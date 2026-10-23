@@ -12,6 +12,87 @@
 using namespace azurerender;
 void require(bool value, const char* message) { if (!value) throw std::runtime_error(message); }
 
+void testOutlineSurface(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    source["materials"][0]["extras"]={{"azureRenderMaterial",{
+        {"schemaVersion",2},{"class","generic"},{"features",{"silhouette-outline"}},
+        {"outlineSurface",{{"schemaVersion",1},{"mode","view-scaled"},{"width",.5},{"depthPrepass",true}}}}}};
+    const auto path=directory/"outline-surface.gltf";
+    const auto load=[&](const Json& value) {std::ofstream(path)<<value.dump();return loadGltfAsset(path.string());};
+    const auto profile=[](Json& value)->Json& {return value["materials"][0]["extras"]["azureRenderMaterial"]["outlineSurface"];};
+    const auto reject=[&](const Json& value,const char* field) {
+        std::string failure;try{(void)load(value);}catch(const std::exception& error){failure=error.what();}
+        if(failure.empty()||failure.find(field)==std::string::npos)
+            throw std::runtime_error(std::string("Invalid outline input must identify ")+field+"; actual: "+failure);
+    };
+    const auto asset=load(source);
+    require(!asset.vertices.empty(),"An outline profile must retain its production geometry");
+    const auto& outline=asset.materials.at(0).outlineSurface;
+    require(outline.present&&outline.depthPrepass&&outline.width==.5F&&outline.minimumPixels==.5F
+        &&outline.normalSource==AssetMaterial::OutlineSurface::NormalSource::Geometry,"Outline fields must reach the typed material");
+    require(outline.maskPixels==std::vector<std::uint8_t>{255,0,0,255}&&outline.maskWidth==1
+        &&outline.maskHeight==1,"Absent masks must retain width and zero depth defaults");
+    for(const char* field:{"width","minimumPixels","depthOffset"})for(const auto& value:Json::array({nullptr,true,"0",-9,9})) {
+        auto invalid=source;profile(invalid)[field]=value;reject(invalid,field);
+    }
+    for(const char* field:{"schemaVersion","mode","normalSource","depthPrepass","uvScaleOffset","color"}) {
+        auto invalid=source;profile(invalid)[field]=nullptr;reject(invalid,field);
+    }
+    auto invalid=source;profile(invalid)["unexpected"]=1;reject(invalid,"unexpected");
+    auto smooth=source;profile(smooth)["normalSource"]="tangent-uv1";
+    for(auto& mesh:smooth["meshes"])for(auto& primitive:mesh["primitives"])primitive["attributes"].erase("TEXCOORD_1");
+    reject(smooth,"TEXCOORD_1");
+    for(auto& mesh:smooth["meshes"])for(auto& primitive:mesh["primitives"])
+        primitive["attributes"]["TEXCOORD_1"]=primitive["attributes"]["TEXCOORD_0"];
+    auto withStream=load(smooth);
+    require(withStream.texcoord1.size()==withStream.vertices.size()&&withStream.primitives.at(0).hasTexcoord1,
+        "Optional UV1 must keep a parallel stream and explicit primitive participation");
+    require(withStream.texcoord1.front()==withStream.vertices.front().texcoord,"UV1 must preserve authored coordinates");
+    auto octahedral=smooth;profile(octahedral)["normalSource"]="tangent-octahedral-uv1";
+    const auto fullSphere=load(octahedral);
+    require(static_cast<unsigned>(fullSphere.materials.at(0).outlineSurface.normalSource)==2
+        &&fullSphere.texcoord1==withStream.texcoord1,"Octahedral smooth directions must retain their explicit stream encoding");
+    auto mixed=smooth;profile(mixed)["normalSource"]="geometry";
+    auto withoutStream=mixed["meshes"][0]["primitives"][0];withoutStream["attributes"].erase("TEXCOORD_1");
+    mixed["meshes"][0]["primitives"].push_back(withoutStream);
+    const auto mixedAsset=load(mixed);
+    require(mixedAsset.texcoord1.size()==mixedAsset.vertices.size()&&mixedAsset.primitives.at(0).hasTexcoord1
+        &&!mixedAsset.primitives.back().hasTexcoord1,"Mixed primitives must keep independent UV1 participation");
+    require(mixedAsset.texcoord1.at(withStream.vertices.size())==std::array<float,2>{0,0},
+        "Absent UV1 sections must keep their aligned zero storage");
+    withStream.texcoord1.at(withStream.indices.at(0))={1.25F,0};
+    bool rejected=false;try{validateOutlineMaterialInputs(withStream);}catch(const std::invalid_argument&){rejected=true;}
+    require(rejected,"Material binding must reject out-of-range smooth coordinates");
+    const std::vector<std::uint8_t> pixels{128,64,0,255};
+    require(stbi_write_png((directory/"outline-mask.png").string().c_str(),1,1,4,pixels.data(),4)!=0,"Cannot write outline mask fixture");
+    auto textured=source;const auto image=textured["images"].size(),sampler=textured["samplers"].size(),texture=textured["textures"].size();
+    textured["images"].push_back({{"uri","outline-mask.png"}});
+    textured["samplers"].push_back({{"wrapS",33071},{"wrapT",33071},{"magFilter",9729},{"minFilter",9729}});
+    textured["textures"].push_back({{"source",image},{"sampler",sampler}});profile(textured)["maskTexture"]=texture;
+    require(load(textured).materials.at(0).outlineSurface.maskPixels==pixels,"Vertex masks must preserve linear channels");
+    invalid=textured;profile(invalid)["maskTexture"]=double(texture)+.00000001;reject(invalid,"maskTexture");
+    invalid=textured;invalid["samplers"][sampler]["minFilter"]=9987;reject(invalid,"sampler");
+    const auto metadata=directory/"outline-mask.png.azmeta";
+    std::ofstream(metadata)<<Json{{"settings",{{"texture",{{"colorSpace","srgb"}}}}}}.dump();
+    reject(textured,"settings");std::filesystem::remove(metadata);
+    const std::array<std::uint32_t,32> ddsHeader{
+        0x20534444,124,0x2100f,2,2,8,0,2,
+        0,0,0,0,0,0,0,0,0,0,0,
+        32,0x41,0,32,0xff,0xff00,0xff0000,0xff000000,
+        0x401008,0,0,0,0};
+    const std::vector<std::uint8_t> ddsBase{128,64,0,255,17,83,1,254,96,32,2,253,29,149,3,252};
+    {std::ofstream output(directory/"outline-mask.dds",std::ios::binary);
+        output.write(reinterpret_cast<const char*>(ddsHeader.data()),sizeof(ddsHeader));
+        output.write(reinterpret_cast<const char*>(ddsBase.data()),ddsBase.size());
+        const std::array<unsigned char,4> lower{11,22,33,44};
+        output.write(reinterpret_cast<const char*>(lower.data()),lower.size());}
+    auto mipMask=textured;mipMask["images"][image]["uri"]="outline-mask.dds";
+    const auto mipMaterial=load(mipMask).materials.at(0).outlineSurface;
+    require(mipMaterial.maskWidth==2&&mipMaterial.maskHeight==2&&mipMaterial.maskPixels==ddsBase,
+        "Fixed-LOD outline masks must retain exactly the base image when DDS contains authored mips");
+}
+
 void testCharacterProfileTextures(const nlohmann::json& fixture, const std::filesystem::path& directory) {
     using Json = nlohmann::json;
     const std::vector<std::uint8_t> rampPixels{17,64,128,223, 96,32,224,160, 29,83,149,215, 255,0,1,254};
@@ -878,6 +959,7 @@ int main(int argc,char** argv) { try {
     require(duplicateRejected,"Duplicate material features must be rejected");
     testCharacterProfileTextures(input,directory);
     testProjectedHairRamp(input,directory);
+    testOutlineSurface(input,directory);
     testEyeRadialSurface(input,directory);
     testMaterialSurfacePacking();
     testMultiplyComposite(input,directory);

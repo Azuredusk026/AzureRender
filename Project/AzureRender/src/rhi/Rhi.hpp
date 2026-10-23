@@ -116,7 +116,22 @@ struct GraphicsPipelineDesc {
     VkRenderPass renderPass = VK_NULL_HANDLE;
     VkPipelineLayout layout = VK_NULL_HANDLE;
     VkCompareOp depthCompare = VK_COMPARE_OP_LESS;
+    // Empty uses RGBA on every color attachment. Otherwise one mask per
+    // attachment, including zero for read-preserved scene color.
+    std::vector<VkColorComponentFlags> colorWriteMasks;
 };
+
+inline void validateGraphicsColorWriteMasks(const GraphicsPipelineDesc& desc) {
+    if(!desc.colorWriteMasks.empty()&&desc.colorWriteMasks.size()!=desc.colorAttachmentCount)
+        throw std::invalid_argument("Color write masks must match the color attachment count");
+    for(const auto mask:desc.colorWriteMasks)if(mask&~VkColorComponentFlags{0xf})
+        throw std::invalid_argument("Color write mask contains unknown components");
+}
+inline VkColorComponentFlags graphicsColorWriteMask(const GraphicsPipelineDesc& desc,std::size_t index) {
+    validateGraphicsColorWriteMasks(desc);
+    if(index>=desc.colorAttachmentCount)throw std::out_of_range("Color write attachment index");
+    return desc.colorWriteMasks.empty()?VkColorComponentFlags{0xf}:desc.colorWriteMasks[index];
+}
 
 struct RenderPassAttachmentDesc {
     VkFormat format = VK_FORMAT_UNDEFINED;
@@ -260,6 +275,8 @@ public:
         const GpuBuffer& source,
         const GpuBuffer& destination,
         VkDeviceSize size) = 0;
+    // Upload transitions into shader-read layout make the written image
+    // visible to every supported shader consumer on the upload queue.
     virtual void transitionImageLayout(
         const GpuImage& image,
         VkImageLayout oldLayout,

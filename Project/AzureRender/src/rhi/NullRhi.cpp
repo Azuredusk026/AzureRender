@@ -257,6 +257,7 @@ void NullCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDe
 }
 
 VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
+    validateGraphicsColorWriteMasks(desc);
     const VkPipeline pipeline = mint<VkPipeline>("createGraphicsPipeline");
     calls.back().detail +=
         " cull=" + std::to_string(desc.cullMode)
@@ -264,6 +265,10 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
         + " blend=" + std::to_string(desc.alphaBlend)
         + " depth=" + std::to_string(desc.depthTest)
         + "/" + std::to_string(desc.depthWrite);
+    if(!desc.colorWriteMasks.empty()) {
+        calls.back().detail+=" masks=";
+        for(const auto mask:desc.colorWriteMasks)calls.back().detail+=std::to_string(mask)+"/";
+    }
     return pipeline;
 }
 

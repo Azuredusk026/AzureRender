@@ -180,6 +180,10 @@ def complete_material_document(material, model, image_uuids):
     selected = []
 
     def reference(index):
+        if type(index) is float:
+            if not math.isfinite(index) or index != math.trunc(index):
+                raise ValueError('Invalid source texture index')
+            index = int(index)
         if type(index) is not int or not 0 <= index < len(model.get('textures', [])):
             raise ValueError('Invalid source texture index')
         if index not in selected:
@@ -189,7 +193,7 @@ def complete_material_document(material, model, image_uuids):
     def walk(value):
         if isinstance(value, dict):
             for key, child in value.items():
-                if (key.endswith('Texture') or key == 'texture') and type(child) is int:
+                if (key.endswith('Texture') or key == 'texture') and type(child) in (int, float):
                     value[key] = reference(child)
                 elif key.endswith('Texture') and isinstance(child, dict) and 'index' in child:
                     child['index'] = reference(child['index'])

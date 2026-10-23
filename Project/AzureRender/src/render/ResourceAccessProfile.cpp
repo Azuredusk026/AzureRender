@@ -1,6 +1,7 @@
 #include "ResourceAccessProfile.hpp"
 #include <stdexcept>
 #include <limits>
+#include <initializer_list>
 
 namespace azurerender {
 namespace {
@@ -11,6 +12,19 @@ bool fits(std::uint64_t images, std::uint64_t samplerCount, std::uint64_t buffer
     return samplerCount <= samplers && samplerCount <= setSamplers && images <= sampled &&
         images <= setSampled && images <= resources && buffers <= resources - images
         && colors <= resources - images - buffers;
+}
+bool fitsStages(std::uint64_t images,std::uint64_t samplerCount,std::uint64_t buffers,std::uint64_t colors,
+    std::uint64_t vertexImages,std::uint64_t vertexBuffers,std::uint32_t samplers,
+    std::uint32_t setSamplers,std::uint32_t sampled,std::uint32_t setSampled,std::uint32_t resources) {
+    if(vertexImages>setSamplers||vertexImages>setSampled)return false;
+    return fits(images,samplerCount,buffers,colors,samplers,
+        static_cast<std::uint32_t>(setSamplers-vertexImages),sampled,
+        static_cast<std::uint32_t>(setSampled-vertexImages),resources)
+        &&fits(vertexImages,vertexImages,vertexBuffers,0,samplers,setSamplers,sampled,setSampled,resources);
+}
+bool fitsPool(std::uint64_t remaining,std::initializer_list<std::uint64_t> counts) {
+    for(const auto count:counts){if(count>remaining)return false;remaining-=count;}
+    return true;
 }
 std::uint64_t samplerCount(std::uint64_t images,std::uint64_t separateImages,std::uint64_t separateSamplers) {
     if(separateImages>images||separateSamplers>std::numeric_limits<std::uint64_t>::max()-(images-separateImages))
@@ -25,6 +39,8 @@ ResourceAccessProfile ResourceAccessProfile::select(
     const DeviceCapabilities& device, const ResourceAccessRequirements& request) {
     if (!request.fixedSampledImageSlots || !request.sampledImageSlots)
         throw std::invalid_argument("Resource layouts require nonzero sampled image slots");
+    if(request.descriptorSetBuffers&&request.descriptorSetBuffers<request.fragmentBuffers)
+        throw std::invalid_argument("Descriptor set buffer count cannot be smaller than its fragment bindings");
     const auto indexedSamplers=samplerCount(request.sampledImageSlots,request.separateImageSlots,request.separateSamplerSlots);
     const auto fixedSamplers=samplerCount(request.fixedSampledImageSlots,request.fixedSeparateImageSlots,request.fixedSeparateSamplerSlots);
     const bool address = device.deviceAddressSupported && device.deviceAddressEnabled &&
@@ -32,7 +48,8 @@ ResourceAccessProfile ResourceAccessProfile::select(
     if (request.requireDeviceAddress && !address)
         return {ResourceAccessMode::Unsupported, false, "Device address requires device and allocator enablement"};
     const auto& limits = device.limits;
-    const bool fixed = fits(request.fixedSampledImageSlots, fixedSamplers, request.fragmentBuffers, request.fragmentColorAttachments,
+    const bool fixed = fitsStages(request.fixedSampledImageSlots, fixedSamplers, request.fragmentBuffers, request.fragmentColorAttachments,
+        request.fixedVertexCombinedImageSamplers,request.vertexBuffers,
         knownOrMinimum(limits.maxPerStageDescriptorSamplers,16),
         knownOrMinimum(limits.maxDescriptorSetSamplers,96),
         knownOrMinimum(limits.maxPerStageDescriptorSampledImages,16),
@@ -45,20 +62,21 @@ ResourceAccessProfile ResourceAccessProfile::select(
             !device.descriptorIndexingSupported || !device.descriptorIndexingEnabled)
             return {ResourceAccessMode::Unsupported,address,"Update-after-bind requires explicit enablement"};
         const auto& update = device.indexingLimits;
-        if (!fits(request.sampledImageSlots,indexedSamplers,request.fragmentBuffers,request.fragmentColorAttachments,
+        if (!fitsStages(request.sampledImageSlots,indexedSamplers,request.fragmentBuffers,request.fragmentColorAttachments,
+            request.vertexCombinedImageSamplers,request.vertexBuffers,
             update.maxPerStageDescriptorUpdateAfterBindSamplers,
             update.maxDescriptorSetUpdateAfterBindSamplers,
             update.maxPerStageDescriptorUpdateAfterBindSampledImages,
             update.maxDescriptorSetUpdateAfterBindSampledImages,
-            update.maxPerStageUpdateAfterBindResources) ||
-            request.sampledImageSlots>update.maxUpdateAfterBindDescriptorsInAllPools ||
-            request.separateSamplerSlots>update.maxUpdateAfterBindDescriptorsInAllPools-request.sampledImageSlots ||
-            request.fragmentBuffers>update.maxUpdateAfterBindDescriptorsInAllPools-request.sampledImageSlots-request.separateSamplerSlots)
+            update.maxPerStageUpdateAfterBindResources) || !fitsPool(update.maxUpdateAfterBindDescriptorsInAllPools,
+                {request.sampledImageSlots,request.vertexCombinedImageSamplers,request.separateSamplerSlots,
+                 request.descriptorSetBuffers?request.descriptorSetBuffers:request.fragmentBuffers}))
             return {ResourceAccessMode::Unsupported,address,"Update-after-bind layout exceeds queried capacity"};
         return {ResourceAccessMode::Indexed,address,"Indexed update-after-bind layout within queried capacity"};
     }
     if (device.descriptorIndexingSupported && device.descriptorIndexingEnabled &&
-        fits(request.sampledImageSlots, indexedSamplers, request.fragmentBuffers, request.fragmentColorAttachments,
+        fitsStages(request.sampledImageSlots, indexedSamplers, request.fragmentBuffers, request.fragmentColorAttachments,
+            request.vertexCombinedImageSamplers,request.vertexBuffers,
             limits.maxPerStageDescriptorSamplers,limits.maxDescriptorSetSamplers,
             limits.maxPerStageDescriptorSampledImages,limits.maxDescriptorSetSampledImages,
             limits.maxPerStageResources))

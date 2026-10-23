@@ -73,6 +73,8 @@ std::uint64_t materialSourcePixelBytes(const LoadedAsset& asset) {
         for(const auto* pixels:{&m.baseColorPixels,&m.normalPixels,&m.metallicRoughnessPixels,
                 &m.specularEmissivePixels,&m.styleMaskPixels,&m.matcapPixels,&m.hairDataPixels,
                 &m.faceSdf.pixels,&m.shadowColorLutPixels,&m.projectedHairRamp.parameterPixels,&m.projectedHairRamp.line.pixels})bytes+=pixels->size();
+    for(const auto& material:asset.materials)if(material.outlineSurface.present)
+        bytes+=material.outlineSurface.maskPixels.size();
     return bytes;
 }
 
@@ -238,6 +240,7 @@ void appendShowcasePlatform(LoadedAsset& asset, const Vector3& footPivot) {
             {top, nextTop, bottom, bottom, nextTop, nextBottom});
     }
 
+    if(!asset.texcoord1.empty())asset.texcoord1.resize(asset.vertices.size(),{0,0});
     asset.primitives.push_back({
         firstIndex,
         static_cast<std::uint32_t>(asset.indices.size()) - firstIndex,
@@ -439,6 +442,18 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
                 +", transferredBytes="+std::to_string(stats.transferredPixelBytes)+", discardedBytes="+std::to_string(stats.discardedPixelBytes));
         });
     }
+    const auto hasProjection=[](const LoadedAsset& mesh) {
+        return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material){return material.outlineSurface.present;});
+    };
+    outlineProjectionEnabled_=hasProjection(asset_);
+    for(const auto& resource:additionalResources_)outlineProjectionEnabled_|=hasProjection(resource->asset);
+    if(outlineProjectionEnabled_)enqueue("outline projection",loadTimings_.materialUploadMs,[this,context] {
+        std::vector<LoadedAsset*> meshes{&asset_};
+        for(auto& resource:additionalResources_)meshes.push_back(&resource->asset);
+        const auto data=buildOutlineProjectionData(meshes,context.descriptorLimits.maxStorageBufferRange);
+        outlineProjection_=std::make_unique<OutlineProjectionResources>(*allocator_,context.descriptorLimits.maxStorageBufferRange);
+        outlineProjection_->initialize(data,*materialTextureCache_);
+    });
     // The full material inventory must fit an ordinary descriptor layout.
     // Combined image samplers consume both sampler and sampled-image limits;
     // The fragment stage also carries one uniform and six storage buffers.
@@ -446,8 +461,8 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         + std::uint64_t{kMaterialTextureSlots} * totalMaterialCount();
     const auto& limits = context.descriptorLimits;
     if((limits.maxPerStageDescriptorStorageBuffers&&limits.maxPerStageDescriptorStorageBuffers<6)
-        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<11))
-        throw std::runtime_error("Scene layout requires six storage buffers per stage and eleven per descriptor set");
+        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<(outlineProjectionEnabled_?12U:11U)))
+        throw std::runtime_error("Scene storage buffers cannot fit the selected material layout");
     irradianceBufferBudget_=limits.maxStorageBufferRange;
     DeviceCapabilities capabilities;
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
@@ -457,6 +472,10 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     requirements.separateImageSlots=requirements.fixedSeparateImageSlots=1;
     requirements.separateSamplerSlots=requirements.fixedSeparateSamplerSlots=1;
     requirements.fragmentColorAttachments=kMaterialColorAttachmentCount;
+    requirements.vertexCombinedImageSamplers=outlineProjectionEnabled_?totalMaterialCount():0;
+    requirements.fixedVertexCombinedImageSamplers=outlineProjectionEnabled_?1:0;
+    requirements.vertexBuffers=outlineProjectionEnabled_?7:6;
+    requirements.descriptorSetBuffers=outlineProjectionEnabled_?13:12;
     auto access=ResourceAccessProfile::select(capabilities,requirements);
     auto objectRequirements=requirements;
     ++objectRequirements.sampledImageSlots;++objectRequirements.fixedSampledImageSlots;
@@ -1434,6 +1453,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"outlineProjectionLayoutVersion\": " << PackedOutlineProjectionRecord::kLayoutVersion << ",\n"
+         << "  \"outlineProjectionBytes\": " << (outlineProjection_?outlineProjection_->buffer().size:0) << ",\n"
+         << "  \"outlineProjectionMaterials\": " << (outlineProjection_?outlineProjection_->recordCount():0) << ",\n"
+         << "  \"outlineProjectionCoordinates\": " << (outlineProjection_?outlineProjection_->coordinateCount():0) << ",\n"
          << "  \"instanceDataLayoutVersion\": " << SceneInstanceGpuData::kLayoutVersion << ",\n"
          << "  \"objectShadowLayoutVersion\": " << ObjectShadowGpuHeader::kLayoutVersion << ",\n"
          << "  \"objectShadowPrepared\": " << (objectShadowPrepared_?"true":"false") << ",\n"
@@ -2376,6 +2399,7 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
 }
 
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
+    bool depthShell=false;
     bool sampled=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
         snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
     if(snapshot.settings.sceneLightingEnabled&&snapshot.settings.nprLighting.enabled&&!(qaEffectMode_==4&&!qaEffectEnabled_)) {
@@ -2389,10 +2413,12 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
     }
     for(const auto& span:snapshot.visibleSpans){
         const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
-        for(const auto& material:mesh.materials)
+        for(const auto& material:mesh.materials) {
             sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction))!=0;
+            depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
+        }
     }
-    if(!sampled)return;
+    if(!sampled&&!depthShell)return;
     commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
     commands.bindPipeline(overlayDepthPipeline_);
     if(bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
@@ -2425,7 +2451,10 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
             });
         }
     }
+    if(depthShell)recordOutlineShells(context,snapshot,commands,true);
 }
+
+#include "CharacterOutlinePass.inc"
 
 void CharacterSceneRenderer::createDescriptorPool() {
     rhi::DescriptorPoolDesc poolDesc{};
@@ -2439,10 +2468,10 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * (textureSlots + 4)},
+             frameCount * (textureSlots + 4 + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
             {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * 11},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * (outlineProjectionEnabled_?12U:11U)},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2452,10 +2481,10 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * 15},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * (outlineProjectionEnabled_?16U:15U)},
         {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * 11},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * (outlineProjectionEnabled_?12U:11U)},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2510,6 +2539,10 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
         };
         if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(outlineProjectionEnabled_) {
+            bindings.push_back({30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
+            bindings.push_back({31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,static_cast<std::uint32_t>(totalMaterialCount()),VK_SHADER_STAGE_VERTEX_BIT});
+        }
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
         return;
     }
@@ -2549,11 +2582,29 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
     };
     if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,kFragment});
+    if(outlineProjectionEnabled_) {
+        bindings.push_back({30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
+        bindings.push_back({31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_VERTEX_BIT});
+    }
     descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
 }
 
 void CharacterSceneRenderer::createDescriptorSets() {
     objectShadowBoundViews_.fill(objectShadowPrepared_&&objectShadowAtlas_->view()?objectShadowAtlas_->view():shadowImageView_);
+    const auto writeProjection=[this](VkDescriptorSet set,std::size_t material) {
+        if(!outlineProjectionEnabled_)return;
+        const auto& buffer=outlineProjection_->buffer();
+        rhi_->writeDescriptorBuffer({set,30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});
+        const auto& masks=outlineProjection_->masks();
+        if(bindlessTextures_) {
+            rhi::DescriptorImageArrayWrite write{};write.set=set;write.binding=31;
+            for(const auto& mask:masks)write.elements.push_back({mask.sampler,mask.view,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            rhi_->writeDescriptorImageArray(write);
+        }else {
+            const auto& mask=masks.at(material);
+            rhi_->writeDescriptorImage({set,31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,mask.view,mask.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+        }
+    };
     const auto writeDepthBindings=[this](VkDescriptorSet set){
         rhi_->writeDescriptorImage({set,9,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,shadowImageView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
         rhi_->writeDescriptorImage({set,28,VK_DESCRIPTOR_TYPE_SAMPLER,VK_NULL_HANDLE,shadowSampler_,VK_IMAGE_LAYOUT_UNDEFINED});
@@ -2617,6 +2668,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
             writeDepthBindings(uniformWrite.set);
+            writeProjection(uniformWrite.set,0);
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
@@ -2708,6 +2760,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
             writeDepthBindings(uniformWrite.set);
+            writeProjection(uniformWrite.set,globalMaterial-1);
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
@@ -2847,11 +2900,13 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             ? (bindlessTextures_?"/mesh_object_bindless.frag.spv":"/mesh_object.frag.spv")
             : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")));
     const auto outlineVertexCode =
-        azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
-            ? "/outline_compute.vert.spv"
-            : "/outline.vert.spv"));
+        azurerender::readBinaryFile(shaderDirectory + (outlineProjectionEnabled_
+            ? (computeSkinningEnabled_?(bindlessTextures_?"/outline_view_scaled_compute_bindless.vert.spv":"/outline_view_scaled_compute.vert.spv")
+                :(bindlessTextures_?"/outline_view_scaled_bindless.vert.spv":"/outline_view_scaled.vert.spv"))
+            : (computeSkinningEnabled_?"/outline_compute.vert.spv":"/outline.vert.spv")));
     const auto outlineFragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + "/outline.frag.spv");
+        azurerender::readBinaryFile(shaderDirectory + (outlineProjectionEnabled_
+            ?(bindlessTextures_?"/outline_view_scaled_bindless.frag.spv":"/outline_view_scaled.frag.spv"):"/outline.frag.spv"));
     const auto backgroundVertexCode =
         azurerender::readBinaryFile(shaderDirectory + "/background.vert.spv");
     const auto backgroundFragmentCode =
@@ -2928,7 +2983,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             materialAttributes[6],
             materialAttributes[7],
         };
-        const std::vector<rhi::VertexAttributeDesc> outlineAttributes = {
+        std::vector<rhi::VertexAttributeDesc> outlineAttributes = {
             materialAttributes[0],
             materialAttributes[1],
             materialAttributes[4],
@@ -2937,6 +2992,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             materialAttributes[7],
         };
 
+        if(outlineProjectionEnabled_) {
+            outlineAttributes.push_back(materialAttributes[2]);outlineAttributes.push_back(materialAttributes[3]);
+        }
         rhi::GraphicsPipelineDesc materialDesc{};
         materialDesc.vertexShader = vertexModule;
         materialDesc.fragmentShader = fragmentModule;
@@ -3014,6 +3072,20 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         outlinePipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
         outlineDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         outlineMirroredPipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
+        if(outlineProjectionEnabled_) {
+            const auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory+
+                (bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv")));
+            try {
+                auto shell=outlineDesc;shell.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                shell.fragmentShader=depthModule;shell.renderPass=overlayDepthPass_;
+                shell.depthTest=true;shell.depthWrite=true;shell.depthCompare=VK_COMPARE_OP_LESS;
+                shell.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
+                outlineDepthPipeline_=rhi_->createGraphicsPipeline(shell);
+                shell.frontFace=VK_FRONT_FACE_CLOCKWISE;
+                outlineDepthMirroredPipeline_=rhi_->createGraphicsPipeline(shell);
+            }catch(...){rhi_->destroyShaderModule(depthModule);throw;}
+            rhi_->destroyShaderModule(depthModule);
+        }
 
         rhi::GraphicsPipelineDesc backgroundDesc = materialDesc;
         backgroundDesc.vertexShader = backgroundVertexModule;
@@ -3084,7 +3156,7 @@ void CharacterSceneRenderer::destroyResources() {
              &multiplyMirroredPipeline_,
              &multiplyDoubleSidedPipeline_,
              &sceneTintPipeline_,
-             &outlinePipeline_,
+             &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
@@ -3176,6 +3248,7 @@ void CharacterSceneRenderer::destroyResources() {
         resource->gpuMaterials.clear();
     }
     additionalResources_.clear();
+    outlineProjection_.reset();outlineProjectionEnabled_=false;
     materialTextureCache_.reset();
     if (iblPrefilterPipeline_ != VK_NULL_HANDLE) {
         rhi_->destroyPipeline(iblPrefilterPipeline_);
@@ -3223,7 +3296,7 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &multiplyMirroredPipeline_,
              &multiplyDoubleSidedPipeline_,
              &sceneTintPipeline_,
-             &outlinePipeline_,
+             &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
@@ -3955,112 +4028,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
         }
     }
     }
-    // Opaque surfaces establish scene depth before the outward shell.
-    // Foreground silhouettes therefore remain visible over rear geometry.
-    if (stage == 0 || stage == 1 || stage == 4) {
-    commands.bindVertexBuffer(
-        (snapshot != nullptr ? snapshot->buffers.vertices.at(0) : renderVertexBuffer(0, context.currentFrame).buffer), 0);
-    commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(0) : renderIndexBuffer(0).buffer), 0);
-    const auto hasMaterialOutline=[](const LoadedAsset& mesh) {
-        return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material) {
-            return (material.materialFeatures&MaterialFeatureSilhouetteOutline)!=0;
-        });
-    };
-    bool materialOutlines=hasMaterialOutline(asset_);
-    for(const auto& resource:additionalResources_)materialOutlines=materialOutlines||hasMaterialOutline(resource->asset);
-    if (settings.silhouetteOutlineEnabled || materialOutlines) {
-        commands.bindPipeline(outlinePipeline_);
-        MorphPushConstants outlineMorphConstants{};
-        outlineMorphConstants.weights = settings.morphWeights;
-        commands.pushConstants(
-            pipelineLayout_,
-            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
-            sizeof(MaterialPushConstants),
-            &outlineMorphConstants,
-            sizeof(outlineMorphConstants));
-        if (counters != nullptr) {
-            ++counters->pushConstantUpdates;
-        }
-        for (const std::array<std::uint32_t, 3>& span :
-             snapshot->visibleSpans) {
-            const std::uint32_t meshKey = span[0];
-            const std::uint32_t firstInstance = span[1];
-            const std::uint32_t instanceCount = span[2];
-            commands.bindPipeline(scene::mirroredTransform(snapshot->instances.at(firstInstance).model)
-                ? outlineMirroredPipeline_ : outlinePipeline_);
-            const auto recordOutlinePrimitives = [&](
-                const LoadedAsset& mesh,
-                const std::size_t globalMaterialBase) {
-                for (const AssetPrimitive& primitive : mesh.primitives) {
-                    const AssetMaterial& outlineMaterial =
-                        mesh.materials[primitive.materialIndex];
-                    if (!settings.characterPresentation.platformEnabled
-                        && outlineMaterial.showcasePlatform > 0.5F) {
-                        continue;
-                    }
-                    // The turntable is a receiver, not character silhouette
-                    // geometry; overlay cards likewise produce oversized
-                    // black shells.
-                    if (outlineMaterial.showcasePlatform > 0.5F
-                        || outlineMaterial.materialClass
-                            == AssetMaterialClass::Overlay
-                        || outlineMaterial.alphaMode == AssetAlphaMode::Blend) {
-                        continue;
-                    }
-                    if((settings.sceneLightingEnabled || !settings.silhouetteOutlineEnabled)
-                        &&!(outlineMaterial.materialFeatures&MaterialFeatureSilhouetteOutline))continue;
-                    outlineMorphConstants.gizmoTransform=primitiveGizmoTransform(snapshot->gizmo,&primitive-mesh.primitives.data());
-                    commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,
-                        sizeof(MaterialPushConstants)+offsetof(MorphPushConstants,gizmoTransform),
-                        outlineMorphConstants.gizmoTransform.data(),sizeof(outlineMorphConstants.gizmoTransform));
-                    if(counters)++counters->pushConstantUpdates;
-                    if (!bindlessTextures_) {
-                        const std::size_t descriptorIndex =
-                            context.currentFrame * totalMaterialCount()
-                            + globalMaterialBase + primitive.materialIndex;
-                        commands.bindDescriptorSet(
-                            pipelineLayout_, descriptorSets_[descriptorIndex]);
-                        if (counters != nullptr) {
-                            ++counters->descriptorSetBinds;
-                        }
-                    }
-                    forEachPrimitiveOpacityRun(snapshot->nodeWorldOpacities,primitive.nodeIndex,firstInstance,instanceCount,[&](const PrimitiveOpacityRun& run) {
-                        if (run.opacity == 0) return;
-                        for(std::uint32_t index=0;index<run.instanceCount;){
-                            const auto source=run.firstInstance+index;
-                            const auto tile=snapshot->buffers.outlineMaskTiles.at(source);
-                            std::uint32_t count=1;
-                            if(tile==std::numeric_limits<std::uint32_t>::max())
-                                while(index+count<run.instanceCount
-                                    &&snapshot->buffers.outlineMaskTiles.at(source+count)==tile)++count;
-                            struct MaskPush {std::uint32_t tile;float opacity;};
-                            const MaskPush mask{tile,run.opacity};
-                            commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,
-                                sizeof(MaterialPushConstants)+offsetof(MorphPushConstants,textureBaseIndex),&mask,sizeof(mask));
-                            commands.drawIndexed(primitive.indexCount,primitive.firstIndex,count,source);
-                            if(counters){++counters->drawCalls;++counters->pushConstantUpdates;}
-                            index+=count;
-                        }
-                    });
-                }
-            };
-            if (meshKey == 0) {
-                commands.bindVertexBuffer(
-                    (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
-                commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
-                recordOutlinePrimitives(asset_, 0);
-            } else {
-                const AdditionalResource& resource =
-                    *additionalResources_[meshKey - 1];
-                commands.bindVertexBuffer(
-                    (snapshot != nullptr ? snapshot->buffers.vertices.at(meshKey) : renderVertexBuffer(meshKey, context.currentFrame).buffer), 0);
-                commands.bindIndexBuffer((snapshot != nullptr ? snapshot->buffers.indices.at(meshKey) : renderIndexBuffer(meshKey).buffer), 0);
-                recordOutlinePrimitives(
-                    resource.asset, resource.globalMaterialBase);
-            }
-        }
-    }
-    }
+    if(stage==0||stage==1||stage==4)recordOutlineShells(context,*snapshot,commands,false,counters);
     if (stage == 0 || stage == 3) {
     for (std::size_t slot = firstTransparent; slot < transparentEnd; ++slot) {
         const scene::SceneInstance* instance = &snapshot->instances.at(snapshot->visibleIndices[slot]);

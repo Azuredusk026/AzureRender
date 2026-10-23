@@ -103,7 +103,7 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     AssetMaterial result=parameterOverride?*source:AssetMaterial{};if(!parameterOverride){result.name=typeId;result.materialProfileExplicit=true;}
     if(parameterOverride&&(result.materialClass!=AssetMaterialClass::Generic
         ||result.specularInput.present||result.nprDiffuse.present||result.eyeSurface.present
-        ||result.projectedHairRamp.present||result.faceSdf.present
+        ||result.projectedHairRamp.present||result.faceSdf.present||result.outlineSurface.present
         ||(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite)))
         &&(parameters.value("transmission",0.F)>0||parameters.value("thickness",0.F)>0))
         throw std::invalid_argument("Transmission overrides require a generic source material");
@@ -172,6 +172,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
         lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
         lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
+        lost(source.outlineSurface.present&&!replacement.outlineSurface.present,"outlineSurface");
         lost(source.specularInput.present&&!replacement.specularInput.present,"specularInput");
         lost(source.alphaMode!=replacement.alphaMode,"alphaMode");
         lost(source.doubleSided!=replacement.doubleSided,"doubleSided");
@@ -189,5 +190,6 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
             "Full material replacement at slot "+id+" from "+binding.path+" discards source semantics: "+losses);
     }
     static_cast<void>(resolveMaterialFrame(mesh));
+    validateOutlineMaterialInputs(mesh);
 }
 }

@@ -23,7 +23,11 @@ public:
     struct Draw {std::uint32_t first,count,tile;float opacity;bool fresh;};
     struct Pipeline {unsigned cull,front;};
     VkRenderPass maskPass=VK_NULL_HANDLE,pass=VK_NULL_HANDLE;
+    VkRenderPass opaqueDepthPass=VK_NULL_HANDLE;
+    unsigned ordinaryDepthDraws=0;
     std::set<std::uint64_t> outlinePipelines;
+    std::set<std::uint64_t> depthShellPipelines;
+    std::vector<Draw> depthShells;
     std::map<std::uint64_t,Pipeline> pipelineDescriptions;
     std::vector<Pipeline> coveragePipelines;
     std::uint64_t pipeline=0;
@@ -51,6 +55,7 @@ public:
     void bindIndexBuffer(VkBuffer,VkDeviceSize)override{}
     void draw(unsigned)override{}
     void drawIndexed(unsigned,unsigned,unsigned count=1,unsigned first=0)override{
+        if(pass==opaqueDepthPass&&pass!=VK_NULL_HANDLE&&!depthShellPipelines.count(pipeline))++ordinaryDepthDraws;
         if(pass==maskPass&&pass!=VK_NULL_HANDLE){
             require(count==1,"Coverage tiles must rasterize only their owning instance");
             covered[first].insert(tile);
@@ -61,6 +66,12 @@ public:
             std::memcpy(&draw.tile,constants.data()+136,4);
             std::memcpy(&draw.opacity,constants.data()+140,4);
             outlines.push_back(draw);
+        }
+        if(depthShellPipelines.count(pipeline)) {
+            Draw draw{first,count,0,0,fresh};
+            std::memcpy(&draw.tile,constants.data()+136,4);
+            std::memcpy(&draw.opacity,constants.data()+140,4);
+            depthShells.push_back(draw);
         }
         fresh=false;
     }
@@ -73,12 +84,14 @@ public:
     void writeTimestamp(VkQueryPool,unsigned,VkPipelineStageFlagBits)override{}
 };
 
-enum class Kind {Explicit,Legacy,Fading,Hidden,Blend,Platform,Mixed,DoubleSided,Mirrored,GizmoMirrored,CullingDisabled,HiddenExplicitLegacy};
+enum class Kind {Explicit,Legacy,Fading,Hidden,Blend,Platform,Mixed,DoubleSided,Mirrored,GizmoMirrored,CullingDisabled,HiddenExplicitLegacy,
+    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,ColorOnly};
 void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool compute){
     rhi::NullRhi backend;
     CharacterSceneRenderer renderer;
     RenderSettings settings;
     settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;
+    if(kind==Kind::ProjectedPlatform)settings.showcasePlatformFeature=true;
     settings.characterPresentation.platformEnabled=false;
     settings.innerOutlineEnabled=false;
     settings.silhouetteOutlineEnabled=kind==Kind::Legacy||kind==Kind::Fading||kind==Kind::Mixed||kind==Kind::HiddenExplicitLegacy;
@@ -105,9 +118,20 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     material.doubleSided=kind==Kind::DoubleSided;
     const bool explicitOutline=kind!=Kind::Legacy&&kind!=Kind::Fading;
     if(explicitOutline)material.materialFeatures|=MaterialFeatureSilhouetteOutline;
+    const bool projection=kind==Kind::Projected||kind==Kind::DepthOnly||kind==Kind::ProjectedUv1
+        ||kind==Kind::ProjectedMixed||kind==Kind::ProjectedFading||kind==Kind::ProjectedPlatform||kind==Kind::ColorOnly;
+    if(projection) {
+        material.outlineSurface.present=true;material.outlineSurface.depthPrepass=kind!=Kind::ColorOnly;
+        material.outlineSurface.width=.75F;
+        if(kind==Kind::DepthOnly)material.materialFeatures&=~MaterialFeatureSilhouetteOutline;
+        if(kind==Kind::ProjectedUv1||kind==Kind::ProjectedPlatform) {
+            material.outlineSurface.normalSource=AssetMaterial::OutlineSurface::NormalSource::TangentUv1;
+            mesh.texcoord1.resize(mesh.vertices.size(),{.25F,-.25F});mesh.primitives.front().hasTexcoord1=true;
+        }
+    }
     if(kind==Kind::Blend)material.alphaMode=AssetAlphaMode::Blend;
     if(kind==Kind::Platform)material.showcasePlatform=1;
-    for(auto& node:mesh.nodes)node.opacity=kind==Kind::Fading?.5F:kind==Kind::Hidden?0.F:1.F;
+    for(auto& node:mesh.nodes)node.opacity=(kind==Kind::Fading||kind==Kind::ProjectedFading)?.5F:kind==Kind::Hidden?0.F:1.F;
     if(kind==Kind::HiddenExplicitLegacy){
         mesh.nodes.front().opacity=0;
         auto node=mesh.nodes.front();node.parent=-1;node.opacity=1;
@@ -127,6 +151,10 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     add("subject",mesh);
     if(kind==Kind::Mirrored)for(auto& node:context.scene.nodes)node.scale[0]=-1;
     if(kind==Kind::Mixed){auto legacy=mesh;legacy.materials.front().materialFeatures=MaterialFeatureNeutralFallback;add("legacy",legacy);}
+    if(kind==Kind::ProjectedMixed) {
+        auto second=mesh;second.materials.front().outlineSurface.width=1.25F;
+        add("second-projection",second);
+    }
     context.preparedMeshes=&prepared;
     context.sceneRenderPass=backend.createRenderPass({});
     context.shadowRenderPass=backend.createRenderPass({});
@@ -140,7 +168,10 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
         const auto cull=std::stoul(call.detail.substr(call.detail.find(" cull=")+6));
         const auto front=std::stoul(call.detail.substr(call.detail.find(" front=")+7));
         capture.pipelineDescriptions.emplace(handle,Capture::Pipeline{static_cast<unsigned>(cull),static_cast<unsigned>(front)});
-        if(cull==VK_CULL_MODE_FRONT_BIT)capture.outlinePipelines.insert(handle);
+        if(cull==VK_CULL_MODE_FRONT_BIT) {
+            if(call.detail.find(" masks=0/1/")!=std::string::npos)capture.depthShellPipelines.insert(handle);
+            else capture.outlinePipelines.insert(handle);
+        }
     }
     require(capture.outlinePipelines.size()==2,"Fixture must identify both public outline winding pipelines");
     RenderGraph graph;
@@ -151,17 +182,20 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     for(const auto& pass:graph.passes())if(pass.name=="character-outline-mask"){
         ++maskPasses;capture.maskPass=pass.renderPass.renderPass;capture.columns=pass.renderPass.extent.width/256;
     }
-    const bool masks=kind!=Kind::Legacy&&kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::HiddenExplicitLegacy;
+    for(const auto& pass:graph.passes())if(pass.name=="character-opaque-depth")capture.opaqueDepthPass=pass.renderPass.renderPass;
+    require(capture.depthShellPipelines.size()==(projection?2U:0U),"Only projection materials allocate depth shell pipelines");
+    const bool masks=kind!=Kind::Legacy&&kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::HiddenExplicitLegacy&&kind!=Kind::DepthOnly;
     require(maskPasses==unsigned(masks),"Explicit opaque silhouettes and fading instances require a mask pass");
     std::string error;require(graph.compile(error),"Fixture render graph must compile");graph.execute(&capture);
-    const bool visible=kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform;
-    require(capture.covered.size()==(masks?2U:0U),"Only eligible visible instances may own coverage tiles");
+    const bool visible=kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::DepthOnly;
+    const unsigned instances=kind==Kind::ProjectedMixed?4:2;
+    require(capture.covered.size()==(masks?instances:0U),"Only eligible visible instances may own coverage tiles");
     std::set<unsigned> tiles;
     for(const auto& [instance,coverage]:capture.covered){
         require(coverage.size()==1,"Each instance must rasterize exactly its own tile");
         tiles.insert(*coverage.begin());
     }
-    require(tiles.size()==(masks?2U:0U),"Overlapping instances must retain distinct tiles");
+    require(tiles.size()==(masks?instances:0U),"Overlapping instances must retain distinct tiles");
     for(const auto& pipeline:capture.coveragePipelines){
         const bool mirrored=kind==Kind::Mirrored||kind==Kind::GizmoMirrored;
         const auto cull=kind==Kind::DoubleSided||kind==Kind::CullingDisabled?VK_CULL_MODE_NONE:VK_CULL_MODE_BACK_BIT;
@@ -173,7 +207,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     for(const auto& draw:capture.outlines){
         outlined+=draw.count;
         require(draw.fresh,"Every outline draw must push its tile and opacity explicitly");
-        require(draw.opacity==(kind==Kind::Fading?.5F:1.F),"Outline opacity must match the primitive run");
+        require(draw.opacity==((kind==Kind::Fading||kind==Kind::ProjectedFading)?.5F:1.F),"Outline opacity must match the primitive run");
         if(draw.tile==noTile){
             ++unmaskedBatches;
             require(draw.count==2,"Consecutive fully opaque legacy instances must retain their original batch");
@@ -186,7 +220,21 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
                 "Outline sampling requires a rasterized tile owned by that instance");
         }
     }
-    require(outlined==(visible?(kind==Kind::Mixed?4U:2U):0U),"Every eligible fixture instance must retain its outline");
+    require(outlined==(visible?(kind==Kind::Mixed?4U:instances):0U),"Every eligible fixture instance must retain its outline");
+    unsigned depthInstances=0;
+    for(const auto& draw:capture.depthShells) {
+        require(draw.fresh&&draw.tile==noTile,"Depth shells require independent coverage without a color-mask tile");
+        require(draw.opacity==(kind==Kind::ProjectedFading?.5F:1.F),"Depth shells must consume the current opacity run");
+        depthInstances+=draw.count;
+    }
+    require(depthInstances==((projection&&kind!=Kind::ColorOnly)?instances:0U),"Depth participation must be independent of color outlines");
+    if(kind==Kind::ColorOnly)require(capture.ordinaryDepthDraws==0,"Color-only shells without depth consumers must skip ordinary depth rendering");
+    bool projectionBuffer=false,vertexMask=false;
+    for(const auto& layout:backend.descriptorLayouts)for(const auto& binding:layout) {
+        if(binding.binding==30){projectionBuffer=true;require(binding.stages==VK_SHADER_STAGE_VERTEX_BIT,"Projection storage is vertex-only");}
+        if(binding.binding==31){vertexMask=true;require(binding.stages==VK_SHADER_STAGE_VERTEX_BIT,"Width mask is vertex-only");}
+    }
+    require(projectionBuffer==projection&&vertexMask==projection,"Legacy layouts must retain their optional resource boundary");
     require(unmaskedBatches==unsigned(kind==Kind::Legacy||kind==Kind::Mixed||kind==Kind::HiddenExplicitLegacy),
         "Legacy and explicit draw states must retain separate ownership");
     renderer.onUnload(context);
@@ -205,7 +253,8 @@ int main(int argc,char** argv){try{
     require(argc==2,"Expected compiled shader directory");
     for(bool bindless:{false,true})for(bool compute:{false,true})
         for(auto kind:{Kind::Explicit,Kind::Legacy,Kind::Fading,Kind::Hidden,Kind::Blend,Kind::Platform,Kind::Mixed,
-                Kind::DoubleSided,Kind::Mirrored,Kind::GizmoMirrored,Kind::CullingDisabled,Kind::HiddenExplicitLegacy})
+                Kind::DoubleSided,Kind::Mirrored,Kind::GizmoMirrored,Kind::CullingDisabled,Kind::HiddenExplicitLegacy,
+                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::ColorOnly})
             verify(argv[1],kind,bindless,compute);
     std::cout<<"Explicit silhouettes retain independent coverage and legacy batching\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

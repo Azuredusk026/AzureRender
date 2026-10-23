@@ -3,6 +3,7 @@
 #include "render/IrradianceVolume.hpp"
 #include "render/EnvironmentCubeTexture.hpp"
 #include "render/SampledTextureCache.hpp"
+#include "render/OutlineProjectionResources.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
@@ -144,6 +145,8 @@ private:
     void createOverlayDepth(const RenderContext& context);
     void destroyOverlayDepth();
     void recordOverlayDepth(const RenderContext& context, const SceneInstanceSnapshot& snapshot, rhi::ICommandRecorder& commands);
+    void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+        rhi::ICommandRecorder& commands,bool depthShell,SceneSubmissionCounters* counters=nullptr);
     struct MaterialPushConstants {
         float alphaCutoff = 0.5F;
         std::uint32_t alphaMode = 0;
@@ -292,6 +295,8 @@ private:
     rhi::GpuBuffer indexBuffer_;
     std::vector<GpuMaterial> gpuMaterials_;
     std::unique_ptr<SampledTextureCache> materialTextureCache_;
+    std::unique_ptr<OutlineProjectionResources> outlineProjection_;
+    bool outlineProjectionEnabled_=false;
     GpuTexture environmentTexture_;
     std::unique_ptr<EnvironmentCubeTexture> reflectionProbeTexture_;
     IrradianceVolume irradianceVolume_;
@@ -348,6 +353,8 @@ private:
     VkPipeline multiplyDoubleSidedPipeline_ = VK_NULL_HANDLE;
     VkPipeline sceneTintPipeline_ = VK_NULL_HANDLE;
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
+    VkPipeline outlineDepthPipeline_=VK_NULL_HANDLE;
+    VkPipeline outlineDepthMirroredPipeline_=VK_NULL_HANDLE;
     VkPipeline outlineMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;
     VkPipeline shadowPipeline_ = VK_NULL_HANDLE;

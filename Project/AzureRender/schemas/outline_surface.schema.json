@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://azurerender.local/schema/outline-surface.json",
+  "title": "AzureRender Outline Surface",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "mode", "width"],
+  "properties": {
+    "schemaVersion": {"type": "integer", "const": 1},
+    "mode": {"const": "view-scaled"},
+    "width": {"type": "number", "minimum": 0, "maximum": 8},
+    "minimumPixels": {"type": "number", "minimum": 0, "maximum": 8, "default": 0.5},
+    "depthOffset": {"type": "number", "minimum": -4, "maximum": 4, "default": 0},
+    "normalSource": {"enum": ["geometry", "tangent-uv1", "tangent-octahedral-uv1"], "default": "geometry"},
+    "depthPrepass": {"type": "boolean", "default": false},
+    "maskTexture": {"type": "integer", "minimum": 0},
+    "uvScaleOffset": {
+      "type": "array", "minItems": 4, "maxItems": 4,
+      "items": {"type": "number", "minimum": -65536, "maximum": 65536},
+      "default": [1, 1, 0, 0]
+    },
+    "color": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {"type": "number", "minimum": 0, "maximum": 64},
+      "default": [0.018, 0.028, 0.042]
+    }
+  }
+}

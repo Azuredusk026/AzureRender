@@ -10,6 +10,31 @@ layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(push_constant) uniform Parameters { float contrast; } parameters;
 void main(){
     uint i=gl_GlobalInvocationID.x;
+    if(i>=287u) {
+#ifdef AZURE_OUTLINE_DIRECTION_ENCODING
+        vec2 inputUv[6]=vec2[](vec2(.5,.5),vec2(0),vec2(1),vec2(.5),vec2(-.25,.5),vec2(-.75,.75));
+        uint probe=(i-287u)/3u;
+        result.values[i]=outlineTangentDirection(inputUv[probe],probe==0u?1u:2u)[(i-287u)%3u];
+#else
+        result.values[i]=-99;
+#endif
+        return;
+    }
+    if(i>=280u) {
+#ifdef AZURE_OUTLINE_DEPTH_PROJECTION
+        vec4 clips[7]=vec4[](vec4(0,0,2.902902902902903,3),vec4(0,0,.9009009009009009,1),
+            vec4(0,0,.04904904904904905,1),vec4(0,0,.0999692202129364,3.21),
+            vec4(0,0,0,.1),vec4(0,0,0,.1),vec4(0,0,1,0));
+        vec2 slopes[7]=vec2[](vec2(1.001001001001001,1),vec2(1.001001001001001,1),
+            vec2(.01001001001001001,0),vec2(-9.894371032714844e-6,1),
+            vec2(1.001001001001001,1),vec2(1.001001001001001,1),vec2(1,1));
+        float shifts[7]=float[](.1,0,.1,.1,-.2,-.1,.1);
+        result.values[i]=outlineShiftedClipDepth(clips[i-280u],slopes[i-280u],shifts[i-280u]);
+#else
+        result.values[i]=-99;
+#endif
+        return;
+    }
     if(i>=260u) {
 #ifdef AZURE_OUTLINE_PROJECTION
         if(i<272u) {

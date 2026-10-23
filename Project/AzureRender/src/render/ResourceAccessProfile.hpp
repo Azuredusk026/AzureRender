@@ -23,13 +23,21 @@ struct ResourceAccessRequirements {
     std::uint64_t fragmentBuffers = 0;
     bool requireDeviceAddress = false;
     bool requireUpdateAfterBind = false;
-    // Image totals include combined and image-only descriptors. Standalone
+    // Fragment image totals include combined and image-only descriptors. Standalone
     // samplers have independent stage limits and pool allocation counts.
     std::uint64_t separateImageSlots = 0;
     std::uint64_t separateSamplerSlots = 0;
     std::uint64_t fixedSeparateImageSlots = 0;
     std::uint64_t fixedSeparateSamplerSlots = 0;
     std::uint64_t fragmentColorAttachments = 0;
+    // Additional vertex-only bindings share set capacity with the fragment
+    // layout, but retain their own per-stage limits.
+    std::uint64_t vertexCombinedImageSamplers = 0;
+    std::uint64_t fixedVertexCombinedImageSamplers = 0;
+    std::uint64_t vertexBuffers = 0;
+    // Distinct buffer bindings across all stages. Zero retains the fragment
+    // count for callers with a single-stage descriptor contract.
+    std::uint64_t descriptorSetBuffers = 0;
 };
 struct ResourceAccessProfile {
     ResourceAccessMode mode = ResourceAccessMode::Unsupported;

@@ -82,7 +82,7 @@ void VulkanRhi::transitionImageLayout(
             barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
             barrier.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
             sourceStage = VK_PIPELINE_STAGE_TRANSFER_BIT;
-            destinationStage = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+            destinationStage = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT;
         } else {
             throw std::runtime_error("Unsupported image layout transition");
         }
@@ -225,7 +225,7 @@ void VulkanRhi::generateMipmaps(
             vkCmdPipelineBarrier(
                 commandBuffer,
                 VK_PIPELINE_STAGE_TRANSFER_BIT,
-                VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+                VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
                 0,
                 0,
                 nullptr,
@@ -256,7 +256,7 @@ void VulkanRhi::generateMipmaps(
         vkCmdPipelineBarrier(
             commandBuffer,
             VK_PIPELINE_STAGE_TRANSFER_BIT,
-            VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
             0,
             0,
             nullptr,
@@ -403,6 +403,7 @@ void VulkanCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, Vk
 
 VkPipeline VulkanRhi::createGraphicsPipeline(
     const GraphicsPipelineDesc& desc) {
+    validateGraphicsColorWriteMasks(desc);
     VkPipelineShaderStageCreateInfo vertexStage{
         VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
     vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
@@ -470,9 +471,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
         desc.colorAttachmentCount);
     for (std::size_t index=0;index<colorBlendAttachments.size();++index) {
         auto& attachment=colorBlendAttachments[index];
-        attachment.colorWriteMask =
-            VK_COLOR_COMPONENT_R_BIT | VK_COLOR_COMPONENT_G_BIT
-            | VK_COLOR_COMPONENT_B_BIT | VK_COLOR_COMPONENT_A_BIT;
+        attachment.colorWriteMask = graphicsColorWriteMask(desc,index);
         if (desc.alphaBlend) {
             if(desc.primaryColorBlend==PrimaryColorBlend::Multiply) {
                 if(index!=0) {attachment.colorWriteMask=0;continue;}

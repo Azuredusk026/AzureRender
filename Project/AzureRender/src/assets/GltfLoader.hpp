@@ -183,6 +183,16 @@ struct AssetMaterial {
         std::vector<std::uint8_t> parameterPixels;
         std::uint32_t parameterWidth=0,parameterHeight=0;
     } projectedHairRamp;
+    struct OutlineSurface {
+        enum class NormalSource : std::uint8_t { Geometry,TangentUv1,TangentOctahedralUv1 };
+        bool present=false,depthPrepass=false;
+        NormalSource normalSource=NormalSource::Geometry;
+        float width=.5F,minimumPixels=.5F,depthOffset=0;
+        std::array<float,4> uvScaleOffset{1,1,0,0};
+        std::array<float,3> color{.018F,.028F,.042F};
+        std::vector<std::uint8_t> maskPixels{255,0,0,255};
+        std::uint32_t maskWidth=1,maskHeight=1;
+    } outlineSurface;
     struct EyeSurface {
         bool present=false;
         bool nprLighting=false;
@@ -243,6 +253,7 @@ struct AssetPrimitive {
     std::uint32_t materialIndex = 0;
     std::array<float, 3> center{};
     std::uint32_t nodeIndex = std::numeric_limits<std::uint32_t>::max();
+    bool hasTexcoord1=false;
 };
 
 struct AssetNode {
@@ -309,9 +320,13 @@ struct LoadedAsset {
     std::uint32_t morphTargetCount = 0;
     std::vector<MorphTargetRange> morphRanges;
     std::vector<MorphWeightState> defaultMorphWeights;
+    // Optional standard UV1 stream, indexed like vertices. Consumers declare
+    // their interpretation; the base vertex/skinning ABI remains unchanged.
+    std::vector<std::array<float,2>> texcoord1;
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);
+void validateOutlineMaterialInputs(const LoadedAsset& asset);
 struct AssetImage {std::vector<std::uint8_t> pixels;std::uint32_t width=0,height=0;std::vector<std::string> losses;std::vector<azurerender::ImageMipLevel> mipLevels;std::string sourceCompression;};
 [[nodiscard]] AssetImage loadAssetImage(const std::string& path);
 // Candidate validation consumes embedded data without filesystem access.

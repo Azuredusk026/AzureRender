@@ -125,6 +125,20 @@ int main() {
 
     // The device mock mints distinct handles and logs creation.
     NullRhi rhi;
+    {
+        azurerender::rhi::GraphicsPipelineDesc selective;
+        selective.colorAttachmentCount=2;
+        selective.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
+        if(azurerender::rhi::graphicsColorWriteMask(selective,0)!=0
+            ||azurerender::rhi::graphicsColorWriteMask(selective,1)!=VK_COLOR_COMPONENT_R_BIT)return 93;
+        selective.colorWriteMasks={0};
+        bool rejected=false;
+        try {rhi.createGraphicsPipeline(selective);}catch(const std::invalid_argument&){rejected=true;}
+        if(!rejected||countCalls(rhi.calls,"createGraphicsPipeline")!=0)return 94;
+        selective.colorWriteMasks={0,0x10};rejected=false;
+        try {rhi.createGraphicsPipeline(selective);}catch(const std::invalid_argument&){rejected=true;}
+        if(!rejected||countCalls(rhi.calls,"createGraphicsPipeline")!=0)return 95;
+    }
     const VkPipeline first =
         rhi.createGraphicsPipeline(azurerender::rhi::GraphicsPipelineDesc{});
     const VkPipeline second =

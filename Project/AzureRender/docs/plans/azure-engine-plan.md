@@ -94,6 +94,8 @@ NR12 负责画面、操控、发布与实录联合验收。
 接入风险及公共契约见[架构审计](2026-10-22-render-capability-integration-audit.md)。
 NR0-A1 固定有效入口，NR8-V2 管理候选晋升及跨入口验证。
 NR6-C15 至 C18 覆盖材质、GPU 绑定、多层高光和距离描边。
+公共距离投影与深度壳已进入[生产验证](../acceptance/nr/outline-material-integration.md)。
+原生整区、动态晋升及完整抗锯齿分别保留门禁。
 对象图集及原生过滤范围见[GPU 验证](../acceptance/nr/object-shadow-gpu.md)。
 真实腿部保留七字节差异，完整角色外观继续待验。
 逐材质局部灯下限及实际候选见[响应验证](../acceptance/nr/material-local-wrap.md)。

@@ -33,6 +33,17 @@ int main(){try{
     incompatibleComplete=complete;incompatibleComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["typo"]=1;
     bool fieldRejected=false;try{(void)MaterialData::parse(incompatibleComplete).interpret([](const auto&){return std::filesystem::path();});}catch(const std::exception&){fieldRejected=true;}
     require(fieldRejected,"Complete documents must reject unknown profile fields");
+    auto outlined=complete;
+    outlined["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["outlineSurface"]={
+        {"schemaVersion",1},{"mode","view-scaled"},{"width",.7},{"minimumPixels",.4},
+        {"depthOffset",.12},{"depthPrepass",true},{"color",{.1,.2,.3}}};
+    const auto outlineDocument=MaterialData::parse(outlined);
+    require(outlineDocument.encode()==outlined&&MaterialGraph::fromMaterial(outlineDocument).compile().encode()==outlined,
+        "Complete documents and graphs must preserve the exact outline contract");
+    const auto outlineMaterial=outlineDocument.interpret([](const auto&){return std::filesystem::path();});
+    require(outlineMaterial.outlineSurface.present&&outlineMaterial.outlineSurface.depthPrepass
+        &&std::abs(outlineMaterial.outlineSurface.width-.7F)<1e-6F&&outlineMaterial.outlineSurface.color[1]==.2F,
+        "Complete material interpretation must consume depth, color and projection inputs");
     auto pbr=MaterialData::defaults("azure.pbr");pbr.parameters["baseColor"]={.5,.25,.125,1};pbr.parameters["roughness"]=.3;pbr.parameters["metallic"]=.8;
     const auto material=MaterialData::parse(pbr.encode()).interpret([](const auto&)->std::filesystem::path{throw std::runtime_error("No texture expected");});
     require(material.baseColorPixels[0]>material.baseColorPixels[1]&&material.metallicRoughnessPixels[1]==77&&material.metallicRoughnessPixels[2]==204,"Runtime interpretation must consume actual linear color and PBR parameters");
@@ -58,7 +69,9 @@ int main(){try{
     const auto replacementPath=std::filesystem::temp_directory_path()/("azure-replacement-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azurematerial");
     {std::ofstream output(replacementPath);output<<MaterialData::defaults("azure.pbr").encode();}
     AssetMaterial source;source.name="face-slot";source.slotId="source-slot";source.materialClass=AssetMaterialClass::Face;
-    source.faceSdf.present=true;source.nprDiffuse.present=true;source.materialFeatures=MaterialFeatureDiffuseRamp|MaterialFeatureGeometryShadow;
+    source.faceSdf.present=true;source.nprDiffuse.present=true;source.outlineSurface.present=true;
+    source.outlineSurface.depthPrepass=true;source.outlineSurface.width=.65F;
+    source.materialFeatures=MaterialFeatureDiffuseRamp|MaterialFeatureGeometryShadow;
     source.nprDiffuse.lighting={true,{1.2F,.8F,.6F},{.7F,.9F,1.1F}};
     source.nprDiffuse.rimResponse=AssetMaterial::NprDiffuse::RimResponse::ViewFacing;
     source.nprDiffuse.viewTint={true,.595F,{.38F,.12F,.14F}};
@@ -72,7 +85,8 @@ int main(){try{
     require(messages.size()>firstMessage,"Full replacement must diagnose lost character capabilities");
     const auto& warning=messages.back();
     require(warning.find("source-slot")!=std::string::npos&&warning.find("faceSdf")!=std::string::npos
-        &&warning.find("nprDiffuse")!=std::string::npos&&warning.find("diffuse-ramp")!=std::string::npos,
+        &&warning.find("nprDiffuse")!=std::string::npos&&warning.find("diffuse-ramp")!=std::string::npos
+        &&warning.find("outlineSurface")!=std::string::npos,
         "Replacement diagnostic must identify the slot and discarded semantics");
     require(mesh.materials[0].slotId==source.slotId&&mesh.materials[0].name==source.name&&!mesh.materials[0].faceSdf.present,
         "Diagnostics must preserve explicit full replacement and stable slot identity");
@@ -92,6 +106,7 @@ int main(){try{
     const auto& patched=mesh.materials[0];
     require(patched.emissiveStrength==3&&(patched.materialFeatures&MaterialFeatureEmissiveMask),"Override must reach its runtime consumer");
     require(patched.faceSdf.present&&patched.faceSdf.headNode==7&&patched.faceSdf.pixels==source.faceSdf.pixels
+        &&patched.outlineSurface.present&&patched.outlineSurface.depthPrepass&&patched.outlineSurface.width==.65F
         &&patched.nprDiffuse.present&&patched.nprDiffuse.lighting.present
         &&patched.nprDiffuse.lighting.ambientColor==source.nprDiffuse.lighting.ambientColor
         &&patched.nprDiffuse.lighting.mainColor==source.nprDiffuse.lighting.mainColor

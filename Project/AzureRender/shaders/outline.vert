@@ -35,6 +35,9 @@ layout(location = 7) in vec3 morph1;
 layout(location = 0) out vec3 opacityCoordinate;
 
 layout(push_constant) uniform MorphWeights {
+#if defined(AZURE_VIEW_SCALED_OUTLINE)
+    layout(offset = 124) uint materialIndex;
+#endif
     layout(offset = 128) vec2 weights;
     layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
@@ -44,6 +47,9 @@ layout(std430, binding = 17) readonly buffer InstanceSkinnedVertices { uint word
 float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceData.instances[gl_InstanceIndex].meta.y + uint(gl_VertexIndex))*27u+offset]); }
 vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
 #endif
+#if defined(AZURE_VIEW_SCALED_OUTLINE)
+#include "outline_view_scaled.glsl"
+#else
 void main() {
     opacityCoordinate=position;
 #if defined(AZURE_COMPUTE_SKINNING)
@@ -76,3 +82,4 @@ void main() {
     if(magnitude>.00001)clip.xy+=pixelDirection/magnitude * camera.renderingParameters.x*2.0/camera.clusterDepth.zw*clip.w;
     gl_Position=clip;
 }
+#endif

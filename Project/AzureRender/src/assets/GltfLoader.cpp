@@ -200,7 +200,7 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","specularInput","nprDiffuse","surface","composite","sceneRefraction"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","nprDiffuse","surface","composite","sceneRefraction"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
             for(const char* key:{"styleParameters","featureParameters"})if(profile.contains(key)) {
                 const auto& vector=profile.at(key);
@@ -1162,6 +1162,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
 }
 
 #include "EyeSurfaceLoader.inc"
+#include "OutlineSurfaceLoader.inc"
 
 AssetMaterial loadMaterial(
     const tinygltf::Model& model,
@@ -1535,6 +1536,7 @@ AssetMaterial loadMaterial(
         if(distortionImage>=0)styleMaskImage=distortionImage;
         projectedHairParameterImage=loadProjectedHairRamp(*material,model,result,matcapImage);
         loadEyeSurface(*material,model,result,styleMaskImage,matcapImage);
+        loadOutlineSurface(*material,model,result,imageSettings);
     }
 
     if (baseColorImage >= 0) {
@@ -2252,6 +2254,19 @@ void appendPrimitive(
     copyFloatAttribute(model, primitive, "NORMAL", 3, vertices);
     copyFloatAttribute(model, primitive, "TANGENT", 4, vertices);
     copyFloatAttribute(model, primitive, "TEXCOORD_0", 2, vertices);
+    const auto secondary=primitive.attributes.find("TEXCOORD_1");
+    std::vector<std::array<float,2>> texcoord1;
+    if(secondary!=primitive.attributes.end()) {
+        const auto& accessor=model.accessors.at(static_cast<std::size_t>(secondary->second));
+        if(accessor.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||accessor.type!=TINYGLTF_TYPE_VEC2
+            ||accessor.count!=vertices.size())throw std::invalid_argument("Unsupported glTF TEXCOORD_1 layout");
+        texcoord1.resize(vertices.size());const auto* data=accessorData(model,accessor);
+        const auto stride=accessorStride(model,accessor);
+        for(std::size_t i=0;i<texcoord1.size();++i) {
+            std::memcpy(texcoord1[i].data(),data+i*stride,2*sizeof(float));
+            for(float value:texcoord1[i])if(!std::isfinite(value))throw std::invalid_argument("TEXCOORD_1 must be finite");
+        }
+    }
     copySkinAttributes(model, primitive, vertices);
     std::uint32_t morphCount = 0;
     copyMorphTargets(model, primitive, vertices, morphCount);
@@ -2298,6 +2313,11 @@ void appendPrimitive(
         ? static_cast<std::uint32_t>(primitive.material)
         : fallbackMaterial;
     draw.nodeIndex = nodeIndex;
+    draw.hasTexcoord1=!texcoord1.empty();
+    if(!texcoord1.empty()||!asset.texcoord1.empty()) {
+        asset.texcoord1.resize(baseVertex+vertices.size());
+        if(!texcoord1.empty())std::copy(texcoord1.begin(),texcoord1.end(),asset.texcoord1.begin()+baseVertex);
+    }
     std::array<float, 3> primitiveMin{};
     std::array<float, 3> primitiveMax{};
     primitiveMin.fill(std::numeric_limits<float>::max());
@@ -2606,6 +2626,7 @@ LoadedAsset loadGltfAsset(const std::string& path) {
     }
     auto asset=importGltfModel(model,&authored,&imageSettings);
     for(const auto& material:asset.materials)validateEyeTextureSettings(material);
+    validateOutlineMaterialInputs(asset);
     return asset;
 }
 namespace {
@@ -2629,9 +2650,25 @@ void parseEmbeddedGltf(const std::string& bytes,bool binary,tinygltf::Model& mod
         reinterpret_cast<const unsigned char*>(bytes.data()),bytes.size(),binary));
 }
 }
+void validateOutlineMaterialInputs(const LoadedAsset& asset) {
+    if(!asset.texcoord1.empty()&&asset.texcoord1.size()!=asset.vertices.size())
+        throw std::invalid_argument("TEXCOORD_1 stream must match the vertex table");
+    for(const auto& primitive:asset.primitives) {
+        const auto& material=asset.materials.at(primitive.materialIndex);
+        if(!material.outlineSurface.present
+            ||material.outlineSurface.normalSource==AssetMaterial::OutlineSurface::NormalSource::Geometry)continue;
+        if(!primitive.hasTexcoord1||asset.texcoord1.empty())
+            throw std::invalid_argument(material.name+" outlineSurface.normalSource requires TEXCOORD_1");
+        for(std::size_t i=0;i<primitive.indexCount;++i) {
+            const auto vertex=asset.indices.at(static_cast<std::size_t>(primitive.firstIndex)+i);
+            for(float value:asset.texcoord1.at(vertex))if(!std::isfinite(value)||value< -1||value>1)
+                throw std::invalid_argument(material.name+" outlineSurface.normalSource requires signed unit TEXCOORD_1 values");
+        }
+    }
+}
 LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
     tinygltf::Model model;AuthoredImageMips authored;parseEmbeddedGltf(bytes,binary,model,authored);
-    return importGltfModel(model,&authored);
+    auto asset=importGltfModel(model,&authored);validateOutlineMaterialInputs(asset);return asset;
 }
 std::vector<AssetMaterial> loadEmbeddedGltfMaterials(const std::string& bytes,bool binary,
     const std::vector<nlohmann::json>& imageSettings){

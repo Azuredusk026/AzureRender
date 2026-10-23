@@ -189,6 +189,15 @@ function(compile_shader source_file)
     if(shader_source_base STREQUAL "shadow.frag" OR shader_source_base STREQUAL "surface_response_test.comp")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/shadow_coverage.glsl")
     endif()
+    if(shader_source_base STREQUAL "outline.vert" OR shader_source_base STREQUAL "surface_response_test.comp")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/outline_projection.glsl")
+    endif()
+    if(shader_source_base STREQUAL "outline.vert")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/outline_projection_data.glsl" "${SHADER_SOURCE_DIR}/outline_view_scaled.glsl")
+    endif()
+    if(shader_source_base STREQUAL "outline.frag" OR shader_source_base STREQUAL "outline_depth.frag")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/outline_surface_fragment.glsl" "${SHADER_SOURCE_DIR}/node_opacity.glsl")
+    endif()
     if(shader_source_base STREQUAL "mesh.vert" OR shader_source_base STREQUAL "shadow.vert"
         OR shader_source_base STREQUAL "outline.vert" OR shader_source_base STREQUAL "scene_instance_layout_test.comp")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/instance_data.glsl")
@@ -269,6 +278,15 @@ compile_shader(
     DEFINES AZURE_COMPUTE_SKINNING=1
     OUTPUT_NAME outline_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/outline.frag")
+compile_shader("${SHADER_SOURCE_DIR}/outline.vert" DEFINES AZURE_VIEW_SCALED_OUTLINE=1 OUTPUT_NAME outline_view_scaled.vert)
+compile_shader("${SHADER_SOURCE_DIR}/outline.vert" DEFINES AZURE_VIEW_SCALED_OUTLINE=1 AZURE_BINDLESS=1 OUTPUT_NAME outline_view_scaled_bindless.vert)
+compile_shader("${SHADER_SOURCE_DIR}/outline.vert" DEFINES AZURE_VIEW_SCALED_OUTLINE=1 AZURE_COMPUTE_SKINNING=1 OUTPUT_NAME outline_view_scaled_compute.vert)
+compile_shader("${SHADER_SOURCE_DIR}/outline.vert" DEFINES AZURE_VIEW_SCALED_OUTLINE=1 AZURE_COMPUTE_SKINNING=1 AZURE_BINDLESS=1 OUTPUT_NAME outline_view_scaled_compute_bindless.vert)
+compile_shader("${SHADER_SOURCE_DIR}/outline.frag" DEFINES AZURE_VIEW_SCALED_OUTLINE=1 OUTPUT_NAME outline_view_scaled.frag)
+compile_shader("${SHADER_SOURCE_DIR}/outline.frag" DEFINES AZURE_VIEW_SCALED_OUTLINE=1 AZURE_BINDLESS=1 OUTPUT_NAME outline_view_scaled_bindless.frag)
+compile_shader("${SHADER_SOURCE_DIR}/outline_depth.frag")
+compile_shader("${SHADER_SOURCE_DIR}/outline_depth.frag" DEFINES AZURE_BINDLESS=1 OUTPUT_NAME outline_depth_bindless.frag)
+compile_shader("${SHADER_SOURCE_DIR}/sampled_upload_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/outline_mask.frag")
 compile_shader("${SHADER_SOURCE_DIR}/outline_mask.frag" DEFINES AZURE_BINDLESS=1 OUTPUT_NAME outline_mask_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_OUTLINE_MASK=1 OUTPUT_NAME outline_mask.vert)
@@ -399,6 +417,7 @@ add_library(AzureRenderCore STATIC
     src/rhi/GpuAllocator.cpp
     src/rhi/NullRhi.cpp
     src/render/SampledTextureCache.cpp
+    src/render/OutlineProjectionResources.cpp
     src/rhi/PipelineInspection.cpp
     src/rhi/UploadRingBuffer.cpp
     src/rhi/VulkanRhi.cpp
@@ -726,6 +745,11 @@ if(BUILD_TESTING)
     add_dependencies(AzureSurfaceResponseGpuTests AzureRenderShaders)
     add_test(NAME AzureRender.SurfaceResponseGpu COMMAND AzureSurfaceResponseGpuTests "${SHADER_BINARY_DIR}/surface_response_test.comp.spv" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/showcase_looks.json")
     set_tests_properties(AzureRender.SurfaceResponseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_executable(AzureSampledUploadGpuTests tests/SampledUploadGpuTests.cpp)
+    target_link_libraries(AzureSampledUploadGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureSampledUploadGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.SampledUploadGpu COMMAND AzureSampledUploadGpuTests "${SHADER_BINARY_DIR}/sampled_upload_test.comp.spv")
+    set_tests_properties(AzureRender.SampledUploadGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureColorGradingLutGpuTests tests/ColorGradingLutGpuTests.cpp)
     target_link_libraries(AzureColorGradingLutGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureColorGradingLutGpuTests AzureRenderShaders)
@@ -810,6 +834,9 @@ if(BUILD_TESTING)
     endif()
     add_test(NAME AzureRender.CharacterRepair COMMAND AzureCharacterRepairTests
         "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf")
+    add_executable(AzureOutlineProjectionTests tests/OutlineProjectionTests.cpp)
+    target_link_libraries(AzureOutlineProjectionTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.OutlineProjection COMMAND AzureOutlineProjectionTests)
     find_program(AZURE_NODE_EXECUTABLE node)
     if(AZURE_NODE_EXECUTABLE)
         add_test(NAME AzureRender.SurfaceConversion COMMAND "${AZURE_NODE_EXECUTABLE}"
@@ -1119,6 +1146,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.EyeNprGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_eye_npr_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.EyeNprGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.OutlineProjectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_outline_projection_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.OutlineProjectionGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.CubeProbeGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_cube_probe_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
@@ -1437,6 +1467,7 @@ if(BUILD_TESTING)
         src/render/RenderGraph.cpp
         src/scenes/CharacterSceneRenderer.cpp
         src/render/SampledTextureCache.cpp
+        src/render/OutlineProjectionResources.cpp
         src/render/ResourceAccessProfile.cpp
         src/render/VisibilityPrototype.cpp
         src/assets/GltfLoader.cpp
@@ -2119,6 +2150,7 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.ObjectShadowGpu PROPERTIES TIMEOUT 900 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureTools.NativeNprLighting COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_npr_lighting.py)
     add_test(NAME AzureTools.NativeProjectedHairMath COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_character_projected_hair_math.py)
+    add_test(NAME AzureTools.OutlineDirections COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_outline_directions.py)
     add_test(NAME AzureTools.NativeCapturedLights COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_captured_lights.py)
     add_test(NAME AzureTools.NativeCameraProjection COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_camera_projection.py)
     add_test(NAME AzureTools.NativeCapturePixels COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_capture_pixels.py)

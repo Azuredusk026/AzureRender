@@ -34,6 +34,29 @@ int main(){
         sharedDepth.separateSamplerSlots=sharedDepth.fixedSeparateSamplerSlots=1;
         require(ResourceAccessProfile::select(shared,sharedDepth).mode==ResourceAccessMode::Indexed,
             "Seventeen images sharing sixteen samplers must use independent limits");
+        auto splitStages=shared;splitStages.limits.maxDescriptorSetSamplers=17;
+        splitStages.limits.maxDescriptorSetSampledImages=18;
+        auto vertexRequest=sharedDepth;vertexRequest.vertexCombinedImageSamplers=1;
+        vertexRequest.fixedVertexCombinedImageSamplers=1;vertexRequest.vertexBuffers=5;
+        require(ResourceAccessProfile::select(splitStages,vertexRequest).mode==ResourceAccessMode::Indexed,
+            "Vertex and fragment samplers need independent stage budgets and a shared set budget");
+        auto limitedSet=splitStages;limitedSet.limits.maxDescriptorSetSamplers=16;
+        require(ResourceAccessProfile::select(limitedSet,vertexRequest).mode==ResourceAccessMode::Unsupported,
+            "Vertex-only samplers must count against the descriptor set");
+        limitedSet=splitStages;limitedSet.limits.maxDescriptorSetSampledImages=17;
+        require(ResourceAccessProfile::select(limitedSet,vertexRequest).mode==ResourceAccessMode::Unsupported,
+            "Vertex-only images must count against the descriptor set");
+        auto indexedVertex=vertexRequest;indexedVertex.vertexCombinedImageSamplers=17;
+        auto vertexStageDevice=splitStages;vertexStageDevice.limits.maxDescriptorSetSamplers=64;
+        vertexStageDevice.limits.maxDescriptorSetSampledImages=64;
+        require(ResourceAccessProfile::select(vertexStageDevice,indexedVertex).mode==ResourceAccessMode::Fixed,
+            "A vertex array exceeding the stage budget must select the fixed layout");
+        indexedVertex.fixedVertexCombinedImageSamplers=17;
+        require(ResourceAccessProfile::select(vertexStageDevice,indexedVertex).mode==ResourceAccessMode::Unsupported,
+            "Both layout stages must fit the device");
+        auto tooManyVertexBuffers=vertexRequest;tooManyVertexBuffers.vertexBuffers=128;
+        require(ResourceAccessProfile::select(splitStages,tooManyVertexBuffers).mode==ResourceAccessMode::Unsupported,
+            "Vertex buffers must count against total stage resources");
         auto attachmentRequest=sharedDepth;attachmentRequest.fragmentColorAttachments=2;
         auto attachmentDevice=shared;attachmentDevice.limits.maxPerStageResources=25;
         require(ResourceAccessProfile::select(attachmentDevice,attachmentRequest).mode==ResourceAccessMode::Unsupported,"Fragment color attachments must count against total stage resources");
@@ -97,6 +120,14 @@ int main(){
         require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Unsupported,"Update-after-bind stage totals must include color attachments");
         updateLimits.maxPerStageUpdateAfterBindResources=26;
         require(ResourceAccessProfile::select(updating,sharedUpdates).mode==ResourceAccessMode::Indexed,"Color attachments must not consume descriptor pool slots");
+        auto stagedUpdates=sharedUpdates;stagedUpdates.vertexCombinedImageSamplers=1;
+        stagedUpdates.fixedVertexCombinedImageSamplers=1;stagedUpdates.vertexBuffers=5;
+        stagedUpdates.descriptorSetBuffers=13;updateLimits.maxUpdateAfterBindDescriptorsInAllPools=31;
+        require(ResourceAccessProfile::select(updating,stagedUpdates).mode==ResourceAccessMode::Unsupported,
+            "Pool capacity must include vertex descriptors and the distinct buffer bindings");
+        updateLimits.maxUpdateAfterBindDescriptorsInAllPools=32;
+        require(ResourceAccessProfile::select(updating,stagedUpdates).mode==ResourceAccessMode::Indexed,
+            "Exact combined-stage pool capacity must remain valid");
         auto huge=request;huge.sampledImageSlots=std::numeric_limits<std::uint64_t>::max();
         require(ResourceAccessProfile::select(device,huge).mode==ResourceAccessMode::Fixed,"Resource sums must not overflow");
         auto invalid=request;invalid.fixedSampledImageSlots=0;

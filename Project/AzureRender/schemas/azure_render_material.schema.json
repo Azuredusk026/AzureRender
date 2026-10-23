@@ -110,6 +110,9 @@
       "type": "object",
       "description": "Typed fields and ownership are validated by the production material interpreter."
     },
+    "outlineSurface": {
+      "$ref": "outline_surface.schema.json"
+    },
     "specularInput": {
       "type": "object",
       "description": "Typed fields and ownership are validated by the production material interpreter."

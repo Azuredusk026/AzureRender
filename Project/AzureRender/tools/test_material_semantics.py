@@ -23,6 +23,26 @@ class MaterialSemanticsTests(unittest.TestCase):
         self.assertEqual(converted['extras']['azureRenderMaterial']['faceSdf']['texture'], 1)
         self.assertEqual(material['normalTexture']['index'], 1)
 
+    def test_complete_outline_mask_preserves_independent_texture_binding(self):
+        import uuid
+        identity = str(uuid.uuid4())
+        source = {'textures': [{'source': 3}, {'source': 3}], 'samplers': []}
+        outline = {'schemaVersion': 1, 'mode': 'view-scaled', 'width': .5,
+                   'normalSource': 'tangent-uv1', 'depthPrepass': True, 'maskTexture': 0}
+        material = {'normalTexture': {'index': 1}, 'extras': {'azureRenderMaterial': {
+            'schemaVersion': 2, 'class': 'hair', 'outlineSurface': outline}}}
+        document = self.tool.complete_material_document(material, source, {'3': identity})
+        converted = document['surface']['materials'][0]['extras']['azureRenderMaterial']['outlineSurface']
+        self.assertEqual(converted, {**outline, 'maskTexture': 1})
+        self.assertEqual(document['textures'], {'0': {'asset': identity, 'usage': 'linear'}})
+        self.assertEqual(len(document['surface']['textures']), 2)
+        self.assertEqual(outline['maskTexture'], 0)
+        material['extras']['azureRenderMaterial']['outlineSurface']['maskTexture']=0.0
+        integral=self.tool.complete_material_document(material,source,{'3':identity})
+        self.assertEqual(integral['surface']['materials'][0]['extras']['azureRenderMaterial']['outlineSurface']['maskTexture'],1)
+        material['extras']['azureRenderMaterial']['outlineSurface']['maskTexture']=.0000001
+        with self.assertRaises(ValueError):self.tool.complete_material_document(material,source,{'3':identity})
+
     def setUp(self):
         path = Path(__file__).with_name('convert_material_semantics.py')
         self.assertTrue(path.exists(), 'Material conversion implementation is missing')
