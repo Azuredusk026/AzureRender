@@ -54,6 +54,12 @@ public:
     // inputs copied into renderer storage remain frozen until workers join.
     virtual void updateFrame(const SceneFrameData& frame) = 0;
 
+    // Owner-thread notifications after recording workers join. Only successful
+    // queue submissions publish previous-frame state; abandoned recordings do
+    // not advance history. Neither callback may throw after queue acceptance.
+    virtual void onFrameSubmitted(std::uint64_t submission) noexcept {(void)submission;}
+    virtual void onFrameAbandoned() noexcept {}
+
     // Records the scene passes into context.commandBuffer, writing the engine
     // Scene Color / depth / normal attachments through context.sceneFramebuffer.
     virtual void recordScene(const RenderContext& context) = 0;

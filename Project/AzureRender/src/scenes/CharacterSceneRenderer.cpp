@@ -528,11 +528,12 @@ bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(scene_.irradianceVolume.asset!=context.scene.irradianceVolume.asset)return false;
     if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
     if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
-    scene_=context.scene;animationIndex_=0;animationTime_=0;return true;
+    scene_=context.scene;animationIndex_=0;animationTime_=0;++temporalSceneGeneration_;temporalView_.clear();return true;
 }
 
 void CharacterSceneRenderer::onSwapchainRecreate(
     const RenderContext& context) {
+    temporalView_.clear();
     renderSettings_ = context.renderSettings;
     // The scene render pass is recreated by the engine; the character
     // pipelines reference it and must be rebuilt.
@@ -609,6 +610,16 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE, static_cast<std::uint32_t>(currentFrame_),
         RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers),std::move(shadowViews),std::move(nodeOpacities),std::move(objectShadowPages_));
     visibleInstances_.clear();
+    TemporalFrameInfo temporal;
+    temporal.width=std::max(frame.swapchainWidth,1U);temporal.height=std::max(frame.swapchainHeight,1U);
+    temporal.sceneGeneration=temporalSceneGeneration_;
+    temporal.cameraCut=static_cast<std::uint64_t>(frame.camera.source);
+    temporal.projection=projectionMatrix_;temporal.viewProjection=multiply(projectionMatrix_,viewMatrix_);
+    temporal.exposureScale=std::exp2(renderSettings_->grade.exposureEv);
+    const auto finite=[](const auto& matrix){return std::all_of(matrix.begin(),matrix.end(),[](float value){return std::isfinite(value);});};
+    if(frame.swapchainWidth&&frame.swapchainHeight&&finite(temporal.projection)&&finite(temporal.viewProjection))
+        temporalView_.prepare(temporal);
+    else temporalView_.clear();
 }
 
 void CharacterSceneRenderer::ensureInstanceCapacity() {
@@ -1367,6 +1378,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
 }
 
 void CharacterSceneRenderer::onUnload(const RenderContext& context) {
+    temporalView_.clear();
     (void)context;
     loadJobs_.clear();loadInitialized_=false;destroyResources();
     faceSdfHeadNode_.reset();faceSdfTextureCount_=0;
@@ -1452,6 +1464,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
         for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend)transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"temporalViewSubmission\": " << temporalView_.lastSubmission() << ",\n"
+         << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
+         << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
          << "  \"outlineProjectionLayoutVersion\": " << PackedOutlineProjectionRecord::kLayoutVersion << ",\n"
          << "  \"outlineProjectionBytes\": " << (outlineProjection_?outlineProjection_->buffer().size:0) << ",\n"

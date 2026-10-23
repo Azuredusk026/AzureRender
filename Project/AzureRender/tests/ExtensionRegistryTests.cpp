@@ -2,6 +2,8 @@
 
 #include <cassert>
 #include <memory>
+#include <iostream>
+#include <initializer_list>
 #include <stdexcept>
 #include <string_view>
 
@@ -104,14 +106,17 @@ int main() {
     // Scene renderer registry reuses the same dependency/version contract and
     // the default diagnostic view lookup comes from capabilities.
     azurerender::SceneRendererRegistry sceneRegistry;
-    if(sceneRegistry.kApiVersion!=2||azurerender::SceneRendererCapabilities::kApiVersion!=2)
-        throw std::runtime_error("Camera view layout changes require scene renderer API version two");
-    bool oldSceneApiRejected=false;
-    try{sceneRegistry.registerFactory({"scene.old",1,{"render"},{}},[]{return std::make_unique<TestSceneRenderer>();});}
-    catch(const std::runtime_error&){oldSceneApiRejected=true;}
-    if(!oldSceneApiRejected)throw std::runtime_error("An older scene renderer API must be rejected before registration");
+    if(sceneRegistry.kApiVersion!=3||azurerender::SceneRendererCapabilities::kApiVersion!=3){
+        std::cerr<<"Submission callback changes require scene renderer API version three\n";return 1;
+    }
+    for(const auto legacyApi:{1U,2U}){
+        bool oldSceneApiRejected=false;
+        try{sceneRegistry.registerFactory({"scene.old",legacyApi,{"render"},{}},[]{return std::make_unique<TestSceneRenderer>();});}
+        catch(const std::runtime_error&){oldSceneApiRejected=true;}
+        if(!oldSceneApiRejected){std::cerr<<"An older scene renderer API must be rejected before registration\n";return 1;}
+    }
     sceneRegistry.registerFactory(
-        {"scene.character", 2, {"render"}, {}},
+        {"scene.character", 3, {"render"}, {}},
         [] { return std::make_unique<TestSceneRenderer>(); });
     assert(sceneRegistry.contains("scene.character"));
     const auto selectedScene = sceneRegistry.create("scene.character");

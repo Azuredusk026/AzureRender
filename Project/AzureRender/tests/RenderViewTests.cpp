@@ -38,6 +38,7 @@ int main(int argc,char** argv){try{
     require(service.describe(a).at("renderCameraPosition")==nlohmann::json({2,1,3}),"Renderer snapshot uses the independent preview camera");
     require(service.describe(b).at("renderCameraPosition")==nlohmann::json({-2,2,1}),"Preview cameras remain independent");
     std::string error;require(graph.compile(error),"Independent views must form a valid graph");graph.execute(&commands);
+    require(service.submitted(1),"Recorded auxiliary views receive the successful submission");
     require(service.describe(a).at("renderCount")==1,"Repeated requests coalesce within one frame");
     require(service.describe(c).at("renderCount")==0,"A dormant view remains unscheduled");
     require(service.describe(a).at("colorImage")!=service.describe(b).at("colorImage"),"Independent views own different attachments");
@@ -48,6 +49,7 @@ int main(int argc,char** argv){try{
     require(service.describe(a).at("resolvedImage")!=service.describe(a).at("colorImage"),"HDR rendering and UI output have independent images");
     reject([&]{service.sample(c,2);});
     RenderGraph idle;service.schedule(idle,frame,base,2);require(idle.passes().empty(),"A completed static result causes no new render work");
+    require(service.submitted(2),"A static result consumes no new history");
     service.sample(a,2);const auto live=rhi.allocator().statistics().liveImages;
     service.release(a);reject([&]{service.request(a);});service.complete(1);
     require(rhi.allocator().statistics().liveImages==live,"A sampled cached view survives until its use completes");
@@ -55,12 +57,14 @@ int main(int argc,char** argv){try{
     const auto replacement=service.create(descriptor);require(replacement!=a,"Reused slots carry a new generation");
     reject([&]{service.resize(b,{0,128});});service.resize(b,{320,180});service.request(b);
     RenderGraph resized;service.schedule(resized,frame,base,3);require(resized.compile(error),"Resized view graph is valid");resized.execute(&commands);
+    require(service.submitted(3),"Resized rendering commits after recording");
     service.complete(3);require(service.describe(b).at("extent")==nlohmann::json({320,180}),"Only the requested view is resized");
     service.sample(b,4);service.resize(b,{400,200});
     require(service.sample(b,5)==VK_NULL_HANDLE,"Pending resize suspends sampling so old GPU uses can retire");
     RenderGraph pending;service.schedule(pending,frame,base,4);require(pending.passes().empty(),"In-flight resize preserves the current resources");
+    require(service.submitted(4),"Pending resize does not submit a new rendered view");
     service.complete(4);RenderGraph finished;service.schedule(finished,frame,base,5);
-    require(finished.compile(error),"Completed resize builds a valid graph");finished.execute(&commands);service.complete(5);
+    require(finished.compile(error),"Completed resize builds a valid graph");finished.execute(&commands);require(service.submitted(5),"Finished resize commits");service.complete(5);
     require(service.describe(b).at("extent")==nlohmann::json({400,200}),"Suspended sampling allows a requested resize to finish");
     service.release(b);service.release(c);service.release(replacement);service.complete(5);
     require(rhi.allocator().statistics().liveImages==0,"Released views leave no image allocations");
@@ -85,6 +89,7 @@ int main(int argc,char** argv){try{
     large.extent={2048,2048};const auto maximum=limited.create(large);limited.request(maximum);
     RenderGraph extentGraph;limited.schedule(extentGraph,frame,base,1);
     require(extentGraph.compile(error),"Physical supersampling dimensions form a valid graph");extentGraph.execute(&commands);
+    require(limited.submitted(1),"Device-limit rendering receives its successful submission");
     require(limited.describe(maximum).at("frameExtent")==nlohmann::json({4096,4096}),"Renderers consume the physical AA scene dimensions in their per-frame uniforms");
     limited.release(maximum);limited.complete(1);
     require(rhi.allocator().statistics().liveImages==beforeFailure,"The device-limit boundary remains usable after an oversized AA request");

@@ -1,6 +1,7 @@
 # AzureRender 工程
 
 原生时序输入与运动解码见[时序核验](docs/acceptance/nr/native-temporal-inputs.md)。
+主辅视图的历史提交边界见[时序帧状态](docs/runtime/temporal-frame-state.md)。
 
 材质变体资源归属与实际片元核对见[合成验证](docs/acceptance/nr/character-composite-diagnosis.md)。
 逐材质 NPR 光色及真实皮肤色带见[光色验证](docs/acceptance/nr/npr-material-lighting.md)。

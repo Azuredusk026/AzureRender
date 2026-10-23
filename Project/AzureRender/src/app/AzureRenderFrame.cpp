@@ -241,13 +241,24 @@ void AzureRenderApp::drawFrame() {
     updateGameUi(frameData.deltaSeconds);
     vkCheck(vkResetFences(device_, 1, &inFlightFences_[currentFrame_]), "vkResetFences");
     vkCheck(vkResetCommandBuffer(commandBuffers_[currentFrame_], 0), "vkResetCommandBuffer");
-    recordCommandBuffer(
+    const auto abandonRecording=[this]{
+#if AZURE_WITH_EDITOR
+        if(renderViews_)renderViews_->cancel(graphicsSubmission_+1);
+#endif
+        if(sceneRenderer_)sceneRenderer_->onFrameAbandoned();
+    };
+    try {
+        recordCommandBuffer(
         commandBuffers_[currentFrame_],
         imageIndex,
         captureThisFrame
             ? readback.buffer.buffer
             : VK_NULL_HANDLE,
         frameSnapshot.frame());
+    } catch(...) {
+        abandonRecording();
+        throw;
+    }
 
     const VkSemaphore waitSemaphores[] = {imageAvailableSemaphores_[currentFrame_]};
     const VkPipelineStageFlags waitStages[] = {VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT};
@@ -262,10 +273,14 @@ void AzureRenderApp::drawFrame() {
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
     const auto submitStart = std::chrono::steady_clock::now();
-    vkCheck(
-        vkQueueSubmit(graphicsQueue_, 1, &submitInfo, inFlightFences_[currentFrame_]),
-        "vkQueueSubmit");
+    const auto submitResult=vkQueueSubmit(graphicsQueue_,1,&submitInfo,inFlightFences_[currentFrame_]);
+    if(submitResult!=VK_SUCCESS)abandonRecording();
+    vkCheck(submitResult,"vkQueueSubmit");
     graphicsFrameSubmissions_[currentFrame_]=++graphicsSubmission_;
+    if(sceneRenderer_)sceneRenderer_->onFrameSubmitted(graphicsSubmission_);
+#if AZURE_WITH_EDITOR
+    if(renderViews_)renderViews_->submitted(graphicsSubmission_);
+#endif
     if (runOptions_.gpuTimingEnabled)
         submissionCounters_.submitMilliseconds += std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - submitStart).count();
     if (runOptions_.gpuTimingEnabled) {

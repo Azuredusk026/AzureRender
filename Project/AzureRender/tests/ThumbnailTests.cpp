@@ -16,9 +16,10 @@ int main(int argc,char** argv){try{
     require(a!=0,"A content request creates a render view");
     require(thumbnails.request({"mesh","fingerprint-a","settings-a"},descriptor)==a,"Same fingerprint reuses its cache");
     RenderGraph graph;rhi::NullCommandRecorder recorder;base.commands=&recorder;
-    views.schedule(graph,{},base,1);std::string error;require(graph.compile(error),"Thumbnail graph compiles");graph.execute(&recorder);views.complete(1);
+    views.schedule(graph,{},base,1);std::string error;require(graph.compile(error),"Thumbnail graph compiles");graph.execute(&recorder);require(views.submitted(1),"Thumbnail commits after queue submission");views.complete(1);
     thumbnails.request({"mesh","fingerprint-a","settings-a"},descriptor);
     RenderGraph dormant;views.schedule(dormant,{},base,2);require(dormant.passes().empty(),"Cached thumbnails stop rendering");
+    require(views.submitted(2),"Dormant thumbnails do not advance rendered history");
     const auto b=thumbnails.request({"mesh","fingerprint-b","settings-a"},descriptor);
     require(a!=b,"Source changes replace the cache generation");
     thumbnails.clear();views.complete(2);

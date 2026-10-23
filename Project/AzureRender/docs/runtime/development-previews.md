@@ -20,7 +20,13 @@ Platform 拥有受控子进程与取消机制。
 Player 链接运行与渲染模块。
 开发编译服务由 AzureRender 宿主装配。
 视图创建、调度与销毁要求其创建线程。
+
+队列接受录制结果后，调用 `RenderViewService::submitted`。
+录制或提交失败时，调用同一服务的 `cancel`。
+围栏完成后，调用 `complete` 执行资源退役。
 关闭先取消编译，再等待 GPU 并释放资源。
+
+独立视图的提交与历史规则见[时序帧状态](temporal-frame-state.md)。
 
 ## 着色器重载
 

@@ -19,6 +19,7 @@
 #include "render/SceneInstanceGpuData.hpp"
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
+#include "render/TemporalViewState.hpp"
 #include "render/ShadowTileBounds.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
@@ -56,6 +57,8 @@ public:
     bool reuseScene(const RenderContext& context) override;
     void onSwapchainRecreate(const RenderContext& context) override;
     void updateFrame(const SceneFrameData& frame) override;
+    void onFrameSubmitted(std::uint64_t submission) noexcept override {temporalView_.commit(submission);}
+    void onFrameAbandoned() noexcept override {temporalView_.cancel();}
     void recordScene(const RenderContext& context) override;
     void registerPasses(RenderGraph& graph, const SceneGraphResources& resources,
                         const RenderContext& context) override;
@@ -68,6 +71,8 @@ public:
     void appendCaptureManifestFields(std::ostream& json) const override;
 
 private:
+    TemporalViewState temporalView_;
+    std::uint64_t temporalSceneGeneration_=1;
     bool faceSdfPrepared_=false,platformPrepared_=false;
     std::uint32_t faceSdfTextureCount_=0;
     struct GpuMaterial;

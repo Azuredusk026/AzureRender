@@ -492,7 +492,7 @@ flowchart TB
 
 | 契约 | 当前版本 |
 | --- | ---: |
-| `ISceneRenderer` API | 2 |
+| `ISceneRenderer` API | 3 |
 | `azure.camera` / `CameraViewDescriptor` | 2 |
 | `RenderSettings` | 8 |
 | `.azscene` | 3 |

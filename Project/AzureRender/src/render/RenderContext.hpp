@@ -64,7 +64,7 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 2;
+    static constexpr std::uint32_t kApiVersion = 3;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;

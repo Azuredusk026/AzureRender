@@ -28,6 +28,9 @@ public:
     void resize(RenderViewHandle,VkExtent2D);
     void setCamera(RenderViewHandle,const std::array<float,3>&,const std::array<float,3>&);
     void schedule(RenderGraph&,const SceneFrameData&,const RenderContext&,std::uint64_t submission);
+    bool submitted(std::uint64_t submission) noexcept;
+    // Only cancel work that has not been accepted by the queue.
+    bool cancel(std::uint64_t submission) noexcept;
     void complete(std::uint64_t submission);
     // Every UI/capture read advances lifetime, including cached static output.
     // Pending resize returns no image until previous GPU uses complete.
