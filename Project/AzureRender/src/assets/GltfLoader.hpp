@@ -192,7 +192,9 @@ struct AssetMaterial {
         enum class IndirectNormal : std::uint8_t { Surface, WorldHorizontal, FaceFrameRadialHorizontal };
         bool present=false;
         float shadowScale=1;
-        bool styleMaskGb=false,albedoAlpha=false;
+        enum class ShadowMask : std::uint8_t { None,StyleMaskGb,One };
+        ShadowMask shadowMask=ShadowMask::None;
+        bool albedoAlpha=false;
         IndirectNormal indirectNormal=IndirectNormal::Surface;
         struct Lighting {
             bool present=false;
@@ -209,6 +211,8 @@ struct AssetMaterial {
             bool present=false;
             float bias=0;
         } mainRamp;
+        enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow };
+        CharacterVisibility characterVisibility=CharacterVisibility::SceneVisibility;
     } nprDiffuse;
     struct SpecularInput {
         enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };

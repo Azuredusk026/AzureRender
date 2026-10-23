@@ -311,17 +311,17 @@ vec3 materialNprLitAlbedo(vec3 base,vec3 normal,vec3 view) {
     vec4 tint=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[2];
     return characterDiffuseViewTint(base,normal,view,tint);
 }
-CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec4 ramp,float visibility,vec3 normal,vec3 view) {
-    vec4 parameters=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0];
-    vec2 mask=parameters.y>.5?textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).gb:vec2(0);
+CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec4 ramp,float visibility,float mainShadow,vec3 normal,vec3 view) {
+    PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
+    vec4 parameters=profile.rows[0];
+    vec2 mask=parameters.y>1.5?vec2(1,0):parameters.y>.5?textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).gb:vec2(0);
     vec3 shadow=sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,base.rgb);
-    // Host scene lighting aliases both visibility inputs to the available
-    // main-light map. Native per-character/global bindings are independent.
+    float characterVisibility=profile.rows[3].x>.5?mainShadow:visibility;
     return characterDiffuseResponse(materialNprLitAlbedo(base.rgb,normal,view),shadow,metallic,parameters.x,ramp,
-        parameters.z>.5?base.a:1.0,mask,dot(normal,view),visibility,visibility);
+        parameters.z>.5?base.a:1.0,mask,dot(normal,view),characterVisibility,visibility);
 }
-vec3 materialNprDiffuse(vec4 base,float metallic,vec4 ramp,float visibility,vec3 normal,vec3 view){
-    return materialNprDiffuseResponse(base,metallic,ramp,visibility,normal,view).color;
+vec3 materialNprDiffuse(vec4 base,float metallic,vec4 ramp,float visibility,float mainShadow,vec3 normal,vec3 view){
+    return materialNprDiffuseResponse(base,metallic,ramp,visibility,mainShadow,normal,view).color;
 }
 
 vec4 shadowPlaneQuad(ivec2 base,ivec2 lo,ivec2 hi,vec2 uv,vec2 extent,vec2 gradient) {
@@ -776,7 +776,7 @@ void main() {
         } else if(normalMode>.5)indirectDiffuseNormal=worldHorizontalDiffuseNormal(shadedNormal);
     }
     vec3 nprAmbientResponse=nprDiffuse
-        ?materialNprDiffuse(baseColor,metallic,classRampRgba,shadowVisibility,shadedNormal,viewDirection):diffuseColor;
+        ?materialNprDiffuse(baseColor,metallic,classRampRgba,shadowVisibility,shadowVisibility,shadedNormal,viewDirection):diffuseColor;
     float characterSceneVisibility=camera.nprLightingParameters.x>.5
         ?mix(shadowVisibility,1.0,camera.nprGainFloor.z):shadowVisibility;
     vec3 localCharacterDiffuse=diffuseColor;
@@ -939,7 +939,7 @@ void main() {
         if(characterLight) {
             if(!localCharacterResponseReady) {
                 if(nprDiffuse)localCharacterDiffuse=materialNprDiffuse(baseColor,metallic,classRampRgba,
-                    characterSceneVisibility,shadedNormal,viewDirection);
+                    characterSceneVisibility,shadowVisibility,shadedNormal,viewDirection);
                 localCharacterResponseReady=true;
             }
             clusteredDiffuse+=localCharacterDiffuse*characterRadiance;
@@ -956,7 +956,7 @@ void main() {
             // composition. This explicit host adapter retains cosine-weighted
             // local irradiance and the main-direction color response.
             vec3 response=light.coneType.y>1.5
-                ?materialNprDiffuse(baseColor,metallic,localRamp,visibility,shadedNormal,viewDirection)
+                ?materialNprDiffuse(baseColor,metallic,localRamp,visibility,shadowVisibility,shadedNormal,viewDirection)
                 :nprAmbientResponse*pointDiffuse;
             // Color selection and incident-energy visibility are independent.
             // The native illumination expression gates its main-light term
@@ -1333,7 +1333,7 @@ void main() {
             response=hairDiffuseResponse;
             incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;
         } else {
-            response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,visibility,shadedNormal,viewDirection);
+            response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,visibility,shadowVisibility,shadedNormal,viewDirection);
             PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
             if(profile.rows[10].w>.5) {
                 incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;

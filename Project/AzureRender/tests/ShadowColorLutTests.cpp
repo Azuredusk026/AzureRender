@@ -70,6 +70,18 @@ int main(){
   colored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["lighting"]={
     {"schemaVersion",1},{"ambientColor",{1.2,.8,.6}},{"mainColor",{.7,.9,1.1}}};
   const auto coloredMaterial=load(colored).materials[0];
+  auto independent=colored;
+  auto& independentNpr=independent["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
+  independentNpr["shadowMask"]="one";independentNpr["characterVisibility"]="main-light-shadow";
+  const auto independentPacked=azurerender::packMaterialSurfaceProfile(load(independent).materials[0]);
+  require(independentPacked.rows[0][1]==2&&independentPacked.rows[3][0]==1,
+    "Character visibility source and full receiver mask must have independent packed selectors");
+  require(packed.rows[3][0]==0,"Omitted character visibility source must preserve the scene visibility alias");
+  for(const auto& bad:std::vector<Json>{nullptr,true,0,"unknown"}) {
+    auto invalid=independent;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["characterVisibility"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Invalid character visibility sources must reject during shared material interpretation");
+  }
   auto signedRamp=colored;
   require(stbi_write_png((root/"ramp.png").string().c_str(),4,1,4,pixels,16)!=0,"Cannot create ramp fixture");
   signedRamp["images"].push_back({{"uri","ramp.png"}});

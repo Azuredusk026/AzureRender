@@ -1801,12 +1801,13 @@ AssetMaterial loadMaterial(
             if(!npr.is_object())throw std::invalid_argument("nprDiffuse requires an object");
             for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
-                &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
+                &&field.key()!="characterVisibility")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
                 ||npr["lightingInputs"]!="host-scene-radiance"
-                ||(npr["shadowMask"]!="none"&&npr["shadowMask"]!="style-mask-gb")
+                ||(npr["shadowMask"]!="none"&&npr["shadowMask"]!="style-mask-gb"&&npr["shadowMask"]!="one")
                 ||(npr["baseAo"]!="one"&&npr["baseAo"]!="albedo-alpha"))
                 throw std::invalid_argument("Invalid nprDiffuse input contract");
             if(npr.contains("indirectNormal")&&(!npr["indirectNormal"].is_string()
@@ -1827,10 +1828,20 @@ AssetMaterial loadMaterial(
                 ||result.materialClass==AssetMaterialClass::Showcase
                 ||((result.materialFeatures&MaterialFeatureDiffuseRamp)&&npr["shadowMask"]=="style-mask-gb"))
                 throw std::invalid_argument("Incompatible nprDiffuse material owners");
-            result.nprDiffuse={true,npr["shadowScale"].get<float>(),npr["shadowMask"]=="style-mask-gb",npr["baseAo"]=="albedo-alpha",
+            result.nprDiffuse={true,npr["shadowScale"].get<float>(),
+                npr["shadowMask"]=="one"?AssetMaterial::NprDiffuse::ShadowMask::One
+                    :npr["shadowMask"]=="style-mask-gb"?AssetMaterial::NprDiffuse::ShadowMask::StyleMaskGb
+                    :AssetMaterial::NprDiffuse::ShadowMask::None,npr["baseAo"]=="albedo-alpha",
                 indirectNormal=="face-frame-radial-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal
                     :indirectNormal=="world-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal
                     :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
+            if(npr.contains("characterVisibility")) {
+                const auto& source=npr.at("characterVisibility");
+                if(!source.is_string()||(source!="scene-visibility"&&source!="main-light-shadow"))
+                    throw std::invalid_argument("Invalid nprDiffuse.characterVisibility");
+                result.nprDiffuse.characterVisibility=source=="main-light-shadow"?AssetMaterial::NprDiffuse::CharacterVisibility::MainLightShadow
+                    :AssetMaterial::NprDiffuse::CharacterVisibility::SceneVisibility;
+            }
             if(npr.contains("lighting")) {
                 const auto& raw=npr.at("lighting");
                 if(!raw.is_object()||raw.size()!=3||!raw.contains("schemaVersion")

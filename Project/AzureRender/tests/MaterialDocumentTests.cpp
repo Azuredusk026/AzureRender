@@ -63,6 +63,8 @@ int main(){try{
     source.nprDiffuse.rimResponse=AssetMaterial::NprDiffuse::RimResponse::ViewFacing;
     source.nprDiffuse.viewTint={true,.595F,{.38F,.12F,.14F}};
     source.nprDiffuse.mainRamp={true,.25F};
+    source.nprDiffuse.shadowMask=AssetMaterial::NprDiffuse::ShadowMask::One;
+    source.nprDiffuse.characterVisibility=AssetMaterial::NprDiffuse::CharacterVisibility::MainLightShadow;
     mesh.materials={source};MaterialBinding binding;binding.path=replacementPath.u8string();
     auto& messages=RuntimeDiagnostics::instance().messages();const auto firstMessage=messages.size();
     applyMaterialBindings(mesh,{{"source-slot",binding}});
@@ -96,6 +98,8 @@ int main(){try{
         &&patched.nprDiffuse.viewTint.present&&patched.nprDiffuse.viewTint.scale==source.nprDiffuse.viewTint.scale
         &&patched.nprDiffuse.viewTint.color==source.nprDiffuse.viewTint.color
         &&patched.nprDiffuse.mainRamp.present&&patched.nprDiffuse.mainRamp.bias==source.nprDiffuse.mainRamp.bias
+        &&patched.nprDiffuse.shadowMask==source.nprDiffuse.shadowMask
+        &&patched.nprDiffuse.characterVisibility==source.nprDiffuse.characterVisibility
         &&patched.materialClass==source.materialClass&&patched.baseColorPixels==source.baseColorPixels,
         "Parameter override must retain unselected source fields and character inputs");
     require(messages.size()==patchMessages,"Preserving source semantics must not report replacement loss");

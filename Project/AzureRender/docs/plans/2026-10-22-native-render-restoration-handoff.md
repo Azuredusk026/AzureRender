@@ -25,6 +25,8 @@ C11-R8 的材质边缘响应及正交回退见[实际验证](../acceptance/nr/ma
 C11-R9 的有符号主光色带通过双配置验证。
 身体拓扑、真实片元及剩余阴影见[色带验收](../acceptance/nr/signed-main-ramp.md)。
 C16-R4 继续核对屏幕遮罩的独立角色、场景可见量。
+材质来源选择与常量接收遮罩通过双配置验证。
+原生对象阴影图、采样及剩余生产门禁见[来源验收](../acceptance/nr/character-visibility-inputs.md)。
 
 C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 范围见[照明验收](../acceptance/nr/npr-illumination.md)。

@@ -24,15 +24,16 @@ def linear(value):
     return np.where(value<=.04045,value/12.92,((value+.055)/1.055)**2.4)
 
 
-def reference(base,shadow,ramp,ao,scale):
-    # Literal source dependencies: no mask, fully visible host lights.
+def reference(base,shadow,ramp,ao,scale,character_visibility=1,shadow_mask=0):
+    # Literal source dependencies with independent material receiver selection.
     lit=base*.95999997854232788
     source=shadow*.95999997854232788*scale
     weights=np.array([.21267290413379669,.7151522040367126,.07217500358819962])
     saturated=lambda c:np.dot(c,weights)+(c-np.dot(c,weights))*1.2000000476837158
     shade=saturated(source*.64999997615814209)
-    shade=shade+(source-shade)*np.clip(ao+ramp[3],0,1)
-    untinted=shade+(lit-shade)*min(ao,ramp[3])
+    visibility=1-shadow_mask+character_visibility*shadow_mask
+    shade=shade+(source-shade)*np.clip(ao*((1-shadow_mask)+visibility*shadow_mask)+ramp[3],0,1)
+    untinted=shade+(lit-shade)*min(ao,visibility,ramp[3])
     chroma=max(ramp[:3])-min(ramp[:3])
     tinted=untinted*(1-chroma+ramp[:3]*chroma)
     return tinted*np.clip(np.dot(untinted,weights)/max(np.dot(tinted,weights),.0010000000474974513),0,1.5)

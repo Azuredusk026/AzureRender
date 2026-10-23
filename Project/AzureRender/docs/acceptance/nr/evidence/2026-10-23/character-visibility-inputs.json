@@ -1,0 +1,472 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "Independent NPR character visibility source; native object-shadow production equivalence remains pending",
+  "run": "build/runs/20261023-165425-character-visibility-producer-audit-9c2ea6",
+  "cpu": [
+    {
+      "config": "release",
+      "groups": 11,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "groups": 11,
+      "passed": true
+    }
+  ],
+  "gpu": [
+    {
+      "suite": "npr-new",
+      "config": "release",
+      "captures": 6,
+      "passed": true
+    },
+    {
+      "suite": "numeric",
+      "config": "release",
+      "probes": 248,
+      "passed": true
+    },
+    {
+      "suite": "npr",
+      "config": "release",
+      "captures": 18,
+      "passed": true
+    },
+    {
+      "suite": "rim",
+      "config": "release",
+      "captures": 6,
+      "passed": true
+    },
+    {
+      "suite": "hair",
+      "config": "release",
+      "captures": 4,
+      "passed": true
+    },
+    {
+      "suite": "numeric",
+      "config": "debug",
+      "probes": 248,
+      "passed": true
+    },
+    {
+      "suite": "npr",
+      "config": "debug",
+      "captures": 24,
+      "passed": true
+    },
+    {
+      "suite": "rim",
+      "config": "debug",
+      "captures": 6,
+      "passed": true
+    },
+    {
+      "suite": "hair",
+      "config": "debug",
+      "captures": 4,
+      "passed": true
+    }
+  ],
+  "actualCaptures": [
+    {
+      "name": "baseline",
+      "config": "release",
+      "playerSha256": "e32b9ab7dfa45a2668b9bc14dfbf0191c18d48ebc399be981c7210b9322ec991",
+      "imageSha256": "bc6a8eb1293bea9e77fb25695818d0b305391127615815b6f8d0ae32db6035e5",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            111,
+            75,
+            63
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "body-scene-shadow",
+      "config": "release",
+      "playerSha256": "e32b9ab7dfa45a2668b9bc14dfbf0191c18d48ebc399be981c7210b9322ec991",
+      "imageSha256": "bc6a8eb1293bea9e77fb25695818d0b305391127615815b6f8d0ae32db6035e5",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            111,
+            75,
+            63
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "body-main-shadow",
+      "config": "release",
+      "playerSha256": "e32b9ab7dfa45a2668b9bc14dfbf0191c18d48ebc399be981c7210b9322ec991",
+      "imageSha256": "df9d0121ab76cb1b53c5d99851e6a8c9fc4e18edf7d22f4367f4fca9abcd2e42",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            92,
+            60,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "name": "body-face-main-shadow",
+      "config": "release",
+      "playerSha256": "e32b9ab7dfa45a2668b9bc14dfbf0191c18d48ebc399be981c7210b9322ec991",
+      "imageSha256": "669777b8831ce79d78ac6267319296bfa823b506625d1bdc9afa52b247b5d27d",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            92,
+            60,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fixed",
+      "config": "debug",
+      "playerSha256": "26945431424fb829b972f0773fb97eeaa498c8acd6b2035ecca5517cfd43d2aa",
+      "imageSha256": "df9d0121ab76cb1b53c5d99851e6a8c9fc4e18edf7d22f4367f4fca9abcd2e42",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            92,
+            60,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "main",
+      "config": "release",
+      "playerSha256": "e32b9ab7dfa45a2668b9bc14dfbf0191c18d48ebc399be981c7210b9322ec991",
+      "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+      "pixels": [],
+      "maximumByteDifference": 0
+    }
+  ],
+  "nativeDistribution": [
+    {
+      "pixel": [
+        1251,
+        919
+      ],
+      "traceSha256": "57a385f0d52f25a15b708b05f4fa82ff1f2d55ebf561590f9122e9698d84257c",
+      "rawGatherError": 0,
+      "rawFlipY": false,
+      "gatherOrder": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "receiverDepth": 0.48090362548828125,
+      "blockedCount": 61,
+      "nativeBlockedCount": 61.0,
+      "positiveDeltaSum": 11.370745837688446,
+      "nativePositiveDeltaSum": 11.370746612548828,
+      "nativeVisibility": 0.01842176914215088,
+      "predictedVisibility": 0.018421768325329713,
+      "visibilityError": 8.16821166260695e-10,
+      "gatherSampleCount": 64
+    },
+    {
+      "pixel": [
+        1276,
+        276
+      ],
+      "traceSha256": "6b3c1a5c77c5dab73463298691f555494020f04249ca89560d35e827a3ccf833",
+      "rawGatherError": 0,
+      "rawFlipY": false,
+      "gatherOrder": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "receiverDepth": 0.7059288024902344,
+      "blockedCount": 0,
+      "nativeBlockedCount": 0.0,
+      "positiveDeltaSum": 0.0,
+      "nativePositiveDeltaSum": 0.0,
+      "nativeVisibility": 1.0,
+      "predictedVisibility": 1.0,
+      "visibilityError": 0.0,
+      "gatherSampleCount": 64
+    },
+    {
+      "pixel": [
+        1281,
+        300
+      ],
+      "traceSha256": "bcdc9cf963fc4cbd9af987643c86997db084437e2b5575a08206f3ec61bd03bc",
+      "rawGatherError": 0,
+      "rawFlipY": false,
+      "gatherOrder": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "receiverDepth": 0.6921424865722656,
+      "blockedCount": 0,
+      "nativeBlockedCount": 0.0,
+      "positiveDeltaSum": 0.0,
+      "nativePositiveDeltaSum": 0.0,
+      "nativeVisibility": 1.0,
+      "predictedVisibility": 1.0,
+      "visibilityError": 0.0,
+      "gatherSampleCount": 64
+    },
+    {
+      "pixel": [
+        1368,
+        380
+      ],
+      "traceSha256": "90ff7f5b48603dbe57a1741614939d5bb82b767dc52fa582bbfcb816435efd1a",
+      "rawGatherError": 0,
+      "rawFlipY": false,
+      "gatherOrder": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "receiverDepth": 0.6635322570800781,
+      "blockedCount": 0,
+      "nativeBlockedCount": 0.0,
+      "positiveDeltaSum": 0.0,
+      "nativePositiveDeltaSum": 0.0,
+      "nativeVisibility": 1.0,
+      "predictedVisibility": 1.0,
+      "visibilityError": 0.0,
+      "gatherSampleCount": 64
+    }
+  ],
+  "sourceDepth": {
+    "resource": "ResourceId::158089",
+    "format": "R16_TYPELESS",
+    "width": 4096,
+    "height": 2048,
+    "sha256": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+    "writes": [
+      125,
+      143,
+      152,
+      163,
+      171,
+      182,
+      191,
+      200,
+      208,
+      223,
+      237
+    ]
+  },
+  "remaining": [
+    "Public per-object depth atlas and frame ownership",
+    "Native receiver offsets, projection, precise sample constants and distribution filtering",
+    "Default local-light wrap floor per material",
+    "Native tangent frame and skin dielectric specular response",
+    "Full native image and dynamic promotion"
+  ]
+}
