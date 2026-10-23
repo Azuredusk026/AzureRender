@@ -26,9 +26,11 @@ def read_postvs(path,instance=0):
     fmt=mesh.get('format',{})
     if fmt.get('compByteWidth')!=4 or fmt.get('compType')!=1 or fmt.get('type')!=0:
         raise ValueError('VSOut position requires regular float32 components')
-    if (not signature or signature[0].get('semanticIdxName')!='SV_Position'
-        or signature[0].get('compCount')!=4 or signature[0].get('varType')!=0):
-        raise ValueError('VSOut requires the replay position-first signature')
+    positions=[field for field in signature if field.get('semanticIdxName')=='SV_Position']
+    if len(positions)!=1 or positions[0].get('compCount')!=4 or positions[0].get('varType')!=0:
+        raise ValueError('VSOut requires one regular float32 position signature')
+    # Replay places the position first even when the shader declares it last.
+    signature=positions+[field for field in signature if field.get('semanticIdxName')!='SV_Position']
     layout=[];cursor=0;names=set()
     for field in signature:
         name=field.get('semanticIdxName');components=field.get('compCount')

@@ -46,5 +46,12 @@ class PostVsTests(unittest.TestCase):
             result=self.read(root,data)
             self.assertEqual(result['attributes']['TEXCOORD0'].dtype,np.dtype('<u4'))
             np.testing.assert_array_equal(result['attributes']['TEXCOORD0'][0],np.array([.1,.2],dtype='<f4').view('<u4'))
+    def test_replay_position_first_with_late_shader_position(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);data=self.fixture(root)
+            data['output_signature'].reverse()
+            result=self.read(root,data)
+            np.testing.assert_array_equal(result['attributes']['SV_Position'],[[1,2,3,1],[4,5,6,1]])
+            np.testing.assert_allclose(result['attributes']['TEXCOORD0'],[[.1,.2],[.3,.4]])
 
 if __name__=='__main__':unittest.main()

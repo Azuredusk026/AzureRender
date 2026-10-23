@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "Shared instance layout and native object-shadow input proof; object-shadow atlas integration remains pending",
+  "run": "build/runs/20261023-173532-object-shadow-contract-91a092",
+  "layout": {
+    "version": 1,
+    "bytes": 496,
+    "alignment": 16,
+    "offsets": {
+      "model": 0,
+      "modelViewProjection": 64,
+      "cascadeMatrices": 128,
+      "meta": 384,
+      "faceLight": 400,
+      "morph": 416,
+      "faceFrame": 432
+    }
+  },
+  "checks": [
+    {
+      "config": "release",
+      "recordingGroups": 2,
+      "postVsCases": 5,
+      "gpuRecords": 2,
+      "gpuWords": 248,
+      "passed": true
+    },
+    {
+      "config": "debug",
+      "recordingGroups": 2,
+      "postVsCases": 5,
+      "gpuRecords": 2,
+      "gpuWords": 248,
+      "passed": true
+    }
+  ],
+  "shaderComparison": [
+    {
+      "config": "debug",
+      "file": "mesh.vert.spv",
+      "sha256": "2f31217eca02344ef3d74442bf5359c53fc062a12206a35437c794c72d9d726f",
+      "afterSha256": "2f31217eca02344ef3d74442bf5359c53fc062a12206a35437c794c72d9d726f",
+      "identical": true
+    },
+    {
+      "config": "debug",
+      "file": "shadow.vert.spv",
+      "sha256": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+      "afterSha256": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+      "identical": true
+    },
+    {
+      "config": "debug",
+      "file": "outline.vert.spv",
+      "sha256": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+      "afterSha256": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+      "identical": true
+    },
+    {
+      "config": "release",
+      "file": "mesh.vert.spv",
+      "sha256": "2f31217eca02344ef3d74442bf5359c53fc062a12206a35437c794c72d9d726f",
+      "afterSha256": "2f31217eca02344ef3d74442bf5359c53fc062a12206a35437c794c72d9d726f",
+      "identical": true
+    },
+    {
+      "config": "release",
+      "file": "shadow.vert.spv",
+      "sha256": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+      "afterSha256": "f77f4a08f86ecb4cbdbfb60d5c76c876925d5d3af2a640d22edc920313cb5443",
+      "identical": true
+    },
+    {
+      "config": "release",
+      "file": "outline.vert.spv",
+      "sha256": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+      "afterSha256": "fcb1503f585505b1d3a77bec3802089e11f335e327435c2fc7bef7dca7ae988d",
+      "identical": true
+    }
+  ],
+  "actualCaptures": [
+    {
+      "name": "fixed",
+      "config": "debug",
+      "playerSha256": "d9c10b361b093fe05c975308bc8009f704d582b1ef24d2f9506f5cfe7ae896be",
+      "imageSha256": "df9d0121ab76cb1b53c5d99851e6a8c9fc4e18edf7d22f4367f4fca9abcd2e42",
+      "pixels": [
+        {
+          "pixel": [
+            1251,
+            919
+          ],
+          "actual": [
+            92,
+            60,
+            52
+          ]
+        },
+        {
+          "pixel": [
+            1368,
+            380
+          ],
+          "actual": [
+            144,
+            113,
+            100
+          ]
+        },
+        {
+          "pixel": [
+            1276,
+            276
+          ],
+          "actual": [
+            156,
+            131,
+            118
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            300
+          ],
+          "actual": [
+            161,
+            138,
+            125
+          ]
+        }
+      ],
+      "maximumByteDifference": 0
+    },
+    {
+      "name": "main",
+      "config": "release",
+      "playerSha256": "c048dfbec3257ca235900451023b1377847d7401a0b4cfdf8e6ff57e17c98f01",
+      "imageSha256": "c226beac7b389f90447785ea4c1d3ccf45fc052a5e3bc40210462d7d88841919",
+      "pixels": [],
+      "maximumByteDifference": 0
+    }
+  ],
+  "sourceVertices": [
+    {
+      "event": 163,
+      "vertices": 3289,
+      "indices": 17037,
+      "identicalVisibleIndices": true,
+      "uvMaximumError": 0.0,
+      "visibleCameraRelativeMaximumError": 0.0,
+      "clipMatrixMaximumError": 4.7385345965267334e-05
+    },
+    {
+      "event": 237,
+      "vertices": 11564,
+      "indices": 43044,
+      "identicalVisibleIndices": true,
+      "uvMaximumError": 0.0,
+      "visibleCameraRelativeMaximumError": 0.0,
+      "clipMatrixMaximumError": 4.785478932944898e-05
+    }
+  ],
+  "sourceFloat32Fma": [
+    {
+      "event": 163,
+      "maximumFloat32FmaClipError": 0.0
+    },
+    {
+      "event": 237,
+      "maximumFloat32FmaClipError": 0.0
+    }
+  ],
+  "sourceRaster": [
+    {
+      "event": 143,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    },
+    {
+      "event": 152,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    },
+    {
+      "event": 163,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    },
+    {
+      "event": 171,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    },
+    {
+      "event": 182,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    },
+    {
+      "event": 191,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    },
+    {
+      "event": 200,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    },
+    {
+      "event": 208,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    },
+    {
+      "event": 223,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "08d02aacbf1ce0c26afbfb77e7334ad17376b4169e81ffe34919ecb8aa150543"
+    },
+    {
+      "event": 237,
+      "cullMode": 0,
+      "depthBias": -8,
+      "slopeBias": -0.0,
+      "pixelShaderSha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+    }
+  ],
+  "sourcePoisson": {
+    "sha256": "fe71bcc0912093f2f2f754397ff0395e56947fb8a2edeb2f84de86df330fd03b",
+    "uint32": [
+      3201081267,
+      1063955090,
+      3211864058,
+      3201061344,
+      1040121934,
+      3212706305,
+      1064440302,
+      3208959771,
+      1062876132,
+      1057349892,
+      3183535000,
+      3211652203,
+      3194671333,
+      1064906152,
+      1051762308,
+      1050048288,
+      3209018472,
+      1059231696,
+      3211425662,
+      1055545736,
+      1061876180,
+      3206286094,
+      3209740500,
+      3210808912,
+      3205757713,
+      1062266235,
+      3200514852,
+      1049474200,
+      3210003689,
+      3205389102,
+      1064931168,
+      1061267692,
+      1062128548,
+      1058465561,
+      1055059832,
+      3212419372,
+      1056005468,
+      1063372016,
+      1057592576,
+      3203566922,
+      3198206253,
+      3211988469,
+      3196561928,
+      3201728006,
+      3211914230,
+      3198645051,
+      1061863138,
+      1044609992,
+      3191700082,
+      3212547147,
+      3195515288,
+      1065303976,
+      3211725472,
+      1052196876,
+      3209717972,
+      1063916682,
+      3212796835,
+      1032676071,
+      1045209904,
+      1061769832,
+      1050459336,
+      1064547749,
+      1041451160,
+      3188745312
+    ]
+  },
+  "remaining": [
+    "Registered object-shadow configuration and render snapshot ownership",
+    "Bounded per-object D16 atlas and opaque geometry draw",
+    "Receiver offsets, distribution filter and source selection",
+    "Combined skin, hair and main-scene regression",
+    "Source event 223 has a distinct caster fragment program; inspect its coverage policy"
+  ],
+  "sourceObjectProjection": {
+    "worldToUnitShadow": [
+      [
+        -0.6180487275123596,
+        -9.49598355504122e-09,
+        -0.1089787557721138,
+        0.4710374894827396
+      ],
+      [
+        0.03680873662233353,
+        0.33922746777534485,
+        -0.20875252783298492,
+        0.18561258912086487
+      ],
+      [
+        -0.059343110769987106,
+        0.2135448008775711,
+        0.3365512192249298,
+        0.3363666981458664
+      ]
+    ],
+    "center": [
+      -0.032922994611390845,
+      0.8817030359784858,
+      -0.07904755292348345
+    ],
+    "halfExtents": [
+      0.7967071888720466,
+      1.2499696266474514,
+      1.2407684771464365
+    ],
+    "outgoingDirection": [
+      0.1472621113061905,
+      -0.5299193263053894,
+      -0.8351644277572632
+    ],
+    "normalBias": 0.009336411952972412,
+    "lightBias": 0.004668205976486206,
+    "filterRadiusTexels": [
+      4,
+      2
+    ],
+    "atlas": {
+      "columns": 4,
+      "rows": 2,
+      "resolution": 1024,
+      "sourcePage": 6
+    },
+    "forwardCasterDepthBias": 8,
+    "scissorBorderPixels": 1
+  }
+}

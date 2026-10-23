@@ -1345,6 +1345,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"instanceDataLayoutVersion\": " << SceneInstanceGpuData::kLayoutVersion << ",\n"
          << "  \"lightBufferLayoutVersion\": " << RenderLightGpu::kLayoutVersion << ",\n"
          << "  \"faceSdfTextures\": " << faceSdfTextureCount_ << ",\n"
          << "  \"showcasePlatformPrepared\": " << (platformPrepared_?"true":"false") << ",\n"

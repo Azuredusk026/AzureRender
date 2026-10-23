@@ -21,15 +21,7 @@ layout(std430, binding = 10) readonly buffer JointData {
     mat4 matrices[];
 } jointData;
 
-struct InstanceTransforms {
-    mat4 model;
-    mat4 modelViewProjection;
-    mat4 cascadeLightModelViewProjection[4];
-    uvec4 meta;
-    vec4 faceLight;
-    vec4 morph;
-    mat4 faceFrame;
-};
+#include "instance_data.glsl"
 layout(std430, binding = 13) readonly buffer InstanceData {
     InstanceTransforms instances[];
 } instanceData;

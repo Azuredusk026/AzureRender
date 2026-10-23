@@ -14,6 +14,7 @@
 #include "render/GpuCullingResources.hpp"
 #include "render/DeformedBounds.hpp"
 #include "render/SceneInstanceSnapshot.hpp"
+#include "render/SceneInstanceGpuData.hpp"
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
 #include "render/ShadowTileBounds.hpp"
@@ -210,16 +211,7 @@ private:
     // Per-instance transforms uploaded to the instance storage buffer. The
     // host computes them with the same matrix helpers as the single-model
     // path, so one instance reproduces the original values bit for bit.
-    struct InstanceGpuData {
-        std::array<float, 16> model{};
-        std::array<float, 16> modelViewProjection{};
-        std::array<std::array<float, 16>, kShadowCascadeCount>
-            cascadeLightModelViewProjection{};
-        std::array<std::uint32_t, 4> meta{};
-        std::array<float, 4> faceLight{};
-        std::array<float, 4> morph{};
-        std::array<float,16> faceFrame{};
-    };
+    using InstanceGpuData=SceneInstanceGpuData;
     static_assert(sizeof(InstanceGpuData) == 496);
 
     using SkinningPushConstants = SkinningBatch;
