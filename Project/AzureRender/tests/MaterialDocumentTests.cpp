@@ -65,6 +65,7 @@ int main(){try{
     source.nprDiffuse.mainRamp={true,.25F};
     source.nprDiffuse.shadowMask=AssetMaterial::NprDiffuse::ShadowMask::One;
     source.nprDiffuse.characterVisibility=AssetMaterial::NprDiffuse::CharacterVisibility::MainLightShadow;
+    source.nprDiffuse.localDiffuseFloorScale=2;
     mesh.materials={source};MaterialBinding binding;binding.path=replacementPath.u8string();
     auto& messages=RuntimeDiagnostics::instance().messages();const auto firstMessage=messages.size();
     applyMaterialBindings(mesh,{{"source-slot",binding}});
@@ -100,6 +101,7 @@ int main(){try{
         &&patched.nprDiffuse.mainRamp.present&&patched.nprDiffuse.mainRamp.bias==source.nprDiffuse.mainRamp.bias
         &&patched.nprDiffuse.shadowMask==source.nprDiffuse.shadowMask
         &&patched.nprDiffuse.characterVisibility==source.nprDiffuse.characterVisibility
+        &&patched.nprDiffuse.localDiffuseFloorScale==source.nprDiffuse.localDiffuseFloorScale
         &&(patched.materialFeatures&MaterialFeatureGeometryShadow)!=0
         &&patched.materialClass==source.materialClass&&patched.baseColorPixels==source.baseColorPixels,
         "Parameter override must retain unselected source fields and character inputs");

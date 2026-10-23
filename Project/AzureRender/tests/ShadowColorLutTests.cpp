@@ -80,6 +80,21 @@ int main(){
     &&packed.rows[0][3]==0,"Omitted indirect normal mode must preserve the surface normal");
   require(packed.rows[10][3]==0,"Omitted material lighting must retain scene-owned colors");
   auto colored=composed;
+  auto wrapped=composed;
+  wrapped["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["localDiffuseFloorScale"]=2;
+  const auto wrappedPacked=azurerender::packMaterialSurfaceProfile(load(wrapped).materials[0]);
+  require(wrappedPacked.rows[3][1]==2&&packed.rows[3][1]==1,
+    "Material local wrap scale must pack independently with an identity default");
+  for(const Json& bad:std::vector<Json>{-0.001,4.001,true,"2",nullptr}) {
+    auto invalid=wrapped;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["localDiffuseFloorScale"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Invalid local wrap scale must reject");
+  }
+  for(float endpoint:{0.F,4.F}) {
+    wrapped["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["localDiffuseFloorScale"]=endpoint;
+    require(azurerender::packMaterialSurfaceProfile(load(wrapped).materials[0]).rows[3][1]==endpoint,
+      "Local wrap scale endpoints must remain legal");
+  }
   colored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["lighting"]={
     {"schemaVersion",1},{"ambientColor",{1.2,.8,.6}},{"mainColor",{.7,.9,1.1}}};
   const auto coloredMaterial=load(colored).materials[0];

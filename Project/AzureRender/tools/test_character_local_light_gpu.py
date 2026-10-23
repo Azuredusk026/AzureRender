@@ -28,7 +28,8 @@ def line_reference(incoming,axis,length):
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
     names=('front','side','back','compressed','uncompressed','two-lights','fixed','disabled-scene-npr','no-receiver','pbr','pbr-control','upper-light','lower-light',
-        'line-light','line-zero','line-zero-range','line-axis-x','line-axis-y','line-fixed','line-range','line-pbr','line-pbr-control','offset-camera')
+        'line-light','line-zero','line-zero-range','line-axis-x','line-axis-y','line-fixed','line-range','line-pbr','line-pbr-control','offset-camera',
+        'wrap-identity','wrap-zero','wrap-double','wrap-four','wrap-fixed','wrap-document')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]};frames={}
@@ -43,9 +44,12 @@ def run(player,output,selected=None,expected_validation=None):
                 'shadowColorLut':{'schemaVersion':1,'texture':1,'flipV':False},'diffuseRamp':{'schemaVersion':1,'texture':2},'styleParameters':[1,1,0,0],
                 'nprDiffuse':{'schemaVersion':1,'shadowScale':.55,'lightingInputs':'host-scene-radiance','shadowMask':'none','baseAo':'albedo-alpha'}}}
             if name.startswith('pbr') or name.startswith('line-pbr'):del mat['extras']
+            wrap_scale={'wrap-zero':0,'wrap-double':2,'wrap-four':4,'wrap-fixed':2,'wrap-document':2}.get(name,1)
+            if name.startswith('wrap-'):mat['extras']['azureRenderMaterial']['nprDiffuse']['localDiffuseFloorScale']=wrap_scale
             model_path.write_text(json.dumps(model),encoding='utf-8')
             path=folder/'level.azurelevel';level=json.loads(path.read_text());light=level['lights'][0]
             position=[2,0,0] if name=='side' else [0,0,-2] if name=='back' else [0,0,2]
+            if name.startswith('wrap-'):position=[0,0,-2]
             if name in ('upper-light','lower-light'):position=[0,2 if name=='upper-light' else -2,.5];light['radius']=1
             if name=='offset-camera':
                 position=[0,0,.5];light['radius']=1
@@ -55,6 +59,7 @@ def run(player,output,selected=None,expected_validation=None):
             if line:position=[0,0,1]
             level['nodes'][2]['components']['azure.transform']['data']['translation']=position
             strong=name in ('compressed','uncompressed','two-lights');color=[8,4,2] if strong else [.8,.6,.4];intensity=1 if strong else 3 if name in ('side','back','upper-light','lower-light') else .7
+            if name.startswith('wrap-'):intensity=3
             if name=='offset-camera':intensity=3
             light.update(color=color,intensity=intensity)
             if line:light.update(intensity=3);intensity=3
@@ -73,9 +78,21 @@ def run(player,output,selected=None,expected_validation=None):
                 'ambientDirection':[0,1,0],'directionBias':.15,'directionGain':1.5,'directionFloor':.5,'outdoorGain':1.05,
                 'shadowAmbientGain':.8,'indoorMix':0,'litAmbientMix':0,'mainColorMix':1,'shadowOverride':0,'useSceneIrradiance':False}
             path.write_text(json.dumps(level),encoding='utf-8')
+            if name=='wrap-document':
+                from convert_material_semantics import complete_material_document
+                import uuid
+                images={str(i):str(uuid.uuid4()) for i in range(3)}
+                for i,image in enumerate(model['images']):
+                    (folder/(image['uri']+'.azmeta')).write_text(json.dumps(dict(schemaVersion=1,id=images[str(i)],settings={},dependencies=[])))
+                material_id=str(uuid.uuid4());mat['extras']['azureSlotId']='surface'
+                model_path.write_text(json.dumps(model),encoding='utf-8')
+                (folder/'surface.azurematerial').write_text(json.dumps(complete_material_document(mat,model,images)))
+                (folder/'surface.azurematerial.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,settings={},dependencies=list(images.values()))))
+                next(n for n in level['nodes'] if n.get('resourceId')=='plane')['materialSlots']={'surface':material_id}
+                path.write_text(json.dumps(level),encoding='utf-8')
             command=[str(player.resolve()),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128',
                 '--capture-dir',str(folder/'frames'),'--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--qa-isolation','direct-diffuse']
-            if name in ('fixed','line-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+            if name in ('fixed','line-fixed','wrap-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             (folder/'command.json').write_text(json.dumps(command,indent=2),encoding='utf-8')
             with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace');assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
@@ -102,7 +119,8 @@ def run(player,output,selected=None,expected_validation=None):
                     incident=np.asarray(color)*intensity*attenuation
                 # Literal source default-mode compression and wrap, independent of GLSL.
                 denominator=max(max(incident)*.75,1);incident*=1-compression+compression/denominator
-                incident*=.25+np.clip(cosine+.5,0,1)*.75
+                floor=.25*wrap_scale
+                incident*=floor+np.clip(cosine+.5,0,1)*(1-floor)
                 if name=='two-lights':
                     fill=np.asarray(color)*.25*attenuation
                     fill/=max(max(fill)*.75,1);fill*=.25+np.clip(cosine+.5,0,1)*.75;incident+=fill
@@ -116,6 +134,11 @@ def run(player,output,selected=None,expected_validation=None):
             if error is not None:assert error<=.008,(name,error,measured,expected)
         for a,b in (('front','fixed'),('front','disabled-scene-npr'),('pbr','pbr-control'),('line-light','line-fixed'),('line-pbr','line-pbr-control')):
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
+        for a,b in [('back','wrap-identity'),('wrap-double','wrap-fixed'),('wrap-double','wrap-document')]:
+            if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
+        if all(name in frames for name in ['wrap-zero','wrap-identity','wrap-double','wrap-four']):
+            values=[frames[name][64,64].sum() for name in ['wrap-zero','wrap-identity','wrap-double','wrap-four']]
+            assert all(b>a+5 for a,b in zip(values,values[1:])),values
         axis_cases={v['name']:np.asarray(v['expected']) for v in report['captures'] if v['name'] in ('line-axis-x','line-axis-y')}
         if len(axis_cases)==2:assert np.max(np.abs(axis_cases['line-axis-x']-axis_cases['line-axis-y']))>.015,'Axis rotation must exceed quantization and comparison budget'
         report['status']='passed'

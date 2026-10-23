@@ -216,6 +216,7 @@ struct AssetMaterial {
         } mainRamp;
         enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow };
         CharacterVisibility characterVisibility=CharacterVisibility::SceneVisibility;
+        float localDiffuseFloorScale=1;
     } nprDiffuse;
     struct SpecularInput {
         enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };

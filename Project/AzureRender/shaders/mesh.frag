@@ -930,8 +930,10 @@ void main() {
             radiance*=line.factor*(light.coneType.z<1.5?distanceSquared+1.0:1.0);
             pointDirection=line.direction;pointDiffuse=max(dot(localLightingNormal,pointDirection),0.0);
         }
+        vec2 localResponse=light.characterResponse.yz;
+        if(nprDiffuse)localResponse.x*=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].y;
         vec3 characterRadiance=characterLight?characterLocalLightRadiance(radiance,
-            dot(localLightingNormal,pointDirection),light.characterResponse.yz,characterSceneVisibility):radiance;
+            dot(localLightingNormal,pointDirection),localResponse,characterSceneVisibility):radiance;
         if(!specularOnly) {
         if(eyeRadial&&camera.clusterLighting.x>.5) {
             // This host adapter is independent from the unbound native NPR globals.

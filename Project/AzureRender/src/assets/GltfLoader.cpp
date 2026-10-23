@@ -1807,7 +1807,7 @@ AssetMaterial loadMaterial(
             for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
-                &&field.key()!="characterVisibility")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -1847,6 +1847,12 @@ AssetMaterial loadMaterial(
                 result.nprDiffuse.characterVisibility=source=="object-shadow"?AssetMaterial::NprDiffuse::CharacterVisibility::ObjectShadow
                     :source=="main-light-shadow"?AssetMaterial::NprDiffuse::CharacterVisibility::MainLightShadow
                     :AssetMaterial::NprDiffuse::CharacterVisibility::SceneVisibility;
+            }
+            if(npr.contains("localDiffuseFloorScale")) {
+                const auto& value=npr.at("localDiffuseFloorScale");
+                if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>4)
+                    throw std::invalid_argument("Invalid nprDiffuse.localDiffuseFloorScale");
+                result.nprDiffuse.localDiffuseFloorScale=value.get<float>();
             }
             if(npr.contains("lighting")) {
                 const auto& raw=npr.at("lighting");
