@@ -81,6 +81,14 @@ int main(int argc,char** argv){try{
     require(rhi.allocator().statistics().liveImages==beforeFailure,"Unsupported spatial AA format releases partially created view outputs");
     rhi.unavailableSampledFormats.clear();const auto recovered=another.create(descriptor);another.release(recovered);
     require(rhi.allocator().statistics().liveImages==beforeFailure,"A failed AA allocation leaves the view service reusable");
+    auto temporalFallback=descriptor;temporalFallback.settings.antiAliasing=3;
+    const auto unsupported=another.create(temporalFallback);
+    require(another.describe(unsupported).at("temporalAvailable")==false,"A renderer without motion uses the observable spatial fallback");
+    require(another.describe(unsupported).at("temporalFallback")=="Renderer does not provide motion vectors","Missing motion capability has a precise diagnostic");
+    another.request(unsupported);RenderGraph fallbackGraph;another.schedule(fallbackGraph,frame,base,1);
+    require(fallbackGraph.compile(error),"Unsupported temporal output forms a valid spatial graph");fallbackGraph.execute(&commands);
+    require(another.submitted(1),"Fallback output participates in actual view submission");another.release(unsupported);another.complete(1);
+    require(rhi.allocator().statistics().liveImages==beforeFailure,"Unsupported temporal output releases all view allocations");
     auto limitedBase=base;limitedBase.descriptorLimits.maxImageDimension2D=4096;
     RenderViewService limited(limitedBase,[](const std::string&){return std::make_unique<SampleSceneRenderer>();},[]{});
     auto large=descriptor;large.settings.antiAliasing=2;large.extent={3000,3000};

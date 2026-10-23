@@ -3,6 +3,10 @@
 #include <string>
 
 namespace azurerender {
+inline int spatialAntiAliasingMode(int requested,bool temporalReady){
+    if(requested<0||requested>3)throw std::invalid_argument("AA mode must be within 0..3");
+    return requested==3?(temporalReady?0:1):requested;
+}
 // Owns a linear display-color target and a resolve pipeline. The caller owns
 // submission retirement, the final framebuffer and its active render pass.
 class SpatialAntiAliasing final {

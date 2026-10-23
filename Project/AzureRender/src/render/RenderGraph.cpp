@@ -74,6 +74,8 @@ void RenderGraph::use(
     const bool isWrite) {
     std::string error;
     if (!valid(pass, resource, error)) throw std::out_of_range(error);
+    if(usage==RenderGraphUsage::DepthReadAttachment&&isWrite)
+        throw std::invalid_argument("Read-only depth cannot declare writes");
     compiled_ = false;
     if (isWrite) passes_[pass].writes.push_back(resource);
     else passes_[pass].reads.push_back(resource);
@@ -82,10 +84,10 @@ void RenderGraph::use(
 
 void RenderGraph::attachment(PassId pass, ResourceId resource,
                              RenderGraphUsage usage, VkImageLayout finalLayout) {
-    if ((usage != RenderGraphUsage::ColorAttachment && usage != RenderGraphUsage::DepthAttachment)
+    if ((usage != RenderGraphUsage::ColorAttachment && usage != RenderGraphUsage::DepthAttachment&&usage!=RenderGraphUsage::DepthReadAttachment)
         || finalLayout == VK_IMAGE_LAYOUT_UNDEFINED)
         throw std::invalid_argument("Attachment requires valid usage and final layout");
-    use(pass, resource, usage, true);
+    use(pass, resource, usage, usage!=RenderGraphUsage::DepthReadAttachment);
     passes_[pass].uses.back().attachmentFinalLayout = finalLayout;
 }
 
@@ -247,6 +249,10 @@ bool RenderGraph::compile(std::string& error) {
     const auto stateFor = [](const RenderGraphUsage usage, const bool write) {
         ResourceState state{};
         switch (usage) {
+        case RenderGraphUsage::FragmentUniform:
+            state.stage=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+            state.access=VK_ACCESS_UNIFORM_READ_BIT;
+            break;
         case RenderGraphUsage::Present:
             state.stage = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT;
             state.access = 0;
@@ -271,6 +277,12 @@ bool RenderGraph::compile(std::string& error) {
             state.stage = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
             state.access = write ? VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT : VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT;
             state.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+            break;
+        case RenderGraphUsage::DepthReadAttachment:
+            state.stage=VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT|VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
+            // STORE preserves depth values but is still an attachment memory write.
+            state.access=VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+            state.layout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
             break;
         case RenderGraphUsage::VertexBuffer:
             state.stage = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;
@@ -318,7 +330,7 @@ bool RenderGraph::compile(std::string& error) {
     for (const PassId pass : executionOrder_) {
         for (const RenderGraphUse& use : passes_[pass].uses) {
             ResourceState next = stateFor(use.usage, use.write);
-            if (use.attachmentFinalLayout != VK_IMAGE_LAYOUT_UNDEFINED) {
+            if (use.attachmentFinalLayout != VK_IMAGE_LAYOUT_UNDEFINED&&use.usage!=RenderGraphUsage::DepthReadAttachment) {
                 next.layout = use.attachmentFinalLayout;
                 states[use.resource] = next;
                 continue;
@@ -353,6 +365,7 @@ bool RenderGraph::compile(std::string& error) {
             barrier.image.dstAccessMask = next.access;
             barriers_.push_back(barrier);
             states[use.resource] = next;
+            if(use.attachmentFinalLayout!=VK_IMAGE_LAYOUT_UNDEFINED)states[use.resource].layout=use.attachmentFinalLayout;
         }
     }
     imageBarrierIndices_.assign(passes_.size(), {});

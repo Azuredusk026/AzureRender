@@ -20,6 +20,7 @@
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
 #include "render/TemporalViewState.hpp"
+#include "render/MotionVectorPass.hpp"
 #include "render/ShadowTileBounds.hpp"
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
@@ -57,8 +58,8 @@ public:
     bool reuseScene(const RenderContext& context) override;
     void onSwapchainRecreate(const RenderContext& context) override;
     void updateFrame(const SceneFrameData& frame) override;
-    void onFrameSubmitted(std::uint64_t submission) noexcept override {temporalView_.commit(submission);}
-    void onFrameAbandoned() noexcept override {temporalView_.cancel();}
+    void onFrameSubmitted(std::uint64_t submission) noexcept override;
+    void onFrameAbandoned() noexcept override;
     void recordScene(const RenderContext& context) override;
     void registerPasses(RenderGraph& graph, const SceneGraphResources& resources,
                         const RenderContext& context) override;
@@ -72,6 +73,15 @@ public:
 
 private:
     TemporalViewState temporalView_;
+    MotionPoseHistory motionPoses_;
+    std::unique_ptr<MotionVectorPass> motionPass_;
+    MotionVectorTarget* motionTarget_=nullptr;
+    std::vector<MotionVectorDraw> motionDraws_;
+    std::uint32_t motionPreviousValidObjects_=0;
+    void initializeMotion(const RenderContext&);
+    void prepareMotion();
+    void prepareTemporalFrame(const SceneFrameData&);
+    std::array<float,2> samplingJitter_{};
     std::uint64_t temporalSceneGeneration_=1;
     bool faceSdfPrepared_=false,platformPrepared_=false;
     std::uint32_t faceSdfTextureCount_=0;
@@ -387,6 +397,7 @@ private:
     // compose per-instance matrices with identical operation order.
     std::array<float, 16> viewMatrix_{};
     std::array<float, 16> projectionMatrix_{};
+    std::array<float, 16> samplingProjectionMatrix_{};
     std::array<std::array<float, 16>, kShadowCascadeCount>
         cascadeLightViewProjections_{};
     std::array<float, kShadowCascadeCount> cascadeSplits_{};

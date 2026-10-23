@@ -8,7 +8,7 @@ class RenderViewOutput final {
 public:
     RenderViewOutput(const RenderContext&,VkImageView hdr,VkSampler sampler,ViewColorTransfer);
     ~RenderViewOutput();
-    void schedule(RenderGraph&,RenderGraph::ResourceId hdr,const std::string& name);
+    void schedule(RenderGraph&,RenderGraph::ResourceId hdr,const std::string& name,bool temporalReady=false);
     const rhi::GpuImage& image() const{return image_;}
     VkImageView view() const{return view_;}
 private:

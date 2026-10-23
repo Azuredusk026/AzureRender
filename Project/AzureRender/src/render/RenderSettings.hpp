@@ -116,9 +116,9 @@ struct SkySettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 17;
+    static constexpr std::uint32_t kSchemaVersion = 18;
     bool faceSdfFeature=true,showcasePlatformFeature=true;
-    // 0: off, 1: edge adaptive, 2: four-sample supersampling.
+    // 0: off, 1: edge adaptive, 2: four-sample supersampling, 3: native temporal.
     std::uint32_t antiAliasing = 1;
     float cameraNear = .1F;
     float cameraFar = 100.0F;

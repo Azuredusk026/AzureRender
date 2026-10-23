@@ -21,6 +21,7 @@
 #include "render/RenderSettings.hpp"
 #include "render/ColorGradingLutGpu.hpp"
 #include "render/SpatialAntiAliasing.hpp"
+#include "render/TemporalReconstruction.hpp"
 #include "render/TransientResourcePool.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "rhi/GpuAllocator.hpp"
@@ -290,6 +291,9 @@ private:
     std::vector<VkFramebuffer> swapchainFramebuffers_;
     std::vector<VkFramebuffer> postProcessFramebuffers_;
     std::vector<std::unique_ptr<azurerender::SpatialAntiAliasing>> spatialAntiAliasing_;
+    std::unique_ptr<azurerender::TemporalReconstruction> temporalReconstruction_;
+    bool temporalRequested_=false;
+    std::string temporalFallback_;
     std::vector<VkFramebuffer> editorUiFramebuffers_;
     std::vector<azurerender::rhi::GpuImage> depthImages_;
     std::vector<VkImageView> depthImageViews_;
@@ -429,6 +433,7 @@ private:
     void createSyncObjects();
 
     void createSceneRenderer();
+    void createTemporalResources();
     bool preloadLevelRenderer(const azurerender::Level& level);
     void prepareLevelRenderer(const azurerender::Level& level);
     void releasePreparedRenderer();

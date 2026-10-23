@@ -75,7 +75,8 @@ void AzureRenderApp::drawFrame() {
     }
 #endif
     const unsigned samplingScale=effectiveRenderSettings_.antiAliasing==2?2:1;
-    if((sceneRenderExtent_.width!=renderExtent_.width*samplingScale || sceneRenderExtent_.height!=renderExtent_.height*samplingScale)
+    if((sceneRenderExtent_.width!=renderExtent_.width*samplingScale || sceneRenderExtent_.height!=renderExtent_.height*samplingScale
+        ||(effectiveRenderSettings_.antiAliasing==3)!=temporalRequested_)
         &&!recreateSwapchain())return;
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
@@ -246,6 +247,7 @@ void AzureRenderApp::drawFrame() {
         if(renderViews_)renderViews_->cancel(graphicsSubmission_+1);
 #endif
         if(sceneRenderer_)sceneRenderer_->onFrameAbandoned();
+        if(temporalReconstruction_)temporalReconstruction_->cancel();
     };
     try {
         recordCommandBuffer(
@@ -278,6 +280,7 @@ void AzureRenderApp::drawFrame() {
     vkCheck(submitResult,"vkQueueSubmit");
     graphicsFrameSubmissions_[currentFrame_]=++graphicsSubmission_;
     if(sceneRenderer_)sceneRenderer_->onFrameSubmitted(graphicsSubmission_);
+    if(temporalReconstruction_)temporalReconstruction_->commit(graphicsSubmission_);
 #if AZURE_WITH_EDITOR
     if(renderViews_)renderViews_->submitted(graphicsSubmission_);
 #endif
@@ -1000,7 +1003,7 @@ void AzureRenderApp::recordCommandBuffer(
         state.aspectMask = aspect;
         return graph.importImage(name, state);
     };
-    const azurerender::SceneGraphResources resources{
+    azurerender::SceneGraphResources resources{
         importAttachment("scene-color", sceneColorImages_[imageIndex].image, VK_IMAGE_ASPECT_COLOR_BIT),
         importAttachment("scene-depth", depthImages_[imageIndex].image, VK_IMAGE_ASPECT_DEPTH_BIT),
         importAttachment("scene-normal", normalImages_[imageIndex].image, VK_IMAGE_ASPECT_COLOR_BIT),
@@ -1014,7 +1017,15 @@ void AzureRenderApp::recordCommandBuffer(
     const auto output = graph.importImage("output", outputState);
     azurerender::rhi::VulkanCommandRecorder serialSceneRecorder(commandBuffer, true);
     if (runOptions_.parallelRecordingDisabled) sceneContext.commands = &serialSceneRecorder;
+    bool temporalReady=false;std::array<azurerender::RenderGraph::ResourceId,2> temporalMotion{};
+    if(temporalReconstruction_&&sceneRenderer_&&sceneRenderer_->capabilities().supportsMotionVectors){
+        temporalMotion=temporalReconstruction_->importMotion(graph,"main");resources.motion=temporalMotion[0];resources.motionSurfaceDepth=temporalMotion[1];
+        const auto* rendererState=sceneRenderer_->sceneState();
+        if(rendererState&&rendererState->temporalFrame){temporalReconstruction_->prepare(*rendererState->temporalFrame,sceneContext.currentFrame,imageIndex);temporalReady=true;}
+        else temporalReconstruction_->cancel();
+    }
     if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, resources, sceneContext);
+    if(temporalReady)temporalReconstruction_->schedule(graph,resources.color,resources.depth,temporalMotion,"main");
 #if AZURE_WITH_EDITOR
     // All views consume the same snapshot after the host advances simulation.
     if(renderViews_)renderViews_->schedule(graph,frame,sceneContext,graphicsSubmission_+1);
@@ -1114,7 +1125,7 @@ void AzureRenderApp::recordCommandBuffer(
     finalPass.renderArea.extent=renderExtent_;vkCmdBeginRenderPass(commandBuffer,&finalPass,VK_SUBPASS_CONTENTS_INLINE);
     VkViewport finalViewport{};finalViewport.width=float(renderExtent_.width);finalViewport.height=float(renderExtent_.height);finalViewport.maxDepth=1;
     VkRect2D finalScissor{};finalScissor.extent=renderExtent_;vkCmdSetViewport(commandBuffer,0,1,&finalViewport);vkCmdSetScissor(commandBuffer,0,1,&finalScissor);
-    spatial.resolve(commandRecorder,effectiveRenderSettings_.antiAliasing,
+    spatial.resolve(commandRecorder,azurerender::spatialAntiAliasingMode(effectiveRenderSettings_.antiAliasing,temporalReady),
         swapchainFormat_!=VK_FORMAT_B8G8R8A8_SRGB&&swapchainFormat_!=VK_FORMAT_R8G8B8A8_SRGB,effectiveRenderSettings_.diagnosticView!=0);
     if ((hudEnabled_ || runOptions_.technicalSequence) &&
         hudVertexCounts_[currentFrame_] > 0) {

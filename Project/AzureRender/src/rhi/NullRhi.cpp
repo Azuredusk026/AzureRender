@@ -334,7 +334,7 @@ void NullRhi::writeDescriptorBuffer(const DescriptorBufferWrite& write) {
 }
 
 VkRenderPass NullRhi::createRenderPass(const RenderPassDesc& desc) {
-    (void)desc;
+    validateRenderPassDesc(desc);
     return mint<VkRenderPass>("createRenderPass");
 }
 

@@ -1,0 +1,34 @@
+#include "render/TemporalReconstruction.hpp"
+#include "render/MotionPoseData.hpp"
+#include "rhi/NullRhi.hpp"
+#include <iostream>
+using namespace azurerender;
+void temporalCheck(bool value,const char* why){if(!value)throw std::runtime_error(why);}
+int main(int argc,char** argv)try{
+    if(argc!=2)throw std::invalid_argument("Expected shaders");
+    rhi::NullRhi backend;
+    TemporalSceneSource source{reinterpret_cast<VkImage>(100),reinterpret_cast<VkImageView>(101),reinterpret_cast<VkImage>(102),reinterpret_cast<VkImageView>(103)};
+    {
+        TemporalReconstruction temporal(backend,backend.allocator(),{64,48},VK_FORMAT_D32_SFLOAT,{source},argv[1]);
+        temporalCheck(temporal.byteSize()==64*48*52,"Temporal budget includes motion, surface depth, scratch and both histories");
+        temporalCheck(backend.allocator().statistics().liveImages==7,"View owns seven independent image allocations");
+        TemporalViewState camera;TemporalFrameInfo info;info.width=64;info.height=48;info.sceneGeneration=1;info.projection=info.viewProjection=motionIdentityMatrix();
+        temporal.prepare(camera.prepare(info),0,0);temporalCheck(!temporal.preparedHistoryValid(),"First frame rejects history");
+        temporalCheck(!temporal.commit(1),"Unrecorded preparation cannot advance GPU history");
+        RenderGraph graph;auto motion=temporal.importMotion(graph,"fixture");
+        auto color=graph.addResource("color"),depth=graph.addResource("depth");temporal.schedule(graph,color,depth,motion,"fixture");
+        std::string error;temporalCheck(graph.compile(error),"Temporal graph compiles");rhi::NullCommandRecorder commands;graph.execute(&commands);
+        temporalCheck(temporal.commit(3)&&camera.commit(3),"Recorded state advances with actual submission");
+        auto index=temporal.historyIndex();temporalCheck(temporal.historySubmission()==3&&!temporal.commit(3),"Duplicate submission cannot rotate history");
+        temporal.prepare(camera.prepare(info),1,0);temporalCheck(temporal.preparedHistoryValid(),"Consecutive render uses submitted history");
+        temporal.cancel();camera.cancel();temporalCheck(temporal.historyIndex()==index&&temporal.historySubmission()==3,"Canceled work preserves committed history");
+        ++info.cameraCut;temporal.prepare(camera.prepare(info),1,0);temporalCheck(!temporal.preparedHistoryValid(),"Cut rejects previous camera history");
+        temporal.cancel();camera.cancel();info.cameraCut=0;
+        TemporalPreparedFrame mismatch=camera.prepare(info);mismatch.previousSubmission=99;temporal.prepare(mismatch,1,0);
+        temporalCheck(!temporal.preparedHistoryValid(),"Camera and attachment submissions must match");
+    }
+    temporalCheck(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,"Temporal ownership releases all resources");
+    bool rejected=false;try{TemporalReconstruction oversized(backend,backend.allocator(),{100000,100000},VK_FORMAT_D32_SFLOAT,{source},argv[1]);}catch(const std::invalid_argument&){rejected=true;}
+    temporalCheck(rejected&&backend.allocator().statistics().liveImages==0,"Oversized history rejects before allocation");
+    std::cout<<"Temporal reconstruction: ownership, budget, graph, actual submission, cancel and camera reset passed\n";return 0;
+}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

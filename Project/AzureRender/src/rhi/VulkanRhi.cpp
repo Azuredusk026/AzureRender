@@ -646,6 +646,7 @@ void VulkanRhi::writeDescriptorBuffer(const DescriptorBufferWrite& write) {
 }
 
 VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
+    validateRenderPassDesc(desc);
     std::vector<VkAttachmentDescription> attachments(desc.attachments.size());
     std::vector<VkAttachmentReference> colorReferences;
     VkAttachmentReference depthReference{};
@@ -656,19 +657,19 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         attachment.samples = VK_SAMPLE_COUNT_1_BIT;
         attachment.loadOp = source.clear
             ? VK_ATTACHMENT_LOAD_OP_CLEAR
-            : VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+            : source.load?VK_ATTACHMENT_LOAD_OP_LOAD:VK_ATTACHMENT_LOAD_OP_DONT_CARE;
         attachment.storeOp = source.store
             ? VK_ATTACHMENT_STORE_OP_STORE
             : VK_ATTACHMENT_STORE_OP_DONT_CARE;
-        attachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-        attachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+        attachment.stencilLoadOp = source.isDepth&&source.load?VK_ATTACHMENT_LOAD_OP_LOAD:VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+        attachment.stencilStoreOp = source.isDepth&&source.load&&source.store?VK_ATTACHMENT_STORE_OP_STORE:VK_ATTACHMENT_STORE_OP_DONT_CARE;
         attachment.initialLayout = source.initialLayout;
         attachment.finalLayout = source.finalLayout;
-        if (source.isDepth) {
+        if (source.isDepth&&static_cast<std::int32_t>(index)==desc.depthAttachment) {
             depthReference.attachment = static_cast<std::uint32_t>(index);
             depthReference.layout =
-                VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
-        } else {
+                desc.depthReadOnly?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+        } else if(!source.isDepth) {
             VkAttachmentReference reference{};
             reference.attachment = static_cast<std::uint32_t>(index);
             reference.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
@@ -697,7 +698,8 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         externalToPass.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
         if(desc.depthAttachment>=0){
             externalToPass.dstStageMask |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
-            externalToPass.dstAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+            // STORE preserves the values but is still an attachment memory write.
+            externalToPass.dstAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
         }
         externalToPass.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
         dependencies.push_back(externalToPass);
@@ -713,6 +715,7 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         if(desc.depthAttachment>=0){
             passToExternal.srcStageMask |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
             passToExternal.srcAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+            if(desc.depthReadOnly)passToExternal.srcAccessMask |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT;
         }
         passToExternal.dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
         passToExternal.dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;

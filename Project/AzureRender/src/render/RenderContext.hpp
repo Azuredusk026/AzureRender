@@ -30,6 +30,8 @@ class ICommandRecorder;
 }
 
 struct RenderSettings;
+class MotionVectorTarget;
+struct TemporalPreparedFrame;
 
 // Opt-in per-frame submission counters. The engine owns the storage and passes
 // a pointer through RenderContext; a scene renderer increments the fields while
@@ -57,6 +59,7 @@ struct RendererSceneState {
     const float* modelMatrix = nullptr;  // 16 floats, column-major
     std::int32_t selectedPrimitiveIndex = -1;
     std::size_t primitiveCount = 0;
+    const TemporalPreparedFrame* temporalFrame = nullptr;
 };
 
 // Declares what a scene renderer needs from the engine-owned frame.
@@ -64,7 +67,7 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 3;
+    static constexpr std::uint32_t kApiVersion = 4;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;
@@ -72,6 +75,7 @@ struct SceneRendererCapabilities {
     // Index 0 must be the Beauty (final composite) name.
     std::vector<std::string> diagnosticViewNames;
     bool supportsProjectionOffset=false;
+    bool supportsMotionVectors=false;
 };
 inline void validateSceneRendererCamera(const SceneRendererCapabilities& capabilities,const CameraViewDescriptor& camera){
     if((camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)&&!capabilities.supportsProjectionOffset)
@@ -250,6 +254,8 @@ struct RenderContext {
     SceneSubmissionCounters* submissionCounters = nullptr;
 
     const RenderSettings* renderSettings = nullptr;
+    // View-owned output. Retire renderer recording before replacing this target.
+    MotionVectorTarget* motionOutput = nullptr;
 };
 
 }  // namespace azurerender

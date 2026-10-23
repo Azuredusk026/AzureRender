@@ -28,7 +28,7 @@ public:
     rhi::GpuAllocator allocator;
     std::unique_ptr<rhi::VulkanRhi> backend;
 
-    VulkanComputeFixture() {
+    explicit VulkanComputeFixture(bool graphics=false) {
         try {
             VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
             application.pApplicationName="AzureRender Compute Contract";application.apiVersion=VK_API_VERSION_1_3;
@@ -72,6 +72,10 @@ public:
             queueInfo.queueFamilyIndex=family;queueInfo.queueCount=1;queueInfo.pQueuePriorities=&priority;
             VkPhysicalDeviceFeatures features{};vkGetPhysicalDeviceFeatures(physical,&features);
             VkPhysicalDeviceFeatures used{};used.shaderStorageImageExtendedFormats=features.shaderStorageImageExtendedFormats;
+            if(graphics){
+                if(!features.independentBlend)throw std::runtime_error("Graphics fixture requires independent attachment blending");
+                used.independentBlend=VK_TRUE;used.samplerAnisotropy=features.samplerAnisotropy;
+            }
             VkDeviceCreateInfo deviceInfo{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
             deviceInfo.queueCreateInfoCount=1;deviceInfo.pQueueCreateInfos=&queueInfo;deviceInfo.pEnabledFeatures=&used;
             vkRequire(vkCreateDevice(physical,&deviceInfo,nullptr,&device),"vkCreateDevice");

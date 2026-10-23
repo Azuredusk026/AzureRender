@@ -56,7 +56,7 @@ void RenderViewOutput::destroy() noexcept{
     if(view_)rhi.destroyImageView(view_);
     if(image_.image)context_.allocator->destroyImage(image_);
 }
-void RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,const std::string& name){
+void RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,const std::string& name,bool temporalReady){
     rhi::ImageBarrierDesc initial{};initial.image=image_.image;
     const auto output=graph.importImage(name+"-ldr",initial);
     initial.image=spatial_->inputImage().image;
@@ -73,10 +73,10 @@ void RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,c
     });
     graph.use(gradePass,hdr,RenderGraphUsage::Sampled,false);
     graph.attachment(gradePass,linear,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
-    const auto resolvePass=graph.addCommandPass(name+"-resolve",[this](rhi::ICommandRecorder& commands){
+    const auto resolvePass=graph.addCommandPass(name+"-resolve",[this,temporalReady](rhi::ICommandRecorder& commands){
         commands.beginRenderPass({pass_,framebuffer_,context_.swapchainExtent,{}});
         commands.setViewport(float(image_.width),float(image_.height));commands.setScissor(context_.swapchainExtent);
-        spatial_->resolve(commands,context_.renderSettings?context_.renderSettings->antiAliasing:1,
+        spatial_->resolve(commands,spatialAntiAliasingMode(context_.renderSettings?context_.renderSettings->antiAliasing:1,temporalReady),
             transfer_==ViewColorTransfer::SrgbEncoded,context_.renderSettings&&context_.renderSettings->diagnosticView!=0);
         commands.endRenderPass();
     });

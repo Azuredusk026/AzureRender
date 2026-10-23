@@ -15,6 +15,8 @@ struct SceneGraphResources {
     RenderGraph::ResourceId depth;
     RenderGraph::ResourceId normal;
     RenderGraph::ResourceId shadow;
+    RenderGraph::ResourceId motion=UINT32_MAX;
+    RenderGraph::ResourceId motionSurfaceDepth=UINT32_MAX;
 };
 
 // A pluggable scene renderer: the unit that draws a scene into the engine's

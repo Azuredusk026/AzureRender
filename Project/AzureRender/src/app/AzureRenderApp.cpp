@@ -471,9 +471,25 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
     }
 }
 
+void AzureRenderApp::createTemporalResources(){
+    temporalReconstruction_.reset();temporalFallback_.clear();temporalRequested_=effectiveRenderSettings_.antiAliasing==3;
+    if(!temporalRequested_)return;
+    try{
+        VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+        if(properties.limits.maxPerStageDescriptorStorageBuffers<6)throw std::runtime_error("Temporal geometry requires six vertex storage bindings");
+        std::vector<azurerender::TemporalSceneSource> sources;
+        for(std::size_t i=0;i<sceneColorImages_.size();++i)sources.push_back({sceneColorImages_[i].image,sceneColorImageViews_[i],depthImages_[i].image,depthImageViews_[i]});
+        std::string shaders=resourceLocator_.shaderDirectory().u8string();
+#if AZURE_WITH_EDITOR
+        if(!activeShaderDirectory_.empty())shaders=activeShaderDirectory_;
+#endif
+        temporalReconstruction_=std::make_unique<azurerender::TemporalReconstruction>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,std::move(sources),shaders);
+    }catch(const std::exception& error){temporalFallback_=error.what();azurerender::RuntimeDiagnostics::instance().info("render","Temporal AA spatial fallback: "+temporalFallback_);}
+}
 void AzureRenderApp::createSceneRenderer() {
     azurerender::RenderContext context;
     buildRenderContext(context);
+    createTemporalResources();context.motionOutput=temporalReconstruction_?&temporalReconstruction_->motion():nullptr;
     std::string rendererId =
         azurerender::sceneTypeName(renderSettings_.sceneType);
     if(context.sceneWorldCoordinates)
@@ -586,6 +602,7 @@ void AzureRenderApp::buildRenderContext(
         effectiveRenderSettings_=engineSettings_?azurerender::resolveRenderSettings(*engineSettings_,renderSettings_):renderSettings_;
         context.renderSettings=&effectiveRenderSettings_;
     }
+    context.motionOutput=temporalReconstruction_?&temporalReconstruction_->motion():nullptr;
 }
 
 void AzureRenderApp::buildSceneFrameData(

@@ -1,0 +1,874 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "12b08e9",
+  "run": "build/runs/20261024-042710-temporal-motion-output-de038d",
+  "rendererApiVersion": 4,
+  "renderSettingsVersion": 18,
+  "scope": "NR7-AA1 through AA3 public motion, jitter and HDR-history integration. AA4 through AA6 quality and promotion gates remain pending.",
+  "configurations": {
+    "debug": {
+      "playerSha256": "ed37556627a42f2dc202b14e93dddb1cf0057a9ac28ae4b3858b901649564af3",
+      "editorSha256": "14bdc8e05c1f7848688e0106a522c6c9236cbb775ba7f62b2ab4639d3ebf393d",
+      "checks": 18,
+      "logFingerprints": {
+        "debug-final-build.log": "9b7014b7582f76414127c50aa570680e993aef7e3b1e832a5bbc2d9d9970b7c6",
+        "debug-cpu.log": "33c2faf61d82aa7c8f85aceb073e866a94aaf16c7f626b5b6adb25d4f8f46a03",
+        "debug-existing-cpu.log": "9f1ad17018e6b4b806a6c8fdc71c289e45bb192b0a912a65f307923a0e92e984",
+        "debug-gpu.log": "8f44f0f9b5938dd6512e1e6fb2afd8202b7406b49573a9566052851d7071ce29",
+        "debug-fallback.log": "42c535376936582a8954b56fca94f45ad086ce0378d59c7fd06d057e3a3671d6"
+      },
+      "native": {
+        "status": "passed",
+        "config": "debug",
+        "mode": 3,
+        "playerSha256": "ed37556627a42f2dc202b14e93dddb1cf0057a9ac28ae4b3858b901649564af3",
+        "images": {
+          "frame_000000.png": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+          "frame_000001.png": "ee65820706579363e975a083a1cd79a0e3f005d80d74dc7c616d464e230e9c2e",
+          "frame_000002.png": "1bee2fd5cc8b9f438cdb17a3516514ac8be9230fe2bcf112407eca06501fc0b2",
+          "frame_000003.png": "a4687186768f52d861ec247b9647b1b801ff5321905dc03dbf81d9fc6a83676f",
+          "frame_000004.png": "3c22cdb54c4c89e6ffd9487624a28dd58b0ac0c392b44edc61dad7785f1be1aa",
+          "frame_000005.png": "a501d76f5e13b55a35feddf2da4a90beb2c42bcec8246cb6ad00a5ba2d4738b3",
+          "frame_000006.png": "19c993da830c9cc6234bec246690e8ead0addc56047a5935d0f3340717c0986c",
+          "frame_000007.png": "c785830cb4c8dfaf501d0d1ea8d189586940d3fe17d6643116e950f741403982",
+          "frame_000008.png": "e69466ffd237d7046b427c14885d917181ae2835ded65a7cbd2cf412be36d449",
+          "frame_000009.png": "9e3dd092b9281a13dbae4aa055caf3b28404237ff557ced0ce2eb6399470089a",
+          "frame_000010.png": "f5e89dbfcca2d2da060da98451e7e234a119ed0102cc4f3f6bd1514fd51d9c76",
+          "frame_000011.png": "f0b32df1ddba117daefd3e35d9c1945eda14cb353576dc13d2e7455702c73fd1",
+          "frame_000012.png": "e0d9c40deb6fb38c8ad4a1cb87cd84a1e12a59b0a9424fbe4f815917525d7b94",
+          "frame_000013.png": "0d49ee81f400f56ea36224308daad47301158fbaec333795ec1df15345a84e16",
+          "frame_000014.png": "1520c0c9d1800680e8dc5db5f06bb0fb3086e36619a0130023ecae17e0b5b2ff",
+          "frame_000015.png": "cd138a499a00a408ec38628556c5310c05392fc8ce6ec9a3e40d612cf1ab0b80"
+        },
+        "temporal": {
+          "antiAliasingPipeline": "native-hdr-temporal-v1",
+          "temporalHistorySubmission": 16,
+          "temporalBytes": 191692800,
+          "temporalFallback": "",
+          "motionOutputActive": true,
+          "motionPreviousValidObjects": 1
+        }
+      },
+      "baseline": {
+        "status": "passed",
+        "config": "debug",
+        "mode": 0,
+        "playerSha256": "ed37556627a42f2dc202b14e93dddb1cf0057a9ac28ae4b3858b901649564af3",
+        "images": {
+          "frame_000000.png": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e"
+        },
+        "temporal": {
+          "antiAliasingPipeline": "linear-display-spatial-v1",
+          "temporalHistorySubmission": 0,
+          "temporalBytes": 0,
+          "temporalFallback": "",
+          "motionOutputActive": false,
+          "motionPreviousValidObjects": 0
+        }
+      },
+      "viewResult": "5ef681b5a0862dedb49c44bd230d25e91f9beac313026c627cdaed42d0ad1349",
+      "viewImages": {
+        "view-0-0.rgba": "9ae24c10feaadb974dee698c1df9aa472c4e45959d072410164bd2fe093d883f",
+        "view-0-1.rgba": "e87bcc220493fa9abd56f1286da4bba00877a1ff66231207fdff8bd81cb92a5f",
+        "view-0-2.rgba": "7d23055641efbc25a4d76e2dc7bddf66a25484c7fe95fb8f664a88d98b1fcb04",
+        "view-0-3.rgba": "4a98a2490b79bc8d9190646a9fd0876b54f422be588732e94390ff8e46b99e08",
+        "view-0-4.rgba": "7c3e2d1798daa980f1f0d31b672c5308e7ffd8fec192d86eba05293bd62c13c7",
+        "view-0-5.rgba": "69cabcc76c952c6e734ab4d38c4ab438b5367fe807a9d7b1c095c86a33e6c131",
+        "view-0-6.rgba": "87128f2853eb8934366aa74c89cd5764cab6f11159e841cb99225ed86d5daf97",
+        "view-0-7.rgba": "b6258768fdf0e553218d70e9d7ae0146d22c2bea2b89429ee446ac55599081fb",
+        "view-0-8.rgba": "25c67a1fdd1a72cba8dba2b934477f032578beb98d33700f215cbd99b63a2b95",
+        "view-0-9.rgba": "5f8c0a840d63505caec95cbd41d27a66f500fff425e2b8b5a2055b16589c0fb9",
+        "view-1-0.rgba": "4b507b33bc3457e4cc2c5bee813dc96cc6970a5a6e2d85526bb0135d55da863a",
+        "view-1-1.rgba": "a6457a8474eac55ae6d96bc1b581937635599aeda9de74f84cec5a9772a9d268",
+        "view-1-2.rgba": "e53260ce51c255f83d4b76bcf04930acd09a67a97a3d80dfd00f5520965377ea",
+        "view-1-3.rgba": "6e7b0b83869e091231fea86912b5da27c9bb9befc86f20c0f1567359800b1aec",
+        "view-1-4.rgba": "a52c6a03ac84013e26e8dfa8ba0f0fe52fb0945803d794f35fb7307b5caa4f1c",
+        "view-1-5.rgba": "3241e0e8385afef2fbddb257223825195122ba7e05e13e3630b14af2b919a8d1",
+        "view-1-6.rgba": "84854e0c0005baf29b4d3d9501a83115ba785f49ddbb6456cba288c6a7d70c3d",
+        "view-1-7.rgba": "3c7606e828243da16957b0989226d908e4d48e29d2faa63c414aa8c34997b29f",
+        "view-1-8.rgba": "caaf8e1c172fdc3cedcc2a0f38f5bc745b782c252851580d9e0ce3bcbacab0c0",
+        "view-1-9.rgba": "763517226988f31d0617188fd52918ef74edaf02afe86506ae0681cfd0ad6b2c"
+      },
+      "validationEnabled": true,
+      "capabilityReport": "93c9fb29461fae11a7e57d4e49112071a71940dee571f1f6696ffbf03c392879"
+    },
+    "release": {
+      "playerSha256": "5fe9e127dbf182e16f636806c3f8933aa57e25471eaa1338ca9a9363727d0155",
+      "editorSha256": "b1df64ac5c916bc6b58a9a763951b0c3801e132fd8807f9a4904e82bf6d15349",
+      "checks": 18,
+      "logFingerprints": {
+        "release-final-build.log": "33a9f5a55a1c03850d07ec5ab74de0b5e53b37e8fe6e05e5efa72ae58e953e9c",
+        "release-checks.log": "1c929999c0656583ff800041ec8a1b14f4443f6fb9057ab0b8257b7a37852a9b",
+        "release-fallback.log": "1d6d1f55efcbdccb58e9d1c59792f7e99a62d209d014cbce33b8ae1178617405"
+      },
+      "native": {
+        "status": "passed",
+        "config": "release",
+        "mode": 3,
+        "playerSha256": "5fe9e127dbf182e16f636806c3f8933aa57e25471eaa1338ca9a9363727d0155",
+        "images": {
+          "frame_000000.png": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+          "frame_000001.png": "ee65820706579363e975a083a1cd79a0e3f005d80d74dc7c616d464e230e9c2e",
+          "frame_000002.png": "1bee2fd5cc8b9f438cdb17a3516514ac8be9230fe2bcf112407eca06501fc0b2",
+          "frame_000003.png": "426155d1010c295220e4f14d68d39ee469376fb1dfd26572edd897b1333e1df3",
+          "frame_000004.png": "3c22cdb54c4c89e6ffd9487624a28dd58b0ac0c392b44edc61dad7785f1be1aa",
+          "frame_000005.png": "a501d76f5e13b55a35feddf2da4a90beb2c42bcec8246cb6ad00a5ba2d4738b3",
+          "frame_000006.png": "19c993da830c9cc6234bec246690e8ead0addc56047a5935d0f3340717c0986c",
+          "frame_000007.png": "1bc0344141b03c0d0812b4eb8c000c1873c386e8f55de2b1ce141f2888865cf7",
+          "frame_000008.png": "82b3120a336d0e7dc9035c0fecff9604bfb89fa1a9a9d4758d8a311980128130",
+          "frame_000009.png": "9e3dd092b9281a13dbae4aa055caf3b28404237ff557ced0ce2eb6399470089a",
+          "frame_000010.png": "13837571a1b8675a5cd06900e140a2868cfd93e370bf3f99fe257228e5405f67",
+          "frame_000011.png": "8c007be27183c330f8acd53a5f6643fbaf59538256b308dada15e175c9230773",
+          "frame_000012.png": "e0d9c40deb6fb38c8ad4a1cb87cd84a1e12a59b0a9424fbe4f815917525d7b94",
+          "frame_000013.png": "0d49ee81f400f56ea36224308daad47301158fbaec333795ec1df15345a84e16",
+          "frame_000014.png": "1520c0c9d1800680e8dc5db5f06bb0fb3086e36619a0130023ecae17e0b5b2ff",
+          "frame_000015.png": "cd138a499a00a408ec38628556c5310c05392fc8ce6ec9a3e40d612cf1ab0b80"
+        },
+        "temporal": {
+          "antiAliasingPipeline": "native-hdr-temporal-v1",
+          "temporalHistorySubmission": 16,
+          "temporalBytes": 191692800,
+          "temporalFallback": "",
+          "motionOutputActive": true,
+          "motionPreviousValidObjects": 1
+        }
+      },
+      "baseline": {
+        "status": "passed",
+        "config": "release",
+        "mode": 0,
+        "playerSha256": "5fe9e127dbf182e16f636806c3f8933aa57e25471eaa1338ca9a9363727d0155",
+        "images": {
+          "frame_000000.png": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e"
+        },
+        "temporal": {
+          "antiAliasingPipeline": "linear-display-spatial-v1",
+          "temporalHistorySubmission": 0,
+          "temporalBytes": 0,
+          "temporalFallback": "",
+          "motionOutputActive": false,
+          "motionPreviousValidObjects": 0
+        }
+      },
+      "viewResult": "5ef681b5a0862dedb49c44bd230d25e91f9beac313026c627cdaed42d0ad1349",
+      "viewImages": {
+        "view-0-0.rgba": "9ae24c10feaadb974dee698c1df9aa472c4e45959d072410164bd2fe093d883f",
+        "view-0-1.rgba": "e87bcc220493fa9abd56f1286da4bba00877a1ff66231207fdff8bd81cb92a5f",
+        "view-0-2.rgba": "7d23055641efbc25a4d76e2dc7bddf66a25484c7fe95fb8f664a88d98b1fcb04",
+        "view-0-3.rgba": "4a98a2490b79bc8d9190646a9fd0876b54f422be588732e94390ff8e46b99e08",
+        "view-0-4.rgba": "7c3e2d1798daa980f1f0d31b672c5308e7ffd8fec192d86eba05293bd62c13c7",
+        "view-0-5.rgba": "69cabcc76c952c6e734ab4d38c4ab438b5367fe807a9d7b1c095c86a33e6c131",
+        "view-0-6.rgba": "87128f2853eb8934366aa74c89cd5764cab6f11159e841cb99225ed86d5daf97",
+        "view-0-7.rgba": "b6258768fdf0e553218d70e9d7ae0146d22c2bea2b89429ee446ac55599081fb",
+        "view-0-8.rgba": "25c67a1fdd1a72cba8dba2b934477f032578beb98d33700f215cbd99b63a2b95",
+        "view-0-9.rgba": "5f8c0a840d63505caec95cbd41d27a66f500fff425e2b8b5a2055b16589c0fb9",
+        "view-1-0.rgba": "4b507b33bc3457e4cc2c5bee813dc96cc6970a5a6e2d85526bb0135d55da863a",
+        "view-1-1.rgba": "a6457a8474eac55ae6d96bc1b581937635599aeda9de74f84cec5a9772a9d268",
+        "view-1-2.rgba": "e53260ce51c255f83d4b76bcf04930acd09a67a97a3d80dfd00f5520965377ea",
+        "view-1-3.rgba": "6e7b0b83869e091231fea86912b5da27c9bb9befc86f20c0f1567359800b1aec",
+        "view-1-4.rgba": "a52c6a03ac84013e26e8dfa8ba0f0fe52fb0945803d794f35fb7307b5caa4f1c",
+        "view-1-5.rgba": "3241e0e8385afef2fbddb257223825195122ba7e05e13e3630b14af2b919a8d1",
+        "view-1-6.rgba": "84854e0c0005baf29b4d3d9501a83115ba785f49ddbb6456cba288c6a7d70c3d",
+        "view-1-7.rgba": "3c7606e828243da16957b0989226d908e4d48e29d2faa63c414aa8c34997b29f",
+        "view-1-8.rgba": "caaf8e1c172fdc3cedcc2a0f38f5bc745b782c252851580d9e0ce3bcbacab0c0",
+        "view-1-9.rgba": "763517226988f31d0617188fd52918ef74edaf02afe86506ae0681cfd0ad6b2c"
+      },
+      "validationEnabled": false,
+      "capabilityReport": "fcc84c76d84bace150db35ec07631ab83809bdd1c365b6d96cb8afe8e354190a"
+    }
+  },
+  "shaders": {
+    "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+    "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+    "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+    "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+    "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+    "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+    "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+    "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+    "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+    "character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+    "character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+    "character_snapshot.frag.spv": "195300dbd3ddc25430fa6cd7f2518137429d1e3011bbdc30ce4dca00bb9b7a0c",
+    "character_snapshot_bindless.frag.spv": "5b741f45655e6586da70c6f563e074b5be6654a737667e96b2a2c7b418f0aa6e",
+    "character_snapshot_object.frag.spv": "6f0dfa5b560e48e219a888a9f7262dbd41f74c04e9fe7306744427567667d7c5",
+    "character_snapshot_object_bindless.frag.spv": "434aca25786d23473927d22078b8a94484a0b8f58c7a419b8a95ff2aa061b1a5",
+    "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+    "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+    "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+    "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+    "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+    "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+    "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+    "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+    "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+    "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+    "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+    "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "mesh.frag.spv": "9bf04ea49afbcd6be50356ae607a787e4b87cc74fe8b552f8684bdb9d31e960e",
+    "mesh.vert.spv": "7b96ee9e2d69418e3d7203edcadd0ff32b0c85b67e5873aecf064fc59e42af79",
+    "mesh_bindless.frag.spv": "05c1f97764113143774b3e93981be3f39c6362302a0ffbbeb6ef6c1b93e4b401",
+    "mesh_compute.vert.spv": "f6f9c0928bb0dfc44208f5037f08b3725aca238f3ac7b85312b57a0461c676a8",
+    "mesh_object.frag.spv": "fd64169d6e49f07e097736bf61b129f89fbb1414b5bc446e654a978883f4dd0e",
+    "mesh_object.vert.spv": "cf4a88c4f044397466584727dc95f25ccef371a24a781157701cdbd04b66d1db",
+    "mesh_object_bindless.frag.spv": "bc1dbf1ef97b8b0ca5dd205da4d26ca9853beaefd0de88148d1a12aa75c26544",
+    "mesh_object_compute.vert.spv": "ab476e2667a137eb117ca06af02954ade47c78c815b61e5b77355e6d3952906a",
+    "motion_outline.vert.spv": "176339eb2a7c7b9dfc2ffc92f15acdfd25ac62fea97ccdb8100d6d080b075d1d",
+    "motion_pose_test.comp.spv": "919ea2f4d091d74b65be64155dbfbecffea8d142ff65ddb9c199b87c5c2a9886",
+    "motion_projection_test.comp.spv": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+    "motion_vector.frag.spv": "38dacb2201bab94b79d83ea2e2a2e0d4ab02b1cb62630d9c9fab811bd50b3729",
+    "motion_vector.vert.spv": "5f1b0da9fafd3455581ac579a30f807876695941505874d86b96b833cc7deb1c",
+    "object_shadow_filter_test.comp.spv": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+    "outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+    "outline.vert.spv": "89b19925e95cf701782777777a3fcf40437208319b46188ad55896f010f4b626",
+    "outline_compute.vert.spv": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+    "outline_depth.frag.spv": "91f3981e718b0c12d5b54c8d83cb35a076e520b779a4cb4028dca9407b5f018e",
+    "outline_depth_bindless.frag.spv": "7103292f36b2357e10511fb322e28fb919d5beb87be5101061a7e6a8fc50586f",
+    "outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+    "outline_mask.vert.spv": "cb3505b020250cb49558a0c055215581b4f8a69fe2dbbb7ce6b3e4a8b482b2a2",
+    "outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+    "outline_mask_compute.vert.spv": "bcfaa8ffacbaf95a2c4bb329c78c8b39ce26a8800dd38cf4ee80159ec4d583ee",
+    "outline_view_scaled.frag.spv": "5d4fb190ce0b30c14d9bbcf5b16d9c72008c8c14c585b3609adff10458e44d93",
+    "outline_view_scaled.vert.spv": "45959c7380ffb8c9be2555a90fd5db5dfb08c2f0c7d2baa13d1d03629ea4d839",
+    "outline_view_scaled_bindless.frag.spv": "b16a26a16ede89881771bf1d90cc2838d20e960ac90863b55888d134b63699ef",
+    "outline_view_scaled_bindless.vert.spv": "321b60090832210bd73af29557f8278b3b3d2f8f29accabc337670d144dc2300",
+    "outline_view_scaled_compute.vert.spv": "c2ac0fd0453b4b6fe5cca15ffd1ada52377185325203df5e87e5f4e984988e8c",
+    "outline_view_scaled_compute_bindless.vert.spv": "086b568c356ad5db2977995e4b7b08c7c35d5de1532813fca850023ca4177569",
+    "pathtracing.comp.spv": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+    "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+    "readonly_depth_test.frag.spv": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+    "readonly_depth_test.vert.spv": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+    "sampled_upload_test.comp.spv": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+    "scene_instance_layout_test.comp.spv": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+    "shadow.frag.spv": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+    "shadow.vert.spv": "2b4cb71f7ec302242f8341b33e481033c14a5edce3c853a44ca0a7ad039cf5b1",
+    "shadow_bindless.frag.spv": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+    "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+    "shadow_compute.vert.spv": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+    "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+    "skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+    "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+    "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+    "surface_response_test.comp.spv": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+    "temporal_copy.frag.spv": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+    "temporal_resolve.frag.spv": "3220d0a664983ee07535cca241e5287e784066bf9bc2462b1143cff9a71f23dc",
+    "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+    "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+  },
+  "prior69ShadersUnchanged": true,
+  "gpuChecks": {
+    "previousPose": 1560,
+    "motionAttachment": 18750,
+    "hdrHistory": 20480,
+    "preservedHardwareDepthPixels": 1024
+  },
+  "textureBytesPerPixel": 52,
+  "maximumViewTextureBytes": 536870912,
+  "maximumMotionTextureBytes": 268435456,
+  "pending": [
+    "Same-source camera identity/cut routing",
+    "Exposure, animation, disocclusion and continuous-motion quality gates",
+    "Independent 4x reference, KK peaks, fine-strand energy and clothing edge stability",
+    "GPU time and bandwidth",
+    "NR8-V2 and NR12 promotion",
+    "Whole-hair C17/C18 and NR6"
+  ],
+  "nativeConfigurationDifferences": [
+    {
+      "frame": 0,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 1,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 2,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 3,
+      "maximumByteError": 1,
+      "differentValues": 1
+    },
+    {
+      "frame": 4,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 5,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 6,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 7,
+      "maximumByteError": 1,
+      "differentValues": 1
+    },
+    {
+      "frame": 8,
+      "maximumByteError": 1,
+      "differentValues": 1
+    },
+    {
+      "frame": 9,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 10,
+      "maximumByteError": 1,
+      "differentValues": 1
+    },
+    {
+      "frame": 11,
+      "maximumByteError": 1,
+      "differentValues": 1
+    },
+    {
+      "frame": 12,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 13,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 14,
+      "maximumByteError": 0,
+      "differentValues": 0
+    },
+    {
+      "frame": 15,
+      "maximumByteError": 0,
+      "differentValues": 0
+    }
+  ],
+  "nativeHair": {
+    "sourceMaterialEvent": 950,
+    "sourceTemporalEvent": 1579,
+    "sourceTemporalSha256": "ac841a76cdb6a81a1005d07e81354639e46ea043351694f8b2e7949a4ea9aa85",
+    "frames": 16,
+    "regions": [
+      {
+        "name": "crown",
+        "pixels": 7344,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 4.0,
+                "meanAbsoluteByteError": 0.9945079883805374
+              },
+              "temporal": {
+                "maximumByteError": 128,
+                "p95ByteError": 22.0,
+                "meanAbsoluteByteError": 4.751134713144517
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 149,
+                "p95ByteError": 10.0,
+                "meanAbsoluteByteError": 1.888435003631082
+              },
+              "temporal": {
+                "maximumByteError": 124,
+                "p95ByteError": 18.0,
+                "meanAbsoluteByteError": 3.8829883805374004
+              }
+            }
+          },
+          {
+            "frame": 15,
+            "errors": {
+              "material": {
+                "maximumByteError": 156,
+                "p95ByteError": 12.0,
+                "meanAbsoluteByteError": 2.2110566448801743
+              },
+              "temporal": {
+                "maximumByteError": 124,
+                "p95ByteError": 17.0,
+                "meanAbsoluteByteError": 3.710965867828613
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.3371801267876882,
+        "lastEightMaximumRange": 59
+      },
+      {
+        "name": "head",
+        "pixels": 17017,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 23.0,
+                "meanAbsoluteByteError": 2.1498893263599146
+              },
+              "temporal": {
+                "maximumByteError": 162,
+                "p95ByteError": 28.0,
+                "meanAbsoluteByteError": 6.361560008618832
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 149,
+                "p95ByteError": 24.0,
+                "meanAbsoluteByteError": 3.57166363048716
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.291825821237586
+              }
+            }
+          },
+          {
+            "frame": 15,
+            "errors": {
+              "material": {
+                "maximumByteError": 156,
+                "p95ByteError": 26.0,
+                "meanAbsoluteByteError": 4.040410569822335
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.169516757752052
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.4509875148598408,
+        "lastEightMaximumRange": 154
+      },
+      {
+        "name": "full",
+        "pixels": 17017,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 23.0,
+                "meanAbsoluteByteError": 2.1498893263599146
+              },
+              "temporal": {
+                "maximumByteError": 162,
+                "p95ByteError": 28.0,
+                "meanAbsoluteByteError": 6.361560008618832
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 149,
+                "p95ByteError": 24.0,
+                "meanAbsoluteByteError": 3.57166363048716
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.291825821237586
+              }
+            }
+          },
+          {
+            "frame": 15,
+            "errors": {
+              "material": {
+                "maximumByteError": 156,
+                "p95ByteError": 26.0,
+                "meanAbsoluteByteError": 4.040410569822335
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.169516757752052
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.4509875148598408,
+        "lastEightMaximumRange": 154
+      }
+    ],
+    "controls": [
+      {
+        "pixel": [
+          1308,
+          165
+        ],
+        "sourceMaterial": [
+          116,
+          40,
+          43
+        ],
+        "sourceTemporal": [
+          126,
+          45,
+          48
+        ],
+        "first": [
+          116,
+          40,
+          43
+        ],
+        "last": [
+          148,
+          63,
+          63
+        ],
+        "temporalRange": [
+          32,
+          23,
+          20
+        ]
+      },
+      {
+        "pixel": [
+          1309,
+          166
+        ],
+        "sourceMaterial": [
+          118,
+          40,
+          43
+        ],
+        "sourceTemporal": [
+          126,
+          46,
+          50
+        ],
+        "first": [
+          118,
+          40,
+          44
+        ],
+        "last": [
+          144,
+          60,
+          60
+        ],
+        "temporalRange": [
+          26,
+          20,
+          16
+        ]
+      },
+      {
+        "pixel": [
+          1313,
+          170
+        ],
+        "sourceMaterial": [
+          121,
+          44,
+          47
+        ],
+        "sourceTemporal": [
+          138,
+          56,
+          57
+        ],
+        "first": [
+          122,
+          44,
+          48
+        ],
+        "last": [
+          123,
+          45,
+          48
+        ],
+        "temporalRange": [
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          1327,
+          181
+        ],
+        "sourceMaterial": [
+          129,
+          51,
+          52
+        ],
+        "sourceTemporal": [
+          119,
+          45,
+          47
+        ],
+        "first": [
+          129,
+          51,
+          52
+        ],
+        "last": [
+          154,
+          69,
+          68
+        ],
+        "temporalRange": [
+          25,
+          18,
+          16
+        ]
+      },
+      {
+        "pixel": [
+          1313,
+          169
+        ],
+        "sourceMaterial": [
+          126,
+          45,
+          49
+        ],
+        "sourceTemporal": [
+          187,
+          92,
+          87
+        ],
+        "first": [
+          126,
+          45,
+          49
+        ],
+        "last": [
+          126,
+          45,
+          49
+        ],
+        "temporalRange": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          1314,
+          170
+        ],
+        "sourceMaterial": [
+          124,
+          46,
+          49
+        ],
+        "sourceTemporal": [
+          186,
+          91,
+          87
+        ],
+        "first": [
+          125,
+          46,
+          50
+        ],
+        "last": [
+          125,
+          46,
+          49
+        ],
+        "temporalRange": [
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "pixel": [
+          1314,
+          171
+        ],
+        "sourceMaterial": [
+          123,
+          46,
+          49
+        ],
+        "sourceTemporal": [
+          128,
+          51,
+          53
+        ],
+        "first": [
+          124,
+          46,
+          50
+        ],
+        "last": [
+          123,
+          46,
+          49
+        ],
+        "temporalRange": [
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "pixel": [
+          1315,
+          171
+        ],
+        "sourceMaterial": [
+          123,
+          45,
+          49
+        ],
+        "sourceTemporal": [
+          163,
+          77,
+          74
+        ],
+        "first": [
+          123,
+          45,
+          49
+        ],
+        "last": [
+          124,
+          46,
+          49
+        ],
+        "temporalRange": [
+          2,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  "redEvidence": {
+    "depth-read-red-build.log": "0f825258ab449c9246926ce95980cbad2b7ac5bd46a41d7f6cf1627d15d2a595",
+    "depth-read-red2-build.log": "9eb9aa3039e624286a32b8358cf2eae153adac64b8155f93a82a9ff8b941de28",
+    "motion-recording-red-build.log": "92a9a434323d61dd8193b7ba0f28376397e531a2a1bdfd64b913f2161d8af52f",
+    "motion-target-red-build.log": "ff4c34c9555c4a6a9e69ee34f32e2d5137e99ee1fc8d204dfbfa9656e33b67c0",
+    "outline-depth-input-red-build.log": "59cc939f1fe3cba40ccfe407da162dae798f6acec59e58f3a06a0eb6763838f7",
+    "outline-width-gpu-red.log": "57478894937feb21152f76ffa5f7b9a63157502beaf2779da8f2675d1a91a85a",
+    "pose-bounds-red-build.log": "59a6d772a4f82bf12be8d439c7bd0f1f90a0fa0a393a03feb47a9ad40d011e9f",
+    "pose-bounds-red.log": "b2fcd7f9e8aa0e8f29741b40740dce79011df00b9a2fecca6b250a9a046efca8",
+    "pose-gpu-red-build.log": "4cf141405876e363ad86c5f0cbd4553a8aa25bd6dde33f794da41d7c2c37321b",
+    "pose-gpu-red.log": "6b4a4b8952ac1f31544bd7240c7033c1877d30f92ddce30623b2d1a2fc85bd2b",
+    "pose-red-build.log": "d0bcf1cd6f85e96567b796dd9ed398acecdc9c0e71b8318df0b168c2c3ff26ed",
+    "previous-directions-red-build.log": "470e2111f2e0924a47e50a60cdad686df00fd527ef1460e3b126ac95c715c961",
+    "previous-outline-red-build.log": "520fcba540dcfc61aa63b5976c52fdc9bfe1859f8d2464e94db52250d2ac94eb",
+    "sdk4-red-build.log": "213135708fd61ba7ca5c35448d60b92670c9b0333ad13f618894a41eb6c44cfe",
+    "sdk4-red.log": "5a0765c309d3d557ae24d29792a456009f5f1f34c32f8e9d92dabbaae6a4f32f",
+    "settings-red-build.log": "0ffdc37766bb5afe0864861ed5ac18ab4e8653fc5fd229fc53c53751ce271777",
+    "settings-red2-build.log": "ceb6145285341fe02804a57de309fd812166af5407dfc3a747f49f81cc59ad8c",
+    "settings-red2.log": "ad319d1bf0e352eef867c6c98ba390ae6f5a2706963b5b3b9c093b249e0ff6ce",
+    "temporal-cli-red-build.log": "3a544399e93b43bfc6929e27d0227a0d49797e2566dcc5b31aa93471c465840e",
+    "temporal-cli-red.log": "86f439deeb1011b376a31bfccc1adb09fca413a7b36b003fe40767fd9fd12dc9",
+    "temporal-owner-red.log": "c400446432c890e8741f88ef94e4bf654e6becdff7525d23cfe1d272142420d0",
+    "temporal-views-gpu.log": "e149d0cbfca1978dc56f9c72e945ace1f3113f98b57cdac335ee980de6d25152",
+    "temporal-views-gpu-green.log": "deb05e966a484a7512ccb8d4c7d72eb1da86ff36828d1044a6008af9db278ff4",
+    "motion-shell-diagnostic.log": "5c2449b6b6f4673992362b23813c1dee6d4edc0d5b2a3123653a4ba3c324167c",
+    "temporal-hdr-gpu.log": "0bfb763f3e7e0f67b5254e272e964b3d8ceca99473e512609726cf3184234943"
+  },
+  "baselineHarnessCorrection": "The first comparison selected spatial mode 1 against the frozen source mode 0. Mode 0 was rerun with the original exact-image hash requirement.",
+  "implementationHashes": {
+    "Project/AzureRender/CHANGELOG.md": "28282d8bcfbb616a122c4d055d4446405377cd1dd95c1a2c69e9f8b4bf0aeeaa",
+    "Project/AzureRender/CMakeLists.txt": "0897c3f57588a12cac24591ab30f36c469be0ce12e3101d221eddfbe3f132273",
+    "Project/AzureRender/README.md": "ba9b6f8b59691dc0d939911eba97247fa2876f4a050553ca43151154823ece48",
+    "Project/AzureRender/docs/acceptance/nr/temporal-reconstruction-integration.md": "1c156cde671e46d18174cc9fc14650208460c32c6f7062ded6936f4d4cf417ec",
+    "Project/AzureRender/docs/architecture.md": "9183023496dab6f1a4fb2e1884e4f9e87de67f1e0470b6030e6dd3733e09c3e6",
+    "Project/AzureRender/docs/plans/2026-10-22-native-render-restoration-handoff.md": "06a9787f3ea450a6f3b1135772499bf68415265f698b0e6e3a90b5587e3c5bcd",
+    "Project/AzureRender/docs/plans/2026-10-24-temporal-reconstruction-integration.md": "80ce9e6dd1f6c4ac1bb3a1e2db3b805ec01fa5b93b6212373a29750a9fa2e10e",
+    "Project/AzureRender/docs/plans/azure-engine-plan.md": "a3c69a33bb1fea2d43f980e3146d235420f2d7ee3aba1faee15c99df95f1d8d0",
+    "Project/AzureRender/docs/runtime/spatial-antialiasing.md": "adf2ef5b69bd0e66db498d039f7832daff40b59f632c42b3be7c09a9df02b9ea",
+    "Project/AzureRender/docs/runtime/temporal-antialiasing.md": "bb23fcbc596e1c448b7d3a043cc50f1d90ddbec25319b25f3aa34f385a0aa31f",
+    "Project/AzureRender/shaders/motion_outline.vert": "1b667aa522903dc70e5b3274e05f93072ef343e03fcaa9edf5c570c997ec3826",
+    "Project/AzureRender/shaders/motion_pose_data.glsl": "0c34e2e671a0bbbe97f34870483b7b251f0fc5975724fe60f6188e21565516a5",
+    "Project/AzureRender/shaders/motion_pose_test.comp": "4449b6553def550fd6a5906128701de9063a3a2b2c3205eac4bc504ebd34977b",
+    "Project/AzureRender/shaders/motion_vector.frag": "5ceefc007cf421700934d5cf9136f295c7c8a569aaf3eb2e352fd9a2fbe6d8ba",
+    "Project/AzureRender/shaders/motion_vector.vert": "7be8170268924d3cdee1bafa463aac7ceae30b0efe492496c6ecb25a323c6b26",
+    "Project/AzureRender/shaders/motion_vector_push.glsl": "af41eeee8a2ddd0f9c240aeaf704b9e24ba0c553609296c533a6f74c18df81c3",
+    "Project/AzureRender/shaders/motion_vector_vertex.glsl": "b857393918f59658bd2e9e097c6d37b387942bbe34a57eb49267766f8a4b5655",
+    "Project/AzureRender/shaders/readonly_depth_test.frag": "1b89562811a5a436862f8aa443e49d8bd9bff3ec8a07c5efb5586bb227aacbda",
+    "Project/AzureRender/shaders/readonly_depth_test.vert": "74dca4d7ad3e3bc46547ff304fa24691132fc2722a65af8a9e7a1da952618628",
+    "Project/AzureRender/shaders/temporal_copy.frag": "fa01cba2c9e33ff007b205f3a675503b87120ebe0665d64f29d854dd437ac5c5",
+    "Project/AzureRender/shaders/temporal_resolve.frag": "5a21b27d72e7e6607511d0cd7944e529954de522ec32f023b6d1d3a67dda42ed",
+    "Project/AzureRender/src/app/AzureRenderApp.cpp": "ad746a68ad0db7c385a4d25e4b129bf523a869f8ad3996146c2d80a5d3b1e923",
+    "Project/AzureRender/src/app/AzureRenderApp.hpp": "b80f3049d06e075e52713f2906f4349cb55a2ec2d5b43306aabcb899da28ec7d",
+    "Project/AzureRender/src/app/AzureRenderCapture.cpp": "f4430645e6a51675590e9951dbc79bb060f4a175171986f1a9d28a630d4b15ed",
+    "Project/AzureRender/src/app/AzureRenderFrame.cpp": "6cf09550d6e099cb897e7b9875d08b461c3d7e18f803171884f5a633fa17741c",
+    "Project/AzureRender/src/app/AzureRenderSupport.cpp": "f7e63362167bb1af944bdff99d316ef1320a388bf610d772fd15d8ad3066a8ca",
+    "Project/AzureRender/src/app/CommandLine.cpp": "ee5665aa748d513cb364c71a94cc196a973a52d5cea85fc2247b558085fa223c",
+    "Project/AzureRender/src/editor/panels/EnvironmentPanel.cpp": "41043bc5d5ae691d2c4b75a10b1ee4ccfbc4174c51f9699c91c7471f13028d63",
+    "Project/AzureRender/src/extensions/ISceneRenderer.hpp": "05d4d7259436b6b7d22edfa801e4dfad85b0485656077044ba8107f2f46c4875",
+    "Project/AzureRender/src/render/MotionPoseData.cpp": "9d0cb644526745d001f3848a5f5c90003012d8ea13e489382fc189801dbaf25b",
+    "Project/AzureRender/src/render/MotionPoseData.hpp": "2a8efd5dd95a242898af46ad948085bea79f72664eb62f6fb36a1f6f2d5ef64a",
+    "Project/AzureRender/src/render/MotionVectorPass.cpp": "27b83f366083738d47b9822b359aa72a63d2e8aa548eb7d9ee8b0566172f2e7a",
+    "Project/AzureRender/src/render/MotionVectorPass.hpp": "61bbbe28ac91d548779c6ba881e316bf220d141f3b6dadd32f2e58a981960b72",
+    "Project/AzureRender/src/render/MotionVectorTarget.cpp": "b984bab7b9d2f2ad2629dd09d980cc97c6978a1ef8809056f32d7bc1cd3485aa",
+    "Project/AzureRender/src/render/MotionVectorTarget.hpp": "01e22e0159a6a0ba17aa9c5f2f855d216f641e52afe89e221ad353c0e10ecb22",
+    "Project/AzureRender/src/render/RenderContext.hpp": "7e3b985794aed0827cfbada0a7a7a15dbd5ec03a4f126a7f20863f9edd9b63df",
+    "Project/AzureRender/src/render/RenderGraph.cpp": "6b3829e5eb57fbc791fb18e08b20d2892f1b8e65650f2838ed24965e9cb0b92b",
+    "Project/AzureRender/src/render/RenderGraph.hpp": "9ab15fa341118d2493c42224a4897eded07323e0c9e12997d75e1765ab87ed04",
+    "Project/AzureRender/src/render/RenderSettings.cpp": "cfe78d18895a3524c940cbe996a8234433372ac7bfbfe32d401cf28d499c401f",
+    "Project/AzureRender/src/render/RenderSettings.hpp": "0583b3494d28f6a8fd44966052649d3f7c63beba3043dad709783ab062bd1b83",
+    "Project/AzureRender/src/render/RenderViewOutput.cpp": "36c32041e15c0ef8f5621bea7e8e69e9cbcf9ac01d566e8123d1c4ed2fcfbd63",
+    "Project/AzureRender/src/render/RenderViewOutput.hpp": "66a926ea0d30d79f1bd1bdbe7b936c46c4a9e23b25d7d358f82b86a58bf0ef36",
+    "Project/AzureRender/src/render/RenderViewService.cpp": "5a8e3549fede4695141a3944f7fed5062fd95739b48c47d80018a51f322c5326",
+    "Project/AzureRender/src/render/SpatialAntiAliasing.hpp": "0aadbbf61a456917f69ca43bb6efc10e2354488b10f7d4356c983cc2cd0eefc2",
+    "Project/AzureRender/src/render/TemporalReconstruction.cpp": "015d315f50fe8b870a1bc92713ac4b2e30397a405f6c848ac792ac75605e5d4b",
+    "Project/AzureRender/src/render/TemporalReconstruction.hpp": "acac160f9c47df9a887909b0d48e2d73cba673578ffea05ed0f9d987fd31feb5",
+    "Project/AzureRender/src/rhi/NullRhi.cpp": "0283160264a31d8f3d7ce66f8289b582a5c4e1d0083ccf9849658c173b1ac4a9",
+    "Project/AzureRender/src/rhi/Rhi.hpp": "9d56c0112d202e0ca282a66218b53841a49e5b188e7c69843b5c4ded2e2654c5",
+    "Project/AzureRender/src/rhi/VulkanRhi.cpp": "d78b4b65a722ee83ff2ae800c16267e7462c0cf068400ca648e88cae5e34e6bb",
+    "Project/AzureRender/src/runtime/LevelRenderSettings.hpp": "3483b5e57ca3e258acdc96105d87002345d56d125211ded08cd2ab645452a6eb",
+    "Project/AzureRender/src/scenes/CharacterMotionPass.inc": "ff501e60461a375c2b4cb6c90cb718d122f0bd980b174dc5932f530a1af83e1b",
+    "Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp": "464a3879e0c47023f7339d3f668d02343d2a0eec70c17169b8a45da46ef4e477",
+    "Project/AzureRender/src/scenes/CharacterSceneRenderer.hpp": "1d13e61c1832efa612fc66428d37ec3c9a1a838bfd66db3c921ece87d447dec5",
+    "Project/AzureRender/tests/CommandLineTests.cpp": "dce9793e104887cf57f3900cdd76e541fe152cefefda65d08f97e29416d8e533",
+    "Project/AzureRender/tests/ExtensionRegistryTests.cpp": "cc63881faa1ee729d1de70cc9ccf90f3a57ed17ea962a235c6c05260da566b9e",
+    "Project/AzureRender/tests/MotionPoseDataTests.cpp": "917db57ca2a156113224b4752bec238a5d5720350da4d9e1d6ee6377a150028c",
+    "Project/AzureRender/tests/MotionPoseGpuTests.cpp": "54cdd0074ef7b7476c798e43244a618974700a2e6708ac0a50399302196294dc",
+    "Project/AzureRender/tests/MotionRecordingTests.cpp": "950958c8e1fa324d855a7f7fa85739db16826749796d9adc03c0de43695e77d1",
+    "Project/AzureRender/tests/MotionVectorGpuTests.cpp": "be892f064d5fc5267433a23f2907ee4e6e430a5fa26e2469ef25559eb15791e7",
+    "Project/AzureRender/tests/MotionVectorTargetTests.cpp": "31684a3ae2d9d928098957a2c6e9dab955d0c13c85565c7b95da8ee7bb1d3a41",
+    "Project/AzureRender/tests/ReadOnlyDepthContractTests.cpp": "2e24774c0b440af52f02c5cbc596c52cad37ec7ccee24ce3c08c2d50f59a404a",
+    "Project/AzureRender/tests/ReadOnlyDepthGpuTests.cpp": "1b1dbdec6015d88fe9861d567944008ca70dce697bd52fe0eb1b6fff5925a1f5",
+    "Project/AzureRender/tests/RenderViewTests.cpp": "7057c2beb64430ded6e33cec9977cc8557e53a2506e5453627f70b2157f165d2",
+    "Project/AzureRender/tests/TemporalReconstructionTests.cpp": "e60e1bbf52c642e87c5ca57e3446a40f2cc30a6a176cc34241f00024c39a06f3",
+    "Project/AzureRender/tests/TemporalSettingsTests.cpp": "a2e9fca9cdad903a82f3d55101f217320a2216f4de0e54b257c0cbb59c748762",
+    "Project/AzureRender/tests/TemporalViewGpuTests.cpp": "f8aae0c840156f69abc8c41e830fa18f9c40816017239fe99e22a9226bc9d782",
+    "Project/AzureRender/tests/support/VulkanComputeFixture.hpp": "3f2033e087de8c0cda7659626aae066722d426191baad4f31986f04c1e6609e3"
+  }
+}

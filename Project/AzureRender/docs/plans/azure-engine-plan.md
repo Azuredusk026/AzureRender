@@ -17,7 +17,9 @@ NR0 的参考门禁及 NR1 至 NR12 的正式条件保持待验。
 NR7-AA0 已核对原生时序输入、运动与历史 RGB 合成。
 单帧来源及连续序列边界见[时序核验](../acceptance/nr/native-temporal-inputs.md)。
 AA1、AA2 的提交基础与运动数学已完成公共验证。
-运动附件及前帧变形继续按[提交验证](../acceptance/nr/temporal-motion-contract.md)推进。
+运动、前帧变形及 HDR 历史已接入主辅视图。
+双配置与真实角色序列见[接入验证](../acceptance/nr/temporal-reconstruction-integration.md)。
+继续执行 AA4 至 AA6 的细节、运动与预算门禁。
 
 鼻下与脸颊暗影按直接光、GI、遮罩和镜面分项核验。
 脸部径向法线候选通过双配置各 36 次 GPU 检查。

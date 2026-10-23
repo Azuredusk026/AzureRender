@@ -67,7 +67,7 @@ inline void decodeScreenSpaceReflection(ScreenSpaceReflectionSettings& target,co
     validateScreenSpaceReflection(value);target=value;
 }
 inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
-    return {{"nprLighting",encodeNprLighting(settings.nprLighting)},{"screenSpaceReflection",encodeScreenSpaceReflection(settings.screenSpaceReflection)},{"renderer",sceneTypeName(settings.sceneType)},{"pathTraceSamples",settings.pathTraceSamples},{"pathTraceBounces",settings.pathTraceBounces},{"pathTraceDenoise",settings.pathTraceDenoise},{"pathTraceSeed",settings.pathTraceSeed},{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
+    return {{"schemaVersion",RenderSettings::kSchemaVersion},{"nprLighting",encodeNprLighting(settings.nprLighting)},{"screenSpaceReflection",encodeScreenSpaceReflection(settings.screenSpaceReflection)},{"renderer",sceneTypeName(settings.sceneType)},{"pathTraceSamples",settings.pathTraceSamples},{"pathTraceBounces",settings.pathTraceBounces},{"pathTraceDenoise",settings.pathTraceDenoise},{"pathTraceSeed",settings.pathTraceSeed},{"skyMode",settings.sky.mode},{"skyColor",settings.sky.color},{"skyIntensity",settings.sky.intensity},{"skyRotation",settings.sky.rotationDegrees},{"outlinePixels",settings.outline.silhouetteWidthPixels},{"antiAliasing",settings.antiAliasing},{"cameraNear",settings.cameraNear},{"cameraFar",settings.cameraFar},{"shadowDistance",settings.shadowDistance},
         {"showcasePreset",settings.showcasePreset},{"background",settings.characterPresentation.backgroundEnabled},{"platform",settings.characterPresentation.platformEnabled},
         {"faceSdf",settings.faceSdf.enabled},{"faceThreshold",settings.faceSdf.threshold},{"faceSoftness",settings.faceSdf.softness},{"outline",settings.outline.strength},
         {"shadowRadius",settings.shadow.maximumFilterRadiusTexels},{"exposure",settings.grade.exposureEv},
@@ -80,6 +80,19 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
 }
 inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::json& data){
     if(!data.is_object())throw std::invalid_argument("Level renderSettings must be an object");
+    std::uint64_t version=17;
+    if(data.contains("schemaVersion")){
+        const auto& authored=data.at("schemaVersion");
+        if(!authored.is_number_integer())throw std::invalid_argument("Render settings version must be an integer");
+        version=authored.get<std::uint64_t>();
+        if(!version||version>RenderSettings::kSchemaVersion)throw std::invalid_argument("Unsupported level render settings version");
+    }
+    if(data.contains("antiAliasing")){
+        const auto& mode=data.at("antiAliasing");
+        if(!mode.is_number_integer())throw std::invalid_argument("Anti-aliasing mode must be an integer");
+        const auto value=mode.get<std::uint64_t>();
+        if(value>3||(version<18&&value>2))throw std::invalid_argument("Temporal anti-aliasing requires render settings version 18");
+    }
     auto settings=target;
     if(data.contains("nprLighting"))decodeNprLighting(settings.nprLighting,data.at("nprLighting"));
     if(data.contains("screenSpaceReflection"))decodeScreenSpaceReflection(settings.screenSpaceReflection,data.at("screenSpaceReflection"));

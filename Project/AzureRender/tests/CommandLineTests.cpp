@@ -34,6 +34,8 @@ void expectError(
 }  // namespace
 
 int main() try {
+    require(azurerender::parseCommandLine({"--anti-aliasing","temporal"}).options.renderSettings.antiAliasing==3,
+        "Native temporal sampling is available through the production command line");
     const auto directProject=azurerender::parseCommandLine({"--project",u8"D:/用户项目/Monica.azureproject"});
     require(directProject.options.editorMode && directProject.options.projectFile==u8"D:/用户项目/Monica.azureproject",
         "Project shortcut must enter editor and preserve Unicode paths");

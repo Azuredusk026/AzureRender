@@ -174,6 +174,7 @@ bool AzureRenderApp::recreateSwapchain() {
     createEditorUiFramebuffers();
     createPostProcessDescriptorSets();
     createSwapchainSemaphores();
+    createTemporalResources();
     if (sceneRenderer_ != nullptr) {
         azurerender::RenderContext sceneContext;
         buildRenderContext(sceneContext);
@@ -233,6 +234,7 @@ void AzureRenderApp::recreateEditorViewportResources() {
     createFramebuffers();
     createPostProcessFramebuffers();
     createPostProcessDescriptorSets();
+    createTemporalResources();
     if(sceneRenderer_){azurerender::RenderContext context;buildRenderContext(context);sceneRenderer_->onSwapchainRecreate(context);}
 #if AZURE_WITH_EDITOR
     editorLayer_->setViewportImages(
@@ -267,6 +269,7 @@ void AzureRenderApp::cleanupEditorViewportResources(
     }
     postProcessFramebuffers_.clear();
     spatialAntiAliasing_.clear();
+    temporalReconstruction_.reset();
 
     const auto destroyImages = [this](
                                    auto& views,

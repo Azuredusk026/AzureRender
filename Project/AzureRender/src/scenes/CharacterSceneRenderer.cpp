@@ -261,6 +261,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     caps.requiresSceneDepth = true;
     caps.requiresSceneNormal = true;
     caps.supportsProjectionOffset=true;
+    caps.supportsMotionVectors=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -502,7 +503,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     enqueue("buffers",loadTimings_.buffersMs,[this]{createUniformBuffers();createJointBuffers();},true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
     enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
-    enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);buildSceneState();},true);
+    enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);initializeMotion(context);buildSceneState();},true);
     loadTimings_.cpuPrepareMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-prepareStart).count();
     RuntimeDiagnostics::instance().info("render","Scene load CPU preparation: "+std::to_string(loadTimings_.cpuPrepareMs)
         +" ms, materialPixelBytes="+std::to_string(decodedMaterialPixelBytes_));
@@ -528,12 +529,13 @@ bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(scene_.irradianceVolume.asset!=context.scene.irradianceVolume.asset)return false;
     if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
     if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
-    scene_=context.scene;animationIndex_=0;animationTime_=0;++temporalSceneGeneration_;temporalView_.clear();return true;
+    scene_=context.scene;animationIndex_=0;animationTime_=0;++temporalSceneGeneration_;temporalView_.clear();motionPoses_.clear();return true;
 }
 
 void CharacterSceneRenderer::onSwapchainRecreate(
     const RenderContext& context) {
     temporalView_.clear();
+    motionPoses_.clear();motionPass_.reset();
     renderSettings_ = context.renderSettings;
     // The scene render pass is recreated by the engine; the character
     // pipelines reference it and must be rebuilt.
@@ -542,6 +544,7 @@ void CharacterSceneRenderer::onSwapchainRecreate(
     if(descriptorPool_!=VK_NULL_HANDLE)rhi_->destroyDescriptorPool(descriptorPool_);
     createDescriptorPool();createDescriptorSets();
     createGraphicsPipeline(context);
+    initializeMotion(context);
 }
 
 void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
@@ -610,16 +613,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE, static_cast<std::uint32_t>(currentFrame_),
         RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers),std::move(shadowViews),std::move(nodeOpacities),std::move(objectShadowPages_));
     visibleInstances_.clear();
-    TemporalFrameInfo temporal;
-    temporal.width=std::max(frame.swapchainWidth,1U);temporal.height=std::max(frame.swapchainHeight,1U);
-    temporal.sceneGeneration=temporalSceneGeneration_;
-    temporal.cameraCut=static_cast<std::uint64_t>(frame.camera.source);
-    temporal.projection=projectionMatrix_;temporal.viewProjection=multiply(projectionMatrix_,viewMatrix_);
-    temporal.exposureScale=std::exp2(renderSettings_->grade.exposureEv);
-    const auto finite=[](const auto& matrix){return std::all_of(matrix.begin(),matrix.end(),[](float value){return std::isfinite(value);});};
-    if(frame.swapchainWidth&&frame.swapchainHeight&&finite(temporal.projection)&&finite(temporal.viewProjection))
-        temporalView_.prepare(temporal);
-    else temporalView_.clear();
+    prepareMotion();
 }
 
 void CharacterSceneRenderer::ensureInstanceCapacity() {
@@ -963,7 +957,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         // The same association as the per-frame uniform path so a single
         // instance reproduces the original values exactly.
         destination[slot].modelViewProjection =
-            multiply(projectionMatrix_, multiply(viewMatrix_, model));
+            multiply(samplingProjectionMatrix_, multiply(viewMatrix_, model));
         for (std::size_t cascade = 0;
              cascade < kShadowCascadeCount;
              ++cascade) {
@@ -1340,6 +1334,30 @@ void CharacterSceneRenderer::registerPasses(
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     graph.attachment(main, resources.normal, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    if(motionPass_){
+        if(resources.motion==UINT32_MAX||resources.motionSurfaceDepth==UINT32_MAX)
+            throw std::invalid_argument("Motion-enabled renderer requires imported view outputs");
+        const auto pass=graph.addCommandPass("character-motion",[this,frozenContext,draws=motionDraws_](rhi::ICommandRecorder& commands){
+            motionPass_->record(commands,frozenContext->currentFrame,frozenContext->imageIndex,frozenContext->renderExtent,draws);
+        });
+        graph.use(pass,instanceResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,jointResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,morphWeightResource,RenderGraphUsage::VertexStorage,false);
+        if(outlineMaskResource)graph.use(pass,*outlineMaskResource,RenderGraphUsage::Sampled,false);
+        if(outlineProjectionEnabled_)graph.use(pass,importHostStorage("character-motion-outline",outlineProjection_->buffer()),RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,importHostStorage("character-previous-poses",motionPass_->previous(context.currentFrame)),RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){
+            graph.use(pass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+            if(!computeSkinningEnabled_)graph.use(pass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+            else {rhi::BufferBarrierDesc initial;const auto& source=sourceVertexBuffer(key);initial.buffer=source.buffer;initial.size=source.size;
+                initial.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;initial.dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
+                graph.use(pass,graph.importBuffer("character-motion-base-"+std::to_string(key),initial),RenderGraphUsage::VertexBuffer,false);}
+        }
+        graph.attachment(pass,resources.depth,RenderGraphUsage::DepthReadAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        graph.attachment(pass,resources.motion,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(pass,resources.motionSurfaceDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
 }
 
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
@@ -1379,6 +1397,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
 
 void CharacterSceneRenderer::onUnload(const RenderContext& context) {
     temporalView_.clear();
+    motionPoses_.clear();state_.temporalFrame=nullptr;
     (void)context;
     loadJobs_.clear();loadInitialized_=false;destroyResources();
     faceSdfHeadNode_.reset();faceSdfTextureCount_=0;
@@ -1464,6 +1483,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
         for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend)transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
+         << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
          << "  \"temporalViewSubmission\": " << temporalView_.lastSubmission() << ",\n"
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
@@ -2470,6 +2491,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
 }
 
 #include "CharacterOutlinePass.inc"
+#include "CharacterMotionPass.inc"
 
 void CharacterSceneRenderer::createDescriptorPool() {
     rhi::DescriptorPoolDesc poolDesc{};
@@ -3154,6 +3176,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
 void CharacterSceneRenderer::destroyResources() {
+    motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();motionPreviousValidObjects_=0;
     destroyOverlayDepth();
     for (auto& resources : gpuCullingFrames_) resources.reset();
     gpuCullingCapacities_.fill(0);
@@ -3364,6 +3387,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     constexpr float kPi = 3.14159265358979323846F;
     Matrix4 projection = characterProjection(*renderSettings_,aspect);
     projectionMatrix_ = projection;
+    prepareTemporalFrame(frame);
     updateClusteredLighting(
         view,
         projection,
@@ -3459,7 +3483,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const auto& reflection=settings.screenSpaceReflection;
     const bool reflectionActive=screenSpaceReflectionActive(reflection,settings.sceneLightingEnabled,
         qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
-    uniform.screenReflectionWorldToClip=multiply(projectionMatrix_,viewMatrix_);
+    uniform.screenReflectionWorldToClip=multiply(samplingProjectionMatrix_,viewMatrix_);
     uniform.screenReflectionTrace={reflectionActive?1.F:0.F,reflection.maxDistance,reflection.thickness,reflection.normalBias};
     uniform.screenReflectionQuality={float(reflection.maxSteps),reflection.maxRoughness,reflection.edgeFade,reflection.strength};
     uniform.cascadeDepthRanges=cascadeDepthRanges;

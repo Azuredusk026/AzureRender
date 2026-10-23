@@ -1,0 +1,25 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "motion_vector_push.glsl"
+#include "motion_projection.glsl"
+#include "node_opacity.glsl"
+layout(binding=5) uniform sampler2D baseColor;
+layout(binding=8) uniform sampler2D coverageMask;
+layout(location=0) in vec2 textureCoordinate;
+layout(location=1) in vec3 opacityCoordinate;
+layout(location=2) in vec4 currentClip;
+layout(location=3) in vec4 previousClip;
+layout(location=4) in float previousValid;
+layout(location=0) out vec4 outputMotion;
+layout(location=1) out float outputSurfaceDepth;
+void main(){
+    if(!azureNodeOpacityCovered(opacityCoordinate,motion.outline.w))discard;
+    if((motion.flags&512u)!=0u){
+        uint tile=floatBitsToUint(motion.camera.w);
+        if(tile!=0xffffffffu){ivec2 extent=ivec2(motion.outline.yz);uint columns=uint(textureSize(coverageMask,0).x/extent.x);
+            if(columns>0u&&texelFetch(coverageMask,ivec2(tile%columns,tile/columns)*extent+ivec2(gl_FragCoord.xy),0).r>.5)discard;}
+    }else if((motion.flags&3u)==1u&&texture(baseColor,textureCoordinate).a<motion.alphaCutoff)discard;
+    outputMotion=azureMotionProjection(currentClip,previousClip,previousValid>=.999999);
+    if(outputMotion.w==0||(motion.flags&16u)!=0u)outputMotion.w=-1;
+    outputSurfaceDepth=gl_FragCoord.z;
+}

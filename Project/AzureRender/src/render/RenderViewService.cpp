@@ -1,5 +1,6 @@
 #include "RenderViewService.hpp"
 #include "RenderViewOutput.hpp"
+#include "TemporalReconstruction.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstring>
@@ -27,6 +28,8 @@ struct View {
     SceneFrameData frame;
     std::unique_ptr<ISceneRenderer> renderer;
     std::unique_ptr<RenderViewOutput> output;
+    std::unique_ptr<TemporalReconstruction> temporal;
+    std::string temporalFallback;
     std::array<rhi::GpuImage,4> images{};
     std::array<VkImageView,4> views{};
     VkRenderPass scenePass=VK_NULL_HANDLE,shadowPass=VK_NULL_HANDLE;
@@ -40,6 +43,7 @@ struct View {
         if(!context.rhi)return;
         if(renderer){try{renderer->onUnload(context);}catch(...){}}
         output.reset();
+        temporal.reset();
         auto& rhi=*context.rhi;
         if(framebuffer)rhi.destroyFramebuffer(framebuffer);
         if(shadowFramebuffer)rhi.destroyFramebuffer(shadowFramebuffer);
@@ -74,7 +78,7 @@ struct RenderViewService::State {
         validateExtent(descriptor.extent);validateCamera(descriptor.cameraPosition,descriptor.cameraTarget);
         validateRenderSettings(descriptor.settings);
         auto view=std::make_shared<View>();view->descriptor=descriptor;view->context=base;
-        auto& context=view->context;context.scene=descriptor.scene;context.renderSettings=&view->descriptor.settings;
+        auto& context=view->context;context.scene=descriptor.scene;context.renderSettings=&view->descriptor.settings;context.motionOutput=nullptr;
         context.sceneWorldCoordinates=descriptor.sceneWorldCoordinates;
         context.gpuTimingEnabled=false;context.timestampQueryPool=VK_NULL_HANDLE;context.submissionCounters=nullptr;
         context.renderExtent=descriptor.extent;context.swapchainExtent=descriptor.extent;
@@ -107,10 +111,18 @@ struct RenderViewService::State {
         context.sceneRenderPass=view->scenePass;context.sceneFramebuffer=view->framebuffer;
         context.shadowRenderPass=view->shadowPass;context.shadowFramebuffer=view->shadowFramebuffer;
         context.shadowImageView=view->views[3];context.shadowSampler=view->sampler;
-        view->output=std::make_unique<RenderViewOutput>(context,view->views[0],view->sampler,descriptor.transfer);
         view->renderer=factory(descriptor.rendererId);
         if(!view->renderer)throw std::invalid_argument("Render view factory returned no renderer");
         validateSceneRendererCapabilities(view->renderer->capabilities());
+        if(descriptor.settings.antiAliasing==3){
+            if(view->renderer->capabilities().supportsMotionVectors){
+                try{view->temporal=std::make_unique<TemporalReconstruction>(rhi,*context.allocator,context.renderExtent,context.depthFormat,
+                    std::vector<TemporalSceneSource>{{view->images[0].image,view->views[0],view->images[1].image,view->views[1]}},context.shaderDirectory);
+                    context.motionOutput=&view->temporal->motion();}
+                catch(const std::exception& error){view->temporalFallback=error.what();}
+            }else view->temporalFallback="Renderer does not provide motion vectors";
+        }
+        view->output=std::make_unique<RenderViewOutput>(context,view->views[0],view->sampler,descriptor.transfer);
         view->renderer->onLoad(context);view->loaded=true;
         return view;
     }
@@ -162,8 +174,9 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
         }
         // Recording contexts are view-owned: reference-capturing renderer callbacks remain valid.
         view->context.commandBuffer=recording.commandBuffer;view->context.commands=recording.commands;
-        view->context.currentFrame=recording.currentFrame;view->context.imageIndex=recording.currentFrame;
+        view->context.currentFrame=recording.currentFrame;view->context.imageIndex=0;
         view->frame=frame;view->frame.renderSettings=&view->descriptor.settings;
+        view->frame.currentFrame=recording.currentFrame;
         view->frame.cameraOverride=true;
         view->frame.camera={};
         view->frame.camera.source=RenderCameraSource::SceneView;
@@ -179,10 +192,16 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
         auto import=[&](std::size_t i){rhi::ImageBarrierDesc initial{};initial.image=view->images[i].image;
             initial.aspectMask=(i==1 || i==3)?VK_IMAGE_ASPECT_DEPTH_BIT:VK_IMAGE_ASPECT_COLOR_BIT;
             return graph.importImage("view-"+std::to_string(index)+"-"+std::to_string(i),initial);};
-        const SceneGraphResources resources{import(0),import(1),import(2),import(3)};
+        SceneGraphResources resources{import(0),import(1),import(2),import(3)};
+        bool temporalReady=false;std::array<RenderGraph::ResourceId,2> motion{};
+        if(view->temporal){motion=view->temporal->importMotion(graph,"view-"+std::to_string(index));resources.motion=motion[0];resources.motionSurfaceDepth=motion[1];
+            const auto* rendererState=view->renderer->sceneState();
+            if(rendererState&&rendererState->temporalFrame){view->temporal->prepare(*rendererState->temporalFrame,recording.currentFrame,0);temporalReady=true;}
+            else view->temporal->cancel();}
         const auto firstPass=graph.passes().size();
         view->renderer->registerPasses(graph,resources,view->context);
-        view->output->schedule(graph,resources.color,"view-"+std::to_string(index));
+        if(temporalReady)view->temporal->schedule(graph,resources.color,resources.depth,motion,"view-"+std::to_string(index));
+        view->output->schedule(graph,resources.color,"view-"+std::to_string(index),temporalReady);
         // The one-shot graph retains the owner through recording and worker joins.
         const auto lease=std::make_shared<std::shared_ptr<View>>(view);
         const auto recorded=std::make_shared<bool>(false);
@@ -198,6 +217,7 @@ bool RenderViewService::submitted(std::uint64_t submission) noexcept {
     for(const auto& pending:state_->pending)if(!*pending.recorded)return false;
     for(const auto& pending:state_->pending) {
         pending.view->renderer->onFrameSubmitted(submission);
+        if(pending.view->temporal)pending.view->temporal->commit(submission);
         pending.view->lastRenderSubmission=submission;++pending.view->submittedRenderCount;
     }
     state_->pending.clear();state_->lastSubmitted=submission;return true;
@@ -207,6 +227,7 @@ bool RenderViewService::cancel(std::uint64_t submission) noexcept {
         ||submission<=state_->lastSubmitted||submission<=state_->lastCanceled)return false;
     for(const auto& pending:state_->pending) {
         auto& view=*pending.view;view.renderer->onFrameAbandoned();view.requested=true;
+        if(view.temporal)view.temporal->cancel();
         if(view.lastUse==submission)view.lastUse=pending.previousUse;
         view.renderCount=pending.previousCount;
     }
@@ -234,6 +255,8 @@ nlohmann::json RenderViewService::describe(RenderViewHandle handle) const{
         {"renderCameraPosition",view.frame.camera.view.position},{"renderCameraTarget",view.frame.camera.view.target},{"cameraPosition",view.descriptor.cameraPosition},{"cameraTarget",view.descriptor.cameraTarget},
         {"renderCount",view.renderCount},{"colorImage",reinterpret_cast<std::uintptr_t>(view.images[0].image)},
         {"lastRenderSubmission",view.lastRenderSubmission},{"submittedRenderCount",view.submittedRenderCount},
+        {"temporalAvailable",view.temporal!=nullptr},{"temporalHistorySubmission",view.temporal?view.temporal->historySubmission():0},
+        {"temporalBytes",view.temporal?view.temporal->byteSize():0},{"temporalFallback",view.temporalFallback},
         {"resolvedImage",reinterpret_cast<std::uintptr_t>(view.output->image().image)},
         {"outputFormat",view.descriptor.transfer==ViewColorTransfer::Linear?"rgba8-linear":"rgba8-srgb-encoded"},
         {"lastUseSubmission",view.lastUse},{"completedSubmission",state_->completed},{"requested",view.requested},

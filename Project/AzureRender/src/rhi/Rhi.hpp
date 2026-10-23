@@ -140,6 +140,8 @@ struct RenderPassAttachmentDesc {
     bool clear = true;
     bool store = true;
     bool isDepth = false;
+    // Loading requires defined prior contents and is exclusive with clear.
+    bool load = false;
 };
 
 // A single-subpass render pass; every pass in the project fits this shape.
@@ -150,7 +152,26 @@ struct RenderPassDesc {
     // External fragment-read -> attachment-write dependency, used when the
     // pass output is sampled later in the frame.
     bool externalReadDependency = false;
+    bool depthReadOnly = false;
 };
+
+inline void validateRenderPassDesc(const RenderPassDesc& desc) {
+    if(desc.depthAttachment< -1||(desc.depthAttachment>=0
+        &&static_cast<std::size_t>(desc.depthAttachment)>=desc.attachments.size()))
+        throw std::invalid_argument("Render pass depth attachment index is invalid");
+    for(const auto& attachment:desc.attachments) {
+        if(attachment.clear&&attachment.load)throw std::invalid_argument("Render pass attachment cannot load and clear");
+        if(attachment.load&&attachment.initialLayout==VK_IMAGE_LAYOUT_UNDEFINED)
+            throw std::invalid_argument("Loading an attachment requires defined prior contents");
+    }
+    if(desc.depthAttachment>=0&&!desc.attachments[static_cast<std::size_t>(desc.depthAttachment)].isDepth)
+        throw std::invalid_argument("Render pass depth index must identify a depth attachment");
+    if(desc.depthReadOnly) {
+        if(desc.depthAttachment<0)throw std::invalid_argument("Read-only depth requires a depth attachment");
+        const auto& depth=desc.attachments[static_cast<std::size_t>(desc.depthAttachment)];
+        if(!depth.load||depth.clear)throw std::invalid_argument("Read-only depth requires loaded depth contents");
+    }
+}
 
 struct FramebufferDesc {
     VkRenderPass renderPass = VK_NULL_HANDLE;
