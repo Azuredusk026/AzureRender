@@ -3,6 +3,12 @@
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline void to_json(nlohmann::json& value,const LightShape::CharacterResponse& response) {
+    if(response.schemaVersion==4) {
+        response.validate();const bool rim=response.specialMode==LightShape::CharacterResponse::SpecialMode::ScreenRim;
+        value={{"schemaVersion",4},{"composition",rim?"screen-rim":"specular-only"}};
+        if(rim){value["offsetScale"]=response.rimOffsetScale;value["surfaceTint"]=response.rimSurfaceTint;}
+        return;
+    }
     if(response.schemaVersion==3) {
         response.validate();value={{"schemaVersion",3},{"composition","color-blend"},{"strength",response.strength},
             {"facingWeight",response.facingWeight},{"projectedDistance",response.projectedDistance},{"order",response.order}};return;
@@ -11,6 +17,23 @@ inline void to_json(nlohmann::json& value,const LightShape::CharacterResponse& r
     if(response.schemaVersion==2)value["linearLength"]=response.linearLength;
 }
 inline void from_json(const nlohmann::json& value,LightShape::CharacterResponse& response) {
+    if(value.is_object()&&value.contains("schemaVersion")&&value["schemaVersion"].is_number_integer()&&value["schemaVersion"]==4) {
+        if(!value.contains("composition")||!value["composition"].is_string())throw std::invalid_argument("Missing special character light composition");
+        const bool rim=value["composition"]=="screen-rim";
+        if((!rim&&value["composition"]!="specular-only")||value.size()!=(rim?4U:2U))
+            throw std::invalid_argument("Invalid special character light fields");
+        response={};response.present=true;response.schemaVersion=4;
+        response.specialMode=rim?LightShape::CharacterResponse::SpecialMode::ScreenRim:LightShape::CharacterResponse::SpecialMode::SpecularOnly;
+        if(rim) {
+            for(const auto& [field,maximum]:{std::pair{"offsetScale",16.0},std::pair{"surfaceTint",1.0}}) {
+                if(!value.contains(field)||!value[field].is_number())throw std::invalid_argument("Missing screen rim field");
+                const double number=value[field].get<double>();
+                if(!std::isfinite(number)||number<0||number>maximum)throw std::invalid_argument("Invalid screen rim field range");
+            }
+            response.rimOffsetScale=value["offsetScale"].get<float>();response.rimSurfaceTint=value["surfaceTint"].get<float>();
+        }
+        response.validate();return;
+    }
     if(value.is_object()&&value.contains("schemaVersion")&&value["schemaVersion"].is_number_integer()&&value["schemaVersion"]==3) {
         if(value.size()!=6||!value.contains("composition")||value["composition"]!="color-blend"
             ||!value.contains("projectedDistance")||!value["projectedDistance"].is_boolean()

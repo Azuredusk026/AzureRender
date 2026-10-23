@@ -196,6 +196,14 @@ int main() {
         if(!blendReloaded.isProjectedColorBlend()||blendReloaded.strength!=.7F||blendReloaded.facingWeight!=.25F||blendReloaded.order!=8)
             throw std::runtime_error("Scene save and reopen must preserve ordered color composition");
         assert(shapeReloaded.falloff==azurerender::LightFalloff::RangePower&&shapeReloaded.falloffExponent==3.5F);
+        auto rimDocument=blendDocument;auto& rimResponse=rimDocument.lights[0].shape.characterResponse;
+        rimResponse={};rimResponse.present=true;rimResponse.schemaVersion=4;
+        rimResponse.specialMode=azurerender::LightShape::CharacterResponse::SpecialMode::ScreenRim;
+        rimResponse.rimOffsetScale=.4F;rimResponse.rimSurfaceTint=.8F;
+        rimDocument.save(directory/"screen-rim.azscene");
+        const auto rimReloaded=azurerender::SceneDocument::load(directory/"screen-rim.azscene").lights[0].shape.characterResponse;
+        if(!rimReloaded.isCharacterOnly()||rimReloaded.rimOffsetScale!=.4F||rimReloaded.rimSurfaceTint!=.8F)
+            throw std::runtime_error("Scene save and reopen must retain special character light parameters");
         assert(shapeReloaded.influenceBox.enabled&&shapeReloaded.influenceBox.worldToBox==document.lights[0].shape.influenceBox.worldToBox);
         if(shapeReloaded.receivers.characters||!shapeReloaded.receivers.surfaces) {
             std::cerr<<"Scene save and reopen must preserve light receiver selection\n";return 1;

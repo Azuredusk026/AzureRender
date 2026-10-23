@@ -16,7 +16,7 @@ from test_npr_diffuse_gpu import linear
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
     names=('single','zero','full','facing-front','facing-back','two-layers','reverse-layers','fixed',
-        'projected','sphere','geometric-normal','pbr','pbr-control','disabled','disabled-control','no-receiver','ambient','ambient-control','ambient-direct','ambient-indirect')
+        'projected','projected-behind','sphere','geometric-normal','pbr','pbr-control','disabled','disabled-control','no-receiver','ambient','ambient-control','ambient-direct','ambient-indirect')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report=dict(schemaVersion=1,status='running',playerSha256=hashlib.sha256(player.read_bytes()).hexdigest(),captures=[]);frames={}
@@ -44,12 +44,12 @@ def run(player,output,selected=None,expected_validation=None):
             colors=[[.6,.2,.1]];strengths=[0 if name=='zero' else 1 if name=='full' else .7]
             if name in ('two-layers','reverse-layers'):colors=[[.6,.2,.1],[.1,.4,.8]];strengths=[.7,.5]
             for i,(color,strength) in enumerate(zip(colors,strengths)):
-                projected=name=='projected';position=[3,0,1] if name in ('projected','sphere') else [0,0,-1] if name=='facing-back' else [0,0,1]
+                projected=name.startswith('projected');position=[-1,0,100] if name=='projected-behind' else [3,0,1] if name in ('projected','sphere') else [0,0,-1] if name=='facing-back' else [0,0,1]
                 if name=='full':position=[.03125,-.03125,0]
                 response=dict(schemaVersion=3,composition='color-blend',strength=strength,
                     facingWeight=1 if name in ('facing-front','facing-back','geometric-normal') else 0,
                     projectedDistance=projected,order=1-i if name=='reverse-layers' else i)
-                shape=dict(type='spot' if projected else 'point',direction=[0,0,-1],falloff='range-power',falloffExponent=2,
+                shape=dict(type='spot' if projected else 'point',direction=[1,0,0] if name=='projected-behind' else [0,0,-1],falloff='range-power',falloffExponent=2,
                     innerCone=.25,outerCone=.5,characterResponse=response)
                 if name=='no-receiver':shape['receivers']=dict(schemaVersion=1,surfaces=True,characters=False)
                 identifier='modifier-'+str(i)
@@ -80,7 +80,8 @@ def run(player,output,selected=None,expected_validation=None):
                 if name.startswith(('pbr','disabled')) or name=='no-receiver':continue
                 response=light['shape']['characterResponse'];position=next(n for n in level['nodes'] if n['id']==light['nodeId'])['components']['azure.transform']['data']['translation']
                 incoming=np.array(position)-[.03125,-.03125,0]
-                if response['projectedDistance']:incoming=np.array([0,0,incoming[2]])
+                if response['projectedDistance']:
+                    axis=np.asarray(light['shape']['direction']);incoming=axis*np.dot(incoming,axis)
                 squared=np.dot(incoming,incoming);direction=incoming/max(np.sqrt(squared),.001)
                 window=max(1-min(squared/4,1),0)**2
                 facing=np.clip(direction[2]+.5,0,1);smooth=facing*facing*(3-2*facing)

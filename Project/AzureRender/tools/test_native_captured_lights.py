@@ -106,6 +106,28 @@ class CapturedLightTests(unittest.TestCase):
         self.assertEqual(converted['falloff'],'range-power');self.assertEqual(converted['falloffExponent'],2)
         with self.assertRaises(ValueError):subject.render_color_blend(self.decode(self.fixture())[0])
 
+    def test_screen_rim_keeps_depth_window_and_projected_direction(self):
+        # A positive source edge, independent from the renderer's screen sampling.
+        result=subject.screen_rim_response([.6,.4,.2],.5,[.3,.1,.05],[.6,0,.8],[-.8,0,.6],
+            [0,0,1],[1,0,0],4,3,surface_tint=.8)
+        self.assertEqual(result,[0,0,0])
+        result=subject.screen_rim_response([.6,.4,.2],.5,[.3,.1,.05],[.6,0,.8],[.8,0,.6],
+            [0,0,1],[1,0,0],4,3,surface_tint=.8)
+        expected=[c*.5*.6*(.5+.8*(b*.96-.5)) for c,b in zip([.6,.4,.2],[.3,.1,.05])]
+        for a,b in zip(result,expected):self.assertAlmostEqual(a,b,places=12)
+        self.assertEqual(subject.screen_rim_response([1,1,1],1,[1,1,1],[1,0,0],[1,0,0],[0,0,1],[1,0,0],3.05,3,surface_tint=1),[0,0,0])
+
+    def test_special_light_adapter_preserves_explicit_consumers(self):
+        raw=self.fixture(mode=3)
+        struct.pack_into('<I',raw,(6+2)*16+12,0x3fffffff);struct.pack_into('<I',raw,(6+3)*16,0x3fffffff)
+        light=self.decode(raw)[0];response=subject.render_special_character_response(light)
+        self.assertEqual(response,dict(schemaVersion=4,composition='screen-rim',offsetScale=1,surfaceTint=light['response']['parameters'][1]))
+        self.assertEqual(subject.render_special_character_response(self.decode(self.fixture(mode=2))[0]),dict(schemaVersion=4,composition='specular-only'))
+        with self.assertRaises(ValueError):subject.render_special_character_response(self.decode(self.fixture())[0])
+
+    def test_rim_adapter_rejects_missing_native_shadow_consumer(self):
+        with self.assertRaises(ValueError):subject.render_special_character_response(self.decode(self.fixture(mode=3))[0])
+
     def test_render_response_keeps_default_and_line_versions_explicit(self):
         point=self.decode(self.fixture())[0]
         response=subject.render_character_response(point)

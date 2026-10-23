@@ -834,6 +834,8 @@ void main() {
             eyeProfile.highlight.rgb,eyeProfile.scattering.rgb);
         eyeAlphaMultiplier=characterEyeAlphaMultiplier(baseColor.a,eyeProfile.shape.z);
     }
+    bool characterLightComposition=(nprDiffuse||projectedLighting)&&camera.nprLightingParameters.x>.5;
+    vec4 characterBlend=vec4(0,0,0,1);
     uint sceneLightCount = uint(max(camera.clusterGrid.w, 0.0));
     for (uint lightOffset = 0U; lightOffset < lightRange.y; ++lightOffset) {
         uint lightIndex = clusterIndexData.indices[lightRange.x + lightOffset];
@@ -843,7 +845,20 @@ void main() {
         ClusterLight light = sceneLightData.lights[lightIndex];
         uint receiverBit=sceneCharacter||nprDiffuse?2U:1U;
         if((uint(light.boxParameters.w)&receiverBit)==0U)continue;
-        if(light.characterResponse.x==2.0||light.characterResponse.x==3.0)continue;
+        bool colorBlend=light.characterResponse.x==2.0||light.characterResponse.x==3.0;
+        bool screenRim=light.characterResponse.x==4.0,specularOnly=light.characterResponse.x==5.0;
+        if(colorBlend) {
+            if(characterLightComposition) {
+                SceneLightSample blendSample=sampleSceneLight(light,worldPosition,light.characterResponse.x==3.0);
+                if(blendSample.attenuation>.0001) {
+                    float weight=characterColorBlendWeight(blendSample.attenuation,dot(geometricNormal,blendSample.direction),light.characterResponse.yz);
+                    characterBlend.rgb=mix(characterBlend.rgb,light.colorIntensity.rgb*light.colorIntensity.w,weight);
+                    characterBlend.a*=1.0-weight;
+                }
+            }
+            continue;
+        }
+        if((screenRim||specularOnly)&&(!characterLightComposition||material.alphaMode==2))continue;
         SceneLightSample sampled=sampleSceneLight(light,worldPosition,false);
         vec3 toLight=sampled.incoming,pointDirection=sampled.direction;
         float distanceSquared=sampled.distanceSquared,attenuation=sampled.attenuation;
@@ -853,6 +868,25 @@ void main() {
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
+        if(screenRim) {
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+            if(!(qaEffectMode==4&&qaEffectDisabled)&&attenuation>.0001) {
+                vec2 screenNormal=vec2(dot(shadedNormal,camera.cameraRight.xyz),-dot(shadedNormal,camera.cameraUp.xyz));
+                float normalSquared=dot(screenNormal,screenNormal);
+                screenNormal=normalSquared>1e-12?screenNormal*inversesqrt(normalSquared):vec2(0);
+                vec2 extent=vec2(textureSize(overlaySceneDepth,0));
+                vec2 offset=screenNormal*vec2(extent.y/extent.x,1.0)*(.006*light.characterResponse.y);
+                vec2 halfPixel=.5/extent;
+                vec2 depthUv=clamp(gl_FragCoord.xy/extent+offset,halfPixel,1.0-halfPixel);
+                float sceneDepth=textureLod(overlaySceneDepth,depthUv,0.0).r;
+                float surfaceDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
+                vec3 radial=worldPosition-instanceFaceFrame[3].xyz;radial.y=1.0/16384.0;radial=normalize(radial);
+                sceneRim+=radiance*characterScreenRimResponse(baseColor.rgb,light.characterResponse.z,shadedNormal,
+                    pointDirection,camera.cameraForward.xyz,radial,sceneDepth,surfaceDepth);
+            }
+#endif
+            continue;
+        }
         bool characterLight=light.characterResponse.x==1.0&&(sceneCharacter||nprDiffuse);
         if(characterLight&&light.characterResponse.w>0.0) {
             LineLightGeometry line=lineLightGeometry(toLight,light.directionOuter.xyz,light.characterResponse.w);
@@ -861,6 +895,7 @@ void main() {
         }
         vec3 characterRadiance=characterLight?characterLocalLightRadiance(radiance,
             dot(localLightingNormal,pointDirection),light.characterResponse.yz,characterSceneVisibility):radiance;
+        if(!specularOnly) {
         if(eyeRadial&&camera.clusterLighting.x>.5) {
             // This host adapter is independent from the unbound native NPR globals.
             vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,pointDirection)*.5+.5,.5),0.0);
@@ -912,6 +947,7 @@ void main() {
             clusteredDiffuse+=contribution;
             if(float(lightIndex)==camera.nprLightingParameters.y)sceneMainDiffuse=contribution;
         }
+        }
         vec3 pointHalfDirection = normalize(pointDirection + viewDirection);
         float pointSpecular = pow(
             max(dot(shadedNormal, pointHalfDirection), 0.0), specularPower);
@@ -921,7 +957,7 @@ void main() {
             : f0 * pointSpecular * pointDiffuse * mix(0.7, 0.12, roughness);
         clusteredSpecular += pointResponse * radiance * light.boxParameters.z;
         if(sceneCharacter && hairActive>0.0 && !(qaEffectMode==3 && qaEffectDisabled)) {
-            vec3 hairRadiance=characterLight?characterRadiance*pointDiffuse*light.boxParameters.z:radiance;
+            vec3 hairRadiance=(characterLight||specularOnly)?characterRadiance*pointDiffuse*light.boxParameters.z:radiance;
             if(projectedHair) {
                 CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,pointDirection,light.coneType.y>1.5);
                 if(projectedLighting&&float(lightIndex)==camera.nprLightingParameters.y) {
@@ -947,7 +983,7 @@ void main() {
                 float width=float(textureSize(AZ_TEX_MATCAP,0).x);
                 hairRamp=textureLod(AZ_TEX_MATCAP,vec2((lobes.x*(width-1)+.5)/width,.5),0).r;
             }
-            vec3 energy=(characterLight?characterRadiance*light.boxParameters.z:radiance)*pointDiffuse*material.hairParameters.y
+            vec3 energy=((characterLight||specularOnly)?characterRadiance*light.boxParameters.z:radiance)*pointDiffuse*material.hairParameters.y
                 *material.featureParameters.y*hairRamp;
             sceneHairPrimary+=mix(baseColor.rgb,vec3(1,.68,.74),.18)
                 *bands.x*mix(.58,1.0,visibility)*.58*energy;
@@ -955,7 +991,7 @@ void main() {
                 *bands.y*mix(.35,.72,visibility)*.22*energy;
             }
         }
-        if(sceneCharacter && !(qaEffectMode==4 && qaEffectDisabled)) {
+        if(sceneCharacter && !specularOnly && !(qaEffectMode==4 && qaEffectDisabled)) {
             sceneRim+=radiance*pow(1.0-normalDotView,3.2)
                 *smoothstep(-.25,.65,dot(shadedNormal,pointDirection))
                 *material.styleParameters.w*.12;
@@ -1254,6 +1290,7 @@ void main() {
             secondaryKkSpecular=sceneHairSecondary;
             rimLighting=sceneRim;
         }
+        if(!sceneCharacter&&nprDiffuse)rimLighting=sceneRim;
         beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular
             + emissive + kkSpecular + secondaryKkSpecular + rimLighting;
         if(overlayMaterial)beautyColor=overlayVisible>.5?baseColor.rgb:vec3(0);
@@ -1401,21 +1438,11 @@ void main() {
         outputAlpha=1.0;
     }
     if(multiplyComposite)beautyColor=baseColor.rgb;
-    if((nprDiffuse||projectedLighting)&&camera.nprLightingParameters.x>.5) {
-        for(uint lightOffset=0U;lightOffset<lightRange.y;++lightOffset) {
-            uint lightIndex=clusterIndexData.indices[lightRange.x+lightOffset];
-            if(lightIndex>=sceneLightCount)continue;
-            ClusterLight light=sceneLightData.lights[lightIndex];
-            if((light.characterResponse.x!=2.0&&light.characterResponse.x!=3.0)||(uint(light.boxParameters.w)&2U)==0U)continue;
-            SceneLightSample sampled=sampleSceneLight(light,worldPosition,light.characterResponse.x==3.0);
-            if(sampled.attenuation<=.0001)continue;
-            float weight=characterColorBlendWeight(sampled.attenuation,dot(geometricNormal,sampled.direction),light.characterResponse.yz);
-            vec3 target=light.colorIntensity.rgb*light.colorIntensity.w;
-            beautyColor=mix(beautyColor,target,weight);
-            directDiffuse=mix(directDiffuse,target,weight);
-            ambientDiffuse*=1.0-weight;directSpecular*=1.0-weight;ambientSpecular*=1.0-weight;
-            kkSpecular*=1.0-weight;secondaryKkSpecular*=1.0-weight;rimLighting*=1.0-weight;emissive*=1.0-weight;
-        }
+    if(characterBlend.a<1.0) {
+        beautyColor=beautyColor*characterBlend.a+characterBlend.rgb;
+        directDiffuse=directDiffuse*characterBlend.a+characterBlend.rgb;
+        ambientDiffuse*=characterBlend.a;directSpecular*=characterBlend.a;ambientSpecular*=characterBlend.a;
+        kkSpecular*=characterBlend.a;secondaryKkSpecular*=characterBlend.a;rimLighting*=characterBlend.a;emissive*=characterBlend.a;
     }
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {

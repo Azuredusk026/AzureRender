@@ -1,6 +1,17 @@
 #ifndef AZURE_LIGHT_ATTENUATION
 #define AZURE_LIGHT_ATTENUATION
 #define AZURE_LINE_LIGHT_GEOMETRY 1
+#define AZURE_CHARACTER_SCREEN_RIM 1
+vec3 characterScreenRimResponse(vec3 base,float tint,vec3 normal,vec3 light,vec3 cameraAxis,
+    vec3 radial,float sceneDepth,float surfaceDepth) {
+    vec3 planar=light-cameraAxis*dot(light,cameraAxis);
+    float squared=dot(planar,planar);
+    planar=squared>1e-12?planar*inversesqrt(squared):vec3(0);
+    float facing=clamp(dot(normal,planar),0.0,1.0);
+    float depth=clamp((sceneDepth-surfaceDepth-.1)*10.0,0.0,1.0);
+    float visibility=clamp(dot(radial,light)+1.0,0.0,1.0);
+    return (.5+tint*(base*.96-.5))*(depth*depth*(3.0-2.0*depth)*visibility*facing);
+}
 float characterColorBlendWeight(float attenuation,float normalDotLight,vec2 weights) {
     float facing=clamp(normalDotLight+.5,0.0,1.0);
     float smoothFacing=facing*facing*(3.0-2.0*facing);

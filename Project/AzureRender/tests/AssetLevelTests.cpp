@@ -142,6 +142,11 @@ int main() {
   auto blendLevel=Level::parse(characterDocument,db);blendLevel.save(root/"assets/blend-light.azurelevel");
   const auto blendLight=Level::load(root/"assets/blend-light.azurelevel",db).scene.lights[0].shape.characterResponse;
   check(blendLight.isColorBlend()&&!blendLight.projectedDistance&&blendLight.strength==.7F&&blendLight.order==8);
+  characterDocument["lights"][0]["shape"]["characterResponse"]={{"schemaVersion",4},{"composition","screen-rim"},
+      {"offsetScale",.4F},{"surfaceTint",.8F}};
+  auto rimLevel=Level::parse(characterDocument,db);rimLevel.save(root/"assets/rim-light.azurelevel");
+  const auto rimLight=Level::load(root/"assets/rim-light.azurelevel",db).scene.lights[0].shape.characterResponse;
+  check(rimLight.isCharacterOnly()&&rimLight.rimOffsetScale==.4F&&rimLight.rimSurfaceTint==.8F);
   check(!nlohmann::json::object().get<LightShape>().influenceBox.enabled);
   check(nlohmann::json::object().get<LightShape>().specularScale==1.F);
   const auto responseShape=nlohmann::json{{"specularScale",.195F}}.get<LightShape>();

@@ -37,7 +37,8 @@ def color_response(base,ramp,visibility,view_alpha,scale,brightness,sat):
 
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
-    names=('direct','ambient','dim-visibility','diffuse-scale','kk','kk-fixed','kk-zero-ambient','kk-disabled','local-kk','extra-kk','no-main','direct-fixed','disabled-lighting','absent-input','local-response-kk','local-response-zero-kk','local-line-kk','local-line-kk-fixed')
+    names=('direct','ambient','dim-visibility','diffuse-scale','kk','kk-fixed','kk-zero-ambient','kk-disabled','local-kk','extra-kk','no-main','direct-fixed','disabled-lighting','absent-input','local-response-kk','local-response-zero-kk','local-line-kk','local-line-kk-fixed',
+        'local-specular-kk','local-specular-zero-kk','local-specular-kk-fixed','local-specular-diffuse')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]}
@@ -75,6 +76,10 @@ def run(player,output,selected=None,expected_validation=None):
                     characterResponse={'schemaVersion':2,'diffuseFloor':.25,'compression':0,'linearLength':4})
             if name=='extra-kk':
                 light=copy.deepcopy(level['lights'][0]);light.update(id='extra',color=[.1,.2,.3],intensity=.2);level['lights'].append(light)
+            if name.startswith('local-specular-'):
+                level['lights'][0].update(intensity=8)
+                level['lights'][0]['shape'].update(specularScale=0 if 'zero' in name else 2,
+                    characterResponse={'schemaVersion':4,'composition':'specular-only'})
             level_path.write_text(json.dumps(level),encoding='utf-8')
             isolation='hair-kk' if 'kk' in name or name=='no-main' else 'ambient' if name=='ambient' else 'direct-diffuse'
             command=[str(player.resolve()),'--project',str(project),'--width','128','--height','128','--capture-dir',str(folder/'frames'),
@@ -121,16 +126,19 @@ def run(player,output,selected=None,expected_validation=None):
                         q=np.dot(delta,delta)/100;incident=np.array([.2,.4,.6])*8*factor*max(1-q*q,0)**2
                         incident*=.25+np.clip(direction[2]+.5,0,1)*.75
                         expected=np.asarray(primary)*incident*max(direction[2],0)*2*3
+                    if name.startswith('local-specular-'):
+                        delta=np.array([0,.16,4])-sample['worldPoint'];cosine=delta[2]/np.linalg.norm(delta)
+                        expected*=16*cosine*(0 if 'zero' in name else 2)
                     if name=='extra-kk':expected+=raw*np.array([.1,.2,.3])*.2*3
                 else:expected=response*(ambient if isolation=='ambient' else direct)*(.5 if name=='diffuse-scale' else 1)
                 if name in ('disabled-lighting','absent-input'):expected=hair.linear(hair.CONTROL[:3])*.96*np.array([.2,.4,.6])*.5*ramp[:3]
                 wanted.append(expected)
             maximum=float(np.abs(np.asarray(measured)-wanted).max())
-            if name=='local-response-kk' or name.startswith('local-line-'):assert np.max(wanted)>.015,'KK positive control must exceed quantization and comparison budget'
+            if name=='local-response-kk' or name.startswith('local-line-') or name in ('local-specular-kk','local-specular-kk-fixed'):assert np.max(wanted)>.015,'KK positive control must exceed quantization and comparison budget'
             report['captures'].append({'name':name,'maximumLinearError':maximum,'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),
                 'validationEnabled':validation,'measured':measured[0].tolist(),'expected':np.asarray(wanted[0]).tolist()})
             assert maximum<=.008,(name,maximum,measured[0],wanted[0])
-        for a,b in (('direct','direct-fixed'),('kk','kk-fixed'),('local-line-kk','local-line-kk-fixed')):
+        for a,b in (('direct','direct-fixed'),('kk','kk-fixed'),('local-line-kk','local-line-kk-fixed'),('local-specular-kk','local-specular-kk-fixed')):
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b])
         if 'disabled-lighting' in frames and 'absent-input' in frames:assert np.array_equal(frames['disabled-lighting'],frames['absent-input'])
         report['status']='passed'

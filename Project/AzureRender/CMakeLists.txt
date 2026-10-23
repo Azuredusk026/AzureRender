@@ -2083,6 +2083,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.CharacterColorBlendGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_color_blend_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CharacterColorBlendGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureRender.CharacterScreenRimGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.CharacterScreenRimGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureRender.ClusteredLightProjectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_local_light_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --case upper-light --case lower-light
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

@@ -76,6 +76,8 @@ public:
             const auto& response=light.shape.characterResponse;
             value.characterResponse={response.present?1.F:0.F,response.diffuseFloor,response.compression,response.linearLength};
             if(response.isColorBlend())value.characterResponse={response.projectedDistance?3.F:2.F,response.strength,response.facingWeight,static_cast<float>(response.order)};
+            if(response.present&&response.schemaVersion==4)value.characterResponse={
+                response.specialMode==LightShape::CharacterResponse::SpecialMode::ScreenRim?4.F:5.F,response.rimOffsetScale,response.rimSurfaceTint,0};
             packed.push_back(value);
         }
         return packed;

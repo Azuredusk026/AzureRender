@@ -30,6 +30,8 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 投影方向、真实点光及主场景影响见[聚簇验证](../acceptance/nr/clustered-light-projection.md)。
 线形发射、方向积分及实际灯二见[线形验证](../acceptance/nr/character-line-light.md)。
 有序混合、实际权重及最终像素见[颜色混合](../acceptance/nr/character-color-blend.md)。
+屏幕边缘及镜面消费者见[运行验证](../acceptance/nr/character-screen-light-modes.md)。
+完整九灯候选的图像误差仍待修复，按 C16-R1 继续定位。
 
 环形多层高光与距离描边保持完整原生验收待项。
 最终目标为完成 NR0 至 NR12 的全部适用门禁。

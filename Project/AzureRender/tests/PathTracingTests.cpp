@@ -64,6 +64,15 @@ int main(){try{
  scene.lights.back().shape.characterResponse={};
  require(tracing::sceneFingerprint(scene,{})!=withBlend,"Composition activation must invalidate photon history");
  scene.lights.pop_back();require(tracing::sceneFingerprint(scene,{})==beforeBlend,"Removing a modifier restores the physical scene fingerprint");
+ modifier.shape.characterResponse={};modifier.shape.characterResponse.present=true;modifier.shape.characterResponse.schemaVersion=4;
+ modifier.shape.characterResponse.specialMode=LightShape::CharacterResponse::SpecialMode::ScreenRim;
+ scene.lights.push_back(modifier);
+ require(tracing::buildGeometry(scene,meshes,{}).lights.size()==physicalLights,"Screen rim must not emit physical photons");
+ scene.lights.back().shape.characterResponse.specialMode=LightShape::CharacterResponse::SpecialMode::SpecularOnly;
+ require(tracing::buildGeometry(scene,meshes,{}).lights.size()==physicalLights,"Character-only specular light must not emit physical photons");
+ const auto specialFingerprint=tracing::sceneFingerprint(scene,{});scene.lights.back().shape.characterResponse={};
+ require(tracing::sceneFingerprint(scene,{})!=specialFingerprint,"Special composition activation must invalidate physical history");
+ scene.lights.pop_back();
  scene.nodes[1].scale={-1,1,1};auto mirrored=tracing::buildGeometry(scene,meshes,{});
  require(mirrored.triangles[0].e1[0]*mirrored.triangles[0].e2[1]-mirrored.triangles[0].e1[1]*mirrored.triangles[0].e2[0]>0,"Mirrored instances preserve front-face winding");scene.nodes[1].scale={1,1,1};
  auto fingerprint=tracing::sceneFingerprint(scene,{});scene.nodes[1].visible=false;require(tracing::sceneFingerprint(scene,{})!=fingerprint,"Visibility invalidates accumulation");require(tracing::buildGeometry(scene,meshes,{}).triangles.empty(),"Hidden geometry omitted");

@@ -155,6 +155,40 @@ def render_color_blend(record):
     return shape
 
 
+def screen_rim_response(color,attenuation,base,normal,light,camera_axis,radial,depth,surface_depth,*,surface_tint):
+    """Captured opaque screen rim: linear depth gate and projected local-light direction."""
+    for vector in (color,base,normal,light,camera_axis,radial):
+        if len(vector)!=3:raise ValueError('Screen rim vectors require three coordinates')
+        for value in vector:_finite(value,-65536,65536,'screen rim vector')
+    for value,name in ((attenuation,'rim attenuation'),(surface_tint,'rim tint')):_finite(value,0,1,name)
+    for value in (depth,surface_depth):_finite(value,0,1e9,'linear depth')
+    dot=lambda a,b:sum(x*y for x,y in zip(a,b))
+    for vector in (normal,light,camera_axis,radial):
+        if abs(dot(vector,vector)-1)>1e-4:raise ValueError('Screen rim directions must be normalized')
+    planar=[a-b*dot(light,camera_axis) for a,b in zip(light,camera_axis)];length=math.sqrt(dot(planar,planar))
+    planar=[v/length for v in planar] if length>1e-6 else [0,0,0]
+    t=min(max((depth-surface_depth-.1)*10,0),1);window=t*t*(3-2*t)
+    visibility=min(max(dot(radial,light)+1,0),1);facing=min(max(dot(normal,planar),0),1)
+    return [c*attenuation*window*visibility*facing*(.5+surface_tint*(b*.96-.5)) for c,b in zip(color,base)]
+
+
+def render_special_character_response(record):
+    """Select only confirmed screen-rim or specular-only source modes."""
+    if not isinstance(record,dict) or record.get('mode') not in (2,3) or record.get('linearLength',0)!=0:
+        raise ValueError('A confirmed punctual special character light is required')
+    if record['mode']==2:return dict(schemaVersion=4,composition='specular-only')
+    words=record.get('rawShadowWords')
+    if not isinstance(words,list) or len(words)!=2:raise ValueError('Screen rim requires explicit shadow selection words')
+    planar=record['shape']['type']=='spot' or record.get('flags',0)&2
+    if planar:
+        index=struct.unpack('<f',struct.pack('<I',words[1]))[0]
+        if not math.isfinite(index) or int(index)>=0:raise ValueError('Screen rim shadow atlas requires an independent consumer')
+    elif any(((word>>shift)&1023)!=1023 for word in words for shift in (0,10,20)):
+        raise ValueError('Screen rim cube-shadow atlas requires an independent consumer')
+    p=record['response']['parameters']
+    return dict(schemaVersion=4,composition='screen-rim',offsetScale=_finite(p[0],0,16,'rim offset'),surfaceTint=_finite(p[1],0,1,'rim tint'))
+
+
 def render_character_response(record):
     """Map a decoded default-mode record to the supported public color-response version."""
     if not isinstance(record,dict) or record.get('mode')!=0 or not isinstance(record.get('response'),dict):

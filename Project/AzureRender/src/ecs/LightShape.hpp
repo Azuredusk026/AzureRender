@@ -30,18 +30,32 @@ struct LightShape {
         float strength=0,facingWeight=0;
         bool projectedDistance=false;
         unsigned order=0;
+        enum class SpecialMode { None,ScreenRim,SpecularOnly };
+        SpecialMode specialMode=SpecialMode::None;
+        float rimOffsetScale=0,rimSurfaceTint=0;
         bool isColorBlend() const noexcept { return present&&schemaVersion==3; }
         bool isProjectedColorBlend() const noexcept { return isColorBlend()&&projectedDistance; }
+        bool isCharacterOnly() const noexcept { return present&&(schemaVersion==3||schemaVersion==4); }
         void validate() const {
-            if((schemaVersion<1||schemaVersion>3)||!std::isfinite(linearLength)||linearLength<0||linearLength>65536
+            if((schemaVersion<1||schemaVersion>4)||!std::isfinite(linearLength)||linearLength<0||linearLength>65536
                 ||(schemaVersion==1&&linearLength!=0))throw std::invalid_argument("Invalid character line-light version or length");
             for(float value:{diffuseFloor,compression})if(!std::isfinite(value)||value<0||value>1)
                 throw std::invalid_argument("Character light response values must be in [0,1]");
             for(float value:{strength,facingWeight})if(!std::isfinite(value)||value<0||value>1)
                 throw std::invalid_argument("Color blend strength and facing weight must be in [0,1]");
-            if(order>65535||(schemaVersion==3&&(diffuseFloor!=0||compression!=0||linearLength!=0))
+            if(order>65535||(schemaVersion>=3&&(diffuseFloor!=0||compression!=0||linearLength!=0))
                 ||(schemaVersion!=3&&(strength!=0||facingWeight!=0||projectedDistance||order!=0)))
                 throw std::invalid_argument("Character response fields do not match their version");
+            if(!std::isfinite(rimOffsetScale)||rimOffsetScale<0||rimOffsetScale>16
+                ||!std::isfinite(rimSurfaceTint)||rimSurfaceTint<0||rimSurfaceTint>1)
+                throw std::invalid_argument("Invalid screen rim offset or surface tint");
+            if(schemaVersion==4) {
+                if(specialMode!=SpecialMode::ScreenRim&&specialMode!=SpecialMode::SpecularOnly)
+                    throw std::invalid_argument("A special character light requires a recognized mode");
+                if(specialMode==SpecialMode::SpecularOnly&&(rimOffsetScale!=0||rimSurfaceTint!=0))
+                    throw std::invalid_argument("Specular-only light does not accept screen rim fields");
+            } else if(specialMode!=SpecialMode::None||rimOffsetScale!=0||rimSurfaceTint!=0)
+                throw std::invalid_argument("Screen rim fields require character response version four");
         }
     } characterResponse;
 

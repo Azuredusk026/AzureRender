@@ -2279,6 +2279,14 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
     bool sampled=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
         snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
+    if(snapshot.settings.sceneLightingEnabled&&snapshot.settings.nprLighting.enabled&&!(qaEffectMode_==4&&!qaEffectEnabled_)) {
+        const auto& lights=frameLights_.lights();
+        sampled|=std::any_of(lights.begin(),lights.end(),[](const RenderLight& light){
+            const auto& response=light.shape.characterResponse;
+            return response.present&&response.specialMode==LightShape::CharacterResponse::SpecialMode::ScreenRim
+                &&light.shape.receivers.characters&&light.intensity>0;
+        });
+    }
     for(const auto& span:snapshot.visibleSpans){
         const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
         for(const auto& material:mesh.materials)
@@ -3367,7 +3375,7 @@ void CharacterSceneRenderer::updateClusteredLighting(
         }
         const Vector3 viewPosition = transformPosition(view, source.position);
         const float depth = -viewPosition[2];
-        if (source.shape.type!=LightKind::Directional
+        if (source.shape.type!=LightKind::Directional&&!source.shape.characterResponse.isProjectedColorBlend()
             && (depth + source.radius < renderSettings_->cameraNear || source.radius <= 0.0F)) {
             continue;
         }

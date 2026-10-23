@@ -50,6 +50,7 @@
 默认加法、屏幕边缘和替换模式分别验收。
 实际灯二的方向及积分见[线形灯验证](character-line-light.md)。
 实际灯八的轴向窗口与顺序见[混合验证](character-color-blend.md)。
+模式二、三的消费及原生图像待项见[边缘与镜面验证](character-screen-light-modes.md)。
 
 七项解码检查及七项场景常量检查通过。
 检查覆盖模式位、非法输入、包围盒及独立公式。

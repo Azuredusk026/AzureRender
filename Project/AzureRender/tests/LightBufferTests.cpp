@@ -30,6 +30,22 @@ int main() { try {
         if(!rejected)throw std::runtime_error("Invalid blend fields must be rejected: "+field);
     }
     const Json character={{"schemaVersion",1},{"diffuseFloor",.25},{"compression",.8}};
+    const Json rim={{"schemaVersion",4},{"composition","screen-rim"},{"offsetScale",.4F},{"surfaceTint",.8F}};
+    auto rimShape=Json{{"type","point"},{"characterResponse",rim}}.get<azurerender::LightShape>();
+    if(Json(rimShape)["characterResponse"]!=rim)throw std::runtime_error("Screen rim fields must survive public serialization");
+    azurerender::RenderLight special;special.shape=rimShape;azurerender::LightBuffer specialBuffer;specialBuffer.setLights({special});
+    if(specialBuffer.gpuData()[0].characterResponse!=std::array<float,4>{4,.4F,.8F,0})
+        throw std::runtime_error("Screen rim must preserve its response mode and parameters in 144 bytes");
+    const Json specularOnly={{"schemaVersion",4},{"composition","specular-only"}};
+    special.shape=Json{{"characterResponse",specularOnly}}.get<azurerender::LightShape>();specialBuffer.setLights({special});
+    if(specialBuffer.gpuData()[0].characterResponse!=std::array<float,4>{5,0,0,0})
+        throw std::runtime_error("Specular-only light must retain its distinct GPU consumer");
+    for(const auto& [field,bad]:std::vector<std::pair<std::string,Json>>{{"offsetScale",-1},{"offsetScale",16.00000001},
+        {"offsetScale",true},{"surfaceTint",1.00000001},{"surfaceTint",nullptr},{"composition","rim"},{"extra",0}}) {
+        auto invalid=rim;invalid[field]=bad;bool rejected=false;
+        try{(void)invalid.get<azurerender::LightShape::CharacterResponse>();}catch(const std::exception&){rejected=true;}
+        if(!rejected)throw std::runtime_error("Invalid screen rim parameters must be rejected: "+field);
+    }
     Json localShape={{"type","point"},{"characterResponse",character}};
     auto local=localShape.get<azurerender::LightShape>();
     if(!Json(local).contains("characterResponse")
