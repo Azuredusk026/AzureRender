@@ -1635,7 +1635,7 @@ void CharacterSceneRenderer::uploadTextureData(
             std::size_t expected=0;unsigned w=width,h=height;for(unsigned level=0;level<requestedMipLevels;++level){expected+=std::size_t(w)*h*4;w=std::max(w/2,1U);h=std::max(h/2,1U);}
             if(pixels.size()!=expected)throw std::invalid_argument("Authored texture mip storage is invalid");filtered.assign(pixels.begin(),pixels.end());
         }else if(requestedMipLevels==1&&pixels.size()>baseBytes)filtered.assign(pixels.begin(),pixels.begin()+baseBytes);
-        else if(requestedMipLevels==0){auto chain=buildTextureMipChain(pixels,width,height,semantic,alphaCutoff);filtered=std::move(chain.pixels);mipLevels=chain.levels;}
+        else if(requestedMipLevels==0){auto chain=buildTextureMipChain(pixels,width,height,semantic,alphaCutoff,!importSettings||importSettings->filter=="linear");filtered=std::move(chain.pixels);mipLevels=chain.levels;}
     }
     bool authoredHalfMips=false;
     if constexpr(sizeof(typename std::decay_t<Pixels>::value_type)==2) {

@@ -141,7 +141,7 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     {
     TimedSection timer{statistics_.mipMs};
     if(!request.mipLevels) {
-        auto chain=buildTextureMipChain(pixels,request.width,request.height,request.semantic,request.alphaCutoff);
+        auto chain=buildTextureMipChain(pixels,request.width,request.height,request.semantic,request.alphaCutoff,request.sampler.filter==VK_FILTER_LINEAR);
         filtered=std::move(chain.pixels);storage=&filtered;
     }else if(request.mipLevels==1&&pixels.size()>baseBytes) {
         filtered.assign(pixels.begin(),pixels.begin()+static_cast<std::size_t>(baseBytes));storage=&filtered;

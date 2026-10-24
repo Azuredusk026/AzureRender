@@ -153,3 +153,8 @@ P8 状态为 Ready，机器批次已收尾。
 相关细节、运动误差及完整响应共同验收。
 裁剪候选和服饰边缘仍有专项失败。
 范围见[混合覆盖验证](acceptance/nr/blend-temporal-coverage.md)。
+
+裁剪纹理的自动层级按实际缩小过滤器估计覆盖。
+可辨层级的 CPU、GPU 和最近邻兼容检查通过。
+连续运动及组合采样仍有专项待验项。
+结果见[缩小覆盖验证](acceptance/nr/alpha-mip-footprint.md)。

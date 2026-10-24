@@ -1,0 +1,501 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "cefc31f",
+  "run": "build/runs/20261024-133121-alpha-mip-footprint-008937",
+  "scope": "Generated RGBA8 cutout mips at resolvable levels; temporal convergence, fractional LOD and anisotropic footprints remain separate.",
+  "rendererApiVersion": 4,
+  "materialBytes": 192,
+  "textureSlots": 9,
+  "temporalTextureBytesPerPixel": 52,
+  "configurations": {
+    "debug": {
+      "cpuChecks": 4,
+      "cpuLogSha256": "3503caec4db0e21b527233934d906bff6c2629ee4ea84c7b248e68571737cbf2",
+      "cpuDetailsSha256": "6f3a73dde4573df2fb14715d5ebab5d9fb756536d691ce86b4babeb774b23788",
+      "buildLogSha256": "2f006f087edf92ea930032bf72b14bcca7563dabf9e423717938c18712321bb0",
+      "playerSha256": "8cceadebdd494f6854165cb44e62021ab95e519bc533f99120d2622ad4d09068",
+      "editorSha256": "3064f5fb29b1aa9c3fbb46211d9be8222d877f5faac430f750614aecfb193cb9",
+      "gpuCoverage": [
+        {
+          "name": "opaque",
+          "withinLevelFilter": "linear",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 1.0,
+          "targetCoverage": 1.0,
+          "relativeError": 0.0,
+          "imageSha256": "147c3b57041b5c818ad56b114fe0f5e327b8e7472ffe6653fe10e5738cb77174",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "cc69bca067eb232749533befc6da9871e8cb5e4d5062378119525b06a4be4ee3",
+          "metadataSha256": "bf85f6c1ea8f702aaca94c7f90dfc9c21a68f74b37b8642577decedc705a7f5e",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        },
+        {
+          "name": "slant-2",
+          "withinLevelFilter": "linear",
+          "mip": 2,
+          "phaseTiles": 64,
+          "coverage": 0.28143310546875,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.0006510416666667407,
+          "imageSha256": "8c7c00d62a5e1258a8540cda224ddc9d4e4295d410e9ce98e36fceb0afc1ee2a",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "daff1ba8be43c4761a1ab6eb03a8a2711e1f3707fda939cd991d447c0ab9af73",
+          "metadataSha256": "0abb2788d3f5654ca13b55fe5e352a13526b45626215d71b1d394767977e3cdd",
+          "levelSha256": "b63d17351648ce7b38b02cf0b7b5f774d7c3e7cf471668eb4e4db61a7fe494c8"
+        },
+        {
+          "name": "slant-3",
+          "withinLevelFilter": "linear",
+          "mip": 3,
+          "phaseTiles": 64,
+          "coverage": 0.28082275390625,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.0015190972222222099,
+          "imageSha256": "1d5a47831994f4971c7deaa934a1f3bc35a3ed2a0191af610ac2f73da607865b",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "35e40684de49844a741b091dab7549cf69cb7955fc3fc1a6fb6bead550d46815",
+          "metadataSha256": "c3a12827bbb0c6f6eb1731082203a7410e571e13671b0336a4d865aa0c835470",
+          "levelSha256": "6412cd09ea07fdc68a7c93526451ff7d9fc924849e44fe0d3fb8e9acde8326fb"
+        },
+        {
+          "name": "slant-4",
+          "withinLevelFilter": "linear",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 0.2822265625,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.003472222222222321,
+          "imageSha256": "f7923abcb21a8389dbaf88e5ce2e3cd04092e4afc99297c4f96071fa4ddae63d",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "8a83c295ffc04efafe7df69f53482351e6ccbfb36ac7dac3be7350e71081241a",
+          "metadataSha256": "d1bf69fc2e13ca0313747dfb904c606583dffdb34fcf4dde6529d506d0bee7a2",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        },
+        {
+          "name": "ring-2",
+          "withinLevelFilter": "linear",
+          "mip": 2,
+          "phaseTiles": 64,
+          "coverage": 0.061687469482421875,
+          "targetCoverage": 0.061614990234375,
+          "relativeError": 0.0011763249133234233,
+          "imageSha256": "c9bdb6e8e6de60a4dc8e6155c4011f0e22af255db9e922e67a83198a94840ae1",
+          "sourceImageSha256": "e51f77b0cbfbe2bb0f5da54f2258305b8d8ec56db9ccebedb16f3a99d6640a88",
+          "modelSha256": "daff1ba8be43c4761a1ab6eb03a8a2711e1f3707fda939cd991d447c0ab9af73",
+          "metadataSha256": "8c9c992518e5d742be0fae73c0bd0dcd29e5caf9c4216edd3d32894bc8cffcb0",
+          "levelSha256": "b63d17351648ce7b38b02cf0b7b5f774d7c3e7cf471668eb4e4db61a7fe494c8"
+        },
+        {
+          "name": "ring-3",
+          "withinLevelFilter": "linear",
+          "mip": 3,
+          "phaseTiles": 64,
+          "coverage": 0.0611419677734375,
+          "targetCoverage": 0.061614990234375,
+          "relativeError": 0.00767706785537392,
+          "imageSha256": "b66b61b36cd6006d3f2b1149393d893c44c6d4a56b21b5a2f98b000048a646db",
+          "sourceImageSha256": "e51f77b0cbfbe2bb0f5da54f2258305b8d8ec56db9ccebedb16f3a99d6640a88",
+          "modelSha256": "35e40684de49844a741b091dab7549cf69cb7955fc3fc1a6fb6bead550d46815",
+          "metadataSha256": "60e55acb16d5e11b50ddb895ab5051f8b8222de815f6d9bbff5b5086f4d07d42",
+          "levelSha256": "6412cd09ea07fdc68a7c93526451ff7d9fc924849e44fe0d3fb8e9acde8326fb"
+        },
+        {
+          "name": "ring-4",
+          "withinLevelFilter": "linear",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 0.062255859375,
+          "targetCoverage": 0.061614990234375,
+          "relativeError": 0.010401188707280795,
+          "imageSha256": "87606b3baf0904c3464d6a0fa664958a413bbbbc3ed9413001f99e8a8d1e0923",
+          "sourceImageSha256": "e51f77b0cbfbe2bb0f5da54f2258305b8d8ec56db9ccebedb16f3a99d6640a88",
+          "modelSha256": "8a83c295ffc04efafe7df69f53482351e6ccbfb36ac7dac3be7350e71081241a",
+          "metadataSha256": "0aacea5b6b7b201d43521f361c818e1e02410a51bea6c20c24b1a1e71aacf37d",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        },
+        {
+          "name": "slant-4-fixed",
+          "withinLevelFilter": "linear",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 0.2822265625,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.003472222222222321,
+          "imageSha256": "f7923abcb21a8389dbaf88e5ce2e3cd04092e4afc99297c4f96071fa4ddae63d",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "8a83c295ffc04efafe7df69f53482351e6ccbfb36ac7dac3be7350e71081241a",
+          "metadataSha256": "043d383e3d837729907a0af7a9b14156d632fb1d21e11f3679efd4a18962af2f",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        },
+        {
+          "name": "slant-4-nearest",
+          "withinLevelFilter": "nearest",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 0.28125,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.0,
+          "imageSha256": "55031913b6ab00e2cd8806f50a3d61c3c4f3e5942a61de6983c9dda67633d7be",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "8a83c295ffc04efafe7df69f53482351e6ccbfb36ac7dac3be7350e71081241a",
+          "metadataSha256": "cced513edcc45a6ea99dbd1def1d650151ee5c669b03263e8358fcbf62110153",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        }
+      ],
+      "gpuReceiptSha256": "cd89fd8b55f1afa43e21c922b57a6d0dd3f9a1ed5fc62d929dd587b1f47da1e4",
+      "authoredCases": 6,
+      "authoredMaximumByteError": 0.0,
+      "authoredReceiptSha256": "30445ce41e8d9bd4fcf088e41ed470e89e64e253710b8f8b2232750457db5a4a",
+      "outlineCases": 33,
+      "outlineReceiptSha256": "1f26a532080ee1fc71fed104a9fa0a4153745241a2f41da4ebce086869798dfd",
+      "nativeFrames": 32,
+      "nativeReferenceByteDifference": 0,
+      "nativeReceiptSha256": "bf58112f96310741041dfd22fd8526fdfd9ad3b55355ad4550a23c8173117ff1"
+    },
+    "release": {
+      "cpuChecks": 4,
+      "cpuLogSha256": "07c8b24ca20cb5eea8f77ae7c5372a63385d769c54f542f5618c1cd08ab2fd1d",
+      "cpuDetailsSha256": "f5440aea826472ed79825d8c24be38ec483a004bf5676f6446df115fcc774d5a",
+      "buildLogSha256": "de63fec58e91162ab1b5d7dd42b614912e7413948ff9c2a6f5572b84a9428007",
+      "playerSha256": "dbbfc64fc667ab7b6919a2317e83c294b62d723fd3aafd213fe6e43a0375e595",
+      "editorSha256": "7f86bec8f1683222c0447f6d37cf9f14afbd508adef43875b34af906bb54955b",
+      "gpuCoverage": [
+        {
+          "name": "opaque",
+          "withinLevelFilter": "linear",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 1.0,
+          "targetCoverage": 1.0,
+          "relativeError": 0.0,
+          "imageSha256": "147c3b57041b5c818ad56b114fe0f5e327b8e7472ffe6653fe10e5738cb77174",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "cc69bca067eb232749533befc6da9871e8cb5e4d5062378119525b06a4be4ee3",
+          "metadataSha256": "72e1f579237a59ef6f3e5ace7ab14c5c11ecc63a719a3026bc4f2b8c3933bc68",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        },
+        {
+          "name": "slant-2",
+          "withinLevelFilter": "linear",
+          "mip": 2,
+          "phaseTiles": 64,
+          "coverage": 0.28143310546875,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.0006510416666667407,
+          "imageSha256": "8c7c00d62a5e1258a8540cda224ddc9d4e4295d410e9ce98e36fceb0afc1ee2a",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "daff1ba8be43c4761a1ab6eb03a8a2711e1f3707fda939cd991d447c0ab9af73",
+          "metadataSha256": "846dba157460b565bdece0da45db7aac7d8d0660fec18e600a0c45f9b2617fc4",
+          "levelSha256": "b63d17351648ce7b38b02cf0b7b5f774d7c3e7cf471668eb4e4db61a7fe494c8"
+        },
+        {
+          "name": "slant-3",
+          "withinLevelFilter": "linear",
+          "mip": 3,
+          "phaseTiles": 64,
+          "coverage": 0.28082275390625,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.0015190972222222099,
+          "imageSha256": "1d5a47831994f4971c7deaa934a1f3bc35a3ed2a0191af610ac2f73da607865b",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "35e40684de49844a741b091dab7549cf69cb7955fc3fc1a6fb6bead550d46815",
+          "metadataSha256": "3b7f547b129f12da2a55423e8adc1c3ac6f349a09ab250dc12ac2e02da5733c2",
+          "levelSha256": "6412cd09ea07fdc68a7c93526451ff7d9fc924849e44fe0d3fb8e9acde8326fb"
+        },
+        {
+          "name": "slant-4",
+          "withinLevelFilter": "linear",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 0.2822265625,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.003472222222222321,
+          "imageSha256": "f7923abcb21a8389dbaf88e5ce2e3cd04092e4afc99297c4f96071fa4ddae63d",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "8a83c295ffc04efafe7df69f53482351e6ccbfb36ac7dac3be7350e71081241a",
+          "metadataSha256": "9243f922efc210baf44421e55b79e3e3e7c013ffd47ab13999e398395473ca85",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        },
+        {
+          "name": "ring-2",
+          "withinLevelFilter": "linear",
+          "mip": 2,
+          "phaseTiles": 64,
+          "coverage": 0.061687469482421875,
+          "targetCoverage": 0.061614990234375,
+          "relativeError": 0.0011763249133234233,
+          "imageSha256": "c9bdb6e8e6de60a4dc8e6155c4011f0e22af255db9e922e67a83198a94840ae1",
+          "sourceImageSha256": "e51f77b0cbfbe2bb0f5da54f2258305b8d8ec56db9ccebedb16f3a99d6640a88",
+          "modelSha256": "daff1ba8be43c4761a1ab6eb03a8a2711e1f3707fda939cd991d447c0ab9af73",
+          "metadataSha256": "e164064d09faa9fd28b086fdfc5e2d5dec69bce1fa7b8f4a8e1129e6abc0016e",
+          "levelSha256": "b63d17351648ce7b38b02cf0b7b5f774d7c3e7cf471668eb4e4db61a7fe494c8"
+        },
+        {
+          "name": "ring-3",
+          "withinLevelFilter": "linear",
+          "mip": 3,
+          "phaseTiles": 64,
+          "coverage": 0.0611419677734375,
+          "targetCoverage": 0.061614990234375,
+          "relativeError": 0.00767706785537392,
+          "imageSha256": "b66b61b36cd6006d3f2b1149393d893c44c6d4a56b21b5a2f98b000048a646db",
+          "sourceImageSha256": "e51f77b0cbfbe2bb0f5da54f2258305b8d8ec56db9ccebedb16f3a99d6640a88",
+          "modelSha256": "35e40684de49844a741b091dab7549cf69cb7955fc3fc1a6fb6bead550d46815",
+          "metadataSha256": "681d25320c91980d881f802e038bad95888c52e12630fe6497ebc5f122bb2e60",
+          "levelSha256": "6412cd09ea07fdc68a7c93526451ff7d9fc924849e44fe0d3fb8e9acde8326fb"
+        },
+        {
+          "name": "ring-4",
+          "withinLevelFilter": "linear",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 0.062255859375,
+          "targetCoverage": 0.061614990234375,
+          "relativeError": 0.010401188707280795,
+          "imageSha256": "87606b3baf0904c3464d6a0fa664958a413bbbbc3ed9413001f99e8a8d1e0923",
+          "sourceImageSha256": "e51f77b0cbfbe2bb0f5da54f2258305b8d8ec56db9ccebedb16f3a99d6640a88",
+          "modelSha256": "8a83c295ffc04efafe7df69f53482351e6ccbfb36ac7dac3be7350e71081241a",
+          "metadataSha256": "554ae6b21de29b3e21a630e8bb5f5e6a46d9fb6be4e0cc11d207678ec3dbf890",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        },
+        {
+          "name": "slant-4-fixed",
+          "withinLevelFilter": "linear",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 0.2822265625,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.003472222222222321,
+          "imageSha256": "f7923abcb21a8389dbaf88e5ce2e3cd04092e4afc99297c4f96071fa4ddae63d",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "8a83c295ffc04efafe7df69f53482351e6ccbfb36ac7dac3be7350e71081241a",
+          "metadataSha256": "2196846920fddb24c5a28274b4ccf4d2a3097e82fd9a05a205627db6d44eabd6",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        },
+        {
+          "name": "slant-4-nearest",
+          "withinLevelFilter": "nearest",
+          "mip": 4,
+          "phaseTiles": 64,
+          "coverage": 0.28125,
+          "targetCoverage": 0.28125,
+          "relativeError": 0.0,
+          "imageSha256": "55031913b6ab00e2cd8806f50a3d61c3c4f3e5942a61de6983c9dda67633d7be",
+          "sourceImageSha256": "6e857139c1f2ccccdc2ec84b2631424e3614226551695729e93f9ba0cf8ca774",
+          "modelSha256": "8a83c295ffc04efafe7df69f53482351e6ccbfb36ac7dac3be7350e71081241a",
+          "metadataSha256": "3c05ba4227b90b6b912a1e2003ac1c583bc2d71f857d2b841cafc886be99c966",
+          "levelSha256": "5608cba732e675ad366bbf2368d048330093dfda09ad874a807bd1897d6e1356"
+        }
+      ],
+      "gpuReceiptSha256": "9a7226d47b3495fd661fa7e4c93f5e3da46d292108725660a2f820dea68981ff",
+      "authoredCases": 6,
+      "authoredMaximumByteError": 0.0,
+      "authoredReceiptSha256": "9941185f3022efeba6856b37cffe26c8b92d03014880a32c8f62b100f5e3f038",
+      "outlineCases": 33,
+      "outlineReceiptSha256": "545bb526dca4b43374cc60f83a773c452856d81547c47870ea86cc1efa7176f8",
+      "nativeFrames": 32,
+      "nativeReferenceByteDifference": 0,
+      "nativeReceiptSha256": "41bbdb46b588fb589e619d8e513d651de2e8e9c2af14ec7c547ed2cd381c555b"
+    }
+  },
+  "shaderCompatibility": {
+    "count": 85,
+    "referenceSha256": "7c581c86c254d23d52929ffca86a966a6ad7a1d953b9748dfc6c4449fa4cd56b",
+    "referencePath": "build/runs/20261024-123840-alpha-clothing-motion-6cc1c9/frozen-shaders.json",
+    "maximumFingerprintDifference": 0
+  },
+  "crossConfigurationCoverageByteDifference": 0,
+  "registeredGpuTestSha256": "8eb5da8982fdfbac364fc21718c15edf618e42a0c11187317a51f0f3b580214e",
+  "sourceBeauty": {
+    "sha256": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+    "rimControls": [
+      {
+        "pixel": [
+          1308,
+          165
+        ],
+        "source": [
+          116,
+          40,
+          43
+        ],
+        "candidate": [
+          116,
+          40,
+          43
+        ],
+        "maximumByteError": 0
+      },
+      {
+        "pixel": [
+          1309,
+          166
+        ],
+        "source": [
+          118,
+          40,
+          43
+        ],
+        "candidate": [
+          118,
+          40,
+          44
+        ],
+        "maximumByteError": 1
+      },
+      {
+        "pixel": [
+          1313,
+          170
+        ],
+        "source": [
+          121,
+          44,
+          47
+        ],
+        "candidate": [
+          122,
+          44,
+          48
+        ],
+        "maximumByteError": 1
+      },
+      {
+        "pixel": [
+          1327,
+          181
+        ],
+        "source": [
+          129,
+          51,
+          52
+        ],
+        "candidate": [
+          129,
+          51,
+          52
+        ],
+        "maximumByteError": 0
+      },
+      {
+        "pixel": [
+          1313,
+          169
+        ],
+        "source": [
+          126,
+          45,
+          49
+        ],
+        "candidate": [
+          126,
+          45,
+          49
+        ],
+        "maximumByteError": 0
+      },
+      {
+        "pixel": [
+          1314,
+          170
+        ],
+        "source": [
+          124,
+          46,
+          49
+        ],
+        "candidate": [
+          125,
+          46,
+          50
+        ],
+        "maximumByteError": 1
+      },
+      {
+        "pixel": [
+          1314,
+          171
+        ],
+        "source": [
+          123,
+          46,
+          49
+        ],
+        "candidate": [
+          124,
+          46,
+          50
+        ],
+        "maximumByteError": 1
+      },
+      {
+        "pixel": [
+          1315,
+          171
+        ],
+        "source": [
+          123,
+          45,
+          49
+        ],
+        "candidate": [
+          123,
+          45,
+          49
+        ],
+        "maximumByteError": 0
+      }
+    ]
+  },
+  "pointCompatibility": {
+    "baseCommit": "cefc31f",
+    "alphaChainFnv64": [
+      5740879283081582922,
+      10050683099083470810
+    ],
+    "referenceHeaderSha256": "5faedb0ed6aff9604e9ff57e44effe5880c195e5a5313387226367c873fbfd63",
+    "referenceLogSha256": "2043e4f815e7bf61fefae69d767919bcae78ac1418443eef49da58394de244b4",
+    "scope": "Exact nearest-sampled alpha chain compatibility; the independent 2-percent area gate applies to the six bilinear probes."
+  },
+  "redEvidence": {
+    "cpuLogSha256": "37f2437dc15cb507bfd04475772aacd6c28fed98b2f9f470433a138a132171b6",
+    "nearestReceiptSha256": "baefd748f4e077130581e07c3d7714682829fa95450374ec46ae94e2221bd313",
+    "nearestRelativeError": 0.5555555555555556
+  },
+  "pendingMotion": {
+    "receiptSha256": "545e63a48e5b2d37f8f7e871c0dab39dc37919655ec3fea737cf6821efaa14b0",
+    "movingEnergyRange": [
+      0.37624155987843755,
+      0.4924155175370677
+    ],
+    "lastEightEnergyRange": [
+      0.369831062264221,
+      0.3893754021739523
+    ],
+    "coherentDetailRange": [
+      -0.24165682441652186,
+      0.15760199112217602
+    ],
+    "errorRatio": 1.0080102722718152,
+    "residualChangeRatio": 0.41832137721776963,
+    "edgeErrorRatio": 1.0856328467449117,
+    "accepted": false
+  },
+  "sourceHashes": {
+    "CMakeLists.txt": "a978e7b40307426106bd7c059a36b2064763d9b5c8c27473594cfb7ebb70550f",
+    "src/assets/TextureMipChain.hpp": "8b52c765316563ebb17bf89a8707e3c1245abf169b74a31ca84202c189fe6817",
+    "src/render/SampledTextureCache.cpp": "e8584adf606f0f925e09b755eba0aa0938f673e83cdeb965a6e1f9d6904a9e27",
+    "src/scenes/CharacterSceneRenderer.cpp": "0557546bc54bc966c720bd39f657deec7448e885c9079c9f120db9c10335a176",
+    "tests/TextureMipCoverageTests.cpp": "a45e14956a6c24f93cf1d0caaf443094b4c6cd36a19b641813031ed7d3d98bcf",
+    "tools/test_alpha_mip_coverage_gpu.py": "fa42f9f11e8dba8fd444217d295b6ef009cefb64650494e1e65824c19cae55bd"
+  },
+  "remaining": [
+    "Fractional mip interpolation and anisotropic coverage",
+    "Cutout temporal energy and correlated detail",
+    "Node fade motion semantics",
+    "Native dynamic character and clothing edges",
+    "NR7-AA5/AA6 and NR0-NR12 joint acceptance"
+  ]
+}
