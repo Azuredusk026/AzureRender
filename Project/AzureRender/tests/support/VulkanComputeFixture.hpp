@@ -28,7 +28,7 @@ public:
     rhi::GpuAllocator allocator;
     std::unique_ptr<rhi::VulkanRhi> backend;
 
-    explicit VulkanComputeFixture(bool graphics=false) {
+    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false) {
         try {
             VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
             application.pApplicationName="AzureRender Compute Contract";application.apiVersion=VK_API_VERSION_1_3;
@@ -63,7 +63,8 @@ public:
             vkGetPhysicalDeviceQueueFamilyProperties(physical,&count,nullptr);
             std::vector<VkQueueFamilyProperties> families(count);vkGetPhysicalDeviceQueueFamilyProperties(physical,&count,families.data());
             bool found=false;
-            for(std::uint32_t index=0;index<count;++index) if((families[index].queueFlags&VK_QUEUE_COMPUTE_BIT)!=0) {
+            for(std::uint32_t index=0;index<count;++index) if((families[index].queueFlags&VK_QUEUE_COMPUTE_BIT)!=0
+                &&(!graphics||(families[index].queueFlags&VK_QUEUE_GRAPHICS_BIT)!=0)) {
                 family=index;timestampBits=families[index].timestampValidBits;found=true;break;
             }
             if(!found || !timestampBits) throw std::runtime_error("Compute queue with timestamps is required");
@@ -72,6 +73,7 @@ public:
             queueInfo.queueFamilyIndex=family;queueInfo.queueCount=1;queueInfo.pQueuePriorities=&priority;
             VkPhysicalDeviceFeatures features{};vkGetPhysicalDeviceFeatures(physical,&features);
             VkPhysicalDeviceFeatures used{};used.shaderStorageImageExtendedFormats=features.shaderStorageImageExtendedFormats;
+            used.sampleRateShading=sampleShading?features.sampleRateShading:VK_FALSE;
             if(graphics){
                 if(!features.independentBlend)throw std::runtime_error("Graphics fixture requires independent attachment blending");
                 used.independentBlend=VK_TRUE;used.samplerAnisotropy=features.samplerAnisotropy;
@@ -83,7 +85,7 @@ public:
             VkCommandPoolCreateInfo commandInfo{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};commandInfo.queueFamilyIndex=family;
             vkRequire(vkCreateCommandPool(device,&commandInfo,nullptr,&pool),"vkCreateCommandPool");
             allocator.initialize(instance,physical,device,VK_API_VERSION_1_3);
-            backend=std::make_unique<rhi::VulkanRhi>(device,physical,queue,pool,allocator);
+            backend=std::make_unique<rhi::VulkanRhi>(device,physical,queue,pool,allocator,false,nullptr,used.sampleRateShading==VK_TRUE);
         } catch(...) {close();throw;}
     }
     ~VulkanComputeFixture() {close();}

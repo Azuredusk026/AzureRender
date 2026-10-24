@@ -76,16 +76,18 @@ GpuImage NullGpuAllocator::createImage(
     result.arrayLayers = createInfo.arrayLayers;
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;
-    statistics_.imageBytes += static_cast<VkDeviceSize>(createInfo.extent.width)
-        * createInfo.extent.height * 4 * createInfo.arrayLayers;
-    statistics_.liveImageBytes+=static_cast<VkDeviceSize>(result.width)*result.height*4*result.arrayLayers;
+    const auto bytes=static_cast<VkDeviceSize>(result.width)*result.height*4*result.arrayLayers
+        *std::max(1U,static_cast<unsigned>(createInfo.samples));
+    imageBytes_[result.image]=bytes;
+    statistics_.imageBytes+=bytes;statistics_.liveImageBytes+=bytes;
     return result;
 }
 
 void NullGpuAllocator::destroyImage(GpuImage& image) noexcept {
-    if (image.image != VK_NULL_HANDLE && statistics_.liveImages > 0) {
+    const auto found=imageBytes_.find(image.image);
+    if (found!=imageBytes_.end()) {
         --statistics_.liveImages;
-        statistics_.liveImageBytes-=static_cast<VkDeviceSize>(image.width)*image.height*4*image.arrayLayers;
+        statistics_.liveImageBytes-=found->second;imageBytes_.erase(found);
     }
     image = GpuImage{};
 }
@@ -258,13 +260,21 @@ void NullCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDe
 
 VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
     validateGraphicsColorWriteMasks(desc);
+    validateGraphicsMultisampling(desc);
+    if((supportedSamples&desc.rasterizationSamples)==0||desc.minSampleShading>0&&!supportsSampleShading())
+        throw std::runtime_error("Requested raster sampling or sample shading is unavailable");
+    const auto pass=renderPassSamples_.find(desc.renderPass);
+    if(pass!=renderPassSamples_.end()&&pass->second!=desc.rasterizationSamples)
+        throw std::invalid_argument("Pipeline and render pass sample counts must match");
     const VkPipeline pipeline = mint<VkPipeline>("createGraphicsPipeline");
     calls.back().detail +=
         " cull=" + std::to_string(desc.cullMode)
         + " front=" + std::to_string(desc.frontFace)
         + " blend=" + std::to_string(desc.alphaBlend)
         + " depth=" + std::to_string(desc.depthTest)
-        + "/" + std::to_string(desc.depthWrite);
+        + "/" + std::to_string(desc.depthWrite)
+        + " samples="+std::to_string(desc.rasterizationSamples)
+        + " sampleShading="+std::to_string(desc.minSampleShading);
     if(!desc.colorWriteMasks.empty()) {
         calls.back().detail+=" masks=";
         for(const auto mask:desc.colorWriteMasks)calls.back().detail+=std::to_string(mask)+"/";
@@ -335,10 +345,15 @@ void NullRhi::writeDescriptorBuffer(const DescriptorBufferWrite& write) {
 
 VkRenderPass NullRhi::createRenderPass(const RenderPassDesc& desc) {
     validateRenderPassDesc(desc);
-    return mint<VkRenderPass>("createRenderPass");
+    const auto samples=desc.attachments.empty()?VK_SAMPLE_COUNT_1_BIT:desc.attachments.front().samples;
+    if(!desc.attachments.empty()&&(supportedSamples&samples)==0)throw std::runtime_error("Requested attachment sampling is unavailable");
+    const auto pass=mint<VkRenderPass>("createRenderPass");
+    if(!desc.attachments.empty()){renderPassSamples_[pass]=samples;calls.back().detail+=" samples="+std::to_string(samples);}
+    return pass;
 }
 
 void NullRhi::destroyRenderPass(const VkRenderPass renderPass) {
+    renderPassSamples_.erase(renderPass);
     calls.push_back({"destroyRenderPass", hexHandle(renderPass)});
 }
 

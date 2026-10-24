@@ -5,6 +5,8 @@
 #include "rhi/PipelineInspection.hpp"
 
 #include <functional>
+#include <unordered_map>
+#include <mutex>
 
 namespace azurerender::rhi {
 
@@ -18,16 +20,18 @@ public:
         VkQueue graphicsQueue,
         VkCommandPool commandPool,
         GpuAllocator& allocator, bool samplerAnisotropyEnabled=false,
-        PipelineInspection* pipelineInspection=nullptr)
+        PipelineInspection* pipelineInspection=nullptr,bool sampleShadingEnabled=false)
         : device_(device),
           physicalDevice_(physicalDevice),
           graphicsQueue_(graphicsQueue),
           commandPool_(commandPool),
           samplerAnisotropyEnabled_(samplerAnisotropyEnabled),allocator_(&allocator),
-          pipelineInspection_(pipelineInspection) {}
+          pipelineInspection_(pipelineInspection),sampleShadingEnabled_(sampleShadingEnabled) {}
 
     GpuAllocator& allocator() override { return *allocator_; }
     bool supportsSampledImage(VkFormat format,bool linearFilter) const override;
+    VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const override;
+    bool supportsSampleShading() const noexcept override {return sampleShadingEnabled_;}
 
     void copyBuffer(
         const GpuBuffer& source,
@@ -111,6 +115,9 @@ private:
     bool samplerAnisotropyEnabled_ = false;
     GpuAllocator* allocator_ = nullptr;
     PipelineInspection* pipelineInspection_ = nullptr;
+    bool sampleShadingEnabled_=false;
+    std::unordered_map<VkRenderPass,VkSampleCountFlagBits> renderPassSamples_;
+    std::mutex renderPassMutex_;
 };
 
 // Records onto a live VkCommandBuffer. Created per frame by the engine.

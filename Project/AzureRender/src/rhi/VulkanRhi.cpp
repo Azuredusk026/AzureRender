@@ -106,6 +106,14 @@ bool VulkanRhi::supportsSampledImage(VkFormat format,bool linearFilter) const {
     const VkFormatFeatureFlags required=VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT|VK_FORMAT_FEATURE_TRANSFER_DST_BIT|(linearFilter?VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT:0);
     return (properties.optimalTilingFeatures&required)==required;
 }
+VkSampleCountFlags VulkanRhi::imageSampleCounts(VkFormat format,VkImageUsageFlags usage) const {
+    if(format==VK_FORMAT_UNDEFINED||!usage)return 0;
+    VkImageFormatProperties properties{};
+    const auto result=vkGetPhysicalDeviceImageFormatProperties(physicalDevice_,format,VK_IMAGE_TYPE_2D,
+        VK_IMAGE_TILING_OPTIMAL,usage,0,&properties);
+    if(result==VK_ERROR_FORMAT_NOT_SUPPORTED)return 0;
+    vkCheck(result,"vkGetPhysicalDeviceImageFormatProperties");return properties.sampleCounts;
+}
 void VulkanRhi::copyBufferToImage(
     const GpuBuffer& source,
     const GpuImage& destination,
@@ -404,6 +412,15 @@ void VulkanCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, Vk
 VkPipeline VulkanRhi::createGraphicsPipeline(
     const GraphicsPipelineDesc& desc) {
     validateGraphicsColorWriteMasks(desc);
+    validateGraphicsMultisampling(desc);
+    if(desc.minSampleShading>0&&!supportsSampleShading())
+        throw std::runtime_error("Sample shading is unavailable on this backend");
+    {
+        std::lock_guard<std::mutex> lock(renderPassMutex_);
+        const auto pass=renderPassSamples_.find(desc.renderPass);
+        if(pass!=renderPassSamples_.end()&&pass->second!=desc.rasterizationSamples)
+            throw std::invalid_argument("Pipeline and render pass sample counts must match");
+    }
     VkPipelineShaderStageCreateInfo vertexStage{
         VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
     vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
@@ -460,7 +477,9 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     }
     VkPipelineMultisampleStateCreateInfo multisampling{
         VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO};
-    multisampling.rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+    multisampling.rasterizationSamples = desc.rasterizationSamples;
+    multisampling.sampleShadingEnable = desc.minSampleShading>0?VK_TRUE:VK_FALSE;
+    multisampling.minSampleShading = desc.minSampleShading;
     VkPipelineDepthStencilStateCreateInfo depthStencil{
         VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO};
     depthStencil.depthTestEnable = desc.depthTest ? VK_TRUE : VK_FALSE;
@@ -647,6 +666,9 @@ void VulkanRhi::writeDescriptorBuffer(const DescriptorBufferWrite& write) {
 
 VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
     validateRenderPassDesc(desc);
+    for(const auto& source:desc.attachments)if(source.samples!=VK_SAMPLE_COUNT_1_BIT
+        &&(imageSampleCounts(source.format,source.isDepth?VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT:VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)&source.samples)==0)
+        throw std::runtime_error("Requested attachment sampling is unavailable");
     std::vector<VkAttachmentDescription> attachments(desc.attachments.size());
     std::vector<VkAttachmentReference> colorReferences;
     VkAttachmentReference depthReference{};
@@ -654,7 +676,7 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         const RenderPassAttachmentDesc& source = desc.attachments[index];
         VkAttachmentDescription& attachment = attachments[index];
         attachment.format = source.format;
-        attachment.samples = VK_SAMPLE_COUNT_1_BIT;
+        attachment.samples = source.samples;
         attachment.loadOp = source.clear
             ? VK_ATTACHMENT_LOAD_OP_CLEAR
             : source.load?VK_ATTACHMENT_LOAD_OP_LOAD:VK_ATTACHMENT_LOAD_OP_DONT_CARE;
@@ -737,10 +759,15 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
     vkCheck(
         vkCreateRenderPass(device_, &renderPassInfo, nullptr, &renderPass),
         "vkCreateRenderPass");
+    try{if(!desc.attachments.empty()){std::lock_guard<std::mutex> lock(renderPassMutex_);
+        renderPassSamples_[renderPass]=desc.attachments.empty()?VK_SAMPLE_COUNT_1_BIT:desc.attachments.front().samples;}
+    }
+    catch(...){vkDestroyRenderPass(device_,renderPass,nullptr);throw;}
     return renderPass;
 }
 
 void VulkanRhi::destroyRenderPass(const VkRenderPass renderPass) {
+    {std::lock_guard<std::mutex> lock(renderPassMutex_);renderPassSamples_.erase(renderPass);}
     vkDestroyRenderPass(device_, renderPass, nullptr);
 }
 

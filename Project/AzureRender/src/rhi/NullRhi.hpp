@@ -7,6 +7,7 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <unordered_map>
 
 namespace azurerender::rhi {
 
@@ -52,6 +53,7 @@ private:
     // deque so block addresses stay stable while the vector grows.
     std::deque<std::vector<std::byte>> hostBlocks_;
     std::uint64_t nextHandle_ = 1;
+    std::unordered_map<VkImage,VkDeviceSize> imageBytes_;
 };
 
 // Recording backend. Creates distinct non-null fake handles and logs every
@@ -66,9 +68,15 @@ public:
     std::vector<std::vector<DescriptorBindingDesc>> descriptorLayouts;
     std::vector<DescriptorPoolDesc> descriptorPools;
     std::vector<DescriptorImageWrite> descriptorImageWrites;
+    VkSampleCountFlags supportedSamples=VK_SAMPLE_COUNT_1_BIT;
+    bool sampleShadingSupported=false;
 
     IGpuAllocator& allocator() override { return gpuAllocator_; }
     bool supportsSampledImage(VkFormat format,bool) const override {return unavailableSampledFormats.count(format)==0;}
+    VkSampleCountFlags imageSampleCounts(VkFormat format,VkImageUsageFlags usage) const override {
+        return format==VK_FORMAT_UNDEFINED||!usage||((usage&VK_IMAGE_USAGE_SAMPLED_BIT)&&unavailableSampledFormats.count(format))?0:supportedSamples;
+    }
+    bool supportsSampleShading() const noexcept override {return sampleShadingSupported;}
 
     void copyBuffer(
         const GpuBuffer& source,
@@ -145,6 +153,7 @@ private:
 
     NullGpuAllocator gpuAllocator_;
     std::uint64_t nextHandle_ = 1;
+    std::unordered_map<VkRenderPass,VkSampleCountFlagBits> renderPassSamples_;
 };
 
 // Records the command sequence; asserts nothing by itself.

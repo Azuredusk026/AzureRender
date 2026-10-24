@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <functional>
+#include <cmath>
 #include <stdexcept>
 #include <vector>
 
@@ -119,7 +120,19 @@ struct GraphicsPipelineDesc {
     // Empty uses RGBA on every color attachment. Otherwise one mask per
     // attachment, including zero for read-preserved scene color.
     std::vector<VkColorComponentFlags> colorWriteMasks;
+    VkSampleCountFlagBits rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
+    float minSampleShading = 0;
 };
+
+inline bool validSampleCount(VkSampleCountFlagBits samples) {
+    const auto value=static_cast<std::uint32_t>(samples);
+    return value>0&&value<=64&&(value&(value-1))==0;
+}
+inline void validateGraphicsMultisampling(const GraphicsPipelineDesc& desc) {
+    if(!validSampleCount(desc.rasterizationSamples)||!std::isfinite(desc.minSampleShading)
+        ||desc.minSampleShading<0||desc.minSampleShading>1)
+        throw std::invalid_argument("Multisampling requires a valid sample count and a finite shading fraction within 0..1");
+}
 
 inline void validateGraphicsColorWriteMasks(const GraphicsPipelineDesc& desc) {
     if(!desc.colorWriteMasks.empty()&&desc.colorWriteMasks.size()!=desc.colorAttachmentCount)
@@ -142,6 +155,7 @@ struct RenderPassAttachmentDesc {
     bool isDepth = false;
     // Loading requires defined prior contents and is exclusive with clear.
     bool load = false;
+    VkSampleCountFlagBits samples = VK_SAMPLE_COUNT_1_BIT;
 };
 
 // A single-subpass render pass; every pass in the project fits this shape.
@@ -160,6 +174,8 @@ inline void validateRenderPassDesc(const RenderPassDesc& desc) {
         &&static_cast<std::size_t>(desc.depthAttachment)>=desc.attachments.size()))
         throw std::invalid_argument("Render pass depth attachment index is invalid");
     for(const auto& attachment:desc.attachments) {
+        if(!validSampleCount(attachment.samples)||attachment.samples!=desc.attachments.front().samples)
+            throw std::invalid_argument("A subpass requires matching valid attachment sample counts");
         if(attachment.clear&&attachment.load)throw std::invalid_argument("Render pass attachment cannot load and clear");
         if(attachment.load&&attachment.initialLayout==VK_IMAGE_LAYOUT_UNDEFINED)
             throw std::invalid_argument("Loading an attachment requires defined prior contents");
@@ -363,6 +379,8 @@ public:
     virtual void destroyRenderPass(VkRenderPass renderPass) = 0;
     virtual VkFramebuffer createFramebuffer(const FramebufferDesc& desc) = 0;
     virtual void destroyFramebuffer(VkFramebuffer framebuffer) = 0;
+    virtual VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const {return VK_SAMPLE_COUNT_1_BIT;}
+    virtual bool supportsSampleShading() const noexcept {return false;}
 };
 
 }  // namespace azurerender::rhi
