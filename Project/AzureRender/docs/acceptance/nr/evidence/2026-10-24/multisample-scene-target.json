@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "d8a1533",
+  "run": "build/runs/20261024-183512-multisample-scene-target-4968f3",
+  "scope": "MS2 common scene target and resolve; view assembly and character quality pending",
+  "rendererApiVersion": 4,
+  "sourceSamples": 4,
+  "sourceSlots": 2,
+  "maximumSourceBytes": 536870912,
+  "estimatedBytesPerPixelPerSlot": 64,
+  "configurations": {
+    "debug": {
+      "registeredChecks": 8,
+      "sceneResolveNumericChecks": 30720,
+      "estimatedSourceBytes": 131072,
+      "actualSourceBytes": 131072,
+      "validationErrors": 0,
+      "liveImagesAfterRelease": 0,
+      "liveBuffersAfterRelease": 0,
+      "detailsLogSha256": "96933a0a6760ecb22e1a20ff8a50dac15e2073be8f9ac4ba36e6738a8a09280d",
+      "playerSha256": "b9cbe330212e957ef6f14df604a06c13e175645faa609389c701c083ff0fe715",
+      "editorSha256": "bd0bc220796b9c223126ebb1fb84b3ff2e8b868f1da0fafa870010cf3d87fccc"
+    },
+    "release": {
+      "registeredChecks": 8,
+      "sceneResolveNumericChecks": 30720,
+      "estimatedSourceBytes": 131072,
+      "actualSourceBytes": 131072,
+      "validationErrors": 0,
+      "liveImagesAfterRelease": 0,
+      "liveBuffersAfterRelease": 0,
+      "detailsLogSha256": "597cef5da397de35c5e0c502bd4572e77b7e364ebc7463c5e3228de6a27e0c7b",
+      "playerSha256": "7834928f6748d74599a925084474b1e13222127a3c6176c59fad1ca2fae38b67",
+      "editorSha256": "42ef83756ed060cc38a44317dd70398a657c54f0f866a4bb8992d933e2bd68e7"
+    }
+  },
+  "shaders": {
+    "count": 89,
+    "crossConfigurationIdentical": true,
+    "existing85ByteIdentical": true,
+    "priorMultisampleProbeSourceIdentical": true,
+    "added": [
+      "scene_multisample_probe.frag.spv",
+      "scene_multisample_resolve.frag.spv"
+    ]
+  },
+  "sourceHashes": {
+    "CMakeLists.txt": "0aaa7d3fe63535fa9e0bccd6ca0ad9698ac1b59dd4a9b3add32086df8568a7a4",
+    "src/render/SceneMultisampling.hpp": "5f4233dde8b7f6a04921eb6b6c4d88a3bc7f24254f1b780ba94b5a686b7776b2",
+    "src/render/SceneMultisampling.cpp": "798be7f4c003bf8e844b9feb95dc8fbbbee707228c9d1c831e8cf11612fab2e3",
+    "shaders/scene_multisample_probe.frag": "bd75c1f033e118625ef9a7ee7d30ffd64dc33ec5e040898ba87a13f05ed59536",
+    "shaders/scene_multisample_resolve.frag": "698e59be0bdb9960da1bdb64ad5d97912070ea52190b57104c74cfec82ac439c",
+    "tests/SceneMultisamplingTests.cpp": "99f50472d8862dacb8196da8921e88fbc73c0afcfd36cf50d0f18eafc2e2a055",
+    "tests/SceneMultisamplingGpuTests.cpp": "2bdcec55ec80d75fd25621d10fcdfe797c35c881e615cffe73317b0a8d689f5d"
+  }
+}

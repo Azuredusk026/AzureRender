@@ -328,6 +328,8 @@ compile_shader("${SHADER_SOURCE_DIR}/sampled_upload_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/outline_mask.frag")
 compile_shader("${SHADER_SOURCE_DIR}/multisample_probe.vert")
 compile_shader("${SHADER_SOURCE_DIR}/multisample_probe.frag")
+compile_shader("${SHADER_SOURCE_DIR}/scene_multisample_resolve.frag")
+compile_shader("${SHADER_SOURCE_DIR}/scene_multisample_probe.frag")
 compile_shader("${SHADER_SOURCE_DIR}/outline_mask.frag" DEFINES AZURE_BINDLESS=1 OUTPUT_NAME outline_mask_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_OUTLINE_MASK=1 OUTPUT_NAME outline_mask.vert)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_OUTLINE_MASK=1 AZURE_COMPUTE_SKINNING=1 OUTPUT_NAME outline_mask_compute.vert)
@@ -460,6 +462,7 @@ add_library(AzureRenderCore STATIC
     src/render/OutlineProjectionResources.cpp
     src/render/MotionPoseData.cpp
     src/render/MotionVectorPass.cpp
+    src/render/SceneMultisampling.cpp
     src/render/TemporalReconstruction.cpp
     src/render/MotionVectorTarget.cpp
     src/rhi/PipelineInspection.cpp
@@ -788,6 +791,15 @@ if(BUILD_TESTING)
     add_executable(AzureMotionProjectionGpuTests tests/MotionProjectionGpuTests.cpp)
     add_executable(AzureMotionPoseGpuTests tests/MotionPoseGpuTests.cpp)
     add_executable(AzureMotionVectorGpuTests tests/MotionVectorGpuTests.cpp)
+    add_executable(AzureSceneMultisamplingGpuTests tests/SceneMultisamplingGpuTests.cpp)
+    target_link_libraries(AzureSceneMultisamplingGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureSceneMultisamplingGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.SceneMultisamplingGpu COMMAND AzureSceneMultisamplingGpuTests "${SHADER_BINARY_DIR}")
+    set_tests_properties(AzureRender.SceneMultisamplingGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120 SKIP_RETURN_CODE 77)
+    add_executable(AzureSceneMultisamplingTests tests/SceneMultisamplingTests.cpp)
+    target_link_libraries(AzureSceneMultisamplingTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureSceneMultisamplingTests AzureRenderShaders)
+    add_test(NAME AzureRender.SceneMultisampling COMMAND AzureSceneMultisamplingTests "${SHADER_BINARY_DIR}")
     add_executable(AzureMultisampleContractTests tests/MultisampleContractTests.cpp)
     target_link_libraries(AzureMultisampleContractTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.MultisampleContract COMMAND AzureMultisampleContractTests)

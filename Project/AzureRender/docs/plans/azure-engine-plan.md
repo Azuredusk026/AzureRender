@@ -32,6 +32,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 裁剪足迹与运动外壳见[覆盖验证](../acceptance/nr/cutout-motion-coverage.md)。
 动态高频门禁及几何样点对照见[细节验证](../acceptance/nr/native-detail-sampling.md)。
 多样点 RHI 声明及设备验证见[采样契约](../acceptance/nr/multisample-rhi.md)。
+公共源目标及最近深度解析见[目标验收](../acceptance/nr/multisample-scene-target.md)。
 完整运动、透明覆盖和服饰闪烁继续执行 AA4 至 AA6。
 
 鼻下与脸颊暗影按直接光、GI、遮罩和镜面分项核验。
