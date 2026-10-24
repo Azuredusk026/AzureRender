@@ -48,8 +48,8 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
                 if(counters)++counters->descriptorSetBinds;
             }
             if(outlineProjectionEnabled_) {
-                struct CoveragePush {float cutoff;std::uint32_t mode;};
-                const CoveragePush coverage{material.alphaCutoff,static_cast<std::uint32_t>(material.alphaMode)};
+                struct CoveragePush {float cutoff;std::uint32_t mode,features;};
+                const CoveragePush coverage{material.alphaCutoff,static_cast<std::uint32_t>(material.alphaMode),materialFeaturesForFrame(material)};
                 commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&coverage,sizeof(coverage));
                 const std::array<std::uint32_t,2> indices{textureBase+primitive.materialIndex*kMaterialTextureSlots,identity};
                 commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,120,indices.data(),sizeof(indices));

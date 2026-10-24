@@ -166,3 +166,8 @@ P8 状态为 Ready，机器批次已收尾。
 高频细发丝幅度未通过，完整动态验收保持待项。
 结果见[渐隐运动验证](acceptance/nr/blend-fade-motion.md)。
 移动与显露见[历史验证](acceptance/nr/native-motion-history.md)。
+
+裁剪表面的颜色、遮罩、深度壳及运动共用采样足迹。
+透明运动外壳及部分响应组合通过所属 GPU 探针。
+完整细线与服饰的质量门禁保持待项。
+范围见[裁剪覆盖验证](acceptance/nr/cutout-motion-coverage.md)。

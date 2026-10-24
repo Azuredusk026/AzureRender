@@ -1489,7 +1489,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
          << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
          << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
-         << "  \"motionResponseEncoding\": \"negative-reactivity-v2\",\n"
+         << "  \"motionResponseEncoding\": \"coverage-reactivity-v3\",\n"
          << "  \"temporalViewSubmission\": " << temporalView_.lastSubmission() << ",\n"
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
@@ -2425,7 +2425,7 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
                     if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
                     MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
                         m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
-                        m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),m.materialFeatures,m.materialProfileVersion,
+                        m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),materialFeaturesForFrame(m),m.materialProfileVersion,
                         static_cast<std::uint32_t>((materialBase+primitive.materialIndex)<<1U)};
                     MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;
                     morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());

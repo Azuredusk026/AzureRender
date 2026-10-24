@@ -6,6 +6,9 @@ const uint azurePixelIntegralFeature=8388608u;
 bool azureUniformMaterialFrame(vec3 nx,vec3 ny,vec3 tx,vec3 ty){
     return length(nx)+length(ny)+length(tx)+length(ty)<=1e-6;
 }
+float azureTemporalMaskAlpha(sampler2D source,vec2 uv,vec2 dx,vec2 dy){
+    return textureGrad(source,uv,dx*.25,dy*.25).a;
+}
 float azureTemporalBlendAlpha(sampler2D source,vec2 uv,vec2 dx,vec2 dy,vec2 jitter){
     float alpha=0;
     for(int y=0;y<4;++y)for(int x=0;x<4;++x){

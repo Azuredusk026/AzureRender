@@ -546,6 +546,8 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 }
 
 void main() {
+    vec2 alphaUvDx=vec2(0),alphaUvDy=vec2(0);
+    if((material.materialFeatures&0x40000000U)!=0U){alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);}
     if(azureHairPixelIntegral){
     projectedHairUvDx=dFdx(textureCoordinate);projectedHairUvDy=dFdy(textureCoordinate);
     projectedHairNormalDx=dFdx(worldNormal);projectedHairNormalDy=dFdy(worldNormal);
@@ -557,8 +559,10 @@ void main() {
     EyeSurfaceProfile eyeProfile;
     CharacterEyeCoordinates eyeCoordinates;
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
+    if(material.alphaMode==1&&(material.materialFeatures&0x40000000U)!=0U)
+        baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
     if(material.alphaMode==2&&(material.materialFeatures&0x40000000U)!=0U)
-        baseColor.a=azureTemporalBlendAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,dFdx(textureCoordinate),dFdy(textureCoordinate),
+        baseColor.a=azureTemporalBlendAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy,
             vec2(camera.cameraRight.w,camera.cameraUp.w));
     if(eyeRadial) {
         eyeProfile=loadEyeSurfaceProfile(material.materialPadding>>1U);

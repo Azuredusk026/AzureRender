@@ -9,6 +9,7 @@ layout(std140,binding=6) uniform TemporalData {vec4 frame;mat4 inverseCurrent;ma
 layout(location=0) out vec4 outputColor;
 layout(location=1) out vec4 outputHistory;
 layout(location=2) out float outputDepth;
+bool cutoutMotion(float value){return value>=2&&value<3;}
 bool finite4(vec4 value){return !any(isnan(value))&&!any(isinf(value));}
 vec3 reconstructedHistory(vec2 uv){
     vec2 position=uv*temporal.frame.xy-.5,base=floor(position),f=position-base;
@@ -32,6 +33,7 @@ void main(){
     vec2 uv=gl_FragCoord.xy/temporal.frame.xy;
     vec4 current=texelFetch(currentColor,pixel,0),motion=texelFetch(vectors,pixel,0);
     bool reusable=finite4(current)&&finite4(motion)&&motion.w>-2;
+    bool currentCutout=cutoutMotion(motion.w);
     bool responsive=motion.w<=-1||!finite4(motion);
     float depth=texelFetch(hardwareDepth,pixel,0).r;
     if(motion.w!=0)depth=texelFetch(surfaceDepth,pixel,0).r;
@@ -60,6 +62,7 @@ void main(){
     float nearestViewDepth=previousViewDepth(minimumDepth);
     float baseContrast=max(max(baseHigh.r-baseLow.r,baseHigh.g-baseLow.g),baseHigh.b-baseLow.b);
     bool coverageEdge=baseContrast>.001*max(1,max(max(baseHigh.r,baseHigh.g),baseHigh.b))&&previousViewDepth(maximumDepth)-nearestViewDepth>temporal.limits.x+.05*nearestViewDepth;
+    coverageEdge=coverageEdge||(!currentCutout&&cutoutMotion(motion.w));
     vec3 low=coverageEdge?edgeLow:baseLow,high=coverageEdge?edgeHigh:baseHigh;
     vec3 accumulated=current.rgb;
     if(valid){
@@ -70,7 +73,7 @@ void main(){
         if(length((uv-previousUv)*temporal.frame.xy)>.01)history.rgb=reconstructedHistory(previousUv);
         valid=abs(expectedViewDepth-sampledViewDepth)<=tolerance&&finite4(history)&&history.a>.5;
         if(valid){float speed=length(motion.xy*temporal.frame.xy);float weight=mix(temporal.limits.z,.8,clamp(speed/8,0,1));
-            if(!coverageEdge)weight*=1-clamp(-motion.w,0,1);
+            if(!coverageEdge)weight*=1-(cutoutMotion(motion.w)?motion.w-2:clamp(-motion.w,0,1));
             float contrast=max(max(high.r-low.r,high.g-low.g),high.b-low.b);
             float clipping=coverageEdge&&contrast>1e-5?mix(temporal.limits.w,1,clamp(speed,0,1)):1;
             vec3 bounded=mix(history.rgb,clamp(history.rgb,low,high),clipping);

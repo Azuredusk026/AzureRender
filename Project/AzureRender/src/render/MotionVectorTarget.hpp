@@ -5,7 +5,9 @@
 namespace azurerender {
 // Owns one motion attachment and framebuffers borrowing the scene depth views.
 // The caller retires GPU work and destroys this owner before those depth views.
-// W: 1 tracked, 0 background, -1 fully responsive; (-1,0) partially responsive.
+// W: 1 tracked, [2,3) cutout coverage plus partial response, 0 background;
+// -1 missing previous,
+// -2 fully responsive, (-1,0) partially responsive.
 class MotionVectorTarget final {
 public:
     static constexpr VkFormat kFormat=VK_FORMAT_R32G32B32A32_SFLOAT;

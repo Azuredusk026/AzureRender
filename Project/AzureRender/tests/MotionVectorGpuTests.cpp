@@ -60,21 +60,22 @@ int main(int argc,char** argv)try{
         MotionPoseHistory history;history.stage({old},oldView);history.commit(3);history.stage({now},{});
         MotionVectorDraw draw;draw.vertices=buffers[4].buffer;draw.indices=buffers[5].buffer;draw.indexCount=3;
         draw.push.camera[2]=3;const std::uint32_t noTile=UINT32_MAX;std::memcpy(&draw.push.camera[3],&noTile,4);draw.push.outline={.8F,32,32,1};
-        for(unsigned variant=0;variant<12;++variant){
+        for(unsigned variant=0;variant<17;++variant){
             auto packed=history.pack(identity,variant==0?0:3,8192);pass.prepare(variant%2,packed,input);draw.push.flags=variant==2?16:variant==3?512:variant==4?768:variant==5?18:0;
             draw.shell=variant==3||variant==4;
-            const std::uint32_t filtered=variant>=9?(1U<<30U):variant>=6?MaterialFeatureHairPixelIntegral:0U;std::memcpy(&draw.push.detail[1],&filtered,4);
+            const std::uint32_t filtered=variant>=14?((1U<<30U)|MaterialFeatureHairPixelIntegral):variant>=9?(1U<<30U):variant>=6?MaterialFeatureHairPixelIntegral:0U;std::memcpy(&draw.push.detail[1],&filtered,4);
             draw.push.outline[3]=variant==11?0.F:variant==10?.5F:1.F;
             if(variant>=6){
                 draw.push.flags=variant>=9?18:variant==8?16:0;
-                for(unsigned i=0;i<3;++i)vertices[i].normal=variant==7?std::array<float,3>{i==0?1.F:0.F,i==1?1.F:0.F,i==2?1.F:0.F}:std::array<float,3>{1,0,0};
+                for(unsigned i=0;i<3;++i)vertices[i].normal=variant==7||variant==15?std::array<float,3>{i==0?1.F:0.F,i==1?1.F:0.F,i==2?1.F:0.F}:std::array<float,3>{1,0,0};
                 std::memcpy(buffers[4].mapped,vertices.data(),sizeof(vertices));host.allocator.flush(buffers[4],0,sizeof(vertices));
             }
-            if(variant==5||variant==9)backend.executeOneShot([&](rhi::ICommandRecorder& commands){rhi::ImageBarrierDesc b;b.image=images[1].image;
+            if(variant>=12){draw.push.flags=variant==16?17:variant>=14?1:513;draw.shell=variant<14;}
+            if(variant==5||variant==9||variant==12||variant==13)backend.executeOneShot([&](rhi::ICommandRecorder& commands){rhi::ImageBarrierDesc b;b.image=images[1].image;
                 b.oldLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;b.newLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
                 b.srcStageMask=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;b.srcAccessMask=VK_ACCESS_SHADER_READ_BIT;
                 b.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;b.dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;commands.imageBarrier(b);
-                VkClearColorValue transparent{{1,1,1,variant==5?0.F:1.F}};commands.clearColorImage(b.image,b.newLayout,transparent);
+                VkClearColorValue transparent{{1,1,1,variant==5||variant==12?0.F:1.F}};commands.clearColorImage(b.image,b.newLayout,transparent);
                 b.oldLayout=b.newLayout;b.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;b.srcStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;b.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
                 b.dstStageMask=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;b.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;commands.imageBarrier(b);});
             host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer raw){
@@ -94,9 +95,9 @@ int main(int argc,char** argv)try{
             });
             host.allocator.invalidate(buffers[6],0,buffers[6].size);const auto* values=static_cast<const float*>(buffers[6].mapped);
             for(unsigned y=1;y<31;++y)for(unsigned x=5;x<30;++x){auto pixel=y*32+x;const auto* motion=values+pixel*4;
-                const bool invisible=variant==5||variant==11;
-                const bool reactive=variant==2||variant==8||variant>=9;
-                const float response=invisible?0.F:reactive?-2.F:variant==6?-.5F:variant==0?-1.F:1.F;
+                const bool invisible=variant==5||variant==11||variant==12;
+                const bool reactive=variant==2||variant==8||variant==16||(variant>=9&&variant<=11);
+                const float response=invisible?0.F:reactive?-2.F:variant==14?2.5F:variant==13||variant==15?2.F:variant==6?-.5F:variant==0?-1.F:1.F;
                 const float expected[]{variant&&!invisible?.1F:0,0,variant==4?.27F:variant&&!invisible?.25F:0,response};
                 for(unsigned axis=0;axis<4;++axis)if(!std::isfinite(motion[axis])||std::abs(motion[axis]-expected[axis])>2e-6F)
                     {std::cerr<<"variant="<<variant<<" pixel="<<x<<','<<y<<" axis="<<axis<<" actual="<<motion[axis]<<" expected="<<expected[axis]<<'\n';
@@ -109,8 +110,8 @@ int main(int argc,char** argv)try{
         const MotionMatrix farProjection{1,0,0,0,0,-1,0,0,0,0,1000.F/(.1F-1000.F),-1,0,0,100.F/(.1F-1000.F),0};
         // Phases 14/15 expose an opaque surface after a coplanar reactive layer.
         // Depth and neighbourhood bounds cannot distinguish that stale colour.
-        for(unsigned phase=0;phase<16;++phase){
-            const auto slot=phase%2;info.cameraCut=phase>=14?2:phase>=3?1:0;info.exposureScale=phase==8?2.F:phase==9?4.F:1.F;
+        for(unsigned phase=0;phase<18;++phase){
+            const auto slot=phase%2;info.cameraCut=phase>=16?3:phase>=14?2:phase>=3?1:0;info.exposureScale=phase==8?2.F:phase==9?4.F:1.F;
             info.projection=info.viewProjection=phase==10||phase==11?farProjection:identity;
             const auto prepared=camera.prepare(info);
             if(phase==9&&(!prepared.previous||prepared.previous->exposureScale!=2.F))throw std::runtime_error("Exposure changes must preserve unexposed HDR history");
@@ -121,7 +122,9 @@ int main(int argc,char** argv)try{
             std::memcpy(buffers[0].mapped,&instance,sizeof(instance));host.allocator.flush(buffers[0],0,sizeof(instance));
             temporal.prepare(prepared,slot,0);temporalPoses.stage({currentPose},{});
             pass.prepare(slot,temporalPoses.pack(prepared.previous?prepared.previous->viewProjection:identity,prepared.previousSubmission,8192),input);
-            draw.shell=false;draw.push.flags=phase==2||phase==5||phase==14?16:0;
+            draw.shell=false;draw.push.flags=phase>=16?1:phase==2||phase==5||phase==14?16:0;
+            const std::uint32_t temporalFeatures=phase>=16?((1U<<30U)|MaterialFeatureHairPixelIntegral):0;
+            std::memcpy(&draw.push.detail[1],&temporalFeatures,4);
             auto* upload=static_cast<std::uint16_t*>(buffers[9].mapped);
             for(unsigned pixel=0;pixel<1024;++pixel){auto value=((pixel%32+pixel/32+phase)%2)?std::uint16_t(0x3c00):std::uint16_t(0);
                 if(phase==6)value=value?0x3a66:0x3266;
@@ -179,6 +182,7 @@ int main(int argc,char** argv)try{
                 if((phase==6||phase==7)&&(pixel%32<5||pixel%32>=30||pixel/32<1||pixel/32>=31))continue;
                 auto expected=axis==3?std::uint16_t(0x3800):upload[pixel*4+axis];
                 if(axis<3&&(phase==1||phase==4||phase==9))expected=expected?0x2e66:0x3b33;
+                if(axis<3&&phase==17)expected=expected?0x3866:0x3733;
                 if((phase==12||phase==13)&&expected==0&&pixels[pixel*4+axis]<=0x21)continue;
                 if(std::abs(int(pixels[pixel*4+axis])-int(expected))>1){std::cerr<<"Temporal phase="<<phase<<" pixel="<<pixel<<" axis="<<axis<<" actual="<<pixels[pixel*4+axis]<<" expected="<<expected<<'\n';
                     throw std::runtime_error("HDR temporal output differs from independent history blend, reactive or camera-cut reference");}
@@ -187,5 +191,5 @@ int main(int argc,char** argv)try{
         }
     }
     if(host.errors.load())throw std::runtime_error("Motion vector Vulkan validation errors");
-    std::cout<<"Motion vector GPU: 45000 motion checks and 63344 HDR history checks, including coplanar reactive release, far depth and moving silhouette rejection passed\n";return 0;
+    std::cout<<"Motion vector GPU: 63750 motion checks and 71536 HDR history checks, including coplanar reactive release, far depth and moving silhouette rejection passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
