@@ -28,7 +28,12 @@ void main(){
     }else{
         uint alphaMode=motion.flags&3u;
         if(alphaMode==1u&&texture(baseColor,textureCoordinate).a<motion.alphaCutoff)discard;
-        if(alphaMode==2u&&texture(baseColor,textureCoordinate).a<=0)discard;
+        if(alphaMode==2u){
+            float alpha=(floatBitsToUint(motion.detail.y)&0x40000000u)!=0u
+                ?azureTemporalBlendAlpha(baseColor,textureCoordinate,dFdx(textureCoordinate),dFdy(textureCoordinate),motion.detail.zw*motion.outline.yz*.5)
+                :texture(baseColor,textureCoordinate).a;
+            if(alpha<=0)discard;
+        }
     }
     outputMotion=azureMotionProjection(currentClip,previousClip,previousValid>=.999999);
     if(outputMotion.w==0||(motion.flags&16u)!=0u)outputMotion.w=-1;

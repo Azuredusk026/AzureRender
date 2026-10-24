@@ -1,8 +1,13 @@
 // Included after the renderer's primitive helpers. The public motion pass owns
 // GPU submission state; this adapter supplies the asset's frozen draw inputs.
 std::uint32_t CharacterSceneRenderer::materialFeaturesForFrame(const AssetMaterial& material) const noexcept {
+    constexpr auto customCoverage=MaterialFeatureOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction
+        |MaterialFeatureMultiplyComposite|MaterialFeatureEyeRadialSurface;
+    const bool temporalCoverage=material.alphaMode==AssetAlphaMode::Blend&&material.materialClass!=AssetMaterialClass::Overlay
+        &&(material.materialFeatures&customCoverage)==0
+        &&motionPass_&&renderSettings_&&renderSettings_->antiAliasing==3&&state_.temporalFrame;
     return materialSamplingFeatures(material.materialFeatures,temporalMaterialSamplesActive()
-        &&material.alphaMode!=AssetAlphaMode::Blend&&material.materialClass!=AssetMaterialClass::Overlay);
+        &&material.alphaMode!=AssetAlphaMode::Blend&&material.materialClass!=AssetMaterialClass::Overlay,temporalCoverage);
 }
 bool CharacterSceneRenderer::temporalMaterialSamplesActive() const noexcept {
     return motionPass_&&renderSettings_&&renderSettings_->antiAliasing==3&&state_.temporalFrame&&state_.temporalFrame->previous.has_value();
@@ -97,7 +102,7 @@ void CharacterSceneRenderer::prepareMotion(){
                 push.flags=static_cast<unsigned>(m.alphaMode)|(reactive?16U:0U)|(outlineProjectionEnabled_?256U:0U)|(shell?512U:0U);
                 push.camera={cameraPosition_[0],cameraPosition_[1],cameraPosition_[2],0};
                 const auto tile=shell?snapshot.buffers.outlineMaskTiles.at(source):UINT32_MAX;std::memcpy(&push.camera[3],&tile,4);
-                push.detail={m.featureParameters[0],0,0,0};std::memcpy(&push.detail[1],&m.materialFeatures,4);
+                push.detail={m.featureParameters[0],0,0,0};const auto frameFeatures=materialFeaturesForFrame(m);std::memcpy(&push.detail[1],&frameFeatures,4);
                 if(temporal){push.detail[2]=2*samplingJitter_[0]/temporal->current.width;push.detail[3]=2*samplingJitter_[1]/temporal->current.height;}
                 push.outline={view.outlinePixels,float(temporal?temporal->current.width:1),float(temporal?temporal->current.height:1),run.opacity};
                 motionDraws_.push_back(draw);

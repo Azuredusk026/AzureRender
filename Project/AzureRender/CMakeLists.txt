@@ -890,6 +890,13 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.MaterialMotionResponseGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_temporal_coverage_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.MaterialMotionResponseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.BlendCoverageGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_temporal_alpha_coverage_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --case blend --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.BlendCoverageGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.CompositeCoverageCompatibilityGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_temporal_alpha_coverage_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --case composite --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.CompositeCoverageCompatibilityGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.CoverageDetailMetrics COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_temporal_coverage_metrics.py")
     add_test(NAME AzureRender.SpatialAntiAliasingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>")
     add_test(NAME AzureRender.SpatialAntiAliasingAuxiliaryGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"

@@ -148,3 +148,8 @@ P8 状态为 Ready，机器批次已收尾。
 | 集成与交付 P9 | `34d108a` | [实施记录](acceptance/p9/2026-10-12.md) |
 
 阶段编号用于查找证据。阅读顺序为本页、[开发总计划](plans/azure-engine-plan.md)、[协作与验收](development-workflow.md)。历史候选的数字只解释其自身来源，历史入口见[计划快照](history/2026-10-12-planning/azure-engine-plan.md)。
+
+混合细线采用共享覆盖积分及独立运行期策略。
+相关细节、运动误差及完整响应共同验收。
+裁剪候选和服饰边缘仍有专项失败。
+范围见[混合覆盖验证](acceptance/nr/blend-temporal-coverage.md)。

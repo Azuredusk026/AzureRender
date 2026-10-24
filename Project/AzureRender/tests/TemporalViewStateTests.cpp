@@ -11,6 +11,8 @@ int main()try{
     checkTemporal(materialSamplingFeatures(authored,false)==authored,"First-frame shading retains authored feature bits");
     checkTemporal(materialSamplingFeatures(authored,true)==(authored|kTemporalMaterialSamples),"Temporal shading adds only its reserved runtime bit");
     checkTemporal(materialSamplingFeatures(authored|kTemporalMaterialSamples,false)==authored,"History invalidation clears runtime sampling without changing authored features");
+    checkTemporal(materialSamplingFeatures(authored,false,true)==(authored|kTemporalAlphaCoverage),"Coverage filtering is independent of history sampling");
+    checkTemporal(materialSamplingFeatures(authored|kTemporalAlphaCoverage,false,false)==authored,"Coverage runtime policy cannot survive in authored features");
     TemporalViewState main,aux;TemporalFrameInfo a;a.width=2560;a.height=1440;a.sceneGeneration=1;
     const auto first=main.prepare(a);
     checkTemporal(first.reset==TemporalReset::First&&!first.previous&&first.sampleIndex==0,"First frame has no history");

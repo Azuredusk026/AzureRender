@@ -557,6 +557,9 @@ void main() {
     EyeSurfaceProfile eyeProfile;
     CharacterEyeCoordinates eyeCoordinates;
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
+    if(material.alphaMode==2&&(material.materialFeatures&0x40000000U)!=0U)
+        baseColor.a=azureTemporalBlendAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,dFdx(textureCoordinate),dFdy(textureCoordinate),
+            vec2(camera.cameraRight.w,camera.cameraUp.w));
     if(eyeRadial) {
         eyeProfile=loadEyeSurfaceProfile(material.materialPadding>>1U);
         vec2 originalUv=textureCoordinate*eyeProfile.uvScaleOffset.xy+eyeProfile.uvScaleOffset.zw;

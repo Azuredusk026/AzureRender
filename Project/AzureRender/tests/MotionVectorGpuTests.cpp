@@ -60,20 +60,20 @@ int main(int argc,char** argv)try{
         MotionPoseHistory history;history.stage({old},oldView);history.commit(3);history.stage({now},{});
         MotionVectorDraw draw;draw.vertices=buffers[4].buffer;draw.indices=buffers[5].buffer;draw.indexCount=3;
         draw.push.camera[2]=3;const std::uint32_t noTile=UINT32_MAX;std::memcpy(&draw.push.camera[3],&noTile,4);draw.push.outline={.8F,32,32,1};
-        for(unsigned variant=0;variant<9;++variant){
+        for(unsigned variant=0;variant<10;++variant){
             auto packed=history.pack(identity,variant==0?0:3,8192);pass.prepare(variant%2,packed,input);draw.push.flags=variant==2?16:variant==3?512:variant==4?768:variant==5?18:0;
             draw.shell=variant==3||variant==4;
-            const std::uint32_t filtered=variant>=6?MaterialFeatureHairPixelIntegral:0U;std::memcpy(&draw.push.detail[1],&filtered,4);
+            const std::uint32_t filtered=variant==9?(1U<<30U):variant>=6?MaterialFeatureHairPixelIntegral:0U;std::memcpy(&draw.push.detail[1],&filtered,4);
             if(variant>=6){
-                draw.push.flags=variant==8?16:0;
+                draw.push.flags=variant==9?18:variant==8?16:0;
                 for(unsigned i=0;i<3;++i)vertices[i].normal=variant==7?std::array<float,3>{i==0?1.F:0.F,i==1?1.F:0.F,i==2?1.F:0.F}:std::array<float,3>{1,0,0};
                 std::memcpy(buffers[4].mapped,vertices.data(),sizeof(vertices));host.allocator.flush(buffers[4],0,sizeof(vertices));
             }
-            if(variant==5)backend.executeOneShot([&](rhi::ICommandRecorder& commands){rhi::ImageBarrierDesc b;b.image=images[1].image;
+            if(variant==5||variant==9)backend.executeOneShot([&](rhi::ICommandRecorder& commands){rhi::ImageBarrierDesc b;b.image=images[1].image;
                 b.oldLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;b.newLayout=VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
                 b.srcStageMask=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;b.srcAccessMask=VK_ACCESS_SHADER_READ_BIT;
                 b.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;b.dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;commands.imageBarrier(b);
-                VkClearColorValue transparent{{1,1,1,0}};commands.clearColorImage(b.image,b.newLayout,transparent);
+                VkClearColorValue transparent{{1,1,1,variant==5?0.F:1.F}};commands.clearColorImage(b.image,b.newLayout,transparent);
                 b.oldLayout=b.newLayout;b.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;b.srcStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;b.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
                 b.dstStageMask=VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;b.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;commands.imageBarrier(b);});
             host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer raw){
@@ -93,7 +93,7 @@ int main(int argc,char** argv)try{
             });
             host.allocator.invalidate(buffers[6],0,buffers[6].size);const auto* values=static_cast<const float*>(buffers[6].mapped);
             for(unsigned y=1;y<31;++y)for(unsigned x=5;x<30;++x){auto pixel=y*32+x;const auto* motion=values+pixel*4;
-                const float expected[]{variant&&variant!=5?.1F:0,0,variant==4?.27F:variant&&variant!=5?.25F:0,variant==6?-.5F:variant==5?0.F:variant==0||variant==2||variant==8?-1.F:1.F};
+                const float expected[]{variant&&variant!=5?.1F:0,0,variant==4?.27F:variant&&variant!=5?.25F:0,variant==9?-1.F:variant==6?-.5F:variant==5?0.F:variant==0||variant==2||variant==8?-1.F:1.F};
                 for(unsigned axis=0;axis<4;++axis)if(!std::isfinite(motion[axis])||std::abs(motion[axis]-expected[axis])>2e-6F)
                     {std::cerr<<"variant="<<variant<<" pixel="<<x<<','<<y<<" axis="<<axis<<" actual="<<motion[axis]<<" expected="<<expected[axis]<<'\n';
                     throw std::runtime_error("Actual motion attachment differs from independent translation, depth or reactive reference");}
@@ -181,5 +181,5 @@ int main(int argc,char** argv)try{
         }
     }
     if(host.errors.load())throw std::runtime_error("Motion vector Vulkan validation errors");
-    std::cout<<"Motion vector GPU: 33750 motion checks and 55152 HDR history checks, including far depth and moving silhouette rejection passed\n";return 0;
+    std::cout<<"Motion vector GPU: 37500 motion checks and 55152 HDR history checks, including far depth and moving silhouette rejection passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

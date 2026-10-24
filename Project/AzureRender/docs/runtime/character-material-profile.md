@@ -334,6 +334,11 @@ glTF 的 `alphaMode` 必须为 `BLEND`。
 
 ## 轮廓与验证
 
+模式三的混合 Alpha 覆盖按输出像素积分。
+运行期位三十由视图持有，作者输入经提交时清除。
+完整响应及叠层规则见[时序抗锯齿](temporal-antialiasing.md)。
+验收见[混合细线覆盖](../acceptance/nr/blend-temporal-coverage.md)。
+
 `silhouette-outline` 按材质开启背面壳外轮廓。
 显式外轮廓使用每实例独立的实面覆盖遮罩。
 壳片元在自身覆盖内部被丢弃，外缘保留描边。

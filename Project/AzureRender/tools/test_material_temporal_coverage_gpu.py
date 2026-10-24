@@ -110,7 +110,7 @@ def measure(source,candidate,reference):
     assert centroids[-1]-centroids[0]>4,'The public skinning path must actually move the fixture'
     return dict(movingEnergyRatios=energy[16:48].tolist(),lastEightEnergyRatios=energy[-8:].tolist(),
         sourceMovingEnergyRatios=sourceEnergy[16:48].tolist(),movingMeanAbsoluteError=error,sourceMovingMeanAbsoluteError=sourceError,
-        errorRatio=error/sourceError,residualChange=change,sourceResidualChange=sourceChange,residualChangeRatio=change/sourceChange,
+        errorRatio=error/max(sourceError,1e-12),residualChange=change,sourceResidualChange=sourceChange,residualChangeRatio=change/max(sourceChange,1e-12),
         edgeErrorRatio=float(np.mean(edge)/np.mean(controlEdge)),maximumGhostPixelsOutsideTwoPixels=max(ghosts),
         referenceCentroidDisplacement=centroids[-1]-centroids[0],maximumFlatByteError=flatError)
 

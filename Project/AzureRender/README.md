@@ -200,6 +200,7 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 高光隔离的显示倍率与曝光见[分量测量](docs/runtime/component-radiometry.md)。
 投影头发的可选采样积分见[材质验证](docs/acceptance/nr/projected-hair-pixel-integral.md)。
 不透明高光运动及部分响应见[运动验证](docs/acceptance/nr/material-motion-response.md)。
+混合细线覆盖见[覆盖验证](docs/acceptance/nr/blend-temporal-coverage.md)。
 完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。
 时序历史、材质走样及主场景运动细节保持待验。
 公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。

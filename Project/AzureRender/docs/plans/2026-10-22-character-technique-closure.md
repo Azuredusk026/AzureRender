@@ -38,6 +38,7 @@
 显式切线手性与程序色带方向见[坐标验证](../acceptance/nr/projected-hair-coordinates.md)。
 投影响应的采样足迹与固定区域能量见[像素积分](../acceptance/nr/projected-hair-pixel-integral.md)。
 主带运动及历史响应见[运动验证](../acceptance/nr/material-motion-response.md)。
+混合细线覆盖见[专项验证](../acceptance/nr/blend-temporal-coverage.md)。
 原生图片层级、可见图元及采样见[输入验证](../acceptance/nr/typed-image-inputs.md)。
 实际采样器及独立层级过滤见[状态验证](../acceptance/nr/sampler-filter-and-bias.md)。
 共享颜色核、环境遮蔽和照明乘积见[数值验证](../acceptance/nr/captured-hair-illumination.md)。

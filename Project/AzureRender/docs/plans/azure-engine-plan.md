@@ -25,6 +25,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 高光采样输入及诊断曝光见[分量核验](../acceptance/nr/component-radiometry.md)。
 投影头发的积分契约与固定机位结果见[像素积分](../acceptance/nr/projected-hair-pixel-integral.md)。
 不透明主带运动与部分响应见[运动验证](../acceptance/nr/material-motion-response.md)。
+混合细线积分与细节门禁见[覆盖验证](../acceptance/nr/blend-temporal-coverage.md)。
 完整运动、透明覆盖和服饰闪烁继续执行 AA4 至 AA6。
 
 鼻下与脸颊暗影按直接光、GI、遮罩和镜面分项核验。
