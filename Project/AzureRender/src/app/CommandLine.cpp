@@ -30,7 +30,7 @@ constexpr const char* kUsage =
     "[--qa-camera <preset>] [--qa-light <preset>] "
     "[--qa-morph-weights <w0> <w1>] "
     "[--qa-effect <effect> --qa-effect-state <state>] "
-    "[--qa-isolation <view>] [--render-path <traditional|subpasses|dynamic>] "
+    "[--qa-isolation <view>] [--qa-exposure <-8..8 EV>] [--render-path <traditional|subpasses|dynamic>] "
     "[--scene-type <character|blackhole>] "
     "[--blackhole-quality <performance|balanced|cinematic>] "
     "[--blackhole-camera <front|orbit-left|high|close|over-shoulder>] "
@@ -68,6 +68,7 @@ constexpr const char* kHelp =
     "  --qa-camera <preset> --qa-light <preset>\n"
     "  --qa-camera scene --qa-light scene Preserve authored scene conditions\n"
     "  --qa-isolation <view>             Includes roughness, metallic, direct-specular, reflection, shaded-normal, object-shadow-visibility\n"
+    "  --qa-exposure <-8..8 EV>          Radiometric isolation exposure; default 0 EV\n"
     "  --qa-light-scan                    Rotate the key light through 120 frames\n"
     "  --qa-animation                     Play animation with a fixed QA camera\n"
     "  --qa-isolation brow-mask           Show visible eyebrow regions\n"
@@ -270,6 +271,13 @@ void validate(const ParsedCommandLine& parsed) {
             "reflection", "shaded-normal", "shadow-color", "object-shadow-visibility"})) {
         fail(CommandLineErrorCode::InvalidValue, "--qa-isolation",
              "Unknown --qa-isolation: " + options.qaIsolation);
+    }
+    if(options.qaExposureEv){
+        if(*options.qaExposureEv < -8.F || *options.qaExposureEv > 8.F)
+            fail(CommandLineErrorCode::InvalidValue,"--qa-exposure","Diagnostic exposure requires -8 through 8 EV");
+        if(!isOneOf(options.qaIsolation,{"albedo","hair-kk","rim","specular","emissive","ambient","direct-diffuse","direct-specular","reflection","overlay"})
+            || options.qaEffectState=="isolation")
+            fail(CommandLineErrorCode::InvalidCombination,"--qa-exposure","Diagnostic exposure requires an explicit radiometric --qa-isolation");
     }
     const bool qaRequested = !options.qaCamera.empty()
         || !options.qaLight.empty()
@@ -573,6 +581,8 @@ ParsedCommandLine parseCommandLine(
             }
         } else if (argument == "--qa-isolation") {
             parsed.options.qaIsolation = requireValue(arguments, index, argument);
+        } else if (argument == "--qa-exposure") {
+            parsed.options.qaExposureEv=parseFiniteFloat(requireValue(arguments,index,argument),argument);
         } else {
             fail(
                 CommandLineErrorCode::UnknownOption,

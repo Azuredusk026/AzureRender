@@ -310,6 +310,7 @@ void AzureRenderApp::writeCaptureManifest(
         << std::quoted(qaEffectStateName_) << ",\n"
         << "  \"qaIsolation\": "
         << std::quoted(qaIsolationName_) << ",\n"
+        << "  \"qaExposureEv\": " << runOptions_.qaExposureEv.value_or(0.F) << ",\n"
         << "  \"qaDisableFaceCulling\": " << (runOptions_.qaDisableFaceCulling ? "true" : "false") << ",\n"
         << "  \"qaDisableDepthTest\": " << (runOptions_.qaDisableDepthTest ? "true" : "false") << ",\n"
         << "  \"cameraNear\": " << renderSettings_.cameraNear << ",\n"

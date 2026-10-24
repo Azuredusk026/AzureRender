@@ -703,6 +703,7 @@ void AzureRenderApp::buildSceneFrameData(
         // Apply component transfer after final frame-setting resolution.
         // Authored grades remain in the scene document and setting layers.
         effectiveRenderSettings_.grade=azurerender::GradeSettings{};
+        effectiveRenderSettings_.grade.exposureEv=runOptions_.qaExposureEv.value_or(0.F);
         effectiveRenderSettings_.grade.toneMappingEnabled=false;
         effectiveRenderSettings_.bloom.enabled=false;
     }

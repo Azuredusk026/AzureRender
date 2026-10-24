@@ -22,6 +22,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 继续执行 AA4 至 AA6 的细节、运动与预算门禁。
 覆盖、显式镜头及公共四倍尺寸结果见[质量验证](../acceptance/nr/temporal-coverage-quality.md)。
 描边输出像素与细线能量见[采样验证](../acceptance/nr/outline-temporal-footprint.md)。
+高光采样输入及诊断曝光见[分量核验](../acceptance/nr/component-radiometry.md)。
 
 鼻下与脸颊暗影按直接光、GI、遮罩和镜面分项核验。
 脸部径向法线候选通过双配置各 36 次 GPU 检查。

@@ -1,0 +1,1043 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "614a6aa",
+  "run": "build/runs/20261024-074605-native-material-aa-reference-9eb92d",
+  "scope": "NR7-AA4 radiometric component exposure and native texture-footprint diagnosis. Pixel-integrated projected hair, fine alpha coverage and clothing motion remain pending.",
+  "configurations": {
+    "debug": {
+      "checks": 19,
+      "checksLog": "c6fdbd5c247300e7300cd74548c4d2aa0a8277bafc85711fa1ba4b15aa77c492",
+      "buildLog": "08115a139a087d6f205d93c2a44bfb1e8920635dd64806644ef3d0ba8fc78d9d",
+      "playerSha256": "ab1e9b3b3a922014432607846b6eb3a9eb7024275bcd9fba6cbf9943586ed0c1",
+      "editorSha256": "9171e5edb1b4b15b4ad2d5ace28a4d0a5409f35b2263e7b614a4e55ece77777f",
+      "componentExposure": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "ab1e9b3b3a922014432607846b6eb3a9eb7024275bcd9fba6cbf9943586ed0c1",
+        "captures": [
+          {
+            "isolation": "direct-diffuse",
+            "label": "default",
+            "exposureEv": 0,
+            "imageSha256": "1eec32df39caebc2ba48ac0a6bceaac55efedc4f678b64272b3fc88ee2d5a5e3",
+            "validationEnabled": true
+          },
+          {
+            "isolation": "direct-diffuse",
+            "label": "zero",
+            "exposureEv": 0,
+            "imageSha256": "1eec32df39caebc2ba48ac0a6bceaac55efedc4f678b64272b3fc88ee2d5a5e3",
+            "validationEnabled": true
+          },
+          {
+            "isolation": "direct-diffuse",
+            "label": "negative",
+            "exposureEv": -2,
+            "imageSha256": "df2d79d217a064b8d832b9546fd26e45688e1597d84755445a103e8141a1abaf",
+            "validationEnabled": true
+          },
+          {
+            "isolation": "direct-diffuse",
+            "label": "positive",
+            "exposureEv": 2,
+            "imageSha256": "defa14b3e7aadd143a77dae7770a7eec4083bf8d75d722ff20d1536ad3564cb8",
+            "validationEnabled": true
+          },
+          {
+            "isolation": "emissive",
+            "label": "default",
+            "exposureEv": 0,
+            "imageSha256": "b5a750128b8ec121128886bb892a7c19f29fd6342380e2988a1648e4253dc0eb",
+            "validationEnabled": true
+          },
+          {
+            "isolation": "emissive",
+            "label": "zero",
+            "exposureEv": 0,
+            "imageSha256": "b5a750128b8ec121128886bb892a7c19f29fd6342380e2988a1648e4253dc0eb",
+            "validationEnabled": true
+          },
+          {
+            "isolation": "emissive",
+            "label": "negative",
+            "exposureEv": -2,
+            "imageSha256": "483922f1d60b6fb0f98da7617f6cafc1886ed007c4f0b5e36278194bea488d5a",
+            "validationEnabled": true
+          },
+          {
+            "isolation": "emissive",
+            "label": "positive",
+            "exposureEv": 2,
+            "imageSha256": "b3dd3fc02ca82e5a446300b8bdb53f9125b3d4200f39943354747b84802d839f",
+            "validationEnabled": true
+          }
+        ],
+        "comparisons": [
+          {
+            "isolation": "direct-diffuse",
+            "exposureEv": -2,
+            "maximumIntervalErrorBytes": 0.5359356350040607
+          },
+          {
+            "isolation": "direct-diffuse",
+            "exposureEv": 2,
+            "maximumIntervalErrorBytes": 0.5446204389356772
+          },
+          {
+            "isolation": "emissive",
+            "exposureEv": -2,
+            "maximumIntervalErrorBytes": 0.1582965968732566
+          },
+          {
+            "isolation": "emissive",
+            "exposureEv": 2,
+            "maximumIntervalErrorBytes": 0.016692424500320158
+          }
+        ]
+      },
+      "nativeCompatibility": {
+        "status": "passed",
+        "config": "debug",
+        "mode": 0,
+        "playerSha256": "ab1e9b3b3a922014432607846b6eb3a9eb7024275bcd9fba6cbf9943586ed0c1",
+        "images": {
+          "frame_000000.png": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e"
+        },
+        "temporal": {
+          "antiAliasingPipeline": "linear-display-spatial-v1",
+          "temporalHistorySubmission": 0,
+          "temporalBytes": 0,
+          "temporalFallback": "",
+          "motionOutputActive": false,
+          "motionPreviousValidObjects": 0
+        }
+      }
+    },
+    "release": {
+      "checks": 19,
+      "checksLog": "0d97ac5923a0a1a382d74fd55dc0c1cb51a847b3d4949902760db582b4d4cc3b",
+      "buildLog": "598ab736b527712e6b7cd9f105d768d67da43ec4be375eb3113dab3eaa516b21",
+      "playerSha256": "200fa042cdfff3fb4958fe902c7882efb1bc4af24c71140ab78c7befdd397b02",
+      "editorSha256": "279972d9041b663a47adebe3639f87bb898b27b6b40ab2576848832d142f836e",
+      "componentExposure": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "200fa042cdfff3fb4958fe902c7882efb1bc4af24c71140ab78c7befdd397b02",
+        "captures": [
+          {
+            "isolation": "direct-diffuse",
+            "label": "default",
+            "exposureEv": 0,
+            "imageSha256": "1eec32df39caebc2ba48ac0a6bceaac55efedc4f678b64272b3fc88ee2d5a5e3",
+            "validationEnabled": false
+          },
+          {
+            "isolation": "direct-diffuse",
+            "label": "zero",
+            "exposureEv": 0,
+            "imageSha256": "1eec32df39caebc2ba48ac0a6bceaac55efedc4f678b64272b3fc88ee2d5a5e3",
+            "validationEnabled": false
+          },
+          {
+            "isolation": "direct-diffuse",
+            "label": "negative",
+            "exposureEv": -2,
+            "imageSha256": "df2d79d217a064b8d832b9546fd26e45688e1597d84755445a103e8141a1abaf",
+            "validationEnabled": false
+          },
+          {
+            "isolation": "direct-diffuse",
+            "label": "positive",
+            "exposureEv": 2,
+            "imageSha256": "defa14b3e7aadd143a77dae7770a7eec4083bf8d75d722ff20d1536ad3564cb8",
+            "validationEnabled": false
+          },
+          {
+            "isolation": "emissive",
+            "label": "default",
+            "exposureEv": 0,
+            "imageSha256": "b5a750128b8ec121128886bb892a7c19f29fd6342380e2988a1648e4253dc0eb",
+            "validationEnabled": false
+          },
+          {
+            "isolation": "emissive",
+            "label": "zero",
+            "exposureEv": 0,
+            "imageSha256": "b5a750128b8ec121128886bb892a7c19f29fd6342380e2988a1648e4253dc0eb",
+            "validationEnabled": false
+          },
+          {
+            "isolation": "emissive",
+            "label": "negative",
+            "exposureEv": -2,
+            "imageSha256": "483922f1d60b6fb0f98da7617f6cafc1886ed007c4f0b5e36278194bea488d5a",
+            "validationEnabled": false
+          },
+          {
+            "isolation": "emissive",
+            "label": "positive",
+            "exposureEv": 2,
+            "imageSha256": "b3dd3fc02ca82e5a446300b8bdb53f9125b3d4200f39943354747b84802d839f",
+            "validationEnabled": false
+          }
+        ],
+        "comparisons": [
+          {
+            "isolation": "direct-diffuse",
+            "exposureEv": -2,
+            "maximumIntervalErrorBytes": 0.5359356350040607
+          },
+          {
+            "isolation": "direct-diffuse",
+            "exposureEv": 2,
+            "maximumIntervalErrorBytes": 0.5446204389356772
+          },
+          {
+            "isolation": "emissive",
+            "exposureEv": -2,
+            "maximumIntervalErrorBytes": 0.1582965968732566
+          },
+          {
+            "isolation": "emissive",
+            "exposureEv": 2,
+            "maximumIntervalErrorBytes": 0.016692424500320158
+          }
+        ]
+      },
+      "nativeCompatibility": {
+        "status": "passed",
+        "config": "release",
+        "mode": 0,
+        "playerSha256": "200fa042cdfff3fb4958fe902c7882efb1bc4af24c71140ab78c7befdd397b02",
+        "images": {
+          "frame_000000.png": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e"
+        },
+        "temporal": {
+          "antiAliasingPipeline": "linear-display-spatial-v1",
+          "temporalHistorySubmission": 0,
+          "temporalBytes": 0,
+          "temporalFallback": "",
+          "motionOutputActive": false,
+          "motionPreviousValidObjects": 0
+        }
+      }
+    }
+  },
+  "unchangedShaderCount": 77,
+  "unsaturatedReference": {
+    "result": {
+      "status": "passed",
+      "kind": "high",
+      "playerSha256": "200fa042cdfff3fb4958fe902c7882efb1bc4af24c71140ab78c7befdd397b02",
+      "referenceScale": 4,
+      "output": [
+        5120,
+        2880
+      ],
+      "minimumPixelsScaled": true,
+      "receiverPixelOffsetsScaled": true,
+      "images": {
+        "frame_000000.png": "0080c285e52775c8665e7421eb4a52335141015df6506d45dee0aae3be0a4a00"
+      }
+    },
+    "exposureEv": -4,
+    "componentDisplayMultiplier": 3,
+    "saturatedScalars": 0
+  },
+  "samplingDiagnosis": {
+    "schemaVersion": 1,
+    "exposureEv": -4,
+    "isolationDisplayMultiplier": 3,
+    "referenceScale": 4,
+    "maskSha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+    "rows": [
+      {
+        "sampling": "source",
+        "region": "crown",
+        "pixels": 1470,
+        "lastEightEnergyRatios": [
+          0.901232898235321,
+          0.9018586874008179,
+          0.9046671986579895,
+          0.9052606821060181,
+          0.9051395058631897,
+          0.9023367762565613,
+          0.9032496213912964,
+          0.901908814907074
+        ],
+        "meanAbsoluteError": 0.0019275377271696925,
+        "temporalMeanDeviation": 0.00023127080930862576,
+        "temporalMaximumRange": 0.013039826415479183,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "sampling": "source",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "lastEightEnergyRatios": [
+          0.9085361957550049,
+          0.9095178246498108,
+          0.9118642807006836,
+          0.9115161299705505,
+          0.9122177362442017,
+          0.9098841547966003,
+          0.9111121296882629,
+          0.9099143743515015
+        ],
+        "meanAbsoluteError": 0.0010774820111691952,
+        "temporalMeanDeviation": 0.00014945416478440166,
+        "temporalMaximumRange": 0.013039826415479183,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "sampling": "source",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "lastEightEnergyRatios": [
+          0.9711705446243286,
+          0.9773774147033691,
+          0.9514704346656799,
+          0.9573318362236023,
+          0.9719492197036743,
+          0.9572527408599854,
+          0.965168297290802,
+          0.9796571731567383
+        ],
+        "meanAbsoluteError": 0.0004611200129147619,
+        "temporalMeanDeviation": 0.00014302661293186247,
+        "temporalMaximumRange": 0.011072378605604172,
+        "peakRatio": 0.9504438042640686
+      },
+      {
+        "sampling": "-normal",
+        "region": "crown",
+        "pixels": 1470,
+        "lastEightEnergyRatios": [
+          0.8887495398521423,
+          0.889037549495697,
+          0.8909327983856201,
+          0.8902273178100586,
+          0.8903734683990479,
+          0.8879592418670654,
+          0.8904104232788086,
+          0.8894180655479431
+        ],
+        "meanAbsoluteError": 0.0016168042784556746,
+        "temporalMeanDeviation": 0.00022522953804582357,
+        "temporalMaximumRange": 0.011740561574697495,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "sampling": "-normal",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "lastEightEnergyRatios": [
+          0.8907512426376343,
+          0.8910843133926392,
+          0.8926870226860046,
+          0.8919810056686401,
+          0.892535388469696,
+          0.8905423283576965,
+          0.893075168132782,
+          0.891834020614624
+        ],
+        "meanAbsoluteError": 0.0009021093719638884,
+        "temporalMeanDeviation": 0.00013823644258081913,
+        "temporalMaximumRange": 0.011740561574697495,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "sampling": "-normal",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "lastEightEnergyRatios": [
+          0.9371738433837891,
+          0.9392634630203247,
+          0.9195977449417114,
+          0.9292380809783936,
+          0.9419223070144653,
+          0.9295418858528137,
+          0.9312018752098083,
+          0.9437448978424072
+        ],
+        "meanAbsoluteError": 0.00036157568683847785,
+        "temporalMeanDeviation": 0.0001254149537999183,
+        "temporalMaximumRange": 0.011005191132426262,
+        "peakRatio": 0.9504438042640686
+      },
+      {
+        "sampling": "-parameter",
+        "region": "crown",
+        "pixels": 1470,
+        "lastEightEnergyRatios": [
+          1.0088348388671875,
+          1.0101439952850342,
+          1.0105537176132202,
+          1.0104626417160034,
+          1.0109423398971558,
+          1.0115978717803955,
+          1.0111156702041626,
+          1.0086495876312256
+        ],
+        "meanAbsoluteError": 0.0012668141862377524,
+        "temporalMeanDeviation": 0.00028546369867399335,
+        "temporalMaximumRange": 0.021840320900082588,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "sampling": "-parameter",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "lastEightEnergyRatios": [
+          1.0114717483520508,
+          1.012802004814148,
+          1.0129631757736206,
+          1.012342095375061,
+          1.0134769678115845,
+          1.0141578912734985,
+          1.0143119096755981,
+          1.0120017528533936
+        ],
+        "meanAbsoluteError": 0.0007448082324117422,
+        "temporalMeanDeviation": 0.00018102984176948667,
+        "temporalMaximumRange": 0.021840320900082588,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "sampling": "-parameter",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "lastEightEnergyRatios": [
+          1.021111249923706,
+          1.0280125141143799,
+          1.0022093057632446,
+          1.0093330144882202,
+          1.023514747619629,
+          1.0120315551757812,
+          1.0155904293060303,
+          1.0292469263076782
+        ],
+        "meanAbsoluteError": 0.00043296499643474817,
+        "temporalMeanDeviation": 0.00014838564675301313,
+        "temporalMaximumRange": 0.0103981364518404,
+        "peakRatio": 0.9996886849403381
+      },
+      {
+        "sampling": "-both",
+        "region": "crown",
+        "pixels": 1470,
+        "lastEightEnergyRatios": [
+          0.9955530762672424,
+          0.9969801902770996,
+          0.997268795967102,
+          0.9972251653671265,
+          0.9962199926376343,
+          0.996094286441803,
+          0.9974415302276611,
+          0.9953334331512451
+        ],
+        "meanAbsoluteError": 0.0006396804237738252,
+        "temporalMeanDeviation": 0.0002828658325597644,
+        "temporalMaximumRange": 0.01739693060517311,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "sampling": "-both",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "lastEightEnergyRatios": [
+          0.9920927286148071,
+          0.9934596419334412,
+          0.993882417678833,
+          0.9936394691467285,
+          0.9932252168655396,
+          0.9930124282836914,
+          0.9949194192886353,
+          0.9926489591598511
+        ],
+        "meanAbsoluteError": 0.0004015699669253081,
+        "temporalMeanDeviation": 0.00017242040485143661,
+        "temporalMaximumRange": 0.01739693060517311,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "sampling": "-both",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "lastEightEnergyRatios": [
+          0.994404137134552,
+          0.997379720211029,
+          0.9763995409011841,
+          0.9865618944168091,
+          0.9948047399520874,
+          0.9878858327865601,
+          0.987041175365448,
+          1.0001349449157715
+        ],
+        "meanAbsoluteError": 0.00031575243338011205,
+        "temporalMeanDeviation": 0.00013387984654400498,
+        "temporalMaximumRange": 0.009115714579820633,
+        "peakRatio": 0.9748848676681519
+      },
+      {
+        "sampling": "-normal-linear",
+        "region": "crown",
+        "pixels": 1470,
+        "lastEightEnergyRatios": [
+          0.9008501768112183,
+          0.9001865983009338,
+          0.9030781984329224,
+          0.903678834438324,
+          0.9036942720413208,
+          0.901585042476654,
+          0.9019027948379517,
+          0.9008088111877441
+        ],
+        "meanAbsoluteError": 0.0018651832360774279,
+        "temporalMeanDeviation": 0.0002296258753631264,
+        "temporalMaximumRange": 0.01133107952773571,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "sampling": "-normal-linear",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "lastEightEnergyRatios": [
+          0.9070980548858643,
+          0.9069666862487793,
+          0.9090678095817566,
+          0.9092207551002502,
+          0.9097267985343933,
+          0.9081681966781616,
+          0.9086849093437195,
+          0.9078167676925659
+        ],
+        "meanAbsoluteError": 0.001040731556713581,
+        "temporalMeanDeviation": 0.00014758117322344333,
+        "temporalMaximumRange": 0.01133107952773571,
+        "peakRatio": 1.018855333328247
+      },
+      {
+        "sampling": "-normal-linear",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "lastEightEnergyRatios": [
+          0.9644029140472412,
+          0.9705915451049805,
+          0.9427846074104309,
+          0.950413167476654,
+          0.9637926816940308,
+          0.9498565793037415,
+          0.9568594694137573,
+          0.9703677892684937
+        ],
+        "meanAbsoluteError": 0.0004515837354119867,
+        "temporalMeanDeviation": 0.0001384116185363382,
+        "temporalMaximumRange": 0.011768922209739685,
+        "peakRatio": 0.9748848676681519
+      }
+    ]
+  },
+  "sourceBeauty": {
+    "schemaVersion": 1,
+    "referenceScale": 4,
+    "measureDomain": "linear display RGB",
+    "maskSha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+    "regions": [
+      {
+        "isolation": "beauty",
+        "region": "crown",
+        "box": [
+          607,
+          80,
+          670,
+          121
+        ],
+        "pixels": 1903,
+        "referenceEnergy": 651.2884521484375,
+        "lastEightEnergyRatios": [
+          0.9868700504302979,
+          0.9870805144309998,
+          0.9876090884208679,
+          0.9871470332145691,
+          0.9874061942100525,
+          0.9867865443229675,
+          0.9874038100242615,
+          0.9872121214866638
+        ],
+        "meanAbsoluteError": 0.00509951077401638,
+        "temporalMeanDeviation": 0.0010227992897853255,
+        "temporalMaximumRange": 0.08655962347984314,
+        "modeZeroMeanAbsoluteError": 0.008700177073478699
+      },
+      {
+        "isolation": "beauty",
+        "region": "hair-interior",
+        "box": [
+          570,
+          65,
+          715,
+          220
+        ],
+        "pixels": 4025,
+        "referenceEnergy": 1070.2244873046875,
+        "lastEightEnergyRatios": [
+          0.99782395362854,
+          0.9989591836929321,
+          0.9981045722961426,
+          0.9982073307037354,
+          0.9980461597442627,
+          0.9975705146789551,
+          0.9969972372055054,
+          0.9987867474555969
+        ],
+        "meanAbsoluteError": 0.004914387129247189,
+        "temporalMeanDeviation": 0.001050865976139903,
+        "temporalMaximumRange": 0.11645707488059998,
+        "modeZeroMeanAbsoluteError": 0.008676709607243538
+      },
+      {
+        "isolation": "beauty",
+        "region": "fine-hair-boundary",
+        "box": [
+          570,
+          65,
+          715,
+          220
+        ],
+        "pixels": 1068,
+        "referenceEnergy": 291.1295166015625,
+        "lastEightEnergyRatios": [
+          0.9864541292190552,
+          0.9790193438529968,
+          0.989787757396698,
+          0.9842471480369568,
+          0.9893823266029358,
+          0.9886932969093323,
+          0.9920276403427124,
+          0.9828445911407471
+        ],
+        "meanAbsoluteError": 0.010442054830491543,
+        "temporalMeanDeviation": 0.003517434000968933,
+        "temporalMaximumRange": 0.44784292578697205,
+        "modeZeroMeanAbsoluteError": 0.02871296927332878
+      },
+      {
+        "isolation": "beauty",
+        "region": "clothing",
+        "box": [
+          500,
+          220,
+          800,
+          550
+        ],
+        "pixels": 60488,
+        "referenceEnergy": 7438.591796875,
+        "lastEightEnergyRatios": [
+          0.9975553154945374,
+          0.9973489046096802,
+          0.9973863363265991,
+          0.9968645572662354,
+          0.9976451992988586,
+          0.9970746636390686,
+          0.9970948696136475,
+          0.9970822334289551
+        ],
+        "meanAbsoluteError": 0.0016026463126763701,
+        "temporalMeanDeviation": 0.000541843066457659,
+        "temporalMaximumRange": 0.23195137083530426,
+        "modeZeroMeanAbsoluteError": 0.002283896319568157
+      },
+      {
+        "isolation": "hair-kk",
+        "region": "crown",
+        "box": [
+          607,
+          80,
+          670,
+          121
+        ],
+        "pixels": 1507,
+        "referenceEnergy": 734.25634765625,
+        "lastEightEnergyRatios": [
+          0.9125456213951111,
+          0.9120221734046936,
+          0.9150618314743042,
+          0.9158015847206116,
+          0.9157555103302002,
+          0.9116891622543335,
+          0.9140170216560364,
+          0.9132313132286072
+        ],
+        "meanAbsoluteError": 0.02586720511317253,
+        "temporalMeanDeviation": 0.002765218261629343,
+        "temporalMaximumRange": 0.2122717648744583
+      },
+      {
+        "isolation": "hair-kk",
+        "region": "hair-interior",
+        "box": [
+          570,
+          65,
+          715,
+          220
+        ],
+        "pixels": 3149,
+        "referenceEnergy": 827.081787109375,
+        "lastEightEnergyRatios": [
+          0.9211822748184204,
+          0.92103511095047,
+          0.923442542552948,
+          0.9234384894371033,
+          0.9241207838058472,
+          0.9205942749977112,
+          0.9231091141700745,
+          0.9226681590080261
+        ],
+        "meanAbsoluteError": 0.014415739104151726,
+        "temporalMeanDeviation": 0.0018448290647938848,
+        "temporalMaximumRange": 0.2122717648744583
+      },
+      {
+        "isolation": "hair-kk",
+        "region": "fine-hair-boundary",
+        "box": [
+          570,
+          65,
+          715,
+          220
+        ],
+        "pixels": 762,
+        "referenceEnergy": 59.38742446899414,
+        "lastEightEnergyRatios": [
+          0.9708293676376343,
+          0.9837713837623596,
+          0.9622296690940857,
+          0.9628061652183533,
+          0.9765831232070923,
+          0.9619653820991516,
+          0.9751659631729126,
+          0.9870262742042542
+        ],
+        "meanAbsoluteError": 0.0068467059172689915,
+        "temporalMeanDeviation": 0.001978750806301832,
+        "temporalMaximumRange": 0.1767578274011612
+      },
+      {
+        "isolation": "hair-kk",
+        "region": "clothing",
+        "box": [
+          500,
+          220,
+          800,
+          550
+        ],
+        "pixels": 1977,
+        "referenceEnergy": 139.06886291503906,
+        "lastEightEnergyRatios": [
+          0.762460470199585,
+          0.7570594549179077,
+          0.7645098567008972,
+          0.764763355255127,
+          0.7568909525871277,
+          0.763969898223877,
+          0.7627198696136475,
+          0.761635959148407
+        ],
+        "meanAbsoluteError": 0.007212011143565178,
+        "temporalMeanDeviation": 0.001395939732901752,
+        "temporalMaximumRange": 0.07421357929706573
+      }
+    ]
+  },
+  "samplingInputs": {
+    "native-character": {
+      "t17.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -1
+          }
+        },
+        "schemaVersion": 1,
+        "id": "d10a68bf-6a74-58fe-ad4a-3356af844a10",
+        "dependencies": []
+      },
+      "t18.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -1
+          }
+        },
+        "schemaVersion": 1,
+        "id": "414458e7-5ef9-5239-871f-bba9080d649b",
+        "dependencies": []
+      }
+    },
+    "sampling-normal": {
+      "t17.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -1
+          }
+        },
+        "schemaVersion": 1,
+        "id": "d10a68bf-6a74-58fe-ad4a-3356af844a10",
+        "dependencies": []
+      },
+      "t18.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -3
+          }
+        },
+        "schemaVersion": 1,
+        "id": "414458e7-5ef9-5239-871f-bba9080d649b",
+        "dependencies": []
+      }
+    },
+    "sampling-parameter": {
+      "t17.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -3
+          }
+        },
+        "schemaVersion": 1,
+        "id": "d10a68bf-6a74-58fe-ad4a-3356af844a10",
+        "dependencies": []
+      },
+      "t18.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -1
+          }
+        },
+        "schemaVersion": 1,
+        "id": "414458e7-5ef9-5239-871f-bba9080d649b",
+        "dependencies": []
+      }
+    },
+    "sampling-both": {
+      "t17.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -3
+          }
+        },
+        "schemaVersion": 1,
+        "id": "d10a68bf-6a74-58fe-ad4a-3356af844a10",
+        "dependencies": []
+      },
+      "t18.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -3
+          }
+        },
+        "schemaVersion": 1,
+        "id": "414458e7-5ef9-5239-871f-bba9080d649b",
+        "dependencies": []
+      }
+    },
+    "sampling-normal-linear": {
+      "t17.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "nearest",
+            "anisotropy": 1,
+            "mipBias": -1
+          }
+        },
+        "schemaVersion": 1,
+        "id": "d10a68bf-6a74-58fe-ad4a-3356af844a10",
+        "dependencies": []
+      },
+      "t18.dds.azmeta": {
+        "settings": {
+          "texture": {
+            "schemaVersion": 1,
+            "filter": "linear",
+            "mipFilter": "linear",
+            "anisotropy": 1,
+            "mipBias": -1
+          }
+        },
+        "schemaVersion": 1,
+        "id": "414458e7-5ef9-5239-871f-bba9080d649b",
+        "dependencies": []
+      }
+    }
+  },
+  "sourceHashes": {
+    "native-assets\\outline-converted-document.azurelevel": "a7e72bccd49dfd8fd62b03e74e3fc216cf7dda95109d010c717998c3516a6594",
+    "native-character\\outline-converted.azurematerial": "9d90c9b740cdc9f0e65d75df12d127ebc0242dd64a63d527e37cddb44a399306",
+    "native-character\\native-textures\\t17.dds": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995",
+    "native-character\\native-textures\\t18.dds": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54",
+    "capture_reference.py": "fc277df3dce5e37a285b9c645d5fd407f01247ab341a57bda3f2c7c24e8bead3",
+    "measure_reference.py": "e13870d840608b781783e0d36155ad3e6662419fe538635d98f3a3fcb066bf46",
+    "measure_sampling.py": "45b2fc575dc27371a3164c129d935056da236e5f47f5b4fcfc1a2c8c7a5d3e35"
+  },
+  "rawPhaseCaptures": [
+    {
+      "status": "passed",
+      "kind": "phase0",
+      "playerSha256": "e8b98db469c33fbb9abe90ee5b2e57156a29f67408587534da79375bafbdddfa",
+      "referenceScale": 1,
+      "output": [
+        1280,
+        720
+      ],
+      "minimumPixelsScaled": false,
+      "receiverPixelOffsetsScaled": false,
+      "images": {
+        "frame_000000.png": "fbb90dfcdb6806c4739002ff133bfea56bad8a2898baff6d46ca74a7436b2ad6"
+      }
+    },
+    {
+      "status": "passed",
+      "kind": "phase1",
+      "playerSha256": "e8b98db469c33fbb9abe90ee5b2e57156a29f67408587534da79375bafbdddfa",
+      "referenceScale": 1,
+      "output": [
+        1280,
+        720
+      ],
+      "minimumPixelsScaled": false,
+      "receiverPixelOffsetsScaled": false,
+      "images": {
+        "frame_000000.png": "04a3fa541d91953a2574b07d929b592239cf8e8df4b7b0496b501d2a00b2c717"
+      }
+    },
+    {
+      "status": "passed",
+      "kind": "phase2",
+      "playerSha256": "e8b98db469c33fbb9abe90ee5b2e57156a29f67408587534da79375bafbdddfa",
+      "referenceScale": 1,
+      "output": [
+        1280,
+        720
+      ],
+      "minimumPixelsScaled": false,
+      "receiverPixelOffsetsScaled": false,
+      "images": {
+        "frame_000000.png": "fccc9b68e6b964d20ccc1d45344014233defed51ca142dbc0e37ec00abe6a7a5"
+      }
+    },
+    {
+      "status": "passed",
+      "kind": "phase3",
+      "playerSha256": "e8b98db469c33fbb9abe90ee5b2e57156a29f67408587534da79375bafbdddfa",
+      "referenceScale": 1,
+      "output": [
+        1280,
+        720
+      ],
+      "minimumPixelsScaled": false,
+      "receiverPixelOffsetsScaled": false,
+      "images": {
+        "frame_000000.png": "341dbbe0aa15bd0f55aac9bc1918fa5a8a64ef774362da94b24c9fd17de84757"
+      }
+    },
+    {
+      "status": "passed",
+      "kind": "phase4",
+      "playerSha256": "e8b98db469c33fbb9abe90ee5b2e57156a29f67408587534da79375bafbdddfa",
+      "referenceScale": 1,
+      "output": [
+        1280,
+        720
+      ],
+      "minimumPixelsScaled": false,
+      "receiverPixelOffsetsScaled": false,
+      "images": {
+        "frame_000000.png": "e900c4e43a0df85305a0b4527cc732fc0c8553f03c6427a0e3f0a9a64460cee8"
+      }
+    },
+    {
+      "status": "passed",
+      "kind": "phase5",
+      "playerSha256": "e8b98db469c33fbb9abe90ee5b2e57156a29f67408587534da79375bafbdddfa",
+      "referenceScale": 1,
+      "output": [
+        1280,
+        720
+      ],
+      "minimumPixelsScaled": false,
+      "receiverPixelOffsetsScaled": false,
+      "images": {
+        "frame_000000.png": "c6d421601995a3071569f7159fc8ab6ac5cbd2ef909989e6efa069edc7fd41bf"
+      }
+    },
+    {
+      "status": "passed",
+      "kind": "phase6",
+      "playerSha256": "e8b98db469c33fbb9abe90ee5b2e57156a29f67408587534da79375bafbdddfa",
+      "referenceScale": 1,
+      "output": [
+        1280,
+        720
+      ],
+      "minimumPixelsScaled": false,
+      "receiverPixelOffsetsScaled": false,
+      "images": {
+        "frame_000000.png": "04d29b1cc42a55351cf86b0b6d27bd51298ac0fbdf4349c84b7f51b0ab8cb9d2"
+      }
+    },
+    {
+      "status": "passed",
+      "kind": "phase7",
+      "playerSha256": "e8b98db469c33fbb9abe90ee5b2e57156a29f67408587534da79375bafbdddfa",
+      "referenceScale": 1,
+      "output": [
+        1280,
+        720
+      ],
+      "minimumPixelsScaled": false,
+      "receiverPixelOffsetsScaled": false,
+      "images": {
+        "frame_000000.png": "a423406259502f50354a1b597a444531721ba513fae4e1a470722fe7d3e45bc0"
+      }
+    }
+  ],
+  "remaining": [
+    "Projected-hair pixel integration, including coupled primary, secondary and line response",
+    "Fine-boundary 2-percent energy gate across every converged phase",
+    "Independent moving KK, alpha hair and clothing references",
+    "Native complete region equivalence and NR8-V2 promotion"
+  ]
+}

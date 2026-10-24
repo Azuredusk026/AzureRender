@@ -34,6 +34,25 @@ void expectError(
 }  // namespace
 
 int main() try {
+    require(azurerender::parseCommandLine({"--qa-isolation","hair-kk","--qa-exposure","-4"}).options.qaIsolation=="hair-kk",
+        "Component isolation accepts explicit diagnostic exposure");
+    require(azurerender::parseCommandLine({"--qa-isolation","hair-kk","--qa-exposure","-4"}).options.qaExposureEv==-4.F,
+        "Diagnostic exposure retains its signed EV value");
+    require(!azurerender::parseCommandLine({}).options.qaExposureEv,"Default diagnostic exposure remains implicit zero EV");
+    require(azurerender::parseCommandLine({"--qa-isolation","rim","--qa-exposure","0"}).options.qaExposureEv==0.F,
+        "Explicit zero diagnostic exposure is preserved");
+    require(azurerender::parseCommandLine({"--qa-isolation","specular","--qa-exposure","-8"}).options.qaExposureEv==-8.F
+        &&azurerender::parseCommandLine({"--qa-isolation","reflection","--qa-exposure","8"}).options.qaExposureEv==8.F,
+        "Both diagnostic exposure endpoints are accepted");
+    expectError(CommandLineErrorCode::MissingValue,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-exposure"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-exposure","nan"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-exposure","9"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-exposure",{"--qa-isolation","rim","--qa-exposure","-8.01"});
+    expectError(CommandLineErrorCode::InvalidValue,"--qa-exposure",{"--qa-isolation","rim","--qa-exposure","inf"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-exposure","-4"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","beauty","--qa-exposure","-4"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","world-normal","--qa-exposure","-4"});
+    expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-effect","rim","--qa-effect-state","isolation","--qa-exposure","-4"});
     require(azurerender::parseCommandLine({"--anti-aliasing","temporal"}).options.renderSettings.antiAliasing==3,
         "Native temporal sampling is available through the production command line");
     const auto directProject=azurerender::parseCommandLine({"--project",u8"D:/用户项目/Monica.azureproject"});

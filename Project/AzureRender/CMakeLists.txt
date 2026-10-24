@@ -861,6 +861,9 @@ if(BUILD_TESTING)
         --executable "$<TARGET_FILE:AzureRender>" --asset "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf"
         --output "${CMAKE_CURRENT_BINARY_DIR}/sampling-fixture")
     set_tests_properties(AzureRender.SamplingGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    add_test(NAME AzureRender.ComponentExposureGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_component_exposure_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.ComponentExposureGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
     add_test(NAME AzureRender.SpatialAntiAliasingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>")
     add_test(NAME AzureRender.SpatialAntiAliasingAuxiliaryGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"
