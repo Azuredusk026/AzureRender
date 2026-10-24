@@ -1489,7 +1489,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
          << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
          << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
-         << "  \"motionResponseEncoding\": \"negative-reactivity-v1\",\n"
+         << "  \"motionResponseEncoding\": \"negative-reactivity-v2\",\n"
          << "  \"temporalViewSubmission\": " << temporalView_.lastSubmission() << ",\n"
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"

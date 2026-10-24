@@ -31,6 +31,7 @@ void main(){
     ivec2 pixel=ivec2(gl_FragCoord.xy),extent=ivec2(temporal.frame.xy);
     vec2 uv=gl_FragCoord.xy/temporal.frame.xy;
     vec4 current=texelFetch(currentColor,pixel,0),motion=texelFetch(vectors,pixel,0);
+    bool reusable=finite4(current)&&finite4(motion)&&motion.w>-2;
     bool responsive=motion.w<=-1||!finite4(motion);
     float depth=texelFetch(hardwareDepth,pixel,0).r;
     if(motion.w!=0)depth=texelFetch(surfaceDepth,pixel,0).r;
@@ -75,5 +76,5 @@ void main(){
             vec3 bounded=mix(history.rgb,clamp(history.rgb,low,high),clipping);
             accumulated=mix(current.rgb,bounded,weight);}
     }
-    outputColor=vec4(accumulated,current.a);outputHistory=vec4(accumulated,1);outputDepth=depth;
+    outputColor=vec4(accumulated,current.a);outputHistory=vec4(accumulated,reusable?1:0);outputDepth=depth;
 }

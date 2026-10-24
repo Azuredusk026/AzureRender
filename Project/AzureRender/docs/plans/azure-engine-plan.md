@@ -28,6 +28,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 混合细线积分与细节门禁见[覆盖验证](../acceptance/nr/blend-temporal-coverage.md)。
 裁剪纹理的生成足迹见[缩小覆盖验证](../acceptance/nr/alpha-mip-footprint.md)。
 混合节点透明度与运动覆盖见[渐隐验证](../acceptance/nr/blend-fade-motion.md)。
+真实角色移动与共面显露见[历史验证](../acceptance/nr/native-motion-history.md)。
 完整运动、透明覆盖和服饰闪烁继续执行 AA4 至 AA6。
 
 鼻下与脸颊暗影按直接光、GI、遮罩和镜面分项核验。

@@ -38,7 +38,8 @@ void main(){
         }
     }
     outputMotion=azureMotionProjection(currentClip,previousClip,previousValid>=.999999);
-    if(outputMotion.w==0||(motion.flags&16u)!=0u)outputMotion.w=-1;
+    if((motion.flags&16u)!=0u)outputMotion.w=-2;
+    else if(outputMotion.w==0)outputMotion.w=-1;
     else if(integrated)outputMotion.w=-.5;
     outputSurfaceDepth=gl_FragCoord.z;
 }

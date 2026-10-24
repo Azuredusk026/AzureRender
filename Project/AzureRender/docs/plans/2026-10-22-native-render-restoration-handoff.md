@@ -88,6 +88,8 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 公共四倍尺寸与覆盖核对见[时序质量](../acceptance/nr/temporal-coverage-quality.md)。
 距离描边采样及线性深度历史见[覆盖契约](../acceptance/nr/outline-temporal-footprint.md)。
 高光无截断测量及参数图层级红测见[分量核验](../acceptance/nr/component-radiometry.md)。
+共面显露及真实角色移动见[历史验证](../acceptance/nr/native-motion-history.md)。
+角色移动的整体能量通过，高频细节幅度仍有失败。
 先保存主入口走样红测及官方时序通道输入。
 材质阶段同步核验发丝、KK、Ramp、服饰与描边走样。
 视图历史、运动场及静态与动态联合画质保持待验。

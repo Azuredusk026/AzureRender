@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "0d4a62f",
+  "run": "build/runs/20261024-150621-native-motion-history-f4d899",
+  "scope": "Coplanar reactive history validity; native translation aggregate controls pass, high-frequency detail remains failed.",
+  "rendererApiVersion": 4,
+  "materialBytes": 192,
+  "motionPushBytes": 128,
+  "temporalBytesPerPixel": 52,
+  "motionResponseEncoding": "negative-reactivity-v2",
+  "configurations": {
+    "debug": {
+      "registeredChecks": 7,
+      "checksSha256": "fe25bdf1da91e948615a56662c13e7f633816c8461751b0f9cf7fd8c0986553f",
+      "motionNumericChecks": 45000,
+      "hdrNumericChecks": 63344,
+      "numericLogSha256": "5a6d07db96104fc9d420db3a19aea2ff60b9fd80ca80d99ce19467b2d0955365",
+      "nativeFixedFrames": 32,
+      "nativeFixedDifference": {
+        "configuration": "debug",
+        "maximumByteError": 13,
+        "changedPixelsAcross32Frames": 118,
+        "bounds": [
+          [
+            662,
+            454,
+            662,
+            455
+          ],
+          [
+            662,
+            453,
+            662,
+            455
+          ],
+          [
+            662,
+            454,
+            662,
+            455
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            456,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            456,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            456,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ]
+        ]
+      },
+      "nativeTranslationFrames": 80,
+      "translationReceiptSha256": "307d42fe068bd67438452920ab6b3510fbfd74703b57bfae866f0e43ec2c84a6",
+      "errorRatio": 0.6787668466567993,
+      "residualChangeRatio": 0.5058115720748901,
+      "energyRange": [
+        0.9934536218643188,
+        0.9946280121803284
+      ],
+      "lastEightEnergyRange": [
+        0.9930298924446106,
+        0.9937788248062134
+      ],
+      "aggregateCoherentRange": [
+        0.9629759192466736,
+        0.9935417771339417
+      ],
+      "highFrequencyCoherentRange": [
+        0.28648999333381653,
+        0.9299867749214172
+      ],
+      "highFrequencyPassed": false,
+      "buildLogSha256": "cdf8ee83baecc0cc956206ff81584f39a88fb409c7f18266dd57ba1bef67b72d",
+      "playerSha256": "354435ea41a404b3f61195b1bf402186c330dc6ff2f7a46578584d1f7ac6fcda"
+    },
+    "release": {
+      "registeredChecks": 7,
+      "checksSha256": "02a1c2766667861eacabc94835d49fe15295ef1f8f3ceef522ab76891086d07f",
+      "motionNumericChecks": 45000,
+      "hdrNumericChecks": 63344,
+      "numericLogSha256": "5a6d07db96104fc9d420db3a19aea2ff60b9fd80ca80d99ce19467b2d0955365",
+      "nativeFixedFrames": 32,
+      "nativeFixedDifference": {
+        "configuration": "release",
+        "maximumByteError": 13,
+        "changedPixelsAcross32Frames": 118,
+        "bounds": [
+          [
+            662,
+            454,
+            662,
+            455
+          ],
+          [
+            662,
+            453,
+            662,
+            455
+          ],
+          [
+            662,
+            454,
+            662,
+            455
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            456,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            456,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            456,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ],
+          [
+            662,
+            453,
+            662,
+            458
+          ],
+          [
+            662,
+            454,
+            662,
+            458
+          ]
+        ]
+      },
+      "nativeTranslationFrames": 80,
+      "translationReceiptSha256": "097cdd4f7b4ce156912a9fb307dc3b08337a6710cae92e291cf6be74e3e003c7",
+      "errorRatio": 0.6787668466567993,
+      "residualChangeRatio": 0.5058115720748901,
+      "energyRange": [
+        0.9934536218643188,
+        0.9946280121803284
+      ],
+      "lastEightEnergyRange": [
+        0.9930298924446106,
+        0.9937788248062134
+      ],
+      "aggregateCoherentRange": [
+        0.9629759192466736,
+        0.9935417771339417
+      ],
+      "highFrequencyCoherentRange": [
+        0.28648999333381653,
+        0.9299867749214172
+      ],
+      "highFrequencyPassed": false,
+      "buildLogSha256": "b895ccb93750529ea4982f25708455e1b36a7df9ad4672b40a2b84c12ad8f86f",
+      "playerSha256": "2aeb7d5c2fdee7164b27e92256d540c189620e9c882fa953441e8e00c3f26dcb"
+    }
+  },
+  "shaders": {
+    "count": 85,
+    "changed": [
+      "motion_vector.frag.spv",
+      "temporal_resolve.frag.spv"
+    ],
+    "crossConfigurationIdentical": true
+  },
+  "fixedChangedRegion": [
+    {
+      "frame": 4,
+      "pixels": 2,
+      "candidate": 0.00038032871088944376,
+      "previous": 0.0015047583729028702
+    },
+    {
+      "frame": 5,
+      "pixels": 3,
+      "candidate": 0.0003774160286411643,
+      "previous": 0.001025860314257443
+    },
+    {
+      "frame": 6,
+      "pixels": 2,
+      "candidate": 0.00022856518626213074,
+      "previous": 0.0013024071231484413
+    },
+    {
+      "frame": 8,
+      "pixels": 6,
+      "candidate": 0.0006716303178109229,
+      "previous": 0.0017133568180724978
+    },
+    {
+      "frame": 9,
+      "pixels": 6,
+      "candidate": 0.0006716303178109229,
+      "previous": 0.001511005568318069
+    },
+    {
+      "frame": 10,
+      "pixels": 6,
+      "candidate": 0.000599625229369849,
+      "previous": 0.0013592420145869255
+    },
+    {
+      "frame": 11,
+      "pixels": 3,
+      "candidate": 0.0005299578770063818,
+      "previous": 0.0015914482064545155
+    },
+    {
+      "frame": 12,
+      "pixels": 5,
+      "candidate": 0.0004493551386985928,
+      "previous": 0.001496066921390593
+    },
+    {
+      "frame": 13,
+      "pixels": 6,
+      "candidate": 0.00041953183244913816,
+      "previous": 0.0011231654789298773
+    },
+    {
+      "frame": 14,
+      "pixels": 5,
+      "candidate": 0.00029803041252307594,
+      "previous": 0.0012127752415835857
+    },
+    {
+      "frame": 16,
+      "pixels": 6,
+      "candidate": 0.0006716303178109229,
+      "previous": 0.0017133568180724978
+    },
+    {
+      "frame": 17,
+      "pixels": 6,
+      "candidate": 0.0006716303178109229,
+      "previous": 0.001511005568318069
+    },
+    {
+      "frame": 18,
+      "pixels": 6,
+      "candidate": 0.000599625229369849,
+      "previous": 0.0013592420145869255
+    },
+    {
+      "frame": 19,
+      "pixels": 3,
+      "candidate": 0.0005299578770063818,
+      "previous": 0.0015914482064545155
+    },
+    {
+      "frame": 20,
+      "pixels": 5,
+      "candidate": 0.0004493551386985928,
+      "previous": 0.001496066921390593
+    },
+    {
+      "frame": 21,
+      "pixels": 6,
+      "candidate": 0.00041953183244913816,
+      "previous": 0.0011231654789298773
+    },
+    {
+      "frame": 22,
+      "pixels": 5,
+      "candidate": 0.00029803041252307594,
+      "previous": 0.0012127752415835857
+    },
+    {
+      "frame": 24,
+      "pixels": 6,
+      "candidate": 0.0006716303178109229,
+      "previous": 0.0017133568180724978
+    },
+    {
+      "frame": 25,
+      "pixels": 6,
+      "candidate": 0.0006716303178109229,
+      "previous": 0.001511005568318069
+    },
+    {
+      "frame": 26,
+      "pixels": 6,
+      "candidate": 0.000599625229369849,
+      "previous": 0.0013592420145869255
+    },
+    {
+      "frame": 27,
+      "pixels": 3,
+      "candidate": 0.0005299578770063818,
+      "previous": 0.0015914482064545155
+    },
+    {
+      "frame": 28,
+      "pixels": 5,
+      "candidate": 0.0004493551386985928,
+      "previous": 0.001496066921390593
+    },
+    {
+      "frame": 29,
+      "pixels": 6,
+      "candidate": 0.00041953183244913816,
+      "previous": 0.0011231654789298773
+    },
+    {
+      "frame": 30,
+      "pixels": 5,
+      "candidate": 0.00029803041252307594,
+      "previous": 0.0012127752415835857
+    }
+  ],
+  "fixedEnergyRows": [
+    {
+      "kind": "temporal-debug",
+      "region": "crown",
+      "pixels": 1470,
+      "energyRatios": [
+        0.9947258234024048,
+        0.9955404996871948,
+        0.9950440526008606,
+        0.9968512654304504,
+        0.9947637915611267,
+        0.9948851466178894,
+        0.9955331683158875,
+        0.995290219783783
+      ],
+      "meanAbsoluteError": 0.0005593787645921111,
+      "temporalMeanDeviation": 0.00027680990751832724,
+      "peakRatio": 0.9963659048080444
+    },
+    {
+      "kind": "temporal-debug",
+      "region": "hair-interior",
+      "pixels": 3014,
+      "energyRatios": [
+        0.990980327129364,
+        0.9914478659629822,
+        0.9913565516471863,
+        0.9926419258117676,
+        0.990958571434021,
+        0.990915060043335,
+        0.9924041628837585,
+        0.9919431805610657
+      ],
+      "meanAbsoluteError": 0.00035744457272812724,
+      "temporalMeanDeviation": 0.00016980869986582547,
+      "peakRatio": 0.9963659048080444
+    },
+    {
+      "kind": "temporal-debug",
+      "region": "fine-hair-boundary",
+      "pixels": 742,
+      "energyRatios": [
+        1.0014077425003052,
+        0.9986519813537598,
+        0.9822812080383301,
+        0.9909268021583557,
+        0.9904415011405945,
+        0.9827656745910645,
+        0.9926139712333679,
+        1.0076003074645996
+      ],
+      "meanAbsoluteError": 0.00028915429720655084,
+      "temporalMeanDeviation": 0.00013198639499023557,
+      "peakRatio": 0.9504438042640686
+    },
+    {
+      "kind": "temporal-release",
+      "region": "crown",
+      "pixels": 1470,
+      "energyRatios": [
+        0.9947258234024048,
+        0.9955404996871948,
+        0.9950440526008606,
+        0.9968512654304504,
+        0.9947637915611267,
+        0.9948851466178894,
+        0.9955331683158875,
+        0.995290219783783
+      ],
+      "meanAbsoluteError": 0.0005593787645921111,
+      "temporalMeanDeviation": 0.00027680990751832724,
+      "peakRatio": 0.9963659048080444
+    },
+    {
+      "kind": "temporal-release",
+      "region": "hair-interior",
+      "pixels": 3014,
+      "energyRatios": [
+        0.990980327129364,
+        0.9914478659629822,
+        0.9913565516471863,
+        0.9926419258117676,
+        0.990958571434021,
+        0.990915060043335,
+        0.9924041628837585,
+        0.9919431805610657
+      ],
+      "meanAbsoluteError": 0.00035744457272812724,
+      "temporalMeanDeviation": 0.00016980869986582547,
+      "peakRatio": 0.9963659048080444
+    },
+    {
+      "kind": "temporal-release",
+      "region": "fine-hair-boundary",
+      "pixels": 742,
+      "energyRatios": [
+        1.0014077425003052,
+        0.9986519813537598,
+        0.9822812080383301,
+        0.9909268021583557,
+        0.9904415011405945,
+        0.9827656745910645,
+        0.9926139712333679,
+        1.0076003074645996
+      ],
+      "meanAbsoluteError": 0.00028915429720655084,
+      "temporalMeanDeviation": 0.00013198639499023557,
+      "peakRatio": 0.9504438042640686
+    }
+  ],
+  "sourceBeauty": {
+    "sha256": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+    "rimMaximumByteErrors": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  "geometry": {
+    "sourceGlbSha256": "9246691bb5671d854029d9481e739e319d2fb756903c1d329a59b543271c1ed4",
+    "animatedGlbSha256": "8e707c895d4b2bed00393e5270c813a4bf850591f6c34236435d35f1086f3840",
+    "preservedBinaryBytes": 26428588,
+    "preservedBinarySha256": "0c6c450d1553f148a24be9222b706578a321c910abefa378b12614e71a2d9722",
+    "originalNodeCount": 328,
+    "originalRootNodes": [
+      326,
+      327
+    ],
+    "translationWorldUnits": 0.03,
+    "animationTimes": [
+      0,
+      0.26666666666666666,
+      0.8,
+      2
+    ],
+    "projects": {
+      "off": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261024-142358-blend-fade-motion-7e378a\\native-motion-off.azureproject",
+      "temporal": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261024-142358-blend-fade-motion-7e378a\\native-motion-temporal.azureproject",
+      "high": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261024-142358-blend-fade-motion-7e378a\\native-motion-high.azureproject"
+    }
+  },
+  "reference": {
+    "roi": [
+      540,
+      45,
+      765,
+      240
+    ],
+    "frames": 80,
+    "highFrequencyFilter": "input-minus-3x3-box-edge-padding",
+    "metricsSha256": "6ca943737eb25264b8bc9b54f45b84dff35c75980d4262f051c72f2b3b68fe7a",
+    "measurementSha256": "ce02c96f88589d09de6d27755724ffd967af67e6f905202525a316562a7f842b"
+  },
+  "redLogSha256": "aa840aee1f9e385fb7b86238a9460b7b2ba669b43011d507e95ef2f137f5b9bc",
+  "sourceHashes": {
+    "shaders/motion_vector.frag": "2165bc29bd1750d3196f8c83c8b95f06532e2af78683768fb723da26ba645355",
+    "shaders/temporal_resolve.frag": "335b17a84212357875b1357db71e7dc1f5314ff8bf9216c3468d920c30148010",
+    "tests/MotionVectorGpuTests.cpp": "54f9121a921b3a50c1813a0d706367e9930d002bd205b09e1c34b5546700e8aa",
+    "src/scenes/CharacterSceneRenderer.cpp": "08b29def0f423487099d155971fa54f63427dd90a19ecf30b97c93130dd107c9"
+  },
+  "remaining": [
+    "Native moving hair high-frequency detail fails original 0.8-1.2 amplitude gate",
+    "Cutout combined footprint and clothing edges",
+    "NR7-AA5/AA6, NR8-V2 and NR0-NR12 joint acceptance"
+  ]
+}
