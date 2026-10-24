@@ -205,6 +205,7 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 混合节点渐隐及运动覆盖见[渐隐验证](docs/acceptance/nr/blend-fade-motion.md)。
 真实角色移动与共面显露见[历史验证](docs/acceptance/nr/native-motion-history.md)。
 裁剪足迹与运动外壳见[覆盖验证](docs/acceptance/nr/cutout-motion-coverage.md)。
+动态高频门禁及几何样点对照见[细节验证](docs/acceptance/nr/native-detail-sampling.md)。
 完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。
 时序历史、材质走样及主场景运动细节保持待验。
 公共数值与生命周期结果见[验收记录](docs/acceptance/nr/spatial-antialiasing.md)。

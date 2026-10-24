@@ -171,3 +171,8 @@ P8 状态为 Ready，机器批次已收尾。
 透明运动外壳及部分响应组合通过所属 GPU 探针。
 完整细线与服饰的质量门禁保持待项。
 范围见[裁剪覆盖验证](acceptance/nr/cutout-motion-coverage.md)。
+
+动态细节测量共用整体及三乘三高频相关幅度。
+旋转四样点的离线对照通过头发、细线及轮廓门禁。
+GPU 多样点着色、主辅视图及预算按专项计划接入。
+证据见[动态细节验证](acceptance/nr/native-detail-sampling.md)。

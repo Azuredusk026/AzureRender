@@ -11,6 +11,7 @@ import tempfile
 import numpy as np
 from PIL import Image
 import test_material_temporal_coverage_gpu as motion
+from temporal_coverage_metrics import correlated_detail
 
 
 def fixture(folder,case,mode):
@@ -52,11 +53,7 @@ def fixture(folder,case,mode):
 
 def coherent_detail(candidate,reference,indices=slice(16,48)):
     """Project onto the reference signal so uncorrelated noise cannot mimic detail."""
-    a,b=(motion.local(v)[indices] for v in (candidate,reference))
-    a=a-a.mean((1,2),keepdims=True);b=b-b.mean((1,2),keepdims=True)
-    energy=(b*b).sum((1,2,3))
-    assert energy.min()>1e-8,'The detail reference must contain resolvable structure'
-    return ((a*b).sum((1,2,3))/energy).tolist()
+    return correlated_detail(motion.local(candidate),motion.local(reference),indices)
 
 
 def run(player,output,case,validation):
