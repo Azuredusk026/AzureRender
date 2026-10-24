@@ -1,9 +1,11 @@
 """Measure animated alpha coverage against independent fourfold rasterization."""
 import argparse
+import base64
 import hashlib
 import json
 from pathlib import Path
 import re
+import struct
 import subprocess
 import tempfile
 import numpy as np
@@ -24,18 +26,33 @@ def fixture(folder,case,mode):
     for material in asset['materials']:
         material.pop('extras',None)
         material['pbrMetallicRoughness'].update(baseColorTexture={'index':texture},baseColorFactor=[.35,.55,.7,1])
-        material['alphaMode']={'mask':'MASK','blend':'BLEND','cloth':'OPAQUE','composite':'BLEND'}[case]
+        material['alphaMode']={'mask':'MASK','blend':'BLEND','fading':'BLEND','fade-cycle':'BLEND','cloth':'OPAQUE','composite':'BLEND'}[case]
         material['alphaCutoff']=.5
         if case=='composite':material['extras']={'azureRenderMaterial':{'schemaVersion':2,
             'class':'generic' if folder.name=='candidate' else 'overlay','features':['multiply-composite'],
             'composite':{'schemaVersion':1,'mode':'multiply'}}}
+    if case in ('fading','fade-cycle'):
+        asset.setdefault('extensionsUsed',[]).append('AZURE_node_opacity')
+        asset['nodes'][0].setdefault('extensions',{})['AZURE_node_opacity']={'schemaVersion':1,'opacity':.5}
+    if case=='fade-cycle':
+        binary=bytearray(base64.b64decode(asset['buffers'][0]['uri'].split(',',1)[1]))
+        def scalar(values):
+            while len(binary)%4:binary.append(0)
+            view=len(asset['bufferViews']);asset['bufferViews'].append({'buffer':0,'byteOffset':len(binary),'byteLength':len(values)*4})
+            binary.extend(struct.pack('<'+'f'*len(values),*values));index=len(asset['accessors'])
+            asset['accessors'].append({'bufferView':view,'componentType':5126,'count':len(values),'type':'SCALAR'});return index
+        animation=asset['animations'][0];sampler=len(animation['samplers'])
+        animation['samplers'].append({'input':scalar([0,16/60,24/60,40/60,48/60,80/60]),
+            'output':scalar([.5,.5,0,0,.5,.5]),'interpolation':'LINEAR'})
+        animation['extensions']={'AZURE_node_opacity':{'schemaVersion':1,'channels':[{'node':0,'sampler':sampler}]}}
+        asset['buffers'][0].update(byteLength=len(binary),uri='data:application/octet-stream;base64,'+base64.b64encode(binary).decode())
     path.write_text(json.dumps(asset))
     return project
 
 
-def coherent_detail(candidate,reference):
+def coherent_detail(candidate,reference,indices=slice(16,48)):
     """Project onto the reference signal so uncorrelated noise cannot mimic detail."""
-    a,b=(motion.local(v)[16:48] for v in (candidate,reference))
+    a,b=(motion.local(v)[indices] for v in (candidate,reference))
     a=a-a.mean((1,2),keepdims=True);b=b-b.mean((1,2),keepdims=True)
     energy=(b*b).sum((1,2,3))
     assert energy.min()>1e-8,'The detail reference must contain resolvable structure'
@@ -74,7 +91,12 @@ def run(player,output,case,validation):
             assert q['maximumCompatibilityByteError']<=1,q
         else:
             q=motion.measure(images['source'],images['candidate'],images['reference']);report['quality']=q
-            if case!='cloth':q['coherentDetailRatios']=coherent_detail(images['candidate'],images['reference'])
+            if case!='cloth':
+                active=np.r_[16:24,41:48] if case=='fade-cycle' else slice(16,48)
+                q['coherentDetailRatios']=coherent_detail(images['candidate'],images['reference'],active)
+            if case=='fade-cycle':
+                q['maximumHiddenByteError']=float(np.max(np.abs(motion.encoded(images['candidate'][25:40])-motion.encoded(images['reference'][25:40,0:1,0:1]))))
+                assert q['maximumHiddenByteError']<=1,q
             assert all(abs(v-1)<=.02 for v in q['movingEnergyRatios']+q['lastEightEnergyRatios']),q
             assert q['errorRatio']<=.8 and q['residualChangeRatio']<=.8 and q['edgeErrorRatio']<=.8,q
             assert q['maximumGhostPixelsOutsideTwoPixels']==0 and q['maximumFlatByteError']<=1,q
@@ -92,7 +114,7 @@ def run(player,output,case,validation):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__)
     parser.add_argument('--executable',type=Path,required=True);parser.add_argument('--output',type=Path)
-    parser.add_argument('--case',choices=('mask','blend','cloth','composite'),required=True)
+    parser.add_argument('--case',choices=('mask','blend','fading','fade-cycle','cloth','composite'),required=True)
     parser.add_argument('--validation',choices=('enabled','disabled'),required=True);args=parser.parse_args()
     if args.output:run(args.executable.resolve(),args.output.resolve(),args.case,args.validation)
     else:

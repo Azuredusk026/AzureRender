@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "fa6d679",
+  "run": "build/runs/20261024-142358-blend-fade-motion-7e378a",
+  "scope": "Current blended node-opacity coverage and generic fade-to-background sequence; complete occlusion and native motion remain separate.",
+  "rendererApiVersion": 4,
+  "materialBytes": 192,
+  "motionPushBytes": 128,
+  "temporalBytesPerPixel": 52,
+  "configurations": {
+    "debug": {
+      "registeredChecks": 7,
+      "additionalNodeOpacityCheck": true,
+      "checksLogSha256": "22681930c01cbd8c9dea559975434b4821bc110d0b94c7626b4ca5b2752f3781",
+      "checksDetailsSha256": "41e20b327a25ba96e135976f480a602e204dfbf74a30c49b08e4c7560d3badab",
+      "nodeOpacityLogSha256": "16e26d79dcfe1c707387a928631823db6db5f53a8f9052025ac6dc3578eecbec",
+      "buildLogSha256": "5a9e98bf0a881195f8730c398c70b233c141cf8078b5a3903573b5663d4a33ce",
+      "playerSha256": "8cceadebdd494f6854165cb44e62021ab95e519bc533f99120d2622ad4d09068",
+      "editorSha256": "3064f5fb29b1aa9c3fbb46211d9be8222d877f5faac430f750614aecfb193cb9",
+      "motionNumericChecks": 45000,
+      "hdrHistoryChecks": 55152,
+      "cases": {
+        "half": {
+          "receiptSha256": "c9442286a08cc9813a1e02ea8967374ed7f8e67bde6761bccf72475842164a78",
+          "metrics": {
+            "errorRatio": 0.05355440791674428,
+            "residualChangeRatio": 0.05150722735390578,
+            "edgeErrorRatio": 0.5152100372469144,
+            "maximumGhostPixelsOutsideTwoPixels": 0,
+            "maximumFlatByteError": 0
+          },
+          "movingEnergyRange": [
+            0.9995911697228662,
+            0.999939099182955
+          ],
+          "coherentDetailRange": [
+            0.9966098676386488,
+            0.9988949959806512
+          ],
+          "maximumHiddenByteError": null
+        },
+        "cycle": {
+          "receiptSha256": "df8a6713696a07648a054df3c0bfcbb899af75bfe742eecc024a4cc1d0407551",
+          "metrics": {
+            "errorRatio": 0.07779654158697669,
+            "residualChangeRatio": 0.0823946426627335,
+            "edgeErrorRatio": 0.46685192002257736,
+            "maximumGhostPixelsOutsideTwoPixels": 0,
+            "maximumFlatByteError": 0
+          },
+          "movingEnergyRange": [
+            0.9998262124107998,
+            1.0016510167599388
+          ],
+          "coherentDetailRange": [
+            0.9767628986058928,
+            1.0009878815108386
+          ],
+          "maximumHiddenByteError": 0.0
+        }
+      },
+      "outlineCases": 33,
+      "outlineSummarySha256": "1f26a532080ee1fc71fed104a9fa0a4153745241a2f41da4ebce086869798dfd",
+      "nativeFrames": 32,
+      "nativeReferenceByteDifference": 0,
+      "nativeReceiptSha256": "bf58112f96310741041dfd22fd8526fdfd9ad3b55355ad4550a23c8173117ff1"
+    },
+    "release": {
+      "registeredChecks": 7,
+      "additionalNodeOpacityCheck": true,
+      "checksLogSha256": "ceb9c0ad020e7c91fdea004f1d5906d857a25788857ae8870b0cc1fd10c4fc53",
+      "checksDetailsSha256": "a868c7f8a8ea20b92e28b12f6f63819783e2f9e7d88b3723e4abe28e877f4b4f",
+      "nodeOpacityLogSha256": "16e26d79dcfe1c707387a928631823db6db5f53a8f9052025ac6dc3578eecbec",
+      "buildLogSha256": "9ee916fcb3fdaa17d0f49de8099add5fcb2aa59e8577ec8721a7e8b7ab3a8c1f",
+      "playerSha256": "dbbfc64fc667ab7b6919a2317e83c294b62d723fd3aafd213fe6e43a0375e595",
+      "editorSha256": "7f86bec8f1683222c0447f6d37cf9f14afbd508adef43875b34af906bb54955b",
+      "motionNumericChecks": 45000,
+      "hdrHistoryChecks": 55152,
+      "cases": {
+        "half": {
+          "receiptSha256": "a647834de39bd20421c12d81662c7c42f71ce451630d452b9f25bed21b0b7b22",
+          "metrics": {
+            "errorRatio": 0.05355440791674428,
+            "residualChangeRatio": 0.05150722735390578,
+            "edgeErrorRatio": 0.5152100372469144,
+            "maximumGhostPixelsOutsideTwoPixels": 0,
+            "maximumFlatByteError": 0
+          },
+          "movingEnergyRange": [
+            0.9995911697228662,
+            0.999939099182955
+          ],
+          "coherentDetailRange": [
+            0.9966098676386488,
+            0.9988949959806512
+          ],
+          "maximumHiddenByteError": null
+        },
+        "cycle": {
+          "receiptSha256": "89785d33fabcb9cac2858f25f9709a6614df048d90504143d33b13b03278159b",
+          "metrics": {
+            "errorRatio": 0.07779654158697669,
+            "residualChangeRatio": 0.0823946426627335,
+            "edgeErrorRatio": 0.46685192002257736,
+            "maximumGhostPixelsOutsideTwoPixels": 0,
+            "maximumFlatByteError": 0
+          },
+          "movingEnergyRange": [
+            0.9998262124107998,
+            1.0016510167599388
+          ],
+          "coherentDetailRange": [
+            0.9767628986058928,
+            1.0009878815108386
+          ],
+          "maximumHiddenByteError": 0.0
+        }
+      },
+      "outlineCases": 33,
+      "outlineSummarySha256": "545bb526dca4b43374cc60f83a773c452856d81547c47870ea86cc1efa7176f8",
+      "nativeFrames": 32,
+      "nativeReferenceByteDifference": 0,
+      "nativeReceiptSha256": "41bbdb46b588fb589e619d8e513d651de2e8e9c2af14ec7c547ed2cd381c555b"
+    }
+  },
+  "shaders": {
+    "count": 85,
+    "changed": [
+      "motion_vector.frag.spv"
+    ],
+    "baselineReferenceSha256": "7c581c86c254d23d52929ffca86a966a6ad7a1d953b9748dfc6c4449fa4cd56b",
+    "motionFragmentSha256": "1bb1a1083d0f9fcfc024d48b7fe37c7981129dfe5e41923280e8a9877a213409",
+    "crossConfigurationIdentical": true
+  },
+  "sourceBeauty": {
+    "sha256": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+    "rimMaximumByteErrors": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  "redLogSha256": "e11140b3d60c1ce80ec9c55346a49f7ee635c2d5cf67c612e7d5d86a2d6cf625",
+  "sourceHashes": {
+    "CMakeLists.txt": "640f8abf55cb8de710a5b262e20e80f481559444d432da21cdaad97faf347398",
+    "shaders/motion_vector.frag": "c0fe2fc13cc218245f02e51369c7934761478f9c74918d687ec6c761712b19aa",
+    "tests/MotionVectorGpuTests.cpp": "a2da39b7fe560cff7f62c05a7bf2ffc8f934188bf72f33c70fbee9103725da9e",
+    "tools/test_temporal_alpha_coverage_gpu.py": "5ff9e805f50831376bf5a9b30c028aecc909729c20df20904ad32a4a50991458"
+  },
+  "remaining": [
+    "Coplanar translucent disappearance and history validity",
+    "Cutout combined sampling and temporal convergence",
+    "Native captured-model motion, clothing edges and full material restoration",
+    "NR7-AA5/AA6 and NR0-NR12 joint acceptance"
+  ]
+}

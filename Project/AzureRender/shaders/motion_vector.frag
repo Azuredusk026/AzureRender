@@ -20,7 +20,9 @@ void main(){
     if((motion.flags&512u)==0u&&(floatBitsToUint(motion.detail.y)&azurePixelIntegralFeature)!=0u)
         integrated=azureUniformMaterialFrame(dFdx(materialFrameNormal),dFdy(materialFrameNormal),
             dFdx(materialFrameTangent),dFdy(materialFrameTangent));
-    if(!azureNodeOpacityCovered(opacityCoordinate,motion.outline.w))discard;
+    bool blend=(motion.flags&512u)==0u&&(motion.flags&3u)==2u;
+    if(blend){if(motion.outline.w<=0)discard;}
+    else if(!azureNodeOpacityCovered(opacityCoordinate,motion.outline.w))discard;
     if((motion.flags&512u)!=0u){
         uint tile=floatBitsToUint(motion.camera.w);
         if(tile!=0xffffffffu){ivec2 extent=ivec2(motion.outline.yz);uint columns=uint(textureSize(coverageMask,0).x/extent.x);

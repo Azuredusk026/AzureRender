@@ -158,3 +158,8 @@ P8 状态为 Ready，机器批次已收尾。
 可辨层级的 CPU、GPU 和最近邻兼容检查通过。
 连续运动及组合采样仍有专项待验项。
 结果见[缩小覆盖验证](acceptance/nr/alpha-mip-footprint.md)。
+
+混合节点的当前运动覆盖与连续 Alpha 一致。
+半透明度及渐隐循环通过相关细节和隐藏期检查。
+共面叠层显露与实际角色移动继续专项验证。
+结果见[渐隐运动验证](acceptance/nr/blend-fade-motion.md)。

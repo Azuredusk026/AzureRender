@@ -899,6 +899,12 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.BlendCoverageGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_temporal_alpha_coverage_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --case blend --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.BlendCoverageGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.BlendFadeCoverageGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_temporal_alpha_coverage_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --case fading --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.BlendFadeCoverageGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.BlendFadeCycleGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_temporal_alpha_coverage_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --case fade-cycle --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.BlendFadeCycleGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_test(NAME AzureRender.CompositeCoverageCompatibilityGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_temporal_alpha_coverage_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --case composite --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CompositeCoverageCompatibilityGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)

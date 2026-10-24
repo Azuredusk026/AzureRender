@@ -195,6 +195,7 @@ R11G11B10 与 RGBA16F 的量化误差单独记录。
 不透明分项的运动、部分响应及三次重建见[运动验证](../acceptance/nr/material-motion-response.md)。
 混合细线的覆盖积分及相关细节门禁见[专项验证](../acceptance/nr/blend-temporal-coverage.md)。
 裁剪纹理的可辨层级见[缩小覆盖验证](../acceptance/nr/alpha-mip-footprint.md)。
+混合节点渐隐的运动与背景显露见[专项验证](../acceptance/nr/blend-fade-motion.md)。
 
 ### 图像与动态验收
 

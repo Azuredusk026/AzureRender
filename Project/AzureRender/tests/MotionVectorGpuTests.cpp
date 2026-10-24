@@ -60,12 +60,13 @@ int main(int argc,char** argv)try{
         MotionPoseHistory history;history.stage({old},oldView);history.commit(3);history.stage({now},{});
         MotionVectorDraw draw;draw.vertices=buffers[4].buffer;draw.indices=buffers[5].buffer;draw.indexCount=3;
         draw.push.camera[2]=3;const std::uint32_t noTile=UINT32_MAX;std::memcpy(&draw.push.camera[3],&noTile,4);draw.push.outline={.8F,32,32,1};
-        for(unsigned variant=0;variant<10;++variant){
+        for(unsigned variant=0;variant<12;++variant){
             auto packed=history.pack(identity,variant==0?0:3,8192);pass.prepare(variant%2,packed,input);draw.push.flags=variant==2?16:variant==3?512:variant==4?768:variant==5?18:0;
             draw.shell=variant==3||variant==4;
-            const std::uint32_t filtered=variant==9?(1U<<30U):variant>=6?MaterialFeatureHairPixelIntegral:0U;std::memcpy(&draw.push.detail[1],&filtered,4);
+            const std::uint32_t filtered=variant>=9?(1U<<30U):variant>=6?MaterialFeatureHairPixelIntegral:0U;std::memcpy(&draw.push.detail[1],&filtered,4);
+            draw.push.outline[3]=variant==11?0.F:variant==10?.5F:1.F;
             if(variant>=6){
-                draw.push.flags=variant==9?18:variant==8?16:0;
+                draw.push.flags=variant>=9?18:variant==8?16:0;
                 for(unsigned i=0;i<3;++i)vertices[i].normal=variant==7?std::array<float,3>{i==0?1.F:0.F,i==1?1.F:0.F,i==2?1.F:0.F}:std::array<float,3>{1,0,0};
                 std::memcpy(buffers[4].mapped,vertices.data(),sizeof(vertices));host.allocator.flush(buffers[4],0,sizeof(vertices));
             }
@@ -93,13 +94,14 @@ int main(int argc,char** argv)try{
             });
             host.allocator.invalidate(buffers[6],0,buffers[6].size);const auto* values=static_cast<const float*>(buffers[6].mapped);
             for(unsigned y=1;y<31;++y)for(unsigned x=5;x<30;++x){auto pixel=y*32+x;const auto* motion=values+pixel*4;
-                const float expected[]{variant&&variant!=5?.1F:0,0,variant==4?.27F:variant&&variant!=5?.25F:0,variant==9?-1.F:variant==6?-.5F:variant==5?0.F:variant==0||variant==2||variant==8?-1.F:1.F};
+                const bool invisible=variant==5||variant==11;
+                const float expected[]{variant&&!invisible?.1F:0,0,variant==4?.27F:variant&&!invisible?.25F:0,invisible?0.F:variant>=9?-1.F:variant==6?-.5F:variant==0||variant==2||variant==8?-1.F:1.F};
                 for(unsigned axis=0;axis<4;++axis)if(!std::isfinite(motion[axis])||std::abs(motion[axis]-expected[axis])>2e-6F)
                     {std::cerr<<"variant="<<variant<<" pixel="<<x<<','<<y<<" axis="<<axis<<" actual="<<motion[axis]<<" expected="<<expected[axis]<<'\n';
                     throw std::runtime_error("Actual motion attachment differs from independent translation, depth or reactive reference");}
-                if(std::abs(values[4096+pixel]-(variant==5?1.F:variant==4?.27F:.25F))>1e-6F)throw std::runtime_error("Motion color-surface depth differs from drawn surface");}
+                if(std::abs(values[4096+pixel]-(invisible?1.F:variant==4?.27F:.25F))>1e-6F)throw std::runtime_error("Motion color-surface depth differs from drawn surface");}
         }
-        draw.push.detail[1]=0;
+        draw.push.detail[1]=0;draw.push.outline[3]=1;
         TemporalViewState camera;TemporalFrameInfo info;info.width=info.height=32;info.sceneGeneration=1;
         info.projection=info.viewProjection=identity;MotionPoseHistory temporalPoses;
         const MotionMatrix farProjection{1,0,0,0,0,-1,0,0,0,0,1000.F/(.1F-1000.F),-1,0,0,100.F/(.1F-1000.F),0};
@@ -181,5 +183,5 @@ int main(int argc,char** argv)try{
         }
     }
     if(host.errors.load())throw std::runtime_error("Motion vector Vulkan validation errors");
-    std::cout<<"Motion vector GPU: 37500 motion checks and 55152 HDR history checks, including far depth and moving silhouette rejection passed\n";return 0;
+    std::cout<<"Motion vector GPU: 45000 motion checks and 55152 HDR history checks, including far depth and moving silhouette rejection passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
