@@ -317,7 +317,7 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"cameraFar\": " << renderSettings_.cameraFar << ",\n"
         << "  \"antiAliasing\": " << effectiveRenderSettings_.antiAliasing << ",\n"
         << "  \"nprLighting\": " << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump() << ",\n"
-        << "  \"antiAliasingPipeline\": " << std::quoted(temporalReconstruction_&&sceneRenderer_&&sceneRenderer_->capabilities().supportsMotionVectors?"native-hdr-temporal-v2":"linear-display-spatial-v1") << ",\n"
+        << "  \"antiAliasingPipeline\": " << std::quoted(temporalReconstruction_&&sceneRenderer_&&sceneRenderer_->capabilities().supportsMotionVectors?"native-hdr-temporal-v3":"linear-display-spatial-v1") << ",\n"
         << "  \"temporalRequested\": " << (temporalRequested_?"true":"false") << ",\n"
         << "  \"temporalHistorySubmission\": " << (temporalReconstruction_?temporalReconstruction_->historySubmission():0) << ",\n"
         << "  \"temporalBytes\": " << (temporalReconstruction_?temporalReconstruction_->byteSize():0) << ",\n"

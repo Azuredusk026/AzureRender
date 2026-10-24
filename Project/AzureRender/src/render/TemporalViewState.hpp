@@ -22,13 +22,14 @@ struct TemporalPreparedFrame {
     std::uint64_t previousSubmission=0;
     std::uint32_t sampleIndex=0;
 };
-// Centered Halton(2,3), eight phases. The phase follows this view's successful
+inline constexpr char kTemporalSamplingPattern[]="zero-mean-halton8-v1";
+// Zero-mean Halton(2,3), eight phases. The phase follows this view's successful
 // submissions, independently of frame-ring slots and simulation updates.
 inline std::array<float,2> temporalJitterPixels(std::uint32_t phase) {
     constexpr std::array<std::array<float,2>,8> samples{{
         {{0,-1.F/6}},{{-.25F,1.F/6}},{{.25F,-7.F/18}},{{-.375F,-1.F/18}},
         {{.125F,5.F/18}},{{-.125F,-5.F/18}},{{.375F,1.F/18}},{{-.4375F,7.F/18}}}};
-    return samples[phase%8];
+    auto value=samples[phase%8];value[0]+=7.F/128.F;return value;
 }
 // Owner-thread CPU state. Preparing never publishes GPU history. Resource
 // owners commit only after a successful queue submission; clear on recreation.

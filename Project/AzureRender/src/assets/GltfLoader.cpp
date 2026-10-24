@@ -176,6 +176,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "silhouette-outline") return MaterialFeatureSilhouetteOutline;
     if (value == "multiply-composite") return MaterialFeatureMultiplyComposite;
     if (value == "hair-projected-ramp") return MaterialFeatureHairProjectedRamp;
+    if (value == "hair-pixel-integral") return MaterialFeatureHairPixelIntegral;
     if (value == "eye-radial-surface") return MaterialFeatureEyeRadialSurface;
     if (value == "unlit-surface") return MaterialFeatureUnlitSurface;
     if (value == "geometry-shadow") return MaterialFeatureGeometryShadow;
@@ -302,6 +303,12 @@ void loadMaterialProfile(
             }
             result.materialFeatures |= flag;
         }
+    }
+    if(result.materialFeatures&MaterialFeatureHairPixelIntegral){
+        constexpr auto required=MaterialFeatureHairAnisotropy|MaterialFeatureHairProjectedRamp;
+        if(result.materialProfileVersion!=2||result.materialClass!=AssetMaterialClass::Hair
+            ||(result.materialFeatures&required)!=required)
+            throw std::runtime_error("hair-pixel-integral requires schema 2 projected hair for "+result.name);
     }
     const auto coverage=result.materialFeatures&MaterialFeatureShadowCoverageMask;
     if(coverage&&(result.materialProfileVersion!=2||coverage==MaterialFeatureShadowCoverageMask||result.materialClass==AssetMaterialClass::Showcase))

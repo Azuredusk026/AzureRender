@@ -81,6 +81,13 @@ private:
     void initializeMotion(const RenderContext&);
     void prepareMotion();
     void prepareTemporalFrame(const SceneFrameData&);
+    std::uint32_t materialFeaturesForFrame(const AssetMaterial&) const noexcept;
+    bool temporalMaterialSamplesActive() const noexcept;
+    void initializeHairIntegralPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&);
+    void destroyHairIntegralPipelines() noexcept;
+    VkPipeline hairIntegralPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const;
+    std::array<VkPipeline,6> hairIntegralPipelines_{};
+    std::array<VkPipeline,3> hairIntegralSnapshotPipelines_{};
     std::array<float,2> samplingJitter_{};
     std::uint64_t temporalSceneGeneration_=1;
     bool faceSdfPrepared_=false,platformPrepared_=false;

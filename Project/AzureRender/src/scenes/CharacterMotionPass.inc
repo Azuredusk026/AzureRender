@@ -1,5 +1,12 @@
 // Included after the renderer's primitive helpers. The public motion pass owns
 // GPU submission state; this adapter supplies the asset's frozen draw inputs.
+std::uint32_t CharacterSceneRenderer::materialFeaturesForFrame(const AssetMaterial& material) const noexcept {
+    return materialSamplingFeatures(material.materialFeatures,temporalMaterialSamplesActive()
+        &&material.alphaMode!=AssetAlphaMode::Blend&&material.materialClass!=AssetMaterialClass::Overlay);
+}
+bool CharacterSceneRenderer::temporalMaterialSamplesActive() const noexcept {
+    return motionPass_&&renderSettings_&&renderSettings_->antiAliasing==3&&state_.temporalFrame&&state_.temporalFrame->previous.has_value();
+}
 void CharacterSceneRenderer::prepareTemporalFrame(const SceneFrameData& frame){
     TemporalFrameInfo temporal;
     temporal.width=std::max(frame.swapchainWidth,1U);temporal.height=std::max(frame.swapchainHeight,1U);

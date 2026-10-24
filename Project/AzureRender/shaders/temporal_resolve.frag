@@ -32,7 +32,7 @@ void main(){
         if(abs(x)<=1&&abs(y)<=1){baseLow=min(baseLow,value);baseHigh=max(baseHigh,value);}
         vec4 candidate=texelFetch(vectors,neighbour,0);
         float candidateDepth=candidate.w!=0?texelFetch(surfaceDepth,neighbour,0).r:texelFetch(hardwareDepth,neighbour,0).r;
-        minimumDepth=min(minimumDepth,candidateDepth);maximumDepth=max(maximumDepth,candidateDepth);
+        if(abs(x)<=1&&abs(y)<=1){minimumDepth=min(minimumDepth,candidateDepth);maximumDepth=max(maximumDepth,candidateDepth);}
         if(candidateDepth<depth){depth=candidateDepth;motion=candidate;}
     }
     vec2 previousUv=uv-motion.xy;float expectedDepth=motion.z;

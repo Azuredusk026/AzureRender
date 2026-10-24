@@ -183,7 +183,8 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
             {MaterialFeatureSilhouetteOutline,"silhouette-outline"},{MaterialFeatureMultiplyComposite,"multiply-composite"},
             {MaterialFeatureOverlay,"overlay"},{MaterialFeatureBrowOverlay,"brow-overlay"},
             {MaterialFeatureSceneRefraction,"scene-refraction"},{MaterialFeatureUnlitSurface,"unlit-surface"},
-            {MaterialFeatureGeometryShadow,"geometry-shadow"},{MaterialFeatureSqrtAlphaShadow,"sqrt-alpha-shadow"}})
+            {MaterialFeatureGeometryShadow,"geometry-shadow"},{MaterialFeatureSqrtAlphaShadow,"sqrt-alpha-shadow"},
+            {MaterialFeatureHairPixelIntegral,"hair-pixel-integral"}})
             lost((removed&feature)!=0,label);
         replacement.slotId=slotId;replacement.name=name;mesh.materials[index]=std::move(replacement);
         if(!document.parameterOverride&&!losses.empty())RuntimeDiagnostics::instance().warning("material",

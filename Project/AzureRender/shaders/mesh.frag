@@ -12,6 +12,11 @@
 #include "environment_specular.glsl"
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
+#if defined(AZURE_HAIR_PIXEL_INTEGRAL)
+const bool azureHairPixelIntegral=true;
+#else
+const bool azureHairPixelIntegral=false;
+#endif
 
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 layout(binding = 18) uniform sampler2D overlaySceneDepth;
@@ -213,12 +218,25 @@ vec3 projectedHairNormal(vec2 encoded,float scale,float tangentSign) {
     return characterProjectedHairNormal(encoded,scale,worldNormal,vec4(worldTangent.xyz,worldTangent.w*tangentSign));
 }
 
-CharacterProjectedHairEnergy projectedHairResponse(vec3 view,vec3 light,bool directional,bool evaluateLine,out vec2 line) {
+// Gradients are prepared before nonuniform light selection and coverage exits.
+vec2 projectedHairUvDx,projectedHairUvDy;
+vec3 projectedHairNormalDx,projectedHairNormalDy,projectedHairPositionDx,projectedHairPositionDy;
+vec4 projectedHairTangentDx,projectedHairTangentDy;
+struct ProjectedHairIncident {vec3 radiance;vec4 response;vec4 mainRadiance;float specularScale;float ambientOcclusion;};
+CharacterProjectedHairEnergy projectedHairSample(vec3 view,vec3 light,bool directional,bool evaluateLine,
+    vec2 uv,vec2 screenOffset,bool integrated,ProjectedHairIncident incident,out vec2 line) {
     ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
-    vec4 parameters=texture(AZ_TEX_FACE_SDF,textureCoordinate);
-    vec4 packedNormals=texture(AZ_TEX_HAIR_DATA,textureCoordinate);
-    vec4 tangent=vec4(worldTangent.xyz,worldTangent.w*p.objectY.w);
-    vec3 normal=projectedHairNormal(packedNormals.ba,p.edgeNormalDirection.y,p.objectY.w);
+    vec4 parameters=integrated?textureGrad(AZ_TEX_FACE_SDF,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):texture(AZ_TEX_FACE_SDF,uv);
+    vec4 packedNormals=integrated?textureGrad(AZ_TEX_HAIR_DATA,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):texture(AZ_TEX_HAIR_DATA,uv);
+    vec3 basisNormal=worldNormal;vec4 basisTangent=worldTangent;
+    if(integrated){
+        basisNormal+=projectedHairNormalDx*screenOffset.x+projectedHairNormalDy*screenOffset.y;
+        basisTangent+=projectedHairTangentDx*screenOffset.x+projectedHairTangentDy*screenOffset.y;
+        vec3 position=worldPosition+projectedHairPositionDx*screenOffset.x+projectedHairPositionDy*screenOffset.y;
+        view=characterProjectedSafeNormalize(camera.cameraPosition.xyz-position,view);
+    }
+    vec4 tangent=vec4(basisTangent.xyz,basisTangent.w*p.objectY.w);
+    vec3 normal=characterProjectedHairNormal(packedNormals.ba,p.edgeNormalDirection.y,basisNormal,tangent);
     mat3 frame=mat3(instanceFaceFrame);
     vec3 objectX=normalize(frame*p.objectX.xyz);
     vec3 objectY=normalize(frame*p.objectY.xyz);
@@ -237,12 +255,61 @@ CharacterProjectedHairEnergy projectedHairResponse(vec3 view,vec3 light,bool dir
     PackedMaterialSurfaceProfile packed=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
     if(evaluateLine&&packed.rows[8].z>.5){
         vec4 uvTransform=packed.rows[9];
-        float sampleValue=texture(AZ_TEX_SHADOW_COLOR_LUT,textureCoordinate*uvTransform.xy+uvTransform.zw).r;
+        vec2 lineUv=uv*uvTransform.xy+uvTransform.zw;
+        float sampleValue=integrated?textureGrad(AZ_TEX_SHADOW_COLOR_LUT,lineUv,
+            projectedHairUvDx*uvTransform.xy*.25,projectedHairUvDy*uvTransform.xy*.25).r
+            :texture(AZ_TEX_SHADOW_COLOR_LUT,lineUv).r;
         vec3 strand=characterProjectedHairStrand(normal,tangent,parameters.r,objectX,objectY,objectZ,p.edgeNormalDirection.z);
-        line=characterProjectedHairLine(strand,normal,halfVector,textureCoordinate.x,sampleValue,parameters.g,energy.q,packed.rows[7],packed.rows[8].xy);
+        line=characterProjectedHairLine(strand,normal,halfVector,uv.x,sampleValue,parameters.g,energy.q,packed.rows[7],packed.rows[8].xy);
     }
     if(adapter.x>.5){energy.primary*=adapter.z;energy.secondary*=adapter.z;}
+    if(integrated&&incident.response.x>.5){
+        vec3 surface=characterProjectedHairNormal(packedNormals.rg,p.edgeNormalDirection.w,basisNormal,tangent)*(gl_FrontFacing?1.0:-1.0);
+        float cosine=dot(surface,light);vec3 weight;
+        if(incident.response.x>2.5){
+            float ao=incident.ambientOcclusion,visibility=incident.response.w;
+            vec4 diffuseRamp=textureLod(AZ_TEX_STYLE_MASK,vec2(cosine*.5+.5,.5),0);
+            float viewAlpha=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(surface,-camera.cameraForward.xyz)*.5+.5,.5),0).a;
+            float litMask=min(min(parameters.b,ao),diffuseRamp.a),aoMask=parameters.b*ao;
+            CharacterDiffuseIllumination illumination=characterDiffuseIllumination(surface,incident.radiance,incident.mainRadiance,
+                camera.nprDirectionBias,camera.nprGainFloor,camera.nprComposition,camera.nprAmbientColor.a,
+                ao*camera.nprLightingParameters.z,litMask,visibility);
+            float mask=mix(viewAlpha*aoMask,litMask,visibility);
+            float scale=mix(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[5].w,1.0,mask)*(.5+.5*mask);
+            weight=(illumination.ambient+illumination.direct)*(scale*material.featureParameters.y);
+        }else{
+            vec3 radiance=incident.radiance;
+            if(incident.response.x>1.5)radiance=characterLocalLightRadiance(radiance,cosine,incident.response.yz,incident.response.w);
+            weight=radiance*(max(cosine,0.0)*incident.specularScale);
+        }
+        energy.primary*=weight;energy.secondary*=weight;
+    }
     return energy;
+}
+
+CharacterProjectedHairEnergy projectedHairResponseWeighted(vec3 view,vec3 light,bool directional,bool evaluateLine,
+    ProjectedHairIncident incident,out vec2 line) {
+    if(!azureHairPixelIntegral||(material.materialFeatures&8388608U)==0U)
+        return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),false,incident,line);
+    if((material.materialFeatures&0x80000000U)!=0U)
+        return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),true,incident,line);
+    CharacterProjectedHairEnergy total=CharacterProjectedHairEnergy(vec3(0),vec3(0),vec3(0));
+    vec2 lineMoments=vec2(0);
+    for(int y=0;y<4;++y)for(int x=0;x<4;++x){
+        vec2 offset=(vec2(x,y)+.5)*.25-.5;
+        vec2 uv=textureCoordinate+projectedHairUvDx*offset.x+projectedHairUvDy*offset.y;
+        vec2 modulation;CharacterProjectedHairEnergy contribution=projectedHairSample(view,light,directional,evaluateLine,uv,offset,true,incident,modulation);
+        total.q+=contribution.q;total.primary+=contribution.primary;total.secondary+=contribution.secondary;
+        lineMoments+=vec2(modulation.x,modulation.x*modulation.y);
+    }
+    // The diffuse stripe is a linear RGB/luminance operator. Preserve its
+    // joint gain/saturation moments rather than multiplying their means.
+    line=vec2(lineMoments.x*.0625,abs(lineMoments.x)>1e-8?lineMoments.y/lineMoments.x:1);
+    total.q*=.0625;total.primary*=.0625;total.secondary*=.0625;return total;
+}
+
+CharacterProjectedHairEnergy projectedHairResponse(vec3 view,vec3 light,bool directional,bool evaluateLine,out vec2 line) {
+    return projectedHairResponseWeighted(view,light,directional,evaluateLine,ProjectedHairIncident(vec3(1),vec4(0),vec4(0),1,1),line);
 }
 
 CharacterProjectedHairEnergy projectedHairDirect(vec3 view,vec3 light,bool directional){
@@ -254,7 +321,9 @@ CharacterDiffuseResponse projectedHairDiffuseResponse(vec3 base,vec3 normal,vec3
     PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
     vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(normal,light)*.5+.5,.5),0.0);
     viewAlpha=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(normal,-camera.cameraForward.xyz)*.5+.5,.5),0.0).a;
-    float characterVisibility=texture(AZ_TEX_FACE_SDF,textureCoordinate).b;
+    float characterVisibility=azureHairPixelIntegral&&(material.materialFeatures&0x80800000U)==0x80800000U
+        ?textureGrad(AZ_TEX_FACE_SDF,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25).b
+        :texture(AZ_TEX_FACE_SDF,textureCoordinate).b;
     float litMask=min(min(characterVisibility,ao),ramp.a),aoMask=characterVisibility*ao;
     vec3 shadow=characterDiffuseSaturation(base*profile.rows[10].w,profile.rows[11].w);
     CharacterDiffuseResponse response=characterDiffuseWeightedResponse(base,shadow,0.0,profile.rows[5].w,ramp,
@@ -473,6 +542,12 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 }
 
 void main() {
+    if(azureHairPixelIntegral){
+    projectedHairUvDx=dFdx(textureCoordinate);projectedHairUvDy=dFdy(textureCoordinate);
+    projectedHairNormalDx=dFdx(worldNormal);projectedHairNormalDy=dFdy(worldNormal);
+    projectedHairTangentDx=dFdx(worldTangent);projectedHairTangentDy=dFdy(worldTangent);
+    projectedHairPositionDx=dFdx(worldPosition);projectedHairPositionDy=dFdy(worldPosition);
+    }
     if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
     bool eyeRadial=material.materialClass==6U&&materialFeatureEnabled(131072U)>.5;
     EyeSurfaceProfile eyeProfile;
@@ -545,7 +620,9 @@ void main() {
     vec4 normalSample=texture(AZ_TEX_NORMAL,textureCoordinate);
     vec3 sampledNormal = normalSample.xyz * 2.0 - 1.0;
     vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
-    vec4 hairData = texture(AZ_TEX_HAIR_DATA, textureCoordinate);
+    vec4 hairData = azureHairPixelIntegral&&(material.materialFeatures&0x80800000U)==0x80800000U
+        ?textureGrad(AZ_TEX_HAIR_DATA,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25)
+        :texture(AZ_TEX_HAIR_DATA, textureCoordinate);
     float hairActive = material.materialClass==3U ? materialFeatureEnabled(2U) : 0.0;
     bool projectedHair=hairActive>0.0&&materialFeatureEnabled(65536U)>.5;
     bool strandDiffuse=projectedHair
@@ -855,6 +932,7 @@ void main() {
     vec3 clusteredSpecular = vec3(0.0);
     vec3 sceneHairPrimary=vec3(0),sceneHairSecondary=vec3(0),sceneRim=vec3(0);
     vec3 mainHairPrimary=vec3(0),mainHairSecondary=vec3(0);
+    bool mainHairAvailable=false;
     vec3 eyeHostDiffuse=vec3(0),eyeHostMatcap=vec3(0);
     vec4 eyeMatcap=vec4(0);
     float eyeViewRampAlpha=0;
@@ -1023,8 +1101,17 @@ void main() {
         if(sceneCharacter && hairActive>0.0 && !(qaEffectMode==3 && qaEffectDisabled)) {
             vec3 hairRadiance=(characterLight||specularOnly)?characterRadiance*pointDiffuse*light.boxParameters.z:radiance;
             if(projectedHair) {
-                CharacterProjectedHairEnergy energy=projectedHairDirect(viewDirection,pointDirection,light.coneType.y>1.5);
+                bool composedHair=projectedLighting&&float(lightIndex)==camera.nprLightingParameters.y;
+                bool integrateIncident=azureHairPixelIntegral&&(material.materialFeatures&8388608U)!=0U&&!composedHair&&(characterLight||specularOnly);
+                CharacterProjectedHairEnergy energy;
+                if(integrateIncident){
+                    vec2 unusedLine;ProjectedHairIncident incident=ProjectedHairIncident(radiance,
+                        vec4(characterLight?2.0:1.0,localResponse,characterSceneVisibility),vec4(0),light.boxParameters.z,1);
+                    energy=projectedHairResponseWeighted(viewDirection,pointDirection,light.coneType.y>1.5,false,incident,unusedLine);
+                    hairRadiance=vec3(1);
+                }else energy=projectedHairDirect(viewDirection,pointDirection,light.coneType.y>1.5);
                 if(projectedLighting&&float(lightIndex)==camera.nprLightingParameters.y) {
+                    mainHairAvailable=true;
                     mainHairPrimary=energy.primary;mainHairSecondary=energy.secondary;
                 } else {
                     sceneHairPrimary+=energy.primary*hairRadiance*material.featureParameters.y;
@@ -1413,8 +1500,15 @@ void main() {
             float weight=mix(hairViewAlpha*response.aoMask,response.litMask,visibility);
             float scale=mix(hairShadowScale,1.0,weight)*(.5+.5*weight);
             vec3 specularIllumination=(illumination.ambient+illumination.direct)*scale*material.featureParameters.y;
-            vec3 primary=min(sceneHairPrimary+mainHairPrimary*specularIllumination,vec3(material.matcapColor.w));
-            vec3 secondary=sceneHairSecondary+mainHairSecondary*specularIllumination;
+            vec3 primaryMain=mainHairPrimary*specularIllumination,secondaryMain=mainHairSecondary*specularIllumination;
+            if(azureHairPixelIntegral&&(material.materialFeatures&8388608U)!=0U&&mainHairAvailable){
+                vec2 unusedLine;ProjectedHairIncident sampleLighting=ProjectedHairIncident(incident,
+                    vec4(3,0,0,visibility),mainRadiance,1,physicalAo);
+                CharacterProjectedHairEnergy energy=projectedHairResponseWeighted(viewDirection,lightDirection,true,false,sampleLighting,unusedLine);
+                primaryMain=energy.primary;secondaryMain=energy.secondary;
+            }
+            vec3 primary=min(sceneHairPrimary+primaryMain,vec3(material.matcapColor.w));
+            vec3 secondary=sceneHairSecondary+secondaryMain;
             beautyColor+=primary+secondary-kkSpecular-secondaryKkSpecular;
             kkSpecular=primary;secondaryKkSpecular=secondary;
         }

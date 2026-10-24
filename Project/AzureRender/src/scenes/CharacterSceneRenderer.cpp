@@ -2,6 +2,7 @@
 #include "assets/AssetDeformation.hpp"
 #include "animation/ExpressionPose.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
+#include "render/MaterialSampling.hpp"
 #include "scene/DirectionalLightSelection.hpp"
 #include "assets/MaterialData.hpp"
 #include "assets/MaterialSurfaceProfile.hpp"
@@ -1485,6 +1486,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
          << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
+         << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
+         << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
+         << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
          << "  \"temporalViewSubmission\": " << temporalView_.lastSubmission() << ",\n"
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
@@ -2468,13 +2472,14 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
             if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
             const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(first).model,
                 snapshot.gizmo,&primitive-mesh.primitives.data());
-            commands.bindPipeline(m.doubleSided?overlayDepthDoubleSidedPipeline_
+            commands.bindPipeline((m.materialFeatures&MaterialFeatureHairPixelIntegral)
+                ?hairIntegralPipeline(m,mirrored,true):m.doubleSided?overlayDepthDoubleSidedPipeline_
                 :mirrored?overlayDepthMirroredPipeline_:overlayDepthPipeline_);
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
             MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
                 m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
-                m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),m.materialFeatures,m.materialProfileVersion,
+                m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),materialFeaturesForFrame(m),m.materialProfileVersion,
                 static_cast<std::uint32_t>((materialBase+primitive.materialIndex)<<1U)};
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));
             MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
@@ -2492,6 +2497,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
 
 #include "CharacterOutlinePass.inc"
 #include "CharacterMotionPass.inc"
+#include "CharacterMaterialSampling.inc"
 
 void CharacterSceneRenderer::createDescriptorPool() {
     rhi::DescriptorPoolDesc poolDesc{};
@@ -3049,6 +3055,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = false;
         materialDesc.depthWrite = true;
+        const auto integralBase=materialDesc;
         opaquePipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         opaqueMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
@@ -3072,6 +3079,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         blendDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        initializeHairIntegralPipelines(context,integralBase);
         auto multiplyDesc=materialDesc;
         multiplyDesc.primaryColorBlend=rhi::PrimaryColorBlend::Multiply;
         multiplyDesc.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;
@@ -3176,6 +3184,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
 void CharacterSceneRenderer::destroyResources() {
+    destroyHairIntegralPipelines();
     motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();motionPreviousValidObjects_=0;
     destroyOverlayDepth();
     for (auto& resources : gpuCullingFrames_) resources.reset();
@@ -3323,6 +3332,7 @@ void CharacterSceneRenderer::destroyResources() {
 }
 
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
+    destroyHairIntegralPipelines();
     for (VkPipeline* pipeline : {
              &opaquePipeline_,
              &opaqueMirroredPipeline_,
@@ -4149,7 +4159,8 @@ void CharacterSceneRenderer::drawPrimitive(
         :RecordingGizmoState{selectedPrimitiveIndex_,gizmoActive_,gizmoTranslation_,gizmoRotation_,gizmoScale_};
     const bool mirrored=primitiveMirroredTransform(model,gizmo,&primitive-mesh.primitives.data());
     const bool multiplyComposite=(material.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
-    const VkPipeline pipeline = multiplyComposite
+    const VkPipeline pipeline = (material.materialFeatures&MaterialFeatureHairPixelIntegral)
+        ?hairIntegralPipeline(material,mirrored,false):multiplyComposite
         ? (material.doubleSided?multiplyDoubleSidedPipeline_:mirrored?multiplyMirroredPipeline_:multiplyPipeline_)
         : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipeline_ : blend
         ? (material.doubleSided ? blendDoubleSidedPipeline_ : mirrored ? blendMirroredPipeline_ : blendPipeline_)
@@ -4177,7 +4188,7 @@ void CharacterSceneRenderer::drawPrimitive(
         material.styleParameters,
         material.featureParameters,
             static_cast<std::uint32_t>(material.materialClass),
-            material.materialFeatures,
+            materialFeaturesForFrame(material),
             material.materialProfileVersion,
             static_cast<std::uint32_t>((globalMaterialBase+primitive.materialIndex)<<1U) |
             ((snapshot != nullptr ? snapshot->gizmo.selectedPrimitive : selectedPrimitiveIndex_)

@@ -23,6 +23,11 @@ NR12 验收近乎原生画面、WASD 和运动动画混合。
 来源、结果与限制见[操控验证](acceptance/nr/playable-integration.md)。
 下一主线见[完整还原计划](plans/2026-10-17-native-render-restoration.md)。
 
+投影头发支持可选的像素响应积分。
+公共主次叶、条纹及照明组合已通过分项检查。
+真实固定区域通过八相位高光能量门禁。
+范围与运动待项见[积分验证](acceptance/nr/projected-hair-pixel-integral.md)。
+
 终末地专项已打通本机原生资源包读取。
 原生待机候选已完成引擎五帧技术采样。
 原生表情源包含 245 个控制项，绑定待实装。

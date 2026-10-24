@@ -286,6 +286,22 @@ compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OBJECT_SHADOW=1 OU
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OBJECT_SHADOW=1 AZURE_BINDLESS=1 OUTPUT_NAME mesh_object_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OBJECT_SHADOW=1 AZURE_OPAQUE_SNAPSHOT=1 OUTPUT_NAME character_snapshot_object.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OBJECT_SHADOW=1 AZURE_BINDLESS=1 AZURE_OPAQUE_SNAPSHOT=1 OUTPUT_NAME character_snapshot_object_bindless.frag)
+foreach(_hair_object IN ITEMS 0 1)
+    foreach(_hair_indexed IN ITEMS 0 1)
+        set(_hair_defines AZURE_HAIR_PIXEL_INTEGRAL=1)
+        set(_hair_suffix "")
+        if(_hair_object)
+            list(APPEND _hair_defines AZURE_OBJECT_SHADOW=1)
+            string(APPEND _hair_suffix "_object")
+        endif()
+        if(_hair_indexed)
+            list(APPEND _hair_defines AZURE_BINDLESS=1)
+            string(APPEND _hair_suffix "_bindless")
+        endif()
+        compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES ${_hair_defines} OUTPUT_NAME "mesh_integral${_hair_suffix}.frag")
+        compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES ${_hair_defines} AZURE_OPAQUE_SNAPSHOT=1 OUTPUT_NAME "character_snapshot_integral${_hair_suffix}.frag")
+    endforeach()
+endforeach()
 compile_shader(
     "${SHADER_SOURCE_DIR}/mesh.frag"
     DEFINES AZURE_BINDLESS=1
@@ -864,6 +880,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ComponentExposureGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_component_exposure_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.ComponentExposureGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    add_test(NAME AzureRender.ProjectedHairIntegralGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_integral_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.ProjectedHairIntegralGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_test(NAME AzureRender.SpatialAntiAliasingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>")
     add_test(NAME AzureRender.SpatialAntiAliasingAuxiliaryGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"

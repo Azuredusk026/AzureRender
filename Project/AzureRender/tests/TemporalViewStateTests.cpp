@@ -1,4 +1,5 @@
 #include "render/TemporalViewState.hpp"
+#include "render/MaterialSampling.hpp"
 #include <cmath>
 #include <limits>
 #include <stdexcept>
@@ -6,6 +7,10 @@
 using namespace azurerender;
 void checkTemporal(bool value,const char* why){if(!value)throw std::runtime_error(why);}
 int main()try{
+    constexpr auto authored=(1U<<23U)|3U;
+    checkTemporal(materialSamplingFeatures(authored,false)==authored,"First-frame shading retains authored feature bits");
+    checkTemporal(materialSamplingFeatures(authored,true)==(authored|kTemporalMaterialSamples),"Temporal shading adds only its reserved runtime bit");
+    checkTemporal(materialSamplingFeatures(authored|kTemporalMaterialSamples,false)==authored,"History invalidation clears runtime sampling without changing authored features");
     TemporalViewState main,aux;TemporalFrameInfo a;a.width=2560;a.height=1440;a.sceneGeneration=1;
     const auto first=main.prepare(a);
     checkTemporal(first.reset==TemporalReset::First&&!first.previous&&first.sampleIndex==0,"First frame has no history");
@@ -44,8 +49,11 @@ int main()try{
         checkTemporal(rejected,"Invalid temporal metadata must fail before replacing a prepared frame");
     }
     checkTemporal(main.commit(22),"Invalid preparation preserves the preceding valid pending frame");
+    std::array<float,2> mean{};
     for(unsigned i=0;i<16;++i){const auto jitter=temporalJitterPixels(i);
+        if(i<8){mean[0]+=jitter[0];mean[1]+=jitter[1];}
         checkTemporal(std::abs(jitter[0])<=.5F&&std::abs(jitter[1])<=.5F,"Jitter remains subpixel");
         checkTemporal(jitter==temporalJitterPixels(i+8),"Eight-phase sampling has explicit period");}
+    checkTemporal(std::abs(mean[0])<1e-6F&&std::abs(mean[1])<1e-6F,"Repeated temporal samples must preserve the pixel centre without persistent projection bias");
     std::cout<<"Temporal view state contract passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

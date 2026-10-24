@@ -261,6 +261,20 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
         &&std::abs(hair.specularNormalScale-1.4F)<.000001F&&hair.objectBasis[2]==-1,
         "Signed shifts, independent normal scales and rotated source basis must survive loading");
     auto handed=source;handed["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["tangentSign"]=-1;
+    auto integrated=source;
+    integrated["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back("hair-pixel-integral");
+    const auto integratedAsset=load(integrated);
+    require((integratedAsset.materials[0].materialFeatures&(1U<<23U))!=0,
+        "Explicit projected-hair integration must reach the existing material feature word");
+    require(packMaterialSurfaceProfile(integratedAsset.materials[0]).rows==packMaterialSurfaceProfile(material).rows,
+        "Pixel integration must preserve the existing surface-profile payload");
+    auto orphan=integrated;
+    orphan["materials"][0]["extras"]["azureRenderMaterial"]["hair"].erase("projectedRamp");
+    orphan["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"hair-anisotropy","hair-pixel-integral"};
+    reject(orphan,"hair-pixel-integral");
+    auto wrongClass=integrated;
+    wrongClass["materials"][0]["extras"]["azureRenderMaterial"]["class"]="fabric";
+    reject(wrongClass,"hair-pixel-integral");
     require(packMaterialSurfaceProfile(load(handed).materials[0]).rows[4][3]==-1,
         "Explicit projected tangent orientation must reach its reserved GPU component");
     for(const auto& value:Json::array({0,.5,2,true,"-1",nullptr})) {
