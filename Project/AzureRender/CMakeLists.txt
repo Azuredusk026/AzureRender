@@ -223,6 +223,10 @@ function(compile_shader source_file)
     if(shader_source_base STREQUAL "mesh.frag")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/screen_space_reflection.glsl")
     endif()
+    if(shader_source_base STREQUAL "mesh.frag" OR shader_source_base STREQUAL "motion_vector.frag"
+        OR shader_source_base STREQUAL "motion_vector.vert" OR shader_source_base STREQUAL "motion_outline.vert")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/material_sampling.glsl")
+    endif()
     list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/character_diffuse.glsl")
     foreach(shader_define IN LISTS SHADER_DEFINES)
         list(APPEND shader_define_args "-D${shader_define}")
@@ -883,6 +887,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ProjectedHairIntegralGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_integral_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.ProjectedHairIntegralGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.MaterialMotionResponseGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_temporal_coverage_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.MaterialMotionResponseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_test(NAME AzureRender.SpatialAntiAliasingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>")
     add_test(NAME AzureRender.SpatialAntiAliasingAuxiliaryGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_spatial_antialiasing_gpu.py"

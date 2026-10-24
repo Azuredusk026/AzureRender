@@ -12,6 +12,7 @@
 #include "environment_specular.glsl"
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
+#include "material_sampling.glsl"
 #if defined(AZURE_HAIR_PIXEL_INTEGRAL)
 const bool azureHairPixelIntegral=true;
 #else
@@ -291,12 +292,15 @@ CharacterProjectedHairEnergy projectedHairResponseWeighted(vec3 view,vec3 light,
     ProjectedHairIncident incident,out vec2 line) {
     if(!azureHairPixelIntegral||(material.materialFeatures&8388608U)==0U)
         return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),false,incident,line);
-    if((material.materialFeatures&0x80000000U)!=0U)
+    bool temporalSamples=(material.materialFeatures&0x80000000U)!=0U;
+    if(temporalSamples&&!azureUniformMaterialFrame(projectedHairNormalDx,projectedHairNormalDy,
+        projectedHairTangentDx.xyz,projectedHairTangentDy.xyz))
         return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),true,incident,line);
     CharacterProjectedHairEnergy total=CharacterProjectedHairEnergy(vec3(0),vec3(0),vec3(0));
     vec2 lineMoments=vec2(0);
     for(int y=0;y<4;++y)for(int x=0;x<4;++x){
         vec2 offset=(vec2(x,y)+.5)*.25-.5;
+        if((material.materialFeatures&0x80000000U)!=0U)offset+=vec2(camera.cameraRight.w,camera.cameraUp.w);
         vec2 uv=textureCoordinate+projectedHairUvDx*offset.x+projectedHairUvDy*offset.y;
         vec2 modulation;CharacterProjectedHairEnergy contribution=projectedHairSample(view,light,directional,evaluateLine,uv,offset,true,incident,modulation);
         total.q+=contribution.q;total.primary+=contribution.primary;total.secondary+=contribution.secondary;

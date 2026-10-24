@@ -1,0 +1,1176 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "baseCommit": "d2aee3e",
+  "run": "build/runs/20261024-101602-native-hair-coverage-motion-90e55c",
+  "rendererApiVersion": 4,
+  "implementation": "native-hdr-temporal-v4",
+  "motionResponseEncoding": "negative-reactivity-v1",
+  "materialBytes": 192,
+  "materialTextureSlots": 9,
+  "cameraBytes": 640,
+  "motionPushBytes": 128,
+  "textureBytesPerPixel": 52,
+  "scope": "Opaque projected-hair motion, locally uniform frame sampling and partial history response. Alpha coverage, clothing and full native motion remain open.",
+  "configurations": {
+    "debug": {
+      "checks": 25,
+      "checksLogSha256": "6493a1b609d4a936586b723a3b4a358812516867648e60f3f93b2f9b3e5b5a9c",
+      "detailsSha256": "34713e51aa80e1f4c53262116647434ae5bba08a2c34cbfdde89f2142e536e8c",
+      "buildLogSha256": "629988c2429655b7d7766351784e5d78754bec7bf346ea66736b3dab4866adee",
+      "playerSha256": "680ffd0bdece0cdd798d49abad67d00b5a7ca856b0e0fd3c6a580dfd0a148b91",
+      "editorSha256": "e307ab2edac70dd3e2db9fa9fc48ad777dd3abd2ed4908245e39403bd3bc363a",
+      "motionQuality": {
+        "movingEnergyRatios": [
+          1.0003100632409185,
+          0.9998495194502425,
+          0.9999283386733004,
+          0.9998041215493804,
+          0.9999464472102734,
+          1.0000034158683386,
+          0.9997472204219855,
+          1.0002558016840066,
+          0.9999594149073615,
+          0.9994808312627275,
+          1.0000560288021807,
+          1.0001851868720382,
+          0.9996275292972154,
+          1.0007071136598302,
+          1.000099404351974,
+          0.9999633046680543,
+          1.000008893564906,
+          0.9999229486475187,
+          1.000817650304591,
+          0.9997986707826008,
+          0.9998910668046084,
+          1.0002373393019666,
+          0.9999867753850841,
+          1.0003481280258584,
+          0.9999914927977029,
+          1.000137387496751,
+          1.0003633968117942,
+          0.9996767867043606,
+          1.0003475266140445,
+          1.0002592897490714,
+          1.0002186919076086,
+          1.0001402192461666
+        ],
+        "lastEightEnergyRatios": [
+          0.9999598525416623,
+          0.9999743340753026,
+          1.0000661895535894,
+          0.9999845302160537,
+          1.0000360316006454,
+          1.0000198028447476,
+          1.0000079875934793,
+          1.0000038946661902
+        ],
+        "sourceMovingEnergyRatios": [
+          1.0390379906863518,
+          1.0393057135940027,
+          1.037968739795593,
+          1.0384694657325249,
+          1.0381875123958566,
+          1.038336256356122,
+          1.0386482101576686,
+          1.0388207543176118,
+          1.0385731831966662,
+          1.0381402707869447,
+          1.0386858728002164,
+          1.0379077545086621,
+          1.0382400549629986,
+          1.0381880846576592,
+          1.0383931088133354,
+          1.0384535278683633,
+          1.038945866270485,
+          1.0386816361764923,
+          1.0386259682510304,
+          1.037917370688935,
+          1.038286272137344,
+          1.038230632852175,
+          1.0378560955824159,
+          1.038900379933007,
+          1.0383826297098406,
+          1.0383408841547606,
+          1.0390946162734884,
+          1.0379294927363814,
+          1.0390994449431648,
+          1.038776292090656,
+          1.0387848947225458,
+          1.0398641632576673
+        ],
+        "movingMeanAbsoluteError": 0.000160295164687175,
+        "sourceMovingMeanAbsoluteError": 0.0005506812714073317,
+        "errorRatio": 0.29108519394081,
+        "residualChange": 0.0002341967094921194,
+        "sourceResidualChange": 0.00037104575001681663,
+        "residualChangeRatio": 0.6311801428301094,
+        "edgeErrorRatio": 0.7908012724642821,
+        "maximumGhostPixelsOutsideTwoPixels": 0,
+        "referenceCentroidDisplacement": 12.5,
+        "maximumFlatByteError": 0
+      },
+      "outline": {
+        "cases": 33,
+        "summarySha256": "f75ee24bfea0a493a0f69c4b9f02ea6ca72af9a1202c11d1cbc9c30fdad35812",
+        "minimumTemporal": [
+          {
+            "name": "minimum-temporal",
+            "referenceMass": 342.41669335720326,
+            "lastEightMassRatios": [
+              0.989062002944097,
+              0.9857880187375498,
+              0.9905070065773275,
+              0.9890197491129304,
+              0.9890004622556269,
+              0.9876278774562385,
+              0.9875345134004871,
+              0.9948681053380597
+            ],
+            "meanMassRatio": 0.9891759669777895
+          },
+          {
+            "name": "minimum-temporal-far",
+            "referenceMass": 132.9322418656781,
+            "lastEightMassRatios": [
+              0.9915660828107861,
+              0.9946498739190491,
+              0.9980931038688229,
+              0.9936808315827886,
+              0.9993079116671292,
+              0.9937655876673143,
+              0.9945240783043109,
+              0.9957377071199284
+            ],
+            "meanMassRatio": 0.9951656471175162
+          }
+        ]
+      },
+      "native": {
+        "frames": 32,
+        "manifestSha256": "b4e798592ec12a2b1832dc3073ebb1d9d418f1526e4c8d9cdaebef8f9019c52f",
+        "receiptSha256": "857ae5c13921d2eb0ad4b3c700d7c689c75eb3e90ba8ed933e1207a6ba898241"
+      }
+    },
+    "release": {
+      "checks": 25,
+      "checksLogSha256": "8de1dcc9f3997183398a493a8d43f71849b3d5080b056a687ff01d0fc10eb000",
+      "detailsSha256": "86f4259d1600d8fb2a1e1292537b95867c05066de719d8dd6c256a181b30309f",
+      "buildLogSha256": "a4f67c7213662c9ee4b5db3c262a0540bba321e7fac3f44754870325f7ab0135",
+      "playerSha256": "0fd56829e3f66c2106eff09e0a96bd9bcc8b05a674e2ffad7e6fa52b210477db",
+      "editorSha256": "1140ed4e76c54bb2a579ff1abe1f97ec2af7d341ee5b8af3e2fefa56b729426c",
+      "motionQuality": {
+        "movingEnergyRatios": [
+          1.0003100632409185,
+          0.9998495194502425,
+          0.9999283386733004,
+          0.9998041215493804,
+          0.9999464472102734,
+          1.0000034158683386,
+          0.9997472204219855,
+          1.0002558016840066,
+          0.9999594149073615,
+          0.9994808312627275,
+          1.0000560288021807,
+          1.0001851868720382,
+          0.9996275292972154,
+          1.0007071136598302,
+          1.000099404351974,
+          0.9999633046680543,
+          1.000008893564906,
+          0.9999229486475187,
+          1.000817650304591,
+          0.9997986707826008,
+          0.9998910668046084,
+          1.0002373393019666,
+          0.9999867753850841,
+          1.0003481280258584,
+          0.9999914927977029,
+          1.000137387496751,
+          1.0003633968117942,
+          0.9996767867043606,
+          1.0003475266140445,
+          1.0002592897490714,
+          1.0002186919076086,
+          1.0001402192461666
+        ],
+        "lastEightEnergyRatios": [
+          0.9999598525416623,
+          0.9999743340753026,
+          1.0000661895535894,
+          0.9999845302160537,
+          1.0000360316006454,
+          1.0000198028447476,
+          1.0000079875934793,
+          1.0000038946661902
+        ],
+        "sourceMovingEnergyRatios": [
+          1.0390379906863518,
+          1.0393057135940027,
+          1.037968739795593,
+          1.0384694657325249,
+          1.0381875123958566,
+          1.038336256356122,
+          1.0386482101576686,
+          1.0388207543176118,
+          1.0385731831966662,
+          1.0381402707869447,
+          1.0386858728002164,
+          1.0379077545086621,
+          1.0382400549629986,
+          1.0381880846576592,
+          1.0383931088133354,
+          1.0384535278683633,
+          1.038945866270485,
+          1.0386816361764923,
+          1.0386259682510304,
+          1.037917370688935,
+          1.038286272137344,
+          1.038230632852175,
+          1.0378560955824159,
+          1.038900379933007,
+          1.0383826297098406,
+          1.0383408841547606,
+          1.0390946162734884,
+          1.0379294927363814,
+          1.0390994449431648,
+          1.038776292090656,
+          1.0387848947225458,
+          1.0398641632576673
+        ],
+        "movingMeanAbsoluteError": 0.000160295164687175,
+        "sourceMovingMeanAbsoluteError": 0.0005506812714073317,
+        "errorRatio": 0.29108519394081,
+        "residualChange": 0.0002341967094921194,
+        "sourceResidualChange": 0.00037104575001681663,
+        "residualChangeRatio": 0.6311801428301094,
+        "edgeErrorRatio": 0.7908012724642821,
+        "maximumGhostPixelsOutsideTwoPixels": 0,
+        "referenceCentroidDisplacement": 12.5,
+        "maximumFlatByteError": 0
+      },
+      "outline": {
+        "cases": 33,
+        "summarySha256": "91d298dcab75c1af8993ea1a5a578ef96c5b13863cd6fef280c82067901249cd",
+        "minimumTemporal": [
+          {
+            "name": "minimum-temporal",
+            "referenceMass": 342.41669335720326,
+            "lastEightMassRatios": [
+              0.989062002944097,
+              0.9857880187375498,
+              0.9905070065773275,
+              0.9890197491129304,
+              0.9890004622556269,
+              0.9876278774562385,
+              0.9875345134004871,
+              0.9948681053380597
+            ],
+            "meanMassRatio": 0.9891759669777895
+          },
+          {
+            "name": "minimum-temporal-far",
+            "referenceMass": 132.9322418656781,
+            "lastEightMassRatios": [
+              0.9915660828107861,
+              0.9946498739190491,
+              0.9980931038688229,
+              0.9936808315827886,
+              0.9993079116671292,
+              0.9937655876673143,
+              0.9945240783043109,
+              0.9957377071199284
+            ],
+            "meanMassRatio": 0.9951656471175162
+          }
+        ]
+      },
+      "native": {
+        "frames": 32,
+        "manifestSha256": "e549fbdec422b39b2eba728be1d4eb19f9429da0387d8625a37680e2194d41a1",
+        "receiptSha256": "a7528d8d54ae0d9571ffa6ceeeef2204d176f2b2b8d72e666f7d33431c27b0bf"
+      }
+    }
+  },
+  "shaders": {
+    "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+    "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+    "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+    "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+    "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+    "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+    "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+    "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+    "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+    "character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+    "character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+    "character_snapshot.frag.spv": "c8bc3fc532fea580a165a49088747c7b3d5aae1f1827135486e3d4e9c1336fad",
+    "character_snapshot_bindless.frag.spv": "ea5d34cfc21da231be0f948098846f4c7a44608c5ab3f581699b6c4cf3c377e6",
+    "character_snapshot_integral.frag.spv": "dd84c661df398fcf566e3679eee3412b56ac68927b1e3858e75a219e604bd402",
+    "character_snapshot_integral_bindless.frag.spv": "fdc929db4f545706fb33aeb7a88d74b25f44b86bbb2f865e9e44061604cc5b8a",
+    "character_snapshot_integral_object.frag.spv": "edb227249096f126c1c5e077ef0a5606070b23984654785ebdfc45d29909711a",
+    "character_snapshot_integral_object_bindless.frag.spv": "acdcaf2ad4a52a3efc0acb84f8ad88ef3b35f3ad3c56f7f5799e322fee6c3975",
+    "character_snapshot_object.frag.spv": "70254bf15397be274492cba24bb198e9f32fcdd9582d2b207893636232c3114f",
+    "character_snapshot_object_bindless.frag.spv": "f4695ccae038aaae122ce78620ade1389b4e654c919b08b2197d905b336565c5",
+    "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+    "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+    "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+    "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+    "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+    "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+    "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+    "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+    "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+    "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+    "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+    "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+    "mesh.frag.spv": "449c2ee5c63dd31e8a99a5ab7c471f2f791f9a316deb184622165baa42f5bf37",
+    "mesh.vert.spv": "7b96ee9e2d69418e3d7203edcadd0ff32b0c85b67e5873aecf064fc59e42af79",
+    "mesh_bindless.frag.spv": "14c026c21281ed59163c1919a7c0eddfd4d07c7ef3ace347dc1eb9285a634e05",
+    "mesh_compute.vert.spv": "f6f9c0928bb0dfc44208f5037f08b3725aca238f3ac7b85312b57a0461c676a8",
+    "mesh_integral.frag.spv": "671fa15d52381ee0b35f456b675fb8cd2ce1cc9ca2aaee63585ed8bc19c3502b",
+    "mesh_integral_bindless.frag.spv": "f2382df026284b837b0efea84d9b7d8aa039263596e38300b5ba1d585ac8e7a8",
+    "mesh_integral_object.frag.spv": "708db6427cb9e4c24c90c8f201e800c7b454d47102167de3dbedcf2f51a9f495",
+    "mesh_integral_object_bindless.frag.spv": "6da1fbdbbc31a1dbe28ee78207df2c633d0434f0d3eaab2bd2cd9d5c2c2f8bab",
+    "mesh_object.frag.spv": "f47f9bc8266d8a04ce5ba5288e2a448144419dbaa8be60fd346b7c51a9340a56",
+    "mesh_object.vert.spv": "cf4a88c4f044397466584727dc95f25ccef371a24a781157701cdbd04b66d1db",
+    "mesh_object_bindless.frag.spv": "535d2d544cdc03904edde772eff66942a42f5e4463453f6d2f8a3ea5090527b4",
+    "mesh_object_compute.vert.spv": "ab476e2667a137eb117ca06af02954ade47c78c815b61e5b77355e6d3952906a",
+    "motion_outline.vert.spv": "7f2c4a2daf0b6a235d7fd954b55edd047f3417da48e36c71d2fb03f261a18163",
+    "motion_pose_test.comp.spv": "919ea2f4d091d74b65be64155dbfbecffea8d142ff65ddb9c199b87c5c2a9886",
+    "motion_projection_test.comp.spv": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+    "motion_vector.frag.spv": "1811cc8b684aeb230e704d3b9edf2d9e4740841c471b0056d968195882b0c8ea",
+    "motion_vector.vert.spv": "c360527028fe3a214c61a30d08e3ae3ad859840bb1467d2eeeb17fa287951958",
+    "object_shadow_filter_test.comp.spv": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+    "outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+    "outline.vert.spv": "89b19925e95cf701782777777a3fcf40437208319b46188ad55896f010f4b626",
+    "outline_compute.vert.spv": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+    "outline_depth.frag.spv": "91f3981e718b0c12d5b54c8d83cb35a076e520b779a4cb4028dca9407b5f018e",
+    "outline_depth_bindless.frag.spv": "7103292f36b2357e10511fb322e28fb919d5beb87be5101061a7e6a8fc50586f",
+    "outline_mask.frag.spv": "c6c0875b058ce8b2fd8d1bc7504687ded47690cc4753fae9e2ff9b839a43a4c9",
+    "outline_mask.vert.spv": "cb3505b020250cb49558a0c055215581b4f8a69fe2dbbb7ce6b3e4a8b482b2a2",
+    "outline_mask_bindless.frag.spv": "4bc09476228361b8159d2ef404f692e13672f63cef9213dcc6372f3dcf0dcb5d",
+    "outline_mask_compute.vert.spv": "bcfaa8ffacbaf95a2c4bb329c78c8b39ce26a8800dd38cf4ee80159ec4d583ee",
+    "outline_view_scaled.frag.spv": "5d4fb190ce0b30c14d9bbcf5b16d9c72008c8c14c585b3609adff10458e44d93",
+    "outline_view_scaled.vert.spv": "93a80d478f7bb98587ae58ef8a969e0021c8ec5e171b4bac612c57de89f765a9",
+    "outline_view_scaled_bindless.frag.spv": "b16a26a16ede89881771bf1d90cc2838d20e960ac90863b55888d134b63699ef",
+    "outline_view_scaled_bindless.vert.spv": "f37ae718a4adde9589f3c957e0dbdd5f19038863c0f15f744a9b1e54af14d62b",
+    "outline_view_scaled_compute.vert.spv": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56",
+    "outline_view_scaled_compute_bindless.vert.spv": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2",
+    "pathtracing.comp.spv": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+    "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+    "readonly_depth_test.frag.spv": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+    "readonly_depth_test.vert.spv": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+    "sampled_upload_test.comp.spv": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+    "scene_instance_layout_test.comp.spv": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+    "shadow.frag.spv": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+    "shadow.vert.spv": "2b4cb71f7ec302242f8341b33e481033c14a5edce3c853a44ca0a7ad039cf5b1",
+    "shadow_bindless.frag.spv": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+    "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+    "shadow_compute.vert.spv": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+    "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+    "skin.comp.spv": "c568f268629009a4421afe0c452f52c1d6fd7cb494a5587545528e6983c02d26",
+    "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+    "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+    "surface_response_test.comp.spv": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+    "temporal_copy.frag.spv": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+    "temporal_resolve.frag.spv": "b47eaac52201961cbbf3d484b93a4f80251e9317b970a417a1077fbc7a083fe0",
+    "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+    "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+  },
+  "nativeEnergy": {
+    "referenceSha256": "0080c285e52775c8665e7421eb4a52335141015df6506d45dee0aae3be0a4a00",
+    "maskSha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+    "rows": [
+      {
+        "kind": "temporal-final-debug",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9947258234024048,
+          0.9955404996871948,
+          0.9950440526008606,
+          0.9968512654304504,
+          0.9947637915611267,
+          0.9948851466178894,
+          0.9955331683158875,
+          0.995290219783783
+        ],
+        "meanAbsoluteError": 0.0005593787645921111,
+        "temporalMeanDeviation": 0.00027680990751832724,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-final-debug",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.990980327129364,
+          0.9914478659629822,
+          0.9913565516471863,
+          0.9926419258117676,
+          0.990958571434021,
+          0.990915060043335,
+          0.9924041628837585,
+          0.9919431805610657
+        ],
+        "meanAbsoluteError": 0.00035744457272812724,
+        "temporalMeanDeviation": 0.00016980869986582547,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-final-debug",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0014077425003052,
+          0.9986519813537598,
+          0.9822812080383301,
+          0.9909268021583557,
+          0.9904415011405945,
+          0.9827656745910645,
+          0.9926139712333679,
+          1.0076003074645996
+        ],
+        "meanAbsoluteError": 0.00028915429720655084,
+        "temporalMeanDeviation": 0.00013198639499023557,
+        "peakRatio": 0.9504438042640686
+      },
+      {
+        "kind": "temporal-final-release",
+        "region": "crown",
+        "pixels": 1470,
+        "energyRatios": [
+          0.9947258234024048,
+          0.9955404996871948,
+          0.9950440526008606,
+          0.9968512654304504,
+          0.9947637915611267,
+          0.9948851466178894,
+          0.9955331683158875,
+          0.995290219783783
+        ],
+        "meanAbsoluteError": 0.0005593787645921111,
+        "temporalMeanDeviation": 0.00027680990751832724,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-final-release",
+        "region": "hair-interior",
+        "pixels": 3014,
+        "energyRatios": [
+          0.990980327129364,
+          0.9914478659629822,
+          0.9913565516471863,
+          0.9926419258117676,
+          0.990958571434021,
+          0.990915060043335,
+          0.9924041628837585,
+          0.9919431805610657
+        ],
+        "meanAbsoluteError": 0.00035744457272812724,
+        "temporalMeanDeviation": 0.00016980869986582547,
+        "peakRatio": 0.9963659048080444
+      },
+      {
+        "kind": "temporal-final-release",
+        "region": "fine-hair-boundary",
+        "pixels": 742,
+        "energyRatios": [
+          1.0014077425003052,
+          0.9986519813537598,
+          0.9822812080383301,
+          0.9909268021583557,
+          0.9904415011405945,
+          0.9827656745910645,
+          0.9926139712333679,
+          1.0076003074645996
+        ],
+        "meanAbsoluteError": 0.00028915429720655084,
+        "temporalMeanDeviation": 0.00013198639499023557,
+        "peakRatio": 0.9504438042640686
+      }
+    ]
+  },
+  "nativeMaximumCrossConfigurationByteError": 0,
+  "sourceCompatibilitySha256": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+  "performance": {
+    "inspectionDisabled": {
+      "rows": [
+        {
+          "kind": "baseline",
+          "index": 0,
+          "medianFrameMs": 11.186831999999999,
+          "meanSceneMs": 10.500816,
+          "samples": 128
+        },
+        {
+          "kind": "candidate",
+          "index": 1,
+          "medianFrameMs": 11.19688,
+          "meanSceneMs": 10.490808,
+          "samples": 128
+        },
+        {
+          "kind": "candidate",
+          "index": 2,
+          "medianFrameMs": 11.18264,
+          "meanSceneMs": 10.478,
+          "samples": 128
+        },
+        {
+          "kind": "baseline",
+          "index": 3,
+          "medianFrameMs": 11.205312,
+          "meanSceneMs": 10.509256,
+          "samples": 128
+        }
+      ],
+      "baselineMedianMeanMs": 11.196072,
+      "candidateMedianMeanMs": 11.18976,
+      "ratio": 0.9994362308495337,
+      "playerSha256": "0fd56829e3f66c2106eff09e0a96bd9bcc8b05a674e2ffad7e6fa52b210477db"
+    },
+    "inspectionEnabled": {
+      "rows": [
+        {
+          "kind": "baseline",
+          "index": 0,
+          "medianFrameMs": 11.279808,
+          "meanSceneMs": 10.589576,
+          "samples": 128
+        },
+        {
+          "kind": "candidate",
+          "index": 1,
+          "medianFrameMs": 11.2676,
+          "meanSceneMs": 10.559768,
+          "samples": 128
+        },
+        {
+          "kind": "candidate",
+          "index": 2,
+          "medianFrameMs": 11.269872,
+          "meanSceneMs": 10.576008,
+          "samples": 128
+        },
+        {
+          "kind": "baseline",
+          "index": 3,
+          "medianFrameMs": 11.2812,
+          "meanSceneMs": 10.608112,
+          "samples": 128
+        }
+      ],
+      "baselineMedianMeanMs": 11.280504,
+      "candidateMedianMeanMs": 11.268736,
+      "ratio": 0.9989567842004222,
+      "playerSha256": "0fd56829e3f66c2106eff09e0a96bd9bcc8b05a674e2ffad7e6fa52b210477db"
+    }
+  },
+  "performanceScope": "Same executable, asset and 1280x720 view, ABBA order; 160 frames/run, first 32 discarded. Baseline shaders exactly reproduce all 85 d2aee3e fingerprints. NR12 1080p remains pending.",
+  "sourceCoverage": {
+    "manifestSha256": "c87bb39e8155ba04c57741bb832a5750711c4e932c151ba21861eab585184327",
+    "shaderSha256": "c57d0c434f3f9246e8a154859bf65531825d444cff3546ce4a00402846022f97",
+    "event": 950,
+    "discardInstruction": false,
+    "blending": false,
+    "depthWrites": true,
+    "statesSha256": "0eeb2d38d99f49c6ea9eced3ac8898b07b2ff7c54e4e216a04e697b64744e94d"
+  },
+  "rejectedCandidates": {
+    "opaque-red": {
+      "receiptSha256": "8d2c6c14083fb22669ca76e44bb774041264f5199b2b5378be394875e0a83d33",
+      "metrics": {
+        "errorRatio": 1.357741445891287,
+        "residualChangeRatio": 1.2185971177803792,
+        "edgeErrorRatio": 1.0636883347231976
+      }
+    },
+    "spatial16": {
+      "receiptSha256": "3001781d287ed7fbef933ff1f6c0b2c91639e6eb88368f865954473d6c0b459c",
+      "metrics": {
+        "errorRatio": 0.734002827659202,
+        "residualChangeRatio": 0.9589718359530048,
+        "edgeErrorRatio": 0.9698506248389082
+      }
+    },
+    "temporal4": {
+      "receiptSha256": "f64d5b9caa083946b96d425253b0fa6bb80e330bc1e994aa83c0551c2307fbea",
+      "metrics": {
+        "errorRatio": 0.9321478785796614,
+        "residualChangeRatio": 1.0378340014938456,
+        "edgeErrorRatio": 0.9576020778420561
+      }
+    },
+    "cubic16": {
+      "receiptSha256": "fcc4bf5c9469c22afe00cd108da4ecec063a72f3905aa596a4d092dde0c237e8",
+      "metrics": {
+        "errorRatio": 0.6715288563572722,
+        "residualChangeRatio": 0.9652422760651742,
+        "edgeErrorRatio": 0.9207935899892664
+      }
+    },
+    "centred-integral": {
+      "receiptSha256": "76b4f1f53a37cd02ce81006e23e425c2571065024879564b2928c7d712c037f8",
+      "metrics": {
+        "errorRatio": 0.5339364061891756,
+        "residualChangeRatio": 0.8823772295125317,
+        "edgeErrorRatio": 0.8747772284708353
+      }
+    },
+    "motion-weight": {
+      "receiptSha256": "16102a61fb680d528b43da12209b9140d7e8d85e4da1e3de9609641465ff86fe",
+      "metrics": {
+        "errorRatio": 0.49052151866112953,
+        "residualChangeRatio": 0.8267728515079534,
+        "edgeErrorRatio": 0.8514935167737449
+      }
+    },
+    "startup-count": {
+      "receiptSha256": "6793dd150499d7d4cc18c4306ca80517a0600cea73138fd19caaf599ee314a17",
+      "metrics": {
+        "errorRatio": 0.49087728297039895,
+        "residualChangeRatio": 0.8266523065781203,
+        "edgeErrorRatio": 0.8535069390755521
+      }
+    }
+  },
+  "measurementCorrection": {
+    "testSha256": "46c8cc472e93ce24d9e5c52d5360107ce129140ff85fc3c78b390df739706d4a",
+    "correction": "Geometry projection replaces brightness classification. Frame zero is the initial pose. All numeric gates are unchanged; the projected reference is validated to one output byte."
+  },
+  "sourceHashes": {
+    "CMakeLists.txt": "d75e50b0c93d50a5f2c66c41dac043e4cdfdc21782bffc73e24a1336a71ce517",
+    "shaders/material_sampling.glsl": "3b54c30de14a5813b1a5a32610fb8e22942a29c9316a3f193cd12806706f1aeb",
+    "shaders/mesh.frag": "acf2e7d4bcc145e8296b8ebf92aa187ce2571a49a74b21eac8a7ec712d15febf",
+    "shaders/motion_vector.frag": "3b5054be6e57d55e85dc68bb8e62e2f52b08e44a9033415f13f295e3d6cf7e70",
+    "shaders/motion_vector_vertex.glsl": "b7a8821feb8de44fc01ebe3ff8f8d8634704167be2dcbedd63333a5addf6264e",
+    "shaders/temporal_resolve.frag": "eea5d2f3e3b4d2bf818594f070e3ce7fcc3985a3c260a3389e4b29de0e7aa92b",
+    "src/scenes/CharacterSceneRenderer.cpp": "aeb78be07ea28c87a3f0c889d7dcd54e6cc877cdb490821622634ebef73e4e0a",
+    "src/scenes/CharacterSceneRenderer.hpp": "47c464404a153898d0cfb9c490aec426191a6e33764442b14064f520ffe65604",
+    "src/app/AzureRenderCapture.cpp": "51e57df7ec099c6a5651d02073df02d77a05142206682054948294b1a787b942",
+    "src/render/MotionVectorTarget.hpp": "f6dfb35cdf884610b9f67993fd5202081809d9a34b74fa4c5fe4ecb715e18786",
+    "tests/MotionVectorGpuTests.cpp": "84a52a382d49a07e4d763c94f5f24a3968d7e5ceda200bfb39ff246c79850f25",
+    "tools/test_material_temporal_coverage_gpu.py": "86a065f0d773b8afed8d088fd4265a2b63851f457238bcb454a4b9baec58fe8a"
+  },
+  "diffuseCompatibility": {
+    "scope": "NPR diffuse ramp, identical authored material, old shader control; nonregression, not opaque GG improvement",
+    "receiptSha256": "f96791f69164fea136be2a5b20cbfb50d53c4bc22e7ccfb39e2268752977f87e",
+    "quality": {
+      "movingEnergyRatios": [
+        0.999620053728642,
+        0.9996201954635663,
+        0.9996230472775595,
+        0.9996239126528749,
+        0.9996231135127553,
+        0.9996217595447326,
+        0.9996222687935181,
+        0.999623812226413,
+        0.9996222602515134,
+        0.9996225166499233,
+        0.9996214155337185,
+        0.9996213108367642,
+        0.9996220871722957,
+        0.999619001045272,
+        0.9996186755437009,
+        0.9996230800449973,
+        0.9996231598165795,
+        0.999623263790569,
+        0.9996214454537191,
+        0.999621099295908,
+        0.9996245109410477,
+        0.9996211883325097,
+        0.9996233399914868,
+        0.9996211470232101,
+        0.9996217645390804,
+        0.9996228193522574,
+        0.9996210879065952,
+        0.9996207752166336,
+        0.999621701151395,
+        0.9996215829180413,
+        0.9996240444001514,
+        0.9996238336045254
+      ],
+      "lastEightEnergyRatios": [
+        0.9996224368784439,
+        0.9996224368784439,
+        0.9996224368784439,
+        0.9996224368784439,
+        0.9996224368784439,
+        0.9996224368784439,
+        0.9996224368784439,
+        0.9996224368784439
+      ],
+      "sourceMovingEnergyRatios": [
+        0.999620053728642,
+        0.9996201954635663,
+        0.9996230472775595,
+        0.9996239126528749,
+        0.9996231135127553,
+        0.9996217595447326,
+        0.9996222687935181,
+        0.999623812226413,
+        0.9996222602515134,
+        0.9996225166499233,
+        0.9996214155337185,
+        0.9996213108367642,
+        0.9996220871722957,
+        0.999619001045272,
+        0.9996186755437009,
+        0.9996230800449973,
+        0.9996231598165795,
+        0.999623263790569,
+        0.9996214454537191,
+        0.999621099295908,
+        0.9996245109410477,
+        0.9996211883325097,
+        0.9996233399914868,
+        0.9996211470232101,
+        0.9996217645390804,
+        0.9996228193522574,
+        0.9996210879065952,
+        0.9996207752166336,
+        0.999621701151395,
+        0.9996215829180413,
+        0.9996240444001514,
+        0.9996238336045254
+      ],
+      "movingMeanAbsoluteError": 5.945400545497469e-06,
+      "sourceMovingMeanAbsoluteError": 5.945400545497469e-06,
+      "errorRatio": 1.0,
+      "residualChange": 4.580468977798842e-06,
+      "sourceResidualChange": 4.580468977798842e-06,
+      "residualChangeRatio": 1.0,
+      "edgeErrorRatio": 0.891310605753182,
+      "maximumGhostPixelsOutsideTwoPixels": 0,
+      "referenceCentroidDisplacement": 12.5,
+      "maximumFlatByteError": 0
+    }
+  },
+  "nativeBeauty": {
+    "sourceMaterialEvent": 950,
+    "sourceTemporalEvent": 1579,
+    "sourceTemporalSha256": "ac841a76cdb6a81a1005d07e81354639e46ea043351694f8b2e7949a4ea9aa85",
+    "frames": 32,
+    "regions": [
+      {
+        "name": "crown",
+        "pixels": 7344,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 9.0,
+                "meanAbsoluteByteError": 1.4137164124909223
+              },
+              "temporal": {
+                "maximumByteError": 128,
+                "p95ByteError": 21.0,
+                "meanAbsoluteByteError": 4.82248547567175
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 124,
+                "p95ByteError": 12.0,
+                "meanAbsoluteByteError": 2.1313543936092954
+              },
+              "temporal": {
+                "maximumByteError": 123,
+                "p95ByteError": 19.0,
+                "meanAbsoluteByteError": 4.187000726216413
+              }
+            }
+          },
+          {
+            "frame": 31,
+            "errors": {
+              "material": {
+                "maximumByteError": 169,
+                "p95ByteError": 14.0,
+                "meanAbsoluteByteError": 2.641839143064633
+              },
+              "temporal": {
+                "maximumByteError": 122,
+                "p95ByteError": 18.0,
+                "meanAbsoluteByteError": 4.095452069716775
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.34804559874239754,
+        "lastEightMaximumRange": 37
+      },
+      {
+        "name": "head",
+        "pixels": 17017,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 23.0,
+                "meanAbsoluteByteError": 2.3790719084836733
+              },
+              "temporal": {
+                "maximumByteError": 162,
+                "p95ByteError": 28.0,
+                "meanAbsoluteByteError": 6.395917807682514
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 124,
+                "p95ByteError": 24.0,
+                "meanAbsoluteByteError": 3.6528177704648295
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.519852696323285
+              }
+            }
+          },
+          {
+            "frame": 31,
+            "errors": {
+              "material": {
+                "maximumByteError": 169,
+                "p95ByteError": 26.19999999999891,
+                "meanAbsoluteByteError": 4.427689957101721
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.474956416132887
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.4579189431729928,
+        "lastEightMaximumRange": 92
+      },
+      {
+        "name": "full",
+        "pixels": 17017,
+        "records": [
+          {
+            "frame": 0,
+            "errors": {
+              "material": {
+                "maximumByteError": 125,
+                "p95ByteError": 23.0,
+                "meanAbsoluteByteError": 2.3790719084836733
+              },
+              "temporal": {
+                "maximumByteError": 162,
+                "p95ByteError": 28.0,
+                "meanAbsoluteByteError": 6.395917807682514
+              }
+            }
+          },
+          {
+            "frame": 7,
+            "errors": {
+              "material": {
+                "maximumByteError": 124,
+                "p95ByteError": 24.0,
+                "meanAbsoluteByteError": 3.6528177704648295
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.519852696323285
+              }
+            }
+          },
+          {
+            "frame": 31,
+            "errors": {
+              "material": {
+                "maximumByteError": 169,
+                "p95ByteError": 26.19999999999891,
+                "meanAbsoluteByteError": 4.427689957101721
+              },
+              "temporal": {
+                "maximumByteError": 132,
+                "p95ByteError": 25.0,
+                "meanAbsoluteByteError": 5.474956416132887
+              }
+            }
+          }
+        ],
+        "lastEightMeanStandardDeviation": 0.4579189431729928,
+        "lastEightMaximumRange": 92
+      }
+    ],
+    "controls": [
+      {
+        "pixel": [
+          1308,
+          165
+        ],
+        "sourceMaterial": [
+          116,
+          40,
+          43
+        ],
+        "sourceTemporal": [
+          126,
+          45,
+          48
+        ],
+        "first": [
+          116,
+          40,
+          43
+        ],
+        "last": [
+          151,
+          65,
+          64
+        ],
+        "temporalRange": [
+          36,
+          26,
+          22
+        ]
+      },
+      {
+        "pixel": [
+          1309,
+          166
+        ],
+        "sourceMaterial": [
+          118,
+          40,
+          43
+        ],
+        "sourceTemporal": [
+          126,
+          46,
+          50
+        ],
+        "first": [
+          118,
+          40,
+          44
+        ],
+        "last": [
+          145,
+          60,
+          61
+        ],
+        "temporalRange": [
+          27,
+          20,
+          18
+        ]
+      },
+      {
+        "pixel": [
+          1313,
+          170
+        ],
+        "sourceMaterial": [
+          121,
+          44,
+          47
+        ],
+        "sourceTemporal": [
+          138,
+          56,
+          57
+        ],
+        "first": [
+          122,
+          44,
+          48
+        ],
+        "last": [
+          123,
+          45,
+          48
+        ],
+        "temporalRange": [
+          2,
+          1,
+          2
+        ]
+      },
+      {
+        "pixel": [
+          1327,
+          181
+        ],
+        "sourceMaterial": [
+          129,
+          51,
+          52
+        ],
+        "sourceTemporal": [
+          119,
+          45,
+          47
+        ],
+        "first": [
+          129,
+          51,
+          52
+        ],
+        "last": [
+          133,
+          54,
+          56
+        ],
+        "temporalRange": [
+          4,
+          3,
+          4
+        ]
+      },
+      {
+        "pixel": [
+          1313,
+          169
+        ],
+        "sourceMaterial": [
+          126,
+          45,
+          49
+        ],
+        "sourceTemporal": [
+          187,
+          92,
+          87
+        ],
+        "first": [
+          126,
+          45,
+          49
+        ],
+        "last": [
+          125,
+          45,
+          48
+        ],
+        "temporalRange": [
+          1,
+          0,
+          1
+        ]
+      },
+      {
+        "pixel": [
+          1314,
+          170
+        ],
+        "sourceMaterial": [
+          124,
+          46,
+          49
+        ],
+        "sourceTemporal": [
+          186,
+          91,
+          87
+        ],
+        "first": [
+          125,
+          46,
+          50
+        ],
+        "last": [
+          127,
+          47,
+          50
+        ],
+        "temporalRange": [
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "pixel": [
+          1314,
+          171
+        ],
+        "sourceMaterial": [
+          123,
+          46,
+          49
+        ],
+        "sourceTemporal": [
+          128,
+          51,
+          53
+        ],
+        "first": [
+          124,
+          46,
+          50
+        ],
+        "last": [
+          121,
+          45,
+          48
+        ],
+        "temporalRange": [
+          3,
+          1,
+          2
+        ]
+      },
+      {
+        "pixel": [
+          1315,
+          171
+        ],
+        "sourceMaterial": [
+          123,
+          45,
+          49
+        ],
+        "sourceTemporal": [
+          163,
+          77,
+          74
+        ],
+        "first": [
+          123,
+          45,
+          49
+        ],
+        "last": [
+          127,
+          47,
+          51
+        ],
+        "temporalRange": [
+          5,
+          3,
+          2
+        ]
+      }
+    ]
+  },
+  "remaining": [
+    "Alpha mask and blend microgeometry sequences",
+    "Clothing and high-frequency normal input",
+    "Native character motion and full C17/C18 appearance",
+    "NR7-AA5/AA6 budget and production promotion",
+    "NR0-NR12 joint acceptance"
+  ]
+}

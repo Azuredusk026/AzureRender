@@ -1489,6 +1489,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
          << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
          << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
+         << "  \"motionResponseEncoding\": \"negative-reactivity-v1\",\n"
          << "  \"temporalViewSubmission\": " << temporalView_.lastSubmission() << ",\n"
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
@@ -3488,8 +3489,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
 
     UniformBufferObject uniform{};
     // The actual view rotation is independent of sky projection scale.
-    uniform.cameraRight={viewMatrix_[0],viewMatrix_[4],viewMatrix_[8],0};
-    uniform.cameraUp={viewMatrix_[1],viewMatrix_[5],viewMatrix_[9],0};
+    uniform.cameraRight={viewMatrix_[0],viewMatrix_[4],viewMatrix_[8],samplingJitter_[0]};
+    uniform.cameraUp={viewMatrix_[1],viewMatrix_[5],viewMatrix_[9],samplingJitter_[1]};
     const auto& reflection=settings.screenSpaceReflection;
     const bool reflectionActive=screenSpaceReflectionActive(reflection,settings.sceneLightingEnabled,
         qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));

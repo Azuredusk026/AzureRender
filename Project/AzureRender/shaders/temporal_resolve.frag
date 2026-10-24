@@ -10,6 +10,19 @@ layout(location=0) out vec4 outputColor;
 layout(location=1) out vec4 outputHistory;
 layout(location=2) out float outputDepth;
 bool finite4(vec4 value){return !any(isnan(value))&&!any(isinf(value));}
+vec3 reconstructedHistory(vec2 uv){
+    vec2 position=uv*temporal.frame.xy-.5,base=floor(position),f=position-base;
+    vec2 f2=f*f,f3=f2*f;
+    vec2 w0=-.5*f+f2-.5*f3,w1=vec2(1)-2.5*f2+1.5*f3;
+    vec2 w2=.5*f+2*f2-1.5*f3,w3=-.5*f2+.5*f3,w12=w1+w2;
+    vec2 positions[3]=vec2[3]((base-.5)/temporal.frame.xy,
+        (base+.5+w2/w12)/temporal.frame.xy,(base+2.5)/temporal.frame.xy);
+    vec2 weights[3]=vec2[3](w0,w12,w3);
+    vec3 value=vec3(0);
+    for(int y=0;y<3;++y)for(int x=0;x<3;++x)
+        value+=textureLod(historyColor,vec2(positions[x].x,positions[y].y),0).rgb*weights[x].x*weights[y].y;
+    return value;
+}
 float previousViewDepth(float deviceDepth){
     vec4 p=temporal.previousDepthProjection;float denominator=deviceDepth*p.z-p.x;
     return abs(denominator)>1e-12?abs((p.y-deviceDepth*p.w)/denominator):1e20;
@@ -18,7 +31,7 @@ void main(){
     ivec2 pixel=ivec2(gl_FragCoord.xy),extent=ivec2(temporal.frame.xy);
     vec2 uv=gl_FragCoord.xy/temporal.frame.xy;
     vec4 current=texelFetch(currentColor,pixel,0),motion=texelFetch(vectors,pixel,0);
-    bool responsive=motion.w<0||!finite4(motion);
+    bool responsive=motion.w<=-1||!finite4(motion);
     float depth=texelFetch(hardwareDepth,pixel,0).r;
     if(motion.w!=0)depth=texelFetch(surfaceDepth,pixel,0).r;
     vec3 baseLow=current.rgb,baseHigh=current.rgb,edgeLow=current.rgb,edgeHigh=current.rgb;
@@ -36,7 +49,7 @@ void main(){
         if(candidateDepth<depth){depth=candidateDepth;motion=candidate;}
     }
     vec2 previousUv=uv-motion.xy;float expectedDepth=motion.z;
-    bool valid=temporal.frame.z>.5&&!responsive&&motion.w>=0&&finite4(current)&&finite4(motion);
+    bool valid=temporal.frame.z>.5&&!responsive&&motion.w>-1&&finite4(current)&&finite4(motion);
     if(valid&&motion.w==0){
         vec4 world=temporal.inverseCurrent*vec4(uv*2-1,depth,1),previous=temporal.previous*world;
         valid=finite4(previous)&&previous.w>1e-8;
@@ -53,8 +66,10 @@ void main(){
         float expectedViewDepth=previousViewDepth(expectedDepth),sampledViewDepth=previousViewDepth(texelFetch(historyDepth,center,0).r);
         float tolerance=temporal.limits.x+temporal.limits.y*expectedViewDepth;
         vec4 history=texture(historyColor,previousUv);
+        if(length((uv-previousUv)*temporal.frame.xy)>.01)history.rgb=reconstructedHistory(previousUv);
         valid=abs(expectedViewDepth-sampledViewDepth)<=tolerance&&finite4(history)&&history.a>.5;
         if(valid){float speed=length(motion.xy*temporal.frame.xy);float weight=mix(temporal.limits.z,.8,clamp(speed/8,0,1));
+            if(!coverageEdge)weight*=1-clamp(-motion.w,0,1);
             float contrast=max(max(high.r-low.r,high.g-low.g),high.b-low.b);
             float clipping=coverageEdge&&contrast>1e-5?mix(temporal.limits.w,1,clamp(speed,0,1)):1;
             vec3 bounded=mix(history.rgb,clamp(history.rgb,low,high),clipping);

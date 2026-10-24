@@ -3,6 +3,7 @@
 #include "motion_vector_push.glsl"
 #include "motion_projection.glsl"
 #include "node_opacity.glsl"
+#include "material_sampling.glsl"
 layout(binding=5) uniform sampler2D baseColor;
 layout(binding=8) uniform sampler2D coverageMask;
 layout(location=0) in vec2 textureCoordinate;
@@ -10,9 +11,15 @@ layout(location=1) in vec3 opacityCoordinate;
 layout(location=2) in vec4 currentClip;
 layout(location=3) in vec4 previousClip;
 layout(location=4) in float previousValid;
+layout(location=5) in vec3 materialFrameNormal;
+layout(location=6) in vec3 materialFrameTangent;
 layout(location=0) out vec4 outputMotion;
 layout(location=1) out float outputSurfaceDepth;
 void main(){
+    bool integrated=false;
+    if((motion.flags&512u)==0u&&(floatBitsToUint(motion.detail.y)&azurePixelIntegralFeature)!=0u)
+        integrated=azureUniformMaterialFrame(dFdx(materialFrameNormal),dFdy(materialFrameNormal),
+            dFdx(materialFrameTangent),dFdy(materialFrameTangent));
     if(!azureNodeOpacityCovered(opacityCoordinate,motion.outline.w))discard;
     if((motion.flags&512u)!=0u){
         uint tile=floatBitsToUint(motion.camera.w);
@@ -25,5 +32,6 @@ void main(){
     }
     outputMotion=azureMotionProjection(currentClip,previousClip,previousValid>=.999999);
     if(outputMotion.w==0||(motion.flags&16u)!=0u)outputMotion.w=-1;
+    else if(integrated)outputMotion.w=-.5;
     outputSurfaceDepth=gl_FragCoord.z;
 }

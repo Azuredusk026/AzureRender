@@ -222,6 +222,7 @@ private:
         std::array<float, 4> skyRight{},skyUp{},skyForward{},skyColor{},skyParameters{};
         std::array<float, 4> probeCenter{},probeHalfExtents{},probeCapture{},probeParameters{};
         std::array<float,4> irradianceOriginSpacing{},irradianceDimensionsEnabled{},irradianceParameters{};
+        // xyz: view basis; w: current shading jitter in output pixels, X/Y.
         std::array<float,4> cameraRight{},cameraUp{};
         std::array<float,16> screenReflectionWorldToClip{};
         std::array<float,4> screenReflectionTrace{},screenReflectionQuality{};

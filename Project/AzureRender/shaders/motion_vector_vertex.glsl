@@ -4,6 +4,7 @@
 #include "morph_data.glsl"
 #include "motion_pose_data.glsl"
 #include "instance_data.glsl"
+#include "material_sampling.glsl"
 layout(std430,binding=0) readonly buffer CurrentInstances {InstanceTransforms values[];} current;
 layout(std430,binding=1) readonly buffer CurrentJoints {mat4 values[];} joints;
 layout(location=0) in vec3 position;
@@ -20,6 +21,8 @@ layout(location=1) out vec3 opacityCoordinate;
 layout(location=2) out vec4 currentClip;
 layout(location=3) out vec4 previousClip;
 layout(location=4) out float previousValid;
+layout(location=5) out vec3 materialFrameNormal;
+layout(location=6) out vec3 materialFrameTangent;
 #if defined(AZURE_MOTION_OUTLINE)
 layout(std430,binding=6) readonly buffer OutlineWords {uint words[];} shell;
 layout(binding=7) uniform sampler2D widthMask;
@@ -34,6 +37,12 @@ void main(){
     for(uint i=0u;i<4u;++i)if(jointWeights[i]!=0)skin+=jointWeights[i]*joints.values[instance.meta.x+jointIndices[i]];
     vec4 shaped=skin*vec4(p,1);
     vec4 local=motion.gizmo*shaped;
+    materialFrameNormal=vec3(0);materialFrameTangent=vec3(0);
+    if((motion.flags&512u)==0u&&(floatBitsToUint(motion.detail.y)&azurePixelIntegralFeature)!=0u){
+        vec3 localNormal=normalize(transpose(inverse(mat3(motion.gizmo)))*normalize(mat3(skin)*n));
+        materialFrameNormal=normalize(transpose(inverse(mat3(instance.model)))*localNormal);
+        materialFrameTangent=normalize(mat3(instance.model)*mat3(motion.gizmo)*normalize(mat3(skin)*t));
+    }
     vec4 raster;
     bool valid;
 #if defined(AZURE_MOTION_OUTLINE)

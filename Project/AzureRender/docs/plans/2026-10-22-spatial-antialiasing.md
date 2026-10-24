@@ -192,6 +192,7 @@ R11G11B10 与 RGBA16F 的量化误差单独记录。
 真实发冠、细发边界及运动残差继续逐项验收。
 固定机位的三处高光区域已通过八相位能量检查。
 范围与保留门禁见[像素积分](../acceptance/nr/projected-hair-pixel-integral.md)。
+不透明分项的运动、部分响应及三次重建见[运动验证](../acceptance/nr/material-motion-response.md)。
 
 ### 图像与动态验收
 
