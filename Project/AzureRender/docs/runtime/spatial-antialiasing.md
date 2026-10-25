@@ -2,7 +2,7 @@
 
 `render.antiAliasing` 控制场景输出采样。
 主视口、辅助视口和 Player 使用同一实现。
-默认值为 1，合法范围为 0 至 3。
+默认值为 1，合法范围为 0 至 4。
 模式三的采样、历史与回退见[时序抗锯齿](temporal-antialiasing.md)。
 配置写入关卡后可保存与重开。
 
@@ -11,9 +11,13 @@
 | 0 | 直接输出调色结果 | 输出尺寸 |
 | 1 | 方向跨度与亚像素边缘过滤 | 输出尺寸 |
 | 2 | 四个子像素的线性覆盖合成 | 输出宽高各乘二 |
+| 3 | 原生尺寸时序重建 | 输出尺寸 |
+| 4 | 四个几何样点逐样点着色 | 输出尺寸 |
 
 命令行使用 `--anti-aliasing`。
-三个取值为 `off`、`edge`、`supersample`。
+取值为 `off`、`edge`、`supersample`。
+时序与多样点分别使用 `temporal`、`multisample`。
+模式四的能力与回退见[多样点契约](multisample-shading.md)。
 原生场景预设按关卡中的设置生效。
 辅助视口描述可设置整数 `antiAliasing`。
 `transfer` 接受 `linear` 与 `srgb`。
@@ -68,7 +72,7 @@ CTest 入口为 `AzureRender.SpatialAntiAliasingGpu`。
 
 采集清单记录 `antiAliasing` 与实际场景尺寸。
 `antiAliasingPipeline` 标识输出实现版本。
-当前版本为 `linear-display-spatial-v1`。
+空间输出标识为 `linear-display-spatial-v1`。
 辅助视口诊断还提供 `sceneExtent`。
 `frameExtent` 表示渲染器接收的物理场景尺寸。
 它与 `sceneExtent` 保持一致。

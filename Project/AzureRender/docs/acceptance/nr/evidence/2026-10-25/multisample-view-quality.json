@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "baseCommit": "8e419e3",
+  "run": "build/runs/20261024-184956-multisample-view-quality-6be5b8",
+  "rendererApiVersion": 5,
+  "renderSettingsVersion": 19,
+  "defaultAntiAliasing": 1,
+  "configurations": {
+    "debug": {
+      "registeredChecks": 12,
+      "auxiliaryOutputBytes": 22528,
+      "sceneResolveChecks": 30720,
+      "fallbackFrames": 3,
+      "fallbackMaximumByteDifference": 0,
+      "validationErrors": 0,
+      "detailsLogSha256": "43f55f8b314c0b8cb652c173acf09d0f4702449ba42596d57a0662a6a4e0faf1",
+      "fallbackReceiptSha256": "259d09745a0c6dfba32eff07d820c0dcf960ca4d44dfc11eb4d04eeebbc245fc",
+      "playerSha256": "58168d53417ac3b93af80277a626827031fe9cca0cfd0a3a0883456a7a89d141",
+      "editorSha256": "6db11829df8cd67343b5b521de054a92f3b02f1653da1dca4ba330380b95b87e",
+      "settingsDetailsSha256": "3e47b3e92278cc416a9395cf1af3ec5961574bb780f84ed464bec2afda32ba59"
+    },
+    "release": {
+      "registeredChecks": 12,
+      "auxiliaryOutputBytes": 22528,
+      "sceneResolveChecks": 30720,
+      "fallbackFrames": 3,
+      "fallbackMaximumByteDifference": 0,
+      "validationErrors": 0,
+      "detailsLogSha256": "95f63a98bae8e27e0cb5289cd4ca99891916b646a5ebbf86b0156568961cd540",
+      "fallbackReceiptSha256": "1d76d9d2e888d10b205a306c0551ccef00269cb305603d67773b7f31350714ec",
+      "playerSha256": "063b8abf2f712c509010de8e4cb999ef2f54e3078d185367a1b31f5c12ad8b0e",
+      "editorSha256": "e0998ff6621589dc104f64efa82a6cbbe8741e1d0a45dcb1eac2085af32d31b7"
+    }
+  },
+  "nativeBeauty": {
+    "sha256": "40f58a84d72ff6aac9229335fed7a4514634d0b80e507658d008933d7b50db9e",
+    "rimMaximumByteErrors": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  "shaders": {
+    "count": 89,
+    "crossConfigurationIdentical": true,
+    "frozenExisting85Unchanged": true
+  },
+  "sourceHashes": {
+    "CMakeLists.txt": "26ba4178573d31225c9b636d9571c902dc308b5ca7dbf37f21e6166b8446e2a3",
+    "src/app/AzureRenderApp.cpp": "937af2dd3d90d6f9ee3aef8e63d327bdecd4c8776479adffdfb11a0ac9e41dec",
+    "src/app/AzureRenderApp.hpp": "13fd588872a0c4838683d9b1679f37387fac97785a9174219325b9913c90eae5",
+    "src/app/AzureRenderCapture.cpp": "2c0c7bee4a2f95aa25e1863472c2fb8747470696eb3504592060c3b8d645603a",
+    "src/app/AzureRenderFrame.cpp": "af30e19089051886d955a22a50a0dd835e31f941f1a67ebff61c6e525ce83589",
+    "src/app/AzureRenderSupport.cpp": "91718bbb829ce4046c2f1f3dd165781816aac77469ea73a138890a380780e945",
+    "src/app/CommandLine.cpp": "1921a5a30218ba17242d922f9ee4326f0099ec01251b94c38877cbff822ed7b7",
+    "src/editor/panels/EnvironmentPanel.cpp": "195786988c94bc7d4cab03c32f8494fd8fc6583a20f75e40952c08f903644d79",
+    "src/render/RenderContext.hpp": "b57572d4b5281ebac35280b4299e01aae420a847d4e73291a125d6042dba8fd4",
+    "src/render/RenderSettings.cpp": "cbc8c1013512bc1c96c0c64132f460c8b62857c4a138c1ccfdef5ba9504d84b0",
+    "src/render/RenderSettings.hpp": "47017612e335e043a25fce940e6ea8cc905fa10fd1ab12d5b9d189c0acb5757b",
+    "src/render/RenderViewOutput.cpp": "f8058509a6ede5b7095293291a9bc81065ff8f85f4471585a16586149c91565c",
+    "src/render/RenderViewService.cpp": "20704930a43c482928d17559e864641feaed037e80c8bca124b74339c0b9bc29",
+    "src/render/SpatialAntiAliasing.hpp": "f0ace5ebcbccb66e73899bdda19c830b8e442b3b9404fb26d3e1a92e0bfcfe26",
+    "src/runtime/LevelRenderSettings.hpp": "e8aa68ce10c44ea18703b773d248a904cb78393adbaf60d38cdf115d105a3902",
+    "tests/CommandLineTests.cpp": "4e07fae5f541f85e0ffb24c1d5ae3d08ce0c75327bed85402c05aafd3ea17d3c",
+    "tests/ExtensionRegistryTests.cpp": "85e45d610a655fc3dadb5d8b4e69b7bcc77f42bde85886073133d7c85b4ca51e",
+    "tests/TemporalSettingsTests.cpp": "df4420f5148db57460b00f45cd72e1856eefb5c41b21c892f1f60abdb164c63b",
+    "tests/MultisampleViewTests.cpp": "b0b424df9111268c6010a5832d086f2ae0189f162a3b5a9a920645b9bb3ab1e2",
+    "tests/MultisampleViewGpuTests.cpp": "f3ccbf01707b6a22f5ae82cdd4683d07e8d307aeb432409e5166885089b0d325",
+    "tests/support/MultisampleSceneProbe.hpp": "f289eac00074027a1e5f2310eec129942a059650285bd84e5b805ef19ef7120c"
+  },
+  "remaining": [
+    "MS3 production character per-sample shading and original quality gates",
+    "MS4 matching snapshot and shell coverage",
+    "MS5 movement, visibility and performance; NR0-NR12 joint acceptance"
+  ]
+}

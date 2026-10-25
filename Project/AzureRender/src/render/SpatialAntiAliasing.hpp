@@ -3,8 +3,9 @@
 #include <string>
 
 namespace azurerender {
-inline int spatialAntiAliasingMode(int requested,bool temporalReady){
-    if(requested<0||requested>3)throw std::invalid_argument("AA mode must be within 0..3");
+inline int spatialAntiAliasingMode(int requested,bool temporalReady,bool multisampleReady=false){
+    if(requested<0||requested>4)throw std::invalid_argument("AA mode must be within 0..4");
+    if(requested==4)return multisampleReady?0:1;
     return requested==3?(temporalReady?0:1):requested;
 }
 // Owns a linear display-color target and a resolve pipeline. The caller owns

@@ -76,7 +76,8 @@ void AzureRenderApp::drawFrame() {
 #endif
     const unsigned samplingScale=effectiveRenderSettings_.antiAliasing==2?2:1;
     if((sceneRenderExtent_.width!=renderExtent_.width*samplingScale || sceneRenderExtent_.height!=renderExtent_.height*samplingScale
-        ||(effectiveRenderSettings_.antiAliasing==3)!=temporalRequested_)
+        ||(effectiveRenderSettings_.antiAliasing==3)!=temporalRequested_
+        ||(effectiveRenderSettings_.antiAliasing==4)!=multisampleRequested_)
         &&!recreateSwapchain())return;
     collectGpuTiming(currentFrame_);
     workerCommandPools_->resetFrame(currentFrame_, inFlightFences_[currentFrame_]);
@@ -983,7 +984,7 @@ void AzureRenderApp::recordCommandBuffer(
     sceneContext.commandBuffer = commandBuffer;
     azurerender::rhi::VulkanCommandRecorder commandRecorder(commandBuffer);
     sceneContext.commands = &commandRecorder;
-    sceneContext.sceneFramebuffer = swapchainFramebuffers_[imageIndex];
+    sceneContext.sceneFramebuffer = sceneMultisampling_?sceneMultisampling_->framebuffer(sceneContext.currentFrame):swapchainFramebuffers_[imageIndex];
     if (runOptions_.gpuTimingEnabled && !timestampQueryPools_.empty()) {
         sceneContext.timestampQueryPool =
             timestampQueryPools_[currentFrame_];
@@ -1024,7 +1025,12 @@ void AzureRenderApp::recordCommandBuffer(
         if(rendererState&&rendererState->temporalFrame){temporalReconstruction_->prepare(*rendererState->temporalFrame,sceneContext.currentFrame,imageIndex);temporalReady=true;}
         else temporalReconstruction_->cancel();
     }
-    if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, resources, sceneContext);
+    auto sceneResources=resources;
+    std::array<azurerender::RenderGraph::ResourceId,3> multisampleSources{};
+    if(sceneMultisampling_){multisampleSources=sceneMultisampling_->importSources(graph,sceneContext.currentFrame,"main-samples");
+        sceneResources.color=multisampleSources[0];sceneResources.depth=multisampleSources[1];sceneResources.normal=multisampleSources[2];}
+    if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, sceneResources, sceneContext);
+    if(sceneMultisampling_)sceneMultisampling_->schedule(graph,sceneContext.currentFrame,imageIndex,multisampleSources,{resources.color,resources.depth,resources.normal},"main-multisample-resolve");
     if(temporalReady)temporalReconstruction_->schedule(graph,resources.color,resources.depth,temporalMotion,"main");
 #if AZURE_WITH_EDITOR
     // All views consume the same snapshot after the host advances simulation.
@@ -1125,7 +1131,7 @@ void AzureRenderApp::recordCommandBuffer(
     finalPass.renderArea.extent=renderExtent_;vkCmdBeginRenderPass(commandBuffer,&finalPass,VK_SUBPASS_CONTENTS_INLINE);
     VkViewport finalViewport{};finalViewport.width=float(renderExtent_.width);finalViewport.height=float(renderExtent_.height);finalViewport.maxDepth=1;
     VkRect2D finalScissor{};finalScissor.extent=renderExtent_;vkCmdSetViewport(commandBuffer,0,1,&finalViewport);vkCmdSetScissor(commandBuffer,0,1,&finalScissor);
-    spatial.resolve(commandRecorder,azurerender::spatialAntiAliasingMode(effectiveRenderSettings_.antiAliasing,temporalReady),
+    spatial.resolve(commandRecorder,azurerender::spatialAntiAliasingMode(effectiveRenderSettings_.antiAliasing,temporalReady,sceneMultisampling_!=nullptr),
         swapchainFormat_!=VK_FORMAT_B8G8R8A8_SRGB&&swapchainFormat_!=VK_FORMAT_R8G8B8A8_SRGB,effectiveRenderSettings_.diagnosticView!=0);
     if ((hudEnabled_ || runOptions_.technicalSequence) &&
         hudVertexCounts_[currentFrame_] > 0) {

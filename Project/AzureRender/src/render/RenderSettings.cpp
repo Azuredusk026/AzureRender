@@ -133,6 +133,8 @@ RenderSettings migrateRenderSettings(
         settings.cameraNear=.1F;settings.cameraFar=100;settings.shadowDistance=100;
     }
     if (sourceSchemaVersion < 9) settings.antiAliasing = 1;
+    if(sourceSchemaVersion<19&&settings.antiAliasing>3)
+        throw std::invalid_argument("Multisample anti-aliasing requires RenderSettings version 19");
     if(sourceSchemaVersion<18&&settings.antiAliasing>2)
         throw std::invalid_argument("Temporal anti-aliasing requires RenderSettings version 18");
     if (sourceSchemaVersion < 14) settings.grade.lut = {};
@@ -199,7 +201,7 @@ void validateRenderSettings(const RenderSettings& settings) {
     }
 
     requireRange(settings.outline.silhouetteWidthPixels,0.F,8.F,"outline.silhouetteWidthPixels");
-    if (settings.antiAliasing > 3) throw std::invalid_argument("Unknown anti-aliasing quality");
+    if (settings.antiAliasing > 4) throw std::invalid_argument("Unknown anti-aliasing quality");
     requireRange(settings.styleMaskStrength, 0.0F, 2.0F, "styleMaskStrength");
     requireRange(settings.cameraNear,.01F,10,"cameraNear");
     requireRange(settings.cameraFar,.01F,5000,"cameraFar");
@@ -273,7 +275,7 @@ void validateRenderSettings(const RenderSettings& settings) {
 namespace azurerender {
 void registerRenderSettings(SettingRegistry& r) {
     r.add({"render.shadowDistance","Shadow coverage distance in metres",100.0,.01,5000.,false,true,false});
-    r.add({"render.antiAliasing","Anti-aliasing: off, edge adaptive, supersampling, temporal",1,0.,3.,false,true,false});
+    r.add({"render.antiAliasing","Anti-aliasing: off, edge adaptive, supersampling, temporal, multisampling",1,0.,4.,false,true,false});
     r.add({"render.diagnosticView","Diagnostic view: beauty, normal, outline, shadow, depth",0,0.,4.,false,true,false});
     r.add({"render.exposure","Temporary exposure in EV",0.0,-8.,8.,false,true,false});
     r.add({"render.blackholeQuality","Blackhole quality: performance, balanced, cinematic",2,0.,2.,false,true,false,false});

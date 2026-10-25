@@ -96,7 +96,8 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 按[四样点着色计划](2026-10-24-multisample-shading.md)接入真实几何采样。
 RHI 附件及逐样点插值已通过[双配置验收](../acceptance/nr/multisample-rhi.md)。
 公共目标及深度解析通过[双配置验收](../acceptance/nr/multisample-scene-target.md)。
-当前继续 MS2 的主辅视图装配与质量模式接入。
+主辅视图装配与质量模式见[视图验收](../acceptance/nr/multisample-view-quality.md)。
+当前继续 MS3 的角色逐样点着色与 MS4 的覆盖接入。
 先保存主入口走样红测及官方时序通道输入。
 材质阶段同步核验发丝、KK、Ramp、服饰与描边走样。
 视图历史、运动场及静态与动态联合画质保持待验。

@@ -291,7 +291,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandPool();
     rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
         device_, physicalDevice_, graphicsQueue_, commandPool_,
-        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get());
+        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get(), [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.sampleRateShading==VK_TRUE;}(physicalDevice_));
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(std::filesystem::u8path(assetPath)).u8string();
     phase("shadow resources", [this] { createShadowResources(); });
@@ -486,6 +486,21 @@ void AzureRenderApp::createTemporalResources(){
         temporalReconstruction_=std::make_unique<azurerender::TemporalReconstruction>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,std::move(sources),shaders);
     }catch(const std::exception& error){temporalFallback_=error.what();azurerender::RuntimeDiagnostics::instance().info("render","Temporal AA spatial fallback: "+temporalFallback_);}
 }
+void AzureRenderApp::createMultisampleResources(){
+    sceneMultisampling_.reset();multisampleFallback_.clear();multisampleRequested_=effectiveRenderSettings_.antiAliasing==4;
+    azurerender::RenderContext context;buildRenderContext(context);
+    if(multisampleRequested_&&sceneRenderer_){
+        try{
+            if(!sceneRenderer_->capabilities().supportsMultisampleShading)throw std::runtime_error("Renderer does not provide multisample shading");
+            if(!rhi_->supportsSampleShading()||!context.descriptorLimits.standardSampleLocations)throw std::runtime_error("Device lacks enabled standard sample shading");
+            std::vector<azurerender::SceneMultisampleDestination> destinations;
+            for(std::size_t i=0;i<sceneColorImages_.size();++i)destinations.push_back({{sceneColorImages_[i].image,depthImages_[i].image,normalImages_[i].image},
+                {sceneColorImageViews_[i],depthImageViews_[i],normalImageViews_[i]}});
+            sceneMultisampling_=std::make_unique<azurerender::SceneMultisampling>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,normalFormat_,
+                azurerender::SceneSecondaryResolve::Average,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),context.shaderDirectory);
+        }catch(const std::exception& error){multisampleFallback_=error.what();azurerender::RuntimeDiagnostics::instance().info("render","Multisample AA spatial fallback: "+multisampleFallback_);}
+    }
+}
 void AzureRenderApp::createSceneRenderer() {
     azurerender::RenderContext context;
     buildRenderContext(context);
@@ -500,6 +515,8 @@ void AzureRenderApp::createSceneRenderer() {
     sceneRenderer_ = registry.create(rendererId);
     azurerender::validateSceneRendererCapabilities(
         sceneRenderer_->capabilities());
+    createMultisampleResources();context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
+    context.sceneRenderPass=sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
 #if AZURE_WITH_EDITOR
     if (runOptions_.editorSession) {
         const auto loadedScene = runOptions_.editorSession->viewScene();
@@ -556,7 +573,8 @@ void AzureRenderApp::buildRenderContext(
     context.sceneColorFormat = kHdrSceneColorFormat;
     context.depthFormat = depthFormat_;
     context.normalFormat = normalFormat_;
-    context.sceneRenderPass = renderPass_;
+    context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
+    context.sceneRenderPass = sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
     context.postProcessRenderPass = postProcessRenderPass_;
     context.postProcessPipelineLayout = postProcessPipelineLayout_;
     context.postProcessDescriptorSetLayout = postProcessDescriptorSetLayout_;
@@ -1341,6 +1359,7 @@ void AzureRenderApp::createLogicalDevice() {
     deviceFeatures.independentBlend = VK_TRUE;
     VkPhysicalDeviceFeatures supportedSampler{};vkGetPhysicalDeviceFeatures(physicalDevice_,&supportedSampler);
     deviceFeatures.samplerAnisotropy=supportedSampler.samplerAnisotropy;
+    deviceFeatures.sampleRateShading=supportedSampler.sampleRateShading;
     deviceFeatures.drawIndirectFirstInstance = indirectFirstInstanceSupported_ ? VK_TRUE : VK_FALSE;
     deviceFeatures.multiDrawIndirect = multiDrawIndirectSupported_ ? VK_TRUE : VK_FALSE;
     VkPhysicalDeviceVulkan12Features vulkan12Features{

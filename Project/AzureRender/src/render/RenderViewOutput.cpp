@@ -76,7 +76,7 @@ void RenderViewOutput::schedule(RenderGraph& graph,RenderGraph::ResourceId hdr,c
     const auto resolvePass=graph.addCommandPass(name+"-resolve",[this,temporalReady](rhi::ICommandRecorder& commands){
         commands.beginRenderPass({pass_,framebuffer_,context_.swapchainExtent,{}});
         commands.setViewport(float(image_.width),float(image_.height));commands.setScissor(context_.swapchainExtent);
-        spatial_->resolve(commands,spatialAntiAliasingMode(context_.renderSettings?context_.renderSettings->antiAliasing:1,temporalReady),
+        spatial_->resolve(commands,spatialAntiAliasingMode(context_.renderSettings?context_.renderSettings->antiAliasing:1,temporalReady,context_.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT),
             transfer_==ViewColorTransfer::SrgbEncoded,context_.renderSettings&&context_.renderSettings->diagnosticView!=0);
         commands.endRenderPass();
     });

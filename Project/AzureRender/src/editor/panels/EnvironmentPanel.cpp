@@ -47,7 +47,7 @@ void ImGuiEditorLayer::drawEnvironmentPanel(PanelContext& context) {
         session_->edit("render.settings",{{"values",{{"shadowRadius",shadowRadius}}}},"render-shadowRadius");
     }
     int aa=static_cast<int>(settings.antiAliasing);
-    if(ui::combo(ui::tr("Anti-aliasing"),&aa,"Off\0Edge adaptive\0Supersampling 2x\0Temporal\0"))
+    if(ui::combo(ui::tr("Anti-aliasing"),&aa,"Off\0Edge adaptive\0Supersampling 2x\0Temporal\0Multisampling 4x\0"))
         session_->edit("render.settings",{{"values",{{"antiAliasing",aa}}}},"render-aa");
     float exposure = settings.grade.exposureEv;
     if (ImGui::SliderFloat(ui::tr("Exposure EV"), &exposure, -8.0F, 8.0F)) {

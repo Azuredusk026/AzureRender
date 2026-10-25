@@ -91,7 +91,7 @@ inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::jso
         const auto& mode=data.at("antiAliasing");
         if(!mode.is_number_integer())throw std::invalid_argument("Anti-aliasing mode must be an integer");
         const auto value=mode.get<std::uint64_t>();
-        if(value>3||(version<18&&value>2))throw std::invalid_argument("Temporal anti-aliasing requires render settings version 18");
+        if(value>4||(version<19&&value>3)||(version<18&&value>2))throw std::invalid_argument("Anti-aliasing mode requires its render settings version: temporal 18, multisample 19");
     }
     auto settings=target;
     if(data.contains("nprLighting"))decodeNprLighting(settings.nprLighting,data.at("nprLighting"));

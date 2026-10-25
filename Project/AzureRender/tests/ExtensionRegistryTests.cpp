@@ -106,17 +106,17 @@ int main() {
     // Scene renderer registry reuses the same dependency/version contract and
     // the default diagnostic view lookup comes from capabilities.
     azurerender::SceneRendererRegistry sceneRegistry;
-    if(sceneRegistry.kApiVersion!=4||azurerender::SceneRendererCapabilities::kApiVersion!=4){
-        std::cerr<<"Motion output changes require scene renderer API version four\n";return 1;
+    if(sceneRegistry.kApiVersion!=5||azurerender::SceneRendererCapabilities::kApiVersion!=5){
+        std::cerr<<"Motion output changes require scene renderer API version five\n";return 1;
     }
-    for(const auto legacyApi:{1U,2U,3U}){
+    for(const auto legacyApi:{1U,2U,3U,4U}){
         bool oldSceneApiRejected=false;
         try{sceneRegistry.registerFactory({"scene.old",legacyApi,{"render"},{}},[]{return std::make_unique<TestSceneRenderer>();});}
         catch(const std::runtime_error&){oldSceneApiRejected=true;}
         if(!oldSceneApiRejected){std::cerr<<"An older scene renderer API must be rejected before registration\n";return 1;}
     }
     sceneRegistry.registerFactory(
-        {"scene.character", 4, {"render"}, {}},
+        {"scene.character", 5, {"render"}, {}},
         [] { return std::make_unique<TestSceneRenderer>(); });
     assert(sceneRegistry.contains("scene.character"));
     const auto selectedScene = sceneRegistry.create("scene.character");

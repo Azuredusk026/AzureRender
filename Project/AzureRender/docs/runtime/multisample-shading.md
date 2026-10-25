@@ -81,3 +81,40 @@ HDR 使用 `R16G16B16A16_SFLOAT`。
 缺少生产者、错误资源或附件别名在图修改前拒绝。
 失败创建须释放全部所属资源。
 主辅视图装配与角色质量范围见[场景目标验收](../acceptance/nr/multisample-scene-target.md)。
+
+## 视图质量与版本
+
+渲染设置版本十九提供 `antiAliasing=4`。
+命令行使用 `--anti-aliasing multisample`。
+控制台使用 `render.antiAliasing=4`。
+默认模式为一，正式画质晋升消费联合验收。
+
+完整关卡设置保存版本与整数画质。
+模式四要求来源版本至少十九。
+模式三要求来源版本至少十八。
+部分覆盖可继承目标对象已有的有效画质。
+
+渲染器 API 版本五声明 `supportsMultisampleShading`。
+`RenderContext::rasterizationSamples` 表示实际附件样本数。
+默认值为一，能力通过后值为四。
+管线与着色器选择消费该实际值。
+
+主视图与辅助视图共用公共目标和解析流程。
+每个视图独立检查能力、标准位置、格式及预算。
+能力不足时采用模式一的空间输出并记录原因。
+四样点模式消费独立几何覆盖，其历史分配为零。
+
+辅助视图从自己的质量设置建立实际样本状态。
+视口重建等待资源退役，再建立新尺寸的样点目标。
+连续在途帧使用不同源槽。
+单样点输出继续使用所属视图的完成序号。
+
+诊断记录 `rasterizationSamples` 与 `multisampleBytes`。
+`multisampleAllocatedBytes` 记录分配器统计。
+`multisampleFallback` 记录空间回退原因。
+主辅视图记录 `multisampleSourceSlots`。
+`sceneAttachmentFormats` 按颜色、深度及法线记录格式。
+
+已接入的渲染器按自身能力决定可用画质。
+角色逐样点材质及描边按 MS3、MS4 接入。
+真实角色的动态细节须通过 MS5 的原有门禁。

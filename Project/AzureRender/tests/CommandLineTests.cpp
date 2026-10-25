@@ -53,6 +53,8 @@ int main() try {
     expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","beauty","--qa-exposure","-4"});
     expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","world-normal","--qa-exposure","-4"});
     expectError(CommandLineErrorCode::InvalidCombination,"--qa-exposure",{"--qa-isolation","hair-kk","--qa-effect","rim","--qa-effect-state","isolation","--qa-exposure","-4"});
+    require(azurerender::parseCommandLine({"--anti-aliasing","multisample"}).options.renderSettings.antiAliasing==4,
+        "Four-sample quality uses the production command line");
     require(azurerender::parseCommandLine({"--anti-aliasing","temporal"}).options.renderSettings.antiAliasing==3,
         "Native temporal sampling is available through the production command line");
     const auto directProject=azurerender::parseCommandLine({"--project",u8"D:/用户项目/Monica.azureproject"});

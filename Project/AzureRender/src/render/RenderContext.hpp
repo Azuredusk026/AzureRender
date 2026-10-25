@@ -67,7 +67,7 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 4;
+    static constexpr std::uint32_t kApiVersion = 5;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;
@@ -76,6 +76,7 @@ struct SceneRendererCapabilities {
     std::vector<std::string> diagnosticViewNames;
     bool supportsProjectionOffset=false;
     bool supportsMotionVectors=false;
+    bool supportsMultisampleShading=false;
 };
 inline void validateSceneRendererCamera(const SceneRendererCapabilities& capabilities,const CameraViewDescriptor& camera){
     if((camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)&&!capabilities.supportsProjectionOffset)
@@ -211,6 +212,7 @@ struct RenderContext {
     VkFormat depthFormat = VK_FORMAT_UNDEFINED;
     VkFormat normalFormat = VK_FORMAT_R8G8B8A8_UNORM;
 
+    VkSampleCountFlagBits rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;
     VkRenderPass sceneRenderPass = VK_NULL_HANDLE;
     VkRenderPass postProcessRenderPass = VK_NULL_HANDLE;
     VkPipelineLayout postProcessPipelineLayout = VK_NULL_HANDLE;
