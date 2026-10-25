@@ -968,6 +968,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.MultisampleMaterialMotionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_temporal_coverage_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.MultisampleMaterialMotionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.MultisampleCameraMotionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_temporal_coverage_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --motion-driver camera --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.MultisampleCameraMotionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     foreach(coverage_case mask cloth blend fading fade-cycle composite)
         add_test(NAME AzureRender.MultisampleCoverage-${coverage_case}Gpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_temporal_alpha_coverage_gpu.py"
             --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --case "${coverage_case}" --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

@@ -100,6 +100,7 @@ GPU 接入先核对 `standardSampleLocations`。
 完整颜色消费包含屏幕反射、折射和场景染色。
 深度路径及成本范围见[需求验证](../acceptance/nr/snapshot-depth-demand.md)。
 四样点主通道成本继续进入 60 帧预算验收。
+角色与镜头的独立平移见[镜头验证](../acceptance/nr/camera-motion-quality.md)。
 
 - [ ] 固定、移动、转身和遮挡显露通过质量门禁。
 - [ ] 角色与镜头运动分别核对高频结构及残差。

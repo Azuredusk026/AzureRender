@@ -13,6 +13,7 @@ import numpy as np
 from PIL import Image
 import test_projected_hair_integral_gpu as integral
 import test_projected_hair_gpu as hair
+from temporal_coverage_metrics import correlated_detail
 
 
 FRAMES=80
@@ -20,7 +21,7 @@ FPS=60
 DISTANCE=.3
 
 
-def fixture(folder,filtered,mode):
+def fixture(folder,filtered,mode,driver="character"):
     project=integral.fixture(folder,True,filtered)
     path=folder/'assets/panels.gltf';asset=json.loads(path.read_text())
     binary=bytearray(base64.b64decode(asset['buffers'][0]['uri'].split(',',1)[1]))
@@ -43,10 +44,20 @@ def fixture(folder,filtered,mode):
     translations=append([0,0,0,0,0,0,DISTANCE,0,0,DISTANCE,0,0],'VEC3',4)
     asset['animations']=[{'name':'translate-and-hold','samplers':[{'input':times,'output':translations,'interpolation':'LINEAR'}],
         'channels':[{'sampler':0,'target':{'node':joint,'path':'translation'}}]}]
+    if driver=='camera':asset['animations']=[]
     asset['buffers'][0].update(byteLength=len(binary),uri='data:application/octet-stream;base64,'+base64.b64encode(binary).decode())
     path.write_text(json.dumps(asset))
     path=folder/'assets/scene.azurelevel';level=json.loads(path.read_text())
-    level['renderSettings'].update(schemaVersion=19 if mode==4 else 18,antiAliasing=mode);path.write_text(json.dumps(level))
+    level['renderSettings'].update(schemaVersion=19 if mode==4 else 18,antiAliasing=mode)
+    if driver=='camera':
+        camera=next(node for node in level['nodes'] if node['id']=='camera')
+        camera['components']['azure.script']={'type':'azure.script','version':1,
+            'data':{'asset':'assets:/camera.lua','enabled':True}}
+        (folder/'assets/camera.lua').write_text('function init() self.elapsed=0 end\n'
+            'function update(dt)\nself.elapsed=self.elapsed+dt\n'
+            'local t=math.max(0,math.min(1,(self.elapsed-16/60)/(32/60)))\n'
+            f"self:set('azure.transform','translation',{{-{DISTANCE}*t,0,3}})\nend\n")
+    path.write_text(json.dumps(level))
     return project
 
 
@@ -61,23 +72,23 @@ def frames(folder,scale):
     return np.stack(values)
 
 
-def local(values):
-    # Capture frame zero records the initial pose. This transform
-    # follows the authored joint analytically, independently of image flow.
+def local(values,frame_lag=0):
+    # Align authored translation at its declared render time,
+    # independently of measured image flow.
     widthPerWorld=128/(2*hair.CAMERA[2]*math.tan(math.radians(hair.FOV)*.5))
     result=[]
     for index,value in enumerate(values):
-        amount=np.clip((index/FPS-16/FPS)/(32/FPS),0,1)*DISTANCE*widthPerWorld
+        amount=np.clip(((index-frame_lag)/FPS-16/FPS)/(32/FPS),0,1)*DISTANCE*widthPerWorld
         x=np.r_[np.arange(34,57),np.arange(71,94)]+amount
         first=np.floor(x).astype(int);fraction=(x-first)[None,:,None]
         result.append(value[34:94,first]*(1-fraction)+value[34:94,first+1]*fraction)
     return np.stack(result)
 
 
-def projected_coverage(index):
+def projected_coverage(index,frame_lag=0):
     half=hair.CAMERA[2]*math.tan(math.radians(hair.FOV)*.5)
     coordinates=((np.arange(512)+.5)/512*2-1)*half
-    translation=np.clip((index/FPS-16/FPS)/(32/FPS),0,1)*DISTANCE
+    translation=np.clip(((index-frame_lag)/FPS-16/FPS)/(32/FPS),0,1)*DISTANCE
     mask=(np.abs(coordinates[None,:]-translation)<=float(np.float32(.9)))&(np.abs(coordinates[:,None])<=float(np.float32(.9)))
     return mask.reshape(128,4,128,4).any((1,3))
 
@@ -87,8 +98,8 @@ def encoded(values):
     return np.rint(np.where(values<=.0031308,values*12.92,1.055*values**(1/2.4)-.055)*255)
 
 
-def measure(source,candidate,reference):
-    a,b,ref=(local(v) for v in (source,candidate,reference))
+def measure(source,candidate,reference,frame_lag=0):
+    a,b,ref=(local(v,frame_lag) for v in (source,candidate,reference))
     energy=b.sum((1,2,3))/ref.sum((1,2,3));sourceEnergy=a.sum((1,2,3))/ref.sum((1,2,3))
     residual=b-ref;control=a-ref;moving=slice(16,48)
     error=float(np.abs(residual[moving]).mean());sourceError=float(np.abs(control[moving]).mean())
@@ -97,7 +108,7 @@ def measure(source,candidate,reference):
     background=reference[:,0:1,0:1]
     centroids=[];edge=[];controlEdge=[];ghosts=[];flatError=0
     for index in range(FRAMES):
-        mask=projected_coverage(index)
+        mask=projected_coverage(index,frame_lag)
         assert np.max(np.abs(encoded(reference[index])-encoded(background[index]))[~mask])<=1,('Reference geometry projection mismatch',index)
         centroids.append(float(np.nonzero(mask)[1].mean()))
         padded=np.pad(mask,2);neighbours=[padded[y:y+128,x:x+128] for y in range(5) for x in range(5)]
@@ -107,7 +118,7 @@ def measure(source,candidate,reference):
             edge.append(float(np.abs(candidate[index]-reference[index])[boundary].mean()))
             controlEdge.append(float(np.abs(source[index]-reference[index])[boundary].mean()))
             ghosts.append(int(np.any(np.abs(encoded(candidate[index])-encoded(background[index]))>1,axis=2)[~outer].sum()))
-    assert centroids[-1]-centroids[0]>4,'The public skinning path must actually move the fixture'
+    assert centroids[-1]-centroids[0]>4,'The public motion driver must actually move the fixture'
     return dict(movingEnergyRatios=energy[16:48].tolist(),lastEightEnergyRatios=energy[-8:].tolist(),
         sourceMovingEnergyRatios=sourceEnergy[16:48].tolist(),movingMeanAbsoluteError=error,sourceMovingMeanAbsoluteError=sourceError,
         errorRatio=error/max(sourceError,1e-12),residualChange=change,sourceResidualChange=sourceChange,residualChangeRatio=change/max(sourceChange,1e-12),
@@ -115,18 +126,19 @@ def measure(source,candidate,reference):
         referenceCentroidDisplacement=centroids[-1]-centroids[0],maximumFlatByteError=flatError)
 
 
-def run(player,output,validation,quality="temporal"):
+def run(player,output,validation,quality="temporal",driver="character"):
     output.mkdir(parents=True,exist_ok=False);digest=hashlib.sha256(player.read_bytes()).hexdigest()
-    report=dict(schemaVersion=1,status='running',qualityMode=quality,playerSha256=digest,frames=FRAMES,fps=FPS,captures=[])
+    report=dict(schemaVersion=1,status='running',qualityMode=quality,motionDriver=driver,playerSha256=digest,frames=FRAMES,fps=FPS,captures=[])
     report['shaders']={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (player.parent/'shaders').glob('*.spv')}
     try:
         images={}
         plans=[('source',1,False,0),('integral',1,True,4),('reference',4,False,0)] if quality=='multisample' else [('source',1,False,3),('integral',1,True,3),('reference',4,False,0)]
         for name,scale,filtered,mode in plans:
-            folder=output/name;project=fixture(folder,filtered,mode)
+            folder=output/name;project=fixture(folder,filtered,mode,driver)
             command=[str(player),'--project',str(project),'--width',str(128*scale),'--height',str(128*scale),
                 '--capture-dir',str(folder/'frames'),'--capture-frames',str(FRAMES),'--capture-fps',str(FPS),
                 '--fixed-frame-step','--qa-animation','--qa-camera','scene','--qa-light','scene','--qa-isolation','hair-kk','--qa-exposure','-4']
+            if driver=='camera':command+=['--runtime-report',str(folder/'runtime.json')]
             (folder/'command.json').write_text(json.dumps(command,indent=2))
             with (folder/'player.log').open('w',encoding='utf-8') as log:
                 subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
@@ -138,10 +150,22 @@ def run(player,output,validation,quality="temporal"):
             if mode==4:assert manifest['rasterizationSamples']==4 and not manifest['multisampleFallback'],'Four-sample quality must use actual multisample attachments'
             assert manifest['antiAliasing']==mode and manifest['qaAnimation']
             if mode==3:assert manifest['temporalHistorySubmission']>=FRAMES and manifest['motionOutputActive']
+            if driver=='camera':
+                state=json.loads((folder/'runtime.json').read_text())
+                camera=next(node for node in state['nodes'] if node['id']=='camera')
+                assert state['activeScripts']==1 and not state['scriptErrors'] and not state['presentationErrors']
+                assert abs(camera['translation'][0]+DISTANCE)<1e-6
             images[name]=frames(folder,scale)
             report['captures'].append(dict(name=name,manifest=manifest,
                 images={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((folder/'frames').glob('frame_*.png'))}))
-        report['quality']=measure(images['source'],images['integral'],images['reference']);q=report['quality']
+        # Fixed-step world cameras interpolate the previous state at a zero accumulator.
+        frame_lag=1 if driver=='camera' else 0
+        report['cameraInterpolationFrameLag']=frame_lag
+        report['quality']=measure(images['source'],images['integral'],images['reference'],frame_lag);q=report['quality']
+        if driver=='camera':
+            q['highFrequencyDetailRatios']=correlated_detail(local(images['integral'],frame_lag),
+                local(images['reference'],frame_lag),slice(16,48),highpass=True)
+            assert all(.8<=value<=1.2 for value in q['highFrequencyDetailRatios']),q
         assert all(abs(v-1)<=.02 for v in q['movingEnergyRatios']+q['lastEightEnergyRatios']),q
         assert q['errorRatio']<=.8 and q['residualChangeRatio']<=.8 and q['edgeErrorRatio']<=.8,q
         assert q['maximumGhostPixelsOutsideTwoPixels']==0,q
@@ -156,8 +180,9 @@ def run(player,output,validation,quality="temporal"):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--executable',type=Path,required=True)
     parser.add_argument('--quality',choices=('temporal','multisample'),default='temporal')
+    parser.add_argument('--motion-driver',choices=('character','camera'),default='character')
     parser.add_argument('--output',type=Path);parser.add_argument('--validation',choices=('enabled','disabled'),required=True);args=parser.parse_args()
-    if args.output:run(args.executable.resolve(),args.output.resolve(),args.validation,args.quality)
+    if args.output:run(args.executable.resolve(),args.output.resolve(),args.validation,args.quality,args.motion_driver)
     else:
         with tempfile.TemporaryDirectory(prefix='material-motion-') as temporary:
-            run(args.executable.resolve(),Path(temporary)/'captures',args.validation,args.quality)
+            run(args.executable.resolve(),Path(temporary)/'captures',args.validation,args.quality,args.motion_driver)

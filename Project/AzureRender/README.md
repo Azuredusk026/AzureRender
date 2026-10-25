@@ -210,6 +210,7 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 角色逐样点材质与动态质量见[材质验证](docs/acceptance/nr/multisample-character-material.md)。
 多样点副本、描边和边缘光见[副本验证](docs/acceptance/nr/multisample-snapshot-outline.md)。
 副本按颜色与深度需求选择着色，见[成本验证](docs/acceptance/nr/snapshot-depth-demand.md)。
+公共脚本镜头与真实角色的动态细节见[镜头验证](docs/acceptance/nr/camera-motion-quality.md)。
 公共四样点目标与最近深度解析见[专项验证](docs/acceptance/nr/multisample-scene-target.md)。
 主辅视图画质、实际样本与回退见[视图验证](docs/acceptance/nr/multisample-view-quality.md)。
 完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。
