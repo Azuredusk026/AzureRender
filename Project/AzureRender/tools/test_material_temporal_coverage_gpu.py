@@ -46,7 +46,7 @@ def fixture(folder,filtered,mode):
     asset['buffers'][0].update(byteLength=len(binary),uri='data:application/octet-stream;base64,'+base64.b64encode(binary).decode())
     path.write_text(json.dumps(asset))
     path=folder/'assets/scene.azurelevel';level=json.loads(path.read_text())
-    level['renderSettings'].update(schemaVersion=18,antiAliasing=mode);path.write_text(json.dumps(level))
+    level['renderSettings'].update(schemaVersion=19 if mode==4 else 18,antiAliasing=mode);path.write_text(json.dumps(level))
     return project
 
 
@@ -115,13 +115,14 @@ def measure(source,candidate,reference):
         referenceCentroidDisplacement=centroids[-1]-centroids[0],maximumFlatByteError=flatError)
 
 
-def run(player,output,validation):
+def run(player,output,validation,quality="temporal"):
     output.mkdir(parents=True,exist_ok=False);digest=hashlib.sha256(player.read_bytes()).hexdigest()
-    report=dict(schemaVersion=1,status='running',playerSha256=digest,frames=FRAMES,fps=FPS,captures=[])
+    report=dict(schemaVersion=1,status='running',qualityMode=quality,playerSha256=digest,frames=FRAMES,fps=FPS,captures=[])
     report['shaders']={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (player.parent/'shaders').glob('*.spv')}
     try:
         images={}
-        for name,scale,filtered,mode in [('source',1,False,3),('integral',1,True,3),('reference',4,False,0)]:
+        plans=[('source',1,False,0),('integral',1,True,4),('reference',4,False,0)] if quality=='multisample' else [('source',1,False,3),('integral',1,True,3),('reference',4,False,0)]
+        for name,scale,filtered,mode in plans:
             folder=output/name;project=fixture(folder,filtered,mode)
             command=[str(player),'--project',str(project),'--width',str(128*scale),'--height',str(128*scale),
                 '--capture-dir',str(folder/'frames'),'--capture-frames',str(FRAMES),'--capture-fps',str(FPS),
@@ -134,6 +135,7 @@ def run(player,output,validation):
             assert 'Allocator after unload: buffers=0 images=0' in log
             assert ('Validation layer: enabled' in log)==(validation=='enabled')
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8-sig'))
+            if mode==4:assert manifest['rasterizationSamples']==4 and not manifest['multisampleFallback'],'Four-sample quality must use actual multisample attachments'
             assert manifest['antiAliasing']==mode and manifest['qaAnimation']
             if mode==3:assert manifest['temporalHistorySubmission']>=FRAMES and manifest['motionOutputActive']
             images[name]=frames(folder,scale)
@@ -153,8 +155,9 @@ def run(player,output,validation):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--executable',type=Path,required=True)
+    parser.add_argument('--quality',choices=('temporal','multisample'),default='temporal')
     parser.add_argument('--output',type=Path);parser.add_argument('--validation',choices=('enabled','disabled'),required=True);args=parser.parse_args()
-    if args.output:run(args.executable.resolve(),args.output.resolve(),args.validation)
+    if args.output:run(args.executable.resolve(),args.output.resolve(),args.validation,args.quality)
     else:
         with tempfile.TemporaryDirectory(prefix='material-motion-') as temporary:
-            run(args.executable.resolve(),Path(temporary)/'captures',args.validation)
+            run(args.executable.resolve(),Path(temporary)/'captures',args.validation,args.quality)

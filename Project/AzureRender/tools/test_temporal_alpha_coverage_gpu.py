@@ -56,13 +56,14 @@ def coherent_detail(candidate,reference,indices=slice(16,48)):
     return correlated_detail(motion.local(candidate),motion.local(reference),indices)
 
 
-def run(player,output,case,validation):
+def run(player,output,case,validation,quality="temporal"):
     output.mkdir(parents=True,exist_ok=False)
     fingerprints={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (player.parent/'shaders').glob('*.spv')}
-    report=dict(schemaVersion=1,status='running',case=case,playerSha256=hashlib.sha256(player.read_bytes()).hexdigest(),shaders=fingerprints,captures=[])
+    report=dict(schemaVersion=1,status='running',case=case,qualityMode=quality,playerSha256=hashlib.sha256(player.read_bytes()).hexdigest(),shaders=fingerprints,captures=[])
     try:
         images={}
-        plans=[('source',1,3),('candidate',1,3)] if case=='composite' else [('source',1,0),('candidate',1,3),('reference',4,0)]
+        mode=4 if quality=='multisample' else 3
+        plans=[('source',1,mode),('candidate',1,mode)] if case=='composite' else [('source',1,0),('candidate',1,mode),('reference',4,0)]
         for name,scale,mode in plans:
             folder=output/name;project=fixture(folder,case,mode)
             command=[str(player),'--project',str(project),'--width',str(128*scale),'--height',str(128*scale),
@@ -77,6 +78,7 @@ def run(player,output,case,validation):
             assert ('Validation layer: enabled' in log)==(validation=='enabled')
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8-sig'))
             assert manifest['antiAliasing']==mode and manifest['qaAnimation']
+            if mode==4:assert manifest['rasterizationSamples']==4 and not manifest['multisampleFallback'],'Four-sample quality must use actual multisample attachments'
             images[name]=motion.frames(folder,scale)
             report['captures'].append(dict(name=name,manifest=manifest,images={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((folder/'frames').glob('frame_*.png'))}))
         if case=='composite':
@@ -112,8 +114,9 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__)
     parser.add_argument('--executable',type=Path,required=True);parser.add_argument('--output',type=Path)
     parser.add_argument('--case',choices=('mask','blend','fading','fade-cycle','cloth','composite'),required=True)
+    parser.add_argument('--quality',choices=('temporal','multisample'),default='temporal')
     parser.add_argument('--validation',choices=('enabled','disabled'),required=True);args=parser.parse_args()
-    if args.output:run(args.executable.resolve(),args.output.resolve(),args.case,args.validation)
+    if args.output:run(args.executable.resolve(),args.output.resolve(),args.case,args.validation,args.quality)
     else:
         with tempfile.TemporaryDirectory(prefix='alpha-coverage-') as temporary:
-            run(args.executable.resolve(),Path(temporary)/'captures',args.case,args.validation)
+            run(args.executable.resolve(),Path(temporary)/'captures',args.case,args.validation,args.quality)

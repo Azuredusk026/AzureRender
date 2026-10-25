@@ -263,6 +263,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     caps.requiresSceneNormal = true;
     caps.supportsProjectionOffset=true;
     caps.supportsMotionVectors=true;
+    caps.supportsMultisampleShading=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -2935,12 +2936,17 @@ void CharacterSceneRenderer::createDescriptorSets() {
 void CharacterSceneRenderer::createGraphicsPipeline(
     const RenderContext& context) {
     const std::string shaderDirectory = context.shaderDirectory;
+    rasterizationSamples_=context.rasterizationSamples;
+    const auto mainFragment=[&](std::string file){
+        if(rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT)file.insert(file.rfind(".frag.spv"),"_samples");
+        return azurerender::readBinaryFile(shaderDirectory+file);
+    };
     const auto vertexCode =
         azurerender::readBinaryFile(shaderDirectory + (objectShadowPrepared_
             ? (computeSkinningEnabled_?"/mesh_object_compute.vert.spv":"/mesh_object.vert.spv")
             : (computeSkinningEnabled_?"/mesh_compute.vert.spv":"/mesh.vert.spv")));
     const auto fragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + (objectShadowPrepared_
+        mainFragment((objectShadowPrepared_
             ? (bindlessTextures_?"/mesh_object_bindless.frag.spv":"/mesh_object.frag.spv")
             : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")));
     const auto outlineVertexCode =
@@ -2949,12 +2955,12 @@ void CharacterSceneRenderer::createGraphicsPipeline(
                 :(bindlessTextures_?"/outline_view_scaled_bindless.vert.spv":"/outline_view_scaled.vert.spv"))
             : (computeSkinningEnabled_?"/outline_compute.vert.spv":"/outline.vert.spv")));
     const auto outlineFragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + (outlineProjectionEnabled_
+        mainFragment((outlineProjectionEnabled_
             ?(bindlessTextures_?"/outline_view_scaled_bindless.frag.spv":"/outline_view_scaled.frag.spv"):"/outline.frag.spv"));
     const auto backgroundVertexCode =
         azurerender::readBinaryFile(shaderDirectory + "/background.vert.spv");
     const auto backgroundFragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
+        mainFragment((bindlessTextures_
             ? "/background_bindless.frag.spv"
             : "/background.frag.spv"));
     const auto shadowVertexCode =
@@ -3047,6 +3053,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.vertexAttributes = materialAttributes;
         materialDesc.colorAttachmentCount = kMaterialColorAttachmentCount;
         materialDesc.renderPass = context.sceneRenderPass;
+        materialDesc.rasterizationSamples=context.rasterizationSamples;materialDesc.minSampleShading=context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT?1.F:0.F;
         materialDesc.layout = pipelineLayout_;
         // The Vulkan lens flips Y and uses a positive-height viewport.
         // glTF outward CCW faces remain CCW in framebuffer coordinates.
@@ -3063,7 +3070,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
         auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_ + (objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv"))));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=overlayDepthPass_;
-        depthDesc.colorAttachmentCount=2;
+        depthDesc.colorAttachmentCount=2;depthDesc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;depthDesc.minSampleShading=0;
         overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);
         depthDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
         overlayDepthMirroredPipeline_=rhi_->createGraphicsPipeline(depthDesc);
@@ -3097,7 +3104,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         const auto maskModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
         const auto maskVertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv")));
         auto maskDesc=materialDesc;maskDesc.fragmentShader=maskModule;maskDesc.renderPass=outlineMaskPass_;
-        maskDesc.vertexShader=maskVertex;
+        maskDesc.vertexShader=maskVertex;maskDesc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;maskDesc.minSampleShading=0;
         maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;
         maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
         maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
@@ -3124,6 +3131,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             try {
                 auto shell=outlineDesc;shell.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 shell.fragmentShader=depthModule;shell.renderPass=overlayDepthPass_;
+                shell.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;shell.minSampleShading=0;
                 shell.depthTest=true;shell.depthWrite=true;shell.depthCompare=VK_COMPARE_OP_LESS;
                 shell.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
                 outlineDepthPipeline_=rhi_->createGraphicsPipeline(shell);
@@ -3144,6 +3152,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         backgroundPipeline_ = rhi_->createGraphicsPipeline(backgroundDesc);
 
         rhi::GraphicsPipelineDesc shadowDesc = materialDesc;
+        shadowDesc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;shadowDesc.minSampleShading=0;
         shadowDesc.vertexShader = shadowVertexModule;
         shadowDesc.fragmentShader = shadowFragmentModule;
         shadowDesc.vertexAttributes = shadowAttributes;

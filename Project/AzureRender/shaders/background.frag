@@ -1,5 +1,6 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
+#include "fragment_sampling.glsl"
 #include "sky.glsl"
 
 layout(binding = 0) uniform CameraData {
@@ -34,7 +35,7 @@ layout(binding = 4) uniform sampler2D environmentTexture;
 #define AZ_TEX_ENVIRONMENT environmentTexture
 #endif
 
-layout(location = 0) in vec2 screenUv;
+layout(location = 0) AZURE_SAMPLE in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
 

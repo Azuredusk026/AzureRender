@@ -216,10 +216,12 @@ R11G11B10 与 RGBA16F 的量化误差单独记录。
 
 该场景实测须与公共夹具结果分别记录。
 模糊导致细节消失属于失败。
-实际角色移动的三乘三高频相关幅度未达门禁。
+时序路径的角色高频相关幅度保留未通过记录。
 红测及区域结果见[角色移动验证](../acceptance/nr/native-motion-history.md)。
 旋转四样点预测及高频门禁见[细节验证](../acceptance/nr/native-detail-sampling.md)。
 几何多样点按[接入计划](2026-10-24-multisample-shading.md)继续实施。
+四样点材质及真实角色移动通过[分项验证](../acceptance/nr/multisample-character-material.md)。
+深度副本、描边覆盖与联合场景继续执行。
 时序残差、拖影长度和收敛时间建立独立红测。
 修复前冻结阈值、参考序列和性能预算。
 

@@ -89,15 +89,16 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 距离描边采样及线性深度历史见[覆盖契约](../acceptance/nr/outline-temporal-footprint.md)。
 高光无截断测量及参数图层级红测见[分量核验](../acceptance/nr/component-radiometry.md)。
 共面显露及真实角色移动见[历史验证](../acceptance/nr/native-motion-history.md)。
-角色移动的整体能量通过，高频细节幅度仍有失败。
+时序路径的角色高频细节保留未通过记录。
 裁剪足迹与运动外壳见[覆盖验证](../acceptance/nr/cutout-motion-coverage.md)。
-裁剪能量通过分项检查，完整细节及服饰边缘仍待修复。
+时序路径的裁剪细节及服饰边缘保留未通过记录。
 旋转四样点的离线质量对照见[细节验证](../acceptance/nr/native-detail-sampling.md)。
 按[四样点着色计划](2026-10-24-multisample-shading.md)接入真实几何采样。
 RHI 附件及逐样点插值已通过[双配置验收](../acceptance/nr/multisample-rhi.md)。
 公共目标及深度解析通过[双配置验收](../acceptance/nr/multisample-scene-target.md)。
 主辅视图装配与质量模式见[视图验收](../acceptance/nr/multisample-view-quality.md)。
-当前继续 MS3 的角色逐样点着色与 MS4 的覆盖接入。
+角色四样点动态质量见[材质验证](../acceptance/nr/multisample-character-material.md)。
+当前继续 MS4 的深度副本、外壳覆盖和边缘光验证。
 先保存主入口走样红测及官方时序通道输入。
 材质阶段同步核验发丝、KK、Ramp、服饰与描边走样。
 视图历史、运动场及静态与动态联合画质保持待验。

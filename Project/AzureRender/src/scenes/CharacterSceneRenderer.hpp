@@ -88,6 +88,7 @@ private:
     VkPipeline hairIntegralPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const;
     std::array<VkPipeline,6> hairIntegralPipelines_{};
     std::array<VkPipeline,3> hairIntegralSnapshotPipelines_{};
+    VkSampleCountFlagBits rasterizationSamples_=VK_SAMPLE_COUNT_1_BIT;
     std::array<float,2> samplingJitter_{};
     std::uint64_t temporalSceneGeneration_=1;
     bool faceSdfPrepared_=false,platformPrepared_=false;

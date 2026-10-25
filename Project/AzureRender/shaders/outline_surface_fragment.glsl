@@ -1,4 +1,5 @@
 #include "node_opacity.glsl"
+#include "fragment_sampling.glsl"
 #include "material_sampling.glsl"
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
@@ -16,8 +17,8 @@ layout(push_constant) uniform ShellInputs {
     layout(offset=136) uint tile;
     layout(offset=140) float opacity;
 } shell;
-layout(location=0) in vec3 opacityCoordinate;
-layout(location=1) in vec2 textureCoordinate;
+layout(location=0) AZURE_SAMPLE in vec3 opacityCoordinate;
+layout(location=1) AZURE_SAMPLE in vec2 textureCoordinate;
 layout(location=2) flat in vec4 shellColor;
 layout(location=3) flat in vec4 shellDepthProjection;
 bool shellCovered() {

@@ -5,7 +5,7 @@ std::uint32_t CharacterSceneRenderer::materialFeaturesForFrame(const AssetMateri
         |MaterialFeatureMultiplyComposite|MaterialFeatureEyeRadialSurface;
     const bool temporalCoverage=(material.alphaMode==AssetAlphaMode::Blend||material.alphaMode==AssetAlphaMode::Mask)&&material.materialClass!=AssetMaterialClass::Overlay
         &&(material.materialFeatures&customCoverage)==0
-        &&motionPass_&&renderSettings_&&renderSettings_->antiAliasing==3&&state_.temporalFrame;
+        &&(rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT||(motionPass_&&renderSettings_&&renderSettings_->antiAliasing==3&&state_.temporalFrame));
     return materialSamplingFeatures(material.materialFeatures,temporalMaterialSamplesActive()
         &&material.alphaMode!=AssetAlphaMode::Blend&&material.materialClass!=AssetMaterialClass::Overlay,temporalCoverage);
 }

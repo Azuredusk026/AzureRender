@@ -13,7 +13,8 @@
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
 #include "material_sampling.glsl"
-#if defined(AZURE_HAIR_PIXEL_INTEGRAL)
+#include "fragment_sampling.glsl"
+#if defined(AZURE_HAIR_PIXEL_INTEGRAL) || defined(AZURE_GEOMETRY_SAMPLES)
 const bool azureHairPixelIntegral=true;
 #else
 const bool azureHairPixelIntegral=false;
@@ -142,15 +143,15 @@ layout(push_constant) uniform MaterialData {
 // Low bit selects the primitive; upper bits address the immutable material table.
 #define AZURE_SELECTED_PADDING 1U
 
-layout(location = 0) in vec3 worldNormal;
-layout(location = 1) in vec4 worldTangent;
-layout(location = 2) in vec2 textureCoordinate;
-layout(location = 3) in vec3 worldPosition;
-layout(location = 4) in vec4 shadowPositions[4];
-layout(location = 8) in float eyebrowRegion;
+layout(location = 0) AZURE_SAMPLE in vec3 worldNormal;
+layout(location = 1) AZURE_SAMPLE in vec4 worldTangent;
+layout(location = 2) AZURE_SAMPLE in vec2 textureCoordinate;
+layout(location = 3) AZURE_SAMPLE in vec3 worldPosition;
+layout(location = 4) AZURE_SAMPLE in vec4 shadowPositions[4];
+layout(location = 8) AZURE_SAMPLE in float eyebrowRegion;
 layout(location = 9) flat in vec4 instanceFaceDirection;
 layout(location = 10) flat in mat4 instanceFaceFrame;
-layout(location = 14) in vec3 opacityCoordinate;
+layout(location = 14) AZURE_SAMPLE in vec3 opacityCoordinate;
 #if defined(AZURE_OBJECT_SHADOW)
 layout(location=15) flat in uint instanceObjectShadow;
 layout(binding=29) uniform texture2D objectShadowDepth;
@@ -164,7 +165,7 @@ float materialObjectVisibility(vec3 surfaceNormal){
         camera.screenReflectionWorldToClip,camera.cameraRight.xyz,camera.cameraUp.xyz,camera.clusterDepth.zw);
     vec3 receiverNormal=record.receiverSampling.z>.5?surfaceNormal:normalize(worldNormal);
     return objectShadowVisibility(objectShadowDepth,sharedDepthSampler,record,receiverPosition,receiverNormal,
-        ivec2(gl_FragCoord.x,camera.clusterDepth.w-gl_FragCoord.y));
+        ivec2(AZURE_FRAGMENT_COORD.x,camera.clusterDepth.w-AZURE_FRAGMENT_COORD.y));
 }
 #else
 float materialObjectVisibility(vec3 surfaceNormal){return 1.0;}
@@ -290,17 +291,29 @@ CharacterProjectedHairEnergy projectedHairSample(vec3 view,vec3 light,bool direc
 
 CharacterProjectedHairEnergy projectedHairResponseWeighted(vec3 view,vec3 light,bool directional,bool evaluateLine,
     ProjectedHairIncident incident,out vec2 line) {
+#if defined(AZURE_GEOMETRY_SAMPLES)
+    if(!azureUniformMaterialFrame(projectedHairNormalDx,projectedHairNormalDy,
+        projectedHairTangentDx.xyz,projectedHairTangentDy.xyz))
+        return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),true,incident,line);
+#else
     if(!azureHairPixelIntegral||(material.materialFeatures&8388608U)==0U)
         return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),false,incident,line);
     bool temporalSamples=(material.materialFeatures&0x80000000U)!=0U;
     if(temporalSamples&&!azureUniformMaterialFrame(projectedHairNormalDx,projectedHairNormalDy,
         projectedHairTangentDx.xyz,projectedHairTangentDy.xyz))
         return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),true,incident,line);
+#endif
     CharacterProjectedHairEnergy total=CharacterProjectedHairEnergy(vec3(0),vec3(0),vec3(0));
     vec2 lineMoments=vec2(0);
     for(int y=0;y<4;++y)for(int x=0;x<4;++x){
         vec2 offset=(vec2(x,y)+.5)*.25-.5;
+#if defined(AZURE_GEOMETRY_SAMPLES)
+        // Integrate a constant material frame around the pixel center;
+        // geometry coverage remains the responsibility of each real sample.
+        offset-=gl_SamplePosition-vec2(.5);
+#else
         if((material.materialFeatures&0x80000000U)!=0U)offset+=vec2(camera.cameraRight.w,camera.cameraUp.w);
+#endif
         vec2 uv=textureCoordinate+projectedHairUvDx*offset.x+projectedHairUvDy*offset.y;
         vec2 modulation;CharacterProjectedHairEnergy contribution=projectedHairSample(view,light,directional,evaluateLine,uv,offset,true,incident,modulation);
         total.q+=contribution.q;total.primary+=contribution.primary;total.secondary+=contribution.secondary;
@@ -325,7 +338,12 @@ CharacterDiffuseResponse projectedHairDiffuseResponse(vec3 base,vec3 normal,vec3
     PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
     vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(normal,light)*.5+.5,.5),0.0);
     viewAlpha=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(normal,-camera.cameraForward.xyz)*.5+.5,.5),0.0).a;
-    float characterVisibility=azureHairPixelIntegral&&(material.materialFeatures&0x80800000U)==0x80800000U
+    float characterVisibility=
+#if defined(AZURE_GEOMETRY_SAMPLES)
+        true
+#else
+        azureHairPixelIntegral&&(material.materialFeatures&0x80800000U)==0x80800000U
+#endif
         ?textureGrad(AZ_TEX_FACE_SDF,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25).b
         :texture(AZ_TEX_FACE_SDF,textureCoordinate).b;
     float litMask=min(min(characterVisibility,ao),ramp.a),aoMask=characterVisibility*ao;
@@ -547,7 +565,11 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 
 void main() {
     vec2 alphaUvDx=vec2(0),alphaUvDy=vec2(0);
+#if defined(AZURE_GEOMETRY_SAMPLES)
+    alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);
+#else
     if((material.materialFeatures&0x40000000U)!=0U){alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);}
+#endif
     if(azureHairPixelIntegral){
     projectedHairUvDx=dFdx(textureCoordinate);projectedHairUvDy=dFdy(textureCoordinate);
     projectedHairNormalDx=dFdx(worldNormal);projectedHairNormalDy=dFdy(worldNormal);
@@ -558,12 +580,20 @@ void main() {
     bool eyeRadial=material.materialClass==6U&&materialFeatureEnabled(131072U)>.5;
     EyeSurfaceProfile eyeProfile;
     CharacterEyeCoordinates eyeCoordinates;
+#if defined(AZURE_GEOMETRY_SAMPLES)
+    vec4 baseColor=textureGrad(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx*.25,alphaUvDy*.25);
+#else
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
+#endif
     if(material.alphaMode==1&&(material.materialFeatures&0x40000000U)!=0U)
         baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
     if(material.alphaMode==2&&(material.materialFeatures&0x40000000U)!=0U)
+#if defined(AZURE_GEOMETRY_SAMPLES)
+        baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
+#else
         baseColor.a=azureTemporalBlendAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy,
             vec2(camera.cameraRight.w,camera.cameraUp.w));
+#endif
     if(eyeRadial) {
         eyeProfile=loadEyeSurfaceProfile(material.materialPadding>>1U);
         vec2 originalUv=textureCoordinate*eyeProfile.uvScaleOffset.xy+eyeProfile.uvScaleOffset.zw;
@@ -631,7 +661,12 @@ void main() {
     vec4 normalSample=texture(AZ_TEX_NORMAL,textureCoordinate);
     vec3 sampledNormal = normalSample.xyz * 2.0 - 1.0;
     vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
-    vec4 hairData = azureHairPixelIntegral&&(material.materialFeatures&0x80800000U)==0x80800000U
+    vec4 hairData =
+#if defined(AZURE_GEOMETRY_SAMPLES)
+        true
+#else
+        azureHairPixelIntegral&&(material.materialFeatures&0x80800000U)==0x80800000U
+#endif
         ?textureGrad(AZ_TEX_HAIR_DATA,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25)
         :texture(AZ_TEX_HAIR_DATA, textureCoordinate);
     float hairActive = material.materialClass==3U ? materialFeatureEnabled(2U) : 0.0;
@@ -923,7 +958,7 @@ void main() {
     uint gridX = max(uint(camera.clusterGrid.x), 1U);
     uint gridY = max(uint(camera.clusterGrid.y), 1U);
     uint gridZ = max(uint(camera.clusterGrid.z), 1U);
-    vec2 screenUv = gl_FragCoord.xy / max(camera.clusterDepth.zw, vec2(1.0));
+    vec2 screenUv = AZURE_FRAGMENT_COORD.xy / max(camera.clusterDepth.zw, vec2(1.0));
     uint clusterX = min(uint(clamp(screenUv.x, 0.0, 0.999999) * float(gridX)), gridX - 1U);
     uint clusterY = min(uint(clamp(screenUv.y, 0.0, 0.999999) * float(gridY)), gridY - 1U);
     float nearDepth = max(camera.clusterDepth.x, 0.001);
@@ -1018,7 +1053,7 @@ void main() {
                 vec2 extent=vec2(textureSize(overlaySceneDepth,0));
                 vec2 offset=screenNormal*vec2(extent.y/extent.x,1.0)*(.006*light.characterResponse.y);
                 vec2 halfPixel=.5/extent;
-                vec2 depthUv=clamp(gl_FragCoord.xy/extent+offset,halfPixel,1.0-halfPixel);
+                vec2 depthUv=clamp(AZURE_FRAGMENT_COORD.xy/extent+offset,halfPixel,1.0-halfPixel);
                 float sceneDepth=textureLod(overlaySceneDepth,depthUv,0.0).r;
                 float surfaceDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
                 sceneRim+=radiance*characterScreenRimResponse(baseColor.rgb,light.characterResponse.z,shadedNormal,
@@ -1351,7 +1386,7 @@ void main() {
     if (browOverlay) {
         // M_Common_Brow uses a constant Opaccity parameter; the face texture
         // alpha is not the brow mask and is intentionally ignored here.
-        float sceneDepth=texture(overlaySceneDepth,gl_FragCoord.xy/camera.clusterDepth.zw).r;
+        float sceneDepth=texture(overlaySceneDepth,AZURE_FRAGMENT_COORD.xy/camera.clusterDepth.zw).r;
         float overlayDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
         float fade=clamp((sceneDepth-overlayDepth)/max(material.featureParameters.z,.0001),0.0,1.0);
         outputAlpha = material.featureParameters.y * fade;
@@ -1576,7 +1611,7 @@ void main() {
         beautyColor+=blended-ambientSpecular;ambientSpecular=blended;
     }
     if(materialFeatureEnabled(1024U)>.5) {
-        vec2 uv=gl_FragCoord.xy/camera.clusterDepth.zw;
+        vec2 uv=AZURE_FRAGMENT_COORD.xy/camera.clusterDepth.zw;
         vec2 mapUv=textureCoordinate*material.styleParameters.xy+material.styleParameters.zw;
         vec2 offset=sceneRefractionOffset(texture(AZ_TEX_STYLE_MASK,mapUv).rg,material.hairParameters.z);
         float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
@@ -1688,7 +1723,7 @@ void main() {
     }
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if (materialFeatureEnabled(256U) > 0.5) {
-        vec2 uv=gl_FragCoord.xy/camera.clusterDepth.zw;
+        vec2 uv=AZURE_FRAGMENT_COORD.xy/camera.clusterDepth.zw;
         float sceneDepth=texture(overlaySceneDepth,uv).r;
         outputAlpha=clamp(1.0-sceneDepth/max(material.featureParameters.z,.001),0.0,1.0)*material.featureParameters.y;
         if (overlayDisabled) outputAlpha=0.0;
