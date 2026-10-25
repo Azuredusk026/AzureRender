@@ -1,6 +1,6 @@
 # 主场景角色材质接入
 
-日期：2026-10-25。范围为 NR8-V2 完整材质候选。
+日期：2026-10-26。范围为 NR8-V2 完整材质候选。
 主项目与可玩项目共用动态角色和完整画像。
 完整原生外观及跨编辑入口继续验收。
 
@@ -9,16 +9,17 @@
 工作项目位于以下目录：
 
 ```text
-build/runs/20261025-160544-main-material-frame-integration-1ad7a0/main-candidate-v2/
+build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-candidate-v3/
 ```
 
 主入口为 `project.azureproject`。
 可玩入口为 `playable-safe.azureproject`。
-角色引用为 `character:/hero-restored-inputs-v2.glb`。
+角色引用为 `character:/hero-restored-inputs-v3.glb`。
 原项目及冻结回归输入分别保存。
 
 两关卡各绑定十三份完整材质文档。
-五十八份图片按 UUID 注册并声明依赖。
+图片按 UUID 注册并声明依赖。
+身体追加三份原生 DDS，源字节和采样元数据各自核对。
 原生 DDS 保留其源字节和逐级图像。
 场景启用 `nprLighting` 并消费实际辐照资源。
 
@@ -37,6 +38,7 @@ build/runs/20261025-160544-main-material-frame-integration-1ad7a0/main-candidate
 - 头发绑定姿态的平滑方向使用八面体编码。
 - 眼睛 UV 的 V 方向与原生采样约定对应。
 - 眼睛切线第四分量与该 V 方向配对。
+- 身体 UV 与切线第四分量采用配对转换。
 
 头发方向转换覆盖 11,564 个顶点。
 眼睛的配对转换覆盖 210 个顶点。
@@ -54,6 +56,13 @@ build/runs/20261025-160544-main-material-frame-integration-1ad7a0/main-candidate
 绑定姿态方向及完整动态原生覆盖分别验收。
 
 ## 实际运行
+
+当前主入口以 Release 完成实际画面捕获。
+固定描述符及顶点蒙皮路径复验同一画面。
+身体骨盆原点及真实像素见[专项验收](body-rim-origin.md)。
+
+以下四次入口及运动验证对应第二版候选。
+当前候选保留其非身体输入和完整动画。
 
 Release 的四次完整场景捕获均通过。
 主入口与可玩入口分别比较内嵌画像和完整文档。

@@ -18,6 +18,7 @@ C15 完整画像、UUID 依赖及编辑事务接入通过。
 
 当前执行 C16 的输入边界及 C17 的多层高光。
 双帧的实际实例记录与材质帧见[来源核对](../acceptance/nr/material-frame-instance-producer.md)。
+身体骨盆原点及双配置验证见[径向原点验收](../acceptance/nr/body-rim-origin.md)。
 虚拟主灯与独立条纹已接入公共材质契约。
 三个真实正主叶及五份关闭对照见[分层验证](../acceptance/nr/projected-hair-positive-layers.md)。
 C11-R7 接入逐材质光色，范围见[皮肤验证](../acceptance/nr/npr-material-lighting.md)。
@@ -39,7 +40,8 @@ C16-R4 继续核对屏幕遮罩的独立角色、场景可见量。
 实际画面与范围见[共享采样验证](../acceptance/nr/shared-depth-sampling.md)。
 对象图集、在途记录及分布过滤已接入。
 原生深度对照与完整外观边界见[GPU 验证](../acceptance/nr/object-shadow-gpu.md)。
-腿部仍有七字节误差，继续分离可见量与局部灯贡献。
+腿部完整颜色已通过径向原点对照。
+身体执行几何及完整合成继续按 C16 验收。
 接收位置与表面法线已接入公共组件。
 对象隔离测得腿部为 `5/255`，与原生一致。
 范围见[接收坐标验证](../acceptance/nr/object-shadow-receiver.md)。

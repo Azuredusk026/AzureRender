@@ -293,6 +293,10 @@ private:
     bool transparentDrawsPrepared_ = false;
     std::vector<std::vector<const AssetPrimitive*>> transparentPrimitivesByMesh_;
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
+    std::shared_ptr<const MaterialOriginInstances> materialOriginInstances_;
+    std::vector<std::vector<std::uint32_t>> materialOriginNodes_;
+    std::uint32_t materialOriginFirstInstance(const AssetMaterial& material,
+        const SceneInstanceSnapshot* snapshot,std::uint32_t first,std::uint32_t count) const;
     void prepareTransparentIndices();
     bool gpuCullingEnabled_ = false;
     bool visibilityPrototype_ = false;

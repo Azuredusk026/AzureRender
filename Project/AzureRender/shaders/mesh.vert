@@ -98,7 +98,8 @@ void main() {
     if((morphWeights.materialFeatures & 65536U)!=0U && (morphWeights.materialFeatures & 1048576U)==0U) {
         // The projected hair frame follows the source object and gizmo.
         instanceFaceFrame=instanceData.instances[gl_InstanceIndex].model*morphWeights.gizmoTransform;
-    } else if((morphWeights.materialFeatures & (2048U|1048576U))!=0U) {
+    } else if((morphWeights.materialFeatures & (2048U|1048576U))!=0U
+        ||(instanceData.instances[gl_InstanceIndex].instanceFlags&AZURE_INSTANCE_MATERIAL_RIM_ORIGIN)!=0U) {
         mat4 model=instanceData.instances[gl_InstanceIndex].model;
         instanceFaceFrame=model*morphWeights.gizmoTransform*inverse(model)*instanceFaceFrame;
         for(int axis=0;axis<3;++axis)instanceFaceFrame[axis].xyz=normalize(instanceFaceFrame[axis].xyz);

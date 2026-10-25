@@ -45,6 +45,17 @@ namespace azurerender {
 
 namespace {
 
+std::vector<std::uint32_t> materialOriginNodes(const LoadedAsset& mesh) {
+    std::vector<std::uint32_t> result;
+    for(const auto& material:mesh.materials)if(material.nprDiffuse.rimOrigin.present) {
+        const auto node=material.nprDiffuse.rimOrigin.node;
+        if(node>=mesh.nodes.size())throw std::invalid_argument("Material rim origin node is outside the model");
+        result.push_back(node);
+    }
+    std::sort(result.begin(),result.end());result.erase(std::unique(result.begin(),result.end()),result.end());
+    return result;
+}
+
 std::uint64_t stableSceneLightId(std::string_view id){
     std::uint64_t result=1469598103934665603ULL;
     for(const unsigned char value:id){result^=value;result*=1099511628211ULL;}
@@ -613,7 +624,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         std::move(sceneInstances_), std::move(visibleIndices), std::move(opaqueRecordingSpans_),
         std::move(visibleShadowSpansByMeshKey_), std::move(indirectInstanceOffsets_), std::move(transparentIndexOffsets_), std::move(visibleSpansByMeshKey_), *renderSettings_,
         gpuCullingFrames_[currentFrame_] ? gpuCullingFrames_[currentFrame_]->output().buffer : VK_NULL_HANDLE, static_cast<std::uint32_t>(currentFrame_),
-        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers),std::move(shadowViews),std::move(nodeOpacities),std::move(objectShadowPages_));
+        RecordingGizmoState{selectedPrimitiveIndex_, gizmoActive_, gizmoTranslation_, gizmoRotation_, gizmoScale_}, std::move(recordingBuffers),std::move(shadowViews),std::move(nodeOpacities),std::move(objectShadowPages_),materialOriginInstances_);
     visibleInstances_.clear();
     prepareMotion();
 }
@@ -846,6 +857,10 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         }
     }
 
+    materialOriginInstances_=materialOriginNodes_.empty()?nullptr:
+        std::make_shared<const MaterialOriginInstances>(sceneInstances_,materialOriginNodes_);
+    if(materialOriginInstances_&&materialOriginInstances_->gpuCount()>instanceCapacity_)
+        throw std::length_error("Material origin instances exceed the allocated frame buffer");
     prepareInstancePoses();
     if (gpuCullingEnabled_ && !sceneInstances_.empty()) {
         std::vector<GpuCullBounds> bounds;
@@ -969,7 +984,24 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     }
     for(std::size_t index=0;index<objectShadowPages_.size();++index)
         destination[objectShadowPages_[index].instanceIndex].objectShadowIndex=static_cast<std::uint32_t>(index+1);
+    if(materialOriginInstances_)for(const auto& copy:materialOriginInstances_->copies()) {
+        const auto& instance=sceneInstances_.at(copy.sourceIndex);
+        const auto& pose=instancePoses_.at(copy.sourceIndex).pose;
+        const auto origin=multiply(instance.model,pose.nodeWorldMatrices.at(copy.node));
+        auto& alias=destination[copy.gpuIndex];alias=destination[copy.sourceIndex];
+        for(unsigned axis=0;axis<3;++axis)alias.faceFrame[12+axis]=origin[12+axis];
+        alias.instanceFlags|=InstanceGpuData::kMaterialRimOrigin;
+    }
     allocator_->flush(instanceBuffers_[currentFrame_],0,instanceBuffers_[currentFrame_].size);
+}
+
+std::uint32_t CharacterSceneRenderer::materialOriginFirstInstance(const AssetMaterial& material,
+    const SceneInstanceSnapshot* snapshot,std::uint32_t first,std::uint32_t count) const {
+    const auto& origin=material.nprDiffuse.rimOrigin;
+    if(!origin.present)return first;
+    const auto& plan=snapshot?snapshot->materialOrigins:materialOriginInstances_;
+    if(!plan)throw std::logic_error("Material rim origin instance plan is unavailable");
+    return plan->firstInstance(origin.node,first,count);
 }
 
 void CharacterSceneRenderer::prepareObjectShadows(){
@@ -2265,8 +2297,24 @@ void CharacterSceneRenderer::createUniformBuffers() {
         clusterIndexBuffers_[index] = allocator_->createBuffer(
             clusterIndexBytes, VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
     }
-    instanceCapacity_ = static_cast<std::uint32_t>(
-        std::max<std::size_t>(qaInstanceCount_, scene_.nodes.size()));
+    materialOriginNodes_.clear();
+    materialOriginNodes_.push_back(materialOriginNodes(asset_));
+    for(const auto& resource:additionalResources_)materialOriginNodes_.push_back(materialOriginNodes(resource->asset));
+    std::uint64_t originRecords=0;
+    if(std::any_of(materialOriginNodes_.begin(),materialOriginNodes_.end(),[](const auto& nodes){return !nodes.empty();})) {
+        const scene::ResourceLayout layout(scene_);
+        for(const auto& node:scene_.nodes) {
+            const auto key=layout.meshKey(node.resourceId);
+            if(key<materialOriginNodes_.size())originRecords+=materialOriginNodes_[key].size()
+                *(scene_.nodes.size()==1?std::uint64_t(qaInstanceCount_):1U);
+        }
+    } else materialOriginNodes_.clear();
+    const auto capacity=std::max<std::size_t>(qaInstanceCount_,scene_.nodes.size())+originRecords;
+    if(capacity>std::numeric_limits<std::uint32_t>::max())
+        throw std::length_error("Material origin frame buffer exceeds GPU indexing");
+    if(originRecords&&irradianceBufferBudget_&&capacity*sizeof(InstanceGpuData)>irradianceBufferBudget_)
+        throw std::length_error("Material origin instances exceed the device storage range");
+    instanceCapacity_=static_cast<std::uint32_t>(capacity);
     instanceBuffers_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
         instanceBuffers_[index] = allocator_->createBuffer(
@@ -2547,7 +2595,8 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 if (run.opacity == 0) return;
                 morph.nodeOpacity=run.opacity;
                 commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
-                commands.drawIndexed(primitive.indexCount,primitive.firstIndex,run.instanceCount,run.firstInstance);
+                commands.drawIndexed(primitive.indexCount,primitive.firstIndex,run.instanceCount,
+                    materialOriginFirstInstance(m,&snapshot,run.firstInstance,run.instanceCount));
                 if(counters){++counters->pushConstantUpdates;++counters->drawCalls;}
             });
         }
@@ -3352,6 +3401,7 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     instanceBuffers_.clear();
+    materialOriginInstances_.reset();materialOriginNodes_.clear();
     for (auto& buffer : lightBuffers_) {
         allocator_->destroyBuffer(buffer);
     }
@@ -4309,8 +4359,9 @@ void CharacterSceneRenderer::drawPrimitive(
         &morphConstants,
         sizeof(morphConstants));
     std::uint32_t recordedDrawCalls = 0;
-    if (!blend && indirectBuffer != VK_NULL_HANDLE
-        && firstIndexOffset == primitive.firstIndex) {
+    const bool useIndirect=!blend&&indirectBuffer!=VK_NULL_HANDLE
+        &&firstIndexOffset==primitive.firstIndex&&!material.nprDiffuse.rimOrigin.present;
+    if (useIndirect) {
         const auto primitiveIndex = static_cast<std::size_t>(&primitive - mesh.primitives.data());
         if (snapshot != nullptr ? snapshot->buffers.multiDrawIndirect : multiDrawIndirect_) {
             for (std::uint32_t i = 0; i < instanceCount;) {
@@ -4331,13 +4382,13 @@ void CharacterSceneRenderer::drawPrimitive(
         }
     } else {
         commands.drawIndexed(
-            primitive.indexCount, firstIndexOffset, instanceCount, firstInstance);
+            primitive.indexCount, firstIndexOffset, instanceCount,
+            materialOriginFirstInstance(material,snapshot,firstInstance,instanceCount));
         ++recordedDrawCalls;
     }
     if (counters != nullptr) {
         counters->drawCalls += recordedDrawCalls;
-        if (!blend && indirectBuffer != VK_NULL_HANDLE
-            && firstIndexOffset == primitive.firstIndex)
+        if (useIndirect)
             counters->indirectDrawCalls += recordedDrawCalls;
         ++counters->pipelineBinds;
         counters->pushConstantUpdates += 2;

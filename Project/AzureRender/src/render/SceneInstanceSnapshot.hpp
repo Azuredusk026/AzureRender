@@ -3,6 +3,7 @@
 #include "scene/RenderBatching.hpp"
 #include "render/RenderSettings.hpp"
 #include "render/ObjectShadow.hpp"
+#include "render/MaterialOriginInstances.hpp"
 #include <array>
 #include <cmath>
 #include <memory>
@@ -48,6 +49,7 @@ struct SceneInstanceSnapshot final {
     const std::vector<std::size_t> transparentOffsets;
     const std::vector<std::vector<float>> nodeWorldOpacities;
     const std::vector<ObjectShadowPage> objectShadowPages;
+    const std::shared_ptr<const MaterialOriginInstances> materialOrigins;
 
     SceneInstanceSnapshot(std::vector<scene::SceneInstance> source,
         std::vector<std::uint32_t> visible,
@@ -60,15 +62,19 @@ struct SceneInstanceSnapshot final {
         RecordingBufferSet bufferSet = {},
         std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews = {},
         std::vector<std::vector<float>> nodeOpacities = {},
-        std::vector<ObjectShadowPage> objectPages = {})
+        std::vector<ObjectShadowPage> objectPages = {},
+        std::shared_ptr<const MaterialOriginInstances> originInstances = {})
         : settings(std::move(renderSettings)), indirectBuffer(indirectHandle), frameIndex(frame),
           gizmo(std::move(gizmoState)), buffers(std::move(bufferSet)), instances(std::move(source)), visibleIndices(std::move(visible)),
           opaqueSpans(std::move(opaque)), visibleSpans(std::move(visibleBatches)), shadowSpans(std::move(shadow)),
           shadowViewSpans(std::move(shadowViews)),
           indirectOffsets(std::move(indirect)), transparentOffsets(std::move(transparent)),
-          nodeWorldOpacities(std::move(nodeOpacities)),objectShadowPages(std::move(objectPages)) {}
+          nodeWorldOpacities(std::move(nodeOpacities)),objectShadowPages(std::move(objectPages)),
+          materialOrigins(std::move(originInstances)) {}
 
     void validateForRecording() const {
+        if(materialOrigins&&materialOrigins->physicalCount()!=instances.size())
+            throw std::logic_error("Snapshot material origins do not match physical instances");
         if(objectShadowPages.size()>kObjectShadowCapacity)throw std::logic_error("Snapshot object shadow capacity exceeded");
         std::array<bool,kObjectShadowCapacity> occupied{};
         for(const auto& page:objectShadowPages){

@@ -1816,7 +1816,8 @@ AssetMaterial loadMaterial(
             for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
-                &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
+                &&field.key()!="rimOrigin")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -1862,6 +1863,23 @@ AssetMaterial loadMaterial(
                 if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>4)
                     throw std::invalid_argument("Invalid nprDiffuse.localDiffuseFloorScale");
                 result.nprDiffuse.localDiffuseFloorScale=value.get<float>();
+            }
+            if(npr.contains("rimOrigin")) {
+                const auto& raw=npr.at("rimOrigin");
+                if(!raw.is_object()||raw.size()!=2||!raw.contains("schemaVersion")
+                    ||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+                    ||!raw.contains("node")||!raw.at("node").is_string()||raw.at("node").get<std::string>().empty())
+                    throw std::invalid_argument("Invalid nprDiffuse.rimOrigin contract");
+                if(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Skin
+                    &&result.materialClass!=AssetMaterialClass::Fabric&&result.materialClass!=AssetMaterialClass::Metal)
+                    throw std::invalid_argument("nprDiffuse.rimOrigin requires a generic, skin, fabric or metal surface");
+                auto& origin=result.nprDiffuse.rimOrigin;
+                origin.nodeName=raw.at("node").get<std::string>();
+                unsigned matches=0;
+                for(std::size_t index=0;index<model.nodes.size();++index)
+                    if(model.nodes[index].name==origin.nodeName){origin.node=static_cast<std::uint32_t>(index);++matches;}
+                if(matches!=1)throw std::invalid_argument("nprDiffuse.rimOrigin requires one unique named node");
+                origin.present=true;
             }
             if(npr.contains("lighting")) {
                 const auto& raw=npr.at("lighting");

@@ -8,6 +8,7 @@ namespace azurerender {
 // Shared with shaders/instance_data.glsl. Writers retire the owning frame fence.
 struct alignas(16) SceneInstanceGpuData {
     static constexpr unsigned kLayoutVersion=2;
+    static constexpr std::uint32_t kMaterialRimOrigin=1U;
     std::array<float,16> model{};
     std::array<float,16> modelViewProjection{};
     std::array<std::array<float,16>,4> cascadeLightModelViewProjection{};

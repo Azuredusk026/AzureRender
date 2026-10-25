@@ -1,5 +1,7 @@
 #include "assets/GltfLoader.hpp"
 #include "assets/MaterialSurfaceProfile.hpp"
+#include "assets/MaterialData.hpp"
+#include "assets/MaterialGraph.hpp"
 #include "resources/ResourceLocator.hpp"
 #include <stb_image_write.h>
 #include <chrono>
@@ -72,6 +74,56 @@ int main(){
   npr={{"schemaVersion",1},{"shadowScale",.7},{"lightingInputs","host-scene-radiance"},
     {"shadowMask","none"},{"baseAo","albedo-alpha"}};
   const auto response=load(composed);
+  auto anchored=composed;
+  anchored["nodes"].push_back({{"name","material-rim-origin"},{"translation",{.25,.5,.75}}});
+  anchored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rimOrigin"]={
+    {"schemaVersion",1},{"node","material-rim-origin"}};
+  const auto anchoredAsset=load(anchored);
+  const auto& origin=anchoredAsset.materials[0].nprDiffuse.rimOrigin;
+  require(origin.present&&origin.node==anchored["nodes"].size()-1&&origin.nodeName=="material-rim-origin",
+    "Material rim origin must resolve its own source node independently of the shared face frame");
+  require(!response.materials[0].nprDiffuse.rimOrigin.present,"Omitted rim origin must preserve the shared frame source");
+  for(const auto& bad:std::vector<Json>{nullptr,{{"schemaVersion",2},{"node","material-rim-origin"}},
+      {{"schemaVersion",1.0},{"node","material-rim-origin"}},{{"schemaVersion",1},{"node",42}},
+      {{"schemaVersion",1},{"node",""}},{{"schemaVersion",1},{"node","missing"}},
+      {{"schemaVersion",1},{"node","material-rim-origin"},{"offset",{0,0,0}}}}) {
+    auto invalid=anchored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rimOrigin"]=bad;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Malformed or unresolved rim origins must reject during import");
+  }
+  auto ambiguousOrigin=anchored;ambiguousOrigin["nodes"].push_back({{"name","material-rim-origin"}});
+  bool ambiguousRejected=false;try{load(ambiguousOrigin);}catch(const std::exception&){ambiguousRejected=true;}
+  require(ambiguousRejected,"Rim origin names must identify one node");
+  for(const auto* kind:{"generic","skin","fabric","metal"}) {
+    auto accepted=anchored;accepted["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    require(load(accepted).materials[0].nprDiffuse.rimOrigin.present,"Supported NPR surfaces must share the origin contract");
+  }
+  for(const auto* kind:{"face","hair","eye","overlay"}) {
+    auto invalid=anchored;invalid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Rim origin overrides must reject incompatible material frame owners");
+  }
+  auto surfaceMaterial=anchored["materials"][0];
+  surfaceMaterial.erase("normalTexture");surfaceMaterial.erase("occlusionTexture");surfaceMaterial.erase("emissiveTexture");
+  surfaceMaterial["pbrMetallicRoughness"].erase("baseColorTexture");
+  surfaceMaterial["pbrMetallicRoughness"].erase("metallicRoughnessTexture");
+  surfaceMaterial["extras"]["azureRenderMaterial"]["shadowColorLut"]["texture"]=0;
+  const Json complete={{"schemaVersion",3},{"typeId","azure.profile"},{"parameters",Json::object()},
+    {"textures",{{"0",{{"asset","00000000-0000-4000-8000-000000000017"},{"usage","albedo"}}}}},
+    {"surface",{{"asset",{{"version","2.0"}}},{"materials",Json::array({surfaceMaterial})},
+      {"textures",Json::array({{{"source",0}}})},{"nodes",Json::array({{{"name","material-rim-origin"}}})}}}};
+  const auto document=azurerender::MaterialData::parse(complete);
+  require(document.encode()==complete&&azurerender::MaterialGraph::fromMaterial(document).compile().encode()==complete,
+    "Complete material documents and graphs must preserve the rim origin by name");
+  require(document.interpret([&](const auto&){return root/"lut.png";}).nprDiffuse.rimOrigin.node==0,
+    "Standalone complete documents must resolve their declared origin node");
+  const auto documentPath=root/"origin.azurematerial";std::ofstream(documentPath)<<document.encode().dump();
+  auto rebound=anchoredAsset;
+  const auto slot=azurerender::materialSlotIds(rebound).at(0);
+  const azurerender::MaterialBinding binding{documentPath.string(),"rim-origin-contract",{{"00000000-0000-4000-8000-000000000017",(root/"lut.png").string()}}};
+  azurerender::applyMaterialBindings(rebound,{{slot,binding}});
+  require(rebound.materials[0].nprDiffuse.rimOrigin.node==origin.node&&rebound.nodeWorldMatrices==anchoredAsset.nodeWorldMatrices,
+    "Complete document binding must resolve against the target model and preserve its node transforms");
   require((response.materials[0].materialFeatures&(1U<<19U))!=0,"NPR color composition must be explicitly selected");
   const auto packed=azurerender::packMaterialSurfaceProfile(response.materials[0]);
   require(std::abs(packed.rows[0][0]-.7F)<1e-6F&&packed.rows[0][1]==0&&packed.rows[0][2]==1,

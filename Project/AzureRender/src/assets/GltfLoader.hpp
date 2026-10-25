@@ -218,6 +218,11 @@ struct AssetMaterial {
         } lighting;
         enum class RimResponse : std::uint8_t { ScreenDepth,ViewFacing };
         RimResponse rimResponse=RimResponse::ScreenDepth;
+        struct RimOrigin {
+            bool present=false;
+            std::uint32_t node=0;
+            std::string nodeName;
+        } rimOrigin;
         struct ViewTint {
             bool present=false;
             float scale=0;

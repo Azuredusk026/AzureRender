@@ -151,6 +151,20 @@
         }
       ],
       "historicalReceipt": "retention-receipt.json"
+    },
+    {
+      "path": "runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee",
+      "pathBase": "build",
+      "purpose": "身体材质原点、原生输入及第三版动态主候选。",
+      "retention": "NR12 正式归档后另行清理。",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/body-rim-origin.json",
+      "pinMarker": ".keep",
+      "primaryProject": "main-candidate-v3/project.azureproject",
+      "releasePlayer": {
+        "path": "build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/frozen-release/AzurePlayer.exe",
+        "bytes": 5772288,
+        "sha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f"
+      }
     }
   ]
 }
