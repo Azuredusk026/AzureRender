@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 2,
+  "date": "2026-10-25",
+  "baseCommit": "61e34031c6342c9a03d1dfbc1ef0f2f5c853cf26",
+  "status": "actual-player-entry-and-dynamic-input-checks-passed",
+  "scope": "NR8-V2 complete material candidate; native full appearance, Editor/Play/export/move and MS5 joint quality remain gated",
+  "run": "build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0",
+  "mainProject": "build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\main-candidate-v2\\project.azureproject",
+  "playableProject": "build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\main-candidate-v2\\playable-safe.azureproject",
+  "canonicalModelSha256": "baef81491d4fa24b93776fa1fa615f9fa4a838b5f9ed131f15c0e096422c6b64",
+  "originalModelSha256": "a8a08d008eca0ec50078af5d98121cad5a4f293f5e785cb22fc3ee4a2e081619",
+  "preservedAnimationClips": 9,
+  "preservedNodeCount": 327,
+  "preservedBinaryPrefixSha256": "a4d3e7b3f646aea8de7b656600bbfb3fce5e96390491b6a7fd7b5ed2f246e959",
+  "attributeConversions": [
+    {
+      "mesh": 9,
+      "primitive": 0,
+      "material": 9,
+      "semantic": "TEXCOORD_1"
+    },
+    {
+      "mesh": 11,
+      "primitive": 0,
+      "material": 11,
+      "semantic": "TEXCOORD_0"
+    },
+    {
+      "mesh": 11,
+      "primitive": 0,
+      "material": 11,
+      "semantic": "TANGENT"
+    }
+  ],
+  "registeredImages": 58,
+  "completeDocuments": 13,
+  "documentFingerprints": [
+    {
+      "index": 0,
+      "path": "assets\\restored-character-materials\\material-0.azurematerial",
+      "sha256": "9a97900eafcb3a698f07b52f80962a28679e426c270efde2f82b113f869c3537",
+      "validationLogSha256": "d27dad0e9ac0964c39620c676c135a5ea281820d9ef60521be300a8950ff31ca"
+    },
+    {
+      "index": 1,
+      "path": "assets\\restored-character-materials\\material-1.azurematerial",
+      "sha256": "7b05827ef427a5137ff194a0b271ca2796c857d0a81b187c7897f835e140986d",
+      "validationLogSha256": "7d492ee10edf24cbfb2590db939b276b77fdc09c83262157b41ef311c592dfd9"
+    },
+    {
+      "index": 2,
+      "path": "assets\\restored-character-materials\\material-2.azurematerial",
+      "sha256": "63465376ec9a222028f8e0400ca015b9054523d37eff2ef360d1033685a2d539",
+      "validationLogSha256": "e67c6b9750165bbde823ddc676e52f2a818cbf0fee25433b90cf8f14e8b76c58"
+    },
+    {
+      "index": 3,
+      "path": "assets\\restored-character-materials\\material-3.azurematerial",
+      "sha256": "55e4b31fff80d95b5e14685efc08c512444a70015aa0433aacc7485e6050221b",
+      "validationLogSha256": "9f4a78b76ba30cee26434b9b98828eecde3966b6c46592db23ee9b79ab7fb56a"
+    },
+    {
+      "index": 4,
+      "path": "assets\\restored-character-materials\\material-4.azurematerial",
+      "sha256": "84e9338ef46ead0ce4c0d490ef9f8dae79ebfc8f772fbb039b1a74595a4f7a57",
+      "validationLogSha256": "f6cf482cac889daf101861854cdce1780dcdafee71323a8ce9ff65df032eb100"
+    },
+    {
+      "index": 5,
+      "path": "assets\\restored-character-materials\\material-5.azurematerial",
+      "sha256": "6216895e3fbf40146d4c09250c9111ccb7b35db91989624cbe4f0d3ff103a133",
+      "validationLogSha256": "baf32093cb4debbde16e739095354764ea07fcf7036cfc75a169092499c7915c"
+    },
+    {
+      "index": 6,
+      "path": "assets\\restored-character-materials\\material-6.azurematerial",
+      "sha256": "950d7bc898265fda9d0a50656ebb5302750779fd51d67dfaba326bec71d6b189",
+      "validationLogSha256": "7a68f6100f7b5329495412afbbbb81e9432670c93ac283b540a7946dfce8a7e6"
+    },
+    {
+      "index": 7,
+      "path": "assets\\restored-character-materials\\material-7.azurematerial",
+      "sha256": "988af44d222563ff63279726c5417d99ba241cdba3c6dde6d0e9fb1b74d07914",
+      "validationLogSha256": "a3b8fe850ee7d49684dec03ac0d7441d3317e0e5194f4d306d5a55f8e26803a2"
+    },
+    {
+      "index": 8,
+      "path": "assets\\restored-character-materials\\material-8.azurematerial",
+      "sha256": "02ecdceafa9a95cc9fcd4abb8971f68e628839aed8a3e877b07fee0c4eb81959",
+      "validationLogSha256": "6186e12d0ac6d7cbbc2939adf7c494d728c271cbb57c35a2956348b2789154f2"
+    },
+    {
+      "index": 9,
+      "path": "assets\\restored-character-materials\\material-9.azurematerial",
+      "sha256": "844cbd6256eaab4421c42f007919c6602d16b28c9f3bf2a885be101b01f28768",
+      "validationLogSha256": "f4bc1aa4d83c3772dc64934e1d32c0ffe5b73cb49a6063023905fdfc9cef0eae"
+    },
+    {
+      "index": 10,
+      "path": "assets\\restored-character-materials\\material-10.azurematerial",
+      "sha256": "1207dd33c57674142f54985a991a73475a2929c397a81f356ed8a7e448843348",
+      "validationLogSha256": "2b69aa935ead5014c9eeebe08e0592f23e377f3753ced57cc01dc8858739803d"
+    },
+    {
+      "index": 11,
+      "path": "assets\\restored-character-materials\\material-11.azurematerial",
+      "sha256": "501827cef6d5b914db31794f61b8858015167ec6552c8c8a9015b05ff42c4665",
+      "validationLogSha256": "50e0b595d2774e5be4b113e7ede854fce87ac68224eb341c2b1c4d5dabb46519"
+    },
+    {
+      "index": 12,
+      "path": "assets\\restored-character-materials\\material-12.azurematerial",
+      "sha256": "cefbf58df2ac625fbbbaf96be68a89d0beea7b11bec33cc6a93598f168979682",
+      "validationLogSha256": "e8a5e0ba694bac239f6a4ca1cf4e581edcd634087983aad2af5a9a669979c676"
+    }
+  ],
+  "captures": {
+    "main-embedded": {
+      "imageSha256": "b2108cfa08cdd69c5f930422196f3f37b6766c7d78104bdedfe500d38853301a",
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "manifestSha256": "2f990734d8e09ee28e905d6e45431583c11191d04baf24c568121dc27bf53ea7",
+      "runtimeSha256": "97a6784138d1217123166215374ed0ad978adb2d9df0fbccdec0be5b6f9d8c92",
+      "logSha256": "0217b6e930062f80106b0395ddefa2784d4bd990a2be0d1552940262805ffcdd",
+      "nprLighting": {
+        "ambientColor": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "ambientDirection": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "ambientWeight": 1.0,
+        "directionBias": 0.0,
+        "directionFloor": 1.0,
+        "directionGain": 0.0,
+        "enabled": true,
+        "indoorMix": 0.0,
+        "litAmbientMix": 0.0,
+        "mainColorMix": 0.0,
+        "outdoorGain": 1.0,
+        "schemaVersion": 1,
+        "shadowAmbientGain": 1.0,
+        "shadowOverride": 0.0,
+        "useSceneIrradiance": true
+      },
+      "antiAliasing": 1,
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1,
+      "objectShadowDepthBytes": 16777216
+    },
+    "main-documents": {
+      "imageSha256": "b2108cfa08cdd69c5f930422196f3f37b6766c7d78104bdedfe500d38853301a",
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "manifestSha256": "c0adc825d41d8e4d64837d73ea6afc7905e7c6bbe16978baae0812a58128d528",
+      "runtimeSha256": "97a6784138d1217123166215374ed0ad978adb2d9df0fbccdec0be5b6f9d8c92",
+      "logSha256": "aec358c250ab7218e20177ca1cbefd3c6410feaf996a249534be734ac2c55076",
+      "nprLighting": {
+        "ambientColor": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "ambientDirection": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "ambientWeight": 1.0,
+        "directionBias": 0.0,
+        "directionFloor": 1.0,
+        "directionGain": 0.0,
+        "enabled": true,
+        "indoorMix": 0.0,
+        "litAmbientMix": 0.0,
+        "mainColorMix": 0.0,
+        "outdoorGain": 1.0,
+        "schemaVersion": 1,
+        "shadowAmbientGain": 1.0,
+        "shadowOverride": 0.0,
+        "useSceneIrradiance": true
+      },
+      "antiAliasing": 1,
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1,
+      "objectShadowDepthBytes": 16777216
+    },
+    "playable-embedded": {
+      "imageSha256": "9481244cf8488a99facc45e334d3769beab016a7f67fd407201eff280c701085",
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "manifestSha256": "0c478dee741695d478afc800ec5e124e0c3361ddbec3f75794bc47b157b12cfa",
+      "runtimeSha256": "517247244b4c59c36f576218899bc4d78a8902dcd6c90b8a46258c509e5e2df8",
+      "logSha256": "a28a8123d4036c021faebfbb053be09e67bcd3d00dc55198bf078696f45cc137",
+      "nprLighting": {
+        "ambientColor": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "ambientDirection": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "ambientWeight": 1.0,
+        "directionBias": 0.0,
+        "directionFloor": 1.0,
+        "directionGain": 0.0,
+        "enabled": true,
+        "indoorMix": 0.0,
+        "litAmbientMix": 0.0,
+        "mainColorMix": 0.0,
+        "outdoorGain": 1.0,
+        "schemaVersion": 1,
+        "shadowAmbientGain": 1.0,
+        "shadowOverride": 0.0,
+        "useSceneIrradiance": true
+      },
+      "antiAliasing": 1,
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1,
+      "objectShadowDepthBytes": 16777216
+    },
+    "playable-documents": {
+      "imageSha256": "9481244cf8488a99facc45e334d3769beab016a7f67fd407201eff280c701085",
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "manifestSha256": "6aea17bc35ef3646dc15a741d15892f3ad3dd9dfa5ffde5d808173c564555fb6",
+      "runtimeSha256": "517247244b4c59c36f576218899bc4d78a8902dcd6c90b8a46258c509e5e2df8",
+      "logSha256": "cb3d1e6c8e73d6b246892c5db3753acc04ff7e37e8e58221a4a72914b65f21f0",
+      "nprLighting": {
+        "ambientColor": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "ambientDirection": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "ambientWeight": 1.0,
+        "directionBias": 0.0,
+        "directionFloor": 1.0,
+        "directionGain": 0.0,
+        "enabled": true,
+        "indoorMix": 0.0,
+        "litAmbientMix": 0.0,
+        "mainColorMix": 0.0,
+        "outdoorGain": 1.0,
+        "schemaVersion": 1,
+        "shadowAmbientGain": 1.0,
+        "shadowOverride": 0.0,
+        "useSceneIrradiance": true
+      },
+      "antiAliasing": 1,
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1,
+      "objectShadowDepthBytes": 16777216
+    }
+  },
+  "dynamicCaptures": {
+    "head-front": {
+      "frames": 1,
+      "firstImageSha256": "0ca086c1f4d62edf4c667b22f93d90b8eb78b61b04e803efc27f66a615839c8c",
+      "lastImageSha256": "0ca086c1f4d62edf4c667b22f93d90b8eb78b61b04e803efc27f66a615839c8c",
+      "heroAnimation": {
+        "blend": 1.0,
+        "clip": 0,
+        "morph": [
+          0.0,
+          0.0
+        ],
+        "node": "hero",
+        "previousClip": 0,
+        "samples": [],
+        "time": 0.0
+      },
+      "rasterizationSamples": 4,
+      "snapshotRasterizationSamples": 4,
+      "outlineMaskSamples": 4,
+      "multisampleFallback": ""
+    },
+    "head-side": {
+      "frames": 1,
+      "firstImageSha256": "a2c14b4a8774da75c6bada402f51fcfd048185fd83da1a68d313e68e84ce1ec0",
+      "lastImageSha256": "a2c14b4a8774da75c6bada402f51fcfd048185fd83da1a68d313e68e84ce1ec0",
+      "heroAnimation": {
+        "blend": 1.0,
+        "clip": 0,
+        "morph": [
+          0.0,
+          0.0
+        ],
+        "node": "hero",
+        "previousClip": 0,
+        "samples": [],
+        "time": 0.0
+      },
+      "rasterizationSamples": 4,
+      "snapshotRasterizationSamples": 4,
+      "outlineMaskSamples": 4,
+      "multisampleFallback": ""
+    },
+    "head-turn": {
+      "frames": 80,
+      "firstImageSha256": "b67946f366ed3a4893471404037df2f2548b637ffb274ba5a7698b17fdb13c42",
+      "lastImageSha256": "d2f4b77d2bae95bd1d816ddceca0a8e786b1e374f656bd8f124ce9785fa8c7dc",
+      "heroAnimation": {
+        "blend": 1.0,
+        "clip": 6,
+        "morph": [
+          0.0,
+          0.0
+        ],
+        "node": "hero",
+        "previousClip": 6,
+        "samples": [],
+        "time": 2.6333333333333337
+      },
+      "rasterizationSamples": 4,
+      "snapshotRasterizationSamples": 4,
+      "outlineMaskSamples": 4,
+      "multisampleFallback": ""
+    }
+  },
+  "headFrame": {
+    "sourceCapture": 6834,
+    "event": 789,
+    "indices": 8718,
+    "sourcePaletteBuffer": "ResourceId::399",
+    "instanceConstantsBuffer": "ResourceId::405",
+    "flags": 52,
+    "paletteRow": 39835,
+    "headSourcePath": "chr_0016_laevat_postmodel/Root/Bip001/Bip001_Pelvis/Bip001_Spine/Bip001_Spine1/Bip001_Spine2/Bip001_Neck/Bip001_Head",
+    "positionErrorMetres": 0.0003915607545535608,
+    "maximumBasisError": 2.7705416689191717e-06,
+    "instanceSelectionScope": "First 256-byte instance record; API base-instance arguments are not exposed by current D3D11 serializer",
+    "producerIdentityGate": "pending independent API base-instance confirmation"
+  },
+  "reports": {
+    "candidate-v2-audit.json": "d987e33f9e4084328d75a59063b508284d6d9cefb753e90bfc45da015ad3cdf2",
+    "v2-main-captures.json": "1c0594f1312b1dab46be393a0f5fcef51a4d692a7cc9ad27b4efd5e10d0d1c82",
+    "head-captures-v2.json": "137ebd4048ded6e6562f32b7004ddafe2c09c8c05ef8947f27191018577bc282",
+    "eye-input-v2.json": "06a268fd9f9c96cc795408943c6206b48ed14647b3007f66587b14dc1ffc83d4",
+    "bind-outline-directions.json": "2a54b73b17a37e57d22a7ed8d73f9daf87a6f5fc306f524fa80f799f387ce776",
+    "source-frame-axis-comparison.json": "3d7e4a7721edad7a407a6bc2054ccee2c54acd9f62880d09e8e39dd900518597",
+    "heldout-6834-dossier.json": "8f32f1506ba338ab9fcf6345760ecbdeac46918c0e20580975aa9c542845bbd4",
+    "heldout-6834-cb2-first-instance.json": "180f8847fa2805c356af2ad5a4095ead3da6b3d62c9a4d58edb85a0d33e1489f",
+    "heldout-6834-skin-window.json": "d5edfc3b65de89817966af44102b4501af15ed7bfa1c497193c459d890ae287f",
+    "heldout-6834-corrected-frame-comparison.json": "13c95330b6a6ff5285491beea797b9518ecf0dadcb3865fedc5e7f680555f248",
+    "npr-activation-control.json": "a28adcfe13d2b319611e6d7ff2d470a409e57dd12f2ebc393d18bd3f15344f49",
+    "head-turn-video.json": "85b64c5b197b61297846642d87e33de8ac7871c7e10c18e2afdff13533292445",
+    "v2-material-semantics.log": "f468cee1dc37f91e2fccafdc0c21cad00fe61eb81445d3e11c056c270ac8dc01",
+    "v2-outline-directions.log": "bc9f0351ad6554b6493f6432f9fbfc0c86034d73fc31375aace5c187249f4541"
+  },
+  "generators": {
+    "prepare_main.py": "aea9d676a94b89b48a12e5bc93b5466be24f2afac0d657ab3cb6835c9650d25b",
+    "prepare_eye_v2.py": "ea19b9de8f5f777ab0bc65b58bcb9e992cbeb82d704bcaaa4ab7dd565b15dbe3",
+    "audit_candidate_v2.py": "6d613c59e94ee5af6fb899afc86bbb453402e262e24b3e4e0b2be544856916aa",
+    "capture_main_v2.py": "cb63105f37bd20def82b94b0c028049083395ae53fb745b91507f12ea0ba767c",
+    "capture_head_v2.py": "649b43c028f53a63afac65c0557edbf33ac0f3598f6ee43d9035d553b35c8921"
+  },
+  "limitations": [
+    "Native full visible eye region and mip-boundary equivalence remain gated",
+    "Whole-scene GI, reflections and warm-frame AA budget remain gated",
+    "Editor, Play, save/reopen, export and moved project equivalence remain gated",
+    "Dynamic source head and encoded outline equivalence require further native pose coverage"
+  ]
+}

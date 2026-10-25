@@ -37,6 +37,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 副本着色需求及真实图像一致性见[成本验证](../acceptance/nr/snapshot-depth-demand.md)。
 四样点主通道成本与联合画质继续按 MS5 验收。
 完整画像的轻量槽位查询见[专项验收](../acceptance/nr/material-slot-inspection.md)。
+主入口的完整画像、眼睛坐标及动态轴见[接入验证](../acceptance/nr/main-character-integration.md)。
 独立镜头平移及真实角色细节见[镜头验证](../acceptance/nr/camera-motion-quality.md)。
 公共源目标及最近深度解析见[目标验收](../acceptance/nr/multisample-scene-target.md)。
 主辅视图的实际样本、质量与回退见[视图验收](../acceptance/nr/multisample-view-quality.md)。

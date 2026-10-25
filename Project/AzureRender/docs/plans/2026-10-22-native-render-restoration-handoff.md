@@ -8,7 +8,7 @@ C16-R3 的双配置构建、CPU 及 GPU 回归通过。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。
 新增任务为 NR0-A1、NR6-C15 至 C18、NR8-V2。
-首批角色候选已进入主项目与可玩入口。
+完整材质候选已进入主项目与可玩入口。
 范围见[主场景接入](../acceptance/nr/main-character-integration.md)。
 公共材质已接入稀疏参数覆盖及共享编辑操作。
 八次 GPU 夹具与真实角色对照见[覆盖验收](../acceptance/nr/material-parameter-overrides.md)。
@@ -103,6 +103,10 @@ RHI 附件及逐样点插值已通过[双配置验收](../acceptance/nr/multisam
 独立镜头平移及真实角色细节见[镜头验证](../acceptance/nr/camera-motion-quality.md)。
 当前继续 MS5 的主入口画像、动态材质帧及联合画质。
 源槽位的公共查询及冻结主场景回归见[元数据验证](../acceptance/nr/material-slot-inspection.md)。
+当前候选保留九条动画并绑定十三份完整文档。
+四次实际入口及八十帧转身通过运行检查。
+NPR 照明、眼睛坐标及动态材质轴见[主场景验证](../acceptance/nr/main-character-integration.md)。
+完整动态质量、跨编辑入口和正式预算继续验收。
 先保存主入口走样红测及官方时序通道输入。
 材质阶段同步核验发丝、KK、Ramp、服饰与描边走样。
 视图历史、运动场及静态与动态联合画质保持待验。
@@ -390,7 +394,7 @@ RUN/scene-audit/character-binding-audit/capture_face_radial.py
 其原生公式和源 UV 应与新帧的实际绘制再次对应。
 
 证据及草案位于角色审计目录的 `cloth-texture-trace/`。
-眼睛公共径向能力可用，真实 GLB 的 `eyeSurface` 仍缺。
+实际候选的 `eyeSurface` 已进入完整文档与动态资产。
 额发遮挡、眉毛遮罩、预深度及模板继续逐项核验。
 头发、皮肤与丝袜的分支分别保存参数来源。
 
