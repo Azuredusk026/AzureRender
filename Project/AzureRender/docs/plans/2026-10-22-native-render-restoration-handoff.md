@@ -17,6 +17,7 @@ C15 完整画像、UUID 依赖及编辑事务接入通过。
 证据见[完整文档验收](../acceptance/nr/complete-material-document.md)。
 
 当前执行 C16 的输入边界及 C17 的多层高光。
+双帧的实际实例记录与材质帧见[来源核对](../acceptance/nr/material-frame-instance-producer.md)。
 虚拟主灯与独立条纹已接入公共材质契约。
 三个真实正主叶及五份关闭对照见[分层验证](../acceptance/nr/projected-hair-positive-layers.md)。
 C11-R7 接入逐材质光色，范围见[皮肤验证](../acceptance/nr/npr-material-lighting.md)。

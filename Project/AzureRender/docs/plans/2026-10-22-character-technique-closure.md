@@ -7,6 +7,7 @@
 架构风险与实施边界见[接入审计](2026-10-22-render-capability-integration-audit.md)。
 公共机制、候选内容、主场景消费与原生等价分别登记。
 新增输入先通过 C15、C16 的材质及绑定契约检查。
+双帧的实际实例及跨阶段调色板见[来源核对](../acceptance/nr/material-frame-instance-producer.md)。
 
 ## 技术与证据
 

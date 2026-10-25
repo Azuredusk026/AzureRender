@@ -98,6 +98,7 @@ NPR 适配及捕获姿态完整文档见[眼睛输入](../acceptance/nr/eye-npr-
 二维发丝高光与表面响应已通过双配置数值检查。
 范围及保留门禁见[高光验收](../acceptance/nr/projected-hair.md)。
 实例外轮廓覆盖与真实脸部已完成分项验证。
+原生双帧的材质帧实例及跨阶段调色板见[来源验收](../acceptance/nr/material-frame-instance-producer.md)。
 结果及兼容待项见[外轮廓验收](../acceptance/nr/outline-coverage.md)。
 
 ## 资源验证计划
