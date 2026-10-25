@@ -55,6 +55,19 @@ def _descriptor(used):
         'shader_binding_index': used.access.index, 'array_element': used.access.arrayElement}
 
 
+def sampler_binding(used):
+    """Read the sampler descriptor independently from normal resource descriptors."""
+    bound = used.sampler
+    return {'object': str(bound.object),
+        'address': [str(bound.addressU), str(bound.addressV), str(bound.addressW)],
+        'filter': {'minify': str(bound.filter.minify), 'magnify': str(bound.filter.magnify),
+            'mip': str(bound.filter.mip), 'function': str(bound.filter.filter)},
+        'lod': {'bias': bound.mipBias, 'minimum': bound.minLOD, 'maximum': bound.maxLOD},
+        'maximum_anisotropy': bound.maxAnisotropy,
+        'compare_function': str(bound.compareFunction), 'unnormalized': bound.unnormalized,
+        'shader_binding_index': used.access.index, 'array_element': used.access.arrayElement}
+
+
 def replay_capture(rd, request, receipt):
     output = Path(request['output'])
     capture = rd.OpenCaptureFile()
@@ -141,7 +154,8 @@ def replay_capture(rd, request, receipt):
                         'set_or_space': resource.fixedBindSetOrSpace, 'texture': resource.isTexture}
                         for resource in reflection.readOnlyResources],
                     'read_only_bindings': [_descriptor(binding) for binding in pipeline.GetReadOnlyResources(stage)],
-                    'read_write_bindings': [_descriptor(binding) for binding in pipeline.GetReadWriteResources(stage)]}
+                    'read_write_bindings': [_descriptor(binding) for binding in pipeline.GetReadWriteResources(stage)],
+                    'sampler_bindings': [sampler_binding(binding) for binding in pipeline.GetSamplers(stage)]}
                 shader_path = output/('event-{}-{}.shader'.format(event, str(stage)))
                 shader_path.write_bytes(bytes(reflection.rawBytes))
                 receipt['artifacts'].append(fingerprint(shader_path))

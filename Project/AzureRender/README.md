@@ -18,6 +18,7 @@
 对象接收位置与原生可见量见[坐标验证](docs/acceptance/nr/object-shadow-receiver.md)。
 
 眼睛 NPR 适配及完整材质文档见[输入验收](docs/acceptance/nr/eye-npr-inputs.md)。
+原生采样器、硬件层级及梯度进入独立证据核对。
 完整眼部区域、层级边界及动态姿态继续验收。
 材质槽位查询与主场景图像回归见[元数据验收](docs/acceptance/nr/material-slot-inspection.md)。
 九动画角色、完整文档及实际转身见[主场景验证](docs/acceptance/nr/main-character-integration.md)。

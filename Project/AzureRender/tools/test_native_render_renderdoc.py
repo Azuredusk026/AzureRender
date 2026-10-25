@@ -17,6 +17,42 @@ try:
 except ImportError:
     action_stage_scope = active_stage_reflections = None
 
+try:
+    from native_render.renderdoc_replay import sampler_binding
+except ImportError:
+    sampler_binding = None
+
+
+class RenderDocSamplerTests(unittest.TestCase):
+    def test_sampler_uses_sampler_descriptor_and_retains_sampling_boundary(self):
+        self.assertTrue(callable(sampler_binding), 'Sampler evidence exporter is required')
+        sampler = SimpleNamespace(object='sampler-338', addressU='Wrap', addressV='Wrap',
+            addressW='Wrap', filter=SimpleNamespace(minify='Linear', magnify='Linear',
+                mip='Point', filter='Normal'), mipBias=0., minLOD=0., maxLOD=1000.,
+            maxAnisotropy=0., compareFunction='AlwaysTrue', unnormalized=False)
+        used = SimpleNamespace(sampler=sampler, descriptor=None,
+            access=SimpleNamespace(index=1, arrayElement=0))
+        result = sampler_binding(used)
+        self.assertEqual(result['object'], 'sampler-338')
+        self.assertEqual(result['filter'], dict(minify='Linear', magnify='Linear',
+            mip='Point', function='Normal'))
+        self.assertEqual(result['address'], ['Wrap', 'Wrap', 'Wrap'])
+        self.assertEqual(result['lod'], dict(bias=0., minimum=0., maximum=1000.))
+        self.assertEqual(result['maximum_anisotropy'], 0.)
+        self.assertEqual(result['shader_binding_index'], 1)
+        self.assertFalse(result['unnormalized'])
+        sampler.addressU = 'ClampEdge'
+        sampler.filter.mip = 'Linear'
+        sampler.mipBias = -1.
+        sampler.minLOD = 2.
+        sampler.maxLOD = 7.
+        sampler.maxAnisotropy = 8.
+        result = sampler_binding(used)
+        self.assertEqual(result['address'][0], 'ClampEdge')
+        self.assertEqual(result['filter']['mip'], 'Linear')
+        self.assertEqual(result['lod'], dict(bias=-1., minimum=2., maximum=7.))
+        self.assertEqual(result['maximum_anisotropy'], 8.)
+
 
 class RenderDocStageActivityTests(unittest.TestCase):
     def test_draw_and_dispatch_do_not_export_retained_inactive_bindings(self):
