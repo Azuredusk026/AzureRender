@@ -275,6 +275,7 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
         + "/" + std::to_string(desc.depthWrite)
         + " samples="+std::to_string(desc.rasterizationSamples)
         + " sampleShading="+std::to_string(desc.minSampleShading);
+    if(desc.depthBias)calls.back().detail+=" depthBias="+std::to_string(desc.depthBiasConstant)+"/"+std::to_string(desc.depthBiasSlope);
     if(!desc.colorWriteMasks.empty()) {
         calls.back().detail+=" masks=";
         for(const auto mask:desc.colorWriteMasks)calls.back().detail+=std::to_string(mask)+"/";

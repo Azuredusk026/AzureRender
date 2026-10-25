@@ -26,6 +26,9 @@ public:
     VkRenderPass maskPass=VK_NULL_HANDLE,pass=VK_NULL_HANDLE;
     VkRenderPass opaqueDepthPass=VK_NULL_HANDLE;
     unsigned ordinaryDepthDraws=0,depthOnlyDraws=0;
+    unsigned prefillDraws=0;
+    std::set<std::uint64_t> prefillPipelines;
+    std::vector<bool> snapshotPrefillOrder;
     std::set<std::uint64_t> depthOnlyPipelines;
     std::set<std::uint64_t> outlinePipelines;
     std::set<std::uint64_t> depthShellPipelines;
@@ -57,7 +60,10 @@ public:
     void bindIndexBuffer(VkBuffer,VkDeviceSize)override{}
     void draw(unsigned)override{}
     void drawIndexed(unsigned,unsigned,unsigned count=1,unsigned first=0)override{
-        if(pass==opaqueDepthPass&&pass!=VK_NULL_HANDLE&&!depthShellPipelines.count(pipeline)){++ordinaryDepthDraws;if(depthOnlyPipelines.count(pipeline))++depthOnlyDraws;}
+        if(pass==opaqueDepthPass&&pass!=VK_NULL_HANDLE&&!depthShellPipelines.count(pipeline)){
+            ++ordinaryDepthDraws;if(depthOnlyPipelines.count(pipeline))++depthOnlyDraws;
+            const bool prefill=prefillPipelines.count(pipeline)!=0;prefillDraws+=prefill;snapshotPrefillOrder.push_back(prefill);
+        }
         if(pass==maskPass&&pass!=VK_NULL_HANDLE){
             require(count==1,"Coverage tiles must rasterize only their owning instance");
             covered[first].insert(tile);
@@ -87,7 +93,7 @@ public:
 };
 
 enum class Kind {Explicit,Legacy,Fading,Hidden,Blend,Platform,Mixed,DoubleSided,Mirrored,GizmoMirrored,CullingDisabled,HiddenExplicitLegacy,
-    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer};
+    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth};
 void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool compute,bool multisample=false){
     rhi::NullRhi backend;
     if(multisample){backend.supportedSamples=VK_SAMPLE_COUNT_1_BIT|VK_SAMPLE_COUNT_4_BIT;backend.sampleShadingSupported=true;}
@@ -97,12 +103,14 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     if(kind==Kind::ProjectedPlatform)settings.showcasePlatformFeature=true;
     settings.characterPresentation.platformEnabled=false;
     settings.innerOutlineEnabled=false;
-    settings.screenSpaceReflection.enabled=kind==Kind::ReflectionConsumer;
+    const bool reflection=kind==Kind::ReflectionConsumer||kind==Kind::ReflectionMirrored||kind==Kind::ReflectionDoubleSided
+        ||kind==Kind::ReflectionFading||kind==Kind::ReflectionMasked||kind==Kind::ReflectionNoDepth;
+    settings.screenSpaceReflection.enabled=reflection;
     settings.silhouetteOutlineEnabled=kind==Kind::Legacy||kind==Kind::Fading||kind==Kind::Mixed||kind==Kind::HiddenExplicitLegacy;
     settings.sceneLightingEnabled=!settings.silhouetteOutlineEnabled;
     RenderContext context;
     context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=shaders.string();
-    context.renderExtent=context.swapchainExtent={256,192};context.cullingEnabled=false;
+    context.renderExtent=context.swapchainExtent={256,192};context.cullingEnabled=false;context.depthTestEnabled=kind!=Kind::ReflectionNoDepth;
     context.bindlessTextures=bindless;context.computeSkinning=compute;context.renderSettings=&settings;
     context.sceneWorldCoordinates=true;
     context.rasterizationSamples=multisample?VK_SAMPLE_COUNT_4_BIT:VK_SAMPLE_COUNT_1_BIT;
@@ -121,7 +129,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     material.materialFeatures=MaterialFeatureNeutralFallback;
     material.materialClass=AssetMaterialClass::Generic;
     material.alphaMode=AssetAlphaMode::Opaque;
-    material.doubleSided=kind==Kind::DoubleSided;
+    material.doubleSided=kind==Kind::DoubleSided||kind==Kind::ReflectionDoubleSided;
     const bool explicitOutline=kind!=Kind::Legacy&&kind!=Kind::Fading;
     if(explicitOutline)material.materialFeatures|=MaterialFeatureSilhouetteOutline;
     const bool projection=kind==Kind::Projected||kind==Kind::DepthOnly||kind==Kind::ProjectedUv1
@@ -138,9 +146,10 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     if(kind==Kind::RefractionConsumer)material.materialFeatures|=MaterialFeatureSceneRefraction;
     if(kind==Kind::TintConsumer)material.materialFeatures|=MaterialFeatureSceneTint;
     if(kind==Kind::MaskedEye){material.alphaMode=AssetAlphaMode::Mask;material.materialClass=AssetMaterialClass::Eye;material.eyeSurface.present=true;material.materialFeatures|=MaterialFeatureEyeRadialSurface;}
+    if(kind==Kind::ReflectionMasked)material.alphaMode=AssetAlphaMode::Mask;
     if(kind==Kind::Blend)material.alphaMode=AssetAlphaMode::Blend;
     if(kind==Kind::Platform)material.showcasePlatform=1;
-    for(auto& node:mesh.nodes)node.opacity=(kind==Kind::Fading||kind==Kind::ProjectedFading)?.5F:kind==Kind::Hidden?0.F:1.F;
+    for(auto& node:mesh.nodes)node.opacity=(kind==Kind::Fading||kind==Kind::ProjectedFading||kind==Kind::ReflectionFading)?.5F:kind==Kind::Hidden?0.F:1.F;
     if(kind==Kind::HiddenExplicitLegacy){
         mesh.nodes.front().opacity=0;
         auto node=mesh.nodes.front();node.parent=-1;node.opacity=1;
@@ -158,7 +167,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
             node.resourceId=id;node.translation[0]=i?.35F:-.35F;context.scene.nodes.push_back(node);}
     };
     add("subject",mesh);
-    if(kind==Kind::Mirrored)for(auto& node:context.scene.nodes)node.scale[0]=-1;
+    if(kind==Kind::Mirrored||kind==Kind::ReflectionMirrored)for(auto& node:context.scene.nodes)node.scale[0]=-1;
     if(kind==Kind::Mixed){auto legacy=mesh;legacy.materials.front().materialFeatures=MaterialFeatureNeutralFallback;add("legacy",legacy);}
     if(kind==Kind::ProjectedMixed) {
         auto second=mesh;second.materials.front().outlineSurface.width=1.25F;
@@ -177,6 +186,11 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
         const auto cull=std::stoul(call.detail.substr(call.detail.find(" cull=")+6));
         const auto front=std::stoul(call.detail.substr(call.detail.find(" front=")+7));
         capture.pipelineDescriptions.emplace(handle,Capture::Pipeline{static_cast<unsigned>(cull),static_cast<unsigned>(front)});
+        if(cull!=VK_CULL_MODE_FRONT_BIT&&call.detail.find(" masks=0/0/")!=std::string::npos){
+            capture.prefillPipelines.insert(handle);
+            require(call.detail.find(" depthBias=1.000000/0.000000")!=std::string::npos,
+                "Opaque prefill must conservatively bias depth away from strict LESS color draws");
+        }
         if(cull!=VK_CULL_MODE_FRONT_BIT&&call.detail.find(" masks=0/1/")!=std::string::npos)capture.depthOnlyPipelines.insert(handle);
         if(cull==VK_CULL_MODE_FRONT_BIT) {
             if(call.detail.find(" masks=0/1/")!=std::string::npos)capture.depthShellPipelines.insert(handle);
@@ -207,7 +221,16 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     }
     require(maskPasses==unsigned(masks||multisample),"Explicit opaque silhouettes and fading instances require a mask pass");
     std::string error;require(graph.compile(error),"Fixture render graph must compile");graph.execute(&capture);
-    if(kind==Kind::RefractionConsumer||kind==Kind::TintConsumer||kind==Kind::MaskedEye||kind==Kind::ReflectionConsumer)require(capture.ordinaryDepthDraws>0&&capture.depthOnlyDraws==0,"Color consumers retain fully shaded snapshots");
+    const bool colorConsumer=kind==Kind::RefractionConsumer||kind==Kind::TintConsumer||reflection;
+    require(capture.prefillPipelines.size()==3,"Snapshot prefill must support ordinary, mirrored and double-sided winding");
+    if(colorConsumer&&kind!=Kind::ReflectionMasked&&kind!=Kind::ReflectionNoDepth){
+        require(capture.prefillDraws>0&&capture.ordinaryDepthDraws==2*capture.prefillDraws,
+            "Color snapshots must prefill opaque coverage before fully shading the same geometry");
+        const auto firstColor=std::find(capture.snapshotPrefillOrder.begin(),capture.snapshotPrefillOrder.end(),false);
+        require(firstColor!=capture.snapshotPrefillOrder.end()&&std::none_of(firstColor,capture.snapshotPrefillOrder.end(),[](bool v){return v;}),
+            "Opaque prefill must finish before the first full color draw");
+    }else require(capture.prefillDraws==0,"Depth consumers and transformed masked eyes retain their single coverage pass");
+    if(colorConsumer||kind==Kind::MaskedEye)require(capture.ordinaryDepthDraws>0&&capture.depthOnlyDraws==0,"Color consumers retain fully shaded snapshots");
     else require(capture.depthOnlyDraws==capture.ordinaryDepthDraws,"Depth consumers must avoid unused snapshot color shading");
     const bool visible=kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::DepthOnly;
     const unsigned instances=kind==Kind::ProjectedMixed?4:2;
@@ -219,8 +242,8 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     }
     require(tiles.size()==(masks?instances:0U),"Overlapping instances must retain distinct tiles");
     for(const auto& pipeline:capture.coveragePipelines){
-        const bool mirrored=kind==Kind::Mirrored||kind==Kind::GizmoMirrored;
-        const auto cull=kind==Kind::DoubleSided||kind==Kind::CullingDisabled?VK_CULL_MODE_NONE:VK_CULL_MODE_BACK_BIT;
+        const bool mirrored=kind==Kind::Mirrored||kind==Kind::GizmoMirrored||kind==Kind::ReflectionMirrored;
+        const auto cull=kind==Kind::DoubleSided||kind==Kind::CullingDisabled||kind==Kind::ReflectionDoubleSided?VK_CULL_MODE_NONE:VK_CULL_MODE_BACK_BIT;
         const auto front=mirrored?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
         require(pipeline.cull==static_cast<unsigned>(cull)&&pipeline.front==static_cast<unsigned>(front),
             "Coverage must share primary opaque double-sided and transform parity rules");
@@ -229,7 +252,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     for(const auto& draw:capture.outlines){
         outlined+=draw.count;
         require(draw.fresh,"Every outline draw must push its tile and opacity explicitly");
-        require(draw.opacity==((kind==Kind::Fading||kind==Kind::ProjectedFading)?.5F:1.F),"Outline opacity must match the primitive run");
+        require(draw.opacity==((kind==Kind::Fading||kind==Kind::ProjectedFading||kind==Kind::ReflectionFading)?.5F:1.F),"Outline opacity must match the primitive run");
         if(draw.tile==noTile){
             ++unmaskedBatches;
             require(draw.count==2,"Consecutive fully opaque legacy instances must retain their original batch");
@@ -276,7 +299,7 @@ int main(int argc,char** argv){try{
     for(bool multisample:{false,true})for(bool bindless:{false,true})for(bool compute:{false,true})
         for(auto kind:{Kind::Explicit,Kind::Legacy,Kind::Fading,Kind::Hidden,Kind::Blend,Kind::Platform,Kind::Mixed,
                 Kind::DoubleSided,Kind::Mirrored,Kind::GizmoMirrored,Kind::CullingDisabled,Kind::HiddenExplicitLegacy,
-                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer})
+                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth})
             verify(argv[1],kind,bindless,compute,multisample);
     std::cout<<"Explicit silhouettes retain independent coverage and legacy batching\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

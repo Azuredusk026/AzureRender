@@ -1,6 +1,7 @@
 """Exercise raster scene-color refraction through public project and glTF APIs."""
 import argparse
 import base64
+import copy
 import io
 import json
 from pathlib import Path
@@ -19,6 +20,11 @@ def run(executable, root, quality="existing", expected_validation="enabled"):
     source = json.loads((assets / 'rear.gltf').read_text())
     source['materials'][0].update(emissiveFactor=[.6, .15, .05])
     source['materials'][0]['pbrMetallicRoughness']['baseColorFactor'] = [0, 0, 0, 1]
+    coplanar=copy.deepcopy(source['materials'][0]);coplanar['emissiveFactor']=[.05,.6,.15]
+    source['materials'].append(coplanar)
+    for mesh in source['meshes']:
+        for primitive in list(mesh['primitives']):
+            duplicate=copy.deepcopy(primitive);duplicate['material']=1;mesh['primitives'].append(duplicate)
     (assets / 'rear.gltf').write_text(json.dumps(source))
     surface(assets / 'glass.gltf', double_sided=True, alpha=True)
     glass = json.loads((assets / 'glass.gltf').read_text())

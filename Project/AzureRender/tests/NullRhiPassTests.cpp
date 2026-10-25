@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <set>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -470,7 +471,8 @@ void verifyMultiplyCompositeRecording(const std::filesystem::path& shaderDirecto
 
 }  // namespace
 
-int main() try {
+int main(int argc,char** argv) try {
+    if(argc!=2)throw std::invalid_argument("Expected compiled shader directory");
 #undef assert
 #define assert(condition) do { if (!(condition)) { std::cerr << "Check failed: " << #condition << '\n'; return 1; } } while (false)
 #ifdef _WIN32
@@ -480,49 +482,7 @@ int main() try {
 
     // NullRhi never reads shader contents, but the renderer still opens the
     // files; dummy bytes are enough.
-    const std::filesystem::path shaderDirectory =
-        std::filesystem::temp_directory_path() / "azr_nullrhi_shaders";
-    std::filesystem::create_directories(shaderDirectory);
-    const std::vector<char> dummySpv = {'\x03', '\x02', '\x23', '\x07'};
-    for (const char* name : {
-             "blackhole.vert.spv",
-             "blackhole.frag.spv",
-             "blackhole_taa.frag.spv",
-             "blackhole_composite.frag.spv",
-             "mesh.vert.spv",
-             "mesh_object.vert.spv",
-             "mesh_object_compute.vert.spv",
-             "mesh_object.frag.spv",
-             "mesh_object_bindless.frag.spv",
-             "character_snapshot_object.frag.spv",
-             "character_snapshot_object_bindless.frag.spv",
-             "mesh.frag.spv",
-             "mesh_bindless.frag.spv",
-             "character_snapshot.frag.spv",
-             "character_snapshot_bindless.frag.spv",
-             "outline_mask.frag.spv",
-             "outline_mask_bindless.frag.spv",
-             "outline_mask.vert.spv",
-             "outline_mask_compute.vert.spv",
-             "outline.vert.spv",
-             "outline.frag.spv",
-             "background.vert.spv",
-             "background.frag.spv",
-             "background_bindless.frag.spv",
-             "shadow.vert.spv",
-             "shadow_bounds.comp.spv",
-             "mesh_compute.vert.spv",
-             "outline_compute.vert.spv",
-             "shadow_compute.vert.spv",
-             "skin.comp.spv",
-             "cull_indirect.comp.spv",
-             "visibility_prototype.comp.spv",
-             "shadow.frag.spv",
-             "shadow_bindless.frag.spv",
-         }) {
-        std::ofstream(shaderDirectory / name, std::ios::binary)
-            .write(dummySpv.data(), 4);
-    }
+    const std::filesystem::path shaderDirectory=std::filesystem::u8path(argv[1]);
 
     verifyMultiplyCompositeRecording(shaderDirectory, false);
     verifyMultiplyCompositeRecording(shaderDirectory, true);

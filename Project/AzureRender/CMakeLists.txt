@@ -1666,50 +1666,9 @@ if(BUILD_TESTING)
     add_test(
         NAME AzureRender.NullRhi
         COMMAND AzureRenderNullRhiTests)
-    add_executable(
-        AzureRenderNullRhiPassTests
-        src/assets/MaterialData.cpp
-        tests/NullRhiPassTests.cpp
-        src/scenes/pathtracing/PathTracingSceneRenderer.cpp
-        src/render/pathtracing/TraceScene.cpp
-        src/render/sky/SkyPass.cpp
-        src/scenes/BlackholeSceneRenderer.cpp
-        src/render/ComputePass.cpp
-        src/render/RenderGraph.cpp
-        src/scenes/CharacterSceneRenderer.cpp
-        src/render/SampledTextureCache.cpp
-        src/render/OutlineProjectionResources.cpp
-        src/render/MotionPoseData.cpp
-        src/render/MotionVectorTarget.cpp
-        src/render/MotionVectorPass.cpp
-        src/render/ResourceAccessProfile.cpp
-        src/render/VisibilityPrototype.cpp
-        src/assets/GltfLoader.cpp
-        src/animation/AnimationBlend.cpp
-        src/animation/ExpressionPose.cpp
-        src/assets/image/ImageCodec.cpp
-        src/assets/image/TextureContainerAdapter.cpp
-        src/assets/TextureImportSettings.cpp
-        src/render/EnvironmentAsset.cpp
-        src/render/EnvironmentCubeTexture.cpp
-        src/render/RenderSettings.cpp
-        src/diagnostics/RuntimeDiagnostics.cpp
-        src/rhi/NullRhi.cpp
-    )
-    target_include_directories(
-        AzureRenderNullRhiPassTests PRIVATE
-            "${CMAKE_CURRENT_SOURCE_DIR}/src"
-            "${TINYGLTF_INCLUDE_DIR}"
-            "${STB_INCLUDE_DIR}")
-    target_sources(AzureRenderNullRhiPassTests PRIVATE src/assets/image/SvgCodec.cpp)
-    target_sources(AzureRenderNullRhiPassTests PRIVATE src/assets/MaterialGraph.cpp)
-    target_link_libraries(
-        AzureRenderNullRhiPassTests PRIVATE
-            AzureFoundation
-            pugixml::pugixml
-            Vulkan::Vulkan
-            nlohmann_json::nlohmann_json
-            OpenEXR::OpenEXR TIFF::TIFF WebP::webp Microsoft::DirectXTex KTX::ktx)
+    add_executable(AzureRenderNullRhiPassTests tests/NullRhiPassTests.cpp)
+    target_link_libraries(AzureRenderNullRhiPassTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureRenderNullRhiPassTests AzureRenderShaders)
     target_compile_options(AzureRenderNullRhiPassTests PRIVATE
         $<$<CXX_COMPILER_ID:MSVC>:/UNDEBUG>
         $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-UNDEBUG>)
@@ -1718,7 +1677,7 @@ if(BUILD_TESTING)
         AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
     add_test(
         NAME AzureRender.NullRhiPass
-        COMMAND AzureRenderNullRhiPassTests)
+        COMMAND AzureRenderNullRhiPassTests "${SHADER_BINARY_DIR}")
     add_executable(
         AzureRenderSceneGraphTests
         tests/SceneGraphTests.cpp

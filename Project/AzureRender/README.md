@@ -22,6 +22,7 @@
 材质槽位查询与主场景图像回归见[元数据验收](docs/acceptance/nr/material-slot-inspection.md)。
 九动画角色、完整文档及实际转身见[主场景验证](docs/acceptance/nr/main-character-integration.md)。
 普通材质零贡献光源及主场景预算见[成本验证](docs/acceptance/nr/ordinary-light-zero-energy.md)。
+不透明副本预填及共面规则见[预填验证](docs/acceptance/nr/opaque-snapshot-depth-prefill.md)。
 距离描边的共享数学与深度来源见[分项验证](docs/acceptance/nr/outline-depth-source.md)。
 公共材质、可选方向流和独立深度壳见[接入验证](docs/acceptance/nr/outline-material-integration.md)。
 生产材质、平滑顶点流及外扩深度壳继续接入。
