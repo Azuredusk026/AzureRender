@@ -156,6 +156,7 @@ private:
     std::array<VkImageView,kMaxFramesInFlight> overlayDepthViews_{};
     std::array<VkFramebuffer,kMaxFramesInFlight> overlayDepthFramebuffers_{};
     VkRenderPass overlayDepthPass_=VK_NULL_HANDLE;
+    std::array<VkPipeline,3> snapshotDepthOnlyPipelines_{};
     VkPipeline overlayDepthPipeline_=VK_NULL_HANDLE;
     VkPipeline overlayDepthMirroredPipeline_=VK_NULL_HANDLE;
     VkPipeline overlayDepthDoubleSidedPipeline_=VK_NULL_HANDLE;

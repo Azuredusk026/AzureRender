@@ -224,11 +224,12 @@ function(compile_shader source_file)
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/screen_space_reflection.glsl")
     endif()
     if(shader_source_base STREQUAL "mesh.frag" OR shader_source_base STREQUAL "motion_vector.frag"
-        OR shader_source_base STREQUAL "motion_vector.vert" OR shader_source_base STREQUAL "motion_outline.vert")
+        OR shader_source_base STREQUAL "motion_vector.vert" OR shader_source_base STREQUAL "motion_outline.vert"
+        OR shader_source_base STREQUAL "character_depth.frag")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/material_sampling.glsl")
     endif()
     list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/character_diffuse.glsl")
-    if(shader_source_base STREQUAL "mesh.frag" OR shader_source_base STREQUAL "outline.frag" OR shader_source_base STREQUAL "outline_depth.frag" OR shader_source_base STREQUAL "background.frag" OR shader_source_base STREQUAL "outline_mask.frag")
+    if(shader_source_base STREQUAL "mesh.frag" OR shader_source_base STREQUAL "outline.frag" OR shader_source_base STREQUAL "outline_depth.frag" OR shader_source_base STREQUAL "background.frag" OR shader_source_base STREQUAL "outline_mask.frag" OR shader_source_base STREQUAL "character_depth.frag")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/fragment_sampling.glsl")
     endif()
     foreach(shader_define IN LISTS SHADER_DEFINES)
@@ -267,7 +268,13 @@ compile_shader(
     "${SHADER_SOURCE_DIR}/mesh.vert"
     DEFINES AZURE_COMPUTE_SKINNING=1
     OUTPUT_NAME mesh_compute.vert)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_SNAPSHOT_DEPTH=1 OUTPUT_NAME character_snapshot_depth.vert)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_COMPUTE_SKINNING=1 OUTPUT_NAME character_snapshot_depth_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag")
+compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 OUTPUT_NAME character_snapshot_depth.frag)
+compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_depth_bindless.frag)
+compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_GEOMETRY_SAMPLES=1 OUTPUT_NAME character_snapshot_depth_samples.frag)
+compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_GEOMETRY_SAMPLES=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_depth_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/shadow_filter_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/object_shadow_filter_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_bounds.comp")

@@ -99,7 +99,8 @@ RHI 附件及逐样点插值已通过[双配置验收](../acceptance/nr/multisam
 主辅视图装配与质量模式见[视图验收](../acceptance/nr/multisample-view-quality.md)。
 角色四样点动态质量见[材质验证](../acceptance/nr/multisample-character-material.md)。
 深度副本、外壳覆盖及边缘光见[副本验证](../acceptance/nr/multisample-snapshot-outline.md)。
-当前继续 MS5 的联合画质、镜头运动及性能预算。
+副本着色需求及冻结图像对照见[成本验证](../acceptance/nr/snapshot-depth-demand.md)。
+当前继续 MS5 的主通道成本、镜头运动及联合画质。
 先保存主入口走样红测及官方时序通道输入。
 材质阶段同步核验发丝、KK、Ramp、服饰与描边走样。
 视图历史、运动场及静态与动态联合画质保持待验。

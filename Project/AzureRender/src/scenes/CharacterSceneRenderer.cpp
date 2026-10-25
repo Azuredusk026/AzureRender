@@ -2475,8 +2475,9 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
 
 void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands){
     bool depthShell=false;
-    bool sampled=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
+    bool colorRequired=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
         snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
+    bool sampled=colorRequired;
     if(snapshot.settings.sceneLightingEnabled&&snapshot.settings.nprLighting.enabled&&!(qaEffectMode_==4&&!qaEffectEnabled_)) {
         const auto& lights=frameLights_.lights();
         sampled|=std::any_of(lights.begin(),lights.end(),[](const RenderLight& light){
@@ -2490,6 +2491,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
         const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
         for(const auto& material:mesh.materials) {
             sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction))!=0;
+            colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0;
             depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
         }
     }
@@ -2507,9 +2509,12 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
             if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
             const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(first).model,
                 snapshot.gizmo,&primitive-mesh.primitives.data());
-            commands.bindPipeline((m.materialFeatures&MaterialFeatureHairPixelIntegral)
-                ?hairIntegralPipeline(m,mirrored,true):m.doubleSided?overlayDepthDoubleSidedPipeline_
-                :mirrored?overlayDepthMirroredPipeline_:overlayDepthPipeline_);
+            // Radial eyes can transform the alpha-test UV before coverage.
+            const bool simpleDepth=!colorRequired&&!(m.alphaMode==AssetAlphaMode::Mask
+                &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
+            commands.bindPipeline(simpleDepth?snapshotDepthOnlyPipelines_[m.doubleSided?2:mirrored?1:0]
+                :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
+                :m.doubleSided?overlayDepthDoubleSidedPipeline_:mirrored?overlayDepthMirroredPipeline_:overlayDepthPipeline_);
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
             MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
@@ -3109,6 +3114,20 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         overlayDepthMirroredPipeline_=rhi_->createGraphicsPipeline(depthDesc);
         depthDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;depthDesc.cullMode=VK_CULL_MODE_NONE;
         overlayDepthDoubleSidedPipeline_=rhi_->createGraphicsPipeline(depthDesc);rhi_->destroyShaderModule(depthModule);
+        const auto simpleDepthModule=rhi_->createShaderModule(mainFragment(bindlessTextures_
+            ?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv"));
+        VkShaderModule simpleDepthVertex=VK_NULL_HANDLE;
+        try{
+            simpleDepthVertex=rhi_->createShaderModule(azurerender::readBinaryFile(shaderDirectory+(computeSkinningEnabled_
+                ?"/character_snapshot_depth_compute.vert.spv":"/character_snapshot_depth.vert.spv")));
+            auto desc=depthDesc;desc.vertexShader=simpleDepthVertex;desc.fragmentShader=simpleDepthModule;desc.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
+            for(unsigned facing=0;facing<3;++facing){
+                desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+                snapshotDepthOnlyPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+            }
+        }catch(...){if(simpleDepthVertex)rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);throw;}
+        rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);
         materialDesc.cullMode = VK_CULL_MODE_NONE;
         opaqueDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
@@ -3250,7 +3269,7 @@ void CharacterSceneRenderer::destroyResources() {
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
-             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&outlineMaskPipeline_,
+             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
@@ -3391,7 +3410,7 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
-             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&outlineMaskPipeline_,
+             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
