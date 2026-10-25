@@ -25,6 +25,12 @@ public:
     struct Pipeline {unsigned cull,front;};
     VkRenderPass maskPass=VK_NULL_HANDLE,pass=VK_NULL_HANDLE;
     VkRenderPass opaqueDepthPass=VK_NULL_HANDLE;
+    VkRenderPass mainPass=VK_NULL_HANDLE;
+    unsigned mainPrefillDraws=0;
+    unsigned mainDrawCalls=0,mainPipelineBinds=0,mainDescriptorBinds=0,mainPushConstantUpdates=0;
+    SceneSubmissionCounters* counters=nullptr;
+    SceneSubmissionCounters beforeMain;
+    std::vector<bool> mainPrefillOrder;
     unsigned ordinaryDepthDraws=0,depthOnlyDraws=0;
     unsigned prefillDraws=0;
     std::set<std::uint64_t> prefillPipelines;
@@ -41,7 +47,9 @@ public:
     bool fresh=false;
     std::vector<Draw> outlines;
     std::map<std::uint32_t,std::set<std::uint32_t>> covered;
-    void beginRenderPass(const rhi::RenderPassBeginDesc& desc)override{pass=desc.renderPass;}
+    void beginRenderPass(const rhi::RenderPassBeginDesc& desc)override{
+        pass=desc.renderPass;if(pass==mainPass&&counters)beforeMain=*counters;
+    }
     void endRenderPass()override{pass=VK_NULL_HANDLE;}
     void setViewport(float,float,float x=0,float y=0)override{
         tile=static_cast<unsigned>(y/192)*columns+static_cast<unsigned>(x/256);
@@ -49,17 +57,23 @@ public:
     void setScissor(VkExtent2D,VkOffset2D={})override{}
     void bindComputePipeline(VkPipeline)override{}
     void bindComputeDescriptorSet(VkPipelineLayout,VkDescriptorSet)override{}
-    void bindPipeline(VkPipeline value)override{pipeline=handleValue(value);}
-    void bindDescriptorSet(VkPipelineLayout,VkDescriptorSet)override{}
+    void bindPipeline(VkPipeline value)override{pipeline=handleValue(value);if(pass==mainPass)++mainPipelineBinds;}
+    void bindDescriptorSet(VkPipelineLayout,VkDescriptorSet)override{if(pass==mainPass)++mainDescriptorBinds;}
     void pushConstants(VkPipelineLayout,VkShaderStageFlags,unsigned offset,const void* data,unsigned size)override{
         require(offset+size<=constants.size(),"Push constants exceed the public range");
         std::memcpy(constants.data()+offset,data,size);
+        if(pass==mainPass)++mainPushConstantUpdates;
         if(offset==136&&size==8)fresh=true;
     }
     void bindVertexBuffer(VkBuffer,VkDeviceSize)override{}
     void bindIndexBuffer(VkBuffer,VkDeviceSize)override{}
-    void draw(unsigned)override{}
+    void draw(unsigned)override{if(pass==mainPass)++mainDrawCalls;}
     void drawIndexed(unsigned,unsigned,unsigned count=1,unsigned first=0)override{
+        if(pass==mainPass)++mainDrawCalls;
+        if(pass==mainPass&&pass!=VK_NULL_HANDLE&&!outlinePipelines.count(pipeline)&&!depthShellPipelines.count(pipeline)){
+            const bool prefill=prefillPipelines.count(pipeline)!=0;
+            mainPrefillDraws+=prefill;mainPrefillOrder.push_back(prefill);
+        }
         if(pass==opaqueDepthPass&&pass!=VK_NULL_HANDLE&&!depthShellPipelines.count(pipeline)){
             ++ordinaryDepthDraws;if(depthOnlyPipelines.count(pipeline))++depthOnlyDraws;
             const bool prefill=prefillPipelines.count(pipeline)!=0;prefillDraws+=prefill;snapshotPrefillOrder.push_back(prefill);
@@ -93,7 +107,7 @@ public:
 };
 
 enum class Kind {Explicit,Legacy,Fading,Hidden,Blend,Platform,Mixed,DoubleSided,Mirrored,GizmoMirrored,CullingDisabled,HiddenExplicitLegacy,
-    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth};
+    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth,MainNoLighting,MainMultiply};
 void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool compute,bool multisample=false){
     rhi::NullRhi backend;
     if(multisample){backend.supportedSamples=VK_SAMPLE_COUNT_1_BIT|VK_SAMPLE_COUNT_4_BIT;backend.sampleShadingSupported=true;}
@@ -108,11 +122,13 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     settings.screenSpaceReflection.enabled=reflection;
     settings.silhouetteOutlineEnabled=kind==Kind::Legacy||kind==Kind::Fading||kind==Kind::Mixed||kind==Kind::HiddenExplicitLegacy;
     settings.sceneLightingEnabled=!settings.silhouetteOutlineEnabled;
+    if(kind==Kind::MainNoLighting)settings.sceneLightingEnabled=false;
     RenderContext context;
     context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=shaders.string();
     context.renderExtent=context.swapchainExtent={256,192};context.cullingEnabled=false;context.depthTestEnabled=kind!=Kind::ReflectionNoDepth;
     context.bindlessTextures=bindless;context.computeSkinning=compute;context.renderSettings=&settings;
     context.sceneWorldCoordinates=true;
+    SceneSubmissionCounters counters;context.submissionCounters=&counters;
     context.rasterizationSamples=multisample?VK_SAMPLE_COUNT_4_BIT:VK_SAMPLE_COUNT_1_BIT;
     context.depthFormat=VK_FORMAT_D32_SFLOAT;
     context.faceCullingEnabled=kind!=Kind::CullingDisabled;
@@ -145,6 +161,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     }
     if(kind==Kind::RefractionConsumer)material.materialFeatures|=MaterialFeatureSceneRefraction;
     if(kind==Kind::TintConsumer)material.materialFeatures|=MaterialFeatureSceneTint;
+    if(kind==Kind::MainMultiply)material.materialFeatures|=MaterialFeatureMultiplyComposite;
     if(kind==Kind::MaskedEye){material.alphaMode=AssetAlphaMode::Mask;material.materialClass=AssetMaterialClass::Eye;material.eyeSurface.present=true;material.materialFeatures|=MaterialFeatureEyeRadialSurface;}
     if(kind==Kind::ReflectionMasked)material.alphaMode=AssetAlphaMode::Mask;
     if(kind==Kind::Blend)material.alphaMode=AssetAlphaMode::Blend;
@@ -181,6 +198,8 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     if(kind==Kind::GizmoMirrored){frame.gizmoActive=true;frame.selectedPrimitiveIndex=0;frame.gizmoScale[0]=-1;}
     frame.swapchainWidth=256;frame.swapchainHeight=192;renderer.updateFrame(frame);
     Capture capture;
+    capture.mainPass=context.sceneRenderPass;
+    capture.counters=&counters;
     for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"){
         const auto handle=std::stoull(call.detail.substr(0,call.detail.find(' ')),nullptr,16);
         const auto cull=std::stoul(call.detail.substr(call.detail.find(" cull=")+6));
@@ -221,8 +240,29 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     }
     require(maskPasses==unsigned(masks||multisample),"Explicit opaque silhouettes and fading instances require a mask pass");
     std::string error;require(graph.compile(error),"Fixture render graph must compile");graph.execute(&capture);
+    counters.drawCalls-=capture.beforeMain.drawCalls;counters.pipelineBinds-=capture.beforeMain.pipelineBinds;
+    counters.descriptorSetBinds-=capture.beforeMain.descriptorSetBinds;counters.pushConstantUpdates-=capture.beforeMain.pushConstantUpdates;
+    if(counters.drawCalls!=capture.mainDrawCalls||counters.pipelineBinds!=capture.mainPipelineBinds
+        ||counters.descriptorSetBinds!=capture.mainDescriptorBinds||counters.pushConstantUpdates!=capture.mainPushConstantUpdates)
+        std::cerr<<"Main counters kind="<<static_cast<unsigned>(kind)<<" draws="<<counters.drawCalls<<'/'<<capture.mainDrawCalls
+            <<" pipelines="<<counters.pipelineBinds<<'/'<<capture.mainPipelineBinds
+            <<" descriptors="<<counters.descriptorSetBinds<<'/'<<capture.mainDescriptorBinds
+            <<" pushes="<<counters.pushConstantUpdates<<'/'<<capture.mainPushConstantUpdates<<'\n';
+    require(counters.drawCalls==capture.mainDrawCalls&&counters.pipelineBinds==capture.mainPipelineBinds
+        &&counters.descriptorSetBinds==capture.mainDescriptorBinds&&counters.pushConstantUpdates==capture.mainPushConstantUpdates,
+        "Submission counters must include every actual main prefill and color command");
     const bool colorConsumer=kind==Kind::RefractionConsumer||kind==Kind::TintConsumer||reflection;
-    require(capture.prefillPipelines.size()==3,"Snapshot prefill must support ordinary, mirrored and double-sided winding");
+    require(capture.prefillPipelines.size()==6,"Snapshot and main prefill each require three winding pipelines");
+    const bool mainPrefill=settings.sceneLightingEnabled&&context.depthTestEnabled
+        &&material.alphaMode==AssetAlphaMode::Opaque&&kind!=Kind::TintConsumer&&kind!=Kind::MainMultiply
+        &&kind!=Kind::Hidden&&kind!=Kind::Platform;
+    require((capture.mainPrefillDraws>0)==mainPrefill,
+        "Lit opaque main draws require prefill; masked, hidden, tint and disabled-depth draws retain their coverage");
+    if(mainPrefill){
+        const auto firstColor=std::find(capture.mainPrefillOrder.begin(),capture.mainPrefillOrder.end(),false);
+        require(firstColor!=capture.mainPrefillOrder.end()&&std::none_of(firstColor,capture.mainPrefillOrder.end(),[](bool v){return v;}),
+            "Main opaque depth must finish before full material shading begins");
+    }
     if(colorConsumer&&kind!=Kind::ReflectionMasked&&kind!=Kind::ReflectionNoDepth){
         require(capture.prefillDraws>0&&capture.ordinaryDepthDraws==2*capture.prefillDraws,
             "Color snapshots must prefill opaque coverage before fully shading the same geometry");
@@ -299,7 +339,7 @@ int main(int argc,char** argv){try{
     for(bool multisample:{false,true})for(bool bindless:{false,true})for(bool compute:{false,true})
         for(auto kind:{Kind::Explicit,Kind::Legacy,Kind::Fading,Kind::Hidden,Kind::Blend,Kind::Platform,Kind::Mixed,
                 Kind::DoubleSided,Kind::Mirrored,Kind::GizmoMirrored,Kind::CullingDisabled,Kind::HiddenExplicitLegacy,
-                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth})
+                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth,Kind::MainNoLighting,Kind::MainMultiply})
             verify(argv[1],kind,bindless,compute,multisample);
     std::cout<<"Explicit silhouettes retain independent coverage and legacy batching\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

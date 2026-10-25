@@ -2496,10 +2496,23 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
         }
     }
     if(!sampled&&!depthShell)return;
+    if(colorRequired&&context.depthTestEnabled)
+        recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
+    recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);
+    if(depthShell)recordOutlineShells(context,snapshot,commands,true);
+}
+
+void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+    rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters){
+    const bool mainPrefill=mode==DepthCoverageMode::MainPrefill;
+    const bool prefill=mainPrefill||mode==DepthCoverageMode::SnapshotPrefill;
+    const bool colorRequired=mode==DepthCoverageMode::SnapshotColor;
+    const auto& prefillPipelines=mainPrefill?mainPrefillPipelines_:snapshotPrefillPipelines_;
     commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
-    commands.bindPipeline(overlayDepthPipeline_);
-    if(bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
-    const auto recordCoverage=[&](bool prefill){
+    if(bindlessTextures_){
+        commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
+        if(counters)++counters->descriptorSetBinds;
+    }
     for(const auto& span:snapshot.visibleSpans){
         const auto key=span[0],first=span[1],count=span[2];const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
         const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
@@ -2508,23 +2521,26 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
         for(const auto& primitive:mesh.primitives){
             const auto& m=mesh.materials[primitive.materialIndex];if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay)continue;
             if(prefill&&m.alphaMode!=AssetAlphaMode::Opaque)continue;
+            if(mainPrefill&&(m.materialFeatures&(MaterialFeatureSceneTint|MaterialFeatureMultiplyComposite))!=0)continue;
             if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
             const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(first).model,
                 snapshot.gizmo,&primitive-mesh.primitives.data());
             // Radial eyes can transform the alpha-test UV before coverage.
             const bool simpleDepth=!colorRequired&&!(m.alphaMode==AssetAlphaMode::Mask
                 &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
-            commands.bindPipeline(prefill?snapshotPrefillPipelines_[m.doubleSided?2:mirrored?1:0]
+            commands.bindPipeline(prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
                 :simpleDepth?snapshotDepthOnlyPipelines_[m.doubleSided?2:mirrored?1:0]
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :m.doubleSided?overlayDepthDoubleSidedPipeline_:mirrored?overlayDepthMirroredPipeline_:overlayDepthPipeline_);
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
-            if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
+            if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
+            if(counters)++counters->pipelineBinds;
             MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
                 m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
                 m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),materialFeaturesForFrame(m),m.materialProfileVersion,
                 static_cast<std::uint32_t>((materialBase+primitive.materialIndex)<<1U)};
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));
+            if(counters)++counters->pushConstantUpdates;
             MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
             morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());
             forEachPrimitiveOpacityRun(snapshot.nodeWorldOpacities,primitive.nodeIndex,first,count,[&](const PrimitiveOpacityRun& run) {
@@ -2532,13 +2548,10 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
                 morph.nodeOpacity=run.opacity;
                 commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
                 commands.drawIndexed(primitive.indexCount,primitive.firstIndex,run.instanceCount,run.firstInstance);
+                if(counters){++counters->pushConstantUpdates;++counters->drawCalls;}
             });
         }
     }
-    };
-    if(colorRequired&&context.depthTestEnabled)recordCoverage(true);
-    recordCoverage(false);
-    if(depthShell)recordOutlineShells(context,snapshot,commands,true);
 }
 
 #include "CharacterOutlinePass.inc"
@@ -3135,6 +3148,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
                 auto prefill=desc;prefill.colorWriteMasks={0,0};prefill.depthBias=true;
                 prefill.depthBiasConstant=1.F;prefill.depthBiasSlope=0.F;
                 snapshotPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
+                prefill.renderPass=context.sceneRenderPass;
+                mainPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
             }
         }catch(...){if(simpleDepthVertex)rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);throw;}
         rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);
@@ -3279,7 +3294,7 @@ void CharacterSceneRenderer::destroyResources() {
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
-             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&outlineMaskPipeline_,
+             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
@@ -3420,7 +3435,7 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
-             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&outlineMaskPipeline_,
+             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
@@ -4093,6 +4108,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     if (stage == 0 || stage == 1 || stage == 4) {
     if (settings.characterPresentation.backgroundEnabled) {
         commands.bindPipeline(backgroundPipeline_);
+        if(counters)++counters->pipelineBinds;
         if (!bindlessTextures_) {
             const std::size_t backgroundDescriptorIndex =
                 context.currentFrame * totalMaterialCount();
@@ -4103,10 +4119,13 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             }
         }
         commands.draw(3);
+        if(counters)++counters->drawCalls;
     }
 
     }
     if (stage == 0 || stage == 2 || stage == 4) {
+    if(settings.sceneLightingEnabled&&context.depthTestEnabled)
+        recordDepthCoverage(context,*snapshot,commands,DepthCoverageMode::MainPrefill,counters);
     for (const std::array<std::uint32_t, 3>& span : snapshot->opaqueSpans) {
         const std::uint32_t meshKey = span[0];
         const std::uint32_t firstInstance = span[1];

@@ -158,6 +158,7 @@ private:
     VkRenderPass overlayDepthPass_=VK_NULL_HANDLE;
     std::array<VkPipeline,3> snapshotDepthOnlyPipelines_{};
     std::array<VkPipeline,3> snapshotPrefillPipelines_{};
+    std::array<VkPipeline,3> mainPrefillPipelines_{};
     VkPipeline overlayDepthPipeline_=VK_NULL_HANDLE;
     VkPipeline overlayDepthMirroredPipeline_=VK_NULL_HANDLE;
     VkPipeline overlayDepthDoubleSidedPipeline_=VK_NULL_HANDLE;
@@ -174,6 +175,9 @@ private:
     void createOverlayDepth(const RenderContext& context);
     void destroyOverlayDepth();
     void recordOverlayDepth(const RenderContext& context, const SceneInstanceSnapshot& snapshot, rhi::ICommandRecorder& commands);
+    enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill};
+    void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+        rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
     void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,bool depthShell,SceneSubmissionCounters* counters=nullptr);
     struct MaterialPushConstants {

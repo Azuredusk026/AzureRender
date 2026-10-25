@@ -101,6 +101,7 @@ RHI 附件及逐样点插值已通过[双配置验收](../acceptance/nr/multisam
 角色四样点动态质量见[材质验证](../acceptance/nr/multisample-character-material.md)。
 深度副本、外壳覆盖及边缘光见[副本验证](../acceptance/nr/multisample-snapshot-outline.md)。
 副本着色需求及冻结图像对照见[成本验证](../acceptance/nr/snapshot-depth-demand.md)。
+主通道预填及实际提交计数见[主通道验证](../acceptance/nr/opaque-main-depth-prefill.md)。
 独立镜头平移及真实角色细节见[镜头验证](../acceptance/nr/camera-motion-quality.md)。
 当前继续 MS5 的主入口画像、动态材质帧及联合画质。
 源槽位的公共查询及冻结主场景回归见[元数据验证](../acceptance/nr/material-slot-inspection.md)。

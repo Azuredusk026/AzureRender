@@ -36,6 +36,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 深度副本及外壳覆盖见[副本验证](../acceptance/nr/multisample-snapshot-outline.md)。
 副本着色需求及真实图像一致性见[成本验证](../acceptance/nr/snapshot-depth-demand.md)。
 四样点主通道成本与联合画质继续按 MS5 验收。
+主通道预填及双配置动态质量见[专项验证](../acceptance/nr/opaque-main-depth-prefill.md)。
 主场景的实际绘制成本与剩余预算见[专项计划](2026-10-25-main-scene-shading-budget.md)。
 副本预填、实际入口及冻结图像见[专项验收](../acceptance/nr/opaque-snapshot-depth-prefill.md)。
 完整画像的轻量槽位查询见[专项验收](../acceptance/nr/material-slot-inspection.md)。

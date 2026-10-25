@@ -42,6 +42,7 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
             const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(first).model,snapshot.gizmo,primitiveIndex);
             commands.bindPipeline(depthShell?(mirrored?outlineDepthMirroredPipeline_:outlineDepthPipeline_)
                 :(mirrored?outlineMirroredPipeline_:outlinePipeline_));
+            if(counters)++counters->pipelineBinds;
             const auto identity=static_cast<std::uint32_t>(materialBase+primitive.materialIndex);
             if(!bindlessTextures_) {
                 commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame*totalMaterialCount()+identity]);
