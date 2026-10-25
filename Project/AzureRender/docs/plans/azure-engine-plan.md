@@ -100,6 +100,7 @@ NPR 适配及捕获姿态完整文档见[眼睛输入](../acceptance/nr/eye-npr-
 实例外轮廓覆盖与真实脸部已完成分项验证。
 原生双帧的材质帧实例及跨阶段调色板见[来源验收](../acceptance/nr/material-frame-instance-producer.md)。
 身体骨盆原点及双配置验证见[径向原点验收](../acceptance/nr/body-rim-origin.md)。
+蒙皮齐次位置及剩余严格图像门禁见[位置验收](../acceptance/nr/skinning-position-consistency.md)。
 结果及兼容待项见[外轮廓验收](../acceptance/nr/outline-coverage.md)。
 
 ## 资源验证计划

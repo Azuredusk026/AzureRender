@@ -2,6 +2,7 @@
 #define AZURE_MOTION_POSE_DATA_GLSL
 #include "motion_projection.glsl"
 #include "outline_projection.glsl"
+#include "skin_position.glsl"
 #ifndef AZURE_MOTION_POSE_BINDING
 #define AZURE_MOTION_POSE_BINDING 4
 #endif
@@ -65,7 +66,7 @@ bool azurePreviousMotionLocal(uint instanceIndex,uint vertexIndex,uint morphTabl
         float weight=azureMotionFloat(ranges.y+targets.y+target);
         if(weight!=0)morphed+=weight*azureMotionTarget(targets.x+target*9u);
     }
-    skinned=skin*vec4(morphed,1);return azureFiniteClip(skinned);
+    skinned=azureSkinPosition(skin,morphed);return azureFiniteClip(skinned);
 }
 bool azurePreviousMotionClip(uint instanceIndex,uint vertexIndex,uint morphTableBase,uint primitiveIndex,
     vec3 position,vec3 morph0,vec3 morph1,uvec4 jointIndices,vec4 jointWeights,

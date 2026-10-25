@@ -3,6 +3,7 @@
 #define AZURE_MORPH_DATA_BINDING 3
 #define AZURE_MORPH_WEIGHT_BINDING 4
 #include "morph_data.glsl"
+#include "skin_position.glsl"
 
 layout(local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
 
@@ -92,7 +93,7 @@ void main() {
         + weights.z * jointData.matrices[jointBase + joints.z]
         + weights.w * jointData.matrices[jointBase + joints.w];
     vec3 skinnedPosition =
-        (skinMatrix * vec4(morphedPosition, 1.0)).xyz;
+        azureSkinPosition(skinMatrix,morphedPosition).xyz;
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * normal);
     vec3 skinnedTangent = normalize(mat3(skinMatrix) * morphedTangent);
 

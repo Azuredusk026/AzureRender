@@ -165,6 +165,14 @@
         "bytes": 5772288,
         "sha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f"
       }
+    },
+    {
+      "path": "runs/20261026-063405-skinning-path-equivalence-ddcc46",
+      "pathBase": "build",
+      "purpose": "蒙皮仿射位置、动作序列及主场景差异。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/skinning-position-consistency.json"
     }
   ]
 }

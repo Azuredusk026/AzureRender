@@ -26,7 +26,7 @@ void main() {
         +jointWeights.y*jointData.matrices[jointBase+jointIndices.y]
         +jointWeights.z*jointData.matrices[jointBase+jointIndices.z]
         +jointWeights.w*jointData.matrices[jointBase+jointIndices.w];
-    vec3 skinnedPosition=(skin*vec4(p,1)).xyz;
+    vec3 skinnedPosition=azureSkinPosition(skin,p).xyz;
     vec3 skinnedNormal=normalize(mat3(skin)*n),skinnedTangent=normalize(mat3(skin)*t);
     float tangentSign=tangent.w;
 #endif

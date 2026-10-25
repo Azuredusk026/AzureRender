@@ -1,6 +1,7 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
 #include "morph_data.glsl"
+#include "skin_position.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -123,7 +124,7 @@ void main() {
         instanceData.instances[gl_InstanceIndex].meta.w,morphedPosition,morphedNormal,morphedTangent))
         morphedPosition+=morph0*instanceData.instances[gl_InstanceIndex].morph.x+morph1*instanceData.instances[gl_InstanceIndex].morph.y;
 
-    vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
+    vec4 skinnedPosition = azureSkinPosition(skinMatrix,morphedPosition);
     vec3 skinnedNormal = normalize(mat3(skinMatrix) * morphedNormal);
     vec3 skinnedTangent = normalize(mat3(skinMatrix) * morphedTangent);
 #endif

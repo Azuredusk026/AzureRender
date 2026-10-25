@@ -22,7 +22,7 @@ int main(int argc,char** argv)try{
     auto general=makeGpuPose("general");general.model[12]=-.2F;general.morphTableBase=1;general.morphWeights={.5F};
     general.joints={motionIdentityMatrix(),motionIdentityMatrix()};general.joints[0][13]=.4F;general.joints[1][12]=.4F;
     auto brow=makeGpuPose("brow"),mirror=legacy,behind=makeGpuPose("behind"),corrupt=makeGpuPose("corrupt"),fresh=makeGpuPose("new");
-    mirror.identity.node="mirror";mirror.model[0]=-1;behind.joints[0][15]=-1;
+    mirror.identity.node="mirror";mirror.model[0]=-1;
     auto scaled=makeGpuPose("scaled");scaled.model[0]=2;scaled.model[5]=3;scaled.model[10]=.5F;
     scaled.joints[0][0]=0;scaled.joints[0][1]=1;scaled.joints[0][4]=-1;scaled.joints[0][5]=0;
     MotionPoseView view;view.cameraPosition={0,0,2};view.selectedPrimitive=1;view.gizmo[13]=.2F;
@@ -30,6 +30,8 @@ int main(int argc,char** argv)try{
     MotionPoseHistory history;history.stage({legacy,general,brow,mirror,behind,corrupt,scaled},view);history.commit(3);
     history.stage({general,legacy,brow,mirror,behind,fresh,corrupt,scaled},{});auto packed=history.pack(motionIdentityMatrix(),3,8192);
     packed.words[28+6*40+32]=UINT32_MAX;
+    // Behind-camera coverage belongs to projection; joint transforms are affine.
+    packed.words[28+4*40+16+15]=0xbf800000U;
     // Independent immutable morph table: 3 vertices, one position target.
     std::vector<std::uint32_t> targets(49,0);
     for(unsigned vertex=0;vertex<3;++vertex){targets[1+vertex*3]=10+vertex*9;targets[3+vertex*3]=1;
@@ -65,7 +67,6 @@ int main(int argc,char** argv)try{
     for(auto& probe:probes){probe.expectedOutline=probe.expectedClip;
         if(probe.selectors[0]==0&&probe.expectedClip[3]!=0)probe.expectedOutline[1]+=.045F;
         if(probe.selectors[0]==2&&probe.expectedClip[3]!=0)probe.expectedOutline[2]=.25F;
-        if(probe.selectors[0]==4)probe.expectedOutline[3]=1;
         if(probe.selectors[0]==7)probe.expectedOutline[0]-=.045F;
     }
     const auto profile=[&](unsigned object,std::array<float,4> n,std::array<float,4> expected){
@@ -77,6 +78,13 @@ int main(int argc,char** argv)try{
     profile(1,{0,1,0,0},{.2F,.1035F,.255F,1});
     profile(1,{0,0,1,0},{.2F,.1F,.255F,1});
     profile(3,{1,0,0,0},{-.2035F,.1F,.255F,1});
+    std::vector<std::size_t> homogeneousProbes;
+    for(const float weight:{std::nextafter(1.F,0.F),std::nextafter(1.F,2.F)}){
+        add(2,0,0,0,{0,0,.25F*weight,1});
+        probes.back().weights={weight,0,0,0};
+        probes.back().expectedOutline=probes.back().expectedClip;
+        homogeneousProbes.push_back(probes.size()-1);
+    }
     test::VulkanComputeFixture host;auto& backend=*host.backend;
     std::array<rhi::GpuBuffer,4> buffers{};VkDescriptorSetLayout setLayout{};VkDescriptorPool pool{};
     VkPipelineLayout layout{};VkShaderModule shader{};VkPipeline pipeline{};
@@ -113,8 +121,11 @@ int main(int argc,char** argv)try{
             const auto value=output[i*20+axis];if(!std::isfinite(value)||std::abs(value-expected)>1e-6F){passed=false;
                 std::cerr<<"Motion pose variant "<<variant<<" probe "<<i<<" axis "<<axis<<": "<<value<<" expected "<<expected<<'\n';}
         }
+        if(variant==0)for(const auto index:homogeneousProbes)
+            if(output[index*20+3]!=1.F)
+                throw std::runtime_error("Affine skinned positions must preserve exact homogeneous one despite weight rounding");
         if(!passed)throw std::runtime_error("Previous motion pose GPU contract failed");
     }
     if(host.errors.load())throw std::runtime_error("Motion pose Vulkan validation errors");
-    std::cout<<"Previous motion pose: 26 cases, 3 buffer variants, 1560 scalar checks passed\n";return 0;
+    std::cout<<"Previous motion pose: "<<probes.size()<<" cases, 3 buffer variants and exact affine homogeneous checks passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

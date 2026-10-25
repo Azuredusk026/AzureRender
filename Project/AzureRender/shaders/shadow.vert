@@ -1,6 +1,7 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
 #include "morph_data.glsl"
+#include "skin_position.glsl"
 
 layout(binding = 0) uniform CameraData {
     vec4 cameraPosition;
@@ -61,7 +62,7 @@ void main() {
         + jointWeights.y * jointData.matrices[jointBase + jointIndices.y]
         + jointWeights.z * jointData.matrices[jointBase + jointIndices.z]
         + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
-    vec4 skinnedPosition = skinMatrix * vec4(morphedPosition, 1.0);
+    vec4 skinnedPosition = azureSkinPosition(skinMatrix,morphedPosition);
 #endif
     gl_Position = shadowParameters.cascadeIndex==4u
         ? shadowParameters.gizmoTransform * skinnedPosition :

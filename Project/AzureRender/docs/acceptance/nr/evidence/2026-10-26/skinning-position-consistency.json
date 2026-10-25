@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "phase": "NR7-AA1",
+  "status": "affine-position-contract-verified-strict-image-equality-open",
+  "sourceManifest": {
+    "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/source-manifest.json",
+    "bytes": 30126,
+    "sha256": "7672419b26d7b7757778136d7614426b120afa5c605eaccd14d9399ed5cb54aa"
+  },
+  "contract": {
+    "kernel": "azureSkinPosition",
+    "homogeneousW": 1,
+    "instanceLayoutChanges": 0,
+    "descriptorChanges": 0,
+    "positionXYZ": "Weighted affine matrix result; weight rounding remains in XYZ"
+  },
+  "baseline": {
+    "mainChangedPixels": 61,
+    "mainMaximumByteDifference": 10,
+    "independentCharacter": {
+      "changedPixels": 13,
+      "maximumByteDifference": 2
+    },
+    "privateControls": [
+      {
+        "name": "normal-once",
+        "baseline-compute-v3": {
+          "changedPixels": 0,
+          "maximumByteDifference": 0
+        },
+        "baseline-vertex-v3": {
+          "changedPixels": 13,
+          "maximumByteDifference": 2
+        }
+      },
+      {
+        "name": "homogeneous",
+        "baseline-compute-v3": {
+          "changedPixels": 0,
+          "maximumByteDifference": 0
+        },
+        "baseline-vertex-v3": {
+          "changedPixels": 13,
+          "maximumByteDifference": 2
+        }
+      }
+    ]
+  },
+  "tests": {
+    "debug-cpu": {
+      "count": 7,
+      "log": {
+        "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/affine-cpu-debug.log",
+        "bytes": 1142,
+        "sha256": "652c81bbfa5a6b3d33e3389ce2b8a34d14a8c1707b5f29f4736cee14eb90445d"
+      }
+    },
+    "debug-gpu": {
+      "count": 5,
+      "log": {
+        "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/affine-gpu-debug.log",
+        "bytes": 914,
+        "sha256": "6ec455ab831fda89837f11c74b6ae89667345e34631617d5904c5eae17c8b053"
+      }
+    },
+    "release-cpu": {
+      "count": 7,
+      "log": {
+        "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/affine-cpu-release.log",
+        "bytes": 1146,
+        "sha256": "354a367e4a5ffa962bf01e5e1fdb2fc1e71fee69789e1c1507573505d004e9d4"
+      }
+    },
+    "release-gpu": {
+      "count": 5,
+      "log": {
+        "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/affine-gpu-release.log",
+        "bytes": 918,
+        "sha256": "3c47b7913b82199454a987afe840c8907ed22a3ebc6584717633f79b0abb5ac2"
+      }
+    }
+  },
+  "captures": [
+    {
+      "name": "public-debug-compute",
+      "frames": 32,
+      "processSeconds": 75.9539999999979,
+      "playerSha256": "efe9d78de7982b0cfb44902cd1b4c05955f18f4651d622891976aed2a01b64d1",
+      "validationEnabled": true,
+      "imageSha256": "b5bf93e50be44b38ee1f9d22dc878323bc505a90c2dbd097f623e6994439ceda"
+    },
+    {
+      "name": "public-debug-vertex",
+      "frames": 32,
+      "processSeconds": 79.45300000000134,
+      "playerSha256": "efe9d78de7982b0cfb44902cd1b4c05955f18f4651d622891976aed2a01b64d1",
+      "validationEnabled": true,
+      "imageSha256": "b5bf93e50be44b38ee1f9d22dc878323bc505a90c2dbd097f623e6994439ceda"
+    },
+    {
+      "name": "public-release-compute",
+      "frames": 32,
+      "processSeconds": 44.4690000000046,
+      "playerSha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f",
+      "validationEnabled": false,
+      "imageSha256": "b5bf93e50be44b38ee1f9d22dc878323bc505a90c2dbd097f623e6994439ceda"
+    },
+    {
+      "name": "public-release-vertex",
+      "frames": 32,
+      "processSeconds": 45.13999999999942,
+      "playerSha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f",
+      "validationEnabled": false,
+      "imageSha256": "b5bf93e50be44b38ee1f9d22dc878323bc505a90c2dbd097f623e6994439ceda"
+    },
+    {
+      "name": "public-main-compute",
+      "frames": 1,
+      "processSeconds": 217.10899999999674,
+      "playerSha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f",
+      "validationEnabled": false,
+      "imageSha256": "1a5f5698798fa47272dd2a219c4844a1e154117cfde29635df35a160aaab4ec9"
+    },
+    {
+      "name": "public-main-vertex",
+      "frames": 1,
+      "processSeconds": 233.36000000000058,
+      "playerSha256": "d4f8b25cd6d9e29cae7950bcca47233d174a66a7544e591182bc7ef6623ceb6f",
+      "validationEnabled": false,
+      "imageSha256": "88470896bb3e33369c61953fd839dfa6030f105f4a1a6ab2d6116a9efcaf4666"
+    }
+  ],
+  "existingSequenceOutputByteBudget": 1,
+  "exactOutputProbeStatus": "A stricter diagnostic found a one-byte residual at one pixel in frame 23; the diagnostic is retained",
+  "evidence": [
+    {
+      "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/homogeneous-motion-red.log",
+      "bytes": 86,
+      "sha256": "3b3397c8f3bd9a460566f6ffd8f2229d624590ad5717c77caebffb446bf10ae2"
+    },
+    {
+      "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/run_private_diagnosis.py",
+      "bytes": 2520,
+      "sha256": "29a1d522f878983004a2348dc71800034043d34bf37ce994a0158a515ac8bcda"
+    },
+    {
+      "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/verify_public_paths.py",
+      "bytes": 3164,
+      "sha256": "8248c5929a818fc84c94c2794737da748df0ec2320cc5c30112aa0b323e1be65"
+    },
+    {
+      "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/verify_remaining_public_paths.py",
+      "bytes": 3325,
+      "sha256": "4ca82930a67c531ef9d6a4c089f11a4ad99f52cc79a28356ef68433be26dc924"
+    },
+    {
+      "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/public-debug-path-differences.json",
+      "bytes": 3267,
+      "sha256": "09e453e0c936a1f05f412fe153db76490033afde7e349a0fde80cea79d26dbf4"
+    },
+    {
+      "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/public-release-path-differences.json",
+      "bytes": 3267,
+      "sha256": "09e453e0c936a1f05f412fe153db76490033afde7e349a0fde80cea79d26dbf4"
+    },
+    {
+      "path": "build/runs/20261026-063405-skinning-path-equivalence-ddcc46/public-main-path-difference.json",
+      "bytes": 265,
+      "sha256": "012f693eeae1de89a5cb7468e17b8763d44dee0767f1920625426739ce304d1e"
+    }
+  ],
+  "remaining": [
+    "High-frequency temporal material and hair coverage gates",
+    "Complete native character appearance",
+    "Formal 1080p 60 FPS and dual-hardware acceptance",
+    "Strict image equality: one one-byte pixel remains in the main scene and animation frame 23"
+  ],
+  "animatedComparisons": {
+    "debug": {
+      "comparedFrames": 32,
+      "exactFrames": 30,
+      "changedPixelsTotal": 2,
+      "maximumByteDifference": 1
+    },
+    "release": {
+      "comparedFrames": 32,
+      "exactFrames": 30,
+      "changedPixelsTotal": 2,
+      "maximumByteDifference": 1
+    }
+  },
+  "mainPathDifference": {
+    "changedPixels": 1,
+    "maximumByteDifference": 1,
+    "points": [
+      {
+        "x": 63,
+        "y": 185,
+        "compute": [
+          123,
+          121,
+          121
+        ],
+        "vertex": [
+          123,
+          120,
+          121
+        ]
+      }
+    ]
+  }
+}

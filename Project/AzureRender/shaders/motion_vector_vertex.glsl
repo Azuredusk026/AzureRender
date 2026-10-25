@@ -35,7 +35,7 @@ void main(){
     if(!applyAssetMorph(instance.meta.z,vertex,instance.meta.w,p,n,t))p+=morph0*instance.morph.x+morph1*instance.morph.y;
     mat4 skin=mat4(0);
     for(uint i=0u;i<4u;++i)if(jointWeights[i]!=0)skin+=jointWeights[i]*joints.values[instance.meta.x+jointIndices[i]];
-    vec4 shaped=skin*vec4(p,1);
+    vec4 shaped=azureSkinPosition(skin,p);
     vec4 local=motion.gizmo*shaped;
     materialFrameNormal=vec3(0);materialFrameTangent=vec3(0);
     if((motion.flags&512u)==0u&&(floatBitsToUint(motion.detail.y)&azurePixelIntegralFeature)!=0u){
