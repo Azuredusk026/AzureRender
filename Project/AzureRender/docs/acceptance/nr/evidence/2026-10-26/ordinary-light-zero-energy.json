@@ -1,0 +1,561 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "baseCommit": "cf41ce587fe7257a7ac07033f54d429395404038",
+  "status": "zero-energy-public-and-main-parity-checks-passed",
+  "scope": "Exact-zero ordinary-surface optimization; opaque prefill and final joint budget remain gated",
+  "run": "build\\runs\\20261025-211745-main-npr-joint-quality-budget-e0cdf1",
+  "sources": {
+    "CMakeLists.txt": "02152e313aee91ebeae4862a1cadb1974b2da3b4ac9044708be9ae60e6cd0652",
+    "shaders/mesh.frag": "ef0026e991d2a0f4e5db3e70298adeadbde2442c25879017a9168c07d66d4c75",
+    "tools/test_character_local_light_gpu.py": "bfe87303b613a51c223291399ac6c36002dcdc7ce766b1c477bd68210d723dd9"
+  },
+  "checks": {
+    "build-zero-final-debug.log": "44fad1f7450132bea1feb13d030d811ddab4b78f140e496dbcf5341dafe3f43d",
+    "build-zero-final-release.log": "132133d1923eda5c7dc1cceea49b423bd9c11c86ea8bc4b45a44f4e77c9f9ad4",
+    "zero-gpu-debug.log": "409853d4b9e503fd5585fc22a8ac3bb9328ac4208dfebc849039460e48689e6b",
+    "zero-gpu-release.log": "87179f1522af0e8bcd2ac08b1007ee6779c367ded76f2335cdcbf699325e3bfc",
+    "zero-refraction-release-final.log": "5677cdad180b0ac6bf71e199cdcc0a06c16389c72f22fe20685c7f9d52ca0715",
+    "zero-final-spirv-comparison.json": "aa4b5f04d85f259e425d2e2b1ede78eb6d6c2d9ad008da97d0a5250e916e2649",
+    "snapshot-timings.json": "a1d898fc304394b39b0a1340465855899a6ed6bd9acc51d0a99278fcf9fe555c",
+    "main-timings.json": "0533cf2d0215e3378eb0019ddc901355ed619a1e5ff35d7c8514fdb03b4ac803",
+    "hotspot-vertex-comparison.json": "78f778605209de7008ff6d1d1e54092afa5ef0dff152c55aed1edec64dbeb9fb",
+    "hotspot-dossiers.json": "7513f1e985462dd1a2bf9bbb6ffba51bf4bdf26f8eaa3964b0b2a14c5b2703c8",
+    "engine-renderdoc/player.log": "e1827abcce2e7d6ddb5e466290e26b9084d4b1871c0999366a50801e248606e0"
+  },
+  "fixtures": {
+    "zero-lights-debug-final": {
+      "cases": 33,
+      "receiptSha256": "bfaac62d08eaf7a0e8415303ef01fdaa74531f2f44d62506e90f84373b0f5576",
+      "maximumLinearError": 0.0009804369489416487
+    },
+    "zero-lights-release-v2": {
+      "cases": 33,
+      "receiptSha256": "43cf40c2aaa08c69cf124cf00521a19e45bcfd310d5d20ade0553df3241a33b5",
+      "maximumLinearError": 0.0009804369489416487
+    }
+  },
+  "mainImageParity": {
+    "status": "passed",
+    "maximumByteError": 0,
+    "changedPixels": 0,
+    "meanByteError": 0.0,
+    "imageSha256": "b2108cfa08cdd69c5f930422196f3f37b6766c7d78104bdedfe500d38853301a"
+  },
+  "finalSpirvComparison": {
+    "debug": {
+      "matching": 24,
+      "differences": []
+    },
+    "release": {
+      "matching": 24,
+      "differences": []
+    }
+  },
+  "measurements": {
+    "final-1080p-aa1": {
+      "schemaVersion": 1,
+      "mode": 1,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 439,
+        "liveBuffers": 820,
+        "liveImages": 439,
+        "bufferBytes": 2672395808,
+        "imageBytes": 2685131264,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 2685131264,
+        "deviceLocalPeakBytes": 3145782400
+      },
+      "snapshotMultisampleAllocatedBytes": 0,
+      "shadowMs": {
+        "mean": 4.172088400000001,
+        "p50": 4.167968,
+        "p95": 4.4310976,
+        "maximum": 4.48272
+      },
+      "sceneMs": {
+        "mean": 95.6418176,
+        "p50": 95.6416,
+        "p95": 96.2330112,
+        "maximum": 96.433152
+      },
+      "postProcessMs": {
+        "mean": 0.2125184,
+        "p50": 0.205824,
+        "p95": 0.2151424,
+        "maximum": 0.4096
+      },
+      "frameMs": {
+        "mean": 100.02642440000001,
+        "p50": 100.04464,
+        "p95": 100.6336752,
+        "maximum": 100.871424
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "final-1080p-aa4": {
+      "schemaVersion": 1,
+      "mode": 4,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 451,
+        "liveBuffers": 820,
+        "liveImages": 451,
+        "bufferBytes": 2672395808,
+        "imageBytes": 3232193024,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 3232193024,
+        "deviceLocalPeakBytes": 3692844160
+      },
+      "snapshotMultisampleAllocatedBytes": 267386880,
+      "shadowMs": {
+        "mean": 4.2166712,
+        "p50": 4.217792,
+        "p95": 4.4723696,
+        "maximum": 4.517024
+      },
+      "sceneMs": {
+        "mean": 375.5295744,
+        "p50": 370.41920000000005,
+        "p95": 391.3163264,
+        "maximum": 479.132672
+      },
+      "postProcessMs": {
+        "mean": 0.4232448,
+        "p50": 0.420352,
+        "p95": 0.436224,
+        "maximum": 0.68608
+      },
+      "frameMs": {
+        "mean": 380.1694904,
+        "p50": 375.120048,
+        "p95": 395.9213952,
+        "maximum": 483.157952
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "ssr-off-v2-1080p-aa1": {
+      "schemaVersion": 1,
+      "mode": 1,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 439,
+        "liveBuffers": 820,
+        "liveImages": 439,
+        "bufferBytes": 2672395808,
+        "imageBytes": 2685131264,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 2685131264,
+        "deviceLocalPeakBytes": 3145782400
+      },
+      "snapshotMultisampleAllocatedBytes": 0,
+      "shadowMs": {
+        "mean": 4.0588576000000005,
+        "p50": 4.156736,
+        "p95": 4.38396,
+        "maximum": 4.453088
+      },
+      "sceneMs": {
+        "mean": 68.19776,
+        "p50": 68.180992,
+        "p95": 68.57047039999999,
+        "maximum": 68.686848
+      },
+      "postProcessMs": {
+        "mean": 0.20760319999999996,
+        "p50": 0.203776,
+        "p95": 0.2150912,
+        "maximum": 0.418816
+      },
+      "frameMs": {
+        "mean": 72.46422079999999,
+        "p50": 72.501888,
+        "p95": 72.87180000000001,
+        "maximum": 73.045952
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "ssr-off-v2-1080p-aa4": {
+      "schemaVersion": 1,
+      "mode": 4,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 451,
+        "liveBuffers": 820,
+        "liveImages": 451,
+        "bufferBytes": 2672395808,
+        "imageBytes": 3232193024,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 3232193024,
+        "deviceLocalPeakBytes": 3692844160
+      },
+      "snapshotMultisampleAllocatedBytes": 267386880,
+      "shadowMs": {
+        "mean": 4.5588172,
+        "p50": 4.31448,
+        "p95": 4.6576912,
+        "maximum": 24.259648
+      },
+      "sceneMs": {
+        "mean": 298.74483200000003,
+        "p50": 298.046464,
+        "p95": 308.97402880000004,
+        "maximum": 466.62656
+      },
+      "postProcessMs": {
+        "mean": 0.42979839999999997,
+        "p50": 0.420352,
+        "p95": 0.47416319999999984,
+        "maximum": 0.647168
+      },
+      "frameMs": {
+        "mean": 303.7334476,
+        "p50": 302.736096,
+        "p95": 313.75237119999997,
+        "maximum": 491.440192
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "ssr-off-shadow1-1080p-aa1": {
+      "schemaVersion": 1,
+      "mode": 1,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 439,
+        "liveBuffers": 820,
+        "liveImages": 439,
+        "bufferBytes": 2672395808,
+        "imageBytes": 2685131264,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 2685131264,
+        "deviceLocalPeakBytes": 3145782400
+      },
+      "snapshotMultisampleAllocatedBytes": 0,
+      "shadowMs": {
+        "mean": 3.6567459999999996,
+        "p50": 3.604048,
+        "p95": 3.8939008,
+        "maximum": 4.554496
+      },
+      "sceneMs": {
+        "mean": 49.903487999999996,
+        "p50": 49.604608,
+        "p95": 49.9186688,
+        "maximum": 63.03744
+      },
+      "postProcessMs": {
+        "mean": 0.20619520000000002,
+        "p50": 0.201728,
+        "p95": 0.20992,
+        "maximum": 0.410624
+      },
+      "frameMs": {
+        "mean": 53.76642919999999,
+        "p50": 53.415152,
+        "p95": 53.8044336,
+        "maximum": 67.840768
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "ssr-off-shadow1-1080p-aa4": {
+      "schemaVersion": 1,
+      "mode": 4,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 451,
+        "liveBuffers": 820,
+        "liveImages": 451,
+        "bufferBytes": 2672395808,
+        "imageBytes": 3232193024,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 3232193024,
+        "deviceLocalPeakBytes": 3692844160
+      },
+      "snapshotMultisampleAllocatedBytes": 267386880,
+      "shadowMs": {
+        "mean": 4.9005216,
+        "p50": 4.360384,
+        "p95": 4.737110399999999,
+        "maximum": 25.408096
+      },
+      "sceneMs": {
+        "mean": 247.8883456,
+        "p50": 244.143104,
+        "p95": 254.7175424,
+        "maximum": 463.960064
+      },
+      "postProcessMs": {
+        "mean": 0.4325888000000001,
+        "p50": 0.421888,
+        "p95": 0.5138944,
+        "maximum": 0.630784
+      },
+      "frameMs": {
+        "mean": 253.221456,
+        "p50": 248.912688,
+        "p95": 259.67112319999995,
+        "maximum": 489.913952
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "optimized-fragment-1080p-aa1": {
+      "schemaVersion": 1,
+      "mode": 1,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 439,
+        "liveBuffers": 820,
+        "liveImages": 439,
+        "bufferBytes": 2672395808,
+        "imageBytes": 2685131264,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 2685131264,
+        "deviceLocalPeakBytes": 3145782400
+      },
+      "snapshotMultisampleAllocatedBytes": 0,
+      "shadowMs": {
+        "mean": 4.1231516,
+        "p50": 4.148192,
+        "p95": 4.3902992,
+        "maximum": 4.416384
+      },
+      "sceneMs": {
+        "mean": 95.231552,
+        "p50": 94.622208,
+        "p95": 98.81758719999999,
+        "maximum": 99.499008
+      },
+      "postProcessMs": {
+        "mean": 0.20779519999999999,
+        "p50": 0.206848,
+        "p95": 0.2140672,
+        "maximum": 0.219136
+      },
+      "frameMs": {
+        "mean": 99.5624988,
+        "p50": 98.996832,
+        "p95": 103.170744,
+        "maximum": 103.811936
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "optimized-fragment-1080p-aa4": {
+      "schemaVersion": 1,
+      "mode": 4,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 451,
+        "liveBuffers": 820,
+        "liveImages": 451,
+        "bufferBytes": 2672395808,
+        "imageBytes": 3232193024,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 3232193024,
+        "deviceLocalPeakBytes": 3692844160
+      },
+      "snapshotMultisampleAllocatedBytes": 267386880,
+      "shadowMs": {
+        "mean": 4.861185600000001,
+        "p50": 4.258512,
+        "p95": 4.5678896,
+        "maximum": 28.646656
+      },
+      "sceneMs": {
+        "mean": 375.4148096,
+        "p50": 370.522624,
+        "p95": 395.0196224,
+        "maximum": 606.930944
+      },
+      "postProcessMs": {
+        "mean": 0.4313472000000001,
+        "p50": 0.422912,
+        "p95": 0.4721664,
+        "maximum": 0.64512
+      },
+      "frameMs": {
+        "mean": 380.7073424,
+        "p50": 375.143584,
+        "p95": 399.7488112,
+        "maximum": 636.141824
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "zero-attenuation-1080p-aa1": {
+      "schemaVersion": 1,
+      "mode": 1,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 439,
+        "liveBuffers": 820,
+        "liveImages": 439,
+        "bufferBytes": 2672395808,
+        "imageBytes": 2685131264,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 2685131264,
+        "deviceLocalPeakBytes": 3145782400
+      },
+      "snapshotMultisampleAllocatedBytes": 0,
+      "shadowMs": {
+        "mean": 4.0593168,
+        "p50": 4.140816,
+        "p95": 4.3690448,
+        "maximum": 4.466592
+      },
+      "sceneMs": {
+        "mean": 89.3982464,
+        "p50": 89.40390400000001,
+        "p95": 89.84294399999999,
+        "maximum": 90.153984
+      },
+      "postProcessMs": {
+        "mean": 0.20752640000000003,
+        "p50": 0.205824,
+        "p95": 0.21504,
+        "maximum": 0.221184
+      },
+      "frameMs": {
+        "mean": 93.6650896,
+        "p50": 93.676208,
+        "p95": 94.1903856,
+        "maximum": 94.472512
+      },
+      "passes60FpsGpuBudget": false
+    },
+    "zero-attenuation-1080p-aa4": {
+      "schemaVersion": 1,
+      "mode": 4,
+      "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "frames": 96,
+      "warmupFrames": 16,
+      "steadyFrames": 80,
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "allocator": {
+        "bufferAllocations": 2027,
+        "imageAllocations": 451,
+        "liveBuffers": 820,
+        "liveImages": 451,
+        "bufferBytes": 2672395808,
+        "imageBytes": 3232193024,
+        "liveBufferBytes": 250791792,
+        "liveImageBytes": 3232193024,
+        "deviceLocalPeakBytes": 3692844160
+      },
+      "snapshotMultisampleAllocatedBytes": 267386880,
+      "shadowMs": {
+        "mean": 4.8448112000000005,
+        "p50": 4.240304,
+        "p95": 4.6372896,
+        "maximum": 27.9376
+      },
+      "sceneMs": {
+        "mean": 355.2104576,
+        "p50": 350.004736,
+        "p95": 372.89482239999995,
+        "maximum": 534.315008
+      },
+      "postProcessMs": {
+        "mean": 0.4396416,
+        "p50": 0.423424,
+        "p95": 0.5640191999999997,
+        "maximum": 0.66048
+      },
+      "frameMs": {
+        "mean": 360.49491040000004,
+        "p50": 354.668944,
+        "p95": 377.9577248,
+        "maximum": 562.812736
+      },
+      "passes60FpsGpuBudget": false
+    }
+  },
+  "releaseRegistrationRepair": {
+    "priorFailure": "CTest omitted the expected validation-layer configuration",
+    "currentRule": "Debug enabled; Release disabled; image and unload gates unchanged",
+    "passedFollowup": "zero-refraction-release-final.log"
+  },
+  "profiling": {
+    "capture": "build\\runs\\20261025-211745-main-npr-joint-quality-budget-e0cdf1\\engine-renderdoc\\engine-main_frame450.rdc",
+    "api": "Vulkan",
+    "frame": 450,
+    "snapshotEventRange": [
+      9683,
+      10616
+    ],
+    "snapshotGpuMs": 144.037888,
+    "mainEventRange": [
+      11436,
+      13262
+    ],
+    "mainGpuMs": 235.648896,
+    "hotspotEvents": [
+      9863,
+      11664
+    ],
+    "hotspotIndexCount": 16857,
+    "matchingSourceFirstVertexErrorMetres": 0
+  },
+  "additionalFullDebugHeadCapture": {
+    "result": {
+      "status": "passed",
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "meanByteError": 0.0,
+      "imageSha256": "0ca086c1f4d62edf4c667b22f93d90b8eb78b61b04e803efc27f66a615839c8c"
+    },
+    "validationEnabled": true,
+    "rasterizationSamples": 4,
+    "receiptSha256": "b2647d39070204ebe71047dada38a34ee7aabe0320e8185845855a68616856f4",
+    "logSha256": "deb2734f844143ee972a36a6f1dbd72b4f1dc321c24cd024c8f42c8488531b95"
+  },
+  "limitations": [
+    "Full-scene 1080p 60fps budget remains failed",
+    "Native full appearance and continuous detail remain gated",
+    "Independent optimized-SPIRV experiment provided no useful timing gain"
+  ]
+}

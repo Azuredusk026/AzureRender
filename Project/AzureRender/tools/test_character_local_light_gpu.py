@@ -29,7 +29,8 @@ def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
     names=('front','side','back','compressed','uncompressed','two-lights','fixed','disabled-scene-npr','no-receiver','pbr','pbr-control','upper-light','lower-light',
         'line-light','line-zero','line-zero-range','line-axis-x','line-axis-y','line-fixed','line-range','line-pbr','line-pbr-control','offset-camera',
-        'wrap-identity','wrap-zero','wrap-double','wrap-four','wrap-fixed','wrap-document')
+        'wrap-identity','wrap-zero','wrap-double','wrap-four','wrap-fixed','wrap-document',
+        'pbr-zero-box','pbr-zero-box-fixed','pbr-zero-box-control','pbr-positive-box')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]};frames={}
@@ -72,6 +73,11 @@ def run(player,output,selected=None,expected_validation=None):
                 if name!='line-pbr-control':light['shape']['characterResponse'].update(schemaVersion=2,linearLength=0 if name.startswith('line-zero') else 4)
                 if name=='line-axis-y':level['nodes'][2]['components']['azure.transform']['data']['rotation']=[0,0,90]
             if name=='no-receiver':light['shape']['receivers']={'schemaVersion':1,'surfaces':True,'characters':False}
+            if name.startswith('pbr-zero-box') or name=='pbr-positive-box':
+                light['shape']['influenceBox']={'enabled':True,'falloffThreshold':1,
+                    'worldToBox':[[.25,0,0,-5 if name in ('pbr-zero-box','pbr-zero-box-fixed') else 0],
+                                  [0,.25,0,0],[0,0,.25,0]]}
+                if name=='pbr-zero-box-control':light['shape']['receivers']={'schemaVersion':1,'surfaces':False,'characters':True}
             if name=='two-lights':
                 fill=copy.deepcopy(light);fill.update(id='fill',intensity=.25);level['lights'].append(fill)
             level['renderSettings']['nprLighting']={'schemaVersion':1,'enabled':name!='disabled-scene-npr','ambientColor':[0,0,0],
@@ -92,7 +98,7 @@ def run(player,output,selected=None,expected_validation=None):
                 path.write_text(json.dumps(level),encoding='utf-8')
             command=[str(player.resolve()),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128',
                 '--capture-dir',str(folder/'frames'),'--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--qa-isolation','direct-diffuse']
-            if name in ('fixed','line-fixed','wrap-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+            if name in ('fixed','line-fixed','wrap-fixed','pbr-zero-box-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             (folder/'command.json').write_text(json.dumps(command,indent=2),encoding='utf-8')
             with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace');assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
@@ -104,7 +110,8 @@ def run(player,output,selected=None,expected_validation=None):
             pixel_x=80 if name in ('line-axis-x','line-axis-y') else 64
             if name=='offset-camera':pixel_x=pixel_y=96
             measured=linear(pixels[pixel_y,pixel_x]);expected=None;error=None
-            if name.startswith('pbr') or name.startswith('line-pbr'):assert max(measured)>.015,'PBR unchanged-path control must remain visibly lit'
+            if name.startswith('pbr-zero-box'):assert max(measured)==0,'Zero-contribution ordinary surfaces must remain exactly black'
+            elif name.startswith('pbr') or name.startswith('line-pbr'):assert max(measured)>.015,'PBR unchanged-path control must remain visibly lit'
             if not (name.startswith('pbr') or name.startswith('line-pbr')):
                 delta=np.asarray(position)-[(pixel_x+.5)/128*8-4,4-(pixel_y+.5)/128*8,0];distance=np.linalg.norm(delta);cosine=delta[2]/distance
                 if name=='offset-camera':
@@ -136,6 +143,11 @@ def run(player,output,selected=None,expected_validation=None):
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
         for a,b in [('back','wrap-identity'),('wrap-double','wrap-fixed'),('wrap-double','wrap-document')]:
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
+        for a,b in [('pbr-zero-box','pbr-zero-box-control'),('pbr-zero-box','pbr-zero-box-fixed'),('pbr','pbr-positive-box')]:
+            if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
+        if 'pbr-zero-box' in frames and 'pbr-positive-box' in frames:
+            assert np.max(frames['pbr-zero-box'][64,64])==0,'Zero box contribution must be exactly black'
+            assert np.max(frames['pbr-positive-box'][64,64])>5,'Positive box control must retain ordinary lighting'
         if all(name in frames for name in ['wrap-zero','wrap-identity','wrap-double','wrap-four']):
             values=[frames[name][64,64].sum() for name in ['wrap-zero','wrap-identity','wrap-double','wrap-four']]
             assert all(b>a+5 for a,b in zip(values,values[1:])),values

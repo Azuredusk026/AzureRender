@@ -1027,6 +1027,9 @@ void main() {
         }
         if((screenRim||specularOnly)&&(!characterLightComposition||material.alphaMode==2))continue;
         SceneLightSample sampled=sampleSceneLight(light,worldPosition,false);
+        // Exact zero incident energy has no ordinary-surface BRDF contribution.
+        // Character composition keeps its material-frame and main-light state.
+        if(!sceneCharacter&&!characterLightComposition&&sampled.attenuation==0.0)continue;
         vec3 toLight=sampled.incoming,pointDirection=sampled.direction;
         float distanceSquared=sampled.distanceSquared,attenuation=sampled.attenuation;
         vec3 localLightingNormal=dualFaceSdf && light.coneType.y<=1.5
