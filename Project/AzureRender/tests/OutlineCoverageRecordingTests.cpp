@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "rhi/NullRhi.hpp"
 #include <array>
@@ -86,8 +87,9 @@ public:
 
 enum class Kind {Explicit,Legacy,Fading,Hidden,Blend,Platform,Mixed,DoubleSided,Mirrored,GizmoMirrored,CullingDisabled,HiddenExplicitLegacy,
     Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,ColorOnly};
-void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool compute){
+void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool compute,bool multisample=false){
     rhi::NullRhi backend;
+    if(multisample){backend.supportedSamples=VK_SAMPLE_COUNT_1_BIT|VK_SAMPLE_COUNT_4_BIT;backend.sampleShadingSupported=true;}
     CharacterSceneRenderer renderer;
     RenderSettings settings;
     settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;
@@ -101,6 +103,8 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     context.renderExtent=context.swapchainExtent={256,192};context.cullingEnabled=false;
     context.bindlessTextures=bindless;context.computeSkinning=compute;context.renderSettings=&settings;
     context.sceneWorldCoordinates=true;
+    context.rasterizationSamples=multisample?VK_SAMPLE_COUNT_4_BIT:VK_SAMPLE_COUNT_1_BIT;
+    context.depthFormat=VK_FORMAT_D32_SFLOAT;
     context.faceCullingEnabled=kind!=Kind::CullingDisabled;
     auto& limits=context.descriptorLimits;limits.maxImageDimension2D=4096;
     limits.maxPerStageDescriptorSamplers=limits.maxDescriptorSetSamplers=4096;
@@ -185,7 +189,17 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     for(const auto& pass:graph.passes())if(pass.name=="character-opaque-depth")capture.opaqueDepthPass=pass.renderPass.renderPass;
     require(capture.depthShellPipelines.size()==(projection?2U:0U),"Only projection materials allocate depth shell pipelines");
     const bool masks=kind!=Kind::Legacy&&kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::HiddenExplicitLegacy&&kind!=Kind::DepthOnly;
-    require(maskPasses==unsigned(masks),"Explicit opaque silhouettes and fading instances require a mask pass");
+    if(multisample){
+        for(const auto pass:{capture.opaqueDepthPass,capture.maskPass}){
+            bool sampled=false;
+            for(const auto& call:backend.calls)if(call.name=="createRenderPass"&&std::stoull(call.detail.substr(0,call.detail.find(' ')),nullptr,16)==handleValue(pass))
+                sampled=call.detail.find(" samples=4")!=std::string::npos;
+            require(sampled,"Snapshot and outline coverage passes must match the four-sample scene");
+        }
+        require(std::any_of(graph.passes().begin(),graph.passes().end(),[](const auto& pass){return pass.name=="character-opaque-resolve";}),
+            "Snapshot colors and nearest depth require a shared resolve producer");
+    }
+    require(maskPasses==unsigned(masks||multisample),"Explicit opaque silhouettes and fading instances require a mask pass");
     std::string error;require(graph.compile(error),"Fixture render graph must compile");graph.execute(&capture);
     const bool visible=kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::DepthOnly;
     const unsigned instances=kind==Kind::ProjectedMixed?4:2;
@@ -251,10 +265,10 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
 }
 int main(int argc,char** argv){try{
     require(argc==2,"Expected compiled shader directory");
-    for(bool bindless:{false,true})for(bool compute:{false,true})
+    for(bool multisample:{false,true})for(bool bindless:{false,true})for(bool compute:{false,true})
         for(auto kind:{Kind::Explicit,Kind::Legacy,Kind::Fading,Kind::Hidden,Kind::Blend,Kind::Platform,Kind::Mixed,
                 Kind::DoubleSided,Kind::Mirrored,Kind::GizmoMirrored,Kind::CullingDisabled,Kind::HiddenExplicitLegacy,
                 Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::ColorOnly})
-            verify(argv[1],kind,bindless,compute);
+            verify(argv[1],kind,bindless,compute,multisample);
     std::cout<<"Explicit silhouettes retain independent coverage and legacy batching\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

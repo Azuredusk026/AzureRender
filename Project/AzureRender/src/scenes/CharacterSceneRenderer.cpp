@@ -1220,17 +1220,28 @@ void CharacterSceneRenderer::registerPasses(
     rhi::ImageBarrierDesc overlayInitial{};overlayInitial.image=overlaySceneDepth_[context.currentFrame].image.image;
     overlayInitial.newLayout=VK_IMAGE_LAYOUT_UNDEFINED;
     const auto overlayDepth=graph.importImage("character-overlay-depth",overlayInitial);
-    rhi::RenderPassBeginDesc overlayBegin{};overlayBegin.renderPass=overlayDepthPass_;
-    overlayBegin.framebuffer=overlayDepthFramebuffers_[context.currentFrame];overlayBegin.extent=context.renderExtent;
+    rhi::RenderPassBeginDesc overlayBegin{};overlayBegin.renderPass=snapshotPass();
+    overlayBegin.framebuffer=snapshotFramebuffer(context.currentFrame);overlayBegin.extent=context.renderExtent;
     VkClearValue linearClear{};linearClear.color.float32[0]=100000;VkClearValue depthClear{};depthClear.depthStencil={1,0};
-    VkClearValue colorClear{};overlayBegin.clearValues={colorClear,linearClear,depthClear};
+    VkClearValue colorClear{};overlayBegin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{colorClear,depthClear,linearClear}:std::vector<VkClearValue>{colorClear,linearClear,depthClear};
+    std::array<RenderGraph::ResourceId,3> snapshotSources{};
+    if(snapshotMultisampling_)snapshotSources=snapshotMultisampling_->importSources(graph,context.currentFrame,"character-opaque-source");
     const auto prepass=graph.addGraphicsPass("character-opaque-depth",overlayBegin,[this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
         recordOverlayDepth(*frozenContext,*frozenInstances,commands);
     });
-    graph.attachment(prepass,overlayDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+
     rhi::ImageBarrierDesc snapshotState{};snapshotState.image=opaqueSceneColor_[context.currentFrame].image.image;
     const auto snapshotColor=graph.importImage("character-opaque-color",snapshotState);
-    graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    if(snapshotMultisampling_){
+        for(unsigned i=0;i<3;++i)graph.attachment(prepass,snapshotSources[i],i==1?RenderGraphUsage::DepthAttachment:RenderGraphUsage::ColorAttachment,
+            i==1?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        rhi::ImageBarrierDesc depthState{};depthState.image=overlayDepthAttachments_[context.currentFrame].image;depthState.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+        const auto snapshotDepth=graph.importImage("character-opaque-hardware-depth",depthState);
+        snapshotMultisampling_->schedule(graph,context.currentFrame,context.currentFrame,snapshotSources,{snapshotColor,snapshotDepth,overlayDepth},"character-opaque-resolve");
+    }else{
+        graph.attachment(prepass,overlayDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
     graph.use(prepass,resources.shadow,RenderGraphUsage::Sampled,false);
     graph.use(prepass,jointResource,RenderGraphUsage::VertexStorage,false);
     graph.use(prepass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
@@ -1385,9 +1396,10 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->depthBoundsBytes(),VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     if(objectShadowPrepared_)context.commands->bufferBarrier({bounds->buffer().buffer,bounds->objectRecordsOffset(),bounds->buffer().size-bounds->objectRecordsOffset(),
         VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
-    rhi::RenderPassBeginDesc begin{};begin.renderPass=overlayDepthPass_;begin.framebuffer=overlayDepthFramebuffers_[context.currentFrame];begin.extent=context.renderExtent;
-    VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues={color,linear,depth};
+    rhi::RenderPassBeginDesc begin{};begin.renderPass=snapshotPass();begin.framebuffer=snapshotFramebuffer(context.currentFrame);begin.extent=context.renderExtent;
+    VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{color,depth,linear}:std::vector<VkClearValue>{color,linear,depth};
     context.commands->beginRenderPass(begin);recordOverlayDepth(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
+    if(snapshotMultisampling_)snapshotMultisampling_->recordResolve(*context.commands,context.currentFrame,context.currentFrame);
     if(instanceSnapshot_->buffers.outlineMaskImage){
         rhi::RenderPassBeginDesc mask{};mask.renderPass=outlineMaskPass_;
         mask.framebuffer=instanceSnapshot_->buffers.outlineMaskFramebuffer;mask.extent=instanceSnapshot_->buffers.outlineMaskExtent;
@@ -1496,6 +1508,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
          << "  \"outlineProjectionLayoutVersion\": " << PackedOutlineProjectionRecord::kLayoutVersion << ",\n"
+         << "  \"snapshotRasterizationSamples\": " << (snapshotMultisampling_?4:1) << ",\n"
+         << "  \"snapshotMultisampleBytes\": " << (snapshotMultisampling_?snapshotMultisampling_->byteSize():0) << ",\n"
+         << "  \"snapshotMultisampleAllocatedBytes\": " << (snapshotMultisampling_?snapshotMultisampling_->allocatedByteSize():0) << ",\n"
+         << "  \"outlineMaskSamples\": " << rasterizationSamples_ << ",\n"
          << "  \"outlineProjectionBytes\": " << (outlineProjection_?outlineProjection_->buffer().size:0) << ",\n"
          << "  \"outlineProjectionMaterials\": " << (outlineProjection_?outlineProjection_->recordCount():0) << ",\n"
          << "  \"outlineProjectionCoordinates\": " << (outlineProjection_?outlineProjection_->coordinateCount():0) << ",\n"
@@ -2310,10 +2326,12 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
 }
 
 void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
+    rasterizationSamples_=context.rasterizationSamples;
     outlineMaskViewExtent_=context.renderExtent;
     outlineMaskMaxDimension_=context.descriptorLimits.maxImageDimension2D;
     rhi::RenderPassDesc maskPass;
     maskPass.attachments={{VK_FORMAT_R8_UNORM,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false}};
+    maskPass.attachments[0].samples=context.rasterizationSamples;
     maskPass.externalReadDependency=true;
     outlineMaskPass_=rhi_->createRenderPass(maskPass);
     rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
@@ -2333,8 +2351,17 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
         overlayDepthViews_[frame]=rhi_->createImageView(depth.image,context.depthFormat,VK_IMAGE_ASPECT_DEPTH_BIT,1);
         overlayDepthFramebuffers_[frame]=rhi_->createFramebuffer({overlayDepthPass_,{color.view,target.view,overlayDepthViews_[frame]},context.renderExtent.width,context.renderExtent.height});
     }
+    if(context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT){
+        std::vector<SceneMultisampleDestination> destinations;
+        for(unsigned frame=0;frame<kMaxFramesInFlight;++frame)
+            destinations.push_back({{opaqueSceneColor_[frame].image.image,overlayDepthAttachments_[frame].image,overlaySceneDepth_[frame].image.image},
+                {opaqueSceneColor_[frame].view,overlayDepthViews_[frame],overlaySceneDepth_[frame].view}});
+        snapshotMultisampling_=std::make_unique<SceneMultisampling>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,VK_FORMAT_R32_SFLOAT,
+            SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_);
+    }
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
+    snapshotMultisampling_.reset();
     for(std::size_t i=0;i<kMaxFramesInFlight;++i){
         if(outlineMaskFramebuffers_[i])rhi_->destroyFramebuffer(outlineMaskFramebuffers_[i]);outlineMaskFramebuffers_[i]=VK_NULL_HANDLE;
         auto& mask=outlineMasks_[i];if(mask.view)rhi_->destroyImageView(mask.view);allocator_->destroyImage(mask.image);mask={};
@@ -2368,8 +2395,10 @@ void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::
         }
         if(needed)masked.push_back(instance.sourceIndex);
     }
-    const auto layout=makeOutlineMaskLayout(sceneInstances_.size(),masked,
-        outlineMaskViewExtent_.width,outlineMaskViewExtent_.height,outlineMaskMaxDimension_);
+    auto layout=makeOutlineMaskLayout(sceneInstances_.size(),masked,
+        outlineMaskViewExtent_.width,outlineMaskViewExtent_.height,outlineMaskMaxDimension_,128ULL*1024*1024/rasterizationSamples_);
+    // Multisample shader descriptors always receive a matching image type.
+    if(!layout.width&&rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT)layout.width=layout.height=1;
     auto& mask=outlineMasks_[currentFrame_];
     if(mask.image.width!=layout.width||mask.image.height!=layout.height){
         // updateFrame runs only after this frame slot's fence has retired.
@@ -2378,11 +2407,15 @@ void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::
         if(mask.view)rhi_->destroyImageView(mask.view);
         allocator_->destroyImage(mask.image);mask={};
         if(layout.width){
-            mask.image=allocator_->createImage2D(layout.width,layout.height,VK_FORMAT_R8_UNORM,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
+            VkImageCreateInfo image{VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO};image.imageType=VK_IMAGE_TYPE_2D;
+            image.extent={layout.width,layout.height,1};image.format=VK_FORMAT_R8_UNORM;image.mipLevels=image.arrayLayers=1;
+            image.samples=rasterizationSamples_;image.tiling=VK_IMAGE_TILING_OPTIMAL;
+            image.usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;
+            mask.image=allocator_->createImage(image,false);
             mask.view=rhi_->createImageView(mask.image.image,VK_FORMAT_R8_UNORM,VK_IMAGE_ASPECT_COLOR_BIT,1);
             outlineMaskFramebuffers_[currentFrame_]=rhi_->createFramebuffer({outlineMaskPass_,{mask.view},layout.width,layout.height});
             RuntimeDiagnostics::instance().info("render","Outline mask allocated: frame="+std::to_string(currentFrame_)
-                +", instances="+std::to_string(masked.size())+", bytes="+std::to_string(std::uint64_t{layout.width}*layout.height));
+                +", instances="+std::to_string(masked.size())+", bytes="+std::to_string(std::uint64_t{layout.width}*layout.height*rasterizationSamples_));
         }
     }
     const auto& fallback=gpuMaterials_[0].baseColor;
@@ -3068,9 +3101,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         opaqueMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
-        auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_ + (objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv"))));
-        auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=overlayDepthPass_;
-        depthDesc.colorAttachmentCount=2;depthDesc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;depthDesc.minSampleShading=0;
+        auto depthModule=rhi_->createShaderModule(mainFragment((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv"))));
+        auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
+        depthDesc.colorAttachmentCount=2;
         overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);
         depthDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
         overlayDepthMirroredPipeline_=rhi_->createGraphicsPipeline(depthDesc);
@@ -3101,10 +3134,10 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         auto tintDesc=materialDesc;
         sceneTintPipeline_=rhi_->createGraphicsPipeline(tintDesc);
 
-        const auto maskModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
+        const auto maskModule=rhi_->createShaderModule(mainFragment((bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
         const auto maskVertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv")));
         auto maskDesc=materialDesc;maskDesc.fragmentShader=maskModule;maskDesc.renderPass=outlineMaskPass_;
-        maskDesc.vertexShader=maskVertex;maskDesc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;maskDesc.minSampleShading=0;
+        maskDesc.vertexShader=maskVertex;
         maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;
         maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
         maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
@@ -3126,12 +3159,11 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         outlineDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         outlineMirroredPipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
         if(outlineProjectionEnabled_) {
-            const auto depthModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory+
+            const auto depthModule=rhi_->createShaderModule(mainFragment(
                 (bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv")));
             try {
                 auto shell=outlineDesc;shell.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
-                shell.fragmentShader=depthModule;shell.renderPass=overlayDepthPass_;
-                shell.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;shell.minSampleShading=0;
+                shell.fragmentShader=depthModule;shell.renderPass=snapshotPass();
                 shell.depthTest=true;shell.depthWrite=true;shell.depthCompare=VK_COMPARE_OP_LESS;
                 shell.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
                 outlineDepthPipeline_=rhi_->createGraphicsPipeline(shell);

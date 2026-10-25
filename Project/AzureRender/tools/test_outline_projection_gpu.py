@@ -59,17 +59,24 @@ def reference_bounds(positions,size,distance,fov,width):
     return np.array([pixels[:,0].min(),pixels[:,0].max()])
 
 
-def run(player,output,selected=None,validation=None):
+def run(player,output,selected=None,validation=None,quality="existing"):
     names=['wide','zero','mask-zero','mask-half','fixed','document','uv1-zero','uv1-tilt','depth-only',
            'masked-clear','hidden','near','far','narrow-fov','resize','depth-positive','depth-negative',
            'two-assets','two-assets-fixed','uv1-mirror','fading','near-plane','morph','translated',
            'octahedral-forward','octahedral-back','color-only',
            'minimum-supersample','minimum-supersample-fixed','minimum-reference',
            'minimum-temporal','minimum-temporal-far','minimum-reference-far']
+    if quality=='multisample' and selected is None:
+        # Solid-red occupancy and exact mirrored pixels belong to the original
+        # single-sample controls. Multisample coverage uses independent linear
+        # energy references at near and far distances, plus empty-shell controls.
+        selected=['zero','mask-zero','depth-only','masked-clear','hidden',
+            'minimum-supersample','minimum-supersample-fixed','minimum-reference',
+            'minimum-temporal-far','minimum-reference-far']
     if selected:
         assert set(selected)<=set(names);names=[name for name in names if name in selected]
     output.mkdir(parents=True,exist_ok=False);digest=hashlib.sha256(player.read_bytes()).hexdigest()
-    frames={};rows=[];report=dict(schemaVersion=1,status='running',playerSha256=digest,captures=rows,
+    frames={};rows=[];report=dict(schemaVersion=1,status='running',qualityMode=quality,playerSha256=digest,captures=rows,
         scope='Public color, coverage and lifecycle controls; raw depth and native rim are separate acceptance evidence.')
     try:
         for name in names:
@@ -157,6 +164,8 @@ def run(player,output,selected=None,validation=None):
             command=[str(player),'--project',str(folder/'lab.azureproject'),'--width',str(size),'--height',str(size),
                 '--capture-dir',str(folder/'frames'),'--capture-frames',str(capture_count),'--fixed-frame-step','--qa-camera','scene','--qa-light','scene',
                 '--runtime-report',str(folder/'runtime.json'),'--set','render.features.showcase-platform=false','--set','render.features.face-sdf=false']
+            sampled=quality=='multisample' and not name.startswith('minimum-reference')
+            if sampled:command+=['--set','render.antiAliasing=4']
             if name in ['fixed','two-assets-fixed','minimum-supersample-fixed']:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             with (folder/'player.log').open('w',encoding='utf-8') as log:
                 subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
@@ -166,6 +175,9 @@ def run(player,output,selected=None,validation=None):
             if validation:assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             runtime=json.loads((folder/'runtime.json').read_text(encoding='utf-8'));assert not runtime['scriptErrors'] and not runtime['presentationErrors']
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8'))
+            if sampled:
+                assert manifest['rasterizationSamples']==manifest['snapshotRasterizationSamples']==manifest['outlineMaskSamples']==4 and not manifest['multisampleFallback'],name
+                assert manifest['snapshotMultisampleBytes']>0 and manifest['snapshotMultisampleAllocatedBytes']>0,name
             # The glTF loader appends its ordinary fallback material slot.
             materials=4 if name.startswith('two-assets') else 2
             coordinates=len(positions) if uv1 or name.startswith('two-assets') else 0
@@ -173,7 +185,7 @@ def run(player,output,selected=None,validation=None):
             assert manifest['outlineProjectionCoordinates']==coordinates
             assert manifest['outlineProjectionBytes']==16+materials*64+8*coordinates
             frame=folder/'frames'/f'frame_{capture_count-1:06d}.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
-            if name.startswith('minimum-temporal'):
+            if name.startswith('minimum-temporal') and not sampled:
                 assert manifest['antiAliasing']==3 and manifest['temporalHistorySubmission']>=32 and manifest['motionPreviousValidObjects']>0,name
             else:assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
             red=(pixels[:,:,0]>240)&(pixels[:,:,1]<4)&(pixels[:,:,2]<4)
@@ -191,7 +203,7 @@ def run(player,output,selected=None,validation=None):
                 boundary_error=float(np.abs(measured-expected).max())
                 assert boundary_error<=1,(name,measured,expected,boundary_error)
             rows.append(dict(name=name,outlinePixels=count,playerSha256=digest,imageSha256=hashlib.sha256(frame.read_bytes()).hexdigest(),
-                validationEnabled='Validation layer: enabled' in log,outlineBytes=manifest['outlineProjectionBytes'],size=size,distance=distance,
+                validationEnabled='Validation layer: enabled' in log,antiAliasing=manifest['antiAliasing'],rasterizationSamples=manifest['rasterizationSamples'],outlineBytes=manifest['outlineProjectionBytes'],size=size,distance=distance,
                 maximumHorizontalBoundaryErrorPixels=boundary_error))
         if 'minimum-reference' in frames:
             def linear(pixels):
@@ -209,7 +221,8 @@ def run(player,output,selected=None,validation=None):
                 assert abs(ratio-1)<=.02,('Supersampling must preserve output-pixel minimum outline coverage within 2 percent',name,ratio)
         if 'minimum-supersample' in frames and 'minimum-supersample-fixed' in frames:
             assert np.array_equal(frames['minimum-supersample'],frames['minimum-supersample-fixed'])
-        report['minimumTemporal']=[]
+        minimum_key='minimumMultisample' if quality=='multisample' else 'minimumTemporal'
+        report[minimum_key]=[]
         temporal_failures=[]
         for name,reference_name in [('minimum-temporal','minimum-reference'),('minimum-temporal-far','minimum-reference-far')]:
             if name not in frames or reference_name not in frames:continue
@@ -221,7 +234,7 @@ def run(player,output,selected=None,validation=None):
             for index in range(24,32):
                 pixels=temporal_linear(np.asarray(Image.open(output/name/'frames'/f'frame_{index:06d}.png').convert('RGB')))
                 ratios.append(float(np.maximum(pixels[:,:,0]-pixels[:,:,1],0).sum()/reference_mass))
-            report['minimumTemporal'].append(dict(name=name,referenceMass=float(reference_mass),lastEightMassRatios=ratios,meanMassRatio=float(np.mean(ratios))))
+            report[minimum_key].append(dict(name=name,referenceMass=float(reference_mass),lastEightMassRatios=ratios,meanMassRatio=float(np.mean(ratios))))
             if max(abs(value-1) for value in ratios)>.02:temporal_failures.append((name,ratios))
         assert not temporal_failures,('Temporal fine outline energy must stay within 2 percent on every converged phase',temporal_failures)
         if 'wide' in frames:
@@ -256,9 +269,10 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--executable',type=Path,required=True)
     parser.add_argument('--output',type=Path);parser.add_argument('--case',action='append')
     parser.add_argument('--expected-validation','--validation',dest='expected_validation',choices=['enabled','disabled'])
+    parser.add_argument('--quality',choices=('existing','multisample'),default='existing')
     args=parser.parse_args()
-    if args.output:run(args.executable.resolve(),args.output.resolve(),args.case,args.expected_validation)
+    if args.output:run(args.executable.resolve(),args.output.resolve(),args.case,args.expected_validation,args.quality)
     else:
         root=Path(__file__).resolve().parents[1]/'build/runs';root.mkdir(parents=True,exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='outline_projection_',dir=root) as directory:
-            run(args.executable.resolve(),Path(directory)/'captures',args.case,args.expected_validation)
+            run(args.executable.resolve(),Path(directory)/'captures',args.case,args.expected_validation,args.quality)

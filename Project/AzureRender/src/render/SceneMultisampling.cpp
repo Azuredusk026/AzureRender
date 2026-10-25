@@ -76,6 +76,17 @@ std::array<RenderGraph::ResourceId,3> SceneMultisampling::importSources(RenderGr
     for(unsigned i=0;i<3;++i){rhi::ImageBarrierDesc initial;initial.image=source.images[i].image;initial.aspectMask=i==1?VK_IMAGE_ASPECT_DEPTH_BIT:VK_IMAGE_ASPECT_COLOR_BIT;
         result[i]=graph.importImage(name+"-"+std::to_string(i),initial);}return result;
 }
+void SceneMultisampling::recordResolveDraw(rhi::ICommandRecorder& commands,std::uint32_t slot) const{
+    commands.setViewport(float(extent_.width),float(extent_.height));commands.setScissor(extent_);commands.bindPipeline(pipeline_);
+    commands.bindDescriptorSet(layout_,sets_.at(slot));const auto policy=static_cast<std::uint32_t>(secondaryResolve_);
+    commands.pushConstants(layout_,VK_SHADER_STAGE_FRAGMENT_BIT,0,&policy,sizeof(policy));commands.draw(3);
+}
+void SceneMultisampling::recordResolve(rhi::ICommandRecorder& commands,std::uint32_t slot,std::uint32_t destination) const{
+    (void)sets_.at(slot);const auto framebuffer=outputs_.at(destination);
+    rhi::RenderPassBeginDesc begin;begin.renderPass=resolvePass_;begin.framebuffer=framebuffer;begin.extent=extent_;
+    begin.clearValues.resize(3);begin.clearValues[1].depthStencil={1,0};
+    commands.beginRenderPass(begin);recordResolveDraw(commands,slot);commands.endRenderPass();
+}
 void SceneMultisampling::schedule(RenderGraph& graph,std::uint32_t slot,std::uint32_t destination,
     std::array<RenderGraph::ResourceId,3> inputs,std::array<RenderGraph::ResourceId,3> outputs,const std::string& name) const{
     const auto& source=sources_.at(slot);const auto& target=destinations_.at(destination);
@@ -90,9 +101,7 @@ void SceneMultisampling::schedule(RenderGraph& graph,std::uint32_t slot,std::uin
         throw std::logic_error("Multisample resolve requires every scene attachment producer");
     rhi::RenderPassBeginDesc begin;begin.renderPass=resolvePass_;begin.framebuffer=outputs_.at(destination);begin.extent=extent_;begin.clearValues.resize(3);begin.clearValues[1].depthStencil={1,0};
     const auto pass=graph.addGraphicsPass(name,begin,[this,slot](rhi::ICommandRecorder& commands){
-        commands.setViewport(float(extent_.width),float(extent_.height));commands.setScissor(extent_);commands.bindPipeline(pipeline_);
-        commands.bindDescriptorSet(layout_,sets_.at(slot));const auto policy=static_cast<std::uint32_t>(secondaryResolve_);
-        commands.pushConstants(layout_,VK_SHADER_STAGE_FRAGMENT_BIT,0,&policy,sizeof(policy));commands.draw(3);});
+        recordResolveDraw(commands,slot);});
     for(auto input:inputs)graph.use(pass,input,RenderGraphUsage::Sampled,false);
     for(unsigned i=0;i<3;++i)graph.attachment(pass,outputs[i],i==1?RenderGraphUsage::DepthAttachment:RenderGraphUsage::ColorAttachment,
         i==1?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);

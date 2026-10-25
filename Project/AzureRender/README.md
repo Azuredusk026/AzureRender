@@ -208,6 +208,7 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 动态高频门禁及几何样点对照见[细节验证](docs/acceptance/nr/native-detail-sampling.md)。
 多样点 RHI 声明及场景目标见[采样契约](docs/runtime/multisample-shading.md)。
 角色逐样点材质与动态质量见[材质验证](docs/acceptance/nr/multisample-character-material.md)。
+多样点副本、描边和边缘光见[副本验证](docs/acceptance/nr/multisample-snapshot-outline.md)。
 公共四样点目标与最近深度解析见[专项验证](docs/acceptance/nr/multisample-scene-target.md)。
 主辅视图画质、实际样本与回退见[视图验证](docs/acceptance/nr/multisample-view-quality.md)。
 完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。

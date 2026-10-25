@@ -33,7 +33,8 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 动态高频门禁及几何样点对照见[细节验证](../acceptance/nr/native-detail-sampling.md)。
 多样点 RHI 声明及设备验证见[采样契约](../acceptance/nr/multisample-rhi.md)。
 角色四样点动态质量见[材质验证](../acceptance/nr/multisample-character-material.md)。
-深度副本及外壳覆盖继续按 MS4 接入。
+深度副本及外壳覆盖见[副本验证](../acceptance/nr/multisample-snapshot-outline.md)。
+联合画质与性能预算继续按 MS5 执行。
 公共源目标及最近深度解析见[目标验收](../acceptance/nr/multisample-scene-target.md)。
 主辅视图的实际样本、质量与回退见[视图验收](../acceptance/nr/multisample-view-quality.md)。
 完整运动、透明覆盖和服饰闪烁继续执行 AA4 至 AA6。

@@ -11,7 +11,8 @@ layout(push_constant) uniform Material { float cutoff; int alphaMode; layout(off
 #define BASE baseColor
 #endif
 #include "material_sampling.glsl"
-layout(location=2) in vec2 textureCoordinate;
+#include "fragment_sampling.glsl"
+layout(location=2) AZURE_SAMPLE in vec2 textureCoordinate;
 layout(location=0) out float coverage;
 void main() {
     if(material.alphaMode==1){

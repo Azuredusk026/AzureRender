@@ -8,12 +8,12 @@ void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext
     }};
     inspect(asset_);for(const auto& resource:additionalResources_)inspect(resource->asset);
     const bool multisample=context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT;
-    if((!opaque&&!blend)||(multisample&&!opaque))return;
+    if((!opaque&&!blend)||multisample)return;
     std::string suffix=objectShadowPrepared_?"_object":"";
     if(bindlessTextures_)suffix+="_bindless";
     VkShaderModule color=VK_NULL_HANDLE,snapshot=VK_NULL_HANDLE;
     try {
-        if(!multisample)color=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/mesh_integral"+suffix+".frag.spv"));
+        color=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/mesh_integral"+suffix+".frag.spv"));
         if(opaque)snapshot=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/character_snapshot_integral"+suffix+".frag.spv"));
         for(unsigned kind=0;kind<2;++kind){
             if(kind==0?!opaque:!blend)continue;
@@ -22,7 +22,7 @@ void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext
                 desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
                 desc.alphaBlend=kind==1;desc.depthWrite=kind==0;
-                if(!multisample)hairIntegralPipelines_[kind*3+facing]=rhi_->createGraphicsPipeline(desc);
+                hairIntegralPipelines_[kind*3+facing]=rhi_->createGraphicsPipeline(desc);
                 if(kind==0){
                     desc.fragmentShader=snapshot;desc.renderPass=overlayDepthPass_;desc.colorAttachmentCount=2;
                     desc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;desc.minSampleShading=0;
@@ -44,7 +44,8 @@ void CharacterSceneRenderer::destroyHairIntegralPipelines() noexcept {
     for(auto& pipeline:hairIntegralSnapshotPipelines_){if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;}
 }
 VkPipeline CharacterSceneRenderer::hairIntegralPipeline(const AssetMaterial& material,bool mirrored,bool snapshot) const {
-    if(!snapshot&&rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT){
+    if(rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT){
+        if(snapshot)return material.doubleSided?overlayDepthDoubleSidedPipeline_:mirrored?overlayDepthMirroredPipeline_:overlayDepthPipeline_;
         if(material.alphaMode==AssetAlphaMode::Blend)return material.doubleSided?blendDoubleSidedPipeline_:mirrored?blendMirroredPipeline_:blendPipeline_;
         return material.doubleSided?opaqueDoubleSidedPipeline_:mirrored?opaqueMirroredPipeline_:opaquePipeline_;
     }

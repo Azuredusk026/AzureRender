@@ -13,7 +13,7 @@ from native_render.light_lab import generate
 from test_npr_diffuse_gpu import linear
 
 
-def run(player,output,selected=None,expected_validation=None):
+def run(player,output,selected=None,expected_validation=None,quality="existing"):
     output.mkdir(parents=True,exist_ok=False)
     names=('edge','interior','near-depth','mid-depth','far-depth','zero-offset','zero-tint','spot','fixed',
         'disabled','effect-disabled','no-receiver','pbr','pbr-control','pbr-specular','parallel','blend','rim-isolation','smooth')
@@ -21,7 +21,7 @@ def run(player,output,selected=None,expected_validation=None):
         'material-facing-front','material-facing-disabled','material-facing-effect-disabled','material-facing-no-receiver','material-facing-generic','pbr-material','pbr-material-control')
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
-    report=dict(schemaVersion=1,status='running',playerSha256=hashlib.sha256(player.read_bytes()).hexdigest(),captures=[]);frames={}
+    report=dict(schemaVersion=1,status='running',qualityMode=quality,playerSha256=hashlib.sha256(player.read_bytes()).hexdigest(),captures=[]);frames={}
     try:
         for name in names:
             print(name,flush=True);folder=output/name;generate(folder,'dark')
@@ -69,6 +69,7 @@ def run(player,output,selected=None,expected_validation=None):
             path.write_text(json.dumps(level),encoding='utf-8')
             command=[str(player.resolve()),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128','--capture-dir',str(folder/'frames'),
                 '--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene']
+            if quality=='multisample':command+=['--set','render.antiAliasing=4']
             if name in ('fixed','material-facing-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             if name=='rim-isolation':command+=['--qa-isolation','rim']
             if name in ('effect-disabled','material-facing-effect-disabled'):command+=['--qa-effect','rim','--qa-effect-state','disabled']
@@ -79,26 +80,33 @@ def run(player,output,selected=None,expected_validation=None):
             assert 'Allocator after unload: buffers=0 images=0' in log
             validation='Validation layer: enabled' in log
             if expected_validation:assert validation==(expected_validation=='enabled')
+            manifest=json.loads((folder/'frames/capture_manifest.json').read_text())
+            if quality=='multisample':assert manifest['rasterizationSamples']==manifest['snapshotRasterizationSamples']==manifest['outlineMaskSamples']==4 and not manifest['multisampleFallback']
             if material_rim:
-                manifest=json.loads((folder/'frames/capture_manifest.json').read_text())
                 assert manifest['materialSurfaceProfileLayoutVersion']==9 and manifest['lightBufferLayoutVersion']==3
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
-            x=64 if name=='interior' else 84;measured=linear(pixels[64,x]);point=np.array([(x+.5)/128*8-4,-.03125,0])
-            delta=np.asarray(position)-point;squared=np.dot(delta,delta);distance=np.sqrt(squared);light=delta/distance
-            normal=np.array([128,128,255] if name=='material-facing-front' else [204,128,230])/255*2-1;normal/=np.linalg.norm(normal)
-            planar=light.copy();planar[2]=0;length=np.linalg.norm(planar);planar=planar/length if length>1e-6 else np.zeros(3)
-            attenuation=(1-distance/10)**2/(1+.12*squared)
-            if name=='smooth':attenuation=max(1-(squared/100)**2,0)**2/(squared+1)
-            depth_weight=0 if name in ('interior','zero-offset') else {'near-depth':0,'mid-depth':.5,'far-depth':1}.get(name,1)
-            if view_facing:
-                view=np.array([0,0,5])-point;view/=np.linalg.norm(view);width=response['width']
-                band=np.clip(((1-abs(np.dot(normal,view)))-(.8-.6*width))/(.1+.2*width),0,1);depth_weight=band*band*(3-2*band)
-            facing=np.clip(np.dot(normal,planar),0,1);tint=.5+response.get('surfaceTint',0)*(.25*.96-.5)
-            expected=np.array([.8,.6,.4])*1.5*attenuation*depth_weight*facing*tint
-            if name in ('disabled','effect-disabled','no-receiver','material-facing-disabled','material-facing-effect-disabled','material-facing-no-receiver'):expected[:]=0
-            if name=='blend':
-                weight=.7*max(1-min(squared/4,1),0)**2;expected=expected*(1-weight)+np.array([.1,.2,.3])*weight
-            if name=='rim-isolation':expected*=3
+            x=64 if name=='interior' else 84;measured=linear(pixels[64,x])
+            samples=[(.375,.125),(.875,.375),(.125,.625),(.625,.875)] if quality=='multisample' else [(.5,.5)]
+            expected_samples=[]
+            for sx,sy in samples:
+                point=np.array([(x+sx)/128*8-4,4-(64+sy)/128*8,0])
+                delta=np.asarray(position)-point;squared=np.dot(delta,delta);distance=np.sqrt(squared);light=delta/distance
+                normal=np.array([128,128,255] if name=='material-facing-front' else [204,128,230])/255*2-1;normal/=np.linalg.norm(normal)
+                planar=light.copy();planar[2]=0;length=np.linalg.norm(planar);planar=planar/length if length>1e-6 else np.zeros(3)
+                attenuation=(1-distance/10)**2/(1+.12*squared)
+                if name=='smooth':attenuation=max(1-(squared/100)**2,0)**2/(squared+1)
+                depth_weight=0 if name in ('interior','zero-offset') else {'near-depth':0,'mid-depth':.5,'far-depth':1}.get(name,1)
+                if view_facing:
+                    view=np.array([0,0,5])-point;view/=np.linalg.norm(view);width=response['width']
+                    band=np.clip(((1-abs(np.dot(normal,view)))-(.8-.6*width))/(.1+.2*width),0,1);depth_weight=band*band*(3-2*band)
+                facing=np.clip(np.dot(normal,planar),0,1);tint=.5+response.get('surfaceTint',0)*(.25*.96-.5)
+                expected=np.array([.8,.6,.4])*1.5*attenuation*depth_weight*facing*tint
+                if name in ('disabled','effect-disabled','no-receiver','material-facing-disabled','material-facing-effect-disabled','material-facing-no-receiver'):expected[:]=0
+                if name=='blend':
+                    weight=.7*max(1-min(squared/4,1),0)**2;expected=expected*(1-weight)+np.array([.1,.2,.3])*weight
+                if name=='rim-isolation':expected*=3
+                expected_samples.append(expected)
+            expected=np.mean(expected_samples,axis=0)
             error=None if name.startswith('pbr') else float(np.abs(measured-expected).max())
             if error is None:assert max(measured)>.015,'Physical compatibility controls must remain visibly lit'
             else:assert error<=.008,(name,error,measured,expected)
@@ -118,8 +126,8 @@ def run(player,output,selected=None,expected_validation=None):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__);p.add_argument('--executable',type=Path,required=True);p.add_argument('--output',type=Path)
-    p.add_argument('--case',action='append');p.add_argument('--expected-validation',choices=('enabled','disabled'));a=p.parse_args()
-    if a.output:run(a.executable,a.output.resolve(),a.case,a.expected_validation)
+    p.add_argument('--case',action='append');p.add_argument('--expected-validation',choices=('enabled','disabled'));p.add_argument('--quality',choices=('existing','multisample'),default='existing');a=p.parse_args()
+    if a.output:run(a.executable,a.output.resolve(),a.case,a.expected_validation,a.quality)
     else:
         with tempfile.TemporaryDirectory(prefix='screen-rim-',dir=Path(__file__).resolve().parents[1]/'build/runs') as temporary:
-            run(a.executable,Path(temporary)/'capture',a.case,a.expected_validation)
+            run(a.executable,Path(temporary)/'capture',a.case,a.expected_validation,a.quality)

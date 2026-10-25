@@ -24,6 +24,8 @@ public:
     std::uint64_t allocatedByteSize() const noexcept{return allocatedBytes_;}
     std::uint64_t byteSize() const noexcept{return bytes_;}
     std::array<RenderGraph::ResourceId,3> importSources(RenderGraph&,std::uint32_t slot,const std::string&) const;
+    // Caller supplies source attachment-write to fragment-read synchronization.
+    void recordResolve(rhi::ICommandRecorder&,std::uint32_t slot,std::uint32_t destination) const;
     void schedule(RenderGraph&,std::uint32_t slot,std::uint32_t destination,
         std::array<RenderGraph::ResourceId,3> sources,std::array<RenderGraph::ResourceId,3> outputs,const std::string&) const;
 private:
@@ -33,6 +35,7 @@ private:
     std::vector<VkFramebuffer> outputs_;std::vector<VkDescriptorSet> sets_;
     VkRenderPass sourcePass_{},resolvePass_{};VkSampler sampler_{};VkDescriptorSetLayout descriptors_{};
     VkDescriptorPool pool_{};VkPipelineLayout layout_{};VkPipeline pipeline_{};std::uint64_t bytes_=0,allocatedBytes_=0;
+    void recordResolveDraw(rhi::ICommandRecorder&,std::uint32_t slot) const;
     void reset() noexcept;
 };
 }

@@ -4,6 +4,7 @@
 #include "render/EnvironmentCubeTexture.hpp"
 #include "render/SampledTextureCache.hpp"
 #include "render/OutlineProjectionResources.hpp"
+#include "render/SceneMultisampling.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
@@ -147,6 +148,9 @@ private:
     };
 
     std::array<GpuTexture,kMaxFramesInFlight> overlaySceneDepth_;
+    std::unique_ptr<SceneMultisampling> snapshotMultisampling_;
+    VkRenderPass snapshotPass() const {return snapshotMultisampling_?snapshotMultisampling_->renderPass():overlayDepthPass_;}
+    VkFramebuffer snapshotFramebuffer(std::uint32_t slot) const {return snapshotMultisampling_?snapshotMultisampling_->framebuffer(slot):overlayDepthFramebuffers_.at(slot);}
     std::array<GpuTexture,kMaxFramesInFlight> opaqueSceneColor_;
     std::array<rhi::GpuImage,kMaxFramesInFlight> overlayDepthAttachments_;
     std::array<VkImageView,kMaxFramesInFlight> overlayDepthViews_{};

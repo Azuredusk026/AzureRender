@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "render/SceneMultisampling.hpp"
 #include "rhi/NullRhi.hpp"
 #include <iostream>
@@ -30,6 +31,12 @@ int main(int argc,char** argv)try{
         auto producer=graph.addPass("scene");for(unsigned i=0;i<3;++i)graph.attachment(producer,sources[i],i==1?RenderGraphUsage::DepthAttachment:RenderGraphUsage::ColorAttachment,i==1?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         auto wrong=outputs;wrong[2]=wrong[0];reject([&]{target->schedule(graph,1,0,sources,wrong,"alias");});check(graph.passes().size()==1,"Aliases reject atomically");
         target->schedule(graph,1,0,sources,outputs,"resolve");std::string error;check(graph.compile(error),error.c_str());
+        rhi::NullCommandRecorder direct;
+        reject([&]{target->recordResolve(direct,2,0);});reject([&]{target->recordResolve(direct,0,1);});
+        check(direct.calls.empty(),"Invalid direct resolve slots reject before recording");
+        target->recordResolve(direct,1,0);
+        check(direct.calls.front().name=="beginRenderPass"&&direct.calls.back().name=="endRenderPass","Direct resolve owns its pass scope");
+        check(std::count_if(direct.calls.begin(),direct.calls.end(),[](const auto& c){return c.name=="draw";})==1,"Direct resolve draws once");
         rhi::NullCommandRecorder commands;graph.execute(&commands);check(graph.passes().size()==2&&graph.executionOrder().back()==1,"Resolve follows all source writers");
     }
     check(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,"Target destruction releases allocations");

@@ -12,7 +12,7 @@ from PIL import Image
 from create_visibility_fixture import surface
 
 
-def run(executable, root):
+def run(executable, root, quality="existing", expected_validation="enabled"):
     assets = root / 'assets'
     assets.mkdir(parents=True, exist_ok=False)
     surface(assets / 'rear.gltf', double_sided=True)
@@ -54,12 +54,15 @@ def run(executable, root):
         output = root / mode
         command = [str(executable.resolve()), '--project', str(project.resolve()), '--width', '320', '--height', '240',
             '--capture-dir', str(output.resolve()), '--capture-frames', '1', '--runtime-report', str((root / (mode + '-runtime.json')).resolve())]
+        if quality=='multisample':command+=['--set','render.antiAliasing=4']
         if mode == 'fixed':
             command += ['--disable-bindless', '--disable-compute-skinning', '--disable-parallel-recording']
         result = subprocess.run(command, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
         (root / (mode + '.log')).write_text(result.stdout + result.stderr, encoding='utf-8')
         assert result.returncode == 0 and not re.search(r'VUID-|Validation Error|\[error\]', result.stdout + result.stderr), mode
-        assert 'Validation layer: enabled' in result.stdout, mode
+        assert ('Validation layer: enabled' in result.stdout)==(expected_validation=='enabled'), mode
+        manifest=json.loads((output/'capture_manifest.json').read_text())
+        if quality=='multisample':assert manifest['rasterizationSamples']==manifest['snapshotRasterizationSamples']==4 and not manifest['multisampleFallback'],mode
         assert 'Allocator after unload: buffers=0 images=0' in result.stdout, mode
         data = json.loads((root / (mode + '-runtime.json')).read_text())
         assert not data['scriptErrors'] and not data['presentationErrors']
@@ -69,7 +72,7 @@ def run(executable, root):
     darkening = float((results['transmit'][crop] - results['dark'][crop]).mean())
     fallback = float(np.abs(results['transmit'] - results['fixed']).mean())
     assert transmitted < 1 and darkening > 10 and fallback < .1, (transmitted, darkening, fallback)
-    summary = {'frames': 4, 'transmissionDifference': transmitted, 'brightnessResponse': darkening,
+    summary = {'frames': 4, 'qualityMode': quality, 'expectedValidation': expected_validation, 'transmissionDifference': transmitted, 'brightnessResponse': darkening,
         'fixedDescriptorCpuDifference': fallback, 'validationErrors': 0}
     (root / 'summary.json').write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary))
@@ -79,11 +82,13 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('--executable', required=True, type=Path)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--quality',choices=('existing','multisample'),default='existing')
+    parser.add_argument('--expected-validation',choices=('enabled','disabled'),default='enabled')
     args = parser.parse_args()
     if args.output:
-        run(args.executable, args.output.resolve())
+        run(args.executable, args.output.resolve(),args.quality,args.expected_validation)
     else:
         runs = Path(__file__).resolve().parents[1] / 'build/runs'
         runs.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='scene-refraction-', dir=runs) as temporary:
-            run(args.executable, Path(temporary))
+            run(args.executable, Path(temporary),args.quality,args.expected_validation)
