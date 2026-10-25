@@ -104,6 +104,8 @@ std::string uuid() {
 }
 void writeCache(const std::filesystem::path& path, const std::string& data) {
     namespace fs=std::filesystem;
+    // Validate the complete immutable payload before reserving staging space.
+    if(fs::is_regular_file(path)&&cacheBytes(path)==data)return;
     fs::create_directories(path.parent_path());
     fs::path staging;
     for(unsigned attempt=0;attempt<8 && staging.empty();++attempt){

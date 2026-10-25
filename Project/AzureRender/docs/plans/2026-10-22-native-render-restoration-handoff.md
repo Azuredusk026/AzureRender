@@ -8,6 +8,7 @@ C16-R3 的双配置构建、CPU 及 GPU 回归通过。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。
 新增任务为 NR0-A1、NR6-C15 至 C18、NR8-V2。
+完整缓存复用及并发恢复见[缓存验证](../acceptance/nr/complete-asset-cache-reuse.md)。
 完整材质候选已进入主项目与可玩入口。
 范围见[主场景接入](../acceptance/nr/main-character-integration.md)。
 公共材质已接入稀疏参数覆盖及共享编辑操作。

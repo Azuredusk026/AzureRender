@@ -1,6 +1,9 @@
 #include "runtime/AssetDatabase.hpp"
 #include "runtime/LevelSession.hpp"
 #include <fstream>
+#include <iterator>
+#include <future>
+#include <vector>
 #include <iostream>
 #include <stdexcept>
 #include <thread>
@@ -38,6 +41,31 @@ int main() {
   // A cache publisher owns only its unique staging file. Another
   // operation's staging path must survive both publication and failure.
   const auto cachePath=db.cacheFile(id);
+  const auto cacheRoot=cachePath.parent_path().parent_path();
+  const auto cacheStamp=std::filesystem::file_time_type::clock::now()-std::chrono::hours(24);
+  std::filesystem::last_write_time(cacheRoot,cacheStamp);
+  AssetDatabase warmDatabase(project);warmDatabase.refresh();
+  check(warmDatabase.readSource(id)=="first");
+  if(std::filesystem::last_write_time(cacheRoot)!=cacheStamp)
+      throw std::runtime_error("Warm refresh must reuse complete cache without creating staging data");
+  const auto readCache=[&]{std::ifstream input(cachePath,std::ios::binary);
+      return std::string(std::istreambuf_iterator<char>(input),std::istreambuf_iterator<char>());};
+  const auto completePayload=readCache();auto damagedPayload=completePayload;damagedPayload.back()^=1;
+  std::ofstream(cachePath,std::ios::binary).write(damagedPayload.data(),damagedPayload.size());
+  AssetDatabase repairedDatabase(project);repairedDatabase.refresh();
+  check(repairedDatabase.readSource(id)=="first" && readCache()==completePayload);
+  const auto parallelRefresh=[&]{
+      std::vector<std::future<void>> jobs;
+      for(unsigned i=0;i<3;++i)jobs.push_back(std::async(std::launch::async,[&]{
+          AssetDatabase candidate(project);candidate.refresh();
+          check(candidate.readSource(id)=="first");
+      }));
+      for(auto& job:jobs)job.get();
+      check(readCache()==completePayload);
+  };
+  std::filesystem::last_write_time(cacheRoot,cacheStamp);parallelRefresh();
+  check(std::filesystem::last_write_time(cacheRoot)==cacheStamp);
+  std::filesystem::remove(cachePath);parallelRefresh();
 #ifdef _WIN32
   // A publisher retains delete access during rename. A cache reader must
   // permit that access while reading the complete immutable file.
