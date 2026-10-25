@@ -47,8 +47,11 @@
 ## 源槽位身份
 
 模型材质的 `extras.azureSlotId` 提供显式身份。
-唯一材质名称映射为 `name:<名称>`。
-匿名或重复名称映射为 `index:<索引>`。
+唯一的导入名称映射为 `name:<名称>`。
+缺少名称时，导入器使用 `UnnamedMaterial`。
+隐式材质使用 `FallbackMaterial`。
+
+重复名称映射为 `index:<索引>`。
 索引槽位适用于保持材质表顺序的源文件。
 
 显式身份与唯一名称支持材质表重排。
@@ -179,9 +182,14 @@ SDF 头节点按所绑定模型的节点名称解析。
 
 ```text
 AzureMaterialValidator model.glb
+AzureMaterialValidator --slots model.glb
 AzureMaterialValidator surface.azurematerial uuid-paths.json
 python tools/validate_material_profiles.py model.glb
 ```
+
+`--slots` 读取材质名称、显式身份及隐式材质。
+槽位检查与运行绑定共用身份分配规则。
+几何、纹理和动画由完整模型准备路径校验。
 
 UUID 路径文件是 UUID 到本机图片路径的 JSON 对象。
 `--describe` 返回已注册的材质字段。

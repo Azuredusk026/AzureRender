@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-25",
+  "baseCommit": "f65c04841edc757e3b18e1c8c260154fe8a2ebed",
+  "status": "passed",
+  "scope": "Material slot metadata inspection; scene NPR activation and dynamic profile restoration have independent gates",
+  "run": "build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0",
+  "sources": {
+    "src/assets/MaterialData.cpp": "fbcd2eb35b22b8e99b24e789be61e5097a87ed61dcf38ada93d082cbdf941f3d",
+    "src/assets/MaterialData.hpp": "8a91120499c79ebdbd4e9fa3e4f7bc784748014545bd6966e44f12baec51b41e",
+    "src/runtime/MaterialDocument.cpp": "60f3c03da37f4e5b478a5395525ce1f69523634a24121ff7bd2f579a5d30fafb",
+    "tools/MaterialValidator.cpp": "6bb55b6699c663287638c5cd888065e7ac75531afc2ae8c51566ab86ccd086f3",
+    "tests/MaterialDocumentTests.cpp": "a72724bb0808958251d49cd4479b60885f932d10d826e8eb1adfde14aa8c219b"
+  },
+  "checks": {
+    "build-slot-final-debug.log": "4d64f4c03dfbd1a94d3ef4e5f215f295107a26ae3d146741e02988849f92c941",
+    "build-slot-final-release.log": "295cc53e270abbdce56a4ad5c588cf6cd1bab40c64a9ef40e0e74d716e5b587e",
+    "slot-contracts-final-debug.log": "154e24a68a328eb1752b400c227f522c3d0b6c14de53251711289d1bd94b55b2",
+    "slot-contracts-final-release.log": "be8a3d9e8d436992f5b165611fcc354a5df73dc51f975fd3b20b8dee170e7ff8"
+  },
+  "benchmarks": {
+    "slot-full": {
+      "status": "passed",
+      "kind": "full",
+      "seconds": 3.461281400000189,
+      "peakWorkingSetBytes": 937369600,
+      "command": [
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialValidator.exe",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\main-candidate-v2\\content-character\\hero-restored-inputs-v2.glb"
+      ],
+      "executableSha256": "9605c21d866c76df93fb581ba05177e1ea10c4476137934f4c9a57c08fa62575",
+      "modelSha256": "baef81491d4fa24b93776fa1fa615f9fa4a838b5f9ed131f15c0e096422c6b64"
+    },
+    "slot-metadata-final": {
+      "status": "passed",
+      "kind": "metadata-final",
+      "seconds": 0.18244500000037078,
+      "peakWorkingSetBytes": 29593600,
+      "command": [
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialValidator.exe",
+        "--slots",
+        "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\main-candidate-v2\\content-character\\hero-restored-inputs-v2.glb"
+      ],
+      "executableSha256": "e137f046e3457c14235b4a36e17a36278b0efb01c9b06ae58bd87a8ddc2f532e",
+      "modelSha256": "baef81491d4fa24b93776fa1fa615f9fa4a838b5f9ed131f15c0e096422c6b64"
+    }
+  },
+  "sceneRegression": {
+    "status": "passed",
+    "imageSha256": "13d8912f2537cb43822347249675f71159c0a47af3b42607838925aa60903285",
+    "previousImageSha256": "13d8912f2537cb43822347249675f71159c0a47af3b42607838925aa60903285",
+    "playerSha256": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+    "wallSeconds": 199.9640614,
+    "scope": "Unchanged full main scene and material documents; source slot inspection implementation regression"
+  },
+  "sceneRegressionLogSha256": "20d9b2e21124d3eb6b255787aba82d5c22da8fd2064c2122a6eb5581ff4688f3",
+  "priorActualEntryParity": {
+    "receipt": "build\\runs\\20261025-160544-main-material-frame-integration-1ad7a0\\main-captures.json",
+    "sha256": "b536a12a7d5ff26c64f18372c1ba38fdea978aec241c0140617bb4d477099a8a",
+    "status": "passed",
+    "scope": "Four actual scene entry captures before the metadata inspection change"
+  },
+  "binaries": {
+    "debug": {
+      "AzurePlayer": "cdcd8f81297d906839c3325ed32d4d8d9a05c33b10f8a19d3ca465015300beac",
+      "AzureRender": "69655384442f15562ad3f464e1fb9d985dbc4bd576abbd146d927ea5dc7b4027",
+      "AzureMaterialValidator": "55c1b77e869cefdb87b9a05ac9f55dda2a2aba09c83ca63256e720efb7db1d6c"
+    },
+    "release": {
+      "AzurePlayer": "e2a96d88de8915d3a267967d80454d0443354873c40f4b50fc474c7a06ca564d",
+      "AzureRender": "690943ed9b6ac5632708af49ca29f1231d5ea0f110756ebb5b13ab071fdef9e5",
+      "AzureMaterialValidator": "e137f046e3457c14235b4a36e17a36278b0efb01c9b06ae58bd87a8ddc2f532e"
+    }
+  }
+}

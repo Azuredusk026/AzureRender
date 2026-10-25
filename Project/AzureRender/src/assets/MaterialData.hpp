@@ -36,5 +36,7 @@ struct MaterialData {
         const AssetMaterial* source=nullptr) const;
 };
 std::vector<std::string> materialSlotIds(const LoadedAsset&);
+// Inspect source identities without decoding geometry, images or animations.
+std::vector<std::string> inspectMaterialSlots(const std::filesystem::path&);
 void applyMaterialBindings(LoadedAsset&,const std::map<std::string,MaterialBinding>&);
 }

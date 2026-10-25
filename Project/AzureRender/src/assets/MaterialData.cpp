@@ -2,6 +2,8 @@
 #include "assets/MaterialGraph.hpp"
 #include "assets/MaterialFrame.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
+#include <algorithm>
+#include <cctype>
 #include <cmath>
 #include <fstream>
 #include <set>
@@ -149,6 +151,39 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     }
     if((!parameterOverride||parameters.contains("emissiveStrength"))&&result.emissiveStrength>0)result.materialFeatures|=MaterialFeatureEmissiveMask;
     return result;
+}
+std::vector<std::string> inspectMaterialSlots(const std::filesystem::path& path){
+    auto extension=path.extension().u8string();
+    std::transform(extension.begin(),extension.end(),extension.begin(),[](unsigned char value){return static_cast<char>(std::tolower(value));});
+    if(extension!=".glb"&&extension!=".gltf")return materialSlotIds(loadGltfAsset(path.u8string()));
+    std::ifstream input(path,std::ios::binary);if(!input)throw std::runtime_error("Cannot inspect source material slots: "+path.u8string());
+    Json document;
+    if(extension==".glb"){
+        unsigned char header[20]{};input.read(reinterpret_cast<char*>(header),sizeof(header));
+        const auto word=[&](unsigned offset){std::uint32_t value=0;for(unsigned byte=0;byte<4;++byte)value|=std::uint32_t(header[offset+byte])<<(byte*8U);return value;};
+        const auto bytes=std::filesystem::file_size(path);
+        if(!input||word(0)!=0x46546c67U||word(4)!=2||word(8)<20||word(8)>bytes||word(16)!=0x4e4f534aU||word(12)>word(8)-20)
+            throw std::invalid_argument("Invalid GLB material metadata header");
+        std::string json(word(12),'\0');input.read(json.data(),static_cast<std::streamsize>(json.size()));
+        if(!input)throw std::invalid_argument("Truncated GLB material metadata");document=Json::parse(json);
+    }else input>>document;
+    if(!document.is_object())throw std::invalid_argument("Material metadata requires a glTF object");
+    const auto materials=document.value("materials",Json::array());
+    if(!materials.is_array())throw std::invalid_argument("Material metadata requires an array");
+    LoadedAsset metadata;metadata.materials.reserve(materials.size()+1);
+    for(const auto& value:materials){
+        if(!value.is_object())throw std::invalid_argument("Material metadata entries require objects");
+        AssetMaterial material;material.name=value.value("name",std::string{});if(material.name.empty())material.name="UnnamedMaterial";
+        const auto extras=value.value("extras",Json::object());
+        if(extras.is_object()&&extras.contains("azureSlotId")){
+            const auto& identity=extras.at("azureSlotId");
+            if(!identity.is_string()||identity.get<std::string>().empty())throw std::invalid_argument("azureSlotId requires a nonempty string");
+            material.slotId=identity.get<std::string>();
+        }
+        metadata.materials.push_back(std::move(material));
+    }
+    metadata.materials.emplace_back();
+    return materialSlotIds(metadata);
 }
 std::vector<std::string> materialSlotIds(const LoadedAsset& mesh){
     std::map<std::string,unsigned> names;for(const auto& material:mesh.materials)++names[material.name];

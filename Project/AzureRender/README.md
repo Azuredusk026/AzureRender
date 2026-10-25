@@ -19,6 +19,7 @@
 
 眼睛 NPR 适配及完整材质文档见[输入验收](docs/acceptance/nr/eye-npr-inputs.md)。
 完整眼部区域、层级边界及动态姿态继续验收。
+材质槽位查询与主场景图像回归见[元数据验收](docs/acceptance/nr/material-slot-inspection.md)。
 距离描边的共享数学与深度来源见[分项验证](docs/acceptance/nr/outline-depth-source.md)。
 公共材质、可选方向流和独立深度壳见[接入验证](docs/acceptance/nr/outline-material-integration.md)。
 生产材质、平滑顶点流及外扩深度壳继续接入。

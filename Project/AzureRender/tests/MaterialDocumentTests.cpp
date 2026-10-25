@@ -64,6 +64,54 @@ int main(){try{
             "Zero emission must preserve the default feature contract");
     }
     for(const auto& invalid:std::vector<nlohmann::json>{nlohmann::json{{"schemaVersion",2}},[&]{auto d=pbr.encode();d["parameters"]["roughness"]=-1;return d;}(),[&]{auto d=pbr.encode();d["textures"]["albedo"]={{"asset","assets:/bad.png"},{"usage","albedo"}};return d;}()}){bool rejected=false;try{MaterialData::parse(invalid);}catch(const std::exception&){rejected=true;}require(rejected,"Malformed material documents must fail deterministically");}
+    const auto cubePath=std::filesystem::path(__FILE__).parent_path().parent_path()/"assets_public/scene_inspector/assets/cube.gltf";
+    nlohmann::json cube;{std::ifstream input(cubePath);input>>cube;}
+    const auto metadataPath=std::filesystem::temp_directory_path()/("azure-slot-metadata-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".gltf");
+    const std::vector<nlohmann::json> identityCases={nlohmann::json::array({{{"name","A"}},{{"name","B"}}}),
+        nlohmann::json::array({nlohmann::json::object()}),
+        nlohmann::json::array({nlohmann::json::object(),nlohmann::json::object()}),
+        nlohmann::json::array({{{"name","same"}},{{"name","same"}}}),
+        nlohmann::json::array({{{"name","FallbackMaterial"}}}),
+        nlohmann::json::array({{{"name","named"},{"extras",{{"azureSlotId","authored"}}}}}),nlohmann::json::array()};
+    for(const auto& materials:identityCases){
+        auto document=cube;document["materials"]=materials;
+        if(materials.empty())for(auto& mesh:document["meshes"])for(auto& primitive:mesh["primitives"])primitive.erase("material");
+        {std::ofstream output(metadataPath);output<<document;}
+        require(inspectMaterialSlots(metadataPath)==materialSlotIds(loadGltfAsset(metadataPath.u8string())),
+            "Metadata identities must match complete model loading, including implicit fallback");
+    }
+    auto absentImage=cube;absentImage["images"]={{{"uri","missing-slot-inspection-image.png"}}};absentImage["textures"]={{{"source",0}}};
+    absentImage["materials"][0]["pbrMetallicRoughness"]["baseColorTexture"]={{"index",0}};
+    {std::ofstream output(metadataPath);output<<absentImage;}
+    require(!inspectMaterialSlots(metadataPath).empty(),"Slot inspection must not require image decoding");
+    bool fullImageRejected=false;try{static_cast<void>(loadGltfAsset(metadataPath.u8string()));}catch(const std::exception&){fullImageRejected=true;}
+    require(fullImageRejected,"Full model preparation must retain missing-image validation");
+    auto conflicting=cube;conflicting["materials"]={{{"extras",{{"azureSlotId","same"}}}},{{"extras",{{"azureSlotId","same"}}}}};
+    {std::ofstream output(metadataPath);output<<conflicting;}
+    bool metadataRejected=false;try{static_cast<void>(inspectMaterialSlots(metadataPath));}catch(const std::exception&){metadataRejected=true;}
+    require(metadataRejected,"Metadata inspection must reject conflicting explicit identities");
+    const auto binaryPath=std::filesystem::path(metadataPath.u8string()+".glb");auto encoded=cube.dump();encoded.append((4-encoded.size()%4)%4,' ');
+    const auto writeWord=[](std::ofstream& output,std::uint32_t value){for(unsigned byte=0;byte<4;++byte)output.put(static_cast<char>((value>>(byte*8U))&255U));};
+    {std::ofstream output(binaryPath,std::ios::binary);writeWord(output,0x46546c67U);writeWord(output,2);writeWord(output,static_cast<std::uint32_t>(20+encoded.size()));writeWord(output,static_cast<std::uint32_t>(encoded.size()));writeWord(output,0x4e4f534aU);output<<encoded;}
+    require(inspectMaterialSlots(binaryPath)==materialSlotIds(loadGltfAsset(binaryPath.u8string())),"GLB inspection must preserve full-loader identities");
+    {std::ofstream output(binaryPath,std::ios::binary);output<<"glTF";}
+    metadataRejected=false;try{static_cast<void>(inspectMaterialSlots(binaryPath));}catch(const std::exception&){metadataRejected=true;}
+    require(metadataRejected,"Truncated GLB headers must fail before material identity publication");
+    for(const auto& header:std::vector<std::array<std::uint32_t,5>>{
+            {0x46546c67U,3U,static_cast<std::uint32_t>(20+encoded.size()),static_cast<std::uint32_t>(encoded.size()),0x4e4f534aU},
+            {0x46546c67U,2U,static_cast<std::uint32_t>(20+encoded.size()),static_cast<std::uint32_t>(encoded.size()),0x004e4942U},
+            {0x46546c67U,2U,static_cast<std::uint32_t>(24+encoded.size()),static_cast<std::uint32_t>(encoded.size()+4),0x4e4f534aU}}){
+        {std::ofstream output(binaryPath,std::ios::binary);for(const auto word:header)writeWord(output,word);output<<encoded;}
+        metadataRejected=false;try{static_cast<void>(inspectMaterialSlots(binaryPath));}catch(const std::exception&){metadataRejected=true;}
+        require(metadataRejected,"Invalid GLB versions, chunk types and declared lengths must be rejected");
+    }
+    for(const auto& invalidIdentity:std::vector<nlohmann::json>{"",42}){
+        auto document=cube;document["materials"][0]["extras"]["azureSlotId"]=invalidIdentity;
+        {std::ofstream output(metadataPath);output<<document;}
+        metadataRejected=false;try{static_cast<void>(inspectMaterialSlots(metadataPath));}catch(const std::exception&){metadataRejected=true;}
+        require(metadataRejected,"Malformed explicit source identities must retain strict rejection");
+    }
+    std::filesystem::remove(metadataPath);std::filesystem::remove(binaryPath);
     LoadedAsset mesh;AssetMaterial a,b;a.name="A";b.name="B";mesh.materials={a,b};const auto slots=materialSlotIds(mesh);std::swap(mesh.materials[0],mesh.materials[1]);require(materialSlotIds(mesh)[1]==slots[0],"Named source slots must survive material table reordering");
     a.slotId="stable";b.slotId="stable";mesh.materials={a,b};bool duplicate=false;try{materialSlotIds(mesh);}catch(const std::exception&){duplicate=true;}require(duplicate,"Conflicting explicit slot IDs must be rejected");
     const auto replacementPath=std::filesystem::temp_directory_path()/("azure-replacement-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azurematerial");

@@ -14,13 +14,13 @@ MaterialBinding resolveMaterialBinding(const std::string& id,const AssetDatabase
 }
 void resolveSceneMaterials(SceneDocument& scene,const AssetDatabase& assets){
     auto candidate=scene;
-    std::map<std::string,LoadedAsset> models;
+    std::map<std::string,std::vector<std::string>> modelSlots;
     for(auto& node:candidate.nodes){
         node.resolvedMaterials.clear();if(node.materialSlots.empty())continue;
         const auto resource=std::find_if(candidate.resources.begin(),candidate.resources.end(),[&](const auto& item){return item.id==node.resourceId;});
         if(resource==candidate.resources.end())throw std::invalid_argument("Material overrides require a mesh");
-        const auto key=resource->path.u8string();if(!models.count(key))models.emplace(key,loadGltfAsset(key));
-        const auto slots=materialSlotIds(models.at(key));
+        const auto key=resource->path.u8string();if(!modelSlots.count(key))modelSlots.emplace(key,inspectMaterialSlots(resource->path));
+        const auto& slots=modelSlots.at(key);
         for(const auto& [slot,id]:node.materialSlots){
             if(std::find(slots.begin(),slots.end(),slot)==slots.end())throw std::invalid_argument("Material slot disappeared during reimport: "+slot);
             node.resolvedMaterials[slot]=resolveMaterialBinding(id,assets);
