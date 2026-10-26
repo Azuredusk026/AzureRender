@@ -197,6 +197,10 @@ R11G11B10 与 RGBA16F 的量化误差单独记录。
 裁剪纹理的可辨层级见[缩小覆盖验证](../acceptance/nr/alpha-mip-footprint.md)。
 混合节点渐隐的运动与背景显露见[专项验证](../acceptance/nr/blend-fade-motion.md)。
 
+头发与眼睛的最近层级边界共用[采样诊断](../acceptance/nr/hair-sampling-boundary.md)。
+原生与候选的层级切换精度单独记录。
+覆盖、环带能量及运动门禁保持原有预算。
+
 ### 图像与动态验收
 
 整图、轮廓及材质区域分别统计。

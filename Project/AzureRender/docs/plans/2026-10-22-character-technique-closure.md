@@ -82,6 +82,8 @@
 
 实际结果与剩余门禁见[可见量验收](../acceptance/nr/hair-object-visibility.md)。
 
+纹理层级边界与接收精度见[采样诊断](../acceptance/nr/hair-sampling-boundary.md)。
+
 ## 对象深度偏置核对
 
 原生对象深度使用 D16 与反向偏置负八。

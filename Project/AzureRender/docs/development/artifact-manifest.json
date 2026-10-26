@@ -216,6 +216,14 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-27/object-shadow-exact-bias.json"
+    },
+    {
+      "path": "runs/20261027-031252-hair-residual-fragment-diagnosis-13e962",
+      "pathBase": "build",
+      "purpose": "头发实际层级、接收精度与世界原点失败对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/hair-sampling-boundary.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

@@ -66,6 +66,7 @@ C16-R4 继续核对屏幕遮罩的独立角色、场景可见量。
 对象图集已接入公共精确深度偏置。
 双配置、原生生产及主入口见[偏置验收](../acceptance/nr/object-shadow-exact-bias.md)。
 当前继续核对剩余片元的法线、采样及合成。
+实际层级边界及未晋升候选见[采样诊断](../acceptance/nr/hair-sampling-boundary.md)。
 双配置、环境域及主入口见[可见量验收](../acceptance/nr/hair-object-visibility.md)。
 原生整区和动态晋升仍需验证。
 

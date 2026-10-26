@@ -38,6 +38,7 @@
 实际投影、独立裁剪图及动态主候选见[覆盖验证](docs/acceptance/nr/hair-depth-coverage.md)。
 共享角色可见量、环境域及第七版主入口见[接收验收](docs/acceptance/nr/hair-object-visibility.md)。
 公共精确深度偏置与原生对象图集见[生产验收](docs/acceptance/nr/object-shadow-exact-bias.md)。
+头发与眼睛的硬件层级边界见[采样诊断](docs/acceptance/nr/hair-sampling-boundary.md)。
 
 场景支持[风格化漫反射照明](docs/runtime/npr-illumination.md)。
 数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。

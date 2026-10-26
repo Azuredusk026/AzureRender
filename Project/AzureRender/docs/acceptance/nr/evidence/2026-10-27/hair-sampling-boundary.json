@@ -1,0 +1,185 @@
+{
+  "schemaVersion": 1,
+  "verified": "2026-10-27",
+  "phase": "NR6-C17/NR7-AA4",
+  "status": "mip-boundary-and-receiver-precision-diagnosed",
+  "rendererChanged": false,
+  "fullHairRegionAccepted": false,
+  "nativeFrame": 10401,
+  "nativeEvent": 950,
+  "candidateEvent": 493,
+  "mipBoundary": {
+    "displayPixel": [
+      1322,
+      263
+    ],
+    "uvBitEqual": true,
+    "nativeBiasedLod": 1.5,
+    "candidateBiasedLod": 1.49609375,
+    "analyticBiasedLod": 1.464599609375,
+    "packedLodResolution": 0.000244140625,
+    "nearestMipFilter": true,
+    "maximumColorByteError": 6
+  },
+  "visibility": [
+    {
+      "pixel": [
+        1324,
+        289
+      ],
+      "native": 86,
+      "candidate": 69
+    },
+    {
+      "pixel": [
+        1322,
+        320
+      ],
+      "native": 95,
+      "candidate": 116
+    }
+  ],
+  "cpuFilterIsApproximation": true,
+  "originExperiment": [
+    {
+      "name": "crown",
+      "box": [
+        1215,
+        160,
+        1340,
+        242
+      ],
+      "pixels": 7344,
+      "maximumByteError": 178,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.46713870733478574,
+      "pixelsOverOneByte": 109
+    },
+    {
+      "name": "head",
+      "box": [
+        1140,
+        130,
+        1430,
+        440
+      ],
+      "pixels": 17017,
+      "maximumByteError": 178,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.4440461499285029,
+      "pixelsOverOneByte": 349
+    },
+    {
+      "name": "full",
+      "box": [
+        0,
+        0,
+        2560,
+        1440
+      ],
+      "pixels": 17017,
+      "maximumByteError": 178,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.4440461499285029,
+      "pixelsOverOneByte": 349
+    }
+  ],
+  "remaining": [
+    "Full native hair region remains open at 73 over-budget pixels.",
+    "Nearest-mip boundary precision also affects the captured eye case.",
+    "Object receiver coordinate and gather precision need actual GPU comparison.",
+    "The source-origin variant is retained as a failed experiment and is not the working candidate."
+  ],
+  "artifacts": [
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/trace-summary.json",
+      "bytes": 2643,
+      "sha256": "72297fca83a82edce9867efbe9b2fdaaddb99703d89398a7f6e12bd4c669b746"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/variable-ids.json",
+      "bytes": 3125,
+      "sha256": "c3bd22b9ab254bef674b296c739f646ca83e99d1a5b0fd9ccb3ce25c6672a681"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/sampling-probes.json",
+      "bytes": 19739,
+      "sha256": "fc41c982b012263c2a8172dd8180d3fa00870a5ee521150ddc5692a0ae992a51"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/filter-variants.json",
+      "bytes": 2106,
+      "sha256": "f60a106e67590b36eddf6787566d9693d3d7fa8b078902468dc4d9addef53657"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/origin-hypothesis.json",
+      "bytes": 395,
+      "sha256": "3c7ce955c280da051c1c5aaba381d580b7cc2b743cd28988782e3b0bc451aabc"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/origin-capture-v2/receipt.json",
+      "bytes": 21,
+      "sha256": "2c3265f2c8bbea5b81766f695a9df10dc49ae21d5e4c841fcfafacea2bd7cf99"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/origin-capture-v2/hair-region-metrics.json",
+      "bytes": 1196,
+      "sha256": "09e6e43a1f350af72ba6cae8604437291b8f8aaffa544f6b5790e94fa2cd048d"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/origin-capture-v2/command.json",
+      "bytes": 822,
+      "sha256": "0b12fccddd16d8875d80bfe8a7d6c4f0595d935a98314134c38dee2d620db4d4"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/probe_sampling.py",
+      "bytes": 3313,
+      "sha256": "fc20cdebe587c596d2d1fb2df197a5167d7c1373b629e08296f20a9053cde377"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/trace_residuals.py",
+      "bytes": 3482,
+      "sha256": "1dd50130e2ab139caff4fb426a0877a5514763fbd21037ba54c9873dd03a64ba"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/native-1322-263.json",
+      "bytes": 322906,
+      "sha256": "153c945b398ed1d731a65b6e77d95868c44f0841ee042ec410314cfa98795c39"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/native-1324-289.json",
+      "bytes": 323689,
+      "sha256": "ad29530f0c84087d669982bdcd16738812a0379c43096f025391817076621036"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/native-1322-320.json",
+      "bytes": 321816,
+      "sha256": "40f87db62f1c7ff0014d2fb2e0053d3f14766cc7970b8f129b1f71e4128117eb"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/native-1258-215.json",
+      "bytes": 318251,
+      "sha256": "1993838e57ba4b7226c35f4a2d1ced15217b2df70837a7e24d9b86573c90bff5"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/candidate-1322-263.json",
+      "bytes": 693110,
+      "sha256": "1cbb711f659363387fe66bacd54bede9a98cc16727846b1efa82169f9b35fd55"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/candidate-1324-289.json",
+      "bytes": 710329,
+      "sha256": "d06f0aa5f9836c321b26990774e0f6c1554dca5a08a1a9f70ab8ccd9b8e7935e"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/candidate-1322-320.json",
+      "bytes": 649745,
+      "sha256": "62f5267e77025fcc1466c181906076a45f72ac8c282281dc41e52310995d8e4b"
+    },
+    {
+      "path": "build/runs/20261027-031252-hair-residual-fragment-diagnosis-13e962/candidate-1258-215.json",
+      "bytes": 697795,
+      "sha256": "7ed42a7847cb51ecbf9a99ee7ca6de3745a1ed5b2f377acb03604f05a16096a5"
+    }
+  ]
+}
