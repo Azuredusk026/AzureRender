@@ -103,6 +103,7 @@ struct AssetMaterialFrame {
 };
 
 struct AssetMaterial {
+    enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow,One };
     std::array<unsigned,9> authoredMipLevels{};
     std::array<azurerender::TextureImportSettings,9> textureSettings=[] {
         std::array<azurerender::TextureImportSettings,9> result;
@@ -178,6 +179,7 @@ struct AssetMaterial {
             bool present=false;
             float shadowBrightness=1,shadowSaturation=1,shadowScale=1;
             std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
+            CharacterVisibility characterVisibility=CharacterVisibility::One;
         } lighting;
         // Column-major source object axes expressed in the asset frame.
         std::array<float,9> objectBasis{1,0,0,0,1,0,0,0,1};
@@ -233,7 +235,7 @@ struct AssetMaterial {
             bool present=false;
             float bias=0;
         } mainRamp;
-        enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow };
+        using CharacterVisibility=AssetMaterial::CharacterVisibility;
         CharacterVisibility characterVisibility=CharacterVisibility::SceneVisibility;
         float localDiffuseFloorScale=1;
     } nprDiffuse;

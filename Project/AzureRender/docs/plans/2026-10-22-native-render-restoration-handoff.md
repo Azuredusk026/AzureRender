@@ -59,7 +59,12 @@ C16-R4 继续核对屏幕遮罩的独立角色、场景可见量。
 真实发冠的八个冻结控制点误差为零至一字节。
 原生顶点宽度图和片元裁剪图分别绑定。
 正确裁剪的六个强边缘光点通过一字节门禁。
-候选实际投影附件及第六版主入口见[覆盖验收](../acceptance/nr/hair-depth-coverage.md)。
+候选实际投影附件见[覆盖验收](../acceptance/nr/hair-depth-coverage.md)。
+共享角色可见量已进入第七版主入口。
+三个侧发与十四个边缘光控制点通过一字节检查。
+完整头发仍有 104 个像素超过该预算。
+当前继续核对深度重建及压缩法线生产。
+双配置、环境域及主入口见[可见量验收](../acceptance/nr/hair-object-visibility.md)。
 原生整区和动态晋升仍需验证。
 
 机制与待项见[接入验证](../acceptance/nr/outline-material-integration.md)。

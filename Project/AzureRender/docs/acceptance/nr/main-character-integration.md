@@ -1,6 +1,6 @@
 # 主场景角色材质接入
 
-日期：2026-10-26。范围为 NR8-V2 完整材质候选。
+日期：2026-10-27。范围为 NR8-V2 完整材质候选。
 主项目与可玩项目共用动态角色和完整画像。
 完整原生外观及跨编辑入口继续验收。
 
@@ -9,18 +9,22 @@
 工作项目位于以下目录：
 
 ```text
-build/runs/20261026-215130-native-hair-depth-validation-1645d9/main-candidate-v6/
+build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/
 ```
 
 主入口为 `project.azureproject`。
 可玩入口为 `playable-safe.azureproject`。
-角色引用为 `character:/hero-restored-inputs-v6.glb`。
+角色引用为 `character:/hero-restored-inputs-v7.glb`。
 原项目及冻结回归输入分别保存。
 
 两关卡各绑定十三份完整材质文档。
 图片按 UUID 注册并声明依赖。
 身体和服饰按材质身份绑定原生 DDS。
 服饰参数图逐层保存转换结果及采样元数据。
+
+头发照明消费公共对象可见量来源。
+材质遮蔽量与环境入射权重分别保存。
+实际侧发与整区门禁见[可见量验收](hair-object-visibility.md)。
 
 头发片元覆盖通过基础图透明通道消费原生裁剪图。
 顶点宽度图与片元覆盖各自保留来源和采样规则。

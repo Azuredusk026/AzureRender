@@ -981,6 +981,17 @@ int loadSceneRefraction(const tinygltf::Material& material,
     return image;
 }
 
+AssetMaterial::CharacterVisibility parseCharacterVisibility(const nlohmann::json& value,const char* field) {
+    using Source=AssetMaterial::CharacterVisibility;
+    if(value.is_string()) {
+        if(value=="one")return Source::One;
+        if(value=="scene-visibility")return Source::SceneVisibility;
+        if(value=="main-light-shadow")return Source::MainLightShadow;
+        if(value=="object-shadow")return Source::ObjectShadow;
+    }
+    throw std::invalid_argument(std::string("Invalid ")+field);
+}
+
 int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Model& model,
     AssetMaterial& result,int& rampImage) {
     if(!material.extras.IsObject()||!material.extras.Has("azureRenderMaterial"))return -1;
@@ -1102,19 +1113,23 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
     if(source.Has("diffuseScale"))target.diffuseScale=scalar("diffuseScale",0,1);
     if(source.Has("lighting")) {
         const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("lighting");
-        const std::set<std::string> fields{"schemaVersion","shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor"};
-        if(!raw.is_object()||raw.size()!=fields.size()||!raw.contains("schemaVersion")
+        const std::set<std::string> fields{"schemaVersion","shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor","characterVisibility"};
+        if(!raw.is_object()||(raw.size()!=6&&raw.size()!=7)||!raw.contains("schemaVersion")
             ||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
             ||target.surfaceResponse!=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
             ||!(result.materialFeatures&MaterialFeatureDiffuseRamp))
             throw std::invalid_argument("Invalid projectedRamp.lighting ownership or version");
         for(const auto& field:raw.items())if(!fields.count(field.key()))throw std::invalid_argument("Unknown projectedRamp.lighting field");
+        for(const char* field:{"shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor"})
+            if(!raw.contains(field))throw std::invalid_argument("Missing projectedRamp.lighting field");
         const auto number=[&](const nlohmann::json& value,float maximum) {
             if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>maximum)
                 throw std::invalid_argument("Invalid projectedRamp.lighting value");
             return value.get<float>();
         };
         auto& lighting=target.lighting;
+        if(raw.contains("characterVisibility"))lighting.characterVisibility=parseCharacterVisibility(
+            raw.at("characterVisibility"),"projectedRamp.lighting.characterVisibility");
         lighting.shadowBrightness=number(raw.at("shadowBrightness"),16);
         lighting.shadowSaturation=number(raw.at("shadowSaturation"),16);
         lighting.shadowScale=number(raw.at("shadowScale"),16);
@@ -1897,12 +1912,8 @@ AssetMaterial loadMaterial(
                     :indirectNormal=="world-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal
                     :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
             if(npr.contains("characterVisibility")) {
-                const auto& source=npr.at("characterVisibility");
-                if(!source.is_string()||(source!="scene-visibility"&&source!="main-light-shadow"&&source!="object-shadow"))
-                    throw std::invalid_argument("Invalid nprDiffuse.characterVisibility");
-                result.nprDiffuse.characterVisibility=source=="object-shadow"?AssetMaterial::NprDiffuse::CharacterVisibility::ObjectShadow
-                    :source=="main-light-shadow"?AssetMaterial::NprDiffuse::CharacterVisibility::MainLightShadow
-                    :AssetMaterial::NprDiffuse::CharacterVisibility::SceneVisibility;
+                result.nprDiffuse.characterVisibility=parseCharacterVisibility(
+                    npr.at("characterVisibility"),"nprDiffuse.characterVisibility");
             }
             if(npr.contains("localDiffuseFloorScale")) {
                 const auto& value=npr.at("localDiffuseFloorScale");

@@ -4,7 +4,10 @@
 组件通过公共属性、脚本及编辑操作访问。
 当前已接入配置、文档与类型化渲染快照。
 场景渲染器生产深度图集，并提供对象可见量。
+
 NPR 材质通过 `characterVisibility: "object-shadow"` 消费。
+头发在 `hair.projectedRamp.lighting` 中声明该来源。
+通用 NPR 材质在 `nprDiffuse` 中声明该来源。
 
 ## 参数
 

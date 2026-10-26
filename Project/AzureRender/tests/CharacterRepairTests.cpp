@@ -397,6 +397,24 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
         &&litPacked.rows[10]==std::array<float,4>{.8F,.9F,1.1F,.55F}
         &&litPacked.rows[11]==std::array<float,4>{1,.9F,.7F,1.1F},
         "Projected hair lighting must preserve typed colors and independent shadow controls");
+    for(const auto& entry:std::array<std::pair<const char*,float>,4>{{
+            {"one",0.F},{"scene-visibility",2.F},{"main-light-shadow",4.F},{"object-shadow",6.F}}}) {
+        auto withVisibility=litStrand;
+        auto& ramp=withVisibility["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"];
+        ramp.erase("virtualLight");ramp["lighting"]["characterVisibility"]=entry.first;
+        const auto loaded=load(withVisibility);
+        require(packMaterialSurfaceProfile(loaded.materials[0]).rows[6][0]==entry.second,
+            "Hair visibility must retain its selected source independently of the virtual-light flag");
+        ramp["virtualLight"]={{"schemaVersion",1},{"blend",.25},{"objectGain",.75}};
+        const auto virtualVisibility=load(withVisibility);
+        require(packMaterialSurfaceProfile(virtualVisibility.materials[0]).rows[6][0]==entry.second+1.F,
+            "Hair visibility must compose with the virtual-light adapter");
+    }
+    for(const auto& value:Json::array({nullptr,true,1,"invalid"})) {
+        auto bad=litStrand;
+        bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"]["characterVisibility"]=value;
+        reject(bad,"characterVisibility");
+    }
     for(const auto& field:{"schemaVersion","shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor"}) {
         auto bad=litStrand;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"].erase(field);
         reject(bad,"projectedRamp.lighting");

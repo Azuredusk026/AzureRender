@@ -1381,7 +1381,8 @@
         "docs/acceptance/nr/character-indirect-normal.md",
         "docs/plans/2026-10-22-native-render-restoration-handoff.md",
         "docs/acceptance/nr/cloth-native-integration.md",
-        "docs/acceptance/nr/hair-depth-coverage.md"
+        "docs/acceptance/nr/hair-depth-coverage.md",
+        "docs/acceptance/nr/hair-object-visibility.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"
@@ -1430,7 +1431,8 @@
         "docs/acceptance/nr/character-logistics-restored.md",
         "docs/plans/2026-10-22-native-render-restoration-handoff.md",
         "docs/acceptance/nr/cloth-native-integration.md",
-        "docs/acceptance/nr/hair-depth-coverage.md"
+        "docs/acceptance/nr/hair-depth-coverage.md",
+        "docs/acceptance/nr/hair-object-visibility.md"
       ],
       "requiredAcceptance": [
         "NR8.delivery"

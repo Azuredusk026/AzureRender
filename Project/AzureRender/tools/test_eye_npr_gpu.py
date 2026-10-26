@@ -88,7 +88,7 @@ def run(player,output,selected=None,validation=None):
             if validation:assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             runtime=json.loads((folder/'runtime.json').read_text(encoding='utf-8'));assert not runtime['scriptErrors'] and not runtime['presentationErrors']
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8'))
-            assert manifest['materialSurfaceProfileLayoutVersion']==9
+            assert manifest['materialSurfaceProfileLayoutVersion']==10
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
             error=None;expected=None

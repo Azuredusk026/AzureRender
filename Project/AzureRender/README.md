@@ -36,6 +36,7 @@
 距离描边的共享数学与深度来源见[分项验证](docs/acceptance/nr/outline-depth-source.md)。
 公共材质、可选方向流和独立深度壳见[接入验证](docs/acceptance/nr/outline-material-integration.md)。
 实际投影、独立裁剪图及动态主候选见[覆盖验证](docs/acceptance/nr/hair-depth-coverage.md)。
+共享角色可见量、环境域及第七版主入口见[接收验收](docs/acceptance/nr/hair-object-visibility.md)。
 
 场景支持[风格化漫反射照明](docs/runtime/npr-illumination.md)。
 数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。

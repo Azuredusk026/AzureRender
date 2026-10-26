@@ -18,11 +18,36 @@ def component(kind,data):
     return dict(type=kind,version=1,data=data)
 
 
+def hair_receiver(receiver,model,folder,source,lit=False):
+    images=[('shadow.png',(255,255,255,255)),('packed.png',(128,128,128,128)),
+            ('parameters.png',(128,255 if lit else 0,255,255 if lit else 0)),
+            ('hair-ramp.png',(255,255,255,255))]
+    model['images']=[];model['textures']=[]
+    for name,rgba in images:
+        Image.new('RGBA',(2,2) if name=='hair-ramp.png' else (2,1),rgba).save(folder/name)
+        model['images'].append(dict(uri=name));model['textures'].append(dict(source=len(model['images'])-1))
+    lighting=dict(schemaVersion=1,shadowBrightness=.55,shadowSaturation=1.1,shadowScale=.55,
+                  ambientColor=[0,0,0],mainColor=[1,1,1])
+    if source is not None:lighting['characterVisibility']=source
+    projected=dict(schemaVersion=1,primaryShift=0,secondaryShift=0,intensity=1,secondaryRange=1,
+                   edgeFade=1,specularNormalScale=1,surfaceNormalScale=1,directionX=0,
+                   parameterTexture=2,rampTexture=3,secondaryColor=[.25,.4,.7],
+                   objectBasis=[1,0,0,0,1,0,0,0,1],surfaceResponse='strand-diffuse',diffuseScale=.96,
+                   lighting=lighting)
+    receiver['extras']['azureRenderMaterial']=dict(schemaVersion=2,**{'class':'hair'},
+        features=['hair-anisotropy','hair-projected-ramp','diffuse-ramp'],
+        diffuseRamp=dict(schemaVersion=1,texture=0),
+        hair=dict(power=200,strength=1,rampRow=3,strandShift=0,upperLimit=4,
+                  dataTexture=1,dataNormalY='positive',projectedRamp=projected))
+
+
 def run(player,output,selected=None,expected_validation=None):
     output.mkdir(parents=True,exist_ok=False)
     names=['clear','shadow','shadow-fixed','shadow-document','disabled','mirrored-clear','mirrored','two-objects','ordinary','ordinary-disabled']
     names+=['visibility','visibility-lit','visibility-disabled']
     names+=['receiver-zero','receiver-offset','receiver-normal','receiver-combined','receiver-fixed','receiver-document']
+    names+=['one','hair-legacy','hair-one','hair-object','hair-object-fixed','hair-object-document',
+            'hair-object-disabled','hair-clear','hair-one-lit','hair-object-lit','hair-object-ambient','hair-object-ambient-ms']
     if selected:
         assert set(selected)<=set(names);names=[name for name in names if name in selected]
     digest=hashlib.sha256(player.read_bytes()).hexdigest();frames={}
@@ -42,11 +67,19 @@ def run(player,output,selected=None,expected_validation=None):
                     nprDiffuse=dict(schemaVersion=1,shadowScale=.55,lightingInputs='host-scene-radiance',
                         shadowMask='one',baseAo='one',characterVisibility='object-shadow'))
             clear_model=copy.deepcopy(model)
+            if name=='one':receiver['extras']['azureRenderMaterial']['nprDiffuse']['characterVisibility']='one'
+            if name.startswith('hair-'):
+                source=None if name=='hair-legacy' else 'object-shadow' if name.startswith('hair-object') else 'one'
+                hair_receiver(receiver,model,folder,source,name.endswith('-lit'))
+                if name.startswith('hair-object-ambient'):
+                    lighting=receiver['extras']['azureRenderMaterial']['hair']['projectedRamp']['lighting']
+                    lighting.update(ambientColor=[1,1,1],mainColor=[0,0,0])
+                if name.endswith('-ms'):receiver['extras']['azureRenderMaterial']['features'].append('hair-pixel-integral')
             if name.startswith('receiver-'):
                 Image.new('RGBA',(4,4),(230,128,205,255)).save(folder/'normal.png')
                 model['images'].append(dict(uri='normal.png'));model['textures'].append(dict(source=1))
                 receiver['normalTexture']=dict(index=1)
-            if name not in ['clear','mirrored-clear','visibility-lit']:
+            if name not in ['clear','mirrored-clear','visibility-lit','hair-clear','hair-one-lit','hair-object-lit']:
                 model['nodes'].append(dict(mesh=0,translation=[0,0,1],scale=[.125,.125,1]))
                 model['scenes'][0]['nodes'].append(1)
             (folder/'plane.gltf').write_text(json.dumps(model),encoding='utf-8')
@@ -56,6 +89,8 @@ def run(player,output,selected=None,expected_validation=None):
                 nprLighting=dict(schemaVersion=1,enabled=True,ambientDirection=[0,0,1],directionBias=0,
                     directionGain=1,directionFloor=0,litAmbientMix=0,ambientColor=[0,0,0],
                     shadowOverride=1,indoorMix=0,useSceneIrradiance=False))
+            if name.startswith('hair-object-ambient'):
+                level['renderSettings']['nprLighting'].update(ambientWeight=1,outdoorGain=1)
             receiver_node=next(node for node in level['nodes'] if node.get('resourceId')=='plane')
             settings=dict(enabled=not name.endswith('disabled'),center=[0,0,.5],halfExtents=[6,6,3],
                 normalBias=.1,lightBias=.05,filterRadiusX=4,filterRadiusY=2,atlasPage=6)
@@ -64,13 +99,11 @@ def run(player,output,selected=None,expected_validation=None):
                 settings.update(receiverPixelOffsetX=0 if name in ['receiver-zero','receiver-normal'] else -2,
                     receiverPixelOffsetY=0 if name in ['receiver-zero','receiver-normal'] else 2,
                     surfaceNormalBias=name not in ['receiver-zero','receiver-offset'])
-            if name in ['shadow-document','receiver-document']:
-                image_id=str(uuid.uuid4());material_id=str(uuid.uuid4())
-                (folder/'shadow.png.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=image_id,settings={},dependencies=[])))
-                texture_ids={'0':image_id}
-                if name=='receiver-document':
-                    normal_id=str(uuid.uuid4());texture_ids['1']=normal_id
-                    (folder/'normal.png.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=normal_id,settings={},dependencies=[])))
+            if name in ['shadow-document','receiver-document','hair-object-document']:
+                material_id=str(uuid.uuid4());texture_ids={}
+                for index,image in enumerate(model['images']):
+                    identity=str(uuid.uuid4());texture_ids[str(index)]=identity
+                    (folder/(image['uri']+'.azmeta')).write_text(json.dumps(dict(schemaVersion=1,id=identity,settings={},dependencies=[])))
                 (folder/'surface.azurematerial').write_text(json.dumps(complete_material_document(receiver,model,texture_ids)))
                 (folder/'surface.azurematerial.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,settings={},dependencies=list(texture_ids.values()))))
                 receiver_node['materialSlots']={'surface':material_id}
@@ -86,7 +119,11 @@ def run(player,output,selected=None,expected_validation=None):
             level_path.write_text(json.dumps(level,indent=2),encoding='utf-8')
             command=[str(player),'--project',str(folder/'lab.azureproject'),'--width','256','--height','256',
                 '--capture-dir',str(folder/'frames'),'--capture-frames','2','--fixed-frame-step','--qa-camera','scene',
-                '--qa-light','scene','--qa-effect','specular','--qa-effect-state','disabled','--runtime-report',str(folder/'runtime.json')]
+                '--qa-light','scene','--runtime-report',str(folder/'runtime.json')]
+            if name.endswith('-lit'):command+=['--qa-isolation','hair-kk']
+            else:command+=['--qa-effect','specular','--qa-effect-state','disabled']
+            if name.startswith('hair-object-ambient'):command+=['--qa-isolation','ambient','--qa-exposure','0']
+            if name.endswith('-ms'):command+=['--anti-aliasing','multisample']
             if name.endswith('fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             if name.startswith(('visibility','receiver-')):command+=['--qa-isolation','object-shadow-visibility']
             (folder/'command.json').write_text(json.dumps(command,indent=2),encoding='utf-8')
@@ -101,7 +138,8 @@ def run(player,output,selected=None,expected_validation=None):
             pages=0 if name.endswith('disabled') else 2 if name=='two-objects' else 1
             assert manifest['objectShadowLayoutVersion']==2 and manifest['objectShadowPages']==pages
             assert manifest['objectShadowDepthBytes']==(16*1024*1024 if pages else 0)
-            assert manifest['instanceDataLayoutVersion']==2 and manifest['materialSurfaceProfileLayoutVersion']==9
+            assert manifest['instanceDataLayoutVersion']==2 and manifest['materialSurfaceProfileLayoutVersion']==10
+            if name.endswith('-ms'):assert manifest['rasterizationSamples']==4
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
             target=pixels[126:130,200:204] if name=='two-objects' else pixels[126:130,150:154]
@@ -110,6 +148,8 @@ def run(player,output,selected=None,expected_validation=None):
                 assert pixels[124:132,84:92].min()==255,name
                 if name=='visibility':assert target.max()==0,name
                 else:assert target.min()==255,name
+            if name.startswith('hair-object-ambient'):
+                assert target.min()>16,'Character occlusion must preserve the independent ambient incident weight'
             report['captures'].append(dict(name=name,validationEnabled=validation,objectPages=pages,
                 center=pixels[128,152].tolist(),shadowMean=float(target.mean()),
                 control=pixels[128,88].tolist(),imageSha256=hashlib.sha256(frame.read_bytes()).hexdigest()))
@@ -120,6 +160,16 @@ def run(player,output,selected=None,expected_validation=None):
                 assert np.array_equal(frames[name][124:132,84:92],frames[reference][124:132,84:92]),name
         for a,b in [('shadow','shadow-fixed'),('shadow','shadow-document'),('ordinary','ordinary-disabled')]:
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
+        for name in ['hair-object','hair-object-fixed','hair-object-document']:
+            if name in frames and 'hair-one' in frames:
+                assert frames[name][126:130,150:154].mean()<frames['hair-one'][126:130,150:154].mean()*.85,name
+                assert np.array_equal(frames[name][124:132,84:92],frames['hair-one'][124:132,84:92]),name
+        for a,b in [('one','disabled'),('hair-legacy','hair-one'),('hair-object','hair-object-fixed'),
+                    ('hair-object','hair-object-document'),('hair-object-disabled','hair-one'),
+                    ('hair-one-lit','hair-object-lit')]:
+            if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)
+        if 'hair-one-lit' in frames:
+            assert frames['hair-one-lit'][124:132,84:92].max()>4,'Virtual-light-disabled control must retain positive KK energy'
         for name in ['receiver-offset','receiver-normal','receiver-combined']:
             if name in frames and 'receiver-zero' in frames:
                 assert np.any(frames[name]!=frames['receiver-zero']),name

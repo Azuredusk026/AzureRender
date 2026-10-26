@@ -39,7 +39,10 @@
 
 `characterVisibility` 为可选字符串。
 默认 `scene-visibility` 采用传入的场景可见量。
+
 `main-light-shadow` 采用宿主主灯阴影图的实际结果。
+`object-shadow` 采用所属实例的对象投影和过滤结果。
+`one` 使用常量一。
 场景覆盖、亮部选择和角色遮罩分别保留各自消费者。
 
 ```json
