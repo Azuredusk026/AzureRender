@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "started": "2026-10-26",
+  "verified": "2026-10-27",
+  "phase": "NR6-C18",
+  "status": "native-depth-projection-and-cutout-inputs-integrated-full-region-open",
+  "nativeFrame": 10401,
+  "widthMaskResource": "23875",
+  "coverageMaskResource": "23880",
+  "depthEvents": [
+    422,
+    440
+  ],
+  "shadeEvent": 950,
+  "material": {
+    "alphaMode": "MASK",
+    "alphaCutoff": 0.5,
+    "doubleSided": false,
+    "addedRuntimeBindings": 0,
+    "materialBytes": 192,
+    "fragmentTextureSlots": 9
+  },
+  "strongControlPoints": 6,
+  "weakControlPoints": 8,
+  "maximumControlByteError": 1,
+  "debugReleaseWholeImageEqual": true,
+  "regions": [
+    {
+      "name": "crown",
+      "box": [
+        1215,
+        160,
+        1340,
+        242
+      ],
+      "pixels": 7344,
+      "maximumByteError": 17,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.47925744371822804,
+      "pixelsOverOneByte": 219
+    },
+    {
+      "name": "head",
+      "box": [
+        1140,
+        130,
+        1430,
+        440
+      ],
+      "pixels": 17017,
+      "maximumByteError": 44,
+      "p95ByteError": 21.0,
+      "meanAbsoluteByteError": 1.7555581673228733,
+      "pixelsOverOneByte": 1998
+    },
+    {
+      "name": "full",
+      "box": [
+        0,
+        0,
+        2560,
+        1440
+      ],
+      "pixels": 17017,
+      "maximumByteError": 44,
+      "p95ByteError": 21.0,
+      "meanAbsoluteByteError": 1.7555581673228733,
+      "pixelsOverOneByte": 1998
+    }
+  ],
+  "movement": {
+    "status": "passed",
+    "capturedFrames": 16,
+    "positionStart": [
+      0.0,
+      1.034999966621399,
+      9.0
+    ],
+    "positionEnd": [
+      -0.8933441042900085,
+      1.0324134826660156,
+      8.266650199890137
+    ],
+    "movementMetres": 1.1557994237280729,
+    "animationFrames": 176,
+    "fixedSteps": 112,
+    "sampledHeroClips": [
+      0,
+      7
+    ]
+  },
+  "mainImage": {
+    "image": {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/main-v6-release/frames/frame_000000.png",
+      "bytes": 3361718,
+      "sha256": "b578c724dc16ceb85a329c23e6c9e6958b613b8ae18eb59265f5789e7ea09e41"
+    },
+    "changedPixels": 684,
+    "maximumByteError": 183,
+    "bbox": [
+      885,
+      209,
+      985,
+      1079
+    ]
+  },
+  "evidence": [
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/generation-manifest.json",
+      "bytes": 31967,
+      "sha256": "ad4a98fd7fee92afdaca0f8f5c266520b868bc5f69509fc091f95d5cc0233254"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/actual-shell-comparison.json",
+      "bytes": 1816,
+      "sha256": "cc31bbb4eddee3be97c62407c6888e30296949d10fc718fdacd47060260f8785"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/native-mask-data.json",
+      "bytes": 6760,
+      "sha256": "c010267961606078436e76712a3eda79093d581b1de41a21f8b5f0ccee0eba4e"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/native-depth-coverage.json",
+      "bytes": 10637,
+      "sha256": "5d1070729ca61e38ca224314b24f75470a89a11849c189be5d9e29ba9fc5ad64"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/native-coverage-inspect.json",
+      "bytes": 52154,
+      "sha256": "d622fb9a861b5e0096eb9b19d71cd1c6844286febf34c15f88c295bd76215f22"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/native-rim-remaining.json",
+      "bytes": 38944,
+      "sha256": "5e2820d579a0d9c173016894c85bcd4af519698fc6579ba2c68dd4d560640678"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/native-hair-rasterizer.json",
+      "bytes": 1359,
+      "sha256": "56a00fcadf49637425ee6e739d56cfcedb421991809c039383027f9a7fbd7936"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/alpha-coverage-conversion.json",
+      "bytes": 3594,
+      "sha256": "3d7cbc5adfc0c6ff1f872bdd511bf6c17983ed92d181806ecc8c5c150e235d8f"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/native-culling-strong-points.json",
+      "bytes": 1521,
+      "sha256": "7c8073a1fae56d3e4819abf0346cee46ae30705662b9e94312dfcd1803b3a7f7"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/culled-weak-control-points.json",
+      "bytes": 1969,
+      "sha256": "68c567418010c77ea309e8d9068c33fbf17c2cd58b0669f382d8fa2d28922a2c"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/candidate-v6-validation.json",
+      "bytes": 1988,
+      "sha256": "810845f12a0bbe4e0ce1c53abe146f46616af50195f1739c4c475687e5d58542"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/main-candidate-v6.json",
+      "bytes": 1361,
+      "sha256": "e5af3357fd244fbd0c287f2f8e43c43ea4be721f995eb34209964e3d8b073161"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/main-v6-image-comparison.json",
+      "bytes": 359,
+      "sha256": "2b50e87e440e1d0dfcad43f65a1f49b01f1b8da09a08714fa6157027634ce515"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/native-culling/region/hair-region-metrics.json",
+      "bytes": 1197,
+      "sha256": "523d558358e4985b36ea958f4d541cb474e05a9639c97bafe8a1c5ceb2836146"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/playable-v6-dynamic/receipt.json",
+      "bytes": 358,
+      "sha256": "1dbc3067b58b8153abe3e6aeecf67fc92121a8d00680a9dcfa25bc51a93f7228"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/material-validation/receipt.json",
+      "bytes": 229,
+      "sha256": "30ded6c4e9a8f778fe0392546f28e052cd88c9f567d004cd54b526032f70295f"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/converter-red.log",
+      "bytes": 4341,
+      "sha256": "6a6b3f40d29553a48efc5a8791d11a4073942a524ead1ddd32ed42fb72dfe0f7"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/converter-green.log",
+      "bytes": 114,
+      "sha256": "08950c4620612655ebb5176053e39f5b4fd2e271c45d26b146b6c41187a49e2a"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/native-character-green.log",
+      "bytes": 146,
+      "sha256": "3102f472a0d9026fb3504c64fd1edf1a3630abd894e69a6012e64e05c02ad89c"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/cpu-debug.log",
+      "bytes": 894,
+      "sha256": "baafc76e98c8036c0a34842ee0a80c1c4b9fa0bb90ac39deeaf09cddb3b3e92b"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/cpu-material-debug.log",
+      "bytes": 1149,
+      "sha256": "810f979177537523c2accdec43b8634297c7dfb2f7240ae911a27b996c0f68df"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/cpu-release.log",
+      "bytes": 1878,
+      "sha256": "55ca83a717964faebc81feb79259ecca034d56295b784e64e73dfbb3eedfca94"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/alpha-gpu-debug.log",
+      "bytes": 447,
+      "sha256": "27c31fc420be6cb7686b64913f1afd1a2dd28b24d04cf8f25dac2ead73310321"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/alpha-gpu-release.log",
+      "bytes": 451,
+      "sha256": "02381f83c391c8779bbe4f189318e1655322bb6ced00bc24fe1a87c2e4e55b56"
+    },
+    {
+      "path": "build/runs/20261026-215130-native-hair-depth-validation-1645d9/coverage-red.json",
+      "bytes": 1522,
+      "sha256": "4163ca42e8ed795f424d1ccd9024c6009d12f2c41e70ac25322adf20981781d7"
+    }
+  ],
+  "remaining": [
+    "Complete native one-byte region gate",
+    "Coverage resampling levels zero and one",
+    "Color outline illumination",
+    "Full multilayer hair and side/back poses",
+    "Temporal detail quality and formal performance"
+  ]
+}

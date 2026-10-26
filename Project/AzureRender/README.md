@@ -35,7 +35,7 @@
 完整资产缓存复用、并发恢复及实际入口见[缓存验证](docs/acceptance/nr/complete-asset-cache-reuse.md)。
 距离描边的共享数学与深度来源见[分项验证](docs/acceptance/nr/outline-depth-source.md)。
 公共材质、可选方向流和独立深度壳见[接入验证](docs/acceptance/nr/outline-material-integration.md)。
-生产材质、平滑顶点流及外扩深度壳继续接入。
+实际投影、独立裁剪图及动态主候选见[覆盖验证](docs/acceptance/nr/hair-depth-coverage.md)。
 
 场景支持[风格化漫反射照明](docs/runtime/npr-illumination.md)。
 数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。

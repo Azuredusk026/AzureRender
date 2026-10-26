@@ -190,6 +190,15 @@
       "pinMarker": ".keep",
       "primaryProject": "main-candidate-v4/project.azureproject",
       "evidence": "docs/acceptance/nr/evidence/2026-10-26/cloth-native-integration.json"
+    },
+    {
+      "path": "runs/20261026-215130-native-hair-depth-validation-1645d9",
+      "pathBase": "build",
+      "purpose": "头发实际投影、原生裁剪输入与第六版动态主候选。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "main-candidate-v6/project.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/hair-depth-coverage.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

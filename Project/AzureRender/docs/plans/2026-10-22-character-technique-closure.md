@@ -75,6 +75,9 @@ R 控制扩张量，G 参与深度偏移。
 可选流支持半球方向和八面体方向。
 默认固定像素与距离投影分别回归。
 原生整区和动态机位继续执行 C18 门禁。
+片元裁剪使用独立原生输入，并覆盖普通及外扩深度。
+顶点图素、实际投影及完整区域见[覆盖验证](../acceptance/nr/hair-depth-coverage.md)。
+放大层级的局部边界与颜色轮廓保持整区待验。
 
 机制及真实边界见[接入验证](../acceptance/nr/outline-material-integration.md)。
 采样尺度与近远细线门禁见[覆盖验证](../acceptance/nr/outline-temporal-footprint.md)。

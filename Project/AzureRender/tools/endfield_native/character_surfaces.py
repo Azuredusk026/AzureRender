@@ -53,6 +53,44 @@ def orm_specular_image(image):
     return Image.merge('RGBA', (blue, roughness, red, green))
 
 
+def coverage_mips(base_levels, mask_levels):
+    """Pack authored linear mask R into base alpha without changing encoded RGB.
+
+    Both chains must be complete and power-of-two aligned. Larger base levels
+    bilinearly resample mask level zero; matching and smaller levels retain the
+    corresponding authored mask texels. Sampling equivalence at resampled levels
+    requires a separate GPU coverage check. Callers own DDS encoding and metadata.
+    """
+    def validate(levels):
+        if not levels:
+            raise ValueError('Coverage conversion requires complete mip chains')
+        width, height = levels[0].size
+        if (width < 1 or height < 1 or width & (width - 1) or height & (height - 1)
+                or len(levels) != max(width, height).bit_length()):
+            raise ValueError('Coverage mip chains must be complete powers of two')
+        if any(image.size != (max(width >> level, 1), max(height >> level, 1))
+               for level, image in enumerate(levels)):
+            raise ValueError('Coverage mip dimensions are inconsistent')
+
+    validate(base_levels)
+    validate(mask_levels)
+    sizes = [image.size for image in base_levels]
+    if mask_levels[0].size not in sizes:
+        raise ValueError('Coverage mask must align with an authored base level')
+    shift = sizes.index(mask_levels[0].size)
+    if [image.size for image in mask_levels] != sizes[shift:]:
+        raise ValueError('Coverage mask chain does not match base dimensions')
+    result = []
+    for level, base in enumerate(base_levels):
+        alpha = mask_levels[max(level - shift, 0)].convert('RGBA').getchannel('R')
+        if alpha.size != base.size:
+            alpha = alpha.resize(base.size, Image.Resampling.BILINEAR)
+        output = base.convert('RGBA')
+        output.putalpha(alpha)
+        result.append(output)
+    return result
+
+
 def color_image(image, color_space):
     if color_space == 1: return image.convert('RGBA')
     if color_space != 0: raise ValueError('Unknown native image color space')

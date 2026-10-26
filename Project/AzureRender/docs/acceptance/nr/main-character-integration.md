@@ -9,18 +9,21 @@
 工作项目位于以下目录：
 
 ```text
-build/runs/20261026-090813-cloth-material-native-integration-b73ec2/main-candidate-v4/
+build/runs/20261026-215130-native-hair-depth-validation-1645d9/main-candidate-v6/
 ```
 
 主入口为 `project.azureproject`。
 可玩入口为 `playable-safe.azureproject`。
-角色引用为 `character:/hero-restored-inputs-v4.glb`。
+角色引用为 `character:/hero-restored-inputs-v6.glb`。
 原项目及冻结回归输入分别保存。
 
 两关卡各绑定十三份完整材质文档。
 图片按 UUID 注册并声明依赖。
 身体和服饰按材质身份绑定原生 DDS。
 服饰参数图逐层保存转换结果及采样元数据。
+
+头发片元覆盖通过基础图透明通道消费原生裁剪图。
+顶点宽度图与片元覆盖各自保留来源和采样规则。
 
 原生 DDS 保留其源字节和逐级图像。
 场景启用 `nprLighting` 并消费实际辐照资源。
@@ -64,6 +67,7 @@ build/runs/20261026-090813-cloth-material-native-integration-b73ec2/main-candida
 第三版候选保存固定描述符和顶点蒙皮的实际图像对照。
 当前版本使用同一公共绑定与仿射位置契约。
 服饰原生输入及组合照明见[专项验收](cloth-native-integration.md)。
+头发裁剪输入、实际顶点及整区边界见[覆盖验收](hair-depth-coverage.md)。
 
 可玩入口另采集十六帧 W、A 输入与动画混合。
 身体骨盆原点及真实像素见[专项验收](body-rim-origin.md)。

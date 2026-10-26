@@ -8,6 +8,39 @@ from endfield_native import character_surfaces as subject
 
 
 class CharacterSurfaceTests(unittest.TestCase):
+    def test_coverage_keeps_authored_rgb_and_each_mask_mip(self):
+        base = [Image.new('RGBA', size, (19, 87, 201, 143))
+                for size in [(8, 4), (4, 2), (2, 1), (1, 1)]]
+        masks = [Image.new('RGBA', size, (alpha, 99, 211, 255))
+                 for size, alpha in [((2, 1), 0), ((1, 1), 173)]]
+        result = subject.coverage_mips(base, masks)
+        self.assertEqual([im.getpixel((0, 0)) for im in result],
+                         [(19, 87, 201, 0)] * 3 + [(19, 87, 201, 173)])
+        self.assertEqual(base[0].getpixel((0, 0)), (19, 87, 201, 143))
+        self.assertEqual(masks[0].getpixel((0, 0)), (0, 99, 211, 255))
+
+    def test_coverage_same_size_preserves_nonuniform_native_alpha(self):
+        mask = Image.new('RGBA', (2, 1))
+        mask.putdata([(0, 255, 12, 255), (255, 0, 12, 0)])
+        result = subject.coverage_mips(
+            [Image.new('RGB', (2, 1), (81, 92, 103)), Image.new('RGB', (1, 1))],
+            [mask, Image.new('RGBA', (1, 1), (127, 255, 255, 255))])
+        self.assertEqual([result[0].getpixel((x, 0)) for x in range(2)],
+                         [(81, 92, 103, 0), (81, 92, 103, 255)])
+        self.assertEqual(result[1].getpixel((0, 0)), (0, 0, 0, 127))
+
+    def test_coverage_rejects_incomplete_or_unaligned_chains(self):
+        for bases, masks in [([], []),
+                ([Image.new('RGB', (0, 1))], [Image.new('RGB', (0, 1))]),
+                ([Image.new('RGB', (4, 4))], [Image.new('RGB', (2, 2))]),
+                ([Image.new('RGB', (3, 3)), Image.new('RGB', (1, 1))],
+                 [Image.new('RGB', (2, 2)), Image.new('RGB', (1, 1))]),
+                ([Image.new('RGB', (2, 2)), Image.new('RGB', (1, 1))],
+                 [Image.new('RGB', (4, 4)), Image.new('RGB', (2, 2)), Image.new('RGB', (1, 1))])]:
+            with self.subTest(base=[im.size for im in bases], mask=[im.size for im in masks]):
+                with self.assertRaises(ValueError):
+                    subject.coverage_mips(bases, masks)
+
     def test_explicit_specular_preserves_each_source_channel(self):
         png=BytesIO();Image.new('RGBA',(1,1),(51,76,102,204)).save(png,format='PNG')
         obj={'source':'cab','path_id':1,'name':'cloth'}
