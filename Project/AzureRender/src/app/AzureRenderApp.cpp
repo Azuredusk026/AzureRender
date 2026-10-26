@@ -1411,8 +1411,11 @@ void AzureRenderApp::createLogicalDevice() {
     const auto inspectionQuery = inspectionEnabled
         ? reinterpret_cast<PFN_vkGetPipelineExecutablePropertiesKHR>(
             vkGetDeviceProcAddr(device_, "vkGetPipelineExecutablePropertiesKHR")) : nullptr;
+    const auto statisticsQuery=inspectionEnabled&&runOptions_.pipelineStatistics
+        ?reinterpret_cast<PFN_vkGetPipelineExecutableStatisticsKHR>(vkGetDeviceProcAddr(device_,"vkGetPipelineExecutableStatisticsKHR")):nullptr;
     pipelineInspection_ = std::make_unique<azurerender::rhi::PipelineInspection>(
-        device_, inspectionSupported, !runOptions_.pipelineInspectionDisabled, inspectionQuery);
+        device_, inspectionSupported, !runOptions_.pipelineInspectionDisabled, inspectionQuery,
+        azurerender::rhi::PipelineStatisticsOptions{runOptions_.pipelineStatistics,statisticsQuery});
     vkGetDeviceQueue(device_, *indices.graphics, 0, &graphicsQueue_);
     vkGetDeviceQueue(device_, *indices.present, 0, &presentQueue_);
     const std::filesystem::path capabilityDirectory = runOptions_.captureDirectory.empty()

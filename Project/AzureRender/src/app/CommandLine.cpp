@@ -83,6 +83,7 @@ constexpr const char* kHelp =
     "  --disable-compute-skinning        Use vertex-shader skinning and morph\n"
     "  --disable-parallel-recording      Record every pass on the main thread\n"
     "  --disable-pipeline-inspection     Skip supported pipeline executable queries\n"
+    "  --pipeline-statistics             Capture optional shader compile statistics\n"
     "  --disable-gpu-culling             Use CPU visibility and direct draws\n"
     "  --visibility-prototype            Emit stable GPU surface identities\n"
     "  --qa-disable-face-culling         Diagnose winding by rendering both faces\n"
@@ -453,6 +454,8 @@ ParsedCommandLine parseCommandLine(
             parsed.options.parallelRecordingDisabled = true;
         } else if (argument == "--disable-pipeline-inspection") {
             parsed.options.pipelineInspectionDisabled = true;
+        } else if (argument == "--pipeline-statistics") {
+            parsed.options.pipelineStatistics = true;
         } else if (argument == "--disable-gpu-culling") {
             parsed.options.gpuCullingDisabled = true;
         } else if (argument == "--visibility-prototype") {

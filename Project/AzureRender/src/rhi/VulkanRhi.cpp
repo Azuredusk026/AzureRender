@@ -387,6 +387,7 @@ void VulkanRhi::destroyPipelineLayout(const VkPipelineLayout layout) {
 VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
     if (!desc.shader || !desc.layout) throw std::invalid_argument("Compute pipeline requires shader and layout");
     VkComputePipelineCreateInfo info{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};
+    info.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
     info.stage = {VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
     info.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
     info.stage.module = desc.shader;
@@ -394,7 +395,7 @@ VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
     info.layout = desc.layout;
     VkPipeline pipeline = VK_NULL_HANDLE;
     vkCheck(vkCreateComputePipelines(device_, VK_NULL_HANDLE, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
-    if (pipelineInspection_) pipelineInspection_->inspect(pipeline);
+    if (pipelineInspection_) pipelineInspection_->inspect(pipeline,info.flags);
     return pipeline;
 }
 void VulkanCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
@@ -553,13 +554,14 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     pipelineInfo.layout = desc.layout;
     pipelineInfo.renderPass = desc.renderPass;
     pipelineInfo.subpass = 0;
+    pipelineInfo.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
 
     VkPipeline pipeline = VK_NULL_HANDLE;
     vkCheck(
         vkCreateGraphicsPipelines(
             device_, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
         "vkCreateGraphicsPipelines");
-    if (pipelineInspection_) pipelineInspection_->inspect(pipeline);
+    if (pipelineInspection_) pipelineInspection_->inspect(pipeline,pipelineInfo.flags);
     return pipeline;
 }
 

@@ -360,6 +360,7 @@ void AzureRenderApp::createGraphicsPipeline() {
         pipelineInfo.layout = postProcessPipelineLayout_;
         pipelineInfo.renderPass = spatialAntiAliasing_.at(0)->inputPass();
         pipelineInfo.subpass = 0;
+        pipelineInfo.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
         vkCheck(
             vkCreateGraphicsPipelines(
                 device_,
@@ -369,7 +370,7 @@ void AzureRenderApp::createGraphicsPipeline() {
                 nullptr,
                 &innerOutlinePipeline_),
             "vkCreateGraphicsPipelines(inner outline)");
-        if (pipelineInspection_) pipelineInspection_->inspect(innerOutlinePipeline_);
+        if (pipelineInspection_) pipelineInspection_->inspect(innerOutlinePipeline_,pipelineInfo.flags);
 
         VkVertexInputBindingDescription hudBinding{};
         hudBinding.binding = 0;
@@ -412,7 +413,7 @@ void AzureRenderApp::createGraphicsPipeline() {
                 nullptr,
                 &hudPipeline_),
             "vkCreateGraphicsPipelines(HUD)");
-        if (pipelineInspection_) pipelineInspection_->inspect(hudPipeline_);
+        if (pipelineInspection_) pipelineInspection_->inspect(hudPipeline_,pipelineInfo.flags);
     } catch (...) {
         vkDestroyShaderModule(device_, hudFragmentModule, nullptr);
         vkDestroyShaderModule(device_, hudVertexModule, nullptr);

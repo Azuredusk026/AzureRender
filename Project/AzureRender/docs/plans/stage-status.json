@@ -1413,7 +1413,8 @@
         "docs/acceptance/nr/unlit-surface.md",
         "docs/acceptance/nr/character-logistics-restored.md",
         "docs/plans/2026-10-22-native-render-restoration-handoff.md",
-        "docs/acceptance/nr/hair-sampling-boundary.md"
+        "docs/acceptance/nr/hair-sampling-boundary.md",
+        "docs/acceptance/nr/main-aa-cost-attribution.md"
       ],
       "requiredAcceptance": [
         "NR7.delivery"
@@ -1436,7 +1437,8 @@
         "docs/acceptance/nr/cloth-native-integration.md",
         "docs/acceptance/nr/hair-depth-coverage.md",
         "docs/acceptance/nr/hair-object-visibility.md",
-        "docs/acceptance/nr/object-shadow-exact-bias.md"
+        "docs/acceptance/nr/object-shadow-exact-bias.md",
+        "docs/acceptance/nr/main-aa-cost-attribution.md"
       ],
       "requiredAcceptance": [
         "NR8.delivery"

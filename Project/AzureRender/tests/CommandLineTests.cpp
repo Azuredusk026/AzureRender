@@ -96,6 +96,10 @@ int main() try {
                 "Surface and lighting components must be selectable independently");
     require(!defaults.options.pipelineInspectionDisabled,
             "Supported pipeline inspection must default to enabled");
+    require(!azurerender::parseCommandLine({}).options.pipelineStatistics,
+            "Compile statistics must be opt-in");
+    require(azurerender::parseCommandLine({"--pipeline-statistics"}).options.pipelineStatistics,
+            "Compile statistics flag must be preserved");
     require(azurerender::parseCommandLine({"--disable-pipeline-inspection"}).options.pipelineInspectionDisabled,
             "Pipeline inspection diagnostic switch was not parsed");
     require(!defaults.options.visibilityPrototype,"Visibility prototype must be optional");
