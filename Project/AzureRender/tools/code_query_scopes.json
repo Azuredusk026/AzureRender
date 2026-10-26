@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "scopes": {
+    "source": ["src", "shaders", "managed"],
+    "tests": ["tests"],
+    "tools": ["tools"],
+    "docs": ["docs/runtime", "docs/tutorials", "docs/architecture", "docs/development", "docs/reference"],
+    "evidence": ["docs/acceptance", "docs/history", "docs/archive"],
+    "plans": ["docs/plans", "docs/research"],
+    "private": ["assets_private"],
+    "artifacts": ["build"]
+  }
+}

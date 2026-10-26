@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。
+
 原生时序输入与运动解码见[时序核验](docs/acceptance/nr/native-temporal-inputs.md)。
 主辅视图的历史提交边界见[时序帧状态](docs/runtime/temporal-frame-state.md)。
 
