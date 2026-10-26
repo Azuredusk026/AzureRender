@@ -208,6 +208,14 @@
       "pinMarker": ".keep",
       "primaryProject": "main-candidate-v7/project.azureproject",
       "evidence": "docs/acceptance/nr/evidence/2026-10-27/hair-object-visibility.json"
+    },
+    {
+      "path": "runs/20261027-022702-object-visibility-depth-reconstruction-c7312f",
+      "pathBase": "build",
+      "purpose": "公共精确深度偏置、原生对象图集及第七版主入口回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/object-shadow-exact-bias.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

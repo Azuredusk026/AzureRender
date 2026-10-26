@@ -261,6 +261,8 @@ void NullCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDe
 VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
     validateGraphicsColorWriteMasks(desc);
     validateGraphicsMultisampling(desc);
+    if(desc.depthBiasExact&&!desc.depthBias)throw std::invalid_argument("Exact depth bias requires enabled depth bias");
+    if(desc.depthBiasExact&&!supportsExactDepthBias())throw std::runtime_error("Exact depth bias is unavailable on this backend");
     if((supportedSamples&desc.rasterizationSamples)==0||desc.minSampleShading>0&&!supportsSampleShading())
         throw std::runtime_error("Requested raster sampling or sample shading is unavailable");
     const auto pass=renderPassSamples_.find(desc.renderPass);
@@ -276,6 +278,7 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
         + " samples="+std::to_string(desc.rasterizationSamples)
         + " sampleShading="+std::to_string(desc.minSampleShading);
     if(desc.depthBias)calls.back().detail+=" depthBias="+std::to_string(desc.depthBiasConstant)+"/"+std::to_string(desc.depthBiasSlope);
+    if(desc.depthBiasExact)calls.back().detail+=" exactDepthBias=1";
     if(!desc.colorWriteMasks.empty()) {
         calls.back().detail+=" masks=";
         for(const auto mask:desc.colorWriteMasks)calls.back().detail+=std::to_string(mask)+"/";

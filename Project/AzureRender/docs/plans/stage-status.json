@@ -1382,7 +1382,8 @@
         "docs/plans/2026-10-22-native-render-restoration-handoff.md",
         "docs/acceptance/nr/cloth-native-integration.md",
         "docs/acceptance/nr/hair-depth-coverage.md",
-        "docs/acceptance/nr/hair-object-visibility.md"
+        "docs/acceptance/nr/hair-object-visibility.md",
+        "docs/acceptance/nr/object-shadow-exact-bias.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"
@@ -1432,7 +1433,8 @@
         "docs/plans/2026-10-22-native-render-restoration-handoff.md",
         "docs/acceptance/nr/cloth-native-integration.md",
         "docs/acceptance/nr/hair-depth-coverage.md",
-        "docs/acceptance/nr/hair-object-visibility.md"
+        "docs/acceptance/nr/hair-object-visibility.md",
+        "docs/acceptance/nr/object-shadow-exact-bias.md"
       ],
       "requiredAcceptance": [
         "NR8.delivery"

@@ -70,6 +70,7 @@ public:
     std::vector<DescriptorImageWrite> descriptorImageWrites;
     VkSampleCountFlags supportedSamples=VK_SAMPLE_COUNT_1_BIT;
     bool sampleShadingSupported=false;
+    bool exactDepthBiasSupported=true;
 
     IGpuAllocator& allocator() override { return gpuAllocator_; }
     bool supportsSampledImage(VkFormat format,bool) const override {return unavailableSampledFormats.count(format)==0;}
@@ -77,6 +78,7 @@ public:
         return format==VK_FORMAT_UNDEFINED||!usage||((usage&VK_IMAGE_USAGE_SAMPLED_BIT)&&unavailableSampledFormats.count(format))?0:supportedSamples;
     }
     bool supportsSampleShading() const noexcept override {return sampleShadingSupported;}
+    bool supportsExactDepthBias() const noexcept override {return exactDepthBiasSupported;}
 
     void copyBuffer(
         const GpuBuffer& source,

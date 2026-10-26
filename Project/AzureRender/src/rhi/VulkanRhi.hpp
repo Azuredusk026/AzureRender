@@ -20,18 +20,19 @@ public:
         VkQueue graphicsQueue,
         VkCommandPool commandPool,
         GpuAllocator& allocator, bool samplerAnisotropyEnabled=false,
-        PipelineInspection* pipelineInspection=nullptr,bool sampleShadingEnabled=false)
+        PipelineInspection* pipelineInspection=nullptr,bool sampleShadingEnabled=false,bool exactDepthBiasEnabled=false)
         : device_(device),
           physicalDevice_(physicalDevice),
           graphicsQueue_(graphicsQueue),
           commandPool_(commandPool),
           samplerAnisotropyEnabled_(samplerAnisotropyEnabled),allocator_(&allocator),
-          pipelineInspection_(pipelineInspection),sampleShadingEnabled_(sampleShadingEnabled) {}
+          pipelineInspection_(pipelineInspection),sampleShadingEnabled_(sampleShadingEnabled),exactDepthBiasEnabled_(exactDepthBiasEnabled) {}
 
     GpuAllocator& allocator() override { return *allocator_; }
     bool supportsSampledImage(VkFormat format,bool linearFilter) const override;
     VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const override;
     bool supportsSampleShading() const noexcept override {return sampleShadingEnabled_;}
+    bool supportsExactDepthBias() const noexcept override {return exactDepthBiasEnabled_;}
 
     void copyBuffer(
         const GpuBuffer& source,
@@ -116,6 +117,7 @@ private:
     GpuAllocator* allocator_ = nullptr;
     PipelineInspection* pipelineInspection_ = nullptr;
     bool sampleShadingEnabled_=false;
+    bool exactDepthBiasEnabled_=false;
     std::unordered_map<VkRenderPass,VkSampleCountFlagBits> renderPassSamples_;
     std::mutex renderPassMutex_;
 };

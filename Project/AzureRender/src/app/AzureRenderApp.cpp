@@ -1,3 +1,4 @@
+#include "rhi/VulkanDepthBias.hpp"
 #include "runtime/InputPreferences.hpp"
 #include "foundation/FramePacing.hpp"
 #include "assets/AssetDeformation.hpp"
@@ -291,7 +292,7 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandPool();
     rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
         device_, physicalDevice_, graphicsQueue_, commandPool_,
-        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get(), [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.sampleRateShading==VK_TRUE;}(physicalDevice_));
+        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get(), [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.sampleRateShading==VK_TRUE;}(physicalDevice_),exactDepthBiasEnabled_);
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(std::filesystem::u8path(assetPath)).u8string();
     phase("shadow resources", [this] { createShadowResources(); });
@@ -1392,6 +1393,12 @@ void AzureRenderApp::createLogicalDevice() {
     if (inspectionEnabled) {
         enabledExtensions.push_back(VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME);
         vulkan12Features.pNext = &inspectionFeatures;
+    }
+    auto exactDepthBias=azurerender::rhi::queryExactDepthBias(physicalDevice_);
+    exactDepthBiasEnabled_=exactDepthBias.depthBiasExact==VK_TRUE;
+    if(exactDepthBiasEnabled_){
+        enabledExtensions.push_back(VK_EXT_DEPTH_BIAS_CONTROL_EXTENSION_NAME);
+        exactDepthBias.pNext=vulkan12Features.pNext;vulkan12Features.pNext=&exactDepthBias;
     }
     createInfo.pNext = &vulkan12Features;
     createInfo.queueCreateInfoCount = static_cast<std::uint32_t>(queueCreateInfos.size());

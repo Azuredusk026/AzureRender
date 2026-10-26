@@ -413,6 +413,8 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     const GraphicsPipelineDesc& desc) {
     validateGraphicsColorWriteMasks(desc);
     validateGraphicsMultisampling(desc);
+    if(desc.depthBiasExact&&!desc.depthBias)throw std::invalid_argument("Exact depth bias requires enabled depth bias");
+    if(desc.depthBiasExact&&!supportsExactDepthBias())throw std::runtime_error("Exact depth bias is unavailable on this backend");
     if(desc.minSampleShading>0&&!supportsSampleShading())
         throw std::runtime_error("Sample shading is unavailable on this backend");
     {
@@ -470,6 +472,11 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     rasterizer.cullMode = desc.cullMode;
     rasterizer.frontFace = desc.frontFace;
     rasterizer.lineWidth = 1.0F;
+    VkDepthBiasRepresentationInfoEXT biasRepresentation{VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT};
+    if(desc.depthBiasExact){
+        biasRepresentation.depthBiasRepresentation=VK_DEPTH_BIAS_REPRESENTATION_LEAST_REPRESENTABLE_VALUE_FORMAT_EXT;
+        biasRepresentation.depthBiasExact=VK_TRUE;rasterizer.pNext=&biasRepresentation;
+    }
     if (desc.depthBias) {
         rasterizer.depthBiasEnable = VK_TRUE;
         rasterizer.depthBiasConstantFactor = desc.depthBiasConstant;

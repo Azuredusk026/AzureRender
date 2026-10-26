@@ -1550,6 +1550,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"instanceDataLayoutVersion\": " << SceneInstanceGpuData::kLayoutVersion << ",\n"
          << "  \"objectShadowLayoutVersion\": " << ObjectShadowGpuHeader::kLayoutVersion << ",\n"
          << "  \"objectShadowPrepared\": " << (objectShadowPrepared_?"true":"false") << ",\n"
+         << "  \"objectShadowExactDepthBias\": " << (objectShadowPrepared_&&rhi_->supportsExactDepthBias()?"true":"false") << ",\n"
          << "  \"objectShadowPages\": " << (instanceSnapshot_?instanceSnapshot_->objectShadowPages.size():0) << ",\n"
          << "  \"objectShadowDepthBytes\": " << (objectShadowAtlas_&&objectShadowAtlas_->image().image?ObjectShadowAtlas::kDepthBytes:0) << ",\n"
          << "  \"materialTextureBindingLayoutVersion\": " << kTextureBindingLayoutVersion << ",\n"
@@ -3294,6 +3295,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         if(objectShadowPrepared_){
             shadowDesc.renderPass=objectShadowAtlas_->renderPass();
             shadowDesc.depthBiasConstant=8.F;shadowDesc.depthBiasSlope=0.F;
+            shadowDesc.depthBiasExact=rhi_->supportsExactDepthBias();
             objectShadowPipeline_=rhi_->createGraphicsPipeline(shadowDesc);
         }
     } catch (...) {

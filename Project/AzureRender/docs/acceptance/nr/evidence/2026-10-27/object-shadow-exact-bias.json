@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "verified": "2026-10-27",
+  "phase": "NR6-C16",
+  "status": "exact-bias-integrated-native-atlas-and-hair-region-open",
+  "baseCommit": "ea9cf622c5012f18cec529e638d45a7b08d33dc8",
+  "nativeFrame": 10401,
+  "nativeDepthBias": -8,
+  "engineForwardDepthBias": 8,
+  "nativeFormat": "D16",
+  "runtimeExtension": "VK_EXT_depth_bias_control",
+  "capability": "IRhi::supportsExactDepthBias",
+  "pipelineSetting": "GraphicsPipelineDesc::depthBiasExact",
+  "legacyProbe": "One requested unit moves two D16 attachment units on this device.",
+  "gpuExactSamples": 15360,
+  "biases": [
+    0,
+    1,
+    -1,
+    8,
+    -8
+  ],
+  "integralAttachmentDepths": [
+    12345,
+    32768,
+    54321
+  ],
+  "cpuTestsPerConfiguration": 3,
+  "gpuKernelTestsPerConfiguration": 3,
+  "gpuFixtureCasesPerConfiguration": 31,
+  "gpuFixtureFramesPerConfiguration": 62,
+  "debugReleaseFixtureImagesEqual": true,
+  "debugReleaseCapturedImageEqual": true,
+  "bodyControlsPreserved": true,
+  "sidePointCount": 3,
+  "rimPointCount": 14,
+  "maximumControlByteError": 1,
+  "actualAtlas": {
+    "sharedCoveredTexels": 182211,
+    "signedUnitPercentiles": {
+      "min": -27914.0,
+      "p1": -2.0,
+      "p5": -1.0,
+      "p50": 0.0,
+      "p95": 1.0,
+      "p99": 2.0,
+      "max": 11920.0
+    },
+    "exactSharedTexels": 120603,
+    "withinOneUnit": 176136,
+    "pixelsOverTwoUnits": 2380,
+    "renderDocWholeImageEqual": true
+  },
+  "regions": [
+    {
+      "name": "crown",
+      "box": [
+        1215,
+        160,
+        1340,
+        242
+      ],
+      "pixels": 7344,
+      "maximumByteError": 3,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.3287490922294844,
+      "pixelsOverOneByte": 26
+    },
+    {
+      "name": "head",
+      "box": [
+        1140,
+        130,
+        1430,
+        440
+      ],
+      "pixels": 17017,
+      "maximumByteError": 6,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.2899453487688782,
+      "pixelsOverOneByte": 73
+    },
+    {
+      "name": "full",
+      "box": [
+        0,
+        0,
+        2560,
+        1440
+      ],
+      "pixels": 17017,
+      "maximumByteError": 6,
+      "p95ByteError": 1.0,
+      "meanAbsoluteByteError": 0.2899453487688782,
+      "pixelsOverOneByte": 73
+    }
+  ],
+  "runtime": {
+    "main-v7": {
+      "animationFrames": 2,
+      "fixedSteps": 0,
+      "replayedActions": 0,
+      "presentationErrors": [],
+      "scriptErrors": [],
+      "hero": [
+        0.0,
+        1.034999966621399,
+        9.0
+      ],
+      "unloadBuffers": 0,
+      "unloadImages": 0
+    },
+    "playable-v7": {
+      "animationFrames": 176,
+      "fixedSteps": 112,
+      "replayedActions": 4,
+      "presentationErrors": [],
+      "scriptErrors": [],
+      "hero": [
+        -0.8933441042900085,
+        1.0324134826660156,
+        8.266650199890137
+      ],
+      "unloadBuffers": 0,
+      "unloadImages": 0
+    },
+    "bodyControls": [
+      {
+        "pixel": [
+          1251,
+          919
+        ],
+        "source": [
+          85,
+          59,
+          52
+        ],
+        "actual": [
+          85,
+          59,
+          52
+        ]
+      },
+      {
+        "pixel": [
+          1368,
+          380
+        ],
+        "actual": [
+          146,
+          114,
+          100
+        ],
+        "previousVerifiedCandidate": [
+          146,
+          114,
+          100
+        ],
+        "referenceEvidence": "docs/acceptance/nr/evidence/2026-10-26/body-rim-origin.json"
+      }
+    ]
+  },
+  "materialBytes": 192,
+  "materialTextureSlots": 9,
+  "materialLayoutVersion": 10,
+  "objectRecordBytes": 112,
+  "objectLayoutVersion": 2,
+  "addedRenderPasses": 0,
+  "frozenReleasePlayerSha256": "0b4ae83c90c2183fbf75a2fd63470f2af06d4721d5d2713c082b1b6e80b80e7a",
+  "shaderCount": 114,
+  "debugReleaseShadersEqual": true,
+  "remaining": [
+    "Full native hair gate has 73 pixels above one-byte error.",
+    "2380 mutually covered atlas texels differ by more than two D16 units; complete caster coverage and raster precision remain open.",
+    "Hardware without the exact-depth-bias feature uses legacy Vulkan units and requires separate equivalence acceptance.",
+    "Formal NR0-NR12 delivery and performance gates remain open."
+  ],
+  "sourceFingerprints": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "6c5b3af562212a4a19653506d47ad5a9c27a91c75ac3428aac5c5d130b05ffe8"
+    },
+    {
+      "path": "src/rhi/Rhi.hpp",
+      "sha256": "c3594cfc5fcbe23604795c6069117ebf13ee3a5db014c26f06ba19a2dce42d1c"
+    },
+    {
+      "path": "src/rhi/VulkanRhi.hpp",
+      "sha256": "1e3711ba99a0e7242871f51df918a913afa911a6610939ec6781a36ba7cce51b"
+    },
+    {
+      "path": "src/rhi/VulkanRhi.cpp",
+      "sha256": "3659d85254f632b6905cd3378f363099c0b7aee7563b8cf6fb1f394d5383873d"
+    },
+    {
+      "path": "src/rhi/NullRhi.hpp",
+      "sha256": "dda6ec016be3d9133597e9dac65729bc0277b5b057ac25e5202082fd69160093"
+    },
+    {
+      "path": "src/rhi/NullRhi.cpp",
+      "sha256": "103edea2d0b4c62f0abd828082c905dca5ea5ded806770d2dc121766e5a91337"
+    },
+    {
+      "path": "src/rhi/VulkanDepthBias.hpp",
+      "sha256": "385b39439115a89af4d603b04736a49423ba7d0019f66f6da960ccc048230fe9"
+    },
+    {
+      "path": "src/app/AzureRenderApp.cpp",
+      "sha256": "2310bb44086af6a3c8eda625b0119e013a155937368d74a27c556b6d4a4264f2"
+    },
+    {
+      "path": "src/app/AzureRenderApp.hpp",
+      "sha256": "f362b8b9316be4ae5d381a4ac9c450de893435383c2e0333c71388f02c830e75"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.cpp",
+      "sha256": "955497388834e916e6cc21db52dc04f604e7a059536cbc235212c58096fa7a42"
+    },
+    {
+      "path": "tests/DepthBiasGpuTests.cpp",
+      "sha256": "7daa21869c8ada6c028940808bfa2e96f65701103dc38d3fa9080fe3291653b2"
+    },
+    {
+      "path": "tests/NullRhiTests.cpp",
+      "sha256": "47769a0f68dc456a90516dc458861e50a0dc1303480a1b9052cbf6b44c815bb5"
+    },
+    {
+      "path": "tests/ObjectShadowRecordingTests.cpp",
+      "sha256": "64d641a73f921efed18f0d7556160e4a77f6d6be42e8a0d4a9143f0a6d99e4cd"
+    },
+    {
+      "path": "tests/support/VulkanComputeFixture.hpp",
+      "sha256": "eb73bcb798e7f42052f83e20673ef9e55a2797452d430f2c602fa9f17a57a733"
+    },
+    {
+      "path": "shaders/depth_bias_test.frag",
+      "sha256": "b82d8fdbfede7ad2446a3636fba051bc6ed4ae2be400852a7f9ce02f1f7743fd"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/producer-proof.json",
+      "bytes": 2457,
+      "sha256": "d5db063a7c9e55f42913b7cc5189f05034e5f0631d108588349a7e564ef726f4"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/native-inputs.json",
+      "bytes": 601,
+      "sha256": "94f0762034cb491c8231a0b01a33154a8dd1ee0514b434ce0f36ebdb6118bd3a"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/native-t2.bin",
+      "bytes": 16777216,
+      "sha256": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/pipeline-states.json",
+      "bytes": 12276,
+      "sha256": "2b06ff999155330d37341eece1aac15ebc51d0ce37ec9ce134e51cef5e4e4f80"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/receiver-exact-gpu-capture.json",
+      "bytes": 1862,
+      "sha256": "cd1518d0cd2ac1c435b3492635a9db42e19cc62acadf202a12e0a690ff759d25"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/exact-producer-export.json",
+      "bytes": 83,
+      "sha256": "84f909df8c3979b848e4a8d76129aab46324f93a71573d8c213c700470579d2f"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/exact-object-atlas.bin",
+      "bytes": 16777216,
+      "sha256": "ee700ac4164ffd1923cc9ca1eaeddf27366213a4b8dc5cf0e17fa154328f781e"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/exact-object-records.bin",
+      "bytes": 2098064,
+      "sha256": "694a2e62f321bcf60142c46cd8b2249dc09146619f2ecd3e68ac0620ee787958"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/exact-atlas-comparison.json",
+      "bytes": 328,
+      "sha256": "7ebe38031fd4e0880a0d94dcabb9bc028d92be453f3511a222a409cb68231266"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/legacy-probe-red.log",
+      "bytes": 88,
+      "sha256": "eac9213ce0f9d07dd2e714806e4a1eb981f25a9550790256634478f661098ef6"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/red-depth-bias.log",
+      "bytes": 628,
+      "sha256": "96dbb5776250445ca32cee3c63293632b42db33df49e651eff4d878687ec676d"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/green-depth-bias.log",
+      "bytes": 549,
+      "sha256": "23f3ec4e5ba5674ada2703b89ad86371f86e201615e21d509a131b959402e3b1"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/cpu-debug.log",
+      "bytes": 621,
+      "sha256": "9cb9ceae8603ec53481c3eff6de71babe4b8686b0adfc43ebcf31247206f03f2"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/cpu-release.log",
+      "bytes": 625,
+      "sha256": "6dc4da011bb85d3192a8b30cb7f32a40bc7d306f578e0d562145fbd05a4ca6f5"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/gpu-kernels-debug.log",
+      "bytes": 681,
+      "sha256": "80b17875d9d0b05377ccdf325113aa26e77d3ddda2c423f98ed5116108ac1021"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/gpu-kernels-release.log",
+      "bytes": 685,
+      "sha256": "c521bf05f7929fae8085901cd7f60097b99eb0f01c978daa2e8310c5358b4b46"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/object-full-debug/summary.json",
+      "bytes": 11476,
+      "sha256": "cf621e20ebbc13987e119cd1dfdc602af317ae6df2f5f486c51f11b75a942b45"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/object-full-release/summary.json",
+      "bytes": 11507,
+      "sha256": "c169274ed3eb6e5c05a6dcf5b519e41c3a2436280a89df2a5014a8beb93e8730"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/captured-controls.json",
+      "bytes": 5418,
+      "sha256": "e3ed8a2139cdfa9b9f2e48bb4240159ae368f470101ad8e360a54d5ff2e732a7"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/exact-debug/hair-region-metrics.json",
+      "bytes": 1186,
+      "sha256": "f41c478006adfe54291d216e0de491937ce5ebc403004ac06a49a5dc7c9eaa6e"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/exact-debug/frames/capture_manifest.json",
+      "bytes": 9850,
+      "sha256": "d5eaf72a6b11d9ac258220650dbafe8e088846a15b4642cfb395b4201d89d065"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/exact-release/frames/capture_manifest.json",
+      "bytes": 9848,
+      "sha256": "765f33fea32b7b18e6bc481ba6074eafc6ee9a3a7eff6dc1f4e2cb5b3b1a0d95"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/runtime-controls.json",
+      "bytes": 1140,
+      "sha256": "f80a986a5b8b7642bd07218691c23c7bf8c44e29384142f1db260ac52e860d8f"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/main-image-comparison.json",
+      "bytes": 279,
+      "sha256": "75163649ab703f86d141779e3b222a9b1eb3cc513e6d75e0f3a3e6b479490d70"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/main-v7/frames/capture_manifest.json",
+      "bytes": 9781,
+      "sha256": "46ce4abd97394cca413bac7c0bf6aa68238394360b5ef5e4b667e7b1f0e25c37"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/playable-v7/frames/capture_manifest.json",
+      "bytes": 9791,
+      "sha256": "b5a7a5d722d64c7f096d00d47ac23f221847fbd3f9645dd9d2934e5656fd1e29"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/gpu-validation.json",
+      "bytes": 446,
+      "sha256": "87e8ecce3bbb557080177b4687f545cd2e0554f52e0c2cdf74ec95b7cab23b9d"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/frozen-release.json",
+      "bytes": 12141,
+      "sha256": "ec449437a4d9943ec51a51f1979be5cba1e0ed6d1f82bf76277b3e7386639ee4"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/editor-build-debug.log",
+      "bytes": 8982,
+      "sha256": "f86af9e4a5e744d23c2d334c6d7a08c2562a9a309b74f62a3429c00af6876cf3"
+    },
+    {
+      "path": "build/runs/20261027-022702-object-visibility-depth-reconstruction-c7312f/editor-build-release.log",
+      "bytes": 8984,
+      "sha256": "2e1c3720852791041204425cbda1d65044fb2a4398504f12ab600e3cc90c041a"
+    }
+  ]
+}

@@ -272,6 +272,7 @@ private:
     // Resource creation backend handed to scene renderers.
     std::unique_ptr<azurerender::rhi::VulkanRhi> rhi_;
     std::unique_ptr<azurerender::rhi::PipelineInspection> pipelineInspection_;
+    bool exactDepthBiasEnabled_=false;
 
     VkSwapchainKHR swapchain_ = VK_NULL_HANDLE;
     VkFormat swapchainFormat_ = VK_FORMAT_UNDEFINED;

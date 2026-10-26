@@ -36,6 +36,20 @@ std::size_t countCalls(
 }  // namespace
 
 int main() {
+    {
+        NullRhi backend;azurerender::rhi::GraphicsPipelineDesc desc;
+        desc.depthBiasExact=true;bool rejected=false;
+        try{backend.createGraphicsPipeline(desc);}catch(const std::invalid_argument&){rejected=true;}
+        if(!rejected||!backend.calls.empty())return 20;
+        desc.depthBias=true;backend.exactDepthBiasSupported=false;rejected=false;
+        try{backend.createGraphicsPipeline(desc);}catch(const std::runtime_error&){rejected=true;}
+        if(!rejected||!backend.calls.empty())return 21;
+        desc.depthBiasExact=false;auto pipeline=backend.createGraphicsPipeline(desc);backend.destroyPipeline(pipeline);
+        backend.exactDepthBiasSupported=true;desc.depthBiasExact=true;
+        pipeline=backend.createGraphicsPipeline(desc);
+        if(backend.calls.back().detail.find("exactDepthBias=1")==std::string::npos)return 22;
+        backend.destroyPipeline(pipeline);
+    }
 #ifdef _WIN32
     // Asserts must print and abort, not wait on a modal dialog: the harness
     // runs tests without a visible console.

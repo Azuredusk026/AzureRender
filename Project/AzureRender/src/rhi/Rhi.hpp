@@ -122,6 +122,9 @@ struct GraphicsPipelineDesc {
     std::vector<VkColorComponentFlags> colorWriteMasks;
     VkSampleCountFlagBits rasterizationSamples = VK_SAMPLE_COUNT_1_BIT;
     float minSampleShading = 0;
+    // Use one depth-format unit without implementation-dependent scaling.
+    // Requires enabled depth bias and supportsExactDepthBias().
+    bool depthBiasExact = false;
 };
 
 inline bool validSampleCount(VkSampleCountFlagBits samples) {
@@ -381,6 +384,7 @@ public:
     virtual void destroyFramebuffer(VkFramebuffer framebuffer) = 0;
     virtual VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const {return VK_SAMPLE_COUNT_1_BIT;}
     virtual bool supportsSampleShading() const noexcept {return false;}
+    virtual bool supportsExactDepthBias() const noexcept {return false;}
 };
 
 }  // namespace azurerender::rhi

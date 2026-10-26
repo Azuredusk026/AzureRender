@@ -89,3 +89,4 @@ build/runs/20261027-002548-native-hair-layer-region-closure-61c105/
 原生纹理、追踪、矩阵及 GPU 收据保存于该目录。
 逐文件指纹和检查范围见[结构化证据](evidence/2026-10-27/hair-object-visibility.json)。
 前置投影与裁剪见[深度覆盖](hair-depth-coverage.md)。
+对象生产的后续核对见[精确偏置验收](object-shadow-exact-bias.md)。

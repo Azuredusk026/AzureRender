@@ -7,8 +7,9 @@
 using namespace azurerender;
 namespace {
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
-void verify(const std::filesystem::path& shaders,bool indexed,bool compute){
+void verify(const std::filesystem::path& shaders,bool indexed,bool compute,bool exact){
     rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
+    backend.exactDepthBiasSupported=exact;
     context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=shaders.string();
     context.renderExtent={256,192};context.bindlessTextures=indexed;context.computeSkinning=compute;context.cullingEnabled=false;
     auto& limits=context.descriptorLimits;
@@ -27,6 +28,10 @@ void verify(const std::filesystem::path& shaders,bool indexed,bool compute){
     RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;settings.silhouetteOutlineEnabled=false;
     context.renderSettings=&settings;
     renderer.onLoad(context);
+    require(std::any_of(backend.calls.begin(),backend.calls.end(),[exact](const auto& call){
+        return call.name=="createGraphicsPipeline"&&call.detail.find("depthBias=8.000000/0.000000")!=std::string::npos
+            &&(call.detail.find("exactDepthBias=1")!=std::string::npos)==exact;
+    }),"Object shadows must select exact depth units only on capable backends");
     SceneFrameData frame;frame.renderSettings=&settings;frame.swapchainWidth=256;frame.swapchainHeight=192;
     renderer.updateFrame(frame);const auto before=backend.allocator().statistics().liveImages;
     auto scene=std::make_shared<scene::SceneDescription>(context.scene);
@@ -64,7 +69,7 @@ void verify(const std::filesystem::path& shaders,bool indexed,bool compute){
 }
 int main(int argc,char** argv)try{
     require(argc==2,"Expected shader directory");
-    for(bool indexed:{false,true})for(bool compute:{false,true})verify(argv[1],indexed,compute);
+    for(bool exact:{false,true})for(bool indexed:{false,true})for(bool compute:{false,true})verify(argv[1],indexed,compute,exact);
     std::cout<<"Object shadow recording: lazy allocation, two mirrored/scaled instances, immutable graph, disable and release passed\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

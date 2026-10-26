@@ -25,6 +25,7 @@ build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidat
 头发照明消费公共对象可见量来源。
 材质遮蔽量与环境入射权重分别保存。
 实际侧发与整区门禁见[可见量验收](hair-object-visibility.md)。
+图集精确偏置及本批主入口见[生产验收](object-shadow-exact-bias.md)。
 
 头发片元覆盖通过基础图透明通道消费原生裁剪图。
 顶点宽度图与片元覆盖各自保留来源和采样规则。

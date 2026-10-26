@@ -1,6 +1,7 @@
 #pragma once
 #include "rhi/GpuAllocator.hpp"
 #include "rhi/VulkanRhi.hpp"
+#include "rhi/VulkanDepthBias.hpp"
 #include <atomic>
 #include <functional>
 #include <iostream>
@@ -28,7 +29,7 @@ public:
     rhi::GpuAllocator allocator;
     std::unique_ptr<rhi::VulkanRhi> backend;
 
-    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false) {
+    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false) {
         try {
             VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
             application.pApplicationName="AzureRender Compute Contract";application.apiVersion=VK_API_VERSION_1_3;
@@ -80,12 +81,19 @@ public:
             }
             VkDeviceCreateInfo deviceInfo{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
             deviceInfo.queueCreateInfoCount=1;deviceInfo.pQueueCreateInfos=&queueInfo;deviceInfo.pEnabledFeatures=&used;
+            VkPhysicalDeviceDepthBiasControlFeaturesEXT biasFeatures{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT};
+            const char* biasExtension=VK_EXT_DEPTH_BIAS_CONTROL_EXTENSION_NAME;
+            if(exactDepthBias){
+                biasFeatures=rhi::queryExactDepthBias(physical);
+                if(!biasFeatures.depthBiasExact)throw std::runtime_error("Exact depth bias is unavailable");
+                deviceInfo.pNext=&biasFeatures;deviceInfo.enabledExtensionCount=1;deviceInfo.ppEnabledExtensionNames=&biasExtension;
+            }
             vkRequire(vkCreateDevice(physical,&deviceInfo,nullptr,&device),"vkCreateDevice");
             vkGetDeviceQueue(device,family,0,&queue);
             VkCommandPoolCreateInfo commandInfo{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};commandInfo.queueFamilyIndex=family;
             vkRequire(vkCreateCommandPool(device,&commandInfo,nullptr,&pool),"vkCreateCommandPool");
             allocator.initialize(instance,physical,device,VK_API_VERSION_1_3);
-            backend=std::make_unique<rhi::VulkanRhi>(device,physical,queue,pool,allocator,false,nullptr,used.sampleRateShading==VK_TRUE);
+            backend=std::make_unique<rhi::VulkanRhi>(device,physical,queue,pool,allocator,false,nullptr,used.sampleRateShading==VK_TRUE,exactDepthBias);
         } catch(...) {close();throw;}
     }
     ~VulkanComputeFixture() {close();}
