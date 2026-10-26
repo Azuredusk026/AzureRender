@@ -1568,8 +1568,9 @@ void main() {
             float viewAlpha=textureLod(AZ_TEX_STYLE_MASK,
                 vec2(specularRampDot(shadedNormal,-camera.cameraForward.xyz)*.5+.5,.5),0).a;
             float fullDiffuse=specularRampFullDiffuse(viewAlpha,response.aoMask,response.litMask,visibility);
+            vec4 rampIllumination=vec4(illumination.ambient+illumination.direct,mainRadiance.a>0?1:0);
             vec3 mainSpecular=specularRampMain(rampReflectance,rampSample,rampSpecularLobe,fullDiffuse,
-                mainRadiance,camera.nprLightingParameters.w)*material.styleParameters.z*dielectricSpecularWeight;
+                rampIllumination,camera.nprLightingParameters.w)*material.styleParameters.z*dielectricSpecularWeight;
             directSpecular+=mainSpecular;beautyColor+=mainSpecular;
         }
         if(projectedLighting) {

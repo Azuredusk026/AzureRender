@@ -26,6 +26,7 @@
 身体骨盆原点及双配置验证见[径向原点验收](docs/acceptance/nr/body-rim-origin.md)。
 蒙皮齐次位置及剩余严格图像门禁见[位置验收](docs/acceptance/nr/skinning-position-consistency.md)。
 服饰二维高光的公共契约与实际画面边界见[服饰验收](docs/acceptance/nr/cloth-specular-ramp.md)。
+服饰原生输入、组合照明及主候选见[接入验收](docs/acceptance/nr/cloth-native-integration.md)。
 普通材质零贡献光源及主场景预算见[成本验证](docs/acceptance/nr/ordinary-light-zero-energy.md)。
 不透明副本预填及共面规则见[预填验证](docs/acceptance/nr/opaque-snapshot-depth-prefill.md)。
 不透明主通道预填、实际计数及联合成本见[主通道验证](docs/acceptance/nr/opaque-main-depth-prefill.md)。

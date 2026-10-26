@@ -9,7 +9,7 @@ from convert_material_semantics import complete_material_document
 NORMAL=np.array([.22,.07,1.]);NORMAL/=np.linalg.norm(NORMAL)
 PIXEL=(64,64)
 BUDGET=.006
-CASES=['ramp','fixed','vertex','flip','iridescent','half','floor-zero','floor-one','no-main','no-main-iridescent','omitted','omitted-fixed','document','generic']
+CASES=['ramp','fixed','vertex','flip','iridescent','half','floor-zero','floor-one','no-main','no-main-iridescent','omitted','omitted-fixed','document','generic','illumination']
 
 def sample(image,uv):
     height,width=image.shape[:2];x,y=np.asarray(uv)*[width,height]-.5;ix,iy=np.floor([x,y]).astype(int);fx,fy=x-ix,y-iy
@@ -31,7 +31,7 @@ def prepare(root,name):
     if name.startswith('omitted'):profile.pop('specularRamp')
     if name=='generic':
         profile['nprDiffuse']['shadowAlbedo']='base-color';profile.pop('shadowColorLut')
-    material['extras']=dict(azureSlotId='surface',azureRenderMaterial=profile);path.write_text(json.dumps(model));level_path=assets/'scene.azurelevel';level=json.loads(level_path.read_text());level['nodes'][1]['components']['azure.camera']['data'].update(orthographic=True,orthographicHeight=1);level['nodes'].append(dict(id='main'));level['lights']=[] if name.startswith('no-main') else [dict(id='main',nodeId='main',intensity=1.5,radius=10,shape=dict(type='directional',direction=[0,0,-1]))];level['renderSettings'].update(nprLighting=dict(schemaVersion=1,enabled=True,specularFloor=floor),environmentSpecularModel='legacy-schlick');level['reflectionProbe']['intensity']=.1
+    material['extras']=dict(azureSlotId='surface',azureRenderMaterial=profile);path.write_text(json.dumps(model));level_path=assets/'scene.azurelevel';level=json.loads(level_path.read_text());level['nodes'][1]['components']['azure.camera']['data'].update(orthographic=True,orthographicHeight=1);level['nodes'].append(dict(id='main'));level['lights']=[] if name.startswith('no-main') else [dict(id='main',nodeId='main',intensity=1.5,radius=10,shape=dict(type='directional',direction=[0,0,-1]))];level['renderSettings'].update(nprLighting=dict(schemaVersion=1,enabled=True,specularFloor=floor,ambientWeight=1 if name=='illumination' else 0,ambientColor=[.25,.5,1]),environmentSpecularModel='legacy-schlick');level['reflectionProbe']['intensity']=.1
     if name=='document':
         ids={str(i):str(uuid.uuid4()) for i in range(6)}
         for i,file in enumerate(files):(assets/(file+'.png.azmeta')).write_text(json.dumps(dict(schemaVersion=1,id=ids[str(i)],settings={},dependencies=[])))
@@ -48,7 +48,8 @@ def reference(data,isolation):
     if data['name'].startswith('no-main'):return np.zeros(3)
     if data['name'].startswith('omitted'):return None
     view_alpha=sample(data['diffuse'].astype(float)/255,[(np.dot(normal,camera)+1)*.5,.5])[3];main_alpha=sample(data['diffuse'].astype(float)/255,[(np.dot(normal,light)+1)*.5,.5])[3];ao=float(data['orm'][0])/255;full=min(ao,main_alpha,1)
-    return f0*ramp*lobe*1.5*(.5+.5*full)*(data['floor']+(1-data['floor'])*full)
+    illumination=np.array([1.75,2,2.5]) if data['name']=='illumination' else np.full(3,1.5)
+    return f0*ramp*lobe*illumination*(.5+.5*full)*(data['floor']+(1-data['floor'])*full)
 
 def run(player,output,validation=None,resources=None):
     output.mkdir(parents=True,exist_ok=False);rows=[];pictures={}
@@ -68,7 +69,7 @@ def run(player,output,validation=None,resources=None):
         assert np.array_equal(pictures[isolation+'-omitted'],pictures[isolation+'-omitted-fixed'])
     for isolation in ['direct-diffuse','emissive']:
         for name in ['flip','iridescent','omitted']:assert np.array_equal(pictures[isolation+'-ramp'],pictures[isolation+'-'+name]),(isolation,name)
-    for name in ['flip','floor-zero','floor-one']:assert np.array_equal(pictures['reflection-ramp'],pictures['reflection-'+name])
+    for name in ['flip','floor-zero','floor-one','illumination']:assert np.array_equal(pictures['reflection-ramp'],pictures['reflection-'+name])
     assert np.max(abs(pictures['reflection-ramp'].astype(int)-pictures['reflection-iridescent'].astype(int)))>2
     (output/'summary.json').write_text(json.dumps(dict(status='passed',linearErrorBudget=BUDGET,executableSha256=hashlib.sha256(player.read_bytes()).hexdigest(),captures=rows),indent=2))
 

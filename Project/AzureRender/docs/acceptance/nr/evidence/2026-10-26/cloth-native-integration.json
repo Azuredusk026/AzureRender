@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "phase": "NR6-C9-S1",
+  "status": "native-input-and-composed-illumination-integrated-full-appearance-open",
+  "generationManifest": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/generation-manifest.json",
+    "bytes": 31586,
+    "sha256": "1a4fffcf936e686c6aeab06e03aa9df2edd569322676330c20acd1d4bfb2f440"
+  },
+  "nativeComposition": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/native-illumination-composition.json",
+    "bytes": 3702,
+    "sha256": "9d8ef1baaa592c537ef676eac75789ff9a81bb420e98f10f9e3a7c01815ffa14"
+  },
+  "parameterMips": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/parameter-mip-conversion.json",
+    "bytes": 4562,
+    "sha256": "5e8fe95ca3df2dab7c5be50927caf0bd08d934eb07503dc64dcab7d299900328"
+  },
+  "candidates": [
+    {
+      "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/main-candidate-v4.json",
+      "bytes": 4022,
+      "sha256": "4cf7d7e8364de261fe2778a64181f4fd22597eb22f9e71810d0cc144d7990d7d"
+    },
+    {
+      "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/captured-candidate.json",
+      "bytes": 3317,
+      "sha256": "c52f5e16052a713eab658e3b69b798902864aca3f62869329748ee5af864c862"
+    }
+  ],
+  "red": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/illumination-red/receipt.json",
+    "bytes": 216,
+    "sha256": "7bd20398b94b11cdeb8ccb22a54468829f5a557da9fe1238d5a49b9b245d909c"
+  },
+  "green": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/illumination-green/receipt.json",
+    "bytes": 219,
+    "sha256": "212e98586cb8e7c1501465b5ce1b16ead47a6bbd7fcf937431c7e32825987fcf"
+  },
+  "tests": {
+    "debug": {
+      "captures": 38,
+      "maximumLinearError": 0.0008779630298799967,
+      "receipt": {
+        "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/production-debug/summary.json",
+        "bytes": 13444,
+        "sha256": "1ecd81e41a74c622381a25a97b19510a84bb5ed7d595088f42421f2ba8ded076"
+      },
+      "build": {
+        "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/illumination-build-debug.log",
+        "bytes": 1506,
+        "sha256": "b7db9991c7c5c7c942127bf5f6b4795dd2376f79319f6ab648f8e1d7e789ccec"
+      }
+    },
+    "release": {
+      "captures": 38,
+      "maximumLinearError": 0.0008779630298799967,
+      "receipt": {
+        "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/production-release/summary.json",
+        "bytes": 13444,
+        "sha256": "e279cf4293c16711f033e2a3456053f18b24f6804eaca5bae43f6d9445317161"
+      },
+      "build": {
+        "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/illumination-build-release.log",
+        "bytes": 1508,
+        "sha256": "8bd60aae5241952c357692083ad5e9965843d16207971a177518529c8445df18"
+      }
+    }
+  },
+  "actualCapture": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/captured-corrected-comparison.json",
+    "bytes": 1109,
+    "sha256": "e27570918df28d720e229302396a5bc81d7c839769be7c02ec294889dce776cc"
+  },
+  "comparisonImage": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/cloth-reference-comparison.png",
+    "bytes": 128910,
+    "sha256": "feef5c0a79f225499df468443fcbcd3f63ad71ec011a5a46ed7147aded6f8320"
+  },
+  "main": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/main-v4-release/receipt.json",
+    "bytes": 338,
+    "sha256": "af8a2d141ed28898e28710bfc99a012609154e012b17b33261ebe1225317f9f2"
+  },
+  "mainDifference": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/main-v4-image-comparison.json",
+    "bytes": 218,
+    "sha256": "995b84b4c01455c73689b5f80d1a5290432f404078df3c7f42d14e71aefd3ed2"
+  },
+  "playable": {
+    "path": "build/runs/20261026-090813-cloth-material-native-integration-b73ec2/playable-v4-release/receipt.json",
+    "bytes": 469,
+    "sha256": "e61c5705533d95ef507947b582cd25ad42c178b175e1a7cf6c5c29ae9aeac4cc"
+  },
+  "inheritedCpuScope": "8f4ae21 loader, document, settings and ownership checks; this phase changes only the selected shader consumer and its GPU fixtures",
+  "remaining": [
+    "Full cloth mask, shadow and local illumination",
+    "Native debugger/hardware 0.51 target-ULP gate",
+    "Editor/Play/export/move and formal performance",
+    "Other materials, temporal quality and NR12"
+  ],
+  "effectiveMainSettings": {
+    "antiAliasing": 1,
+    "nprLighting": {
+      "ambientColor": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "ambientDirection": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "ambientWeight": 1.0,
+      "directionBias": 0.0,
+      "directionFloor": 1.0,
+      "directionGain": 0.0,
+      "enabled": true,
+      "indoorMix": 0.0,
+      "litAmbientMix": 0.0,
+      "mainColorMix": 0.0,
+      "outdoorGain": 1.0,
+      "schemaVersion": 1,
+      "shadowAmbientGain": 1.0,
+      "shadowOverride": 0.0,
+      "specularFloor": 0.550000011920929,
+      "useSceneIrradiance": true
+    },
+    "materialSurfaceProfileLayoutVersion": 9,
+    "materialTextureBindingLayoutVersion": 1,
+    "sharedMaterialTextureSlots": 2,
+    "objectShadowPrepared": true,
+    "objectShadowPages": 1
+  },
+  "effectiveClothMaterial": {
+    "index": 4,
+    "name": "M_actor_laevat_cloth_04",
+    "class": "fabric",
+    "features": 2646017,
+    "profileVersion": 2,
+    "emissiveStrength": 0,
+    "styleParameters": [
+      1,
+      1,
+      1,
+      0.5
+    ],
+    "featureParameters": [
+      1,
+      0,
+      1,
+      0
+    ],
+    "profileSource": "asset-extras",
+    "primitiveCount": 1
+  }
+}

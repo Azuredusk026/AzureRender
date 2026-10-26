@@ -181,6 +181,15 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-26/cloth-specular-ramp.json"
+    },
+    {
+      "path": "runs/20261026-090813-cloth-material-native-integration-b73ec2",
+      "pathBase": "build",
+      "purpose": "服饰原生层级、组合照明及第四版动态主候选。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "main-candidate-v4/project.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/cloth-native-integration.json"
     }
   ]
 }

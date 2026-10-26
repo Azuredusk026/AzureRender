@@ -9,17 +9,19 @@
 工作项目位于以下目录：
 
 ```text
-build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-candidate-v3/
+build/runs/20261026-090813-cloth-material-native-integration-b73ec2/main-candidate-v4/
 ```
 
 主入口为 `project.azureproject`。
 可玩入口为 `playable-safe.azureproject`。
-角色引用为 `character:/hero-restored-inputs-v3.glb`。
+角色引用为 `character:/hero-restored-inputs-v4.glb`。
 原项目及冻结回归输入分别保存。
 
 两关卡各绑定十三份完整材质文档。
 图片按 UUID 注册并声明依赖。
-身体追加三份原生 DDS，源字节和采样元数据各自核对。
+身体和服饰按材质身份绑定原生 DDS。
+服饰参数图逐层保存转换结果及采样元数据。
+
 原生 DDS 保留其源字节和逐级图像。
 场景启用 `nprLighting` 并消费实际辐照资源。
 
@@ -38,7 +40,7 @@ build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-candidate
 - 头发绑定姿态的平滑方向使用八面体编码。
 - 眼睛 UV 的 V 方向与原生采样约定对应。
 - 眼睛切线第四分量与该 V 方向配对。
-- 身体 UV 与切线第四分量采用配对转换。
+- 身体与第四号服饰的 UV 和切线第四分量采用配对转换。
 
 头发方向转换覆盖 11,564 个顶点。
 眼睛的配对转换覆盖 210 个顶点。
@@ -49,6 +51,7 @@ build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-candidate
 第二姿态的头骨位置误差约为 0.39 毫米。
 局部基底最大分量误差约为 `2.8e-6`。
 四次绘制的实例参数与跨阶段调色板已独立核对。
+
 原始记录和空间边界见[来源验收](material-frame-instance-producer.md)。
 
 执行后顶点用于所属捕获姿态的诊断。
@@ -58,16 +61,21 @@ build/runs/20261026-040118-authored-normal-frame-diagnosis-2a3bee/main-candidate
 ## 实际运行
 
 当前主入口以 Release 完成实际画面捕获。
-固定描述符及顶点蒙皮路径复验同一画面。
+第三版候选保存固定描述符和顶点蒙皮的实际图像对照。
+当前版本使用同一公共绑定与仿射位置契约。
+服饰原生输入及组合照明见[专项验收](cloth-native-integration.md)。
+
+可玩入口另采集十六帧 W、A 输入与动画混合。
 身体骨盆原点及真实像素见[专项验收](body-rim-origin.md)。
 
 以下四次入口及运动验证对应第二版候选。
-当前候选保留其非身体输入和完整动画。
+动态骨架、主场景灯光与运动图持有相同来源。
 
 Release 的四次完整场景捕获均通过。
 主入口与可玩入口分别比较内嵌画像和完整文档。
 每个入口的两张图像均逐像素一致。
 运行诊断及卸载计数检查通过。
+
 本批 Release 使用其缺省的验证层配置。
 
 近景使用实际主场景的灯光和辐照输入。

@@ -102,6 +102,7 @@ NPR 适配及捕获姿态完整文档见[眼睛输入](../acceptance/nr/eye-npr-
 身体骨盆原点及双配置验证见[径向原点验收](../acceptance/nr/body-rim-origin.md)。
 蒙皮齐次位置及剩余严格图像门禁见[位置验收](../acceptance/nr/skinning-position-consistency.md)。
 服饰二维高光的公共契约与实际画面边界见[服饰验收](../acceptance/nr/cloth-specular-ramp.md)。
+服饰原生输入、组合照明及主候选见[接入验收](../acceptance/nr/cloth-native-integration.md)。
 结果及兼容待项见[外轮廓验收](../acceptance/nr/outline-coverage.md)。
 
 ## 资源验证计划

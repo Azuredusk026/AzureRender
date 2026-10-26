@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-22",
+  "updated": "2026-10-26",
   "states": {
     "Complete": "完成",
     "Ready": "Ready",
@@ -1379,7 +1379,8 @@
         "docs/acceptance/nr/character-color-receivers.md",
         "docs/acceptance/nr/character-main-shadow.md",
         "docs/acceptance/nr/character-indirect-normal.md",
-        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md",
+        "docs/acceptance/nr/cloth-native-integration.md"
       ],
       "requiredAcceptance": [
         "NR6.delivery"
@@ -1426,7 +1427,8 @@
         "docs/plans/2026-10-17-native-playable-restoration.md",
         "docs/acceptance/nr/character-logistics-joint.md",
         "docs/acceptance/nr/character-logistics-restored.md",
-        "docs/plans/2026-10-22-native-render-restoration-handoff.md"
+        "docs/plans/2026-10-22-native-render-restoration-handoff.md",
+        "docs/acceptance/nr/cloth-native-integration.md"
       ],
       "requiredAcceptance": [
         "NR8.delivery"
