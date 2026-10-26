@@ -14,6 +14,7 @@
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
 #include "material_sampling.glsl"
+#include "material_specialization.glsl"
 #include "fragment_sampling.glsl"
 #if defined(AZURE_HAIR_PIXEL_INTEGRAL) || defined(AZURE_GEOMETRY_SAMPLES)
 const bool azureHairPixelIntegral=true;
@@ -118,6 +119,8 @@ layout(push_constant) uniform MaterialData {
 layout(constant_id=0) const bool azureOrdinaryOpaque=false;
 #define AZURE_MATERIAL_CLASS (azureOrdinaryOpaque?0U:material.materialClass)
 #define AZURE_ALPHA_MODE (azureOrdinaryOpaque?0:material.alphaMode)
+// View-owned temporal sampling and coverage remain dynamic.
+#define AZURE_MATERIAL_FEATURES azureSpecializedMaterialFeatures(azureOrdinaryOpaque,material.materialFeatures)
 
 #if defined(AZURE_BINDLESS)
 #define AZ_TEX_BASE_COLOR textureArray[nonuniformEXT(material.textureBase + 0u)]
@@ -307,9 +310,9 @@ CharacterProjectedHairEnergy projectedHairResponseWeighted(vec3 view,vec3 light,
         projectedHairTangentDx.xyz,projectedHairTangentDy.xyz))
         return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),true,incident,line);
 #else
-    if(!azureHairPixelIntegral||(material.materialFeatures&8388608U)==0U)
+    if(!azureHairPixelIntegral||(AZURE_MATERIAL_FEATURES&8388608U)==0U)
         return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),false,incident,line);
-    bool temporalSamples=(material.materialFeatures&0x80000000U)!=0U;
+    bool temporalSamples=(AZURE_MATERIAL_FEATURES&0x80000000U)!=0U;
     if(temporalSamples&&!azureUniformMaterialFrame(projectedHairNormalDx,projectedHairNormalDy,
         projectedHairTangentDx.xyz,projectedHairTangentDy.xyz))
         return projectedHairSample(view,light,directional,evaluateLine,textureCoordinate,vec2(0),true,incident,line);
@@ -323,7 +326,7 @@ CharacterProjectedHairEnergy projectedHairResponseWeighted(vec3 view,vec3 light,
         // geometry coverage remains the responsibility of each real sample.
         offset-=gl_SamplePosition-vec2(.5);
 #else
-        if((material.materialFeatures&0x80000000U)!=0U)offset+=vec2(camera.cameraRight.w,camera.cameraUp.w);
+        if((AZURE_MATERIAL_FEATURES&0x80000000U)!=0U)offset+=vec2(camera.cameraRight.w,camera.cameraUp.w);
 #endif
         vec2 uv=textureCoordinate+projectedHairUvDx*offset.x+projectedHairUvDy*offset.y;
         vec2 modulation;CharacterProjectedHairEnergy contribution=projectedHairSample(view,light,directional,evaluateLine,uv,offset,true,incident,modulation);
@@ -353,7 +356,7 @@ CharacterDiffuseResponse projectedHairDiffuseResponse(vec3 base,vec3 normal,vec3
 #if defined(AZURE_GEOMETRY_SAMPLES)
         true
 #else
-        azureHairPixelIntegral&&(material.materialFeatures&0x80800000U)==0x80800000U
+        azureHairPixelIntegral&&(AZURE_MATERIAL_FEATURES&0x80800000U)==0x80800000U
 #endif
         ?textureGrad(AZ_TEX_FACE_SDF,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25).b
         :texture(AZ_TEX_FACE_SDF,textureCoordinate).b;
@@ -398,7 +401,7 @@ vec3 materialClassColor(uint materialClass) {
 }
 
 float materialFeatureEnabled(uint feature) {
-    return (material.materialFeatures & feature) != 0U ? 1.0 : 0.0;
+    return (AZURE_MATERIAL_FEATURES & feature) != 0U ? 1.0 : 0.0;
 }
 
 vec3 sampleToonRamp(float coordinate) {
@@ -579,7 +582,7 @@ void main() {
 #if defined(AZURE_GEOMETRY_SAMPLES)
     alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);
 #else
-    if((material.materialFeatures&0x40000000U)!=0U){alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);}
+    if((AZURE_MATERIAL_FEATURES&0x40000000U)!=0U){alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);}
 #endif
     if(azureHairPixelIntegral){
     projectedHairUvDx=dFdx(textureCoordinate);projectedHairUvDy=dFdy(textureCoordinate);
@@ -596,9 +599,9 @@ void main() {
 #else
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
 #endif
-    if(AZURE_ALPHA_MODE==1&&(material.materialFeatures&0x40000000U)!=0U)
+    if(AZURE_ALPHA_MODE==1&&(AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
         baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
-    if(AZURE_ALPHA_MODE==2&&(material.materialFeatures&0x40000000U)!=0U)
+    if(AZURE_ALPHA_MODE==2&&(AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
 #if defined(AZURE_GEOMETRY_SAMPLES)
         baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
 #else
@@ -676,7 +679,7 @@ void main() {
 #if defined(AZURE_GEOMETRY_SAMPLES)
         true
 #else
-        azureHairPixelIntegral&&(material.materialFeatures&0x80800000U)==0x80800000U
+        azureHairPixelIntegral&&(AZURE_MATERIAL_FEATURES&0x80800000U)==0x80800000U
 #endif
         ?textureGrad(AZ_TEX_HAIR_DATA,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25)
         :texture(AZ_TEX_HAIR_DATA, textureCoordinate);
@@ -1185,7 +1188,7 @@ void main() {
             vec3 hairRadiance=(characterLight||specularOnly)?characterRadiance*pointDiffuse*light.boxParameters.z:radiance;
             if(projectedHair) {
                 bool composedHair=projectedLighting&&float(lightIndex)==camera.nprLightingParameters.y;
-                bool integrateIncident=azureHairPixelIntegral&&(material.materialFeatures&8388608U)!=0U&&!composedHair&&(characterLight||specularOnly);
+                bool integrateIncident=azureHairPixelIntegral&&(AZURE_MATERIAL_FEATURES&8388608U)!=0U&&!composedHair&&(characterLight||specularOnly);
                 CharacterProjectedHairEnergy energy;
                 if(integrateIncident){
                     vec2 unusedLine;ProjectedHairIncident incident=ProjectedHairIncident(radiance,
@@ -1593,7 +1596,7 @@ void main() {
             float scale=mix(hairShadowScale,1.0,weight)*(.5+.5*weight);
             vec3 specularIllumination=(illumination.ambient+illumination.direct)*scale*material.featureParameters.y;
             vec3 primaryMain=mainHairPrimary*specularIllumination,secondaryMain=mainHairSecondary*specularIllumination;
-            if(azureHairPixelIntegral&&(material.materialFeatures&8388608U)!=0U&&mainHairAvailable){
+            if(azureHairPixelIntegral&&(AZURE_MATERIAL_FEATURES&8388608U)!=0U&&mainHairAvailable){
                 vec2 unusedLine;ProjectedHairIncident sampleLighting=ProjectedHairIncident(incident,
                     vec4(3,0,0,visibility),mainRadiance,1,physicalAo,projectedVisibility);
                 CharacterProjectedHairEnergy energy=projectedHairResponseWeighted(viewDirection,lightDirection,true,false,sampleLighting,unusedLine);

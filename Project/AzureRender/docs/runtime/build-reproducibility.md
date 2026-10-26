@@ -27,6 +27,17 @@ python tools/build_provenance.py verify --build-dir build/ninja-msvc-release
 启用托管模块时，记录包含程序集与原生库。
 私有素材通过单独的准入报告关联。
 
+## 着色器依赖
+
+GLSL 编译通过 `-MD` 和 `-MF` 输出实际包含依赖。
+CMake 使用 `DEPFILE` 将依赖交给增量构建。
+依赖文件位于 `CMakeFiles/shader-deps`。
+运行资源目录保存所属 SPIR-V 文件。
+
+共享头文件的改动会触发全部实际消费者重新编译。
+热重载使用源目录的完整内容快照。
+其共享头文件纳入同一内容指纹和编译事务。
+
 ## 回归入口
 
 ```powershell

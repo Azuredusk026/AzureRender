@@ -1,0 +1,715 @@
+{
+  "schemaVersion": 1,
+  "verified": "2026-10-27",
+  "phase": "NR7-AA5",
+  "status": "generic-feature-folding-and-incremental-includes-integrated-formal-gates-open",
+  "baseCommit": "b8adbd0",
+  "materialPolicy": {
+    "className": "generic",
+    "alphaMode": "opaque",
+    "allowedAuthoredValues": [
+      0,
+      8,
+      32,
+      40
+    ],
+    "preservedSurfaceFlags": [
+      "emissive-mask",
+      "neutral-fallback"
+    ],
+    "preservedViewFlags": [
+      2147483648,
+      1073741824
+    ],
+    "gpuPreserveMask": "0xc0000028",
+    "mainPipelines": 3,
+    "snapshot": "full-shader",
+    "parameterAndTextureInputs": "dynamic",
+    "layoutVersions": {
+      "material": 10,
+      "instance": 2,
+      "objectShadow": 2
+    }
+  },
+  "gpuFeatureInputs": 12,
+  "gpuFeatureResults": 24,
+  "shaderModules": 117,
+  "shaderConfigurationsByteEqual": true,
+  "contractsPerConfiguration": 7,
+  "hotReloadPerConfiguration": 1,
+  "shaderDependency": {
+    "status": "passed",
+    "configurations": [
+      {
+        "configuration": "debug",
+        "affectedShaderOutputs": 25,
+        "families": [
+          "mesh.frag",
+          "specialization_test.comp"
+        ]
+      },
+      {
+        "configuration": "release",
+        "affectedShaderOutputs": 25,
+        "families": [
+          "mesh.frag",
+          "specialization_test.comp"
+        ]
+      }
+    ],
+    "touchRebuildPreservesBytes": true,
+    "shaderCount": 117,
+    "crossConfigurationByteEqual": true
+  },
+  "captures": {
+    "main-debug": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "pipelines": 45,
+      "playerSha256": "fa4aee7a23290a058507d8f3f8ea9d93b878ef1e025589a86a189bde561169b7"
+    },
+    "character-debug": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "pipelines": 44,
+      "playerSha256": "fa4aee7a23290a058507d8f3f8ea9d93b878ef1e025589a86a189bde561169b7"
+    },
+    "main-release": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "pipelines": 45,
+      "playerSha256": "9f07cf5e7f9bde7466bec67ae264f96f6719edc09ca7dc315c822e7829c015da"
+    },
+    "character-release": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "imageExact": true,
+      "maximumByteError": 0,
+      "changedPixels": 0,
+      "pipelines": 44,
+      "playerSha256": "9f07cf5e7f9bde7466bec67ae264f96f6719edc09ca7dc315c822e7829c015da"
+    }
+  },
+  "publicGpu": {
+    "debug": {
+      "npr": {
+        "status": "passed",
+        "playerSha256": "fa4aee7a23290a058507d8f3f8ea9d93b878ef1e025589a86a189bde561169b7",
+        "budget": 0.008,
+        "maximumLinearError": 0.0029339036009812802,
+        "captures": 36
+      },
+      "probe": {
+        "status": "passed",
+        "linearErrorBudget": 0.004,
+        "characterLinearErrorBudget": 0.0005,
+        "playerSha256": "fa4aee7a23290a058507d8f3f8ea9d93b878ef1e025589a86a189bde561169b7",
+        "captures": 26
+      },
+      "overrides": {
+        "status": "passed",
+        "maximumLinearErrorBudget": 0.004,
+        "playerSha256": "fa4aee7a23290a058507d8f3f8ea9d93b878ef1e025589a86a189bde561169b7",
+        "captures": 8
+      }
+    },
+    "release": {
+      "npr": {
+        "status": "passed",
+        "playerSha256": "9f07cf5e7f9bde7466bec67ae264f96f6719edc09ca7dc315c822e7829c015da",
+        "budget": 0.008,
+        "maximumLinearError": 0.0029339036009812802,
+        "captures": 36
+      },
+      "probe": {
+        "status": "passed",
+        "linearErrorBudget": 0.004,
+        "characterLinearErrorBudget": 0.0005,
+        "playerSha256": "9f07cf5e7f9bde7466bec67ae264f96f6719edc09ca7dc315c822e7829c015da",
+        "captures": 26
+      },
+      "overrides": {
+        "status": "passed",
+        "maximumLinearErrorBudget": 0.004,
+        "playerSha256": "9f07cf5e7f9bde7466bec67ae264f96f6719edc09ca7dc315c822e7829c015da",
+        "captures": 8
+      }
+    }
+  },
+  "multisample": {
+    "validationErrors": 0,
+    "resourcesReleased": true,
+    "rasterizationSamples": 4,
+    "imageExact": false,
+    "maximumByteError": 1,
+    "changedPixels": 4,
+    "publishedFlatByteBudget": 1,
+    "points": [
+      {
+        "pixel": [
+          444,
+          167
+        ],
+        "baseline": [
+          53,
+          52,
+          53,
+          255
+        ],
+        "candidate": [
+          53,
+          52,
+          52,
+          255
+        ]
+      },
+      {
+        "pixel": [
+          1569,
+          680
+        ],
+        "baseline": [
+          222,
+          220,
+          221,
+          255
+        ],
+        "candidate": [
+          222,
+          220,
+          222,
+          255
+        ]
+      },
+      {
+        "pixel": [
+          480,
+          718
+        ],
+        "baseline": [
+          126,
+          122,
+          125,
+          255
+        ],
+        "candidate": [
+          126,
+          123,
+          125,
+          255
+        ]
+      },
+      {
+        "pixel": [
+          369,
+          889
+        ],
+        "baseline": [
+          136,
+          133,
+          136,
+          255
+        ],
+        "candidate": [
+          135,
+          133,
+          136,
+          255
+        ]
+      }
+    ]
+  },
+  "playable": {
+    "status": "passed-runtime-replay",
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000001.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000002.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000003.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000004.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000005.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000006.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000007.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000008.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000009.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000010.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000011.png",
+        "changedPixels": 1,
+        "maximumByteError": 1
+      },
+      {
+        "frame": "frame_000012.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000013.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000014.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000015.png",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "stateAndPositionsExact": true,
+    "animationFrames": 176,
+    "fixedSteps": 112,
+    "actions": 4,
+    "horizontalDisplacement": 1.1557965296672654,
+    "resourcesReleased": true,
+    "errors": 0
+  },
+  "performance": {
+    "extent": [
+      1920,
+      1080
+    ],
+    "qualityMode": 1,
+    "warmupFrames": 16,
+    "steadyFrames": 80,
+    "baseline": {
+      "shadowMs": {
+        "mean": 3.9738472000000002,
+        "p95": 4.438678400000001
+      },
+      "sceneMs": {
+        "mean": 55.902348800000006,
+        "p95": 58.408396800000006
+      },
+      "postProcessMs": {
+        "mean": 0.21388800000000002,
+        "p95": 0.2171392
+      },
+      "frameMs": {
+        "mean": 60.09008399999999,
+        "p95": 62.637664
+      }
+    },
+    "candidate": {
+      "shadowMs": {
+        "mean": 3.8936892,
+        "p95": 4.336742399999999
+      },
+      "sceneMs": {
+        "mean": 50.4310272,
+        "p95": 53.392588800000006
+      },
+      "postProcessMs": {
+        "mean": 0.20716800000000002,
+        "p95": 0.2130432
+      },
+      "frameMs": {
+        "mean": 54.5318844,
+        "p95": 57.397305599999996
+      }
+    },
+    "passes60FpsGpuBudget": false
+  },
+  "negativeCandidate": {
+    "allowedAuthoredValues": [
+      32
+    ],
+    "gpuFold": "(submitted & 0xc0000000) | 32",
+    "steady": {
+      "shadowMs": {
+        "mean": 4.212558400000001,
+        "p95": 4.4726032
+      },
+      "sceneMs": {
+        "mean": 69.09391360000001,
+        "p95": 71.4974208
+      },
+      "postProcessMs": {
+        "mean": 0.215872,
+        "p95": 0.2253312
+      },
+      "frameMs": {
+        "mean": 73.522344,
+        "p95": 75.9523904
+      }
+    },
+    "promoted": false
+  },
+  "hotMaterialPushConstants": {
+    "status": "exported",
+    "events": [
+      {
+        "event": 2405,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              40
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "event": 2854,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              40
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "event": 3568,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              40
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "event": 5172,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              40
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "event": 9852,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "event": 10723,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              40
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "event": 11362,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              40
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "event": 12488,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "event": 13403,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              40
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "event": 14218,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              40
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "event": 14511,
+        "push": [
+          {
+            "name": "alphaMode",
+            "value": [
+              2
+            ]
+          },
+          {
+            "name": "materialClass",
+            "value": [
+              0
+            ]
+          },
+          {
+            "name": "materialFeatures",
+            "value": [
+              1032
+            ]
+          },
+          {
+            "name": "materialProfileVersion",
+            "value": [
+              2
+            ]
+          }
+        ]
+      }
+    ],
+    "matchedEvents": [
+      2405,
+      2854,
+      3568,
+      5172,
+      9852,
+      10723,
+      12488,
+      13403
+    ]
+  },
+  "sourceHashes": {
+    "CMakeLists.txt": "676ec5921da20402ebd25c9da68c65740492f723569d03cd9c9d089127309277",
+    "src/render/MaterialPipelinePolicy.hpp": "3b19ee28fb0b4b92299e7205f159f04ab31d1517dbbe4eebd590f2c9dcf1be4e",
+    "shaders/mesh.frag": "e6c2c07dd08e0317576bc20b47c5d872d4eb4d6f3bbc71f946d026306ab813af",
+    "shaders/material_specialization.glsl": "52ebaf7d5679083740edfa9f14e72f728a661cf764b2354e54e7ccd49b8e6cde",
+    "shaders/specialization_test.comp": "1ef8295551d38ce7eb84264c90606d906f19f0825cdb34c9a0577b51c70d482c",
+    "tests/MaterialPipelinePolicyTests.cpp": "579fd3aae09964b985b2100918c088088a095befc80a1513c9c320947475a659",
+    "tests/ShaderSpecializationGpuTests.cpp": "380cadb259b9db21ce7fd4ea95e7cebca378d50813a4aafe8c5e4a82b5459f6d"
+  },
+  "artifacts": {
+    "run": "build/runs/20261027-060450-default-material-feature-specialization-3837ad",
+    "capture": "build/runs/20261027-042606-ordinary-material-specialization-af947b/main-gpu_frame2.rdc"
+  },
+  "remaining": [
+    "NR0-NR12 formal acceptance",
+    "AA6 strict static and motion equivalence",
+    "1080p 60 fps budget",
+    "native hair and eye sampling boundaries"
+  ]
+}

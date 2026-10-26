@@ -183,6 +183,8 @@ function(compile_shader source_file)
         set(shader_name "${SHADER_OUTPUT_NAME}")
     endif()
     set(shader_output "${SHADER_BINARY_DIR}/${shader_name}.spv")
+    set(shader_dependency_directory "${CMAKE_CURRENT_BINARY_DIR}/CMakeFiles/shader-deps")
+    set(shader_depfile "${shader_dependency_directory}/${shader_name}.d")
     set(shader_define_args)
     set(shader_lut_dependency)
     get_filename_component(shader_source_base "${source_file}" NAME)
@@ -245,8 +247,9 @@ function(compile_shader source_file)
 
     add_custom_command(
         OUTPUT "${shader_output}"
-        COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
-        COMMAND Vulkan::glslc ${shader_define_args} "${source_file}" -o "${shader_output}"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}" "${shader_dependency_directory}"
+        COMMAND Vulkan::glslc ${shader_define_args} -MD -MF "${shader_depfile}" "${source_file}" -o "${shader_output}"
+        DEPFILE "${shader_depfile}"
         DEPENDS "${source_file}" ${shader_lut_dependency} "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/environment_specular.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/character_surface.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM

@@ -74,10 +74,16 @@ RHI 管线描述使用 `ShaderSpecialization` 保存常量。
 非法列表在调用驱动或记录模拟管线前拒绝。
 创建期间的数据与映射由 RHI 调用栈持有。
 
-普通不透明材质的颜色管线使用专用化常量零。
-类别与透明模式固定，其余输入继续读取公共材质数据。
+普通通用不透明材质的颜色管线使用专用化常量零。
+功能集合由零、自发光遮罩及中性标志组成。
+类别、透明模式及未使用的功能位固定。
+参数、纹理、自发光、中性及视图采样标志保持动态。
 主颜色拥有三种朝向，快照颜色采用完整程序。
 场景卸载与管线重建释放所属句柄。
+
+附加着色功能及未知位采用完整程序。
+显式 PBR 与 glTF 默认材质消费同一选择规则。
+编译依赖见[构建复现](../runtime/build-reproducibility.md)。
 
 接口依据见 [Vulkan 管线统计](https://docs.vulkan.org/refpages/latest/refpages/source/vkGetPipelineExecutableStatisticsKHR.html)。
 抗锯齿预算见[空间抗锯齿计划](../plans/2026-10-22-spatial-antialiasing.md)。

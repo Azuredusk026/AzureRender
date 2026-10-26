@@ -46,6 +46,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 完整资产缓存复用与主入口图像见[缓存验证](../acceptance/nr/complete-asset-cache-reuse.md)。
 主场景的实际绘制成本与剩余预算见[专项计划](2026-10-25-main-scene-shading-budget.md)。
 普通材质的有界专用化及快照精度见[专项验证](../acceptance/nr/ordinary-material-specialization.md)。
+基础功能集合与共享头文件构建见[功能验证](../acceptance/nr/generic-material-feature-folding.md)。
 副本预填、实际入口及冻结图像见[专项验收](../acceptance/nr/opaque-snapshot-depth-prefill.md)。
 完整画像的轻量槽位查询见[专项验收](../acceptance/nr/material-slot-inspection.md)。
 主入口的完整画像、眼睛坐标及动态轴见[接入验证](../acceptance/nr/main-character-integration.md)。
