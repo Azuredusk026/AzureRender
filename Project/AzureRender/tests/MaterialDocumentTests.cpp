@@ -150,6 +150,7 @@ int main(){try{
     {std::ofstream output(replacementPath);output<<patchDocument.encode();}
     source.emissiveStrength=.5F;source.baseColorPixels={71,82,93,255};source.baseColorWidth=source.baseColorHeight=1;
     source.faceSdf.headNode=7;source.faceSdf.headNodeName="Head";source.faceSdf.pixels={9,8,7,6};
+    source.specularRamp={true,true,.35F};
     mesh.materials={source};const auto patchMessages=messages.size();applyMaterialBindings(mesh,{{"source-slot",binding}});
     std::filesystem::remove(replacementPath);
     const auto& patched=mesh.materials[0];
@@ -168,6 +169,8 @@ int main(){try{
         &&patched.nprDiffuse.localDiffuseFloorScale==source.nprDiffuse.localDiffuseFloorScale
         &&patched.nprDiffuse.rimOrigin.present&&patched.nprDiffuse.rimOrigin.node==source.nprDiffuse.rimOrigin.node
         &&patched.nprDiffuse.rimOrigin.nodeName==source.nprDiffuse.rimOrigin.nodeName
+        &&patched.specularRamp.present&&patched.specularRamp.flipV
+        &&patched.specularRamp.iridescence==source.specularRamp.iridescence
         &&(patched.materialFeatures&MaterialFeatureGeometryShadow)!=0
         &&patched.materialClass==source.materialClass&&patched.baseColorPixels==source.baseColorPixels,
         "Parameter override must retain unselected source fields and character inputs");

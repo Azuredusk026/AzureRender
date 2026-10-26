@@ -33,6 +33,7 @@
     "litAmbientMix": 0,
     "mainColorMix": 0,
     "shadowOverride": 0,
+    "specularFloor": 0,
     "useSceneIrradiance": false
   }
 }
@@ -51,6 +52,7 @@
 | litAmbientMix | 0 至 1，环境量与单位填充的混合权重 |
 | mainColorMix | 0 至 1，主灯颜色对可见环境项的调制 |
 | shadowOverride | 0 至 1，实际主灯阴影向完全可见的混合 |
+| specularFloor | 0 至 1，二维高光主光照明的底值，默认 0 |
 
 未知字段、非法版本及非有限输入触发错误。
 非法解析保留调用方已有设置。
@@ -101,3 +103,15 @@ CPU 大小和偏移通过静态检查约束。
 GPU 检查覆盖固定与索引描述符。
 捕获清单保存实际照明设置，并将其纳入状态摘要。
 原生来源与检查范围见[照明验收](../acceptance/nr/npr-illumination.md)。
+
+## 二维高光照明
+
+声明 `specularRamp` 的表面消费独立主光镜面响应。
+照明权重由视角色带 Alpha、AO 及亮区遮罩组合。
+`specularFloor` 对该权重设置照明底值。
+`shadowOverride` 继续持有场景可见量的来源。
+
+主光颜色及强度使用公共方向灯选择结果。
+无有效主光时，该专用直接镜面贡献为零。
+普通局部灯及环境反射各自消费所属响应。
+完整规则见[二维高光色带](specular-ramp.md)。

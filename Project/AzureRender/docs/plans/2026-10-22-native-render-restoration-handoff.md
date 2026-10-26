@@ -20,6 +20,7 @@ C15 完整画像、UUID 依赖及编辑事务接入通过。
 双帧的实际实例记录与材质帧见[来源核对](../acceptance/nr/material-frame-instance-producer.md)。
 身体骨盆原点及双配置验证见[径向原点验收](../acceptance/nr/body-rim-origin.md)。
 蒙皮齐次位置及剩余严格图像门禁见[位置验收](../acceptance/nr/skinning-position-consistency.md)。
+服饰二维高光的公共契约与实际画面边界见[服饰验收](../acceptance/nr/cloth-specular-ramp.md)。
 虚拟主灯与独立条纹已接入公共材质契约。
 三个真实正主叶及五份关闭对照见[分层验证](../acceptance/nr/projected-hair-positive-layers.md)。
 C11-R7 接入逐材质光色，范围见[皮肤验证](../acceptance/nr/npr-material-lighting.md)。

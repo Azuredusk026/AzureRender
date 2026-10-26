@@ -173,6 +173,14 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-26/skinning-position-consistency.json"
+    },
+    {
+      "path": "runs/20261026-062121-cloth-specular-ramp-capture-0e33fc",
+      "pathBase": "build",
+      "purpose": "服饰二维高光色带、源骨骼绑定及硬件输出边界。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-26/cloth-specular-ramp.json"
     }
   ]
 }

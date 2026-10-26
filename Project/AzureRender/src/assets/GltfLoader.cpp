@@ -201,7 +201,7 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","nprDiffuse","surface","composite","sceneRefraction"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
             for(const char* key:{"styleParameters","featureParameters"})if(profile.contains(key)) {
                 const auto& vector=profile.at(key);
@@ -1171,6 +1171,42 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
 #include "EyeSurfaceLoader.inc"
 #include "OutlineSurfaceLoader.inc"
 
+int loadSpecularRamp(const tinygltf::Material& material,const tinygltf::Model& model,
+    AssetMaterial& result,int previousImage) {
+    if(material.extras_json_string.empty())return previousImage;
+    const auto extras=nlohmann::json::parse(material.extras_json_string);
+    if(!extras.contains("azureRenderMaterial"))return previousImage;
+    const auto& parent=extras.at("azureRenderMaterial");
+    if(!parent.contains("specularRamp"))return previousImage;
+    const auto& raw=parent.at("specularRamp");
+    const std::set<std::string> fields{"schemaVersion","texture","flipV","iridescence","lightingInputs"};
+    if(!raw.is_object()||raw.size()!=fields.size())throw std::invalid_argument("Invalid specularRamp fields");
+    for(const auto& field:fields)if(!raw.contains(field))throw std::invalid_argument("Missing specularRamp field "+field);
+    if(!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+        ||!raw.at("texture").is_number_integer()||raw.at("texture").get<double>()<0
+        ||raw.at("texture").get<double>()>=model.textures.size()||!raw.at("flipV").is_boolean()
+        ||!raw.at("lightingInputs").is_string()||raw.at("lightingInputs")!="host-main-light")
+        throw std::invalid_argument("Invalid specularRamp contract");
+    if(parent.at("schemaVersion")!=2||!parent.contains("nprDiffuse")
+        ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Fabric
+            &&result.materialClass!=AssetMaterialClass::Metal)
+        ||previousImage>=0||(result.materialFeatures&MaterialFeatureFaceSdfEligible)
+        ||parent.contains("surface")||parent.contains("composite")||parent.contains("sceneRefraction")
+        ||result.transmission!=0||result.thickness!=0)
+        throw std::invalid_argument("Incompatible specularRamp material owners");
+    const auto number=[&](const char* name,double maximum){const auto& value=raw.at(name);
+        if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>maximum)
+            throw std::invalid_argument(std::string("Invalid specularRamp.")+name);
+        return value.get<float>();};
+    result.specularRamp={true,raw.at("flipV").get<bool>(),number("iridescence",1)};
+    const int image=model.textures.at(raw.at("texture").get<std::size_t>()).source;
+    if(image<0||static_cast<std::size_t>(image)>=model.images.size())throw std::invalid_argument("specularRamp requires a valid image");
+    auto& sampler=result.textureSettings[5];sampler.usage=sampler.colorSpace="linear";sampler.filter="linear";
+    sampler.wrapU=sampler.wrapV="clamp";sampler.mipPolicy="none";
+    sampler.mipFilter=azurerender::TextureImportSettings::MipFilter::Nearest;sampler.anisotropy=1;sampler.mipBias=0;
+    return image;
+}
+
 AssetMaterial loadMaterial(
     const tinygltf::Model& model,
     const tinygltf::Material* material,const AuthoredImageMips* authored=nullptr,
@@ -1544,6 +1580,7 @@ AssetMaterial loadMaterial(
         projectedHairParameterImage=loadProjectedHairRamp(*material,model,result,matcapImage);
         loadEyeSurface(*material,model,result,styleMaskImage,matcapImage);
         loadOutlineSurface(*material,model,result,imageSettings);
+        matcapImage=loadSpecularRamp(*material,model,result,matcapImage);
     }
 
     if (baseColorImage >= 0) {
@@ -1677,9 +1714,11 @@ AssetMaterial loadMaterial(
             matcapImage,
             kNoFactor,
             result.matcapWidth,
-            result.matcapHeight,result.faceSdf.schemaVersion!=2&&!result.projectedHairRamp.present,authored,&result.authoredMipLevels[5]);
+            result.matcapHeight,result.faceSdf.schemaVersion!=2&&!result.projectedHairRamp.present&&!result.specularRamp.present,authored,&result.authoredMipLevels[5]);
         if(result.projectedHairRamp.present&&(result.matcapWidth<2||result.matcapHeight<2))
             throw std::invalid_argument("projectedRamp requires a two-dimensional ramp image");
+        if(result.specularRamp.present&&(result.matcapWidth<2||result.matcapHeight<2))
+            throw std::invalid_argument("specularRamp requires a two-dimensional ramp image");
     } else {
         result.matcapWidth = 2;
         result.matcapHeight = 2;
@@ -1817,14 +1856,18 @@ AssetMaterial loadMaterial(
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
                 &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
-                &&field.key()!="rimOrigin")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
                 ||npr["lightingInputs"]!="host-scene-radiance"
                 ||(npr["shadowMask"]!="none"&&npr["shadowMask"]!="style-mask-gb"&&npr["shadowMask"]!="one")
-                ||(npr["baseAo"]!="one"&&npr["baseAo"]!="albedo-alpha"))
+                ||(npr["baseAo"]!="one"&&npr["baseAo"]!="albedo-alpha"&&npr["baseAo"]!="metallic-roughness-red"))
                 throw std::invalid_argument("Invalid nprDiffuse input contract");
+            if(npr.contains("shadowAlbedo")&&(!npr.at("shadowAlbedo").is_string()
+                ||(npr.at("shadowAlbedo")!="lookup"&&npr.at("shadowAlbedo")!="base-color")))
+                throw std::invalid_argument("Invalid nprDiffuse.shadowAlbedo");
+            const bool baseShadow=npr.contains("shadowAlbedo")&&npr.at("shadowAlbedo")=="base-color";
             if(npr.contains("indirectNormal")&&(!npr["indirectNormal"].is_string()
                 ||(npr["indirectNormal"]!="surface"&&npr["indirectNormal"]!="world-horizontal"
                     &&npr["indirectNormal"]!="face-frame-radial-horizontal")))
@@ -1834,7 +1877,8 @@ AssetMaterial loadMaterial(
                 ||!result.faceSdf.present||result.faceSdf.schemaVersion!=2))
                 throw std::invalid_argument("Face-frame radial indirect normal requires a version 2 face SDF material");
             const auto& parentVersion=authoredProfile["azureRenderMaterial"]["schemaVersion"];
-            if(!parentVersion.is_number_integer()||parentVersion!=2||!(result.materialFeatures&MaterialFeatureShadowColorLut)
+            if(!parentVersion.is_number_integer()||parentVersion!=2
+                ||(baseShadow?bool(result.materialFeatures&MaterialFeatureShadowColorLut):!(result.materialFeatures&MaterialFeatureShadowColorLut))
                 ||result.projectedHairRamp.present||result.eyeSurface.present
                 ||(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite))
                 ||result.transmission!=0||result.thickness!=0
@@ -1846,7 +1890,9 @@ AssetMaterial loadMaterial(
             result.nprDiffuse={true,npr["shadowScale"].get<float>(),
                 npr["shadowMask"]=="one"?AssetMaterial::NprDiffuse::ShadowMask::One
                     :npr["shadowMask"]=="style-mask-gb"?AssetMaterial::NprDiffuse::ShadowMask::StyleMaskGb
-                    :AssetMaterial::NprDiffuse::ShadowMask::None,npr["baseAo"]=="albedo-alpha",
+                    :AssetMaterial::NprDiffuse::ShadowMask::None,
+                npr["baseAo"]=="metallic-roughness-red"?AssetMaterial::NprDiffuse::BaseAo::MetallicRoughnessRed
+                    :npr["baseAo"]=="albedo-alpha"?AssetMaterial::NprDiffuse::BaseAo::AlbedoAlpha:AssetMaterial::NprDiffuse::BaseAo::One,
                 indirectNormal=="face-frame-radial-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal
                     :indirectNormal=="world-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal
                     :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
@@ -1949,7 +1995,7 @@ AssetMaterial loadMaterial(
             auto settings=azurerender::TextureImportSettings::parse(raw,defaults);
             const bool lookup=(slot==4&&((result.materialFeatures&MaterialFeatureDiffuseRamp)
                 ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||result.eyeSurface.present))
-                ||(slot==5&&(result.projectedHairRamp.present
+                ||(slot==5&&(result.projectedHairRamp.present||result.specularRamp.present
                     ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||(result.eyeSurface.present&&!result.eyeSurface.nprLighting)))
                 ||(slot==8&&shadowColorLutImage>=0);
             const bool typed=lookup||slot==6||slot==7||slot==8;
@@ -1957,7 +2003,8 @@ AssetMaterial loadMaterial(
                 throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));
             if(lookup&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU
                 ||settings.wrapV!=defaults.wrapV||settings.mipPolicy!=defaults.mipPolicy
-                ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias))
+                ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias
+                ||(slot==5&&result.specularRamp.present&&settings.mipFilter!=defaults.mipFilter)))
                 throw std::invalid_argument(result.name+" fixed lookup sampler violated at slot "+std::to_string(slot));
             result.textureSettings[slot]=std::move(settings);
         }

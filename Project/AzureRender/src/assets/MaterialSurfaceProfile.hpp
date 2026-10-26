@@ -59,7 +59,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     PackedMaterialSurfaceProfile result;
     if(material.nprDiffuse.present) {
         result.rows[0]={material.nprDiffuse.shadowScale,static_cast<float>(material.nprDiffuse.shadowMask),
-            material.nprDiffuse.albedoAlpha?1.F:0.F,
+            static_cast<float>(material.nprDiffuse.baseAo),
             static_cast<float>(material.nprDiffuse.indirectNormal)};
         result.rows[1][0]=static_cast<float>(material.nprDiffuse.rimResponse);
         result.rows[3][0]=static_cast<float>(material.nprDiffuse.characterVisibility);
@@ -85,6 +85,10 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         ||material.materialClass==AssetMaterialClass::Metal) {
         result.rows[5][2]=static_cast<float>(material.specularInput.source);
         result.rows[5][3]=material.specularInput.scale;
+        if(material.specularRamp.present) {
+            const auto& ramp=material.specularRamp;
+            result.rows[4]={0,0,ramp.iridescence,ramp.flipV?-1.F:1.F};
+        }
     }
     return result;
 }

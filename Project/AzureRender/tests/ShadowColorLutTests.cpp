@@ -313,6 +313,77 @@ int main(){
     bool rejected=false;try{load(invalid);}catch(const std::exception&){rejected=true;}
     require(rejected,"Malformed shadow LUT configuration must fail import");
   }
+  auto clothRamp=composed;
+  auto& clothProfile=clothRamp["materials"][0]["extras"]["azureRenderMaterial"];
+  clothProfile["class"]="fabric";
+  clothProfile["nprDiffuse"]["baseAo"]="metallic-roughness-red";
+  clothProfile["specularRamp"]={{"schemaVersion",1},{"texture",index},{"flipV",false},
+    {"iridescence",.35},{"lightingInputs","host-main-light"}};
+  const auto clothPacked=azurerender::packMaterialSurfaceProfile(load(clothRamp).materials[0]);
+  require(clothPacked.rows[0][2]==2.F&&clothPacked.rows[4][0]==0.F&&clothPacked.rows[4][1]==0.F&&clothPacked.rows[4][2]==.35F&&clothPacked.rows[4][3]==1.F,
+    "Two-dimensional cloth specular ramps require a typed material consumer");
+  require(azurerender::packMaterialSurfaceProfile(response.materials[0]).rows[4][3]==0,
+    "Omitted specular ramps must preserve the default surface response");
+  for(const char* kind:{"generic","fabric","metal"}){
+    auto valid=clothRamp;valid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;
+    const auto material=load(valid).materials[0];const auto& sampler=material.textureSettings[5];
+    require(material.specularRamp.present&&material.matcapWidth==4&&material.matcapHeight==2
+      &&material.matcapPixels==std::vector<std::uint8_t>(pixels,pixels+32),
+      "Specular ramp owners must retain their linear two-dimensional texels");
+    require(sampler.colorSpace=="linear"&&sampler.filter=="linear"&&sampler.wrapU=="clamp"&&sampler.wrapV=="clamp"
+      &&sampler.mipPolicy=="none"&&sampler.mipBias==0&&sampler.anisotropy==1,
+      "Specular ramp lookup sampling must preserve explicit linear zero-level semantics");
+  }
+  auto flippedRamp=clothRamp;flippedRamp["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"]["flipV"]=true;
+  require(azurerender::packMaterialSurfaceProfile(load(flippedRamp).materials[0]).rows[4][3]==-1,
+    "Specular ramp row orientation must have an explicit packed selector");
+  const auto rejectRamp=[&](const Json& candidate){bool failed=false;try{load(candidate);}catch(const std::exception&){failed=true;}
+    require(failed,"Invalid or conflicting specular ramp contracts must reject");};
+  for(const char* kind:{"skin","face","hair","eye","overlay"}){
+    auto invalid=clothRamp;invalid["materials"][0]["extras"]["azureRenderMaterial"]["class"]=kind;rejectRamp(invalid);
+  }
+  for(const auto& field:std::vector<std::pair<std::string,Json>>{{"schemaVersion",2},{"schemaVersion",1.5},
+    {"schemaVersion",true},{"texture",-1},{"texture",.5},{"texture",999999},{"texture",true},
+    {"flipV",0},{"iridescence",-.01},{"iridescence",1.01},{"iridescence",true},{"iridescence",nullptr},
+    {"lightingInputs","unknown"},{"lightingInputs",nullptr},{"unknown",0}}){
+    auto invalid=clothRamp;invalid["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"][field.first]=field.second;rejectRamp(invalid);
+  }
+  for(const auto& field:clothProfile["specularRamp"].items()){
+    auto invalid=clothRamp;invalid["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"].erase(field.key());rejectRamp(invalid);
+  }
+  auto noDiffuse=clothRamp;noDiffuse["materials"][0]["extras"]["azureRenderMaterial"].erase("nprDiffuse");rejectRamp(noDiffuse);
+  auto occupied=clothRamp;occupied["materials"][0]["extras"]["afterglowMatcapTexture"]=index;rejectRamp(occupied);
+  auto matcapOwner=clothRamp;matcapOwner["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back("face-sdf-eligible");rejectRamp(matcapOwner);
+  require(stbi_write_png((root/"ramp-line.png").string().c_str(),4,1,4,pixels,16)!=0,"Cannot create line ramp control");
+  auto lineRamp=clothRamp;const auto lineIndex=lineRamp["textures"].size();
+  lineRamp["textures"].push_back({{"source",lineRamp["images"].size()}});lineRamp["images"].push_back({{"uri","ramp-line.png"}});
+  lineRamp["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"]["texture"]=lineIndex;rejectRamp(lineRamp);
+  auto clothComplete=complete;
+  clothComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["class"]="fabric";
+  clothComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"]=clothProfile["specularRamp"];
+  clothComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["specularRamp"]["texture"]=0;
+  const auto clothDocument=azurerender::MaterialData::parse(clothComplete);
+  require(clothDocument.encode()==clothComplete&&azurerender::MaterialGraph::fromMaterial(clothDocument).compile().encode()==clothComplete,
+    "Complete material documents and graphs must retain every specular ramp field");
+  require(clothDocument.interpret([&](const auto&){return root/"lut.png";}).specularRamp.present,
+    "Complete material documents must reach the typed specular ramp loader");
+  auto baseShadow=clothRamp;auto& baseShadowProfile=baseShadow["materials"][0]["extras"]["azureRenderMaterial"];
+  baseShadowProfile.erase("shadowColorLut");baseShadowProfile["nprDiffuse"]["shadowAlbedo"]="base-color";
+  const auto baseShadowMaterial=load(baseShadow).materials[0];
+  require(baseShadowMaterial.nprDiffuse.present&&baseShadowMaterial.specularRamp.present
+    &&!(baseShadowMaterial.materialFeatures&MaterialFeatureShadowColorLut),
+    "Explicit base-color shadows must compose with specular ramps without an invented lookup image");
+  for(const Json& policy:std::vector<Json>{nullptr,true,"unknown"}){
+    auto invalid=baseShadow;invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowAlbedo"]=policy;rejectRamp(invalid);
+  }
+  auto conflictingShadow=clothRamp;
+  conflictingShadow["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowAlbedo"]="base-color";rejectRamp(conflictingShadow);
+  auto baseDocument=clothComplete;auto& baseDocumentProfile=baseDocument["surface"]["materials"][0]["extras"]["azureRenderMaterial"];
+  baseDocumentProfile.erase("shadowColorLut");baseDocumentProfile["nprDiffuse"]["shadowAlbedo"]="base-color";
+  const auto baseData=azurerender::MaterialData::parse(baseDocument);
+  require(azurerender::MaterialGraph::fromMaterial(baseData).compile().encode()==baseDocument
+    &&!(baseData.interpret([&](const auto&){return root/"lut.png";}).materialFeatures&MaterialFeatureShadowColorLut),
+    "Complete documents must preserve explicit base-color shadows without adding a lookup dependency");
   require(stbi_write_png((root/"lut.png").string().c_str(),2,2,4,pixels,8)!=0,"Cannot create invalid LUT fixture");
   bool rejected=false;try{load(baseline);}catch(const std::exception&){rejected=true;}
   require(rejected,"LUT strip dimensions must encode a complete cube");

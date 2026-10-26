@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "phase": "NR6-C9-S1",
+  "status": "public-response-verified-native-appearance-open",
+  "sourceManifest": {
+    "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/source-manifest.json",
+    "bytes": 2989,
+    "sha256": "530afa7c400570aacfd5c0ba24297b16d2ad29773dc650810f9d0b873d30c3a3"
+  },
+  "sourceBinding": {
+    "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/cloth-binding-proof.json",
+    "bytes": 3501,
+    "sha256": "19abb653f14bb08522e70bb8f748eb51134eb2b27bb609c74b8fb7461a25282d"
+  },
+  "sourceFormula": {
+    "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/cloth-specular-formula-proof.json",
+    "bytes": 12370,
+    "sha256": "71507b5ef25699b30492c3f88f86e75cb6e2b22afd6e1d43214ad06b46200cad"
+  },
+  "hardwareAgreement": {
+    "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/debugger-hardware-agreement.json",
+    "bytes": 2766,
+    "sha256": "a098b17d82392f05dd6ed9d3b43b788945ff83c02a9aba38df6d6b562a667c4f"
+  },
+  "tests": {
+    "debug": {
+      "cpuCount": 12,
+      "cpu": [
+        {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/final-cpu-debug.log",
+          "bytes": 1694,
+          "sha256": "88b8c2f1897dfa49d02bb302feabb4c8e2ee5a6d4604c0d6286fcd2899aed08b"
+        },
+        {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/character-repair-debug.log",
+          "bytes": 384,
+          "sha256": "5eef77d27232a3181e4a3fa31ee1c525be14de8a680b826f8f8c1c0666aebad6"
+        },
+        {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/complete-shadow-document-debug.log",
+          "bytes": 385,
+          "sha256": "857cb4eac3c2279c548b2eb4f61318c16beb4d91743bd3e49f58e4db6c183760"
+        },
+        {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/owner-final-debug.log",
+          "bytes": 385,
+          "sha256": "8556234cd4c4f8ac3dcd280766a790e910569f054808add43a335e2d88e7fe63"
+        }
+      ],
+      "production": {
+        "captures": 36,
+        "maximumLinearError": 0.0008779630298799967,
+        "receipt": {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/base-shadow-production-debug/summary.json",
+          "bytes": 12669,
+          "sha256": "b59dd848ff13fe9352cacf8c07d1eeff623c5b00b042fb1751e2e572aae0c545"
+        }
+      },
+      "kernel": {
+        "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/specular-dot-order.log",
+        "bytes": 70,
+        "sha256": "b6754e5db7daa9e051ae69ee34c6a95acf3347cb41f29d869590ee08942ff727"
+      },
+      "build": {
+        "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/owner-final-build-debug.log",
+        "bytes": 568,
+        "sha256": "e54ad0a54519e97dd3134a73e7defec15d7b1a1261af19196c37586e4af42a37"
+      }
+    },
+    "release": {
+      "cpuCount": 12,
+      "cpu": [
+        {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/final-cpu-release.log",
+          "bytes": 1698,
+          "sha256": "548b999094b8e2443101843e13301eaf0a891ff6c46ceb34b127abe3742014ad"
+        },
+        {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/character-repair-release.log",
+          "bytes": 388,
+          "sha256": "f40a06545ed9f34aebd9f02df40fc22b146876b4984a2fa3cbb1bdc7656b5f59"
+        },
+        {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/complete-shadow-document-release.log",
+          "bytes": 389,
+          "sha256": "c71f6c0ddb5889657cec40266b74a0b7f8bb4786cc625040c8cc9419b5622ecf"
+        },
+        {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/owner-final-release.log",
+          "bytes": 389,
+          "sha256": "813b24163baedc3120437b5288d8047a881127a96472e852c4242e6394cef034"
+        }
+      ],
+      "production": {
+        "captures": 36,
+        "maximumLinearError": 0.0008779630298799967,
+        "receipt": {
+          "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/base-shadow-production-release/summary.json",
+          "bytes": 12669,
+          "sha256": "a2ac43d5c89e7e0c9345bd1cd845edb6fa16dd1ecc9d136f5b66e8cd52aa5abb"
+        }
+      },
+      "kernel": {
+        "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/specular-kernel-release.log",
+        "bytes": 446,
+        "sha256": "518bec6c5ab668628a30bbd85e3f4e2485d9e00c7deb56b545eeee885bd74ae8"
+      },
+      "build": {
+        "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/owner-final-build-release.log",
+        "bytes": 671,
+        "sha256": "5e45d3901e84f16f31d9124bd9406d9f96ba989a46292340dae08c17e70be888"
+      }
+    }
+  },
+  "legacyGpuRegression": {
+    "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/final-gpu-regression-debug.log",
+    "bytes": 913,
+    "sha256": "8da6bdf44cf8a5bc08d069942bb1a9684c1c0751b7fd8b77bfb44df22e2410f9"
+  },
+  "negativeControls": [
+    {
+      "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/missing-ramp-reflection-control.json",
+      "bytes": 413,
+      "sha256": "ea28defec229511a54b4fe61ad46112b47c197f25a23cdcccb2c37e5cd1ed81f"
+    },
+    {
+      "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/matcap-owner-red.log",
+      "bytes": 60,
+      "sha256": "0df9d48af00865e1024ab89107e9d074b8871247b961528dc96970e8922e6205"
+    },
+    {
+      "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/debugger-hardware-red.log",
+      "bytes": 644,
+      "sha256": "24de729990469ac3b6c2c4d9a55b1ef764456299eb956fe56da3fe6f8ca0971a"
+    }
+  ],
+  "contract": {
+    "surfaceProfileBytes": 192,
+    "surfaceProfileRows": 12,
+    "descriptorLayoutChanges": 0,
+    "instanceLayoutChanges": 0,
+    "classes": [
+      "generic",
+      "fabric",
+      "metal"
+    ],
+    "slotOwnership": "exclusive MatCap slot",
+    "lightingInputs": "host-main-light"
+  },
+  "remaining": [
+    "Native hardware half-ULP output gate fails; budget remains 0.51 target ULP",
+    "Dynamic main cloth binding and material promotion",
+    "Other clothing variants and full illumination",
+    "Temporal aliasing and formal 60 fps acceptance"
+  ],
+  "mainDefaultRegression": {
+    "path": "build/runs/20261026-062121-cloth-specular-ramp-capture-0e33fc/main-default-regression/receipt.json",
+    "sha256": "b687e172fc12248d83186fa16b5fec735acef8b664de1baf19086fb1c6b8637a",
+    "bytes": 318
+  },
+  "validationScope": "Final loader owner rejection rebuilt and tested in both configurations; production consumer shaders unchanged from 36-capture suites. Main default image verified with final executable."
+}

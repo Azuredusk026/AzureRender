@@ -13,15 +13,18 @@ int main(){try{
     decodeLevelRenderSettings(styled,{{"nprLighting",{{"schemaVersion",1},{"enabled",true},
         {"ambientColor",{1.2,.9,.8}},{"ambientDirection",{0,1,0}},{"directionBias",.15},
         {"directionGain",1.5},{"directionFloor",.5},{"outdoorGain",1.05},{"shadowAmbientGain",.8},{"ambientWeight",.2877224684},
-        {"indoorMix",0},{"litAmbientMix",1},{"mainColorMix",1},{"shadowOverride",1},{"useSceneIrradiance",false}}}});
+        {"indoorMix",0},{"litAmbientMix",1},{"mainColorMix",1},{"shadowOverride",1},{"specularFloor",.55},{"useSceneIrradiance",false}}}});
     const auto styledJson=encodeLevelRenderSettings(styled);
     check(styledJson.contains("nprLighting")&&styledJson.at("nprLighting").at("enabled")==true,
         "NPR illumination must roundtrip through the shared scene settings contract");
+    check(std::abs(styledJson.at("nprLighting").at("specularFloor").get<float>()-.55F)<1e-7F,
+        "Scene-owned specular floors must roundtrip independently from shadow visibility");
     check(std::abs(styledJson.at("nprLighting").at("ambientWeight").get<float>()-.2877224684F)<1e-7F,
         "Global ambient weight must roundtrip independently from material and screen occlusion");
     for(const auto& mutation:{nlohmann::json{{"schemaVersion",1.5}},nlohmann::json{{"enabled",1}},
         nlohmann::json{{"directionGain",true}},nlohmann::json{{"ambientWeight",-1}},nlohmann::json{{"ambientWeight",true}},nlohmann::json{{"ambientDirection",{0,0,0}}},
-        nlohmann::json{{"ambientColor",{1,2}}},nlohmann::json{{"mainColorMix",-1}},nlohmann::json{{"unknown",1}}}){
+        nlohmann::json{{"ambientColor",{1,2}}},nlohmann::json{{"mainColorMix",-1}},nlohmann::json{{"specularFloor",-.1}},
+        nlohmann::json{{"specularFloor",1.1}},nlohmann::json{{"specularFloor",true}},nlohmann::json{{"unknown",1}}}){
         auto invalid=styledJson;invalid["nprLighting"].update(mutation);bool rejected=false;
         try{RenderSettings value;decodeLevelRenderSettings(value,invalid);}catch(const std::exception&){rejected=true;}
         check(rejected,"Malformed NPR illumination must be rejected");

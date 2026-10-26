@@ -210,7 +210,8 @@ struct AssetMaterial {
         float shadowScale=1;
         enum class ShadowMask : std::uint8_t { None,StyleMaskGb,One };
         ShadowMask shadowMask=ShadowMask::None;
-        bool albedoAlpha=false;
+        enum class BaseAo : std::uint8_t { One,AlbedoAlpha,MetallicRoughnessRed };
+        BaseAo baseAo=BaseAo::One;
         IndirectNormal indirectNormal=IndirectNormal::Surface;
         struct Lighting {
             bool present=false;
@@ -242,6 +243,10 @@ struct AssetMaterial {
         Source source=Source::EmissiveAlpha;
         float scale=1;
     } specularInput;
+    struct SpecularRamp {
+        bool present=false,flipV=false;
+        float iridescence=0;
+    } specularRamp;
     // toon, shadow tint, specular, rim
     std::array<float, 4> styleParameters{1.0F, 1.0F, 1.0F, 1.0F};
     // outline, hair highlight, emissive, face overlay

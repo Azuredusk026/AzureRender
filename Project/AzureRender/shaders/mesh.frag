@@ -9,6 +9,7 @@
 #include "shadow_compare.glsl"
 #include "surface_response.glsl"
 #include "character_diffuse.glsl"
+#include "specular_ramp.glsl"
 #include "environment_specular.glsl"
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
@@ -421,17 +422,17 @@ vec3 materialNprLitAlbedo(vec3 base,vec3 normal,vec3 view) {
     vec4 tint=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[2];
     return characterDiffuseViewTint(base,normal,view,tint);
 }
-CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec4 ramp,float visibility,float mainShadow,vec3 normal,vec3 view) {
+CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec4 ramp,float baseAo,float visibility,float mainShadow,vec3 normal,vec3 view) {
     PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
     vec4 parameters=profile.rows[0];
     vec2 mask=parameters.y>1.5?vec2(1,0):parameters.y>.5?textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).gb:vec2(0);
-    vec3 shadow=sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,base.rgb);
+    vec3 shadow=materialFeatureEnabled(4096U)>.5?sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,base.rgb):base.rgb;
     float characterVisibility=profile.rows[3].x>1.5?materialObjectVisibility(normal):profile.rows[3].x>.5?mainShadow:visibility;
     return characterDiffuseResponse(materialNprLitAlbedo(base.rgb,normal,view),shadow,metallic,parameters.x,ramp,
-        parameters.z>.5?base.a:1.0,mask,dot(normal,view),characterVisibility,visibility);
+        baseAo,mask,dot(normal,view),characterVisibility,visibility);
 }
-vec3 materialNprDiffuse(vec4 base,float metallic,vec4 ramp,float visibility,float mainShadow,vec3 normal,vec3 view){
-    return materialNprDiffuseResponse(base,metallic,ramp,visibility,mainShadow,normal,view).color;
+vec3 materialNprDiffuse(vec4 base,float metallic,vec4 ramp,float baseAo,float visibility,float mainShadow,vec3 normal,vec3 view){
+    return materialNprDiffuseResponse(base,metallic,ramp,baseAo,visibility,mainShadow,normal,view).color;
 }
 
 vec4 shadowPlaneQuad(ivec2 base,ivec2 lo,ivec2 hi,vec2 uv,vec2 extent,vec2 gradient) {
@@ -782,7 +783,25 @@ void main() {
     float specularLobe = pow(
         max(dot(shadedNormal, halfDirection), 0.0),
         specularPower);
+    bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
+        &&!(qaEffectMode==1&&qaEffectDisabled);
+    vec4 nprParameters=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0];
+    vec4 rampProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[4];
+    float aoSource=nprParameters.z;
+    float nprBaseAo=aoSource>1.5?packedMaterial.r:aoSource>.5?baseColor.a:1.0;
+    bool specularRamp=nprDiffuse&&abs(rampProfile.w)>.5
+        &&(material.materialClass==0U||material.materialClass==4U||material.materialClass==5U);
     vec3 f0 = mix(vec3(dielectricF0(specularLevel)), baseColor.rgb, metallic);
+    vec3 rampReflectance=f0,rampSample=vec3(1);
+    float rampSpecularLobe=0;
+    if(specularRamp){
+        SpecularRampCoordinates coordinates=specularRampCoordinates(shadedNormal,viewDirection,
+            -camera.cameraForward.xyz,lightDirection,clamp(packedMaterial.g,0,1),metallic,
+            mix(shadowVisibility,1.0,camera.nprGainFloor.z),rampProfile.z);
+        vec2 uv=coordinates.uv;if(rampProfile.w<0)uv.y=1.0-uv.y;
+        rampSample=textureLod(AZ_TEX_MATCAP,uv,0).rgb;rampSpecularLobe=coordinates.lobe;
+        f0=specularRampEnvironment(f0,rampSample,rampProfile.z);
+    }
     if(strandDiffuse)f0=vec3(0);
     float normalDotView = max(dot(shadedNormal, viewDirection), 0.0);
     bool microfacetSurface = material.materialClass == 0U || material.materialClass == 4U
@@ -793,7 +812,7 @@ void main() {
     bool fittedEnvironment=camera.clusterLighting.x>.5&&camera.clusterLighting.w>.5
         &&material.materialClass==0U;
     vec3 environmentResponse=fittedEnvironment
-        ?ggxMultiscatterEnvironment(mix(vec3(.04),baseColor.rgb,metallic),roughness,normalDotView)
+        ?ggxMultiscatterEnvironment(specularRamp?f0:mix(vec3(.04),baseColor.rgb,metallic),roughness,normalDotView)
         :fresnel;
     vec3 diffuseColor = baseColor.rgb * (1.0 - metallic) * projectedDiffuseScale;
     vec3 environmentDiffuse = textureLod(
@@ -909,8 +928,6 @@ void main() {
     vec4 classRampRgba=dualFaceSdf?textureLod(AZ_TEX_MATCAP,vec2(rampCoordinate,.5),0.0)
         :signedMainRamp?textureLod(AZ_TEX_STYLE_MASK,vec2(rampCoordinate,.5),0.0):materialDiffuseRampRgba(rampCoordinate);
     vec3 classRamp = classRampRgba.rgb;
-    bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
-        &&!(qaEffectMode==1&&qaEffectDisabled);
     vec3 indirectDiffuseNormal=shadedNormal;
     if(eyeNpr)indirectDiffuseNormal=worldHorizontalDiffuseNormal(shadedNormal);
     if(nprDiffuse) {
@@ -922,7 +939,7 @@ void main() {
         } else if(normalMode>.5)indirectDiffuseNormal=worldHorizontalDiffuseNormal(shadedNormal);
     }
     vec3 nprAmbientResponse=nprDiffuse
-        ?materialNprDiffuse(baseColor,metallic,classRampRgba,shadowVisibility,shadowVisibility,shadedNormal,viewDirection):diffuseColor;
+        ?materialNprDiffuse(baseColor,metallic,classRampRgba,nprBaseAo,shadowVisibility,shadowVisibility,shadedNormal,viewDirection):diffuseColor;
     float characterSceneVisibility=camera.nprLightingParameters.x>.5
         ?mix(shadowVisibility,1.0,camera.nprGainFloor.z):shadowVisibility;
     vec3 localCharacterDiffuse=diffuseColor;
@@ -1098,7 +1115,7 @@ void main() {
         }
         if(characterLight) {
             if(!localCharacterResponseReady) {
-                if(nprDiffuse)localCharacterDiffuse=materialNprDiffuse(baseColor,metallic,classRampRgba,
+                if(nprDiffuse)localCharacterDiffuse=materialNprDiffuse(baseColor,metallic,classRampRgba,nprBaseAo,
                     characterSceneVisibility,shadowVisibility,shadedNormal,viewDirection);
                 localCharacterResponseReady=true;
             }
@@ -1126,7 +1143,7 @@ void main() {
             // composition. This explicit host adapter retains cosine-weighted
             // local irradiance and the main-direction color response.
             vec3 response=light.coneType.y>1.5
-                ?materialNprDiffuse(baseColor,metallic,localRamp,visibility,shadowVisibility,shadedNormal,viewDirection)
+                ?materialNprDiffuse(baseColor,metallic,localRamp,nprBaseAo,visibility,shadowVisibility,shadedNormal,viewDirection)
                 :nprAmbientResponse*pointDiffuse;
             // Color selection and incident-energy visibility are independent.
             // The native illumination expression gates its main-light term
@@ -1146,7 +1163,9 @@ void main() {
             ? directSurfaceSpecular(f0, roughness, pointDiffuse, normalDotView,
                 max(dot(shadedNormal, pointHalfDirection), 0.0), max(dot(viewDirection, pointHalfDirection), 0.0))
             : f0 * pointSpecular * pointDiffuse * mix(0.7, 0.12, roughness);
-        clusteredSpecular += pointResponse * radiance * light.boxParameters.z;
+        bool composedRamp=specularRamp&&camera.nprLightingParameters.x>.5
+            &&float(lightIndex)==camera.nprLightingParameters.y;
+        if(!composedRamp)clusteredSpecular += pointResponse * radiance * light.boxParameters.z;
         if(sceneCharacter && hairActive>0.0 && !(qaEffectMode==3 && qaEffectDisabled)) {
             vec3 hairRadiance=(characterLight||specularOnly)?characterRadiance*pointDiffuse*light.boxParameters.z:radiance;
             if(projectedHair) {
@@ -1515,7 +1534,7 @@ void main() {
             response=hairDiffuseResponse;
             incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;
         } else {
-            response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,visibility,shadowVisibility,shadedNormal,viewDirection);
+            response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,nprBaseAo,visibility,shadowVisibility,shadedNormal,viewDirection);
             PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
             if(profile.rows[10].w>.5) {
                 incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;
@@ -1545,6 +1564,14 @@ void main() {
         sceneMainDiffuse=response.color*illumination.direct;
         beautyColor+=combinedAmbient+combinedDirect-ambientDiffuse-directDiffuse;
         ambientDiffuse=combinedAmbient;directDiffuse=combinedDirect;
+        if(specularRamp&&!(qaEffectMode==5&&qaEffectDisabled)){
+            float viewAlpha=textureLod(AZ_TEX_STYLE_MASK,
+                vec2(specularRampDot(shadedNormal,-camera.cameraForward.xyz)*.5+.5,.5),0).a;
+            float fullDiffuse=specularRampFullDiffuse(viewAlpha,response.aoMask,response.litMask,visibility);
+            vec3 mainSpecular=specularRampMain(rampReflectance,rampSample,rampSpecularLobe,fullDiffuse,
+                mainRadiance,camera.nprLightingParameters.w)*material.styleParameters.z*dielectricSpecularWeight;
+            directSpecular+=mainSpecular;beautyColor+=mainSpecular;
+        }
         if(projectedLighting) {
             float weight=mix(hairViewAlpha*response.aoMask,response.litMask,visibility);
             float scale=mix(hairShadowScale,1.0,weight)*(.5+.5*weight);
