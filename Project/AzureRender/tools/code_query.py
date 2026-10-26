@@ -170,6 +170,9 @@ def bounded_output(payload, max_chars):
         elif rows and 'lines' in rows[0] and len(rows[0]['lines']) > 1:
             rows[0]['lines'].pop()
             rows[0]['end'] -= 1
+        elif rows and rows[0].get('symbols'):
+            rows[0]['symbols'].pop()
+            rows[0]['symbolsTruncated'] = True
         elif rows:
             row = rows[0]
             text = row['lines'][0] if 'lines' in row else row.get('text', '')
@@ -192,16 +195,17 @@ def parser():
     p = Parser(description=__doc__)
     p.add_argument('--root', type=Path, default=ENGINE)
     sub = p.add_subparsers(dest='operation', required=True, parser_class=Parser)
-    for name in ('search', 'read'):
+    for name in ('search', 'read', 'symbols', 'map'):
         command = sub.add_parser(name)
-        command.add_argument('query' if name == 'search' else 'path')
+        command.add_argument('path' if name == 'read' else 'query')
         command.add_argument('--scope', default='source')
         command.add_argument('--max-chars', type=int, default=12000)
         command.add_argument('--json', action='store_true', help='Machine-readable JSON (also the default)')
         command.add_argument('--timeout', type=float, default=10)
-        if name == 'search':
+        if name != 'read':
             command.add_argument('--module')
-            command.add_argument('--limit', type=int, default=20)
+            command.add_argument('--limit', type=int, default=20 if name == 'search' else (8 if name == 'symbols' else 5))
+            if name == 'map':command.add_argument('--depth',type=int,default=1)
         else:
             command.add_argument('--start', type=int, default=1)
             command.add_argument('--lines', type=int, default=80)
@@ -217,10 +221,14 @@ def main(argv=None):
         if not 700 <= budget <= 12000 or not 0 < args.timeout <= 30:
             raise QueryError('Budget must be in 700..12000 and timeout in (0,30]')
         root = args.root.resolve()
-        if args.operation == 'search':
+        if args.operation != 'read':
             if not 1 <= args.limit <= 20:
                 raise QueryError('Limit must be in 1..20')
-            payload = search(root, args.query, args.scope, args.module, args.limit, started+args.timeout)
+            if args.operation == 'search':
+                payload = search(root, args.query, args.scope, args.module, args.limit, started+args.timeout)
+            else:
+                from code_symbols import query
+                payload = query(root,args.query,args.scope,args.module,args.limit,started+args.timeout,args.operation,getattr(args,'depth',1))
         else:
             payload = read(root, args.path, args.scope, args.start, args.lines)
         payload['elapsedMs'] = round((time.monotonic()-started)*1000, 2)
@@ -228,9 +236,9 @@ def main(argv=None):
         output = bounded_output(payload, budget)
         sys.stdout.write(output)
         return 0 if found else 1
-    except (QueryError, OSError, UnicodeError, json.JSONDecodeError) as error:
+    except (ValueError, OSError) as error:
         payload = base_payload('error', '')
-        payload.update(status='error', error=str(error)[:240])
+        payload.update(status='error', error=str(error)[:240],elapsedMs=round((time.monotonic()-started)*1000,2))
         sys.stdout.write(bounded_output(payload, max(700, min(budget, 12000))))
         return 2
 

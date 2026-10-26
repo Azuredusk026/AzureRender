@@ -110,6 +110,7 @@ class QueryTests(unittest.TestCase):
         code, data, raw = self.query('search', 'RenderGraph', '--timeout', '0.000001')
         self.assertEqual(code, 2)
         self.assertEqual(data['status'], 'error')
+        self.assertGreater(data['elapsedMs'], 0)
         self.assertLessEqual(len(raw), 12000)
 
     def test_truncation_hint_is_included_in_json_budget(self):

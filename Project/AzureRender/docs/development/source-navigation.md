@@ -90,8 +90,46 @@ rg -n -F 'RenderGraphTests' CMakeLists.txt
 结果被截断时，应缩小目录或补充符号。
 错误和空结果分别判断。
 
-## 证据与索引边界
+## 按需符号地图
 
+安装固定版本的语法解析依赖：
+
+```powershell
+python -m pip install --only-binary=:all: --target build/qa-python/code-intelligence -r tools/requirements-code-intelligence.txt
+python tools/code_query.py symbols RenderGraph --json --timeout 30
+python tools/code_query.py map RenderGraph --module src/render --depth 1 --json
+```
+
+`symbols` 按名称返回类型、别名、函数及签名。
+默认返回八项，`--limit` 上限为二十。
+`map` 返回定义文件和本地包含关系的邻接文件。
+默认返回五个文件，每个文件至多四项符号。
+
+地图深度为零至二，结果共享完整响应预算。
+名称已知时使用 `symbols`，明确文本使用 `search`。
+需要理解文件关系时再读取地图。
+首次索引可使用三十秒期限。
+
+索引支持 C/C++、Python 与 C#。
+着色器采用 C++ 兼容语法近似提取。
+`syntaxErrors` 标记语法恢复，相关结果需读取源码核对。
+Lua 等未覆盖文件通过文本检索定位。
+
+缓存位于 `build/code-intelligence/`。
+查询逐文件重新核对内容哈希，复用有效的解析结果。
+同长度、同修改时间的内容变化仍触发更新。
+解析器版本和提取实现变化会使缓存更新。
+
+目录边界、未跟踪源码和删除重命名共用查询契约。
+索引字段记录指纹、解析数量、覆盖范围和后端版本。
+宏、重载匹配和真实调用关系由编译器语义决定。
+当前地图的 `precision` 为 `syntax`。
+
+依赖版本、来源与许可见[依赖记录](code-intelligence-dependencies.json)。
+原生依赖不可用时，工具报告安装入口。
+文本检索与文件读取可独立运行。
+
+## 证据与索引边界
 历史源码快照用于解释对应候选的验证结果。
 当前实现从 `src/` 等生产目录定位。
 证据检索按阶段、日期或报告给出的路径展开。

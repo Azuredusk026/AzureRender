@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "configurations": [
+    {
+      "configuration": "debug",
+      "cache": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER": "D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe",
+        "CMAKE_GENERATOR": "Ninja"
+      },
+      "compdbExitCode": 0,
+      "commands": 63,
+      "generatedHeaders": [
+        {
+          "path": "build/ninja-msvc-debug/generated/reflection/GeneratedRegistry.hpp",
+          "exists": true,
+          "sha256": "491929470e973dbc58d5f6b5a8423ec9cb84831af1829618de72e9f8c9b4be38"
+        },
+        {
+          "path": "build/ninja-msvc-debug/generated/runtime/GeneratedComponents.hpp",
+          "exists": true,
+          "sha256": "36ae1c9c63561ccdf8db7067608573029ee6326f3d7cacf44809aed33a5ca251"
+        }
+      ],
+      "preprocessorEvaluatedBySyntaxIndex": false
+    },
+    {
+      "configuration": "release",
+      "cache": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_CXX_COMPILER": "D:/Visual Studio/2022/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe",
+        "CMAKE_GENERATOR": "Ninja"
+      },
+      "compdbExitCode": 0,
+      "commands": 63,
+      "generatedHeaders": [
+        {
+          "path": "build/ninja-msvc-release/generated/reflection/GeneratedRegistry.hpp",
+          "exists": true,
+          "sha256": "491929470e973dbc58d5f6b5a8423ec9cb84831af1829618de72e9f8c9b4be38"
+        },
+        {
+          "path": "build/ninja-msvc-release/generated/runtime/GeneratedComponents.hpp",
+          "exists": true,
+          "sha256": "36ae1c9c63561ccdf8db7067608573029ee6326f3d7cacf44809aed33a5ca251"
+        }
+      ],
+      "preprocessorEvaluatedBySyntaxIndex": false
+    }
+  ]
+}

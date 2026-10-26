@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "638e9c3fccfccbdd9faec675532ccdf5788e00dd",
+  "conditions": "Same working tree; first/repeat are consecutive samples without disk-cache flushing. Includes interpreter and native-library loading. Tool regression tests ran concurrently.",
+  "tasks": [
+    {
+      "query": "MaterialDocument",
+      "expectedFile": "src/runtime/MaterialDocument.hpp",
+      "attempts": [
+        {
+          "operation": "search",
+          "pass": "first",
+          "wallMs": 938.0,
+          "outputChars": 4928,
+          "expectedFileFound": true,
+          "resultCount": 20,
+          "truncated": false,
+          "parsedFiles": null,
+          "exitCode": 0
+        },
+        {
+          "operation": "search",
+          "pass": "repeat",
+          "wallMs": 968.0,
+          "outputChars": 4928,
+          "expectedFileFound": true,
+          "resultCount": 20,
+          "truncated": false,
+          "parsedFiles": null,
+          "exitCode": 0
+        },
+        {
+          "operation": "symbols",
+          "pass": "first",
+          "wallMs": 3485.0,
+          "outputChars": 857,
+          "expectedFileFound": true,
+          "resultCount": 1,
+          "truncated": false,
+          "parsedFiles": 635,
+          "exitCode": 0
+        },
+        {
+          "operation": "symbols",
+          "pass": "repeat",
+          "wallMs": 1640.0,
+          "outputChars": 854,
+          "expectedFileFound": true,
+          "resultCount": 1,
+          "truncated": false,
+          "parsedFiles": 0,
+          "exitCode": 0
+        },
+        {
+          "operation": "map",
+          "pass": "first",
+          "wallMs": 1735.0,
+          "outputChars": 4904,
+          "expectedFileFound": true,
+          "resultCount": 5,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        },
+        {
+          "operation": "map",
+          "pass": "repeat",
+          "wallMs": 1812.0,
+          "outputChars": 4904,
+          "expectedFileFound": true,
+          "resultCount": 5,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "query": "RenderGraph",
+      "expectedFile": "src/render/RenderGraph.hpp",
+      "attempts": [
+        {
+          "operation": "search",
+          "pass": "first",
+          "wallMs": 828.0,
+          "outputChars": 4320,
+          "expectedFileFound": false,
+          "resultCount": 20,
+          "truncated": true,
+          "parsedFiles": null,
+          "exitCode": 0
+        },
+        {
+          "operation": "search",
+          "pass": "repeat",
+          "wallMs": 813.0,
+          "outputChars": 4320,
+          "expectedFileFound": false,
+          "resultCount": 20,
+          "truncated": true,
+          "parsedFiles": null,
+          "exitCode": 0
+        },
+        {
+          "operation": "symbols",
+          "pass": "first",
+          "wallMs": 1734.0,
+          "outputChars": 3606,
+          "expectedFileFound": true,
+          "resultCount": 8,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        },
+        {
+          "operation": "symbols",
+          "pass": "repeat",
+          "wallMs": 1688.0,
+          "outputChars": 3606,
+          "expectedFileFound": true,
+          "resultCount": 8,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        },
+        {
+          "operation": "map",
+          "pass": "first",
+          "wallMs": 1828.0,
+          "outputChars": 5526,
+          "expectedFileFound": true,
+          "resultCount": 5,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        },
+        {
+          "operation": "map",
+          "pass": "repeat",
+          "wallMs": 1765.0,
+          "outputChars": 5526,
+          "expectedFileFound": true,
+          "resultCount": 5,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "query": "EditRegistry",
+      "expectedFile": "src/editor/commands/EditRegistry.hpp",
+      "attempts": [
+        {
+          "operation": "search",
+          "pass": "first",
+          "wallMs": 797.0,
+          "outputChars": 4376,
+          "expectedFileFound": true,
+          "resultCount": 20,
+          "truncated": true,
+          "parsedFiles": null,
+          "exitCode": 0
+        },
+        {
+          "operation": "search",
+          "pass": "repeat",
+          "wallMs": 782.0,
+          "outputChars": 4376,
+          "expectedFileFound": true,
+          "resultCount": 20,
+          "truncated": true,
+          "parsedFiles": null,
+          "exitCode": 0
+        },
+        {
+          "operation": "symbols",
+          "pass": "first",
+          "wallMs": 1750.0,
+          "outputChars": 3262,
+          "expectedFileFound": true,
+          "resultCount": 8,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        },
+        {
+          "operation": "symbols",
+          "pass": "repeat",
+          "wallMs": 1640.0,
+          "outputChars": 3262,
+          "expectedFileFound": true,
+          "resultCount": 8,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        },
+        {
+          "operation": "map",
+          "pass": "first",
+          "wallMs": 1813.0,
+          "outputChars": 4661,
+          "expectedFileFound": true,
+          "resultCount": 5,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        },
+        {
+          "operation": "map",
+          "pass": "repeat",
+          "wallMs": 1797.0,
+          "outputChars": 4661,
+          "expectedFileFound": true,
+          "resultCount": 5,
+          "truncated": true,
+          "parsedFiles": 0,
+          "exitCode": 0
+        }
+      ]
+    }
+  ]
+}
