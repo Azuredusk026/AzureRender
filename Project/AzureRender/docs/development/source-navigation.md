@@ -104,3 +104,4 @@ rg -n -F 'RenderGraphTests' CMakeLists.txt
 
 目录规模和实装建议见[结构与检索优化计划](../plans/2026-10-26-repository-structure-and-retrieval.md)。
 产物保留与清理见[产物管理](artifact-retention.md)。
+证据盘点、归档与恢复见[操作说明](evidence-operations.md)。

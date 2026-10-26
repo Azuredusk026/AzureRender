@@ -191,5 +191,6 @@
       "primaryProject": "main-candidate-v4/project.azureproject",
       "evidence": "docs/acceptance/nr/evidence/2026-10-26/cloth-native-integration.json"
     }
-  ]
+  ],
+  "evidenceRetentionManifest": "evidence-retention.json"
 }

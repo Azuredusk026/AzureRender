@@ -11,7 +11,7 @@ def git(root, *args):
     return subprocess.run(['git', '-C', str(root), *args], capture_output=True, encoding='utf-8', check=False)
 
 
-def audit(root):
+def audit(root, inventory=False):
     root = root.resolve()
     listed = git(root, 'ls-files', '-z')
     if listed.returncode:
@@ -50,16 +50,21 @@ def audit(root):
         observed = actual.returncode == 0
         probes.append(dict(path=path, expectedIgnored=ignored, ignored=observed, passed=observed == ignored))
     passed = not state and not broken and all(p['passed'] for p in probes)
-    return dict(schemaVersion=1, status='passed' if passed else 'failed',
+    result = dict(schemaVersion=1, status='passed' if passed else 'failed',
         trackedToolState=state, danglingLinks=broken, ignoreProbes=probes)
+    if inventory:
+        from evidence_inventory import evidence_inventory
+        result['evidenceInventory'] = evidence_inventory(root)
+    return result
 
 
 def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('--source', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--inventory', action='store_true', help='Measure evidence and inbound references without deleting files')
     args = parser.parse_args()
-    result = audit(args.source)
+    result = audit(args.source, args.inventory)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(result, ensure_ascii=False))

@@ -57,6 +57,39 @@ class RepositoryAuditTests(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertFalse(next(p for p in report['ignoreProbes'] if p['path'].endswith('src/main.cpp'))['passed'])
 
+    def test_inventory_finds_nested_document_script_navigation_and_json_references(self):
+        from evidence_inventory import reference_graph
+        engine = self.root/'Project/AzureRender'
+        target = engine/'docs/acceptance/p3/raw.bin'
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b'raw')
+        samples = {
+            'docs/runtime/nested/guide.md': '[Raw](../../acceptance/p3/raw.bin#data)',
+            'tools/probe.py': 'source="docs/acceptance/p3/raw.bin"',
+            'mkdocs.yml': '  - Raw: acceptance/p3/raw.bin',
+            'docs/plans/manifest.json': '{"source":"../acceptance/p3/raw.bin"}',
+        }
+        for name,text in samples.items():
+            p=engine/name;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
+        rows=reference_graph(self.root,[target])
+        self.assertEqual({r['document'] for r in rows}, {'Project/AzureRender/'+n for n in samples})
+        self.assertTrue(all(r['target']=='Project/AzureRender/docs/acceptance/p3/raw.bin' for r in rows))
+
+    def test_inventory_counts_hardlinks_once_and_rejects_outside_paths(self):
+        from evidence_inventory import inspect_directory
+        import os
+        target=self.root/'evidence';target.mkdir()
+        (target/'a.bin').write_bytes(b'123456789')
+        os.link(target/'a.bin',target/'b.bin')
+        data=inspect_directory(self.root,target)
+        self.assertEqual((data['logicalBytes'],data['uniqueFileDataBytes'],data['files']),(18,9,2))
+        with self.assertRaises(ValueError):inspect_directory(target,self.root)
+
+    def test_reference_literals_that_look_like_invalid_urls_are_ignored(self):
+        from evidence_inventory import reference_graph
+        document=self.root/'regex.py';document.write_text('pattern="//[0]/not-a-host"')
+        self.assertEqual(reference_graph(self.root,[self.root/'target']),[])
+
 
 if __name__ == '__main__':
     unittest.main()
