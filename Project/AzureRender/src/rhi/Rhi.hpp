@@ -20,9 +20,22 @@
 
 namespace azurerender::rhi {
 
+// Raw 32-bit SPIR-V values; booleans use VkBool32, floats use their bit pattern.
+struct ShaderSpecializationConstant { std::uint32_t id=0,value=0; };
+using ShaderSpecialization = std::vector<ShaderSpecializationConstant>;
+inline constexpr std::size_t kMaxShaderSpecializationConstants=16;
+inline void validateShaderSpecialization(const ShaderSpecialization& values) {
+    if(values.size()>kMaxShaderSpecializationConstants)
+        throw std::invalid_argument("Shader specialization exceeds sixteen constants per stage");
+    for(std::size_t i=0;i<values.size();++i)for(std::size_t j=0;j<i;++j)
+        if(values[i].id==values[j].id)
+            throw std::invalid_argument("Shader specialization IDs must be unique within a stage");
+}
+
 struct ComputePipelineDesc {
     VkShaderModule shader = VK_NULL_HANDLE;
     VkPipelineLayout layout = VK_NULL_HANDLE;
+    ShaderSpecialization specialization;
 };
 
 struct SamplerDesc {
@@ -125,6 +138,8 @@ struct GraphicsPipelineDesc {
     // Use one depth-format unit without implementation-dependent scaling.
     // Requires enabled depth bias and supportsExactDepthBias().
     bool depthBiasExact = false;
+    ShaderSpecialization vertexSpecialization;
+    ShaderSpecialization fragmentSpecialization;
 };
 
 inline bool validSampleCount(VkSampleCountFlagBits samples) {

@@ -3,6 +3,7 @@
 #include "animation/ExpressionPose.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "render/MaterialSampling.hpp"
+#include "render/MaterialPipelinePolicy.hpp"
 #include "scene/DirectionalLightSelection.hpp"
 #include "assets/MaterialData.hpp"
 #include "assets/MaterialSurfaceProfile.hpp"
@@ -1532,6 +1533,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
          << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
+         << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
          << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
          << "  \"motionResponseEncoding\": \"coverage-reactivity-v3\",\n"
@@ -3182,7 +3184,10 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         depthDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
         overlayDepthMirroredPipeline_=rhi_->createGraphicsPipeline(depthDesc);
         depthDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;depthDesc.cullMode=VK_CULL_MODE_NONE;
-        overlayDepthDoubleSidedPipeline_=rhi_->createGraphicsPipeline(depthDesc);rhi_->destroyShaderModule(depthModule);
+        overlayDepthDoubleSidedPipeline_=rhi_->createGraphicsPipeline(depthDesc);
+        try{initializeOrdinaryOpaquePipelines(context,integralBase);}
+        catch(...){rhi_->destroyShaderModule(depthModule);throw;}
+        rhi_->destroyShaderModule(depthModule);
         const auto simpleDepthModule=rhi_->createShaderModule(mainFragment(bindlessTextures_
             ?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv"));
         VkShaderModule simpleDepthVertex=VK_NULL_HANDLE;
@@ -3321,6 +3326,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
 void CharacterSceneRenderer::destroyResources() {
+    destroyOrdinaryOpaquePipelines();
     destroyHairIntegralPipelines();
     motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();motionPreviousValidObjects_=0;
     destroyOverlayDepth();
@@ -3470,6 +3476,7 @@ void CharacterSceneRenderer::destroyResources() {
 }
 
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
+    destroyOrdinaryOpaquePipelines();
     destroyHairIntegralPipelines();
     for (VkPipeline* pipeline : {
              &opaquePipeline_,
@@ -4306,6 +4313,7 @@ void CharacterSceneRenderer::drawPrimitive(
         ? (material.doubleSided?multiplyDoubleSidedPipeline_:mirrored?multiplyMirroredPipeline_:multiplyPipeline_)
         : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipeline_ : blend
         ? (material.doubleSided ? blendDoubleSidedPipeline_ : mirrored ? blendMirroredPipeline_ : blendPipeline_)
+        : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipelines_[material.doubleSided?2:mirrored?1:0]
         : (material.doubleSided ? opaqueDoubleSidedPipeline_ : mirrored ? opaqueMirroredPipeline_ : opaquePipeline_);
     commands.bindPipeline(pipeline);
     if (!bindlessTextures_) {

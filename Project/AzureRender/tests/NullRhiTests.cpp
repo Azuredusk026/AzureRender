@@ -37,6 +37,34 @@ std::size_t countCalls(
 
 int main() {
     {
+        using namespace azurerender::rhi;
+        NullRhi backend;GraphicsPipelineDesc graphics;
+        graphics.vertexSpecialization={{0,0x3f000000U}};
+        graphics.fragmentSpecialization={{0,1},{7,0xffffffffU}};
+        auto pipeline=backend.createGraphicsPipeline(graphics);
+        if(backend.calls.back().detail.find(" fragmentSpec=0:1/7:4294967295/")==std::string::npos)return 30;
+        backend.destroyPipeline(pipeline);
+        graphics.fragmentSpecialization.push_back({7,0});
+        const auto count=backend.calls.size();bool rejected=false;
+        try{backend.createGraphicsPipeline(graphics);}catch(const std::invalid_argument&){rejected=true;}
+        if(!rejected||backend.calls.size()!=count)return 31;
+        graphics.fragmentSpecialization.clear();graphics.vertexSpecialization.clear();
+        for(unsigned i=0;i<17;++i)graphics.vertexSpecialization.push_back({i,i+1});
+        rejected=false;try{backend.createGraphicsPipeline(graphics);}catch(const std::invalid_argument&){rejected=true;}
+        if(!rejected||backend.calls.size()!=count)return 32;
+        ComputePipelineDesc compute{reinterpret_cast<VkShaderModule>(1),reinterpret_cast<VkPipelineLayout>(2)};
+        for(unsigned i=0;i<16;++i)compute.specialization.push_back({i,i+5});
+        pipeline=backend.createComputePipeline(compute);
+        if(backend.calls.back().detail.find(" spec=0:5/1:6/")==std::string::npos)return 33;
+        backend.destroyPipeline(pipeline);
+        compute.specialization[15].id=0;rejected=false;
+        try{backend.createComputePipeline(compute);}catch(const std::invalid_argument&){rejected=true;}
+        if(!rejected)return 34;
+        compute.specialization.clear();pipeline=backend.createComputePipeline(compute);
+        if(backend.calls.back().detail.find(" spec=")!=std::string::npos)return 35;
+        backend.destroyPipeline(pipeline);
+    }
+    {
         NullRhi backend;azurerender::rhi::GraphicsPipelineDesc desc;
         desc.depthBiasExact=true;bool rejected=false;
         try{backend.createGraphicsPipeline(desc);}catch(const std::invalid_argument&){rejected=true;}

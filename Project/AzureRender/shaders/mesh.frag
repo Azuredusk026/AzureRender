@@ -115,6 +115,10 @@ layout(push_constant) uniform MaterialData {
     layout(offset = 140) float nodeOpacity;
 } material;
 
+layout(constant_id=0) const bool azureOrdinaryOpaque=false;
+#define AZURE_MATERIAL_CLASS (azureOrdinaryOpaque?0U:material.materialClass)
+#define AZURE_ALPHA_MODE (azureOrdinaryOpaque?0:material.alphaMode)
+
 #if defined(AZURE_BINDLESS)
 #define AZ_TEX_BASE_COLOR textureArray[nonuniformEXT(material.textureBase + 0u)]
 #define AZ_TEX_NORMAL textureArray[nonuniformEXT(material.textureBase + 1u)]
@@ -401,7 +405,7 @@ vec3 sampleToonRamp(float coordinate) {
     vec2 atlasSize = vec2(textureSize(AZ_TEX_TOON_RAMP, 0));
     float minimumU = 0.5 / atlasSize.x;
     float maximumU = 1.0 - minimumU;
-    float row = float(min(material.materialClass, 9U));
+    float row = float(min(AZURE_MATERIAL_CLASS, 9U));
     vec2 uv = vec2(
         mix(minimumU, maximumU, clamp(coordinate, 0.0, 1.0)),
         (row + 0.5) / atlasSize.y);
@@ -583,8 +587,8 @@ void main() {
     projectedHairTangentDx=dFdx(worldTangent);projectedHairTangentDy=dFdy(worldTangent);
     projectedHairPositionDx=dFdx(worldPosition);projectedHairPositionDy=dFdy(worldPosition);
     }
-    if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
-    bool eyeRadial=material.materialClass==6U&&materialFeatureEnabled(131072U)>.5;
+    if (AZURE_ALPHA_MODE != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
+    bool eyeRadial=AZURE_MATERIAL_CLASS==6U&&materialFeatureEnabled(131072U)>.5;
     EyeSurfaceProfile eyeProfile;
     CharacterEyeCoordinates eyeCoordinates;
 #if defined(AZURE_GEOMETRY_SAMPLES)
@@ -592,9 +596,9 @@ void main() {
 #else
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
 #endif
-    if(material.alphaMode==1&&(material.materialFeatures&0x40000000U)!=0U)
+    if(AZURE_ALPHA_MODE==1&&(material.materialFeatures&0x40000000U)!=0U)
         baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
-    if(material.alphaMode==2&&(material.materialFeatures&0x40000000U)!=0U)
+    if(AZURE_ALPHA_MODE==2&&(material.materialFeatures&0x40000000U)!=0U)
 #if defined(AZURE_GEOMETRY_SAMPLES)
         baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
 #else
@@ -612,7 +616,7 @@ void main() {
     bool eyeNpr=eyeRadial&&camera.clusterLighting.x>.5&&camera.nprLightingParameters.x>.5
         &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>.5;
     bool multiplyComposite = materialFeatureEnabled(32768U) > 0.5;
-    bool overlayMaterial = (material.materialClass == 7U
+    bool overlayMaterial = (AZURE_MATERIAL_CLASS == 7U
         && materialFeatureEnabled(16U) > 0.5) || multiplyComposite;
     bool browOverlay = overlayMaterial
         && materialFeatureEnabled(64U) > 0.5;
@@ -652,7 +656,7 @@ void main() {
         baseColor.rgb += vec3(0.34, 0.105, 0.012)
             * signalRing * ticks * platformMask;
     }
-    if (material.alphaMode == 1 && baseColor.a < material.alphaCutoff) {
+    if (AZURE_ALPHA_MODE == 1 && baseColor.a < material.alphaCutoff) {
         discard;
     }
 
@@ -676,7 +680,7 @@ void main() {
 #endif
         ?textureGrad(AZ_TEX_HAIR_DATA,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25)
         :texture(AZ_TEX_HAIR_DATA, textureCoordinate);
-    float hairActive = material.materialClass==3U ? materialFeatureEnabled(2U) : 0.0;
+    float hairActive = AZURE_MATERIAL_CLASS==3U ? materialFeatureEnabled(2U) : 0.0;
     bool projectedHair=hairActive>0.0&&materialFeatureEnabled(65536U)>.5;
     bool strandDiffuse=projectedHair
         &&loadProjectedHairSurfaceProfile(material.materialPadding>>1U).secondaryColor.w>.5;
@@ -708,7 +712,7 @@ void main() {
     float styleStrength = camera.renderingParameters.y;
     float diffuseBandThreshold = camera.renderingParameters.z;
     bool sceneCharacter=camera.clusterLighting.x>.5
-        && sceneCharacterSurface(material.materialClass,material.materialProfileVersion);
+        && sceneCharacterSurface(AZURE_MATERIAL_CLASS,material.materialProfileVersion);
     if(sceneCharacter && diffuseBandThreshold<0.0)diffuseBandThreshold=.40;
     float bandEnabled = step(0.0, diffuseBandThreshold);
     float styleMask = smoothstep(
@@ -723,22 +727,22 @@ void main() {
     float roughness = clamp(sqrt(packedMaterial.g*packedMaterial.g+normalVariance*.25), 0.08, 1.0);
     float metallic = clamp(packedMaterial.b, 0.0, 1.0);
     float specularLevel = clamp(specularEmissive.a, 0.0, 1.0);
-    if(material.materialClass==0U||material.materialClass==4U||material.materialClass==5U) {
+    if(AZURE_MATERIAL_CLASS==0U||AZURE_MATERIAL_CLASS==4U||AZURE_MATERIAL_CLASS==5U) {
         vec2 inputProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[5].zw;
         specularLevel=clamp((inputProfile.x>.5?packedMaterial.a:specularEmissive.a)*inputProfile.y,0.0,1.0);
     }
     // Character surface classes use authored packed maps from several source
     // conventions. Keep dielectric surfaces physically bounded while leaving
     // the dedicated Metal class untouched.
-    if (material.materialClass == 1U || material.materialClass == 2U) {
+    if (AZURE_MATERIAL_CLASS == 1U || AZURE_MATERIAL_CLASS == 2U) {
         metallic = min(metallic, 0.015);
-        roughness = max(roughness, material.materialClass == 2U ? 0.58 : 0.52);
-        specularLevel = min(specularLevel, material.materialClass == 2U ? 0.22 : 0.32);
-    } else if (material.materialClass == 3U) {
+        roughness = max(roughness, AZURE_MATERIAL_CLASS == 2U ? 0.58 : 0.52);
+        specularLevel = min(specularLevel, AZURE_MATERIAL_CLASS == 2U ? 0.22 : 0.32);
+    } else if (AZURE_MATERIAL_CLASS == 3U) {
         metallic = min(metallic, 0.04);
         roughness = max(roughness, 0.44);
         specularLevel = min(specularLevel, 0.30);
-    } else if (material.materialClass == 6U) {
+    } else if (AZURE_MATERIAL_CLASS == 6U) {
         metallic = 0.0;
     }
     if(strandDiffuse)metallic=0.0;
@@ -768,9 +772,9 @@ void main() {
         1.0,
         shadowVisibility,
         showcasePreset == 1.0 ? 0.88 : 0.72);
-    if (material.materialClass == 2U) {
+    if (AZURE_MATERIAL_CLASS == 2U) {
         keyVisibility = max(keyVisibility, 0.84);
-    } else if (material.materialClass == 1U) {
+    } else if (AZURE_MATERIAL_CLASS == 1U) {
         keyVisibility = max(keyVisibility, 0.58);
     }
     vec3 keyColor = vec3(1.04, 0.98, 0.94);
@@ -796,7 +800,7 @@ void main() {
     float aoSource=nprParameters.z;
     float nprBaseAo=aoSource>1.5?packedMaterial.r:aoSource>.5?baseColor.a:1.0;
     bool specularRamp=nprDiffuse&&abs(rampProfile.w)>.5
-        &&(material.materialClass==0U||material.materialClass==4U||material.materialClass==5U);
+        &&(AZURE_MATERIAL_CLASS==0U||AZURE_MATERIAL_CLASS==4U||AZURE_MATERIAL_CLASS==5U);
     vec3 f0 = mix(vec3(dielectricF0(specularLevel)), baseColor.rgb, metallic);
     vec3 rampReflectance=f0,rampSample=vec3(1);
     float rampSpecularLobe=0;
@@ -810,13 +814,13 @@ void main() {
     }
     if(strandDiffuse)f0=vec3(0);
     float normalDotView = max(dot(shadedNormal, viewDirection), 0.0);
-    bool microfacetSurface = material.materialClass == 0U || material.materialClass == 4U
-        || material.materialClass == 5U || material.materialClass == 9U;
+    bool microfacetSurface = AZURE_MATERIAL_CLASS == 0U || AZURE_MATERIAL_CLASS == 4U
+        || AZURE_MATERIAL_CLASS == 5U || AZURE_MATERIAL_CLASS == 9U;
     vec3 fresnel =
         f0 + (1.0 - f0) * pow(1.0 - normalDotView, 5.0);
     if(strandDiffuse)fresnel=vec3(0);
     bool fittedEnvironment=camera.clusterLighting.x>.5&&camera.clusterLighting.w>.5
-        &&material.materialClass==0U;
+        &&AZURE_MATERIAL_CLASS==0U;
     vec3 environmentResponse=fittedEnvironment
         ?ggxMultiscatterEnvironment(specularRamp?f0:mix(vec3(.04),baseColor.rgb,metallic),roughness,normalDotView)
         :fresnel;
@@ -870,7 +874,7 @@ void main() {
         0.0,
         1.0);
     vec4 faceSdfSample = vec4(0.0);
-    float faceSdfEligible = material.materialClass == 2U
+    float faceSdfEligible = AZURE_MATERIAL_CLASS == 2U
         ? materialFeatureEnabled(4U)
         : 0.0;
     float faceSdfEnabled = camera.faceSdfParameters.x
@@ -963,7 +967,7 @@ void main() {
         localCharacterDiffuse=hairDiffuseResponse.color;
         localCharacterResponseReady=true;
     }
-    vec3 indirectChroma = toonIndirectChroma(classRamp, toonWeight, material.materialClass);
+    vec3 indirectChroma = toonIndirectChroma(classRamp, toonWeight, AZURE_MATERIAL_CLASS);
     float rampLuminance = dot(classRamp, vec3(0.2126, 0.7152, 0.0722));
     vec3 diffuseResponse = mix(vec3(diffuse), classRamp, toonWeight);
     float ambientRampVisibility = mix(
@@ -1053,7 +1057,7 @@ void main() {
             }
             continue;
         }
-        if((screenRim||specularOnly)&&(!characterLightComposition||material.alphaMode==2))continue;
+        if((screenRim||specularOnly)&&(!characterLightComposition||AZURE_ALPHA_MODE==2))continue;
         SceneLightSample sampled=sampleSceneLight(light,worldPosition,false);
         // Exact zero incident energy has no ordinary-surface BRDF contribution.
         // Character composition keeps its material-frame and main-light state.
@@ -1237,17 +1241,17 @@ void main() {
         max(shadowRegion, (1.0 - shadowVisibility) * 0.72)
         * shadowSystemWeight * material.styleParameters.y
         * materialFeatureEnabled(1U);
-    shadowWeight *= material.materialClass == 2U
+    shadowWeight *= AZURE_MATERIAL_CLASS == 2U
         ? 0.28
-        : (material.materialClass == 1U ? 0.62 : 1.0);
+        : (AZURE_MATERIAL_CLASS == 1U ? 0.62 : 1.0);
     vec3 lamShadowTint = mix(
         vec3(1.0),
         material.lamShadowColor.rgb,
         material.lamShadowColor.a * shadowWeight
             * (showcasePreset == 1.0 ? 0.36 : 0.36));
-    float aoClassWeight = material.materialClass == 2U
+    float aoClassWeight = AZURE_MATERIAL_CLASS == 2U
         ? 0.10
-        : (material.materialClass == 1U ? 0.28 : 1.0);
+        : (AZURE_MATERIAL_CLASS == 1U ? 0.28 : 1.0);
     vec3 aoShadowTint = mix(
         vec3(1.0),
         material.aoColor.rgb,
@@ -1277,7 +1281,7 @@ void main() {
         tintedDiffuse,
         huePreservedHair,
         hairActive * 0.80);
-    float faceActive = material.materialClass == 2U && !dualFaceSdf ? 1.0 : 0.0;
+    float faceActive = AZURE_MATERIAL_CLASS == 2U && !dualFaceSdf ? 1.0 : 0.0;
     tintedDiffuse *= mix(vec3(1.0), vec3(0.86, 0.77, 0.74), faceActive);
     tintedDiffuse *= mix(
         vec3(1.0),
@@ -1295,11 +1299,11 @@ void main() {
         * keyVisibility * material.styleParameters.z;
     directSpecular += clusteredSpecular * material.styleParameters.z;
     ambientSpecular *= material.styleParameters.z;
-    float dielectricSpecularWeight = material.materialClass == 1U
+    float dielectricSpecularWeight = AZURE_MATERIAL_CLASS == 1U
         ? 0.05
-        : (material.materialClass == 2U
+        : (AZURE_MATERIAL_CLASS == 2U
             ? 0.03
-            : (material.materialClass == 3U ? 0.08 : 1.0));
+            : (AZURE_MATERIAL_CLASS == 3U ? 0.08 : 1.0));
     ambientSpecular *= dielectricSpecularWeight;
     directSpecular *= dielectricSpecularWeight;
     // Prevent a bright sky texel from bleaching red hair to grey. Hair uses
@@ -1414,7 +1418,7 @@ void main() {
         kkSpecular = vec3(0.0);
         secondaryKkSpecular = vec3(0.0);
     }
-    float outputAlpha = material.alphaMode == 2 ? baseColor.a : 1.0;
+    float outputAlpha = AZURE_ALPHA_MODE == 2 ? baseColor.a : 1.0;
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if (browOverlay) {
         // M_Common_Brow uses a constant Opaccity parameter; the face texture
@@ -1725,7 +1729,7 @@ void main() {
     } else if (qaIsolationMode == 7) {
         qaColor = emissive;
     } else if (qaIsolationMode == 8) {
-        qaColor = materialClassColor(material.materialClass);
+        qaColor = materialClassColor(AZURE_MATERIAL_CLASS);
     } else if (qaIsolationMode == 9) {
         qaColor = vec3(styleMask);
     } else if (qaIsolationMode == 10) {
@@ -1738,7 +1742,7 @@ void main() {
             vec3(0.0),
             vec3(1.0));
     } else if (qaIsolationMode == 13) {
-        qaColor = material.materialClass == 2U
+        qaColor = AZURE_MATERIAL_CLASS == 2U
             ? mix(vec3(0.04), vec3(faceIllumination), faceSdfSample.a)
             : vec3(0.0);
     } else if (qaIsolationMode == 14) {
@@ -1780,7 +1784,7 @@ void main() {
         outputColor.rgb = mix(outputColor.rgb, vec3(0.96, 0.62, 0.10), 0.42);
         outputColor.a = 1.0;
     }
-    if (material.alphaMode == 2) outputColor.a *= material.nodeOpacity;
+    if (AZURE_ALPHA_MODE == 2) outputColor.a *= material.nodeOpacity;
     if(multiplyComposite) {
         outputColor.rgb=mix(vec3(1.0),outputColor.rgb,compositeCoverage);
         outputColor.a=0.0;

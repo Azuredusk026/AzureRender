@@ -62,5 +62,22 @@ AzurePlayer.exe --project project.azureproject --smoke-frames 24 --pipeline-stat
 实际帧、通道及场景计时提供运行成本。
 优化同时复验图像、资源及性能门禁。
 
+## 着色器专用化
+
+RHI 管线描述使用 `ShaderSpecialization` 保存常量。
+每项包含 SPIR-V 常量标识和三十二位原始值。
+布尔值使用 `VkBool32`，浮点值使用对应位模式。
+计算、顶点和片元阶段分别声明列表。
+
+单阶段最多十六项，标识在该阶段内唯一。
+空列表使用着色器默认值。
+非法列表在调用驱动或记录模拟管线前拒绝。
+创建期间的数据与映射由 RHI 调用栈持有。
+
+普通不透明材质的颜色管线使用专用化常量零。
+类别与透明模式固定，其余输入继续读取公共材质数据。
+主颜色拥有三种朝向，快照颜色采用完整程序。
+场景卸载与管线重建释放所属句柄。
+
 接口依据见 [Vulkan 管线统计](https://docs.vulkan.org/refpages/latest/refpages/source/vkGetPipelineExecutableStatisticsKHR.html)。
 抗锯齿预算见[空间抗锯齿计划](../plans/2026-10-22-spatial-antialiasing.md)。

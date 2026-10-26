@@ -247,8 +247,14 @@ void NullRhi::destroyPipelineLayout(const VkPipelineLayout layout) {
 }
 
 VkPipeline NullRhi::createComputePipeline(const ComputePipelineDesc& desc) {
+    validateShaderSpecialization(desc.specialization);
     if (!desc.shader || !desc.layout) throw std::invalid_argument("Compute pipeline requires shader and layout");
-    return mint<VkPipeline>("createComputePipeline");
+    const auto pipeline=mint<VkPipeline>("createComputePipeline");
+    if(!desc.specialization.empty()){
+        calls.back().detail+=" spec=";
+        for(const auto& v:desc.specialization)calls.back().detail+=std::to_string(v.id)+":"+std::to_string(v.value)+"/";
+    }
+    return pipeline;
 }
 void NullCommandRecorder::bindComputePipeline(VkPipeline pipeline) {
     calls.push_back({"bindComputePipeline", hexHandle(pipeline)});
@@ -259,6 +265,8 @@ void NullCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDe
 }
 
 VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
+    validateShaderSpecialization(desc.vertexSpecialization);
+    validateShaderSpecialization(desc.fragmentSpecialization);
     validateGraphicsColorWriteMasks(desc);
     validateGraphicsMultisampling(desc);
     if(desc.depthBiasExact&&!desc.depthBias)throw std::invalid_argument("Exact depth bias requires enabled depth bias");
@@ -279,6 +287,13 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
         + " sampleShading="+std::to_string(desc.minSampleShading);
     if(desc.depthBias)calls.back().detail+=" depthBias="+std::to_string(desc.depthBiasConstant)+"/"+std::to_string(desc.depthBiasSlope);
     if(desc.depthBiasExact)calls.back().detail+=" exactDepthBias=1";
+    const auto recordSpecialization=[&](const char* name,const ShaderSpecialization& values){
+        if(values.empty())return;
+        calls.back().detail+=std::string(" ")+name+"=";
+        for(const auto& v:values)calls.back().detail+=std::to_string(v.id)+":"+std::to_string(v.value)+"/";
+    };
+    recordSpecialization("vertexSpec",desc.vertexSpecialization);
+    recordSpecialization("fragmentSpec",desc.fragmentSpecialization);
     if(!desc.colorWriteMasks.empty()) {
         calls.back().detail+=" masks=";
         for(const auto mask:desc.colorWriteMasks)calls.back().detail+=std::to_string(mask)+"/";

@@ -86,6 +86,9 @@ private:
     bool temporalMaterialSamplesActive() const noexcept;
     void initializeHairIntegralPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&);
     void destroyHairIntegralPipelines() noexcept;
+    void initializeOrdinaryOpaquePipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&);
+    void destroyOrdinaryOpaquePipelines() noexcept;
+    std::array<VkPipeline,3> ordinaryOpaquePipelines_{};
     VkPipeline hairIntegralPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const;
     std::array<VkPipeline,6> hairIntegralPipelines_{};
     std::array<VkPipeline,3> hairIntegralSnapshotPipelines_{};

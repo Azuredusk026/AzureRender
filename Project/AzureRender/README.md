@@ -3,6 +3,7 @@
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。
 显式管线编译统计见[GPU 管线检查](docs/development/pipeline-inspection.md)。
 实际主场景热点与保留预算见[成本验证](docs/acceptance/nr/main-aa-cost-attribution.md)。
+普通材质专用化及完整快照路径见[材质验证](docs/acceptance/nr/ordinary-material-specialization.md)。
 
 原生时序输入与运动解码见[时序核验](docs/acceptance/nr/native-temporal-inputs.md)。
 主辅视图的历史提交边界见[时序帧状态](docs/runtime/temporal-frame-state.md)。

@@ -1,4 +1,5 @@
 #include "rhi/VulkanRhi.hpp"
+#include "rhi/VulkanSpecialization.hpp"
 
 #include "render/RenderMath.hpp"
 
@@ -385,6 +386,7 @@ void VulkanRhi::destroyPipelineLayout(const VkPipelineLayout layout) {
 }
 
 VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
+    const VulkanSpecialization specialization(desc.specialization);
     if (!desc.shader || !desc.layout) throw std::invalid_argument("Compute pipeline requires shader and layout");
     VkComputePipelineCreateInfo info{VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO};
     info.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
@@ -392,6 +394,7 @@ VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
     info.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
     info.stage.module = desc.shader;
     info.stage.pName = "main";
+    info.stage.pSpecializationInfo=specialization.get();
     info.layout = desc.layout;
     VkPipeline pipeline = VK_NULL_HANDLE;
     vkCheck(vkCreateComputePipelines(device_, VK_NULL_HANDLE, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
@@ -412,6 +415,8 @@ void VulkanCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, Vk
 
 VkPipeline VulkanRhi::createGraphicsPipeline(
     const GraphicsPipelineDesc& desc) {
+    const VulkanSpecialization vertexSpecialization(desc.vertexSpecialization);
+    const VulkanSpecialization fragmentSpecialization(desc.fragmentSpecialization);
     validateGraphicsColorWriteMasks(desc);
     validateGraphicsMultisampling(desc);
     if(desc.depthBiasExact&&!desc.depthBias)throw std::invalid_argument("Exact depth bias requires enabled depth bias");
@@ -429,11 +434,13 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     vertexStage.stage = VK_SHADER_STAGE_VERTEX_BIT;
     vertexStage.module = desc.vertexShader;
     vertexStage.pName = "main";
+    vertexStage.pSpecializationInfo=vertexSpecialization.get();
     VkPipelineShaderStageCreateInfo fragmentStage{
         VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO};
     fragmentStage.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
     fragmentStage.module = desc.fragmentShader;
     fragmentStage.pName = "main";
+    fragmentStage.pSpecializationInfo=fragmentSpecialization.get();
     const std::array shaderStages = {vertexStage, fragmentStage};
 
     VkVertexInputBindingDescription bindingDescription{};
