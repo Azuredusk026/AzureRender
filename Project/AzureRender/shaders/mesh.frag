@@ -53,7 +53,13 @@ layout(binding = 0) uniform CameraData {
     vec4 screenReflectionTrace,screenReflectionQuality;
     vec4 nprDirectionBias,nprGainFloor,nprAmbientColor,nprComposition,nprMainRadiance,nprLightingParameters;
 } camera;
+#if defined(AZURE_PROBE_FIELD)
+layout(binding=23) uniform sampler2DArray reflectionProbeTexture;
+layout(std430,binding=33) readonly buffer ReflectionField {vec4 probeFieldRows[];};
+#include "reflection_probe_field.glsl"
+#else
 layout(binding=23) uniform samplerCube reflectionProbeTexture;
+#endif
 layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
 #if defined(AZURE_IRRADIANCE_CLIPMAP)
 #include "irradiance_clipmap.glsl"
@@ -1506,6 +1512,9 @@ void main() {
 #endif
     vec3 sceneReflectionRadiance=vec3(0);
     vec3 sceneReflectionResponse=environmentResponse;
+#if defined(AZURE_PROBE_FIELD)
+    vec3 reflectionDiffuseIncident=textureLod(AZ_TEX_ENVIRONMENT,directionToEquirectangular(indirectDiffuseNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*camera.clusterLighting.y;
+#endif
     bool overlayDisabled = qaEffectMode == 9 && qaEffectDisabled;
     float overlayVisible = overlayMaterial && !overlayDisabled ? 1.0 : 0.0;
     beautyColor = mix(beautyColor, baseColor.rgb, overlayVisible);
@@ -1549,6 +1558,9 @@ void main() {
     }
     if(camera.irradianceDimensionsEnabled.w>.5){
         vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal,!(nprDiffuse||projectedLighting||eyeNpr));
+#if defined(AZURE_PROBE_FIELD)
+        reflectionDiffuseIncident=mix(reflectionDiffuseIncident,volume.rgb,volume.w);
+#endif
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
     }
@@ -1636,6 +1648,20 @@ void main() {
             directDiffuse+=difference;beautyColor+=difference;
         }
     }
+#if defined(AZURE_PROBE_FIELD)
+    if(camera.probeParameters.x>.5){
+        float lastMip=float(textureQueryLevels(reflectionProbeTexture)-1);
+        float lod=reflectionProbeLod(roughness,lastMip,vec3(camera.probeCenter.w,camera.probeHalfExtents.w,camera.probeCapture.w));
+        vec3 radiance=reflectionProbeFieldRadiance(reflectionProbeTexture,worldPosition,reflectionDirection,indirectDiffuseNormal,
+            dot(reflectionDiffuseIncident,vec3(.212673,.715152,.072175)),lod).rgb;
+        sceneReflectionRadiance=radiance;
+        vec3 blended=environmentResponse*radiance;
+        if(sceneCharacter)blended*=material.styleParameters.z*dielectricSpecularWeight;
+        if(qaEffectMode==5&&qaEffectDisabled)blended=vec3(0);
+        if(camera.clusterLighting.x>.5)blended=sceneReflectionResponse*radiance;
+        beautyColor+=blended-ambientSpecular;ambientSpecular=blended;
+    }
+#else
     if(camera.probeParameters.x>.5){
         vec3 edge=camera.probeHalfExtents.xyz-abs(worldPosition-camera.probeCenter.xyz);
         float distanceToEdge=min(edge.x,min(edge.y,edge.z));
@@ -1664,6 +1690,7 @@ void main() {
             ambientSpecular=blended;
         }
     }
+#endif
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface
         &&!overlayMaterial&&!(qaEffectMode==5&&qaEffectDisabled)){

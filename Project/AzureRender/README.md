@@ -11,6 +11,7 @@
 地面实际 UV 绑定及颜色上传见[地面绑定](docs/acceptance/nr/floor-runtime-binding.md)。
 探针身份、动态反射链及对照镜头见[运行核验](docs/acceptance/nr/native-reflection-bindings.md)。
 可配置的探针预滤波层级见[层级验收](docs/acceptance/nr/reflection-lod.md)。
+有序体积、辐照亮度适配及生产消费见[探针验收](docs/acceptance/nr/reflection-probe-fields.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

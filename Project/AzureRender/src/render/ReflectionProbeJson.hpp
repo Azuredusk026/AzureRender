@@ -1,5 +1,6 @@
 #pragma once
 #include "render/ReflectionProbe.hpp"
+#include "render/ReflectionProbeFieldJson.hpp"
 #include <nlohmann/json.hpp>
 namespace azurerender {
 inline void to_json(nlohmann::json& json,const ReflectionLodMapping& mapping){
@@ -26,7 +27,9 @@ inline void from_json(const nlohmann::json& json,ReflectionLodMapping& mapping){
 }
 inline void to_json(nlohmann::json& json,const ReflectionProbe& probe){
     probe.validate();
-    json={{"version",probe.lodMapping?ReflectionProbe::kSchemaVersion:2},{"texture",probe.texture},{"center",probe.center},{"halfExtents",probe.halfExtents},
+    if(probe.field){json={{"version",4},{"texture",probe.texture},{"field",*probe.field}};
+        if(probe.lodMapping)json["lodMapping"]=*probe.lodMapping;return;}
+    json={{"version",probe.lodMapping?3:2},{"texture",probe.texture},{"center",probe.center},{"halfExtents",probe.halfExtents},
         {"capturePosition",probe.capturePosition},{"intensity",probe.intensity},
         {"blendDistance",probe.blendDistance},{"boxProjection",probe.boxProjection}};
     if(probe.projectionOrigin)json["projectionOrigin"]=*probe.projectionOrigin;
@@ -34,8 +37,15 @@ inline void to_json(nlohmann::json& json,const ReflectionProbe& probe){
 }
 inline void from_json(const nlohmann::json& json,ReflectionProbe& probe){
     if(!json.is_object()||!json.contains("version")||!json.at("version").is_number_integer()
-        ||(json.at("version")!=1&&json.at("version")!=2&&json.at("version")!=ReflectionProbe::kSchemaVersion))
+        ||(json.at("version")!=1&&json.at("version")!=2&&json.at("version")!=3&&json.at("version")!=ReflectionProbe::kSchemaVersion))
         throw std::invalid_argument("Unsupported reflection probe version");
+    if(json.at("version")==4){
+        if(!json.contains("field")||json.size()!=(json.contains("lodMapping")?4U:3U))throw std::invalid_argument("Probe field requires exclusive version four fields");
+        ReflectionProbe result;result.texture=json.at("texture").get<std::string>();result.field=json.at("field").get<ReflectionProbeField>();
+        if(json.contains("lodMapping"))result.lodMapping=json.at("lodMapping").get<ReflectionLodMapping>();
+        result.validate();probe=std::move(result);return;
+    }
+    if(json.contains("field"))throw std::invalid_argument("Probe field requires reflection version four");
     if(json.at("version")==1&&json.contains("projectionOrigin"))
         throw std::invalid_argument("Projection origin requires reflection probe version 2");
     if((json.at("version")==3)!=json.contains("lodMapping"))

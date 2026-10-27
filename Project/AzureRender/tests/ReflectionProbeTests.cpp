@@ -153,4 +153,13 @@ int main() {
     p.halfExtents[0]=0; assert(rejects(p)); p.halfExtents[0]=2;
     p.intensity=-1; assert(rejects(p)); p.intensity=1;
     p.center[0]=std::numeric_limits<float>::quiet_NaN(); assert(rejects(p));
+    ReflectionProbe fieldProbe;fieldProbe.texture="room.azoa";fieldProbe.field=ReflectionProbeField{};
+    nlohmann::json fieldJson=fieldProbe;
+    assert(fieldJson.at("version")==4&&fieldJson.contains("field"));
+    const auto fieldRoundtrip=fieldJson.get<ReflectionProbe>();
+    assert(fieldRoundtrip.field&&nlohmann::json(fieldRoundtrip)==fieldJson);
+    auto conflict=fieldJson;conflict["center"]={1,2,3};bool conflictRejected=false;
+    try{(void)conflict.get<ReflectionProbe>();}catch(const std::exception&){conflictRejected=true;}
+    assert(conflictRejected);
+
 }

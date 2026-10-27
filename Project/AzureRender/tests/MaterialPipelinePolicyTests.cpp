@@ -33,4 +33,7 @@ int main(){
         !="/character_snapshot_object_bindless_samples_clipmap.frag.spv")return 13;
     bool invalid=false;try{(void)sceneFragmentVariant("mesh.vert.spv",false,true);}catch(const std::invalid_argument&){invalid=true;}
     if(!invalid)return 14;
+    if(sceneFragmentVariant("mesh.frag.spv",false,false,true)!="mesh_field.frag.spv")return 15;
+    if(sceneFragmentVariant("mesh.frag.spv",true,true,true)!="mesh_samples_clipmap_field.frag.spv")return 16;
+
 }

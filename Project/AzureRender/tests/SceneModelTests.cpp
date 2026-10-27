@@ -176,6 +176,13 @@ int main() {
         document.lights[0].shape.influenceBox.worldToBox[0]={0,.5F,0,-.5F};
         document.lights[0].shape.influenceBox.worldToBox[1]={-1,0,0,0};
         document.save(scenePath);
+        auto fieldDocument=document;fieldDocument.reflectionProbe.field=azurerender::ReflectionProbeField{};
+        azurerender::ReflectionProbeVolume volume;volume.arrayLayer=2;volume.fade=.5F;fieldDocument.reflectionProbe.field->probes={volume};
+        fieldDocument.reflectionProbe.field->worldToField[0][0]=-1;
+        fieldDocument.save(directory/"probe-field.azscene");
+        const auto fieldReloaded=azurerender::SceneDocument::load(directory/"probe-field.azscene");
+        assert(fieldReloaded.reflectionProbe.field&&fieldReloaded.reflectionProbe.field->probes[0].arrayLayer==2);
+        assert(fieldReloaded.reflectionProbe.field->worldToField[0][0]==-1);
         const auto shapeReloaded=azurerender::SceneDocument::load(scenePath).lights[0].shape;
         auto responseDocument=document;
         responseDocument.lights[0].shape.characterResponse={true,.25F,.8F};

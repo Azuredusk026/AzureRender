@@ -1,4 +1,5 @@
 #pragma once
+#include "render/ReflectionProbeField.hpp"
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -25,7 +26,7 @@ struct ReflectionLodMapping {
 // One world-axis-aligned reflection volume. Positions use scene metres.
 // The renderer owns its texture; an empty path disables this contribution.
 struct ReflectionProbe {
-    static constexpr int kSchemaVersion=3;
+    static constexpr int kSchemaVersion=4;
     std::string texture;
     std::array<float,3> center{0,0,0};
     std::array<float,3> halfExtents{1,1,1};
@@ -36,7 +37,9 @@ struct ReflectionProbe {
     // An omitted origin follows capturePosition when that position changes.
     std::optional<std::array<float,3>> projectionOrigin;
     std::optional<ReflectionLodMapping> lodMapping;
+    std::optional<ReflectionProbeField> field;
     void validate() const {
+        if(field)field->validate(256);
         if(lodMapping)lodMapping->validate();
         for(unsigned axis=0;axis<3;++axis)
             if(!std::isfinite(center[axis])||!std::isfinite(capturePosition[axis])

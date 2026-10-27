@@ -2,6 +2,7 @@
 #pragma once
 #include "render/IrradianceVolume.hpp"
 #include "render/EnvironmentCubeTexture.hpp"
+#include "render/OctahedralEnvironmentGpu.hpp"
 #include "render/SampledTextureCache.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
@@ -341,6 +342,9 @@ private:
     bool outlineProjectionEnabled_=false;
     GpuTexture environmentTexture_;
     std::unique_ptr<EnvironmentCubeTexture> reflectionProbeTexture_;
+    std::unique_ptr<OctahedralEnvironmentGpu> probeFieldTexture_;
+    rhi::GpuBuffer probeFieldBuffer_;
+    bool probeFieldActive_=false;
     IrradianceVolume irradianceVolume_;
     std::unique_ptr<IrradianceClipmapGpu> irradianceClipmap_;
     bool irradianceClipmapActive_=false;

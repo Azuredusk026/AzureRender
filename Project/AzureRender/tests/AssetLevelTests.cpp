@@ -1,4 +1,5 @@
 #include "runtime/AssetDatabase.hpp"
+#include "render/OctahedralEnvironment.hpp"
 #include "runtime/LevelSession.hpp"
 #include <fstream>
 #include <iterator>
@@ -149,6 +150,16 @@ int main() {
   const auto mappedReopened=Level::load(root/"mapped-saved.azurelevel",db);
   check(mappedReopened.scene.reflectionProbe.lodMapping.has_value());
   check(std::abs(mappedReopened.scene.reflectionProbe.lod(.5F,8)-3.8F)<2e-6F);
+  OctahedralEnvironment array;array.layers=2;array.texels={0,0};const auto arrayBytes=array.encode();
+  {std::ofstream out(root/"assets/probe.azoa",std::ios::binary);out.write(reinterpret_cast<const char*>(arrayBytes.data()),arrayBytes.size());}
+  check(OctahedralEnvironment::load(root/"assets/probe.azoa").layers==2);
+  auto fieldLevel=level;ReflectionProbe fieldProbe;fieldProbe.texture="assets:/probe.azoa";fieldProbe.field=ReflectionProbeField{};
+  ReflectionProbeVolume room;room.arrayLayer=1;room.fade=.25F;fieldProbe.field->probes.push_back(room);
+  fieldLevel["reflectionProbe"]=fieldProbe;write(root/"assets/field.azurelevel",fieldLevel.dump());db.refresh();
+  auto fieldScene=Level::load(root/"assets/field.azurelevel",db);fieldScene.save(root/"field-saved.azurelevel");
+  const auto fieldReopened=Level::load(root/"field-saved.azurelevel",db);
+  check(fieldReopened.scene.reflectionProbe.field&&fieldReopened.scene.reflectionProbe.field->probes.size()==1);
+  check(fieldReopened.scene.reflectionProbe.field->probes[0].fade==.25F);
   check(reopened.scene.irradianceVolume.sampling.jitterAmplitude==.2F && reopened.scene.irradianceVolume.sampling.phase==49.875F);
   check(reopened.scene.lights[0].shape.type==LightKind::Spot
       && reopened.scene.lights[0].shape.innerCone==.25F);

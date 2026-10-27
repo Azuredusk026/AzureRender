@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR5-R9 ordered probe field, luminance adaptation and scene integration",
+  "status": "narrow-checks-passed",
+  "privateRun": "build/runs/20261027-153828-ordered-probe-field-contract-f8886a",
+  "source": {
+    "CMakeLists.txt": "b5e230a597f0d59468f5f38a7817a929b5e951f30c21c36db5409a635788f1ba",
+    "src/render/ReflectionProbeField.hpp": "4ac0897551394dfb2770016fa77b332b16a8b1698a2dc4e7773e81c975f8a7e5",
+    "src/render/ReflectionProbeFieldJson.hpp": "de85dbd8992cb1208dcd42b3dda268a6523ecb5d611a100bb72e5295bbe5b05a",
+    "src/render/ReflectionProbe.hpp": "ae8fa5e8d95384ad7192aba862c7ed2a32434cd4a73b27ddcf5e7b537b22c7ba",
+    "src/render/ReflectionProbeJson.hpp": "5dfd47f5f834482474fc51b08714514ee50209c73654974710047962835bd2c3",
+    "src/render/MaterialPipelinePolicy.hpp": "50ea2fe48ff404ea832a253888893994a863fb251afa69427fc943af38c8f213",
+    "src/scenes/CharacterSceneRenderer.hpp": "1d8a9c8329550d9949bf9649b3117d4a01efb27504e420de22ca8065ca18ea72",
+    "src/scenes/CharacterSceneRenderer.cpp": "f04b4121a420d0d6fcc856dc764cf40fde4426bb73940510bebdece9dafc34fb",
+    "shaders/mesh.frag": "85fdc3c13c9f7724afde4fd1d6cbc364d4047e6eb5fded4d539195c5a0f31096",
+    "shaders/reflection_probe_field.glsl": "b6ce78cdb273bc83706be971dbce5ac09cca553ebd023afcb9d0e05d0e792e7f",
+    "shaders/reflection_probe_field_test.comp": "6f77741e5a43c77ce28e38cbf1ecdc6dd3b7e3f74cd9d9b164b22eed31f494ca",
+    "tests/ReflectionProbeFieldTests.cpp": "78c97e0478bb0c4de109238d6de5e5ebcf989dcad2bf69fb6cb9a136d8e74c15",
+    "tests/ReflectionProbeFieldGpuTests.cpp": "44dc5c309b355dc5ea6c9583bf16f74433d652fadfa3519cd70f11dbb925d804",
+    "tests/ReflectionProbeTests.cpp": "b58c3d3aa61e574cb4e9e32f237b851c0c138c8ccc6d522dd46c2e759d9a2265",
+    "tests/MaterialPipelinePolicyTests.cpp": "f663c92fee673336fdb09691d6f86e4e2c01abe882520aa3a5768ececa010c11",
+    "tests/AssetLevelTests.cpp": "98273ece9de3cdd68007cf735b19e55afe09c4c174877d1764db3636b830e820",
+    "tests/SceneModelTests.cpp": "e1b552ab7927432c80709dcb9432187d7b75f763409be4b5208c7f9062e4c94a",
+    "tools/native_render/probe_field_lab.py": "9d845391e919bb51f5eaf4a88b50de1cfb4c0fd9052bc882ba0e57de7e6705af"
+  },
+  "hardware": {
+    "debug": [
+      {
+        "variant": "field",
+        "queries": 307,
+        "maximumRgbError": 5.960464477539063e-08,
+        "maximumRemainingError": 0.0,
+        "budgetRgb": 0.0001,
+        "budgetRemaining": 2e-06,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "status": "passed",
+        "capturedCalibrationBitExact": true
+      },
+      {
+        "variant": "mirrored",
+        "queries": 307,
+        "maximumRgbError": 5.960464477539063e-08,
+        "maximumRemainingError": 0.0,
+        "budgetRgb": 0.0001,
+        "budgetRemaining": 2e-06,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "status": "passed"
+      },
+      {
+        "variant": "rotated",
+        "queries": 307,
+        "maximumRgbError": 2.384185791015625e-07,
+        "maximumRemainingError": 0.0,
+        "budgetRgb": 0.0001,
+        "budgetRemaining": 2e-06,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "status": "passed"
+      },
+      {
+        "variant": "sphere",
+        "queries": 307,
+        "maximumRgbError": 1.1920928955078125e-07,
+        "maximumRemainingError": 0.0,
+        "budgetRgb": 0.0001,
+        "budgetRemaining": 2e-06,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "status": "passed"
+      }
+    ],
+    "release": [
+      {
+        "variant": "field",
+        "queries": 307,
+        "maximumRgbError": 5.960464477539063e-08,
+        "maximumRemainingError": 0.0,
+        "budgetRgb": 0.0001,
+        "budgetRemaining": 2e-06,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "status": "passed",
+        "capturedCalibrationBitExact": true
+      },
+      {
+        "variant": "mirrored",
+        "queries": 307,
+        "maximumRgbError": 5.960464477539063e-08,
+        "maximumRemainingError": 0.0,
+        "budgetRgb": 0.0001,
+        "budgetRemaining": 2e-06,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "status": "passed"
+      },
+      {
+        "variant": "rotated",
+        "queries": 307,
+        "maximumRgbError": 2.384185791015625e-07,
+        "maximumRemainingError": 0.0,
+        "budgetRgb": 0.0001,
+        "budgetRemaining": 2e-06,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "status": "passed"
+      },
+      {
+        "variant": "sphere",
+        "queries": 307,
+        "maximumRgbError": 1.1920928955078125e-07,
+        "maximumRemainingError": 0.0,
+        "budgetRgb": 0.0001,
+        "budgetRemaining": 2e-06,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "status": "passed"
+      }
+    ]
+  },
+  "publicGpu": {
+    "debug": {
+      "status": "passed",
+      "captures": 16,
+      "playerSha256": "504c561f6eb474de3ad36bb94e2b660a3c3f699dc2f9a6f2a0473d612d431d3b",
+      "budget": 0.004,
+      "maximumError": 0.0,
+      "validationErrors": 0,
+      "resourcesReleased": true
+    },
+    "release": {
+      "status": "passed",
+      "captures": 16,
+      "playerSha256": "476c102c103b759c3b96ddc410c35b978f80e7911e42b2677503416467aeee91",
+      "budget": 0.004,
+      "maximumError": 0.0,
+      "validationErrors": 0,
+      "resourcesReleased": true
+    }
+  },
+  "tests": {
+    "debug": {
+      "cpu": 5,
+      "computeGpu": 6,
+      "playerCaptures": 16,
+      "passed": true
+    },
+    "release": {
+      "cpu": 5,
+      "computeGpu": 6,
+      "playerCaptures": 16,
+      "passed": true
+    }
+  },
+  "inputVerification": {
+    "generatedFilesVerified": 164,
+    "configurationImagesExact": true,
+    "shadersExact": true,
+    "shaderCount": 193,
+    "labSha256": "9d845391e919bb51f5eaf4a88b50de1cfb4c0fd9052bc882ba0e57de7e6705af"
+  },
+  "legacyMaterialPrograms": {
+    "sourceCommit": "9bc40ff3fee8f9da11240f136cc38bbc05dca5b3",
+    "programs": 48,
+    "byteExact": true
+  },
+  "main": {
+    "legacyExact": true,
+    "fieldChangedPixels": 1755706,
+    "maximumByteDelta": 164,
+    "meanByteDelta": 2.872334104938272
+  },
+  "camera": {
+    "changedPixels": 3586352,
+    "maxByteDelta": 217,
+    "meanByteDelta": 37.10732340494792,
+    "configurationImagesExact": true,
+    "debugResourcesReleased": true,
+    "debugValidationErrors": 0
+  },
+  "architecture": {
+    "module": "RenderCore",
+    "owner": "OctahedralEnvironmentGpu and scene-owned immutable metadata",
+    "maxLocalProbes": 32,
+    "metadataBytesFor12": 1456,
+    "metadataBudgetBytes": 3696,
+    "newFragmentPrograms": 48,
+    "uniformBytesAdded": 0,
+    "textureBinding": 23,
+    "optionalStorageBinding": 33,
+    "secondWorkflow": "independent nested-room fixtures"
+  },
+  "limits": [
+    "原生分块索引裁剪等价待核对",
+    "实景地面、墙面照明及资源集合继续还原",
+    "角色独立反射及连续时序待验收",
+    "单帧冷启动计时不代表稳定性能",
+    "首次 Debug 基线在 240 秒截止，独立官方镜头批次在 600 秒内通过。"
+  ]
+}
