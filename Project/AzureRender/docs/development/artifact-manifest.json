@@ -542,6 +542,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/base-uv-distortion.json",
       "primaryProject": "build/runs/20261028-064046-native-base-uv-distortion-e1de77/full-candidate/enclosure-distortion.azureproject"
+    },
+    {
+      "path": "runs/20261028-065136-native-central-emissive-identity-466ad8",
+      "pathBase": "build",
+      "purpose": "中央字形柱、恒定混合权重及原版像素验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/central-glyph-composition.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
