@@ -108,6 +108,7 @@ CPU 与编辑回归范围见[解释验证](docs/acceptance/nr/material-document-
 原生 GI 工具支持三层组合及方向 Alpha 保留。
 离线验证与运行待项见[组合验收](docs/acceptance/nr/irradiance-composition.md)。
 三维上传及官方体积输入见[资源验收](docs/acceptance/nr/volume-image-upload.md)。
+三层资源与活动片元硬件采样见[精度验收](docs/acceptance/nr/irradiance-clipmap-resource.md)。
 
 反射射线预计算通过双配置图像及动态遮挡回归。
 真实中庭短测及边界见[射线验收](docs/acceptance/nr/reflection-ray-math.md)。

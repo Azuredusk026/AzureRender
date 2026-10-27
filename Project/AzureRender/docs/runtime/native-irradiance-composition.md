@@ -28,13 +28,15 @@
 | version | 整数 1 |
 | enabled | 体积启用布尔值 |
 | worldPosition | 原生抖动后的三维世界位置 |
-| cameraPosition | 三维相机位置 |
+| cameraPosition | 版本一的三维中心偏移向量 |
 | chunkOrigin | 三维分块原点 |
-| centerScales | 三层中心的相机缩放系数 |
+| centerScales | 三层中心偏移比例 |
 | sampledLayers | 三层幅度及三组方向四元组 |
 | defaultCoefficients | 三色默认球谐四元组 |
 
 层中心按 `chunkOrigin-cameraPosition*scale` 计算。
+3534 的调用向量采用逆观察矩阵 Z 轴。
+相机位置与该轴分别记录来源及原始常量。
 各层采用已确认的水平与垂直边界连续过渡。
 方向图第零组 Alpha 控制默认环境混合。
 三色方向系数保留符号，法线求值属于消费端。
@@ -51,8 +53,8 @@
 一千组外部汇编解释结果与生产入口一致。
 源记录、层级和默认环境分别具有独立验证范围。
 
-真实默认球谐常量及采样器状态继续核验。
-三层活动范围与实时抖动属于后续运行接入。
+3534 的默认常量及采样器见[体积输入](../acceptance/nr/volume-image-upload.md)。
+设备采样精度与实时抖动按所属运行门禁验收。
 现行 `AZIV0001` 保存规则网格的候选方向场。
 完整原生运行资产按对应版本另行验收。
 
