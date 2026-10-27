@@ -5,10 +5,10 @@ void CharacterSceneRenderer::initializeOrdinaryOpaquePipelines(const RenderConte
     bool needed=eligible(asset_);for(const auto& resource:additionalResources_)needed|=eligible(resource->asset);
     if(!needed)return;
     try{
-        for(unsigned facing=0;facing<3;++facing){
+        for(unsigned facing=0;facing<4;++facing){
             auto desc=color;
-            desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
-            desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+            desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+            desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaquePipelines_[facing]=rhi_->createGraphicsPipeline(desc);
         }
@@ -35,16 +35,16 @@ void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext
     if(bindlessTextures_)suffix+="_bindless";
     VkShaderModule color=VK_NULL_HANDLE,snapshot=VK_NULL_HANDLE;
     try {
-        color=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+sceneFragmentVariant("/mesh_integral"+suffix+".frag.spv",false,irradianceClipmapActive_)));
-        if(opaque)snapshot=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+sceneFragmentVariant("/character_snapshot_integral"+suffix+".frag.spv",false,irradianceClipmapActive_)));
+        color=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+sceneFragmentVariant("/mesh_integral"+suffix+".frag.spv",false,irradianceClipmapActive_,probeFieldActive_)));
+        if(opaque)snapshot=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+sceneFragmentVariant("/character_snapshot_integral"+suffix+".frag.spv",false,irradianceClipmapActive_,probeFieldActive_)));
         for(unsigned kind=0;kind<2;++kind){
             if(kind==0?!opaque:!blend)continue;
-            for(unsigned facing=0;facing<3;++facing){
+            for(unsigned facing=0;facing<4;++facing){
                 auto desc=base;desc.fragmentShader=color;
-                desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
-                desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+                desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
                 desc.alphaBlend=kind==1;desc.depthWrite=kind==0;
-                hairIntegralPipelines_[kind*3+facing]=rhi_->createGraphicsPipeline(desc);
+                hairIntegralPipelines_[kind*4+facing]=rhi_->createGraphicsPipeline(desc);
                 if(kind==0){
                     desc.fragmentShader=snapshot;desc.renderPass=overlayDepthPass_;desc.colorAttachmentCount=2;
                     desc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;desc.minSampleShading=0;
@@ -67,13 +67,13 @@ void CharacterSceneRenderer::destroyHairIntegralPipelines() noexcept {
 }
 VkPipeline CharacterSceneRenderer::hairIntegralPipeline(const AssetMaterial& material,bool mirrored,bool snapshot) const {
     if(rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT){
-        if(snapshot)return material.doubleSided?overlayDepthDoubleSidedPipeline_:mirrored?overlayDepthMirroredPipeline_:overlayDepthPipeline_;
-        if(material.alphaMode==AssetAlphaMode::Blend)return material.doubleSided?blendDoubleSidedPipeline_:mirrored?blendMirroredPipeline_:blendPipeline_;
-        return material.doubleSided?opaqueDoubleSidedPipeline_:mirrored?opaqueMirroredPipeline_:opaquePipeline_;
+        if(snapshot)return overlayDepthPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)];
+        if(material.alphaMode==AssetAlphaMode::Blend)return blendPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)];
+        return opaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)];
     }
-    const unsigned facing=material.doubleSided?2U:mirrored?1U:0U;
+    const unsigned facing=surfaceFacingIndex(material.doubleSided,mirrored);
     const auto pipeline=snapshot?hairIntegralSnapshotPipelines_[facing]
-        :hairIntegralPipelines_[(material.alphaMode==AssetAlphaMode::Blend?3U:0U)+facing];
+        :hairIntegralPipelines_[(material.alphaMode==AssetAlphaMode::Blend?4U:0U)+facing];
     if(!pipeline)throw std::logic_error("Hair pixel integral pipeline is unavailable for the material");
     return pipeline;
 }

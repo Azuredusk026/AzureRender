@@ -92,7 +92,7 @@ def run(player,output,validation,selected=None):
                 with (folder/'player.log').open('w',encoding='utf-8') as log:
                     subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
                 manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8-sig'))
-                assert manifest['pixelIntegralPipelineCount']==(6 if integrated else 0),(kind,manifest['pixelIntegralPipelineCount'])
+                assert manifest['pixelIntegralPipelineCount']==(8 if integrated else 0),(kind,manifest['pixelIntegralPipelineCount'])
                 log=(folder/'player.log').read_text(encoding='utf-8',errors='replace')
                 assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
                 assert 'Allocator after unload: buffers=0 images=0' in log,name

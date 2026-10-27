@@ -2621,7 +2621,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
             commands.bindPipeline(prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
                 :simpleDepth?snapshotDepthOnlyPipelines_[m.doubleSided?2:mirrored?1:0]
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
-                :m.doubleSided?overlayDepthDoubleSidedPipeline_:mirrored?overlayDepthMirroredPipeline_:overlayDepthPipeline_);
+                :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]);
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
             if(counters)++counters->pipelineBinds;
@@ -3216,19 +3216,18 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = false;
         materialDesc.depthWrite = true;
+        const auto createFacingPipelines=[&](std::array<VkPipeline,4>& pipelines,const rhi::GraphicsPipelineDesc& base){
+            for(unsigned facing=0;facing<4;++facing){auto desc=base;
+                desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                desc.cullMode=facing>=2||!context.faceCullingEnabled?VK_CULL_MODE_NONE:VK_CULL_MODE_BACK_BIT;
+                pipelines[facing]=rhi_->createGraphicsPipeline(desc);}
+        };
         const auto integralBase=materialDesc;
-        opaquePipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
-        opaqueMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+        createFacingPipelines(opaquePipelines_,materialDesc);
         auto depthModule=rhi_->createShaderModule(mainFragment((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")),true));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
         depthDesc.colorAttachmentCount=2;
-        overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);
-        depthDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
-        overlayDepthMirroredPipeline_=rhi_->createGraphicsPipeline(depthDesc);
-        depthDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;depthDesc.cullMode=VK_CULL_MODE_NONE;
-        overlayDepthDoubleSidedPipeline_=rhi_->createGraphicsPipeline(depthDesc);
+        createFacingPipelines(overlayDepthPipelines_,depthDesc);
         try{initializeOrdinaryOpaquePipelines(context,integralBase);}
         catch(...){rhi_->destroyShaderModule(depthModule);throw;}
         rhi_->destroyShaderModule(depthModule);
@@ -3252,30 +3251,23 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             }
         }catch(...){if(simpleDepthVertex)rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);throw;}
         rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);
-        materialDesc.cullMode = VK_CULL_MODE_NONE;
-        opaqueDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = true;
         materialDesc.depthWrite = false;
-        blendPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
-        blendMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
-        materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
-        materialDesc.cullMode = VK_CULL_MODE_NONE;
-        blendDoubleSidedPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
+        createFacingPipelines(blendPipelines_,materialDesc);
+        materialDesc.cullMode=VK_CULL_MODE_NONE;
         initializeHairIntegralPipelines(context,integralBase);
         auto multiplyDesc=materialDesc;
         multiplyDesc.primaryColorBlend=rhi::PrimaryColorBlend::Multiply;
         multiplyDesc.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;
         multiplyDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
-        multiplyPipeline_=rhi_->createGraphicsPipeline(multiplyDesc);
-        multiplyDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
-        multiplyMirroredPipeline_=rhi_->createGraphicsPipeline(multiplyDesc);
-        multiplyDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
-        multiplyDesc.cullMode=VK_CULL_MODE_NONE;
-        multiplyDoubleSidedPipeline_=rhi_->createGraphicsPipeline(multiplyDesc);
+        createFacingPipelines(multiplyPipelines_,multiplyDesc);
         auto tintDesc=materialDesc;
-        sceneTintPipeline_=rhi_->createGraphicsPipeline(tintDesc);
+        for(unsigned mirrored=0;mirrored<2;++mirrored){
+            tintDesc.frontFace=mirrored?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+            sceneTintPipelines_[mirrored]=rhi_->createGraphicsPipeline(tintDesc);}
+
 
         const auto maskModule=rhi_->createShaderModule(mainFragment((bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
         const auto maskVertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv")));
@@ -3380,22 +3372,22 @@ void CharacterSceneRenderer::destroyResources() {
         return;
     }
     for (VkPipeline* pipeline : {
-             &opaquePipeline_,
-             &opaqueMirroredPipeline_,
-             &opaqueDoubleSidedPipeline_,
-             &blendPipeline_,
-             &blendMirroredPipeline_,
-             &blendDoubleSidedPipeline_,
-             &multiplyPipeline_,
-             &multiplyMirroredPipeline_,
-             &multiplyDoubleSidedPipeline_,
-             &sceneTintPipeline_,
+             &opaquePipelines_[0],
+             &opaquePipelines_[1],
+             &opaquePipelines_[2],&opaquePipelines_[3],
+             &blendPipelines_[0],
+             &blendPipelines_[1],
+             &blendPipelines_[2],&blendPipelines_[3],
+             &multiplyPipelines_[0],
+             &multiplyPipelines_[1],
+             &multiplyPipelines_[2],&multiplyPipelines_[3],
+             &sceneTintPipelines_[0],&sceneTintPipelines_[1],
              &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
-             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
+             &overlayDepthPipelines_[0],&overlayDepthPipelines_[1],&overlayDepthPipelines_[2],&overlayDepthPipelines_[3],&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
@@ -3525,22 +3517,22 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
     destroyOrdinaryOpaquePipelines();
     destroyHairIntegralPipelines();
     for (VkPipeline* pipeline : {
-             &opaquePipeline_,
-             &opaqueMirroredPipeline_,
-             &opaqueDoubleSidedPipeline_,
-             &blendPipeline_,
-             &blendMirroredPipeline_,
-             &blendDoubleSidedPipeline_,
-             &multiplyPipeline_,
-             &multiplyMirroredPipeline_,
-             &multiplyDoubleSidedPipeline_,
-             &sceneTintPipeline_,
+             &opaquePipelines_[0],
+             &opaquePipelines_[1],
+             &opaquePipelines_[2],&opaquePipelines_[3],
+             &blendPipelines_[0],
+             &blendPipelines_[1],
+             &blendPipelines_[2],&blendPipelines_[3],
+             &multiplyPipelines_[0],
+             &multiplyPipelines_[1],
+             &multiplyPipelines_[2],&multiplyPipelines_[3],
+             &sceneTintPipelines_[0],&sceneTintPipelines_[1],
              &outlinePipeline_,&outlineDepthPipeline_,&outlineDepthMirroredPipeline_,
              &outlineMirroredPipeline_,
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
-             &overlayDepthPipeline_,&overlayDepthMirroredPipeline_,&overlayDepthDoubleSidedPipeline_,&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
+             &overlayDepthPipelines_[0],&overlayDepthPipelines_[1],&overlayDepthPipelines_[2],&overlayDepthPipelines_[3],&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
             rhi_->destroyPipeline(*pipeline);
@@ -4358,11 +4350,11 @@ void CharacterSceneRenderer::drawPrimitive(
     const bool multiplyComposite=(material.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
     const VkPipeline pipeline = (material.materialFeatures&MaterialFeatureHairPixelIntegral)
         ?hairIntegralPipeline(material,mirrored,false):multiplyComposite
-        ? (material.doubleSided?multiplyDoubleSidedPipeline_:mirrored?multiplyMirroredPipeline_:multiplyPipeline_)
-        : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipeline_ : blend
-        ? (material.doubleSided ? blendDoubleSidedPipeline_ : mirrored ? blendMirroredPipeline_ : blendPipeline_)
-        : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipelines_[material.doubleSided?2:mirrored?1:0]
-        : (material.doubleSided ? opaqueDoubleSidedPipeline_ : mirrored ? opaqueMirroredPipeline_ : opaquePipeline_);
+        ? (multiplyPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
+        : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipelines_[mirrored?1:0] : blend
+        ? (blendPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
+        : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]
+        : (opaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]);
     commands.bindPipeline(pipeline);
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =

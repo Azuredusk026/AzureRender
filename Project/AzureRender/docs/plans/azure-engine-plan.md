@@ -90,6 +90,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 公共对数映射及双配置 GPU 检查见[层级验收](../acceptance/nr/reflection-lod.md)。
 原生数组、有序探针及连续时序继续实施。
 有序体积、辐照亮度适配及生产消费见[探针验收](../acceptance/nr/reflection-probe-fields.md)。
+双面镜像的法线、GI 及积分头发联合路径见[朝向验收](../acceptance/nr/surface-facing.md)。
 帧内镜头报告及完整精度指纹见[来源验收](../acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](../acceptance/nr/octahedral-environment.md)。
 

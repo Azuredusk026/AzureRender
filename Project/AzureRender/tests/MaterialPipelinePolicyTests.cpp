@@ -36,4 +36,7 @@ int main(){
     if(sceneFragmentVariant("mesh.frag.spv",false,false,true)!="mesh_field.frag.spv")return 15;
     if(sceneFragmentVariant("mesh.frag.spv",true,true,true)!="mesh_samples_clipmap_field.frag.spv")return 16;
 
+    if(surfaceFacingIndex(false,false)!=0||surfaceFacingIndex(false,true)!=1
+        ||surfaceFacingIndex(true,false)!=2||surfaceFacingIndex(true,true)!=3)return 17;
+
 }

@@ -328,6 +328,14 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-27/reflection-probe-fields.json"
+    },
+    {
+      "path": "runs/20261027-164030-mirrored-two-sided-surface-facing-d6bce5",
+      "pathBase": "build",
+      "purpose": "双面镜像朝向、头发积分及探针联合回归与官方镜头复采。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/surface-facing.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

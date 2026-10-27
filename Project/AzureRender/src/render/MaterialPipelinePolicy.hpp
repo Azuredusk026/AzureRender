@@ -3,6 +3,10 @@
 #include <string>
 #include <stdexcept>
 namespace azurerender {
+// Cull policy and authored front-face orientation are independent.
+inline constexpr unsigned surfaceFacingIndex(bool doubleSided,bool mirrored) noexcept {
+    return (doubleSided?2U:0U)+(mirrored?1U:0U);
+}
 // Plain PBR with optional emission/neutral bits shares one bounded fast path.
 inline bool ordinaryOpaqueMaterial(const AssetMaterial& material) noexcept {
     return material.materialClass==AssetMaterialClass::Generic&&material.alphaMode==AssetAlphaMode::Opaque
