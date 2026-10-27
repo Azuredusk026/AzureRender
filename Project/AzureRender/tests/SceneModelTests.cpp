@@ -161,6 +161,7 @@ int main() {
         document.irradianceVolume.asset="field.aziv";
         document.irradianceVolume.intensity=.75F;
         document.irradianceVolume.enabled=true;
+        document.irradianceVolume.sampling={.25F,.2F,49.875F};
         document.renderSettings.sceneLightingEnabled = true;
         document.lights.push_back({
             "key-light", "root", {1.0F, 0.5F, 0.25F}, 2.0F, 5.0F, true});
@@ -232,6 +233,7 @@ int main() {
         assert((defaultProbe.project({3,4,5},{1,0,0})==std::array<float,3>{6,1,1}));
         const auto giReloaded=azurerender::SceneDocument::load(scenePath).irradianceVolume;
         assert(giReloaded.asset=="field.aziv" && giReloaded.enabled && giReloaded.intensity==.75F);
+        assert(giReloaded.sampling.normalOffset==.25F && giReloaded.sampling.jitterAmplitude==.2F && giReloaded.sampling.phase==49.875F);
         auto invalidGi=nlohmann::json(document.irradianceVolume);invalidGi["version"]=999;
         bool rejectedGi=false;
         try{(void)invalidGi.get<azurerender::IrradianceVolumeBinding>();}catch(const std::invalid_argument&){rejectedGi=true;}

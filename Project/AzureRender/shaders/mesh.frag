@@ -16,6 +16,7 @@
 #include "material_sampling.glsl"
 #include "material_specialization.glsl"
 #include "fragment_sampling.glsl"
+#include "irradiance_query.glsl"
 #if defined(AZURE_HAIR_PIXEL_INTEGRAL) || defined(AZURE_GEOMETRY_SAMPLES)
 const bool azureHairPixelIntegral=true;
 #else
@@ -550,8 +551,9 @@ vec3 hsvToRgb(vec3 hsv){
     vec3 triangle=clamp(abs(fract(vec3(hsv.x)+vec3(0,2.0/3.0,1.0/3.0))*6-3)-1,0,1);
     return hsv.z*mix(vec3(1),triangle,clamp(hsv.y,0,1));
 }
-vec4 evaluateIrradianceVolume(vec3 position,vec3 normal) {
+vec4 evaluateIrradianceVolume(vec3 position,vec3 normal,bool surfaceReceiver) {
     if(camera.irradianceDimensionsEnabled.w<.5)return vec4(0);
+    if(surfaceReceiver)position=irradianceQueryPosition(position,normal,gl_FragCoord.xy,camera.irradianceParameters.yzw);
 #if defined(AZURE_IRRADIANCE_CLIPMAP)
     vec4 parameters[13];for(int i=0;i<13;++i)parameters[i]=irradianceCells[i];
     IrradianceClipmapResult result=evaluateIrradianceClipmap(irradianceClipmapTextures,parameters,position);
@@ -1545,7 +1547,7 @@ void main() {
         if(overlayMaterial)beautyColor=overlayVisible>.5?baseColor.rgb:vec3(0);
     }
     if(camera.irradianceDimensionsEnabled.w>.5){
-        vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal);
+        vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal,!(nprDiffuse||projectedLighting||eyeNpr));
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
     }
@@ -1574,7 +1576,7 @@ void main() {
             vec3 envNormal=indirectDiffuseNormal;float angle=camera.clusterLighting.z;
             envNormal.xz=mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envNormal.xz;
             incident=textureLod(AZ_TEX_ENVIRONMENT,directionToEquirectangular(envNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*camera.clusterLighting.y;
-            if(camera.irradianceDimensionsEnabled.w>.5){vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal);incident=mix(incident,volume.rgb,volume.w);}
+            if(camera.irradianceDimensionsEnabled.w>.5){vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal,false);incident=mix(incident,volume.rgb,volume.w);}
         }
         CharacterDiffuseIllumination illumination=characterDiffuseIllumination(indirectDiffuseNormal,incident,mainRadiance,
             camera.nprDirectionBias,camera.nprGainFloor,camera.nprComposition,camera.nprAmbientColor.a,

@@ -1,0 +1,449 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR4-G6",
+  "status": "receiver-query-accepted-formal-stage-pending",
+  "run": "build/runs/20261027-105346-irradiance-receiver-query-contract-212980",
+  "source": {
+    "CMakeLists.txt": "951fa0ea4e206da11a21dcff7ca201037a9ee85a5440368ec496f794156f6728",
+    "src/render/IrradianceQuery.hpp": "e476deec8c0ce33f4e7a31ed31296d8f106baad9b10576c54c26e42de984e55b",
+    "src/render/IrradianceVolumeBinding.hpp": "15cfd1290a13a6345daf8519527ff51a2cd2d8d45a6a3facfd58ff48acf6bed0",
+    "src/render/IrradianceVolumeJson.hpp": "6e0db376c6cf3688c1002330c4c0a9aaf2be8731f75900ca2ea37647cab7bb72",
+    "src/scenes/CharacterSceneRenderer.cpp": "57e2f40ce8e86049d2d27e984c0036bda392f9074b4c7ecaad134b68bda0719c",
+    "shaders/mesh.frag": "c8261fae0bb6cf1900b2ffa7a6b77b2586db6258f29978819f2b425aaf8447cd",
+    "shaders/irradiance_query.glsl": "ebcd4015006c796aff012e038f6858e2d72f27bcc0c1633f7543a5b12ee7ec46",
+    "shaders/irradiance_query_test.comp": "8c9ce141144a7b68bddbe10baa4ce603b236e3b17074d5729ac329329b259732",
+    "tests/IrradianceQueryTests.cpp": "7ac811fe0d4bfe2ca14f18ec45d959307294746f908ae63d31be2a6dcb42f481",
+    "tests/IrradianceQueryGpuTests.cpp": "2e6ce82d0dd4d395fbf112a418f4d3bd3d82bf869a57da648d8e509c6855ae00",
+    "tests/support/IrradianceQueryFixture.hpp": "f08c3d1c66048c62b287fca14f9db4ad1b213f0adca8f4ac55845630aad0d613",
+    "tests/AssetLevelTests.cpp": "56d31805c391e92e401d8098a7c18a663b1e7e0ff9ad0fede37d6f87d2000f31",
+    "tests/SceneModelTests.cpp": "7e4fb702891a597d8341df38df8457a736c42df446738bf9314ce19fd3862184",
+    "tests/MaterialTextureSharingTests.cpp": "ecef55efc4d48f73ec5040597a910acde9170a695af9aa52e5827d81ebdeb3de",
+    "tools/native_render/irradiance_clipmap_lab.py": "b375d195cfbf6c2cc145b3d3f6b646583740a9452e48c9323ae8207234c7f92e"
+  },
+  "native": {
+    "activeEvent": 8912,
+    "shaderSha256": "ec0f0876c321e491a5763672ad48baf1ccf00d56841cde617857568f0f9218fe",
+    "queryInstructions": [
+      "mad r14.xyz, r4.xyzx, l(0x3e800000, 0x3e800000, 0x3e800000, 0x00000000), r6.xyzx",
+      "round_z r0.z, cb1[137].x",
+      "mad r3.xz, r0.zzzz, l(0x40054fdf, 0x00000000, 0x409bbe77, 0x00000000), r2.xxyx",
+      "dp2 r0.z, r3.xzxx, l(0x3d897143, 0x3bbf4590, 0x00000000, 0x00000000)",
+      "frc r0.z, r0.z",
+      "mul r0.z, r0.z, l(0x4253ee82)",
+      "frc r0.z, r0.z",
+      "mad r0.z, r0.z, l(0x40000000), l(0xbf800000)",
+      "mad r14.xyz, r0.zzzz, l(0x3e4ccccd, 0x3e4ccccd, 0x3e4ccccd, 0x00000000), r14.xyzx",
+      "mad r15.xyz, cb0[6].xzyx, -cb1[137].wwww, cb1[135].xzyx"
+    ],
+    "sourceConstants": {
+      "0": [
+        2560.0,
+        1440.0,
+        0.0003906250058207661,
+        0.0006944444612599909
+      ],
+      "29": [
+        1.0,
+        1.0,
+        1.0,
+        0.0
+      ],
+      "137": [
+        49.0,
+        13.0,
+        52.0,
+        144.0
+      ]
+    },
+    "sourceNormalOffset": 0.25,
+    "sourceJitterAmplitude": 0.2,
+    "sourcePhase": 49,
+    "sourceGain": 1,
+    "method": "Explicit shader replacement; original depth, packed normals and constant buffers; float-bit nibble readback",
+    "points": [
+      {
+        "worldPosition": [
+          1.6876760721206665,
+          18.82817840576172,
+          24.273435592651367
+        ],
+        "normal": [
+          0.00197040312923491,
+          -0.9999805688858032,
+          0.005911209620535374
+        ],
+        "signedNoise": -0.9260406494140625,
+        "queryPosition": [
+          1.5029605627059937,
+          18.392976760864258,
+          24.089706420898438
+        ],
+        "pixel": [
+          1323.0,
+          1078.0
+        ],
+        "phase": 49.0
+      },
+      {
+        "worldPosition": [
+          -10.045928001403809,
+          18.828168869018555,
+          21.81377601623535
+        ],
+        "normal": [
+          -0.0019626992288976908,
+          -0.9999962449073792,
+          0.0019626992288976908
+        ],
+        "signedNoise": 0.9393539428710938,
+        "queryPosition": [
+          -9.858548164367676,
+          18.76603889465332,
+          22.00213623046875
+        ],
+        "pixel": [
+          1000.0,
+          1100.0
+        ],
+        "phase": 49.0
+      },
+      {
+        "worldPosition": [
+          11.624181747436523,
+          18.82809066772461,
+          21.920516967773438
+        ],
+        "normal": [
+          -0.007943880744278431,
+          -0.9999369382858276,
+          0.007943880744278431
+        ],
+        "signedNoise": -0.8041176795959473,
+        "queryPosition": [
+          11.461372375488281,
+          18.417282104492188,
+          21.76167869567871
+        ],
+        "pixel": [
+          1600.0,
+          1100.0
+        ],
+        "phase": 49.0
+      },
+      {
+        "worldPosition": [
+          -19.416379928588867,
+          18.758743286132812,
+          7.148178577423096
+        ],
+        "normal": [
+          0.7850183844566345,
+          -0.46549636125564575,
+          -0.40872856974601746
+        ],
+        "signedNoise": -0.15967559814453125,
+        "queryPosition": [
+          -19.252059936523438,
+          18.61043357849121,
+          7.014061450958252
+        ],
+        "pixel": [
+          500.0,
+          1300.0
+        ],
+        "phase": 49.0
+      },
+      {
+        "worldPosition": [
+          18.52547264099121,
+          19.08491325378418,
+          7.971121311187744
+        ],
+        "normal": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "signedNoise": 0.4312019348144531,
+        "queryPosition": [
+          18.611713409423828,
+          18.921154022216797,
+          8.057361602783203
+        ],
+        "pixel": [
+          2000.0,
+          1300.0
+        ],
+        "phase": 49.0
+      },
+      {
+        "worldPosition": [
+          0.17437955737113953,
+          3.554439067840576,
+          -3.4459376335144043
+        ],
+        "normal": [
+          -0.019956074655056,
+          -0.0009978037560358644,
+          -0.9998003244400024
+        ],
+        "signedNoise": -0.3252410888671875,
+        "queryPosition": [
+          0.10434232652187347,
+          3.4891414642333984,
+          -3.7609360218048096
+        ],
+        "pixel": [
+          1280.0,
+          720.0
+        ],
+        "phase": 49.0
+      },
+      {
+        "worldPosition": [
+          0.5041278600692749,
+          8.172985076904297,
+          -3.4758286476135254
+        ],
+        "normal": [
+          -0.5346018671989441,
+          -0.0013500035274773836,
+          -0.8451030254364014
+        ],
+        "signedNoise": -0.8031539916992188,
+        "queryPosition": [
+          0.20984657108783722,
+          8.012016296386719,
+          -3.8477351665496826
+        ],
+        "pixel": [
+          1300.0,
+          1000.0
+        ],
+        "phase": 49.0
+      }
+    ],
+    "labNoise": [
+      {
+        "pixel": [
+          64.0,
+          64.0
+        ],
+        "signedNoise": -0.5193634033203125
+      },
+      {
+        "pixel": [
+          40.0,
+          40.0
+        ],
+        "signedNoise": -0.07266616821289062
+      },
+      {
+        "pixel": [
+          88.0,
+          88.0
+        ],
+        "signedNoise": -0.9319000244140625
+      }
+    ],
+    "nprConsumer": {
+      "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/character-binding-audit/actor-skin-vulkan69-normal-audit.hlsl",
+      "sha256": "fa370b729b358c940c51fd1dc7d085b02c4134158bef560f4553715c56f79390",
+      "variant": 69,
+      "position": "Original surface world position",
+      "scope": "Static shader consumer audit"
+    }
+  },
+  "contract": {
+    "bindingVersion": 2,
+    "legacyVersion": 1,
+    "legacySampling": [
+      0,
+      0,
+      0
+    ],
+    "maximumAbsolutePhase": 16777216,
+    "pixelOrigin": "top-left",
+    "pixelRounding": "floor",
+    "phaseRounding": "truncate-toward-zero",
+    "scope": "physical-surface",
+    "nprPosition": "Original surface world position",
+    "cameraBufferLayoutChanged": false,
+    "newTextureDescriptors": 0,
+    "newRendererVariants": 0
+  },
+  "numeric": {
+    "cpuPositionMaximumError": 0,
+    "gpuPositionMaximumError": 0,
+    "nativeNoiseExact": true,
+    "positionBudget": 2e-06,
+    "nativePoints": 7,
+    "computeQueries": 11,
+    "configurations": [
+      "debug",
+      "release"
+    ],
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "tests": {
+    "debug": {
+      "ctestsPassed": 8,
+      "sceneCaptures": 21,
+      "errors": {
+        "baseline": 0.0021576922592086156,
+        "half-intensity": 0.0013722208690352955,
+        "disabled-stack": 8.973016451162535e-05,
+        "disabled-binding": 0.0004615720116543792,
+        "outside": 8.973016451162535e-05,
+        "translated": 0.001836801187728998,
+        "fine-transition": 0.003762319525850877,
+        "medium-transition": 0.0035202074038531705,
+        "outer-transition": 0.0034560443754977355,
+        "mirrored": 0.0009375926409499746,
+        "legacy": 0.0021576922592086156,
+        "msaa4": 0.0021576922592086156,
+        "snapshot": 0.0021576922592086156,
+        "receiver-offset": 0.00208989181246666,
+        "receiver-jitter": 0.0012356532620245164,
+        "receiver-combined": 0.002362486052921109,
+        "receiver-grid": 0.004083756202506339,
+        "receiver-control": 0.0021576922592086156,
+        "receiver-snapshot": 0.0012356532620245164,
+        "receiver-npr-control": 0.0021243365610620346,
+        "receiver-npr": 0.0021243365610620346
+      },
+      "nprControlImageExact": true,
+      "omittedQueryGaps": {
+        "receiver-offset": 0.06299019607843137,
+        "receiver-jitter": 0.03494625091552739,
+        "receiver-combined": 0.05932839113123278,
+        "receiver-grid": 0.028525018692016513
+      }
+    },
+    "release": {
+      "ctestsPassed": 8,
+      "sceneCaptures": 21,
+      "errors": {
+        "baseline": 0.0021576922592086156,
+        "half-intensity": 0.0013722208690352955,
+        "disabled-stack": 8.973016451162535e-05,
+        "disabled-binding": 0.0004615720116543792,
+        "outside": 8.973016451162535e-05,
+        "translated": 0.001836801187728998,
+        "fine-transition": 0.003762319525850877,
+        "medium-transition": 0.0035202074038531705,
+        "outer-transition": 0.0034560443754977355,
+        "mirrored": 0.0009375926409499746,
+        "legacy": 0.0021576922592086156,
+        "msaa4": 0.0021576922592086156,
+        "snapshot": 0.0021576922592086156,
+        "receiver-offset": 0.00208989181246666,
+        "receiver-jitter": 0.0012356532620245164,
+        "receiver-combined": 0.002362486052921109,
+        "receiver-grid": 0.004083756202506339,
+        "receiver-control": 0.0021576922592086156,
+        "receiver-snapshot": 0.0012356532620245164,
+        "receiver-npr-control": 0.0021243365610620346,
+        "receiver-npr": 0.0021243365610620346
+      },
+      "nprControlImageExact": true,
+      "omittedQueryGaps": {
+        "receiver-offset": 0.06299019607843137,
+        "receiver-jitter": 0.03494625091552739,
+        "receiver-combined": 0.05932839113123278,
+        "receiver-grid": 0.028525018692016513
+      }
+    }
+  },
+  "imageBudget": 0.012,
+  "shaderPrograms": {
+    "total": 143,
+    "crossConfigurationExact": true,
+    "additionalQueryCompute": 1,
+    "rendererVariantsAdded": 0
+  },
+  "main": {
+    "accepted-default-debug": {
+      "status": "passed",
+      "parameters": {
+        "normalOffset": 0.0,
+        "jitterAmplitude": 0.0,
+        "phase": 0.0
+      },
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "meanByteError": 0.0,
+      "resourcesReleased": true,
+      "validationErrors": 0
+    },
+    "accepted-default-release": {
+      "status": "passed",
+      "parameters": {
+        "normalOffset": 0.0,
+        "jitterAmplitude": 0.0,
+        "phase": 0.0
+      },
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "meanByteError": 0.0,
+      "resourcesReleased": true,
+      "validationErrors": 0
+    },
+    "accepted-query-release": {
+      "status": "passed",
+      "parameters": {
+        "normalOffset": 0.25,
+        "jitterAmplitude": 0.200000003,
+        "phase": 49.875
+      },
+      "changedPixels": 1788387,
+      "maximumByteError": 154,
+      "meanByteError": 1.869108555169753,
+      "resourcesReleased": true,
+      "validationErrors": 0
+    }
+  },
+  "frozenRelease": {
+    "path": "build/runs/20261027-105346-irradiance-receiver-query-contract-212980/frozen-accepted-release",
+    "files": 179,
+    "shaderPrograms": 143
+  },
+  "failures": [
+    {
+      "path": "red-build.log",
+      "reason": "Missing public CPU query contract"
+    },
+    {
+      "path": "shader-red.log",
+      "reason": "Missing shared GPU query function"
+    },
+    {
+      "path": "binding-red.log",
+      "reason": "Binding version 2 rejected before implementation"
+    },
+    {
+      "path": "scene-red.log",
+      "reason": "Production Player rejected version 2 before implementation"
+    },
+    {
+      "path": "noise-order.log",
+      "reason": "The alternate fused dot order differs at source pixel 2000,1300"
+    },
+    {
+      "path": "phase-report-red.log",
+      "reason": "Six-digit stream output rounded a phase near 50 to the next integer"
+    },
+    {
+      "path": "npr-red.log",
+      "reason": "Applying deferred-surface jitter to NPR produced error .0317633 above .012"
+    }
+  ],
+  "limitations": [
+    "Diagnostic shader replacement reconstructs query inputs; original shader register intermediates remain separate evidence",
+    "The authored fixed phase does not establish the native continuous-frame phase producer",
+    "Material-specific native globals and full character lighting equivalence remain pending",
+    "The fixed-phase main candidate is diagnostic; the accepted default candidate retains zero sampling offsets",
+    "Formal NR0/NR2 registration, NR4 lighting, temporal AA and 60 FPS remain pending"
+  ]
+}

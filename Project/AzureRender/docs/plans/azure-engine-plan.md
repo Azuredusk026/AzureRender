@@ -79,6 +79,8 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 三层资源与活动片元采样见[精度验收](../acceptance/nr/irradiance-clipmap-resource.md)。
 公共材质按资源版本消费三层过渡和默认环境。
 实际候选与生命周期见[接入验收](../acceptance/nr/irradiance-clipmap-scene.md)。
+物理采样偏移与 NPR 位置边界通过双配置检查。
+数值范围与正式待项见[查询验收](../acceptance/nr/irradiance-query.md)。
 
 反射射线预计算通过双配置与动态遮挡回归。
 短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。

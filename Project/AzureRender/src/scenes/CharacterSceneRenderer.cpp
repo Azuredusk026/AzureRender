@@ -1526,6 +1526,7 @@ void CharacterSceneRenderer::setPlaybackPlaying(const bool playing) {
 
 void CharacterSceneRenderer::appendCaptureManifestFields(
     std::ostream& json) const {
+    const auto reportPrecision=json.precision();
     const std::string animationName = asset_.animations.empty()
         ? std::string()
         : asset_.animations[animationIndex_].name;
@@ -1542,6 +1543,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
+         << "  \"irradianceQueryScope\": \"physical-surface\",\n"
+         << "  \"irradianceQuery\": {\"normalOffset\":" << std::setprecision(std::numeric_limits<float>::max_digits10) << scene_.irradianceVolume.sampling.normalOffset
+         << ",\"jitterAmplitude\":" << scene_.irradianceVolume.sampling.jitterAmplitude
+         << ",\"phase\":" << scene_.irradianceVolume.sampling.phase << "},\n" << std::setprecision(reportPrecision)
          << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
          << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
          << "  \"motionResponseEncoding\": \"coverage-reactivity-v3\",\n"
@@ -3761,7 +3766,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.irradianceOriginSpacing={irradianceVolume_.origin[0],irradianceVolume_.origin[1],irradianceVolume_.origin[2],irradianceVolume_.spacing};
     const auto& irradianceDimensions=irradianceClipmapActive_?irradianceClipmapDimensions_:irradianceVolume_.dimensions;
     uniform.irradianceDimensionsEnabled={float(irradianceDimensions[0]),float(irradianceDimensions[1]),float(irradianceDimensions[2]),gi.enabled&&(irradianceClipmap_||!irradianceVolume_.cells.empty())?1.F:0.F};
-    uniform.irradianceParameters={gi.intensity,0,0,0};
+    uniform.irradianceParameters={gi.intensity,gi.sampling.normalOffset,gi.sampling.jitterAmplitude,gi.sampling.phase};
     std::memcpy(
         uniformBuffers_[currentFrame_].mapped,
         &uniform,

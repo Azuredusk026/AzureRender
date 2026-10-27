@@ -60,13 +60,14 @@
 ## 场景绑定与 GPU 消费
 
 关卡通过 `irradianceVolume` 绑定资源。
-绑定版本为 1，默认强度为 1，默认关闭。
+绑定版本为 2，默认强度为 1，默认关闭。
 强度须为有限非负数，启用时须提供资源。
+采样规则见[辐照接收位置](irradiance-query.md)。
 
 ```json
 {
   "irradianceVolume": {
-    "version": 1,
+    "version": 2,
     "asset": "assets:/field.aziv",
     "intensity": 1,
     "enabled": true

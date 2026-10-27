@@ -74,7 +74,11 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
             const auto images=rhi.allocator().statistics().liveImages,buffers=rhi.allocator().statistics().liveBuffers;
             const auto binding=context.scene.irradianceVolume;
             context.scene.irradianceVolume.enabled=false;context.scene.irradianceVolume.intensity=.25F;
+            context.scene.irradianceVolume.sampling={.25F,.2F,49.99999F};
             require(renderer.reuseScene(context),"Clipmap enable and intensity retain the loaded resources");
+            std::ostringstream updated;updated<<'{';renderer.appendCaptureManifestFields(updated);updated<<"\"end\":0}";
+            require(nlohmann::json::parse(updated.str()).at("irradianceQuery").at("phase").get<float>()==context.scene.irradianceVolume.sampling.phase,
+                "Query sampling changes must reach the retained scene");
             require(rhi.allocator().statistics().liveImages==images&&rhi.allocator().statistics().liveBuffers==buffers,
                 "Frame parameter changes preserve immutable clipmap ownership");
             auto grid=irradiance;grid.replace_extension(".aziv");context.scene.irradianceVolume.asset=grid.u8string();

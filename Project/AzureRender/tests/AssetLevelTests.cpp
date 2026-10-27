@@ -119,7 +119,8 @@ int main() {
   level["reflectionProbe"]=probe;
   write(root/"assets/field.aziv","irradiance-source");db.refresh();
   const auto giId=db.idForPath("assets:/field.aziv");
-  level["irradianceVolume"]={{"version",1},{"asset",giId},{"intensity",.5},{"enabled",false}};
+  level["irradianceVolume"]={{"version",2},{"asset",giId},{"intensity",.5},{"enabled",false},
+      {"sampling",{{"normalOffset",.25},{"jitterAmplitude",.2},{"phase",49.875}}}};
   level["lights"]=nlohmann::json::array({{{"id","spot"},{"nodeId","instance:node"},
       {"shape",{{"type","spot"},{"direction",{0,0,-1}},{"innerCone",.25},{"outerCone",.5},
           {"falloff","range-power"},{"falloffExponent",3.5}}}}});
@@ -129,6 +130,7 @@ int main() {
   check(parsed.scene.reflectionProbe.halfExtents==probe.halfExtents);
   check(parsed.scene.irradianceVolume.asset==db.resolve(giId).u8string());
   check(parsed.scene.irradianceVolume.intensity==.5F && !parsed.scene.irradianceVolume.enabled);
+  check(parsed.scene.irradianceVolume.sampling.normalOffset==.25F && parsed.scene.irradianceVolume.sampling.phase==49.875F);
   const auto& giDependencies=db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies;
   check(std::find(giDependencies.begin(),giDependencies.end(),giId)!=giDependencies.end());
   check(std::find(db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies.begin(),
@@ -138,6 +140,7 @@ int main() {
   parsed.save(root/"saved.azurelevel");auto reopened=Level::load(root/"saved.azurelevel",db);
   check(reopened.scene.nodes[0].translation[2]==17 && reopened.scene.nodes[0].prefabSource==prefabId);
   check(reopened.scene.reflectionProbe.blendDistance==.75F);
+  check(reopened.scene.irradianceVolume.sampling.jitterAmplitude==.2F && reopened.scene.irradianceVolume.sampling.phase==49.875F);
   check(reopened.scene.lights[0].shape.type==LightKind::Spot
       && reopened.scene.lights[0].shape.innerCone==.25F);
   check(reopened.scene.lights[0].shape.falloff==LightFalloff::RangePower
