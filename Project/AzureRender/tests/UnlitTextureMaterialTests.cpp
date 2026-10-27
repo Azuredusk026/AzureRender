@@ -55,6 +55,16 @@ int main(int argc,char** argv){try{
  require(m.textureSettings[0].mipPolicy=="none"&&m.textureSettings[4].mipFilter==TextureImportSettings::MipFilter::Nearest,"Layer mip sampling preserved");
  require(!m.styleMaskPixels.empty()&&m.styleMaskWidth>0,"Second layer image reaches owned slot");
  const auto packed=packMaterialSurfaceProfile(m);
+ auto distortionSource=source;auto& distortionSurface=distortionSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
+ distortionSurface["baseUvDistortion"]={{"texture",1},{"channels","red"},
+  {"uv",distortionSurface["layers"][0]["uv"]},{"scale",{.1,-.1}},{"bias",{.2,-.2}}};
+ const auto distortionMaterial=load(distortionSource).materials.at(0);const auto distortionPacked=packMaterialSurfaceProfile(distortionMaterial);
+ require(distortionPacked.rows[16][2]==1&&distortionPacked.rows[20]==std::array<float,4>{.1F,-.1F,.2F,-.2F},
+  "Base UV distortion enable and remap reach material table");
+ require(distortionMaterial.specularEmissivePixels==distortionMaterial.styleMaskPixels
+  &&distortionMaterial.textureSettings[3].wrapU=="clamp"
+  &&distortionMaterial.textureSettings[3].mipFilter==TextureImportSettings::MipFilter::Nearest,
+  "Base UV distortion owns slot three and its sampler");
  require(packed.rows[0]==std::array<float,4>{1,1,0,0}&&packed.rows[2]==std::array<float,4>{0,.1F,0,.1F},"UV and time rows reach public material table");
  require(packed.rows[5]==std::array<float,4>{1,0,1.5F,0}&&packed.rows[6]==std::array<float,4>{1.3F,1.3F,1.3F,1},"Clock and straight tint packing");
  require(packed.rows[9]==std::array<float,4>{0,0,1,1},"Layer modes and soft intersection packing");
@@ -90,6 +100,12 @@ int main(int argc,char** argv){try{
  const std::string baseId="11111111-1111-4111-8111-111111111111",maskId="22222222-2222-4222-8222-222222222222";
  document.textures={{"0",{{"asset",baseId},{"usage","albedo"}}},{"1",{{"asset",maskId},{"usage","albedo"}}}};
  const auto restored=MaterialData::parse(document.encode());
+ auto distortionDocument=document;distortionDocument.surface["materials"]=distortionSource["materials"];
+ const auto distortionStandalone=MaterialData::parse(distortionDocument.encode()).interpret(
+  [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
+ require(packMaterialSurfaceProfile(distortionStandalone).rows==distortionPacked.rows
+  &&distortionStandalone.specularEmissivePixels==distortionMaterial.specularEmissivePixels,
+  "Complete document preserves base UV distortion pixels and parameters");
  auto coverageDocument=document;coverageDocument.surface["materials"]=coverageSource["materials"];
  const auto coverageStandalone=MaterialData::parse(coverageDocument.encode()).interpret(
   [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});

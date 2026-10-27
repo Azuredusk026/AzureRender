@@ -39,22 +39,25 @@ std::array<float,4> sample(std::array<float,4> rgba,UnlitTextureLayer::SampleMod
     for(float v:rgba)finite(v,"sample");
     return mode==UnlitTextureLayer::SampleMode::RedAsAlpha?std::array<float,4>{1,1,1,rgba[0]}:rgba;
 }
-void layerSample(const Json& input,UnlitTextureLayer& layer,std::size_t textureCount) {
+void textureUv(const Json& input,UnlitTextureLayer& layer,std::size_t textureCount) {
     const auto& texture=input.at("texture");
     if(!integer(texture)||texture.get<double>()<0||texture.get<double>()>=static_cast<double>(textureCount)
         ||texture.get<double>()>std::numeric_limits<int>::max())invalid("layer.texture");
     layer.texture=texture.get<int>();
-    if(input.at("sampleMode")=="red-as-alpha")layer.sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
-    else if(input.at("sampleMode")!="rgba")invalid("layer.sampleMode");
     const auto& uv=input.at("uv");fields(uv,{"set","scaleOffset","rotation","speed"},"layer.uv");
     if(!integer(uv.at("set"))||uv.at("set")!=0)invalid("layer.uv.set");
     layer.scaleOffset=vector<4>(uv.at("scaleOffset"),"layer.uv.scaleOffset");
     layer.rotation=vector<4>(uv.at("rotation"),"layer.uv.rotation");
     layer.speed=vector<2>(uv.at("speed"),"layer.uv.speed");
 }
+void layerSample(const Json& input,UnlitTextureLayer& layer,std::size_t textureCount) {
+    textureUv(input,layer,textureCount);
+    if(input.at("sampleMode")=="red-as-alpha")layer.sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
+    else if(input.at("sampleMode")!="rgba")invalid("layer.sampleMode");
+}
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer"});
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
@@ -79,6 +82,14 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
         coverage.threshold=scalar(input.at("threshold"),"coverageLayer.threshold");
         coverage.gain=scalar(input.at("gain"),"coverageLayer.gain",0);
         if(coverage.gain<=0)invalid("coverageLayer.gain");
+    }
+    if(source.contains("baseUvDistortion")) {
+        const auto& input=source.at("baseUvDistortion");fields(input,{"texture","channels","uv","scale","bias"},"baseUvDistortion");
+        auto& distortion=result.baseUvDistortion;textureUv(input,distortion.sample,textureCount);
+        if(input.at("channels")=="rg")distortion.channels=UnlitTextureLayers::BaseUvDistortion::Channels::Rg;
+        else if(input.at("channels")!="red")invalid("baseUvDistortion.channels");
+        distortion.scale=vector<2>(input.at("scale"),"baseUvDistortion.scale");
+        distortion.bias=vector<2>(input.at("bias"),"baseUvDistortion.bias");distortion.present=true;
     }
     result.tint=vector<4>(source.at("tint"),"tint");result.blendTint=vector<4>(source.at("blendTint"),"blendTint");
     const auto& clock=source.at("clock");fields(clock,{"rate","offsetSeconds"},"clock");
@@ -153,6 +164,17 @@ float evaluateUnlitCoverageLayer(const UnlitTextureLayers::CoverageLayer& covera
     finite(coverage.threshold,"coverage threshold");finite(coverage.gain,"coverage gain");
     if(coverage.gain<=0)invalid("coverage gain");
     return saturate((sample(rgba,coverage.sample.sampleMode)[3]-coverage.threshold)*coverage.gain);
+}
+std::array<float,2> evaluateUnlitBaseUvDistortion(const UnlitTextureLayers::BaseUvDistortion& distortion,std::array<float,4> rgba) {
+    if(!distortion.present)return {};
+    for(float value:rgba)finite(value,"UV distortion sample");
+    std::array<float,2> result{};
+    for(unsigned i=0;i<2;++i) {
+        const unsigned channel=distortion.channels==UnlitTextureLayers::BaseUvDistortion::Channels::Rg?i:0;
+        finite(distortion.scale[i],"UV distortion scale");finite(distortion.bias[i],"UV distortion bias");
+        result[i]=rgba[channel]*distortion.scale[i]+distortion.bias[i];finite(result[i],"UV distortion offset");
+    }
+    return result;
 }
 float evaluateUnlitViewCoverage(const UnlitTextureLayers& profile,float normalDotView) {
     finite(normalDotView,"view coverage input");if(!profile.viewCoveragePresent)return 1;

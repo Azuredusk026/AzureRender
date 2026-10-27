@@ -13,7 +13,7 @@ import tempfile
 
 import numpy as np
 from PIL import Image
-from create_visibility_fixture import surface,component
+from create_visibility_fixture import surface,component,pad_material_profile_index
 from convert_material_semantics import complete_material_document
 from test_unlit_texture_layers_gpu import profile,layer,linear,png_uri
 
@@ -30,6 +30,8 @@ def run(player,output,validation='any',case='vertex'):
         'view-additive','view-additive-document')
     if case=='coverage-layer':kinds=('coverage-red','coverage-alpha','coverage-mask','coverage-low','coverage-high',
         'coverage-soft','coverage-document','coverage-linear','coverage-uv','coverage-clock','coverage-disabled')
+    if case=='uv-distortion':kinds=('distortion-red','distortion-rg','distortion-bias','distortion-mask',
+        'distortion-document','distortion-clock','distortion-disabled','distortion-srgb','distortion-linear')
     for fixed in (False,True):
         for kind in kinds:
             name=('fixed-' if fixed else 'indexed-')+kind;root=output/name;assets=root/'assets';assets.mkdir(parents=True)
@@ -44,7 +46,7 @@ def run(player,output,validation='any',case='vertex'):
             normal=np.array([math.sqrt(.75),0,-.5 if kind=='view-back' else .5])
             if case=='view-coverage':
                 model['meshes'][0]['primitives'][0]['attributes']['NORMAL']=append(np.tile(normal,(4,1)).astype('<f4').tobytes(),5126,'VEC3',4)
-            if kind in ('coverage-uv','coverage-clock'):
+            if kind in ('coverage-uv','coverage-clock') or case=='uv-distortion':
                 model['meshes'][0]['primitives'][0]['attributes']['TEXCOORD_0']=append(struct.pack('<8f',*([.25,.25]*4)),5126,'VEC2',4)
             colors=np.column_stack([positions[:,0]+.5,positions[:,1]+.5,np.full(4,.25),.5+.5*positions[:,0]]).astype('<f4')
             if kind!='missing':model['meshes'][0]['primitives'][0]['attributes']['COLOR_0']=append(colors.tobytes(),5126,'VEC4',4)
@@ -90,6 +92,29 @@ def run(player,output,validation='any',case='vertex'):
                     path=assets/'coverage.png';Image.fromarray(coverage_pixel.reshape(1,1,4),'RGBA').save(path)
                     Path(str(path)+'.azmeta').write_text(json.dumps(dict(schemaVersion=1,id='55555555-5555-4555-8555-555555555555',settings=dict(texture=dict(colorSpace='linear')),dependencies=[])))
                     model['images'][2]=dict(uri='coverage.png')
+            if case=='uv-distortion':
+                pattern=np.array([[[255,64,128,192],[32,192,64,128]],[[64,128,255,64],[192,255,32,255]]],dtype=np.uint8)
+                noise_pixel=np.array([128,224,64,255],dtype=np.uint8)
+                noise_pattern=noise_pixel.reshape(1,1,4)
+                if kind=='distortion-clock':
+                    noise_pattern=np.array([[[0,32,128,255],[224,32,128,255]],[[64,32,128,255],[192,32,128,255]]],dtype=np.uint8)
+                    noise_pixel=noise_pattern[0,1]
+                model['images']=[dict(uri=png_uri(pattern)),dict(uri=png_uri(np.tile(mask,(2,2,1)))),dict(uri=png_uri(noise_pattern))]
+                model['textures']=[dict(source=i,sampler=i) for i in range(3)]
+                model['samplers']=[dict(wrapS=33071,wrapT=33071,minFilter=9728,magFilter=9728) for _ in range(3)]
+                d=dict(texture=2,channels='rg' if kind=='distortion-rg' else 'red',uv=copy.deepcopy(p['layers'][0]['uv']),
+                    scale=[.75 if kind in ('distortion-srgb','distortion-linear') else 2,.5 if kind=='distortion-rg' else 0],bias=[-.5,.5] if kind=='distortion-bias' else [0,0])
+                if kind!='distortion-disabled':p['baseUvDistortion']=d
+                if kind=='distortion-clock':p['clock']=dict(rate=0,offsetSeconds=1);d['uv']['speed']=[.5,0]
+                if kind=='distortion-mask':
+                    p['layers'].append(layer('mask',1));p['coverageLayer']=dict(texture=1,sampleMode='red-as-alpha',uv=copy.deepcopy(p['layers'][0]['uv']),threshold=0,gain=1)
+                    mask_pattern=np.array([[mask,[255,255,255,255]],[[0,0,0,0],[0,0,0,0]]],dtype=np.uint8);model['images'][1]=dict(uri=png_uri(mask_pattern))
+                if kind=='distortion-linear':
+                    path=assets/'noise.png';Image.fromarray(noise_pattern,'RGBA').save(path)
+                    Path(str(path)+'.azmeta').write_text(json.dumps(dict(schemaVersion=1,id='55555555-5555-4555-8555-555555555555',settings=dict(texture=dict(colorSpace='linear')),dependencies=[])));model['images'][2]=dict(uri=path.name)
+                signal=(noise_pixel[:2]/255 if kind=='distortion-linear' else linear(noise_pixel[:2]));signal=signal if d['channels']=='rg' else np.repeat(signal[0],2)
+                uv=np.array([.25,.25])+(signal*np.array(d['scale'])+d['bias'] if kind!='distortion-disabled' else 0)
+                selected=np.clip(np.floor(uv*2).astype(int),0,1);base=pattern[selected[1],selected[0]]
             model['materials']=[dict(name='VertexSignal',alphaMode='BLEND',doubleSided=True,extras=dict(azureSlotId='surface',
                 azureRenderMaterial=dict(schemaVersion=2,**{'class':'generic'},features=['unlit-surface','unlit-texture-layers'],surface=p)))]
             node=dict(id='surface',resourceId='surface',components={'azure.transform':component('azure.transform',dict(translation=[0,0,0]))})
@@ -116,6 +141,15 @@ def run(player,output,validation='any',case='vertex'):
                 document=complete_material_document(model['materials'][0],model,{str(i):ids[i] for i in range(3)})
                 path=assets/'coverage.azurematerial';path.write_text(json.dumps(document));Path(str(path)+'.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,settings={},dependencies=ids)));node['materialSlots']={'surface':material_id}
                 embedded=dict(p,vertexColor=False);embedded.pop('coverageLayer');model['materials'][0]['extras']['azureRenderMaterial']['surface']=embedded
+            if kind=='distortion-document':
+                ids=['11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222','33333333-3333-4333-8333-333333333333'];material_id='44444444-4444-4444-8444-444444444444'
+                for i,value in enumerate([pattern,np.tile(mask,(2,2,1)),noise_pattern]):
+                    path=assets/f'distortion-{i}.png';Image.fromarray(value,'RGBA').save(path)
+                    Path(str(path)+'.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=ids[i],settings={},dependencies=[])));model['images'][i]=dict(uri=path.name)
+                document=complete_material_document(model['materials'][0],model,{str(i):ids[i] for i in range(3)})
+                path=assets/'distortion.azurematerial';path.write_text(json.dumps(document));Path(str(path)+'.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,settings={},dependencies=ids)));node['materialSlots']={'surface':material_id}
+                embedded=dict(p);embedded.pop('baseUvDistortion');model['materials'][0]['extras']['azureRenderMaterial']['surface']=embedded
+            pad_material_profile_index(model)
             (assets/'surface.gltf').write_text(json.dumps(model))
             surface(assets/'rear.gltf',double_sided=True);rear=json.loads((assets/'rear.gltf').read_text())
             rear['materials']=[dict(pbrMetallicRoughness=dict(baseColorFactor=[.07,.09,.11,1]),
@@ -139,7 +173,7 @@ def run(player,output,validation='any',case='vertex'):
             log=(root/'player.log').read_text(errors='replace');assert 'Allocator after unload: buffers=0 images=0' in log and not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
             enabled='Validation layer: enabled' in log
             if validation!='any':assert enabled==(validation=='enabled'),name
-            manifest=json.loads((root/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==15
+            manifest=json.loads((root/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==16
             pixels=np.asarray(Image.open(root/'frames/frame_000000.png').convert('RGB'));errors=[]
             for x,y in [(64,64),(56,56),(72,56),(56,72),(72,72)]:
                 world_x=(2*(x+.5)/128-1)*3*math.tan(math.radians(55/2))
@@ -149,7 +183,8 @@ def run(player,output,validation='any',case='vertex'):
                 rgb=linear(base[:3]);alpha=base[3]/255
                 if kind=='red-alpha':alpha=rgb[0];rgb=np.ones(3)
                 rgb=rgb*np.array(p['tint'][:3])*vertex[:3];alpha=alpha*p['tint'][3]*vertex[3]
-                if kind in ('mask','view-mask','coverage-mask','coverage-document'):rgb*=linear(mask[:3]);alpha*=mask[3]/255
+                if kind in ('mask','view-mask','coverage-mask','coverage-document','distortion-mask'):rgb*=linear(mask[:3]);alpha*=mask[3]/255
+                if kind=='distortion-mask':alpha*=linear(mask[:3])[0]
                 if case=='coverage-layer' and kind!='coverage-disabled':
                     c=p['coverageLayer'];value=coverage_pixel[3]/255 if c['sampleMode']=='rgba' else coverage_pixel[0]/255 if kind=='coverage-linear' else linear(coverage_pixel[:3])[0]
                     alpha*=np.clip((value-c['threshold'])*c['gain'],0,1)
@@ -167,6 +202,7 @@ def run(player,output,validation='any',case='vertex'):
                 error=float(abs(linear(pixels[y,x])-expected).max());errors.append(error);assert error<=.008,(name,x,y,error,pixels[y,x].tolist(),expected.tolist())
             equivalence='heatmap' if kind in ('document','skinned') else 'ignored' if kind=='missing' else 'view-front' if kind=='view-document' else 'view-additive' if kind=='view-additive-document' else 'coverage-mask' if kind=='coverage-document' else kind
             if kind=='coverage-disabled':equivalence='coverage-high'
+            if kind=='distortion-document':equivalence='distortion-red'
             if equivalence in images:assert np.array_equal(images[equivalence],pixels),(name,'descriptor, skinning or document mismatch')
             else:images[equivalence]=pixels
             maximum=max(maximum,max(errors));records.append(dict(name=name,kind=kind,maximumLinearError=max(errors),validationEnabled=enabled,
@@ -180,7 +216,7 @@ def run(player,output,validation='any',case='vertex'):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--executable',type=Path,required=True);parser.add_argument('--output',type=Path)
     parser.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any')
-    parser.add_argument('--case',choices=['vertex','view-coverage','coverage-layer'],default='vertex');args=parser.parse_args()
+    parser.add_argument('--case',choices=['vertex','view-coverage','coverage-layer','uv-distortion'],default='vertex');args=parser.parse_args()
     if args.output:run(args.executable,args.output.resolve(),args.expected_validation,args.case)
     else:
         with tempfile.TemporaryDirectory(prefix='vertex-color-',dir=Path(__file__).resolve().parents[1]/'build/runs') as temporary:

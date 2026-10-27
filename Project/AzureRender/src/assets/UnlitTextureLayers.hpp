@@ -35,6 +35,13 @@ struct UnlitTextureLayers {
         UnlitTextureLayer sample;
         float threshold=0,gain=1;
     } coverageLayer;
+    struct BaseUvDistortion {
+        enum class Channels { Red, Rg };
+        bool present=false;
+        UnlitTextureLayer sample;
+        Channels channels=Channels::Red;
+        std::array<float,2> scale{},bias{};
+    } baseUvDistortion;
 };
 struct UnlitEffectFrame {
     float exposureGain=1,saturation=1;
@@ -50,6 +57,7 @@ float evaluateSoftIntersection(float sceneViewZ,float effectViewZ,float distance
 float evaluateUnlitViewDepthFade(const UnlitTextureLayers&,float effectViewZ);
 float evaluateUnlitViewCoverage(const UnlitTextureLayers&,float interpolatedNormalDotView);
 float evaluateUnlitCoverageLayer(const UnlitTextureLayers::CoverageLayer&,std::array<float,4> sample);
+std::array<float,2> evaluateUnlitBaseUvDistortion(const UnlitTextureLayers::BaseUvDistortion&,std::array<float,4> sample);
 // Samples and output are linear, straight RGBA. Node opacity is applied once.
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers&,
     std::array<float,4> baseSample,std::array<float,4> secondSample,

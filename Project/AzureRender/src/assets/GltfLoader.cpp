@@ -899,7 +899,7 @@ std::array<float, 4> readMaterialVectorExtra(
 #include "UnlitTextureSurfaceLoader.inc"
 
 void loadUnlitSurface(const tinygltf::Material& material,const tinygltf::Model& model,
-    AssetMaterial& result,int& baseImage,int& secondImage,int& coverageImage) {
+    AssetMaterial& result,int& baseImage,int& secondImage,int& coverageImage,int& distortionImage) {
     if(!material.extras.IsObject()||!material.extras.Has("azureRenderMaterial"))return;
     const auto& profile=material.extras.Get("azureRenderMaterial");
     const bool enabled=(result.materialFeatures&MaterialFeatureUnlitSurface)!=0;
@@ -912,7 +912,7 @@ void loadUnlitSurface(const tinygltf::Material& material,const tinygltf::Model& 
     if(!enabled&&!layered&&!profile.Has("surface")&&!authoredSurface)return;
     if(layered) {
         if(!authoredSurface)throw std::invalid_argument("unlit texture layers require an authored surface");
-        loadUnlitTextureSurface(material,model,authored.at("azureRenderMaterial"),result,baseImage,secondImage,coverageImage);
+        loadUnlitTextureSurface(material,model,authored.at("azureRenderMaterial"),result,baseImage,secondImage,coverageImage,distortionImage);
         return;
     }
     if(authored.is_object()&&authored.contains("azureRenderMaterial")) {
@@ -1629,7 +1629,7 @@ AssetMaterial loadMaterial(
         } else if (material->alphaMode == "BLEND") {
             result.alphaMode = AssetAlphaMode::Blend;
         }
-        loadUnlitSurface(*material,model,result,baseColorImage,styleMaskImage,unlitCoverageImage);
+        loadUnlitSurface(*material,model,result,baseColorImage,styleMaskImage,unlitCoverageImage,specularEmissiveImage);
         loadMaterialComposite(*material,result);
         const int distortionImage=loadSceneRefraction(*material,model,result);
         if(distortionImage>=0)styleMaskImage=distortionImage;
@@ -2050,7 +2050,8 @@ AssetMaterial loadMaterial(
             const auto defaults=result.textureSettings[slot];
             auto settings=azurerender::TextureImportSettings::parse(raw,defaults);
             const bool layer=result.unlitTextureLayers.present&&(slot==0||(slot==4&&result.unlitTextureLayers.layerCount==2)
-                ||(slot==8&&result.unlitTextureLayers.coverageLayer.present));
+                ||(slot==8&&result.unlitTextureLayers.coverageLayer.present)
+                ||(slot==3&&result.unlitTextureLayers.baseUvDistortion.present));
             if(layer&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU||settings.wrapV!=defaults.wrapV
                 ||settings.mipPolicy!=defaults.mipPolicy||settings.mipFilter!=defaults.mipFilter
                 ||settings.anisotropy!=defaults.anisotropy))

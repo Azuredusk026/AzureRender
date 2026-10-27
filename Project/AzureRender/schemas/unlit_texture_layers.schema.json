@@ -427,6 +427,96 @@
           "maximum": 3.4028234663852886e+38
         }
       }
+    },
+    "baseUvDistortion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "texture",
+        "channels",
+        "uv",
+        "scale",
+        "bias"
+      ],
+      "properties": {
+        "texture": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "uv": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "set",
+            "scaleOffset",
+            "rotation",
+            "speed"
+          ],
+          "properties": {
+            "set": {
+              "type": "integer",
+              "const": 0
+            },
+            "scaleOffset": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            },
+            "rotation": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            },
+            "speed": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number",
+                "minimum": -3.4028234663852886e+38,
+                "maximum": 3.4028234663852886e+38
+              }
+            }
+          }
+        },
+        "channels": {
+          "enum": [
+            "red",
+            "rg"
+          ]
+        },
+        "scale": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": -3.4028234663852886e+38,
+            "maximum": 3.4028234663852886e+38
+          }
+        },
+        "bias": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": -3.4028234663852886e+38,
+            "maximum": 3.4028234663852886e+38
+          }
+        }
+      }
     }
   },
   "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。"

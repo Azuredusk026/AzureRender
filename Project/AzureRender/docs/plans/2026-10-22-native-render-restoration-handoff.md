@@ -29,6 +29,7 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 实际箱体姿态、共享材质及完整镜头见[箱体验收](../acceptance/nr/captured-logistics-boxes.md)。
 独立覆盖率、作者层级及实际字形见[覆盖率验收](../acceptance/nr/unlit-coverage-texture.md)。
 三项原生材质组合与隔离绘制见[组合验收](../acceptance/nr/remaining-vfx-combinations.md)。
+基础坐标扰动、独立采样及实际墙面见[扰动验收](../acceptance/nr/base-uv-distortion.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

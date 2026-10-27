@@ -29,6 +29,28 @@ void reject(const Json& json,std::size_t textures=2) {
 void parsing() {
  const auto base=fixture();const auto p=parseUnlitTextureLayers(base,2);
  require(p.present&&p.layerCount==1&&p.layers[0].texture==0,"Base layer binding");
+ auto disturbed=base;disturbed["baseUvDistortion"]={{"texture",1},{"channels","red"},
+  {"uv",base["layers"][0]["uv"]},{"scale",{.1,-.1}},{"bias",{0,0}}};
+ require(parseUnlitTextureLayers(disturbed,2).present,"Independent base UV distortion parses");
+ require(!p.baseUvDistortion.present,"Base UV distortion is opt-in");
+ for(const char* field:{"texture","channels","uv","scale","bias"}) {
+  auto invalid=disturbed;invalid["baseUvDistortion"].erase(field);reject(invalid);
+ }
+ for(const Json& value:Json::array({true,1,"blue",nullptr})) {
+  auto invalid=disturbed;invalid["baseUvDistortion"]["channels"]=value;reject(invalid);
+ }
+ auto invalidDistortion=disturbed;invalidDistortion["baseUvDistortion"]["texture"]=2;reject(invalidDistortion);
+ invalidDistortion=disturbed;invalidDistortion["baseUvDistortion"]["scale"]={1};reject(invalidDistortion);
+ invalidDistortion=disturbed;invalidDistortion["baseUvDistortion"]["extra"]=0;reject(invalidDistortion);
+ const auto distortion=parseUnlitTextureLayers(disturbed,2).baseUvDistortion;
+ auto offset=evaluateUnlitBaseUvDistortion(distortion,{.25F,.75F,.5F,0});
+ near(offset[0],.025F,"Red noise offsets base U");near(offset[1],-.025F,"Red noise offsets base V independently");
+ auto rg=distortion;rg.channels=UnlitTextureLayers::BaseUvDistortion::Channels::Rg;rg.scale={2,-4};rg.bias={-1,2};
+ offset=evaluateUnlitBaseUvDistortion(rg,{.25F,.75F,0,1});
+ near(offset[0],-.5F,"RG noise U scale and bias");near(offset[1],-1,"RG noise V scale and bias");
+ require(evaluateUnlitBaseUvDistortion(p.baseUvDistortion,{1,1,1,1})==std::array<float,2>{0,0},"Absent distortion keeps transformed base UV");
+ bool invalidSample=false;try{(void)evaluateUnlitBaseUvDistortion(distortion,{std::numeric_limits<float>::infinity(),0,0,0});}catch(const std::invalid_argument&){invalidSample=true;}
+ require(invalidSample,"Nonfinite distortion sample fails");
  auto covered=base;covered["coverageLayer"]={{"texture",1},{"sampleMode","red-as-alpha"},
   {"uv",base["layers"][0]["uv"]},{"threshold",-.26866},{"gain",.2}};
  require(parseUnlitTextureLayers(covered,2).present,"Independent coverage texture parses");

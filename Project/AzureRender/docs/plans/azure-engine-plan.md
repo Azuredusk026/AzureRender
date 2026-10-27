@@ -32,6 +32,7 @@
 实际箱体姿态、共享材质及完整镜头见[箱体验收](../acceptance/nr/captured-logistics-boxes.md)。
 独立覆盖率、作者层级及实际字形见[覆盖率验收](../acceptance/nr/unlit-coverage-texture.md)。
 三项原生材质组合与隔离绘制见[组合验收](../acceptance/nr/remaining-vfx-combinations.md)。
+基础坐标扰动、独立采样及实际墙面见[扰动验收](../acceptance/nr/base-uv-distortion.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。

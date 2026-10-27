@@ -6,12 +6,12 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=15;
+    static constexpr unsigned kLayoutVersion=16;
     using Row=std::array<float,4>;
-    std::array<Row,17> rows{};
+    std::array<Row,21> rows{};
 };
 static_assert(std::is_standard_layout_v<PackedMaterialSurfaceProfile>);
-static_assert(sizeof(PackedMaterialSurfaceProfile)==272);
+static_assert(sizeof(PackedMaterialSurfaceProfile)==336);
 static_assert(alignof(PackedMaterialSurfaceProfile)==16);
 static_assert(offsetof(PackedMaterialSurfaceProfile,rows)==0);
 static_assert(sizeof(PackedMaterialSurfaceProfile::Row)==16);
@@ -80,6 +80,12 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
             r[13]=layer.scaleOffset;r[14]=layer.rotation;
             r[15]={layer.speed[0],layer.speed[1],layer.sampleMode==UnlitTextureLayer::SampleMode::RedAsAlpha?1.F:0.F,0};
             r[16]={coverage.threshold,coverage.gain,0,0};
+        }
+        if(p.baseUvDistortion.present) {
+            const auto& d=p.baseUvDistortion;const auto& layer=d.sample;r[16][2]=1;
+            r[17]=layer.scaleOffset;r[18]=layer.rotation;
+            r[19]={layer.speed[0],layer.speed[1],d.channels==UnlitTextureLayers::BaseUvDistortion::Channels::Rg?1.F:0.F,0};
+            r[20]={d.scale[0],d.scale[1],d.bias[0],d.bias[1]};
         }
         return result;
     }

@@ -228,7 +228,7 @@ struct ProjectedHairProfile {
     vec4 secondaryColor;
     vec4 objectX,objectY,objectZ;
 };
-struct PackedMaterialSurfaceProfile { vec4 rows[17]; };
+struct PackedMaterialSurfaceProfile { vec4 rows[21]; };
 #include "unlit_texture_layers.glsl"
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
@@ -1751,7 +1751,12 @@ void main() {
         if(materialFeatureEnabled(16777216U)>.5) {
             PackedMaterialSurfaceProfile p=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
             float tau=p.rows[5].x*camera.unlitTimeExposure.x+p.rows[5].y;
-            vec4 layerBase=texture(AZ_TEX_BASE_COLOR,azureUnlitLayerUv(textureCoordinate,p.rows[0],p.rows[1],p.rows[2].xy,tau));
+            vec2 baseUv=azureUnlitLayerUv(textureCoordinate,p.rows[0],p.rows[1],p.rows[2].xy,tau);
+            if(p.rows[16].z>.5) {
+                vec4 noise=texture(AZ_TEX_SPECULAR_EMISSIVE,azureUnlitLayerUv(textureCoordinate,p.rows[17],p.rows[18],p.rows[19].xy,tau));
+                baseUv+=azureUnlitBaseUvDistortion(noise,p.rows[19].z,p.rows[20]);
+            }
+            vec4 layerBase=texture(AZ_TEX_BASE_COLOR,baseUv);
             vec4 second=vec4(1);
             if(p.rows[9].z>.5)second=texture(AZ_TEX_STYLE_MASK,azureUnlitLayerUv(textureCoordinate,p.rows[3],p.rows[4],p.rows[2].zw,tau));
             float soft=1.0;

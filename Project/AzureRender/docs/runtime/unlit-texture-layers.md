@@ -37,6 +37,7 @@
 | `viewCoverage` | 可选视角覆盖率对象 |
 | `composite` | 可选 `alpha` 或 `additive`，默认 `alpha` |
 | `coverageLayer` | 可选覆盖率纹理、独立 UV、阈值及增益 |
+| `baseUvDistortion` | 可选基础坐标扰动纹理、独立 UV 及线性映射 |
 
 必需字段明确提供，数值须有限且能由单精度表示。
 每一层独立拥有 UV、角色及采样模式。
@@ -202,12 +203,37 @@ CPU 评价在启用该字段时要求明确的覆盖采样。
 摄像机常量大小为 688 字节，帧布局版本为一。
 材质常量在加载期拥有，表现时间由宿主每帧提供。
 
-材质表版本为十五，每项十七行，共 272 字节。
+材质表版本为十六，每项二十一行，共 336 字节。
 图层使用前十行，记录两层坐标及颜色参数。
 第十一行承载可选深度范围。
 第十二行承载活动标记及顶点颜色标记。
 第十三行承载可选视角覆盖率参数。
 第十四至十七行承载可选覆盖纹理及重映射。
+第十八至二十一行承载基础坐标扰动及映射。
+
+## 基础坐标扰动
+
+`baseUvDistortion` 定义基础图层的采样位移。
+字段为 `texture`、`uv`、`channels`、`scale` 和 `bias`。
+纹理及独立 UV 使用既有图层的范围规则。
+二维缩放和偏移均要求有限单精度数值。
+
+`channels` 采用 `red` 或 `rg`。
+`red` 将红通道同时用于两个坐标分量。
+`rg` 分别采用红、绿通道。
+输入值使用纹理导入声明的颜色空间。
+
+```text
+noiseUv = evaluateLayerUv(uv0, distortionUv, materialSeconds)
+signal = channels == red ? sample(noiseUv).rr : sample(noiseUv).rg
+offset = signal * scale + bias
+baseSampleUv = evaluateLayerUv(uv0, baseUv, materialSeconds) + offset
+```
+
+扰动在基础图层的坐标变换后应用。
+遮罩与覆盖率独立评价自己的采样坐标。
+该纹理独立持有采样器、作者 mip 及导入偏置。
+槽位三通过无光照材质的排他所有权承载该图像。
 资产读取与流绑定见[顶点颜色输入](vertex-color-inputs.md)。
 深度需求按材质能力进入现有不透明快照流程。
 绑定十八提供同相机、同单位的线性视图深度。

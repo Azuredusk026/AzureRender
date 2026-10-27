@@ -1,6 +1,6 @@
 // Included in GltfLoader.cpp's private loader namespace.
 void loadUnlitTextureSurface(const tinygltf::Material& source,const tinygltf::Model& model,
-    const nlohmann::json& profile,AssetMaterial& result,int& baseImage,int& secondImage,int& coverageImage) {
+    const nlohmann::json& profile,AssetMaterial& result,int& baseImage,int& secondImage,int& coverageImage,int& distortionImage) {
     const auto fail=[](const char* field){throw std::invalid_argument(std::string("Invalid unlit texture layers: ")+field);};
     constexpr std::uint32_t allowed=MaterialFeatureUnlitSurface|MaterialFeatureUnlitTextureLayers;
     if(result.materialProfileVersion!=2||(result.materialFeatures&allowed)!=allowed
@@ -47,5 +47,6 @@ void loadUnlitTextureSurface(const tinygltf::Material& source,const tinygltf::Mo
     };
     for(unsigned i=0;i<layers.layerCount;++i)bind(layers.layers[i],i==0?0:4,i==0?baseImage:secondImage);
     if(layers.coverageLayer.present)bind(layers.coverageLayer.sample,8,coverageImage);
+    if(layers.baseUvDistortion.present)bind(layers.baseUvDistortion.sample,3,distortionImage);
     result.unlitTextureLayers=std::move(layers);
 }

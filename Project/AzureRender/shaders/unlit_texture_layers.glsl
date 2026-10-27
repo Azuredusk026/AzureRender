@@ -24,7 +24,10 @@ float azureUnlitViewCoverage(float normalDotView,vec4 parameters) {
 float azureUnlitCoverageLayer(vec4 value,float mode,vec2 remap) {
     return clamp((azureUnlitLayerSample(value,mode).a-remap.x)*remap.y,0.0,1.0);
 }
-vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[17],float soft,float exposureGain,float saturation,vec3 colorGain,vec4 vertexColor,float normalDotView,vec4 coverage) {
+vec2 azureUnlitBaseUvDistortion(vec4 sampleValue,float channels,vec4 remap) {
+    return (channels>.5?sampleValue.rg:sampleValue.rr)*remap.xy+remap.zw;
+}
+vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[21],float soft,float exposureGain,float saturation,vec3 colorGain,vec4 vertexColor,float normalDotView,vec4 coverage) {
     base=azureUnlitLayerSample(base,rows[9].x)*rows[6];
     if(rows[11].y>.5)base*=vertexColor;
     if(rows[9].z>.5) {

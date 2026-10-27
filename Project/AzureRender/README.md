@@ -35,6 +35,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 实际箱体姿态、共享材质及完整镜头见[箱体验收](docs/acceptance/nr/captured-logistics-boxes.md)。
 独立覆盖率、作者层级及实际字形见[覆盖率验收](docs/acceptance/nr/unlit-coverage-texture.md)。
 三项原生材质组合与隔离绘制见[组合验收](docs/acceptance/nr/remaining-vfx-combinations.md)。
+基础坐标扰动、独立采样及实际墙面见[扰动验收](docs/acceptance/nr/base-uv-distortion.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

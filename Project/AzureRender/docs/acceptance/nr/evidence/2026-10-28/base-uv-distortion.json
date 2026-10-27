@@ -1,0 +1,1903 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR7-L4J",
+  "status": "contract_and_captured_inputs_passed",
+  "baseCommit": "adddac0",
+  "run": "build/runs/20261028-064046-native-base-uv-distortion-e1de77",
+  "primaryProject": "build/runs/20261028-064046-native-base-uv-distortion-e1de77/full-candidate/enclosure-distortion.azureproject",
+  "source": {
+    "CMakeLists.txt": "6365471a5ccc4c427893181c0151d94f91e002512b2098f82beaafe66a3b2271",
+    "schemas/unlit_texture_layers.schema.json": "6fca4f941ab2dd86c6977dbf1ec11e131873d0c3e088a707bd7195f366eebf5c",
+    "shaders/mesh.frag": "0a8fb05d04e7228d94755eada1d20d7c7d4513a5a7aafc3622ca961caa2044e0",
+    "shaders/unlit_texture_layers.glsl": "d72435cf58173e6d7f31981bf2510162c28c96f77feaa3a7a204e0501551ad4b",
+    "src/assets/GltfLoader.cpp": "ea87e1422d6947d95146fecb1c4b73f824100417bc41d7060cfcd1b8c52ec178",
+    "src/assets/MaterialSurfaceProfile.hpp": "6c32c719ad10591c901f91f93ba3789881aad89de0502b0c71ae14b08f99a85d",
+    "src/assets/UnlitTextureLayers.cpp": "1525447cf6edb501f3fac583863379756b977630a98ff0c1dea378c3fa7cb923",
+    "src/assets/UnlitTextureLayers.hpp": "0220cf3dc68478e738ffda39e914787649178e9c37ad65b549465fbfc6177b35",
+    "src/assets/UnlitTextureSurfaceLoader.inc": "65d9fb093b7f2dea1fa81d7602aaa2ae9d526d5eaa042c90f1ff8d01761f5533",
+    "src/scenes/CharacterSceneRenderer.cpp": "19ba0de2dab95897355c7caaccbdac2eace5669a6e2e961ab25dfbe49e452139",
+    "tests/UnlitTextureLayersTests.cpp": "5ae2cdeff88e47fa1a6aaa30c556c7a81b827e17b8cec57addfce9475caa784e",
+    "tests/UnlitTextureMaterialTests.cpp": "1966e16e2d2d258d5098679949b587becf0babad0a9e0c18a506edc7e64d43de",
+    "tools/create_visibility_fixture.py": "5b0fa7354bb6327323980b0c76f35d228b9aa24cf5635506c486e18185d6d3fa",
+    "tools/test_character_screen_rim_gpu.py": "a3e20ebb95b5ee2d8de77caa0cf352c744c511d38dea9f910e509fbf9b9532d1",
+    "tools/test_eye_npr_gpu.py": "e822413904823c3510a1a5ad755e3e6021ef54e5f68de6c22ee410a8a851c7de",
+    "tools/test_npr_illumination_gpu.py": "5f73f506bcc42790e9ab71b15d3db45d4109a2bc7f6ef44f4694a252b96bb9a1",
+    "tools/test_object_shadow_gpu.py": "2bc9fb203161762e4cbbe197e7e4489870e8c8f8b4efc2ffcae57b0a8f40b0ab",
+    "tools/test_texture_mip_bias_gpu.py": "7b9133a0d4bf272ca9e938cf268ebb5a010c3a4ca4ac7d4c9053b671eb49a420",
+    "tools/test_unlit_texture_layers_gpu.py": "2209c9f121aec3002c78755c1925d1bdc49ed354aa8893ae67a2549677e0da70",
+    "tools/test_vertex_color_gpu.py": "8f29c0aa7981d75f8e3880d2936c28de3e67c89307fac60d5f9dbd8950f488d4"
+  },
+  "binaries": {
+    "debug-AzurePlayer": "2f848e41187ecca2ffd5150562e2814ada6f1dbafd829c9a3b0a2a9651b8b958",
+    "debug-AzureRender": "56dce77001ed351fbdd6fdb92b5689965b1255b722c75040f5d52728e52a0c8f",
+    "debug-AzureMaterialValidator": "fe38ff6d5b9d865f5ab5f3795805187bbd7b7736de4a495bd095e5a0d6e323f0",
+    "release-AzurePlayer": "82afe1005504b49685e0695343ce0b167c91c7b4482645e6a6e02a156d921d8a",
+    "release-AzureRender": "9bc6c5aa27f17b87b151f68f8714686dcdd2761d1656ef01ed317be4142a956f",
+    "release-AzureMaterialValidator": "3ca93c9540939a371ffe91e139cca2dd776a5497e6115ec03f282af051221e24"
+  },
+  "artifacts": [
+    {
+      "path": "actual-checks.log",
+      "sha256": "f688b216a397eccc5b374d8ddaf9e05edccf61737d56357760cf7c2e4a387a5b"
+    },
+    {
+      "path": "capture_distortion_inputs.py",
+      "sha256": "697b9b2028895eee876b2a58fa50559fbc8ed86223b5f39c9be41055fe22b738"
+    },
+    {
+      "path": "check_distortion_alpha.py",
+      "sha256": "daaa600b8a89d38f3cf8d3667b569eec66e00a9cd16ccf972da4428299ca3aa9"
+    },
+    {
+      "path": "check_distortion_alpha_quantized.py",
+      "sha256": "959d928bfe152c6e4266c9d242474b499ea6cc90dc10d05d700f4c80080fe18f"
+    },
+    {
+      "path": "check_distortion_alpha_raster_quantized.py",
+      "sha256": "433e476add509d5587c5c6001085718e04f5fa86a44630c220df4b55b0eaf65e"
+    },
+    {
+      "path": "component-project/assets/9078-0.dds",
+      "sha256": "2b154549251723088d0d56b48b64e2e38d6409f1a9700bbdb128457f973d0629"
+    },
+    {
+      "path": "component-project/assets/9078-0.dds.azmeta",
+      "sha256": "0a309e17fccadb010fa6d1b1081e00394599d383571aa7d8e77e2c721cbff703"
+    },
+    {
+      "path": "component-project/assets/9078-1.dds",
+      "sha256": "51f6ea3119023d915b1ae2a61076d02cee14eea335ca201b2175535d17d0c2af"
+    },
+    {
+      "path": "component-project/assets/9078-1.dds.azmeta",
+      "sha256": "7239259cbbf0216e08088228383d797c9d6e90751fe6b26cf294ac3db7763ddd"
+    },
+    {
+      "path": "component-project/assets/9078-2.dds",
+      "sha256": "1368ac5275884a041e9dbe27392f52ab9a794df83cc056e7c59f199236e1a4f3"
+    },
+    {
+      "path": "component-project/assets/9078-2.dds.azmeta",
+      "sha256": "7294a53de364c4b1bcf5dfaedc4bed51da2e15abdb42f666b157da735dd8340a"
+    },
+    {
+      "path": "component-project/assets/9094-0.dds",
+      "sha256": "410479cff40da961dfcfe04a47397c9b01704df1d4d109adaf4ba48a08ebe8bf"
+    },
+    {
+      "path": "component-project/assets/9094-0.dds.azmeta",
+      "sha256": "4c31476b747eacc7e97babbd41b0dee14ca80243f1701f17676d1cccc707d804"
+    },
+    {
+      "path": "component-project/assets/9094-1.dds",
+      "sha256": "51f6ea3119023d915b1ae2a61076d02cee14eea335ca201b2175535d17d0c2af"
+    },
+    {
+      "path": "component-project/assets/9094-1.dds.azmeta",
+      "sha256": "3b636a76d8f1d2f740e14538c8fd84adbeaefec87c6a0d8952ca2fe6c1ff9dff"
+    },
+    {
+      "path": "component-project/assets/9094-2.dds",
+      "sha256": "1368ac5275884a041e9dbe27392f52ab9a794df83cc056e7c59f199236e1a4f3"
+    },
+    {
+      "path": "component-project/assets/9094-2.dds.azmeta",
+      "sha256": "1a678d6c39466676d1c327d020a37858b0d2bfe233962d107f888926d7b7a8cd"
+    },
+    {
+      "path": "component-project/assets/event-9078.gltf",
+      "sha256": "6733778b3961ff076c13a6f016cd5492fe63db63a70246b46f8ad24b3d120c4a"
+    },
+    {
+      "path": "component-project/assets/event-9078.gltf.azmeta",
+      "sha256": "f59a2f1144c6d2249a682f794d3469c24a1586c1df1f0bf1c812d84c0ce47591"
+    },
+    {
+      "path": "component-project/assets/event-9094.gltf",
+      "sha256": "e4bf86535635c215a0f112dc08f36d4db9c3a053f0e2bc42f9a0b996c47aa491"
+    },
+    {
+      "path": "component-project/assets/event-9094.gltf.azmeta",
+      "sha256": "ca099acb36e5a50be5bb8e28b8b3fe733dfbd44db74320091839c295ba93fc05"
+    },
+    {
+      "path": "component-project/assets/scene.azurelevel",
+      "sha256": "bfab4724814a888393a31a217018b459cec7d40909479f9bb84f831b6746750c"
+    },
+    {
+      "path": "component-project/assets/scene.azurelevel.azmeta",
+      "sha256": "e5f00157d0289b44bf5bdc2f2f528384b55be22d7e83bbb58a2b00c23922f1a0"
+    },
+    {
+      "path": "component-project/project.azureproject",
+      "sha256": "61b70a1826228f31a5d45de2c5808233a2b23ed4d37676c9e7ae86a73e784eef"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-alpha/frames/capture_manifest.json",
+      "sha256": "ff1b835a50c121594d95af0e7d19e4753d295f9c783108e8c77de68629b17361"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-alpha/frames/frame_000000.png",
+      "sha256": "b903a9dd23e0e10ae962d273018a09c5f783c97f76e44f1c664a9e44bb298f09"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-alpha/player.log",
+      "sha256": "e6609c9838f09348239083615a9d8f797c2d0f291a8e07c6de1dfc8b2b6b5127"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-alpha/runtime.json",
+      "sha256": "27126d6db3aede334d9267cb1e5c4d5c66efee1c2955ad75972f1d121159b42f"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-clock/frames/capture_manifest.json",
+      "sha256": "5edeb786dc79ffed7a6a01f7f28ca6120ed49ad425abe01edd9d5ec68652732d"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-clock/frames/frame_000000.png",
+      "sha256": "b903a9dd23e0e10ae962d273018a09c5f783c97f76e44f1c664a9e44bb298f09"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-clock/player.log",
+      "sha256": "c5eb0b70dcdf8e5b77fedcd8a9f3029af0d1b9103ff8acebc8ed9fc00f93d80f"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-clock/runtime.json",
+      "sha256": "30921cc983523c3079fe2aa1ad0cc46a8cc6b7ee6cb480f33ed1a51da87394a6"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-disabled/frames/capture_manifest.json",
+      "sha256": "8c019b6e40e9d5dd2121681a4b88a92445d8df38908e34017e2696c100c17a33"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-disabled/frames/frame_000000.png",
+      "sha256": "b903a9dd23e0e10ae962d273018a09c5f783c97f76e44f1c664a9e44bb298f09"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-disabled/player.log",
+      "sha256": "dbd3ac746197a7699d54a189abc0402a734c45ca318aba30c43445495c693b13"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-disabled/runtime.json",
+      "sha256": "c4fb5914cea5c3baefdc010c82dfcef626b06749dcd49d66d1dfb5fd894f7b0f"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-document/frames/capture_manifest.json",
+      "sha256": "1d432b382b18a4ba102f09085f80d9f9e7ca5316e6b3549150c75834eb1f413f"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-document/frames/frame_000000.png",
+      "sha256": "bf04cebb0f1bf7bc5babab125b2af91d331298105bb57c8f3b808f30566526a7"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-document/player.log",
+      "sha256": "272f98fae55be543b4b20ee35d6d2cb5c83941eea4c775ae4639530310585d06"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-document/runtime.json",
+      "sha256": "3adf769dd66ef515c7c6aa7e89be932d718d40472b5c5c0eff5e5829f6dace16"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-high/frames/capture_manifest.json",
+      "sha256": "9f3d86c2108fdc5987e1413ad1553455c477a8ad574df639c5d26edc4df6b3f5"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-high/frames/frame_000000.png",
+      "sha256": "b903a9dd23e0e10ae962d273018a09c5f783c97f76e44f1c664a9e44bb298f09"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-high/player.log",
+      "sha256": "32bef79a50ab5dc3c17cb64031652095ed1f9e2cd86d90d651138fb005646927"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-high/runtime.json",
+      "sha256": "2dbda946387435aadd165d8cd392df083383c04b63b4dc75048879188c0232be"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-linear/frames/capture_manifest.json",
+      "sha256": "cebe459aeedfd8cdcda8cc4829651e2b59821fe5e92169ae23d42783787ddaad"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-linear/frames/frame_000000.png",
+      "sha256": "a2e600bd903176697a6b241f398070079e89dadcf3dee3a35244d39b7654366f"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-linear/player.log",
+      "sha256": "ad43085dc7f297f09fa0542c14d63303907c5c8308bb17eb5036b350fd24545a"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-linear/runtime.json",
+      "sha256": "055c2a75394dae13609b28b4d8e5b86526e3e15f9334b8b9bb4205a84108af36"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-low/frames/capture_manifest.json",
+      "sha256": "f06542f2a9b36650ec19d4ef04e368a856c54d2a5b3a38b4babb30f692aa175f"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-low/frames/frame_000000.png",
+      "sha256": "30e612980ec75abdff1b51747bff5d7765a7a9b73284c2fa9e76f5d0d988e050"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-low/player.log",
+      "sha256": "0814284785fca15a328d3c005d569708c861d94a8767b60941b8df40a52d8aa0"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-low/runtime.json",
+      "sha256": "cbacf2b78d9dbeee71a2adcc477f686bb85a09fb57d6e1ce01c865de960e5438"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-mask/frames/capture_manifest.json",
+      "sha256": "594ead5b578e43d6d5b690d8ce8eb76b0456f9ad5c25b76f80c68bdf4faf1e0e"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-mask/frames/frame_000000.png",
+      "sha256": "bf04cebb0f1bf7bc5babab125b2af91d331298105bb57c8f3b808f30566526a7"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-mask/player.log",
+      "sha256": "56d9e75ef847a4b5371262fa375468a40e081b9ed105e00d4b8708dc7219fde5"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-mask/runtime.json",
+      "sha256": "8cf496cbc4d5dc7c43911be188fac97f3b33d50ea8eca8eff55a57f433fd5a9c"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-red/frames/capture_manifest.json",
+      "sha256": "acf34dafb173ec50bc4d8e21ee36bce4a39f1ead0389bbdb8c5c843a95039559"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-red/frames/frame_000000.png",
+      "sha256": "cb9cbdd85fcae893285e5d98eb6e234b6ab35ea44931fd1f84de0ff69b1f6145"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-red/player.log",
+      "sha256": "5045a3e57eeee2d586409e1624dc358376aadb9ff1abf0625bbc9c5c0596e596"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-red/runtime.json",
+      "sha256": "054a73c8e9ff2dabe5688967b596aff0f56bf2e8b0585ae1b02a2d713a79cff6"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-soft/frames/capture_manifest.json",
+      "sha256": "ad7ad2aba021cc69a6bcc53eba866ddf636d9cdebd06e5f1a311033f330730aa"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-soft/frames/frame_000000.png",
+      "sha256": "52c8d9c1a9c8263c1da11dc34803c1fac765d26d9c86acd48f3db7e6ff7f9ac3"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-soft/player.log",
+      "sha256": "896bac22e543da76978b07932021653fb795d25eee4719e51bc202ddee6e756f"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-soft/runtime.json",
+      "sha256": "52af5b0b88309d0292167af624882a3dd177b18acd76f60609aa319782e947b9"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-uv/frames/capture_manifest.json",
+      "sha256": "6de693480636b6e70ec00be948f7f6ea71cb98d1ee7bfe42e6eb4cd95a0878ac"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-uv/frames/frame_000000.png",
+      "sha256": "5f7c0d8529dec168d80012fcc65be0c778d32c751fb1859a78d091cffd4fdbdd"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-uv/player.log",
+      "sha256": "757e77083ac6426676eed38d7937fc70a521c97d8547215ff7e99570b9a5015e"
+    },
+    {
+      "path": "coverage-layout-debug/fixed-coverage-uv/runtime.json",
+      "sha256": "f3bf2810c06c3af80593913708a6c8f7d1229143cefc0d08d3680b7493bcf98b"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-alpha/frames/capture_manifest.json",
+      "sha256": "7a77037d60ec25cb49206641aaff6fae9f6e4008716898ed7092d6c7a57691d4"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-alpha/frames/frame_000000.png",
+      "sha256": "b903a9dd23e0e10ae962d273018a09c5f783c97f76e44f1c664a9e44bb298f09"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-alpha/player.log",
+      "sha256": "ccb5e7c54cd3392dc8715c7252079473c67664e05389d1c860748aac3a7ed875"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-alpha/runtime.json",
+      "sha256": "428d4a0f5d4097345fc54b5cf94dec9f12027a779ad6bcb395ac11a8f1ad91d9"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-clock/frames/capture_manifest.json",
+      "sha256": "456f6c35367ccfc9969a2aba1901a8b0f0e525f67c0cd82d35716014ed142956"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-clock/frames/frame_000000.png",
+      "sha256": "b903a9dd23e0e10ae962d273018a09c5f783c97f76e44f1c664a9e44bb298f09"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-clock/player.log",
+      "sha256": "4462d900f32ef68bee9c1d9a94529adc1693a975817376ea725a6d548f051d15"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-clock/runtime.json",
+      "sha256": "e90000bc688d98fdc04511f7fa96f1bc6520fa03f2f1c551adbb8af85974960f"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-disabled/frames/capture_manifest.json",
+      "sha256": "1516a891a910634e38127e870d034d64a8f89f028f04f9f8179d4f7bdbc0a69e"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-disabled/frames/frame_000000.png",
+      "sha256": "b903a9dd23e0e10ae962d273018a09c5f783c97f76e44f1c664a9e44bb298f09"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-disabled/player.log",
+      "sha256": "d54c4cd7fbf5ccbc6e9ca2c5b7442b991d5a0106853f3f6eb868a2cc6e961004"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-disabled/runtime.json",
+      "sha256": "4fa42e59690650cc3ba4d03a0aa27ea02c4342ffdfb19e8fcb7db541ae272f3b"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-document/frames/capture_manifest.json",
+      "sha256": "b29187b50584805bf8cf956ec78a75e56bfbde237397bf941eba9017fdce26f1"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-document/frames/frame_000000.png",
+      "sha256": "bf04cebb0f1bf7bc5babab125b2af91d331298105bb57c8f3b808f30566526a7"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-document/player.log",
+      "sha256": "5e79690d7180724ec46219ea052fa336594bf1aa2d0ce2b5aa64495171ae9806"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-document/runtime.json",
+      "sha256": "6ef96098784810562bd35d46826195d4335045ad7f8b770447eb87d5d529d87e"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-high/frames/capture_manifest.json",
+      "sha256": "b1720414490928b184a36e16bee1a723badfeed8cc1282b3ecd7726209288e72"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-high/frames/frame_000000.png",
+      "sha256": "b903a9dd23e0e10ae962d273018a09c5f783c97f76e44f1c664a9e44bb298f09"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-high/player.log",
+      "sha256": "49231d723472aed607ab691ce05d74349a03accfb4380beb7b26ab35a44ca810"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-high/runtime.json",
+      "sha256": "2beed9c4a0fd1dbef6d867e4ba424c9455291d245867f91805b605adea0f8e4a"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-linear/frames/capture_manifest.json",
+      "sha256": "2e778e3d64f35996f4ae0994d2f18bb00c2dfa32846166a313412955d003601e"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-linear/frames/frame_000000.png",
+      "sha256": "a2e600bd903176697a6b241f398070079e89dadcf3dee3a35244d39b7654366f"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-linear/player.log",
+      "sha256": "49f5958a3032e9d6d5428a8e8a4925ac2ea4684a8eab368cbac6884d88f5ad31"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-linear/runtime.json",
+      "sha256": "d8e38661afb397f75f4d885612c884cf0c8af6f7b3c70606327584af835e568b"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-low/frames/capture_manifest.json",
+      "sha256": "08f3ef846d7a46ad61e5be877da64d3e7530ae9bd873dca5600215c6bfffc304"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-low/frames/frame_000000.png",
+      "sha256": "30e612980ec75abdff1b51747bff5d7765a7a9b73284c2fa9e76f5d0d988e050"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-low/player.log",
+      "sha256": "b8c336d07a1f33bf86ade5b1fe9a29d2ba8e34f5c0e87730f9a7d97e11ce179f"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-low/runtime.json",
+      "sha256": "1c1cfa894e7bef0573abeacfc72efcd3320681518611e3b79d05bc6d5929254c"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-mask/frames/capture_manifest.json",
+      "sha256": "5878a0192c6e9782608f3718068a94e83a6888942696ab131651f8d833f99e36"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-mask/frames/frame_000000.png",
+      "sha256": "bf04cebb0f1bf7bc5babab125b2af91d331298105bb57c8f3b808f30566526a7"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-mask/player.log",
+      "sha256": "f0f945173615146ad09b3cbf53b61f8fcb5b0fbd0efdc93ec2e6e95e03f3e059"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-mask/runtime.json",
+      "sha256": "789f6bd14f6cf11a412791898d80cb36291224056c7a02a333b1f327bc9697d1"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-red/frames/capture_manifest.json",
+      "sha256": "05ef7ec89f9faad13d700ec767a3fe8d66c7f82670d277dc7fdd2bdddcb581ea"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-red/frames/frame_000000.png",
+      "sha256": "cb9cbdd85fcae893285e5d98eb6e234b6ab35ea44931fd1f84de0ff69b1f6145"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-red/player.log",
+      "sha256": "5a339e2716d51647807d3968fb52a7eb5fc35b02f35b5bd7fb2514c4ca4620b5"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-red/runtime.json",
+      "sha256": "5d789480341214210e6a94b15e57f07a4336afe10171fbf9ab3584d48f5724bc"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-soft/frames/capture_manifest.json",
+      "sha256": "c72c3ce120833e279d42789ede91c281b0982b012fe0b31ed25f562376a6ee8d"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-soft/frames/frame_000000.png",
+      "sha256": "52c8d9c1a9c8263c1da11dc34803c1fac765d26d9c86acd48f3db7e6ff7f9ac3"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-soft/player.log",
+      "sha256": "c80fd5147e32326fb482f906458eee406bb28fa2b72293579931cd9e8cf4c3e1"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-soft/runtime.json",
+      "sha256": "efcffb699cdfe66ecfb33e93319046d8d5d787c242cd4e82f3b97442746a2dd6"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-uv/frames/capture_manifest.json",
+      "sha256": "2ba7d3bc49eda2087d5fc84a226e4b82da100841a588ce0513499da77cada894"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-uv/frames/frame_000000.png",
+      "sha256": "5f7c0d8529dec168d80012fcc65be0c778d32c751fb1859a78d091cffd4fdbdd"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-uv/player.log",
+      "sha256": "78d2b07604ed1537a14956c0bc4407df46bde04948c056d514b4fbac6760ff14"
+    },
+    {
+      "path": "coverage-layout-debug/indexed-coverage-uv/runtime.json",
+      "sha256": "d2306de04e5b1cc3da1a17030cc81e4cf0c1b400761e36d00fd120a6dcc54806"
+    },
+    {
+      "path": "coverage-layout-debug/summary.json",
+      "sha256": "52150bbe9a80f83acd9eef0911f8389c4cb9e5eb779c6d6e53230fd05ac7825e"
+    },
+    {
+      "path": "coverage-layout-debug.log",
+      "sha256": "1cd89912ee40c20652bd4d48b24bad3a80f1200c038ba225e61c9d429accc2b5"
+    },
+    {
+      "path": "cpu-debug.log",
+      "sha256": "657f6a733600053e1817877916f65d896e1f65de6538a33538ba196ec8621a17"
+    },
+    {
+      "path": "cpu-release.log",
+      "sha256": "8a73069beeb23ba84b3e81bd5c5a3f00440cbf444466e5a7e1835fb3b75dc801"
+    },
+    {
+      "path": "debug-build.log",
+      "sha256": "5eb04076d2ea18d1184d500fe62a18e7dff7ff2768e977e7f644722c630fbedc"
+    },
+    {
+      "path": "debug-regressions.log",
+      "sha256": "d3cf0e9e05c73241fd8c9fa626c7ac58dabc41bed3408bce1eb08ad77adafa7d"
+    },
+    {
+      "path": "distortion-alpha-oracle.json",
+      "sha256": "97ea736741898f67ceba8d3677ce15c6923e638fc0c5205872af4feff6ccd5ad"
+    },
+    {
+      "path": "distortion-alpha-quantized.json",
+      "sha256": "ab96e87b8b4fb81ed3749c0b2f30058c9782e78f593a937a8c0f2def481b9d34"
+    },
+    {
+      "path": "distortion-alpha-raster-quantized.json",
+      "sha256": "995abc7c777da7a601ad735c3900b52a0fd9645342111f5cffc677302b7222cd"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-bias/frames/capture_manifest.json",
+      "sha256": "0874969cf90952dce9fd104250c17f3b67b796dda0efeda76acbaec37d33f7db"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-bias/frames/frame_000000.png",
+      "sha256": "5b4ae2dfcc96fd9e9cd64504e2d058f765f850170c418fb09d78d33409bba3bf"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-bias/player.log",
+      "sha256": "56c91b04f42e68e4bee488cc32323e5c91c95f25ec2469fb0ad654783ccecc45"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-bias/runtime.json",
+      "sha256": "d8ab81ef4fd7976abfe86b83f3c01a3a4b413c2dde837edf30932c093ec0dc13"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-clock/frames/capture_manifest.json",
+      "sha256": "2ac6e5f98ba4cb8fe502cf709a24cbec004fadd78aa29500c724ace3d67a9886"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-clock/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-clock/player.log",
+      "sha256": "5240bdaf14238408a54df9fcd78c92d1a1b624544fb5c3151e772011282fb396"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-clock/runtime.json",
+      "sha256": "caa1f50a0e97b1a3bcbf58e1ee85bc062d704ac6fbef665b9b3d430484425765"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-disabled/frames/capture_manifest.json",
+      "sha256": "d97ff3b089d838dfba46709f0df2abe3f47ac3657dcf4a286e497c8ad7faac2a"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-disabled/frames/frame_000000.png",
+      "sha256": "286933b6cd02da7d9986deaeaf514d3f0f7d3bc2ebbf04db3a7c85426c5468d3"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-disabled/player.log",
+      "sha256": "4a5ef3fec237827e8a84f24eb66713f8062efba5d44f1ffa3114f7feab96056e"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-disabled/runtime.json",
+      "sha256": "85810f4c2859e1ae8e09116244fa299ab718ed95964658376850a7400f01a048"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-document/frames/capture_manifest.json",
+      "sha256": "a5282692d60c04a0866551dd53eee28356a30fbde4ae511034c5ebe8eb0459c0"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-document/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-document/player.log",
+      "sha256": "cbf9449081a578a754cb9b6a782ec36c9cdab8fe70bd21f8e33a3ae17cf3f46c"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-document/runtime.json",
+      "sha256": "2e4d3f7ed38ed030537d70cc1ea544c05654341831d8bd80cd634d96bab0faf1"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-linear/frames/capture_manifest.json",
+      "sha256": "cde19a9312f8680365e92ec48420062de806546c4b39a362d39ff6aa7a4e23a8"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-linear/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-linear/player.log",
+      "sha256": "8b53562c212538c24c868a2fd8db686cbb9efcb0782fe25d52fd8244fc3e5326"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-linear/runtime.json",
+      "sha256": "0826a34cb797df3492c249662fd8a3a1a2e382b7e50a82c9bd4218e962bda670"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-mask/frames/capture_manifest.json",
+      "sha256": "2f3d929f52e18c59a523661dea43591675bb1a02ec4e4068cce0c9723f01f64d"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-mask/frames/frame_000000.png",
+      "sha256": "0e68264cd7adc1857b8d239ed9d58324a30cd960e62c2e1a585bbdfcef25a988"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-mask/player.log",
+      "sha256": "b6379277e7b88c7d173170b6ae8dc950adb0425eca50720c59be2d3db9836cea"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-mask/runtime.json",
+      "sha256": "9a0220055ec142a7842ed0a81375f5aabb10e88a82a34260b1ae66a4abb9e092"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-red/frames/capture_manifest.json",
+      "sha256": "d4c877a23a081b38abad692068c69786d225a7bf7ed67df25887cfd8de6223fc"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-red/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-red/player.log",
+      "sha256": "3a8dfa277608be5d9262c5ef85ee7f5f8892dc7f9a768e0d91f3f9ea29d3090a"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-red/runtime.json",
+      "sha256": "3a0ae8a6cc49250f8d573d16b24ba8ae2c15a7dd5a0c91eac620e6c90fd14137"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-rg/frames/capture_manifest.json",
+      "sha256": "e8898c47030d65147f3dcd03db75d9aa3c03d974512c0cf923ac15f9853efaed"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-rg/frames/frame_000000.png",
+      "sha256": "f1f2ea3c1b4ed2aa68bff9e1c27feab147b74b11205145155217075f70a01adb"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-rg/player.log",
+      "sha256": "cf91349c18bb10ed0904283f0e3cfd79e425cdbbd515a78c449e446065f0a1ef"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-rg/runtime.json",
+      "sha256": "17565ac2df582cbbfa2cb8b14771e87314204f6404034ab64170be76b960d3a7"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-srgb/frames/capture_manifest.json",
+      "sha256": "2bbe38af560433f638baa5bf80f876da07ffa170902cc21160d99d1656547c59"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-srgb/frames/frame_000000.png",
+      "sha256": "286933b6cd02da7d9986deaeaf514d3f0f7d3bc2ebbf04db3a7c85426c5468d3"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-srgb/player.log",
+      "sha256": "9d3110a791cf9fbb677fd1c00140ba1af122e50bcf0a782bfcf250bbf60e5db6"
+    },
+    {
+      "path": "distortion-debug/fixed-distortion-srgb/runtime.json",
+      "sha256": "be82c430e141151707e94c9b0bc4fc6f29d48057d2a9afae65f9aa4a0a81b5ca"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-bias/frames/capture_manifest.json",
+      "sha256": "8b18eeae2f4f14cbdcf851b118d42c4f6ef41714f6f88d4fab77890c15c8f2b4"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-bias/frames/frame_000000.png",
+      "sha256": "5b4ae2dfcc96fd9e9cd64504e2d058f765f850170c418fb09d78d33409bba3bf"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-bias/player.log",
+      "sha256": "ea9b7aaadae13121f784e6ce0c9d324c5e136fca147fb600eefecfd8778ac2da"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-bias/runtime.json",
+      "sha256": "06eccbc77fa86e081a00461fa66d015bb96a57e4e317f01139fd383ae7f3822f"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-clock/frames/capture_manifest.json",
+      "sha256": "4f0b4beda68ae75b15260a152bf91d146291d5776ccc8a80f4f6cbf321d64f94"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-clock/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-clock/player.log",
+      "sha256": "19d95eca99ee63158ea6c6f1d656c5177411bf1f9dff77f6c3ea857e8022927a"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-clock/runtime.json",
+      "sha256": "0f7716caaaddee016312b55beca9e4c46e71930a814f82ced317b40c9281ae55"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-disabled/frames/capture_manifest.json",
+      "sha256": "08b09e4b7d52627767b54e40223972e22ac2e7348fff9983e95d2f3585e82efb"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-disabled/frames/frame_000000.png",
+      "sha256": "286933b6cd02da7d9986deaeaf514d3f0f7d3bc2ebbf04db3a7c85426c5468d3"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-disabled/player.log",
+      "sha256": "3b34170c8d8113f250c7f3921af950c9fb18ba49a2a261bc12a7fc8df68cf27e"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-disabled/runtime.json",
+      "sha256": "9e078d5833f01c49d944483066423afff7befa9eb512802d591c2dc383e02acc"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-document/frames/capture_manifest.json",
+      "sha256": "61ea9cd11d58a86f36b763bcadee04ae56faddb077b80f88a15a7090d2bf7d75"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-document/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-document/player.log",
+      "sha256": "476aa91c99d7fcf62f0e4ac41379e091d7cc176151bb3b4ef1d8afd97d51d3b3"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-document/runtime.json",
+      "sha256": "4d7fe08422347443d5f6fb26b339c57e429a3d5d4bb8605fbeef4d3a9cae192c"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-linear/frames/capture_manifest.json",
+      "sha256": "1d130392843dfea8e52c48ffa3396b0c37ef8a8a3ac14271929c8cf000725799"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-linear/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-linear/player.log",
+      "sha256": "6b9cebeb07ca4bd96f27b0f404b0e79bc161cd88a7959affa6add4977eb062d2"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-linear/runtime.json",
+      "sha256": "1b94bb0cc12499ed0614df8f7e1bfe0a8bd9534a16b38d85f4b9c90dc4ee6df2"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-mask/frames/capture_manifest.json",
+      "sha256": "36766c78f0254b4dd7ed57d2ff43b7099958c4698b25d2c5b716a66a67b0f8df"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-mask/frames/frame_000000.png",
+      "sha256": "0e68264cd7adc1857b8d239ed9d58324a30cd960e62c2e1a585bbdfcef25a988"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-mask/player.log",
+      "sha256": "9e7df17cc3b1d5b65183481be167aaafe632ce6e5a0d57d7e378695d632a9cb4"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-mask/runtime.json",
+      "sha256": "8a1f99a593845b0d400a1fe8a06243fbd1b77728b1c7eba385839718a9464c16"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-red/frames/capture_manifest.json",
+      "sha256": "a6023b85cca50635cddbee30847ef428a5bf345557384b028472e791bd03ee29"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-red/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-red/player.log",
+      "sha256": "bbb5eef82419ad7e71ef75e39db230b65df3ff7bf7d77ac8647c93fd53acc72e"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-red/runtime.json",
+      "sha256": "8f1ba29782497cde41f178c04f9e908c0aaa623aba4d7bf254c17e44d62a370a"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-rg/frames/capture_manifest.json",
+      "sha256": "7646c331af25e72b454e78e6c56a88a28e30577b8a2b003b99ee077c708cf4ce"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-rg/frames/frame_000000.png",
+      "sha256": "f1f2ea3c1b4ed2aa68bff9e1c27feab147b74b11205145155217075f70a01adb"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-rg/player.log",
+      "sha256": "6c0d8aba3f1df6b1ae98e61044746fe7f099e6be9e9350feb363eddb59192001"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-rg/runtime.json",
+      "sha256": "2b8a78b4c1a01663b9ffccafc6e3bf63fa7463ba733c00e6b7f4820633215a14"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-srgb/frames/capture_manifest.json",
+      "sha256": "b45f14dfb45a5166ea6ecdc045d68c282c4550f8cd8cf5cadfcd9e612cb4b1c5"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-srgb/frames/frame_000000.png",
+      "sha256": "286933b6cd02da7d9986deaeaf514d3f0f7d3bc2ebbf04db3a7c85426c5468d3"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-srgb/player.log",
+      "sha256": "d04aa7b698959e568988afeb02e6e8493a30455e37c0e59bb4f5a155f8d30062"
+    },
+    {
+      "path": "distortion-debug/indexed-distortion-srgb/runtime.json",
+      "sha256": "81fc02316936ad73e3a45a525b23e134f66a5f74ada6226c6616911c7d3e38d2"
+    },
+    {
+      "path": "distortion-debug/summary.json",
+      "sha256": "595c19a1a5dd6111feb53d64976e22d57c9a69cbcc915256306a6006ae50f5d4"
+    },
+    {
+      "path": "distortion-debug.log",
+      "sha256": "c9b5d0293fc9ce927a4319701760f60cae9285bcb60157cc7ece2a94f391b5cd"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-biased/frames/capture_manifest.json",
+      "sha256": "9e9f5d81caefbee45945e239695f14e158c1e8c5f74291b23824266f9552676b"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-biased/frames/frame_000000.png",
+      "sha256": "e85e19d767f34829bd46b0c541bf3acbb947323f6bbf2a855306b6fc25116326"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-biased/player.log",
+      "sha256": "6b4189f2ee7096999686c3c30c172deb80a87a6daac849e3ceba461da040af84"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-biased/runtime.json",
+      "sha256": "221e26df441ecd023fcd8449746367939344ae52bfbe54dcb8d77a83c27f6ea4"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-documents/frames/capture_manifest.json",
+      "sha256": "84892ed02fb26c611cd4ebbc4759859e5a5afc0d7b53dedfbdd0b3b36cdd2334"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-documents/frames/frame_000000.png",
+      "sha256": "e85e19d767f34829bd46b0c541bf3acbb947323f6bbf2a855306b6fc25116326"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-documents/player.log",
+      "sha256": "8a0d9d7d53013462b3516d4f0d72a4d19ce8d9f7b5c7c8ce5ff9e4dcc9a685b5"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-documents/runtime.json",
+      "sha256": "221e26df441ecd023fcd8449746367939344ae52bfbe54dcb8d77a83c27f6ea4"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-fixed/frames/capture_manifest.json",
+      "sha256": "db794288af5b2c59d8e4cabd36979954401882309505f1cfb777eec70c3d8ca3"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-fixed/frames/frame_000000.png",
+      "sha256": "e85e19d767f34829bd46b0c541bf3acbb947323f6bbf2a855306b6fc25116326"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-fixed/player.log",
+      "sha256": "6a244b0772eeb02215635bb4ceb5962bc040cb6765ccfec495399d7833ba442c"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-fixed/runtime.json",
+      "sha256": "221e26df441ecd023fcd8449746367939344ae52bfbe54dcb8d77a83c27f6ea4"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-neutral/frames/capture_manifest.json",
+      "sha256": "bea9675fb520a875db3a10240daee2f0ead24edc08432ac48c262a0af242a44d"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-neutral/frames/frame_000000.png",
+      "sha256": "524b07c6b50e54048ec58944b801081bac7263a52ebcc4b3de551f0d7329d196"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-neutral/player.log",
+      "sha256": "1fe3dc14960ef501dab79b5f07a0705c38bcd79ff418b307ca89d261d9ebec83"
+    },
+    {
+      "path": "distortion-mip-debug/distortion-neutral/runtime.json",
+      "sha256": "221e26df441ecd023fcd8449746367939344ae52bfbe54dcb8d77a83c27f6ea4"
+    },
+    {
+      "path": "distortion-mip-debug/summary.json",
+      "sha256": "167d6bb0e2a4a571c7d68023490b47811d8f8ca32b5d784d446e02fea303d55e"
+    },
+    {
+      "path": "distortion-mip-debug.log",
+      "sha256": "c04e47cf0dbf2c69101fb606a34a5ca535e6dbdb7769ac0274d65fdd7dc463c4"
+    },
+    {
+      "path": "distortion-mip-release/distortion-biased/frames/capture_manifest.json",
+      "sha256": "d11f6055b40d64ff54b8d7026b71317f1414441edc26025b94be9a70bb436e36"
+    },
+    {
+      "path": "distortion-mip-release/distortion-biased/frames/frame_000000.png",
+      "sha256": "e85e19d767f34829bd46b0c541bf3acbb947323f6bbf2a855306b6fc25116326"
+    },
+    {
+      "path": "distortion-mip-release/distortion-biased/player.log",
+      "sha256": "732193b7e3cec56b688f34520c24ebd0393c4656dc94dcedf62a177dbfda09f8"
+    },
+    {
+      "path": "distortion-mip-release/distortion-biased/runtime.json",
+      "sha256": "221e26df441ecd023fcd8449746367939344ae52bfbe54dcb8d77a83c27f6ea4"
+    },
+    {
+      "path": "distortion-mip-release/distortion-documents/frames/capture_manifest.json",
+      "sha256": "a5857db4932d9346916c659ae892898c7293ead6f52fd4e9e3752765a496ef58"
+    },
+    {
+      "path": "distortion-mip-release/distortion-documents/frames/frame_000000.png",
+      "sha256": "e85e19d767f34829bd46b0c541bf3acbb947323f6bbf2a855306b6fc25116326"
+    },
+    {
+      "path": "distortion-mip-release/distortion-documents/player.log",
+      "sha256": "69fd254f3956d71cf75c5330ca1389c1bc460238ce47b7fffbea25d433ccbdc0"
+    },
+    {
+      "path": "distortion-mip-release/distortion-documents/runtime.json",
+      "sha256": "221e26df441ecd023fcd8449746367939344ae52bfbe54dcb8d77a83c27f6ea4"
+    },
+    {
+      "path": "distortion-mip-release/distortion-fixed/frames/capture_manifest.json",
+      "sha256": "35f33a117a2ff75a98305e19abe5120d0019c91335ccf377a2429584db32842d"
+    },
+    {
+      "path": "distortion-mip-release/distortion-fixed/frames/frame_000000.png",
+      "sha256": "e85e19d767f34829bd46b0c541bf3acbb947323f6bbf2a855306b6fc25116326"
+    },
+    {
+      "path": "distortion-mip-release/distortion-fixed/player.log",
+      "sha256": "79ad48b55c487ced9e8300d03a544ae6eb8e45e7f6759a5082979476dc724ff3"
+    },
+    {
+      "path": "distortion-mip-release/distortion-fixed/runtime.json",
+      "sha256": "221e26df441ecd023fcd8449746367939344ae52bfbe54dcb8d77a83c27f6ea4"
+    },
+    {
+      "path": "distortion-mip-release/distortion-neutral/frames/capture_manifest.json",
+      "sha256": "aebed046323af27f597875d6954f9687e44721167755c6a83c850ddb48dcc2b8"
+    },
+    {
+      "path": "distortion-mip-release/distortion-neutral/frames/frame_000000.png",
+      "sha256": "524b07c6b50e54048ec58944b801081bac7263a52ebcc4b3de551f0d7329d196"
+    },
+    {
+      "path": "distortion-mip-release/distortion-neutral/player.log",
+      "sha256": "26429bab518bded245d9566eea44423ef158eafea1a15ddd953905557b051a45"
+    },
+    {
+      "path": "distortion-mip-release/distortion-neutral/runtime.json",
+      "sha256": "221e26df441ecd023fcd8449746367939344ae52bfbe54dcb8d77a83c27f6ea4"
+    },
+    {
+      "path": "distortion-mip-release/summary.json",
+      "sha256": "98802c5d4c96ab1de5d1d28fb704688d0b3f55cf1ddd76bf5513202f43c67baa"
+    },
+    {
+      "path": "distortion-mip-release.log",
+      "sha256": "c04e47cf0dbf2c69101fb606a34a5ca535e6dbdb7769ac0274d65fdd7dc463c4"
+    },
+    {
+      "path": "distortion-pixel-history.json",
+      "sha256": "991d67b84779ea229e2c3eb03cff85943f1fe10ffa842af82d8c77bf6c423895"
+    },
+    {
+      "path": "distortion-receipt.json",
+      "sha256": "80344e3e886dfc8b46ae5d9026310285f65692d9c3836a6a7b2ee685c92e7041"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-bias/frames/capture_manifest.json",
+      "sha256": "88f3b73290b9202cad7959eca1dc7c4842b092e3ff0c2f5a71606a5070297f65"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-bias/frames/frame_000000.png",
+      "sha256": "5b4ae2dfcc96fd9e9cd64504e2d058f765f850170c418fb09d78d33409bba3bf"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-bias/player.log",
+      "sha256": "30bbc8e4fac10674706939af560b54a2a78b9c7971542370538fb0b9b8db6225"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-bias/runtime.json",
+      "sha256": "d8ab81ef4fd7976abfe86b83f3c01a3a4b413c2dde837edf30932c093ec0dc13"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-clock/frames/capture_manifest.json",
+      "sha256": "af488cd9671af61012b86f4c8fe381dcf7dcff530aa316bdccb231d103cb095b"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-clock/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-clock/player.log",
+      "sha256": "799945aeca852be38ae838ea9112709e4f9fc42d298b65abb9ecb440899bdcea"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-clock/runtime.json",
+      "sha256": "caa1f50a0e97b1a3bcbf58e1ee85bc062d704ac6fbef665b9b3d430484425765"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-disabled/frames/capture_manifest.json",
+      "sha256": "79bb2007ed554ab88071b2259c3a1d0829a94ac814fa30a9112ab91ab39f74b8"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-disabled/frames/frame_000000.png",
+      "sha256": "286933b6cd02da7d9986deaeaf514d3f0f7d3bc2ebbf04db3a7c85426c5468d3"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-disabled/player.log",
+      "sha256": "50f365a07cf09390675b3945946cfb9a6cc2533015214b286cc4608c42bf10a1"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-disabled/runtime.json",
+      "sha256": "85810f4c2859e1ae8e09116244fa299ab718ed95964658376850a7400f01a048"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-document/frames/capture_manifest.json",
+      "sha256": "0fe02e8c2246799273a7f08f80de5dc5b15815a41ac0abffa99111b05dd28951"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-document/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-document/player.log",
+      "sha256": "2c4d9693c5bd0e6aebf87355e37154686e4071bff2ec9e5b7888e5b957ca4b3d"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-document/runtime.json",
+      "sha256": "2e4d3f7ed38ed030537d70cc1ea544c05654341831d8bd80cd634d96bab0faf1"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-linear/frames/capture_manifest.json",
+      "sha256": "492d5a779093f34234cf8bc5c7d6f982fcb2baa2782d060a00d99c4823a09760"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-linear/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-linear/player.log",
+      "sha256": "691c161e4bb0bfe79f7445d8b6a89831c507ec5858e3dea2a175109f8cb36559"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-linear/runtime.json",
+      "sha256": "0826a34cb797df3492c249662fd8a3a1a2e382b7e50a82c9bd4218e962bda670"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-mask/frames/capture_manifest.json",
+      "sha256": "3edb498304c47fe098b508792f4b03f7cff55c2734699b1c65ac820d18a060ab"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-mask/frames/frame_000000.png",
+      "sha256": "0e68264cd7adc1857b8d239ed9d58324a30cd960e62c2e1a585bbdfcef25a988"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-mask/player.log",
+      "sha256": "41d17b19f540e1a4a799812ae4cf87e32baaf47ecc36dce99d2f2553f7212471"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-mask/runtime.json",
+      "sha256": "9a0220055ec142a7842ed0a81375f5aabb10e88a82a34260b1ae66a4abb9e092"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-red/frames/capture_manifest.json",
+      "sha256": "3ea43bba7c7196ff93d8d2d161b7141d4b6e75041d125b4bf667e697aea61e05"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-red/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-red/player.log",
+      "sha256": "917c608ccbacd96600c3e34c1158995e2dc1d60cc9a1395827479ff3db17de42"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-red/runtime.json",
+      "sha256": "3a0ae8a6cc49250f8d573d16b24ba8ae2c15a7dd5a0c91eac620e6c90fd14137"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-rg/frames/capture_manifest.json",
+      "sha256": "4fde80e2a614687360d3eba68622ce31a7b0e83b9f48ce1568ff251e328e0de1"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-rg/frames/frame_000000.png",
+      "sha256": "f1f2ea3c1b4ed2aa68bff9e1c27feab147b74b11205145155217075f70a01adb"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-rg/player.log",
+      "sha256": "f1f98113ed7458b1bbc258d6e6e929e9b4a0823d18097fdb407199e79915df15"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-rg/runtime.json",
+      "sha256": "17565ac2df582cbbfa2cb8b14771e87314204f6404034ab64170be76b960d3a7"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-srgb/frames/capture_manifest.json",
+      "sha256": "1f09486b1ddf5631f9d7308eb107810331c52ae8d20f9c7459df3ae348fcd9b1"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-srgb/frames/frame_000000.png",
+      "sha256": "286933b6cd02da7d9986deaeaf514d3f0f7d3bc2ebbf04db3a7c85426c5468d3"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-srgb/player.log",
+      "sha256": "23f81190504934fc4212556e0cc25239b3cf08728b020c8e418ee67dee756f6c"
+    },
+    {
+      "path": "distortion-release/fixed-distortion-srgb/runtime.json",
+      "sha256": "be82c430e141151707e94c9b0bc4fc6f29d48057d2a9afae65f9aa4a0a81b5ca"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-bias/frames/capture_manifest.json",
+      "sha256": "357692a87992c1e8c631f035c98640d190f02fadfdbea702eb316e63b4b76029"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-bias/frames/frame_000000.png",
+      "sha256": "5b4ae2dfcc96fd9e9cd64504e2d058f765f850170c418fb09d78d33409bba3bf"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-bias/player.log",
+      "sha256": "f857c3a669c480669728308b68417534ebfc47bae1f9df7a30479aa85a1e9311"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-bias/runtime.json",
+      "sha256": "06eccbc77fa86e081a00461fa66d015bb96a57e4e317f01139fd383ae7f3822f"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-clock/frames/capture_manifest.json",
+      "sha256": "9d4ba9c716d5100eb4464a2a0a28739f2951812235578aa94ff617ce32668c15"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-clock/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-clock/player.log",
+      "sha256": "d046f502fd32a5b8787683f17286c1a0e5ac3f491181398a2deadeef96889914"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-clock/runtime.json",
+      "sha256": "0f7716caaaddee016312b55beca9e4c46e71930a814f82ced317b40c9281ae55"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-disabled/frames/capture_manifest.json",
+      "sha256": "bc213cb0cf6eebc19612bf86c89cc6ea86f1b40f380d19871fafac321176adc2"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-disabled/frames/frame_000000.png",
+      "sha256": "286933b6cd02da7d9986deaeaf514d3f0f7d3bc2ebbf04db3a7c85426c5468d3"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-disabled/player.log",
+      "sha256": "f6c861057a834459eeb525d289e811ab2d4a918ff09502f0fd717675364d71cb"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-disabled/runtime.json",
+      "sha256": "9e078d5833f01c49d944483066423afff7befa9eb512802d591c2dc383e02acc"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-document/frames/capture_manifest.json",
+      "sha256": "b31ed27e75062911f6cf599a4fa8ec55651f255539da31bcae33a8a87b7a5846"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-document/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-document/player.log",
+      "sha256": "a086ad976154411770c18975a53993bb4f6d93d93c19bed59bb2be34fa872d11"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-document/runtime.json",
+      "sha256": "4d7fe08422347443d5f6fb26b339c57e429a3d5d4bb8605fbeef4d3a9cae192c"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-linear/frames/capture_manifest.json",
+      "sha256": "7a25e33ab32bee8f752cdf773bd6f6a85843f72e8e9458109f985baee4fc9ebc"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-linear/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-linear/player.log",
+      "sha256": "d2e7d8340912f83ac77aec2e0eedea42094a18c8bacb2ade080b79d5304634f8"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-linear/runtime.json",
+      "sha256": "1b94bb0cc12499ed0614df8f7e1bfe0a8bd9534a16b38d85f4b9c90dc4ee6df2"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-mask/frames/capture_manifest.json",
+      "sha256": "51f50fbf45aff11a88e31cc8f966407e973b3f0aed2519b98ea169dfd442dc61"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-mask/frames/frame_000000.png",
+      "sha256": "0e68264cd7adc1857b8d239ed9d58324a30cd960e62c2e1a585bbdfcef25a988"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-mask/player.log",
+      "sha256": "8fa0d7f304ee8c125b162cfb14e601964c048ec19f28dcc423cb41565a1e417c"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-mask/runtime.json",
+      "sha256": "8a1f99a593845b0d400a1fe8a06243fbd1b77728b1c7eba385839718a9464c16"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-red/frames/capture_manifest.json",
+      "sha256": "d771b5a02b545f9b46cf2bda42edec6ebf0969a3000955c89161a9f3c64327d1"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-red/frames/frame_000000.png",
+      "sha256": "e1b3939534cf69bddddf3d8c1940d241493b42efeecdc04c80280efa663b3cd7"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-red/player.log",
+      "sha256": "a6b889e13801f8e4ab9e784f05c70add74cbf4ad59e816a199c5247de3108659"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-red/runtime.json",
+      "sha256": "8f1ba29782497cde41f178c04f9e908c0aaa623aba4d7bf254c17e44d62a370a"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-rg/frames/capture_manifest.json",
+      "sha256": "5950e1e2280710939b9d578f285bef689e84d25ac2583c56a82d5092dc227502"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-rg/frames/frame_000000.png",
+      "sha256": "f1f2ea3c1b4ed2aa68bff9e1c27feab147b74b11205145155217075f70a01adb"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-rg/player.log",
+      "sha256": "3432dd272bfd93c797955a90b2cd8d9c4a2cc54e2c55b3fb86e1ff8a486e6234"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-rg/runtime.json",
+      "sha256": "2b8a78b4c1a01663b9ffccafc6e3bf63fa7463ba733c00e6b7f4820633215a14"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-srgb/frames/capture_manifest.json",
+      "sha256": "1e53641b42b0363f1f1c865b1df2715287fa05f8c8e64a920abe5c23cb013f5a"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-srgb/frames/frame_000000.png",
+      "sha256": "286933b6cd02da7d9986deaeaf514d3f0f7d3bc2ebbf04db3a7c85426c5468d3"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-srgb/player.log",
+      "sha256": "03db95fe34e86840032a00b5127cf87abe6b6a98b7a94d33eeec0a4206d3aa2f"
+    },
+    {
+      "path": "distortion-release/indexed-distortion-srgb/runtime.json",
+      "sha256": "81fc02316936ad73e3a45a525b23e134f66a5f74ada6226c6616911c7d3e38d2"
+    },
+    {
+      "path": "distortion-release/summary.json",
+      "sha256": "9bb37bcb7c37380a23aa2201a9e82860c1f648c2256c24252751bc82d71cd1a2"
+    },
+    {
+      "path": "distortion-release.log",
+      "sha256": "c9b5d0293fc9ce927a4319701760f60cae9285bcb60157cc7ece2a94f391b5cd"
+    },
+    {
+      "path": "distortion-witness-points.json",
+      "sha256": "85964290dcee0c0770afac685964c01309077a3613bdaf04eb7e49885c9ffd22"
+    },
+    {
+      "path": "event-9078/input-indices.bin",
+      "sha256": "46e0cfc6f882aba6c5c99c3069227d28c074999b56c2b74a25ee3ed40e2a9b15"
+    },
+    {
+      "path": "event-9078/input-vb-0.bin",
+      "sha256": "6ff8afa9f78b0dafc7695f7ef406ce8c47b129240bfc3fbcc58bc9244f2300b9"
+    },
+    {
+      "path": "event-9078/input-vb-1.bin",
+      "sha256": "78d54f1a1f691f450df75f2a75bf931cd23b92111df390e29cb634e178bdaf7e"
+    },
+    {
+      "path": "event-9078/input-vb-2.bin",
+      "sha256": "6ff8afa9f78b0dafc7695f7ef406ce8c47b129240bfc3fbcc58bc9244f2300b9"
+    },
+    {
+      "path": "event-9078/input-vb-3.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-9078/input-vb-4.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-9078/inputs.json",
+      "sha256": "496b4e5068e04157ee5e3e70c2d2893be1bf7605a937c7cb35d375e3f11d8945"
+    },
+    {
+      "path": "event-9078/post-indices-0.bin",
+      "sha256": "46e0cfc6f882aba6c5c99c3069227d28c074999b56c2b74a25ee3ed40e2a9b15"
+    },
+    {
+      "path": "event-9078/post-vertices-0.bin",
+      "sha256": "dbc6c7a66c36b69bbd3c5491f9a2193f75d4bec777fc5418fd8cbbac7ca18c56"
+    },
+    {
+      "path": "event-9094/input-indices.bin",
+      "sha256": "46e0cfc6f882aba6c5c99c3069227d28c074999b56c2b74a25ee3ed40e2a9b15"
+    },
+    {
+      "path": "event-9094/input-vb-0.bin",
+      "sha256": "6ff8afa9f78b0dafc7695f7ef406ce8c47b129240bfc3fbcc58bc9244f2300b9"
+    },
+    {
+      "path": "event-9094/input-vb-1.bin",
+      "sha256": "78d54f1a1f691f450df75f2a75bf931cd23b92111df390e29cb634e178bdaf7e"
+    },
+    {
+      "path": "event-9094/input-vb-2.bin",
+      "sha256": "6ff8afa9f78b0dafc7695f7ef406ce8c47b129240bfc3fbcc58bc9244f2300b9"
+    },
+    {
+      "path": "event-9094/input-vb-3.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-9094/input-vb-4.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-9094/inputs.json",
+      "sha256": "46067b3bbd4804864e22bc123956c8e2b15db09bbf70ed21a71219166669b01e"
+    },
+    {
+      "path": "event-9094/post-indices-0.bin",
+      "sha256": "46e0cfc6f882aba6c5c99c3069227d28c074999b56c2b74a25ee3ed40e2a9b15"
+    },
+    {
+      "path": "event-9094/post-vertices-0.bin",
+      "sha256": "e07db41f7b861133026ed3f4b2fd8a2ad93ffca1b320ca4d2d614646d31abd60"
+    },
+    {
+      "path": "eye-layout-debug/combined/frames/capture_manifest.json",
+      "sha256": "d989ece18299a1d6a8fe252f61542d1db7a0a1402a25095b0975a113f04f7648"
+    },
+    {
+      "path": "eye-layout-debug/combined/frames/frame_000000.png",
+      "sha256": "c27e591f260e7eed4f50f809de12ccf51d4e83507531d71bf36eed57f1731493"
+    },
+    {
+      "path": "eye-layout-debug/combined/player.log",
+      "sha256": "a0bc704784e651e0573213d5cb4daad28eee7cc4093b65a99e16f6a825ae7bf3"
+    },
+    {
+      "path": "eye-layout-debug/combined/runtime.json",
+      "sha256": "63e82cd4c400486bed7823bc3517dfbb405024c6e7d2d14fc2d2693ea03e9b71"
+    },
+    {
+      "path": "eye-layout-debug/document/frames/capture_manifest.json",
+      "sha256": "6795c14eb7a9d582cea0cfc2d729cc45f465cccfb756535e6f8e5e862d65a4fa"
+    },
+    {
+      "path": "eye-layout-debug/document/frames/frame_000000.png",
+      "sha256": "c27e591f260e7eed4f50f809de12ccf51d4e83507531d71bf36eed57f1731493"
+    },
+    {
+      "path": "eye-layout-debug/document/player.log",
+      "sha256": "52f33db08d6a806031eb3113964071c77fae72c192ca498918c67111acfd4b51"
+    },
+    {
+      "path": "eye-layout-debug/document/runtime.json",
+      "sha256": "0390b5ccec0f30ad6b9369f26d81853de7b42dcf7b55f34024872b268add9347"
+    },
+    {
+      "path": "eye-layout-debug/fixed/frames/capture_manifest.json",
+      "sha256": "9dd1de5c21fa61c29b67d58c0fa6f2c8bf1098f6b5e0424aa98d1b4a24bb02d3"
+    },
+    {
+      "path": "eye-layout-debug/fixed/frames/frame_000000.png",
+      "sha256": "c27e591f260e7eed4f50f809de12ccf51d4e83507531d71bf36eed57f1731493"
+    },
+    {
+      "path": "eye-layout-debug/fixed/player.log",
+      "sha256": "174e8064c5d6462f02e0fe900acd5b0386534a0fd5fc37fece2ca597858996e0"
+    },
+    {
+      "path": "eye-layout-debug/fixed/runtime.json",
+      "sha256": "06a4b90e89f523308d85f4880ea478ea35c96d2ddaac778c4cb0a85b593457f7"
+    },
+    {
+      "path": "eye-layout-debug/summary.json",
+      "sha256": "7757de6b44eaa663cc9a266502e29e56cd866b7980946fe57c1d5de313ba46d4"
+    },
+    {
+      "path": "eye-layout-debug.log",
+      "sha256": "a0e112f7f28a368b7d87616574c99a8d384c9237622c510fbf47a9cc03dcc48b"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9078-0.dds",
+      "sha256": "2b154549251723088d0d56b48b64e2e38d6409f1a9700bbdb128457f973d0629"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9078-0.dds.azmeta",
+      "sha256": "0a309e17fccadb010fa6d1b1081e00394599d383571aa7d8e77e2c721cbff703"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9078-1.dds",
+      "sha256": "51f6ea3119023d915b1ae2a61076d02cee14eea335ca201b2175535d17d0c2af"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9078-1.dds.azmeta",
+      "sha256": "7239259cbbf0216e08088228383d797c9d6e90751fe6b26cf294ac3db7763ddd"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9078-2.dds",
+      "sha256": "1368ac5275884a041e9dbe27392f52ab9a794df83cc056e7c59f199236e1a4f3"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9078-2.dds.azmeta",
+      "sha256": "7294a53de364c4b1bcf5dfaedc4bed51da2e15abdb42f666b157da735dd8340a"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9094-0.dds",
+      "sha256": "410479cff40da961dfcfe04a47397c9b01704df1d4d109adaf4ba48a08ebe8bf"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9094-0.dds.azmeta",
+      "sha256": "4c31476b747eacc7e97babbd41b0dee14ca80243f1701f17676d1cccc707d804"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9094-1.dds",
+      "sha256": "51f6ea3119023d915b1ae2a61076d02cee14eea335ca201b2175535d17d0c2af"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9094-1.dds.azmeta",
+      "sha256": "3b636a76d8f1d2f740e14538c8fd84adbeaefec87c6a0d8952ca2fe6c1ff9dff"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9094-2.dds",
+      "sha256": "1368ac5275884a041e9dbe27392f52ab9a794df83cc056e7c59f199236e1a4f3"
+    },
+    {
+      "path": "full-candidate/captured-distortion/9094-2.dds.azmeta",
+      "sha256": "1a678d6c39466676d1c327d020a37858b0d2bfe233962d107f888926d7b7a8cd"
+    },
+    {
+      "path": "full-candidate/captured-distortion/event-9078.gltf",
+      "sha256": "6733778b3961ff076c13a6f016cd5492fe63db63a70246b46f8ad24b3d120c4a"
+    },
+    {
+      "path": "full-candidate/captured-distortion/event-9078.gltf.azmeta",
+      "sha256": "2165e2aeb091d7bd7449acd96b5466802a33790a90eccffc2c677fef669369a9"
+    },
+    {
+      "path": "full-candidate/captured-distortion/event-9094.gltf",
+      "sha256": "e4bf86535635c215a0f112dc08f36d4db9c3a053f0e2bc42f9a0b996c47aa491"
+    },
+    {
+      "path": "full-candidate/captured-distortion/event-9094.gltf.azmeta",
+      "sha256": "5ce2a3138b17be269ee19c216aebea654886a46c9bba0444f0068e0d79018a22"
+    },
+    {
+      "path": "full-candidate/enclosure-distortion.azureproject",
+      "sha256": "c86f4286332850d9f21faa8a0f432805d46c5979694779547c758dee13aabe8a"
+    },
+    {
+      "path": "full-candidate/native-gi/enclosure-distortion.azurelevel",
+      "sha256": "e400b3405c051e21f74178682ea2a7b77d07029552760b48ef1e0eb396156eda"
+    },
+    {
+      "path": "isolated-component-gpu.json",
+      "sha256": "20bce00bb6ba06faec9037634d26359bf6f3d82b3730f95b5ed638cd3ad2cf87"
+    },
+    {
+      "path": "isolated-debug-fixed/frames/capture_manifest.json",
+      "sha256": "a5de53d6a555f0ecb9eb3881d0cedc1777767bab27da8752a7b92d38e6b0da85"
+    },
+    {
+      "path": "isolated-debug-fixed/frames/frame_000000.png",
+      "sha256": "a522670c2e841e4474af8d7818e03a24562dd6528b5ac7bbf9bd20211a3b1481"
+    },
+    {
+      "path": "isolated-debug-fixed/runtime.json",
+      "sha256": "07dd7fcb2ed935f26dfeb8c0fbc3a1e27ee65f34cf75a50486b4a2519d1bc517"
+    },
+    {
+      "path": "isolated-debug-fixed.log",
+      "sha256": "e85efe09c2477a66eff8ff73ca845011f83a037fb65b3285981d1d5a3fd3e82a"
+    },
+    {
+      "path": "isolated-debug-indexed/frames/capture_manifest.json",
+      "sha256": "28f69880dd3ec010e7971a9bb988fdaddbd7c22f311d25ef9ecc7f574235463d"
+    },
+    {
+      "path": "isolated-debug-indexed/frames/frame_000000.png",
+      "sha256": "a522670c2e841e4474af8d7818e03a24562dd6528b5ac7bbf9bd20211a3b1481"
+    },
+    {
+      "path": "isolated-debug-indexed/runtime.json",
+      "sha256": "07dd7fcb2ed935f26dfeb8c0fbc3a1e27ee65f34cf75a50486b4a2519d1bc517"
+    },
+    {
+      "path": "isolated-debug-indexed.log",
+      "sha256": "8a617afa8286f2b88da061739e604ca75e651a83989b6c23cc4a743c0f214c10"
+    },
+    {
+      "path": "isolated-release-fixed/frames/capture_manifest.json",
+      "sha256": "851635a4b8ca0e70f11310431fb3dfeae5d5feb5c17349fd932bceebf005777c"
+    },
+    {
+      "path": "isolated-release-fixed/frames/frame_000000.png",
+      "sha256": "a522670c2e841e4474af8d7818e03a24562dd6528b5ac7bbf9bd20211a3b1481"
+    },
+    {
+      "path": "isolated-release-fixed/runtime.json",
+      "sha256": "07dd7fcb2ed935f26dfeb8c0fbc3a1e27ee65f34cf75a50486b4a2519d1bc517"
+    },
+    {
+      "path": "isolated-release-fixed.log",
+      "sha256": "a7d561bef3da7c2fe420534c6c32ecee318b7952f83e7f3e809ca31f7660ce7f"
+    },
+    {
+      "path": "isolated-release-indexed/frames/capture_manifest.json",
+      "sha256": "25051a98204d39918c973e8a0efc95f25a80a4ee3819ac3b83389b407ec78e20"
+    },
+    {
+      "path": "isolated-release-indexed/frames/frame_000000.png",
+      "sha256": "a522670c2e841e4474af8d7818e03a24562dd6528b5ac7bbf9bd20211a3b1481"
+    },
+    {
+      "path": "isolated-release-indexed/runtime.json",
+      "sha256": "07dd7fcb2ed935f26dfeb8c0fbc3a1e27ee65f34cf75a50486b4a2519d1bc517"
+    },
+    {
+      "path": "isolated-release-indexed.log",
+      "sha256": "cc6493ad782f619c483ecc146cfc418979a704ab8c6a84974f45641ddd200076"
+    },
+    {
+      "path": "main-control-release/frames/capture_manifest.json",
+      "sha256": "19e8af833e89f1dda74664a9b9558821351cc69b77106e7358f48a72a51fb13a"
+    },
+    {
+      "path": "main-control-release/frames/frame_000000.png",
+      "sha256": "c8b74dbac7a858d6bfa870eb6552238b2eb719d485cc518a790caeba28e032df"
+    },
+    {
+      "path": "main-control-release/runtime.json",
+      "sha256": "5119c3fe63d72d115bbfe6a239d3ed1df518e87bb1f4f226f93c3ae293d5f05b"
+    },
+    {
+      "path": "main-control-release.log",
+      "sha256": "9dbdf05503f0beef1102c99027503b81e54336bebb2f79621e3314ba28536715"
+    },
+    {
+      "path": "main-distortion-comparison.json",
+      "sha256": "a833d4456e6ed506d0fa6a2fbbbbcb80ec268eb4857f5ce8618783bd997c884a"
+    },
+    {
+      "path": "main-distortion-release/frames/capture_manifest.json",
+      "sha256": "4b7debe3fce41b0d220f3df8a8081e78a8b9eb2e27582701fa294352a3dfc977"
+    },
+    {
+      "path": "main-distortion-release/frames/frame_000000.png",
+      "sha256": "5d237aad1db5afd4b8eced60ae62c78e83bc0af6228e8648a9d6a1b64e786e1f"
+    },
+    {
+      "path": "main-distortion-release/runtime.json",
+      "sha256": "ebf29f381d5b117af93fc8db92e7a2bfa0bc549fa4153dd82782af4a913acaec"
+    },
+    {
+      "path": "main-distortion-release.log",
+      "sha256": "d7579ccabfa285659ab0f2e216d9864755ca6b2024cafa6ea2eb5dc186204c9a"
+    },
+    {
+      "path": "material-validation.json",
+      "sha256": "426142bd95b240488a06cb2c8cb23d73e1e3a9f2a4fb53b56da913fc0170d52b"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip0.bin",
+      "sha256": "7e652d359954049cffd9ee3a516e4de792e9aba24c1b59b9096dbacf9dcf2fbb"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip1.bin",
+      "sha256": "fc8a2d95643aa2a460e99a0c8eea31ef5b8b0695d7b4c3b8d28d64b161a10ae3"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip2.bin",
+      "sha256": "be03e85839f308346b6a745cdd705d50900111e696fe53e25c55232f4e5a0c51"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip3.bin",
+      "sha256": "b5815dc1bdba80435fdb3a7ebeaae2e74c478d595c295b79674b6155619d841c"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip4.bin",
+      "sha256": "37acd2922fdd07db511b8ea22f65a13e0bbc39436cd400f0a2356a130849cb14"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip5.bin",
+      "sha256": "7d617efa073934c53677817e6e6275381813aee63e5dc5e69d80c324e136bc72"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip6.bin",
+      "sha256": "94afd51b3ab6d27fbb95bb3174704cad5c64c5351df4364a213287120f404898"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip7.bin",
+      "sha256": "cd7aea46789c93e4355c4284c3b958b8e5dd11fb6db9eaf5a235ccc5e7b2444d"
+    },
+    {
+      "path": "native-mips/ResourceId-10207-mip8.bin",
+      "sha256": "b7dbe7106ec7d0492d2671b64997cde12045c6e77bf853c1a7fbf66ee5249b9d"
+    },
+    {
+      "path": "native-mips/ResourceId-10229-mip0.bin",
+      "sha256": "d7a0071f1be2283e3b32124a3a161c785585b6f179ca396ee90ac64b791327d7"
+    },
+    {
+      "path": "native-mips/ResourceId-10229-mip1.bin",
+      "sha256": "be991d09ffb0e9a571c1b5c7dcdc0bd0bdf1962d613384fc3e82e1c6c96a7d79"
+    },
+    {
+      "path": "native-mips/ResourceId-10229-mip2.bin",
+      "sha256": "3c195ab3712c84990f3a2930fac4187870d08ca310a21aaa81421cf2b003c1f6"
+    },
+    {
+      "path": "native-mips/ResourceId-10229-mip3.bin",
+      "sha256": "7d06e741054b924b9b18899f1bb084db1c8e83346cb9dc1764f3febc1f3601c5"
+    },
+    {
+      "path": "native-mips/ResourceId-10229-mip4.bin",
+      "sha256": "dae84d03c673ffc806ffe092e032fa7ae8be0ffa1b5649ef76f5a879ee0272b9"
+    },
+    {
+      "path": "native-mips/ResourceId-10229-mip5.bin",
+      "sha256": "199399f9f9d2836f3a31587082ab35cc5c86ab5e087b209fd5341d8ae2eebea7"
+    },
+    {
+      "path": "native-mips/ResourceId-10229-mip6.bin",
+      "sha256": "199399f9f9d2836f3a31587082ab35cc5c86ab5e087b209fd5341d8ae2eebea7"
+    },
+    {
+      "path": "native-mips/ResourceId-12227-mip0.bin",
+      "sha256": "f0b5daaadbe9b711b901368e02e054a336fbeb0575c9118520d483c58cf1827b"
+    },
+    {
+      "path": "native-mips/ResourceId-12227-mip1.bin",
+      "sha256": "9bd8c0001817816ce315c4ae09aed8787b99c1d7f397380cbe6c45cc08f36236"
+    },
+    {
+      "path": "native-mips/ResourceId-12227-mip2.bin",
+      "sha256": "66f3561746bf9721029e9d3551641588af46f9747474873bf7cea4ee8ffec0f4"
+    },
+    {
+      "path": "native-mips/ResourceId-12227-mip3.bin",
+      "sha256": "c59738a9d9bd456f523c5863b9fcc5af5fae715223c383f3451377bdfe583d76"
+    },
+    {
+      "path": "native-mips/ResourceId-12227-mip4.bin",
+      "sha256": "fa8cafe662fcd34752d4ec1e4e9f2768658e1ef8adf793db38988019910027a1"
+    },
+    {
+      "path": "native-mips/ResourceId-12227-mip5.bin",
+      "sha256": "2b340ecfa25a594a8b48c66ab269b7196a33d8ae5ddfb2555fc0e8afd7b7c824"
+    },
+    {
+      "path": "native-mips/ResourceId-12227-mip6.bin",
+      "sha256": "05767424b86ee5249811b87bd9aa1e1bf579c50e2f80027dbeb78ad78a0be688"
+    },
+    {
+      "path": "native-mips/ResourceId-12227-mip7.bin",
+      "sha256": "d068b07008be11d37eb227c6b2270bb81f3e05d4674fc3b33dfe3b3b027213d3"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip0.bin",
+      "sha256": "f16c6d3ee3b489794106b622e9c560435959192364aa4aea88500a0047180fcf"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip1.bin",
+      "sha256": "9c820ff1c53b2b796a9613c6d886e3e94d1f0fb41ddf1bcb18dde0bb23574a66"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip2.bin",
+      "sha256": "856ef308d3e8b9ee05a17bd314b1a157867798858cccf5bdb08a649c7f13f197"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip3.bin",
+      "sha256": "fae9c909571f418db72afc059c0bd26971f6ecaa489cf47a43ed90d349bed440"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip4.bin",
+      "sha256": "637ce5dba6a0b62a2c33430ddf7a8f36b4ec54b8eab4025f208820a295179f9b"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip5.bin",
+      "sha256": "4ab5a81e24965c7980fb02f0f5417334f8c0ceca41eaea7da9ff379d52e9df02"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip6.bin",
+      "sha256": "50babc37d2c923716e4d4a6f2e5690920f46f2ecafd2cb97376e83e06b0372c3"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip7.bin",
+      "sha256": "ae64b8282d20bd7bba7867e2b5b1050eefe3a3d63e2e35ba737c02f44012220a"
+    },
+    {
+      "path": "native-mips/ResourceId-12229-mip8.bin",
+      "sha256": "87b7b90c6a4f144df210b1eb36fecee5dc202505eb1ff141ec35ce678c088c26"
+    },
+    {
+      "path": "native-mips/ResourceId-359-mip0.bin",
+      "sha256": "e0205519f6bcde4208fd5e9aece72f518eb4ce5879ca1832a6cb221d534a2d7e"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow/frames/capture_manifest.json",
+      "sha256": "a53017ee90248400c972af5485f8476a8d2355438b6bacc1258bfd395a706411"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow/frames/frame_000000.png",
+      "sha256": "25fc720dc864bb868c306fe816ffb69e88c5dca0b16c70d304161557ed690f87"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow/player.log",
+      "sha256": "86886187aa94220eea7e669a6670e408ab84fca71c0f7138cd8130b68b877483"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow/runtime.json",
+      "sha256": "5dbb1cd5558024d758bdc4e0d12923a9b861e57777b63ccd5a304ad49b2fcf79"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow-document/frames/capture_manifest.json",
+      "sha256": "0db2f0223503ed8dfb00049d3814889bcd0bcad4b619eb1a1dd4c316504d327a"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow-document/frames/frame_000000.png",
+      "sha256": "25fc720dc864bb868c306fe816ffb69e88c5dca0b16c70d304161557ed690f87"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow-document/player.log",
+      "sha256": "a71cf41110c8ef72ceba64a70ce8fe8a38ac289800816c504c65f9675ac8e5f0"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow-document/runtime.json",
+      "sha256": "5dbb1cd5558024d758bdc4e0d12923a9b861e57777b63ccd5a304ad49b2fcf79"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow-fixed/frames/capture_manifest.json",
+      "sha256": "eaf1050da4fa3ce991330eff5706bf95915898c63c8cbf49487076453df947b3"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow-fixed/frames/frame_000000.png",
+      "sha256": "25fc720dc864bb868c306fe816ffb69e88c5dca0b16c70d304161557ed690f87"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow-fixed/player.log",
+      "sha256": "e56c66e2b0607f63940584760d011c13ba65e9f1288f505107c3838e1553fd98"
+    },
+    {
+      "path": "npr-layout-debug/material-colors-character-main-shadow-fixed/runtime.json",
+      "sha256": "5dbb1cd5558024d758bdc4e0d12923a9b861e57777b63ccd5a304ad49b2fcf79"
+    },
+    {
+      "path": "npr-layout-debug/summary.json",
+      "sha256": "633e304458a01911175be5f33dd11a07dac3cbe439b63f4b96d2e0cacfee304a"
+    },
+    {
+      "path": "npr-layout-debug.log",
+      "sha256": "426e92f8e3e7ac7582b17bc583d5d3b1ca457d18260c285179e76a14afc88bfa"
+    },
+    {
+      "path": "parser-red-build.log",
+      "sha256": "3d5ea2021aa3706447ba1cdf421c55101b4f17ba2942d7715e2477987d34ddf6"
+    },
+    {
+      "path": "parser-red.log",
+      "sha256": "fe9c20e37cc6b48473041be10bf5e972a14eb12f136ca715ae35ac2f037e85f4"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "e26d986a3c5a6aaaf766e7dffcfb57fa99862924fcbc697290498d6334028f00"
+    },
+    {
+      "path": "prepare_distortion.py",
+      "sha256": "1370986282cc620b96ad38e29b478d5f40cd826bf6486817de29164334f1a858"
+    },
+    {
+      "path": "probe_distortion_pixels.py",
+      "sha256": "3c765a1db219728e83cef5931babe0cf34c1cb57e74d10c6216d129554879df9"
+    },
+    {
+      "path": "quantized-oracle.log",
+      "sha256": "a4119cfab6c31268a4d02d5d657ae345aa5cc59d118ca25d5baa9d7a2c4fd684"
+    },
+    {
+      "path": "raster-quantized-oracle.log",
+      "sha256": "fb24ef42febaecddebbb77086d7a4be5f0131415ebc4352f54ba72b1fe0b1fb1"
+    },
+    {
+      "path": "release-build.log",
+      "sha256": "bea4c793e8fa17ee64112caa3917d16f54975a1289c7a06dafdaf9ff04b88c1d"
+    },
+    {
+      "path": "release-checks.log",
+      "sha256": "4e4f8a05f3b801640b79fae60053581b56cc09f5ec025ea98f447b8e4ec816ef"
+    },
+    {
+      "path": "rim-layout-debug/material-facing/frames/capture_manifest.json",
+      "sha256": "741b95058636f0d0d3dfe78600eb3a8b9064ee0827d8f7bd264f3a8318c7b4e3"
+    },
+    {
+      "path": "rim-layout-debug/material-facing/frames/frame_000000.png",
+      "sha256": "390e63166e29e582b9aab707573ffa8c5664a9aafb581732ac1c21946c4c873a"
+    },
+    {
+      "path": "rim-layout-debug/material-facing/player.log",
+      "sha256": "a3e453a38f67504ff70fc3216d8b512716ca878003faba68d2440c194fb51691"
+    },
+    {
+      "path": "rim-layout-debug/material-facing-fixed/frames/capture_manifest.json",
+      "sha256": "e044d685dd6e38695555446836afe7560a7a59f9e2ca50bc7a6afef66ecdd21c"
+    },
+    {
+      "path": "rim-layout-debug/material-facing-fixed/frames/frame_000000.png",
+      "sha256": "390e63166e29e582b9aab707573ffa8c5664a9aafb581732ac1c21946c4c873a"
+    },
+    {
+      "path": "rim-layout-debug/material-facing-fixed/player.log",
+      "sha256": "72cd5f42537f1acfc72704527f94a136ed0ec97c7ae13df14213ead9c181d508"
+    },
+    {
+      "path": "rim-layout-debug/summary.json",
+      "sha256": "a9d576cf6f65546dca8e991d39dd66ef07f6dfe5ad6e11ef8f2d7fb18b87d6a9"
+    },
+    {
+      "path": "rim-layout-debug.log",
+      "sha256": "75ad950c7cd867dcb266e047d1363d636fa9dca22e4667e7d812079b5c7dc420"
+    },
+    {
+      "path": "run_actual_checks.py",
+      "sha256": "d06a1de794499ffd689c6e2ff38128231f7ed70ce66092d8114321532f7cc7be"
+    },
+    {
+      "path": "run_debug_regressions.py",
+      "sha256": "bb299b4f0942d5c77aee50772e747f357b621e8b41b1ef93719ffb4781f54d88"
+    },
+    {
+      "path": "run_release_checks.py",
+      "sha256": "833f9bcbe811ff828b993a35fba0e51f5dd17b0267bbec09a4e73f98ebac424a"
+    },
+    {
+      "path": "runtime-inputs.json",
+      "sha256": "2c73e7f840c6f030faf392d2742adfcf57adbad88bdde14b5039880626c52744"
+    }
+  ],
+  "tests": {
+    "cpuPerConfiguration": 5,
+    "distortionGpuPerConfiguration": 18,
+    "mipGpuPerConfiguration": 4,
+    "coverageGpuDebug": 22,
+    "nprNonzeroIndexDebug": 8,
+    "materialValidators": 4,
+    "actualComponentCaptures": 4,
+    "defaultChangedChannels": 0,
+    "maximumLinearError": 0.001879149960499954,
+    "nativeAlphaEstimateMaximumDifference": 0.00048777802738858567
+  },
+  "mainCamera": {
+    "status": "captured",
+    "defaultChangedChannels": 0,
+    "changedPixels": 26550,
+    "priorMeanAbsoluteByteError": 14.234761284722222,
+    "candidateMeanAbsoluteByteError": 14.136346390335648,
+    "regions": [
+      {
+        "event": 9078,
+        "sourceContributingPixels": 19854,
+        "priorError": 29.159094724824552,
+        "candidateError": 17.25941036231154
+      },
+      {
+        "event": 9094,
+        "sourceContributingPixels": 4815,
+        "priorError": 57.15638629283489,
+        "candidateError": 31.10827275874005
+      }
+    ]
+  },
+  "content": {
+    "vfxInstances": 30,
+    "opaqueBoxInstances": 22,
+    "materialLayoutVersion": 16,
+    "materialRows": 21,
+    "materialBytes": 336,
+    "textureSlots": 9,
+    "shaderArtifactsPerConfiguration": 193
+  },
+  "limitations": [
+    "Native CPU alpha reconstruction approximates hardware sampling; measured differences remain explicit.",
+    "Captured poses and clock offsets retained; continuous emitter motion remains open.",
+    "Additional central-emissive programs, full background and formal NR0 through NR12 gates remain open."
+  ]
+}

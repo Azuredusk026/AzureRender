@@ -533,6 +533,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/remaining-vfx-combinations.json",
       "primaryProject": "build/runs/20261028-063534-native-remaining-layer-combinations-563a11/full-candidate/enclosure-remaining.azureproject"
+    },
+    {
+      "path": "runs/20261028-064046-native-base-uv-distortion-e1de77",
+      "pathBase": "build",
+      "purpose": "基础纹理坐标扰动、作者层级及实际墙面验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/base-uv-distortion.json",
+      "primaryProject": "build/runs/20261028-064046-native-base-uv-distortion-e1de77/full-candidate/enclosure-distortion.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
