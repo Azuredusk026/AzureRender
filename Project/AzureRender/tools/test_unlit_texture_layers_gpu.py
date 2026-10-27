@@ -64,16 +64,22 @@ def run(player,root,expected_validation='any',selected=None):
 
     def capture(name,kind,*,fixed=False,frames=1):
         nonlocal clear_background
-        p=profile();model=copy.deepcopy(template);opacity=.4 if kind in ('node-opacity','coverage-clamp','coverage-soft') else 1
+        p=profile();model=copy.deepcopy(template);opacity=.4 if kind in ('node-opacity','coverage-clamp','coverage-soft','view-soft') else 1
         delta=.75 if kind in ('soft-half','node-opacity','diagonal','orthographic') else 2
         if kind=='soft-zero':delta=0
         if kind=='depth-occluded':delta=-.25
         if kind=='coverage-clamp':p['tint'][3]=3;delta=1.125
         if kind=='coverage-soft':p['tint'][3]=2;delta=.75
         if kind=='coverage-negative':p['tint'][3]=-1
+        if kind.startswith('view-'):
+            p['viewDepthFade']=dict(near=[2,4],far=[10,20])
+            if kind=='view-far':p['viewDepthFade']=dict(near=[0,1],far=[2,4])
+            if kind=='view-zero':p['viewDepthFade']=dict(near=[4,5],far=[10,20])
+            if kind=='view-soft':p['tint'][3]=3;delta=.75
         pixels=base_pixel.reshape(1,1,4);second=second_pixel.reshape(1,1,4)
         colors=dict(schemaVersion=1,exposureGain=1,saturation=1,colorGain=[1,1,1])
         if kind in ('mask','blend','document-mask'):p['layers'].append(layer('mask' if kind=='document-mask' else kind,1))
+        if kind=='view-mask':p['layers'].append(layer('mask',1))
         if kind=='red-alpha':p['layers'][0]['sampleMode']='red-as-alpha'
         if kind in ('highlight','node-opacity'):p['tint']=[1.3,1.3,1.3,1];p['highlightExpansion']['gain']=3
         if kind=='frame-color':colors.update(exposureGain=1.5,saturation=.25,colorGain=[.75,1,.5])
@@ -107,9 +113,9 @@ def run(player,root,expected_validation='any',selected=None):
             model['materials'][0]['pbrMetallicRoughness']=dict(baseColorFactor=[.8,.1,.05,1])
         model['extensionsUsed']=['AZURE_node_opacity'];model['nodes'][0]['extensions']={'AZURE_node_opacity':dict(schemaVersion=1,opacity=opacity)}
         (assets/'surface.gltf').write_text(json.dumps(model))
-        yaw=15 if kind=='diagonal' else 0;camera_x=3*math.tan(math.radians(yaw))
+        yaw=15 if kind in ('diagonal','view-diagonal') else 0;camera_x=3*math.tan(math.radians(yaw))
         camera=component('azure.camera',dict(enabled=True,priority=1,fieldOfView=55,nearPlane=.1,farPlane=20,
-            orthographic=kind=='orthographic',orthographicHeight=2));camera['version']=2
+            orthographic=kind in ('orthographic','view-orthographic'),orthographicHeight=2));camera['version']=2
         nodes=[dict(id='surface',resourceId='surface',components={'azure.transform':component('azure.transform',dict(translation=[0,0,0]))}),
             dict(id='camera',components={'azure.transform':component('azure.transform',dict(translation=[camera_x,0,3],rotation=[0,yaw,0])), 'azure.camera':camera})]
         if document_id:nodes[0]['materialSlots']={'surface':document_id}
@@ -135,7 +141,7 @@ def run(player,root,expected_validation='any',selected=None):
         if expected_validation!='any':assert validation==(expected_validation=='enabled'),name
         report=json.loads((out/'runtime.json').read_text());assert not report['scriptErrors'] and not report['presentationErrors'],name
         manifest=json.loads((out/'frames/capture_manifest.json').read_text())
-        assert manifest['materialSurfaceProfileLayoutVersion']==11 and manifest['cameraUniformBytes']==688 and manifest['unlitFrameLayoutVersion']==1,name
+        assert manifest['materialSurfaceProfileLayoutVersion']==12 and manifest['cameraUniformBytes']==688 and manifest['unlitFrameLayoutVersion']==1,name
         assert np.allclose(manifest['qaCameraPosition'],[camera_x,0,3],atol=1e-6),name
         images=[np.asarray(Image.open(out/f'frames/frame_{i:06d}.png').convert('RGB')) for i in range(frames)]
         for i,image in enumerate(images):
@@ -154,7 +160,7 @@ def run(player,root,expected_validation='any',selected=None):
                 expected=linear(sample_pixel[:3]);alpha=sample_pixel[3]/255
                 if kind=='red-alpha':alpha=expected[0];expected=np.ones(3)
                 expected=expected*np.array(p['tint'][:3]);alpha*=p['tint'][3]
-                if kind in ('mask','document-mask','independent-samplers'):
+                if kind in ('mask','document-mask','independent-samplers','view-mask'):
                     mask=pattern[0,1] if kind=='independent-samplers' else second_pixel
                     expected*=linear(mask[:3]);alpha*=mask[3]/255
                 if kind=='blend':
@@ -163,7 +169,11 @@ def run(player,root,expected_validation='any',selected=None):
                 expected=np.clip(expected*colors['exposureGain'],0,1000)
                 luminance=np.dot(expected,[.212673,.715152,.072175]);expected=(luminance+colors['saturation']*(expected-luminance))*np.array(colors['colorGain'])
                 soft=1 if kind=='empty-background' else min(1,max(0,delta/math.cos(math.radians(yaw))/1.5))
-                alpha=np.clip(alpha*soft,0,1)*opacity;receiver=clear_background if kind=='empty-background' else np.array([.07,.09,.11])
+                fade=1
+                if kind.startswith('view-'):
+                    depth=3/math.cos(math.radians(yaw));ranges=p['viewDepthFade'];near=ranges['near'];far=ranges['far']
+                    fade=min(1,max(0,(depth-near[0])/(near[1]-near[0])))*min(1,max(0,(far[1]-depth)/(far[1]-far[0])))
+                alpha=np.clip(alpha*soft*fade,0,1)*opacity;receiver=clear_background if kind=='empty-background' else np.array([.07,.09,.11])
                 expected=receiver if kind=='depth-occluded' else expected*alpha+receiver*(1-alpha)
             # The target is an eight-bit presentation image. HDR survives the
             # transparent blend, then the display attachment clips its range.
@@ -184,7 +194,7 @@ def run(player,root,expected_validation='any',selected=None):
 
     kinds=['clear-only','base','mask','document-mask','blend','red-alpha','highlight','node-opacity','soft-half','soft-zero','depth-occluded',
         'empty-background','diagonal','orthographic','frame-color','repeat','clamp','independent-samplers','scroll','clock-frozen','clock-reverse',
-        'coverage-clamp','coverage-soft','coverage-negative']
+        'coverage-clamp','coverage-soft','coverage-negative','view-near','view-far','view-zero','view-soft','view-diagonal','view-orthographic','view-mask']
     if selected:
         assert set(selected)<=set(kinds),'Unknown layer case';kinds=[kind for kind in kinds if kind in selected]
         if 'clear-only' not in kinds:kinds.insert(0,'clear-only')

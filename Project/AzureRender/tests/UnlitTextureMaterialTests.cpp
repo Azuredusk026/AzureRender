@@ -58,11 +58,21 @@ int main(int argc,char** argv){try{
  require(packed.rows[0]==std::array<float,4>{1,1,0,0}&&packed.rows[2]==std::array<float,4>{0,.1F,0,.1F},"UV and time rows reach public material table");
  require(packed.rows[5]==std::array<float,4>{1,0,1.5F,0}&&packed.rows[6]==std::array<float,4>{1.3F,1.3F,1.3F,1},"Clock and straight tint packing");
  require(packed.rows[9]==std::array<float,4>{0,0,1,1},"Layer modes and soft intersection packing");
+ auto fadedSource=source;fadedSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"]["viewDepthFade"]=
+  {{"near",{.5,1}},{"far",{100,150}}};
+ const auto fadedPacked=packMaterialSurfaceProfile(load(fadedSource).materials.at(0));
+ require(fadedPacked.rows[10]==std::array<float,4>{.5F,1,100,150}
+  &&fadedPacked.rows[11]==std::array<float,4>{1,0,0,0},"View-depth fade uses reserved material rows");
  auto document=MaterialData::defaults("azure.profile");
  document.surface={{"asset",{{"version","2.0"}}},{"materials",source["materials"]},{"textures",source["textures"]},{"samplers",source["samplers"]}};
  const std::string baseId="11111111-1111-4111-8111-111111111111",maskId="22222222-2222-4222-8222-222222222222";
  document.textures={{"0",{{"asset",baseId},{"usage","albedo"}}},{"1",{{"asset",maskId},{"usage","albedo"}}}};
  const auto restored=MaterialData::parse(document.encode());
+ auto fadedDocument=document;fadedDocument.surface["materials"]=fadedSource["materials"];
+ const auto fadedStandalone=MaterialData::parse(fadedDocument.encode()).interpret(
+  [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
+ require(packMaterialSurfaceProfile(fadedStandalone).rows==fadedPacked.rows,
+  "Complete material documents preserve view-depth fade");
  const auto interpreted=restored.interpret([&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
  require(packMaterialSurfaceProfile(interpreted).rows==packed.rows,"Complete standalone material document carries layer contract");
  require(interpreted.textureSettings[4].wrapU=="clamp"&&interpreted.styleMaskPixels==m.styleMaskPixels,"Standalone layer sampler and pixels agree with model import");

@@ -1,6 +1,7 @@
 #pragma once
 #include <array>
 #include <cstddef>
+#include <optional>
 #include <nlohmann/json_fwd.hpp>
 
 namespace azurerender {
@@ -22,6 +23,8 @@ struct UnlitTextureLayers {
     float softDistance=1,softBias=0;
     float highlightThreshold=1,highlightGain=0;
     float postExposureWeight=1,globalColorWeight=1;
+    bool viewDepthFadePresent=false;
+    std::array<float,4> viewDepthFade{};
 };
 struct UnlitEffectFrame {
     float exposureGain=1,saturation=1;
@@ -34,8 +37,10 @@ UnlitTextureLayers parseUnlitTextureLayers(const nlohmann::json&,std::size_t tex
 double evaluateUnlitMaterialTime(const UnlitTextureLayers&,double presentationSeconds);
 std::array<float,2> evaluateUnlitLayerUv(const UnlitTextureLayer&,std::array<float,2>,double materialSeconds);
 float evaluateSoftIntersection(float sceneViewZ,float effectViewZ,float distance,float bias);
+float evaluateUnlitViewDepthFade(const UnlitTextureLayers&,float effectViewZ);
 // Samples and output are linear, straight RGBA. Node opacity is applied once.
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers&,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
-    float softIntersection,float nodeOpacity,const UnlitEffectFrame&);
+    float softIntersection,float nodeOpacity,const UnlitEffectFrame&,
+    std::optional<float> effectViewZ=std::nullopt);
 }

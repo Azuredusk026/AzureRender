@@ -270,6 +270,36 @@
       "type": "number",
       "minimum": 0,
       "maximum": 1
+    },
+    "viewDepthFade": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "near",
+        "far"
+      ],
+      "properties": {
+        "near": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 3.4028234663852886e+38
+          }
+        },
+        "far": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 3.4028234663852886e+38
+          }
+        }
+      }
     }
   },
   "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。"

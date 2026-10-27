@@ -29,6 +29,15 @@ void reject(const Json& json,std::size_t textures=2) {
 void parsing() {
  const auto base=fixture();const auto p=parseUnlitTextureLayers(base,2);
  require(p.present&&p.layerCount==1&&p.layers[0].texture==0,"Base layer binding");
+ auto faded=base;faded["viewDepthFade"]={{"near",{.5,1}},{"far",{100,150}}};
+ require(parseUnlitTextureLayers(faded,2).present,"Optional view-depth fade parses");
+ for(const Json& bad:Json::array({nullptr,true,{{"near",{.5,1}}},
+  {{"near",{1,1}},{"far",{100,150}}},{{"near",{-.5,1}},{"far",{100,150}}},
+  {{"near",{.5,true}},{"far",{100,150}}},{{"near",{.5,1}},{"far",{150,100}}},
+  {{"near",{1.,1.+1e-9}},{"far",{100,150}}},{{"near",{.5}},{"far",{100,150}}},
+  {{"near",{.5,1}},{"far",{100,150}},{"extra",0}}})) {
+  auto invalid=faded;invalid["viewDepthFade"]=bad;reject(invalid);
+ }
  auto invalid=base;
  for(const char* key:{"schemaVersion","lighting","layers","tint","clock","softIntersection","highlightExpansion","blendTint","postExposureWeight","globalColorWeight"}) {invalid=base;invalid.erase(key);reject(invalid);}
  for(const Json& v:{Json(nullptr),Json(true),Json(1.5),Json(1),Json(3)}) {invalid=base;invalid["schemaVersion"]=v;reject(invalid);}
@@ -95,7 +104,19 @@ void numerical() {
  near(evaluateUnlitTextureLayers(p,{.2F,.3F,.4F,.75F},{},1,.4F,{})[3],0,
   "Negative material alpha contributes zero coverage");
  p.tint[3]=1;
+ auto faded=fixture();faded["viewDepthFade"]={{"near",{.5,1}},{"far",{100,150}}};
+ auto depthProfile=parseUnlitTextureLayers(faded,2);
+ const float depths[]={0,.5F,.75F,1,100,125,150,-125};
+ const float coverage[]={0,0,.5F,1,1,.5F,0,.5F};
+ for(unsigned i=0;i<8;++i)near(evaluateUnlitViewDepthFade(depthProfile,depths[i]),coverage[i],"Captured near and far view-depth fade");
+ depthProfile.tint[3]=2;
+ near(evaluateUnlitTextureLayers(depthProfile,{.2F,.3F,.4F,.75F},{},.75F,.4F,{},.75F)[3],.225F,
+  "View-depth fade combines with soft intersection before coverage saturation");
+ near(evaluateUnlitTextureLayers(depthProfile,{.2F,.3F,.4F,.75F},{},.75F,.4F,{},1.F)[3],.4F,
+  "Peak coverage saturates before the node opacity");
  const auto bad=[&](auto callback){bool failed=false;try{callback();}catch(const std::invalid_argument&){failed=true;}require(failed,"Invalid runtime input must fail explicitly");};
+ bad([&]{(void)evaluateUnlitTextureLayers(depthProfile,{1,1,1,1},{},1,1,{});});
+ bad([&]{(void)evaluateUnlitViewDepthFade(depthProfile,std::numeric_limits<float>::infinity());});
  bad([&]{(void)evaluateUnlitMaterialTime(p,std::numeric_limits<double>::infinity());});
  bad([&]{(void)evaluateUnlitLayerUv(layer,{.2F,.3F},std::numeric_limits<double>::quiet_NaN());});
  bad([&]{(void)evaluateSoftIntersection(1,1,0,0);});

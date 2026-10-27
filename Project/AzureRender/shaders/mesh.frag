@@ -1753,13 +1753,14 @@ void main() {
             vec4 second=vec4(1);
             if(p.rows[9].z>.5)second=texture(AZ_TEX_STYLE_MASK,azureUnlitLayerUv(textureCoordinate,p.rows[3],p.rows[4],p.rows[2].zw,tau));
             float soft=1.0;
+            float effectDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
             if(p.rows[9].w>.5) {
                 float sceneDepth=texture(overlaySceneDepth,AZURE_FRAGMENT_COORD.xy/camera.clusterDepth.zw).r;
-                float effectDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
                 soft=azureUnlitSoftIntersection(sceneDepth,effectDepth,p.rows[5].z,p.rows[5].w);
             }
 #endif
+            soft*=azureUnlitViewDepthFade(effectDepth,p.rows[10],p.rows[11].x);
             vec4 layered=azureUnlitLayerColor(layerBase,second,p.rows,soft,camera.unlitTimeExposure.y,camera.unlitTimeExposure.z,camera.unlitColorGain.rgb);
             baseColor=azureUnlitLayerSample(layerBase,p.rows[9].x)*p.rows[6];
             beautyColor=layered.rgb;outputAlpha=layered.a;emissive=layered.rgb;

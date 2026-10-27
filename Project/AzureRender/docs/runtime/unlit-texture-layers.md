@@ -32,8 +32,9 @@
 | `highlightExpansion` | 非负 `threshold` 与 `gain` |
 | `postExposureWeight` | 零至一的曝光权重 |
 | `globalColorWeight` | 零至一的全局颜色权重 |
+| `viewDepthFade` | 可选对象，`near` 和 `far` 各含起止深度 |
 
-全部字段明确提供，数值须有限且能由单精度表示。
+必需字段明确提供，数值须有限且能由单精度表示。
 每一层独立拥有 UV、角色及采样模式。
 纹理资源、采样器及材质兼容性由调用方校验。
 图层材质通过完整表面文档提供参数。
@@ -79,10 +80,15 @@ Blend 权重为基础透明度与第二层透明度之和。
 该值限制到零至一。
 材质透明度先乘交界权重，再限制到零至一。
 最终透明度恰好乘一次节点透明度。
+启用视图深度淡出时，交界权重再乘近端与远端权重。
+每段范围非负且严格递增，单位与视图深度一致。
+近端逐渐显现，远端逐渐消隐。
 
 ```text
 soft = saturate((abs(sceneViewZ) - abs(effectViewZ) + bias) / distance)
-alpha = saturate(baseAlpha * soft) * nodeOpacity
+nearFade = saturate((abs(effectViewZ) - nearStart) / (nearEnd - nearStart))
+farFade = saturate((farEnd - abs(effectViewZ)) / (farEnd - farStart))
+alpha = saturate(baseAlpha * soft * nearFade * farFade) * nodeOpacity
 luminance = dot(rgb, [0.212673, 0.715152, 0.072175])
 mapped = (luminance + saturation * (rgb - luminance)) * colorGain
 rgb = mix(rgb, mapped, globalColorWeight)
@@ -92,6 +98,9 @@ rgb = mix(rgb, mapped, globalColorWeight)
 曝光及饱和度为有限非负数。
 评价函数明确拒绝非有限时间、采样与结果。
 调用方负责将独立透明度交给相应的混合管线。
+默认画像的深度淡出权重为一。
+CPU 评价在启用该字段时要求明确的视图深度。
+实际片元从世界位置及相机前向计算相同深度。
 
 ## 材质接入
 
@@ -134,8 +143,9 @@ rgb = mix(rgb, mapped, globalColorWeight)
 摄像机常量大小为 688 字节，帧布局版本为一。
 材质常量在加载期拥有，表现时间由宿主每帧提供。
 
-材质表版本为十一，每项十二行，共 192 字节。
+材质表版本为十二，每项十二行，共 192 字节。
 图层使用前十行，记录两层坐标及颜色参数。
+最后两行承载可选深度范围及活动标记。
 深度需求按材质能力进入现有不透明快照流程。
 绑定十八提供同相机、同单位的线性视图深度。
 

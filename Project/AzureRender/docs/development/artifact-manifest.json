@@ -479,6 +479,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/vfx-mip-and-coverage.json",
       "primaryProject": "build/runs/20261028-030807-native-vfx-instance-closure-491cc6/full-candidate/enclosure-vfx-extended.azureproject"
+    },
+    {
+      "path": "runs/20261028-033440-native-vfx-view-depth-fade-09828e",
+      "pathBase": "build",
+      "purpose": "公共视图深度淡出、完整文档、双配置绘制及十九个实际实例验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/vfx-view-depth-fade.json",
+      "primaryProject": "build/runs/20261028-033440-native-vfx-view-depth-fade-09828e/full-candidate/enclosure-vfx-depth-fade.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

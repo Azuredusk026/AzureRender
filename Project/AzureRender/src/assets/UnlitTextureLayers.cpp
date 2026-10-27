@@ -10,9 +10,15 @@ namespace azurerender {
 namespace {
 using Json=nlohmann::json;
 [[noreturn]] void invalid(const std::string& field) {throw std::invalid_argument("Invalid unlit texture layers: "+field);}
-void fields(const Json& value,std::initializer_list<const char*> names,const char* field) {
-    if(!value.is_object()||value.size()!=names.size())invalid(field);
+void fields(const Json& value,std::initializer_list<const char*> names,const char* field,
+    std::initializer_list<const char*> optional={}) {
+    if(!value.is_object()||value.size()<names.size()||value.size()>names.size()+optional.size())invalid(field);
     for(const char* name:names)if(!value.contains(name))invalid(std::string(field)+"."+name);
+    for(const auto& entry:value.items()) {
+        bool known=false;for(const char* name:names)known|=entry.key()==name;
+        for(const char* name:optional)known|=entry.key()==name;
+        if(!known)invalid(std::string(field)+"."+entry.key());
+    }
 }
 float scalar(const Json& value,const char* name,float minimum=-std::numeric_limits<float>::max(),float maximum=std::numeric_limits<float>::max()) {
     if(!value.is_number())invalid(name);
@@ -35,7 +41,7 @@ std::array<float,4> sample(std::array<float,4> rgba,UnlitTextureLayer::SampleMod
 }
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface");
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
@@ -71,6 +77,13 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
     result.highlightGain=scalar(highlight.at("gain"),"highlightExpansion.gain",0);
     result.postExposureWeight=scalar(source.at("postExposureWeight"),"postExposureWeight",0,1);
     result.globalColorWeight=scalar(source.at("globalColorWeight"),"globalColorWeight",0,1);
+    if(source.contains("viewDepthFade")) {
+        const auto& fade=source.at("viewDepthFade");fields(fade,{"near","far"},"viewDepthFade");
+        const auto nearRange=vector<2>(fade.at("near"),"viewDepthFade.near");
+        const auto farRange=vector<2>(fade.at("far"),"viewDepthFade.far");
+        result.viewDepthFadePresent=true;result.viewDepthFade={nearRange[0],nearRange[1],farRange[0],farRange[1]};
+        (void)evaluateUnlitViewDepthFade(result,0);
+    }
     result.present=true;return result;
 }
 double evaluateUnlitMaterialTime(const UnlitTextureLayers& profile,double presentationSeconds) {
@@ -97,13 +110,23 @@ void validateUnlitEffectFrame(const UnlitEffectFrame& frame) {
     if(frame.exposureGain<0||frame.saturation<0)invalid("frame gain domain");
     for(float gain:frame.colorGain)finite(gain,"frame color");
 }
+float evaluateUnlitViewDepthFade(const UnlitTextureLayers& profile,float effectViewZ) {
+    finite(effectViewZ,"view depth");if(!profile.viewDepthFadePresent)return 1;
+    const auto& range=profile.viewDepthFade;for(float value:range)finite(value,"viewDepthFade range");
+    if(range[0]<0||range[2]<0||range[1]<=range[0]||range[3]<=range[2])invalid("viewDepthFade range");
+    const float depth=std::abs(effectViewZ);
+    return saturate((depth-range[0])/(range[1]-range[0]))
+        *saturate((range[3]-depth)/(range[3]-range[2]));
+}
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
-    float softIntersection,float nodeOpacity,const UnlitEffectFrame& frame) {
+    float softIntersection,float nodeOpacity,const UnlitEffectFrame& frame,std::optional<float> effectViewZ) {
     if(!profile.present||profile.layerCount<1||profile.layerCount>2)invalid("unbound profile");
     validateUnlitEffectFrame(frame);
     for(float value:{softIntersection,nodeOpacity})finite(value,"frame");
     if(softIntersection<0||softIntersection>1||nodeOpacity<0||nodeOpacity>1)invalid("frame domain");
+    if(profile.viewDepthFadePresent&&!effectViewZ)invalid("missing view depth");
+    if(effectViewZ)softIntersection*=evaluateUnlitViewDepthFade(profile,*effectViewZ);
     auto result=sample(baseSample,profile.layers[0].sampleMode);
     for(unsigned i=0;i<4;++i)result[i]*=profile.tint[i];
     if(profile.layerCount==2) {

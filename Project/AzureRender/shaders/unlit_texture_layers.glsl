@@ -11,6 +11,12 @@ vec4 azureUnlitLayerSample(vec4 rgba,float mode) {
 float azureUnlitSoftIntersection(float sceneViewZ,float effectViewZ,float distance,float bias) {
     return clamp((abs(sceneViewZ)-abs(effectViewZ)+bias)/distance,0.0,1.0);
 }
+float azureUnlitViewDepthFade(float effectViewZ,vec4 range,float enabled) {
+    if(enabled<.5)return 1.0;
+    float depth=abs(effectViewZ);
+    return clamp((depth-range.x)/(range.y-range.x),0.0,1.0)
+        *clamp((range.w-depth)/(range.w-range.z),0.0,1.0);
+}
 vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[12],float soft,float exposureGain,float saturation,vec3 colorGain) {
     base=azureUnlitLayerSample(base,rows[9].x)*rows[6];
     if(rows[9].z>.5) {
