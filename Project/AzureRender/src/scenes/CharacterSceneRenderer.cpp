@@ -3261,6 +3261,16 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         for(const auto& resource:additionalResources_)vertexColors|=!resource->asset.vertexColors.empty();
         if(vertexColors){auto colored=materialDesc;colored.vertexBindings[1].stride=sizeof(std::array<float,4>);
             createFacingPipelines(vertexColorBlendPipelines_,colored);}
+        bool additive=false,coloredAdditive=false;
+        const auto inspectAdditive=[&](const LoadedAsset& asset){for(const auto& m:asset.materials)
+            if(m.unlitTextureLayers.present&&m.unlitTextureLayers.composite==UnlitTextureLayers::Composite::Additive) {
+                additive=true;coloredAdditive|=m.unlitTextureLayers.useVertexColor&&!asset.vertexColors.empty();
+            }};
+        inspectAdditive(asset_);for(const auto& resource:additionalResources_)inspectAdditive(resource->asset);
+        if(additive){auto composed=materialDesc;composed.primaryColorBlend=rhi::PrimaryColorBlend::Additive;
+            createFacingPipelines(additiveBlendPipelines_,composed);
+            if(coloredAdditive){composed.vertexBindings[1].stride=sizeof(std::array<float,4>);
+                createFacingPipelines(vertexColorAdditiveBlendPipelines_,composed);}}
         materialDesc.cullMode=VK_CULL_MODE_NONE;
         initializeHairIntegralPipelines(context,integralBase);
         auto multiplyDesc=materialDesc;
@@ -3386,6 +3396,8 @@ void CharacterSceneRenderer::destroyResources() {
              &blendPipelines_[2],&blendPipelines_[3],
              &vertexColorBlendPipelines_[0],&vertexColorBlendPipelines_[1],
              &vertexColorBlendPipelines_[2],&vertexColorBlendPipelines_[3],
+             &additiveBlendPipelines_[0],&additiveBlendPipelines_[1],&additiveBlendPipelines_[2],&additiveBlendPipelines_[3],
+             &vertexColorAdditiveBlendPipelines_[0],&vertexColorAdditiveBlendPipelines_[1],&vertexColorAdditiveBlendPipelines_[2],&vertexColorAdditiveBlendPipelines_[3],
              &multiplyPipelines_[0],
              &multiplyPipelines_[1],
              &multiplyPipelines_[2],&multiplyPipelines_[3],
@@ -3535,6 +3547,8 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &blendPipelines_[2],&blendPipelines_[3],
              &vertexColorBlendPipelines_[0],&vertexColorBlendPipelines_[1],
              &vertexColorBlendPipelines_[2],&vertexColorBlendPipelines_[3],
+             &additiveBlendPipelines_[0],&additiveBlendPipelines_[1],&additiveBlendPipelines_[2],&additiveBlendPipelines_[3],
+             &vertexColorAdditiveBlendPipelines_[0],&vertexColorAdditiveBlendPipelines_[1],&vertexColorAdditiveBlendPipelines_[2],&vertexColorAdditiveBlendPipelines_[3],
              &multiplyPipelines_[0],
              &multiplyPipelines_[1],
              &multiplyPipelines_[2],&multiplyPipelines_[3],
@@ -4369,11 +4383,15 @@ void CharacterSceneRenderer::drawPrimitive(
         :RecordingGizmoState{selectedPrimitiveIndex_,gizmoActive_,gizmoTranslation_,gizmoRotation_,gizmoScale_};
     const bool mirrored=primitiveMirroredTransform(model,gizmo,&primitive-mesh.primitives.data());
     const bool multiplyComposite=(material.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
+    const bool vertexColor=material.unlitTextureLayers.useVertexColor&&!mesh.vertexColors.empty();
+    const bool additive=material.unlitTextureLayers.present&&material.unlitTextureLayers.composite==UnlitTextureLayers::Composite::Additive;
+    const auto& transparentPipelines=additive?(vertexColor?vertexColorAdditiveBlendPipelines_:additiveBlendPipelines_)
+        :(vertexColor?vertexColorBlendPipelines_:blendPipelines_);
     const VkPipeline pipeline = (material.materialFeatures&MaterialFeatureHairPixelIntegral)
         ?hairIntegralPipeline(material,mirrored,false):multiplyComposite
         ? (multiplyPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
         : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipelines_[mirrored?1:0] : blend
-        ? ((material.unlitTextureLayers.useVertexColor&&!mesh.vertexColors.empty()?vertexColorBlendPipelines_:blendPipelines_)[surfaceFacingIndex(material.doubleSided,mirrored)])
+        ? transparentPipelines[surfaceFacingIndex(material.doubleSided,mirrored)]
         : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]
         : (opaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]);
     const auto colorBuffer=snapshot&&!snapshot->buffers.vertexColors.empty()

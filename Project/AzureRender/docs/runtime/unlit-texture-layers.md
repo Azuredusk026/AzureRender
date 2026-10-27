@@ -34,6 +34,8 @@
 | `globalColorWeight` | 零至一的全局颜色权重 |
 | `viewDepthFade` | 可选对象，`near` 和 `far` 各含起止深度 |
 | `vertexColor` | 可选布尔值，默认假，选择线性顶点 RGBA 乘法 |
+| `viewCoverage` | 可选视角覆盖率对象 |
+| `composite` | 可选 `alpha` 或 `additive`，默认 `alpha` |
 
 必需字段明确提供，数值须有限且能由单精度表示。
 每一层独立拥有 UV、角色及采样模式。
@@ -104,6 +106,35 @@ rgb = mix(rgb, mapped, globalColorWeight)
 CPU 评价在启用该字段时要求明确的视图深度。
 实际片元从世界位置及相机前向计算相同深度。
 
+## 视角覆盖率与合成
+
+`viewCoverage` 提供四个有限参数。
+`bias` 为法线视线点积的偏置。
+`exponent` 为正数，`invertWeight` 和 `weight` 位于零至一。
+缺少该对象时，视角覆盖率为一。
+
+输入法线采用顶点归一化后的片元插值。
+视线在透视相机下指向相机位置。
+正交相机采用相机前向的反方向。
+法线保留表面来源方向。
+
+```text
+power = pow(saturate(dot(interpolatedNormal, viewDirection) + bias), exponent)
+response = mix(1 - power, power, invertWeight)
+coverage = mix(1, response, weight)
+baseAlpha = saturate(baseAlpha) * coverage
+```
+
+CPU 评价在启用该对象时要求明确的点积。
+`softIntersection.enabled` 默认为真。
+该字段为假时，场景深度交界权重为一。
+近远淡出继续使用独立的视图深度。
+
+`alpha` 合成按覆盖率混合前景与背景。
+`additive` 合成将颜色乘覆盖率后加到背景。
+加色路径保留颜色目标的透明度。
+节点透明度在两种路径中均消费一次。
+
 ## 材质接入
 
 根画像使用 `azureRenderMaterial.schemaVersion=2`。
@@ -145,15 +176,17 @@ CPU 评价在启用该字段时要求明确的视图深度。
 摄像机常量大小为 688 字节，帧布局版本为一。
 材质常量在加载期拥有，表现时间由宿主每帧提供。
 
-材质表版本为十三，每项十二行，共 192 字节。
+材质表版本为十四，每项十三行，共 208 字节。
 图层使用前十行，记录两层坐标及颜色参数。
-最后两行承载可选深度范围及活动标记。
-最后一行的第二分量记录顶点颜色标记。
+第十一行承载可选深度范围。
+第十二行承载活动标记及顶点颜色标记。
+第十三行承载可选视角覆盖率参数。
 资产读取与流绑定见[顶点颜色输入](vertex-color-inputs.md)。
 深度需求按材质能力进入现有不透明快照流程。
 绑定十八提供同相机、同单位的线性视图深度。
 
-透明管线使用 `SrcAlpha/OneMinusSrcAlpha`。
+透明混合使用 `SrcAlpha/OneMinusSrcAlpha`。
+加色合成使用 `SrcAlpha/One` 并保留目标透明度。
 着色器输出独立 RGB 与透明度。
 节点透明度在现有最终透明合成中消费一次。
 固定与索引描述符使用相同的材质表和评价函数。

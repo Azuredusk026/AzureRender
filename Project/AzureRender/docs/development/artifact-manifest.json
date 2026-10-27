@@ -497,6 +497,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/vertex-color-streams.json",
       "primaryProject": "build/runs/20261028-040334-vertex-color-input-contract-b54529/full-candidate/enclosure-vfx-vertex-color.azureproject"
+    },
+    {
+      "path": "runs/20261028-045834-native-logistics-activation-15ae9a",
+      "pathBase": "build",
+      "purpose": "公共视角覆盖率、加色合成、双配置及二十四个实际实例验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-dependent-vfx-coverage.json",
+      "primaryProject": "build/runs/20261028-045834-native-logistics-activation-15ae9a/full-candidate/enclosure-vfx-view-coverage.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

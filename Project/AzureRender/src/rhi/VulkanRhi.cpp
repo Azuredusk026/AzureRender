@@ -513,6 +513,16 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
         auto& attachment=colorBlendAttachments[index];
         attachment.colorWriteMask = graphicsColorWriteMask(desc,index);
         if (desc.alphaBlend) {
+            if(index==0&&desc.primaryColorBlend==PrimaryColorBlend::Additive) {
+                attachment.blendEnable=VK_TRUE;
+                attachment.srcColorBlendFactor=desc.premultipliedAlpha?VK_BLEND_FACTOR_ONE:VK_BLEND_FACTOR_SRC_ALPHA;
+                attachment.dstColorBlendFactor=VK_BLEND_FACTOR_ONE;
+                attachment.colorBlendOp=VK_BLEND_OP_ADD;
+                attachment.srcAlphaBlendFactor=VK_BLEND_FACTOR_ZERO;
+                attachment.dstAlphaBlendFactor=VK_BLEND_FACTOR_ONE;
+                attachment.alphaBlendOp=VK_BLEND_OP_ADD;
+                continue;
+            }
             if(desc.primaryColorBlend==PrimaryColorBlend::Multiply) {
                 if(index!=0) {attachment.colorWriteMask=0;continue;}
                 attachment.blendEnable=VK_TRUE;

@@ -6,12 +6,12 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=13;
+    static constexpr unsigned kLayoutVersion=14;
     using Row=std::array<float,4>;
-    std::array<Row,12> rows{};
+    std::array<Row,13> rows{};
 };
 static_assert(std::is_standard_layout_v<PackedMaterialSurfaceProfile>);
-static_assert(sizeof(PackedMaterialSurfaceProfile)==192);
+static_assert(sizeof(PackedMaterialSurfaceProfile)==208);
 static_assert(alignof(PackedMaterialSurfaceProfile)==16);
 static_assert(offsetof(PackedMaterialSurfaceProfile,rows)==0);
 static_assert(sizeof(PackedMaterialSurfaceProfile::Row)==16);
@@ -71,9 +71,10 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         r[8]={p.highlightThreshold,p.highlightGain,p.postExposureWeight,p.globalColorWeight};
         r[9]={p.layers[0].sampleMode==UnlitTextureLayer::SampleMode::RedAsAlpha?1.F:0.F,
             p.layers[1].sampleMode==UnlitTextureLayer::SampleMode::RedAsAlpha?1.F:0.F,
-            p.layerCount==1?0.F:p.layers[1].role==UnlitTextureLayer::Role::Mask?1.F:2.F,1};
+            p.layerCount==1?0.F:p.layers[1].role==UnlitTextureLayer::Role::Mask?1.F:2.F,p.softIntersectionEnabled?1.F:0.F};
         if(p.viewDepthFadePresent){r[10]=p.viewDepthFade;r[11][0]=1;}
         r[11][1]=p.useVertexColor?1.F:0.F;
+        if(p.viewCoveragePresent){r[11][2]=1;r[12]=p.viewCoverage;}
         return result;
     }
     if(material.nprDiffuse.present) {

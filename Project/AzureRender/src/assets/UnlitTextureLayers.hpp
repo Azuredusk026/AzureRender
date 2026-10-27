@@ -15,6 +15,8 @@ struct UnlitTextureLayer {
     std::array<float,2> speed{};
 };
 struct UnlitTextureLayers {
+    enum class Composite { Alpha, Additive };
+    Composite composite=Composite::Alpha;
     bool present=false;
     unsigned layerCount=0;
     std::array<UnlitTextureLayer,2> layers{};
@@ -26,6 +28,8 @@ struct UnlitTextureLayers {
     bool viewDepthFadePresent=false;
     std::array<float,4> viewDepthFade{};
     bool useVertexColor=false;
+    bool softIntersectionEnabled=true,viewCoveragePresent=false;
+    std::array<float,4> viewCoverage{0,1,0,1};
 };
 struct UnlitEffectFrame {
     float exposureGain=1,saturation=1;
@@ -39,9 +43,11 @@ double evaluateUnlitMaterialTime(const UnlitTextureLayers&,double presentationSe
 std::array<float,2> evaluateUnlitLayerUv(const UnlitTextureLayer&,std::array<float,2>,double materialSeconds);
 float evaluateSoftIntersection(float sceneViewZ,float effectViewZ,float distance,float bias);
 float evaluateUnlitViewDepthFade(const UnlitTextureLayers&,float effectViewZ);
+float evaluateUnlitViewCoverage(const UnlitTextureLayers&,float interpolatedNormalDotView);
 // Samples and output are linear, straight RGBA. Node opacity is applied once.
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers&,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
     float softIntersection,float nodeOpacity,const UnlitEffectFrame&,
-    std::optional<float> effectViewZ=std::nullopt,std::array<float,4> vertexColor={1,1,1,1});
+    std::optional<float> effectViewZ=std::nullopt,std::array<float,4> vertexColor={1,1,1,1},
+    std::optional<float> interpolatedNormalDotView=std::nullopt);
 }

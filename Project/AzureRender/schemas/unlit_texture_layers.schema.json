@@ -238,6 +238,10 @@
           "type": "number",
           "minimum": -3.4028234663852886e+38,
           "maximum": 3.4028234663852886e+38
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true
         }
       }
     },
@@ -304,6 +308,45 @@
     "vertexColor": {
       "type": "boolean",
       "default": false
+    },
+    "viewCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bias",
+        "exponent",
+        "invertWeight",
+        "weight"
+      ],
+      "properties": {
+        "bias": {
+          "type": "number",
+          "minimum": -3.4028234663852886e+38,
+          "maximum": 3.4028234663852886e+38
+        },
+        "exponent": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3.4028234663852886e+38
+        },
+        "invertWeight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "composite": {
+      "enum": [
+        "alpha",
+        "additive"
+      ],
+      "default": "alpha"
     }
   },
   "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。"

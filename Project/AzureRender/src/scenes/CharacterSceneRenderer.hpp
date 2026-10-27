@@ -399,6 +399,7 @@ private:
     std::array<VkPipeline,4> opaquePipelines_{};
     std::array<VkPipeline,4> blendPipelines_{};
     std::array<VkPipeline,4> vertexColorBlendPipelines_{};
+    std::array<VkPipeline,4> additiveBlendPipelines_{},vertexColorAdditiveBlendPipelines_{};
     std::array<VkPipeline,4> multiplyPipelines_{};
     std::array<VkPipeline,2> sceneTintPipelines_{};
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;

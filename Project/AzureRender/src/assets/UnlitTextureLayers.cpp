@@ -41,11 +41,15 @@ std::array<float,4> sample(std::array<float,4> rgba,UnlitTextureLayer::SampleMod
 }
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor"});
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
     UnlitTextureLayers result;result.layerCount=static_cast<unsigned>(layers.size());
+    if(source.contains("composite")) {
+        if(source.at("composite")=="additive")result.composite=UnlitTextureLayers::Composite::Additive;
+        else if(source.at("composite")!="alpha")invalid("composite");
+    }
     for(unsigned i=0;i<result.layerCount;++i) {
         const auto& input=layers[i];auto& layer=result.layers[i];
         fields(input,{"role","texture","sampleMode","uv"},"layer");
@@ -68,7 +72,11 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
     result.tint=vector<4>(source.at("tint"),"tint");result.blendTint=vector<4>(source.at("blendTint"),"blendTint");
     const auto& clock=source.at("clock");fields(clock,{"rate","offsetSeconds"},"clock");
     result.clockRate=scalar(clock.at("rate"),"clock.rate");result.clockOffsetSeconds=scalar(clock.at("offsetSeconds"),"clock.offsetSeconds");
-    const auto& soft=source.at("softIntersection");fields(soft,{"distance","bias"},"softIntersection");
+    const auto& soft=source.at("softIntersection");fields(soft,{"distance","bias"},"softIntersection",{"enabled"});
+    if(soft.contains("enabled")) {
+        if(!soft.at("enabled").is_boolean())invalid("softIntersection.enabled");
+        result.softIntersectionEnabled=soft.at("enabled").get<bool>();
+    }
     result.softDistance=scalar(soft.at("distance"),"softIntersection.distance");
     if(result.softDistance<=0)invalid("softIntersection.distance");
     result.softBias=scalar(soft.at("bias"),"softIntersection.bias");
@@ -77,6 +85,13 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
     result.highlightGain=scalar(highlight.at("gain"),"highlightExpansion.gain",0);
     result.postExposureWeight=scalar(source.at("postExposureWeight"),"postExposureWeight",0,1);
     result.globalColorWeight=scalar(source.at("globalColorWeight"),"globalColorWeight",0,1);
+    if(source.contains("viewCoverage")) {
+        const auto& view=source.at("viewCoverage");fields(view,{"bias","exponent","invertWeight","weight"},"viewCoverage");
+        result.viewCoveragePresent=true;
+        result.viewCoverage={scalar(view.at("bias"),"viewCoverage.bias"),scalar(view.at("exponent"),"viewCoverage.exponent",0),
+            scalar(view.at("invertWeight"),"viewCoverage.invertWeight",0,1),scalar(view.at("weight"),"viewCoverage.weight",0,1)};
+        if(result.viewCoverage[1]<=0)invalid("viewCoverage.exponent");
+    }
     if(source.contains("vertexColor")) {
         if(!source.at("vertexColor").is_boolean())invalid("vertexColor");
         result.useVertexColor=source.at("vertexColor").get<bool>();
@@ -122,14 +137,23 @@ float evaluateUnlitViewDepthFade(const UnlitTextureLayers& profile,float effectV
     return saturate((depth-range[0])/(range[1]-range[0]))
         *saturate((range[3]-depth)/(range[3]-range[2]));
 }
+float evaluateUnlitViewCoverage(const UnlitTextureLayers& profile,float normalDotView) {
+    finite(normalDotView,"view coverage input");if(!profile.viewCoveragePresent)return 1;
+    const auto& p=profile.viewCoverage;for(float v:p)finite(v,"view coverage parameters");
+    if(p[1]<=0||p[2]<0||p[2]>1||p[3]<0||p[3]>1)invalid("view coverage parameters");
+    const float power=std::pow(saturate(normalDotView+p[0]),p[1]);
+    const float response=(1-power)*(1-p[2])+power*p[2];
+    return 1+(response-1)*p[3];
+}
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
     float softIntersection,float nodeOpacity,const UnlitEffectFrame& frame,std::optional<float> effectViewZ,
-    std::array<float,4> vertexColor) {
+    std::array<float,4> vertexColor,std::optional<float> interpolatedNormalDotView) {
     if(!profile.present||profile.layerCount<1||profile.layerCount>2)invalid("unbound profile");
     validateUnlitEffectFrame(frame);
     for(float value:{softIntersection,nodeOpacity})finite(value,"frame");
     if(softIntersection<0||softIntersection>1||nodeOpacity<0||nodeOpacity>1)invalid("frame domain");
+    if(!profile.softIntersectionEnabled)softIntersection=1;
     if(profile.viewDepthFadePresent&&!effectViewZ)invalid("missing view depth");
     if(effectViewZ)softIntersection*=evaluateUnlitViewDepthFade(profile,*effectViewZ);
     auto result=sample(baseSample,profile.layers[0].sampleMode);
@@ -142,6 +166,10 @@ std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile
             const float weight=saturate((result[3]+second[3])*profile.blendTint[3]);
             for(unsigned i=0;i<3;++i)result[i]+=second[i]*profile.blendTint[i]*weight;
         } else invalid("second layer role");
+    }
+    if(profile.viewCoveragePresent) {
+        if(!interpolatedNormalDotView)invalid("missing view coverage input");
+        result[3]=saturate(result[3])*evaluateUnlitViewCoverage(profile,*interpolatedNormalDotView);
     }
     for(unsigned i=0;i<3;++i) {
         result[i]+=std::max(result[i]-profile.highlightThreshold,0.F)*profile.highlightGain;

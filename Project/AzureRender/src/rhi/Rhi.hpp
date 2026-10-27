@@ -107,7 +107,7 @@ struct VertexBindingDesc {
     VkVertexInputRate inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 };
 
-enum class PrimaryColorBlend { Alpha, Multiply };
+enum class PrimaryColorBlend { Alpha, Multiply, Additive };
 
 struct GraphicsPipelineDesc {
     VkShaderModule vertexShader = VK_NULL_HANDLE;

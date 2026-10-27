@@ -29,6 +29,21 @@ void reject(const Json& json,std::size_t textures=2) {
 void parsing() {
  const auto base=fixture();const auto p=parseUnlitTextureLayers(base,2);
  require(p.present&&p.layerCount==1&&p.layers[0].texture==0,"Base layer binding");
+ auto additive=base;additive["composite"]="additive";
+ require(parseUnlitTextureLayers(additive,2).composite==UnlitTextureLayers::Composite::Additive,
+  "Additive composition is explicit and independent of alpha coverage");
+ require(p.composite==UnlitTextureLayers::Composite::Alpha,"Existing layered surfaces retain alpha composition");
+ for(const Json& value:{Json(true),Json(1),Json("screen"),Json(nullptr)}){additive["composite"]=value;reject(additive);}
+ auto view=base;view["viewCoverage"]={{"bias",1.23},{"exponent",1},{"invertWeight",0},{"weight",.988}};
+ require(parseUnlitTextureLayers(view,2).present,"Captured view-dependent coverage parses");
+ auto detached=base;detached["softIntersection"]["enabled"]=false;
+ require(parseUnlitTextureLayers(detached,2).present,"Unlit layers can explicitly omit scene-depth intersection");
+ for(const Json& bad:Json::array({nullptr,true,{{"bias",0},{"exponent",0},{"invertWeight",0},{"weight",1}},
+  {{"bias",0},{"exponent",1},{"invertWeight",-1},{"weight",1}},{{"bias",0},{"exponent",1},{"invertWeight",0},{"weight",1.1}},
+  {{"bias",0},{"exponent",1},{"invertWeight",0},{"weight",1},{"extra",0}}})) {
+  auto invalid=view;invalid["viewCoverage"]=bad;reject(invalid);
+ }
+ detached["softIntersection"]["enabled"]=1;reject(detached);
  auto faded=base;faded["viewDepthFade"]={{"near",{.5,1}},{"far",{100,150}}};
  require(parseUnlitTextureLayers(faded,2).present,"Optional view-depth fade parses");
  auto colored=base;colored["vertexColor"]=true;
@@ -118,6 +133,20 @@ void numerical() {
  near(evaluateUnlitTextureLayers(depthProfile,{.2F,.3F,.4F,.75F},{},.75F,.4F,{},1.F)[3],.4F,
   "Peak coverage saturates before the node opacity");
  auto vertexProfile=parseUnlitTextureLayers(fixture(),2);vertexProfile.useVertexColor=true;
+ auto viewProfile=parseUnlitTextureLayers(fixture(),2);viewProfile.viewCoveragePresent=true;
+ viewProfile.viewCoverage={.25F,2,0,.8F};
+ near(evaluateUnlitViewCoverage(viewProfile,.25F),.8F,"Biased squared view response and weight");
+ near(evaluateUnlitViewCoverage(viewProfile,2),.2F,"View response clamps the biased dot product");
+ viewProfile.viewCoverage[2]=1;
+ near(evaluateUnlitViewCoverage(viewProfile,.25F),.4F,"Inverted response selects the power lobe");
+ viewProfile.viewCoverage[3]=0;
+ near(evaluateUnlitViewCoverage(viewProfile,.25F),1,"Zero view weight preserves alpha");
+ viewProfile.viewCoverage={0,1,0,1};viewProfile.softIntersectionEnabled=false;viewProfile.tint[3]=2;
+ near(evaluateUnlitTextureLayers(viewProfile,{1,1,1,.8F},{},0,.4F,{},std::nullopt,{1,1,1,1},.5F)[3],.2F,
+  "View coverage clamps material alpha before response, bypasses scene depth and applies node opacity once");
+ viewProfile.viewDepthFadePresent=true;viewProfile.viewDepthFade={.5F,1,100,150};
+ near(evaluateUnlitTextureLayers(viewProfile,{1,1,1,.8F},{},0,.4F,{},.75F,{1,1,1,1},.5F)[3],.1F,
+  "View coverage combines with independent near-far depth fade");
  vertexProfile.tint={1,1,1,1};vertexProfile.highlightGain=0;
  vertexProfile.layers[0].sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
  const auto vertex=evaluateUnlitTextureLayers(vertexProfile,{.5F,.9F,.1F,.1F},{},1,.4F,{},std::nullopt,{.2F,.4F,.8F,.5F});

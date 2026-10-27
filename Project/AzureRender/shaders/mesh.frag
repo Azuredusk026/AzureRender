@@ -228,7 +228,7 @@ struct ProjectedHairProfile {
     vec4 secondaryColor;
     vec4 objectX,objectY,objectZ;
 };
-struct PackedMaterialSurfaceProfile { vec4 rows[12]; };
+struct PackedMaterialSurfaceProfile { vec4 rows[13]; };
 #include "unlit_texture_layers.glsl"
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
@@ -1763,7 +1763,9 @@ void main() {
             }
 #endif
             soft*=azureUnlitViewDepthFade(effectDepth,p.rows[10],p.rows[11].x);
-            vec4 layered=azureUnlitLayerColor(layerBase,second,p.rows,soft,camera.unlitTimeExposure.y,camera.unlitTimeExposure.z,camera.unlitColorGain.rgb,vec4(vertexColorRgb,vertexColorAlpha));
+            vec3 projectiveRow=vec3(camera.screenReflectionWorldToClip[0].w,camera.screenReflectionWorldToClip[1].w,camera.screenReflectionWorldToClip[2].w);
+            vec3 viewDirection=dot(projectiveRow,projectiveRow)<1e-12?-camera.cameraForward.xyz:normalize(camera.cameraPosition.xyz-worldPosition);
+            vec4 layered=azureUnlitLayerColor(layerBase,second,p.rows,soft,camera.unlitTimeExposure.y,camera.unlitTimeExposure.z,camera.unlitColorGain.rgb,vec4(vertexColorRgb,vertexColorAlpha),dot(worldNormal,viewDirection));
             baseColor=azureUnlitLayerSample(layerBase,p.rows[9].x)*p.rows[6];
             if(p.rows[11].y>.5)baseColor*=vec4(vertexColorRgb,vertexColorAlpha);
             beautyColor=layered.rgb;outputAlpha=layered.a;emissive=layered.rgb;

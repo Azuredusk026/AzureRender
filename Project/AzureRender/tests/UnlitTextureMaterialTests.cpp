@@ -67,10 +67,23 @@ int main(int argc,char** argv){try{
  require(packMaterialSurfaceProfile(load(coloredSource).materials.at(0)).rows[11][1]==1,
   "Explicit vertex color consumption reaches the material table");
  auto document=MaterialData::defaults("azure.profile");
+ auto viewSource=source;auto& viewSurface=viewSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
+ viewSurface["viewCoverage"]={{"bias",1.23},{"exponent",1},{"invertWeight",0},{"weight",.988}};
+ viewSurface["softIntersection"]["enabled"]=false;
+ viewSurface["composite"]="additive";
+ const auto viewPacked=packMaterialSurfaceProfile(load(viewSource).materials.at(0));
+ require(viewPacked.rows[9][3]==0&&viewPacked.rows[11][2]==1
+  &&viewPacked.rows[12]==std::array<float,4>{1.23F,1,0,.988F},"View coverage and explicit scene-depth bypass reach the material table");
  document.surface={{"asset",{{"version","2.0"}}},{"materials",source["materials"]},{"textures",source["textures"]},{"samplers",source["samplers"]}};
  const std::string baseId="11111111-1111-4111-8111-111111111111",maskId="22222222-2222-4222-8222-222222222222";
  document.textures={{"0",{{"asset",baseId},{"usage","albedo"}}},{"1",{{"asset",maskId},{"usage","albedo"}}}};
  const auto restored=MaterialData::parse(document.encode());
+ auto viewDocument=document;viewDocument.surface["materials"]=viewSource["materials"];
+ const auto viewStandalone=MaterialData::parse(viewDocument.encode()).interpret(
+  [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
+ require(packMaterialSurfaceProfile(viewStandalone).rows==viewPacked.rows,"Complete document preserves view coverage and scene-depth selection");
+ require(viewStandalone.unlitTextureLayers.composite==UnlitTextureLayers::Composite::Additive,
+  "Complete document preserves additive composition independently of GPU parameter rows");
  auto fadedDocument=document;fadedDocument.surface["materials"]=fadedSource["materials"];
  const auto fadedStandalone=MaterialData::parse(fadedDocument.encode()).interpret(
   [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
