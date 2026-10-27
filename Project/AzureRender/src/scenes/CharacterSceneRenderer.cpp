@@ -258,6 +258,7 @@ void appendShowcasePlatform(LoadedAsset& asset, const Vector3& footPivot) {
     }
 
     if(!asset.texcoord1.empty())asset.texcoord1.resize(asset.vertices.size(),{0,0});
+    if(!asset.vertexColors.empty())asset.vertexColors.resize(asset.vertices.size(),{1,1,1,1});
     asset.primitives.push_back({
         firstIndex,
         static_cast<std::uint32_t>(asset.indices.size()) - firstIndex,
@@ -451,7 +452,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         textureBase+=kMaterialTextureSlots*static_cast<std::uint32_t>(resource->asset.materials.size());materialBase+=resource->asset.materials.size();
         auto* item=resource.get();jointBounds_.push_back(JointBounds::build(item->asset));
         decodedMaterialPixelBytes_+=materialSourcePixelBytes(item->asset);
-        enqueue("mesh "+std::to_string(key),loadTimings_.meshUploadMs,[this,item]{createMeshBuffers(item->asset,item->vertexBuffer,item->indexBuffer);});
+        enqueue("mesh "+std::to_string(key),loadTimings_.meshUploadMs,[this,item]{createMeshBuffers(item->asset,item->vertexBuffer,item->indexBuffer,item->vertexColorBuffer);});
         materials(item->asset,item->gpuMaterials,key);additionalResources_.push_back(std::move(resource));
         if(key%16==0||key+1==layout.paths.size())loadJobs_.push_back([this,key] {
             const auto& stats=materialTextureCache_->statistics();
@@ -621,6 +622,8 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     for (std::uint32_t key = 0; key < meshResourceCount_; ++key) {
         recordingBuffers.vertices.push_back(renderVertexBuffer(key, static_cast<std::uint32_t>(currentFrame_)).buffer);
         recordingBuffers.indices.push_back(renderIndexBuffer(key).buffer);
+        const auto color=key==0?vertexColorBuffer_.buffer:additionalResources_[key-1]->vertexColorBuffer.buffer;
+        recordingBuffers.vertexColors.push_back(color?color:whiteVertexColorBuffer_.buffer);
     }
     if (!oitIndexBuffers_.empty()) recordingBuffers.transparentIndices = oitIndexBuffers_[currentFrame_].buffer;
     std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews;
@@ -647,7 +650,7 @@ void CharacterSceneRenderer::ensureInstanceCapacity() {
     for(const auto& instance:sceneInstances_){
         const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
         joints+=mesh.jointMatrices.size()*sizeof(std::array<float,16>);
-        vertices+=mesh.vertices.size()*sizeof(AssetVertex);
+        vertices+=mesh.vertices.size()*sizeof(AssetVertex)+mesh.vertexColors.size()*sizeof(std::array<float,4>);
         morphBytes+=morphGpuMeshes_.at(instance.meshKey).weightCount*sizeof(float);
     }
     if(morphBytes>kMorphGpuBudgetBytes)throw std::runtime_error("Instance morph weights exceed 128 MiB frame budget");
@@ -1649,45 +1652,34 @@ void CharacterSceneRenderer::onAnimationKey(
 void CharacterSceneRenderer::createMeshBuffers(
     LoadedAsset& asset,
     rhi::GpuBuffer& vertexBuffer,
-    rhi::GpuBuffer& indexBuffer) {
-    const VkDeviceSize vertexSize =
-        sizeof(AssetVertex) * asset.vertices.size();
-    rhi::GpuBuffer vertexStaging = allocator_->createBuffer(
-        vertexSize,
-        VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-        true);
-    std::memcpy(
-        vertexStaging.mapped,
-        asset.vertices.data(),
-        static_cast<std::size_t>(vertexSize));
-    vertexBuffer = allocator_->createBuffer(
-        vertexSize,
-        VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
-            | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-        false);
-    rhi_->copyBuffer(vertexStaging, vertexBuffer, vertexSize);
-    allocator_->destroyBuffer(vertexStaging);
-
-    const VkDeviceSize indexSize =
-        sizeof(std::uint32_t) * asset.indices.size();
-    rhi::GpuBuffer indexStaging = allocator_->createBuffer(
-        indexSize,
-        VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-        true);
-    std::memcpy(
-        indexStaging.mapped,
-        asset.indices.data(),
-        static_cast<std::size_t>(indexSize));
-    indexBuffer = allocator_->createBuffer(
-        indexSize,
-        VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-        false);
-    rhi_->copyBuffer(indexStaging, indexBuffer, indexSize);
-    allocator_->destroyBuffer(indexStaging);
+    rhi::GpuBuffer& indexBuffer,rhi::GpuBuffer& vertexColorBuffer) {
+    if(vertexBuffer.buffer||indexBuffer.buffer||vertexColorBuffer.buffer)
+        throw std::logic_error("Retire mesh buffers before creating their replacement");
+    if(!asset.vertexColors.empty()&&asset.vertexColors.size()!=asset.vertices.size())
+        throw std::invalid_argument("Vertex color stream must match the mesh vertex count");
+    const auto upload=[&](const void* data,VkDeviceSize size,VkBufferUsageFlags usage){
+        rhi::GpuBuffer staging{},target{};
+        try {
+            staging=allocator_->createBuffer(size,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true);
+            if(!staging.mapped)throw std::runtime_error("Vertex upload requires mapped staging memory");
+            std::memcpy(staging.mapped,data,static_cast<std::size_t>(size));
+            target=allocator_->createBuffer(size,VK_BUFFER_USAGE_TRANSFER_DST_BIT|usage,false);
+            rhi_->copyBuffer(staging,target,size);allocator_->destroyBuffer(staging);return target;
+        }catch(...){allocator_->destroyBuffer(staging);allocator_->destroyBuffer(target);throw;}
+    };
+    if(!whiteVertexColorBuffer_.buffer){const std::array<float,4> white{1,1,1,1};
+        whiteVertexColorBuffer_=upload(white.data(),sizeof(white),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);}
+    try {
+        vertexBuffer=upload(asset.vertices.data(),sizeof(AssetVertex)*asset.vertices.size(),
+            VK_BUFFER_USAGE_VERTEX_BUFFER_BIT|VK_BUFFER_USAGE_STORAGE_BUFFER_BIT);
+        indexBuffer=upload(asset.indices.data(),sizeof(std::uint32_t)*asset.indices.size(),VK_BUFFER_USAGE_INDEX_BUFFER_BIT);
+        if(!asset.vertexColors.empty())vertexColorBuffer=upload(asset.vertexColors.data(),
+            sizeof(std::array<float,4>)*asset.vertexColors.size(),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
+    }catch(...){allocator_->destroyBuffer(vertexBuffer);allocator_->destroyBuffer(indexBuffer);allocator_->destroyBuffer(vertexColorBuffer);throw;}
 }
 
 void CharacterSceneRenderer::createVertexBuffer() {
-    createMeshBuffers(asset_, vertexBuffer_, indexBuffer_);
+    createMeshBuffers(asset_, vertexBuffer_, indexBuffer_,vertexColorBuffer_);
 }
 
 void CharacterSceneRenderer::createIndexBuffer() {
@@ -2156,7 +2148,7 @@ void CharacterSceneRenderer::createAdditionalResources() {
         resource->asset = loadGltfAsset(resource->path);
         applyMaterialBindings(resource->asset,layout.materials.at(index));
         createMeshBuffers(
-            resource->asset, resource->vertexBuffer, resource->indexBuffer);
+            resource->asset, resource->vertexBuffer, resource->indexBuffer,resource->vertexColorBuffer);
         uploadMaterialTextures(resource->asset, resource->gpuMaterials);
         resource->jointBase = jointBase;
         resource->textureBase = textureBase;
@@ -2604,6 +2596,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
     const bool mainPrefill=mode==DepthCoverageMode::MainPrefill;
     const bool prefill=mainPrefill||mode==DepthCoverageMode::SnapshotPrefill;
     const bool colorRequired=mode==DepthCoverageMode::SnapshotColor;
+    commands.bindVertexStream(1,whiteVertexColorBuffer_.buffer,0);
     const auto& prefillPipelines=mainPrefill?mainPrefillPipelines_:snapshotPrefillPipelines_;
     commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
     if(bindlessTextures_){
@@ -3184,6 +3177,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
              static_cast<std::uint32_t>(offsetof(AssetVertex, morph1))},
             {8, VK_FORMAT_R32_SFLOAT,
              static_cast<std::uint32_t>(offsetof(AssetVertex, browMask))},
+            {9,VK_FORMAT_R32G32B32A32_SFLOAT,0,1},
         };
         const std::vector<rhi::VertexAttributeDesc> shadowAttributes = {
             materialAttributes[0],
@@ -3208,8 +3202,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         rhi::GraphicsPipelineDesc materialDesc{};
         materialDesc.vertexShader = vertexModule;
         materialDesc.fragmentShader = fragmentModule;
-        materialDesc.vertexStride =
-            static_cast<std::uint32_t>(sizeof(AssetVertex));
+        materialDesc.vertexBindings={{0,static_cast<std::uint32_t>(sizeof(AssetVertex)),VK_VERTEX_INPUT_RATE_VERTEX},
+            {1,0,VK_VERTEX_INPUT_RATE_VERTEX}};
         materialDesc.vertexAttributes = materialAttributes;
         materialDesc.colorAttachmentCount = kMaterialColorAttachmentCount;
         materialDesc.renderPass = context.sceneRenderPass;
@@ -3263,6 +3257,10 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.alphaBlend = true;
         materialDesc.depthWrite = false;
         createFacingPipelines(blendPipelines_,materialDesc);
+        bool vertexColors=!asset_.vertexColors.empty();
+        for(const auto& resource:additionalResources_)vertexColors|=!resource->asset.vertexColors.empty();
+        if(vertexColors){auto colored=materialDesc;colored.vertexBindings[1].stride=sizeof(std::array<float,4>);
+            createFacingPipelines(vertexColorBlendPipelines_,colored);}
         materialDesc.cullMode=VK_CULL_MODE_NONE;
         initializeHairIntegralPipelines(context,integralBase);
         auto multiplyDesc=materialDesc;
@@ -3319,6 +3317,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         backgroundDesc.vertexShader = backgroundVertexModule;
         backgroundDesc.fragmentShader = backgroundFragmentModule;
         backgroundDesc.vertexStride = 0;
+        backgroundDesc.vertexBindings.clear();
         backgroundDesc.vertexAttributes.clear();
         backgroundDesc.cullMode = VK_CULL_MODE_NONE;
         backgroundDesc.depthTest = false;
@@ -3385,6 +3384,8 @@ void CharacterSceneRenderer::destroyResources() {
              &blendPipelines_[0],
              &blendPipelines_[1],
              &blendPipelines_[2],&blendPipelines_[3],
+             &vertexColorBlendPipelines_[0],&vertexColorBlendPipelines_[1],
+             &vertexColorBlendPipelines_[2],&vertexColorBlendPipelines_[3],
              &multiplyPipelines_[0],
              &multiplyPipelines_[1],
              &multiplyPipelines_[2],&multiplyPipelines_[3],
@@ -3471,10 +3472,12 @@ void CharacterSceneRenderer::destroyResources() {
     skinnedVertexBuffers_.clear();
     allocator_->destroyBuffer(indexBuffer_);
     allocator_->destroyBuffer(vertexBuffer_);
+    allocator_->destroyBuffer(vertexColorBuffer_);allocator_->destroyBuffer(whiteVertexColorBuffer_);
     gpuMaterials_.clear();
     for (auto& resource : additionalResources_) {
         allocator_->destroyBuffer(resource->indexBuffer);
         allocator_->destroyBuffer(resource->vertexBuffer);
+        allocator_->destroyBuffer(resource->vertexColorBuffer);
         for (auto& buffer : resource->skinnedVertexBuffers) {
             allocator_->destroyBuffer(buffer);
         }
@@ -3530,6 +3533,8 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &blendPipelines_[0],
              &blendPipelines_[1],
              &blendPipelines_[2],&blendPipelines_[3],
+             &vertexColorBlendPipelines_[0],&vertexColorBlendPipelines_[1],
+             &vertexColorBlendPipelines_[2],&vertexColorBlendPipelines_[3],
              &multiplyPipelines_[0],
              &multiplyPipelines_[1],
              &multiplyPipelines_[2],&multiplyPipelines_[3],
@@ -4368,9 +4373,13 @@ void CharacterSceneRenderer::drawPrimitive(
         ?hairIntegralPipeline(material,mirrored,false):multiplyComposite
         ? (multiplyPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
         : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipelines_[mirrored?1:0] : blend
-        ? (blendPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
+        ? ((material.unlitTextureLayers.useVertexColor&&!mesh.vertexColors.empty()?vertexColorBlendPipelines_:blendPipelines_)[surfaceFacingIndex(material.doubleSided,mirrored)])
         : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]
         : (opaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]);
+    const auto colorBuffer=snapshot&&!snapshot->buffers.vertexColors.empty()
+        ?snapshot->buffers.vertexColors.at(snapshot->instances.at(firstInstance).meshKey):whiteVertexColorBuffer_.buffer;
+    if(!snapshot&&!mesh.vertexColors.empty())throw std::logic_error("Vertex colors require immutable recording buffers");
+    commands.bindVertexStream(1,colorBuffer,0);
     commands.bindPipeline(pipeline);
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =

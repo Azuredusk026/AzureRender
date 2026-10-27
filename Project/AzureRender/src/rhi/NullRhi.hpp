@@ -181,6 +181,7 @@ public:
         const void* data,
         std::uint32_t size) override;
     void bindVertexBuffer(VkBuffer buffer, VkDeviceSize offset) override;
+    void bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) override;
     void bindIndexBuffer(VkBuffer buffer, VkDeviceSize offset) override;
     void draw(std::uint32_t vertexCount) override;
     void drawIndexed(

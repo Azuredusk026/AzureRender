@@ -138,7 +138,7 @@ def run(player,output,selected=None,expected_validation=None):
             pages=0 if name.endswith('disabled') else 2 if name=='two-objects' else 1
             assert manifest['objectShadowLayoutVersion']==2 and manifest['objectShadowPages']==pages
             assert manifest['objectShadowDepthBytes']==(16*1024*1024 if pages else 0)
-            assert manifest['instanceDataLayoutVersion']==2 and manifest['materialSurfaceProfileLayoutVersion']==12
+            assert manifest['instanceDataLayoutVersion']==2 and manifest['materialSurfaceProfileLayoutVersion']==13
             if name.endswith('-ms'):assert manifest['rasterizationSamples']==4
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name

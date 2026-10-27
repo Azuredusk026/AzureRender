@@ -25,6 +25,7 @@ struct UnlitTextureLayers {
     float postExposureWeight=1,globalColorWeight=1;
     bool viewDepthFadePresent=false;
     std::array<float,4> viewDepthFade{};
+    bool useVertexColor=false;
 };
 struct UnlitEffectFrame {
     float exposureGain=1,saturation=1;
@@ -42,5 +43,5 @@ float evaluateUnlitViewDepthFade(const UnlitTextureLayers&,float effectViewZ);
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers&,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
     float softIntersection,float nodeOpacity,const UnlitEffectFrame&,
-    std::optional<float> effectViewZ=std::nullopt);
+    std::optional<float> effectViewZ=std::nullopt,std::array<float,4> vertexColor={1,1,1,1});
 }

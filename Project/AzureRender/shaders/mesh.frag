@@ -171,6 +171,8 @@ layout(location = 2) AZURE_SAMPLE in vec2 textureCoordinate;
 layout(location = 3) AZURE_SAMPLE in vec3 worldPosition;
 layout(location = 4) AZURE_SAMPLE in vec4 shadowPositions[4];
 layout(location = 8) AZURE_SAMPLE in float eyebrowRegion;
+layout(location=8,component=1) AZURE_SAMPLE in vec3 vertexColorRgb;
+layout(location=0,component=3) AZURE_SAMPLE in float vertexColorAlpha;
 layout(location = 9) flat in vec4 instanceFaceDirection;
 layout(location = 10) flat in mat4 instanceFaceFrame;
 layout(location = 14) AZURE_SAMPLE in vec3 opacityCoordinate;
@@ -1761,8 +1763,9 @@ void main() {
             }
 #endif
             soft*=azureUnlitViewDepthFade(effectDepth,p.rows[10],p.rows[11].x);
-            vec4 layered=azureUnlitLayerColor(layerBase,second,p.rows,soft,camera.unlitTimeExposure.y,camera.unlitTimeExposure.z,camera.unlitColorGain.rgb);
+            vec4 layered=azureUnlitLayerColor(layerBase,second,p.rows,soft,camera.unlitTimeExposure.y,camera.unlitTimeExposure.z,camera.unlitColorGain.rgb,vec4(vertexColorRgb,vertexColorAlpha));
             baseColor=azureUnlitLayerSample(layerBase,p.rows[9].x)*p.rows[6];
+            if(p.rows[11].y>.5)baseColor*=vec4(vertexColorRgb,vertexColorAlpha);
             beautyColor=layered.rgb;outputAlpha=layered.a;emissive=layered.rgb;
             if(qaEffectMode==6&&qaEffectDisabled){beautyColor=vec3(0);emissive=vec3(0);}
         }

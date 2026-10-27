@@ -17,8 +17,9 @@ float azureUnlitViewDepthFade(float effectViewZ,vec4 range,float enabled) {
     return clamp((depth-range.x)/(range.y-range.x),0.0,1.0)
         *clamp((range.w-depth)/(range.w-range.z),0.0,1.0);
 }
-vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[12],float soft,float exposureGain,float saturation,vec3 colorGain) {
+vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[12],float soft,float exposureGain,float saturation,vec3 colorGain,vec4 vertexColor) {
     base=azureUnlitLayerSample(base,rows[9].x)*rows[6];
+    if(rows[11].y>.5)base*=vertexColor;
     if(rows[9].z>.5) {
         second=azureUnlitLayerSample(second,rows[9].y);
         if(rows[9].z<1.5)base*=second;

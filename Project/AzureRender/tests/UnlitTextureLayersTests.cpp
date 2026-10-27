@@ -31,6 +31,9 @@ void parsing() {
  require(p.present&&p.layerCount==1&&p.layers[0].texture==0,"Base layer binding");
  auto faded=base;faded["viewDepthFade"]={{"near",{.5,1}},{"far",{100,150}}};
  require(parseUnlitTextureLayers(faded,2).present,"Optional view-depth fade parses");
+ auto colored=base;colored["vertexColor"]=true;
+ require(parseUnlitTextureLayers(colored,2).present,"Explicit vertex color consumption parses");
+ for(const Json& value:{Json(1),Json("true"),Json(nullptr)}){colored["vertexColor"]=value;reject(colored);}
  for(const Json& bad:Json::array({nullptr,true,{{"near",{.5,1}}},
   {{"near",{1,1}},{"far",{100,150}}},{{"near",{-.5,1}},{"far",{100,150}}},
   {{"near",{.5,true}},{"far",{100,150}}},{{"near",{.5,1}},{"far",{150,100}}},
@@ -114,6 +117,19 @@ void numerical() {
   "View-depth fade combines with soft intersection before coverage saturation");
  near(evaluateUnlitTextureLayers(depthProfile,{.2F,.3F,.4F,.75F},{},.75F,.4F,{},1.F)[3],.4F,
   "Peak coverage saturates before the node opacity");
+ auto vertexProfile=parseUnlitTextureLayers(fixture(),2);vertexProfile.useVertexColor=true;
+ vertexProfile.tint={1,1,1,1};vertexProfile.highlightGain=0;
+ vertexProfile.layers[0].sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
+ const auto vertex=evaluateUnlitTextureLayers(vertexProfile,{.5F,.9F,.1F,.1F},{},1,.4F,{},std::nullopt,{.2F,.4F,.8F,.5F});
+ near(vertex[0],.2F,"Vertex RGB follows sample-mode interpretation");near(vertex[2],.8F,"Vertex blue remains linear");
+ near(vertex[3],.1F,"Vertex alpha and node opacity are each consumed once");
+ vertexProfile.layers[0].sampleMode=UnlitTextureLayer::SampleMode::Rgba;
+ vertexProfile.layerCount=2;vertexProfile.layers[1].role=UnlitTextureLayer::Role::Blend;vertexProfile.blendTint={1,1,1,1};
+ const auto vertexBlend=evaluateUnlitTextureLayers(vertexProfile,{.5F,.5F,.5F,.8F},{.5F,.1F,.2F,.2F},1,1,{},std::nullopt,{.2F,.4F,.8F,.5F});
+ near(vertexBlend[0],.4F,"Vertex alpha participates in blend weighting");near(vertexBlend[2],.52F,"Blend energy follows vertex color multiplication");
+ vertexProfile.layerCount=1;vertexProfile.useVertexColor=false;
+ near(evaluateUnlitTextureLayers(vertexProfile,{.5F,.5F,.5F,.8F},{},1,1,{},std::nullopt,{0,0,0,0})[3],.8F,
+  "Unselected vertex data leaves existing coverage intact");
  const auto bad=[&](auto callback){bool failed=false;try{callback();}catch(const std::invalid_argument&){failed=true;}require(failed,"Invalid runtime input must fail explicitly");};
  bad([&]{(void)evaluateUnlitTextureLayers(depthProfile,{1,1,1,1},{},1,1,{});});
  bad([&]{(void)evaluateUnlitViewDepthFade(depthProfile,std::numeric_limits<float>::infinity());});

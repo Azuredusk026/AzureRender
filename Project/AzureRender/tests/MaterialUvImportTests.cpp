@@ -60,6 +60,47 @@ int main(){
   explicitTangent["meshes"][0]["primitives"][0]["attributes"]["TANGENT"]=5;
   const auto retained=load(explicitTangent);
   if(!near(retained.vertices[0].tangent[0],1)||!near(retained.vertices[0].tangent[3],-1))throw std::runtime_error("Authored tangent directions and handedness must remain intact");
+  const unsigned char colors[]={255,0,64,255,128,32,0,128,0,255,255,64};
+  {std::ofstream out(root/"mesh.bin",std::ios::binary|std::ios::app);out.write(reinterpret_cast<const char*>(colors),sizeof(colors));}
+  auto colored=source;colored["buffers"][0]["byteLength"]=188;
+  colored["bufferViews"].push_back({{"buffer",0},{"byteOffset",176},{"byteLength",12}});
+  colored["accessors"].push_back({{"bufferView",5},{"componentType",5121},{"count",3},{"type","VEC4"},{"normalized",true}});
+  colored["meshes"][0]["primitives"][0]["attributes"]["COLOR_0"]=5;
+  const auto rgba=load(colored);
+  if(rgba.vertexColors.size()!=3||!near(rgba.vertexColors[0][2],64.F/255)||!near(rgba.vertexColors[1][3],128.F/255))
+      throw std::runtime_error("Normalized COLOR_0 must remain linear RGBA");
+  if(!ordinary.vertexColors.empty())throw std::runtime_error("Absent colors must retain the optional-stream default");
+  auto mixedColors=colored;mixedColors["meshes"][0]["primitives"].push_back(source["meshes"][0]["primitives"][0]);
+  const auto padded=load(mixedColors);
+  if(padded.vertexColors.size()!=6||padded.vertexColors[3]!=std::array<float,4>{1,1,1,1})
+      throw std::runtime_error("Uncolored primitives must use white without changing color indices");
+  auto invalidColor=colored;invalidColor["accessors"][5]["normalized"]=false;reject(invalidColor);
+  invalidColor=colored;invalidColor["accessors"][5]["count"]=2;reject(invalidColor);
+  invalidColor=colored;invalidColor["accessors"][5]["type"]="VEC2";reject(invalidColor);
+  invalidColor=colored;invalidColor["bufferViews"][5]["byteLength"]=11;reject(invalidColor);
+  const auto colorFixture=[&](const void* bytes,std::size_t size,int format,const char* type,bool normalized,
+      unsigned stride=0,unsigned accessorOffset=0){
+    const auto length=std::filesystem::file_size(root/"mesh.bin");const auto offset=(length+3)&~std::uintmax_t(3);
+    {std::ofstream out(root/"mesh.bin",std::ios::binary|std::ios::app);for(auto i=length;i<offset;++i)out.put(0);out.write(static_cast<const char*>(bytes),size);}
+    auto input=source;input["buffers"][0]["byteLength"]=offset+size;
+    input["bufferViews"].push_back({{"buffer",0},{"byteOffset",offset},{"byteLength",size}});
+    if(stride)input["bufferViews"][5]["byteStride"]=stride;
+    input["accessors"].push_back({{"bufferView",5},{"componentType",format},{"count",3},{"type",type},{"normalized",normalized},{"byteOffset",accessorOffset}});
+    input["meshes"][0]["primitives"][0]["attributes"]["COLOR_0"]=5;return input;
+  };
+  const unsigned short rgb16[]={65535,0,32768,0,65535,0,123,456,789};
+  const auto rgb=load(colorFixture(rgb16,sizeof(rgb16),5123,"VEC3",true));
+  if(!near(rgb.vertexColors[0][2],32768.F/65535)||rgb.vertexColors[2][3]!=1)
+      throw std::runtime_error("Normalized RGB16 must preserve linear channels and implicit alpha");
+  const float rgba32[]={.1F,.2F,.3F,.4F,.5F,.6F,.7F,.8F,.9F,1,0,.2F};
+  const auto floatSource=colorFixture(rgba32,sizeof(rgba32),5126,"VEC4",false);
+  if(load(floatSource).vertexColors[1]!=std::array<float,4>{.5F,.6F,.7F,.8F})throw std::runtime_error("Float colors must preserve their exact values");
+  invalidColor=floatSource;invalidColor["accessors"][5]["normalized"]=true;reject(invalidColor);
+  const unsigned char interleaved[]={0,0,255,0,64,255,0,0, 0,0,128,32,0,128,0,0, 0,0,0,255,255,64,0,0};
+  if(load(colorFixture(interleaved,sizeof(interleaved),5121,"VEC4",true,8,2)).vertexColors!=rgba.vertexColors)
+      throw std::runtime_error("Interleaved color offsets and strides must preserve source channels");
+  float invalidFloats[12]={};invalidFloats[0]=1.01F;
+  reject(colorFixture(invalidFloats,sizeof(invalidFloats),5126,"VEC4",false));
   std::filesystem::remove_all(root);std::cout<<"Material UV import checks passed\n";return 0;
  }catch(const std::exception& e){std::cerr<<e.what()<<'\n';std::filesystem::remove_all(root);return 1;}
 }

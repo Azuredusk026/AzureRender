@@ -484,6 +484,36 @@ std::size_t accessorStride(
     return static_cast<std::size_t>(stride);
 }
 
+std::vector<std::array<float,4>> readVertexColors(const tinygltf::Model& model,
+    const tinygltf::Primitive& primitive,std::size_t count) {
+    const auto found=primitive.attributes.find("COLOR_0");if(found==primitive.attributes.end())return {};
+    const auto fail=[](){throw std::invalid_argument("Invalid glTF COLOR_0 layout, range or storage");};
+    const auto& accessor=model.accessors.at(static_cast<std::size_t>(found->second));
+    const unsigned components=accessor.type==TINYGLTF_TYPE_VEC3?3:accessor.type==TINYGLTF_TYPE_VEC4?4:0;
+    const bool floating=accessor.componentType==TINYGLTF_COMPONENT_TYPE_FLOAT;
+    const unsigned bytes=floating?4:accessor.componentType==TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT?2:
+        accessor.componentType==TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE?1:0;
+    if(!components||!bytes||!count||accessor.count!=count||accessor.sparse.isSparse
+        ||accessor.bufferView<0||accessor.normalized==floating)fail();
+    const auto& view=model.bufferViews.at(static_cast<std::size_t>(accessor.bufferView));
+    const auto& buffer=model.buffers.at(static_cast<std::size_t>(view.buffer));
+    const auto stride=accessorStride(model,accessor);const std::size_t element=components*bytes;
+    if(stride<element||accessor.byteOffset%bytes||view.byteOffset%bytes
+        ||view.byteOffset>buffer.data.size()||view.byteLength>buffer.data.size()-view.byteOffset
+        ||accessor.byteOffset>view.byteLength||element>view.byteLength-accessor.byteOffset
+        ||count-1>(view.byteLength-accessor.byteOffset-element)/stride)fail();
+    const auto* data=buffer.data.data()+view.byteOffset+accessor.byteOffset;
+    std::vector<std::array<float,4>> result(count,{1,1,1,1});
+    for(std::size_t i=0;i<count;++i)for(unsigned channel=0;channel<components;++channel) {
+        const auto* input=data+i*stride+channel*bytes;float value=0;
+        if(floating)std::memcpy(&value,input,4);
+        else if(bytes==2){std::uint16_t raw=0;std::memcpy(&raw,input,2);value=static_cast<float>(raw)/65535.F;}
+        else value=static_cast<float>(*input)/255.F;
+        if(!std::isfinite(value)||value<0||value>1)fail();result[i][channel]=value;
+    }
+    return result;
+}
+
 void copyFloatAttribute(
     const tinygltf::Model& model,
     const tinygltf::Primitive& primitive,
@@ -2372,6 +2402,7 @@ void appendPrimitive(
     copyFloatAttribute(model, primitive, "NORMAL", 3, vertices);
     copyFloatAttribute(model, primitive, "TANGENT", 4, vertices);
     copyFloatAttribute(model, primitive, "TEXCOORD_0", 2, vertices);
+    const auto vertexColors=readVertexColors(model,primitive,vertices.size());
     const auto secondary=primitive.attributes.find("TEXCOORD_1");
     std::vector<std::array<float,2>> texcoord1;
     if(secondary!=primitive.attributes.end()) {
@@ -2436,6 +2467,10 @@ void appendPrimitive(
         : fallbackMaterial;
     draw.nodeIndex = nodeIndex;
     draw.hasTexcoord1=!texcoord1.empty();
+    if(!vertexColors.empty()||!asset.vertexColors.empty()) {
+        asset.vertexColors.resize(baseVertex+vertices.size(),{1,1,1,1});
+        if(!vertexColors.empty())std::copy(vertexColors.begin(),vertexColors.end(),asset.vertexColors.begin()+baseVertex);
+    }
     if(!texcoord1.empty()||!asset.texcoord1.empty()) {
         asset.texcoord1.resize(baseVertex+vertices.size());
         if(!texcoord1.empty())std::copy(texcoord1.begin(),texcoord1.end(),asset.texcoord1.begin()+baseVertex);

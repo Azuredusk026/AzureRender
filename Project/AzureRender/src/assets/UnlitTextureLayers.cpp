@@ -41,7 +41,7 @@ std::array<float,4> sample(std::array<float,4> rgba,UnlitTextureLayer::SampleMod
 }
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade"});
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
@@ -77,6 +77,10 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
     result.highlightGain=scalar(highlight.at("gain"),"highlightExpansion.gain",0);
     result.postExposureWeight=scalar(source.at("postExposureWeight"),"postExposureWeight",0,1);
     result.globalColorWeight=scalar(source.at("globalColorWeight"),"globalColorWeight",0,1);
+    if(source.contains("vertexColor")) {
+        if(!source.at("vertexColor").is_boolean())invalid("vertexColor");
+        result.useVertexColor=source.at("vertexColor").get<bool>();
+    }
     if(source.contains("viewDepthFade")) {
         const auto& fade=source.at("viewDepthFade");fields(fade,{"near","far"},"viewDepthFade");
         const auto nearRange=vector<2>(fade.at("near"),"viewDepthFade.near");
@@ -120,7 +124,8 @@ float evaluateUnlitViewDepthFade(const UnlitTextureLayers& profile,float effectV
 }
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
-    float softIntersection,float nodeOpacity,const UnlitEffectFrame& frame,std::optional<float> effectViewZ) {
+    float softIntersection,float nodeOpacity,const UnlitEffectFrame& frame,std::optional<float> effectViewZ,
+    std::array<float,4> vertexColor) {
     if(!profile.present||profile.layerCount<1||profile.layerCount>2)invalid("unbound profile");
     validateUnlitEffectFrame(frame);
     for(float value:{softIntersection,nodeOpacity})finite(value,"frame");
@@ -129,6 +134,7 @@ std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile
     if(effectViewZ)softIntersection*=evaluateUnlitViewDepthFade(profile,*effectViewZ);
     auto result=sample(baseSample,profile.layers[0].sampleMode);
     for(unsigned i=0;i<4;++i)result[i]*=profile.tint[i];
+    if(profile.useVertexColor)for(unsigned i=0;i<4;++i){finite(vertexColor[i],"vertex color");result[i]*=vertexColor[i];}
     if(profile.layerCount==2) {
         const auto second=sample(secondSample,profile.layers[1].sampleMode);
         if(profile.layers[1].role==UnlitTextureLayer::Role::Mask)for(unsigned i=0;i<4;++i)result[i]*=second[i];

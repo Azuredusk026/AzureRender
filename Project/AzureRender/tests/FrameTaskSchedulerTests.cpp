@@ -34,6 +34,16 @@ int main() {
     sourceInstances[0].meshKey = 7;
     const azurerender::SceneInstanceSnapshot validInstances(sourceInstances, {0}, {}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers);
     validInstances.validateForRecording();
+    auto colorBuffers=validBuffers;
+    colorBuffers.vertexColors.assign(8,reinterpret_cast<VkBuffer>(std::uintptr_t{3}));
+    const azurerender::SceneInstanceSnapshot colorSnapshot(sourceInstances,{0},{},{},{},{0},{},{},VK_NULL_HANDLE,0,{},colorBuffers);
+    colorBuffers.vertexColors[7]=reinterpret_cast<VkBuffer>(std::uintptr_t{4});
+    colorSnapshot.validateForRecording();
+    if(colorSnapshot.buffers.vertexColors[7]!=reinterpret_cast<VkBuffer>(std::uintptr_t{3}))return 1;
+    colorBuffers.vertexColors.pop_back();bool incompleteColorsRejected=false;
+    try{const azurerender::SceneInstanceSnapshot incompleteColors(sourceInstances,{0},{},{},{},{0},{},{},VK_NULL_HANDLE,0,{},colorBuffers);
+        incompleteColors.validateForRecording();}catch(const std::logic_error&){incompleteColorsRejected=true;}
+    if(!incompleteColorsRejected)return 1;
     std::vector<std::vector<float>> sourceOpacities{{0.4F, 1.0F}};
     const azurerender::SceneInstanceSnapshot opacitySnapshot(sourceInstances, {0}, {}, {}, {}, {0}, {}, {}, VK_NULL_HANDLE, 0, {}, validBuffers, {}, sourceOpacities);
     sourceOpacities[0][0] = 0;

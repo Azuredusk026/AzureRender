@@ -141,7 +141,7 @@ def run(player,root,expected_validation='any',selected=None):
         if expected_validation!='any':assert validation==(expected_validation=='enabled'),name
         report=json.loads((out/'runtime.json').read_text());assert not report['scriptErrors'] and not report['presentationErrors'],name
         manifest=json.loads((out/'frames/capture_manifest.json').read_text())
-        assert manifest['materialSurfaceProfileLayoutVersion']==12 and manifest['cameraUniformBytes']==688 and manifest['unlitFrameLayoutVersion']==1,name
+        assert manifest['materialSurfaceProfileLayoutVersion']==13 and manifest['cameraUniformBytes']==688 and manifest['unlitFrameLayoutVersion']==1,name
         assert np.allclose(manifest['qaCameraPosition'],[camera_x,0,3],atol=1e-6),name
         images=[np.asarray(Image.open(out/f'frames/frame_{i:06d}.png').convert('RGB')) for i in range(frames)]
         for i,image in enumerate(images):

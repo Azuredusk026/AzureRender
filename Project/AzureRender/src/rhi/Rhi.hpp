@@ -98,6 +98,13 @@ struct VertexAttributeDesc {
     std::uint32_t location = 0;
     VkFormat format = VK_FORMAT_UNDEFINED;
     std::uint32_t offset = 0;
+    std::uint32_t binding = 0;
+};
+
+struct VertexBindingDesc {
+    std::uint32_t binding = 0;
+    std::uint32_t stride = 0;
+    VkVertexInputRate inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 };
 
 enum class PrimaryColorBlend { Alpha, Multiply };
@@ -109,6 +116,8 @@ struct GraphicsPipelineDesc {
     // Empty vertexStride means a fullscreen pipeline with no vertex input.
     std::uint32_t vertexStride = 0;
     std::vector<VertexAttributeDesc> vertexAttributes;
+    // Explicit streams use vertexStride=0; an empty list uses the single-stream shorthand.
+    std::vector<VertexBindingDesc> vertexBindings;
 
     VkCullModeFlags cullMode = VK_CULL_MODE_BACK_BIT;
     VkFrontFace frontFace = VK_FRONT_FACE_CLOCKWISE;
@@ -141,6 +150,32 @@ struct GraphicsPipelineDesc {
     ShaderSpecialization vertexSpecialization;
     ShaderSpecialization fragmentSpecialization;
 };
+
+inline constexpr std::uint32_t kMaximumVertexBindings=16;
+inline std::vector<VertexBindingDesc> resolveGraphicsVertexBindings(const GraphicsPipelineDesc& desc) {
+    auto bindings=desc.vertexBindings;
+    if(!bindings.empty()&&desc.vertexStride)throw std::invalid_argument("Explicit vertex bindings require zero shorthand stride");
+    if(bindings.empty()&&desc.vertexStride)bindings.push_back({0,desc.vertexStride,VK_VERTEX_INPUT_RATE_VERTEX});
+    if(bindings.size()>kMaximumVertexBindings||desc.vertexAttributes.size()>16)
+        throw std::invalid_argument("Vertex input exceeds the portable binding or attribute budget");
+    for(std::size_t i=0;i<bindings.size();++i) {
+        const auto& binding=bindings[i];
+        if(binding.binding>=kMaximumVertexBindings||binding.stride>2048
+            ||(binding.inputRate!=VK_VERTEX_INPUT_RATE_VERTEX&&binding.inputRate!=VK_VERTEX_INPUT_RATE_INSTANCE))
+            throw std::invalid_argument("Invalid vertex binding or stride");
+        for(std::size_t j=0;j<i;++j)if(bindings[j].binding==binding.binding)
+            throw std::invalid_argument("Duplicate vertex binding");
+    }
+    for(std::size_t i=0;i<desc.vertexAttributes.size();++i) {
+        const auto& attribute=desc.vertexAttributes[i];bool found=false;
+        for(const auto& binding:bindings)found|=binding.binding==attribute.binding;
+        if(!found||attribute.location>=16||attribute.offset>2047||attribute.format==VK_FORMAT_UNDEFINED)
+            throw std::invalid_argument("Invalid vertex attribute binding, location, offset or format");
+        for(std::size_t j=0;j<i;++j)if(desc.vertexAttributes[j].location==attribute.location)
+            throw std::invalid_argument("Duplicate vertex attribute location");
+    }
+    return bindings;
+}
 
 inline bool validSampleCount(VkSampleCountFlagBits samples) {
     const auto value=static_cast<std::uint32_t>(samples);
@@ -282,6 +317,11 @@ public:
         std::uint32_t size) = 0;
 
     virtual void bindVertexBuffer(VkBuffer buffer, VkDeviceSize offset) = 0;
+    virtual void bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) {
+        if(binding>=kMaximumVertexBindings||!buffer)throw std::invalid_argument("Invalid vertex stream binding or buffer");
+        if(binding!=0)throw std::runtime_error("This recorder does not support additional vertex streams");
+        bindVertexBuffer(buffer,offset);
+    }
     virtual void bindIndexBuffer(VkBuffer buffer, VkDeviceSize offset) = 0;
     virtual void draw(std::uint32_t vertexCount) = 0;
     virtual void drawIndexed(

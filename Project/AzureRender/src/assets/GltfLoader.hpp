@@ -339,6 +339,8 @@ struct LoadedAsset {
     // Optional standard UV1 stream, indexed like vertices. Consumers declare
     // their interpretation; the base vertex/skinning ABI remains unchanged.
     std::vector<std::array<float,2>> texcoord1;
+    // Optional linear RGBA, indexed like vertices; absent primitives use white.
+    std::vector<std::array<float,4>> vertexColors;
 };
 
 [[nodiscard]] LoadedAsset loadGltfAsset(const std::string& path);

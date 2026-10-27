@@ -40,6 +40,11 @@ layout(location = 5) in vec4 jointWeights;
 layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
 layout(location = 8) in float browMask;
+#if !defined(AZURE_OUTLINE_MASK) && !defined(AZURE_SNAPSHOT_DEPTH)
+layout(location=9) in vec4 vertexColor;
+layout(location=8,component=1) out vec3 vertexColorRgb;
+layout(location=0,component=3) out float vertexColorAlpha;
+#endif
 #if defined(AZURE_OUTLINE_MASK) || defined(AZURE_SNAPSHOT_DEPTH)
 #define AZURE_VERTEX_OUTPUT(locationIndex)
 #else
@@ -89,6 +94,9 @@ float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceD
 vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
 #endif
 void main() {
+#if !defined(AZURE_OUTLINE_MASK) && !defined(AZURE_SNAPSHOT_DEPTH)
+    vertexColorRgb=vertexColor.rgb;vertexColorAlpha=vertexColor.a;
+#endif
 #if defined(AZURE_OBJECT_SHADOW)
     instanceObjectShadow=instanceData.instances[gl_InstanceIndex].objectShadowIndex;
 #endif

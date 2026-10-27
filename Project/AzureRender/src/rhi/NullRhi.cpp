@@ -266,6 +266,7 @@ void NullCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, VkDe
 }
 
 VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
+    const auto vertexBindings=resolveGraphicsVertexBindings(desc);
     validateShaderSpecialization(desc.vertexSpecialization);
     validateShaderSpecialization(desc.fragmentSpecialization);
     validateGraphicsColorWriteMasks(desc);
@@ -295,6 +296,11 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
     };
     recordSpecialization("vertexSpec",desc.vertexSpecialization);
     recordSpecialization("fragmentSpec",desc.fragmentSpecialization);
+    if(!vertexBindings.empty()) {
+        calls.back().detail+=" vertexBindings=";
+        for(const auto& binding:vertexBindings)calls.back().detail+=std::to_string(binding.binding)+":"
+            +std::to_string(binding.stride)+":"+std::to_string(binding.inputRate)+"/";
+    }
     if(!desc.colorWriteMasks.empty()) {
         calls.back().detail+=" masks=";
         for(const auto mask:desc.colorWriteMasks)calls.back().detail+=std::to_string(mask)+"/";
@@ -462,6 +468,11 @@ void NullCommandRecorder::bindIndexBuffer(
     calls.push_back(
         {"bindIndexBuffer",
          hexHandle(buffer) + " +" + std::to_string(offset)});
+}
+
+void NullCommandRecorder::bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) {
+    if(binding>=kMaximumVertexBindings||!buffer)throw std::invalid_argument("Invalid vertex stream binding or buffer");
+    calls.push_back({"bindVertexStream","binding="+std::to_string(binding)+" "+hexHandle(buffer)+" +"+std::to_string(offset)});
 }
 
 void NullCommandRecorder::draw(const std::uint32_t vertexCount) {

@@ -63,6 +63,9 @@ int main(int argc,char** argv){try{
  const auto fadedPacked=packMaterialSurfaceProfile(load(fadedSource).materials.at(0));
  require(fadedPacked.rows[10]==std::array<float,4>{.5F,1,100,150}
   &&fadedPacked.rows[11]==std::array<float,4>{1,0,0,0},"View-depth fade uses reserved material rows");
+ auto coloredSource=source;coloredSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"]["vertexColor"]=true;
+ require(packMaterialSurfaceProfile(load(coloredSource).materials.at(0)).rows[11][1]==1,
+  "Explicit vertex color consumption reaches the material table");
  auto document=MaterialData::defaults("azure.profile");
  document.surface={{"asset",{{"version","2.0"}}},{"materials",source["materials"]},{"textures",source["textures"]},{"samplers",source["samplers"]}};
  const std::string baseId="11111111-1111-4111-8111-111111111111",maskId="22222222-2222-4222-8222-222222222222";
@@ -73,6 +76,10 @@ int main(int argc,char** argv){try{
   [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
  require(packMaterialSurfaceProfile(fadedStandalone).rows==fadedPacked.rows,
   "Complete material documents preserve view-depth fade");
+ auto coloredDocument=document;coloredDocument.surface["materials"]=coloredSource["materials"];
+ require(MaterialData::parse(coloredDocument.encode()).interpret(
+  [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");}).unlitTextureLayers.useVertexColor,
+  "Complete material documents preserve explicit vertex color consumption");
  const auto interpreted=restored.interpret([&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
  require(packMaterialSurfaceProfile(interpreted).rows==packed.rows,"Complete standalone material document carries layer contract");
  require(interpreted.textureSettings[4].wrapU=="clamp"&&interpreted.styleMaskPixels==m.styleMaskPixels,"Standalone layer sampler and pixels agree with model import");

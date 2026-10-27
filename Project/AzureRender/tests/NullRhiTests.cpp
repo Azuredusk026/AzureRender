@@ -38,6 +38,34 @@ std::size_t countCalls(
 int main() {
     {
         using namespace azurerender::rhi;
+        NullRhi backend;GraphicsPipelineDesc desc;
+        desc.vertexBindings={{0,12,VK_VERTEX_INPUT_RATE_VERTEX},{1,0,VK_VERTEX_INPUT_RATE_VERTEX}};
+        desc.vertexAttributes={{0,VK_FORMAT_R32G32B32_SFLOAT,0,0},{1,VK_FORMAT_R32G32B32A32_SFLOAT,0,1}};
+        const auto pipeline=backend.createGraphicsPipeline(desc);
+        if(backend.calls.back().detail.find(" vertexBindings=0:12:0/1:0:0/")==std::string::npos) {
+            std::fprintf(stderr,"Explicit vertex streams must reach the backend\n");return 70;
+        }
+        backend.destroyPipeline(pipeline);
+        const auto rejected=[&](const GraphicsPipelineDesc& invalid){
+            const auto count=backend.calls.size();bool failed=false;
+            try{backend.createGraphicsPipeline(invalid);}catch(const std::invalid_argument&){failed=true;}
+            return failed&&backend.calls.size()==count;
+        };
+        auto invalid=desc;invalid.vertexBindings[1].binding=0;if(!rejected(invalid))return 71;
+        invalid=desc;invalid.vertexAttributes[1].binding=2;if(!rejected(invalid))return 72;
+        invalid=desc;invalid.vertexAttributes[1].location=0;if(!rejected(invalid))return 73;
+        invalid=desc;invalid.vertexStride=12;if(!rejected(invalid))return 74;
+        invalid=desc;invalid.vertexBindings[1].inputRate=static_cast<VkVertexInputRate>(123);if(!rejected(invalid))return 75;
+        invalid=desc;invalid.vertexAttributes[1].format=VK_FORMAT_UNDEFINED;if(!rejected(invalid))return 76;
+        NullCommandRecorder commands;
+        try{commands.bindVertexStream(1,reinterpret_cast<VkBuffer>(17),32);}
+        catch(const std::exception&){std::fprintf(stderr,"Additional vertex stream binding must be supported\n");return 77;}
+        if(commands.calls.back().name!="bindVertexStream"||commands.calls.back().detail.find("binding=1")==std::string::npos)return 78;
+        commands.bindVertexBuffer(reinterpret_cast<VkBuffer>(19),0);
+        if(commands.calls.back().name!="bindVertexBuffer")return 79;
+    }
+    {
+        using namespace azurerender::rhi;
         NullRhi backend;GraphicsPipelineDesc graphics;
         graphics.vertexSpecialization={{0,0x3f000000U}};
         graphics.fragmentSpecialization={{0,1},{7,0xffffffffU}};

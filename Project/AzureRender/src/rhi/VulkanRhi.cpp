@@ -416,6 +416,12 @@ void VulkanCommandRecorder::bindComputeDescriptorSet(VkPipelineLayout layout, Vk
 
 VkPipeline VulkanRhi::createGraphicsPipeline(
     const GraphicsPipelineDesc& desc) {
+    const auto vertexBindings=resolveGraphicsVertexBindings(desc);
+    for(const auto& attribute:desc.vertexAttributes) {
+        VkFormatProperties properties{};vkGetPhysicalDeviceFormatProperties(physicalDevice_,attribute.format,&properties);
+        if(!(properties.bufferFeatures&VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT))
+            throw std::runtime_error("Vertex input format is unavailable on this device");
+    }
     const VulkanSpecialization vertexSpecialization(desc.vertexSpecialization);
     const VulkanSpecialization fragmentSpecialization(desc.fragmentSpecialization);
     validateGraphicsColorWriteMasks(desc);
@@ -444,25 +450,24 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     fragmentStage.pSpecializationInfo=fragmentSpecialization.get();
     const std::array shaderStages = {vertexStage, fragmentStage};
 
-    VkVertexInputBindingDescription bindingDescription{};
-    bindingDescription.binding = 0;
-    bindingDescription.stride = desc.vertexStride;
-    bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
+    std::vector<VkVertexInputBindingDescription> bindingDescriptions;
+    bindingDescriptions.reserve(vertexBindings.size());
+    for(const auto& binding:vertexBindings)bindingDescriptions.push_back({binding.binding,binding.stride,binding.inputRate});
     std::vector<VkVertexInputAttributeDescription> attributes(
         desc.vertexAttributes.size());
     for (std::size_t index = 0; index < desc.vertexAttributes.size(); ++index) {
         attributes[index] = {
             desc.vertexAttributes[index].location,
-            0,
+            desc.vertexAttributes[index].binding,
             desc.vertexAttributes[index].format,
             desc.vertexAttributes[index].offset,
         };
     }
     VkPipelineVertexInputStateCreateInfo vertexInput{
         VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO};
-    if (desc.vertexStride > 0) {
-        vertexInput.vertexBindingDescriptionCount = 1;
-        vertexInput.pVertexBindingDescriptions = &bindingDescription;
+    if (!bindingDescriptions.empty()) {
+        vertexInput.vertexBindingDescriptionCount = static_cast<std::uint32_t>(bindingDescriptions.size());
+        vertexInput.pVertexBindingDescriptions = bindingDescriptions.data();
         vertexInput.vertexAttributeDescriptionCount =
             static_cast<std::uint32_t>(attributes.size());
         vertexInput.pVertexAttributeDescriptions = attributes.data();
@@ -895,6 +900,11 @@ void VulkanCommandRecorder::bindIndexBuffer(
     const VkDeviceSize offset) {
     vkCmdBindIndexBuffer(
         commandBuffer_, buffer, offset, VK_INDEX_TYPE_UINT32);
+}
+
+void VulkanCommandRecorder::bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) {
+    if(binding>=kMaximumVertexBindings||!buffer)throw std::invalid_argument("Invalid vertex stream binding or buffer");
+    vkCmdBindVertexBuffers(commandBuffer_,binding,1,&buffer,&offset);
 }
 
 void VulkanCommandRecorder::draw(const std::uint32_t vertexCount) {

@@ -488,6 +488,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/vfx-view-depth-fade.json",
       "primaryProject": "build/runs/20261028-033440-native-vfx-view-depth-fade-09828e/full-candidate/enclosure-vfx-depth-fade.azureproject"
+    },
+    {
+      "path": "runs/20261028-040334-vertex-color-input-contract-b54529",
+      "pathBase": "build",
+      "purpose": "公共顶点颜色、多流绑定、双配置绘制及二十二个实际实例验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/vertex-color-streams.json",
+      "primaryProject": "build/runs/20261028-040334-vertex-color-input-contract-b54529/full-candidate/enclosure-vfx-vertex-color.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

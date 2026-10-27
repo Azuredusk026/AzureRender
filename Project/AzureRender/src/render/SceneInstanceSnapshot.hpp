@@ -21,6 +21,7 @@ struct RecordingGizmoState {
 struct RecordingBufferSet {
     std::vector<VkBuffer> vertices;
     std::vector<VkBuffer> indices;
+    std::vector<VkBuffer> vertexColors;
     VkBuffer transparentIndices = VK_NULL_HANDLE;
     bool multiDrawIndirect = false;
     std::uint32_t maxDrawIndirectCount = 1;
@@ -86,6 +87,8 @@ struct SceneInstanceSnapshot final {
             throw std::logic_error("Snapshot indirect batch limit is zero");
         if (buffers.vertices.size() != buffers.indices.size())
             throw std::logic_error("Snapshot vertex/index resource counts differ");
+        if(!buffers.vertexColors.empty()&&buffers.vertexColors.size()!=buffers.vertices.size())
+            throw std::logic_error("Snapshot vertex color resource count differs");
         if(buffers.outlineMaskImage!=VK_NULL_HANDLE
             &&(buffers.outlineMaskFramebuffer==VK_NULL_HANDLE||!buffers.outlineMaskExtent.width
                 ||!buffers.outlineMaskExtent.height||buffers.outlineMaskTiles.size()!=instances.size()))

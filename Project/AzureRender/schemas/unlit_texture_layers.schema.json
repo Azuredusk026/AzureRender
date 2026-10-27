@@ -300,6 +300,10 @@
           }
         }
       }
+    },
+    "vertexColor": {
+      "type": "boolean",
+      "default": false
     }
   },
   "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。"

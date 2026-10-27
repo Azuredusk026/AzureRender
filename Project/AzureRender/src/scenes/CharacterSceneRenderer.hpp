@@ -272,6 +272,7 @@ private:
         LoadedAsset asset;
         rhi::GpuBuffer vertexBuffer;
         rhi::GpuBuffer indexBuffer;
+        rhi::GpuBuffer vertexColorBuffer;
         std::vector<GpuMaterial> gpuMaterials;
         std::vector<rhi::GpuBuffer> skinnedVertexBuffers;
         std::uint32_t jointBase = 0;
@@ -339,6 +340,7 @@ private:
     };
     rhi::GpuBuffer vertexBuffer_;
     rhi::GpuBuffer indexBuffer_;
+    rhi::GpuBuffer vertexColorBuffer_,whiteVertexColorBuffer_;
     std::vector<GpuMaterial> gpuMaterials_;
     std::unique_ptr<SampledTextureCache> materialTextureCache_;
     std::unique_ptr<OutlineProjectionResources> outlineProjection_;
@@ -396,6 +398,7 @@ private:
     VkPipelineLayout pipelineLayout_ = VK_NULL_HANDLE;
     std::array<VkPipeline,4> opaquePipelines_{};
     std::array<VkPipeline,4> blendPipelines_{};
+    std::array<VkPipeline,4> vertexColorBlendPipelines_{};
     std::array<VkPipeline,4> multiplyPipelines_{};
     std::array<VkPipeline,2> sceneTintPipelines_{};
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
@@ -486,7 +489,7 @@ private:
     void createMeshBuffers(
         LoadedAsset& asset,
         rhi::GpuBuffer& vertexBuffer,
-        rhi::GpuBuffer& indexBuffer);
+        rhi::GpuBuffer& indexBuffer,rhi::GpuBuffer& vertexColorBuffer);
     template <typename Pixels>
     void uploadTextureData(
         const Pixels& pixels,

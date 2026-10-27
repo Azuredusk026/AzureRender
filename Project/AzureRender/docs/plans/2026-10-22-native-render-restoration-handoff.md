@@ -24,6 +24,7 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 活动物流参数及实际资源见[截帧绑定](../acceptance/nr/captured-vfx-layers.md)。
 层级采样、覆盖率及实际实例见[绘制验收](../acceptance/nr/vfx-mip-and-coverage.md)。
 近远淡出及实际图层见[深度验收](../acceptance/nr/vfx-view-depth-fade.md)。
+公共顶点颜色、多流绑定及实际特效见[颜色验收](../acceptance/nr/vertex-color-streams.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。
