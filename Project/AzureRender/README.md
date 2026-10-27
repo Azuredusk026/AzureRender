@@ -14,6 +14,7 @@
 有序体积、辐照亮度适配及生产消费见[探针验收](docs/acceptance/nr/reflection-probe-fields.md)。
 双面镜像的法线、GI 及积分头发联合路径见[朝向验收](docs/acceptance/nr/surface-facing.md)。
 截帧资源定位、明确来源和关卡快照见[来源选择](docs/acceptance/nr/scene-source-selection.md)。
+原生 UV1、网格烘焙和统一运行表面见[坐标验收](docs/acceptance/nr/surface-uv-domain.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

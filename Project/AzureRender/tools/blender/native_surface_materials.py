@@ -5,9 +5,47 @@ only the verified two-map tri-channel base/metallic/roughness arithmetic.
 Source mesh UV selection and missing vertex-stream binding remain unverified.
 """
 import bpy
+import json
+import math
 from native_surface_colors import surface_color_record
 
 from blender_scene_materials import create_material as _create_surface
+
+
+def configure_uv_sampling(material, record):
+    """Bind the verified Lit texture roles to explicit authored UV layers."""
+    if not _verified_branch(record):
+        raise NotImplementedError('Explicit UV sampling requires the verified Lit surface branch')
+    roles = {'_BaseColorMap':'_BaseUVSet', '_NormalMap':'_BasePbrMapUVSet',
+             '_MaskMap':'_MaskUVSet'}
+    values = record.get('Floats') or {}
+    textures = {t['Property']:t for t in record['Textures']}
+    tree = material.node_tree
+    selections = {}
+    for property_name, selector in roles.items():
+        value = values.get(selector,0)
+        if type(value) not in (int,float) or value not in (0,1):
+            raise ValueError('Native texture UV selector requires zero or one: '+selector)
+        texture = _texture(material,property_name)
+        slot = textures[property_name]
+        scale,offset = slot.get('Scale',[1,1]),slot.get('Offset',[0,0])
+        if any(len(v)!=2 or any(type(x) not in (int,float) or not math.isfinite(x) for x in v)
+               for v in (scale,offset)):
+            raise ValueError('Native texture transform requires finite float2 values')
+        uv = tree.nodes.new('ShaderNodeUVMap');uv.uv_map='UV'+str(int(value))
+        vector = uv.outputs[0]
+        if scale != [1,1] or offset != [0,0]:
+            mapping = tree.nodes.new('ShaderNodeMapping')
+            mapping.inputs['Scale'].default_value[:2]=scale
+            mapping.inputs['Location'].default_value[:2]=offset
+            tree.links.new(vector,mapping.inputs['Vector']);vector=mapping.outputs[0]
+        tree.links.new(vector,texture.inputs['Vector'])
+        selections[property_name]=int(value)
+    for node in tree.nodes:
+        if node.type=='NORMAL_MAP':node.uv_map='UV'+str(selections['_NormalMap'])
+    material['endfield_uv_sampling_contract']='NativeLitUvSelection/1'
+    material['endfield_uv_sampling']=json.dumps(selections,sort_keys=True)
+    return selections
 
 
 _SHADER_SOURCE = 'cab-93483c2cb844b6b343af0950ad4630ad'

@@ -7,7 +7,9 @@ C16-R3 的双配置构建、CPU 及 GPU 回归通过。
 当前执行逐技术点还原及真实模型验证。
 3534 的 A3 顶点投影及来源选择已完成独立验证。
 明确来源和有效候选见[来源选择验收](../acceptance/nr/scene-source-selection.md)。
-当前继续核对 A3 采样流、GI 抖动及中央物流。
+当前继续核对 GI 的实际像素方向、抖动及中央物流。
+独立 UV1、网格烘焙及运行表面见[坐标验收](../acceptance/nr/surface-uv-domain.md)。
+来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。
 新增任务为 NR0-A1、NR6-C15 至 C18、NR8-V2。

@@ -21,6 +21,8 @@ def main():
     parser.add_argument('--exchange', action='store_true')
     parser.add_argument('--render', action='store_true')
     parser.add_argument('--bake-materials', type=int, metavar='RESOLUTION')
+    parser.add_argument('--mesh-bake-uv', choices=('UV0','UV1'),
+                        help='Bake the verified surface on an explicit native mesh UV layer')
     parser.add_argument('--surface-color-encoding', choices=('authored-srgb','gpu-linear'), default='authored-srgb')
     parser.add_argument('--lod-policy', choices=('metric', 'highest'), default='metric')
     parser.add_argument('--lod-metric-squared', type=float)
@@ -29,6 +31,8 @@ def main():
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     if args.lod_policy == 'highest' and args.lod_metric_squared is not None:
         parser.error('--lod-metric-squared requires --lod-policy metric')
+    if args.mesh_bake_uv and not args.bake_materials:
+        parser.error('--mesh-bake-uv requires --bake-materials')
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from endfield_native.scene_lod import select_draw_indices
     from endfield_native.mesh_binding import resolve_mesh_binding
@@ -41,7 +45,7 @@ def main():
     sys.path.insert(0, str(source))
     from blender_build_map02_chunk_20260727 import import_obj, unity_matrix
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'blender'))
-    from native_surface_materials import create_material
+    from native_surface_materials import create_material,configure_uv_sampling
     from endfield_scene_material_contract import load_catalog, reference_key
     manifest_path = probe / 'scene_manifest.json'
     manifest = json.loads(manifest_path.read_text(encoding='utf8'))
@@ -60,6 +64,7 @@ def main():
     bpy.ops.object.delete(use_global=False)
     mesh_cache, material_cache, draw_cache = {}, {}, {}
     bake_reports = []
+    uv_reports = []
     audit = []
     max_matrix_error = 0.0
     basis = Matrix(((1,0,0,0), (0,0,-1,0), (0,1,0,0), (0,0,0,1)))
@@ -83,13 +88,18 @@ def main():
             if key not in mesh_cache:
                 objects = import_obj(probe / exported['File'])
                 mesh_cache[key] = [obj.data for obj in objects]
+                if args.mesh_bake_uv:
+                    from native_mesh_uvs import restore_uv1
+                    uv_reports.append(restore_uv1(mesh_cache[key],exported,probe))
                 for obj in objects:
                     bpy.data.objects.remove(obj, do_unlink=True)
             material_key = reference_key(containers[pair['material']])
             if material_key not in material_cache:
                 material_cache[material_key] = create_material(materials[material_key], textures, True,
                     color_encoding=args.surface_color_encoding)
-                if args.bake_materials:
+                if args.mesh_bake_uv:
+                    configure_uv_sampling(material_cache[material_key],materials[material_key])
+                if args.bake_materials and not args.mesh_bake_uv:
                     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'blender'))
                     from bake_material_channels import bake_material
                     original = material_cache[material_key]
@@ -105,6 +115,15 @@ def main():
                 mesh = mesh_cache[key][draw['submesh']].copy()
                 mesh.materials.clear()
                 mesh.materials.append(material_cache[material_key])
+                if args.mesh_bake_uv:
+                    from bake_material_channels import bake_material
+                    original=material_cache[material_key]
+                    baked,bake_report=bake_material(original,args.bake_materials,
+                        original.get('endfield_alpha_clip_threshold'),mesh=mesh,uv_layer=args.mesh_bake_uv)
+                    mesh.materials.clear();mesh.materials.append(baked)
+                    mesh.uv_layers.active=mesh.uv_layers[args.mesh_bake_uv]
+                    mesh.uv_layers[args.mesh_bake_uv].active_render=True
+                    bake_reports.append(bake_report)
                 draw_cache[draw_key] = mesh
             mesh = draw_cache[draw_key]
             obj = bpy.data.objects.new(identity + '-draw-' + str(index), mesh)
@@ -154,11 +173,17 @@ def main():
     if args.exchange:
         sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'blender'))
         from export_scene_exchange import export_scene
-        exchange = export_scene(output / 'exchange/scene.azuresceneexchange', data['scene'] + '-native-slice')
+        exchange = export_scene(output / 'exchange/scene.azuresceneexchange', data['scene'] + '-native-slice',
+                                export_tangents=bool(args.mesh_bake_uv))
     else:
         exchange = None
-    bpy.ops.export_scene.gltf(filepath=str(output / 'scene.glb'), export_format='GLB', export_animations=False, export_extras=True)
+    bpy.ops.export_scene.gltf(filepath=str(output / 'scene.glb'), export_format='GLB', export_animations=False,
+                              export_extras=True,export_tangents=bool(args.mesh_bake_uv))
     bpy.ops.wm.save_as_mainfile(filepath=str(output / 'scene.blend'))
+    uv_dependencies = ([Path(__file__).resolve().parents[1]/'endfield_native/mesh_uvs.py',
+        Path(__file__).resolve().parents[1]/'blender/native_mesh_uvs.py',
+        Path(__file__).resolve().parents[1]/'blender/bake_material_channels.py',
+        Path(__file__).resolve().parents[1]/'blender/export_scene_exchange.py'] if args.mesh_bake_uv else [])
     report = dict(status='source_bound_technical_preview', objects=audit,
                   source_entities=len(selected_renderers), shared_draw_resources=len(draw_cache),
                   source_selection=source_selection,
@@ -167,9 +192,10 @@ def main():
                   inputs=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in (inventory, manifest_path, Path(__file__),
                       Path(__file__).resolve().parents[1] / 'blender/native_surface_materials.py',
                       Path(__file__).with_name('scene_sources.py'),
-                      source / 'blender_scene_materials.py')],
+                      source / 'blender_scene_materials.py',*uv_dependencies)],
                   exchange_resources=len(exchange['resources']) if exchange else None,
                   baked_materials=bake_reports,
+                  mesh_bake_uv=args.mesh_bake_uv,uv_streams=uv_reports,
                   lod_policy=args.lod_policy,
                   lod_metric_squared=(args.lod_metric_squared or 0.0) if args.lod_policy == 'metric' else None,
                   limitations=['static authored LOD selection; runtime camera mapping unverified', 'upstream material approximation',

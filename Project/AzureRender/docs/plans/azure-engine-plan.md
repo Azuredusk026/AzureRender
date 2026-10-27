@@ -11,6 +11,8 @@
 已按用户指令恢复自主实施，持续推进 NR0 至 NR12。
 截帧资源的明确来源选择见[来源验收](../acceptance/nr/scene-source-selection.md)。
 当前继续核对实际材质采样流、GI 及中央物流。
+独立 UV1 与统一表面输入见[坐标验收](../acceptance/nr/surface-uv-domain.md)。
+启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。
 中庭与莱万汀各一帧完成 2560×1440 实际图像导出。

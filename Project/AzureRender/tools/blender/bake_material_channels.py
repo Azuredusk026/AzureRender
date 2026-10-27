@@ -1,25 +1,33 @@
 """Evaluate UV-periodic Principled inputs into portable glTF surface maps.
 
-This adapter samples UV0 over the unit square. View-, object-, vertex- and
-time-dependent shading requires a mesh-specific adapter, not this baker.
-The original material and mesh assignments remain caller-owned.
+The default domain is periodic UV0. An explicit mesh and target UV layer allow
+independent named UV inputs. View-, object-, vertex- and time-dependent inputs
+require a separate adapter. Source materials and meshes remain caller-owned.
 """
 import bpy
 import numpy as np
 
 
-def bake_material(source, resolution=1024, alpha_cutoff=None):
+def bake_material(source, resolution=1024, alpha_cutoff=None, *, mesh=None, uv_layer=None):
     if resolution < 8 or resolution > 4096:
         raise ValueError('Bake resolution must be between 8 and 4096')
     if alpha_cutoff is not None and not 0 <= alpha_cutoff <= 1:
         raise ValueError('Alpha cutoff must be in the unit interval')
     if not source.use_nodes:
         raise ValueError('A node material is required')
+    if (mesh is None) != (uv_layer is None):
+        raise ValueError('Mesh baking requires an explicit mesh and UV target')
+    if mesh is not None and (not mesh.polygons or not isinstance(uv_layer,str)
+            or uv_layer not in mesh.uv_layers or any(p.material_index != 0 for p in mesh.polygons)):
+        raise ValueError('Mesh baking requires one material and a valid UV target')
     originals = [n for n in source.node_tree.nodes if n.type == 'BSDF_PRINCIPLED']
     if len(originals) != 1:
         raise ValueError('Exactly one Principled surface is required: ' + source.name)
     unsupported = {'TEX_COORD', 'ATTRIBUTE', 'VERTEX_COLOR', 'LAYER_WEIGHT', 'CAMERA', 'OBJECT_INFO', 'NEW_GEOMETRY'}
     for n in source.node_tree.nodes:
+        if n.type == 'UVMAP' and any(s.is_linked for s in n.outputs):
+            if mesh is None or n.uv_map not in mesh.uv_layers:
+                raise ValueError('Named UV maps require a matching mesh layer: ' + n.uv_map)
         if n.type in unsupported:
             active = [s.name for s in n.outputs if s.is_linked]
             if active and not (n.type == 'TEX_COORD' and active == ['UV']):
@@ -27,14 +35,35 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
     scene = bpy.context.scene
     scene.render.engine = 'CYCLES'
     scene.cycles.samples = 1
-    scene.render.bake.margin = 0
+    scene.render.bake.margin = 8 if mesh is not None else 0
+    if mesh is not None:scene.render.bake.margin_type='EXTEND'
     scene.render.bake.use_clear = True
     bpy.ops.object.select_all(action='DESELECT')
-    bpy.ops.mesh.primitive_plane_add(size=2)
-    plane = bpy.context.object
+    if mesh is None:
+        bpy.ops.mesh.primitive_plane_add(size=2)
+        plane = bpy.context.object
+    else:
+        plane = bpy.data.objects.new(source.name+'-bake-target',mesh.copy())
+        bpy.context.collection.objects.link(plane)
+        plane.select_set(True)
+        bpy.context.view_layer.objects.active=plane
+        plane.data.materials.clear()
     temporary = source.copy()
     plane.data.materials.append(temporary)
     nodes, links = temporary.node_tree.nodes, temporary.node_tree.links
+    if mesh is not None:
+        primary=next((layer.name for layer in mesh.uv_layers if layer.active_render),mesh.uv_layers[0].name)
+        primary_node=nodes.new('ShaderNodeUVMap');primary_node.uv_map=primary
+        for node in list(nodes):
+            if node.type == 'TEX_COORD':
+                for link in list(node.outputs['UV'].links):
+                    links.new(primary_node.outputs[0],link.to_socket)
+            elif node.type == 'TEX_IMAGE' and not node.inputs['Vector'].is_linked:
+                links.new(primary_node.outputs[0],node.inputs['Vector'])
+            elif node.type == 'NORMAL_MAP' and not node.uv_map:
+                node.uv_map=primary
+        plane.data.uv_layers.active=plane.data.uv_layers[uv_layer]
+        plane.data.uv_layers[uv_layer].active_render=True
     bsdf = next(n for n in nodes if n.type == 'BSDF_PRINCIPLED')
     output = next(n for n in nodes if n.type == 'OUTPUT_MATERIAL' and n.is_active_output)
     target = nodes.new('ShaderNodeTexImage')
@@ -58,7 +87,8 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
                 value = socket.default_value
                 emitter.inputs['Color'].default_value = tuple(value) if socket.type == 'RGBA' else (value,value,value,1)
             links.new(emitter.outputs[0], output.inputs['Surface'])
-        bpy.ops.object.bake(type='NORMAL' if normal else 'EMIT')
+        bpy.ops.object.bake(type='NORMAL' if normal else 'EMIT',
+                            **({'uv_layer':uv_layer} if mesh is not None else {}))
         pixels = np.empty(resolution*resolution*4, dtype=np.float32)
         image.pixels.foreach_get(pixels)
         arrays[name] = pixels.reshape((-1,4))
@@ -80,7 +110,8 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
         result.use_nodes = True
         for key in source.keys():
             result[key] = source[key]
-        result['azureBakeDomain'] = 'UV0 unit square, periodically repeated'
+        result['azureBakeDomain'] = ('UV0 unit square, periodically repeated' if mesh is None
+                                    else 'mesh target UV layer: '+uv_layer)
         result.diffuse_color = source.diffuse_color
         result.surface_render_method = source.surface_render_method
         result.use_backface_culling = source.use_backface_culling
@@ -88,6 +119,9 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
         surface = rn.get('Principled BSDF')
         images = {}
         textures = {}
+        output_uv=None
+        if mesh is not None:
+            output_uv=rn.new('ShaderNodeUVMap');output_uv.uv_map=uv_layer
         for name in ('base','normal','orm','emission'):
             # Generated float images pack their linear buffer directly into PNG.
             # glTF consumers decode color PNGs as sRGB, so explicitly encode the
@@ -104,6 +138,7 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
             image.pack()
             images[name] = image.name
             tex = rn.new('ShaderNodeTexImage'); tex.image=image
+            if output_uv is not None:rl.new(output_uv.outputs[0],tex.inputs['Vector'])
             textures[name] = tex
         rl.new(textures['base'].outputs['Color'],surface.inputs['Base Color'])
         source_alpha = originals[0].inputs['Alpha']
@@ -116,6 +151,7 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
         elif source_alpha.is_linked or source_alpha.default_value < 1:
             rl.new(textures['base'].outputs['Alpha'],surface.inputs['Alpha'])
         normal = rn.new('ShaderNodeNormalMap')
+        if mesh is not None:normal.uv_map=uv_layer
         rl.new(textures['normal'].outputs['Color'],normal.inputs['Color'])
         rl.new(normal.outputs[0],surface.inputs['Normal'])
         split = rn.new('ShaderNodeSeparateColor')
@@ -125,6 +161,7 @@ def bake_material(source, resolution=1024, alpha_cutoff=None):
         rl.new(textures['emission'].outputs['Color'],surface.inputs['Emission Color'])
         surface.inputs['Emission Strength'].default_value = peak
         return result, dict(source=source.name,resolution=resolution,images=images,
+                            paddingPixels=8 if mesh is not None else 0,
                             emissionScale=peak,domain=result['azureBakeDomain'],
                             colorEncoding='sRGB RGB; linear alpha and data maps',storage='RGBA8 straight alpha')
     finally:

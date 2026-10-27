@@ -2305,6 +2305,26 @@ void loadAnimations(const tinygltf::Model& model,LoadedAsset& asset) {
     }
 }
 
+unsigned surfaceUvSet(const tinygltf::Model& model,int materialIndex) {
+    if(materialIndex<0)return 0;
+    const auto& material=model.materials.at(static_cast<std::size_t>(materialIndex));
+    int selected=-1;
+    const auto include=[&](const auto& texture) {
+        if(texture.index<0)return;
+        if(texture.texCoord<0||texture.texCoord>1)
+            throw std::runtime_error("Surface textures require TEXCOORD_0 or TEXCOORD_1");
+        if(texture.extensions.count("KHR_texture_transform"))
+            throw std::runtime_error("Surface texture transforms require a baked surface UV domain");
+        if(selected>=0&&selected!=texture.texCoord)
+            throw std::runtime_error("Mixed surface UV sets require mesh material baking");
+        selected=texture.texCoord;
+    };
+    include(material.pbrMetallicRoughness.baseColorTexture);
+    include(material.pbrMetallicRoughness.metallicRoughnessTexture);
+    include(material.normalTexture);include(material.emissiveTexture);include(material.occlusionTexture);
+    return selected<0?0U:static_cast<unsigned>(selected);
+}
+
 void appendPrimitive(
     const tinygltf::Model& model,
     const tinygltf::Primitive& primitive,
@@ -2349,6 +2369,10 @@ void appendPrimitive(
             std::memcpy(texcoord1[i].data(),data+i*stride,2*sizeof(float));
             for(float value:texcoord1[i])if(!std::isfinite(value))throw std::invalid_argument("TEXCOORD_1 must be finite");
         }
+    }
+    if(surfaceUvSet(model,primitive.material)==1) {
+        if(texcoord1.empty())throw std::runtime_error("Surface texture requires missing TEXCOORD_1");
+        for(std::size_t i=0;i<vertices.size();++i)vertices[i].texcoord=texcoord1[i];
     }
     copySkinAttributes(model, primitive, vertices);
     std::uint32_t morphCount = 0;

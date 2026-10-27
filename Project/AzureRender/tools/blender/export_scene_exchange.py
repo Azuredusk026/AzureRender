@@ -48,7 +48,7 @@ def write_exchange(document, output):
         temporary.unlink(missing_ok=True)
 
 
-def export_scene(output, scene_id):
+def export_scene(output, scene_id, *, export_tangents=False):
     import bpy
     from mathutils import Matrix
     output = Path(output)
@@ -85,7 +85,7 @@ def export_scene(output, scene_id):
                     bpy.context.view_layer.objects.active = candidate
                     path = output.parent / (identity + '.glb')
                     try:
-                        bpy.ops.export_scene.gltf(filepath=str(path.resolve()), export_format='GLB', use_selection=True, export_animations=False, export_yup=True)
+                        bpy.ops.export_scene.gltf(filepath=str(path.resolve()), export_format='GLB', use_selection=True, export_animations=False, export_yup=True, export_tangents=export_tangents)
                     finally:
                         mesh = candidate.data
                         bpy.data.objects.remove(candidate, do_unlink=True)
