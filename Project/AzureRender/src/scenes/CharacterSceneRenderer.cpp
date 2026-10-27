@@ -1569,6 +1569,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"outlineProjectionMaterials\": " << (outlineProjection_?outlineProjection_->recordCount():0) << ",\n"
          << "  \"outlineProjectionCoordinates\": " << (outlineProjection_?outlineProjection_->coordinateCount():0) << ",\n"
          << "  \"instanceDataLayoutVersion\": " << SceneInstanceGpuData::kLayoutVersion << ",\n"
+         << "  \"cascadeProjectionLayoutVersion\": 2,\n"
+         << "  \"cascadeCasterDistance\": " << renderSettings_->shadowDistance << ",\n"
+         << "  \"cameraUniformBytes\": " << sizeof(UniformBufferObject) << ",\n"
          << "  \"objectShadowLayoutVersion\": " << ObjectShadowGpuHeader::kLayoutVersion << ",\n"
          << "  \"objectShadowPrepared\": " << (objectShadowPrepared_?"true":"false") << ",\n"
          << "  \"objectShadowExactDepthBias\": " << (objectShadowPrepared_&&rhi_->supportsExactDepthBias()?"true":"false") << ",\n"
@@ -3614,7 +3617,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const Vector3 cameraUp = normalize(cross(cameraRight, cameraForward));
     // Keep conservative shadow coverage around the shared geometry projection.
     const float halfFovTangent = 1.0F / std::abs(projection[5]);
-    std::array<float,4> cascadeDepthRanges{};
+    std::array<float,4> cascadeDepthRanges{},cascadeWorldDiameters{};
     float cascadeNear = settings.cameraNear;
     for (std::size_t cascade = 0;
          cascade < kShadowCascadeCount;
@@ -3649,7 +3652,9 @@ void CharacterSceneRenderer::updateUniformBuffer(
                 radius, vectorLength(subtract(corner, center)));
         }
         radius = std::max(std::ceil(radius * 16.0F) / 16.0F, 0.25F);
-        cascadeDepthRanges[cascade]=radius*4.1F-.1F;
+        const auto depthFit=computeCascadeDepthFit(radius,settings.shadowDistance);
+        cascadeDepthRanges[cascade]=depthFit.farPlane-depthFit.nearPlane;
+        cascadeWorldDiameters[cascade]=radius*2.F;
         const Vector3 snapUp=std::abs(dot(lightDirection,worldUp))>.97F?Vector3{0,0,1}:worldUp;
         const Vector3 snapRight=normalize(cross(snapUp,lightDirection));
         const Vector3 snapVertical=normalize(cross(lightDirection,snapRight));
@@ -3658,13 +3663,13 @@ void CharacterSceneRenderer::updateUniformBuffer(
         const float dy=std::round(dot(center,snapVertical)/worldTexel)*worldTexel-dot(center,snapVertical);
         center=addVectors(center,addVectors(scaleVector(snapRight,dx),scaleVector(snapVertical,dy)));
         const Vector3 lightEye = addVectors(
-            center, scaleVector(lightDirection, radius * 2.0F + 0.1F));
+            center, scaleVector(lightDirection, depthFit.eyeDistance));
         const Vector3 lightUp = std::abs(dot(lightDirection, worldUp)) > 0.97F
             ? Vector3{0.0F, 0.0F, 1.0F}
             : worldUp;
         const Matrix4 lightView = lookAt(lightEye, center, lightUp);
         const Matrix4 lightProjection = orthographic(
-            -radius, radius, -radius, radius, 0.1F, radius * 4.1F);
+            -radius, radius, -radius, radius, depthFit.nearPlane, depthFit.farPlane);
         cascadeLightViewProjections_[cascade] =
             multiply(lightProjection, lightView);
         shadowCascadeFrusta_[cascade] = scene::extractFrustumPlanes(
@@ -3683,6 +3688,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.screenReflectionTrace={reflectionActive?1.F:0.F,reflection.maxDistance,reflection.thickness,reflection.normalBias};
     uniform.screenReflectionQuality={float(reflection.maxSteps),reflection.maxRoughness,reflection.edgeFade,reflection.strength};
     uniform.cascadeDepthRanges=cascadeDepthRanges;
+    uniform.cascadeWorldDiameters=cascadeWorldDiameters;
     const float skyScale=settings.cameraView&&settings.cameraView->projection==CameraProjectionKind::Orthographic?0.F:halfFovTangent;
     uniform.skyRight={cameraRight[0]*skyScale*aspect,cameraRight[1]*skyScale*aspect,cameraRight[2]*skyScale*aspect,0};
     uniform.skyUp={cameraUp[0]*skyScale,cameraUp[1]*skyScale,cameraUp[2]*skyScale,0};

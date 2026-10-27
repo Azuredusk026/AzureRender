@@ -17,6 +17,7 @@
 作者法线和两个生产入口见[角点验收](../acceptance/nr/mesh-corner-normals.md)。
 局部灯来源倍率与完整镜头见[绑定验收](../acceptance/nr/local-light-profile-binding.md)。
 活动主光辐照输入及方向核对见[主光验收](../acceptance/nr/main-light-runtime-binding.md)。
+级联上游遮挡和滤波尺度见[深度验收](../acceptance/nr/cascade-caster-depth.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。

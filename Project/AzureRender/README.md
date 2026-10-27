@@ -20,6 +20,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 网格作者法线、角点及生产入口见[来源验收](docs/acceptance/nr/mesh-corner-normals.md)。
 局部灯档案、实体身份及实际镜头见[倍率绑定](docs/acceptance/nr/local-light-profile-binding.md)。
 活动主光的辐照输入及方向核对见[主光验收](docs/acceptance/nr/main-light-runtime-binding.md)。
+级联上游遮挡范围及滤波尺度见[阴影验收](docs/acceptance/nr/cascade-caster-depth.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

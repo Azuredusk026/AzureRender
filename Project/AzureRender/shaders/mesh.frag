@@ -52,6 +52,7 @@ layout(binding = 0) uniform CameraData {
     mat4 screenReflectionWorldToClip;
     vec4 screenReflectionTrace,screenReflectionQuality;
     vec4 nprDirectionBias,nprGainFloor,nprAmbientColor,nprComposition,nprMainRadiance,nprLightingParameters;
+    vec4 cascadeWorldDiameters;
 } camera;
 #if defined(AZURE_PROBE_FIELD)
 layout(binding=23) uniform sampler2DArray reflectionProbeTexture;
@@ -482,7 +483,7 @@ float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,fl
     ivec2 lo=origin+ivec2(1),hi=origin+tile-ivec2(2);
     vec2 uv=(vec2(origin)+localUv*vec2(tile))/vec2(extent);
     float depthRange=camera.cascadeDepthRanges[cascade];
-    float worldTexel=depthRange/4.1*2.0/float(tile.x);
+    float worldTexel=camera.cascadeWorldDiameters[cascade]/float(tile.x);
     float maximumRadius=clamp(camera.renderingParameters.w,1.0,16.0);
     depthGradient*=shadowReceiverPlaneWeight(normalCurvature,worldTexel*maximumRadius);
     float receiver=p.z-shadowReceiverBias(normalDotLight,worldTexel)/depthRange;
