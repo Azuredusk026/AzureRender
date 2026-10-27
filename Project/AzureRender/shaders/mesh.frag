@@ -11,6 +11,7 @@
 #include "character_diffuse.glsl"
 #include "specular_ramp.glsl"
 #include "environment_specular.glsl"
+#include "reflection_lod.glsl"
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
 #include "material_sampling.glsl"
@@ -1649,12 +1650,13 @@ void main() {
                 direction=worldPosition+reflectionDirection*exitDistance-camera.probeCapture.xyz;
             }
             float lastMip=float(textureQueryLevels(reflectionProbeTexture)-1);
-            vec3 localSpecular=environmentResponse*textureLod(reflectionProbeTexture,direction,roughness*lastMip).rgb*camera.probeParameters.y;
+            float probeLod=reflectionProbeLod(roughness,lastMip,vec3(camera.probeCenter.w,camera.probeHalfExtents.w,camera.probeCapture.w));
+            vec3 localSpecular=environmentResponse*textureLod(reflectionProbeTexture,direction,probeLod).rgb*camera.probeParameters.y;
             if(sceneCharacter)localSpecular*=material.styleParameters.z*dielectricSpecularWeight;
             if(qaEffectMode==5 && qaEffectDisabled)localSpecular=vec3(0);
             vec3 blended=mix(ambientSpecular,localSpecular,weight);
             if(camera.clusterLighting.x>.5){
-                vec3 localRadiance=textureLod(reflectionProbeTexture,direction,roughness*lastMip).rgb*camera.probeParameters.y;
+                vec3 localRadiance=textureLod(reflectionProbeTexture,direction,probeLod).rgb*camera.probeParameters.y;
                 sceneReflectionRadiance=mix(sceneReflectionRadiance,localRadiance,weight);
                 blended=sceneReflectionResponse*sceneReflectionRadiance;
             }

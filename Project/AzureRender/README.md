@@ -10,6 +10,7 @@
 精确采样抖动及 NPR 接收边界见[查询位置](docs/acceptance/nr/irradiance-query.md)。
 地面实际 UV 绑定及颜色上传见[地面绑定](docs/acceptance/nr/floor-runtime-binding.md)。
 探针身份、动态反射链及对照镜头见[运行核验](docs/acceptance/nr/native-reflection-bindings.md)。
+可配置的探针预滤波层级见[层级验收](docs/acceptance/nr/reflection-lod.md)。
 
 原生时序输入与运动解码见[时序核验](docs/acceptance/nr/native-temporal-inputs.md)。
 主辅视图的历史提交边界见[时序帧状态](docs/runtime/temporal-frame-state.md)。

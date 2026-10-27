@@ -140,6 +140,15 @@ int main() {
   parsed.save(root/"saved.azurelevel");auto reopened=Level::load(root/"saved.azurelevel",db);
   check(reopened.scene.nodes[0].translation[2]==17 && reopened.scene.nodes[0].prefabSource==prefabId);
   check(reopened.scene.reflectionProbe.blendDistance==.75F);
+  auto mappedLevel=level;
+  mappedLevel["reflectionProbe"]["version"]=3;
+  mappedLevel["reflectionProbe"]["lodMapping"]={{"schemaVersion",1},{"kind","logarithmic"},
+      {"scale",1.2},{"bias",5},{"minimumRoughness",.001}};
+  write(root/"assets/mapped.azurelevel",mappedLevel.dump());db.refresh();
+  auto mappedScene=Level::load(root/"assets/mapped.azurelevel",db);mappedScene.save(root/"mapped-saved.azurelevel");
+  const auto mappedReopened=Level::load(root/"mapped-saved.azurelevel",db);
+  check(mappedReopened.scene.reflectionProbe.lodMapping.has_value());
+  check(std::abs(mappedReopened.scene.reflectionProbe.lod(.5F,8)-3.8F)<2e-6F);
   check(reopened.scene.irradianceVolume.sampling.jitterAmplitude==.2F && reopened.scene.irradianceVolume.sampling.phase==49.875F);
   check(reopened.scene.lights[0].shape.type==LightKind::Spot
       && reopened.scene.lights[0].shape.innerCone==.25F);

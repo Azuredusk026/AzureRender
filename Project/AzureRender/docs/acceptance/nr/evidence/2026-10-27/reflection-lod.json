@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR5-R7 configurable local reflection LOD",
+  "status": "narrow-checks-passed",
+  "privateRun": "build/runs/20261027-134641-reflection-roughness-lod-contract-e10415",
+  "source": {
+    "CMakeLists.txt": "5feeb079df6417387bffed238c09213bcc9ce7e80d56feeafef09e3a5205796d",
+    "src/render/ReflectionProbe.hpp": "80e6cd70850818667e68d2fd57e52e6f2a25bdfca715f18ceafe40dc88e6a484",
+    "src/render/ReflectionProbeJson.hpp": "344b630545ee3c08c7e94bbe76b490a588597de67841a9f83d3ec3961413c78a",
+    "src/scenes/CharacterSceneRenderer.cpp": "40dae3bc07b1bc35a0e079c4e410e0aa7db0c44525385f5d1f03595441f8221f",
+    "shaders/mesh.frag": "237f01fc8e5e35cb6a85aadf5613fed01875acec0601f963562c6af2d4bc6f0e",
+    "shaders/reflection_lod.glsl": "d5f97dfa68bad9e674474125733b812eb1872b88fbbced3dd62e175f14dfd44c",
+    "tests/ReflectionProbeTests.cpp": "9aca7a1d930f555b52e9989897b1710a699c0d4a8ac62f8ec8be2393d6574304",
+    "tests/AssetLevelTests.cpp": "fb1077323306bd681e77b7fe20be559c95e3a4daf76e9498b920a22922ba89a0",
+    "tools/native_render/reflection_lod_lab.py": "f3a8444421553aef295e8efdc1dfbaf160bba51570b7cb4721b2367c8dfa80b0"
+  },
+  "native": {
+    "frame": 3534,
+    "event": 8912,
+    "shaderSha256": "ec0f0876c321e491a5763672ad48baf1ccf00d56841cde617857568f0f9218fe",
+    "method": "Explicit shader replacement; original roughness GBuffer and environment constants; captured AO disabled; float-bit nibble readback",
+    "parameters": {
+      "scale": 1.2,
+      "bias": 5,
+      "minimumRoughness": 0.001
+    },
+    "realPoints": [
+      {
+        "roughness": 0.08699902147054672,
+        "effectiveRoughness": 0.08699902147054672,
+        "mipCount": 7.0,
+        "unclampedLod": 0.7725715637207031,
+        "clampedLod": 0.7725715637207031,
+        "ambientOcclusionEnabled": 0.0
+      },
+      {
+        "roughness": 0.12316715717315674,
+        "effectiveRoughness": 0.12316715717315674,
+        "mipCount": 7.0,
+        "unclampedLod": 1.374427318572998,
+        "clampedLod": 1.374427318572998,
+        "ambientOcclusionEnabled": 0.0
+      },
+      {
+        "roughness": 0.1006842628121376,
+        "effectiveRoughness": 0.1006842628121376,
+        "mipCount": 7.0,
+        "unclampedLod": 1.0254921913146973,
+        "clampedLod": 1.0254921913146973,
+        "ambientOcclusionEnabled": 0.0
+      },
+      {
+        "roughness": 0.09677419066429138,
+        "effectiveRoughness": 0.09677419066429138,
+        "mipCount": 7.0,
+        "unclampedLod": 0.9569196701049805,
+        "clampedLod": 0.9569196701049805,
+        "ambientOcclusionEnabled": 0.0
+      },
+      {
+        "roughness": 0.11925708502531052,
+        "effectiveRoughness": 0.11925708502531052,
+        "mipCount": 7.0,
+        "unclampedLod": 1.3185763359069824,
+        "clampedLod": 1.3185763359069824,
+        "ambientOcclusionEnabled": 0.0
+      },
+      {
+        "roughness": 0.1163245365023613,
+        "effectiveRoughness": 0.1163245365023613,
+        "mipCount": 7.0,
+        "unclampedLod": 1.2754731178283691,
+        "clampedLod": 1.2754731178283691,
+        "ambientOcclusionEnabled": 0.0
+      },
+      {
+        "roughness": 0.11925708502531052,
+        "effectiveRoughness": 0.11925708502531052,
+        "mipCount": 7.0,
+        "unclampedLod": 1.3185763359069824,
+        "clampedLod": 1.3185763359069824,
+        "ambientOcclusionEnabled": 0.0
+      }
+    ],
+    "powerOfTwoInputLods": [
+      5.0,
+      3.799999952316284,
+      2.5999999046325684,
+      1.3999996185302734,
+      0.19999980926513672,
+      -6.958941459655762
+    ],
+    "quantizedInputLods": [
+      5.0,
+      3.8067760467529297,
+      2.606776237487793,
+      1.406775951385498,
+      0.20677566528320312,
+      4.501955032348633
+    ],
+    "privateHashes": {
+      "native_lod_probe.hlsl": "a155221c41bade1eae403e6957d13a20696aa76fb919ee40eb92c9a2f9e78024",
+      "native_lod_quantized_probe.hlsl": "e725d15e9677886dee75d7ee6bc1db654cd9f8874dbac82b0d9a07dffafeedb0",
+      "native-lod-points.json": "3f51958a5848c9127853dcb4ee612ecd36e37d0325bd50fcb2c43e68d12179b3",
+      "native-lod-quantized-points.json": "3d96d53160739b895e3ea325774e9f5c11beece7255dbcabe088d79a21393b96"
+    }
+  },
+  "tests": {
+    "cpuNativePointBudget": 2e-06,
+    "ctestsPerConfiguration": 3,
+    "levelRoundtripPassed": true,
+    "editorTargetsBuilt": [
+      "Debug",
+      "Release"
+    ],
+    "gpuCapturesPerConfiguration": 22,
+    "maximumQuantizationIntervalLinearError": 0.0012701829999113012,
+    "budget": 0.004,
+    "descriptorImagesExact": true,
+    "sourceInputRegeneration": {
+      "captures": 44,
+      "sha256": "09291c460751d34ff09ce102948caeb974fc390fb1c6189fadd1d6a3c910d9bf"
+    },
+    "shaderCount": 143,
+    "shaderConfigurationsByteExact": true,
+    "main": {
+      "main-default-release": {
+        "status": "passed",
+        "mode": "default",
+        "configuration": "release",
+        "changedPixels": 0,
+        "maximumByteDelta": 0,
+        "meanByteDelta": 0.0,
+        "resourcesReleased": true,
+        "validationErrors": 0
+      },
+      "main-log-release": {
+        "status": "passed",
+        "mode": "log",
+        "configuration": "release",
+        "changedPixels": 1339379,
+        "maximumByteDelta": 126,
+        "meanByteDelta": 0.5543032648533951,
+        "resourcesReleased": true,
+        "validationErrors": 0
+      },
+      "main-log-debug": {
+        "status": "passed",
+        "mode": "log",
+        "configuration": "debug",
+        "changedPixels": 1339379,
+        "maximumByteDelta": 126,
+        "meanByteDelta": 0.5543032648533951,
+        "resourcesReleased": true,
+        "validationErrors": 0,
+        "debugReleaseImageExact": true
+      }
+    }
+  },
+  "negatives": {
+    "contract": "contract-red.log",
+    "oldProduction": "gpu-red/log-half-indexed/player.log",
+    "omittedImportQuantization": "gpu-debug.log",
+    "missingMultisampleVersion": "gpu-verified-debug.log"
+  },
+  "architecture": {
+    "newShaderVariants": 0,
+    "newDescriptors": 0,
+    "newUniformBytes": 0,
+    "probeVersion": 3,
+    "unmappedSaveVersion": 2,
+    "parameterLanes": [
+      "probeCenter.w",
+      "probeHalfExtents.w",
+      "probeCapture.w"
+    ]
+  },
+  "limits": [
+    "Original native array filtering, ordered probe blending and complete temporal reflections remain pending",
+    "Hardware source reference explicitly replaces pixel output and is not an unchanged shader-register dump",
+    "Formal NR0-NR12 image equality, AA and performance gates remain pending"
+  ]
+}

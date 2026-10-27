@@ -3757,10 +3757,11 @@ void CharacterSceneRenderer::updateUniformBuffer(
         }
     }
     const auto& probe=scene_.reflectionProbe;
-    uniform.probeCenter={probe.center[0],probe.center[1],probe.center[2],0};
-    uniform.probeHalfExtents={probe.halfExtents[0],probe.halfExtents[1],probe.halfExtents[2],0};
+    const auto probeLod=probe.lodMapping?probe.lodMapping->shaderParameters():std::array<float,3>{};
+    uniform.probeCenter={probe.center[0],probe.center[1],probe.center[2],probeLod[0]};
+    uniform.probeHalfExtents={probe.halfExtents[0],probe.halfExtents[1],probe.halfExtents[2],probeLod[1]};
     const auto projectionOrigin=probe.projectionOrigin.value_or(probe.capturePosition);
-    uniform.probeCapture={projectionOrigin[0],projectionOrigin[1],projectionOrigin[2],0};
+    uniform.probeCapture={projectionOrigin[0],projectionOrigin[1],projectionOrigin[2],probeLod[2]};
     uniform.probeParameters={!probe.texture.empty()?1.F:0.F,probe.intensity,probe.blendDistance,probe.boxProjection?1.F:0.F};
     const auto& gi=scene_.irradianceVolume;
     uniform.irradianceOriginSpacing={irradianceVolume_.origin[0],irradianceVolume_.origin[1],irradianceVolume_.origin[2],irradianceVolume_.spacing};

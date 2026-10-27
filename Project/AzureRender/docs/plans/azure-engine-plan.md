@@ -86,7 +86,9 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 颜色上传、公共转换与主场景见[绑定验收](../acceptance/nr/floor-runtime-binding.md)。
 继续核对独立纹理采样、反射生产通道及移动响应。
 十二探针身份、反射生产链与对照镜头见[运行核验](../acceptance/nr/native-reflection-bindings.md)。
-继续接入对数层级、有序探针及真实时序比较。
+继续核对有序探针及真实时序比较。
+公共对数映射及双配置 GPU 检查见[层级验收](../acceptance/nr/reflection-lod.md)。
+原生数组、有序探针及连续时序继续实施。
 
 反射射线预计算通过双配置与动态遮挡回归。
 短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。
