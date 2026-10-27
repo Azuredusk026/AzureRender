@@ -25,6 +25,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 for argument in ('extractor-src', 'manifest', 'shader-evidence', 'output'):
     parser.add_argument('--' + argument, type=Path, required=True)
 parser.add_argument('--adapter', default='native_surface_materials')
+parser.add_argument('--color-upload-evidence', type=Path)
 args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
 for name in ('extractor_src', 'manifest', 'shader_evidence'):
     setattr(args, name, getattr(args, name).resolve(strict=True))
@@ -100,6 +101,23 @@ def fixture(record):
 
 
 results, failures = [], []
+if args.color_upload_evidence:
+    color_upload=json.loads(args.color_upload_evidence.read_text(encoding='utf-8'))
+    assert color_upload['schemaVersion']==1
+    for case in color_upload['cases']:
+        record=copy.deepcopy(original)
+        mapping,base,nro,mask=fixture(record)
+        record['Colors'].update(case['authoredColors'])
+        gpu_record=copy.deepcopy(record);gpu_record['Colors'].update(case['gpuColors'])
+        expected=evaluate(gpu_record,base,nro,mask)
+        def authored_builder(record,mapping,pack):
+            return adapter.create_material(record,mapping,pack,color_encoding='authored-srgb')
+        actual=sample(record,mapping,authored_builder)
+        for channel in ('base','metallic','roughness'):
+            if np.max(np.abs(np.asarray(actual[channel])-np.asarray(expected[channel])))>.012:
+                failures.append(f'captured upload {case["event"]} {channel} differs')
+        results.append(dict(case='captured-color-upload-'+str(case['event']),expected=expected,actual=actual))
+
 for mode, saturation in ((1, False), (2, False), (1, True)):
     record = copy.deepcopy(original)
     mapping, base, nro, mask = fixture(record)

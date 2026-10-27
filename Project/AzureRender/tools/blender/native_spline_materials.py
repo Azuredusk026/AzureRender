@@ -117,10 +117,12 @@ def _static_emission(material, record):
         'Static LitEffect RGBA emission; compiled intensity/remap and runtime UV motion pending'])
 
 
-def create_material(record, textures, pack_textures=True):
+def create_material(record, textures, pack_textures=True, color_encoding='gpu-linear'):
+    if color_encoding not in ('gpu-linear','authored-srgb'):
+        raise ValueError('Unsupported surface color encoding')
     shader = record['Shader']['Name']
     if shader != 'HGRP/Effect/VFXBaseV2':
-        material = _create_surface(record, textures, pack_textures)
+        material = _create_surface(record, textures, pack_textures, color_encoding=color_encoding)
         if shader == 'HGRP/LitEffect' and record['Floats'].get('_EnableEmissiveMap') == 1:
             _static_emission(material, record)
         return material

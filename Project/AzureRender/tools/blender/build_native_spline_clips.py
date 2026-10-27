@@ -44,6 +44,7 @@ def main():
     parser.add_argument('--seed', type=int, required=True)
     parser.add_argument('--sample-rate', type=float, default=30)
     parser.add_argument('--resolution', type=int, default=1024)
+    parser.add_argument('--surface-color-encoding', choices=('authored-srgb','gpu-linear'), default='authored-srgb')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     tools = Path(__file__).resolve().parents[1]
     sys.path[:0] = [str(tools), str(tools / 'blender'), str(args.extractor_src)]
@@ -130,7 +131,7 @@ def main():
                             raise ValueError('UV0 outside the unit square requires verified periodic source sampling')
                     if key not in cache:
                         rec = materials[key]
-                        original = create_material(rec, textures, True)
+                        original = create_material(rec, textures, True, color_encoding=args.surface_color_encoding)
                         cache[key] = bake_material(original, args.resolution,
                                                    original.get('endfield_alpha_clip_threshold'))
                     baked, report = cache[key]

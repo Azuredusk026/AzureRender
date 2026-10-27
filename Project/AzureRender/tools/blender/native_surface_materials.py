@@ -5,6 +5,7 @@ only the verified two-map tri-channel base/metallic/roughness arithmetic.
 Source mesh UV selection and missing vertex-stream binding remain unverified.
 """
 import bpy
+from native_surface_colors import surface_color_record
 
 from blender_scene_materials import create_material as _create_surface
 
@@ -67,9 +68,13 @@ def _texture(material, prop):
     return matches[0]
 
 
-def create_material(record, texture_files, pack_textures=True):
+def create_material(record, texture_files, pack_textures=True, color_encoding='gpu-linear'):
+    if color_encoding not in ('gpu-linear','authored-srgb'):
+        raise ValueError('Unsupported surface color encoding')
+    verified=_verified_branch(record)
+    if verified:record=surface_color_record(record,color_encoding)
     material = _create_surface(record, texture_files, pack_textures)
-    if not _verified_branch(record):
+    if not verified:
         return material
     values, colors = record.get('Floats') or {}, record.get('Colors') or {}
     if values.get('_UseMaskRUVSetAndTilingScale', 0) > .5:
@@ -123,6 +128,8 @@ def create_material(record, texture_files, pack_textures=True):
         'Lit record 477: B/G/R absolute base, roughness, metallic interpolation; '
         'shared saturate-adjusted mask times authored albedo alpha')
     material['endfield_tri_channel_contract'] = 'NativeTriSurfaceAlgebra/1'
+    material['endfield_input_surface_color_encoding'] = color_encoding
+    material['endfield_surface_color_encoding'] = 'gpu-linear'
     material['endfield_tri_channel_status'] = 'source_algebra_uv_domain_pending'
     material['endfield_tri_channel_uv_status'] = 'extractor_sampling_preserved_mesh_uv_and_runtime_binding_pending'
     material['endfield_surface_fidelity'] = 'source_tri_surface_algebra_mesh_uv_runtime_and_lighting_pending'

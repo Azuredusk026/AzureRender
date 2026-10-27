@@ -21,6 +21,7 @@ def main():
     parser.add_argument('--exchange', action='store_true')
     parser.add_argument('--render', action='store_true')
     parser.add_argument('--bake-materials', type=int, metavar='RESOLUTION')
+    parser.add_argument('--surface-color-encoding', choices=('authored-srgb','gpu-linear'), default='authored-srgb')
     parser.add_argument('--lod-policy', choices=('metric', 'highest'), default='metric')
     parser.add_argument('--lod-metric-squared', type=float)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
@@ -82,7 +83,8 @@ def main():
                     bpy.data.objects.remove(obj, do_unlink=True)
             material_key = reference_key(containers[pair['material']])
             if material_key not in material_cache:
-                material_cache[material_key] = create_material(materials[material_key], textures, True)
+                material_cache[material_key] = create_material(materials[material_key], textures, True,
+                    color_encoding=args.surface_color_encoding)
                 if args.bake_materials:
                     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'blender'))
                     from bake_material_channels import bake_material

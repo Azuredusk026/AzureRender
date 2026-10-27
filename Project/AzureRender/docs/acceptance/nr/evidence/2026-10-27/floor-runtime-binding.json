@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR5-R7 captured floor inputs and material color upload",
+  "privateRun": "build/runs/20261027-115657-native-floor-coordinate-capture-362e52",
+  "status": "narrow-checks-passed",
+  "source": {
+    "CMakeLists.txt": "808d91e384fd5bc68b9392ffeb3da0a04bbd491925c5c598a4b119a43adca72a",
+    "tools/blender/native_surface_colors.py": "c2d615128fac42d89d9b0fb216595c740a15f18697b6aba5644a69bf5eb1e95d",
+    "tools/test_native_surface_colors.py": "ec40dc9bcb7343d6841d5563291375c2edfaf0fff2f291fc3e238d1b49022339",
+    "tests/fixtures/native_surface_color_upload.json": "1ae6d82b44425c694d48fc216e6b2358dcce646842a02dab81d40956a2ae2c9d",
+    "tools/blender/native_surface_materials.py": "79dddd0af36455b8f4354b80fc31184850f70f5a83f120942c9b16c1b99b7361",
+    "tools/blender/native_spline_materials.py": "727bd7513b1990b9aa38290a3e69a23637fb23bd429d6bb7932ffa77bbad0aa2",
+    "tools/blender/test_native_surface_materials.py": "fea990ec76a90b2f6baf5e0ca4000b36e63d160d48ffddcd4cf5653f280dffe6",
+    "tools/endfield_native/build_scene_preview.py": "9d95ffcd5e53f604cf8adfd54359b545b0be8a029eb970918123d6e7b2abf637",
+    "tools/blender/build_native_spline_clips.py": "9daf9224d31867faba297df099ffaa6596b467c3275a39bfece46485778a4172"
+  },
+  "native": {
+    "frame": 3534,
+    "capture": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534.rdc",
+    "finalTexture": "ResourceId::406",
+    "gbufferOrientation": "vertical flip relative to final swapchain",
+    "meshPathId": -6961952291911658290,
+    "entity": 17853416,
+    "uvSetOne": "alias of UV0; TEXCOORD0/1/4 at slot1 byte0 float2",
+    "uvStride": 8,
+    "objectMatrixMatchesSerializedEntity": true,
+    "draws": [
+      {
+        "event": 5299,
+        "submesh": 1,
+        "indexCount": 16857,
+        "indexOffset": 11877,
+        "indexBuffer": {
+          "resource": "ResourceId::11593",
+          "offset": 6624256,
+          "stride": 2
+        },
+        "indexSha256": "60291edec4ca9e7eb802ca398af7ceca6883248e321d4c9d726b383798fc123c",
+        "rawSourceIndicesExact": true,
+        "shaders": [
+          {
+            "stage": "vertex",
+            "resource": "ResourceId::16052",
+            "sha256": "ea49772c611f653b18c70199bb0dfcea284ea1f0af795fd8defc9f4d8e6e2b57"
+          },
+          {
+            "stage": "pixel",
+            "resource": "ResourceId::16055",
+            "sha256": "8eb54455b74d6b3dc10683e3ddd66450539ecd3c4a23485711426742f21e47b6"
+          }
+        ],
+        "uvStreamSha256": "81539e77ed454bb05124e922ad9cee4676e51610bacb51910fee4c59fa5eb1e9"
+      },
+      {
+        "event": 5310,
+        "submesh": 2,
+        "indexCount": 6138,
+        "indexOffset": 28734,
+        "indexBuffer": {
+          "resource": "ResourceId::11593",
+          "offset": 6624256,
+          "stride": 2
+        },
+        "indexSha256": "9b2a346813648b989689816b2ea52864cdf71c8ec3b84e320c0d99107e51a56a",
+        "rawSourceIndicesExact": true,
+        "shaders": [
+          {
+            "stage": "vertex",
+            "resource": "ResourceId::16052",
+            "sha256": "ea49772c611f653b18c70199bb0dfcea284ea1f0af795fd8defc9f4d8e6e2b57"
+          },
+          {
+            "stage": "pixel",
+            "resource": "ResourceId::16055",
+            "sha256": "8eb54455b74d6b3dc10683e3ddd66450539ecd3c4a23485711426742f21e47b6"
+          }
+        ],
+        "uvStreamSha256": "81539e77ed454bb05124e922ad9cee4676e51610bacb51910fee4c59fa5eb1e9"
+      }
+    ],
+    "materialParameters": {
+      "cases": [
+        {
+          "event": 5299,
+          "material": "M_mod_map01_zmdbuliding+1_002_21",
+          "rowsCompared": 32,
+          "rawMaximumError": 0.28672658205032353,
+          "convertedMaximumError": 2.0980834958272965e-08,
+          "remaining": []
+        },
+        {
+          "event": 5310,
+          "material": "M_mod_map01_zmdbuliding+1_002_24",
+          "rowsCompared": 32,
+          "rawMaximumError": 0.27920785447395324,
+          "convertedMaximumError": 6.58108569862037e-08,
+          "remaining": []
+        }
+      ],
+      "budget": 1e-06
+    }
+  },
+  "tests": {
+    "pureDataCases": 3,
+    "ctestsPerConfiguration": 1,
+    "splineBakeUnitCases": 8,
+    "blender": [
+      {
+        "path": "surface-color-green/result.json",
+        "cases": 8,
+        "sha256": "950cd4417911710f91898f782cbae7ddd1d908f8f538b827417d9bc861f3f34e"
+      },
+      {
+        "path": "spline-color-green/result.json",
+        "cases": 8,
+        "sha256": "f1fad678d8113f5cee5f8ad1816b1fdface145ec582c1a6c5009d4983ae8148e"
+      },
+      {
+        "path": "spline-regression-final/result.json",
+        "cases": 7,
+        "sha256": "4729a92be592a3d375d2f1eeef2bec1a0fcde9b1bbcdc5a0be156820ecafe6a1"
+      }
+    ],
+    "main": {
+      "debug": {
+        "status": "passed",
+        "changedPixels": 852382,
+        "maximumByteError": 133,
+        "meanByteError": 10.43744442033179,
+        "floorLinearLuminanceBefore": 0.24779972147394919,
+        "floorLinearLuminanceAfter": 0.11210183899274918,
+        "resourcesReleased": true,
+        "validationErrors": 0
+      },
+      "release": {
+        "status": "passed",
+        "changedPixels": 852382,
+        "maximumByteError": 133,
+        "meanByteError": 10.43744442033179,
+        "floorLinearLuminanceBefore": 0.24779972147394919,
+        "floorLinearLuminanceAfter": 0.11210183899274918,
+        "resourcesReleased": true,
+        "validationErrors": 0
+      }
+    },
+    "mainDebugReleaseImageExact": true,
+    "mainCandidate": {
+      "readOnlyHardlinks": 1484,
+      "changedNodes": [
+        "exchange-node-17925932836137211-138",
+        "exchange-node-17925932836137215-139"
+      ],
+      "materialDocumentSchema": 3,
+      "geometryAndCameraUnchanged": true,
+      "GIUnchanged": true,
+      "cacheOwnership": "Copied local cache"
+    }
+  },
+  "negatives": {
+    "missingColorModule": "color-red.log",
+    "missingEncodingAPI": "surface-color-red.log",
+    "wrongCompatibilityManifest": "spline-regression.log",
+    "cullingMismatch": "main-release/player.log",
+    "interruptedDiagnostic": "main-debug/player.log",
+    "cullingRecovery": {
+      "reason": "Preserve imported geometry culling while validating material color upload",
+      "materials": [
+        {
+          "material": "M_mod_map01_zmdbuliding+1_002_21",
+          "doubleSided": true
+        },
+        {
+          "material": "M_mod_map01_zmdbuliding+1_002_24",
+          "doubleSided": true
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Only two central floor draws have verified runtime UV aliases",
+    "Baked surface does not preserve independent source texture mip/filter selection",
+    "Camera registration, full lighting, native reflection and formal performance remain pending"
+  ]
+}

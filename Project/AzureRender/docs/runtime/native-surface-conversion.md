@@ -30,6 +30,27 @@ weight = adjusted * alpha
 颜色目标为遮罩颜色的绝对线性值。
 输出交给公共通道烘焙器及 glTF 管线。
 
+## 颜色上传
+
+`color_encoding` 显式声明四组表面颜色的输入域。
+`gpu-linear` 接收 GPU 线性值，也是适配器默认值。
+`authored-srgb` 将 RGB 按 sRGB 传输函数转为线性值。
+Alpha 保持线性，输入记录保持原值。
+
+转换范围为 `_BaseColor` 和 `_MaskAlbedoR/G/B`。
+自发光及其他颜色保留所属分支的解释。
+非有限值、错误长度和编码冲突产生明确错误。
+输出记录 `SurfaceColorEncoding: gpu-linear`。
+
+场景和样条生成命令默认读取作者域颜色。
+`--surface-color-encoding` 可显式选择上述输入域。
+两类入口通过同一表面适配器执行转换。
+
+中央地面的两个来源绘制已核对实际 UV 别名流。
+其 `TEXCOORD0/1/4` 共用第二顶点流的首组坐标。
+该绑定结论按已核验的绘制范围使用。
+详情见[地面运行绑定](../acceptance/nr/floor-runtime-binding.md)。
+
 ## 来源与验收
 
 转换输出记录表面契约及采样域状态。
@@ -51,3 +72,5 @@ CPU 烘焙覆盖实际源像素及合成参数。
 `--manifest` 指定场景清单，`--output` 指定输出目录。
 `--shader-evidence` 指定独立源指令参考收据。
 `--adapter` 可选择公共表面或样条入口。
+`--color-upload-evidence` 接收实际 GPU 颜色参考。
+纯数据验证入口为 `tools/test_native_surface_colors.py`。
