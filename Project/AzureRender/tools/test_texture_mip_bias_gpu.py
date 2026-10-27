@@ -14,6 +14,7 @@ import numpy as np
 from PIL import Image
 from native_render.light_lab import generate
 from convert_material_semantics import complete_material_document
+from test_unlit_texture_layers_gpu import profile as layer_profile,layer
 
 
 def authored_mips():
@@ -26,7 +27,8 @@ def authored_mips():
 
 def run(player,output,expected_validation='any',selected=None):
     output.mkdir(parents=True,exist_ok=False)
-    names=('neutral','biased','fixed','documents','device-clamped','mip-filter')
+    names=('neutral','biased','fixed','documents','device-clamped','mip-filter',
+           'layer-neutral','layer-biased','layer-fixed','layer-documents','layer-mask-biased')
     if selected:
         assert set(selected)<=set(names);names=tuple(name for name in names if name in selected)
     report={'schemaVersion':1,'status':'running','captures':[],
@@ -36,6 +38,7 @@ def run(player,output,expected_validation='any',selected=None):
     try:
         for name in names:
             print(name,flush=True)
+            layered=name.startswith('layer-');variant=name.removeprefix('layer-')
             root=output/name;generate(root,'dark')
             model=json.loads((root/'plane.gltf').read_text(encoding='utf-8'))
             model['materials'][0]['name']='MipPanel'
@@ -43,17 +46,31 @@ def run(player,output,expected_validation='any',selected=None):
             model['textures']=[{'source':0}]
             nodes=[];resources=[]
             for index,side in enumerate(('left','right')):
-                identity=str(uuid.uuid4());bias=0 if name in ('neutral','mip-filter') else ((-16 if index==0 else 16) if name=='device-clamped' else (-1 if index==0 else 1))
+                identity=str(uuid.uuid4());bias=0 if variant in ('neutral','mip-filter') else ((-16 if index==0 else 16) if variant=='device-clamped' else (-1 if index==0 else 1))
                 path=root/(side+'.dds');path.write_bytes(authored_mips())
                 metadata={'schemaVersion':1,'id':identity,'dependencies':[],
                           'settings':{'texture':{'filter':'linear','mipFilter':'linear' if name=='mip-filter' and index==1 else 'nearest','anisotropy':1,'mipBias':bias}}}
                 Path(str(path)+'.azmeta').write_text(json.dumps(metadata),encoding='utf-8')
                 asset=copy.deepcopy(model);asset['images']=[{'uri':side+'.dds'}]
+                if layered:
+                    surface=layer_profile();surface['softIntersection']['distance']=.001
+                    asset['samplers']=[dict(minFilter=9985,magFilter=9729,wrapS=10497,wrapT=10497)]
+                    asset['textures'][0]['sampler']=0
+                    asset['materials'][0].pop('pbrMetallicRoughness',None)
+                    asset['materials'][0].update(alphaMode='BLEND',doubleSided=True,extras=dict(azureRenderMaterial=
+                        dict(schemaVersion=2,**{'class':'generic'},features=['unlit-surface','unlit-texture-layers'],surface=surface)))
+                    if variant=='mask-biased':
+                        white=root/'white.dds'
+                        if not white.exists():
+                            raw=authored_mips();white.write_bytes(raw[:128]+bytes([255,255,255,255])*(sum((128>>i)**2 for i in range(8))))
+                        asset['images']=[{'uri':'white.dds'},{'uri':side+'.dds'}]
+                        asset['textures']=[dict(source=0,sampler=0),dict(source=1,sampler=0)]
+                        surface['layers'].append(layer('mask',1))
                 (root/(side+'.gltf')).write_text(json.dumps(asset),encoding='utf-8')
                 resources.append({'id':side,'asset':'assets:/'+side+'.gltf'})
                 node={'id':side,'resourceId':side,'components':{'azure.transform':{
                     'type':'azure.transform','version':1,'data':{'translation':[-9 if index==0 else 9,0,0]}}}}
-                if name=='documents':
+                if variant=='documents':
                     document=complete_material_document(asset['materials'][0],asset,{'0':identity})
                     material=root/(side+'.azurematerial');material.write_text(json.dumps(document),encoding='utf-8')
                     material_id=str(uuid.uuid4())
@@ -64,12 +81,13 @@ def run(player,output,expected_validation='any',selected=None):
             camera=next(n for n in level['nodes'] if n['id']=='camera')
             camera['components']['azure.camera']['data']['orthographicHeight']=32*2**.25 if name=='mip-filter' else 32
             level.update(resources=resources,nodes=nodes+[camera],lights=[])
+            if layered:level['renderSettings'].update(toneMapping=False,exposure=0,bloomEnabled=False,antiAliasing=0)
             path.write_text(json.dumps(level),encoding='utf-8')
             command=[str(player.resolve()),'--project',str((root/'lab.azureproject').resolve()),
                      '--width','128','--height','128','--capture-dir',str(root/'frames'),
                      '--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene',
-                     '--qa-isolation','albedo','--runtime-report',str(root/'runtime.json')]
-            if name=='fixed':command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+                     '--qa-isolation','beauty' if layered else 'albedo','--runtime-report',str(root/'runtime.json')]
+            if variant=='fixed':command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             (root/'command.json').write_text(json.dumps(command,indent=2),encoding='utf-8')
             with (root/'player.log').open('w',encoding='utf-8') as log:
                 subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
@@ -85,7 +103,7 @@ def run(player,output,expected_validation='any',selected=None):
             runtime=json.loads((root/'runtime.json').read_text(encoding='utf-8'))
             assert not runtime['scriptErrors'] and not runtime['presentationErrors'],name
             path=root/'frames/frame_000000.png';pixels=np.asarray(Image.open(path).convert('RGB'))
-            expected=np.array([(0,0,255),(0,0,255)] if name=='neutral' else [(0,255,0),(255,255,0)],dtype=int)
+            expected=np.array([(0,0,255),(0,0,255)] if variant=='neutral' else [(0,255,0),(255,255,0)],dtype=int)
             if name=='device-clamped':
                 palette=[(255,0,0),(0,255,0),(0,0,255),(255,255,0),(255,0,255),(0,255,255),(128,128,128),(255,255,255)]
                 # Independent implicit-LOD oracle: 128 texels / 32 pixels,
@@ -103,6 +121,8 @@ def run(player,output,expected_validation='any',selected=None):
             assert error<=1/255,(name,error,measured.tolist())
         for left,right in [('biased','fixed'),('biased','documents')]:
             if left in images and right in images:assert np.array_equal(images[left],images[right]),(left,right)
+        for right in ('layer-fixed','layer-documents','layer-mask-biased'):
+            if 'layer-biased' in images and right in images:assert np.array_equal(images['layer-biased'],images[right]),right
         if 'biased' in statistics and 'neutral' in statistics:
             assert statistics['biased']['uniqueTextures']==statistics['neutral']['uniqueTextures']+1
         report['status']='passed'

@@ -66,6 +66,23 @@ int main(int argc,char** argv){try{
  const auto interpreted=restored.interpret([&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
  require(packMaterialSurfaceProfile(interpreted).rows==packed.rows,"Complete standalone material document carries layer contract");
  require(interpreted.textureSettings[4].wrapU=="clamp"&&interpreted.styleMaskPixels==m.styleMaskPixels,"Standalone layer sampler and pixels agree with model import");
+ const auto metadata=[&](const char* name,const std::string& id,const Json& settings){
+  std::ofstream(folder/(std::string(name)+".azmeta"))<<Json{{"schemaVersion",1},{"id",id},
+   {"settings",{{"texture",settings}}},{"dependencies",Json::array()}}.dump();
+ };
+ metadata("base.png",baseId,{{"mipBias",-1.25}});metadata("mask.png",maskId,{{"mipBias",.75}});
+ const auto biased=load(source).materials.at(0);
+ require(biased.textureSettings[0].mipBias==-1.25F&&biased.textureSettings[4].mipBias==.75F,
+  "Layer image metadata carries independent mip bias");
+ require(biased.textureSettings[0].wrapU=="repeat"&&biased.textureSettings[4].wrapU=="clamp"
+  &&biased.textureSettings[4].mipFilter==TextureImportSettings::MipFilter::Nearest,
+  "Mip bias preserves glTF sampler ownership");
+ const auto biasedDocument=restored.interpret([&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
+ require(biasedDocument.textureSettings[0].mipBias==-1.25F&&biasedDocument.textureSettings[4].mipBias==.75F,
+  "Complete material documents consume layer image mip bias");
+ require(packMaterialSurfaceProfile(biased).rows==packed.rows,"Sampler bias leaves surface parameters intact");
+ metadata("base.png",baseId,{{"mipBias",-1},{"wrapU","clamp"}});reject(source);
+ std::filesystem::remove(folder/"base.png.azmeta");std::filesystem::remove(folder/"mask.png.azmeta");
  const auto patch=MaterialData::parse({{"schemaVersion",2},{"typeId","azure.pbr"},{"mode","parameters"},
   {"parameters",{{"emissiveStrength",1}}},{"textures",Json::object()}});
  bool patchRejected=false;

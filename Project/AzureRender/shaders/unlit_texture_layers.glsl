@@ -24,6 +24,6 @@ vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[12],float soft,float e
     vec3 mapped=(luminance+saturation*(base.rgb-luminance))*colorGain;
     base.rgb=mix(base.rgb,mapped,rows[8].w);
     // Node opacity is consumed by the existing final transparent composition.
-    base.a*=soft;return base;
+    base.a=clamp(base.a*soft,0.0,1.0);return base;
 }
 #endif

@@ -2017,7 +2017,7 @@ AssetMaterial loadMaterial(
             const bool layer=result.unlitTextureLayers.present&&(slot==0||(slot==4&&result.unlitTextureLayers.layerCount==2));
             if(layer&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU||settings.wrapV!=defaults.wrapV
                 ||settings.mipPolicy!=defaults.mipPolicy||settings.mipFilter!=defaults.mipFilter
-                ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias))
+                ||settings.anisotropy!=defaults.anisotropy))
                 throw std::invalid_argument(result.name+" unlit layer sampler ownership violated");
             const bool lookup=(slot==4&&((result.materialFeatures&MaterialFeatureDiffuseRamp)
                 ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||result.eyeSurface.present))

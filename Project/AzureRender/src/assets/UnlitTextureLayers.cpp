@@ -118,7 +118,7 @@ std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile
         result[i]+=std::max(result[i]-profile.highlightThreshold,0.F)*profile.highlightGain;
         result[i]=std::clamp(result[i]*(1+(frame.exposureGain-1)*profile.postExposureWeight),0.F,1000.F);
     }
-    result[3]*=softIntersection*nodeOpacity;
+    result[3]=saturate(result[3]*softIntersection)*nodeOpacity;
     const float luminance=result[0]*.212673F+result[1]*.715152F+result[2]*.072175F;
     for(unsigned i=0;i<3;++i) {
         const float mapped=(luminance+frame.saturation*(result[i]-luminance))*frame.colorGain[i];

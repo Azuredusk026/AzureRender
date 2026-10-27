@@ -40,7 +40,7 @@ def profile():
         postExposureWeight=1,globalColorWeight=1)
 
 
-def run(player,root,expected_validation='any'):
+def run(player,root,expected_validation='any',selected=None):
     root.mkdir(parents=True,exist_ok=False);assets=root/'assets';assets.mkdir()
     inputs=[player.resolve(),Path(__file__).resolve(),Path(__file__).with_name('create_visibility_fixture.py'),
         Path(__file__).with_name('convert_material_semantics.py'),*sorted((player.parent/'shaders').glob('*.spv'))]
@@ -64,10 +64,13 @@ def run(player,root,expected_validation='any'):
 
     def capture(name,kind,*,fixed=False,frames=1):
         nonlocal clear_background
-        p=profile();model=copy.deepcopy(template);opacity=.4 if kind=='node-opacity' else 1
+        p=profile();model=copy.deepcopy(template);opacity=.4 if kind in ('node-opacity','coverage-clamp','coverage-soft') else 1
         delta=.75 if kind in ('soft-half','node-opacity','diagonal','orthographic') else 2
         if kind=='soft-zero':delta=0
         if kind=='depth-occluded':delta=-.25
+        if kind=='coverage-clamp':p['tint'][3]=3;delta=1.125
+        if kind=='coverage-soft':p['tint'][3]=2;delta=.75
+        if kind=='coverage-negative':p['tint'][3]=-1
         pixels=base_pixel.reshape(1,1,4);second=second_pixel.reshape(1,1,4)
         colors=dict(schemaVersion=1,exposureGain=1,saturation=1,colorGain=[1,1,1])
         if kind in ('mask','blend','document-mask'):p['layers'].append(layer('mask' if kind=='document-mask' else kind,1))
@@ -160,7 +163,7 @@ def run(player,root,expected_validation='any'):
                 expected=np.clip(expected*colors['exposureGain'],0,1000)
                 luminance=np.dot(expected,[.212673,.715152,.072175]);expected=(luminance+colors['saturation']*(expected-luminance))*np.array(colors['colorGain'])
                 soft=1 if kind=='empty-background' else min(1,max(0,delta/math.cos(math.radians(yaw))/1.5))
-                alpha*=soft*opacity;receiver=clear_background if kind=='empty-background' else np.array([.07,.09,.11])
+                alpha=np.clip(alpha*soft,0,1)*opacity;receiver=clear_background if kind=='empty-background' else np.array([.07,.09,.11])
                 expected=receiver if kind=='depth-occluded' else expected*alpha+receiver*(1-alpha)
             # The target is an eight-bit presentation image. HDR survives the
             # transparent blend, then the display attachment clips its range.
@@ -180,7 +183,11 @@ def run(player,root,expected_validation='any'):
         (root/'progress.json').write_text(json.dumps(dict(records=records,metrics=metrics),indent=2));print(name,flush=True)
 
     kinds=['clear-only','base','mask','document-mask','blend','red-alpha','highlight','node-opacity','soft-half','soft-zero','depth-occluded',
-        'empty-background','diagonal','orthographic','frame-color','repeat','clamp','independent-samplers','scroll','clock-frozen','clock-reverse']
+        'empty-background','diagonal','orthographic','frame-color','repeat','clamp','independent-samplers','scroll','clock-frozen','clock-reverse',
+        'coverage-clamp','coverage-soft','coverage-negative']
+    if selected:
+        assert set(selected)<=set(kinds),'Unknown layer case';kinds=[kind for kind in kinds if kind in selected]
+        if 'clear-only' not in kinds:kinds.insert(0,'clear-only')
     for fixed in (False,True):
         for kind in kinds:capture(('fixed-' if fixed else 'indexed-')+kind,kind,fixed=fixed,frames=3 if kind in ('scroll','clock-frozen','clock-reverse') else 1)
     assert fingerprint()==frozen,'Inputs changed during GPU regression'
@@ -194,8 +201,8 @@ def run(player,root,expected_validation='any'):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--executable',type=Path,required=True)
-    parser.add_argument('--output',type=Path);parser.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any');args=parser.parse_args()
-    if args.output:run(args.executable,args.output.resolve(),args.expected_validation)
+    parser.add_argument('--output',type=Path);parser.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any');parser.add_argument('--case',action='append');args=parser.parse_args()
+    if args.output:run(args.executable,args.output.resolve(),args.expected_validation,args.case)
     else:
         with tempfile.TemporaryDirectory(prefix='unlit-layers-',dir=Path(__file__).resolve().parents[1]/'build/runs') as temporary:
-            run(args.executable,Path(temporary)/'check',args.expected_validation)
+            run(args.executable,Path(temporary)/'check',args.expected_validation,args.case)

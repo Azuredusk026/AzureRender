@@ -86,6 +86,15 @@ void numerical() {
  p.postExposureWeight=0;p.globalColorWeight=0;
  const auto independent=evaluateUnlitTextureLayers(p,{1,.5F,.25F,.8F},{},1,1,frame);
  near(independent[0],1,"Zero frame weight preserves source RGB");near(independent[1],.5F,"Zero frame color weight");
+ p.tint[3]=2;
+ near(evaluateUnlitTextureLayers(p,{.2F,.3F,.4F,.75F},{},.75F,.4F,{})[3],.4F,
+  "Coverage saturates after soft intersection and before node opacity");
+ near(evaluateUnlitTextureLayers(p,{.2F,.3F,.4F,.75F},{},.5F,.4F,{})[3],.3F,
+  "Unsaturated soft coverage remains proportional");
+ p.tint[3]=-1;
+ near(evaluateUnlitTextureLayers(p,{.2F,.3F,.4F,.75F},{},1,.4F,{})[3],0,
+  "Negative material alpha contributes zero coverage");
+ p.tint[3]=1;
  const auto bad=[&](auto callback){bool failed=false;try{callback();}catch(const std::invalid_argument&){failed=true;}require(failed,"Invalid runtime input must fail explicitly");};
  bad([&]{(void)evaluateUnlitMaterialTime(p,std::numeric_limits<double>::infinity());});
  bad([&]{(void)evaluateUnlitLayerUv(layer,{.2F,.3F},std::numeric_limits<double>::quiet_NaN());});

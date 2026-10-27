@@ -22,6 +22,7 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 上方与后方来源接入见[围护验收](../acceptance/nr/enclosure-authored-normals.md)。
 物流图层、完整材质与实际绘制见[图层接入](../runtime/unlit-texture-layers.md)。
 活动物流参数及实际资源见[截帧绑定](../acceptance/nr/captured-vfx-layers.md)。
+层级采样、覆盖率及实际实例见[绘制验收](../acceptance/nr/vfx-mip-and-coverage.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

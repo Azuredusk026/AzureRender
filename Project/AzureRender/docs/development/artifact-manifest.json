@@ -470,6 +470,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-vfx-layers.json",
       "primaryProject": "build/runs/20261028-021151-native-vfx-layer-conversion-d389a1/full-candidate/enclosure-vfx.azureproject"
+    },
+    {
+      "path": "runs/20261028-030807-native-vfx-instance-closure-491cc6",
+      "pathBase": "build",
+      "purpose": "图层层级偏移、覆盖率、逐绘制贡献与十八个实际实例验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/vfx-mip-and-coverage.json",
+      "primaryProject": "build/runs/20261028-030807-native-vfx-instance-closure-491cc6/full-candidate/enclosure-vfx-extended.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

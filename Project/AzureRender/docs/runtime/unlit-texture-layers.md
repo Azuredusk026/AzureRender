@@ -5,6 +5,7 @@
 数值入口见[图层契约验收](../acceptance/nr/unlit-texture-layer-contract.md)。
 实际绑定见[图层材质验收](../acceptance/nr/unlit-texture-material.md)。
 来源转换与实际截帧输入见[物流图层来源](../acceptance/nr/captured-vfx-layers.md)。
+层级采样、覆盖率和活动实例见[绘制验收](../acceptance/nr/vfx-mip-and-coverage.md)。
 
 ## 数据契约
 
@@ -76,11 +77,12 @@ Blend 权重为基础透明度与第二层透明度之和。
 `evaluateSoftIntersection` 使用同单位的视图深度。
 交界权重为深度绝对值之差，加偏移后除以距离。
 该值限制到零至一。
-最终透明度恰好乘一次交界权重与节点透明度。
+材质透明度先乘交界权重，再限制到零至一。
+最终透明度恰好乘一次节点透明度。
 
 ```text
 soft = saturate((abs(sceneViewZ) - abs(effectViewZ) + bias) / distance)
-alpha = baseAlpha * soft * nodeOpacity
+alpha = saturate(baseAlpha * soft) * nodeOpacity
 luminance = dot(rgb, [0.212673, 0.715152, 0.072175])
 mapped = (luminance + saturation * (rgb - luminance)) * colorGain
 rgb = mix(rgb, mapped, globalColorWeight)
@@ -110,7 +112,9 @@ rgb = mix(rgb, mapped, globalColorWeight)
 
 第一层使用固定槽零，第二层使用固定槽四。
 图像导入设置可明确颜色空间。
-采样器所有权由每层的 glTF 采样器确定。
+图像元数据的 `settings.texture.mipBias` 提供层级偏移。
+该值为负十六至十六的有限数，默认零。
+每层 glTF 采样器确定过滤、寻址及层级选择。
 冲突的图像采样设置产生异常。
 
 完整材质文档通过 `azure.profile` 提供同一表面对象。
