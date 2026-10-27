@@ -13,7 +13,22 @@ def _scale(value):
     return struct.unpack('<f',struct.pack('<f',value))[0]
 
 
-def bind_specular_profiles(level,profile,*,source_scene):
+def _profile_color(fields,encoding):
+    color=fields.get('color');temperature=fields.get('use_color_temperature')
+    if not isinstance(color,list) or len(color) not in (3,4) or type(temperature) is not bool:
+        raise ValueError('Profile colors require RGB or RGBA and an explicit temperature flag')
+    color=[_scale(value) for value in color]
+    if encoding=='authored-srgb' and any(value>1 for value in color):
+        raise ValueError('Authored sRGB profile colors require values in [0,1]')
+    if temperature:return None
+    if encoding=='linear':return color[:3]
+    # Round each source operation to float32, including the exponent.
+    return [_scale(value/_scale(12.92)) if value<=_scale(.04045) else
+        _scale(math.pow(_scale(_scale(value+_scale(.055))/_scale(1.055)),_scale(2.4))) for value in color[:3]]
+
+
+def bind_specular_profiles(level,profile,*,source_scene,color_encoding=None):
+    if color_encoding not in (None,'authored-srgb','linear'):raise ValueError('Unsupported profile color encoding')
     if (not isinstance(profile,dict) or profile.get('format')!='AzureEndfieldEcsLights/1'
             or not isinstance(source_scene,str) or not source_scene or profile.get('scene')!=source_scene
             or not isinstance(profile.get('rows'),list)):
@@ -26,10 +41,10 @@ def bind_specular_profiles(level,profile,*,source_scene):
         if identity in sources:raise ValueError('Duplicate native light source identity')
         if not isinstance(row.get('fields'),dict) or not isinstance(row.get('identity'),str) or not row['identity']:
             raise ValueError('Native light source record lacks its field identity')
-        sources[identity]=(_scale(row['fields'].get('specular_intensity')),row['identity'])
+        sources[identity]=(_scale(row['fields'].get('specular_intensity')),row['identity'],row['fields'])
     if not isinstance(level,dict) or not isinstance(level.get('lights'),list):
         raise ValueError('Native light binding requires a level light list')
-    result=copy.deepcopy(level);bindings=[];unmapped=[];seen=set();entities=set()
+    result=copy.deepcopy(level);bindings=[];unmapped=[];seen=set();entities=set();colored=0;unresolved=[]
     for light in result['lights']:
         if not isinstance(light,dict) or not isinstance(light.get('id'),str) or not light['id']:
             raise ValueError('Invalid target light identity')
@@ -45,12 +60,21 @@ def bind_specular_profiles(level,profile,*,source_scene):
         if entity not in sources:raise ValueError('Missing native light source: '+identity)
         shape=light.setdefault('shape',{})
         if not isinstance(shape,dict):raise ValueError('Target light shape must be an object')
-        value,source_identity=sources[entity];previous=_scale(shape.get('specularScale',1))
+        value,source_identity,fields=sources[entity];previous=_scale(shape.get('specularScale',1))
         shape['specularScale']=value
-        bindings.append(dict(light=identity,sourceEntity=entity,sourceIdentity=source_identity,previous=previous,value=value))
+        binding=dict(light=identity,sourceEntity=entity,sourceIdentity=source_identity,previous=previous,value=value)
+        if color_encoding is not None:
+            color=_profile_color(fields,color_encoding)
+            binding['color']=dict(source=fields['color'],previous=copy.deepcopy(light.get('color')),
+                status='unresolved-temperature' if color is None else 'bound')
+            if color is None:unresolved.append(identity)
+            else:light['color']=color;binding['color']['value']=color;colored+=1
+        bindings.append(binding)
     if not bindings:raise ValueError('Level contains no native lights to bind')
-    return result,dict(schemaVersion=1,sourceScene=source_scene,boundLights=len(bindings),
+    receipt=dict(schemaVersion=1,sourceScene=source_scene,boundLights=len(bindings),
         changedLights=sum(b['previous']!=b['value'] for b in bindings),unmappedLights=unmapped,bindings=bindings)
+    if color_encoding is not None:receipt.update(colorEncoding=color_encoding,coloredLights=colored,unresolvedColorLights=unresolved)
+    return result,receipt
 
 
 def bind_directional_radiometry(level,raw,*,light_id,enabled):

@@ -53,3 +53,22 @@ python tools/bind_native_light_profiles.py `
 调用者须核对源世界方向与关卡节点变换。
 运行快照按节点矩阵转换局部方向。
 常量、方向及实际图像见[主光验收](../acceptance/nr/main-light-runtime-binding.md)。
+
+## 档案颜色空间
+
+`--profile-color-encoding` 显式选择档案 RGB 的解释方式。
+`authored-srgb` 接收零至一的源颜色。
+`linear` 接收有限非负的单精度线性颜色。
+省略该参数时只绑定镜面倍率。
+
+源记录须提供 RGB 或 RGBA，以及明确的温度标志。
+普通颜色写入现有灯光 RGB，强度保持各自配置。
+sRGB 分支按来源公式逐次舍入为单精度。
+RGBA 的透明分量保留在来源收据中。
+
+温度混合灯保留当前颜色配置。
+其身份列入 `unresolvedColorLights`。
+`coloredLights` 记录具有明确转换的灯具数量。
+调用结果及收据共同报告该边界。
+
+实际颜色、失败输入及截帧对照见[颜色验收](../acceptance/nr/local-light-color-space.md)。

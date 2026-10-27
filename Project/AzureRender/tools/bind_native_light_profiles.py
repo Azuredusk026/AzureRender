@@ -12,6 +12,8 @@ def main():
     for name in ('level','profiles','output','receipt'):
         parser.add_argument('--'+name,type=Path,required=True)
     parser.add_argument('--source-scene',required=True)
+    parser.add_argument('--profile-color-encoding',choices=['authored-srgb','linear'],
+                        help='Explicit profile RGB encoding; temperature-enabled colors remain unresolved in the receipt')
     parser.add_argument('--main-header',type=Path,help='Caller-confirmed six-row CB3 header; radiometry only')
     parser.add_argument('--main-light',help='Explicit directional target identity; existing local direction retained')
     parser.add_argument('--main-enabled',choices=['0','1'],help='Caller-confirmed captured main-light activation')
@@ -22,7 +24,7 @@ def main():
     if paths[0]==paths[1] or any(p.exists() for p in paths):
         raise ValueError('Light profile output and receipt require distinct new files')
     level_raw=args.level.read_bytes();profile_raw=args.profiles.read_bytes()
-    result,binding=bind_specular_profiles(json.loads(level_raw),json.loads(profile_raw),source_scene=args.source_scene)
+    result,binding=bind_specular_profiles(json.loads(level_raw),json.loads(profile_raw),source_scene=args.source_scene,color_encoding=args.profile_color_encoding)
     main_binding=None
     if all(main_options):
         main_raw=args.main_header.read_bytes()
@@ -42,7 +44,9 @@ def main():
     except Exception:
         for path in created:path.unlink()
         raise
-    print(json.dumps(dict(output=str(paths[0]),boundLights=binding['boundLights'],changedLights=binding['changedLights'],unmappedLights=binding['unmappedLights'])))
+    summary=dict(output=str(paths[0]),boundLights=binding['boundLights'],changedLights=binding['changedLights'],unmappedLights=binding['unmappedLights'])
+    if args.profile_color_encoding:summary.update(coloredLights=binding['coloredLights'],unresolvedColorLights=binding['unresolvedColorLights'])
+    print(json.dumps(summary))
 
 
 if __name__=='__main__':

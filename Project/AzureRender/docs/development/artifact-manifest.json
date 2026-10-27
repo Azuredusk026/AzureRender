@@ -400,6 +400,14 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-27/cascade-caster-depth.json"
+    },
+    {
+      "path": "runs/20261027-233926-native-local-light-runtime-audit-1b643d",
+      "pathBase": "build",
+      "purpose": "局部灯颜色空间、单精度运算、双配置分项及实际镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/local-light-color-space.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

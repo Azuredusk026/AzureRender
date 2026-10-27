@@ -49,6 +49,42 @@ class NativeLightProfileTests(unittest.TestCase):
         self.assertEqual(result['lights'][2]['color'],[0,0,0]);self.assertEqual(result['lights'][2]['intensity'],0)
         self.assertFalse(result['lights'][2]['enabled'])
 
+    def test_explicit_srgb_color_uses_captured_float32_operations(self):
+        self.profile['rows'][0]['fields'].update(color=[1,.9753895998001099,.9528301358222961,1],use_color_temperature=False)
+        self.profile['rows'][1]['fields'].update(color=[.5,.04,1,1],use_color_temperature=False)
+        before=copy.deepcopy(self.level)
+        result,receipt=bind_specular_profiles(self.level,self.profile,source_scene='fixture',color_encoding='authored-srgb')
+        color=result['lights'][0]['color'];f=lambda x:struct.unpack('<f',struct.pack('<f',x))[0]
+        self.assertEqual([f(c*131.60000610351562) for c in color],[131.60000610351562,124.35221099853516,117.91789245605469])
+        self.assertAlmostEqual(result['lights'][1]['color'][0],.21404114,places=7)
+        self.assertAlmostEqual(result['lights'][1]['color'][1],.003095975,places=8)
+        self.assertEqual(receipt['coloredLights'],2);self.assertEqual(receipt['unresolvedColorLights'],[])
+        self.assertEqual(result['lights'][0]['intensity'],3);self.assertEqual(self.level,before)
+        repeated,_=bind_specular_profiles(result,self.profile,source_scene='fixture',color_encoding='authored-srgb')
+        self.assertEqual(result,repeated)
+
+    def test_temperature_colors_are_explicitly_unresolved_and_retained(self):
+        for row in self.profile['rows']:row['fields'].update(color=[.5,.25,1,1],use_color_temperature=False)
+        self.profile['rows'][1]['fields']['use_color_temperature']=True
+        self.level['lights'][1]['color']=[.9,.8,.7]
+        result,receipt=bind_specular_profiles(self.level,self.profile,source_scene='fixture',color_encoding='authored-srgb')
+        self.assertEqual(result['lights'][1]['color'],[.9,.8,.7]);self.assertEqual(receipt['unresolvedColorLights'],['native-light-9'])
+        self.assertEqual(receipt['coloredLights'],1)
+
+    def test_color_policy_and_invalid_inputs_are_rejected(self):
+        for invalid in [None,[-1,0,0],[float('nan'),0,0],[2,0,0],[True,0,0],[0,0]]:
+            self.setUp()
+            for row in self.profile['rows']:row['fields'].update(color=[1,1,1],use_color_temperature=False)
+            self.profile['rows'][0]['fields']['color']=invalid
+            with self.subTest(color=invalid),self.assertRaises(ValueError):
+                bind_specular_profiles(self.level,self.profile,source_scene='fixture',color_encoding='authored-srgb')
+        with self.assertRaises(ValueError):bind_specular_profiles(self.level,self.profile,source_scene='fixture',color_encoding='unknown')
+
+    def test_linear_color_policy_retains_linear_values(self):
+        for row in self.profile['rows']:row['fields'].update(color=[2,.25,1],use_color_temperature=False)
+        result,receipt=bind_specular_profiles(self.level,self.profile,source_scene='fixture',color_encoding='linear')
+        self.assertEqual(result['lights'][0]['color'],[2,.25,1]);self.assertEqual(receipt['coloredLights'],2)
+
     def setUp(self):
         self.level={'schemaVersion':1,'lights':[
             {'id':'native-light-7','shape':{'type':'point','specularScale':1},'intensity':3},
@@ -119,6 +155,16 @@ class NativeLightProfileTests(unittest.TestCase):
             self.assertEqual(json.loads(main_output.read_text())['lights'][2]['intensity'],4)
             self.assertFalse(json.loads(main_receipt.read_text())['mainBinding']['enabled'])
             self.assertEqual(level.read_bytes(),before)
+            for row in self.profile['rows']:row['fields'].update(color=[.5,.25,1,1],use_color_temperature=False)
+            self.profile['rows'][1]['fields']['use_color_temperature']=True
+            profile.write_text(json.dumps(self.profile))
+            color_command=command.copy();color_output=root/'color.azurelevel';color_receipt=root/'color-receipt.json'
+            color_command[color_command.index('--output')+1]=str(color_output)
+            color_command[color_command.index('--receipt')+1]=str(color_receipt)
+            completed=subprocess.run(color_command+['--profile-color-encoding','authored-srgb'],check=True,capture_output=True,text=True)
+            summary=json.loads(completed.stdout);self.assertEqual(summary['coloredLights'],1)
+            self.assertEqual(summary['unresolvedColorLights'],['native-light-9'])
+            self.assertEqual(json.loads(color_receipt.read_text())['binding']['colorEncoding'],'authored-srgb')
 
 
 if __name__=='__main__':unittest.main()
