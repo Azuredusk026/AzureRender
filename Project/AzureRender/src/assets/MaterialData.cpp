@@ -103,6 +103,8 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     }
     validate();if(parameterOverride&&!source)throw std::invalid_argument("Parameter override requires a source material");
     AssetMaterial result=parameterOverride?*source:AssetMaterial{};if(!parameterOverride){result.name=typeId;result.materialProfileExplicit=true;}
+    if(parameterOverride&&result.unlitTextureLayers.present)
+        throw std::invalid_argument("Unlit texture layers require a complete profile document");
     if(parameterOverride&&(result.materialClass!=AssetMaterialClass::Generic
         ||result.specularInput.present||result.nprDiffuse.present||result.eyeSurface.present
         ||result.projectedHairRamp.present||result.faceSdf.present||result.outlineSurface.present

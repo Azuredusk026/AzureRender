@@ -461,6 +461,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-texture-material.json",
       "primaryProject": "gpu-release-binding-final/project.azureproject"
+    },
+    {
+      "path": "runs/20261028-021151-native-vfx-layer-conversion-d389a1",
+      "pathBase": "build",
+      "purpose": "原生图层转换、完整文档边界、实际实例输入与双配置绘制验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-vfx-layers.json",
+      "primaryProject": "build/runs/20261028-021151-native-vfx-layer-conversion-d389a1/full-candidate/enclosure-vfx.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

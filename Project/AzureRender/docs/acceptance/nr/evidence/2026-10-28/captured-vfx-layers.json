@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR7-L4C",
+  "status": "passed",
+  "run": "build/runs/20261028-021151-native-vfx-layer-conversion-d389a1",
+  "primaryProject": "build/runs/20261028-021151-native-vfx-layer-conversion-d389a1/full-candidate/enclosure-vfx.azureproject",
+  "source": {
+    "CMakeLists.txt": "c5df3d3324a7c848cef02dfdeefd9cc82a643f351c462074303b8bea81d3ce9a",
+    "src/assets/MaterialData.cpp": "8b51cac99caf0aef988547f6605ff31df99c4cc48b89f7ced3a94fbc539ba3f5",
+    "tests/UnlitTextureMaterialTests.cpp": "3baca065f5a2eb0e7e5d83ff5ad56e7443166c90a619d348a18a3a5015e7bca6",
+    "tools/endfield_native/vfx_profile.py": "360fdd9dce6e37d4c0a13273f273fb49c65e83b4339de131bdb3605d693bc453",
+    "tools/endfield_native/color_space.py": "627a252dc0c106f8abbe8d7f56bea9b7e23d2941a715fd29853e5c0c33bdcc1d",
+    "tools/endfield_native/light_profiles.py": "a2b1f913265bcff19cd172db7f5ac7312cb12d8e6fab8305f675286022f7cfd5",
+    "tools/test_native_vfx_profile.py": "5e6852185fd63dac7ea04867324ddfe2e302faa5047b854807121924fd7cee35",
+    "tools/test_native_color_space.py": "753b7c5cda7c334ce1709bb14818bb59788c941b9aab4a6a924fb50c486c3f2d"
+  },
+  "artifacts": [
+    {
+      "path": "plan.md",
+      "sha256": "178b4db6d00e74496e72247b49cf9be2d7b65a4e586c5dafe6dbd2175cc1d65e"
+    },
+    {
+      "path": "converter-final.log",
+      "sha256": "eca65e64b723d247c40e3a652a75257802594c18200f97961f91c6a6d2665bd3"
+    },
+    {
+      "path": "final-cpu-debug.log",
+      "sha256": "8035d99f3857e1d4d752c4a0a60fdd4462913635d73f570acf9acb92a6800de9"
+    },
+    {
+      "path": "final-cpu-release.log",
+      "sha256": "c17401bdec23484e9bfacf67d1cf8d9c85d51038eb4a3c9b15af315bf139557d"
+    },
+    {
+      "path": "captured-contract-gpu.json",
+      "sha256": "18061c78d22200a75a1617d3b303b0cc2d7db9ca11f510228b0cfa710347ccfb"
+    },
+    {
+      "path": "captured-material-validation.json",
+      "sha256": "72055fb30b6dee2befa5f02322565cae007ab7946fd0a1a52fb2aa42bbee45a9"
+    },
+    {
+      "path": "authored-profile-validation.json",
+      "sha256": "fc9c7b93c5e4e6cab859f550952dcd47a3b5b9e7bbaa7efd4b5b3de307db46fc"
+    },
+    {
+      "path": "native-vfx-layout-scan.json",
+      "sha256": "4c035a9c916ef34799f276ebebe24755ae2e703bc3d3c5957823a54e8e196d93"
+    },
+    {
+      "path": "native-vfx-binding-scan.json",
+      "sha256": "c95fb9901dc395641211f6cf0543afa8eec174d46a29061de09249cee6b325d9"
+    },
+    {
+      "path": "native-unorm-texture-matches.json",
+      "sha256": "7c3064fef4ce4df0cbfce788005e6235aaf60b7152030555ee447391a2bda391"
+    },
+    {
+      "path": "runtime-inputs.json",
+      "sha256": "65dc916c806191b560a89508a2660be591aadebcfdfe606a31ee534b644fbe66"
+    },
+    {
+      "path": "post-vertices.json",
+      "sha256": "3044bfe600956d4123fdf7b6d8ea2f86c4ee56178528b8aac4303bfd53989c37"
+    },
+    {
+      "path": "post-world-validation.json",
+      "sha256": "fdef69866d9953f490524a89f8267e5a0833078cfe43760772e0e7f4f32f4603"
+    },
+    {
+      "path": "runtime-parameters.json",
+      "sha256": "8fbc8294ed97ab4cf3865e8b2fef66c59e03fa76aac823a8573230fde89429b7"
+    },
+    {
+      "path": "sampler-mip-mode.json",
+      "sha256": "8fbd15bb7d6f2d9c74880e7895e557088f118088d861d4fe4f05ff13ba7849ee"
+    },
+    {
+      "path": "seven-material-profiles-authored.json",
+      "sha256": "35af8f4b51edeb8a45c36661dad45da82eab33b98eaed1513f8f8367431f82ec"
+    },
+    {
+      "path": "captured-layer-receipt.json",
+      "sha256": "b27387c55af1f8bc9b5844a0f3389c14160964c17409b531427e493bd30c6235"
+    },
+    {
+      "path": "main-vfx-nearest-comparison.json",
+      "sha256": "4260fc790048e8d575c4266ef67cffe89413c63095fd70f7e5c753f5e2b001b6"
+    },
+    {
+      "path": "prepare_captured_layers.py",
+      "sha256": "5c608b001b650e975acdfb3b3dbf58cabecbab08b9fde5d9c4b1f67a8fd3b9e7"
+    },
+    {
+      "path": "validate_camera_push.py",
+      "sha256": "a2621dbc65f1a650a98aed3ceab20f0453860dc99cfb9b01e025bc18d0f6d16b"
+    },
+    {
+      "path": "test_captured_contract.py",
+      "sha256": "4ceaea4df1a0e493c8fa6e1b1f0a3d2f2a28957c4d3ec3d2abcbc79b60ad9cb6"
+    },
+    {
+      "path": "full-candidate/enclosure-vfx.azureproject",
+      "sha256": "d76fb31d758575b5c7c40085242e44ba3529444c07635fe1899f70e2d10eafbc"
+    },
+    {
+      "path": "full-candidate/native-gi/enclosure-vfx.azurelevel",
+      "sha256": "d92304217c786ed74106d571a3e5585ca5dd71a0290d97122d8f2444031a1458"
+    },
+    {
+      "path": "main-vfx-nearest-release/runtime.json",
+      "sha256": "2856775b9dcfd79838ca8b958e00f48873c76fa4b5da7e3c7f692287f86cf2ea"
+    },
+    {
+      "path": "main-vfx-nearest-release.log",
+      "sha256": "2466ee6fb6f07643a1686ca4ba33e08308f143a3b5ecce39dff9ca4866b91f16"
+    },
+    {
+      "path": "main-vfx-nearest-release/frames/frame_000000.png",
+      "sha256": "6f55ea6ded986f5c67f4319c5fb54e9890d29a613d81a32644c1c8a84f460a66"
+    },
+    {
+      "path": "main-vfx-nearest-release/frames/capture_manifest.json",
+      "sha256": "0f66b6bd2cb834b9f34981993918b1760141312c93c38aad75700fa8bb18b1b9"
+    },
+    {
+      "path": "captured-release-indexed.log",
+      "sha256": "aa7103f614865bc6266d421fcf5f1d7b8cdd581f010420d9b7b5e8bc1cae45d8"
+    },
+    {
+      "path": "captured-release-indexed/runtime.json",
+      "sha256": "bd43fad576fb3997960c498a7bc85e16c0fc6025eace13cc54e7d8e0d18ad443"
+    },
+    {
+      "path": "captured-release-indexed/frames/frame_000000.png",
+      "sha256": "b88ad5533c72b57eccf1ded2742021417d6cf4918e690f215f29ee254f2f85ef"
+    },
+    {
+      "path": "captured-release-indexed/frames/capture_manifest.json",
+      "sha256": "5638ac5d52c2e72d57a345bed3dd4d4499c4e3a7b97141ec1e4c18feec686cea"
+    },
+    {
+      "path": "captured-release-fixed.log",
+      "sha256": "0048e6a8451bed919055def01e769e4a27de377209384752c37b3823a4aebb52"
+    },
+    {
+      "path": "captured-release-fixed/runtime.json",
+      "sha256": "bd43fad576fb3997960c498a7bc85e16c0fc6025eace13cc54e7d8e0d18ad443"
+    },
+    {
+      "path": "captured-release-fixed/frames/frame_000000.png",
+      "sha256": "b88ad5533c72b57eccf1ded2742021417d6cf4918e690f215f29ee254f2f85ef"
+    },
+    {
+      "path": "captured-release-fixed/frames/capture_manifest.json",
+      "sha256": "06639f15d6028bdf9ba40a5c20d4161be047f4ae3d8c5343ebae9c153c88755b"
+    },
+    {
+      "path": "captured-debug-indexed.log",
+      "sha256": "cf4425d2001cfc4fd648999ace1e1f81016c3ee63339011d63d9f77e4519dcd1"
+    },
+    {
+      "path": "captured-debug-indexed/runtime.json",
+      "sha256": "bd43fad576fb3997960c498a7bc85e16c0fc6025eace13cc54e7d8e0d18ad443"
+    },
+    {
+      "path": "captured-debug-indexed/frames/frame_000000.png",
+      "sha256": "b88ad5533c72b57eccf1ded2742021417d6cf4918e690f215f29ee254f2f85ef"
+    },
+    {
+      "path": "captured-debug-indexed/frames/capture_manifest.json",
+      "sha256": "35b80485a7f72143fbac42c70c7546a4b2fed9e8149b749307798f3eac30943d"
+    },
+    {
+      "path": "captured-debug-fixed.log",
+      "sha256": "23d71f38ca08b440f7b40c92c1927d074647a6dbb2300f664de62aadc0a791d1"
+    },
+    {
+      "path": "captured-debug-fixed/runtime.json",
+      "sha256": "bd43fad576fb3997960c498a7bc85e16c0fc6025eace13cc54e7d8e0d18ad443"
+    },
+    {
+      "path": "captured-debug-fixed/frames/frame_000000.png",
+      "sha256": "b88ad5533c72b57eccf1ded2742021417d6cf4918e690f215f29ee254f2f85ef"
+    },
+    {
+      "path": "captured-debug-fixed/frames/capture_manifest.json",
+      "sha256": "05a3f35c2512537fc655d529eaed6b3e2d5af6533fce725fdc3e605f5b08532f"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10127.gltf",
+      "sha256": "c12f9f882cc027a4dc0450df096cb36c7eb9dcd440b1d46e103fd27e8ea1770e"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10127.gltf.azmeta",
+      "sha256": "6b5eab54baab5a01a1d7891b2ffb0f80e52181ca3cbe203ca6eaa5686d71deed"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10337.gltf",
+      "sha256": "53bb448130fda9686360c86092b23f9e84971b8b18e22d63eac5421f9ac0208e"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10337.gltf.azmeta",
+      "sha256": "10e3668834d936e7ebc7b812b8b404a77efa7aeaf07dc4be8f6b0cc516c967e2"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10350.gltf",
+      "sha256": "ef2af18c0ac803c0d094da5c175a4946b88c7dc1dbce5c09fe41bd612f66a755"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10350.gltf.azmeta",
+      "sha256": "3fb6947103b1d013b52c9cf75478ce525ca5250986c886b88cda7037376b2566"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10463.gltf",
+      "sha256": "1f765d7f500e052523d3c8674af5c780beba340c898e5f2713ac0ef7b0e392f7"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10463.gltf.azmeta",
+      "sha256": "dbcb959c6b47fbe9f63374fa62e3fb769eaf4c2ae9674891f850a1801604d92c"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10497.gltf",
+      "sha256": "f4257adc56d095dacf5ce71cb3fd8819db2582f1f7a6fdc53fa564bfbf573a5e"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10497.gltf.azmeta",
+      "sha256": "82c1cf0f39dbb20e9959147123ae35fb4f95f36f3eb42ca0aaa3580f6e1c4f73"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10510.gltf",
+      "sha256": "262a07afcf061799b96baef4e97de72259309aa631ff91a83045e2361aa7538c"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10510.gltf.azmeta",
+      "sha256": "6a24f4ca70e4a086bef48e959a0330fe0dcb8486de0f069a3c42442c0522b6d3"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10527.gltf",
+      "sha256": "e843846cc68e83c15adfe97a131793c6f24fa7e3441226ac6cd6038c1cfe3cf1"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10527.gltf.azmeta",
+      "sha256": "fca4c1945c45a68b058fe413d1877e1746cb745bf82ecbc715a84f74a53b00e8"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10544.gltf",
+      "sha256": "e887e9f136456a092eeec2c5bc34a7b0d84e3fa118512a24bce9f3c60386c71f"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10544.gltf.azmeta",
+      "sha256": "7e2ec6dee35a2e9315398083f1b6fc6b65d08a90322c765814c8a082dc827533"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10596.gltf",
+      "sha256": "42e8e0c4b696ec649dd8393825f9a7982188eb0a5fe0f7606fa80df1fae68b3e"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10596.gltf.azmeta",
+      "sha256": "8ad3683f0892656ee280b77ec652dbd0f3c85abb26886f52488f0801d7a1e749"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10609.gltf",
+      "sha256": "42cf3f8ecc332c7aba968c58afaec1312c2998fe66d974619f4446c84c920861"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10609.gltf.azmeta",
+      "sha256": "76f0962fe6d321a4fdeb1feadce950227bc8b94dbf622c4d9d063f99fcf007a0"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10698.gltf",
+      "sha256": "197bd2632778fc0c8df697e5ab399d43600780730648b812c9f37f8e35b6ab0b"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10698.gltf.azmeta",
+      "sha256": "91e1ed726ede17535bbe19e172bb0ee38b16a51797f25a959f4e8d0efa4c8e54"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10715.gltf",
+      "sha256": "c5b899c75d1aeb2ed0001901e580f19552a7e7df000917de44f903ea6ac0109b"
+    },
+    {
+      "path": "full-candidate/captured-vfx/event-10715.gltf.azmeta",
+      "sha256": "95df2f0b36f2e7cbe69fd7b263f06d5d8f9c5a8e3f1e1ff25419cb16b7f20e8a"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12068.dds",
+      "sha256": "1d0c8a46c2e0e74522f9c4c7294f5e99cc8b2d48d0285794e2033e8dd68b8693"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12068.dds.azmeta",
+      "sha256": "5580e26e2e308fe9a60a10800ab0cfc10b5e81e06352e165bef844207bb1c829"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12075.dds",
+      "sha256": "f34285f94df8236cd3f4105f40016186a71f4ae128f208dbc90089eab45fb2ea"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12075.dds.azmeta",
+      "sha256": "cecaafa18d5bc6d88f6c3ff7de0b2253c90d11f914e35a8afa139623d2d9e507"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12178.dds",
+      "sha256": "9365259df2e3e9fc849c71958ef5325cb7871f31810fb56a6e856904f5bc5317"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12178.dds.azmeta",
+      "sha256": "54afdb2f80548a504c32f57e5cd9f14c5d688430231f348f03482401cc1b92c0"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12182.dds",
+      "sha256": "78aceba17decf92a8cc9596a10cf396efa11689e4a4e4cc9107f6ab8dccb6d54"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12182.dds.azmeta",
+      "sha256": "185d5bae9494581b4623dd99e94f68d8d4ecd1f01d0967066dd4e799f7f3d91a"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12212.dds",
+      "sha256": "d7f89865c9638f837680a7faeb5feb67e09e90eea0a0cfc61b66fdc9b50a39c5"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-12212.dds.azmeta",
+      "sha256": "7e62c3d2ff6faca453ef2e857c483be82db234a893f945450977055bb6329552"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-5858.dds",
+      "sha256": "b6a673a60835c485a4baa9dd5d5f48bfb52f22ee1d97eaeb3a1eaa4360a47984"
+    },
+    {
+      "path": "full-candidate/captured-vfx/ResourceId-5858.dds.azmeta",
+      "sha256": "2bbf8c49d093f90e60218e9431a6061dc79c74a01c5843d96f8d4b1afb400771"
+    },
+    {
+      "path": "remaining-constant-prefix.json",
+      "sha256": "ed5e50cece316fb7ce4c85fcd9d651c4c9aa20b1dcd12b6bdd936d18bb7eaf8b"
+    }
+  ],
+  "tests": {
+    "cpuPerConfiguration": 5,
+    "converterAndSharedColor": 35,
+    "materialChecksPerConfiguration": 37,
+    "authoredProfiles": 7,
+    "runtimeProfiles": 12,
+    "gpuConfigurations": [
+      "debug",
+      "release"
+    ],
+    "descriptorPaths": [
+      "fixed",
+      "indexed"
+    ],
+    "configurationAndDescriptorExact": true,
+    "allocatorAfterUnload": {
+      "buffers": 0,
+      "images": 0
+    }
+  },
+  "nativeInputs": {
+    "reference": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534.rdc",
+    "timeSeconds": 73.48992156982422,
+    "instanceRate": 1,
+    "instanceOffset": 0,
+    "vertexColors": "white RGBA; zero instance attenuation",
+    "draws": [
+      10127,
+      10337,
+      10350,
+      10463,
+      10497,
+      10510,
+      10527,
+      10544,
+      10596,
+      10609,
+      10698,
+      10715
+    ],
+    "sourceVertexWorldMaximumError": 3.1379347227300514e-06,
+    "layerUvMaximumError": 1.4194898412256407e-06,
+    "sampler": {
+      "pixel": "linear",
+      "mip": "nearest",
+      "shaderLodBias": -1,
+      "candidateLodBias": 0
+    },
+    "textureStorage": "raw captured BC7_SRGB DDS mip chains"
+  },
+  "mainCamera": {
+    "status": "captured",
+    "changedPixels": 63970,
+    "priorMeanAbsoluteByteError": 17.126005045572917,
+    "candidateMeanAbsoluteByteError": 16.796656991464122,
+    "changedRegionPriorMeanAbsoluteByteError": 55.45366057005888,
+    "changedRegionCandidateMeanAbsoluteByteError": 36.47431608566516
+  },
+  "limitations": [
+    "Captured geometry pose; source animation curves and remaining logistics instances are separate.",
+    "Twelve selected draws have proven runtime inputs; the full active drawing set remains open.",
+    "NR0 through NR12 formal visual and performance gates remain active.",
+    "Native shader adds -1 global texture mip bias; this candidate uses zero. Public sampler ownership is the next task."
+  ],
+  "baseCommit": "2f190a6",
+  "binaries": {
+    "debug": "88f94c5ece8cbe4105b7ad4fdc50956ac1d4153da2f8cb51d1a2a9f8587e8c38",
+    "release": "4bb6182f0cee8d2ef1954da068f38471eeb501b380bb9de06eb3009de83dae60"
+  }
+}

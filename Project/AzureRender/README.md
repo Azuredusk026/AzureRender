@@ -27,6 +27,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 静态作者法线与精确轴置换见[批量验收](docs/acceptance/nr/static-authored-normals.md)。
 上方与后方来源接入见[围护验收](docs/acceptance/nr/enclosure-authored-normals.md)。
 物流图层、完整材质与实际绘制见[图层接入](docs/runtime/unlit-texture-layers.md)。
+活动物流图层、颜色及采样来源见[截帧绑定](docs/acceptance/nr/captured-vfx-layers.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

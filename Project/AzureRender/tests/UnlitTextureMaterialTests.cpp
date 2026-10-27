@@ -66,6 +66,12 @@ int main(int argc,char** argv){try{
  const auto interpreted=restored.interpret([&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
  require(packMaterialSurfaceProfile(interpreted).rows==packed.rows,"Complete standalone material document carries layer contract");
  require(interpreted.textureSettings[4].wrapU=="clamp"&&interpreted.styleMaskPixels==m.styleMaskPixels,"Standalone layer sampler and pixels agree with model import");
+ const auto patch=MaterialData::parse({{"schemaVersion",2},{"typeId","azure.pbr"},{"mode","parameters"},
+  {"parameters",{{"emissiveStrength",1}}},{"textures",Json::object()}});
+ bool patchRejected=false;
+ try{(void)patch.interpret([&](const std::string&){return folder/"base.png";},&interpreted);}
+ catch(const std::invalid_argument& e){patchRejected=std::string(e.what()).find("complete profile")!=std::string::npos;}
+ require(patchRejected,"Typed layer parameters require a complete profile document");
  auto bound=asset;const auto slot=materialSlotIds(bound).at(0);const auto boundName=bound.materials[0].name;
  const auto materialPath=folder/"layers.azmat";std::ofstream(materialPath)<<document.encode().dump();
  MaterialBinding binding;binding.path=materialPath.string();binding.textures={{baseId,(folder/"base.png").string()},{maskId,(folder/"mask.png").string()}};

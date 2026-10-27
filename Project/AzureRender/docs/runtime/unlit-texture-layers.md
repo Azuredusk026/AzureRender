@@ -4,6 +4,7 @@
 公共类型为 `UnlitTextureLayers`。
 数值入口见[图层契约验收](../acceptance/nr/unlit-texture-layer-contract.md)。
 实际绑定见[图层材质验收](../acceptance/nr/unlit-texture-material.md)。
+来源转换与实际截帧输入见[物流图层来源](../acceptance/nr/captured-vfx-layers.md)。
 
 ## 数据契约
 
@@ -34,6 +35,8 @@
 全部字段明确提供，数值须有限且能由单精度表示。
 每一层独立拥有 UV、角色及采样模式。
 纹理资源、采样器及材质兼容性由调用方校验。
+图层材质通过完整表面文档提供参数。
+通用 PBR 参数覆盖对该模型产生明确的失败诊断。
 
 ## 表现时间与坐标
 

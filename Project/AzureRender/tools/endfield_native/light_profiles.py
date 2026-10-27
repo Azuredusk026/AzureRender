@@ -6,6 +6,7 @@ import struct
 
 from .captured_lights import decode_directional_header,decode_records,render_character_response
 from .lighting_ecs import render_light_receivers
+from .color_space import srgb_to_linear_f32
 
 
 def _scale(value):
@@ -23,9 +24,7 @@ def _profile_color(fields,encoding):
         raise ValueError('Authored sRGB profile colors require values in [0,1]')
     if temperature:return None
     if encoding=='linear':return color[:3]
-    # Round each source operation to float32, including the exponent.
-    return [_scale(value/_scale(12.92)) if value<=_scale(.04045) else
-        _scale(math.pow(_scale(_scale(value+_scale(.055))/_scale(1.055)),_scale(2.4))) for value in color[:3]]
+    return [srgb_to_linear_f32(value) for value in color[:3]]
 
 
 def bind_specular_profiles(level,profile,*,source_scene,color_encoding=None):

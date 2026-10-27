@@ -2820,6 +2820,7 @@ if(BUILD_TESTING)
         "NativeRenderEvidence|test_native_render*.py"
         "NativeCharacter|test_native_character*.py"
         "NativeVfxProfile|test_native_vfx_profile.py"
+        "NativeColorSpace|test_native_color_space.py"
         "EndfieldNative|test_endfield_native*.py")
         string(REPLACE "|" ";" _ev_parts "${_ev_case}")
         list(GET _ev_parts 0 _ev_name)
