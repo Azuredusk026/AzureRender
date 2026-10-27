@@ -337,6 +337,8 @@ public:
         VkImageLayout oldLayout,
         VkImageLayout newLayout,
         std::uint32_t mipLevels) = 0;
+    // Tightly packed mip-major texels, then array layers and Z slices.
+    // Volume depth comes from the destination allocation and shrinks per mip.
     virtual void copyBufferToImage(
         const GpuBuffer& source,
         const GpuImage& destination,

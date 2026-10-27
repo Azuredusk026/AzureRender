@@ -1,6 +1,7 @@
 # 网格辐照度资源
 
 原生场景的覆盖与来源见[中庭验证](../acceptance/nr/irradiance-coverage.md)。
+三维资源的上传规则见[体积纹理](volume-image-upload.md)。
 
 `AZIV0001` 保存通用规则网格的方向辐照系数。
 资源属于 RenderCore 的数据契约。

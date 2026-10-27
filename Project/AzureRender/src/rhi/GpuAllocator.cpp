@@ -171,6 +171,7 @@ GpuImage GpuAllocator::createImage(
     result.height = createInfo.extent.height;
     result.mipLevels = createInfo.mipLevels;
     result.arrayLayers = createInfo.arrayLayers;
+    result.depth = createInfo.extent.depth;
 
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;

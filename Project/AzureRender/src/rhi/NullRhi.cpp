@@ -74,9 +74,10 @@ GpuImage NullGpuAllocator::createImage(
     result.height = createInfo.extent.height;
     result.mipLevels = createInfo.mipLevels;
     result.arrayLayers = createInfo.arrayLayers;
+    result.depth = createInfo.extent.depth;
     ++statistics_.imageAllocations;
     ++statistics_.liveImages;
-    const auto bytes=static_cast<VkDeviceSize>(result.width)*result.height*4*result.arrayLayers
+    const auto bytes=static_cast<VkDeviceSize>(result.width)*result.height*result.depth*4*result.arrayLayers
         *std::max(1U,static_cast<unsigned>(createInfo.samples));
     imageBytes_[result.image]=bytes;
     statistics_.imageBytes+=bytes;statistics_.liveImageBytes+=bytes;
@@ -161,7 +162,7 @@ void NullRhi::copyBufferToImage(
     const std::uint32_t width,
     const std::uint32_t height,
     const std::uint32_t mipLevels, const std::uint32_t bytesPerTexel) {
-    if(collectImageUploads){ImageUpload upload{width,height,mipLevels,{}};const auto* begin=static_cast<const std::uint8_t*>(source.mapped);if(begin)upload.pixels.assign(begin,begin+source.size);imageUploads.push_back(std::move(upload));}
+    if(collectImageUploads){ImageUpload upload{width,height,mipLevels,{},destination.depth};const auto* begin=static_cast<const std::uint8_t*>(source.mapped);if(begin)upload.pixels.assign(begin,begin+source.size);imageUploads.push_back(std::move(upload));}
     calls.push_back(
         {"copyBufferToImage",
          hexHandle(destination.image) + " " + std::to_string(width) + "x"

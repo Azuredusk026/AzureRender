@@ -123,13 +123,14 @@ void VulkanRhi::copyBufferToImage(
     const std::uint32_t mipLevels, const std::uint32_t bytesPerTexel) {
     runOneShot("copyBufferToImage", [&](VkCommandBuffer commandBuffer) {
         std::vector<VkBufferImageCopy> regions;
-        VkDeviceSize offset=0;unsigned w=width,h=height;
+        VkDeviceSize offset=0;unsigned w=width,h=height,d=destination.depth;
         for(unsigned level=0;level<mipLevels;++level){
         VkBufferImageCopy region{};region.bufferOffset=offset;region.imageSubresource.mipLevel=level;
         region.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
         region.imageSubresource.layerCount = destination.arrayLayers;
-        region.imageExtent = {w, h, 1};
-        regions.push_back(region);offset+=VkDeviceSize(w)*h*bytesPerTexel*destination.arrayLayers;w=std::max(w/2,1U);h=std::max(h/2,1U);
+        region.imageExtent = {w, h, d};
+        regions.push_back(region);offset+=VkDeviceSize(w)*h*d*bytesPerTexel*destination.arrayLayers;
+        w=std::max(w/2,1U);h=std::max(h/2,1U);d=std::max(d/2,1U);
         }
         vkCmdCopyBufferToImage(
             commandBuffer,

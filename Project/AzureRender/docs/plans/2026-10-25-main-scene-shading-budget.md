@@ -152,3 +152,7 @@ RHI 使用有界的三十二位着色器专用化常量。
 实际热点功能值和两种材质入口共同决定选择规则。
 同批模式一 P95 为 57.40 毫秒，冻结对照为 62.64 毫秒。
 画面与构建依赖见[功能验证](../acceptance/nr/generic-material-feature-folding.md)。
+
+反射与局部光源使用冻结程序分别做九十六帧对照。
+两者均保留正式候选的启用设置。
+逐项成本见[主场景对照](../acceptance/nr/volume-image-upload.md)。

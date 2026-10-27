@@ -61,7 +61,7 @@ private:
 class NullRhi final : public IRhi {
 public:
     std::vector<RecordedCall> calls;
-    struct ImageUpload {unsigned width,height,levels;std::vector<std::uint8_t> pixels;};
+    struct ImageUpload {unsigned width,height,levels;std::vector<std::uint8_t> pixels;unsigned depth=1;};
     bool collectImageUploads=false;
     std::vector<ImageUpload> imageUploads;
     std::set<VkFormat> unavailableSampledFormats;

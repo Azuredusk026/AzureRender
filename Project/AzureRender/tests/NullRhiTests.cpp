@@ -168,6 +168,20 @@ int main() {
     // The device mock mints distinct handles and logs creation.
     NullRhi rhi;
     {
+        auto info=cubeInfo;info.imageType=VK_IMAGE_TYPE_3D;info.extent={2,3,4};
+        info.arrayLayers=1;info.flags=0;
+        auto volume=allocator.createImage(info,false);
+        if(volume.depth!=4||allocator.statistics().liveImageBytes!=96)return 101;
+        auto upload=allocator.createBuffer(96,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true);
+        std::memset(upload.mapped,0x6b,96);rhi.collectImageUploads=true;
+        rhi.copyBufferToImage(upload,volume,2,3);
+        const auto& recorded=rhi.imageUploads.back();
+        if(recorded.depth!=4||recorded.pixels.size()!=96||recorded.pixels.back()!=0x6b)return 102;
+        rhi.imageUploads.clear();rhi.collectImageUploads=false;
+        allocator.destroyBuffer(upload);allocator.destroyImage(volume);
+        if(allocator.statistics().liveImageBytes||allocator.statistics().liveBufferBytes)return 103;
+    }
+    {
         azurerender::rhi::GraphicsPipelineDesc selective;
         selective.colorAttachmentCount=2;
         selective.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};

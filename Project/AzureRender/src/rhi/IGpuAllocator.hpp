@@ -31,6 +31,7 @@ struct GpuImage {
     std::uint32_t height = 0;
     std::uint32_t mipLevels = 1;
     std::uint32_t arrayLayers = 1;
+    std::uint32_t depth = 1;
 };
 
 // Running totals used by the performance baseline to show that a structural
