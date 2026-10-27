@@ -435,6 +435,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/static-authored-normals.json",
       "primaryProject": "full-candidate/normals-default.azureproject"
+    },
+    {
+      "path": "runs/20261028-010811-native-enclosure-authored-normals-bdab65",
+      "pathBase": "build",
+      "purpose": "上方与后方作者法线、UV 保留及真实镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/enclosure-authored-normals.json",
+      "primaryProject": "full-candidate/enclosure-default.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

@@ -2,6 +2,7 @@
 
 作者法线、独立 UV 流及目标烘焙见[原生网格转换](../development/native-surface-uvs.md)。
 单精度坐标、精确换轴及实际建筑见[静态法线](../acceptance/nr/static-authored-normals.md)。
+上方与后方资源见[围护验收](../acceptance/nr/enclosure-authored-normals.md)。
 
 原生场景和样条共用 `native_surface_materials.py`。
 该模块包装显式提供的 Blender 提取器。

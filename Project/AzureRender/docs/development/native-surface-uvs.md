@@ -17,6 +17,7 @@
 非法作者位置与 UV 在导入前校验。
 大平铺坐标和大型几何均使用相同存储约定。
 批量接入及精度验证见[静态法线](../acceptance/nr/static-authored-normals.md)。
+上方与后方资源见[围护验收](../acceptance/nr/enclosure-authored-normals.md)。
 
 源面采用完整的正索引，支持独立的位置、UV 和法线索引。
 作者法线须有限且非零，转换按单位方向保存。
