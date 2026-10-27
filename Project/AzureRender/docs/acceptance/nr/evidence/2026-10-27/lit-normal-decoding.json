@@ -1,0 +1,823 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR1-S3",
+  "status": "lit_normal_conversion_passed_full_surface_and_lighting_pending",
+  "source": {
+    "tools/blender/native_surface_materials.py": "967fbb1abc07ec8c473f0a49864b5f4a1501e1e69c3195797556382959edd1cd",
+    "tools/blender/test_native_surface_normals.py": "59d490351fba71bdbb5f1133bebb342e9acfb5676a02d55a0ed3fa6bf70b0db6"
+  },
+  "tests": {
+    "blenderNormalCases": 6,
+    "invalidStrengthCases": 4,
+    "maximumNormalComponentError": 1.0666785121848932e-07,
+    "normalBudget": 2e-05,
+    "surfaceRegressionCases": 6,
+    "gpuCapturesPerConfiguration": 16,
+    "configurationImagesExact": true,
+    "legacyFixtureImagesExact": true,
+    "shaderPrograms": 193,
+    "shaderConfigurationBytesExact": true,
+    "runtimeShaderSourceUnchanged": true,
+    "finalRebuildBytesExact": true
+  },
+  "native": {
+    "source": "build\\runs\\20261027-115657-native-floor-coordinate-capture-362e52\\5299\\pixel.dxbc",
+    "sha256": "8eb54455b74d6b3dc10683e3ddd66450539ecd3c4a23485711426742f21e47b6",
+    "event": 5299,
+    "threshold": 0.012,
+    "thresholdBits": "0x3c449ba6",
+    "zFloor": 0.00048828125,
+    "zFloorBits": "0x3a000000",
+    "deadZoneInstructions": [
+      "mad r2.xy, r2.xyxx, l(0x40000000, 0x40000000, 0x00000000, 0x00000000), l(0xbf800000, 0xbf800000, 0x00000000, 0x00000000)",
+      "lt r3.xy, |r2.xyxx|, l(0x3c449ba6, 0x3c449ba6, 0x00000000, 0x00000000)",
+      "movc r2.xy, r3.xyxx, l(0x00000000,0x00000000,0x00000000,0x00000000), r2.xyxx",
+      "mul r3.xy, r2.xyxx, cb2[0].xxxx",
+      "mad r3.zw, cb2[22].xxxx, r0.yyyz, v1.xxxy"
+    ],
+    "zInstructions": [
+      "mad r0.xzw, v3.xxyz, r3.xxxx, r0.xxzw",
+      "dp2 r1.x, r2.xyxx, r2.xyxx",
+      "add r1.x, -r1.x, l(0x3f800000)",
+      "max r1.x, r1.x, l(0x00000000)",
+      "sqrt r1.x, r1.x",
+      "max r1.x, r1.x, l(0x3a000000)",
+      "lt r1.y, l(0x00000000), cb2[1].w"
+    ]
+  },
+  "normal": [
+    {
+      "pixel": [
+        1280,
+        1100
+      ],
+      "beforeDegrees": 1.0106971412517085,
+      "afterDegrees": 0.47440581847092694
+    },
+    {
+      "pixel": [
+        1280,
+        1250
+      ],
+      "beforeDegrees": 1.0106971412517085,
+      "afterDegrees": 0.47440581847092694
+    },
+    {
+      "pixel": [
+        600,
+        1000
+      ],
+      "beforeDegrees": 1.0057930369606274,
+      "afterDegrees": 1.0057930369606274
+    },
+    {
+      "pixel": [
+        2000,
+        1000
+      ],
+      "beforeDegrees": 0.4032465007118849,
+      "afterDegrees": 0.4032465007118849
+    },
+    {
+      "pixel": [
+        700,
+        650
+      ],
+      "beforeDegrees": 1.256273356340072,
+      "afterDegrees": 1.256273356340072
+    },
+    {
+      "pixel": [
+        400,
+        450
+      ],
+      "beforeDegrees": 1.1216904496897115,
+      "afterDegrees": 1.391730828214589
+    },
+    {
+      "pixel": [
+        2000,
+        650
+      ],
+      "beforeDegrees": 1.1308878094467083,
+      "afterDegrees": 1.1308878094467083
+    },
+    {
+      "pixel": [
+        1800,
+        1000
+      ],
+      "beforeDegrees": 0.4032465007118849,
+      "afterDegrees": 0.4032465007118849
+    },
+    {
+      "pixel": [
+        400,
+        950
+      ],
+      "beforeDegrees": 9.083289123366976,
+      "afterDegrees": 9.083289123366976
+    },
+    {
+      "pixel": [
+        2100,
+        950
+      ],
+      "beforeDegrees": 8.628221925454707,
+      "afterDegrees": 8.628221925454707
+    }
+  ],
+  "surface": {
+    "metallic": [
+      {
+        "pixel": [
+          1280,
+          1100
+        ],
+        "native": 0.0,
+        "candidate": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          1280,
+          1250
+        ],
+        "native": 0.0,
+        "candidate": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          600,
+          1000
+        ],
+        "native": 0.0,
+        "candidate": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          2000,
+          1000
+        ],
+        "native": 0.0,
+        "candidate": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          700,
+          650
+        ],
+        "native": 0.0,
+        "candidate": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          400,
+          450
+        ],
+        "native": 0.0,
+        "candidate": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          2000,
+          650
+        ],
+        "native": 0.007820136852394917,
+        "candidate": [
+          0.008023192985384994,
+          0.008023192985384994,
+          0.008023192985384994
+        ],
+        "error": 0.00020305613299007735
+      },
+      {
+        "pixel": [
+          1800,
+          1000
+        ],
+        "native": 0.0,
+        "candidate": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          400,
+          950
+        ],
+        "native": 0.9960899315738025,
+        "candidate": [
+          0.9911020971138298,
+          0.9911020971138298,
+          0.9911020971138298
+        ],
+        "error": 0.004987834459972751
+      },
+      {
+        "pixel": [
+          2100,
+          950
+        ],
+        "native": 0.9921798631476051,
+        "candidate": [
+          0.9911020971138298,
+          0.9911020971138298,
+          0.9911020971138298
+        ],
+        "error": 0.001077766033775296
+      }
+    ],
+    "roughness": [
+      {
+        "pixel": [
+          1280,
+          1100
+        ],
+        "native": 0.11925708699902249,
+        "candidate": [
+          0.10224173308810132,
+          0.10224173308810132,
+          0.10224173308810132
+        ],
+        "error": 0.01701535391092117
+      },
+      {
+        "pixel": [
+          1280,
+          1250
+        ],
+        "native": 0.12023460410557185,
+        "candidate": [
+          0.11953842798834562,
+          0.11953842798834562,
+          0.11953842798834562
+        ],
+        "error": 0.0006961761172262354
+      },
+      {
+        "pixel": [
+          600,
+          1000
+        ],
+        "native": 0.2101661779081134,
+        "candidate": [
+          0.20155625379439707,
+          0.20155625379439707,
+          0.20155625379439707
+        ],
+        "error": 0.008609924113716333
+      },
+      {
+        "pixel": [
+          2000,
+          1000
+        ],
+        "native": 0.21505376344086022,
+        "candidate": [
+          0.20507873639031693,
+          0.20507873639031693,
+          0.20507873639031693
+        ],
+        "error": 0.00997502705054329
+      },
+      {
+        "pixel": [
+          700,
+          650
+        ],
+        "native": 0.696969696969697,
+        "candidate": [
+          0.7011018919329731,
+          0.7011018919329731,
+          0.7011018919329731
+        ],
+        "error": 0.0041321949632761035
+      },
+      {
+        "pixel": [
+          400,
+          450
+        ],
+        "native": 0.7116324535679375,
+        "candidate": [
+          0.7083757798916868,
+          0.7083757798916868,
+          0.7083757798916868
+        ],
+        "error": 0.00325667367625071
+      },
+      {
+        "pixel": [
+          2000,
+          650
+        ],
+        "native": 0.3460410557184751,
+        "candidate": [
+          0.3662525955988395,
+          0.3662525955988395,
+          0.3662525955988395
+        ],
+        "error": 0.020211539880364393
+      },
+      {
+        "pixel": [
+          1800,
+          1000
+        ],
+        "native": 0.21212121212121213,
+        "candidate": [
+          0.19806931955994886,
+          0.19806931955994886,
+          0.19806931955994886
+        ],
+        "error": 0.014051892561263268
+      },
+      {
+        "pixel": [
+          400,
+          950
+        ],
+        "native": 0.43499511241446726,
+        "candidate": [
+          0.43415363617474895,
+          0.43415363617474895,
+          0.43415363617474895
+        ],
+        "error": 0.0008414762397183084
+      },
+      {
+        "pixel": [
+          2100,
+          950
+        ],
+        "native": 0.43499511241446726,
+        "candidate": [
+          0.43415363617474895,
+          0.43415363617474895,
+          0.43415363617474895
+        ],
+        "error": 0.0008414762397183084
+      }
+    ],
+    "albedo": [
+      {
+        "pixel": [
+          1280,
+          1100
+        ],
+        "native": [
+          0.026241221894849898,
+          0.026241221894849898,
+          0.026241221894849898
+        ],
+        "candidate": [
+          0.028426039504420793,
+          0.028426039504420793,
+          0.028426039504420793
+        ],
+        "error": 0.002184817609570896
+      },
+      {
+        "pixel": [
+          1280,
+          1250
+        ],
+        "native": [
+          0.026241221894849898,
+          0.026241221894849898,
+          0.026241221894849898
+        ],
+        "candidate": [
+          0.02518685962736163,
+          0.02518685962736163,
+          0.02518685962736163
+        ],
+        "error": 0.0010543622674882673
+      },
+      {
+        "pixel": [
+          600,
+          1000
+        ],
+        "native": [
+          0.07036009569659588,
+          0.07036009569659588,
+          0.07036009569659588
+        ],
+        "candidate": [
+          0.07227185068231748,
+          0.07227185068231748,
+          0.07227185068231748
+        ],
+        "error": 0.0019117549857216032
+      },
+      {
+        "pixel": [
+          2000,
+          1000
+        ],
+        "native": [
+          0.07227185068231748,
+          0.07227185068231748,
+          0.07227185068231748
+        ],
+        "candidate": [
+          0.07227185068231748,
+          0.07227185068231748,
+          0.07227185068231748
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          700,
+          650
+        ],
+        "native": [
+          0.25015828472995344,
+          0.26225065752969623,
+          0.26635560480286247
+        ],
+        "candidate": [
+          0.25015828472995344,
+          0.26225065752969623,
+          0.26635560480286247
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          400,
+          450
+        ],
+        "native": [
+          0.24620132670783548,
+          0.2581828529215958,
+          0.26225065752969623
+        ],
+        "candidate": [
+          0.238397573812271,
+          0.25415209433082675,
+          0.25415209433082675
+        ],
+        "error": 0.00809856319886948
+      },
+      {
+        "pixel": [
+          2000,
+          650
+        ],
+        "native": [
+          0.4396571738409188,
+          0.4396571738409188,
+          0.4396571738409188
+        ],
+        "candidate": [
+          0.4396571738409188,
+          0.4396571738409188,
+          0.4396571738409188
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          1800,
+          1000
+        ],
+        "native": [
+          0.07227185068231748,
+          0.07227185068231748,
+          0.07227185068231748
+        ],
+        "candidate": [
+          0.0822827071298148,
+          0.0822827071298148,
+          0.0822827071298148
+        ],
+        "error": 0.010010856447497316
+      },
+      {
+        "pixel": [
+          400,
+          950
+        ],
+        "native": [
+          0.4396571738409188,
+          0.44520119451622786,
+          0.44520119451622786
+        ],
+        "candidate": [
+          0.4396571738409188,
+          0.44520119451622786,
+          0.44520119451622786
+        ],
+        "error": 0.0
+      },
+      {
+        "pixel": [
+          2100,
+          950
+        ],
+        "native": [
+          0.4396571738409188,
+          0.4396571738409188,
+          0.4396571738409188
+        ],
+        "candidate": [
+          0.4396571738409188,
+          0.4396571738409188,
+          0.4396571738409188
+        ],
+        "error": 0.0
+      }
+    ],
+    "shaded-normal": [
+      {
+        "pixel": [
+          1280,
+          1100
+        ],
+        "native": [
+          0.0009794309735298157,
+          0.9999990463256836,
+          -0.0009794309735298157
+        ],
+        "candidate": [
+          0.005771889259134303,
+          0.9998221339109172,
+          -0.017955106131687062
+        ],
+        "error": 1.0106971412517085
+      },
+      {
+        "pixel": [
+          1280,
+          1250
+        ],
+        "native": [
+          0.0009794309735298157,
+          0.9999990463256836,
+          -0.0009794309735298157
+        ],
+        "candidate": [
+          0.005771889259134303,
+          0.9998221339109172,
+          -0.017955106131687062
+        ],
+        "error": 1.0106971412517085
+      },
+      {
+        "pixel": [
+          600,
+          1000
+        ],
+        "native": [
+          0.0009794309735298157,
+          0.9999990463256836,
+          -0.0009794309735298157
+        ],
+        "candidate": [
+          0.017759506212688746,
+          0.9998234779921822,
+          -0.006132927090519499
+        ],
+        "error": 1.0057930369606274
+      },
+      {
+        "pixel": [
+          2000,
+          1000
+        ],
+        "native": [
+          0.0009794309735298157,
+          0.9999990463256836,
+          -0.0009794309735298157
+        ],
+        "candidate": [
+          0.0057727112742259525,
+          0.9999645255692012,
+          -0.0061337922777502385
+        ],
+        "error": 0.4032465007118849
+      },
+      {
+        "pixel": [
+          700,
+          650
+        ],
+        "native": [
+          -0.6642643809318542,
+          0.17948944866657257,
+          -0.7256282567977905
+        ],
+        "candidate": [
+          -0.650590479072062,
+          0.1943693050824721,
+          -0.7341339127043114
+        ],
+        "error": 1.256273356340072
+      },
+      {
+        "pixel": [
+          400,
+          450
+        ],
+        "native": [
+          -0.75766521692276,
+          -0.49691030383110046,
+          -0.4231117367744446
+        ],
+        "candidate": [
+          -0.7447658715736928,
+          -0.5073529452460808,
+          -0.4334936971735639
+        ],
+        "error": 1.1216904496897115
+      },
+      {
+        "pixel": [
+          2000,
+          650
+        ],
+        "native": [
+          0.7328912615776062,
+          -0.0013828137889504433,
+          -0.6803443431854248
+        ],
+        "candidate": [
+          0.7457710340793821,
+          -0.006159089824419373,
+          -0.666173873955369
+        ],
+        "error": 1.1308878094467083
+      },
+      {
+        "pixel": [
+          1800,
+          1000
+        ],
+        "native": [
+          0.0009794309735298157,
+          0.9999990463256836,
+          -0.0009794309735298157
+        ],
+        "candidate": [
+          0.0057727112742259525,
+          0.9999645255692012,
+          -0.0061337922777502385
+        ],
+        "error": 0.4032465007118849
+      },
+      {
+        "pixel": [
+          400,
+          950
+        ],
+        "native": [
+          0.0973002016544342,
+          0.22619137167930603,
+          -0.9692111015319824
+        ],
+        "candidate": [
+          -0.05296280219196776,
+          0.2753278409815006,
+          -0.9598903695550028
+        ],
+        "error": 9.083289123366976
+      },
+      {
+        "pixel": [
+          2100,
+          950
+        ],
+        "native": [
+          -0.2102838158607483,
+          0.22656385600566864,
+          -0.9510255455970764
+        ],
+        "candidate": [
+          -0.06454499143016852,
+          0.2619712202678456,
+          -0.9629148580392014
+        ],
+        "error": 8.628221925454707
+      }
+    ]
+  },
+  "beauty": {
+    "changedPixels": 614665,
+    "maximumDelta": 145,
+    "meanDelta": 0.534736328125,
+    "nativeMeanAbsoluteErrorBefore": 28.802782570167825,
+    "nativeMeanAbsoluteErrorAfter": 28.6567736364294
+  },
+  "candidate": "build/runs/20261027-211548-native-surface-normal-closure-cb9114/camera-candidate/fixed-beauty.azureproject",
+  "visualPromotion": {
+    "diagnosticReference": true,
+    "mainProjectPromoted": false
+  },
+  "architecture": {
+    "gpuLayoutChanged": false,
+    "additionalShaderVariants": 0,
+    "adapterScope": "verified Lit two-map tri-channel branch"
+  },
+  "run": "build/runs/20261027-211548-native-surface-normal-closure-cb9114",
+  "artifacts": {
+    "native-surface-inputs.json": "ecae20590ecfc2df9adf34a1dc316bbdb451267b6edda54073e118e0deaa70bb",
+    "normal-source-proof.json": "f8cbed9ff54e5195b8f26768d256541ea971fb3b7f074eef7d9c14fd8dda1da7",
+    "floor-normal-hex.dxbc.txt": "537667baab52322e49a9ea4adba50e5808f51a5cf3147e3ef4169e076e12ce03",
+    "native-normal-points.json": "1a415a43f954f2808eff4c9e668cd8a287f7b5138b8c8c73ed8fdfa6ff11bc87",
+    "surface-comparison.json": "edb9ea80d658d9e963aa16fff03fef8398fbe642c83b0eaed7c495835540ac88",
+    "normal-correction-comparison.json": "4cd303446769b28d1ee7fbcb1651f79b3ac4be9310977fa16c4da5d83f01d457",
+    "normal-graph-red/summary.json": "6007527ca53c89101f44d253b4d75c7514313131ead68a6fa1ade18de6979230",
+    "normal-graph-final/summary.json": "b1fe9922ecd0592be5289b74253292dbd1448d082d51a26b976fc43f9ee13f17",
+    "surface-regression-final/result.json": "4f2c6f8e100b2d16d829af79ee796617661a7e386d3ffb8862b9e8f86ad3dcf1",
+    "mesh-bake-regression/summary.json": "f4a421cd42bd1449b2ed0ffdf5223c8302246a8d6410580cc7253dc3c1a98b1a",
+    "a3-final-build.json": "20fda0c5ad554012cf8b68d7c3ef52ea26a43b49c8d812084d96532cbd88e474",
+    "a3-final-surface.glb": "422e7f68cc240b9e885cadb54a78f4a51c98dcb6ecb5558a7c7532b708295be0",
+    "fixed-candidate-inputs.json": "b4586e00ea30fc7ab052e05ae4aeb298b1449042a34d80743ec840db9f476feb",
+    "beauty-comparison.json": "b99600e8a70f44ef374f409f475ffc3a94832a4d9dfa211d595c18549c95d16c",
+    "surface-gpu-debug/summary.json": "3521fc4d2599b7ee58177bcd67de8559b658ef4a430cc45e089278e1484699d5",
+    "surface-gpu-release/summary.json": "3521fc4d2599b7ee58177bcd67de8559b658ef4a430cc45e089278e1484699d5",
+    "floor-materials-final.json": "bbfc7d5e768d657afddea82824bed13ac05a4d92a58d99eb10d4f464c864ea97",
+    "floor-materials-final/floor-21-base.png": "9acee6180a0c5ce7c041253dcf0a8d985da33a82cea19e22a52ddddc53560e56",
+    "floor-materials-final/floor-21-base.png.azmeta": "266ad0cbcf360e757de43020bb8ad32027ab5fa2345cb1b23cb03245115fb065",
+    "floor-materials-final/floor-21-emission.png": "1b366ec4054bd44bd8ff6496c8a681bd1c1dfb6a89178c3445be01017423a6e1",
+    "floor-materials-final/floor-21-emission.png.azmeta": "4df5ebbfaecbc571033f35818cabb453edb6f9602241259b39d2f2443696677f",
+    "floor-materials-final/floor-21-normal.png": "de176c85d750e7bb425ac83dcf7a38ddbcec1fc5fbaefb826297fa7f065b85b9",
+    "floor-materials-final/floor-21-normal.png.azmeta": "ebe58aa33f7d6e856dea43832b72fe49d5b4c80c743fa993477e6865053955fd",
+    "floor-materials-final/floor-21-orm.png": "36b0681ae1619388136cd9f8df423179dfa7743d7380efde581972db29d04f94",
+    "floor-materials-final/floor-21-orm.png.azmeta": "aba03b133062c3fb6051553b6403849fc63a57168fd4185139340f295e523ac8",
+    "floor-materials-final/floor-21.azurematerial": "49958ce1fd4335cfca5fc21762059544b4aa92412706cede2339b17465b980c5",
+    "floor-materials-final/floor-21.azurematerial.azmeta": "4381f7ed2496dc719bcf613ac1f22061de7ffb3a2e4024c7fd95073247d05fc9",
+    "floor-materials-final/floor-24-base.png": "b3f55a548d2f4b427ee2ba3d92b54f57b6f644f1aca28c2ed983d6b66c44e52f",
+    "floor-materials-final/floor-24-base.png.azmeta": "49aa04a107053018c634203e2a9ee318366a8c603734672212e110b134a3fbba",
+    "floor-materials-final/floor-24-emission.png": "1b366ec4054bd44bd8ff6496c8a681bd1c1dfb6a89178c3445be01017423a6e1",
+    "floor-materials-final/floor-24-emission.png.azmeta": "3ae52877747fa6aac8501541ce04ba5d9f86508ec0dab0c2b5a583ead16e0f26",
+    "floor-materials-final/floor-24-normal.png": "a1eef4d16da6f564f3a2a86f3da3c7a2d9208a4ce21faf94dd6e7f8043560af6",
+    "floor-materials-final/floor-24-normal.png.azmeta": "0649614cb15247deab998e33881790015d9dedb53ab2b664b39d78c6a01a1898",
+    "floor-materials-final/floor-24-orm.png": "49d0539b4b62fbc2bcbd0bc0193fd808d39b84db223aac87563e5cab48c37e07",
+    "floor-materials-final/floor-24-orm.png.azmeta": "94b8c055ef64633f8729fd4c4be0a397075fdf81de68ad3857222f831a541183",
+    "floor-materials-final/floor-24.azurematerial": "8e6a561a9060a12d5379cf43abddffe38b5ff939336094b6fcfbcbfbabff3d29",
+    "floor-materials-final/floor-24.azurematerial.azmeta": "e7304ba56628081a1ef88b879a97d58a4d84743de898ed970bb74f61bb87d2e9",
+    "shaded-normal-release.log": "9eb85d68ffc572bc25dd29510e757e714f9459685a2fe13b2fbe1207c81daec1",
+    "shaded-normal-release/frames/frame_000000.png": "4b2568b35198d6e03c6e47ca58559acf97a6d14b9a5d345a93afc9e1d5b88748",
+    "shaded-normal-release/frames/capture_manifest.json": "6dca3f05978efcb86f3290cef0a31a5537dce5949bdc844d0378b5b33b2ef2d6",
+    "roughness-release.log": "655a9ea822c362fdb1582829b7072f707de182990b63fda1d7f1ad917238f42d",
+    "roughness-release/frames/frame_000000.png": "cd906fd3fa298a090969f9935d809685441d525ddc39af54a3541451d9df74ea",
+    "roughness-release/frames/capture_manifest.json": "fa432c6ab1382b5cf1754e1614b6b12949546f02d9e3152b4544eba73a414bf7",
+    "metallic-release.log": "8fc1073977dda3f62b7836164c410b4bbefb15cd0180106c3d4fe56ece607021",
+    "metallic-release/frames/frame_000000.png": "22d91bb3bae0efe7779f46ec2843bc19dc80464580b5b0257f3feaef5db03a21",
+    "metallic-release/frames/capture_manifest.json": "20a481fd7cccba442323fde37be9160753dda60371619eb5faef447cfaac36e3",
+    "albedo-release.log": "fc25594e373d9be3a8169f9336b519ee411ece0d000368ae41b5430c1b322926",
+    "albedo-release/frames/frame_000000.png": "cd36e86c4880fe2646a22fcca0a7659cbd67867b9e2636e01c101d2a5027dc59",
+    "albedo-release/frames/capture_manifest.json": "efdb4ad3440e8ef5b4811a738a0a32f7b920ef9264ce0b180992dabc9f377127",
+    "fixed-shaded-normal-release.log": "93ef240e63ffdc7cc66047d59936618112368968238d06f397b9b7144f5c38f6",
+    "fixed-shaded-normal-release/frames/frame_000000.png": "d308257a54b837fe1e7ab814ae9f578b4eebc2e0d3319db7f261824866e08505",
+    "fixed-shaded-normal-release/frames/capture_manifest.json": "12e3628735f6de9e2ea1ef0c51f6b4d633e5749db2de0a22cd7e4777bba15de9",
+    "fixed-beauty-release.log": "8359f3070e3ae0af1ee96cfe7625456c70413c4dd330b031b08863596afa090c",
+    "fixed-beauty-release/frames/frame_000000.png": "a1cf9e6ddc8c5fa9cf0402a0d594290acc9b9fc59bd8c732edbef8194dbf533f",
+    "fixed-beauty-release/frames/capture_manifest.json": "de45db9d6dcb55443af784792eb5955620c8ddf45bec2443d90180f15a444f9f"
+  },
+  "remaining": [
+    "front faceted panel normals and source instances",
+    "texture filtering and roughness differences",
+    "full light and reflection composition",
+    "native GI phase and character environment",
+    "central logistics and formal NR0–NR12 gates"
+  ]
+}

@@ -32,6 +32,20 @@ weight = adjusted * alpha
 颜色目标为遮罩颜色的绝对线性值。
 输出交给公共通道烘焙器及 glTF 管线。
 
+## 法线解码
+
+已核验的 Lit 分支读取 NRO 的红、绿通道。
+两通道映射到有符号 XY，绝对值小于 `0.012` 时归零。
+Z 为 `sqrt(max(0, 1 - dot(XY, XY)))`，下限为 `1/2048`。
+`_NormalScale` 仅缩放 XY，之后进入切线空间转换。
+
+法线强度须为有限非负数，布尔值产生类型错误。
+失败发生在创建 Blender 材质之前。
+输出记录 `NativeLitPackedNormal/1`。
+纹理坐标、烘焙目标及作者切线沿用所属采样域。
+
+阈值、原生输入及实际镜头见[法线验收](../acceptance/nr/lit-normal-decoding.md)。
+
 ## 颜色上传
 
 `color_encoding` 显式声明四组表面颜色的输入域。

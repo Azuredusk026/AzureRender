@@ -1,9 +1,4 @@
-"""Lit record-477 surface-algebra adapter for the pinned extractor.
-
-The source extractor owns texture loading and UV sampling. This adapter owns
-only the verified two-map tri-channel base/metallic/roughness arithmetic.
-Source mesh UV selection and missing vertex-stream binding remain unverified.
-"""
+"""Verified Lit surface arithmetic, packed normals and explicit UV bindings."""
 import bpy
 import json
 import math
@@ -98,6 +93,28 @@ def _scalar_lerp(tree, current, target, weight):
     return _math(tree, 'MULTIPLY_ADD', difference, weight, current)
 
 
+def _configure_normal_decoder(material, texture, strength):
+    tree=material.node_tree
+    normal_nodes=[node for node in tree.nodes if node.type=='NORMAL_MAP']
+    if len(normal_nodes)!=1:
+        raise ValueError('Verified Lit surface requires one tangent normal node')
+    split=tree.nodes.new('ShaderNodeSeparateColor')
+    tree.links.new(texture.outputs['Color'],split.inputs['Color'])
+    signed=[]
+    for channel in ('Red','Green'):
+        value=_math(tree,'MULTIPLY_ADD',split.outputs[channel],2,-1)
+        inside=_math(tree,'LESS_THAN',_math(tree,'ABSOLUTE',value),.012)
+        signed.append(_math(tree,'MULTIPLY',value,_math(tree,'SUBTRACT',1,inside)))
+    squared=_math(tree,'ADD',*[_math(tree,'MULTIPLY',value,value) for value in signed])
+    z=_math(tree,'MAXIMUM',_math(tree,'SQRT',_math(tree,'SUBTRACT',1,squared,clamp=True)),1/2048)
+    encoded=tree.nodes.new('ShaderNodeCombineColor')
+    for socket,value in zip(encoded.inputs,(*[_math(tree,'MULTIPLY',v,strength) for v in signed],z)):
+        tree.links.new(_math(tree,'MULTIPLY_ADD',value,.5,.5),socket)
+    normal=normal_nodes[0];normal.inputs['Strength'].default_value=1
+    tree.links.new(encoded.outputs['Color'],normal.inputs['Color'])
+    material['endfield_lit_normal_contract']='NativeLitPackedNormal/1'
+
+
 def _texture(material, prop):
     matches = [node for node in material.node_tree.nodes
                if node.type == 'TEX_IMAGE' and node.label == prop]
@@ -110,7 +127,11 @@ def create_material(record, texture_files, pack_textures=True, color_encoding='g
     if color_encoding not in ('gpu-linear','authored-srgb'):
         raise ValueError('Unsupported surface color encoding')
     verified=_verified_branch(record)
-    if verified:record=surface_color_record(record,color_encoding)
+    if verified:
+        record=surface_color_record(record,color_encoding)
+        strength=(record.get('Floats') or {}).get('_NormalScale',1)
+        if type(strength) not in (int,float) or not math.isfinite(strength) or strength<0:
+            raise ValueError('Verified Lit normal strength must be finite and nonnegative')
     material = _create_surface(record, texture_files, pack_textures)
     if not verified:
         return material
@@ -121,6 +142,7 @@ def create_material(record, texture_files, pack_textures=True, color_encoding='g
     bsdf = next(node for node in tree.nodes if node.type == 'BSDF_PRINCIPLED')
     base, nro, mask = (_texture(material, prop) for prop in
                        ('_BaseColorMap', '_NormalMap', '_MaskMap'))
+    _configure_normal_decoder(material,nro,strength)
 
     # Record 477, base-source block: tint * brightness, saturate, then cover.
     base_tint = colors.get('_BaseColor', [1, 1, 1, 1])

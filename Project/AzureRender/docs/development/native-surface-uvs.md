@@ -29,6 +29,11 @@
 其他着色分支按所属适配任务扩展。
 颜色上传遵循[原生表面转换](../runtime/native-surface-conversion.md)。
 
+Lit 法线的 XY 阈值及 Z 下限在解码节点中执行。
+颜色、粗糙度和金属度保持各自采样与混合规则。
+`test_native_surface_normals.py` 使用 CPU 烘焙检查六组输入。
+强度的非法值同时检查错误及材质所有权。
+
 ## 网格烘焙
 
 公共入口为 `bake_material(source, resolution, mesh=mesh, uv_layer='UV1')`。

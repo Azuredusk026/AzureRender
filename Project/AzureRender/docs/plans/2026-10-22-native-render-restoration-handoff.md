@@ -10,6 +10,7 @@ C16-R3 的双配置构建、CPU 及 GPU 回归通过。
 GI 的像素原点和场方向见[查询坐标](../acceptance/nr/irradiance-query-frame.md)。
 当前继续核对完整照明组合、连续采样及中央物流。
 独立 UV1、网格烘焙及运行表面见[坐标验收](../acceptance/nr/surface-uv-domain.md)。
+Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-decoding.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。
