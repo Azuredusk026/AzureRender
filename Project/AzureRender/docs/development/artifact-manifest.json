@@ -506,6 +506,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-dependent-vfx-coverage.json",
       "primaryProject": "build/runs/20261028-045834-native-logistics-activation-15ae9a/full-candidate/enclosure-vfx-view-coverage.azureproject"
+    },
+    {
+      "path": "runs/20261028-052815-native-logistics-box-bindings-1ef4fa",
+      "pathBase": "build",
+      "purpose": "真实像素定位、二十二个箱体姿态、共享资源及双配置验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-logistics-boxes.json",
+      "primaryProject": "build/runs/20261028-052815-native-logistics-box-bindings-1ef4fa/full-candidate/enclosure-captured-boxes.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
