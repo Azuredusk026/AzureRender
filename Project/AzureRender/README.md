@@ -37,6 +37,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 三项原生材质组合与隔离绘制见[组合验收](docs/acceptance/nr/remaining-vfx-combinations.md)。
 基础坐标扰动、独立采样及实际墙面见[扰动验收](docs/acceptance/nr/base-uv-distortion.md)。
 中央字形柱与独立覆盖率组合见[字形柱验收](docs/acceptance/nr/central-glyph-composition.md)。
+雾效传输、体积格式及原版载荷见[雾效数据验收](docs/acceptance/nr/fog-transport-data.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

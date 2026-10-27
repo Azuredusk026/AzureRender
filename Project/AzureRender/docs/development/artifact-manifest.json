@@ -551,6 +551,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/central-glyph-composition.json",
       "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-070825-native-view-fog-source-mapping-c98020",
+      "pathBase": "build",
+      "purpose": "雾效传输、版本化体积数据及完整原版载荷验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/fog-transport-data.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

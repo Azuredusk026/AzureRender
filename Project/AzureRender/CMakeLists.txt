@@ -548,6 +548,8 @@ add_library(AzureRenderCore STATIC
     src/render/TransientResourcePool.cpp
     src/render/RenderSettings.cpp
     src/render/EnvironmentAsset.cpp
+    src/render/FogTransport.cpp
+    src/render/FogVolumeData.cpp
     src/render/EnvironmentCubeTexture.cpp
     src/render/ComputePass.cpp
     src/rhi/GpuAllocator.cpp
@@ -1004,6 +1006,12 @@ if(BUILD_TESTING)
     add_executable(AzureCharacterRepairTests tests/CharacterRepairTests.cpp)
     target_link_libraries(AzureCharacterRepairTests PRIVATE AzureRuntime)
     add_executable(AzureUnlitTextureLayersTests tests/UnlitTextureLayersTests.cpp)
+    add_executable(AzureFogTransportTests tests/FogTransportTests.cpp)
+    target_link_libraries(AzureFogTransportTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.FogTransport COMMAND AzureFogTransportTests)
+    add_executable(AzureFogVolumeDataTests tests/FogVolumeDataTests.cpp)
+    target_link_libraries(AzureFogVolumeDataTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.FogVolumeData COMMAND AzureFogVolumeDataTests)
     target_link_libraries(AzureUnlitTextureLayersTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.UnlitTextureLayers COMMAND AzureUnlitTextureLayersTests)
     add_executable(AzureUnlitTextureMaterialTests tests/UnlitTextureMaterialTests.cpp)
