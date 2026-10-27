@@ -6,9 +6,28 @@ import numpy as np
 import tempfile
 import json
 import struct
+import subprocess
+import sys
+import hashlib
 
 
 class NativeColorGradingTests(unittest.TestCase):
+    def test_captured_cli_receipt_is_reopenable_json(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);payload=(np.arange(32,dtype=np.float16)/32).astype('<f2').tobytes()
+            source=root/'strip.bin';source.write_bytes(payload);receipt=root/'capture.json';output=root/'captured.azlut'
+            metadata=dict(complete=True,format='R16G16B16A16_FLOAT',width=4,height=2,depth=1,mip=0,slice=0,sample=0,
+                bytes=len(payload),sha256=hashlib.sha256(payload).hexdigest(),eid=17,rid='fixture-resource')
+            receipt.write_text(json.dumps(dict(ok=True,data=metadata)))
+            command=[sys.executable,str(Path(__file__).parent/'endfield_native/color_grading.py'),'--captured-strip',str(source),'--capture-receipt',str(receipt),'--output',str(output)]
+            subprocess.run(command,check=True,capture_output=True)
+            result=json.loads(output.with_suffix('.receipt.json').read_text(encoding='utf-8'))
+            self.assertEqual(result['evidenceStatus'],'runtime-captured')
+            self.assertEqual(result['outputSha256'],hashlib.sha256(output.read_bytes()).hexdigest())
+            raw=output.read_bytes();length=struct.unpack_from('<I',raw,8)[0]
+            np.testing.assert_array_equal(np.frombuffer(raw[12+length:],dtype='<f4'),np.frombuffer(payload,dtype='<f2').astype('<f4'))
+            self.assertEqual(json.loads(raw[12:12+length])['source']['evidence'],2)
+
     def module(self):
         path = Path(__file__).parent / "endfield_native/color_grading.py"
         self.assertTrue(path.is_file(), "Full native matrix and grading-chain candidate generator is required")

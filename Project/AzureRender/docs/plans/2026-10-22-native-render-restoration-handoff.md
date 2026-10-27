@@ -16,6 +16,7 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 活动主光常量与实际绑定见[主光验收](../acceptance/nr/main-light-runtime-binding.md)。
 实际墙体遮挡及级联深度见[阴影验收](../acceptance/nr/cascade-caster-depth.md)。
 局部灯源颜色与逐位对照见[颜色验收](../acceptance/nr/local-light-color-space.md)。
+活动颜色表及实际消费见[调色验收](../acceptance/nr/captured-color-grading-lut.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

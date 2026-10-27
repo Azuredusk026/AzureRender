@@ -6,7 +6,7 @@
 #include <cstring>
 using namespace azurerender;
 int main(int argc,char** argv) try {
-    if(argc!=2)throw std::invalid_argument("Expected color grading LUT shader");
+    if(argc!=2&&argc!=3)throw std::invalid_argument("Expected color grading LUT shader and optional LUT asset");
     test::VulkanComputeFixture host;auto& backend=*host.backend;
     const std::array<std::array<float,4>,11> probes{{
         {{0,0,0,1}},{{1,1,1,1}},{{.13F,.7F,.55F,1}},{{-1,.5F,2,1}},{{.2F,.3F,.33333334F,1}},
@@ -30,25 +30,26 @@ int main(int argc,char** argv) try {
     const rhi::PushConstantRangeDesc range{VK_SHADER_STAGE_COMPUTE_BIT,16};
     layout=backend.createPipelineLayout(setLayout,&range);shader=backend.createShaderModule(readBinaryFile(argv[1]));pipeline=backend.createComputePipeline({shader,layout});
     unsigned checked=0;float maximumIdealError=0,maximumIdealBound=0,maximumQuantizedReferenceError=0,maximumUnfilteredReferenceError=0;
-    for(unsigned profile=0;profile<2;++profile){
-        auto lut=makeIdentityColorGradingLut(4);
-        if(profile)for(std::size_t i=0;i<lut.image.rgba32.size();i+=4){
+    for(unsigned profile=0;profile<(argc==3?3U:2U);++profile){
+        auto lut=profile==2?loadColorGradingLut(argv[2]):makeIdentityColorGradingLut(4);
+        const auto dimension=lut.dimension;
+        if(profile==1)for(std::size_t i=0;i<lut.image.rgba32.size();i+=4){
             const float r=lut.image.rgba32[i],g=lut.image.rgba32[i+1],b=lut.image.rgba32[i+2];
             lut.image.rgba32[i]=r*.7F+g*.3F;lut.image.rgba32[i+1]=1-b;lut.image.rgba32[i+2]=r*g*b;
         }
         ColorGradingLutGpu resource(backend,lut);
         std::array<float,3> redGradient{},greenGradient{};
-        for(unsigned g=0;g<4;++g)for(unsigned b=0;b<4;++b)for(unsigned r=0;r<4;++r){
-            const auto offset=(std::size_t(g)*16+b*4+r)*4;
+        for(unsigned g=0;g<dimension;++g)for(unsigned b=0;b<dimension;++b)for(unsigned r=0;r<dimension;++r){
+            const auto offset=(std::size_t(g)*dimension*dimension+b*dimension+r)*4;
             for(unsigned channel=0;channel<3;++channel){
-                if(r<3)redGradient[channel]=std::max(redGradient[channel],std::abs(lut.image.rgba32[offset+4+channel]-lut.image.rgba32[offset+channel]));
-                if(g<3)greenGradient[channel]=std::max(greenGradient[channel],std::abs(lut.image.rgba32[offset+64+channel]-lut.image.rgba32[offset+channel]));
+                if(r+1<dimension)redGradient[channel]=std::max(redGradient[channel],std::abs(lut.image.rgba32[offset+4+channel]-lut.image.rgba32[offset+channel]));
+                if(g+1<dimension)greenGradient[channel]=std::max(greenGradient[channel],std::abs(lut.image.rgba32[offset+dimension*dimension*4+channel]-lut.image.rgba32[offset+channel]));
             }
         }
         backend.writeDescriptorImage({set,0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,resource.view(),resource.sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
         for(unsigned domain=0;domain<2;++domain)for(unsigned encode=0;encode<2;++encode){
             lut.inputDomain=static_cast<ColorGradingInputDomain>(domain);
-            const std::array<float,4> parameters{4,1.7F,float(domain),float(encode)};
+            const std::array<float,4> parameters{float(dimension),1.7F,float(domain),float(encode)};
             host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
                 commands.bufferBarrier({input.buffer,0,input.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
                 commands.bindComputePipeline(pipeline);commands.bindComputeDescriptorSet(layout,set);
@@ -63,8 +64,8 @@ int main(int argc,char** argv) try {
                 auto quantized=coordinates;
                 const float filterScale=std::ldexp(1.F,static_cast<int>(host.properties.limits.subTexelPrecisionBits));
                 for(unsigned axis=0;axis<2;++axis){
-                    const float lattice=coordinates[axis]*3,lower=std::floor(lattice);
-                    quantized[axis]=(lower+std::round((lattice-lower)*filterScale)/filterScale)/3;
+                    const float lattice=coordinates[axis]*float(dimension-1),lower=std::floor(lattice);
+                    quantized[axis]=(lower+std::round((lattice-lower)*filterScale)/filterScale)/float(dimension-1);
                 }
                 auto linearReference=lut;linearReference.inputDomain=ColorGradingInputDomain::Linear;
                 const auto filtered=sampleColorGradingLut(linearReference,quantized,1,static_cast<ColorGradingOutputEncoding>(encode));

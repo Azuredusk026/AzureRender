@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "phase": "NR7-P1",
+  "status": "captured-lut-binding-passed",
+  "run": "build/runs/20261027-235607-native-active-light-and-post-binding-12490c",
+  "source": {
+    "tests/ColorGradingLutGpuTests.cpp": "41d0b115e6a2703ed01632eee51988ceb4bc79fb017cb8904148860e946857e2",
+    "tools/test_endfield_native_color_grading.py": "fc6dd76cc2f14e95c66aad7f6caa76746a4e02bc122982a263baf81c8e47c2e9"
+  },
+  "producer": {
+    "path": "tools/endfield_native/color_grading.py",
+    "sha256": "734299d342b5c4e288b5ef92193d3b4a6be605bda12e7657578780678ea2428c"
+  },
+  "capture": {
+    "event": 11393,
+    "resource": "ResourceId::15724",
+    "pixelShaderSha256": "91f1634989e86fc383a6d2474280d2f2465ef503e639c56e45580e0bb7da8077",
+    "rawSha256": "8a88e41a1e22fc656136d6a90e118b452ca638169bce8aed767d7152da8d0809",
+    "dimension": 32,
+    "inputDomain": "logc3-full-log",
+    "outputDomain": "linear",
+    "exposureEv": 0,
+    "exposureMultiplier": 1,
+    "halfFloatExpansionExact": true,
+    "sourceRun": "build/runs/20261027-233926-native-local-light-runtime-audit-1b643d"
+  },
+  "tests": {
+    "python": 5,
+    "numericProbesPerConfiguration": 1188,
+    "ctestPerConfiguration": 4,
+    "actualComponentCaptures": 4,
+    "fullCaptures": 2,
+    "configurationAndDescriptorExact": true
+  },
+  "fullCamera": {
+    "default": {
+      "meanAbsoluteByteError": 18.803403682002315,
+      "panelRgb": [
+        [
+          41,
+          43,
+          40
+        ],
+        [
+          39,
+          40,
+          34
+        ]
+      ],
+      "grade": {
+        "schemaVersion": 2,
+        "exposureEv": 0,
+        "saturation": 1,
+        "contrast": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "toneMappingEnabled": true,
+        "lut": {
+          "schemaVersion": 1,
+          "asset": "gi:/captured-3534.azlut",
+          "exposureMultiplier": 1,
+          "dimension": 32,
+          "inputDomain": "logc3-full-log",
+          "outputDomain": "linear",
+          "fingerprintAlgorithm": "FNV-1a-64",
+          "fingerprint": "b963486c619e8333"
+        }
+      }
+    },
+    "native": {
+      "meanAbsoluteByteError": 19.227090928819443,
+      "panelRgb": [
+        [
+          42,
+          44,
+          41
+        ],
+        [
+          39,
+          40,
+          34
+        ]
+      ],
+      "grade": {
+        "schemaVersion": 2,
+        "exposureEv": 0,
+        "saturation": 1,
+        "contrast": 1,
+        "tint": [
+          1,
+          1,
+          1
+        ],
+        "toneMappingEnabled": true,
+        "lut": {
+          "schemaVersion": 1,
+          "asset": "gi:/captured-3534.azlut",
+          "exposureMultiplier": 1,
+          "dimension": 32,
+          "inputDomain": "logc3-full-log",
+          "outputDomain": "linear",
+          "fingerprintAlgorithm": "FNV-1a-64",
+          "fingerprint": "b963486c619e8333"
+        }
+      }
+    }
+  },
+  "boundaries": [
+    "Bloom, vignette, sharpening and output dither remain separate native consumers.",
+    "Captured cluster masks select source light indices 0..4; actual light snapshot binding follows separately.",
+    "Remaining normals, logistics, character and NR0-NR12 visual/performance gates remain open."
+  ],
+  "artifacts": [
+    {
+      "path": "captured-strip-export.json",
+      "sha256": "7baed58b5ad0b04929904dae57270fd7afafa03e40d78368efbdd01ec9451b35"
+    },
+    {
+      "path": "full-candidate/native-gi/captured-3534.azlut",
+      "sha256": "266d3041215d9b50e570a42a8d36241d217c3ffc6bc3b68b8a1a8f9009b00a11"
+    },
+    {
+      "path": "full-candidate/native-gi/captured-3534.receipt.json",
+      "sha256": "9ec5b7971f80b98502c68a74cd2f164369ff8ab4713ca71e4cdf4bda5e16a562"
+    },
+    {
+      "path": "captured-lut-components.json",
+      "sha256": "e05346b9fb743ea699e33dd8542d41fbbefdb3fa0f6582325437019b0eda7a1e"
+    },
+    {
+      "path": "full-lut-comparison.json",
+      "sha256": "972f1bde34af8ff1ab45f8ffc79ed43a8c281f6cadf291a2187c4a2ec27630e1"
+    },
+    {
+      "path": "captured-lut-gpu-red.log",
+      "sha256": "d75d78201ca1532ba23b2b0b2a60638c5a9e1ed9bc5b71e42be2a68d8f953c48"
+    },
+    {
+      "path": "lut-python-final.log",
+      "sha256": "5d2de6b3f321a7dac0b0f1f8cf8357958445f5295e5ae4fcf24fe69752826567"
+    },
+    {
+      "path": "lut-debug-build.log",
+      "sha256": "52443dfc1217917b6a9965f0836b4a2d5b27834ffc756add183d3de5a50579f7"
+    },
+    {
+      "path": "lut-release-build.log",
+      "sha256": "52443dfc1217917b6a9965f0836b4a2d5b27834ffc756add183d3de5a50579f7"
+    },
+    {
+      "path": "hosts-debug-build.log",
+      "sha256": "c24a6ed221b6f6a2c89dd52dd77cc604518077ab0b8065b1f3ff1ccde700d35c"
+    },
+    {
+      "path": "hosts-release-build.log",
+      "sha256": "4bb0cab88b27d9ad996f4ce3416e7cb125a2accf830bcef705e7661d34015d71"
+    },
+    {
+      "path": "lut-debug-gpu.log",
+      "sha256": "b31d89c0d3b5bdc111550e0d3b1a98e7db8ce4f7ae35c452e5403448c2daa5e2"
+    },
+    {
+      "path": "ctest-debug.log",
+      "sha256": "107a5f1ddceb53015acf83d168cac0caf5c31ed9c6cc917e4895cc2e757f56b2"
+    },
+    {
+      "path": "ctest-debug-detail.log",
+      "sha256": "52bbf822a0af3a66f1a1be64158de1056261b4cbf2e018f06960ee6069ccfcdc"
+    },
+    {
+      "path": "lut-release-gpu.log",
+      "sha256": "b31d89c0d3b5bdc111550e0d3b1a98e7db8ce4f7ae35c452e5403448c2daa5e2"
+    },
+    {
+      "path": "ctest-release.log",
+      "sha256": "677a6c41852bdbd9fc5b75048809c5b2e6bfe9fe2af93333e9fa362d90aaeeb6"
+    },
+    {
+      "path": "ctest-release-detail.log",
+      "sha256": "aa3e4c9f8a2f7d037962138cf786c6d6945006ba765c6d45f9fff01d165bbbce"
+    },
+    {
+      "path": "lut-release-indexed/frames/frame_000000.png",
+      "sha256": "426e1e1e89c28b9ea1e5aa9361ebbfac9270a450f2f1ef17de50cdcaeac96f52"
+    },
+    {
+      "path": "lut-release-indexed/frames/capture_manifest.json",
+      "sha256": "03442d1fde5fe3f321d6f8c2ad46d37558cf86a231897a26810e15438a21c782"
+    },
+    {
+      "path": "lut-release-indexed.log",
+      "sha256": "aa70ca305ad66845bc958ee9ba508c35a9b95db8ca81224a2fbfc51b4185bbfe"
+    },
+    {
+      "path": "lut-release-fixed/frames/frame_000000.png",
+      "sha256": "426e1e1e89c28b9ea1e5aa9361ebbfac9270a450f2f1ef17de50cdcaeac96f52"
+    },
+    {
+      "path": "lut-release-fixed/frames/capture_manifest.json",
+      "sha256": "7703b72a8c1df391ace5dff0d36531c7a331f64ea54e6aa4e6a3b50fda23a23d"
+    },
+    {
+      "path": "lut-release-fixed.log",
+      "sha256": "3a62fc3ae4fd27d5092526feada22bbf62e0828e502f3619a6462dea4392923d"
+    },
+    {
+      "path": "lut-debug-indexed/frames/frame_000000.png",
+      "sha256": "426e1e1e89c28b9ea1e5aa9361ebbfac9270a450f2f1ef17de50cdcaeac96f52"
+    },
+    {
+      "path": "lut-debug-indexed/frames/capture_manifest.json",
+      "sha256": "c19e2942dbf46d50ed33eb6ca864ab35bb825a4b76d432bc156b6115d0adc04c"
+    },
+    {
+      "path": "lut-debug-indexed.log",
+      "sha256": "79ee014b7f1e718a848f7f55da811027b68f942c6bf713f480fac6eff956d0a3"
+    },
+    {
+      "path": "lut-debug-fixed/frames/frame_000000.png",
+      "sha256": "426e1e1e89c28b9ea1e5aa9361ebbfac9270a450f2f1ef17de50cdcaeac96f52"
+    },
+    {
+      "path": "lut-debug-fixed/frames/capture_manifest.json",
+      "sha256": "ba4c8e7c4bacde12d31a86a7c43bb59e5a8927d20a7dd1c6c66e7f86fa619731"
+    },
+    {
+      "path": "lut-debug-fixed.log",
+      "sha256": "94c1f47aa189912b4cffdc99ece35b40874088e07813c37be9d7c9aef91014b4"
+    },
+    {
+      "path": "full-default/frames/frame_000000.png",
+      "sha256": "2a7e3fdc2946a516286e6b7a5bc00e6a87895bde1210020dc6316acdae82b0ad"
+    },
+    {
+      "path": "full-default/frames/capture_manifest.json",
+      "sha256": "bbad764361d57741a6aa32f9e47a359ca7adf6a314cbf595a56284d0077f5301"
+    },
+    {
+      "path": "full-default.log",
+      "sha256": "6955d6c1b5b790079676a201e7de61ad1aa8900213ef77201a8d2aea44241756"
+    },
+    {
+      "path": "full-native/frames/frame_000000.png",
+      "sha256": "f9544b7aa9dac66c16b5ff2641c5e65cca0206fb1eda86f1ed96f4d00f08a5b0"
+    },
+    {
+      "path": "full-native/frames/capture_manifest.json",
+      "sha256": "369807b3d6446540a40155942fa889e34d093d0ef32239fa2b2d127736f30fd6"
+    },
+    {
+      "path": "full-native.log",
+      "sha256": "a0334ae989fe3e201fa0393ffa9630794d33f66b8bb107caf897cebf29714994"
+    }
+  ]
+}

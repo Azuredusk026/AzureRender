@@ -408,6 +408,15 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-27/local-light-color-space.json"
+    },
+    {
+      "path": "runs/20261027-235607-native-active-light-and-post-binding-12490c",
+      "pathBase": "build",
+      "purpose": "活动颜色表、实际资源数值、双配置及编辑恢复验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-color-grading-lut.json",
+      "primaryProject": "full-candidate/lut-default.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
