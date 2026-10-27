@@ -85,6 +85,8 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 中央地面的索引、UV 别名流及完整材质参数已核对。
 颜色上传、公共转换与主场景见[绑定验收](../acceptance/nr/floor-runtime-binding.md)。
 继续核对独立纹理采样、反射生产通道及移动响应。
+十二探针身份、反射生产链与对照镜头见[运行核验](../acceptance/nr/native-reflection-bindings.md)。
+继续接入对数层级、有序探针及真实时序比较。
 
 反射射线预计算通过双配置与动态遮挡回归。
 短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。

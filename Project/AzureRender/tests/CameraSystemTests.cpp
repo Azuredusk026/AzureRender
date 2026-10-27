@@ -27,6 +27,19 @@ int main(){try{
     game::GameCamera offsetCamera;offsetCamera.projectionOffsetX=.25F;offsetCamera.projectionOffsetY=-.5F;
     const auto offsetView=gameCameraView(offsetCamera,scene::identityMatrix());
     check(offsetView.projectionOffsetX==.25F&&offsetView.projectionOffsetY==-.5F,"Game camera projection offsets reach the shared render view");
+    game::GameCamera capturedCamera;capturedCamera.fieldOfView=57.22092455245762F;capturedCamera.farPlane=10000;
+    capturedCamera.projectionOffsetX=-.0002929684706032276F;capturedCamera.projectionOffsetY=.00007717559492448345F;
+    const auto capturedView=gameCameraView(capturedCamera,scene::composeTrs(
+        {-.26604312658309937F,2.262058973312378F,-24.905324935913086F},
+        {-176.57766118423316F,-.2822828552113573F,-179.98311892665737F},{1,1,1}));
+    const std::array<float,3> capturedForward{.004926745314151049F,.059694841504096985F,.9982044696807861F};
+    const std::array<float,3> capturedUp{-.00029462671955116093F,.9982166290283203F,-.05969411879777908F};
+    for(unsigned axis=0;axis<3;++axis){
+        check(std::abs(capturedView.target[axis]-capturedView.position[axis]-capturedForward[axis])<2e-6F,
+            "Captured camera forward must follow the production X/Z angle convention");
+        check(std::abs(capturedView.up[axis]-capturedUp[axis])<1e-6F,"Captured camera up reaches the shared render view");
+    }
+    check(capturedView.farPlane==10000,"Source camera clipping remains owned by the camera component");
     auto invalid=camera;invalid["data"]["nearPlane"]=100;invalid["data"]["farPlane"]=1;
     bool rejected=false;try{registry.validate("azure.camera",invalid);}catch(const std::exception&){rejected=true;}
     check(rejected,"Invalid clipping planes rejected");
