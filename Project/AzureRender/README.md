@@ -18,6 +18,7 @@
 原生 UV1、网格烘焙和统一运行表面见[坐标验收](docs/acceptance/nr/surface-uv-domain.md)。
 Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/nr/lit-normal-decoding.md)。
 网格作者法线、角点及生产入口见[来源验收](docs/acceptance/nr/mesh-corner-normals.md)。
+局部灯档案、实体身份及实际镜头见[倍率绑定](docs/acceptance/nr/local-light-profile-binding.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

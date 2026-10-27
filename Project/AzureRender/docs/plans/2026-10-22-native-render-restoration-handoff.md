@@ -12,6 +12,7 @@ GI 的像素原点和场方向见[查询坐标](../acceptance/nr/irradiance-quer
 独立 UV1、网格烘焙及运行表面见[坐标验收](../acceptance/nr/surface-uv-domain.md)。
 Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-decoding.md)。
 作者法线、坐标及生产入口见[角点验收](../acceptance/nr/mesh-corner-normals.md)。
+局部灯来源倍率及主光读取边界见[绑定验收](../acceptance/nr/local-light-profile-binding.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

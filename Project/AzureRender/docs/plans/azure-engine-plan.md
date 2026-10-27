@@ -15,6 +15,7 @@
 独立 UV1 与统一表面输入见[坐标验收](../acceptance/nr/surface-uv-domain.md)。
 来源法线解码及分项镜头见[法线验收](../acceptance/nr/lit-normal-decoding.md)。
 作者法线和两个生产入口见[角点验收](../acceptance/nr/mesh-corner-normals.md)。
+局部灯来源倍率与完整镜头见[绑定验收](../acceptance/nr/local-light-profile-binding.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。
