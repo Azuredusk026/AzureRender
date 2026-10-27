@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-27",
+  "phase": "NR4-G6",
+  "status": "scene-integration-accepted-formal-stage-pending",
+  "run": "build/runs/20261027-084907-irradiance-clipmap-scene-integration-af425d",
+  "source": {
+    "CMakeLists.txt": "e35a70497ee88be898b13393720da57592da97dc4ea60f467bb23209049eb0e6",
+    "src/render/IrradianceResource.hpp": "cf724be45f1ae8709f566107c2badc9dbb62c514626a332c160ad396c0988b21",
+    "src/render/MaterialPipelinePolicy.hpp": "ad0b15db8cf67f2a6d8aa6f7046bfa1dcc5b31500cc829bc70009a3fa7e78d6b",
+    "src/scenes/CharacterSceneRenderer.cpp": "424ac36ac19aacf8fc8af32a9f03ee12b387c9b4779b5e14afb84b34b73d3e9e",
+    "src/scenes/CharacterSceneRenderer.hpp": "51df69ec71bd50ff60e39367a9c88612fe7e4cc75a80ce6f9c8a3a7a17460286",
+    "src/scenes/CharacterMaterialSampling.inc": "aef8f0ff08a281d46e56dce1716e6f10ae617b3cd6c2692a8c32f6a61544cdf4",
+    "shaders/mesh.frag": "66d2b34c3db8a3f0e0de0db0472190b226b82147df26aae66319905d4f487aae",
+    "tests/IrradianceClipmapTests.cpp": "eae401cb580e3c84187d313c8499dc570d83103ebc78eaf47f838e73aada2962",
+    "tests/MaterialPipelinePolicyTests.cpp": "63310b89123f3f3c8e8d8989552d1d0d750ac452896a95b2c70ef5a1b31b4430",
+    "tests/MaterialTextureSharingTests.cpp": "35f9751933bbbe015fb913b8888eff135edbb59336c20774bfbda4f4897c66c5",
+    "tools/native_render/irradiance_clipmap_lab.py": "5c6f374631ed73e72272d6b5609ed9867b1e22f3d4d83c01cb0634b0b881ae0d"
+  },
+  "contract": {
+    "bindingVersion": 1,
+    "resourceHeaders": [
+      "AZIV0001",
+      "AZIC0001"
+    ],
+    "extensionIndependent": true,
+    "textureBinding": 32,
+    "textureCount": 6,
+    "parameterBinding": 24,
+    "parameterBytes": 208,
+    "optionalResourceLayout": true
+  },
+  "tests": {
+    "debug": {
+      "cpuCtestsPassed": 5,
+      "clipmapSceneCaptures": 13,
+      "gridSceneCaptures": 6
+    },
+    "release": {
+      "cpuCtestsPassed": 5,
+      "clipmapSceneCaptures": 13,
+      "gridSceneCaptures": 6
+    }
+  },
+  "publicScene": {
+    "maximumError": 0.003762319525850877,
+    "budget": 0.012,
+    "errors": {
+      "public-release-final": {
+        "baseline": 0.0021576922592086156,
+        "half-intensity": 0.0013722208690352955,
+        "disabled-stack": 8.973016451162535e-05,
+        "disabled-binding": 0.0004615720116543792,
+        "outside": 8.973016451162535e-05,
+        "translated": 0.001836801187728998,
+        "fine-transition": 0.003762319525850877,
+        "medium-transition": 0.0035202074038531705,
+        "outer-transition": 0.0034560443754977355,
+        "mirrored": 0.0009375926409499746,
+        "legacy": 0.0021576922592086156,
+        "msaa4": 0.0021576922592086156,
+        "snapshot": 0.0021576922592086156
+      },
+      "public-debug": {
+        "baseline": 0.0021576922592086156,
+        "half-intensity": 0.0013722208690352955,
+        "disabled-stack": 8.973016451162535e-05,
+        "disabled-binding": 0.0004615720116543792,
+        "outside": 8.973016451162535e-05,
+        "translated": 0.001836801187728998,
+        "fine-transition": 0.003762319525850877,
+        "medium-transition": 0.0035202074038531705,
+        "outer-transition": 0.0034560443754977355,
+        "mirrored": 0.0009375926409499746,
+        "legacy": 0.0021576922592086156,
+        "msaa4": 0.0021576922592086156,
+        "snapshot": 0.0021576922592086156
+      }
+    }
+  },
+  "shaderPrograms": {
+    "total": 142,
+    "baselineExact": 117,
+    "addedClipmap": 24,
+    "crossConfigurationExact": true,
+    "sourceComputeProgramCrossConfigurationExact": true
+  },
+  "main": {
+    "accepted-grid-release": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "resourceKind": "grid",
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "meanByteError": 0.0,
+      "imageExact": true
+    },
+    "accepted-grid-debug": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "resourceKind": "grid",
+      "changedPixels": 0,
+      "maximumByteError": 0,
+      "meanByteError": 0.0,
+      "imageExact": true
+    },
+    "accepted-clipmap-release": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "resourceKind": "clipmap",
+      "changedPixels": 1993159,
+      "maximumByteError": 223,
+      "meanByteError": 4.38396930459105,
+      "imageExact": false
+    },
+    "accepted-clipmap-debug": {
+      "exitCode": 0,
+      "validationErrors": 0,
+      "resourcesReleased": true,
+      "resourceKind": "clipmap",
+      "changedPixels": 1993159,
+      "maximumByteError": 223,
+      "meanByteError": 4.38396930459105,
+      "imageExact": false
+    }
+  },
+  "crossConfigurationMain": {
+    "imageExact": true,
+    "maximumByteError": 0,
+    "changedPixels": 0
+  },
+  "candidate": {
+    "sourceProject": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7",
+    "candidate": "build/runs/20261027-084907-irradiance-clipmap-scene-integration-af425d/main-candidate",
+    "geometryAndMaterialsUnchanged": true,
+    "worldToField": [
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ]
+    ],
+    "sourceSpace": "Static scene import preserves source instance matrices through the Y-up basis conversion; authored actor spawn remains in scene coordinates",
+    "formalFrameRegistration": "NR0/NR2 remain pending; the candidate does not claim the source actor pose/camera",
+    "assetBytes": 50331872,
+    "assetSha256": "185530fcd40e8888d00ad404f5327048a4c5225ebbbc4fd825f17f4799cf7b75"
+  },
+  "playable": {
+    "status": "passed",
+    "frames": 16,
+    "stateAndPositionsExact": true,
+    "animationFrames": 176,
+    "fixedSteps": 112,
+    "actions": 4,
+    "horizontalDisplacement": 1.1557965296672654,
+    "resourcesReleased": true,
+    "validationErrors": 0
+  },
+  "performance": {
+    "grid": {
+      "kind": "grid",
+      "samples": 96,
+      "warmup": 16,
+      "steady": 80,
+      "metrics": {
+        "shadowMs": {
+          "mean": 4.407822400000001,
+          "p95": 7.7411744
+        },
+        "sceneMs": {
+          "mean": 58.302835200000004,
+          "p95": 70.4646656
+        },
+        "postProcessMs": {
+          "mean": 0.24669439999999998,
+          "p95": 0.24970239999999994
+        },
+        "frameMs": {
+          "mean": 62.95735199999999,
+          "p95": 74.7624304
+        },
+        "workSamplesMs": {
+          "mean": 84.94110125,
+          "p95": 81.774055
+        },
+        "totalSamplesMs": {
+          "mean": 86.4086325,
+          "p95": 81.950955
+        },
+        "physicsSamplesMs": {
+          "mean": 11.935558227848102,
+          "p95": 14.128929999999993
+        }
+      },
+      "resourcesReleased": true,
+      "validationErrors": 0
+    },
+    "clipmap": {
+      "kind": "clipmap",
+      "samples": 96,
+      "warmup": 16,
+      "steady": 80,
+      "metrics": {
+        "shadowMs": {
+          "mean": 4.1122388,
+          "p95": 5.315395199999999
+        },
+        "sceneMs": {
+          "mean": 56.618956800000014,
+          "p95": 61.171712
+        },
+        "postProcessMs": {
+          "mean": 0.2258816,
+          "p95": 0.2489344
+        },
+        "frameMs": {
+          "mean": 60.9570772,
+          "p95": 65.622536
+        },
+        "workSamplesMs": {
+          "mean": 86.87624,
+          "p95": 78.73929
+        },
+        "totalSamplesMs": {
+          "mean": 87.20929125,
+          "p95": 78.99342999999999
+        },
+        "physicsSamplesMs": {
+          "mean": 12.409055696202529,
+          "p95": 14.000539999999999
+        }
+      },
+      "resourcesReleased": true,
+      "validationErrors": 0
+    }
+  },
+  "lifecycle": {
+    "enableAndIntensityReuse": true,
+    "changedAssetPathRejectsReuse": true,
+    "twoLoadUnloadCycles": true,
+    "fixedAndIndexed": true,
+    "validationErrors": 0
+  },
+  "failures": [
+    {
+      "path": "public-release",
+      "reason": "AA4 fixture omitted render settings version 19; corrected fixture retains engine rejection"
+    },
+    {
+      "path": "mount-repair-receipt.json",
+      "reason": "Initial junction mounts rejected by project containment; candidate uses physical mount directories"
+    },
+    {
+      "path": "snapshot-replay-inprocess-negative.json",
+      "reason": "Capture and replay in one process crashed the capture tool; independent retained-capture replay passed"
+    },
+    {
+      "path": "grid-cli-failure.json",
+      "reason": "Existing grid tool requires tools on PYTHONPATH and module execution"
+    }
+  ],
+  "limitations": [
+    "Native receiver normal offset, query jitter and final consumer gain remain pending",
+    "Native actor pose and camera registration remain pending under NR0/NR2",
+    "The integration does not establish full native static/character lighting equivalence",
+    "Formal AA5/AA6 and 60 FPS gates remain pending"
+  ],
+  "snapshotCapture": {
+    "capture": "build/runs/20261027-084907-irradiance-clipmap-scene-integration-af425d/snapshot-gpu_frame2.rdc",
+    "mainAndSnapshotSubmitted": true,
+    "draws": [
+      {
+        "event": 109,
+        "outputs": 2,
+        "parameterBytes": 208,
+        "textures": [
+          {
+            "element": 0,
+            "dimensions": [
+              2,
+              2,
+              2
+            ],
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "element": 1,
+            "dimensions": [
+              2,
+              6,
+              2
+            ],
+            "format": "R8G8B8A8_UNORM"
+          }
+        ],
+        "shaderSha256": "8e149fc5a8c489aee97f791613f782271e6db8ab2ec9bd99f9e5e0bbfd8c7f74",
+        "program": "character_snapshot_object_bindless_clipmap.frag.spv"
+      },
+      {
+        "event": 149,
+        "outputs": 2,
+        "parameterBytes": 208,
+        "textures": [
+          {
+            "element": 0,
+            "dimensions": [
+              2,
+              2,
+              2
+            ],
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "element": 1,
+            "dimensions": [
+              2,
+              6,
+              2
+            ],
+            "format": "R8G8B8A8_UNORM"
+          }
+        ],
+        "shaderSha256": "a6478f2ed1f0a0854e4f5a100f118a1065a86c76d139e10912c28c26cc4d420c",
+        "program": "mesh_object_bindless_clipmap.frag.spv"
+      }
+    ],
+    "accessedTextureElements": [
+      0,
+      1
+    ],
+    "scope": "Fine-layer fixture; medium and outer layers use separate scene cases"
+  }
+}

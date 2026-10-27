@@ -53,6 +53,10 @@ layout(binding = 0) uniform CameraData {
 } camera;
 layout(binding=23) uniform samplerCube reflectionProbeTexture;
 layout(std430,binding=24) readonly buffer IrradianceCells { vec4 irradianceCells[]; };
+#if defined(AZURE_IRRADIANCE_CLIPMAP)
+#include "irradiance_clipmap.glsl"
+layout(binding=32) uniform sampler3D irradianceClipmapTextures[6];
+#endif
 
 #if defined(AZURE_BINDLESS)
 // Indexed slots 0..1 are environment and toon ramp; material blocks follow.
@@ -548,6 +552,13 @@ vec3 hsvToRgb(vec3 hsv){
 }
 vec4 evaluateIrradianceVolume(vec3 position,vec3 normal) {
     if(camera.irradianceDimensionsEnabled.w<.5)return vec4(0);
+#if defined(AZURE_IRRADIANCE_CLIPMAP)
+    vec4 parameters[13];for(int i=0;i<13;++i)parameters[i]=irradianceCells[i];
+    IrradianceClipmapResult result=evaluateIrradianceClipmap(irradianceClipmapTextures,parameters,position);
+    vec4 basis=vec4(normal,1);
+    return vec4(max(vec3(dot(result.coefficients[0],basis),dot(result.coefficients[1],basis),
+        dot(result.coefficients[2],basis)),vec3(0))*camera.irradianceParameters.x,1);
+#else
     vec3 q=(position-camera.irradianceOriginSpacing.xyz)/camera.irradianceOriginSpacing.w;
     ivec3 dims=ivec3(camera.irradianceDimensionsEnabled.xyz);
     if(any(lessThan(q,vec3(0)))||any(greaterThan(q,vec3(dims-ivec3(1)))))return vec4(0);
@@ -565,6 +576,7 @@ vec4 evaluateIrradianceVolume(vec3 position,vec3 normal) {
     vec4 basis=vec4(normal,1);
     return vec4(max(vec3(dot(red,basis),dot(green,basis),dot(blue,basis)),vec3(0))*camera.irradianceParameters.x,
         clamp(weight,0,1));
+#endif
 }
 
 float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSample) {

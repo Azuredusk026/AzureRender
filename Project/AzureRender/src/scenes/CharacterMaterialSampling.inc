@@ -35,8 +35,8 @@ void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext
     if(bindlessTextures_)suffix+="_bindless";
     VkShaderModule color=VK_NULL_HANDLE,snapshot=VK_NULL_HANDLE;
     try {
-        color=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/mesh_integral"+suffix+".frag.spv"));
-        if(opaque)snapshot=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/character_snapshot_integral"+suffix+".frag.spv"));
+        color=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+sceneFragmentVariant("/mesh_integral"+suffix+".frag.spv",false,irradianceClipmapActive_)));
+        if(opaque)snapshot=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+sceneFragmentVariant("/character_snapshot_integral"+suffix+".frag.spv",false,irradianceClipmapActive_)));
         for(unsigned kind=0;kind<2;++kind){
             if(kind==0?!opaque:!blend)continue;
             for(unsigned facing=0;facing<3;++facing){

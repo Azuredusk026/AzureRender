@@ -4,6 +4,8 @@
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "render/MaterialSampling.hpp"
 #include "render/MaterialPipelinePolicy.hpp"
+#include "render/IrradianceClipmapGpu.hpp"
+#include "render/IrradianceResource.hpp"
 #include "scene/DirectionalLightSelection.hpp"
 #include "assets/MaterialData.hpp"
 #include "assets/MaterialSurfaceProfile.hpp"
@@ -43,6 +45,8 @@
 using namespace azurerender::internal;
 
 namespace azurerender {
+CharacterSceneRenderer::CharacterSceneRenderer() = default;
+CharacterSceneRenderer::~CharacterSceneRenderer() = default;
 
 namespace {
 
@@ -483,7 +487,10 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     capabilities.descriptorIndexingSupported=context.bindlessTextures;
     capabilities.descriptorIndexingEnabled=context.bindlessTextures;
     capabilities.limits=limits;
-    ResourceAccessRequirements requirements{indexedSlots+5,16,7};
+    irradianceClipmapActive_=!scene_.irradianceVolume.asset.empty()
+        &&readIrradianceResourceKind(std::filesystem::u8path(scene_.irradianceVolume.asset))==IrradianceResourceKind::Clipmap;
+    const std::uint32_t irradianceSlots=irradianceClipmapActive_?6U:0U;
+    ResourceAccessRequirements requirements{indexedSlots+5+irradianceSlots,16+irradianceSlots,7};
     requirements.separateImageSlots=requirements.fixedSeparateImageSlots=1;
     requirements.separateSamplerSlots=requirements.fixedSeparateSamplerSlots=1;
     requirements.fragmentColorAttachments=kMaterialColorAttachmentCount;
@@ -1534,6 +1541,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
+         << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
          << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
          << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
          << "  \"motionResponseEncoding\": \"coverage-reactivity-v3\",\n"
@@ -1937,8 +1945,17 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
     reflectionProbeTexture_=std::make_unique<EnvironmentCubeTexture>(*rhi_,std::move(probeImage));
     scene_.irradianceVolume.validate();
     irradianceVolume_={};
+    irradianceClipmap_.reset();irradianceClipmapDimensions_={1,1,1};
     std::vector<std::array<float,4>> irradianceWords(4);
-    if(!scene_.irradianceVolume.asset.empty()){
+    if(irradianceClipmapActive_){
+        auto field=IrradianceClipmap::load(std::filesystem::u8path(scene_.irradianceVolume.asset));
+        const auto bytes=sizeof(field.shaderParameters());
+        if(irradianceBufferBudget_&&bytes>irradianceBufferBudget_)
+            throw std::runtime_error("Irradiance clipmap parameters exceed device storage buffer range");
+        irradianceClipmapDimensions_=field.dimensions;
+        irradianceClipmap_=std::make_unique<IrradianceClipmapGpu>(*rhi_,field);
+        RuntimeDiagnostics::instance().info("render","Irradiance clipmap: 3 layers, 6 volume textures");
+    }else if(!scene_.irradianceVolume.asset.empty()){
         irradianceVolume_=IrradianceVolume::load(std::filesystem::u8path(scene_.irradianceVolume.asset));
         irradianceWords.resize(irradianceVolume_.cells.size()*4);
         for(std::size_t i=0;i<irradianceVolume_.cells.size();++i){
@@ -1948,12 +1965,14 @@ void CharacterSceneRenderer::createTexture(bool uploadMaterials) {
         }
         RuntimeDiagnostics::instance().info("render","Irradiance volume: "+std::to_string(irradianceVolume_.cells.size())+" samples");
     }
+    if(!irradianceClipmapActive_){
     const auto irradianceBytes=irradianceWords.size()*sizeof(irradianceWords[0]);
     if(irradianceBufferBudget_&&irradianceBytes>irradianceBufferBudget_)
         throw std::runtime_error("Irradiance volume exceeds device storage buffer range");
     irradianceBuffer_=allocator_->createBuffer(irradianceBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memcpy(irradianceBuffer_.mapped,irradianceWords.data(),irradianceBytes);
     allocator_->flush(irradianceBuffer_,0,irradianceBytes);
+    }
     const auto toonRamp = loadPpmTexture(rampAtlasPath_);
     uploadTextureData(
         toonRamp.pixels,
@@ -2622,7 +2641,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * (textureSlots + 4 + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
+             frameCount * (textureSlots + 4 + (irradianceClipmapActive_?6U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
             {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * (outlineProjectionEnabled_?12U:11U)},
@@ -2635,7 +2654,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * (outlineProjectionEnabled_?16U:15U)},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(irradianceClipmapActive_?6U:0U))},
         {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * (outlineProjectionEnabled_?12U:11U)},
@@ -2692,6 +2711,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
         };
+        if(irradianceClipmapActive_)bindings.push_back({32,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(outlineProjectionEnabled_) {
             bindings.push_back({30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
@@ -2735,6 +2755,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment},
         {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
     };
+    if(irradianceClipmapActive_)bindings.push_back({32,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6,kFragment});
     if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,kFragment});
     if(outlineProjectionEnabled_) {
         bindings.push_back({30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
@@ -2759,7 +2780,9 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi_->writeDescriptorImage({set,31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,mask.view,mask.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
         }
     };
-    const auto writeDepthBindings=[this](VkDescriptorSet set){
+    const auto& irradianceData=irradianceClipmap_?irradianceClipmap_->parameters():irradianceBuffer_;
+    const auto writeSceneImages=[this](VkDescriptorSet set){
+        if(irradianceClipmap_)irradianceClipmap_->writeTextures(set,32);
         rhi_->writeDescriptorImage({set,9,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,shadowImageView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
         rhi_->writeDescriptorImage({set,28,VK_DESCRIPTOR_TYPE_SAMPLER,VK_NULL_HANDLE,shadowSampler_,VK_IMAGE_LAYOUT_UNDEFINED});
         if(objectShadowPrepared_)rhi_->writeDescriptorImage({set,29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
@@ -2821,11 +2844,11 @@ void CharacterSceneRenderer::createDescriptorSets() {
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
-            writeDepthBindings(uniformWrite.set);
+            writeSceneImages(uniformWrite.set);
             writeProjection(uniformWrite.set,0);
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
-            rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
+            rhi_->writeDescriptorBuffer({descriptorSets_[frame],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceData.buffer,irradianceData.size});
             const auto& probe=*reflectionProbeTexture_;
             rhi_->writeDescriptorImage({descriptorSets_[frame],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view(),probe.sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[frame],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
@@ -2913,11 +2936,11 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
-            writeDepthBindings(uniformWrite.set);
+            writeSceneImages(uniformWrite.set);
             writeProjection(uniformWrite.set,globalMaterial-1);
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
-            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceBuffer_.buffer,irradianceBuffer_.size});
+            rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],24,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,irradianceData.buffer,irradianceData.size});
             const auto& probe=*reflectionProbeTexture_;
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,probe.view(),probe.sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],18,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,overlaySceneDepth_[frame].view,overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
@@ -3046,9 +3069,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const RenderContext& context) {
     const std::string shaderDirectory = context.shaderDirectory;
     rasterizationSamples_=context.rasterizationSamples;
-    const auto mainFragment=[&](std::string file){
-        if(rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT)file.insert(file.rfind(".frag.spv"),"_samples");
-        return azurerender::readBinaryFile(shaderDirectory+file);
+    const auto mainFragment=[&](std::string file,bool material=false){
+        return azurerender::readBinaryFile(shaderDirectory+sceneFragmentVariant(std::move(file),
+            rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,material&&irradianceClipmapActive_));
     };
     const auto vertexCode =
         azurerender::readBinaryFile(shaderDirectory + (objectShadowPrepared_
@@ -3057,7 +3080,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const auto fragmentCode =
         mainFragment((objectShadowPrepared_
             ? (bindlessTextures_?"/mesh_object_bindless.frag.spv":"/mesh_object.frag.spv")
-            : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")));
+            : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")),true);
     const auto outlineVertexCode =
         azurerender::readBinaryFile(shaderDirectory + (outlineProjectionEnabled_
             ? (computeSkinningEnabled_?(bindlessTextures_?"/outline_view_scaled_compute_bindless.vert.spv":"/outline_view_scaled_compute.vert.spv")
@@ -3177,7 +3200,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         opaqueMirroredPipeline_ = rhi_->createGraphicsPipeline(materialDesc);
         materialDesc.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
-        auto depthModule=rhi_->createShaderModule(mainFragment((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv"))));
+        auto depthModule=rhi_->createShaderModule(mainFragment((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")),true));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
         depthDesc.colorAttachmentCount=2;
         overlayDepthPipeline_=rhi_->createGraphicsPipeline(depthDesc);
@@ -3467,6 +3490,7 @@ void CharacterSceneRenderer::destroyResources() {
     }
     rhi_->destroySampler(environmentTexture_.sampler);
     reflectionProbeTexture_.reset();
+    irradianceClipmap_.reset();irradianceClipmapActive_=false;irradianceClipmapDimensions_={1,1,1};
     allocator_->destroyBuffer(irradianceBuffer_);irradianceBuffer_={};irradianceVolume_={};
     rhi_->destroyImageView(environmentTexture_.view);
     allocator_->destroyImage(environmentTexture_.image);
@@ -3735,7 +3759,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.probeParameters={!probe.texture.empty()?1.F:0.F,probe.intensity,probe.blendDistance,probe.boxProjection?1.F:0.F};
     const auto& gi=scene_.irradianceVolume;
     uniform.irradianceOriginSpacing={irradianceVolume_.origin[0],irradianceVolume_.origin[1],irradianceVolume_.origin[2],irradianceVolume_.spacing};
-    uniform.irradianceDimensionsEnabled={float(irradianceVolume_.dimensions[0]),float(irradianceVolume_.dimensions[1]),float(irradianceVolume_.dimensions[2]),gi.enabled&&!irradianceVolume_.cells.empty()?1.F:0.F};
+    const auto& irradianceDimensions=irradianceClipmapActive_?irradianceClipmapDimensions_:irradianceVolume_.dimensions;
+    uniform.irradianceDimensionsEnabled={float(irradianceDimensions[0]),float(irradianceDimensions[1]),float(irradianceDimensions[2]),gi.enabled&&(irradianceClipmap_||!irradianceVolume_.cells.empty())?1.F:0.F};
     uniform.irradianceParameters={gi.intensity,0,0,0};
     std::memcpy(
         uniformBuffers_[currentFrame_].mapped,

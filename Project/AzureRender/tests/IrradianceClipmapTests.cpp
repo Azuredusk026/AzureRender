@@ -1,5 +1,6 @@
 #include <iostream>
 #include "render/IrradianceClipmap.hpp"
+#include "render/IrradianceResource.hpp"
 #include "support/IrradianceClipmapFixture.hpp"
 #include <limits>
 #include <functional>
@@ -53,6 +54,20 @@ int main(int argc,char** argv)try{
     reject([&]{(void)v.query({std::numeric_limits<float>::quiet_NaN(),0,0});});
     if(argc==2){const auto path=std::filesystem::u8path(argv[1]);std::filesystem::create_directories(path.parent_path());
         std::ofstream f(path,std::ios::binary);f.write(reinterpret_cast<const char*>(bytes.data()),bytes.size());f.close();
-        check(IrradianceClipmap::load(path).encode()==bytes,"File save/reopen");}
+        check(IrradianceClipmap::load(path).encode()==bytes,"File save/reopen");
+        check(readIrradianceResourceKind(path)==IrradianceResourceKind::Clipmap,"Typed clipmap header");
+        const auto renamed=path.parent_path()/"renamed.bin";
+        std::filesystem::copy_file(path,renamed,std::filesystem::copy_options::overwrite_existing);
+        check(readIrradianceResourceKind(renamed)==IrradianceResourceKind::Clipmap,"Kind is independent of file extension");
+        IrradianceVolume grid;grid.cells.resize(1);const auto old=grid.encode();
+        const auto gridPath=path.parent_path()/"grid.bin";
+        {std::ofstream out(gridPath,std::ios::binary);out.write(reinterpret_cast<const char*>(old.data()),old.size());}
+        check(readIrradianceResourceKind(gridPath)==IrradianceResourceKind::Grid,"Existing grid header");
+        {std::ofstream out(renamed,std::ios::binary);out<<"AZIC0002";}
+        reject([&]{(void)readIrradianceResourceKind(renamed);});
+        {std::ofstream out(renamed,std::ios::binary);out<<"AZI";}
+        reject([&]{(void)readIrradianceResourceKind(renamed);});
+        reject([&]{(void)readIrradianceResourceKind(path.parent_path()/"missing-field.bin");});
+    }
     std::cout<<"PASS: clipmap asset, interpolation, independent colors, transforms, transitions and invalid input\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

@@ -264,6 +264,14 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-27/irradiance-clipmap-resource.json"
+    },
+    {
+      "path": "runs/20261027-084907-irradiance-clipmap-scene-integration-af425d",
+      "pathBase": "build",
+      "purpose": "三层辐照主场景、公共材质、角色回放及成本对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/irradiance-clipmap-scene.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

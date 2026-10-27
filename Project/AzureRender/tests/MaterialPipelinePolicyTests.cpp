@@ -26,4 +26,11 @@ int main(){
         if(ordinaryOpaqueMaterial(material))return 4;
     }
     std::cout<<"Ordinary opaque policy: final class/alpha eligibility passed\n";
+    if(sceneFragmentVariant("mesh.frag.spv",false,false)!="mesh.frag.spv")return 10;
+    if(sceneFragmentVariant("mesh.frag.spv",true,false)!="mesh_samples.frag.spv")return 11;
+    if(sceneFragmentVariant("mesh.frag.spv",false,true)!="mesh_clipmap.frag.spv")return 12;
+    if(sceneFragmentVariant("/character_snapshot_object_bindless.frag.spv",true,true)
+        !="/character_snapshot_object_bindless_samples_clipmap.frag.spv")return 13;
+    bool invalid=false;try{(void)sceneFragmentVariant("mesh.vert.spv",false,true);}catch(const std::invalid_argument&){invalid=true;}
+    if(!invalid)return 14;
 }

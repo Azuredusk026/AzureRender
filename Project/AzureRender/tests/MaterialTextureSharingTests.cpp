@@ -1,10 +1,13 @@
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "rhi/NullRhi.hpp"
+#include "support/IrradianceClipmapFixture.hpp"
 
 #include <filesystem>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <chrono>
+#include <fstream>
 
 using namespace azurerender;
 void require(bool value,const char* reason) {if(!value)throw std::runtime_error(reason);}
@@ -16,7 +19,7 @@ void requireReleasedPixels(const AssetMaterial& material) {
         require(pixels->empty()&&pixels->capacity()==0,"Uploaded renderer materials must release CPU pixel allocations");
 }
 
-void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prepared=false) {
+void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prepared=false,const std::filesystem::path& irradiance={}) {
     rhi::NullRhi rhi;CharacterSceneRenderer renderer;RenderContext context;
     context.allocator=&rhi.allocator();context.rhi=&rhi;context.bindlessTextures=bindless;
     context.shaderDirectory=shaderDirectory.string();
@@ -24,6 +27,7 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
     context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();
     RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;
     context.renderSettings=&settings;
+    if(!irradiance.empty()){context.scene.irradianceVolume.asset=irradiance.u8string();context.scene.irradianceVolume.enabled=true;}
     auto& limits=context.descriptorLimits;
     limits.maxPerStageDescriptorSamplers=limits.maxDescriptorSetSamplers=4096;
     limits.maxPerStageDescriptorSampledImages=limits.maxDescriptorSetSampledImages=4096;
@@ -45,6 +49,7 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
         while(!renderer.prepareLoad(context,0)){}
         std::ostringstream fields;fields<<'{';renderer.appendCaptureManifestFields(fields);fields<<"\"end\":0}";
         const auto report=nlohmann::json::parse(fields.str());
+        require(report.at("irradianceResourceKind")==(!irradiance.empty()?"clipmap":"none"),"Renderer selects the declared irradiance resource family");
         const auto& stats=report.at("materialTextureCache");
         // Each imported resource includes its authored material and the loader's
         // fallback. Six generated 2x2 maps and one 1x1 LUT are common; the two
@@ -65,6 +70,17 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
         for(const auto& [path,mesh]:preparedMeshes)
             require(!mesh->materials.front().baseColorPixels.empty(),"Borrowed prepared assets retain their decoded source pixels");
         require(renderer.reuseScene(context),"Shared material ownership preserves scene reuse");
+        if(!irradiance.empty()){
+            const auto images=rhi.allocator().statistics().liveImages,buffers=rhi.allocator().statistics().liveBuffers;
+            const auto binding=context.scene.irradianceVolume;
+            context.scene.irradianceVolume.enabled=false;context.scene.irradianceVolume.intensity=.25F;
+            require(renderer.reuseScene(context),"Clipmap enable and intensity retain the loaded resources");
+            require(rhi.allocator().statistics().liveImages==images&&rhi.allocator().statistics().liveBuffers==buffers,
+                "Frame parameter changes preserve immutable clipmap ownership");
+            auto grid=irradiance;grid.replace_extension(".aziv");context.scene.irradianceVolume.asset=grid.u8string();
+            require(!renderer.reuseScene(context),"Grid/clipmap asset changes require a new resource layout");
+            context.scene.irradianceVolume=binding;require(renderer.reuseScene(context),"The retained clipmap remains valid until retirement");
+        }
         renderer.onUnload(context);
         require(rhi.allocator().statistics().liveImages==0&&rhi.allocator().statistics().liveBuffers==0,"Renderer unload must free shared materials and independent attachments exactly once");
     }
@@ -112,5 +128,15 @@ int main(int argc,char** argv) {try {
     require(argc==2,"Expected compiled shader directory");
     verify(false,argv[1]);verify(true,argv[1]);verify(false,argv[1],true);verify(true,argv[1],true);
     verifyProjectedPixels(false,argv[1]);verifyProjectedPixels(true,argv[1]);
+    auto clipmapPath=std::filesystem::temp_directory_path()/("azure-clipmap-sharing-"+
+        std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azic");
+    auto gridPath=clipmapPath;gridPath.replace_extension(".aziv");
+    auto cleanup=std::unique_ptr<void,std::function<void(void*)>>(&clipmapPath,[&](void*){
+        std::error_code error;std::filesystem::remove(clipmapPath,error);std::filesystem::remove(gridPath,error);
+    });
+    const auto clipmap=test::clipmapFixture().encode();IrradianceVolume grid;grid.cells.resize(1);const auto gridBytes=grid.encode();
+    {std::ofstream out(clipmapPath,std::ios::binary);out.write(reinterpret_cast<const char*>(clipmap.data()),clipmap.size());}
+    {std::ofstream out(gridPath,std::ios::binary);out.write(reinterpret_cast<const char*>(gridBytes.data()),gridBytes.size());}
+    verify(false,argv[1],true,clipmapPath);verify(true,argv[1],true,clipmapPath);
     std::cout<<"Public multi-resource fixture: fixed/indexed bindings and reload sharing passed\n";
 }catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}}

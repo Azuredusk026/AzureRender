@@ -77,6 +77,8 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 来源与运行待项见[组合验收](../acceptance/nr/irradiance-composition.md)。
 三维上传及实际体积载荷见[资源验收](../acceptance/nr/volume-image-upload.md)。
 三层资源与活动片元采样见[精度验收](../acceptance/nr/irradiance-clipmap-resource.md)。
+公共材质按资源版本消费三层过渡和默认环境。
+实际候选与生命周期见[接入验收](../acceptance/nr/irradiance-clipmap-scene.md)。
 
 反射射线预计算通过双配置与动态遮挡回归。
 短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。

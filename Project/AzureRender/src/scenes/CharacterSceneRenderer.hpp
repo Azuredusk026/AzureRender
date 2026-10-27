@@ -38,6 +38,7 @@
 
 namespace azurerender {
 
+class IrradianceClipmapGpu;
 // The stylized character pipeline, migrated from the monolith application
 // class into the first concrete ISceneRenderer. It owns the loaded glTF
 // asset, its GPU resources (buffers/textures/descriptors/pipelines), the
@@ -45,10 +46,10 @@ namespace azurerender {
 // HDR Scene Color attachment.
 class CharacterSceneRenderer final : public ISceneRenderer {
 public:
-    CharacterSceneRenderer() = default;
+    CharacterSceneRenderer();
     CharacterSceneRenderer(const CharacterSceneRenderer&) = delete;
     CharacterSceneRenderer& operator=(const CharacterSceneRenderer&) = delete;
-    ~CharacterSceneRenderer() override = default;
+    ~CharacterSceneRenderer() override;
 
     [[nodiscard]] std::string_view name() const noexcept override {
         return "character";
@@ -341,6 +342,9 @@ private:
     GpuTexture environmentTexture_;
     std::unique_ptr<EnvironmentCubeTexture> reflectionProbeTexture_;
     IrradianceVolume irradianceVolume_;
+    std::unique_ptr<IrradianceClipmapGpu> irradianceClipmap_;
+    bool irradianceClipmapActive_=false;
+    std::array<std::uint32_t,3> irradianceClipmapDimensions_{1,1,1};
     rhi::GpuBuffer irradianceBuffer_;
     VkDeviceSize irradianceBufferBudget_=0;
     GpuTexture toonRampTexture_;

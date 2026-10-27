@@ -6,6 +6,8 @@
 普通材质专用化及完整快照路径见[材质验证](docs/acceptance/nr/ordinary-material-specialization.md)。
 基础功能集合、视图标志及编译依赖见[功能裁剪](docs/acceptance/nr/generic-material-feature-folding.md)。
 
+三层体积、公共材质及主场景绑定见[辐照接入](docs/acceptance/nr/irradiance-clipmap-scene.md)。
+
 原生时序输入与运动解码见[时序核验](docs/acceptance/nr/native-temporal-inputs.md)。
 主辅视图的历史提交边界见[时序帧状态](docs/runtime/temporal-frame-state.md)。
 

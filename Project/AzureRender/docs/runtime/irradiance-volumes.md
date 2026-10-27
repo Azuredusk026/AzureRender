@@ -2,6 +2,8 @@
 
 原生场景的覆盖与来源见[中庭验证](../acceptance/nr/irradiance-coverage.md)。
 三维资源的上传规则见[体积纹理](volume-image-upload.md)。
+场景绑定也支持[三层辐照资源](irradiance-clipmaps.md)。
+运行时按版本文件头选择对应加载器和着色程序。
 
 `AZIV0001` 保存通用规则网格的方向辐照系数。
 资源属于 RenderCore 的数据契约。
