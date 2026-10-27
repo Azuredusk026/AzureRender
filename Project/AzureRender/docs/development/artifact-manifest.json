@@ -444,6 +444,14 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/enclosure-authored-normals.json",
       "primaryProject": "full-candidate/enclosure-default.azureproject"
+    },
+    {
+      "path": "runs/20261028-011700-unlit-texture-layers-contract-363bb3",
+      "pathBase": "build",
+      "purpose": "无光照图层公共解析、数值预期及双配置 CPU 验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-texture-layer-contract.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

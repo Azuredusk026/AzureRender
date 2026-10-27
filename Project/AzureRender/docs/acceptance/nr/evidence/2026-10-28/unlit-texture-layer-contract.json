@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "phase": "NR7-L4A",
+  "status": "public-layer-numerical-contract-passed",
+  "run": "build/runs/20261028-011700-unlit-texture-layers-contract-363bb3",
+  "source": {
+    "CMakeLists.txt": "390a26d8158c797c0bfc057349f49ff2b88bcf7e39a20658a0e8302fd5bdd230",
+    "src/assets/UnlitTextureLayers.hpp": "35e3cd73eff0371a77d4150dae5b9db21c5d2d7af1206a81ec552c38815bf59b",
+    "src/assets/UnlitTextureLayers.cpp": "570e45e377c9d5098bebd8b4409b83dee744ad453e801605a69f570884df0f31",
+    "tests/UnlitTextureLayersTests.cpp": "9805014fca34a0462af0a24a85a66a46ba637b520db2d6231ea12fb55f14d9ba"
+  },
+  "capturedContract": {
+    "path": "build/runs/20261022-051129-character-logistics-restoration-0f2e71/scene-audit/logistics-l4/contract.json",
+    "sha256": "7f1cbc817e49c7607442f793b4770a4ce7062cb30487d2e30970b948cceb3c1d",
+    "examples": 2,
+    "clock": "Host-authored reference rate and phase; native live constants remain uncaptured"
+  },
+  "tests": {
+    "publicChecksPerConfiguration": 101,
+    "capturedChecksPerConfiguration": 110,
+    "ctestPerConfiguration": 2,
+    "configurations": [
+      "debug",
+      "release"
+    ],
+    "expectedRed": "missing public header",
+    "characterRepairPassed": true
+  },
+  "boundaries": [
+    "This stage validates public parsing and numerical evaluation.",
+    "Material loading, GPU bindings and logistics appearance remain separate gates."
+  ],
+  "artifacts": [
+    {
+      "path": "captured-debug.log",
+      "sha256": "3beea3ee05f0ffbbabc03047372e17431706d8ac8d4b51dd5dafb328ea07d4d4"
+    },
+    {
+      "path": "captured-release.log",
+      "sha256": "3beea3ee05f0ffbbabc03047372e17431706d8ac8d4b51dd5dafb328ea07d4d4"
+    },
+    {
+      "path": "contract-debug-build.log",
+      "sha256": "3cbf30ad9518a45f81b4825b929d6d6f001d1eb44921df47c4639c6123ac4f0e"
+    },
+    {
+      "path": "contract-debug-final-build.log",
+      "sha256": "6b41d3f66bb4db3a02dcc199ff984921e3aab035687fd86888ef63198aab9876"
+    },
+    {
+      "path": "contract-debug.log",
+      "sha256": "e964ab7a69bacec3efcbdc374a7cd7e4ee2bb6f8a3e33561b40d0f9341bceeb2"
+    },
+    {
+      "path": "contract-red.log",
+      "sha256": "61c6fee783616f26b7f6879fe1fc083a426f4ab0fef239099443cef62e2e65bc"
+    },
+    {
+      "path": "contract-release-build.log",
+      "sha256": "75da903780c17d3ce58a4f16388945da3d6b6f50cbd404545cdae2b1ac92f074"
+    },
+    {
+      "path": "ctest-debug.log",
+      "sha256": "0bd49079a3e0750035327c4fb006aa68b14ff6734117ce4366b6b183363dc646"
+    },
+    {
+      "path": "ctest-release.log",
+      "sha256": "363ac5fc5f8e64c77289f51f0adf1dc21fc9f1ad739edad32159a24c9f1f5f5c"
+    },
+    {
+      "path": "public-debug.log",
+      "sha256": "e45d830c223bfe4ecb76defec544daa4e5525542e23149ddb6ca793fed8c0029"
+    },
+    {
+      "path": "public-release.log",
+      "sha256": "e45d830c223bfe4ecb76defec544daa4e5525542e23149ddb6ca793fed8c0029"
+    }
+  ]
+}

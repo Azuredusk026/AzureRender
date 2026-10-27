@@ -516,6 +516,7 @@ add_library(AzureRenderCore STATIC
     src/assets/Scene2D.cpp
     src/assets/TextureImportSettings.cpp
     src/assets/GltfLoader.cpp
+    src/assets/UnlitTextureLayers.cpp
     src/animation/AnimationBlend.cpp
     src/animation/ExpressionPose.cpp
     src/assets/image/ImageCodec.cpp
@@ -1002,6 +1003,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ColorGradingLut COMMAND AzureColorGradingLutTests)
     add_executable(AzureCharacterRepairTests tests/CharacterRepairTests.cpp)
     target_link_libraries(AzureCharacterRepairTests PRIVATE AzureRuntime)
+    add_executable(AzureUnlitTextureLayersTests tests/UnlitTextureLayersTests.cpp)
+    target_link_libraries(AzureUnlitTextureLayersTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.UnlitTextureLayers COMMAND AzureUnlitTextureLayersTests)
     add_executable(AzureTextureFilteringTests tests/TextureFilteringTests.cpp)
     add_executable(AzureTextureMipCoverageTests tests/TextureMipCoverageTests.cpp)
     target_include_directories(AzureTextureMipCoverageTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")

@@ -23,6 +23,7 @@
 活动索引和实际灯光快照见[灯光验收](../acceptance/nr/captured-active-lights.md)。
 静态作者法线与精确轴置换见[批量验收](../acceptance/nr/static-authored-normals.md)。
 上方与后方来源接入见[围护验收](../acceptance/nr/enclosure-authored-normals.md)。
+物流公共图层解析与数值评价见[契约验收](../acceptance/nr/unlit-texture-layer-contract.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。
