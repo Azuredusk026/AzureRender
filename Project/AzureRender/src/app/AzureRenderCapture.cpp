@@ -101,6 +101,21 @@ void AzureRenderApp::writeCaptureManifest(
     const auto& gradeLut=effectiveRenderSettings_.grade.lut;
     const auto gradeLutPath=gradeLut.resolvedAsset.empty()?std::filesystem::u8path(gradeLut.asset):gradeLut.resolvedAsset;
     const std::string gradeLutHash=gradeLut.asset.empty()?std::string{}:fnv1a64FileHex(gradeLutPath);
+    const auto& captureCamera=effectiveRenderSettings_.cameraView;
+    const float captureNear=captureCamera?captureCamera->nearPlane:effectiveRenderSettings_.cameraNear;
+    const float captureFar=captureCamera?captureCamera->farPlane:effectiveRenderSettings_.cameraFar;
+    nlohmann::json cameraLens=nullptr;
+    const nlohmann::json cameraUp=captureCamera?nlohmann::json(captureCamera->up):nlohmann::json(nullptr);
+    nlohmann::json cameraPose=nullptr;
+    if(captureCamera){
+        const bool orthographic=captureCamera->projection==azurerender::CameraProjectionKind::Orthographic;
+        cameraLens={{"schemaVersion",1},{"projection",orthographic?"orthographic":"perspective"},
+            {"nearPlane",captureNear},{"farPlane",captureFar},
+            {"offsetNdc",{captureCamera->projectionOffsetX,captureCamera->projectionOffsetY}}};
+        cameraPose={{"position",captureCamera->position},{"target",captureCamera->target},{"up",captureCamera->up}};
+        if(orthographic)cameraLens["orthographicHeight"]=captureCamera->orthoHeight;
+        else cameraLens["verticalFovRadians"]=captureCamera->fov;
+    }
     std::ostringstream qaState;
     qaState
         << resolvedAssetPath_ << '|'
@@ -114,8 +129,8 @@ void AzureRenderApp::writeCaptureManifest(
         << renderSettings_.diagnosticView << '|'
         << runOptions_.qaDisableFaceCulling << '|'
         << runOptions_.qaDisableDepthTest << '|'
-        << renderSettings_.cameraNear << '|'
-        << renderSettings_.cameraFar << '|'
+        << captureNear << '|'
+        << captureFar << '|'
         << effectiveRenderSettings_.shadowDistance << '|'
         << qaIsolationMode_ << '|'
         << qaEffectMode_ << '|'
@@ -168,6 +183,8 @@ void AzureRenderApp::writeCaptureManifest(
     if(effectiveRenderSettings_.cameraView){const auto& camera=*effectiveRenderSettings_.cameraView;
         if(camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)
             qaState<<"|camera-projection-v2|"<<camera.projectionOffsetX<<'|'<<camera.projectionOffsetY;}
+    qaState<<"|camera-lens-v1|"<<cameraLens.dump();
+    qaState<<"|camera-pose-v1|"<<cameraPose.dump();
     qaState
         << '|'
         << rampProfileHash << '|'
@@ -297,6 +314,8 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"cameraProjection\": {\"schemaVersion\": " << azurerender::CameraViewDescriptor::kLayoutVersion
         << ", \"offsetNdc\": [" << (effectiveRenderSettings_.cameraView?effectiveRenderSettings_.cameraView->projectionOffsetX:0)
         << ", " << (effectiveRenderSettings_.cameraView?effectiveRenderSettings_.cameraView->projectionOffsetY:0) << "]},\n"
+        << "  \"cameraLens\": " << cameraLens.dump() << ",\n"
+        << "  \"cameraUp\": " << cameraUp.dump() << ",\n"
         << "  \"qaHarnessVersion\": \"CQ-0-v1\",\n"
         << "  \"qaHarnessEnabled\": "
         << (qaHarnessEnabled_ ? "true" : "false") << ",\n"
@@ -313,8 +332,8 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"qaExposureEv\": " << runOptions_.qaExposureEv.value_or(0.F) << ",\n"
         << "  \"qaDisableFaceCulling\": " << (runOptions_.qaDisableFaceCulling ? "true" : "false") << ",\n"
         << "  \"qaDisableDepthTest\": " << (runOptions_.qaDisableDepthTest ? "true" : "false") << ",\n"
-        << "  \"cameraNear\": " << renderSettings_.cameraNear << ",\n"
-        << "  \"cameraFar\": " << renderSettings_.cameraFar << ",\n"
+        << "  \"cameraNear\": " << captureNear << ",\n"
+        << "  \"cameraFar\": " << captureFar << ",\n"
         << "  \"antiAliasing\": " << effectiveRenderSettings_.antiAliasing << ",\n"
         << "  \"nprLighting\": " << azurerender::encodeNprLighting(renderSettings_.nprLighting).dump() << ",\n"
         << "  \"antiAliasingPipeline\": " << std::quoted(sceneMultisampling_?"native-hdr-multisample-v1":temporalReconstruction_&&sceneRenderer_&&sceneRenderer_->capabilities().supportsMotionVectors?"native-hdr-temporal-v4":"linear-display-spatial-v1") << ",\n"
@@ -333,6 +352,7 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"sceneRenderHeight\": " << sceneRenderExtent_.height << ",\n"
         << "  \"shadowDistance\": " << effectiveRenderSettings_.shadowDistance << ",\n"
         << "  \"qaStateHashAlgorithm\": \"FNV-1a-64\",\n"
+        << "  \"qaStateFingerprintVersion\": 2,\n"
         << "  \"qaStateHash\": " << std::quoted(qaStateHash) << ",\n"
         << "  \"toonRampFormat\": \"AzureRender Toon Ramp Profiles v1\",\n"
         << "  \"toonRampVersion\": 1,\n"

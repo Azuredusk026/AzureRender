@@ -67,3 +67,4 @@
 
 生成方案通过现有场景层级、相机组件和 GI 变换接入。
 来源及实际检查见[原生反射绑定](../acceptance/nr/native-reflection-bindings.md)。
+实际镜头与状态指纹的记录规则见[捕获相机来源](capture-camera.md)。

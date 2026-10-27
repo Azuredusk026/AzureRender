@@ -2426,6 +2426,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.CameraProjectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_camera_projection_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CameraProjectionGpu PROPERTIES TIMEOUT 180 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureRender.CaptureCameraGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_capture_camera_gpu.py"
+        --player $<TARGET_FILE:AzurePlayer>)
+    set_tests_properties(AzureRender.CaptureCameraGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureTools.NativePostVs COMMAND "${Python3_EXECUTABLE}" -m unittest discover -s "${CMAKE_CURRENT_SOURCE_DIR}/tools" -p test_native_postvs.py)
     add_test(NAME AzureEngine.NprIlluminationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_illumination_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

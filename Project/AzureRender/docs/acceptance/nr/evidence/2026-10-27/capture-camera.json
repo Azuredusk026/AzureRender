@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "scope": "NR0 selected-camera capture provenance and fingerprints",
+  "status": "narrow-checks-passed",
+  "privateRun": "build/runs/20261027-143744-capture-camera-provenance-81927a",
+  "source": {
+    "CMakeLists.txt": "962279ca67e65c1c242d2c292b90366a0ed9dff7d74a8a5655d81fb39930aab4",
+    "src/app/AzureRenderCapture.cpp": "793e4391dddede54d65e3e5c898984dc3726eab483056b0a35bbb100e9f1376b",
+    "tools/test_capture_camera_gpu.py": "759e477ad78116f3553583ab8bb33827b32d7f81ebe254607b2be48e5b7c0896"
+  },
+  "tests": {
+    "debug": {
+      "cameraCaptures": 14,
+      "projectionRegressionCaptures": 14,
+      "ctests": 2,
+      "hostBuilds": [
+        "Player",
+        "Editor"
+      ],
+      "checks": [
+        {
+          "renderer": "character",
+          "baseLens": {
+            "farPlane": 10000.0,
+            "nearPlane": 0.25,
+            "offsetNdc": [
+              0.0,
+              0.0
+            ],
+            "projection": "perspective",
+            "schemaVersion": 1,
+            "verticalFovRadians": 0.9986935257911682
+          },
+          "farPlaneChangesFingerprint": true,
+          "fovChangesFingerprint": true,
+          "orthographicHeightChangesFingerprint": true,
+          "rollChangesFingerprint": true,
+          "oneUlpPoseChangesFingerprint": true,
+          "farOnlyImageExact": true
+        },
+        {
+          "renderer": "pathtracing",
+          "baseLens": {
+            "farPlane": 10000.0,
+            "nearPlane": 0.25,
+            "offsetNdc": [
+              0.0,
+              0.0
+            ],
+            "projection": "perspective",
+            "schemaVersion": 1,
+            "verticalFovRadians": 0.9986935257911682
+          },
+          "farPlaneChangesFingerprint": true,
+          "fovChangesFingerprint": true,
+          "orthographicHeightChangesFingerprint": true,
+          "rollChangesFingerprint": true,
+          "oneUlpPoseChangesFingerprint": true,
+          "farOnlyImageExact": true
+        }
+      ],
+      "captureSummarySha256": "0f1f917a033b18c681f8e62fe042fa99b7e1ba508a061c77083fb159f809f6f6",
+      "projectionSummarySha256": "39c2a8135c45a708470d2ce7ff35368b19eeb3cf08002f62ac2458f1c5952e86"
+    },
+    "release": {
+      "cameraCaptures": 14,
+      "projectionRegressionCaptures": 14,
+      "ctests": 2,
+      "hostBuilds": [
+        "Player",
+        "Editor"
+      ],
+      "checks": [
+        {
+          "renderer": "character",
+          "baseLens": {
+            "farPlane": 10000.0,
+            "nearPlane": 0.25,
+            "offsetNdc": [
+              0.0,
+              0.0
+            ],
+            "projection": "perspective",
+            "schemaVersion": 1,
+            "verticalFovRadians": 0.9986935257911682
+          },
+          "farPlaneChangesFingerprint": true,
+          "fovChangesFingerprint": true,
+          "orthographicHeightChangesFingerprint": true,
+          "rollChangesFingerprint": true,
+          "oneUlpPoseChangesFingerprint": true,
+          "farOnlyImageExact": true
+        },
+        {
+          "renderer": "pathtracing",
+          "baseLens": {
+            "farPlane": 10000.0,
+            "nearPlane": 0.25,
+            "offsetNdc": [
+              0.0,
+              0.0
+            ],
+            "projection": "perspective",
+            "schemaVersion": 1,
+            "verticalFovRadians": 0.9986935257911682
+          },
+          "farPlaneChangesFingerprint": true,
+          "fovChangesFingerprint": true,
+          "orthographicHeightChangesFingerprint": true,
+          "rollChangesFingerprint": true,
+          "oneUlpPoseChangesFingerprint": true,
+          "farOnlyImageExact": true
+        }
+      ],
+      "captureSummarySha256": "3046140f3d33c770e71d938fd5ec3455b1eb1500508ae3dec9333e7f697dfa11",
+      "projectionSummarySha256": "39c2a8135c45a708470d2ce7ff35368b19eeb3cf08002f62ac2458f1c5952e86"
+    }
+  },
+  "nativeCamera": {
+    "status": "passed",
+    "imageExact": true,
+    "cameraLens": {
+      "farPlane": 10000.0,
+      "nearPlane": 0.10000000149011612,
+      "offsetNdc": [
+        -0.0002929684706032276,
+        7.717559492448345e-05
+      ],
+      "projection": "perspective",
+      "schemaVersion": 1,
+      "verticalFovRadians": 0.9986935257911682
+    },
+    "cameraUp": [
+      -0.0002945943851955235,
+      0.9982167482376099,
+      -0.05969396233558655
+    ],
+    "fingerprintVersion": 2,
+    "resourcesReleased": true,
+    "validationErrors": 0
+  },
+  "negatives": {
+    "oldProduction": "gpu-red.log",
+    "reportedNear": 0.1,
+    "reportedFar": 20,
+    "configuredNear": 0.25,
+    "configuredFar": 10000
+  },
+  "architecture": {
+    "cameraViewLayoutVersion": 2,
+    "lensMetadataVersion": 1,
+    "stateFingerprintVersion": 2,
+    "newRenderInputs": 0,
+    "newShaderVariants": 0,
+    "newDescriptors": 0
+  },
+  "limits": [
+    "Existing QA position and target fields retain their display precision; the input fingerprint uses complete float values",
+    "Formal NR0 image registration, scene activation and full NR1-NR12 rendering remain pending"
+  ]
+}

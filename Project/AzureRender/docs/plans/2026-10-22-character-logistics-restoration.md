@@ -1417,7 +1417,7 @@ C18-R1 的共享 XY 投影核通过双配置数值验证。
 颜色上传及主场景候选见[绑定验收](../acceptance/nr/floor-runtime-binding.md)。
 烘焙候选的独立纹理过滤与完整反射继续验收。
 实际资源及对照镜头见[运行核验](../acceptance/nr/native-reflection-bindings.md)。
-相机捕获报告的实际裁剪参数另行完善。
+相机捕获报告及精确输入指纹见[来源验收](../acceptance/nr/capture-camera.md)。
 公共层级契约及夹持检查见[层级验收](../acceptance/nr/reflection-lod.md)。
 画面反射的算法身份通过实际通道与采样核验。
 原性能目标和已有短测限制继续保留。
