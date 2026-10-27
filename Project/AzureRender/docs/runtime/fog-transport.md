@@ -94,3 +94,36 @@ CPU 全精度插值与硬件格式精度分别记录。
 独立测试着色器由测试目标构建。
 
 资源、真实采样及释放检查见[GPU 验收](../acceptance/nr/fog-volume-gpu.md)。
+
+## 视图坐标
+
+`FogViewProjection` 声明视口和体积的像素原点。
+调用方提供左上原点的整数像素及有符号视图深度。
+体积原点采用 `UpperLeft` 或 `LowerLeft`。
+视口单轴范围为一至一万六千三百八十四。
+
+`pixelCenterOffset` 位于零至一。
+`jitterRadius` 使用像素单位，范围为零至十六。
+`framePhase` 位于零至七，明确选择抖动相位。
+抖动由像素和相位共同产生，评价过程具有确定性。
+
+```text
+uv = (pixelAtDeclaredOrigin + pixelCenterOffset + jitter * jitterRadius) / extent
+z = log2(abs(viewDepth) * depthEncoding.x + depthEncoding.y) * depthEncoding.z
+weight = saturate((abs(viewDepth) - minimumViewDepth) / nearFadeWidth)
+```
+
+深度比例非负，偏置和对数倍率为正。
+近端深度非负，淡出宽度为正。
+输入与结果均要求有限。
+坐标的边缘寻址由体积采样器处理。
+
+`PackedFogViewProjection` 采用版本一。
+布局包含三行十六字节数据，共四十八字节。
+首行持有视口倒数、抖动半径和中心偏移。
+第二行持有深度编码及近端深度。
+
+第三行持有淡出宽度、视口尺寸及相位标志。
+标志的低三位表示相位，第四位表示左下原点。
+`fog_view_projection.glsl` 消费同一布局。
+来源与数值见[坐标验收](../acceptance/nr/view-fog-projection.md)。

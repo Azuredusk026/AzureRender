@@ -550,6 +550,7 @@ add_library(AzureRenderCore STATIC
     src/render/EnvironmentAsset.cpp
     src/render/FogTransport.cpp
     src/render/FogVolumeData.cpp
+    src/render/FogViewProjection.cpp
     src/render/EnvironmentCubeTexture.cpp
     src/render/ComputePass.cpp
     src/rhi/GpuAllocator.cpp
@@ -1012,6 +1013,9 @@ if(BUILD_TESTING)
     add_executable(AzureFogVolumeDataTests tests/FogVolumeDataTests.cpp)
     target_link_libraries(AzureFogVolumeDataTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FogVolumeData COMMAND AzureFogVolumeDataTests)
+    add_executable(AzureFogViewProjectionTests tests/FogViewProjectionTests.cpp)
+    target_link_libraries(AzureFogViewProjectionTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.FogViewProjection COMMAND AzureFogViewProjectionTests)
     add_executable(AzureFogVolumeOwnerTests tests/FogVolumeOwnerTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureFogVolumeOwnerTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FogVolumeOwner COMMAND AzureFogVolumeOwnerTests)
@@ -1019,7 +1023,7 @@ if(BUILD_TESTING)
     add_custom_command(OUTPUT "${AZURE_FOG_TEST_SHADER}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/shader-modules"
         COMMAND Vulkan::glslc -I "${SHADER_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/shaders/fog_volume_test.comp" -o "${AZURE_FOG_TEST_SHADER}"
-        DEPENDS tests/shaders/fog_volume_test.comp shaders/fog_transport.glsl VERBATIM)
+        DEPENDS tests/shaders/fog_volume_test.comp shaders/fog_transport.glsl shaders/fog_view_projection.glsl VERBATIM)
     add_custom_target(AzureFogVolumeTestShader DEPENDS "${AZURE_FOG_TEST_SHADER}")
     add_executable(AzureFogVolumeGpuTests tests/FogVolumeGpuTests.cpp)
     target_link_libraries(AzureFogVolumeGpuTests PRIVATE AzureRenderCore)

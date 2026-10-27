@@ -569,6 +569,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/fog-volume-gpu.json",
       "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-073457-view-fog-projection-contract-0a6cea",
+      "pathBase": "build",
+      "purpose": "视图雾场坐标、确定性抖动及原版完整采样验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-projection.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
