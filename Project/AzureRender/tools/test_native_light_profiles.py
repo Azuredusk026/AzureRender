@@ -9,9 +9,68 @@ import unittest
 
 from endfield_native.light_profiles import bind_specular_profiles
 from endfield_native.light_profiles import bind_directional_radiometry
+from endfield_native.light_profiles import bind_captured_lights
 
 
 class NativeLightProfileTests(unittest.TestCase):
+    def capture_fixture(self):
+        raw=bytearray((6+256*8)*16)
+        for index,mode in [(0,16),(1,0)]:
+            rows=[(.5,.25,1,1),(2,3,4,.1),(0,0,0,2),(-1,0,0,0),(1,.8,0,0),(0,0,0,0),(0,0,0,2),(0,0,.5,-1)]
+            for row,values in enumerate(rows):struct.pack_into('<4f',raw,(6+index*8+row)*16,*values)
+            struct.pack_into('<I',raw,(6+index*8+3)*16+12,mode)
+        selection=dict(schemaVersion=1,sourceScene='fixture',event=17,namespace='frame17',indices=[0,1],origin=[1,0,0],
+            tileWords=[3]+[0]*7,depthWords=[3]+[0]*7,surfaceReceivers=True,replaceLightIds=['native-light-7','native-light-9'])
+        level=copy.deepcopy(self.level);level['nodes']=[]
+        for light in level['lights']:
+            light['nodeId']=light['id'];level['nodes'].append(dict(id=light['id']))
+        return level,raw,selection
+
+    def test_captured_selection_binds_world_nodes_receivers_and_retains_sun(self):
+        level,raw,selection=self.capture_fixture();before=copy.deepcopy(level)
+        result,receipt=bind_captured_lights(level,raw,selection,source_scene='fixture')
+        self.assertEqual(level,before);self.assertEqual(result['lights'][0],before['lights'][2])
+        self.assertEqual(receipt['indices'],[0,1]);self.assertEqual(receipt['replacedLights'],2)
+        first,second=result['lights'][1:]
+        self.assertEqual(first['id'],'frame17-0');self.assertEqual(first['color'],[.5,.25,1]);self.assertEqual(first['intensity'],1)
+        self.assertEqual(first['shape']['receivers'],dict(schemaVersion=1,surfaces=True,characters=False))
+        self.assertEqual(second['shape']['receivers'],dict(schemaVersion=1,surfaces=True,characters=True))
+        self.assertAlmostEqual(second['shape']['characterResponse']['diffuseFloor'],.25)
+        self.assertEqual(result['nodes'][-2]['components']['azure.transform']['data']['translation'],[-1,3,4])
+        self.assertEqual(result['nodes'][-2]['parentId'],'')
+
+    def test_captured_selection_rejects_stale_indices_identity_and_scene(self):
+        for mutate in [lambda l,s:s.update(indices=[2]),lambda l,s:s.update(indices=[0,0]),lambda l,s:s.update(sourceScene='other'),
+                       lambda l,s:s.update(tileWords=[True]+[0]*7),lambda l,s:s.update(replaceLightIds=['missing']),
+                       lambda l,s:l['nodes'].append(dict(id='frame17-0')),lambda l,s:s.update(namespace='../escape'),
+                       lambda l,s:s.update(surfaceReceivers=1),lambda l,s:s.update(origin=None)]:
+            level,raw,selection=self.capture_fixture();mutate(level,selection)
+            with self.assertRaises(ValueError):bind_captured_lights(level,raw,selection,source_scene='fixture')
+
+    def test_inactive_records_are_rejected_before_decoding_unused_bytes(self):
+        level,raw,selection=self.capture_fixture();selection['indices']=[2]
+        with self.assertRaisesRegex(ValueError,'active masks'):bind_captured_lights(level,raw,selection,source_scene='fixture')
+
+    def test_captured_cli_writes_snapshot_and_explicit_source_receipt(self):
+        level,raw,selection=self.capture_fixture()
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);source=root/'source.azurelevel';constants=root/'constants.bin';selected=root/'selection.json'
+            source.write_text(json.dumps(level));constants.write_bytes(raw);selected.write_text(json.dumps(selection));before=source.read_bytes()
+            output=root/'snapshot.azurelevel';receipt=root/'receipt.json'
+            command=[sys.executable,str(Path(__file__).with_name('bind_native_light_profiles.py')),'--level',str(source),
+                '--captured-constants',str(constants),'--selection',str(selected),'--source-scene','fixture','--output',str(output),'--receipt',str(receipt)]
+            completed=subprocess.run(command,check=True,capture_output=True,text=True)
+            self.assertEqual(json.loads(completed.stdout)['createdLights'],2)
+            saved=json.loads(receipt.read_text());self.assertEqual(saved['schemaVersion'],2)
+            self.assertEqual(saved['binding']['indices'],[0,1]);self.assertIn('sha256',saved['capturedConstants'])
+            self.assertEqual(source.read_bytes(),before);self.assertEqual(len(json.loads(output.read_text())['lights']),3)
+
+    def test_captured_selection_rejects_unavailable_consumers(self):
+        for row,component,value,integer in [(3,3,3,True),(7,3,1,False),(2,2,1,False)]:
+            level,raw,selection=self.capture_fixture()
+            struct.pack_into('<I' if integer else '<f',raw,(6+row)*16+component*4,value)
+            with self.assertRaises(ValueError):bind_captured_lights(level,raw,selection,source_scene='fixture')
+
     def main_header(self):
         raw=bytearray(96)
         struct.pack_into('<4f',raw,0,0,-1,0,0)

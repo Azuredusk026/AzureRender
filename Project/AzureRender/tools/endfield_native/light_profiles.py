@@ -1,10 +1,11 @@
-"""Bind explicitly selected native ECS light profiles to an authored level."""
+"""Bind native ECS profiles or explicitly selected captured light records."""
 import copy
 import math
 import re
 import struct
 
-from .captured_lights import decode_directional_header
+from .captured_lights import decode_directional_header,decode_records,render_character_response
+from .lighting_ecs import render_light_receivers
 
 
 def _scale(value):
@@ -95,3 +96,61 @@ def bind_directional_radiometry(level,raw,*,light_id,enabled):
     target['shape']['specularScale']=decoded['specularScale']
     return result,dict(schemaVersion=1,light=light_id,enabled=enabled,previous=previous,
         directionBinding='existing-local-direction',**decoded)
+
+
+def bind_captured_lights(level,raw,selection,*,source_scene):
+    """Replace explicit light identities with caller-confirmed captured records."""
+    fields={'schemaVersion','sourceScene','event','namespace','indices','origin','tileWords','depthWords','surfaceReceivers','replaceLightIds'}
+    if (not isinstance(selection,dict) or set(selection)!=fields or type(selection['schemaVersion']) is not int
+            or selection['schemaVersion']!=1 or not isinstance(source_scene,str) or not source_scene
+            or selection['sourceScene']!=source_scene or type(selection['event']) is not int or selection['event']<=0
+            or type(selection['surfaceReceivers']) is not bool or not isinstance(selection['namespace'],str)
+            or not re.fullmatch(r'[A-Za-z][A-Za-z0-9_.-]{0,63}',selection['namespace'])):
+        raise ValueError('Captured light selection requires explicit version, scene, event, namespace and receivers')
+    for name in ['tileWords','depthWords']:
+        words=selection[name]
+        if not isinstance(words,list) or len(words)!=8 or any(type(w) is not int or not 0<=w<2**32 for w in words):
+            raise ValueError('Captured light masks require eight uint32 words')
+    indices=selection['indices']
+    if (not isinstance(indices,list) or not indices or any(type(i) is not int or not 0<=i<256 for i in indices)
+            or len(set(indices))!=len(indices)):
+        raise ValueError('Captured light selection requires unique valid indices')
+    origin=selection['origin']
+    if not isinstance(origin,list) or len(origin)!=3 or any(type(v) not in (int,float) or not math.isfinite(v) for v in origin):
+        raise ValueError('Captured origin requires three finite coordinates')
+    for index in indices:
+        if not (selection['tileWords'][index//32]&selection['depthWords'][index//32]&(1<<(index%32))):
+            raise ValueError('Captured light index is outside the confirmed active masks')
+    records=decode_records(raw,indices,origin=origin)
+    replacements=selection['replaceLightIds']
+    if (not isinstance(replacements,list) or any(not isinstance(x,str) or not x for x in replacements)
+            or len(set(replacements))!=len(replacements)):
+        raise ValueError('Captured light replacement identities must be unique strings')
+    if not isinstance(level,dict) or any(not isinstance(level.get(name),list) for name in ['lights','nodes']):
+        raise ValueError('Captured light binding requires level nodes and lights')
+    identities={}
+    for name in ['lights','nodes']:
+        values=[row.get('id') if isinstance(row,dict) else None for row in level[name]]
+        if any(not isinstance(x,str) or not x for x in values) or len(set(values))!=len(values):
+            raise ValueError('Invalid or duplicate captured target '+name)
+        identities[name]=set(values)
+    if not set(replacements)<=identities['lights']:raise ValueError('Missing captured replacement light identity')
+    if len(level['lights'])-len(replacements)+len(records)>128:raise ValueError('Captured snapshot exceeds runtime light capacity')
+    result=copy.deepcopy(level);result['lights']=[l for l in result['lights'] if l['id'] not in replacements];bindings=[]
+    for record in records:
+        if record['mode'] not in (0,16) or record['cookieIndex']>=0 or record['linearLength']!=0:
+            raise ValueError('Captured mode, cookie or line emitter requires a separately verified consumer')
+        identity=selection['namespace']+'-'+str(record['sourceIndex'])
+        if identity in identities['lights'] or identity in identities['nodes']:raise ValueError('Captured light identity collision')
+        identities['lights'].add(identity);identities['nodes'].add(identity)
+        shape=copy.deepcopy(record['shape']);shape['receivers']=render_light_receivers(dict(npr_type=record['mode'],character_only=not selection['surfaceReceivers']))
+        if record['mode']==0:shape['characterResponse']=render_character_response(record)
+        node=dict(id=identity,name=identity,parentId='',components={'azure.transform':dict(type='azure.transform',version=1,
+            data=dict(translation=record['position'],rotation=[0,0,0],scale=[1,1,1]))})
+        result['nodes'].append(node);result['lights'].append(dict(id=identity,nodeId=identity,color=record['color'],intensity=record['intensity'],radius=record['radius'],enabled=True,shape=shape))
+        bindings.append(dict(light=identity,sourceIndex=record['sourceIndex'],mode=record['mode'],rawRecordHex=record['rawRecordHex'],rawShadowWords=record['rawShadowWords']))
+    receipt=dict(schemaVersion=1,sourceScene=source_scene,event=selection['event'],indices=list(indices),namespace=selection['namespace'],
+        replacedLights=len(replacements),replacementIds=list(replacements),createdLights=len(records),origin=list(origin),
+        activeMasks={name:list(selection[name]) for name in ['tileWords','depthWords']},
+        coordinateConvention='source-world-minus-origin-then-x-reflection',surfaceReceivers=selection['surfaceReceivers'],bindings=bindings)
+    return result,receipt

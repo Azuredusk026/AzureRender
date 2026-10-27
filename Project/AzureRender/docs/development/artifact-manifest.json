@@ -417,6 +417,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-color-grading-lut.json",
       "primaryProject": "full-candidate/lut-default.azureproject"
+    },
+    {
+      "path": "runs/20261028-001254-captured-active-light-snapshot-7decb5",
+      "pathBase": "build",
+      "purpose": "活动索引、灯光快照、双配置分项及角色接收回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-active-lights.json",
+      "primaryProject": "full-candidate/active-native.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

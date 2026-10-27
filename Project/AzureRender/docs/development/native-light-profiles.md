@@ -1,7 +1,7 @@
-# 原生灯光倍率绑定
+# 原生灯光绑定
 
 `tools/bind_native_light_profiles.py` 生成关卡快照。
-来源为 `AzureEndfieldEcsLights/1` 灯光档案。
+来源包括 ECS 灯光档案及明确选择的截帧常量。
 调用者须明确选择来源场景。
 转换属于内容工具层，运行时使用现有灯光契约。
 
@@ -72,3 +72,45 @@ RGBA 的透明分量保留在来源收据中。
 调用结果及收据共同报告该边界。
 
 实际颜色、失败输入及截帧对照见[颜色验收](../acceptance/nr/local-light-color-space.md)。
+
+## 活动截帧快照
+
+`--captured-constants` 与 `--profiles` 互斥。
+截帧常量采用已核验的 CB3 完整记录布局。
+`--selection` 提供版本一的明确选择。
+所有输入及选择文件的摘要进入来源收据。
+
+选择包含以下字段：
+
+| 字段 | 约束与职责 |
+| --- | --- |
+| `schemaVersion` | 固定为整数一 |
+| `sourceScene`、`event` | 明确场景与正整数事件 |
+| `namespace` | 最长 64 字符的灯光身份前缀 |
+| `indices` | 唯一的零至 255 索引 |
+| `origin` | 三个有限世界坐标 |
+| `tileWords`、`depthWords` | 各八个无符号 32 位遮罩字 |
+| `surfaceReceivers` | 明确选择普通表面接收 |
+| `replaceLightIds` | 当前关卡中唯一且存在的替换身份 |
+
+工具先校验活动遮罩，再解码所选记录。
+坐标先减去来源原点，再执行来源约定的 X 反射。
+新灯光使用世界根节点，方向及灯盒采用同一世界约定。
+未选择的灯光及原有节点保持各自配置。
+
+支持默认角色响应和普通模式十六。
+普通模式的角色接收位为假。
+Cookie、有限长度和其他专用模式要求独立消费证明。
+输出灯光总量须符合运行时 128 盏的容量。
+
+```powershell
+python tools/bind_native_light_profiles.py `
+  --level input.azurelevel --captured-constants lights.bin `
+  --selection selection.json --source-scene base01_lv001 `
+  --output active.azurelevel --receipt binding.json
+```
+
+截帧输出收据采用版本二。
+它保存常量、选择、源事件、活动遮罩及逐记录字节。
+ECS 档案输出继续采用版本一。
+实际选择及画面见[快照验收](../acceptance/nr/captured-active-lights.md)。
