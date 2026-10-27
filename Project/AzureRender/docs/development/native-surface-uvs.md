@@ -7,10 +7,16 @@
 
 ## 作者法线
 
-`native_mesh_frames.py` 包装明确提供的原生 OBJ 导入器。
-位置与方向使用来源的 X 反射和 Blender 轴约定。
+`native_mesh_frames.py` 通过 Blender 导入来源 OBJ。
+位置与方向使用精确的 X 反射和轴置换。
+位置与 UV 在单精度存储域中匹配。
 绕序转换完成后，法线按源三角形角点重新绑定。
 网格保存 `NativeObjCornerNormals/1` 收据。
+
+导入器明确处理分组、绕序及对象所有权。
+非法作者位置与 UV 在导入前校验。
+大平铺坐标和大型几何均使用相同存储约定。
+批量接入及精度验证见[静态法线](../acceptance/nr/static-authored-normals.md)。
 
 源面采用完整的正索引，支持独立的位置、UV 和法线索引。
 作者法线须有限且非零，转换按单位方向保存。

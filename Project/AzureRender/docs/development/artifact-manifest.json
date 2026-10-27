@@ -426,6 +426,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-active-lights.json",
       "primaryProject": "full-candidate/active-native.azureproject"
+    },
+    {
+      "path": "runs/20261028-003640-static-authored-normal-batch-d5c959",
+      "pathBase": "build",
+      "purpose": "中央作者法线、精确轴置换及双配置真实场景验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/static-authored-normals.json",
+      "primaryProject": "full-candidate/normals-default.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

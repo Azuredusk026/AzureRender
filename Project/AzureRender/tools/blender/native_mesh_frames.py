@@ -1,7 +1,8 @@
-"""Restore authored normal corners after the pinned probe's OBJ conversion."""
+"""Import native OBJ with exact source axes and authored normal corners."""
 from pathlib import Path
 import hashlib
 import json
+import re
 import numpy as np
 
 from endfield_native.mesh_corners import match_triangle_corners
@@ -29,6 +30,14 @@ def _obj_normal_corners(path):
     normals=np.asarray(normals,dtype=float);length=np.linalg.norm(normals,axis=1)
     if np.any(length<1e-12):raise ValueError('Native OBJ has a zero authored normal')
     normals/=length[:,None]
+    # Blender geometry and native GPU streams both store float32 values.
+    # Canonicalize text before applying the unchanged corner tolerances.
+    for values in [positions,uvs]:
+        if not values:continue
+        coordinates=np.asarray(values,dtype=np.float64)
+        if np.max(np.abs(coordinates))>np.finfo(np.float32).max:
+            raise ValueError('Native OBJ stream exceeds float32 storage')
+        values[:]=coordinates.astype(np.float32).astype(np.float64).tolist()
     keys={};p,u,n,triangles=[],[],[],[]
     for face in faces:
         if len(face)!=3:raise ValueError('Native authored normal matching requires triangle faces')
@@ -70,14 +79,28 @@ def restore_obj_normals(meshes,path):
 
 
 def import_native_obj(path):
-    from blender_build_map02_chunk_20260727 import import_obj
+    import bpy
+    from mathutils import Matrix
     path=Path(path).resolve(strict=True);source=_obj_normal_corners(path)
-    objects=import_obj(path)
-    try:_restore_obj_normals([obj.data for obj in objects],path,source)
-    except Exception:
-        import bpy
+    before=set(bpy.data.objects)
+    try:
+        bpy.ops.wm.obj_import(filepath=str(path),forward_axis='NEGATIVE_Z',up_axis='Y',
+            use_split_objects=False,use_split_groups=True)
+        objects=[obj for obj in set(bpy.data.objects)-before if obj.type=='MESH']
+        if not objects:raise ValueError('Native OBJ contains no triangle meshes')
+        # Bake the source axis contract as an exact signed permutation.
+        # The temporary object rotation is represented through Euler angles.
+        basis=Matrix(((-1,0,0,0),(0,0,-1,0),(0,1,0,0),(0,0,0,1)))
         for obj in objects:
-            mesh=obj.data;bpy.data.objects.remove(obj,do_unlink=True)
-            if mesh.users==0:bpy.data.meshes.remove(mesh)
+            obj.data.transform(basis);obj.data.flip_normals();obj.data.update()
+            obj.matrix_world=Matrix.Identity(4)
+        _restore_obj_normals([obj.data for obj in objects],path,source)
+        def group_order(obj):
+            match=re.search(r'_(\d+)(?:\.\d+)?$',obj.name)
+            return (int(match[1]) if match else 0,obj.name.casefold())
+        return sorted(objects,key=group_order)
+    except Exception:
+        for obj in set(bpy.data.objects)-before:
+            mesh=obj.data if obj.type=='MESH' else None;bpy.data.objects.remove(obj,do_unlink=True)
+            if mesh is not None and mesh.users==0:bpy.data.meshes.remove(mesh)
         raise
-    return objects

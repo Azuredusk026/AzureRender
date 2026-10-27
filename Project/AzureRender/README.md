@@ -24,6 +24,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 局部灯源颜色、单精度解码及温度边界见[颜色验收](docs/acceptance/nr/local-light-color-space.md)。
 活动颜色表、硬件采样及实际镜头见[调色验收](docs/acceptance/nr/captured-color-grading-lut.md)。
 活动灯光索引、公共快照及接收范围见[灯光验收](docs/acceptance/nr/captured-active-lights.md)。
+静态作者法线与精确轴置换见[批量验收](docs/acceptance/nr/static-authored-normals.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

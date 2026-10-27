@@ -45,7 +45,8 @@ if args.adapter=='native':
     malformed=[original.replace('1/1/1','1/1',1),original.replace('1/1/1','99/1/1',1),
         original.replace(next(line for line in lines if line.startswith('vn ')),'vn 0 0 0',1),
         original.replace(next(line for line in lines if line.startswith('vn ')),'vn nan 1 0',1),
-        original.replace('f 1/1/1 2/2/1 3/3/1','f 1/1/1 2/2/1 3/3/1 4/4/1')]
+        original.replace('f 1/1/1 2/2/1 3/3/1','f 1/1/1 2/2/1 3/3/1 4/4/1'),
+        original.replace('vt 0 0','vt 1e100 0'),original.replace(lines[0],'v 1e100 0 0')]
     for index,text in enumerate(malformed):
         bad=args.output/f'invalid-{index}.obj';bad.write_text(text)
         before=(len(bpy.data.objects),len(bpy.data.meshes))
@@ -63,7 +64,27 @@ if args.adapter=='native':
         expected=normals[int(obj.name.split('.')[0].rsplit('_',1)[-1])]
         expected=np.asarray([expected[0],-expected[2],expected[1]])
         assert max(np.linalg.norm(np.asarray(n.vector)-expected) for n in obj.data.corner_normals)<1e-4
-    extra=dict(invalidInputs=len(malformed),generatedNormals=True,authoredNormalsWithoutUv=True)
+    tiled=args.output/'tiled-uv.obj'
+    tiled.write_text(original.replace('vt 0 0','vt 103.123456 51.987654').replace('vt 1 0','vt 104.123456 51.987654')
+        .replace('vt 1 1','vt 104.123456 52.987654').replace('vt 0 1','vt 103.123456 52.987654'))
+    tiled_objects=import_obj(tiled);assert len(tiled_objects)==2
+    for obj in tiled_objects:
+        expected=normals[int(obj.name.split('.')[0].rsplit('_',1)[-1])];expected=np.asarray([expected[0],-expected[2],expected[1]])
+        control=obj.data.copy();control.normals_split_custom_set([expected.tolist()]*len(control.loops));control.update()
+        np.testing.assert_allclose([list(n.vector) for n in obj.data.corner_normals],[list(n.vector) for n in control.corner_normals],rtol=0,atol=2e-5)
+        bpy.data.meshes.remove(control)
+    large_points=np.asarray(points)+np.array([71.23456789,39.12345678,-82.98765432])
+    large_lines=tiled.read_text().splitlines();cursor=0
+    for index,line in enumerate(large_lines):
+        if line.startswith('v '):
+            x,y,z=large_points[cursor];large_lines[index]=f'v {-x} {y} {z}';cursor+=1
+    large_source=args.output/'large-coordinates.obj';large_source.write_text('\n'.join(large_lines)+'\n')
+    large_objects=import_obj(large_source);assert len(large_objects)==2
+    expected_positions=large_points[:,[0,2,1]].astype(np.float32);expected_positions[:,1]*=-1
+    for obj in large_objects:
+        group=int(obj.name.split('.')[0].rsplit('_',1)[-1]);selected=[0,1,2] if group==0 else [0,2,3]
+        assert {tuple(v.co) for v in obj.data.vertices}=={tuple(v) for v in expected_positions[selected]}
+    extra=dict(invalidInputs=len(malformed),generatedNormals=True,authoredNormalsWithoutUv=True,tiledUvFloat32=True,exactAxesFloat32=True)
 result=dict(status='passed' if maximum<2e-5 else 'failed',maximumError=maximum,budget=2e-5,meshes=rows,
             flipNormalsDocumentation=objects[0].data.flip_normals.__doc__,extra=extra)
 (args.output/'summary.json').write_text(json.dumps(result,indent=2)+'\n')

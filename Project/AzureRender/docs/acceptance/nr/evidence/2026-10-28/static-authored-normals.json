@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "phase": "NR1-S5",
+  "status": "central-static-authored-normals-passed",
+  "run": "build/runs/20261028-003640-static-authored-normal-batch-d5c959",
+  "source": {
+    "tools/blender/native_mesh_frames.py": "9efca6bb83d469b2a633fedeaa58499ca23fc4b0817c2435a8802df35b72ca3d",
+    "tools/blender/test_native_mesh_frames.py": "91ea7a5dab7ed7ffa1a548462fcc0917879f79b33bfb7311ead2e0833858a63c"
+  },
+  "tests": {
+    "blenderFixture": {
+      "invalidInputs": 7,
+      "generatedNormals": true,
+      "authoredNormalsWithoutUv": true,
+      "tiledUvFloat32": true,
+      "exactAxesFloat32": true
+    },
+    "normalControlError": 0.0,
+    "normalControlBudget": 2e-05,
+    "cpuRegression": 18,
+    "gpuCaptures": 11,
+    "configurationAndDescriptorExact": true,
+    "miniPanelPixelsMatchFull": true
+  },
+  "geometry": {
+    "mapped": 44,
+    "unreferenced": 16,
+    "sourcePositionError": 0,
+    "sourceUvError": 0,
+    "materialAndImageBytesExact": true,
+    "uv0Exact": true,
+    "maximumNormalChangeDegrees": 179.56210883475276
+  },
+  "fullCamera": {
+    "native": {
+      "meanAbsoluteByteError": 17.871727340133102,
+      "panelRgb": [
+        [
+          42,
+          44,
+          41
+        ],
+        [
+          39,
+          40,
+          34
+        ]
+      ]
+    },
+    "default": {
+      "meanAbsoluteByteError": 17.848314344618057,
+      "panelRgb": [
+        [
+          41,
+          43,
+          40
+        ],
+        [
+          39,
+          40,
+          34
+        ]
+      ]
+    }
+  },
+  "normalComparison": {
+    "validSource": {
+      "pixels": 3686400,
+      "before": {
+        "mean": 13.825776548852941,
+        "median": 2.3872379703109856
+      },
+      "after": {
+        "mean": 11.752181273942588,
+        "median": 0.8180808564581512
+      }
+    },
+    "matchingAlbedo": {
+      "pixels": 2151685,
+      "before": {
+        "mean": 8.915803437289552,
+        "median": 1.0218242579518801
+      },
+      "after": {
+        "mean": 6.5202654127415425,
+        "median": 0.5619080676104832
+      }
+    },
+    "changedMatchingAlbedo": {
+      "pixels": 560479,
+      "before": {
+        "mean": 25.20313793376424,
+        "median": 24.291641196903583
+      },
+      "after": {
+        "mean": 16.008670742882618,
+        "median": 2.318951700053478
+      }
+    }
+  },
+  "primaryProject": "full-candidate/normals-default.azureproject",
+  "boundaries": [
+    "Image masks do not establish identical geometry across the entire frame.",
+    "Other static resource groups and NR0-NR12 final gates remain open."
+  ],
+  "artifacts": [
+    {
+      "path": "geometry-source-index.json",
+      "sha256": "0ddd1b9abc9dc94b143893444f5950241d223736e22126a595a8400ed9a29c6e"
+    },
+    {
+      "path": "geometry-export-exact.json",
+      "sha256": "434e6d399aa775d42ca1498590415e4a2d1f98cb9624eb676a6c6d4ecf43da22"
+    },
+    {
+      "path": "geometry-application.json",
+      "sha256": "ef62db5efa4b1fd97de06139c4dabf053a738a0d5101c976cd4b212818ed8697"
+    },
+    {
+      "path": "geometry-gpu.json",
+      "sha256": "8ef56fe4c530b59838269483a57681b4eb1d2e1d72d6d3c2eb7157aaff08df90"
+    },
+    {
+      "path": "full-geometry-comparison.json",
+      "sha256": "c02f7d1ecf43d28b55131bf105e2889c65cbf375d92e3b19b1ad3e98aa4ceb38"
+    },
+    {
+      "path": "source-normal-comparison.json",
+      "sha256": "83eb46bacbd1974ad5a67b84e85be7278a1e483e84c92d1932a355850e3195ff"
+    },
+    {
+      "path": "exact-axes-final/summary.json",
+      "sha256": "cd9731c25dc2b80f4a3b40ff33ca7489e5e8c52ef4b33bcf1a8b58a5d6fab9fa"
+    },
+    {
+      "path": "exact-axes-final.log",
+      "sha256": "1b1390951837d43752425d21b5777b06bd78b659251342a24667d03b0102fee6"
+    },
+    {
+      "path": "corners-final.log",
+      "sha256": "a452765834500d51fb38dc210afa3293cc98058cf0221ff94d549945e97de74f"
+    },
+    {
+      "path": "spline-final.log",
+      "sha256": "a954fc90a88b515c9787547331a8d359423f53647a573beba32d34b045d20fc3"
+    },
+    {
+      "path": "exchange-final.log",
+      "sha256": "90fcabc0233280de79c8b57c61bb7cce6620d85bb536ef0648f285119e64f9d0"
+    },
+    {
+      "path": "normal-batch-side-by-side.png",
+      "sha256": "f482a8200041f10757fc7adefe08ee2ea4b35a72c86acb335814db1829874b40"
+    },
+    {
+      "path": "mini-debug-fixed-shaded-normal/frames/capture_manifest.json",
+      "sha256": "d36e916555482b69f8b489835a98b3c7f08297890fb5f33d072255ead70caccb"
+    },
+    {
+      "path": "mini-debug-fixed-world-normal/frames/capture_manifest.json",
+      "sha256": "dda0c4ee5a9875a333434d527b71b0d2cc14994bf62401f98faadce9aadca722"
+    },
+    {
+      "path": "mini-debug-indexed-shaded-normal/frames/capture_manifest.json",
+      "sha256": "f37bae995af18ed6472a0f32409dcebb32c241c7247d172e532676db70b5c5a8"
+    },
+    {
+      "path": "mini-debug-indexed-world-normal/frames/capture_manifest.json",
+      "sha256": "393a98949face39ccc6c73fa96f508377520526ad993d4f928187b7a718c91fd"
+    },
+    {
+      "path": "mini-release-fixed-shaded-normal/frames/capture_manifest.json",
+      "sha256": "7896ae1c889400f80cc9fcc9210e10d2813510250c913f542878af05cf0f0495"
+    },
+    {
+      "path": "mini-release-fixed-world-normal/frames/capture_manifest.json",
+      "sha256": "f7c826f225dd67a5077605d46b33d795720e8b92bbfbb9d131a15baa8ad29e7c"
+    },
+    {
+      "path": "mini-release-indexed-shaded-normal/frames/capture_manifest.json",
+      "sha256": "a363261c23c7c49d1f8584123e825d4b7cb2a4b5e3e8ecbe2baa3ef2f7ce9b4a"
+    },
+    {
+      "path": "mini-release-indexed-world-normal/frames/capture_manifest.json",
+      "sha256": "f10cb1e9b88aba286808d42b498f93352bda8f449dad6e324a86963ea906c77e"
+    },
+    {
+      "path": "full-default/frames/capture_manifest.json",
+      "sha256": "4d27d2d9951dbf4facd44f0ba49ea826e02c710a7ba67492468879da46c1b551"
+    },
+    {
+      "path": "full-native/frames/capture_manifest.json",
+      "sha256": "4b6f30d66a9bd1c828766e534059f06e8827d3bbf285950bfb4ccecbd2e0d2f0"
+    },
+    {
+      "path": "full-normal/frames/capture_manifest.json",
+      "sha256": "590967198b4c7c4eeaa6957b288f8d9f783b97ebb2929a8443f227e358f82c26"
+    }
+  ]
+}

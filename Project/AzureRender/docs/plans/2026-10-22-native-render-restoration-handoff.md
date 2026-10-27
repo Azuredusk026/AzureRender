@@ -18,6 +18,7 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 局部灯源颜色与逐位对照见[颜色验收](../acceptance/nr/local-light-color-space.md)。
 活动颜色表及实际消费见[调色验收](../acceptance/nr/captured-color-grading-lut.md)。
 活动灯光和接收范围见[快照验收](../acceptance/nr/captured-active-lights.md)。
+静态作者法线与精确轴置换见[批量验收](../acceptance/nr/static-authored-normals.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。
