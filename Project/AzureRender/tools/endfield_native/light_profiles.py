@@ -4,6 +4,8 @@ import math
 import re
 import struct
 
+from .captured_lights import decode_directional_header
+
 
 def _scale(value):
     if type(value) not in (int,float) or not math.isfinite(value) or not 0<=value<=3.4028234663852886e38:
@@ -49,3 +51,23 @@ def bind_specular_profiles(level,profile,*,source_scene):
     if not bindings:raise ValueError('Level contains no native lights to bind')
     return result,dict(schemaVersion=1,sourceScene=source_scene,boundLights=len(bindings),
         changedLights=sum(b['previous']!=b['value'] for b in bindings),unmappedLights=unmapped,bindings=bindings)
+
+
+def bind_directional_radiometry(level,raw,*,light_id,enabled):
+    """Bind captured radiometry; the caller owns the existing local/world direction mapping."""
+    decoded=decode_directional_header(raw)
+    if type(enabled) is not bool or not isinstance(light_id,str) or not light_id:
+        raise ValueError('Main light binding requires an explicit identity and boolean activation')
+    if not isinstance(level,dict) or not isinstance(level.get('lights'),list):
+        raise ValueError('Main light binding requires a level light list')
+    if any(not isinstance(light,dict) for light in level['lights']):raise ValueError('Invalid target light record')
+    targets=[light for light in level['lights'] if light.get('id')==light_id]
+    if len(targets)!=1 or not isinstance(targets[0].get('shape'),dict) or targets[0]['shape'].get('type')!='directional':
+        raise ValueError('Main light binding requires one directional target identity')
+    result=copy.deepcopy(level);target=next(light for light in result['lights'] if light.get('id')==light_id)
+    previous={key:copy.deepcopy(target.get(key)) for key in ['color','intensity','enabled']}
+    previous['specularScale']=target['shape'].get('specularScale',1)
+    target.update(color=decoded['color'],intensity=decoded['intensity'],enabled=enabled)
+    target['shape']['specularScale']=decoded['specularScale']
+    return result,dict(schemaVersion=1,light=light_id,enabled=enabled,previous=previous,
+        directionBinding='existing-local-direction',**decoded)

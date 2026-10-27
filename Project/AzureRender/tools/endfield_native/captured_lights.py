@@ -14,6 +14,19 @@ def _finite(value,minimum,maximum,name):
     return value
 
 
+def decode_directional_header(raw):
+    """Decode the caller-confirmed six-row deferred CB3 header in source coordinates."""
+    if len(raw)!=96:raise ValueError('Captured directional header must contain six rows')
+    rows=[struct.unpack_from('<4f',raw,i*16) for i in range(6)]
+    direction=[_finite(v,-1,1,'main direction') for v in rows[0][:3]]
+    if abs(sum(v*v for v in direction)-1)>1e-4:raise ValueError('Captured main direction must be normalized')
+    radiance=[_finite(v,0,65536,'main radiance') for v in rows[1][:3]]
+    intensity=max(radiance)
+    return dict(sourceDirection=direction,radiance=radiance,intensity=intensity,
+        color=[v/intensity for v in radiance] if intensity else [0,0,0],
+        specularScale=_finite(rows[4][0],0,65536,'main specular scale'),rawHeaderHex=bytes(raw).hex())
+
+
 def _direction(encoded):
     x,y=[_finite(v,-1,1,'encoded axis') for v in encoded]
     z=.5*y+.5-abs(x)

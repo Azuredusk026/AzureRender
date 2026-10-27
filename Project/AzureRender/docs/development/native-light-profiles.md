@@ -36,3 +36,20 @@ python tools/bind_native_light_profiles.py `
 它返回关卡副本和绑定收据，适用于批处理与夹具。
 运行行为见[逐灯镜面响应](../runtime/light-specular-response.md)。
 实际来源及画面见[绑定验收](../acceptance/nr/local-light-profile-binding.md)。
+
+## 活动主光辐照
+
+调用者确认事件后，可提供 CB3 的前六行字节。
+`decode_directional_header` 读取源世界方向与辐照输入。
+颜色取第二行 RGB，镜面倍率取第五行 X。
+颜色和强度按最大颜色通道拆分，保留原始字节。
+
+主光绑定须同时提供 `--main-header`、`--main-light` 和 `--main-enabled`。
+启用值为零或一，来自调用者确认的活动状态。
+目标须为唯一的方向光。
+工具更新颜色、强度、镜面倍率及启用状态。
+
+`bind_directional_radiometry` 保留目标的局部方向。
+调用者须核对源世界方向与关卡节点变换。
+运行快照按节点矩阵转换局部方向。
+常量、方向及实际图像见[主光验收](../acceptance/nr/main-light-runtime-binding.md)。

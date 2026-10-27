@@ -8,9 +8,47 @@ import tempfile
 import unittest
 
 from endfield_native.light_profiles import bind_specular_profiles
+from endfield_native.light_profiles import bind_directional_radiometry
 
 
 class NativeLightProfileTests(unittest.TestCase):
+    def main_header(self):
+        raw=bytearray(96)
+        struct.pack_into('<4f',raw,0,0,-1,0,0)
+        struct.pack_into('<4f',raw,16,2,3,4,4)
+        struct.pack_into('<4f',raw,64,.195,0,1,0)
+        return raw
+
+    def test_main_radiometry_preserves_local_direction_and_other_lights(self):
+        before=copy.deepcopy(self.level)
+        self.level['lights'][2]['shape']['direction']=[1,0,0]
+        result,receipt=bind_directional_radiometry(self.level,self.main_header(),light_id='project-sun',enabled=True)
+        light=result['lights'][2]
+        self.assertEqual(light['color'],[.5,.75,1]);self.assertEqual(light['intensity'],4)
+        self.assertAlmostEqual(light['shape']['specularScale'],.195,places=7)
+        self.assertEqual(light['shape']['direction'],[1,0,0]);self.assertTrue(light['enabled'])
+        self.assertEqual(result['lights'][:2],before['lights'][:2])
+        self.assertEqual(receipt['sourceDirection'],[0,-1,0]);self.assertEqual(receipt['directionBinding'],'existing-local-direction')
+
+    def test_main_radiometry_requires_directional_identity_and_explicit_activation(self):
+        for identity,enabled in [('missing',True),('native-light-7',True),('project-sun',1)]:
+            with self.subTest(identity=identity,enabled=enabled),self.assertRaises(ValueError):
+                bind_directional_radiometry(self.level,self.main_header(),light_id=identity,enabled=enabled)
+
+    def test_main_header_rejects_length_nonfinite_radiometry_and_invalid_direction(self):
+        variants=[self.main_header()[:-1]]
+        for offset,value in [(0,float('nan')),(4,0),(16,-1),(20,float('inf')),(64,-1)]:
+            raw=self.main_header();struct.pack_into('<f',raw,offset,value);variants.append(raw)
+        for raw in variants:
+            with self.subTest(header=raw.hex()),self.assertRaises(ValueError):
+                bind_directional_radiometry(self.level,raw,light_id='project-sun',enabled=True)
+
+    def test_zero_main_radiometry_and_disabled_activation_are_valid(self):
+        raw=self.main_header();struct.pack_into('<4f',raw,16,0,0,0,0)
+        result,_=bind_directional_radiometry(self.level,raw,light_id='project-sun',enabled=False)
+        self.assertEqual(result['lights'][2]['color'],[0,0,0]);self.assertEqual(result['lights'][2]['intensity'],0)
+        self.assertFalse(result['lights'][2]['enabled'])
+
     def setUp(self):
         self.level={'schemaVersion':1,'lights':[
             {'id':'native-light-7','shape':{'type':'point','specularScale':1},'intensity':3},
@@ -71,6 +109,16 @@ class NativeLightProfileTests(unittest.TestCase):
             self.assertEqual(level.read_bytes(),before);self.assertEqual(json.loads(receipt.read_text())['binding']['boundLights'],2)
             saved=output.read_bytes();repeated=subprocess.run(command,capture_output=True)
             self.assertNotEqual(repeated.returncode,0);self.assertEqual(output.read_bytes(),saved)
+            header=root/'main.bin';header.write_bytes(self.main_header())
+            main_command=command.copy();main_output=root/'main.azurelevel';main_receipt=root/'main-receipt.json'
+            main_command[main_command.index('--output')+1]=str(main_output)
+            main_command[main_command.index('--receipt')+1]=str(main_receipt)
+            partial=subprocess.run(main_command+['--main-header',str(header)],capture_output=True)
+            self.assertNotEqual(partial.returncode,0);self.assertFalse(main_output.exists());self.assertFalse(main_receipt.exists())
+            subprocess.run(main_command+['--main-header',str(header),'--main-light','project-sun','--main-enabled','0'],check=True,capture_output=True)
+            self.assertEqual(json.loads(main_output.read_text())['lights'][2]['intensity'],4)
+            self.assertFalse(json.loads(main_receipt.read_text())['mainBinding']['enabled'])
+            self.assertEqual(level.read_bytes(),before)
 
 
 if __name__=='__main__':unittest.main()
