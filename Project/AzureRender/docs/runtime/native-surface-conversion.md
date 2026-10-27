@@ -1,6 +1,6 @@
 # 原生表面转换
 
-独立 UV 流及网格目标烘焙见[原生 UV 转换](../development/native-surface-uvs.md)。
+作者法线、独立 UV 流及目标烘焙见[原生网格转换](../development/native-surface-uvs.md)。
 
 原生场景和样条共用 `native_surface_materials.py`。
 该模块包装显式提供的 Blender 提取器。

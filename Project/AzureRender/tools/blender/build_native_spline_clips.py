@@ -48,7 +48,7 @@ def main():
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     tools = Path(__file__).resolve().parents[1]
     sys.path[:0] = [str(tools), str(tools / 'blender'), str(args.extractor_src)]
-    from blender_build_map02_chunk_20260727 import import_obj
+    from native_mesh_frames import import_native_obj as import_obj
     from blender_scene_effects import _owner_matrix_root_relative, _blender_matrix
     from native_spline_materials import create_material
     from endfield_scene_material_contract import load_catalog, reference_key
@@ -64,6 +64,7 @@ def main():
               tools / 'endfield_native/spline_bake.py', tools / 'endfield_native/vfx_profile.py',
               tools / 'blender/native_spline_materials.py',
               tools / 'blender/native_surface_materials.py',
+              tools / 'blender/native_mesh_frames.py',tools / 'endfield_native/mesh_corners.py',
               tools / 'blender/bake_material_channels.py']
     inputs.extend(args.extractor_src / name for name in (
         'blender_scene_materials.py', 'blender_scene_effect_layers.py',
@@ -108,6 +109,7 @@ def main():
                 mesh_inputs.append({'identity': mesh_record['Asset'], 'path': str(mesh_path),
                                     'sha256': hashlib.sha256(mesh_path.read_bytes()).hexdigest()})
                 objects = import_obj(mesh_path)
+                mesh_inputs[-1]['normalStreams']=[json.loads(obj.data['azureNativeNormalReceipt']) for obj in objects]
                 owner = owners[reference_key(draw['identity'])]
                 relative = _owner_matrix_root_relative(nodes, reference_key(group['GameObject']),
                                                        reference_key(owner))

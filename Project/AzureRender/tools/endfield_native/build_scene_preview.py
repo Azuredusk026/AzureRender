@@ -43,8 +43,9 @@ def main():
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     sys.path.insert(0, str(source))
-    from blender_build_map02_chunk_20260727 import import_obj, unity_matrix
+    from blender_build_map02_chunk_20260727 import unity_matrix
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'blender'))
+    from native_mesh_frames import import_native_obj as import_obj
     from native_surface_materials import create_material,configure_uv_sampling
     from endfield_scene_material_contract import load_catalog, reference_key
     manifest_path = probe / 'scene_manifest.json'
@@ -65,6 +66,7 @@ def main():
     mesh_cache, material_cache, draw_cache = {}, {}, {}
     bake_reports = []
     uv_reports = []
+    normal_reports = []
     audit = []
     max_matrix_error = 0.0
     basis = Matrix(((1,0,0,0), (0,0,-1,0), (0,1,0,0), (0,0,0,1)))
@@ -88,6 +90,7 @@ def main():
             if key not in mesh_cache:
                 objects = import_obj(probe / exported['File'])
                 mesh_cache[key] = [obj.data for obj in objects]
+                normal_reports.extend(json.loads(mesh['azureNativeNormalReceipt']) for mesh in mesh_cache[key])
                 if args.mesh_bake_uv:
                     from native_mesh_uvs import restore_uv1
                     uv_reports.append(restore_uv1(mesh_cache[key],exported,probe))
@@ -191,11 +194,13 @@ def main():
                   maximum_source_bounds_overflow=maximum_bounds_overflow,
                   inputs=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in (inventory, manifest_path, Path(__file__),
                       Path(__file__).resolve().parents[1] / 'blender/native_surface_materials.py',
+                      Path(__file__).resolve().parents[1] / 'blender/native_mesh_frames.py',
+                      Path(__file__).with_name('mesh_corners.py'),
                       Path(__file__).with_name('scene_sources.py'),
-                      source / 'blender_scene_materials.py',*uv_dependencies)],
+                      source / 'blender_scene_materials.py',source / 'blender_build_map02_chunk_20260727.py',*uv_dependencies)],
                   exchange_resources=len(exchange['resources']) if exchange else None,
                   baked_materials=bake_reports,
-                  mesh_bake_uv=args.mesh_bake_uv,uv_streams=uv_reports,
+                  mesh_bake_uv=args.mesh_bake_uv,uv_streams=uv_reports,normal_streams=normal_reports,
                   lod_policy=args.lod_policy,
                   lod_metric_squared=(args.lod_metric_squared or 0.0) if args.lod_policy == 'metric' else None,
                   limitations=['static authored LOD selection; runtime camera mapping unverified', 'upstream material approximation',
