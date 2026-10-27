@@ -141,6 +141,15 @@ int main() {
   parsed.save(root/"saved.azurelevel");auto reopened=Level::load(root/"saved.azurelevel",db);
   check(reopened.scene.nodes[0].translation[2]==17 && reopened.scene.nodes[0].prefabSource==prefabId);
   check(reopened.scene.reflectionProbe.blendDistance==.75F);
+  auto orientedLevel=level;orientedLevel["irradianceVolume"]["version"]=3;
+  orientedLevel["irradianceVolume"]["sampling"]["pixelOrigin"]="bottom-left";
+  orientedLevel["irradianceVolume"]["sampling"]["jitterSpace"]="field";
+  write(root/"assets/oriented.azurelevel",orientedLevel.dump());db.refresh();
+  auto orientedScene=Level::load(root/"assets/oriented.azurelevel",db);
+  orientedScene.save(root/"oriented-saved.azurelevel");
+  const auto orientedReloaded=Level::load(root/"oriented-saved.azurelevel",db);
+  check(orientedReloaded.scene.irradianceVolume.sampling.pixelOrigin==IrradianceQueryParameters::PixelOrigin::BottomLeft);
+  check(orientedReloaded.scene.irradianceVolume.sampling.jitterSpace==IrradianceQueryParameters::JitterSpace::Field);
   auto mappedLevel=level;
   mappedLevel["reflectionProbe"]["version"]=3;
   mappedLevel["reflectionProbe"]["lodMapping"]={{"schemaVersion",1},{"kind","logarithmic"},

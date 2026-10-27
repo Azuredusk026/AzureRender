@@ -11,8 +11,21 @@ int main(int argc,char** argv)try{
     cases.push_back({2,-3,4,.25F,0,1,0,0,0,0,0,0,2,-2.75F,4,-1});
     cases.push_back({2,-3,4,0,0,1,0,.2F,0,0,0,0,1.8F,-3.2F,3.8F,-1});
     cases.push_back(test::nativeIrradianceQueries[0]);cases.back()[8]+=.75F;cases.back()[9]+=.5F;cases.back()[10]+=.875F;
-    std::vector<std::array<float,12>> inputs(cases.size());
-    for(std::size_t i=0;i<cases.size();++i)std::copy_n(cases[i].begin(),12,inputs[i].begin());
+    std::vector<IrradianceQueryFrame> frames(cases.size());
+    for(auto row:test::nativeIrradianceQueries){
+        row[0]=-row[0];row[4]=-row[4];row[9]=1439-row[9];row[11]=7;row[12]=-row[12];
+        cases.push_back(row);frames.push_back({1440,{-1,0,0,0,1,0,0,0,1}});
+    }
+    const float diagonal=std::sqrt(.5F);
+    cases.push_back({2,-3,4,0,0,1,0,.2F,0,0,0,5,2,-3.2F,4-.2F*std::sqrt(2.F),-1});
+    frames.push_back({0,{diagonal,0,diagonal,0,1,0,-diagonal,0,diagonal}});
+    std::vector<std::array<float,28>> inputs(cases.size());
+    for(std::size_t i=0;i<cases.size();++i){
+        std::copy_n(cases[i].begin(),12,inputs[i].begin());
+        for(unsigned row=0;row<3;++row)for(unsigned column=0;column<3;++column)
+            inputs[i][12+row*4+column]=frames[i].worldToField[row*3+column];
+        inputs[i][24]=float(frames[i].viewportHeight);
+    }
     test::VulkanComputeFixture host;auto& backend=*host.backend;
     rhi::GpuBuffer input{},output{};VkDescriptorSetLayout setLayout{};VkDescriptorPool pool{};
     VkPipelineLayout layout{};VkShaderModule shader{};VkPipeline pipeline{};

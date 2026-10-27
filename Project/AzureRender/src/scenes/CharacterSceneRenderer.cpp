@@ -1549,7 +1549,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"irradianceQueryScope\": \"physical-surface\",\n"
          << "  \"irradianceQuery\": {\"normalOffset\":" << std::setprecision(std::numeric_limits<float>::max_digits10) << scene_.irradianceVolume.sampling.normalOffset
          << ",\"jitterAmplitude\":" << scene_.irradianceVolume.sampling.jitterAmplitude
-         << ",\"phase\":" << scene_.irradianceVolume.sampling.phase << "},\n" << std::setprecision(reportPrecision)
+         << ",\"phase\":" << scene_.irradianceVolume.sampling.phase
+         << ",\"pixelOrigin\":" << std::quoted(scene_.irradianceVolume.sampling.pixelOrigin==IrradianceQueryParameters::PixelOrigin::TopLeft?"top-left":"bottom-left")
+         << ",\"jitterSpace\":" << std::quoted(scene_.irradianceVolume.sampling.jitterSpace==IrradianceQueryParameters::JitterSpace::World?"world":"field")
+         << "},\n" << std::setprecision(reportPrecision)
          << "  \"pixelIntegralPipelineCount\": " << (std::count_if(hairIntegralPipelines_.begin(),hairIntegralPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})+std::count_if(hairIntegralSnapshotPipelines_.begin(),hairIntegralSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;})) << ",\n"
          << "  \"temporalSamplingPattern\": " << std::quoted(kTemporalSamplingPattern) << ",\n"
          << "  \"motionResponseEncoding\": \"coverage-reactivity-v3\",\n"
@@ -3775,7 +3778,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const auto& gi=scene_.irradianceVolume;
     uniform.irradianceOriginSpacing={irradianceVolume_.origin[0],irradianceVolume_.origin[1],irradianceVolume_.origin[2],irradianceVolume_.spacing};
     const auto& irradianceDimensions=irradianceClipmapActive_?irradianceClipmapDimensions_:irradianceVolume_.dimensions;
-    uniform.irradianceDimensionsEnabled={float(irradianceDimensions[0]),float(irradianceDimensions[1]),float(irradianceDimensions[2]),gi.enabled&&(irradianceClipmap_||!irradianceVolume_.cells.empty())?1.F:0.F};
+    uniform.irradianceDimensionsEnabled={float(irradianceDimensions[0]),float(irradianceDimensions[1]),float(irradianceDimensions[2]),
+        float(gi.sampling.enabledFlags(gi.enabled&&(irradianceClipmap_||!irradianceVolume_.cells.empty())))};
     uniform.irradianceParameters={gi.intensity,gi.sampling.normalOffset,gi.sampling.jitterAmplitude,gi.sampling.phase};
     std::memcpy(
         uniformBuffers_[currentFrame_].mapped,

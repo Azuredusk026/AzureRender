@@ -176,6 +176,13 @@ int main() {
         document.lights[0].shape.influenceBox.worldToBox[0]={0,.5F,0,-.5F};
         document.lights[0].shape.influenceBox.worldToBox[1]={-1,0,0,0};
         document.save(scenePath);
+        auto queryDocument=document;
+        queryDocument.irradianceVolume.sampling.pixelOrigin=azurerender::IrradianceQueryParameters::PixelOrigin::BottomLeft;
+        queryDocument.irradianceVolume.sampling.jitterSpace=azurerender::IrradianceQueryParameters::JitterSpace::Field;
+        queryDocument.save(directory/"query-frame.azscene");
+        const auto queryReloaded=azurerender::SceneDocument::load(directory/"query-frame.azscene");
+        assert(queryReloaded.irradianceVolume.sampling.pixelOrigin==azurerender::IrradianceQueryParameters::PixelOrigin::BottomLeft);
+        assert(queryReloaded.irradianceVolume.sampling.jitterSpace==azurerender::IrradianceQueryParameters::JitterSpace::Field);
         auto fieldDocument=document;fieldDocument.reflectionProbe.field=azurerender::ReflectionProbeField{};
         azurerender::ReflectionProbeVolume volume;volume.arrayLayer=2;volume.fade=.5F;fieldDocument.reflectionProbe.field->probes={volume};
         fieldDocument.reflectionProbe.field->worldToField[0][0]=-1;

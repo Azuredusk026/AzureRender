@@ -560,7 +560,15 @@ vec3 hsvToRgb(vec3 hsv){
 }
 vec4 evaluateIrradianceVolume(vec3 position,vec3 normal,bool surfaceReceiver) {
     if(camera.irradianceDimensionsEnabled.w<.5)return vec4(0);
-    if(surfaceReceiver)position=irradianceQueryPosition(position,normal,gl_FragCoord.xy,camera.irradianceParameters.yzw);
+    if(surfaceReceiver){
+        uint queryFlags=uint(camera.irradianceDimensionsEnabled.w+.5);
+        vec2 pixel=irradianceQueryPixel(gl_FragCoord.xy,camera.clusterDepth.w,queryFlags);
+        vec3 direction=vec3(1);
+#if defined(AZURE_IRRADIANCE_CLIPMAP)
+        if((queryFlags&4u)!=0u)direction=irradianceCells[1].xyz+irradianceCells[2].xyz+irradianceCells[3].xyz;
+#endif
+        position=irradianceQueryPosition(position,normal,pixel,camera.irradianceParameters.yzw,direction);
+    }
 #if defined(AZURE_IRRADIANCE_CLIPMAP)
     vec4 parameters[13];for(int i=0;i<13;++i)parameters[i]=irradianceCells[i];
     IrradianceClipmapResult result=evaluateIrradianceClipmap(irradianceClipmapTextures,parameters,position);

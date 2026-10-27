@@ -352,6 +352,14 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-27/surface-uv-domain.json"
+    },
+    {
+      "path": "runs/20261027-201756-native-irradiance-pixel-origin-986da8",
+      "pathBase": "build",
+      "purpose": "辐照查询像素原点、场方向、双配置与真实镜头验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-27/irradiance-query-frame.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

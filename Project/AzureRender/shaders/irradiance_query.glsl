@@ -15,4 +15,15 @@ vec3 irradianceQueryPosition(vec3 surface,vec3 normal,vec2 pixel,vec3 parameters
     precise vec3 offset=fma(normal,vec3(parameters.x),surface);
     return fma(vec3(irradianceQuerySignedNoise(pixel,parameters.z)),vec3(parameters.y),offset);
 }
+vec2 irradianceQueryPixel(vec2 pixel,float viewportHeight,uint flags){
+    vec2 cell=floor(pixel);
+    if((flags&2u)!=0u)cell.y=viewportHeight-1.0-cell.y;
+    return cell;
+}
+vec3 irradianceQueryPosition(vec3 surface,vec3 normal,vec2 pixel,vec3 parameters,vec3 direction){
+    if(parameters.x==0.0&&parameters.y==0.0)return surface;
+    precise vec3 offset=fma(normal,vec3(parameters.x),surface);
+    precise vec3 amplitude=vec3(parameters.y)*direction;
+    return fma(vec3(irradianceQuerySignedNoise(pixel,parameters.z)),amplitude,offset);
+}
 #endif
