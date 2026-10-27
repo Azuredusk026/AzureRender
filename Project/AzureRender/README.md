@@ -12,6 +12,7 @@
 探针身份、动态反射链及对照镜头见[运行核验](docs/acceptance/nr/native-reflection-bindings.md)。
 可配置的探针预滤波层级见[层级验收](docs/acceptance/nr/reflection-lod.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
+原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 
 原生时序输入与运动解码见[时序核验](docs/acceptance/nr/native-temporal-inputs.md)。
 主辅视图的历史提交边界见[时序帧状态](docs/runtime/temporal-frame-state.md)。
