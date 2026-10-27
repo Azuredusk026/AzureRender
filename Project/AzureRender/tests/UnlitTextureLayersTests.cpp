@@ -29,6 +29,16 @@ void reject(const Json& json,std::size_t textures=2) {
 void parsing() {
  const auto base=fixture();const auto p=parseUnlitTextureLayers(base,2);
  require(p.present&&p.layerCount==1&&p.layers[0].texture==0,"Base layer binding");
+ auto covered=base;covered["coverageLayer"]={{"texture",1},{"sampleMode","red-as-alpha"},
+  {"uv",base["layers"][0]["uv"]},{"threshold",-.26866},{"gain",.2}};
+ require(parseUnlitTextureLayers(covered,2).present,"Independent coverage texture parses");
+ for(const char* field:{"texture","sampleMode","uv","threshold","gain"}) {
+  auto invalid=covered;invalid["coverageLayer"].erase(field);reject(invalid);
+ }
+ for(const Json& bad:Json::array({nullptr,true,{{"texture",1},{"sampleMode","red-as-alpha"},{"uv",base["layers"][0]["uv"]},{"threshold",0},{"gain",0}},
+  {{"texture",2},{"sampleMode","red-as-alpha"},{"uv",base["layers"][0]["uv"]},{"threshold",0},{"gain",1}}})) {
+  auto invalid=covered;invalid["coverageLayer"]=bad;reject(invalid);
+ }
  auto additive=base;additive["composite"]="additive";
  require(parseUnlitTextureLayers(additive,2).composite==UnlitTextureLayers::Composite::Additive,
   "Additive composition is explicit and independent of alpha coverage");
@@ -133,6 +143,20 @@ void numerical() {
  near(evaluateUnlitTextureLayers(depthProfile,{.2F,.3F,.4F,.75F},{},.75F,.4F,{},1.F)[3],.4F,
   "Peak coverage saturates before the node opacity");
  auto vertexProfile=parseUnlitTextureLayers(fixture(),2);vertexProfile.useVertexColor=true;
+ auto coveredProfile=parseUnlitTextureLayers(fixture(),2);auto& coverageInput=coveredProfile.coverageLayer;
+ coverageInput.present=true;coverageInput.sample.sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
+ coverageInput.threshold=.25F;coverageInput.gain=2;
+ near(evaluateUnlitCoverageLayer(coverageInput,{.5F,.1F,.9F,.8F}),.5F,"Coverage remaps the selected red channel");
+ near(evaluateUnlitCoverageLayer(coverageInput,{.1F,.9F,.9F,1}),0,"Coverage clips below threshold");
+ near(evaluateUnlitCoverageLayer(coverageInput,{1,.9F,.9F,0}),1,"Coverage clips above the remap range");
+ coverageInput.sample.sampleMode=UnlitTextureLayer::SampleMode::Rgba;
+ near(evaluateUnlitCoverageLayer(coverageInput,{0,0,0,.5F}),.5F,"RGBA mode selects alpha independently of RGB");
+ coveredProfile.tint={1,1,1,3};coveredProfile.highlightGain=0;coveredProfile.layerCount=2;
+ coveredProfile.layers[1].role=UnlitTextureLayer::Role::Mask;
+ auto coveredColor=evaluateUnlitTextureLayers(coveredProfile,{.2F,.3F,.4F,.8F},{1,1,1,.5F},.5F,.4F,{},
+  std::nullopt,{1,1,1,1},std::nullopt,std::array<float,4>{0,0,0,.5F});
+ near(coveredColor[0],.2F,"Coverage leaves composed RGB intact");
+ near(coveredColor[3],.12F,"Coverage precedes soft intersection, saturation and single node opacity");
  auto viewProfile=parseUnlitTextureLayers(fixture(),2);viewProfile.viewCoveragePresent=true;
  viewProfile.viewCoverage={.25F,2,0,.8F};
  near(evaluateUnlitViewCoverage(viewProfile,.25F),.8F,"Biased squared view response and weight");
@@ -160,6 +184,8 @@ void numerical() {
  near(evaluateUnlitTextureLayers(vertexProfile,{.5F,.5F,.5F,.8F},{},1,1,{},std::nullopt,{0,0,0,0})[3],.8F,
   "Unselected vertex data leaves existing coverage intact");
  const auto bad=[&](auto callback){bool failed=false;try{callback();}catch(const std::invalid_argument&){failed=true;}require(failed,"Invalid runtime input must fail explicitly");};
+ bad([&]{(void)evaluateUnlitTextureLayers(coveredProfile,{1,1,1,1},{1,1,1,1},1,1,{});});
+ bad([&]{(void)evaluateUnlitCoverageLayer(coverageInput,{0,0,0,std::numeric_limits<float>::infinity()});});
  bad([&]{(void)evaluateUnlitTextureLayers(depthProfile,{1,1,1,1},{},1,1,{});});
  bad([&]{(void)evaluateUnlitViewDepthFade(depthProfile,std::numeric_limits<float>::infinity());});
  bad([&]{(void)evaluateUnlitMaterialTime(p,std::numeric_limits<double>::infinity());});

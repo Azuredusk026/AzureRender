@@ -7,6 +7,14 @@ import io
 from PIL import Image
 
 
+def pad_material_profile_index(model):
+    """Exercise the profile stride with the visible material at index one."""
+    model['materials'].insert(0, {'name':'profile-index-padding',
+        'pbrMetallicRoughness':{'baseColorFactor':[.01,.02,.03,1]}})
+    for mesh in model.get('meshes',[]):
+        for primitive in mesh['primitives']:primitive['material']=primitive.get('material',0)+1
+
+
 def surface(path, *, baked_mirror=False, baked_scale=None, double_sided=False, alpha=False, sloped=False, normal_map=False):
     # Counterclockwise triangles point toward +Z, independently of the engine.
     positions = [(-.5, -.5, 0), (.5, -.5, 0), (.5, .5, 0), (-.5, .5, 0)]

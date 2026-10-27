@@ -28,6 +28,8 @@ def run(player,output,validation='any',case='vertex'):
     kinds=('heatmap','red-alpha','mask','document','ignored','missing','skinned','opacity') if case=='vertex' else (
         'view-front','view-back','view-invert','view-mask','view-document','view-orthographic','view-soft','view-depth',
         'view-additive','view-additive-document')
+    if case=='coverage-layer':kinds=('coverage-red','coverage-alpha','coverage-mask','coverage-low','coverage-high',
+        'coverage-soft','coverage-document','coverage-linear','coverage-uv','coverage-clock','coverage-disabled')
     for fixed in (False,True):
         for kind in kinds:
             name=('fixed-' if fixed else 'indexed-')+kind;root=output/name;assets=root/'assets';assets.mkdir(parents=True)
@@ -42,6 +44,8 @@ def run(player,output,validation='any',case='vertex'):
             normal=np.array([math.sqrt(.75),0,-.5 if kind=='view-back' else .5])
             if case=='view-coverage':
                 model['meshes'][0]['primitives'][0]['attributes']['NORMAL']=append(np.tile(normal,(4,1)).astype('<f4').tobytes(),5126,'VEC3',4)
+            if kind in ('coverage-uv','coverage-clock'):
+                model['meshes'][0]['primitives'][0]['attributes']['TEXCOORD_0']=append(struct.pack('<8f',*([.25,.25]*4)),5126,'VEC2',4)
             colors=np.column_stack([positions[:,0]+.5,positions[:,1]+.5,np.full(4,.25),.5+.5*positions[:,0]]).astype('<f4')
             if kind!='missing':model['meshes'][0]['primitives'][0]['attributes']['COLOR_0']=append(colors.tobytes(),5126,'VEC4',4)
             if kind=='skinned':
@@ -62,12 +66,34 @@ def run(player,output,validation='any',case='vertex'):
             mask=np.array([128,192,64,192],dtype=np.uint8)
             if kind=='red-alpha':p['layers'][0]['sampleMode']='red-as-alpha'
             if kind in ('mask','view-mask'):p['layers'].append(layer('mask',1))
+            if kind in ('coverage-mask','coverage-document'):p['layers'].append(layer('mask',1))
             model['images']=[dict(uri=png_uri(base.reshape(1,1,4))),dict(uri=png_uri(mask.reshape(1,1,4)))]
             model['textures']=[dict(source=0),dict(source=1)]
+            coverage_pixel=np.array([128,64,224,192],dtype=np.uint8)
+            if case=='coverage-layer':
+                c=layer('mask',2);c.pop('role');c.update(sampleMode='rgba' if kind=='coverage-alpha' else 'red-as-alpha',threshold=.05,gain=2)
+                if kind=='coverage-low':c['threshold']=1
+                if kind=='coverage-high':c['threshold']=-1
+                if kind!='coverage-disabled':p['coverageLayer']=c
+                if kind in ('coverage-uv','coverage-clock'):
+                    pattern=np.array([[[64,32,128,255],[224,32,128,255]],[[128,32,128,255],[192,32,128,255]]],dtype=np.uint8)
+                    model['images'].append(dict(uri=png_uri(pattern)));coverage_pixel=pattern[0,1 if kind=='coverage-clock' else 0]
+                    if kind=='coverage-clock':p['clock']=dict(rate=0,offsetSeconds=1);c['uv']['speed']=[.5,0]
+                else:model['images'].append(dict(uri=png_uri(coverage_pixel.reshape(1,1,4))))
+                model['textures'].append(dict(source=2,sampler=2))
+                nearest=kind in ('coverage-uv','coverage-clock')
+                model['samplers']=[dict(wrapS=10497,wrapT=10497,minFilter=9729,magFilter=9729),
+                    dict(wrapS=33071,wrapT=33071,minFilter=9729,magFilter=9729),
+                    dict(wrapS=33071,wrapT=33071,minFilter=9728 if nearest else 9729,magFilter=9728 if nearest else 9729)]
+                model['textures'][0]['sampler']=0;model['textures'][1]['sampler']=1
+                if kind=='coverage-linear':
+                    path=assets/'coverage.png';Image.fromarray(coverage_pixel.reshape(1,1,4),'RGBA').save(path)
+                    Path(str(path)+'.azmeta').write_text(json.dumps(dict(schemaVersion=1,id='55555555-5555-4555-8555-555555555555',settings=dict(texture=dict(colorSpace='linear')),dependencies=[])))
+                    model['images'][2]=dict(uri='coverage.png')
             model['materials']=[dict(name='VertexSignal',alphaMode='BLEND',doubleSided=True,extras=dict(azureSlotId='surface',
                 azureRenderMaterial=dict(schemaVersion=2,**{'class':'generic'},features=['unlit-surface','unlit-texture-layers'],surface=p)))]
             node=dict(id='surface',resourceId='surface',components={'azure.transform':component('azure.transform',dict(translation=[0,0,0]))})
-            opacity=.4 if kind in ('opacity','view-soft') else 1
+            opacity=.4 if kind in ('opacity','view-soft','coverage-soft') else 1
             model['extensionsUsed']=['AZURE_node_opacity'];model['nodes'][0]['extensions']={'AZURE_node_opacity':dict(schemaVersion=1,opacity=opacity)}
             if kind in ('document','view-document','view-additive-document'):
                 image_id='11111111-1111-4111-8111-111111111111';material_id='22222222-2222-4222-8222-222222222222'
@@ -82,12 +108,20 @@ def run(player,output,validation='any',case='vertex'):
                 if kind in ('view-document','view-additive-document'):
                     embedded=model['materials'][0]['extras']['azureRenderMaterial']['surface']
                     embedded['viewCoverage']=dict(p['viewCoverage'],weight=0);embedded['composite']='alpha'
+            if kind=='coverage-document':
+                ids=['11111111-1111-4111-8111-111111111111','22222222-2222-4222-8222-222222222222','33333333-3333-4333-8333-333333333333'];material_id='44444444-4444-4444-8444-444444444444'
+                for i,value in enumerate([base,mask,coverage_pixel]):
+                    path=assets/f'channel-{i}.png';Image.fromarray(value.reshape(1,1,4),'RGBA').save(path)
+                    Path(str(path)+'.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=ids[i],settings={},dependencies=[])));model['images'][i]=dict(uri=path.name)
+                document=complete_material_document(model['materials'][0],model,{str(i):ids[i] for i in range(3)})
+                path=assets/'coverage.azurematerial';path.write_text(json.dumps(document));Path(str(path)+'.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,settings={},dependencies=ids)));node['materialSlots']={'surface':material_id}
+                embedded=dict(p,vertexColor=False);embedded.pop('coverageLayer');model['materials'][0]['extras']['azureRenderMaterial']['surface']=embedded
             (assets/'surface.gltf').write_text(json.dumps(model))
             surface(assets/'rear.gltf',double_sided=True);rear=json.loads((assets/'rear.gltf').read_text())
             rear['materials']=[dict(pbrMetallicRoughness=dict(baseColorFactor=[.07,.09,.11,1]),
                 extras=dict(azureRenderMaterial=dict(schemaVersion=2,**{'class':'generic'},features=['unlit-surface'],surface=dict(schemaVersion=1,lighting='unlit'))))]
             (assets/'rear.gltf').write_text(json.dumps(rear))
-            delta=.75 if kind in ('opacity','view-soft') else 2
+            delta=.75 if kind in ('opacity','view-soft','coverage-soft') else 2
             camera=dict(id='camera',components={'azure.transform':component('azure.transform',dict(translation=[0,0,3])),
                 'azure.camera':dict(type='azure.camera',version=2,data=dict(enabled=True,priority=1,fieldOfView=55,nearPlane=.1,farPlane=20))})
             if kind=='view-orthographic':camera['components']['azure.camera']['data'].update(orthographic=True,orthographicHeight=2)
@@ -105,7 +139,7 @@ def run(player,output,validation='any',case='vertex'):
             log=(root/'player.log').read_text(errors='replace');assert 'Allocator after unload: buffers=0 images=0' in log and not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
             enabled='Validation layer: enabled' in log
             if validation!='any':assert enabled==(validation=='enabled'),name
-            manifest=json.loads((root/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==14
+            manifest=json.loads((root/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==15
             pixels=np.asarray(Image.open(root/'frames/frame_000000.png').convert('RGB'));errors=[]
             for x,y in [(64,64),(56,56),(72,56),(56,72),(72,72)]:
                 world_x=(2*(x+.5)/128-1)*3*math.tan(math.radians(55/2))
@@ -115,7 +149,10 @@ def run(player,output,validation='any',case='vertex'):
                 rgb=linear(base[:3]);alpha=base[3]/255
                 if kind=='red-alpha':alpha=rgb[0];rgb=np.ones(3)
                 rgb=rgb*np.array(p['tint'][:3])*vertex[:3];alpha=alpha*p['tint'][3]*vertex[3]
-                if kind in ('mask','view-mask'):rgb*=linear(mask[:3]);alpha*=mask[3]/255
+                if kind in ('mask','view-mask','coverage-mask','coverage-document'):rgb*=linear(mask[:3]);alpha*=mask[3]/255
+                if case=='coverage-layer' and kind!='coverage-disabled':
+                    c=p['coverageLayer'];value=coverage_pixel[3]/255 if c['sampleMode']=='rgba' else coverage_pixel[0]/255 if kind=='coverage-linear' else linear(coverage_pixel[:3])[0]
+                    alpha*=np.clip((value-c['threshold'])*c['gain'],0,1)
                 soft=min(1,delta/1.5)
                 if case=='view-coverage':
                     direction=np.array([-world_x,-world_y,3.]);direction/=np.linalg.norm(direction)
@@ -128,7 +165,8 @@ def run(player,output,validation='any',case='vertex'):
                 alpha=np.clip(alpha*soft,0,1)*opacity
                 expected=np.clip(rgb*alpha+np.array([.07,.09,.11])*(1 if p.get('composite')=='additive' else 1-alpha),0,1)
                 error=float(abs(linear(pixels[y,x])-expected).max());errors.append(error);assert error<=.008,(name,x,y,error,pixels[y,x].tolist(),expected.tolist())
-            equivalence='heatmap' if kind in ('document','skinned') else 'ignored' if kind=='missing' else 'view-front' if kind=='view-document' else 'view-additive' if kind=='view-additive-document' else kind
+            equivalence='heatmap' if kind in ('document','skinned') else 'ignored' if kind=='missing' else 'view-front' if kind=='view-document' else 'view-additive' if kind=='view-additive-document' else 'coverage-mask' if kind=='coverage-document' else kind
+            if kind=='coverage-disabled':equivalence='coverage-high'
             if equivalence in images:assert np.array_equal(images[equivalence],pixels),(name,'descriptor, skinning or document mismatch')
             else:images[equivalence]=pixels
             maximum=max(maximum,max(errors));records.append(dict(name=name,kind=kind,maximumLinearError=max(errors),validationEnabled=enabled,
@@ -142,7 +180,7 @@ def run(player,output,validation='any',case='vertex'):
 if __name__=='__main__':
     parser=argparse.ArgumentParser(__doc__);parser.add_argument('--executable',type=Path,required=True);parser.add_argument('--output',type=Path)
     parser.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any')
-    parser.add_argument('--case',choices=['vertex','view-coverage'],default='vertex');args=parser.parse_args()
+    parser.add_argument('--case',choices=['vertex','view-coverage','coverage-layer'],default='vertex');args=parser.parse_args()
     if args.output:run(args.executable,args.output.resolve(),args.expected_validation,args.case)
     else:
         with tempfile.TemporaryDirectory(prefix='vertex-color-',dir=Path(__file__).resolve().parents[1]/'build/runs') as temporary:

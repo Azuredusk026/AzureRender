@@ -11,6 +11,7 @@ import numpy as np
 from PIL import Image
 from native_render.light_lab import generate
 from test_npr_diffuse_gpu import linear
+from create_visibility_fixture import pad_material_profile_index
 
 
 def run(player,output,selected=None,expected_validation=None,quality="existing"):
@@ -67,6 +68,7 @@ def run(player,output,selected=None,expected_validation=None,quality="existing")
             level['renderSettings']['nprLighting']=dict(schemaVersion=1,enabled=name not in ('disabled','material-facing-disabled'),ambientColor=[0,0,0],ambientDirection=[0,1,0],directionBias=0,
                 directionGain=0,directionFloor=1,outdoorGain=1,shadowAmbientGain=1,indoorMix=0,litAmbientMix=0,mainColorMix=0,shadowOverride=1,useSceneIrradiance=False)
             path.write_text(json.dumps(level),encoding='utf-8')
+            pad_material_profile_index(model);model_path.write_text(json.dumps(model),encoding='utf-8')
             command=[str(player.resolve()),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128','--capture-dir',str(folder/'frames'),
                 '--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene']
             if quality=='multisample':command+=['--set','render.antiAliasing=4']
@@ -83,7 +85,7 @@ def run(player,output,selected=None,expected_validation=None,quality="existing")
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text())
             if quality=='multisample':assert manifest['rasterizationSamples']==manifest['snapshotRasterizationSamples']==manifest['outlineMaskSamples']==4 and not manifest['multisampleFallback']
             if material_rim:
-                assert manifest['materialSurfaceProfileLayoutVersion']==14 and manifest['lightBufferLayoutVersion']==3
+                assert manifest['materialSurfaceProfileLayoutVersion']==15 and manifest['lightBufferLayoutVersion']==3
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             x=64 if name=='interior' else 84;measured=linear(pixels[64,x])
             samples=[(.375,.125),(.875,.375),(.125,.625),(.625,.875)] if quality=='multisample' else [(.5,.5)]

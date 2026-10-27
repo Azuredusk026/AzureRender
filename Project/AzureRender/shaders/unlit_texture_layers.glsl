@@ -21,7 +21,10 @@ float azureUnlitViewCoverage(float normalDotView,vec4 parameters) {
     float power=pow(clamp(normalDotView+parameters.x,0.0,1.0),parameters.y);
     return mix(1.0,mix(1.0-power,power,parameters.z),parameters.w);
 }
-vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[13],float soft,float exposureGain,float saturation,vec3 colorGain,vec4 vertexColor,float normalDotView) {
+float azureUnlitCoverageLayer(vec4 value,float mode,vec2 remap) {
+    return clamp((azureUnlitLayerSample(value,mode).a-remap.x)*remap.y,0.0,1.0);
+}
+vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[17],float soft,float exposureGain,float saturation,vec3 colorGain,vec4 vertexColor,float normalDotView,vec4 coverage) {
     base=azureUnlitLayerSample(base,rows[9].x)*rows[6];
     if(rows[11].y>.5)base*=vertexColor;
     if(rows[9].z>.5) {
@@ -29,6 +32,7 @@ vec4 azureUnlitLayerColor(vec4 base,vec4 second,vec4 rows[13],float soft,float e
         if(rows[9].z<1.5)base*=second;
         else base.rgb+=second.rgb*rows[7].rgb*clamp((base.a+second.a)*rows[7].a,0.0,1.0);
     }
+    if(rows[11].w>.5)base.a*=azureUnlitCoverageLayer(coverage,rows[15].z,rows[16].xy);
     if(rows[11].z>.5)base.a=clamp(base.a,0.0,1.0)*azureUnlitViewCoverage(normalDotView,rows[12]);
     base.rgb+=max(base.rgb-rows[8].x,vec3(0))*rows[8].y;
     base.rgb=clamp(base.rgb*mix(1.0,exposureGain,rows[8].z),vec3(0),vec3(1000));

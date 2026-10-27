@@ -30,6 +30,7 @@
 公共顶点颜色、多流绑定及实际特效见[颜色验收](../acceptance/nr/vertex-color-streams.md)。
 柱面视角覆盖率与加色合成见[合成验收](../acceptance/nr/view-dependent-vfx-coverage.md)。
 实际箱体姿态、共享材质及完整镜头见[箱体验收](../acceptance/nr/captured-logistics-boxes.md)。
+独立覆盖率、作者层级及实际字形见[覆盖率验收](../acceptance/nr/unlit-coverage-texture.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。

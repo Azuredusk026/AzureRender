@@ -11,6 +11,7 @@ import numpy as np
 from PIL import Image
 from native_render.light_lab import generate
 from convert_material_semantics import complete_material_document
+from create_visibility_fixture import pad_material_profile_index
 
 
 def linear(rgb):
@@ -76,6 +77,7 @@ def run(player,output,selected=None,validation=None):
                 (folder/'eye.azurematerial.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=material_id,settings={},dependencies=list(ids.values()))),encoding='utf-8')
                 next(x for x in level['nodes'] if x.get('resourceId')=='plane')['materialSlots']={'eye':material_id}
             level_path.write_text(json.dumps(level),encoding='utf-8')
+            pad_material_profile_index(model);(folder/'plane.gltf').write_text(json.dumps(model),encoding='utf-8')
             command=[str(player),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128',
                 '--capture-dir',str(folder/'frames'),'--capture-frames','2','--fixed-frame-step','--qa-camera','scene',
                 '--qa-light','scene','--runtime-report',str(folder/'runtime.json')]
@@ -88,7 +90,7 @@ def run(player,output,selected=None,validation=None):
             if validation:assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             runtime=json.loads((folder/'runtime.json').read_text(encoding='utf-8'));assert not runtime['scriptErrors'] and not runtime['presentationErrors']
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8'))
-            assert manifest['materialSurfaceProfileLayoutVersion']==14
+            assert manifest['materialSurfaceProfileLayoutVersion']==15
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
             error=None;expected=None

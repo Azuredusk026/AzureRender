@@ -30,6 +30,11 @@ struct UnlitTextureLayers {
     bool useVertexColor=false;
     bool softIntersectionEnabled=true,viewCoveragePresent=false;
     std::array<float,4> viewCoverage{0,1,0,1};
+    struct CoverageLayer {
+        bool present=false;
+        UnlitTextureLayer sample;
+        float threshold=0,gain=1;
+    } coverageLayer;
 };
 struct UnlitEffectFrame {
     float exposureGain=1,saturation=1;
@@ -44,10 +49,12 @@ std::array<float,2> evaluateUnlitLayerUv(const UnlitTextureLayer&,std::array<flo
 float evaluateSoftIntersection(float sceneViewZ,float effectViewZ,float distance,float bias);
 float evaluateUnlitViewDepthFade(const UnlitTextureLayers&,float effectViewZ);
 float evaluateUnlitViewCoverage(const UnlitTextureLayers&,float interpolatedNormalDotView);
+float evaluateUnlitCoverageLayer(const UnlitTextureLayers::CoverageLayer&,std::array<float,4> sample);
 // Samples and output are linear, straight RGBA. Node opacity is applied once.
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers&,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
     float softIntersection,float nodeOpacity,const UnlitEffectFrame&,
     std::optional<float> effectViewZ=std::nullopt,std::array<float,4> vertexColor={1,1,1,1},
-    std::optional<float> interpolatedNormalDotView=std::nullopt);
+    std::optional<float> interpolatedNormalDotView=std::nullopt,
+    std::optional<std::array<float,4>> coverageSample=std::nullopt);
 }

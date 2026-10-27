@@ -515,6 +515,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/captured-logistics-boxes.json",
       "primaryProject": "build/runs/20261028-052815-native-logistics-box-bindings-1ef4fa/full-candidate/enclosure-captured-boxes.azureproject"
+    },
+    {
+      "path": "runs/20261028-055131-native-glyph-layer-inputs-f2ec92",
+      "pathBase": "build",
+      "purpose": "独立覆盖率纹理、作者层级及实际字形验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-coverage-texture.json",
+      "primaryProject": "build/runs/20261028-055131-native-glyph-layer-inputs-f2ec92/full-candidate/enclosure-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

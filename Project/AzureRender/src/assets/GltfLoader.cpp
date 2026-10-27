@@ -899,7 +899,7 @@ std::array<float, 4> readMaterialVectorExtra(
 #include "UnlitTextureSurfaceLoader.inc"
 
 void loadUnlitSurface(const tinygltf::Material& material,const tinygltf::Model& model,
-    AssetMaterial& result,int& baseImage,int& secondImage) {
+    AssetMaterial& result,int& baseImage,int& secondImage,int& coverageImage) {
     if(!material.extras.IsObject()||!material.extras.Has("azureRenderMaterial"))return;
     const auto& profile=material.extras.Get("azureRenderMaterial");
     const bool enabled=(result.materialFeatures&MaterialFeatureUnlitSurface)!=0;
@@ -912,7 +912,7 @@ void loadUnlitSurface(const tinygltf::Material& material,const tinygltf::Model& 
     if(!enabled&&!layered&&!profile.Has("surface")&&!authoredSurface)return;
     if(layered) {
         if(!authoredSurface)throw std::invalid_argument("unlit texture layers require an authored surface");
-        loadUnlitTextureSurface(material,model,authored.at("azureRenderMaterial"),result,baseImage,secondImage);
+        loadUnlitTextureSurface(material,model,authored.at("azureRenderMaterial"),result,baseImage,secondImage,coverageImage);
         return;
     }
     if(authored.is_object()&&authored.contains("azureRenderMaterial")) {
@@ -1279,6 +1279,7 @@ AssetMaterial loadMaterial(
     int projectedHairParameterImage=-1;
     int projectedHairLineImage=-1;
     int shadowColorLutImage=-1;
+    int unlitCoverageImage=-1;
     std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
     if (material != nullptr) {
         loadMaterialProfile(*material, result);
@@ -1628,7 +1629,7 @@ AssetMaterial loadMaterial(
         } else if (material->alphaMode == "BLEND") {
             result.alphaMode = AssetAlphaMode::Blend;
         }
-        loadUnlitSurface(*material,model,result,baseColorImage,styleMaskImage);
+        loadUnlitSurface(*material,model,result,baseColorImage,styleMaskImage,unlitCoverageImage);
         loadMaterialComposite(*material,result);
         const int distortionImage=loadSceneRefraction(*material,model,result);
         if(distortionImage>=0)styleMaskImage=distortionImage;
@@ -1781,6 +1782,10 @@ AssetMaterial loadMaterial(
             0, 0, 0, 255, 0, 0, 0, 255,
             0, 0, 0, 255, 0, 0, 0, 255,
         };
+    }
+    if(unlitCoverageImage>=0) {
+        result.shadowColorLutPixels=decodeImageRgba(model,unlitCoverageImage,{1,1,1,1},
+            result.shadowColorLutWidth,result.shadowColorLutHeight,true,authored,&result.authoredMipLevels[8]);
     }
     if (hairDataImage >= 0) {
         constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
@@ -2037,14 +2042,15 @@ AssetMaterial loadMaterial(
         const int images[]={baseColorImage,normalImage,metallicRoughnessImage,specularEmissiveImage,
             styleMaskImage,matcapImage,hairDataImage,
             projectedHairParameterImage>=0?projectedHairParameterImage:faceSdfImage,
-            projectedHairLineImage>=0?projectedHairLineImage:shadowColorLutImage};
+            unlitCoverageImage>=0?unlitCoverageImage:projectedHairLineImage>=0?projectedHairLineImage:shadowColorLutImage};
         for(std::size_t slot=0;slot<9;++slot) {
             if(images[slot]<0)continue;
             const auto& raw=imageSettings->at(static_cast<std::size_t>(images[slot]));
             if(raw.is_null())continue;
             const auto defaults=result.textureSettings[slot];
             auto settings=azurerender::TextureImportSettings::parse(raw,defaults);
-            const bool layer=result.unlitTextureLayers.present&&(slot==0||(slot==4&&result.unlitTextureLayers.layerCount==2));
+            const bool layer=result.unlitTextureLayers.present&&(slot==0||(slot==4&&result.unlitTextureLayers.layerCount==2)
+                ||(slot==8&&result.unlitTextureLayers.coverageLayer.present));
             if(layer&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU||settings.wrapV!=defaults.wrapV
                 ||settings.mipPolicy!=defaults.mipPolicy||settings.mipFilter!=defaults.mipFilter
                 ||settings.anisotropy!=defaults.anisotropy))
@@ -2054,7 +2060,7 @@ AssetMaterial loadMaterial(
                 ||(slot==5&&(result.projectedHairRamp.present||result.specularRamp.present
                     ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||(result.eyeSurface.present&&!result.eyeSurface.nprLighting)))
                 ||(slot==8&&shadowColorLutImage>=0);
-            const bool typed=lookup||slot==6||slot==7||slot==8;
+            const bool typed=lookup||slot==6||slot==7||(slot==8&&!result.unlitTextureLayers.coverageLayer.present);
             if(typed&&settings.colorSpace!=defaults.colorSpace)
                 throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));
             if(lookup&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU

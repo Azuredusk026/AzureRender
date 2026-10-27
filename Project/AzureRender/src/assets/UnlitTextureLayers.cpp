@@ -39,9 +39,22 @@ std::array<float,4> sample(std::array<float,4> rgba,UnlitTextureLayer::SampleMod
     for(float v:rgba)finite(v,"sample");
     return mode==UnlitTextureLayer::SampleMode::RedAsAlpha?std::array<float,4>{1,1,1,rgba[0]}:rgba;
 }
+void layerSample(const Json& input,UnlitTextureLayer& layer,std::size_t textureCount) {
+    const auto& texture=input.at("texture");
+    if(!integer(texture)||texture.get<double>()<0||texture.get<double>()>=static_cast<double>(textureCount)
+        ||texture.get<double>()>std::numeric_limits<int>::max())invalid("layer.texture");
+    layer.texture=texture.get<int>();
+    if(input.at("sampleMode")=="red-as-alpha")layer.sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
+    else if(input.at("sampleMode")!="rgba")invalid("layer.sampleMode");
+    const auto& uv=input.at("uv");fields(uv,{"set","scaleOffset","rotation","speed"},"layer.uv");
+    if(!integer(uv.at("set"))||uv.at("set")!=0)invalid("layer.uv.set");
+    layer.scaleOffset=vector<4>(uv.at("scaleOffset"),"layer.uv.scaleOffset");
+    layer.rotation=vector<4>(uv.at("rotation"),"layer.uv.rotation");
+    layer.speed=vector<2>(uv.at("speed"),"layer.uv.speed");
+}
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite"});
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
@@ -57,17 +70,15 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
         else if(input.at("role")=="mask")layer.role=UnlitTextureLayer::Role::Mask;
         else if(input.at("role")=="blend")layer.role=UnlitTextureLayer::Role::Blend;
         else invalid("second layer role");
-        const auto& texture=input.at("texture");
-        if(!integer(texture)||texture.get<double>()<0||texture.get<double>()>=static_cast<double>(textureCount)
-            ||texture.get<double>()>std::numeric_limits<int>::max())invalid("layer.texture");
-        layer.texture=texture.get<int>();
-        if(input.at("sampleMode")=="red-as-alpha")layer.sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
-        else if(input.at("sampleMode")!="rgba")invalid("layer.sampleMode");
-        const auto& uv=input.at("uv");fields(uv,{"set","scaleOffset","rotation","speed"},"layer.uv");
-        if(!integer(uv.at("set"))||uv.at("set")!=0)invalid("layer.uv.set");
-        layer.scaleOffset=vector<4>(uv.at("scaleOffset"),"layer.uv.scaleOffset");
-        layer.rotation=vector<4>(uv.at("rotation"),"layer.uv.rotation");
-        layer.speed=vector<2>(uv.at("speed"),"layer.uv.speed");
+        layerSample(input,layer,textureCount);
+    }
+    if(source.contains("coverageLayer")) {
+        const auto& input=source.at("coverageLayer");fields(input,{"texture","sampleMode","uv","threshold","gain"},"coverageLayer");
+        auto& coverage=result.coverageLayer;layerSample(input,coverage.sample,textureCount);
+        coverage.sample.role=UnlitTextureLayer::Role::Mask;coverage.present=true;
+        coverage.threshold=scalar(input.at("threshold"),"coverageLayer.threshold");
+        coverage.gain=scalar(input.at("gain"),"coverageLayer.gain",0);
+        if(coverage.gain<=0)invalid("coverageLayer.gain");
     }
     result.tint=vector<4>(source.at("tint"),"tint");result.blendTint=vector<4>(source.at("blendTint"),"blendTint");
     const auto& clock=source.at("clock");fields(clock,{"rate","offsetSeconds"},"clock");
@@ -137,6 +148,12 @@ float evaluateUnlitViewDepthFade(const UnlitTextureLayers& profile,float effectV
     return saturate((depth-range[0])/(range[1]-range[0]))
         *saturate((range[3]-depth)/(range[3]-range[2]));
 }
+float evaluateUnlitCoverageLayer(const UnlitTextureLayers::CoverageLayer& coverage,std::array<float,4> rgba) {
+    if(!coverage.present)return 1;
+    finite(coverage.threshold,"coverage threshold");finite(coverage.gain,"coverage gain");
+    if(coverage.gain<=0)invalid("coverage gain");
+    return saturate((sample(rgba,coverage.sample.sampleMode)[3]-coverage.threshold)*coverage.gain);
+}
 float evaluateUnlitViewCoverage(const UnlitTextureLayers& profile,float normalDotView) {
     finite(normalDotView,"view coverage input");if(!profile.viewCoveragePresent)return 1;
     const auto& p=profile.viewCoverage;for(float v:p)finite(v,"view coverage parameters");
@@ -148,7 +165,8 @@ float evaluateUnlitViewCoverage(const UnlitTextureLayers& profile,float normalDo
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
     float softIntersection,float nodeOpacity,const UnlitEffectFrame& frame,std::optional<float> effectViewZ,
-    std::array<float,4> vertexColor,std::optional<float> interpolatedNormalDotView) {
+    std::array<float,4> vertexColor,std::optional<float> interpolatedNormalDotView,
+    std::optional<std::array<float,4>> coverageSample) {
     if(!profile.present||profile.layerCount<1||profile.layerCount>2)invalid("unbound profile");
     validateUnlitEffectFrame(frame);
     for(float value:{softIntersection,nodeOpacity})finite(value,"frame");
@@ -166,6 +184,10 @@ std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile
             const float weight=saturate((result[3]+second[3])*profile.blendTint[3]);
             for(unsigned i=0;i<3;++i)result[i]+=second[i]*profile.blendTint[i]*weight;
         } else invalid("second layer role");
+    }
+    if(profile.coverageLayer.present) {
+        if(!coverageSample)invalid("missing coverage sample");
+        result[3]*=evaluateUnlitCoverageLayer(profile.coverageLayer,*coverageSample);
     }
     if(profile.viewCoveragePresent) {
         if(!interpolatedNormalDotView)invalid("missing view coverage input");

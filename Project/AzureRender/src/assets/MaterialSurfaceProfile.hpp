@@ -6,12 +6,12 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=14;
+    static constexpr unsigned kLayoutVersion=15;
     using Row=std::array<float,4>;
-    std::array<Row,13> rows{};
+    std::array<Row,17> rows{};
 };
 static_assert(std::is_standard_layout_v<PackedMaterialSurfaceProfile>);
-static_assert(sizeof(PackedMaterialSurfaceProfile)==208);
+static_assert(sizeof(PackedMaterialSurfaceProfile)==272);
 static_assert(alignof(PackedMaterialSurfaceProfile)==16);
 static_assert(offsetof(PackedMaterialSurfaceProfile,rows)==0);
 static_assert(sizeof(PackedMaterialSurfaceProfile::Row)==16);
@@ -75,6 +75,12 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         if(p.viewDepthFadePresent){r[10]=p.viewDepthFade;r[11][0]=1;}
         r[11][1]=p.useVertexColor?1.F:0.F;
         if(p.viewCoveragePresent){r[11][2]=1;r[12]=p.viewCoverage;}
+        if(p.coverageLayer.present) {
+            const auto& coverage=p.coverageLayer;const auto& layer=coverage.sample;r[11][3]=1;
+            r[13]=layer.scaleOffset;r[14]=layer.rotation;
+            r[15]={layer.speed[0],layer.speed[1],layer.sampleMode==UnlitTextureLayer::SampleMode::RedAsAlpha?1.F:0.F,0};
+            r[16]={coverage.threshold,coverage.gain,0,0};
+        }
         return result;
     }
     if(material.nprDiffuse.present) {

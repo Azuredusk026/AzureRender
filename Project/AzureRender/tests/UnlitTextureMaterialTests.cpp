@@ -58,6 +58,18 @@ int main(int argc,char** argv){try{
  require(packed.rows[0]==std::array<float,4>{1,1,0,0}&&packed.rows[2]==std::array<float,4>{0,.1F,0,.1F},"UV and time rows reach public material table");
  require(packed.rows[5]==std::array<float,4>{1,0,1.5F,0}&&packed.rows[6]==std::array<float,4>{1.3F,1.3F,1.3F,1},"Clock and straight tint packing");
  require(packed.rows[9]==std::array<float,4>{0,0,1,1},"Layer modes and soft intersection packing");
+ auto coverageSource=source;auto& coverageSurface=coverageSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
+ coverageSurface["coverageLayer"]={{"texture",1},{"sampleMode","red-as-alpha"},
+  {"uv",coverageSurface["layers"][0]["uv"]},{"threshold",-.25},{"gain",2}};
+ const auto coverageMaterial=load(coverageSource).materials.at(0);const auto coveragePacked=packMaterialSurfaceProfile(coverageMaterial);
+ require(coveragePacked.rows[11][3]==1&&coveragePacked.rows[16]==std::array<float,4>{-.25F,2,0,0},
+  "Coverage enable and remap reach the material table");
+ require(coverageMaterial.shadowColorLutPixels==coverageMaterial.styleMaskPixels
+  &&coverageMaterial.shadowColorLutWidth==2&&coverageMaterial.shadowColorLutHeight==2,
+  "Coverage owns slot eight without lookup-table dimension rules");
+ require(coverageMaterial.textureSettings[8].wrapU=="clamp"
+  &&coverageMaterial.textureSettings[8].mipFilter==TextureImportSettings::MipFilter::Nearest,
+  "Coverage texture preserves its own sampler");
  auto fadedSource=source;fadedSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"]["viewDepthFade"]=
   {{"near",{.5,1}},{"far",{100,150}}};
  const auto fadedPacked=packMaterialSurfaceProfile(load(fadedSource).materials.at(0));
@@ -78,6 +90,12 @@ int main(int argc,char** argv){try{
  const std::string baseId="11111111-1111-4111-8111-111111111111",maskId="22222222-2222-4222-8222-222222222222";
  document.textures={{"0",{{"asset",baseId},{"usage","albedo"}}},{"1",{{"asset",maskId},{"usage","albedo"}}}};
  const auto restored=MaterialData::parse(document.encode());
+ auto coverageDocument=document;coverageDocument.surface["materials"]=coverageSource["materials"];
+ const auto coverageStandalone=MaterialData::parse(coverageDocument.encode()).interpret(
+  [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
+ require(packMaterialSurfaceProfile(coverageStandalone).rows==coveragePacked.rows
+  &&coverageStandalone.shadowColorLutPixels==coverageMaterial.shadowColorLutPixels,
+  "Complete document preserves independent coverage pixels and parameters");
  auto viewDocument=document;viewDocument.surface["materials"]=viewSource["materials"];
  const auto viewStandalone=MaterialData::parse(viewDocument.encode()).interpret(
   [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});

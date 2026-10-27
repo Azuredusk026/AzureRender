@@ -13,7 +13,7 @@ import uuid
 import numpy as np
 from PIL import Image
 from native_render.light_lab import generate
-from create_visibility_fixture import surface,component
+from create_visibility_fixture import surface,component,pad_material_profile_index
 from test_npr_diffuse_gpu import reference,linear
 from convert_material_semantics import complete_material_document
 
@@ -121,6 +121,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
                 (folder/'surface.azurematerial.azmeta').write_text(json.dumps({'schemaVersion':1,'id':identity,'settings':{},'dependencies':list(identities.values())}))
                 next(node for node in level['nodes'] if node.get('resourceId'))['materialSlots']={'surface':identity}
             level_path.write_text(json.dumps(level))
+            pad_material_profile_index(model);model_path.write_text(json.dumps(model))
             command=[str(player.resolve()),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128',
                 '--capture-dir',str(folder/'frames'),'--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene',
                 '--qa-effect','specular','--qa-effect-state','disabled','--runtime-report',str(folder/'runtime.json')]
@@ -136,7 +137,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             assert manifest['nprLighting']['enabled']==settings['enabled']
             assert manifest['nprLighting']['schemaVersion']==1
             assert manifest['nprLighting']['ambientWeight']==settings.get('ambientWeight',1)
-            if material_colors:assert manifest['materialSurfaceProfileLayoutVersion']==14
+            if material_colors:assert manifest['materialSurfaceProfileLayoutVersion']==15
             state_hashes[name]=manifest['qaStateHash']
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             measured=linear(pixels[96 if name.startswith('offset-') else 64,96 if name.startswith('offset-') else 64]);color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)

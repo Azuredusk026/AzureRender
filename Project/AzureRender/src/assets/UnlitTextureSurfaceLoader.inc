@@ -1,6 +1,6 @@
 // Included in GltfLoader.cpp's private loader namespace.
 void loadUnlitTextureSurface(const tinygltf::Material& source,const tinygltf::Model& model,
-    const nlohmann::json& profile,AssetMaterial& result,int& baseImage,int& secondImage) {
+    const nlohmann::json& profile,AssetMaterial& result,int& baseImage,int& secondImage,int& coverageImage) {
     const auto fail=[](const char* field){throw std::invalid_argument(std::string("Invalid unlit texture layers: ")+field);};
     constexpr std::uint32_t allowed=MaterialFeatureUnlitSurface|MaterialFeatureUnlitTextureLayers;
     if(result.materialProfileVersion!=2||(result.materialFeatures&allowed)!=allowed
@@ -38,13 +38,14 @@ void loadUnlitTextureSurface(const tinygltf::Material& source,const tinygltf::Mo
         target.mipFilter=(minimum==9986||minimum==9987)?azurerender::TextureImportSettings::MipFilter::Linear
             :azurerender::TextureImportSettings::MipFilter::Nearest;
     };
-    for(unsigned i=0;i<layers.layerCount;++i) {
-        const auto& texture=model.textures[static_cast<std::size_t>(layers.layers[i].texture)];
+    const auto bind=[&](const azurerender::UnlitTextureLayer& layer,unsigned slot,int& imageIndex) {
+        const auto& texture=model.textures[static_cast<std::size_t>(layer.texture)];
         if(!texture.extensions.empty()||texture.source<0||static_cast<std::size_t>(texture.source)>=model.images.size())fail("texture resource");
         const auto& image=model.images[static_cast<std::size_t>(texture.source)];
         if(image.width<=0||image.height<=0||image.image.empty())fail("texture image data");
-        sampler(texture.sampler,result.textureSettings[i==0?0:4]);
-        (i==0?baseImage:secondImage)=texture.source;
-    }
+        sampler(texture.sampler,result.textureSettings[slot]);imageIndex=texture.source;
+    };
+    for(unsigned i=0;i<layers.layerCount;++i)bind(layers.layers[i],i==0?0:4,i==0?baseImage:secondImage);
+    if(layers.coverageLayer.present)bind(layers.coverageLayer.sample,8,coverageImage);
     result.unlitTextureLayers=std::move(layers);
 }
