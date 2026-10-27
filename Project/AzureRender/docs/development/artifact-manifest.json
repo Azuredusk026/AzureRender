@@ -560,6 +560,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/fog-transport-data.json",
       "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-072457-fog-volume-gpu-sampling-8e7be7",
+      "pathBase": "build",
+      "purpose": "三维雾场上传、原版硬件采样及资源释放验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/fog-volume-gpu.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

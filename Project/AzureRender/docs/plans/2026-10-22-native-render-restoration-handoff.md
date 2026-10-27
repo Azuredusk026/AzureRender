@@ -32,6 +32,7 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 基础坐标扰动、独立采样及实际墙面见[扰动验收](../acceptance/nr/base-uv-distortion.md)。
 中央字形柱与独立覆盖率组合见[字形柱验收](../acceptance/nr/central-glyph-composition.md)。
 雾效传输、体积格式及原版载荷见[雾效数据验收](../acceptance/nr/fog-transport-data.md)。
+三维雾场上传、原版采样及资源释放见[雾场 GPU 验收](../acceptance/nr/fog-volume-gpu.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

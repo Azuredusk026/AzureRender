@@ -35,6 +35,7 @@
 基础坐标扰动、独立采样及实际墙面见[扰动验收](../acceptance/nr/base-uv-distortion.md)。
 中央字形柱与独立覆盖率组合见[字形柱验收](../acceptance/nr/central-glyph-composition.md)。
 雾效传输、体积格式及原版载荷见[雾效数据验收](../acceptance/nr/fog-transport-data.md)。
+三维雾场上传、原版采样及资源释放见[雾场 GPU 验收](../acceptance/nr/fog-volume-gpu.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。
