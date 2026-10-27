@@ -179,6 +179,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "hair-pixel-integral") return MaterialFeatureHairPixelIntegral;
     if (value == "eye-radial-surface") return MaterialFeatureEyeRadialSurface;
     if (value == "unlit-surface") return MaterialFeatureUnlitSurface;
+    if (value == "unlit-texture-layers") return MaterialFeatureUnlitTextureLayers;
     if (value == "geometry-shadow") return MaterialFeatureGeometryShadow;
     if (value == "sqrt-alpha-shadow") return MaterialFeatureSqrtAlphaShadow;
     return 0;
@@ -865,7 +866,10 @@ std::array<float, 4> readMaterialVectorExtra(
     return result;
 }
 
-void loadUnlitSurface(const tinygltf::Material& material,const AssetMaterial& result) {
+#include "UnlitTextureSurfaceLoader.inc"
+
+void loadUnlitSurface(const tinygltf::Material& material,const tinygltf::Model& model,
+    AssetMaterial& result,int& baseImage,int& secondImage) {
     if(!material.extras.IsObject()||!material.extras.Has("azureRenderMaterial"))return;
     const auto& profile=material.extras.Get("azureRenderMaterial");
     const bool enabled=(result.materialFeatures&MaterialFeatureUnlitSurface)!=0;
@@ -874,7 +878,13 @@ void loadUnlitSurface(const tinygltf::Material& material,const AssetMaterial& re
     if(!material.extras_json_string.empty())authored=nlohmann::json::parse(material.extras_json_string);
     const bool authoredSurface=authored.is_object()&&authored.contains("azureRenderMaterial")
         &&authored["azureRenderMaterial"].is_object()&&authored["azureRenderMaterial"].contains("surface");
-    if(!enabled&&!profile.Has("surface")&&!authoredSurface)return;
+    const bool layered=(result.materialFeatures&MaterialFeatureUnlitTextureLayers)!=0;
+    if(!enabled&&!layered&&!profile.Has("surface")&&!authoredSurface)return;
+    if(layered) {
+        if(!authoredSurface)throw std::invalid_argument("unlit texture layers require an authored surface");
+        loadUnlitTextureSurface(material,model,authored.at("azureRenderMaterial"),result,baseImage,secondImage);
+        return;
+    }
     if(authored.is_object()&&authored.contains("azureRenderMaterial")) {
         const auto& raw=authored["azureRenderMaterial"];
         if(!raw.contains("features")||!raw["features"].is_array())
@@ -1588,7 +1598,7 @@ AssetMaterial loadMaterial(
         } else if (material->alphaMode == "BLEND") {
             result.alphaMode = AssetAlphaMode::Blend;
         }
-        loadUnlitSurface(*material,result);
+        loadUnlitSurface(*material,model,result,baseColorImage,styleMaskImage);
         loadMaterialComposite(*material,result);
         const int distortionImage=loadSceneRefraction(*material,model,result);
         if(distortionImage>=0)styleMaskImage=distortionImage;
@@ -2004,6 +2014,11 @@ AssetMaterial loadMaterial(
             if(raw.is_null())continue;
             const auto defaults=result.textureSettings[slot];
             auto settings=azurerender::TextureImportSettings::parse(raw,defaults);
+            const bool layer=result.unlitTextureLayers.present&&(slot==0||(slot==4&&result.unlitTextureLayers.layerCount==2));
+            if(layer&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU||settings.wrapV!=defaults.wrapV
+                ||settings.mipPolicy!=defaults.mipPolicy||settings.mipFilter!=defaults.mipFilter
+                ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias))
+                throw std::invalid_argument(result.name+" unlit layer sampler ownership violated");
             const bool lookup=(slot==4&&((result.materialFeatures&MaterialFeatureDiffuseRamp)
                 ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||result.eyeSurface.present))
                 ||(slot==5&&(result.projectedHairRamp.present||result.specularRamp.present

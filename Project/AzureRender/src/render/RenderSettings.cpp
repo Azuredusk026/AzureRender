@@ -236,6 +236,7 @@ void validateRenderSettings(const RenderSettings& settings) {
         requireRange(channel, 0.0F, 1.0F, "faceSdf.shadowColor channel");
     }
     requireRange(settings.bloom.threshold, 0.0F, 8.0F, "bloom.threshold");
+    validateUnlitEffectFrame(settings.unlitEffects);
     requireRange(settings.bloom.strength, 0.0F, 2.0F, "bloom.strength");
     requireRange(settings.outline.strength, 0.0F, 2.0F, "outline.strength");
     requireRange(

@@ -207,6 +207,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
         lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
         lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
+        lost(source.unlitTextureLayers.present&&!replacement.unlitTextureLayers.present,"surface.layers");
         lost(source.outlineSurface.present&&!replacement.outlineSurface.present,"outlineSurface");
         lost(source.specularInput.present&&!replacement.specularInput.present,"specularInput");
         lost(source.specularRamp.present&&!replacement.specularRamp.present,"specularRamp");
@@ -220,7 +221,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
             {MaterialFeatureOverlay,"overlay"},{MaterialFeatureBrowOverlay,"brow-overlay"},
             {MaterialFeatureSceneRefraction,"scene-refraction"},{MaterialFeatureUnlitSurface,"unlit-surface"},
             {MaterialFeatureGeometryShadow,"geometry-shadow"},{MaterialFeatureSqrtAlphaShadow,"sqrt-alpha-shadow"},
-            {MaterialFeatureHairPixelIntegral,"hair-pixel-integral"}})
+            {MaterialFeatureHairPixelIntegral,"hair-pixel-integral"},{MaterialFeatureUnlitTextureLayers,"unlit-texture-layers"}})
             lost((removed&feature)!=0,label);
         replacement.slotId=slotId;replacement.name=name;mesh.materials[index]=std::move(replacement);
         if(!document.parameterOverride&&!losses.empty())RuntimeDiagnostics::instance().warning("material",

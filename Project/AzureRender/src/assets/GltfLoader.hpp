@@ -1,6 +1,7 @@
 #pragma once
 
 #include "assets/TextureImportSettings.hpp"
+#include "assets/UnlitTextureLayers.hpp"
 #include "assets/MorphTargetData.hpp"
 #include "animation/AnimationCurve.hpp"
 #include "animation/AnimationClipSample.hpp"
@@ -68,6 +69,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureGeometryShadow = 1U << 21U,
     MaterialFeatureSqrtAlphaShadow = 1U << 22U,
     MaterialFeatureHairPixelIntegral = 1U << 23U,
+    MaterialFeatureUnlitTextureLayers = 1U << 24U,
     MaterialFeatureShadowCoverageMask = MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow,
 };
 
@@ -103,6 +105,7 @@ struct AssetMaterialFrame {
 };
 
 struct AssetMaterial {
+    azurerender::UnlitTextureLayers unlitTextureLayers;
     enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow,One };
     std::array<unsigned,9> authoredMipLevels{};
     std::array<azurerender::TextureImportSettings,9> textureSettings=[] {

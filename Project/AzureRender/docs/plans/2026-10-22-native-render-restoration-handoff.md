@@ -20,7 +20,7 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 活动灯光和接收范围见[快照验收](../acceptance/nr/captured-active-lights.md)。
 静态作者法线与精确轴置换见[批量验收](../acceptance/nr/static-authored-normals.md)。
 上方与后方来源接入见[围护验收](../acceptance/nr/enclosure-authored-normals.md)。
-物流公共图层解析与数值评价见[契约验收](../acceptance/nr/unlit-texture-layer-contract.md)。
+物流图层、完整材质与实际绘制见[图层接入](../runtime/unlit-texture-layers.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

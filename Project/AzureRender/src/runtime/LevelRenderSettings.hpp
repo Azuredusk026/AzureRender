@@ -1,7 +1,28 @@
 #pragma once
 #include "render/RenderSettings.hpp"
 #include <nlohmann/json.hpp>
+#include <cmath>
+#include <limits>
 namespace azurerender {
+inline nlohmann::json encodeUnlitEffectFrame(const UnlitEffectFrame& value) {
+    validateUnlitEffectFrame(value);
+    return {{"schemaVersion",1},{"exposureGain",value.exposureGain},{"saturation",value.saturation},{"colorGain",value.colorGain}};
+}
+inline void decodeUnlitEffectFrame(UnlitEffectFrame& target,const nlohmann::json& data) {
+    if(!data.is_object()||data.size()!=4||!data.contains("schemaVersion")||!data.at("schemaVersion").is_number_integer()
+        ||data.at("schemaVersion")!=1||!data.contains("exposureGain")||!data.contains("saturation")||!data.contains("colorGain"))
+        throw std::invalid_argument("Invalid unlit effects frame fields");
+    const auto number=[](const nlohmann::json& v){
+        if(!v.is_number()||!std::isfinite(v.get<double>())||std::abs(v.get<double>())>std::numeric_limits<float>::max())
+            throw std::invalid_argument("Invalid unlit effects frame number");
+        return v.get<float>();
+    };
+    auto value=target;value.exposureGain=number(data.at("exposureGain"));value.saturation=number(data.at("saturation"));
+    const auto& color=data.at("colorGain");
+    if(!color.is_array()||color.size()!=3)throw std::invalid_argument("Invalid unlit effects color gain");
+    for(unsigned i=0;i<3;++i)value.colorGain[i]=number(color[i]);
+    validateUnlitEffectFrame(value);target=value;
+}
 inline nlohmann::json encodeNprLighting(const NprLightingSettings& s){
     validateNprLighting(s);
     return {{"schemaVersion",1},{"enabled",s.enabled},{"useSceneIrradiance",s.useSceneIrradiance},
@@ -75,6 +96,7 @@ inline nlohmann::json encodeLevelRenderSettings(const RenderSettings& settings){
         {"saturation",settings.grade.saturation},{"contrast",settings.grade.contrast},{"tint",settings.grade.tint},{"toneMapping",settings.grade.toneMappingEnabled},
         {"gradeLut",{{"schemaVersion",ColorGradingLutSettings::kSchemaVersion},{"asset",settings.grade.lut.asset},{"exposureMultiplier",settings.grade.lut.exposureMultiplier}}},
         {"bloomEnabled",settings.bloom.enabled},{"bloomThreshold",settings.bloom.threshold},{"bloomStrength",settings.bloom.strength},
+        {"unlitEffects",encodeUnlitEffectFrame(settings.unlitEffects)},
         {"outlineDepth",settings.outline.depthThreshold},{"outlineNormal",settings.outline.normalThreshold},{"outlineColor",settings.outline.color},
         {"stylized",settings.stylizedLightingEnabled},{"sceneLighting",settings.sceneLightingEnabled},{"environmentSpecularModel",std::string(environmentSpecularModelName(settings.environmentSpecularModel))},{"innerOutline",settings.innerOutlineEnabled},{"silhouetteOutline",settings.silhouetteOutlineEnabled},
         {"styleMaskStrength",settings.styleMaskStrength},{"diffuseBandThreshold",settings.diffuseBandThreshold},{"diagnosticView",settings.diagnosticView}};
@@ -95,6 +117,10 @@ inline void decodeLevelRenderSettings(RenderSettings& target,const nlohmann::jso
         if(value>4||(version<19&&value>3)||(version<18&&value>2))throw std::invalid_argument("Anti-aliasing mode requires its render settings version: temporal 18, multisample 19");
     }
     auto settings=target;
+    if(data.contains("unlitEffects")) {
+        if(version<20)throw std::invalid_argument("unlit effects require render settings version 20");
+        decodeUnlitEffectFrame(settings.unlitEffects,data.at("unlitEffects"));
+    }
     if(data.contains("nprLighting"))decodeNprLighting(settings.nprLighting,data.at("nprLighting"));
     if(data.contains("screenSpaceReflection"))decodeScreenSpaceReflection(settings.screenSpaceReflection,data.at("screenSpaceReflection"));
     settings.sceneType=sceneTypeFromString(data.value("renderer",std::string(sceneTypeName(settings.sceneType))));

@@ -6,7 +6,7 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=10;
+    static constexpr unsigned kLayoutVersion=11;
     using Row=std::array<float,4>;
     std::array<Row,12> rows{};
 };
@@ -60,6 +60,20 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
     PackedMaterialSurfaceProfile result;
+    if(material.unlitTextureLayers.present) {
+        const auto& p=material.unlitTextureLayers;auto& r=result.rows;
+        r[0]=p.layers[0].scaleOffset;r[1]=p.layers[0].rotation;
+        r[2]={p.layers[0].speed[0],p.layers[0].speed[1],0,0};
+        if(p.layerCount==2) {r[2][2]=p.layers[1].speed[0];r[2][3]=p.layers[1].speed[1];
+            r[3]=p.layers[1].scaleOffset;r[4]=p.layers[1].rotation;}
+        r[5]={p.clockRate,p.clockOffsetSeconds,p.softDistance,p.softBias};
+        r[6]=p.tint;r[7]=p.blendTint;
+        r[8]={p.highlightThreshold,p.highlightGain,p.postExposureWeight,p.globalColorWeight};
+        r[9]={p.layers[0].sampleMode==UnlitTextureLayer::SampleMode::RedAsAlpha?1.F:0.F,
+            p.layers[1].sampleMode==UnlitTextureLayer::SampleMode::RedAsAlpha?1.F:0.F,
+            p.layerCount==1?0.F:p.layers[1].role==UnlitTextureLayer::Role::Mask?1.F:2.F,1};
+        return result;
+    }
     if(material.nprDiffuse.present) {
         result.rows[0]={material.nprDiffuse.shadowScale,static_cast<float>(material.nprDiffuse.shadowMask),
             static_cast<float>(material.nprDiffuse.baseAo),

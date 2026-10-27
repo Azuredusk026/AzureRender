@@ -1572,6 +1572,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"cascadeProjectionLayoutVersion\": 2,\n"
          << "  \"cascadeCasterDistance\": " << renderSettings_->shadowDistance << ",\n"
          << "  \"cameraUniformBytes\": " << sizeof(UniformBufferObject) << ",\n"
+         << "  \"unlitFrameLayoutVersion\": 1,\n"
          << "  \"objectShadowLayoutVersion\": " << ObjectShadowGpuHeader::kLayoutVersion << ",\n"
          << "  \"objectShadowPrepared\": " << (objectShadowPrepared_?"true":"false") << ",\n"
          << "  \"objectShadowExactDepthBias\": " << (objectShadowPrepared_&&rhi_->supportsExactDepthBias()?"true":"false") << ",\n"
@@ -2586,7 +2587,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
     for(const auto& span:snapshot.visibleSpans){
         const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
         for(const auto& material:mesh.materials) {
-            sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction))!=0;
+            sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureUnlitTextureLayers))!=0;
             colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0;
             depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
         }
@@ -3689,6 +3690,11 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.screenReflectionQuality={float(reflection.maxSteps),reflection.maxRoughness,reflection.edgeFade,reflection.strength};
     uniform.cascadeDepthRanges=cascadeDepthRanges;
     uniform.cascadeWorldDiameters=cascadeWorldDiameters;
+    if(!std::isfinite(frame.timeSeconds)||std::abs(frame.timeSeconds)>std::numeric_limits<float>::max())
+        throw std::invalid_argument("Invalid unlit presentation time");
+    validateUnlitEffectFrame(settings.unlitEffects);
+    uniform.unlitTimeExposure={static_cast<float>(frame.timeSeconds),settings.unlitEffects.exposureGain,settings.unlitEffects.saturation,0};
+    uniform.unlitColorGain={settings.unlitEffects.colorGain[0],settings.unlitEffects.colorGain[1],settings.unlitEffects.colorGain[2],0};
     const float skyScale=settings.cameraView&&settings.cameraView->projection==CameraProjectionKind::Orthographic?0.F:halfFovTangent;
     uniform.skyRight={cameraRight[0]*skyScale*aspect,cameraRight[1]*skyScale*aspect,cameraRight[2]*skyScale*aspect,0};
     uniform.skyUp={cameraUp[0]*skyScale,cameraUp[1]*skyScale,cameraUp[2]*skyScale,0};

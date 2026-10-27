@@ -1006,6 +1006,10 @@ if(BUILD_TESTING)
     add_executable(AzureUnlitTextureLayersTests tests/UnlitTextureLayersTests.cpp)
     target_link_libraries(AzureUnlitTextureLayersTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.UnlitTextureLayers COMMAND AzureUnlitTextureLayersTests)
+    add_executable(AzureUnlitTextureMaterialTests tests/UnlitTextureMaterialTests.cpp)
+    target_link_libraries(AzureUnlitTextureMaterialTests PRIVATE AzureRuntime)
+    add_test(NAME AzureRender.UnlitTextureMaterial COMMAND AzureUnlitTextureMaterialTests
+        "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/third_person/material_fixture.gltf")
     add_executable(AzureTextureFilteringTests tests/TextureFilteringTests.cpp)
     add_executable(AzureTextureMipCoverageTests tests/TextureMipCoverageTests.cpp)
     target_include_directories(AzureTextureMipCoverageTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -1422,6 +1426,10 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.SilhouetteCoverageGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.UnlitSurfaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_unlit_surface_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.UnlitSurfaceGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.UnlitTextureLayersGpu COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_unlit_texture_layers_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.UnlitTextureLayersGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.SceneRefractionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_scene_refraction_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.SceneRefractionGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)

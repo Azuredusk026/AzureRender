@@ -27,6 +27,7 @@ struct UnlitEffectFrame {
     float exposureGain=1,saturation=1;
     std::array<float,3> colorGain{1,1,1};
 };
+void validateUnlitEffectFrame(const UnlitEffectFrame&);
 // Parsing returns an owned value; resource and feature compatibility is checked
 // by the material loader before accepting this surface model.
 UnlitTextureLayers parseUnlitTextureLayers(const nlohmann::json&,std::size_t textureCount);

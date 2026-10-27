@@ -242,8 +242,11 @@ private:
         std::array<float,4> screenReflectionTrace{},screenReflectionQuality{};
         std::array<float,4> nprDirectionBias{},nprGainFloor{},nprAmbientColor{},nprComposition{},nprMainRadiance{},nprLightingParameters{};
         std::array<float,4> cascadeWorldDiameters{};
+        std::array<float,4> unlitTimeExposure{},unlitColorGain{};
     };
-    static_assert(sizeof(UniformBufferObject)==41*16);
+    static_assert(sizeof(UniformBufferObject)==43*16);
+    static_assert(offsetof(UniformBufferObject,unlitTimeExposure)==41*16);
+    static_assert(offsetof(UniformBufferObject,unlitColorGain)==42*16);
     static_assert(offsetof(UniformBufferObject,cascadeWorldDiameters)==40*16);
     static_assert(offsetof(UniformBufferObject,nprDirectionBias)==34*16);
     static_assert(offsetof(UniformBufferObject,nprLightingParameters)==39*16);

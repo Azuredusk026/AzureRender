@@ -53,6 +53,7 @@ layout(binding = 0) uniform CameraData {
     vec4 screenReflectionTrace,screenReflectionQuality;
     vec4 nprDirectionBias,nprGainFloor,nprAmbientColor,nprComposition,nprMainRadiance,nprLightingParameters;
     vec4 cascadeWorldDiameters;
+    vec4 unlitTimeExposure,unlitColorGain;
 } camera;
 #if defined(AZURE_PROBE_FIELD)
 layout(binding=23) uniform sampler2DArray reflectionProbeTexture;
@@ -226,6 +227,7 @@ struct ProjectedHairProfile {
     vec4 objectX,objectY,objectZ;
 };
 struct PackedMaterialSurfaceProfile { vec4 rows[12]; };
+#include "unlit_texture_layers.glsl"
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
 } materialSurfaceProfiles;
@@ -1744,6 +1746,25 @@ void main() {
         directSpecular=vec3(0);ambientSpecular=vec3(0);
         kkSpecular=vec3(0);secondaryKkSpecular=vec3(0);rimLighting=vec3(0);
         beautyColor=baseColor.rgb+emissive;
+        if(materialFeatureEnabled(16777216U)>.5) {
+            PackedMaterialSurfaceProfile p=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
+            float tau=p.rows[5].x*camera.unlitTimeExposure.x+p.rows[5].y;
+            vec4 layerBase=texture(AZ_TEX_BASE_COLOR,azureUnlitLayerUv(textureCoordinate,p.rows[0],p.rows[1],p.rows[2].xy,tau));
+            vec4 second=vec4(1);
+            if(p.rows[9].z>.5)second=texture(AZ_TEX_STYLE_MASK,azureUnlitLayerUv(textureCoordinate,p.rows[3],p.rows[4],p.rows[2].zw,tau));
+            float soft=1.0;
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+            if(p.rows[9].w>.5) {
+                float sceneDepth=texture(overlaySceneDepth,AZURE_FRAGMENT_COORD.xy/camera.clusterDepth.zw).r;
+                float effectDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
+                soft=azureUnlitSoftIntersection(sceneDepth,effectDepth,p.rows[5].z,p.rows[5].w);
+            }
+#endif
+            vec4 layered=azureUnlitLayerColor(layerBase,second,p.rows,soft,camera.unlitTimeExposure.y,camera.unlitTimeExposure.z,camera.unlitColorGain.rgb);
+            baseColor=azureUnlitLayerSample(layerBase,p.rows[9].x)*p.rows[6];
+            beautyColor=layered.rgb;outputAlpha=layered.a;emissive=layered.rgb;
+            if(qaEffectMode==6&&qaEffectDisabled){beautyColor=vec3(0);emissive=vec3(0);}
+        }
     }
     if(eyeRadial) {
         if(camera.clusterLighting.x<.5) {

@@ -53,7 +53,9 @@
           "eye-radial-surface",
           "unlit-surface",
           "geometry-shadow",
-          "sqrt-alpha-shadow"
+          "sqrt-alpha-shadow",
+          "hair-pixel-integral",
+          "unlit-texture-layers"
         ]
       }
     },
@@ -122,8 +124,28 @@
       "description": "Typed fields and ownership are validated by the production material interpreter."
     },
     "surface": {
-      "type": "object",
-      "description": "Typed fields and ownership are validated by the production material interpreter."
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "schemaVersion",
+            "lighting"
+          ],
+          "properties": {
+            "schemaVersion": {
+              "type": "integer",
+              "const": 1
+            },
+            "lighting": {
+              "const": "unlit"
+            }
+          }
+        },
+        {
+          "$ref": "unlit_texture_layers.schema.json"
+        }
+      ]
     },
     "composite": {
       "type": "object",

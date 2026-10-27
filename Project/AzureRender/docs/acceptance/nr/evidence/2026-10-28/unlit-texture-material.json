@@ -1,0 +1,723 @@
+{
+  "schemaVersion": 1,
+  "phase": "NR7-L4B",
+  "status": "public-unlit-texture-material-passed",
+  "run": "build/runs/20261028-012437-unlit-texture-layers-material-binding-6364c0",
+  "source": {
+    "CMakeLists.txt": "60b3a6670d593a93cc4abcf344607b50d1dbc0d4e5344a46d49f3fe0eadfa929",
+    "src/assets/GltfLoader.cpp": "a3c5277364b63023212e7fdd1c9d9b5d25e2aa05e6a1dced3b46a6cbdeba5c13",
+    "src/assets/GltfLoader.hpp": "61abdcafbf5a4b9035a981ca73ec5ceb342f039e3e4b087932068566e927ac6c",
+    "src/assets/MaterialData.cpp": "c67101d7e6d16b9553ece0f789d87c10a23c3883659363db8fc06cce43634d4b",
+    "src/assets/MaterialSurfaceProfile.hpp": "e6402f837f024383ae39f8e187dd703cdd3fa8031f6be795938440cb938f345c",
+    "src/assets/UnlitTextureLayers.cpp": "0f7de538d4586cb27f52c849a688a57021ca06efcd5e624eb125406a970b99d4",
+    "src/assets/UnlitTextureLayers.hpp": "85dfc23c8332ee44d0a229eb8086af3d1507ab1e8472904526059e7bb37c1e6f",
+    "src/assets/UnlitTextureSurfaceLoader.inc": "2fa19bf0e3696e2b2236fad060f3f917c4bec01369f14b9090038b53b16e1919",
+    "src/render/RenderSettings.cpp": "e7638fdb2b5ed5c352e474e2dfc62465899e48b1c66fba4c1b6c5a3c93f354c5",
+    "src/render/RenderSettings.hpp": "b262400a49976e9bde0627b423655878280faf758f9ee7ec18bc462a7c7cd3b3",
+    "src/runtime/LevelRenderSettings.hpp": "b7cc25b3c679c87c1e49b316d299c4f94aaca077e86d27c4aa27dcb7479b10df",
+    "src/scenes/CharacterSceneRenderer.cpp": "f9708bf67b5245d90b7382f14fb73629d30d10d9b28efec6807c00abc757c3e4",
+    "src/scenes/CharacterSceneRenderer.hpp": "3d3773557516cb52351bfec22261030d827158c1f8ad01d70c4858f5cfddb69e",
+    "shaders/mesh.frag": "c798beaec085d1894dadfa1ed6df2bc389d930601ead8ad390d25b38c302639e",
+    "shaders/unlit_texture_layers.glsl": "9d32ae7c05ec809c5cc989574494d228f5d6d9ad70bc9a9dbee6c8574a4b32e9",
+    "tests/UnlitTextureMaterialTests.cpp": "23f8d395eb168da6c70b714c56c24700b84180362495651fdcbfe3842e7e2138",
+    "tools/test_unlit_texture_layers_gpu.py": "27cafc49d9119595f3ac16caf870ea29e8b7f7279dc080e5857d2bb5b875f6cb",
+    "schemas/azure_render_material.schema.json": "af5c204d0d4687bdae9e5a600a429df13aafba8d780683cd074e27eee63d3f43",
+    "schemas/unlit_texture_layers.schema.json": "f363747b99cd502b953b08f3bf5780d926aff661cdba0db5d12324a6df80c69f"
+  },
+  "layouts": {
+    "materialSurfaceVersion": 11,
+    "materialBytes": 192,
+    "materialRows": 12,
+    "layerRows": 10,
+    "textureSlots": [
+      0,
+      4
+    ],
+    "cameraUniformBytes": 688,
+    "unlitFrameVersion": 1,
+    "renderSettingsVersion": 20
+  },
+  "tests": {
+    "cpuPerConfiguration": 9,
+    "materialBindingChecksPerConfiguration": 36,
+    "layerCapturesPerConfiguration": 42,
+    "layerFramesPerConfiguration": 54,
+    "legacyCapturesPerConfiguration": 25,
+    "editorFramesPerConfiguration": 42,
+    "maximumLinearError": 0.004765446513407712,
+    "linearTolerance": 0.008,
+    "configurationsExact": true,
+    "descriptorsExact": true,
+    "materialDocumentExact": true,
+    "hostPauseExact": true,
+    "singleStepAdvances": true,
+    "resourceUnloadClean": true,
+    "shaderVariantsExact": 193
+  },
+  "mainCamera": {
+    "status": "passed",
+    "baselineRun": "build\\runs\\20261028-010811-native-enclosure-authored-normals-bdab65",
+    "maximumByteDifference": 0,
+    "changedChannels": 0
+  },
+  "primaryProject": "gpu-release-binding-final/project.azureproject",
+  "boundaries": [
+    "Native live VFX shader, resources, time and per-instance parameters require independent capture binding.",
+    "Legacy generic parameter-patch ownership for typed layers is an explicit next-stage task.",
+    "Actual logistics, complete character rendering and NR0-NR12 final gates remain open."
+  ],
+  "artifacts": [
+    {
+      "path": "plan.md",
+      "sha256": "a3f68ef537a7dee9127a6060cc743e4629383591a7f662439e1eeaeeaeabd3b7"
+    },
+    {
+      "path": "material-red-final.log",
+      "sha256": "0633c138b0db7f6aa108f27eb8b52ad329de12bb0393b79c817ee290accb12ba"
+    },
+    {
+      "path": "material-loss-red.log",
+      "sha256": "a63557a8f6b7442e2f688cbf54a69bc290bba9db9a89f0250e90ea776aac0eda"
+    },
+    {
+      "path": "gpu-oracle-red.json",
+      "sha256": "b10e84b684084e6b1e52091866029547707b537c53711d763813f94e7a37f1f7"
+    },
+    {
+      "path": "gpu-background-red.json",
+      "sha256": "cb59c86f417de0356a81f37d1fd73b190ee05303efa4e5950ee72095b18675f2"
+    },
+    {
+      "path": "final-gpu-pipeline.json",
+      "sha256": "8f3d38dd1ac6474b0af6cc130b39292f5b811d73bd260c7fed875cbad89f664e"
+    },
+    {
+      "path": "main-regression-final.json",
+      "sha256": "1d893f6ea3cf98e1fa587a8e9409bbd0211da1a5942c373a4dfeecd7553dd217"
+    },
+    {
+      "path": "main-regression-final.log",
+      "sha256": "d752282e7e730ce775548cc59aae5f9f9a6cc174af9bb06e1c64a34b181c4381"
+    },
+    {
+      "path": "editor_clock.py",
+      "sha256": "462c2c567d60ea707faaae9b272f4298600e42ebcfb92a9930fae036ebb4a6c5"
+    },
+    {
+      "path": "ctest-debug-final.log",
+      "sha256": "4b7d6da76dad9ee0acb1aee82fc415144eba17ea9374d13c5eea9daf523223ff"
+    },
+    {
+      "path": "material-debug-final.log",
+      "sha256": "21bdcdba2e9fb2b75df9335bca05f8426160e68460295073fb8893d77c978b58"
+    },
+    {
+      "path": "debug-build.log",
+      "sha256": "95a56014533447a3ed69215cc5cdf4e36c365a28fa2101aca8da4460fe54deda"
+    },
+    {
+      "path": "debug-final-binding-build.log",
+      "sha256": "108f8c7c88d811912ad5185020fa46455750d0d2d02b4167e01e07f874688d27"
+    },
+    {
+      "path": "gpu-debug-binding-final/summary.json",
+      "sha256": "c285acaa3ec920fe5d98e51d27c3b2492d8703a24f1aea15d5bc26ce96f81db7"
+    },
+    {
+      "path": "legacy-unlit-debug-final/summary.json",
+      "sha256": "d07a53a57aa93bcc3f1dc1252bbd5c856dd6388a6b67bbd854c47733ad69ee77"
+    },
+    {
+      "path": "editor-clock-debug-final/summary.json",
+      "sha256": "b4b564e762cc66b6b5a222838666dc031c46c703147385565fd85d1d23274e25"
+    },
+    {
+      "path": "editor-clock-debug-final/runtime.json",
+      "sha256": "98396bf8cb063c3ab410a6bb0ebe15a0d61c506b41362cc13f27d33678751da9"
+    },
+    {
+      "path": "editor-clock-debug-final/player.log",
+      "sha256": "5e4a66607c35602cf3bc4bcb897df5ce7d7771b2fc5fe8275f0fe30e5a64ca68"
+    },
+    {
+      "path": "editor-clock-debug-final/frames/capture_manifest.json",
+      "sha256": "8362d906cf03c53d45f74c02a7fd583a76b57001d6127edd8eccbce999c0b9de"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-base/frames/capture_manifest.json",
+      "sha256": "8910ba64e04d065744607daddf176b3d7c63288ea21bab258ac03a09226151ff"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-blend/frames/capture_manifest.json",
+      "sha256": "6f5b19976c636766f093cacad504c367a7c83b8cadcafd09bb9f4d40bd65fa12"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-clamp/frames/capture_manifest.json",
+      "sha256": "d2f1899b02a8147f1c93a6011504b51c607e0f0764829c77af573691d752bcb6"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-clear-only/frames/capture_manifest.json",
+      "sha256": "6c7db11a7884dade90898392994b56c6f701bff88991b44ddb59313677787367"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-clock-frozen/frames/capture_manifest.json",
+      "sha256": "aedca90a37e4d36ea2c19abf93001f19daec877875dc46e42a836d10fdf21318"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-clock-reverse/frames/capture_manifest.json",
+      "sha256": "4e5256ab85ebfa5fbf7baf70f6c85d2ec1582075da8d3c59e5289bf44ef7af39"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-depth-occluded/frames/capture_manifest.json",
+      "sha256": "76b8e77fb0beedb18b6a6d2ccfff7c90131e215ab8b8972b25960cc0755efd6e"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-diagonal/frames/capture_manifest.json",
+      "sha256": "543fe44b649ae4b9dc499191070a791203e7dd38f051f6b09c57e6ff2e10a2cb"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-document-mask/frames/capture_manifest.json",
+      "sha256": "02437038fd71f001506c28a8794016be1f9d3b4dabd5630499cf17d3680b4897"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-empty-background/frames/capture_manifest.json",
+      "sha256": "841ea8d825ec21f576b658c7950c87042d9d7286a6e16e5d952acdd28e56d720"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-frame-color/frames/capture_manifest.json",
+      "sha256": "97a2ee10bcbef77f2f7a03f4d0fbdcd41dffa3c3d5486a24bf9d4b21ac151061"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-highlight/frames/capture_manifest.json",
+      "sha256": "ae6784e1c6f14c6a08a98f1b4bb58fb0339fcbd5b1733f931ba46b9d74aa7858"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-independent-samplers/frames/capture_manifest.json",
+      "sha256": "409b027433777c8bec07640b15176fce4394b75495c4a730ccd0003bd669ab92"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-mask/frames/capture_manifest.json",
+      "sha256": "6ecc86930d85d33ed028c2b8f0b5193681a584e89f9a18bf1fd89a6ffc52e4f7"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-node-opacity/frames/capture_manifest.json",
+      "sha256": "4c96ec01d7f84ec7b97b9ba1cee5f3ad39cd3e9abdce9c1d776ec2142b87ed4f"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-orthographic/frames/capture_manifest.json",
+      "sha256": "2d7568a1a3b04f2e3fc8cdcc5531141c60010ccfc33192395582dca8ef893eda"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-red-alpha/frames/capture_manifest.json",
+      "sha256": "ffca26a964e5f17af6ee2c50ef7990ec6af05d677f840f14486cde595f914175"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-repeat/frames/capture_manifest.json",
+      "sha256": "ab2a0f179b6f6aa32f08b079ca55caceba1f00b89f0eee965a698ab2ecab498e"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-scroll/frames/capture_manifest.json",
+      "sha256": "381d0738a421db57b48cb8b2de287451a3fe7f3301babb445cc1a9394c177f84"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-soft-half/frames/capture_manifest.json",
+      "sha256": "89417e10b10f24c9060bfc48587e2db44334ae025ec07bd727dc2589a0a744b7"
+    },
+    {
+      "path": "gpu-debug-binding-final/fixed-soft-zero/frames/capture_manifest.json",
+      "sha256": "d3048da938eba59880236dd2bd9ca187a350204af8630ff9b8752603a86c87df"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-base/frames/capture_manifest.json",
+      "sha256": "c5f733186256c3f8c14b40dda9fc59ecb67c0a28513915bff9caeb04c943e230"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-blend/frames/capture_manifest.json",
+      "sha256": "29a172ed3dbe05b775c046e846b67bb95d9dc3ab0777d057165a440fa69cfba5"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-clamp/frames/capture_manifest.json",
+      "sha256": "7cf9058f9dfc5fc62fa60045a7c11fede1b5eaf89cc38c43b9a041f7f42fac21"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-clear-only/frames/capture_manifest.json",
+      "sha256": "62e03a25f16526f5bdf1077c01efd98f5bee061c04779c88d4d28a8521fcb9fd"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-clock-frozen/frames/capture_manifest.json",
+      "sha256": "a12193f2b1ef902bd149ccba9e01b558f44b636230b3d3c9a555266a6ec218cb"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-clock-reverse/frames/capture_manifest.json",
+      "sha256": "a7193a9731e87b57534293de775c3bb94cf8d22da3c837f04419d6d08b1bcd58"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-depth-occluded/frames/capture_manifest.json",
+      "sha256": "5f0a26b1e2e32f026cf94964c40778e2e5de3672ad0b3eaffd68f0c33c575453"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-diagonal/frames/capture_manifest.json",
+      "sha256": "0a2596a303e552d9acf084b17119b62894732a7fd364a688fe330e266c3eb701"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-document-mask/frames/capture_manifest.json",
+      "sha256": "505281b31a2f6cba729f5ae105735625afb74b7a6ac1c1fd707ec91360651ce6"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-empty-background/frames/capture_manifest.json",
+      "sha256": "577f0e99b7340522dd7c241a71781b663346e2aea4a78d6439cd478f1cd83a00"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-frame-color/frames/capture_manifest.json",
+      "sha256": "b4e0d1fec84dd03578587670cb0ff3d1be60756f7f7f8c487a149b27f1ab02ec"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-highlight/frames/capture_manifest.json",
+      "sha256": "773e09286bc82cc8508dc96355d7df6d12f17133671dc6b71fb662a788e43d24"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-independent-samplers/frames/capture_manifest.json",
+      "sha256": "82aa832393b1756a1560cb7d0ba2b808c5aec6c37aecc9ab2d03542dbee6d829"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-mask/frames/capture_manifest.json",
+      "sha256": "2583bcb4b9061bdf6fc8094c31645714980692a525722450545140a320000b77"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-node-opacity/frames/capture_manifest.json",
+      "sha256": "1697cb4fc29063bd465dcb03ede1fdf04038ee0f228b485a5feb1ee7238d9a37"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-orthographic/frames/capture_manifest.json",
+      "sha256": "9a8cc681af7d6111c08854e205a4fbaff3d060457a2938f838613ba9c470d6d2"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-red-alpha/frames/capture_manifest.json",
+      "sha256": "f7888df4388f0ff710870e8216d4a38ffa5da3b558f406eddbc884fe30ba5330"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-repeat/frames/capture_manifest.json",
+      "sha256": "aa96c3dc8f7c345d756e2a15e08cec4bdff169a69665b4432afe84555161faa5"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-scroll/frames/capture_manifest.json",
+      "sha256": "ba9fbd3ca67546c435ed20897a6b9afc2b791f4faa67da25e3e311d018254968"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-soft-half/frames/capture_manifest.json",
+      "sha256": "71de9107147d9a2ab7611be1fa03d969b6c08ea79a8482461b96e4eaea460e1c"
+    },
+    {
+      "path": "gpu-debug-binding-final/indexed-soft-zero/frames/capture_manifest.json",
+      "sha256": "abfaa4f8f98c86486cb03272773d75faca410edb849f4da777930f75937a7097"
+    },
+    {
+      "path": "legacy-unlit-debug-final/combined/frames/capture_manifest.json",
+      "sha256": "f0e6d2fa63aa621ebe128dec7ae84a89e5be2bc54dbb763fbcd6e3646c7df858"
+    },
+    {
+      "path": "legacy-unlit-debug-final/combined-half/frames/capture_manifest.json",
+      "sha256": "b09578f3faa0e7907e254831e414478731e7275c16f8689203a8ba24065150a0"
+    },
+    {
+      "path": "legacy-unlit-debug-final/dark/frames/capture_manifest.json",
+      "sha256": "25625e2068a9a1370c7208cd923cc5bf4ee3aa02a440105a0a288d4a8aba045d"
+    },
+    {
+      "path": "legacy-unlit-debug-final/depth-hidden/frames/capture_manifest.json",
+      "sha256": "fae2cc9415f6df6c0122569c0b06b2824696272f51eabcb618f683d6df116648"
+    },
+    {
+      "path": "legacy-unlit-debug-final/direct/frames/capture_manifest.json",
+      "sha256": "3136ee7295b607393cd7e4846bce949ca07cd6006474ad2325a8ffc4b34366c4"
+    },
+    {
+      "path": "legacy-unlit-debug-final/emission/frames/capture_manifest.json",
+      "sha256": "2ec890e1a88633996e93cab4161c6892dd506230d32e30f0f925038017816ff7"
+    },
+    {
+      "path": "legacy-unlit-debug-final/fixed/frames/capture_manifest.json",
+      "sha256": "827805d8dff79b27e150ed79fac8b1d3723854b2705a1e616aa538bc74dcffcb"
+    },
+    {
+      "path": "legacy-unlit-debug-final/gi-only/frames/capture_manifest.json",
+      "sha256": "569db74de952d7f5d5a6a272c6a53e53627aebdc29ff239c5113db8a44ccf62e"
+    },
+    {
+      "path": "legacy-unlit-debug-final/half/frames/capture_manifest.json",
+      "sha256": "b10493e2cb4db875b2d3f565668aded6e937f8eeda3f4a3f86bfa23a855c65a8"
+    },
+    {
+      "path": "legacy-unlit-debug-final/indirect/frames/capture_manifest.json",
+      "sha256": "7b6ad1495e6e321913a0382bb2091cfbd2de24524f0d72683cbe9abca2b7bb97"
+    },
+    {
+      "path": "legacy-unlit-debug-final/isolation-ambient/frames/capture_manifest.json",
+      "sha256": "cd9ea2ff037338e804ec3e46b0d87a7ec02a777715057e68d988c34d09e16657"
+    },
+    {
+      "path": "legacy-unlit-debug-final/isolation-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "8fcf186a9f5d057a53273d74e9fde99b501dbb97a1d15b6d6c6b7cb12f1aa22b"
+    },
+    {
+      "path": "legacy-unlit-debug-final/isolation-direct-specular/frames/capture_manifest.json",
+      "sha256": "a27b829629c024afad23c123b94a33bc69ce736849a39188bc2c3da4125c0d66"
+    },
+    {
+      "path": "legacy-unlit-debug-final/isolation-hair-kk/frames/capture_manifest.json",
+      "sha256": "5797d2418ab862c304816a5ed01d35392dc09ef0c8aa9faea47dd663822b68a6"
+    },
+    {
+      "path": "legacy-unlit-debug-final/isolation-reflection/frames/capture_manifest.json",
+      "sha256": "759ab08da2af3e5ac776ddaa3d91797c1356d0c1c8903dcd26d15ee61d87c77c"
+    },
+    {
+      "path": "legacy-unlit-debug-final/isolation-rim/frames/capture_manifest.json",
+      "sha256": "ef9a60364f651931d46b30fd9abb1ce7a1d8b28e853b6ac7064f603375d14148"
+    },
+    {
+      "path": "legacy-unlit-debug-final/node-half/frames/capture_manifest.json",
+      "sha256": "b0131566c6c81d6b6e4f2dcff440e13b561c2defd8cb4f02a8157f3eb53177dc"
+    },
+    {
+      "path": "legacy-unlit-debug-final/pbr-dark/frames/capture_manifest.json",
+      "sha256": "9fa4c0ece71ad56124ca1f5658e2be73d36b990b40f25f1816b14b79b123879c"
+    },
+    {
+      "path": "legacy-unlit-debug-final/pbr-gi-off/frames/capture_manifest.json",
+      "sha256": "91f271bd73486b7998af0903f8eee1c2fafcf8e8afdacbdd48fa3539c80a9015"
+    },
+    {
+      "path": "legacy-unlit-debug-final/pbr-gi-on/frames/capture_manifest.json",
+      "sha256": "3d7a70c34384f75ec523e43b3f40f944ed15c1d956fd1de0b6c368b33f97e3d6"
+    },
+    {
+      "path": "legacy-unlit-debug-final/pbr-light/frames/capture_manifest.json",
+      "sha256": "755446dc07316008d7426d28528bbe4fae0496d5059cac8ad52a5f61eb48aa31"
+    },
+    {
+      "path": "legacy-unlit-debug-final/pbr-probe-off/frames/capture_manifest.json",
+      "sha256": "57d331cdde85069c1c565af1b399b17c888f07b83b13b8db841b71eddc491d65"
+    },
+    {
+      "path": "legacy-unlit-debug-final/pbr-probe-on/frames/capture_manifest.json",
+      "sha256": "259a50430735f60f1108616d6728f3f818fc24461b4ec558aea176a226a4eb5a"
+    },
+    {
+      "path": "legacy-unlit-debug-final/probe-only/frames/capture_manifest.json",
+      "sha256": "da617db0274a4e8a07838fa8bc6cfdf0876c3c797b7a49baaf7f82da074db0c0"
+    },
+    {
+      "path": "legacy-unlit-debug-final/showcase/frames/capture_manifest.json",
+      "sha256": "8ac0637a877f2e97126398ea993f114c5db8658eb0fb3342d98c571639e9f563"
+    },
+    {
+      "path": "ctest-release-final.log",
+      "sha256": "d62ffdc30e5d2f7775d2c51a286b0589f101db438f405244370e2046bcc0fabf"
+    },
+    {
+      "path": "material-release-final.log",
+      "sha256": "44e848fe1ee37a66613ac719af457a84a2583c8c50cf9de3e4bd3364bb121bc2"
+    },
+    {
+      "path": "release-build.log",
+      "sha256": "750c4a0de26ce332af2336bb8bb7e8a4cfd499677ea45304eda22e07e7cc1ceb"
+    },
+    {
+      "path": "release-final-binding-build.log",
+      "sha256": "fd48825d1f928449e6b2685dd1c19ef2ed5b2bdd252848a6958f86aea6122203"
+    },
+    {
+      "path": "gpu-release-binding-final/summary.json",
+      "sha256": "588a77c909351aff35e2d39898612ca3095df9fd52cae4a680ff0bca9cc95f7d"
+    },
+    {
+      "path": "legacy-unlit-release-final/summary.json",
+      "sha256": "a1a08e4f9c13a252e1f26ba47bc3bbec8cf04bf9e0a38bbab4412c142ccc5ce1"
+    },
+    {
+      "path": "editor-clock-release-final/summary.json",
+      "sha256": "2272c741ba7ae0ad1825126a0e73cf62a94d4dd1fd411f28f1d96bc1877f0e51"
+    },
+    {
+      "path": "editor-clock-release-final/runtime.json",
+      "sha256": "7a3dcc60e95668c4fce4f5fe85d4731b98d131067642473409642a77cb351ac6"
+    },
+    {
+      "path": "editor-clock-release-final/player.log",
+      "sha256": "89a7b555922d7e56cccb60ca21960ee420c120065aca520d52d9ebda299f399e"
+    },
+    {
+      "path": "editor-clock-release-final/frames/capture_manifest.json",
+      "sha256": "cf4189ea04cf214c47c8ccf4881359df0426a5d26f4884059e313fd5434d1b53"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-base/frames/capture_manifest.json",
+      "sha256": "8e5938ef55d33f4939a9759b68b53fd6ff1be011b0e1e0375b5df433df128022"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-blend/frames/capture_manifest.json",
+      "sha256": "1c20e4dc31d68a8f86e475431e95939f83da5290c3d072e1c4160608cac40035"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-clamp/frames/capture_manifest.json",
+      "sha256": "16b8c19634a49453e080183db8eb673a876786ef9747b7374a373644406d13a6"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-clear-only/frames/capture_manifest.json",
+      "sha256": "e3e5130bfcc0ed11e81fba0d180578207d78ceef075f95f3c2fffb874a78c29d"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-clock-frozen/frames/capture_manifest.json",
+      "sha256": "244ae92cc6045ed6e52ae66d5152cda2737acc82b9d969a92cc1faba6387c0d9"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-clock-reverse/frames/capture_manifest.json",
+      "sha256": "00306c5a1bf2d7287f2bec1fd8fac88ce83e64497969811e82371c23f46e2f21"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-depth-occluded/frames/capture_manifest.json",
+      "sha256": "d9563114551ae1b6fe8a72cabe5a92ca25f172b1850521c96f254d0dac40859e"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-diagonal/frames/capture_manifest.json",
+      "sha256": "70660272043a6a465261e720e1f04336bc21c2bc243019a335aca578c676c3bf"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-document-mask/frames/capture_manifest.json",
+      "sha256": "0b1007337aff4213064d2bb415078da964e105531dd5e20d53af44e66cea22b6"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-empty-background/frames/capture_manifest.json",
+      "sha256": "96fa2aaf5a47d7870a8de9b385cff4b581dff13487ce0815a02fb6d72bf5bf3c"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-frame-color/frames/capture_manifest.json",
+      "sha256": "703b93f7e48ea4b7d0ba565500cf8e99c5a4b62f7420640fa77bd9af54f3c23d"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-highlight/frames/capture_manifest.json",
+      "sha256": "2f851036de0f307b0d9c35b8f28aff40a23e35dcc904272b3e55ed5c5429bf1c"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-independent-samplers/frames/capture_manifest.json",
+      "sha256": "1915d6596e338e590ad306c67b77dbce5d15cee71c11862a95d16dcfb107211f"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-mask/frames/capture_manifest.json",
+      "sha256": "a0da41f169dabd32c6f1b4994f7780dd9198cb85dab7d10114b0de7425b58dc6"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-node-opacity/frames/capture_manifest.json",
+      "sha256": "c0069efcf5add7c995ef78cf4b398f6050908892ca4a82b1dc0a5e77bf65273b"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-orthographic/frames/capture_manifest.json",
+      "sha256": "06dfbe5d3eefe65552546a01dc1e07e833684ddf639694441454e050c659d1cb"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-red-alpha/frames/capture_manifest.json",
+      "sha256": "92004c7e4ab9da7327806cd63f7f5641d5211afb36229dc280d2e2623069628d"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-repeat/frames/capture_manifest.json",
+      "sha256": "3112588e1e64421743e889cf2749a64eac6dda06f6fc4525c2d2a6df6c242f44"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-scroll/frames/capture_manifest.json",
+      "sha256": "9de8cf4338898ecea13787bf0e51fb103ccf52412ab57cdea586798606378782"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-soft-half/frames/capture_manifest.json",
+      "sha256": "81b310e210bb91451576cb50f019ddf100f14949dd12d29bd1349da0077f9b73"
+    },
+    {
+      "path": "gpu-release-binding-final/fixed-soft-zero/frames/capture_manifest.json",
+      "sha256": "7b33a20fef743812c6bddbbb29f3c0c8182fe13e3a82e7d8f4cd2c436348066e"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-base/frames/capture_manifest.json",
+      "sha256": "a484ff5fb8920aef89860128946abe98ecb687f0e6627d123f4190fc939be724"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-blend/frames/capture_manifest.json",
+      "sha256": "2d604f3642b56e91a47124558db418ac8af4e9be1f777cfaef55a702bb8a3bd6"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-clamp/frames/capture_manifest.json",
+      "sha256": "c8723b69428affd1f1f0f0f99c4c77fe7d5aa0ab79e72703ef403f8b45713d19"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-clear-only/frames/capture_manifest.json",
+      "sha256": "0695f5d2e16c95af1d3d48d082dcd4edd9fd66445d364dc207b7e12f27e22905"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-clock-frozen/frames/capture_manifest.json",
+      "sha256": "45da69d4ab67d38c7bd0d07c30c4485fec60f13e9d02d740fb0411f18e91fc6b"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-clock-reverse/frames/capture_manifest.json",
+      "sha256": "f9dc4e57c2b391627cdb71aa83720085e864dee374d3f7714fdebc943397b3d7"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-depth-occluded/frames/capture_manifest.json",
+      "sha256": "31c94c38e72521ff0fdc16cadf7a40d78a0047a9f78cba0d2d849736a376982c"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-diagonal/frames/capture_manifest.json",
+      "sha256": "3bb0ff07ba9c87bd02fe9dcc3673f5e2e58d08ca06c560725ec96f0e4161c610"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-document-mask/frames/capture_manifest.json",
+      "sha256": "460af6b37d8500a3bf29579ed68ebaa2545ebce2a27e71d3bf341cf96cbf5c1b"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-empty-background/frames/capture_manifest.json",
+      "sha256": "17ba83f422d2cb22d7bf80eeca25aa9aa00819c2be99f2218f46376e4d6706fc"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-frame-color/frames/capture_manifest.json",
+      "sha256": "aa3f20a1b9d68aa8479c0081b61a85c9fa33e2513e33ff287eaaec2d62c2fb01"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-highlight/frames/capture_manifest.json",
+      "sha256": "a2ab863dde82087b7c05de52643601422238089e1cb3eecca74762090e4bc885"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-independent-samplers/frames/capture_manifest.json",
+      "sha256": "8b078dae89f51e1a94ecf2ff262323bbb2c8ad3e54b84344316d06da79fd5c52"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-mask/frames/capture_manifest.json",
+      "sha256": "8fd4429a0aee9e1710b8e8f63938f785276cad109a9e4f584fed409d9ef83b6f"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-node-opacity/frames/capture_manifest.json",
+      "sha256": "17e10e393b342275db5496171ae2f7d277c2ceb0a8547b9d8bce40c81cd13cb3"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-orthographic/frames/capture_manifest.json",
+      "sha256": "f926c3366bc6026ace976454ce97b9339eb6b6c8602a7171048f95cbf96d092c"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-red-alpha/frames/capture_manifest.json",
+      "sha256": "da9f33d3cbe21df56f160043c2e166ab513b31248e974f36208c4e2b2ee3fb02"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-repeat/frames/capture_manifest.json",
+      "sha256": "ce3f430ba727fb8c5d8d62eb0fe7215bd6936e9eee1f6d6500bc5e9ab0abe177"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-scroll/frames/capture_manifest.json",
+      "sha256": "6c7f979ce0d8a298a7b5e0245cb6d0a23c608f05691c3054fa52b9b13e35426b"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-soft-half/frames/capture_manifest.json",
+      "sha256": "55275adf338fecacf816a313ff11d02b27a8e1aaa5317685903e450c4ed4fc6c"
+    },
+    {
+      "path": "gpu-release-binding-final/indexed-soft-zero/frames/capture_manifest.json",
+      "sha256": "81e656fb17d0e3c9aea55a3e8a5c604e4fead438e7c808acc14ee5d3c93604e2"
+    },
+    {
+      "path": "legacy-unlit-release-final/combined/frames/capture_manifest.json",
+      "sha256": "79fa8d0ecb60330ad102538d4c1ec28cacf619f14f431b91671318d67c16d80c"
+    },
+    {
+      "path": "legacy-unlit-release-final/combined-half/frames/capture_manifest.json",
+      "sha256": "6fae63f4b865a35d0dc7784dfd37e47273de22250f67ae617a4b1c2652e201f1"
+    },
+    {
+      "path": "legacy-unlit-release-final/dark/frames/capture_manifest.json",
+      "sha256": "b2f06d1c796de8f779ff22a24ed5944fb1b5dc06f99fd0a47ae3fd2e2580dc7b"
+    },
+    {
+      "path": "legacy-unlit-release-final/depth-hidden/frames/capture_manifest.json",
+      "sha256": "f5cc5a704955cdc4498227d762e1703246fd87e92e7e606a82581b8981c7256e"
+    },
+    {
+      "path": "legacy-unlit-release-final/direct/frames/capture_manifest.json",
+      "sha256": "6adc4e160f7bbd65e9a2720716ee042102e62019ea1daa6453997b5bbac7d100"
+    },
+    {
+      "path": "legacy-unlit-release-final/emission/frames/capture_manifest.json",
+      "sha256": "26695cb5c411074bfc814926868c38f7869b7550b19a317037456da4bea26dfd"
+    },
+    {
+      "path": "legacy-unlit-release-final/fixed/frames/capture_manifest.json",
+      "sha256": "f16b98c575fca70bde22b29759a19b435181612e38e8ca7870b060bd423e6d83"
+    },
+    {
+      "path": "legacy-unlit-release-final/gi-only/frames/capture_manifest.json",
+      "sha256": "18c5dce68f84c4267978df1e07c615708568feaf7527b6a8c09a221ec2f824f0"
+    },
+    {
+      "path": "legacy-unlit-release-final/half/frames/capture_manifest.json",
+      "sha256": "2de4898a7ff5f97aad4e0289d239b0fa878249608d216f9cec060b1943c0a7a3"
+    },
+    {
+      "path": "legacy-unlit-release-final/indirect/frames/capture_manifest.json",
+      "sha256": "27b1fb839c4ae8f2f96768ffbc429726f576ea3e79e3af3c4e93886853f8f0eb"
+    },
+    {
+      "path": "legacy-unlit-release-final/isolation-ambient/frames/capture_manifest.json",
+      "sha256": "d624c19be77b9c6fd30672a08632bd0ad78c23876a575732cc7a321024fbf5eb"
+    },
+    {
+      "path": "legacy-unlit-release-final/isolation-direct-diffuse/frames/capture_manifest.json",
+      "sha256": "adaabd16e6e4a83468913ba2d4b2ef8e4e93582bd55c97979eac40e177fb3d26"
+    },
+    {
+      "path": "legacy-unlit-release-final/isolation-direct-specular/frames/capture_manifest.json",
+      "sha256": "8f08194e99dbbbad10e31ec0a2d3fd68b2e06163eec4b01425f72ff30f286253"
+    },
+    {
+      "path": "legacy-unlit-release-final/isolation-hair-kk/frames/capture_manifest.json",
+      "sha256": "d55c6255ebc1222a69dcd1aa4e70dc306e3fcdb6583d3e6ff84acca1d4f4c6e9"
+    },
+    {
+      "path": "legacy-unlit-release-final/isolation-reflection/frames/capture_manifest.json",
+      "sha256": "30aa6efdf9450fca0fadeacef0acd364fe7e47ac225a2f3ecb9ceb2e859b97a0"
+    },
+    {
+      "path": "legacy-unlit-release-final/isolation-rim/frames/capture_manifest.json",
+      "sha256": "3af6afa5f6520b18ca580f26dc3ed44cdb9d9e87ef0d8afb77210213216d13ca"
+    },
+    {
+      "path": "legacy-unlit-release-final/node-half/frames/capture_manifest.json",
+      "sha256": "31d70c3fddfdf024c17f956d765fd12867908d99fae5064c9aaeea19a6d829da"
+    },
+    {
+      "path": "legacy-unlit-release-final/pbr-dark/frames/capture_manifest.json",
+      "sha256": "742fa9622e068a36a1134d01ef5561c0c63b14e640e550d69b9824e4f9ce0ace"
+    },
+    {
+      "path": "legacy-unlit-release-final/pbr-gi-off/frames/capture_manifest.json",
+      "sha256": "59cd988b331f0988693bc7af99495b6bee7ff4d266086c0d1bb38c8236c38e73"
+    },
+    {
+      "path": "legacy-unlit-release-final/pbr-gi-on/frames/capture_manifest.json",
+      "sha256": "1e60acf4d4af7e6919528debac09a5c02e8f61721f8780391c4857dcae958749"
+    },
+    {
+      "path": "legacy-unlit-release-final/pbr-light/frames/capture_manifest.json",
+      "sha256": "8a4287fbbbe3cc10a2b276b793e639f27cb72d0910fa61cefdb32adb747d466f"
+    },
+    {
+      "path": "legacy-unlit-release-final/pbr-probe-off/frames/capture_manifest.json",
+      "sha256": "c1a03062c3e4a2cb3758cfc91a01d5f4830a79f8fef781fe9bb0cd91548e7bd0"
+    },
+    {
+      "path": "legacy-unlit-release-final/pbr-probe-on/frames/capture_manifest.json",
+      "sha256": "e229b7d44cb15dcef2a697d11d68dea372a965ca4436cc48c9a878fee0dbf22c"
+    },
+    {
+      "path": "legacy-unlit-release-final/probe-only/frames/capture_manifest.json",
+      "sha256": "fc78deb1fa2330a84801e88440b341040f29ae46d00870b5d0d5b44e5293c83c"
+    },
+    {
+      "path": "legacy-unlit-release-final/showcase/frames/capture_manifest.json",
+      "sha256": "f14a259736e88671554c84d96a32e1db476804a0490cb7b5170cb4157198d3da"
+    }
+  ]
+}

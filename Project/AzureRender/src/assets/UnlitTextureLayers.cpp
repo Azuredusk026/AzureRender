@@ -92,13 +92,18 @@ float evaluateSoftIntersection(float sceneViewZ,float effectViewZ,float distance
     if(distance<=0)invalid("soft intersection distance");
     return saturate((std::abs(sceneViewZ)-std::abs(effectViewZ)+bias)/distance);
 }
+void validateUnlitEffectFrame(const UnlitEffectFrame& frame) {
+    finite(frame.exposureGain,"frame exposure");finite(frame.saturation,"frame saturation");
+    if(frame.exposureGain<0||frame.saturation<0)invalid("frame gain domain");
+    for(float gain:frame.colorGain)finite(gain,"frame color");
+}
 std::array<float,4> evaluateUnlitTextureLayers(const UnlitTextureLayers& profile,
     std::array<float,4> baseSample,std::array<float,4> secondSample,
     float softIntersection,float nodeOpacity,const UnlitEffectFrame& frame) {
     if(!profile.present||profile.layerCount<1||profile.layerCount>2)invalid("unbound profile");
-    for(float value:{softIntersection,nodeOpacity,frame.exposureGain,frame.saturation})finite(value,"frame");
-    if(frame.exposureGain<0||frame.saturation<0||softIntersection<0||softIntersection>1||nodeOpacity<0||nodeOpacity>1)invalid("frame domain");
-    for(float gain:frame.colorGain)finite(gain,"frame color");
+    validateUnlitEffectFrame(frame);
+    for(float value:{softIntersection,nodeOpacity})finite(value,"frame");
+    if(softIntersection<0||softIntersection>1||nodeOpacity<0||nodeOpacity>1)invalid("frame domain");
     auto result=sample(baseSample,profile.layers[0].sampleMode);
     for(unsigned i=0;i<4;++i)result[i]*=profile.tint[i];
     if(profile.layerCount==2) {

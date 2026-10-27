@@ -4,6 +4,7 @@
 #include "render/EnvironmentSpecular.hpp"
 #include "render/ScreenSpaceReflection.hpp"
 #include "render/NprLighting.hpp"
+#include "assets/UnlitTextureLayers.hpp"
 #include "render/CameraViewDescriptor.hpp"
 #include <optional>
 
@@ -116,7 +117,7 @@ struct SkySettings {
 };
 
 struct RenderSettings {
-    static constexpr std::uint32_t kSchemaVersion = 19;
+    static constexpr std::uint32_t kSchemaVersion = 20;
     bool faceSdfFeature=true,showcasePlatformFeature=true;
     // 0: off, 1: edge adaptive, 2: four-sample supersampling, 3: native temporal, 4: per-sample MSAA.
     std::uint32_t antiAliasing = 1;
@@ -147,6 +148,7 @@ struct RenderSettings {
     EnvironmentSpecularModel environmentSpecularModel=EnvironmentSpecularModel::LegacySchlick;
     ScreenSpaceReflectionSettings screenSpaceReflection;
     NprLightingSettings nprLighting;
+    UnlitEffectFrame unlitEffects;
     float styleMaskStrength = 1.0F;
     float diffuseBandThreshold = 0.40F;
     std::uint32_t showcasePreset = 0;

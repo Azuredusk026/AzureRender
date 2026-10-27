@@ -452,6 +452,15 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-texture-layer-contract.json"
+    },
+    {
+      "path": "runs/20261028-012437-unlit-texture-layers-material-binding-6364c0",
+      "pathBase": "build",
+      "purpose": "公共纹理图层、完整文档绑定、真实暂停及双配置绘制验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-texture-material.json",
+      "primaryProject": "gpu-release-binding-final/project.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
