@@ -524,6 +524,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-coverage-texture.json",
       "primaryProject": "build/runs/20261028-055131-native-glyph-layer-inputs-f2ec92/full-candidate/enclosure-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-063534-native-remaining-layer-combinations-563a11",
+      "pathBase": "build",
+      "purpose": "三项实际图层组合、作者层级及双配置隔离验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/remaining-vfx-combinations.json",
+      "primaryProject": "build/runs/20261028-063534-native-remaining-layer-combinations-563a11/full-candidate/enclosure-remaining.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

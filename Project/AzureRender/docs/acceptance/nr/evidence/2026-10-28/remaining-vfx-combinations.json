@@ -1,0 +1,624 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR7-L4I",
+  "status": "captured_bindings_and_combinations_passed",
+  "baseCommit": "edbecb1",
+  "run": "build/runs/20261028-063534-native-remaining-layer-combinations-563a11",
+  "primaryProject": "build/runs/20261028-063534-native-remaining-layer-combinations-563a11/full-candidate/enclosure-remaining.azureproject",
+  "source": {
+    "CMakeLists.txt": "1fd419cd23e84d61fd077d2c093274e73d7204b1bddf3d58a6a32597ecd6b3b9",
+    "schemas/unlit_texture_layers.schema.json": "abe5189b0189761ca5955a7d6c893801b0a5c93e7f6025e53fd1f7cb42373dbf",
+    "shaders/mesh.frag": "cbeb1289a5af26deee8f23ceaae96352de77f7286ac53691cee7ba67b8bb9dd1",
+    "shaders/unlit_texture_layers.glsl": "3737950166fece90734687829094263a4ba773437511c8c0a11479486b261182",
+    "src/assets/GltfLoader.cpp": "b2922917d9a9d03b1d0ea0bde53519ea75dfae3e1c727b2f67d2f0ec86071fd7",
+    "src/assets/MaterialSurfaceProfile.hpp": "8f11266b103c1f2907ee3b2a6bb377b8f878f3730a42226033c657c3956ee4fd",
+    "src/assets/UnlitTextureLayers.cpp": "a277d23147096b60ac9e8e7c106609b59cdf6a1f02d8e0b25fd6dd7bff4ca078",
+    "src/assets/UnlitTextureLayers.hpp": "3e050c4421636bfce0182d54d8b37a87502c13b58e0e174a5425ceae227b56a4",
+    "src/assets/UnlitTextureSurfaceLoader.inc": "ddab97c184dec890b75e69ece9271c3932074f05657187c82f82b36a264254d3",
+    "src/scenes/CharacterSceneRenderer.cpp": "19ba0de2dab95897355c7caaccbdac2eace5669a6e2e961ab25dfbe49e452139",
+    "tests/UnlitTextureLayersTests.cpp": "3b18a545651cac3a72e0b0f696bfb7a5e1ef7c0e6511faf103448e56eddf81f8",
+    "tests/UnlitTextureMaterialTests.cpp": "1964765494835daa99b4e3dc8623efb6a577565341632736b51084aabd466f68",
+    "tools/create_visibility_fixture.py": "5b0fa7354bb6327323980b0c76f35d228b9aa24cf5635506c486e18185d6d3fa",
+    "tools/test_character_screen_rim_gpu.py": "07287f60b16c84ce9c2c745fd8bba43ba364263edea4a8dcc4144216bf6bcb95",
+    "tools/test_eye_npr_gpu.py": "8f95b2c8bcdb37eda13d109c711acd1ba5035953775f5a37016a969763decb46",
+    "tools/test_npr_illumination_gpu.py": "3320cf52fd13a9f7cc21ad352aaaa447480e8e55fc13a40feb7b92c394cec90f",
+    "tools/test_object_shadow_gpu.py": "7f2e146da9d74f122df256077225cb0c4c50f5fe8754d2b769eb174abedd72fc",
+    "tools/test_texture_mip_bias_gpu.py": "bd9ab46bc0660ba0f3a5ca262d648852fe3ba45db692a83ea0560bb15c7f2a1d",
+    "tools/test_unlit_texture_layers_gpu.py": "ba88fd340a1c9a4e229a20391f0144cc620c6fd808b260df813737a949dbbbc5",
+    "tools/test_vertex_color_gpu.py": "3db2cf13f570a6d50f0931663a247c1c0248196cf31f8436310aab5ed2780377"
+  },
+  "binaries": {
+    "debug-AzurePlayer": "17f5e13d51429a4ef898e12e46528de21d8f772547f0f17f59ce43c57ef307dc",
+    "debug-AzureRender": "e29ece780a3415f5694c7836f34359ddb559796519d79a6c381f0e49bd894f89",
+    "debug-AzureMaterialValidator": "50cabfb21a6eee81816ff792cc37f8d987b06dfddcd74dedde7cf241acf7a014",
+    "release-AzurePlayer": "b967e9fef39e371f0e0021324ea70fad584d24057eff1f2a0f72249878e4c83c",
+    "release-AzureRender": "e63ebe2d75ced46a2c1a7d89b8a3589c401365a03d58ca1700784a498c0fc9cb",
+    "release-AzureMaterialValidator": "9e99f70e451059ef3a30c289b7e8f4dfa72d03ea74ed0e16f13bae2942d27f8f"
+  },
+  "reusedEvidence": {
+    "path": "docs/acceptance/nr/evidence/2026-10-28/unlit-coverage-texture.json",
+    "sha256": "e8910850b1fcba43da9c3c28ceda0b242c97e63bf68c2170d516d6726690a6ce",
+    "sourceFingerprintsMatched": true,
+    "binaryFingerprintsMatched": true
+  },
+  "artifacts": [
+    {
+      "path": "capture_remaining_inputs.py",
+      "sha256": "458d77115f29632356d12aefdcc04210031c9b6fee912ad538d2961ce203da92"
+    },
+    {
+      "path": "component-project/assets/10791-0.dds",
+      "sha256": "317679f9fdfcf44803ad2ca5fe0a7d48ea0a3db43f5a7f89a52bb6706836ef77"
+    },
+    {
+      "path": "component-project/assets/10791-0.dds.azmeta",
+      "sha256": "5f91942823bd2818636e5b8170a4f53909867a431bcea0a2ff0f9b303680ffd7"
+    },
+    {
+      "path": "component-project/assets/11023-0.dds",
+      "sha256": "1421e93cca552c02cabc8081c560d1082b62513ab9be1f466cb6f5e7f1c6e8b3"
+    },
+    {
+      "path": "component-project/assets/11023-0.dds.azmeta",
+      "sha256": "5eae8b62736a8833daf5eb4ef8b49cf403f7b50b9ac769a9f7fb3153c534787c"
+    },
+    {
+      "path": "component-project/assets/11023-1.dds",
+      "sha256": "03880dc3fd2388492e145ec47d910f8a1541df83882036086830e3f97b23cfa3"
+    },
+    {
+      "path": "component-project/assets/11023-1.dds.azmeta",
+      "sha256": "09c3e177af351fac3336e6b44acc8029a725c5992a18d097cdd1196ee0b7ea83"
+    },
+    {
+      "path": "component-project/assets/9179-0.dds",
+      "sha256": "5e76e3c65ba329d3821ddd804e1e9d8331151fdab6ef1c4c797f63fc6f671573"
+    },
+    {
+      "path": "component-project/assets/9179-0.dds.azmeta",
+      "sha256": "6af847d0a60ec07eb2a4401574724ddbae85df846affc172a345171f0f9e8c4b"
+    },
+    {
+      "path": "component-project/assets/9179-1.dds",
+      "sha256": "5cfdd6ad064854ed8e9e63038ac31eb94d63dae6f986d01fcfabd6cfde6753a8"
+    },
+    {
+      "path": "component-project/assets/9179-1.dds.azmeta",
+      "sha256": "4aa8ae856e74b1d0e51ffe38f4a6d4bd1b4d0b88d4aec630d38f23255359e555"
+    },
+    {
+      "path": "component-project/assets/event-10791.gltf",
+      "sha256": "ba4368b5b5a311404fc7f7e91ddbd718e5acf6916068fa66da919099f2533d3f"
+    },
+    {
+      "path": "component-project/assets/event-10791.gltf.azmeta",
+      "sha256": "6d8178616d0f96527ffcdf289f64c06532edbf6d50c14d0b37011a84b090de6e"
+    },
+    {
+      "path": "component-project/assets/event-11023.gltf",
+      "sha256": "0d26e3d7d12f0a6f619154da94c5036965cf1795ca37e36b7b12771e1360be5f"
+    },
+    {
+      "path": "component-project/assets/event-11023.gltf.azmeta",
+      "sha256": "8d59880c7aa92c7c245d492fbdcaf61be695d2b84a145936d5411785a068aa57"
+    },
+    {
+      "path": "component-project/assets/event-9179.gltf",
+      "sha256": "7709a7ecefbcfd57e481f7b87eba3349f8cae1c0494a9b301c89c74302892b78"
+    },
+    {
+      "path": "component-project/assets/event-9179.gltf.azmeta",
+      "sha256": "c9d802b022674e0d47373edea0316f9a8cbaa273064f5363a7c00333ceb9de79"
+    },
+    {
+      "path": "component-project/assets/scene.azurelevel",
+      "sha256": "86a11557306c4af93dd6946c854c4df160d333680f6fb297828868721e999fa3"
+    },
+    {
+      "path": "component-project/assets/scene.azurelevel.azmeta",
+      "sha256": "b6b480dbeb9fc8896599b6dbefab881f02aef09d26e64c875b2438ca6b07bb88"
+    },
+    {
+      "path": "component-project/project.azureproject",
+      "sha256": "8376146b320cedf38b0c28247916ee4037a6ca86886aafab95b84a0b5f93c7c2"
+    },
+    {
+      "path": "event-10791/input-indices.bin",
+      "sha256": "8f00ca74771dcfd7b28b954ddd5c223efaff4e287e1ced2cb7305613c7cbbfd4"
+    },
+    {
+      "path": "event-10791/input-vb-0.bin",
+      "sha256": "bcb295116802412bf5e25ae226c66cc9936a34661b9a97ad28a1beb424e34b3f"
+    },
+    {
+      "path": "event-10791/input-vb-1.bin",
+      "sha256": "3e85b4bdba7cfd18aec8fa3fc16a47e4f9339c2a6261f40d0a9e0929de872676"
+    },
+    {
+      "path": "event-10791/input-vb-2.bin",
+      "sha256": "bcb295116802412bf5e25ae226c66cc9936a34661b9a97ad28a1beb424e34b3f"
+    },
+    {
+      "path": "event-10791/input-vb-3.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-10791/input-vb-4.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-10791/inputs.json",
+      "sha256": "fd174900326e3a06147792d5e1b09c6f22c84cbc08fa416eeaa0116cc0a8c322"
+    },
+    {
+      "path": "event-10791/post-indices-0.bin",
+      "sha256": "8f00ca74771dcfd7b28b954ddd5c223efaff4e287e1ced2cb7305613c7cbbfd4"
+    },
+    {
+      "path": "event-10791/post-vertices-0.bin",
+      "sha256": "54b907a54d0d303b66e27da7e8f7b666ad2fe79f000d1113113c857b634323cd"
+    },
+    {
+      "path": "event-11023/input-indices.bin",
+      "sha256": "9a3c11652a100e5cd7203afc474a285d80d87eac7c36646b352be6159d5ff904"
+    },
+    {
+      "path": "event-11023/input-vb-0.bin",
+      "sha256": "a222cf59973355cb9b90d08de11b78617e85d22e86050a6d7f01924ed6085c61"
+    },
+    {
+      "path": "event-11023/input-vb-1.bin",
+      "sha256": "12276b5f229d942bcd2f1a99be43c9604d9a27b1d70bc3c714d0f8577f5794cb"
+    },
+    {
+      "path": "event-11023/input-vb-2.bin",
+      "sha256": "a222cf59973355cb9b90d08de11b78617e85d22e86050a6d7f01924ed6085c61"
+    },
+    {
+      "path": "event-11023/input-vb-3.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-11023/input-vb-4.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-11023/inputs.json",
+      "sha256": "78c4d07dea377363496b80bbb1a5f83f228ab8eb2501210d693a9c34e9a1b950"
+    },
+    {
+      "path": "event-11023/post-indices-0.bin",
+      "sha256": "9a3c11652a100e5cd7203afc474a285d80d87eac7c36646b352be6159d5ff904"
+    },
+    {
+      "path": "event-11023/post-vertices-0.bin",
+      "sha256": "e8103b536037bcf4bc32c84637843f10242e1fc0b58b360ba475c5aae43b027c"
+    },
+    {
+      "path": "event-9179/input-indices.bin",
+      "sha256": "3be6b2bbc67e16e4ed3f0bf8d15db04d75f4ce431296494c622ca3062918e75c"
+    },
+    {
+      "path": "event-9179/input-vb-0.bin",
+      "sha256": "61cf221c6895e14ba9340c8ec9cfc96067b371bb62d6ceffc3820dff310e51a9"
+    },
+    {
+      "path": "event-9179/input-vb-1.bin",
+      "sha256": "eef9f1da7d9059aea4dd294e0ab19e0880e8c30cc6ad3517f7d60a6161fc5a9f"
+    },
+    {
+      "path": "event-9179/input-vb-2.bin",
+      "sha256": "61cf221c6895e14ba9340c8ec9cfc96067b371bb62d6ceffc3820dff310e51a9"
+    },
+    {
+      "path": "event-9179/input-vb-3.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-9179/input-vb-4.bin",
+      "sha256": "d60dbf57189e6a16e14dc8e8a5ff123ff163334a32857641daeee7d46966bb76"
+    },
+    {
+      "path": "event-9179/inputs.json",
+      "sha256": "73fd6dffcf0fd00bfbd8b2abe49045c30cc36e7c5f4439663fc5444bb6f456c1"
+    },
+    {
+      "path": "event-9179/post-indices-0.bin",
+      "sha256": "3be6b2bbc67e16e4ed3f0bf8d15db04d75f4ce431296494c622ca3062918e75c"
+    },
+    {
+      "path": "event-9179/post-vertices-0.bin",
+      "sha256": "e62d762e2902363520f32419f52f9ddd50d6af55eb524230008cac1bc48953fd"
+    },
+    {
+      "path": "full-candidate/captured-remaining/10791-0.dds",
+      "sha256": "317679f9fdfcf44803ad2ca5fe0a7d48ea0a3db43f5a7f89a52bb6706836ef77"
+    },
+    {
+      "path": "full-candidate/captured-remaining/10791-0.dds.azmeta",
+      "sha256": "5f91942823bd2818636e5b8170a4f53909867a431bcea0a2ff0f9b303680ffd7"
+    },
+    {
+      "path": "full-candidate/captured-remaining/11023-0.dds",
+      "sha256": "1421e93cca552c02cabc8081c560d1082b62513ab9be1f466cb6f5e7f1c6e8b3"
+    },
+    {
+      "path": "full-candidate/captured-remaining/11023-0.dds.azmeta",
+      "sha256": "5eae8b62736a8833daf5eb4ef8b49cf403f7b50b9ac769a9f7fb3153c534787c"
+    },
+    {
+      "path": "full-candidate/captured-remaining/11023-1.dds",
+      "sha256": "03880dc3fd2388492e145ec47d910f8a1541df83882036086830e3f97b23cfa3"
+    },
+    {
+      "path": "full-candidate/captured-remaining/11023-1.dds.azmeta",
+      "sha256": "09c3e177af351fac3336e6b44acc8029a725c5992a18d097cdd1196ee0b7ea83"
+    },
+    {
+      "path": "full-candidate/captured-remaining/9179-0.dds",
+      "sha256": "5e76e3c65ba329d3821ddd804e1e9d8331151fdab6ef1c4c797f63fc6f671573"
+    },
+    {
+      "path": "full-candidate/captured-remaining/9179-0.dds.azmeta",
+      "sha256": "6af847d0a60ec07eb2a4401574724ddbae85df846affc172a345171f0f9e8c4b"
+    },
+    {
+      "path": "full-candidate/captured-remaining/9179-1.dds",
+      "sha256": "5cfdd6ad064854ed8e9e63038ac31eb94d63dae6f986d01fcfabd6cfde6753a8"
+    },
+    {
+      "path": "full-candidate/captured-remaining/9179-1.dds.azmeta",
+      "sha256": "4aa8ae856e74b1d0e51ffe38f4a6d4bd1b4d0b88d4aec630d38f23255359e555"
+    },
+    {
+      "path": "full-candidate/captured-remaining/event-10791.gltf",
+      "sha256": "ba4368b5b5a311404fc7f7e91ddbd718e5acf6916068fa66da919099f2533d3f"
+    },
+    {
+      "path": "full-candidate/captured-remaining/event-10791.gltf.azmeta",
+      "sha256": "2dfa7bf9cf6adda68f017890beabe1b94f8cdb70bfd343f329540fe265553ced"
+    },
+    {
+      "path": "full-candidate/captured-remaining/event-11023.gltf",
+      "sha256": "0d26e3d7d12f0a6f619154da94c5036965cf1795ca37e36b7b12771e1360be5f"
+    },
+    {
+      "path": "full-candidate/captured-remaining/event-11023.gltf.azmeta",
+      "sha256": "0a88f0c769c4cfd90ec45cf1ab90772a4b8981caf9190c422258c5a2c0cd1511"
+    },
+    {
+      "path": "full-candidate/captured-remaining/event-9179.gltf",
+      "sha256": "7709a7ecefbcfd57e481f7b87eba3349f8cae1c0494a9b301c89c74302892b78"
+    },
+    {
+      "path": "full-candidate/captured-remaining/event-9179.gltf.azmeta",
+      "sha256": "9eb0a2f775f927a7052afa428ce527de7d97a3d5deff2c5cd5d7bc517f387889"
+    },
+    {
+      "path": "full-candidate/enclosure-remaining.azureproject",
+      "sha256": "0b0fb7d898a5cfe632b20389e1b039ac1e4dee9adcc01b4695ef0bd726e71164"
+    },
+    {
+      "path": "full-candidate/native-gi/enclosure-remaining.azurelevel",
+      "sha256": "353f4d910d8ce3475406b95fcc82eef9328ef65c40809d88dbd63bcfc3189bd8"
+    },
+    {
+      "path": "gpu-checks.log",
+      "sha256": "1ea778a0f93f87a80f7d29658aeec0e718cec07beee66bff2b5134e1959bf5f3"
+    },
+    {
+      "path": "isolated-component-gpu.json",
+      "sha256": "92a39bbf40aa6cf03258d63a5c92c527e5540cd1cb8fbd3bb89c25904e23a29e"
+    },
+    {
+      "path": "isolated-debug-fixed/frames/capture_manifest.json",
+      "sha256": "9cdf5eaadf0e16e2e73a9143957d0dfad5e634b8893cebc3fbefe2545d2ffc5f"
+    },
+    {
+      "path": "isolated-debug-fixed/frames/frame_000000.png",
+      "sha256": "d7e5fbc701c2b366a9da82faf4494b85cf1169676fcbcd324ec648d75c00f4d9"
+    },
+    {
+      "path": "isolated-debug-fixed/runtime.json",
+      "sha256": "d1933d538f389b6d720c592c0c11bcbe94aa98cecb8e5476de16fb229a5e8e92"
+    },
+    {
+      "path": "isolated-debug-fixed.log",
+      "sha256": "7f656162dc209ae3ecfbb9122d24b98efa24addfd56aff82834f14ea5cf99df6"
+    },
+    {
+      "path": "isolated-debug-indexed/frames/capture_manifest.json",
+      "sha256": "6ac7eb1f108ae8cdc3712d6f7c7ade2bda1f0930f8b2fcab3a1ca73b515cd445"
+    },
+    {
+      "path": "isolated-debug-indexed/frames/frame_000000.png",
+      "sha256": "d7e5fbc701c2b366a9da82faf4494b85cf1169676fcbcd324ec648d75c00f4d9"
+    },
+    {
+      "path": "isolated-debug-indexed/runtime.json",
+      "sha256": "d1933d538f389b6d720c592c0c11bcbe94aa98cecb8e5476de16fb229a5e8e92"
+    },
+    {
+      "path": "isolated-debug-indexed.log",
+      "sha256": "6c8b9deafc0536ab1954e4758ed35971732498ed2780b5218584e89b1d3fda42"
+    },
+    {
+      "path": "isolated-release-fixed/frames/capture_manifest.json",
+      "sha256": "8ae046bbb3b73191786953a0933ceb3c4b535a4291717f3a19551928b9230a59"
+    },
+    {
+      "path": "isolated-release-fixed/frames/frame_000000.png",
+      "sha256": "d7e5fbc701c2b366a9da82faf4494b85cf1169676fcbcd324ec648d75c00f4d9"
+    },
+    {
+      "path": "isolated-release-fixed/runtime.json",
+      "sha256": "d1933d538f389b6d720c592c0c11bcbe94aa98cecb8e5476de16fb229a5e8e92"
+    },
+    {
+      "path": "isolated-release-fixed.log",
+      "sha256": "05e119b5c4a468c61b03e53c563c62e38f4792345396e29397dd0dfa294aa990"
+    },
+    {
+      "path": "isolated-release-indexed/frames/capture_manifest.json",
+      "sha256": "bd7bf4e487232b211f96c3b5bfaae7f04e527107f7d188267171459489aa5f50"
+    },
+    {
+      "path": "isolated-release-indexed/frames/frame_000000.png",
+      "sha256": "d7e5fbc701c2b366a9da82faf4494b85cf1169676fcbcd324ec648d75c00f4d9"
+    },
+    {
+      "path": "isolated-release-indexed/runtime.json",
+      "sha256": "d1933d538f389b6d720c592c0c11bcbe94aa98cecb8e5476de16fb229a5e8e92"
+    },
+    {
+      "path": "isolated-release-indexed.log",
+      "sha256": "ab6a0716020117308af147861c0abbdde8fff6704ecdcec4691922a2a7e7aad6"
+    },
+    {
+      "path": "main-remaining-comparison.json",
+      "sha256": "90c57534f33e2eca3f42bc915bce97b7ae1a785147c7b4788a4434ca8841833d"
+    },
+    {
+      "path": "main-remaining-release/frames/capture_manifest.json",
+      "sha256": "446278a5def1c7a3cfb30a493c46d50a283bad29985b8d0c6f3d20312a96c033"
+    },
+    {
+      "path": "main-remaining-release/frames/frame_000000.png",
+      "sha256": "c8b74dbac7a858d6bfa870eb6552238b2eb719d485cc518a790caeba28e032df"
+    },
+    {
+      "path": "main-remaining-release/runtime.json",
+      "sha256": "5119c3fe63d72d115bbfe6a239d3ed1df518e87bb1f4f226f93c3ae293d5f05b"
+    },
+    {
+      "path": "main-remaining-release.log",
+      "sha256": "81ab248b5d5cdec7b6e3aa55f259179d27ea8268d290a50106f0c7c4ad425780"
+    },
+    {
+      "path": "material-validation.json",
+      "sha256": "2532b6403174a17bafc3e59e5a095abcb5aebdf7d1067e4a778f0ceb93271247"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip0.bin",
+      "sha256": "0521f286f711295a025f23dd37cc101cd028d5ba58fe334108932c03de42d65b"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip1.bin",
+      "sha256": "5e3dfbab76a4dd6f9a76ea4290a1b8bab07dd3ac5feaf79ecc7dc77accc03eda"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip10.bin",
+      "sha256": "2d645817bf6161afd183a774c3fd47e42ad26ba8139fbc6fe60e12e7ee9147d2"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip2.bin",
+      "sha256": "f551f05f44f030486951d589225347760cf874d6d421acf365670dc5efa592d5"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip3.bin",
+      "sha256": "2c6ecf37710afcdb41622b7578686a7c790c1c8e3729d9c4f86d13aeae5834a8"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip4.bin",
+      "sha256": "e1e437e90550c7f884ea5b37026b132f2d183d5ee5f8dbb32c92de1cb8046d08"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip5.bin",
+      "sha256": "4ae1aca9d5deb3406dd32a46d95601a303ef66b71e5e113fd5fd055d6e986c0e"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip6.bin",
+      "sha256": "55ee3d8cce0f91275581c37ce4d544ecd5b231f0ee63e0807e4cdaa2165ee692"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip7.bin",
+      "sha256": "ef267931a8b14c7b6fa0bddffc887d88ea54069d3a69a6332207393bf4d1c38e"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip8.bin",
+      "sha256": "b7d11a82c0c949b7e33f7733c9f574a7eb2c27694751d7dc00bbe824f3333d36"
+    },
+    {
+      "path": "native-mips/ResourceId-12004-mip9.bin",
+      "sha256": "fc0ede0a0283ad3af01ddf2d098af31eec81ce22e33134bcd4e0c7feaaaa5df7"
+    },
+    {
+      "path": "native-mips/ResourceId-12007-mip0.bin",
+      "sha256": "66eaa0df8f5b3864278915fe67ab5907c037fac196f931a474e4562747b020f5"
+    },
+    {
+      "path": "native-mips/ResourceId-12007-mip1.bin",
+      "sha256": "ca62a4c9d53cf4fcbc37be997a097767822ffa088b88aacf8302e0357fc934ca"
+    },
+    {
+      "path": "native-mips/ResourceId-12007-mip2.bin",
+      "sha256": "59149904f6e551deef778179f6f11bf78d9645bed39afdef97b6c70fbaf89117"
+    },
+    {
+      "path": "native-mips/ResourceId-12007-mip3.bin",
+      "sha256": "51bd94bb4ad01c8b0d533942a7c0fdf453ae37e2c84de9449f892ecdf70ac662"
+    },
+    {
+      "path": "native-mips/ResourceId-12007-mip4.bin",
+      "sha256": "879c6a6da7c44a51640d30b493e9831e5bf31637488402646df72da057b90e37"
+    },
+    {
+      "path": "native-mips/ResourceId-12007-mip5.bin",
+      "sha256": "76d9d0ca0a18a50ac766a7155f0e57f8365802c636132da17cd64f32210bce91"
+    },
+    {
+      "path": "native-mips/ResourceId-12007-mip6.bin",
+      "sha256": "1f302dba7c02d20488fa264d2d00be955abe34c11c4a4c0dbec1f7e6a3fb488a"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip0.bin",
+      "sha256": "6e5188910fae3659b6084c1c37cdaee281ef65c75a33548550ea69d0e0d039ba"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip1.bin",
+      "sha256": "fc9ab8cffbfa00a9a6f4f3f3d435d7539275822fe392de2aa4f1901882ce646a"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip2.bin",
+      "sha256": "b5062f7622a53e39d8705683e5819eb313d7952afe50d0c7083a21d00d0a1ec8"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip3.bin",
+      "sha256": "19ac37fdc7d2f78d97ac2101e6b0131c3a66424976842bad3101590a75a41911"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip4.bin",
+      "sha256": "05e4eeea08f106c9c9db0f9df1a50aa1d9066db3a53ce91fd200a4989e1c27a7"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip5.bin",
+      "sha256": "ef7ee3a31202f3a51c5248f441aa431d140434984105dcb5b0ad57912d2c984b"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip6.bin",
+      "sha256": "b4767aa94c45726f6c5119b19f002bb40b2fbc4772d6ff69f33a93653a7c0e5e"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip7.bin",
+      "sha256": "1132b26c0f0f33c4710d4dfed1bf397b78f741bef9552bb9c85094aa54e28c43"
+    },
+    {
+      "path": "native-mips/ResourceId-12188-mip8.bin",
+      "sha256": "10949f75ec1495440eb04bb120ac4dfb96634a2a605df7d1ea5ca05f15b633ff"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip0.bin",
+      "sha256": "1e855eec16cec4cca3d02bea84450dc563ec5c44cc5645a794b9a2e6b83a89ff"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip1.bin",
+      "sha256": "8c30acb4e9e8afe2d31772e1583422eed339789204bfc557b87b0cf32091194e"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip2.bin",
+      "sha256": "01038c0990f79be19e7d8340f1cd8d51ef181aad846fa6eb18b128c2691c6237"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip3.bin",
+      "sha256": "0633e9175192bc6ba52179ea98c8ab62baa344b863db16c7f58859cae0468ebd"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip4.bin",
+      "sha256": "56970bf0503dd78c172dca6ab7919abd91a54a1452469448e27915588c81e5a1"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip5.bin",
+      "sha256": "392824d06bec3c073c37a5ad46f9870b9ab488b9ec66e92c69a28f4b28801606"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip6.bin",
+      "sha256": "d2a945a6609f9dc5c41c94ae5864a3f01b2bd0918b155727b4c3bb48fa459be4"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip7.bin",
+      "sha256": "7054a5286b66ee3e7ab47495c33361459a6381fbdf1ae342a3468fc6c86735d7"
+    },
+    {
+      "path": "native-mips/ResourceId-12190-mip8.bin",
+      "sha256": "81ad88315f795888a37ffd5bdc2856d032517b7a1b36c8dff3c85850fdcf301a"
+    },
+    {
+      "path": "native-mips/ResourceId-339-mip0.bin",
+      "sha256": "8667e718294e9e0df1d30600ba3eeb201f764aad2dad72748643e4a285e1d1f7"
+    },
+    {
+      "path": "native-mips/ResourceId-359-mip0.bin",
+      "sha256": "e0205519f6bcde4208fd5e9aece72f518eb4ce5879ca1832a6cb221d534a2d7e"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "33a623f83ca2cafbfaf2808e56e5912abbeb6b8772d4f634d9595cb1dc778049"
+    },
+    {
+      "path": "prepare_remaining.py",
+      "sha256": "6c1156af6882035a57ab79ec1afb98217ee33a2f179db40fc9f3b5bb6ecea0ec"
+    },
+    {
+      "path": "remaining-receipt.json",
+      "sha256": "c77fedbb6a862391761a761cf31aa2aaf1d4754f59d785399c46b34e660c56b0"
+    },
+    {
+      "path": "run_checks.py",
+      "sha256": "658926350d03c1587e826467b4e412a7386e7dd592f549b32d74516a0ecbb7ea"
+    },
+    {
+      "path": "runtime-inputs.json",
+      "sha256": "eab6886efeace0929ca537ae94000411f2a412ffce5542f8f71df4b7ab36ec03"
+    }
+  ],
+  "tests": {
+    "materialValidators": 6,
+    "componentCaptures": 4,
+    "configurationAndDescriptorExact": true,
+    "allocatorAfterUnload": {
+      "buffers": 0,
+      "images": 0
+    }
+  },
+  "content": {
+    "vfxInstances": 28,
+    "opaqueBoxInstances": 22,
+    "materialLayoutVersion": 15,
+    "events": [
+      9179,
+      10791,
+      11023
+    ]
+  },
+  "mainCamera": {
+    "status": "captured",
+    "changedPixels": 687,
+    "priorMeanAbsoluteByteError": 14.235525535300926,
+    "candidateMeanAbsoluteByteError": 14.234761284722222,
+    "regions": [
+      {
+        "event": 9179,
+        "sourceContributingPixels": 11,
+        "priorError": 145.0909090909091,
+        "candidateError": 36.484848484848484
+      },
+      {
+        "event": 10791,
+        "sourceContributingPixels": 38,
+        "priorError": 108.8157894736842,
+        "candidateError": 98.41228070175438
+      },
+      {
+        "event": 11023,
+        "sourceContributingPixels": 148,
+        "priorError": 17.02027027027027,
+        "candidateError": 9.8490990990991
+      }
+    ]
+  },
+  "limitations": [
+    "Frozen captured geometry and source material clock; continuous emitter motion remains open.",
+    "Remaining two UV-disturbed effects and other central emissive programs remain open.",
+    "Full NR0 through NR12 image and performance gates remain active."
+  ]
+}
