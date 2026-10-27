@@ -24,12 +24,15 @@ def main():
     parser.add_argument('--surface-color-encoding', choices=('authored-srgb','gpu-linear'), default='authored-srgb')
     parser.add_argument('--lod-policy', choices=('metric', 'highest'), default='metric')
     parser.add_argument('--lod-metric-squared', type=float)
+    parser.add_argument('--source-chunk', action='append',
+                        help='Exact inventory chunk path; repeat to select multiple sources')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     if args.lod_policy == 'highest' and args.lod_metric_squared is not None:
         parser.error('--lod-metric-squared requires --lod-policy metric')
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
     from endfield_native.scene_lod import select_draw_indices
     from endfield_native.mesh_binding import resolve_mesh_binding
+    from endfield_native.scene_sources import select_renderer_sources
     source = args.source_root.resolve(strict=True)
     probe = args.probe.resolve(strict=True)
     inventory = args.inventory.resolve(strict=True)
@@ -45,6 +48,7 @@ def main():
     data = json.loads(inventory.read_text(encoding='utf8'))
     if data['format'] != 'AzureEndfieldRawSceneInventory/1':
         raise ValueError('Unsupported source instance inventory')
+    selected_renderers, source_selection = select_renderer_sources(data, args.source_chunk)
     materials, textures = load_catalog((manifest_path,))
     containers = {}
     for row in manifest['Containers']:
@@ -59,7 +63,7 @@ def main():
     audit = []
     max_matrix_error = 0.0
     basis = Matrix(((1,0,0,0), (0,0,-1,0), (0,1,0,0), (0,0,0,1)))
-    for row in data['renderers']:
+    for row in selected_renderers:
         entity = row['instance']
         identity = 'native-' + str(entity['entity_id'])
         parent = bpy.data.objects.new(identity, None)
@@ -136,7 +140,7 @@ def main():
                 bounds[axis*2] = min(bounds[axis*2], point[axis])
                 bounds[axis*2+1] = max(bounds[axis*2+1], point[axis])
     maximum_bounds_overflow = 0.0
-    for row in data['renderers']:
+    for row in selected_renderers:
         entity = row['instance']
         actual = observed_bounds.get(entity['entity_id'])
         expected = entity['world_bounds']
@@ -156,11 +160,13 @@ def main():
     bpy.ops.export_scene.gltf(filepath=str(output / 'scene.glb'), export_format='GLB', export_animations=False, export_extras=True)
     bpy.ops.wm.save_as_mainfile(filepath=str(output / 'scene.blend'))
     report = dict(status='source_bound_technical_preview', objects=audit,
-                  source_entities=len(data['renderers']), shared_draw_resources=len(draw_cache),
+                  source_entities=len(selected_renderers), shared_draw_resources=len(draw_cache),
+                  source_selection=source_selection,
                   maximum_source_matrix_error=max_matrix_error, materials=len(material_cache),
                   maximum_source_bounds_overflow=maximum_bounds_overflow,
                   inputs=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in (inventory, manifest_path, Path(__file__),
                       Path(__file__).resolve().parents[1] / 'blender/native_surface_materials.py',
+                      Path(__file__).with_name('scene_sources.py'),
                       source / 'blender_scene_materials.py')],
                   exchange_resources=len(exchange['resources']) if exchange else None,
                   baked_materials=bake_reports,

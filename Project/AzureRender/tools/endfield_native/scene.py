@@ -106,6 +106,8 @@ def main():
     parser.add_argument('--selection-policy', choices=('world-bounds', 'origin'), default='world-bounds',
                         help='Closed world-bounds overlap; missing bounds use half-open origin membership')
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--source-chunk', action='append',
+                        help='Exact VFS chunk path; repeat to select multiple sources')
     args = parser.parse_args()
     from extractor_core import resources
     from extractor_core.instances import iter_entities
@@ -122,6 +124,11 @@ def main():
     entries = sorted((e for e in group.iter_files() if pattern.fullmatch(e.file_name)), key=lambda e:e.file_name)
     if not entries:
         raise ValueError('Scene has no InitChunkData')
+    from endfield_native.scene_sources import select_chunk_paths
+    available_chunks = [e.file_name for e in entries]
+    selected_chunks = select_chunk_paths(available_chunks, args.source_chunk)
+    selected_set = set(selected_chunks)
+    entries = [e for e in entries if e.file_name in selected_set]
     paths = build_path_id_index(args.path_hash)
     chunks, records, renderers = [], [], {}
     for entry in entries:
@@ -154,6 +161,10 @@ def main():
     unique, duplicates = merge_instances(records)
     selected = list(renderers.values())
     selection = dict(policy=args.selection_policy,
+                     source_chunks=dict(schemaVersion=1,
+                         policy='all' if args.source_chunk is None else 'explicit',
+                         selectedChunks=selected_chunks,
+                         excludedChunks=[p for p in available_chunks if p not in selected_set]),
                      geometry_boundary='closed_overlap' if args.selection_policy == 'world-bounds' else 'half_open_origin',
                      missing_bounds='half_open_origin',
                      selected_without_world_bounds=sum(row['instance'].get('world_bounds') is None for row in selected),
