@@ -47,6 +47,18 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
                 level.resourceKey+=":"+std::to_string(record.second.fingerprint);
         }
     }
+    if(expanded.contains("viewFog")){
+        level.scene.viewFog=expanded.at("viewFog").get<ViewFogBinding>();
+        auto& reference=level.scene.viewFog.asset;
+        if(!reference.empty()){
+            reference=assets.resolveReference(reference).u8string();
+            std::string key="viewFog:"+reference;
+            for(const auto& record:assets.records())if(record.second.path==std::filesystem::u8path(reference))
+                key+=":"+std::to_string(record.second.fingerprint);
+            level.resourceKey+=key;
+            level.reloadKey_+=key;
+        }
+    }
     std::set<std::string> resources;
     for (const auto& source : expanded.at("resources")) {
         SceneResource resource{source.at("id").get<std::string>(), "gltf", assets.resolveReference(source.at("asset").get<std::string>())};

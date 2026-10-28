@@ -1,5 +1,7 @@
 #include "runtime/AssetDatabase.hpp"
 #include "render/OctahedralEnvironment.hpp"
+#include "render/FogVolumeData.hpp"
+#include "scene/SceneDescription.hpp"
 #include "runtime/LevelSession.hpp"
 #include <fstream>
 #include <iterator>
@@ -122,6 +124,12 @@ int main() {
   const auto giId=db.idForPath("assets:/field.aziv");
   level["irradianceVolume"]={{"version",2},{"asset",giId},{"intensity",.5},{"enabled",false},
       {"sampling",{{"normalOffset",.25},{"jitterAmplitude",.2},{"phase",49.875}}}};
+  FogVolumeData fogVolume;fogVolume.dimensions={1,1,1};fogVolume.rgba16f={0,0,0,0x3c00};
+  fogVolume.save(root/"assets/view.azfog");db.refresh();
+  const auto fogId=db.idForPath("assets:/view.azfog");
+  ViewFogBinding fog;fog.enabled=true;fog.asset=fogId;
+  fog.captureView=CameraViewDescriptor{};fog.projection.extent={2560,1440};
+  level["viewFog"]=fog;
   level["lights"]=nlohmann::json::array({{{"id","spot"},{"nodeId","instance:node"},
       {"shape",{{"type","spot"},{"direction",{0,0,-1}},{"innerCone",.25},{"outerCone",.5},
           {"falloff","range-power"},{"falloffExponent",3.5}}}}});
@@ -132,8 +140,11 @@ int main() {
   check(parsed.scene.irradianceVolume.asset==db.resolve(giId).u8string());
   check(parsed.scene.irradianceVolume.intensity==.5F && !parsed.scene.irradianceVolume.enabled);
   check(parsed.scene.irradianceVolume.sampling.normalOffset==.25F && parsed.scene.irradianceVolume.sampling.phase==49.875F);
+  check(parsed.scene.viewFog.enabled && parsed.scene.viewFog.asset==db.resolve(fogId).u8string());
+  check(parsed.scene.renderDescription().viewFog.projection.extent==fog.projection.extent);
   const auto& giDependencies=db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies;
   check(std::find(giDependencies.begin(),giDependencies.end(),giId)!=giDependencies.end());
+  check(std::find(giDependencies.begin(),giDependencies.end(),fogId)!=giDependencies.end());
   check(std::find(db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies.begin(),
       db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies.end(),id)!=db.records().at(db.idForPath("assets:/start.azurelevel")).dependencies.end());
   transform.translation={15,16,17};
@@ -141,6 +152,22 @@ int main() {
   parsed.save(root/"saved.azurelevel");auto reopened=Level::load(root/"saved.azurelevel",db);
   check(reopened.scene.nodes[0].translation[2]==17 && reopened.scene.nodes[0].prefabSource==prefabId);
   check(reopened.scene.reflectionProbe.blendDistance==.75F);
+  check(reopened.scene.viewFog.asset==parsed.scene.viewFog.asset);
+  const auto fogResourceKey=parsed.resourceKey;
+  fogVolume.rgba16f[0]=0x3800;fogVolume.save(root/"assets/view.azfog");db.refresh();
+  check(Level::parse(level,db).resourceKey!=fogResourceKey);
+  check(Level::parse(level,db).reloadKey()!=parsed.reloadKey());
+  auto changedFog=level;changedFog["viewFog"]["projection"]["framePhase"]=1;
+  check(Level::parse(changedFog,db).reloadKey()!=parsed.reloadKey());
+  SceneDocument fogScene;fogScene.viewFog=parsed.scene.viewFog;fogScene.viewFog.asset=fogId;
+  fogScene.save(root/"assets/fog.azscene");db.refresh();
+  const auto& textFogDependencies=db.records().at(db.idForPath("assets:/fog.azscene")).dependencies;
+  check(std::find(textFogDependencies.begin(),textFogDependencies.end(),fogId)!=textFogDependencies.end());
+  std::filesystem::rename(root/"assets/view.azfog",root/"assets/moved-view.azfog");
+  std::filesystem::rename(root/"assets/view.azfog.azmeta",root/"assets/moved-view.azfog.azmeta");
+  db.refresh();check(Level::parse(level,db).scene.viewFog.asset==db.resolve(fogId).u8string());
+  check(db.resolve(fogId).filename()=="moved-view.azfog");
+  check(project.loadScene(root/"assets/fog.azscene").viewFog.asset==db.resolve(fogId).u8string());
   auto orientedLevel=level;orientedLevel["irradianceVolume"]["version"]=3;
   orientedLevel["irradianceVolume"]["sampling"]["pixelOrigin"]="bottom-left";
   orientedLevel["irradianceVolume"]["sampling"]["jitterSpace"]="field";

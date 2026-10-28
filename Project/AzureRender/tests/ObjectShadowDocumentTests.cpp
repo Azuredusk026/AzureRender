@@ -37,7 +37,9 @@ int main(){
         require(reopened.nodes[0].objectShadow->receiverPixelOffsetX==-.5F&&reopened.nodes[0].objectShadow->receiverPixelOffsetY==.5F&&reopened.nodes[0].objectShadow->surfaceNormalBias,"Receiver settings lost during document roundtrip");
         std::string legacy;{std::ifstream file(path);legacy.assign(std::istreambuf_iterator<char>(file),{});}
         const auto field=legacy.find("objectShadow ");require(field!=std::string::npos,"Version thirteen must serialize an explicit optional shadow field");
-        legacy.erase(field,legacy.find('\n',field)-field+1);const auto header=legacy.find("schemaVersion 13");
+        legacy.erase(field,legacy.find('\n',field)-field+1);
+        const auto fogField=legacy.find("viewFog ");require(fogField!=std::string::npos,"Current scene must serialize view fog");
+        legacy.erase(fogField,legacy.find('\n',fogField)-fogField+1);const auto header=legacy.find("schemaVersion 14");
         require(header!=std::string::npos,"Unexpected current scene version");legacy.replace(header,16,"schemaVersion 12");
         {std::ofstream file(root/"legacy.azscene");file<<legacy;}
         require(!SceneDocument::load(root/"legacy.azscene").nodes[0].objectShadow,"Version twelve must load with an empty object shadow");

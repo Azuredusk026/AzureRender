@@ -11,6 +11,8 @@ scene::SceneDescription SceneDocument::renderDescription() const {
     result.reflectionProbe = reflectionProbe;
     irradianceVolume.validate();
     result.irradianceVolume = irradianceVolume;
+    viewFog.validate();
+    result.viewFog = viewFog;
     result.resources.reserve(this->resources.size());
     for (const azurerender::SceneResource& resource :
          this->resources) {

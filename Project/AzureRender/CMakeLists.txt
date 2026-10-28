@@ -551,6 +551,8 @@ add_library(AzureRenderCore STATIC
     src/render/FogTransport.cpp
     src/render/FogVolumeData.cpp
     src/render/FogViewProjection.cpp
+    src/render/ViewFogBinding.cpp
+    src/render/ViewFogBindingJson.cpp
     src/render/EnvironmentCubeTexture.cpp
     src/render/ComputePass.cpp
     src/rhi/GpuAllocator.cpp
@@ -1016,6 +1018,9 @@ if(BUILD_TESTING)
     add_executable(AzureFogViewProjectionTests tests/FogViewProjectionTests.cpp)
     target_link_libraries(AzureFogViewProjectionTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FogViewProjection COMMAND AzureFogViewProjectionTests)
+    add_executable(AzureViewFogBindingTests tests/ViewFogBindingTests.cpp)
+    target_link_libraries(AzureViewFogBindingTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ViewFogBinding COMMAND AzureViewFogBindingTests)
     add_executable(AzureFogVolumeOwnerTests tests/FogVolumeOwnerTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureFogVolumeOwnerTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FogVolumeOwner COMMAND AzureFogVolumeOwnerTests)

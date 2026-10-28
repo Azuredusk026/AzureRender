@@ -5,6 +5,7 @@
 #include "render/LightShapeJson.hpp"
 #include "render/ReflectionProbeJson.hpp"
 #include "render/IrradianceVolumeJson.hpp"
+#include "render/ViewFogBindingJson.hpp"
 #include "ecs/ObjectShadow.hpp"
 #include <optional>
 
@@ -53,7 +54,7 @@ struct SceneLight {
 };
 
 struct SceneDocument {
-    static constexpr std::uint32_t kSchemaVersion = 13;
+    static constexpr std::uint32_t kSchemaVersion = 14;
 
     std::string sceneId = "untitled";
     std::vector<SceneResource> resources;
@@ -61,6 +62,7 @@ struct SceneDocument {
     std::vector<SceneLight> lights;
     ReflectionProbe reflectionProbe;
     IrradianceVolumeBinding irradianceVolume;
+    ViewFogBinding viewFog;
     // Scene renderer selector persisted through renderSettings.sceneType.
     RenderSettings renderSettings;
 

@@ -89,6 +89,7 @@ void writeDocument(std::ostream& output, const SceneDocument& document) {
     }
     output << "reflectionProbe " << std::quoted(nlohmann::json(document.reflectionProbe).dump()) << '\n';
     output << "irradianceVolume " << std::quoted(nlohmann::json(document.irradianceVolume).dump()) << '\n';
+    output << "viewFog " << std::quoted(nlohmann::json(document.viewFog).dump()) << '\n';
     output << "showcasePreset " << document.renderSettings.showcasePreset << '\n'
            << "styleMaskStrength " << document.renderSettings.styleMaskStrength << '\n'
            << "diffuseBandThreshold " << document.renderSettings.diffuseBandThreshold << '\n'
@@ -292,6 +293,11 @@ SceneDocument SceneDocument::load(const std::filesystem::path& path) {
         std::string payload;
         if(!(input>>key>>std::quoted(payload))||key!="irradianceVolume")throw std::runtime_error("Missing irradiance volume");
         document.irradianceVolume=nlohmann::json::parse(payload).get<IrradianceVolumeBinding>();
+    }
+    if(schemaVersion>=14){
+        std::string payload;
+        if(!(input>>key>>std::quoted(payload))||key!="viewFog")throw std::runtime_error("Missing view fog binding");
+        document.viewFog=nlohmann::json::parse(payload).get<ViewFogBinding>();
     }
     if (!(input >> key >> document.renderSettings.showcasePreset)
         || key != "showcasePreset") {

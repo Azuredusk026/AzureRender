@@ -14,6 +14,7 @@
 #include "ecs/LightShape.hpp"
 #include "render/ReflectionProbe.hpp"
 #include "render/IrradianceVolumeBinding.hpp"
+#include "render/ViewFogBinding.hpp"
 #include "ecs/ObjectShadow.hpp"
 #include <optional>
 
@@ -61,6 +62,7 @@ struct SceneDescription {
     std::vector<SceneLightDesc> lights;
     ReflectionProbe reflectionProbe;
     IrradianceVolumeBinding irradianceVolume;
+    ViewFogBinding viewFog;
 };
 
 struct ResourceLayout {

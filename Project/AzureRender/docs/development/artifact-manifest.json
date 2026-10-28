@@ -578,6 +578,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-projection.json",
       "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-074753-scene-view-fog-resource-3ec2ae",
+      "pathBase": "build",
+      "purpose": "场景视图雾场绑定、资源引用及双配置兼容验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-scene-binding.json",
+      "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

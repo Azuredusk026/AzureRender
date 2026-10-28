@@ -10,6 +10,11 @@ void assignLegacyResourceKey(Level& level,const AssetDatabase& assets){
         level.resourceKey+=resource.path.lexically_normal().generic_u8string()+":";
         for(const auto& record:assets.records())if(record.second.path==resource.path)level.resourceKey+=std::to_string(record.second.fingerprint);
     }
+    if(!level.scene.viewFog.asset.empty()){
+        level.resourceKey+="viewFog:"+level.scene.viewFog.asset;
+        for(const auto& record:assets.records())if(record.second.path==std::filesystem::u8path(level.scene.viewFog.asset))
+            level.resourceKey+=":"+std::to_string(record.second.fingerprint);
+    }
 }
 }
 

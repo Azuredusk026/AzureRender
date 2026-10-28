@@ -208,6 +208,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                 const auto scene=SceneDocument::load(path);
                 if(!scene.reflectionProbe.texture.empty())document["reflectionProbe"]=scene.reflectionProbe;
                 if(!scene.irradianceVolume.asset.empty())document["irradianceVolume"]=scene.irradianceVolume;
+                if(!scene.viewFog.asset.empty())document["viewFog"]=scene.viewFog;
                 if(!scene.renderSettings.grade.lut.asset.empty())document["gradeLut"]={{"asset",scene.renderSettings.grade.lut.asset}};
                 for(const auto& resource:scene.resources)document["resources"].push_back({{"asset",resource.path.generic_u8string()}});
                 document["nodes"]=Json::array();for(const auto& node:scene.nodes)if(!node.materialSlots.empty())document["nodes"].push_back({{"materialSlots",node.materialSlots}});

@@ -14,6 +14,8 @@
 
 namespace {
 std::string withoutObjectShadows(std::string value) {
+    if(const auto line=value.find("viewFog ");line!=std::string::npos)
+        value.erase(line,value.find('\n',line)-line+1);
     for(auto line=value.find("objectShadow ");line!=std::string::npos;line=value.find("objectShadow "))
         value.erase(line,value.find('\n',line)-line+1);
     return value;
@@ -158,6 +160,9 @@ int main() {
         probePayload["capturePosition"]={1,2,3};
         probePayload["projectionOrigin"]={3,4,5};
         document.reflectionProbe=probePayload.get<azurerender::ReflectionProbe>();
+        document.viewFog.enabled=true;document.viewFog.asset="view.azfog";
+        document.viewFog.captureView=azurerender::CameraViewDescriptor{};
+        document.viewFog.projection.extent={2560,1440};
         document.irradianceVolume.asset="field.aziv";
         document.irradianceVolume.intensity=.75F;
         document.irradianceVolume.enabled=true;
@@ -246,6 +251,19 @@ int main() {
         defaultProbe.capturePosition={2,3,4};
         assert((defaultProbe.project({3,4,5},{1,0,0})==std::array<float,3>{6,1,1}));
         const auto giReloaded=azurerender::SceneDocument::load(scenePath).irradianceVolume;
+        const auto fogReloaded=azurerender::SceneDocument::load(scenePath).viewFog;
+        if(!fogReloaded.enabled||fogReloaded.asset!=document.viewFog.asset||fogReloaded.projection.extent!=document.viewFog.projection.extent)
+            throw std::runtime_error("Scene save and reopen must retain view fog binding");
+        {
+            std::ifstream file(scenePath);
+            std::string legacy((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>());
+            const auto line=legacy.find("viewFog ");
+            legacy.erase(line,legacy.find('\n',line)-line+1);
+            const auto header=legacy.find("schemaVersion 14");legacy.replace(header,16,"schemaVersion 13");
+            const auto path=directory/"version-thirteen.azscene";{std::ofstream out(path);out<<legacy;}
+            if(azurerender::SceneDocument::load(path).viewFog.enabled)
+                throw std::runtime_error("Version thirteen must retain disabled fog default");
+        }
         assert(giReloaded.asset=="field.aziv" && giReloaded.enabled && giReloaded.intensity==.75F);
         assert(giReloaded.sampling.normalOffset==.25F && giReloaded.sampling.jitterAmplitude==.2F && giReloaded.sampling.phase==49.875F);
         auto invalidGi=nlohmann::json(document.irradianceVolume);invalidGi["version"]=999;
@@ -266,7 +284,7 @@ int main() {
             auto legacy=withoutLightReceivers(contents);
             const auto responseLine=legacy.find("lightSpecularScale ");assert(responseLine!=std::string::npos);
             legacy.erase(responseLine,legacy.find('\n',responseLine)-responseLine+1);
-            const auto header=legacy.find("schemaVersion 13");assert(header!=std::string::npos);
+            const auto header=legacy.find("schemaVersion 14");assert(header!=std::string::npos);
             legacy.replace(header,16,"schemaVersion 6");
             const auto falloffLine=legacy.find("lightFalloff ");assert(falloffLine!=std::string::npos);
             legacy.erase(falloffLine,legacy.find('\n',falloffLine)-falloffLine+1);
@@ -286,7 +304,7 @@ int main() {
             versionEight=withoutLightReceivers(versionEight);
             const auto responseLine=versionEight.find("lightSpecularScale ");assert(responseLine!=std::string::npos);
             versionEight.erase(responseLine,versionEight.find('\n',responseLine)-responseLine+1);
-            const auto header=versionEight.find("schemaVersion 13");assert(header!=std::string::npos);
+            const auto header=versionEight.find("schemaVersion 14");assert(header!=std::string::npos);
             versionEight.replace(header,16,"schemaVersion 8");
             const auto boxLine=versionEight.find("lightInfluenceBox ");assert(boxLine!=std::string::npos);
             versionEight.erase(boxLine,versionEight.find('\n',boxLine)-boxLine+1);
@@ -301,7 +319,7 @@ int main() {
             versionNine=withoutLightReceivers(versionNine);
             const auto line=versionNine.find("lightSpecularScale ");assert(line!=std::string::npos);
             versionNine.erase(line,versionNine.find('\n',line)-line+1);
-            const auto header=versionNine.find("schemaVersion 13");assert(header!=std::string::npos);
+            const auto header=versionNine.find("schemaVersion 14");assert(header!=std::string::npos);
             versionNine.replace(header,16,"schemaVersion 9");
             const auto path=directory/"version-nine.azscene";
             {std::ofstream file(path);file<<versionNine;}
@@ -312,7 +330,7 @@ int main() {
             std::ifstream saved(scenePath);
             std::string legacy((std::istreambuf_iterator<char>(saved)),std::istreambuf_iterator<char>());
             legacy=withoutLightReceivers(legacy);
-            const auto header=legacy.find("schemaVersion 13");
+            const auto header=legacy.find("schemaVersion 14");
             legacy.replace(header,16,"schemaVersion 10");
             const auto path=directory/"version-ten.azscene";
             {std::ofstream file(path);file<<legacy;}
@@ -325,7 +343,7 @@ int main() {
         {
             std::ifstream file(scenePath);
             auto legacy=withoutCharacterLightResponse(std::string((std::istreambuf_iterator<char>(file)),std::istreambuf_iterator<char>()));
-            const auto header=legacy.find("schemaVersion 13");legacy.replace(header,16,"schemaVersion 11");
+            const auto header=legacy.find("schemaVersion 14");legacy.replace(header,16,"schemaVersion 11");
             const auto path=directory/"version-eleven.azscene";{std::ofstream out(path);out<<legacy;}
             if(azurerender::SceneDocument::load(path).lights[0].shape.characterResponse.present) {
                 std::cerr<<"Version eleven must retain the default character response\n";return 1;
