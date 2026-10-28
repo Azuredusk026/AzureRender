@@ -1,0 +1,335 @@
+{
+  "status": "passed",
+  "events": 3123,
+  "sumEventMs": 40.969376000000004,
+  "counter": {
+    "name": "GPU Duration",
+    "unit": "CounterUnit.Seconds"
+  },
+  "groups": [
+    {
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "events": 26,
+      "milliseconds": 14.788607999999998,
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "kind": "draw",
+      "shader": "uninspected",
+      "events": 2684,
+      "milliseconds": 11.93027200000001,
+      "compiledName": "uninspected"
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::9548",
+      "events": 27,
+      "milliseconds": 7.822976,
+      "compiledName": "mesh_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "kind": "dispatch",
+      "shader": "uninspected",
+      "events": 375,
+      "milliseconds": 3.1509759999999996,
+      "compiledName": "uninspected"
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::9479",
+      "events": 1,
+      "milliseconds": 1.023808,
+      "compiledName": "reflection_trace_packed.comp.spv"
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::9534",
+      "events": 1,
+      "milliseconds": 0.5365759999999999,
+      "compiledName": "shadow_bounds.comp.spv"
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::9597",
+      "events": 2,
+      "milliseconds": 0.45363200000000004,
+      "compiledName": "view_fog_surface.frag.spv"
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::9289",
+      "events": 2,
+      "milliseconds": 0.367616,
+      "compiledName": "skin.comp.spv"
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::9343",
+      "events": 1,
+      "milliseconds": 0.245472,
+      "compiledName": "reflection_reprojection.comp.spv"
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::9490",
+      "events": 1,
+      "milliseconds": 0.197632,
+      "compiledName": "reflection_spatial_filter.comp.spv"
+    },
+    {
+      "kind": "dispatch",
+      "shader": "ResourceId::9373",
+      "events": 1,
+      "milliseconds": 0.176352,
+      "compiledName": "depth_pyramid.comp.spv"
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::249",
+      "events": 1,
+      "milliseconds": 0.15872,
+      "compiledName": "inner_outline.frag.spv"
+    },
+    {
+      "kind": "draw",
+      "shader": "ResourceId::233",
+      "events": 1,
+      "milliseconds": 0.116736,
+      "compiledName": "spatial_antialiasing.frag.spv"
+    }
+  ],
+  "topEvents": [
+    {
+      "event": 15721,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.0022784,
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 15466,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.001503232,
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 15451,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.00139264,
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 15289,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.001251328,
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 15304,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.001159168,
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 15344,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.001133568,
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 15349,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.0011008,
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 26188,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.001097728,
+      "kind": "draw",
+      "shader": "ResourceId::9548",
+      "compiledName": "mesh_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 20539,
+      "name": "vkCmdDispatch()",
+      "seconds": 0.001023808,
+      "kind": "dispatch",
+      "shader": "ResourceId::9479",
+      "compiledName": "reflection_trace_packed.comp.spv"
+    },
+    {
+      "event": 15441,
+      "name": "vkCmdDrawIndexed()",
+      "seconds": 0.000850944,
+      "kind": "draw",
+      "shader": "ResourceId::9560",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 13083,
+      "name": "vkCmdDispatch()",
+      "seconds": 0.000536576,
+      "kind": "dispatch",
+      "shader": "ResourceId::9534",
+      "compiledName": "shadow_bounds.comp.spv"
+    },
+    {
+      "event": 23168,
+      "name": "vkCmdDrawIndexedIndirect(1) => <9090, 1>",
+      "seconds": 0.000482304,
+      "kind": "draw",
+      "shader": "ResourceId::9548",
+      "compiledName": "mesh_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 23143,
+      "name": "vkCmdDrawIndexedIndirect(1) => <4662, 1>",
+      "seconds": 0.000466944,
+      "kind": "draw",
+      "shader": "ResourceId::9548",
+      "compiledName": "mesh_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 22895,
+      "name": "vkCmdDrawIndexedIndirect(1) => <16857, 1>",
+      "seconds": 0.000449536,
+      "kind": "draw",
+      "shader": "ResourceId::9548",
+      "compiledName": "mesh_object_bindless_clipmap_field.frag.spv"
+    },
+    {
+      "event": 23614,
+      "name": "Indirect sub-command[0](<474, 1>)",
+      "seconds": 0.000443104,
+      "kind": "draw",
+      "shader": "ResourceId::9548",
+      "compiledName": "mesh_object_bindless_clipmap_field.frag.spv"
+    }
+  ],
+  "shaderInspectedEvents": 64,
+  "shaderInspectionLimit": 64,
+  "source": {
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261029-044333-reflection-pass-profile-087370\\capture_frame30.rdc",
+    "bytes": 1587711672,
+    "sha256": "5c163a81d779509e49e42cdc3dc9883b2c6ae1cea3b4848a569275a465266e45"
+  },
+  "shaderIdentity": {
+    "ResourceId::9289": {
+      "stage": "ShaderStage.Compute",
+      "constantBlockBytes": [
+        40
+      ],
+      "sourceFiles": [],
+      "sha256": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4",
+      "compiledName": "skin.comp.spv"
+    },
+    "ResourceId::9534": {
+      "stage": "ShaderStage.Compute",
+      "constantBlockBytes": [],
+      "sourceFiles": [],
+      "sha256": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+      "compiledName": "shadow_bounds.comp.spv"
+    },
+    "ResourceId::9560": {
+      "stage": "ShaderStage.Pixel",
+      "constantBlockBytes": [
+        688,
+        0,
+        144
+      ],
+      "sourceFiles": [],
+      "sha256": "a071b3f3d0702e223219887a3018637dc9876333e6ee328056bba3b1f6e4c692",
+      "compiledName": "character_snapshot_object_bindless_clipmap_field.frag.spv"
+    },
+    "ResourceId::9343": {
+      "stage": "ShaderStage.Compute",
+      "constantBlockBytes": [
+        48
+      ],
+      "sourceFiles": [],
+      "sha256": "b54cc4ccbcf1dc7fdf7ede3815ce51afccfdac2e853daa0e024f02f24d472158",
+      "compiledName": "reflection_reprojection.comp.spv"
+    },
+    "ResourceId::9373": {
+      "stage": "ShaderStage.Compute",
+      "constantBlockBytes": [
+        16
+      ],
+      "sourceFiles": [],
+      "sha256": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+      "compiledName": "depth_pyramid.comp.spv"
+    },
+    "ResourceId::9479": {
+      "stage": "ShaderStage.Compute",
+      "constantBlockBytes": [
+        192
+      ],
+      "sourceFiles": [],
+      "sha256": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+      "compiledName": "reflection_trace_packed.comp.spv"
+    },
+    "ResourceId::9490": {
+      "stage": "ShaderStage.Compute",
+      "constantBlockBytes": [
+        64
+      ],
+      "sourceFiles": [],
+      "sha256": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+      "compiledName": "reflection_spatial_filter.comp.spv"
+    },
+    "ResourceId::9548": {
+      "stage": "ShaderStage.Pixel",
+      "constantBlockBytes": [
+        688,
+        0,
+        144
+      ],
+      "sourceFiles": [],
+      "sha256": "e98c375383796066da3a545167e1e5fca5be0e3b0b3ae6c768d22835568665d1",
+      "compiledName": "mesh_object_bindless_clipmap_field.frag.spv"
+    },
+    "ResourceId::9597": {
+      "stage": "ShaderStage.Pixel",
+      "constantBlockBytes": [
+        0
+      ],
+      "sourceFiles": [],
+      "sha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+      "compiledName": "view_fog_surface.frag.spv"
+    },
+    "ResourceId::249": {
+      "stage": "ShaderStage.Pixel",
+      "constantBlockBytes": [
+        144,
+        112
+      ],
+      "sourceFiles": [],
+      "sha256": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+      "compiledName": "inner_outline.frag.spv"
+    },
+    "ResourceId::233": {
+      "stage": "ShaderStage.Pixel",
+      "constantBlockBytes": [
+        16
+      ],
+      "sourceFiles": [],
+      "sha256": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+      "compiledName": "spatial_antialiasing.frag.spv"
+    }
+  }
+}

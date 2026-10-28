@@ -52,6 +52,11 @@ Debug 和 Release 的输出均逐级匹配十二份数据。
 当前运行目录为 `build/runs/20261029-025624-main-reflection-history-3693f3`。
 该目录的可重建导入缓存按任务结束清理。
 原始截帧和完整候选仍由本机保留。
+逐事件计数已定位不透明快照的高耗时绘制。
+后续先检查快照重复着色和深度剔除。
+事件与程序指纹见[GPU 热点](../acceptance/nr/reflection-pass-profile.md)。
+诊断捕获位于 `build/runs/20261029-044333-reflection-pass-profile-087370`。
+该捕获约 1.48 GiB，缓存清理后保留原始证据。
 KK 动态夹具通过 NR7-AA5-E1 的双配置边缘门槛。
 服饰、薄透明及正式场景继续联合验收。
 数值及剩余范围见[运动边缘验证](../acceptance/nr/temporal-motion-edges.md)。
