@@ -351,6 +351,8 @@ private:
     rhi::GpuBuffer probeFieldBuffer_;
     bool probeFieldActive_=false;
     IrradianceVolume irradianceVolume_;
+    struct ViewFogState;
+    std::unique_ptr<ViewFogState> viewFog_;
     std::unique_ptr<IrradianceClipmapGpu> irradianceClipmap_;
     bool irradianceClipmapActive_=false;
     std::array<std::uint32_t,3> irradianceClipmapDimensions_{1,1,1};

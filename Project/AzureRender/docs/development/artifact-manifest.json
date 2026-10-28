@@ -587,6 +587,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-scene-binding.json",
       "primaryProject": "build/runs/20261028-065136-native-central-emissive-identity-466ad8/full-candidate/enclosure-central-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-081005-native-fog-surface-inputs-4648ba",
+      "pathBase": "build",
+      "purpose": "预积分视图雾表面、原版片元及双配置实际绘制验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-surfaces.json",
+      "primaryProject": "build/runs/20261028-081005-native-fog-surface-inputs-4648ba/full-candidate/enclosure-view-fog.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

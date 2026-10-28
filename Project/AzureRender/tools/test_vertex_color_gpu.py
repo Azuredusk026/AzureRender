@@ -173,7 +173,7 @@ def run(player,output,validation='any',case='vertex'):
             log=(root/'player.log').read_text(errors='replace');assert 'Allocator after unload: buffers=0 images=0' in log and not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
             enabled='Validation layer: enabled' in log
             if validation!='any':assert enabled==(validation=='enabled'),name
-            manifest=json.loads((root/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==16
+            manifest=json.loads((root/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==17
             pixels=np.asarray(Image.open(root/'frames/frame_000000.png').convert('RGB'));errors=[]
             for x,y in [(64,64),(56,56),(72,56),(56,72),(72,72)]:
                 world_x=(2*(x+.5)/128-1)*3*math.tan(math.radians(55/2))

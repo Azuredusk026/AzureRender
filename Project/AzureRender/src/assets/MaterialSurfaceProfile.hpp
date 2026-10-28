@@ -6,7 +6,7 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=16;
+    static constexpr unsigned kLayoutVersion=17;
     using Row=std::array<float,4>;
     std::array<Row,21> rows{};
 };
@@ -87,6 +87,8 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
             r[19]={layer.speed[0],layer.speed[1],d.channels==UnlitTextureLayers::BaseUvDistortion::Channels::Rg?1.F:0.F,0};
             r[20]={d.scale[0],d.scale[1],d.bias[0],d.bias[1]};
         }
+        r[16][3]=p.fogMode==UnlitTextureLayers::FogMode::Scene?1.F:0.F;
+        r[15][3]=p.composite==UnlitTextureLayers::Composite::Additive?1.F:0.F;
         return result;
     }
     if(material.nprDiffuse.present) {

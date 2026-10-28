@@ -29,6 +29,11 @@ void reject(const Json& json,std::size_t textures=2) {
 void parsing() {
  const auto base=fixture();const auto p=parseUnlitTextureLayers(base,2);
  require(p.present&&p.layerCount==1&&p.layers[0].texture==0,"Base layer binding");
+ auto fogged=base;fogged["fogMode"]="scene";
+ require(parseUnlitTextureLayers(fogged,2).fogMode==UnlitTextureLayers::FogMode::Scene,"Scene fog is an optional unlit surface mode");
+ require(p.fogMode==UnlitTextureLayers::FogMode::None,"Scene fog defaults to none");
+ fogged["fogMode"]="none";require(parseUnlitTextureLayers(fogged,2).present,"Explicit fog none mode parses");
+ for(const Json& value:Json::array({true,1,"world",nullptr})){fogged["fogMode"]=value;reject(fogged);}
  auto disturbed=base;disturbed["baseUvDistortion"]={{"texture",1},{"channels","red"},
   {"uv",base["layers"][0]["uv"]},{"scale",{.1,-.1}},{"bias",{0,0}}};
  require(parseUnlitTextureLayers(disturbed,2).present,"Independent base UV distortion parses");

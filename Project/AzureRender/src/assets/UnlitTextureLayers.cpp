@@ -57,11 +57,15 @@ void layerSample(const Json& input,UnlitTextureLayer& layer,std::size_t textureC
 }
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion"});
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion","fogMode"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
     UnlitTextureLayers result;result.layerCount=static_cast<unsigned>(layers.size());
+    if(source.contains("fogMode")){
+        if(source.at("fogMode")=="scene")result.fogMode=UnlitTextureLayers::FogMode::Scene;
+        else if(source.at("fogMode")!="none")invalid("fogMode");
+    }
     if(source.contains("composite")) {
         if(source.at("composite")=="additive")result.composite=UnlitTextureLayers::Composite::Additive;
         else if(source.at("composite")!="alpha")invalid("composite");

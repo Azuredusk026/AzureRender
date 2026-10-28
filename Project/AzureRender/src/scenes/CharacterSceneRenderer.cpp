@@ -6,6 +6,8 @@
 #include "render/MaterialPipelinePolicy.hpp"
 #include "render/IrradianceClipmapGpu.hpp"
 #include "render/IrradianceResource.hpp"
+#include "render/ViewFogGpu.hpp"
+#include "render/FogVolumeData.hpp"
 #include "scene/DirectionalLightSelection.hpp"
 #include "assets/MaterialData.hpp"
 #include "assets/MaterialSurfaceProfile.hpp"
@@ -45,6 +47,7 @@
 using namespace azurerender::internal;
 
 namespace azurerender {
+#include "CharacterViewFog.inc"
 CharacterSceneRenderer::CharacterSceneRenderer() = default;
 CharacterSceneRenderer::~CharacterSceneRenderer() = default;
 
@@ -480,9 +483,13 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     const std::uint64_t indexedSlots = kSharedTextureSlots
         + std::uint64_t{kMaterialTextureSlots} * totalMaterialCount();
     probeFieldActive_=scene_.reflectionProbe.field.has_value()&&!scene_.reflectionProbe.texture.empty();
+    scene_.viewFog.validate();
+    const std::uint32_t fogSlots=scene_.viewFog.enabled?1U:0U;
+    if(fogSlots&&!rhi_->supportsSampledImage(VK_FORMAT_R16G16B16A16_SFLOAT,true))
+        throw std::runtime_error("View fog requires linear RGBA16F sampling");
     const auto& limits = context.descriptorLimits;
-    if((limits.maxPerStageDescriptorStorageBuffers&&limits.maxPerStageDescriptorStorageBuffers<(probeFieldActive_?7U:6U))
-        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<(outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)))
+    if((limits.maxPerStageDescriptorStorageBuffers&&limits.maxPerStageDescriptorStorageBuffers<(probeFieldActive_?7U:6U)+fogSlots)
+        ||(limits.maxDescriptorSetStorageBuffers&&limits.maxDescriptorSetStorageBuffers<(outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+fogSlots))
         throw std::runtime_error("Scene storage buffers cannot fit the selected material layout");
     irradianceBufferBudget_=limits.maxStorageBufferRange;
     DeviceCapabilities capabilities;
@@ -492,14 +499,14 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     irradianceClipmapActive_=!scene_.irradianceVolume.asset.empty()
         &&readIrradianceResourceKind(std::filesystem::u8path(scene_.irradianceVolume.asset))==IrradianceResourceKind::Clipmap;
     const std::uint32_t irradianceSlots=irradianceClipmapActive_?6U:0U;
-    ResourceAccessRequirements requirements{indexedSlots+5+irradianceSlots,16+irradianceSlots,7+(probeFieldActive_?1U:0U)};
+    ResourceAccessRequirements requirements{indexedSlots+5+irradianceSlots+fogSlots,16+irradianceSlots+fogSlots,7+(probeFieldActive_?1U:0U)+fogSlots};
     requirements.separateImageSlots=requirements.fixedSeparateImageSlots=1;
     requirements.separateSamplerSlots=requirements.fixedSeparateSamplerSlots=1;
     requirements.fragmentColorAttachments=kMaterialColorAttachmentCount;
     requirements.vertexCombinedImageSamplers=outlineProjectionEnabled_?totalMaterialCount():0;
     requirements.fixedVertexCombinedImageSamplers=outlineProjectionEnabled_?1:0;
     requirements.vertexBuffers=outlineProjectionEnabled_?7:6;
-    requirements.descriptorSetBuffers=(outlineProjectionEnabled_?13U:12U)+(probeFieldActive_?1U:0U);
+    requirements.descriptorSetBuffers=(outlineProjectionEnabled_?13U:12U)+(probeFieldActive_?1U:0U)+fogSlots;
     auto access=ResourceAccessProfile::select(capabilities,requirements);
     auto objectRequirements=requirements;
     ++objectRequirements.sampledImageSlots;++objectRequirements.fixedSampledImageSlots;
@@ -523,7 +530,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + ", requested slots=" + std::to_string(indexedSlots)
             + ", stage sampler limit="
             + std::to_string(limits.maxPerStageDescriptorSamplers));
-    enqueue("buffers",loadTimings_.buffersMs,[this]{createUniformBuffers();createJointBuffers();},true);
+    enqueue("buffers",loadTimings_.buffersMs,[this]{createUniformBuffers();createJointBuffers();if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));},true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
     enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
     enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);initializeMotion(context);buildSceneState();},true);
@@ -552,6 +559,7 @@ bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(scene_.reflectionProbe.field.has_value()!=context.scene.reflectionProbe.field.has_value())return false;
     if(scene_.reflectionProbe.field&&scene_.reflectionProbe.field->gpuRows({1,1,0,0},false)!=context.scene.reflectionProbe.field->gpuRows({1,1,0,0},false))return false;
     if(scene_.irradianceVolume.asset!=context.scene.irradianceVolume.asset)return false;
+    if(scene_.viewFog.enabled||context.scene.viewFog.enabled)return false;
     if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
     if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
     scene_=context.scene;animationIndex_=0;animationTime_=0;++temporalSceneGeneration_;temporalView_.clear();motionPoses_.clear();return true;
@@ -1098,6 +1106,8 @@ void CharacterSceneRenderer::registerPasses(
     const auto morphTargetResource=importHostStorage("character-morph-targets-v1",morphTargetBuffer_);
     const auto morphWeightResource=importHostStorage("character-morph-weights",morphWeightBuffers_[context.currentFrame]);
     const auto instanceResource=importHostStorage("character-instances-v2",instanceBuffers_[context.currentFrame]);
+    std::optional<RenderGraph::ResourceId> fogResource;
+    if(viewFog_)fogResource=importHostStorage("character-view-fog-v1",viewFog_->gpu.parameters(context.currentFrame));
     const auto clusterHeaderResource = importHostStorage(
         "character-cluster-headers",
         clusterHeaderBuffers_[context.currentFrame]);
@@ -1359,6 +1369,7 @@ void CharacterSceneRenderer::registerPasses(
     graph.setRecordingChunks(main, std::move(mainChunks));
     graph.use(main, overlayDepth,RenderGraphUsage::Sampled,false);
     graph.use(main,snapshotColor,RenderGraphUsage::Sampled,false);
+    if(fogResource)graph.use(main,*fogResource,RenderGraphUsage::FragmentStorage,false);
     if(outlineMaskResource)graph.use(main,*outlineMaskResource,RenderGraphUsage::Sampled,false);
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
     if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
@@ -1576,6 +1587,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"cascadeCasterDistance\": " << renderSettings_->shadowDistance << ",\n"
          << "  \"cameraUniformBytes\": " << sizeof(UniformBufferObject) << ",\n"
          << "  \"unlitFrameLayoutVersion\": 1,\n"
+         << "  \"viewFogEnabled\": " << (viewFog_?"true":"false") << ",\n"
+         << "  \"viewFogMatch\": \"" << fogViewMatchName(viewFog_?viewFog_->match:FogViewMatch::Disabled) << "\",\n"
+         << "  \"viewFogFrameLayoutVersion\": " << PackedViewFogFrame::layoutVersion << ",\n"
          << "  \"objectShadowLayoutVersion\": " << ObjectShadowGpuHeader::kLayoutVersion << ",\n"
          << "  \"objectShadowPrepared\": " << (objectShadowPrepared_?"true":"false") << ",\n"
          << "  \"objectShadowExactDepthBias\": " << (objectShadowPrepared_&&rhi_->supportsExactDepthBias()?"true":"false") << ",\n"
@@ -2662,10 +2676,10 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * (textureSlots + 4 + (irradianceClipmapActive_?6U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
+             frameCount * (textureSlots + 4 + (irradianceClipmapActive_?6U:0U) + (viewFog_?1U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
             {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U))},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
         };
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2675,10 +2689,10 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(irradianceClipmapActive_?6U:0U))},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?1U:0U))},
         {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U))},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
     };
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
@@ -2733,6 +2747,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
         };
         if(probeFieldActive_)bindings.push_back({33,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(viewFog_){bindings.push_back({34,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});bindings.push_back({35,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
         if(irradianceClipmapActive_)bindings.push_back({32,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(outlineProjectionEnabled_) {
@@ -2778,6 +2793,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
     };
     if(probeFieldActive_)bindings.push_back({33,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment});
+    if(viewFog_){bindings.push_back({34,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment});bindings.push_back({35,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment});}
     if(irradianceClipmapActive_)bindings.push_back({32,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6,kFragment});
     if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,kFragment});
     if(outlineProjectionEnabled_) {
@@ -2871,6 +2887,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
             writeSceneImages(uniformWrite.set);
+            if(viewFog_)viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
             writeProjection(uniformWrite.set,0);
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
@@ -2961,6 +2978,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
             writeSceneImages(uniformWrite.set);
+            if(viewFog_)viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
             writeProjection(uniformWrite.set,globalMaterial-1);
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
@@ -3272,6 +3290,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             createFacingPipelines(additiveBlendPipelines_,composed);
             if(coloredAdditive){composed.vertexBindings[1].stride=sizeof(std::array<float,4>);
                 createFacingPipelines(vertexColorAdditiveBlendPipelines_,composed);}}
+        if(viewFog_)viewFog_->initializePipelines(context,materialDesc,bindlessTextures_,asset_,additionalResources_);
         materialDesc.cullMode=VK_CULL_MODE_NONE;
         initializeHairIntegralPipelines(context,integralBase);
         auto multiplyDesc=materialDesc;
@@ -3379,6 +3398,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
 void CharacterSceneRenderer::destroyResources() {
+    viewFog_.reset();
     destroyOrdinaryOpaquePipelines();
     destroyHairIntegralPipelines();
     motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();motionPreviousValidObjects_=0;
@@ -3537,6 +3557,7 @@ void CharacterSceneRenderer::destroyResources() {
 }
 
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
+    if(viewFog_)viewFog_->releasePipelines();
     destroyOrdinaryOpaquePipelines();
     destroyHairIntegralPipelines();
     for (VkPipeline* pipeline : {
@@ -3607,6 +3628,12 @@ void CharacterSceneRenderer::updateUniformBuffer(
     constexpr float kPi = 3.14159265358979323846F;
     Matrix4 projection = characterProjection(*renderSettings_,aspect);
     projectionMatrix_ = projection;
+    if(viewFog_){
+        auto camera=renderSettings_->cameraView.value_or(CameraViewDescriptor{});
+        if(!renderSettings_->cameraView){camera.position=cameraPosition_;camera.target=cameraTarget_;
+            camera.fov=2.F*std::atan(1.F/std::abs(projection[5]));camera.nearPlane=renderSettings_->cameraNear;camera.farPlane=renderSettings_->cameraFar;}
+        viewFog_->update(frame.currentFrame,camera,{frame.swapchainWidth,frame.swapchainHeight});
+    }
     prepareTemporalFrame(frame);
     updateClusteredLighting(
         view,
@@ -4303,6 +4330,10 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     }
     }
     if(stage==0||stage==1||stage==4)recordOutlineShells(context,*snapshot,commands,false,counters);
+    if((stage==0||stage==4)&&viewFog_){
+        const auto descriptor=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount();
+        viewFog_->record(commands,pipelineLayout_,descriptorSets_[descriptor],counters);
+    }
     if (stage == 0 || stage == 3) {
     for (std::size_t slot = firstTransparent; slot < transparentEnd; ++slot) {
         const scene::SceneInstance* instance = &snapshot->instances.at(snapshot->visibleIndices[slot]);
@@ -4388,7 +4419,9 @@ void CharacterSceneRenderer::drawPrimitive(
     const bool additive=material.unlitTextureLayers.present&&material.unlitTextureLayers.composite==UnlitTextureLayers::Composite::Additive;
     const auto& transparentPipelines=additive?(vertexColor?vertexColorAdditiveBlendPipelines_:additiveBlendPipelines_)
         :(vertexColor?vertexColorBlendPipelines_:blendPipelines_);
-    const VkPipeline pipeline = (material.materialFeatures&MaterialFeatureHairPixelIntegral)
+    const auto fogPipeline=viewFog_&&blend&&material.unlitTextureLayers.fogMode==UnlitTextureLayers::FogMode::Scene
+        ?viewFog_->materialPipeline(additive,vertexColor,surfaceFacingIndex(material.doubleSided,mirrored)):VK_NULL_HANDLE;
+    const VkPipeline pipeline = fogPipeline?fogPipeline:(material.materialFeatures&MaterialFeatureHairPixelIntegral)
         ?hairIntegralPipeline(material,mirrored,false):multiplyComposite
         ? (multiplyPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
         : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipelines_[mirrored?1:0] : blend

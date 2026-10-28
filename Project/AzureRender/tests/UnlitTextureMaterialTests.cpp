@@ -55,6 +55,12 @@ int main(int argc,char** argv){try{
  require(m.textureSettings[0].mipPolicy=="none"&&m.textureSettings[4].mipFilter==TextureImportSettings::MipFilter::Nearest,"Layer mip sampling preserved");
  require(!m.styleMaskPixels.empty()&&m.styleMaskWidth>0,"Second layer image reaches owned slot");
  const auto packed=packMaterialSurfaceProfile(m);
+ require(packed.rows[16][3]==0,"Unlit material defaults to disabled scene fog");
+ auto fogSource=source;auto& fogSurface=fogSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
+ fogSurface["fogMode"]="scene";fogSurface["composite"]="additive";
+ const auto fogMaterial=load(fogSource).materials.at(0);const auto fogPacked=packMaterialSurfaceProfile(fogMaterial);
+ require(fogMaterial.unlitTextureLayers.fogMode==UnlitTextureLayers::FogMode::Scene&&fogPacked.rows[16][3]==1&&fogPacked.rows[15][3]==1,
+  "Scene fog and additive scattering policy reach the production material table");
  auto distortionSource=source;auto& distortionSurface=distortionSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
  distortionSurface["baseUvDistortion"]={{"texture",1},{"channels","red"},
   {"uv",distortionSurface["layers"][0]["uv"]},{"scale",{.1,-.1}},{"bias",{.2,-.2}}};

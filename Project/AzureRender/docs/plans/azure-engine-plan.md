@@ -38,6 +38,7 @@
 三维雾场上传、原版采样及资源释放见[雾场 GPU 验收](../acceptance/nr/fog-volume-gpu.md)。
 像素原点、抖动及深度映射见[视图坐标验收](../acceptance/nr/view-fog-projection.md)。
 场景资源、捕获视图及保存重开见[绑定验收](../acceptance/nr/view-fog-scene-binding.md)。
+预积分雾场、实际表面与资源隔离见[表面验收](../acceptance/nr/view-fog-surfaces.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。

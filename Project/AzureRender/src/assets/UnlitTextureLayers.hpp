@@ -16,7 +16,9 @@ struct UnlitTextureLayer {
 };
 struct UnlitTextureLayers {
     enum class Composite { Alpha, Additive };
+    enum class FogMode { None, Scene };
     Composite composite=Composite::Alpha;
+    FogMode fogMode=FogMode::None;
     bool present=false;
     unsigned layerCount=0;
     std::array<UnlitTextureLayer,2> layers{};

@@ -188,6 +188,12 @@ function(compile_shader source_file)
     set(shader_define_args)
     set(shader_lut_dependency)
     get_filename_component(shader_source_base "${source_file}" NAME)
+    if(shader_source_base STREQUAL "view_fog_surface.frag" OR "AZURE_VIEW_FOG=1" IN_LIST SHADER_DEFINES)
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/view_fog.glsl" "${SHADER_SOURCE_DIR}/view_fog_material.glsl" "${SHADER_SOURCE_DIR}/fog_transport.glsl" "${SHADER_SOURCE_DIR}/fog_view_projection.glsl")
+    endif()
+    if(shader_source_base STREQUAL "mesh.frag")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/unlit_surface_sample.glsl")
+    endif()
     if(shader_source_base STREQUAL "shadow.frag" OR shader_source_base STREQUAL "surface_response_test.comp")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/shadow_coverage.glsl")
     endif()
@@ -320,6 +326,11 @@ compile_shader("${SHADER_SOURCE_DIR}/outline.frag" DEFINES AZURE_GEOMETRY_SAMPLE
 compile_shader("${SHADER_SOURCE_DIR}/background.frag" DEFINES AZURE_GEOMETRY_SAMPLES=1  OUTPUT_NAME background_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/background.frag" DEFINES AZURE_GEOMETRY_SAMPLES=1 AZURE_BINDLESS=1 OUTPUT_NAME background_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag")
+compile_shader("${SHADER_SOURCE_DIR}/view_fog_surface.frag")
+compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 OUTPUT_NAME mesh_fog.frag)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 AZURE_BINDLESS=1 OUTPUT_NAME mesh_fog_bindless.frag)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 AZURE_GEOMETRY_SAMPLES=1 OUTPUT_NAME mesh_fog_samples.frag)
+compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 AZURE_BINDLESS=1 AZURE_GEOMETRY_SAMPLES=1 OUTPUT_NAME mesh_fog_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_OBJECT_SHADOW=1 OUTPUT_NAME mesh_object.vert)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_OBJECT_SHADOW=1 AZURE_COMPUTE_SKINNING=1 OUTPUT_NAME mesh_object_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_OBJECT_SHADOW=1 OUTPUT_NAME mesh_object.frag)
@@ -445,6 +456,9 @@ foreach(_clipmap_base IN LISTS _clipmap_base_programs)
             list(APPEND _clipmap_defines "${_clipmap_define}")
         endforeach()
     endif()
+    if("AZURE_VIEW_FOG=1" IN_LIST _clipmap_defines)
+        continue()
+    endif()
     compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES ${_clipmap_defines} OUTPUT_NAME "${_clipmap_output}")
 endforeach()
 get_property(_field_base_programs GLOBAL PROPERTY AZURE_SHADER_DESCRIPTORS)
@@ -463,6 +477,9 @@ foreach(_field_base IN LISTS _field_base_programs)
             string(JSON _field_define GET "${_field_base}" defines ${_field_define_index})
             list(APPEND _field_defines "${_field_define}")
         endforeach()
+    endif()
+    if("AZURE_VIEW_FOG=1" IN_LIST _field_defines)
+        continue()
     endif()
     compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES ${_field_defines} OUTPUT_NAME "${_field_output}")
 endforeach()
@@ -553,6 +570,7 @@ add_library(AzureRenderCore STATIC
     src/render/FogViewProjection.cpp
     src/render/ViewFogBinding.cpp
     src/render/ViewFogBindingJson.cpp
+    src/render/ViewFogGpu.cpp
     src/render/EnvironmentCubeTexture.cpp
     src/render/ComputePass.cpp
     src/rhi/GpuAllocator.cpp
@@ -1021,6 +1039,11 @@ if(BUILD_TESTING)
     add_executable(AzureViewFogBindingTests tests/ViewFogBindingTests.cpp)
     target_link_libraries(AzureViewFogBindingTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ViewFogBinding COMMAND AzureViewFogBindingTests)
+    add_executable(AzureViewFogGpuTests tests/ViewFogGpuTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureViewFogGpuTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ViewFogGpu COMMAND AzureViewFogGpuTests)
+    add_test(NAME AzureRender.ViewFogShaderContract COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/check_view_fog_shader_contract.py" "${SHADER_BINARY_DIR}")
     add_executable(AzureFogVolumeOwnerTests tests/FogVolumeOwnerTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureFogVolumeOwnerTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FogVolumeOwner COMMAND AzureFogVolumeOwnerTests)
@@ -1461,6 +1484,10 @@ if(BUILD_TESTING)
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_unlit_texture_layers_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.UnlitTextureLayersGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.ViewFogGpu COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_view_fog_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.ViewFogGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.VertexColorGpu COMMAND "${Python3_EXECUTABLE}"
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_vertex_color_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

@@ -17,6 +17,7 @@
     "globalColorWeight"
   ],
   "properties": {
+    "fogMode": {"type": "string", "enum": ["none", "scene"], "default": "none"},
     "schemaVersion": {
       "type": "integer",
       "const": 2
