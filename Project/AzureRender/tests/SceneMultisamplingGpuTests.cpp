@@ -29,6 +29,9 @@ int main(int argc,char** argv)try{
         }
         for(unsigned i=0;i<3;++i)buffers[i]=host.allocator.createBuffer(32*32*(i==0?8:4),VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         target=std::make_unique<SceneMultisampling>(backend,host.allocator,VkExtent2D{32,32},formats[1],formats[2],minimum?SceneSecondaryResolve::Minimum:SceneSecondaryResolve::Average,2,destinations,argv[1]);
+        require(target->sourceView(0,2)!=VK_NULL_HANDLE&&target->sourceView(1,2)!=target->sourceView(0,2),"Source views belong to distinct in-flight slots");
+        try{target->sourceView(2,0);throw std::runtime_error("Invalid source slot accepted");}catch(const std::out_of_range&){}
+        try{target->sourceView(0,3);throw std::runtime_error("Invalid source attachment accepted");}catch(const std::out_of_range&){}
         std::cout<<"Source estimated bytes="<<target->byteSize()<<", allocated bytes="<<target->allocatedByteSize()<<" secondaryMinimum="<<minimum<<'\n';
         vertex=backend.createShaderModule(readBinaryFile(std::string(argv[1])+"/multisample_probe.vert.spv"));fragment=backend.createShaderModule(readBinaryFile(std::string(argv[1])+"/scene_multisample_probe.frag.spv"));
         rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_FRAGMENT_BIT,8};emptySet=backend.createDescriptorSetLayout({});layout=backend.createPipelineLayout(emptySet,&push);

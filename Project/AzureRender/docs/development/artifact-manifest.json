@@ -605,6 +605,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/central-late-glyph.json",
       "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-095659-native-fog-msaa-coverage-f1b28c",
+      "pathBase": "build",
+      "purpose": "逐采样雾效的解析轮廓、真实主场景回归及计时验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-multisample.json",
+      "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

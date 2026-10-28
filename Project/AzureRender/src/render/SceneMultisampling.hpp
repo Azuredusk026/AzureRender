@@ -21,6 +21,8 @@ public:
     VkRenderPass renderPass() const noexcept{return sourcePass_;}
     VkFramebuffer framebuffer(std::uint32_t slot) const{return sources_.at(slot).framebuffer;}
     VkImage sourceImage(std::uint32_t slot,std::uint32_t attachment) const{return sources_.at(slot).images.at(attachment).image;}
+    // Borrowed source view; source slots share this owner's GPU retirement boundary.
+    VkImageView sourceView(std::uint32_t slot,std::uint32_t attachment) const{return sources_.at(slot).views.at(attachment);}
     std::uint64_t allocatedByteSize() const noexcept{return allocatedBytes_;}
     std::uint64_t byteSize() const noexcept{return bytes_;}
     std::array<RenderGraph::ResourceId,3> importSources(RenderGraph&,std::uint32_t slot,const std::string&) const;

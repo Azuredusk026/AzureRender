@@ -327,6 +327,7 @@ compile_shader("${SHADER_SOURCE_DIR}/background.frag" DEFINES AZURE_GEOMETRY_SAM
 compile_shader("${SHADER_SOURCE_DIR}/background.frag" DEFINES AZURE_GEOMETRY_SAMPLES=1 AZURE_BINDLESS=1 OUTPUT_NAME background_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag")
 compile_shader("${SHADER_SOURCE_DIR}/view_fog_surface.frag")
+compile_shader("${SHADER_SOURCE_DIR}/view_fog_surface.frag" DEFINES AZURE_FOG_SAMPLES=1 OUTPUT_NAME view_fog_surface_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 OUTPUT_NAME mesh_fog.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 AZURE_BINDLESS=1 OUTPUT_NAME mesh_fog_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES AZURE_VIEW_FOG=1 AZURE_GEOMETRY_SAMPLES=1 OUTPUT_NAME mesh_fog_samples.frag)
@@ -1488,6 +1489,10 @@ if(BUILD_TESTING)
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_view_fog_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.ViewFogGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.ViewFogMultisampleGpu COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_view_fog_msaa_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.ViewFogMultisampleGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.VertexColorGpu COMMAND "${Python3_EXECUTABLE}"
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_vertex_color_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

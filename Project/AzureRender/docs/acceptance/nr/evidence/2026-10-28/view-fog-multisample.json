@@ -1,0 +1,698 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR3-F1F",
+  "status": "per_sample_fog_passed_full_native_atmosphere_pending",
+  "baseCommit": "c015bd3",
+  "run": "build/runs/20261028-095659-native-fog-msaa-coverage-f1b28c",
+  "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject",
+  "changedSource": [
+    "CMakeLists.txt",
+    "src/render/SceneMultisampling.hpp",
+    "src/scenes/CharacterSceneRenderer.cpp",
+    "src/scenes/CharacterViewFog.inc",
+    "shaders/view_fog_surface.frag",
+    "tests/SceneMultisamplingGpuTests.cpp",
+    "tools/test_view_fog_gpu.py",
+    "tools/test_view_fog_msaa_gpu.py"
+  ],
+  "source": {
+    "CMakeLists.txt": "bc1c73f1b23ada36857b92a6c111d5e9ff746d1919a0b7419b89739de6a3b186",
+    "src/render/SceneMultisampling.hpp": "28b686dfbdbfe618e94014166ab30858764d7c719efec6c6d72e2515aac97bb2",
+    "src/scenes/CharacterSceneRenderer.cpp": "7e3ab67df587059815d2e7c7286187d4f8d93ec842a263313511007ea74d53c4",
+    "src/scenes/CharacterViewFog.inc": "888d5c536e2bedb7392b21235850f15ae32617d2c1c860a4021983f7ca1f697b",
+    "shaders/view_fog_surface.frag": "b3f347b810ef5ce5307a1cc74a664e37c7a8b4eee5e877c542b6a7092ef546d3",
+    "tests/SceneMultisamplingGpuTests.cpp": "0c35c19cc5391a801f30811085e0598804b32584a8208f0c5d0e9f2031feb993",
+    "tools/test_view_fog_gpu.py": "33e7bfb8eb27a59be1a91db12b109838605aae1249bfbb476ecbed74ffa78f48",
+    "tools/test_view_fog_msaa_gpu.py": "1fb9c69f76e9ff8faf284a30cc0a307f8e24bcaea5415bff480bc8b232e0d100",
+    "src/render/SceneMultisampling.cpp": "4317a24884a549ae8cb079c2425137f23a5434def22e1e6523ce83cc7a973eda",
+    "src/render/ViewFogGpu.hpp": "08f62e569dd5f63c141fd6be0566217f1f9fff5a2d5393172e724f1927ab8c7e",
+    "src/render/ViewFogGpu.cpp": "fc3759621e3c7776c2094fb10f2dda7d4981b7281eb7aebca7731348d1a04dea",
+    "shaders/view_fog.glsl": "a049575477f8f13a6c6ee518de787e8e26812bbc90a51f9d95c69b42c383920d",
+    "shaders/view_fog_material.glsl": "535c30542ca829f36cd0484690d1fac811b709ec06f38525182beb768c855234"
+  },
+  "artifacts": [
+    {
+      "path": "capture_main_regression.py",
+      "sha256": "a609449c21f561471345e972dd02b79dc63c2ad7e2611ad175d86de7e5875326"
+    },
+    {
+      "path": "check_performance.py",
+      "sha256": "f4dc990fceb199e0d19cc22fc2d08072e3e93c2e487e91493ab993d88acc82cf"
+    },
+    {
+      "path": "configuration-exact.json",
+      "sha256": "c13d039ff76e70c47fee41283d5eb550b6ed6a0fde3d6c986b3d51438dbdc44a"
+    },
+    {
+      "path": "debug-build.log",
+      "sha256": "54a11ab34a2075f667bb133e13146ee020fe09e869c15f27084c0a1c63ca8fd5"
+    },
+    {
+      "path": "debug-cpu.log",
+      "sha256": "7673c3a900e8f4d4bd285ad5652a5b98f2c20f42332f9d1a5e264e37b39fc535"
+    },
+    {
+      "path": "debug-depth-build.log",
+      "sha256": "e3d8f9d16f4142e495c2072c0d0d6335569cd14fa24ece36256c4011e6bb2374"
+    },
+    {
+      "path": "debug-edge.log",
+      "sha256": "155464e74713c53edcef46d8d9a8c1f98e2bc16091faadad6a9115028fc25d26"
+    },
+    {
+      "path": "debug-editor-build.log",
+      "sha256": "a7e4cc5c2f8cd54c5170941e3cb3c1a30c7f2220c7b908931ff335fc6ceed0b7"
+    },
+    {
+      "path": "debug-final-cpu.log",
+      "sha256": "856d3a4234d27e64429e2022e203cd3a6add957bdbe5352346a076d57f17678b"
+    },
+    {
+      "path": "debug-msaa-regression.log",
+      "sha256": "dcf1aacdc047e003d7cc9833f6f27a58adab355b88096de2868754d9def1fc8f"
+    },
+    {
+      "path": "debug-surface.log",
+      "sha256": "78aff2171fcc260382fb6a625f18839cfec59e635d8f6c4dd43c28a065868404"
+    },
+    {
+      "path": "debug-tests-build.log",
+      "sha256": "3dc2dff4e7d0aa8227ec686a9a1cc7da3433957274a2892bba8f8b2965d98a20"
+    },
+    {
+      "path": "fog-sample-comparison.png",
+      "sha256": "3bf527f70f95dd637d5d10c1a6c51220aad930227bab097f2dbc16256eebf47c"
+    },
+    {
+      "path": "main-default-release.log",
+      "sha256": "9e040d9b95229d75547b74817c6cd6d7d911c0d51d7102bf799498d32d8d4db2"
+    },
+    {
+      "path": "main-native-release.log",
+      "sha256": "8e7642f44af7ba2895b08bd29e0ace04b5770cbf9f396dfa52bf60324afca705"
+    },
+    {
+      "path": "main-regression.json",
+      "sha256": "041dc40470a01ba11bb72ee4d03dcb8a6b4a723ea313d369c4712c7ac788ca6f"
+    },
+    {
+      "path": "negative-shader.json",
+      "sha256": "27f84317115cc668e4e2fb4ece2f08933fc6d17f2352111a0bc82e4f06bcf739"
+    },
+    {
+      "path": "negative-shader.log",
+      "sha256": "44601dc3c43035435dc20b7488c1a742d6a510f6b5e64dddb383361a9f7d5b38"
+    },
+    {
+      "path": "performance-off.json",
+      "sha256": "5c38d24e985aff2d5ad87551c02c8091f837757299953b7f2403ad021e3a5b70"
+    },
+    {
+      "path": "performance-off.log",
+      "sha256": "2c24a798b60a13a4cbb9ef4222bc64af9610a506041a99a4d3d6618326e1fa05"
+    },
+    {
+      "path": "performance-on.json",
+      "sha256": "dfba3db5647aa70271608063b0b83cf30da4d42df38ab8e8a9266ad9a8bd3909"
+    },
+    {
+      "path": "performance-on.log",
+      "sha256": "08004bd0c90d9223b59e0cfb873de78c818d882eaf68a1af552c105f8ed4663b"
+    },
+    {
+      "path": "plan.md",
+      "sha256": "54fdc47113820cfe5bbb015bdf3b10da65897b5e958a8f3815dc6ba9f8fb02b8"
+    },
+    {
+      "path": "red-boundary.log",
+      "sha256": "699e10f6650986bdb63c81b0c26bd7f9fb8fb33b0c8b507ed9dd5bf0498a1337"
+    },
+    {
+      "path": "red-coverage.log",
+      "sha256": "0923bef625abae90c82003a6cf9554bddd27a31432dee966b131e2564bb73845"
+    },
+    {
+      "path": "red-edge.log",
+      "sha256": "ebd6c5207d64f99f8c7271a477544e159e23674150610ccaa5cc433944d615e7"
+    },
+    {
+      "path": "red-four-sample.log",
+      "sha256": "d484e4e6cf21cd679d3ac8a1f8710b5c05f8937bd8981f9b1f713b153af80f42"
+    },
+    {
+      "path": "red.log",
+      "sha256": "9693dc4238eec2e4462c7f4b5f338477c08f8e91c4308b2375a857e98c531d16"
+    },
+    {
+      "path": "release-build.log",
+      "sha256": "ece7368bba813cdc8ec6fd94f6af2b8de7868be1688abc815dea591f81e9a93c"
+    },
+    {
+      "path": "release-edge.log",
+      "sha256": "155464e74713c53edcef46d8d9a8c1f98e2bc16091faadad6a9115028fc25d26"
+    },
+    {
+      "path": "release-final-cpu.log",
+      "sha256": "93449c5f188b8d52a8f09eae116e2ecb7f2a84f89ecaca99340945d17cd7cedb"
+    },
+    {
+      "path": "release-msaa-regression.log",
+      "sha256": "738d23978cc2e77efaac7c6cc13b8100b318cf27c09062ed0fac9f6a76bb32b7"
+    },
+    {
+      "path": "release-surface.log",
+      "sha256": "78aff2171fcc260382fb6a625f18839cfec59e635d8f6c4dd43c28a065868404"
+    },
+    {
+      "path": "release-tests-build.log",
+      "sha256": "30b3c4f83a6e79c8b97345fce01b1f3396ad6d32af605485cc611e7e1d2d950a"
+    },
+    {
+      "path": "resource-layout-receipt.json",
+      "sha256": "d6aa91e9c484310d35a139310f87fcd6ebe6dacfecd0fb22d58d2a79b73d3d10"
+    },
+    {
+      "path": "shader-catalog-receipt.json",
+      "sha256": "d775ea46c4f46c2c969f4323c4969335e53a0b7866e0f72837354b54351705f1"
+    }
+  ],
+  "projects": [
+    {
+      "path": "performance-project/.azure/cache/4026aabf-7071-4eef-bff5-a4ed2aef27ce/12618945119350147138.azcache",
+      "sha256": "8a688781f15ed1b62ecdeaddf7a80f8976799be72b935d00a64df23ebe713c12"
+    },
+    {
+      "path": "performance-project/.azure/cache/64d55f46-332b-4e77-b4d3-36c49a62208a/13973409444711351198.azcache",
+      "sha256": "7c08aa60b1be2dcd6fb599f66b7c38eae7e3e133f90479b31c8eecb2823a6fdb"
+    },
+    {
+      "path": "performance-project/.azure/cache/89254ce3-3bdf-4c94-9b35-803842c0ec18/6712869494663793976.azcache",
+      "sha256": "0d7234fa706a4b52e2d4825d3d8c8301365306825f5fb49a09a6bb0096401344"
+    },
+    {
+      "path": "performance-project/.azure/cache/bdca4e9c-448f-4f49-8590-7a4ce65409fc/8121251205026287370.azcache",
+      "sha256": "d63b594337268e8972d7fdba6b258dc3d6130fcd955331738966030553e907b8"
+    },
+    {
+      "path": "performance-project/.azure/cache/dd34798a-3f68-44a5-8698-20c9ed6546bc/2798466869527086174.azcache",
+      "sha256": "09c35935e1e9f49d17268f7f9cb234bc94704e47d1640fd32f18dee51b39b88c"
+    },
+    {
+      "path": "performance-project/.azure/cache/e38df752-f93b-46fd-9d1f-61ea6acde4a7/1827175118464263285.azcache",
+      "sha256": "49d6d09c71cdf350d9cf2642fabd7059d801db81f8f687824f8a6677d188b900"
+    },
+    {
+      "path": "performance-project/.azure/cache/f5825c69-4269-4570-b0e2-eda69abd51ea/18352265612791054910.azcache",
+      "sha256": "c231b4e740143991e3f33937d4f06d2b53011aa674493e3d0da411d624012294"
+    },
+    {
+      "path": "performance-project/assets/front.gltf",
+      "sha256": "454f5ef2aa6ced2f1a7179a66df7910aebd33fc40fdf5e918b778280ceb14dda"
+    },
+    {
+      "path": "performance-project/assets/front.gltf.azmeta",
+      "sha256": "9b170420ee208a76673e1cf880b9049663b6b9c9b3bef1f607222f0edde2fcd2"
+    },
+    {
+      "path": "performance-project/assets/off.azurelevel",
+      "sha256": "252720b35c0acf6f5515b9b1ada69f138f8d2d581a54e2a63779faf11df92a1c"
+    },
+    {
+      "path": "performance-project/assets/off.azurelevel.azmeta",
+      "sha256": "2dc9de97342185cd493cc5c91052d74c5db503e958b5382da09d40561ea44541"
+    },
+    {
+      "path": "performance-project/assets/on.azurelevel",
+      "sha256": "2f6220c620c907560fc390f42ebe226200b136d3fa7af052d23267abb594136c"
+    },
+    {
+      "path": "performance-project/assets/on.azurelevel.azmeta",
+      "sha256": "d62cb91a128762133b4669d6955039695114143ad225e6d11682df729be71f54"
+    },
+    {
+      "path": "performance-project/assets/performance-off.azurelevel",
+      "sha256": "1a9796883ddb87590dc9f69602a203af07943495f6cb9fbd6277a0c3061d381f"
+    },
+    {
+      "path": "performance-project/assets/performance-off.azurelevel.azmeta",
+      "sha256": "65573678b0dc7e2e82fa0642efbad21b31daa883630cd74fd3af8a4d242a4ddf"
+    },
+    {
+      "path": "performance-project/assets/performance-on.azurelevel",
+      "sha256": "d471a04b4e2f62941eee424d045458bc842642d626711ff47257a4cecbb2f9f9"
+    },
+    {
+      "path": "performance-project/assets/performance-on.azurelevel.azmeta",
+      "sha256": "cce565578aee4771e03cde2379d2a90728a595b1567c82065b206f026b452e9c"
+    },
+    {
+      "path": "performance-project/assets/rear.gltf",
+      "sha256": "03d54f9254b10cfdfeb5ba71e697f46edda95c2ea7aef6db9368c9f41dc68184"
+    },
+    {
+      "path": "performance-project/assets/rear.gltf.azmeta",
+      "sha256": "88a18d061f807612c92e7f78e466efd18cd0ad63d9e3635fc8a6cdbef75f2151"
+    },
+    {
+      "path": "performance-project/assets/view.azfog",
+      "sha256": "251130000f0da81b4d6981a11d0108f7c988fbc6cdf038f1a3700dbfeb72b179"
+    },
+    {
+      "path": "performance-project/assets/view.azfog.azmeta",
+      "sha256": "67c11e692ce8c8fd4df283d1ee2f805ab3d1baf9366f16b43a8b1b0f0bdc2fd6"
+    },
+    {
+      "path": "performance-project/off.azureproject",
+      "sha256": "e66cd49bc4c96d8be4f24d2eb41927e035fe902ade1ee0c2af4c44cab1914d86"
+    },
+    {
+      "path": "performance-project/on.azureproject",
+      "sha256": "f05d265730f98fed604c7a3b794031c617d33a71dfdf4cc3c45245a98c06bfee"
+    }
+  ],
+  "binaries": {
+    "debug-AzurePlayer": "1fbffaed145201e090529f2443f530c4ad5fa89dd170d579ad28a651516b21b1",
+    "debug-AzureRender": "462adc6146102634e6440f9e7a00c87d806cff7abb4a9635c478704468621f5b",
+    "debug-AzureSceneMultisamplingGpuTests": "57c669d237e9c16d4d2672891098f85ef1f835ec9b9c515547cec1d1fa7ffb5d",
+    "release-AzurePlayer": "242464eb20535775ae03cad73e1136a144a6f98dacd84988ec95163beacc4534",
+    "release-AzureRender": "38c56b3de6c61471192d9b4e8ee3ed5b0be15f33fcb8ecaa18e06042ffd5ceca",
+    "release-AzureSceneMultisamplingGpuTests": "b3bc0fed38d2bc1645b2cc221ccc69132ebc838a846d9bc49f13dc0f12c6c977"
+  },
+  "gpu": {
+    "debug": {
+      "status": "passed",
+      "cases": [
+        {
+          "case": "silhouette",
+          "fixed": false,
+          "size": 128,
+          "maximumLinearError": 0.001598974696718769,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "depth-step",
+          "fixed": false,
+          "size": 128,
+          "maximumLinearError": 0.0032676699860716973,
+          "baselineMaximumLinearError": 0.0022506575296962206,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "camera-mismatch",
+          "fixed": false,
+          "size": 128,
+          "maximumLinearError": 0.0016225308447025827,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "resize",
+          "fixed": false,
+          "size": 192,
+          "maximumLinearError": 0.001598974696718769,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 32988,
+            "1": 77,
+            "2": 41,
+            "3": 73,
+            "4": 3685
+          },
+          "ambiguousRasterizationPixels": 13
+        },
+        {
+          "case": "single-sample",
+          "fixed": false,
+          "size": 128,
+          "maximumLinearError": 0.00153259950043938,
+          "baselineMaximumLinearError": 0.0007857828382234477,
+          "coverageCounts": {
+            "0": 14705,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1679
+          },
+          "ambiguousRasterizationPixels": 5
+        },
+        {
+          "case": "silhouette",
+          "fixed": true,
+          "size": 128,
+          "maximumLinearError": 0.001598974696718769,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "depth-step",
+          "fixed": true,
+          "size": 128,
+          "maximumLinearError": 0.0032676699860716973,
+          "baselineMaximumLinearError": 0.0022506575296962206,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "camera-mismatch",
+          "fixed": true,
+          "size": 128,
+          "maximumLinearError": 0.0016225308447025827,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "resize",
+          "fixed": true,
+          "size": 192,
+          "maximumLinearError": 0.001598974696718769,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 32988,
+            "1": 77,
+            "2": 41,
+            "3": 73,
+            "4": 3685
+          },
+          "ambiguousRasterizationPixels": 13
+        },
+        {
+          "case": "single-sample",
+          "fixed": true,
+          "size": 128,
+          "maximumLinearError": 0.00153259950043938,
+          "baselineMaximumLinearError": 0.0007857828382234477,
+          "coverageCounts": {
+            "0": 14705,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1679
+          },
+          "ambiguousRasterizationPixels": 5
+        }
+      ],
+      "maximumLinearError": 0.0032676699860716973,
+      "budget": 0.008,
+      "descriptorExact": true
+    },
+    "release": {
+      "status": "passed",
+      "cases": [
+        {
+          "case": "silhouette",
+          "fixed": false,
+          "size": 128,
+          "maximumLinearError": 0.001598974696718769,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "depth-step",
+          "fixed": false,
+          "size": 128,
+          "maximumLinearError": 0.0032676699860716973,
+          "baselineMaximumLinearError": 0.0022506575296962206,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "camera-mismatch",
+          "fixed": false,
+          "size": 128,
+          "maximumLinearError": 0.0016225308447025827,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "resize",
+          "fixed": false,
+          "size": 192,
+          "maximumLinearError": 0.001598974696718769,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 32988,
+            "1": 77,
+            "2": 41,
+            "3": 73,
+            "4": 3685
+          },
+          "ambiguousRasterizationPixels": 13
+        },
+        {
+          "case": "single-sample",
+          "fixed": false,
+          "size": 128,
+          "maximumLinearError": 0.00153259950043938,
+          "baselineMaximumLinearError": 0.0007857828382234477,
+          "coverageCounts": {
+            "0": 14705,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1679
+          },
+          "ambiguousRasterizationPixels": 5
+        },
+        {
+          "case": "silhouette",
+          "fixed": true,
+          "size": 128,
+          "maximumLinearError": 0.001598974696718769,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "depth-step",
+          "fixed": true,
+          "size": 128,
+          "maximumLinearError": 0.0032676699860716973,
+          "baselineMaximumLinearError": 0.0022506575296962206,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "camera-mismatch",
+          "fixed": true,
+          "size": 128,
+          "maximumLinearError": 0.0016225308447025827,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 14642,
+            "1": 53,
+            "2": 20,
+            "3": 53,
+            "4": 1616
+          },
+          "ambiguousRasterizationPixels": 20
+        },
+        {
+          "case": "resize",
+          "fixed": true,
+          "size": 192,
+          "maximumLinearError": 0.001598974696718769,
+          "baselineMaximumLinearError": 0.0016225308447025827,
+          "coverageCounts": {
+            "0": 32988,
+            "1": 77,
+            "2": 41,
+            "3": 73,
+            "4": 3685
+          },
+          "ambiguousRasterizationPixels": 13
+        },
+        {
+          "case": "single-sample",
+          "fixed": true,
+          "size": 128,
+          "maximumLinearError": 0.00153259950043938,
+          "baselineMaximumLinearError": 0.0007857828382234477,
+          "coverageCounts": {
+            "0": 14705,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1679
+          },
+          "ambiguousRasterizationPixels": 5
+        }
+      ],
+      "maximumLinearError": 0.0032676699860716973,
+      "budget": 0.008,
+      "descriptorExact": true
+    }
+  },
+  "performance": {
+    "off": {
+      "width": 1920,
+      "height": 1080,
+      "samples": 96,
+      "mainSceneAverageMs": 25.557568,
+      "totalAverageMs": 25.827277,
+      "totalP50Ms": 25.670384,
+      "totalP95Ms": 26.937904,
+      "snapshotRasterizationSamples": 4,
+      "snapshotMultisampleBytes": 265420800,
+      "snapshotMultisampleAllocatedBytes": 267386880,
+      "viewFogEnabled": false,
+      "viewFogMatch": "disabled"
+    },
+    "on": {
+      "width": 1920,
+      "height": 1080,
+      "samples": 96,
+      "mainSceneAverageMs": 26.776117,
+      "totalAverageMs": 27.04726,
+      "totalP50Ms": 26.8152,
+      "totalP95Ms": 29.23124,
+      "snapshotRasterizationSamples": 4,
+      "snapshotMultisampleBytes": 265420800,
+      "snapshotMultisampleAllocatedBytes": 267386880,
+      "viewFogEnabled": true,
+      "viewFogMatch": "matched"
+    }
+  },
+  "main": {
+    "status": "passed",
+    "cases": [
+      {
+        "case": "native",
+        "changedPixels": 0
+      },
+      {
+        "case": "default",
+        "changedPixels": 0
+      }
+    ]
+  },
+  "negative": {
+    "status": "passed",
+    "incorrectResolvedDepthProgramRejected": true,
+    "exitCode": 1,
+    "error": "AssertionError: ('per-sample-fog', 'silhouette', 0.16111047353242364, {'0': 0.0, '1': 0.16111047353242364, '2': 0.10466386562746105, '3': 0.05258487870328374, '4': 0.00153259950043938})",
+    "overrideScope": "isolated shader directory; original shaders retained"
+  },
+  "resources": {
+    "status": "passed",
+    "snapshotAllocationsUnchanged": true
+  },
+  "tests": {
+    "cpuPerConfiguration": 10,
+    "existingFogCasesPerConfiguration": 26,
+    "newCasesPerConfiguration": 10,
+    "capturesPerConfiguration": 20,
+    "maximumLinearError": 0.0032676699860716973,
+    "budget": 0.008,
+    "configurationAndDescriptorRgbExact": true,
+    "debugAffectedMultisampleChecks": 3,
+    "releaseOwnershipChecks": 1
+  },
+  "priorEvidenceCorrection": {
+    "path": "docs/acceptance/nr/evidence/2026-10-28/view-fog-surfaces.json",
+    "case": "msaa",
+    "configuredAntiAliasing": 3,
+    "observedRasterizationSamples": 1,
+    "actualMode": "native temporal",
+    "currentAntiAliasing": 4,
+    "currentRasterizationSamples": 4
+  },
+  "limitations": [
+    "Analytic rasterization excludes samples within two 1/256-pixel units of polygon boundaries; 20 pixels at 128 and 13 at 192.",
+    "Real full-scene captures validate unchanged single-sample output; synthetic scenes validate true per-sample coverage.",
+    "Short GPU measurements use a one-texel volume and two opaque meshes; full-scene sustained performance is not claimed.",
+    "Spectral atmosphere, distant height fog, moving-view generation and formal NR0-NR12 image/AA/performance gates remain open.",
+    "1080p four-sample two-mesh GPU ranges average 25.827277 ms off and 27.04726 ms on; the formal 16.67 ms target remains unmet and retained."
+  ],
+  "checks": [
+    {
+      "path": "debug-edge/report.json",
+      "sha256": "f1eda7c55200a19111f12b87277967c47437f4971635cc0f7cf330cbc09d60b6"
+    },
+    {
+      "path": "debug-surface/report.json",
+      "sha256": "adc13e29c70663f0bd61e5f0886721b3816f9f273e3b62c085fab8e821695f52"
+    },
+    {
+      "path": "release-edge/report.json",
+      "sha256": "26555bc42358bf4149af701c1fb5cf8f5493321d1e2eefb9f8512e08dcfa1e64"
+    },
+    {
+      "path": "release-surface/report.json",
+      "sha256": "af481827334aec86a0a6335d4654e4aa272decde737ccd8d3a4c673ad4c43124"
+    }
+  ]
+}

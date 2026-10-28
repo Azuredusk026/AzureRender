@@ -40,6 +40,7 @@
 场景资源、捕获视图及保存重开见[绑定验收](../acceptance/nr/view-fog-scene-binding.md)。
 预积分雾场、实际表面与资源隔离见[表面验收](../acceptance/nr/view-fog-surfaces.md)。
 中央白色标识与浮点附件对照见[标识验收](../acceptance/nr/central-late-glyph.md)。
+逐采样深度、覆盖率与双配置回归见[轮廓验收](../acceptance/nr/view-fog-multisample.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。

@@ -82,7 +82,7 @@ def run(player, output, validation, selected):
                     for x in range(dims[0]):payload.extend(struct.pack('<4e',*(x*.125,y*.0625,.03125,.5) if gradient else (.03125,.0625,.125,.5)))
             (assets/'view.azfog').write_bytes(b'AZFOG001'+struct.pack('<3I',*dims)+payload)
             settings=dict(schemaVersion=20,sceneLighting=True,skyIntensity=0,platform=False,background=False,stylized=False,
-                silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=3 if kind=='msaa' else 0,
+                silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=4 if kind=='msaa' else 0,
                 exposure=0,toneMapping=False,contrast=1,saturation=1)
             scene=dict(schemaVersion=1,id=name,sceneType='character',resources=[dict(id='surface',asset='assets:/surface.gltf'),dict(id='rear',asset='assets:/rear.gltf')],
                 nodes=[front,camera,dict(id='rear',resourceId='rear',components={'azure.transform':component('azure.transform',dict(translation=[0,0,-2],scale=[10,10,10]))})],
@@ -100,6 +100,7 @@ def run(player, output, validation, selected):
             assert 'Allocator after unload: buffers=0 images=0' in log and not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
             if validation!='any':assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             manifest=json.loads((root/'frames/capture_manifest.json').read_text())
+            if kind=='msaa':assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
             assert manifest['materialSurfaceProfileLayoutVersion']==17 and manifest['cameraUniformBytes']==688,name
             expected_state=kind if kind in ('camera-mismatch','aspect-mismatch') else 'disabled' if kind in ('absent','disabled') else 'matched'
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])

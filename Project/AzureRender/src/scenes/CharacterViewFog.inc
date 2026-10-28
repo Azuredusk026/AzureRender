@@ -20,7 +20,8 @@ struct CharacterSceneRenderer::ViewFogState {
         VkShaderModule vertex=VK_NULL_HANDLE,fragment=VK_NULL_HANDLE,layered=VK_NULL_HANDLE;
         try{
             vertex=backend.createShaderModule(readBinaryFile(context.shaderDirectory+"/background.vert.spv"));
-            fragment=backend.createShaderModule(readBinaryFile(context.shaderDirectory+"/view_fog_surface.frag.spv"));
+            fragment=backend.createShaderModule(readBinaryFile(context.shaderDirectory+
+                (context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT?"/view_fog_surface_samples.frag.spv":"/view_fog_surface.frag.spv")));
             auto desc=base;desc.vertexShader=vertex;desc.fragmentShader=fragment;
             desc.vertexStride=0;desc.vertexBindings.clear();desc.vertexAttributes.clear();desc.vertexSpecialization={};
             desc.depthTest=desc.depthWrite=false;desc.cullMode=VK_CULL_MODE_NONE;desc.alphaBlend=true;desc.premultipliedAlpha=true;

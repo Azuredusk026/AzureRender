@@ -499,7 +499,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     irradianceClipmapActive_=!scene_.irradianceVolume.asset.empty()
         &&readIrradianceResourceKind(std::filesystem::u8path(scene_.irradianceVolume.asset))==IrradianceResourceKind::Clipmap;
     const std::uint32_t irradianceSlots=irradianceClipmapActive_?6U:0U;
-    ResourceAccessRequirements requirements{indexedSlots+5+irradianceSlots+fogSlots,16+irradianceSlots+fogSlots,7+(probeFieldActive_?1U:0U)+fogSlots};
+    ResourceAccessRequirements requirements{indexedSlots+5+irradianceSlots+2*fogSlots,16+irradianceSlots+2*fogSlots,7+(probeFieldActive_?1U:0U)+fogSlots};
     requirements.separateImageSlots=requirements.fixedSeparateImageSlots=1;
     requirements.separateSamplerSlots=requirements.fixedSeparateSamplerSlots=1;
     requirements.fragmentColorAttachments=kMaterialColorAttachmentCount;
@@ -1369,7 +1369,10 @@ void CharacterSceneRenderer::registerPasses(
     graph.setRecordingChunks(main, std::move(mainChunks));
     graph.use(main, overlayDepth,RenderGraphUsage::Sampled,false);
     graph.use(main,snapshotColor,RenderGraphUsage::Sampled,false);
-    if(fogResource)graph.use(main,*fogResource,RenderGraphUsage::FragmentStorage,false);
+    if(fogResource){
+        graph.use(main,*fogResource,RenderGraphUsage::FragmentStorage,false);
+        if(snapshotMultisampling_)graph.use(main,snapshotSources[2],RenderGraphUsage::Sampled,false);
+    }
     if(outlineMaskResource)graph.use(main,*outlineMaskResource,RenderGraphUsage::Sampled,false);
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
     if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
@@ -2581,7 +2584,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
     bool depthShell=false;
     bool colorRequired=screenSpaceReflectionActive(snapshot.settings.screenSpaceReflection,
         snapshot.settings.sceneLightingEnabled,qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
-    bool sampled=colorRequired;
+    bool sampled=colorRequired||viewFog_!=nullptr;
     if(snapshot.settings.sceneLightingEnabled&&snapshot.settings.nprLighting.enabled&&!(qaEffectMode_==4&&!qaEffectEnabled_)) {
         const auto& lights=frameLights_.lights();
         sampled|=std::any_of(lights.begin(),lights.end(),[](const RenderLight& light){
@@ -2676,7 +2679,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * (textureSlots + 4 + (irradianceClipmapActive_?6U:0U) + (viewFog_?1U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
+             frameCount * (textureSlots + 4 + (irradianceClipmapActive_?6U:0U) + (viewFog_?2U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
             {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
@@ -2689,7 +2692,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?1U:0U))},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?2U:0U))},
         {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
@@ -2747,7 +2750,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
         };
         if(probeFieldActive_)bindings.push_back({33,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
-        if(viewFog_){bindings.push_back({34,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});bindings.push_back({35,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
+        if(viewFog_){bindings.push_back({34,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});bindings.push_back({35,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});bindings.push_back({36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
         if(irradianceClipmapActive_)bindings.push_back({32,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(outlineProjectionEnabled_) {
@@ -2793,7 +2796,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         {27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment},
     };
     if(probeFieldActive_)bindings.push_back({33,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment});
-    if(viewFog_){bindings.push_back({34,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment});bindings.push_back({35,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment});}
+    if(viewFog_){bindings.push_back({34,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,kFragment});bindings.push_back({35,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment});bindings.push_back({36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,kFragment});}
     if(irradianceClipmapActive_)bindings.push_back({32,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,6,kFragment});
     if(objectShadowPrepared_)bindings.push_back({29,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,1,kFragment});
     if(outlineProjectionEnabled_) {
@@ -2887,7 +2890,12 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
             writeSceneImages(uniformWrite.set);
-            if(viewFog_)viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
+            if(viewFog_){
+                viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
+                rhi_->writeDescriptorImage({uniformWrite.set,36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+                    snapshotMultisampling_?snapshotMultisampling_->sourceView(static_cast<unsigned>(frame),2):overlaySceneDepth_[frame].view,
+                    overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            }
             writeProjection(uniformWrite.set,0);
             rhi_->writeDescriptorBuffer({descriptorSets_[frame],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[frame],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
@@ -2978,7 +2986,12 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
             writeSceneImages(uniformWrite.set);
-            if(viewFog_)viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
+            if(viewFog_){
+                viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
+                rhi_->writeDescriptorImage({uniformWrite.set,36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+                    snapshotMultisampling_?snapshotMultisampling_->sourceView(static_cast<unsigned>(frame),2):overlaySceneDepth_[frame].view,
+                    overlaySceneDepth_[frame].sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+            }
             writeProjection(uniformWrite.set,globalMaterial-1);
             rhi_->writeDescriptorBuffer({descriptorSets_[descriptorIndex],27,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,materialSurfaceProfiles_.buffer,materialSurfaceProfiles_.size});
             rhi_->writeDescriptorImage({descriptorSets_[descriptorIndex],26,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,gpuMaterials_[0].baseColor.view,gpuMaterials_[0].baseColor.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
