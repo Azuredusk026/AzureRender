@@ -146,6 +146,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 主场景历史、取消重试及 GPU 接收证据见[装配验收](../acceptance/nr/main-reflection-history.md)。
 快照重复着色的成本依据见[逐事件诊断](../acceptance/nr/reflection-pass-profile.md)。
 快照特化的双配置、图像及短测见[预算验证](../acceptance/nr/snapshot-shading-budget.md)。
+原版四点搜索、足迹系数及精度待项见[射线来源](../acceptance/nr/native-ray-source.md)。
 主宿主共享运动目标及双配置验证见[共享验收](../acceptance/nr/shared-motion.md)。
 KK 动态边缘的双配置门槛见[运动边缘验证](../acceptance/nr/temporal-motion-edges.md)。
 原版层级射线及动态时间历史继续验收。

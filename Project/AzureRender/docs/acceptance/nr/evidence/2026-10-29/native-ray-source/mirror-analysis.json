@@ -1,0 +1,246 @@
+{
+  "15861": {
+    "changedPixels": 1,
+    "changedChannels": [
+      1
+    ],
+    "maximumAbsoluteIntegerDelta": 4194304,
+    "deltaCounts": [
+      [
+        4194304,
+        1
+      ]
+    ],
+    "examples": [
+      {
+        "x": 257,
+        "y": 116,
+        "reference": [
+          1771725652
+        ],
+        "candidate": [
+          1775919956
+        ]
+      }
+    ]
+  },
+  "16501": {
+    "changedPixels": 9273,
+    "changedChannels": [
+      0,
+      9273
+    ],
+    "maximumAbsoluteIntegerDelta": 16,
+    "deltaCounts": [
+      [
+        1,
+        4625
+      ],
+      [
+        -1,
+        4605
+      ],
+      [
+        2,
+        27
+      ],
+      [
+        -2,
+        14
+      ],
+      [
+        6,
+        1
+      ],
+      [
+        16,
+        1
+      ]
+    ],
+    "examples": [
+      {
+        "x": 9,
+        "y": 0,
+        "reference": [
+          65535,
+          664
+        ],
+        "candidate": [
+          65535,
+          663
+        ]
+      },
+      {
+        "x": 244,
+        "y": 0,
+        "reference": [
+          65535,
+          30656
+        ],
+        "candidate": [
+          65535,
+          30657
+        ]
+      },
+      {
+        "x": 278,
+        "y": 0,
+        "reference": [
+          65535,
+          29525
+        ],
+        "candidate": [
+          65535,
+          29524
+        ]
+      },
+      {
+        "x": 300,
+        "y": 0,
+        "reference": [
+          65535,
+          28586
+        ],
+        "candidate": [
+          65535,
+          28587
+        ]
+      },
+      {
+        "x": 379,
+        "y": 0,
+        "reference": [
+          65535,
+          33797
+        ],
+        "candidate": [
+          65535,
+          33798
+        ]
+      }
+    ]
+  },
+  "15781": {
+    "changedPixels": 0,
+    "changedChannels": [
+      0
+    ],
+    "maximumAbsoluteIntegerDelta": 0,
+    "deltaCounts": [],
+    "examples": []
+  },
+  "instructionCounts": [
+    331,
+    338
+  ],
+  "opcodeDifferences": [
+    {
+      "tag": "replace",
+      "originalRange": [
+        46,
+        47
+      ],
+      "candidateRange": [
+        46,
+        47
+      ],
+      "original": [
+        "mov r4.w, -r4.y"
+      ],
+      "candidate": [
+        "xor r4.w, r4.y, l(0x80000000)"
+      ]
+    },
+    {
+      "tag": "insert",
+      "originalRange": [
+        77,
+        77
+      ],
+      "candidateRange": [
+        77,
+        78
+      ],
+      "original": [],
+      "candidate": [
+        "mov r6.yz, l(0.000000, 1.000000, 0.500000, 0.000000)"
+      ]
+    },
+    {
+      "tag": "insert",
+      "originalRange": [
+        95,
+        95
+      ],
+      "candidateRange": [
+        96,
+        98
+      ],
+      "original": [],
+      "candidate": [
+        "mov r4.w, r6.z",
+        "mov r8.xyz, l(0, 0, 0, 0)"
+      ]
+    },
+    {
+      "tag": "insert",
+      "originalRange": [
+        130,
+        130
+      ],
+      "candidateRange": [
+        133,
+        134
+      ],
+      "original": [],
+      "candidate": [
+        "mov r5.z, r10.z"
+      ]
+    },
+    {
+      "tag": "insert",
+      "originalRange": [
+        139,
+        139
+      ],
+      "candidateRange": [
+        143,
+        144
+      ],
+      "original": [],
+      "candidate": [
+        "mov r2.zw, r8.xxxy"
+      ]
+    },
+    {
+      "tag": "insert",
+      "originalRange": [
+        160,
+        160
+      ],
+      "candidateRange": [
+        165,
+        166
+      ],
+      "original": [],
+      "candidate": [
+        "and r4.zw, r4.zzzw, l(0, 0, 1, 1)"
+      ]
+    },
+    {
+      "tag": "insert",
+      "originalRange": [
+        286,
+        286
+      ],
+      "candidateRange": [
+        292,
+        293
+      ],
+      "original": [],
+      "candidate": [
+        "and r4.zw, r4.zzzw, l(0, 0, 1, 1)"
+      ]
+    }
+  ]
+}

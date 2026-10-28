@@ -1,0 +1,30 @@
+{
+  "status": "failed",
+  "outputs": [
+    {
+      "resource": 15861,
+      "bytes": 3686400,
+      "differentBytes": 2330383,
+      "referenceSha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853",
+      "outputSha256": "dbfacadb366c3d58176176f10964407b1ff11a5e833283ce2d75ea521c45c3cd"
+    },
+    {
+      "resource": 16501,
+      "bytes": 3686400,
+      "differentBytes": 2143287,
+      "referenceSha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0",
+      "outputSha256": "20de0a5e31d478d1ba07a9a12287dcd52b0e9cacad1da71af1e1e1e8b2f481cd"
+    },
+    {
+      "resource": 15781,
+      "bytes": 921600,
+      "differentBytes": 390072,
+      "referenceSha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609",
+      "outputSha256": "27d97c512122f6f4555407c9ef439c7b8de0dfa46d2265be9d9cf1e3f04b8ef2"
+    }
+  ],
+  "label": "red",
+  "sourceSha256": "2b8a835008ae7351d5e43fe0103297b6e5fcbda8aa928719fa3b2e37088f0732",
+  "compiler": "",
+  "error": "Traceback (most recent call last):\n  File \"D:/Assigment/2609/FYP/Project/AzureRender/build/runs/20261029-052336-native-hierarchical-reflection-52b603/check_mirror.py\", line 23, in <module>\n    assert all(x['differentBytes']==0 for x in report['outputs']),report['outputs']\nAssertionError: [{'resource': 15861, 'bytes': 3686400, 'differentBytes': 2330383, 'referenceSha256': '171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853', 'outputSha256': 'dbfacadb366c3d58176176f10964407b1ff11a5e833283ce2d75ea521c45c3cd'}, {'resource': 16501, 'bytes': 3686400, 'differentBytes': 2143287, 'referenceSha256': 'c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0', 'outputSha256': '20de0a5e31d478d1ba07a9a12287dcd52b0e9cacad1da71af1e1e1e8b2f481cd'}, {'resource': 15781, 'bytes': 921600, 'differentBytes': 390072, 'referenceSha256': '2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609', 'outputSha256': '27d97c512122f6f4555407c9ef439c7b8de0dfa46d2265be9d9cf1e3f04b8ef2'}]\n"
+}

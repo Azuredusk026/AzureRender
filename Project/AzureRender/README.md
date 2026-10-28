@@ -63,6 +63,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 前置运动与主场景反射历史见[装配验收](docs/acceptance/nr/main-reflection-history.md)。
 完整场景的逐事件成本见[GPU 热点](docs/acceptance/nr/reflection-pass-profile.md)。
 普通材质快照特化及画面兼容见[预算验证](docs/acceptance/nr/snapshot-shading-budget.md)。
+原版射线输入、过滤足迹及数值待项见[来源核验](docs/acceptance/nr/native-ray-source.md)。
 共享运动目标及画面兼容范围见[共享验收](docs/acceptance/nr/shared-motion.md)。
 时序 KK 动态夹具及剩余范围见[运动边缘验证](docs/acceptance/nr/temporal-motion-edges.md)。
 独立过滤资源及双配置结果见[公共过滤验收](docs/acceptance/nr/reflection-spatial-filter.md)。

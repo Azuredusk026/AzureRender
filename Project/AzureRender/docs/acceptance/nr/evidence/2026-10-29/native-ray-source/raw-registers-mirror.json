@@ -1,0 +1,44 @@
+{
+  "status": "failed",
+  "outputs": [
+    {
+      "resource": 15861,
+      "bytes": 3686400,
+      "differentBytes": 1,
+      "referenceSha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853",
+      "outputSha256": "b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e"
+    },
+    {
+      "resource": 16501,
+      "bytes": 3686400,
+      "differentBytes": 9312,
+      "referenceSha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0",
+      "outputSha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2"
+    },
+    {
+      "resource": 15781,
+      "bytes": 921600,
+      "differentBytes": 0,
+      "referenceSha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609",
+      "outputSha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+    }
+  ],
+  "label": "raw-registers",
+  "sourceSha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1",
+  "compiler": "",
+  "compiledBlocks": [
+    {
+      "name": "C0",
+      "bytes": 1040
+    },
+    {
+      "name": "C1",
+      "bytes": 48
+    },
+    {
+      "name": "C2",
+      "bytes": 96
+    }
+  ],
+  "error": "Traceback (most recent call last):\n  File \"D:/Assigment/2609/FYP/Project/AzureRender/build/runs/20261029-052336-native-hierarchical-reflection-52b603/check_mirror.py\", line 26, in <module>\n    assert all(x['differentBytes']==0 for x in report['outputs']),report['outputs']\nAssertionError: [{'resource': 15861, 'bytes': 3686400, 'differentBytes': 1, 'referenceSha256': '171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853', 'outputSha256': 'b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e'}, {'resource': 16501, 'bytes': 3686400, 'differentBytes': 9312, 'referenceSha256': 'c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0', 'outputSha256': '9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2'}, {'resource': 15781, 'bytes': 921600, 'differentBytes': 0, 'referenceSha256': '2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609', 'outputSha256': '2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609'}]\n"
+}

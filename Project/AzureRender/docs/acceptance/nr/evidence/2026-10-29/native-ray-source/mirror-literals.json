@@ -1,0 +1,2847 @@
+[
+  {
+    "instruction": 0,
+    "opcode": "ld_structured_indexable(structured_buffer, stride=4)(mixed,mixed,mixed,mixed)",
+    "binaryOpcode": 167,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 1,
+    "opcode": "ushr",
+    "binaryOpcode": 85,
+    "immediateBits": [
+      [
+        16,
+        16,
+        16,
+        16
+      ]
+    ]
+  },
+  {
+    "instruction": 2,
+    "opcode": "and",
+    "binaryOpcode": 1,
+    "immediateBits": [
+      [
+        65535,
+        65535,
+        65535,
+        65535
+      ]
+    ]
+  },
+  {
+    "instruction": 3,
+    "opcode": "imad",
+    "binaryOpcode": 35,
+    "immediateBits": [
+      [
+        8,
+        8,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 4,
+    "opcode": "ftou",
+    "binaryOpcode": 28,
+    "immediateBits": []
+  },
+  {
+    "instruction": 5,
+    "opcode": "uge",
+    "binaryOpcode": 80,
+    "immediateBits": []
+  },
+  {
+    "instruction": 6,
+    "opcode": "or",
+    "binaryOpcode": 60,
+    "immediateBits": []
+  },
+  {
+    "instruction": 7,
+    "opcode": "if_z",
+    "binaryOpcode": 31,
+    "immediateBits": []
+  },
+  {
+    "instruction": 8,
+    "opcode": "ld_uav_typed(texture2d)(unorm,unorm,unorm,unorm)",
+    "binaryOpcode": 163,
+    "immediateBits": []
+  },
+  {
+    "instruction": 9,
+    "opcode": "itof",
+    "binaryOpcode": 43,
+    "immediateBits": []
+  },
+  {
+    "instruction": 10,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        0,
+        1056964608,
+        1056964608,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 11,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 12,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        981668463,
+        981668463,
+        981668463,
+        981668463
+      ]
+    ]
+  },
+  {
+    "instruction": 13,
+    "opcode": "if_nz",
+    "binaryOpcode": 31,
+    "immediateBits": []
+  },
+  {
+    "instruction": 14,
+    "opcode": "utof",
+    "binaryOpcode": 86,
+    "immediateBits": []
+  },
+  {
+    "instruction": 15,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        0,
+        0,
+        1056964608,
+        1056964608
+      ]
+    ]
+  },
+  {
+    "instruction": 16,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 17,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 18,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        1056964608,
+        1056964608,
+        1056964608,
+        1056964608
+      ]
+    ]
+  },
+  {
+    "instruction": 19,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": [
+      [
+        1040187392,
+        1040187392,
+        1040187392,
+        1040187392
+      ]
+    ]
+  },
+  {
+    "instruction": 20,
+    "opcode": "round_pi",
+    "binaryOpcode": 66,
+    "immediateBits": []
+  },
+  {
+    "instruction": 21,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": [
+      [
+        1082130432,
+        1082130432,
+        1082130432,
+        1082130432
+      ]
+    ]
+  },
+  {
+    "instruction": 22,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": []
+  },
+  {
+    "instruction": 23,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 24,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1073741824,
+        1073741824,
+        0,
+        0
+      ],
+      [
+        3212836864,
+        3212836864,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 25,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 26,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 27,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 28,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 29,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 30,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 31,
+    "opcode": "ld_indexable(texture2d)(float,float,float,float)",
+    "binaryOpcode": 45,
+    "immediateBits": []
+  },
+  {
+    "instruction": 32,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        0,
+        0,
+        1073741824,
+        1073741824
+      ],
+      [
+        0,
+        0,
+        3212836864,
+        3212836864
+      ]
+    ]
+  },
+  {
+    "instruction": 33,
+    "opcode": "dp2",
+    "binaryOpcode": 15,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 34,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 35,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 36,
+    "opcode": "ge",
+    "binaryOpcode": 29,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 37,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 38,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        0,
+        0
+      ],
+      [
+        3212836864,
+        3212836864,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 39,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 40,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": []
+  },
+  {
+    "instruction": 41,
+    "opcode": "dp3",
+    "binaryOpcode": 16,
+    "immediateBits": []
+  },
+  {
+    "instruction": 42,
+    "opcode": "rsq",
+    "binaryOpcode": 68,
+    "immediateBits": []
+  },
+  {
+    "instruction": 43,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 44,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 45,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 46,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": []
+  },
+  {
+    "instruction": 47,
+    "opcode": "dp3",
+    "binaryOpcode": 16,
+    "immediateBits": []
+  },
+  {
+    "instruction": 48,
+    "opcode": "rsq",
+    "binaryOpcode": 68,
+    "immediateBits": []
+  },
+  {
+    "instruction": 49,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 50,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 51,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 52,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 53,
+    "opcode": "dp3",
+    "binaryOpcode": 16,
+    "immediateBits": []
+  },
+  {
+    "instruction": 54,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 55,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 56,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 57,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 58,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 59,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 60,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1065353216,
+        3212836864,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 61,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 62,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 63,
+    "opcode": "dp2",
+    "binaryOpcode": 15,
+    "immediateBits": []
+  },
+  {
+    "instruction": 64,
+    "opcode": "sqrt",
+    "binaryOpcode": 75,
+    "immediateBits": []
+  },
+  {
+    "instruction": 65,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": [
+      [
+        1056964608,
+        1056964608,
+        1056964608,
+        1056964608
+      ]
+    ]
+  },
+  {
+    "instruction": 66,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 67,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1056964608,
+        1056964608,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 68,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 69,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 70,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 71,
+    "opcode": "min",
+    "binaryOpcode": 51,
+    "immediateBits": []
+  },
+  {
+    "instruction": 72,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 73,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 74,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 75,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": [
+      [
+        953267991,
+        953267991,
+        953267991,
+        953267991
+      ]
+    ]
+  },
+  {
+    "instruction": 76,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 77,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": [
+      [
+        1056964608,
+        1056964608,
+        1065353216,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 78,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 79,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 80,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": []
+  },
+  {
+    "instruction": 81,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 82,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        981668463,
+        981668463,
+        981668463,
+        981668463
+      ]
+    ]
+  },
+  {
+    "instruction": 83,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 84,
+    "opcode": "round_z",
+    "binaryOpcode": 67,
+    "immediateBits": []
+  },
+  {
+    "instruction": 85,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        0,
+        1074089951,
+        1083948663,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 86,
+    "opcode": "dp2",
+    "binaryOpcode": 15,
+    "immediateBits": [
+      [
+        1032417603,
+        1002390928,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 87,
+    "opcode": "frc",
+    "binaryOpcode": 26,
+    "immediateBits": []
+  },
+  {
+    "instruction": 88,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": [
+      [
+        1112796802,
+        1112796802,
+        1112796802,
+        1112796802
+      ]
+    ]
+  },
+  {
+    "instruction": 89,
+    "opcode": "frc",
+    "binaryOpcode": 26,
+    "immediateBits": []
+  },
+  {
+    "instruction": 90,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": []
+  },
+  {
+    "instruction": 91,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1056964608,
+        1056964608,
+        1065353216,
+        0
+      ],
+      [
+        1056964608,
+        1056964608,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 92,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 93,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 94,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 95,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 96,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 97,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": []
+  },
+  {
+    "instruction": 98,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 99,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 100,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": []
+  },
+  {
+    "instruction": 101,
+    "opcode": "loop",
+    "binaryOpcode": 48,
+    "immediateBits": []
+  },
+  {
+    "instruction": 102,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": []
+  },
+  {
+    "instruction": 103,
+    "opcode": "if_nz",
+    "binaryOpcode": 31,
+    "immediateBits": []
+  },
+  {
+    "instruction": 104,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1073741824,
+        1073741824
+      ]
+    ]
+  },
+  {
+    "instruction": 105,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1077936128,
+        1077936128,
+        1082130432,
+        1082130432
+      ]
+    ]
+  },
+  {
+    "instruction": 106,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1065353216,
+        1073741824,
+        1077936128,
+        1082130432
+      ]
+    ]
+  },
+  {
+    "instruction": 107,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 108,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 109,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 110,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 111,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 112,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 113,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": []
+  },
+  {
+    "instruction": 114,
+    "opcode": "or",
+    "binaryOpcode": 60,
+    "immediateBits": []
+  },
+  {
+    "instruction": 115,
+    "opcode": "or",
+    "binaryOpcode": 60,
+    "immediateBits": []
+  },
+  {
+    "instruction": 116,
+    "opcode": "if_nz",
+    "binaryOpcode": 31,
+    "immediateBits": []
+  },
+  {
+    "instruction": 117,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": []
+  },
+  {
+    "instruction": 118,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": []
+  },
+  {
+    "instruction": 119,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": []
+  },
+  {
+    "instruction": 120,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": []
+  },
+  {
+    "instruction": 121,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": [
+      [
+        1073741824,
+        1073741824,
+        1073741824,
+        1073741824
+      ],
+      [
+        1077936128,
+        1077936128,
+        1077936128,
+        1077936128
+      ]
+    ]
+  },
+  {
+    "instruction": 122,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 123,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 124,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 125,
+    "opcode": "div_sat",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 126,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 127,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 128,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        4294967295,
+        4294967295,
+        4294967295,
+        4294967295
+      ]
+    ]
+  },
+  {
+    "instruction": 129,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": []
+  },
+  {
+    "instruction": 130,
+    "opcode": "break",
+    "binaryOpcode": 2,
+    "immediateBits": []
+  },
+  {
+    "instruction": 131,
+    "opcode": "endif",
+    "binaryOpcode": 21,
+    "immediateBits": []
+  },
+  {
+    "instruction": 132,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1082130432,
+        1082130432,
+        1082130432,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 133,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        1082130432,
+        1082130432,
+        1082130432,
+        1082130432
+      ]
+    ]
+  },
+  {
+    "instruction": 134,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": []
+  },
+  {
+    "instruction": 135,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 136,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": []
+  },
+  {
+    "instruction": 137,
+    "opcode": "continue",
+    "binaryOpcode": 7,
+    "immediateBits": []
+  },
+  {
+    "instruction": 138,
+    "opcode": "else",
+    "binaryOpcode": 18,
+    "immediateBits": []
+  },
+  {
+    "instruction": 139,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": []
+  },
+  {
+    "instruction": 140,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 141,
+    "opcode": "break",
+    "binaryOpcode": 2,
+    "immediateBits": []
+  },
+  {
+    "instruction": 142,
+    "opcode": "endif",
+    "binaryOpcode": 21,
+    "immediateBits": []
+  },
+  {
+    "instruction": 143,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 144,
+    "opcode": "endloop",
+    "binaryOpcode": 22,
+    "immediateBits": []
+  },
+  {
+    "instruction": 145,
+    "opcode": "if_nz",
+    "binaryOpcode": 31,
+    "immediateBits": []
+  },
+  {
+    "instruction": 146,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": []
+  },
+  {
+    "instruction": 147,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 148,
+    "opcode": "min",
+    "binaryOpcode": 51,
+    "immediateBits": []
+  },
+  {
+    "instruction": 149,
+    "opcode": "min",
+    "binaryOpcode": 51,
+    "immediateBits": []
+  },
+  {
+    "instruction": 150,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": []
+  },
+  {
+    "instruction": 151,
+    "opcode": "div_sat",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 152,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 153,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 154,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 155,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        0,
+        0,
+        1073741824,
+        1073741824
+      ],
+      [
+        0,
+        0,
+        3212836864,
+        3212836864
+      ]
+    ]
+  },
+  {
+    "instruction": 156,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 157,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 158,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        0,
+        3204448256,
+        3204448256,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 159,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 160,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 161,
+    "opcode": "iadd",
+    "binaryOpcode": 30,
+    "immediateBits": []
+  },
+  {
+    "instruction": 162,
+    "opcode": "itof",
+    "binaryOpcode": 43,
+    "immediateBits": []
+  },
+  {
+    "instruction": 163,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 164,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 165,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 166,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 167,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 168,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 169,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        1056964608,
+        1056964608,
+        1056964608,
+        1056964608
+      ]
+    ]
+  },
+  {
+    "instruction": 170,
+    "opcode": "and",
+    "binaryOpcode": 1,
+    "immediateBits": []
+  },
+  {
+    "instruction": 171,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1073741824,
+        1073741824,
+        0,
+        0
+      ],
+      [
+        3212836864,
+        3212836864,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 172,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 173,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 174,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 175,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 176,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        0,
+        1073741824,
+        0,
+        1073741824
+      ],
+      [
+        0,
+        3212836864,
+        0,
+        3212836864
+      ]
+    ]
+  },
+  {
+    "instruction": 177,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 178,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 179,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 180,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 181,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 182,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 183,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 184,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 185,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 186,
+    "opcode": "dp3",
+    "binaryOpcode": 16,
+    "immediateBits": []
+  },
+  {
+    "instruction": 187,
+    "opcode": "sqrt",
+    "binaryOpcode": 75,
+    "immediateBits": []
+  },
+  {
+    "instruction": 188,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 189,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": [
+      [
+        1008981770,
+        1008981770,
+        1008981770,
+        1008981770
+      ]
+    ]
+  },
+  {
+    "instruction": 190,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": [
+      [
+        1048576000,
+        1048576000,
+        1048576000,
+        1048576000
+      ]
+    ]
+  },
+  {
+    "instruction": 191,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": []
+  },
+  {
+    "instruction": 192,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 193,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": []
+  },
+  {
+    "instruction": 194,
+    "opcode": "else",
+    "binaryOpcode": 18,
+    "immediateBits": []
+  },
+  {
+    "instruction": 195,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 196,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 197,
+    "opcode": "endif",
+    "binaryOpcode": 21,
+    "immediateBits": []
+  },
+  {
+    "instruction": 198,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 199,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1073741824,
+        1073741824,
+        0,
+        0
+      ],
+      [
+        3212836864,
+        3212836864,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 200,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 201,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": [
+      [
+        1073741824,
+        1073741824,
+        1073741824,
+        1073741824
+      ]
+    ]
+  },
+  {
+    "instruction": 202,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        3212836864,
+        3212836864,
+        3212836864,
+        3212836864
+      ]
+    ]
+  },
+  {
+    "instruction": 203,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 204,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": [
+      [
+        3221372469,
+        3221372469,
+        3221372469,
+        3221372469
+      ]
+    ]
+  },
+  {
+    "instruction": 205,
+    "opcode": "exp",
+    "binaryOpcode": 25,
+    "immediateBits": []
+  },
+  {
+    "instruction": 206,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 207,
+    "opcode": "sqrt",
+    "binaryOpcode": 75,
+    "immediateBits": []
+  },
+  {
+    "instruction": 208,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        3164171824,
+        3164171824,
+        3164171824,
+        3164171824
+      ],
+      [
+        1033377319,
+        1033377319,
+        1033377319,
+        1033377319
+      ]
+    ]
+  },
+  {
+    "instruction": 209,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        3193517188,
+        3193517188,
+        3193517188,
+        3193517188
+      ]
+    ]
+  },
+  {
+    "instruction": 210,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1070140836,
+        1070140836,
+        1070140836,
+        1070140836
+      ]
+    ]
+  },
+  {
+    "instruction": 211,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 212,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 213,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 214,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 215,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 216,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 217,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1073741824,
+        1073741824,
+        0,
+        0
+      ],
+      [
+        3212836864,
+        3212836864,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 218,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 219,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 220,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 221,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 222,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 223,
+    "opcode": "dp3",
+    "binaryOpcode": 16,
+    "immediateBits": []
+  },
+  {
+    "instruction": 224,
+    "opcode": "rsq",
+    "binaryOpcode": 68,
+    "immediateBits": []
+  },
+  {
+    "instruction": 225,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 226,
+    "opcode": "sqrt",
+    "binaryOpcode": 75,
+    "immediateBits": []
+  },
+  {
+    "instruction": 227,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        1065336439,
+        1065336439,
+        1065336439,
+        1065336439
+      ]
+    ]
+  },
+  {
+    "instruction": 228,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 229,
+    "opcode": "and",
+    "binaryOpcode": 1,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 230,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 231,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 232,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 233,
+    "opcode": "dp3",
+    "binaryOpcode": 16,
+    "immediateBits": []
+  },
+  {
+    "instruction": 234,
+    "opcode": "rsq",
+    "binaryOpcode": 68,
+    "immediateBits": []
+  },
+  {
+    "instruction": 235,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 236,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 237,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 238,
+    "opcode": "dp4",
+    "binaryOpcode": 17,
+    "immediateBits": []
+  },
+  {
+    "instruction": 239,
+    "opcode": "sqrt",
+    "binaryOpcode": 75,
+    "immediateBits": []
+  },
+  {
+    "instruction": 240,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 241,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 242,
+    "opcode": "sincos",
+    "binaryOpcode": 77,
+    "immediateBits": []
+  },
+  {
+    "instruction": 243,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 244,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 245,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 246,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 247,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 248,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 249,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 250,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 251,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 252,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 253,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 254,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 255,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1056964608,
+        1056964608,
+        0,
+        0
+      ],
+      [
+        1056964608,
+        1056964608,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 256,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 257,
+    "opcode": "dp3",
+    "binaryOpcode": 16,
+    "immediateBits": []
+  },
+  {
+    "instruction": 258,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 259,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 260,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 261,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 262,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 263,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 264,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 265,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 266,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 267,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 268,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 269,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 270,
+    "opcode": "dp3",
+    "binaryOpcode": 16,
+    "immediateBits": []
+  },
+  {
+    "instruction": 271,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 272,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 273,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 274,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 275,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 276,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 277,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 278,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 279,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 280,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 281,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 282,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 283,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 284,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        0,
+        3204448256,
+        3204448256,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 285,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 286,
+    "opcode": "lt",
+    "binaryOpcode": 49,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 287,
+    "opcode": "iadd",
+    "binaryOpcode": 30,
+    "immediateBits": []
+  },
+  {
+    "instruction": 288,
+    "opcode": "itof",
+    "binaryOpcode": 43,
+    "immediateBits": []
+  },
+  {
+    "instruction": 289,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 290,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 291,
+    "opcode": "dp2",
+    "binaryOpcode": 15,
+    "immediateBits": []
+  },
+  {
+    "instruction": 292,
+    "opcode": "sqrt",
+    "binaryOpcode": 75,
+    "immediateBits": []
+  },
+  {
+    "instruction": 293,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 294,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": [
+      [
+        1017370378,
+        1017370378,
+        1017370378,
+        1017370378
+      ]
+    ]
+  },
+  {
+    "instruction": 295,
+    "opcode": "log",
+    "binaryOpcode": 47,
+    "immediateBits": []
+  },
+  {
+    "instruction": 296,
+    "opcode": "mad_sat",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        1060205080,
+        1060205080,
+        1060205080,
+        1060205080
+      ],
+      [
+        1008981770,
+        1008981770,
+        1008981770,
+        1008981770
+      ]
+    ]
+  },
+  {
+    "instruction": 297,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 298,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": [
+      [
+        1069066811,
+        1069066811,
+        1069066811,
+        1069066811
+      ]
+    ]
+  },
+  {
+    "instruction": 299,
+    "opcode": "exp",
+    "binaryOpcode": 25,
+    "immediateBits": []
+  },
+  {
+    "instruction": 300,
+    "opcode": "ge",
+    "binaryOpcode": 29,
+    "immediateBits": [
+      [
+        953267991,
+        953267991,
+        953267991,
+        953267991
+      ]
+    ]
+  },
+  {
+    "instruction": 301,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 302,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        0,
+        1056964608,
+        1056964608,
+        0
+      ],
+      [
+        0,
+        1056964608,
+        1056964608,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 303,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 304,
+    "opcode": "dp2",
+    "binaryOpcode": 15,
+    "immediateBits": []
+  },
+  {
+    "instruction": 305,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 306,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": [
+      [
+        0,
+        1056964608,
+        1056964608,
+        0
+      ],
+      [
+        0,
+        1056964608,
+        1056964608,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 307,
+    "opcode": "mad",
+    "binaryOpcode": 50,
+    "immediateBits": []
+  },
+  {
+    "instruction": 308,
+    "opcode": "dp2",
+    "binaryOpcode": 15,
+    "immediateBits": []
+  },
+  {
+    "instruction": 309,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": []
+  },
+  {
+    "instruction": 310,
+    "opcode": "sqrt",
+    "binaryOpcode": 75,
+    "immediateBits": []
+  },
+  {
+    "instruction": 311,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": [
+      [
+        1056964608,
+        1056964608,
+        1056964608,
+        1056964608
+      ]
+    ]
+  },
+  {
+    "instruction": 312,
+    "opcode": "log",
+    "binaryOpcode": 47,
+    "immediateBits": []
+  },
+  {
+    "instruction": 313,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 314,
+    "opcode": "min",
+    "binaryOpcode": 51,
+    "immediateBits": []
+  },
+  {
+    "instruction": 315,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": []
+  },
+  {
+    "instruction": 316,
+    "opcode": "movc",
+    "binaryOpcode": 55,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 317,
+    "opcode": "else",
+    "binaryOpcode": 18,
+    "immediateBits": []
+  },
+  {
+    "instruction": 318,
+    "opcode": "mov",
+    "binaryOpcode": 54,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 319,
+    "opcode": "endif",
+    "binaryOpcode": 21,
+    "immediateBits": []
+  },
+  {
+    "instruction": 320,
+    "opcode": "sample_l(texture2d)(float,float,float,float)",
+    "binaryOpcode": 72,
+    "immediateBits": [
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "instruction": 321,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": []
+  },
+  {
+    "instruction": 322,
+    "opcode": "max",
+    "binaryOpcode": 52,
+    "immediateBits": []
+  },
+  {
+    "instruction": 323,
+    "opcode": "add",
+    "binaryOpcode": 0,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 324,
+    "opcode": "div",
+    "binaryOpcode": 14,
+    "immediateBits": [
+      [
+        1065353216,
+        1065353216,
+        1065353216,
+        1065353216
+      ]
+    ]
+  },
+  {
+    "instruction": 325,
+    "opcode": "mul",
+    "binaryOpcode": 56,
+    "immediateBits": []
+  },
+  {
+    "instruction": 326,
+    "opcode": "store_uav_typed",
+    "binaryOpcode": 164,
+    "immediateBits": []
+  },
+  {
+    "instruction": 327,
+    "opcode": "store_uav_typed",
+    "binaryOpcode": 164,
+    "immediateBits": []
+  },
+  {
+    "instruction": 328,
+    "opcode": "store_uav_typed",
+    "binaryOpcode": 164,
+    "immediateBits": []
+  },
+  {
+    "instruction": 329,
+    "opcode": "endif",
+    "binaryOpcode": 21,
+    "immediateBits": []
+  },
+  {
+    "instruction": 330,
+    "opcode": "ret",
+    "binaryOpcode": 62,
+    "immediateBits": []
+  }
+]

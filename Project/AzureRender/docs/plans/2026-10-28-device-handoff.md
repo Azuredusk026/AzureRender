@@ -58,6 +58,15 @@ Debug 和 Release 的输出均逐级匹配十二份数据。
 实现、双配置及性能见[快照预算](../acceptance/nr/snapshot-shading-budget.md)。
 最近场景运行目录为 `build/runs/20261029-045743-snapshot-shading-budget-8ee0b1`。
 该目录的导入缓存和临时对照程序在验收后清理。
+原版射线的分类、搜索及足迹输入已核对。
+重建可信度逐字节一致，颜色与足迹精度仍待验收。
+来源及可恢复载荷见[射线核验](../acceptance/nr/native-ray-source.md)。
+该内核的主场景接入保持待项。
+
+原始分析位于 `build/runs/20261029-052336-native-hierarchical-reflection-52b603`。
+压缩输出及稀疏差异已进入 Git。
+重放原版和重建内核时，仍需本机原始 RDC。
+角色的服饰及薄透明抗锯齿按既有门槛继续实施。
 事件与程序指纹见[GPU 热点](../acceptance/nr/reflection-pass-profile.md)。
 诊断捕获位于 `build/runs/20261029-044333-reflection-pass-profile-087370`。
 该捕获约 1.48 GiB，缓存清理后保留原始证据。
