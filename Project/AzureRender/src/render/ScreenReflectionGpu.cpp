@@ -4,6 +4,11 @@
 #include <utility>
 namespace azurerender {
 namespace {
+VkExtent2D traceExtent(VkExtent2D source,unsigned divisor){
+    if(!source.width||!source.height||source.width>8192||source.height>8192||(divisor!=1&&divisor!=2))
+        throw std::invalid_argument("Reflection source requires bounded dimensions and a resolution divisor of one or two");
+    return {std::max(1U,source.width/divisor),std::max(1U,source.height/divisor)};
+}
 std::pair<unsigned,std::uint64_t> profile(VkExtent2D extent,unsigned frames,unsigned maximumLevels){
     if(!extent.width||!extent.height||extent.width>8192||extent.height>8192||!frames||frames>8||!maximumLevels||maximumLevels>14)
         throw std::invalid_argument("Screen reflection requires bounded dimensions, frames and levels");
@@ -15,8 +20,8 @@ std::pair<unsigned,std::uint64_t> profile(VkExtent2D extent,unsigned frames,unsi
     return {levels,bytes};
 }
 }
-bool ScreenReflectionGpu::supported(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,unsigned maximumLevels,ReflectionPyramidPrecision precision){
-    try{(void)profile(extent,frames,maximumLevels);}catch(const std::invalid_argument&){return false;}
+bool ScreenReflectionGpu::supported(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,unsigned maximumLevels,ReflectionPyramidPrecision precision,unsigned resolutionDivisor){
+    try{(void)profile(traceExtent(extent,resolutionDivisor),frames,maximumLevels);}catch(const std::invalid_argument&){return false;}
     const auto signal=[&](VkFormat format){return backend.supportsStorageImage(format)&&backend.supportsSampledImage(format,true)
         &&(backend.imageSampleCounts(format,VK_IMAGE_USAGE_STORAGE_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT|VK_IMAGE_USAGE_TRANSFER_DST_BIT)&VK_SAMPLE_COUNT_1_BIT);};
     const auto common=[&](VkFormat format){return backend.supportsStorageImage(format)&&backend.supportsSampledImage(format,false)
@@ -32,22 +37,22 @@ ScreenReflectionShaders ScreenReflectionShaders::load(const std::string& directo
         {readBinaryFile(directory+"/reflection_trace_packed.comp.spv"),readBinaryFile(directory+"/reflection_trace_float.comp.spv")},
         {readBinaryFile(directory+"/reflection_signal_pyramid_packed.comp.spv"),readBinaryFile(directory+"/reflection_signal_pyramid_float.comp.spv")}};
 }
-ScreenReflectionGpu::ScreenReflectionGpu(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,const ScreenReflectionShaders& shaders,unsigned maximumLevels,ReflectionPyramidPrecision precision)
-    :extent_(extent),frames_(frames){
-    const auto properties=profile(extent,frames,maximumLevels);levels_=properties.first;imageBytes_=properties.second;
+ScreenReflectionGpu::ScreenReflectionGpu(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,const ScreenReflectionShaders& shaders,unsigned maximumLevels,ReflectionPyramidPrecision precision,unsigned resolutionDivisor)
+    :extent_(traceExtent(extent,resolutionDivisor)),sourceExtent_(extent),frames_(frames){
+    const auto properties=profile(extent_,frames,maximumLevels);levels_=properties.first;imageBytes_=properties.second;
     if(precision!=ReflectionPyramidPrecision::PreferPacked&&precision!=ReflectionPyramidPrecision::RequirePacked&&precision!=ReflectionPyramidPrecision::Float32)throw std::invalid_argument("Invalid reflection precision");
-    depth_=std::make_unique<DepthPyramidGpu>(backend,extent,levels_,frames,shaders.depth);
-    signals_=std::make_unique<ReflectionSignalPyramidGpu>(backend,extent,levels_,frames,precision,shaders.signal);
+    depth_=std::make_unique<DepthPyramidGpu>(backend,extent_,levels_,frames,shaders.depth);
+    signals_=std::make_unique<ReflectionSignalPyramidGpu>(backend,extent_,levels_,frames,precision,shaders.signal);
     const auto formats=signals_->base(0);
-    rays_=std::make_unique<ReflectionRayGpu>(backend,extent,frames,formats.colorFormat,formats.confidenceFormat,shaders.ray);
-    filter_=std::make_unique<ReflectionSpatialFilterGpu>(backend,extent,frames,shaders.filter,ReflectionFilterOutputAccess::StorageRead);
+    rays_=std::make_unique<ReflectionRayGpu>(backend,extent_,frames,formats.colorFormat,formats.confidenceFormat,shaders.ray);
+    filter_=std::make_unique<ReflectionSpatialFilterGpu>(backend,extent_,frames,shaders.filter,ReflectionFilterOutputAccess::StorageRead);
 }
 void ScreenReflectionGpu::record(rhi::ICommandRecorder& commands,unsigned slot,const ReflectionTraceInputs& inputs,const ReflectionTraceView& view,const ScreenSpaceReflectionSettings& settings){
-    if(slot>=frames_||!inputs.surface||!inputs.color||inputs.width!=extent_.width||inputs.height!=extent_.height)
+    if(slot>=frames_||!inputs.surface||!inputs.color||inputs.width!=sourceExtent_.width||inputs.height!=sourceExtent_.height)
         throw std::invalid_argument("Screen reflection input or slot mismatch");
     for(unsigned i=0;i<frames_;++i)if(inputs.surface==output(i).view||inputs.color==output(i).view)throw std::invalid_argument("Screen reflection inputs alias its outputs");
     (void)view.pack(extent_.width,extent_.height,settings,ReflectionColorEncoding::MaxComponent);
-    depth_->record(commands,slot,inputs.surface,DepthReduction::Minimum);
+    depth_->record(commands,slot,inputs.surface,DepthReduction::Minimum,sourceExtent_);
     signals_->beginBaseWrite(commands,slot);
     rays_->record(commands,slot,inputs,signals_->base(slot),view,settings);
     const auto depth=depth_->output(slot);

@@ -14,6 +14,13 @@ int main()try{
     require(!ScreenReflectionGpu::supported(backend,{17,9},2));backend.unavailableStorageFormats.clear();
     rejects([&]{ScreenReflectionGpu p(backend,{8192,8192},2,shaders);});
     rejects([&]{ScreenReflectionGpu p(backend,{0,9},2,shaders);});
+    rejects([&]{ScreenReflectionGpu p(backend,{17,9},2,shaders,7,ReflectionPyramidPrecision::Float32,3);});
+    {
+        ScreenReflectionGpu half(backend,{35,19},2,shaders,7,ReflectionPyramidPrecision::Float32,2);
+        ScreenReflectionGpu full(backend,{35,19},2,shaders);
+        require(half.output(0).extent.width==17&&half.output(0).extent.height==9&&half.levels()==5);
+        require(half.imageByteBudget()<full.imageByteBudget()/3);
+    }
     {
         ScreenReflectionGpu p(backend,{17,9},2,shaders);require(p.levels()==5);
         require(p.output(0).layout==VK_IMAGE_LAYOUT_GENERAL&&p.output(0).view!=p.output(1).view);

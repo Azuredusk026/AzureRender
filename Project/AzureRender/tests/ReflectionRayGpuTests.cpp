@@ -9,8 +9,29 @@ using namespace azurerender;
 namespace {
 void require(bool v,const char* message){if(!v)throw std::runtime_error(message);}
 constexpr unsigned width=65,height=33;
+bool centralMirrorHit(const ReflectionTraceView& view,bool ortho,bool moved,unsigned outputWidth,unsigned outputHeight){
+    // Independent mirror-plane intersection for the actual selected source sample.
+    const auto x=unsigned((float(outputWidth/2)+.5F)/outputWidth*width);
+    const auto y=unsigned((float(outputHeight/2)+.5F)/outputHeight*height);
+    const float u=(float(x)+.5F)/width*2-1,v=(float(y)+.5F)/height*2-1;
+    const float a=(u+(ortho?-view.projection[12]:view.projection[8]))/view.projection[0];
+    const float b=(v+(ortho?-view.projection[13]:view.projection[9]))/view.projection[5];
+    constexpr float nz=.8660254037844386F;
+    const float cameraX=view.right[0]*a+view.up[0]*b;
+    const float depth=ortho?3+.5F/nz*cameraX:3/(1-.5F/nz*cameraX);
+    std::array<float,3> origin{},direction{};
+    for(unsigned c=0;c<3;++c){origin[c]=view.forward[c]*depth+(view.right[c]*a+view.up[c]*b)*(ortho?1.F:depth);
+        direction[c]=view.forward[c]+(ortho?0.F:view.right[c]*a+view.up[c]*b);}
+    const float dot=.5F*direction[0]+nz*direction[2];direction[0]-=dot;direction[2]-=2*nz*dot;
+    const float t=(-2-origin[2])/direction[2];if(t<=0)return false;
+    std::array<float,4> point{origin[0]+t*direction[0],origin[1]+t*direction[1],-2,1},clip{};
+    if(point[0]<(moved?2.5F:1.5F))return false;
+    for(unsigned row=0;row<4;++row)for(unsigned column=0;column<4;++column)clip[row]+=view.worldToClip[column*4+row]*point[column];
+    return clip[3]>0&&std::abs(clip[0])<=clip[3]&&std::abs(clip[1])<=clip[3]&&clip[2]>=0&&clip[2]<=clip[3];
+}
 void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayShaders,const ReflectionPyramidShaders& pyramidShaders,
-    const std::vector<char>& filterShader,const std::vector<char>& depthShader,bool packed,unsigned mode,bool composed){
+    const std::vector<char>& filterShader,const std::vector<char>& depthShader,bool packed,unsigned mode,bool composed,bool reduced=false){
+    const unsigned outputWidth=reduced?width/2:width,outputHeight=reduced?height/2:height;
     const bool ortho=mode==1||mode==3,rolled=mode==2,moved=mode==4;
     ReflectionTraceView view;view.right=rolled?std::array<float,3>{0,1,0}:std::array<float,3>{1,0,0};
     view.up=rolled?std::array<float,3>{-1,0,0}:std::array<float,3>{0,1,0};view.forward={0,0,-1};
@@ -34,15 +55,15 @@ void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayS
     }
     test::ComputeTexture surface(*host.backend,width,height,1,4,VK_FORMAT_R32G32B32A32_SFLOAT,surfaces);
     test::ComputeTexture color(*host.backend,width,height,1,4,VK_FORMAT_R32G32B32A32_SFLOAT,colors);
-    ReflectionSignalPyramidGpu signals(*host.backend,{width,height},1,2,packed?ReflectionPyramidPrecision::RequirePacked:ReflectionPyramidPrecision::Float32,pyramidShaders);
-    const auto formats=signals.base(0);ReflectionRayGpu ray(*host.backend,{width,height},2,formats.colorFormat,formats.confidenceFormat,rayShaders);
-    ReflectionSpatialFilterGpu filter(*host.backend,{width,height},2,filterShader);
+    ReflectionSignalPyramidGpu signals(*host.backend,{outputWidth,outputHeight},1,2,packed?ReflectionPyramidPrecision::RequirePacked:ReflectionPyramidPrecision::Float32,pyramidShaders);
+    const auto formats=signals.base(0);ReflectionRayGpu ray(*host.backend,{outputWidth,outputHeight},2,formats.colorFormat,formats.confidenceFormat,rayShaders);
+    ReflectionSpatialFilterGpu filter(*host.backend,{outputWidth,outputHeight},2,filterShader);
     std::unique_ptr<ScreenReflectionGpu> combined;
     if(composed)combined=std::make_unique<ScreenReflectionGpu>(*host.backend,VkExtent2D{width,height},2,
-        ScreenReflectionShaders{depthShader,filterShader,rayShaders,pyramidShaders},7,packed?ReflectionPyramidPrecision::RequirePacked:ReflectionPyramidPrecision::Float32);
+        ScreenReflectionShaders{depthShader,filterShader,rayShaders,pyramidShaders},7,packed?ReflectionPyramidPrecision::RequirePacked:ReflectionPyramidPrecision::Float32,reduced?2U:1U);
     std::array<rhi::GpuBuffer,2> buffers{};
     try{
-        for(auto& buffer:buffers)buffer=host.allocator.createBuffer(width*height*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
+        for(auto& buffer:buffers)buffer=host.allocator.createBuffer(outputWidth*outputHeight*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
             if(combined){
                 for(unsigned slot=0;slot<2;++slot){ScreenSpaceReflectionSettings settings;settings.enabled=slot==0;settings.maxDistance=12;settings.maxSteps=128;
@@ -52,21 +73,21 @@ void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayS
                     settings.enabled=slot==0;settings.maxDistance=12;settings.maxSteps=128;
                     ray.record(commands,slot,{surface.view,color.view,width,height},signals.base(slot),view,settings);}
                 for(unsigned slot=0;slot<2;++slot){signals.record(commands,slot,surface.view,1,{});const auto signal=signals.output(slot);
-                    ReflectionFilterInputViews input{surface.view,surface.view,signal.color,width,height,1,1};input.confidence=signal.confidence;input.confidenceLevels=1;input.roughnessChannel=3;
+                    ReflectionFilterInputViews input{surface.view,surface.view,signal.color,outputWidth,outputHeight,1,1};input.confidence=signal.confidence;input.confidenceLevels=1;input.roughnessChannel=3;
                     ReflectionFilterParameters parameters;parameters.maxLod=0;filter.record(commands,slot,input,parameters);}
             }
             for(unsigned slot=0;slot<2;++slot){
                 const auto output=combined?combined->output(slot):filter.output(slot);
                 commands.imageBarrier({output.image,output.layout,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
-                commands.copyImageToBuffer(output.image,buffers[slot].buffer,{width,height});
+                commands.copyImageToBuffer(output.image,buffers[slot].buffer,{outputWidth,outputHeight});
                 commands.imageBarrier({output.image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,output.layout,1,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_TRANSFER_READ_BIT,VK_ACCESS_SHADER_READ_BIT});
                 commands.bufferBarrier({buffers[slot].buffer,0,buffers[slot].size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});}
         });
         for(unsigned slot=0;slot<2;++slot){auto& buffer=buffers[slot];host.allocator.invalidate(buffer,0,buffer.size);const auto* data=static_cast<const float*>(buffer.mapped);
-            for(unsigned i=0;i<width*height*4;++i)require(std::isfinite(data[i]),"Nonfinite reflection ray/filter output");
-            const auto* center=data+((height/2)*width+width/2)*4;
-            std::cout<<"Trace composed="<<composed<<" packed="<<packed<<" mode="<<mode<<" slot="<<slot<<" center="<<center[0]<<','<<center[1]<<','<<center[2]<<','<<center[3]<<'\n';
-            if(slot||moved)require(center[0]==0&&center[3]==0,"Disabled or moved reflector must have no central ray hit");
+            for(unsigned i=0;i<outputWidth*outputHeight*4;++i)require(std::isfinite(data[i]),"Nonfinite reflection ray/filter output");
+            const auto* center=data+((outputHeight/2)*outputWidth+outputWidth/2)*4;
+            std::cout<<"Trace composed="<<composed<<" reduced="<<reduced<<" packed="<<packed<<" mode="<<mode<<" slot="<<slot<<" center="<<center[0]<<','<<center[1]<<','<<center[2]<<','<<center[3]<<'\n';
+            if(slot||!centralMirrorHit(view,ortho,moved,outputWidth,outputHeight))require(center[0]==0&&center[3]==0,"Disabled or analytically invisible reflector must have no central ray hit");
             else {require(center[3]>.5F,"Analytic mirror must hit the visible emissive wall");const std::array<float,3> expected{1,.2F,.1F};
                 for(unsigned c=0;c<3;++c)require(std::abs(center[c]-expected[c])<(packed?.02F:1e-5F),"Reflected radiance differs from independent wall color");}
         }
@@ -79,6 +100,7 @@ int main(int argc,char** argv)try{
     const ReflectionTraceShaders rays{readBinaryFile(argv[1]),readBinaryFile(argv[2])};
     const ReflectionPyramidShaders pyramids{readBinaryFile(argv[3]),readBinaryFile(argv[4])};const auto filter=readBinaryFile(argv[5]);const auto depth=readBinaryFile(argv[6]);
     for(bool composed:{false,true})for(bool packed:{false,true})for(unsigned mode=0;mode<5;++mode)fixture(host,rays,pyramids,filter,depth,packed,mode,composed);
+    for(bool composed:{false,true})for(bool packed:{false,true})for(unsigned mode=0;mode<5;++mode)fixture(host,rays,pyramids,filter,depth,packed,mode,composed,true);
     require(host.errors==0&&!host.allocator.statistics().liveImages&&!host.allocator.statistics().liveBuffers,"Reflection ray validation or retirement failed");
-    std::cout<<"PASS: 40 outputs, perspective/orthographic/rolled/offset/motion, validation=0 resources=0\n";return 0;
+    std::cout<<"PASS: 80 full/half outputs, perspective/orthographic/rolled/offset/motion, validation=0 resources=0\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

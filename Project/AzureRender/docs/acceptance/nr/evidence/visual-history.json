@@ -361,6 +361,24 @@
         "计算生产和七级信号链实际启用。",
         "完整图平均字节误差为 13.065549，原版等价继续验收。"
       ]
+    },
+    {
+      "id": "nr5-r8-j",
+      "title": "反射半分辨率生产",
+      "phase": "NR5-R8-J",
+      "commit": "275eeaa+source-sha256",
+      "status": "半尺寸生产通过，原版层级射线和历史待验",
+      "source": "build/runs/20261028-225752-native-reflection-resolution-72730c/main-release/frames/frame_000000.png",
+      "project": "build/runs/20261028-225752-native-reflection-resolution-72730c/full-candidate/enclosure-sampler.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-resolution.json",
+      "scope": "完整主场景",
+      "image": "docs/acceptance/nr/visual-history/2026-10-28-nr5-r8-j-half.png",
+      "imagePurpose": "scene-composite",
+      "notes": [
+        "原版 3534 机位，完整场景 2560×1440。",
+        "计算反射为 1280×720，源命中颜色保持完整分辨率。",
+        "完整图平均字节误差为 12.927558，时间历史继续实施。"
+      ]
     }
   ],
   "userAttachment": {
@@ -369,5 +387,5 @@
     "matchesSnapshot": "nr3-f1i",
     "rgbPixelExact": true
   },
-  "defaultPreviewSnapshot": "nr5-r8-i"
+  "defaultPreviewSnapshot": "nr5-r8-j"
 }

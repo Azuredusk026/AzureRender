@@ -45,12 +45,17 @@ void DepthPyramidGpu::release() noexcept{
     if(point_)backend_.destroySampler(point_);point_={};
 }
 DepthPyramidOutput DepthPyramidGpu::output(unsigned index) const{const auto& slot=slots_.at(index);return {slot.image.image,slot.all,point_,extent_,levels_};}
-void DepthPyramidGpu::record(rhi::ICommandRecorder& commands,unsigned index,VkImageView source,DepthReduction reduction){
+void DepthPyramidGpu::record(rhi::ICommandRecorder& commands,unsigned index,VkImageView source,DepthReduction reduction,VkExtent2D sourceExtent){
     auto& slot=slots_.at(index);
     if(!source||(reduction!=DepthReduction::Minimum&&reduction!=DepthReduction::Maximum))throw std::invalid_argument("Invalid depth pyramid input or reduction");
+    if(!sourceExtent.width&&!sourceExtent.height)sourceExtent=extent_;
+    const bool reduced=sourceExtent.width!=extent_.width||sourceExtent.height!=extent_.height;
+    if(!sourceExtent.width||!sourceExtent.height||sourceExtent.width>8192||sourceExtent.height>8192||
+        (reduced&&(std::max(1U,sourceExtent.width/2)!=extent_.width||std::max(1U,sourceExtent.height/2)!=extent_.height)))
+        throw std::invalid_argument("Depth source must match the output or its floor-half reduction");
     for(const auto& candidate:slots_){if(source==candidate.all)throw std::invalid_argument("Depth input aliases pyramid output");
         for(const auto& mip:candidate.mips)if(source==mip.view)throw std::invalid_argument("Depth input aliases pyramid mip");}
-    for(unsigned mip=0;mip<levels_;++mip){auto& target=slot.mips[mip];const std::array<std::uint32_t,4> values{mip?1U:0U,reduction==DepthReduction::Maximum?1U:0U,0,0};
+    for(unsigned mip=0;mip<levels_;++mip){auto& target=slot.mips[mip];const std::array<std::uint32_t,4> values{mip||reduced?1U:0U,reduction==DepthReduction::Maximum?1U:0U,0,0};
         std::memcpy(target.parameters.mapped,values.data(),16);backend_.allocator().flush(target.parameters,0,16);
         backend_.writeDescriptorImage({target.set,0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,mip?slot.mips[mip-1].view:source,point_,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
         backend_.writeDescriptorImage({target.set,1,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,target.view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});}

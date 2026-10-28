@@ -163,12 +163,29 @@ void confidenceFixture(test::VulkanComputeFixture& host,const std::vector<char>&
     require(std::abs(wide[3*4+3]-result[3*4+3])>1e-4F,"Quantization control must affect confidence");
     std::cout<<"Confidence mip selection, quantization and surface channel passed\n";
 }
+void fullSurfaceFixture(test::VulkanComputeFixture& host,const std::vector<char>& shader){
+    for(const unsigned width:{17U,1280U}){
+        constexpr unsigned height=1,levels=2;std::vector<float> depths,colors,surface;
+        for(unsigned mip=0;mip<levels;++mip){const unsigned count=width>>mip;
+            depths.insert(depths.end(),count,1);colors.insert(colors.end(),count*4,mip?.25F:.125F);}
+        for(unsigned y=0;y<2;++y)for(unsigned x=0;x<width*2;++x)surface.insert(surface.end(),{1,1,0,float(x%2)});
+        Texture depth(*host.backend,width,height,levels,1,VK_FORMAT_R32_SFLOAT,depths);
+        Texture color(*host.backend,width,height,levels,4,VK_FORMAT_R32G32B32A32_SFLOAT,colors);
+        Texture material(*host.backend,width*2,2,1,4,VK_FORMAT_R32G32B32A32_SFLOAT,surface);
+        ReflectionSpatialFilterGpu filter(*host.backend,{width,height},1,shader);
+        ReflectionFilterInputViews inputs{depth.view,material.view,color.view,width,height,levels,levels};inputs.roughnessChannel=3;
+        ReflectionFilterParameters parameters;parameters.maxLod=1;parameters.encoding=ReflectionColorEncoding::Linear;
+        const auto values=capture(host,filter,0,inputs,parameters);
+        for(unsigned x=0;x<width;++x)require(std::abs(values[x*4]-.25F)<1e-6F,"Full-resolution roughness must select the same floor-mapped pixel as the ray producer");
+    }
+    std::cout<<"Full-resolution alternating roughness follows explicit source-pixel selection\n";
+}
 
 }
 int main(int argc,char** argv)try{
     require(argc==2||argc==4,"Expected shader and optional fixture/output paths");
     test::VulkanComputeFixture host;const auto shader=readBinaryFile(argv[1]);
-    if(argc==4)nativeFixture(host,shader,std::filesystem::u8path(argv[2]),argv[3]);else {synthetic(host,shader);confidenceFixture(host,shader);}
+    if(argc==4)nativeFixture(host,shader,std::filesystem::u8path(argv[2]),argv[3]);else {synthetic(host,shader);confidenceFixture(host,shader);fullSurfaceFixture(host,shader);}
     require(host.errors==0,"Vulkan validation reported an error");
     require(host.allocator.statistics().liveBuffers==0&&host.allocator.statistics().liveImages==0,"GPU resources must be released");
     std::cout<<"PASS: validation errors=0 liveBuffers=0 liveImages=0\n";return 0;

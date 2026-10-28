@@ -12,7 +12,8 @@ public:
     ~DepthPyramidGpu();
     DepthPyramidGpu(const DepthPyramidGpu&)=delete;
     DepthPyramidGpu& operator=(const DepthPyramidGpu&)=delete;
-    void record(rhi::ICommandRecorder&,unsigned slot,VkImageView source,DepthReduction);
+    // An explicit source extent selects a same-size copy or a floor-half base reduction.
+    void record(rhi::ICommandRecorder&,unsigned slot,VkImageView source,DepthReduction,VkExtent2D sourceExtent={});
     DepthPyramidOutput output(unsigned slot) const;
 private:
     struct Mip {VkImageView view{};VkDescriptorSet set{};rhi::GpuBuffer parameters{};};

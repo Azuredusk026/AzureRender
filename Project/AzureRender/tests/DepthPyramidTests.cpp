@@ -18,9 +18,13 @@ int main()try{
         rejects([&]{p.record(commands,0,VK_NULL_HANDLE,DepthReduction::Minimum);});
         rejects([&]{p.record(commands,0,p.output(1).view,DepthReduction::Minimum);});
         rejects([&]{p.record(commands,0,borrowed,static_cast<DepthReduction>(99));});
+        rejects([&]{p.record(commands,0,borrowed,DepthReduction::Minimum,{0,18});});
+        rejects([&]{p.record(commands,0,borrowed,DepthReduction::Minimum,{40,18});});
+        rejects([&]{p.record(commands,0,borrowed,DepthReduction::Minimum,{9000,18});});
         require(commands.calls.empty());
         p.record(commands,0,borrowed,DepthReduction::Minimum);
         p.record(commands,1,borrowed,DepthReduction::Maximum);
+        p.record(commands,0,borrowed,DepthReduction::Minimum,{35,19});
         require(!commands.calls.empty());
     }
     require(!backend.allocator().statistics().liveBuffers&&!backend.allocator().statistics().liveImages);

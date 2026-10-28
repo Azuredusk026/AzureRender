@@ -1,0 +1,76 @@
+{
+  "status": "captured",
+  "textures": [
+    {
+      "resource": "ResourceId::15849",
+      "path": "full-depth.bin",
+      "width": 2560,
+      "height": 1440,
+      "format": "D32S8_TYPELESS",
+      "bytes": 29491200,
+      "sha256": "eaad41bb2fc24b8087f20ea06ee7ad239fc5a9bca0d31a9c4aeda1dccec6d072"
+    },
+    {
+      "resource": "ResourceId::16447",
+      "path": "half-depth.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R32_FLOAT",
+      "bytes": 3686400,
+      "sha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777"
+    },
+    {
+      "resource": "ResourceId::15834",
+      "path": "full-normal-material.bin",
+      "width": 2560,
+      "height": 1440,
+      "format": "R10G10B10A2_UNORM",
+      "bytes": 14745600,
+      "sha256": "a2d3b7893c20fb0909d043f9d43adee1b1307c857210a6b5d63ba2f8bd9248b4"
+    },
+    {
+      "resource": "ResourceId::15771",
+      "path": "full-reflection-normal.bin",
+      "width": 2560,
+      "height": 1440,
+      "format": "R10G10B10A2_UNORM",
+      "bytes": 14745600,
+      "sha256": "a2d3b7893c20fb0909d043f9d43adee1b1307c857210a6b5d63ba2f8bd9248b4"
+    },
+    {
+      "resource": "ResourceId::16497",
+      "path": "half-surface.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R10G10B10A2_UNORM",
+      "bytes": 3686400,
+      "sha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae"
+    },
+    {
+      "resource": "ResourceId::15781",
+      "path": "half-eligibility.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R8_UNORM",
+      "bytes": 921600,
+      "sha256": "c45228dbd3e22e1bb6145f7381e594186a083673ee0ab09ff1e4b144bccee71c"
+    },
+    {
+      "resource": "ResourceId::15777",
+      "path": "half-ray-mask.bin",
+      "width": 1280,
+      "height": 720,
+      "format": "R8_UNORM",
+      "bytes": 921600,
+      "sha256": "24ce48985d5e5a4d07e86ea4fd5fa549a3c7b0c74be637ed0d90feeab17eaf13"
+    }
+  ],
+  "mirror": {
+    "status": "captured",
+    "bytes": 3686400,
+    "differentBytes": 0,
+    "sha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae",
+    "referenceSha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae"
+  },
+  "depthShaderSha256": "be76304c3f0ecf2cba5927f8ba68d5df7b207d040b3a6fc816d937d07188fd20"
+}

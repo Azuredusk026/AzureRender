@@ -731,6 +731,14 @@
       "retention": "NR12 正式归档时核对保留范围",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/screen-reflection.json"
+    },
+    {
+      "path": "runs/20261028-225752-native-reflection-resolution-72730c",
+      "pathBase": "build",
+      "purpose": "半分辨率反射、真实深度和整数选样验证",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-resolution.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

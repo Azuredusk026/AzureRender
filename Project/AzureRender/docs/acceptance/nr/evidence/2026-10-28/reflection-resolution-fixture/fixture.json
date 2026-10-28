@@ -1,0 +1,14 @@
+{
+  "width": 2560,
+  "height": 1440,
+  "format": "R32_FLOAT",
+  "uncompressedBytes": 14745600,
+  "sha256": "8e3f50a0343673677148d7a50bbb27b2b7bb9143b60d39c4b821ab6090cf4ebf",
+  "compression": "zlib",
+  "compressedBytes": 7843650,
+  "compressedSha256": "3d094c385484c6da2655ca8d06de63570269ec5c056253ccffefc3c8fd2e594b",
+  "sourceResource": 15849,
+  "sourceFormat": "D32S8_TYPELESS",
+  "sourceStrideBytes": 8,
+  "referenceDirectory": "../reflection-pyramid-fixture"
+}

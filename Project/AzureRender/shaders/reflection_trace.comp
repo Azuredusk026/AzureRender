@@ -16,9 +16,12 @@ layout(r32f,binding=3) uniform writeonly image2D outputConfidence;
 layout(std140,binding=4) uniform Settings {mat4 worldToClip;vec4 position,right,up,forward,projection,trace,quality,viewport;} frame;
 void main(){
     ivec2 p=ivec2(gl_GlobalInvocationID.xy);if(any(greaterThanEqual(p,ivec2(frame.viewport.xy))))return;
-    vec4 surface=texelFetch(sceneSurface,p,0),value=vec4(0);
+    ivec2 sourceExtent=textureSize(sceneSurface,0);
+    ivec2 sourcePixel=(p*2+1)*sourceExtent/(ivec2(frame.viewport.xy)*2);
+    vec4 surface=texelFetch(sceneSurface,sourcePixel,0),value=vec4(0);
     if(surface.r>0&&surface.r<100000&&surface.a<frame.quality.y){
-        vec2 uv=(vec2(p)+.5)/frame.viewport.xy;
+        // Reconstruct the selected full-resolution sample at its own pixel center.
+        vec2 uv=(vec2(sourcePixel)+.5)/vec2(sourceExtent);
         vec2 lateral=(uv*2-1+frame.projection.zw)*frame.projection.xy*(frame.viewport.z>.5?surface.r:1);
         vec3 position=frame.position.xyz+frame.forward.xyz*surface.r+frame.right.xyz*lateral.x+frame.up.xyz*lateral.y;
         vec3 normal=decodeReflectionSurfaceNormal(surface);

@@ -1,0 +1,814 @@
+{
+  "phase": "NR5-R8-J",
+  "status": "scene-integrated-native-ray-and-history-pending",
+  "run": "build/runs/20261028-225752-native-reflection-resolution-72730c",
+  "nativeHierarchicalRayEquivalent": false,
+  "temporalHistoryIntegrated": false,
+  "cameraBytes": 688,
+  "materialBytes": 336,
+  "traceBytes": 192,
+  "gpuOutputsPerConfiguration": 80,
+  "sourceEvidence": {
+    "status": "captured",
+    "textures": [
+      {
+        "resource": "ResourceId::15849",
+        "path": "full-depth.bin",
+        "width": 2560,
+        "height": 1440,
+        "format": "D32S8_TYPELESS",
+        "bytes": 29491200,
+        "sha256": "eaad41bb2fc24b8087f20ea06ee7ad239fc5a9bca0d31a9c4aeda1dccec6d072"
+      },
+      {
+        "resource": "ResourceId::16447",
+        "path": "half-depth.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R32_FLOAT",
+        "bytes": 3686400,
+        "sha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777"
+      },
+      {
+        "resource": "ResourceId::15834",
+        "path": "full-normal-material.bin",
+        "width": 2560,
+        "height": 1440,
+        "format": "R10G10B10A2_UNORM",
+        "bytes": 14745600,
+        "sha256": "a2d3b7893c20fb0909d043f9d43adee1b1307c857210a6b5d63ba2f8bd9248b4"
+      },
+      {
+        "resource": "ResourceId::15771",
+        "path": "full-reflection-normal.bin",
+        "width": 2560,
+        "height": 1440,
+        "format": "R10G10B10A2_UNORM",
+        "bytes": 14745600,
+        "sha256": "a2d3b7893c20fb0909d043f9d43adee1b1307c857210a6b5d63ba2f8bd9248b4"
+      },
+      {
+        "resource": "ResourceId::16497",
+        "path": "half-surface.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R10G10B10A2_UNORM",
+        "bytes": 3686400,
+        "sha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae"
+      },
+      {
+        "resource": "ResourceId::15781",
+        "path": "half-eligibility.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R8_UNORM",
+        "bytes": 921600,
+        "sha256": "c45228dbd3e22e1bb6145f7381e594186a083673ee0ab09ff1e4b144bccee71c"
+      },
+      {
+        "resource": "ResourceId::15777",
+        "path": "half-ray-mask.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R8_UNORM",
+        "bytes": 921600,
+        "sha256": "24ce48985d5e5a4d07e86ea4fd5fa549a3c7b0c74be637ed0d90feeab17eaf13"
+      }
+    ],
+    "mirror": {
+      "status": "captured",
+      "bytes": 3686400,
+      "differentBytes": 0,
+      "sha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae",
+      "referenceSha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae"
+    },
+    "depthShaderSha256": "be76304c3f0ecf2cba5927f8ba68d5df7b207d040b3a6fc816d937d07188fd20"
+  },
+  "nativeSurfaceNegative": {
+    "status": "captured",
+    "bytes": 3686400,
+    "differentBytes": 3663278,
+    "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+    "referenceSha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae",
+    "differentPixels": 921600,
+    "control": "zero-output-shader-replacement"
+  },
+  "nativeFilterParity": {
+    "debug": "c1894c9dca3b6ac93c56d999cb4dd6ae8bbfdfb4fbc8a74a6f9d7278f6175cda",
+    "release": "c1894c9dca3b6ac93c56d999cb4dd6ae8bbfdfb4fbc8a74a6f9d7278f6175cda"
+  },
+  "tests": {
+    "debug": {
+      "componentLog": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\n    Start 340: AzureRender.ReflectionRay\n1/6 Test #340: AzureRender.ReflectionRay ................   Passed    0.69 sec\n    Start 341: AzureRender.ScreenReflection\n2/6 Test #341: AzureRender.ScreenReflection .............   Passed    0.21 sec\n    Start 342: AzureRender.ReflectionRayGpu\n3/6 Test #342: AzureRender.ReflectionRayGpu .............   Passed    1.57 sec\n    Start 343: AzureRender.DepthPyramid\n4/6 Test #343: AzureRender.DepthPyramid .................   Passed    0.45 sec\n    Start 344: AzureRender.DepthPyramidGpu\n5/6 Test #344: AzureRender.DepthPyramidGpu ..............   Passed    1.59 sec\n    Start 348: AzureRender.ReflectionSpatialFilterGpu\n6/6 Test #348: AzureRender.ReflectionSpatialFilterGpu ...   Passed    1.04 sec\n\n100% tests passed, 0 tests failed out of 6\n\nLabel Time Summary:\ngpu    =   4.19 sec*proc (3 tests)\n\nTotal Test time (real) =   5.58 sec\n",
+      "surface": {
+        "schemaVersion": 1,
+        "cases": [
+          {
+            "antiAliasing": 0,
+            "requested": false,
+            "surfaceMetadata": false,
+            "validationErrors": 0,
+            "resourcesReleased": true
+          },
+          {
+            "antiAliasing": 0,
+            "requested": true,
+            "surfaceMetadata": true,
+            "validationErrors": 0,
+            "resourcesReleased": true
+          },
+          {
+            "antiAliasing": 4,
+            "requested": false,
+            "surfaceMetadata": false,
+            "validationErrors": 0,
+            "resourcesReleased": true
+          },
+          {
+            "antiAliasing": 4,
+            "requested": true,
+            "surfaceMetadata": true,
+            "validationErrors": 0,
+            "resourcesReleased": true
+          }
+        ],
+        "status": "passed"
+      },
+      "ssr": {
+        "status": "passed",
+        "suite": "extended",
+        "captures": 44,
+        "budgets": {
+          "minimumRedSignal": 0.003,
+          "minimumActivePixels": 12,
+          "redPixelThreshold": 0.005,
+          "minimumEnergyInsideExpected": 0.65,
+          "maximumCentroidErrorPixels": 9.0,
+          "maximumCompatibilityByteError": 2,
+          "maximumBeautyIsolationMeanLinearError": 0.015,
+          "maximumSuppressedSignalRatio": 0.25
+        },
+        "metrics": [
+          {
+            "name": "indexed-visible-target",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "indexed-default",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-hidden",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-full-source-under-reflection-isolation",
+            "sourceBeautyLinear": [
+              0.7991027380144125,
+              0.039546235276732455,
+              0.015208514422912614
+            ],
+            "sourceReflectionLinear": [
+              0.00030352698354883513,
+              0.00030352698354883513,
+              0.0006070539670976703
+            ],
+            "receiverBeautyIsolationMeanLinearError": 0.0
+          },
+          {
+            "name": "indexed-lit-source",
+            "meanRedSignal": 0.7282078896875349,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.06697680745407,
+              151.78829312534236
+            ],
+            "centroidErrorPixels": 4.206359220612677,
+            "energyInsideExpected": 0.990093990680751
+          },
+          {
+            "name": "indexed-lit-source-control",
+            "sourceLinear": [
+              1.0,
+              0.07390559768146068,
+              0.03846672362971497
+            ],
+            "sourceEmissiveFactor": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "name": "indexed-rough",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-short-ray",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-back-single",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-offscreen",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-reload",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-back-double",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "indexed-mirrored",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "indexed-occlusion",
+            "meanRedSignal": 0.0,
+            "unoccluded": 0.5051587806649692
+          },
+          {
+            "name": "indexed-motion-0",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "indexed-motion-2",
+            "meanRedSignal": 0.5060883642585711,
+            "activePixels": 437,
+            "weightedCentroid": [
+              186.8804907356633,
+              151.85188017385835
+            ],
+            "centroidErrorPixels": 4.169546060755831,
+            "energyInsideExpected": 0.9897759908533571
+          },
+          {
+            "name": "indexed-same-process-motion",
+            "observedPixels": [
+              54.836659620564916,
+              0.13113203889602687
+            ],
+            "expectedPixels": [
+              55.022397223787664,
+              0.0
+            ],
+            "frames": 3
+          },
+          {
+            "name": "indexed-edge-confidence",
+            "hardSignal": 0.5052698906828312,
+            "fadedSignal": 0.08283791077439079
+          },
+          {
+            "name": "fixed-visible-target",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "fixed-default",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-hidden",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-full-source-under-reflection-isolation",
+            "sourceBeautyLinear": [
+              0.7991027380144125,
+              0.039546235276732455,
+              0.015208514422912614
+            ],
+            "sourceReflectionLinear": [
+              0.00030352698354883513,
+              0.00030352698354883513,
+              0.0006070539670976703
+            ],
+            "receiverBeautyIsolationMeanLinearError": 0.0
+          },
+          {
+            "name": "fixed-lit-source",
+            "meanRedSignal": 0.7282078896875349,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.06697680745407,
+              151.78829312534236
+            ],
+            "centroidErrorPixels": 4.206359220612677,
+            "energyInsideExpected": 0.990093990680751
+          },
+          {
+            "name": "fixed-lit-source-control",
+            "sourceLinear": [
+              1.0,
+              0.07390559768146068,
+              0.03846672362971497
+            ],
+            "sourceEmissiveFactor": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "name": "fixed-rough",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-short-ray",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-back-single",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-offscreen",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-reload",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-back-double",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "fixed-mirrored",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "fixed-occlusion",
+            "meanRedSignal": 0.0,
+            "unoccluded": 0.5051587806649692
+          },
+          {
+            "name": "fixed-motion-0",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "fixed-motion-2",
+            "meanRedSignal": 0.5060883642585711,
+            "activePixels": 437,
+            "weightedCentroid": [
+              186.8804907356633,
+              151.85188017385835
+            ],
+            "centroidErrorPixels": 4.169546060755831,
+            "energyInsideExpected": 0.9897759908533571
+          },
+          {
+            "name": "fixed-same-process-motion",
+            "observedPixels": [
+              54.836659620564916,
+              0.13113203889602687
+            ],
+            "expectedPixels": [
+              55.022397223787664,
+              0.0
+            ],
+            "frames": 3
+          },
+          {
+            "name": "fixed-edge-confidence",
+            "hardSignal": 0.5052698906828312,
+            "fadedSignal": 0.08283791077439079
+          },
+          {
+            "name": "descriptor-parity-on-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-off-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-default-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-hidden-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-beauty-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-motion-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-motion-1",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-motion-2",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-rough-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-rough-off-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-short-ray-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-disabled-specular-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-occluded-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-back-single-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-back-double-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-mirrored-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-offscreen-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-offscreen-off-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-edge-hard-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-edge-fade-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-reload-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-lit-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-lit-off-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-lit-beauty-0",
+            "maximumByteError": 0
+          }
+        ],
+        "sourceSha256": "1b2cb550d0a82333be39d957a287b3439a373e20a7adfff2030073f5645fde59"
+      }
+    },
+    "release": {
+      "componentLog": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\n    Start 340: AzureRender.ReflectionRay\n1/6 Test #340: AzureRender.ReflectionRay ................   Passed    0.44 sec\n    Start 341: AzureRender.ScreenReflection\n2/6 Test #341: AzureRender.ScreenReflection .............   Passed    1.08 sec\n    Start 342: AzureRender.ReflectionRayGpu\n3/6 Test #342: AzureRender.ReflectionRayGpu .............   Passed    1.80 sec\n    Start 343: AzureRender.DepthPyramid\n4/6 Test #343: AzureRender.DepthPyramid .................   Passed    0.39 sec\n    Start 344: AzureRender.DepthPyramidGpu\n5/6 Test #344: AzureRender.DepthPyramidGpu ..............   Passed    0.99 sec\n    Start 348: AzureRender.ReflectionSpatialFilterGpu\n6/6 Test #348: AzureRender.ReflectionSpatialFilterGpu ...   Passed    1.00 sec\n\n100% tests passed, 0 tests failed out of 6\n\nLabel Time Summary:\ngpu    =   3.79 sec*proc (3 tests)\n\nTotal Test time (real) =   5.75 sec\n",
+      "surface": {
+        "schemaVersion": 1,
+        "cases": [
+          {
+            "antiAliasing": 0,
+            "requested": false,
+            "surfaceMetadata": false,
+            "validationErrors": 0,
+            "resourcesReleased": true
+          },
+          {
+            "antiAliasing": 0,
+            "requested": true,
+            "surfaceMetadata": true,
+            "validationErrors": 0,
+            "resourcesReleased": true
+          },
+          {
+            "antiAliasing": 4,
+            "requested": false,
+            "surfaceMetadata": false,
+            "validationErrors": 0,
+            "resourcesReleased": true
+          },
+          {
+            "antiAliasing": 4,
+            "requested": true,
+            "surfaceMetadata": true,
+            "validationErrors": 0,
+            "resourcesReleased": true
+          }
+        ],
+        "status": "passed"
+      },
+      "ssr": {
+        "status": "passed",
+        "suite": "core",
+        "captures": 10,
+        "budgets": {
+          "minimumRedSignal": 0.003,
+          "minimumActivePixels": 12,
+          "redPixelThreshold": 0.005,
+          "minimumEnergyInsideExpected": 0.65,
+          "maximumCentroidErrorPixels": 9.0,
+          "maximumCompatibilityByteError": 2,
+          "maximumBeautyIsolationMeanLinearError": 0.015,
+          "maximumSuppressedSignalRatio": 0.25
+        },
+        "metrics": [
+          {
+            "name": "indexed-visible-target",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "indexed-default",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-hidden",
+            "maximumByteError": 0
+          },
+          {
+            "name": "indexed-full-source-under-reflection-isolation",
+            "sourceBeautyLinear": [
+              0.7991027380144125,
+              0.039546235276732455,
+              0.015208514422912614
+            ],
+            "sourceReflectionLinear": [
+              0.00030352698354883513,
+              0.00030352698354883513,
+              0.0006070539670976703
+            ],
+            "receiverBeautyIsolationMeanLinearError": 0.0
+          },
+          {
+            "name": "fixed-visible-target",
+            "meanRedSignal": 0.5051587806649692,
+            "activePixels": 437,
+            "weightedCentroid": [
+              132.04383111509838,
+              151.72074813496232
+            ],
+            "centroidErrorPixels": 4.275915724919367,
+            "energyInsideExpected": 0.9892139678429952
+          },
+          {
+            "name": "fixed-default",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-hidden",
+            "maximumByteError": 0
+          },
+          {
+            "name": "fixed-full-source-under-reflection-isolation",
+            "sourceBeautyLinear": [
+              0.7991027380144125,
+              0.039546235276732455,
+              0.015208514422912614
+            ],
+            "sourceReflectionLinear": [
+              0.00030352698354883513,
+              0.00030352698354883513,
+              0.0006070539670976703
+            ],
+            "receiverBeautyIsolationMeanLinearError": 0.0
+          },
+          {
+            "name": "descriptor-parity-on-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-off-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-default-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-hidden-0",
+            "maximumByteError": 0
+          },
+          {
+            "name": "descriptor-parity-beauty-0",
+            "maximumByteError": 0
+          }
+        ],
+        "sourceSha256": "1b2cb550d0a82333be39d957a287b3439a373e20a7adfff2030073f5645fde59"
+      }
+    }
+  },
+  "sourceSha256": {
+    "src/render/DepthPyramid.hpp": "88fdf311d0cd063f087f32dea1b8d465a75065748adf155eb881e75b3addd994",
+    "src/render/DepthPyramid.cpp": "0b48cdc3aca4888b5dd99ec8944dc4a2ea92751d4c29db3f27a760be3189f38f",
+    "src/render/ReflectionRay.cpp": "8a96635d9ccbee30594181c1553fa8231a6b21f61d6ebc0a7fb8346d7b7d587b",
+    "src/render/ScreenReflectionGpu.hpp": "d9fe8c124e710bbf82a3931876439ba0d1762ac3533751eeb2da65fcc16b4c8a",
+    "src/render/ScreenReflectionGpu.cpp": "2e4bc8afaa93a08220d8172d778f1606572a675297333e1ccd9c8221385c1030",
+    "src/render/RenderContext.hpp": "eb7ee9ad7a6ff3797b7a6a20b7f5e6d98f8762248c0dca993689dc3f1c7671c8",
+    "src/scenes/CharacterScreenReflection.inc": "61b08910e7c6c4bdfb6bce2ba294b86bbf2c27450dccaa0b7c01fcda3e0436dc",
+    "src/scenes/CharacterSceneRenderer.cpp": "2948a58c64be75dc38586f3cc4f30ad7d7cf96b8f14d254b41dbb0a00f61a8ff",
+    "shaders/reflection_trace.comp": "4fb3db6bbc9c6166d5db278589313641849adc1fa5cf823923b76d9ddf4a9eec",
+    "shaders/reflection_spatial_filter.comp": "7b363f9e326a7afff4d1737c869839208b52cf9d4debbf18a0fbaedb1108b30b",
+    "shaders/depth_pyramid.comp": "be76304c3f0ecf2cba5927f8ba68d5df7b207d040b3a6fc816d937d07188fd20",
+    "tests/DepthPyramidTests.cpp": "2647d02193f4e4c9b2fd40aeaf38c914d00598847e83870f23ad28c19d0fe8b4",
+    "tests/DepthPyramidGpuTests.cpp": "e445a9157849c1fa0b30b3ad258b8bc2a41426115aaf812d64a10637facba4ad",
+    "tests/ReflectionRayGpuTests.cpp": "3456fc95eb33d5a305ebb3c516127ed1e7c5ebc0ea67f4e67f812136edac9169",
+    "tests/ScreenReflectionTests.cpp": "08c8c9c9b7a58076662bff9a756980361c5d1bbcc675d53ae8be8a7d30b644af",
+    "tests/ReflectionSpatialFilterGpuTests.cpp": "2b9ce09de2f753d45246e1da2a56c3776571cba96a3147063f57a11a0b4b60f4",
+    "tools/prepare_reflection_resolution_fixture.py": "5eed86a295cdf231ec6ff3ca1f79517bb2cbb7f1ad6fbc7a18648a76a7b7eeec"
+  },
+  "binaries": {
+    "debug": {
+      "AzurePlayer": "1b475d510ec6ddea444b306c121a6425935837b209dba1546157a51b2d17e7c9",
+      "AzureRender": "b1ebffea3f1e6bfc5e70c119ddc980222385b6d2ce89ec6b1e277e3e0a23371a",
+      "shaders": {
+        "depth_pyramid.comp.spv": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+        "reflection_trace_packed.comp.spv": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+        "reflection_trace_float.comp.spv": "4e89f2e77717f918f86538b504a38d3469609848c4c59b8990d6c24625ee4351",
+        "reflection_spatial_filter.comp.spv": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc"
+      }
+    },
+    "release": {
+      "AzurePlayer": "e8ccb0f704c330c159ebc2585b6b54b4d0bd7a9d4834b77fa0de6641872d3a42",
+      "AzureRender": "d50c4c3738aea5dc3aabb8f532ebe81476eee7841ffd4b574bb1cf2041b73722",
+      "shaders": {
+        "depth_pyramid.comp.spv": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+        "reflection_trace_packed.comp.spv": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+        "reflection_trace_float.comp.spv": "4e89f2e77717f918f86538b504a38d3469609848c4c59b8990d6c24625ee4351",
+        "reflection_spatial_filter.comp.spv": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc"
+      }
+    }
+  },
+  "artifacts": {
+    "selection-fix-debug-ctest.log": "153e8555e430b3614c652ef77be924fe212d08138f0955352bd457db41fb0a3e",
+    "native-depth-debug.log": "be9cdab2f95c29b3f6c4da605bce93be9931464dfd2d384e25309816223e52d4",
+    "native-filter-debug.log": "b6354a90801766ccb2cedff10529c009c17ab6c199f936ca7f57c7d9411bfb98",
+    "final-release-ctest.log": "4b85c5c4f16bb8d333fceba9f0bed8f1e45e930e411a401642145b57ffa12220",
+    "native-depth-release.log": "be9cdab2f95c29b3f6c4da605bce93be9931464dfd2d384e25309816223e52d4",
+    "native-filter-release.log": "b6354a90801766ccb2cedff10529c009c17ab6c199f936ca7f57c7d9411bfb98",
+    "main-release/player.log": "8470e916aa0ac9aac94e74bf84b4a4f5620619942ab4e5a484a3619037a97359",
+    "main-release/player-error.log": "efe54510999af82b4fc986f64bb2a767408cf5aed7dff36ae69f192a6330adfb",
+    "perf-release/player.log": "1dc9492cbebb3bcdd9b824b644795dc0d83a6b97d5c684b273d67b1db687700c",
+    "perf-release/player-error.log": "cb833a18918bbda239c8b502fbe03747f20b3fa76c2b7a88150c7bbe4cb6beb6",
+    "perf-release/timing.json": "76d908ce6d38f59e8db3bd165cac1be271298495a885b356a1d53d5fb41fa72f",
+    "perf-release/timing.csv": "438126daf6c5cb2c05b4607610291c4cc901fdadc6f53ab8b1924df0ee3e664c",
+    "main-release/frames/capture_manifest.json": "87d9076a9f770904b7e07a233a4fad5ca9cb7540637e1fb19cd03be13a1ed166",
+    "ssr-debug-selection/summary.json": "8350561074ff02f6c7c12083626cec83d7075a7040569970ec2c39fba7010229",
+    "ssr-release/summary.json": "0a4d6e23d3a76d4d9b24f22874efedbcd45a198a571c8df9d7f705be165440fb",
+    "roughness-selection.log": "3e24a2bc4199973d9afff29e23d11fde9f9f868cd3fc0c9e79d6c26aaea4d092",
+    "depth-red.log": "fa69ca79bfd6a381adb2d62cd5b66b3da782395cb1d143b6f26d0a6843fa8c57",
+    "ray-half-red.log": "65a13e60a7528226080f2156e56ebc963275a23551d99b72409c97e85e39c3bb"
+  },
+  "nativeDepth": {
+    "levels": 7,
+    "baseSourceExtent": [
+      2560,
+      1440
+    ],
+    "outputExtent": [
+      1280,
+      720
+    ],
+    "differentBytes": 0,
+    "configurations": 2
+  },
+  "main": {
+    "changedPixels": 1138985,
+    "maximumByteChange": 124,
+    "meanByteChange": 0.6008736617476852,
+    "officialMeanByteError": 12.92755832248264,
+    "fields": {
+      "qaCamera": "scene",
+      "sceneRenderWidth": 2560,
+      "sceneRenderHeight": 1440,
+      "qaCameraPosition": [
+        -0.266043,
+        2.26206,
+        -24.9053
+      ],
+      "qaCameraTarget": [
+        -0.261116,
+        2.32175,
+        -23.9071
+      ],
+      "reflectionSurfaceSnapshot": true,
+      "screenReflectionComputePrepared": true,
+      "screenReflectionComputeActive": true,
+      "screenReflectionPreparation": "compute",
+      "screenReflectionLevels": 7,
+      "screenReflectionWidth": 1280,
+      "screenReflectionHeight": 720
+    },
+    "imageSha256": "44be47ba9b50b690591a3480926210ade2f285a51955b195c4d5c8bc3accda7c",
+    "resourcesReleased": true,
+    "validationLayer": false,
+    "uniqueMeshes": 364
+  },
+  "performance": {
+    "width": 1920,
+    "height": 1080,
+    "warmup": 30,
+    "samples": 120,
+    "averageMs": 36.18081706666667,
+    "p95Ms": 36.942888,
+    "budgetMs": 16.667,
+    "passed": false,
+    "formalSustainedAcceptance": false,
+    "reflectionExtent": [
+      960,
+      540
+    ]
+  },
+  "cacheCleanup": {
+    "path": "build/runs/20261028-225752-native-reflection-resolution-72730c/full-candidate/.azure/cache",
+    "result": [
+      3814878264,
+      1793202220.7631528
+    ],
+    "originalInputsPreserved": true,
+    "cacheLocation": "D"
+  },
+  "floorDiagnostic": {
+    "full": 9.92466525607639,
+    "half": 9.652288682725695
+  }
+}

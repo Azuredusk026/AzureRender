@@ -13,8 +13,9 @@ void CharacterSceneRenderer::createScreenReflectionResources(const RenderContext
         if(!context.renderSettings||!context.renderSettings->screenSpaceReflection.enabled)return;
         reflectionPreparation_="queue-without-compute";if(!context.computeShaders)return;
         reflectionPreparation_="depth-only-snapshot";if(reflectionSurfaceFormat_!=VK_FORMAT_R32G32B32A32_SFLOAT)return;
-        reflectionPreparation_="resource-limits";if(!ScreenReflectionGpu::supported(*rhi_,context.renderExtent,kMaxFramesInFlight))return;
-        screenReflections_=std::make_unique<ScreenReflectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),ScreenReflectionShaders::load(shaderDirectory_));
+        constexpr unsigned resolutionDivisor=2;
+        reflectionPreparation_="resource-limits";if(!ScreenReflectionGpu::supported(*rhi_,context.renderExtent,kMaxFramesInFlight,7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor))return;
+        screenReflections_=std::make_unique<ScreenReflectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),ScreenReflectionShaders::load(shaderDirectory_),7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor);
         reflectionPreparation_="compute";
     }catch(...){allocator_->destroyBuffer(staging);destroyScreenReflectionResources();throw;}
 }

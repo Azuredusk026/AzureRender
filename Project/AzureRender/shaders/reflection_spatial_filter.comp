@@ -30,7 +30,9 @@ void main(){
     uvec2 pixel=gl_GlobalInvocationID.xy;
     if(any(greaterThanEqual(pixel,uvec2(parameters.rows[2].zw))))return;
     precise vec2 uv=(vec2(pixel)+.5)*parameters.rows[0].xy;
-    vec4 material=textureLod(surfaceData,uv,0);
+    // Match the ray producer without floating-point ambiguity at texel boundaries.
+    ivec2 materialPixel=(ivec2(pixel)*2+1)*textureSize(surfaceData,0)/(imageSize(resultImage)*2);
+    vec4 material=texelFetch(surfaceData,materialPixel,0);
     vec2 surface=vec2(material[int(parameters.rows[3].y)],material.g);
     float lod=clamp(surface.r,0,1)*parameters.rows[0].z;
     vec3 color;

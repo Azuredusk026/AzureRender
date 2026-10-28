@@ -183,9 +183,9 @@ struct RenderContext {
     // R16G16B16A16_SFLOAT supports storage-image writes on this device.
     bool rgba16fStorageImage = false;
 
-    // Compute skinning/morph is available on the active queue and enabled
-    // for this run. False selects vertex-shader skinning/morph.
+    // Compute execution is supported by the active queue.
     bool computeShaders = false;
+    // Skinning/morph is enabled for this run; false selects vertex skinning.
     bool computeSkinning = false;
     bool gpuCulling = false;
     bool visibilityPrototype = false;

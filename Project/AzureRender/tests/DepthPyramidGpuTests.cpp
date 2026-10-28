@@ -13,14 +13,14 @@ std::vector<VkBufferImageCopy> regions(const DepthPyramidOutput& out){
         r.imageExtent={std::max(1U,out.extent.width>>mip),std::max(1U,out.extent.height>>mip),1};
         result.push_back(r);offset+=VkDeviceSize(r.imageExtent.width)*r.imageExtent.height*4;}return result;
 }
-std::array<std::vector<float>,2> capture(test::VulkanComputeFixture& host,DepthPyramidGpu& pyramid,VkImageView source,bool reverse){
+std::array<std::vector<float>,2> capture(test::VulkanComputeFixture& host,DepthPyramidGpu& pyramid,VkImageView source,bool reverse,VkExtent2D sourceExtent={}){
     const auto out=pyramid.output(0);const auto copies=regions(out);const auto& last=copies.back();
     const auto bytes=last.bufferOffset+VkDeviceSize(last.imageExtent.width)*last.imageExtent.height*4;
     std::array<rhi::GpuBuffer,2> buffers{};
     try{
         for(auto& buffer:buffers)buffer=host.allocator.createBuffer(bytes,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer native){
-            for(unsigned slot=0;slot<2;++slot)pyramid.record(commands,slot,source,(slot==0)^reverse?DepthReduction::Minimum:DepthReduction::Maximum);
+            for(unsigned slot=0;slot<2;++slot)pyramid.record(commands,slot,source,(slot==0)^reverse?DepthReduction::Minimum:DepthReduction::Maximum,sourceExtent);
             for(unsigned slot=0;slot<2;++slot){const auto output=pyramid.output(slot);
                 commands.imageBarrier({output.image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,out.levels,
                     VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
@@ -51,12 +51,24 @@ void synthetic(test::VulkanComputeFixture& host,const std::vector<char>& shader)
         for(bool reverse:{false,true}){const auto pair=capture(host,pyramid,texture.view,reverse);
             for(unsigned slot=0;slot<2;++slot)require(pair[slot]==reference(red,extent.width,extent.height,levels,(slot==1)^reverse),"Odd/degenerate depth levels or distinct in-flight reductions differ");}
     }
+    for(const auto sourceExtent:{VkExtent2D{34,18},VkExtent2D{35,19},VkExtent2D{1,19}}){
+        const VkExtent2D extent{std::max(1U,sourceExtent.width/2),std::max(1U,sourceExtent.height/2)};
+        constexpr unsigned levels=4;std::vector<float> values(sourceExtent.width*sourceExtent.height);
+        for(unsigned i=0;i<values.size();++i)values[i]=float((i*73U)%997U)-500.F;
+        test::ComputeTexture texture(*host.backend,sourceExtent.width,sourceExtent.height,1,1,VK_FORMAT_R32_SFLOAT,values);
+        DepthPyramidGpu pyramid(*host.backend,extent,levels,2,shader);
+        for(bool reverse:{false,true}){const auto pair=capture(host,pyramid,texture.view,reverse,sourceExtent);
+            for(unsigned slot=0;slot<2;++slot){auto expected=reference(values,sourceExtent.width,sourceExtent.height,levels+1,(slot==1)^reverse);
+                expected.erase(expected.begin(),expected.begin()+values.size());
+                require(pair[slot]==expected,"Reduced base must preserve odd overlapping coverage and per-slot reduction");}}
+    }
     std::cout<<"Synthetic: odd axes, one-pixel axis, all levels, two modes, simultaneous slots and reuse exact\n";
 }
-void nativeFixture(test::VulkanComputeFixture& host,const std::vector<char>& shader,const std::filesystem::path& root){
-    const auto bytes=readBinaryFile((root/"texture-16447-mip-0.bin").u8string());
-    test::ComputeTexture source(*host.backend,1280,720,1,VK_FORMAT_R32_SFLOAT,bytes);
-    DepthPyramidGpu pyramid(*host.backend,{1280,720},7,2,shader);const auto pair=capture(host,pyramid,source.view,false);std::size_t offset=0;
+void nativeFixture(test::VulkanComputeFixture& host,const std::vector<char>& shader,const std::filesystem::path& root,const std::filesystem::path& fullDepth={}){
+    const bool reduced=!fullDepth.empty();
+    const auto bytes=readBinaryFile((reduced?fullDepth:root/"texture-16447-mip-0.bin").u8string());
+    test::ComputeTexture source(*host.backend,reduced?2560U:1280U,reduced?1440U:720U,1,VK_FORMAT_R32_SFLOAT,bytes);
+    DepthPyramidGpu pyramid(*host.backend,{1280,720},7,2,shader);const auto pair=capture(host,pyramid,source.view,false,reduced?VkExtent2D{2560,1440}:VkExtent2D{});std::size_t offset=0;
     for(unsigned mip=0;mip<7;++mip){const auto expected=readBinaryFile((root/("texture-16447-mip-"+std::to_string(mip)+".bin")).u8string());
         require(offset+expected.size()<=pair[1].size()*4,"Native depth level outside readback");
         require(std::memcmp(reinterpret_cast<const char*>(pair[1].data())+offset,expected.data(),expected.size())==0,"Native maximum depth pyramid differs bytewise");offset+=expected.size();}
@@ -64,8 +76,8 @@ void nativeFixture(test::VulkanComputeFixture& host,const std::vector<char>& sha
 }
 }
 int main(int argc,char** argv)try{
-    require(argc==2||argc==3,"Expected shader and optional native fixture root");test::VulkanComputeFixture host;const auto shader=readBinaryFile(argv[1]);
-    if(argc==3)nativeFixture(host,shader,std::filesystem::u8path(argv[2]));else synthetic(host,shader);
+    require(argc>=2&&argc<=4,"Expected shader, optional native fixture root and full-resolution depth");test::VulkanComputeFixture host;const auto shader=readBinaryFile(argv[1]);
+    if(argc>=3)nativeFixture(host,shader,std::filesystem::u8path(argv[2]),argc==4?std::filesystem::u8path(argv[3]):std::filesystem::path{});else synthetic(host,shader);
     require(host.errors==0&&!host.allocator.statistics().liveBuffers&&!host.allocator.statistics().liveImages,"Depth GPU validation or resource retirement failed");
     std::cout<<"PASS: validation=0 resources=0\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

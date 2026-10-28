@@ -1590,6 +1590,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"screenReflectionComputeActive\": " << (reflectionActive_[currentFrame_]?"true":"false") << ",\n"
          << "  \"screenReflectionPreparation\": " << std::quoted(reflectionPreparation_) << ",\n"
          << "  \"screenReflectionLevels\": " << (screenReflections_?screenReflections_->levels():0) << ",\n"
+         << "  \"screenReflectionWidth\": " << (screenReflections_?screenReflections_->output(0).extent.width:0) << ",\n"
+         << "  \"screenReflectionHeight\": " << (screenReflections_?screenReflections_->output(0).extent.height:0) << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
          << "  \"irradianceQueryScope\": \"physical-surface\",\n"

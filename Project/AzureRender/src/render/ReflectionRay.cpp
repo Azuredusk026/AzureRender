@@ -61,11 +61,13 @@ void ReflectionRayGpu::release() noexcept{
 void ReflectionRayGpu::record(rhi::ICommandRecorder& commands,unsigned index,const ReflectionTraceInputs& inputs,const ReflectionPyramidViews& base,
     const ReflectionTraceView& view,const ScreenSpaceReflectionSettings& settings,ReflectionColorEncoding encoding){
     auto& slot=slots_.at(index);
-    if(!inputs.surface||!inputs.color||inputs.width!=extent_.width||inputs.height!=extent_.height||base.width!=extent_.width||base.height!=extent_.height
+    const bool same=inputs.width==extent_.width&&inputs.height==extent_.height;
+    const bool half=std::max(1U,inputs.width/2)==extent_.width&&std::max(1U,inputs.height/2)==extent_.height;
+    if(!inputs.surface||!inputs.color||!inputs.width||!inputs.height||inputs.width>8192||inputs.height>8192||(!same&&!half)||base.width!=extent_.width||base.height!=extent_.height
         ||base.levels!=1||!base.color||!base.confidence||base.color==base.confidence||base.colorFormat!=color_||base.confidenceFormat!=confidence_)
         throw std::invalid_argument("Reflection trace requires matching sampled inputs and writable base views");
     for(const auto source:{inputs.surface,inputs.color})if(source==base.color||source==base.confidence)throw std::invalid_argument("Reflection trace input aliases its output");
-    const auto frame=view.pack(inputs.width,inputs.height,settings,encoding);std::memcpy(slot.parameters.mapped,&frame,sizeof(frame));backend_.allocator().flush(slot.parameters,0,sizeof(frame));
+    const auto frame=view.pack(extent_.width,extent_.height,settings,encoding);std::memcpy(slot.parameters.mapped,&frame,sizeof(frame));backend_.allocator().flush(slot.parameters,0,sizeof(frame));
     backend_.writeDescriptorImage({slot.set,0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,inputs.surface,point_,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
     backend_.writeDescriptorImage({slot.set,1,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,inputs.color,point_,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
     backend_.writeDescriptorImage({slot.set,2,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,base.color,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});
