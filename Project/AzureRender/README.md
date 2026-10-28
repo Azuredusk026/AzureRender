@@ -42,6 +42,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 像素原点、抖动及深度映射见[视图坐标验收](docs/acceptance/nr/view-fog-projection.md)。
 场景资源、捕获视图及保存重开见[绑定验收](docs/acceptance/nr/view-fog-scene-binding.md)。
 预积分雾场、实际表面与资源隔离见[表面验收](docs/acceptance/nr/view-fog-surfaces.md)。
+中央白色标识与浮点附件对照见[标识验收](docs/acceptance/nr/central-late-glyph.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 
