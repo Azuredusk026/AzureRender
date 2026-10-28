@@ -8,12 +8,14 @@ SceneMultisampling::SceneMultisampling(rhi::IRhi& rhi,rhi::IGpuAllocator& alloca
     :rhi_(rhi),allocator_(allocator),extent_(extent),secondaryResolve_(policy),destinations_(std::move(destinations)){
     const std::array<VkFormat,3> formats{VK_FORMAT_R16G16B16A16_SFLOAT,depth,secondary};
     const auto pixels=std::uint64_t(extent.width)*extent.height;
-    const auto bytesPerPixel=std::uint64_t(8+4+4)*4*slots;
+    const auto secondaryBytes=secondary==VK_FORMAT_R32G32B32A32_SFLOAT?16U:4U;
+    const auto bytesPerPixel=std::uint64_t(8+4+secondaryBytes)*4*slots;
     if(!extent.width||!extent.height||!slots||slots>2||pixels>kMaximumBytes/bytesPerPixel
         ||destinations_.empty()||destinations_.size()>UINT32_MAX
-        ||depth!=VK_FORMAT_D32_SFLOAT||(secondary!=VK_FORMAT_R8G8B8A8_UNORM&&secondary!=VK_FORMAT_R32_SFLOAT)
-        ||(policy!=SceneSecondaryResolve::Average&&policy!=SceneSecondaryResolve::Minimum)
-        ||(policy==SceneSecondaryResolve::Minimum&&secondary!=VK_FORMAT_R32_SFLOAT))
+        ||depth!=VK_FORMAT_D32_SFLOAT||(secondary!=VK_FORMAT_R8G8B8A8_UNORM&&secondary!=VK_FORMAT_R32_SFLOAT&&secondary!=VK_FORMAT_R32G32B32A32_SFLOAT)
+        ||(policy!=SceneSecondaryResolve::Average&&policy!=SceneSecondaryResolve::Minimum&&policy!=SceneSecondaryResolve::MinimumDepthSample)
+        ||(policy==SceneSecondaryResolve::Minimum&&secondary!=VK_FORMAT_R32_SFLOAT)
+        ||(policy==SceneSecondaryResolve::MinimumDepthSample&&secondary!=VK_FORMAT_R32G32B32A32_SFLOAT))
         throw std::invalid_argument("Scene multisampling requires bounded four-sample targets and supported resolve formats");
     for(const auto& destination:destinations_)for(unsigned i=0;i<3;++i){
         if(!destination.images[i]||!destination.views[i])throw std::invalid_argument("Missing multisample destination image or view");

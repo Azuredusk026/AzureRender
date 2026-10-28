@@ -8,11 +8,12 @@ layout(location=1) out vec4 outSecondary;
 void main(){
     ivec2 pixel=ivec2(gl_FragCoord.xy);
     vec4 color=vec4(0),secondary=vec4(0),nearest=texelFetch(sourceSecondary,pixel,0);
-    float depth=1;
+    vec4 nearestSample=nearest;float depth=1;
     for(int sampleIndex=0;sampleIndex<4;++sampleIndex){
         color+=texelFetch(sourceColor,pixel,sampleIndex);
         vec4 value=texelFetch(sourceSecondary,pixel,sampleIndex);secondary+=value;nearest=min(nearest,value);
+        if(value.r<nearestSample.r)nearestSample=value;
         depth=min(depth,texelFetch(sourceDepth,pixel,sampleIndex).r);
     }
-    outColor=color*.25;outSecondary=policy.secondaryMinimum==0?secondary*.25:nearest;gl_FragDepth=depth;
+    outColor=color*.25;outSecondary=policy.secondaryMinimum==0?secondary*.25:policy.secondaryMinimum==1?nearest:nearestSample;gl_FragDepth=depth;
 }

@@ -2,7 +2,7 @@
 #include "render/RenderGraph.hpp"
 #include <array>
 namespace azurerender {
-enum class SceneSecondaryResolve : std::uint32_t { Average, Minimum };
+enum class SceneSecondaryResolve : std::uint32_t { Average, Minimum, MinimumDepthSample };
 // Attachment order: HDR color, depth, secondary color. Destination images and
 // views are borrowed. Retire GPU work before replacement; destinations outlive us.
 struct SceneMultisampleDestination {

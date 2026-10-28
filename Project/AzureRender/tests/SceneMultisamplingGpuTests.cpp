@@ -12,8 +12,8 @@ int main(int argc,char** argv)try{
     if(argc!=2)throw std::invalid_argument("Expected shaders");test::VulkanComputeFixture host(true,true);auto& backend=*host.backend;
     if(!backend.supportsSampleShading()||!host.properties.limits.standardSampleLocations)return 77;
     std::cout<<"Scene multisampling device: "<<host.properties.deviceName<<'\n';unsigned checked=0;
-    for(unsigned minimum=0;minimum<2;++minimum){
-        std::array<VkFormat,3> formats{VK_FORMAT_R16G16B16A16_SFLOAT,VK_FORMAT_D32_SFLOAT,minimum?VK_FORMAT_R32_SFLOAT:VK_FORMAT_R8G8B8A8_UNORM};
+    for(unsigned minimum=0;minimum<3;++minimum){
+        std::array<VkFormat,3> formats{VK_FORMAT_R16G16B16A16_SFLOAT,VK_FORMAT_D32_SFLOAT,minimum==2?VK_FORMAT_R32G32B32A32_SFLOAT:minimum?VK_FORMAT_R32_SFLOAT:VK_FORMAT_R8G8B8A8_UNORM};
         for(unsigned i=0;i<3;++i)if(!(backend.imageSampleCounts(formats[i],VK_IMAGE_USAGE_SAMPLED_BIT|(i==1?VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT:VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT))&VK_SAMPLE_COUNT_4_BIT))return 77;
         std::array<rhi::GpuImage,6> images{};std::array<rhi::GpuBuffer,3> buffers{};std::vector<SceneMultisampleDestination> destinations(2);
         VkDescriptorSetLayout emptySet{};VkShaderModule vertex{},fragment{};VkPipelineLayout layout{};VkPipeline pipeline{};std::unique_ptr<SceneMultisampling> target;
@@ -27,8 +27,9 @@ int main(int argc,char** argv)try{
             images[d*3+i]=host.allocator.createImage2D(32,32,formats[i],VK_IMAGE_USAGE_TRANSFER_SRC_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|(i==1?VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT:VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT));
             destinations[d].images[i]=images[d*3+i].image;destinations[d].views[i]=backend.createImageView(images[d*3+i].image,formats[i],i==1?VK_IMAGE_ASPECT_DEPTH_BIT:VK_IMAGE_ASPECT_COLOR_BIT,1);
         }
-        for(unsigned i=0;i<3;++i)buffers[i]=host.allocator.createBuffer(32*32*(i==0?8:4),VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
-        target=std::make_unique<SceneMultisampling>(backend,host.allocator,VkExtent2D{32,32},formats[1],formats[2],minimum?SceneSecondaryResolve::Minimum:SceneSecondaryResolve::Average,2,destinations,argv[1]);
+        for(unsigned i=0;i<3;++i)buffers[i]=host.allocator.createBuffer(32*32*(i==0?8:i==2&&minimum==2?16:4),VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
+        target=std::make_unique<SceneMultisampling>(backend,host.allocator,VkExtent2D{32,32},formats[1],formats[2],minimum==2?SceneSecondaryResolve::MinimumDepthSample:minimum?SceneSecondaryResolve::Minimum:SceneSecondaryResolve::Average,2,destinations,argv[1]);
+        require(target->byteSize()==32*32*(minimum==2?112ULL:64ULL)*2,"Source budget must account for the complete secondary format");
         require(target->sourceView(0,2)!=VK_NULL_HANDLE&&target->sourceView(1,2)!=target->sourceView(0,2),"Source views belong to distinct in-flight slots");
         try{target->sourceView(2,0);throw std::runtime_error("Invalid source slot accepted");}catch(const std::out_of_range&){}
         try{target->sourceView(0,3);throw std::runtime_error("Invalid source attachment accepted");}catch(const std::out_of_range&){}
@@ -65,7 +66,9 @@ int main(int argc,char** argv)try{
             const std::array<float,4> expected{.5F+2*phase,.5F,.375F,1};
             for(unsigned pixel=0;pixel<1024;++pixel){for(unsigned c=0;c<4;++c){require(std::abs(halfFloat(hdr[pixel*4+c])-expected[c])<.002F,"HDR sample mean or source-slot isolation differs");++checked;}
                 require(std::abs(depth[pixel]-(.2F+.3F*phase))<1e-6F,"Depth resolve must select nearest covered sample");++checked;
-                if(minimum){require(std::abs(linear[pixel]-.3F)<1e-6F,"Linear secondary depth must resolve minimum");++checked;}
+                if(minimum==2){const std::array<float,4> metadata{.3F,4,7,.9F};
+                    for(unsigned c=0;c<4;++c){require(std::abs(linear[pixel*4+c]-metadata[c])<1e-6F,"Resolved metadata must come from one minimum-depth sample");++checked;}}
+                else if(minimum){require(std::abs(linear[pixel]-.3F)<1e-6F,"Linear secondary depth must resolve minimum");++checked;}
                 else for(unsigned c=0;c<4;++c){require(std::abs(int(normal[pixel*4+c])-128)<=1,"Normal attachment must resolve arithmetic mean");++checked;}
             }
         }

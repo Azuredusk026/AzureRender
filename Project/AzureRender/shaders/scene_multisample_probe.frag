@@ -7,5 +7,5 @@ void main(){
     vec2 samplePosition=fract(uv*32);
     color=vec4(samplePosition.x+2*probe.phase,samplePosition.y,float(gl_SampleID)*.25,1);
     float value=probe.linearDepth!=0?.3+.2*gl_SampleID:float(gl_SampleID%2==0);
-    secondary=vec4(value);gl_FragDepth=.2+.1*gl_SampleID+.3*probe.phase;
+    secondary=probe.linearDepth==2?vec4(gl_SampleID<=1?.3:value,4-gl_SampleID,7+gl_SampleID,.9-.1*gl_SampleID):vec4(value);gl_FragDepth=.2+.1*gl_SampleID+.3*probe.phase;
 }
