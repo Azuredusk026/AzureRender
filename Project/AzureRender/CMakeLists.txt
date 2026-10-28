@@ -317,6 +317,8 @@ compile_shader("${SHADER_SOURCE_DIR}/reflection_surface_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/depth_pyramid.comp")
 compile_shader("${SHADER_SOURCE_DIR}/reflection_trace.comp" DEFINES AZURE_REFLECTION_PACKED=1 OUTPUT_NAME reflection_trace_packed.comp)
 compile_shader("${SHADER_SOURCE_DIR}/reflection_trace.comp" OUTPUT_NAME reflection_trace_float.comp)
+compile_shader("${SHADER_SOURCE_DIR}/reflection_temporal.comp" DEFINES AZURE_REFLECTION_PACKED=1 OUTPUT_NAME reflection_temporal_packed.comp)
+compile_shader("${SHADER_SOURCE_DIR}/reflection_temporal.comp" OUTPUT_NAME reflection_temporal_float.comp)
 compile_shader("${SHADER_SOURCE_DIR}/depth_bias_test.frag")
 compile_shader("${SHADER_SOURCE_DIR}/scene_instance_layout_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/color_grading_lut_test.comp")
@@ -537,6 +539,7 @@ add_library(AzureRenderCore STATIC
     src/render/ReflectionSignalPyramid.cpp
     src/render/DepthPyramid.cpp
     src/render/ReflectionRay.cpp
+    src/render/ReflectionTemporal.cpp
     src/render/ScreenReflectionGpu.cpp
     src/assets/GeneratorRegistry.cpp
     src/assets/PrimitiveGenerator.cpp
@@ -2576,6 +2579,14 @@ if(BUILD_TESTING)
     add_executable(AzureReflectionRayTests tests/ReflectionRayTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureReflectionRayTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ReflectionRay COMMAND AzureReflectionRayTests)
+    add_executable(AzureReflectionTemporalTests tests/ReflectionTemporalTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureReflectionTemporalTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ReflectionTemporal COMMAND AzureReflectionTemporalTests)
+    add_executable(AzureReflectionTemporalGpuTests tests/ReflectionTemporalGpuTests.cpp)
+    target_link_libraries(AzureReflectionTemporalGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureReflectionTemporalGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ReflectionTemporalGpu COMMAND AzureReflectionTemporalGpuTests "${SHADER_BINARY_DIR}/reflection_temporal_packed.comp.spv" "${SHADER_BINARY_DIR}/reflection_temporal_float.comp.spv" "${SHADER_BINARY_DIR}/reflection_signal_pyramid_packed.comp.spv" "${SHADER_BINARY_DIR}/reflection_signal_pyramid_float.comp.spv")
+    set_tests_properties(AzureRender.ReflectionTemporalGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureScreenReflectionTests tests/ScreenReflectionTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureScreenReflectionTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ScreenReflection COMMAND AzureScreenReflectionTests)

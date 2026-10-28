@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "archive": "fixture.zip",
+  "bytes": 9027369,
+  "sha256": "011b3347ee208cc8e9406357ebf4e4a4a42fad262542d70e0591ea975931b298",
+  "referenceColor": "../../2026-10-28/reflection-pyramid-fixture/texture-16552-mip-0.bin",
+  "referenceConfidence": "../../2026-10-28/reflection-pyramid-fixture/confidence-mip-0.bin",
+  "definesForConfidence": [
+    "CONFIDENCE=1"
+  ],
+  "frame": 3534,
+  "confidenceEvent": 8732,
+  "colorEvent": 8741
+}

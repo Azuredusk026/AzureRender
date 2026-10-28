@@ -140,6 +140,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。
 本帧计算反射的主场景装配见[组合契约](../runtime/screen-reflection.md)。
 半尺寸层级与源像素选择见[尺寸验收](../acceptance/nr/reflection-resolution.md)。
+历史计算的冻结输入及公共资源见[时间过滤验收](../acceptance/nr/reflection-temporal.md)。
 原版层级射线及动态时间历史继续验收。
 
 中庭原生方向场已覆盖后方的已知照明缺口。

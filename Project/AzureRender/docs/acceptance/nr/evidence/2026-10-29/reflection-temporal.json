@@ -1,0 +1,339 @@
+{
+  "phase": "NR5-R8-K",
+  "status": "component-verified-main-temporal-integration-pending",
+  "run": "build/runs/20261028-235523-native-reflection-temporal-f18aa9",
+  "mainSceneTemporalIntegrated": false,
+  "continuousNativeSequenceVerified": false,
+  "frameBytes": 32,
+  "descriptorBindings": 9,
+  "imagesOwned": 0,
+  "syntheticOutputsPerConfiguration": 24,
+  "nativeOutputsPerConfiguration": 4,
+  "sourceFrame": 3534,
+  "sourceConfidenceEvent": 8732,
+  "sourceColorEvent": 8741,
+  "sourceInputs": {
+    "status": "captured",
+    "textures": [
+      {
+        "event": 8732,
+        "resource": "ResourceId::15781",
+        "path": "current-confidence.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R8_UNORM",
+        "bytes": 921600,
+        "sha256": "dffe15783316e3129e0225d592ebbd05d22a1441d64547be0c845a60fe87cfd2"
+      },
+      {
+        "event": 8732,
+        "resource": "ResourceId::16508",
+        "path": "motion.bin",
+        "width": 2560,
+        "height": 1440,
+        "format": "R10G10B10A2_UNORM",
+        "bytes": 14745600,
+        "sha256": "5c114bb08d77d97949439fae4b43a9c62ff21636ca8a71768da408706ffb9549"
+      },
+      {
+        "event": 8732,
+        "resource": "ResourceId::16501",
+        "path": "surface-weight.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R16G16_UNORM",
+        "bytes": 3686400,
+        "sha256": "c2daded777b834dd8c3707dbbd4d2fd01724499262b096c2ac152d9b0e818bda"
+      },
+      {
+        "event": 8732,
+        "resource": "ResourceId::16396",
+        "path": "previous-confidence.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R8_UNORM",
+        "bytes": 921600,
+        "sha256": "2f0f076bff38ed54ca9edd1fcba7a887a4eb8a8f1adb4e70e8c7f05743e3d52d"
+      },
+      {
+        "event": 8732,
+        "resource": "ResourceId::16596",
+        "path": "temporal-confidence.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R8_UNORM",
+        "bytes": 921600,
+        "sha256": "0f45ba8b3561771b27887d28fb09342d827f2b58c4a39c9465382587d60232cc"
+      },
+      {
+        "event": 8741,
+        "resource": "ResourceId::15861",
+        "path": "current-color.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R11G11B10_FLOAT",
+        "bytes": 3686400,
+        "sha256": "d16077bceb536d0f622b05c8c6875b9e5f81ad4e2c62ebda2e2eaffbd25a5d69"
+      },
+      {
+        "event": 8741,
+        "resource": "ResourceId::16352",
+        "path": "previous-color.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R11G11B10_FLOAT",
+        "bytes": 3686400,
+        "sha256": "cbc4da684552bbd4ce07515897a8d153691b5873d3b2b437b8b6b063421f802a"
+      },
+      {
+        "event": 8741,
+        "resource": "ResourceId::16552",
+        "path": "temporal-color.bin",
+        "width": 1280,
+        "height": 720,
+        "format": "R11G11B10_FLOAT",
+        "bytes": 3686400,
+        "sha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+      }
+    ]
+  },
+  "sourceMirrors": {
+    "confidence-mirror": {
+      "status": "captured",
+      "bytes": 921600,
+      "differentBytes": 0,
+      "sha256": "0f45ba8b3561771b27887d28fb09342d827f2b58c4a39c9465382587d60232cc",
+      "referenceSha256": "0f45ba8b3561771b27887d28fb09342d827f2b58c4a39c9465382587d60232cc"
+    },
+    "color-mirror": {
+      "status": "captured",
+      "bytes": 3686400,
+      "differentBytes": 0,
+      "sha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272",
+      "referenceSha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+    },
+    "confidence-negative": {
+      "status": "captured",
+      "bytes": 921600,
+      "differentBytes": 547865,
+      "sha256": "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366",
+      "referenceSha256": "0f45ba8b3561771b27887d28fb09342d827f2b58c4a39c9465382587d60232cc"
+    },
+    "color-negative": {
+      "status": "captured",
+      "bytes": 3686400,
+      "differentBytes": 3680418,
+      "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+      "referenceSha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+    }
+  },
+  "tests": {
+    "debug": {
+      "regression": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\n    Start 341: AzureRender.ReflectionTemporal\n1/5 Test #341: AzureRender.ReflectionTemporal ...........   Passed    1.10 sec\n    Start 342: AzureRender.ReflectionTemporalGpu\n2/5 Test #342: AzureRender.ReflectionTemporalGpu ........   Passed    1.35 sec\n    Start 344: AzureRender.ReflectionRayGpu\n3/5 Test #344: AzureRender.ReflectionRayGpu .............   Passed    1.89 sec\n    Start 346: AzureRender.DepthPyramidGpu\n4/5 Test #346: AzureRender.DepthPyramidGpu ..............   Passed    1.53 sec\n    Start 350: AzureRender.ReflectionSpatialFilterGpu\n5/5 Test #350: AzureRender.ReflectionSpatialFilterGpu ...   Passed    1.24 sec\n\n100% tests passed, 0 tests failed out of 5\n\nLabel Time Summary:\ngpu    =   6.00 sec*proc (4 tests)\n\nTotal Test time (real) =   7.12 sec\n",
+      "native": {
+        "configuration": "public-debug",
+        "budgets": {
+          "colorNativeUnits": 1.01,
+          "confidenceBytes": 1.01
+        },
+        "results": [
+          {
+            "format": "packed",
+            "pixels": 921600,
+            "differentColorPixels": 11,
+            "maximumNativeColorUnits": 1.0,
+            "colorOverBudget": 0,
+            "maximumConfidenceByteError": 0.0,
+            "confidenceOverBudget": 0
+          },
+          {
+            "format": "float",
+            "pixels": 921600,
+            "differentColorPixels": 754968,
+            "maximumNativeColorUnits": 1.0,
+            "colorOverBudget": 0,
+            "maximumConfidenceByteError": 0.5600054264068604,
+            "confidenceOverBudget": 0
+          }
+        ],
+        "zeroWeightBaselineMaximum": 0.0,
+        "zeroWeightMaskMaximum": 0.0,
+        "nativeHistoryChangedPixels": 744590
+      }
+    },
+    "release": {
+      "regression": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\n    Start 341: AzureRender.ReflectionTemporal\n1/5 Test #341: AzureRender.ReflectionTemporal ...........   Passed    0.45 sec\n    Start 342: AzureRender.ReflectionTemporalGpu\n2/5 Test #342: AzureRender.ReflectionTemporalGpu ........   Passed    1.49 sec\n    Start 344: AzureRender.ReflectionRayGpu\n3/5 Test #344: AzureRender.ReflectionRayGpu .............   Passed    1.57 sec\n    Start 346: AzureRender.DepthPyramidGpu\n4/5 Test #346: AzureRender.DepthPyramidGpu ..............   Passed    1.27 sec\n    Start 350: AzureRender.ReflectionSpatialFilterGpu\n5/5 Test #350: AzureRender.ReflectionSpatialFilterGpu ...   Passed    1.15 sec\n\n100% tests passed, 0 tests failed out of 5\n\nLabel Time Summary:\ngpu    =   5.47 sec*proc (4 tests)\n\nTotal Test time (real) =   5.96 sec\n",
+      "native": {
+        "configuration": "public-release",
+        "budgets": {
+          "colorNativeUnits": 1.01,
+          "confidenceBytes": 1.01
+        },
+        "results": [
+          {
+            "format": "packed",
+            "pixels": 921600,
+            "differentColorPixels": 11,
+            "maximumNativeColorUnits": 1.0,
+            "colorOverBudget": 0,
+            "maximumConfidenceByteError": 0.0,
+            "confidenceOverBudget": 0
+          },
+          {
+            "format": "float",
+            "pixels": 921600,
+            "differentColorPixels": 754968,
+            "maximumNativeColorUnits": 1.0,
+            "colorOverBudget": 0,
+            "maximumConfidenceByteError": 0.5600054264068604,
+            "confidenceOverBudget": 0
+          }
+        ],
+        "zeroWeightBaselineMaximum": 0.0,
+        "zeroWeightMaskMaximum": 0.0,
+        "nativeHistoryChangedPixels": 744590
+      }
+    }
+  },
+  "sources": {
+    "CMakeLists.txt": "d347bf8a9f744948c44d2e5587ff049a9505a5bfeee22c9755cb2070bbd51392",
+    "src/render/ReflectionTemporal.hpp": "8f5ac6ea94cd448c112f2d225c2d95eb704765572234de7f03ba90aec4fe31d0",
+    "src/render/ReflectionTemporal.cpp": "c65ba3a494ecca509a104ebd2a1df087a32e6fb7de92daf9c5ffab5711d8cc57",
+    "shaders/reflection_temporal.comp": "7879c5108bc60d1d4a21eb0a0156908de96f03a56e7baba2cb01edd73608cce8",
+    "tests/ReflectionTemporalTests.cpp": "da0938bc93a45ae15a68c8569226b7e5e0583b2cc91efbfcbfdd7a2a6eef54ee",
+    "tests/ReflectionTemporalGpuTests.cpp": "2b1aeadc5b36a3524d228978338b058541b6339b14f6d0d7b8d8c6a37804763e",
+    "tools/check_reflection_temporal_fixture.py": "c1ef0d85d53752f473e85b27faa84e756f20abd801c4c9c561e0429583bee40b"
+  },
+  "binaries": {
+    "debug": {
+      "AzurePlayer": "6aa4dad5bd415f8be2ea41ae2601ce81014b72035e9cb617596ca52e6570f70e",
+      "AzureRender": "7c56f205b5f586cbf81c14e23632a41cf198970db25627319080ed27ad2810f4",
+      "AzureReflectionTemporalGpuTests": "343a01774336f04f378f280e08cdc50677776326acc9362de7a7ec9c0444a8db",
+      "shaders": {
+        "reflection_temporal_packed.comp.spv": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3",
+        "reflection_temporal_float.comp.spv": "66c44b623b83f9e6176e7c44f7039992ada997ac29933d4224cac71c7bc00020"
+      }
+    },
+    "release": {
+      "AzurePlayer": "d987460a45ed547a2b605ef36823fea4eaee307654285b7a096315298f2f0637",
+      "AzureRender": "5208e586a3538e6806b46e78cd0cbc4f6713d0b39235449e537322f52308fbf6",
+      "AzureReflectionTemporalGpuTests": "0544c6185b52cb22028b7896de521aab945eb8114097f55ee7d69f345785e202",
+      "shaders": {
+        "reflection_temporal_packed.comp.spv": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3",
+        "reflection_temporal_float.comp.spv": "66c44b623b83f9e6176e7c44f7039992ada997ac29933d4224cac71c7bc00020"
+      }
+    }
+  },
+  "artifacts": {
+    "regression-debug.log": "cde9826ebaa78ff24c4d41757fd22f4b8a6c599a51ebd67b9cdc4c8742e29e10",
+    "regression-release.log": "6ab1bc9af7e28343c114487c3f729065f14ed54563b6b5fde152b487be488f34",
+    "temporal-release-build.log": "d3f3e5db1729449d0cde1a40139b79c4d5d53a1614bce2f9687335df41c260e7",
+    "app-debug-build.log": "454bde473c9eb5419110e7e8dff390c5b4d77d0640cc83e60094740b76618024",
+    "temporal-red.log": "7c70273cdd0190c9546368acd7aad3d6dbf7420029352a6d5629297e514655d6",
+    "temporal-gpu-diagnostic.log": "48408a77cdb598234b4f8c11d8a3ba3e0fa804ba4d749274933183980bb268a7",
+    "temporal-clipping-debug-ctest.log": "435ddd27f45502d31596c15888496341d5ec7ff2bbdf0ad93c0eaf1497a72f4f",
+    "temporal-format-debug-ctest.log": "f67617a84d47846d7c2acc6fd21a48df2a813051bced9df7d79a41f46fdf216d",
+    "public-debug.log": "0b7382a4344d4a8d5b339041b8cd3d3c04767888c87361fdacd44375e738350c",
+    "public-release.log": "0b7382a4344d4a8d5b339041b8cd3d3c04767888c87361fdacd44375e738350c",
+    "public-debug-portable.log": "0b7382a4344d4a8d5b339041b8cd3d3c04767888c87361fdacd44375e738350c"
+  },
+  "configurationAndPortableParity": [
+    {
+      "path": "float-0-color.bin",
+      "sha256": "b06c3ba1e5cd78e5396e685ef77d53fdbd38a2c6224385d5c5f52a03307714fc",
+      "bytes": 14745600
+    },
+    {
+      "path": "float-0-confidence.bin",
+      "sha256": "316df644ccb24bbeffb83bf84b8c25bd5df7d6f63d9f4ba969360af6c41c2b7a",
+      "bytes": 3686400
+    },
+    {
+      "path": "float-1-color.bin",
+      "sha256": "5d0417046a86eaed7833a37495da664fd2bf841100eb8b283f85d1663cc4566e",
+      "bytes": 14745600
+    },
+    {
+      "path": "float-1-confidence.bin",
+      "sha256": "5c69fdf43d0d31fa3d920ded95c97b7d22da81249fe0e7275396da318e561351",
+      "bytes": 3686400
+    },
+    {
+      "path": "packed-0-color.bin",
+      "sha256": "2a905124f272533004bb1d2d7855e38f616334d86a6f2bbe986794c96ee40910",
+      "bytes": 3686400
+    },
+    {
+      "path": "packed-0-confidence.bin",
+      "sha256": "0f45ba8b3561771b27887d28fb09342d827f2b58c4a39c9465382587d60232cc",
+      "bytes": 921600
+    },
+    {
+      "path": "packed-1-color.bin",
+      "sha256": "da3edae0c94df3e5f8a824edcd6449a13430433ccd6e1e0e68affc4f8e15943a",
+      "bytes": 3686400
+    },
+    {
+      "path": "packed-1-confidence.bin",
+      "sha256": "dffe15783316e3129e0225d592ebbd05d22a1441d64547be0c845a60fe87cfd2",
+      "bytes": 921600
+    }
+  ],
+  "portableCheck": {
+    "configuration": "public-debug-portable",
+    "budgets": {
+      "colorNativeUnits": 1.01,
+      "confidenceBytes": 1.01
+    },
+    "results": [
+      {
+        "format": "packed",
+        "pixels": 921600,
+        "differentColorPixels": 11,
+        "maximumNativeColorUnits": 1.0,
+        "colorOverBudget": 0,
+        "maximumConfidenceByteError": 0.0,
+        "confidenceOverBudget": 0
+      },
+      {
+        "format": "float",
+        "pixels": 921600,
+        "differentColorPixels": 754968,
+        "maximumNativeColorUnits": 1.0,
+        "colorOverBudget": 0,
+        "maximumConfidenceByteError": 0.5600054264068604,
+        "confidenceOverBudget": 0
+      }
+    ],
+    "zeroWeightBaselineMaximum": 0.0,
+    "zeroWeightMaskMaximum": 0.0,
+    "nativeHistoryChangedPixels": 744590
+  },
+  "legacyShaderParity": {
+    "debug": {
+      "checked": 206,
+      "changed": []
+    },
+    "release": {
+      "checked": 206,
+      "changed": []
+    }
+  },
+  "fixture": {
+    "schemaVersion": 1,
+    "archive": "fixture.zip",
+    "bytes": 9027369,
+    "sha256": "011b3347ee208cc8e9406357ebf4e4a4a42fad262542d70e0591ea975931b298",
+    "referenceColor": "../../2026-10-28/reflection-pyramid-fixture/texture-16552-mip-0.bin",
+    "referenceConfidence": "../../2026-10-28/reflection-pyramid-fixture/confidence-mip-0.bin",
+    "definesForConfidence": [
+      "CONFIDENCE=1"
+    ],
+    "frame": 3534,
+    "confidenceEvent": 8732,
+    "colorEvent": 8741
+  },
+  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "cacheLocation": "D",
+  "newSceneCacheCreated": false
+}
