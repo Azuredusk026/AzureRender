@@ -1,0 +1,1357 @@
+{
+  "frames": [
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 1,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 1,
+        "lastUseSubmission": 1,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 1,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 1,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 1,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 1,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 1,
+        "lastUseSubmission": 1,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 1,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 1,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 1,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 2,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 2,
+        "lastUseSubmission": 2,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 2,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 2,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 2,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 2,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 2,
+        "lastUseSubmission": 2,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 2,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 2,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 2,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 3,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 3,
+        "lastUseSubmission": 3,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 3,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 3,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 3,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 3,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 3,
+        "lastUseSubmission": 3,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 3,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 3,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 3,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 4,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 4,
+        "lastUseSubmission": 4,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 4,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 4,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 4,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 4,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 4,
+        "lastUseSubmission": 4,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 4,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 4,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 4,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 5,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 5,
+        "lastUseSubmission": 5,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 5,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 5,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 5,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 5,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 5,
+        "lastUseSubmission": 5,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 5,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 5,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 5,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 6,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 6,
+        "lastUseSubmission": 6,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 6,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 6,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 6,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 6,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 6,
+        "lastUseSubmission": 6,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 6,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 6,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 6,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 7,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 7,
+        "lastUseSubmission": 7,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 7,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 7,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 7,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 7,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 7,
+        "lastUseSubmission": 7,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 7,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 7,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 7,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 8,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 8,
+        "lastUseSubmission": 8,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 8,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 8,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 8,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 8,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 8,
+        "lastUseSubmission": 8,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 8,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 8,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 8,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0399999618530273,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.30000001192092896,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 9,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 9,
+        "lastUseSubmission": 9,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0399999618530273,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.30000001192092896,
+          0.0,
+          0.0
+        ],
+        "renderCount": 9,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 9,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 9,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 9,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 9,
+        "lastUseSubmission": 9,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 9,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 9,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 9,
+        "worldCoordinates": false
+      }
+    ],
+    [
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0799999237060547,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.6000000238418579,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 3298534883331,
+        "completedSubmission": 10,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 10,
+        "lastUseSubmission": 10,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0799999237060547,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.6000000238418579,
+          0.0,
+          0.0
+        ],
+        "renderCount": 10,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 67070209294397,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 10,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 10,
+        "worldCoordinates": false
+      },
+      {
+        "antiAliasing": 3,
+        "cameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "cameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "capacity": 3,
+        "colorImage": 299067162755344,
+        "completedSubmission": 10,
+        "extent": [
+          96,
+          64
+        ],
+        "frameExtent": [
+          96,
+          64
+        ],
+        "lastRenderSubmission": 10,
+        "lastUseSubmission": 10,
+        "multisampleAllocatedBytes": 0,
+        "multisampleBytes": 0,
+        "multisampleFallback": "",
+        "multisampleSourceSlots": 0,
+        "outputFormat": "rgba8-linear",
+        "rasterizationSamples": 1,
+        "renderCameraPosition": [
+          2.0,
+          1.0,
+          3.0
+        ],
+        "renderCameraTarget": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "renderCount": 10,
+        "renderer": "character",
+        "requested": false,
+        "resolvedImage": 360639813910856,
+        "retired": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "sceneExtent": [
+          96,
+          64
+        ],
+        "schemaVersion": 1,
+        "submittedRenderCount": 10,
+        "temporalAvailable": true,
+        "temporalBytes": 319488,
+        "temporalFallback": "",
+        "temporalHistorySubmission": 10,
+        "worldCoordinates": false
+      }
+    ]
+  ],
+  "quality": [
+    {
+      "asset": 0,
+      "edgePixels": 1362,
+      "errorRatio": 1.0820297519326645,
+      "flatMaximumByteError": 11.0,
+      "offError": 6.82034691629956,
+      "temporalError": 7.379818281938326
+    }
+  ],
+  "resized": {
+    "antiAliasing": 3,
+    "cameraPosition": [
+      2.0799999237060547,
+      1.0,
+      3.0
+    ],
+    "cameraTarget": [
+      0.6000000238418579,
+      0.0,
+      0.0
+    ],
+    "capacity": 3,
+    "colorImage": 638816255738437,
+    "completedSubmission": 12,
+    "extent": [
+      64,
+      64
+    ],
+    "frameExtent": [
+      64,
+      64
+    ],
+    "lastRenderSubmission": 12,
+    "lastUseSubmission": 12,
+    "multisampleAllocatedBytes": 0,
+    "multisampleBytes": 0,
+    "multisampleFallback": "",
+    "multisampleSourceSlots": 0,
+    "outputFormat": "rgba8-linear",
+    "rasterizationSamples": 1,
+    "renderCameraPosition": [
+      2.0799999237060547,
+      1.0,
+      3.0
+    ],
+    "renderCameraTarget": [
+      0.6000000238418579,
+      0.0,
+      0.0
+    ],
+    "renderCount": 11,
+    "renderer": "character",
+    "requested": false,
+    "resolvedImage": 700388906893949,
+    "retired": 0,
+    "sceneAttachmentFormats": [
+      97,
+      126,
+      37
+    ],
+    "sceneExtent": [
+      64,
+      64
+    ],
+    "schemaVersion": 1,
+    "submittedRenderCount": 1,
+    "temporalAvailable": true,
+    "temporalBytes": 212992,
+    "temporalFallback": "",
+    "temporalHistorySubmission": 12,
+    "worldCoordinates": false
+  }
+}

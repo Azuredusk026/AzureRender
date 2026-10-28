@@ -1,0 +1,19 @@
+Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start  35: AzureRender.TemporalViewGpu
+1/5 Test  #35: AzureRender.TemporalViewGpu ..........   Passed   12.85 sec
+    Start  36: AzureRender.MotionVectorGpu
+2/5 Test  #36: AzureRender.MotionVectorGpu ..........   Passed    1.64 sec
+    Start 103: AzureRender.TemporalReconstruction
+3/5 Test #103: AzureRender.TemporalReconstruction ...   Passed    0.57 sec
+    Start 104: AzureRender.SharedMotionGpu
+4/5 Test #104: AzureRender.SharedMotionGpu ..........   Passed    0.93 sec
+    Start 113: AzureRender.TemporalViewState
+5/5 Test #113: AzureRender.TemporalViewState ........   Passed    0.34 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Label Time Summary:
+gpu    =  15.41 sec*proc (3 tests)
+
+Total Test time (real) =  16.38 sec

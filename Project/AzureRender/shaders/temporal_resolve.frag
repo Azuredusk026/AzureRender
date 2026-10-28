@@ -79,5 +79,13 @@ void main(){
             vec3 bounded=mix(history.rgb,clamp(history.rgb,low,high),clipping);
             accumulated=mix(current.rgb,bounded,weight);}
     }
-    outputColor=vec4(accumulated,current.a);outputHistory=vec4(accumulated,reusable?1:0);outputDepth=depth;
+    // Display reconstruction is bounded by current geometry colours.
+    // Preserve the accumulated history to keep sharpening out of feedback.
+    vec3 displayed=accumulated;
+    if(valid&&coverageEdge&&!currentCutout&&!responsive&&motion.w==1){
+        vec3 midpoint=(low+high)*.5;
+        float gain=1+.5*clamp(length(motion.xy*temporal.frame.xy)*4,0,1);
+        displayed=clamp(midpoint+(accumulated-midpoint)*gain,low,high);
+    }
+    outputColor=vec4(displayed,current.a);outputHistory=vec4(accumulated,reusable?1:0);outputDepth=depth;
 }

@@ -153,7 +153,8 @@ C11 已接入显式照明组合，继续闭合 HDR 与调色链。
 共面显露及真实角色移动见[历史验证](../acceptance/nr/native-motion-history.md)。
 时序路径的角色高频细节保留未通过记录。
 裁剪足迹与运动外壳见[覆盖验证](../acceptance/nr/cutout-motion-coverage.md)。
-时序路径的裁剪细节及服饰边缘保留未通过记录。
+裁剪细节保留未通过记录。
+服饰及 KK 的当前动态门槛见[显示验证](../acceptance/nr/temporal-display-edges.md)。
 旋转四样点的离线质量对照见[细节验证](../acceptance/nr/native-detail-sampling.md)。
 按[四样点着色计划](2026-10-24-multisample-shading.md)接入真实几何采样。
 RHI 附件及逐样点插值已通过[双配置验收](../acceptance/nr/multisample-rhi.md)。
