@@ -123,7 +123,13 @@ vec4 traceScreenSpaceReflection(sampler2D source,sampler2D depth,mat4 worldToCli
         if(!screenReflectionProjectClip(clipOrigin+clipDirection*distance,uv))return vec4(0);
         float surfaceDepth=texture(depth,uv).r;
         float delta=depthOrigin+depthDirection*distance-surfaceDepth;
+#if defined(AZURE_REFLECTION_RAW_HIT)
+        bool enteredFromFront=previousDelta<0.0;
+        float marchingDelta=delta;
+        if((enteredFromFront&&delta>=0.0)||(previousDelta>0.0&&delta<=0.0)){
+#else
         if(previousDelta<0.0&&delta>=0.0){
+#endif
             float low=previousDistance,high=distance;
             vec2 highUv=uv;float highSurfaceDepth=surfaceDepth,highDelta=delta;
             for(int refine=0;refine<6;++refine){
@@ -131,16 +137,32 @@ vec4 traceScreenSpaceReflection(sampler2D source,sampler2D depth,mat4 worldToCli
                 if(!screenReflectionProjectClip(clipOrigin+clipDirection*middle,candidateUv))return vec4(0);
                 float candidateDepth=texture(depth,candidateUv).r;
                 float separation=depthOrigin+depthDirection*middle-candidateDepth;
+#if defined(AZURE_REFLECTION_RAW_HIT)
+                if(enteredFromFront?separation>=0.0:separation<=0.0){high=middle;highUv=candidateUv;highSurfaceDepth=candidateDepth;highDelta=separation;}
+#else
                 if(separation>=0.0){high=middle;highUv=candidateUv;highSurfaceDepth=candidateDepth;highDelta=separation;}
+#endif
                 else low=middle;
             }
             vec3 point=origin+rayDirection*high;
             uv=highUv;surfaceDepth=highSurfaceDepth;delta=highDelta;
+#if defined(AZURE_REFLECTION_RAW_HIT)
+            // A silhouette discontinuity may precede a valid two-sided surface.
+            if(surfaceDepth<=0.0||abs(delta)>trace.z){
+                previousDelta=marchingDelta;
+                previousDistance=distance;continue;
+            }
+#else
             if(surfaceDepth<=0.0||delta<0.0||delta>trace.z)return vec4(0);
+#endif
             float confidence=screenReflectionConfidence(uv,roughness,high,trace,quality);
+#if defined(AZURE_REFLECTION_RAW_HIT)
+            return vec4(screenReflectionRadiance(source,depth,uv,surfaceDepth,trace.z),confidence);
+#else
             vec4 filtered=screenReflectionFilteredRadiance(source,depth,worldToClip,
                 uv,point,rayDirection,high,roughness,surfaceDepth,trace.z);
             return vec4(filtered.rgb,confidence*filtered.a);
+#endif
         }
         previousDelta=delta;previousDistance=distance;
     }

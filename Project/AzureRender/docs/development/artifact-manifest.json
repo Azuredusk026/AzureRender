@@ -675,6 +675,54 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-spatial-filter.json"
+    },
+    {
+      "path": "runs/20261028-171807-native-reflection-producer-source-10f3f4",
+      "pathBase": "build",
+      "purpose": "原版信号层级来源及公共资源检查",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-pyramid-fixture/receipt.json"
+    },
+    {
+      "path": "runs/20261028-193016-reflection-confidence-consumer-39162f",
+      "pathBase": "build",
+      "purpose": "反射可信度消费与真实遮罩检查",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-confidence-consumer.json"
+    },
+    {
+      "path": "runs/20261028-194027-coherent-surface-msaa-08d494",
+      "pathBase": "build",
+      "purpose": "完整表面样本解析与格式预算检查",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/coherent-surface-msaa.json"
+    },
+    {
+      "path": "runs/20261028-194826-reflection-surface-snapshot-173af6",
+      "pathBase": "build",
+      "purpose": "主场景表面快照及实际图片对照",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-surface-snapshot.json"
+    },
+    {
+      "path": "runs/20261028-202338-reflection-depth-pyramid-710acd",
+      "pathBase": "build",
+      "purpose": "深度层级与原版奇数维度归约",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/depth-pyramid.json"
+    },
+    {
+      "path": "runs/20261028-204514-reflection-ray-producer-942abc",
+      "pathBase": "build",
+      "purpose": "计算反射射线、投影与独立镜面夹具",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-ray.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

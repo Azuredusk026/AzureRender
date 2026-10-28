@@ -1,0 +1,46 @@
+{
+  "phase": "NR5-R8-H",
+  "status": "component-verified",
+  "mainSceneIntegrated": false,
+  "nativeRayShaderEquivalent": false,
+  "frameBytes": 192,
+  "descriptorBindings": 5,
+  "outputsPerConfiguration": 20,
+  "configurationCount": 2,
+  "projectionCases": [
+    "perspective",
+    "orthographic",
+    "rolled",
+    "projection-offset",
+    "moved-occluder"
+  ],
+  "formats": [
+    "r11g11b10+r8",
+    "rgba32f+r32f"
+  ],
+  "validationErrors": 0,
+  "liveBuffers": 0,
+  "liveImages": 0,
+  "legacyShaderParity": [
+    {
+      "configuration": "debug",
+      "checked": 143,
+      "changed": []
+    },
+    {
+      "configuration": "release",
+      "checked": 143,
+      "changed": []
+    }
+  ],
+  "sources": {
+    "src/render/ReflectionRay.hpp": "8a6199df4ae00a079a5176a5c8d44a5a86f9aee1a356a8df9f4f452ddbf9b88a",
+    "src/render/ReflectionRay.cpp": "2bff6cf2b7cccd81b85a636af143f3f51079647ee841916159817077c5156426",
+    "shaders/reflection_trace.comp": "587521b9082b0e32dfa92c1a3b1ae27c91833879a3b5941955ba802e1eb456af",
+    "shaders/screen_space_reflection.glsl": "c1b8c681e03d2d1dc2f903e71b1788d2b39ae724a4f39b64c5f750485556c5d0",
+    "tests/ReflectionRayTests.cpp": "edd81be0870c849bc934331dd0c8129bfb01843a1998d8f5fb47a0bd6c6c78aa",
+    "tests/ReflectionRayGpuTests.cpp": "4604471c55c5cbc5aebec6061e92367d9808488afbe85f778a3fe9436f821200"
+  },
+  "debug": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\r\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-debug\r\n    Start 340: AzureRender.ReflectionRay\r\n1/2 Test #340: AzureRender.ReflectionRay ........   Passed    0.29 sec\r\n    Start 341: AzureRender.ReflectionRayGpu\r\n2/2 Test #341: AzureRender.ReflectionRayGpu .....   Passed    0.91 sec\r\n\r\n100% tests passed, 0 tests failed out of 2\r\n\r\nLabel Time Summary:\r\ngpu    =   0.91 sec*proc (1 test)\r\n\r\nTotal Test time (real) =   1.23 sec\r\n",
+  "release": "Internal ctest changing into directory: D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\r\nTest project D:/Assigment/2609/FYP/Project/AzureRender/build/ninja-msvc-release\r\n    Start 340: AzureRender.ReflectionRay\r\n1/2 Test #340: AzureRender.ReflectionRay ........   Passed    0.88 sec\r\n    Start 341: AzureRender.ReflectionRayGpu\r\n2/2 Test #341: AzureRender.ReflectionRayGpu .....   Passed    2.19 sec\r\n\r\n100% tests passed, 0 tests failed out of 2\r\n\r\nLabel Time Summary:\r\ngpu    =   2.19 sec*proc (1 test)\r\n\r\nTotal Test time (real) =   3.14 sec\r\n"
+}

@@ -1,0 +1,32 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#define AZURE_REFLECTION_RAW_HIT 1
+#include "screen_space_reflection.glsl"
+#include "reflection_surface.glsl"
+layout(local_size_x=8,local_size_y=8) in;
+layout(binding=0) uniform sampler2D sceneSurface;
+layout(binding=1) uniform sampler2D sceneColor;
+#if defined(AZURE_REFLECTION_PACKED)
+layout(r11f_g11f_b10f,binding=2) uniform writeonly image2D outputColor;
+layout(r8,binding=3) uniform writeonly image2D outputConfidence;
+#else
+layout(rgba32f,binding=2) uniform writeonly image2D outputColor;
+layout(r32f,binding=3) uniform writeonly image2D outputConfidence;
+#endif
+layout(std140,binding=4) uniform Settings {mat4 worldToClip;vec4 position,right,up,forward,projection,trace,quality,viewport;} frame;
+void main(){
+    ivec2 p=ivec2(gl_GlobalInvocationID.xy);if(any(greaterThanEqual(p,ivec2(frame.viewport.xy))))return;
+    vec4 surface=texelFetch(sceneSurface,p,0),value=vec4(0);
+    if(surface.r>0&&surface.r<100000&&surface.a<frame.quality.y){
+        vec2 uv=(vec2(p)+.5)/frame.viewport.xy;
+        vec2 lateral=(uv*2-1+frame.projection.zw)*frame.projection.xy*(frame.viewport.z>.5?surface.r:1);
+        vec3 position=frame.position.xyz+frame.forward.xyz*surface.r+frame.right.xyz*lateral.x+frame.up.xyz*lateral.y;
+        vec3 normal=decodeReflectionSurfaceNormal(surface);
+        vec3 incident=frame.viewport.z>.5?normalize(position-frame.position.xyz):frame.forward.xyz;
+        value=traceScreenSpaceReflection(sceneColor,sceneSurface,frame.worldToClip,frame.position.xyz,frame.forward.xyz,
+            position,normal,reflect(incident,normal),surface.a,frame.trace,frame.quality);
+        value.rgb=max(value.rgb,vec3(0));
+        if(frame.viewport.w>.5)value.rgb/=1+max(max(value.r,value.g),value.b);
+    }
+    imageStore(outputColor,p,vec4(value.rgb,1));imageStore(outputConfidence,p,vec4(value.a));
+}

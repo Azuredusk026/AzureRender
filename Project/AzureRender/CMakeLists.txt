@@ -315,6 +315,8 @@ compile_shader("${SHADER_SOURCE_DIR}/reflection_signal_pyramid.comp" DEFINES AZU
 compile_shader("${SHADER_SOURCE_DIR}/reflection_signal_pyramid.comp" OUTPUT_NAME reflection_signal_pyramid_float.comp)
 compile_shader("${SHADER_SOURCE_DIR}/reflection_surface_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/depth_pyramid.comp")
+compile_shader("${SHADER_SOURCE_DIR}/reflection_trace.comp" DEFINES AZURE_REFLECTION_PACKED=1 OUTPUT_NAME reflection_trace_packed.comp)
+compile_shader("${SHADER_SOURCE_DIR}/reflection_trace.comp" OUTPUT_NAME reflection_trace_float.comp)
 compile_shader("${SHADER_SOURCE_DIR}/depth_bias_test.frag")
 compile_shader("${SHADER_SOURCE_DIR}/scene_instance_layout_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/color_grading_lut_test.comp")
@@ -534,6 +536,7 @@ add_library(AzureRenderCore STATIC
     src/render/ReflectionSpatialFilter.cpp
     src/render/ReflectionSignalPyramid.cpp
     src/render/DepthPyramid.cpp
+    src/render/ReflectionRay.cpp
     src/assets/GeneratorRegistry.cpp
     src/assets/PrimitiveGenerator.cpp
     src/assets/primitives/RoundPrimitives.cpp
@@ -2569,6 +2572,14 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ReflectionSpatialFilter COMMAND AzureReflectionSpatialFilterTests)
     add_executable(AzureReflectionSignalPyramidTests tests/ReflectionSignalPyramidTests.cpp src/rhi/NullRhi.cpp)
     add_executable(AzureDepthPyramidTests tests/DepthPyramidTests.cpp src/rhi/NullRhi.cpp)
+    add_executable(AzureReflectionRayTests tests/ReflectionRayTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureReflectionRayTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ReflectionRay COMMAND AzureReflectionRayTests)
+    add_executable(AzureReflectionRayGpuTests tests/ReflectionRayGpuTests.cpp)
+    target_link_libraries(AzureReflectionRayGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureReflectionRayGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ReflectionRayGpu COMMAND AzureReflectionRayGpuTests "${SHADER_BINARY_DIR}/reflection_trace_packed.comp.spv" "${SHADER_BINARY_DIR}/reflection_trace_float.comp.spv" "${SHADER_BINARY_DIR}/reflection_signal_pyramid_packed.comp.spv" "${SHADER_BINARY_DIR}/reflection_signal_pyramid_float.comp.spv" "${SHADER_BINARY_DIR}/reflection_spatial_filter.comp.spv")
+    set_tests_properties(AzureRender.ReflectionRayGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     target_link_libraries(AzureDepthPyramidTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.DepthPyramid COMMAND AzureDepthPyramidTests)
     add_executable(AzureDepthPyramidGpuTests tests/DepthPyramidGpuTests.cpp)
