@@ -1,0 +1,38 @@
+#version 450
+layout(local_size_x=8,local_size_y=8) in;
+layout(binding=0) uniform sampler2D currentSurface;
+layout(binding=1) uniform sampler2D currentMotion;
+layout(binding=2) uniform sampler2D previousSelectedMotion;
+layout(rgba32f,binding=3) uniform writeonly image2D selectedMotion;
+layout(r32f,binding=4) uniform writeonly image2D historyAcceptance;
+layout(std140,binding=5) uniform Settings {vec4 extent;vec4 projection;vec4 limits;} frame;
+bool finite4(vec4 value){return !any(isnan(value))&&!any(isinf(value));}
+void main(){
+    ivec2 pixel=ivec2(gl_GlobalInvocationID.xy),extent=ivec2(frame.extent.xy);
+    if(any(greaterThanEqual(pixel,extent)))return;
+    ivec2 source=(2*pixel+1)*ivec2(frame.extent.zw)/(2*extent);
+    vec4 surface=texelFetch(currentSurface,source,0),motion=texelFetch(currentMotion,source,0);
+    bool usable=finite4(surface)&&surface.r>0&&surface.r<100000;
+    bool moving=finite4(motion);
+    vec2 delta=moving?motion.xy:vec2(0);
+    float acceptance=0;
+    bool cutout=moving&&motion.w>=2&&motion.w<3;
+    bool partial=moving&&motion.w>-1&&motion.w<0;
+    bool tracked=moving&&(motion.w==1||cutout||partial);
+    vec2 previousUv=(vec2(pixel)+.5)/vec2(extent)-delta;
+    if(frame.limits.z>.5&&usable&&tracked&&motion.z>=0&&motion.z<=1
+        &&all(greaterThanEqual(previousUv,vec2(0)))&&all(lessThanEqual(previousUv,vec2(1)))){
+        ivec2 previousExtent=textureSize(previousSelectedMotion,0);
+        ivec2 previousPixel=clamp(ivec2(previousUv*vec2(previousExtent)),ivec2(0),previousExtent-1);
+        vec4 previous=texelFetch(previousSelectedMotion,previousPixel,0);
+        float denominator=motion.z*frame.projection.z-frame.projection.x;
+        if(!isnan(denominator)&&!isinf(denominator)&&abs(denominator)>1e-12&&finite4(previous)&&previous.w>.5&&previous.z>0){
+            float expected=abs((frame.projection.y-motion.z*frame.projection.w)/denominator);
+            float tolerance=frame.limits.x+frame.limits.y*expected;
+            if(!isnan(expected)&&!isinf(expected)&&expected>0&&abs(previous.z-expected)<=tolerance)
+                acceptance=cutout?3-motion.w:partial?1+motion.w:1;
+        }
+    }
+    imageStore(selectedMotion,pixel,vec4(delta,usable?surface.r:0,usable?1:0));
+    imageStore(historyAcceptance,pixel,vec4(acceptance));
+}

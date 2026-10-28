@@ -59,6 +59,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 半分辨率生产、真实深度及整数选样见[尺寸验收](docs/acceptance/nr/reflection-resolution.md)。
 反射历史计算及借用图像资源见[时间过滤契约](docs/runtime/reflection-temporal.md)。
 时间核的公共组合与槽位验证见[组合验收](docs/acceptance/nr/reflection-temporal-composition.md)。
+公共运动选样及深度接收见[重投影契约](docs/runtime/reflection-reprojection.md)。
 共享运动目标及画面兼容范围见[共享验收](docs/acceptance/nr/shared-motion.md)。
 时序 KK 动态夹具及剩余范围见[运动边缘验证](docs/acceptance/nr/temporal-motion-edges.md)。
 独立过滤资源及双配置结果见[公共过滤验收](docs/acceptance/nr/reflection-spatial-filter.md)。
