@@ -1,0 +1,21 @@
+{
+  "phase": "NR5-R8-C",
+  "status": "component-verified",
+  "mainSceneIntegrated": false,
+  "sources": {
+    "src/render/ReflectionSignalPyramid.hpp": "a5ad0241dee57340c0f15053d1dd6b0467d9e7d6a3a21243d317a841fe08d92a",
+    "src/render/ReflectionSignalPyramid.cpp": "0cb9f1e4f54a6019ca9ba3ca897a69519f32887331cfd209c1d8a6528c1317a0",
+    "shaders/reflection_signal_pyramid.comp": "7e8e32c7cfa72f25ff8f60e36db29ecfdd269cf43cf6403db2dbd1baf9568835",
+    "tests/ReflectionSignalPyramidTests.cpp": "de66d64585c1d107ddecc14ea3c2891296fd826071a75b254aa2a989131e4903",
+    "tests/ReflectionSignalPyramidGpuTests.cpp": "f74dab923b6435d591f9bf2b58d381f78a6c32224106484a75f0035d2684a98b"
+  },
+  "configurations": [
+    "Debug",
+    "Release"
+  ],
+  "nativeLevelsPerConfiguration": 12,
+  "differentBytes": 0,
+  "validationErrors": 0,
+  "liveBuffers": 0,
+  "liveImages": 0
+}

@@ -24,10 +24,10 @@ NR0 为 Active，NR1 至 NR12 为 Pending。
 其计算程序为 `shaders/reflection_signal_pyramid.comp`。
 真实帧基础载荷和逐级参考位于[层级夹具](../acceptance/nr/evidence/2026-10-28/reflection-pyramid-fixture/fixture.json)。
 原版重建的六级颜色和可信度均逐字节一致。
-Debug Vulkan 实际输出也逐级匹配这十二份数据。
+Debug 和 Release 的输出均逐级匹配十二份数据。
 
 此代码处于交接候选，主场景尚未接入该层级资源。
-继续核验 Release、不同参数槽位、同步及完整场景性能。
+双配置相关测试通过，完整场景性能继续验收。
 随后实现可信度解析、反射生产和时间历史。
 最终画面须使用真实遮罩与探针合成进行对照。
 
