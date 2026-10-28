@@ -47,6 +47,7 @@
 双配置、真实片元与完整候选见[合成验收](../acceptance/nr/scene-fog.md)。
 阶段截图、机位和待验差异见[画面记录](../acceptance/nr/visual-history.md)。
 物流彩色环带的源实例及采样见[还原验收](../acceptance/nr/opaque-logistics-rings.md)。
+公共 glTF 采样器及完整场景结果见[采样器验收](../acceptance/nr/gltf-sampler-contract.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。

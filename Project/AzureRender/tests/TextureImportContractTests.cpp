@@ -12,6 +12,22 @@ int main(){try{
  require(biased.describe().at("mipBias")==-1.0,"Authored mip bias must survive image metadata interpretation");
  require(biased.sampler(8,16).mipLodBias==-1,"Mip bias must reach the RHI sampler input");
  require(color.describe().at("mipBias")==0.0,"Omitted mip bias must preserve compatible zero-bias sampling");
+ rhi::SamplerDesc inheritedSampler;inheritedSampler.filter=VK_FILTER_NEAREST;
+ require(inheritedSampler.effectiveMagFilter()==VK_FILTER_NEAREST,"Omitted magnification filter follows the legacy filter");
+ auto independent=TextureImportSettings::parse({{"schemaVersion",2},{"filter","nearest"},{"magFilter","linear"},{"mipFilter","nearest"}});
+ require(independent.sampler(4,16).filter==VK_FILTER_NEAREST&&independent.sampler(4,16).effectiveMagFilter()==VK_FILTER_LINEAR,
+     "Independent magnification and minification must reach the RHI");
+ require(independent.describe().at("schemaVersion")==2&&independent.describe().at("magFilter")=="linear","Independent filtering has an explicit format version");
+ require(TextureImportSettings::parse(independent.describe()).describe()==independent.describe(),"Independent sampler metadata must roundtrip");
+ auto overrideBoth=TextureImportSettings::parse({{"filter","linear"}},independent);
+ require(overrideBoth.sampler(4,16).effectiveMagFilter()==VK_FILTER_LINEAR&&overrideBoth.describe().at("schemaVersion")==1,
+     "Legacy filter overrides both filters and retains its format");
+ for(const auto& invalid:nlohmann::json::array({nlohmann::json{{"schemaVersion",1},{"magFilter","linear"}},
+         nlohmann::json{{"schemaVersion",2}},nlohmann::json{{"schemaVersion",2},{"magFilter","cubic"}},
+         nlohmann::json{{"schemaVersion",2},{"magFilter",true}},nlohmann::json{{"schemaVersion",2},{"magFilter",nullptr}}})) {
+  bool failed=false;try{(void)TextureImportSettings::parse(invalid);}catch(const std::exception&){failed=true;}
+  require(failed,"Invalid magnification metadata and incompatible versions must fail");
+ }
  auto separate=TextureImportSettings::parse({{"filter","linear"},{"mipFilter","nearest"}});
  require(separate.sampler(8,16).filter==VK_FILTER_LINEAR&&!separate.sampler(8,16).mipmapLinear,
      "Minification and mip filtering must remain independently authored");

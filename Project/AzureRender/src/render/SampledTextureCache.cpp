@@ -24,7 +24,7 @@ struct TimedSection {
     ~TimedSection() {elapsed+=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();}
 };
 bool sameSampler(const rhi::SamplerDesc& a,const rhi::SamplerDesc& b) {
-    return a.filter==b.filter&&a.addressU==b.addressU&&a.addressV==b.addressV
+    return a.filter==b.filter&&a.effectiveMagFilter()==b.effectiveMagFilter()&&a.addressU==b.addressU&&a.addressV==b.addressV
         &&a.addressW==b.addressW&&a.maxLod==b.maxLod
         &&a.mipmapLinear==b.mipmapLinear&&a.maxAnisotropy==b.maxAnisotropy&&a.mipLodBias==b.mipLodBias;
 }
@@ -92,7 +92,8 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     if(!std::isfinite(request.sampler.maxLod)||request.sampler.maxLod<0
         ||!std::isfinite(request.sampler.mipLodBias)
         ||!std::isfinite(request.sampler.maxAnisotropy)||request.sampler.maxAnisotropy<1
-        ||(request.sampler.filter!=VK_FILTER_NEAREST&&request.sampler.filter!=VK_FILTER_LINEAR))
+        ||(request.sampler.filter!=VK_FILTER_NEAREST&&request.sampler.filter!=VK_FILTER_LINEAR)
+        ||(request.sampler.effectiveMagFilter()!=VK_FILTER_NEAREST&&request.sampler.effectiveMagFilter()!=VK_FILTER_LINEAR))
         throw std::invalid_argument("Texture sampler settings are invalid");
     switch(request.semantic) {
     case TextureFilterSemantic::Linear:case TextureFilterSemantic::Srgb:
@@ -111,7 +112,7 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
         ||(request.mipLevels==1&&pixels.size()<baseBytes)
         ||(request.mipLevels>1&&pixels.size()!=baseBytes&&pixels.size()!=residentBytes))
         throw std::invalid_argument("Texture pixel storage does not match its mip policy");
-    if(!rhi_.supportsSampledImage(request.format,request.sampler.filter==VK_FILTER_LINEAR))
+    if(!rhi_.supportsSampledImage(request.format,request.sampler.filter==VK_FILTER_LINEAR||request.sampler.effectiveMagFilter()==VK_FILTER_LINEAR))
         throw std::runtime_error("Device does not support the decoded texture sampling format");
     auto effective=request;
     effective.sampler.maxLod=std::min(effective.sampler.maxLod,float(levels-1));

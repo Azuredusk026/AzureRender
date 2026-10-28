@@ -6,6 +6,7 @@
 
 #include <cstdint>
 #include <functional>
+#include <optional>
 #include <cmath>
 #include <stdexcept>
 #include <vector>
@@ -47,6 +48,8 @@ struct SamplerDesc {
     bool mipmapLinear = true;
     float maxAnisotropy = 1.0F;
     float mipLodBias = 0.0F;
+    std::optional<VkFilter> magFilter;
+    VkFilter effectiveMagFilter() const noexcept { return magFilter.value_or(filter); }
 };
 
 struct DescriptorBindingDesc {

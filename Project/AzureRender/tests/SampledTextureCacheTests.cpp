@@ -106,6 +106,10 @@ void isolated_keys() {
     check([](auto& r){r.sampler.mipmapLinear=false;});
     check([](auto& r){r.sampler.maxAnisotropy=4;});
     check([](auto& r){r.sampler.mipLodBias=-1;});
+    check([](auto& r){r.sampler.magFilter=VK_FILTER_NEAREST;});
+    auto equivalent=original;equivalent.sampler.magFilter=VK_FILTER_LINEAR;
+    require(cache.acquire(pixels,equivalent).view==a.view,"Equivalent effective magnification settings must share the texture binding");
+
     check([](auto& r){r.sampler.maxLod=0;});
     auto changed=pixels;changed[0]=1;
     require(cache.acquire(changed,original).view!=a.view,"A one-byte pixel change must never reuse stale texture content");
@@ -128,6 +132,7 @@ void invalid_inputs() {
     wrong=upload;wrong.mipLevels=3;reject([&]{cache.acquire(checker(),wrong);});
     wrong=upload;wrong.alphaCutoff=2;reject([&]{cache.acquire(checker(),wrong);});
     wrong=upload;wrong.sampler.maxAnisotropy=0;reject([&]{cache.acquire(checker(),wrong);});
+    wrong=upload;wrong.sampler.magFilter=static_cast<VkFilter>(999);reject([&]{cache.acquire(checker(),wrong);});
     wrong=upload;wrong.sampler.mipLodBias=std::numeric_limits<float>::quiet_NaN();reject([&]{cache.acquire(checker(),wrong);});
     backend.unavailableSampledFormats.insert(upload.format);reject([&]{cache.acquire(checker(),upload);});
     require(backend.allocator().statistics().imageAllocations==0&&backend.allocator().statistics().bufferAllocations==0,"Invalid requests must fail before native allocation");

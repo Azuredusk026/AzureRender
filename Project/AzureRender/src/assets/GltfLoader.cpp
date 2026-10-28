@@ -2038,11 +2038,55 @@ AssetMaterial loadMaterial(
             result.materialFeatures|=MaterialFeatureNprDiffuse;
         }
     }
+    const int images[]={baseColorImage,normalImage,metallicRoughnessImage,specularEmissiveImage,
+        styleMaskImage,matcapImage,hairDataImage,
+        projectedHairParameterImage>=0?projectedHairParameterImage:faceSdfImage,
+        unlitCoverageImage>=0?unlitCoverageImage:projectedHairLineImage>=0?projectedHairLineImage:shadowColorLutImage};
+    if(material&&!result.unlitTextureLayers.present
+        &&(result.materialClass==AssetMaterialClass::Generic||result.materialClass==AssetMaterialClass::Emissive)) {
+        const int textures[]={material->pbrMetallicRoughness.baseColorTexture.index,material->normalTexture.index,
+            material->pbrMetallicRoughness.metallicRoughnessTexture.index,material->emissiveTexture.index,material->occlusionTexture.index};
+        for(std::size_t slot=0;slot<5;++slot) {
+            if(slot==4&&((result.materialFeatures&(MaterialFeatureDiffuseRamp|MaterialFeatureDualFaceSdf|MaterialFeatureSceneRefraction))
+                ||result.eyeSurface.present))continue;
+            if(textures[slot]<0)continue;
+            const auto& texture=model.textures.at(static_cast<std::size_t>(textures[slot]));
+            if(texture.source!=images[slot])continue;
+            if(texture.sampler== -1)continue;
+            if(texture.sampler< -1||static_cast<std::size_t>(texture.sampler)>=model.samplers.size())
+                throw std::invalid_argument(result.name+" invalid glTF sampler reference");
+            const auto& sampler=model.samplers[static_cast<std::size_t>(texture.sampler)];
+            auto& settings=result.textureSettings[slot];
+            using Settings=azurerender::TextureImportSettings;
+            switch(sampler.minFilter) {
+            case -1:break;
+            case 9728:case 9729:
+                settings.filter=sampler.minFilter==9728?"nearest":"linear";
+                settings.mipPolicy="none";settings.mipFilter=Settings::MipFilter::Nearest;break;
+            case 9984:case 9985:case 9986:case 9987:
+                settings.filter=(sampler.minFilter==9984||sampler.minFilter==9986)?"nearest":"linear";
+                settings.mipPolicy="generate";
+                settings.mipFilter=sampler.minFilter>=9986?Settings::MipFilter::Linear:Settings::MipFilter::Nearest;break;
+            default:throw std::invalid_argument(result.name+" unsupported glTF minFilter");
+            }
+            switch(sampler.magFilter) {
+            case -1:break;
+            case 9728:settings.magFilter=Settings::MagFilter::Nearest;break;
+            case 9729:settings.magFilter=Settings::MagFilter::Linear;break;
+            default:throw std::invalid_argument(result.name+" unsupported glTF magFilter");
+            }
+            const auto wrap=[&](int value)->std::string {
+                switch(value) {
+                case 10497:return "repeat";
+                case 33071:return "clamp";
+                case 33648:return "mirror";
+                default:throw std::invalid_argument(result.name+" unsupported glTF wrap mode");
+                }
+            };
+            settings.wrapU=wrap(sampler.wrapS);settings.wrapV=wrap(sampler.wrapT);
+        }
+    }
     if(imageSettings) {
-        const int images[]={baseColorImage,normalImage,metallicRoughnessImage,specularEmissiveImage,
-            styleMaskImage,matcapImage,hairDataImage,
-            projectedHairParameterImage>=0?projectedHairParameterImage:faceSdfImage,
-            unlitCoverageImage>=0?unlitCoverageImage:projectedHairLineImage>=0?projectedHairLineImage:shadowColorLutImage};
         for(std::size_t slot=0;slot<9;++slot) {
             if(images[slot]<0)continue;
             const auto& raw=imageSettings->at(static_cast<std::size_t>(images[slot]));
@@ -2052,7 +2096,8 @@ AssetMaterial loadMaterial(
             const bool layer=result.unlitTextureLayers.present&&(slot==0||(slot==4&&result.unlitTextureLayers.layerCount==2)
                 ||(slot==8&&result.unlitTextureLayers.coverageLayer.present)
                 ||(slot==3&&result.unlitTextureLayers.baseUvDistortion.present));
-            if(layer&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU||settings.wrapV!=defaults.wrapV
+            const bool magChanged=settings.sampler(1,1).effectiveMagFilter()!=defaults.sampler(1,1).effectiveMagFilter();
+            if(layer&&(settings.filter!=defaults.filter||magChanged||settings.wrapU!=defaults.wrapU||settings.wrapV!=defaults.wrapV
                 ||settings.mipPolicy!=defaults.mipPolicy||settings.mipFilter!=defaults.mipFilter
                 ||settings.anisotropy!=defaults.anisotropy))
                 throw std::invalid_argument(result.name+" unlit layer sampler ownership violated");
@@ -2064,7 +2109,7 @@ AssetMaterial loadMaterial(
             const bool typed=lookup||slot==6||slot==7||(slot==8&&!result.unlitTextureLayers.coverageLayer.present);
             if(typed&&settings.colorSpace!=defaults.colorSpace)
                 throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));
-            if(lookup&&(settings.filter!=defaults.filter||settings.wrapU!=defaults.wrapU
+            if(lookup&&(settings.filter!=defaults.filter||magChanged||settings.wrapU!=defaults.wrapU
                 ||settings.wrapV!=defaults.wrapV||settings.mipPolicy!=defaults.mipPolicy
                 ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias
                 ||(slot==5&&result.specularRamp.present&&settings.mipFilter!=defaults.mipFilter)))

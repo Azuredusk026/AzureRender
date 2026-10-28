@@ -43,6 +43,69 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  checkFactor({1,1,1,1},{255,255,255,255});
  checkFactor({.18,.04,.7,1},{118,56,218,255});
  checkFactor({0,0,0,0},{0,0,0,0});
+ // Standard samplers remain per texture binding and precede explicit image overrides.
+ auto samplerSource=source;
+ samplerSource["materials"][0]["name"]="GenericSamplerFixture";
+ for(int minFilter:{9728,9729,9984,9985,9986,9987})for(int magFilter:{9728,9729}) {
+  samplerSource["samplers"]=nlohmann::json::array({{{"minFilter",minFilter},{"magFilter",magFilter},{"wrapS",33071},{"wrapT",33648}}});
+  samplerSource["textures"][texture]["sampler"]=0;std::ofstream(root/"sampler.gltf")<<samplerSource.dump();
+  const auto imported=loadGltfAsset((root/"sampler.gltf").string());const auto& declared=imported.materials[0].textureSettings[1];const auto actualSampler=declared.sampler(4,16);
+  const bool nearest=minFilter==9728||minFilter==9984||minFilter==9986;
+  if(actualSampler.filter!=(nearest?VK_FILTER_NEAREST:VK_FILTER_LINEAR)
+      ||actualSampler.effectiveMagFilter()!=(magFilter==9728?VK_FILTER_NEAREST:VK_FILTER_LINEAR)
+      ||actualSampler.mipmapLinear!=(minFilter==9986||minFilter==9987)
+      ||actualSampler.addressU!=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE||actualSampler.addressV!=VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT
+      ||(declared.mipPolicy=="none")!=(minFilter==9728||minFilter==9729))throw std::runtime_error("glTF sampler filtering and wrapping must reach ordinary material slots");
+ }
+ for(int invalidSampler:{-2,2}) {
+  auto invalid=samplerSource;invalid["textures"][texture]["sampler"]=invalidSampler;std::ofstream(root/"invalid-sampler.gltf")<<invalid.dump();
+  bool rejected=false;try{(void)loadGltfAsset((root/"invalid-sampler.gltf").string());}catch(const std::exception&){rejected=true;}
+  if(!rejected)throw std::runtime_error("Invalid glTF sampler references must fail");
+ }
+ auto absent=samplerSource;absent["textures"][texture].erase("sampler");
+ std::ofstream(root/"absent-sampler.gltf")<<absent.dump();
+ const auto absentMaterial=loadGltfAsset((root/"absent-sampler.gltf").string());
+ if(absentMaterial.materials[0].textureSettings[1].describe()!=AssetMaterial{}.textureSettings[1].describe())
+  throw std::runtime_error("Absent glTF sampler must retain material defaults");
+ auto split=samplerSource;split["samplers"]=nlohmann::json::array({{{"minFilter",9985},{"magFilter",9728}},{{"minFilter",9986},{"magFilter",9729}}});
+ split["materials"].push_back(split["materials"][0]);
+ const auto secondTexture=split["textures"].size();split["textures"].push_back({{"source",image},{"sampler",1}});
+ split["materials"][1]["normalTexture"]["index"]=secondTexture;
+ std::ofstream(root/"split-samplers.gltf")<<split.dump();
+ const auto splitAsset=loadGltfAsset((root/"split-samplers.gltf").string());
+ if(splitAsset.materials[0].normalPixels!=splitAsset.materials[1].normalPixels
+     ||splitAsset.materials[0].textureSettings[1].sampler(4,16).effectiveMagFilter()!=VK_FILTER_NEAREST
+     ||splitAsset.materials[1].textureSettings[1].sampler(4,16).effectiveMagFilter()!=VK_FILTER_LINEAR)
+  throw std::runtime_error("Shared glTF image must retain per-binding samplers");
+ std::ofstream(root/"normal.png.azmeta")<<nlohmann::json{{"schemaVersion",1},{"id","00000000-0000-4000-8000-000000000001"},{"settings",{{"texture",{{"mipBias",-.5}}}}},{"dependencies",nlohmann::json::array()}}.dump();
+ const auto partial=loadGltfAsset((root/"split-samplers.gltf").string());
+ if(partial.materials[0].textureSettings[1].mipBias!=-.5F
+     ||partial.materials[0].textureSettings[1].sampler(4,16).effectiveMagFilter()!=VK_FILTER_NEAREST
+     ||partial.materials[1].textureSettings[1].sampler(4,16).effectiveMagFilter()!=VK_FILTER_LINEAR)
+  throw std::runtime_error("Partial image metadata must retain undeclared glTF sampler fields");
+ std::filesystem::remove(root/"normal.png.azmeta");
+ for(const char* field:{"minFilter","magFilter","wrapS"}) {
+  auto invalid=samplerSource;invalid["samplers"][0][field]=12345;std::ofstream(root/"invalid-filter.gltf")<<invalid.dump();
+  bool rejected=false;try{(void)loadGltfAsset((root/"invalid-filter.gltf").string());}catch(const std::exception&){rejected=true;}
+  if(!rejected)throw std::runtime_error("Invalid glTF sampler enums must fail");
+ }
+ auto lookup=samplerSource;
+ if(!stbi_write_png((root/"lookup.png").string().c_str(),4,1,4,pixels,16))throw std::runtime_error("Cannot create lookup sampler fixture");
+ lookup["images"][image]["uri"]="lookup.png";
+ lookup["materials"][0]["occlusionTexture"]={{"index",texture}};
+ lookup["materials"][0]["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","generic"},{"features",{"diffuse-ramp"}},
+     {"diffuseRamp",{{"schemaVersion",1},{"texture",texture}}}};
+ std::ofstream(root/"lookup-sampler.gltf")<<lookup.dump();
+ const auto lookupAsset=loadGltfAsset((root/"lookup-sampler.gltf").string());
+ const auto& lookupSettings=lookupAsset.materials[0].textureSettings[4];
+ if(lookupSettings.mipPolicy!="none"||lookupSettings.wrapU!="clamp"||lookupSettings.wrapV!="clamp"
+     ||lookupSettings.sampler(1,1).effectiveMagFilter()!=VK_FILTER_LINEAR)
+  throw std::runtime_error("Dedicated lookup sampling must retain ownership when a standard slot shares its image");
+ std::ofstream(root/"lookup.png.azmeta")<<nlohmann::json{{"schemaVersion",1},{"id","00000000-0000-4000-8000-000000000002"},
+     {"settings",{{"texture",{{"schemaVersion",2},{"magFilter","nearest"}}}}},{"dependencies",nlohmann::json::array()}}.dump();
+ bool lookupRejected=false;try{(void)loadGltfAsset((root/"lookup-sampler.gltf").string());}catch(const std::exception&){lookupRejected=true;}
+ if(!lookupRejected)throw std::runtime_error("Independent magnification metadata must obey fixed lookup ownership");
+ std::filesystem::remove(root/"lookup.png.azmeta");
  const auto settings=TextureImportSettings::parse({{"usage","normal"},{"wrapV","clamp"},{"filter","nearest"},{"mipPolicy","none"}});
  std::ofstream(root/"normal.png.azmeta")<<nlohmann::json{{"schemaVersion",1},{"id","00000000-0000-4000-8000-000000000001"},{"settings",{{"texture",{{"filter","nearest"}}}}},{"dependencies",nlohmann::json::array()}}.dump();
  const auto inherited=loadGltfAsset((root/"model.gltf").string());

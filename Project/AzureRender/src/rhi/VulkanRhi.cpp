@@ -307,8 +307,11 @@ void VulkanRhi::destroyImageView(const VkImageView view) {
 
 VkSampler VulkanRhi::createSampler(const SamplerDesc& desc) {
     if(!std::isfinite(desc.mipLodBias))throw std::invalid_argument("Sampler mip bias must be finite");
+    if((desc.filter!=VK_FILTER_LINEAR&&desc.filter!=VK_FILTER_NEAREST)
+        ||(desc.effectiveMagFilter()!=VK_FILTER_LINEAR&&desc.effectiveMagFilter()!=VK_FILTER_NEAREST))
+        throw std::invalid_argument("Unsupported sampler filter");
     VkSamplerCreateInfo samplerInfo{VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO};
-    samplerInfo.magFilter = desc.filter;
+    samplerInfo.magFilter = desc.effectiveMagFilter();
     samplerInfo.minFilter = desc.filter;
     samplerInfo.addressModeU = desc.addressU;
     samplerInfo.addressModeV = desc.addressV;

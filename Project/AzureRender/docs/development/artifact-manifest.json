@@ -650,6 +650,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/opaque-logistics-rings.json",
       "primaryProject": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/full-candidate/enclosure-opaque-rings.azureproject"
+    },
+    {
+      "path": "runs/20261028-141910-gltf-sampler-contract-bb2a59",
+      "pathBase": "build",
+      "purpose": "公共采样器、实际环带、双配置回归及阶段画面。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/gltf-sampler-contract.json",
+      "primaryProject": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/full-candidate/enclosure-sampler.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

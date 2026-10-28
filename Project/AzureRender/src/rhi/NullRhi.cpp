@@ -210,7 +210,9 @@ void NullRhi::destroyImageView(const VkImageView view) {
 }
 
 VkSampler NullRhi::createSampler(const SamplerDesc& desc) {
-    (void)desc;
+    if((desc.filter!=VK_FILTER_LINEAR&&desc.filter!=VK_FILTER_NEAREST)
+        ||(desc.effectiveMagFilter()!=VK_FILTER_LINEAR&&desc.effectiveMagFilter()!=VK_FILTER_NEAREST))
+        throw std::invalid_argument("Unsupported sampler filter");
     return mint<VkSampler>("createSampler");
 }
 

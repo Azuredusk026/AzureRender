@@ -191,6 +191,72 @@
         "完整场景平均字节误差为 13.058428。",
         "动态滚动、反射等价与持续性能继续验收。"
       ]
+    },
+    {
+      "id": "nr6-c15-s1",
+      "title": "公共采样器接入",
+      "phase": "NR6-C15-S1",
+      "commit": "f1d1701",
+      "status": "公共契约分项通过，完整还原待验",
+      "scope": "完整主场景及隔离夹具",
+      "configuration": "Release",
+      "descriptor": "indexed",
+      "camera": "3534 捕获机位",
+      "width": 2560,
+      "height": 1440,
+      "recordedDate": "2026-10-28",
+      "evidence": "docs/acceptance/nr/gltf-sampler-contract.md",
+      "project": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/full-candidate/enclosure-sampler.azureproject",
+      "sourceProjectSha256": "7844d0921ac0b2df10f8d247b6e6b4b74971b3e9e33fff91f283a100a72f96c5",
+      "sourceScene": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/full-candidate/scene/enclosure-sampler.azurelevel",
+      "sourceSceneSha256": "def6f52a0bccc9aca7aa270d5787b584a8b8b6e29cee39f487297ac135e4e14e",
+      "captureManifest": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/main-sampler-release/frames/capture_manifest.json",
+      "captureManifestSha256": "4cbe7727bcffa7cf6eb463512ee3ce4629c26aefd96fad83e4402c123562811a",
+      "comparisons": {
+        "diagnostic": {
+          "image": "docs/acceptance/nr/visual-history/2026-10-28-nr6-c15-s1-diagnostic-f1d1701.png",
+          "source": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/gpu-before/wrap-10497-indexed/frames/frame_000000.png",
+          "sha256": "c44bee8536d5ef45ec52c4eff7a53201c09e60aabec8c5b49b37847c7bea37b0",
+          "sourceSha256": "c44bee8536d5ef45ec52c4eff7a53201c09e60aabec8c5b49b37847c7bea37b0",
+          "rgbSha256": "8d522fad792589c18f959754345726b18a132ee91e72e423c5315c8f00cb120f",
+          "bytes": 809
+        },
+        "fixture": {
+          "image": "docs/acceptance/nr/visual-history/2026-10-28-nr6-c15-s1-fixture-f1d1701.png",
+          "source": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/gpu-debug-final/wrap-10497-indexed/frames/frame_000000.png",
+          "sha256": "8898a8dae20ec2bb185fb2e06f930e634ab2f9895c952b14389c8e9eb6b52cec",
+          "sourceSha256": "8898a8dae20ec2bb185fb2e06f930e634ab2f9895c952b14389c8e9eb6b52cec",
+          "rgbSha256": "b7cb721249e0798c68be1b4dcf3ff7240bcee055d94aaf88086caa74373b0a21",
+          "bytes": 811
+        },
+        "main": {
+          "image": "docs/acceptance/nr/visual-history/2026-10-28-nr7-l4m-opaque-rings-59510a5.png",
+          "source": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/main-sampler-release/frames/frame_000000.png",
+          "sha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728",
+          "sourceSha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728",
+          "rgbSha256": "e6e8da46797f0f153c8d5610c575db9f7a53fe2e763c626b428356718130f5bb",
+          "bytes": 5726367
+        }
+      },
+      "sourceFingerprints": {
+        "src/rhi/Rhi.hpp": "77c56a5fc3c2c38b4351399aced42a338bae3ad4f06d8b0e1c2b1262f4befddf",
+        "src/rhi/NullRhi.cpp": "3eae91644c683816ed854c667ae1ac9954dd3d435863dee77c7bc841a69d3b5b",
+        "src/rhi/VulkanRhi.cpp": "582c59f8e79a55a3ee765ece3f585b1266a7714ae10b260961d024010020a620",
+        "src/assets/TextureImportSettings.hpp": "6cf5832b39f2ffc2fff5ffecd8fabc272466bb180a1c75bc26ed8fdb76424ee7",
+        "src/assets/TextureImportSettings.cpp": "a2fea3372121a3985eb692b171d47d03a540926322a546d4aeeb59de9741ba28",
+        "src/assets/GltfLoader.cpp": "42b7186248d72952e4e7030d9422af06801e052d7645f0ddc13284f83c3ea412",
+        "src/render/SampledTextureCache.cpp": "e9dae018d63a5cef193ebf8ae366c0d04059e5e4d2f86b5f8c85645c005197a7",
+        "tests/TextureImportContractTests.cpp": "997915a09f6962b3d48760c59c97c7c1f61857a2bc8cae97cc3b54746d256f14",
+        "tests/TextureMaterialImportTests.cpp": "5a801d11d1ce6ec82338986b5fa83649a40a139222f374363aa98959dabbda19",
+        "tests/SampledTextureCacheTests.cpp": "6342f8b736496c818ce6b33cc6cad015445e35db24a78770b2e49dcf3fcf8032",
+        "tools/test_gltf_sampler_gpu.py": "6016109a97fd1d4be58a34938fd107d4adb6fd13b860fb300a7ccd00024c5eac"
+      },
+      "image": "docs/acceptance/nr/visual-history/2026-10-28-nr7-l4m-opaque-rings-59510a5.png",
+      "source": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/main-sampler-release/frames/frame_000000.png",
+      "sha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728",
+      "sourceSha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728",
+      "rgbSha256": "e6e8da46797f0f153c8d5610c575db9f7a53fe2e763c626b428356718130f5bb",
+      "bytes": 5726367
     }
   ],
   "userAttachment": {
