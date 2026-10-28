@@ -1,0 +1,19 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "fog_analytic.glsl"
+layout(local_size_x=1) in;
+struct Input {vec4 rows[12];};
+struct Output {vec4 rows[6];};
+layout(binding=0,std430) readonly buffer Inputs {Input values[];} source;
+layout(binding=1,std430) writeonly buffer Outputs {Output values[];} destination;
+void main(){
+    uint n=gl_GlobalInvocationID.x;Input p=source.values[n];
+    AzureAerialFog aerial;for(int i=0;i<6;++i)aerial.rows[i]=p.rows[i];
+    AzureFogTransport air=azureEvaluateAerialFog(aerial,p.rows[6].xyz,p.rows[7].xyz);
+    AzureFogTransport height=azureEvaluateHeightFog(p.rows[8].xyz,p.rows[9].xyz,p.rows[11].xyz,p.rows[7].xyz);
+    AzureFogTransport volume;volume.scattering=p.rows[10].xyz;volume.transmittance=vec3(p.rows[10].w);
+    AzureFogTransport combined=azureComposeFogTransport(volume,azureComposeFogTransport(height,air));
+    destination.values[n].rows[0]=vec4(air.transmittance,0);destination.values[n].rows[1]=vec4(air.scattering,0);
+    destination.values[n].rows[2]=vec4(height.transmittance,0);destination.values[n].rows[3]=vec4(height.scattering,0);
+    destination.values[n].rows[4]=vec4(combined.transmittance,0);destination.values[n].rows[5]=vec4(combined.scattering,0);
+}

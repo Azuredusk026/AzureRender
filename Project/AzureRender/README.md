@@ -45,6 +45,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 中央白色标识与浮点附件对照见[标识验收](docs/acceptance/nr/central-late-glyph.md)。
 逐采样深度、覆盖率与双配置回归见[轮廓验收](docs/acceptance/nr/view-fog-multisample.md)。
 普通无光照表面、附件一致性及 GPU 成本见[预算验收](docs/acceptance/nr/unlit-opaque-budget.md)。
+光谱大气、远端片元与公共数值见[解析雾验收](docs/acceptance/nr/analytic-fog.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 

@@ -38,6 +38,9 @@ int main(){try{
  medium.density=1;medium.heightFalloff=1;
  require(evaluateHeightFog(medium,{0,-1e30F,0},{0,-1e30F,10}).transmittance[0]==0,"Dense extreme height has finite zero transmittance");
  require(evaluateHeightFog(medium,{0,1e30F,0},{0,1e30F,10}).transmittance[0]==1,"Sparse extreme height has finite unit transmittance");
+ medium.referenceHeight=0;medium.density=.25F;medium.heightFalloff=2;
+ near(evaluateHeightFog(medium,{0,1e30F,0},{0,0,0}).transmittance[0],std::exp(-.125F),"Extreme descending vertical integral remains exact");
+ near(evaluateHeightFog(medium,{0,0,0},{0,1e30F,0}).transmittance[0],std::exp(-.125F),"Extreme ascending vertical integral remains exact");
  require(evaluateHeightFog(medium,{1,2,3},{1,2,3}).scattering==std::array<float,3>{},"Zero-length segment is exact");
  for(float invalid:{-1.F,std::numeric_limits<float>::infinity(),std::numeric_limits<float>::quiet_NaN()}) {
   auto bad=medium;bad.density=invalid;reject([&]{(void)evaluateHeightFog(bad,{0,0,0},{1,0,0});});

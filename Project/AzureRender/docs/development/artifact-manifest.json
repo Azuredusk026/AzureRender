@@ -623,6 +623,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-opaque-budget.json",
       "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-105914-native-atmosphere-height-mapping-18f8ff",
+      "pathBase": "build",
+      "purpose": "光谱大气、真实远端片元和双配置数值契约验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/analytic-fog.json",
+      "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

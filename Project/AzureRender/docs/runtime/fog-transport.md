@@ -69,6 +69,10 @@ JSON 字段、版本和数值范围接受完整校验。
 
 ## 传输语义
 
+光谱大气使用 `ExponentialAerialFog` 提供独立参数。
+高度积分与大气共享稳定的对数数值内核。
+数值契约、来源片元和 GPU 对照见[解析雾验收](../acceptance/nr/analytic-fog.md)。
+
 `FogTransport` 持有线性散射 RGB 和逐通道透射率。
 散射非负，透射率位于零至一。
 默认值具有零散射和单位透射率。

@@ -567,6 +567,7 @@ add_library(AzureRenderCore STATIC
     src/render/RenderSettings.cpp
     src/render/EnvironmentAsset.cpp
     src/render/FogTransport.cpp
+    src/render/AerialFog.cpp
     src/render/FogVolumeData.cpp
     src/render/FogViewProjection.cpp
     src/render/ViewFogBinding.cpp
@@ -1031,6 +1032,20 @@ if(BUILD_TESTING)
     add_executable(AzureFogTransportTests tests/FogTransportTests.cpp)
     target_link_libraries(AzureFogTransportTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FogTransport COMMAND AzureFogTransportTests)
+    add_executable(AzureAerialFogTests tests/AerialFogTests.cpp)
+    target_link_libraries(AzureAerialFogTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.AerialFog COMMAND AzureAerialFogTests)
+    set(AZURE_AERIAL_TEST_SHADER "${CMAKE_CURRENT_BINARY_DIR}/shader-modules/aerial-fog-test.comp.spv")
+    add_custom_command(OUTPUT "${AZURE_AERIAL_TEST_SHADER}"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/shader-modules"
+        COMMAND Vulkan::glslc -I "${SHADER_SOURCE_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/shaders/aerial_fog_test.comp" -o "${AZURE_AERIAL_TEST_SHADER}"
+        DEPENDS tests/shaders/aerial_fog_test.comp shaders/fog_analytic.glsl shaders/fog_transport.glsl VERBATIM)
+    add_custom_target(AzureAerialFogTestShader DEPENDS "${AZURE_AERIAL_TEST_SHADER}")
+    add_executable(AzureAerialFogGpuTests tests/AerialFogGpuTests.cpp)
+    target_link_libraries(AzureAerialFogGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureAerialFogGpuTests AzureAerialFogTestShader)
+    add_test(NAME AzureRender.AerialFogGpu COMMAND AzureAerialFogGpuTests "${AZURE_AERIAL_TEST_SHADER}")
+    set_tests_properties(AzureRender.AerialFogGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureFogVolumeDataTests tests/FogVolumeDataTests.cpp)
     target_link_libraries(AzureFogVolumeDataTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.FogVolumeData COMMAND AzureFogVolumeDataTests)
