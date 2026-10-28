@@ -55,6 +55,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 四通道表面快照及格式选择见[快照契约](docs/runtime/reflection-surface-snapshot.md)。
 最近深度、反向深度及奇数维度归约见[层级契约](docs/runtime/depth-pyramid.md)。
 计算射线、投影重建及基础信号生产见[射线契约](docs/runtime/reflection-ray.md)。
+主场景计算生产、资源预算及消费见[组合契约](docs/runtime/screen-reflection.md)。
 独立过滤资源及双配置结果见[公共过滤验收](docs/acceptance/nr/reflection-spatial-filter.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。

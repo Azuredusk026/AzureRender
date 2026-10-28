@@ -1,4 +1,5 @@
 #include "render/ReflectionRay.hpp"
+#include "render/ScreenReflectionGpu.hpp"
 #include "render/LinearMath.hpp"
 #include "resources/BinaryFile.hpp"
 #include "support/VulkanComputeFixture.hpp"
@@ -9,7 +10,7 @@ namespace {
 void require(bool v,const char* message){if(!v)throw std::runtime_error(message);}
 constexpr unsigned width=65,height=33;
 void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayShaders,const ReflectionPyramidShaders& pyramidShaders,
-    const std::vector<char>& filterShader,bool packed,unsigned mode){
+    const std::vector<char>& filterShader,const std::vector<char>& depthShader,bool packed,unsigned mode,bool composed){
     const bool ortho=mode==1||mode==3,rolled=mode==2,moved=mode==4;
     ReflectionTraceView view;view.right=rolled?std::array<float,3>{0,1,0}:std::array<float,3>{1,0,0};
     view.up=rolled?std::array<float,3>{-1,0,0}:std::array<float,3>{0,1,0};view.forward={0,0,-1};
@@ -36,26 +37,35 @@ void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayS
     ReflectionSignalPyramidGpu signals(*host.backend,{width,height},1,2,packed?ReflectionPyramidPrecision::RequirePacked:ReflectionPyramidPrecision::Float32,pyramidShaders);
     const auto formats=signals.base(0);ReflectionRayGpu ray(*host.backend,{width,height},2,formats.colorFormat,formats.confidenceFormat,rayShaders);
     ReflectionSpatialFilterGpu filter(*host.backend,{width,height},2,filterShader);
+    std::unique_ptr<ScreenReflectionGpu> combined;
+    if(composed)combined=std::make_unique<ScreenReflectionGpu>(*host.backend,VkExtent2D{width,height},2,
+        ScreenReflectionShaders{depthShader,filterShader,rayShaders,pyramidShaders},7,packed?ReflectionPyramidPrecision::RequirePacked:ReflectionPyramidPrecision::Float32);
     std::array<rhi::GpuBuffer,2> buffers{};
     try{
         for(auto& buffer:buffers)buffer=host.allocator.createBuffer(width*height*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
-            for(unsigned slot=0;slot<2;++slot){signals.beginBaseWrite(commands,slot);ScreenSpaceReflectionSettings settings;
-                settings.enabled=slot==0;settings.maxDistance=12;settings.maxSteps=128;
-                ray.record(commands,slot,{surface.view,color.view,width,height},signals.base(slot),view,settings);}
-            for(unsigned slot=0;slot<2;++slot){signals.record(commands,slot,surface.view,1,{});const auto signal=signals.output(slot);
-                ReflectionFilterInputViews input{surface.view,surface.view,signal.color,width,height,1,1};input.confidence=signal.confidence;input.confidenceLevels=1;input.roughnessChannel=3;
-                ReflectionFilterParameters parameters;parameters.maxLod=0;filter.record(commands,slot,input,parameters);
-                const auto output=filter.output(slot);
-                commands.imageBarrier({output.image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+            if(combined){
+                for(unsigned slot=0;slot<2;++slot){ScreenSpaceReflectionSettings settings;settings.enabled=slot==0;settings.maxDistance=12;settings.maxSteps=128;
+                    combined->record(commands,slot,{surface.view,color.view,width,height},view,settings);}
+            }else{
+                for(unsigned slot=0;slot<2;++slot){signals.beginBaseWrite(commands,slot);ScreenSpaceReflectionSettings settings;
+                    settings.enabled=slot==0;settings.maxDistance=12;settings.maxSteps=128;
+                    ray.record(commands,slot,{surface.view,color.view,width,height},signals.base(slot),view,settings);}
+                for(unsigned slot=0;slot<2;++slot){signals.record(commands,slot,surface.view,1,{});const auto signal=signals.output(slot);
+                    ReflectionFilterInputViews input{surface.view,surface.view,signal.color,width,height,1,1};input.confidence=signal.confidence;input.confidenceLevels=1;input.roughnessChannel=3;
+                    ReflectionFilterParameters parameters;parameters.maxLod=0;filter.record(commands,slot,input,parameters);}
+            }
+            for(unsigned slot=0;slot<2;++slot){
+                const auto output=combined?combined->output(slot):filter.output(slot);
+                commands.imageBarrier({output.image,output.layout,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
                 commands.copyImageToBuffer(output.image,buffers[slot].buffer,{width,height});
-                commands.imageBarrier({output.image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_TRANSFER_READ_BIT,VK_ACCESS_SHADER_READ_BIT});
+                commands.imageBarrier({output.image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,output.layout,1,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_TRANSFER_READ_BIT,VK_ACCESS_SHADER_READ_BIT});
                 commands.bufferBarrier({buffers[slot].buffer,0,buffers[slot].size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});}
         });
         for(unsigned slot=0;slot<2;++slot){auto& buffer=buffers[slot];host.allocator.invalidate(buffer,0,buffer.size);const auto* data=static_cast<const float*>(buffer.mapped);
             for(unsigned i=0;i<width*height*4;++i)require(std::isfinite(data[i]),"Nonfinite reflection ray/filter output");
             const auto* center=data+((height/2)*width+width/2)*4;
-            std::cout<<"Trace packed="<<packed<<" mode="<<mode<<" slot="<<slot<<" center="<<center[0]<<','<<center[1]<<','<<center[2]<<','<<center[3]<<'\n';
+            std::cout<<"Trace composed="<<composed<<" packed="<<packed<<" mode="<<mode<<" slot="<<slot<<" center="<<center[0]<<','<<center[1]<<','<<center[2]<<','<<center[3]<<'\n';
             if(slot||moved)require(center[0]==0&&center[3]==0,"Disabled or moved reflector must have no central ray hit");
             else {require(center[3]>.5F,"Analytic mirror must hit the visible emissive wall");const std::array<float,3> expected{1,.2F,.1F};
                 for(unsigned c=0;c<3;++c)require(std::abs(center[c]-expected[c])<(packed?.02F:1e-5F),"Reflected radiance differs from independent wall color");}
@@ -65,10 +75,10 @@ void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayS
 }
 }
 int main(int argc,char** argv)try{
-    require(argc==6,"Expected packed/wide ray and pyramid shaders, then filter shader");test::VulkanComputeFixture host;
+    require(argc==7,"Expected packed/wide ray and pyramid shaders, then filter shader");test::VulkanComputeFixture host;
     const ReflectionTraceShaders rays{readBinaryFile(argv[1]),readBinaryFile(argv[2])};
-    const ReflectionPyramidShaders pyramids{readBinaryFile(argv[3]),readBinaryFile(argv[4])};const auto filter=readBinaryFile(argv[5]);
-    for(bool packed:{false,true})for(unsigned mode=0;mode<5;++mode)fixture(host,rays,pyramids,filter,packed,mode);
+    const ReflectionPyramidShaders pyramids{readBinaryFile(argv[3]),readBinaryFile(argv[4])};const auto filter=readBinaryFile(argv[5]);const auto depth=readBinaryFile(argv[6]);
+    for(bool composed:{false,true})for(bool packed:{false,true})for(unsigned mode=0;mode<5;++mode)fixture(host,rays,pyramids,filter,depth,packed,mode,composed);
     require(host.errors==0&&!host.allocator.statistics().liveImages&&!host.allocator.statistics().liveBuffers,"Reflection ray validation or retirement failed");
-    std::cout<<"PASS: 20 outputs, perspective/orthographic/rolled/offset/motion, validation=0 resources=0\n";return 0;
+    std::cout<<"PASS: 40 outputs, perspective/orthographic/rolled/offset/motion, validation=0 resources=0\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

@@ -4,6 +4,7 @@
 #include <vector>
 namespace azurerender {
 enum class ReflectionColorEncoding { Linear,MaxComponent };
+enum class ReflectionFilterOutputAccess {Sampled,StorageRead};
 using ReflectionFilterFrame=std::array<std::array<float,4>,3>;
 struct ReflectionFilterParameters {
     float maxLod=6,sharpLod=.25F,depthFalloff=.01F,minimumWeight=.01F;
@@ -26,12 +27,13 @@ struct ReflectionFilterOutput {
     VkImageView view=VK_NULL_HANDLE;
     VkSampler sampler=VK_NULL_HANDLE;
     VkExtent2D extent{};
+    VkImageLayout layout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 };
 // Inputs are borrowed in SHADER_READ_ONLY_OPTIMAL. Surface R/G holds roughness/confidence.
 // Each slot is reusable after its consuming submission completes. The caller waits before destruction.
 class ReflectionSpatialFilterGpu final {
 public:
-    ReflectionSpatialFilterGpu(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,const std::vector<char>& shader);
+    ReflectionSpatialFilterGpu(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,const std::vector<char>& shader,ReflectionFilterOutputAccess=ReflectionFilterOutputAccess::Sampled);
     ~ReflectionSpatialFilterGpu();
     ReflectionSpatialFilterGpu(const ReflectionSpatialFilterGpu&)=delete;
     ReflectionSpatialFilterGpu& operator=(const ReflectionSpatialFilterGpu&)=delete;
@@ -40,6 +42,7 @@ public:
 private:
     struct Slot {rhi::GpuImage image{};VkImageView view=VK_NULL_HANDLE;rhi::GpuBuffer parameters{};VkDescriptorSet set=VK_NULL_HANDLE;bool initialized=false;};
     void release() noexcept;
+    VkImageLayout outputLayout_=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
     rhi::IRhi& backend_;
     VkExtent2D extent_{};
     std::vector<Slot> slots_;

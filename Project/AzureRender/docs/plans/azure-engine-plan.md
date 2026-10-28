@@ -138,6 +138,8 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 
 反射射线预计算通过双配置与动态遮挡回归。
 短测及正式待项见[射线验收](../acceptance/nr/reflection-ray-math.md)。
+本帧计算反射的主场景装配见[组合契约](../runtime/screen-reflection.md)。
+原版层级射线及动态时间历史继续验收。
 
 中庭原生方向场已覆盖后方的已知照明缺口。
 双配置检查及边界见[光照覆盖](../acceptance/nr/irradiance-coverage.md)。

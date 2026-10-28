@@ -6,6 +6,7 @@
 #include "render/SampledTextureCache.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
+#include "render/ScreenReflectionGpu.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
@@ -152,6 +153,15 @@ private:
         SampledTextureBinding shadowColorLut;
     };
 
+    void createScreenReflectionResources(const RenderContext&);
+    void destroyScreenReflectionResources();
+    void publishScreenReflectionOutput(unsigned frame);
+    std::unique_ptr<ScreenReflectionGpu> screenReflections_;
+    rhi::GpuImage reflectionFallback_{};VkImageView reflectionFallbackView_{};
+    std::string reflectionPreparation_;
+    std::array<bool,kMaxFramesInFlight> reflectionDescriptorPublished_{},reflectionActive_{};
+    std::array<ReflectionTraceView,kMaxFramesInFlight> reflectionViews_{};
+    std::array<ScreenSpaceReflectionSettings,kMaxFramesInFlight> reflectionSettings_{};
     VkFormat reflectionSurfaceFormat_=VK_FORMAT_R32_SFLOAT;
     std::array<GpuTexture,kMaxFramesInFlight> overlaySceneDepth_;
     std::unique_ptr<SceneMultisampling> snapshotMultisampling_;

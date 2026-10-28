@@ -63,6 +63,12 @@ int main()try{
         backend.destroyImageView(colorView);backend.destroyImageView(surfaceView);backend.destroyImageView(depthView);
         backend.allocator().destroyImage(colorImage);backend.allocator().destroyImage(surface);backend.allocator().destroyImage(depth);
     }
+    {
+        const auto clearCount=std::count_if(backend.calls.begin(),backend.calls.end(),[](const auto& c){return c.name=="clearColorImage";});
+        ReflectionSpatialFilterGpu storage(backend,{17,9},1,code,ReflectionFilterOutputAccess::StorageRead);
+        require(std::count_if(backend.calls.begin(),backend.calls.end(),[](const auto& c){return c.name=="clearColorImage";})>clearCount,"Storage outputs must be initialized before any consumer");
+        require(storage.output(0).layout==VK_IMAGE_LAYOUT_GENERAL,"Storage consumers require a GENERAL output");
+    }
     require(backend.allocator().statistics().liveBuffers==0&&backend.allocator().statistics().liveImages==0,"Filter releases owned images and parameter buffers");
     std::cout<<"PASS: reflection filter bounds, HDR transport, independent frame ownership and transactional recording\n";
     return 0;

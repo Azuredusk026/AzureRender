@@ -553,6 +553,7 @@ void AzureRenderApp::buildRenderContext(
     context.bindlessTextures =
         bindlessTexturesSupported_ && !runOptions_.bindlessDisabled;
     context.rgba16fStorageImage = rgba16fStorageImageSupported_;
+    context.computeShaders = computeShaderSupported_;
     context.computeSkinning =
         computeShaderSupported_ && !runOptions_.computeSkinningDisabled;
     context.cullingEnabled = !runOptions_.cullingDisabled;

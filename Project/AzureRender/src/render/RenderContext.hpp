@@ -185,6 +185,7 @@ struct RenderContext {
 
     // Compute skinning/morph is available on the active queue and enabled
     // for this run. False selects vertex-shader skinning/morph.
+    bool computeShaders = false;
     bool computeSkinning = false;
     bool gpuCulling = false;
     bool visibilityPrototype = false;

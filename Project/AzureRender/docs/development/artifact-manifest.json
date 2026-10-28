@@ -723,6 +723,14 @@
       "retention": "NR12 正式归档时核对保留范围",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-ray.json"
+    },
+    {
+      "path": "runs/20261028-212848-screen-reflection-integration-5a1d9c",
+      "pathBase": "build",
+      "purpose": "主场景计算反射组合、完整画面和短时性能",
+      "retention": "NR12 正式归档时核对保留范围",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/screen-reflection.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

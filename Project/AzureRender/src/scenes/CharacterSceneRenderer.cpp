@@ -607,6 +607,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     qaEffectEnabled_ = frame.qaEffectEnabled;
     qaHarnessEnabled_ = frame.qaHarnessEnabled;
     updateUniformBuffer(frame);
+    if(screenReflections_)publishScreenReflectionOutput(static_cast<unsigned>(currentFrame_));
     rebuildSceneInstances();
     prepareTransparentIndices();
     // CPU visibility already participates in this renderer. Preserve stable
@@ -1331,6 +1332,19 @@ void CharacterSceneRenderer::registerPasses(
             graph.use(maskPass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
         }
     }
+    std::optional<RenderGraph::ResourceId> reflectionResource;
+    if(screenReflections_&&reflectionActive_[context.currentFrame]){
+        const auto slot=context.currentFrame;publishScreenReflectionOutput(slot);
+        const auto output=screenReflections_->output(slot);rhi::ImageBarrierDesc initial{};initial.image=output.image;
+        reflectionResource=graph.importImage("character-filtered-reflection",initial);
+        const auto view=reflectionViews_[slot];const auto settings=reflectionSettings_[slot];
+        const ReflectionTraceInputs inputs{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height};
+        const auto producer=graph.addCommandPass("character-compute-reflection",[this,slot,view,settings,inputs](rhi::ICommandRecorder& commands){
+            screenReflections_->record(commands,slot,inputs,view,settings);
+        },true);
+        graph.use(producer,overlayDepth,RenderGraphUsage::ComputeSampled,false);graph.use(producer,snapshotColor,RenderGraphUsage::ComputeSampled,false);
+        graph.write(producer,*reflectionResource);
+    }
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         recordMainDraws(context, 0, frozenInstances.get(), 0, static_cast<std::size_t>(-1),
@@ -1369,6 +1383,7 @@ void CharacterSceneRenderer::registerPasses(
     graph.setRecordingChunks(main, std::move(mainChunks));
     graph.use(main, overlayDepth,RenderGraphUsage::Sampled,false);
     graph.use(main,snapshotColor,RenderGraphUsage::Sampled,false);
+    if(reflectionResource)graph.read(main,*reflectionResource);
     if(fogResource){
         graph.use(main,*fogResource,RenderGraphUsage::FragmentStorage,false);
         if(snapshotMultisampling_)graph.use(main,snapshotSources[2],RenderGraphUsage::Sampled,false);
@@ -1460,6 +1475,15 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{color,depth,linear}:std::vector<VkClearValue>{color,linear,depth};
     context.commands->beginRenderPass(begin);recordOverlayDepth(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
     if(snapshotMultisampling_)snapshotMultisampling_->recordResolve(*context.commands,context.currentFrame,context.currentFrame);
+    if(screenReflections_&&reflectionActive_[context.currentFrame]){
+        const auto slot=context.currentFrame;
+        for(const auto image:{overlaySceneDepth_[slot].image.image,opaqueSceneColor_[slot].image.image})context.commands->imageBarrier({image,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        screenReflections_->record(*context.commands,slot,{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height},
+            reflectionViews_[slot],reflectionSettings_[slot]);
+    }
+
     if(instanceSnapshot_->buffers.outlineMaskImage){
         rhi::RenderPassBeginDesc mask{};mask.renderPass=outlineMaskPass_;
         mask.framebuffer=instanceSnapshot_->buffers.outlineMaskFramebuffer;mask.extent=instanceSnapshot_->buffers.outlineMaskExtent;
@@ -1562,6 +1586,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
          << "  \"reflectionSurfaceSnapshot\": " << (reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?"true":"false") << ",\n"
+         << "  \"screenReflectionComputePrepared\": " << (screenReflections_?"true":"false") << ",\n"
+         << "  \"screenReflectionComputeActive\": " << (reflectionActive_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"screenReflectionPreparation\": " << std::quoted(reflectionPreparation_) << ",\n"
+         << "  \"screenReflectionLevels\": " << (screenReflections_?screenReflections_->levels():0) << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
          << "  \"irradianceQueryScope\": \"physical-surface\",\n"
@@ -2476,8 +2504,10 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
         snapshotMultisampling_=std::make_unique<SceneMultisampling>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,reflectionSurfaceFormat_,
             reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?SceneSecondaryResolve::MinimumDepthSample:SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_);
     }
+    createScreenReflectionResources(context);
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
+    destroyScreenReflectionResources();
     snapshotMultisampling_.reset();
     for(std::size_t i=0;i<kMaxFramesInFlight;++i){
         if(outlineMaskFramebuffers_[i])rhi_->destroyFramebuffer(outlineMaskFramebuffers_[i]);outlineMaskFramebuffers_[i]=VK_NULL_HANDLE;
@@ -2676,6 +2706,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
 #include "CharacterOutlinePass.inc"
 #include "CharacterMotionPass.inc"
 #include "CharacterMaterialSampling.inc"
+#include "CharacterScreenReflection.inc"
 
 void CharacterSceneRenderer::createDescriptorPool() {
     rhi::DescriptorPoolDesc poolDesc{};
@@ -2694,6 +2725,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
         };
+        poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,frameCount});
         poolDesc.maxSets = frameCount;
         descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
         return;
@@ -2707,6 +2739,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
     };
+    poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,descriptorCount});
     poolDesc.maxSets = descriptorCount;
     descriptorPool_ = rhi_->createDescriptorPool(poolDesc);
 }
@@ -2767,6 +2800,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             bindings.push_back({30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
             bindings.push_back({31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,static_cast<std::uint32_t>(totalMaterialCount()),VK_SHADER_STAGE_VERTEX_BIT});
         }
+        bindings.push_back({37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
         return;
     }
@@ -2813,10 +2847,12 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         bindings.push_back({30,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
         bindings.push_back({31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_VERTEX_BIT});
     }
-    descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
+    bindings.push_back({37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
 }
 
 void CharacterSceneRenderer::createDescriptorSets() {
+    reflectionDescriptorPublished_.fill(false);
     objectShadowBoundViews_.fill(objectShadowPrepared_&&objectShadowAtlas_->view()?objectShadowAtlas_->view():shadowImageView_);
     const auto writeProjection=[this](VkDescriptorSet set,std::size_t material) {
         if(!outlineProjectionEnabled_)return;
@@ -2834,6 +2870,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
     };
     const auto& irradianceData=irradianceClipmap_?irradianceClipmap_->parameters():irradianceBuffer_;
     const auto writeSceneImages=[this](VkDescriptorSet set){
+        rhi_->writeDescriptorImage({set,37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,reflectionFallbackView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});
         if(probeFieldTexture_){probeFieldTexture_->writeTexture(set,23);
             rhi_->writeDescriptorBuffer({set,33,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,probeFieldBuffer_.buffer,probeFieldBuffer_.size});}
         else rhi_->writeDescriptorImage({set,23,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,reflectionProbeTexture_->view(),reflectionProbeTexture_->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
@@ -3281,6 +3318,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             simpleDepthVertex=rhi_->createShaderModule(azurerender::readBinaryFile(shaderDirectory+(computeSkinningEnabled_
                 ?"/character_snapshot_depth_compute.vert.spv":"/character_snapshot_depth.vert.spv")));
             auto desc=depthDesc;desc.vertexShader=simpleDepthVertex;desc.fragmentShader=simpleDepthModule;desc.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
+            // Snapshot-depth vertices consume the mesh stream without vertex colors.
+            desc.vertexAttributes.pop_back();desc.vertexBindings.resize(1);
             for(unsigned facing=0;facing<3;++facing){
                 desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
@@ -3331,6 +3370,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         const auto maskVertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv")));
         auto maskDesc=materialDesc;maskDesc.fragmentShader=maskModule;maskDesc.renderPass=outlineMaskPass_;
         maskDesc.vertexShader=maskVertex;
+        maskDesc.vertexAttributes.pop_back();maskDesc.vertexBindings.resize(1);
         maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;
         maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
         maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
@@ -3756,7 +3796,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const bool reflectionActive=screenSpaceReflectionActive(reflection,settings.sceneLightingEnabled,
         qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
     uniform.screenReflectionWorldToClip=multiply(samplingProjectionMatrix_,viewMatrix_);
-    uniform.screenReflectionTrace={reflectionActive?1.F:0.F,reflection.maxDistance,reflection.thickness,reflection.normalBias};
+    uniform.screenReflectionTrace={reflectionActive?(screenReflections_?2.F:1.F):0.F,reflection.maxDistance,reflection.thickness,reflection.normalBias};
     uniform.screenReflectionQuality={float(reflection.maxSteps),reflection.maxRoughness,reflection.edgeFade,reflection.strength};
     uniform.cascadeDepthRanges=cascadeDepthRanges;
     uniform.cascadeWorldDiameters=cascadeWorldDiameters;
@@ -3780,6 +3820,11 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.cameraForward = {
         cameraForward[0], cameraForward[1], cameraForward[2], 0.0F,
     };
+    reflectionActive_[currentFrame_]=reflectionActive&&screenReflections_!=nullptr;
+    reflectionSettings_[currentFrame_]=reflection;
+    auto& traceView=reflectionViews_[currentFrame_];traceView.projection=samplingProjectionMatrix_;traceView.worldToClip=uniform.screenReflectionWorldToClip;
+    for(unsigned axis=0;axis<3;++axis){traceView.position[axis]=uniform.cameraPosition[axis];traceView.right[axis]=uniform.cameraRight[axis];
+        traceView.up[axis]=uniform.cameraUp[axis];traceView.forward[axis]=uniform.cameraForward[axis];}
     uniform.clusterGrid = {
         static_cast<float>(kClusterGridX),
         static_cast<float>(kClusterGridY),

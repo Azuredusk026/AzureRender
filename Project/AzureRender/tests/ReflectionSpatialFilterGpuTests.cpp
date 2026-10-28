@@ -18,10 +18,10 @@ std::vector<float> floats(const std::filesystem::path& path){
 }
 using Texture=test::ComputeTexture;
 void copyOutput(rhi::ICommandRecorder& commands,const ReflectionFilterOutput& target,const rhi::GpuBuffer& buffer){
-    commands.imageBarrier({target.image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,
+    commands.imageBarrier({target.image,target.layout,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,
         VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
     commands.copyImageToBuffer(target.image,buffer.buffer,target.extent);
-    commands.imageBarrier({target.image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+    commands.imageBarrier({target.image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,target.layout,1,
         VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_TRANSFER_READ_BIT,VK_ACCESS_SHADER_READ_BIT});
     commands.bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
 }
@@ -144,7 +144,15 @@ void confidenceFixture(test::VulkanComputeFixture& host,const std::vector<char>&
     Texture color(*host.backend,width,height,levels,4,VK_FORMAT_R32G32B32A32_SFLOAT,colors);
     Texture mask(*host.backend,width,height,levels,1,VK_FORMAT_R32_SFLOAT,masks);
     Texture material(*host.backend,width,height,1,4,VK_FORMAT_R32G32B32A32_SFLOAT,surface);
-    ReflectionSpatialFilterGpu filter(*host.backend,{width,height},2,shader);
+    ReflectionSpatialFilterGpu filter(*host.backend,{width,height},2,shader,ReflectionFilterOutputAccess::StorageRead);
+    auto initial=host.allocator.createBuffer(width*height*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
+    try{
+        host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){copyOutput(commands,filter.output(0),initial);});
+        host.allocator.invalidate(initial,0,initial.size);const auto* values=static_cast<const float*>(initial.mapped);
+        for(unsigned i=0;i<width*height*4;++i)require(values[i]==0,"Storage output must be neutral before first production");
+        host.allocator.destroyBuffer(initial);
+    }catch(...){host.allocator.destroyBuffer(initial);throw;}
+
     ReflectionFilterInputViews inputs{depth.view,material.view,color.view,width,height,levels,levels};
     inputs.confidence=mask.view;inputs.confidenceLevels=levels;inputs.roughnessChannel=2;
     ReflectionFilterParameters p;p.maxLod=3;p.encoding=ReflectionColorEncoding::Linear;

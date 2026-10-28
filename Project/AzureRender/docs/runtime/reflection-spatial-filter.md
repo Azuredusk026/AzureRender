@@ -54,6 +54,12 @@
 过滤资源同步自身输出的存储写入及后续采样。
 输出通过 `output(slot)` 借用句柄。
 
+构造参数 `ReflectionFilterOutputAccess` 选择输出访问。
+默认 `Sampled` 使用 `SHADER_READ_ONLY_OPTIMAL`。
+`StorageRead` 使用 `GENERAL`，供只读存储图像消费。
+该模式在构造时清零输出，并建立读取可见性。
+输出结构的 `layout` 提供实际布局。
+
 宿主在对应提交完成后复用槽位。
 同次提交可记录使用不同参数的两个槽位。
 销毁前由宿主等待全部消费者完成。

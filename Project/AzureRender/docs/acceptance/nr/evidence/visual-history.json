@@ -343,6 +343,24 @@
         "实际启用四通道表面快照。",
         "动态反射生产和连续历史继续接入。"
       ]
+    },
+    {
+      "id": "nr5-r8-i",
+      "title": "本帧计算反射接入",
+      "phase": "NR5-R8-I",
+      "commit": "1634098+source-sha256",
+      "status": "场景生产接入，原版等价待验",
+      "source": "build/runs/20261028-212848-screen-reflection-integration-5a1d9c/main-release/frames/frame_000000.png",
+      "project": "build/runs/20261028-212848-screen-reflection-integration-5a1d9c/full-candidate/enclosure-sampler.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/screen-reflection.json",
+      "scope": "完整主场景",
+      "image": "docs/acceptance/nr/visual-history/2026-10-28-nr5-r8-i-compute.png",
+      "imagePurpose": "scene-composite",
+      "notes": [
+        "原版 3534 机位，2560×1440，364 项资源。",
+        "计算生产和七级信号链实际启用。",
+        "完整图平均字节误差为 13.065549，原版等价继续验收。"
+      ]
     }
   ],
   "userAttachment": {
@@ -351,5 +369,5 @@
     "matchesSnapshot": "nr3-f1i",
     "rgbPixelExact": true
   },
-  "defaultPreviewSnapshot": "nr5-r8-f"
+  "defaultPreviewSnapshot": "nr5-r8-i"
 }

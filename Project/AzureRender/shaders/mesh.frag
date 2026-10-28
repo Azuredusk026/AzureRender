@@ -34,6 +34,13 @@ const bool azureHairPixelIntegral=false;
 layout(binding = 18) uniform sampler2D overlaySceneDepth;
 layout(binding = 19) uniform sampler2D opaqueSceneColor;
 #include "screen_space_reflection.glsl"
+layout(rgba32f,binding=37) uniform readonly image2D computedScreenReflection;
+vec4 sampleComputedScreenReflection(vec2 uv){
+    ivec2 size=imageSize(computedScreenReflection);vec2 pixel=uv*vec2(size)-.5;
+    ivec2 first=ivec2(floor(pixel));vec2 f=fract(pixel);vec4 taps[4];
+    for(int tap=0;tap<4;++tap)taps[tap]=imageLoad(computedScreenReflection,clamp(first+ivec2(tap%2,tap/2),ivec2(0),size-1));
+    return mix(mix(taps[0],taps[1],f.x),mix(taps[2],taps[3],f.x),f.y);
+}
 #endif
 
 layout(binding = 0) uniform CameraData {
@@ -1719,7 +1726,10 @@ void main() {
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface
         &&!overlayMaterial&&!(qaEffectMode==5&&qaEffectDisabled)){
-        vec4 screenReflection=traceScreenSpaceReflection(opaqueSceneColor,overlaySceneDepth,
+        vec4 screenReflection;
+        if(camera.screenReflectionTrace.x>1.5)
+            screenReflection=sampleComputedScreenReflection(AZURE_FRAGMENT_COORD.xy/vec2(textureSize(opaqueSceneColor,0)));
+        else screenReflection=traceScreenSpaceReflection(opaqueSceneColor,overlaySceneDepth,
             camera.screenReflectionWorldToClip,camera.cameraPosition.xyz,camera.cameraForward.xyz,
             worldPosition,shadedNormal,reflectionDirection,roughness,
             camera.screenReflectionTrace,camera.screenReflectionQuality);
