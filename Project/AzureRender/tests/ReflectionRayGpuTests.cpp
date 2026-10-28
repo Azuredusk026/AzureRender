@@ -67,6 +67,17 @@ void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayS
         motion=std::make_unique<test::ComputeTexture>(*host.backend,width,height,1,2,VK_FORMAT_R32G32_SFLOAT,std::vector<float>(width*height*2,0));
         acceptance=std::make_unique<test::ComputeTexture>(*host.backend,outputWidth,outputHeight,1,1,VK_FORMAT_R32_SFLOAT,std::vector<float>(outputWidth*outputHeight,1));
         rejection=std::make_unique<test::ComputeTexture>(*host.backend,outputWidth,outputHeight,1,1,VK_FORMAT_R32_SFLOAT,std::vector<float>(outputWidth*outputHeight,0));
+        VkCommandBuffer abandoned{};VkCommandBufferAllocateInfo allocation{VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
+        allocation.commandPool=host.pool;allocation.level=VK_COMMAND_BUFFER_LEVEL_PRIMARY;allocation.commandBufferCount=1;
+        test::vkRequire(vkAllocateCommandBuffers(host.device,&allocation,&abandoned),"allocate abandoned reflection commands");
+        try{
+            VkCommandBufferBeginInfo begin{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};test::vkRequire(vkBeginCommandBuffer(abandoned,&begin),"begin abandoned reflection commands");
+            rhi::VulkanCommandRecorder commands(abandoned);ScreenSpaceReflectionSettings settings;settings.enabled=true;settings.maxDistance=12;settings.maxSteps=128;
+            ScreenReflectionHistoryInputs history;history.motion=motion->view;history.acceptance=acceptance->view;history.parameters.minimumColor=0;
+            combined->record(commands,0,{surface.view,color.view,width,height},view,settings,&history);
+            test::vkRequire(vkEndCommandBuffer(abandoned),"end abandoned reflection commands");
+            vkFreeCommandBuffers(host.device,host.pool,1,&abandoned);abandoned=VK_NULL_HANDLE;
+        }catch(...){if(abandoned)vkFreeCommandBuffers(host.device,host.pool,1,&abandoned);throw;}
     }
     std::array<rhi::GpuBuffer,2> buffers{};
     try{

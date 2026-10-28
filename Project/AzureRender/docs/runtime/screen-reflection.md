@@ -93,7 +93,38 @@ RGB 保存反射辐射，Alpha 保存命中可信度。
 读取前帧历史与覆盖当前槽位须遵守所属队列顺序。
 取消记录保持上次实际提交的历史身份。
 当前槽位与所选历史图像相同时，调用者拒绝该历史。
-主场景的运动前置生产及时间历史调度继续按计划接入。
+## 主场景装配
+
+单样点场景按实际反射需求装配时间过滤。
+视图已提供运动目标时，反射借用同一附件。
+独立反射需求由场景持有运动目标。
+场景负责在快照硬件深度上生成不透明运动。
+主颜色之后的抗锯齿继续消费完整表面的运动。
+资源图排序前置写入、反射读取及后置写入。
+运动参数、描述符与帧缓冲沿已有绘制组件复用。
+
+历史身份仅在所属视图的实际成功提交后推进。
+取消录制保留上次成功提交的身份。
+前帧缺失、切镜、场景及尺寸变化拒绝历史。
+当前槽位与历史槽位相同时，使用本帧信号。
+多样点运动未满足一致选样时，场景使用本帧反射。
+准备原因由 `screenReflectionTemporalPreparation` 记录。
+
+采集清单提供以下字段。
+
+| 字段 | 含义 |
+| --- | --- |
+| `screenReflectionTemporalPrepared` | 时间资源已装配 |
+| `screenReflectionTemporalActive` | 本帧使用时间生产链 |
+| `screenReflectionHistoryValid` | 当前历史候选通过视图身份检查 |
+| `screenReflectionHistorySubmission` | 最近成功提交的历史身份 |
+| `screenReflectionOwnsMotion` | 运动目标由反射场景持有 |
+| `screenReflectionMotionBytes` | 所消费运动目标的图像字节数 |
+| `screenReflectionReprojectionBytes` | 重投影资源的图像字节数 |
+
+逐像素接收仍由重投影的 R32F 输出决定。
+历史候选有效不代表所有像素均接收历史。
+实际采集与原版边界见[主场景历史验收](../acceptance/nr/main-reflection-history.md)。
 
 场景通过 `screenReflectionComputePrepared` 记录准备状态。
 `screenReflectionComputeActive` 记录当前帧实际启用状态。

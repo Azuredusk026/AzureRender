@@ -1289,15 +1289,16 @@ void CharacterSceneRenderer::registerPasses(
 
     rhi::ImageBarrierDesc snapshotState{};snapshotState.image=opaqueSceneColor_[context.currentFrame].image.image;
     const auto snapshotColor=graph.importImage("character-opaque-color",snapshotState);
+    rhi::ImageBarrierDesc depthState{};depthState.image=overlayDepthAttachments_[context.currentFrame].image;depthState.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+    const auto snapshotDepth=graph.importImage("character-opaque-hardware-depth",depthState);
     if(snapshotMultisampling_){
         for(unsigned i=0;i<3;++i)graph.attachment(prepass,snapshotSources[i],i==1?RenderGraphUsage::DepthAttachment:RenderGraphUsage::ColorAttachment,
             i==1?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
-        rhi::ImageBarrierDesc depthState{};depthState.image=overlayDepthAttachments_[context.currentFrame].image;depthState.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
-        const auto snapshotDepth=graph.importImage("character-opaque-hardware-depth",depthState);
         snapshotMultisampling_->schedule(graph,context.currentFrame,context.currentFrame,snapshotSources,{snapshotColor,snapshotDepth,overlayDepth},"character-opaque-resolve");
     }else{
         graph.attachment(prepass,overlayDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(prepass,snapshotDepth,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     }
     graph.use(prepass,resources.shadow,RenderGraphUsage::Sampled,false);
     graph.use(prepass,jointResource,RenderGraphUsage::VertexStorage,false);
@@ -1332,6 +1333,39 @@ void CharacterSceneRenderer::registerPasses(
             graph.use(maskPass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
         }
     }
+    const auto addMotionUses=[&](auto pass){
+        graph.use(pass,instanceResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,jointResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,morphWeightResource,RenderGraphUsage::VertexStorage,false);
+        if(outlineMaskResource)graph.use(pass,*outlineMaskResource,RenderGraphUsage::Sampled,false);
+        if(outlineProjectionEnabled_)graph.use(pass,importHostStorage("character-motion-outline",outlineProjection_->buffer()),RenderGraphUsage::VertexStorage,false);
+        graph.use(pass,importHostStorage("character-previous-poses",motionPass_->previous(context.currentFrame)),RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){
+            graph.use(pass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+            if(!computeSkinningEnabled_)graph.use(pass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+            else {rhi::BufferBarrierDesc initial;const auto& source=sourceVertexBuffer(key);initial.buffer=source.buffer;initial.size=source.size;
+                initial.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;initial.dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
+                graph.use(pass,graph.importBuffer("character-motion-base-"+std::to_string(key),initial),RenderGraphUsage::VertexBuffer,false);}
+        }
+    };
+    std::array<RenderGraph::ResourceId,2> reflectionMotionResources{};
+    if(reflectionReprojection_&&reflectionActive_[context.currentFrame]){
+        if(context.motionOutput){
+            if(resources.motion==UINT32_MAX||resources.motionSurfaceDepth==UINT32_MAX)throw std::invalid_argument("Shared reflection motion requires imported view outputs");
+            reflectionMotionResources={resources.motion,resources.motionSurfaceDepth};
+        }else{
+            rhi::ImageBarrierDesc initial;initial.image=motionTarget_->image().image;
+            reflectionMotionResources[0]=graph.importImage("character-reflection-motion",initial);
+            initial.image=motionTarget_->surfaceDepthImage().image;reflectionMotionResources[1]=graph.importImage("character-reflection-surface-depth",initial);
+        }
+        const auto motion=graph.addCommandPass("character-reflection-motion",[this,frozenContext,draws=reflectionMotionDraws_](rhi::ICommandRecorder& commands){
+            motionPass_->recordToFramebuffer(commands,frozenContext->currentFrame,reflectionMotionFramebuffer(frozenContext->currentFrame),frozenContext->renderExtent,draws);
+        });
+        addMotionUses(motion);
+        graph.attachment(motion,snapshotDepth,RenderGraphUsage::DepthReadAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        for(auto resource:reflectionMotionResources)graph.attachment(motion,resource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
     std::optional<RenderGraph::ResourceId> reflectionResource;
     if(screenReflections_&&reflectionActive_[context.currentFrame]){
         const auto slot=context.currentFrame;publishScreenReflectionOutput(slot);
@@ -1340,9 +1374,10 @@ void CharacterSceneRenderer::registerPasses(
         const auto view=reflectionViews_[slot];const auto settings=reflectionSettings_[slot];
         const ReflectionTraceInputs inputs{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height};
         const auto producer=graph.addCommandPass("character-compute-reflection",[this,slot,view,settings,inputs](rhi::ICommandRecorder& commands){
-            screenReflections_->record(commands,slot,inputs,view,settings);
+            recordScreenReflection(commands,slot,inputs,view,settings);
         },true);
         graph.use(producer,overlayDepth,RenderGraphUsage::ComputeSampled,false);graph.use(producer,snapshotColor,RenderGraphUsage::ComputeSampled,false);
+        if(reflectionReprojection_)graph.use(producer,reflectionMotionResources[0],RenderGraphUsage::ComputeSampled,false);
         graph.write(producer,*reflectionResource);
     }
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
@@ -1422,26 +1457,13 @@ void CharacterSceneRenderer::registerPasses(
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     graph.attachment(main, resources.normal, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
-    if(motionPass_){
+    if(motionPass_&&context.motionOutput){
         if(resources.motion==UINT32_MAX||resources.motionSurfaceDepth==UINT32_MAX)
             throw std::invalid_argument("Motion-enabled renderer requires imported view outputs");
         const auto pass=graph.addCommandPass("character-motion",[this,frozenContext,draws=motionDraws_](rhi::ICommandRecorder& commands){
             motionPass_->record(commands,frozenContext->currentFrame,frozenContext->imageIndex,frozenContext->renderExtent,draws);
         });
-        graph.use(pass,instanceResource,RenderGraphUsage::VertexStorage,false);
-        graph.use(pass,jointResource,RenderGraphUsage::VertexStorage,false);
-        graph.use(pass,morphTargetResource,RenderGraphUsage::VertexStorage,false);
-        graph.use(pass,morphWeightResource,RenderGraphUsage::VertexStorage,false);
-        if(outlineMaskResource)graph.use(pass,*outlineMaskResource,RenderGraphUsage::Sampled,false);
-        if(outlineProjectionEnabled_)graph.use(pass,importHostStorage("character-motion-outline",outlineProjection_->buffer()),RenderGraphUsage::VertexStorage,false);
-        graph.use(pass,importHostStorage("character-previous-poses",motionPass_->previous(context.currentFrame)),RenderGraphUsage::VertexStorage,false);
-        for(std::uint32_t key=0;key<meshResourceCount_;++key){
-            graph.use(pass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
-            if(!computeSkinningEnabled_)graph.use(pass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
-            else {rhi::BufferBarrierDesc initial;const auto& source=sourceVertexBuffer(key);initial.buffer=source.buffer;initial.size=source.size;
-                initial.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;initial.dstAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
-                graph.use(pass,graph.importBuffer("character-motion-base-"+std::to_string(key),initial),RenderGraphUsage::VertexBuffer,false);}
-        }
+        addMotionUses(pass);
         graph.attachment(pass,resources.depth,RenderGraphUsage::DepthReadAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
         graph.attachment(pass,resources.motion,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         graph.attachment(pass,resources.motionSurfaceDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
@@ -1477,10 +1499,17 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     if(snapshotMultisampling_)snapshotMultisampling_->recordResolve(*context.commands,context.currentFrame,context.currentFrame);
     if(screenReflections_&&reflectionActive_[context.currentFrame]){
         const auto slot=context.currentFrame;
+        if(reflectionReprojection_){
+            context.commands->imageBarrier({overlayDepthAttachments_[slot].image,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,
+                VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+            motionPass_->recordToFramebuffer(*context.commands,slot,reflectionMotionFramebuffer(slot),context.renderExtent,reflectionMotionDraws_);
+            context.commands->imageBarrier({motionTarget_->image().image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+                VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        }
         for(const auto image:{overlaySceneDepth_[slot].image.image,opaqueSceneColor_[slot].image.image})context.commands->imageBarrier({image,
             VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
             VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
-        screenReflections_->record(*context.commands,slot,{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height},
+        recordScreenReflection(*context.commands,slot,{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height},
             reflectionViews_[slot],reflectionSettings_[slot]);
     }
 
@@ -1588,6 +1617,14 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"reflectionSurfaceSnapshot\": " << (reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?"true":"false") << ",\n"
          << "  \"screenReflectionComputePrepared\": " << (screenReflections_?"true":"false") << ",\n"
          << "  \"screenReflectionComputeActive\": " << (reflectionActive_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"screenReflectionTemporalPrepared\": " << (reflectionReprojection_?"true":"false") << ",\n"
+         << "  \"screenReflectionTemporalActive\": " << (reflectionReprojection_&&reflectionActive_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"screenReflectionTemporalPreparation\": " << std::quoted(reflectionHistoryPreparation_) << ",\n"
+         << "  \"screenReflectionHistoryValid\": " << (reflectionHistoryValid_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"screenReflectionHistorySubmission\": " << reflectionHistorySubmission_ << ",\n"
+         << "  \"screenReflectionOwnsMotion\": " << (reflectionOwnedMotion_?"true":"false") << ",\n"
+         << "  \"screenReflectionMotionBytes\": " << (reflectionReprojection_&&motionTarget_?motionTarget_->byteSize():0) << ",\n"
+         << "  \"screenReflectionReprojectionBytes\": " << (reflectionReprojection_?reflectionReprojection_->byteSize():0) << ",\n"
          << "  \"screenReflectionPreparation\": " << std::quoted(reflectionPreparation_) << ",\n"
          << "  \"screenReflectionLevels\": " << (screenReflections_?screenReflections_->levels():0) << ",\n"
          << "  \"screenReflectionWidth\": " << (screenReflections_?screenReflections_->output(0).extent.width:0) << ",\n"
@@ -2483,7 +2520,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     outlineMaskPass_=rhi_->createRenderPass(maskPass);
     rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
         {reflectionSurfaceFormat_,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
-        {context.depthFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,true,false,true}};
+        {context.depthFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,true,true,true}};
     pass.depthAttachment=2;pass.externalReadDependency=true;overlayDepthPass_=rhi_->createRenderPass(pass);
     for(std::size_t frame=0;frame<kMaxFramesInFlight;++frame){
         auto& color=opaqueSceneColor_[frame];
@@ -3466,7 +3503,7 @@ void CharacterSceneRenderer::destroyResources() {
     viewFog_.reset();
     destroyOrdinaryOpaquePipelines();
     destroyHairIntegralPipelines();
-    motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();motionPreviousValidObjects_=0;
+    motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();reflectionMotionDraws_.clear();motionPreviousValidObjects_=0;
     destroyOverlayDepth();
     for (auto& resources : gpuCullingFrames_) resources.reset();
     gpuCullingCapacities_.fill(0);

@@ -60,13 +60,12 @@ void DepthPyramidGpu::record(rhi::ICommandRecorder& commands,unsigned index,VkIm
         backend_.writeDescriptorImage({target.set,0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,mip?slot.mips[mip-1].view:source,point_,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
         backend_.writeDescriptorImage({target.set,1,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,target.view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});}
     for(unsigned mip=0;mip<levels_;++mip){
-        commands.imageBarrier({slot.image.image,slot.initialized?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_GENERAL,1,
-            VkPipelineStageFlags(slot.initialized?VK_PIPELINE_STAGE_ALL_COMMANDS_BIT:VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT),VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-            slot.initialized?VK_ACCESS_SHADER_READ_BIT:0U,VK_ACCESS_SHADER_WRITE_BIT,VK_IMAGE_ASPECT_COLOR_BIT,mip});
+        commands.imageBarrier({slot.image.image,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_GENERAL,1,
+            VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+            VK_ACCESS_MEMORY_READ_BIT|VK_ACCESS_MEMORY_WRITE_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_IMAGE_ASPECT_COLOR_BIT,mip});
         ComputePass({std::max(1U,extent_.width>>mip),std::max(1U,extent_.height>>mip),8,8,1,true}).record(commands,pipeline_,layout_,slot.mips[mip].set);
         commands.imageBarrier({slot.image.image,VK_IMAGE_LAYOUT_GENERAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
             VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_COLOR_BIT,mip});
     }
-    slot.initialized=true;
 }
 }

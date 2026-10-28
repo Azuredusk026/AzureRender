@@ -70,6 +70,7 @@ void ScreenReflectionGpu::record(rhi::ICommandRecorder& commands,unsigned slot,c
         for(auto source:{history->motion,history->acceptance,history->previousColor,history->previousConfidence})
             if(source&&(source==target.color||source==target.confidence))throw std::invalid_argument("Temporal reflection history aliases its current output");
     }
+    try{
     depth_->record(commands,slot,inputs.surface,DepthReduction::Minimum,sourceExtent_);
     const auto depth=depth_->output(slot);
     if(history){
@@ -92,5 +93,6 @@ void ScreenReflectionGpu::record(rhi::ICommandRecorder& commands,unsigned slot,c
     filtered.confidence=signal.confidence;filtered.confidenceLevels=levels_;filtered.roughnessChannel=3;
     ReflectionFilterParameters parameters;parameters.maxLod=float(levels_-1);
     filter_->record(commands,slot,filtered,parameters);
+    }catch(...){signals_->abandonBaseWrite(slot);if(current_)current_->abandonBaseWrite(slot);throw;}
 }
 }

@@ -27,11 +27,12 @@ public:
     ReflectionPyramidViews base(unsigned slot) const;
     ReflectionPyramidViews output(unsigned slot) const;
     void beginBaseWrite(rhi::ICommandRecorder&,unsigned slot);
+    void abandonBaseWrite(unsigned slot);
     void record(rhi::ICommandRecorder&,unsigned slot,VkImageView depth,unsigned depthLevels,const ReflectionPyramidParameters&);
 private:
     struct Mip {VkImageView color=VK_NULL_HANDLE,confidence=VK_NULL_HANDLE;VkDescriptorSet set=VK_NULL_HANDLE;rhi::GpuBuffer parameters{};};
     struct Slot {rhi::GpuImage color{},confidence{};VkImageView allColor=VK_NULL_HANDLE,allConfidence=VK_NULL_HANDLE;
-        std::vector<Mip> mips;bool writing=false,ready=false;};
+        std::vector<Mip> mips;bool writing=false;};
     void release() noexcept;
     rhi::IRhi& backend_;VkExtent2D extent_{};unsigned levels_=0;bool packed_=false;
     VkFormat colorFormat_=VK_FORMAT_UNDEFINED,confidenceFormat_=VK_FORMAT_UNDEFINED;

@@ -33,6 +33,10 @@ int main()try{
         require(std::count_if(commands.calls.begin(),commands.calls.end(),[](const auto& c){return c.name=="dispatch";})==3,"All three dependent mips are recorded");
         rejects([&]{pyramid.record(commands,0,depth,4,parameters);});
         pyramid.beginBaseWrite(commands,0);pyramid.record(commands,0,depth,4,parameters);
+        pyramid.beginBaseWrite(commands,1);pyramid.abandonBaseWrite(1);const auto abandonedCalls=commands.calls.size();
+        rejects([&]{pyramid.record(commands,1,depth,4,parameters);});
+        require(commands.calls.size()==abandonedCalls,"Abandoned base writes require a fresh write cycle");
+        pyramid.beginBaseWrite(commands,1);pyramid.record(commands,1,depth,4,parameters);
     }
     require(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,"Pyramid owns and releases its resources");
     backend.unavailableStorageFormats.insert(VK_FORMAT_R8_UNORM);

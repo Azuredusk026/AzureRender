@@ -7,6 +7,7 @@
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
+#include "render/ReflectionReprojection.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
 #include "assets/GltfLoader.hpp"
@@ -80,7 +81,7 @@ private:
     MotionPoseHistory motionPoses_;
     std::unique_ptr<MotionVectorPass> motionPass_;
     MotionVectorTarget* motionTarget_=nullptr;
-    std::vector<MotionVectorDraw> motionDraws_;
+    std::vector<MotionVectorDraw> motionDraws_,reflectionMotionDraws_;
     std::uint32_t motionPreviousValidObjects_=0;
     void initializeMotion(const RenderContext&);
     void prepareMotion();
@@ -155,8 +156,19 @@ private:
 
     void createScreenReflectionResources(const RenderContext&);
     void destroyScreenReflectionResources();
+    void destroyReflectionHistoryResources();
+    void recordScreenReflection(rhi::ICommandRecorder&,unsigned,const ReflectionTraceInputs&,const ReflectionTraceView&,const ScreenSpaceReflectionSettings&);
+    VkFramebuffer reflectionMotionFramebuffer(unsigned slot) const;
     void publishScreenReflectionOutput(unsigned frame);
     std::unique_ptr<ScreenReflectionGpu> screenReflections_;
+    std::unique_ptr<ReflectionReprojectionGpu> reflectionReprojection_;
+    std::unique_ptr<MotionVectorTarget> reflectionOwnedMotion_;
+    std::array<VkFramebuffer,kMaxFramesInFlight> reflectionMotionFramebuffers_{};
+    std::array<bool,kMaxFramesInFlight> reflectionHistoryValid_{};
+    std::optional<unsigned> reflectionPendingSlot_;
+    std::uint64_t reflectionHistorySubmission_=0;
+    unsigned reflectionHistorySlot_=0;
+    std::string reflectionHistoryPreparation_;
     rhi::GpuImage reflectionFallback_{};VkImageView reflectionFallbackView_{};
     std::string reflectionPreparation_;
     std::array<bool,kMaxFramesInFlight> reflectionDescriptorPublished_{},reflectionActive_{};

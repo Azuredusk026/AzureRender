@@ -17,7 +17,7 @@ public:
     DepthPyramidOutput output(unsigned slot) const;
 private:
     struct Mip {VkImageView view{};VkDescriptorSet set{};rhi::GpuBuffer parameters{};};
-    struct Slot {rhi::GpuImage image{};VkImageView all{};std::vector<Mip> mips;bool initialized=false;};
+    struct Slot {rhi::GpuImage image{};VkImageView all{};std::vector<Mip> mips;};
     void release() noexcept;
     rhi::IRhi& backend_;VkExtent2D extent_{};unsigned levels_=0;std::vector<Slot> slots_;
     VkSampler point_{};VkDescriptorSetLayout descriptors_{};VkDescriptorPool pool_{};

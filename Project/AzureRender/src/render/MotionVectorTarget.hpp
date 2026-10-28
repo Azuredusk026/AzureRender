@@ -24,6 +24,7 @@ public:
     VkRenderPass renderPass() const noexcept {return pass_;}
     VkFramebuffer framebuffer(std::uint32_t source) const {return framebuffers_.at(source);}
     std::uint64_t byteSize() const noexcept {return bytes_;}
+    VkExtent2D extent() const noexcept {return extent_;}
     bool compatible(const rhi::IRhi&,VkExtent2D,VkFormat,const std::vector<VkImageView>& depths) const noexcept;
 private:
     rhi::IRhi& rhi_;rhi::IGpuAllocator& allocator_;

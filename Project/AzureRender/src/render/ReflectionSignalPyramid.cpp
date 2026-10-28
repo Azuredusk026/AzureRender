@@ -89,11 +89,12 @@ ReflectionPyramidViews ReflectionSignalPyramidGpu::output(unsigned index) const 
 }
 void ReflectionSignalPyramidGpu::beginBaseWrite(rhi::ICommandRecorder& commands,unsigned index){
     auto& slot=slots_.at(index);if(slot.writing)throw std::logic_error("Reflection pyramid base write is already active");
-    for(const auto image:{slot.color.image,slot.confidence.image})commands.imageBarrier({image,slot.ready?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_UNDEFINED,
-        VK_IMAGE_LAYOUT_GENERAL,levels_,VkPipelineStageFlags(slot.ready?VK_PIPELINE_STAGE_ALL_COMMANDS_BIT:VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT),
-        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_TRANSFER_BIT,slot.ready?VK_ACCESS_SHADER_READ_BIT:0U,VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_TRANSFER_WRITE_BIT});
+    for(const auto image:{slot.color.image,slot.confidence.image})commands.imageBarrier({image,VK_IMAGE_LAYOUT_UNDEFINED,
+        VK_IMAGE_LAYOUT_GENERAL,levels_,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+        VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_MEMORY_READ_BIT|VK_ACCESS_MEMORY_WRITE_BIT,VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_TRANSFER_WRITE_BIT});
     slot.writing=true;
 }
+void ReflectionSignalPyramidGpu::abandonBaseWrite(unsigned index){slots_.at(index).writing=false;}
 void ReflectionSignalPyramidGpu::record(rhi::ICommandRecorder& commands,unsigned index,VkImageView depth,unsigned depthLevels,const ReflectionPyramidParameters& parameters){
     auto& slot=slots_.at(index);if(!slot.writing)throw std::logic_error("Reflection pyramid requires a completed base-write producer");
     if(!depth)throw std::invalid_argument("Reflection pyramid requires a depth view");
@@ -114,6 +115,6 @@ void ReflectionSignalPyramidGpu::record(rhi::ICommandRecorder& commands,unsigned
     }
     for(const auto image:{slot.color.image,slot.confidence.image})commands.imageBarrier({image,VK_IMAGE_LAYOUT_GENERAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,levels_,
         VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
-    slot.ready=true;slot.writing=false;
+    slot.writing=false;
 }
 }

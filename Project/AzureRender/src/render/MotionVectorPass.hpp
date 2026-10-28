@@ -37,6 +37,10 @@ public:
     void prepare(std::uint32_t frame,const PackedMotionPoseFrame&,const MotionVectorInputs&);
     void record(rhi::ICommandRecorder&,std::uint32_t frame,std::uint32_t image,VkExtent2D,
         const std::vector<MotionVectorDraw>&) const;
+    // The caller owns a compatible framebuffer with this target's two colours
+    // and the selected borrowed read-only depth; all uses retire before release.
+    void recordToFramebuffer(rhi::ICommandRecorder&,std::uint32_t frame,VkFramebuffer,VkExtent2D,
+        const std::vector<MotionVectorDraw>&) const;
     const rhi::GpuBuffer& previous(std::uint32_t frame) const{return previous_.at(frame);}
 private:
     rhi::IRhi& rhi_;rhi::IGpuAllocator& allocator_;MotionVectorTarget& target_;

@@ -79,7 +79,14 @@ void MotionVectorPass::prepare(std::uint32_t frame,const PackedMotionPoseFrame& 
     }
 }
 void MotionVectorPass::record(rhi::ICommandRecorder& commands,std::uint32_t frame,std::uint32_t image,VkExtent2D extent,const std::vector<MotionVectorDraw>& draws) const{
-    rhi::RenderPassBeginDesc pass;pass.renderPass=target_.renderPass();pass.framebuffer=target_.framebuffer(image);pass.extent=extent;pass.clearValues.resize(3);
+    recordToFramebuffer(commands,frame,target_.framebuffer(image),extent,draws);
+}
+void MotionVectorPass::recordToFramebuffer(rhi::ICommandRecorder& commands,std::uint32_t frame,VkFramebuffer framebuffer,VkExtent2D extent,const std::vector<MotionVectorDraw>& draws) const{
+    if(frame>=previous_.size()||!framebuffer||extent.width!=target_.extent().width||extent.height!=target_.extent().height)
+        throw std::invalid_argument("Motion recording requires a matching slot, extent and borrowed framebuffer");
+    for(auto image:{target_.image().image,target_.surfaceDepthImage().image})commands.imageBarrier({image,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,1,
+        VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_ACCESS_MEMORY_READ_BIT|VK_ACCESS_MEMORY_WRITE_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT});
+    rhi::RenderPassBeginDesc pass;pass.renderPass=target_.renderPass();pass.framebuffer=framebuffer;pass.extent=extent;pass.clearValues.resize(3);
     pass.clearValues[1].color.float32[0]=1;commands.beginRenderPass(pass);commands.setViewport(float(extent.width),float(extent.height));commands.setScissor(extent);
     for(const auto& draw:draws){commands.bindPipeline(pipelines_.at((draw.shell?4:0)|(draw.doubleSided?2:0)|(draw.mirrored?1:0)));
         commands.bindDescriptorSet(layout_,sets_.at(frame*materials_+draw.push.material));

@@ -31,21 +31,26 @@ void CharacterSceneRenderer::prepareTemporalFrame(const SceneFrameData& frame){
     }
 }
 void CharacterSceneRenderer::initializeMotion(const RenderContext& context){
-    motionTarget_=context.motionOutput;
+    motionTarget_=context.motionOutput?context.motionOutput:reflectionOwnedMotion_.get();
     if(totalMaterialCount()>UINT32_MAX)throw std::length_error("Motion material count exceeds descriptor addressing");
     if(motionTarget_)motionPass_=std::make_unique<MotionVectorPass>(*rhi_,*allocator_,*motionTarget_,shaderDirectory_,
         static_cast<std::uint32_t>(totalMaterialCount()),static_cast<std::uint32_t>(kMaxFramesInFlight),context.faceCullingEnabled,context.depthTestEnabled);
 }
 void CharacterSceneRenderer::onFrameSubmitted(std::uint64_t submission) noexcept{
-    if(temporalView_.commit(submission))motionPoses_.commit(submission);
+    if(temporalView_.commit(submission)){
+        motionPoses_.commit(submission);
+        if(reflectionPendingSlot_&&submission>reflectionHistorySubmission_){reflectionHistorySlot_=*reflectionPendingSlot_;reflectionHistorySubmission_=submission;}
+    }
+    reflectionPendingSlot_.reset();
     state_.temporalFrame=temporalView_.committed()?&*temporalView_.committed():nullptr;
 }
 void CharacterSceneRenderer::onFrameAbandoned() noexcept{
-    temporalView_.cancel();motionPoses_.cancel();
+    temporalView_.cancel();motionPoses_.cancel();reflectionPendingSlot_.reset();
     state_.temporalFrame=temporalView_.committed()?&*temporalView_.committed():nullptr;
 }
 void CharacterSceneRenderer::prepareMotion(){
-    motionDraws_.clear();motionPreviousValidObjects_=0;if(!motionPass_||!instanceSnapshot_)return;
+    motionDraws_.clear();reflectionMotionDraws_.clear();reflectionPendingSlot_.reset();reflectionHistoryValid_[currentFrame_]=false;
+    motionPreviousValidObjects_=0;if(!motionPass_||!instanceSnapshot_)return;
     const auto& snapshot=*instanceSnapshot_;
     std::vector<MotionPoseState> poses;poses.reserve(snapshot.instances.size());
     std::map<std::pair<std::string,std::uint32_t>,std::uint32_t> replicas;
@@ -106,6 +111,7 @@ void CharacterSceneRenderer::prepareMotion(){
                 if(temporal){push.detail[2]=2*samplingJitter_[0]/temporal->current.width;push.detail[3]=2*samplingJitter_[1]/temporal->current.height;}
                 push.outline={view.outlinePixels,float(temporal?temporal->current.width:1),float(temporal?temporal->current.height:1),run.opacity};
                 motionDraws_.push_back(draw);
+                if(stage==0&&!(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled))reflectionMotionDraws_.push_back(draw);
             });
         }
     }

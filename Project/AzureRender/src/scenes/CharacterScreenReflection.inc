@@ -15,14 +15,58 @@ void CharacterSceneRenderer::createScreenReflectionResources(const RenderContext
         reflectionPreparation_="depth-only-snapshot";if(reflectionSurfaceFormat_!=VK_FORMAT_R32G32B32A32_SFLOAT)return;
         constexpr unsigned resolutionDivisor=2;
         reflectionPreparation_="resource-limits";if(!ScreenReflectionGpu::supported(*rhi_,context.renderExtent,kMaxFramesInFlight,7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor))return;
-        screenReflections_=std::make_unique<ScreenReflectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),ScreenReflectionShaders::load(shaderDirectory_),7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor);
+        bool temporal=context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT;
+        reflectionHistoryPreparation_=temporal?"resource-limits":"multisample-motion-unavailable";
+        if(temporal&&context.descriptorLimits.maxPerStageDescriptorStorageBuffers&&context.descriptorLimits.maxPerStageDescriptorStorageBuffers<6){temporal=false;reflectionHistoryPreparation_="geometry-storage-limits";}
+        const auto pixels=std::uint64_t(context.renderExtent.width)*context.renderExtent.height;
+        if(temporal&&!context.motionOutput&&pixels>MotionVectorTarget::kMaximumBytes/MotionVectorTarget::kBytesPerPixel){temporal=false;reflectionHistoryPreparation_="motion-budget";}
+        const auto halfPixels=std::uint64_t(std::max(1U,context.renderExtent.width/2))*std::max(1U,context.renderExtent.height/2);
+        if(temporal&&halfPixels*kMaxFramesInFlight>ReflectionReprojectionGpu::kMaximumBytes/ReflectionReprojectionGpu::kBytesPerPixel){temporal=false;reflectionHistoryPreparation_="history-budget";}
+        if(temporal&&!ScreenReflectionGpu::supported(*rhi_,context.renderExtent,kMaxFramesInFlight,7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor,true)){temporal=false;reflectionHistoryPreparation_="combined-budget";}
+        const auto shaders=ScreenReflectionShaders::load(shaderDirectory_);
+        if(temporal){
+            try{
+                if(!context.motionOutput)reflectionOwnedMotion_=std::make_unique<MotionVectorTarget>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,
+                    std::vector<VkImageView>(overlayDepthViews_.begin(),overlayDepthViews_.end()));
+                auto* motion=context.motionOutput?context.motionOutput:reflectionOwnedMotion_.get();
+                if(context.motionOutput)for(unsigned frame=0;frame<kMaxFramesInFlight;++frame)
+                    reflectionMotionFramebuffers_[frame]=rhi_->createFramebuffer({motion->renderPass(),{motion->view(),motion->surfaceDepthView(),overlayDepthViews_[frame]},context.renderExtent.width,context.renderExtent.height});
+                reflectionReprojection_=std::make_unique<ReflectionReprojectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),readBinaryFile(shaderDirectory_+"/reflection_reprojection.comp.spv"),resolutionDivisor);
+                screenReflections_=std::make_unique<ScreenReflectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),shaders,7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor,true);
+                reflectionHistoryPreparation_="temporal";
+            }catch(const std::exception& error){destroyReflectionHistoryResources();screenReflections_.reset();temporal=false;reflectionHistoryPreparation_=error.what();}
+        }
+        if(!temporal)screenReflections_=std::make_unique<ScreenReflectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),shaders,7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor);
         reflectionPreparation_="compute";
     }catch(...){allocator_->destroyBuffer(staging);destroyScreenReflectionResources();throw;}
 }
 void CharacterSceneRenderer::destroyScreenReflectionResources(){
     screenReflections_.reset();reflectionDescriptorPublished_.fill(false);reflectionActive_.fill(false);
+    destroyReflectionHistoryResources();
     if(reflectionFallbackView_)rhi_->destroyImageView(reflectionFallbackView_);reflectionFallbackView_=VK_NULL_HANDLE;
     allocator_->destroyImage(reflectionFallback_);
+}
+void CharacterSceneRenderer::destroyReflectionHistoryResources(){
+    for(auto& framebuffer:reflectionMotionFramebuffers_){if(framebuffer)rhi_->destroyFramebuffer(framebuffer);framebuffer=VK_NULL_HANDLE;}
+    reflectionReprojection_.reset();reflectionOwnedMotion_.reset();reflectionPendingSlot_.reset();
+    reflectionHistorySubmission_=0;reflectionHistorySlot_=0;reflectionHistoryValid_.fill(false);reflectionHistoryPreparation_="not-requested";
+}
+VkFramebuffer CharacterSceneRenderer::reflectionMotionFramebuffer(unsigned slot) const{
+    return reflectionOwnedMotion_?reflectionOwnedMotion_->framebuffer(slot):reflectionMotionFramebuffers_.at(slot);
+}
+void CharacterSceneRenderer::recordScreenReflection(rhi::ICommandRecorder& commands,unsigned slot,const ReflectionTraceInputs& inputs,const ReflectionTraceView& view,const ScreenSpaceReflectionSettings& settings){
+    publishScreenReflectionOutput(slot);
+    if(!reflectionReprojection_){screenReflections_->record(commands,slot,inputs,view,settings);return;}
+    const auto* temporal=state_.temporalFrame;
+    const bool valid=temporal&&temporal->previous&&reflectionHistorySubmission_&&temporal->previousSubmission==reflectionHistorySubmission_&&reflectionHistorySlot_!=slot;
+    ReflectionReprojectionParameters parameters;parameters.historyValid=valid;
+    if(temporal){const auto& projection=temporal->previous?temporal->previous->projection:temporal->current.projection;parameters.previousDepthProjection={projection[10],projection[14],projection[11],projection[15]};}
+    reflectionReprojection_->record(commands,slot,{inputs.surface,motionTarget_->view(),valid?reflectionReprojection_->output(reflectionHistorySlot_).motion:VK_NULL_HANDLE,inputs.width,inputs.height},parameters);
+    const auto reprojection=reflectionReprojection_->output(slot);ScreenReflectionHistoryInputs history;
+    history.motion=reprojection.motion;history.acceptance=reprojection.acceptance;history.parameters.historyValid=valid;
+    if(valid){const auto previous=screenReflections_->history(reflectionHistorySlot_);history.previousColor=previous.color;history.previousConfidence=previous.confidence;}
+    screenReflections_->record(commands,slot,inputs,view,settings,&history);
+    reflectionHistoryValid_[slot]=valid;reflectionPendingSlot_=slot;
 }
 void CharacterSceneRenderer::publishScreenReflectionOutput(unsigned frame){
     if(reflectionDescriptorPublished_.at(frame))return;
