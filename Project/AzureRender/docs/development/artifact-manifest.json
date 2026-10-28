@@ -614,6 +614,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/view-fog-multisample.json",
       "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-102818-native-fog-opaque-budget-226558",
+      "pathBase": "build",
+      "purpose": "普通无光照表面的同程序预算、附件一致性及真实场景回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/unlit-opaque-budget.json",
+      "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

@@ -38,6 +38,7 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 预积分雾场、实际表面与资源隔离见[表面验收](../acceptance/nr/view-fog-surfaces.md)。
 中央白色标识与浮点附件对照见[标识验收](../acceptance/nr/central-late-glyph.md)。
 逐采样深度、覆盖率与双配置回归见[轮廓验收](../acceptance/nr/view-fog-multisample.md)。
+普通无光照表面、附件一致性及 GPU 成本见[预算验收](../acceptance/nr/unlit-opaque-budget.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

@@ -615,6 +615,7 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 }
 
 #include "unlit_surface_sample.glsl"
+#include "unlit_opaque.glsl"
 #if defined(AZURE_VIEW_FOG)
 #include "view_fog_material.glsl"
 #else
@@ -708,6 +709,7 @@ void main() {
     if (!gl_FrontFacing) {
         geometricNormal = -geometricNormal;
     }
+    if(azureWritePlainUnlitBeauty(baseColor,geometricNormal,platformMask))return;
     vec3 tangent = normalize(
         worldTangent.xyz
         - geometricNormal * dot(geometricNormal, worldTangent.xyz));

@@ -6,6 +6,8 @@
 实际绑定见[图层材质验收](../acceptance/nr/unlit-texture-material.md)。
 来源转换与实际截帧输入见[物流图层来源](../acceptance/nr/captured-vfx-layers.md)。
 层级采样、覆盖率和活动实例见[绘制验收](../acceptance/nr/vfx-mip-and-coverage.md)。
+普通不透明无光照内容按基色与自发光评价最终颜色。
+实际资源、四倍采样成本和附件对照见[预算验收](../acceptance/nr/unlit-opaque-budget.md)。
 
 ## 数据契约
 

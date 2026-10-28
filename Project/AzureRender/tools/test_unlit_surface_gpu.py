@@ -49,7 +49,7 @@ def run(player, root, expected_validation='any', legacy_lit_red=False):
 
     def capture(name, *, lighting=False, indirect=False, gi=False, probe=False, alpha=1, opacity=1,
                 fixed=False, scene=True, unlit=True, isolation='beauty',
-                emission_only=False, behind=False):
+                emission_only=False, behind=False, material_class='emissive', anti_aliasing=0):
         model = copy.deepcopy(template)
         material = model['materials'][0]
         material['pbrMetallicRoughness'].update(
@@ -57,7 +57,7 @@ def run(player, root, expected_validation='any', legacy_lit_red=False):
             metallicFactor=0, roughnessFactor=.6)
         material['emissiveFactor'] = list(emission)
         material['alphaMode'] = 'BLEND' if alpha < 1 or opacity < 1 or behind else 'OPAQUE'
-        profile = {'schemaVersion': 2, 'class': 'emissive' if unlit else 'generic',
+        profile = {'schemaVersion': 2, 'class': material_class if unlit else 'generic',
                    'features': ['emissive-mask']}
         if unlit and not legacy_lit_red:
             profile['features'].append('unlit-surface')
@@ -87,10 +87,10 @@ def run(player, root, expected_validation='any', legacy_lit_red=False):
                           {'id': 'surface', 'asset': 'assets:/surface.gltf'}],
             'nodes': nodes, 'lights': [{'id': 'light', 'nodeId': 'light',
                 'color': [1, 1, 1], 'intensity': 12, 'radius': 10, 'enabled': lighting}],
-            'renderSettings': {'sceneLighting': scene, 'skyIntensity': 0,
+            'renderSettings': {'schemaVersion': 20, 'sceneLighting': scene, 'skyIntensity': 0,
                 'cameraNear': .1, 'cameraFar': 20, 'shadowDistance': 20,
                 'platform': False, 'silhouetteOutline': False, 'innerOutline': False,
-                'stylized': True, 'bloomEnabled': False, 'antiAliasing': 0,
+                'stylized': True, 'bloomEnabled': False, 'antiAliasing': anti_aliasing,
                 'exposure': 0, 'toneMapping': False, 'contrast': 1, 'saturation': 1}}
         if indirect or gi:
             level['irradianceVolume'] = {'version': 1, 'asset': 'assets:/field.aziv',
@@ -126,6 +126,7 @@ def run(player, root, expected_validation='any', legacy_lit_red=False):
         report = json.loads((output / 'runtime.json').read_text())
         assert not report['scriptErrors'] and not report['presentationErrors'], name
         manifest = json.loads((output / 'frames/capture_manifest.json').read_text())
+        if anti_aliasing==4:assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4,name
         assert manifest['qaIsolation'] == isolation and manifest['qaCamera'] == 'scene', name
         assert np.allclose(manifest['qaCameraPosition'], [0, 0, 3], atol=1e-6), name
         frame = output / 'frames/frame_000000.png'
@@ -142,7 +143,11 @@ def run(player, root, expected_validation='any', legacy_lit_red=False):
              ('showcase', {'scene': False}), ('fixed', {'lighting': True, 'indirect': True, 'fixed': True}),
              ('emission', {'emission_only': True}), ('half', {'alpha': .5}),
              ('node-half', {'opacity': .5}), ('combined-half', {'alpha': .5, 'opacity': .5}),
-             ('depth-hidden', {'behind': True})]
+             ('depth-hidden', {'behind': True}),
+             ('generic', {'material_class':'generic','lighting':True,'indirect':True}),
+             ('generic-fixed', {'material_class':'generic','lighting':True,'indirect':True,'fixed':True}),
+             ('generic-msaa', {'material_class':'generic','lighting':True,'indirect':True,'anti_aliasing':4}),
+             ('emissive-msaa', {'lighting':True,'indirect':True,'anti_aliasing':4})]
     for name, options in cases:
         actual = linear(capture(name, **options))
         coverage = options.get('alpha', 1) * options.get('opacity', 1)
