@@ -67,6 +67,10 @@ Debug 和 Release 的输出均逐级匹配十二份数据。
 压缩输出及稀疏差异已进入 Git。
 重放原版和重建内核时，仍需本机原始 RDC。
 角色的服饰及薄透明抗锯齿按既有门槛继续实施。
+隐藏平台的运动列表已与颜色可见性同步。
+双配置及实际附件见[可见性验收](../acceptance/nr/motion-visible-surfaces.md)。
+服饰和薄透明画质保持失败状态，继续处理轮廓与细节。
+当前实验目录为 `build/runs/20261029-060530-temporal-cloth-edge-74920a`。
 事件与程序指纹见[GPU 热点](../acceptance/nr/reflection-pass-profile.md)。
 诊断捕获位于 `build/runs/20261029-044333-reflection-pass-profile-087370`。
 该捕获约 1.48 GiB，缓存清理后保留原始证据。

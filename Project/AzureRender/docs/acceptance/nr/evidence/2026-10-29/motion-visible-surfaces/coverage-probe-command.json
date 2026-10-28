@@ -1,0 +1,23 @@
+[
+  "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+  "--project",
+  "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261029-060530-temporal-cloth-edge-74920a\\green-cloth-debug\\candidate\\test.azureproject",
+  "--width",
+  "128",
+  "--height",
+  "128",
+  "--capture-dir",
+  "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261029-060530-temporal-cloth-edge-74920a\\coverage-probe\\frames",
+  "--capture-frames",
+  "160",
+  "--capture-fps",
+  "60",
+  "--fixed-frame-step",
+  "--qa-animation",
+  "--qa-camera",
+  "scene",
+  "--qa-light",
+  "scene",
+  "--qa-isolation",
+  "albedo"
+]

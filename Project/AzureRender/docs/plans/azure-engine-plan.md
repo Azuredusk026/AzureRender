@@ -149,6 +149,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 原版四点搜索、足迹系数及精度待项见[射线来源](../acceptance/nr/native-ray-source.md)。
 主宿主共享运动目标及双配置验证见[共享验收](../acceptance/nr/shared-motion.md)。
 KK 动态边缘的双配置门槛见[运动边缘验证](../acceptance/nr/temporal-motion-edges.md)。
+平台开关与运动附件的实际对应见[可见性验证](../acceptance/nr/motion-visible-surfaces.md)。
 原版层级射线及动态时间历史继续验收。
 
 中庭原生方向场已覆盖后方的已知照明缺口。

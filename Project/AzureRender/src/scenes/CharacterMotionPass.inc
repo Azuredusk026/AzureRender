@@ -90,6 +90,7 @@ void CharacterSceneRenderer::prepareMotion(){
         const auto materialBase=key==0?0:additionalResources_[key-1]->globalMaterialBase;
         for(std::size_t primitiveIndex=0;primitiveIndex<mesh.primitives.size();++primitiveIndex){
             const auto& primitive=mesh.primitives[primitiveIndex];const auto& m=mesh.materials.at(primitive.materialIndex);
+            if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
             const bool reactive=m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay;
             const bool shell=stage==1;
             if(shell){if(reactive||m.showcasePlatform>.5F||!((m.materialFeatures&MaterialFeatureSilhouetteOutline)!=0
@@ -111,7 +112,7 @@ void CharacterSceneRenderer::prepareMotion(){
                 if(temporal){push.detail[2]=2*samplingJitter_[0]/temporal->current.width;push.detail[3]=2*samplingJitter_[1]/temporal->current.height;}
                 push.outline={view.outlinePixels,float(temporal?temporal->current.width:1),float(temporal?temporal->current.height:1),run.opacity};
                 motionDraws_.push_back(draw);
-                if(stage==0&&!(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled))reflectionMotionDraws_.push_back(draw);
+                if(stage==0)reflectionMotionDraws_.push_back(draw);
             });
         }
     }

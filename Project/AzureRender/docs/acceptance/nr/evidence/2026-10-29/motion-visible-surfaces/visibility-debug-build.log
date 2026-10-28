@@ -1,0 +1,13 @@
+[0/2] Re-checking globbed directories...
+[1/12] cmd.exe /C "cd /D D:\Assigment\2609\FYP\Project\AzureRender\build\ninja-msvc-debug && C:\Users\23587\AppData\Local\Programs\Python\Python311\python.exe D:/Assigment/2609/FYP/Project/AzureRender/tools/generate_script_bindings.py --check"
+Script binding artifacts verified
+[2/12] Compiling temporal_resolve.frag
+[3/12] Building CXX object CMakeFiles\AzureRenderCore.dir\src\scenes\CharacterSceneRenderer.cpp.obj
+[4/12] Linking CXX static library AzureRenderCore.lib
+[5/12] Linking CXX executable AzureGeometryCompiler.exe
+[6/12] Linking CXX executable AzurePlayer.exe
+[7/12] Linking CXX executable AzureMotionVectorGpuTests.exe
+[8/12] Linking CXX executable AzureRender.exe
+[9/12] Linking CXX executable AzureSharedMotionGpuTests.exe
+[10/12] Linking CXX executable AzureTemporalViewGpuTests.exe
+[11/12] Linking CXX executable AzureRenderNullRhiPassTests.exe
