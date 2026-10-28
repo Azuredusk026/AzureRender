@@ -65,6 +65,7 @@ public:
     bool collectImageUploads=false;
     std::vector<ImageUpload> imageUploads;
     std::set<VkFormat> unavailableSampledFormats;
+    std::set<VkFormat> unavailableStorageFormats;
     std::vector<std::vector<DescriptorBindingDesc>> descriptorLayouts;
     std::vector<DescriptorPoolDesc> descriptorPools;
     std::vector<DescriptorImageWrite> descriptorImageWrites;
@@ -74,8 +75,10 @@ public:
 
     IGpuAllocator& allocator() override { return gpuAllocator_; }
     bool supportsSampledImage(VkFormat format,bool) const override {return unavailableSampledFormats.count(format)==0;}
+    bool supportsStorageImage(VkFormat format) const override {return format!=VK_FORMAT_UNDEFINED&&unavailableStorageFormats.count(format)==0;}
     VkSampleCountFlags imageSampleCounts(VkFormat format,VkImageUsageFlags usage) const override {
-        return format==VK_FORMAT_UNDEFINED||!usage||((usage&VK_IMAGE_USAGE_SAMPLED_BIT)&&unavailableSampledFormats.count(format))?0:supportedSamples;
+        return format==VK_FORMAT_UNDEFINED||!usage||((usage&VK_IMAGE_USAGE_SAMPLED_BIT)&&unavailableSampledFormats.count(format))
+            ||((usage&VK_IMAGE_USAGE_STORAGE_BIT)&&unavailableStorageFormats.count(format))?0:supportedSamples;
     }
     bool supportsSampleShading() const noexcept override {return sampleShadingSupported;}
     bool supportsExactDepthBias() const noexcept override {return exactDepthBiasSupported;}

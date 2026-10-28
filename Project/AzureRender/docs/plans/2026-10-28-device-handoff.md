@@ -1,0 +1,60 @@
+# 原生渲染开发交接
+
+日期：2026-10-28。工作分支为 `engine-dev`。
+本页记录另一台设备恢复开发所需的状态和资源。
+开发规则见仓库根目录 `AGENT.md`。
+源码定位见 [源码导航](../development/source-navigation.md)。
+完整阶段目标见 [原生还原交接](2026-10-22-native-render-restoration-handoff.md)。
+
+## 当前状态
+
+NR0 为 Active，NR1 至 NR12 为 Pending。
+完整画面 SSIM 0.95 和持续 1080p60 仍待验收。
+最近一次完整场景 GPU 测量平均 46.025 毫秒。
+该结果尚未达到 16.67 毫秒预算。
+
+公共采样器和反射空间过滤已有独立验收。
+见[采样器证据](../acceptance/nr/evidence/2026-10-28/gltf-sampler-contract.json)及[反射过滤验收](../acceptance/nr/reflection-spatial-filter.md)。
+截图记录见[阶段画面](../acceptance/nr/visual-history.md)。
+反射中间纹理用于诊断，其模糊画面不能作为最终场景。
+
+## 当前反射工作
+
+反射颜色与可信度层级资源位于 `src/render/ReflectionSignalPyramid.*`。
+其计算程序为 `shaders/reflection_signal_pyramid.comp`。
+真实帧基础载荷和逐级参考位于[层级夹具](../acceptance/nr/evidence/2026-10-28/reflection-pyramid-fixture/fixture.json)。
+原版重建的六级颜色和可信度均逐字节一致。
+Debug Vulkan 实际输出也逐级匹配这十二份数据。
+
+此代码处于交接候选，主场景尚未接入该层级资源。
+继续核验 Release、不同参数槽位、同步及完整场景性能。
+随后实现可信度解析、反射生产和时间历史。
+最终画面须使用真实遮罩与探针合成进行对照。
+
+## 环境与资源迁移
+
+仓库保存源码、测试、文档、阶段截图和上述小型载荷。
+`build/` 被 Git 忽略，其中的本机运行产物不会随克隆迁移。
+原版 3534 帧的 RDC 文件约 945 MB，位于：
+
+```text
+Project/AzureRender/build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534.rdc
+```
+
+完整场景候选和其他原始截帧也保存在本机 `build/runs/`。
+需要对这些数据执行原始重放时，应从原设备另行复制对应目录。
+原版资源与重放程序的路径由本机环境提供。
+另一台设备需安装 Vulkan SDK、Visual Studio C++ 工具链及项目依赖。
+RenderDoc 1.46 用于原版帧分析。
+
+## 恢复顺序
+
+1. 克隆仓库并切换 `engine-dev`，核对 `git status`。
+2. 阅读本页、开发总计划和反射接入计划。
+3. 按本机工具链配置构建 Debug 和 Release。
+4. 执行反射层级、空间过滤及 RHI 测试。
+5. 对照真实载荷完成反射生产接入和场景截图。
+6. 继续角色材质、眼睛、描边、抗锯齿及 NR0–NR12 验收。
+
+多 GPU 程序应串行运行，避免重放与验收相互干扰。
+阶段完成后记录测试、画面、性能及资源释放结果。

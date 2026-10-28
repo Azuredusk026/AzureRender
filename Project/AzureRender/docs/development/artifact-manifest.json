@@ -17,7 +17,7 @@
     "ninja-msvc-debug",
     "ninja-msvc-release"
   ],
-  "runRetentionDays": 14,
+  "runRetentionDays": 7,
   "preservedRuns": [
     {
       "path": "runs/20261021-172156-native-render-evidence-623c52",

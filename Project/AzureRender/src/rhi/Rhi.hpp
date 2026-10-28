@@ -366,6 +366,7 @@ public:
 
     virtual IGpuAllocator& allocator() = 0;
     virtual bool supportsSampledImage(VkFormat format,bool linearFilter) const = 0;
+    virtual bool supportsStorageImage(VkFormat) const {return false;}
 
     // One-shot upload helpers. Each submits and waits internally; call only
     // during load, never per frame.

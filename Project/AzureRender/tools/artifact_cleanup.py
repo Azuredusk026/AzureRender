@@ -12,6 +12,7 @@ import uuid
 
 ENGINE = Path(__file__).resolve().parents[1]
 BUILD = ENGINE / "build"
+RETENTION_DAYS = 7
 
 def is_link(path):
     return path.is_symlink() or bool(getattr(path.lstat(), "st_file_attributes", 0) & 1024)
@@ -99,7 +100,7 @@ def main():
     tracked = { (repo / p).resolve() for p in subprocess.check_output(
         ["git", "ls-files", "-z"], cwd=repo).decode("utf-8").split("\0") if p }
     now = time.time()
-    paths = [p for p in runs.iterdir() if eligible(p, 14, now)]
+    paths = [p for p in runs.iterdir() if eligible(p, RETENTION_DAYS, now)]
     if args.legacy_list:
         for name in json.loads(args.legacy_list.read_text(encoding="utf-8")):
             if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", name):
@@ -115,7 +116,7 @@ def main():
     for path in paths:
         try:
             size, newest = remove_artifact(BUILD, path, tracked)
-            if path.parent == runs and now - newest < 14 * 86400:
+            if path.parent == runs and now - newest < RETENTION_DAYS * 86400:
                 continue
             if (path / ".keep").exists():
                 continue

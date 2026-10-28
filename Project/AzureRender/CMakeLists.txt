@@ -311,6 +311,8 @@ compile_shader("${SHADER_SOURCE_DIR}/irradiance_clipmap_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/octahedral_environment_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/reflection_probe_field_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/reflection_spatial_filter.comp")
+compile_shader("${SHADER_SOURCE_DIR}/reflection_signal_pyramid.comp" DEFINES AZURE_REFLECTION_PACKED=1 OUTPUT_NAME reflection_signal_pyramid_packed.comp)
+compile_shader("${SHADER_SOURCE_DIR}/reflection_signal_pyramid.comp" OUTPUT_NAME reflection_signal_pyramid_float.comp)
 compile_shader("${SHADER_SOURCE_DIR}/depth_bias_test.frag")
 compile_shader("${SHADER_SOURCE_DIR}/scene_instance_layout_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/color_grading_lut_test.comp")
@@ -528,6 +530,7 @@ add_library(AzureRenderCore STATIC
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
     src/render/ReflectionSpatialFilter.cpp
+    src/render/ReflectionSignalPyramid.cpp
     src/assets/GeneratorRegistry.cpp
     src/assets/PrimitiveGenerator.cpp
     src/assets/primitives/RoundPrimitives.cpp
@@ -2561,6 +2564,14 @@ if(BUILD_TESTING)
     add_executable(AzureReflectionSpatialFilterTests tests/ReflectionSpatialFilterTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureReflectionSpatialFilterTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ReflectionSpatialFilter COMMAND AzureReflectionSpatialFilterTests)
+    add_executable(AzureReflectionSignalPyramidTests tests/ReflectionSignalPyramidTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureReflectionSignalPyramidTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ReflectionSignalPyramid COMMAND AzureReflectionSignalPyramidTests)
+    add_executable(AzureReflectionSignalPyramidGpuTests tests/ReflectionSignalPyramidGpuTests.cpp)
+    target_link_libraries(AzureReflectionSignalPyramidGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureReflectionSignalPyramidGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ReflectionSignalPyramidGpu COMMAND AzureReflectionSignalPyramidGpuTests "${SHADER_BINARY_DIR}/reflection_signal_pyramid_packed.comp.spv" "${SHADER_BINARY_DIR}/reflection_signal_pyramid_float.comp.spv")
+    set_tests_properties(AzureRender.ReflectionSignalPyramidGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureReflectionSpatialFilterGpuTests tests/ReflectionSpatialFilterGpuTests.cpp)
     target_link_libraries(AzureReflectionSpatialFilterGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureReflectionSpatialFilterGpuTests AzureRenderShaders)

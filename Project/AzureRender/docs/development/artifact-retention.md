@@ -12,7 +12,7 @@
 | 主发布构建 | `build/ninja-msvc-release` | 持续复用 |
 | 当前交付 | `build/ux-2026-10-14/Engine` | 保留可用安装 |
 | 重大交付留档 | `build/p8-final-2026-10-14` | 人工确认后才删除 |
-| 新任务临时产物 | `build/runs/` | 结束且停止写入 14 天后清理 |
+| 新任务临时产物 | `build/runs/` | 结束且停止写入 7 天后清理 |
 | 后续重大版本 | `build/archives/<版本号>-<提交短码>/` | 明确里程碑后留档 |
 | 清理结果 | `build/maintenance/cleanup-latest.json` | 覆盖保存最近一次结果 |
 | 正式证据 | `docs/acceptance/` | 由 Git 管理 |
@@ -99,6 +99,7 @@ python tools/artifact_cleanup.py --apply
 详细目录与字节数见 [清理清单](cleanup-2026-10-14.json)。
 
 保留清单见 [交付与构建登记](artifact-manifest.json)。
+2026 年 10 月 26 日的任务、缓存与文档处理见[清理记录](cleanup-2026-10-26.json)。
 截图保留视频、命名图片和每组首、中、末帧。
 当前引擎入口指纹与清理前一致。
 主构建目录及其依赖已核对存在。

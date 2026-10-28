@@ -54,6 +54,8 @@ nav:
   - 后续开发路线: plans/2026-10-11-next-development.md
   - 编辑器体验与通用能力计划: plans/2026-10-14-editor-generalization.md
   - 协作与验收: development-workflow.md
+  - 源码导航与检索: development/source-navigation.md
+  - 仓库结构与检索优化: plans/2026-10-26-repository-structure-and-retrieval.md
   - 二维内容: runtime/scene-2d.md
   - 扩展格式范围: assets/extended-formats.md
   - P9 内容扩展集成: acceptance/p9/2026-10-12.md

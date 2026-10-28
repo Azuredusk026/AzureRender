@@ -107,6 +107,11 @@ bool VulkanRhi::supportsSampledImage(VkFormat format,bool linearFilter) const {
     const VkFormatFeatureFlags required=VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT|VK_FORMAT_FEATURE_TRANSFER_DST_BIT|(linearFilter?VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT:0);
     return (properties.optimalTilingFeatures&required)==required;
 }
+bool VulkanRhi::supportsStorageImage(VkFormat format) const {
+    if(format==VK_FORMAT_UNDEFINED)return false;
+    VkFormatProperties properties{};vkGetPhysicalDeviceFormatProperties(physicalDevice_,format,&properties);
+    return (properties.optimalTilingFeatures&VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT)!=0;
+}
 VkSampleCountFlags VulkanRhi::imageSampleCounts(VkFormat format,VkImageUsageFlags usage) const {
     if(format==VK_FORMAT_UNDEFINED||!usage)return 0;
     VkImageFormatProperties properties{};

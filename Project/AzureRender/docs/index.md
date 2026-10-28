@@ -42,6 +42,9 @@ AzureRender 提供 Windows 编辑器、原生 Vulkan 渲染核心与独立 Playe
 
 ## 参与开发
 
+代码定位见[源码导航](development/source-navigation.md)。
+目录规模与后续工具见[结构与检索优化计划](plans/2026-10-26-repository-structure-and-retrieval.md)。
+
 模块职责见[引擎基础](runtime/engine-foundation.md)和[渲染器架构](architecture.md)。生产操作见[编辑服务](runtime/edit-operations.md)，命令入口见[开发命令参考](reference/developer-cli.md)。具体后续任务见[后续开发路线](plans/2026-10-11-next-development.md)。
 
 ## 查询验收依据

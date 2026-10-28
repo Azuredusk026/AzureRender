@@ -1,6 +1,7 @@
 #include "render/ReflectionSpatialFilter.hpp"
 #include "resources/BinaryFile.hpp"
 #include "support/VulkanComputeFixture.hpp"
+#include "support/ComputeTexture.hpp"
 #include <nlohmann/json.hpp>
 #include <filesystem>
 #include <fstream>
@@ -15,35 +16,7 @@ std::vector<float> floats(const std::filesystem::path& path){
     std::vector<float> values(bytes.size()/4);std::memcpy(values.data(),bytes.data(),bytes.size());
     for(float value:values)require(std::isfinite(value),"Nonfinite fixture input");return values;
 }
-class Texture {
-public:
-    rhi::IRhi& backend;rhi::GpuImage image{};VkImageView view{};
-    Texture(rhi::IRhi& r,unsigned width,unsigned height,unsigned levels,unsigned channels,VkFormat format,const std::vector<float>& values):backend(r){
-        initialize(width,height,levels,channels*4,format,values.data(),values.size()*4);
-    }
-    Texture(rhi::IRhi& r,unsigned width,unsigned height,unsigned levels,VkFormat format,const std::vector<char>& values):backend(r){
-        initialize(width,height,levels,4,format,values.data(),values.size());
-    }
-    ~Texture(){release();}
-    Texture(const Texture&)=delete;Texture& operator=(const Texture&)=delete;
-private:
-    void initialize(unsigned width,unsigned height,unsigned levels,unsigned texelBytes,VkFormat format,const void* data,std::size_t bytes){
-        std::size_t expected=0;for(unsigned mip=0;mip<levels;++mip)expected+=std::size_t(std::max(1U,width>>mip))*std::max(1U,height>>mip)*texelBytes;
-        require(bytes==expected,"Fixture mip storage must match its dimensions");rhi::GpuBuffer staging{};
-        try{
-            staging=backend.allocator().createBuffer(bytes,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true);
-            std::memcpy(staging.mapped,data,bytes);backend.allocator().flush(staging,0,staging.size);
-            image=backend.allocator().createImage2D(width,height,format,VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_SAMPLED_BIT,levels);
-            backend.transitionImageLayout(image,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,levels);
-            backend.copyBufferToImage(staging,image,width,height,levels,texelBytes);
-            backend.executeOneShot([&](rhi::ICommandRecorder& commands){commands.imageBarrier({image.image,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,levels,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});});
-            backend.allocator().destroyBuffer(staging);view=backend.createImageView(image.image,format,VK_IMAGE_ASPECT_COLOR_BIT,levels);
-        }catch(...){backend.allocator().destroyBuffer(staging);release();throw;}
-    }
-    void release(){if(view)backend.destroyImageView(view);view=VK_NULL_HANDLE;backend.allocator().destroyImage(image);}
-};
+using Texture=test::ComputeTexture;
 void copyOutput(rhi::ICommandRecorder& commands,const ReflectionFilterOutput& target,const rhi::GpuBuffer& buffer){
     commands.imageBarrier({target.image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,
         VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});

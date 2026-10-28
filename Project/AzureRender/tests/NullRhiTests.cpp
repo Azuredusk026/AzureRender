@@ -37,6 +37,15 @@ std::size_t countCalls(
 
 int main() {
     {
+        NullRhi backend;
+        assert(backend.supportsStorageImage(VK_FORMAT_R32_SFLOAT));
+        assert(backend.supportsStorageImage(VK_FORMAT_B10G11R11_UFLOAT_PACK32));
+        backend.unavailableStorageFormats.insert(VK_FORMAT_B10G11R11_UFLOAT_PACK32);
+        assert(!backend.supportsStorageImage(VK_FORMAT_B10G11R11_UFLOAT_PACK32));
+        assert(backend.supportsSampledImage(VK_FORMAT_B10G11R11_UFLOAT_PACK32,true));
+        assert(!backend.supportsStorageImage(VK_FORMAT_UNDEFINED));
+    }
+    {
         using namespace azurerender::rhi;
         NullRhi backend;GraphicsPipelineDesc desc;
         desc.vertexBindings={{0,12,VK_VERTEX_INPUT_RATE_VERTEX},{1,0,VK_VERTEX_INPUT_RATE_VERTEX}};
