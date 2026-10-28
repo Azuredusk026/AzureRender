@@ -632,6 +632,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/analytic-fog.json",
       "primaryProject": "build/runs/20261028-092102-native-transparent-submission-order-f583ea/full-candidate/enclosure-late-glyph.azureproject"
+    },
+    {
+      "path": "runs/20261028-115139-native-scene-fog-composition-c2726a",
+      "pathBase": "build",
+      "purpose": "场景解析雾、真实远端片元和双配置表面合成验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/scene-fog.json",
+      "primaryProject": "build/runs/20261028-115139-native-scene-fog-composition-c2726a/full-candidate/enclosure-composed-fog.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

@@ -40,6 +40,8 @@ Lit 法线阈值与实际材质见[解码验收](../acceptance/nr/lit-normal-dec
 逐采样深度、覆盖率与双配置回归见[轮廓验收](../acceptance/nr/view-fog-multisample.md)。
 普通无光照表面、附件一致性及 GPU 成本见[预算验收](../acceptance/nr/unlit-opaque-budget.md)。
 光谱大气、远端片元与公共数值见[解析雾验收](../acceptance/nr/analytic-fog.md)。
+场景支持[解析雾配置](../runtime/scene-fog.md)及独立解析介质。
+双配置、真实片元与完整候选见[合成验收](../acceptance/nr/scene-fog.md)。
 来源清单与有效候选保留完整输入摘要。
 范围见[角色技术清单](2026-10-22-character-technique-closure.md)。
 本轮接入审计见[架构与能力审计](2026-10-22-render-capability-integration-audit.md)。

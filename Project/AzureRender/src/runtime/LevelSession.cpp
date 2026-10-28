@@ -1,11 +1,14 @@
 #include "runtime/LevelSession.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "assets/GltfLoader.hpp"
+#include "render/ViewFogBindingJson.hpp"
+#include <nlohmann/json.hpp>
 #include <set>
 namespace azurerender {
 namespace {
 void assignLegacyResourceKey(Level& level,const AssetDatabase& assets){
     if(!level.resourceKey.empty())return;
+    if(level.scene.viewFog.analytic)level.resourceKey+="fogAnalytic:"+nlohmann::json(level.scene.viewFog).dump();
     for(const auto& resource:level.scene.resources){
         level.resourceKey+=resource.path.lexically_normal().generic_u8string()+":";
         for(const auto& record:assets.records())if(record.second.path==resource.path)level.resourceKey+=std::to_string(record.second.fingerprint);

@@ -1,5 +1,6 @@
 #include "render/ViewFogGpu.hpp"
 #include "render/FogVolumeGpu.hpp"
+#include "render/CameraProjection.hpp"
 #include <cstring>
 #include <stdexcept>
 #include <vector>
@@ -36,6 +37,22 @@ FogViewMatch ViewFogGpu::updateFrame(unsigned frame,const CameraViewDescriptor& 
     PackedViewFogFrame packed{};const auto projection=state_->binding.projection.pack();
     for(unsigned row=0;row<3;++row)packed.rows[row]=projection.rows[row];
     packed.rows[3]={float(viewport[0]),float(viewport[1]),match==FogViewMatch::Matched?1.F:0.F,0};
+    if(state_->binding.analytic){
+        const auto& analytic=*state_->binding.analytic;const float aspect=float(viewport[0])/viewport[1];validateCameraView(camera,aspect);
+        const auto forward=internal::normalize(internal::subtract(camera.target,camera.position));
+        const auto right=internal::normalize(internal::cross(forward,camera.up)),up=internal::cross(right,forward);
+        const bool ortho=camera.projection==CameraProjectionKind::Orthographic;
+        const float halfHeight=ortho?camera.orthoHeight*.5F:std::tan(camera.fov*.5F);
+        packed.rows[3][3]=1;packed.rows[4]={camera.position[0],camera.position[1],camera.position[2],ortho?1.F:0.F};
+        for(unsigned i=0;i<3;++i){packed.rows[5][i]=forward[i];packed.rows[6][i]=right[i]*halfHeight*aspect;packed.rows[7][i]=up[i]*halfHeight;}
+        packed.rows[8]={camera.projectionOffsetX,camera.projectionOffsetY,0,0};
+        if(analytic.height){
+            const auto& height=*analytic.height;packed.rows[8][2]=height.startViewDepth;packed.rows[8][3]=static_cast<float>(height.layers.size());
+            for(unsigned i=0;i<height.layers.size();++i){const auto& layer=height.layers[i];packed.rows[9+2*i]={layer.density,layer.heightFalloff,layer.referenceHeight,0};packed.rows[10+2*i]={layer.scatteringColor[0],layer.scatteringColor[1],layer.scatteringColor[2],0};}
+            packed.rows[13][0]=height.minimumTransmittance;packed.rows[14]=height.transmittanceBias;
+        }
+        if(analytic.aerial){packed.rows[13][1]=1;const auto p=analytic.aerial->pack();for(unsigned i=0;i<6;++i)packed.rows[15+i]=p.rows[i];}
+    }
     std::memcpy(buffer.mapped,&packed,sizeof(packed));state_->backend.allocator().flush(buffer,0,sizeof(packed));
     return match;
 }

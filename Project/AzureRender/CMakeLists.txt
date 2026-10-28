@@ -189,7 +189,7 @@ function(compile_shader source_file)
     set(shader_lut_dependency)
     get_filename_component(shader_source_base "${source_file}" NAME)
     if(shader_source_base STREQUAL "view_fog_surface.frag" OR "AZURE_VIEW_FOG=1" IN_LIST SHADER_DEFINES)
-        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/view_fog.glsl" "${SHADER_SOURCE_DIR}/view_fog_material.glsl" "${SHADER_SOURCE_DIR}/fog_transport.glsl" "${SHADER_SOURCE_DIR}/fog_view_projection.glsl")
+        list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/view_fog.glsl" "${SHADER_SOURCE_DIR}/view_fog_material.glsl" "${SHADER_SOURCE_DIR}/fog_transport.glsl" "${SHADER_SOURCE_DIR}/fog_view_projection.glsl" "${SHADER_SOURCE_DIR}/fog_analytic.glsl")
     endif()
     if(shader_source_base STREQUAL "mesh.frag")
         list(APPEND shader_lut_dependency "${SHADER_SOURCE_DIR}/unlit_surface_sample.glsl" "${SHADER_SOURCE_DIR}/unlit_opaque.glsl")
@@ -568,6 +568,7 @@ add_library(AzureRenderCore STATIC
     src/render/EnvironmentAsset.cpp
     src/render/FogTransport.cpp
     src/render/AerialFog.cpp
+    src/render/AnalyticFog.cpp
     src/render/FogVolumeData.cpp
     src/render/FogViewProjection.cpp
     src/render/ViewFogBinding.cpp
@@ -1504,6 +1505,10 @@ if(BUILD_TESTING)
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_view_fog_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.ViewFogGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.SceneFogGpu COMMAND "${Python3_EXECUTABLE}"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_scene_fog_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.SceneFogGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.ViewFogMultisampleGpu COMMAND "${Python3_EXECUTABLE}"
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_view_fog_msaa_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

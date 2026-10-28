@@ -1,3 +1,9 @@
+namespace {
+FogVolumeData sceneFogVolume(const ViewFogBinding& binding){
+    if(!binding.asset.empty())return FogVolumeData::load(std::filesystem::u8path(binding.asset));
+    FogVolumeData identity;identity.dimensions={1,1,1};identity.rgba16f={0,0,0,0x3c00};return identity;
+}
+}
 // Optional view-fog state has the same retirement boundary as the scene renderer.
 struct CharacterSceneRenderer::ViewFogState {
     rhi::IRhi& backend;
@@ -6,7 +12,7 @@ struct CharacterSceneRenderer::ViewFogState {
     std::array<VkPipeline,2> surface{};
     std::array<std::array<std::array<VkPipeline,4>,2>,2> materials{};
     ViewFogState(rhi::IRhi& rhi,const ViewFogBinding& binding,unsigned frames)
-        :backend(rhi),gpu(rhi,binding,FogVolumeData::load(std::filesystem::u8path(binding.asset)),frames){}
+        :backend(rhi),gpu(rhi,binding,sceneFogVolume(binding),frames){}
     ~ViewFogState(){releasePipelines();}
     void releasePipelines() noexcept {
         for(auto& pipeline:surface){if(pipeline)backend.destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;}

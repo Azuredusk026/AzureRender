@@ -17,12 +17,15 @@ std::array<Vector,2> basis(const CameraViewDescriptor& view){
 }
 }
 void ViewFogBinding::validate() const {
-    projection.validate();if(enabled&&(asset.empty()||!captureView))throw std::invalid_argument("Enabled view fog requires a volume and captured view");
+    projection.validate();if(analytic)analytic->validate();
+    if(enabled&&asset.empty()&&!analytic)throw std::invalid_argument("Enabled fog requires a volume or analytic medium");
+    if(enabled&&!asset.empty()&&!captureView)throw std::invalid_argument("A captured fog volume requires its source view");
     if(captureView)(void)basis(*captureView);
 }
 FogViewMatch ViewFogBinding::match(const CameraViewDescriptor& current,float aspect) const {
     validate();if(!enabled)return FogViewMatch::Disabled;
     if(!std::isfinite(aspect)||aspect<=0)throw std::invalid_argument("Fog view aspect must be finite and positive");
+    if(asset.empty()){(void)basis(current);return FogViewMatch::AnalyticOnly;}
     const auto a=basis(*captureView),b=basis(current);const auto& reference=*captureView;
     if(current.projection!=reference.projection)return FogViewMatch::CameraMismatch;
     for(unsigned i=0;i<3;++i)if(std::abs(double(current.position[i])-reference.position[i])>1e-4||std::abs(a[0][i]-b[0][i])>1e-5||std::abs(a[1][i]-b[1][i])>1e-5)return FogViewMatch::CameraMismatch;
@@ -33,7 +36,7 @@ FogViewMatch ViewFogBinding::match(const CameraViewDescriptor& current,float asp
     return std::abs(aspect-expected)>1e-5*std::max(1.,expected)?FogViewMatch::AspectMismatch:FogViewMatch::Matched;
 }
 std::string_view fogViewMatchName(FogViewMatch state) noexcept {
-    switch(state){case FogViewMatch::Disabled:return "disabled";case FogViewMatch::Matched:return "matched";case FogViewMatch::CameraMismatch:return "camera-mismatch";case FogViewMatch::AspectMismatch:return "aspect-mismatch";}
+    switch(state){case FogViewMatch::Disabled:return "disabled";case FogViewMatch::Matched:return "matched";case FogViewMatch::CameraMismatch:return "camera-mismatch";case FogViewMatch::AspectMismatch:return "aspect-mismatch";case FogViewMatch::AnalyticOnly:return "analytic-only";}
     return "unknown";
 }
 }

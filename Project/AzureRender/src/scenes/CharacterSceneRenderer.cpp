@@ -1591,6 +1591,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"cameraUniformBytes\": " << sizeof(UniformBufferObject) << ",\n"
          << "  \"unlitFrameLayoutVersion\": 1,\n"
          << "  \"viewFogEnabled\": " << (viewFog_?"true":"false") << ",\n"
+         << "  \"viewFogAnalyticEnabled\": " << (viewFog_&&scene_.viewFog.analytic?"true":"false") << ",\n"
+         << "  \"viewFogFrameBytes\": " << sizeof(PackedViewFogFrame) << ",\n"
          << "  \"viewFogMatch\": \"" << fogViewMatchName(viewFog_?viewFog_->match:FogViewMatch::Disabled) << "\",\n"
          << "  \"viewFogFrameLayoutVersion\": " << PackedViewFogFrame::layoutVersion << ",\n"
          << "  \"objectShadowLayoutVersion\": " << ObjectShadowGpuHeader::kLayoutVersion << ",\n"

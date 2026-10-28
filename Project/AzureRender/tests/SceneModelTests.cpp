@@ -181,6 +181,15 @@ int main() {
         document.lights[0].shape.influenceBox.worldToBox[0]={0,.5F,0,-.5F};
         document.lights[0].shape.influenceBox.worldToBox[1]={-1,0,0,0};
         document.save(scenePath);
+        auto analyticDocument=document;analyticDocument.viewFog.asset.clear();analyticDocument.viewFog.captureView.reset();
+        analyticDocument.viewFog.analytic=azurerender::AnalyticFogSettings{};
+        analyticDocument.viewFog.analytic->aerial=azurerender::ExponentialAerialFog{};
+        analyticDocument.viewFog.analytic->aerial->density=.1F;
+        analyticDocument.save(directory/"analytic-fog.azscene");
+        const auto analyticReloaded=azurerender::SceneDocument::load(directory/"analytic-fog.azscene");
+        assert(analyticReloaded.viewFog.asset.empty()&&analyticReloaded.viewFog.analytic);
+        assert(analyticReloaded.viewFog.analytic->aerial->density==.1F);
+
         auto queryDocument=document;
         queryDocument.irradianceVolume.sampling.pixelOrigin=azurerender::IrradianceQueryParameters::PixelOrigin::BottomLeft;
         queryDocument.irradianceVolume.sampling.jitterSpace=azurerender::IrradianceQueryParameters::JitterSpace::Field;

@@ -43,6 +43,8 @@
 逐采样深度、覆盖率与双配置回归见[轮廓验收](../acceptance/nr/view-fog-multisample.md)。
 普通无光照表面、附件一致性及 GPU 成本见[预算验收](../acceptance/nr/unlit-opaque-budget.md)。
 光谱大气、远端片元与公共数值见[解析雾验收](../acceptance/nr/analytic-fog.md)。
+场景支持[解析雾配置](../runtime/scene-fog.md)及独立解析介质。
+双配置、真实片元与完整候选见[合成验收](../acceptance/nr/scene-fog.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。

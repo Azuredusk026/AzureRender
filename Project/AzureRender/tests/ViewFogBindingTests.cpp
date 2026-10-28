@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <limits>
+#include <cmath>
 using namespace azurerender;
 namespace {
 unsigned checks=0;
@@ -38,5 +39,24 @@ int main()try{
  }
  auto destination=binding;malformed=encoded;malformed["asset"]="changed";malformed["projection"]["extent"]={0,1440};
  reject([&]{from_json(malformed,destination);});check(destination.asset==binding.asset,"Rejected decode leaves target binding unchanged");
+ ViewFogBinding analytic;analytic.enabled=true;analytic.analytic=AnalyticFogSettings{};
+ analytic.analytic->aerial=ExponentialAerialFog{};analytic.analytic->aerial->density=.1F;
+ const nlohmann::json analyticJson=analytic;check(analyticJson["schemaVersion"]==2,"Analytic parameters use binding version two");
+ const auto analyticRestored=analyticJson.get<ViewFogBinding>();
+ check(analyticRestored.asset.empty()&&!analyticRestored.captureView,"Analytic-only fog owns no captured resource");
+ check(analyticRestored.match(moved,1)==FogViewMatch::AnalyticOnly,"World-space atmosphere accepts the current camera");
+ auto combined=binding;combined.analytic=analytic.analytic;check(combined.match(moved,1)==FogViewMatch::CameraMismatch,"Volume validity remains independently observable");
+ auto v2=analyticJson;v2["schemaVersion"]=3;reject([&]{(void)v2.get<ViewFogBinding>();});
+ v2=analyticJson;v2["schemaVersion"]=std::uint64_t{4294967298ULL};reject([&]{(void)v2.get<ViewFogBinding>();});
+ v2=analyticJson;v2["analytic"]["aerial"]["density"]=-1;reject([&]{(void)v2.get<ViewFogBinding>();});
+ v2=analyticJson;v2["analytic"]["extra"]=true;reject([&]{(void)v2.get<ViewFogBinding>();});
+ v2=analyticJson;v2.erase("analytic");reject([&]{(void)v2.get<ViewFogBinding>();});
+ AnalyticFogSettings heightOnly;heightOnly.height=LayeredHeightFog{};
+ heightOnly.height->layers.push_back({std::log(2.F)/5,0,0,{.2F,.4F,.6F}});
+ heightOnly.height->startViewDepth=2;heightOnly.height->minimumTransmittance=.6F;heightOnly.height->transmittanceBias={.1F,0,0,0};
+ const auto transport=evaluateAnalyticFog(heightOnly,{0,0,0},{0,0,-7},{0,0,-1});
+ check(std::abs(transport.transmittance[0]-.7F)<2e-6F&&std::abs(transport.scattering[2]-.18F)<2e-6F,"Height opacity control preserves source radiance");
+ analytic.analytic=heightOnly;const auto heightJson=nlohmann::json(analytic);check(heightJson.get<ViewFogBinding>().analytic->height->layers.size()==1,"Height controls roundtrip through the same binding");
+ v2=heightJson;v2["analytic"]["height"]["layers"].push_back(v2["analytic"]["height"]["layers"][0]);v2["analytic"]["height"]["layers"].push_back(v2["analytic"]["height"]["layers"][0]);reject([&]{(void)v2.get<ViewFogBinding>();});
  std::cout<<"View fog binding checks: "<<checks<<'\n';return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

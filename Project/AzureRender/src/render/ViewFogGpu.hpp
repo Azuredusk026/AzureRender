@@ -6,10 +6,10 @@
 namespace azurerender {
 struct FogVolumeData;
 struct alignas(16) PackedViewFogFrame {
-    static constexpr unsigned layoutVersion=1;
-    std::array<std::array<float,4>,4> rows{};
+    static constexpr unsigned layoutVersion=2;
+    std::array<std::array<float,4>,21> rows{};
 };
-static_assert(sizeof(PackedViewFogFrame)==64&&alignof(PackedViewFogFrame)==16);
+static_assert(sizeof(PackedViewFogFrame)==336&&alignof(PackedViewFogFrame)==16);
 static_assert(std::is_standard_layout_v<PackedViewFogFrame>);
 // Backend outlives this owner; retire submitted frame use before destruction.
 class ViewFogGpu final {
