@@ -123,7 +123,74 @@
         "sceneLighting": true,
         "skyIntensity": 0
       },
-      "contentState": "diagnostic-candidate"
+      "contentState": "diagnostic-candidate",
+      "inputCapture": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/own-hdr/capture_frame2.rdc",
+      "inputCaptureSha256": "6f9329ee55371e40e8f4989eaa13059d3265c41afc3e6fdf612a2240234505b1",
+      "sourceSamplingSnapshot": [
+        {
+          "file": "12178.dds.azmeta",
+          "settings": {
+            "schemaVersion": 1,
+            "id": "953f7e4b-0ab6-e1ac-e91a-1211dfb5f00d",
+            "settings": {
+              "texture": {
+                "mipBias": -1.0,
+                "anisotropy": 1,
+                "mipFilter": "nearest"
+              }
+            },
+            "dependencies": []
+          }
+        },
+        {
+          "file": "12182.dds.azmeta",
+          "settings": {
+            "schemaVersion": 1,
+            "id": "7bbead77-15ae-bf69-b534-c31215227bc4",
+            "settings": {
+              "texture": {
+                "mipBias": -1.0,
+                "anisotropy": 1,
+                "mipFilter": "nearest"
+              }
+            },
+            "dependencies": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "nr7-l4m-opaque-rings",
+      "title": "物流彩色环带接入",
+      "phase": "NR7-L4M",
+      "commit": "59510a5",
+      "status": "静态分项通过，动态与反射门禁待验",
+      "source": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/main-opaque-rings-release/frames/frame_000000.png",
+      "project": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/full-candidate/enclosure-opaque-rings.azureproject",
+      "evidence": "docs/acceptance/nr/opaque-logistics-rings.md",
+      "scope": "完整主场景",
+      "image": "docs/acceptance/nr/visual-history/2026-10-28-nr7-l4m-opaque-rings-59510a5.png",
+      "sha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728",
+      "rgbSha256": "e6e8da46797f0f153c8d5610c575db9f7a53fe2e763c626b428356718130f5bb",
+      "bytes": 5726367,
+      "width": 2560,
+      "height": 1440,
+      "configuration": "Release",
+      "descriptor": "indexed",
+      "camera": "3534 捕获机位",
+      "sourceCommitFull": "59510a5838c8ecd676d7f9e59de2428b51653f34",
+      "recordedDate": "2026-10-28",
+      "sourceProjectSha256": "80732389e5e1283eb1344815a6233dd67376324fa9fc9093ad634c991766d6a8",
+      "sourceScene": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/full-candidate/native-gi/enclosure-opaque-rings.azurelevel",
+      "sourceSceneSha256": "def6f52a0bccc9aca7aa270d5787b584a8b8b6e29cee39f487297ac135e4e14e",
+      "captureManifest": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/main-opaque-rings-release/frames/capture_manifest.json",
+      "captureManifestSha256": "e6a142a10d086be5a17b925526c8cbc1323d8f45153ec780ec2fde35dce9464a",
+      "contentState": "accepted-static-component",
+      "notes": [
+        "真实环带实例和纹理进入完整主场景。",
+        "完整场景平均字节误差为 13.058428。",
+        "动态滚动、反射等价与持续性能继续验收。"
+      ]
     }
   ],
   "userAttachment": {

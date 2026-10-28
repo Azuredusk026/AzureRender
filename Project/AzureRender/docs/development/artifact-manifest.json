@@ -641,6 +641,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/scene-fog.json",
       "primaryProject": "build/runs/20261028-115139-native-scene-fog-composition-c2726a/full-candidate/enclosure-composed-fog.azureproject"
+    },
+    {
+      "path": "runs/20261028-125459-native-logistics-visible-ring-trace-06c55d",
+      "pathBase": "build",
+      "purpose": "物流彩色环带源实例、硬件采样、完整场景及阶段画面验证。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/opaque-logistics-rings.json",
+      "primaryProject": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/full-candidate/enclosure-opaque-rings.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

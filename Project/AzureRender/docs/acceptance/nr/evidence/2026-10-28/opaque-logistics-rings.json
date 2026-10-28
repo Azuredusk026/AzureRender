@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR7-L4M",
+  "status": "static-geometry-and-emission-accepted",
+  "rendererChanged": false,
+  "rendererCommit": "59510a5",
+  "run": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d",
+  "primaryProject": "build/runs/20261028-125459-native-logistics-visible-ring-trace-06c55d/full-candidate/enclosure-opaque-rings.azureproject",
+  "source": {
+    "src/assets/GltfLoader.cpp": "ea87e1422d6947d95146fecb1c4b73f824100417bc41d7060cfcd1b8c52ec178",
+    "src/assets/TextureImportSettings.hpp": "c0b88c3e01cd1b197be260070529585fcfd47a61d9265f43a206c96991142f9b",
+    "src/assets/TextureImportSettings.cpp": "73b0169d3658022172f162da024ba0ba166dadfcdfdb1a05a3c07d43305a91dd",
+    "src/scenes/CharacterSceneRenderer.cpp": "835880f7117de3431b61115f1e6f177220b7cafa45332f2c1bc6d45052fe4dbf"
+  },
+  "artifacts": [
+    {
+      "path": "opaque-ring-inputs.json",
+      "bytes": 25581,
+      "sha256": "811b41b6b793d99a5db41fb354f05117c1e321c88a529de5e3aa3395d2eaa285"
+    },
+    {
+      "path": "native-visible-history.json",
+      "bytes": 13393,
+      "sha256": "fb2adb6dd764a29325de79397e0c0f84d750381769e0f95b2fa0b08435a8eff0"
+    },
+    {
+      "path": "native-opaque-producers.json",
+      "bytes": 164895,
+      "sha256": "da9c4b7fe78ede786978ac3ff5ed75088d846ff61cc311426f4d6c9758ef4dbb"
+    },
+    {
+      "path": "native-ring-emission-oracle.json",
+      "bytes": 3063,
+      "sha256": "8aca70ff15bbdd585e58190263fad4f40598550089ea76032cb7b5c3bc8b7dee"
+    },
+    {
+      "path": "native-ring-hardware-history.json",
+      "bytes": 56228,
+      "sha256": "be9f6b1410053ee6d318174f2200292a4c036d4114600f1c6ff011c303a0f100"
+    },
+    {
+      "path": "native-ring-oracle-comparison.json",
+      "bytes": 3065,
+      "sha256": "4a034c41a4f6dc09a02cfde2595a041907ae26d5a57882744622a2d9b2a00ccf"
+    },
+    {
+      "path": "ring-sampling-probes.json",
+      "bytes": 54989,
+      "sha256": "d057172cfa2604831ecb92a3bc24cd847fa539d5bbf112f0d03051f844979efc"
+    },
+    {
+      "path": "candidate-ring-resource-matches.json",
+      "bytes": 72,
+      "sha256": "f274e1101b32639370a2f0f3a7a8c9a990d6b4441c4069aec68c8638dceaba44"
+    },
+    {
+      "path": "ring-conversion.json",
+      "bytes": 1993,
+      "sha256": "4c99828fe00b5e3a984930a538d4cf808ce6c9906249e237a7bf88f9f98108e3"
+    },
+    {
+      "path": "emission-gpu.json",
+      "bytes": 16271,
+      "sha256": "503a1288fe71a682996ca43ab33cc70ac98bc76384d8676cd626de39f23f9d02"
+    },
+    {
+      "path": "emission-gpu-final.log",
+      "bytes": 686,
+      "sha256": "b36d070cd6d00624b4326eb035d6a2b02be3cf143ea99a8b46763b2e12e7af8e"
+    },
+    {
+      "path": "emission-nearest.log",
+      "bytes": 88,
+      "sha256": "55ab47438600944331ef1b7308bd09ff6b5b0c37cc7d3c0036e12470e80f79c8"
+    },
+    {
+      "path": "linear-mip-source-settings.json",
+      "bytes": 663,
+      "sha256": "cee6e7c7321646ef8ea316dd621d6c59fb8c18d9f5181f177bac3d3475e0d91b"
+    },
+    {
+      "path": "runtime-binary-compatibility.json",
+      "bytes": 266,
+      "sha256": "aa839e5bf19ca1ca84359fc044fa73ff29d799d7840768a2aa062ea3f9d3be5b"
+    },
+    {
+      "path": "full-main-comparison.json",
+      "bytes": 479,
+      "sha256": "1e6645d40080ae5d5cc37beb382bfffe8584621f80291853365268baf5fcb18f"
+    },
+    {
+      "path": "full-performance.json",
+      "bytes": 26278,
+      "sha256": "d29e01607f1c451dc454752becb31c2fe953d2bc30d4a5fd3678a5b41a6bc212"
+    },
+    {
+      "path": "full-performance.log",
+      "bytes": 10313,
+      "sha256": "234922fdbe72483bd91858148b9cf6856b42a5ceaa6149f92ee957c71cee039b"
+    },
+    {
+      "path": "own-hdr-capture.json",
+      "bytes": 3219,
+      "sha256": "9670a2df1d582667c75d87c9feb91c6203d2f9854d2e19eb9da2666293e71b00"
+    },
+    {
+      "path": "fragment-uv-proof2.json",
+      "bytes": 3238,
+      "sha256": "d0ead8cdca1cec4fa05226f758211c16f1fc5b496b91cc61977ab9d7816e2315"
+    },
+    {
+      "path": "lighting-component-diagnostic.json",
+      "bytes": 652,
+      "sha256": "a79c3dac4903544d97e4f45a52f0422715d4fbbf427f37602dfebc296efdd906"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/12178.dds",
+      "bytes": 44196,
+      "sha256": "9365259df2e3e9fc849c71958ef5325cb7871f31810fb56a6e856904f5bc5317"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/12178.dds.azmeta",
+      "bytes": 171,
+      "sha256": "fe27499f567d411b03aead38a3ade11243961b2e996e47875e2792a007a5cbfc"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/12182.dds",
+      "bytes": 44196,
+      "sha256": "78aceba17decf92a8cc9596a10cf396efa11689e4a4e4cc9107f6ab8dccb6d54"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/12182.dds.azmeta",
+      "bytes": 171,
+      "sha256": "cdb6717473caef87e338d4124b1a5b862b25c8ef9c9bba074495c74067814beb"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/flat-normal.png",
+      "bytes": 78,
+      "sha256": "dba5c33b7dd0d996e6a8d67efd85387f716011025fb40a8903c5f0e11619d22b"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/flat-normal.png.azmeta",
+      "bytes": 112,
+      "sha256": "979aa5fde2e69cccbc787e9ab32e01138b1f94d64ee3ff9d5fa92cc1b70d58d8"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/ring-5066-0.gltf",
+      "bytes": 11332,
+      "sha256": "c7139164dc02c3f21d617cdbba04b183dd2b61a0b3b4afb5237b86d54c556902"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/ring-5066-0.gltf.azmeta",
+      "bytes": 112,
+      "sha256": "d79faecb5c7f1e5f7fdb22272a778a15913aa9627ea6e157899c536318a8feb2"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/ring-5078-0.gltf",
+      "bytes": 11332,
+      "sha256": "6e96568c82e055574f9a8a6c8c20ad7c6e963610dfcf346d6aedce0ff9a910de"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/ring-5078-0.gltf.azmeta",
+      "bytes": 112,
+      "sha256": "e1d9bf382adee42487fdf467a8bff3965cc47189162be173c6956a23b6dc052a"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/ring-5078-1.gltf",
+      "bytes": 11333,
+      "sha256": "334e13bb5ae7e872d6bdf710de9eb5aad8748a392b621030c90489c9571f78b4"
+    },
+    {
+      "path": "full-candidate/captured-opaque-rings/ring-5078-1.gltf.azmeta",
+      "bytes": 112,
+      "sha256": "e534deab56126da2de820c71e57b2333d22b9524e5a6b06ccdbef7bb74b1df17"
+    },
+    {
+      "path": "full-candidate/enclosure-opaque-rings.azureproject",
+      "bytes": 1867,
+      "sha256": "80732389e5e1283eb1344815a6233dd67376324fa9fc9093ad634c991766d6a8"
+    },
+    {
+      "path": "full-candidate/native-gi/enclosure-opaque-rings.azurelevel",
+      "bytes": 3889075,
+      "sha256": "def6f52a0bccc9aca7aa270d5787b584a8b8b6e29cee39f487297ac135e4e14e"
+    }
+  ],
+  "nativeEvents": [
+    5066,
+    5078
+  ],
+  "instances": 3,
+  "verticesPerInstance": 114,
+  "indicesPerInstance": 336,
+  "resourceCount": 364,
+  "applicationPrograms": 199,
+  "materialProfileVersion": 17,
+  "materialBytes": 336,
+  "cameraBytes": 688,
+  "emissionMaximumLinearError": 0.003718727898412544,
+  "main": {
+    "status": "captured",
+    "meanAbsoluteByteError": 13.058427915219907,
+    "priorMeanAbsoluteByteError": 13.209241807725695,
+    "changedPixels": 30854,
+    "regions": [
+      {
+        "event": 5066,
+        "sourcePixels": 10294,
+        "priorError": 65.21630723398744,
+        "candidateError": 18.551615827990414
+      },
+      {
+        "event": 5078,
+        "sourcePixels": 5383,
+        "priorError": 28.150411790203727,
+        "candidateError": 14.276983094928479
+      }
+    ]
+  },
+  "performance": {
+    "width": 1920,
+    "height": 1080,
+    "samples": 96,
+    "snapshotRasterizationSamples": 1,
+    "totalAverageMs": 46.025018,
+    "totalP95Ms": 45.073392
+  },
+  "remaining": [
+    "Ordinary glTF sampler mapping: NR6-C15-S1",
+    "Dynamic ring pose and UV clock",
+    "Full reflection equivalence",
+    "Sustained 1080p60 and NR7-AA5/AA6",
+    "NR0 whole-frame image gate"
+  ]
+}
