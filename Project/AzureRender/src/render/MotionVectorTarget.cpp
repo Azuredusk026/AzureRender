@@ -19,6 +19,7 @@ MotionVectorTarget::MotionVectorTarget(rhi::IRhi& rhi,rhi::IGpuAllocator& alloca
         throw std::invalid_argument("Motion target requires bounded extent, a depth format and valid source depth views");
     if(!rhi_.supportsSampledImage(kFormat,false)||!rhi_.supportsSampledImage(kSurfaceDepthFormat,false))
         throw std::runtime_error("Motion and color-surface depth formats must be sampleable on this device");
+    extent_=extent;depthFormat_=depthFormat;depths_=depths;
     bytes_=pixels*kBytesPerPixel;framebuffers_.reserve(depths.size());
     try{
         image_=allocator_.createImage2D(extent.width,extent.height,kFormat,
@@ -36,6 +37,9 @@ MotionVectorTarget::MotionVectorTarget(rhi::IRhi& rhi,rhi::IGpuAllocator& alloca
     }catch(...){reset();throw;}
 }
 MotionVectorTarget::~MotionVectorTarget(){reset();}
+bool MotionVectorTarget::compatible(const rhi::IRhi& backend,VkExtent2D extent,VkFormat format,const std::vector<VkImageView>& depths) const noexcept {
+    return pass_!=VK_NULL_HANDLE&& &rhi_==&backend&&extent.width==extent_.width&&extent.height==extent_.height&&format==depthFormat_&&depths==depths_;
+}
 void MotionVectorTarget::reset() noexcept {
     for(auto framebuffer:framebuffers_)if(framebuffer)rhi_.destroyFramebuffer(framebuffer);
     framebuffers_.clear();
@@ -44,5 +48,6 @@ void MotionVectorTarget::reset() noexcept {
     if(surfaceDepthView_)rhi_.destroyImageView(surfaceDepthView_);surfaceDepthView_=VK_NULL_HANDLE;
     if(image_.image)allocator_.destroyImage(image_);image_={};bytes_=0;
     if(surfaceDepth_.image)allocator_.destroyImage(surfaceDepth_);surfaceDepth_={};
+    extent_={};depthFormat_=VK_FORMAT_UNDEFINED;depths_.clear();
 }
 }

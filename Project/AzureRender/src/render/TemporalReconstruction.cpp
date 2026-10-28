@@ -29,18 +29,21 @@ bool temporalInverse(const std::array<float,16>& source,std::array<float,16>& re
 }
 }
 TemporalReconstruction::TemporalReconstruction(rhi::IRhi& rhi,rhi::IGpuAllocator& allocator,VkExtent2D extent,VkFormat depthFormat,
-    std::vector<TemporalSceneSource> sources,const std::string& shaders):rhi_(rhi),allocator_(allocator),extent_(extent),sources_(std::move(sources)){
+    std::vector<TemporalSceneSource> sources,const std::string& shaders,MotionVectorTarget* sharedMotion):rhi_(rhi),allocator_(allocator),extent_(extent),sources_(std::move(sources)){
     const auto pixels=std::uint64_t(extent.width)*extent.height;
     if(!extent.width||!extent.height||pixels>kMaximumBytes/kBytesPerPixel||sources_.empty()||sources_.size()>UINT32_MAX/28
         ||std::any_of(sources_.begin(),sources_.end(),[](const auto& s){return !s.color||!s.colorView||!s.depth||!s.depthView;}))
         throw std::invalid_argument("Temporal reconstruction requires bounded extent and complete scene sources");
     if(!rhi_.supportsSampledImage(hdrFormat,true)||!rhi_.supportsSampledImage(VK_FORMAT_R32_SFLOAT,false))
         throw std::runtime_error("Temporal reconstruction requires sampled HDR and float depth formats");
-    bytes_=pixels*kBytesPerPixel;
+    std::vector<VkImageView> depths;for(const auto& source:sources_)depths.push_back(source.depthView);
+    if(sharedMotion&&!sharedMotion->compatible(rhi_,extent,depthFormat,depths))
+        throw std::invalid_argument("Shared motion must match the RHI, extent, depth format and ordered source views");
+    bytes_=pixels*(sharedMotion?kBytesPerPixel-MotionVectorTarget::kBytesPerPixel:kBytesPerPixel);
     VkShaderModule vertex=VK_NULL_HANDLE,copy=VK_NULL_HANDLE,resolve=VK_NULL_HANDLE;
     try{
-        std::vector<VkImageView> depths;for(const auto& source:sources_)depths.push_back(source.depthView);
-        motion_=std::make_unique<MotionVectorTarget>(rhi_,allocator_,extent,depthFormat,depths);
+        if(sharedMotion)motion_=sharedMotion;
+        else {ownedMotion_=std::make_unique<MotionVectorTarget>(rhi_,allocator_,extent,depthFormat,depths);motion_=ownedMotion_.get();}
         for(unsigned i=0;i<5;++i){const auto format=i<3?hdrFormat:VK_FORMAT_R32_SFLOAT;
             images_[i]=allocator_.createImage2D(extent.width,extent.height,format,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT);
             views_[i]=rhi_.createImageView(images_[i].image,format,VK_IMAGE_ASPECT_COLOR_BIT,1);}
@@ -89,7 +92,7 @@ void TemporalReconstruction::reset() noexcept{
     if(sampler_)rhi_.destroySampler(sampler_);sampler_=VK_NULL_HANDLE;
     for(auto view:views_)if(view)rhi_.destroyImageView(view);views_={};
     for(auto& buffer:uniforms_)if(buffer.buffer)allocator_.destroyBuffer(buffer);uniforms_={};
-    for(auto& image:images_)if(image.image)allocator_.destroyImage(image);images_={};motion_.reset();
+    for(auto& image:images_)if(image.image)allocator_.destroyImage(image);images_={};ownedMotion_.reset();motion_=nullptr;
 }
 std::array<RenderGraph::ResourceId,2> TemporalReconstruction::importMotion(RenderGraph& graph,const std::string& name) const{
     rhi::ImageBarrierDesc input;input.image=motion_->image().image;auto vectors=graph.importImage(name+"-motion",input);

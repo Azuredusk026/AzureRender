@@ -17,7 +17,7 @@ class TemporalReconstruction final {
 public:
     static constexpr std::uint64_t kBytesPerPixel=52,kMaximumBytes=512ULL*1024*1024;
     TemporalReconstruction(rhi::IRhi&,rhi::IGpuAllocator&,VkExtent2D,VkFormat depthFormat,
-        std::vector<TemporalSceneSource>,const std::string& shaderDirectory);
+        std::vector<TemporalSceneSource>,const std::string& shaderDirectory,MotionVectorTarget* sharedMotion=nullptr);
     ~TemporalReconstruction();
     TemporalReconstruction(const TemporalReconstruction&)=delete;
     TemporalReconstruction& operator=(const TemporalReconstruction&)=delete;
@@ -36,7 +36,8 @@ private:
     struct Pending {std::uint32_t frame=0,source=0,previous=0,next=1;bool valid=false;};
     rhi::IRhi& rhi_;rhi::IGpuAllocator& allocator_;VkExtent2D extent_{};
     std::vector<TemporalSceneSource> sources_;
-    std::unique_ptr<MotionVectorTarget> motion_;
+    std::unique_ptr<MotionVectorTarget> ownedMotion_;
+    MotionVectorTarget* motion_=nullptr;
     // Scratch HDR, two HDR histories, two colour-surface depth histories.
     std::array<rhi::GpuImage,5> images_{};std::array<VkImageView,5> views_{};
     std::array<rhi::GpuBuffer,2> uniforms_{};

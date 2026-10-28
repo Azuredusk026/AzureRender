@@ -38,6 +38,30 @@ int main(int argc,char** argv)try{
         temporalCheck(foreignRejected,"Foreign motion resources cannot enter this view's resolve");
     }
     temporalCheck(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,"Temporal ownership releases all resources");
+    {
+        const TemporalSceneSource second{reinterpret_cast<VkImage>(200),reinterpret_cast<VkImageView>(201),reinterpret_cast<VkImage>(202),reinterpret_cast<VkImageView>(203)};
+        MotionVectorTarget shared(backend,backend.allocator(),{64,48},VK_FORMAT_D32_SFLOAT,{source.depthView,second.depthView});
+        const auto borrowedView=shared.view();
+        {
+            TemporalReconstruction temporal(backend,backend.allocator(),{64,48},VK_FORMAT_D32_SFLOAT,{source,second},argv[1],&shared);
+            temporalCheck(&temporal.motion()==&shared,"Temporal resolve must use the caller's shared motion owner");
+            temporalCheck(temporal.byteSize()==64*48*32&&shared.byteSize()==64*48*20,"Shared budget counts each image owner once");
+            temporalCheck(backend.allocator().statistics().liveImages==7,"Shared target adds five history images without duplicating motion");
+        }
+        temporalCheck(backend.allocator().statistics().liveImages==2&&shared.view()==borrowedView,"Temporal destruction preserves the borrowed motion owner");
+        const auto rejectsShared=[&](VkExtent2D extent,VkFormat depth,std::vector<TemporalSceneSource> sources){
+            bool bad=false;try{TemporalReconstruction temporal(backend,backend.allocator(),extent,depth,std::move(sources),argv[1],&shared);}catch(const std::invalid_argument&){bad=true;}
+            temporalCheck(bad&&backend.allocator().statistics().liveImages==2&&backend.allocator().statistics().liveBuffers==0,"Incompatible shared motion must reject before allocation");
+        };
+        rejectsShared({63,48},VK_FORMAT_D32_SFLOAT,{source,second});
+        rejectsShared({64,48},VK_FORMAT_D16_UNORM,{source,second});
+        rejectsShared({64,48},VK_FORMAT_D32_SFLOAT,{second,source});
+        rejectsShared({64,48},VK_FORMAT_D32_SFLOAT,{source});
+        rhi::NullRhi foreign;bool badBackend=false;
+        try{TemporalReconstruction temporal(foreign,foreign.allocator(),{64,48},VK_FORMAT_D32_SFLOAT,{source,second},argv[1],&shared);}catch(const std::invalid_argument&){badBackend=true;}
+        temporalCheck(badBackend&&foreign.allocator().statistics().liveImages==0,"A shared motion owner cannot cross RHI devices");
+    }
+    temporalCheck(backend.allocator().statistics().liveImages==0,"Shared motion owner releases its images last");
     bool rejected=false;try{TemporalReconstruction oversized(backend,backend.allocator(),{100000,100000},VK_FORMAT_D32_SFLOAT,{source},argv[1]);}catch(const std::invalid_argument&){rejected=true;}
     temporalCheck(rejected&&backend.allocator().statistics().liveImages==0,"Oversized history rejects before allocation");
     std::cout<<"Temporal reconstruction: ownership, budget, graph, actual submission, cancel and camera reset passed\n";return 0;

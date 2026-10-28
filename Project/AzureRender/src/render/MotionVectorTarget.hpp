@@ -24,10 +24,12 @@ public:
     VkRenderPass renderPass() const noexcept {return pass_;}
     VkFramebuffer framebuffer(std::uint32_t source) const {return framebuffers_.at(source);}
     std::uint64_t byteSize() const noexcept {return bytes_;}
+    bool compatible(const rhi::IRhi&,VkExtent2D,VkFormat,const std::vector<VkImageView>& depths) const noexcept;
 private:
     rhi::IRhi& rhi_;rhi::IGpuAllocator& allocator_;
     rhi::GpuImage image_{},surfaceDepth_{};VkImageView view_=VK_NULL_HANDLE,surfaceDepthView_=VK_NULL_HANDLE;VkRenderPass pass_=VK_NULL_HANDLE;
     std::vector<VkFramebuffer> framebuffers_;std::uint64_t bytes_=0;
+    VkExtent2D extent_{};VkFormat depthFormat_=VK_FORMAT_UNDEFINED;std::vector<VkImageView> depths_;
     void reset() noexcept;
 };
 }

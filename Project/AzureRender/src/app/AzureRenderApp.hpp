@@ -293,6 +293,7 @@ private:
     std::vector<VkFramebuffer> swapchainFramebuffers_;
     std::vector<VkFramebuffer> postProcessFramebuffers_;
     std::vector<std::unique_ptr<azurerender::SpatialAntiAliasing>> spatialAntiAliasing_;
+    std::unique_ptr<azurerender::MotionVectorTarget> sharedMotion_;
     std::unique_ptr<azurerender::TemporalReconstruction> temporalReconstruction_;
     std::unique_ptr<azurerender::SceneMultisampling> sceneMultisampling_;
     bool multisampleRequested_=false;

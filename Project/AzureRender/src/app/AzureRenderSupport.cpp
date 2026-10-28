@@ -272,6 +272,7 @@ void AzureRenderApp::cleanupEditorViewportResources(
     postProcessFramebuffers_.clear();
     spatialAntiAliasing_.clear();
     temporalReconstruction_.reset();
+    sharedMotion_.reset();
     sceneMultisampling_.reset();
 
     const auto destroyImages = [this](
