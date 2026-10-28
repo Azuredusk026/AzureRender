@@ -59,6 +59,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 半分辨率生产、真实深度及整数选样见[尺寸验收](docs/acceptance/nr/reflection-resolution.md)。
 反射历史计算及借用图像资源见[时间过滤契约](docs/runtime/reflection-temporal.md)。
 共享运动目标及画面兼容范围见[共享验收](docs/acceptance/nr/shared-motion.md)。
+时序 KK 动态夹具及剩余范围见[运动边缘验证](docs/acceptance/nr/temporal-motion-edges.md)。
 独立过滤资源及双配置结果见[公共过滤验收](docs/acceptance/nr/reflection-spatial-filter.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。

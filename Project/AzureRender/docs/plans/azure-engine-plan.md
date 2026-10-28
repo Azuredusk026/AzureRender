@@ -142,6 +142,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 半尺寸层级与源像素选择见[尺寸验收](../acceptance/nr/reflection-resolution.md)。
 历史计算的冻结输入及公共资源见[时间过滤验收](../acceptance/nr/reflection-temporal.md)。
 主宿主共享运动目标及双配置验证见[共享验收](../acceptance/nr/shared-motion.md)。
+KK 动态边缘的双配置门槛见[运动边缘验证](../acceptance/nr/temporal-motion-edges.md)。
 原版层级射线及动态时间历史继续验收。
 
 中庭原生方向场已覆盖后方的已知照明缺口。

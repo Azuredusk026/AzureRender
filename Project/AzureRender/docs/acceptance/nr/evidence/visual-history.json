@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedDate": "2026-10-28",
+  "recordedDate": "2026-10-29",
   "snapshots": [
     {
       "id": "nr7-l4l",
@@ -378,6 +378,56 @@
         "原版 3534 机位，完整场景 2560×1440。",
         "计算反射为 1280×720，源命中颜色保持完整分辨率。",
         "完整图平均字节误差为 12.927558，时间历史继续实施。"
+      ]
+    },
+    {
+      "id": "nr7-aa5-e1",
+      "title": "时序 KK 动态边缘",
+      "phase": "NR7-AA5-E1",
+      "sourceBaseCommit": "b8d482b",
+      "status": "KK 动态夹具通过，服饰与薄透明待验",
+      "source": "build\\runs\\20261029-015351-reflection-motion-depth-30af9d\\kk-debug-complete\\integral\\frames\\frame_000031.png",
+      "project": "build\\runs\\20261029-015351-reflection-motion-depth-30af9d\\kk-debug-complete\\integral\\test.azureproject",
+      "evidence": "docs/acceptance/nr/temporal-motion-edges.md",
+      "scope": "公共 KK 动态夹具",
+      "image": "docs\\acceptance\\nr\\visual-history\\2026-10-29-nr7-aa5-e1-candidate.png",
+      "imagePurpose": "材质隔离夹具",
+      "images": [
+        {
+          "scope": "control",
+          "source": "build\\runs\\20261029-005117-shared-motion-history-a9430e\\main-debug-kk\\integral\\frames\\frame_000031.png",
+          "image": "docs\\acceptance\\nr\\visual-history\\2026-10-29-nr7-aa5-e1-control.png",
+          "sha256": "b5e48356566dd9109cbeacee9aa52bbe908b32abcc6e1506004e15679773bb43",
+          "rgbSha256": "aa42ec8fb1f526009ec681488d6300e65f575cacea9c50683ea870068d03c5ad",
+          "width": 128,
+          "height": 128,
+          "bytes": 13047
+        },
+        {
+          "scope": "candidate",
+          "source": "build\\runs\\20261029-015351-reflection-motion-depth-30af9d\\kk-debug-complete\\integral\\frames\\frame_000031.png",
+          "image": "docs\\acceptance\\nr\\visual-history\\2026-10-29-nr7-aa5-e1-candidate.png",
+          "sha256": "c4165739458ae9f1cc44fc0e0deef860704b03a494f06a632dcb46d160d0d570",
+          "rgbSha256": "cfe5a87b2f9d19e3ed12b05f0ca3a6dacbf5d912189211f9e60de7de73e266d5",
+          "width": 128,
+          "height": 128,
+          "bytes": 12963
+        },
+        {
+          "scope": "reference",
+          "source": "build\\runs\\20261029-015351-reflection-motion-depth-30af9d\\kk-debug-complete\\reference\\frames\\frame_000031.png",
+          "image": "docs\\acceptance\\nr\\visual-history\\2026-10-29-nr7-aa5-e1-reference.png",
+          "sha256": "03f40ec8744a16a15c497c50cd388eb949a85a12aeaea3d3da6f9a4edd5a0b1c",
+          "rgbSha256": "8d9a6df491263ff3fd2b5eadaff49c74f21bb5551a4d03ced2122710120a8721",
+          "width": 512,
+          "height": 512,
+          "bytes": 210115
+        }
+      ],
+      "notes": [
+        "128×128 原始采集，四倍参考为 512×512。",
+        "来源代码及着色器指纹见阶段收据。",
+        "完整主场景继续引用 NR5-R8-J。"
       ]
     }
   ],

@@ -49,7 +49,7 @@ void main(){
         vec4 candidate=texelFetch(vectors,neighbour,0);
         float candidateDepth=candidate.w!=0?texelFetch(surfaceDepth,neighbour,0).r:texelFetch(hardwareDepth,neighbour,0).r;
         if(abs(x)<=1&&abs(y)<=1){minimumDepth=min(minimumDepth,candidateDepth);maximumDepth=max(maximumDepth,candidateDepth);}
-        if(candidateDepth<depth){depth=candidateDepth;motion=candidate;}
+        if((abs(x)<=1&&abs(y)<=1||cutoutMotion(candidate.w))&&candidateDepth<depth){depth=candidateDepth;motion=candidate;}
     }
     vec2 previousUv=uv-motion.xy;float expectedDepth=motion.z;
     bool valid=temporal.frame.z>.5&&!responsive&&motion.w>-1&&finite4(current)&&finite4(motion);
@@ -75,7 +75,7 @@ void main(){
         if(valid){float speed=length(motion.xy*temporal.frame.xy);float weight=mix(temporal.limits.z,.8,clamp(speed/8,0,1));
             if(!coverageEdge)weight*=1-(cutoutMotion(motion.w)?motion.w-2:clamp(-motion.w,0,1));
             float contrast=max(max(high.r-low.r,high.g-low.g),high.b-low.b);
-            float clipping=coverageEdge&&contrast>1e-5?mix(temporal.limits.w,1,clamp(speed,0,1)):1;
+            float clipping=coverageEdge&&cutoutMotion(motion.w)&&contrast>1e-5?mix(temporal.limits.w,1,clamp(speed,0,1)):1;
             vec3 bounded=mix(history.rgb,clamp(history.rgb,low,high),clipping);
             accumulated=mix(current.rgb,bounded,weight);}
     }
