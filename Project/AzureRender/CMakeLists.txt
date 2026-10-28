@@ -310,6 +310,7 @@ compile_shader("${SHADER_SOURCE_DIR}/specialization_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/irradiance_clipmap_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/octahedral_environment_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/reflection_probe_field_test.comp")
+compile_shader("${SHADER_SOURCE_DIR}/reflection_spatial_filter.comp")
 compile_shader("${SHADER_SOURCE_DIR}/depth_bias_test.frag")
 compile_shader("${SHADER_SOURCE_DIR}/scene_instance_layout_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/color_grading_lut_test.comp")
@@ -526,6 +527,7 @@ target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
+    src/render/ReflectionSpatialFilter.cpp
     src/assets/GeneratorRegistry.cpp
     src/assets/PrimitiveGenerator.cpp
     src/assets/primitives/RoundPrimitives.cpp
@@ -2556,6 +2558,14 @@ if(BUILD_TESTING)
     add_executable(AzureTextureImportContractTests tests/TextureImportContractTests.cpp)
     target_link_libraries(AzureTextureImportContractTests PRIVATE AzureRenderCore)
     add_test(NAME AzureAssets.TextureImportContract COMMAND AzureTextureImportContractTests)
+    add_executable(AzureReflectionSpatialFilterTests tests/ReflectionSpatialFilterTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureReflectionSpatialFilterTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ReflectionSpatialFilter COMMAND AzureReflectionSpatialFilterTests)
+    add_executable(AzureReflectionSpatialFilterGpuTests tests/ReflectionSpatialFilterGpuTests.cpp)
+    target_link_libraries(AzureReflectionSpatialFilterGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureReflectionSpatialFilterGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ReflectionSpatialFilterGpu COMMAND AzureReflectionSpatialFilterGpuTests "${SHADER_BINARY_DIR}/reflection_spatial_filter.comp.spv")
+    set_tests_properties(AzureRender.ReflectionSpatialFilterGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
 endif()
 
 if(BUILD_TESTING)

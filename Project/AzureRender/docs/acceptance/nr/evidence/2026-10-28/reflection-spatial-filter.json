@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR5-R8-B",
+  "status": "public-filter-resource-accepted",
+  "baseCommit": "336ea533bb0fa20dadc82d795a0482cd947c7fc1",
+  "run": "build/runs/20261028-161930-reflection-spatial-filter-gpu-546198",
+  "source": {
+    "src/render/ReflectionSpatialFilter.hpp": "f9b48ede148b60c4418f31dc6f3ee95677208d0cc8f522a912fb2c67499cd86d",
+    "src/render/ReflectionSpatialFilter.cpp": "17d3e3ca03bc30be2f2e6afdf9e962bdb4288ec5f6405abd56e5a56d9112c3d1",
+    "shaders/reflection_spatial_filter.comp": "138bb23a7b25c275a19bd68c8b878281229b2a0ead281ae98757e1306e8eb279",
+    "tests/ReflectionSpatialFilterTests.cpp": "3057ec1b587c65950618946f4757369cd29f10fe0d73b24c157cb21e46f844a1",
+    "tests/ReflectionSpatialFilterGpuTests.cpp": "6936e9f08310613213306ecf3004a404f0a9b3205de7e1acc289cb6dd2d20af2",
+    "CMakeLists.txt": "b2318500ba65917e132a9fae9d6b6e203e3288fc80e82bd481edcb3ff2a9025a"
+  },
+  "artifacts": [
+    {
+      "path": "red-build.log",
+      "bytes": 1574,
+      "sha256": "288ec848dfdebe1ffd7d3cdc2849566cd101ccc96aeaf1ba3294bc5ae9f6969d"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 1751,
+      "sha256": "3e82120e58a8a852100bb66ef1e038f7f3e78ef134b3005e7443172751e4ccee"
+    },
+    {
+      "path": "encode-red.log",
+      "bytes": 554,
+      "sha256": "ed67a5813f94eabe876d324c15c0f3d498384373aa97d190eaeecffdce2b56c0"
+    },
+    {
+      "path": "debug-pair-tests.log",
+      "bytes": 595,
+      "sha256": "816c43ccbbafccbb660487ee5e044fb69be07d8b3d62a92ce55f3cdf03145a54"
+    },
+    {
+      "path": "debug-ctest-details.log",
+      "bytes": 2160,
+      "sha256": "046b66e1d59ece18c3c2bfeb9adf57ee30783e4515b676dde542838121378551"
+    },
+    {
+      "path": "release-tests.log",
+      "bytes": 599,
+      "sha256": "cea57ae80b36e724f961419b25bf01c0dbdbb91e8c9c9cf63134dbf8c0d593be"
+    },
+    {
+      "path": "release-ctest-details.log",
+      "bytes": 2170,
+      "sha256": "c5b52a4e0c5fc0c689b6830b91c549d3a816fdf31cf0980c37436555d3ddd8cb"
+    },
+    {
+      "path": "debug-app-build.log",
+      "bytes": 517,
+      "sha256": "270549c03c2bae24b315f938d077181cfe3d03b75ae371b03dd7c4dab5dbbdd7"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 1463,
+      "sha256": "5aa1f5c19b5f26a658c4ead41809e021d52b8cdb43ed97b8c0a20d80919ab152"
+    },
+    {
+      "path": "native-fixture-conversion.json",
+      "bytes": 4357,
+      "sha256": "ce4a4c267eb532f27893dab34e04bc7b3aa956b1860195119fd75556f22440f6"
+    },
+    {
+      "path": "native-fixture/fixture-packed.json",
+      "bytes": 774,
+      "sha256": "8cdcdb3a54aee33182f1b4ec9888cbdc40889c11b494d696fef04b08dca3b1c6"
+    },
+    {
+      "path": "filter-verification.json",
+      "bytes": 1102,
+      "sha256": "1f98b2d753b982726cdce0b24d92337c40ba438f0035721e5a325f5d7f117749"
+    },
+    {
+      "path": "native-debug-packed-comparison.json",
+      "bytes": 3299,
+      "sha256": "845157ca7237709c15ee6527c6e2f9fc0d6bef6409b6b802f3104cf988b586df"
+    },
+    {
+      "path": "native-debug-lower-comparison.json",
+      "bytes": 3264,
+      "sha256": "3a464b73d0e3a380880f859692cafe0ad1ff41515111b7b8cbdee01bd7d2bf6b"
+    },
+    {
+      "path": "native-debug-precise-comparison.json",
+      "bytes": 3216,
+      "sha256": "6b12bc19e933249cd3c61328e6a8ade93a5844d572ac338c957bc9004d83cc4e"
+    },
+    {
+      "path": "native-debug-accepted.rgba32f",
+      "bytes": 14745600,
+      "sha256": "8c85db15af39e80ae36568151264de847c1f51e90bedc6cc1d546bcb2f719ee0"
+    },
+    {
+      "path": "native-release-accepted.rgba32f",
+      "bytes": 14745600,
+      "sha256": "8c85db15af39e80ae36568151264de847c1f51e90bedc6cc1d546bcb2f719ee0"
+    },
+    {
+      "path": "native-debug-accepted.log",
+      "bytes": 102,
+      "sha256": "b6354a90801766ccb2cedff10529c009c17ab6c199f936ca7f57c7d9411bfb98"
+    },
+    {
+      "path": "native-release-accepted.log",
+      "bytes": 102,
+      "sha256": "b6354a90801766ccb2cedff10529c009c17ab6c199f936ca7f57c7d9411bfb98"
+    },
+    {
+      "path": "native-debug-accepted-comparison.json",
+      "bytes": 3216,
+      "sha256": "6b12bc19e933249cd3c61328e6a8ade93a5844d572ac338c957bc9004d83cc4e"
+    },
+    {
+      "path": "native-release-accepted-comparison.json",
+      "bytes": 3216,
+      "sha256": "6b12bc19e933249cd3c61328e6a8ade93a5844d572ac338c957bc9004d83cc4e"
+    },
+    {
+      "path": "public-filter-output.png",
+      "bytes": 1322767,
+      "sha256": "5e8ce62ccd4789b2d5206b87d14eb9737c5738efb8ab296c5e6a4d4f3eaed0e3"
+    },
+    {
+      "path": "compare_native.py",
+      "bytes": 1028,
+      "sha256": "9eafd723365c2aa6124521479a0c28bb7e9862a2f0e28ac97887c249e2063053"
+    },
+    {
+      "path": "verify_filter.py",
+      "bytes": 2395,
+      "sha256": "7afa2efb81940d92a6a26217520d2a5bb7d5ebd67e30fa5a2e2e8d3620db2bb0"
+    },
+    {
+      "path": "prepare_native_fixture.py",
+      "bytes": 2837,
+      "sha256": "df4659bf5c31378cd25c85bf682c7a673374145d1428bf2ae8b21fe5fa51b17c"
+    },
+    {
+      "path": "prepare_packed_fixture.py",
+      "bytes": 516,
+      "sha256": "57d0eb274edbd8d5138a9dfefeb731a4fe362dbb1d9684d3cf722485019d29a7"
+    },
+    {
+      "path": "precise.comp",
+      "bytes": 2277,
+      "sha256": "65de03f3cf097492750b110e927bb63862707888ab161e1a90042cf0cb2fb715"
+    },
+    {
+      "path": "point-lower.comp",
+      "bytes": 2437,
+      "sha256": "0a12cb9377f944c7fd98782184ea24b7ad2d2b2dfd7831093ed11fc2fe35e333"
+    },
+    {
+      "path": "native-fixture/color-0.rgba32f",
+      "bytes": 14745600,
+      "sha256": "70664e6ae6c7a36fd5499dd2a4a48371c3d024dc61de32f3a9ede1e800eaec59"
+    },
+    {
+      "path": "native-fixture/color-1.rgba32f",
+      "bytes": 3686400,
+      "sha256": "c72c6a6c979f1641e2c81a66ea89a197e2ea2303f22fdc1417f772a4d6d2b5f6"
+    },
+    {
+      "path": "native-fixture/color-2.rgba32f",
+      "bytes": 921600,
+      "sha256": "f974b6b70dfc085fa8050d2e4c280e0108f89ff4e265bd63a8ffd424d0f293a7"
+    },
+    {
+      "path": "native-fixture/color-3.rgba32f",
+      "bytes": 230400,
+      "sha256": "65764dcb4aa77d4b36b2b39a01c79eacba67791f7647e17a2923025158f79a72"
+    },
+    {
+      "path": "native-fixture/color-4.rgba32f",
+      "bytes": 57600,
+      "sha256": "0e8e86f98b00e5311942f269c10cab4241107b43dafb585e71b871c067b974cf"
+    },
+    {
+      "path": "native-fixture/color-5.rgba32f",
+      "bytes": 14080,
+      "sha256": "6f83b63163c2ad233e5d8d4ac6e82c02fe05744889df9a73517399fc7a88446d"
+    },
+    {
+      "path": "native-fixture/color-6.rgba32f",
+      "bytes": 3520,
+      "sha256": "452c805f5f49b7367b8e5875352f40cd47f64b1eebad68785ec170d684c9da8d"
+    },
+    {
+      "path": "native-fixture/color-packed-0.bin",
+      "bytes": 3686400,
+      "sha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+    },
+    {
+      "path": "native-fixture/color-packed-1.bin",
+      "bytes": 921600,
+      "sha256": "660e8fec7748b3053aca2206341dece4ba462272b63291087651f3f0ee7cfdbb"
+    },
+    {
+      "path": "native-fixture/color-packed-2.bin",
+      "bytes": 230400,
+      "sha256": "7159e2adb95e1392abf8203537e28194cc90443de60a7f9c139faff2a3f19bed"
+    },
+    {
+      "path": "native-fixture/color-packed-3.bin",
+      "bytes": 57600,
+      "sha256": "62c694f5eddb6b02b7708e335147472f8e958fe369c55595daa2e95b56cda5b4"
+    },
+    {
+      "path": "native-fixture/color-packed-4.bin",
+      "bytes": 14400,
+      "sha256": "ba0f065738300564a4e89751040e5d1d8e46617d278797e7d3ef548459b1ac46"
+    },
+    {
+      "path": "native-fixture/color-packed-5.bin",
+      "bytes": 3520,
+      "sha256": "2469b25798ed0397eb22e638889b0c78ce151ba7326f3df720d9d6f50baa2f74"
+    },
+    {
+      "path": "native-fixture/color-packed-6.bin",
+      "bytes": 880,
+      "sha256": "26c5a9c14366c4e5de23db315ae346f3c9e66e1e6d5adc30383d5887dc3190a9"
+    },
+    {
+      "path": "native-fixture/depth-0.f32",
+      "bytes": 3686400,
+      "sha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777"
+    },
+    {
+      "path": "native-fixture/depth-1.f32",
+      "bytes": 921600,
+      "sha256": "dbb0978e4a1e1471fa4ac9f21cf8c754b10a2f44ebaeb2c4c1571feae0756973"
+    },
+    {
+      "path": "native-fixture/depth-2.f32",
+      "bytes": 230400,
+      "sha256": "5ce130267f207ef4963bf47f2e316cd37c132fee5891192f058932b3f105cba6"
+    },
+    {
+      "path": "native-fixture/depth-3.f32",
+      "bytes": 57600,
+      "sha256": "d5b8407e7d34e736b878a7da2bde2165c79be3f3fb0b228bd36e2213a256f9f1"
+    },
+    {
+      "path": "native-fixture/depth-4.f32",
+      "bytes": 14400,
+      "sha256": "039064967a6a97b95327edb005582dc70654c07234e8e3260a7699e4c43e088b"
+    },
+    {
+      "path": "native-fixture/depth-5.f32",
+      "bytes": 3520,
+      "sha256": "2ba8930d7453a00bbc2ae6c2d5d064335f03c28d60947b81a873fa787f693ebc"
+    },
+    {
+      "path": "native-fixture/depth-6.f32",
+      "bytes": 880,
+      "sha256": "c6d68bc3aa19783e91e507dacf1258824733b1b2199279da467fc21891736c98"
+    },
+    {
+      "path": "native-fixture/expected.rgba32f",
+      "bytes": 14745600,
+      "sha256": "a97a53a267864b6e8b208c525c17c22c7d32e9b9e537193f1f9dc215768538d6"
+    },
+    {
+      "path": "native-fixture/fixture.json",
+      "bytes": 722,
+      "sha256": "90436d8c688878ab9e36651ddede9c4f648706d392846038208fa39ef05dfce3"
+    },
+    {
+      "path": "native-fixture/surface.rg32f",
+      "bytes": 7372800,
+      "sha256": "96a41ae76226b495c8823e82b7656c33e0e9625a273c186feb9723b22467c92a"
+    },
+    {
+      "path": "runtime/debug/AzureReflectionSpatialFilterTests.exe",
+      "bytes": 228352,
+      "sha256": "c0b25fc5c2c05cbd16e1834983b3d93ff399ba84e3deca3a010be2eaf479a10a"
+    },
+    {
+      "path": "runtime/debug/AzureReflectionSpatialFilterGpuTests.exe",
+      "bytes": 786944,
+      "sha256": "d42b046a310a0870813af7f209db229f9f9e49a4c4c2303782a01cb9bf876eec"
+    },
+    {
+      "path": "runtime/debug/reflection_spatial_filter.comp.spv",
+      "bytes": 7988,
+      "sha256": "6d52bdc80ac13dfd5a5b607ce26053ad90dad35a94d60c7b62d2b699db99eff5"
+    },
+    {
+      "path": "runtime/release/AzureReflectionSpatialFilterTests.exe",
+      "bytes": 144384,
+      "sha256": "36e6043db2464484757171a93b2e218465a650a6119bfa20ca0fd48c583a136f"
+    },
+    {
+      "path": "runtime/release/AzureReflectionSpatialFilterGpuTests.exe",
+      "bytes": 281088,
+      "sha256": "022106fc28543fd995e6d9c94ecae104e080f7f5179f14e18181646566797670"
+    },
+    {
+      "path": "runtime/release/reflection_spatial_filter.comp.spv",
+      "bytes": 7988,
+      "sha256": "6d52bdc80ac13dfd5a5b607ce26053ad90dad35a94d60c7b62d2b699db99eff5"
+    }
+  ],
+  "runtime": [
+    {
+      "configuration": "debug",
+      "playerSha256": "e13c4da6a5bfdc5e49bb040b5667ac80549ea8beac0f3e661d1bded94fad8b91",
+      "editorSha256": "e4921a9497771c1c8244be486ed83e7cf0d751953a1ba3b38c9b5575456bd496",
+      "shaderSha256": "6d52bdc80ac13dfd5a5b607ce26053ad90dad35a94d60c7b62d2b699db99eff5",
+      "gpuTestSha256": "d42b046a310a0870813af7f209db229f9f9e49a4c4c2303782a01cb9bf876eec"
+    },
+    {
+      "configuration": "release",
+      "playerSha256": "5bc075e6ba8d40421f36a5cfd242b6fc9f603dd6858cc6bb1d6473fd91620248",
+      "editorSha256": "33bee5c4c88f5dec0d0ef173eff7d446257bbeea0deb754a432dd5371e6c35b3",
+      "shaderSha256": "6d52bdc80ac13dfd5a5b607ce26053ad90dad35a94d60c7b62d2b699db99eff5",
+      "gpuTestSha256": "022106fc28543fd995e6d9c94ecae104e080f7f5179f14e18181646566797670"
+    }
+  ],
+  "result": {
+    "status": "passed",
+    "stage": "NR5-R8-B",
+    "formatUlpBudget": 1.01,
+    "cases": [
+      {
+        "configuration": "debug",
+        "pixels": 921600,
+        "maximumOutputFormatUlps": 1.0000076293945312,
+        "maximumAbsoluteError": 0.21153831481933594
+      },
+      {
+        "configuration": "release",
+        "pixels": 921600,
+        "maximumOutputFormatUlps": 1.0000076293945312,
+        "maximumAbsoluteError": 0.21153831481933594
+      }
+    ],
+    "configurationFloat32Exact": true,
+    "inFlightSameInputExact": true,
+    "inFlightDifferentParametersSingleSubmission": true,
+    "syntheticCapturesPerConfiguration": 10,
+    "displayMapping": "Linear RGB clamped to 0..1, multiplied by 255 and floored; raw RGBA32F retained.",
+    "compatibility": [
+      {
+        "configuration": "debug",
+        "unchangedPrograms": 199,
+        "addedProgram": "reflection_spatial_filter.comp.spv",
+        "totalPrograms": 200
+      },
+      {
+        "configuration": "release",
+        "unchangedPrograms": 199,
+        "addedProgram": "reflection_spatial_filter.comp.spv",
+        "totalPrograms": 200
+      }
+    ]
+  },
+  "frameBytes": 48,
+  "descriptorBindings": 6,
+  "outputFormat": "RGBA32F",
+  "materialBytes": 336,
+  "cameraBytes": 688,
+  "remaining": [
+    "Main-scene reflection producer integration",
+    "Normal/roughness snapshot consumption",
+    "Dynamic confidence and temporal history",
+    "Native whole-frame image gate",
+    "Sustained 1080p60"
+  ]
+}

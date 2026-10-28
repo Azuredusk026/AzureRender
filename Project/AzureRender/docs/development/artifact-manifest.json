@@ -667,6 +667,14 @@
       "retention": "NR12 正式归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-filter-source.json"
+    },
+    {
+      "path": "runs/20261028-161930-reflection-spatial-filter-gpu-546198",
+      "pathBase": "build",
+      "purpose": "公共反射过滤资源、原版跨 API 输出及双配置回归。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-spatial-filter.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

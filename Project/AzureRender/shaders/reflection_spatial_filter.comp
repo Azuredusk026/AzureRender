@@ -1,0 +1,45 @@
+#version 450
+layout(local_size_x=8,local_size_y=8) in;
+layout(binding=0) uniform sampler2D depthPyramid;
+layout(binding=1) uniform sampler2D surfaceData;
+layout(binding=2) uniform sampler2D linearColor;
+layout(binding=3) uniform sampler2D pointColor;
+layout(rgba32f,binding=4) uniform writeonly image2D resultImage;
+layout(std140,binding=5) uniform Parameters {vec4 rows[3];} parameters;
+float filterDepth(float value){
+    precise float decoded=fma(parameters.rows[1].x,value,parameters.rows[1].y);
+    return parameters.rows[1].z>.5?1.0/max(decoded,1e-8):decoded;
+}
+vec3 filterLevel(vec2 base,float centerDepth,float lod){
+    precise float scale=exp2(lod);
+    precise vec2 margin=parameters.rows[0].xy*1.5;
+    precise vec2 origin=fma(-margin,vec2(scale),base);
+    precise vec2 step=parameters.rows[0].xy*scale;
+    const float kernel[4]=float[4](1,3,3,1);
+    vec3 sum=vec3(0);float weights=0;
+    for(int i=0;i<4;++i)for(int j=0;j<4;++j){
+        precise vec2 uv=fma(vec2(i,j),step,origin);
+        float depth=filterDepth(textureLod(depthPyramid,uv,lod).r);
+        precise float weight=exp2(-parameters.rows[1].w*1.4426950408889634*abs(depth-centerDepth))*(kernel[i]*kernel[j]/64.0);
+        sum=fma(textureLod(linearColor,uv,lod).rgb,vec3(weight),sum);weights+=weight;
+    }
+    return sum/max(weights,parameters.rows[2].x);
+}
+void main(){
+    uvec2 pixel=gl_GlobalInvocationID.xy;
+    if(any(greaterThanEqual(pixel,uvec2(parameters.rows[2].zw))))return;
+    precise vec2 uv=(vec2(pixel)+.5)*parameters.rows[0].xy;
+    vec2 surface=textureLod(surfaceData,uv,0).rg;
+    float lod=clamp(surface.r,0,1)*parameters.rows[0].z;
+    vec3 color;
+    if(lod<parameters.rows[0].w)color=textureLod(pointColor,uv,0).rgb;
+    else{
+        precise float centerDepth=filterDepth(textureLod(depthPyramid,uv,0).r);
+        float low=floor(lod),high=min(low+1,parameters.rows[0].z);
+        precise vec2 base=vec2(pixel)*parameters.rows[0].xy;
+        vec3 a=filterLevel(base,centerDepth,low),b=filterLevel(base,centerDepth,high);
+        color=fma(vec3(lod-low),b-a,a);
+    }
+    if(parameters.rows[2].y>.5)color/=max(1-max(max(color.r,color.g),color.b),1e-6);
+    imageStore(resultImage,ivec2(pixel),vec4(color,clamp(surface.g,0,1)));
+}

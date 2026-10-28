@@ -281,6 +281,37 @@
       "consumerEvent": 8912,
       "nativePayloadSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
       "mirrorPayloadSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98"
+    },
+    {
+      "id": "nr5-r8-b",
+      "title": "公共反射过滤输出",
+      "phase": "NR5-R8-B",
+      "commit": "336ea53",
+      "status": "公共过滤资源通过，生产接入待验",
+      "scope": "公共 GPU 反射过滤输出",
+      "configuration": "Debug",
+      "descriptor": "独立计算描述符",
+      "camera": "3534 冻结输入",
+      "recordedDate": "2026-10-28",
+      "source": "build/runs/20261028-161930-reflection-spatial-filter-gpu-546198/public-filter-output.png",
+      "image": "docs/acceptance/nr/visual-history/2026-10-28-nr5-r8-b-gpu-336ea53.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "5e8ce62ccd4789b2d5206b87d14eb9737c5738efb8ab296c5e6a4d4f3eaed0e3",
+      "rgbSha256": "3a954e8abb02956ed5deda9798e7a111a27eaae210aab7142fe6b70010a576e4",
+      "bytes": 1322767,
+      "evidence": "docs/acceptance/nr/reflection-spatial-filter.md",
+      "displayMapping": "Linear RGB clamped to 0..1, multiplied by 255 and floored; raw RGBA32F retained.",
+      "sourceFingerprints": {
+        "src/render/ReflectionSpatialFilter.hpp": "f9b48ede148b60c4418f31dc6f3ee95677208d0cc8f522a912fb2c67499cd86d",
+        "src/render/ReflectionSpatialFilter.cpp": "17d3e3ca03bc30be2f2e6afdf9e962bdb4288ec5f6405abd56e5a56d9112c3d1",
+        "shaders/reflection_spatial_filter.comp": "138bb23a7b25c275a19bd68c8b878281229b2a0ead281ae98757e1306e8eb279",
+        "tests/ReflectionSpatialFilterTests.cpp": "3057ec1b587c65950618946f4757369cd29f10fe0d73b24c157cb21e46f844a1",
+        "tests/ReflectionSpatialFilterGpuTests.cpp": "6936e9f08310613213306ecf3004a404f0a9b3205de7e1acc289cb6dd2d20af2",
+        "CMakeLists.txt": "b2318500ba65917e132a9fae9d6b6e203e3288fc80e82bd481edcb3ff2a9025a"
+      },
+      "float32Source": "build/runs/20261028-161930-reflection-spatial-filter-gpu-546198/native-debug-accepted.rgba32f",
+      "float32Sha256": "8c85db15af39e80ae36568151264de847c1f51e90bedc6cc1d546bcb2f719ee0"
     }
   ],
   "userAttachment": {

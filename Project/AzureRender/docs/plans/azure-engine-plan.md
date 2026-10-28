@@ -49,6 +49,7 @@
 物流彩色环带的源实例及采样见[还原验收](../acceptance/nr/opaque-logistics-rings.md)。
 公共 glTF 采样器及完整场景结果见[采样器验收](../acceptance/nr/gltf-sampler-contract.md)。
 原版动态反射过滤及公共接入边界见[来源验收](../acceptance/nr/reflection-filter-source.md)。
+独立过滤资源及双配置结果见[公共过滤验收](../acceptance/nr/reflection-spatial-filter.md)。
 启动预算包含隐藏资源引用及材质解码的驻留峰值。
 接续入口为[原生帧还原交接](2026-10-22-native-render-restoration-handoff.md)。
 九份 D3D11 原生帧已通过官方 1.46 加载和通道查询。
