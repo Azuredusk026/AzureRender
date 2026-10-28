@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "stage": "NR5-R8-A",
+  "status": "native-filter-kernel-verified",
+  "baseCommit": "44d6538",
+  "run": "build/runs/20261028-155222-native-floor-reflection-source-9dcd8c",
+  "sourceFrame": 3534,
+  "filterEvent": 8811,
+  "consumerEvent": 8912,
+  "width": 1280,
+  "height": 720,
+  "pixels": 921600,
+  "byteExact": true,
+  "depthResource": 16447,
+  "surfaceResource": 16501,
+  "colorResource": 16552,
+  "outputResource": 15925,
+  "confidence": {
+    "resource": 15777,
+    "width": 1280,
+    "height": 720,
+    "format": "R8_UNORM",
+    "usage": [
+      {
+        "event": 8644,
+        "usage": "ResourceUsage.CS_RWResource"
+      },
+      {
+        "event": 8662,
+        "usage": "ResourceUsage.CS_Resource"
+      },
+      {
+        "event": 8671,
+        "usage": "ResourceUsage.CS_Resource"
+      },
+      {
+        "event": 8691,
+        "usage": "ResourceUsage.CS_RWResource"
+      },
+      {
+        "event": 8702,
+        "usage": "ResourceUsage.CS_Resource"
+      },
+      {
+        "event": 8820,
+        "usage": "ResourceUsage.CS_RWResource"
+      },
+      {
+        "event": 8912,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 8927,
+        "usage": "ResourceUsage.PS_Resource"
+      },
+      {
+        "event": 8944,
+        "usage": "ResourceUsage.PS_Resource"
+      }
+    ]
+  },
+  "depthExponentCoefficient": -0.014426950365304947,
+  "kernelAxis": [
+    1,
+    3,
+    3,
+    1
+  ],
+  "kernelNormalization": 64,
+  "roughnessLodScale": 6,
+  "shaderSha256": "2a6585820cdc9b744f143675203480fc760755117e08e6dda94759d1a44536fb",
+  "nativeShaderSha256": "9cef102c3d3ff931fd2d2f319b6be802e8222a36bfffd6f44d8af9f0187c9952",
+  "artifacts": [
+    {
+      "path": "native-reflection-filter.json",
+      "bytes": 28434,
+      "sha256": "144fed29fc46e644fe4272142de4aeae99f6d3c3f1c89e20daf86de67e7ba489"
+    },
+    {
+      "path": "native-filter.dxbc",
+      "bytes": 3624,
+      "sha256": "9cef102c3d3ff931fd2d2f319b6be802e8222a36bfffd6f44d8af9f0187c9952"
+    },
+    {
+      "path": "filter-mirror.hlsl",
+      "bytes": 1892,
+      "sha256": "2a6585820cdc9b744f143675203480fc760755117e08e6dda94759d1a44536fb"
+    },
+    {
+      "path": "gpu-mirror.json",
+      "bytes": 342,
+      "sha256": "eafaec73055208cd63ae85d665d0f5f5555220ba6f5dcbb5439dbb2fad75154a"
+    },
+    {
+      "path": "mirror-output.bin",
+      "bytes": 3686400,
+      "sha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98"
+    },
+    {
+      "path": "filter-debug.json",
+      "bytes": 30378,
+      "sha256": "e1f9624d6f4f04e01c35d05ec852c13b36f39469f33fbbddd21fe23dc5850c7e"
+    },
+    {
+      "path": "output-rounding.json",
+      "bytes": 182,
+      "sha256": "ca79ea5b06f6a7a91d5108fb2293933d68b35016a9180d3ebc379fae44d0f986"
+    },
+    {
+      "path": "filter-reference.json",
+      "bytes": 5567,
+      "sha256": "a9a42df99066a68cae93a26c83c0423070344d890f8dcfab312e07e8b35a37c8"
+    },
+    {
+      "path": "filter-reference-lower-boundary.json",
+      "bytes": 5531,
+      "sha256": "f80a3a9bf8ce8b458bbdc4ddc08ca265d3275c6b2151632d149d49d9576d21d6"
+    },
+    {
+      "path": "filter-reference-hardware-linear.json",
+      "bytes": 5573,
+      "sha256": "bccc946ea9f405ccc842be8675dad658ffaa6af563e1c34fb6d344b2f05d0a73"
+    },
+    {
+      "path": "capture_reflection_filter.py",
+      "bytes": 3109,
+      "sha256": "15ff0fefecffec85b3356be99dbd0d8ab63608e4e9f40c96f93c135f34399152"
+    },
+    {
+      "path": "check_gpu_mirror.py",
+      "bytes": 1799,
+      "sha256": "0ab984c689125e52953a9a3e5bd917afa0b705accec9a378b6094363af55b31a"
+    },
+    {
+      "path": "debug_filter.py",
+      "bytes": 1620,
+      "sha256": "eed4c76a7d7b4275d9b36e960744229b011a3322719747221e8f7be21c3dd36c"
+    },
+    {
+      "path": "check_output_rounding.py",
+      "bytes": 1789,
+      "sha256": "eb4beb82b4b2d4f8b9166807817b2b2e535333dde8d98d7e8dfefb2a4b8e3f86"
+    },
+    {
+      "path": "check_filter_reference.py",
+      "bytes": 4583,
+      "sha256": "99060397849139c536847ef5f2190995581875b598c63da0c1c65f27da84d355"
+    },
+    {
+      "path": "filter-cb0.bin",
+      "bytes": 3328,
+      "sha256": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007"
+    },
+    {
+      "path": "filter-cb1.bin",
+      "bytes": 256,
+      "sha256": "52368864590c67a16755ff4a01b1f03ce9bd62acb8b5a05693412a07b29787f8"
+    },
+    {
+      "path": "deferred-consumer.asm",
+      "bytes": 120546,
+      "sha256": "052cf218faf38ad6b5a9004a563936ec3e2826778c6fc2662852f941a323f80d"
+    },
+    {
+      "path": "native-reflection-filter.png",
+      "bytes": 1974907,
+      "sha256": "4549aeaf214fac277d781e07a1f6a9488fbcf1f26da7f8a5681b362b348530e6"
+    },
+    {
+      "path": "texture-16447-mip-0.bin",
+      "bytes": 3686400,
+      "sha256": "2b1858f3d80354c90a194a7a45c76297349e7794bed35dc59d62b694f6703777"
+    },
+    {
+      "path": "texture-16447-mip-1.bin",
+      "bytes": 921600,
+      "sha256": "dbb0978e4a1e1471fa4ac9f21cf8c754b10a2f44ebaeb2c4c1571feae0756973"
+    },
+    {
+      "path": "texture-16447-mip-2.bin",
+      "bytes": 230400,
+      "sha256": "5ce130267f207ef4963bf47f2e316cd37c132fee5891192f058932b3f105cba6"
+    },
+    {
+      "path": "texture-16447-mip-3.bin",
+      "bytes": 57600,
+      "sha256": "d5b8407e7d34e736b878a7da2bde2165c79be3f3fb0b228bd36e2213a256f9f1"
+    },
+    {
+      "path": "texture-16447-mip-4.bin",
+      "bytes": 14400,
+      "sha256": "039064967a6a97b95327edb005582dc70654c07234e8e3260a7699e4c43e088b"
+    },
+    {
+      "path": "texture-16447-mip-5.bin",
+      "bytes": 3520,
+      "sha256": "2ba8930d7453a00bbc2ae6c2d5d064335f03c28d60947b81a873fa787f693ebc"
+    },
+    {
+      "path": "texture-16447-mip-6.bin",
+      "bytes": 880,
+      "sha256": "c6d68bc3aa19783e91e507dacf1258824733b1b2199279da467fc21891736c98"
+    },
+    {
+      "path": "texture-16501-mip-0.bin",
+      "bytes": 3686400,
+      "sha256": "c2daded777b834dd8c3707dbbd4d2fd01724499262b096c2ac152d9b0e818bda"
+    },
+    {
+      "path": "texture-16552-mip-0.bin",
+      "bytes": 3686400,
+      "sha256": "ca852b98375964d60a01c2271840d06e64260921b0805da0316592bc8a2ee272"
+    },
+    {
+      "path": "texture-16552-mip-1.bin",
+      "bytes": 921600,
+      "sha256": "660e8fec7748b3053aca2206341dece4ba462272b63291087651f3f0ee7cfdbb"
+    },
+    {
+      "path": "texture-16552-mip-2.bin",
+      "bytes": 230400,
+      "sha256": "7159e2adb95e1392abf8203537e28194cc90443de60a7f9c139faff2a3f19bed"
+    },
+    {
+      "path": "texture-16552-mip-3.bin",
+      "bytes": 57600,
+      "sha256": "62c694f5eddb6b02b7708e335147472f8e958fe369c55595daa2e95b56cda5b4"
+    },
+    {
+      "path": "texture-16552-mip-4.bin",
+      "bytes": 14400,
+      "sha256": "ba0f065738300564a4e89751040e5d1d8e46617d278797e7d3ef548459b1ac46"
+    },
+    {
+      "path": "texture-16552-mip-5.bin",
+      "bytes": 3520,
+      "sha256": "2469b25798ed0397eb22e638889b0c78ce151ba7326f3df720d9d6f50baa2f74"
+    },
+    {
+      "path": "texture-16552-mip-6.bin",
+      "bytes": 880,
+      "sha256": "26c5a9c14366c4e5de23db315ae346f3c9e66e1e6d5adc30383d5887dc3190a9"
+    },
+    {
+      "path": "texture-15925-mip-0.bin",
+      "bytes": 3686400,
+      "sha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98"
+    }
+  ],
+  "cpuReferenceStatus": "diagnostic-only",
+  "remaining": [
+    "Public reflection producer and filter integration",
+    "Temporal history and motion validity",
+    "Native whole-frame image gate",
+    "Sustained 1080p60"
+  ]
+}

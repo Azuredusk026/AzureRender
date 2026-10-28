@@ -257,6 +257,30 @@
       "sourceSha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728",
       "rgbSha256": "e6e8da46797f0f153c8d5610c575db9f7a53fe2e763c626b428356718130f5bb",
       "bytes": 5726367
+    },
+    {
+      "id": "nr5-r8-a",
+      "title": "原生反射过滤通道",
+      "phase": "NR5-R8-A",
+      "commit": "44d6538",
+      "status": "原版过滤核字节一致，公共接入待验",
+      "scope": "原版反射内部通道",
+      "configuration": "官方 D3D11 捕获",
+      "descriptor": "原版采样器",
+      "camera": "3534 捕获机位",
+      "recordedDate": "2026-10-28",
+      "source": "build/runs/20261028-155222-native-floor-reflection-source-9dcd8c/native-reflection-filter.png",
+      "image": "docs/acceptance/nr/visual-history/2026-10-28-nr5-r8-a-source-44d6538.png",
+      "width": 1280,
+      "height": 720,
+      "sha256": "4549aeaf214fac277d781e07a1f6a9488fbcf1f26da7f8a5681b362b348530e6",
+      "rgbSha256": "e8a9653eb4c33ca38983d3d730eeb4b1d8d78ff17faa1ffd589a185f912865e1",
+      "bytes": 1974907,
+      "evidence": "docs/acceptance/nr/reflection-filter-source.md",
+      "filterEvent": 8811,
+      "consumerEvent": 8912,
+      "nativePayloadSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+      "mirrorPayloadSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98"
     }
   ],
   "userAttachment": {

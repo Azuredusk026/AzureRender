@@ -2256,3 +2256,15 @@ NR0、NR7-AA5/AA6 及正式联合门禁继续实施。
 
 实施范围见[采样器接入计划](2026-10-28-gltf-sampler-contract.md)。
 双配置及完整场景结果见[采样器验收](../acceptance/nr/gltf-sampler-contract.md)。
+
+## NR5-R8 动态反射过滤
+
+- [x] 采集实际过滤输入、常量、采样器及消费者权重。
+- [x] 重建双层级深度加权核，并核对全部原版输出字节。
+- [ ] 定义公共过滤参数及在途资源所有权。
+- [ ] 接入本帧反射生产、层级、过滤及探针回退。
+- [ ] 验证连续历史、动态对象和屏幕边缘。
+- [ ] 完成双配置主场景、独立夹具和实际 GPU 预算。
+
+范围见[过滤接入计划](2026-10-28-reflection-filter-integration.md)。
+固定来源的数值范围见[来源验收](../acceptance/nr/reflection-filter-source.md)。

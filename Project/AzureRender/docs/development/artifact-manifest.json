@@ -659,6 +659,14 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-28/gltf-sampler-contract.json",
       "primaryProject": "build/runs/20261028-141910-gltf-sampler-contract-bb2a59/full-candidate/enclosure-sampler.azureproject"
+    },
+    {
+      "path": "runs/20261028-155222-native-floor-reflection-source-9dcd8c",
+      "pathBase": "build",
+      "purpose": "原版反射过滤输入、计算核重建及全图字节对照。",
+      "retention": "NR12 正式归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-filter-source.json"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
