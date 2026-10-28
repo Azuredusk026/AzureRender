@@ -1561,6 +1561,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
          << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
+         << "  \"reflectionSurfaceSnapshot\": " << (reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?"true":"false") << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
          << "  \"irradianceQueryScope\": \"physical-surface\",\n"
@@ -2436,6 +2437,13 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
 
 void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     rasterizationSamples_=context.rasterizationSamples;
+    const auto surfaceUsage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;
+    const bool requested=context.renderSettings&&context.renderSettings->screenSpaceReflection.enabled;
+    const bool multisample=context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT;
+    const bool fits=!multisample||std::uint64_t(context.renderExtent.width)*context.renderExtent.height*112*kMaxFramesInFlight<=SceneMultisampling::kMaximumBytes;
+    const auto supported=rhi_->imageSampleCounts(VK_FORMAT_R32G32B32A32_SFLOAT,surfaceUsage);
+    reflectionSurfaceFormat_=requested&&fits&&(supported&context.rasterizationSamples)
+        &&rhi_->supportsSampledImage(VK_FORMAT_R32G32B32A32_SFLOAT,false)?VK_FORMAT_R32G32B32A32_SFLOAT:VK_FORMAT_R32_SFLOAT;
     outlineMaskViewExtent_=context.renderExtent;
     outlineMaskMaxDimension_=context.descriptorLimits.maxImageDimension2D;
     rhi::RenderPassDesc maskPass;
@@ -2444,7 +2452,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     maskPass.externalReadDependency=true;
     outlineMaskPass_=rhi_->createRenderPass(maskPass);
     rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
-        {VK_FORMAT_R32_SFLOAT,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+        {reflectionSurfaceFormat_,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
         {context.depthFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,true,false,true}};
     pass.depthAttachment=2;pass.externalReadDependency=true;overlayDepthPass_=rhi_->createRenderPass(pass);
     for(std::size_t frame=0;frame<kMaxFramesInFlight;++frame){
@@ -2452,8 +2460,8 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
         color.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,context.sceneColorFormat,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
         color.view=rhi_->createImageView(color.image.image,context.sceneColorFormat,VK_IMAGE_ASPECT_COLOR_BIT,1);
         auto& target=overlaySceneDepth_[frame];
-        target.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,VK_FORMAT_R32_SFLOAT,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
-        target.view=rhi_->createImageView(target.image.image,VK_FORMAT_R32_SFLOAT,VK_IMAGE_ASPECT_COLOR_BIT,1);
+        target.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,reflectionSurfaceFormat_,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
+        target.view=rhi_->createImageView(target.image.image,reflectionSurfaceFormat_,VK_IMAGE_ASPECT_COLOR_BIT,1);
         rhi::SamplerDesc sampler;sampler.filter=VK_FILTER_NEAREST;sampler.addressU=sampler.addressV=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
         target.sampler=rhi_->createSampler(sampler);
         auto& depth=overlayDepthAttachments_[frame];depth=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,context.depthFormat,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
@@ -2465,8 +2473,8 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
         for(unsigned frame=0;frame<kMaxFramesInFlight;++frame)
             destinations.push_back({{opaqueSceneColor_[frame].image.image,overlayDepthAttachments_[frame].image,overlaySceneDepth_[frame].image.image},
                 {opaqueSceneColor_[frame].view,overlayDepthViews_[frame],overlaySceneDepth_[frame].view}});
-        snapshotMultisampling_=std::make_unique<SceneMultisampling>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,VK_FORMAT_R32_SFLOAT,
-            SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_);
+        snapshotMultisampling_=std::make_unique<SceneMultisampling>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,reflectionSurfaceFormat_,
+            reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?SceneSecondaryResolve::MinimumDepthSample:SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_);
     }
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){

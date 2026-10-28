@@ -152,6 +152,7 @@ private:
         SampledTextureBinding shadowColorLut;
     };
 
+    VkFormat reflectionSurfaceFormat_=VK_FORMAT_R32_SFLOAT;
     std::array<GpuTexture,kMaxFramesInFlight> overlaySceneDepth_;
     std::unique_ptr<SceneMultisampling> snapshotMultisampling_;
     VkRenderPass snapshotPass() const {return snapshotMultisampling_?snapshotMultisampling_->renderPass():overlayDepthPass_;}

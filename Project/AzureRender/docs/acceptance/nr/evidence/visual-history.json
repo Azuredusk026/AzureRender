@@ -325,6 +325,24 @@
         "rgbPixelExact": true,
         "imagePurpose": "reflection-intermediate"
       }
+    },
+    {
+      "id": "nr5-r8-f",
+      "title": "反射表面快照接入",
+      "phase": "NR5-R8-F",
+      "commit": "c9fafc9+source-sha256",
+      "status": "表面快照通过，动态生产待验",
+      "source": "build/runs/20261028-194826-reflection-surface-snapshot-173af6/main-release/frames/frame_000000.png",
+      "project": "build/runs/20261028-194826-reflection-surface-snapshot-173af6/full-candidate/enclosure-sampler.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-10-28/reflection-surface-snapshot.json",
+      "scope": "完整主场景",
+      "image": "docs/acceptance/nr/visual-history/2026-10-28-nr7-l4m-opaque-rings-59510a5.png",
+      "imagePurpose": "scene-composite",
+      "notes": [
+        "完整主场景与 NR6-C15-S1 逐像素一致，复用归档图片。",
+        "实际启用四通道表面快照。",
+        "动态反射生产和连续历史继续接入。"
+      ]
     }
   ],
   "userAttachment": {
@@ -333,5 +351,5 @@
     "matchesSnapshot": "nr3-f1i",
     "rgbPixelExact": true
   },
-  "defaultPreviewSnapshot": "nr6-c15-s1"
+  "defaultPreviewSnapshot": "nr5-r8-f"
 }

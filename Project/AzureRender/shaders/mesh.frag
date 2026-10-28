@@ -15,6 +15,9 @@
 #include "specular_ramp.glsl"
 #include "environment_specular.glsl"
 #include "reflection_lod.glsl"
+#if defined(AZURE_OPAQUE_SNAPSHOT)
+#include "reflection_surface.glsl"
+#endif
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
 #include "material_sampling.glsl"
@@ -1874,7 +1877,7 @@ void main() {
     if(camera.clusterLighting.x>.5 && !sceneCharacter)innerOutlineParticipation=0.0;
     vec3 innerOutlineNormal = geometricNormal;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
-    outputNormal=vec4(dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz),0,0,1);
+    outputNormal=encodeReflectionSurface(dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz),shadedNormal,microfacetSurface&&!overlayMaterial?roughness:1.0);
 #else
     outputNormal = vec4(
         innerOutlineNormal * 0.5 + 0.5,
