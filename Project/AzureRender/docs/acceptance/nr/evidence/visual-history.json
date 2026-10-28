@@ -41,7 +41,8 @@
         "sceneLighting": true,
         "skyIntensity": 0.25
       },
-      "contentState": "accepted-component"
+      "contentState": "accepted-component",
+      "imagePurpose": "scene-composite"
     },
     {
       "id": "nr3-f1i",
@@ -82,7 +83,8 @@
         "sceneLighting": true,
         "skyIntensity": 0.25
       },
-      "contentState": "accepted-component"
+      "contentState": "accepted-component",
+      "imagePurpose": "scene-composite"
     },
     {
       "id": "nr7-l4m-diagnostic",
@@ -157,7 +159,8 @@
             "dependencies": []
           }
         }
-      ]
+      ],
+      "imagePurpose": "isolated-material-diagnostic"
     },
     {
       "id": "nr7-l4m-opaque-rings",
@@ -190,7 +193,8 @@
         "真实环带实例和纹理进入完整主场景。",
         "完整场景平均字节误差为 13.058428。",
         "动态滚动、反射等价与持续性能继续验收。"
-      ]
+      ],
+      "imagePurpose": "scene-composite"
     },
     {
       "id": "nr6-c15-s1",
@@ -256,7 +260,8 @@
       "sha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728",
       "sourceSha256": "415964de2f051e2e8041c3e4a44395f1c676e83d1ad87b170c9dca94f470d728",
       "rgbSha256": "e6e8da46797f0f153c8d5610c575db9f7a53fe2e763c626b428356718130f5bb",
-      "bytes": 5726367
+      "bytes": 5726367,
+      "imagePurpose": "scene-composite"
     },
     {
       "id": "nr5-r8-a",
@@ -280,7 +285,8 @@
       "filterEvent": 8811,
       "consumerEvent": 8912,
       "nativePayloadSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
-      "mirrorPayloadSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98"
+      "mirrorPayloadSha256": "5273b1514da46c6ff8a0d6c457d9ffc5cfde855dbc4e80af7d3a9dd43c0aab98",
+      "imagePurpose": "reflection-intermediate"
     },
     {
       "id": "nr5-r8-b",
@@ -311,7 +317,14 @@
         "CMakeLists.txt": "b2318500ba65917e132a9fae9d6b6e203e3288fc80e82bd481edcb3ff2a9025a"
       },
       "float32Source": "build/runs/20261028-161930-reflection-spatial-filter-gpu-546198/native-debug-accepted.rgba32f",
-      "float32Sha256": "8c85db15af39e80ae36568151264de847c1f51e90bedc6cc1d546bcb2f719ee0"
+      "float32Sha256": "8c85db15af39e80ae36568151264de847c1f51e90bedc6cc1d546bcb2f719ee0",
+      "imagePurpose": "reflection-intermediate",
+      "userAttachmentClarification": {
+        "name": "codex-clipboard-83e95572-589a-4368-b4df-64184ffa8510.png",
+        "sha256": "2ccc5306e9e97c88b1e1e942e50dba0d3f120decff08d9bea45155436847270f",
+        "rgbPixelExact": true,
+        "imagePurpose": "reflection-intermediate"
+      }
     }
   ],
   "userAttachment": {
@@ -319,5 +332,6 @@
     "sha256": "689c12b1a9db6aabde85b0da5ff2500375145ffcd3c8b6e983908d3cf4ce7f75",
     "matchesSnapshot": "nr3-f1i",
     "rgbPixelExact": true
-  }
+  },
+  "defaultPreviewSnapshot": "nr6-c15-s1"
 }

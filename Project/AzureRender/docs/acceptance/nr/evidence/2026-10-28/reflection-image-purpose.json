@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "status": "image-purpose-verified",
+  "attachment": "codex-clipboard-83e95572-589a-4368-b4df-64184ffa8510.png",
+  "attachmentSha256": "2ccc5306e9e97c88b1e1e942e50dba0d3f120decff08d9bea45155436847270f",
+  "archivedImage": "docs/acceptance/nr/visual-history/2026-10-28-nr5-r8-b-gpu-336ea53.png",
+  "archivedImageSha256": "5e8ce62ccd4789b2d5206b87d14eb9737c5738efb8ab296c5e6a4d4f3eaed0e3",
+  "rgbPixelExact": true,
+  "imagePurpose": "reflection-intermediate",
+  "width": 1280,
+  "height": 720,
+  "originalChannelImage": "docs\\acceptance\\nr\\visual-history\\2026-10-28-nr5-r8-a-source-44d6538.png",
+  "maximumDisplayByteDifference": 4,
+  "meanAbsoluteDisplayByteDifference": 0.3710579427083333,
+  "sceneCompositeSnapshotId": "nr6-c15-s1",
+  "sceneCompositeWidth": 2560,
+  "sceneCompositeHeight": 1440,
+  "remaining": [
+    "Main-scene reflection producer and confidence integration",
+    "Whole-frame visual quality validation"
+  ]
+}
