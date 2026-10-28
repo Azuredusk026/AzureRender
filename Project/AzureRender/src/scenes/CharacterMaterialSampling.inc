@@ -1,6 +1,6 @@
 // Optional material shader variants share the renderer's layout and ownership.
 void CharacterSceneRenderer::initializeOrdinaryOpaquePipelines(const RenderContext& context,
-    const rhi::GraphicsPipelineDesc& color) {
+    const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot) {
     const auto eligible=[](const auto& asset){return std::any_of(asset.materials.begin(),asset.materials.end(),ordinaryOpaqueMaterial);};
     bool needed=eligible(asset_);for(const auto& resource:additionalResources_)needed|=eligible(resource->asset);
     if(!needed)return;
@@ -11,12 +11,20 @@ void CharacterSceneRenderer::initializeOrdinaryOpaquePipelines(const RenderConte
             desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaquePipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+            desc=snapshot;
+            desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+            desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+            desc.fragmentSpecialization={{0,VK_TRUE}};
+            ordinaryOpaqueSnapshotPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
         }
     }catch(...){destroyOrdinaryOpaquePipelines();throw;}
 }
 void CharacterSceneRenderer::destroyOrdinaryOpaquePipelines() noexcept {
     if(!rhi_)return;
     for(auto& pipeline:ordinaryOpaquePipelines_){
+        if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
+    }
+    for(auto& pipeline:ordinaryOpaqueSnapshotPipelines_){
         if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
     }
 }

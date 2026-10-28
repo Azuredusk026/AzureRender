@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_reflection_history_gpu.py", line 91, in <module>
+    run(args.player.resolve(),args.output.resolve(),args.case,args.expected_validation)
+  File "D:\Assigment\2609\FYP\Project\AzureRender\tools\test_reflection_history_gpu.py", line 45, in run
+    assert manifest['ordinaryOpaqueSnapshotPipelineCount']==manifest['ordinaryOpaquePipelineCount']
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'ordinaryOpaqueSnapshotPipelineCount'

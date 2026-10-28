@@ -1,0 +1,296 @@
+{
+  "phase": "NR5-R8-Q",
+  "sourceBaseCommit": "50e7090",
+  "run": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1",
+  "status": "ordinary-snapshot-specialization-verified-formal-budget-pending",
+  "source": {
+    "src/scenes/CharacterSceneRenderer.cpp": "e5583feb61c5d6662d0a3a9c6f35e0254ea8792b6a05cb12227e70d39ce94619",
+    "src/scenes/CharacterSceneRenderer.hpp": "661aaa8ac3bfcd026cc8e353bc4f6bb49de8b58dcc0bfe9e8695844488b891c1",
+    "src/scenes/CharacterMaterialSampling.inc": "644187d35c1e16df9f220475ef5a6919d8e1da3a9303863b1cbba089a9ad0095",
+    "src/render/MaterialPipelinePolicy.hpp": "4a32aa75cd98be4e53fb69ea218d7f07334a075a50ab14fdddfce2f93ca66d0c",
+    "tools/test_reflection_history_gpu.py": "9b96ea11a196ce8345b8409e2cc569ef280360dbd6a23e8c368e2b6e7622601c"
+  },
+  "debugTestsPassed": 10,
+  "releaseTestsPassed": 10,
+  "playerCases": {
+    "debug-owned": {
+      "status": "passed",
+      "sha256": "8a95eeb39112d71296eae960771ebc17d7965b7c2fbaea0ab8e88d81baab43e4",
+      "images": 12
+    },
+    "debug-shared": {
+      "status": "passed",
+      "sha256": "8ea1dde0af07869865712e24d34ab4c34a80d8305966ec9047ff22fa8e883f9b",
+      "images": 12
+    },
+    "debug-fixed": {
+      "status": "passed",
+      "sha256": "3fb507b180e2427dc40d11a666e5b72e219f4b15b899389acaddfcd6866a5e41",
+      "images": 12
+    },
+    "debug-off": {
+      "status": "passed",
+      "sha256": "f6db87d587c354da3dbbb695e4f91b67150382be3785a1dd3c004e68406a02c8",
+      "images": 12
+    },
+    "debug-multisample": {
+      "status": "passed",
+      "sha256": "d6128f14033f92d543acc0a66ea301be48c1117423ade9e005dae9e05b937005",
+      "images": 12
+    },
+    "debug-motion": {
+      "status": "passed",
+      "sha256": "7c4de5d9b96ea0e9dcb503c11e9e371b965e18d6ad830104753e5474ced416cb",
+      "images": 12
+    },
+    "release-owned": {
+      "status": "passed",
+      "sha256": "0ffd55e214404b6f5d36100d77a553286346ca50f5a41c5c793c08737f1364ce",
+      "images": 12
+    },
+    "release-shared": {
+      "status": "passed",
+      "sha256": "59ecc40e5255b94117bc22b925c218a5ff62b4a9bad14767a886fd277b033698",
+      "images": 12
+    },
+    "release-fixed": {
+      "status": "passed",
+      "sha256": "8c533f6637d1fc2d882fc8047fedd24cf4c8b50da741a1e194fd31f52fe39ded",
+      "images": 12
+    },
+    "release-off": {
+      "status": "passed",
+      "sha256": "316f888ae8b5d1084bdee0f536fa5dadfb78d2f292d931662e68b9af448bf437",
+      "images": 12
+    },
+    "release-multisample": {
+      "status": "passed",
+      "sha256": "cbe3833c6acbbb66f2852f56ae0c6c8690931e016a399fddf4403357fdc01d72",
+      "images": 12
+    },
+    "release-motion": {
+      "status": "passed",
+      "sha256": "94e92fbfbf177c59fdd8837e3c26c5a21a8c950b5a94412605a078e48535b458",
+      "images": 12
+    }
+  },
+  "snapshotCasesPerConfiguration": 4,
+  "unchangedShaderFiles": 209,
+  "cameraBytes": 688,
+  "materialBytes": 336,
+  "addedSnapshotPipelines": 4,
+  "officialFirstFrameMeanByteError": 12.926493959780093,
+  "comparison": {
+    "fixturePairs": 144,
+    "fixtureIdenticalPairs": 144,
+    "debugReleasePairs": 72,
+    "debugReleaseIdenticalPairs": 72,
+    "native": [
+      {
+        "frame": "frame_000000.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000001.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000002.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000003.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000004.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000005.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000006.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000007.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000008.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000009.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000010.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      },
+      {
+        "frame": "frame_000011.png",
+        "identicalPng": true,
+        "meanByteChange": 0.0,
+        "maximumByteChange": 0.0,
+        "changedPixels": 0
+      }
+    ],
+    "baselinePerformance": {
+      "kind": "baseline",
+      "playerSha256": "0d21397d0f39b1e6142f33fa36f07bbae4366722216715166d78e5e220014f42",
+      "warmup": 30,
+      "samples": 120,
+      "averageMs": 34.72656133333333,
+      "p95Ms": 35.208942400000005,
+      "budgetMs": 16.667,
+      "passed": false,
+      "formalSustainedAcceptance": false
+    },
+    "candidatePerformance": {
+      "kind": "candidate",
+      "playerSha256": "d29faf19f46dad225447112a32ef802e7a836288abef84fa2600d13d1fca257a",
+      "warmup": 30,
+      "samples": 120,
+      "averageMs": 25.00809333333333,
+      "p95Ms": 25.4630224,
+      "budgetMs": 16.667,
+      "passed": false,
+      "formalSustainedAcceptance": false
+    },
+    "averageMsReduction": 9.718467999999998
+  },
+  "removed": [
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/full-candidate/.azure",
+      "bytes": 3256452820
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/red-owned/.azure",
+      "bytes": 6728
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/snapshot-debug/aa-0-reflection-0/project/.azure",
+      "bytes": 2958
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/snapshot-debug/aa-0-reflection-1/project/.azure",
+      "bytes": 2957
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/snapshot-debug/aa-4-reflection-0/project/.azure",
+      "bytes": 2958
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/snapshot-debug/aa-4-reflection-1/project/.azure",
+      "bytes": 2957
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/snapshot-release/aa-0-reflection-0/project/.azure",
+      "bytes": 2958
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/snapshot-release/aa-0-reflection-1/project/.azure",
+      "bytes": 2957
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/snapshot-release/aa-4-reflection-0/project/.azure",
+      "bytes": 2958
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/snapshot-release/aa-4-reflection-1/project/.azure",
+      "bytes": 2957
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-debug/fixed/.azure",
+      "bytes": 6728
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-debug/motion/.azure",
+      "bytes": 8062
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-debug/multisample/.azure",
+      "bytes": 6734
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-debug/off/.azure",
+      "bytes": 6727
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-debug/owned/.azure",
+      "bytes": 6728
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-debug/shared/.azure",
+      "bytes": 6729
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-release/fixed/.azure",
+      "bytes": 6728
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-release/motion/.azure",
+      "bytes": 8062
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-release/multisample/.azure",
+      "bytes": 6734
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-release/off/.azure",
+      "bytes": 6727
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-release/owned/.azure",
+      "bytes": 6728
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/validated-release/shared/.azure",
+      "bytes": 6729
+    },
+    {
+      "path": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/baseline-player",
+      "bytes": 62390100
+    }
+  ],
+  "removedBytes": 3318956724,
+  "freeBytes": 28808912896,
+  "formalSsimPassed": false,
+  "formalSustainedPerformancePassed": false
+}

@@ -1630,6 +1630,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"screenReflectionWidth\": " << (screenReflections_?screenReflections_->output(0).extent.width:0) << ",\n"
          << "  \"screenReflectionHeight\": " << (screenReflections_?screenReflections_->output(0).extent.height:0) << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
+         << "  \"ordinaryOpaqueSnapshotPipelineCount\": " << std::count_if(ordinaryOpaqueSnapshotPipelines_.begin(),ordinaryOpaqueSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
          << "  \"irradianceQueryScope\": \"physical-surface\",\n"
          << "  \"irradianceQuery\": {\"normalOffset\":" << std::setprecision(std::numeric_limits<float>::max_digits10) << scene_.irradianceVolume.sampling.normalOffset
@@ -2717,6 +2718,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
             commands.bindPipeline(prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
                 :simpleDepth?snapshotDepthOnlyPipelines_[m.doubleSided?2:mirrored?1:0]
+                :ordinaryOpaqueMaterial(m)?ordinaryOpaqueSnapshotPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]);
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
@@ -3347,7 +3349,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
         depthDesc.colorAttachmentCount=2;
         createFacingPipelines(overlayDepthPipelines_,depthDesc);
-        try{initializeOrdinaryOpaquePipelines(context,integralBase);}
+        try{initializeOrdinaryOpaquePipelines(context,integralBase,depthDesc);}
         catch(...){rhi_->destroyShaderModule(depthModule);throw;}
         rhi_->destroyShaderModule(depthModule);
         const auto simpleDepthModule=rhi_->createShaderModule(mainFragment(bindlessTextures_

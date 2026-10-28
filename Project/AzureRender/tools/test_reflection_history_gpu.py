@@ -42,6 +42,7 @@ def run(player,output,case,validation):
         assert f"Character texture access: {'fixed' if case=='fixed' else 'indexed'}" in log
         manifest=json.loads((output/'frames/capture_manifest.json').read_text(encoding='utf-8-sig'));report['manifest']=manifest
         assert manifest['antiAliasing']==aa
+        assert manifest['ordinaryOpaqueSnapshotPipelineCount']==manifest['ordinaryOpaquePipelineCount']
         expected=enabled and aa!=4
         assert manifest.get('screenReflectionTemporalPrepared')==expected,'Reflection temporal preparation must match actual view demand'
         assert manifest['screenReflectionTemporalActive']==expected
