@@ -10,8 +10,8 @@ public:
     ComputeTexture(rhi::IRhi& r,unsigned width,unsigned height,unsigned levels,unsigned channels,VkFormat format,const std::vector<float>& values):backend(r){
         initialize(width,height,levels,channels*4,format,values.data(),values.size()*4);
     }
-    ComputeTexture(rhi::IRhi& r,unsigned width,unsigned height,unsigned levels,VkFormat format,const std::vector<char>& values):backend(r){
-        initialize(width,height,levels,4,format,values.data(),values.size());
+    ComputeTexture(rhi::IRhi& r,unsigned width,unsigned height,unsigned levels,VkFormat format,const std::vector<char>& values,unsigned texelBytes=4):backend(r){
+        initialize(width,height,levels,texelBytes,format,values.data(),values.size());
     }
     ~ComputeTexture(){release();}
     ComputeTexture(const ComputeTexture&)=delete;ComputeTexture& operator=(const ComputeTexture&)=delete;

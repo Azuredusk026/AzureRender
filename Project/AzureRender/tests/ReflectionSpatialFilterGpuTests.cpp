@@ -79,7 +79,16 @@ void nativeFixture(test::VulkanComputeFixture& host,const std::vector<char>& sha
         color=std::make_unique<Texture>(*host.backend,width,height,colorLevels,VK_FORMAT_B10G11R11_UFLOAT_PACK32,bytes);
     }else color=std::make_unique<Texture>(*host.backend,width,height,colorLevels,4,VK_FORMAT_R32G32B32A32_SFLOAT,loadLevels(root,document.at("colorFiles")));
     ReflectionSpatialFilterGpu filter(*host.backend,{width,height},2,shader);
-    const ReflectionFilterInputViews views{depth.view,surface.view,color->view,width,height,depthLevels,colorLevels};
+    ReflectionFilterInputViews views{depth.view,surface.view,color->view,width,height,depthLevels,colorLevels};
+    std::unique_ptr<Texture> confidence;
+    if(document.contains("confidenceFiles")){
+        if(document.value("confidenceFormat",std::string("r32f"))=="r8"){
+            std::vector<char> bytes;for(const auto& file:document.at("confidenceFiles")){
+                const auto part=readBinaryFile((root/file.get<std::string>()).u8string());bytes.insert(bytes.end(),part.begin(),part.end());}
+            confidence=std::make_unique<Texture>(*host.backend,width,height,static_cast<unsigned>(document.at("confidenceFiles").size()),VK_FORMAT_R8_UNORM,bytes,1);
+        }else confidence=std::make_unique<Texture>(*host.backend,width,height,static_cast<unsigned>(document.at("confidenceFiles").size()),1,VK_FORMAT_R32_SFLOAT,loadLevels(root,document.at("confidenceFiles")));
+        views.confidence=confidence->view;views.confidenceLevels=static_cast<unsigned>(document.at("confidenceFiles").size());
+    }
     const auto result=capture(host,filter,0,views,parameters);const auto repeated=capture(host,filter,1,views,parameters);
     require(result==repeated,"Independent in-flight outputs must match");
     std::ofstream file(std::filesystem::u8path(output),std::ios::binary);file.write(reinterpret_cast<const char*>(result.data()),static_cast<std::streamsize>(result.size()*4));
@@ -125,11 +134,33 @@ void synthetic(test::VulkanComputeFixture& host,const std::vector<char>& shader)
     }
     std::cout<<std::setprecision(9)<<"Synthetic captures="<<captures<<" analyticMaximumError="<<maximum<<" frameParity=exact\n";
 }
+void confidenceFixture(test::VulkanComputeFixture& host,const std::vector<char>& shader){
+    constexpr unsigned width=17,height=9,levels=4;
+    std::vector<float> depths,colors,masks,surface(width*height*4,0);
+    for(unsigned mip=0;mip<levels;++mip){const unsigned count=std::max(1U,width>>mip)*std::max(1U,height>>mip);
+        depths.insert(depths.end(),count,1);colors.insert(colors.end(),count*4,.25F);masks.insert(masks.end(),count,float(mip)/7);}
+    for(unsigned i=0;i<width*height;++i){surface[i*4]=.75F;surface[i*4+2]=std::array<float,6>{0,.32F,.34F,.66F,.67F,1}[i%6];}
+    Texture depth(*host.backend,width,height,levels,1,VK_FORMAT_R32_SFLOAT,depths);
+    Texture color(*host.backend,width,height,levels,4,VK_FORMAT_R32G32B32A32_SFLOAT,colors);
+    Texture mask(*host.backend,width,height,levels,1,VK_FORMAT_R32_SFLOAT,masks);
+    Texture material(*host.backend,width,height,1,4,VK_FORMAT_R32G32B32A32_SFLOAT,surface);
+    ReflectionSpatialFilterGpu filter(*host.backend,{width,height},2,shader);
+    ReflectionFilterInputViews inputs{depth.view,material.view,color.view,width,height,levels,levels};
+    inputs.confidence=mask.view;inputs.confidenceLevels=levels;inputs.roughnessChannel=2;
+    ReflectionFilterParameters p;p.maxLod=3;p.encoding=ReflectionColorEncoding::Linear;
+    const auto result=capture(host,filter,0,inputs,p);
+    for(unsigned i=0;i<width*height;++i)require(std::abs(result[i*4+3]-std::round(std::floor(surface[i*4+2]*3)/7*255)/255)<1e-6F,"Confidence follows floored roughness mip and selected channel");
+    inputs.quantizeConfidence=false;const auto wide=capture(host,filter,1,inputs,p);
+    for(unsigned i=0;i<width*height;++i)require(std::abs(wide[i*4+3]-std::floor(surface[i*4+2]*3)/7)<1e-6F,"Floating confidence must preserve unquantized values");
+    require(std::abs(wide[3*4+3]-result[3*4+3])>1e-4F,"Quantization control must affect confidence");
+    std::cout<<"Confidence mip selection, quantization and surface channel passed\n";
+}
+
 }
 int main(int argc,char** argv)try{
     require(argc==2||argc==4,"Expected shader and optional fixture/output paths");
     test::VulkanComputeFixture host;const auto shader=readBinaryFile(argv[1]);
-    if(argc==4)nativeFixture(host,shader,std::filesystem::u8path(argv[2]),argv[3]);else synthetic(host,shader);
+    if(argc==4)nativeFixture(host,shader,std::filesystem::u8path(argv[2]),argv[3]);else {synthetic(host,shader);confidenceFixture(host,shader);}
     require(host.errors==0,"Vulkan validation reported an error");
     require(host.allocator.statistics().liveBuffers==0&&host.allocator.statistics().liveImages==0,"GPU resources must be released");
     std::cout<<"PASS: validation errors=0 liveBuffers=0 liveImages=0\n";return 0;

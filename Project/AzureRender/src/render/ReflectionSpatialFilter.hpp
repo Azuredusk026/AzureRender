@@ -17,6 +17,9 @@ std::array<float,3> decodeReflectionRadiance(const std::array<float,3>& color);
 struct ReflectionFilterInputViews {
     VkImageView depth=VK_NULL_HANDLE,surface=VK_NULL_HANDLE,color=VK_NULL_HANDLE;
     unsigned width=0,height=0,depthLevels=0,colorLevels=0;
+    VkImageView confidence=VK_NULL_HANDLE;
+    unsigned confidenceLevels=0,roughnessChannel=0;
+    bool quantizeConfidence=true;
 };
 struct ReflectionFilterOutput {
     VkImage image=VK_NULL_HANDLE;

@@ -60,8 +60,9 @@ ReflectionSpatialFilterGpu::ReflectionSpatialFilterGpu(rhi::IRhi& backend,VkExte
         for(unsigned i=0;i<4;++i)bindings.push_back({i,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_COMPUTE_BIT});
         bindings.push_back({4,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_COMPUTE_BIT});
         bindings.push_back({5,VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT});
+        bindings.push_back({6,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_COMPUTE_BIT});
         setLayout_=backend_.createDescriptorSetLayout(bindings);
-        rhi::DescriptorPoolDesc pool;pool.maxSets=frames;pool.sizes={{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,4*frames},
+        rhi::DescriptorPoolDesc pool;pool.maxSets=frames;pool.sizes={{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,5*frames},
             {VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,frames},{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,frames}};
         pool_=backend_.createDescriptorPool(pool);const auto sets=backend_.allocateDescriptorSets(pool_,setLayout_,frames);
         layout_=backend_.createPipelineLayout(setLayout_,nullptr);shader_=backend_.createShaderModule(code);
@@ -71,7 +72,7 @@ ReflectionSpatialFilterGpu::ReflectionSpatialFilterGpu(rhi::IRhi& backend,VkExte
             slot.image=backend_.allocator().createImage2D(extent.width,extent.height,VK_FORMAT_R32G32B32A32_SFLOAT,
                 VK_IMAGE_USAGE_STORAGE_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT);
             slot.view=backend_.createImageView(slot.image.image,VK_FORMAT_R32G32B32A32_SFLOAT,VK_IMAGE_ASPECT_COLOR_BIT,1);
-            slot.parameters=backend_.allocator().createBuffer(sizeof(ReflectionFilterFrame),VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,true);
+            slot.parameters=backend_.allocator().createBuffer(sizeof(ReflectionFilterFrame)+16,VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,true);
             backend_.writeDescriptorBuffer({slot.set,5,VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,slot.parameters.buffer,slot.parameters.size});
         }
     }catch(...){release();throw;}
@@ -95,10 +96,18 @@ void ReflectionSpatialFilterGpu::record(rhi::ICommandRecorder& commands,unsigned
     auto& slot=slots_.at(index);
     if(!inputs.depth||!inputs.surface||!inputs.color||inputs.width!=extent_.width||inputs.height!=extent_.height)
         throw std::invalid_argument("Reflection filter requires matching complete input views");
-    for(const auto& target:slots_)if(inputs.depth==target.view||inputs.surface==target.view||inputs.color==target.view)
+    for(const auto& target:slots_)if(inputs.depth==target.view||inputs.surface==target.view||inputs.color==target.view||inputs.confidence==target.view)
         throw std::invalid_argument("Reflection filter inputs cannot alias its outputs");
     const auto frame=parameters.frame(inputs.width,inputs.height,inputs.depthLevels,inputs.colorLevels);
-    std::memcpy(slot.parameters.mapped,&frame,sizeof(frame));backend_.allocator().flush(slot.parameters,0,sizeof(frame));
+    if(inputs.roughnessChannel>3)throw std::invalid_argument("Reflection roughness channel must be within 0..3");
+    if(inputs.confidence&&(inputs.confidenceLevels>levelsFor(inputs.width,inputs.height)||inputs.confidenceLevels<=parameters.maxLod))
+        throw std::invalid_argument("Reflection confidence pyramid has insufficient levels");
+    std::array<std::array<float,4>,4> dispatch{};
+    std::copy(frame.begin(),frame.end(),dispatch.begin());
+    dispatch[3]={inputs.confidence?1.F:0.F,float(inputs.roughnessChannel),inputs.quantizeConfidence?1.F:0.F,0};
+    std::memcpy(slot.parameters.mapped,&dispatch,sizeof(dispatch));backend_.allocator().flush(slot.parameters,0,sizeof(dispatch));
+    backend_.writeDescriptorImage({slot.set,6,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+        inputs.confidence?inputs.confidence:inputs.surface,linear_,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
     const VkImageView views[]={inputs.depth,inputs.surface,inputs.color,inputs.color};
     for(unsigned binding=0;binding<4;++binding)backend_.writeDescriptorImage({slot.set,binding,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
         views[binding],binding==2?linear_:point_,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});

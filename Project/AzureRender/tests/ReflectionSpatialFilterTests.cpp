@@ -53,6 +53,10 @@ int main()try{
         rejects([&]{filter.record(commands,2,inputs,parameters);});
         auto missing=inputs;missing.color=VK_NULL_HANDLE;rejects([&]{filter.record(commands,1,missing,parameters);});
         auto alias=inputs;alias.color=filter.output(1).view;rejects([&]{filter.record(commands,1,alias,parameters);});
+        auto confidence=inputs;confidence.confidence=colorView;confidence.confidenceLevels=3;
+        rejects([&]{filter.record(commands,1,confidence,parameters);});
+        confidence.confidenceLevels=4;confidence.roughnessChannel=4;
+        rejects([&]{filter.record(commands,1,confidence,parameters);});
         require(backend.descriptorImageWrites.size()==writes&&commands.calls.size()==calls,"Invalid input leaves descriptors and commands unchanged");
         filter.record(commands,0,inputs,parameters);
         require(std::count_if(commands.calls.begin(),commands.calls.end(),[](const auto& call){return call.name=="dispatch";})==2,"Repeated output can be recorded after its prior submission completes");
