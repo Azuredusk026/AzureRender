@@ -1,0 +1,62 @@
+{
+  "phase": "NR5-R8-M",
+  "status": "public-temporal-composition-verified-main-history-pending",
+  "sourceBaseCommit": "8cda7f8",
+  "run": "build\\runs\\20261029-021125-reflection-temporal-composition-f11a86",
+  "debugTestsPassed": 8,
+  "releaseTestsPassed": 8,
+  "existingRayOutputsPerConfiguration": 80,
+  "temporalOutputsPerConfiguration": 16,
+  "changedScalars": {
+    "debug": [
+      2754,
+      2781,
+      664,
+      664
+    ],
+    "release": [
+      2754,
+      2781,
+      664,
+      664
+    ]
+  },
+  "zeroAcceptanceOutputByteExact": true,
+  "host": {
+    "debug": {
+      "coreCaptures": 10,
+      "coreStatus": "passed",
+      "surfaceCases": 4,
+      "surfaceStatus": "passed"
+    },
+    "release": {
+      "coreCaptures": 10,
+      "coreStatus": "passed",
+      "surfaceCases": 4,
+      "surfaceStatus": "passed"
+    }
+  },
+  "shaderFilesUnchangedPerConfiguration": 208,
+  "additionalWorstCaseBytesPerPixelPerSlot": 20,
+  "maximumCombinedBytes": 536870912,
+  "mainSceneTemporalIntegrated": false,
+  "nativeContinuousSequenceVerified": false,
+  "source": {
+    "src/render/ScreenReflectionGpu.cpp": "b0a8961b9aa5b66439c71518b748c41e9099615a48e8b2c416d70aeaaa89f9b2",
+    "src/render/ScreenReflectionGpu.hpp": "8c0c75dfae87bee7f0d664a32b11dd70ed3c7c88db52bf35fe64ed532e6714a6",
+    "tests/ScreenReflectionTests.cpp": "b2719f58d311a3cb1b5dd1012f2fccae9a2d2bf00948b0af6b4ad3e44de94806",
+    "tests/ReflectionRayGpuTests.cpp": "79d2b979ba846534af84165d316057f5163c7e7144a1a81251afbaee148c5103"
+  },
+  "logs": {
+    "red-build.log": "a587c438333a17bb1c5b4bc4294e798cf00df1cf0c9cfcd82d9d8044460c8ec0",
+    "red-test.log": "9221be6daf9cc7b4a7b88896bf5cebc6c4ef665850ab923ef2062d36015dca70",
+    "green-build.log": "b3c4e4ee98ffb29809501af677d35fa33ef211eb07875f7db4b7e74f55dfcd69",
+    "green-test.log": "63a7e1dc3616086e16426dc587657743c29294918a9e4ec312f2b3671d7c79bf",
+    "all-debug-build.log": "00d43afd5e39c333be8cf49edadfa19ad4afff202cc9d8feead8bfbcac6f7242",
+    "all-release-build.log": "2a6d212ccf8ca297807037117aabfa593cb3a55828c9b37e159fd2ad736d8e92",
+    "regression-debug.log": "d95cf1ff21216c7b89908aa9c9fcf5575d5987fac19f7487093c5147fb7e9ae8",
+    "regression-release.log": "7c5ee20a82a60f2fb465ccb0a8e387a7f66010fa4c7fae24ef99ffdfc372e3c1",
+    "composition-debug-verbose.log": "d56bc56ae9130361e79782987f57b158c328c77e5c98a4529cb30027dc6f1840",
+    "composition-release-verbose.log": "ab593da21b31240a36c02f785271ce863123070a1281d46a297297825d4b544f"
+  }
+}

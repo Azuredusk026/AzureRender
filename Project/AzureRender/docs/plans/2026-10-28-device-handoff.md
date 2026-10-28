@@ -42,6 +42,9 @@ Debug 和 Release 的输出均逐级匹配十二份数据。
 默认拥有对照的 80 帧 PNG 与候选逐字节一致。
 数值及画质待项见[共享验收](../acceptance/nr/shared-motion.md)。
 逐视图反射历史及其生产顺序继续接入。
+公共组合已支持射线、时间核、层级与空间过滤的连接。
+预算及连续槽位见[时间组合验证](../acceptance/nr/reflection-temporal-composition.md)。
+主场景继续接入前置运动及遮挡显露接收权重。
 KK 动态夹具通过 NR7-AA5-E1 的双配置边缘门槛。
 服饰、薄透明及正式场景继续联合验收。
 数值及剩余范围见[运动边缘验证](../acceptance/nr/temporal-motion-edges.md)。

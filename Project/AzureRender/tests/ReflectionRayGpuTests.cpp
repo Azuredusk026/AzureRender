@@ -5,6 +5,7 @@
 #include "support/VulkanComputeFixture.hpp"
 #include "support/ComputeTexture.hpp"
 #include <cstring>
+#include <filesystem>
 using namespace azurerender;
 namespace {
 void require(bool v,const char* message){if(!v)throw std::runtime_error(message);}
@@ -30,7 +31,7 @@ bool centralMirrorHit(const ReflectionTraceView& view,bool ortho,bool moved,unsi
     return clip[3]>0&&std::abs(clip[0])<=clip[3]&&std::abs(clip[1])<=clip[3]&&clip[2]>=0&&clip[2]<=clip[3];
 }
 void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayShaders,const ReflectionPyramidShaders& pyramidShaders,
-    const std::vector<char>& filterShader,const std::vector<char>& depthShader,bool packed,unsigned mode,bool composed,bool reduced=false){
+    const std::vector<char>& filterShader,const std::vector<char>& depthShader,bool packed,unsigned mode,bool composed,bool reduced=false,const ReflectionTemporalShaders* temporal=nullptr){
     const unsigned outputWidth=reduced?width/2:width,outputHeight=reduced?height/2:height;
     const bool ortho=mode==1||mode==3,rolled=mode==2,moved=mode==4;
     ReflectionTraceView view;view.right=rolled?std::array<float,3>{0,1,0}:std::array<float,3>{1,0,0};
@@ -60,14 +61,24 @@ void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayS
     ReflectionSpatialFilterGpu filter(*host.backend,{outputWidth,outputHeight},2,filterShader);
     std::unique_ptr<ScreenReflectionGpu> combined;
     if(composed)combined=std::make_unique<ScreenReflectionGpu>(*host.backend,VkExtent2D{width,height},2,
-        ScreenReflectionShaders{depthShader,filterShader,rayShaders,pyramidShaders},7,packed?ReflectionPyramidPrecision::RequirePacked:ReflectionPyramidPrecision::Float32,reduced?2U:1U);
+        ScreenReflectionShaders{depthShader,filterShader,rayShaders,pyramidShaders,temporal?*temporal:ReflectionTemporalShaders{}},7,packed?ReflectionPyramidPrecision::RequirePacked:ReflectionPyramidPrecision::Float32,reduced?2U:1U,temporal!=nullptr);
+    std::unique_ptr<test::ComputeTexture> motion,acceptance,rejection;
+    if(temporal){
+        motion=std::make_unique<test::ComputeTexture>(*host.backend,width,height,1,2,VK_FORMAT_R32G32_SFLOAT,std::vector<float>(width*height*2,0));
+        acceptance=std::make_unique<test::ComputeTexture>(*host.backend,outputWidth,outputHeight,1,1,VK_FORMAT_R32_SFLOAT,std::vector<float>(outputWidth*outputHeight,1));
+        rejection=std::make_unique<test::ComputeTexture>(*host.backend,outputWidth,outputHeight,1,1,VK_FORMAT_R32_SFLOAT,std::vector<float>(outputWidth*outputHeight,0));
+    }
     std::array<rhi::GpuBuffer,2> buffers{};
     try{
         for(auto& buffer:buffers)buffer=host.allocator.createBuffer(outputWidth*outputHeight*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
             if(combined){
                 for(unsigned slot=0;slot<2;++slot){ScreenSpaceReflectionSettings settings;settings.enabled=slot==0;settings.maxDistance=12;settings.maxSteps=128;
-                    combined->record(commands,slot,{surface.view,color.view,width,height},view,settings);}
+                    ScreenReflectionHistoryInputs history;
+                    if(temporal){history.motion=motion->view;history.acceptance=acceptance->view;history.parameters.minimumColor=0;
+                        history.parameters.historyValid=slot!=0;
+                        if(slot){history.previousColor=combined->history(0).color;history.previousConfidence=combined->history(0).confidence;}}
+                    combined->record(commands,slot,{surface.view,color.view,width,height},view,settings,temporal?&history:nullptr);}
             }else{
                 for(unsigned slot=0;slot<2;++slot){signals.beginBaseWrite(commands,slot);ScreenSpaceReflectionSettings settings;
                     settings.enabled=slot==0;settings.maxDistance=12;settings.maxSteps=128;
@@ -91,6 +102,34 @@ void fixture(test::VulkanComputeFixture& host,const ReflectionTraceShaders& rayS
             else {require(center[3]>.5F,"Analytic mirror must hit the visible emissive wall");const std::array<float,3> expected{1,.2F,.1F};
                 for(unsigned c=0;c<3;++c)require(std::abs(center[c]-expected[c])<(packed?.02F:1e-5F),"Reflected radiance differs from independent wall color");}
         }
+        if(temporal){
+            ScreenReflectionHistoryInputs history;history.motion=motion->view;history.acceptance=acceptance->view;
+            history.parameters.minimumColor=0;history.parameters.historyValid=true;history.parameters.varianceScale=10;
+            history.previousColor=combined->history(1).color;history.previousConfidence=combined->history(1).confidence;
+            ScreenSpaceReflectionSettings settings;settings.enabled=true;settings.maxDistance=12;settings.maxSteps=128;
+            host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
+                combined->record(commands,0,{surface.view,color.view,width,height},view,settings,&history);
+                const auto output=combined->output(0);
+                commands.imageBarrier({output.image,output.layout,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+                commands.copyImageToBuffer(output.image,buffers[1].buffer,{outputWidth,outputHeight});
+                commands.bufferBarrier({buffers[1].buffer,0,buffers[1].size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+            });
+            host.allocator.invalidate(buffers[1],0,buffers[1].size);
+            const auto* first=static_cast<const float*>(buffers[0].mapped);const auto* next=static_cast<const float*>(buffers[1].mapped);
+            unsigned changed=0;for(unsigned i=0;i<outputWidth*outputHeight*4;++i){require(std::isfinite(next[i]),"Nonfinite composed temporal output");if(std::abs(first[i]-next[i])>1e-6F)++changed;}
+            require(changed>0,"Accepted reflection history must change the composed output near signal boundaries");
+            std::cout<<"Temporal composed reduced="<<reduced<<" packed="<<packed<<" changed="<<changed<<'\n';
+            history.previousColor=combined->history(0).color;history.previousConfidence=combined->history(0).confidence;history.acceptance=rejection->view;
+            host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
+                combined->record(commands,1,{surface.view,color.view,width,height},view,settings,&history);
+                const auto output=combined->output(1);
+                commands.imageBarrier({output.image,output.layout,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+                commands.copyImageToBuffer(output.image,buffers[1].buffer,{outputWidth,outputHeight});
+                commands.bufferBarrier({buffers[1].buffer,0,buffers[1].size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+            });
+            host.allocator.invalidate(buffers[1],0,buffers[1].size);
+            require(std::memcmp(buffers[0].mapped,buffers[1].mapped,outputWidth*outputHeight*16)==0,"Zero acceptance must recover the exact current-only composed output");
+        }
         for(auto& buffer:buffers)host.allocator.destroyBuffer(buffer);
     }catch(...){for(auto& buffer:buffers)host.allocator.destroyBuffer(buffer);throw;}
 }
@@ -99,8 +138,11 @@ int main(int argc,char** argv)try{
     require(argc==7,"Expected packed/wide ray and pyramid shaders, then filter shader");test::VulkanComputeFixture host;
     const ReflectionTraceShaders rays{readBinaryFile(argv[1]),readBinaryFile(argv[2])};
     const ReflectionPyramidShaders pyramids{readBinaryFile(argv[3]),readBinaryFile(argv[4])};const auto filter=readBinaryFile(argv[5]);const auto depth=readBinaryFile(argv[6]);
+    const auto directory=std::filesystem::path(argv[5]).parent_path().u8string();
+    const ReflectionTemporalShaders temporal{readBinaryFile(directory+"/reflection_temporal_packed.comp.spv"),readBinaryFile(directory+"/reflection_temporal_float.comp.spv")};
     for(bool composed:{false,true})for(bool packed:{false,true})for(unsigned mode=0;mode<5;++mode)fixture(host,rays,pyramids,filter,depth,packed,mode,composed);
     for(bool composed:{false,true})for(bool packed:{false,true})for(unsigned mode=0;mode<5;++mode)fixture(host,rays,pyramids,filter,depth,packed,mode,composed,true);
+    for(bool reduced:{false,true})for(bool packed:{false,true})fixture(host,rays,pyramids,filter,depth,packed,0,true,reduced,&temporal);
     require(host.errors==0&&!host.allocator.statistics().liveImages&&!host.allocator.statistics().liveBuffers,"Reflection ray validation or retirement failed");
-    std::cout<<"PASS: 80 full/half outputs, perspective/orthographic/rolled/offset/motion, validation=0 resources=0\n";return 0;
+    std::cout<<"PASS: 80 full/half outputs plus 16 temporal outputs, perspective/orthographic/rolled/offset/motion, validation=0 resources=0\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

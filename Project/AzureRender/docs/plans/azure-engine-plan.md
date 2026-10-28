@@ -141,6 +141,7 @@ AA1、AA2 的提交基础与运动数学已完成公共验证。
 本帧计算反射的主场景装配见[组合契约](../runtime/screen-reflection.md)。
 半尺寸层级与源像素选择见[尺寸验收](../acceptance/nr/reflection-resolution.md)。
 历史计算的冻结输入及公共资源见[时间过滤验收](../acceptance/nr/reflection-temporal.md)。
+射线与时间核的公共组合见[时间组合验证](../acceptance/nr/reflection-temporal-composition.md)。
 主宿主共享运动目标及双配置验证见[共享验收](../acceptance/nr/shared-motion.md)。
 KK 动态边缘的双配置门槛见[运动边缘验证](../acceptance/nr/temporal-motion-edges.md)。
 原版层级射线及动态时间历史继续验收。
