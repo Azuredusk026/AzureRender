@@ -90,10 +90,14 @@ private:
     bool temporalMaterialSamplesActive() const noexcept;
     void initializeHairIntegralPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&);
     void destroyHairIntegralPipelines() noexcept;
-    void initializeOrdinaryOpaquePipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&,const rhi::GraphicsPipelineDesc&);
-    void destroyOrdinaryOpaquePipelines() noexcept;
+    void initializeMaterialClassPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&,const rhi::GraphicsPipelineDesc&);
+    void destroyMaterialClassPipelines() noexcept;
     std::array<VkPipeline,4> ordinaryOpaquePipelines_{};
     std::array<VkPipeline,4> ordinaryOpaqueSnapshotPipelines_{};
+    static constexpr unsigned kMaterialClassVariantCount=unsigned(AssetMaterialClass::Showcase)+1;
+    std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassPipelines_{};
+    std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassSnapshotPipelines_{};
+    VkPipeline materialClassPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const noexcept;
     VkPipeline hairIntegralPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const;
     std::array<VkPipeline,8> hairIntegralPipelines_{};
     std::array<VkPipeline,4> hairIntegralSnapshotPipelines_{};

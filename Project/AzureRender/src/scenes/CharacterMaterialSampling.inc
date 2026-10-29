@@ -1,11 +1,19 @@
 // Optional material shader variants share the renderer's layout and ownership.
-void CharacterSceneRenderer::initializeOrdinaryOpaquePipelines(const RenderContext& context,
+void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContext& context,
     const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot) {
-    const auto eligible=[](const auto& asset){return std::any_of(asset.materials.begin(),asset.materials.end(),ordinaryOpaqueMaterial);};
-    bool needed=eligible(asset_);for(const auto& resource:additionalResources_)needed|=eligible(resource->asset);
-    if(!needed)return;
+    bool needed=false;
+    std::array<bool,kMaterialClassVariantCount> classes{};
+    const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
+        if(ordinaryOpaqueMaterial(material))needed=true;
+        else if(material.alphaMode!=AssetAlphaMode::Blend){
+            const auto index=unsigned(material.materialClass);
+            if(index<classes.size())classes[index]=true;
+        }
+    }};
+    inspect(asset_);for(const auto& resource:additionalResources_)inspect(resource->asset);
+    if(!needed&&std::none_of(classes.begin(),classes.end(),[](bool value){return value;}))return;
     try{
-        for(unsigned facing=0;facing<4;++facing){
+        if(needed)for(unsigned facing=0;facing<4;++facing){
             auto desc=color;
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
             desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
@@ -17,16 +25,40 @@ void CharacterSceneRenderer::initializeOrdinaryOpaquePipelines(const RenderConte
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaqueSnapshotPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
         }
-    }catch(...){destroyOrdinaryOpaquePipelines();throw;}
+        for(unsigned index=0;index<classes.size();++index)if(classes[index]){
+            for(unsigned facing=0;facing<4;++facing){
+                auto desc=color;
+                desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+                desc.fragmentSpecialization={{1,index}};
+                materialClassPipelines_[index][facing]=rhi_->createGraphicsPipeline(desc);
+                desc=snapshot;
+                desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
+                desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+                desc.fragmentSpecialization={{1,index}};
+                materialClassSnapshotPipelines_[index][facing]=rhi_->createGraphicsPipeline(desc);
+            }
+        }
+    }catch(...){destroyMaterialClassPipelines();throw;}
 }
-void CharacterSceneRenderer::destroyOrdinaryOpaquePipelines() noexcept {
+void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
     if(!rhi_)return;
+    for(auto* variants:{&materialClassPipelines_,&materialClassSnapshotPipelines_})
+        for(auto& facing:*variants)for(auto& pipeline:facing){
+            if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
+        }
     for(auto& pipeline:ordinaryOpaquePipelines_){
         if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
     }
     for(auto& pipeline:ordinaryOpaqueSnapshotPipelines_){
         if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
     }
+}
+
+VkPipeline CharacterSceneRenderer::materialClassPipeline(const AssetMaterial& material,bool mirrored,bool snapshot) const noexcept {
+    const auto index=unsigned(material.materialClass);
+    if(material.alphaMode==AssetAlphaMode::Blend||index>=kMaterialClassVariantCount)return VK_NULL_HANDLE;
+    return (snapshot?materialClassSnapshotPipelines_:materialClassPipelines_)[index][surfaceFacingIndex(material.doubleSided,mirrored)];
 }
 
 void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext& context,

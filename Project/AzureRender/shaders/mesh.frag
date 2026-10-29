@@ -144,7 +144,8 @@ layout(push_constant) uniform MaterialData {
 } material;
 
 layout(constant_id=0) const bool azureOrdinaryOpaque=false;
-#define AZURE_MATERIAL_CLASS (azureOrdinaryOpaque?0U:material.materialClass)
+layout(constant_id=1) const uint azureFixedMaterialClass=0xffffffffU;
+#define AZURE_MATERIAL_CLASS (azureOrdinaryOpaque?0U:(azureFixedMaterialClass!=0xffffffffU?azureFixedMaterialClass:material.materialClass))
 #define AZURE_ALPHA_MODE (azureOrdinaryOpaque?0:material.alphaMode)
 // View-owned temporal sampling and coverage remain dynamic.
 #define AZURE_MATERIAL_FEATURES azureSpecializedMaterialFeatures(azureOrdinaryOpaque,material.materialFeatures)

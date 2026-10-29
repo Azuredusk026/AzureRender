@@ -1630,6 +1630,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"screenReflectionWidth\": " << (screenReflections_?screenReflections_->output(0).extent.width:0) << ",\n"
          << "  \"screenReflectionHeight\": " << (screenReflections_?screenReflections_->output(0).extent.height:0) << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
+         << "  \"materialClassPipelineCount\": " << [&]{unsigned count=0;for(const auto& variants:materialClassPipelines_)for(auto p:variants)count+=p!=VK_NULL_HANDLE;return count;}() << ",\n"
          << "  \"ordinaryOpaqueSnapshotPipelineCount\": " << std::count_if(ordinaryOpaqueSnapshotPipelines_.begin(),ordinaryOpaqueSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
          << "  \"irradianceQueryScope\": \"physical-surface\",\n"
@@ -2716,10 +2717,12 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
             // Radial eyes can transform the alpha-test UV before coverage.
             const bool simpleDepth=!colorRequired&&!(m.alphaMode==AssetAlphaMode::Mask
                 &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
+            const auto classPipeline=materialClassPipeline(m,mirrored,true);
             commands.bindPipeline(prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
                 :simpleDepth?snapshotDepthOnlyPipelines_[m.doubleSided?2:mirrored?1:0]
                 :ordinaryOpaqueMaterial(m)?ordinaryOpaqueSnapshotPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
+                :classPipeline?classPipeline
                 :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]);
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
@@ -3349,7 +3352,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
         depthDesc.colorAttachmentCount=2;
         createFacingPipelines(overlayDepthPipelines_,depthDesc);
-        try{initializeOrdinaryOpaquePipelines(context,integralBase,depthDesc);}
+        try{initializeMaterialClassPipelines(context,integralBase,depthDesc);}
         catch(...){rhi_->destroyShaderModule(depthModule);throw;}
         rhi_->destroyShaderModule(depthModule);
         const auto simpleDepthModule=rhi_->createShaderModule(mainFragment(bindlessTextures_
@@ -3503,7 +3506,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 void CharacterSceneRenderer::destroyResources() {
     viewFog_.reset();
-    destroyOrdinaryOpaquePipelines();
+    destroyMaterialClassPipelines();
     destroyHairIntegralPipelines();
     motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();reflectionMotionDraws_.clear();motionPreviousValidObjects_=0;
     destroyOverlayDepth();
@@ -3662,7 +3665,7 @@ void CharacterSceneRenderer::destroyResources() {
 
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
     if(viewFog_)viewFog_->releasePipelines();
-    destroyOrdinaryOpaquePipelines();
+    destroyMaterialClassPipelines();
     destroyHairIntegralPipelines();
     for (VkPipeline* pipeline : {
              &opaquePipelines_[0],
@@ -4530,12 +4533,14 @@ void CharacterSceneRenderer::drawPrimitive(
         :(vertexColor?vertexColorBlendPipelines_:blendPipelines_);
     const auto fogPipeline=viewFog_&&blend&&material.unlitTextureLayers.fogMode==UnlitTextureLayers::FogMode::Scene
         ?viewFog_->materialPipeline(additive,vertexColor,surfaceFacingIndex(material.doubleSided,mirrored)):VK_NULL_HANDLE;
+    const auto classPipeline=materialClassPipeline(material,mirrored,false);
     const VkPipeline pipeline = fogPipeline?fogPipeline:(material.materialFeatures&MaterialFeatureHairPixelIntegral)
         ?hairIntegralPipeline(material,mirrored,false):multiplyComposite
         ? (multiplyPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
         : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipelines_[mirrored?1:0] : blend
         ? transparentPipelines[surfaceFacingIndex(material.doubleSided,mirrored)]
         : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]
+        :classPipeline?classPipeline
         : (opaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]);
     const auto colorBuffer=snapshot&&!snapshot->buffers.vertexColors.empty()
         ?snapshot->buffers.vertexColors.at(snapshot->instances.at(firstInstance).meshKey):whiteVertexColorBuffer_.buffer;
