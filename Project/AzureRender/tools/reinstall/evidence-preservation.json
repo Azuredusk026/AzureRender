@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "rdcCount": 42,
+  "rdcBytes": 16987601622,
+  "activeMaterialInputHashes": 16,
+  "preservedPngPaths": 126570,
+  "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51"
+}

@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+重装与迁移后先阅读[恢复交接](docs/plans/2026-10-29-reinstall-handoff.md)。
+
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。
 显式管线编译统计见[GPU 管线检查](docs/development/pipeline-inspection.md)。
 实际主场景热点与保留预算见[成本验证](docs/acceptance/nr/main-aa-cost-attribution.md)。

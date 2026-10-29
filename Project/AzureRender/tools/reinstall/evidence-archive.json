@@ -1,0 +1,19 @@
+{
+  "status": "verified",
+  "root": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender",
+  "inputs": [
+    "build/runs",
+    "build/ninja-msvc-debug",
+    "build/ninja-msvc-release",
+    "build/p8-final-2026-10-14",
+    "showcase/archive_legacy"
+  ],
+  "files": 607318,
+  "hardlinks": 77678,
+  "logicalBytes": 335161100145,
+  "payloadBytes": 117971213505,
+  "archiveBytes": 62901352215,
+  "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+  "manifestSha256": "8741261ebd1093dd53e39056bac17532904a6bdb76c5022740ff981a1a72a877",
+  "seconds": 5548.533616065979
+}

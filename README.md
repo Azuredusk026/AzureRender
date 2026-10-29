@@ -13,6 +13,7 @@ AzureRender 提供原生 Vulkan 渲染核心和第三人称游戏引擎。Window
 
 | 目标 | 入口 |
 | --- | --- |
+| 重装或迁移后恢复开发 | [重装恢复交接](Project/AzureRender/docs/plans/2026-10-29-reinstall-handoff.md) |
 | 运行公开演示 | [第三人称探索关卡](Project/AzureRender/docs/runtime/exploration-gameplay.md) |
 | 构建编辑器与 Player | [构建与使用](Project/AzureRender/docs/getting-started.md) |
 | 学习关卡制作 | [从空关卡制作并发布游戏](Project/AzureRender/docs/tutorials/editor-first-game.md) |
