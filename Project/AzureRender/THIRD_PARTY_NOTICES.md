@@ -4,6 +4,11 @@ AzureRender 使用以下第三方依赖。发布目录保留包管理器或上�
 
 离线动画采样工具使用 [ufbx](https://github.com/ufbx/ufbx/tree/v0.17.1) 0.17.1，许可证为 MIT。`prepare_fbx_tool.py` 校验源码 SHA-256，下载许可证并编译宿主工具。源码与许可证位于本机 `build/f1/ufbx/`。该工具用于素材准入与离线重定向，运行时读取 glTF 2.0。
 
+离线着色程序工具采用 Microsoft 的 DXBC 格式及校验规则。
+令牌格式依据 DirectX-Headers 的固定提交。
+容器校验采用 DirectXShaderCompiler 的规则，并以 Python 表达。
+固定版本、适配范围及许可见[来源清单](third_party/shader_arithmetic_order/source.json)。
+
 | 依赖 | 许可证 |
 | --- | --- |
 | Vulkan Headers 与 Loader | Apache License 2.0 |

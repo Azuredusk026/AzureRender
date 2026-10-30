@@ -4,6 +4,7 @@
 前置候选为材质特化提交 `286809a`。
 目标：索引常驻内容以引用及文件指纹为主。
 依据为[恢复计划](2026-10-30-development-recovery.md)中的启动诊断。
+
 技术采用 C++17、nlohmann/json 和现有资产数据库。
 
 ## 结构与契约
@@ -78,6 +79,7 @@
 内存检查为 `AzureEngine.AssetDependencyIndex`。
 引用契约检查为 `AzureEngine.AssetDependencyIndex.Contracts`。
 双配置的引用契约在修改运行时之前已通过。
+
 红测应报告常驻分配超限，绿测应正常退出。
 
 ## 任务二：兼容与实际启动
@@ -93,6 +95,7 @@
 二维依赖使用 `AzureAssets.Scene2DDependencies`。
 其余测试名称以实际 CTest 清单核对。
 Debug 启动期限保持六百秒。
+
 完整 Debug 启动仍在资源加载阶段超时。
 该结果进入待项，相关修复或环境变化后再重试。
 Release 八帧及双配置三种夹具通过图像与释放检查。

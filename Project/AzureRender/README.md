@@ -4,6 +4,8 @@
 
 资产引用、热刷新及内存验证见[依赖索引](docs/acceptance/recovery/asset-dependency-index.md)。
 
+原生射线的计算顺序及冻结数值参考见[顺序验证](docs/acceptance/nr/native-ray-arithmetic-order.md)。
+
 重装与迁移后先阅读[恢复交接](docs/plans/2026-10-29-reinstall-handoff.md)。
 
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。
@@ -18,66 +20,82 @@
 精确采样抖动及 NPR 接收边界见[查询位置](docs/acceptance/nr/irradiance-query.md)。
 像素原点、镜像场方向及实际镜头见[查询坐标](docs/acceptance/nr/irradiance-query-frame.md)。
 地面实际 UV 绑定及颜色上传见[地面绑定](docs/acceptance/nr/floor-runtime-binding.md)。
+
 探针身份、动态反射链及对照镜头见[运行核验](docs/acceptance/nr/native-reflection-bindings.md)。
 可配置的探针预滤波层级见[层级验收](docs/acceptance/nr/reflection-lod.md)。
 有序体积、辐照亮度适配及生产消费见[探针验收](docs/acceptance/nr/reflection-probe-fields.md)。
 双面镜像的法线、GI 及积分头发联合路径见[朝向验收](docs/acceptance/nr/surface-facing.md)。
+
 截帧资源定位、明确来源和关卡快照见[来源选择](docs/acceptance/nr/scene-source-selection.md)。
 原生 UV1、网格烘焙和统一运行表面见[坐标验收](docs/acceptance/nr/surface-uv-domain.md)。
 Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/nr/lit-normal-decoding.md)。
 网格作者法线、角点及生产入口见[来源验收](docs/acceptance/nr/mesh-corner-normals.md)。
+
 局部灯档案、实体身份及实际镜头见[倍率绑定](docs/acceptance/nr/local-light-profile-binding.md)。
 活动主光的辐照输入及方向核对见[主光验收](docs/acceptance/nr/main-light-runtime-binding.md)。
 级联上游遮挡范围及滤波尺度见[阴影验收](docs/acceptance/nr/cascade-caster-depth.md)。
 局部灯源颜色、单精度解码及温度边界见[颜色验收](docs/acceptance/nr/local-light-color-space.md)。
+
 活动颜色表、硬件采样及实际镜头见[调色验收](docs/acceptance/nr/captured-color-grading-lut.md)。
 活动灯光索引、公共快照及接收范围见[灯光验收](docs/acceptance/nr/captured-active-lights.md)。
 静态作者法线与精确轴置换见[批量验收](docs/acceptance/nr/static-authored-normals.md)。
 上方与后方来源接入见[围护验收](docs/acceptance/nr/enclosure-authored-normals.md)。
+
 物流图层、完整材质与实际绘制见[图层接入](docs/runtime/unlit-texture-layers.md)。
 活动物流图层、颜色及采样来源见[截帧绑定](docs/acceptance/nr/captured-vfx-layers.md)。
 层级采样、覆盖率及实际实例见[绘制验收](docs/acceptance/nr/vfx-mip-and-coverage.md)。
 近远淡出、材质保留行及实际图层见[深度验收](docs/acceptance/nr/vfx-view-depth-fade.md)。
+
 公共顶点颜色、多流绑定及实际特效见[颜色验收](docs/acceptance/nr/vertex-color-streams.md)。
 柱面视角覆盖率与加色合成见[合成验收](docs/acceptance/nr/view-dependent-vfx-coverage.md)。
 实际箱体姿态、共享材质及完整镜头见[箱体验收](docs/acceptance/nr/captured-logistics-boxes.md)。
 独立覆盖率、作者层级及实际字形见[覆盖率验收](docs/acceptance/nr/unlit-coverage-texture.md)。
+
 三项原生材质组合与隔离绘制见[组合验收](docs/acceptance/nr/remaining-vfx-combinations.md)。
 基础坐标扰动、独立采样及实际墙面见[扰动验收](docs/acceptance/nr/base-uv-distortion.md)。
 中央字形柱与独立覆盖率组合见[字形柱验收](docs/acceptance/nr/central-glyph-composition.md)。
 雾效传输、体积格式及原版载荷见[雾效数据验收](docs/acceptance/nr/fog-transport-data.md)。
+
 三维雾场上传、原版采样及资源释放见[雾场 GPU 验收](docs/acceptance/nr/fog-volume-gpu.md)。
 像素原点、抖动及深度映射见[视图坐标验收](docs/acceptance/nr/view-fog-projection.md)。
 场景资源、捕获视图及保存重开见[绑定验收](docs/acceptance/nr/view-fog-scene-binding.md)。
 预积分雾场、实际表面与资源隔离见[表面验收](docs/acceptance/nr/view-fog-surfaces.md)。
+
 中央白色标识与浮点附件对照见[标识验收](docs/acceptance/nr/central-late-glyph.md)。
 逐采样深度、覆盖率与双配置回归见[轮廓验收](docs/acceptance/nr/view-fog-multisample.md)。
 普通无光照表面、附件一致性及 GPU 成本见[预算验收](docs/acceptance/nr/unlit-opaque-budget.md)。
 光谱大气、远端片元与公共数值见[解析雾验收](docs/acceptance/nr/analytic-fog.md)。
+
 场景支持[解析雾配置](docs/runtime/scene-fog.md)及独立解析介质。
 双配置、真实片元与完整候选见[合成验收](docs/acceptance/nr/scene-fog.md)。
 阶段截图、机位和待验差异见[画面记录](docs/acceptance/nr/visual-history.md)。
 物流彩色环带的源实例及采样见[还原验收](docs/acceptance/nr/opaque-logistics-rings.md)。
+
 公共 glTF 采样器及完整场景结果见[采样器验收](docs/acceptance/nr/gltf-sampler-contract.md)。
 原版动态反射过滤及公共接入边界见[来源验收](docs/acceptance/nr/reflection-filter-source.md)。
 四通道表面快照及格式选择见[快照契约](docs/runtime/reflection-surface-snapshot.md)。
 最近深度、反向深度及奇数维度归约见[层级契约](docs/runtime/depth-pyramid.md)。
+
 计算射线、投影重建及基础信号生产见[射线契约](docs/runtime/reflection-ray.md)。
 主场景计算生产、资源预算及消费见[组合契约](docs/runtime/screen-reflection.md)。
 半分辨率生产、真实深度及整数选样见[尺寸验收](docs/acceptance/nr/reflection-resolution.md)。
 反射历史计算及借用图像资源见[时间过滤契约](docs/runtime/reflection-temporal.md)。
+
 时间核的公共组合与槽位验证见[组合验收](docs/acceptance/nr/reflection-temporal-composition.md)。
 公共运动选样及深度接收见[重投影契约](docs/runtime/reflection-reprojection.md)。
 前置运动与主场景反射历史见[装配验收](docs/acceptance/nr/main-reflection-history.md)。
 完整场景的逐事件成本见[GPU 热点](docs/acceptance/nr/reflection-pass-profile.md)。
+
 普通材质快照特化及画面兼容见[预算验证](docs/acceptance/nr/snapshot-shading-budget.md)。
 原版射线输入、过滤足迹及数值待项见[来源核验](docs/acceptance/nr/native-ray-source.md)。
 共享运动目标及画面兼容范围见[共享验收](docs/acceptance/nr/shared-motion.md)。
 时序 KK 动态夹具及剩余范围见[运动边缘验证](docs/acceptance/nr/temporal-motion-edges.md)。
+
 隐藏平台的运动覆盖及实际附件见[可见性验证](docs/acceptance/nr/motion-visible-surfaces.md)。
 服饰及 KK 动态门槛见[轮廓显示验证](docs/acceptance/nr/temporal-display-edges.md)。
 独立过滤资源及双配置结果见[公共过滤验收](docs/acceptance/nr/reflection-spatial-filter.md)。
 实际镜头、上向量及输入指纹见[相机来源](docs/acceptance/nr/capture-camera.md)。
+
 原生数组、零符号约定及双配置硬件采样见[数组验收](docs/acceptance/nr/octahedral-environment.md)。
 
 原生时序输入与运动解码见[时序核验](docs/acceptance/nr/native-temporal-inputs.md)。
@@ -87,32 +105,39 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 逐材质 NPR 光色及真实皮肤色带见[光色验证](docs/acceptance/nr/npr-material-lighting.md)。
 材质边缘响应、视角色彩及正交切线见[边缘验证](docs/acceptance/nr/material-rim-and-view-tint.md)。
 有符号主光色带及身体输入见[色带验证](docs/acceptance/nr/signed-main-ramp.md)。
+
 角色可见量来源及对象阴影生产见[阴影验证](docs/acceptance/nr/character-visibility-inputs.md)。
 实例 GPU 布局及原生投影输入见[实例验证](docs/acceptance/nr/instance-gpu-contract.md)。
 逐材质完整几何与平方根 Alpha 投影见[覆盖验证](docs/acceptance/nr/material-shadow-coverage.md)。
 对象阴影的注册配置、文档及投影见[配置验证](docs/acceptance/nr/object-shadow-configuration.md)。
+
 独立深度输入、共享采样器及实际画面见[采样验证](docs/acceptance/nr/shared-depth-sampling.md)。
 对象图集、GPU 过滤及真实角色边界见[对象阴影验证](docs/acceptance/nr/object-shadow-gpu.md)。
 公共对象可见量隔离支持生产输入与光照贡献分别核对。
 逐材质局部漫反射下限见[响应验证](docs/acceptance/nr/material-local-wrap.md)。
+
 对象接收位置与原生可见量见[坐标验证](docs/acceptance/nr/object-shadow-receiver.md)。
 
 眼睛 NPR 适配及完整材质文档见[输入验收](docs/acceptance/nr/eye-npr-inputs.md)。
 原生采样器、硬件层级及梯度进入独立证据核对。
 完整眼部区域、层级边界及动态姿态继续验收。
 材质槽位查询与主场景图像回归见[元数据验收](docs/acceptance/nr/material-slot-inspection.md)。
+
 九动画角色、完整文档及实际转身见[主场景验证](docs/acceptance/nr/main-character-integration.md)。
 原生双帧的实例及跨阶段调色板见[来源核对](docs/acceptance/nr/material-frame-instance-producer.md)。
 身体骨盆原点及双配置验证见[径向原点验收](docs/acceptance/nr/body-rim-origin.md)。
 蒙皮齐次位置及剩余严格图像门禁见[位置验收](docs/acceptance/nr/skinning-position-consistency.md)。
+
 服饰二维高光的公共契约与实际画面边界见[服饰验收](docs/acceptance/nr/cloth-specular-ramp.md)。
 服饰原生输入、组合照明及主候选见[接入验收](docs/acceptance/nr/cloth-native-integration.md)。
 普通材质零贡献光源及主场景预算见[成本验证](docs/acceptance/nr/ordinary-light-zero-energy.md)。
 不透明副本预填及共面规则见[预填验证](docs/acceptance/nr/opaque-snapshot-depth-prefill.md)。
+
 不透明主通道预填、实际计数及联合成本见[主通道验证](docs/acceptance/nr/opaque-main-depth-prefill.md)。
 完整资产缓存复用、并发恢复及实际入口见[缓存验证](docs/acceptance/nr/complete-asset-cache-reuse.md)。
 距离描边的共享数学与深度来源见[分项验证](docs/acceptance/nr/outline-depth-source.md)。
 公共材质、可选方向流和独立深度壳见[接入验证](docs/acceptance/nr/outline-material-integration.md)。
+
 实际投影、独立裁剪图及动态主候选见[覆盖验证](docs/acceptance/nr/hair-depth-coverage.md)。
 共享角色可见量、环境域及第七版主入口见[接收验收](docs/acceptance/nr/hair-object-visibility.md)。
 公共精确深度偏置与原生对象图集见[生产验收](docs/acceptance/nr/object-shadow-exact-bias.md)。
@@ -122,22 +147,27 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 数值与原生输入范围见[照明验收](docs/acceptance/nr/npr-illumination.md)。
 实际顶点与采集调色表见[专项验证](docs/acceptance/nr/captured-vertex-and-grading.md)。
 头发手性、色带及分层输入见[坐标约定](docs/acceptance/nr/projected-hair-coordinates.md)。
+
 图片采样、原生 mip 及完整文档见[输入验证](docs/acceptance/nr/typed-image-inputs.md)。
 独立层级过滤、偏移及编辑消费见[采样状态](docs/acceptance/nr/sampler-filter-and-bias.md)。
 头发材质光色及双叶组合照明见[实际验证](docs/acceptance/nr/projected-hair-lighting.md)。
 捕获局部灯的输入和组合顺序见[记录验证](docs/acceptance/nr/captured-character-local-lights.md)。
+
 公共局部灯颜色及场景兼容见[运行验证](docs/acceptance/nr/character-local-light-response.md)。
 实际矩阵投影与点光覆盖见[聚簇验证](docs/acceptance/nr/clustered-light-projection.md)。
 有限线形积分、旋转与主叶消费见[线形验证](docs/acceptance/nr/character-line-light.md)。
 有序颜色混合、轴向距离及分项能量见[混合验证](docs/acceptance/nr/character-color-blend.md)。
+
 屏幕深度与镜面角色灯见[专项验证](docs/acceptance/nr/character-screen-light-modes.md)。
 捕获子像素相机与公共射线见[投影验证](docs/acceptance/nr/camera-projection-offset.md)。
 真实头发正主叶及逐层关闭对照见[分层验证](docs/acceptance/nr/projected-hair-positive-layers.md)。
 共享颜色核与原生片元见[头发照明验证](docs/acceptance/nr/captured-hair-illumination.md)。
+
 全局环境权重与主灯条纹见[贡献验证](docs/acceptance/nr/ambient-weight-and-main-line.md)。
 同机位诊断支持[捕获姿态与材质帧](docs/acceptance/nr/captured-character-pose.md)。
 投影头发支持显式虚拟主灯与独立条纹。
 数值、GPU 及实际消费见[条纹验收](docs/acceptance/nr/projected-hair-line.md)。
+
 完整材质文档接入共享 glTF 解释器与 UUID 依赖。
 十三槽真实角色对照见[完整文档验收](docs/acceptance/nr/complete-material-document.md)。
 
@@ -273,10 +303,12 @@ AzureRender 是使用 C++17 与原生 Vulkan 的 Windows 引擎。编辑器、�
 源参数、双配置检查及范围见[高光验收](docs/acceptance/nr/projected-hair.md)。
 显式角色外轮廓支持实例覆盖与独立渐隐。
 真实脸部及兼容待项见[外轮廓验收](docs/acceptance/nr/outline-coverage.md)。
+
 脸部数值控制及其范围见[高光正控制](docs/acceptance/nr/face-specular-control.md)。
 场景角色的局部探针消费材质镜面权重与诊断开关。
 分项结果见[反射控制](docs/acceptance/nr/character-probe-controls.md)。
 特效表面支持显式无光照颜色与透明度组合。
+
 来源及双配置检查见[特效验收](docs/acceptance/nr/unlit-surface.md)。
 
 双击安装目录中的 `bin/AzureRender.exe` 进入项目中心。
@@ -293,22 +325,27 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 模式包含关闭、原生分辨率过滤和四子像素超采样。
 配置与边界见[抗锯齿说明](docs/runtime/spatial-antialiasing.md)。
 模式三的运动、历史和资源契约见[时序抗锯齿](docs/runtime/temporal-antialiasing.md)。
+
 描边输出像素与细线能量见[覆盖验证](docs/acceptance/nr/outline-temporal-footprint.md)。
 高光隔离的显示倍率与曝光见[分量测量](docs/runtime/component-radiometry.md)。
 投影头发的可选采样积分见[材质验证](docs/acceptance/nr/projected-hair-pixel-integral.md)。
 不透明高光运动及部分响应见[运动验证](docs/acceptance/nr/material-motion-response.md)。
+
 混合细线覆盖见[覆盖验证](docs/acceptance/nr/blend-temporal-coverage.md)。
 裁剪纹理的缩小覆盖见[层级验证](docs/acceptance/nr/alpha-mip-footprint.md)。
 混合节点渐隐及运动覆盖见[渐隐验证](docs/acceptance/nr/blend-fade-motion.md)。
 真实角色移动与共面显露见[历史验证](docs/acceptance/nr/native-motion-history.md)。
+
 裁剪足迹与运动外壳见[覆盖验证](docs/acceptance/nr/cutout-motion-coverage.md)。
 动态高频门禁及几何样点对照见[细节验证](docs/acceptance/nr/native-detail-sampling.md)。
 多样点 RHI 声明及场景目标见[采样契约](docs/runtime/multisample-shading.md)。
 角色逐样点材质与动态质量见[材质验证](docs/acceptance/nr/multisample-character-material.md)。
+
 多样点副本、描边和边缘光见[副本验证](docs/acceptance/nr/multisample-snapshot-outline.md)。
 副本按颜色与深度需求选择着色，见[成本验证](docs/acceptance/nr/snapshot-depth-demand.md)。
 公共脚本镜头与真实角色的动态细节见[镜头验证](docs/acceptance/nr/camera-motion-quality.md)。
 公共四样点目标与最近深度解析见[专项验证](docs/acceptance/nr/multisample-scene-target.md)。
+
 主辅视图画质、实际样本与回退见[视图验证](docs/acceptance/nr/multisample-view-quality.md)。
 完整画质按[NR7-AA 计划](docs/plans/2026-10-22-spatial-antialiasing.md)推进。
 时序历史、材质走样及主场景运动细节保持待验。
@@ -453,6 +490,7 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 十发射器候选含 91 个槽位，已完成四秒实际采样。
 源材质、运动及待项见[物流联合验收](docs/acceptance/nr/logistics-multiclip.md)。
 离线管线见[路径资产转换](docs/assets/native-spline-conversion.md)。
+
 53 个上层对象已完成[联合采样](docs/acceptance/nr/upper-geometry.md)。
 角色表面及显式切线见[角色通道接入](docs/acceptance/nr/character-surfaces.md)。
 
@@ -465,10 +503,12 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 原生局部算法已核验，完整角色着色仍待还原。
 场景角色支持显式材质色带、高光及外轮廓。
 当前绑定与限制见[角色场景验收](docs/acceptance/nr/character-scene-lighting.md)。
+
 覆盖阴影支持[乘法颜色合成](docs/acceptance/nr/multiply-composite.md)。
 动态实例支持[节点透明度与渐隐描边](docs/acceptance/nr/node-opacity.md)。
 四机位工程视频及 WASD 回放见[角色与物流联合验证](docs/acceptance/nr/character-logistics-joint.md)。
 透明表面支持[场景颜色折射](docs/runtime/scene-color-refraction.md)。
+
 中庭一个原生玻璃材质已进入[联合候选](docs/acceptance/nr/native-glass.md)。
 
 展示记录见[帝江号材质与光照](docs/acceptance/ev/dijiang-lighting-video.md)。

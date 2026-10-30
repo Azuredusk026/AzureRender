@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "captureSha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+  "captureBytes": 944717392,
+  "event": 8702,
+  "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+  "outputs": [
+    {
+      "resource": 15861,
+      "bytes": 3686400,
+      "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+    },
+    {
+      "resource": 16501,
+      "bytes": 3686400,
+      "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+    },
+    {
+      "resource": 15781,
+      "bytes": 921600,
+      "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+    }
+  ],
+  "expectedControlDifferences": [
+    1,
+    9312,
+    0
+  ]
+}

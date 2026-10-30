@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "sourceCodeSha256": "6da92d2cb3e2603b75d822e752980ac89d5f1e4a1f86ba18c4a8d87d8669ca90",
+  "matrixPairs": [
+    {
+      "multiplyOffsetWords": 17,
+      "multiplyAddOffsetWords": 26
+    }
+  ],
+  "dotProducts": []
+}
