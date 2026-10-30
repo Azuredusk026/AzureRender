@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P0-dependencies",
+  "vcpkgCommit": "d186940b2f0c4e8e5b4ff804af57d2a26fbfa091",
+  "manifestSha256": "17a52a1c9824567172c9b06c602bdbe2d4d63ac38fb5e301f92b068b2cb3ab38",
+  "packages": [
+    {
+      "Package": "assimp",
+      "Version": "6.0.4",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "brotli",
+      "Version": "1.2.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "bzip2",
+      "Version": "1.0.8",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "clipper2",
+      "Version": "2.0.1",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "directxmath",
+      "Version": "2026-06-12",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "directxtex",
+      "Version": "2026-05-07",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "egl-registry",
+      "Version": "2025-05-27",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "freetype",
+      "Version": "2.14.3",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "glfw3",
+      "Version": "3.5.1",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "hwloc",
+      "Version": "2.11.2",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "imath",
+      "Version": "3.2.2",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "itlib",
+      "Version": "1.12.2",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "jhasse-poly2tri",
+      "Version": "2023-12-27",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "joltphysics",
+      "Version": "5.6.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "ktx",
+      "Version": "4.4.2",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "kubazip",
+      "Version": "0.3.14",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "libdeflate",
+      "Version": "1.25",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "libflac",
+      "Version": "1.5.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "libjpeg-turbo",
+      "Version": "3.2.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "liblzma",
+      "Version": "5.8.3",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "libogg",
+      "Version": "1.3.6",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "libpng",
+      "Version": "1.6.58",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "libvorbis",
+      "Version": "1.3.7",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "libwebp",
+      "Version": "1.6.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "lua",
+      "Version": "5.4.8",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "manifold",
+      "Version": "3.5.2",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "miniaudio",
+      "Version": "0.11.25",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "minizip",
+      "Version": "1.3.2",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "mp3lame",
+      "Version": "3.100",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "nlohmann-json",
+      "Version": "3.12.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "openexr",
+      "Version": "3.4.13",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "opengl-registry",
+      "Version": "2026-01-26",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "openjph",
+      "Version": "0.31.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "opus",
+      "Version": "1.6.1",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "opusfile",
+      "Version": "0.12+20221121",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "pkgconf",
+      "Version": "3.0.3",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "pugixml",
+      "Version": "1.16",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "rapidjson",
+      "Version": "2025-02-26",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "rmlui",
+      "Version": "6.3",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "robin-hood-hashing",
+      "Version": "3.11.5",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "sol2",
+      "Version": "3.5.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "stb",
+      "Version": "2024-07-29",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "tbb",
+      "Version": "2023.1.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "tiff",
+      "Version": "4.7.2",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "tinygltf",
+      "Version": "3.0.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "utfcpp",
+      "Version": "4.1.1",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "vcpkg-cmake",
+      "Version": "2024-04-23",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "vcpkg-cmake-config",
+      "Version": "2026-07-21",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "vcpkg-cmake-get-vars",
+      "Version": "2025-05-29",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "vcpkg-msbuild",
+      "Version": "2023-08-08",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "vcpkg-pkgconfig-get-modules",
+      "Version": "2024-04-03",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "vcpkg-tool-meson",
+      "Version": "1.9.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "vulkan-memory-allocator",
+      "Version": "3.4.0",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "zlib",
+      "Version": "1.3.2",
+      "Architecture": "x64-windows"
+    },
+    {
+      "Package": "zstd",
+      "Version": "1.5.7",
+      "Architecture": "x64-windows"
+    }
+  ],
+  "configure": {
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+      "cmake",
+      "--preset",
+      "msvc-debug",
+      "-DAZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=ON",
+      "-DPython3_EXECUTABLE=D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-DVCPKG_INSTALLED_DIR=D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\vcpkg_installed"
+    ],
+    "startUtc": "2026-10-30T16:31:36.290845+00:00",
+    "endUtc": "2026-10-30T16:31:59.570757+00:00",
+    "exitCode": 0
+  },
+  "managedSdk": "9.0.319",
+  "managedMeasurements": [
+    {
+      "backend": "coreclr",
+      "buildSeconds": 21.04657380000208,
+      "bytes": 53521,
+      "distributionBytes": 26249
+    },
+    {
+      "backend": "coreclr-samples",
+      "buildSeconds": 1.5930752999993274,
+      "bytes": 53521,
+      "distributionBytes": 26249
+    },
+    {
+      "backend": "nativeaot",
+      "buildSeconds": 11.167363500000647,
+      "bytes": 10268672,
+      "distributionBytes": 1785856
+    }
+  ],
+  "managedFiles": {
+    "coreclr/Azure.Engine.deps.json": {
+      "bytes": 428,
+      "sha256": "e3d2fa079fb7c1165f4c78f99dc6f661d89c1033e4ab8d427893fae0e3bf0d0f"
+    },
+    "coreclr/Azure.Engine.dll": {
+      "bytes": 17920,
+      "sha256": "6540fb411b658653629a857ea20055225a717e63053117691f64671ed329abb0"
+    },
+    "coreclr/Azure.Engine.pdb": {
+      "bytes": 15228,
+      "sha256": "1a6bd332d529eb0620969de07f2fa08ab569f2d38cfe140de5c73227e41fc50f"
+    },
+    "coreclr/Azure.Engine.runtimeconfig.json": {
+      "bytes": 419,
+      "sha256": "8cc5d94ff93f60a590b22dd7b329edc3ec74d79df9909f329e6d78ed7d731daa"
+    },
+    "coreclr/Azure.Samples.deps.json": {
+      "bytes": 826,
+      "sha256": "fe720aa29e1affee1dcf5ddd4cb65de1cc19081c320051c48096ee0a06e8f01f"
+    },
+    "coreclr/Azure.Samples.dll": {
+      "bytes": 6656,
+      "sha256": "f20baac5260fa859214f2bb3a8782925a7aaf7d15f8cf8c88ca1cba9190cb046"
+    },
+    "coreclr/Azure.Samples.pdb": {
+      "bytes": 12044,
+      "sha256": "65cf44f4435fec05c865cff54588efd9d6b91d342fef800ec6f85645aad7c27d"
+    },
+    "nativeaot/Azure.Engine.Native.dll": {
+      "bytes": 1785856,
+      "sha256": "eb49edc7d9aab84724b692abb9d19585e7aedd3ed44ac63acee91c4a3ca625a2"
+    },
+    "nativeaot/Azure.Engine.Native.pdb": {
+      "bytes": 8482816,
+      "sha256": "5785d32fdf7aa6e52f6427b42307a9115bf55fbbf63afef0db6eec681806a8fb"
+    }
+  },
+  "pythonPackagesSha256": "ac4bbc8c04be7f9734c8adc78a5d1b1d871264341099ea8ae9a304881d91f5ce",
+  "pipCheck": "No broken requirements found.",
+  "buildStatus": "main Debug build in progress; runtime tests pending",
+  "rayRepeatability": {
+    "status": "diagnostic-complete",
+    "hypothesis": "Replay ordering or driver differences may affect native ray outputs",
+    "native": [
+      [
+        {
+          "resource": 15861,
+          "bytes": 3686400,
+          "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+        },
+        {
+          "resource": 16501,
+          "bytes": 3686400,
+          "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+        },
+        {
+          "resource": 15781,
+          "bytes": 921600,
+          "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+        }
+      ],
+      [
+        {
+          "resource": 15861,
+          "bytes": 3686400,
+          "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+        },
+        {
+          "resource": 16501,
+          "bytes": 3686400,
+          "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+        },
+        {
+          "resource": 15781,
+          "bytes": 921600,
+          "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+        }
+      ],
+      [
+        {
+          "resource": 15861,
+          "bytes": 3686400,
+          "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+        },
+        {
+          "resource": 16501,
+          "bytes": 3686400,
+          "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+        },
+        {
+          "resource": 15781,
+          "bytes": 921600,
+          "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+        }
+      ]
+    ],
+    "candidate": [
+      {
+        "resource": 15861,
+        "bytes": 3686400,
+        "sha256": "b97d92e5dbdc341aae33c8a4fe67c96e6bd91959ec15e5bf8189607e4f97a57e"
+      },
+      {
+        "resource": 16501,
+        "bytes": 3686400,
+        "sha256": "9b2d3b12e529ffb07c7953e52a9c88a1651c8966c8af58b8b650a6477cab78e2"
+      },
+      {
+        "resource": 15781,
+        "bytes": 921600,
+        "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+      }
+    ],
+    "mirrorSourceSha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1",
+    "candidateDifferences": [
+      {
+        "resource": 15861,
+        "differentBytes": 1
+      },
+      {
+        "resource": 16501,
+        "differentBytes": 9312
+      },
+      {
+        "resource": 15781,
+        "differentBytes": 0
+      }
+    ],
+    "nativeStable": true,
+    "kernelByteEquivalence": false
+  },
+  "logs": {
+    "configure-debug-assimp-cached.log": {
+      "bytes": 89304,
+      "sha256": "0b7288a9c89e5b436cee65c4fd14afd33de839f6c8e5ca4884b3da414ed46706"
+    },
+    "configure-debug-managed.log": {
+      "bytes": 8710,
+      "sha256": "5ce9d38a01d29fd003cb061a4c5ccc0c3877ea2119d673a1cc7ece50917697ca"
+    },
+    "docs-python-install.log": {
+      "bytes": 8955,
+      "sha256": "573fcbe4e810f9d0b73baecb1e5256b9bf8364f38f4611c9be885ded2ae9df6d"
+    },
+    "managed-package-restore.log": {
+      "bytes": 1209,
+      "sha256": "4d95245b75da3bb41113c9e70483649e2ca23ba8f04d303182b48e1a12ac9054"
+    }
+  }
+}

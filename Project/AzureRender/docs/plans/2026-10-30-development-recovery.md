@@ -89,7 +89,8 @@
 | E8 | 运行资产 | 恢复归档中的 `build/runs` | 当前候选资源与故障转储可读 |
 | E9 | 抓帧工具 | RenderDoc 1.46，优先检查保留目录 | 实际 RDC 加载、查询与图像导出通过 |
 | E10 | 文档工具 | `requirements-docs.txt` | 文档校验及需要时的站点构建通过 |
-| E11 | 扩展工具 | .NET、Blender、视频工具按任务安装 | 对应工具链任务可以运行 |
+| E11 | .NET SDK | 9.0.319，启用托管脚本原型 | CoreCLR 与 NativeAOT 构建和测试通过 |
+| E12 | 扩展工具 | Blender、视频工具按任务安装 | 对应工具链任务可以运行 |
 
 vcpkg 内置基线为 `2bc124dac8436f5d8e108273aacf3f68d9824185`。
 工具检出提交同时覆盖 `libwebp 1.6.0#3` 等修订。
@@ -97,7 +98,8 @@ vcpkg 内置基线为 `2bc124dac8436f5d8e108273aacf3f68d9824185`。
 Assimp 为 6.0.4，Manifold 为 3.5.2，Lua 为 5.4.8。
 GLFW、Jolt、RmlUi、音频和图像库由清单安装。
 
-.NET SDK 9.0.319 用于可选托管工具。
+.NET SDK 9.0.319 用于托管工具及当前候选复现。
+本轮构建启用 `AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE`。
 Blender 5.1.2 用于原生离线转换任务。
 视频工具优先使用 `imageio-ffmpeg` 提供的程序。
 Node、uv 和 GitHub CLI 按具体开发任务补齐。
@@ -143,6 +145,9 @@ $env:VCPKG_ROOT = 'D:/Tools/vcpkg'
 $env:VULKAN_SDK = 'D:/Tools/VulkanSDK/1.4.350.0'
 $env:PATH = 'D:/Tools/Python311;D:/Tools/Python311/Scripts;' + $env:PATH
 $env:PYTHONUTF8 = '1'
+$env:DOTNET_ROOT = 'D:/Tools/dotnet9'
+$env:PATH = $env:DOTNET_ROOT + ';' + $env:PATH
+$env:NUGET_PACKAGES = 'D:/Tools/nuget-packages'
 powershell -NoProfile -ExecutionPolicy Bypass -File tools/reinstall/Restore-Environment.ps1 -PreparePython
 & build/reinstall-environment/venv/Scripts/python.exe -m pip check
 ```
@@ -183,9 +188,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/reinstall/Restore-Evid
 
 ```powershell
 $env:PATH = 'D:/Tools/VulkanSDK/1.4.350.0/Bin;' + $env:PATH
-.\tools\msvc_env.bat cmake --preset msvc-debug -DPython3_EXECUTABLE=D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe
+.\tools\msvc_env.bat cmake --preset msvc-debug -DAZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=ON -DPython3_EXECUTABLE=D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe
 .\tools\msvc_env.bat cmake --build --preset msvc-debug -j 2
-.\tools\msvc_env.bat cmake --preset msvc-release -DPython3_EXECUTABLE=D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe
+.\tools\msvc_env.bat cmake --preset msvc-release -DAZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE=ON -DVCPKG_INSTALLED_DIR=D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug/vcpkg_installed -DPython3_EXECUTABLE=D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe
 .\tools\msvc_env.bat cmake --build --preset msvc-release -j 2
 vulkaninfo --summary
 & build/ninja-msvc-release/AzureRender.exe --scene-type character --asset assets_public/test_model.gltf --smoke-frames 120
@@ -305,9 +310,11 @@ P8 保留性能热状态、人工复核和历史归因待项。
 - C++ 验证：经 `msvc_env.bat` 编译、链接及运行通过。
 - Vulkan SDK：1.4.350.0 安装通过，头文件与库齐全。
 - Vulkan 验证：双 GPU、验证层及 Vulkan 1.3 编译通过。
-- vcpkg：按基线及显式覆盖项恢复版本数据库，配置中。
+- vcpkg：固定版本数据库，完整清单安装与配置通过。
 - 运行资产：恢复通过，候选及故障资料指纹通过。
-- C++ 依赖：完整计划解析通过，五十五个包编译安装中。
+- C++ 依赖：五十五个包编译安装通过，Debug 配置通过。
+- .NET：9.0.319 安装通过，CoreCLR 与 NativeAOT 编译通过。
+- 文档工具：mkdocs-material 9.8.0 安装通过，依赖检查通过。
 - 抓帧工具：官方 1.46 跨接口重放及原生图像一致性通过。
 - 引擎构建及真实场景验证：待执行。
 
