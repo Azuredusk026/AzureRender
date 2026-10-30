@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "name": "doc-style",
+      "exitCode": 0
+    },
+    {
+      "name": "doc-links",
+      "exitCode": 0
+    },
+    {
+      "name": "stage-status",
+      "exitCode": 0
+    },
+    {
+      "name": "stage-tests",
+      "exitCode": 0
+    },
+    {
+      "name": "actual-paragraphs",
+      "exitCode": 0
+    }
+  ],
+  "files": {
+    "README.md": "6b462800fd630e6dc41aebb4aadaa2f90d4bfd1ec511abcc4b773d811207eebc",
+    "CHANGELOG.md": "1cb6d0b9f078b9bc8a7e7bf19a8411ac75aa4d116bb70eb0232e414cdeffcd50",
+    "docs/plans/azure-engine-plan.md": "e5f2c826a67fbce5c4fd787add01de6f015cf356965b9fbc47264b8a337c99ff",
+    "docs/plans/2026-10-30-development-recovery.md": "b8589f68c6c5286946fae61d14d606c1abd56a5409858999ff349000bdd4f2b2",
+    "docs/plans/2026-10-28-reflection-filter-integration.md": "9e98e96a790a19337b6554b2a5dd1925bf40a30cd3c0ec4462d1c513ffa0c381",
+    "docs/plans/2026-10-31-ray-vulkan-reference.md": "0f35df1c949b87f8796198ea854386468c268917aa9ac49c6d3150fad504c9ae",
+    "docs/acceptance/recovery/2026-10-30.md": "c8fa40ad7248cac3e648db74cd6bb5620678a90bf958a2aeaf94435b6094a181",
+    "docs/acceptance/nr/native-ray-vulkan-reference.md": "3915f0bc184e486d16d1fce919e5cac59459a1534a75fb77e5ec065b7234fad4"
+  }
+}

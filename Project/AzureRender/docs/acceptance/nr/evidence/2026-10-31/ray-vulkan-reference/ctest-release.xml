@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Win32-ninja"
+	tests="14"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="AZUREDUSK"
+	time="51"
+	timestamp="2026-10-31T07:07:40"
+	>
+	<testcase name="AzureEngine.ModuleBoundaryFixtures" classname="AzureEngine.ModuleBoundaryFixtures" time="1.92404" status="run">
+		<properties/>
+		<system-out>..........
+----------------------------------------------------------------------
+Ran 10 tests in 1.757s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ModuleBoundaries" classname="AzureEngine.ModuleBoundaries" time="34.519" status="run">
+		<properties/>
+		<system-out>{
+  "status": "passed",
+  "targets": 18,
+  "includes": 27412,
+  "violations": []
+}
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ShaderArithmeticOrder" classname="AzureTools.ShaderArithmeticOrder" time="0.449445" status="run">
+		<properties/>
+		<system-out>............
+----------------------------------------------------------------------
+Ran 12 tests in 0.215s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionSpatialFilter" classname="AzureRender.ReflectionSpatialFilter" time="1.65685" status="run">
+		<properties/>
+		<system-out>PASS: reflection filter bounds, HDR transport, independent frame ownership and transactional recording
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionRay" classname="AzureRender.ReflectionRay" time="0.531269" status="run">
+		<properties/>
+		<system-out>PASS: reflection ray projection and frame bounds
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionTemporal" classname="AzureRender.ReflectionTemporal" time="0.558074" status="run">
+		<properties/>
+		<system-out>PASS: temporal frame, bounds, aliases, borrowed outputs and retirement
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionTemporalGpu" classname="AzureRender.ReflectionTemporalGpu" time="2.74776" status="run">
+		<properties>
+			<property name="cmake_labels" value="gpu"/>
+		</properties>
+		<system-out>Synthetic: 24 outputs, history/invalid/outside/clipping/reprojection/zero-weight, two formats and slot reuse passed
+PASS: validation=0 resources=0
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ScreenReflection" classname="AzureRender.ScreenReflection" time="0.599727" status="run">
+		<properties/>
+		<system-out>PASS: composed reflection budgets, ownership and recording
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeRayFixture" classname="AzureTools.NativeRayFixture" time="0.200229" status="run">
+		<properties/>
+		<system-out>...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.021s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.NativeRayReferenceGpu" classname="AzureRender.NativeRayReferenceGpu" time="3.19624" status="run">
+		<properties>
+			<property name="cmake_labels" value="gpu"/>
+		</properties>
+		<system-out>Native ray reference cases passed: 10 D:\Projects\FYP\Project\AzureRender\build\runs\20261031-070823-native-ray-reference-d1e5af
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionRayGpu" classname="AzureRender.ReflectionRayGpu" time="1.83321" status="run">
+		<properties>
+			<property name="cmake_labels" value="gpu"/>
+		</properties>
+		<system-out>Trace composed=0 reduced=0 packed=0 mode=0 slot=0 center=1,0.2,0.1,1
+Trace composed=0 reduced=0 packed=0 mode=0 slot=1 center=0,0,0,0
+Trace composed=0 reduced=0 packed=0 mode=1 slot=0 center=1,0.2,0.1,1
+Trace composed=0 reduced=0 packed=0 mode=1 slot=1 center=0,0,0,0
+Trace composed=0 reduced=0 packed=0 mode=2 slot=0 center=1,0.2,0.1,1
+Trace composed=0 reduced=0 packed=0 mode=2 slot=1 center=0,0,0,0
+Trace composed=0 reduced=0 packed=0 mode=3 slot=0 center=1,0.2,0.1,1
+Trace composed=0 reduced=0 packed=0 mode=3 slot=1 center=0,0,0,0
+Trace composed=0 reduced=0 packed=0 mode=4 slot=0 center=0,0,0,0
+Trace composed=0 reduced=0 packed=0 mode=4 slot=1 center=0,0,0,0
+Trace composed=0 reduced=0 packed=1 mode=0 slot=0 center=1,0.199219,0.0996094,1
+Trace composed=0 reduced=0 packed=1 mode=0 slot=1 center=0,0,0,0
+Trace composed=0 reduced=0 packed=1 mode=1 slot=0 center=1,0.199219,0.0996094,1
+Trace composed=0 reduced=0 packed=1 mode=1 slot=1 center=0,0,0,0
+Trace composed=0 reduced=0 packed=1 mode=2 slot=0 center=1,0.199219,...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.DepthPyramid" classname="AzureRender.DepthPyramid" time="0.766683" status="run">
+		<properties/>
+		<system-out>PASS: depth bounds, capabilities, aliases, slots and retirement
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.DepthPyramidGpu" classname="AzureRender.DepthPyramidGpu" time="1.31087" status="run">
+		<properties>
+			<property name="cmake_labels" value="gpu"/>
+		</properties>
+		<system-out>Synthetic: odd axes, one-pixel axis, all levels, two modes, simultaneous slots and reuse exact
+PASS: validation=0 resources=0
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionSpatialFilterGpu" classname="AzureRender.ReflectionSpatialFilterGpu" time="1.49245" status="run">
+		<properties>
+			<property name="cmake_labels" value="gpu"/>
+		</properties>
+		<system-out>Synthetic captures=10 analyticMaximumError=5.96046448e-08 frameParity=exact
+Confidence mip selection, quantization and surface channel passed
+Full-resolution alternating roughness follows explicit source-pixel selection
+PASS: validation errors=0 liveBuffers=0 liveImages=0
+</system-out>
+	</testcase>
+</testsuite>

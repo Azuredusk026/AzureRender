@@ -387,5 +387,9 @@ R1 已固化输入绑定、原始程序及数值证据。
 R2 的顺序参考通过三份完整 GPU 输出检查。
 公共 Vulkan 内核及主场景接入继续实施。
 
+R3 的 Vulkan 来源夹具通过三份完整输出检查。
+双配置正序、逆序及非法输入见[参考验证](../acceptance/nr/native-ray-vulkan-reference.md)。
+公共接入按深度、运动和前帧所有权声明生产输入。
+
 算术顺序、工具及来源见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
 原始载荷及精度范围见[射线来源](../acceptance/nr/native-ray-source.md)。

@@ -2631,6 +2631,16 @@ if(BUILD_TESTING)
     target_link_libraries(AzureScreenReflectionTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ScreenReflection COMMAND AzureScreenReflectionTests)
     add_executable(AzureReflectionRayGpuTests tests/ReflectionRayGpuTests.cpp)
+    add_executable(AzureNativeRayReferenceGpuTests tests/NativeRayReferenceGpuTests.cpp)
+    target_link_libraries(AzureNativeRayReferenceGpuTests PRIVATE AzureRenderCore AzurePlatform)
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME AzureTools.NativeRayFixture COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_native_ray_fixture.py")
+        add_test(NAME AzureRender.NativeRayReferenceGpu COMMAND "${Python3_EXECUTABLE}"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_native_ray_reference_gpu.py"
+            --executable "$<TARGET_FILE:AzureNativeRayReferenceGpuTests>"
+            --shader "${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/native_ray_vulkan/reference.spv")
+        set_tests_properties(AzureRender.NativeRayReferenceGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    endif()
     target_link_libraries(AzureReflectionRayGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureReflectionRayGpuTests AzureRenderShaders)
     add_test(NAME AzureRender.ReflectionRayGpu COMMAND AzureReflectionRayGpuTests "${SHADER_BINARY_DIR}/reflection_trace_packed.comp.spv" "${SHADER_BINARY_DIR}/reflection_trace_float.comp.spv" "${SHADER_BINARY_DIR}/reflection_signal_pyramid_packed.comp.spv" "${SHADER_BINARY_DIR}/reflection_signal_pyramid_float.comp.spv" "${SHADER_BINARY_DIR}/reflection_spatial_filter.comp.spv" "${SHADER_BINARY_DIR}/depth_pyramid.comp.spv")

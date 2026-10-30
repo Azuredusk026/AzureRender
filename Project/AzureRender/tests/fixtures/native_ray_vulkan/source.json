@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "command": [
+    "<VULKAN_SDK>/Bin/dxc.exe",
+    "-spirv",
+    "-T",
+    "cs_6_0",
+    "-E",
+    "main",
+    "-HV",
+    "2018",
+    "-fspv-target-env=vulkan1.1",
+    "-fvk-b-shift",
+    "0",
+    "0",
+    "-fvk-t-shift",
+    "3",
+    "0",
+    "-fvk-s-shift",
+    "10",
+    "0",
+    "-fvk-u-shift",
+    "11",
+    "0",
+    "-Od",
+    "-Fo",
+    "<OUTPUT>/reference.spv",
+    "<OUTPUT>/reference.hlsl"
+  ],
+  "originalSourceSha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1",
+  "compileExitCode": 0,
+  "validateExitCode": 0,
+  "files": {
+    "ray-mirror-raw.hlsl": {
+      "bytes": 47483,
+      "sha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1"
+    },
+    "reference.hlsl": {
+      "bytes": 46824,
+      "sha256": "123eeacb3f8f1780f20fabc23fee18c43ca093d1c1b147032531eb3ed23e0e23"
+    },
+    "reference.spv": {
+      "bytes": 88556,
+      "sha256": "8656076f682143ab61a38ff3c6accd4952d943a205ab241394b888c04c469653"
+    },
+    "dxc.exe": {
+      "bytes": 1097144,
+      "sha256": "2f94ff0e55750801ee09a573be2c0fa90e632d12ec11c004fa0dbb5a8a9341d2"
+    },
+    "dxcompiler.dll": {
+      "bytes": 21565880,
+      "sha256": "6e990d20e53390cde413ce9a8016a8f43582e325a04cf72ecc706b4bea504f0c"
+    },
+    "spirv-val.exe": {
+      "bytes": 3637688,
+      "sha256": "556f42595acb5c144f94eb6c15f8e5b75b412bac7b326f828725b3368767afa7"
+    }
+  },
+  "schemaVersion": 1,
+  "source": "docs/acceptance/nr/evidence/2026-10-29/native-ray-source/ray-mirror-raw.hlsl",
+  "generator": "tools/native_render/ray_vulkan_shader.py",
+  "classification": "Frozen single-frame Vulkan reference; production integration has separate acceptance"
+}

@@ -292,6 +292,10 @@ Release 完整入口八帧与同机控制一致。
 原生射线的冻结数值参考见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
 三份完整输出逐字节一致，公共生产内核继续实施。
 
+Vulkan 来源参考按[专项验证](../acceptance/nr/native-ray-vulkan-reference.md)验收。
+双配置、正逆瓦片顺序及三份完整输出均通过。
+生产接入继续核对深度约定和历史所有权。
+
 ### P3：原生可玩交付
 
 按 NR0 至 NR8 的依赖补齐联合渲染门禁。

@@ -1,0 +1,3410 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "scope": "Frozen single-frame numeric reference; production integration, sequences, sustained performance and dual-device delivery have separate gates",
+  "sourceBaseCommit": "eb8fe6e793d38cfa03528cf62a3ed6dd7ddf1dc2",
+  "ownedRun": "build/runs/20261031-060648-ray-vulkan-a27711",
+  "strictOutputBytes": 8294400,
+  "fixture": {
+    "schemaVersion": 1,
+    "status": "complete",
+    "captureSha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+    "event": 8702,
+    "preEvent": 8701,
+    "originalShaderSha256": "9874977ebc47e87ed0a006b7bebd51f525126c4f584bc4a6abc95282ba291faa",
+    "dispatch": [
+      9115,
+      1,
+      1
+    ],
+    "localSize": [
+      8,
+      8,
+      1
+    ],
+    "constants": [
+      {
+        "index": 0,
+        "resource": "ResourceId::405",
+        "offset": 64512,
+        "bytes": 1040,
+        "file": "constant-0.bin",
+        "sha256": "3dbc15b0bfa43257ae98dd2bc382f55f6bb9bdd95bd8cf67d548d9a0ee245f39"
+      },
+      {
+        "index": 1,
+        "resource": "ResourceId::405",
+        "offset": 66048,
+        "bytes": 48,
+        "file": "constant-1.bin",
+        "sha256": "86e7395f408f0b2c232d48285b9d8b0c89bd90bab1d027d0809a30bb58134173"
+      },
+      {
+        "index": 2,
+        "resource": "ResourceId::405",
+        "offset": 144896,
+        "bytes": 96,
+        "file": "constant-2.bin",
+        "sha256": "7d864d4efc3ad067f54e09a6a437bc92fcd372e9f217ca0d5e5cce99bc175e20"
+      }
+    ],
+    "tiles": {
+      "file": "tiles.bin",
+      "bytes": 115200,
+      "sha256": "0406b205f7f822f3872276f9bde62e4a69440f9d5a0c72de3035a7a4a402c2e7",
+      "resource": "ResourceId::16505",
+      "view": "ResourceId::16507",
+      "format": "Undefined",
+      "byte_offset": 0,
+      "byte_size": 115200,
+      "first_mip": 0,
+      "mip_count": 1,
+      "first_slice": 0,
+      "slice_count": 1,
+      "shader_binding_index": 0,
+      "array_element": 0,
+      "stride": 4,
+      "activeCount": 9115,
+      "activeSetSha256": "6e5806fd8325964b5497b026bd397015655765b668038f9787bc66738103c657"
+    },
+    "textures": [
+      {
+        "file": "previousColor.bin",
+        "bytes": 29491200,
+        "sha256": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8",
+        "format": "R16G16B16A16_FLOAT",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 2560,
+            "height": 1440,
+            "offset": 0,
+            "bytes": 29491200
+          }
+        ],
+        "width": 2560,
+        "height": 1440,
+        "texelBytes": 8,
+        "role": "previousColor",
+        "binding": 1,
+        "source": {
+          "resource": "ResourceId::14664",
+          "view": "ResourceId::14665",
+          "format": "R16G16B16A16_FLOAT",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 1,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 1,
+          "array_element": 0
+        }
+      },
+      {
+        "file": "previousDepth.bin",
+        "bytes": 4914800,
+        "sha256": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+        "format": "R32_FLOAT",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 1280,
+            "height": 720,
+            "offset": 0,
+            "bytes": 3686400
+          },
+          {
+            "mip": 1,
+            "width": 640,
+            "height": 360,
+            "offset": 3686400,
+            "bytes": 921600
+          },
+          {
+            "mip": 2,
+            "width": 320,
+            "height": 180,
+            "offset": 4608000,
+            "bytes": 230400
+          },
+          {
+            "mip": 3,
+            "width": 160,
+            "height": 90,
+            "offset": 4838400,
+            "bytes": 57600
+          },
+          {
+            "mip": 4,
+            "width": 80,
+            "height": 45,
+            "offset": 4896000,
+            "bytes": 14400
+          },
+          {
+            "mip": 5,
+            "width": 40,
+            "height": 22,
+            "offset": 4910400,
+            "bytes": 3520
+          },
+          {
+            "mip": 6,
+            "width": 20,
+            "height": 11,
+            "offset": 4913920,
+            "bytes": 880
+          }
+        ],
+        "width": 1280,
+        "height": 720,
+        "texelBytes": 4,
+        "role": "previousDepth",
+        "binding": 2,
+        "source": {
+          "resource": "ResourceId::14677",
+          "view": "ResourceId::14678",
+          "format": "R32_FLOAT",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 7,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 2,
+          "array_element": 0
+        }
+      },
+      {
+        "file": "currentDepth.bin",
+        "bytes": 4914800,
+        "sha256": "adb4b82b7a82812eb71b377f1dd7252c64da3689e169bdae04b2988d6854f598",
+        "format": "R32_FLOAT",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 1280,
+            "height": 720,
+            "offset": 0,
+            "bytes": 3686400
+          },
+          {
+            "mip": 1,
+            "width": 640,
+            "height": 360,
+            "offset": 3686400,
+            "bytes": 921600
+          },
+          {
+            "mip": 2,
+            "width": 320,
+            "height": 180,
+            "offset": 4608000,
+            "bytes": 230400
+          },
+          {
+            "mip": 3,
+            "width": 160,
+            "height": 90,
+            "offset": 4838400,
+            "bytes": 57600
+          },
+          {
+            "mip": 4,
+            "width": 80,
+            "height": 45,
+            "offset": 4896000,
+            "bytes": 14400
+          },
+          {
+            "mip": 5,
+            "width": 40,
+            "height": 22,
+            "offset": 4910400,
+            "bytes": 3520
+          },
+          {
+            "mip": 6,
+            "width": 20,
+            "height": 11,
+            "offset": 4913920,
+            "bytes": 880
+          }
+        ],
+        "width": 1280,
+        "height": 720,
+        "texelBytes": 4,
+        "role": "currentDepth",
+        "binding": 3,
+        "source": {
+          "resource": "ResourceId::16447",
+          "view": "ResourceId::16448",
+          "format": "R32_FLOAT",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 7,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 3,
+          "array_element": 0
+        }
+      },
+      {
+        "file": "motion.bin",
+        "bytes": 14745600,
+        "sha256": "5c114bb08d77d97949439fae4b43a9c62ff21636ca8a71768da408706ffb9549",
+        "format": "R10G10B10A2_UNORM",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 2560,
+            "height": 1440,
+            "offset": 0,
+            "bytes": 14745600
+          }
+        ],
+        "width": 2560,
+        "height": 1440,
+        "texelBytes": 4,
+        "role": "motion",
+        "binding": 4,
+        "source": {
+          "resource": "ResourceId::16508",
+          "view": "ResourceId::16509",
+          "format": "R10G10B10A2_UNORM",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 1,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 4,
+          "array_element": 0
+        }
+      },
+      {
+        "file": "surfaceMask.bin",
+        "bytes": 921600,
+        "sha256": "24ce48985d5e5a4d07e86ea4fd5fa549a3c7b0c74be637ed0d90feeab17eaf13",
+        "format": "R8_UNORM",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 1280,
+            "height": 720,
+            "offset": 0,
+            "bytes": 921600
+          }
+        ],
+        "width": 1280,
+        "height": 720,
+        "texelBytes": 1,
+        "role": "surfaceMask",
+        "binding": 5,
+        "source": {
+          "resource": "ResourceId::15777",
+          "view": "ResourceId::15778",
+          "format": "R8_UNORM",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 1,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 5,
+          "array_element": 0
+        }
+      },
+      {
+        "file": "surfaceNormal.bin",
+        "bytes": 3686400,
+        "sha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae",
+        "format": "R10G10B10A2_UNORM",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 1280,
+            "height": 720,
+            "offset": 0,
+            "bytes": 3686400
+          }
+        ],
+        "width": 1280,
+        "height": 720,
+        "texelBytes": 4,
+        "role": "surfaceNormal",
+        "binding": 6,
+        "source": {
+          "resource": "ResourceId::16497",
+          "view": "ResourceId::16498",
+          "format": "R10G10B10A2_UNORM",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 1,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 6,
+          "array_element": 0
+        }
+      }
+    ],
+    "outputs": [
+      {
+        "role": "color",
+        "binding": 0,
+        "source": {
+          "resource": "ResourceId::15861",
+          "view": "ResourceId::15863",
+          "format": "R11G11B10_FLOAT",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 1,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 0,
+          "array_element": 0
+        },
+        "initial": {
+          "file": "color-initial.bin",
+          "bytes": 3686400,
+          "sha256": "0ddf060e619a959fbdddfd289501896bb968bf5bc1ed29e0038d98cbc8313906"
+        },
+        "reference": {
+          "file": "color-reference.bin",
+          "bytes": 3686400,
+          "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+        },
+        "changedBytes": 2319431,
+        "format": "R11G11B10_FLOAT",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 1280,
+            "height": 720,
+            "offset": 0,
+            "bytes": 3686400
+          }
+        ],
+        "width": 1280,
+        "height": 720,
+        "texelBytes": 4
+      },
+      {
+        "role": "footprint",
+        "binding": 1,
+        "source": {
+          "resource": "ResourceId::16501",
+          "view": "ResourceId::16503",
+          "format": "R16G16_UNORM",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 1,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 1,
+          "array_element": 0
+        },
+        "initial": {
+          "file": "footprint-initial.bin",
+          "bytes": 3686400,
+          "sha256": "674f377bbaf16d1117682fc15215792eed8c2dbe590890fa4e7393bdfb54b9e2"
+        },
+        "reference": {
+          "file": "footprint-reference.bin",
+          "bytes": 3686400,
+          "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+        },
+        "changedBytes": 970820,
+        "format": "R16G16_UNORM",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 1280,
+            "height": 720,
+            "offset": 0,
+            "bytes": 3686400
+          }
+        ],
+        "width": 1280,
+        "height": 720,
+        "texelBytes": 4
+      },
+      {
+        "role": "confidence",
+        "binding": 2,
+        "source": {
+          "resource": "ResourceId::15781",
+          "view": "ResourceId::15783",
+          "format": "R8_UNORM",
+          "byte_offset": 0,
+          "byte_size": 0,
+          "first_mip": 0,
+          "mip_count": 1,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 2,
+          "array_element": 0
+        },
+        "initial": {
+          "file": "confidence-initial.bin",
+          "bytes": 921600,
+          "sha256": "c45228dbd3e22e1bb6145f7381e594186a083673ee0ab09ff1e4b144bccee71c"
+        },
+        "reference": {
+          "file": "confidence-reference.bin",
+          "bytes": 921600,
+          "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+        },
+        "changedBytes": 250130,
+        "format": "R8_UNORM",
+        "levels": [
+          {
+            "mip": 0,
+            "width": 1280,
+            "height": 720,
+            "offset": 0,
+            "bytes": 921600
+          }
+        ],
+        "width": 1280,
+        "height": 720,
+        "texelBytes": 1
+      }
+    ],
+    "samplers": [
+      {
+        "object": "ResourceId::318",
+        "address": [
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge",
+          "AddressMode.ClampEdge"
+        ],
+        "filter": {
+          "minify": "FilterMode.Point",
+          "magnify": "FilterMode.Point",
+          "mip": "FilterMode.Point",
+          "function": "FilterFunction.Normal"
+        },
+        "lod": {
+          "bias": 0.0,
+          "minimum": 0.0,
+          "maximum": 1000.0
+        },
+        "maximum_anisotropy": 0.0,
+        "compare_function": "CompareFunction.Never",
+        "unnormalized": false,
+        "shader_binding_index": 0,
+        "array_element": 0
+      }
+    ],
+    "validation": {
+      "sampledTexturesUnchanged": true,
+      "constantsUnchanged": true,
+      "activeTileSetsEqual": true,
+      "originalOutputsExact": true,
+      "originalRepeatedExact": true
+    },
+    "bytes": 75379584
+  },
+  "compiler": {
+    "status": "passed",
+    "command": [
+      "<VULKAN_SDK>/Bin/dxc.exe",
+      "-spirv",
+      "-T",
+      "cs_6_0",
+      "-E",
+      "main",
+      "-HV",
+      "2018",
+      "-fspv-target-env=vulkan1.1",
+      "-fvk-b-shift",
+      "0",
+      "0",
+      "-fvk-t-shift",
+      "3",
+      "0",
+      "-fvk-s-shift",
+      "10",
+      "0",
+      "-fvk-u-shift",
+      "11",
+      "0",
+      "-Od",
+      "-Fo",
+      "<OUTPUT>/reference.spv",
+      "<OUTPUT>/reference.hlsl"
+    ],
+    "originalSourceSha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1",
+    "compileExitCode": 0,
+    "validateExitCode": 0,
+    "files": {
+      "ray-mirror-raw.hlsl": {
+        "bytes": 47483,
+        "sha256": "b72d73f2aadc5955290dc92652f8534eb464fe2a2485c9670318128d9a14a8f1"
+      },
+      "reference.hlsl": {
+        "bytes": 46824,
+        "sha256": "123eeacb3f8f1780f20fabc23fee18c43ca093d1c1b147032531eb3ed23e0e23"
+      },
+      "reference.spv": {
+        "bytes": 88556,
+        "sha256": "8656076f682143ab61a38ff3c6accd4952d943a205ab241394b888c04c469653"
+      },
+      "dxc.exe": {
+        "bytes": 1097144,
+        "sha256": "2f94ff0e55750801ee09a573be2c0fa90e632d12ec11c004fa0dbb5a8a9341d2"
+      },
+      "dxcompiler.dll": {
+        "bytes": 21565880,
+        "sha256": "6e990d20e53390cde413ce9a8016a8f43582e325a04cf72ecc706b4bea504f0c"
+      },
+      "spirv-val.exe": {
+        "bytes": 3637688,
+        "sha256": "556f42595acb5c144f94eb6c15f8e5b75b412bac7b326f828725b3368767afa7"
+      }
+    },
+    "schemaVersion": 1,
+    "source": "docs/acceptance/nr/evidence/2026-10-29/native-ray-source/ray-mirror-raw.hlsl",
+    "generator": "tools/native_render/ray_vulkan_shader.py",
+    "classification": "Frozen single-frame Vulkan reference; production integration has separate acceptance"
+  },
+  "configurations": {
+    "debug": {
+      "build": {
+        "file": "build/runs/20261031-060648-ray-vulkan-a27711/build-debug-final.log",
+        "bytes": 8831,
+        "sha256": "e4be7f2d4473d01557d6375caaffce2d843d2cdb87594337b256c6ae9e883de7"
+      },
+      "ctest": {
+        "file": "build/runs/20261031-060648-ray-vulkan-a27711/ctest-debug.xml",
+        "bytes": 5693,
+        "sha256": "9929d4421ec8cd71fe06fc6741edf861a7ee0a2b17fdfc5ee5c8624019399963"
+      },
+      "tests": {
+        "name": "Win32-ninja",
+        "tests": "14",
+        "failures": "0",
+        "disabled": "0",
+        "skipped": "0",
+        "hostname": "AZUREDUSK",
+        "time": "28",
+        "timestamp": "2026-10-31T07:08:49"
+      },
+      "cases": [
+        {
+          "name": "AzureEngine.ModuleBoundaryFixtures",
+          "classname": "AzureEngine.ModuleBoundaryFixtures",
+          "time": "1.40403",
+          "status": "run"
+        },
+        {
+          "name": "AzureEngine.ModuleBoundaries",
+          "classname": "AzureEngine.ModuleBoundaries",
+          "time": "11.3627",
+          "status": "run"
+        },
+        {
+          "name": "AzureTools.ShaderArithmeticOrder",
+          "classname": "AzureTools.ShaderArithmeticOrder",
+          "time": "0.254004",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionSpatialFilter",
+          "classname": "AzureRender.ReflectionSpatialFilter",
+          "time": "0.726077",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionRay",
+          "classname": "AzureRender.ReflectionRay",
+          "time": "0.869256",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionTemporal",
+          "classname": "AzureRender.ReflectionTemporal",
+          "time": "0.830714",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionTemporalGpu",
+          "classname": "AzureRender.ReflectionTemporalGpu",
+          "time": "2.7747",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ScreenReflection",
+          "classname": "AzureRender.ScreenReflection",
+          "time": "0.723787",
+          "status": "run"
+        },
+        {
+          "name": "AzureTools.NativeRayFixture",
+          "classname": "AzureTools.NativeRayFixture",
+          "time": "0.134318",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.NativeRayReferenceGpu",
+          "classname": "AzureRender.NativeRayReferenceGpu",
+          "time": "3.0151",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionRayGpu",
+          "classname": "AzureRender.ReflectionRayGpu",
+          "time": "1.96161",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.DepthPyramid",
+          "classname": "AzureRender.DepthPyramid",
+          "time": "0.767519",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.DepthPyramidGpu",
+          "classname": "AzureRender.DepthPyramidGpu",
+          "time": "1.58112",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionSpatialFilterGpu",
+          "classname": "AzureRender.ReflectionSpatialFilterGpu",
+          "time": "1.6761",
+          "status": "run"
+        }
+      ],
+      "synthetic": {
+        "status": "passed",
+        "shaderSha256": "8656076f682143ab61a38ff3c6accd4952d943a205ab241394b888c04c469653",
+        "cases": [
+          {
+            "name": "masked",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070908-native-ray-reference-3249c3\\masked\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070908-native-ray-reference-3249c3\\masked-output"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 64,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": false,
+              "status": "passed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "zero-dispatch",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070908-native-ray-reference-3249c3\\zero-dispatch\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070908-native-ray-reference-3249c3\\zero-dispatch-output"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 64,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": false,
+              "status": "passed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "negative-one-byte",
+            "exitCode": 1,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070908-native-ray-reference-3249c3\\negative-one-byte\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070908-native-ray-reference-3249c3\\negative-one-byte-output"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 256,
+                  "differentBytes": 1,
+                  "role": "color"
+                },
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 64,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": false,
+              "status": "failed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "version",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Fixture integer outside its range"
+          },
+          {
+            "name": "dispatch",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Wrong dispatch geometry"
+          },
+          {
+            "name": "tile-range",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Duplicate or out-of-range tile"
+          },
+          {
+            "name": "tile-duplicate",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Duplicate or out-of-range tile"
+          },
+          {
+            "name": "constant-size",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Wrong constant block size"
+          },
+          {
+            "name": "texture-format",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Wrong sampled binding or format"
+          },
+          {
+            "name": "mip-count",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Wrong mip count"
+          }
+        ]
+      },
+      "native": {
+        "status": "passed",
+        "shaderSha256": "8656076f682143ab61a38ff3c6accd4952d943a205ab241394b888c04c469653",
+        "cases": [
+          {
+            "name": "native",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070917-native-ray-reference-5b39b6\\native-output"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 921600,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": false,
+              "status": "passed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "native-reversed",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070917-native-ray-reference-5b39b6\\native-reversed-output",
+              "--reverse"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 921600,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": true,
+              "status": "passed",
+              "validationErrors": 0
+            }
+          }
+        ]
+      },
+      "executable": {
+        "file": "build/ninja-msvc-debug/AzureNativeRayReferenceGpuTests.exe",
+        "bytes": 2046976,
+        "sha256": "8d1f21a8a05711800b1ab6d039affaa17cf9b934f14ff48729631a0fc4c01d3f"
+      },
+      "buildArchive": {
+        "file": "docs/acceptance/nr/evidence/2026-10-31/ray-vulkan-reference/build-debug-final.log.gz",
+        "sha256": "56b51c23b629334806173ca01d837d4b025ba353e0f0c02a053622883195686d",
+        "rawSha256": "e4be7f2d4473d01557d6375caaffce2d843d2cdb87594337b256c6ae9e883de7",
+        "encoding": "gzip"
+      }
+    },
+    "release": {
+      "build": {
+        "file": "build/runs/20261031-060648-ray-vulkan-a27711/build-release-final.log",
+        "bytes": 8834,
+        "sha256": "9de6625087770e580e45e9d85d4b1762d4a80a094029bacde39c33e8370dcf6b"
+      },
+      "ctest": {
+        "file": "build/runs/20261031-060648-ray-vulkan-a27711/ctest-release.xml",
+        "bytes": 5694,
+        "sha256": "093aa11db558c3fc49d8e548adf9aa1ece266a21db758eddd9415ef0d2d551c3"
+      },
+      "tests": {
+        "name": "Win32-ninja",
+        "tests": "14",
+        "failures": "0",
+        "disabled": "0",
+        "skipped": "0",
+        "hostname": "AZUREDUSK",
+        "time": "51",
+        "timestamp": "2026-10-31T07:07:40"
+      },
+      "cases": [
+        {
+          "name": "AzureEngine.ModuleBoundaryFixtures",
+          "classname": "AzureEngine.ModuleBoundaryFixtures",
+          "time": "1.92404",
+          "status": "run"
+        },
+        {
+          "name": "AzureEngine.ModuleBoundaries",
+          "classname": "AzureEngine.ModuleBoundaries",
+          "time": "34.519",
+          "status": "run"
+        },
+        {
+          "name": "AzureTools.ShaderArithmeticOrder",
+          "classname": "AzureTools.ShaderArithmeticOrder",
+          "time": "0.449445",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionSpatialFilter",
+          "classname": "AzureRender.ReflectionSpatialFilter",
+          "time": "1.65685",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionRay",
+          "classname": "AzureRender.ReflectionRay",
+          "time": "0.531269",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionTemporal",
+          "classname": "AzureRender.ReflectionTemporal",
+          "time": "0.558074",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionTemporalGpu",
+          "classname": "AzureRender.ReflectionTemporalGpu",
+          "time": "2.74776",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ScreenReflection",
+          "classname": "AzureRender.ScreenReflection",
+          "time": "0.599727",
+          "status": "run"
+        },
+        {
+          "name": "AzureTools.NativeRayFixture",
+          "classname": "AzureTools.NativeRayFixture",
+          "time": "0.200229",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.NativeRayReferenceGpu",
+          "classname": "AzureRender.NativeRayReferenceGpu",
+          "time": "3.19624",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionRayGpu",
+          "classname": "AzureRender.ReflectionRayGpu",
+          "time": "1.83321",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.DepthPyramid",
+          "classname": "AzureRender.DepthPyramid",
+          "time": "0.766683",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.DepthPyramidGpu",
+          "classname": "AzureRender.DepthPyramidGpu",
+          "time": "1.31087",
+          "status": "run"
+        },
+        {
+          "name": "AzureRender.ReflectionSpatialFilterGpu",
+          "classname": "AzureRender.ReflectionSpatialFilterGpu",
+          "time": "1.49245",
+          "status": "run"
+        }
+      ],
+      "synthetic": {
+        "status": "passed",
+        "shaderSha256": "8656076f682143ab61a38ff3c6accd4952d943a205ab241394b888c04c469653",
+        "cases": [
+          {
+            "name": "masked",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070823-native-ray-reference-d1e5af\\masked\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070823-native-ray-reference-d1e5af\\masked-output"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 64,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": false,
+              "status": "passed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "zero-dispatch",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070823-native-ray-reference-d1e5af\\zero-dispatch\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070823-native-ray-reference-d1e5af\\zero-dispatch-output"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 64,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": false,
+              "status": "passed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "negative-one-byte",
+            "exitCode": 1,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070823-native-ray-reference-d1e5af\\negative-one-byte\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070823-native-ray-reference-d1e5af\\negative-one-byte-output"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 256,
+                  "differentBytes": 1,
+                  "role": "color"
+                },
+                {
+                  "bytes": 256,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 64,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": false,
+              "status": "failed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "version",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Fixture integer outside its range"
+          },
+          {
+            "name": "dispatch",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Wrong dispatch geometry"
+          },
+          {
+            "name": "tile-range",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Duplicate or out-of-range tile"
+          },
+          {
+            "name": "tile-duplicate",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Duplicate or out-of-range tile"
+          },
+          {
+            "name": "constant-size",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Wrong constant block size"
+          },
+          {
+            "name": "texture-format",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Wrong sampled binding or format"
+          },
+          {
+            "name": "mip-count",
+            "exitCode": 1,
+            "rejectedBeforeGpu": true,
+            "diagnostic": "Wrong mip count"
+          }
+        ]
+      },
+      "native": {
+        "status": "passed",
+        "shaderSha256": "8656076f682143ab61a38ff3c6accd4952d943a205ab241394b888c04c469653",
+        "cases": [
+          {
+            "name": "native",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070921-native-ray-reference-c0d645\\native-output"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 921600,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": false,
+              "status": "passed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "native-reversed",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\tests\\fixtures\\native_ray_vulkan\\reference.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-070921-native-ray-reference-c0d645\\native-reversed-output",
+              "--reverse"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 921600,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "reverse": true,
+              "status": "passed",
+              "validationErrors": 0
+            }
+          }
+        ]
+      },
+      "executable": {
+        "file": "build/ninja-msvc-release/AzureNativeRayReferenceGpuTests.exe",
+        "bytes": 312320,
+        "sha256": "0dd970ba8f51ea19c3b9f994fc5abbfc43e73a6bd564ee95884000d9229c6df0"
+      },
+      "buildArchive": {
+        "file": "docs/acceptance/nr/evidence/2026-10-31/ray-vulkan-reference/build-release-final.log.gz",
+        "sha256": "bf957da1531e475eab39665da514e74a4493c0760dd3f6c920eb6414d68cc6bc",
+        "rawSha256": "9de6625087770e580e45e9d85d4b1762d4a80a094029bacde39c33e8370dcf6b",
+        "encoding": "gzip"
+      }
+    }
+  },
+  "export": {
+    "parent": {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/frozen-inputs-portable/parent.json",
+      "bytes": 32586,
+      "sha256": "27fb5587dd101aa1cdfc4c9677ac9d0f6230eb99cbdf6ad24d7750c77bbc9798"
+    },
+    "result": {
+      "status": "passed",
+      "files": [
+        {
+          "file": "constant-0.bin",
+          "bytes": 1040,
+          "sha256": "3dbc15b0bfa43257ae98dd2bc382f55f6bb9bdd95bd8cf67d548d9a0ee245f39"
+        },
+        {
+          "file": "constant-1.bin",
+          "bytes": 48,
+          "sha256": "86e7395f408f0b2c232d48285b9d8b0c89bd90bab1d027d0809a30bb58134173"
+        },
+        {
+          "file": "constant-2.bin",
+          "bytes": 96,
+          "sha256": "7d864d4efc3ad067f54e09a6a437bc92fcd372e9f217ca0d5e5cce99bc175e20"
+        },
+        {
+          "file": "tiles.bin",
+          "bytes": 115200,
+          "sha256": "0406b205f7f822f3872276f9bde62e4a69440f9d5a0c72de3035a7a4a402c2e7",
+          "resource": "ResourceId::16505",
+          "view": "ResourceId::16507",
+          "format": "Undefined",
+          "byte_offset": 0,
+          "byte_size": 115200,
+          "first_mip": 0,
+          "mip_count": 1,
+          "first_slice": 0,
+          "slice_count": 1,
+          "shader_binding_index": 0,
+          "array_element": 0,
+          "stride": 4,
+          "activeCount": 9115,
+          "activeSetSha256": "6e5806fd8325964b5497b026bd397015655765b668038f9787bc66738103c657"
+        },
+        {
+          "file": "previousColor.bin",
+          "bytes": 29491200,
+          "sha256": "9667b36a4cf8716ca807be9a5ea270b47c8981fd38427dc22304e649ffa679a8",
+          "format": "R16G16B16A16_FLOAT",
+          "levels": [
+            {
+              "mip": 0,
+              "width": 2560,
+              "height": 1440,
+              "offset": 0,
+              "bytes": 29491200
+            }
+          ],
+          "width": 2560,
+          "height": 1440,
+          "texelBytes": 8,
+          "role": "previousColor",
+          "binding": 1,
+          "source": {
+            "resource": "ResourceId::14664",
+            "view": "ResourceId::14665",
+            "format": "R16G16B16A16_FLOAT",
+            "byte_offset": 0,
+            "byte_size": 0,
+            "first_mip": 0,
+            "mip_count": 1,
+            "first_slice": 0,
+            "slice_count": 1,
+            "shader_binding_index": 1,
+            "array_element": 0
+          }
+        },
+        {
+          "file": "previousDepth.bin",
+          "bytes": 4914800,
+          "sha256": "76a4b539ed98345f51ebbc0e686347aefd98e26ad1ffe1da65b82f16082d80a9",
+          "format": "R32_FLOAT",
+          "levels": [
+            {
+              "mip": 0,
+              "width": 1280,
+              "height": 720,
+              "offset": 0,
+              "bytes": 3686400
+            },
+            {
+              "mip": 1,
+              "width": 640,
+              "height": 360,
+              "offset": 3686400,
+              "bytes": 921600
+            },
+            {
+              "mip": 2,
+              "width": 320,
+              "height": 180,
+              "offset": 4608000,
+              "bytes": 230400
+            },
+            {
+              "mip": 3,
+              "width": 160,
+              "height": 90,
+              "offset": 4838400,
+              "bytes": 57600
+            },
+            {
+              "mip": 4,
+              "width": 80,
+              "height": 45,
+              "offset": 4896000,
+              "bytes": 14400
+            },
+            {
+              "mip": 5,
+              "width": 40,
+              "height": 22,
+              "offset": 4910400,
+              "bytes": 3520
+            },
+            {
+              "mip": 6,
+              "width": 20,
+              "height": 11,
+              "offset": 4913920,
+              "bytes": 880
+            }
+          ],
+          "width": 1280,
+          "height": 720,
+          "texelBytes": 4,
+          "role": "previousDepth",
+          "binding": 2,
+          "source": {
+            "resource": "ResourceId::14677",
+            "view": "ResourceId::14678",
+            "format": "R32_FLOAT",
+            "byte_offset": 0,
+            "byte_size": 0,
+            "first_mip": 0,
+            "mip_count": 7,
+            "first_slice": 0,
+            "slice_count": 1,
+            "shader_binding_index": 2,
+            "array_element": 0
+          }
+        },
+        {
+          "file": "currentDepth.bin",
+          "bytes": 4914800,
+          "sha256": "adb4b82b7a82812eb71b377f1dd7252c64da3689e169bdae04b2988d6854f598",
+          "format": "R32_FLOAT",
+          "levels": [
+            {
+              "mip": 0,
+              "width": 1280,
+              "height": 720,
+              "offset": 0,
+              "bytes": 3686400
+            },
+            {
+              "mip": 1,
+              "width": 640,
+              "height": 360,
+              "offset": 3686400,
+              "bytes": 921600
+            },
+            {
+              "mip": 2,
+              "width": 320,
+              "height": 180,
+              "offset": 4608000,
+              "bytes": 230400
+            },
+            {
+              "mip": 3,
+              "width": 160,
+              "height": 90,
+              "offset": 4838400,
+              "bytes": 57600
+            },
+            {
+              "mip": 4,
+              "width": 80,
+              "height": 45,
+              "offset": 4896000,
+              "bytes": 14400
+            },
+            {
+              "mip": 5,
+              "width": 40,
+              "height": 22,
+              "offset": 4910400,
+              "bytes": 3520
+            },
+            {
+              "mip": 6,
+              "width": 20,
+              "height": 11,
+              "offset": 4913920,
+              "bytes": 880
+            }
+          ],
+          "width": 1280,
+          "height": 720,
+          "texelBytes": 4,
+          "role": "currentDepth",
+          "binding": 3,
+          "source": {
+            "resource": "ResourceId::16447",
+            "view": "ResourceId::16448",
+            "format": "R32_FLOAT",
+            "byte_offset": 0,
+            "byte_size": 0,
+            "first_mip": 0,
+            "mip_count": 7,
+            "first_slice": 0,
+            "slice_count": 1,
+            "shader_binding_index": 3,
+            "array_element": 0
+          }
+        },
+        {
+          "file": "motion.bin",
+          "bytes": 14745600,
+          "sha256": "5c114bb08d77d97949439fae4b43a9c62ff21636ca8a71768da408706ffb9549",
+          "format": "R10G10B10A2_UNORM",
+          "levels": [
+            {
+              "mip": 0,
+              "width": 2560,
+              "height": 1440,
+              "offset": 0,
+              "bytes": 14745600
+            }
+          ],
+          "width": 2560,
+          "height": 1440,
+          "texelBytes": 4,
+          "role": "motion",
+          "binding": 4,
+          "source": {
+            "resource": "ResourceId::16508",
+            "view": "ResourceId::16509",
+            "format": "R10G10B10A2_UNORM",
+            "byte_offset": 0,
+            "byte_size": 0,
+            "first_mip": 0,
+            "mip_count": 1,
+            "first_slice": 0,
+            "slice_count": 1,
+            "shader_binding_index": 4,
+            "array_element": 0
+          }
+        },
+        {
+          "file": "surfaceMask.bin",
+          "bytes": 921600,
+          "sha256": "24ce48985d5e5a4d07e86ea4fd5fa549a3c7b0c74be637ed0d90feeab17eaf13",
+          "format": "R8_UNORM",
+          "levels": [
+            {
+              "mip": 0,
+              "width": 1280,
+              "height": 720,
+              "offset": 0,
+              "bytes": 921600
+            }
+          ],
+          "width": 1280,
+          "height": 720,
+          "texelBytes": 1,
+          "role": "surfaceMask",
+          "binding": 5,
+          "source": {
+            "resource": "ResourceId::15777",
+            "view": "ResourceId::15778",
+            "format": "R8_UNORM",
+            "byte_offset": 0,
+            "byte_size": 0,
+            "first_mip": 0,
+            "mip_count": 1,
+            "first_slice": 0,
+            "slice_count": 1,
+            "shader_binding_index": 5,
+            "array_element": 0
+          }
+        },
+        {
+          "file": "surfaceNormal.bin",
+          "bytes": 3686400,
+          "sha256": "34b0f713815e3e3b25115d6f1dfef91fdcdfa76297762da8565c8fadc5cb1aae",
+          "format": "R10G10B10A2_UNORM",
+          "levels": [
+            {
+              "mip": 0,
+              "width": 1280,
+              "height": 720,
+              "offset": 0,
+              "bytes": 3686400
+            }
+          ],
+          "width": 1280,
+          "height": 720,
+          "texelBytes": 4,
+          "role": "surfaceNormal",
+          "binding": 6,
+          "source": {
+            "resource": "ResourceId::16497",
+            "view": "ResourceId::16498",
+            "format": "R10G10B10A2_UNORM",
+            "byte_offset": 0,
+            "byte_size": 0,
+            "first_mip": 0,
+            "mip_count": 1,
+            "first_slice": 0,
+            "slice_count": 1,
+            "shader_binding_index": 6,
+            "array_element": 0
+          }
+        },
+        {
+          "file": "color-initial.bin",
+          "bytes": 3686400,
+          "sha256": "0ddf060e619a959fbdddfd289501896bb968bf5bc1ed29e0038d98cbc8313906"
+        },
+        {
+          "file": "color-reference.bin",
+          "bytes": 3686400,
+          "sha256": "171466668545a4639d9f0a49809e00a262836a09979e6243ed395cf93f2bf853"
+        },
+        {
+          "file": "footprint-initial.bin",
+          "bytes": 3686400,
+          "sha256": "674f377bbaf16d1117682fc15215792eed8c2dbe590890fa4e7393bdfb54b9e2"
+        },
+        {
+          "file": "footprint-reference.bin",
+          "bytes": 3686400,
+          "sha256": "c703a5276d22056e5a12ad4a4c681e5ae92f595a6eda1e2042416a090c3f58f0"
+        },
+        {
+          "file": "confidence-initial.bin",
+          "bytes": 921600,
+          "sha256": "c45228dbd3e22e1bb6145f7381e594186a083673ee0ab09ff1e4b144bccee71c"
+        },
+        {
+          "file": "confidence-reference.bin",
+          "bytes": 921600,
+          "sha256": "2fea6f7dd90000166dd40134eb7b991ba590a4e5dc6ef8824f0998eb6caec609"
+        }
+      ],
+      "dispatch": [
+        9115,
+        1,
+        1
+      ],
+      "usage": {
+        "ResourceId::16505": [
+          {
+            "event": 8691,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_Resource"
+          }
+        ],
+        "ResourceId::14664": [
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_Resource"
+          }
+        ],
+        "ResourceId::14677": [
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_Resource"
+          }
+        ],
+        "ResourceId::16447": [
+          {
+            "event": 8587,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8595,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8601,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8607,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8613,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8619,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8625,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8691,
+            "usage": "ResourceUsage.CS_Resource"
+          },
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_Resource"
+          }
+        ],
+        "ResourceId::16508": [
+          {
+            "event": 5017,
+            "usage": "ResourceUsage.Clear"
+          },
+          {
+            "event": 5044,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5066,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5078,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5094,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5107,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5121,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5134,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5147,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5161,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5178,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5193,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5207,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5221,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5234,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5247,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5261,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5275,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5288,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5299,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5310,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5321,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5335,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5348,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5361,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5372,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5385,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5398,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5411,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5425,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5439,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5453,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5467,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5480,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5491,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5504,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5517,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5531,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5542,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5559,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5573,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5588,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5603,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5618,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5633,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5648,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5662,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5677,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5692,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5706,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5720,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5735,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5749,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5764,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5779,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5793,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5807,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5822,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5839,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5854,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5868,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5882,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5897,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5912,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5924,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5938,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5952,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5967,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5982,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 5996,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6010,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6025,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6037,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6054,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6068,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6079,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6090,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6103,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6118,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6131,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6145,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6159,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6173,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6187,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6198,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6212,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6225,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6239,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6250,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6263,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6274,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6288,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6301,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6315,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6328,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6342,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6355,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6369,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6383,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6396,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6409,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6422,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6436,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6447,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6458,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6472,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6485,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6498,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6511,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6524,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6538,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6549,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6560,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6574,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6587,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6600,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6613,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6626,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6639,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6652,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6666,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6679,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6692,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6703,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6716,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6727,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6738,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6752,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6766,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6780,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6791,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6805,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6816,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6829,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6842,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6853,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6867,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6881,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6892,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6906,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6917,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6930,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6941,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6954,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6965,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6976,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 6990,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7003,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7017,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7034,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7048,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7063,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7080,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7094,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7114,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7131,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7148,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7168,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7185,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7205,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7225,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7244,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7258,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7275,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7295,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7305,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7318,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7337,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7351,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7369,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7383,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7396,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7409,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7423,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7437,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7451,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7465,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7480,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7498,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7518,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7538,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7558,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7579,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7597,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7610,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7625,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7639,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7660,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7676,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7694,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7710,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7727,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7746,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7762,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 7782,
+            "usage": "ResourceUsage.ColorTarget"
+          },
+          {
+            "event": 8653,
+            "usage": "ResourceUsage.CS_Resource"
+          },
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_Resource"
+          }
+        ],
+        "ResourceId::15777": [
+          {
+            "event": 8644,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8662,
+            "usage": "ResourceUsage.CS_Resource"
+          },
+          {
+            "event": 8671,
+            "usage": "ResourceUsage.CS_Resource"
+          },
+          {
+            "event": 8691,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_Resource"
+          }
+        ],
+        "ResourceId::16497": [
+          {
+            "event": 8691,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_Resource"
+          }
+        ],
+        "ResourceId::15861": [
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_RWResource"
+          }
+        ],
+        "ResourceId::16501": [
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_RWResource"
+          }
+        ],
+        "ResourceId::15781": [
+          {
+            "event": 8662,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8671,
+            "usage": "ResourceUsage.CS_Resource"
+          },
+          {
+            "event": 8691,
+            "usage": "ResourceUsage.CS_RWResource"
+          },
+          {
+            "event": 8702,
+            "usage": "ResourceUsage.CS_RWResource"
+          }
+        ]
+      },
+      "bytes": 75379584,
+      "originalRepeatedExact": true
+    }
+  },
+  "diagnosticReceipts": [
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/compiler-variants.json",
+      "bytes": 1800,
+      "sha256": "5ead27662bcf9d8c30561a048475798398ae33fce1e00d2aa68b1b0740a823a2"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/dot-order-variants.json",
+      "bytes": 4099,
+      "sha256": "5a132c09952de2e061da2b8d4357e8ce0712ec9171b71fbb3c8cfd391c45d207"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/dot4-order-variants.json",
+      "bytes": 593,
+      "sha256": "47f14bd673457f0e74690f8c95cca113bdb355666290e9fbcbff5a9572193faf"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/footdot-unqualified.json",
+      "bytes": 833,
+      "sha256": "b2ec837a3daa6484f8d4a37c9b221ea1b41e7235abb44a8d11584b86dd53a899"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/footdot2-order-variants.json",
+      "bytes": 611,
+      "sha256": "ae7a55cb8ccb461e385aec7f046c142acc7cc694058b7847e4e356de8038a69a"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/dot-precision-variants.json",
+      "bytes": 322,
+      "sha256": "ce8999e0fb67cfd2b4631c1855f5c52afe9c51a6cf4800cb2ea0234571d1da23"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/matrix-reverse-variants.json",
+      "bytes": 226,
+      "sha256": "f545d82470f04295be3aaa1f732d4f1570a00d76155375965cac9f0b692cceb1"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/projection-order-variants.json",
+      "bytes": 3121,
+      "sha256": "3cae19805e7f62516a6ebd79b6efc4809e5d02633b00c5502b1dfacb318c1ca9"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/observe-d3d-report.json",
+      "bytes": 2944,
+      "sha256": "969182d51185b46fcc7218d7a0c054ed3962276a837501d3039ca250232a856f"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/observe-vulkan-report.json",
+      "bytes": 9181,
+      "sha256": "05dbd9d214190fee61e9ce1d80f6efe8a2c01f7cb54fac36113ee9a867706e83"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/observe2-d3d-report.json",
+      "bytes": 5110,
+      "sha256": "aa8a01838aec39662265a52c5aca6f707ec6eec5f65f094170eb4c7a695d06ff"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/observe2-vulkan-report.json",
+      "bytes": 15785,
+      "sha256": "7f4098649bdbf4027178feb8d661402a6bd3d26572880f1fe489950745144229"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/observe3-d3d-report.json",
+      "bytes": 9562,
+      "sha256": "043fd71abdcafa4ab0bc407a0f567b80c63047b6aac2818c877e66a6c76741a6"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/observe3-vulkan-report.json",
+      "bytes": 28917,
+      "sha256": "11f7fee484bf256f7604baec748b1b19c9c86fde4b7e75264cb374da9ca35f1f"
+    }
+  ],
+  "diagnosticQuantities": {
+    "1": [
+      {
+        "quantity": "pattern",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "qualified": true
+      },
+      {
+        "quantity": "normalX",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "qualified": true
+      },
+      {
+        "quantity": "octX",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "qualified": true
+      },
+      {
+        "quantity": "normalSquared",
+        "differentFloatBits": 49509,
+        "maximumAbsoluteDifference": 5.960464477539063e-08,
+        "qualified": true
+      },
+      {
+        "quantity": "inverseNormal",
+        "differentFloatBits": 21703,
+        "maximumAbsoluteDifference": 1.1920928955078125e-07,
+        "qualified": true
+      },
+      {
+        "quantity": "positionPre",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "qualified": true
+      },
+      {
+        "quantity": "positionDiv",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "qualified": true
+      }
+    ],
+    "2": [
+      {
+        "quantity": "worldPre",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "worldDiv",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "directionSquared",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "direction",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "distance",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "angle",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "sine",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "cosine",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "normal4Squared",
+        "differentFloatBits": 12,
+        "maximumAbsoluteDifference": 7.549516567451064e-15,
+        "examples": [
+          {
+            "d3d": "0x32021366",
+            "vulkan": "0x32021364"
+          },
+          {
+            "d3d": "0x33fd19f0",
+            "vulkan": "0x33fd19ef"
+          },
+          {
+            "d3d": "0x3320992d",
+            "vulkan": "0x3320992b"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "normal4Length",
+        "differentFloatBits": 9,
+        "maximumAbsoluteDifference": 1.8462742445990443e-10,
+        "examples": [
+          {
+            "d3d": "0x38b67b32",
+            "vulkan": "0x38b67b30"
+          },
+          {
+            "d3d": "0x394ac38b",
+            "vulkan": "0x394ac38a"
+          },
+          {
+            "d3d": "0x360491a2",
+            "vulkan": "0x36048e76"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "pointProjected",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "footFinal",
+        "differentFloatBits": 295163,
+        "maximumAbsoluteDifference": 2.3774802684783936e-05,
+        "examples": [
+          {
+            "d3d": "0x3c260184",
+            "vulkan": "0x3c25fa7b"
+          },
+          {
+            "d3d": "0x3e93f213",
+            "vulkan": "0x3e93f200"
+          },
+          {
+            "d3d": "0x3edab3d4",
+            "vulkan": "0x3edab3d3"
+          }
+        ],
+        "qualified": true
+      }
+    ],
+    "3": [
+      {
+        "quantity": "centerX",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "centerY",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "centerW",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "centerUvX",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": false
+      },
+      {
+        "quantity": "centerPixelX",
+        "differentFloatBits": 120701,
+        "maximumAbsoluteDifference": 0.0001220703125,
+        "examples": [
+          {
+            "d3d": "0x3efffb08",
+            "vulkan": "0x3efffa00"
+          },
+          {
+            "d3d": "0x3fc0074a",
+            "vulkan": "0x3fc006c0"
+          },
+          {
+            "d3d": "0x401ffd9d",
+            "vulkan": "0x401ffd80"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "projectedW",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "secondX",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "secondY",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "secondW",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": true
+      },
+      {
+        "quantity": "offsetUvX",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": false
+      },
+      {
+        "quantity": "offsetUvY",
+        "differentFloatBits": 0,
+        "maximumAbsoluteDifference": 0.0,
+        "examples": [],
+        "qualified": false
+      },
+      {
+        "quantity": "mappedUvX",
+        "differentFloatBits": 146387,
+        "maximumAbsoluteDifference": 1.1920928955078125e-07,
+        "examples": [
+          {
+            "d3d": "0x393226a5",
+            "vulkan": "0x39322800"
+          },
+          {
+            "d3d": "0x3a801dd5",
+            "vulkan": "0x3a801e00"
+          },
+          {
+            "d3d": "0x3adf24ec",
+            "vulkan": "0x3adf2500"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "deltaX",
+        "differentFloatBits": 205760,
+        "maximumAbsoluteDifference": 0.000274658203125,
+        "examples": [
+          {
+            "d3d": "0x3e90a2e1",
+            "vulkan": "0x3e90a100"
+          },
+          {
+            "d3d": "0x3e7f0ffe",
+            "vulkan": "0x3e7f0a00"
+          },
+          {
+            "d3d": "0x3ea4344c",
+            "vulkan": "0x3ea43300"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "deltaY",
+        "differentFloatBits": 276111,
+        "maximumAbsoluteDifference": 0.000152587890625,
+        "examples": [
+          {
+            "d3d": "0xbd9ea40a",
+            "vulkan": "0xbd9ea480"
+          },
+          {
+            "d3d": "0xbd8c7439",
+            "vulkan": "0xbd8c7300"
+          },
+          {
+            "d3d": "0xbdb03c2b",
+            "vulkan": "0xbdb043c0"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "deltaSquared",
+        "differentFloatBits": 270560,
+        "maximumAbsoluteDifference": 0.1640625,
+        "examples": [
+          {
+            "d3d": "0x3dafb927",
+            "vulkan": "0x3dafb4fa"
+          },
+          {
+            "d3d": "0x3d88b259",
+            "vulkan": "0x3d88ac35"
+          },
+          {
+            "d3d": "0x3de1d071",
+            "vulkan": "0x3de1ce6b"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "secondDeltaSquared",
+        "differentFloatBits": 364432,
+        "maximumAbsoluteDifference": 0.09765625,
+        "examples": [
+          {
+            "d3d": "0x3ddf2c78",
+            "vulkan": "0x3ddf2ca2"
+          },
+          {
+            "d3d": "0x3dadf885",
+            "vulkan": "0x3dadffe7"
+          },
+          {
+            "d3d": "0x3e0ead93",
+            "vulkan": "0x3e0eb02f"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "sumSquared",
+        "differentFloatBits": 405779,
+        "maximumAbsoluteDifference": 0.1328125,
+        "examples": [
+          {
+            "d3d": "0x3e4772d0",
+            "vulkan": "0x3e4770ce"
+          },
+          {
+            "d3d": "0x3e1b556f",
+            "vulkan": "0x3e1b560e"
+          },
+          {
+            "d3d": "0x3e7f95cc",
+            "vulkan": "0x3e7f9764"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "length",
+        "differentFloatBits": 391321,
+        "maximumAbsoluteDifference": 0.0002899169921875,
+        "examples": [
+          {
+            "d3d": "0x3ee1f644",
+            "vulkan": "0x3ee1f520"
+          },
+          {
+            "d3d": "0x3ec769a8",
+            "vulkan": "0x3ec76a0e"
+          },
+          {
+            "d3d": "0x3effcae0",
+            "vulkan": "0x3effcbad"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "halfLength",
+        "differentFloatBits": 391321,
+        "maximumAbsoluteDifference": 0.00014495849609375,
+        "examples": [
+          {
+            "d3d": "0x3e61f644",
+            "vulkan": "0x3e61f520"
+          },
+          {
+            "d3d": "0x3e4769a8",
+            "vulkan": "0x3e476a0e"
+          },
+          {
+            "d3d": "0x3e7fcae0",
+            "vulkan": "0x3e7fcbad"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "logLength",
+        "differentFloatBits": 345617,
+        "maximumAbsoluteDifference": 0.39003944396972656,
+        "examples": [
+          {
+            "d3d": "0xc00b8629",
+            "vulkan": "0xc00b86a1"
+          },
+          {
+            "d3d": "0xc0171091",
+            "vulkan": "0xc0171062"
+          },
+          {
+            "d3d": "0xc000132a",
+            "vulkan": "0xc00012e0"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "clampedLog",
+        "differentFloatBits": 319649,
+        "maximumAbsoluteDifference": 0.00015756860375404358,
+        "examples": [
+          {
+            "d3d": "0x3d790245",
+            "vulkan": "0x3d78f7b8"
+          },
+          {
+            "d3d": "0x3fddeb1c",
+            "vulkan": "0x3fddeb00"
+          },
+          {
+            "d3d": "0x402406df",
+            "vulkan": "0x402406de"
+          }
+        ],
+        "qualified": true
+      },
+      {
+        "quantity": "normalizedLog",
+        "differentFloatBits": 316889,
+        "maximumAbsoluteDifference": 2.6261433959007263e-05,
+        "examples": [
+          {
+            "d3d": "0x3c260184",
+            "vulkan": "0x3c25fa7b"
+          },
+          {
+            "d3d": "0x3e93f213",
+            "vulkan": "0x3e93f200"
+          },
+          {
+            "d3d": "0x3edab3d4",
+            "vulkan": "0x3edab3d3"
+          }
+        ],
+        "qualified": true
+      }
+    ]
+  },
+  "negativeControls": [
+    {
+      "name": "projection-rcp-mul",
+      "differences": [
+        0,
+        9164,
+        0
+      ],
+      "result": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "liveBuffers": 0,
+        "liveImages": 0,
+        "outputs": [
+          {
+            "bytes": 3686400,
+            "differentBytes": 0,
+            "role": "color"
+          },
+          {
+            "bytes": 3686400,
+            "differentBytes": 9164,
+            "role": "footprint"
+          },
+          {
+            "bytes": 921600,
+            "differentBytes": 0,
+            "role": "confidence"
+          }
+        ],
+        "reverse": false,
+        "status": "failed",
+        "validationErrors": 0
+      },
+      "sourceSha256": "2abf60453b51a24562196a10458efd73be73b0975dbb39b2ffff1289bf5025b0"
+    },
+    {
+      "name": "projection-rcp-factor",
+      "differences": [
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "liveBuffers": 0,
+        "liveImages": 0,
+        "outputs": [
+          {
+            "bytes": 3686400,
+            "differentBytes": 0,
+            "role": "color"
+          },
+          {
+            "bytes": 3686400,
+            "differentBytes": 0,
+            "role": "footprint"
+          },
+          {
+            "bytes": 921600,
+            "differentBytes": 0,
+            "role": "confidence"
+          }
+        ],
+        "reverse": false,
+        "status": "passed",
+        "validationErrors": 0
+      },
+      "sourceSha256": "95803036c9c66ef9663f8c18a5e688ca670efdea5297d264e42d6844b36392a7"
+    },
+    {
+      "name": "projection-rcp-fma",
+      "differences": [
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "liveBuffers": 0,
+        "liveImages": 0,
+        "outputs": [
+          {
+            "bytes": 3686400,
+            "differentBytes": 0,
+            "role": "color"
+          },
+          {
+            "bytes": 3686400,
+            "differentBytes": 0,
+            "role": "footprint"
+          },
+          {
+            "bytes": 921600,
+            "differentBytes": 0,
+            "role": "confidence"
+          }
+        ],
+        "reverse": false,
+        "status": "passed",
+        "validationErrors": 0
+      },
+      "sourceSha256": "5886c1292eedd3200c61e8979dd16bf129c7b362fee625f11059a928d591ce4e"
+    },
+    {
+      "name": "projection-rcp-factor-pixel",
+      "differences": [
+        0,
+        6883,
+        0
+      ],
+      "result": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "liveBuffers": 0,
+        "liveImages": 0,
+        "outputs": [
+          {
+            "bytes": 3686400,
+            "differentBytes": 0,
+            "role": "color"
+          },
+          {
+            "bytes": 3686400,
+            "differentBytes": 6883,
+            "role": "footprint"
+          },
+          {
+            "bytes": 921600,
+            "differentBytes": 0,
+            "role": "confidence"
+          }
+        ],
+        "reverse": false,
+        "status": "failed",
+        "validationErrors": 0
+      },
+      "sourceSha256": "9e1cfba9e7e367ac7e1b2e7732b44f9c4795a9c2e5cb81d78627380f36684114"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "CMakeLists.txt",
+      "bytes": 231658,
+      "sha256": "e9cbedf2cd44f8b622988f44d1fb3b7e41fdfc16eacacee5e9485c8a98be193b",
+      "gitBlob": "92e7b095e404c8f548f5c84daee0c32464d51fb1"
+    },
+    {
+      "file": "tests/NativeRayReferenceGpuTests.cpp",
+      "bytes": 17388,
+      "sha256": "dacb86e7243005738c5cc15f45f4500b6565a55350348995faf0da37dd00f7a5",
+      "gitBlob": "bc0538eab2c965373dae92bd80a3021de52e22ae"
+    },
+    {
+      "file": "tools/native_render/ray_fixture.py",
+      "bytes": 2169,
+      "sha256": "c8b022b051091693476599636a3b8afba60a145d685c446ab3f5c583fed6c5c4",
+      "gitBlob": "1930e17ca35b8649b8f185ddc3f9b67f6bea6bdc"
+    },
+    {
+      "file": "tools/native_render/ray_snapshot_worker.py",
+      "bytes": 9287,
+      "sha256": "983d6e02e5068b12b2817149c5ea049735d61b4ec73b3fb36749e2a02c56e899",
+      "gitBlob": "d4aac1477020bff803f00df485db2aba4f6707a1"
+    },
+    {
+      "file": "tools/native_render/ray_vulkan_shader.py",
+      "bytes": 1843,
+      "sha256": "d76012883fb8810c14aa07ec69a7f4f5c9790e173d47fa14539fbd579b17fdab",
+      "gitBlob": "49f28cf09d1ff05b0d9a04d95ef5e2e19e1d74ad"
+    },
+    {
+      "file": "tools/export_native_ray_fixture.py",
+      "bytes": 3349,
+      "sha256": "f51f9003cdf4c7af9d2049da057e71bc9a02edfc080c29f698804318f2a545d5",
+      "gitBlob": "3ef3c931069694db4f39eed1c599dd19aa968d1d"
+    },
+    {
+      "file": "tools/compile_native_ray_reference.py",
+      "bytes": 1996,
+      "sha256": "f768b4369b982a22d00d500ceeff669e7120852fd66e1b6fcec879a1023bdabe",
+      "gitBlob": "b50bd82342033e3be7c3067357f423e7ea09071a"
+    },
+    {
+      "file": "tools/test_native_ray_fixture.py",
+      "bytes": 3981,
+      "sha256": "5015fb46c5a2c43bfa1a2d06bdd7f52051c5376f3ca68802960962c1c98e09bf",
+      "gitBlob": "4bdcda657fd6ed23d82f7960b10217c8454591cd"
+    },
+    {
+      "file": "tools/test_native_ray_reference_gpu.py",
+      "bytes": 7154,
+      "sha256": "adada6de22380277cb466c86c4d8db8185c3f0396dd6102b9131096684ef5361",
+      "gitBlob": "6db45ffab9f5c78295e526857f85a3093076b0f6"
+    },
+    {
+      "file": "tests/fixtures/native_ray_vulkan/reference.spv",
+      "bytes": 88556,
+      "sha256": "8656076f682143ab61a38ff3c6accd4952d943a205ab241394b888c04c469653",
+      "gitBlob": "8d6d8263e15c93d743b7e7defb74d3b2e645fb0b"
+    },
+    {
+      "file": "tests/fixtures/native_ray_vulkan/compiled-control.spv",
+      "bytes": 68628,
+      "sha256": "1a769c1999cbd6871f57199550aa60596ab0058a323a2eae8b75dcd348b7e52c",
+      "gitBlob": "93d7850b499898ca20ec280193e2744793f05e24"
+    },
+    {
+      "file": "tests/fixtures/native_ray_vulkan/source.json",
+      "bytes": 1753,
+      "sha256": "e1f9322742d4ca947fd9a158ff207c877d4871a95a0eed67920c771682ef8eee",
+      "gitBlob": "2ebe5ac12c535cfcdad266791c2ef3330a715733"
+    },
+    {
+      "file": "tests/fixtures/native_ray_vulkan/control-source.json",
+      "bytes": 2712,
+      "sha256": "0a87b88cbae5fc173bd7687a49029bb0b26fc55bf6238befcf8b5e5b7743356d",
+      "gitBlob": "49f467eb5d7aa0086bb99bc2bab0a290b8654744"
+    }
+  ],
+  "redGreenReceipts": [
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/mip-count-red.log",
+      "bytes": 93,
+      "sha256": "987b07501b1760825d993e115c3e95a8c6222ececd0ad4b1e7f37610a69cc967"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/payload-red.log",
+      "bytes": 261,
+      "sha256": "c32e8c2ae3154c504a4c3db2aa8e01a11b9031d67ea4b28b636945f129612b75"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/payload-object-red.log",
+      "bytes": 999,
+      "sha256": "0936a8791f85b3b47d90f7305278555e7d117da79e54ace7aa56df1e27dbb3ae"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/payload-green-final.log",
+      "bytes": 112,
+      "sha256": "a912dd14b7ecae35d69f4a2f565f20831ad43b581983dc42e86d469390c70c8d"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/build-release.log",
+      "bytes": 10169,
+      "sha256": "013346b0dac9a9216a65b7ef32a7de1f68c8da0ac25579ca2e913cc7b2d01299"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/qualified-compiler/compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "build/runs/20261031-060648-ray-vulkan-a27711/qualified-compiler/validate.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "preservedUserFiles": {
+    "docs\\acceptance\\p5\\closure\\source-evidence\\interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4"
+  },
+  "documentation": {
+    "status": "passed",
+    "checks": [
+      {
+        "name": "doc-style",
+        "exitCode": 0
+      },
+      {
+        "name": "doc-links",
+        "exitCode": 0
+      },
+      {
+        "name": "stage-status",
+        "exitCode": 0
+      },
+      {
+        "name": "stage-tests",
+        "exitCode": 0
+      },
+      {
+        "name": "actual-paragraphs",
+        "exitCode": 0
+      }
+    ],
+    "files": {
+      "README.md": "6b462800fd630e6dc41aebb4aadaa2f90d4bfd1ec511abcc4b773d811207eebc",
+      "CHANGELOG.md": "1cb6d0b9f078b9bc8a7e7bf19a8411ac75aa4d116bb70eb0232e414cdeffcd50",
+      "docs/plans/azure-engine-plan.md": "e5f2c826a67fbce5c4fd787add01de6f015cf356965b9fbc47264b8a337c99ff",
+      "docs/plans/2026-10-30-development-recovery.md": "b8589f68c6c5286946fae61d14d606c1abd56a5409858999ff349000bdd4f2b2",
+      "docs/plans/2026-10-28-reflection-filter-integration.md": "9e98e96a790a19337b6554b2a5dd1925bf40a30cd3c0ec4462d1c513ffa0c381",
+      "docs/plans/2026-10-31-ray-vulkan-reference.md": "0f35df1c949b87f8796198ea854386468c268917aa9ac49c6d3150fad504c9ae",
+      "docs/acceptance/recovery/2026-10-30.md": "c8fa40ad7248cac3e648db74cd6bb5620678a90bf958a2aeaf94435b6094a181",
+      "docs/acceptance/nr/native-ray-vulkan-reference.md": "3915f0bc184e486d16d1fce919e5cac59459a1534a75fb77e5ec065b7234fad4"
+    },
+    "siteWarnings": 85,
+    "newSiteWarnings": 0,
+    "strictMode": "Pending pre-existing source-link warnings"
+  }
+}
