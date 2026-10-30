@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P0-texture",
+  "sourceBaseCommit": "5a2bc28",
+  "runtimeSourceCommit": "8eca1e9",
+  "testSourceSha256": "0c45bce8701878cf232bc97e4955ae93717b93a9c3806960a1e944d88e9b2aaf",
+  "builds": {
+    "debug": {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "cmake",
+        "--build",
+        "--preset",
+        "msvc-debug",
+        "-j",
+        "2"
+      ],
+      "startUtc": "2026-10-30T16:45:16.482859+00:00",
+      "endUtc": "2026-10-30T16:51:29.328622+00:00",
+      "exitCode": 0
+    },
+    "release": {
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "cmake",
+        "--build",
+        "--preset",
+        "msvc-release",
+        "-j",
+        "2"
+      ],
+      "startUtc": "2026-10-30T16:52:39.046105+00:00",
+      "endUtc": "2026-10-30T17:08:29.968082+00:00",
+      "exitCode": 0
+    }
+  },
+  "testFixture": {
+    "minFilter": 9987,
+    "authoredMipLevels": 3,
+    "authoredBytes": 44,
+    "distinctMipSamples": [
+      255,
+      255
+    ],
+    "negativeControls": [
+      "glTF minFilter 9729 uploads 1 level and 32 bytes",
+      "texture metadata mipPolicy none uploads 1 level and 32 bytes"
+    ],
+    "prerequisiteRed": "CTest exit 8: Authored mip upload fixture must enable mip filtering",
+    "green": [
+      "Debug CTest exit 0",
+      "Release CTest exit 0"
+    ]
+  },
+  "debugVerification": {
+    "schemaVersion": 1,
+    "configuration": "debug",
+    "sourceCommit": "5a2bc284b384fc8834fb6c625bfefde5833b39b0",
+    "steps": [
+      {
+        "name": "class-regression",
+        "startUtc": "2026-10-30T17:01:31.459436+00:00",
+        "exitCode": 0,
+        "logSha256": "048e989338762a4dfcae57c18260ad7d24fbd3763cf69178fd96eb846102ff48"
+      },
+      {
+        "name": "loader-managed-regression",
+        "reusedLog": "loader-managed-debug.log",
+        "exitCode": 0
+      },
+      {
+        "name": "public-smoke",
+        "startUtc": "2026-10-30T17:03:20.654083+00:00",
+        "exitCode": 0,
+        "logSha256": "6ce4d5b16b1d27c43b5d58e8b1a0d778b0c2f23bdc82b4f2b4c236016a637592"
+      },
+      {
+        "name": "history-owned",
+        "startUtc": "2026-10-30T17:03:47.154927+00:00",
+        "exitCode": 0,
+        "logSha256": "b298ff56064a979dcb62abd1a072b5c6ed2af6415843f7bdbb56e5aa7997e1e5"
+      },
+      {
+        "name": "history-shared",
+        "startUtc": "2026-10-30T17:04:11.643580+00:00",
+        "exitCode": 0,
+        "logSha256": "c063a335ff0c2d81c66a8125b289f6aae41245de63ed9984ea8bb1d49f5003c0"
+      },
+      {
+        "name": "history-fixed",
+        "startUtc": "2026-10-30T17:04:17.642492+00:00",
+        "exitCode": 0,
+        "logSha256": "48484bbe717a1468c70d86ae798e49758e2914c8dd36727a50682c0cc910c8d7"
+      },
+      {
+        "name": "history-off",
+        "startUtc": "2026-10-30T17:04:38.993344+00:00",
+        "exitCode": 0,
+        "logSha256": "ae0643751480e4aea1c493fa1bb4d585ebd70e6e603c7efd28679ee69da57d20"
+      },
+      {
+        "name": "history-multisample",
+        "startUtc": "2026-10-30T17:04:49.161002+00:00",
+        "exitCode": 0,
+        "logSha256": "c1588d6cdf32c2803c6c4443c7569195ab1cbdb59e57ace660f0978b97edf9ab"
+      },
+      {
+        "name": "history-motion",
+        "startUtc": "2026-10-30T17:05:13.255497+00:00",
+        "exitCode": 0,
+        "logSha256": "d5efa8068eebb8759b195e6ff8aa09b0dd6c9aad77e0d2e6755d471a5cfb52ee"
+      },
+      {
+        "name": "surface-snapshot",
+        "startUtc": "2026-10-30T17:05:19.680038+00:00",
+        "exitCode": 0,
+        "logSha256": "f2889307a6cdc1c17a25530ee8ebb6c4f1deccf85b90bb37040475376b77d576"
+      }
+    ],
+    "status": "passed"
+  },
+  "formatVerification": {
+    "originalBatch": {
+      "passed": 8,
+      "failed": 1,
+      "log": "format-debug.log"
+    },
+    "containerRetest": {
+      "debug": "passed",
+      "release": "passed"
+    }
+  },
+  "startupDebug": {
+    "status": "failed",
+    "configuration": "debug",
+    "playerSha256": "92f2bc68b7624d1d75590cab9f4ebb42a1a1de79b947b3754a93e0906ab72d1c",
+    "originalFault": "preserved; root cause unresolved",
+    "attempts": [],
+    "error": "Command '['D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\ninja-msvc-debug\\\\AzurePlayer.exe', '--project', 'D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261027-002548-native-hair-layer-region-closure-61c105\\\\main-candidate-v7\\\\project.azureproject', '--width', '1920', '--height', '1080', '--fixed-frame-step', '--qa-camera', 'scene', '--qa-light', 'scene', '--qa-isolation', 'beauty', '--runtime-report', 'D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261030-232017-recovery-init-crash-3bd962\\\\startup-debug\\\\1\\\\runtime.json', '--gpu-timing-output', 'D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261030-232017-recovery-init-crash-3bd962\\\\startup-debug\\\\1\\\\gpu.json', '--set', 'render.antiAliasing=4', '--smoke-frames', '150', '--set', 'runtime.maxFrameRate=0', '--set', 'runtime.vsync=false']' timed out after 600.0 seconds"
+  },
+  "startupRelease": {
+    "firstAttempt": "passed; 150 frames; AA4; zero buffers/images after unload",
+    "repeatStatus": "running; 5 attempts requested; original fault root cause unresolved"
+  },
+  "logs": {
+    "build-debug.log": {
+      "bytes": 40041,
+      "sha256": "9374e5959ee4362e3e3d565ed1bb7b40565ba13d407f94643da520ea05716677"
+    },
+    "build-release.log": {
+      "bytes": 96481,
+      "sha256": "a923e4f510120d5ffdddda19bea01085f04451fcaf307b5d58d04be29d9bccef"
+    },
+    "loader-managed-debug.log": {
+      "bytes": 1413,
+      "sha256": "24cbedbcb2b59c762e1d46ac275da369fa742c8a96cbbba857f9eae110de57ef"
+    },
+    "format-debug.log": {
+      "bytes": 3125,
+      "sha256": "3f90879a9226e2e2ee7efd7d9e5fcb4e9cc2e5ec53faac6f63bb203a4546b7c6"
+    },
+    "texture-sampler-prerequisite-red.log": {
+      "bytes": 537,
+      "sha256": "1dbebddc2d442217e156e0902311b52ee235463fa8d76cc146439cec9e413a8a"
+    },
+    "texture-sampler-debug-green.log": {
+      "bytes": 376,
+      "sha256": "baca4eb4f4284a69479f96cdab346f20efaf6e72e522b0ddfe7566260f802f09"
+    },
+    "texture-sampler-release-green.log": {
+      "bytes": 380,
+      "sha256": "18b256f5ab84c3f076149f12c4bcae66ada71960fc0a53253422ab39aa3b1705"
+    },
+    "blender-engine-import.log": {
+      "bytes": 101,
+      "sha256": "6cce8a84aae71ecb79ee14827fe7ca6918302aedabc6445da35e39cbd4830486"
+    },
+    "configure-debug-managed.log": {
+      "bytes": 8444,
+      "sha256": "cb7fff12dc6ded085fc0cdff5e2849edc442f2ab19869be60569e8e7542d6d61"
+    },
+    "configure-release-managed.log": {
+      "bytes": 10538,
+      "sha256": "5fe9caf3e560b2c642d2768c209056f2d7eae0be42cc03cc2535593a9a0fb897"
+    }
+  },
+  "executables": {
+    "debug": {
+      "AzureRender.exe": "ea3f326e813f304a2745340d63b812e2610ca4a8030248f39ccdcb983ca5f985",
+      "AzurePlayer.exe": "92f2bc68b7624d1d75590cab9f4ebb42a1a1de79b947b3754a93e0906ab72d1c"
+    },
+    "release": {
+      "AzureRender.exe": "28f0e6355650340fd6f252c3f0cdf1fbd4926f6b3a88666b058b78601861e1bd",
+      "AzurePlayer.exe": "4ab198bddc9f577338b2ca968c0c526b5a2a8d4f02248ad91ae2d57ffbc05ddc"
+    }
+  },
+  "runtimeSourceFiles": {
+    "shaders/mesh.frag": "b780b53076c8c891a64b48affa8578030d2d33ddc1bf856b459ab17ef8f6ca7c",
+    "src/scenes/CharacterMaterialSampling.inc": "cc0bcaa588e77f79b9934e427be13c650153fa52458968d361e39e4803b81092",
+    "src/scenes/CharacterSceneRenderer.hpp": "9f19f62781cfc9d2e6d861cff40b42389f00e899e8dc5443fb9fb3b2a27ace95",
+    "src/scenes/CharacterSceneRenderer.cpp": "2bed253873e14a78656c6a9ba3f29651ecfe70e255da36a7c638f80e0f86c90f"
+  },
+  "playerFixtures": {
+    "owned": {
+      "status": "passed",
+      "images": 12,
+      "resultSha256": "3fdb1d606937b3cff3a7f5534cef54f8920a57c1f5ccfac3d05929782e9c7e84"
+    },
+    "shared": {
+      "status": "passed",
+      "images": 12,
+      "resultSha256": "a3eac238a013890486083772faa2f6b864abe6420fc6e68df8275f64046d969d"
+    },
+    "fixed": {
+      "status": "passed",
+      "images": 12,
+      "resultSha256": "1724a2bb44b7fab916cd392920d5843377bdcdd72af421a19f03e525c7a093a1"
+    },
+    "off": {
+      "status": "passed",
+      "images": 12,
+      "resultSha256": "89288f1cdb881ae94c9ac1f1abb070c6f073e8734c69aa67edb2f35c9df2c1cd"
+    },
+    "multisample": {
+      "status": "passed",
+      "images": 12,
+      "resultSha256": "306eaf1655e4b0d7c9001d89719be38a830f10ec6d5b10f7efeb3ce5144446d2"
+    },
+    "motion": {
+      "status": "passed",
+      "images": 12,
+      "resultSha256": "d1a6de2cf4cfd446ea9fb476964170735d8142176841997598629b8737a267bb"
+    }
+  }
+}

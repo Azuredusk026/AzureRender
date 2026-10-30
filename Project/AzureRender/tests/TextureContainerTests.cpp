@@ -57,16 +57,32 @@ auto root=argc==4?std::filesystem::absolute(std::filesystem::u8path(argv[3])):st
     nlohmann::json document;{std::ifstream input(std::filesystem::u8path(argv[1]));input>>document;}
     document["images"][0]["uri"]="authored.dds";document["images"][0].erase("mimeType");
     document["materials"][0]["pbrMetallicRoughness"]["baseColorFactor"]={1,1,1,1};
+    document["samplers"][0]["minFilter"]=9987;
     std::ofstream(root/"authored.gltf")<<document.dump();const auto model=loadGltfAsset((root/"authored.gltf").u8string());
     require(model.materials.front().baseColorPixels.size()==44&&model.materials.front().baseColorPixels[33]==255,"Public glTF loading preserves authored mip samples");
+    require(model.materials.front().authoredMipLevels[0]==3&&model.materials.front().textureSettings[0].mipPolicy=="generate","Authored mip upload fixture must enable mip filtering");
     auto embedded=document;embedded["images"][0]["uri"]="data:application/octet-stream;base64,"+base64(raw);const auto inlineAsset=loadEmbeddedGltfAsset(embedded.dump(),false);
     require(inlineAsset.materials.front().baseColorPixels.size()==44,"Embedded model candidates preserve authored texture mip levels");
     {
         rhi::NullRhi backend;backend.collectImageUploads=true;CharacterSceneRenderer renderer;RenderContext context{};context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=argv[2];
         context.rampAtlasPath=(std::filesystem::u8path(argv[1]).parent_path()/"toon_ramp_atlas.ppm").u8string();context.descriptorLimits.maxPerStageDescriptorSamplers=4096;context.descriptorLimits.maxDescriptorSetSamplers=4096;context.descriptorLimits.maxPerStageDescriptorSampledImages=4096;context.descriptorLimits.maxDescriptorSetSampledImages=4096;context.descriptorLimits.maxPerStageResources=4096;
         context.scene.resources.push_back({"asset",(root/"authored.gltf").u8string()});scene::SceneNodeDesc node;node.id="model";node.resourceId="asset";context.scene.nodes.push_back(node);RenderSettings settings;context.renderSettings=&settings;
-        renderer.onLoad(context);bool found=false;for(const auto& upload:backend.imageUploads)if(upload.width==4&&upload.height==2){found=true;require(upload.levels==3&&upload.pixels.size()==44&&upload.pixels[33]==255&&upload.pixels[42]==255,"Production renderer uploads authored mip samples without regeneration");}renderer.onUnload(context);require(found,"Authored texture reaches production renderer upload");
-        std::ofstream(root/"authored.dds.azmeta")<<nlohmann::json{{"settings",{{"texture",{{"mipPolicy","none"}}}}}}.dump();backend.imageUploads.clear();renderer.onLoad(context);found=false;for(const auto& upload:backend.imageUploads)if(upload.width==4&&upload.height==2){found=true;require(upload.levels==1&&upload.pixels.size()==32,"Disabled mip policy uploads only authored base pixels");}renderer.onUnload(context);require(found,"Disabled mip texture reaches renderer");
+        const auto checkUpload=[&](unsigned levels,std::size_t bytes) {
+            bool found=false;
+            for(const auto& upload:backend.imageUploads)if(upload.width==4&&upload.height==2) {
+                found=true;
+                require(upload.levels==levels&&upload.pixels.size()==bytes,"Production upload respects the selected mip policy");
+                if(levels==3)require(upload.pixels[33]==255&&upload.pixels[42]==255,"Production renderer uploads authored mip samples without regeneration");
+            }
+            require(found,"Authored texture reaches production renderer upload");
+        };
+        renderer.onLoad(context);checkUpload(3,44);renderer.onUnload(context);
+        auto baseOnly=document;baseOnly["samplers"][0]["minFilter"]=9729;
+        std::ofstream(root/"authored.gltf")<<baseOnly.dump();backend.imageUploads.clear();
+        renderer.onLoad(context);checkUpload(1,32);renderer.onUnload(context);
+        std::ofstream(root/"authored.gltf")<<document.dump();
+        std::ofstream(root/"authored.dds.azmeta")<<nlohmann::json{{"settings",{{"texture",{{"mipPolicy","none"}}}}}}.dump();backend.imageUploads.clear();
+        renderer.onLoad(context);checkUpload(1,32);renderer.onUnload(context);
         backend.unavailableSampledFormats.insert(VK_FORMAT_R8G8B8A8_SRGB);backend.unavailableSampledFormats.insert(VK_FORMAT_R8G8B8A8_UNORM);
         rejects([&]{try{renderer.onLoad(context);}catch(...){renderer.onUnload(context);throw;}renderer.onUnload(context);},"Device sampling capability rejection precedes unsupported upload");
     }
