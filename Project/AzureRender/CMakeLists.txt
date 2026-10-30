@@ -1760,6 +1760,7 @@ if(BUILD_TESTING)
     )
     target_include_directories(
         AzureRenderEditorCameraTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    target_link_libraries(AzureRenderEditorCameraTests PRIVATE nlohmann_json::nlohmann_json)
     add_test(
         NAME AzureRender.EditorCameraController
         COMMAND AzureRenderEditorCameraTests)

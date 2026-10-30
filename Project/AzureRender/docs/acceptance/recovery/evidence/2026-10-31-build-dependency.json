@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P0-build",
+  "scope": "Editor camera standalone test build dependency and Blender environment",
+  "failure": "C1083 nlohmann/json_fwd.hpp missing from AzureRenderEditorCameraTests include path",
+  "dependencyChain": [
+    "EditorCameraController.cpp",
+    "CameraProjection.hpp",
+    "RenderSettings.hpp",
+    "UnlitTextureLayers.hpp",
+    "nlohmann/json_fwd.hpp"
+  ],
+  "fix": "Declare nlohmann_json::nlohmann_json on the standalone test target",
+  "test": "AzureRender.EditorCameraController",
+  "testResult": "1/1 passed; ctest exit 0",
+  "blender": {
+    "status": "verified",
+    "version": "Blender 5.1.2",
+    "root": "D:\\Tools\\Blender",
+    "archiveSha256": "345bedea7b0acf7cc9666423d8553f9129622aea34ded65c23e8cb70f83f14ff",
+    "source": "https://download.blender.org/release/Blender5.1/blender-5.1.2-windows-x64.zip"
+  },
+  "blenderSmoke": {
+    "status": "passed",
+    "tool": "Blender 5.1.2",
+    "command": [
+      "D:\\Tools\\Blender\\blender-5.1.2-windows-x64\\blender.exe",
+      "--background",
+      "--factory-startup",
+      "--threads",
+      "1",
+      "--python-expr",
+      "import bpy; bpy.ops.export_scene.gltf(filepath='D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261030-232017-recovery-init-crash-3bd962\\\\blender-smoke.glb',export_format='GLB')"
+    ],
+    "outputBytes": 1936,
+    "meshes": 1,
+    "nodes": 1
+  },
+  "logs": {
+    "build-debug-red-missing-camera-json.log": {
+      "bytes": 56695,
+      "sha256": "76b5fb59244465a012c595c4c278946b4865a2eeeec67d5cc2e204987b7b5e5f"
+    },
+    "build-debug-AzureRenderEditorCameraTests.log": {
+      "bytes": 331,
+      "sha256": "d357953254c42f57cdf926f5b85257314db511dcc68ec5e58c838547edddfe22"
+    },
+    "editor-camera-green.log": {
+      "bytes": 385,
+      "sha256": "0675d9ebfc7c2489e3ef6386cd909aa318132ae0a8519699b81460560ffdebda"
+    },
+    "blender-smoke.log": {
+      "bytes": 428,
+      "sha256": "38edad1c1aeb1a59cf989f8808d99ea2dce16c90933a56923b56d2926bb0a942"
+    }
+  }
+}
