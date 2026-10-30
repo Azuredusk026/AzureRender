@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "status": "pending",
+  "owner": "P8 final environment review",
+  "artifactRoot": "build/runs/20261030-232017-recovery-init-crash-3bd962",
+  "candidatePlayerSha256": "2895b224242ae42857318d58767d190b038f93817cffa82702bb389c09fdeca4",
+  "items": [
+    {
+      "id": "native-archive-environment",
+      "state": "Pending",
+      "evidence": "docs/acceptance/recovery/evidence/2026-10-31-baseline.json",
+      "retryTrigger": "Driver/environment attribution completed; use the original archival strict image gate"
+    },
+    {
+      "id": "native-aa4-thermal-performance",
+      "state": "Pending",
+      "failedDiagnostic": "feature-performance/summary.json",
+      "thermalObservations": [
+        {
+          "seconds": 163.91552049999882,
+          "temperature": 80.0,
+          "thermalMargin": 15.0,
+          "thermalSlowdown": {
+            "hardware": false,
+            "software": true
+          },
+          "gpuUtilization": 100.0,
+          "graphicsClockMHz": 2355.0
+        },
+        {
+          "seconds": 169.08424390000073,
+          "temperature": 85.0,
+          "thermalMargin": -1.0,
+          "thermalSlowdown": {
+            "hardware": false,
+            "software": true
+          },
+          "gpuUtilization": 100.0,
+          "graphicsClockMHz": 2295.0
+        }
+      ],
+      "retryTrigger": "Cooling or power environment changes and full warm rendering remains below reported thermal limits",
+      "required": "Paired short comparison first, then formal 15-round and 30-minute batches for the final frozen candidate"
+    }
+  ],
+  "unchangedAcceptance": [
+    "NR12 1080p60",
+    "archived strict image comparison",
+    "dual-device delivery",
+    "physical input and audio review"
+  ]
+}

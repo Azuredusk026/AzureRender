@@ -4,6 +4,7 @@
 #include "render/EnvironmentCubeTexture.hpp"
 #include "render/OctahedralEnvironmentGpu.hpp"
 #include "render/SampledTextureCache.hpp"
+#include "render/MaterialPipelinePolicy.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
@@ -97,6 +98,7 @@ private:
     static constexpr unsigned kMaterialClassVariantCount=unsigned(AssetMaterialClass::Showcase)+1;
     std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassPipelines_{};
     std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassSnapshotPipelines_{};
+    std::array<MaterialFeatureSpecialization,kMaterialClassVariantCount> materialClassFeatureSpecializations_{};
     VkPipeline materialClassPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const noexcept;
     VkPipeline hairIntegralPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const;
     std::array<VkPipeline,8> hairIntegralPipelines_{};

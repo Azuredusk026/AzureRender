@@ -3,11 +3,18 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
     const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot) {
     bool needed=false;
     std::array<bool,kMaterialClassVariantCount> classes{};
+    std::array<std::uint32_t,kMaterialClassVariantCount> intersections{},combined{};
+    intersections.fill(~std::uint32_t{0});
+    materialClassFeatureSpecializations_={};
     const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
         if(ordinaryOpaqueMaterial(material))needed=true;
         else if(material.alphaMode!=AssetAlphaMode::Blend){
             const auto index=unsigned(material.materialClass);
-            if(index<classes.size())classes[index]=true;
+            if(index<classes.size()){
+                classes[index]=true;
+                intersections[index]&=material.materialFeatures;
+                combined[index]|=material.materialFeatures;
+            }
         }
     }};
     inspect(asset_);for(const auto& resource:additionalResources_)inspect(resource->asset);
@@ -26,22 +33,25 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             ordinaryOpaqueSnapshotPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
         }
         for(unsigned index=0;index<classes.size();++index)if(classes[index]){
+            const auto policy=fixedMaterialFeatures(intersections[index],combined[index]);
+            materialClassFeatureSpecializations_[index]=policy;
             for(unsigned facing=0;facing<4;++facing){
                 auto desc=color;
                 desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
-                desc.fragmentSpecialization={{1,index}};
+                desc.fragmentSpecialization={{1,index},{2,policy.fixedMask},{3,policy.fixedValue}};
                 materialClassPipelines_[index][facing]=rhi_->createGraphicsPipeline(desc);
                 desc=snapshot;
                 desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
-                desc.fragmentSpecialization={{1,index}};
+                desc.fragmentSpecialization={{1,index},{2,policy.fixedMask},{3,policy.fixedValue}};
                 materialClassSnapshotPipelines_[index][facing]=rhi_->createGraphicsPipeline(desc);
             }
         }
     }catch(...){destroyMaterialClassPipelines();throw;}
 }
 void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
+    materialClassFeatureSpecializations_={};
     if(!rhi_)return;
     for(auto* variants:{&materialClassPipelines_,&materialClassSnapshotPipelines_})
         for(auto& facing:*variants)for(auto& pipeline:facing){
@@ -58,6 +68,7 @@ void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
 VkPipeline CharacterSceneRenderer::materialClassPipeline(const AssetMaterial& material,bool mirrored,bool snapshot) const noexcept {
     const auto index=unsigned(material.materialClass);
     if(material.alphaMode==AssetAlphaMode::Blend||index>=kMaterialClassVariantCount)return VK_NULL_HANDLE;
+    if(!materialClassFeatureSpecializations_[index].matches(material.materialFeatures))return VK_NULL_HANDLE;
     return (snapshot?materialClassSnapshotPipelines_:materialClassPipelines_)[index][surfaceFacingIndex(material.doubleSided,mirrored)];
 }
 

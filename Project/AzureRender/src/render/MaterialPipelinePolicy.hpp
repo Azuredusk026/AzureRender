@@ -1,5 +1,6 @@
 #pragma once
 #include "assets/GltfLoader.hpp"
+#include <cstdint>
 #include <string>
 #include <stdexcept>
 namespace azurerender {
@@ -11,6 +12,19 @@ inline constexpr unsigned surfaceFacingIndex(bool doubleSided,bool mirrored) noe
 inline bool ordinaryOpaqueMaterial(const AssetMaterial& material) noexcept {
     return material.materialClass==AssetMaterialClass::Generic&&material.alphaMode==AssetAlphaMode::Opaque
         &&(material.materialFeatures&~std::uint32_t{MaterialFeatureNeutralFallback|MaterialFeatureEmissiveMask})==0;
+}
+struct MaterialFeatureSpecialization {
+    std::uint32_t fixedMask=0,fixedValue=0;
+    [[nodiscard]] constexpr bool matches(std::uint32_t features) const noexcept {
+        return (features&fixedMask)==fixedValue;
+    }
+};
+// Empty sets (intersection=~0, union=0) retain the fully dynamic policy.
+// The view's temporal sampling and coverage bits are never specialized.
+[[nodiscard]] inline constexpr MaterialFeatureSpecialization fixedMaterialFeatures(
+    std::uint32_t intersection,std::uint32_t combined) noexcept {
+    const auto mask=~(intersection^combined)&std::uint32_t{0x3fffffffU};
+    return {mask,intersection&mask};
 }
 inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false){
     auto at=file.rfind(".frag.spv");

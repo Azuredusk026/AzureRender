@@ -39,4 +39,19 @@ int main(){
     if(surfaceFacingIndex(false,false)!=0||surfaceFacingIndex(false,true)!=1
         ||surfaceFacingIndex(true,false)!=2||surfaceFacingIndex(true,true)!=3)return 17;
 
+    const auto empty=fixedMaterialFeatures(0xffffffffU,0);
+    if(empty.fixedMask||empty.fixedValue||!empty.matches(0xffffffffU))return 18;
+    const auto shared=fixedMaterialFeatures(32,32);
+    if(shared.fixedMask!=0x3fffffffU||shared.fixedValue!=32
+        ||!shared.matches(32|0xc0000000U)||shared.matches(0)||shared.matches(33))return 19;
+    const auto varied=fixedMaterialFeatures(32,40);
+    if(varied.fixedMask!=0x3ffffff7U||varied.fixedValue!=32
+        ||!varied.matches(32)||!varied.matches(40|0xc0000000U)
+        ||varied.matches(0)||varied.matches(33))return 20;
+    const auto viewOwned=fixedMaterialFeatures(32|0xc0000000U,40|0xc0000000U);
+    if(viewOwned.fixedMask!=varied.fixedMask||viewOwned.fixedValue!=varied.fixedValue)return 21;
+    const auto dynamic=fixedMaterialFeatures(0,0xffffffffU);
+    if(dynamic.fixedMask||dynamic.fixedValue||!dynamic.matches(0xffffffffU))return 22;
+    std::cout<<"Material feature policy: common bits, varying bits, view ownership and changed-material fallback passed\n";
+
 }

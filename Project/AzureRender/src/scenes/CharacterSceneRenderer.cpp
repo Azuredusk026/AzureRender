@@ -1631,6 +1631,15 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"screenReflectionHeight\": " << (screenReflections_?screenReflections_->output(0).extent.height:0) << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"materialClassPipelineCount\": " << [&]{unsigned count=0;for(const auto& variants:materialClassPipelines_)for(auto p:variants)count+=p!=VK_NULL_HANDLE;return count;}() << ",\n"
+         << "  \"materialClassFeatureSpecializations\": " << [&]{
+             auto policies=nlohmann::json::array();
+             for(unsigned index=0;index<materialClassPipelines_.size();++index)
+                 if(std::any_of(materialClassPipelines_[index].begin(),materialClassPipelines_[index].end(),[](auto p){return p!=VK_NULL_HANDLE;})){
+                     const auto& policy=materialClassFeatureSpecializations_[index];
+                     policies.push_back({{"class",index},{"fixedMask",policy.fixedMask},{"fixedValue",policy.fixedValue}});
+                 }
+             return policies.dump();
+         }() << ",\n"
          << "  \"ordinaryOpaqueSnapshotPipelineCount\": " << std::count_if(ordinaryOpaqueSnapshotPipelines_.begin(),ordinaryOpaqueSnapshotPipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"irradianceResourceKind\": " << std::quoted(irradianceClipmapActive_?"clipmap":irradianceVolume_.cells.empty()?"none":"grid") << ",\n"
          << "  \"irradianceQueryScope\": \"physical-surface\",\n"

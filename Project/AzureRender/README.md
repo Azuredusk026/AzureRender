@@ -7,8 +7,10 @@
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。
 显式管线编译统计见[GPU 管线检查](docs/development/pipeline-inspection.md)。
 实际主场景热点与保留预算见[成本验证](docs/acceptance/nr/main-aa-cost-attribution.md)。
+
 普通材质专用化及完整快照路径见[材质验证](docs/acceptance/nr/ordinary-material-specialization.md)。
 基础功能集合、视图标志及编译依赖见[功能裁剪](docs/acceptance/nr/generic-material-feature-folding.md)。
+类别共享功能位及动态回退见[特化验证](docs/acceptance/nr/material-class-feature-specialization.md)。
 
 三层体积、公共材质及主场景绑定见[辐照接入](docs/acceptance/nr/irradiance-clipmap-scene.md)。
 精确采样抖动及 NPR 接收边界见[查询位置](docs/acceptance/nr/irradiance-query.md)。

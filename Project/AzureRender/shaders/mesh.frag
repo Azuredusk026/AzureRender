@@ -145,10 +145,12 @@ layout(push_constant) uniform MaterialData {
 
 layout(constant_id=0) const bool azureOrdinaryOpaque=false;
 layout(constant_id=1) const uint azureFixedMaterialClass=0xffffffffU;
+layout(constant_id=2) const uint azureFixedMaterialFeatureMask=0U;
+layout(constant_id=3) const uint azureFixedMaterialFeatureValue=0U;
 #define AZURE_MATERIAL_CLASS (azureOrdinaryOpaque?0U:(azureFixedMaterialClass!=0xffffffffU?azureFixedMaterialClass:material.materialClass))
 #define AZURE_ALPHA_MODE (azureOrdinaryOpaque?0:material.alphaMode)
 // View-owned temporal sampling and coverage remain dynamic.
-#define AZURE_MATERIAL_FEATURES azureSpecializedMaterialFeatures(azureOrdinaryOpaque,material.materialFeatures)
+#define AZURE_MATERIAL_FEATURES azureSpecializedMaterialFeatures(azureOrdinaryOpaque,(material.materialFeatures&~azureFixedMaterialFeatureMask)|azureFixedMaterialFeatureValue)
 
 #if defined(AZURE_BINDLESS)
 #define AZ_TEX_BASE_COLOR textureArray[nonuniformEXT(material.textureBase + 0u)]

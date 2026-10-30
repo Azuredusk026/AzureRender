@@ -978,6 +978,13 @@ if(BUILD_TESTING)
     add_executable(AzureMaterialPipelinePolicyTests tests/MaterialPipelinePolicyTests.cpp)
     target_link_libraries(AzureMaterialPipelinePolicyTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.MaterialPipelinePolicy COMMAND AzureMaterialPipelinePolicyTests)
+    foreach(AZURE_FEATURE_AA 0 3 4)
+        add_test(NAME AzureRender.MaterialFeatureSpecializationGpu.aa${AZURE_FEATURE_AA}
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_feature_specialization_gpu.py"
+                --player "$<TARGET_FILE:AzurePlayer>" --aa "${AZURE_FEATURE_AA}")
+        set_tests_properties(AzureRender.MaterialFeatureSpecializationGpu.aa${AZURE_FEATURE_AA}
+            PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
+    endforeach()
     target_link_libraries(AzureShaderSpecializationGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureShaderSpecializationGpuTests AzureRenderShaders)
     add_test(NAME AzureRender.ShaderSpecializationGpu COMMAND AzureShaderSpecializationGpuTests "${SHADER_BINARY_DIR}")
