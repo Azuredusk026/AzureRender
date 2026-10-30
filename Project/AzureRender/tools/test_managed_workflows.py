@@ -7,8 +7,25 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import build_game
 from run_playable_long_run import isolated_environment
+
+def restore_package_directory(source,target,timeout=2.0):
+    deadline=time.monotonic()+timeout
+    attempts=0
+    while True:
+        if target.exists() or target.is_symlink():
+            raise FileExistsError(f'Package restore destination already exists: {target}')
+        attempts+=1
+        try:
+            source.rename(target)
+            return attempts
+        except OSError as error:
+            if os.name!='nt' or error.winerror not in (5,32,33):raise
+            remaining=deadline-time.monotonic()
+            if remaining<=0:raise
+            time.sleep(min(.05,remaining))
 
 def verify(build,backend,evidence,configuration):
     build=build.resolve();evidence=evidence.resolve();evidence.mkdir(parents=True,exist_ok=True)
@@ -70,7 +87,8 @@ def verify(build,backend,evidence,configuration):
             shutil.rmtree(moved/'captures',ignore_errors=True);shutil.rmtree(moved/'game/.azure',ignore_errors=True)
             packageResult={'files':len(original['files']),'moved':True,'isolatedPath':env['PATH'],'sourceUnavailable':True,
                 'engineUnavailable':True,'dotnetRuntimeExternal':backend=='coreclr','tamperRejected':True}
-        finally:moved.rename(package)
+        finally:restoreAttempts=restore_package_directory(moved,package)
+        packageResult['directoryRestoreAttempts']=restoreAttempts
     summary={'status':'passed','backend':backend,'configuration':configuration,'workflows':results,'previewRestored':True,'package':packageResult,'inputs':str(root)}
     (evidence/'summary.json').write_text(json.dumps(summary,indent=2)+'\n');print(json.dumps(summary))
 

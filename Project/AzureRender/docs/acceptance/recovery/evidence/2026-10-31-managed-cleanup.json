@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P0-tools-managed-cleanup",
+  "status": "passed",
+  "scope": "Owned test-package restoration with a two-second deadline; engine playback and integrity gates remain unchanged",
+  "artifactRoot": "build/runs/20261031-035308-mw-lock-c17aa4",
+  "sourceFiles": {
+    "tools/test_managed_workflows.py": {
+      "sha256": "31e24168e9b84d22596189acfc9d559cc9e25b310b48fd9459c4eb13317a6185",
+      "gitBlobId": "f676afefd034f336d7c28e5676bc3092f4a43688"
+    },
+    "tools/test_managed_workflow_cleanup.py": {
+      "sha256": "34e76e7f649da15bfb350fa57405876d07a0d782c100361ee82f0ee3b16af770",
+      "gitBlobId": "8b6367920a7578d50169534bbd9ece47ef01056b"
+    }
+  },
+  "unit": {
+    "red": {
+      "path": "build/runs/20261031-035308-mw-lock-c17aa4/cleanup-red.log",
+      "sha256": "a49c9795d4ed983fc67d290e2d4839e944a6221aadb0d581d3151941e9ea6fe6"
+    },
+    "green": {
+      "path": "build/runs/20261031-035308-mw-lock-c17aa4/cleanup-green.log",
+      "sha256": "494f487eb668ff08a398c3e838291ff698317899bf0b610c7da772ff4a617d0a"
+    },
+    "ctest": {
+      "status": "passed",
+      "cases": [
+        {
+          "configuration": "debug",
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "-R",
+            "^AzureTools.ManagedWorkflowCleanup$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\cleanup-debug.xml"
+          ],
+          "exitCode": 0,
+          "logSha256": "fff3dfef65b8846c3708408db8a3e3214437c523457b908a5887887cff7fbd23"
+        },
+        {
+          "configuration": "release",
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "-R",
+            "^AzureTools.ManagedWorkflowCleanup$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\cleanup-release.xml"
+          ],
+          "exitCode": 0,
+          "logSha256": "e400f4502d5ccf0c2f92cd4a8ff751bc1ee88accd6f271e03468f802ee35ae97"
+        }
+      ]
+    }
+  },
+  "realWorkflows": {
+    "status": "passed",
+    "sourceFiles": {
+      "tools/test_managed_workflows.py": "31e24168e9b84d22596189acfc9d559cc9e25b310b48fd9459c4eb13317a6185",
+      "tools/test_managed_workflow_cleanup.py": "34e76e7f649da15bfb350fa57405876d07a0d782c100361ee82f0ee3b16af770"
+    },
+    "cases": [
+      {
+        "configuration": "debug",
+        "backend": "coreclr",
+        "command": [
+          "D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe",
+          "D:/Projects/FYP/Project/AzureRender/tools/test_managed_workflows.py",
+          "--build-dir",
+          "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug",
+          "--backend",
+          "coreclr",
+          "--configuration",
+          "Debug",
+          "--evidence",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\debug\\coreclr"
+        ],
+        "startUtc": "2026-10-30T20:07:29.675676+00:00",
+        "pid": 18888,
+        "exitCode": 0,
+        "logSha256": "0e0d5c8e9ab40f089722f83402149a11c00f376731ec3517b601df108303d774",
+        "endUtc": "2026-10-30T20:07:57.316813+00:00",
+        "result": {
+          "status": "passed",
+          "backend": "coreclr",
+          "configuration": "Debug",
+          "workflows": [
+            {
+              "workflow": "annotation",
+              "translation": [
+                4.0,
+                5.0,
+                6.0
+              ],
+              "activeScripts": 1
+            },
+            {
+              "workflow": "controller",
+              "translation": [
+                0.0,
+                0.0,
+                -2.5858068466186523
+              ],
+              "activeScripts": 1
+            }
+          ],
+          "previewRestored": true,
+          "package": null,
+          "inputs": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\debug\\coreclr\\managed-inputs-h0z28wbw"
+        }
+      },
+      {
+        "configuration": "debug",
+        "backend": "nativeaot",
+        "command": [
+          "D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe",
+          "D:/Projects/FYP/Project/AzureRender/tools/test_managed_workflows.py",
+          "--build-dir",
+          "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug",
+          "--backend",
+          "nativeaot",
+          "--configuration",
+          "Debug",
+          "--evidence",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\debug\\nativeaot"
+        ],
+        "startUtc": "2026-10-30T20:07:57.333596+00:00",
+        "pid": 19384,
+        "exitCode": 0,
+        "logSha256": "db4571f170b9016132add8e7e070502bc51ba7221883074a1fa118f7dc2f0874",
+        "endUtc": "2026-10-30T20:08:22.376010+00:00",
+        "result": {
+          "status": "passed",
+          "backend": "nativeaot",
+          "configuration": "Debug",
+          "workflows": [
+            {
+              "workflow": "annotation",
+              "translation": [
+                4.0,
+                5.0,
+                6.0
+              ],
+              "activeScripts": 1
+            },
+            {
+              "workflow": "controller",
+              "translation": [
+                0.0,
+                0.0,
+                -2.5858068466186523
+              ],
+              "activeScripts": 1
+            }
+          ],
+          "previewRestored": true,
+          "package": null,
+          "inputs": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\debug\\nativeaot\\managed-inputs-6lhexjyx"
+        }
+      },
+      {
+        "configuration": "release",
+        "backend": "coreclr",
+        "command": [
+          "D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe",
+          "D:/Projects/FYP/Project/AzureRender/tools/test_managed_workflows.py",
+          "--build-dir",
+          "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release",
+          "--backend",
+          "coreclr",
+          "--configuration",
+          "Release",
+          "--evidence",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\release\\coreclr"
+        ],
+        "startUtc": "2026-10-30T20:08:22.399238+00:00",
+        "pid": 24252,
+        "exitCode": 0,
+        "logSha256": "066596e29baf04feecdd2e8011e24aa1ec2335d412d039eaf63663de5f9bcb42",
+        "endUtc": "2026-10-30T20:10:04.256421+00:00",
+        "result": {
+          "status": "passed",
+          "backend": "coreclr",
+          "configuration": "Release",
+          "workflows": [
+            {
+              "workflow": "annotation",
+              "translation": [
+                4.0,
+                5.0,
+                6.0
+              ],
+              "activeScripts": 1
+            },
+            {
+              "workflow": "controller",
+              "translation": [
+                4.3394113302674953e-10,
+                1.1920928955078125e-07,
+                -2.5858068466186523
+              ],
+              "activeScripts": 1
+            }
+          ],
+          "previewRestored": true,
+          "package": {
+            "files": 674,
+            "moved": true,
+            "isolatedPath": "C:\\WINDOWS\\System32",
+            "sourceUnavailable": true,
+            "engineUnavailable": true,
+            "dotnetRuntimeExternal": true,
+            "tamperRejected": true,
+            "directoryRestoreAttempts": 1
+          },
+          "inputs": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\release\\coreclr\\managed-inputs-_w7hwk0r"
+        }
+      },
+      {
+        "configuration": "release",
+        "backend": "nativeaot",
+        "command": [
+          "D:/Projects/FYP/Project/AzureRender/build/reinstall-environment/venv/Scripts/python.exe",
+          "D:/Projects/FYP/Project/AzureRender/tools/test_managed_workflows.py",
+          "--build-dir",
+          "D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release",
+          "--backend",
+          "nativeaot",
+          "--configuration",
+          "Release",
+          "--evidence",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\release\\nativeaot"
+        ],
+        "startUtc": "2026-10-30T20:10:04.276350+00:00",
+        "pid": 33812,
+        "exitCode": 0,
+        "logSha256": "6dd9e424d4ecfd40b6d5751865bd9a0fbc20982fe04218c20030be0f896ec29d",
+        "endUtc": "2026-10-30T20:11:41.989592+00:00",
+        "result": {
+          "status": "passed",
+          "backend": "nativeaot",
+          "configuration": "Release",
+          "workflows": [
+            {
+              "workflow": "annotation",
+              "translation": [
+                4.0,
+                5.0,
+                6.0
+              ],
+              "activeScripts": 1
+            },
+            {
+              "workflow": "controller",
+              "translation": [
+                4.3394113302674953e-10,
+                1.1920928955078125e-07,
+                -2.5858068466186523
+              ],
+              "activeScripts": 1
+            }
+          ],
+          "previewRestored": true,
+          "package": {
+            "files": 668,
+            "moved": true,
+            "isolatedPath": "C:\\WINDOWS\\System32",
+            "sourceUnavailable": true,
+            "engineUnavailable": true,
+            "dotnetRuntimeExternal": false,
+            "tamperRejected": true,
+            "directoryRestoreAttempts": 1
+          },
+          "inputs": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-035308-mw-lock-c17aa4\\release\\nativeaot\\managed-inputs-1hq9b8pf"
+        }
+      }
+    ]
+  },
+  "originalFailures": {
+    "coreclr": {
+      "workflowEvidenceRoot": "build/ninja-msvc-release/managed-workflows/coreclr",
+      "batchLog": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-release/ctest.log",
+        "sha256": "3e5ac44e88468976916bea17008b3dd18805f92208c9269c9e824beae4bf83c7"
+      },
+      "reason": "Windows error 5 in final directory rename after functional and integrity checks"
+    },
+    "nativeaot": {
+      "workflowEvidenceRoot": "build/ninja-msvc-release/managed-workflows/nativeaot",
+      "batchLog": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-release/ctest.log",
+        "sha256": "3e5ac44e88468976916bea17008b3dd18805f92208c9269c9e824beae4bf83c7"
+      },
+      "reason": "Windows error 5 in final directory rename after functional and integrity checks"
+    }
+  },
+  "diagnostics": [
+    {
+      "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/managed-workflow-rename-probe.json",
+      "sha256": "362244aa605df40048b9249c1707ca0a338185677b0a0fe33f216f01b6de6ee2"
+    },
+    {
+      "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/managed-rename-static-probe.json",
+      "sha256": "b4f584aac1e30d00d11f3bafc308d960fb59083e69b9dc98d2db5e815f130e33"
+    },
+    {
+      "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/managed-rename-live-probe.json",
+      "sha256": "473aa04df6e19c4043cc6fd39a1b9d30cd6f00c76b6f02f520da2d5c2ff864e9"
+    }
+  ],
+  "runtimeCandidateFiles": {
+    "src/runtime/AssetDatabase.cpp": "fb7f234e1f02456a6b31f4273c2d9923a0a8a2b147da19a3b6e0a35c8664cbad",
+    "src/runtime/AssetDatabase.hpp": "75d25095fa70d930cc76a24bd6574f818c2c40afde8c5a4e60f195570f7a0364"
+  },
+  "runtimeProducts": {
+    "debug": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab",
+    "release": "a76c6185717c7303ab27705bbcdc3c2eb33337c4db3b7b0429ba975ca344e805"
+  },
+  "limitations": [
+    "Original transient directory holder identity remains unknown.",
+    "Warm static and live probes did not reproduce the original in-process failure.",
+    "Bounded waiting handles Windows sharing-related failures; permanent failures continue to propagate."
+  ]
+}
