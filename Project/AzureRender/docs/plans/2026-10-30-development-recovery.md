@@ -61,7 +61,7 @@
 | 核显 | Intel UHD，驱动 32.0.101.6556 |
 | D 盘初始剩余空间 | 约 702.56 GiB |
 | 开发证据归档 | 62,901,352,215 字节，SHA-256 核对通过 |
-| 运行资产 | `build/runs` 待恢复 |
+| 运行资产 | `build/runs` 已恢复，候选及故障资料指纹通过 |
 | 工作区 | 四个 P5 证据文件已有修改，保留现场 |
 
 归档检查使用 `Restore-Evidence.ps1 -CheckOnly`。
@@ -83,7 +83,7 @@
 | E2 | Visual Studio Build Tools | 2022，C++ 桌面工具、Windows SDK、英文诊断 | `cl /Bv` 可运行，记录实际工具集 |
 | E3 | CMake / Ninja | CMake 3.20+，优先使用 VS 自带工具 | 两者版本查询成功 |
 | E4 | Vulkan SDK | 1.4.350.0，含 glslc 与验证层 | 头文件、库、着色编译和设备枚举通过 |
-| E5 | vcpkg | 提交 `2bc124dac8436f5d8e108273aacf3f68d9824185` | 引导成功，版本数据库覆盖工程基线 |
+| E5 | vcpkg | 提交 `d186940b2f0c4e8e5b4ff804af57d2a26fbfa091` | 引导成功，版本数据库覆盖基线及显式覆盖项 |
 | E6 | C++ 依赖 | `vcpkg.json`，`x64-windows` | 清单配置成功，版本符合锁定项 |
 | E7 | Python 依赖 | 环境包及三份工具清单 | `pip check` 与模块导入通过 |
 | E8 | 运行资产 | 恢复归档中的 `build/runs` | 当前候选资源与故障转储可读 |
@@ -92,6 +92,7 @@
 | E11 | 扩展工具 | .NET、Blender、视频工具按任务安装 | 对应工具链任务可以运行 |
 
 vcpkg 内置基线为 `2bc124dac8436f5d8e108273aacf3f68d9824185`。
+工具检出提交同时覆盖 `libwebp 1.6.0#3` 等修订。
 依赖版本由 `vcpkg.json` 和覆盖端口共同确定。
 Assimp 为 6.0.4，Manifold 为 3.5.2，Lua 为 5.4.8。
 GLFW、Jolt、RmlUi、音频和图像库由清单安装。
@@ -112,7 +113,7 @@ Node、uv 和 GitHub CLI 按具体开发任务补齐。
 - [x] 设置本机 `VCPKG_ROOT` 和 `VULKAN_SDK`。
 - [x] 固定 vcpkg 提交并完成引导。
 - [x] 创建 Python 虚拟环境并检查依赖。
-- [ ] 按需恢复运行资产并核对活动路径。
+- [x] 按需恢复运行资产并核对活动路径。
 - [ ] 配置 Debug 与 Release，完成公共冒烟。
 - [ ] 验证 RenderDoc 与当前真实场景入口。
 
@@ -134,9 +135,9 @@ vcpkg 仓库配置使用该本机代理。
 代理端口变化时先核对系统配置。
 
 ```powershell
-git -c http.proxy=http://127.0.0.1:7897 clone --filter=blob:none --no-checkout https://github.com/microsoft/vcpkg.git D:/Tools/vcpkg
+git -c http.proxy=http://127.0.0.1:7897 clone --no-checkout https://github.com/microsoft/vcpkg.git D:/Tools/vcpkg
 git -C D:/Tools/vcpkg config http.proxy http://127.0.0.1:7897
-git -C D:/Tools/vcpkg checkout 2bc124dac8436f5d8e108273aacf3f68d9824185
+git -C D:/Tools/vcpkg checkout d186940b2f0c4e8e5b4ff804af57d2a26fbfa091
 & D:/Tools/vcpkg/bootstrap-vcpkg.bat -disableMetrics
 $env:VCPKG_ROOT = 'D:/Tools/vcpkg'
 $env:VULKAN_SDK = 'D:/Tools/VulkanSDK/1.4.350.0'
@@ -304,8 +305,10 @@ P8 保留性能热状态、人工复核和历史归因待项。
 - C++ 验证：经 `msvc_env.bat` 编译、链接及运行通过。
 - Vulkan SDK：1.4.350.0 安装通过，头文件与库齐全。
 - Vulkan 验证：双 GPU、验证层及 Vulkan 1.3 编译通过。
-- vcpkg：按工程内置基线恢复版本数据库，重新配置中。
-- 构建、资产解压及真实场景验证：待执行。
+- vcpkg：按基线及显式覆盖项恢复版本数据库，配置中。
+- 运行资产：恢复通过，候选及故障资料指纹通过。
+- C++ 依赖：完整计划解析通过，五十五个包编译安装中。
+- 引擎构建及真实场景验证：待执行。
 
 结构化检查记录位于以下本机文件：
 
