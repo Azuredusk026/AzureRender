@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-30",
+  "phase": "P0-tools",
+  "status": "verified",
+  "toolTests": {
+    "engineContracts": 6,
+    "evolutionCoverage": 15,
+    "failures": 0
+  },
+  "publicReplay": {
+    "status": "passed",
+    "toolVersion": "1.46",
+    "source": "build/runs/20261021-172156-native-render-evidence-623c52/renderdoc/plane-capture/capture_frame3.rdc",
+    "sourceSha256": "2521ff53ec84b006fa4ca49dfb8955d9312aaed44b907b996ebc2e1821deed07",
+    "openStatus": "<Result: 'Success'>",
+    "replayStatus": "<Result: 'Success'>",
+    "api": "GraphicsAPI.Vulkan",
+    "actions": 39,
+    "draws": 4,
+    "image": "build/runs/20261030-232017-recovery-init-crash-3bd962/renderdoc-public-replay.png",
+    "imageSha256": "a06a4affbfcc21e2a54563446adec17db79aa55eb1c7ddcf3861ebc3d88d8859"
+  },
+  "nativeReplay": {
+    "status": "passed",
+    "toolVersion": "1.46",
+    "source": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534.rdc",
+    "sourceSha256": "5bf129d05acb43d41ab54042f6648c3d728decb253c94d0250037f01f0b778b3",
+    "openStatus": "<Result: 'Success'>",
+    "replayStatus": "<Result: 'Success'>",
+    "actions": 1034,
+    "api": "GraphicsAPI.D3D11",
+    "drawOrDispatch": 1021,
+    "drawDispatchIdentity": "all 1021 event IDs match archived inventory",
+    "archivedExtraNonDrawActions": [
+      {
+        "eid": 12946,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12947,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12948,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12949,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12950,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12951,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12952,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12953,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12954,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12955,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12956,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      },
+      {
+        "eid": 12957,
+        "kind": "Marker",
+        "flags": "ActionFlags.PushMarker"
+      }
+    ],
+    "resolution": [
+      2560,
+      1440
+    ],
+    "image": "build/runs/20261030-232017-recovery-init-crash-3bd962/renderdoc-native-atrium.png",
+    "imageSha256": "af67600fcbb25060f1770a4bedb5e13b64a981229c9b24d9db29492db1fb5e18"
+  },
+  "nativeImageComparison": {
+    "reference": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame3534-replayed.png",
+    "current": "build/runs/20261030-232017-recovery-init-crash-3bd962/renderdoc-native-atrium.png",
+    "resolution": [
+      2560,
+      1440
+    ],
+    "identicalPixels": true,
+    "differentPixels": 0,
+    "maximumChannelDifference": 0,
+    "meanAbsoluteRgbDifference": 0.0
+  },
+  "originalCountDiagnostic": "build/runs/20261030-232017-recovery-init-crash-3bd962/renderdoc-native-atrium-count-red.json",
+  "scope": "toolchain recovery; formal NR acceptance remains pending"
+}
