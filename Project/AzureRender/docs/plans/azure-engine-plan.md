@@ -17,7 +17,9 @@
 原生射线的冻结数值参考见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
 
 Vulkan 三份完整输出及双配置回归见[参考验证](../acceptance/nr/native-ray-vulkan-reference.md)。
-后续接入公共深度、历史及射线输入契约。
+
+具名投影射线、独立槽位及完整来源结果见[公共接口验证](../acceptance/nr/projected-ray-contract.md)。
+主场景接续深度、运动编码和前帧资源装配。
 
 ## 代码检索与证据管理
 

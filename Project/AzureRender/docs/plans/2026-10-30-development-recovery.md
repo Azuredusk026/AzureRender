@@ -273,8 +273,8 @@ Release 完整入口八帧与同机控制一致。
 
 ### P2：反射、角色与抗锯齿闭环
 
-优先推进原版反射射线 R2 的公共内核接入。
-入口为 `src/render/ReflectionRay.*` 及所属计算程序。
+优先推进投影射线在主场景的深度与历史装配。
+入口为 `src/render/ProjectedReflectionRay.*` 及所属装配。
 颜色、过滤足迹和实际 GPU 输出分别核对。
 公共反射、历史接收和多样点路径共同回归。
 
@@ -290,11 +290,14 @@ Release 完整入口八帧与同机控制一致。
 - [ ] 联合图像、性能与实际资源峰值完成记录。
 
 原生射线的冻结数值参考见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
-三份完整输出逐字节一致，公共生产内核继续实施。
+三份完整输出逐字节一致，主场景装配继续实施。
 
 Vulkan 来源参考按[专项验证](../acceptance/nr/native-ray-vulkan-reference.md)验收。
 双配置、正逆瓦片顺序及三份完整输出均通过。
 生产接入继续核对深度约定和历史所有权。
+
+公共投影射线及双配置资源契约见[接口验证](../acceptance/nr/projected-ray-contract.md)。
+主场景继续装配深度、运动及前帧颜色。
 
 ### P3：原生可玩交付
 

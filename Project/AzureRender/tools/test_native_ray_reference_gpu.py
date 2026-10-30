@@ -19,7 +19,12 @@ def synthetic(root: Path,active: int,wrong_reference=False):
     constants=[]
     for i,size in enumerate((1040,48,96)):
         data=bytearray(size)
+        if i==1:struct.pack_into('<2f',data,40,1,0)
         if i==2:struct.pack_into('<4f',data,0,8,8,.125,.125)
+        if i==2:
+            struct.pack_into('<f',data,20,.1)
+            struct.pack_into('<f',data,48,32)
+            struct.pack_into('<f',data,84,6)
         constants.append(dict(index=i,**payload('constant-{}.bin'.format(i),data)))
     textures=[]
     for binding,(role,fmt,width,height,texel) in enumerate((
@@ -73,6 +78,7 @@ def main():
     parser.add_argument('--executable',type=Path,required=True)
     parser.add_argument('--shader',type=Path,required=True)
     parser.add_argument('--fixture',type=Path)
+    parser.add_argument('--projected',action='store_true')
     args=parser.parse_args()
     run=Path(subprocess.check_output([sys.executable,str(ENGINE/'tools/artifact_cleanup.py'),'--new-run','native-ray-reference'],cwd=ENGINE,text=True).strip())
     rows=[]
@@ -89,6 +95,7 @@ def main():
             output=run/(name+'-output')
             command=[str(args.executable.resolve()),str(args.shader.resolve()),str(fixture),str(output)]
             if reverse:command.append('--reverse')
+            if args.projected:command.append('--projected')
             result=subprocess.run(command,cwd=ENGINE,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=120)
             (run/(name+'.log')).write_text(result.stdout+result.stderr,encoding='utf-8')
             child=json.loads((output/'result.json').read_text(encoding='utf-8'))
@@ -100,11 +107,14 @@ def main():
             else:
                 assert result.returncode!=0 and child['outputs'][0]['differentBytes']==1,row
             assert child['validationErrors']==child['liveBuffers']==child['liveImages']==0,row
+            if args.projected:
+                assert child['independentFrameSlots'] and all(item['differentBytes']==0 for item in child['secondaryOutputs']),row
         if not args.fixture:
             for name,fixture in malformed_cases(run):
                 document=json.loads(fixture.read_text(encoding='utf-8'));verify_payloads(fixture.parent,document) if name!='version' else None
                 output=run/(name+'-output')
                 command=[str(args.executable.resolve()),str(args.shader.resolve()),str(fixture),str(output)]
+                if args.projected:command.append('--projected')
                 result=subprocess.run(command,cwd=ENGINE,capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=30)
                 (run/(name+'.log')).write_text(result.stdout+result.stderr,encoding='utf-8')
                 assert result.returncode!=0 and not output.exists(),(name,result.stdout,result.stderr)

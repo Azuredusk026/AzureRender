@@ -495,6 +495,18 @@ foreach(_field_base IN LISTS _field_base_programs)
     compile_shader("${SHADER_SOURCE_DIR}/mesh.frag" DEFINES ${_field_defines} OUTPUT_NAME "${_field_output}")
 endforeach()
 add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
+find_program(AZURE_DXC_EXECUTABLE NAMES dxc HINTS "$ENV{VULKAN_SDK}/Bin" "$ENV{VULKAN_SDK}/bin")
+if(AZURE_DXC_EXECUTABLE)
+    set(AZURE_PROJECTED_REFLECTION_SHADER "${SHADER_BINARY_DIR}/projected_reflection_trace.comp.spv")
+    add_custom_command(OUTPUT "${AZURE_PROJECTED_REFLECTION_SHADER}"
+        COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
+        COMMAND "${AZURE_DXC_EXECUTABLE}" -spirv -T cs_6_0 -E main -HV 2018 -fspv-target-env=vulkan1.1
+            -fvk-b-shift 0 0 -fvk-t-shift 1 0 -fvk-s-shift 8 0 -fvk-u-shift 9 0 -Od
+            -Fo "${AZURE_PROJECTED_REFLECTION_SHADER}" "${SHADER_SOURCE_DIR}/projected_reflection_trace.hlsl"
+        DEPENDS "${SHADER_SOURCE_DIR}/projected_reflection_trace.hlsl"
+        COMMENT "Compiling projected reflection trace" VERBATIM)
+    add_custom_target(AzureProjectedReflectionShaders DEPENDS "${AZURE_PROJECTED_REFLECTION_SHADER}")
+endif()
 include(cmake/AzureShaderModules.cmake)
 get_property(AZURE_SHADER_DESCRIPTORS GLOBAL PROPERTY AZURE_SHADER_DESCRIPTORS)
 list(JOIN AZURE_SHADER_DESCRIPTORS ",\n" AZURE_SHADER_DESCRIPTORS_JSON)
@@ -540,6 +552,7 @@ add_library(AzureRenderCore STATIC
     src/render/ReflectionSignalPyramid.cpp
     src/render/DepthPyramid.cpp
     src/render/ReflectionRay.cpp
+    src/render/ProjectedReflectionRay.cpp
     src/render/ReflectionTemporal.cpp
     src/render/ReflectionReprojection.cpp
     src/render/ScreenReflectionGpu.cpp
@@ -2611,6 +2624,9 @@ if(BUILD_TESTING)
     add_executable(AzureReflectionRayTests tests/ReflectionRayTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureReflectionRayTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ReflectionRay COMMAND AzureReflectionRayTests)
+    add_executable(AzureProjectedReflectionRayTests tests/ProjectedReflectionRayTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureProjectedReflectionRayTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ProjectedReflectionRay COMMAND AzureProjectedReflectionRayTests)
     add_executable(AzureReflectionTemporalTests tests/ReflectionTemporalTests.cpp src/rhi/NullRhi.cpp)
     add_executable(AzureReflectionReprojectionTests tests/ReflectionReprojectionTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureReflectionReprojectionTests PRIVATE AzureRenderCore)
@@ -2633,6 +2649,9 @@ if(BUILD_TESTING)
     add_executable(AzureReflectionRayGpuTests tests/ReflectionRayGpuTests.cpp)
     add_executable(AzureNativeRayReferenceGpuTests tests/NativeRayReferenceGpuTests.cpp)
     target_link_libraries(AzureNativeRayReferenceGpuTests PRIVATE AzureRenderCore AzurePlatform)
+    if(TARGET AzureProjectedReflectionShaders)
+        add_dependencies(AzureNativeRayReferenceGpuTests AzureProjectedReflectionShaders)
+    endif()
     if(Python3_Interpreter_FOUND)
         add_test(NAME AzureTools.NativeRayFixture COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_native_ray_fixture.py")
         add_test(NAME AzureRender.NativeRayReferenceGpu COMMAND "${Python3_EXECUTABLE}"
@@ -2640,6 +2659,13 @@ if(BUILD_TESTING)
             --executable "$<TARGET_FILE:AzureNativeRayReferenceGpuTests>"
             --shader "${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/native_ray_vulkan/reference.spv")
         set_tests_properties(AzureRender.NativeRayReferenceGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+        if(TARGET AzureProjectedReflectionShaders)
+            add_test(NAME AzureRender.ProjectedReflectionRayGpu COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_native_ray_reference_gpu.py"
+                --executable "$<TARGET_FILE:AzureNativeRayReferenceGpuTests>"
+                --shader "${AZURE_PROJECTED_REFLECTION_SHADER}" --projected)
+            set_tests_properties(AzureRender.ProjectedReflectionRayGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+        endif()
     endif()
     target_link_libraries(AzureReflectionRayGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureReflectionRayGpuTests AzureRenderShaders)

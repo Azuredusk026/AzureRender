@@ -10,6 +10,8 @@
 
 双配置 Vulkan 完整输出、载荷及复现见[射线参考验证](docs/acceptance/nr/native-ray-vulkan-reference.md)。
 
+公共投影射线的输入、编码及资源顺序见[接口说明](docs/runtime/projected-reflection-ray.md)。
+
 重装与迁移后先阅读[恢复交接](docs/plans/2026-10-29-reinstall-handoff.md)。
 
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。

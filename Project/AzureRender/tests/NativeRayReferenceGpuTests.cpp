@@ -2,6 +2,7 @@
 #include "support/ComputeTexture.hpp"
 #include "platform/NativeArguments.hpp"
 #include "resources/BinaryFile.hpp"
+#include "render/ProjectedReflectionRay.hpp"
 #include <nlohmann/json.hpp>
 #include <array>
 #include <cstring>
@@ -122,8 +123,10 @@ public:
     std::array<std::unique_ptr<Storage>,3> outputs;
     VkSampler sampler{};VkDescriptorSetLayout descriptors{};VkDescriptorPool pool{};VkDescriptorSet set{};
     VkShaderModule shader{};VkPipelineLayout layout{};VkPipeline pipeline{};
-    Replay(rhi::IRhi& r,const Fixture& fixture,const Bytes& code,bool reverse):backend(r){
+    std::unique_ptr<ProjectedReflectionRayGpu> projected;
+    Replay(rhi::IRhi& r,const Fixture& fixture,const Bytes& code,bool reverse,bool useProjected,bool ownProjected=true):backend(r){
         try{
+            if(!useProjected){
             std::vector<rhi::DescriptorBindingDesc> bindings;
             for(unsigned i=0;i<3;++i)bindings.push_back({i,VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT});
             bindings.push_back({3,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_COMPUTE_BIT});
@@ -137,25 +140,29 @@ public:
             rhi::SamplerDesc settings;settings.filter=VK_FILTER_NEAREST;settings.mipmapLinear=false;settings.maxLod=1000;
             settings.addressU=settings.addressV=settings.addressW=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler=backend.createSampler(settings);
             backend.writeDescriptorImage({set,10,VK_DESCRIPTOR_TYPE_SAMPLER,VK_NULL_HANDLE,sampler,VK_IMAGE_LAYOUT_UNDEFINED});
+            }
             for(unsigned i=0;i<4;++i){auto data=fixture.buffers[i];
+                if(useProjected&&i<3)continue;
                 if(reverse&&i==3&&fixture.active){std::vector<std::uint32_t> words(fixture.active);std::memcpy(words.data(),data.data(),words.size()*4);
                     std::reverse(words.begin(),words.end());std::memcpy(data.data(),words.data(),words.size()*4);}
                 const auto type=i==3?VK_DESCRIPTOR_TYPE_STORAGE_BUFFER:VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
                 buffers[i]=backend.allocator().createBuffer(data.size(),i==3?VK_BUFFER_USAGE_STORAGE_BUFFER_BIT:VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,true);
                 std::memcpy(buffers[i].mapped,data.data(),data.size());backend.allocator().flush(buffers[i],0,buffers[i].size);
-                backend.writeDescriptorBuffer({set,i,type,buffers[i].buffer,buffers[i].size});
+                if(!useProjected)backend.writeDescriptorBuffer({set,i,type,buffers[i].buffer,buffers[i].size});
             }
             for(unsigned i=0;i<6;++i){const auto& data=fixture.textures[i];sampled[i]=std::make_unique<test::ComputeTexture>(backend,data.width,data.height,data.levels,inputFormats[i].value,data.data,inputFormats[i].bytes);
-                backend.writeDescriptorImage({set,4+i,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,sampled[i]->view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});}
+                if(!useProjected)backend.writeDescriptorImage({set,4+i,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,sampled[i]->view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});}
             for(unsigned i=0;i<3;++i){outputs[i]=std::make_unique<Storage>(backend,fixture.width,fixture.height,outputFormats[i],fixture.initial[i]);
                 readbacks[i]=backend.allocator().createBuffer(fixture.reference[i].size(),VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
-                backend.writeDescriptorImage({set,11+i,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,outputs[i]->view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});}
+                if(!useProjected)backend.writeDescriptorImage({set,11+i,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,outputs[i]->view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});}
+            if(useProjected&&ownProjected)projected=std::make_unique<ProjectedReflectionRayGpu>(backend,2,code);
         }catch(...){release();throw;}
     }
     ~Replay(){release();}
     Replay(const Replay&)=delete;Replay& operator=(const Replay&)=delete;
 private:
     void release(){
+        projected.reset();
         if(pool)backend.destroyDescriptorPool(pool);pool={};if(pipeline)backend.destroyPipeline(pipeline);pipeline={};
         if(shader)backend.destroyShaderModule(shader);shader={};if(layout)backend.destroyPipelineLayout(layout);layout={};
         if(descriptors)backend.destroyDescriptorSetLayout(descriptors);descriptors={};if(sampler)backend.destroySampler(sampler);sampler={};
@@ -163,34 +170,82 @@ private:
         for(auto& item:buffers)backend.allocator().destroyBuffer(item);for(auto& item:readbacks)backend.allocator().destroyBuffer(item);
     }
 };
+void recordProjected(Replay& replay,rhi::ICommandRecorder& commands,const Fixture& fixture,ProjectedReflectionRayGpu& kernel,unsigned slot){
+    // Source-only mapping stays in the test adapter. Core consumes semantic view fields.
+    ProjectedReflectionView view;
+    const auto columns=[&](auto& target,unsigned start){std::memcpy(target.data(),fixture.buffers[0].data()+start*16,sizeof(target));};
+    columns(view.worldNormalToView,0);columns(view.viewDirectionToClip,8);columns(view.clipToView,12);
+    columns(view.relativeWorldToClip,20);columns(view.clipToWorld,24);columns(view.previousClipToWorld,61);
+    std::memcpy(view.position.data(),fixture.buffers[0].data()+44*16,12);
+    std::memcpy(view.depthReciprocal.data(),fixture.buffers[1].data()+40,8);
+    const auto constant=[&](unsigned row,unsigned component){float value=0;std::memcpy(&value,fixture.buffers[2].data()+row*16+component*4,4);return value;};
+    const auto seed=constant(1,0),steps=constant(3,0);
+    require(std::isfinite(seed)&&seed>=0&&seed<=16777215&&std::trunc(seed)==seed&&std::isfinite(steps)&&steps>=1&&steps<=4096&&std::trunc(steps)==steps,"Invalid source sample settings");
+    ProjectedReflectionSettings settings;settings.jitterSeed=static_cast<unsigned>(seed);settings.maxSteps=static_cast<unsigned>(steps);
+    settings.thickness=constant(1,1);settings.motionBlend=constant(2,2);settings.maximumFootprintLevel=constant(5,1);
+    ProjectedReflectionInputs inputs;
+    inputs.previousColor=replay.sampled[0]->view;inputs.previousDepth=replay.sampled[1]->view;inputs.currentDepth=replay.sampled[2]->view;
+    inputs.motion=replay.sampled[3]->view;inputs.surfaceMask=replay.sampled[4]->view;inputs.normalRoughness=replay.sampled[5]->view;
+    inputs.sourceExtent={fixture.textures[0].width,fixture.textures[0].height};inputs.traceExtent={fixture.width,fixture.height};
+    inputs.tiles=replay.buffers[3].buffer;inputs.tileBytes=replay.buffers[3].size;inputs.tileCount=fixture.active;
+    const ProjectedReflectionOutputs outputs{replay.outputs[0]->view,replay.outputs[1]->view,replay.outputs[2]->view,{fixture.width,fixture.height}};
+    kernel.record(commands,slot,inputs,outputs,view,settings);
+}
+Fixture maskedFixture(const Fixture& source){
+    Fixture result;result.width=17;result.height=9;result.active=6;
+    for(unsigned i=0;i<3;++i)result.buffers[i]=source.buffers[i];result.buffers[3]=Bytes(24,0);
+    for(unsigned y=0;y<2;++y)for(unsigned x=0;x<3;++x){const auto tile=(x<<16)|y;std::memcpy(result.buffers[3].data()+(y*3+x)*4,&tile,4);}
+    const std::array<float,4> dimensions{{17,9,1.F/17,1.F/9}};std::memcpy(result.buffers[2].data(),dimensions.data(),16);
+    for(unsigned i=0;i<6;++i){auto& texture=result.textures[i];texture.width=(i==0||i==3)?35:17;texture.height=(i==0||i==3)?19:9;
+        texture.levels=1;texture.data=Bytes(texture.width*texture.height*inputFormats[i].bytes,0);}
+    const std::array<std::uint32_t,2> initial{{0x781e03c0U,0x8000ffffU}};
+    for(unsigned i=0;i<3;++i){result.initial[i]=Bytes(153*outputFormats[i].bytes,0);result.reference[i]=result.initial[i];
+        if(i<2)for(unsigned p=0;p<153;++p)std::memcpy(result.initial[i].data()+p*4,&initial[i],4);}
+    return result;
+}
+void readback(Replay& replay,const Fixture& fixture,rhi::ICommandRecorder& commands){
+    for(unsigned i=0;i<3;++i){const auto image=replay.outputs[i]->image.image;const auto& buffer=replay.readbacks[i];
+        commands.imageBarrier({image,VK_IMAGE_LAYOUT_GENERAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,
+            VK_ACCESS_TRANSFER_WRITE_BIT|VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+        commands.copyImageToBuffer(image,buffer.buffer,{fixture.width,fixture.height});
+        commands.bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});}
+}
+bool compare(Replay& replay,const Fixture& fixture,test::VulkanComputeFixture& host,const std::filesystem::path& output,const std::string& prefix,Json& report){
+    bool exact=true;report=Json::array();
+    for(unsigned i=0;i<3;++i){const auto& buffer=replay.readbacks[i];host.allocator.invalidate(buffer,0,buffer.size);const auto* bytes=static_cast<const char*>(buffer.mapped);
+        std::uint64_t differences=0;for(std::size_t index=0;index<fixture.reference[i].size();++index)differences+=bytes[index]!=fixture.reference[i][index];exact=exact&&differences==0;
+        report.push_back({{"role",outputNames[i]},{"bytes",buffer.size},{"differentBytes",differences}});
+        std::ofstream file(output/(prefix+outputNames[i]+".bin"),std::ios::binary);file.write(bytes,static_cast<std::streamsize>(buffer.size));require(bool(file),"Cannot write replay output");}
+    return exact;
+}
 }
 int main(int argc,char** argv)try{
-    const auto arguments=nativeArguments(argc,argv);require(arguments.size()==4||arguments.size()==5,"Expected shader, fixture, new output and optional --reverse");
-    const bool reverse=arguments.size()==5;require(!reverse||arguments[4]=="--reverse","Unknown replay option");
+    const auto arguments=nativeArguments(argc,argv);require(arguments.size()>=4&&arguments.size()<=6,"Expected shader, fixture, new output and optional --reverse/--projected");
+    bool reverse=false,useProjected=false;
+    for(std::size_t i=4;i<arguments.size();++i){if(arguments[i]=="--reverse"&&!reverse)reverse=true;else if(arguments[i]=="--projected"&&!useProjected)useProjected=true;else require(false,"Unknown or duplicate replay option");}
     const auto fixture=loadFixture(std::filesystem::u8path(arguments[2]));
     const auto code=readBinaryFile(arguments[1]);std::uint32_t magic=0;if(code.size()>=4)std::memcpy(&magic,code.data(),4);
     require(code.size()>=20&&code.size()<=1024*1024&&code.size()%4==0&&magic==0x07230203U,"Invalid reference SPIR-V");
     const auto output=std::filesystem::absolute(std::filesystem::u8path(arguments[3]));require(std::filesystem::create_directory(output),"Replay output must be a new directory");
     test::VulkanComputeFixture host;require(fixture.active<=host.properties.limits.maxComputeWorkGroupCount[0],"Dispatch exceeds device limit");
-    Json report={{"status","failed"},{"device",host.properties.deviceName},{"reverse",reverse},{"outputs",Json::array()}};bool exact=true;
+    Json report={{"status","failed"},{"device",host.properties.deviceName},{"reverse",reverse},{"projected",useProjected},{"outputs",Json::array()}};bool exact=true;
     {
-        Replay replay(*host.backend,fixture,code,reverse);
+        Replay replay(*host.backend,fixture,code,reverse,useProjected);
+        Fixture secondaryFixture;std::unique_ptr<Replay> secondary;
+        if(useProjected){secondaryFixture=maskedFixture(fixture);secondary=std::make_unique<Replay>(*host.backend,secondaryFixture,code,false,true,false);}
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
-            for(unsigned i=0;i<4;++i)commands.bufferBarrier({replay.buffers[i].buffer,0,replay.buffers[i].size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+            for(unsigned i=0;i<4;++i)if(replay.buffers[i].buffer)commands.bufferBarrier({replay.buffers[i].buffer,0,replay.buffers[i].size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
                 VK_ACCESS_HOST_WRITE_BIT,static_cast<VkAccessFlags>(i==3?VK_ACCESS_SHADER_READ_BIT:VK_ACCESS_UNIFORM_READ_BIT)});
-            if(fixture.active){commands.bindComputePipeline(replay.pipeline);commands.bindComputeDescriptorSet(replay.layout,replay.set);commands.dispatch(fixture.active,1,1);}
-            for(unsigned i=0;i<3;++i){const auto image=replay.outputs[i]->image.image;const auto& buffer=replay.readbacks[i];
-                commands.imageBarrier({image,VK_IMAGE_LAYOUT_GENERAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,
-                    VK_ACCESS_TRANSFER_WRITE_BIT|VK_ACCESS_SHADER_WRITE_BIT|VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_TRANSFER_READ_BIT});
-                commands.copyImageToBuffer(image,buffer.buffer,{fixture.width,fixture.height});
-                commands.bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+            if(useProjected){
+                recordProjected(replay,commands,fixture,*replay.projected,0);
+                const auto& buffer=secondary->buffers[3];commands.bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+                recordProjected(*secondary,commands,secondaryFixture,*replay.projected,1);
             }
+            else if(fixture.active){commands.bindComputePipeline(replay.pipeline);commands.bindComputeDescriptorSet(replay.layout,replay.set);commands.dispatch(fixture.active,1,1);}
+            readback(replay,fixture,commands);if(secondary)readback(*secondary,secondaryFixture,commands);
         });
-        for(unsigned i=0;i<3;++i){const auto& buffer=replay.readbacks[i];host.allocator.invalidate(buffer,0,buffer.size);const auto* bytes=static_cast<const char*>(buffer.mapped);
-            std::uint64_t differences=0;for(std::size_t index=0;index<fixture.reference[i].size();++index)differences+=bytes[index]!=fixture.reference[i][index];exact=exact&&differences==0;
-            report["outputs"].push_back({{"role",outputNames[i]},{"bytes",buffer.size},{"differentBytes",differences}});
-            std::ofstream file(output/(std::string(outputNames[i])+".bin"),std::ios::binary);file.write(bytes,static_cast<std::streamsize>(buffer.size));require(bool(file),"Cannot write replay output");
-        }
+        exact=compare(replay,fixture,host,output,"",report["outputs"]);
+        if(secondary){const bool otherExact=compare(*secondary,secondaryFixture,host,output,"secondary-",report["secondaryOutputs"]);exact=exact&&otherExact;report["independentFrameSlots"]=otherExact;}
     }
     report["validationErrors"]=host.errors.load();report["liveBuffers"]=host.allocator.statistics().liveBuffers;report["liveImages"]=host.allocator.statistics().liveImages;
     exact=exact&&host.errors==0&&host.allocator.statistics().liveBuffers==0&&host.allocator.statistics().liveImages==0;report["status"]=exact?"passed":"failed";
