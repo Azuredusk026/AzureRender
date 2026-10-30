@@ -11,10 +11,12 @@
 
 namespace azurerender {
 class EditorSession;
+class ProjectStartup;
 }
 
 struct AzureRenderOptions {
     std::string projectFile;
+    std::shared_ptr<const azurerender::ProjectStartup> projectStartup;
     std::string editorActionsPath;
     std::string editorClosePolicy="ask";
     std::string runtimeReportPath;

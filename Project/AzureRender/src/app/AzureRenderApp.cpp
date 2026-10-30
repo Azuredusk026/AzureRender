@@ -106,8 +106,13 @@ void AzureRenderApp::run(
     }, [this] { runtime_.stop(); });
     if(!options.projectFile.empty() && !options.editorMode)
     runtimeModules_.add({"runtime.project",1,{}, {"runtime.world"}}, [this,&options](auto&) {
-    if (!options.projectFile.empty() && !options.editorMode)
+    if (options.projectStartup) {
+        if (std::filesystem::weakly_canonical(std::filesystem::u8path(options.projectFile)) != options.projectStartup->project().file)
+            throw std::invalid_argument("Prepared startup does not match the project entry");
+        levelSession_ = std::make_unique<azurerender::LevelSession>(*options.projectStartup, runtime_);
+    } else {
         levelSession_ = std::make_unique<azurerender::LevelSession>(azurerender::Project::load(std::filesystem::u8path(options.projectFile)), runtime_);
+    }
     if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_,azurerender::application::systems(),azurerender::application::configuration(levelSession_->project()));
     if (gameRuntime_) {
         gameRuntime_->physics().setMeshResolver(azurerender::collisionMeshAssets(levelSession_->assets()));

@@ -6,9 +6,23 @@
 #include <future>
 #include <atomic>
 namespace azurerender {
+// A fully prepared, read-only startup shared by host configuration and sessions.
+// Source changes are observed by subsequent session refreshes, not construction.
+class ProjectStartup final {
+public:
+    explicit ProjectStartup(Project project);
+    const Project& project() const noexcept { return project_; }
+    const AssetDatabase& assets() const noexcept { return assets_; }
+    const Level& level() const noexcept { return level_; }
+private:
+    Project project_;
+    AssetDatabase assets_;
+    Level level_;
+};
 class LevelSession {
 public:
     LevelSession(Project project, RuntimeLifecycle& runtime);
+    LevelSession(const ProjectStartup& startup, RuntimeLifecycle& runtime);
     ~LevelSession();
     void request(std::string reference);
     void preload(const std::string& reference);
@@ -36,7 +50,6 @@ public:
     std::size_t cachedCandidates() const noexcept { return prepared_.size(); }
     std::uint64_t requestGeneration() const noexcept { return generation_; }
 private:
-    Level load(const std::string& reference) const;
     void commit(Level candidate, const std::string& reference);
     std::function<void(const Level&)> prepare_;
     Project project_;

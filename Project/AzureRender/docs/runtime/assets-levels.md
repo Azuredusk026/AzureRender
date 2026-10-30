@@ -9,7 +9,46 @@
 
 ## 职责与使用场景
 
-AssetDatabase 为挂载目录中的文件建立 UUID 索引、依赖和导入缓存。Level 保存 JSON 场景与反射组件，Prefab 提供节点复用和实例覆盖。LevelSession 管理启动、切换与热重载。
+AssetDatabase 为挂载目录中的文件建立 UUID 索引、依赖和导入缓存。
+Level 保存 JSON 场景与反射组件。
+Prefab 提供节点复用和实例覆盖。
+LevelSession 管理启动、切换与热重载。
+
+## 启动准备
+
+`ProjectStartup` 构造时持有项目并刷新资产索引。
+启动关卡通过该索引解析，成功后开放只读访问。
+项目、索引和关卡分别通过对应访问器获取。
+解析失败通过异常报告。
+
+Player 配置持有 `shared_ptr<const ProjectStartup>`。
+运行会话复制已准备内容，初始提交安装关卡组件。
+不同会话分别持有活动索引、关卡和 World。
+后续切关、取消和热刷新按会话事务执行。
+
+启动快照固定项目定义、索引及已解析关卡。
+模型与纹理资源按渲染加载契约读取。
+源文件变化由会话后续扫描观察。
+
+直接传入项目的会话构造入口执行同一准备过程。
+编辑运行预览和独立 Player 共用该机制。
+
+以下示例在两个独立运行世界中使用同一启动快照。
+
+```cpp
+const azurerender::ProjectStartup startup(
+    azurerender::Project::load("project.azureproject"));
+azurerender::RuntimeLifecycle first, second;
+first.start();
+second.start();
+azurerender::LevelSession firstSession(startup, first);
+azurerender::LevelSession secondSession(startup, second);
+```
+
+`Project::loadScene(path, assets)` 借用已刷新索引。
+项目文件、项目身份和挂载目录须与索引归属一致。
+未刷新及归属不符的索引产生参数错误。
+单参数入口按需要建立自己的索引。
 
 ## 数据与所有权
 
@@ -77,6 +116,7 @@ Windows 缓存读取共享读取、写入和删除访问。
 新资源侧车的创建由所属写入会话执行。
 源内容变更按所属版本校验与事务规则提交。
 实际覆盖见[缓存并发验收](../acceptance/u16/cache-publication.md)。
+
 完整缓存复用及实际主场景见[专项验证](../acceptance/nr/complete-asset-cache-reuse.md)。
 
 资源侧车、关卡、Prefab 与目录资源包均为版本 1。缓存采用 `AZCACHE1` 标识，随后为小端 64 位指纹、负载长度和原始字节。缓存以 UUID 与指纹定位，有效版本在候选导入失败时保留。导入缓存用于稳定读取与失效判断，GPU 格式由 Render Core 解析。

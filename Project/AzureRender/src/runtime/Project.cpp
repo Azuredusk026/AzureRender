@@ -3,6 +3,8 @@
 #include "runtime/Level.hpp"
 #include "runtime/ColorGradingLutBinding.hpp"
 
+#include <algorithm>
+#include <optional>
 #include <fstream>
 #include <iomanip>
 #include <nlohmann/json.hpp>
@@ -155,26 +157,35 @@ Project Project::load(const std::filesystem::path& path) {
 SceneDocument Project::loadStartupScene() const {
     return loadScene(resolve(startupScene));
 }
-SceneDocument Project::loadScene(const std::filesystem::path& sceneFile) const {
-    if (sceneFile.extension() == ".azurelevel") { AssetDatabase assets(*this); assets.refresh(); return Level::load(sceneFile, assets).scene; }
+namespace {
+SceneDocument loadProjectScene(const Project& project, const std::filesystem::path& sceneFile,
+    const AssetDatabase* prepared) {
+    if (sceneFile.extension() == ".azurelevel") {
+        if (prepared) return Level::load(sceneFile, *prepared).scene;
+        AssetDatabase assets(project); assets.refresh();
+        return Level::load(sceneFile, assets).scene;
+    }
     auto scene = SceneDocument::load(sceneFile);
     for (auto& resource : scene.resources) {
         const auto path = resource.path.generic_u8string();
         if (path.find(":/") != std::string::npos)
-            resource.path = resolve(path);
+            resource.path = project.resolve(path);
         else {
             if (resource.path.is_absolute())
                 throw std::runtime_error(
                     "Project scene resource must use a virtual or relative path: " + path);
             resource.path = inside(
-                file.parent_path(),
-                (sceneFile.parent_path() / resource.path).lexically_relative(file.parent_path()));
+                project.file.parent_path(),
+                (sceneFile.parent_path() / resource.path).lexically_relative(project.file.parent_path()));
         }
         if (!std::filesystem::is_regular_file(resource.path))
             throw std::runtime_error("Scene resource missing: " + resource.path.u8string());
     }
     if(!scene.viewFog.asset.empty()||!scene.renderSettings.grade.lut.asset.empty()||std::any_of(scene.nodes.begin(),scene.nodes.end(),[](const auto& node){return !node.materialSlots.empty();})){
-        AssetDatabase assets(*this);assets.refresh();resolveSceneMaterials(scene,assets);
+        std::optional<AssetDatabase> owned;
+        if (!prepared) { owned.emplace(project); owned->refresh(); prepared=&*owned; }
+        const auto& assets=*prepared;
+        resolveSceneMaterials(scene,assets);
         if(!scene.viewFog.asset.empty())scene.viewFog.asset=assets.resolveReference(scene.viewFog.asset).u8string();
         auto& lut=scene.renderSettings.grade.lut;
         if(!lut.asset.empty()){
@@ -182,6 +193,16 @@ SceneDocument Project::loadScene(const std::filesystem::path& sceneFile) const {
         }
     }
     return scene;
+}
+} // namespace
+SceneDocument Project::loadScene(const std::filesystem::path& sceneFile) const {
+    return loadProjectScene(*this, sceneFile, nullptr);
+}
+SceneDocument Project::loadScene(const std::filesystem::path& sceneFile, const AssetDatabase& assets) const {
+    const auto& owner=assets.project();
+    if (!assets.version() || owner.id!=id || owner.file!=file || owner.mounts!=mounts)
+        throw std::invalid_argument("Scene resolver must be refreshed and belong to the same project and mounts");
+    return loadProjectScene(*this, sceneFile, &assets);
 }
 std::filesystem::path Project::resolve(const std::string& virtualPath) const {
     const auto separator = virtualPath.find(":/");

@@ -52,10 +52,12 @@ int main(int argc, char** argv) {
         initial.projectFile = projectPath;
         initial.runtimeReportPath = runtimeReport;
         if (!projectPath.empty()) {
-            const auto project = azurerender::Project::load(std::filesystem::u8path(projectPath));
-            auto scene = project.loadStartupScene();
+            initial.projectStartup = std::make_shared<const azurerender::ProjectStartup>(
+                azurerender::Project::load(std::filesystem::u8path(projectPath)));
+            const auto& project = initial.projectStartup->project();
+            const auto& scene = initial.projectStartup->level().scene;
             initial.renderSettings = scene.renderSettings;
-            initial.sceneDocument = std::move(scene);
+            initial.sceneDocument = scene;
             if (!initial.sceneDocument->resources.empty())
                 initial.assetPath = initial.sceneDocument->resources.front().path.u8string();
             std::cout << "Project loaded: " << project.name << " (" << project.id << ")\n";
@@ -83,14 +85,15 @@ int main(int argc, char** argv) {
         }
         if (check) {
             if (projectPath.empty()) throw std::runtime_error("--check-project requires --project");
-            const auto project=azurerender::Project::load(std::filesystem::u8path(projectPath));
-            azurerender::AssetDatabase assets(project); assets.refresh();
+            const auto& startup=*cli.options.projectStartup;
+            const auto& project=startup.project();
+            auto assets=startup.assets();
             for (const auto& item : assets.records()) {
                 const auto& path = item.second.path;
                 if(path.extension()==".azurelevel")static_cast<void>(azurerender::Level::load(path,assets));
                 if(path.extension()==".gltf" || path.extension()==".glb")static_cast<void>(loadGltfAsset(path.u8string()));
             }
-            azurerender::RuntimeLifecycle runtime;runtime.loadScene(project.loadStartupScene());runtime.start();
+            azurerender::RuntimeLifecycle runtime;runtime.loadScene(startup.level().scene);runtime.start();
             azurerender::GameRuntime game(runtime,azurerender::application::systems(),azurerender::application::configuration(project));
             auto scripts=azurerender::application::scripts(project,runtime,game,assets);scripts->shutdown();
             std::cout << "Project validation passed\n";

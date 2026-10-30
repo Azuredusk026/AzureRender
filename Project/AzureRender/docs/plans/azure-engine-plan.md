@@ -9,6 +9,10 @@
 
 当前材质功能位及主辅视图见[特化验证](../acceptance/nr/material-class-feature-specialization.md)。
 资产常驻索引、双配置回归及启动边界见[索引验证](../acceptance/recovery/asset-dependency-index.md)。
+
+共享启动快照及双配置完整入口见[启动验证](../acceptance/recovery/project-startup-context.md)。
+完整 Debug 四样点在六百秒内完成八帧和卸载。
+
 后续接续主场景预算、原版射线与动态画质。
 原生射线的冻结数值参考见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
 

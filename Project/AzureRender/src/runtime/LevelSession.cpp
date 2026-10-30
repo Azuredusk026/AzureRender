@@ -19,11 +19,26 @@ void assignLegacyResourceKey(Level& level,const AssetDatabase& assets){
             level.resourceKey+=":"+std::to_string(record.second.fingerprint);
     }
 }
+Level loadProjectLevel(const Project& project, const AssetDatabase& assets, const std::string& reference) {
+    const auto path=assets.resolveReference(reference);
+    if(path.extension()==".azurelevel") return Level::load(path, assets);
+    Level level;
+    level.scene=project.loadScene(path, assets);
+    assignLegacyResourceKey(level, assets);
+    return level;
+}
 }
 
+ProjectStartup::ProjectStartup(Project project)
+    : project_(std::move(project)), assets_(project_) {
+    assets_.refresh();
+    level_=loadProjectLevel(project_, assets_, project_.startupScene);
+}
 LevelSession::LevelSession(Project project, RuntimeLifecycle& runtime)
-    : project_(std::move(project)), runtime_(runtime), assets_(project_) {
-    assets_.refresh(); commit(load(project_.startupScene), project_.startupScene);
+    : LevelSession(ProjectStartup(std::move(project)), runtime) {}
+LevelSession::LevelSession(const ProjectStartup& startup, RuntimeLifecycle& runtime)
+    : project_(startup.project()), runtime_(runtime), assets_(startup.assets()) {
+    commit(startup.level(), project_.startupScene);
     nextPoll_ = std::chrono::steady_clock::now() + std::chrono::milliseconds(500);
 }
 LevelSession::~LevelSession(){if(cancelled_)*cancelled_=true;if(work_.valid())work_.wait();}
@@ -42,10 +57,7 @@ void LevelSession::startWork(const std::string& reference,bool refresh){
     work_=std::async(std::launch::async,[database=std::move(database),project,reference,generation,refresh,cancelled,activeKey,meshes]()mutable{
         auto check=[&]{if(*cancelled)throw std::runtime_error("Level preparation cancelled");};
         check();database.refresh(false,check);check();
-        const auto path=database.resolveReference(reference);Level level;
-        if(path.extension()==".azurelevel")level=Level::load(path,database);
-        else{auto legacy=project;legacy.startupScene=reference;level.scene=legacy.loadStartupScene();}
-        assignLegacyResourceKey(level,database);
+        auto level=loadProjectLevel(project,database,reference);
         if(level.resourceKey==activeKey)level.preparedMeshes=meshes;
         for(const auto& resource:level.scene.resources){
             if((!refresh || level.resourceKey!=activeKey) && !level.preparedMeshes.count(resource.path.lexically_normal().generic_u8string())){check();level.preparedMeshes.emplace(resource.path.lexically_normal().generic_u8string(),std::make_shared<const LoadedAsset>(loadGltfAsset(resource.path.u8string())));}
@@ -56,12 +68,6 @@ void LevelSession::startWork(const std::string& reference,bool refresh){
 bool LevelSession::accept(Candidate candidate){
     // The renderer prepares against the candidate without publishing its database.
     commit(std::move(candidate.level),candidate.reference);assets_=std::move(candidate.assets);error_.clear();return true;
-}
-Level LevelSession::load(const std::string& reference) const {
-    const auto path = assets_.resolveReference(reference);
-    if (path.extension() == ".azurelevel") return Level::load(path, assets_);
-    Project legacy = project_; legacy.startupScene = reference;
-    Level level; level.scene = legacy.loadStartupScene();assignLegacyResourceKey(level,assets_); return level;
 }
 void LevelSession::commit(Level candidate, const std::string& reference) {
     const auto start=std::chrono::steady_clock::now();

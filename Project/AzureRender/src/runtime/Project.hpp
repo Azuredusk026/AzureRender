@@ -6,6 +6,7 @@
 
 #include "SceneDocument.hpp"
 namespace azurerender {
+class AssetDatabase;
 class Project final {
    public:
     static constexpr unsigned kSchemaVersion = 1;
@@ -19,6 +20,8 @@ class Project final {
     static Project load(const std::filesystem::path& file);
     [[nodiscard]] SceneDocument loadStartupScene() const;
     [[nodiscard]] SceneDocument loadScene(const std::filesystem::path& sceneFile) const;
+    [[nodiscard]] SceneDocument loadScene(const std::filesystem::path& sceneFile,
+        const AssetDatabase& assets) const;
     [[nodiscard]] std::filesystem::path resolve(const std::string& virtualPath) const;
 };
 }  // namespace azurerender

@@ -21,6 +21,7 @@ struct AssetRecord {
 class AssetDatabase {
 public:
     explicit AssetDatabase(Project project) : project_(std::move(project)) {}
+    const Project& project() const noexcept { return project_; }
     struct RefreshStatistics { std::uint64_t sourceBytesRead=0, filesRead=0, filesReused=0; };
     const RefreshStatistics& refreshStatistics() const noexcept { return statistics_; }
     std::uint64_t version() const noexcept{return version_;}

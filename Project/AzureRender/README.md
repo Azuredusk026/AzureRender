@@ -4,6 +4,8 @@
 
 资产引用、热刷新及内存验证见[依赖索引](docs/acceptance/recovery/asset-dependency-index.md)。
 
+项目启动共享、双配置完整入口及图像见[启动快照验证](docs/acceptance/recovery/project-startup-context.md)。
+
 原生射线的计算顺序及冻结数值参考见[顺序验证](docs/acceptance/nr/native-ray-arithmetic-order.md)。
 
 重装与迁移后先阅读[恢复交接](docs/plans/2026-10-29-reinstall-handoff.md)。
