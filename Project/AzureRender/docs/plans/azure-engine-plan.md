@@ -7,6 +7,7 @@
 工具链、运行资产及双配置公共验证已完成。
 初始化归因与环境像素兼容继续复核。
 当前材质功能位及主辅视图见[特化验证](../acceptance/nr/material-class-feature-specialization.md)。
+资产常驻索引、双配置回归及启动边界见[索引验证](../acceptance/recovery/asset-dependency-index.md)。
 后续接续主场景预算、原版射线与动态画质。
 
 ## 代码检索与证据管理

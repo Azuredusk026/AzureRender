@@ -1,0 +1,1759 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "phase": "P0-index",
+  "status": "affected-functional-validation-passed; full-debug-startup-pending",
+  "sourceBaseCommit": "286809ae8ac14112d963fd8e03f8a82417b26326",
+  "artifactRoot": "build/runs/20261030-232017-recovery-init-crash-3bd962",
+  "sourceFiles": {
+    "src/runtime/AssetDatabase.cpp": {
+      "sha256": "fb7f234e1f02456a6b31f4273c2d9923a0a8a2b147da19a3b6e0a35c8664cbad",
+      "gitBlobId": "1fa6e3c67c4fefa27f477c990cb07ef3dabc847b"
+    },
+    "src/runtime/AssetDatabase.hpp": {
+      "sha256": "75d25095fa70d930cc76a24bd6574f818c2c40afde8c5a4e60f195570f7a0364",
+      "gitBlobId": "6b101cbb89235a1fb7875044d774e1d1c3da0937"
+    },
+    "tests/AssetDependencyIndexTests.cpp": {
+      "sha256": "327027fa9f6e7113a1ccb0d09505b9cac3b4b4abb26b58d1fe2f4ff9bab95d68",
+      "gitBlobId": "f81fd9626369421c4dc6dfc301b9f64a477af36d"
+    },
+    "CMakeLists.txt": {
+      "sha256": "aad59355abf14f79e3a0388867b9a3b4d37e74576ff6aad2d7d5406f9cfd9fb0",
+      "gitBlobId": "f09a8767cbe52a1c233605aad5ad5cec92fadca9"
+    }
+  },
+  "builds": {
+    "debug": {
+      "receipt": {
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+          "cmake",
+          "--build",
+          "--preset",
+          "msvc-debug",
+          "-j",
+          "2"
+        ],
+        "startUtc": "2026-10-30T19:14:04.417616+00:00",
+        "endUtc": "2026-10-30T19:22:05.525679+00:00",
+        "exitCode": 0
+      },
+      "log": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-full-build-debug.log",
+        "sha256": "0ca5267d7000be06cc3ce677c0e901db272003b5d605131cb9ecde6412517724"
+      },
+      "playerSha256": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab",
+      "hostSha256": "b103f6c1177bc0e9b447a1dd5a3d0006d1a33905f91adcb95a85c294751313d4"
+    },
+    "release": {
+      "receipt": {
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+          "cmake",
+          "--build",
+          "--preset",
+          "msvc-release",
+          "-j",
+          "2"
+        ],
+        "startUtc": "2026-10-30T19:22:40.632214+00:00",
+        "endUtc": "2026-10-30T19:29:55.426344+00:00",
+        "exitCode": 0
+      },
+      "log": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-full-build-release.log",
+        "sha256": "97c7e646e68abb73182962f68e9b0227fbf10e83bcf5c77abc2616764e7ec50f"
+      },
+      "playerSha256": "a76c6185717c7303ab27705bbcdc3c2eb33337c4db3b7b0429ba975ca344e805",
+      "hostSha256": "f8f8f6d2c32739c7b26865c10dfbae61ff688d80f4395bfa3c2c3aa5a0ebe1d9"
+    }
+  },
+  "regressions": {
+    "debug": {
+      "count": 25,
+      "names": [
+        "AzureAssets.GenerationManifest",
+        "AzureRender.ColorGradingLut",
+        "AzureGame.ExplorationDesign",
+        "AzureAssets.ModelFormats",
+        "AzureEngine.Project",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ExtendedAssetWorkflow",
+        "AzureEditor.ProjectFlow",
+        "AzureEngine.Scene2DWorkflow",
+        "AzureEngine.LevelPlayer",
+        "AzureEngine.GamePackageRules",
+        "AzureEngine.BuildConfiguration",
+        "AzureEngine.BuildProvenance",
+        "AzureEngine.ScriptBackendContract",
+        "AzureEngine.ManagedModule.coreclr",
+        "AzureEngine.ManagedModule.nativeaot",
+        "AzureEngine.ManagedRuntime.coreclr",
+        "AzureEngine.ManagedRuntime.nativeaot",
+        "AzureEngine.ScriptBackendParity.lua",
+        "AzureEngine.ManagedWorkflows.coreclr",
+        "AzureEngine.ManagedWorkflows.nativeaot",
+        "AzureEditor.ManagedAuthoring",
+        "AzureAssets.TextureImportContract",
+        "AzureAssets.TextureMaterialImport",
+        "AzureAssets.MaterialUvImport"
+      ],
+      "initial": {
+        "status": "failed",
+        "configuration": "debug",
+        "names": [
+          "AzureAssets.GenerationManifest",
+          "AzureRender.ColorGradingLut",
+          "AzureGame.ExplorationDesign",
+          "AzureAssets.ModelFormats",
+          "AzureEngine.Project",
+          "AzureEditor.AssetWorkflow",
+          "AzureEditor.ExtendedAssetWorkflow",
+          "AzureEditor.ProjectFlow",
+          "AzureEngine.Scene2DWorkflow",
+          "AzureEngine.LevelPlayer",
+          "AzureEngine.GamePackageRules",
+          "AzureEngine.BuildConfiguration",
+          "AzureEngine.BuildProvenance",
+          "AzureEngine.ScriptBackendContract",
+          "AzureEngine.ManagedModule.coreclr",
+          "AzureEngine.ManagedModule.nativeaot",
+          "AzureEngine.ManagedRuntime.coreclr",
+          "AzureEngine.ManagedRuntime.nativeaot",
+          "AzureEngine.ScriptBackendParity.lua",
+          "AzureEngine.ManagedWorkflows.coreclr",
+          "AzureEngine.ManagedWorkflows.nativeaot",
+          "AzureEditor.ManagedAuthoring",
+          "AzureAssets.TextureImportContract",
+          "AzureAssets.TextureMaterialImport",
+          "AzureAssets.MaterialUvImport"
+        ],
+        "binaryAndToolHashes": {
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureColorGradingLutTests.exe": "5fc0456f2f76461dfc8fe826fd99a32ace2ae00871e6572ec78c76b12591cb2e",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureGenerationManifestTests.exe": "1fcc53034b728e371cd9cb163cbcda4db2b53a9651842ec4fcce1a797c0b7644",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureScriptBackendContractTests.exe": "816156fe85346d9946f501d0f050d4ac296634ec7e302791f4ec1cd450d54d12",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureManagedModuleTests.exe": "87590935bbb7afd4052f4b971e50606a3a14e7921604c20a4fe179e55fe4926c",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureManagedScriptRuntimeTests.exe": "50d9ca5c44153a4806ddb7116ce22eed64c37276cd6568ed8730c2c1881cf660",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe": "21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_managed_workflows.py": "cb104a82f97d23d418f635665ada718810b07fe50289597f03b26abe03415a26",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_game_package_rules.py": "e8a00d86612af4d6fa2aee90135164a491a79a102b824a5053b9742b4566c63f",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_build_configuration.py": "449da56c120eb80e0311c6fc6334ace366b4a30bedebeea633c37da1e9440919",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_build_provenance.py": "676f63f68c60e548e2de49ea132630c5971393cc035de9a0155b97e95b51faa4",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_level_player.py": "8b76a35e7530297c4c32c566ef8fbf97fa8d556dc092e4541f556cfdf78e9b90",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectTests.exe": "9b104d61977f37dd205f43eefdbd1544e99075ae0c26919ab0fb4e8f4a4cefdc",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureEditorAssetWorkflowTests.exe": "540df57f48fbaed11705dafc41a20bbc8ca10355a088756752aa2a4708ce2322",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureEditorProjectFlowTests.exe": "cf7dd240a6c61317819cad8ad2dae48448b3bd2ad1b44b99618eb6c97a0c9fe8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureTextureImportContractTests.exe": "e2ac8604fce63e4dca70c926edc553813fd45ebb2e78e176437c0236b6b08da5",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureTextureMaterialImportTests.exe": "4b5ee6bd5995f0afba04c07c2cece6f30839281addee5bffb0e19daffda3d119",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialUvImportTests.exe": "992285c549a7e72db283098a1e22e807423d762478b3250db4fff5213ae19312",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureExplorationDesignTests.exe": "d6d4cf2c8ad7f45bc67e41c0f3cfb60e15bcb5f17fafaeb1a36d190bfbe877b8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureScene2DWorkflowTests.exe": "92c9893875bd25a874e584363181e30a5803c2e33abf3ae335ddb8f3b76eea46",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureExtendedAssetWorkflowTests.exe": "6df5153f63907fc3e5ba46930a1a60ecf4c6826df210bc8622668299656f40b2",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_managed_authoring.py": "e722c19d55a149057ea0f834e79d0d716554436b749203ccda09ed3686e9d1a9",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureManagedAuthoringTests.exe": "845e4a41c291d1a141d431cd1e8b62e62df58313063e1a5494cfb4d29ec2d32d",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureModelFormatAdapterTests.exe": "7cf525a6b141bb48724d12fde6cc792e0272ee63fc83efaed0fd7e4d032a2f39"
+        },
+        "sourceFiles": {
+          "src/runtime/AssetDatabase.cpp": "fb7f234e1f02456a6b31f4273c2d9923a0a8a2b147da19a3b6e0a35c8664cbad",
+          "src/runtime/AssetDatabase.hpp": "75d25095fa70d930cc76a24bd6574f818c2c40afde8c5a4e60f195570f7a0364"
+        },
+        "reusedIndexCases": {
+          "count": 4,
+          "junitSha256": "e07cd30da68b0682c754bc6a4d7dad83a7f0f835a0c822114e601a224a6e23a2"
+        },
+        "startUtc": "2026-10-30T19:30:19.556242+00:00",
+        "command": [
+          "D:\\Tools\\VS2022BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^(AzureAssets\\.GenerationManifest|AzureRender\\.ColorGradingLut|AzureGame\\.ExplorationDesign|AzureAssets\\.ModelFormats|AzureEngine\\.Project|AzureEditor\\.AssetWorkflow|AzureEditor\\.ExtendedAssetWorkflow|AzureEditor\\.ProjectFlow|AzureEngine\\.Scene2DWorkflow|AzureEngine\\.LevelPlayer|AzureEngine\\.GamePackageRules|AzureEngine\\.BuildConfiguration|AzureEngine\\.BuildProvenance|AzureEngine\\.ScriptBackendContract|AzureEngine\\.ManagedModule\\.coreclr|AzureEngine\\.ManagedModule\\.nativeaot|AzureEngine\\.ManagedRuntime\\.coreclr|AzureEngine\\.ManagedRuntime\\.nativeaot|AzureEngine\\.ScriptBackendParity\\.lua|AzureEngine\\.ManagedWorkflows\\.coreclr|AzureEngine\\.ManagedWorkflows\\.nativeaot|AzureEditor\\.ManagedAuthoring|AzureAssets\\.TextureImportContract|AzureAssets\\.TextureMaterialImport|AzureAssets\\.MaterialUvImport)$",
+          "-j",
+          "1",
+          "--timeout",
+          "240",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-validation-debug\\results.xml"
+        ],
+        "pid": 38480,
+        "exitCode": 8,
+        "count": 25,
+        "failures": [
+          "AzureEngine.BuildConfiguration"
+        ],
+        "error": "['AzureEngine.BuildConfiguration']",
+        "endUtc": "2026-10-30T19:33:47.308124+00:00"
+      },
+      "initialReceipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-debug/summary.json",
+        "sha256": "2e9763e7579c1e5effca214b45d8aa19665a83b9bed81eba3a34de2427c3d951"
+      },
+      "initialJunit": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-debug/results.xml",
+        "sha256": "d9635a0f17bfd60b5afc7ce9468bf0adb3b60874ee5327fd6a5e2fbebd95449a"
+      },
+      "targetedLog": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-green-debug.log",
+        "sha256": "f8ca59a9483687b142fba794e45f05db983c15a8a31f3ec0f47a0614283a1f63"
+      },
+      "targetedJunit": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-green-debug.xml",
+        "sha256": "e07cd30da68b0682c754bc6a4d7dad83a7f0f835a0c822114e601a224a6e23a2"
+      },
+      "environmentCorrection": {
+        "status": "passed-after-process-environment-correction",
+        "configuration": "debug",
+        "names": [
+          "AzureAssets.GenerationManifest",
+          "AzureRender.ColorGradingLut",
+          "AzureGame.ExplorationDesign",
+          "AzureAssets.ModelFormats",
+          "AzureEngine.Project",
+          "AzureEditor.AssetWorkflow",
+          "AzureEditor.ExtendedAssetWorkflow",
+          "AzureEditor.ProjectFlow",
+          "AzureEngine.Scene2DWorkflow",
+          "AzureEngine.LevelPlayer",
+          "AzureEngine.GamePackageRules",
+          "AzureEngine.BuildConfiguration",
+          "AzureEngine.BuildProvenance",
+          "AzureEngine.ScriptBackendContract",
+          "AzureEngine.ManagedModule.coreclr",
+          "AzureEngine.ManagedModule.nativeaot",
+          "AzureEngine.ManagedRuntime.coreclr",
+          "AzureEngine.ManagedRuntime.nativeaot",
+          "AzureEngine.ScriptBackendParity.lua",
+          "AzureEngine.ManagedWorkflows.coreclr",
+          "AzureEngine.ManagedWorkflows.nativeaot",
+          "AzureEditor.ManagedAuthoring",
+          "AzureAssets.TextureImportContract",
+          "AzureAssets.TextureMaterialImport",
+          "AzureAssets.MaterialUvImport"
+        ],
+        "binaryAndToolHashes": {
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureColorGradingLutTests.exe": "5fc0456f2f76461dfc8fe826fd99a32ace2ae00871e6572ec78c76b12591cb2e",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureGenerationManifestTests.exe": "1fcc53034b728e371cd9cb163cbcda4db2b53a9651842ec4fcce1a797c0b7644",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureScriptBackendContractTests.exe": "816156fe85346d9946f501d0f050d4ac296634ec7e302791f4ec1cd450d54d12",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureManagedModuleTests.exe": "87590935bbb7afd4052f4b971e50606a3a14e7921604c20a4fe179e55fe4926c",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureManagedScriptRuntimeTests.exe": "50d9ca5c44153a4806ddb7116ce22eed64c37276cd6568ed8730c2c1881cf660",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe": "21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_managed_workflows.py": "cb104a82f97d23d418f635665ada718810b07fe50289597f03b26abe03415a26",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_game_package_rules.py": "e8a00d86612af4d6fa2aee90135164a491a79a102b824a5053b9742b4566c63f",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_build_configuration.py": "449da56c120eb80e0311c6fc6334ace366b4a30bedebeea633c37da1e9440919",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_build_provenance.py": "676f63f68c60e548e2de49ea132630c5971393cc035de9a0155b97e95b51faa4",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_level_player.py": "8b76a35e7530297c4c32c566ef8fbf97fa8d556dc092e4541f556cfdf78e9b90",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectTests.exe": "9b104d61977f37dd205f43eefdbd1544e99075ae0c26919ab0fb4e8f4a4cefdc",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureEditorAssetWorkflowTests.exe": "540df57f48fbaed11705dafc41a20bbc8ca10355a088756752aa2a4708ce2322",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureEditorProjectFlowTests.exe": "cf7dd240a6c61317819cad8ad2dae48448b3bd2ad1b44b99618eb6c97a0c9fe8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureTextureImportContractTests.exe": "e2ac8604fce63e4dca70c926edc553813fd45ebb2e78e176437c0236b6b08da5",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureTextureMaterialImportTests.exe": "4b5ee6bd5995f0afba04c07c2cece6f30839281addee5bffb0e19daffda3d119",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialUvImportTests.exe": "992285c549a7e72db283098a1e22e807423d762478b3250db4fff5213ae19312",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureExplorationDesignTests.exe": "d6d4cf2c8ad7f45bc67e41c0f3cfb60e15bcb5f17fafaeb1a36d190bfbe877b8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureScene2DWorkflowTests.exe": "92c9893875bd25a874e584363181e30a5803c2e33abf3ae335ddb8f3b76eea46",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureExtendedAssetWorkflowTests.exe": "6df5153f63907fc3e5ba46930a1a60ecf4c6826df210bc8622668299656f40b2",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_managed_authoring.py": "e722c19d55a149057ea0f834e79d0d716554436b749203ccda09ed3686e9d1a9",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureManagedAuthoringTests.exe": "845e4a41c291d1a141d431cd1e8b62e62df58313063e1a5494cfb4d29ec2d32d",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureModelFormatAdapterTests.exe": "7cf525a6b141bb48724d12fde6cc792e0272ee63fc83efaed0fd7e4d032a2f39"
+        },
+        "sourceFiles": {
+          "src/runtime/AssetDatabase.cpp": "fb7f234e1f02456a6b31f4273c2d9923a0a8a2b147da19a3b6e0a35c8664cbad",
+          "src/runtime/AssetDatabase.hpp": "75d25095fa70d930cc76a24bd6574f818c2c40afde8c5a4e60f195570f7a0364"
+        },
+        "reusedIndexCases": {
+          "count": 4,
+          "junitSha256": "e07cd30da68b0682c754bc6a4d7dad83a7f0f835a0c822114e601a224a6e23a2"
+        },
+        "startUtc": "2026-10-30T19:30:19.556242+00:00",
+        "command": [
+          "D:\\Tools\\VS2022BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^(AzureAssets\\.GenerationManifest|AzureRender\\.ColorGradingLut|AzureGame\\.ExplorationDesign|AzureAssets\\.ModelFormats|AzureEngine\\.Project|AzureEditor\\.AssetWorkflow|AzureEditor\\.ExtendedAssetWorkflow|AzureEditor\\.ProjectFlow|AzureEngine\\.Scene2DWorkflow|AzureEngine\\.LevelPlayer|AzureEngine\\.GamePackageRules|AzureEngine\\.BuildConfiguration|AzureEngine\\.BuildProvenance|AzureEngine\\.ScriptBackendContract|AzureEngine\\.ManagedModule\\.coreclr|AzureEngine\\.ManagedModule\\.nativeaot|AzureEngine\\.ManagedRuntime\\.coreclr|AzureEngine\\.ManagedRuntime\\.nativeaot|AzureEngine\\.ScriptBackendParity\\.lua|AzureEngine\\.ManagedWorkflows\\.coreclr|AzureEngine\\.ManagedWorkflows\\.nativeaot|AzureEditor\\.ManagedAuthoring|AzureAssets\\.TextureImportContract|AzureAssets\\.TextureMaterialImport|AzureAssets\\.MaterialUvImport)$",
+          "-j",
+          "1",
+          "--timeout",
+          "240",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-validation-debug\\results.xml"
+        ],
+        "pid": 38480,
+        "exitCode": 8,
+        "count": 25,
+        "failures": [
+          "AzureEngine.BuildConfiguration"
+        ],
+        "error": "['AzureEngine.BuildConfiguration']",
+        "endUtc": "2026-10-30T19:33:47.308124+00:00",
+        "validatedCount": 25,
+        "firstBatch": {
+          "status": "failed",
+          "failedNames": [
+            "AzureEngine.BuildConfiguration"
+          ],
+          "summarySha256": "2e9763e7579c1e5effca214b45d8aa19665a83b9bed81eba3a34de2427c3d951",
+          "logSha256": "a49a4ff56e7b163b776367ee4373f739f36f84f19cd2e3b3520187634ca1bccb"
+        },
+        "correction": {
+          "test": "AzureEngine.BuildConfiguration",
+          "status": "passed",
+          "finalJunitSha256": "eb21d8a12f9177f97f386e239f017056baa3fca93d4535fab992888822e784c9",
+          "initialCause": "Parent process lacked VCPKG_ROOT and CMake/Ninja search paths",
+          "intermediateRetestCause": "Separate retest command omitted VULKAN_SDK",
+          "processEnvironment": {
+            "VCPKG_ROOT": "D:/Tools/vcpkg",
+            "VULKAN_SDK": "D:/Tools/VulkanSDK/1.4.350.0",
+            "cmake": "VS2022 bundled 3.31.6-msvc6",
+            "ninja": "VS2022 bundled 1.12.1"
+          }
+        }
+      },
+      "environmentReceipts": [
+        {
+          "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-debug/build-environment-retest.log",
+          "sha256": "af98bc5a12c72d130846dffdceb700276fc53f13871fa3c810685b4d0922bcba"
+        },
+        {
+          "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-debug/build-environment-final.log",
+          "sha256": "4df8581e8a84e4ed9a85055b7964eab981f06cd2960a1ff7d5b0cfe2eed0b770"
+        },
+        {
+          "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-debug/build-environment-final.xml",
+          "sha256": "eb21d8a12f9177f97f386e239f017056baa3fca93d4535fab992888822e784c9"
+        }
+      ]
+    },
+    "release": {
+      "count": 25,
+      "names": [
+        "AzureAssets.GenerationManifest",
+        "AzureRender.ColorGradingLut",
+        "AzureGame.ExplorationDesign",
+        "AzureAssets.ModelFormats",
+        "AzureEngine.Project",
+        "AzureEditor.AssetWorkflow",
+        "AzureEditor.ExtendedAssetWorkflow",
+        "AzureEditor.ProjectFlow",
+        "AzureEngine.Scene2DWorkflow",
+        "AzureEngine.LevelPlayer",
+        "AzureEngine.GamePackageRules",
+        "AzureEngine.BuildConfiguration",
+        "AzureEngine.BuildProvenance",
+        "AzureEngine.ScriptBackendContract",
+        "AzureEngine.ManagedModule.coreclr",
+        "AzureEngine.ManagedModule.nativeaot",
+        "AzureEngine.ManagedRuntime.coreclr",
+        "AzureEngine.ManagedRuntime.nativeaot",
+        "AzureEngine.ScriptBackendParity.lua",
+        "AzureEngine.ManagedWorkflows.coreclr",
+        "AzureEngine.ManagedWorkflows.nativeaot",
+        "AzureEditor.ManagedAuthoring",
+        "AzureAssets.TextureImportContract",
+        "AzureAssets.TextureMaterialImport",
+        "AzureAssets.MaterialUvImport"
+      ],
+      "initial": {
+        "status": "failed",
+        "configuration": "release",
+        "names": [
+          "AzureAssets.GenerationManifest",
+          "AzureRender.ColorGradingLut",
+          "AzureGame.ExplorationDesign",
+          "AzureAssets.ModelFormats",
+          "AzureEngine.Project",
+          "AzureEditor.AssetWorkflow",
+          "AzureEditor.ExtendedAssetWorkflow",
+          "AzureEditor.ProjectFlow",
+          "AzureEngine.Scene2DWorkflow",
+          "AzureEngine.LevelPlayer",
+          "AzureEngine.GamePackageRules",
+          "AzureEngine.BuildConfiguration",
+          "AzureEngine.BuildProvenance",
+          "AzureEngine.ScriptBackendContract",
+          "AzureEngine.ManagedModule.coreclr",
+          "AzureEngine.ManagedModule.nativeaot",
+          "AzureEngine.ManagedRuntime.coreclr",
+          "AzureEngine.ManagedRuntime.nativeaot",
+          "AzureEngine.ScriptBackendParity.lua",
+          "AzureEngine.ManagedWorkflows.coreclr",
+          "AzureEngine.ManagedWorkflows.nativeaot",
+          "AzureEditor.ManagedAuthoring",
+          "AzureAssets.TextureImportContract",
+          "AzureAssets.TextureMaterialImport",
+          "AzureAssets.MaterialUvImport"
+        ],
+        "binaryAndToolHashes": {
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureColorGradingLutTests.exe": "1ea57ca52d3b85031dba920ad39ff4433814cb7fe5b4207170bfd6034debcade",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGenerationManifestTests.exe": "7707edee47ab0757106349aef4a8ae0984e70e88063e04cb319a8649ca081b40",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureScriptBackendContractTests.exe": "0e81df811d799343c80edf751da6cd2d7e9b1a27530fd2e72b386fabda0e051b",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureManagedModuleTests.exe": "9f5e789242eeb0eea49c3c10442c41a2297a390e6137650fecf106d2f8b84a03",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureManagedScriptRuntimeTests.exe": "96683d1fa81f3aae0370c3877055a8bf11b37f54a75d70ce18cceb8812eec02c",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe": "21bb438c0d4a6f1f164b9a646f6ee000340185e5871180aec06db8d3f07c0082",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_managed_workflows.py": "cb104a82f97d23d418f635665ada718810b07fe50289597f03b26abe03415a26",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_game_package_rules.py": "e8a00d86612af4d6fa2aee90135164a491a79a102b824a5053b9742b4566c63f",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_build_configuration.py": "449da56c120eb80e0311c6fc6334ace366b4a30bedebeea633c37da1e9440919",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_build_provenance.py": "676f63f68c60e548e2de49ea132630c5971393cc035de9a0155b97e95b51faa4",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_level_player.py": "8b76a35e7530297c4c32c566ef8fbf97fa8d556dc092e4541f556cfdf78e9b90",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe": "a76c6185717c7303ab27705bbcdc3c2eb33337c4db3b7b0429ba975ca344e805",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectTests.exe": "af79ade17ea24af9c153bddbe975fd54b125e2c0bc3e30b965361baed1ef45be",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureEditorAssetWorkflowTests.exe": "00052592aec90d8e6b4312309a17787a765de692ec31541c322410936fc88384",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureEditorProjectFlowTests.exe": "4c8a361952899312a739afb261aebef3ca8f4da052f210f5d9eb987ffc9b869b",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureTextureImportContractTests.exe": "d5d17aec2c197f2ea157b0587ee0b39484d1ad26ad216000a2a64dd122c1aa57",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureTextureMaterialImportTests.exe": "e8ad0669abdf8374589fa5ee82be1a98e7d639c80af7b5c30dffd05370f82389",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialUvImportTests.exe": "00af8c63391e501aa7539f48e88e07d1db9a86624acc7bb3f370bf904c93b65f",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureExplorationDesignTests.exe": "b7a60a62dcd35b56f0d3ff9d02aaf83e78cddd152bf32b3342677f0174c2b753",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureScene2DWorkflowTests.exe": "3f0a735a05e56fece90a85f7cd436ea705e0169c0124e104db0d02c4ebc02a7d",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureExtendedAssetWorkflowTests.exe": "9da7d5512f029a972a36d8ab33a4ed2a6359c666d76eae285df6f197b30dbb54",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_managed_authoring.py": "e722c19d55a149057ea0f834e79d0d716554436b749203ccda09ed3686e9d1a9",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureManagedAuthoringTests.exe": "e31b8309ffedc6911c3e1e643ec72fa989ee41f88fb34d892c3099a3865cddad",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureModelFormatAdapterTests.exe": "43a9fe0b66380207501e26612032dd1e017e156548f6e39d7ccee896c00304a0"
+        },
+        "sourceFiles": {
+          "src/runtime/AssetDatabase.cpp": "fb7f234e1f02456a6b31f4273c2d9923a0a8a2b147da19a3b6e0a35c8664cbad",
+          "src/runtime/AssetDatabase.hpp": "75d25095fa70d930cc76a24bd6574f818c2c40afde8c5a4e60f195570f7a0364"
+        },
+        "reusedIndexCases": {
+          "count": 4,
+          "junitSha256": "160ca356fc0b19e5051d90dc2fc1e52d08b83ef5d89f01e516211eadfbf66213"
+        },
+        "startUtc": "2026-10-30T19:35:14.955859+00:00",
+        "command": [
+          "D:\\Tools\\VS2022BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^(AzureAssets\\.GenerationManifest|AzureRender\\.ColorGradingLut|AzureGame\\.ExplorationDesign|AzureAssets\\.ModelFormats|AzureEngine\\.Project|AzureEditor\\.AssetWorkflow|AzureEditor\\.ExtendedAssetWorkflow|AzureEditor\\.ProjectFlow|AzureEngine\\.Scene2DWorkflow|AzureEngine\\.LevelPlayer|AzureEngine\\.GamePackageRules|AzureEngine\\.BuildConfiguration|AzureEngine\\.BuildProvenance|AzureEngine\\.ScriptBackendContract|AzureEngine\\.ManagedModule\\.coreclr|AzureEngine\\.ManagedModule\\.nativeaot|AzureEngine\\.ManagedRuntime\\.coreclr|AzureEngine\\.ManagedRuntime\\.nativeaot|AzureEngine\\.ScriptBackendParity\\.lua|AzureEngine\\.ManagedWorkflows\\.coreclr|AzureEngine\\.ManagedWorkflows\\.nativeaot|AzureEditor\\.ManagedAuthoring|AzureAssets\\.TextureImportContract|AzureAssets\\.TextureMaterialImport|AzureAssets\\.MaterialUvImport)$",
+          "-j",
+          "1",
+          "--timeout",
+          "240",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-validation-release\\results.xml"
+        ],
+        "pid": 12232,
+        "exitCode": 8,
+        "count": 25,
+        "failures": [
+          "AzureEngine.ManagedWorkflows.coreclr",
+          "AzureEngine.ManagedWorkflows.nativeaot"
+        ],
+        "error": "['AzureEngine.ManagedWorkflows.coreclr', 'AzureEngine.ManagedWorkflows.nativeaot']",
+        "endUtc": "2026-10-30T19:40:53.991504+00:00"
+      },
+      "initialReceipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-release/summary.json",
+        "sha256": "e5d8e379dc61d5b87a5a1369dd408f1904952651186c30fefff455bc950db894"
+      },
+      "initialJunit": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-validation-release/results.xml",
+        "sha256": "9e5583a792b6d2addeefd6782a4450ebf62084a9a7d260e1f34f5c1590eb3c0a"
+      },
+      "targetedLog": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-green-release.log",
+        "sha256": "6b3da56e59efa1c9470a4d828528b1346b715668331b851e86021b2dc326d82e"
+      },
+      "targetedJunit": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-green-release.xml",
+        "sha256": "160ca356fc0b19e5051d90dc2fc1e52d08b83ef5d89f01e516211eadfbf66213"
+      }
+    }
+  },
+  "snapshots": {
+    "index-before-release": {
+      "metrics": {
+        "coldSeconds": 25.4585375,
+        "peakTrackedAllocationBytes": 2544675770,
+        "peakWorkingSetBytes": 3755241472,
+        "privateBytes": 1906663424,
+        "retainedAllocationBytes": 1066894143,
+        "schemaVersion": 1,
+        "warmFilesReused": 739,
+        "warmSeconds": 5.7218322
+      },
+      "recordCount": 739,
+      "recordsSha256": "df4ff7c360ff59645b6611f59e3af7652928a9c66d33eccc8ba08afd4622418f",
+      "snapshot": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-before-release/snapshot.json",
+        "sha256": "e8736b58a8a8143b1969b878a87bdb7ae9f17937660f73ec27991277cd69c96e"
+      },
+      "receipt": {
+        "status": "passed",
+        "configuration": "release",
+        "sourceCommit": "286809ae8ac14112d963fd8e03f8a82417b26326",
+        "sourceFiles": {
+          "src/runtime/AssetDatabase.cpp": "625b2985899a6c4ebdb0eb4c13f6041dee5899e4c4ca4f8e576ad33273d180d9",
+          "src/runtime/AssetDatabase.hpp": "31b3116adfca6dbd61b0dde86efb2245f508bdffc55eb4911e2caa09da649b3a",
+          "tests/AssetDependencyIndexTests.cpp": "327027fa9f6e7113a1ccb0d09505b9cac3b4b4abb26b58d1fe2f4ff9bab95d68"
+        },
+        "executableSha256": "d3e5edb6ea0809718e8e79acf3b083442c657426615eb3f93fcfd817ccaaad3f",
+        "libraries": {
+          "assimp-vc143-mt.dll": "2acf16a9392849e96c8f415f9d1ae4aa16c96f88b029d7c8afe90a08273bcf57",
+          "brotlicommon.dll": "2c76417ac9cb1e3203e94c3751bc3c7860ccff406954a41172c07e96522046bb",
+          "brotlidec.dll": "34edc8f02180aa16e0215b49643fa972dda64527ef9823fca42920db080d227e",
+          "bz2.dll": "f1a9ac696ca0c1ddcd578926aca96149069805910fb4ad6212d827791ae8991c",
+          "deflate.dll": "c4a174c08d0aa3f69699ff46174a54838d64a3762621adb63bd87302b0ac8ac5",
+          "DirectXTex.dll": "295b5ed0af3fc1d2040f571b70064c1cb0161a22bb8c848471383e466f0e77cd",
+          "FLAC.dll": "b02df99b0f0b53f1c56b568e2ddc9d059eb5e19361ded0a1763a242ed7dce287",
+          "freetype.dll": "ea8c4fcefbf224a1c22e7eafdc6940a14652832a1f8ad387b8766672716df77e",
+          "glfw3.dll": "a11bb4d9b2a9d249ed610c946b5199df322d31a5ce662a161c4e245b42df1c1e",
+          "Iex-3_4.dll": "9ffceedbcf3d32a4ad0e1226948066312c4921691adc1bb1cbcef4a5e784f158",
+          "IlmThread-3_4.dll": "98bd8f40376dba07c7fdabc855b450f9f25e7dda9fa60860d897123d3eab5a2a",
+          "Imath-3_2.dll": "b97a40e93f8eec6cb4e0ded871c30fc1c047b2bcaab6ce7949bed4bffb35a070",
+          "jpeg62.dll": "32706a49e09e190e0385d9a4a74a119ce78803663ebb1df13986ca04179b8a02",
+          "ktx.dll": "e7a9f73ff3216c5c74ef1b97eaf6afc18b5d0f0cc0737e2b43b566fd64eae8c6",
+          "kubazip.dll": "f55c17f5b9dde9d8a7b6eb5e7d58ace2a4ab6977805dc93a31cd50fb5323b303",
+          "liblzma.dll": "55876afe06bd7803e66c5b353f696d0da51fb52194dba3450d36d80740eca5ac",
+          "libmp3lame.DLL": "da526e069824937e8069f6dc34ce313f5ad98d54e7431fecdffe71cdf77de17e",
+          "libpng16.dll": "f33bf57620eb33c38e6db3fe6eb4333b1a78dae868f3841145830b5e598bcac2",
+          "libsharpyuv.dll": "1d311a1367d1bb7b2b586f180778857eeeba91f7b93eb3fd72b55243c8e43a5e",
+          "libwebp.dll": "5ba51bf7e842b62df454d25a8769e2e5917da30aaa9be7121cd17979daedd971",
+          "lua.dll": "6f8240c01d093de47d0ecbaaefaa9466a0e111e7bd7fb1d4f8f8df42620453c0",
+          "manifold.dll": "39d9e858f7647a9de0b58ba0badf24dca5af224e8ecdd44d0f93eb127c7fae7b",
+          "minizip.dll": "91bb4fe316834ccedde9045f14fcc97b31019e9a2ff79ef70f51b3c4ee26a86e",
+          "ogg.dll": "080f93d18c1c54df19bdbd5cc7b45804f8b9cce4fbad69a9c6df6acf5bfe9bb2",
+          "OpenEXR-3_4.dll": "2f67b4fd19b3696d42783174d618a42298428313538dbc935800db9d4785599b",
+          "OpenEXRCore-3_4.dll": "30e09aec457c1ed2b624a5f69326efb069386e92d1a4ba4399610d656e01f13c",
+          "openjph.0.31.dll": "98c2c17eb13dd32d85c0361b372b3b1d4b51c0aba3594299349785cf694ecbc9",
+          "opus.dll": "825634299cd31d482e37c0e837bb2d045866f3c145f28ec58b5890eb1a1ca555",
+          "pugixml.dll": "bdbe32c2748bc1acaa4003d1b19956378335ae863f062ae8efb9a82f0cb44837",
+          "rmlui.dll": "42ae16c60b317fb8fe526878e81038c1bb3e905c0c2f54eee334214997475cfc",
+          "tiff.dll": "46b1a9184409cd54653aed627aa048536067bd056a684d77cfd2a348dc7fc4cd",
+          "vorbis.dll": "e9dcc5337bb52b09fbecbf2e6ae05f8118df0fdb6638ff1bb61e2a03d973a6a7",
+          "vorbisenc.dll": "6bf8c1aa28905ed9bc4c03d377037046637dfff29b8e1b5a2a1b39a96d89c7e2",
+          "z.dll": "d2d6e24fdbfabcc02e1bc08b48c23b16d6b05d4caaa4e709ea38a8ba515592f5",
+          "zstd.dll": "f0dac30f0c645dc91c20b24bb2a5e93d77b9aa5f0fef0136ebcdfe5d77a06d79"
+        },
+        "projectSha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-before-release\\AzureAssetDependencyIndexTests.exe",
+          "--snapshot",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\main-candidate-v7\\project.azureproject",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-before-release\\snapshot.json"
+        ],
+        "startUtc": "2026-10-30T19:04:32.396431+00:00",
+        "pid": 34732,
+        "exitCode": 0,
+        "snapshotSha256": "e8736b58a8a8143b1969b878a87bdb7ae9f17937660f73ec27991277cd69c96e",
+        "recordCount": 739,
+        "endUtc": "2026-10-30T19:05:05.259383+00:00"
+      }
+    },
+    "index-after-release": {
+      "metrics": {
+        "coldSeconds": 24.4293332,
+        "peakTrackedAllocationBytes": 422376629,
+        "peakWorkingSetBytes": 395952128,
+        "privateBytes": 30318592,
+        "retainedAllocationBytes": 8249675,
+        "schemaVersion": 1,
+        "warmFilesReused": 739,
+        "warmSeconds": 0.1450019
+      },
+      "recordCount": 739,
+      "recordsSha256": "df4ff7c360ff59645b6611f59e3af7652928a9c66d33eccc8ba08afd4622418f",
+      "snapshot": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-after-release/snapshot.json",
+        "sha256": "7873c984b885bb2b5926711fb74c0360e08d9125d46194988cf112def2f1ea86"
+      },
+      "receipt": {
+        "status": "passed",
+        "configuration": "release",
+        "sourceCommit": "286809ae8ac14112d963fd8e03f8a82417b26326",
+        "sourceFiles": {
+          "src/runtime/AssetDatabase.cpp": "fb7f234e1f02456a6b31f4273c2d9923a0a8a2b147da19a3b6e0a35c8664cbad",
+          "src/runtime/AssetDatabase.hpp": "75d25095fa70d930cc76a24bd6574f818c2c40afde8c5a4e60f195570f7a0364",
+          "tests/AssetDependencyIndexTests.cpp": "327027fa9f6e7113a1ccb0d09505b9cac3b4b4abb26b58d1fe2f4ff9bab95d68"
+        },
+        "executableSha256": "00698631970c838adb188d1fc636574486299b7692d8014d9882c8af38128e90",
+        "libraries": {
+          "assimp-vc143-mt.dll": "2acf16a9392849e96c8f415f9d1ae4aa16c96f88b029d7c8afe90a08273bcf57",
+          "brotlicommon.dll": "2c76417ac9cb1e3203e94c3751bc3c7860ccff406954a41172c07e96522046bb",
+          "brotlidec.dll": "34edc8f02180aa16e0215b49643fa972dda64527ef9823fca42920db080d227e",
+          "bz2.dll": "f1a9ac696ca0c1ddcd578926aca96149069805910fb4ad6212d827791ae8991c",
+          "deflate.dll": "c4a174c08d0aa3f69699ff46174a54838d64a3762621adb63bd87302b0ac8ac5",
+          "DirectXTex.dll": "295b5ed0af3fc1d2040f571b70064c1cb0161a22bb8c848471383e466f0e77cd",
+          "FLAC.dll": "b02df99b0f0b53f1c56b568e2ddc9d059eb5e19361ded0a1763a242ed7dce287",
+          "freetype.dll": "ea8c4fcefbf224a1c22e7eafdc6940a14652832a1f8ad387b8766672716df77e",
+          "glfw3.dll": "a11bb4d9b2a9d249ed610c946b5199df322d31a5ce662a161c4e245b42df1c1e",
+          "Iex-3_4.dll": "9ffceedbcf3d32a4ad0e1226948066312c4921691adc1bb1cbcef4a5e784f158",
+          "IlmThread-3_4.dll": "98bd8f40376dba07c7fdabc855b450f9f25e7dda9fa60860d897123d3eab5a2a",
+          "Imath-3_2.dll": "b97a40e93f8eec6cb4e0ded871c30fc1c047b2bcaab6ce7949bed4bffb35a070",
+          "jpeg62.dll": "32706a49e09e190e0385d9a4a74a119ce78803663ebb1df13986ca04179b8a02",
+          "ktx.dll": "e7a9f73ff3216c5c74ef1b97eaf6afc18b5d0f0cc0737e2b43b566fd64eae8c6",
+          "kubazip.dll": "f55c17f5b9dde9d8a7b6eb5e7d58ace2a4ab6977805dc93a31cd50fb5323b303",
+          "liblzma.dll": "55876afe06bd7803e66c5b353f696d0da51fb52194dba3450d36d80740eca5ac",
+          "libmp3lame.DLL": "da526e069824937e8069f6dc34ce313f5ad98d54e7431fecdffe71cdf77de17e",
+          "libpng16.dll": "f33bf57620eb33c38e6db3fe6eb4333b1a78dae868f3841145830b5e598bcac2",
+          "libsharpyuv.dll": "1d311a1367d1bb7b2b586f180778857eeeba91f7b93eb3fd72b55243c8e43a5e",
+          "libwebp.dll": "5ba51bf7e842b62df454d25a8769e2e5917da30aaa9be7121cd17979daedd971",
+          "lua.dll": "6f8240c01d093de47d0ecbaaefaa9466a0e111e7bd7fb1d4f8f8df42620453c0",
+          "manifold.dll": "39d9e858f7647a9de0b58ba0badf24dca5af224e8ecdd44d0f93eb127c7fae7b",
+          "minizip.dll": "91bb4fe316834ccedde9045f14fcc97b31019e9a2ff79ef70f51b3c4ee26a86e",
+          "ogg.dll": "080f93d18c1c54df19bdbd5cc7b45804f8b9cce4fbad69a9c6df6acf5bfe9bb2",
+          "OpenEXR-3_4.dll": "2f67b4fd19b3696d42783174d618a42298428313538dbc935800db9d4785599b",
+          "OpenEXRCore-3_4.dll": "30e09aec457c1ed2b624a5f69326efb069386e92d1a4ba4399610d656e01f13c",
+          "openjph.0.31.dll": "98c2c17eb13dd32d85c0361b372b3b1d4b51c0aba3594299349785cf694ecbc9",
+          "opus.dll": "825634299cd31d482e37c0e837bb2d045866f3c145f28ec58b5890eb1a1ca555",
+          "pugixml.dll": "bdbe32c2748bc1acaa4003d1b19956378335ae863f062ae8efb9a82f0cb44837",
+          "rmlui.dll": "42ae16c60b317fb8fe526878e81038c1bb3e905c0c2f54eee334214997475cfc",
+          "tiff.dll": "46b1a9184409cd54653aed627aa048536067bd056a684d77cfd2a348dc7fc4cd",
+          "vorbis.dll": "e9dcc5337bb52b09fbecbf2e6ae05f8118df0fdb6638ff1bb61e2a03d973a6a7",
+          "vorbisenc.dll": "6bf8c1aa28905ed9bc4c03d377037046637dfff29b8e1b5a2a1b39a96d89c7e2",
+          "z.dll": "d2d6e24fdbfabcc02e1bc08b48c23b16d6b05d4caaa4e709ea38a8ba515592f5",
+          "zstd.dll": "f0dac30f0c645dc91c20b24bb2a5e93d77b9aa5f0fef0136ebcdfe5d77a06d79"
+        },
+        "projectSha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-after-release\\AzureAssetDependencyIndexTests.exe",
+          "--snapshot",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\main-candidate-v7\\project.azureproject",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-after-release\\snapshot.json"
+        ],
+        "startUtc": "2026-10-30T19:09:28.689739+00:00",
+        "pid": 34384,
+        "exitCode": 0,
+        "snapshotSha256": "7873c984b885bb2b5926711fb74c0360e08d9125d46194988cf112def2f1ea86",
+        "recordCount": 739,
+        "endUtc": "2026-10-30T19:09:53.483863+00:00"
+      }
+    },
+    "index-after-debug": {
+      "metrics": {
+        "coldSeconds": 99.0099412,
+        "peakTrackedAllocationBytes": 423728973,
+        "peakWorkingSetBytes": 496656384,
+        "privateBytes": 73609216,
+        "retainedAllocationBytes": 10595722,
+        "schemaVersion": 1,
+        "warmFilesReused": 739,
+        "warmSeconds": 0.4989895
+      },
+      "recordCount": 739,
+      "recordsSha256": "df4ff7c360ff59645b6611f59e3af7652928a9c66d33eccc8ba08afd4622418f",
+      "snapshot": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-after-debug/snapshot.json",
+        "sha256": "44eb73d15a51a28c752fe0cdffb8b2fe582d052795d52e8957d5399fc61adf85"
+      },
+      "receipt": {
+        "status": "passed",
+        "configuration": "debug",
+        "sourceCommit": "286809ae8ac14112d963fd8e03f8a82417b26326",
+        "sourceFiles": {
+          "src/runtime/AssetDatabase.cpp": "fb7f234e1f02456a6b31f4273c2d9923a0a8a2b147da19a3b6e0a35c8664cbad",
+          "src/runtime/AssetDatabase.hpp": "75d25095fa70d930cc76a24bd6574f818c2c40afde8c5a4e60f195570f7a0364",
+          "tests/AssetDependencyIndexTests.cpp": "327027fa9f6e7113a1ccb0d09505b9cac3b4b4abb26b58d1fe2f4ff9bab95d68"
+        },
+        "executableSha256": "97fb6a8bdadf8ea55b88ba2632ee2ffca4c77d51281f086112b123a6d62260ef",
+        "libraries": {
+          "assimp-vc143-mtd.dll": "15bb0ea6fd67400297eb3db1770c5bc89979289bf8f7c88cc977c805d0ef8696",
+          "brotlicommon.dll": "aaafbbd331474b787f7ec89b4ee5717f1a9b5f3eb2bfd8d1da1203c21d8b5e79",
+          "brotlidec.dll": "0b2c0c6dd462ecb81bb96c7093c79a950c3f0941aece8bed99dcee42c016ceec",
+          "bz2d.dll": "31d72c52a807aba0eaa374e4107fc5cc19795120b0534f815bfd4a8e8e49c20c",
+          "deflate.dll": "ae0ad9969a7caf1338e6eaad02f97d0358fe6a14dfb4b908f8adafd73a33d956",
+          "DirectXTex.dll": "3730fdaafa71d35af0256605802f26b6bd9a24eef0a41c42867a1b4d7144ebd5",
+          "FLAC.dll": "8ef45bc3f90c584a1e5c6feec5c65efb1b1be0e6a61661d5fc8b5d433744d662",
+          "freetyped.dll": "5e8ef8167fcac2032ead44566590519f8c1ad96bb803ed7ed1c1f03b3debf60c",
+          "glfw3.dll": "70f64ba6e0c69fd6e3f9021ebaddf7cca835969f0bde20d2347d236eeba588ec",
+          "Iex-3_4_d.dll": "f0725e50911d431183478f02a34d3399dc55c9c005ee5e17b81dd4f1b51fd622",
+          "IlmThread-3_4_d.dll": "b7a1b2cd8bf770d67c57f192875e339470a8bc7eec301710cbc87065c4ae5408",
+          "Imath-3_2_d.dll": "2b5890f473059f961ae411da1dcc22ddc69d90d424f42332f5cf6a551483670f",
+          "jpeg62.dll": "409afc967fa61047efea61a9a543f686b35658218f7294e6bf2c0327dd5fa5e1",
+          "ktx.dll": "d792b15cd7412a7a049f6d3c17eb8521290998d601dc2c6d77a3bc8f9aaf2ec4",
+          "kubazip.dll": "2a0361031d02eb912b5f0822f7a95218321b5b896077110861953dd611559eaf",
+          "liblzma.dll": "a7961aa5db34a3cc38b24e6e5dd06d5ad41d4a71df02dd83ec5cdf422088e243",
+          "libmp3lame.DLL": "e3c1266eaba44cee2d07a9600caeaacff3549d0b7e29a6aa9fa456b320535a55",
+          "libpng16d.dll": "892c75e7c727f88d9b8f6ae2fd2d9153cf979de5e4172e34b87731b1fb257c56",
+          "libsharpyuv.dll": "c207623d981c5e3683fef719f8f668733ac3f22313614a6f1acd3e71ff507600",
+          "libwebp.dll": "0f30990cc7122cde07d3d5098b357957ed49a82d59f2f42275fb685330cf6a75",
+          "lua.dll": "82304ec1fdd274aeae2a36bd3f703b150b8dfceb40ab81a2453f4b4052a740e8",
+          "manifold.dll": "37ba21b39d5948875c3ae612963d7f477ed645b48d2a695415e657ecf209cde6",
+          "minizipd.dll": "ecc5bd8c8e0dd484ef931de6d71240baedbc69c8031ecadb4b3578b21381df55",
+          "ogg.dll": "8b71e6e6a96f8e15517b2e4beced96cced23704907ea5c32b4b42151f23128c4",
+          "OpenEXR-3_4_d.dll": "6aa1d396d843066d15435e69f6934ebf9b66cb4abc5b60ca3ef51f1eff72248b",
+          "OpenEXRCore-3_4_d.dll": "a407c25d0d41dc088dc7a7c30987f4ec4237d575678722f6ac590a0c08fcf65c",
+          "openjph.0.31d.dll": "789ab0807ac81b51ae000109ccaa6f76fc00ab7770004b6113ace8466ef4f9ea",
+          "opus.dll": "504f6c7f0f8ceac97d98f2ca60563a9256fa88e096a3c0cb8afa4e3c2de121f0",
+          "poly2tri.dll": "13f111cc4b14f8f584c7f69096767502c397f6675029fef75c1a020f937db6cb",
+          "pugixml.dll": "1a9c1aacbb2dd03f03cb6ef2a956829903018ec17616c2462833253115672813",
+          "rmlui.dll": "72b2281a2cb62c32abb137333b9323214a99eb581c36e30daf144c0ef8ee45ab",
+          "tiffd.dll": "dfe4ac2a635291131338cf0d83dc91329473c02dc86cdd12fd9a54c822fcfa4f",
+          "vorbis.dll": "ce22725ec463ca49330ed8e5dacef50f9e69e26b6dd278e8fa5767686ebec4e8",
+          "vorbisenc.dll": "8445dfcd023576ff24c9bfc3bc06dd55f98c9279ebacb83aa81c1bf695a4828f",
+          "zd.dll": "16b4a4de0d69de2046a46ac0f0a4533ada012d330580a9e569b6394105221274",
+          "zstd.dll": "e42f67f091849aa0aac776a81c279bd399eb59b0a34de5e48506deb1bad03e6d"
+        },
+        "projectSha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-after-debug\\AzureAssetDependencyIndexTests.exe",
+          "--snapshot",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\main-candidate-v7\\project.azureproject",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-after-debug\\snapshot.json"
+        ],
+        "startUtc": "2026-10-30T19:09:53.796996+00:00",
+        "pid": 31468,
+        "exitCode": 0,
+        "snapshotSha256": "44eb73d15a51a28c752fe0cdffb8b2fe582d052795d52e8957d5399fc61adf85",
+        "recordCount": 739,
+        "endUtc": "2026-10-30T19:11:34.420214+00:00"
+      }
+    }
+  },
+  "native": {
+    "debug": {
+      "result": {
+        "status": "failed",
+        "configuration": "debug",
+        "antiAliasing": 4,
+        "timeoutSeconds": 600,
+        "hypothesis": "Measured compact index reduces retained memory and warm-copy cost; retry bounded full startup once",
+        "originalFault": "root cause unresolved; original Debug timeout and crash evidence remain separate",
+        "playerSha256": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab",
+        "shaderSet": {
+          "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+          "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+          "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+          "background_bindless_samples.frag.spv": "7937f35e40fc9efc0d323b14c69f57088e8319316aad8e4a729cb17f11806ca0",
+          "background_samples.frag.spv": "a73edda9980479f648b8a5d7bf8e90c7f702a85e6c43a985eaac2a690c2a49d3",
+          "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+          "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+          "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+          "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+          "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+          "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+          "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+          "character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+          "character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+          "character_snapshot.frag.spv": "e38784af2c7238ad8f2b1e36582cf5f10f2c6a393c5a8be02bf9563a690b558c",
+          "character_snapshot_bindless.frag.spv": "6904326b911e76b1a2b9ed8ac941772b1046f01ff136c11b81f474efc9e3ff7f",
+          "character_snapshot_bindless_clipmap.frag.spv": "e4f81966744954d9e948d50291373426ec01c18eb53c60a1329950f0765a1da7",
+          "character_snapshot_bindless_clipmap_field.frag.spv": "bc3eeadea21ca5ff9c7f1b7c710e398fecd3ebb21bf83a3106717942383de52a",
+          "character_snapshot_bindless_field.frag.spv": "72eb9a8c0fb16fd682d418180ad9377c3784ad9f60f14fea3a815041f3be8934",
+          "character_snapshot_bindless_samples.frag.spv": "e8a60592a9f395e35ac9d285ba7f849069b42ffe3ef81a3a3ddf7495ef6e1612",
+          "character_snapshot_bindless_samples_clipmap.frag.spv": "32007a081014aad4894ad74749a64b661b614a887c2d273e47a499b95dc63cfa",
+          "character_snapshot_bindless_samples_clipmap_field.frag.spv": "e037112b5c12c0e6913caa75b5eccebaf7de10eb3e974c2f8a91b4aa04627b0d",
+          "character_snapshot_bindless_samples_field.frag.spv": "453f5815f88138bdda39520cf586c2828ada0de5a005a807204261ecfadd97e0",
+          "character_snapshot_clipmap.frag.spv": "5a5b95b032f3d273de729eb4b3d1615dbd0c63a2185a625db82d287be9befb6c",
+          "character_snapshot_clipmap_field.frag.spv": "37eac53befaf200c3b394d6fd8635a35686bb1a90f9b79bd4d8cbc0194c2e87e",
+          "character_snapshot_depth.frag.spv": "beee6901bfb65d8c04d09ff20df76f49ea80045f5c14816cc1ad76fb55baf8e1",
+          "character_snapshot_depth.vert.spv": "c25cf604b8499b2c0a44f6507f6489b9d125514e53576e673ab1bb36f4915cde",
+          "character_snapshot_depth_bindless.frag.spv": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+          "character_snapshot_depth_bindless_samples.frag.spv": "67ed2047713fe1a1e60816978b6c3464102fa36feae97bf30ec0245ce2adf11c",
+          "character_snapshot_depth_compute.vert.spv": "580b4777a721c1f6646be2d9fe618ed44f6f4c4fdb6fae877aab233462e977d9",
+          "character_snapshot_depth_samples.frag.spv": "83ce6bc8a4e7cb98aef5022dfbb7f88aeeacf75dbdf4f778769c7eebfe92cab3",
+          "character_snapshot_field.frag.spv": "dadba73e5680b3161fd5c66f189cbd559f7f51a46ee9a4c05b727f6bc998d8d7",
+          "character_snapshot_integral.frag.spv": "bd5f3fcbe550d0f01bc28eebeae3e458599e177a2dd2314ccf8b166a7be6df92",
+          "character_snapshot_integral_bindless.frag.spv": "50690464b6c94fc29b856dc27ef8fd68f6ea87d6e9714770e2ed25ded106fb53",
+          "character_snapshot_integral_bindless_clipmap.frag.spv": "4bbac44b6bd226cefcc61e43e59c239f35faae7d818e20f349094ae476e3ac23",
+          "character_snapshot_integral_bindless_clipmap_field.frag.spv": "b344c11ce9e605449e6fb6b88458478a1f1cbc47067836ced06862481fbeb673",
+          "character_snapshot_integral_bindless_field.frag.spv": "1b3de9dc5b48d15ba83802c2bb4de9d18121f4e557fa2fd3cefe993e7445a760",
+          "character_snapshot_integral_clipmap.frag.spv": "007fc66252b67bca77c80ef9100ec966cf96ecc23ae80cdaf666d095cbb171ba",
+          "character_snapshot_integral_clipmap_field.frag.spv": "2d07d7b272db670cdf9cf7145024853ff2d0400c408df2295e02f3d2f27cd22b",
+          "character_snapshot_integral_field.frag.spv": "cb095daf66898395c97d84eb4ea202db609f2da48f8dbbb43ae51db423600b9d",
+          "character_snapshot_integral_object.frag.spv": "e7f2805b404ce12f2e06b9d20b7ff748a2626f9ee87674b55765661e59122138",
+          "character_snapshot_integral_object_bindless.frag.spv": "587baa3b1f861d2b0d5c2a366ea7b2116c8a58064aee7eb715bb381dd26fa944",
+          "character_snapshot_integral_object_bindless_clipmap.frag.spv": "6d4679ab059511ca442d97861bab08057928092b6b148e3dc979b0d1d4c42295",
+          "character_snapshot_integral_object_bindless_clipmap_field.frag.spv": "c589f70125867f798c7794bcbe683a99e5aa803ab2fdec245f8e287127f9d841",
+          "character_snapshot_integral_object_bindless_field.frag.spv": "274f6bcf3bf969a6cf0e4fab80a477372faaa7fed8bb1268ce9d03026be6ebbe",
+          "character_snapshot_integral_object_clipmap.frag.spv": "b7f0d7c8da51b7bb02811d62cff0465f364bb14e7d194f2d52124b0bfc94641e",
+          "character_snapshot_integral_object_clipmap_field.frag.spv": "42785aa514db8a5a69413a15b9afa14f7ba15ed03afe5b107bc9e98895606a76",
+          "character_snapshot_integral_object_field.frag.spv": "a488cf6113e92f96c9a55708812266419aa73329d195f5a60122c578cee90ae3",
+          "character_snapshot_object.frag.spv": "2be4fdfed69d2684662d5afacd552cfd58efa7be4a6b42ddb1406b7469e232c6",
+          "character_snapshot_object_bindless.frag.spv": "793de13091eb9e4a9c271c4fe5e41e4ab00989fb003b05df2ca7cdc96ad93a0b",
+          "character_snapshot_object_bindless_clipmap.frag.spv": "18d21d00997c04f0f01603fc2df7073527661196650e37acbfca7e12c7b96cfa",
+          "character_snapshot_object_bindless_clipmap_field.frag.spv": "5de060392c9a4e68a0e6d7b88d03c0b086803ad27da99af96fc53a13f3ce6710",
+          "character_snapshot_object_bindless_field.frag.spv": "0b46500fadc07343e6c6a26a9b38ab03606eadfe664d5fe0498eb7b886cfd682",
+          "character_snapshot_object_bindless_samples.frag.spv": "d8e69d8f6d8d8d04b4680f760ec988a1b48b2ff27f31b88da19f69edff741f30",
+          "character_snapshot_object_bindless_samples_clipmap.frag.spv": "367d2a88944038e87308672e689978fedcabea1411636b74595bbe87f0206c38",
+          "character_snapshot_object_bindless_samples_clipmap_field.frag.spv": "c0858b6bc23b352c10b48639d4616e223604378cd3d8a58fff826615175506e2",
+          "character_snapshot_object_bindless_samples_field.frag.spv": "604960339f65922a4c8a164e51e73b2c0f28bf90cfceab9adcfda6badce04b49",
+          "character_snapshot_object_clipmap.frag.spv": "ae99c7a71f5102aadaa65b66de1ed48101afd2c4ce03af5e0c41313dfcd00189",
+          "character_snapshot_object_clipmap_field.frag.spv": "38ec3e1d3d1ecac4d2754ba0cb6a5ded1d19463c396decf211fab15a3862a9b7",
+          "character_snapshot_object_field.frag.spv": "34af9bc4cec81f77a6063af97804bed733a60124ca97bb7b1cb3d8ca15ec6040",
+          "character_snapshot_object_samples.frag.spv": "983cbfdfd449e10c871540f58546f2d66773487adfdcd7d9f1a861810879b8f3",
+          "character_snapshot_object_samples_clipmap.frag.spv": "fccc35925f611c563e06dd573de3db0b30155b12b43539edfed55e907eecc05d",
+          "character_snapshot_object_samples_clipmap_field.frag.spv": "8417e17fa20338e44427870df359d1aef516bf1b76fab57783af1e4ba236b905",
+          "character_snapshot_object_samples_field.frag.spv": "35ec8ec6e728a88bcfa417eb8e2c28a0c3b03e2583ca7e0bb99a00f20b239db6",
+          "character_snapshot_samples.frag.spv": "40aaf9082903e0ade56741eca98491133610660d4365fd2f088cc4467518c8f8",
+          "character_snapshot_samples_clipmap.frag.spv": "e69c5c1c6278328b5cbab63d616b17404a8609dd35b060252e1d146d39593fa5",
+          "character_snapshot_samples_clipmap_field.frag.spv": "1156d7f21c8c0dd75076e231df99a3187e89239334b7424e3044cf413eb295e3",
+          "character_snapshot_samples_field.frag.spv": "f67cbacb02233ef6fc8b57a3ae2ed80abc6cf61a77c8d10c85cc680738dbba37",
+          "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+          "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+          "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+          "depth_bias_test.frag.spv": "d3a2d3f4239115d2744fc926736df58c11ab517e1522946d23e28408a821ccd9",
+          "depth_pyramid.comp.spv": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+          "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+          "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+          "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+          "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+          "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+          "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+          "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+          "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+          "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+          "irradiance_clipmap_test.comp.spv": "18327769bd6bfc0fc9ce5274060e267fab85edea147a7d7076642b910bc926d5",
+          "irradiance_query_test.comp.spv": "bd2ceb9f86c3a14a99b71945b8b7394a34a93239246310a16df997d392655553",
+          "mesh.frag.spv": "00459eb4a8ba4b60ec0c6e67549a7154c5a97d6f98d542489e1590695258ddd1",
+          "mesh.vert.spv": "813283b39cb948a389b3fa674396df792bb88ed5cd481002bb6bd5a18d7bb84a",
+          "mesh_bindless.frag.spv": "4b139e07b34a7b73dcbb638c763cd8f1356801d5bbe8891a76fc260da8928df2",
+          "mesh_bindless_clipmap.frag.spv": "dae20f3b04611c897e02b38fdc4918d53eaf6e193d08d5e13be176ef81f4f446",
+          "mesh_bindless_clipmap_field.frag.spv": "cbb2f3b8b0acfe6af698509e1b6d940b490c9a213095ff67e952faa719dea84c",
+          "mesh_bindless_field.frag.spv": "dedb3daceb13ecabdea084816fd862ac4ad6b4e6a4bc577b85e4e9e5b6db812c",
+          "mesh_bindless_samples.frag.spv": "440ed0e3964a8ec274be74448551854e97cb0400e026a25179cbfb8df6fd9f42",
+          "mesh_bindless_samples_clipmap.frag.spv": "25a5f33c0bda601b45e603e6b658e16a0767d2d4affa632488d98d7a6c9c932b",
+          "mesh_bindless_samples_clipmap_field.frag.spv": "51b820a7a32049aff3bf0da39e5b865bbfcc2775a5c50ce029f5fc7b2a31aa88",
+          "mesh_bindless_samples_field.frag.spv": "1044961ab84ed080df1bc467eb80fb65fb8a0a464482f643936ccf44266478dd",
+          "mesh_clipmap.frag.spv": "0e834fdf5ccfdfa2f4ea180cd3d559a0a4506240c431130888e4fee0f3f6d6ac",
+          "mesh_clipmap_field.frag.spv": "9d5b44901e5db3a4856cb40568e571544ee8c78833ac3329ad272b2461dcac5b",
+          "mesh_compute.vert.spv": "bb6f4d819030f26b041375782b49fe3142e1ed92acf02bda6805b0984533a550",
+          "mesh_field.frag.spv": "181bb2babd28acb704e82f5e81308dc25aa974203493adc6b7121d41bdf73621",
+          "mesh_fog.frag.spv": "93174b0548e0a8f46a10b52fce4f8f0866c5f85fbc7466c35c4aed3310ba10a0",
+          "mesh_fog_bindless.frag.spv": "f5389ffcc76ee5d7cc71c656d5de0a0ac73345cbd4c0f4c73193d6caa165393e",
+          "mesh_fog_bindless_samples.frag.spv": "678556d6d0b82a2afeb0fef5aedfb46262fd61ea91576f374ef68646c9cf9d99",
+          "mesh_fog_samples.frag.spv": "2c80e6e083bca60633a13b16636d866cede0da2f99ce19d1ea4ea3d95c3ea7f7",
+          "mesh_integral.frag.spv": "955c9804134f1c916bd7181f536c94d1db9390b7ef42f1307e2dd1679d41f2db",
+          "mesh_integral_bindless.frag.spv": "b2a6c387aac7d675b808691eafe309052cb1461cd6dd1d9e2cb444a564a9fa5f",
+          "mesh_integral_bindless_clipmap.frag.spv": "cd3eca7c4a7ef3aa361e150a8e2a56da0d82633bb021c89c4c5f90689871cdcb",
+          "mesh_integral_bindless_clipmap_field.frag.spv": "c0a79522f6fbbdc9d66ac2dc3bdb978c01d172464583a7cb45ca3aeb272cc819",
+          "mesh_integral_bindless_field.frag.spv": "d9ef86a2db274731b6bed372a81a8fb5c7da69a3fc43d3269e39bab289651b25",
+          "mesh_integral_clipmap.frag.spv": "1f057e821b9b126333b244a4be091c220d57dd83235f7c11fad2907e8b84a32a",
+          "mesh_integral_clipmap_field.frag.spv": "02b7e18d45e5ac63592416b18ce5d6ac246d9baae607c06a8a211d7671ead08a",
+          "mesh_integral_field.frag.spv": "1e156706d706807faa47bea58fc1d757e467d9fa5c0bd62055692e52d0d2186d",
+          "mesh_integral_object.frag.spv": "fb7d4bdd1a9631ccd7aebc361920f723f314d4abe62517acee0f1d7fcd428213",
+          "mesh_integral_object_bindless.frag.spv": "d7148c6f725bf6470ec8678482188ce7c5f6557f4305b64f81b8edc7dd2ec41c",
+          "mesh_integral_object_bindless_clipmap.frag.spv": "5c8842bb775f62e957dd667af86db63a2ba59ebe5c6a4239d70b73a28fdadf67",
+          "mesh_integral_object_bindless_clipmap_field.frag.spv": "2a55fbd29078404e324b8758d79ad55776a6aefcc438fdca851af4a36e5ff708",
+          "mesh_integral_object_bindless_field.frag.spv": "7cb723a9203643cc5fc8bb2926042038770ffc3645e07308165a45c61e848207",
+          "mesh_integral_object_clipmap.frag.spv": "931fe22705dbae8d3602df582f8fafa8df272a75843cb80305c9e64701cc4f4f",
+          "mesh_integral_object_clipmap_field.frag.spv": "1b7085eec7ad28fd7c8ce1f2a4ed2670ce8ad6127de7ec29940513315ee388cc",
+          "mesh_integral_object_field.frag.spv": "de05599557a6f16d85d9c76dfc2f0284b844579713c9fe4cac7c5e5a88fe7da3",
+          "mesh_object.frag.spv": "2f9e046a167e78a374e59499908d63378e8c59ac39b47b2cc53e4760c1fc97cd",
+          "mesh_object.vert.spv": "cdb4e6f952a66fe9d7007271078ac2a4e7e1de86e5998291973ab93638841d54",
+          "mesh_object_bindless.frag.spv": "2aa61cabcfccebf292b2f7f1fdd536d51c2d0a7a6669a28dad2e7c8e348b3266",
+          "mesh_object_bindless_clipmap.frag.spv": "3c74f06496aa555a8a37e4c397236a6b6f5b2269da6fd2eb5f07ea1bf419a09b",
+          "mesh_object_bindless_clipmap_field.frag.spv": "72d2fb9592feeccc5a8cae4a4ef16fa44a2644375e26279924356e0152cfdbe8",
+          "mesh_object_bindless_field.frag.spv": "cae5324a0638859e477b3c84499791592e90802cabdcde64912a602d73abbe86",
+          "mesh_object_bindless_samples.frag.spv": "8dbd199feca9faeeb62d39427b489762b07996678ec28d8f718ff3a1ce36166c",
+          "mesh_object_bindless_samples_clipmap.frag.spv": "7079adc29bead87bf348ac2bf7587e66b601052f9a6d0942c542bbde6b95cf10",
+          "mesh_object_bindless_samples_clipmap_field.frag.spv": "5ac07408bc0d331eacd4d6f2d45607ba558ea65440302078cd4439a9b5ff0f9c",
+          "mesh_object_bindless_samples_field.frag.spv": "bc7fd47f44135b4acd67006050af9c6d44681c02fa7b2c6e63814b26c57ed49d",
+          "mesh_object_clipmap.frag.spv": "5bf4f6de956b7a14b6b6fd06f4bd5974d56e44259cbe0e1380f39779eb824579",
+          "mesh_object_clipmap_field.frag.spv": "bd9218b325158029266b92bd28bc75dff8076c5682489b516eb962137e251cc0",
+          "mesh_object_compute.vert.spv": "edaa575d1dd7a1401110c0f1b0fe30abfca33ffdbf49ef710bed412bcc246a4c",
+          "mesh_object_field.frag.spv": "e966d4c253b9b153cece0a6717b067ada7344f34baa7e795bb7d84450856bb3c",
+          "mesh_object_samples.frag.spv": "5f9f7b0e67ce6ccfa498d764a2a6f4965e8638b4d0298bcf1d34e7ca8cf31b2d",
+          "mesh_object_samples_clipmap.frag.spv": "96ff1d69533f811588cef826456002611c027eeb5e6eec19f86d7fd356224524",
+          "mesh_object_samples_clipmap_field.frag.spv": "babc1344667915e041640b9c8043673c609fbc23aec25616da5eaf27df795757",
+          "mesh_object_samples_field.frag.spv": "9c0e9e0a46597ed36afc03876d779d446fdcaedbcc69e0fb7a612ed5bcd752df",
+          "mesh_samples.frag.spv": "4eed29b21d9fb03faea8e66ecfc2003279d66136733ac3500d06f2d082bbe477",
+          "mesh_samples_clipmap.frag.spv": "cd6d08d88d6a4cc6fe6a9b7f695aacfac85f87f702fd9075adb5be731cc47805",
+          "mesh_samples_clipmap_field.frag.spv": "c3194dead79e4cbf10e8cb30febd9e59c06eb402ae989a46e52eba80a103e987",
+          "mesh_samples_field.frag.spv": "abc4b47ec64ea4d9ba61fc2e15bba8dcdb801301986b96a8abc82bf68ce24d8b",
+          "motion_outline.vert.spv": "20bdc865d9d02cccd775ff18dc645675c32f0f1d17aac37e5867a574cb3d6875",
+          "motion_pose_test.comp.spv": "c657318588f6a94ba16b53a750ad3c59a13d9559012d740bcb0b374b58f3f2ec",
+          "motion_projection_test.comp.spv": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+          "motion_vector.frag.spv": "41734e1b4299cc052b723d29b0994fe5af468baa04fb0348538cf5fedc2feab8",
+          "motion_vector.vert.spv": "0b7450cba1a1fae84341b764777148c760874f6661a89627fcf47aa5f598e583",
+          "multisample_probe.frag.spv": "8f52538e91940803f1d514b0826b39b5b3c4873318b8f33fe5b92a8f7325a7ec",
+          "multisample_probe.vert.spv": "c926a7e110f846f93f37225b9739c0b92d240988c7dcd9a1ae6a4fadc18031dd",
+          "object_shadow_filter_test.comp.spv": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+          "octahedral_environment_test.comp.spv": "1fc426b94f46af33bba7fb12fa06a5e55494e42252cda392ad9279725b46f630",
+          "outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+          "outline.vert.spv": "ab345fb7947c37da4d9154e4c38fc0fd695a0379ddaec4194c3253e207e80894",
+          "outline_compute.vert.spv": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+          "outline_depth.frag.spv": "0e848e0d66ab546443c5ce4f941ef6d5ce18397a11dbdc1a98831aa4a1bd3079",
+          "outline_depth_bindless.frag.spv": "8b658a22dc7145d27864e0555bcfc425ebc4c1b1aa78e16aca51e893ab6a3171",
+          "outline_depth_bindless_samples.frag.spv": "33d7e9187782d0a2163e1dc37805c306505c105b6c318e9c227e9d136db9fd66",
+          "outline_depth_samples.frag.spv": "044d24b1c37c664e161bdd9c9d81939f4bfb573609c780b7c83193336ef27180",
+          "outline_mask.frag.spv": "2b31604545789a8c07a1d2d9b979d5352fdb1a9fbc5e1219fa5d8376bef23b86",
+          "outline_mask.vert.spv": "254ea599605ab1d157f51102e049c089a7f64058f6d486a7776860efcca91e73",
+          "outline_mask_bindless.frag.spv": "4cc56fc9d2ec292ca9eb164ba43c19e871afa9575e6d09b912705a63e3ddcfb3",
+          "outline_mask_bindless_samples.frag.spv": "343b7b2a5deef6c97bbbccfb2557a725311f9d86a5c26db85d7849b80ac1d2be",
+          "outline_mask_compute.vert.spv": "86b117e98b537b5e3a2b96bd77af1a662597bc10c0cb7a4f6ad38def587e6e97",
+          "outline_mask_samples.frag.spv": "5247371d64a4782baf5487e47dd76d0046ddcb0afadafc313ecf43d1e64727c4",
+          "outline_samples.frag.spv": "e15a79625808349bb5137c2c5bd1386f1360fe80f555bbc70afbbbc8d01c003c",
+          "outline_view_scaled.frag.spv": "5e5f39bb2cc36e8801afb8dd0e80915b77dfa01dfa44944063ba39d658c3b321",
+          "outline_view_scaled.vert.spv": "6832ed81cab49e76c25f3ff043c15ea0c62104c5fa92e3150d38132cff63e9f9",
+          "outline_view_scaled_bindless.frag.spv": "0bd2f66eeed847b0fb30d9ed3805cf87366c7f171077fe657c6e5f1f78243db2",
+          "outline_view_scaled_bindless.vert.spv": "785773d452b53ad047d11b2643d3d6e29c562c3ada1fba3e7018d35bc726ba5a",
+          "outline_view_scaled_bindless_samples.frag.spv": "22e56eca66e79089655ae60b8831c95e32fa42067fd16f82436319a0a64761ac",
+          "outline_view_scaled_compute.vert.spv": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56",
+          "outline_view_scaled_compute_bindless.vert.spv": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2",
+          "outline_view_scaled_samples.frag.spv": "f634d82cc5d256d287c17f96db218642c4c1105c56cb109049a52774bd713464",
+          "pathtracing.comp.spv": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+          "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+          "readonly_depth_test.frag.spv": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+          "readonly_depth_test.vert.spv": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+          "reflection_probe_field_test.comp.spv": "94135d202f7410504e29b1e9562421d1161c5f77c6e341a432eeb985164f5a1e",
+          "reflection_reprojection.comp.spv": "b54cc4ccbcf1dc7fdf7ede3815ce51afccfdac2e853daa0e024f02f24d472158",
+          "reflection_signal_pyramid_float.comp.spv": "5017c38801528ef1c47e3fabbd4d1d8417e5cfa729788fe54e13aeab9706d6c7",
+          "reflection_signal_pyramid_packed.comp.spv": "9d9fc987c83a72728ac0296cdbf85596c658e1535a0ef72edc25aab44792926f",
+          "reflection_spatial_filter.comp.spv": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+          "reflection_surface_test.comp.spv": "d959c5051a98ef66fd9e46278dee1baaa248f30fbe536e39e869619f7a2552e1",
+          "reflection_temporal_float.comp.spv": "66c44b623b83f9e6176e7c44f7039992ada997ac29933d4224cac71c7bc00020",
+          "reflection_temporal_packed.comp.spv": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3",
+          "reflection_trace_float.comp.spv": "4e89f2e77717f918f86538b504a38d3469609848c4c59b8990d6c24625ee4351",
+          "reflection_trace_packed.comp.spv": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+          "sampled_upload_test.comp.spv": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+          "scene_instance_layout_test.comp.spv": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+          "scene_multisample_probe.frag.spv": "b01b9af31ae9f4e53d16ec248c0ff6cba9dd320abd55e92d83eb1f68c4ad9dfb",
+          "scene_multisample_resolve.frag.spv": "442a2b06917d60cb1c9006a45ff95afdd919ce96d5648491a9eedefbee64118c",
+          "shadow.frag.spv": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+          "shadow.vert.spv": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5",
+          "shadow_bindless.frag.spv": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+          "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+          "shadow_compute.vert.spv": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+          "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+          "skin.comp.spv": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4",
+          "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+          "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+          "specialization_test.comp.spv": "b38e220726a262bbd12a1893fae88b010832f88f2381402e36a3d783f766ea96",
+          "specialization_test.frag.spv": "c3f301bbf5bdbe5c7279f138fc158f51bde7502a9e3a5042cfe5c264e22c44a8",
+          "specialization_test.vert.spv": "cd32916b0e5871e6206493e6fc9f4e9ddc9fd467f77126a3aa4ecdebdb435e41",
+          "specular_ramp_test.comp.spv": "579badc92e94a243bec3335fe5064122d6b65f93d64baf6b6e7fe74b0f2e6da3",
+          "surface_response_test.comp.spv": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+          "temporal_copy.frag.spv": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+          "temporal_resolve.frag.spv": "244855bdaf134cd6ad898eefb753931d363fd3d8bfa8c7518c03ab9d2c999ef0",
+          "view_fog_surface.frag.spv": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+          "view_fog_surface_samples.frag.spv": "4f9f518a961e886c094b92c70d4232b5e3ca70ece4721182dd4429f5b8673ef1",
+          "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+          "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+        },
+        "inputs": [
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/project.azureproject",
+            "sha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+            "bytes": 621
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/scene.azurelevel",
+            "sha256": "251aa2be3af2da38c800877b4bf64e8ac5c1ed409681f776cb43a5bba6218b97",
+            "bytes": 4170104
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/content-character/hero-restored-inputs-v7.glb",
+            "sha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb",
+            "bytes": 28283500
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-0.azurematerial",
+            "sha256": "b959f3c38e6be013641ad68221bdbeb1ea1b58ebf74892a290a991893022fad7",
+            "bytes": 28005
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-1.azurematerial",
+            "sha256": "7b05827ef427a5137ff194a0b271ca2796c857d0a81b187c7897f835e140986d",
+            "bytes": 31909
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-10.azurematerial",
+            "sha256": "1207dd33c57674142f54985a991a73475a2929c397a81f356ed8a7e448843348",
+            "bytes": 21533
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-11.azurematerial",
+            "sha256": "501827cef6d5b914db31794f61b8858015167ec6552c8c8a9015b05ff42c4665",
+            "bytes": 22418
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-12.azurematerial",
+            "sha256": "cefbf58df2ac625fbbbaf96be68a89d0beea7b11bec33cc6a93598f168979682",
+            "bytes": 20012
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-2.azurematerial",
+            "sha256": "63465376ec9a222028f8e0400ca015b9054523d37eff2ef360d1033685a2d539",
+            "bytes": 31413
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-3.azurematerial",
+            "sha256": "55e4b31fff80d95b5e14685efc08c512444a70015aa0433aacc7485e6050221b",
+            "bytes": 30741
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-4.azurematerial",
+            "sha256": "76ea758de67f868299b0dc6120c8ed7356a3076242da605345d82821b85a15e5",
+            "bytes": 32627
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-5.azurematerial",
+            "sha256": "6216895e3fbf40146d4c09250c9111ccb7b35db91989624cbe4f0d3ff103a133",
+            "bytes": 31413
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-6.azurematerial",
+            "sha256": "950d7bc898265fda9d0a50656ebb5302750779fd51d67dfaba326bec71d6b189",
+            "bytes": 25478
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-7.azurematerial",
+            "sha256": "988af44d222563ff63279726c5417d99ba241cdba3c6dde6d0e9fb1b74d07914",
+            "bytes": 21591
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-8.azurematerial",
+            "sha256": "02ecdceafa9a95cc9fcd4abb8971f68e628839aed8a3e877b07fee0c4eb81959",
+            "bytes": 28252
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-9.azurematerial",
+            "sha256": "4325859f1a6f7414ffe5d2eac331fbc26375c211782b92dae8cefb5322e81663",
+            "bytes": 30804
+          },
+          {
+            "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/continuation.json",
+            "sha256": "72589a6dee4786a0eb8d5d21787c20daf7d8bbe6e066702a939548e92956a4f5",
+            "bytes": 4086
+          },
+          {
+            "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/original-crash-analysis.json",
+            "sha256": "d5f8798f45e24c75561443a8514f95f2de78d784ccff6acbdbdaac28454e69fe",
+            "bytes": 32746
+          },
+          {
+            "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/original-crash.dmp",
+            "sha256": "4c75197ded58caa4457e8ec7031754560a084dc7fd092236d34cebca1c873191",
+            "bytes": 59823279
+          }
+        ],
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\feature-native-aa4\\feature\\frames",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\main-candidate-v7\\project.azureproject",
+          "--width",
+          "1920",
+          "--height",
+          "1080",
+          "--capture-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-native-debug-aa4\\frames",
+          "--capture-frames",
+          "8",
+          "--fixed-frame-step",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--qa-isolation",
+          "beauty",
+          "--runtime-report",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-native-debug-aa4\\runtime.json",
+          "--set",
+          "render.antiAliasing=4"
+        ],
+        "comparisons": [],
+        "startUtc": "2026-10-30T19:54:28.546862+00:00",
+        "pid": 19528,
+        "error": "Command '['D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\ninja-msvc-debug\\\\AzurePlayer.exe', '--project', 'D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261027-002548-native-hair-layer-region-closure-61c105\\\\main-candidate-v7\\\\project.azureproject', '--width', '1920', '--height', '1080', '--capture-dir', 'D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261030-232017-recovery-init-crash-3bd962\\\\index-native-debug-aa4\\\\frames', '--capture-frames', '8', '--fixed-frame-step', '--qa-camera', 'scene', '--qa-light', 'scene', '--qa-isolation', 'beauty', '--runtime-report', 'D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261030-232017-recovery-init-crash-3bd962\\\\index-native-debug-aa4\\\\runtime.json', '--set', 'render.antiAliasing=4']' timed out after 600 seconds",
+        "elapsedSeconds": 614.2440209000015,
+        "endUtc": "2026-10-30T20:04:29.926078+00:00"
+      },
+      "receipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-native-debug-aa4/summary.json",
+        "sha256": "a847465ade50a2e6e80a2297784c3ddf384832aef1e189aa007802622aa33827"
+      },
+      "log": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-native-debug-aa4/player.log",
+        "sha256": "f7573a59285c4d475b2db4043294920a5b04bca69bcc9e9a71fc96cec6896149"
+      }
+    },
+    "release": {
+      "result": {
+        "status": "passed",
+        "configuration": "release",
+        "antiAliasing": 1,
+        "timeoutSeconds": 600,
+        "hypothesis": "Measured compact index reduces retained memory and warm-copy cost; retry bounded full startup once",
+        "originalFault": "root cause unresolved; original Debug timeout and crash evidence remain separate",
+        "playerSha256": "a76c6185717c7303ab27705bbcdc3c2eb33337c4db3b7b0429ba975ca344e805",
+        "shaderSet": {
+          "background.frag.spv": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+          "background.vert.spv": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+          "background_bindless.frag.spv": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+          "background_bindless_samples.frag.spv": "7937f35e40fc9efc0d323b14c69f57088e8319316aad8e4a729cb17f11806ca0",
+          "background_samples.frag.spv": "a73edda9980479f648b8a5d7bf8e90c7f702a85e6c43a985eaac2a690c2a49d3",
+          "blackhole.frag.spv": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+          "blackhole.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+          "blackhole_composite.frag.spv": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+          "blackhole_taa.frag.spv": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+          "blackhole_taa_compute.frag.spv": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+          "bloom_composite.comp.spv": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+          "bloom_downsample.comp.spv": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+          "character_depth.frag.spv": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+          "character_depth_bindless.frag.spv": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+          "character_snapshot.frag.spv": "e38784af2c7238ad8f2b1e36582cf5f10f2c6a393c5a8be02bf9563a690b558c",
+          "character_snapshot_bindless.frag.spv": "6904326b911e76b1a2b9ed8ac941772b1046f01ff136c11b81f474efc9e3ff7f",
+          "character_snapshot_bindless_clipmap.frag.spv": "e4f81966744954d9e948d50291373426ec01c18eb53c60a1329950f0765a1da7",
+          "character_snapshot_bindless_clipmap_field.frag.spv": "bc3eeadea21ca5ff9c7f1b7c710e398fecd3ebb21bf83a3106717942383de52a",
+          "character_snapshot_bindless_field.frag.spv": "72eb9a8c0fb16fd682d418180ad9377c3784ad9f60f14fea3a815041f3be8934",
+          "character_snapshot_bindless_samples.frag.spv": "e8a60592a9f395e35ac9d285ba7f849069b42ffe3ef81a3a3ddf7495ef6e1612",
+          "character_snapshot_bindless_samples_clipmap.frag.spv": "32007a081014aad4894ad74749a64b661b614a887c2d273e47a499b95dc63cfa",
+          "character_snapshot_bindless_samples_clipmap_field.frag.spv": "e037112b5c12c0e6913caa75b5eccebaf7de10eb3e974c2f8a91b4aa04627b0d",
+          "character_snapshot_bindless_samples_field.frag.spv": "453f5815f88138bdda39520cf586c2828ada0de5a005a807204261ecfadd97e0",
+          "character_snapshot_clipmap.frag.spv": "5a5b95b032f3d273de729eb4b3d1615dbd0c63a2185a625db82d287be9befb6c",
+          "character_snapshot_clipmap_field.frag.spv": "37eac53befaf200c3b394d6fd8635a35686bb1a90f9b79bd4d8cbc0194c2e87e",
+          "character_snapshot_depth.frag.spv": "beee6901bfb65d8c04d09ff20df76f49ea80045f5c14816cc1ad76fb55baf8e1",
+          "character_snapshot_depth.vert.spv": "c25cf604b8499b2c0a44f6507f6489b9d125514e53576e673ab1bb36f4915cde",
+          "character_snapshot_depth_bindless.frag.spv": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+          "character_snapshot_depth_bindless_samples.frag.spv": "67ed2047713fe1a1e60816978b6c3464102fa36feae97bf30ec0245ce2adf11c",
+          "character_snapshot_depth_compute.vert.spv": "580b4777a721c1f6646be2d9fe618ed44f6f4c4fdb6fae877aab233462e977d9",
+          "character_snapshot_depth_samples.frag.spv": "83ce6bc8a4e7cb98aef5022dfbb7f88aeeacf75dbdf4f778769c7eebfe92cab3",
+          "character_snapshot_field.frag.spv": "dadba73e5680b3161fd5c66f189cbd559f7f51a46ee9a4c05b727f6bc998d8d7",
+          "character_snapshot_integral.frag.spv": "bd5f3fcbe550d0f01bc28eebeae3e458599e177a2dd2314ccf8b166a7be6df92",
+          "character_snapshot_integral_bindless.frag.spv": "50690464b6c94fc29b856dc27ef8fd68f6ea87d6e9714770e2ed25ded106fb53",
+          "character_snapshot_integral_bindless_clipmap.frag.spv": "4bbac44b6bd226cefcc61e43e59c239f35faae7d818e20f349094ae476e3ac23",
+          "character_snapshot_integral_bindless_clipmap_field.frag.spv": "b344c11ce9e605449e6fb6b88458478a1f1cbc47067836ced06862481fbeb673",
+          "character_snapshot_integral_bindless_field.frag.spv": "1b3de9dc5b48d15ba83802c2bb4de9d18121f4e557fa2fd3cefe993e7445a760",
+          "character_snapshot_integral_clipmap.frag.spv": "007fc66252b67bca77c80ef9100ec966cf96ecc23ae80cdaf666d095cbb171ba",
+          "character_snapshot_integral_clipmap_field.frag.spv": "2d07d7b272db670cdf9cf7145024853ff2d0400c408df2295e02f3d2f27cd22b",
+          "character_snapshot_integral_field.frag.spv": "cb095daf66898395c97d84eb4ea202db609f2da48f8dbbb43ae51db423600b9d",
+          "character_snapshot_integral_object.frag.spv": "e7f2805b404ce12f2e06b9d20b7ff748a2626f9ee87674b55765661e59122138",
+          "character_snapshot_integral_object_bindless.frag.spv": "587baa3b1f861d2b0d5c2a366ea7b2116c8a58064aee7eb715bb381dd26fa944",
+          "character_snapshot_integral_object_bindless_clipmap.frag.spv": "6d4679ab059511ca442d97861bab08057928092b6b148e3dc979b0d1d4c42295",
+          "character_snapshot_integral_object_bindless_clipmap_field.frag.spv": "c589f70125867f798c7794bcbe683a99e5aa803ab2fdec245f8e287127f9d841",
+          "character_snapshot_integral_object_bindless_field.frag.spv": "274f6bcf3bf969a6cf0e4fab80a477372faaa7fed8bb1268ce9d03026be6ebbe",
+          "character_snapshot_integral_object_clipmap.frag.spv": "b7f0d7c8da51b7bb02811d62cff0465f364bb14e7d194f2d52124b0bfc94641e",
+          "character_snapshot_integral_object_clipmap_field.frag.spv": "42785aa514db8a5a69413a15b9afa14f7ba15ed03afe5b107bc9e98895606a76",
+          "character_snapshot_integral_object_field.frag.spv": "a488cf6113e92f96c9a55708812266419aa73329d195f5a60122c578cee90ae3",
+          "character_snapshot_object.frag.spv": "2be4fdfed69d2684662d5afacd552cfd58efa7be4a6b42ddb1406b7469e232c6",
+          "character_snapshot_object_bindless.frag.spv": "793de13091eb9e4a9c271c4fe5e41e4ab00989fb003b05df2ca7cdc96ad93a0b",
+          "character_snapshot_object_bindless_clipmap.frag.spv": "18d21d00997c04f0f01603fc2df7073527661196650e37acbfca7e12c7b96cfa",
+          "character_snapshot_object_bindless_clipmap_field.frag.spv": "5de060392c9a4e68a0e6d7b88d03c0b086803ad27da99af96fc53a13f3ce6710",
+          "character_snapshot_object_bindless_field.frag.spv": "0b46500fadc07343e6c6a26a9b38ab03606eadfe664d5fe0498eb7b886cfd682",
+          "character_snapshot_object_bindless_samples.frag.spv": "d8e69d8f6d8d8d04b4680f760ec988a1b48b2ff27f31b88da19f69edff741f30",
+          "character_snapshot_object_bindless_samples_clipmap.frag.spv": "367d2a88944038e87308672e689978fedcabea1411636b74595bbe87f0206c38",
+          "character_snapshot_object_bindless_samples_clipmap_field.frag.spv": "c0858b6bc23b352c10b48639d4616e223604378cd3d8a58fff826615175506e2",
+          "character_snapshot_object_bindless_samples_field.frag.spv": "604960339f65922a4c8a164e51e73b2c0f28bf90cfceab9adcfda6badce04b49",
+          "character_snapshot_object_clipmap.frag.spv": "ae99c7a71f5102aadaa65b66de1ed48101afd2c4ce03af5e0c41313dfcd00189",
+          "character_snapshot_object_clipmap_field.frag.spv": "38ec3e1d3d1ecac4d2754ba0cb6a5ded1d19463c396decf211fab15a3862a9b7",
+          "character_snapshot_object_field.frag.spv": "34af9bc4cec81f77a6063af97804bed733a60124ca97bb7b1cb3d8ca15ec6040",
+          "character_snapshot_object_samples.frag.spv": "983cbfdfd449e10c871540f58546f2d66773487adfdcd7d9f1a861810879b8f3",
+          "character_snapshot_object_samples_clipmap.frag.spv": "fccc35925f611c563e06dd573de3db0b30155b12b43539edfed55e907eecc05d",
+          "character_snapshot_object_samples_clipmap_field.frag.spv": "8417e17fa20338e44427870df359d1aef516bf1b76fab57783af1e4ba236b905",
+          "character_snapshot_object_samples_field.frag.spv": "35ec8ec6e728a88bcfa417eb8e2c28a0c3b03e2583ca7e0bb99a00f20b239db6",
+          "character_snapshot_samples.frag.spv": "40aaf9082903e0ade56741eca98491133610660d4365fd2f088cc4467518c8f8",
+          "character_snapshot_samples_clipmap.frag.spv": "e69c5c1c6278328b5cbab63d616b17404a8609dd35b060252e1d146d39593fa5",
+          "character_snapshot_samples_clipmap_field.frag.spv": "1156d7f21c8c0dd75076e231df99a3187e89239334b7424e3044cf413eb295e3",
+          "character_snapshot_samples_field.frag.spv": "f67cbacb02233ef6fc8b57a3ae2ed80abc6cf61a77c8d10c85cc680738dbba37",
+          "clear.comp.spv": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+          "color_grading_lut_test.comp.spv": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+          "cull_indirect.comp.spv": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+          "depth_bias_test.frag.spv": "d3a2d3f4239115d2744fc926736df58c11ab517e1522946d23e28408a821ccd9",
+          "depth_pyramid.comp.spv": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+          "editor_ui.frag.spv": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+          "editor_ui_srgb.frag.spv": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+          "game-ui.frag.spv": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+          "game-ui.vert.spv": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+          "hud.frag.spv": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+          "hud.vert.spv": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+          "ibl_prefilter.comp.spv": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+          "inner_outline.frag.spv": "549f668c0310e5fe9d1e6c949ea7808fa092b24794aa95395ea77e6a097e2c76",
+          "inner_outline.vert.spv": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+          "irradiance_clipmap_test.comp.spv": "18327769bd6bfc0fc9ce5274060e267fab85edea147a7d7076642b910bc926d5",
+          "irradiance_query_test.comp.spv": "bd2ceb9f86c3a14a99b71945b8b7394a34a93239246310a16df997d392655553",
+          "mesh.frag.spv": "00459eb4a8ba4b60ec0c6e67549a7154c5a97d6f98d542489e1590695258ddd1",
+          "mesh.vert.spv": "813283b39cb948a389b3fa674396df792bb88ed5cd481002bb6bd5a18d7bb84a",
+          "mesh_bindless.frag.spv": "4b139e07b34a7b73dcbb638c763cd8f1356801d5bbe8891a76fc260da8928df2",
+          "mesh_bindless_clipmap.frag.spv": "dae20f3b04611c897e02b38fdc4918d53eaf6e193d08d5e13be176ef81f4f446",
+          "mesh_bindless_clipmap_field.frag.spv": "cbb2f3b8b0acfe6af698509e1b6d940b490c9a213095ff67e952faa719dea84c",
+          "mesh_bindless_field.frag.spv": "dedb3daceb13ecabdea084816fd862ac4ad6b4e6a4bc577b85e4e9e5b6db812c",
+          "mesh_bindless_samples.frag.spv": "440ed0e3964a8ec274be74448551854e97cb0400e026a25179cbfb8df6fd9f42",
+          "mesh_bindless_samples_clipmap.frag.spv": "25a5f33c0bda601b45e603e6b658e16a0767d2d4affa632488d98d7a6c9c932b",
+          "mesh_bindless_samples_clipmap_field.frag.spv": "51b820a7a32049aff3bf0da39e5b865bbfcc2775a5c50ce029f5fc7b2a31aa88",
+          "mesh_bindless_samples_field.frag.spv": "1044961ab84ed080df1bc467eb80fb65fb8a0a464482f643936ccf44266478dd",
+          "mesh_clipmap.frag.spv": "0e834fdf5ccfdfa2f4ea180cd3d559a0a4506240c431130888e4fee0f3f6d6ac",
+          "mesh_clipmap_field.frag.spv": "9d5b44901e5db3a4856cb40568e571544ee8c78833ac3329ad272b2461dcac5b",
+          "mesh_compute.vert.spv": "bb6f4d819030f26b041375782b49fe3142e1ed92acf02bda6805b0984533a550",
+          "mesh_field.frag.spv": "181bb2babd28acb704e82f5e81308dc25aa974203493adc6b7121d41bdf73621",
+          "mesh_fog.frag.spv": "93174b0548e0a8f46a10b52fce4f8f0866c5f85fbc7466c35c4aed3310ba10a0",
+          "mesh_fog_bindless.frag.spv": "f5389ffcc76ee5d7cc71c656d5de0a0ac73345cbd4c0f4c73193d6caa165393e",
+          "mesh_fog_bindless_samples.frag.spv": "678556d6d0b82a2afeb0fef5aedfb46262fd61ea91576f374ef68646c9cf9d99",
+          "mesh_fog_samples.frag.spv": "2c80e6e083bca60633a13b16636d866cede0da2f99ce19d1ea4ea3d95c3ea7f7",
+          "mesh_integral.frag.spv": "955c9804134f1c916bd7181f536c94d1db9390b7ef42f1307e2dd1679d41f2db",
+          "mesh_integral_bindless.frag.spv": "b2a6c387aac7d675b808691eafe309052cb1461cd6dd1d9e2cb444a564a9fa5f",
+          "mesh_integral_bindless_clipmap.frag.spv": "cd3eca7c4a7ef3aa361e150a8e2a56da0d82633bb021c89c4c5f90689871cdcb",
+          "mesh_integral_bindless_clipmap_field.frag.spv": "c0a79522f6fbbdc9d66ac2dc3bdb978c01d172464583a7cb45ca3aeb272cc819",
+          "mesh_integral_bindless_field.frag.spv": "d9ef86a2db274731b6bed372a81a8fb5c7da69a3fc43d3269e39bab289651b25",
+          "mesh_integral_clipmap.frag.spv": "1f057e821b9b126333b244a4be091c220d57dd83235f7c11fad2907e8b84a32a",
+          "mesh_integral_clipmap_field.frag.spv": "02b7e18d45e5ac63592416b18ce5d6ac246d9baae607c06a8a211d7671ead08a",
+          "mesh_integral_field.frag.spv": "1e156706d706807faa47bea58fc1d757e467d9fa5c0bd62055692e52d0d2186d",
+          "mesh_integral_object.frag.spv": "fb7d4bdd1a9631ccd7aebc361920f723f314d4abe62517acee0f1d7fcd428213",
+          "mesh_integral_object_bindless.frag.spv": "d7148c6f725bf6470ec8678482188ce7c5f6557f4305b64f81b8edc7dd2ec41c",
+          "mesh_integral_object_bindless_clipmap.frag.spv": "5c8842bb775f62e957dd667af86db63a2ba59ebe5c6a4239d70b73a28fdadf67",
+          "mesh_integral_object_bindless_clipmap_field.frag.spv": "2a55fbd29078404e324b8758d79ad55776a6aefcc438fdca851af4a36e5ff708",
+          "mesh_integral_object_bindless_field.frag.spv": "7cb723a9203643cc5fc8bb2926042038770ffc3645e07308165a45c61e848207",
+          "mesh_integral_object_clipmap.frag.spv": "931fe22705dbae8d3602df582f8fafa8df272a75843cb80305c9e64701cc4f4f",
+          "mesh_integral_object_clipmap_field.frag.spv": "1b7085eec7ad28fd7c8ce1f2a4ed2670ce8ad6127de7ec29940513315ee388cc",
+          "mesh_integral_object_field.frag.spv": "de05599557a6f16d85d9c76dfc2f0284b844579713c9fe4cac7c5e5a88fe7da3",
+          "mesh_object.frag.spv": "2f9e046a167e78a374e59499908d63378e8c59ac39b47b2cc53e4760c1fc97cd",
+          "mesh_object.vert.spv": "cdb4e6f952a66fe9d7007271078ac2a4e7e1de86e5998291973ab93638841d54",
+          "mesh_object_bindless.frag.spv": "2aa61cabcfccebf292b2f7f1fdd536d51c2d0a7a6669a28dad2e7c8e348b3266",
+          "mesh_object_bindless_clipmap.frag.spv": "3c74f06496aa555a8a37e4c397236a6b6f5b2269da6fd2eb5f07ea1bf419a09b",
+          "mesh_object_bindless_clipmap_field.frag.spv": "72d2fb9592feeccc5a8cae4a4ef16fa44a2644375e26279924356e0152cfdbe8",
+          "mesh_object_bindless_field.frag.spv": "cae5324a0638859e477b3c84499791592e90802cabdcde64912a602d73abbe86",
+          "mesh_object_bindless_samples.frag.spv": "8dbd199feca9faeeb62d39427b489762b07996678ec28d8f718ff3a1ce36166c",
+          "mesh_object_bindless_samples_clipmap.frag.spv": "7079adc29bead87bf348ac2bf7587e66b601052f9a6d0942c542bbde6b95cf10",
+          "mesh_object_bindless_samples_clipmap_field.frag.spv": "5ac07408bc0d331eacd4d6f2d45607ba558ea65440302078cd4439a9b5ff0f9c",
+          "mesh_object_bindless_samples_field.frag.spv": "bc7fd47f44135b4acd67006050af9c6d44681c02fa7b2c6e63814b26c57ed49d",
+          "mesh_object_clipmap.frag.spv": "5bf4f6de956b7a14b6b6fd06f4bd5974d56e44259cbe0e1380f39779eb824579",
+          "mesh_object_clipmap_field.frag.spv": "bd9218b325158029266b92bd28bc75dff8076c5682489b516eb962137e251cc0",
+          "mesh_object_compute.vert.spv": "edaa575d1dd7a1401110c0f1b0fe30abfca33ffdbf49ef710bed412bcc246a4c",
+          "mesh_object_field.frag.spv": "e966d4c253b9b153cece0a6717b067ada7344f34baa7e795bb7d84450856bb3c",
+          "mesh_object_samples.frag.spv": "5f9f7b0e67ce6ccfa498d764a2a6f4965e8638b4d0298bcf1d34e7ca8cf31b2d",
+          "mesh_object_samples_clipmap.frag.spv": "96ff1d69533f811588cef826456002611c027eeb5e6eec19f86d7fd356224524",
+          "mesh_object_samples_clipmap_field.frag.spv": "babc1344667915e041640b9c8043673c609fbc23aec25616da5eaf27df795757",
+          "mesh_object_samples_field.frag.spv": "9c0e9e0a46597ed36afc03876d779d446fdcaedbcc69e0fb7a612ed5bcd752df",
+          "mesh_samples.frag.spv": "4eed29b21d9fb03faea8e66ecfc2003279d66136733ac3500d06f2d082bbe477",
+          "mesh_samples_clipmap.frag.spv": "cd6d08d88d6a4cc6fe6a9b7f695aacfac85f87f702fd9075adb5be731cc47805",
+          "mesh_samples_clipmap_field.frag.spv": "c3194dead79e4cbf10e8cb30febd9e59c06eb402ae989a46e52eba80a103e987",
+          "mesh_samples_field.frag.spv": "abc4b47ec64ea4d9ba61fc2e15bba8dcdb801301986b96a8abc82bf68ce24d8b",
+          "motion_outline.vert.spv": "20bdc865d9d02cccd775ff18dc645675c32f0f1d17aac37e5867a574cb3d6875",
+          "motion_pose_test.comp.spv": "c657318588f6a94ba16b53a750ad3c59a13d9559012d740bcb0b374b58f3f2ec",
+          "motion_projection_test.comp.spv": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+          "motion_vector.frag.spv": "41734e1b4299cc052b723d29b0994fe5af468baa04fb0348538cf5fedc2feab8",
+          "motion_vector.vert.spv": "0b7450cba1a1fae84341b764777148c760874f6661a89627fcf47aa5f598e583",
+          "multisample_probe.frag.spv": "8f52538e91940803f1d514b0826b39b5b3c4873318b8f33fe5b92a8f7325a7ec",
+          "multisample_probe.vert.spv": "c926a7e110f846f93f37225b9739c0b92d240988c7dcd9a1ae6a4fadc18031dd",
+          "object_shadow_filter_test.comp.spv": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+          "octahedral_environment_test.comp.spv": "1fc426b94f46af33bba7fb12fa06a5e55494e42252cda392ad9279725b46f630",
+          "outline.frag.spv": "1fbdbe1fcfd4a5a725a43146196f4628e2098daba9731e9a8a923421957b0134",
+          "outline.vert.spv": "ab345fb7947c37da4d9154e4c38fc0fd695a0379ddaec4194c3253e207e80894",
+          "outline_compute.vert.spv": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+          "outline_depth.frag.spv": "0e848e0d66ab546443c5ce4f941ef6d5ce18397a11dbdc1a98831aa4a1bd3079",
+          "outline_depth_bindless.frag.spv": "8b658a22dc7145d27864e0555bcfc425ebc4c1b1aa78e16aca51e893ab6a3171",
+          "outline_depth_bindless_samples.frag.spv": "33d7e9187782d0a2163e1dc37805c306505c105b6c318e9c227e9d136db9fd66",
+          "outline_depth_samples.frag.spv": "044d24b1c37c664e161bdd9c9d81939f4bfb573609c780b7c83193336ef27180",
+          "outline_mask.frag.spv": "2b31604545789a8c07a1d2d9b979d5352fdb1a9fbc5e1219fa5d8376bef23b86",
+          "outline_mask.vert.spv": "254ea599605ab1d157f51102e049c089a7f64058f6d486a7776860efcca91e73",
+          "outline_mask_bindless.frag.spv": "4cc56fc9d2ec292ca9eb164ba43c19e871afa9575e6d09b912705a63e3ddcfb3",
+          "outline_mask_bindless_samples.frag.spv": "343b7b2a5deef6c97bbbccfb2557a725311f9d86a5c26db85d7849b80ac1d2be",
+          "outline_mask_compute.vert.spv": "86b117e98b537b5e3a2b96bd77af1a662597bc10c0cb7a4f6ad38def587e6e97",
+          "outline_mask_samples.frag.spv": "5247371d64a4782baf5487e47dd76d0046ddcb0afadafc313ecf43d1e64727c4",
+          "outline_samples.frag.spv": "e15a79625808349bb5137c2c5bd1386f1360fe80f555bbc70afbbbc8d01c003c",
+          "outline_view_scaled.frag.spv": "5e5f39bb2cc36e8801afb8dd0e80915b77dfa01dfa44944063ba39d658c3b321",
+          "outline_view_scaled.vert.spv": "6832ed81cab49e76c25f3ff043c15ea0c62104c5fa92e3150d38132cff63e9f9",
+          "outline_view_scaled_bindless.frag.spv": "0bd2f66eeed847b0fb30d9ed3805cf87366c7f171077fe657c6e5f1f78243db2",
+          "outline_view_scaled_bindless.vert.spv": "785773d452b53ad047d11b2643d3d6e29c562c3ada1fba3e7018d35bc726ba5a",
+          "outline_view_scaled_bindless_samples.frag.spv": "22e56eca66e79089655ae60b8831c95e32fa42067fd16f82436319a0a64761ac",
+          "outline_view_scaled_compute.vert.spv": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56",
+          "outline_view_scaled_compute_bindless.vert.spv": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2",
+          "outline_view_scaled_samples.frag.spv": "f634d82cc5d256d287c17f96db218642c4c1105c56cb109049a52774bd713464",
+          "pathtracing.comp.spv": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+          "pathtracing.frag.spv": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+          "readonly_depth_test.frag.spv": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+          "readonly_depth_test.vert.spv": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+          "reflection_probe_field_test.comp.spv": "94135d202f7410504e29b1e9562421d1161c5f77c6e341a432eeb985164f5a1e",
+          "reflection_reprojection.comp.spv": "b54cc4ccbcf1dc7fdf7ede3815ce51afccfdac2e853daa0e024f02f24d472158",
+          "reflection_signal_pyramid_float.comp.spv": "5017c38801528ef1c47e3fabbd4d1d8417e5cfa729788fe54e13aeab9706d6c7",
+          "reflection_signal_pyramid_packed.comp.spv": "9d9fc987c83a72728ac0296cdbf85596c658e1535a0ef72edc25aab44792926f",
+          "reflection_spatial_filter.comp.spv": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+          "reflection_surface_test.comp.spv": "d959c5051a98ef66fd9e46278dee1baaa248f30fbe536e39e869619f7a2552e1",
+          "reflection_temporal_float.comp.spv": "66c44b623b83f9e6176e7c44f7039992ada997ac29933d4224cac71c7bc00020",
+          "reflection_temporal_packed.comp.spv": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3",
+          "reflection_trace_float.comp.spv": "4e89f2e77717f918f86538b504a38d3469609848c4c59b8990d6c24625ee4351",
+          "reflection_trace_packed.comp.spv": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+          "sampled_upload_test.comp.spv": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+          "scene_instance_layout_test.comp.spv": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+          "scene_multisample_probe.frag.spv": "b01b9af31ae9f4e53d16ec248c0ff6cba9dd320abd55e92d83eb1f68c4ad9dfb",
+          "scene_multisample_resolve.frag.spv": "442a2b06917d60cb1c9006a45ff95afdd919ce96d5648491a9eedefbee64118c",
+          "shadow.frag.spv": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+          "shadow.vert.spv": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5",
+          "shadow_bindless.frag.spv": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+          "shadow_bounds.comp.spv": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+          "shadow_compute.vert.spv": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+          "shadow_filter_test.comp.spv": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+          "skin.comp.spv": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4",
+          "sky.frag.spv": "a9b4c95c9ffbdcd965fdbb7e8c0a756bdba6d5ad6b35111de52977b202c62a16",
+          "spatial_antialiasing.frag.spv": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+          "specialization_test.comp.spv": "b38e220726a262bbd12a1893fae88b010832f88f2381402e36a3d783f766ea96",
+          "specialization_test.frag.spv": "c3f301bbf5bdbe5c7279f138fc158f51bde7502a9e3a5042cfe5c264e22c44a8",
+          "specialization_test.vert.spv": "cd32916b0e5871e6206493e6fc9f4e9ddc9fd467f77126a3aa4ecdebdb435e41",
+          "specular_ramp_test.comp.spv": "579badc92e94a243bec3335fe5064122d6b65f93d64baf6b6e7fe74b0f2e6da3",
+          "surface_response_test.comp.spv": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+          "temporal_copy.frag.spv": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+          "temporal_resolve.frag.spv": "244855bdaf134cd6ad898eefb753931d363fd3d8bfa8c7518c03ab9d2c999ef0",
+          "view_fog_surface.frag.spv": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+          "view_fog_surface_samples.frag.spv": "4f9f518a961e886c094b92c70d4232b5e3ca70ece4721182dd4429f5b8673ef1",
+          "view_resolve.frag.spv": "cb148a239abe0240a9501225cbd95b33506d3ae875ef4921d24c00d9c762e3f9",
+          "visibility_prototype.comp.spv": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a"
+        },
+        "inputs": [
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/project.azureproject",
+            "sha256": "da6121f2f9af86c013d83b96785287c3f19ca51b845f61a1bf01bb3fbece3213",
+            "bytes": 621
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/scene.azurelevel",
+            "sha256": "251aa2be3af2da38c800877b4bf64e8ac5c1ed409681f776cb43a5bba6218b97",
+            "bytes": 4170104
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/content-character/hero-restored-inputs-v7.glb",
+            "sha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb",
+            "bytes": 28283500
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-0.azurematerial",
+            "sha256": "b959f3c38e6be013641ad68221bdbeb1ea1b58ebf74892a290a991893022fad7",
+            "bytes": 28005
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-1.azurematerial",
+            "sha256": "7b05827ef427a5137ff194a0b271ca2796c857d0a81b187c7897f835e140986d",
+            "bytes": 31909
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-10.azurematerial",
+            "sha256": "1207dd33c57674142f54985a991a73475a2929c397a81f356ed8a7e448843348",
+            "bytes": 21533
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-11.azurematerial",
+            "sha256": "501827cef6d5b914db31794f61b8858015167ec6552c8c8a9015b05ff42c4665",
+            "bytes": 22418
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-12.azurematerial",
+            "sha256": "cefbf58df2ac625fbbbaf96be68a89d0beea7b11bec33cc6a93598f168979682",
+            "bytes": 20012
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-2.azurematerial",
+            "sha256": "63465376ec9a222028f8e0400ca015b9054523d37eff2ef360d1033685a2d539",
+            "bytes": 31413
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-3.azurematerial",
+            "sha256": "55e4b31fff80d95b5e14685efc08c512444a70015aa0433aacc7485e6050221b",
+            "bytes": 30741
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-4.azurematerial",
+            "sha256": "76ea758de67f868299b0dc6120c8ed7356a3076242da605345d82821b85a15e5",
+            "bytes": 32627
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-5.azurematerial",
+            "sha256": "6216895e3fbf40146d4c09250c9111ccb7b35db91989624cbe4f0d3ff103a133",
+            "bytes": 31413
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-6.azurematerial",
+            "sha256": "950d7bc898265fda9d0a50656ebb5302750779fd51d67dfaba326bec71d6b189",
+            "bytes": 25478
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-7.azurematerial",
+            "sha256": "988af44d222563ff63279726c5417d99ba241cdba3c6dde6d0e9fb1b74d07914",
+            "bytes": 21591
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-8.azurematerial",
+            "sha256": "02ecdceafa9a95cc9fcd4abb8971f68e628839aed8a3e877b07fee0c4eb81959",
+            "bytes": 28252
+          },
+          {
+            "path": "build/runs/20261027-002548-native-hair-layer-region-closure-61c105/main-candidate-v7/assets/restored-character-materials/material-9.azurematerial",
+            "sha256": "4325859f1a6f7414ffe5d2eac331fbc26375c211782b92dae8cefb5322e81663",
+            "bytes": 30804
+          },
+          {
+            "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/continuation.json",
+            "sha256": "72589a6dee4786a0eb8d5d21787c20daf7d8bbe6e066702a939548e92956a4f5",
+            "bytes": 4086
+          },
+          {
+            "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/original-crash-analysis.json",
+            "sha256": "d5f8798f45e24c75561443a8514f95f2de78d784ccff6acbdbdaac28454e69fe",
+            "bytes": 32746
+          },
+          {
+            "path": "build/runs/20261029-071130-main-character-joint-budget-2cddc4/original-crash.dmp",
+            "sha256": "4c75197ded58caa4457e8ec7031754560a084dc7fd092236d34cebca1c873191",
+            "bytes": 59823279
+          }
+        ],
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\feature-native-capture\\frames",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\main-candidate-v7\\project.azureproject",
+          "--width",
+          "1920",
+          "--height",
+          "1080",
+          "--capture-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-native-release-aa1\\frames",
+          "--capture-frames",
+          "8",
+          "--fixed-frame-step",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--qa-isolation",
+          "beauty",
+          "--runtime-report",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-native-release-aa1\\runtime.json"
+        ],
+        "comparisons": [
+          {
+            "frame": "frame_000000.png",
+            "pngBytesExact": true,
+            "differentPixels": 0,
+            "maximumChannelError": 0,
+            "outputSha256": "b565f136509856b2ad24ed0b61d9578467c76857f30b447e4381afdf11485950",
+            "referenceSha256": "b565f136509856b2ad24ed0b61d9578467c76857f30b447e4381afdf11485950"
+          },
+          {
+            "frame": "frame_000001.png",
+            "pngBytesExact": true,
+            "differentPixels": 0,
+            "maximumChannelError": 0,
+            "outputSha256": "3ff0ec7fc4e6ee3574068f3f5ce7322391d1fa5e1d6bca3032d62c061d6ad3be",
+            "referenceSha256": "3ff0ec7fc4e6ee3574068f3f5ce7322391d1fa5e1d6bca3032d62c061d6ad3be"
+          },
+          {
+            "frame": "frame_000002.png",
+            "pngBytesExact": true,
+            "differentPixels": 0,
+            "maximumChannelError": 0,
+            "outputSha256": "baff819f0089671ce229efae1865bb3bf19ff054d816da92670262beee0cced5",
+            "referenceSha256": "baff819f0089671ce229efae1865bb3bf19ff054d816da92670262beee0cced5"
+          },
+          {
+            "frame": "frame_000003.png",
+            "pngBytesExact": true,
+            "differentPixels": 0,
+            "maximumChannelError": 0,
+            "outputSha256": "5035cfcc4e16c557c894ec0c12938eee6ee7d24388bf2ca045ce998bacec91de",
+            "referenceSha256": "5035cfcc4e16c557c894ec0c12938eee6ee7d24388bf2ca045ce998bacec91de"
+          },
+          {
+            "frame": "frame_000004.png",
+            "pngBytesExact": true,
+            "differentPixels": 0,
+            "maximumChannelError": 0,
+            "outputSha256": "9af55bcfcd45196d720be48b225356ec6f4d76ea2b412b081a05f30a7b636bd7",
+            "referenceSha256": "9af55bcfcd45196d720be48b225356ec6f4d76ea2b412b081a05f30a7b636bd7"
+          },
+          {
+            "frame": "frame_000005.png",
+            "pngBytesExact": true,
+            "differentPixels": 0,
+            "maximumChannelError": 0,
+            "outputSha256": "bae9c631d5074c60cf140fa8df90dbcb66211daf9349d19f6dba061c177525a8",
+            "referenceSha256": "bae9c631d5074c60cf140fa8df90dbcb66211daf9349d19f6dba061c177525a8"
+          },
+          {
+            "frame": "frame_000006.png",
+            "pngBytesExact": true,
+            "differentPixels": 0,
+            "maximumChannelError": 0,
+            "outputSha256": "869247031c347b033a1bfc35b5a47da5e050e6e07084722002c495a3c613ac4f",
+            "referenceSha256": "869247031c347b033a1bfc35b5a47da5e050e6e07084722002c495a3c613ac4f"
+          },
+          {
+            "frame": "frame_000007.png",
+            "pngBytesExact": true,
+            "differentPixels": 0,
+            "maximumChannelError": 0,
+            "outputSha256": "5b5b2c20ebf96525b2b68de9c96db5e56eb7ca2ee9c97654171cb9242c644696",
+            "referenceSha256": "5b5b2c20ebf96525b2b68de9c96db5e56eb7ca2ee9c97654171cb9242c644696"
+          }
+        ],
+        "startUtc": "2026-10-30T20:04:47.973680+00:00",
+        "pid": 34228,
+        "processSeconds": 152.1214254000006,
+        "exitCode": 0,
+        "startupAndUnload": "passed",
+        "exactPngPairs": 8,
+        "elapsedSeconds": 165.31067959999928,
+        "endUtc": "2026-10-30T20:07:21.557879+00:00"
+      },
+      "receipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-native-release-aa1/summary.json",
+        "sha256": "d37350ffa8649dcfb1385cc53d2d142a16e4b7362aad5f85823b72b6a6807f44"
+      },
+      "log": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-native-release-aa1/player.log",
+        "sha256": "dfe8f05e24ff70955ea5cc833e2052ccda782555c843e69a231d52230523f50e"
+      }
+    }
+  },
+  "fixtures": [
+    {
+      "configuration": "debug",
+      "antiAliasing": 0,
+      "exactPngPairs": 2,
+      "receipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-feature-debug-aa0/result.json",
+        "sha256": "558b0682fa48700a65261a0c7d7279cdaa62e16e848b718e58eb48e360139858"
+      },
+      "playerSha256": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab",
+      "images": {
+        "frame_000000.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1",
+        "frame_000001.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1"
+      }
+    },
+    {
+      "configuration": "debug",
+      "antiAliasing": 3,
+      "exactPngPairs": 6,
+      "receipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-feature-debug-aa3/result.json",
+        "sha256": "ae590d2ddc25580d838125510692c1ba3cd5c21c1f7839a9e27be3bf34ad0367"
+      },
+      "playerSha256": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab",
+      "images": {
+        "frame_000000.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1",
+        "frame_000001.png": "1ee2748b1df7e75723b0dde4cf119a0bcfe9a9a0f66d3be4fc0827af83b7dee6",
+        "frame_000002.png": "d010680dda2d723b18fec6f072600e18765af207813fc91ce3a228b122e5c7fc",
+        "frame_000003.png": "4785ffb8919e5c43266b70af0667f5ea10634e3cbacc4fef5ef6e4cb12865588",
+        "frame_000004.png": "5c3c763e1067bdf2f99bf26c5d9160381e775ed818dc743b36190562599e2e2d",
+        "frame_000005.png": "07b1e1002195e7e35dbeea1efc6d88914d2cfb83f11c36fe9aabdbf064e8a84d"
+      }
+    },
+    {
+      "configuration": "debug",
+      "antiAliasing": 4,
+      "exactPngPairs": 2,
+      "receipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-feature-debug-aa4/result.json",
+        "sha256": "3442542aa9515476852677fb9e79256f9631783a06369512dc7bd2a2446d772c"
+      },
+      "playerSha256": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab",
+      "images": {
+        "frame_000000.png": "f4d13d2a0efb87b793d01a178588c6c4857c2dcd08a3a47e5e46cf94f3b90496",
+        "frame_000001.png": "f4d13d2a0efb87b793d01a178588c6c4857c2dcd08a3a47e5e46cf94f3b90496"
+      }
+    },
+    {
+      "configuration": "release",
+      "antiAliasing": 0,
+      "exactPngPairs": 2,
+      "receipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-feature-release-aa0/result.json",
+        "sha256": "619a27149b3b02373dd8029acc2dd962f74003b5bf984c83cc6795e77675af14"
+      },
+      "playerSha256": "a76c6185717c7303ab27705bbcdc3c2eb33337c4db3b7b0429ba975ca344e805",
+      "images": {
+        "frame_000000.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1",
+        "frame_000001.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1"
+      }
+    },
+    {
+      "configuration": "release",
+      "antiAliasing": 3,
+      "exactPngPairs": 6,
+      "receipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-feature-release-aa3/result.json",
+        "sha256": "d66710139565991b1a994d4f643625b60d8886daf9e858912fea13b7ec1446ac"
+      },
+      "playerSha256": "a76c6185717c7303ab27705bbcdc3c2eb33337c4db3b7b0429ba975ca344e805",
+      "images": {
+        "frame_000000.png": "371b679669eed4cd5f41fbb5ecb226f99858e5b0bd17e3aebd9047ac4175fac1",
+        "frame_000001.png": "1ee2748b1df7e75723b0dde4cf119a0bcfe9a9a0f66d3be4fc0827af83b7dee6",
+        "frame_000002.png": "d010680dda2d723b18fec6f072600e18765af207813fc91ce3a228b122e5c7fc",
+        "frame_000003.png": "4785ffb8919e5c43266b70af0667f5ea10634e3cbacc4fef5ef6e4cb12865588",
+        "frame_000004.png": "5c3c763e1067bdf2f99bf26c5d9160381e775ed818dc743b36190562599e2e2d",
+        "frame_000005.png": "07b1e1002195e7e35dbeea1efc6d88914d2cfb83f11c36fe9aabdbf064e8a84d"
+      }
+    },
+    {
+      "configuration": "release",
+      "antiAliasing": 4,
+      "exactPngPairs": 2,
+      "receipt": {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-feature-release-aa4/result.json",
+        "sha256": "8bbc91161a1813f3a5786e0cd0adbbc4b513a6802881a87bf392069d6f9c97dc"
+      },
+      "playerSha256": "a76c6185717c7303ab27705bbcdc3c2eb33337c4db3b7b0429ba975ca344e805",
+      "images": {
+        "frame_000000.png": "f4d13d2a0efb87b793d01a178588c6c4857c2dcd08a3a47e5e46cf94f3b90496",
+        "frame_000001.png": "f4d13d2a0efb87b793d01a178588c6c4857c2dcd08a3a47e5e46cf94f3b90496"
+      }
+    }
+  ],
+  "red": {
+    "status": "red-budget-proven; existing-contracts-pass",
+    "phase": "P0-index-red",
+    "sourceCommit": "286809ae8ac14112d963fd8e03f8a82417b26326",
+    "sourceFiles": {
+      "src\\runtime\\AssetDatabase.cpp": "625b2985899a6c4ebdb0eb4c13f6041dee5899e4c4ca4f8e576ad33273d180d9",
+      "src\\runtime\\AssetDatabase.hpp": "31b3116adfca6dbd61b0dde86efb2245f508bdffc55eb4911e2caa09da649b3a",
+      "tests\\AssetDependencyIndexTests.cpp": "327027fa9f6e7113a1ccb0d09505b9cac3b4b4abb26b58d1fe2f4ff9bab95d68"
+    },
+    "results": [
+      {
+        "configuration": "debug",
+        "budget": "expected failure",
+        "contracts": "passed",
+        "ctestExitCode": 8,
+        "logSha256": "7c96aaf2f111281e1a3f1b5c479836a4dcd52dff89b704e2a77a42d8a558e2eb"
+      },
+      {
+        "configuration": "release",
+        "budget": "expected failure",
+        "contracts": "passed",
+        "ctestExitCode": 8,
+        "logSha256": "53ad467130c50d8997cdd13fe0f9309b949491b92db75d52f1291f75ab5d75f3"
+      }
+    ]
+  },
+  "targeted": [
+    {
+      "configuration": "debug",
+      "passed": 4,
+      "retainedBytes": 20072
+    },
+    {
+      "configuration": "release",
+      "passed": 4,
+      "retainedBytes": 16200
+    }
+  ],
+  "managedWorkflowRemediation": {
+    "manifest": "docs/acceptance/recovery/evidence/2026-10-31-managed-cleanup.json",
+    "retest": {
+      "path": "build/runs/20261031-035308-mw-lock-c17aa4/retest.json",
+      "sha256": "8c3dfac1fcdbed17953db3ca12f3e3b62be8af8d43d6d662be94729ea853752a"
+    },
+    "configurations": [
+      {
+        "configuration": "debug",
+        "backend": "coreclr",
+        "exitCode": 0
+      },
+      {
+        "configuration": "debug",
+        "backend": "nativeaot",
+        "exitCode": 0
+      },
+      {
+        "configuration": "release",
+        "backend": "coreclr",
+        "exitCode": 0
+      },
+      {
+        "configuration": "release",
+        "backend": "nativeaot",
+        "exitCode": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Full Debug native scene again exceeded the unchanged 600-second deadline after measured index-memory improvement; both failures remain. Retry requires a related startup/resource-loading fix or a measured environment change.",
+    "Original TinyGLTF initialization access violation root cause is unresolved.",
+    "739-record memory and timing observations belong to the isolated instrumented AssetDatabase scan, not whole Player or sustained performance.",
+    "New Python CTest registration was configured after the full native builds; C++ and shader inputs remained unchanged.",
+    "Archived image compatibility, AA4 thermal conditions, final dual-device delivery and manual review remain pending under existing gates."
+  ],
+  "validationToolsCommit": "d72983e9bc20906a91ab9e1a2ed74338dda5a5f4",
+  "documentation": {
+    "commands": [
+      {
+        "name": "index-doc-style",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "tools/check_doc_style.py",
+          "README.md",
+          "docs/runtime/assets-levels.md",
+          "docs/plans/azure-engine-plan.md",
+          "docs/plans/2026-10-30-development-recovery.md",
+          "docs/plans/2026-10-31-asset-dependency-index.md",
+          "docs/acceptance/recovery/asset-dependency-index.md",
+          "docs/acceptance/recovery/2026-10-30.md",
+          "docs/acceptance/p8/2026-10-31-environment.md"
+        ]
+      },
+      {
+        "name": "index-doc-links",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\check-phase-links.py",
+          "README.md",
+          "docs/runtime/assets-levels.md",
+          "docs/plans/azure-engine-plan.md",
+          "docs/plans/2026-10-30-development-recovery.md",
+          "docs/plans/2026-10-31-asset-dependency-index.md",
+          "docs/acceptance/recovery/asset-dependency-index.md",
+          "docs/acceptance/recovery/2026-10-30.md",
+          "docs/acceptance/p8/2026-10-31-environment.md"
+        ]
+      },
+      {
+        "name": "index-stage-status",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "tools/check_stage_status.py"
+        ]
+      },
+      {
+        "name": "index-stage-tests",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "tools/test_stage_status.py"
+        ]
+      },
+      {
+        "name": "index-mkdocs-configured",
+        "exitCode": 0,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-m",
+          "mkdocs",
+          "build",
+          "--config-file",
+          "mkdocs.yml",
+          "--site-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261030-232017-recovery-init-crash-3bd962\\index-docs-site"
+        ]
+      }
+    ],
+    "warningAudit": {
+      "status": "passed",
+      "warningCount": 85,
+      "added": [],
+      "removed": [],
+      "priorAudit": "feature-mkdocs-warning-audit.json",
+      "strictPriorExitCode": 1
+    },
+    "receipts": [
+      {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-doc-style.log",
+        "sha256": "14200a262c07586fb106ae098ee6f5971eb460c5f776fcd8731d1fecdc835925"
+      },
+      {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-doc-links.log",
+        "sha256": "90805c707e26249fbe381cabefbabdf46717c0847f2dc8f930f4a584dd23fdf3"
+      },
+      {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-stage-status.log",
+        "sha256": "93b5cece04331eef93578095b61c3fa8bb21a4dc00996f6b6ffbd1e1e305580f"
+      },
+      {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-stage-tests.log",
+        "sha256": "f06cb905945fcb9fa2ce7368674e1866997ec366e8fee2ab4f7a3e59599338ad"
+      },
+      {
+        "path": "build/runs/20261030-232017-recovery-init-crash-3bd962/index-mkdocs-configured.log",
+        "sha256": "0563ec333d7018a718a5d648db36aa50b5fe4d4d0f7f3f4644fd9983be67f957"
+      }
+    ]
+  }
+}

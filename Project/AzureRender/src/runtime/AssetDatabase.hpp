@@ -45,7 +45,8 @@ private:
         std::filesystem::file_time_type sourceTime, metadataTime;
         std::uintmax_t size=0;
         std::string id;
-        nlohmann::json metadata, document;
+        nlohmann::json metadata;
+        std::vector<std::string> references;
         std::uint64_t contentHash=0, baseFingerprint=0;
     };
     std::shared_ptr<const std::map<std::filesystem::path,SourceState>> sources_=std::make_shared<const std::map<std::filesystem::path,SourceState>>();

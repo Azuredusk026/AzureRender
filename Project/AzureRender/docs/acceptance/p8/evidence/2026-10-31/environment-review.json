@@ -42,6 +42,15 @@
       ],
       "retryTrigger": "Cooling or power environment changes and full warm rendering remains below reported thermal limits",
       "required": "Paired short comparison first, then formal 15-round and 30-minute batches for the final frozen candidate"
+    },
+    {
+      "id": "native-debug-startup",
+      "state": "Pending",
+      "owner": "Runtime recovery and resource loading",
+      "evidence": "docs/acceptance/recovery/evidence/2026-10-31-dependency-index.json",
+      "failedDiagnostic": "index-native-debug-aa4/summary.json",
+      "retryTrigger": "Related startup/resource-loading fix or measured environment change; deadline remains 600 seconds",
+      "candidatePlayerSha256": "cdddaba9cfd4b1ed229d4c3ceca88f59f6b5ed7e5b608939ce906fc9eaef28ab"
     }
   ],
   "unchangedAcceptance": [

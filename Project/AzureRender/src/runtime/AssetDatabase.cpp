@@ -155,6 +155,51 @@ void cache(const std::filesystem::path& path, const AssetRecord& record) {
     std::string data = "AZCACHE1"; append64(data, record.fingerprint); append64(data, source.size()); data += source;
     writeCache(path, data);
 }
+std::vector<std::string> discoverAssetReferences(const Json& document,const std::string& extension,
+    const std::string& virtualPath,const Project& project) {
+    std::vector<std::string> references;
+    const auto relativeReference=[&](const std::string& uri) {
+        const auto slash=virtualPath.find(":/");
+        const auto relative=(std::filesystem::u8path(virtualPath.substr(slash+2)).parent_path()/std::filesystem::u8path(uri)).lexically_normal();
+        const auto reference=virtualPath.substr(0,slash+2)+relative.generic_u8string();
+        static_cast<void>(project.resolve(reference));references.push_back(reference);
+    };
+    if(extension==".azure2d") {
+        for(const auto& item:document.at("items"))if(item.contains("image"))
+            relativeReference(item.at("image").get<std::string>());
+    }
+    if(extension==".azscript") {
+        if(!document.is_object() || !document.at("schemaVersion").is_number_integer() || document.at("schemaVersion")!=1
+            || !document.at("type").is_string() || !std::regex_match(document.at("type").get<std::string>(),std::regex("[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+")))
+            throw std::invalid_argument("Invalid managed script asset schema or type");
+        for(const auto& field:document.items())if(field.key()!="schemaVersion" && field.key()!="type" && field.key()!="assembly")
+            throw std::invalid_argument("Unknown managed script asset field");
+        if(document.contains("assembly")) {
+            const auto reference=document.at("assembly").get<std::string>();
+            if(reference.empty())throw std::invalid_argument("Managed assembly reference is empty");
+            references.push_back(reference);
+        }
+    }
+    if(extension==".gltf" || extension==".azurelevel" || extension==".azureprefab" || extension==".azscene" || extension==".azurematerial") {
+        const auto walk=[&](const Json& value,auto&& self)->void {
+            if(value.is_object())for(const auto& field:value.items()) {
+                if((field.key()=="asset" || field.key()=="prefab")&&field.value().is_string())references.push_back(field.value().get<std::string>());
+                else if(field.key()=="reflectionProbe"&&field.value().is_object())references.push_back(field.value().at("texture").get<std::string>());
+                else if(field.key()=="materialSlots"&&field.value().is_object()){for(const auto& slot:field.value().items())references.push_back(slot.value().get<std::string>());}
+                else self(field.value(),self);
+            }
+            else if(value.is_array())for(const auto& child:value)self(child,self);
+        };
+        walk(document,walk);
+        if(extension==".gltf")for(const auto* key:{"buffers","images"})
+            for(const auto& object:document.value(key,Json::array())) {
+                const auto uri=object.value("uri",std::string());
+                if(uri.empty()||uri.rfind("data:",0)==0)continue;
+                relativeReference(uri);
+            }
+    }
+    return references;
+}
 }
 std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<void()> check) {
     // Patterns are immutable and shared across scans, including concurrent
@@ -162,10 +207,8 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
     static const std::regex uuidPattern("[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}");
     statistics_={};
     std::map<std::string, AssetRecord> candidate;
-    std::map<std::string, Json> metadata;
     std::map<std::string, std::string> paths;
     std::map<std::filesystem::path,SourceState> sources;
-    std::map<std::string,Json> documents;
     for (const auto& mount : project_.mounts) {
         for (const auto& entry : std::filesystem::recursive_directory_iterator(mount.second)) {
             if(check)check();
@@ -182,7 +225,7 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                 const auto& state=previous->second;
                 if(!candidate.emplace(state.id,AssetRecord{state.id,virtualPath,path,state.baseFingerprint,state.contentHash,{}}).second)
                     throw std::runtime_error("Duplicate asset UUID: "+state.id);
-                metadata[state.id]=state.metadata;documents[state.id]=state.document;paths[virtualPath]=state.id;
+                paths[virtualPath]=state.id;
                 sources[path]=state;++statistics_.filesReused;continue;
             }
             Json meta;
@@ -214,13 +257,16 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
                 document["nodes"]=Json::array();for(const auto& node:scene.nodes)if(!node.materialSlots.empty())document["nodes"].push_back({{"materialSlots",node.materialSlots}});
             }
             const auto& record=candidate.at(id);
-            sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,meta,document,record.contentHash,record.fingerprint};
-            metadata[id] = meta; documents[id]=std::move(document); paths[virtualPath] = id;
+            auto references=discoverAssetReferences(document,extension,virtualPath,project_);
+            sources[path]={time,std::filesystem::last_write_time(sidecar),size,id,std::move(meta),std::move(references),record.contentHash,record.fingerprint};
+            paths[virtualPath] = id;
         }
     }
     for (auto& entry : candidate) {
         if(check)check();
         auto& record = entry.second;
+        const auto& sourceState=sources.at(record.path);
+        const auto& meta=sourceState.metadata;
         std::set<std::string> dependencies;
         const auto add = [&](const std::string& reference) {
             if (reference.empty() || reference.rfind("engine:/", 0) == 0) return;
@@ -233,52 +279,9 @@ std::vector<std::string> AssetDatabase::refresh(bool verifyAll,std::function<voi
             if (!candidate.count(id)) throw std::runtime_error("Missing asset dependency: " + id);
             dependencies.insert(id);
         };
-        for (const auto& dep : metadata.at(record.id).value("dependencies", Json::array())) add(dep.get<std::string>());
-        const auto extension = assetExtension(record.path);
-        if(extension==".azure2d") {
-            for(const auto& item:documents.at(record.id).at("items"))if(item.contains("image")) {
-                const auto slash=record.virtualPath.find(":/");
-                const auto relative=(std::filesystem::u8path(record.virtualPath.substr(slash+2)).parent_path()/std::filesystem::u8path(item.at("image").get<std::string>())).lexically_normal();
-                const auto reference=record.virtualPath.substr(0,slash+2)+relative.generic_u8string();
-                static_cast<void>(project_.resolve(reference));add(reference);
-            }
-        }
-        if(extension==".azscript") {
-            const auto& document=documents.at(record.id);
-            if(!document.is_object() || !document.at("schemaVersion").is_number_integer() || document.at("schemaVersion")!=1
-                || !document.at("type").is_string() || !std::regex_match(document.at("type").get<std::string>(),std::regex("[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)+")))
-                throw std::invalid_argument("Invalid managed script asset schema or type");
-            for(const auto& field:document.items())if(field.key()!="schemaVersion" && field.key()!="type" && field.key()!="assembly")
-                throw std::invalid_argument("Unknown managed script asset field");
-            if(document.contains("assembly")) {
-                const auto reference=document.at("assembly").get<std::string>();
-                if(reference.empty())throw std::invalid_argument("Managed assembly reference is empty");add(reference);
-            }
-        }
-        if (extension == ".gltf" || extension == ".azurelevel" || extension == ".azureprefab" || extension == ".azscene" || extension==".azurematerial") {
-            const Json& document = documents.at(record.id);
-            const auto walk = [&](const Json& value, auto&& self) -> void {
-                if (value.is_object()) for (const auto& field : value.items()) {
-                    if ((field.key() == "asset" || field.key() == "prefab") && field.value().is_string()) add(field.value().get<std::string>());
-                    else if(field.key()=="reflectionProbe"&&field.value().is_object())add(field.value().at("texture").get<std::string>());
-                    else if(field.key()=="materialSlots"&&field.value().is_object()){for(const auto& slot:field.value().items())add(slot.value().get<std::string>());}
-                    else self(field.value(), self);
-                }
-                else if (value.is_array()) for (const auto& child : value) self(child, self);
-            };
-            walk(document, walk);
-            if (extension == ".gltf") for (const auto* key : {"buffers", "images"})
-                for (const auto& object : document.value(key, Json::array())) {
-                    const auto uri = object.value("uri", std::string());
-                    if (uri.empty() || uri.rfind("data:", 0) == 0) continue;
-                    const auto slash = record.virtualPath.find(":/");
-                    const auto relative = (std::filesystem::u8path(record.virtualPath.substr(slash + 2)).parent_path() / std::filesystem::u8path(uri)).lexically_normal();
-                    const auto virtualPath = record.virtualPath.substr(0, slash + 2) + relative.generic_u8string();
-                    static_cast<void>(project_.resolve(virtualPath)); add(virtualPath);
-                }
-        }
+        for(const auto& dep:meta.value("dependencies",Json::array()))add(dep.get<std::string>());
+        for(const auto& reference:sourceState.references)add(reference);
         record.dependencies.assign(dependencies.begin(), dependencies.end());
-        const auto& meta=metadata.at(record.id);
         if(meta.contains("importGeneration")) {
             record.importGeneration=GenerationManifest::fromJson(meta.at("importGeneration"));
             const auto& imported=*record.importGeneration;
