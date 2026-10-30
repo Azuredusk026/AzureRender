@@ -40,8 +40,18 @@
           "graphicsClockMHz": 2295.0
         }
       ],
-      "retryTrigger": "Cooling or power environment changes and full warm rendering remains below reported thermal limits",
-      "required": "Paired short comparison first, then formal 15-round and 30-minute batches for the final frozen candidate"
+      "retryTrigger": "Cooling/power environment change or a measured reduction of main GPU work; preserve thermal headroom throughout warm rendering",
+      "required": "Paired short comparison first, then formal 15-round and 30-minute batches for the final frozen candidate",
+      "qualifiedRetests": [
+        {
+          "sourceCandidate": "ac7d127",
+          "evidence": "docs/acceptance/p8/evidence/2026-10-31/index-aa4-review.json",
+          "status": "environment-rejected",
+          "reason": "Measured compact-index memory/warm-refresh change qualified one short diagnostic",
+          "functionalFrames": 150,
+          "controlRun": false
+        }
+      ]
     },
     {
       "id": "native-debug-startup",
