@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "scope": "Player per-asset check-project exception context",
+  "sourceCommit": "e9d8a535536bafcc55df9763eac7cfe0ecb3ca46",
+  "sourceSha256": {
+    "src/player/main.cpp": "099219d6ec826408278360a511783fe133f31a369d1549b1331279da06bcef57",
+    "tools/test_player_cli.py": "c25faf7e692fb519f13a628223e11c03a071823b27d25bfe909e289b6050b10c"
+  },
+  "programs": {
+    "debug": "22c9f79d87520598d3f3bd1d807a224bd309fa7e939dd2a75818161f743b9969",
+    "release": "784a0574cd358a5c79cc2c0d0a8bf2b3a01946b17eb99230b5d89748db9cd29d"
+  },
+  "red": "Malformed unreferenced fixture rejected without its path",
+  "green": "Both configurations reject with path and original error; repaired fixture validates",
+  "fullProjectCheckScope": "Closed 514-model input check before exception-context-only rebuild; successful validation logic unchanged",
+  "renderingScope": "No renderer or asset acceptance changes"
+}

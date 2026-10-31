@@ -1,0 +1,18 @@
+{
+  "status": "unreferenced-diagnostic-input-retained-outside-mounts",
+  "reason": "Captured baked eyebrow has no morph targets but retains two default weights. Startup references and source UUID references are absent.",
+  "references": [],
+  "retainedFiles": [
+    {
+      "source": "build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\project\\content-character\\hero-capture-baked-10401-020919.glb",
+      "retained": "build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\unmounted-diagnostic-source\\hero-capture-baked-10401-020919.glb",
+      "sha256": "a434bd68e9eb836848938030239a6ab92792ff8ef43b0939fd6d7f4d158ce8b0"
+    },
+    {
+      "source": "build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\project\\content-character\\hero-capture-baked-10401-020919.glb.azmeta",
+      "retained": "build\\runs\\20261031-183314-full-scene-playable-validation-d5257e\\unmounted-diagnostic-source\\hero-capture-baked-10401-020919.glb.azmeta",
+      "sha256": "26baa924bf73c87b70d1bbc3ea7273140d0e943daedf326931bf1a4e52e6d07e"
+    }
+  ],
+  "originalBackupModified": false
+}

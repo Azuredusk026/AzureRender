@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_player_cli.py", line 65, in <module>
+    verify(parser.parse_args().executable)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_player_cli.py", line 58, in verify
+    assert bad.name in diagnostic,diagnostic
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Project loaded: original (f9d6fe10-5bdf-4778-a1ee-153d0bb242fe)
+AzurePlayer: Morph default weight count mismatch

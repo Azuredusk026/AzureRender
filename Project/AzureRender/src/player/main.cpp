@@ -90,8 +90,12 @@ int main(int argc, char** argv) {
             auto assets=startup.assets();
             for (const auto& item : assets.records()) {
                 const auto& path = item.second.path;
-                if(path.extension()==".azurelevel")static_cast<void>(azurerender::Level::load(path,assets));
-                if(path.extension()==".gltf" || path.extension()==".glb")static_cast<void>(loadGltfAsset(path.u8string()));
+                try {
+                    if(path.extension()==".azurelevel")static_cast<void>(azurerender::Level::load(path,assets));
+                    if(path.extension()==".gltf" || path.extension()==".glb")static_cast<void>(loadGltfAsset(path.u8string()));
+                } catch(const std::exception& error) {
+                    throw std::runtime_error("Project asset '"+path.u8string()+"': "+error.what());
+                }
             }
             azurerender::RuntimeLifecycle runtime;runtime.loadScene(startup.level().scene);runtime.start();
             azurerender::GameRuntime game(runtime,azurerender::application::systems(),azurerender::application::configuration(project));
