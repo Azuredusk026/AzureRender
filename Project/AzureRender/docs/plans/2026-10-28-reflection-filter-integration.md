@@ -401,6 +401,9 @@ R5 的相机适配提供反向深度和上方像素原点。
 
 R5 的公共表面准备提供分帧深度、法线、掩码及足迹。
 独立转换和镜面组合见[准备验证](../acceptance/nr/projected-surface-preparation.md)。
+
+R6 已组合公共生产、深度金字塔和足迹过滤。
+前帧颜色、相机平移及拒绝控制见[组合验证](../acceptance/nr/projected-reflection-composition.md)。
 主场景继续按实际采样快照及提交身份装配。
 
 算术顺序、工具及来源见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。

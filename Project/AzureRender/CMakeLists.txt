@@ -514,6 +514,7 @@ if(AZURE_DXC_EXECUTABLE)
         DEPENDS "${SHADER_SOURCE_DIR}/projected_reflection_trace.hlsl" ${AZURE_DXC_DEPENDENCIES}
         COMMENT "Compiling projected reflection trace" VERBATIM)
     add_custom_target(AzureProjectedReflectionShaders DEPENDS "${AZURE_PROJECTED_REFLECTION_SHADER}")
+    add_dependencies(AzureRenderShaders AzureProjectedReflectionShaders)
 endif()
 include(cmake/AzureShaderModules.cmake)
 get_property(AZURE_SHADER_DESCRIPTORS GLOBAL PROPERTY AZURE_SHADER_DESCRIPTORS)
@@ -563,6 +564,7 @@ add_library(AzureRenderCore STATIC
     src/render/ProjectedReflectionRay.cpp
     src/render/ProjectedReflectionCamera.cpp
     src/render/ProjectedReflectionPreparation.cpp
+    src/render/ProjectedScreenReflectionGpu.cpp
     src/render/ReflectionTemporal.cpp
     src/render/ReflectionReprojection.cpp
     src/render/ScreenReflectionGpu.cpp
@@ -2643,6 +2645,9 @@ if(BUILD_TESTING)
     add_executable(AzureProjectedReflectionPreparationTests tests/ProjectedReflectionPreparationTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureProjectedReflectionPreparationTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ProjectedReflectionPreparation COMMAND AzureProjectedReflectionPreparationTests)
+    add_executable(AzureProjectedScreenReflectionTests tests/ProjectedScreenReflectionTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureProjectedScreenReflectionTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ProjectedScreenReflection COMMAND AzureProjectedScreenReflectionTests)
     add_executable(AzureProjectedReflectionPreparationGpuTests tests/ProjectedReflectionPreparationGpuTests.cpp)
     target_link_libraries(AzureProjectedReflectionPreparationGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureProjectedReflectionPreparationGpuTests AzureRenderShaders)
@@ -2698,6 +2703,12 @@ if(BUILD_TESTING)
                 --shader "${AZURE_PROJECTED_REFLECTION_SHADER}"
                 --preparation "${SHADER_BINARY_DIR}/projected_reflection_prepare.comp.spv")
             set_tests_properties(AzureRender.ProjectedReflectionPreparedMirrorGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
+            add_test(NAME AzureRender.ProjectedScreenReflectionGpu COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_camera_gpu.py"
+                --executable "$<TARGET_FILE:AzureProjectedReflectionCameraGpuTests>"
+                --shader "${AZURE_PROJECTED_REFLECTION_SHADER}"
+                --composition "${SHADER_BINARY_DIR}")
+            set_tests_properties(AzureRender.ProjectedScreenReflectionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
             add_test(NAME AzureRender.ProjectedReflectionRayGpu COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_native_ray_reference_gpu.py"
                 --executable "$<TARGET_FILE:AzureNativeRayReferenceGpuTests>"

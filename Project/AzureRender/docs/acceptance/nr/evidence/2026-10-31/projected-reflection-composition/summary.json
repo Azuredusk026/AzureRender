@@ -1,0 +1,3337 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "sourceBaseCommit": "1addfb3c08b1c16718f20fb756fa03b3d9f3b9e5",
+  "ownedRun": "build/runs/20261031-083738-projected-reflection-composition-adf8a5",
+  "scope": "Public projected producer and footprint-driven filter composition, constant motion and successful-submission history contract; main-scene assembly pending",
+  "imageMaximumBytes": 536870912,
+  "configurations": {
+    "release": {
+      "tests": {
+        "name": "Win32-ninja",
+        "tests": "28",
+        "failures": "0",
+        "disabled": "0",
+        "skipped": "0",
+        "hostname": "AZUREDUSK",
+        "time": "53",
+        "timestamp": "2026-10-31T08:46:21"
+      },
+      "junit": {
+        "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/ctest-release.xml.gz",
+        "bytes": 2010,
+        "sha256": "86cc521715e596544adfa74eed2c54756f5104e5e2165797e5e86e37d8576f23",
+        "rawSha256": "1289305e959196c825f81fbf0edd1191c6bc36f189637fce4cf029fd4409ba6d",
+        "encoding": "gzip"
+      },
+      "ctestLog": {
+        "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/ctest-release.log.gz",
+        "bytes": 850,
+        "sha256": "e4257e6eeb0db07df0d40633bcef18f1c1ea5ba4523e9140bf96bb1b1c35f9a1",
+        "rawSha256": "2483714a211b80f924929866963a01b4d9bfcedbfd9b96aecaf46f13f29e2d5a",
+        "encoding": "gzip"
+      },
+      "mirrors": {
+        "camera": {
+          "status": "passed",
+          "cases": [
+            {
+              "mode": "positive",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "positive",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084648-projected-camera-gpu-7109a7\\positive",
+                "positive"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/positive/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/positive/1.bin",
+                  "bytes": 307200,
+                  "sha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/positive/2.bin",
+                  "bytes": 76800,
+                  "sha256": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+                }
+              ]
+            },
+            {
+              "mode": "wide-edge",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wide-edge",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084648-projected-camera-gpu-7109a7\\wide-edge",
+                "wide-edge"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wide-edge/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wide-edge/1.bin",
+                  "bytes": 307200,
+                  "sha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wide-edge/2.bin",
+                  "bytes": 76800,
+                  "sha256": "39695af38da234401267e8512edccd425340fd044a65152e787e1d780903cff8"
+                }
+              ]
+            },
+            {
+              "mode": "history-static",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-static",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084648-projected-camera-gpu-7109a7\\history-static",
+                "history-static"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/history-static/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/history-static/1.bin",
+                  "bytes": 307200,
+                  "sha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/history-static/2.bin",
+                  "bytes": 76800,
+                  "sha256": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+                }
+              ]
+            },
+            {
+              "mode": "nonfinite-motion",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "nonfinite-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084648-projected-camera-gpu-7109a7\\nonfinite-motion",
+                "nonfinite-motion"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/nonfinite-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/nonfinite-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/nonfinite-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+                }
+              ]
+            },
+            {
+              "mode": "wrong-convention",
+              "exitCode": 1,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wrong-convention",
+                "redHits": 256,
+                "regionPixels": 2432,
+                "staticHits": 256,
+                "status": "failed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084648-projected-camera-gpu-7109a7\\wrong-convention",
+                "wrong-convention"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wrong-convention/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b4b8f0d8ef5095e68cda27c733559c1fd3792e60a32c5d9785e9639ec3f25af0"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wrong-convention/1.bin",
+                  "bytes": 307200,
+                  "sha256": "33f53f414a56cf6a490c97715abc878f7a41f0b3c7ed7700495904ab97123edd"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wrong-convention/2.bin",
+                  "bytes": 76800,
+                  "sha256": "1c89af1ee06cc289fdbd870f7aa2056cda51984121e4b04ddaa71ddda5101d7d"
+                }
+              ]
+            },
+            {
+              "mode": "wrong-motion",
+              "exitCode": 1,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wrong-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 0,
+                "status": "failed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084648-projected-camera-gpu-7109a7\\wrong-motion",
+                "wrong-motion"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wrong-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wrong-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "177c970530cf30162826323f85cf452443d451bbb6dc97624ee8a8f9b4ce4857"
+                },
+                {
+                  "file": "build/runs/20261031-084648-projected-camera-gpu-7109a7/wrong-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+                }
+              ]
+            }
+          ],
+          "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+          "executableSha256": "f05ae62d0eabc3b234069c03539f56226770d5fa8c3017228f4cd6fabdd8f93f",
+          "edgeSensitivity": {
+            "confidenceDifferentBytes": 22080,
+            "monotonic": true,
+            "colorExact": true,
+            "footprintExact": true
+          },
+          "priorEighteenBuffersExact": true
+        },
+        "prepared": {
+          "status": "passed",
+          "cases": [
+            {
+              "mode": "positive",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "positive",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084651-projected-camera-gpu-762366\\positive",
+                "positive",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/positive/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/positive/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/positive/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                }
+              ]
+            },
+            {
+              "mode": "wide-edge",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wide-edge",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084651-projected-camera-gpu-762366\\wide-edge",
+                "wide-edge",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wide-edge/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wide-edge/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wide-edge/2.bin",
+                  "bytes": 76800,
+                  "sha256": "5bd89be7230df820dfb6ca5d22cff0fa451584f02a1c5a56c8c3d907c8377d16"
+                }
+              ]
+            },
+            {
+              "mode": "history-static",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-static",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084651-projected-camera-gpu-762366\\history-static",
+                "history-static",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/history-static/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/history-static/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/history-static/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                }
+              ]
+            },
+            {
+              "mode": "nonfinite-motion",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "nonfinite-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084651-projected-camera-gpu-762366\\nonfinite-motion",
+                "nonfinite-motion",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/nonfinite-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/nonfinite-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/nonfinite-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                }
+              ]
+            },
+            {
+              "mode": "wrong-convention",
+              "exitCode": 1,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wrong-convention",
+                "redHits": 128,
+                "regionPixels": 2432,
+                "staticHits": 128,
+                "status": "failed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084651-projected-camera-gpu-762366\\wrong-convention",
+                "wrong-convention",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wrong-convention/0.bin",
+                  "bytes": 307200,
+                  "sha256": "193fc010073f8de38818a717d5f1e56f13f38171b71493184ae24657a1a560d8"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wrong-convention/1.bin",
+                  "bytes": 307200,
+                  "sha256": "5366fb3507d0c69da9c9ab995c9b5cbda6cbee88554490fbe4e4d858881b0ae3"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wrong-convention/2.bin",
+                  "bytes": 76800,
+                  "sha256": "9bddadf59e5d841321cab59759c4f565d624ab20ca1636b8db2bbeee6d7dba8f"
+                }
+              ]
+            },
+            {
+              "mode": "wrong-motion",
+              "exitCode": 1,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wrong-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 0,
+                "status": "failed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084651-projected-camera-gpu-762366\\wrong-motion",
+                "wrong-motion",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wrong-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wrong-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "c8d91b8740ca5c4df87e2df3427f89aa3a9e1b02bda35756cf1e9d58a0cbddd6"
+                },
+                {
+                  "file": "build/runs/20261031-084651-projected-camera-gpu-762366/wrong-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                }
+              ]
+            }
+          ],
+          "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+          "executableSha256": "f05ae62d0eabc3b234069c03539f56226770d5fa8c3017228f4cd6fabdd8f93f",
+          "preparationSha256": "7df185c8630c180a7d8d4bd8ace2a15572dc07e13e401140df595335d666e4da",
+          "edgeSensitivity": {
+            "confidenceDifferentBytes": 22080,
+            "monotonic": true,
+            "colorExact": true,
+            "footprintExact": true
+          },
+          "priorEighteenBuffersExact": true
+        },
+        "composed": {
+          "status": "passed",
+          "cases": [
+            {
+              "mode": "positive",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "positive",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\positive",
+                "positive",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\positive-control",
+                  "positive",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "positive",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/positive/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/positive/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/positive/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/positive/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                }
+              ]
+            },
+            {
+              "mode": "wide-edge",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wide-edge",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\wide-edge",
+                "wide-edge",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\wide-edge-control",
+                  "wide-edge",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "wide-edge",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "5bd89be7230df820dfb6ca5d22cff0fa451584f02a1c5a56c8c3d907c8377d16"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "b9120c2404c6f163e6cacecc4dcbe623b46f297dbc9fe43dfd6dddad3c91737f"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/wide-edge/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/wide-edge/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/wide-edge/2.bin",
+                  "bytes": 76800,
+                  "sha256": "5bd89be7230df820dfb6ca5d22cff0fa451584f02a1c5a56c8c3d907c8377d16"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/wide-edge/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "b9120c2404c6f163e6cacecc4dcbe623b46f297dbc9fe43dfd6dddad3c91737f"
+                }
+              ]
+            },
+            {
+              "mode": "history-static",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-static",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-static",
+                "history-static",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-static-control",
+                  "history-static",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-static",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-static/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-static/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-static/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-static/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                }
+              ]
+            },
+            {
+              "mode": "nonfinite-motion",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "nonfinite-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\nonfinite-motion",
+                "nonfinite-motion",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\nonfinite-motion-control",
+                  "nonfinite-motion",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "nonfinite-motion",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/nonfinite-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/nonfinite-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/nonfinite-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/nonfinite-motion/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                }
+              ]
+            },
+            {
+              "mode": "history-tinted",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-tinted",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-tinted",
+                "history-tinted",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-tinted-control",
+                  "history-tinted",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-tinted",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-tinted/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-tinted/1.bin",
+                  "bytes": 307200,
+                  "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-tinted/2.bin",
+                  "bytes": 76800,
+                  "sha256": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-tinted/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+                }
+              ]
+            },
+            {
+              "mode": "history-shifted",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-shifted",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-shifted",
+                "history-shifted",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-shifted-control",
+                  "history-shifted",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-shifted",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-shifted/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-shifted/1.bin",
+                  "bytes": 307200,
+                  "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-shifted/2.bin",
+                  "bytes": 76800,
+                  "sha256": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-shifted/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+                }
+              ]
+            },
+            {
+              "mode": "history-wrong-pose",
+              "exitCode": 1,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 0,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-wrong-pose",
+                "redHits": 0,
+                "regionPixels": 2432,
+                "staticHits": 0,
+                "status": "failed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-wrong-pose",
+                "history-wrong-pose",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-wrong-pose-control",
+                  "history-wrong-pose",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 0,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-wrong-pose",
+                  "redHits": 0,
+                  "regionPixels": 2432,
+                  "staticHits": 0,
+                  "status": "failed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-wrong-pose/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-wrong-pose/1.bin",
+                  "bytes": 307200,
+                  "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-wrong-pose/2.bin",
+                  "bytes": 76800,
+                  "sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-wrong-pose/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+                }
+              ]
+            },
+            {
+              "mode": "history-disoccluded",
+              "exitCode": 1,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 0,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-disoccluded",
+                "redHits": 0,
+                "regionPixels": 2432,
+                "staticHits": 0,
+                "status": "failed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-disoccluded",
+                "history-disoccluded",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084655-projected-camera-gpu-0d8024\\history-disoccluded-control",
+                  "history-disoccluded",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 0,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-disoccluded",
+                  "redHits": 0,
+                  "regionPixels": 2432,
+                  "staticHits": 0,
+                  "status": "failed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-disoccluded/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-disoccluded/1.bin",
+                  "bytes": 307200,
+                  "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-disoccluded/2.bin",
+                  "bytes": 76800,
+                  "sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+                },
+                {
+                  "file": "build/runs/20261031-084655-projected-camera-gpu-0d8024/history-disoccluded/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+                }
+              ]
+            }
+          ],
+          "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+          "executableSha256": "f05ae62d0eabc3b234069c03539f56226770d5fa8c3017228f4cd6fabdd8f93f",
+          "compositionDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+          "edgeSensitivity": {
+            "confidenceDifferentBytes": 22080,
+            "monotonic": true,
+            "colorExact": true,
+            "footprintExact": true
+          },
+          "independentComparedBytes": 15360000
+        }
+      },
+      "sourceRegression": {
+        "status": "passed",
+        "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+        "cases": [
+          {
+            "name": "native",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084715-native-ray-reference-7578b6\\native-output",
+              "--projected"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "independentFrameSlots": true,
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 921600,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "projected": true,
+              "reverse": false,
+              "secondaryOutputs": [
+                {
+                  "bytes": 612,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 612,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 153,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "status": "passed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "native-reversed",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084715-native-ray-reference-7578b6\\native-reversed-output",
+              "--reverse",
+              "--projected"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "independentFrameSlots": true,
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 921600,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "projected": true,
+              "reverse": true,
+              "secondaryOutputs": [
+                {
+                  "bytes": 612,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 612,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 153,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "status": "passed",
+              "validationErrors": 0
+            }
+          }
+        ]
+      },
+      "sourceLog": {
+        "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/native-release.log.gz",
+        "bytes": 132,
+        "sha256": "69ce41cab12b51619cd451c843bccc386566d8a7cf4a34901b69f367c03de3fd",
+        "rawSha256": "1d4828a8aeb56b3f6866177d255d95fc8a5ef46946283de75667456b2beab803",
+        "encoding": "gzip"
+      },
+      "executables": [
+        {
+          "file": "build/ninja-msvc-release/AzureProjectedScreenReflectionTests.exe",
+          "bytes": 200192,
+          "sha256": "7ce35c557c77f23d4ffa48ab55a1081956858194e82008fc73a726196f2cd53e"
+        },
+        {
+          "file": "build/ninja-msvc-release/AzureProjectedReflectionCameraGpuTests.exe",
+          "bytes": 304128,
+          "sha256": "f05ae62d0eabc3b234069c03539f56226770d5fa8c3017228f4cd6fabdd8f93f"
+        },
+        {
+          "file": "build/ninja-msvc-release/AzureProjectedReflectionPreparationGpuTests.exe",
+          "bytes": 180224,
+          "sha256": "7051c64ace1c8166d4310f55fe6828cca4202410ca992d4e65ced69168aa87de"
+        },
+        {
+          "file": "build/ninja-msvc-release/AzureNativeRayReferenceGpuTests.exe",
+          "bytes": 329216,
+          "sha256": "e55d26317ec30a5317e5cc19ad44f45c5d7b1c141773664980ed01a19f5482ba"
+        }
+      ],
+      "shaders": [
+        {
+          "file": "build/ninja-msvc-release/shaders/projected_reflection_prepare.comp.spv",
+          "bytes": 7396,
+          "sha256": "7df185c8630c180a7d8d4bd8ace2a15572dc07e13e401140df595335d666e4da"
+        },
+        {
+          "file": "build/ninja-msvc-release/shaders/projected_reflection_trace.comp.spv",
+          "bytes": 91480,
+          "sha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017"
+        },
+        {
+          "file": "build/ninja-msvc-release/shaders/depth_pyramid.comp.spv",
+          "bytes": 3424,
+          "sha256": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0"
+        },
+        {
+          "file": "build/ninja-msvc-release/shaders/reflection_spatial_filter.comp.spv",
+          "bytes": 9204,
+          "sha256": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc"
+        },
+        {
+          "file": "build/ninja-msvc-release/shaders/reflection_signal_pyramid_packed.comp.spv",
+          "bytes": 6552,
+          "sha256": "9d9fc987c83a72728ac0296cdbf85596c658e1535a0ef72edc25aab44792926f"
+        }
+      ]
+    },
+    "debug": {
+      "tests": {
+        "name": "Win32-ninja",
+        "tests": "28",
+        "failures": "0",
+        "disabled": "0",
+        "skipped": "0",
+        "hostname": "AZUREDUSK",
+        "time": "56",
+        "timestamp": "2026-10-31T08:47:18"
+      },
+      "junit": {
+        "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/ctest-debug.xml.gz",
+        "bytes": 2010,
+        "sha256": "8e9763ff3473170a8368d47585329ac9883842334d5c7a15763df880085f98d3",
+        "rawSha256": "c2aa2fa6c7cd84c401a0b965028def36a415d31c1e7aceae6860dd90ca248a2c",
+        "encoding": "gzip"
+      },
+      "ctestLog": {
+        "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/ctest-debug.log.gz",
+        "bytes": 842,
+        "sha256": "6213f907aa511c1a811553d28782a874e6d9942cdbbe81f69d6eccc5fb63d7b1",
+        "rawSha256": "f8d7397c7b0f15e350dc66451860521f1b62f0e33da2c6de193fa5bba44c29ca",
+        "encoding": "gzip"
+      },
+      "mirrors": {
+        "camera": {
+          "status": "passed",
+          "cases": [
+            {
+              "mode": "positive",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "positive",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084745-projected-camera-gpu-83e7e0\\positive",
+                "positive"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/positive/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/positive/1.bin",
+                  "bytes": 307200,
+                  "sha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/positive/2.bin",
+                  "bytes": 76800,
+                  "sha256": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+                }
+              ]
+            },
+            {
+              "mode": "wide-edge",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wide-edge",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084745-projected-camera-gpu-83e7e0\\wide-edge",
+                "wide-edge"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wide-edge/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wide-edge/1.bin",
+                  "bytes": 307200,
+                  "sha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wide-edge/2.bin",
+                  "bytes": 76800,
+                  "sha256": "39695af38da234401267e8512edccd425340fd044a65152e787e1d780903cff8"
+                }
+              ]
+            },
+            {
+              "mode": "history-static",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-static",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084745-projected-camera-gpu-83e7e0\\history-static",
+                "history-static"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/history-static/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/history-static/1.bin",
+                  "bytes": 307200,
+                  "sha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/history-static/2.bin",
+                  "bytes": 76800,
+                  "sha256": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+                }
+              ]
+            },
+            {
+              "mode": "nonfinite-motion",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "nonfinite-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084745-projected-camera-gpu-83e7e0\\nonfinite-motion",
+                "nonfinite-motion"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/nonfinite-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/nonfinite-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "47d67836e33295d070a01d77a89714af246f88510393860600ffb976ce8e91a6"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/nonfinite-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+                }
+              ]
+            },
+            {
+              "mode": "wrong-convention",
+              "exitCode": 1,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wrong-convention",
+                "redHits": 256,
+                "regionPixels": 2432,
+                "staticHits": 256,
+                "status": "failed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084745-projected-camera-gpu-83e7e0\\wrong-convention",
+                "wrong-convention"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wrong-convention/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b4b8f0d8ef5095e68cda27c733559c1fd3792e60a32c5d9785e9639ec3f25af0"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wrong-convention/1.bin",
+                  "bytes": 307200,
+                  "sha256": "33f53f414a56cf6a490c97715abc878f7a41f0b3c7ed7700495904ab97123edd"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wrong-convention/2.bin",
+                  "bytes": 76800,
+                  "sha256": "1c89af1ee06cc289fdbd870f7aa2056cda51984121e4b04ddaa71ddda5101d7d"
+                }
+              ]
+            },
+            {
+              "mode": "wrong-motion",
+              "exitCode": 1,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wrong-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 0,
+                "status": "failed",
+                "surfacePreparation": false,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084745-projected-camera-gpu-83e7e0\\wrong-motion",
+                "wrong-motion"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wrong-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "b6413db8a31300e24a269c7768253e884dca954c48c079aac8e1389f76de8e6b"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wrong-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "177c970530cf30162826323f85cf452443d451bbb6dc97624ee8a8f9b4ce4857"
+                },
+                {
+                  "file": "build/runs/20261031-084745-projected-camera-gpu-83e7e0/wrong-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "ff4a934c42957a76a2096c2445a7953dffe12ac5b4950b208d0ff6ee5baa569b"
+                }
+              ]
+            }
+          ],
+          "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+          "executableSha256": "ad93cd7a4d7d49cae31ff6cd3b41208359bf3013f3534f5a90ab226a402935b7",
+          "edgeSensitivity": {
+            "confidenceDifferentBytes": 22080,
+            "monotonic": true,
+            "colorExact": true,
+            "footprintExact": true
+          },
+          "priorEighteenBuffersExact": true
+        },
+        "prepared": {
+          "status": "passed",
+          "cases": [
+            {
+              "mode": "positive",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "positive",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084749-projected-camera-gpu-c34c74\\positive",
+                "positive",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/positive/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/positive/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/positive/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                }
+              ]
+            },
+            {
+              "mode": "wide-edge",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wide-edge",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084749-projected-camera-gpu-c34c74\\wide-edge",
+                "wide-edge",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wide-edge/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wide-edge/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wide-edge/2.bin",
+                  "bytes": 76800,
+                  "sha256": "5bd89be7230df820dfb6ca5d22cff0fa451584f02a1c5a56c8c3d907c8377d16"
+                }
+              ]
+            },
+            {
+              "mode": "history-static",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-static",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084749-projected-camera-gpu-c34c74\\history-static",
+                "history-static",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/history-static/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/history-static/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/history-static/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                }
+              ]
+            },
+            {
+              "mode": "nonfinite-motion",
+              "exitCode": 0,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "nonfinite-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084749-projected-camera-gpu-c34c74\\nonfinite-motion",
+                "nonfinite-motion",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/nonfinite-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/nonfinite-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/nonfinite-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                }
+              ]
+            },
+            {
+              "mode": "wrong-convention",
+              "exitCode": 1,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wrong-convention",
+                "redHits": 128,
+                "regionPixels": 2432,
+                "staticHits": 128,
+                "status": "failed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084749-projected-camera-gpu-c34c74\\wrong-convention",
+                "wrong-convention",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wrong-convention/0.bin",
+                  "bytes": 307200,
+                  "sha256": "193fc010073f8de38818a717d5f1e56f13f38171b71493184ae24657a1a560d8"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wrong-convention/1.bin",
+                  "bytes": 307200,
+                  "sha256": "5366fb3507d0c69da9c9ab995c9b5cbda6cbee88554490fbe4e4d858881b0ae3"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wrong-convention/2.bin",
+                  "bytes": 76800,
+                  "sha256": "9bddadf59e5d841321cab59759c4f565d624ab20ca1636b8db2bbeee6d7dba8f"
+                }
+              ]
+            },
+            {
+              "mode": "wrong-motion",
+              "exitCode": 1,
+              "result": {
+                "composition": "none",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wrong-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 0,
+                "status": "failed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084749-projected-camera-gpu-c34c74\\wrong-motion",
+                "wrong-motion",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_prepare.comp.spv"
+              ],
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wrong-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wrong-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "c8d91b8740ca5c4df87e2df3427f89aa3a9e1b02bda35756cf1e9d58a0cbddd6"
+                },
+                {
+                  "file": "build/runs/20261031-084749-projected-camera-gpu-c34c74/wrong-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                }
+              ]
+            }
+          ],
+          "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+          "executableSha256": "ad93cd7a4d7d49cae31ff6cd3b41208359bf3013f3534f5a90ab226a402935b7",
+          "preparationSha256": "7df185c8630c180a7d8d4bd8ace2a15572dc07e13e401140df595335d666e4da",
+          "edgeSensitivity": {
+            "confidenceDifferentBytes": 22080,
+            "monotonic": true,
+            "colorExact": true,
+            "footprintExact": true
+          },
+          "priorEighteenBuffersExact": true
+        },
+        "composed": {
+          "status": "passed",
+          "cases": [
+            {
+              "mode": "positive",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "positive",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\positive",
+                "positive",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\positive-control",
+                  "positive",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "positive",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/positive/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/positive/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/positive/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/positive/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                }
+              ]
+            },
+            {
+              "mode": "wide-edge",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "wide-edge",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\wide-edge",
+                "wide-edge",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\wide-edge-control",
+                  "wide-edge",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "wide-edge",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "5bd89be7230df820dfb6ca5d22cff0fa451584f02a1c5a56c8c3d907c8377d16"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "b9120c2404c6f163e6cacecc4dcbe623b46f297dbc9fe43dfd6dddad3c91737f"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/wide-edge/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/wide-edge/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/wide-edge/2.bin",
+                  "bytes": 76800,
+                  "sha256": "5bd89be7230df820dfb6ca5d22cff0fa451584f02a1c5a56c8c3d907c8377d16"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/wide-edge/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "b9120c2404c6f163e6cacecc4dcbe623b46f297dbc9fe43dfd6dddad3c91737f"
+                }
+              ]
+            },
+            {
+              "mode": "history-static",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-static",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-static",
+                "history-static",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-static-control",
+                  "history-static",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-static",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-static/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-static/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-static/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-static/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                }
+              ]
+            },
+            {
+              "mode": "nonfinite-motion",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "nonfinite-motion",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\nonfinite-motion",
+                "nonfinite-motion",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\nonfinite-motion-control",
+                  "nonfinite-motion",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "nonfinite-motion",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/nonfinite-motion/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/nonfinite-motion/1.bin",
+                  "bytes": 307200,
+                  "sha256": "8f2ad65dded02476e76fccf16f1363c59a0e2eeb454d42c7f1e16ce0d29a2993"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/nonfinite-motion/2.bin",
+                  "bytes": 76800,
+                  "sha256": "d544d8617170c43f3a3bbe417d1bb54eb0fb3d7dc815dc7f7e02a064456192c5"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/nonfinite-motion/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "5938c22445b1c46c792a885a46443cd0ce29ff969641ba0c8a32b6f4a45d389f"
+                }
+              ]
+            },
+            {
+              "mode": "history-tinted",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-tinted",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-tinted",
+                "history-tinted",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-tinted-control",
+                  "history-tinted",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-tinted",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-tinted/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-tinted/1.bin",
+                  "bytes": 307200,
+                  "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-tinted/2.bin",
+                  "bytes": 76800,
+                  "sha256": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-tinted/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+                }
+              ]
+            },
+            {
+              "mode": "history-shifted",
+              "exitCode": 0,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 2432,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-shifted",
+                "redHits": 2432,
+                "regionPixels": 2432,
+                "staticHits": 2432,
+                "status": "passed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-shifted",
+                "history-shifted",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-shifted-control",
+                  "history-shifted",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 2432,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-shifted",
+                  "redHits": 2432,
+                  "regionPixels": 2432,
+                  "staticHits": 2432,
+                  "status": "passed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-shifted/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-shifted/1.bin",
+                  "bytes": 307200,
+                  "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-shifted/2.bin",
+                  "bytes": 76800,
+                  "sha256": "560d576943887fa85e96de65b446e2202724beefa3d7a64e21b159efe7066117"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-shifted/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "6edec5b80dc60747588c98d87dfe4244444a72a22918166999834d8a27634916"
+                }
+              ]
+            },
+            {
+              "mode": "history-wrong-pose",
+              "exitCode": 1,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 0,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-wrong-pose",
+                "redHits": 0,
+                "regionPixels": 2432,
+                "staticHits": 0,
+                "status": "failed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-wrong-pose",
+                "history-wrong-pose",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-wrong-pose-control",
+                  "history-wrong-pose",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 0,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-wrong-pose",
+                  "redHits": 0,
+                  "regionPixels": 2432,
+                  "staticHits": 0,
+                  "status": "failed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-wrong-pose/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-wrong-pose/1.bin",
+                  "bytes": 307200,
+                  "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-wrong-pose/2.bin",
+                  "bytes": 76800,
+                  "sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-wrong-pose/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+                }
+              ]
+            },
+            {
+              "mode": "history-disoccluded",
+              "exitCode": 1,
+              "result": {
+                "composition": "public",
+                "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                "filteredRedHits": 0,
+                "liveBuffers": 0,
+                "liveImages": 0,
+                "minimumFraction": 0.75,
+                "mode": "history-disoccluded",
+                "redHits": 0,
+                "regionPixels": 2432,
+                "staticHits": 0,
+                "status": "failed",
+                "surfacePreparation": true,
+                "validationErrors": 0
+              },
+              "command": [
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-disoccluded",
+                "history-disoccluded",
+                "--composition",
+                "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+              ],
+              "independentControl": {
+                "command": [
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionCameraGpuTests.exe",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084753-projected-camera-gpu-4b2828\\history-disoccluded-control",
+                  "history-disoccluded",
+                  "--control",
+                  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+                ],
+                "result": {
+                  "composition": "manual",
+                  "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+                  "filteredRedHits": 0,
+                  "liveBuffers": 0,
+                  "liveImages": 0,
+                  "minimumFraction": 0.75,
+                  "mode": "history-disoccluded",
+                  "redHits": 0,
+                  "regionPixels": 2432,
+                  "staticHits": 0,
+                  "status": "failed",
+                  "surfacePreparation": true,
+                  "validationErrors": 0
+                },
+                "outputs": [
+                  {
+                    "output": 0,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                  },
+                  {
+                    "output": 1,
+                    "bytes": 307200,
+                    "differentBytes": 0,
+                    "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                  },
+                  {
+                    "output": 2,
+                    "bytes": 76800,
+                    "differentBytes": 0,
+                    "sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+                  },
+                  {
+                    "output": 3,
+                    "bytes": 1228800,
+                    "differentBytes": 0,
+                    "sha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+                  }
+                ]
+              },
+              "outputs": [
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-disoccluded/0.bin",
+                  "bytes": 307200,
+                  "sha256": "2df1ffd4660261edd837f5f1f774dd9c0f0608a0505e66cf7b6f7aee8f233281"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-disoccluded/1.bin",
+                  "bytes": 307200,
+                  "sha256": "f636cee96c893fab8571084c15f02719008078eef66a127c3b976b94832e44d3"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-disoccluded/2.bin",
+                  "bytes": 76800,
+                  "sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+                },
+                {
+                  "file": "build/runs/20261031-084753-projected-camera-gpu-4b2828/history-disoccluded/3.bin",
+                  "bytes": 1228800,
+                  "sha256": "64c588482bd953e634473919c99664a8ea9f4e3ede5e0bbee7bda0888e698d14"
+                }
+              ]
+            }
+          ],
+          "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+          "executableSha256": "ad93cd7a4d7d49cae31ff6cd3b41208359bf3013f3534f5a90ab226a402935b7",
+          "compositionDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders",
+          "edgeSensitivity": {
+            "confidenceDifferentBytes": 22080,
+            "monotonic": true,
+            "colorExact": true,
+            "footprintExact": true
+          },
+          "independentComparedBytes": 15360000
+        }
+      },
+      "sourceRegression": {
+        "status": "passed",
+        "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+        "cases": [
+          {
+            "name": "native",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084815-native-ray-reference-b55919\\native-output",
+              "--projected"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "independentFrameSlots": true,
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 921600,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "projected": true,
+              "reverse": false,
+              "secondaryOutputs": [
+                {
+                  "bytes": 612,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 612,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 153,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "status": "passed",
+              "validationErrors": 0
+            }
+          },
+          {
+            "name": "native-reversed",
+            "exitCode": 0,
+            "command": [
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNativeRayReferenceGpuTests.exe",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders\\projected_reflection_trace.comp.spv",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-060648-ray-vulkan-a27711\\frozen-inputs-portable\\manifest.json",
+              "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084815-native-ray-reference-b55919\\native-reversed-output",
+              "--reverse",
+              "--projected"
+            ],
+            "result": {
+              "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+              "independentFrameSlots": true,
+              "liveBuffers": 0,
+              "liveImages": 0,
+              "outputs": [
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 3686400,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 921600,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "projected": true,
+              "reverse": true,
+              "secondaryOutputs": [
+                {
+                  "bytes": 612,
+                  "differentBytes": 0,
+                  "role": "color"
+                },
+                {
+                  "bytes": 612,
+                  "differentBytes": 0,
+                  "role": "footprint"
+                },
+                {
+                  "bytes": 153,
+                  "differentBytes": 0,
+                  "role": "confidence"
+                }
+              ],
+              "status": "passed",
+              "validationErrors": 0
+            }
+          }
+        ]
+      },
+      "sourceLog": {
+        "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/native-debug.log.gz",
+        "bytes": 132,
+        "sha256": "1b84edf20e2a6a8628a06cffcd3a19e230addb64bb7232cd8c5b674aace61c75",
+        "rawSha256": "55ddec9c969b423382652522683796b5ac40cb260cbc11d8c143a0cadd9d74ae",
+        "encoding": "gzip"
+      },
+      "executables": [
+        {
+          "file": "build/ninja-msvc-debug/AzureProjectedScreenReflectionTests.exe",
+          "bytes": 1175552,
+          "sha256": "e7b53f1649efb0d599b00c9a9c71a03421e84066f530851d18038c4fd7b78e32"
+        },
+        {
+          "file": "build/ninja-msvc-debug/AzureProjectedReflectionCameraGpuTests.exe",
+          "bytes": 1988096,
+          "sha256": "ad93cd7a4d7d49cae31ff6cd3b41208359bf3013f3534f5a90ab226a402935b7"
+        },
+        {
+          "file": "build/ninja-msvc-debug/AzureProjectedReflectionPreparationGpuTests.exe",
+          "bytes": 1657856,
+          "sha256": "fe6ed26469137eda0632ce0a44796e33f078db8c6bebadfbc6a05ffebe781428"
+        },
+        {
+          "file": "build/ninja-msvc-debug/AzureNativeRayReferenceGpuTests.exe",
+          "bytes": 2100224,
+          "sha256": "cf283940117dec25af0e0341b5bf1cb73d1653f36a743253e3d2613d470acd43"
+        }
+      ],
+      "shaders": [
+        {
+          "file": "build/ninja-msvc-debug/shaders/projected_reflection_prepare.comp.spv",
+          "bytes": 7396,
+          "sha256": "7df185c8630c180a7d8d4bd8ace2a15572dc07e13e401140df595335d666e4da"
+        },
+        {
+          "file": "build/ninja-msvc-debug/shaders/projected_reflection_trace.comp.spv",
+          "bytes": 91480,
+          "sha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017"
+        },
+        {
+          "file": "build/ninja-msvc-debug/shaders/depth_pyramid.comp.spv",
+          "bytes": 3424,
+          "sha256": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0"
+        },
+        {
+          "file": "build/ninja-msvc-debug/shaders/reflection_spatial_filter.comp.spv",
+          "bytes": 9204,
+          "sha256": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc"
+        },
+        {
+          "file": "build/ninja-msvc-debug/shaders/reflection_signal_pyramid_packed.comp.spv",
+          "bytes": 6552,
+          "sha256": "9d9fc987c83a72728ac0296cdbf85596c658e1535a0ef72edc25aab44792926f"
+        }
+      ]
+    }
+  },
+  "negativeFilterChannel": {
+    "status": "failed",
+    "cases": [
+      {
+        "mode": "positive",
+        "exitCode": 1,
+        "result": {
+          "composition": "public",
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "filteredRedHits": 0,
+          "liveBuffers": 0,
+          "liveImages": 0,
+          "minimumFraction": 0.75,
+          "mode": "positive",
+          "redHits": 2432,
+          "regionPixels": 2432,
+          "staticHits": 2432,
+          "status": "failed",
+          "surfacePreparation": true,
+          "validationErrors": 0
+        },
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionCameraGpuTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\projected_reflection_trace.comp.spv",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-084420-projected-camera-gpu-27f419\\positive",
+          "positive",
+          "--composition",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders"
+        ]
+      }
+    ],
+    "shaderSha256": "05e89a2b970ea2f162bbc03b35c40d85382201f2701d29c5c2d119de8cc88017",
+    "executableSha256": "0a9357e75b8eb0320902c2867ddda5d11224b67936fa1de934bfcdb4b40e92bf",
+    "compositionDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+    "error": "{'composition': 'public', 'device': 'NVIDIA GeForce RTX 4060 Laptop GPU', 'filteredRedHits': 0, 'liveBuffers': 0, 'liveImages': 0, 'minimumFraction': 0.75, 'mode': 'positive', 'redHits': 2432, 'regionPixels': 2432, 'staticHits': 2432, 'status': 'failed', 'surfacePreparation': True, 'validationErrors': 0}"
+  },
+  "logs": [
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/api-red.log.gz",
+      "bytes": 3061,
+      "sha256": "b0aad1dfe2486ccef4fd361c66f0a425efbd0537df40a99f4b7d0f65c458d596",
+      "rawSha256": "5068e1ce9b5a58e7b00f1d1b7a2573245f0edddd7d9216e1a32035b28f3bf411",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/api-green.log.gz",
+      "bytes": 97,
+      "sha256": "a6680c8e8808500e5c755b7e455a01124333e888e045f75bd701e6e2a99cddf4",
+      "rawSha256": "e68d0e2e540b06f332760d279c133a26abc86df7d22a6eb0911c3288d920abf5",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/build-release-initial.log.gz",
+      "bytes": 2724,
+      "sha256": "532616642ad00bda8a0ceec9c4aa2f7eb14c0f86ec6486b5fddcc18071a27947",
+      "rawSha256": "afcf3774554b410e9b23ae7ee21002252d7b3bc90043b54956fba5a7f6cf2ee4",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/history-build.log.gz",
+      "bytes": 170,
+      "sha256": "6c09cb1bf788c6159867ff910f728cb476e4eef2ff49b4c8c24cc4890c5370dc",
+      "rawSha256": "e996de7fbee80b3b1aa548fde9b530c29b669b826e6b9482b971888371d1cdcf",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/history-gpu.log.gz",
+      "bytes": 127,
+      "sha256": "e81c14bb7c0e951e719be5735c4fc29e5c184538dae54fdf93dc5a2e72785111",
+      "rawSha256": "1dd76c9cab33309bf96f7aad0b302cd3bcc6ed9f4bf2353bf07308f5a73ddead",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/wrong-channel-build.log.gz",
+      "bytes": 205,
+      "sha256": "8f59481a60242e37b483ee2f5e7ac1de30f45ddb4b9dc2caa79619555797a4c6",
+      "rawSha256": "dceb114c5337e4b0baf9156b2dcff11ebb1e51f3ddb3215d5d3a4d909b405eab",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/wrong-channel-red.log.gz",
+      "bytes": 411,
+      "sha256": "bc73912e66314041eed74e67ad47823f3836447ff05bed48db65b4242f86ab51",
+      "rawSha256": "b0781d46bfe788520444fc6d71c01df66df05d79e8a9c637cd03f31448b83b75",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/build-release.log.gz",
+      "bytes": 423,
+      "sha256": "1b19efaa5266497278a11daf68c118e6a40413beaf75c75bac1002e1c44902cc",
+      "rawSha256": "921ad04befbc039384233a64eb65fc477bf11f6bdbbe2906fb94fff693219d48",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/build-debug.log.gz",
+      "bytes": 2944,
+      "sha256": "9678a5e12b24c960ca4fc3925e4fb0d2809fef230a849ff2dc27bd30e794369a",
+      "rawSha256": "f65087483bc8de14a5a53f41875e0eb2e929e4c13d07bd9534943769eb0e9b8e",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/final-build-release.log.gz",
+      "bytes": 222,
+      "sha256": "bdad338ee4d5a21e0a7789e230e7288ed58e52af2c5e4f4e803f9d21062590fa",
+      "rawSha256": "db2725347e470ef8d27922232e2aa2d2ed3ca5c6120e883231e7e96a21725b96",
+      "encoding": "gzip"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/final-build-debug.log.gz",
+      "bytes": 222,
+      "sha256": "bdad338ee4d5a21e0a7789e230e7288ed58e52af2c5e4f4e803f9d21062590fa",
+      "rawSha256": "db2725347e470ef8d27922232e2aa2d2ed3ca5c6120e883231e7e96a21725b96",
+      "encoding": "gzip"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "CMakeLists.txt",
+      "bytes": 237844,
+      "sha256": "13736897d2837176b061aef39f1dc6bd1152ec0d676fc9155aa39fb6b81aa792",
+      "gitBlob": "9e4b5ea59aacd49b6d0564ba5dc33dbda609e30b"
+    },
+    {
+      "file": "src/render/ProjectedScreenReflectionGpu.hpp",
+      "bytes": 2924,
+      "sha256": "9a4e951cb4fa722ac6d030e8a6204da03a551c0a1bce02fa1aff6a5cded2da43",
+      "gitBlob": "4e4b7bc3c77ff7607b6e3c8be26cabaec256bf85"
+    },
+    {
+      "file": "src/render/ProjectedScreenReflectionGpu.cpp",
+      "bytes": 9386,
+      "sha256": "d9711d1e9ba35c41ca979abba74c14c53fffc68e2ea6d8c72251f268d7113470",
+      "gitBlob": "c105c3e62863caf0b50856ea590220e21ed2d95d"
+    },
+    {
+      "file": "src/render/ProjectedReflectionRay.hpp",
+      "bytes": 3546,
+      "sha256": "230fcf8231a2b03a8d37ac9f9c5f7b79a01f0b340acfbc292d4ccfa01e6bd373",
+      "gitBlob": "4f60e144918ab97abd1ba6c717f38c7adc1a775f"
+    },
+    {
+      "file": "tests/ProjectedScreenReflectionTests.cpp",
+      "bytes": 5476,
+      "sha256": "f6738d4033a5e52dd329bfb8e2ac1a5fae15b3f84f828ce2be55f222096a8831",
+      "gitBlob": "12cfc1e26a1c0fb6bb8530600dd785a5463dc689"
+    },
+    {
+      "file": "tests/ProjectedReflectionCameraGpuTests.cpp",
+      "bytes": 17443,
+      "sha256": "be630fee94e9a31c282c01ab28b6cafa54ea77b58cc9bea32af8f6993a7769d5",
+      "gitBlob": "0ab99b6ac64da34226f9a14fce9ee4ca63747ff3"
+    },
+    {
+      "file": "tests/ProjectedReflectionPreparationGpuTests.cpp",
+      "bytes": 8534,
+      "sha256": "21640c4aabed45c25a18e6a62cb9f59eee01bd67a351c079c50598eb232c53a2",
+      "gitBlob": "2daad0a7a59d8648dd7302be5354c96cd766c4eb"
+    },
+    {
+      "file": "tools/test_projected_camera_gpu.py",
+      "bytes": 5025,
+      "sha256": "b6141096c327a8aaa9b4099dbff9cdba57c1d5d9f471121525af0a480f6fb1dd",
+      "gitBlob": "fd614c0bb5c62e7b0be685e72339c60cd6f0523d"
+    }
+  ],
+  "figure": [
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/controls.png",
+      "bytes": 40285,
+      "sha256": "eeb7a3897153266d351a0603382e0e7606dcddcc2d1dac972546a709c298b714"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/controls.json",
+      "bytes": 1275,
+      "sha256": "afa94c6688a0310c3252c7a548613c4ec0e2e051489d3cf1ead377a32ac3ac64"
+    },
+    {
+      "file": "docs/acceptance/nr/evidence/2026-10-31/projected-reflection-composition/render_controls.py",
+      "bytes": 2410,
+      "sha256": "7a3de0061210d6319a49f86dbee3ccbb6295d9b06616ce80e0ef37ac3a1ad345"
+    }
+  ],
+  "preservedUserFiles": {
+    "docs\\acceptance\\p5\\closure\\source-evidence\\interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs\\acceptance\\p5\\closure\\source-evidence\\performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4"
+  },
+  "documentation": {
+    "styleFiles": 10,
+    "linksChecked": 616,
+    "stages": 103,
+    "acceptanceItems": 34,
+    "stageUnitTests": 16,
+    "paragraphAudit": "passed",
+    "siteBuild": "passed",
+    "newWarnings": 0,
+    "strictSiteAcceptance": "pending",
+    "files": [
+      {
+        "file": "README.md",
+        "sha256": "f4568b8ff7d4722d35f413b1e2345e2b5709a858dcdcaac33e5d69eae245dd36"
+      },
+      {
+        "file": "CHANGELOG.md",
+        "sha256": "1542b2e4d37c3754d1c056348ade2a897656fca6681aa2faa7c4445a4b1c30ac"
+      },
+      {
+        "file": "docs/plans/azure-engine-plan.md",
+        "sha256": "a0c7106c58a353888fa126d7a47af8c2c50d32b794ad84fe8a26180dbe0acd28"
+      },
+      {
+        "file": "docs/plans/2026-10-30-development-recovery.md",
+        "sha256": "5d458965bac3990af7beb39c96ae8548b2a622d41acd37a7c977a07721a76ce7"
+      },
+      {
+        "file": "docs/plans/2026-10-28-reflection-filter-integration.md",
+        "sha256": "9350cd72d2e17d3c51089e958ee7788299f6585974063a9fdb0a7fa45215ad1c"
+      },
+      {
+        "file": "docs/plans/2026-10-31-projected-reflection-composition.md",
+        "sha256": "ec806695d0e1ff671cd4ba2152c5aa261bd73003517fe7cab39256c4667740be"
+      },
+      {
+        "file": "docs/acceptance/recovery/2026-10-30.md",
+        "sha256": "c8354aafd872f6b9d440a2f8d367438794fd6e47a2dbbc1c42ab09cdb7c6d368"
+      },
+      {
+        "file": "docs/acceptance/nr/projected-reflection-composition.md",
+        "sha256": "7ecd4da75831f337d8f51606fecefd928dbf2d61903538b51700345bf7efaaf9"
+      },
+      {
+        "file": "docs/runtime/projected-screen-reflection.md",
+        "sha256": "f25460dd4a4c234ddcb3922e01532c852b7d4580d62c87cbe3a4cfb05b9079a3"
+      },
+      {
+        "file": "docs/runtime/projected-reflection-ray.md",
+        "sha256": "48ef3a0458147eec41e16c3891e11a8dff44e86ef7ea7c78a79faaf9156247c9"
+      }
+    ]
+  }
+}

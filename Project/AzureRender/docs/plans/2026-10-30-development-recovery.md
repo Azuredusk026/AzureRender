@@ -325,6 +325,9 @@ P8 保留性能热状态、人工复核和历史归因待项。
 表面准备及独立镜面通过双配置验证。
 公共接口和主场景接续见[准备验证](../acceptance/nr/projected-surface-preparation.md)。
 
+公共反射组合通过独立镜面及前帧输入控制。
+资源、过滤及接续范围见[组合验证](../acceptance/nr/projected-reflection-composition.md)。
+
 ## 文档与交付规则
 
 每个可验收阶段同步实现、测试及相关文档。

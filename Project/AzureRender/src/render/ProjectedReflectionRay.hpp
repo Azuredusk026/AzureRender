@@ -27,9 +27,10 @@ struct ProjectedReflectionView {
     ProjectedReflectionFrame pack(VkExtent2D sourceExtent,VkExtent2D traceExtent,const ProjectedReflectionSettings&) const;
 };
 struct ProjectedReflectionInputs {
-    // Borrowed sampled views: source-sized color/motion; trace-sized other inputs.
+    // Borrowed sampled views: source-sized color; trace-sized depth/mask/normal.
+    // Motion is a normalized-UV field; a 1x1 view represents constant displacement.
     // Normal RG stores Y-pole octahedral world coordinates; B stores roughness.
-    // Motion RG uses signed fourth-root displacement centered at 0.5.
+    // Motion RG follows ProjectedReflectionSettings::motionEncoding.
     VkImageView previousColor{},previousDepth{},currentDepth{},motion{},surfaceMask{},normalRoughness{};
     VkExtent2D sourceExtent{},traceExtent{};
     // The caller produces unique in-bounds 8x8 tiles (X in high 16 bits, Y in low 16).

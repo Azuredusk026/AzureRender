@@ -78,8 +78,10 @@
 
 ## 借用资源
 
-源尺寸用于前帧线性 HDR 颜色及运动纹理。
+源尺寸用于前帧线性 HDR 颜色。
+运动场按归一化 UV 采样，一像素纹理可表达恒定位移。
 前帧深度、当前深度、遮罩及法线粗糙度使用射线尺寸。
+
 输入视图在录制前进入 `SHADER_READ_ONLY_OPTIMAL`。
 采样采用最近点及边缘钳制。
 
@@ -141,5 +143,7 @@ python tools/compile_projected_reflection.py `
 实现及冻结来源检查见[公共接口验收](../acceptance/nr/projected-ray-contract.md)。
 相机、独立镜面及失败控制见[相机适配验收](../acceptance/nr/projected-camera-adapter.md)。
 公共快照的编码、预算及同步见[表面准备](projected-reflection-preparation.md)。
+
+恒定运动场、历史选择及过滤见[公共组合](projected-screen-reflection.md)。
 
 场景合成及连续历史按[反射接入计划](../plans/2026-10-28-reflection-filter-integration.md)实施。

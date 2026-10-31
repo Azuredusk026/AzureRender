@@ -38,7 +38,7 @@ void fixture(test::VulkanComputeFixture& host,const std::vector<char>& shader,un
     ProjectedReflectionEligibilityTarget target{confidence.image.image,confidence.view,{ow,oh}};
     ProjectedReflectionPreparationGpu resource(backend,{width,height},2,shader,divisor);Readback readback(host.allocator,pixels);
     // This command is deliberately abandoned before queue submission.
-    bool canceled=false;try{host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){resource.record(commands,0,source.view,target,{10,.001F},{});throw std::runtime_error("cancel fixture");});}catch(const std::runtime_error&){canceled=true;}
+    bool canceled=false;try{host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){resource.record(commands,0,source.view,target,{10,.001F},{});canceled=true;throw std::runtime_error("cancel fixture");});}catch(const std::runtime_error&){if(!canceled)throw;}
     if(!canceled)throw std::runtime_error("Cancellation control did not execute");
     for(unsigned epoch=0;epoch<2;++epoch){
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){

@@ -16,6 +16,8 @@
 
 投影深度、法线转换及分帧所有权见[表面准备](docs/runtime/projected-reflection-preparation.md)。
 
+公共生产、历史输入和足迹过滤见[投影反射组合](docs/runtime/projected-screen-reflection.md)。
+
 重装与迁移后先阅读[恢复交接](docs/plans/2026-10-29-reinstall-handoff.md)。
 
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。

@@ -25,7 +25,8 @@ Vulkan 三份完整输出及双配置回归见[参考验证](../acceptance/nr/na
 表面快照通过公共深度和法线准备接口转换。
 
 公共表面转换及镜面组合见[准备验证](../acceptance/nr/projected-surface-preparation.md)。
-接续主场景快照、过滤足迹及历史身份的装配。
+公共生产与过滤组合见[组合验证](../acceptance/nr/projected-reflection-composition.md)。
+接续主场景的类型化选择、快照及历史提交身份。
 
 ## 代码检索与证据管理
 
