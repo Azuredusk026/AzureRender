@@ -1,0 +1,11 @@
+{
+  "status": "diagnostic-candidate-not-promoted",
+  "reason": "User reference resolves to an earlier captured material and temporal reference. Complete joint scene and visibility candidate remain under review.",
+  "run": "build\\runs\\20261031-133610-native-character-visibility-92ad44",
+  "debugWarnings": 4,
+  "warning": "Vertex output Location 15 has no fragment input; no VUID error was recorded. Warning-free gate remains unpassed.",
+  "releaseAndDebugExitCodes": [
+    0,
+    0
+  ]
+}

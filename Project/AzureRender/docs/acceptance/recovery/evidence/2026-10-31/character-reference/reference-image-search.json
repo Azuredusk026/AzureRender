@@ -1,0 +1,175 @@
+{
+  "pngFiles": 61579,
+  "matchedAspect": 21,
+  "elapsedSeconds": 69.78268098831177,
+  "matches": [
+    {
+      "file": "build/runs\\20261024-074605-native-material-aa-reference-9eb92d\\beauty-reference-comparison.png",
+      "size": [
+        580,
+        310
+      ],
+      "meanByteError": 2.537536151279199
+    },
+    {
+      "file": "build/runs\\20261028-095659-native-fog-msaa-coverage-f1b28c\\fog-sample-comparison.png",
+      "size": [
+        1024,
+        545
+      ],
+      "meanByteError": 37.80986837226548
+    },
+    {
+      "file": "build/runs\\20261023-235559-material-outline-binding-fb611b\\native-release-embedded-lean\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.484386355209494
+    },
+    {
+      "file": "build/runs\\20261023-235559-material-outline-binding-fb611b\\native-release-embedded-converted\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.484386355209494
+    },
+    {
+      "file": "build/runs\\20261023-235559-material-outline-binding-fb611b\\native-debug-fixed-converted\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.484386355209494
+    },
+    {
+      "file": "build/runs\\20261026-215130-native-hair-depth-validation-1645d9\\region\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.51646088246199
+    },
+    {
+      "file": "build/runs\\20261026-215130-native-hair-depth-validation-1645d9\\native-culling\\region\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.51910641453467
+    },
+    {
+      "file": "build/runs\\20261026-215130-native-hair-depth-validation-1645d9\\native-coverage\\region\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.519280682239526
+    },
+    {
+      "file": "build/runs\\20261023-232311-captured-hair-ring-closure-a1b608\\hair-region-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.53480163144234
+    },
+    {
+      "file": "build/runs\\20261027-031252-hair-residual-fragment-diagnosis-13e962\\origin-capture-v2\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.62960511679644
+    },
+    {
+      "file": "build/runs\\20261027-002548-native-hair-layer-region-closure-61c105\\receiver-final-debug\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.63078605858361
+    },
+    {
+      "file": "build/runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\exact-release\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.63137374860957
+    },
+    {
+      "file": "build/runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\exact-debug\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.63137374860957
+    },
+    {
+      "file": "build/runs\\20261027-002548-native-hair-layer-region-closure-61c105\\receiver-debug\\hair-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 39.65254356692621
+    },
+    {
+      "file": "build/runs\\20261024-101602-native-hair-coverage-motion-90e55c\\temporal-final-release-native\\hair-temporal-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 53.06929180571005
+    },
+    {
+      "file": "build/runs\\20261024-081424-projected-hair-pixel-integral-2990a6\\temporal-isolated-native\\hair-temporal-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 53.06929180571005
+    },
+    {
+      "file": "build/runs\\20261024-064930-outline-aa-footprint-923102\\native-release-aa3-final\\hair-temporal-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 53.076941045606226
+    },
+    {
+      "file": "build/runs\\20261024-064930-outline-aa-footprint-923102\\native-debug-aa3-final\\hair-temporal-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 53.076941045606226
+    },
+    {
+      "file": "build/runs\\20261024-062736-temporal-coverage-quality-eeef75\\native-debug-aa3-final\\hair-temporal-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 53.07756581386726
+    },
+    {
+      "file": "build/runs\\20261024-042710-temporal-motion-output-de038d\\native-debug-aa3-first\\hair-temporal-comparison.png",
+      "size": [
+        1160,
+        620
+      ],
+      "meanByteError": 53.07756581386726
+    },
+    {
+      "file": "build/runs\\20261024-074605-native-material-aa-reference-9eb92d\\hair-kk-reference-comparison.png",
+      "size": [
+        580,
+        310
+      ],
+      "meanByteError": 58.514299221357064
+    }
+  ]
+}

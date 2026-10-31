@@ -67,3 +67,10 @@ $sceneRun = & build/reinstall-environment/venv/Scripts/python.exe `
 同时传入 `--fixed-frame-step` 及独立的 `--capture-dir`。
 对照项目为同目录的 `full-character-hidden.azureproject`。
 严格环境像素兼容按组合验证页记录实际状态。
+
+## 正面角色参考
+
+用户提供的正面双图具有独立项目和捕获姿态。
+材质、曝光及时间采样按[角色参考](../acceptance/recovery/character-reference.md)执行。
+该入口用于核对眼睛、头发和服装的实际外观。
+完整环境组合继续使用本页的联合场景入口。

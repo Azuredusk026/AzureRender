@@ -1,0 +1,82 @@
+[
+  {
+    "file": "character/native-textures/t16.dds",
+    "bytes": 5592580,
+    "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643"
+  },
+  {
+    "file": "character/native-textures/t18.dds",
+    "bytes": 5592580,
+    "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+  },
+  {
+    "file": "character/native-textures/t17.dds",
+    "bytes": 5592580,
+    "sha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995"
+  },
+  {
+    "file": "character/native-textures/t14.dds",
+    "bytes": 262272,
+    "sha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4"
+  },
+  {
+    "file": "character/native-textures/t12.dds",
+    "bytes": 349700,
+    "sha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4"
+  },
+  {
+    "file": "character/native-textures/t13.dds",
+    "bytes": 1152,
+    "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05"
+  },
+  {
+    "file": "character/native-captured-body/t14.dds",
+    "bytes": 1398276,
+    "sha256": "2ac9344b3693fefd3b74ecfc2b4f6212920b1754173b8212a8f35fcea634a068"
+  },
+  {
+    "file": "character/native-captured-body/t15.dds",
+    "bytes": 1398256,
+    "sha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e"
+  },
+  {
+    "file": "character/native-captured-body/t12.dds",
+    "bytes": 32916,
+    "sha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86"
+  },
+  {
+    "file": "character/native-cloth-04/t11.dds",
+    "bytes": 1152,
+    "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+  },
+  {
+    "file": "character/native-cloth-04/t12.dds",
+    "bytes": 262272,
+    "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+  },
+  {
+    "file": "character/native-cloth-04/t16.dds",
+    "bytes": 5592580,
+    "sha256": "c7ea4150acd1461cfe37bf7bfacdb197dd05ab7193e1ca245ab445c4e2fb2324"
+  },
+  {
+    "file": "character/native-cloth-04/t17.dds",
+    "bytes": 22369748,
+    "sha256": "38a520d6eca0f00bb8cb852679ddcd2fe1bf9c6cac7fa725c5918a5d8139dedd"
+  },
+  {
+    "file": "character/native-cloth-04/t18.dds",
+    "bytes": 5592560,
+    "sha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a"
+  },
+  {
+    "file": "character/hair-native-mask.dds",
+    "bytes": 349700,
+    "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+  },
+  {
+    "file": "character/hair-base-coverage.dds",
+    "bytes": 22369768,
+    "sha256": "0bf35700e233f4b70351b604ac5e2a187fc5bddcc3a4805e68d105178d387cdf"
+  }
+]

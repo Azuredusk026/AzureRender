@@ -46,6 +46,10 @@ Vulkan 三份完整输出及双配置回归见[参考验证](../acceptance/nr/na
 证据及定位顺序见[画质核验计划](2026-10-31-projected-footprint-quality.md)。
 内容同屏、功能检查及外观验收分别记录。
 
+原始正面角色图已按独立项目重跑三十三帧。
+入口差异与剩余像素条件见[角色参考](../acceptance/recovery/character-reference.md)。
+联合画面继续按相同材质与颜色来源校正。
+
 ## 代码检索与证据管理
 
 有界检索、证据归档与按需符号地图已完成。

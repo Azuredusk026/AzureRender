@@ -1,0 +1,35 @@
+{
+  "status": "compared",
+  "scope": "Exact historical entry points and settings; no renderer or shader changes. PNG images compare directly before overview conversion.",
+  "cases": {
+    "temporal": {
+      "size": [
+        1280,
+        720
+      ],
+      "samePixelFraction": 0.9635394965277778,
+      "meanAbsoluteByteError": 0.05985423900462963,
+      "maximumByteError": 234,
+      "currentSha256": "6bd97b6754bd954d91f664e4e37652baa731c9e73216dc9484728139f78130d4",
+      "historicalSha256": "34946eb81b1c5ae7b2c5bde3fa664a9e54e10d4bf55f36d0d079c1a7691b856c",
+      "headMeanAbsoluteByteError": 0.5725324434556915,
+      "headMaximumByteError": 116
+    },
+    "high": {
+      "size": [
+        5120,
+        2880
+      ],
+      "samePixelFraction": 0.9988071017795139,
+      "meanAbsoluteByteError": 0.0005894413700810185,
+      "maximumByteError": 16,
+      "currentSha256": "1dca1ab2122e8d7abe6d187172df558f1dbe234bc30172cac41d85a8fe8a87ad",
+      "historicalSha256": "f6224e0aa6ab0bb68a32f2a327c6d14c1f95d0c32d2e210d11515f18853f74c7"
+    }
+  },
+  "overview": {
+    "samePixelFraction": 0.7952002224694105,
+    "meanAbsoluteByteError": 0.3059621802002225,
+    "maximumByteError": 89
+  }
+}
