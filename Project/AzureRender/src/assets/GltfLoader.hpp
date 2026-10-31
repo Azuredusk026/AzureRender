@@ -3,6 +3,7 @@
 #include "assets/TextureImportSettings.hpp"
 #include "assets/UnlitTextureLayers.hpp"
 #include "assets/MorphTargetData.hpp"
+#include "assets/MaterialRadiance.hpp"
 #include "animation/AnimationCurve.hpp"
 #include "animation/AnimationClipSample.hpp"
 #include "assets/image/ImageCodec.hpp"
@@ -124,6 +125,7 @@ struct AssetMaterial {
     std::uint32_t materialFeatures = MaterialFeatureNeutralFallback;
     std::uint32_t materialProfileVersion = 1;
     bool materialProfileExplicit = false;
+    float radianceScale = 1.0F;
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;

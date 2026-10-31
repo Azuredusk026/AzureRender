@@ -68,6 +68,8 @@ inline OutlineProjectionData buildOutlineProjectionData(const std::vector<Loaded
         materialCount+=asset->materials.size();
         bool used=false;
         for(const auto& material:asset->materials) {
+            validateMaterialRadianceScale(material.radianceScale,
+                (material.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
             validateOutlineProjectionShape(material);
             used|=material.outlineSurface.present
                 &&material.outlineSurface.normalSource!=AssetMaterial::OutlineSurface::NormalSource::Geometry;
@@ -101,7 +103,8 @@ inline OutlineProjectionData buildOutlineProjectionData(const std::vector<Loaded
                 record.indices={static_cast<std::uint32_t>(shape.normalSource),shape.depthPrepass?1U:0U,tangent?base:0U,
                     tangent?static_cast<std::uint32_t>(asset.vertices.size()):0U};
                 record.uvScaleOffset=shape.uvScaleOffset;
-                record.color={shape.color[0],shape.color[1],shape.color[2],1};
+                record.color={shape.color[0]*material.radianceScale,shape.color[1]*material.radianceScale,
+                    shape.color[2]*material.radianceScale,1};
             }
             result.records.push_back(record);result.masks.push_back(&shape);
         }

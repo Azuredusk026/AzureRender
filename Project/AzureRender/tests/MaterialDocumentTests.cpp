@@ -8,10 +8,11 @@
 using namespace azurerender;
 int main(){try{
     auto require=[](bool condition,const char* message){if(!condition)throw std::runtime_error(message);};
-    const nlohmann::json complete={{"schemaVersion",3},{"typeId","azure.profile"},{"parameters",nlohmann::json::object()},
+    nlohmann::json complete={{"schemaVersion",3},{"typeId","azure.profile"},{"parameters",nlohmann::json::object()},
         {"textures",nlohmann::json::object()},{"surface",{{"asset",{{"version","2.0"}}},{"materials",nlohmann::json::array({{
             {"name","complete-fabric"},{"alphaMode","MASK"},{"alphaCutoff",.37},{"doubleSided",true},
             {"extras",{{"azureRenderMaterial",{{"schemaVersion",2},{"class","fabric"},{"features",{"silhouette-outline"}}}}}}}})}}}};
+    complete["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["radianceScale"]=.25;
     const auto completeDocument=MaterialData::parse(complete);
     require(completeDocument.encode()==complete,"Complete material profiles must round trip without semantic loss");
     bool settingsCountRejected=false;
@@ -20,7 +21,7 @@ int main(){try{
     require(settingsCountRejected,"Embedded material import settings must match the source image table");
     require(MaterialGraph::fromMaterial(completeDocument).compile().encode()==complete,"Material graphs must preserve complete surface documents");
     const auto completeMaterial=completeDocument.interpret([](const auto&){return std::filesystem::path();});
-    require(completeMaterial.materialClass==AssetMaterialClass::Fabric&&completeMaterial.doubleSided
+    require(completeMaterial.radianceScale==.25F&&completeMaterial.materialClass==AssetMaterialClass::Fabric&&completeMaterial.doubleSided
         &&completeMaterial.alphaMode==AssetAlphaMode::Mask&&std::abs(completeMaterial.alphaCutoff-.37F)<.00001F
         &&(completeMaterial.materialFeatures&MaterialFeatureSilhouetteOutline),"Complete documents must consume profile and render state");
     auto invalidComplete=complete;invalidComplete["surface"]["buffers"]=nlohmann::json::array();

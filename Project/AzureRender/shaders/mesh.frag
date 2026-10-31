@@ -249,6 +249,9 @@ struct PackedMaterialSurfaceProfile { vec4 rows[21]; };
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
 } materialSurfaceProfiles;
+float azureMaterialRadianceScale() {
+    return materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[19].w;
+}
 ProjectedHairProfile loadProjectedHairSurfaceProfile(uint index) {
     PackedMaterialSurfaceProfile p=materialSurfaceProfiles.profiles[index];
     return ProjectedHairProfile(p.rows[0],p.rows[1],p.rows[2],p.rows[3],p.rows[4],p.rows[5]);
@@ -1814,6 +1817,14 @@ void main() {
         directDiffuse=directDiffuse*characterBlend.a+characterBlend.rgb;
         ambientDiffuse*=characterBlend.a;directSpecular*=characterBlend.a;ambientSpecular*=characterBlend.a;
         kkSpecular*=characterBlend.a;secondaryKkSpecular*=characterBlend.a;rimLighting*=characterBlend.a;emissive*=characterBlend.a;
+    }
+    float radianceScale=azureMaterialRadianceScale();
+    if(radianceScale!=1.0) {
+        beautyColor*=radianceScale;
+        directDiffuse*=radianceScale;ambientDiffuse*=radianceScale;
+        directSpecular*=radianceScale;ambientSpecular*=radianceScale;
+        kkSpecular*=radianceScale;secondaryKkSpecular*=radianceScale;
+        rimLighting*=radianceScale;emissive*=radianceScale;
     }
     vec3 qaColor = beautyColor;
     if (qaIsolationMode == 1) {

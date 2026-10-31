@@ -143,16 +143,18 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             if name in ('fixed','material-colors-fixed','material-colors-main-ramp-fixed','material-colors-character-main-shadow-fixed','receiver-main-fixed','receiver-main-strong-shadow-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             if name in ('material-colors-direct','material-colors-ambient'):command+=['--qa-isolation','direct-diffuse' if name.endswith('direct') else 'ambient']
             (folder/'command.json').write_text(json.dumps(command,indent=2))
-            with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
+            with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120,cwd=folder)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace');assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
-            assert 'Allocator after unload: buffers=0 images=0' in log,name
+            diagnostics=[json.loads(line) for line in (folder/'captures/azureplayer.log.jsonl').read_text(encoding='utf-8').splitlines()]
+            assert not any(item['level']=='error' for item in diagnostics),name
+            assert any(item['message']=='Allocator after unload: buffers=0 images=0' for item in diagnostics),name
             validation='Validation layer: enabled' in log;assert validation or not require_validation
             if expected_validation is not None:assert validation==(expected_validation=='enabled')
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8'))
             assert manifest['nprLighting']['enabled']==settings['enabled']
             assert manifest['nprLighting']['schemaVersion']==1
             assert manifest['nprLighting']['ambientWeight']==settings.get('ambientWeight',1)
-            if material_colors:assert manifest['materialSurfaceProfileLayoutVersion']==17
+            if material_colors:assert manifest['materialSurfaceProfileLayoutVersion']==18
             state_hashes[name]=manifest['qaStateHash']
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             measured=linear(pixels[96 if name.startswith('offset-') else 64,96 if name.startswith('offset-') else 64]);color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)

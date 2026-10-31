@@ -617,7 +617,10 @@ void testMaterialSurfacePacking() {
     hair.surfaceResponse=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse;hair.diffuseScale=.96F;
     const std::array<float,24> expectedHair{.1F,.2F,.3F,.4F,.5F,.6F,.7F,.8F,.9F,1,1.1F,1,1,2,3,.96F,4,5,6,1,7,8,9,0};
     const auto packedHair=packProjectedHairSurfaceProfile(hair);
-    for(std::size_t row=6;row<packedHair.rows.size();++row)require(packedHair.rows[row]==std::array<float,4>{},"Inactive extension rows must remain zero");
+    for(std::size_t row=6;row<packedHair.rows.size();++row) {
+        const auto expected=row==19?std::array<float,4>{0,0,0,1}:std::array<float,4>{};
+        require(packedHair.rows[row]==expected,"Common radiance defaults and inactive extension components must retain their units");
+    }
     require(std::memcmp(&packedHair,expectedHair.data(),sizeof(expectedHair))==0,
         "Typed hair packing must preserve every declared component of the six-row prefix");
     AssetMaterial material;material.materialClass=AssetMaterialClass::Eye;auto& eye=material.eyeSurface;eye.present=true;
@@ -633,6 +636,55 @@ void testMaterialSurfacePacking() {
     material.eyeSurface.present=false;material.materialClass=AssetMaterialClass::Hair;material.projectedHairRamp=hair;
     const auto generic=packMaterialSurfaceProfile(material);
     require(std::memcmp(&generic,expectedHair.data(),sizeof(expectedHair))==0,"Other materials retain stable hair-compatible rows");
+}
+
+void testMaterialRadianceScale(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    auto& profile=source["materials"][0]["extras"]["azureRenderMaterial"];
+    profile={{"schemaVersion",2},{"class","generic"},{"features",Json::array()},{"radianceScale",.25}};
+    const auto path=directory/"radiance-scale.gltf";
+    const auto load=[&](const Json& value){std::ofstream(path)<<value.dump();return loadGltfAsset(path.string());};
+    require(packMaterialSurfaceProfile(load(source).materials.at(0)).rows[19][3]==.25F,
+        "Material radiance scale must reach the common GPU profile row");
+    for(const auto value:{0.,1.,16.}) {
+        auto selected=source;selected["materials"][0]["extras"]["azureRenderMaterial"]["radianceScale"]=value;
+        const auto loaded=load(selected);
+        require(packMaterialSurfaceProfile(loaded.materials.at(0)).rows[19][3]==value,
+            "Material radiance scale must preserve zero, neutral and upper boundary");
+    }
+    auto defaults=source;defaults["materials"][0]["extras"]["azureRenderMaterial"].erase("radianceScale");
+    require(packMaterialSurfaceProfile(load(defaults).materials.at(0)).rows[19][3]==1,
+        "Omitted material radiance scale must retain unit radiance");
+    for(const auto& value:Json::array({nullptr,true,".25",-.01,-1e-50,16.0000001,16.01})) {
+        auto invalid=source;invalid["materials"][0]["extras"]["azureRenderMaterial"]["radianceScale"]=value;
+        std::string failure;try{(void)load(invalid);}catch(const std::exception& error){failure=error.what();}
+        require(failure.find("radianceScale")!=std::string::npos,
+            "Invalid material radiance input must name radianceScale");
+    }
+    auto legacy=source;legacy["materials"][0]["extras"]["azureRenderMaterial"]["schemaVersion"]=1;
+    bool rejected=false;try{(void)load(legacy);}catch(const std::exception& error){rejected=std::string(error.what()).find("radianceScale")!=std::string::npos;}
+    require(rejected,"Explicit radiance scale requires profile version two");
+    auto multiply=source;auto& mask=multiply["materials"][0];mask["alphaMode"]="BLEND";
+    auto& response=mask["extras"]["azureRenderMaterial"];response["class"]="overlay";
+    response["features"]={"overlay","multiply-composite"};response["composite"]={{"schemaVersion",1},{"mode","multiply"}};
+    rejected=false;try{(void)load(multiply);}catch(const std::exception& error){rejected=std::string(error.what()).find("radianceScale")!=std::string::npos;}
+    require(rejected,"Multiplicative factors must reject non-unit radiance scaling");
+    response["radianceScale"]=1;
+    require(packMaterialSurfaceProfile(load(multiply).materials.at(0)).rows[19][3]==1,
+        "Multiplicative factors retain their unitless response");
+    AssetMaterial layered;layered.radianceScale=.25F;layered.unlitTextureLayers.present=true;
+    layered.unlitTextureLayers.baseUvDistortion.present=true;
+    layered.unlitTextureLayers.baseUvDistortion.scale={.2F,.3F};
+    layered.unlitTextureLayers.baseUvDistortion.bias={.4F,.5F};
+    const auto packed=packMaterialSurfaceProfile(layered);
+    require(packed.rows[19][3]==.25F&&packed.rows[20]==std::array<float,4>{.2F,.3F,.4F,.5F},
+        "Common radiance scaling must preserve unlit UV distortion ownership");
+    for(float value:{-1.F,17.F,std::numeric_limits<float>::infinity(),std::numeric_limits<float>::quiet_NaN()}) {
+        layered.radianceScale=value;rejected=false;
+        try{(void)packMaterialSurfaceProfile(layered);}catch(const std::exception& error){rejected=std::string(error.what()).find("radianceScale")!=std::string::npos;}
+        require(rejected,"Typed material packing rejects invalid radiance scales");
+    }
 }
 
 void testEyeRadialSurface(const nlohmann::json& fixture,const std::filesystem::path& directory) {
@@ -992,6 +1044,7 @@ int main(int argc,char** argv) { try {
     testCharacterProfileTextures(input,directory);
     testProjectedHairRamp(input,directory);
     testOutlineSurface(input,directory);
+    testMaterialRadianceScale(input,directory);
     testEyeRadialSurface(input,directory);
     testMaterialSurfacePacking();
     testMultiplyComposite(input,directory);

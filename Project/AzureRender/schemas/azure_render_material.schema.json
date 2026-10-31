@@ -30,6 +30,13 @@
         "showcase"
       ]
     },
+    "radianceScale": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 16,
+      "default": 1,
+      "description": "Linear outgoing-radiance multiplier after material response and before view transport. Multiplicative surfaces require one."
+    },
     "features": {
       "type": "array",
       "uniqueItems": true,
@@ -156,6 +163,16 @@
       "description": "Typed fields and ownership are validated by the production material interpreter."
     }
   },
+  "allOf": [
+    {
+      "if": {"required": ["radianceScale"]},
+      "then": {"properties": {"schemaVersion": {"const": 2}}}
+    },
+    {
+      "if": {"required": ["features"], "properties": {"features": {"contains": {"const": "multiply-composite"}}}},
+      "then": {"properties": {"radianceScale": {"const": 1}}}
+    }
+  ],
   "$defs": {
     "parameterVector": {
       "type": "array",

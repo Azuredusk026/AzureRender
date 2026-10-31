@@ -1,0 +1,29 @@
+{
+  "command": [
+    "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+    "--test-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "-R",
+    "^(AzureRender\\.SceneInstanceGpuLayout|AzureRender\\.MaterialPipelinePolicy|AzureRender\\.UnlitTextureMaterial|AzureRender\\.MaterialTextureSharing|AzureRender\\.CharacterRepair|AzureRender\\.OutlineProjection|AzureAssets\\.TextureMaterialImport|AzureAssets\\.ShadowColorLut|AzureRender\\.MaterialOriginInstances|AzureAssets\\.MaterialGraph|AzureAssets\\.MaterialDocument)$",
+    "-j",
+    "1",
+    "--output-on-failure",
+    "--no-tests=error"
+  ],
+  "exitCode": 0,
+  "selectedTests": [
+    "AzureRender.SceneInstanceGpuLayout",
+    "AzureRender.MaterialPipelinePolicy",
+    "AzureRender.UnlitTextureMaterial",
+    "AzureRender.MaterialTextureSharing",
+    "AzureRender.CharacterRepair",
+    "AzureRender.OutlineProjection",
+    "AzureAssets.TextureMaterialImport",
+    "AzureAssets.ShadowColorLut",
+    "AzureRender.MaterialOriginInstances",
+    "AzureAssets.MaterialGraph",
+    "AzureAssets.MaterialDocument"
+  ],
+  "executedPassedCount": 11,
+  "status": "passed"
+}

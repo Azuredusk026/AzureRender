@@ -1,0 +1,26 @@
+{
+  "name": "near-world-temporal",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\near-world-temporal.azureproject",
+    "--width",
+    "1536",
+    "--height",
+    "1536",
+    "--capture-frames",
+    "32",
+    "--fixed-frame-step",
+    "--capture-fps",
+    "60",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\near-world-temporal\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\near-world-temporal\\runtime.json"
+  ],
+  "status": "running"
+}

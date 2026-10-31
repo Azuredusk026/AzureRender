@@ -1591,6 +1591,10 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.SilhouetteCoverageGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.UnlitSurfaceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_unlit_surface_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.UnlitSurfaceGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.MaterialRadianceGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_radiance_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.MaterialRadianceGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.UnlitTextureLayersGpu COMMAND "${Python3_EXECUTABLE}"
         "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_unlit_texture_layers_gpu.py" --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

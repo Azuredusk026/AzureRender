@@ -6,9 +6,11 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=17;
+    static constexpr unsigned kLayoutVersion=18;
     using Row=std::array<float,4>;
-    std::array<Row,21> rows{};
+    std::array<Row,21> rows=[] {
+        std::array<Row,21> value{};value[19][3]=1;return value;
+    }();
 };
 static_assert(std::is_standard_layout_v<PackedMaterialSurfaceProfile>);
 static_assert(sizeof(PackedMaterialSurfaceProfile)==336);
@@ -50,6 +52,7 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
         {eye.highlightColor[0],eye.highlightColor[1],eye.highlightColor[2],0},
         {eye.scatteringColor[0],eye.scatteringColor[1],eye.scatteringColor[2],0},
         eye.matcapColor,{eye.directWeights[0],eye.directWeights[1],eye.directWeights[2],0},eye.uvScaleOffset}}};
+    result.rows[19][3]=1;
     if(eye.nprLighting){
         result.rows[6]={eye.shadowScale,0,0,1};
         result.rows[7]={eye.ambientColor[0],eye.ambientColor[1],eye.ambientColor[2],0};
@@ -59,6 +62,8 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 }
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
+    validateMaterialRadianceScale(material.radianceScale,
+        (material.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
     PackedMaterialSurfaceProfile result;
     if(material.unlitTextureLayers.present) {
         const auto& p=material.unlitTextureLayers;auto& r=result.rows;
@@ -89,6 +94,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         }
         r[16][3]=p.fogMode==UnlitTextureLayers::FogMode::Scene?1.F:0.F;
         r[15][3]=p.composite==UnlitTextureLayers::Composite::Additive?1.F:0.F;
+        r[19][3]=material.radianceScale;
         return result;
     }
     if(material.nprDiffuse.present) {
@@ -124,6 +130,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
             result.rows[4]={0,0,ramp.iridescence,ramp.flipV?-1.F:1.F};
         }
     }
+    result.rows[19][3]=material.radianceScale;
     return result;
 }
 }

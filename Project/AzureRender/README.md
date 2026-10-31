@@ -6,6 +6,7 @@
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。
 原生姿态、同条件材质对照及 GI 覆盖见[输入核验](docs/acceptance/nr/native-material-input-audit.md)。
 直接贡献、环境贡献与阴影差异见[照明分项](docs/acceptance/nr/joint-lighting-components.md)。
+完整线性输出、眼睛自发光及曝光换算见[辐亮度验证](docs/acceptance/nr/material-radiance-normalization.md)。
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。
 

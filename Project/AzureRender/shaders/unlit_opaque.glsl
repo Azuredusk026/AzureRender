@@ -15,6 +15,8 @@ bool azureWritePlainUnlitBeauty(vec4 baseColor,vec3 geometricNormal,float platfo
         *material.emissiveStrength*float((features&8U)!=0U);
     if(effect==6&&disabled)emission=vec3(0);
     outputColor=vec4(baseColor.rgb+emission,1);
+    float radianceScale=azureMaterialRadianceScale();
+    if(radianceScale!=1.0)outputColor.rgb*=radianceScale;
     if((material.materialPadding&AZURE_SELECTED_PADDING)!=0U)
         outputColor.rgb=mix(outputColor.rgb,vec3(.96,.62,.10),.42);
 #if defined(AZURE_OPAQUE_SNAPSHOT)

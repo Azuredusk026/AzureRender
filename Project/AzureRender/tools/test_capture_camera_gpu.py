@@ -59,7 +59,7 @@ def run(player,output):
             assert lens['projection']==('orthographic' if case.get('ortho') else 'perspective')
             if case.get('ortho'):assert lens['orthographicHeight']==case['height']
             else:assert abs(lens['verticalFovRadians']-math.radians(case['fov']))<1e-6
-            assert manifest['qaStateFingerprintVersion']==2
+            assert manifest['qaStateFingerprintVersion']==3
             angle=math.radians(case.get('roll',0));expected_up=[math.sin(angle),math.cos(angle),0]
             assert max(abs(a-b) for a,b in zip(manifest['cameraUp'],expected_up))<1e-6
             assert manifest['cameraProjection']==dict(schemaVersion=2,offsetNdc=[0,0])

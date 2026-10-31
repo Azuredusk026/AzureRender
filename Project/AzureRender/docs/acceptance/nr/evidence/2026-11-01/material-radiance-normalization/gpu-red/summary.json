@@ -1,0 +1,36 @@
+{
+  "status": "failed",
+  "programSha256": "88ddbcafd7205aa6ab5cc94c71d507f61634058388e74d523e226d00e3d96e2f",
+  "maximumLinearErrorBudget": 0.008,
+  "nativeEquivalenceClaimed": false,
+  "captures": [
+    {
+      "name": "unlit-quarter",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-red\\unlit-quarter\\lab.azureproject",
+        "--width",
+        "128",
+        "--height",
+        "128",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-red\\unlit-quarter\\frames",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-isolation",
+        "beauty",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-red\\unlit-quarter\\runtime.json"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "comparisons": [],
+  "failure": "('unlit-quarter', 1, ' threshold, F12 screenshot\\nValidation layer: disabled\\nSelected GPU: NVIDIA GeForce RTX 4060 Laptop GPU\\nHDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)\\nAllocator after unload: buffers=0 images=0\\n[1793471771763][info][startup][code=0] Starting logical device\\n[1793471771800][info][gpu][code=0] GPU capability report: D:\\\\Projects\\\\FYP\\\\Project\\\\AzureRender\\\\build\\\\runs\\\\20261101-021345-material-radiance-normalization-1e6231\\\\gpu-red\\\\unlit-quarter\\\\frames\\\\gpu_capabilities.json\\n[1793471771800][info][startup][code=0] Completed logical device in 37 ms\\n[1793471771801][info][startup][code=0] Starting shadow resources\\n[1793471771804][info][startup][code=0] Completed shadow resources in 2 ms\\n[1793471772025][info][startup][code=0] Starting graphics pipelines\\n[1793471772029][info][startup][code=0] Completed graphics pipelines in 3 ms\\n[1793471772030][info][startup][code=0] Starting scene renderer\\nAzurePlayer: azureRenderMaterial radiance-subject unlit surface: unknown field radianceScale\\n')"
+}

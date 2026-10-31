@@ -1,0 +1,262 @@
+{
+  "status": "prepared",
+  "scope": "Independent text and metadata copies; immutable graphics payloads share NTFS data through hard links. Original material documents, V8 geometry and animation payloads remain intact. Isolated views disable fog and screen reflections to qualify the linear normalization comparison.",
+  "sourceProject": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project",
+  "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project",
+  "linkedFiles": 624,
+  "linkedBytes": 3123920544,
+  "copiedFiles": 936,
+  "sourceExposureEv": -2,
+  "targetExposureEv": 0,
+  "radianceScale": 0.25,
+  "nprSettings": {
+    "schemaVersion": 1,
+    "enabled": true,
+    "ambientColor": [
+      1.1870100498199463,
+      0.9272286891937256,
+      0.8129898905754089
+    ],
+    "ambientDirection": [
+      -0.0,
+      0.9999999999999991,
+      4.371138828673789e-08
+    ],
+    "directionBias": 0.15000000596046448,
+    "directionGain": 1.5,
+    "directionFloor": 0.5,
+    "outdoorGain": 1.0499999523162842,
+    "shadowAmbientGain": 0.800000011920929,
+    "indoorMix": 0.0,
+    "litAmbientMix": 1.0,
+    "mainColorMix": 1.0,
+    "shadowOverride": 1.0,
+    "useSceneIrradiance": false,
+    "ambientWeight": 0.28772246837615967,
+    "specularFloor": 0
+  },
+  "materials": [
+    {
+      "name": "M_actor_laevat_body_01",
+      "sourceFile": "assets/restored-character-materials/material-0.azurematerial",
+      "sourceSha256": "b959f3c38e6be013641ad68221bdbeb1ea1b58ebf74892a290a991893022fad7",
+      "normalizedFile": "assets/normalized-character-materials/material-0.azurematerial",
+      "normalizedSha256": "0cc47d0c3152eeaa15251aabe1b37ccb03c77ab81c5da8874432b7853a153db0",
+      "sourceId": "26ae362b-83b2-54c5-aa09-f01eff61b5c5",
+      "normalizedId": "bf50b644-fbea-5aa8-bbab-bb984f13b2d1",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_actor_laevat_cloth_01",
+      "sourceFile": "assets/restored-character-materials/material-1.azurematerial",
+      "sourceSha256": "7b05827ef427a5137ff194a0b271ca2796c857d0a81b187c7897f835e140986d",
+      "normalizedFile": "assets/normalized-character-materials/material-1.azurematerial",
+      "normalizedSha256": "c7aa0344386f9bafea4fa42f9eac5215b54778be13b2449b868e3658b1f1d55e",
+      "sourceId": "ca044980-579e-578d-b575-7f3a73f50632",
+      "normalizedId": "8a456d3a-da1d-5b0c-b2a0-31a5ab4b07b6",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_hairshadow_common_04",
+      "sourceFile": "assets/restored-character-materials/material-10.azurematerial",
+      "sourceSha256": "1207dd33c57674142f54985a991a73475a2929c397a81f356ed8a7e448843348",
+      "normalizedFile": "assets/normalized-character-materials/material-10.azurematerial",
+      "normalizedSha256": "3244846c2bdd47efccc7db662730a723985b6322c477dbc2752e7c34d6e7a158",
+      "sourceId": "6da0ed78-04f6-5a41-8f9f-e583be7d0a42",
+      "normalizedId": "3422c27c-6277-5f21-97f6-64d29085459e",
+      "radianceScale": 1,
+      "unitlessMultiply": true
+    },
+    {
+      "name": "M_actor_laevat_iris_01",
+      "sourceFile": "assets/restored-character-materials/material-11.azurematerial",
+      "sourceSha256": "501827cef6d5b914db31794f61b8858015167ec6552c8c8a9015b05ff42c4665",
+      "normalizedFile": "assets/normalized-character-materials/material-11.azurematerial",
+      "normalizedSha256": "6751b71bc9a972090d423439f32d249558f6a9c55474bef885a0cd7eff06fd45",
+      "sourceId": "fd6b290a-22cb-5ec9-9f70-78823c5aca9a",
+      "normalizedId": "536f27d7-ab2e-5c77-b01b-1147c97507ea",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_fx_laevat_toppotential_01",
+      "sourceFile": "assets/restored-character-materials/material-12.azurematerial",
+      "sourceSha256": "cefbf58df2ac625fbbbaf96be68a89d0beea7b11bec33cc6a93598f168979682",
+      "normalizedFile": "assets/normalized-character-materials/material-12.azurematerial",
+      "normalizedSha256": "5c73f142d4fae04f25407f74a5f631209077f7631c2c864a5bba54d9e99b4e58",
+      "sourceId": "a565fe8b-d7b8-58eb-b460-e0c18cfe4d83",
+      "normalizedId": "595af35d-e311-5dc0-93a9-a38a3717837c",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_actor_laevat_cloth_02",
+      "sourceFile": "assets/restored-character-materials/material-2.azurematerial",
+      "sourceSha256": "63465376ec9a222028f8e0400ca015b9054523d37eff2ef360d1033685a2d539",
+      "normalizedFile": "assets/normalized-character-materials/material-2.azurematerial",
+      "normalizedSha256": "6a69c298acc2d8d4041614e237480b1d999af9cb11670a0f23de62349c0d2a54",
+      "sourceId": "27786a63-00c9-5713-9ee2-db3043684dc5",
+      "normalizedId": "c65283bc-edbe-5b0a-b2b7-a5146eaf927a",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_actor_laevat_cloth_03",
+      "sourceFile": "assets/restored-character-materials/material-3.azurematerial",
+      "sourceSha256": "55e4b31fff80d95b5e14685efc08c512444a70015aa0433aacc7485e6050221b",
+      "normalizedFile": "assets/normalized-character-materials/material-3.azurematerial",
+      "normalizedSha256": "0f9a6031ab3dd7531f2c6c969f02287c06fc7165e3397eef0c61b0cbdf2bd674",
+      "sourceId": "0fb93dda-55d1-5fe6-b476-5b0bdce96e52",
+      "normalizedId": "1480f515-c499-5594-8c39-8b3ed93ad0b8",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_actor_laevat_cloth_04",
+      "sourceFile": "assets/restored-character-materials/material-4.azurematerial",
+      "sourceSha256": "76ea758de67f868299b0dc6120c8ed7356a3076242da605345d82821b85a15e5",
+      "normalizedFile": "assets/normalized-character-materials/material-4.azurematerial",
+      "normalizedSha256": "6fa62fa7d0314f4b0fd8e410f59534fc8cd75d6de82d7db4e98c6e20552ed46c",
+      "sourceId": "5d4a0c55-e9ab-5c4f-ac74-15c387aa464b",
+      "normalizedId": "0fe35d5e-6bb1-5f5e-ac67-dde1c9acf832",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_actor_laevat_cloth_05",
+      "sourceFile": "assets/restored-character-materials/material-5.azurematerial",
+      "sourceSha256": "6216895e3fbf40146d4c09250c9111ccb7b35db91989624cbe4f0d3ff103a133",
+      "normalizedFile": "assets/normalized-character-materials/material-5.azurematerial",
+      "normalizedSha256": "a986991ec969a4016ed5f6556bd2436ca826edca599f034c612caf02e168daec",
+      "sourceId": "26f11883-d2e4-538d-87ad-45998cd78bfa",
+      "normalizedId": "e2a5305d-7528-594d-869e-e7916f72a77c",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_actor_laevat_brow_01",
+      "sourceFile": "assets/restored-character-materials/material-6.azurematerial",
+      "sourceSha256": "950d7bc898265fda9d0a50656ebb5302750779fd51d67dfaba326bec71d6b189",
+      "normalizedFile": "assets/normalized-character-materials/material-6.azurematerial",
+      "normalizedSha256": "c7ba24a935de428031eba29aba9d878339c74b083411580e3acecfb64e0cbd7e",
+      "sourceId": "a4ccf995-90b2-5d4b-9a31-0a10c3967753",
+      "normalizedId": "e4dee7bf-981b-5ff7-b37d-0fda9508dd7e",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_eyewhiteshadow_common_01",
+      "sourceFile": "assets/restored-character-materials/material-7.azurematerial",
+      "sourceSha256": "988af44d222563ff63279726c5417d99ba241cdba3c6dde6d0e9fb1b74d07914",
+      "normalizedFile": "assets/normalized-character-materials/material-7.azurematerial",
+      "normalizedSha256": "b799318f694e01bc375656a1d35a241d84bb4d4b614ece14efca720c4d777318",
+      "sourceId": "8255c80b-1efe-5b9b-8c5f-8b14c14a3f9a",
+      "normalizedId": "6e3a0089-a684-57fd-923f-8b0670d2bfed",
+      "radianceScale": 1,
+      "unitlessMultiply": true
+    },
+    {
+      "name": "M_actor_laevat_face_01",
+      "sourceFile": "assets/restored-character-materials/material-8.azurematerial",
+      "sourceSha256": "02ecdceafa9a95cc9fcd4abb8971f68e628839aed8a3e877b07fee0c4eb81959",
+      "normalizedFile": "assets/normalized-character-materials/material-8.azurematerial",
+      "normalizedSha256": "42b428553d45070491672f34052b7dd50a53874ef4810d7b7423fc55929ab761",
+      "sourceId": "bdb42458-880a-58f8-b449-12c9e59fef47",
+      "normalizedId": "ca67e029-fd24-5a75-b8d3-1da645fea58f",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    },
+    {
+      "name": "M_actor_laevat_hair_01",
+      "sourceFile": "assets/restored-character-materials/material-9.azurematerial",
+      "sourceSha256": "4325859f1a6f7414ffe5d2eac331fbc26375c211782b92dae8cefb5322e81663",
+      "normalizedFile": "assets/normalized-character-materials/material-9.azurematerial",
+      "normalizedSha256": "7aa99d572219f1ad6623978cba2add9a605e7a93a00ddc66440a7f25eeb2e259",
+      "sourceId": "0fdee780-a9e7-5b36-8770-63ff113c0515",
+      "normalizedId": "6478487e-fb6e-5083-bff3-77a22eb329b2",
+      "radianceScale": 0.25,
+      "unitlessMultiply": false
+    }
+  ],
+  "cases": [
+    {
+      "name": "near-source-isolated",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\near-source-isolated.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\scene\\near-source-isolated.azurelevel",
+      "captureFrames": 1,
+      "width": 1536,
+      "height": 1536,
+      "normalized": false,
+      "isolated": true,
+      "antiAliasing": 0
+    },
+    {
+      "name": "near-normalized-isolated",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\near-normalized-isolated.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\scene\\near-normalized-isolated.azurelevel",
+      "captureFrames": 1,
+      "width": 1536,
+      "height": 1536,
+      "normalized": true,
+      "isolated": true,
+      "antiAliasing": 0
+    },
+    {
+      "name": "near-world-normalized",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\near-world-normalized.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\scene\\near-world-normalized.azurelevel",
+      "captureFrames": 1,
+      "width": 1536,
+      "height": 1536,
+      "normalized": true,
+      "isolated": false,
+      "antiAliasing": 0
+    },
+    {
+      "name": "near-world-temporal",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\near-world-temporal.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\scene\\near-world-temporal.azurelevel",
+      "captureFrames": 32,
+      "width": 1536,
+      "height": 1536,
+      "normalized": true,
+      "isolated": false,
+      "antiAliasing": 3
+    },
+    {
+      "name": "full-world-normalized",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\full-world-normalized.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\scene\\full-world-normalized.azurelevel",
+      "captureFrames": 12,
+      "width": 2560,
+      "height": 1440,
+      "normalized": true,
+      "isolated": false,
+      "antiAliasing": 1
+    },
+    {
+      "name": "full-world-hidden",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\full-world-hidden.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\scene\\full-world-hidden.azurelevel",
+      "captureFrames": 12,
+      "width": 2560,
+      "height": 1440,
+      "normalized": true,
+      "isolated": false,
+      "antiAliasing": 1
+    },
+    {
+      "name": "near-default-compatibility",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\near-default-compatibility.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project\\scene\\near-default-compatibility.azurelevel",
+      "captureFrames": 1,
+      "width": 1536,
+      "height": 1536,
+      "normalized": false,
+      "isolated": false,
+      "antiAliasing": 0
+    }
+  ]
+}

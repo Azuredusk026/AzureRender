@@ -1,0 +1,37 @@
+[
+  {
+    "region": "hair-crown",
+    "exact": true,
+    "maxLinearError": 0.0
+  },
+  {
+    "region": "hair-fringe",
+    "exact": true,
+    "maxLinearError": 0.0
+  },
+  {
+    "region": "face-cheek",
+    "exact": true,
+    "maxLinearError": 0.0
+  },
+  {
+    "region": "face-chin",
+    "exact": true,
+    "maxLinearError": 0.0
+  },
+  {
+    "region": "eye-left",
+    "exact": true,
+    "maxLinearError": 0.0
+  },
+  {
+    "region": "environment-right-wall",
+    "exact": false,
+    "maxLinearError": 0.6346424740958028
+  },
+  {
+    "region": "environment-left-wall",
+    "exact": false,
+    "maxLinearError": 0.7175757794370151
+  }
+]

@@ -202,7 +202,8 @@ void AzureRenderApp::writeCaptureManifest(
                 << ':' << material.materialProfileVersion
                 << ':' << material.materialProfileExplicit
                 << ':' << material.doubleSided
-                << ':' << material.emissiveStrength;
+                << ':' << material.emissiveStrength
+                << ':' << material.radianceScale;
             for (const float parameter : material.styleParameters) {
             qaState << ':' << parameter;
         }
@@ -355,7 +356,7 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"sceneRenderHeight\": " << sceneRenderExtent_.height << ",\n"
         << "  \"shadowDistance\": " << effectiveRenderSettings_.shadowDistance << ",\n"
         << "  \"qaStateHashAlgorithm\": \"FNV-1a-64\",\n"
-        << "  \"qaStateFingerprintVersion\": 2,\n"
+        << "  \"qaStateFingerprintVersion\": 3,\n"
         << "  \"qaStateHash\": " << std::quoted(qaStateHash) << ",\n"
         << "  \"toonRampFormat\": \"AzureRender Toon Ramp Profiles v1\",\n"
         << "  \"toonRampVersion\": 1,\n"
@@ -405,6 +406,7 @@ void AzureRenderApp::writeCaptureManifest(
                 << material.materialProfileVersion
                 << ", \"emissiveStrength\": "
                 << material.emissiveStrength
+                << ", \"radianceScale\": " << material.radianceScale
                 << ", \"styleParameters\": ["
                 << material.styleParameters[0] << ", "
                 << material.styleParameters[1] << ", "

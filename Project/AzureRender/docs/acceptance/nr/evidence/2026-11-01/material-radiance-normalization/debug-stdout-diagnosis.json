@@ -1,0 +1,307 @@
+{
+  "case": "unlit-exposure",
+  "stdoutMissingUnload": true,
+  "structuredRecords": [
+    {
+      "timestamp_ms": 1793475239712,
+      "level": "print",
+      "subsystem": "gpu",
+      "code": 0,
+      "message": "Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU"
+    },
+    {
+      "timestamp_ms": 1793475239712,
+      "level": "print",
+      "subsystem": "gpu",
+      "code": 0,
+      "message": "HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)"
+    },
+    {
+      "timestamp_ms": 1793475239712,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Starting logical device"
+    },
+    {
+      "timestamp_ms": 1793475239756,
+      "level": "info",
+      "subsystem": "gpu",
+      "code": 0,
+      "message": "GPU capability report: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-final-debug\\unlit-exposure\\frames\\gpu_capabilities.json"
+    },
+    {
+      "timestamp_ms": 1793475239756,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Completed logical device in 43 ms"
+    },
+    {
+      "timestamp_ms": 1793475239758,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Starting shadow resources"
+    },
+    {
+      "timestamp_ms": 1793475239761,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Completed shadow resources in 3 ms"
+    },
+    {
+      "timestamp_ms": 1793475240022,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Starting graphics pipelines"
+    },
+    {
+      "timestamp_ms": 1793475240030,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Completed graphics pipelines in 8 ms"
+    },
+    {
+      "timestamp_ms": 1793475240034,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Starting scene renderer"
+    },
+    {
+      "timestamp_ms": 1793475240040,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "Turntable foot pivot: [4.000000, -4.000000, 0.000000]"
+    },
+    {
+      "timestamp_ms": 1793475240041,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "Asset path: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-final-debug\\unlit-exposure\\plane.gltf"
+    },
+    {
+      "timestamp_ms": 1793475240041,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "Loaded asset: 293 vertices, 870 indices, 2 primitives, 4 materials"
+    },
+    {
+      "timestamp_ms": 1793475240041,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "Material Class v1 inventory:"
+    },
+    {
+      "timestamp_ms": 1793475240041,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "  [0] profile-index-padding -> generic, flags=0x20, source=fallback/inferred"
+    },
+    {
+      "timestamp_ms": 1793475240041,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "  [1] radiance-subject -> generic, flags=0x40008, source=asset-extras"
+    },
+    {
+      "timestamp_ms": 1793475240041,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "  [2] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred"
+    },
+    {
+      "timestamp_ms": 1793475240041,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "  [3] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras"
+    },
+    {
+      "timestamp_ms": 1793475240042,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "Skinning: static fallback, 1 joint matrices, 0 Morph targets"
+    },
+    {
+      "timestamp_ms": 1793475240042,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "Morph weights: 0.000000, 0.000000"
+    },
+    {
+      "timestamp_ms": 1793475240042,
+      "level": "print",
+      "subsystem": "asset",
+      "code": 0,
+      "message": "Animations: 0"
+    },
+    {
+      "timestamp_ms": 1793475240043,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Character texture access: indexed, requested slots=38, stage sampler limit=1048576"
+    },
+    {
+      "timestamp_ms": 1793475240043,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Scene load CPU preparation: 8.368600 ms, materialPixelBytes=464"
+    },
+    {
+      "timestamp_ms": 1793475240089,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Character IBL: GPU-prefiltered environment mip chain"
+    },
+    {
+      "timestamp_ms": 1793475240095,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Scene load shared textures: 36.926900 ms"
+    },
+    {
+      "timestamp_ms": 1793475240096,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Scene load buffers: 0.251300 ms"
+    },
+    {
+      "timestamp_ms": 1793475240097,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Character skinning and morph: Vulkan compute path"
+    },
+    {
+      "timestamp_ms": 1793475240097,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Scene load skinning: 1.658600 ms"
+    },
+    {
+      "timestamp_ms": 1793475240101,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Scene load descriptors: 3.597100 ms"
+    },
+    {
+      "timestamp_ms": 1793475243338,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Scene load pipelines: 3235.971600 ms"
+    },
+    {
+      "timestamp_ms": 1793475243338,
+      "level": "info",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Optional resources: faceSdfTextures=0, showcasePlatform=true"
+    },
+    {
+      "timestamp_ms": 1793475243338,
+      "level": "print",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Scene renderer: character (sceneType=character)"
+    },
+    {
+      "timestamp_ms": 1793475243339,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Completed scene renderer in 3304 ms"
+    },
+    {
+      "timestamp_ms": 1793475243339,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Starting editor interface"
+    },
+    {
+      "timestamp_ms": 1793475243339,
+      "level": "info",
+      "subsystem": "startup",
+      "code": 0,
+      "message": "Completed editor interface in 0 ms"
+    },
+    {
+      "timestamp_ms": 1793475243339,
+      "level": "print",
+      "subsystem": "qa",
+      "code": 0,
+      "message": "CQ-0 QA: camera=scene, light=scene, effect=none, state=enabled, isolation=beauty"
+    },
+    {
+      "timestamp_ms": 1793475243339,
+      "level": "print",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Diagnostic view: Beauty, stylized lighting: off, internal outline: off, HUD: off"
+    },
+    {
+      "timestamp_ms": 1793475243344,
+      "level": "print",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Clustered lighting: 1 lights, 3456 cluster references"
+    },
+    {
+      "timestamp_ms": 1793475243354,
+      "level": "info",
+      "subsystem": "capture",
+      "code": 0,
+      "message": "Capture progress: 1 / 1"
+    },
+    {
+      "timestamp_ms": 1793475243605,
+      "level": "print",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Rendered frames: 1"
+    },
+    {
+      "timestamp_ms": 1793475243607,
+      "level": "print",
+      "subsystem": "capture",
+      "code": 0,
+      "message": "Capture manifest: D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\gpu-final-debug\\unlit-exposure\\frames\\capture_manifest.json"
+    },
+    {
+      "timestamp_ms": 1793475243608,
+      "level": "print",
+      "subsystem": "capture",
+      "code": 0,
+      "message": "Captured frames: 1 at 60 fps"
+    },
+    {
+      "timestamp_ms": 1793475243638,
+      "level": "print",
+      "subsystem": "render",
+      "code": 0,
+      "message": "Allocator after unload: buffers=0 images=0"
+    }
+  ]
+}

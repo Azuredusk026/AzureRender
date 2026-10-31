@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "8255c80b-1efe-5b9b-8c5f-8b14c14a3f9a",
+  "settings": {},
+  "dependencies": [
+    "4bd32c61-225c-5f6f-bcc1-4cf326f0ded6"
+  ]
+}

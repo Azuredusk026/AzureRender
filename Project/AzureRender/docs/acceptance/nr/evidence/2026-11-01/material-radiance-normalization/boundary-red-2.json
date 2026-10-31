@@ -1,0 +1,12 @@
+{
+  "expected": "reject-raw-json-value-above-sixteen",
+  "input": 16.0000001,
+  "exitCode": 0,
+  "failedToReject": true,
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\boundary-red-2\\lab.azureproject",
+    "--check-project"
+  ]
+}

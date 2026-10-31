@@ -202,8 +202,18 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
+            if(profile.contains("radianceScale")) {
+                const auto& value=profile.at("radianceScale");
+                if(profile.at("schemaVersion")!=2||!value.is_number())
+                    throw std::invalid_argument(context+": radianceScale requires a number and profile version two");
+                const double authoredScale=value.get<double>();
+                if(!std::isfinite(authoredScale)||authoredScale<0||authoredScale>16)
+                    throw std::invalid_argument(context+": radianceScale requires a finite number within zero and sixteen");
+                result.radianceScale=static_cast<float>(authoredScale);
+                azurerender::validateMaterialRadianceScale(result.radianceScale);
+            }
             for(const char* key:{"styleParameters","featureParameters"})if(profile.contains(key)) {
                 const auto& vector=profile.at(key);
                 if(!vector.is_array()||vector.size()!=4)throw std::invalid_argument(context+": invalid "+key);
@@ -2117,6 +2127,8 @@ AssetMaterial loadMaterial(
             result.textureSettings[slot]=std::move(settings);
         }
     }
+    azurerender::validateMaterialRadianceScale(result.radianceScale,
+        (result.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
     return result;
 }
 

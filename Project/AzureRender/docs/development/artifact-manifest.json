@@ -881,6 +881,15 @@
       "retention": "相应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/joint-lighting-components.md"
+    },
+    {
+      "path": "runs/20261101-021345-material-radiance-normalization-1e6231",
+      "pathBase": "build",
+      "purpose": "材质线性输出、双配置独立曝光及原生联合画质核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-world-normalized.azureproject",
+      "evidence": "docs/acceptance/nr/material-radiance-normalization.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

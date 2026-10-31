@@ -1672,6 +1672,19 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"materialRadianceScales\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];
+                     if(material.radianceScale!=1)
+                         values.push_back({{"materialIndex",base+index},{"name",material.name},{"radianceScale",material.radianceScale}});
+                 }
+             };
+             append(asset_,0);
+             for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
          << "  \"outlineProjectionLayoutVersion\": " << PackedOutlineProjectionRecord::kLayoutVersion << ",\n"
          << "  \"snapshotRasterizationSamples\": " << (snapshotMultisampling_?4:1) << ",\n"
          << "  \"snapshotMultisampleBytes\": " << (snapshotMultisampling_?snapshotMultisampling_->byteSize():0) << ",\n"
