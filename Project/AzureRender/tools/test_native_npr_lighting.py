@@ -4,6 +4,41 @@ from endfield_native import npr_lighting as subject
 
 
 class NprLightingTests(unittest.TestCase):
+    def test_scene_settings_do_not_require_object_light_rows(self):
+        g,_=self.fixture()
+        expected=subject.decode_lighting(*self.fixture(),ambient_row=113,main_color_row=114)['settings']
+        for index in [114,115,121]:del g[index]
+        self.assertEqual(subject.decode_scene_settings(g,ambient_row=113),expected)
+
+    def test_scene_context_keeps_its_own_direction_and_visibility(self):
+        g,_=self.fixture()
+        g[29]=[1,1,1,0];g[110]=[0,1,.7,1];g[111]=[0,0,0,0]
+        g[113]=[1,1,1,1];g[116]=[0,1,0,0];g[117]=[.15,.6,1,0];g[122]=[0,0,1,0]
+        self.assertEqual(subject.decode_scene_settings(g,ambient_row=113),dict(
+            schemaVersion=1,enabled=True,ambientColor=[1,1,1],ambientDirection=[0,1,0],
+            directionBias=.15,directionGain=.6,directionFloor=1,outdoorGain=1,
+            shadowAmbientGain=1,ambientWeight=1,indoorMix=0,litAmbientMix=0,
+            mainColorMix=0,shadowOverride=0,useSceneIrradiance=True))
+
+    def test_scene_settings_respect_direction_convention_and_input_ownership(self):
+        import copy
+        g,_=self.fixture();g[116]=[3,4,0,0];before=copy.deepcopy(g)
+        self.assertEqual(subject.decode_scene_settings(g,ambient_row=112)['ambientDirection'],[-.6,.8,0])
+        self.assertEqual(subject.decode_scene_settings(g,ambient_row=112,reflect_x=False)['ambientDirection'],[.6,.8,0])
+        self.assertEqual(g,before)
+
+    def test_scene_settings_reject_missing_and_invalid_source_fields(self):
+        for index in [27,29,110,111,112,116,117,122]:
+            g,_=self.fixture();del g[index]
+            with self.subTest(missing=index),self.assertRaises(ValueError):
+                subject.decode_scene_settings(g,ambient_row=112)
+        for index,component,value in [(27,0,17),(29,0,-.1),(110,1,-1),(110,3,17),
+            (111,2,1.1),(112,0,65),(116,1,0),(117,0,2),(117,1,17),(117,2,-1),
+            (122,1,2),(122,3,float('nan')),(117,1,False)]:
+            g,_=self.fixture();g[index][component]=value
+            with self.subTest(field=index,component=component),self.assertRaises(ValueError):
+                subject.decode_scene_settings(g,ambient_row=112)
+
     def test_surface_material_colors_follow_explicit_source_rows(self):
         self.assertEqual(subject.decode_surface_lighting(*self.fixture(),ambient_row=113,main_color_row=114),
             dict(schemaVersion=1,ambientColor=[1.2,.9,.8],mainColor=[1,.9,.8]))

@@ -846,6 +846,15 @@
       "primaryProject": "移动后的完整场景/playable.azureproject",
       "primaryPackage": "独立游戏 中文 空格",
       "evidence": "docs/acceptance/recovery/full-scene-delivery.md"
+    },
+    {
+      "path": "runs/20261031-222119-combined-visual-isolation-ad6878",
+      "pathBase": "build",
+      "purpose": "联合画质失败诊断、场景照明来源及同输入角色上下文。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/native-scene-near.azureproject",
+      "evidence": "docs/acceptance/nr/joint-visual-input-isolation.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

@@ -1,0 +1,79 @@
+{
+  "scene": {
+    "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame3534\\e8944-ps-cb1.bin",
+    "sourceSha256": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007",
+    "sourceBytes": 3328,
+    "layoutContract": "tools/endfield_native/npr_lighting.py confirmed global layout",
+    "settings": {
+      "schemaVersion": 1,
+      "enabled": true,
+      "ambientColor": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "ambientDirection": [
+        -0.0,
+        1.0,
+        0.0
+      ],
+      "directionBias": 0.15000000596046448,
+      "directionGain": 0.6000000238418579,
+      "directionFloor": 1.0,
+      "outdoorGain": 1.0,
+      "shadowAmbientGain": 1.0,
+      "ambientWeight": 1.0,
+      "indoorMix": 0.0,
+      "litAmbientMix": 0.0,
+      "mainColorMix": 0.0,
+      "shadowOverride": 0.0,
+      "useSceneIrradiance": true,
+      "specularFloor": 0.55
+    }
+  },
+  "portrait": {
+    "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame10401\\e804-PS-cb1.bin",
+    "sourceSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+    "sourceBytes": 3328,
+    "layoutContract": "tools/endfield_native/npr_lighting.py confirmed global layout",
+    "settings": {
+      "schemaVersion": 1,
+      "enabled": true,
+      "ambientColor": [
+        1.1870100498199463,
+        0.9272286891937256,
+        0.8129898905754089
+      ],
+      "ambientDirection": [
+        -0.0,
+        0.9999999999999991,
+        4.371138828673789e-08
+      ],
+      "directionBias": 0.15000000596046448,
+      "directionGain": 1.5,
+      "directionFloor": 0.5,
+      "outdoorGain": 1.0499999523162842,
+      "shadowAmbientGain": 0.800000011920929,
+      "ambientWeight": 0.28772246837615967,
+      "indoorMix": 0.0,
+      "litAmbientMix": 1.0,
+      "mainColorMix": 1.0,
+      "shadowOverride": 1.0,
+      "useSceneIrradiance": false
+    }
+  },
+  "baselineComparison": {
+    "status": "failed-source-input-match",
+    "differences": {
+      "directionBias": {
+        "current": 0.0,
+        "nativeScene": 0.15000000596046448
+      },
+      "directionGain": {
+        "current": 0.0,
+        "nativeScene": 0.6000000238418579
+      }
+    },
+    "scope": "Global composition only; object lighting, visibility, material colors, HDR and complete appearance remain separate conditions."
+  }
+}

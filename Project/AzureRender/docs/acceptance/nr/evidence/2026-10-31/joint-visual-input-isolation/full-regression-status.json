@@ -1,0 +1,32 @@
+{
+  "status": "interrupted-for-visual-diagnosis",
+  "sourceCommit": "39811d70cf282de2e8ad0e6ccf4d95bdd4201374",
+  "startedUtc": "2026-10-31T14:00:36.9901986Z",
+  "builds": [
+    {
+      "configuration": "debug",
+      "seconds": 366.9632793,
+      "exitCode": 0
+    },
+    {
+      "configuration": "release",
+      "seconds": 293.6585324,
+      "exitCode": 0
+    }
+  ],
+  "tests": [],
+  "programsBefore": {
+    "debug/AzureRender.exe": "e0ddc49cd2a01f0ce904773ff7162bb9196f80fc1a91952e8f4050c6638ac574",
+    "release/AzureRender.exe": "d4d911ba75e59f5c7fde78f6a00c253cdf1d42903cd7deeb4b7b5362992e08b8",
+    "release/AzurePlayer.exe": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+    "debug/AzurePlayer.exe": "7ea392f19e2db9d3904a58d5d4890fbaa6d1b166de027cefe8d386c1adf02169"
+  },
+  "programsAfter": {
+    "debug/AzureRender.exe": "e0ddc49cd2a01f0ce904773ff7162bb9196f80fc1a91952e8f4050c6638ac574",
+    "release/AzureRender.exe": "d4d911ba75e59f5c7fde78f6a00c253cdf1d42903cd7deeb4b7b5362992e08b8",
+    "release/AzurePlayer.exe": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+    "debug/AzurePlayer.exe": "7ea392f19e2db9d3904a58d5d4890fbaa6d1b166de027cefe8d386c1adf02169"
+  },
+  "interruptionReason": "用户明确拒绝联合画质，优先执行五项画质缺陷的独立参考对照。完整双配置构建成功；未完成测试不计为通过。",
+  "interruptedUtc": "2026-10-31T14:20:54.3214709Z"
+}

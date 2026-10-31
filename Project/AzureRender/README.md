@@ -2,6 +2,8 @@
 
 最终交付目标与当前执行顺序见[开发总计划](docs/plans/azure-engine-plan.md)。
 
+联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
+
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。
 
 完整物流场景的当前截图与启动入口见[画面恢复](docs/acceptance/recovery/full-scene-visual.md)。

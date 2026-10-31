@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-inputs-verified-visual-acceptance-failed",
+  "retainedRun": "build\\runs\\20261031-222119-combined-visual-isolation-ad6878",
+  "files": [
+    {
+      "file": "cases.json",
+      "bytes": 1179,
+      "sha256": "f8a5cf85b4427aeeae0a29e716b3c770a19b5cfbccf95e1b2167dc57d31274d9"
+    },
+    {
+      "file": "context-cases.json",
+      "bytes": 309,
+      "sha256": "cc4b8aaae354117f5a01812f44a9fca4f8be17387514015a681297a46bd25015"
+    },
+    {
+      "file": "context-delta.json",
+      "bytes": 519,
+      "sha256": "491cfee7d53e256e7b2e18c932644f467dca4c391585a6cfc1b885c2b4380b9a"
+    },
+    {
+      "file": "context-image-comparison.json",
+      "bytes": 1155,
+      "sha256": "a655cff57ee3bdd301702505d46077f68aa9dfac81aae2af3714824747774f2e"
+    },
+    {
+      "file": "context-summary.json",
+      "bytes": 20643,
+      "sha256": "8c947cd685081e69318bc6dc3f571971e5a518868f596235efc835f3f14baf14"
+    },
+    {
+      "file": "control/capture_manifest.json",
+      "bytes": 8924,
+      "sha256": "49a3a0fe4d8bb020cf908cbed06465b019a5ba4688e8104aa1ea200991836b32"
+    },
+    {
+      "file": "control/player.log.gz",
+      "bytes": 3263,
+      "sha256": "139db7fa8228b8a14cec06e33558501daa3d64bf89e9a0a508bb5599eb18577a"
+    },
+    {
+      "file": "control/runtime.json.gz",
+      "bytes": 30587,
+      "sha256": "fad491b0b5c15f2a666c407bf3d08d4980d11c4f1fd2231aed010c8c07819620"
+    },
+    {
+      "file": "control.png",
+      "bytes": 3674548,
+      "sha256": "259ffbb4c4da4b20bd2f1b24fe0d9e7fe84ee40bf75847731a951832cc6a1bf9"
+    },
+    {
+      "file": "decoder-debug.log",
+      "bytes": 367,
+      "sha256": "fa0340ddd5a6df3a6b1cad4301709b89690cd372b899d6e87806d7cfbda6254f"
+    },
+    {
+      "file": "decoder-green.log",
+      "bytes": 114,
+      "sha256": "f70c5e12f81e6ca2a27c5a58d268b60f9b9764c638cc0c6fbef9bce3d25bd541"
+    },
+    {
+      "file": "decoder-red.log",
+      "bytes": 17188,
+      "sha256": "9f76739a33a6cceaa0e594aeae95576fb52b3ea07d46c01ceb9b864d9bc1cfca"
+    },
+    {
+      "file": "decoder-release.log",
+      "bytes": 371,
+      "sha256": "8555d69948d32264251afd06c13224e721249247c95e4a1dc08c366d0bc19408"
+    },
+    {
+      "file": "full-npr-portrait-display/capture_manifest.json",
+      "bytes": 9002,
+      "sha256": "45a5c0168b7fb1523ef404fe6bfbea7a333b70c416d4aa7b4ff7d5b85b071f62"
+    },
+    {
+      "file": "full-npr-portrait-display/player.log.gz",
+      "bytes": 3272,
+      "sha256": "f9f0fcd0ae66a936f44c490d3392c53f4a416f2382afc44eafbc79cd1c42b0e8"
+    },
+    {
+      "file": "full-npr-portrait-display/runtime.json.gz",
+      "bytes": 30587,
+      "sha256": "fad491b0b5c15f2a666c407bf3d08d4980d11c4f1fd2231aed010c8c07819620"
+    },
+    {
+      "file": "full-npr-real-shadow/capture_manifest.json",
+      "bytes": 9048,
+      "sha256": "2d0eb5cccf012f98110d4a85309443d60f99de550a158cdd2ef3da0e198e5833"
+    },
+    {
+      "file": "full-npr-real-shadow/player.log.gz",
+      "bytes": 3279,
+      "sha256": "bce5e489b10de97a38fd25b310b145beead6f8265f33824eb905faede25c1153"
+    },
+    {
+      "file": "full-npr-real-shadow/runtime.json.gz",
+      "bytes": 30587,
+      "sha256": "fad491b0b5c15f2a666c407bf3d08d4980d11c4f1fd2231aed010c8c07819620"
+    },
+    {
+      "file": "full-npr-shadow-override/capture_manifest.json",
+      "bytes": 9050,
+      "sha256": "38728c200f424e7e325aaeb503c444b3574977271a6c0c212e736e7395f83012"
+    },
+    {
+      "file": "full-npr-shadow-override/player.log.gz",
+      "bytes": 3259,
+      "sha256": "18ab29569c4c075030afc0f88a279e6b375a47bc494b168b510a5c070f4f9c05"
+    },
+    {
+      "file": "full-npr-shadow-override/runtime.json.gz",
+      "bytes": 30587,
+      "sha256": "fad491b0b5c15f2a666c407bf3d08d4980d11c4f1fd2231aed010c8c07819620"
+    },
+    {
+      "file": "full-regression/build-debug.log.gz",
+      "bytes": 3863,
+      "sha256": "5751bff6480732d8ca234994c5276e007a0d0ceccb95d213c1072f7e40f2cf5a"
+    },
+    {
+      "file": "full-regression/build-release.log.gz",
+      "bytes": 3917,
+      "sha256": "3f5d8d327093adf25bcee4fb810adb00f9af9fcd0ab5e5b0496f3bce65b33956"
+    },
+    {
+      "file": "full-regression/ctest-debug.log.gz",
+      "bytes": 3169,
+      "sha256": "93dc9c8ac0fc98c70e26e1aa11011339f293fabfcda5d6e94172c797359f9866"
+    },
+    {
+      "file": "full-regression-status.json",
+      "bytes": 1451,
+      "sha256": "beec88f24541c53dce739ecf59fd4afa87b26ffa8bacf086013174bdb18d918c"
+    },
+    {
+      "file": "input-settings.json",
+      "bytes": 15281,
+      "sha256": "44763857a11816ad08f9afea0aa680962f10abff3ca9da2ebe5f6d3742cc52ce"
+    },
+    {
+      "file": "inputs/control.azurelevel.gz",
+      "bytes": 217639,
+      "sha256": "6d7e5a5f2cbb39dc0d3f2e3651793716a9283ce96f548199aafe95a31982543d"
+    },
+    {
+      "file": "inputs/control.azureproject",
+      "bytes": 1827,
+      "sha256": "99ba52cb854061690f8015c892c1c63d59c6fdff69b88f05e4ea5dfa93cb3ca0"
+    },
+    {
+      "file": "inputs/full-npr-portrait-display.azurelevel.gz",
+      "bytes": 217832,
+      "sha256": "9a07bb6e998fa446ab51cda8954e9109837187007020cff8d5b10ee0e16303c5"
+    },
+    {
+      "file": "inputs/full-npr-portrait-display.azureproject",
+      "bytes": 1863,
+      "sha256": "64a2a64da16ebb3e472a8c5143004a93e5d14a146166172ac48298813c24a6b8"
+    },
+    {
+      "file": "inputs/full-npr-real-shadow.azurelevel.gz",
+      "bytes": 217837,
+      "sha256": "8bad38c35c88ad3cedc2e4bd2925c3adfce505feccd24073b1d883e7cef5de0c"
+    },
+    {
+      "file": "inputs/full-npr-real-shadow.azureproject",
+      "bytes": 1853,
+      "sha256": "754e1eec2c3d26eccae4df78d426066160b4e736343ad3f0f6666dd749718451"
+    },
+    {
+      "file": "inputs/full-npr-shadow-override.azurelevel.gz",
+      "bytes": 217838,
+      "sha256": "847d8136b0dc219b604ac5850fd767f8f05d9dcd3baaeeb32322b82cc38bd0fa"
+    },
+    {
+      "file": "inputs/full-npr-shadow-override.azureproject",
+      "bytes": 1861,
+      "sha256": "b3cacbebe743ec8c0d838a4c4e13e0982df0fa53da61e513188793715c536a77"
+    },
+    {
+      "file": "inputs/native-scene-near.azurelevel.gz",
+      "bytes": 217777,
+      "sha256": "122ed3232bc37e389386ba3a5a736ea79be65ce835d6a47a944a5acfe392499a"
+    },
+    {
+      "file": "inputs/native-scene-near.azureproject",
+      "bytes": 1830,
+      "sha256": "99530e711fc0354430be485d2a4b793ffdfbf1815bee3f61b6b4531b3165ab10"
+    },
+    {
+      "file": "inputs/same-input-character-only.azurelevel.gz",
+      "bytes": 7186,
+      "sha256": "ab86cd56a34bc020b3af0d8e5823f58c4845d38763554da31b5a7f4c7e2a7451"
+    },
+    {
+      "file": "inputs/same-input-character-only.azureproject",
+      "bytes": 1846,
+      "sha256": "5b4988df40dcad678b0ccb653f38a7f65ecefb4954e28d2e2169a0cedc1d6010"
+    },
+    {
+      "file": "native-cases.json",
+      "bytes": 293,
+      "sha256": "65e5c694aca545c9af05fd1e8b6aaf6dbf24036a9d3b210688a761d4cc1d4b2f"
+    },
+    {
+      "file": "native-contexts.json",
+      "bytes": 2450,
+      "sha256": "f398041d1ab5c88bd503a682c1e6170de63213bb2f90fd8dcdf1fe0e104017f4"
+    },
+    {
+      "file": "native-global-rows.json",
+      "bytes": 2870,
+      "sha256": "9cebfbb3ff458559e83f09a320da9ce959543c444bd2d9cf65931003aada1dcb"
+    },
+    {
+      "file": "native-scene-near/capture_manifest.json",
+      "bytes": 8955,
+      "sha256": "d27483257578875327be5690a1fcd78792f039573c5e3b6ae1919b2a7fa9d4bc"
+    },
+    {
+      "file": "native-scene-near/player.log.gz",
+      "bytes": 3261,
+      "sha256": "4f756ba4520147bc888f7924e42830d8e2768a6a84eebe833906b110ba301c7b"
+    },
+    {
+      "file": "native-scene-near/runtime.json.gz",
+      "bytes": 30587,
+      "sha256": "fad491b0b5c15f2a666c407bf3d08d4980d11c4f1fd2231aed010c8c07819620"
+    },
+    {
+      "file": "native-scene-near.png",
+      "bytes": 3739341,
+      "sha256": "0afd5b5b3bcc0ce7925011227d6dc238dafc08921717adf0f5d5ff60ba4fbfd2"
+    },
+    {
+      "file": "native-summary.json",
+      "bytes": 14090,
+      "sha256": "2af1b02331c6899a795ffbb3abf62c427f6ec925e264021e09938d2913500220"
+    },
+    {
+      "file": "portrait-globals.bin",
+      "bytes": 3328,
+      "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+    },
+    {
+      "file": "portrait-source-receipt.json",
+      "bytes": 524,
+      "sha256": "b925986815bea62cbbcaa5e4d2531150c1f73a16515ffdbaf39e627097ceb5c5"
+    },
+    {
+      "file": "precommit.json",
+      "bytes": 145,
+      "sha256": "bda09becd9d7d6f58cdab5cc9c1a0dd9fa3c547065f022b9a1816a87d41b81f5"
+    },
+    {
+      "file": "repository-audit.json",
+      "bytes": 821,
+      "sha256": "e17f3366aa26b31c7c237c01bf45a38718b433541cc4a3f57d3dd18a38f432fc"
+    },
+    {
+      "file": "same-input-character-only/capture_manifest.json",
+      "bytes": 12195,
+      "sha256": "748da0cfc8eadaaa788a374d589625e90922f60ee1c1fa5f97f434921bbad9d1"
+    },
+    {
+      "file": "same-input-character-only/player.log.gz",
+      "bytes": 2153,
+      "sha256": "64153ce6b5b616cfbd904f3eeba67e167b696317ff723a76063d30d32ebb8c0e"
+    },
+    {
+      "file": "same-input-character-only/runtime.json.gz",
+      "bytes": 675,
+      "sha256": "ac7814485dc4071b1234f432a15b9423eb987fcf12f14f4e09fd4395f9e255c4"
+    },
+    {
+      "file": "scene-existing-image-comparison.json",
+      "bytes": 1172,
+      "sha256": "cf832efeefb31182ec1d5ed507ae7e4d2c1fa7d0689b9da7547890802712d83b"
+    },
+    {
+      "file": "scene-globals.bin",
+      "bytes": 3328,
+      "sha256": "c588caf1f324c256cf22285ccb1dc0317f6373219e0af467189648d550114007"
+    },
+    {
+      "file": "scene-source-receipt.json",
+      "bytes": 525,
+      "sha256": "bd5bdae0c54350873195a73d5b6516372e8df668441b8e78175a701cc8f18610"
+    },
+    {
+      "file": "scripts/archive.py",
+      "bytes": 4472,
+      "sha256": "61477b2d729eb3fc4662b519be05b5a64055397a5dc7b3de10dc9573378a5fb3"
+    },
+    {
+      "file": "scripts/capture.py",
+      "bytes": 1934,
+      "sha256": "9e483c601ee9633d3d58937787beadc4d842539c1ff4f33c73a570040ae4ee45"
+    },
+    {
+      "file": "scripts/capture_context.py",
+      "bytes": 1958,
+      "sha256": "4a006f963d3fe9132e9fbcf4481a4a22e64711ab42a1ebca366ca4f4d6388ccb"
+    },
+    {
+      "file": "scripts/capture_native.py",
+      "bytes": 1955,
+      "sha256": "95b12140a7a79fdc40fcdbe598e48527f9ec48b6a5582a4ab29482884c05c572"
+    },
+    {
+      "file": "scripts/inspect_inputs.py",
+      "bytes": 1553,
+      "sha256": "214700782245b2fc785562848b894423fdce8c0a88f87c2e04c2f53ff9210f7d"
+    },
+    {
+      "file": "scripts/precommit.py",
+      "bytes": 2627,
+      "sha256": "078588d920f1390b836be2b64a70e7eff5d2a34d412fbedab726a0ebabde812c"
+    },
+    {
+      "file": "scripts/prepare.py",
+      "bytes": 2246,
+      "sha256": "7653f918de2500ffd4ff7a44eb6fbfde35cb8a644b4b78818de33f963c43519c"
+    },
+    {
+      "file": "scripts/prepare_context.py",
+      "bytes": 2141,
+      "sha256": "ff426bba2cab222b8aad405029e0451fc1cd47f0643bfcf36892faf7cf419de6"
+    },
+    {
+      "file": "scripts/prepare_native_scene.py",
+      "bytes": 3102,
+      "sha256": "7f53a6c680d950cb73e6759832678d47cccf4ac551be2425a4a7920f1a9f28b1"
+    },
+    {
+      "file": "scripts/verify.py",
+      "bytes": 4230,
+      "sha256": "22855bfe1bad64b4dfee361c90b2bcae512985acaa4b12075d8daad4db615db2"
+    },
+    {
+      "file": "source-code.json",
+      "bytes": 545,
+      "sha256": "d7e9fc32062a74d90b742e49786bcaea3a9d07467bb5428499c7564ad8257dce"
+    },
+    {
+      "file": "source-inputs.json",
+      "bytes": 6318,
+      "sha256": "90231692dd4afb49801bd5a8f3ffbb86650464ad7d72fd30c2a96ba8e5d264ad"
+    },
+    {
+      "file": "source-scene-diff.json",
+      "bytes": 123,
+      "sha256": "021b7b9b7d914b4f89dc495857474da7d5308a58d02bb5aa886094270acd5a5d"
+    },
+    {
+      "file": "summary.json",
+      "bytes": 56136,
+      "sha256": "f19b9ba5cb78179ded0b3f13841afbadf543ccb060df606882c47ca8e98e8f4c"
+    },
+    {
+      "file": "verification.json",
+      "bytes": 6400,
+      "sha256": "84f392f6fdfb4c3e625cf8aa38dafd7001eb63c122093c1e5145c44d9ca6712c"
+    }
+  ]
+}

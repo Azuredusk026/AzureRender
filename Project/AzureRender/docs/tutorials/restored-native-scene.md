@@ -2,8 +2,10 @@
 
 本页使用恢复后的完整物流场景。
 工作目录为 `D:/Projects/FYP/Project/AzureRender`。
+
 先完成[环境恢复](../plans/2026-10-30-development-recovery.md)。
 画面与范围见[完整场景复核](../acceptance/recovery/full-scene-visual.md)。
+联合角色画质验收未通过，诊断状态见[输入核验](../acceptance/nr/joint-visual-input-isolation.md)。
 
 ## 启动
 

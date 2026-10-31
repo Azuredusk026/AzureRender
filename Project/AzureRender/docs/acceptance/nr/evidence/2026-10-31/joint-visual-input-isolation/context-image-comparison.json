@@ -1,0 +1,65 @@
+{
+  "scope": "Explicit interior rectangles, identical character inputs; environment geometry and post background differ. Formal visible masks remain separate.",
+  "regions": [
+    {
+      "region": "hair-crown",
+      "xyxy": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "meanByte": 0.0,
+      "maxByte": 0,
+      "differentPixels": 0
+    },
+    {
+      "region": "hair-right",
+      "xyxy": [
+        960,
+        565,
+        1030,
+        650
+      ],
+      "meanByte": 0.9072829131652661,
+      "maxByte": 76,
+      "differentPixels": 206
+    },
+    {
+      "region": "face",
+      "xyxy": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "meanByte": 0.0,
+      "maxByte": 0,
+      "differentPixels": 0
+    },
+    {
+      "region": "eye-left",
+      "xyxy": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "meanByte": 0.0,
+      "maxByte": 0,
+      "differentPixels": 0
+    },
+    {
+      "region": "eye-right",
+      "xyxy": [
+        857,
+        734,
+        897,
+        765
+      ],
+      "meanByte": 0.050268817204301076,
+      "maxByte": 13,
+      "differentPixels": 12
+    }
+  ]
+}

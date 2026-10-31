@@ -1,0 +1,1754 @@
+{
+  "status": "captured-visual-acceptance-pending",
+  "programSha256": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+  "cases": [
+    {
+      "name": "control",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\control.azureproject",
+      "levelSha256": "0834f3f1289c60aa756fd1d5e30eae61872ebaae38a455fde6982d3f48f7039e",
+      "status": "captured-visual-acceptance-pending",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\control.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\control\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\control\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 230.8629445000115,
+      "capture": {
+        "format": "Afterglow PNG sequence v1",
+        "asset": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\content-central\\mesh-5e30159980a5a31b.glb",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "width": 1536,
+        "height": 1536,
+        "fps": 60,
+        "capturedFrames": 1,
+        "renderedFrames": 1,
+        "durationSeconds": 0.0166667,
+        "portfolioMode": false,
+        "diagnosticView": "beauty",
+        "stylizedLighting": false,
+        "internalOutline": false,
+        "renderSettingsVersion": 20,
+        "shadowSettings": {
+          "schemaVersion": 1,
+          "maximumFilterRadiusTexels": 8
+        },
+        "faceSdfSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "mirrorHorizontal": false,
+          "threshold": 0.5,
+          "softness": 0.08,
+          "noseShadowStrength": 0,
+          "jawShadowStrength": 0,
+          "shadowColor": [
+            0.55,
+            0.36,
+            0.34,
+            0.55
+          ]
+        },
+        "bloomSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "threshold": 1.05,
+          "strength": 0.16
+        },
+        "outlineSettings": {
+          "schemaVersion": 1,
+          "strength": 0.4,
+          "depthThreshold": 0.18,
+          "normalThreshold": 0.2,
+          "color": [
+            0.008,
+            0.013,
+            0.022
+          ]
+        },
+        "gradeSettings": {
+          "schemaVersion": 2,
+          "exposureEv": 0,
+          "saturation": 1,
+          "contrast": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ],
+          "toneMappingEnabled": true,
+          "lut": {
+            "schemaVersion": 1,
+            "asset": "gi:/captured-3534.azlut",
+            "exposureMultiplier": 1,
+            "dimension": 32,
+            "inputDomain": "logc3-full-log",
+            "outputDomain": "linear",
+            "fingerprintAlgorithm": "FNV-1a-64",
+            "fingerprint": "b963486c619e8333"
+          }
+        },
+        "hudEnabled": false,
+        "cameraProjection": {
+          "schemaVersion": 2,
+          "offsetNdc": [
+            0,
+            0
+          ]
+        },
+        "cameraLens": {
+          "farPlane": 10000.0,
+          "nearPlane": 0.10000000149011612,
+          "offsetNdc": [
+            0.0,
+            0.0
+          ],
+          "projection": "perspective",
+          "schemaVersion": 1,
+          "verticalFovRadians": 0.5585053563117981
+        },
+        "cameraUp": [
+          0.09789655357599258,
+          0.9904671907424927,
+          -0.09690728038549423
+        ],
+        "qaHarnessVersion": "CQ-0-v1",
+        "qaHarnessEnabled": true,
+        "qaCamera": "scene",
+        "qaLight": "scene",
+        "qaLightScan": false,
+        "qaAnimation": false,
+        "sceneWorldCoordinates": true,
+        "qaEffect": "none",
+        "qaEffectState": "enabled",
+        "qaIsolation": "beauty",
+        "qaExposureEv": 0,
+        "qaDisableFaceCulling": false,
+        "qaDisableDepthTest": false,
+        "cameraNear": 0.1,
+        "cameraFar": 10000,
+        "antiAliasing": 0,
+        "nprLighting": {
+          "ambientColor": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "ambientDirection": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "ambientWeight": 1.0,
+          "directionBias": 0.0,
+          "directionFloor": 1.0,
+          "directionGain": 0.0,
+          "enabled": true,
+          "indoorMix": 0.0,
+          "litAmbientMix": 0.0,
+          "mainColorMix": 0.0,
+          "outdoorGain": 1.0,
+          "schemaVersion": 1,
+          "shadowAmbientGain": 1.0,
+          "shadowOverride": 0.0,
+          "specularFloor": 0.550000011920929,
+          "useSceneIrradiance": true
+        },
+        "antiAliasingPipeline": "linear-display-spatial-v1",
+        "rasterizationSamples": 1,
+        "multisampleRequested": false,
+        "multisampleSourceSlots": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "multisampleBytes": 0,
+        "multisampleAllocatedBytes": 0,
+        "multisampleFallback": "",
+        "temporalRequested": false,
+        "temporalHistorySubmission": 0,
+        "temporalBytes": 0,
+        "temporalHistoryBytes": 0,
+        "motionBytes": 0,
+        "temporalMotionShared": false,
+        "temporalFallback": "",
+        "sceneRenderWidth": 1536,
+        "sceneRenderHeight": 1536,
+        "shadowDistance": 50,
+        "qaStateHashAlgorithm": "FNV-1a-64",
+        "qaStateFingerprintVersion": 2,
+        "qaStateHash": "dd66a0babba6aa80",
+        "toonRampFormat": "AzureRender Toon Ramp Profiles v1",
+        "toonRampVersion": 1,
+        "toonRampClassCount": 10,
+        "toonRampProfile": "D:\\Projects\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_profiles.json",
+        "toonRampProfileHashAlgorithm": "FNV-1a-64",
+        "toonRampProfileHash": "ce6c7a32c7c4f5f4",
+        "toonRampAtlas": "D:\\Projects\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_atlas.ppm",
+        "toonRampAtlasHashAlgorithm": "FNV-1a-64",
+        "toonRampAtlasHash": "146a11aa241b7e80",
+        "qaCameraPosition": [
+          -0.763776,
+          2.4753,
+          -16.6268
+        ],
+        "qaCameraTarget": [
+          -1.46769,
+          2.61305,
+          -15.93
+        ],
+        "qaModelRotationRadians": 0,
+        "qaShowcasePreset": 0,
+        "showcasePresetVersion": 1,
+        "showcasePresetName": "Azure Gallery",
+        "materialProfileSchemaVersion": 1,
+        "materialInventory": [
+          {
+            "index": 0,
+            "name": "M_prop_map01_box+1_002_07",
+            "class": "generic",
+            "features": 40,
+            "profileVersion": 1,
+            "emissiveStrength": 1,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 1
+          },
+          {
+            "index": 1,
+            "name": "FallbackMaterial",
+            "class": "generic",
+            "features": 32,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 0
+          },
+          {
+            "index": 2,
+            "name": "AzureRender_ShowcasePlatform",
+            "class": "showcase",
+            "features": 0,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          }
+        ],
+        "technicalSequence": false,
+        "uniqueMeshes": 365,
+        "motionPreviousValidObjects": 0,
+        "motionOutputActive": true,
+        "temporalMaterialSamples": false,
+        "reflectionSurfaceSnapshot": true,
+        "screenReflectionComputePrepared": true,
+        "screenReflectionAlgorithmRequested": "linear",
+        "screenReflectionAlgorithm": "linear",
+        "screenReflectionProducer": "linear-temporal",
+        "screenReflectionFallback": "",
+        "screenReflectionComputeActive": true,
+        "screenReflectionTemporalPrepared": true,
+        "screenReflectionTemporalActive": true,
+        "screenReflectionTemporalPreparation": "temporal",
+        "screenReflectionHistoryValid": false,
+        "screenReflectionHistorySubmission": 1,
+        "screenReflectionHistoryInputSubmission": 0,
+        "screenReflectionMotionUvOffset": [
+          0.0,
+          0.0
+        ],
+        "screenReflectionOwnsMotion": true,
+        "screenReflectionMotionBytes": 47185920,
+        "screenReflectionReprojectionBytes": 23592960,
+        "screenReflectionPreparation": "compute",
+        "screenReflectionLevels": 7,
+        "screenReflectionWidth": 768,
+        "screenReflectionHeight": 768,
+        "screenReflectionImageBudgetBytes": 80213760,
+        "ordinaryOpaquePipelineCount": 4,
+        "materialClassPipelineCount": 28,
+        "materialClassFeatureSpecializations": [
+          {
+            "class": 0,
+            "fixedMask": 1073741823,
+            "fixedValue": 40
+          },
+          {
+            "class": 1,
+            "fixedMask": 1073725439,
+            "fixedValue": 2633729
+          },
+          {
+            "class": 2,
+            "fixedMask": 1073741823,
+            "fixedValue": 2643973
+          },
+          {
+            "class": 3,
+            "fixedMask": 1070522359,
+            "fixedValue": 3
+          },
+          {
+            "class": 4,
+            "fixedMask": 1073213303,
+            "fixedValue": 2121729
+          },
+          {
+            "class": 6,
+            "fixedMask": 1073741823,
+            "fixedValue": 2228224
+          },
+          {
+            "class": 9,
+            "fixedMask": 1073741823,
+            "fixedValue": 0
+          }
+        ],
+        "ordinaryOpaqueSnapshotPipelineCount": 4,
+        "irradianceResourceKind": "clipmap",
+        "irradianceQueryScope": "physical-surface",
+        "irradianceQuery": {
+          "normalOffset": 0,
+          "jitterAmplitude": 0,
+          "phase": 0,
+          "pixelOrigin": "top-left",
+          "jitterSpace": "world"
+        },
+        "pixelIntegralPipelineCount": 0,
+        "temporalSamplingPattern": "zero-mean-halton8-v1",
+        "motionResponseEncoding": "coverage-reactivity-v3",
+        "temporalViewSubmission": 1,
+        "temporalCameraStateValid": true,
+        "temporalViewSampleIndex": 0,
+        "materialSurfaceProfileLayoutVersion": 17,
+        "outlineProjectionLayoutVersion": 1,
+        "snapshotRasterizationSamples": 1,
+        "snapshotMultisampleBytes": 0,
+        "snapshotMultisampleAllocatedBytes": 0,
+        "outlineMaskSamples": 1,
+        "outlineProjectionBytes": 669984,
+        "outlineProjectionMaterials": 743,
+        "outlineProjectionCoordinates": 77802,
+        "instanceDataLayoutVersion": 2,
+        "cascadeProjectionLayoutVersion": 2,
+        "cascadeCasterDistance": 50,
+        "cameraUniformBytes": 688,
+        "unlitFrameLayoutVersion": 1,
+        "viewFogEnabled": true,
+        "viewFogAnalyticEnabled": true,
+        "viewFogFrameBytes": 336,
+        "viewFogMatch": "camera-mismatch",
+        "viewFogFrameLayoutVersion": 2,
+        "objectShadowLayoutVersion": 2,
+        "objectShadowPrepared": true,
+        "objectShadowExactDepthBias": true,
+        "objectShadowPages": 1,
+        "objectShadowDepthBytes": 16777216,
+        "materialTextureBindingLayoutVersion": 1,
+        "sharedMaterialTextureSlots": 2,
+        "lightBufferLayoutVersion": 3,
+        "faceSdfTextures": 1,
+        "showcasePlatformPrepared": true,
+        "sceneTriangles": 547653,
+        "skinnedVertices": 77802,
+        "transparentTriangles": 10735,
+        "jointCapacity": 1174,
+        "vertexCapacity": 825267,
+        "materialTextureCache": {
+          "requests": 5948,
+          "hits": 5572,
+          "uniqueTextures": 376,
+          "requestedBytes": 7990734432,
+          "residentBytes": 2053844512,
+          "retainedPixelBytes": 1581283868,
+          "hashedPixelBytes": 6034774532,
+          "copiedPixelBytes": 1048576,
+          "transferredPixelBytes": 1580235292,
+          "discardedPixelBytes": 4453490664,
+          "hashMs": 6651.75,
+          "matchMs": 798.275,
+          "mipMs": 9497.85,
+          "uploadMs": 2283.42
+        },
+        "sceneLoad": {
+          "cpuPrepareMs": 72509.1,
+          "meshUploadMs": 545.96,
+          "materialUploadMs": 19336.1,
+          "sharedTexturesMs": 508.801,
+          "buffersMs": 112.771,
+          "skinningMs": 14.7864,
+          "descriptorsMs": 130.882,
+          "pipelinesMs": 173.788,
+          "decodedMaterialPixelBytes": 6034774532,
+          "remainingMaterialPixelBytes": 4
+        },
+        "animationIndex": 0,
+        "animation": "",
+        "framePattern": "frame_%06d.png"
+      }
+    },
+    {
+      "name": "full-npr-real-shadow",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-real-shadow.azureproject",
+      "levelSha256": "ad7fc720e580627a6ab2a66e5e4850d808f41f4e5a2b54637c54d418ff5035b2",
+      "status": "captured-visual-acceptance-pending",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-real-shadow.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\full-npr-real-shadow\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\full-npr-real-shadow\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 189.07305759999144,
+      "capture": {
+        "format": "Afterglow PNG sequence v1",
+        "asset": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\content-central\\mesh-5e30159980a5a31b.glb",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "width": 1536,
+        "height": 1536,
+        "fps": 60,
+        "capturedFrames": 1,
+        "renderedFrames": 1,
+        "durationSeconds": 0.0166667,
+        "portfolioMode": false,
+        "diagnosticView": "beauty",
+        "stylizedLighting": false,
+        "internalOutline": false,
+        "renderSettingsVersion": 20,
+        "shadowSettings": {
+          "schemaVersion": 1,
+          "maximumFilterRadiusTexels": 8
+        },
+        "faceSdfSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "mirrorHorizontal": false,
+          "threshold": 0.5,
+          "softness": 0.08,
+          "noseShadowStrength": 0,
+          "jawShadowStrength": 0,
+          "shadowColor": [
+            0.55,
+            0.36,
+            0.34,
+            0.55
+          ]
+        },
+        "bloomSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "threshold": 1.05,
+          "strength": 0.16
+        },
+        "outlineSettings": {
+          "schemaVersion": 1,
+          "strength": 0.4,
+          "depthThreshold": 0.18,
+          "normalThreshold": 0.2,
+          "color": [
+            0.008,
+            0.013,
+            0.022
+          ]
+        },
+        "gradeSettings": {
+          "schemaVersion": 2,
+          "exposureEv": 0,
+          "saturation": 1,
+          "contrast": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ],
+          "toneMappingEnabled": true,
+          "lut": {
+            "schemaVersion": 1,
+            "asset": "gi:/captured-3534.azlut",
+            "exposureMultiplier": 1,
+            "dimension": 32,
+            "inputDomain": "logc3-full-log",
+            "outputDomain": "linear",
+            "fingerprintAlgorithm": "FNV-1a-64",
+            "fingerprint": "b963486c619e8333"
+          }
+        },
+        "hudEnabled": false,
+        "cameraProjection": {
+          "schemaVersion": 2,
+          "offsetNdc": [
+            0,
+            0
+          ]
+        },
+        "cameraLens": {
+          "farPlane": 10000.0,
+          "nearPlane": 0.10000000149011612,
+          "offsetNdc": [
+            0.0,
+            0.0
+          ],
+          "projection": "perspective",
+          "schemaVersion": 1,
+          "verticalFovRadians": 0.5585053563117981
+        },
+        "cameraUp": [
+          0.09789655357599258,
+          0.9904671907424927,
+          -0.09690728038549423
+        ],
+        "qaHarnessVersion": "CQ-0-v1",
+        "qaHarnessEnabled": true,
+        "qaCamera": "scene",
+        "qaLight": "scene",
+        "qaLightScan": false,
+        "qaAnimation": false,
+        "sceneWorldCoordinates": true,
+        "qaEffect": "none",
+        "qaEffectState": "enabled",
+        "qaIsolation": "beauty",
+        "qaExposureEv": 0,
+        "qaDisableFaceCulling": false,
+        "qaDisableDepthTest": false,
+        "cameraNear": 0.1,
+        "cameraFar": 10000,
+        "antiAliasing": 0,
+        "nprLighting": {
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "ambientDirection": [
+            -0.0,
+            1.0,
+            4.371138828673793e-08
+          ],
+          "ambientWeight": 0.28772246837615967,
+          "directionBias": 0.15000000596046448,
+          "directionFloor": 0.5,
+          "directionGain": 1.5,
+          "enabled": true,
+          "indoorMix": 0.0,
+          "litAmbientMix": 1.0,
+          "mainColorMix": 1.0,
+          "outdoorGain": 1.0499999523162842,
+          "schemaVersion": 1,
+          "shadowAmbientGain": 0.800000011920929,
+          "shadowOverride": 0.0,
+          "specularFloor": 0.550000011920929,
+          "useSceneIrradiance": false
+        },
+        "antiAliasingPipeline": "linear-display-spatial-v1",
+        "rasterizationSamples": 1,
+        "multisampleRequested": false,
+        "multisampleSourceSlots": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "multisampleBytes": 0,
+        "multisampleAllocatedBytes": 0,
+        "multisampleFallback": "",
+        "temporalRequested": false,
+        "temporalHistorySubmission": 0,
+        "temporalBytes": 0,
+        "temporalHistoryBytes": 0,
+        "motionBytes": 0,
+        "temporalMotionShared": false,
+        "temporalFallback": "",
+        "sceneRenderWidth": 1536,
+        "sceneRenderHeight": 1536,
+        "shadowDistance": 50,
+        "qaStateHashAlgorithm": "FNV-1a-64",
+        "qaStateFingerprintVersion": 2,
+        "qaStateHash": "0e80d1be6868fc4d",
+        "toonRampFormat": "AzureRender Toon Ramp Profiles v1",
+        "toonRampVersion": 1,
+        "toonRampClassCount": 10,
+        "toonRampProfile": "D:\\Projects\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_profiles.json",
+        "toonRampProfileHashAlgorithm": "FNV-1a-64",
+        "toonRampProfileHash": "ce6c7a32c7c4f5f4",
+        "toonRampAtlas": "D:\\Projects\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_atlas.ppm",
+        "toonRampAtlasHashAlgorithm": "FNV-1a-64",
+        "toonRampAtlasHash": "146a11aa241b7e80",
+        "qaCameraPosition": [
+          -0.763776,
+          2.4753,
+          -16.6268
+        ],
+        "qaCameraTarget": [
+          -1.46769,
+          2.61305,
+          -15.93
+        ],
+        "qaModelRotationRadians": 0,
+        "qaShowcasePreset": 0,
+        "showcasePresetVersion": 1,
+        "showcasePresetName": "Azure Gallery",
+        "materialProfileSchemaVersion": 1,
+        "materialInventory": [
+          {
+            "index": 0,
+            "name": "M_prop_map01_box+1_002_07",
+            "class": "generic",
+            "features": 40,
+            "profileVersion": 1,
+            "emissiveStrength": 1,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 1
+          },
+          {
+            "index": 1,
+            "name": "FallbackMaterial",
+            "class": "generic",
+            "features": 32,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 0
+          },
+          {
+            "index": 2,
+            "name": "AzureRender_ShowcasePlatform",
+            "class": "showcase",
+            "features": 0,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          }
+        ],
+        "technicalSequence": false,
+        "uniqueMeshes": 365,
+        "motionPreviousValidObjects": 0,
+        "motionOutputActive": true,
+        "temporalMaterialSamples": false,
+        "reflectionSurfaceSnapshot": true,
+        "screenReflectionComputePrepared": true,
+        "screenReflectionAlgorithmRequested": "linear",
+        "screenReflectionAlgorithm": "linear",
+        "screenReflectionProducer": "linear-temporal",
+        "screenReflectionFallback": "",
+        "screenReflectionComputeActive": true,
+        "screenReflectionTemporalPrepared": true,
+        "screenReflectionTemporalActive": true,
+        "screenReflectionTemporalPreparation": "temporal",
+        "screenReflectionHistoryValid": false,
+        "screenReflectionHistorySubmission": 1,
+        "screenReflectionHistoryInputSubmission": 0,
+        "screenReflectionMotionUvOffset": [
+          0.0,
+          0.0
+        ],
+        "screenReflectionOwnsMotion": true,
+        "screenReflectionMotionBytes": 47185920,
+        "screenReflectionReprojectionBytes": 23592960,
+        "screenReflectionPreparation": "compute",
+        "screenReflectionLevels": 7,
+        "screenReflectionWidth": 768,
+        "screenReflectionHeight": 768,
+        "screenReflectionImageBudgetBytes": 80213760,
+        "ordinaryOpaquePipelineCount": 4,
+        "materialClassPipelineCount": 28,
+        "materialClassFeatureSpecializations": [
+          {
+            "class": 0,
+            "fixedMask": 1073741823,
+            "fixedValue": 40
+          },
+          {
+            "class": 1,
+            "fixedMask": 1073725439,
+            "fixedValue": 2633729
+          },
+          {
+            "class": 2,
+            "fixedMask": 1073741823,
+            "fixedValue": 2643973
+          },
+          {
+            "class": 3,
+            "fixedMask": 1070522359,
+            "fixedValue": 3
+          },
+          {
+            "class": 4,
+            "fixedMask": 1073213303,
+            "fixedValue": 2121729
+          },
+          {
+            "class": 6,
+            "fixedMask": 1073741823,
+            "fixedValue": 2228224
+          },
+          {
+            "class": 9,
+            "fixedMask": 1073741823,
+            "fixedValue": 0
+          }
+        ],
+        "ordinaryOpaqueSnapshotPipelineCount": 4,
+        "irradianceResourceKind": "clipmap",
+        "irradianceQueryScope": "physical-surface",
+        "irradianceQuery": {
+          "normalOffset": 0,
+          "jitterAmplitude": 0,
+          "phase": 0,
+          "pixelOrigin": "top-left",
+          "jitterSpace": "world"
+        },
+        "pixelIntegralPipelineCount": 0,
+        "temporalSamplingPattern": "zero-mean-halton8-v1",
+        "motionResponseEncoding": "coverage-reactivity-v3",
+        "temporalViewSubmission": 1,
+        "temporalCameraStateValid": true,
+        "temporalViewSampleIndex": 0,
+        "materialSurfaceProfileLayoutVersion": 17,
+        "outlineProjectionLayoutVersion": 1,
+        "snapshotRasterizationSamples": 1,
+        "snapshotMultisampleBytes": 0,
+        "snapshotMultisampleAllocatedBytes": 0,
+        "outlineMaskSamples": 1,
+        "outlineProjectionBytes": 669984,
+        "outlineProjectionMaterials": 743,
+        "outlineProjectionCoordinates": 77802,
+        "instanceDataLayoutVersion": 2,
+        "cascadeProjectionLayoutVersion": 2,
+        "cascadeCasterDistance": 50,
+        "cameraUniformBytes": 688,
+        "unlitFrameLayoutVersion": 1,
+        "viewFogEnabled": true,
+        "viewFogAnalyticEnabled": true,
+        "viewFogFrameBytes": 336,
+        "viewFogMatch": "camera-mismatch",
+        "viewFogFrameLayoutVersion": 2,
+        "objectShadowLayoutVersion": 2,
+        "objectShadowPrepared": true,
+        "objectShadowExactDepthBias": true,
+        "objectShadowPages": 1,
+        "objectShadowDepthBytes": 16777216,
+        "materialTextureBindingLayoutVersion": 1,
+        "sharedMaterialTextureSlots": 2,
+        "lightBufferLayoutVersion": 3,
+        "faceSdfTextures": 1,
+        "showcasePlatformPrepared": true,
+        "sceneTriangles": 547653,
+        "skinnedVertices": 77802,
+        "transparentTriangles": 10735,
+        "jointCapacity": 1174,
+        "vertexCapacity": 825267,
+        "materialTextureCache": {
+          "requests": 5948,
+          "hits": 5572,
+          "uniqueTextures": 376,
+          "requestedBytes": 7990734432,
+          "residentBytes": 2053844512,
+          "retainedPixelBytes": 1581283868,
+          "hashedPixelBytes": 6034774532,
+          "copiedPixelBytes": 1048576,
+          "transferredPixelBytes": 1580235292,
+          "discardedPixelBytes": 4453490664,
+          "hashMs": 6526.81,
+          "matchMs": 743.333,
+          "mipMs": 9222.36,
+          "uploadMs": 2055.82
+        },
+        "sceneLoad": {
+          "cpuPrepareMs": 63793,
+          "meshUploadMs": 551.375,
+          "materialUploadMs": 18650.1,
+          "sharedTexturesMs": 520.297,
+          "buffersMs": 100.251,
+          "skinningMs": 5.3723,
+          "descriptorsMs": 50.5564,
+          "pipelinesMs": 53.7435,
+          "decodedMaterialPixelBytes": 6034774532,
+          "remainingMaterialPixelBytes": 4
+        },
+        "animationIndex": 0,
+        "animation": "",
+        "framePattern": "frame_%06d.png"
+      }
+    },
+    {
+      "name": "full-npr-shadow-override",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-shadow-override.azureproject",
+      "levelSha256": "00c2e43cfb0267024eaa66a354f4a7e7207b10f504f600d125d48bd70009c20e",
+      "status": "captured-visual-acceptance-pending",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-shadow-override.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\full-npr-shadow-override\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\full-npr-shadow-override\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 192.93702979999944,
+      "capture": {
+        "format": "Afterglow PNG sequence v1",
+        "asset": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\content-central\\mesh-5e30159980a5a31b.glb",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "width": 1536,
+        "height": 1536,
+        "fps": 60,
+        "capturedFrames": 1,
+        "renderedFrames": 1,
+        "durationSeconds": 0.0166667,
+        "portfolioMode": false,
+        "diagnosticView": "beauty",
+        "stylizedLighting": false,
+        "internalOutline": false,
+        "renderSettingsVersion": 20,
+        "shadowSettings": {
+          "schemaVersion": 1,
+          "maximumFilterRadiusTexels": 8
+        },
+        "faceSdfSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "mirrorHorizontal": false,
+          "threshold": 0.5,
+          "softness": 0.08,
+          "noseShadowStrength": 0,
+          "jawShadowStrength": 0,
+          "shadowColor": [
+            0.55,
+            0.36,
+            0.34,
+            0.55
+          ]
+        },
+        "bloomSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "threshold": 1.05,
+          "strength": 0.16
+        },
+        "outlineSettings": {
+          "schemaVersion": 1,
+          "strength": 0.4,
+          "depthThreshold": 0.18,
+          "normalThreshold": 0.2,
+          "color": [
+            0.008,
+            0.013,
+            0.022
+          ]
+        },
+        "gradeSettings": {
+          "schemaVersion": 2,
+          "exposureEv": 0,
+          "saturation": 1,
+          "contrast": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ],
+          "toneMappingEnabled": true,
+          "lut": {
+            "schemaVersion": 1,
+            "asset": "gi:/captured-3534.azlut",
+            "exposureMultiplier": 1,
+            "dimension": 32,
+            "inputDomain": "logc3-full-log",
+            "outputDomain": "linear",
+            "fingerprintAlgorithm": "FNV-1a-64",
+            "fingerprint": "b963486c619e8333"
+          }
+        },
+        "hudEnabled": false,
+        "cameraProjection": {
+          "schemaVersion": 2,
+          "offsetNdc": [
+            0,
+            0
+          ]
+        },
+        "cameraLens": {
+          "farPlane": 10000.0,
+          "nearPlane": 0.10000000149011612,
+          "offsetNdc": [
+            0.0,
+            0.0
+          ],
+          "projection": "perspective",
+          "schemaVersion": 1,
+          "verticalFovRadians": 0.5585053563117981
+        },
+        "cameraUp": [
+          0.09789655357599258,
+          0.9904671907424927,
+          -0.09690728038549423
+        ],
+        "qaHarnessVersion": "CQ-0-v1",
+        "qaHarnessEnabled": true,
+        "qaCamera": "scene",
+        "qaLight": "scene",
+        "qaLightScan": false,
+        "qaAnimation": false,
+        "sceneWorldCoordinates": true,
+        "qaEffect": "none",
+        "qaEffectState": "enabled",
+        "qaIsolation": "beauty",
+        "qaExposureEv": 0,
+        "qaDisableFaceCulling": false,
+        "qaDisableDepthTest": false,
+        "cameraNear": 0.1,
+        "cameraFar": 10000,
+        "antiAliasing": 0,
+        "nprLighting": {
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "ambientDirection": [
+            -0.0,
+            1.0,
+            4.371138828673793e-08
+          ],
+          "ambientWeight": 0.28772246837615967,
+          "directionBias": 0.15000000596046448,
+          "directionFloor": 0.5,
+          "directionGain": 1.5,
+          "enabled": true,
+          "indoorMix": 0.0,
+          "litAmbientMix": 1.0,
+          "mainColorMix": 1.0,
+          "outdoorGain": 1.0499999523162842,
+          "schemaVersion": 1,
+          "shadowAmbientGain": 0.800000011920929,
+          "shadowOverride": 1.0,
+          "specularFloor": 0.550000011920929,
+          "useSceneIrradiance": false
+        },
+        "antiAliasingPipeline": "linear-display-spatial-v1",
+        "rasterizationSamples": 1,
+        "multisampleRequested": false,
+        "multisampleSourceSlots": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "multisampleBytes": 0,
+        "multisampleAllocatedBytes": 0,
+        "multisampleFallback": "",
+        "temporalRequested": false,
+        "temporalHistorySubmission": 0,
+        "temporalBytes": 0,
+        "temporalHistoryBytes": 0,
+        "motionBytes": 0,
+        "temporalMotionShared": false,
+        "temporalFallback": "",
+        "sceneRenderWidth": 1536,
+        "sceneRenderHeight": 1536,
+        "shadowDistance": 50,
+        "qaStateHashAlgorithm": "FNV-1a-64",
+        "qaStateFingerprintVersion": 2,
+        "qaStateHash": "747afaa97cb926bc",
+        "toonRampFormat": "AzureRender Toon Ramp Profiles v1",
+        "toonRampVersion": 1,
+        "toonRampClassCount": 10,
+        "toonRampProfile": "D:\\Projects\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_profiles.json",
+        "toonRampProfileHashAlgorithm": "FNV-1a-64",
+        "toonRampProfileHash": "ce6c7a32c7c4f5f4",
+        "toonRampAtlas": "D:\\Projects\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_atlas.ppm",
+        "toonRampAtlasHashAlgorithm": "FNV-1a-64",
+        "toonRampAtlasHash": "146a11aa241b7e80",
+        "qaCameraPosition": [
+          -0.763776,
+          2.4753,
+          -16.6268
+        ],
+        "qaCameraTarget": [
+          -1.46769,
+          2.61305,
+          -15.93
+        ],
+        "qaModelRotationRadians": 0,
+        "qaShowcasePreset": 0,
+        "showcasePresetVersion": 1,
+        "showcasePresetName": "Azure Gallery",
+        "materialProfileSchemaVersion": 1,
+        "materialInventory": [
+          {
+            "index": 0,
+            "name": "M_prop_map01_box+1_002_07",
+            "class": "generic",
+            "features": 40,
+            "profileVersion": 1,
+            "emissiveStrength": 1,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 1
+          },
+          {
+            "index": 1,
+            "name": "FallbackMaterial",
+            "class": "generic",
+            "features": 32,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 0
+          },
+          {
+            "index": 2,
+            "name": "AzureRender_ShowcasePlatform",
+            "class": "showcase",
+            "features": 0,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          }
+        ],
+        "technicalSequence": false,
+        "uniqueMeshes": 365,
+        "motionPreviousValidObjects": 0,
+        "motionOutputActive": true,
+        "temporalMaterialSamples": false,
+        "reflectionSurfaceSnapshot": true,
+        "screenReflectionComputePrepared": true,
+        "screenReflectionAlgorithmRequested": "linear",
+        "screenReflectionAlgorithm": "linear",
+        "screenReflectionProducer": "linear-temporal",
+        "screenReflectionFallback": "",
+        "screenReflectionComputeActive": true,
+        "screenReflectionTemporalPrepared": true,
+        "screenReflectionTemporalActive": true,
+        "screenReflectionTemporalPreparation": "temporal",
+        "screenReflectionHistoryValid": false,
+        "screenReflectionHistorySubmission": 1,
+        "screenReflectionHistoryInputSubmission": 0,
+        "screenReflectionMotionUvOffset": [
+          0.0,
+          0.0
+        ],
+        "screenReflectionOwnsMotion": true,
+        "screenReflectionMotionBytes": 47185920,
+        "screenReflectionReprojectionBytes": 23592960,
+        "screenReflectionPreparation": "compute",
+        "screenReflectionLevels": 7,
+        "screenReflectionWidth": 768,
+        "screenReflectionHeight": 768,
+        "screenReflectionImageBudgetBytes": 80213760,
+        "ordinaryOpaquePipelineCount": 4,
+        "materialClassPipelineCount": 28,
+        "materialClassFeatureSpecializations": [
+          {
+            "class": 0,
+            "fixedMask": 1073741823,
+            "fixedValue": 40
+          },
+          {
+            "class": 1,
+            "fixedMask": 1073725439,
+            "fixedValue": 2633729
+          },
+          {
+            "class": 2,
+            "fixedMask": 1073741823,
+            "fixedValue": 2643973
+          },
+          {
+            "class": 3,
+            "fixedMask": 1070522359,
+            "fixedValue": 3
+          },
+          {
+            "class": 4,
+            "fixedMask": 1073213303,
+            "fixedValue": 2121729
+          },
+          {
+            "class": 6,
+            "fixedMask": 1073741823,
+            "fixedValue": 2228224
+          },
+          {
+            "class": 9,
+            "fixedMask": 1073741823,
+            "fixedValue": 0
+          }
+        ],
+        "ordinaryOpaqueSnapshotPipelineCount": 4,
+        "irradianceResourceKind": "clipmap",
+        "irradianceQueryScope": "physical-surface",
+        "irradianceQuery": {
+          "normalOffset": 0,
+          "jitterAmplitude": 0,
+          "phase": 0,
+          "pixelOrigin": "top-left",
+          "jitterSpace": "world"
+        },
+        "pixelIntegralPipelineCount": 0,
+        "temporalSamplingPattern": "zero-mean-halton8-v1",
+        "motionResponseEncoding": "coverage-reactivity-v3",
+        "temporalViewSubmission": 1,
+        "temporalCameraStateValid": true,
+        "temporalViewSampleIndex": 0,
+        "materialSurfaceProfileLayoutVersion": 17,
+        "outlineProjectionLayoutVersion": 1,
+        "snapshotRasterizationSamples": 1,
+        "snapshotMultisampleBytes": 0,
+        "snapshotMultisampleAllocatedBytes": 0,
+        "outlineMaskSamples": 1,
+        "outlineProjectionBytes": 669984,
+        "outlineProjectionMaterials": 743,
+        "outlineProjectionCoordinates": 77802,
+        "instanceDataLayoutVersion": 2,
+        "cascadeProjectionLayoutVersion": 2,
+        "cascadeCasterDistance": 50,
+        "cameraUniformBytes": 688,
+        "unlitFrameLayoutVersion": 1,
+        "viewFogEnabled": true,
+        "viewFogAnalyticEnabled": true,
+        "viewFogFrameBytes": 336,
+        "viewFogMatch": "camera-mismatch",
+        "viewFogFrameLayoutVersion": 2,
+        "objectShadowLayoutVersion": 2,
+        "objectShadowPrepared": true,
+        "objectShadowExactDepthBias": true,
+        "objectShadowPages": 1,
+        "objectShadowDepthBytes": 16777216,
+        "materialTextureBindingLayoutVersion": 1,
+        "sharedMaterialTextureSlots": 2,
+        "lightBufferLayoutVersion": 3,
+        "faceSdfTextures": 1,
+        "showcasePlatformPrepared": true,
+        "sceneTriangles": 547653,
+        "skinnedVertices": 77802,
+        "transparentTriangles": 10735,
+        "jointCapacity": 1174,
+        "vertexCapacity": 825267,
+        "materialTextureCache": {
+          "requests": 5948,
+          "hits": 5572,
+          "uniqueTextures": 376,
+          "requestedBytes": 7990734432,
+          "residentBytes": 2053844512,
+          "retainedPixelBytes": 1581283868,
+          "hashedPixelBytes": 6034774532,
+          "copiedPixelBytes": 1048576,
+          "transferredPixelBytes": 1580235292,
+          "discardedPixelBytes": 4453490664,
+          "hashMs": 6884.93,
+          "matchMs": 799.603,
+          "mipMs": 9784.72,
+          "uploadMs": 2315.98
+        },
+        "sceneLoad": {
+          "cpuPrepareMs": 61902.6,
+          "meshUploadMs": 572.406,
+          "materialUploadMs": 19895.6,
+          "sharedTexturesMs": 490.935,
+          "buffersMs": 108.666,
+          "skinningMs": 4.4279,
+          "descriptorsMs": 88.1304,
+          "pipelinesMs": 60.7447,
+          "decodedMaterialPixelBytes": 6034774532,
+          "remainingMaterialPixelBytes": 4
+        },
+        "animationIndex": 0,
+        "animation": "",
+        "framePattern": "frame_%06d.png"
+      }
+    },
+    {
+      "name": "full-npr-portrait-display",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-portrait-display.azureproject",
+      "levelSha256": "a84e85c86c8c5b367951190647a9eb0bc003e5a1c360968437b4bb7e06c99668",
+      "status": "captured-visual-acceptance-pending",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-portrait-display.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\full-npr-portrait-display\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\full-npr-portrait-display\\runtime.json"
+      ],
+      "exitCode": 0,
+      "seconds": 173.48190389999945,
+      "capture": {
+        "format": "Afterglow PNG sequence v1",
+        "asset": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\content-central\\mesh-5e30159980a5a31b.glb",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "width": 1536,
+        "height": 1536,
+        "fps": 60,
+        "capturedFrames": 1,
+        "renderedFrames": 1,
+        "durationSeconds": 0.0166667,
+        "portfolioMode": false,
+        "diagnosticView": "beauty",
+        "stylizedLighting": false,
+        "internalOutline": false,
+        "renderSettingsVersion": 20,
+        "shadowSettings": {
+          "schemaVersion": 1,
+          "maximumFilterRadiusTexels": 8
+        },
+        "faceSdfSettings": {
+          "schemaVersion": 1,
+          "enabled": true,
+          "mirrorHorizontal": false,
+          "threshold": 0.5,
+          "softness": 0.08,
+          "noseShadowStrength": 0,
+          "jawShadowStrength": 0,
+          "shadowColor": [
+            0.55,
+            0.36,
+            0.34,
+            0.55
+          ]
+        },
+        "bloomSettings": {
+          "schemaVersion": 1,
+          "enabled": false,
+          "threshold": 1.05,
+          "strength": 0.16
+        },
+        "outlineSettings": {
+          "schemaVersion": 1,
+          "strength": 0.4,
+          "depthThreshold": 0.18,
+          "normalThreshold": 0.2,
+          "color": [
+            0.008,
+            0.013,
+            0.022
+          ]
+        },
+        "gradeSettings": {
+          "schemaVersion": 2,
+          "exposureEv": -2,
+          "saturation": 1,
+          "contrast": 1,
+          "tint": [
+            1,
+            1,
+            1
+          ],
+          "toneMappingEnabled": false,
+          "lut": {
+            "schemaVersion": 1,
+            "asset": "",
+            "exposureMultiplier": 1,
+            "dimension": 0,
+            "inputDomain": "linear",
+            "outputDomain": "linear",
+            "fingerprintAlgorithm": "FNV-1a-64",
+            "fingerprint": ""
+          }
+        },
+        "hudEnabled": false,
+        "cameraProjection": {
+          "schemaVersion": 2,
+          "offsetNdc": [
+            0,
+            0
+          ]
+        },
+        "cameraLens": {
+          "farPlane": 10000.0,
+          "nearPlane": 0.10000000149011612,
+          "offsetNdc": [
+            0.0,
+            0.0
+          ],
+          "projection": "perspective",
+          "schemaVersion": 1,
+          "verticalFovRadians": 0.5585053563117981
+        },
+        "cameraUp": [
+          0.09789655357599258,
+          0.9904671907424927,
+          -0.09690728038549423
+        ],
+        "qaHarnessVersion": "CQ-0-v1",
+        "qaHarnessEnabled": true,
+        "qaCamera": "scene",
+        "qaLight": "scene",
+        "qaLightScan": false,
+        "qaAnimation": false,
+        "sceneWorldCoordinates": true,
+        "qaEffect": "none",
+        "qaEffectState": "enabled",
+        "qaIsolation": "beauty",
+        "qaExposureEv": 0,
+        "qaDisableFaceCulling": false,
+        "qaDisableDepthTest": false,
+        "cameraNear": 0.1,
+        "cameraFar": 10000,
+        "antiAliasing": 0,
+        "nprLighting": {
+          "ambientColor": [
+            1.1870100498199463,
+            0.9272286891937256,
+            0.8129898905754089
+          ],
+          "ambientDirection": [
+            -0.0,
+            1.0,
+            4.371138828673793e-08
+          ],
+          "ambientWeight": 0.28772246837615967,
+          "directionBias": 0.15000000596046448,
+          "directionFloor": 0.5,
+          "directionGain": 1.5,
+          "enabled": true,
+          "indoorMix": 0.0,
+          "litAmbientMix": 1.0,
+          "mainColorMix": 1.0,
+          "outdoorGain": 1.0499999523162842,
+          "schemaVersion": 1,
+          "shadowAmbientGain": 0.800000011920929,
+          "shadowOverride": 0.0,
+          "specularFloor": 0.550000011920929,
+          "useSceneIrradiance": false
+        },
+        "antiAliasingPipeline": "linear-display-spatial-v1",
+        "rasterizationSamples": 1,
+        "multisampleRequested": false,
+        "multisampleSourceSlots": 0,
+        "sceneAttachmentFormats": [
+          97,
+          126,
+          37
+        ],
+        "multisampleBytes": 0,
+        "multisampleAllocatedBytes": 0,
+        "multisampleFallback": "",
+        "temporalRequested": false,
+        "temporalHistorySubmission": 0,
+        "temporalBytes": 0,
+        "temporalHistoryBytes": 0,
+        "motionBytes": 0,
+        "temporalMotionShared": false,
+        "temporalFallback": "",
+        "sceneRenderWidth": 1536,
+        "sceneRenderHeight": 1536,
+        "shadowDistance": 50,
+        "qaStateHashAlgorithm": "FNV-1a-64",
+        "qaStateFingerprintVersion": 2,
+        "qaStateHash": "97df76d86e136d7c",
+        "toonRampFormat": "AzureRender Toon Ramp Profiles v1",
+        "toonRampVersion": 1,
+        "toonRampClassCount": 10,
+        "toonRampProfile": "D:\\Projects\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_profiles.json",
+        "toonRampProfileHashAlgorithm": "FNV-1a-64",
+        "toonRampProfileHash": "ce6c7a32c7c4f5f4",
+        "toonRampAtlas": "D:\\Projects\\FYP\\Project\\AzureRender\\assets_public\\toon_ramp_atlas.ppm",
+        "toonRampAtlasHashAlgorithm": "FNV-1a-64",
+        "toonRampAtlasHash": "146a11aa241b7e80",
+        "qaCameraPosition": [
+          -0.763776,
+          2.4753,
+          -16.6268
+        ],
+        "qaCameraTarget": [
+          -1.46769,
+          2.61305,
+          -15.93
+        ],
+        "qaModelRotationRadians": 0,
+        "qaShowcasePreset": 0,
+        "showcasePresetVersion": 1,
+        "showcasePresetName": "Azure Gallery",
+        "materialProfileSchemaVersion": 1,
+        "materialInventory": [
+          {
+            "index": 0,
+            "name": "M_prop_map01_box+1_002_07",
+            "class": "generic",
+            "features": 40,
+            "profileVersion": 1,
+            "emissiveStrength": 1,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 1
+          },
+          {
+            "index": 1,
+            "name": "FallbackMaterial",
+            "class": "generic",
+            "features": 32,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "fallback/inferred",
+            "primitiveCount": 0
+          },
+          {
+            "index": 2,
+            "name": "AzureRender_ShowcasePlatform",
+            "class": "showcase",
+            "features": 0,
+            "profileVersion": 1,
+            "emissiveStrength": 0,
+            "styleParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "featureParameters": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "profileSource": "asset-extras",
+            "primitiveCount": 1
+          }
+        ],
+        "technicalSequence": false,
+        "uniqueMeshes": 365,
+        "motionPreviousValidObjects": 0,
+        "motionOutputActive": true,
+        "temporalMaterialSamples": false,
+        "reflectionSurfaceSnapshot": true,
+        "screenReflectionComputePrepared": true,
+        "screenReflectionAlgorithmRequested": "linear",
+        "screenReflectionAlgorithm": "linear",
+        "screenReflectionProducer": "linear-temporal",
+        "screenReflectionFallback": "",
+        "screenReflectionComputeActive": true,
+        "screenReflectionTemporalPrepared": true,
+        "screenReflectionTemporalActive": true,
+        "screenReflectionTemporalPreparation": "temporal",
+        "screenReflectionHistoryValid": false,
+        "screenReflectionHistorySubmission": 1,
+        "screenReflectionHistoryInputSubmission": 0,
+        "screenReflectionMotionUvOffset": [
+          0.0,
+          0.0
+        ],
+        "screenReflectionOwnsMotion": true,
+        "screenReflectionMotionBytes": 47185920,
+        "screenReflectionReprojectionBytes": 23592960,
+        "screenReflectionPreparation": "compute",
+        "screenReflectionLevels": 7,
+        "screenReflectionWidth": 768,
+        "screenReflectionHeight": 768,
+        "screenReflectionImageBudgetBytes": 80213760,
+        "ordinaryOpaquePipelineCount": 4,
+        "materialClassPipelineCount": 28,
+        "materialClassFeatureSpecializations": [
+          {
+            "class": 0,
+            "fixedMask": 1073741823,
+            "fixedValue": 40
+          },
+          {
+            "class": 1,
+            "fixedMask": 1073725439,
+            "fixedValue": 2633729
+          },
+          {
+            "class": 2,
+            "fixedMask": 1073741823,
+            "fixedValue": 2643973
+          },
+          {
+            "class": 3,
+            "fixedMask": 1070522359,
+            "fixedValue": 3
+          },
+          {
+            "class": 4,
+            "fixedMask": 1073213303,
+            "fixedValue": 2121729
+          },
+          {
+            "class": 6,
+            "fixedMask": 1073741823,
+            "fixedValue": 2228224
+          },
+          {
+            "class": 9,
+            "fixedMask": 1073741823,
+            "fixedValue": 0
+          }
+        ],
+        "ordinaryOpaqueSnapshotPipelineCount": 4,
+        "irradianceResourceKind": "clipmap",
+        "irradianceQueryScope": "physical-surface",
+        "irradianceQuery": {
+          "normalOffset": 0,
+          "jitterAmplitude": 0,
+          "phase": 0,
+          "pixelOrigin": "top-left",
+          "jitterSpace": "world"
+        },
+        "pixelIntegralPipelineCount": 0,
+        "temporalSamplingPattern": "zero-mean-halton8-v1",
+        "motionResponseEncoding": "coverage-reactivity-v3",
+        "temporalViewSubmission": 1,
+        "temporalCameraStateValid": true,
+        "temporalViewSampleIndex": 0,
+        "materialSurfaceProfileLayoutVersion": 17,
+        "outlineProjectionLayoutVersion": 1,
+        "snapshotRasterizationSamples": 1,
+        "snapshotMultisampleBytes": 0,
+        "snapshotMultisampleAllocatedBytes": 0,
+        "outlineMaskSamples": 1,
+        "outlineProjectionBytes": 669984,
+        "outlineProjectionMaterials": 743,
+        "outlineProjectionCoordinates": 77802,
+        "instanceDataLayoutVersion": 2,
+        "cascadeProjectionLayoutVersion": 2,
+        "cascadeCasterDistance": 50,
+        "cameraUniformBytes": 688,
+        "unlitFrameLayoutVersion": 1,
+        "viewFogEnabled": true,
+        "viewFogAnalyticEnabled": true,
+        "viewFogFrameBytes": 336,
+        "viewFogMatch": "camera-mismatch",
+        "viewFogFrameLayoutVersion": 2,
+        "objectShadowLayoutVersion": 2,
+        "objectShadowPrepared": true,
+        "objectShadowExactDepthBias": true,
+        "objectShadowPages": 1,
+        "objectShadowDepthBytes": 16777216,
+        "materialTextureBindingLayoutVersion": 1,
+        "sharedMaterialTextureSlots": 2,
+        "lightBufferLayoutVersion": 3,
+        "faceSdfTextures": 1,
+        "showcasePlatformPrepared": true,
+        "sceneTriangles": 547653,
+        "skinnedVertices": 77802,
+        "transparentTriangles": 10735,
+        "jointCapacity": 1174,
+        "vertexCapacity": 825267,
+        "materialTextureCache": {
+          "requests": 5948,
+          "hits": 5572,
+          "uniqueTextures": 376,
+          "requestedBytes": 7990734432,
+          "residentBytes": 2053844512,
+          "retainedPixelBytes": 1581283868,
+          "hashedPixelBytes": 6034774532,
+          "copiedPixelBytes": 1048576,
+          "transferredPixelBytes": 1580235292,
+          "discardedPixelBytes": 4453490664,
+          "hashMs": 6546.25,
+          "matchMs": 703.52,
+          "mipMs": 9370.42,
+          "uploadMs": 1385.24
+        },
+        "sceneLoad": {
+          "cpuPrepareMs": 58194.2,
+          "meshUploadMs": 344.547,
+          "materialUploadMs": 18109.5,
+          "sharedTexturesMs": 391.154,
+          "buffersMs": 82.788,
+          "skinningMs": 2.5643,
+          "descriptorsMs": 21.735,
+          "pipelinesMs": 30.9762,
+          "decodedMaterialPixelBytes": 6034774532,
+          "remainingMaterialPixelBytes": 4
+        },
+        "animationIndex": 0,
+        "animation": "",
+        "framePattern": "frame_%06d.png"
+      }
+    }
+  ]
+}

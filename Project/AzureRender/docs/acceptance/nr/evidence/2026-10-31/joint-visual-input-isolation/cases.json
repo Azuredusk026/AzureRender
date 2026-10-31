@@ -1,0 +1,22 @@
+[
+  {
+    "name": "control",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\control.azureproject",
+    "levelSha256": "0834f3f1289c60aa756fd1d5e30eae61872ebaae38a455fde6982d3f48f7039e"
+  },
+  {
+    "name": "full-npr-real-shadow",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-real-shadow.azureproject",
+    "levelSha256": "ad7fc720e580627a6ab2a66e5e4850d808f41f4e5a2b54637c54d418ff5035b2"
+  },
+  {
+    "name": "full-npr-shadow-override",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-shadow-override.azureproject",
+    "levelSha256": "00c2e43cfb0267024eaa66a354f4a7e7207b10f504f600d125d48bd70009c20e"
+  },
+  {
+    "name": "full-npr-portrait-display",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-222119-combined-visual-isolation-ad6878\\project\\full-npr-portrait-display.azureproject",
+    "levelSha256": "a84e85c86c8c5b367951190647a9eb0bc003e5a1c360968437b4bb7e06c99668"
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "scope": "Existing standalone and V8 combined frame 11; programs differ; these rectangles are diagnostic only",
+  "regions": [
+    {
+      "name": "left-wall",
+      "xyxy": [
+        0,
+        180,
+        800,
+        850
+      ],
+      "meanByte": 4.664179104477612e-05,
+      "maxByte": 4,
+      "differentPixels": 56
+    },
+    {
+      "name": "right-wall",
+      "xyxy": [
+        1720,
+        180,
+        2560,
+        850
+      ],
+      "meanByte": 0.0019059464581852642,
+      "maxByte": 31,
+      "differentPixels": 1642
+    },
+    {
+      "name": "floor-left",
+      "xyxy": [
+        0,
+        950,
+        1000,
+        1440
+      ],
+      "meanByte": 0.005634013605442177,
+      "maxByte": 5,
+      "differentPixels": 4261
+    },
+    {
+      "name": "floor-center",
+      "xyxy": [
+        1050,
+        1060,
+        1490,
+        1430
+      ],
+      "meanByte": 0.9682145782145782,
+      "maxByte": 55,
+      "differentPixels": 12890
+    },
+    {
+      "name": "ceiling",
+      "xyxy": [
+        0,
+        0,
+        2560,
+        350
+      ],
+      "meanByte": 0.007454985119047619,
+      "maxByte": 78,
+      "differentPixels": 4205
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "id": "visual-isolation-full-npr-portrait-display",
+  "name": "Complete native scene and character visible",
+  "mounts": [
+    {
+      "name": "assets",
+      "path": "content-assets"
+    },
+    {
+      "name": "candidate",
+      "path": "assets"
+    },
+    {
+      "name": "central",
+      "path": "content-central"
+    },
+    {
+      "name": "upper",
+      "path": "content-upper"
+    },
+    {
+      "name": "character",
+      "path": "content-character"
+    },
+    {
+      "name": "back",
+      "path": "content-back"
+    },
+    {
+      "name": "gi",
+      "path": "native-gi"
+    },
+    {
+      "name": "floor",
+      "path": "floor-materials"
+    },
+    {
+      "name": "floorfixed",
+      "path": "floor-fixed"
+    },
+    {
+      "name": "vfx",
+      "path": "captured-vfx"
+    },
+    {
+      "name": "vfxext",
+      "path": "captured-vfx-extended"
+    },
+    {
+      "name": "vfxfade",
+      "path": "captured-vfx-depth-fade"
+    },
+    {
+      "name": "vfxvertex",
+      "path": "captured-vfx-vertex-color"
+    },
+    {
+      "name": "vfxview",
+      "path": "captured-vfx-view-coverage"
+    },
+    {
+      "name": "boxpose",
+      "path": "captured-logistics-boxes"
+    },
+    {
+      "name": "glyph",
+      "path": "captured-glyph"
+    },
+    {
+      "name": "remaining",
+      "path": "captured-remaining"
+    },
+    {
+      "name": "distortion",
+      "path": "captured-distortion"
+    },
+    {
+      "name": "centralglyph",
+      "path": "captured-central-glyph"
+    },
+    {
+      "name": "capturedfog",
+      "path": "captured-fog"
+    },
+    {
+      "name": "lateglyph",
+      "path": "captured-late-glyph"
+    },
+    {
+      "name": "opaquering",
+      "path": "captured-opaque-rings"
+    },
+    {
+      "name": "stage",
+      "path": "scene"
+    }
+  ],
+  "startupScene": "stage:/full-npr-portrait-display.azurelevel"
+}

@@ -120,3 +120,13 @@ GPU 检查覆盖固定与索引描述符。
 无有效主光时，该专用直接镜面贡献为零。
 普通局部灯及环境反射各自消费所属响应。
 完整规则见[二维高光色带](specular-ramp.md)。
+
+## 离线来源转换
+
+`tools/endfield_native/npr_lighting.py` 解释已确认的常量布局。
+`decode_scene_settings` 接收全局行及显式环境行身份。
+输出为现有照明设置对象，坐标反射由调用参数决定。
+`decode_lighting` 另接收对象行并输出主光与光色来源。
+
+场景与独立角色分别使用其所属截帧的全局参数。
+完整上下文及视觉状态见[输入核验](../acceptance/nr/joint-visual-input-isolation.md)。

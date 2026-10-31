@@ -1,0 +1,10 @@
+{
+  "changedTopFields": [
+    "nodes",
+    "resources"
+  ],
+  "changedSourceNodes": [],
+  "addedNodes": [
+    "hero"
+  ]
+}

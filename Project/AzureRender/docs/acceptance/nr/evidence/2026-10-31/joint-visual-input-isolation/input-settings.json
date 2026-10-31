@@ -1,0 +1,566 @@
+{
+  "portrait": {
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-135416-character-portrait-recovery-0773ca\\original-reference\\project\\high.azureproject",
+    "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-135416-character-portrait-recovery-0773ca\\original-reference\\project\\high\\reference.azurelevel",
+    "keys": [
+      "schemaVersion",
+      "id",
+      "sceneType",
+      "resources",
+      "nodes",
+      "lights",
+      "renderSettings"
+    ],
+    "renderSettings": {
+      "sceneLighting": true,
+      "platform": false,
+      "background": false,
+      "silhouetteOutline": false,
+      "innerOutline": false,
+      "stylized": false,
+      "skyIntensity": 0.5,
+      "bloomEnabled": false,
+      "antiAliasing": 0,
+      "exposure": -2,
+      "toneMapping": false,
+      "contrast": 1,
+      "saturation": 1,
+      "nprLighting": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "ambientColor": [
+          1.1870100498199463,
+          0.9272286891937256,
+          0.8129898905754089
+        ],
+        "ambientDirection": [
+          -0.0,
+          0.9999999999999991,
+          4.371138828673789e-08
+        ],
+        "directionBias": 0.15000000596046448,
+        "directionGain": 1.5,
+        "directionFloor": 0.5,
+        "outdoorGain": 1.0499999523162842,
+        "shadowAmbientGain": 0.800000011920929,
+        "indoorMix": 0.0,
+        "litAmbientMix": 1.0,
+        "mainColorMix": 1.0,
+        "shadowOverride": 1.0,
+        "useSceneIrradiance": false,
+        "ambientWeight": 0.28772246837615967
+      },
+      "gradeLut": {
+        "schemaVersion": 1,
+        "asset": "",
+        "exposureMultiplier": 1
+      },
+      "schemaVersion": 18
+    },
+    "lightsAndCamera": [
+      {
+        "id": "camera",
+        "components": {
+          "azure.transform": {
+            "type": "azure.transform",
+            "version": 1,
+            "data": {
+              "translation": [
+                0,
+                0.8800048828125,
+                3.29998779296875
+              ],
+              "rotation": [
+                -0.7225715253360995,
+                0,
+                0
+              ]
+            }
+          },
+          "azure.camera": {
+            "type": "azure.camera",
+            "version": 2,
+            "data": {
+              "enabled": true,
+              "priority": 1,
+              "fieldOfView": 34.99999942174447,
+              "projectionOffsetX": 0.00019532594888005406,
+              "projectionOffsetY": 0.00023145804880186915
+            }
+          }
+        }
+      }
+    ]
+  },
+  "near": {
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\near-restored.azureproject",
+    "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\scene\\near-restored.azurelevel",
+    "keys": [
+      "id",
+      "irradianceVolume",
+      "lights",
+      "nodes",
+      "reflectionProbe",
+      "renderSettings",
+      "resources",
+      "sceneImports",
+      "sceneType",
+      "schemaVersion",
+      "viewFog"
+    ],
+    "renderSettings": {
+      "antiAliasing": 0,
+      "background": false,
+      "bloomEnabled": true,
+      "bloomStrength": 0.1599999964237213,
+      "bloomThreshold": 1.0499999523162842,
+      "cameraFar": 1000,
+      "cameraNear": 0.1,
+      "contrast": 1,
+      "diagnosticView": 0,
+      "diffuseBandThreshold": 0.4000000059604645,
+      "exposure": 0,
+      "faceSdf": true,
+      "faceSoftness": 0.07999999821186066,
+      "faceThreshold": 0.5,
+      "gradeLut": {
+        "schemaVersion": 1,
+        "asset": "gi:/captured-3534.azlut",
+        "exposureMultiplier": 1.0
+      },
+      "innerOutline": false,
+      "outline": 0.4000000059604645,
+      "outlineColor": [
+        0.00800000037997961,
+        0.013000000268220901,
+        0.02199999988079071
+      ],
+      "outlineDepth": 0.18000000715255737,
+      "outlineNormal": 0.20000000298023224,
+      "outlinePixels": 0.800000011920929,
+      "pathTraceBounces": 6,
+      "pathTraceDenoise": false,
+      "pathTraceSamples": 256,
+      "pathTraceSeed": 0,
+      "platform": false,
+      "renderer": "character",
+      "saturation": 1,
+      "sceneLighting": true,
+      "shadowDistance": 50.0,
+      "shadowRadius": 8.0,
+      "showcasePreset": 0,
+      "silhouetteOutline": false,
+      "skyColor": [
+        0.03500000014901161,
+        0.04500000178813934,
+        0.06499999761581421
+      ],
+      "skyIntensity": 0.25,
+      "skyMode": 0,
+      "skyRotation": 0.0,
+      "styleMaskStrength": 1.0,
+      "stylized": false,
+      "tint": [
+        1,
+        1,
+        1
+      ],
+      "toneMapping": true,
+      "environmentSpecularModel": "ggx-multiscatter-fit",
+      "screenSpaceReflection": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "maxDistance": 32,
+        "thickness": 0.15,
+        "normalBias": 0.03,
+        "maxSteps": 128,
+        "maxRoughness": 0.7,
+        "edgeFade": 0.08,
+        "strength": 1
+      },
+      "nprLighting": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "useSceneIrradiance": true,
+        "specularFloor": 0.55
+      },
+      "schemaVersion": 20,
+      "unlitEffects": {
+        "schemaVersion": 1,
+        "exposureGain": 1,
+        "saturation": 1,
+        "colorGain": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "lightsAndCamera": [
+      {
+        "components": {
+          "azure.camera": {
+            "data": {
+              "enabled": true,
+              "farPlane": 10000.0,
+              "fieldOfView": 32,
+              "priority": 10,
+              "projectionOffsetX": 0,
+              "projectionOffsetY": 0,
+              "nearPlane": 0.1
+            },
+            "type": "azure.camera",
+            "version": 2
+          },
+          "azure.renderable": {
+            "data": {
+              "primitiveIndex": 0,
+              "visible": false
+            },
+            "type": "azure.renderable",
+            "version": 1
+          },
+          "azure.transform": {
+            "data": {
+              "rotation": [
+                -168.81749855758784,
+                44.74185617466877,
+                172.07786332947916
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                -0.7637761919398014,
+                2.4753045306344466,
+                -16.626819892927177
+              ]
+            },
+            "type": "azure.transform",
+            "version": 1
+          }
+        },
+        "id": "camera",
+        "name": "camera",
+        "parentId": "",
+        "resourceId": ""
+      }
+    ]
+  },
+  "joint": {
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\full-restored.azureproject",
+    "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\scene\\full-restored.azurelevel",
+    "keys": [
+      "id",
+      "irradianceVolume",
+      "lights",
+      "nodes",
+      "reflectionProbe",
+      "renderSettings",
+      "resources",
+      "sceneImports",
+      "sceneType",
+      "schemaVersion",
+      "viewFog"
+    ],
+    "renderSettings": {
+      "antiAliasing": 1,
+      "background": false,
+      "bloomEnabled": true,
+      "bloomStrength": 0.1599999964237213,
+      "bloomThreshold": 1.0499999523162842,
+      "cameraFar": 1000,
+      "cameraNear": 0.1,
+      "contrast": 1,
+      "diagnosticView": 0,
+      "diffuseBandThreshold": 0.4000000059604645,
+      "exposure": 0,
+      "faceSdf": true,
+      "faceSoftness": 0.07999999821186066,
+      "faceThreshold": 0.5,
+      "gradeLut": {
+        "schemaVersion": 1,
+        "asset": "gi:/captured-3534.azlut",
+        "exposureMultiplier": 1.0
+      },
+      "innerOutline": false,
+      "outline": 0.4000000059604645,
+      "outlineColor": [
+        0.00800000037997961,
+        0.013000000268220901,
+        0.02199999988079071
+      ],
+      "outlineDepth": 0.18000000715255737,
+      "outlineNormal": 0.20000000298023224,
+      "outlinePixels": 0.800000011920929,
+      "pathTraceBounces": 6,
+      "pathTraceDenoise": false,
+      "pathTraceSamples": 256,
+      "pathTraceSeed": 0,
+      "platform": false,
+      "renderer": "character",
+      "saturation": 1,
+      "sceneLighting": true,
+      "shadowDistance": 50.0,
+      "shadowRadius": 8.0,
+      "showcasePreset": 0,
+      "silhouetteOutline": false,
+      "skyColor": [
+        0.03500000014901161,
+        0.04500000178813934,
+        0.06499999761581421
+      ],
+      "skyIntensity": 0.25,
+      "skyMode": 0,
+      "skyRotation": 0.0,
+      "styleMaskStrength": 1.0,
+      "stylized": false,
+      "tint": [
+        1,
+        1,
+        1
+      ],
+      "toneMapping": true,
+      "environmentSpecularModel": "ggx-multiscatter-fit",
+      "screenSpaceReflection": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "maxDistance": 32,
+        "thickness": 0.15,
+        "normalBias": 0.03,
+        "maxSteps": 128,
+        "maxRoughness": 0.7,
+        "edgeFade": 0.08,
+        "strength": 1
+      },
+      "nprLighting": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "useSceneIrradiance": true,
+        "specularFloor": 0.55
+      },
+      "schemaVersion": 20,
+      "unlitEffects": {
+        "schemaVersion": 1,
+        "exposureGain": 1,
+        "saturation": 1,
+        "colorGain": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "lightsAndCamera": [
+      {
+        "components": {
+          "azure.camera": {
+            "data": {
+              "enabled": true,
+              "farPlane": 10000.0,
+              "fieldOfView": 57.22092455245762,
+              "priority": 10,
+              "projectionOffsetX": -0.0002929684706032276,
+              "projectionOffsetY": 7.717559492448345e-05,
+              "nearPlane": 0.1
+            },
+            "type": "azure.camera",
+            "version": 2
+          },
+          "azure.renderable": {
+            "data": {
+              "primitiveIndex": 0,
+              "visible": false
+            },
+            "type": "azure.renderable",
+            "version": 1
+          },
+          "azure.transform": {
+            "data": {
+              "rotation": [
+                -176.57766118423316,
+                -0.2822828552113573,
+                -179.98311892665737
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                -0.26604312658309937,
+                2.262058973312378,
+                -24.905324935913086
+              ]
+            },
+            "type": "azure.transform",
+            "version": 1
+          }
+        },
+        "id": "camera",
+        "name": "camera",
+        "parentId": "",
+        "resourceId": ""
+      }
+    ]
+  },
+  "scene": {
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-045743-snapshot-shading-budget-8ee0b1\\full-candidate\\enclosure-sampler.azureproject",
+    "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-045743-snapshot-shading-budget-8ee0b1\\full-candidate\\scene\\enclosure-sampler.azurelevel",
+    "keys": [
+      "id",
+      "irradianceVolume",
+      "lights",
+      "nodes",
+      "reflectionProbe",
+      "renderSettings",
+      "resources",
+      "sceneImports",
+      "sceneType",
+      "schemaVersion",
+      "viewFog"
+    ],
+    "renderSettings": {
+      "antiAliasing": 1,
+      "background": false,
+      "bloomEnabled": true,
+      "bloomStrength": 0.1599999964237213,
+      "bloomThreshold": 1.0499999523162842,
+      "cameraFar": 1000,
+      "cameraNear": 0.1,
+      "contrast": 1,
+      "diagnosticView": 0,
+      "diffuseBandThreshold": 0.4000000059604645,
+      "exposure": 0,
+      "faceSdf": true,
+      "faceSoftness": 0.07999999821186066,
+      "faceThreshold": 0.5,
+      "gradeLut": {
+        "schemaVersion": 1,
+        "asset": "gi:/captured-3534.azlut",
+        "exposureMultiplier": 1.0
+      },
+      "innerOutline": false,
+      "outline": 0.4000000059604645,
+      "outlineColor": [
+        0.00800000037997961,
+        0.013000000268220901,
+        0.02199999988079071
+      ],
+      "outlineDepth": 0.18000000715255737,
+      "outlineNormal": 0.20000000298023224,
+      "outlinePixels": 0.800000011920929,
+      "pathTraceBounces": 6,
+      "pathTraceDenoise": false,
+      "pathTraceSamples": 256,
+      "pathTraceSeed": 0,
+      "platform": false,
+      "renderer": "character",
+      "saturation": 1,
+      "sceneLighting": true,
+      "shadowDistance": 50.0,
+      "shadowRadius": 8.0,
+      "showcasePreset": 0,
+      "silhouetteOutline": false,
+      "skyColor": [
+        0.03500000014901161,
+        0.04500000178813934,
+        0.06499999761581421
+      ],
+      "skyIntensity": 0.25,
+      "skyMode": 0,
+      "skyRotation": 0.0,
+      "styleMaskStrength": 1.0,
+      "stylized": false,
+      "tint": [
+        1,
+        1,
+        1
+      ],
+      "toneMapping": true,
+      "environmentSpecularModel": "ggx-multiscatter-fit",
+      "screenSpaceReflection": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "maxDistance": 32,
+        "thickness": 0.15,
+        "normalBias": 0.03,
+        "maxSteps": 128,
+        "maxRoughness": 0.7,
+        "edgeFade": 0.08,
+        "strength": 1
+      },
+      "nprLighting": {
+        "schemaVersion": 1,
+        "enabled": true,
+        "useSceneIrradiance": true,
+        "specularFloor": 0.55
+      },
+      "schemaVersion": 20,
+      "unlitEffects": {
+        "schemaVersion": 1,
+        "exposureGain": 1,
+        "saturation": 1,
+        "colorGain": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "lightsAndCamera": [
+      {
+        "components": {
+          "azure.camera": {
+            "data": {
+              "enabled": true,
+              "farPlane": 10000.0,
+              "fieldOfView": 57.22092455245762,
+              "priority": 10,
+              "projectionOffsetX": -0.0002929684706032276,
+              "projectionOffsetY": 7.717559492448345e-05,
+              "nearPlane": 0.1
+            },
+            "type": "azure.camera",
+            "version": 2
+          },
+          "azure.renderable": {
+            "data": {
+              "primitiveIndex": 0,
+              "visible": false
+            },
+            "type": "azure.renderable",
+            "version": 1
+          },
+          "azure.transform": {
+            "data": {
+              "rotation": [
+                -176.57766118423316,
+                -0.2822828552113573,
+                -179.98311892665737
+              ],
+              "scale": [
+                1.0,
+                1.0,
+                1.0
+              ],
+              "translation": [
+                -0.26604312658309937,
+                2.262058973312378,
+                -24.905324935913086
+              ]
+            },
+            "type": "azure.transform",
+            "version": 1
+          }
+        },
+        "id": "camera",
+        "name": "camera",
+        "parentId": "",
+        "resourceId": ""
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "changedFields": [
+    "nodes",
+    "resources",
+    "sceneImports"
+  ],
+  "nodes": 9,
+  "resources": 1,
+  "retained": [
+    "same character asset and pose",
+    "same camera",
+    "same lights",
+    "same materials",
+    "same NPR composition",
+    "same GI and probe resources",
+    "same post processing"
+  ],
+  "scope": "Character material context isolation. Scene cascade casters and SSR sources differ; main visibility override is 1 in both, and those differences remain out of scope for general equality."
+}
