@@ -26,6 +26,7 @@ Vulkan 三份完整输出及双配置回归见[参考验证](../acceptance/nr/na
 
 公共表面转换及镜面组合见[准备验证](../acceptance/nr/projected-surface-preparation.md)。
 公共生产与过滤组合见[组合验证](../acceptance/nr/projected-reflection-composition.md)。
+完整着色清单及混合编译见[契约验证](../acceptance/recovery/shader-compiler-contract.md)。
 接续主场景的类型化选择、快照及历史提交身份。
 
 ## 代码检索与证据管理

@@ -20,9 +20,20 @@ std::string read(const std::filesystem::path& path){
 }
 }
 ShaderSourceSnapshot snapshotShaders(const ShaderReloadOptions& options){
-    if(options.programs.empty() || options.programs.size()>128 || options.sourceBytes==0 || options.sourceBytes>16*1024*1024
+    if(options.programs.empty() || options.programs.size()>512 || options.sourceBytes==0 || options.sourceBytes>16*1024*1024
         || options.timeoutMs==0 || options.timeoutMs>60000 || options.pollIntervalMs==0)
         throw std::invalid_argument("Invalid shader reload configuration");
+    std::size_t metadataBytes=0;
+    for(const auto& program:options.programs){
+        if(program.arguments.size()>64||program.defines.size()>64||(program.outputOption!="-o"&&program.outputOption!="-Fo"))
+            throw std::invalid_argument("Invalid shader compiler arguments or output option");
+        for(const auto* values:{&program.arguments,&program.defines})for(const auto& value:*values){
+            if(value.size()>4096||value.find('\0')!=std::string::npos)throw std::invalid_argument("Shader compiler argument exceeds bounds");
+            metadataBytes+=value.size();
+        }
+        metadataBytes+=program.source.generic_u8string().size()+program.output.generic_u8string().size()+program.compiler.generic_u8string().size();
+        if(metadataBytes>1024*1024)throw std::invalid_argument("Shader compiler metadata exceeds 1 MiB");
+    }
     ShaderSourceSnapshot result;std::size_t bytes=0;
     for(const auto& entry:std::filesystem::recursive_directory_iterator(options.sourceRoot)){
         if(entry.is_symlink())throw std::invalid_argument("Shader snapshots require regular owned files");
@@ -38,7 +49,9 @@ ShaderSourceSnapshot snapshotShaders(const ShaderReloadOptions& options){
         if(!validRelativeShaderPath(program.source) || !validRelativeShaderPath(program.output) || !result.files.count(program.source))
             throw std::invalid_argument("Shader program must reference a snapshot source and relative output");
         append(program.source.generic_u8string());append(program.output.generic_u8string());
+        append((program.compiler.empty()?options.compiler:program.compiler).generic_u8string());append(program.outputOption);
         for(const auto& define:program.defines)append(define);
+        for(const auto& argument:program.arguments)append(argument);
     }
     std::ostringstream fingerprint;fingerprint<<std::hex<<hash;result.fingerprint=fingerprint.str();return result;
 }
@@ -69,10 +82,11 @@ ShaderCompileResult compileShaderCandidate(const ShaderReloadOptions& options,co
             if(remaining<=0)throw std::runtime_error("Shader compilation deadline exceeded");
             const auto target=result.candidate.directory/program.output;
             std::filesystem::create_directories(target.parent_path());
-            ProcessRequest request;request.executable=options.compiler;request.workingDirectory=sources;
+            ProcessRequest request;request.executable=program.compiler.empty()?options.compiler:program.compiler;request.workingDirectory=sources;
             request.timeoutMs=static_cast<std::uint32_t>(remaining);
+            request.arguments=program.arguments;
             for(const auto& define:program.defines)request.arguments.push_back("-D"+define);
-            request.arguments.insert(request.arguments.end(),{"-I",sources.u8string(),(sources/program.source).u8string(),"-o",target.u8string()});
+            request.arguments.insert(request.arguments.end(),{"-I",sources.u8string(),(sources/program.source).u8string(),program.outputOption,target.u8string()});
             const auto process=runProcess(request,cancelled);
             if(!process.passed){result.cancelled=process.cancelled;throw std::runtime_error(process.diagnostic+"\n"+process.output);}
             const auto code=read(target);std::uint32_t magic=0;

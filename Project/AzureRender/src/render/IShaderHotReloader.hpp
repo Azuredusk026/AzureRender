@@ -9,6 +9,9 @@ enum class ShaderReloadState { Idle, Compiling, Ready, Error, Cancelled };
 struct ShaderProgramDescriptor {
     std::filesystem::path source, output;
     std::vector<std::string> defines;
+    std::filesystem::path compiler; // Empty selects ShaderReloadOptions::compiler.
+    std::vector<std::string> arguments;
+    std::string outputOption="-o";
 };
 struct ShaderReloadOptions {
     std::filesystem::path sourceRoot, binaryRoot, scratchRoot, compiler;

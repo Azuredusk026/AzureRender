@@ -38,6 +38,8 @@ CMake 使用 `DEPFILE` 将依赖交给增量构建。
 热重载使用源目录的完整内容快照。
 其共享头文件纳入同一内容指纹和编译事务。
 
+程序清单、逐程序编译器及 DXC 配置见[热重载编译](../development/shader-hot-reload.md)。
+
 ## 回归入口
 
 ```powershell

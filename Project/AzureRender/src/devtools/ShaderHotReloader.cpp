@@ -18,8 +18,13 @@ ShaderReloadOptions loadShaderReloadOptions(const std::filesystem::path& path){
     options.compiler=resolve(data.at("compiler").get<std::string>());
     options.pollIntervalMs=data.value("pollIntervalMs",500u);options.timeoutMs=data.value("timeoutMs",60000u);
     options.sourceBytes=data.value("sourceBytes",static_cast<std::size_t>(16*1024*1024));
-    for(const auto& program:data.at("programs"))options.programs.push_back({std::filesystem::u8path(program.at("source").get<std::string>()),
-        std::filesystem::u8path(program.at("output").get<std::string>()),program.value("defines",std::vector<std::string>())});
+    for(const auto& program:data.at("programs")){
+        ShaderProgramDescriptor description{std::filesystem::u8path(program.at("source").get<std::string>()),
+            std::filesystem::u8path(program.at("output").get<std::string>()),program.value("defines",std::vector<std::string>())};
+        const auto compiler=program.value("compiler",std::string());if(!compiler.empty())description.compiler=resolve(compiler);
+        description.arguments=program.value("arguments",std::vector<std::string>());description.outputOption=program.value("outputOption",std::string("-o"));
+        options.programs.push_back(std::move(description));
+    }
     return options;
 }
 struct ShaderHotReloader::State {

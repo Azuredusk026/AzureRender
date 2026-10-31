@@ -122,5 +122,32 @@
     "archived strict image comparison",
     "dual-device delivery",
     "physical input and audio review"
-  ]
+  ],
+  "debugAssetThumbnailRefresh": {
+    "status": "pending",
+    "requestFrames": 25,
+    "deadlineMs": 10000,
+    "observedMs": 11938.9605,
+    "operations": 56,
+    "validationEnabled": true,
+    "shaderReloadControlsReached": false,
+    "owner": "编辑预览性能及运行时恢复任务",
+    "retryCondition": "相关预览重建成本优化或实际环境改善",
+    "releaseWorkflowsPassed": [
+      "exploration",
+      "inspector"
+    ],
+    "releaseValidationEnabled": false,
+    "source": "docs/acceptance/recovery/shader-compiler-contract.md",
+    "pipelineCreations": 5,
+    "pipelineTotalMs": 11038.9312,
+    "shaderSnapshotDebugMs": [
+      39.0834,
+      36.2019,
+      34.7958
+    ],
+    "sourceFiles": 122,
+    "sourceBytes": 403325,
+    "sourceFingerprint": "389a03c1c5b531af"
+  }
 }

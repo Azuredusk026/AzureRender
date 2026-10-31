@@ -18,6 +18,8 @@
 
 公共生产、历史输入和足迹过滤见[投影反射组合](docs/runtime/projected-screen-reflection.md)。
 
+完整程序清单及 DXC 热重载见[编译配置](docs/development/shader-hot-reload.md)。
+
 重装与迁移后先阅读[恢复交接](docs/plans/2026-10-29-reinstall-handoff.md)。
 
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。

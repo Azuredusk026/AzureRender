@@ -506,15 +506,23 @@ if(AZURE_DXC_EXECUTABLE)
         endif()
     endforeach()
     set(AZURE_PROJECTED_REFLECTION_SHADER "${SHADER_BINARY_DIR}/projected_reflection_trace.comp.spv")
+    set(AZURE_PROJECTED_REFLECTION_DXC_ARGS -spirv -T cs_6_0 -E main -HV 2018 -fspv-target-env=vulkan1.1
+        -fvk-b-shift 0 0 -fvk-t-shift 1 0 -fvk-s-shift 8 0 -fvk-u-shift 9 0 -Od)
     add_custom_command(OUTPUT "${AZURE_PROJECTED_REFLECTION_SHADER}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
-        COMMAND "${AZURE_DXC_EXECUTABLE}" -spirv -T cs_6_0 -E main -HV 2018 -fspv-target-env=vulkan1.1
-            -fvk-b-shift 0 0 -fvk-t-shift 1 0 -fvk-s-shift 8 0 -fvk-u-shift 9 0 -Od
+        COMMAND "${AZURE_DXC_EXECUTABLE}" ${AZURE_PROJECTED_REFLECTION_DXC_ARGS}
             -Fo "${AZURE_PROJECTED_REFLECTION_SHADER}" "${SHADER_SOURCE_DIR}/projected_reflection_trace.hlsl"
         DEPENDS "${SHADER_SOURCE_DIR}/projected_reflection_trace.hlsl" ${AZURE_DXC_DEPENDENCIES}
         COMMENT "Compiling projected reflection trace" VERBATIM)
     add_custom_target(AzureProjectedReflectionShaders DEPENDS "${AZURE_PROJECTED_REFLECTION_SHADER}")
     add_dependencies(AzureRenderShaders AzureProjectedReflectionShaders)
+    set(_projected_dxc_json_args "")
+    foreach(_argument IN LISTS AZURE_PROJECTED_REFLECTION_DXC_ARGS)
+        list(APPEND _projected_dxc_json_args "\"${_argument}\"")
+    endforeach()
+    list(JOIN _projected_dxc_json_args "," _projected_dxc_json_arguments)
+    set_property(GLOBAL APPEND PROPERTY AZURE_SHADER_DESCRIPTORS
+        "{\"source\":\"projected_reflection_trace.hlsl\",\"output\":\"projected_reflection_trace.comp.spv\",\"defines\":[],\"compiler\":\"${AZURE_DXC_EXECUTABLE}\",\"arguments\":[${_projected_dxc_json_arguments}],\"outputOption\":\"-Fo\"}")
 endif()
 include(cmake/AzureShaderModules.cmake)
 get_property(AZURE_SHADER_DESCRIPTORS GLOBAL PROPERTY AZURE_SHADER_DESCRIPTORS)
@@ -1290,6 +1298,16 @@ if(BUILD_TESTING)
     add_test(NAME AzureEditor.Thumbnail COMMAND AzureThumbnailTests "${SHADER_BINARY_DIR}")
     add_executable(AzureHotReloadTests tests/HotReloadTests.cpp)
     target_link_libraries(AzureHotReloadTests PRIVATE AzureDevtools)
+    add_executable(AzureShaderCompilerContractTests tests/ShaderCompilerContractTests.cpp)
+    target_link_libraries(AzureShaderCompilerContractTests PRIVATE AzureDevtools)
+    if(WIN32 AND AZURE_DXC_EXECUTABLE)
+        add_dependencies(AzureShaderCompilerContractTests AzureProjectedReflectionShaders)
+        add_test(NAME AzureRender.ShaderCompilerContract COMMAND "${Python3_EXECUTABLE}"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shader_compiler_contract.py"
+            --executable "$<TARGET_FILE:AzureShaderCompilerContractTests>"
+            --config "${CMAKE_CURRENT_BINARY_DIR}/shader-reload.json" --dxc "${AZURE_DXC_EXECUTABLE}")
+        set_tests_properties(AzureRender.ShaderCompilerContract PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
+    endif()
     if(WIN32)
         add_test(NAME AzureRender.HotReload COMMAND AzureHotReloadTests
             "$<TARGET_FILE:Vulkan::glslc>" "${CMAKE_CURRENT_BINARY_DIR}/hot-reload-tests")
