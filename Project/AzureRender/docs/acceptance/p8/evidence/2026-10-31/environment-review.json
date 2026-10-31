@@ -149,5 +149,19 @@
     "sourceFiles": 122,
     "sourceBytes": 403325,
     "sourceFingerprint": "389a03c1c5b531af"
+  },
+  "fullSceneVisualReplay": {
+    "status": "content reproduced; strict pixel compatibility pending",
+    "source": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-visual/summary.json",
+    "configuration": "Release",
+    "frames": 12,
+    "width": 2560,
+    "height": 1440,
+    "minimumExactPixelFraction": 0.9998768446180556,
+    "maximumMeanAbsoluteByteError": 5.054615162037037e-05,
+    "maximumChannelError": 9,
+    "pngBytesExactPairs": 0,
+    "owner": "运行环境及渲染兼容复核任务",
+    "retryCondition": "相关渲染修复、环境变化或明确的新诊断假设"
   }
 }
