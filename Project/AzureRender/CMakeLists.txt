@@ -3123,7 +3123,8 @@ if(WIN32)
 endif()
 
 if(WIN32)
-    install(CODE "execute_process(COMMAND \"${Python3_EXECUTABLE}\" \"${CMAKE_CURRENT_SOURCE_DIR}/tools/install_python_runtime.py\" --destination \"\${CMAKE_INSTALL_PREFIX}/share/AzureRender/tools/python\" COMMAND_ERROR_IS_FATAL ANY)")
+    file(TO_CMAKE_PATH "${Python3_EXECUTABLE}" AZURE_INSTALL_PYTHON_EXECUTABLE)
+    install(CODE "execute_process(COMMAND \"${AZURE_INSTALL_PYTHON_EXECUTABLE}\" \"${CMAKE_CURRENT_SOURCE_DIR}/tools/install_python_runtime.py\" --destination \"\${CMAKE_INSTALL_PREFIX}/share/AzureRender/tools/python\" COMMAND_ERROR_IS_FATAL ANY)")
 endif()
 
 target_sources(AzurePlatform PRIVATE src/platform/WindowIcon.cpp)

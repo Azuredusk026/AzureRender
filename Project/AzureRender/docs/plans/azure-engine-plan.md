@@ -139,6 +139,10 @@ Q1 的整体外观和时间稳定性继续验收。
 结果及范围见[操控验收](../acceptance/recovery/full-scene-playable.md)。
 整体画质、性能及发布仍按 Q1 至 Q4 的条件验收。
 
+发布工具支持有界的离线项目校验预算。
+Windows 安装路径及隔离 Python 通过实测。
+范围与证据见[发布校验](../acceptance/recovery/game-package-validation.md)。
+
 ## 代码检索与证据管理
 
 有界检索、证据归档与按需符号地图已完成。

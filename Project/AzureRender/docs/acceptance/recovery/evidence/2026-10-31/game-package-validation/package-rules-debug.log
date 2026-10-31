@@ -1,0 +1,8 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+    Start 202: AzureEngine.GamePackageRules
+1/1 Test #202: AzureEngine.GamePackageRules .....   Passed    2.30 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   2.34 sec

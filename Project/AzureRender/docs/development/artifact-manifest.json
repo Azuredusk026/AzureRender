@@ -836,6 +836,16 @@
       "pinMarker": ".keep",
       "primaryProject": "project/playable.azureproject",
       "evidence": "docs/acceptance/recovery/full-scene-playable.md"
+    },
+    {
+      "path": "runs/20261031-201944-full-scene-delivery-validation-dd89c4",
+      "pathBase": "build",
+      "purpose": "完整场景保存、迁移、独立包及发布校验来源。",
+      "retention": "相应交付与正式验收完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "移动后的完整场景/playable.azureproject",
+      "primaryPackage": "独立游戏 中文 空格",
+      "evidence": "docs/acceptance/recovery/game-package-validation.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

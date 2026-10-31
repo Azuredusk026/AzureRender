@@ -1,0 +1,55 @@
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime (timeout 61.25 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 61.25 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed runtime (timeout 0.01 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 0.01 s)
+...................
+----------------------------------------------------------------------
+Ran 19 tests in 2.401s
+
+OK

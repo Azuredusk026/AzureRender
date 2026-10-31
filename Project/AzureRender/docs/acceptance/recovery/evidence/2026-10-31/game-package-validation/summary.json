@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "sourceBase": "9320a7d",
+  "sources": {
+    "CMakeLists.txt": {
+      "workingTreeSha256": "0e46cd15ca1095f9f14607bedcda9d05dc91dbdc38f13d7c0679f85957aaf76b",
+      "canonicalLfSha256": "d80233cf01a5a6596cce90a56e9426b7b21717995a063ee70d8c55f2934e3b25"
+    },
+    "tools/build_game.py": {
+      "workingTreeSha256": "ac2f67a2d9aaf5f07202fc3d2a058e6044c84df02b213ca80d4e34096080cc9b",
+      "canonicalLfSha256": "3a2d2daedc741dbcc1c82253bb42af7b87bdb9ca8fea361ba600355b73dc7a4e"
+    },
+    "tools/test_game_package_rules.py": {
+      "workingTreeSha256": "2d010d22b3b5c77815e0d04ae89372ce3d2cb9472b5ad613d3661508b7bc4d87",
+      "canonicalLfSha256": "88a8362b3aca67990552520a8f17d6281a6d4f4bf3a88094be6ce55bf3b49e52"
+    }
+  },
+  "defaultValidationSeconds": 1800,
+  "maximumValidationSeconds": 3600,
+  "realOldBudgetSeconds": 60,
+  "oldBudgetTimeoutObserved": true,
+  "ruleTestsPerConfiguration": 19,
+  "configurations": [
+    "Debug",
+    "Release"
+  ],
+  "installedPythonIsolated": true,
+  "windowsInstallPathWarningResolved": true,
+  "nativeProgramsUnchangedFromJointValidation": true,
+  "realSourceAndCandidateChecksPassed": true,
+  "packageFiles": 2200,
+  "packageManifestSha256": "4a15452e44af32c95db095d64c85c9ba0376eea6e900ed99764998a042bc6337",
+  "scope": "Offline Player validation budget and Python installation path; native gameplay and formal performance are separate"
+}

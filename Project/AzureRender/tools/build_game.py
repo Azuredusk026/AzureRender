@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import pathlib
 import shutil
 import subprocess
@@ -14,6 +15,14 @@ REQUIRED_LICENSES = [name + "-LICENSE.txt" for name in [
     "joltphysics", "lua", "sol2", "rmlui", "miniaudio", "freetype", "libpng", "zlib", "bzip2", "brotli", "LatoLatin", "NanoSVG", "NotoSansCJK"]]
 PRIVATE_NAMES = {"assets_private", "captures", "portfolio"}
 GENERATED_NAMES = {".azure", ".git", "__pycache__"}
+DEFAULT_VALIDATION_TIMEOUT_SECONDS = 1800
+
+
+def _validated_timeout(value):
+    if (isinstance(value, bool) or not isinstance(value, (int, float))
+            or not 0 < value <= 3600 or not math.isfinite(value)):
+        raise ValueError("Project validation timeout must be finite, greater than zero and at most 3600 seconds")
+    return float(value)
 
 
 def read_json(path):
@@ -57,9 +66,10 @@ def copy_tree(source, destination):
             shutil.copy2(item, target)
 
 
-def validate_project(player, project):
+def validate_project(player, project, timeout=DEFAULT_VALIDATION_TIMEOUT_SECONDS):
+    timeout = _validated_timeout(timeout)
     result = subprocess.run([str(player), "--project", str(project), "--check-project"],
-        cwd=project.parent, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
+        cwd=project.parent, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout)
     if result.returncode:
         raise ValueError("Project validation failed:\n" + result.stdout + result.stderr)
 
@@ -100,7 +110,8 @@ def verify_package(directory):
     return manifest
 
 
-def build_game(project, install, output, replace=False, validator=None):
+def build_game(project, install, output, replace=False, validator=None, *, validation_timeout=DEFAULT_VALIDATION_TIMEOUT_SECONDS):
+    validation_timeout = _validated_timeout(validation_timeout)
     project, install = pathlib.Path(project).resolve(), pathlib.Path(install).resolve()
     requested_output = pathlib.Path(output).absolute()
     if requested_output.exists() and is_reparse(requested_output):
@@ -140,8 +151,8 @@ def build_game(project, install, output, replace=False, validator=None):
         if any(part in PRIVATE_NAMES for part in root.relative_to(project.parent).parts):
             raise ValueError(f"Private or generated export boundary: {root}")
         roots.append(root)
-    validate = validator or validate_project
-    print("[stage] Validating project and installed runtime",flush=True)
+    validate = validator or (lambda player, project: validate_project(player, project, timeout=validation_timeout))
+    print(f"[stage] Validating project and installed runtime (timeout {validation_timeout:g} s)",flush=True)
     validate(player, project)
     output.parent.mkdir(parents=True, exist_ok=True)
     candidate = pathlib.Path(tempfile.mkdtemp(prefix=f".{output.name}-candidate-", dir=output.parent))
@@ -198,7 +209,7 @@ def build_game(project, install, output, replace=False, validator=None):
         if resolution:
             launch.update(width=width,height=height)
         (candidate/"game-launch.json").write_text(json.dumps(launch,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-        print("[stage] Validating packaged project",flush=True)
+        print(f"[stage] Validating packaged project (timeout {validation_timeout:g} s)",flush=True)
         validate(candidate / "bin/AzurePlayer.exe", game / "project.azureproject")
         if (game / ".azure").exists():
             shutil.rmtree(game / ".azure")
@@ -233,6 +244,8 @@ def main():
     parser.add_argument("--output", type=pathlib.Path)
     parser.add_argument("--replace", action="store_true")
     parser.add_argument("--verify", type=pathlib.Path)
+    parser.add_argument("--validation-timeout", type=float, default=DEFAULT_VALIDATION_TIMEOUT_SECONDS,
+                        help="Seconds allowed for each Player project check (default: 1800, maximum: 3600)")
     args = parser.parse_args()
     try:
         if args.verify:
@@ -240,7 +253,7 @@ def main():
         else:
             if not all([args.project, args.install, args.output]):
                 parser.error("--project, --install and --output are required")
-            manifest = build_game(args.project, args.install, args.output, args.replace)
+            manifest = build_game(args.project, args.install, args.output, args.replace, validation_timeout=args.validation_timeout)
         print(json.dumps({"status": "passed", "name": manifest["name"], "files": len(manifest["files"])}, ensure_ascii=False))
     except (ValueError, OSError, subprocess.SubprocessError) as error:
         parser.exit(1, f"Game package: {error}\n")

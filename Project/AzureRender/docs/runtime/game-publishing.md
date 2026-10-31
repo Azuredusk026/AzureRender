@@ -60,6 +60,23 @@ cmake --install "<Release 构建目录>" --config Release --prefix "D:/AzureEngi
 
 工具先验证关卡、组件、模型和资产依赖，再复制到相邻候选目录。候选 Player 再次验证项目，成功后提交目录。替换使用备份目录，目录提交失败时恢复已有结果。普通用户目录发生冲突时保留原内容。
 
+每次 Player 项目校验的默认预算为 1800 秒。
+`--validation-timeout` 设置每次校验的秒数预算。
+合法值为大于零且至多 3600 的有限数值。
+源项目与候选包使用相同预算。
+
+```powershell
+& "D:/AzureEngine/share/AzureRender/tools/python/python.exe" `
+  "D:/AzureEngine/share/AzureRender/tools/build_game.py" `
+  --project "D:/Games/MyGame/project.azureproject" `
+  --install "D:/AzureEngine" --output "D:/Delivery/MyGame" `
+  --validation-timeout 1800
+```
+
+超时返回失败，候选目录按目录事务清理。
+已发布包按现有回滚规则保留。
+预算属于离线资源检查，运行性能按所属门禁验收。
+
 ## 包结构与运行
 
 | 路径 | 内容 |

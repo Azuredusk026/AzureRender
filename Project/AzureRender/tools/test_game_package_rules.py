@@ -1,8 +1,11 @@
 """Check package transactions, portable mounts, provenance and immutable hashes."""
 import json
 import pathlib
+import subprocess
+import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 import build_game
 
 
@@ -154,6 +157,55 @@ class GamePackageRules(unittest.TestCase):
         (self.project.parent / "QUALITY.json").write_text('[]')
         with self.assertRaises(ValueError):
             self.build()
+
+    def test_project_validation_default_budget(self):
+        with patch.object(build_game.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'','')) as launch:
+            build_game.validate_project(self.install/'bin/AzurePlayer.exe',self.project)
+        self.assertEqual(launch.call_args.kwargs['timeout'],1800)
+
+    def test_explicit_budget_reaches_both_player_checks(self):
+        with patch.object(build_game.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'','')) as launch:
+            build_game.build_game(self.project,self.install,self.output,validation_timeout=61.25)
+        self.assertEqual(launch.call_count,2)
+        self.assertEqual([call.kwargs['timeout'] for call in launch.call_args_list],[61.25,61.25])
+        self.assertEqual(launch.call_args_list[0].args[0][1:],['--project',str(self.project),'--check-project'])
+        self.assertEqual(launch.call_args_list[1].args[0][-1],'--check-project')
+        build_game.verify_package(self.output)
+
+    def test_direct_validation_budget(self):
+        for budget in [.25,3600]:
+            with patch.object(build_game.subprocess,'run',return_value=subprocess.CompletedProcess([],0,'','')) as launch:
+                build_game.validate_project(self.install/'bin/AzurePlayer.exe',self.project,timeout=budget)
+            self.assertEqual(launch.call_args.kwargs['timeout'],budget)
+
+    def test_invalid_validation_budgets_reject_before_launch(self):
+        for budget in [0,-1,True,'60',float('nan'),float('inf'),3600.01,10**1000]:
+            with self.subTest(budget=budget),patch.object(build_game.subprocess,'run') as launch:
+                with self.assertRaises(ValueError):
+                    build_game.build_game(self.project,self.install,self.output,validation_timeout=budget)
+                launch.assert_not_called()
+                self.assertFalse(self.output.exists())
+                with self.assertRaises(ValueError):
+                    build_game.validate_project(self.install/'bin/AzurePlayer.exe',self.project,timeout=budget)
+                launch.assert_not_called()
+
+    def test_validation_timeout_retains_existing_package(self):
+        self.build();original=(self.output/'game_manifest.json').read_bytes()
+        def validate(player,project,timeout):
+            if project.parent.name=='game':raise subprocess.TimeoutExpired([str(player)],timeout)
+        with patch.object(build_game,'validate_project',side_effect=validate):
+            with self.assertRaises(subprocess.TimeoutExpired):
+                build_game.build_game(self.project,self.install,self.output,replace=True,validation_timeout=.01)
+        self.assertEqual((self.output/'game_manifest.json').read_bytes(),original)
+        build_game.verify_package(self.output)
+        self.assertFalse(list(self.root.glob('.published-candidate-*')))
+
+    def test_cli_rejects_nonfinite_validation_budget(self):
+        result=subprocess.run([sys.executable,str(pathlib.Path(build_game.__file__)),'--project',str(self.project),
+            '--install',str(self.install),'--output',str(self.output),'--validation-timeout','nan'],capture_output=True,text=True)
+        self.assertEqual(result.returncode,1,result.stdout+result.stderr)
+        self.assertIn('validation timeout',result.stderr.lower())
+        self.assertFalse(self.output.exists())
 
 
 if __name__ == "__main__":
