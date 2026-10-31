@@ -1,0 +1,17 @@
+[
+  {
+    "name": "reference",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-005348-native-tbn-audit-6c8dea\\material-ab\\reference.azureproject",
+    "captureFrames": 32
+  },
+  {
+    "name": "current-head",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-005348-native-tbn-audit-6c8dea\\material-ab\\current-head.azureproject",
+    "captureFrames": 32
+  },
+  {
+    "name": "current-head-visibility-one",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-005348-native-tbn-audit-6c8dea\\material-ab\\current-head-visibility-one.azureproject",
+    "captureFrames": 32
+  }
+]

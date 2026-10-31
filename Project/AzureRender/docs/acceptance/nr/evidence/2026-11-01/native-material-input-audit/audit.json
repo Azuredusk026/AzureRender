@@ -1,0 +1,93 @@
+{
+  "status": "native-pose-comparison-measured",
+  "scope": "CPU reconstruction with captured face and hair bone palettes; only vertices with complete native bone coverage are compared. Morphs, source topology and position agreement determine eligibility for interpreting normal differences.",
+  "dynamicSha256": "f188722c428358787a12be615d944f4a07185e9a8eaab72b9aa21105f3b7f997",
+  "referenceSha256": "9246691bb5671d854029d9481e739e319d2fb756903c1d329a59b543271c1ed4",
+  "knownNativeBones": 97,
+  "cases": [
+    {
+      "material": "M_actor_laevat_face_01",
+      "vertices": 1792,
+      "mappedVertices": 1792,
+      "referenceMeshHasSkin": false,
+      "sourceMeshNode": {
+        "mesh": 8,
+        "name": "S_actor_laevat_face_01_lod0",
+        "skin": 0
+      },
+      "referenceMeshNode": {
+        "mesh": 8,
+        "name": "S_actor_laevat_face_01_lod0",
+        "matrix": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.220446049250314e-16,
+          -1.0000000000000002,
+          0.0,
+          0.0,
+          1.0000000000000002,
+          2.220446049250314e-16,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "unmappedJointNames": [],
+      "uvMaximumError": 0.0,
+      "positionMaxMetres": 3.8657681835022754e-07,
+      "positionMedianMetres": 1.6924148649383439e-07,
+      "normalMedianDegrees": 9.410874129288369e-06,
+      "normalMaximumDegrees": 4.306270419866739e-05,
+      "tangentMedianDegrees": 8.365239156607497e-06,
+      "tangentMaximumDegrees": 2.3583323811175405e-05,
+      "tangentWExact": true
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "vertices": 11564,
+      "mappedVertices": 11564,
+      "referenceMeshHasSkin": false,
+      "sourceMeshNode": {
+        "mesh": 9,
+        "name": "S_actor_laevat_hair_01_lod0",
+        "skin": 0
+      },
+      "referenceMeshNode": {
+        "mesh": 9,
+        "name": "S_actor_laevat_hair_01_lod0",
+        "matrix": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.220446049250314e-16,
+          -1.0000000000000002,
+          0.0,
+          0.0,
+          1.0000000000000002,
+          2.220446049250314e-16,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "unmappedJointNames": [],
+      "uvMaximumError": 0.0,
+      "positionMaxMetres": 2.6202311269239432e-05,
+      "positionMedianMetres": 2.3164615673622684e-07,
+      "normalMedianDegrees": 0.002348128388505163,
+      "normalMaximumDegrees": 0.14410658530113507,
+      "tangentMedianDegrees": 1.3819533748532954e-05,
+      "tangentMaximumDegrees": 0.0001968610234548882,
+      "tangentWExact": true
+    }
+  ]
+}

@@ -1,0 +1,612 @@
+{
+  "schemaVersion": 1,
+  "id": "line-beauty",
+  "sceneType": "character",
+  "resources": [
+    {
+      "id": "hero",
+      "asset": "character:/outline-converted.glb"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "hero",
+      "resourceId": "hero",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.object-shadow": {
+          "type": "azure.object-shadow",
+          "version": 1,
+          "data": {
+            "center": [
+              -0.032922994611390845,
+              0.8817030359784858,
+              -0.07904755292348345
+            ],
+            "halfExtents": [
+              0.7967071888720466,
+              1.2499696266474514,
+              1.2407684771464365
+            ],
+            "normalBias": 0.009336411952972412,
+            "lightBias": 0.004668205976486206,
+            "enabled": true,
+            "filterRadiusX": 4,
+            "filterRadiusY": 2,
+            "atlasPage": 6,
+            "receiverPixelOffsetX": -0.5,
+            "receiverPixelOffsetY": 0.5,
+            "surfaceNormalBias": true
+          }
+        }
+      },
+      "materialSlots": {
+        "name:M_actor_laevat_hair_01": "b8076b86-c1e2-5fa0-a986-8265f7b4e49c",
+        "name:M_actor_laevat_body_01": "6775f273-82c7-4f89-84bc-aaf2ac679a04",
+        "name:M_actor_laevat_face_01": "ee724184-2e34-5bdb-bc2c-1e3fd45588eb"
+      }
+    },
+    {
+      "id": "camera",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0.8800048828125,
+              3.29998779296875
+            ],
+            "rotation": [
+              -0.7225715253360995,
+              0,
+              0
+            ]
+          }
+        },
+        "azure.camera": {
+          "type": "azure.camera",
+          "version": 2,
+          "data": {
+            "enabled": true,
+            "priority": 1,
+            "fieldOfView": 34.99999942174447,
+            "projectionOffsetX": 0.00019532594888005406,
+            "projectionOffsetY": 0.00023145804880186915
+          }
+        }
+      }
+    },
+    {
+      "id": "main",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-0",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -0.08331298828125,
+              1.462799072265625,
+              0.281036376953125
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-6",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.227996826171875,
+              1.549407958984375,
+              0.0360107421875
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-7",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.0157470703125,
+              1.79229736328125,
+              0.076873779296875
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-2",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.001373291015625,
+              1.556732177734375,
+              0.172760009765625
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-8",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              -0.050537109375,
+              1.0093994140625,
+              -1.1949462890625
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-1",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              1.066986083984375,
+              1.28399658203125,
+              0.402008056640625
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-3",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.42498779296875,
+              1.746002197265625,
+              0.240997314453125
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-4",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.02105712890625,
+              1.65032958984375,
+              0.15899658203125
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "captured-local-5",
+      "components": {
+        "azure.transform": {
+          "type": "azure.transform",
+          "version": 1,
+          "data": {
+            "translation": [
+              0.8599853515625,
+              0.337005615234375,
+              0.1719970703125
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "lights": [
+    {
+      "id": "main",
+      "nodeId": "main",
+      "color": [
+        1,
+        1,
+        1
+      ],
+      "intensity": 1.6243867874145508,
+      "radius": 1,
+      "enabled": true,
+      "shape": {
+        "type": "directional",
+        "direction": [
+          0.147262039821048,
+          -0.529919277570537,
+          -0.8351643256790032
+        ],
+        "falloff": "legacy"
+      }
+    },
+    {
+      "id": "captured-local-0",
+      "nodeId": "captured-local-0",
+      "color": [
+        0.3499999940395355,
+        0.31684333086013794,
+        0.2755943238735199
+      ],
+      "intensity": 1,
+      "radius": 0.45959470279340786,
+      "enabled": true,
+      "shape": {
+        "type": "point",
+        "direction": [
+          0.01631876297530666,
+          0.996258603930108,
+          0.0848674971363472
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 1,
+          "diffuseFloor": 0.25,
+          "compression": 1.0
+        }
+      }
+    },
+    {
+      "id": "captured-local-6",
+      "nodeId": "captured-local-6",
+      "color": [
+        1.5,
+        1.0982012748718262,
+        0.790412187576294
+      ],
+      "intensity": 1,
+      "radius": 0.26348876431281376,
+      "enabled": true,
+      "shape": {
+        "type": "point",
+        "direction": [
+          -0.6932293919156934,
+          -0.5692245775655128,
+          0.4420592612756366
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 1,
+          "diffuseFloor": 0.0,
+          "compression": 0.0
+        }
+      }
+    },
+    {
+      "id": "captured-local-7",
+      "nodeId": "captured-local-7",
+      "color": [
+        3.0,
+        2.3830394744873047,
+        1.0718302726745605
+      ],
+      "intensity": 1,
+      "radius": 0.14913939931828962,
+      "enabled": true,
+      "shape": {
+        "type": "point",
+        "direction": [
+          -0.06623038850614238,
+          -0.03687537403383898,
+          0.9971227318781726
+        ],
+        "falloff": "range-power",
+        "falloffExponent": 2.0,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 1,
+          "diffuseFloor": 0.0,
+          "compression": 0.0
+        }
+      }
+    },
+    {
+      "id": "captured-local-2",
+      "nodeId": "captured-local-2",
+      "color": [
+        1.0,
+        0.7564622759819031,
+        0.575444221496582
+      ],
+      "intensity": 1,
+      "radius": 0.17164486640212193,
+      "enabled": true,
+      "shape": {
+        "type": "point",
+        "direction": [
+          0.8333109493444116,
+          0.20295731774199274,
+          0.5141995613355685
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 2,
+          "diffuseFloor": 0.0,
+          "compression": 0.0,
+          "linearLength": 1.0
+        }
+      }
+    },
+    {
+      "id": "captured-local-8",
+      "nodeId": "captured-local-8",
+      "color": [
+        0.08664814382791519,
+        0.08664814382791519,
+        0.10413092374801636
+      ],
+      "intensity": 1,
+      "radius": 1.4999999552965178,
+      "enabled": true,
+      "shape": {
+        "type": "spot",
+        "direction": [
+          -0.0,
+          0.0,
+          1.0
+        ],
+        "falloff": "range-power",
+        "falloffExponent": 2.0,
+        "outerCone": 0.7562822165836128,
+        "innerCone": 0.7081301828995471,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 3,
+          "composition": "color-blend",
+          "strength": 0.699999988079071,
+          "facingWeight": 0.0,
+          "projectedDistance": true,
+          "order": 8
+        }
+      }
+    },
+    {
+      "id": "captured-local-1",
+      "nodeId": "captured-local-1",
+      "color": [
+        5.662053108215332,
+        7.0046539306640625,
+        8.0
+      ],
+      "intensity": 1,
+      "radius": 1.1499999588727965,
+      "enabled": true,
+      "shape": {
+        "type": "spot",
+        "direction": [
+          -0.8697552528438497,
+          0.0,
+          -0.49348333320440624
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "outerCone": 0.8088947123632426,
+        "innerCone": 0.7186376068767774,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 5,
+          "composition": "material-rim",
+          "width": 0.36800000071525574,
+          "surfaceTint": 0.1940000057220459
+        }
+      }
+    },
+    {
+      "id": "captured-local-3",
+      "nodeId": "captured-local-3",
+      "color": [
+        16.1299991607666,
+        12.178779602050781,
+        9.52668285369873
+      ],
+      "intensity": 1,
+      "radius": 0.5843336512292233,
+      "enabled": true,
+      "shape": {
+        "type": "point",
+        "direction": [
+          -0.9755590943948227,
+          -0.1811086747439018,
+          -0.124435128786291
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 5,
+          "composition": "material-rim",
+          "width": 0.4000000059604645,
+          "surfaceTint": 0.800000011920929
+        }
+      }
+    },
+    {
+      "id": "captured-local-4",
+      "nodeId": "captured-local-4",
+      "color": [
+        0.5,
+        0.3347279727458954,
+        0.07678713649511337
+      ],
+      "intensity": 1,
+      "radius": 0.20822144021007694,
+      "enabled": true,
+      "shape": {
+        "type": "point",
+        "direction": [
+          -0.0664943326977282,
+          -0.062158694066428065,
+          0.9958487839381239
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 4,
+          "composition": "specular-only"
+        }
+      }
+    },
+    {
+      "id": "captured-local-5",
+      "nodeId": "captured-local-5",
+      "color": [
+        4.246540069580078,
+        5.253490447998047,
+        6.0
+      ],
+      "intensity": 1,
+      "radius": 1.1499999588727965,
+      "enabled": true,
+      "shape": {
+        "type": "spot",
+        "direction": [
+          -0.8697552528438497,
+          0.0,
+          -0.49348333320440624
+        ],
+        "falloff": "smooth-inverse-square",
+        "falloffExponent": 2,
+        "outerCone": 0.8088947123632426,
+        "innerCone": 0.7186376068767774,
+        "specularScale": 1.0,
+        "influenceBox": {
+          "enabled": false
+        },
+        "characterResponse": {
+          "schemaVersion": 5,
+          "composition": "material-rim",
+          "width": 0.30000001192092896,
+          "surfaceTint": 0.1940000057220459
+        }
+      }
+    }
+  ],
+  "renderSettings": {
+    "sceneLighting": true,
+    "platform": false,
+    "background": false,
+    "silhouetteOutline": false,
+    "innerOutline": false,
+    "stylized": false,
+    "skyIntensity": 0.5,
+    "bloomEnabled": false,
+    "antiAliasing": 3,
+    "exposure": -2,
+    "toneMapping": false,
+    "contrast": 1,
+    "saturation": 1,
+    "nprLighting": {
+      "schemaVersion": 1,
+      "enabled": true,
+      "ambientColor": [
+        1.1870100498199463,
+        0.9272286891937256,
+        0.8129898905754089
+      ],
+      "ambientDirection": [
+        -0.0,
+        0.9999999999999991,
+        4.371138828673789e-08
+      ],
+      "directionBias": 0.15000000596046448,
+      "directionGain": 1.5,
+      "directionFloor": 0.5,
+      "outdoorGain": 1.0499999523162842,
+      "shadowAmbientGain": 0.800000011920929,
+      "indoorMix": 0.0,
+      "litAmbientMix": 1.0,
+      "mainColorMix": 1.0,
+      "shadowOverride": 1.0,
+      "useSceneIrradiance": false,
+      "ambientWeight": 0.28772246837615967
+    },
+    "gradeLut": {
+      "schemaVersion": 1,
+      "asset": "",
+      "exposureMultiplier": 1
+    },
+    "schemaVersion": 18
+  }
+}

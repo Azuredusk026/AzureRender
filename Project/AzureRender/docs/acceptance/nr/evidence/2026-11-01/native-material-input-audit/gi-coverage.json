@@ -1,0 +1,264 @@
+{
+  "source": "build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\native-gi\\captured-mirrored.azic",
+  "sha256": "f57b41da8b1d8baf65834b09de54896b00e7cbe4ce86b7d39a3ceefd90c7107f",
+  "dimensions": [
+    128,
+    64,
+    128
+  ],
+  "worldToField": [
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      0.0
+    ]
+  ],
+  "defaultCoefficients": [
+    [
+      0.0021635701414197683,
+      0.010509317740797997,
+      -0.0008655044948682189,
+      0.03591318801045418
+    ],
+    [
+      -0.002457847585901618,
+      0.009978373534977436,
+      -0.00026018379139713943,
+      0.029423058032989502
+    ],
+    [
+      -0.014051021076738834,
+      0.019339708611369133,
+      0.0013843115884810686,
+      0.055289097130298615
+    ]
+  ],
+  "layers": [
+    [
+      [
+        0.18793505430221558,
+        1.8259482383728027,
+        -9.079809188842773,
+        0.5
+      ],
+      [
+        29.0,
+        13.0,
+        2.0,
+        0.0
+      ]
+    ],
+    [
+      [
+        -0.004208007827401161,
+        4.154047012329102,
+        29.85016632080078,
+        2.0
+      ],
+      [
+        116.0,
+        52.0,
+        8.0,
+        0.0
+      ]
+    ],
+    [
+      [
+        -0.45746856927871704,
+        9.64597225189209,
+        121.68497467041016,
+        8.0
+      ],
+      [
+        464.0,
+        208.0,
+        32.0,
+        0.0
+      ]
+    ]
+  ],
+  "scope": "Actual static clipmap coverage at fixed and playable receiver points; camera position does not rebase authored layers. This is coverage only, not final radiance or image acceptance.",
+  "cases": [
+    {
+      "name": "native-camera",
+      "world": [
+        -0.266043,
+        2.262059,
+        -24.905325
+      ],
+      "fieldPosition": [
+        0.266043,
+        2.262059,
+        -24.905325
+      ],
+      "fades": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "outsideAllLayers": false
+    },
+    {
+      "name": "fixed-character-feet",
+      "world": [
+        -1.5,
+        1.035,
+        -16
+      ],
+      "fieldPosition": [
+        1.5,
+        1.035,
+        -16.0
+      ],
+      "fades": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "outsideAllLayers": false
+    },
+    {
+      "name": "fixed-character-head",
+      "world": [
+        -1.5,
+        2.65,
+        -16
+      ],
+      "fieldPosition": [
+        1.5,
+        2.65,
+        -16.0
+      ],
+      "fades": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "outsideAllLayers": false
+    },
+    {
+      "name": "playable-character-feet",
+      "world": [
+        0,
+        1.035,
+        9
+      ],
+      "fieldPosition": [
+        0.0,
+        1.035,
+        9.0
+      ],
+      "fades": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "outsideAllLayers": false
+    },
+    {
+      "name": "playable-character-head",
+      "world": [
+        0,
+        2.65,
+        9
+      ],
+      "fieldPosition": [
+        0.0,
+        2.65,
+        9.0
+      ],
+      "fades": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "outsideAllLayers": false
+    },
+    {
+      "name": "central-floor",
+      "world": [
+        0,
+        1.035,
+        -10
+      ],
+      "fieldPosition": [
+        0.0,
+        1.035,
+        -10.0
+      ],
+      "fades": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "outsideAllLayers": false
+    },
+    {
+      "name": "front-floor",
+      "world": [
+        0,
+        1.035,
+        -20
+      ],
+      "fieldPosition": [
+        0.0,
+        1.035,
+        -20.0
+      ],
+      "fades": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "outsideAllLayers": false
+    }
+  ]
+}

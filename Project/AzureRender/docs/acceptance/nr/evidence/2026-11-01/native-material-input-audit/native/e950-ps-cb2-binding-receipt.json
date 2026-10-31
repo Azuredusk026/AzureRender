@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "mode": "summary",
+  "data": {
+    "path": "D:\\Assigment\\2609\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame10401\\e950-ps-cb2-binding.bin",
+    "error": null,
+    "rid": "ResourceId::611",
+    "eid": 950,
+    "offset": 255744,
+    "bytes": 65536,
+    "resource_bytes": 4194304,
+    "sha256": "670548c6705a52d9631365e6fe366da25ca7f93553a6ac1cc1f899baa55cbf58",
+    "complete": true
+  },
+  "err": null,
+  "meta": {
+    "cap": "active",
+    "truncated": false
+  }
+}

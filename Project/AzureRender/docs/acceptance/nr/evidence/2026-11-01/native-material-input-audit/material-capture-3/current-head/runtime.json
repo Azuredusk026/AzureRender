@@ -1,0 +1,131 @@
+{
+  "activeScripts": 0,
+  "animationFrames": 0,
+  "animations": [],
+  "audioStarts": 0,
+  "fixedSteps": 31,
+  "levelRevision": 1,
+  "nodes": [
+    {
+      "id": "hero",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": true
+    },
+    {
+      "id": "camera",
+      "translation": [
+        0.0,
+        0.8800048828125,
+        3.29998779296875
+      ],
+      "visible": false
+    },
+    {
+      "id": "main",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-0",
+      "translation": [
+        -0.08331298828125,
+        1.462799072265625,
+        0.281036376953125
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-6",
+      "translation": [
+        0.227996826171875,
+        1.549407958984375,
+        0.0360107421875
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-7",
+      "translation": [
+        0.0157470703125,
+        1.79229736328125,
+        0.076873779296875
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-2",
+      "translation": [
+        0.001373291015625,
+        1.556732177734375,
+        0.172760009765625
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-8",
+      "translation": [
+        -0.050537109375,
+        1.0093994140625,
+        -1.1949462890625
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-1",
+      "translation": [
+        1.066986083984375,
+        1.28399658203125,
+        0.402008056640625
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-3",
+      "translation": [
+        0.42498779296875,
+        1.746002197265625,
+        0.240997314453125
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-4",
+      "translation": [
+        0.02105712890625,
+        1.65032958984375,
+        0.15899658203125
+      ],
+      "visible": false
+    },
+    {
+      "id": "captured-local-5",
+      "translation": [
+        0.8599853515625,
+        0.337005615234375,
+        0.1719970703125
+      ],
+      "visible": false
+    }
+  ],
+  "presentationErrors": [],
+  "renderProgress": {
+    "samples": 0,
+    "target": 0
+  },
+  "renderer": "character",
+  "replayDelayedFrames": 0,
+  "replayedActions": 0,
+  "routeFrames": [],
+  "scene": "line-beauty",
+  "scriptErrors": [],
+  "simulationMilliseconds": 0.8283000000000003,
+  "uiDrawCalls": 0
+}
