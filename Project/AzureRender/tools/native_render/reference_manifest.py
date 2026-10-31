@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 from pathlib import Path
 
 from PIL import Image, UnidentifiedImageError
@@ -24,6 +25,62 @@ def inspect_reference_image(path):
 
 def _number(value):
     return type(value) in (int, float) and math.isfinite(value)
+
+
+def _reproduction(entry, root):
+    if entry['role'] != 'engine_baseline':
+        raise ValueError('reproduction requires engine_baseline role')
+    recipe = entry['reproduction']
+    fields = {'schemaVersion', 'workingDirectory', 'program', 'project', 'inputs', 'command'}
+    if not isinstance(recipe, dict) or set(recipe) != fields:
+        raise ValueError('reproduction fields are incomplete or unknown')
+    if type(recipe['schemaVersion']) is not int or recipe['schemaVersion'] != 1:
+        raise ValueError('unsupported reproduction schemaVersion')
+    folder = recipe['workingDirectory']
+    if not isinstance(folder, str) or not folder.strip():
+        raise ValueError('invalid reproduction workingDirectory')
+    folder = (Path(root) / folder).resolve()
+    if not folder.is_dir():
+        raise ValueError('reproduction workingDirectory is missing')
+    inputs = recipe['inputs']
+    if not isinstance(inputs, list) or not inputs:
+        raise ValueError('reproduction inputs must be nonempty')
+    seen = set()
+
+    def check_file(record, role):
+        if not isinstance(record, dict) or set(record) != {'path', 'bytes', 'sha256'}:
+            raise ValueError(f'invalid reproduction {role} file record')
+        path, size, expected = record['path'], record['bytes'], record['sha256']
+        if (not isinstance(path, str) or not path.strip() or type(size) is not int or size < 0
+                or not isinstance(expected, str) or not re.fullmatch('[0-9a-f]{64}', expected)):
+            raise ValueError(f'invalid reproduction {role} file identity')
+        path = (Path(root) / path).resolve()
+        if path in seen:
+            raise ValueError(f'reproduction duplicate file: {path}')
+        seen.add(path)
+        if not path.is_file() or path.stat().st_size != size:
+            raise ValueError(f'reproduction {role} file missing or size mismatch: {path}')
+        digest = hashlib.sha256()
+        with path.open('rb') as stream:
+            for block in iter(lambda: stream.read(1024 * 1024), b''):
+                digest.update(block)
+        if digest.hexdigest() != expected:
+            raise ValueError(f'reproduction {role} sha256 mismatch: {path}')
+        return path
+
+    program = check_file(recipe['program'], 'program')
+    project = check_file(recipe['project'], 'project')
+    for record in inputs:
+        check_file(record, 'input')
+    command = recipe['command']
+    if (not isinstance(command, list) or len(command) < 3
+            or any(not isinstance(x, str) or not x.strip() or '\0' in x for x in command)
+            or command.count('--project') != 1 or command[-1] == '--project'):
+        raise ValueError('invalid reproduction command; one --project is required')
+    if (folder / command[0]).resolve() != program:
+        raise ValueError('reproduction command program does not match locked program')
+    if (folder / command[command.index('--project') + 1]).resolve() != project:
+        raise ValueError('reproduction command project does not match locked project')
 
 
 def _state(state):
@@ -111,6 +168,8 @@ def validate_manifest(document, root):
         if role == 'game_reference' and not observed:
             if image['resolution'] != entry['state']['resolution']:
                 raise ValueError(f'reference image resolution mismatch: {identity}')
+        if 'reproduction' in entry:
+            _reproduction(entry, root)
         result['pending' if observed else 'eligible' if role == 'game_reference' else 'auxiliary'].append(identity)
     return result
 

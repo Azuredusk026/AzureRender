@@ -5,6 +5,31 @@
 默认画质入口见[联合验证](../acceptance/recovery/full-scene-character.md)。
 历史装配和冻结对照见[场景验证](../acceptance/nr/projected-main-history.md)。
 
+## Q0 参考输入锁定
+
+归属为现有参考清单及离线验证工具。
+格式沿用 `NativeRenderReference/1`。
+引擎基准可声明版本一的 `reproduction` 对象。
+该字段锁定程序、项目、依赖、工作目录及采集命令。
+
+实现扩展 `tools/native_render/reference_manifest.py`。
+`validate_manifest(document, root)` 保持返回契约。
+私有校验读取文件摘要并核对命令对应的程序和项目。
+字段缺失、摘要漂移、路径别名重复及错配入口应拒绝。
+
+测试扩展 `tools/test_native_render_reference.py`。
+先保存忽略输入锁时的失败结果，再实现校验。
+实际角色参考与完整场景分别构成不同的使用方式。
+仓库审计共用 Git 根目录，覆盖引擎子目录调用。
+
+既有图片清单与参考资格检查保持有效。
+
+- [x] 保存输入漂移及命令错配的失败证据。
+- [x] 实现可选输入锁及明确错误诊断。
+- [x] 通过既有清单与新增输入锁检查。
+- [x] 核验角色参考及完整场景的实际输入。
+- [x] 同步参考说明与保留清单，创建阶段提交。
+
 ## 模块与依据
 
 表面快照、公共准备、投影射线和空间过滤属于渲染模块。

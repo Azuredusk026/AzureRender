@@ -747,6 +747,60 @@
       "retention": "NR12 正式归档时核对保留范围",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/evidence/2026-10-29/reflection-temporal.json"
+    },
+    {
+      "path": "runs/20261031-105539-full-scene-character-composition-b37668",
+      "pathBase": "build",
+      "purpose": "完整环境与动态角色的联合输入基准。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-character-visible.azureproject",
+      "evidence": "docs/acceptance/recovery/full-scene-character.md"
+    },
+    {
+      "path": "runs/20261031-135416-character-portrait-recovery-0773ca",
+      "pathBase": "build",
+      "purpose": "用户正面角色参考的完整可复现输入。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "original-reference/project/temporal.azureproject",
+      "evidence": "docs/acceptance/recovery/character-reference.md"
+    },
+    {
+      "path": "runs/20261029-045743-snapshot-shading-budget-8ee0b1",
+      "pathBase": "build",
+      "purpose": "完整物流环境及原固定机位输入。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "full-candidate/enclosure-sampler.azureproject",
+      "evidence": "docs/acceptance/recovery/full-scene-visual.md"
+    },
+    {
+      "path": "runs/20261024-074605-native-material-aa-reference-9eb92d",
+      "pathBase": "build",
+      "purpose": "原始正面角色参考及面积平均生成来源。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "temporal.azureproject",
+      "evidence": "docs/acceptance/recovery/character-reference.md"
+    },
+    {
+      "path": "runs/20261031-122504-projected-footprint-quality-5daf40",
+      "pathBase": "build",
+      "purpose": "地面足迹读回、实际帧及角色分项诊断。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "actor-closeup/closeup.azureproject",
+      "evidence": "docs/acceptance/nr/scene-material-quality-diagnosis.md"
+    },
+    {
+      "path": "runs/20261031-133610-native-character-visibility-92ad44",
+      "pathBase": "build",
+      "purpose": "独立照明诊断候选及未通过检查收据。",
+      "retention": "对应门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/native-visibility-near.azureproject",
+      "evidence": "docs/plans/2026-10-31-native-character-visibility.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

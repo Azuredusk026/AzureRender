@@ -107,6 +107,107 @@ class ReferenceTests(unittest.TestCase):
         result = inspect_reference_image(self.root / 'frame.png')
         self.assertEqual(result, {'format': 'JPEG', 'resolution': [91, 47]})
 
+    def engine_recipe(self):
+        self.document['entries'][0]['role'] = 'engine_baseline'
+        def record(name, contents):
+            path = self.root / name
+            path.write_bytes(contents)
+            return dict(path=name, bytes=len(contents),
+                        sha256=hashlib.sha256(contents).hexdigest())
+        recipe = dict(schemaVersion=1, workingDirectory='.',
+                      program=record('player.exe', b'fixed player version'),
+                      project=record('project.azureproject', b'{"startupScene":"assets:/scene.azurelevel"}'),
+                      inputs=[record('scene.azurelevel', b'fixed camera and lighting'),
+                              record('material.azurematerial', b'dedicated eye surface')],
+                      command=['player.exe', '--project', 'project.azureproject',
+                               '--width', '64', '--height', '32', '--capture-frames', '32',
+                               '--set', 'render.antiAliasing=3'])
+        self.document['entries'][0]['reproduction'] = recipe
+        return recipe
+
+    def test_engine_input_lock_accepts_intact_inputs_and_rejects_material_drift(self):
+        self.engine_recipe()
+        self.assertEqual(self.check(self.document)['auxiliary'], ['front'])
+        path = self.root / 'material.azurematerial'
+        path.write_bytes(b'X' * path.stat().st_size)
+        with self.assertRaisesRegex(ValueError, 'reproduction.*material'):
+            self.check(self.document)
+
+    def test_engine_input_lock_rejects_program_and_project_drift(self):
+        recipe = self.engine_recipe()
+        for role in ('program', 'project'):
+            with self.subTest(role=role):
+                path = self.root / recipe[role]['path']
+                original = path.read_bytes()
+                path.write_bytes(original + b'changed')
+                with self.assertRaisesRegex(ValueError, 'reproduction.*' + role):
+                    self.check(self.document)
+                path.write_bytes(original)
+
+    def test_engine_input_lock_rejects_command_using_another_project(self):
+        recipe = self.engine_recipe()
+        (self.root / 'other.azureproject').write_text('{}')
+        recipe['command'][2] = 'other.azureproject'
+        with self.assertRaisesRegex(ValueError, 'reproduction.*command.*project'):
+            self.check(self.document)
+
+    def test_engine_input_lock_rejects_command_using_another_program(self):
+        recipe = self.engine_recipe()
+        (self.root / 'other.exe').write_bytes(b'another program')
+        recipe['command'][0] = 'other.exe'
+        with self.assertRaisesRegex(ValueError, 'reproduction.*command.*program'):
+            self.check(self.document)
+
+    def test_engine_input_lock_resolves_command_against_working_directory(self):
+        recipe = self.engine_recipe()
+        (self.root / 'work').mkdir()
+        recipe['workingDirectory'] = 'work'
+        recipe['command'][0] = '../player.exe'
+        recipe['command'][2] = '../project.azureproject'
+        self.assertEqual(self.check(self.document)['auxiliary'], ['front'])
+
+    def test_engine_input_lock_rejects_missing_input_and_duplicate_alias(self):
+        recipe = self.engine_recipe()
+        (self.root / 'material.azurematerial').unlink()
+        with self.assertRaisesRegex(ValueError, 'reproduction.*material'):
+            self.check(self.document)
+        recipe['inputs'].pop()
+        duplicate = copy.deepcopy(recipe['inputs'][0])
+        duplicate['path'] = './scene.azurelevel'
+        recipe['inputs'].append(duplicate)
+        with self.assertRaisesRegex(ValueError, 'reproduction.*duplicate'):
+            self.check(self.document)
+
+    def test_engine_input_lock_rejects_incomplete_or_invalid_recipe(self):
+        recipe = self.engine_recipe()
+        for field in tuple(recipe):
+            with self.subTest(missing=field):
+                doc = copy.deepcopy(self.document)
+                del doc['entries'][0]['reproduction'][field]
+                with self.assertRaisesRegex(ValueError, 'reproduction'):
+                    self.check(doc)
+        for field, value in [('schemaVersion', 2), ('schemaVersion', True),
+                             ('workingDirectory', 'missing'), ('inputs', []),
+                             ('command', 'player.exe --project project.azureproject'),
+                             ('command', ['player.exe', '--project']),
+                             ('command', ['player.exe', '--project', 'project.azureproject',
+                                          '--project', 'project.azureproject'])]:
+            with self.subTest(field=field, value=value):
+                doc = copy.deepcopy(self.document)
+                doc['entries'][0]['reproduction'][field] = value
+                with self.assertRaisesRegex(ValueError, 'reproduction'):
+                    self.check(doc)
+
+    def test_engine_input_lock_rejects_wrong_declared_size_and_non_engine_role(self):
+        recipe = self.engine_recipe()
+        recipe['program']['bytes'] += 1
+        with self.assertRaisesRegex(ValueError, 'reproduction.*program'):
+            self.check(self.document)
+        recipe['program']['bytes'] -= 1
+        self.document['entries'][0]['role'] = 'game_reference'
+        with self.assertRaisesRegex(ValueError, 'reproduction.*engine_baseline'):
+            self.check(self.document)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "scope": "Reference input identity, optional read-only manifest validation and consistent repository audit root. Existing image and native visual gates are unchanged.",
+  "sourceCommit": "bb8eb0cc9f676e982aa5c7cc1891cf8ad71c53c7",
+  "nativeRenderTests": 62,
+  "repositoryAuditTests": 9,
+  "referenceEntries": 2,
+  "lockedInputRecords": [
+    296,
+    1772
+  ],
+  "realMixedEntryRejected": true,
+  "repositoryRootAndEngineEntry": "passed",
+  "graphicsSourceChanges": 0,
+  "goalSource": "docs/plans/azure-engine-plan.md",
+  "implementation": [
+    "tools/native_render/reference_manifest.py",
+    "tools/audit_repository.py"
+  ],
+  "artifacts": [
+    {
+      "file": "actual-green.json",
+      "bytes": 142,
+      "sha256": "cb7f5e417d8d4734e568e7e89c2210b259d2b8f9da67bf45b4f393df5673ff89"
+    },
+    {
+      "file": "actual-mixed-entry-rejection.json",
+      "bytes": 233,
+      "sha256": "cd19a1ab7ee26d8a8e7e6b71cb3502e4e3beb328a75cac42b618ad161b8a9961"
+    },
+    {
+      "file": "doc-verification.json",
+      "bytes": 128,
+      "sha256": "8f3ffb40a5871cf1aa8a1d2eb0db1c11ecf8e65d1b1f0794c07535ff44651a15"
+    },
+    {
+      "file": "green.log",
+      "bytes": 124,
+      "sha256": "0c22cba6a4cc9d05280fb930cef1aef1eea63e5e44d2d9a23a2e82811c67a4c9"
+    },
+    {
+      "file": "native-render-tests.log",
+      "bytes": 166,
+      "sha256": "baab238bbd80a7b9c6479b20c937bfe996159c49b745b41faf2a5472184d38ba"
+    },
+    {
+      "file": "preparation.json",
+      "bytes": 133,
+      "sha256": "7a845ab7f3b1301a7e695d5945878ac2a0f722385dee3e3decea6d16f2ad084a"
+    },
+    {
+      "file": "red.log",
+      "bytes": 13134,
+      "sha256": "389021ce62c336394e900a033b3314899b7283e711ff76b9c168e88b9e0b3d8d"
+    },
+    {
+      "file": "reference-manifest.json",
+      "bytes": 620139,
+      "sha256": "e57347821d2d963158c92e6bbd29e077547d967b3b489896289f3a1ce2e87bc9"
+    },
+    {
+      "file": "repository-engine-green.json",
+      "bytes": 859,
+      "sha256": "7f075209db82bd76bead82c94fdcd78cbdae43216685fb92ffc48809b41d199d"
+    },
+    {
+      "file": "root-normalization-green.log",
+      "bytes": 112,
+      "sha256": "3460c7aaa51fc5930c6126b813e5c087c1391dd51c85825be2cec0c2c52057c5"
+    },
+    {
+      "file": "root-normalization-red.log",
+      "bytes": 2168,
+      "sha256": "4a1cd49af8b3e395433d534503fcce28614ba660866d1463c1afb69ba2cec6e5"
+    }
+  ],
+  "documentation": {
+    "status": "passed",
+    "documents": 7,
+    "localLinks": 593,
+    "paragraphAudit": "passed",
+    "protectedUserFiles": 4
+  }
+}

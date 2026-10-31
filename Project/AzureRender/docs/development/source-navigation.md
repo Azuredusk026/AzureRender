@@ -143,3 +143,10 @@ Lua 等未覆盖文件通过文本检索定位。
 目录规模和实装建议见[结构与检索优化计划](../plans/2026-10-26-repository-structure-and-retrieval.md)。
 产物保留与清理见[产物管理](artifact-retention.md)。
 证据盘点、归档与恢复见[操作说明](evidence-operations.md)。
+
+## 仓库结构审计
+
+`tools/audit_repository.py` 按 Git 工作区根目录审计。
+`--source` 可指定仓库或其子目录。
+文档、跟踪状态及忽略规则共用同一根目录。
+结果记录于调用方指定的输出文件。

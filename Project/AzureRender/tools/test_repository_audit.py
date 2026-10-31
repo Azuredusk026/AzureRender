@@ -22,9 +22,9 @@ class RepositoryAuditTests(unittest.TestCase):
         guide.write_text('# Guide\n[Web](https://example.com)\n', encoding='utf-8')
         subprocess.run(['git', '-C', str(self.root), 'add', '.'], check=True)
 
-    def audit(self):
+    def audit(self, source=None):
         output = self.root / 'result.json'
-        result = subprocess.run([sys.executable, str(TOOL), '--source', str(self.root), '--output', str(output)],
+        result = subprocess.run([sys.executable, str(TOOL), '--source', str(source or self.root), '--output', str(output)],
             capture_output=True, encoding='utf-8')
         self.assertTrue(output.exists(), 'Audit must produce a machine-readable report: ' + result.stderr)
         return result.returncode, json.loads(output.read_text(encoding='utf-8'))
@@ -34,6 +34,24 @@ class RepositoryAuditTests(unittest.TestCase):
         self.assertEqual(code, 0)
         self.assertEqual(report['status'], 'passed')
         self.assertEqual(report['danglingLinks'], [])
+
+    def test_engine_subdirectory_uses_repository_ignore_and_document_scope(self):
+        code, report = self.audit(self.root / 'Project/AzureRender')
+        self.assertEqual(code, 0, report)
+        self.assertEqual(report['status'], 'passed')
+        (self.root / 'README.md').write_text('[Missing](missing.md)')
+        code, report = self.audit(self.root / 'Project/AzureRender/docs')
+        self.assertEqual(code, 1)
+        self.assertEqual(report['danglingLinks'][0]['target'], 'missing.md')
+
+    def test_engine_subdirectory_detects_tracked_tool_state_at_repository_root(self):
+        cache = self.root / '.codemaker/codemap/crash.log'
+        cache.parent.mkdir(parents=True)
+        cache.write_text('local state')
+        subprocess.run(['git', '-C', str(self.root), 'add', '-f', str(cache)], check=True)
+        code, report = self.audit(self.root / 'Project/AzureRender')
+        self.assertEqual(code, 1)
+        self.assertEqual(report['trackedToolState'], ['.codemaker/codemap/crash.log'])
 
     def test_tracked_cache_fails_even_when_gitignore_matches(self):
         cache = self.root / '.codemaker/codemap/crash.log'

@@ -13,6 +13,10 @@ def git(root, *args):
 
 def audit(root, inventory=False):
     root = root.resolve()
+    located = git(root, 'rev-parse', '--show-toplevel')
+    if located.returncode:
+        raise ValueError('Source must be a Git repository: ' + located.stderr)
+    root = Path(located.stdout.strip()).resolve()
     listed = git(root, 'ls-files', '-z')
     if listed.returncode:
         raise ValueError('Source must be a Git repository: ' + listed.stderr)

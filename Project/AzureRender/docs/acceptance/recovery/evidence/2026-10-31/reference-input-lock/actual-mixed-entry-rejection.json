@@ -1,0 +1,5 @@
+{
+  "status": "qualified-rejection",
+  "scope": "A valid portrait input lock combined with the real complete-scene --project argument must be rejected.",
+  "error": "reproduction command project does not match locked project"
+}
