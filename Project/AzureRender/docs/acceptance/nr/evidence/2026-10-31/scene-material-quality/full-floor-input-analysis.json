@@ -1,0 +1,64 @@
+{
+  "status": "characterized",
+  "sourceEvent": 21668,
+  "traceRegionXYXY": [
+    530,
+    550,
+    730,
+    680
+  ],
+  "displayRegionXYXY": [
+    1060,
+    1100,
+    1460,
+    1360
+  ],
+  "validSamples": 24590,
+  "totalSamples": 26000,
+  "quantiles": [
+    0,
+    0.1,
+    0.5,
+    0.9,
+    1
+  ],
+  "maximumFootprintLevel": 6.0,
+  "currentFrameBlend": 0.0,
+  "normalRoughnessFormat": "R32G32B32A32_FLOAT",
+  "scope": "Actual current Vulkan capture, shader event 21668. Floor ROI includes small mixed material regions. Low roughness does not imply a zero projected reflection cone. Spatial filter contract uses the same maximum level as ray producer.",
+  "roughness": [
+    0.07999999821186066,
+    0.09997711330652237,
+    0.11720453947782516,
+    0.1275501698255539,
+    0.4209076464176178
+  ],
+  "normalizedLod": [
+    0.0,
+    0.0,
+    0.39986266880292975,
+    0.4576043335622187,
+    1.0
+  ],
+  "decodedLod": [
+    0.0,
+    0.0,
+    2.3991760128175788,
+    2.7456260013733123,
+    6.0
+  ],
+  "traceLevelScale": [
+    1.0,
+    1.0,
+    5.275017985614882,
+    6.706806605018849,
+    64.0
+  ],
+  "confidence": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ]
+}

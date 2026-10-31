@@ -1,0 +1,17 @@
+{
+  "status": "characterized",
+  "hairPixels": 6581,
+  "meanAbsoluteByteError": 53.40034442587246,
+  "maximumByteError": 157,
+  "samePixelFraction": 0.0,
+  "shadowOnMeanRgb": [
+    138.24312414526668,
+    23.64671022640936,
+    36.623461480018236
+  ],
+  "shadowOffMeanRgb": [
+    203.9726485336575,
+    72.15666312110622,
+    82.34250113964443
+  ]
+}

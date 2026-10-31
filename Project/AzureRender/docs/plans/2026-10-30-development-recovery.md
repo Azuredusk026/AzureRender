@@ -103,7 +103,7 @@ Debug 完整场景的资源扫描与加载成本继续诊断。
 | E6 | C++ 依赖 | `vcpkg.json`，`x64-windows` | 清单配置成功，版本符合锁定项 |
 | E7 | Python 依赖 | 四份工具清单及文档工具 | `pip check` 与模块导入通过 |
 | E8 | 运行资产 | 恢复归档中的 `build/runs` | 当前候选资源与故障转储可读 |
-| E9 | 抓帧工具 | RenderDoc 1.46，优先检查保留目录 | 实际 RDC 加载、查询与图像导出通过 |
+| E9 | 抓帧工具 | RenderDoc 1.46，便携目录及内嵌 Python | 实际 RDC 加载、查询与图像导出通过 |
 | E10 | 文档工具 | `requirements-docs.txt` | 文档校验及需要时的站点构建通过 |
 | E11 | .NET SDK | 9.0.319，启用托管脚本原型 | CoreCLR 与 NativeAOT 构建和测试通过 |
 | E12 | 扩展工具 | Blender、视频工具按任务安装 | 对应工具链任务可以运行 |
@@ -219,6 +219,14 @@ vulkaninfo --summary
 MSVC 环境通过 `tools/msvc_env.bat` 装配。
 GPU 程序串行运行，构建并行度为二。
 首次验收记录编译器、SDK、驱动与实际 GPU。
+
+实际 Vulkan 抓帧使用官方 RenderDoc 1.46 便携版。
+目录为 `D:/Tools/RenderDoc/1.46/RenderDoc_1.46_64`。
+回放脚本通过 `qrenderdoc.exe --python` 执行。
+目标子进程显式提供 Vulkan 层目录及捕获层。
+
+工具来源见 [RenderDoc 发布记录](https://github.com/baldurk/renderdoc/releases/tag/v1.46)。
+安装摘要、实际帧与导出结果见[画质诊断](../acceptance/nr/scene-material-quality-diagnosis.md)。
 
 ## 后续开发顺序
 

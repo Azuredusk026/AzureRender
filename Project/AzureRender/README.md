@@ -6,6 +6,9 @@
 
 完整环境与角色同屏的实际画面见[联合验证](docs/acceptance/recovery/full-scene-character.md)。
 
+地面反射、角色近景及原始 GPU 输入见[画质诊断](docs/acceptance/nr/scene-material-quality-diagnosis.md)。
+完整材质与角色外观继续验收。
+
 资产引用、热刷新及内存验证见[依赖索引](docs/acceptance/recovery/asset-dependency-index.md)。
 
 项目启动共享、双配置完整入口及图像见[启动快照验证](docs/acceptance/recovery/project-startup-context.md)。

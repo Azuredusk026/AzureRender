@@ -1,0 +1,15 @@
+{
+  "status": "extracted",
+  "release": "https://github.com/baldurk/renderdoc/releases/tag/v1.46",
+  "attempts": [],
+  "url": "https://renderdoc.org/stable/1.46/RenderDoc_1.46_64.zip",
+  "redirect": "https://renderdoc.org/stable/1.46/RenderDoc_1.46_64.zip",
+  "file": "D:\\Tools\\Downloads\\RenderDoc_1.46_64.zip",
+  "bytes": 101000153,
+  "sha256": "9ca4d09ecaba2cc791168660d6fc2a7e3d70fe67146e87ec05c5f8dea70772f7",
+  "directory": "D:\\Tools\\RenderDoc\\1.46\\RenderDoc_1.46_64",
+  "pythonHost": "embedded python38.dll",
+  "standalonePyd": false,
+  "renderdocDllSha256": "809da38e3867d9fd09cc5c30dd5310500dee75e999166d7a14ad1ef6e9eca65d",
+  "qrenderdocSha256": "c5e9d3f254d80a7649fbd9eae1c67618cb19278c603710370c220de469397277"
+}

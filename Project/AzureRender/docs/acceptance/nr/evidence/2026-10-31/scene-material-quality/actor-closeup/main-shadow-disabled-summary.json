@@ -1,0 +1,40 @@
+{
+  "status": "captured-diagnostic",
+  "cases": [
+    {
+      "view": "beauty",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-closeup\\closeup.azureproject",
+        "--width",
+        "1280",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-closeup\\main-shadow-disabled\\frames",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-isolation",
+        "beauty",
+        "--qa-effect",
+        "shadow",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-122504-projected-footprint-quality-5daf40\\actor-closeup\\main-shadow-disabled\\runtime.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 187.3015293999997,
+      "imageSha256": "3e9de7c488de9b22b4284711c30c2de1d03fd92646665ab054855dc6eb78f2e0"
+    }
+  ],
+  "elapsedSeconds": 187.32057080000232
+}

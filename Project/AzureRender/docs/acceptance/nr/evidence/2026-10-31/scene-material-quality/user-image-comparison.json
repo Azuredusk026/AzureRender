@@ -1,0 +1,41 @@
+{
+  "userPixelsEqualProjectedCandidate": true,
+  "userFileSha256": "f83d7f72fec15a4153ef447e7e3168e8ce191b6a16eeaa6dffbd2db90dd8421f",
+  "sourceLinear": "build\\runs\\20261031-113415-projected-main-history-93cbc0\\full-linear-actor\\frames\\frame_000002.png",
+  "sourceProjected": "build\\runs\\20261031-113415-projected-main-history-93cbc0\\full-projected-actor\\frames\\frame_000002.png",
+  "regions": {
+    "leftWall": {
+      "regionXYXY": [
+        140,
+        340,
+        600,
+        670
+      ],
+      "meanAbsoluteByteError": 0.17088274044795784,
+      "maximumByteError": 47,
+      "samePixelFraction": 0.7289920948616601
+    },
+    "floor": {
+      "regionXYXY": [
+        1060,
+        1100,
+        1460,
+        1360
+      ],
+      "meanAbsoluteByteError": 10.869044871794872,
+      "maximumByteError": 108,
+      "samePixelFraction": 0.007615384615384615
+    },
+    "actor": {
+      "regionXYXY": [
+        1380,
+        700,
+        1570,
+        1000
+      ],
+      "meanAbsoluteByteError": 2.703263157894737,
+      "maximumByteError": 191,
+      "samePixelFraction": 0.377
+    }
+  }
+}
