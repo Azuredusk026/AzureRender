@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "player": "bin/AzurePlayer.exe",
+  "project": "game/project.azureproject",
+  "resources": "share/AzureRender",
+  "width": 1920,
+  "height": 1080
+}

@@ -143,6 +143,11 @@ Q1 的整体外观和时间稳定性继续验收。
 Windows 安装路径及隔离 Python 通过实测。
 范围与证据见[发布校验](../acceptance/recovery/game-package-validation.md)。
 
+完整场景的保存、中文目录迁移及独立入口已通过机器检查。
+默认入口三帧与工程入口逐字节相同。
+原生入口完成默认 1080p 的完整输入回放。
+交付位置及边界见[独立运行](../acceptance/recovery/full-scene-delivery.md)。
+
 ## 代码检索与证据管理
 
 有界检索、证据归档与按需符号地图已完成。

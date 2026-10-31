@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "package": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\独立游戏 中文 空格",
+  "entry": "完整原生场景操控验证.exe",
+  "sourceUnavailable": true,
+  "engineUnavailable": true,
+  "isolatedPath": "C:\\WINDOWS\\System32",
+  "cases": [
+    {
+      "name": "native-default",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\独立游戏 中文 空格\\完整原生场景操控验证.exe",
+        "--no-error-dialog",
+        "--width",
+        "960",
+        "--height",
+        "540",
+        "--capture-frames",
+        "3",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\native-default\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\native-default\\runtime.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 105.91436759999488
+    },
+    {
+      "name": "native-route",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\独立游戏 中文 空格\\完整原生场景操控验证.exe",
+        "--no-error-dialog",
+        "--capture-frames",
+        "540",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\native-route\\frames",
+        "--game-actions",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\package-actions.json",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\native-route\\runtime.json"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 456.6383419000049
+    }
+  ],
+  "immutableHashesPassed": true,
+  "tamperRejected": true,
+  "referencePixelFrames": 3,
+  "routeFrames": 540,
+  "defaultResolution": [
+    1920,
+    1080
+  ],
+  "manifestSha256": "4a15452e44af32c95db095d64c85c9ba0376eea6e900ed99764998a042bc6337"
+}

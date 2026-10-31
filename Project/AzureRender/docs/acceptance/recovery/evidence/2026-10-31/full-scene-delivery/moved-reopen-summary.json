@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\移动后的完整场景\\playable.azureproject",
+    "--width",
+    "960",
+    "--height",
+    "540",
+    "--capture-fps",
+    "60",
+    "--fixed-frame-step",
+    "--capture-frames",
+    "3",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\moved-reopen\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--qa-isolation",
+    "beauty",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\moved-reopen\\runtime.json"
+  ],
+  "programSha256": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+  "projectSha256": "40674c80b7f3acb531bbf550d3bd9e0c0ec7ab194cc3221a65895765471e57e3",
+  "levelSha256": "b541909a7c3d389eba106ee91f29b722c3e4977304c674a175c027a3efe0ad94",
+  "movedDirectory": true,
+  "originalPathUnavailable": true,
+  "exitCode": 0,
+  "elapsedSeconds": 96.17831859999569,
+  "frames": [
+    {
+      "frame": 0,
+      "changedPixels": 0,
+      "referenceSha256": "dc3aef07871cb66c02ca398aa8316572b7341a87e8dcb0a2f264f7c8eecef1fd",
+      "actualSha256": "dc3aef07871cb66c02ca398aa8316572b7341a87e8dcb0a2f264f7c8eecef1fd"
+    },
+    {
+      "frame": 1,
+      "changedPixels": 0,
+      "referenceSha256": "f32b5bbf07723ae2960ed97ed046b3e9b04def02f3b64598626005f320cf8ffa",
+      "actualSha256": "f32b5bbf07723ae2960ed97ed046b3e9b04def02f3b64598626005f320cf8ffa"
+    },
+    {
+      "frame": 2,
+      "changedPixels": 0,
+      "referenceSha256": "bc744a67a54b53db2826bfe688c3fcf212d00381d555253802480d21d1b17411",
+      "actualSha256": "bc744a67a54b53db2826bfe688c3fcf212d00381d555253802480d21d1b17411"
+    }
+  ]
+}

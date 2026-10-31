@@ -44,6 +44,10 @@ $sceneRun = & build/reinstall-environment/venv/Scripts/python.exe `
 
 ## 完整场景操控
 
+独立游戏的入口与范围见[保存迁移与独立运行](../acceptance/recovery/full-scene-delivery.md)。
+该目录包含实际原生入口、Player 及完整项目资源。
+开发态项目使用以下命令启动。
+
 ```powershell
 & build/ninja-msvc-release/AzurePlayer.exe `
   --project build/runs/20261031-183314-full-scene-playable-validation-d5257e/project/playable.azureproject `

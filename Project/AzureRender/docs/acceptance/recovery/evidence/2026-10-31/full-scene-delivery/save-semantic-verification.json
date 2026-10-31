@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "nodes": 1661,
+  "resources": 365,
+  "preservedOriginalFields": true,
+  "addedCanonicalDefaults": 65,
+  "float32EquivalentFields": 46,
+  "supportedSchemaMigrations": [
+    {
+      "path": "/renderSettings/screenSpaceReflection/schemaVersion",
+      "kind": "supported-linear-schema-migration",
+      "before": 1,
+      "after": 2
+    }
+  ],
+  "unchangedMaterialFiles": 26,
+  "pixelExactReopenedFrames": 3,
+  "serializationContract": "src/runtime/LevelRenderSettings.hpp",
+  "serializationContractSha256": "0c1edfd0fdba178a14fc3bcb6f3c731e9bcb7af7fe90fc125ceea3ffbf256261",
+  "scope": "No original field removed; numeric changes retain identical float32 values; declared defaults and supported linear-reflection migration are checked separately; actual moved Player images are byte-identical."
+}

@@ -845,7 +845,7 @@
       "pinMarker": ".keep",
       "primaryProject": "移动后的完整场景/playable.azureproject",
       "primaryPackage": "独立游戏 中文 空格",
-      "evidence": "docs/acceptance/recovery/game-package-validation.md"
+      "evidence": "docs/acceptance/recovery/full-scene-delivery.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

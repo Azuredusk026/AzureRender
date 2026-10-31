@@ -1,0 +1,35 @@
+{
+  "status": "saved-semantic-review-pending",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRender.exe",
+    "--editor-project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\source-project\\playable.azureproject",
+    "--editor-actions",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\editor-actions.json",
+    "--editor-close-policy",
+    "save",
+    "--width",
+    "960",
+    "--height",
+    "540",
+    "--fixed-frame-step",
+    "--smoke-frames",
+    "8",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-201944-full-scene-delivery-validation-dd89c4\\editor-save\\runtime.json"
+  ],
+  "programSha256": "d4d911ba75e59f5c7fde78f6a00c253cdf1d42903cd7deeb4b7b5362992e08b8",
+  "projectSha256": "40674c80b7f3acb531bbf550d3bd9e0c0ec7ab194cc3221a65895765471e57e3",
+  "levelBeforeSha256": "d9fedfffa93fc4b4092a9cdaf2ac75a67043bed76d222327d37fed003e965b0a",
+  "exitCode": 0,
+  "elapsedSeconds": 130.48023790000298,
+  "editorActions": [
+    {
+      "command": "save",
+      "error": "",
+      "milliseconds": 1335.0411,
+      "passed": true
+    }
+  ],
+  "levelAfterSha256": "b541909a7c3d389eba106ee91f29b722c3e4977304c674a175c027a3efe0ad94"
+}
