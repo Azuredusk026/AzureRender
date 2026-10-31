@@ -1,0 +1,30 @@
+{
+  "status": "public-regression-passed",
+  "sourceBase": "c2da760",
+  "sourceSha256": {
+    "src/app/AzureRenderApp.hpp": "4d4bb30401777a3a31d79cfdb24bbfd6125779e7758e922158c722b7317518de",
+    "src/app/AzureRenderGameplay.cpp": "cf3d935cd59dbee0d1b83e2c8238a044e90a2cb8da86a937675a4db449521d6d",
+    "tools/test_renderer_residency.py": "58199ff3edeee2ab05d80dfcedb1a46f8f8f3849129b870a9f22c43893b2c05f"
+  },
+  "public": [
+    {
+      "configuration": "debug",
+      "cases": 3,
+      "transitions": 21,
+      "resourceRelease": true
+    },
+    {
+      "configuration": "release",
+      "cases": 3,
+      "transitions": 21,
+      "resourceRelease": true
+    }
+  ],
+  "programs": {
+    "debug": "7ea392f19e2db9d3904a58d5d4890fbaa6d1b166de027cefe8d386c1adf02169",
+    "release": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab"
+  },
+  "fullScene": "Release unchanged 540-frame/13-action replay exits zero after restart, allocator zero; all 450 pre-restart PNG files byte-identical to red; Debug full replay belongs to joint validation",
+  "rootCause": "Active renderer rejects fog scene reuse; preload returned active-ready without preparing a replacement; null prepared renderer dereferenced",
+  "sourceBoundary": "Private app-host fallback preparation; renderer reuse rejection and data formats unchanged"
+}

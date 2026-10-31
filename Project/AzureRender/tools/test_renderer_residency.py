@@ -1,4 +1,4 @@
-"""Verify bounded renderer reuse, third-scene eviction and empty-scene restart."""
+"""Verify scene restart, rejected reuse, bounded residency and eviction."""
 import argparse,json,os,secrets,shutil,subprocess,time,uuid
 from pathlib import Path
 from test_validation_protocol import exchange
@@ -7,11 +7,20 @@ from run_playable_long_run import NativeWindow
 def run(player,output):
     out=output/('run-'+uuid.uuid4().hex[:8]);out.mkdir(parents=True)
     source=Path(__file__).resolve().parents[1]/'assets_public';results=[]
-    for workflow in ('platformer','scene_inspector'):
+    for workflow,template,fogged in (('fogged_scene_inspector','scene_inspector',True),
+                                    ('platformer','platformer',False),('scene_inspector','scene_inspector',False)):
         case=out/workflow;case.mkdir();project=case/'game'
-        shutil.copytree(source/workflow,project,ignore=shutil.ignore_patterns('.azure'))
+        shutil.copytree(source/template,project,ignore=shutil.ignore_patterns('.azure'))
         descriptor=json.loads((project/'project.azureproject').read_text(encoding='utf-8'))
         original=descriptor['startupScene'];level=json.loads((project/'assets'/original.split(':/',1)[1]).read_text(encoding='utf-8'))
+        if fogged:
+            level['viewFog']=dict(schemaVersion=2,asset='',enabled=True,captureView=None,
+                projection=dict(schemaVersion=1,extent=[960,540],pixelOrigin='upper-left',framePhase=0,
+                    pixelCenterOffset=.5,jitterRadius=0,depthEncoding=[0,1,1],minimumViewDepth=0,nearFadeWidth=.000001),
+                analytic=dict(schemaVersion=1,aerial=None,height=dict(schemaVersion=1,
+                    layers=[dict(density=.001,heightFalloff=0,referenceHeight=0,scatteringColor=[.1,.1,.1])],
+                    startViewDepth=0,minimumTransmittance=0,transmittanceBias=[0,0,0,0])))
+            (project/'assets'/original.split(':/',1)[1]).write_text(json.dumps(level),encoding='utf-8')
         mesh=project/'assets'/level['resources'][0]['asset'].split(':/',1)[1]
         alias=mesh.with_name('residency-alias'+mesh.suffix);shutil.copyfile(mesh,alias)
         level['resources'][0]['asset']='assets:/'+alias.relative_to(project/'assets').as_posix()
@@ -39,7 +48,7 @@ def run(player,output):
                         if not current['loading'] and current['levelReference']==reference and current['levelRevision']>revision:return current
                         assert process.poll() is None and time.monotonic()<deadline;time.sleep(.02)
                 wait(original,0)
-                for reference in ('assets:/residency-alias.azurelevel','assets:/empty.azurelevel','assets:/empty.azurelevel',original,'assets:/residency-alias.azurelevel',original):
+                for reference in (original,'assets:/residency-alias.azurelevel','assets:/empty.azurelevel','assets:/empty.azurelevel',original,'assets:/residency-alias.azurelevel',original):
                     previous=state()['levelRevision'];call('input',event=dict(action='load-level',reference=reference))
                     current=wait(reference,previous)
                     residency=json.loads(call('query',name='render.residency'));rows.append(residency)
@@ -52,7 +61,7 @@ def run(player,output):
         logs=(case/'stdout.log').read_text(encoding='utf-8')+(case/'stderr.log').read_text(encoding='utf-8')
         assert 'Allocator after unload: buffers=0 images=0' in logs
         assert not any(x in logs for x in ('VUID-','Validation Error','SYNC-HAZARD'))
-        results.append(dict(workflow=workflow,thirdSceneEviction=True,emptySceneRestart=True,released=True))
+        results.append(dict(workflow=workflow,sameSceneRestart=True,rejectedReuse=fogged,thirdSceneEviction=True,emptySceneRestart=True,released=True))
     (out/'summary.json').write_text(json.dumps(dict(passed=True,physicalInput=False,cases=results),indent=2)+'\n',encoding='utf-8')
 
 if __name__=='__main__':

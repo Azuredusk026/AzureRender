@@ -39,8 +39,8 @@ azurerender::AssetDatabase* AzureRenderApp::activeAssets(){
 #endif
     return levelSession_?&levelSession_->assets():nullptr;
 }
-bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level){
-    if(rendererResourceKey_==level.resourceKey && renderSettings_.sceneType==level.scene.renderSettings.sceneType && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty())){
+bool AzureRenderApp::preloadLevelRenderer(const azurerender::Level& level,bool allowActiveReuse){
+    if(allowActiveReuse && rendererResourceKey_==level.resourceKey && renderSettings_.sceneType==level.scene.renderSettings.sceneType && sceneRenderer_ && sceneRenderer_->name()==azurerender::BuiltinRendererCatalog::documentRendererId(level.scene.renderSettings.sceneType,!level.scene.resources.empty())){
         return true;
     }
     azurerender::RenderContext context;buildRenderContext(context);context.scene=level.scene.renderDescription();context.preparedMeshes=&level.preparedMeshes;
@@ -65,7 +65,8 @@ void AzureRenderApp::prepareLevelRenderer(const azurerender::Level& level){
         renderSettings_=level.scene.renderSettings;return;
     }
     if(preparedResourceKey_!=level.resourceKey || !preparedRendererReady_){
-        while(!preloadLevelRenderer(level)){}
+        // A rejected active instance cannot satisfy the fallback preparation.
+        while(!preloadLevelRenderer(level,false)){}
     }
     // The previous scene remains cached. Only reusing a renderer with work
     // still in flight needs GPU retirement; ordinary alternating loads reuse

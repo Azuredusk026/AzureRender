@@ -441,7 +441,7 @@ private:
     void createSceneRenderer();
     void createTemporalResources();
     void createMultisampleResources();
-    bool preloadLevelRenderer(const azurerender::Level& level);
+    bool preloadLevelRenderer(const azurerender::Level& level, bool allowActiveReuse = true);
     void prepareLevelRenderer(const azurerender::Level& level);
     void releasePreparedRenderer();
     void synchronizeEditorRuntime();

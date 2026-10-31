@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "path": "crash-source/release/AzurePlayer.exe",
+      "sha256": "784a0574cd358a5c79cc2c0d0a8bf2b3a01946b17eb99230b5d89748db9cd29d",
+      "bytes": 6069248
+    },
+    {
+      "path": "crash-source/release/AzurePlayer.exe.31592.dmp",
+      "sha256": "36949b3833b657063726f9cde132125a92fef8ebddbc9ce53aee1e0ad935a3d5",
+      "bytes": 61862772
+    },
+    {
+      "path": "crash-source/debug/AzurePlayer.exe",
+      "sha256": "22c9f79d87520598d3f3bd1d807a224bd309fa7e939dd2a75818161f743b9969",
+      "bytes": 21568000
+    },
+    {
+      "path": "crash-source/debug/AzurePlayer.pdb",
+      "sha256": "e1d19b896826fca574d1a6b5ef5478faf15d3e374528f5cc4d356d2852b4379f",
+      "bytes": 185389056
+    },
+    {
+      "path": "crash-source/debug/AzurePlayer.exe.34088.dmp",
+      "sha256": "96b7fcfdb07e6e3d19ed472a7602ca2ac732376c55a1a8d867e25e77a804da9b",
+      "bytes": 65584589
+    }
+  ],
+  "scope": "Matching pre-fix crash programs and debug symbols"
+}
