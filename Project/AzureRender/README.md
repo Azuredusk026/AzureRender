@@ -15,6 +15,8 @@
 
 眼部固定区域、照明候选与环境兼容见[照明联合验证](docs/acceptance/nr/character-illumination-integration.md)。
 
+动态头发的来源坐标恢复与当前画面见[坐标验收](docs/acceptance/nr/hair-source-uv.md)。
+
 资产引用、热刷新及内存验证见[依赖索引](docs/acceptance/recovery/asset-dependency-index.md)。
 
 项目启动共享、双配置完整入口及图像见[启动快照验证](docs/acceptance/recovery/project-startup-context.md)。

@@ -1,0 +1,10 @@
+{
+  "status": "measured",
+  "vertices": 11564,
+  "originalMaximumAbsoluteDifference": 0.9922657012939453,
+  "verticalFlipMaximumAbsoluteDifference": 0.0,
+  "uMaximumError": 0.0,
+  "vMaximumError": 0.0,
+  "verticesBeyondHalfTexelAt2048": 0,
+  "sourceGeometryReport": "hair-geometry-inputs.json"
+}

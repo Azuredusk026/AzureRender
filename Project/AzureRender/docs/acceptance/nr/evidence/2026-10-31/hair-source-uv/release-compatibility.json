@@ -1,0 +1,54 @@
+{
+  "hiddenFrames": [
+    {
+      "frame": 0,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 1,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 2,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 3,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 4,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 5,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 6,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 7,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 8,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 9,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 10,
+      "pngBytesEqual": true
+    },
+    {
+      "frame": 11,
+      "pngBytesEqual": true
+    }
+  ],
+  "hiddenStrictPassed": true,
+  "nearMatchesDiagnostic": true
+}

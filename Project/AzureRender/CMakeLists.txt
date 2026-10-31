@@ -3139,6 +3139,7 @@ if(BUILD_TESTING)
         "MaterialSemantics|test_material_semantics.py"
         "NativeRenderEvidence|test_native_render*.py"
         "NativeCharacter|test_native_character*.py"
+        "NativeMeshUv|test_native_mesh_uv.py"
         "NativeVfxProfile|test_native_vfx_profile.py"
         "NativeColorSpace|test_native_color_space.py"
         "EndfieldNative|test_endfield_native*.py")

@@ -53,19 +53,21 @@ $sceneRun = & build/reinstall-environment/venv/Scripts/python.exe `
 
 联合项目的画面与范围见[组合验证](../acceptance/recovery/full-scene-character.md)。
 该项目保留完整环境的挂载、原机位及调色配置。
-角色采用固定世界位置及原待机动画。
+角色采用恢复主坐标的动态资产及原待机动画。
 项目目录带有保留标记，挂载资源与来源项目共同维护。
 
 ```powershell
 & build/ninja-msvc-release/AzurePlayer.exe `
-  --project build/runs/20261031-105539-full-scene-character-composition-b37668/project/full-character-visible.azureproject `
+  --project build/runs/20261031-172112-hair-source-inputs-14d199/project/full-restored.azureproject `
   --width 1920 --height 1080 `
   --qa-camera scene --qa-light scene --qa-isolation beauty
 ```
 
 固定序列采用 `--capture-frames 12 --capture-fps 60`。
 同时传入 `--fixed-frame-step` 及独立的 `--capture-dir`。
-对照项目为同目录的 `full-character-hidden.azureproject`。
+对照项目为同目录的 `hidden-restored.azureproject`。
+头发坐标及严格隐藏对照见[坐标验收](../acceptance/nr/hair-source-uv.md)。
+
 严格环境像素兼容按组合验证页记录实际状态。
 
 ## 正面角色参考
@@ -83,12 +85,12 @@ $sceneRun = & build/reinstall-environment/venv/Scripts/python.exe `
 
 ```powershell
 & build/ninja-msvc-release/AzurePlayer.exe `
-  --project build/runs/20261031-164808-character-frontal-lighting-fa3879/project/control.azureproject `
+  --project build/runs/20261031-172112-hair-source-inputs-14d199/project/near-restored.azureproject `
   --width 1536 --height 1536 `
   --qa-camera scene --qa-light scene --qa-isolation beauty
 ```
 
 该入口采用关闭抗锯齿的固定诊断机位。
 底色诊断使用 `--qa-isolation albedo`。
-照明候选使用同目录的 `candidate.azureproject`。
+照明候选及输入条件见[联合验证](../acceptance/nr/character-illumination-integration.md)。
 整体外观及时间稳定性仍按正式门禁验收。

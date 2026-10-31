@@ -1,0 +1,122 @@
+{
+  "status": "measured",
+  "scope": "Direct original mesh element order; no positional remapping or tolerance-based matching. Attribute equality does not prove visible texel equality.",
+  "sources": [
+    {
+      "path": "build\\runs\\20261031-135416-character-portrait-recovery-0773ca\\original-reference\\project\\native-character\\outline-converted.glb",
+      "sha256": "9246691bb5671d854029d9481e739e319d2fb756903c1d329a59b543271c1ed4"
+    },
+    {
+      "path": "build\\runs\\20261031-164808-character-frontal-lighting-fa3879\\project\\content-character\\hero-restored-inputs-v7.glb",
+      "sha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb"
+    }
+  ],
+  "attributes": [
+    {
+      "attribute": "INDICES",
+      "referenceShape": [
+        43044,
+        1
+      ],
+      "currentShape": [
+        43044,
+        1
+      ],
+      "equal": true,
+      "maximumAbsoluteDifference": 0.0,
+      "referenceArraySha256": "4f6a5db0a8bba37897435f43a8869e5ded874db2b5c6d7de2372bc552b739492",
+      "currentArraySha256": "4f6a5db0a8bba37897435f43a8869e5ded874db2b5c6d7de2372bc552b739492"
+    },
+    {
+      "attribute": "JOINTS_0",
+      "referenceShape": null,
+      "currentShape": [
+        11564,
+        4
+      ]
+    },
+    {
+      "attribute": "NORMAL",
+      "referenceShape": [
+        11564,
+        3
+      ],
+      "currentShape": [
+        11564,
+        3
+      ],
+      "equal": false,
+      "maximumAbsoluteDifference": 0.47494296729564667,
+      "referenceArraySha256": "9c00a9ebfd860b755711201016f96621781bae715aba4fd59caf5c16f8a1ff6f",
+      "currentArraySha256": "aac9880ab8b95fecaae9b1fc0d792c0c9261cec88b998252b4b9cfd4a3cbc34f"
+    },
+    {
+      "attribute": "POSITION",
+      "referenceShape": [
+        11564,
+        3
+      ],
+      "currentShape": [
+        11564,
+        3
+      ],
+      "equal": false,
+      "maximumAbsoluteDifference": 0.0586196631193161,
+      "referenceArraySha256": "df3da7f6758788fdcd7a67ee9ad2e926c28befbaba42fed5350630e8b527455f",
+      "currentArraySha256": "cb972d58d1e81ac18b4ca6604842554672b5193c85b559b13ce8ac219bc97c5b"
+    },
+    {
+      "attribute": "TANGENT",
+      "referenceShape": [
+        11564,
+        4
+      ],
+      "currentShape": [
+        11564,
+        4
+      ],
+      "equal": false,
+      "maximumAbsoluteDifference": 0.4770731031894684,
+      "referenceArraySha256": "8a1fdeb457e57b0626fbe0391027a344b9ae877c40744727b44bc8a9ea9e109e",
+      "currentArraySha256": "aa31eb17536632d17067dc7281dc2c78f0bd525227e67f25fbc4bc60cf1e8935"
+    },
+    {
+      "attribute": "TEXCOORD_0",
+      "referenceShape": [
+        11564,
+        2
+      ],
+      "currentShape": [
+        11564,
+        2
+      ],
+      "equal": false,
+      "maximumAbsoluteDifference": 0.9922657012939453,
+      "referenceArraySha256": "78055a8a050e95b54f3152055dffaab7521f9fe0bc4d55f7e6720ac4f5f8aab3",
+      "currentArraySha256": "e0a8558cc7d177f53e00aed6ceab1a843139fa8e48b6bfde3890c6e7f182bb9c"
+    },
+    {
+      "attribute": "TEXCOORD_1",
+      "referenceShape": [
+        11564,
+        2
+      ],
+      "currentShape": [
+        11564,
+        2
+      ],
+      "equal": false,
+      "maximumAbsoluteDifference": 0.006119728088378906,
+      "referenceArraySha256": "1f0d764f7d55dec4d0c39aefef6f453f715a0d519de12750ed4b37848a42c90a",
+      "currentArraySha256": "3feb8a86293c52a73a4313973d661582fa37df6f6e072c32c3115d880420da5d"
+    },
+    {
+      "attribute": "WEIGHTS_0",
+      "referenceShape": null,
+      "currentShape": [
+        11564,
+        4
+      ]
+    }
+  ]
+}

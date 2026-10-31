@@ -71,3 +71,10 @@ Release Player 实际采集十二帧，分辨率为 2560×1440。
 负责人及剩余条件见[环境复核](../p8/2026-10-31-environment.md)。
 详细来源、命令和结果见[结构化清单](evidence/2026-10-31/full-scene-character/summary.json)。
 启动步骤见[完整场景显示](../../tutorials/restored-native-scene.md)。
+
+## 头发来源坐标
+
+当前启动入口采用恢复主坐标的动态角色资产。
+头发顶点及索引按冻结参考对应，动画保持完整。
+工具、完整画面及隐藏对照见[坐标验收](../nr/hair-source-uv.md)。
+本页环境恢复的严格像素待项继续按既有范围验收。

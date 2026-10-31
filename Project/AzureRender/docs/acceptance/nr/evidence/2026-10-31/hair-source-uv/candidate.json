@@ -1,0 +1,11 @@
+{
+  "status": "uv-only-diagnostic-prepared",
+  "baseCommit": "20dff9b",
+  "sourceAssetSha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb",
+  "candidateAssetSha256": "f188722c428358787a12be615d944f4a07185e9a8eaab72b9aa21105f3b7f997",
+  "vertices": 11564,
+  "originalBinaryPrefixPreserved": true,
+  "tangentW": "unchanged for single-input diagnostic; final tangent convention is a separate condition",
+  "project": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\hair-v.azureproject",
+  "sourceFiles": 1522
+}

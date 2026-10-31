@@ -1,0 +1,32 @@
+[
+  {
+    "case": "near-restored",
+    "project": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\near-restored.azureproject",
+    "levelSha256": "0834f3f1289c60aa756fd1d5e30eae61872ebaae38a455fde6982d3f48f7039e",
+    "projectSha256": "b3b04466409331dd57e7f38a5ef744b886b4c2aaf7a108d32fd824b3d9ad5c04"
+  },
+  {
+    "case": "full-control",
+    "project": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\full-control.azureproject",
+    "levelSha256": "237bf62abd7f22bce23a6846807023a470968be723f9b8e493e000c2cd1cd5ab",
+    "projectSha256": "26e7efa60305cf2f55b22fe747a4c6cdef9c124f841c8e30420586a2d90fae85"
+  },
+  {
+    "case": "full-restored",
+    "project": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\full-restored.azureproject",
+    "levelSha256": "b0f0243229f8d89891aaa5552cca235e3cd79b637ba1c1d449418f14718bab42",
+    "projectSha256": "3856c5fb14324b39378fa5b855e3898f8199704eced56caf4ccaabde260fc70a"
+  },
+  {
+    "case": "hidden-control",
+    "project": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\hidden-control.azureproject",
+    "levelSha256": "7ff5e644a50afedec28cb432a493b685897cf025adc799afb74b965cfd41861e",
+    "projectSha256": "c304d84bd3431b31c988604cd2d01740827d03e3d494d3c149d9889290d24e4d"
+  },
+  {
+    "case": "hidden-restored",
+    "project": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\hidden-restored.azureproject",
+    "levelSha256": "4c4fe0b38c0b23c705e9dda2c61b2aba27e4ba0f28f572454cc51c89f342ef97",
+    "projectSha256": "ff0a0a075754d92d0dc33ee6b108212c49d5a361d34fae284fffbb8d7b76d187"
+  }
+]

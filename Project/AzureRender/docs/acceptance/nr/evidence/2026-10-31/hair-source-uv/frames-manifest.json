@@ -1,0 +1,314 @@
+[
+  {
+    "case": "near-release",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\near-release\\frames\\frame_000000.png",
+    "bytes": 3674548,
+    "sha256": "259ffbb4c4da4b20bd2f1b24fe0d9e7fe84ee40bf75847731a951832cc6a1bf9"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000000.png",
+    "bytes": 5617957,
+    "sha256": "dba7b77eabc7f5f644af308bea4100f40e7486f63158a949cb6995c7cc017072"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000001.png",
+    "bytes": 5618165,
+    "sha256": "3742b0e8d9765243fcc2935ff8864b3e6801904994021efd4256c3341455775c"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000002.png",
+    "bytes": 5618999,
+    "sha256": "002e1c7b848175b38d26fa5a4ddd4f2b10278400409306b9fc87c2d8c673cf86"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000003.png",
+    "bytes": 5619118,
+    "sha256": "76e05d35d5f2100519f85d43a0fb5c0f4704709065b5ee276cee347b5cbb3c6e"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000004.png",
+    "bytes": 5619039,
+    "sha256": "fb453f34bfda04257e6f2af01c5ad8d51de39fbfa12867ae8bc96363c009b885"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000005.png",
+    "bytes": 5619422,
+    "sha256": "dd2df4ead33dec9035de08b529366975e82de45babdc2eeac707deac7e2d65e8"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000006.png",
+    "bytes": 5618190,
+    "sha256": "2f18da7feb85defaea5604604ae6ff2c86e0548663e54cb643d98b40ba9b8796"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000007.png",
+    "bytes": 5619135,
+    "sha256": "676870abf52c76d10658ad81b8a1132e98c07fbada91a3b7ae33c27355480952"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000008.png",
+    "bytes": 5619543,
+    "sha256": "f87c7a41ed1b119e2a3c3724bb881143dfce9153588809801992c747ed9d344b"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000009.png",
+    "bytes": 5619683,
+    "sha256": "480fa220ae600093243c6ce1941050b760fe91f121e44e928388e0821487f52f"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000010.png",
+    "bytes": 5620828,
+    "sha256": "73adededd13b07060b40fb5547907eab93e18ee243f53d6e6c294b92c7321dd4"
+  },
+  {
+    "case": "full-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-control\\frames\\frame_000011.png",
+    "bytes": 5621732,
+    "sha256": "40b652741f0a37898091b3d2f9403647d7ae5257fcc1ba0b7fbd172b809692a5"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000000.png",
+    "bytes": 5618336,
+    "sha256": "2c282b56fd870fe24c748b079aae4c0b3286f9b67aab4795b88319d8b6e11bd7"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000001.png",
+    "bytes": 5618658,
+    "sha256": "d345eab489775e420efb944f3c9b763dcd0bbb44ff9812ec3f7491d74698ffda"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000002.png",
+    "bytes": 5619477,
+    "sha256": "5dc882f13c2be8b61f0740b9fa61f03e2f43903aea97696a85ca63d1a2b5219f"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000003.png",
+    "bytes": 5618756,
+    "sha256": "87b343105c49492c697606b14e2ba39f8e4d1781f1bc929f2dde81c0891cbf19"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000004.png",
+    "bytes": 5617792,
+    "sha256": "962fa6c1ee3bd9fe4dbd9a8650d7c1f54638808256d17e6c4c049be134d5894d"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000005.png",
+    "bytes": 5618918,
+    "sha256": "d8f96e4e21f94acacf343dd1a635f9fd703927fd62149692c20545f48d35ff88"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000006.png",
+    "bytes": 5619464,
+    "sha256": "220df589d9a215ddf5c1e2803b52f28c46c79f70e5898a38118c41f8d4bde1c0"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000007.png",
+    "bytes": 5618837,
+    "sha256": "628aff654559747f61bae1170d22415bbcb7f9cc26bdda49f3127413cb2a4711"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000008.png",
+    "bytes": 5619573,
+    "sha256": "7d99f4ef500247bdfc62d8348bdc3d23322bf4456173c43b23386ce1ccfd60d8"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000009.png",
+    "bytes": 5620883,
+    "sha256": "6cb19304e24309ee11b5a0a59caa334f1a25e5f549ae12d5d5114fe45a4b2934"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000010.png",
+    "bytes": 5619951,
+    "sha256": "e1f9a1cf2137377963c55723e62ffa171caee206e872d45f158550cf5fe4ab9b"
+  },
+  {
+    "case": "full-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-restored\\frames\\frame_000011.png",
+    "bytes": 5620852,
+    "sha256": "878e6bd96b7187c9e8f8126bf91c596c37754528ac01e7191d227fb98c97359b"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000000.png",
+    "bytes": 5576281,
+    "sha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000001.png",
+    "bytes": 5577174,
+    "sha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000002.png",
+    "bytes": 5577792,
+    "sha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000003.png",
+    "bytes": 5577070,
+    "sha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000004.png",
+    "bytes": 5578159,
+    "sha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000005.png",
+    "bytes": 5577682,
+    "sha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000006.png",
+    "bytes": 5579217,
+    "sha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000007.png",
+    "bytes": 5579035,
+    "sha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000008.png",
+    "bytes": 5579296,
+    "sha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000009.png",
+    "bytes": 5579509,
+    "sha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000010.png",
+    "bytes": 5580000,
+    "sha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed"
+  },
+  {
+    "case": "hidden-control",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-control\\frames\\frame_000011.png",
+    "bytes": 5580774,
+    "sha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000000.png",
+    "bytes": 5576281,
+    "sha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000001.png",
+    "bytes": 5577174,
+    "sha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000002.png",
+    "bytes": 5577792,
+    "sha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000003.png",
+    "bytes": 5577070,
+    "sha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000004.png",
+    "bytes": 5578159,
+    "sha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000005.png",
+    "bytes": 5577682,
+    "sha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000006.png",
+    "bytes": 5579217,
+    "sha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000007.png",
+    "bytes": 5579035,
+    "sha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000008.png",
+    "bytes": 5579296,
+    "sha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000009.png",
+    "bytes": 5579509,
+    "sha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000010.png",
+    "bytes": 5580000,
+    "sha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed"
+  },
+  {
+    "case": "hidden-restored",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\hidden-restored\\frames\\frame_000011.png",
+    "bytes": 5580774,
+    "sha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854"
+  },
+  {
+    "case": "full-debug",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-debug\\frames\\frame_000000.png",
+    "bytes": 5618336,
+    "sha256": "2c282b56fd870fe24c748b079aae4c0b3286f9b67aab4795b88319d8b6e11bd7"
+  },
+  {
+    "case": "full-debug",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-debug\\frames\\frame_000001.png",
+    "bytes": 5618658,
+    "sha256": "d345eab489775e420efb944f3c9b763dcd0bbb44ff9812ec3f7491d74698ffda"
+  },
+  {
+    "case": "full-debug",
+    "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\regression\\full-debug\\frames\\frame_000002.png",
+    "bytes": 5619477,
+    "sha256": "5dc882f13c2be8b61f0740b9fa61f03e2f43903aea97696a85ca63d1a2b5219f"
+  }
+]

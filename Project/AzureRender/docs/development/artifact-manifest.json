@@ -818,6 +818,15 @@
       "pinMarker": ".keep",
       "primaryProject": "project/control.azureproject",
       "evidence": "docs/acceptance/nr/character-illumination-integration.md"
+    },
+    {
+      "path": "runs/20261031-172112-hair-source-inputs-14d199",
+      "pathBase": "build",
+      "purpose": "头发来源坐标恢复资产、完整场景及动态正面。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-restored.azureproject",
+      "evidence": "docs/acceptance/nr/hair-source-uv.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
