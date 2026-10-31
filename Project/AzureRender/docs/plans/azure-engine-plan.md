@@ -11,6 +11,9 @@
 内容、地面反射与少量像素差异见[画面恢复](../acceptance/recovery/full-scene-visual.md)。
 完整场景及角色联合候选分别维护画质基准。
 
+完整环境与原生角色的同屏画面见[联合验证](../acceptance/recovery/full-scene-character.md)。
+固定位置及待机已验证，严格环境像素兼容继续复核。
+
 当前材质功能位及主辅视图见[特化验证](../acceptance/nr/material-class-feature-specialization.md)。
 资产常驻索引、双配置回归及启动边界见[索引验证](../acceptance/recovery/asset-dependency-index.md)。
 

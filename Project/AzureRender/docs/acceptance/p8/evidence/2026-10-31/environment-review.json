@@ -163,5 +163,20 @@
     "pngBytesExactPairs": 0,
     "owner": "运行环境及渲染兼容复核任务",
     "retryCondition": "相关渲染修复、环境变化或明确的新诊断假设"
+  },
+  "fullSceneCharacterComposition": {
+    "status": "strict environment PNG gate pending",
+    "source": "docs/acceptance/recovery/evidence/2026-10-31/full-scene-character/summary.json",
+    "configuration": "Release",
+    "frames": 12,
+    "visibleCapturePassed": true,
+    "hiddenPngBytesExactPairs": 5,
+    "maximumDifferentPixels": 15,
+    "maximumChannelError": 5,
+    "repeatPngBytesExactPairs": 12,
+    "minimumExactPixelFraction": 0.9999959309895833,
+    "owner": "运行环境及渲染兼容复核任务",
+    "retryCondition": "相关渲染修复或明确的范围调整",
+    "rootCause": "unproven; shared Hair class specialization changed alongside stable tiny differences"
   }
 }

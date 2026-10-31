@@ -48,3 +48,22 @@ $sceneRun = & build/reinstall-environment/venv/Scripts/python.exe `
 该入口具有独立的相机、照明和内容组合。
 联合制作同时回归完整物流场景和角色材质。
 通用渲染能力按各自项目配置装配。
+
+## 完整环境与角色
+
+联合项目的画面与范围见[组合验证](../acceptance/recovery/full-scene-character.md)。
+该项目保留完整环境的挂载、原机位及调色配置。
+角色采用固定世界位置及原待机动画。
+项目目录带有保留标记，挂载资源与来源项目共同维护。
+
+```powershell
+& build/ninja-msvc-release/AzurePlayer.exe `
+  --project build/runs/20261031-105539-full-scene-character-composition-b37668/project/full-character-visible.azureproject `
+  --width 1920 --height 1080 `
+  --qa-camera scene --qa-light scene --qa-isolation beauty
+```
+
+固定序列采用 `--capture-frames 12 --capture-fps 60`。
+同时传入 `--fixed-frame-step` 及独立的 `--capture-dir`。
+对照项目为同目录的 `full-character-hidden.azureproject`。
+严格环境像素兼容按组合验证页记录实际状态。

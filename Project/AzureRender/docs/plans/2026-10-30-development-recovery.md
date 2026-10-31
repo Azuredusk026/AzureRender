@@ -39,6 +39,8 @@
 其二十三组内容挂载及原生调色均进入实际画面。
 启动入口、截图与严格像素待项见[画面恢复](../acceptance/recovery/full-scene-visual.md)。
 
+完整环境与角色的固定位置联合画面见[组合验证](../acceptance/recovery/full-scene-character.md)。
+
 编辑器、运行时、发布及路径追踪已有实现和证据。
 原生还原的公共机制已有多项局部验证。
 正式状态仍为 NR0 开发中、NR1 至 NR12 待完成。
