@@ -1,0 +1,784 @@
+{
+  "status": "measured",
+  "sources": [
+    {
+      "asset": "structural-collision.glb",
+      "triangles": 16718,
+      "sha256": "e9b6a67ee3ba96ff608ef11ce584240def29014bba9a44082ff366adf6380df4"
+    },
+    {
+      "asset": "native-railing-collision.glb",
+      "triangles": 5356,
+      "sha256": "db2b66649f9d08e58840861f9e26de5a6de2a3ded05f67d05f047dc42976a766"
+    }
+  ],
+  "preCaptureGeometryReportSha256": "3495dee445b737e2ad2ed2ade1220e290d937b86ff89343ac54b230fa1390b47",
+  "queries": [
+    {
+      "frame": 60,
+      "position": [
+        0.6000000238418579,
+        1.0324134826660156,
+        9.0
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            0.6000000238418579,
+            1.0324290458285832,
+            9.0
+          ],
+          "triangle": 2395,
+          "footMinusSurfaceHeight": -1.5563162567566735e-05
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          0.6000000238418579,
+          1.3324134826660157,
+          9.0
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          0.6000000140115022,
+          1.0324290458288226,
+          9.000000268002879
+        ],
+        "distance": 0.299984436837313,
+        "distanceMinusRadius": -1.556316268697122e-05,
+        "triangle": 2395,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          3.2769552498385105e-08,
+          0.9999999999996003,
+          -8.93389275062826e-07
+        ]
+      }
+    },
+    {
+      "frame": 120,
+      "position": [
+        1.8066655397415161,
+        1.0324134826660156,
+        9.0
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            1.8066655397415161,
+            1.0324290062866943,
+            9.0
+          ],
+          "triangle": 2395,
+          "footMinusSurfaceHeight": -1.5523620678692396e-05
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          1.8066655397415161,
+          1.3324134826660157,
+          9.0
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          1.8066655299111591,
+          1.0324290062869337,
+          9.000000268002914
+        ],
+        "distance": 0.2999844763792019,
+        "distanceMinusRadius": -1.5523620798096882e-05,
+        "triangle": 2395,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          3.276955224995666e-08,
+          0.9999999999996003,
+          -8.933892757323185e-07
+        ]
+      }
+    },
+    {
+      "frame": 150,
+      "position": [
+        3.2510504722595215,
+        1.081106185913086,
+        8.986726760864258
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            3.2510504722595215,
+            1.0810990559222513,
+            8.986726760864258
+          ],
+          "triangle": 4107,
+          "footMinusSurfaceHeight": 7.1299908346311724e-06
+        },
+        {
+          "point": [
+            3.2510504722595215,
+            1.0317733747112552,
+            8.986726760864258
+          ],
+          "triangle": 2186,
+          "footMinusSurfaceHeight": 0.04933281120183075
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          3.2510504722595215,
+          1.381106185913086,
+          8.986726760864258
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          3.25105108430898,
+          1.0810990559244185,
+          8.986727285888358
+        ],
+        "distance": 0.30000712998975126,
+        "distanceMinusRadius": 7.129989751275545e-06,
+        "triangle": 4107,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -2.040116375538261e-06,
+          0.9999999999963876,
+          -1.7500387429368978e-06
+        ]
+      }
+    },
+    {
+      "frame": 180,
+      "position": [
+        4.7506327629089355,
+        1.031774640083313,
+        8.98641586303711
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            4.7506327629089355,
+            1.0317735396885435,
+            8.98641586303711
+          ],
+          "triangle": 2186,
+          "footMinusSurfaceHeight": 1.1003947695265026e-06
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          4.7506327629089355,
+          1.331774640083313,
+          8.98641586303711
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          4.750632795965084,
+          1.031773539688752,
+          8.986416110855968
+        ],
+        "distance": 0.3000011003946652,
+        "distanceMinusRadius": 1.1003946652210495e-06,
+        "triangle": 2186,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -1.1018675597378905e-07,
+          0.9999999999996528,
+          -8.260598325850428e-07
+        ]
+      }
+    },
+    {
+      "frame": 210,
+      "position": [
+        6.256479263305664,
+        1.2877949476242065,
+        9.003660202026367
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            6.256479263305664,
+            1.0317737595839893,
+            9.003660202026367
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.25602118804021723
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          6.256479263305664,
+          1.5877949476242066,
+          9.003660202026367
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          6.331703412433194,
+          1.4000763893127441,
+          9.235175894327671
+        ],
+        "distance": 0.3074027415756844,
+        "distanceMinusRadius": 0.007402741575684435,
+        "triangle": 6365,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -0.24470877761839882,
+          0.61066000045821,
+          -0.7531347674864625
+        ]
+      }
+    },
+    {
+      "frame": 220,
+      "position": [
+        6.738809108734131,
+        1.3650394678115845,
+        8.94927978515625
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            6.738809108734131,
+            1.0317737165835754,
+            8.94927978515625
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.33326575122800906
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          6.738809108734131,
+          1.6650394678115845,
+          8.94927978515625
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          6.783956727924316,
+          1.4000763893127441,
+          9.088229609565046
+        ],
+        "distance": 0.30257361780128783,
+        "distanceMinusRadius": 0.002573617801287842,
+        "triangle": 6365,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -0.14921201497427194,
+          0.8756978894070407,
+          -0.45922650301933976
+        ]
+      }
+    },
+    {
+      "frame": 230,
+      "position": [
+        7.190529823303223,
+        1.5403016805648804,
+        8.917840957641602
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            7.190529823303223,
+            1.0317736951618484,
+            8.917840957641602
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.508527985403032
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          7.190529823303223,
+          1.8403016805648804,
+          8.917840957641602
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          7.4195451736450195,
+          1.6345019340515137,
+          9.010247230529785
+        ],
+        "distance": 0.321466150047291,
+        "distanceMinusRadius": 0.02146615004729102,
+        "triangle": 7050,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -0.7124089124410341,
+          0.6401910325024625,
+          -0.2874525758764637
+        ]
+      }
+    },
+    {
+      "frame": 240,
+      "position": [
+        7.61787748336792,
+        1.608960509300232,
+        8.872233390808105
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            7.61787748336792,
+            1.0317736595524338,
+            8.872233390808105
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.5771868497477981
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          7.61787748336792,
+          1.908960509300232,
+          8.872233390808105
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          7.62464621811295,
+          1.6345614181131343,
+          8.999464041184924
+        ],
+        "distance": 0.30253646955311336,
+        "distanceMinusRadius": 0.002536469553113374,
+        "triangle": 7050,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -0.022373285293599745,
+          0.9069950858897167,
+          -0.42054649003062256
+        ]
+      }
+    },
+    {
+      "frame": 250,
+      "position": [
+        7.838993549346924,
+        1.6006673574447632,
+        8.863574981689453
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            7.838993549346924,
+            1.0317736555761048,
+            8.863574981689453
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.5688937018686584
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          7.838993549346924,
+          1.9006673574447632,
+          8.863574981689453
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          7.8313997431188405,
+          1.6345219552295551,
+          9.006612379710406
+        ],
+        "distance": 0.30224284647602334,
+        "distanceMinusRadius": 0.0022428464760233524,
+        "triangle": 7052,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          0.025124850154843205,
+          0.8805680773533914,
+          -0.47325321240415114
+        ]
+      }
+    },
+    {
+      "frame": 270,
+      "position": [
+        7.835768699645996,
+        1.5880755186080933,
+        8.84058952331543
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            7.835768699645996,
+            1.0317736332821172,
+            8.84058952331543
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.556301885325976
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          7.835768699645996,
+          1.8880755186080933,
+          8.84058952331543
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          7.826982858708345,
+          1.6345232363911142,
+          9.006380272656264
+        ],
+        "distance": 0.3030718122581109,
+        "distanceMinusRadius": 0.0030718122581109286,
+        "triangle": 7052,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          0.028989304126271608,
+          0.8366079323835022,
+          -0.5470345397863612
+        ]
+      }
+    },
+    {
+      "frame": 300,
+      "position": [
+        7.251572608947754,
+        1.5103551149368286,
+        8.814382553100586
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            7.251572608947754,
+            1.0317735963184402,
+            8.814382553100586
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.4785815186183884
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          7.251572608947754,
+          1.8103551149368287,
+          8.814382553100586
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          7.4195451736450195,
+          1.6345019340515137,
+          9.010247230529785
+        ],
+        "distance": 0.3122532555201061,
+        "distanceMinusRadius": 0.012253255520106088,
+        "triangle": 7050,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -0.53793695254668,
+          0.5631748517478363,
+          -0.6272622429603057
+        ]
+      }
+    },
+    {
+      "frame": 330,
+      "position": [
+        7.227208137512207,
+        1.4426425695419312,
+        8.788896560668945
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            7.227208137512207,
+            1.0317735711857043,
+            8.788896560668945
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.4108689983562268
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          7.227208137512207,
+          1.7426425695419312,
+          8.788896560668945
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          7.4195451736450195,
+          1.6345019340515137,
+          9.010247230529785
+        ],
+        "distance": 0.3125444793312924,
+        "distanceMinusRadius": 0.012544479331292435,
+        "triangle": 7050,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -0.6153909246592008,
+          0.34600078594186295,
+          -0.7082213396775807
+        ]
+      }
+    },
+    {
+      "frame": 360,
+      "position": [
+        7.212606430053711,
+        1.368078589439392,
+        8.77209186553955
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            7.212606430053711,
+            1.031773554643041,
+            8.77209186553955
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.336305034796351
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          7.212606430053711,
+          1.6680785894393921,
+          8.77209186553955
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          7.4195451736450195,
+          1.6345019340515137,
+          9.010247230529785
+        ],
+        "distance": 0.3172838055429515,
+        "distanceMinusRadius": 0.017283805542951503,
+        "triangle": 7050,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -0.6522196846359206,
+          0.10582530466823056,
+          -0.7506067464826681
+        ]
+      }
+    },
+    {
+      "frame": 390,
+      "position": [
+        7.203510284423828,
+        1.2868574857711792,
+        8.766160011291504
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            7.203510284423828,
+            1.031773548725286,
+            8.766160011291504
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 0.25508393704589327
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          7.203510284423828,
+          1.5868574857711792,
+          8.766160011291504
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          7.230060824449751,
+          1.4000763893127441,
+          9.018771454174466
+        ],
+        "distance": 0.31528503016365284,
+        "distanceMinusRadius": 0.015285030163652846,
+        "triangle": 6364,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -0.08421122947747166,
+          0.5924198061718436,
+          -0.8012161019882261
+        ]
+      }
+    },
+    {
+      "frame": 410,
+      "position": [
+        6.840120315551758,
+        1.0317745208740234,
+        8.615646362304688
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            6.840120315551758,
+            1.031773395932572,
+            8.615646362304688
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 1.1249414515468459e-06
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          6.840120315551758,
+          1.3317745208740235,
+          8.615646362304688
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          6.840120321518037,
+          1.0317733959328526,
+          8.615646652443823
+        ],
+        "distance": 0.3000011249413113,
+        "distanceMinusRadius": 1.1249413113256779e-06,
+        "triangle": 2188,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -1.9887522180287302e-08,
+          0.999999999999532,
+          -9.671268262231715e-07
+        ]
+      }
+    },
+    {
+      "frame": 450,
+      "position": [
+        6.661504745483398,
+        1.0317745208740234,
+        8.541664123535156
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            6.661504745483398,
+            1.0317733208301432,
+            8.541664123535156
+          ],
+          "triangle": 2188,
+          "footMinusSurfaceHeight": 1.2000438802672875e-06
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          6.661504745483398,
+          1.3317745208740235,
+          8.541664123535156
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          6.661504751449679,
+          1.0317733208304236,
+          8.541664413674365
+        ],
+        "distance": 0.30000120004374026,
+        "distanceMinusRadius": 1.200043740268164e-06,
+        "triangle": 2188,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          -1.988752312280226e-08,
+          0.999999999999532,
+          -9.671268268800244e-07
+        ]
+      }
+    },
+    {
+      "frame": 510,
+      "position": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            0.0,
+            1.0324290677529775,
+            9.0
+          ],
+          "triangle": 2914,
+          "footMinusSurfaceHeight": -1.558508696186678e-05
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          0.0,
+          1.3324134826660157,
+          9.0
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          -3.380672211184213e-08,
+          1.0324290677531893,
+          9.000000249953663
+        ],
+        "distance": 0.2999844149129324,
+        "distanceMinusRadius": -1.5585087067615522e-05,
+        "triangle": 2914,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          1.1269492824036944e-07,
+          0.9999999999996466,
+          -8.332221631353802e-07
+        ]
+      }
+    },
+    {
+      "frame": 540,
+      "position": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "grounded": true,
+      "verticalRayHits": [
+        {
+          "point": [
+            0.0,
+            1.0324290677529775,
+            9.0
+          ],
+          "triangle": 2914,
+          "footMinusSurfaceHeight": -1.558508696186678e-05
+        }
+      ],
+      "bottomSphere": {
+        "center": [
+          0.0,
+          1.3324134826660157,
+          9.0
+        ],
+        "radius": 0.3,
+        "nearestPoint": [
+          -3.380672211184213e-08,
+          1.0324290677531893,
+          9.000000249953663
+        ],
+        "distance": 0.2999844149129324,
+        "distanceMinusRadius": -1.5585087067615522e-05,
+        "triangle": 2914,
+        "source": "structural-collision.glb",
+        "contactNormal": [
+          1.1269492824036944e-07,
+          0.9999999999996466,
+          -8.332221631353802e-07
+        ]
+      }
+    }
+  ],
+  "scope": "Downward center rays against the two declared collision meshes explain planter surface heights. Capsule contact can use a leading or side surface; center rays do not replace the physics solver or prove native collision equivalence."
+}

@@ -42,12 +42,26 @@ $sceneRun = & build/reinstall-environment/venv/Scripts/python.exe `
 归档前保存命令、日志和输入指纹。
 任务完成后按[产物规则](../development/artifact-retention.md)标记目录。
 
-## 角色联合入口
+## 完整场景操控
 
-角色材质及可玩操作使用[角色项目](../acceptance/nr/main-character-integration.md)。
-该入口具有独立的相机、照明和内容组合。
-联合制作同时回归完整物流场景和角色材质。
-通用渲染能力按各自项目配置装配。
+```powershell
+& build/ninja-msvc-release/AzurePlayer.exe `
+  --project build/runs/20261031-183314-full-scene-playable-validation-d5257e/project/playable.azureproject `
+  --width 1920 --height 1080 `
+  --qa-camera scene --qa-light scene --qa-isolation beauty
+```
+
+单击游戏窗口获取操控焦点。
+WASD 移动，Shift 冲刺，移动鼠标转动相机。
+R 重开当前关卡，Esc 释放鼠标和焦点。
+同关卡重开包含较长的备用资源准备。
+
+该入口使用完整环境与 V8 动态角色。
+独立回放、碰撞及画面范围见[操控验收](../acceptance/recovery/full-scene-playable.md)。
+保存、移动和独立发布按交付接续验收。
+
+控制组件及原生片段的来源见[角色项目](../acceptance/nr/main-character-integration.md)。
+该来源项目具有独立的相机、照明和内容组合。
 
 ## 完整环境与角色
 

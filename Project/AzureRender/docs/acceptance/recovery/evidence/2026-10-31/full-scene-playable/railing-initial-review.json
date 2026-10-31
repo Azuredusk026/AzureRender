@@ -1,0 +1,13 @@
+{
+  "status": "failed-settling-window",
+  "frames": 240,
+  "minimumZ": 6.362800121307373,
+  "finalPosition": [
+    -0.001009443774819374,
+    1.167218565940857,
+    6.452399730682373
+  ],
+  "lastSixtyMaximumHorizontalSpeed": 0.08151122321608657,
+  "originalAssertion": "Final center must remain within 0.1 m of capsule tangent to barrier",
+  "diagnosis": "Held-input frames reach the queried barrier. After release, capsule follows edge contact toward the floor; final contact location differs from held blocking location. Extended held and settling observations retain nonpenetration and zero-speed requirements."
+}

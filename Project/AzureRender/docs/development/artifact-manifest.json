@@ -831,11 +831,11 @@
     {
       "path": "runs/20261031-183314-full-scene-playable-validation-d5257e",
       "pathBase": "build",
-      "purpose": "完整环境操控候选、重开诊断及匹配调试符号。",
+      "purpose": "完整环境操控验收、重开诊断及匹配调试符号。",
       "retention": "联合运行及生命周期门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "primaryProject": "project/playable.azureproject",
-      "evidence": "docs/acceptance/recovery/renderer-restart-recovery.md"
+      "evidence": "docs/acceptance/recovery/full-scene-playable.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

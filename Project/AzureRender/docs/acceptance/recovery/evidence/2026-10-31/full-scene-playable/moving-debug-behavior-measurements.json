@@ -1,0 +1,1484 @@
+{
+  "status": "measured-review-pending",
+  "frames": 540,
+  "windows": {
+    "idle": {
+      "frames": [
+        5,
+        28
+      ],
+      "firstPosition": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "lastPosition": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "medianHorizontalSpeed": 0.0,
+      "maximumHorizontalSpeed": 0.0,
+      "groundedFrames": 24,
+      "states": [
+        "idle"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          1.0,
+          1.0
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 0
+    },
+    "walk": {
+      "frames": [
+        60,
+        110
+      ],
+      "firstPosition": [
+        0.6000000238418579,
+        1.0324134826660156,
+        9.0
+      ],
+      "lastPosition": [
+        1.5999990701675415,
+        1.0324134826660156,
+        9.0
+      ],
+      "medianHorizontalSpeed": 1.1999988555908203,
+      "maximumHorizontalSpeed": 1.1999988555908203,
+      "groundedFrames": 51,
+      "states": [
+        "walk"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          1.611397965461947e-05,
+          0.01560425665229559
+        ],
+        "7": [
+          0.9843956232070923,
+          0.9999839067459106
+        ],
+        "8": [
+          1.1537228117308729e-10,
+          1.1968377577886713e-07
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 0
+    },
+    "run": {
+      "frames": [
+        150,
+        195
+      ],
+      "firstPosition": [
+        3.2510504722595215,
+        1.0811060667037964,
+        8.986726760864258
+      ],
+      "lastPosition": [
+        5.500635623931885,
+        1.0317745208740234,
+        8.98641586303711
+      ],
+      "medianHorizontalSpeed": 3.000011444091797,
+      "maximumHorizontalSpeed": 3.0009418008004043,
+      "groundedFrames": 46,
+      "states": [
+        "walk"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          1.4019825578248657e-10,
+          7.262450196776626e-08
+        ],
+        "7": [
+          5.359199712984264e-05,
+          0.022473502904176712
+        ],
+        "8": [
+          0.9775264263153076,
+          0.9999464154243469
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 0
+    },
+    "planter-traversal": {
+      "frames": [
+        230,
+        249
+      ],
+      "firstPosition": [
+        7.190529823303223,
+        1.5403016805648804,
+        8.917840957641602
+      ],
+      "lastPosition": [
+        7.827831268310547,
+        1.6014419794082642,
+        8.864537239074707
+      ],
+      "medianHorizontalSpeed": 1.982531526573529,
+      "maximumHorizontalSpeed": 3.000011444091797,
+      "groundedFrames": 20,
+      "states": [
+        "walk"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          0.001982550835236907,
+          0.02775104157626629
+        ],
+        "7": [
+          0.12420989573001862,
+          0.7101926207542419
+        ],
+        "8": [
+          0.2878248393535614,
+          0.850569486618042
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 19
+    },
+    "stop": {
+      "frames": [
+        255,
+        269
+      ],
+      "firstPosition": [
+        7.8415069580078125,
+        1.5977896451950073,
+        8.8580961227417
+      ],
+      "lastPosition": [
+        7.842366695404053,
+        1.5886472463607788,
+        8.84188461303711
+      ],
+      "medianHorizontalSpeed": 0.0693906775540772,
+      "maximumHorizontalSpeed": 0.07179813903333862,
+      "groundedFrames": 15,
+      "states": [
+        "idle"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          0.49705272912979126,
+          0.8778272867202759
+        ],
+        "7": [
+          0.10427676141262054,
+          0.37785908579826355
+        ],
+        "8": [
+          0.017895950004458427,
+          0.1250881552696228
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 15
+    },
+    "left": {
+      "frames": [
+        280,
+        298
+      ],
+      "firstPosition": [
+        7.643240928649902,
+        1.5847564935684204,
+        8.825817108154297
+      ],
+      "lastPosition": [
+        7.282683849334717,
+        1.5363653898239136,
+        8.814382553100586
+      ],
+      "medianHorizontalSpeed": 1.2036092884953709,
+      "maximumHorizontalSpeed": 1.2042307806660848,
+      "groundedFrames": 19,
+      "states": [
+        "walk"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          0.018492378294467926,
+          0.22527679800987244
+        ],
+        "7": [
+          0.7708109617233276,
+          0.9803550839424133
+        ],
+        "8": [
+          0.0011525630252435803,
+          0.003912264946848154
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 19
+    },
+    "unfocused": {
+      "frames": [
+        305,
+        328
+      ],
+      "firstPosition": [
+        7.2460126876831055,
+        1.4945322275161743,
+        8.810540199279785
+      ],
+      "lastPosition": [
+        7.228536128997803,
+        1.4471796751022339,
+        8.790425300598145
+      ],
+      "medianHorizontalSpeed": 0.0702088502954503,
+      "maximumHorizontalSpeed": 0.07609245396368083,
+      "groundedFrames": 24,
+      "states": [
+        "idle"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          0.5010380148887634,
+          0.9266937971115112
+        ],
+        "7": [
+          0.07328833639621735,
+          0.49852603673934937
+        ],
+        "8": [
+          1.7869173461804166e-05,
+          0.0004359472659416497
+        ]
+      },
+      "focused": [
+        false
+      ],
+      "cameraObstructedFrames": 24
+    },
+    "refocused": {
+      "frames": [
+        335,
+        358
+      ],
+      "firstPosition": [
+        7.224056243896484,
+        1.4310306310653687,
+        8.785268783569336
+      ],
+      "lastPosition": [
+        7.213224411010742,
+        1.3733562231063843,
+        8.77280330657959
+      ],
+      "medianHorizontalSpeed": 0.04396736438144502,
+      "maximumHorizontalSpeed": 0.05585282523783885,
+      "groundedFrames": 24,
+      "states": [
+        "idle"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          0.9421877264976501,
+          0.9680118560791016
+        ],
+        "7": [
+          0.031987883150577545,
+          0.05780551955103874
+        ],
+        "8": [
+          2.7704095373337623e-07,
+          6.758863946743077e-06
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 24
+    },
+    "orbit": {
+      "frames": [
+        365,
+        388
+      ],
+      "firstPosition": [
+        7.211310863494873,
+        1.3547571897506714,
+        8.770601272583008
+      ],
+      "lastPosition": [
+        7.209669589996338,
+        1.2923072576522827,
+        8.76871109008789
+      ],
+      "medianHorizontalSpeed": 0.006752805806104449,
+      "maximumHorizontalSpeed": 0.021071293203034847,
+      "groundedFrames": 24,
+      "states": [
+        "idle"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          0.9753156304359436,
+          0.9974060654640198
+        ],
+        "7": [
+          0.0025939105544239283,
+          0.024684293195605278
+        ],
+        "8": [
+          4.295202415960375e-09,
+          1.0478839840288856e-07
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 2
+    },
+    "forward": {
+      "frames": [
+        400,
+        418
+      ],
+      "firstPosition": [
+        7.024894714355469,
+        1.0317745208740234,
+        8.692178726196289
+      ],
+      "lastPosition": [
+        6.692300796508789,
+        1.0317745208740234,
+        8.554420471191406
+      ],
+      "medianHorizontalSpeed": 1.1999817175023693,
+      "maximumHorizontalSpeed": 1.1999817175023693,
+      "groundedFrames": 19,
+      "states": [
+        "walk"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          0.02057456411421299,
+          0.2504788637161255
+        ],
+        "7": [
+          0.7495211362838745,
+          0.9794254302978516
+        ],
+        "8": [
+          6.659218315663296e-11,
+          8.11258726862718e-10
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 0
+    },
+    "restarted": {
+      "frames": [
+        510,
+        539
+      ],
+      "firstPosition": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "lastPosition": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "medianHorizontalSpeed": 0.0,
+      "maximumHorizontalSpeed": 0.0,
+      "groundedFrames": 30,
+      "states": [
+        "idle"
+      ],
+      "sampleWeightRanges": {
+        "0": [
+          1.0,
+          1.0
+        ]
+      },
+      "focused": [
+        true
+      ],
+      "cameraObstructedFrames": 0
+    }
+  },
+  "levelRevisions": [
+    2,
+    3
+  ],
+  "revisionTransitions": [
+    {
+      "frame": 451,
+      "rowIndex": 450,
+      "before": 2,
+      "after": 3
+    }
+  ],
+  "minimumHeight": 1.0317745208740234,
+  "maximumX": 7.842366695404053,
+  "samples": [
+    {
+      "frame": 1,
+      "rowIndex": 0,
+      "position": [
+        0.0,
+        1.034999966621399,
+        9.0
+      ],
+      "speed": 0.0,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.0,
+          "weight": 1.0
+        }
+      ],
+      "camera": [
+        0.20000000298023224,
+        3.170276165008545,
+        12.863702774047852
+      ],
+      "target": [
+        0.0,
+        2.134999990463257,
+        9.0
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 30,
+      "rowIndex": 29,
+      "position": [
+        0.0066666677594184875,
+        1.0324134826660156,
+        9.0
+      ],
+      "speed": 0.40000006556510925,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.4833333333333333,
+          "weight": 0.956774890422821
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.10666666666666667,
+          "weight": 0.04322509840130806
+        }
+      ],
+      "camera": [
+        0.19850000739097595,
+        3.1599345207214355,
+        12.834725379943848
+      ],
+      "target": [
+        1.8277601654403952e-09,
+        2.132422924041748,
+        9.0
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 61,
+      "rowIndex": 60,
+      "position": [
+        0.6200000047683716,
+        1.0324134826660156,
+        9.0
+      ],
+      "speed": 1.1999988555908203,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.0000000000000013,
+          "weight": 0.013580909930169582
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.8963977386615154,
+          "weight": 0.9864189624786377
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.5602485866634471,
+          "weight": 1.0416374607302714e-07
+        }
+      ],
+      "camera": [
+        0.7083939909934998,
+        3.1599254608154297,
+        12.834725379943848
+      ],
+      "target": [
+        0.5098939538002014,
+        2.132413864135742,
+        9.0
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 120,
+      "rowIndex": 119,
+      "position": [
+        1.8066655397415161,
+        1.0324134826660156,
+        9.0
+      ],
+      "speed": 1.5999984741210938,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.9833333333333312,
+          "weight": 4.684286523115588e-06
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.819793823587576,
+          "weight": 0.9711787104606628
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.512371139742235,
+          "weight": 0.02881661057472229
+        }
+      ],
+      "camera": [
+        1.8881663084030151,
+        3.1599254608154297,
+        12.834725379943848
+      ],
+      "target": [
+        1.6896662712097168,
+        2.132413864135742,
+        9.0
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 151,
+      "rowIndex": 150,
+      "position": [
+        3.3010504245758057,
+        1.081106185913086,
+        8.986726760864258
+      ],
+      "speed": 2.999997138977051,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 2.499999999999996,
+          "weight": 6.320689749372832e-08
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.6387780570075736,
+          "weight": 0.01955946907401085
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.39923628562973346,
+          "weight": 0.9804404973983765
+        }
+      ],
+      "camera": [
+        3.2243704795837402,
+        3.208148956298828,
+        12.821579933166504
+      ],
+      "target": [
+        3.0258705615997314,
+        2.1806373596191406,
+        8.986854553222656
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 196,
+      "rowIndex": 195,
+      "position": [
+        5.550635814666748,
+        1.0317745208740234,
+        8.98641586303711
+      ],
+      "speed": 3.000011444091797,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.7499999999999966,
+          "weight": 1.2201800680955444e-10
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.773290964427822,
+          "weight": 4.664243897423148e-05
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.4833068527673887,
+          "weight": 0.9999533295631409
+        }
+      ],
+      "camera": [
+        5.47330379486084,
+        3.159379720687866,
+        12.82114315032959
+      ],
+      "target": [
+        5.274803638458252,
+        2.1318681240081787,
+        8.986417770385742
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 226,
+      "rowIndex": 225,
+      "position": [
+        7.033993244171143,
+        1.3828238248825073,
+        8.935076713562012
+      ],
+      "speed": 2.9921815046967146,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.2499999999999964,
+          "weight": 1.891749127139186e-12
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.5050622638838786,
+          "weight": 0.027480412274599075
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.3156639149274242,
+          "weight": 0.97251957654953
+        }
+      ],
+      "camera": [
+        6.961390018463135,
+        3.4853482246398926,
+        12.784958839416504
+      ],
+      "target": [
+        6.762889862060547,
+        2.457836627960205,
+        8.950233459472656
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 240,
+      "rowIndex": 239,
+      "position": [
+        7.61787748336792,
+        1.608960509300232,
+        8.872233390808105
+      ],
+      "speed": 2.5848521241729987,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.483333333333329,
+          "weight": 0.006919782143086195
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.848066275569145,
+          "weight": 0.1530413031578064
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.5300414222307156,
+          "weight": 0.8400388956069946
+        }
+      ],
+      "camera": [
+        7.5471720695495605,
+        3.5898680686950684,
+        12.313549995422363
+      ],
+      "target": [
+        7.369939804077148,
+        2.6724464893341064,
+        8.889686584472656
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 250,
+      "rowIndex": 249,
+      "position": [
+        7.838993549346924,
+        1.6006673574447632,
+        8.863574981689453
+      ],
+      "speed": 0.6722208312436698,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.649999999999995,
+          "weight": 0.058758724480867386
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.991196309030604,
+          "weight": 0.6907402276992798
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.6194976931441274,
+          "weight": 0.2505010664463043
+        }
+      ],
+      "camera": [
+        7.891108512878418,
+        3.620908498764038,
+        12.307220458984375
+      ],
+      "target": [
+        7.713188648223877,
+        2.6999266147613525,
+        8.87006950378418
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 270,
+      "rowIndex": 269,
+      "position": [
+        7.835768699645996,
+        1.5880755186080933,
+        8.84058952331543
+      ],
+      "speed": 0.40343388489059967,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.9833333333333272,
+          "weight": 0.8500739336013794
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.02756795095780736,
+          "weight": 0.13435080647468567
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.0172299693486296,
+          "weight": 0.015575287863612175
+        }
+      ],
+      "camera": [
+        8.02029037475586,
+        3.626230239868164,
+        12.33517837524414
+      ],
+      "target": [
+        7.839737892150879,
+        2.6916232109069824,
+        8.847177505493164
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 300,
+      "rowIndex": 299,
+      "position": [
+        7.251572608947754,
+        1.5103551149368286,
+        8.814382553100586
+      ],
+      "speed": 0.6666755676269531,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 2.4833333333333254,
+          "weight": 0.07163995504379272
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.7057790212349453,
+          "weight": 0.9274870157241821
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.4411118882718408,
+          "weight": 0.0008730263216421008
+        }
+      ],
+      "camera": [
+        7.535557270050049,
+        3.5944552421569824,
+        12.346691131591797
+      ],
+      "target": [
+        7.352773666381836,
+        2.648298740386963,
+        8.81558609008789
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 301,
+      "rowIndex": 300,
+      "position": [
+        7.249350547790527,
+        1.501836895942688,
+        8.814382553100586
+      ],
+      "speed": 0.13332366943359375,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 2.499999999999992,
+          "weight": 0.17761798202991486
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.7080295030811986,
+          "weight": 0.8216221928596497
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.44251843942574914,
+          "weight": 0.0007598163792863488
+        }
+      ],
+      "camera": [
+        7.516607284545898,
+        3.584446668624878,
+        12.334789276123047
+      ],
+      "target": [
+        7.334428787231445,
+        2.641420841217041,
+        8.815367698669434
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 330,
+      "rowIndex": 329,
+      "position": [
+        7.227208137512207,
+        1.4426425695419312,
+        8.788896560668945
+      ],
+      "speed": 0.060334035853125426,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.4833333333333252,
+          "weight": 0.9322006106376648
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.8982918321284635,
+          "weight": 0.0677858293056488
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.5614323950802897,
+          "weight": 1.3535274774767458e-05
+        }
+      ],
+      "camera": [
+        7.413275241851807,
+        3.4968738555908203,
+        12.308863639831543
+      ],
+      "target": [
+        7.231297016143799,
+        2.554884195327759,
+        8.793310165405273
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 331,
+      "rowIndex": 330,
+      "position": [
+        7.226558208465576,
+        1.4403506517410278,
+        8.788148880004883
+      ],
+      "speed": 0.05944041476842822,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.49999999999999184,
+          "weight": 0.934569239616394
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.9109078815718556,
+          "weight": 0.06541897356510162
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.5693174259824098,
+          "weight": 1.178008460556157e-05
+        }
+      ],
+      "camera": [
+        7.4125871658325195,
+        3.4949285984039307,
+        12.30908489227295
+      ],
+      "target": [
+        7.230556011199951,
+        2.5526652336120605,
+        8.792510032653809
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 360,
+      "rowIndex": 359,
+      "position": [
+        7.212606430053711,
+        1.368078589439392,
+        8.77209186553955
+      ],
+      "speed": 0.027600687424859632,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.9833333333333266,
+          "weight": 0.9700655937194824
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.23888306537703263,
+          "weight": 0.029934214428067207
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.1493019158606454,
+          "weight": 2.0984886361929966e-07
+        }
+      ],
+      "camera": [
+        7.398565769195557,
+        3.434326171875,
+        12.326950073242188
+      ],
+      "target": [
+        7.214607238769531,
+        2.4824233055114746,
+        8.774393081665039
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 361,
+      "rowIndex": 360,
+      "position": [
+        7.2123188972473145,
+        1.36542809009552,
+        8.771760940551758
+      ],
+      "speed": 0.02630344586323345,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.9999999999999933,
+          "weight": 0.9711049199104309
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.2515261924901075,
+          "weight": 0.028894908726215363
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.15720387030631716,
+          "weight": 1.8263665424456121e-07
+        }
+      ],
+      "camera": [
+        10.725123405456543,
+        2.7238335609436035,
+        10.02631664276123
+      ],
+      "target": [
+        7.214244365692139,
+        2.479823112487793,
+        8.77397632598877
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 390,
+      "rowIndex": 389,
+      "position": [
+        7.203510284423828,
+        1.2868574857711792,
+        8.766160011291504
+      ],
+      "speed": 0.40000271671493126,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.483333333333325,
+          "weight": 0.954809844493866
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.523151071973545,
+          "weight": 0.045190177857875824
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.3269694199834656,
+          "weight": 3.2534659410998756e-09
+        }
+      ],
+      "camera": [
+        10.944952011108398,
+        2.661485195159912,
+        10.101139068603516
+      ],
+      "target": [
+        7.209722518920898,
+        2.4018821716308594,
+        8.76877212524414
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 420,
+      "rowIndex": 419,
+      "position": [
+        6.663558006286621,
+        1.0317745208740234,
+        8.54251480102539
+      ],
+      "speed": 0.6666769820527283,
+      "state": "walk",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.9833333333333232,
+          "weight": 0.07321858406066895
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.22016127968601465,
+          "weight": 0.926781415939331
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.13760079980375917,
+          "weight": 5.0441255339261915e-11
+        }
+      ],
+      "camera": [
+        10.49293327331543,
+        2.393993377685547,
+        9.913837432861328
+      ],
+      "target": [
+        6.757022857666016,
+        2.134343147277832,
+        8.581228256225586
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 450,
+      "rowIndex": 449,
+      "position": [
+        6.661504745483398,
+        1.0317745208740234,
+        8.541664123535156
+      ],
+      "speed": 0.0,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 2.4833333333333214,
+          "weight": 0.9853746294975281
+        },
+        {
+          "clip": 7,
+          "duration": 1.0666666666666667,
+          "loop": true,
+          "time": 0.2224171423661483,
+          "weight": 0.014625382609665394
+        },
+        {
+          "clip": 8,
+          "duration": 0.6666666666666666,
+          "loop": true,
+          "time": 0.13901071397884268,
+          "weight": 7.820338343914046e-13
+        }
+      ],
+      "camera": [
+        10.397653579711914,
+        2.3914313316345215,
+        9.874373435974121
+      ],
+      "target": [
+        6.661742687225342,
+        2.1317808628082275,
+        8.541763305664062
+      ],
+      "levelRevision": 2,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 451,
+      "rowIndex": 450,
+      "position": [
+        0.0,
+        1.0324113368988037,
+        9.0
+      ],
+      "speed": 400.6352232381839,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.016666666666666666,
+          "weight": 1.0
+        }
+      ],
+      "camera": [
+        0.20000000298023224,
+        3.170276165008545,
+        12.863702774047852
+      ],
+      "target": [
+        0.0,
+        2.134999990463257,
+        9.0
+      ],
+      "levelRevision": 3,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 452,
+      "rowIndex": 451,
+      "position": [
+        0.0,
+        1.0324137210845947,
+        9.0
+      ],
+      "speed": 0.0,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.03333333333333333,
+          "weight": 1.0
+        }
+      ],
+      "camera": [
+        0.19850000739097595,
+        3.1620423793792725,
+        12.834725379943848
+      ],
+      "target": [
+        0.0,
+        2.134530782699585,
+        9.0
+      ],
+      "levelRevision": 3,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": false
+    },
+    {
+      "frame": 480,
+      "rowIndex": 479,
+      "position": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "speed": 0.0,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 0.49999999999999994,
+          "weight": 1.0
+        }
+      ],
+      "camera": [
+        0.19850000739097595,
+        3.159932851791382,
+        12.834725379943848
+      ],
+      "target": [
+        0.0,
+        2.1324212551116943,
+        9.0
+      ],
+      "levelRevision": 3,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 511,
+      "rowIndex": 510,
+      "position": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "speed": 0.0,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.016666666666668,
+          "weight": 1.0
+        }
+      ],
+      "camera": [
+        0.19850000739097595,
+        3.1599254608154297,
+        12.834725379943848
+      ],
+      "target": [
+        0.0,
+        2.132413864135742,
+        9.0
+      ],
+      "levelRevision": 3,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    },
+    {
+      "frame": 540,
+      "rowIndex": 539,
+      "position": [
+        0.0,
+        1.0324134826660156,
+        9.0
+      ],
+      "speed": 0.0,
+      "state": "idle",
+      "samples": [
+        {
+          "clip": 0,
+          "duration": 2.5,
+          "loop": true,
+          "time": 1.4999999999999996,
+          "weight": 1.0
+        }
+      ],
+      "camera": [
+        0.19850000739097595,
+        3.1599254608154297,
+        12.834725379943848
+      ],
+      "target": [
+        0.0,
+        2.132413864135742,
+        9.0
+      ],
+      "levelRevision": 3,
+      "levelReference": "stage:/playable.azurelevel",
+      "loading": true
+    }
+  ],
+  "scope": "Speeds derive from observed position differences at fixed 60 Hz; physics integrator velocity is not displacement. Observation frame is the completed-frame counter; input frame is the pre-step counter."
+}
