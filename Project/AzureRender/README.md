@@ -28,6 +28,8 @@
 
 采样位移校正及历史运动接收见[运动验证](docs/acceptance/nr/projected-history-motion.md)。
 
+成功提交身份、实际采样及完整场景见[历史装配](docs/acceptance/nr/projected-main-history.md)。
+
 重装与迁移后先阅读[恢复交接](docs/plans/2026-10-29-reinstall-handoff.md)。
 
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。

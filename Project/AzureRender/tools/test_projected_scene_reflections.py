@@ -1,4 +1,4 @@
-"""Validate the projected current-frame producer through actual Player scenes."""
+"""Validate projected current-frame and submitted-history production through actual Player scenes."""
 from pathlib import Path
 import argparse
 import json
@@ -35,10 +35,19 @@ def main():
                 if case.get('antiAliasing')==3:assert manifest['antiAliasingPipeline']=='native-hdr-temporal-v4' and manifest['temporalHistorySubmission']>0
                 if case.get('algorithm')=='projected':
                     assert manifest['screenReflectionComputePrepared'] and manifest['screenReflectionComputeActive'],diagnostic
-                    assert manifest['screenReflectionAlgorithm']=='projected' and manifest['screenReflectionProducer']=='projected-current-frame',diagnostic
-                    assert not manifest['screenReflectionTemporalPrepared'] and not manifest['screenReflectionHistoryValid'],diagnostic
+                    temporal=case.get('antiAliasing',0)!=4
+                    history=temporal and case.get('frames',1)>1
+                    assert manifest['screenReflectionAlgorithm']=='projected' and manifest['screenReflectionProducer']==('projected-history' if history else 'projected-current-frame'),diagnostic
+                    assert manifest['screenReflectionTemporalPrepared']==temporal and manifest['screenReflectionTemporalActive']==temporal,diagnostic
+                    assert manifest['screenReflectionHistoryValid']==history,diagnostic
+                    assert manifest['screenReflectionHistoryInputSubmission']==(case['frames']-1 if history else 0),diagnostic
+                    if case.get('antiAliasing',0)==3:
+                        assert np.allclose(manifest['screenReflectionMotionUvOffset'],[.5/320,(-5/9)/240],rtol=0,atol=1e-8),diagnostic
+                        assert not manifest['screenReflectionOwnsMotion'],diagnostic
+                    elif temporal:assert manifest['screenReflectionOwnsMotion'],diagnostic
+                    else:assert manifest['screenReflectionTemporalPreparation']=='multisample-motion-unavailable',diagnostic
                     assert manifest['screenReflectionWidth']==160 and manifest['screenReflectionHeight']==120,diagnostic
-                    record['producer']=dict(algorithm=manifest['screenReflectionAlgorithm'],mode=manifest['screenReflectionProducer'],historyValid=False)
+                    record['producer']=dict(algorithm=manifest['screenReflectionAlgorithm'],mode=manifest['screenReflectionProducer'],historyValid=history,inputSubmission=manifest['screenReflectionHistoryInputSubmission'])
             expected=lab.oracle(lab.LEFT);off=images['off'][0]
             positive=lab.measure_reflection(images['on'][0],off,expected,backend+'-projected');report['metrics'].append(positive)
             all_frames[backend]=images

@@ -39,17 +39,21 @@ void CharacterSceneRenderer::initializeMotion(const RenderContext& context){
 void CharacterSceneRenderer::onFrameSubmitted(std::uint64_t submission) noexcept{
     if(temporalView_.commit(submission)){
         motionPoses_.commit(submission);
-        if(reflectionPendingSlot_&&submission>reflectionHistorySubmission_){reflectionHistorySlot_=*reflectionPendingSlot_;reflectionHistorySubmission_=submission;}
+        if(reflectionPendingSlot_&&submission>reflectionHistorySubmission_){
+            reflectionHistorySlot_=*reflectionPendingSlot_;reflectionHistorySubmission_=submission;
+            if(reflectionPendingView_){reflectionHistoryView_=*reflectionPendingView_;reflectionHistoryJitterUv_=reflectionPendingJitterUv_;}
+        }
     }
-    reflectionPendingSlot_.reset();
+    reflectionPendingSlot_.reset();reflectionPendingView_.reset();
     state_.temporalFrame=temporalView_.committed()?&*temporalView_.committed():nullptr;
 }
 void CharacterSceneRenderer::onFrameAbandoned() noexcept{
-    temporalView_.cancel();motionPoses_.cancel();reflectionPendingSlot_.reset();
+    temporalView_.cancel();motionPoses_.cancel();reflectionPendingSlot_.reset();reflectionPendingView_.reset();
     state_.temporalFrame=temporalView_.committed()?&*temporalView_.committed():nullptr;
 }
 void CharacterSceneRenderer::prepareMotion(){
-    motionDraws_.clear();reflectionMotionDraws_.clear();reflectionPendingSlot_.reset();reflectionHistoryValid_[currentFrame_]=false;
+    motionDraws_.clear();reflectionMotionDraws_.clear();reflectionPendingSlot_.reset();reflectionPendingView_.reset();reflectionHistoryValid_[currentFrame_]=false;
+    reflectionMotionUvOffsets_[currentFrame_]={};reflectionInputSubmissions_[currentFrame_]=0;
     motionPreviousValidObjects_=0;if(!motionPass_||!instanceSnapshot_)return;
     const auto& snapshot=*instanceSnapshot_;
     std::vector<MotionPoseState> poses;poses.reserve(snapshot.instances.size());

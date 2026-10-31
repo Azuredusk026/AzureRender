@@ -165,6 +165,9 @@ private:
     void createScreenReflectionResources(const RenderContext&);
     void destroyScreenReflectionResources();
     void destroyReflectionHistoryResources();
+    void createReflectionMotionResources(const RenderContext&);
+    bool screenReflectionTemporalPrepared() const noexcept{return reflectionReprojection_||projectedReflectionHistoryPrepared_;}
+    bool reflectionHistoryAvailable(unsigned slot) const noexcept;
     void recordScreenReflection(rhi::ICommandRecorder&,unsigned,const ReflectionTraceInputs&,const ReflectionTraceView&,const ScreenSpaceReflectionSettings&);
     VkFramebuffer reflectionMotionFramebuffer(unsigned slot) const;
     void publishScreenReflectionOutput(unsigned frame);
@@ -177,10 +180,16 @@ private:
     ScreenSpaceReflectionAlgorithm reflectionAlgorithmRequest_=ScreenSpaceReflectionAlgorithm::Linear;
     std::string reflectionFallbackReason_;
     std::unique_ptr<ReflectionReprojectionGpu> reflectionReprojection_;
+    bool projectedReflectionHistoryPrepared_=false;
     std::unique_ptr<MotionVectorTarget> reflectionOwnedMotion_;
     std::array<VkFramebuffer,kMaxFramesInFlight> reflectionMotionFramebuffers_{};
     std::array<bool,kMaxFramesInFlight> reflectionHistoryValid_{};
     std::optional<unsigned> reflectionPendingSlot_;
+    std::optional<ReflectionTraceView> reflectionPendingView_;
+    ReflectionTraceView reflectionHistoryView_{};
+    std::array<float,2> reflectionPendingJitterUv_{},reflectionHistoryJitterUv_{};
+    std::array<std::array<float,2>,kMaxFramesInFlight> reflectionMotionUvOffsets_{};
+    std::array<std::uint64_t,kMaxFramesInFlight> reflectionInputSubmissions_{};
     std::uint64_t reflectionHistorySubmission_=0;
     unsigned reflectionHistorySlot_=0;
     std::string reflectionHistoryPreparation_;

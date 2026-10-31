@@ -20,7 +20,20 @@ void CharacterSceneRenderer::createScreenReflectionResources(const RenderContext
                 try{
                     projectedReflections_=std::make_unique<ProjectedScreenReflectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),
                         ProjectedScreenReflectionShaders::load(shaderDirectory_),7,resolutionDivisor);
-                    reflectionPreparation_="projected-current-frame";reflectionHistoryPreparation_="current-frame";return;
+                    reflectionPreparation_="projected-compute";
+                    reflectionHistoryPreparation_="multisample-motion-unavailable";
+                    const auto pixels=std::uint64_t(context.renderExtent.width)*context.renderExtent.height;
+                    if(context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT){
+                        if(context.descriptorLimits.maxPerStageDescriptorStorageBuffers&&context.descriptorLimits.maxPerStageDescriptorStorageBuffers<6)
+                            reflectionHistoryPreparation_="geometry-storage-limits";
+                        else if(!context.motionOutput&&pixels>MotionVectorTarget::kMaximumBytes/MotionVectorTarget::kBytesPerPixel)
+                            reflectionHistoryPreparation_="motion-budget";
+                        else try{
+                            createReflectionMotionResources(context);projectedReflectionHistoryPrepared_=true;
+                            reflectionHistoryPreparation_="projected-temporal";
+                        }catch(const std::exception& error){destroyReflectionHistoryResources();reflectionHistoryPreparation_=error.what();}
+                    }
+                    return;
                 }catch(const std::exception& error){projectedReflections_.reset();reflectionFallbackReason_=error.what();}
             }else reflectionFallbackReason_="projected-formats-or-budget";
         }
@@ -36,11 +49,7 @@ void CharacterSceneRenderer::createScreenReflectionResources(const RenderContext
         const auto shaders=ScreenReflectionShaders::load(shaderDirectory_);
         if(temporal){
             try{
-                if(!context.motionOutput)reflectionOwnedMotion_=std::make_unique<MotionVectorTarget>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,
-                    std::vector<VkImageView>(overlayDepthViews_.begin(),overlayDepthViews_.end()));
-                auto* motion=context.motionOutput?context.motionOutput:reflectionOwnedMotion_.get();
-                if(context.motionOutput)for(unsigned frame=0;frame<kMaxFramesInFlight;++frame)
-                    reflectionMotionFramebuffers_[frame]=rhi_->createFramebuffer({motion->renderPass(),{motion->view(),motion->surfaceDepthView(),overlayDepthViews_[frame]},context.renderExtent.width,context.renderExtent.height});
+                createReflectionMotionResources(context);
                 reflectionReprojection_=std::make_unique<ReflectionReprojectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),readBinaryFile(shaderDirectory_+"/reflection_reprojection.comp.spv"),resolutionDivisor);
                 screenReflections_=std::make_unique<ScreenReflectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),shaders,7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor,true);
                 reflectionHistoryPreparation_="temporal";
@@ -58,8 +67,20 @@ void CharacterSceneRenderer::destroyScreenReflectionResources(){
 }
 void CharacterSceneRenderer::destroyReflectionHistoryResources(){
     for(auto& framebuffer:reflectionMotionFramebuffers_){if(framebuffer)rhi_->destroyFramebuffer(framebuffer);framebuffer=VK_NULL_HANDLE;}
-    reflectionReprojection_.reset();reflectionOwnedMotion_.reset();reflectionPendingSlot_.reset();
+    reflectionReprojection_.reset();reflectionOwnedMotion_.reset();reflectionPendingSlot_.reset();reflectionPendingView_.reset();projectedReflectionHistoryPrepared_=false;
+    reflectionHistoryView_={};reflectionPendingJitterUv_={};reflectionHistoryJitterUv_={};reflectionMotionUvOffsets_={};reflectionInputSubmissions_={};
     reflectionHistorySubmission_=0;reflectionHistorySlot_=0;reflectionHistoryValid_.fill(false);reflectionHistoryPreparation_="not-requested";
+}
+void CharacterSceneRenderer::createReflectionMotionResources(const RenderContext& context){
+    if(!context.motionOutput)reflectionOwnedMotion_=std::make_unique<MotionVectorTarget>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,
+        std::vector<VkImageView>(overlayDepthViews_.begin(),overlayDepthViews_.end()));
+    auto* motion=context.motionOutput?context.motionOutput:reflectionOwnedMotion_.get();
+    if(context.motionOutput)for(unsigned frame=0;frame<kMaxFramesInFlight;++frame)
+        reflectionMotionFramebuffers_[frame]=rhi_->createFramebuffer({motion->renderPass(),{motion->view(),motion->surfaceDepthView(),overlayDepthViews_[frame]},context.renderExtent.width,context.renderExtent.height});
+}
+bool CharacterSceneRenderer::reflectionHistoryAvailable(unsigned slot) const noexcept{
+    const auto* temporal=state_.temporalFrame;
+    return temporal&&temporal->previous&&reflectionHistorySubmission_&&temporal->previousSubmission==reflectionHistorySubmission_&&reflectionHistorySlot_!=slot;
 }
 VkFramebuffer CharacterSceneRenderer::reflectionMotionFramebuffer(unsigned slot) const{
     return reflectionOwnedMotion_?reflectionOwnedMotion_->framebuffer(slot):reflectionMotionFramebuffers_.at(slot);
@@ -68,11 +89,22 @@ void CharacterSceneRenderer::recordScreenReflection(rhi::ICommandRecorder& comma
     publishScreenReflectionOutput(slot);
     if(projectedReflections_){
         ProjectedScreenReflectionParameters parameters;parameters.maxSteps=settings.maxSteps;parameters.edgeFade=settings.edgeFade;parameters.maxRoughness=settings.maxRoughness;parameters.strength=settings.strength;
-        projectedReflections_->record(commands,slot,{inputs.surface,inputs.color,VK_NULL_HANDLE,{inputs.width,inputs.height}},view,parameters);return;
+        const std::array<float,2> jitterUv{samplingJitter_[0]/inputs.width,samplingJitter_[1]/inputs.height};
+        const bool valid=projectedReflectionHistoryPrepared_&&reflectionHistoryAvailable(slot);
+        ProjectedScreenReflectionHistory history;
+        if(valid){
+            history={reflectionHistorySlot_,opaqueSceneColor_[reflectionHistorySlot_].view,reflectionHistoryView_};
+            for(unsigned axis=0;axis<2;++axis)parameters.motionUvOffset[axis]=jitterUv[axis]-reflectionHistoryJitterUv_[axis];
+            parameters.requireTrackedMotion=true;
+        }
+        projectedReflections_->record(commands,slot,{inputs.surface,inputs.color,projectedReflectionHistoryPrepared_?motionTarget_->view():VK_NULL_HANDLE,{inputs.width,inputs.height}},view,parameters,valid?&history:nullptr);
+        reflectionHistoryValid_[slot]=valid;reflectionMotionUvOffsets_[slot]=parameters.motionUvOffset;reflectionInputSubmissions_[slot]=valid?reflectionHistorySubmission_:0;
+        if(projectedReflectionHistoryPrepared_){reflectionPendingSlot_=slot;reflectionPendingView_=view;reflectionPendingJitterUv_=jitterUv;}
+        return;
     }
     if(!reflectionReprojection_){screenReflections_->record(commands,slot,inputs,view,settings);return;}
     const auto* temporal=state_.temporalFrame;
-    const bool valid=temporal&&temporal->previous&&reflectionHistorySubmission_&&temporal->previousSubmission==reflectionHistorySubmission_&&reflectionHistorySlot_!=slot;
+    const bool valid=reflectionHistoryAvailable(slot);
     ReflectionReprojectionParameters parameters;parameters.historyValid=valid;
     if(temporal){const auto& projection=temporal->previous?temporal->previous->projection:temporal->current.projection;parameters.previousDepthProjection={projection[10],projection[14],projection[11],projection[15]};}
     reflectionReprojection_->record(commands,slot,{inputs.surface,motionTarget_->view(),valid?reflectionReprojection_->output(reflectionHistorySlot_).motion:VK_NULL_HANDLE,inputs.width,inputs.height},parameters);
@@ -80,7 +112,7 @@ void CharacterSceneRenderer::recordScreenReflection(rhi::ICommandRecorder& comma
     history.motion=reprojection.motion;history.acceptance=reprojection.acceptance;history.parameters.historyValid=valid;
     if(valid){const auto previous=screenReflections_->history(reflectionHistorySlot_);history.previousColor=previous.color;history.previousConfidence=previous.confidence;}
     screenReflections_->record(commands,slot,inputs,view,settings,&history);
-    reflectionHistoryValid_[slot]=valid;reflectionPendingSlot_=slot;
+    reflectionHistoryValid_[slot]=valid;reflectionInputSubmissions_[slot]=valid?reflectionHistorySubmission_:0;reflectionPendingSlot_=slot;
 }
 void CharacterSceneRenderer::publishScreenReflectionOutput(unsigned frame){
     if(reflectionDescriptorPublished_.at(frame))return;
@@ -97,7 +129,7 @@ ReflectionFilterOutput CharacterSceneRenderer::screenReflectionOutput(unsigned s
 const char* CharacterSceneRenderer::screenReflectionProducer(unsigned slot) const{
     if(!reflectionShadingActive_.at(slot))return "disabled";
     if(!reflectionActive_.at(slot))return "fragment";
-    if(projectedReflections_)return "projected-current-frame";
+    if(projectedReflections_)return reflectionHistoryValid_.at(slot)?"projected-history":"projected-current-frame";
     return reflectionReprojection_?"linear-temporal":"linear-current-frame";
 }
 std::string CharacterSceneRenderer::screenReflectionFallback(unsigned slot) const{

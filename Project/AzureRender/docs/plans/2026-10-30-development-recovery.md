@@ -41,6 +41,9 @@
 
 完整环境与角色的固定位置联合画面见[组合验证](../acceptance/recovery/full-scene-character.md)。
 
+投影反射的成功提交历史及受影响回归见[场景装配](../acceptance/nr/projected-main-history.md)。
+投影候选的过滤清晰度继续按 NR5 核对。
+
 编辑器、运行时、发布及路径追踪已有实现和证据。
 原生还原的公共机制已有多项局部验证。
 正式状态仍为 NR0 开发中、NR1 至 NR12 待完成。

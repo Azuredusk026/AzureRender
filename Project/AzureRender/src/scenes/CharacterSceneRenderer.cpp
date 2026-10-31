@@ -1350,7 +1350,7 @@ void CharacterSceneRenderer::registerPasses(
         }
     };
     std::array<RenderGraph::ResourceId,2> reflectionMotionResources{};
-    if(reflectionReprojection_&&reflectionActive_[context.currentFrame]){
+    if(screenReflectionTemporalPrepared()&&reflectionActive_[context.currentFrame]){
         if(context.motionOutput){
             if(resources.motion==UINT32_MAX||resources.motionSurfaceDepth==UINT32_MAX)throw std::invalid_argument("Shared reflection motion requires imported view outputs");
             reflectionMotionResources={resources.motion,resources.motionSurfaceDepth};
@@ -1377,7 +1377,13 @@ void CharacterSceneRenderer::registerPasses(
             recordScreenReflection(commands,slot,inputs,view,settings);
         },true);
         graph.use(producer,overlayDepth,RenderGraphUsage::ComputeSampled,false);graph.use(producer,snapshotColor,RenderGraphUsage::ComputeSampled,false);
-        if(reflectionReprojection_)graph.use(producer,reflectionMotionResources[0],RenderGraphUsage::ComputeSampled,false);
+        if(screenReflectionTemporalPrepared())graph.use(producer,reflectionMotionResources[0],RenderGraphUsage::ComputeSampled,false);
+        if(projectedReflectionHistoryPrepared_&&reflectionHistoryAvailable(slot)){
+            rhi::ImageBarrierDesc previous;previous.image=opaqueSceneColor_[reflectionHistorySlot_].image.image;
+            previous.newLayout=VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;previous.dstStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+            previous.dstAccessMask=VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+            graph.use(producer,graph.importImage("character-reflection-previous-color",previous),RenderGraphUsage::ComputeSampled,false);
+        }
         graph.write(producer,*reflectionResource);
     }
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
@@ -1499,7 +1505,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     if(snapshotMultisampling_)snapshotMultisampling_->recordResolve(*context.commands,context.currentFrame,context.currentFrame);
     if(screenReflectionPrepared()&&reflectionActive_[context.currentFrame]){
         const auto slot=context.currentFrame;
-        if(reflectionReprojection_){
+        if(screenReflectionTemporalPrepared()){
             context.commands->imageBarrier({overlayDepthAttachments_[slot].image,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,
                 VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
             motionPass_->recordToFramebuffer(*context.commands,slot,reflectionMotionFramebuffer(slot),context.renderExtent,reflectionMotionDraws_);
@@ -1507,6 +1513,9 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
                 VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
         }
         for(const auto image:{overlaySceneDepth_[slot].image.image,opaqueSceneColor_[slot].image.image})context.commands->imageBarrier({image,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        if(projectedReflectionHistoryPrepared_&&reflectionHistoryAvailable(slot))context.commands->imageBarrier({opaqueSceneColor_[reflectionHistorySlot_].image.image,
             VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
             VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
         recordScreenReflection(*context.commands,slot,{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height},
@@ -1621,13 +1630,15 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"screenReflectionProducer\": " << std::quoted(screenReflectionProducer(static_cast<unsigned>(currentFrame_))) << ",\n"
          << "  \"screenReflectionFallback\": " << nlohmann::json(screenReflectionFallback(static_cast<unsigned>(currentFrame_))).dump() << ",\n"
          << "  \"screenReflectionComputeActive\": " << (reflectionActive_[currentFrame_]?"true":"false") << ",\n"
-         << "  \"screenReflectionTemporalPrepared\": " << (reflectionReprojection_?"true":"false") << ",\n"
-         << "  \"screenReflectionTemporalActive\": " << (reflectionReprojection_&&reflectionActive_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"screenReflectionTemporalPrepared\": " << (screenReflectionTemporalPrepared()?"true":"false") << ",\n"
+         << "  \"screenReflectionTemporalActive\": " << (screenReflectionTemporalPrepared()&&reflectionActive_[currentFrame_]?"true":"false") << ",\n"
          << "  \"screenReflectionTemporalPreparation\": " << std::quoted(reflectionHistoryPreparation_) << ",\n"
          << "  \"screenReflectionHistoryValid\": " << (reflectionHistoryValid_[currentFrame_]?"true":"false") << ",\n"
          << "  \"screenReflectionHistorySubmission\": " << reflectionHistorySubmission_ << ",\n"
+         << "  \"screenReflectionHistoryInputSubmission\": " << reflectionInputSubmissions_[currentFrame_] << ",\n"
+         << "  \"screenReflectionMotionUvOffset\": " << nlohmann::json(reflectionMotionUvOffsets_[currentFrame_]).dump() << ",\n"
          << "  \"screenReflectionOwnsMotion\": " << (reflectionOwnedMotion_?"true":"false") << ",\n"
-         << "  \"screenReflectionMotionBytes\": " << (reflectionReprojection_&&motionTarget_?motionTarget_->byteSize():0) << ",\n"
+         << "  \"screenReflectionMotionBytes\": " << (screenReflectionTemporalPrepared()&&motionTarget_?motionTarget_->byteSize():0) << ",\n"
          << "  \"screenReflectionReprojectionBytes\": " << (reflectionReprojection_?reflectionReprojection_->byteSize():0) << ",\n"
          << "  \"screenReflectionPreparation\": " << std::quoted(reflectionPreparation_) << ",\n"
          << "  \"screenReflectionLevels\": " << (projectedReflections_?projectedReflections_->levels():screenReflections_?screenReflections_->levels():0) << ",\n"

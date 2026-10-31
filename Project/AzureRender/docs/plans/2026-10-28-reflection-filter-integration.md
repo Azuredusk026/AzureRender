@@ -408,10 +408,12 @@ R6 已组合公共生产、深度金字塔和足迹过滤。
 
 R7 通过类型化算法装配主场景当前帧生产。
 镜面几何、运动及抗锯齿见[场景验证](../acceptance/nr/projected-main-scene.md)。
-R8 接续实际运动、采样抖动差及成功提交的历史输入。
+R8 装配实际运动、采样抖动差及成功提交的历史输入。
+完整场景与生命周期见[历史验证](../acceptance/nr/projected-main-history.md)。
 
 公共 UV 校正和运动响应见[运动验证](../acceptance/nr/projected-history-motion.md)。
-场景历史装配按成功提交、取消及快照复用核对。
+场景历史已核对成功提交、取消及快照复用。
+投影候选的粗糙度来源、足迹尺度与过滤清晰度继续验收。
 
 算术顺序、工具及来源见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
 原始载荷及精度范围见[射线来源](../acceptance/nr/native-ray-source.md)。

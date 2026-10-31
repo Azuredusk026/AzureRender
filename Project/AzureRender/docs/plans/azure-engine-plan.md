@@ -39,7 +39,8 @@ Vulkan 三份完整输出及双配置回归见[参考验证](../acceptance/nr/na
 接续投影历史的实际运动、采样抖动及成功提交身份。
 
 公共 UV 校正和运动响应见[运动验证](../acceptance/nr/projected-history-motion.md)。
-场景按成功提交的历史槽位装配实际输入。
+主场景成功提交、取消及实际采样见[历史装配](../acceptance/nr/projected-main-history.md)。
+完整环境和角色分别验证，投影足迹清晰度继续核对。
 
 ## 代码检索与证据管理
 
