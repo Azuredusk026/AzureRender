@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "visualAcceptance": "failed-user-review",
+  "scope": "Five same-pose component pairs with shared diagnostic exposure; complete actor/scene visual quality remains unaccepted.",
+  "captures": 10,
+  "frozenInputFiles": 37,
+  "protectedUserFiles": 4,
+  "environmentControlPairsExact": 10,
+  "linksChecked": 601,
+  "renderSourceCommit": "e759b52",
+  "renderPlayerSha256": "88ddbcafd7205aa6ab5cc94c71d507f61634058388e74d523e226d00e3d96e2f"
+}

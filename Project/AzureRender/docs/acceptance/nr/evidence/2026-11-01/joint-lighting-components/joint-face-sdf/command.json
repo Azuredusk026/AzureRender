@@ -1,0 +1,26 @@
+{
+  "name": "joint-face-sdf",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261031-231334-receiver-directional-light-911ab7\\project\\near-control.azureproject",
+    "--width",
+    "1536",
+    "--height",
+    "1536",
+    "--capture-frames",
+    "1",
+    "--fixed-frame-step",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\joint-face-sdf\\frames",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--qa-isolation",
+    "face-sdf",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\joint-face-sdf\\runtime.json"
+  ],
+  "status": "running"
+}

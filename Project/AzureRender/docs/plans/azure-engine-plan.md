@@ -54,6 +54,11 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 固定位置与可玩出生点均在最细辐照层内部。
 完整数值及范围见[材质与姿态核验](../acceptance/nr/native-material-input-audit.md)。
 
+同曝光的[照明分项](../acceptance/nr/joint-lighting-components.md)显示角色环境贡献偏强。
+受测区域的直接漫反射中位量为零，墙面控制保持一致。
+角色主光、阴影与源曝光换算继续组合验证。
+换算契约按[材质辐亮度计划](2026-11-01-material-radiance-normalization.md)实施。
+
 | 阶段 | 交付与通过条件 | 当前状态 |
 | --- | --- | --- |
 | Q0 参考输入锁定 | 项目、材质、程序及采集参数可校验 | 已完成 |

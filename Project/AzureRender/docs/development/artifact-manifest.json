@@ -873,6 +873,14 @@
       "pinMarker": ".keep",
       "primaryProject": "material-ab/reference.azureproject",
       "evidence": "docs/acceptance/nr/native-material-input-audit.md"
+    },
+    {
+      "path": "runs/20261101-014745-joint-display-domain-diagnosis-8779a0",
+      "pathBase": "build",
+      "purpose": "同机位角色照明分项、原始帧及来源核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/joint-lighting-components.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

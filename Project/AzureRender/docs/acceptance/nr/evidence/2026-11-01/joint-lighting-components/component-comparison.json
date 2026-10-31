@@ -1,0 +1,676 @@
+{
+  "status": "measured",
+  "scope": "Same geometry, camera and pose. Radiometric images share -2EV and empty grade LUT. Linear-display values are LDR diagnostic measurements; clipped/near-zero regions are explicitly recorded. KK mode multiplies the two lobes by three before exposure. Visibility and SDF modes are unitless. Rectangles are diagnostic regions, not final material masks.",
+  "pairs": [
+    {
+      "component": "ambient",
+      "images": {
+        "joint": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\joint-ambient\\frames\\frame_000000.png",
+          "sha256": "9e2142629a899c26653c09e832bf9c5eb78f569f849b16b493310ff413c5c611"
+        },
+        "reference-look": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\reference-look-ambient\\frames\\frame_000000.png",
+          "sha256": "49b4536989e2d21dc5eaa51336fcf08a0ad86546a8d866570c72cb41fcea4b60"
+        }
+      },
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "jointMedianLinearDisplay": 0.07168838474563591,
+          "referenceMedianLinearDisplay": 0.014391766494944601,
+          "jointReferenceRatio": 4.981208163071427,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 90,
+          "meanAbsoluteChannelError": 37.68654545454545
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.05773219946604929,
+          "referenceMedianLinearDisplay": 0.00959056698697074,
+          "jointReferenceRatio": 6.019685754187562,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 87,
+          "meanAbsoluteChannelError": 42.31879166666667
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "jointMedianLinearDisplay": 0.1547881720031941,
+          "referenceMedianLinearDisplay": 0.024676856291278013,
+          "jointReferenceRatio": 6.272604993769149,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 81,
+          "meanAbsoluteChannelError": 66.28462401795736
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "jointMedianLinearDisplay": 0.14823552791239858,
+          "referenceMedianLinearDisplay": 0.023724873310841135,
+          "jointReferenceRatio": 6.248106195140862,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 79,
+          "meanAbsoluteChannelError": 65.25033333333333
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "jointMedianLinearDisplay": 0.06398997493779991,
+          "referenceMedianLinearDisplay": 0.009550118624223107,
+          "jointReferenceRatio": 6.700437707181405,
+          "jointClippedPixels": 143,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 148,
+          "meanAbsoluteChannelError": 48.31570881226054
+        },
+        {
+          "region": "environment-right-wall",
+          "bounds": [
+            1250,
+            300,
+            1450,
+            450
+          ],
+          "jointMedianLinearDisplay": 0.019281511129061308,
+          "referenceMedianLinearDisplay": 0.019281511129061308,
+          "jointReferenceRatio": 1.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "environment-left-wall",
+          "bounds": [
+            30,
+            400,
+            230,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.024274723514555955,
+          "referenceMedianLinearDisplay": 0.024274723514555955,
+          "jointReferenceRatio": 1.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        }
+      ]
+    },
+    {
+      "component": "direct-diffuse",
+      "images": {
+        "joint": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\joint-direct-diffuse\\frames\\frame_000000.png",
+          "sha256": "5d9d5ee13b76e35a1b49650cc554da9780ce5d50fea04a0c946f8dd5cc6eaf97"
+        },
+        "reference-look": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\reference-look-direct-diffuse\\frames\\frame_000000.png",
+          "sha256": "68239b90d4a0526c7e4a12717b403cba1a1e64567f48707f1a32bb9273dc3d9d"
+        }
+      },
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.07135979884366701,
+          "jointReferenceRatio": 0.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 137,
+          "meanAbsoluteChannelError": 72.11345454545454
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0695364156090413,
+          "jointReferenceRatio": 0.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 137,
+          "meanAbsoluteChannelError": 76.48841666666667
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.21887951286670174,
+          "jointReferenceRatio": 0.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 148,
+          "meanAbsoluteChannelError": 127.25050505050505
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.2108717319800215,
+          "jointReferenceRatio": 0.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 145,
+          "meanAbsoluteChannelError": 125.69
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.08188683679112504,
+          "jointReferenceRatio": 0.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 250,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 87.69367816091955
+        },
+        {
+          "region": "environment-right-wall",
+          "bounds": [
+            1250,
+            300,
+            1450,
+            450
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "environment-left-wall",
+          "bounds": [
+            30,
+            400,
+            230,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        }
+      ]
+    },
+    {
+      "component": "hair-kk",
+      "images": {
+        "joint": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\joint-hair-kk\\frames\\frame_000000.png",
+          "sha256": "38fe4ca99d9875fb44589729e5d6dbde6a3486968390cbfc26ce06ac42745ea1"
+        },
+        "reference-look": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\reference-look-hair-kk\\frames\\frame_000000.png",
+          "sha256": "f9c420d6da8a3d93d8cf087effb840f6526ec683a9e254e56f7f3e98e8440f7e"
+        }
+      },
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "jointMedianLinearDisplay": 0.000322759825371512,
+          "referenceMedianLinearDisplay": 0.0002582078602972096,
+          "jointReferenceRatio": 1.25,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.45575757575757575,
+          "maximumChannelError": 67,
+          "meanAbsoluteChannelError": 0.8767474747474747
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.06319357498054969,
+          "referenceMedianLinearDisplay": 0.07841376737959234,
+          "jointReferenceRatio": 0.8058989778495989,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.0035,
+          "maximumChannelError": 108,
+          "meanAbsoluteChannelError": 12.337541666666667
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "environment-right-wall",
+          "bounds": [
+            1250,
+            300,
+            1450,
+            450
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "environment-left-wall",
+          "bounds": [
+            30,
+            400,
+            230,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        }
+      ]
+    },
+    {
+      "component": "object-shadow-visibility",
+      "images": {
+        "joint": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\joint-object-shadow-visibility\\frames\\frame_000000.png",
+          "sha256": "ce0fc6c9eda9a04c2b0ee1f3671b1f8e06a6ff3e248b72411ce93ada317056bd"
+        },
+        "reference-look": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\reference-look-object-shadow-visibility\\frames\\frame_000000.png",
+          "sha256": "92ab67e19a2c8fd1f96c5906e1412c2e83bc55226d5528579971333130a6488e"
+        }
+      },
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "jointMedianLinearDisplay": 0.9822506601081705,
+          "referenceMedianLinearDisplay": 1.000000111758709,
+          "jointReferenceRatio": 0.9822505503331171,
+          "jointClippedPixels": 6456,
+          "referenceClippedPixels": 13634,
+          "exactPixelsFraction": 0.45266666666666666,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 27.00490909090909
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.9911022078781206,
+          "referenceMedianLinearDisplay": 1.000000111758709,
+          "jointReferenceRatio": 0.9911020971138298,
+          "jointClippedPixels": 2792,
+          "referenceClippedPixels": 8000,
+          "exactPixelsFraction": 0.349,
+          "maximumChannelError": 213,
+          "meanAbsoluteChannelError": 3.525875
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 1.000000111758709,
+          "jointReferenceRatio": 0.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 2949,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 234.87171717171717
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "jointMedianLinearDisplay": 0.3027655880795188,
+          "referenceMedianLinearDisplay": 1.000000111758709,
+          "jointReferenceRatio": 0.30276555424283136,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 1000,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 107.348
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.30054382800416296,
+          "jointReferenceRatio": 0.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 0.04310344827586207,
+          "maximumChannelError": 254,
+          "meanAbsoluteChannelError": 137.2258620689655
+        },
+        {
+          "region": "environment-right-wall",
+          "bounds": [
+            1250,
+            300,
+            1450,
+            450
+          ],
+          "jointMedianLinearDisplay": 1.000000111758709,
+          "referenceMedianLinearDisplay": 1.000000111758709,
+          "jointReferenceRatio": 1.0,
+          "jointClippedPixels": 30000,
+          "referenceClippedPixels": 30000,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "environment-left-wall",
+          "bounds": [
+            30,
+            400,
+            230,
+            650
+          ],
+          "jointMedianLinearDisplay": 1.000000111758709,
+          "referenceMedianLinearDisplay": 1.000000111758709,
+          "jointReferenceRatio": 1.0,
+          "jointClippedPixels": 50000,
+          "referenceClippedPixels": 50000,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        }
+      ]
+    },
+    {
+      "component": "face-sdf",
+      "images": {
+        "joint": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\joint-face-sdf\\frames\\frame_000000.png",
+          "sha256": "6b25f3b233dc7cfc966da2bb3213854e3659a5df58c25c48f9f75df9d1943960"
+        },
+        "reference-look": {
+          "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-014745-joint-display-domain-diagnosis-8779a0\\captures\\reference-look-face-sdf\\frames\\frame_000000.png",
+          "sha256": "dab087df81b3174749072ebd474439cfb79be3398bb2734a753cf030308bcf45"
+        }
+      },
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "jointMedianLinearDisplay": 0.17788843586420883,
+          "referenceMedianLinearDisplay": 1.000000111758709,
+          "jointReferenceRatio": 0.17788841598362912,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 2970,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 188,
+          "meanAbsoluteChannelError": 140.83602693602694
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "jointMedianLinearDisplay": 0.19461785219181327,
+          "referenceMedianLinearDisplay": 1.000000111758709,
+          "jointReferenceRatio": 0.1946178304415758,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 1000,
+          "exactPixelsFraction": 0.0,
+          "maximumChannelError": 147,
+          "meanAbsoluteChannelError": 130.717
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 116,
+          "exactPixelsFraction": 0.9022988505747126,
+          "maximumChannelError": 152,
+          "meanAbsoluteChannelError": 13.530459770114943
+        },
+        {
+          "region": "environment-right-wall",
+          "bounds": [
+            1250,
+            300,
+            1450,
+            450
+          ],
+          "jointMedianLinearDisplay": 2.1907061126752754e-05,
+          "referenceMedianLinearDisplay": 2.1907061126752754e-05,
+          "jointReferenceRatio": 1.0,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        },
+        {
+          "region": "environment-left-wall",
+          "bounds": [
+            30,
+            400,
+            230,
+            650
+          ],
+          "jointMedianLinearDisplay": 0.0,
+          "referenceMedianLinearDisplay": 0.0,
+          "jointReferenceRatio": null,
+          "jointClippedPixels": 0,
+          "referenceClippedPixels": 0,
+          "exactPixelsFraction": 1.0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0.0
+        }
+      ]
+    }
+  ]
+}
