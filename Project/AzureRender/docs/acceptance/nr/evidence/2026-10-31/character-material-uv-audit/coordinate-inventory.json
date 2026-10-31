@@ -1,0 +1,143 @@
+{
+  "status": "source-coordinate-inventory",
+  "scope": "Direct source vertex order only. Equal topology and UV orientation statistics do not prove texture image orientation; material and texture bindings require independent checks before restoration.",
+  "baseCommit": "4188d66",
+  "sources": [
+    {
+      "path": "build\\runs\\20261031-135416-character-portrait-recovery-0773ca\\original-reference\\project\\native-character\\outline-converted.glb",
+      "sha256": "9246691bb5671d854029d9481e739e319d2fb756903c1d329a59b543271c1ed4"
+    },
+    {
+      "path": "build\\runs\\20261031-172112-hair-source-inputs-14d199\\project\\content-character\\hero-restored-inputs-v8.glb",
+      "sha256": "f188722c428358787a12be615d944f4a07185e9a8eaab72b9aa21105f3b7f997"
+    }
+  ],
+  "materials": [
+    {
+      "material": "M_actor_laevat_body_01",
+      "referenceVertices": 3289,
+      "currentVertices": 3346,
+      "indicesEqual": false
+    },
+    {
+      "material": "M_actor_laevat_cloth_01",
+      "referenceVertices": 32031,
+      "currentVertices": 32031,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.9946383237838745,
+      "matchingTangentWVertices": 32031,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_actor_laevat_cloth_02",
+      "referenceVertices": 17541,
+      "currentVertices": 17541,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.9985390901565552,
+      "matchingTangentWVertices": 17541,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_actor_laevat_cloth_03",
+      "referenceVertices": 2122,
+      "currentVertices": 2122,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.7991828918457031,
+      "matchingTangentWVertices": 2122,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_actor_laevat_cloth_04",
+      "referenceVertices": 2820,
+      "currentVertices": 2820,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.9922000169754028,
+      "verticalReflectionMaximumUvDifference": 0.0,
+      "matchingTangentWVertices": 0,
+      "matchingReflectedTangentWVertices": 2820
+    },
+    {
+      "material": "M_actor_laevat_cloth_05",
+      "referenceVertices": 5108,
+      "currentVertices": 5108,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.9987095594406128,
+      "matchingTangentWVertices": 5108,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_actor_laevat_brow_01",
+      "referenceVertices": 578,
+      "currentVertices": 578,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.9885249137878418,
+      "matchingTangentWVertices": 0,
+      "matchingReflectedTangentWVertices": 578
+    },
+    {
+      "material": "M_eyewhiteshadow_common_01",
+      "referenceVertices": 36,
+      "currentVertices": 36,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.9829800128936768,
+      "matchingTangentWVertices": 36,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_actor_laevat_face_01",
+      "referenceVertices": 1792,
+      "currentVertices": 1792,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.9837599992752075,
+      "matchingTangentWVertices": 1792,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_actor_laevat_hair_01",
+      "referenceVertices": 11564,
+      "currentVertices": 11564,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.9922657012939453,
+      "matchingTangentWVertices": 11564,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_hairshadow_common_04",
+      "referenceVertices": 156,
+      "currentVertices": 156,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.98980712890625,
+      "matchingTangentWVertices": 156,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_actor_laevat_iris_01",
+      "referenceVertices": 210,
+      "currentVertices": 210,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 2.9802322387695312e-08,
+      "verticalReflectionMaximumUvDifference": 1.0,
+      "matchingTangentWVertices": 210,
+      "matchingReflectedTangentWVertices": 0
+    },
+    {
+      "material": "M_fx_laevat_toppotential_01",
+      "referenceVertices": 498,
+      "currentVertices": 498,
+      "indicesEqual": true,
+      "directMaximumUvDifference": 0.0,
+      "verticalReflectionMaximumUvDifference": 0.5942915678024292,
+      "matchingTangentWVertices": 498,
+      "matchingReflectedTangentWVertices": 0
+    }
+  ]
+}

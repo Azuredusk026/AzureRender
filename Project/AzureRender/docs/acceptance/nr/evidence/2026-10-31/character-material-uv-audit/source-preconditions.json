@@ -1,0 +1,24 @@
+{
+  "status": "actual-source-preconditions-enforced",
+  "sourceCommit": "4188d66",
+  "toolSha256": "f62e83475bfa216befa4044b1ae5e91debb8f1c35ad5124f099b9e1dbd166826",
+  "cases": [
+    {
+      "slot": "name:M_actor_laevat_body_01",
+      "rejected": true,
+      "diagnostic": "Source vertex count differs"
+    },
+    {
+      "slot": "name:M_actor_laevat_cloth_04",
+      "rejected": true,
+      "diagnostic": "Source tangent sign differs"
+    },
+    {
+      "slot": "name:M_actor_laevat_brow_01",
+      "rejected": true,
+      "diagnostic": "Source tangent sign differs"
+    }
+  ],
+  "sourceDocumentPreserved": true,
+  "scope": "Topology or tangent-sign rejection is expected. Each material requires its own source correspondence; no UV changes were applied."
+}

@@ -54,6 +54,23 @@
 生成报告见[工具输出](evidence/2026-10-31/hair-source-uv/cli-restoration-final.json)。
 动画、节点及前缀核对见[资产记录](evidence/2026-10-31/hair-source-uv/restoration-report.json)。
 
+## 材质覆盖
+
+十三份画像按同一源元素顺序完成主坐标盘点。
+十二份具有相同索引顺序，十份主坐标逐元素相同。
+虹膜主坐标的最大差为 `2.98e-8`。
+数据见[材质盘点](evidence/2026-10-31/character-material-uv-audit/coordinate-inventory.json)。
+
+身体的冻结参考与动态来源具有不同顶点规模。
+第四号服饰的主坐标与切线采用独立原生配对。
+该来源及完整着色范围见[服饰验收](cloth-native-integration.md)。
+眉毛的主坐标相同，切线符号具有独立差异。
+
+实际工具分别拒绝身体、第四号服饰及眉毛的源组合。
+拒绝原因对应顶点数量或切线符号条件。
+调用方文档保持完整，几何和纹理均未写入。
+收据见[来源前置条件](evidence/2026-10-31/character-material-uv-audit/source-preconditions.json)。
+
 ## 检查状态
 
 十一项专项测试覆盖数据恢复及非法输入。
