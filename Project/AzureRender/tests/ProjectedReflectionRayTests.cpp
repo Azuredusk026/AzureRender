@@ -34,6 +34,16 @@ int main()try{
     auto badSettings=settings;badSettings.motionBlend=1.1F;rejects([&]{view.pack({34,18},{17,9},badSettings);});
     badSettings=settings;badSettings.maximumFootprintLevel=0;rejects([&]{view.pack({34,18},{17,9},badSettings);});
     badSettings=settings;badSettings.maxSteps=0;rejects([&]{view.pack({34,18},{17,9},badSettings);});
+    require(packed[26][2]==0&&packed[26][3]==0&&packed[27][3]==0,"Default motion options must retain the source constant layout");
+    auto tracked=settings;tracked.motionEncoding=ProjectedReflectionMotionEncoding::LinearUv;tracked.motionUvOffset={.125F,-.0625F};tracked.requireTrackedMotion=true;
+    const auto corrected=view.pack({34,18},{17,9},tracked);
+    require(corrected[26][2]==.125F&&corrected[26][3]==-.0625F&&corrected[27][3]==1,"Sampled UV offset and tracked-response policy packing differs");
+    for(float value:{-1.01F,1.01F,std::numeric_limits<float>::quiet_NaN(),std::numeric_limits<float>::infinity()}){
+        auto bad=tracked;bad.motionUvOffset[0]=value;rejects([&]{view.pack({34,18},{17,9},bad);});
+        bad=tracked;bad.motionUvOffset[1]=value;rejects([&]{view.pack({34,18},{17,9},bad);});
+    }
+    auto encoded=tracked;encoded.motionEncoding=ProjectedReflectionMotionEncoding::FourthRoot;rejects([&]{view.pack({34,18},{17,9},encoded);});
+    encoded=settings;encoded.requireTrackedMotion=true;rejects([&]{view.pack({34,18},{17,9},encoded);});
     rhi::NullRhi backend;std::vector<char> code(20);code[0]=3;code[1]=2;code[2]=35;code[3]=7;
     rejects([&]{ProjectedReflectionRayGpu ray(backend,0,code);});
     rejects([&]{ProjectedReflectionRayGpu ray(backend,9,code);});
@@ -55,6 +65,7 @@ int main()try{
         bad=inputs;bad.normalRoughness=VK_NULL_HANDLE;rejects([&]{ray.record(commands,0,bad,outputs,view,settings);});
         auto badOutput=outputs;badOutput.footprint=outputs.confidence;rejects([&]{ray.record(commands,0,inputs,badOutput,view,settings);});
         badOutput=outputs;badOutput.extent.width=18;rejects([&]{ray.record(commands,0,inputs,badOutput,view,settings);});
+        auto invalidMotion=tracked;invalidMotion.motionUvOffset[1]=std::numeric_limits<float>::quiet_NaN();rejects([&]{ray.record(commands,0,inputs,outputs,view,invalidMotion);});
         rejects([&]{ray.record(commands,2,inputs,outputs,view,settings);});
         require(commands.calls.empty()&&backend.descriptorImageWrites.size()==writes,"Rejected input changed recording state");
         bad=inputs;bad.tileCount=0;ray.record(commands,0,bad,outputs,view,settings);

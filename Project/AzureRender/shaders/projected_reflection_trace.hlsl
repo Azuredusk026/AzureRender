@@ -23,6 +23,19 @@ float orderedDot(float2 a,float2 b){precise float v=a.x*b.x;return mad(a.y,b.y,v
 float orderedDot(float3 a,float3 b){precise float v=a.x*b.x;return mad(a.z,b.z,mad(a.y,b.y,v));}
 float orderedDot(float4 a,float4 b){precise float v=a.x*b.x;return mad(a.w,b.w,mad(a.z,b.z,mad(a.y,b.y,v)));}
 float2 finiteMotion(float2 value){return all(isfinite(value))?value:float2(0,0);}
+float2 linearMotion(float2 value){
+    float2 motion=finiteMotion(value);
+    if(any(traceConfig.zw!=float2(0,0)))motion+=traceConfig.zw;
+    return motion;
+}
+float trackedMotionAcceptance(float4 motion,float2 previousUv,float depth){
+    if(!all(isfinite(motion))||!all(isfinite(previousUv))||motion.z<0||motion.z>1||!isfinite(depth)||depth<=0
+        ||any(previousUv<float2(0,0))||any(previousUv>float2(1,1)))return 0;
+    if(motion.w==1)return 1;
+    if(motion.w>=2&&motion.w<3)return 3-motion.w;
+    if(motion.w>-1&&motion.w<0)return 1+motion.w;
+    return 0;
+}
 [numthreads(8,8,1)] void main(uint3 group:SV_GroupID,uint3 thread:SV_GroupThreadID){
 uint4 r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13;
 uint packedTile=worklist[group.x];uint2 outputPixel=uint2(packedTile>>16,packedTile&65535u)*8+thread.xy;
@@ -192,7 +205,7 @@ uint4 v152=((r1.yyyy)!=uint4(0,0,0,0)?uint4(0x3f800000u,0x3f800000u,0x3f800000u,
 float4 v153=(asfloat(r0.wwww))*(asfloat(r1.xxxx));r0.w=asuint(v153).w;
 // Decode signed fourth-power motion at the hit.
 float4 v154=motionInput.SampleLevel(pointSampler,(asfloat(r8.xyxx)).xy,(asfloat(uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u))).x).zxyw;r1.yz=asuint(v154).yz;
-if(footprintConfig.z>.5){float2 delta=finiteMotion(asfloat(r1.yz));r1.yz=asuint(delta);r2.zw=asuint(abs(delta));}else{
+if(footprintConfig.z>.5){float2 delta=linearMotion(asfloat(r1.yz));r1.yz=asuint(delta);r2.zw=asuint(abs(delta));}else{
 float4 v155=mad(abs(asfloat(r1.yyyz)),asfloat(uint4(0x00000000u,0x00000000u,0x40000000u,0x40000000u)),asfloat(uint4(0x00000000u,0x00000000u,0xbf800000u,0xbf800000u)));r2.zw=asuint(v155).zw;
 float4 v156=(asfloat(r2.zzzw))*(asfloat(r2.zzzw));r2.zw=asuint(v156).zw;
 float4 v157=(asfloat(r2.zzzw))*(asfloat(r2.zzzw));r2.zw=asuint(v157).zw;
@@ -236,13 +249,14 @@ float4 v190=max(asfloat(r1.yyyy),asfloat(uint4(0x3e800000u,0x3e800000u,0x3e80000
 uint4 v191=uint4((asfloat(r1.yyyy))<(asfloat(r1.wwww)))*0xffffffffu;r1.y=v191.y;
 uint4 v192=((r1.yyyy)!=uint4(0,0,0,0)?uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u):r0.wwww);r1.y=v192.y;
 uint4 v193=((r1.zzzz)!=uint4(0,0,0,0)?r1.yyyy:r0.wwww);r1.x=v193.x;
+if(historyConfig.w>.5&&historyConfig.z<1){float acceptance=trackedMotionAcceptance(v154.yzxw,asfloat(r2.xy),v167.y);r1.x=asuint(asfloat(r1.x)*acceptance);}
 }else{
 uint4 v195=uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u);r2.zw=v195.zw;
 uint4 v196=uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u);r1.x=v196.x;
 }
 // Compute the roughness-dependent projected footprint.
 float4 v198=motionInput.SampleLevel(pointSampler,(asfloat(r2.xyxx)).xy,(asfloat(uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u))).x).zxyw;r1.yz=asuint(v198).yz;
-if(footprintConfig.z>.5){float2 delta=finiteMotion(asfloat(r1.yz));r4.xy=asuint(sqrt(abs(delta)));}else{
+if(footprintConfig.z>.5){float2 delta=linearMotion(asfloat(r1.yz));r4.xy=asuint(sqrt(abs(delta)));}else{
 float4 v199=mad(abs(asfloat(r1.yzyy)),asfloat(uint4(0x40000000u,0x40000000u,0x00000000u,0x00000000u)),asfloat(uint4(0xbf800000u,0xbf800000u,0x00000000u,0x00000000u)));r4.xy=asuint(v199).xy;
 float4 v200=(asfloat(r4.xyxx))*(asfloat(r4.xyxx));r4.xy=asuint(v200).xy;
 }

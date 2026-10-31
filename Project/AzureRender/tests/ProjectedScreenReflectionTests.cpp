@@ -36,6 +36,7 @@ int main()try{
         auto p=parameters;p.maxSteps=0;rejects([&]{resource.record(commands,0,inputs,camera,p);});
         p=parameters;p.edgeFade=std::numeric_limits<float>::quiet_NaN();rejects([&]{resource.record(commands,0,inputs,camera,p);});
         p=parameters;p.strength=2;rejects([&]{resource.record(commands,0,inputs,camera,p);});
+        p=parameters;p.motionUvOffset[1]=std::numeric_limits<float>::infinity();rejects([&]{resource.record(commands,0,inputs,camera,p);});
         auto invalid=camera;invalid.projection=internal::orthographic(-1,1,-1,1,.1F,1000);rejects([&]{resource.record(commands,0,inputs,invalid,parameters);});
         invalid=camera;invalid.projection[10]=-1;invalid.projection[14]=-.1F;rejects([&]{resource.record(commands,0,inputs,invalid,parameters);});
         ProjectedScreenReflectionHistory history{1,reinterpret_cast<VkImageView>(902),camera};

@@ -14,6 +14,9 @@ struct ProjectedReflectionSettings {
     float edgeFade=.1F; // Normalized distance from the hit UV to the nearest screen edge.
     float motionBlend=0,maximumFootprintLevel=6;
     ProjectedReflectionMotionEncoding motionEncoding=ProjectedReflectionMotionEncoding::FourthRoot;
+    // Linear UV correction: current sampling jitter UV minus previous sampling jitter UV.
+    std::array<float,2> motionUvOffset{};
+    bool requireTrackedMotion=false;
 };
 // Matrices store columns. Clip coordinates use device depth in [0,1].
 // The caller supplies the selected current/previous projection convention.
@@ -31,6 +34,8 @@ struct ProjectedReflectionInputs {
     // Motion is a normalized-UV field; a 1x1 view represents constant displacement.
     // Normal RG stores Y-pole octahedral world coordinates; B stores roughness.
     // Motion RG follows ProjectedReflectionSettings::motionEncoding.
+    // Tracked linear motion additionally uses B for previous device depth and A
+    // for engine response: 1 tracked, [2,3) cutout, (-1,0) partial reaction.
     VkImageView previousColor{},previousDepth{},currentDepth{},motion{},surfaceMask{},normalRoughness{};
     VkExtent2D sourceExtent{},traceExtent{};
     // The caller produces unique in-bounds 8x8 tiles (X in high 16 bits, Y in low 16).

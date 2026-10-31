@@ -25,6 +25,8 @@ ProjectedReflectionFrame ProjectedReflectionView::pack(VkExtent2D source,VkExten
     require(std::isfinite(settings.edgeFade)&&settings.edgeFade>0&&settings.edgeFade<=1,"Projected reflection edge fade must be within (0,1]");
     require(std::isfinite(settings.motionBlend)&&settings.motionBlend>=0&&settings.motionBlend<=1,"Projected reflection motion blend must be within [0,1]");
     require(std::isfinite(settings.maximumFootprintLevel)&&settings.maximumFootprintLevel>0&&settings.maximumFootprintLevel<=16,"Projected reflection footprint level must be within (0,16]");
+    for(float value:settings.motionUvOffset)require(std::isfinite(value)&&value>=-1&&value<=1,"Projected reflection motion UV offset must be within [-1,1]");
+    require(settings.motionEncoding==ProjectedReflectionMotionEncoding::LinearUv||(!settings.requireTrackedMotion&&settings.motionUvOffset[0]==0&&settings.motionUvOffset[1]==0),"Projected reflection motion correction and response require linear UV encoding");
     ProjectedReflectionFrame frame{};unsigned offset=0;
     const auto append=[&](const auto& matrix){for(const auto& column:matrix)frame[offset++]=column;};
     append(worldNormalToView);append(viewDirectionToClip);append(clipToView);append(relativeWorldToClip);append(clipToWorld);append(previousClipToWorld);
@@ -32,7 +34,7 @@ ProjectedReflectionFrame ProjectedReflectionView::pack(VkExtent2D source,VkExten
     frame[23]={float(source.width),float(source.height),1.F/source.width,1.F/source.height};
     frame[24]={0,0,depthReciprocal[0],depthReciprocal[1]};
     frame[25]={float(trace.width),float(trace.height),1.F/trace.width,1.F/trace.height};
-    frame[26]={float(settings.jitterSeed),settings.edgeFade,0,0};frame[27]={0,0,settings.motionBlend,0};
+    frame[26]={float(settings.jitterSeed),settings.edgeFade,settings.motionUvOffset[0],settings.motionUvOffset[1]};frame[27]={0,0,settings.motionBlend,settings.requireTrackedMotion?1.F:0.F};
     frame[28]={float(settings.maxSteps),0,0,0};frame[29]={0,settings.maximumFootprintLevel,
         settings.motionEncoding==ProjectedReflectionMotionEncoding::LinearUv?1.F:0.F,convention==ProjectedReflectionConvention::VulkanUpperLeft?1.F:0.F};return frame;
 }

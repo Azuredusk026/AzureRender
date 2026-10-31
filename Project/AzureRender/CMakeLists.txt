@@ -2736,6 +2736,12 @@ if(BUILD_TESTING)
                 --shader "${AZURE_PROJECTED_REFLECTION_SHADER}"
                 --composition "${SHADER_BINARY_DIR}")
             set_tests_properties(AzureRender.ProjectedScreenReflectionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
+            add_test(NAME AzureRender.ProjectedReflectionMotionGpu COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_camera_gpu.py"
+                --executable "$<TARGET_FILE:AzureProjectedReflectionCameraGpuTests>"
+                --shader "${AZURE_PROJECTED_REFLECTION_SHADER}"
+                --composition "${SHADER_BINARY_DIR}" --motion-contract)
+            set_tests_properties(AzureRender.ProjectedReflectionMotionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
             add_test(NAME AzureRender.ProjectedReflectionRayGpu COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_native_ray_reference_gpu.py"
                 --executable "$<TARGET_FILE:AzureNativeRayReferenceGpuTests>"

@@ -13,6 +13,8 @@ struct ProjectedScreenReflectionShaders {
 struct ProjectedScreenReflectionParameters {
     unsigned maxSteps=96,jitterSeed=0;
     float edgeFade=.08F,maxRoughness=.7F,strength=1;
+    std::array<float,2> motionUvOffset{};
+    bool requireTrackedMotion=false;
 };
 struct ProjectedScreenReflectionInputs {
     // Borrowed sampled RGBA32F snapshot and finite nonnegative HDR color.

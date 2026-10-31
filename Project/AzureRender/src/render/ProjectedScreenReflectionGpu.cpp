@@ -59,6 +59,7 @@ void ProjectedScreenReflectionGpu::record(rhi::ICommandRecorder& commands,unsign
     require(view.depthReciprocal[1]>0,"Projected composition requires a finite far plane");
     ProjectedReflectionSettings ray;ray.maxSteps=parameters.maxSteps;ray.jitterSeed=parameters.jitterSeed;ray.edgeFade=parameters.edgeFade;
     ray.motionEncoding=ProjectedReflectionMotionEncoding::LinearUv;ray.motionBlend=history?0.F:1.F;ray.maximumFootprintLevel=float(std::max(1U,levels_-1));
+    ray.motionUvOffset=parameters.motionUvOffset;ray.requireTrackedMotion=parameters.requireTrackedMotion;
     (void)view.pack(source_,extent_,ray);
     const ProjectedReflectionPreparationParameters surface{parameters.maxRoughness,parameters.strength};(void)surface.frame(source_,extent_,view.depthReciprocal);
     for(unsigned i=0;i<frames_;++i){const auto p=prepare_->output(i);const auto base=signals_->base(i),all=signals_->output(i);

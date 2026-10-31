@@ -36,6 +36,8 @@
 | `edgeFade` | `(0,1]` | 0.08 |
 | `maxRoughness` | `[0.05,1]` | 0.7 |
 | `strength` | `[0,1]` | 1 |
+| `motionUvOffset` | 各分量 `[-1,1]` | `[0,0]` |
+| `requireTrackedMotion` | 布尔值 | false |
 
 这些字段属于 `ProjectedScreenReflectionParameters`。
 边缘距离、粗糙度及强度分别按所属公共规则计算。
@@ -51,6 +53,11 @@
 该运动场按归一化 UV 采样，支持一像素恒定场。
 运动为空时，当前帧模式借用内部零位移纹理。
 非有限线性运动由公共射线归零。
+
+公共组合将采样 UV 偏移和响应要求传给射线。
+运动 B、A 的编码及接收规则见[运动契约](projected-reflection-ray.md)。
+响应模式同时核对有限值、UV 边界及正数前帧深度。
+当前帧模式按自身颜色和深度完成生产。
 
 ## 当前与历史模式
 

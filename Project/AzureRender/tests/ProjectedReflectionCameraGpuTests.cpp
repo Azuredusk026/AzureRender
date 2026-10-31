@@ -11,6 +11,7 @@
 #include <filesystem>
 #include <fstream>
 #include <limits>
+#include <set>
 using namespace azurerender;
 namespace {
 using Json=nlohmann::json;
@@ -28,9 +29,14 @@ int main(int argc,char** argv)try{
     if(args.size()==6&&!filtered)throw std::runtime_error("Unknown composition mode");
     const auto output=std::filesystem::absolute(std::filesystem::u8path(args[2]));
     if(!std::filesystem::create_directory(output))throw std::runtime_error("Expected a new output directory");
-    const auto& mode=args[3];if(mode!="positive"&&mode!="wide-edge"&&mode!="history-static"&&mode!="nonfinite-motion"&&mode!="wrong-convention"&&mode!="wrong-motion"&&mode!="history-tinted"&&mode!="history-shifted"&&mode!="history-wrong-pose"&&mode!="history-disoccluded")throw std::runtime_error("Unknown physical mirror mode");
-    const bool historyUsed=mode.rfind("history-",0)==0,shifted=mode=="history-shifted"||mode=="history-wrong-pose";
-    const float geometryScale=historyUsed&&mode!="history-static"?.1F:1.F;
+    const auto& mode=args[3];const std::set<std::string> modes{"positive","wide-edge","history-static","nonfinite-motion","wrong-convention","wrong-motion","history-tinted","history-shifted","history-wrong-pose","history-disoccluded",
+        "history-response-tracked","history-response-assumed","history-response-cutout","history-response-partial","history-response-background","history-response-missing","history-response-reactive","history-response-nonfinite","history-response-depth","history-response-zero-depth","history-response-outside","history-response-mixed","response-current","history-offset","history-wrong-offset"};
+    if(!modes.count(mode))throw std::runtime_error("Unknown physical mirror mode");
+    const bool response=mode.rfind("history-response-",0)==0,offset=mode=="history-offset"||mode=="history-wrong-offset";
+    const bool historyUsed=mode.rfind("history-",0)==0,shifted=mode=="history-shifted"||mode=="history-wrong-pose"||offset;
+    const bool reduced=mode=="history-response-cutout"||mode=="history-response-partial";
+    const unsigned minimumConfidence=reduced?32U:128U;
+    const float geometryScale=(historyUsed&&mode!="history-static")||mode=="response-current"?.1F:1.F;
     constexpr unsigned width=640,height=480,traceWidth=320,traceHeight=240;
     ReflectionTraceView camera;camera.projection=internal::perspective(3.14159265358979323846F/3,float(width)/height,.1F,1000.F);
     camera.worldToClip=camera.projection;camera.right={1,0,0};camera.up={0,1,0};camera.forward={0,0,-1};
@@ -39,9 +45,12 @@ int main(int argc,char** argv)try{
     auto view=projectedReflectionView(camera,historyUsed?&declaredPrevious:nullptr);
     ProjectedReflectionSettings settings;settings.maxSteps=64;settings.motionBlend=1;settings.motionEncoding=ProjectedReflectionMotionEncoding::LinearUv;
     if(historyUsed)settings.motionBlend=0;
+    if(mode=="history-response-mixed")settings.motionBlend=.75F;
     if(mode=="wide-edge")settings.edgeFade=.5F;
     if(mode=="wrong-convention")view.convention=ProjectedReflectionConvention::MirroredViewY;
     if(mode=="wrong-motion")settings.motionEncoding=ProjectedReflectionMotionEncoding::FourthRoot;
+    settings.requireTrackedMotion=(response&&mode!="history-response-assumed")||mode=="response-current";
+    if(mode=="history-offset")settings.motionUvOffset={.125F,0};
     const auto surface=[&](float v){
         const float dy=(2*v-1)/camera.projection[5];const float denominator=dy+.08F;const float floorDistance=denominator<0?-30.F/denominator:100000.F;
         return std::array<float,2>{{std::min(180.F,floorDistance)*geometryScale,floorDistance<180?1.F:0.F}};
@@ -53,7 +62,18 @@ int main(int argc,char** argv)try{
         const bool lowerWall=(y+.5F)/height>.5F;
         scene[i]=value[1]>0?0.F:lowerWall?1.F:0.F;scene[i+1]=value[1]>0||lowerWall?0.F:1.F;scene[i+2]=value[1]>0?1.F:0.F;scene[i+3]=1;
         snapshot[i]=value[0];snapshot[i+1]=value[1]>0?.5F+.04F/1.08F:.5F;snapshot[i+2]=value[1]>0?1.F:.5F;snapshot[i+3]=value[1]>0?.15F:1.F;
-        if(shifted)motion[i]=5*camera.projection[0]/(2*value[0]);}
+        if(shifted)motion[i]=5*camera.projection[0]/(2*value[0]);
+        if(offset)motion[i]-=.125F;
+        if(response){motion[i+2]=1.F-(1.F/value[0]-view.depthReciprocal[1])/view.depthReciprocal[0];motion[i+3]=1;
+            if(mode=="history-response-assumed"||mode=="history-response-background"||mode=="history-response-mixed")motion[i+3]=0;
+            if(mode=="history-response-cutout")motion[i+3]=2.75F;
+            if(mode=="history-response-partial")motion[i+3]=-.75F;
+            if(mode=="history-response-missing")motion[i+3]=-1;
+            if(mode=="history-response-reactive")motion[i+3]=-2;
+            if(mode=="history-response-nonfinite")motion[i+3]=std::numeric_limits<float>::quiet_NaN();
+            if(mode=="history-response-depth")motion[i+2]=-.1F;
+            if(mode=="history-response-outside")motion[i]=1;
+        }}
     for(unsigned y=0;y<traceHeight;++y)for(unsigned x=0;x<traceWidth;++x){const auto value=surface((y+.5F)/traceHeight);const auto i=y*traceWidth+x;
         depth[i]=(1.F/value[0]-view.depthReciprocal[1])/view.depthReciprocal[0];
         normal[i*4]=.5F;normal[i*4+1]=value[1]>0?.5F-.04F/1.08F:1.F;normal[i*4+2]=value[1]>0?.15F:1.F;
@@ -72,10 +92,11 @@ int main(int argc,char** argv)try{
         test::ComputeTexture snapshotSurface(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(snapshot),16);
         auto pastSnapshot=snapshot,currentColor=scene;
         if(mode=="history-disoccluded")for(std::size_t i=0;i<pastSnapshot.size();i+=4)pastSnapshot[i]=1;
+        if(mode=="history-response-zero-depth")for(std::size_t i=0;i<pastSnapshot.size();i+=4)pastSnapshot[i]=100000;
         if(mode=="history-tinted")for(std::size_t i=0;i<currentColor.size();i+=4){currentColor[i]=currentColor[i+1]=0;currentColor[i+2]=1;}
         test::ComputeTexture previousSurface(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(pastSnapshot),16);
         test::ComputeTexture changedColor(backend,width,height,1,VK_FORMAT_R32G32B32A32_SFLOAT,bytes(currentColor),16);
-        test::ComputeTexture occludedDepth(backend,traceWidth,traceHeight,1,VK_FORMAT_R32_SFLOAT,bytes(std::vector<float>(traceWidth*traceHeight,(1.F-view.depthReciprocal[1])/view.depthReciprocal[0])),4);
+        test::ComputeTexture occludedDepth(backend,traceWidth,traceHeight,1,VK_FORMAT_R32_SFLOAT,bytes(std::vector<float>(traceWidth*traceHeight,mode=="history-response-zero-depth"?0.F:(1.F-view.depthReciprocal[1])/view.depthReciprocal[0])),4);
         test::ComputeStorage outputColor(backend,traceWidth,traceHeight,VK_FORMAT_B10G11R11_UFLOAT_PACK32,4,std::vector<char>(traceWidth*traceHeight*4,0));
         test::ComputeStorage outputFootprint(backend,traceWidth,traceHeight,VK_FORMAT_R16G16_UNORM,4,std::vector<char>(traceWidth*traceHeight*4,0));
         test::ComputeStorage outputConfidence(backend,traceWidth,traceHeight,VK_FORMAT_R8_UNORM,1,bytes(eligibility));
@@ -95,7 +116,7 @@ int main(int argc,char** argv)try{
             preparation=std::make_unique<ProjectedReflectionPreparationGpu>(backend,VkExtent2D{width,height},1,readBinaryFile(control?args[5]+"/projected_reflection_prepare.comp.spv":args[4]),2);
             const auto prepared=preparation->output(0);inputs.currentDepth=inputs.previousDepth=prepared.depth;inputs.surfaceMask=prepared.mask;inputs.normalRoughness=prepared.normalRoughness;
             inputs.tiles=prepared.tiles;inputs.tileBytes=prepared.tileBytes;inputs.tileCount=prepared.tileCount;outputs.footprint=prepared.footprint;storage[1]=prepared.footprintImage;
-            if(mode=="history-disoccluded")inputs.previousDepth=occludedDepth.view;
+            if(mode=="history-disoccluded"||mode=="history-response-zero-depth")inputs.previousDepth=occludedDepth.view;
         }
         if(control){
             const auto shaders=ProjectedScreenReflectionShaders::load(args[5]);
@@ -117,6 +138,7 @@ int main(int argc,char** argv)try{
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
             if(composed){
                 ProjectedScreenReflectionParameters parameters;parameters.maxSteps=settings.maxSteps;parameters.edgeFade=settings.edgeFade;
+                parameters.motionUvOffset=settings.motionUvOffset;parameters.requireTrackedMotion=settings.requireTrackedMotion;
                 ProjectedScreenReflectionInputs snapshot{snapshotSurface.view,changedColor.view,mode=="nonfinite-motion"||historyUsed?delta.view:VK_NULL_HANDLE,{width,height}};
                 if(historyUsed){
                     composition->record(commands,0,{previousSurface.view,color.view,VK_NULL_HANDLE,{width,height}},previousCamera,parameters);
@@ -149,12 +171,12 @@ int main(int argc,char** argv)try{
         const auto* colors=static_cast<const char*>(buffers.values[1].mapped);const auto* footprints=static_cast<const char*>(buffers.values[2].mapped);const auto* confidence=static_cast<const unsigned char*>(buffers.values[3].mapped);
         for(unsigned y=traceHeight*80/100;y<traceHeight*88/100;++y)for(unsigned x=traceWidth*30/100;x<traceWidth*70/100;++x){const auto index=y*traceWidth+x;++region;
             std::uint32_t packed=0;std::uint16_t attenuation=0;std::memcpy(&packed,colors+index*4,4);std::memcpy(&attenuation,footprints+index*4,2);
-            const bool red=packed==0x380U&&confidence[index]>=128;redHits+=red;staticHits+=red&&attenuation==65535;
-            if(filtered){const auto* result=static_cast<const float*>(buffers.values[4].mapped)+index*4;filteredRedHits+=result[0]>.95F&&result[1]<.05F&&result[2]<.05F&&result[3]>=.5F;}}
+            const bool red=packed==0x380U&&confidence[index]>=minimumConfidence;redHits+=red;staticHits+=red&&attenuation==65535;
+            if(filtered){const auto* result=static_cast<const float*>(buffers.values[4].mapped)+index*4;filteredRedHits+=result[0]>.95F&&result[1]<.05F&&result[2]<.05F&&result[3]>=(reduced?.125F:.5F);}}
         correct=redHits*4>=region*3&&staticHits*4>=region*3;
         if(filtered){correct=correct&&filteredRedHits*4>=region*3;report["filteredRedHits"]=filteredRedHits;const auto* values=static_cast<const float*>(buffers.values[4].mapped);
             for(unsigned i=0;i<traceWidth*traceHeight*4;++i)if(!std::isfinite(values[i])||values[i]<0||(i%4==3&&values[i]>1))throw std::runtime_error("Filtered reflection must be finite nonnegative HDR with unit confidence");}
-        report.update({{"regionPixels",region},{"redHits",redHits},{"staticHits",staticHits},{"minimumFraction",.75}});
+        report.update({{"regionPixels",region},{"redHits",redHits},{"staticHits",staticHits},{"minimumFraction",.75},{"minimumConfidence",minimumConfidence}});
     }
     report["validationErrors"]=host.errors.load();report["liveBuffers"]=host.allocator.statistics().liveBuffers;report["liveImages"]=host.allocator.statistics().liveImages;
     correct=correct&&host.errors==0&&host.allocator.statistics().liveBuffers==0&&host.allocator.statistics().liveImages==0;report["status"]=correct?"passed":"failed";
