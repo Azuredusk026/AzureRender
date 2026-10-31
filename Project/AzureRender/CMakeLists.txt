@@ -497,13 +497,20 @@ endforeach()
 add_custom_target(AzureRenderShaders ALL DEPENDS ${COMPILED_SHADERS})
 find_program(AZURE_DXC_EXECUTABLE NAMES dxc HINTS "$ENV{VULKAN_SDK}/Bin" "$ENV{VULKAN_SDK}/bin")
 if(AZURE_DXC_EXECUTABLE)
+    get_filename_component(AZURE_DXC_DIRECTORY "${AZURE_DXC_EXECUTABLE}" DIRECTORY)
+    set(AZURE_DXC_DEPENDENCIES "${AZURE_DXC_EXECUTABLE}")
+    foreach(AZURE_DXC_LIBRARY dxcompiler.dll libdxcompiler.so)
+        if(EXISTS "${AZURE_DXC_DIRECTORY}/${AZURE_DXC_LIBRARY}")
+            list(APPEND AZURE_DXC_DEPENDENCIES "${AZURE_DXC_DIRECTORY}/${AZURE_DXC_LIBRARY}")
+        endif()
+    endforeach()
     set(AZURE_PROJECTED_REFLECTION_SHADER "${SHADER_BINARY_DIR}/projected_reflection_trace.comp.spv")
     add_custom_command(OUTPUT "${AZURE_PROJECTED_REFLECTION_SHADER}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}"
         COMMAND "${AZURE_DXC_EXECUTABLE}" -spirv -T cs_6_0 -E main -HV 2018 -fspv-target-env=vulkan1.1
             -fvk-b-shift 0 0 -fvk-t-shift 1 0 -fvk-s-shift 8 0 -fvk-u-shift 9 0 -Od
             -Fo "${AZURE_PROJECTED_REFLECTION_SHADER}" "${SHADER_SOURCE_DIR}/projected_reflection_trace.hlsl"
-        DEPENDS "${SHADER_SOURCE_DIR}/projected_reflection_trace.hlsl"
+        DEPENDS "${SHADER_SOURCE_DIR}/projected_reflection_trace.hlsl" ${AZURE_DXC_DEPENDENCIES}
         COMMENT "Compiling projected reflection trace" VERBATIM)
     add_custom_target(AzureProjectedReflectionShaders DEPENDS "${AZURE_PROJECTED_REFLECTION_SHADER}")
 endif()
@@ -553,6 +560,7 @@ add_library(AzureRenderCore STATIC
     src/render/DepthPyramid.cpp
     src/render/ReflectionRay.cpp
     src/render/ProjectedReflectionRay.cpp
+    src/render/ProjectedReflectionCamera.cpp
     src/render/ReflectionTemporal.cpp
     src/render/ReflectionReprojection.cpp
     src/render/ScreenReflectionGpu.cpp
@@ -2627,6 +2635,14 @@ if(BUILD_TESTING)
     add_executable(AzureProjectedReflectionRayTests tests/ProjectedReflectionRayTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureProjectedReflectionRayTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ProjectedReflectionRay COMMAND AzureProjectedReflectionRayTests)
+    add_executable(AzureProjectedReflectionCameraTests tests/ProjectedReflectionCameraTests.cpp)
+    target_link_libraries(AzureProjectedReflectionCameraTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ProjectedReflectionCamera COMMAND AzureProjectedReflectionCameraTests)
+    add_executable(AzureProjectedReflectionCameraGpuTests tests/ProjectedReflectionCameraGpuTests.cpp)
+    target_link_libraries(AzureProjectedReflectionCameraGpuTests PRIVATE AzureRenderCore AzurePlatform)
+    if(TARGET AzureProjectedReflectionShaders)
+        add_dependencies(AzureProjectedReflectionCameraGpuTests AzureProjectedReflectionShaders)
+    endif()
     add_executable(AzureReflectionTemporalTests tests/ReflectionTemporalTests.cpp src/rhi/NullRhi.cpp)
     add_executable(AzureReflectionReprojectionTests tests/ReflectionReprojectionTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureReflectionReprojectionTests PRIVATE AzureRenderCore)
@@ -2660,6 +2676,11 @@ if(BUILD_TESTING)
             --shader "${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/native_ray_vulkan/reference.spv")
         set_tests_properties(AzureRender.NativeRayReferenceGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
         if(TARGET AzureProjectedReflectionShaders)
+            add_test(NAME AzureRender.ProjectedReflectionCameraGpu COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_camera_gpu.py"
+                --executable "$<TARGET_FILE:AzureProjectedReflectionCameraGpuTests>"
+                --shader "${AZURE_PROJECTED_REFLECTION_SHADER}")
+            set_tests_properties(AzureRender.ProjectedReflectionCameraGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 180)
             add_test(NAME AzureRender.ProjectedReflectionRayGpu COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_native_ray_reference_gpu.py"
                 --executable "$<TARGET_FILE:AzureNativeRayReferenceGpuTests>"

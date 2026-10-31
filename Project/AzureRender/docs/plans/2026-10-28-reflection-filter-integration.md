@@ -395,5 +395,9 @@ R4 已提供具名投影参数及借用资源的公共计算接口。
 双配置来源输出和同提交双槽位见[接口验证](../acceptance/nr/projected-ray-contract.md)。
 主场景装配继续核对当前深度、运动及成功提交的前帧输入。
 
+R5 的相机适配提供反向深度和上方像素原点。
+线性 UV 运动及独立倾斜镜面见[相机验证](../acceptance/nr/projected-camera-adapter.md)。
+表面准备继续消费公共快照的线性深度及世界法线。
+
 算术顺序、工具及来源见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
 原始载荷及精度范围见[射线来源](../acceptance/nr/native-ray-source.md)。

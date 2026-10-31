@@ -299,6 +299,9 @@ Vulkan 来源参考按[专项验证](../acceptance/nr/native-ray-vulkan-referenc
 公共投影射线及双配置资源契约见[接口验证](../acceptance/nr/projected-ray-contract.md)。
 主场景继续装配深度、运动及前帧颜色。
 
+相机、线性运动及双配置镜面控制见[适配验证](../acceptance/nr/projected-camera-adapter.md)。
+表面深度、法线和反射资格按公共输入契约准备。
+
 ### P3：原生可玩交付
 
 按 NR0 至 NR8 的依赖补齐联合渲染门禁。

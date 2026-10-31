@@ -28,7 +28,9 @@ int main()try{
     rejects([&]{view.pack({33,18},{17,9},settings);});rejects([&]{view.pack({0,18},{17,9},settings);});
     auto invalid=view;invalid.position[1]=std::numeric_limits<float>::quiet_NaN();rejects([&]{invalid.pack({34,18},{17,9},settings);});
     invalid=view;invalid.clipToWorld[2][0]=std::numeric_limits<float>::infinity();rejects([&]{invalid.pack({34,18},{17,9},settings);});
-    for(float value:{0.F,-1.F,std::numeric_limits<float>::quiet_NaN()}){auto bad=settings;bad.thickness=value;rejects([&]{view.pack({34,18},{17,9},bad);});}
+    auto narrow=settings;narrow.edgeFade=.05F;auto wide=settings;wide.edgeFade=.5F;
+    require(view.pack({34,18},{17,9},narrow)[26][1]==.05F&&view.pack({34,18},{17,9},wide)[26][1]==.5F,"Edge fade width packing differs");
+    for(float value:{0.F,-1.F,std::numeric_limits<float>::quiet_NaN()}){auto bad=settings;bad.edgeFade=value;rejects([&]{view.pack({34,18},{17,9},bad);});}
     auto badSettings=settings;badSettings.motionBlend=1.1F;rejects([&]{view.pack({34,18},{17,9},badSettings);});
     badSettings=settings;badSettings.maximumFootprintLevel=0;rejects([&]{view.pack({34,18},{17,9},badSettings);});
     badSettings=settings;badSettings.maxSteps=0;rejects([&]{view.pack({34,18},{17,9},badSettings);});

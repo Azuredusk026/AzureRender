@@ -1,5 +1,6 @@
 #include "support/VulkanComputeFixture.hpp"
 #include "support/ComputeTexture.hpp"
+#include "support/ComputeStorage.hpp"
 #include "platform/NativeArguments.hpp"
 #include "resources/BinaryFile.hpp"
 #include "render/ProjectedReflectionRay.hpp"
@@ -94,28 +95,7 @@ Fixture loadFixture(const std::filesystem::path& file){
     return result;
 }
 
-class Storage {
-public:
-    rhi::IRhi& backend;rhi::GpuImage image{};VkImageView view{};
-    Storage(rhi::IRhi& r,unsigned width,unsigned height,Format format,const Bytes& data):backend(r){
-        rhi::GpuBuffer staging{};
-        try{
-            require(backend.supportsStorageImage(format.value),"Storage image format unavailable");
-            staging=backend.allocator().createBuffer(data.size(),VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true);
-            std::memcpy(staging.mapped,data.data(),data.size());backend.allocator().flush(staging,0,staging.size);
-            image=backend.allocator().createImage2D(width,height,format.value,VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT|VK_IMAGE_USAGE_STORAGE_BIT);
-            backend.transitionImageLayout(image,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,1);
-            backend.copyBufferToImage(staging,image,width,height,1,format.bytes);
-            backend.executeOneShot([&](rhi::ICommandRecorder& commands){commands.imageBarrier({image.image,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,VK_IMAGE_LAYOUT_GENERAL,1,
-                VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});});
-            backend.allocator().destroyBuffer(staging);view=backend.createImageView(image.image,format.value,VK_IMAGE_ASPECT_COLOR_BIT,1);
-        }catch(...){backend.allocator().destroyBuffer(staging);release();throw;}
-    }
-    ~Storage(){release();}
-    Storage(const Storage&)=delete;Storage& operator=(const Storage&)=delete;
-private:
-    void release(){if(view)backend.destroyImageView(view);view={};backend.allocator().destroyImage(image);}
-};
+using Storage=test::ComputeStorage;
 class Replay {
 public:
     rhi::IRhi& backend;std::array<rhi::GpuBuffer,4> buffers{};std::array<rhi::GpuBuffer,3> readbacks{};
@@ -152,7 +132,7 @@ public:
             }
             for(unsigned i=0;i<6;++i){const auto& data=fixture.textures[i];sampled[i]=std::make_unique<test::ComputeTexture>(backend,data.width,data.height,data.levels,inputFormats[i].value,data.data,inputFormats[i].bytes);
                 if(!useProjected)backend.writeDescriptorImage({set,4+i,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,sampled[i]->view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});}
-            for(unsigned i=0;i<3;++i){outputs[i]=std::make_unique<Storage>(backend,fixture.width,fixture.height,outputFormats[i],fixture.initial[i]);
+            for(unsigned i=0;i<3;++i){outputs[i]=std::make_unique<Storage>(backend,fixture.width,fixture.height,outputFormats[i].value,outputFormats[i].bytes,fixture.initial[i]);
                 readbacks[i]=backend.allocator().createBuffer(fixture.reference[i].size(),VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
                 if(!useProjected)backend.writeDescriptorImage({set,11+i,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,outputs[i]->view,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});}
             if(useProjected&&ownProjected)projected=std::make_unique<ProjectedReflectionRayGpu>(backend,2,code);
@@ -182,7 +162,7 @@ void recordProjected(Replay& replay,rhi::ICommandRecorder& commands,const Fixtur
     const auto seed=constant(1,0),steps=constant(3,0);
     require(std::isfinite(seed)&&seed>=0&&seed<=16777215&&std::trunc(seed)==seed&&std::isfinite(steps)&&steps>=1&&steps<=4096&&std::trunc(steps)==steps,"Invalid source sample settings");
     ProjectedReflectionSettings settings;settings.jitterSeed=static_cast<unsigned>(seed);settings.maxSteps=static_cast<unsigned>(steps);
-    settings.thickness=constant(1,1);settings.motionBlend=constant(2,2);settings.maximumFootprintLevel=constant(5,1);
+    settings.edgeFade=constant(1,1);settings.motionBlend=constant(2,2);settings.maximumFootprintLevel=constant(5,1);
     ProjectedReflectionInputs inputs;
     inputs.previousColor=replay.sampled[0]->view;inputs.previousDepth=replay.sampled[1]->view;inputs.currentDepth=replay.sampled[2]->view;
     inputs.motion=replay.sampled[3]->view;inputs.surfaceMask=replay.sampled[4]->view;inputs.normalRoughness=replay.sampled[5]->view;

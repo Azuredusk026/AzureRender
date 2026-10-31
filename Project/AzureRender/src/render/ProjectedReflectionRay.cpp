@@ -19,8 +19,10 @@ ProjectedReflectionFrame ProjectedReflectionView::pack(VkExtent2D source,VkExten
     for(float value:position)require(std::isfinite(value),"Nonfinite projected reflection camera position");
     for(float value:depthReciprocal)require(std::isfinite(value),"Nonfinite projected reflection depth convention");
     require(depthReciprocal[1]>=0&&depthReciprocal[0]+depthReciprocal[1]>0,"Invalid projected reflection depth convention");
+    require(convention==ProjectedReflectionConvention::MirroredViewY||convention==ProjectedReflectionConvention::VulkanUpperLeft,"Unknown projected reflection coordinate convention");
+    require(settings.motionEncoding==ProjectedReflectionMotionEncoding::FourthRoot||settings.motionEncoding==ProjectedReflectionMotionEncoding::LinearUv,"Unknown projected reflection motion encoding");
     require(settings.jitterSeed<=16777215&&settings.maxSteps>=1&&settings.maxSteps<=4096,"Projected reflection sample budget outside range");
-    require(std::isfinite(settings.thickness)&&settings.thickness>0&&settings.thickness<=1,"Projected reflection thickness must be within (0,1]");
+    require(std::isfinite(settings.edgeFade)&&settings.edgeFade>0&&settings.edgeFade<=1,"Projected reflection edge fade must be within (0,1]");
     require(std::isfinite(settings.motionBlend)&&settings.motionBlend>=0&&settings.motionBlend<=1,"Projected reflection motion blend must be within [0,1]");
     require(std::isfinite(settings.maximumFootprintLevel)&&settings.maximumFootprintLevel>0&&settings.maximumFootprintLevel<=16,"Projected reflection footprint level must be within (0,16]");
     ProjectedReflectionFrame frame{};unsigned offset=0;
@@ -30,8 +32,9 @@ ProjectedReflectionFrame ProjectedReflectionView::pack(VkExtent2D source,VkExten
     frame[23]={float(source.width),float(source.height),1.F/source.width,1.F/source.height};
     frame[24]={0,0,depthReciprocal[0],depthReciprocal[1]};
     frame[25]={float(trace.width),float(trace.height),1.F/trace.width,1.F/trace.height};
-    frame[26]={float(settings.jitterSeed),settings.thickness,0,0};frame[27]={0,0,settings.motionBlend,0};
-    frame[28]={float(settings.maxSteps),0,0,0};frame[29]={0,settings.maximumFootprintLevel,0,0};return frame;
+    frame[26]={float(settings.jitterSeed),settings.edgeFade,0,0};frame[27]={0,0,settings.motionBlend,0};
+    frame[28]={float(settings.maxSteps),0,0,0};frame[29]={0,settings.maximumFootprintLevel,
+        settings.motionEncoding==ProjectedReflectionMotionEncoding::LinearUv?1.F:0.F,convention==ProjectedReflectionConvention::VulkanUpperLeft?1.F:0.F};return frame;
 }
 ProjectedReflectionRayGpu::ProjectedReflectionRayGpu(rhi::IRhi& backend,unsigned frames,const std::vector<char>& code):backend_(backend){
     require(frames>=1&&frames<=8,"Projected reflection frame count must be within 1..8");

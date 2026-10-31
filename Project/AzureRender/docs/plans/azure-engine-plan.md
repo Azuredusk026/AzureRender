@@ -21,6 +21,9 @@ Vulkan 三份完整输出及双配置回归见[参考验证](../acceptance/nr/na
 具名投影射线、独立槽位及完整来源结果见[公共接口验证](../acceptance/nr/projected-ray-contract.md)。
 主场景接续深度、运动编码和前帧资源装配。
 
+引擎相机、线性运动及镜面控制见[相机适配验证](../acceptance/nr/projected-camera-adapter.md)。
+接续表面快照的深度和法线准备。
+
 ## 代码检索与证据管理
 
 有界检索、证据归档与按需符号地图已完成。

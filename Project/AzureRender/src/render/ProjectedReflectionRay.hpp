@@ -7,9 +7,13 @@ using ProjectedReflectionVector=std::array<float,4>;
 using ProjectedReflectionMatrix3=std::array<ProjectedReflectionVector,3>;
 using ProjectedReflectionMatrix4=std::array<ProjectedReflectionVector,4>;
 using ProjectedReflectionFrame=std::array<ProjectedReflectionVector,30>;
+enum class ProjectedReflectionConvention {MirroredViewY,VulkanUpperLeft};
+enum class ProjectedReflectionMotionEncoding {FourthRoot,LinearUv};
 struct ProjectedReflectionSettings {
     unsigned jitterSeed=0,maxSteps=32;
-    float thickness=.1F,motionBlend=0,maximumFootprintLevel=6;
+    float edgeFade=.1F; // Normalized distance from the hit UV to the nearest screen edge.
+    float motionBlend=0,maximumFootprintLevel=6;
+    ProjectedReflectionMotionEncoding motionEncoding=ProjectedReflectionMotionEncoding::FourthRoot;
 };
 // Matrices store columns. Clip coordinates use device depth in [0,1].
 // The caller supplies the selected current/previous projection convention.
@@ -19,6 +23,7 @@ struct ProjectedReflectionView {
     std::array<float,3> position{};
     // Positive forward distance is 1/(depthReciprocal[0]*deviceDepth+depthReciprocal[1]).
     std::array<float,2> depthReciprocal{1,0};
+    ProjectedReflectionConvention convention=ProjectedReflectionConvention::MirroredViewY;
     ProjectedReflectionFrame pack(VkExtent2D sourceExtent,VkExtent2D traceExtent,const ProjectedReflectionSettings&) const;
 };
 struct ProjectedReflectionInputs {

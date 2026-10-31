@@ -22,6 +22,7 @@ SamplerState pointSampler:register(s0);
 float orderedDot(float2 a,float2 b){precise float v=a.x*b.x;return mad(a.y,b.y,v);}
 float orderedDot(float3 a,float3 b){precise float v=a.x*b.x;return mad(a.z,b.z,mad(a.y,b.y,v));}
 float orderedDot(float4 a,float4 b){precise float v=a.x*b.x;return mad(a.w,b.w,mad(a.z,b.z,mad(a.y,b.y,v)));}
+float2 finiteMotion(float2 value){return all(isfinite(value))?value:float2(0,0);}
 [numthreads(8,8,1)] void main(uint3 group:SV_GroupID,uint3 thread:SV_GroupThreadID){
 uint4 r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13;
 uint packedTile=worklist[group.x];uint2 outputPixel=uint2(packedTile>>16,packedTile&65535u)*8+thread.xy;
@@ -77,7 +78,7 @@ float4 v43=(asfloat(r0.zzzz))*(asfloat(r6.xyxz));r5.xyw=asuint(v43).xyw;
 float4 v44=(asfloat(r5.zzzz))*(asfloat(r5.zzzz));r0.z=asuint(v44).z;
 float4 v45=(asfloat(r0.zzzz))*(asfloat(r0.zzzz));r0.z=asuint(v45).z;
 // Reflect the view direction and project the ray.
-uint4 v46=(r4.yyyy)^0x80000000u;r4.w=v46.w;
+if(footprintConfig.w>.5){r4.w=r4.y;}else{uint4 v46=(r4.yyyy)^0x80000000u;r4.w=v46.w;}
 float4 v47=float4(orderedDot((asfloat(r4.xzwx)).xyz,(asfloat(r4.xzwx)).xyz),orderedDot((asfloat(r4.xzwx)).xyz,(asfloat(r4.xzwx)).xyz),orderedDot((asfloat(r4.xzwx)).xyz,(asfloat(r4.xzwx)).xyz),orderedDot((asfloat(r4.xzwx)).xyz,(asfloat(r4.xzwx)).xyz));r0.w=asuint(v47).w;
 float4 v48=rsqrt(asfloat(r0.wwww));r0.w=asuint(v48).w;
 float4 v49=(asfloat(r0.wwww))*(asfloat(r4.xwzx));r4.xyz=asuint(v49).xyz;
@@ -91,7 +92,8 @@ float4 v56=(asfloat(r4.yyyy))*(viewDirectionToClip[1].xyzw);r6.xyzw=asuint(v56).
 float4 v57=mad(viewDirectionToClip[0].xyzw,asfloat(r4.xxxx),asfloat(r6.xyzw));r6.xyzw=asuint(v57).xyzw;
 float4 v58=mad(viewDirectionToClip[2].xyzw,asfloat(r4.zzzz),asfloat(r6.xyzw));r4.xyzw=asuint(v58).xyzw;
 uint4 v59=uint4(0x3f800000u,0x3f800000u,0x3f800000u,0x3f800000u);r3.w=v59.w;
-float4 v60=mad(asfloat(r4.xyzw),asfloat(uint4(0x3f800000u,0xbf800000u,0x3f800000u,0x3f800000u)),asfloat(r3.xyzw));r4.xyzw=asuint(v60).xyzw;
+if(footprintConfig.w>.5){float4 v60=mad(asfloat(r4.xyzw),float4(1,1,1,1),asfloat(r3.xyzw));r4.xyzw=asuint(v60).xyzw;}
+else{float4 v60=mad(asfloat(r4.xyzw),asfloat(uint4(0x3f800000u,0xbf800000u,0x3f800000u,0x3f800000u)),asfloat(r3.xyzw));r4.xyzw=asuint(v60).xyzw;}
 float4 v61=(asfloat(r4.xyzx))/(asfloat(r4.wwww));r4.xyz=asuint(v61).xyz;
 float4 v62=(-(asfloat(r3.xyzx)))+(asfloat(r4.xyzx));r4.xyz=asuint(v62).xyz;
 float4 v63=float4(orderedDot((asfloat(r4.xyxx)).xy,(asfloat(r4.xyxx)).xy),orderedDot((asfloat(r4.xyxx)).xy,(asfloat(r4.xyxx)).xy),orderedDot((asfloat(r4.xyxx)).xy,(asfloat(r4.xyxx)).xy),orderedDot((asfloat(r4.xyxx)).xy,(asfloat(r4.xyxx)).xy));r0.w=asuint(v63).w;
@@ -190,6 +192,7 @@ uint4 v152=((r1.yyyy)!=uint4(0,0,0,0)?uint4(0x3f800000u,0x3f800000u,0x3f800000u,
 float4 v153=(asfloat(r0.wwww))*(asfloat(r1.xxxx));r0.w=asuint(v153).w;
 // Decode signed fourth-power motion at the hit.
 float4 v154=motionInput.SampleLevel(pointSampler,(asfloat(r8.xyxx)).xy,(asfloat(uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u))).x).zxyw;r1.yz=asuint(v154).yz;
+if(footprintConfig.z>.5){float2 delta=finiteMotion(asfloat(r1.yz));r1.yz=asuint(delta);r2.zw=asuint(abs(delta));}else{
 float4 v155=mad(abs(asfloat(r1.yyyz)),asfloat(uint4(0x00000000u,0x00000000u,0x40000000u,0x40000000u)),asfloat(uint4(0x00000000u,0x00000000u,0xbf800000u,0xbf800000u)));r2.zw=asuint(v155).zw;
 float4 v156=(asfloat(r2.zzzw))*(asfloat(r2.zzzw));r2.zw=asuint(v156).zw;
 float4 v157=(asfloat(r2.zzzw))*(asfloat(r2.zzzw));r2.zw=asuint(v157).zw;
@@ -199,6 +202,7 @@ uint4 v160=uint4((asfloat(r1.yyzy))<(asfloat(uint4(0x00000000u,0x00000000u,0x000
 uint4 v161=asuint((-(asint(r4.xxyx)))+(asint(r1.yyzy)));r1.yz=v161.yz;
 float4 v162=float4(asint(r1.yyzy));r1.yz=asuint(v162).yz;
 float4 v163=(asfloat(r1.yyzy))*(asfloat(r2.zzwz));r1.yz=asuint(v163).yz;
+}
 float4 v164=(asfloat(uint4(0x3f800000u,0x3f800000u,0x3f800000u,0x3f800000u)))+(-(historyConfig.zzzz));r1.w=asuint(v164).w;
 float4 v165=(asfloat(r1.wwww))*(asfloat(r1.yyyz));r2.zw=asuint(v165).zw;
 float4 v166=mad(-(asfloat(r1.yzyy)),asfloat(r1.wwww),asfloat(r8.xyxx));r2.xy=asuint(v166).xy;
@@ -208,12 +212,14 @@ uint4 v169=uint4((historyConfig.zzzz)<(asfloat(uint4(0x3f000000u,0x3f000000u,0x3
 uint4 v170=(r1.wwww)&(r1.zzzz);r1.z=v170.z;
 // Reject inconsistent previous-frame geometry.
 float4 v171=mad(asfloat(r2.xyxx),asfloat(uint4(0x40000000u,0x40000000u,0x00000000u,0x00000000u)),asfloat(uint4(0xbf800000u,0xbf800000u,0x00000000u,0x00000000u)));r4.xy=asuint(v171).xy;
-float4 v172=(-(asfloat(r4.yyyy)))*(previousClipToWorld[1].xyzw);r6.xyzw=asuint(v172).xyzw;
+if(footprintConfig.w>.5){float4 v172=asfloat(r4.yyyy)*previousClipToWorld[1].xyzw;r6.xyzw=asuint(v172);}
+else{float4 v172=(-(asfloat(r4.yyyy)))*(previousClipToWorld[1].xyzw);r6.xyzw=asuint(v172).xyzw;}
 float4 v173=mad(previousClipToWorld[0].xyzw,asfloat(r4.xxxx),asfloat(r6.xyzw));r4.xyzw=asuint(v173).xyzw;
 float4 v174=mad(previousClipToWorld[2].xyzw,asfloat(r1.yyyy),asfloat(r4.xyzw));r4.xyzw=asuint(v174).xyzw;
 float4 v175=(asfloat(r4.xyzw))+(previousClipToWorld[3].xyzw);r4.xyzw=asuint(v175).xyzw;
 float4 v176=mad(asfloat(r8.xxxy),asfloat(uint4(0x00000000u,0x40000000u,0x00000000u,0x40000000u)),asfloat(uint4(0x00000000u,0xbf800000u,0x00000000u,0xbf800000u)));r1.yw=asuint(v176).yw;
-float4 v177=(-(asfloat(r1.wwww)))*(clipToWorld[1].xyzw);r6.xyzw=asuint(v177).xyzw;
+if(footprintConfig.w>.5){float4 v177=asfloat(r1.wwww)*clipToWorld[1].xyzw;r6.xyzw=asuint(v177);}
+else{float4 v177=(-(asfloat(r1.wwww)))*(clipToWorld[1].xyzw);r6.xyzw=asuint(v177).xyzw;}
 float4 v178=mad(clipToWorld[0].xyzw,asfloat(r1.yyyy),asfloat(r6.xyzw));r6.xyzw=asuint(v178).xyzw;
 float4 v179=mad(clipToWorld[2].xyzw,asfloat(r8.zzzz),asfloat(r6.xyzw));r6.xyzw=asuint(v179).xyzw;
 float4 v180=(asfloat(r6.xyzw))+(clipToWorld[3].xyzw);r6.xyzw=asuint(v180).xyzw;
@@ -236,8 +242,10 @@ uint4 v196=uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u);r1.x=v196.x;
 }
 // Compute the roughness-dependent projected footprint.
 float4 v198=motionInput.SampleLevel(pointSampler,(asfloat(r2.xyxx)).xy,(asfloat(uint4(0x00000000u,0x00000000u,0x00000000u,0x00000000u))).x).zxyw;r1.yz=asuint(v198).yz;
+if(footprintConfig.z>.5){float2 delta=finiteMotion(asfloat(r1.yz));r4.xy=asuint(sqrt(abs(delta)));}else{
 float4 v199=mad(abs(asfloat(r1.yzyy)),asfloat(uint4(0x40000000u,0x40000000u,0x00000000u,0x00000000u)),asfloat(uint4(0xbf800000u,0xbf800000u,0x00000000u,0x00000000u)));r4.xy=asuint(v199).xy;
 float4 v200=(asfloat(r4.xyxx))*(asfloat(r4.xyxx));r4.xy=asuint(v200).xy;
+}
 float4 v201=(asfloat(uint4(0x40000000u,0x40000000u,0x40000000u,0x40000000u)))/(asfloat(r0.zzzz));r0.w=asuint(v201).w;
 float4 v202=(asfloat(r0.wwww))+(asfloat(uint4(0xbf800000u,0xbf800000u,0xbf800000u,0xbf800000u)));r0.w=asuint(v202).w;
 float4 v203=(asfloat(uint4(0x3f800000u,0x3f800000u,0x3f800000u,0x3f800000u)))/(asfloat(r0.wwww));r0.w=asuint(v203).w;
