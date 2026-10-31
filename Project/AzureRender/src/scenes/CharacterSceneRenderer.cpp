@@ -607,7 +607,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     qaEffectEnabled_ = frame.qaEffectEnabled;
     qaHarnessEnabled_ = frame.qaHarnessEnabled;
     updateUniformBuffer(frame);
-    if(screenReflections_)publishScreenReflectionOutput(static_cast<unsigned>(currentFrame_));
+    if(screenReflectionPrepared())publishScreenReflectionOutput(static_cast<unsigned>(currentFrame_));
     rebuildSceneInstances();
     prepareTransparentIndices();
     // CPU visibility already participates in this renderer. Preserve stable
@@ -1367,9 +1367,9 @@ void CharacterSceneRenderer::registerPasses(
         for(auto resource:reflectionMotionResources)graph.attachment(motion,resource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     }
     std::optional<RenderGraph::ResourceId> reflectionResource;
-    if(screenReflections_&&reflectionActive_[context.currentFrame]){
+    if(screenReflectionPrepared()&&reflectionActive_[context.currentFrame]){
         const auto slot=context.currentFrame;publishScreenReflectionOutput(slot);
-        const auto output=screenReflections_->output(slot);rhi::ImageBarrierDesc initial{};initial.image=output.image;
+        const auto output=screenReflectionOutput(slot);rhi::ImageBarrierDesc initial{};initial.image=output.image;
         reflectionResource=graph.importImage("character-filtered-reflection",initial);
         const auto view=reflectionViews_[slot];const auto settings=reflectionSettings_[slot];
         const ReflectionTraceInputs inputs{overlaySceneDepth_[slot].view,opaqueSceneColor_[slot].view,context.renderExtent.width,context.renderExtent.height};
@@ -1497,7 +1497,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{color,depth,linear}:std::vector<VkClearValue>{color,linear,depth};
     context.commands->beginRenderPass(begin);recordOverlayDepth(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
     if(snapshotMultisampling_)snapshotMultisampling_->recordResolve(*context.commands,context.currentFrame,context.currentFrame);
-    if(screenReflections_&&reflectionActive_[context.currentFrame]){
+    if(screenReflectionPrepared()&&reflectionActive_[context.currentFrame]){
         const auto slot=context.currentFrame;
         if(reflectionReprojection_){
             context.commands->imageBarrier({overlayDepthAttachments_[slot].image,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,
@@ -1615,7 +1615,11 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
          << "  \"reflectionSurfaceSnapshot\": " << (reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?"true":"false") << ",\n"
-         << "  \"screenReflectionComputePrepared\": " << (screenReflections_?"true":"false") << ",\n"
+         << "  \"screenReflectionComputePrepared\": " << (screenReflectionPrepared()?"true":"false") << ",\n"
+         << "  \"screenReflectionAlgorithmRequested\": " << std::quoted(screenSpaceReflectionAlgorithmName(reflectionSettings_[currentFrame_].algorithm)) << ",\n"
+         << "  \"screenReflectionAlgorithm\": " << std::quoted(reflectionShadingActive_[currentFrame_]?(reflectionActive_[currentFrame_]&&projectedReflections_?"projected":"linear"):"disabled") << ",\n"
+         << "  \"screenReflectionProducer\": " << std::quoted(screenReflectionProducer(static_cast<unsigned>(currentFrame_))) << ",\n"
+         << "  \"screenReflectionFallback\": " << nlohmann::json(screenReflectionFallback(static_cast<unsigned>(currentFrame_))).dump() << ",\n"
          << "  \"screenReflectionComputeActive\": " << (reflectionActive_[currentFrame_]?"true":"false") << ",\n"
          << "  \"screenReflectionTemporalPrepared\": " << (reflectionReprojection_?"true":"false") << ",\n"
          << "  \"screenReflectionTemporalActive\": " << (reflectionReprojection_&&reflectionActive_[currentFrame_]?"true":"false") << ",\n"
@@ -1626,9 +1630,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"screenReflectionMotionBytes\": " << (reflectionReprojection_&&motionTarget_?motionTarget_->byteSize():0) << ",\n"
          << "  \"screenReflectionReprojectionBytes\": " << (reflectionReprojection_?reflectionReprojection_->byteSize():0) << ",\n"
          << "  \"screenReflectionPreparation\": " << std::quoted(reflectionPreparation_) << ",\n"
-         << "  \"screenReflectionLevels\": " << (screenReflections_?screenReflections_->levels():0) << ",\n"
-         << "  \"screenReflectionWidth\": " << (screenReflections_?screenReflections_->output(0).extent.width:0) << ",\n"
-         << "  \"screenReflectionHeight\": " << (screenReflections_?screenReflections_->output(0).extent.height:0) << ",\n"
+         << "  \"screenReflectionLevels\": " << (projectedReflections_?projectedReflections_->levels():screenReflections_?screenReflections_->levels():0) << ",\n"
+         << "  \"screenReflectionWidth\": " << (screenReflectionPrepared()?screenReflectionOutput(0).extent.width:0) << ",\n"
+         << "  \"screenReflectionHeight\": " << (screenReflectionPrepared()?screenReflectionOutput(0).extent.height:0) << ",\n"
+         << "  \"screenReflectionImageBudgetBytes\": " << (projectedReflections_?projectedReflections_->imageByteBudget():screenReflections_?screenReflections_->imageByteBudget():0) << ",\n"
          << "  \"ordinaryOpaquePipelineCount\": " << std::count_if(ordinaryOpaquePipelines_.begin(),ordinaryOpaquePipelines_.end(),[](auto p){return p!=VK_NULL_HANDLE;}) << ",\n"
          << "  \"materialClassPipelineCount\": " << [&]{unsigned count=0;for(const auto& variants:materialClassPipelines_)for(auto p:variants)count+=p!=VK_NULL_HANDLE;return count;}() << ",\n"
          << "  \"materialClassFeatureSpecializations\": " << [&]{
@@ -3848,8 +3853,10 @@ void CharacterSceneRenderer::updateUniformBuffer(
     const auto& reflection=settings.screenSpaceReflection;
     const bool reflectionActive=screenSpaceReflectionActive(reflection,settings.sceneLightingEnabled,
         qaIsolationMode_,!(qaEffectMode_==5&&!qaEffectEnabled_));
+    const bool reflectionComputed=screenReflectionPrepared()&&reflection.algorithm==reflectionAlgorithmRequest_
+        &&(!projectedReflections_||(samplingProjectionMatrix_[11]==-1&&samplingProjectionMatrix_[15]==0&&samplingProjectionMatrix_[10]<-1&&samplingProjectionMatrix_[14]<0));
     uniform.screenReflectionWorldToClip=multiply(samplingProjectionMatrix_,viewMatrix_);
-    uniform.screenReflectionTrace={reflectionActive?(screenReflections_?2.F:1.F):0.F,reflection.maxDistance,reflection.thickness,reflection.normalBias};
+    uniform.screenReflectionTrace={reflectionActive?(reflectionComputed?2.F:1.F):0.F,reflection.maxDistance,reflection.thickness,reflection.normalBias};
     uniform.screenReflectionQuality={float(reflection.maxSteps),reflection.maxRoughness,reflection.edgeFade,reflection.strength};
     uniform.cascadeDepthRanges=cascadeDepthRanges;
     uniform.cascadeWorldDiameters=cascadeWorldDiameters;
@@ -3873,7 +3880,7 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.cameraForward = {
         cameraForward[0], cameraForward[1], cameraForward[2], 0.0F,
     };
-    reflectionActive_[currentFrame_]=reflectionActive&&screenReflections_!=nullptr;
+    reflectionShadingActive_[currentFrame_]=reflectionActive;reflectionActive_[currentFrame_]=reflectionActive&&reflectionComputed;
     reflectionSettings_[currentFrame_]=reflection;
     auto& traceView=reflectionViews_[currentFrame_];traceView.projection=samplingProjectionMatrix_;traceView.worldToClip=uniform.screenReflectionWorldToClip;
     for(unsigned axis=0;axis<3;++axis){traceView.position[axis]=uniform.cameraPosition[axis];traceView.right[axis]=uniform.cameraRight[axis];

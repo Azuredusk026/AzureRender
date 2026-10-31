@@ -10,10 +10,20 @@ void CharacterSceneRenderer::createScreenReflectionResources(const RenderContext
             VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});});
         allocator_->destroyBuffer(staging);reflectionFallbackView_=rhi_->createImageView(reflectionFallback_.image,VK_FORMAT_R32G32B32A32_SFLOAT,VK_IMAGE_ASPECT_COLOR_BIT,1);
         reflectionPreparation_="initial-setting-disabled";
+        reflectionAlgorithmRequest_=context.renderSettings?context.renderSettings->screenSpaceReflection.algorithm:ScreenSpaceReflectionAlgorithm::Linear;
         if(!context.renderSettings||!context.renderSettings->screenSpaceReflection.enabled)return;
         reflectionPreparation_="queue-without-compute";if(!context.computeShaders)return;
         reflectionPreparation_="depth-only-snapshot";if(reflectionSurfaceFormat_!=VK_FORMAT_R32G32B32A32_SFLOAT)return;
         constexpr unsigned resolutionDivisor=2;
+        if(reflectionAlgorithmRequest_==ScreenSpaceReflectionAlgorithm::Projected){
+            if(ProjectedScreenReflectionGpu::supported(*rhi_,context.renderExtent,kMaxFramesInFlight,7,resolutionDivisor)){
+                try{
+                    projectedReflections_=std::make_unique<ProjectedScreenReflectionGpu>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),
+                        ProjectedScreenReflectionShaders::load(shaderDirectory_),7,resolutionDivisor);
+                    reflectionPreparation_="projected-current-frame";reflectionHistoryPreparation_="current-frame";return;
+                }catch(const std::exception& error){projectedReflections_.reset();reflectionFallbackReason_=error.what();}
+            }else reflectionFallbackReason_="projected-formats-or-budget";
+        }
         reflectionPreparation_="resource-limits";if(!ScreenReflectionGpu::supported(*rhi_,context.renderExtent,kMaxFramesInFlight,7,ReflectionPyramidPrecision::PreferPacked,resolutionDivisor))return;
         bool temporal=context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT;
         reflectionHistoryPreparation_=temporal?"resource-limits":"multisample-motion-unavailable";
@@ -41,7 +51,7 @@ void CharacterSceneRenderer::createScreenReflectionResources(const RenderContext
     }catch(...){allocator_->destroyBuffer(staging);destroyScreenReflectionResources();throw;}
 }
 void CharacterSceneRenderer::destroyScreenReflectionResources(){
-    screenReflections_.reset();reflectionDescriptorPublished_.fill(false);reflectionActive_.fill(false);
+    projectedReflections_.reset();screenReflections_.reset();reflectionDescriptorPublished_.fill(false);reflectionActive_.fill(false);reflectionShadingActive_.fill(false);reflectionFallbackReason_.clear();
     destroyReflectionHistoryResources();
     if(reflectionFallbackView_)rhi_->destroyImageView(reflectionFallbackView_);reflectionFallbackView_=VK_NULL_HANDLE;
     allocator_->destroyImage(reflectionFallback_);
@@ -56,6 +66,10 @@ VkFramebuffer CharacterSceneRenderer::reflectionMotionFramebuffer(unsigned slot)
 }
 void CharacterSceneRenderer::recordScreenReflection(rhi::ICommandRecorder& commands,unsigned slot,const ReflectionTraceInputs& inputs,const ReflectionTraceView& view,const ScreenSpaceReflectionSettings& settings){
     publishScreenReflectionOutput(slot);
+    if(projectedReflections_){
+        ProjectedScreenReflectionParameters parameters;parameters.maxSteps=settings.maxSteps;parameters.edgeFade=settings.edgeFade;parameters.maxRoughness=settings.maxRoughness;parameters.strength=settings.strength;
+        projectedReflections_->record(commands,slot,{inputs.surface,inputs.color,VK_NULL_HANDLE,{inputs.width,inputs.height}},view,parameters);return;
+    }
     if(!reflectionReprojection_){screenReflections_->record(commands,slot,inputs,view,settings);return;}
     const auto* temporal=state_.temporalFrame;
     const bool valid=temporal&&temporal->previous&&reflectionHistorySubmission_&&temporal->previousSubmission==reflectionHistorySubmission_&&reflectionHistorySlot_!=slot;
@@ -70,8 +84,27 @@ void CharacterSceneRenderer::recordScreenReflection(rhi::ICommandRecorder& comma
 }
 void CharacterSceneRenderer::publishScreenReflectionOutput(unsigned frame){
     if(reflectionDescriptorPublished_.at(frame))return;
-    const auto output=screenReflections_->output(frame);const auto count=bindlessTextures_?1U:static_cast<unsigned>(totalMaterialCount());
+    const auto output=screenReflectionOutput(frame);const auto count=bindlessTextures_?1U:static_cast<unsigned>(totalMaterialCount());
     for(unsigned index=0;index<count;++index)rhi_->writeDescriptorImage({descriptorSets_.at(frame*count+index),37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,
         output.view,VK_NULL_HANDLE,output.layout});
     reflectionDescriptorPublished_[frame]=true;
+}
+ReflectionFilterOutput CharacterSceneRenderer::screenReflectionOutput(unsigned slot) const{
+    if(projectedReflections_)return projectedReflections_->output(slot);
+    if(screenReflections_)return screenReflections_->output(slot);
+    throw std::logic_error("Screen reflection output requires a prepared producer");
+}
+const char* CharacterSceneRenderer::screenReflectionProducer(unsigned slot) const{
+    if(!reflectionShadingActive_.at(slot))return "disabled";
+    if(!reflectionActive_.at(slot))return "fragment";
+    if(projectedReflections_)return "projected-current-frame";
+    return reflectionReprojection_?"linear-temporal":"linear-current-frame";
+}
+std::string CharacterSceneRenderer::screenReflectionFallback(unsigned slot) const{
+    if(!reflectionShadingActive_.at(slot))return {};
+    if(!screenReflectionPrepared())return reflectionPreparation_;
+    if(reflectionSettings_.at(slot).algorithm!=reflectionAlgorithmRequest_)return "resource-rebuild-required";
+    const auto& projection=reflectionViews_.at(slot).projection;
+    if(projectedReflections_&&(projection[11]!=-1||projection[15]!=0||projection[10]>=-1||projection[14]>=0))return "perspective-finite-depth-required";
+    return reflectionFallbackReason_;
 }

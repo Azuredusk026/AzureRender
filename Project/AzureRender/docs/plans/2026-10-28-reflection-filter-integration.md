@@ -406,5 +406,9 @@ R6 已组合公共生产、深度金字塔和足迹过滤。
 前帧颜色、相机平移及拒绝控制见[组合验证](../acceptance/nr/projected-reflection-composition.md)。
 主场景继续按实际采样快照及提交身份装配。
 
+R7 通过类型化算法装配主场景当前帧生产。
+镜面几何、运动及抗锯齿见[场景验证](../acceptance/nr/projected-main-scene.md)。
+R8 接续实际运动、采样抖动差及成功提交的历史输入。
+
 算术顺序、工具及来源见[顺序验证](../acceptance/nr/native-ray-arithmetic-order.md)。
 原始载荷及精度范围见[射线来源](../acceptance/nr/native-ray-source.md)。

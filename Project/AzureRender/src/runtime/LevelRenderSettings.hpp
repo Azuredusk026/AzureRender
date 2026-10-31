@@ -58,21 +58,25 @@ inline void decodeNprLighting(NprLightingSettings& target,const nlohmann::json& 
     value.specularFloor=data.value("specularFloor",value.specularFloor);validateNprLighting(value);target=value;
 }
 inline nlohmann::json encodeScreenSpaceReflection(const ScreenSpaceReflectionSettings& s){
-    return {{"schemaVersion",ScreenSpaceReflectionSettings::kSchemaVersion},{"enabled",s.enabled},
+    validateScreenSpaceReflection(s);
+    return {{"schemaVersion",ScreenSpaceReflectionSettings::kSchemaVersion},{"enabled",s.enabled},{"algorithm",screenSpaceReflectionAlgorithmName(s.algorithm)},
         {"maxDistance",s.maxDistance},{"thickness",s.thickness},{"normalBias",s.normalBias},
         {"maxSteps",s.maxSteps},{"maxRoughness",s.maxRoughness},{"edgeFade",s.edgeFade},{"strength",s.strength}};
 }
 inline void decodeScreenSpaceReflection(ScreenSpaceReflectionSettings& target,const nlohmann::json& data){
     if(!data.is_object()||!data.contains("schemaVersion")||!data.at("schemaVersion").is_number_integer()
-        ||data.at("schemaVersion")!=ScreenSpaceReflectionSettings::kSchemaVersion)
+        ||(data.at("schemaVersion")!=1&&data.at("schemaVersion")!=ScreenSpaceReflectionSettings::kSchemaVersion))
         throw std::invalid_argument("Unsupported screen reflection settings version");
     for(const auto& field:data.items()){
         const auto& key=field.key();
         if(key!="schemaVersion"&&key!="enabled"&&key!="maxDistance"&&key!="thickness"&&key!="normalBias"
-            &&key!="maxSteps"&&key!="maxRoughness"&&key!="edgeFade"&&key!="strength")
+            &&key!="maxSteps"&&key!="maxRoughness"&&key!="edgeFade"&&key!="strength"&&key!="algorithm")
             throw std::invalid_argument("Unknown screen reflection setting");
+        if(key=="algorithm"&&data.at("schemaVersion")==1)throw std::invalid_argument("Reflection algorithm requires settings version two");
     }
     auto value=target;
+    value.algorithm=data.at("schemaVersion")==1?ScreenSpaceReflectionAlgorithm::Linear:
+        parseScreenSpaceReflectionAlgorithm(data.value("algorithm",std::string(screenSpaceReflectionAlgorithmName(value.algorithm))));
     value.enabled=data.value("enabled",value.enabled);
     value.maxDistance=data.value("maxDistance",value.maxDistance);
     value.thickness=data.value("thickness",value.thickness);

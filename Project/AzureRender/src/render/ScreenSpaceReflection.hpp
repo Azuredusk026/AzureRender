@@ -4,8 +4,19 @@
 #include <stdexcept>
 #include <string>
 namespace azurerender {
+enum class ScreenSpaceReflectionAlgorithm {Linear,Projected};
+inline const char* screenSpaceReflectionAlgorithmName(ScreenSpaceReflectionAlgorithm algorithm){
+    if(algorithm==ScreenSpaceReflectionAlgorithm::Linear)return "linear";
+    if(algorithm==ScreenSpaceReflectionAlgorithm::Projected)return "projected";
+    throw std::invalid_argument("Unknown screen reflection algorithm");
+}
+inline ScreenSpaceReflectionAlgorithm parseScreenSpaceReflectionAlgorithm(const std::string& name){
+    if(name=="linear")return ScreenSpaceReflectionAlgorithm::Linear;
+    if(name=="projected")return ScreenSpaceReflectionAlgorithm::Projected;
+    throw std::invalid_argument("Unknown screen reflection algorithm");
+}
 struct ScreenSpaceReflectionSettings {
-    static constexpr std::uint32_t kSchemaVersion=1;
+    static constexpr std::uint32_t kSchemaVersion=2;
     bool enabled=false;
     float maxDistance=20.F; // World metres.
     float thickness=.15F; // Positive camera-forward linear depth in metres.
@@ -14,8 +25,10 @@ struct ScreenSpaceReflectionSettings {
     float maxRoughness=.7F;
     float edgeFade=.08F; // Normalized screen distance to the closest edge.
     float strength=1.F;
+    ScreenSpaceReflectionAlgorithm algorithm=ScreenSpaceReflectionAlgorithm::Linear;
 };
 inline void validateScreenSpaceReflection(const ScreenSpaceReflectionSettings& settings){
+    (void)screenSpaceReflectionAlgorithmName(settings.algorithm);
     const auto range=[](float value,float low,float high,const char* name){
         if(!std::isfinite(value)||value<low||value>high)
             throw std::invalid_argument(std::string("screenSpaceReflection.")+name+" outside legal domain");

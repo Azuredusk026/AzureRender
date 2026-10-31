@@ -331,6 +331,9 @@ P8 保留性能热状态、人工复核和历史归因待项。
 完整着色清单及逐程序编译通过双配置验证。
 实际宿主范围和 Debug 预览待项见[契约验证](../acceptance/recovery/shader-compiler-contract.md)。
 
+主场景装配通过类型化设置选择投影反射。
+实际当前帧生产与历史接续见[场景验证](../acceptance/nr/projected-main-scene.md)。
+
 ## 文档与交付规则
 
 每个可验收阶段同步实现、测试及相关文档。

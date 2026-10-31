@@ -884,6 +884,11 @@ if(BUILD_TESTING)
     add_executable(AzureScreenSpaceReflectionTests tests/ScreenSpaceReflectionTests.cpp src/runtime/SceneDocument.cpp src/render/RenderSettings.cpp)
     target_link_libraries(AzureScreenSpaceReflectionTests PRIVATE AzureRuntime AzureRenderCore)
     add_test(NAME AzureRender.ScreenSpaceReflection COMMAND AzureScreenSpaceReflectionTests "${CMAKE_CURRENT_BINARY_DIR}/runs/ssr-contract/roundtrip.azscene")
+    add_executable(AzureProjectedReflectionSceneTests tests/ProjectedReflectionSceneTests.cpp)
+    target_link_libraries(AzureProjectedReflectionSceneTests PRIVATE AzureRenderCore)
+    target_compile_definitions(AzureProjectedReflectionSceneTests PRIVATE AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+    add_dependencies(AzureProjectedReflectionSceneTests AzureRenderShaders)
+    add_test(NAME AzureRender.ProjectedReflectionScene COMMAND AzureProjectedReflectionSceneTests "${SHADER_BINARY_DIR}")
     add_executable(AzureEnvironmentSpecularTests tests/EnvironmentSpecularTests.cpp src/render/RenderSettings.cpp src/runtime/SceneDocument.cpp)
     target_link_libraries(AzureEnvironmentSpecularTests PRIVATE AzureRuntime AzureRenderCore)
     add_test(NAME AzureRender.EnvironmentSpecular COMMAND AzureEnvironmentSpecularTests "${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/environment_specular/dfg_reference.json" "${CMAKE_CURRENT_BINARY_DIR}/runs/environment-specular-cpu")
@@ -1655,6 +1660,10 @@ if(BUILD_TESTING)
         --executable $<TARGET_FILE:AzurePlayer>
         --suite extended --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.ScreenSpaceReflectionGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.ProjectedScreenReflectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_scene_reflections.py"
+        --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.ProjectedScreenReflectionGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureTools.CubemapEnvironment COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_cubemap_environment.py")
     add_test(NAME AzureEngine.ProjectedHairGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> $<$<CONFIG:Debug>:--require-validation> COMMAND_EXPAND_LISTS)

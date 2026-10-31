@@ -188,12 +188,14 @@ def prepare(root,case):
          [0,0,-1 if case.get('reverse') else 1],target,case.get('reverse',False),case.get('motion',False))
     settings=dict(sceneLighting=True,environmentSpecularModel='ggx-multiscatter-fit',skyIntensity=0,
         skyMode=2,skyColor=[0,0,0],cameraNear=.1,cameraFar=30,shadowDistance=30,platform=False,
-        stylized=False,silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=0,
+        stylized=False,silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=case.get('antiAliasing',0),
         exposure=0,toneMapping=False,contrast=1,saturation=1)
+    if case.get('antiAliasing',0)>=3:settings['schemaVersion']=19
     if not case.get('omitted'):
         configuration=copy.deepcopy(SSR);configuration['enabled']=case.get('enabled',True)
         for field in ('maxDistance','edgeFade'):
             if field in case:configuration[field]=case[field]
+        if 'algorithm' in case:configuration.update(schemaVersion=2,algorithm=case['algorithm'])
         settings['screenSpaceReflection']=configuration
     x=case.get('x',LEFT)
     nodes=[dict(id='floor',resourceId='floor'),dict(id='target',resourceId='target',components={
@@ -261,7 +263,7 @@ def capture(player,root,backend,case,prepare_only,expected_validation):
     assert np.allclose(manifest['qaCameraPosition'],CAMERA,atol=1e-5),(record['name'],'camera pose differs from independent oracle')
     assert np.allclose(manifest['qaCameraTarget'],CAMERA+FORWARD,atol=1e-5),(record['name'],'camera direction differs from independent oracle')
     assert manifest['sceneRenderWidth']==WIDTH and manifest['sceneRenderHeight']==HEIGHT
-    assert manifest['antiAliasing']==0
+    assert manifest['antiAliasing']==case.get('antiAliasing',0)
     paths=sorted((root/'frames').glob('frame_*.png'))
     assert len(paths)==case.get('frames',1),record['name']
     images=[np.asarray(Image.open(p).convert('RGB')) for p in paths]

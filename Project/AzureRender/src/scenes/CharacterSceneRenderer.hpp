@@ -8,6 +8,7 @@
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
+#include "render/ProjectedScreenReflectionGpu.hpp"
 #include "render/ReflectionReprojection.hpp"
 
 #include "extensions/ISceneRenderer.hpp"
@@ -167,7 +168,14 @@ private:
     void recordScreenReflection(rhi::ICommandRecorder&,unsigned,const ReflectionTraceInputs&,const ReflectionTraceView&,const ScreenSpaceReflectionSettings&);
     VkFramebuffer reflectionMotionFramebuffer(unsigned slot) const;
     void publishScreenReflectionOutput(unsigned frame);
+    bool screenReflectionPrepared() const noexcept{return screenReflections_||projectedReflections_;}
+    ReflectionFilterOutput screenReflectionOutput(unsigned slot) const;
+    const char* screenReflectionProducer(unsigned slot) const;
+    std::string screenReflectionFallback(unsigned slot) const;
     std::unique_ptr<ScreenReflectionGpu> screenReflections_;
+    std::unique_ptr<ProjectedScreenReflectionGpu> projectedReflections_;
+    ScreenSpaceReflectionAlgorithm reflectionAlgorithmRequest_=ScreenSpaceReflectionAlgorithm::Linear;
+    std::string reflectionFallbackReason_;
     std::unique_ptr<ReflectionReprojectionGpu> reflectionReprojection_;
     std::unique_ptr<MotionVectorTarget> reflectionOwnedMotion_;
     std::array<VkFramebuffer,kMaxFramesInFlight> reflectionMotionFramebuffers_{};
@@ -178,7 +186,7 @@ private:
     std::string reflectionHistoryPreparation_;
     rhi::GpuImage reflectionFallback_{};VkImageView reflectionFallbackView_{};
     std::string reflectionPreparation_;
-    std::array<bool,kMaxFramesInFlight> reflectionDescriptorPublished_{},reflectionActive_{};
+    std::array<bool,kMaxFramesInFlight> reflectionDescriptorPublished_{},reflectionActive_{},reflectionShadingActive_{};
     std::array<ReflectionTraceView,kMaxFramesInFlight> reflectionViews_{};
     std::array<ScreenSpaceReflectionSettings,kMaxFramesInFlight> reflectionSettings_{};
     VkFormat reflectionSurfaceFormat_=VK_FORMAT_R32_SFLOAT;
