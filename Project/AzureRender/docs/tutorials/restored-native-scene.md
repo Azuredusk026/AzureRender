@@ -74,3 +74,21 @@ $sceneRun = & build/reinstall-environment/venv/Scripts/python.exe `
 材质、曝光及时间采样按[角色参考](../acceptance/recovery/character-reference.md)执行。
 该入口用于核对眼睛、头发和服装的实际外观。
 完整环境组合继续使用本页的联合场景入口。
+
+## 动态角色正面诊断
+
+完整环境中的角色近景见[照明联合验证](../acceptance/nr/character-illumination-integration.md)。
+诊断保持动态模型、原待机动画及完整材质。
+项目的输入资产均位于自身挂载目录中。
+
+```powershell
+& build/ninja-msvc-release/AzurePlayer.exe `
+  --project build/runs/20261031-164808-character-frontal-lighting-fa3879/project/control.azureproject `
+  --width 1536 --height 1536 `
+  --qa-camera scene --qa-light scene --qa-isolation beauty
+```
+
+该入口采用关闭抗锯齿的固定诊断机位。
+底色诊断使用 `--qa-isolation albedo`。
+照明候选使用同目录的 `candidate.azureproject`。
+整体外观及时间稳定性仍按正式门禁验收。

@@ -1,0 +1,16 @@
+{
+  "status": "frontal-diagnostic-captured-visual-quality-pending",
+  "baseCommit": "06d701c",
+  "captures": 3,
+  "resolution": [
+    1536,
+    1536
+  ],
+  "antiAliasing": 0,
+  "verifiedAssetFiles": 1516,
+  "sharedProgramDependenciesVerified": 247,
+  "sourceScope": "Existing dynamic asset, thirteen material documents, idle animation and complete scene. Only camera, AA and candidate NPR fields vary as recorded.",
+  "nativeVisualAcceptance": "pending",
+  "candidatePromotion": "not-promoted",
+  "failedAttempt": "External parent mount rejected by the production project boundary; retained receipt. Successful projects contain copied text and binary hardlinks inside each declared mount."
+}

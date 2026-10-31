@@ -1,0 +1,139 @@
+{
+  "status": "captured-camera-and-iris-regions-verified",
+  "visualAcceptance": "pending",
+  "scope": "Color-mask diagnostics inside manually frozen image rectangles. The mask selects violet iris pixels from the albedo view, includes some boundary pixels and is not a formal native visibility mask.",
+  "irisRegions": [
+    {
+      "region": "image-left-iris",
+      "rectangle": [
+        625,
+        755,
+        697,
+        829
+      ],
+      "maskPixels": 1115,
+      "controlMeanRgb": [
+        140.85201793721973,
+        75.88609865470852,
+        167.1121076233184
+      ],
+      "candidateMeanRgb": [
+        149.12735426008967,
+        84.86278026905829,
+        175.82152466367714
+      ],
+      "changedPixels": 1115,
+      "meanByteDifference": 10.620926756352766,
+      "maximumByteDifference": 47
+    },
+    {
+      "region": "image-right-iris",
+      "rectangle": [
+        838,
+        704,
+        912,
+        781
+      ],
+      "maskPixels": 1074,
+      "controlMeanRgb": [
+        146.70670391061452,
+        80.17877094972067,
+        172.53724394785849
+      ],
+      "candidateMeanRgb": [
+        159.0297951582868,
+        93.30074487895718,
+        181.80446927374302
+      ],
+      "changedPixels": 1074,
+      "meanByteDifference": 13.259155803848541,
+      "maximumByteDifference": 50
+    }
+  ],
+  "captures": [
+    {
+      "case": "control-beauty",
+      "qaCameraPosition": [
+        -0.763776,
+        2.4753,
+        -16.6268
+      ],
+      "qaCameraTarget": [
+        -1.46769,
+        2.61305,
+        -15.93
+      ],
+      "cameraLens": {
+        "farPlane": 10000.0,
+        "nearPlane": 0.10000000149011612,
+        "offsetNdc": [
+          0.0,
+          0.0
+        ],
+        "projection": "perspective",
+        "schemaVersion": 1,
+        "verticalFovRadians": 0.5585053563117981
+      },
+      "viewFogMatch": "camera-mismatch",
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1,
+      "pngSha256": "c46f4e5ea1935a667604bb85fea72e8049602742492471d4bab0217933b69231"
+    },
+    {
+      "case": "candidate-beauty",
+      "qaCameraPosition": [
+        -0.763776,
+        2.4753,
+        -16.6268
+      ],
+      "qaCameraTarget": [
+        -1.46769,
+        2.61305,
+        -15.93
+      ],
+      "cameraLens": {
+        "farPlane": 10000.0,
+        "nearPlane": 0.10000000149011612,
+        "offsetNdc": [
+          0.0,
+          0.0
+        ],
+        "projection": "perspective",
+        "schemaVersion": 1,
+        "verticalFovRadians": 0.5585053563117981
+      },
+      "viewFogMatch": "camera-mismatch",
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1,
+      "pngSha256": "b3659c0f7bc24592b1df31a36abdf6b0622d656df24778c6dad26c230b66e450"
+    },
+    {
+      "case": "control-albedo",
+      "qaCameraPosition": [
+        -0.763776,
+        2.4753,
+        -16.6268
+      ],
+      "qaCameraTarget": [
+        -1.46769,
+        2.61305,
+        -15.93
+      ],
+      "cameraLens": {
+        "farPlane": 10000.0,
+        "nearPlane": 0.10000000149011612,
+        "offsetNdc": [
+          0.0,
+          0.0
+        ],
+        "projection": "perspective",
+        "schemaVersion": 1,
+        "verticalFovRadians": 0.5585053563117981
+      },
+      "viewFogMatch": "camera-mismatch",
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1,
+      "pngSha256": "b0969eda2f92f97e99abf7bcecd2075ff4b2ac588f95d5e2f0fe4444bbd19806"
+    }
+  ]
+}

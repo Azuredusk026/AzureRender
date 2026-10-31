@@ -809,6 +809,15 @@
       "retention": "对应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/character-illumination-integration.md"
+    },
+    {
+      "path": "runs/20261031-164808-character-frontal-lighting-fa3879",
+      "pathBase": "build",
+      "purpose": "完整环境中动态角色的正面及眼部画质诊断。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/control.azureproject",
+      "evidence": "docs/acceptance/nr/character-illumination-integration.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
