@@ -890,6 +890,15 @@
       "pinMarker": ".keep",
       "primaryProject": "project/full-world-normalized.azureproject",
       "evidence": "docs/acceptance/nr/material-radiance-normalization.md"
+    },
+    {
+      "path": "runs/20261101-035644-material-display-domain-0ebb85",
+      "pathBase": "build",
+      "purpose": "角色调色单变量、颜色可达边界及显示策略输入核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/near-grade-only.azureproject",
+      "evidence": "docs/acceptance/nr/material-display-domain.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

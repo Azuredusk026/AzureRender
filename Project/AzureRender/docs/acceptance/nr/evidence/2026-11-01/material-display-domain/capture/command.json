@@ -1,0 +1,22 @@
+[
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+  "--project",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-035644-material-display-domain-0ebb85\\project\\near-grade-only.azureproject",
+  "--width",
+  "1536",
+  "--height",
+  "1536",
+  "--capture-frames",
+  "1",
+  "--fixed-frame-step",
+  "--capture-fps",
+  "60",
+  "--capture-dir",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-035644-material-display-domain-0ebb85\\grade-only-capture\\frames",
+  "--qa-camera",
+  "scene",
+  "--qa-light",
+  "scene",
+  "--runtime-report",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-035644-material-display-domain-0ebb85\\grade-only-capture\\runtime.json"
+]

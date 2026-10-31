@@ -1,0 +1,16 @@
+{
+  "sourceCommit": "dac54cf842692c51b5238cda3f9100c2abd4c117",
+  "frozenBuildSourceCommit": "6910e02dfd5cbe28432e41552233ca80cd2bfd36",
+  "sourceBuildIndexAudit": {
+    "status": "passed",
+    "stagedFiles": 721,
+    "evidenceIndexBlobs": 689,
+    "frozenSourceIndexBlobs": 986,
+    "preservedUserFiles": 4,
+    "unexpectedStagedFiles": [],
+    "evidenceManifestMatchesGitIndex": true,
+    "compiledSourceMatchesGitIndex": true
+  },
+  "visualAcceptance": "failed-user-review",
+  "changedProductionFiles": []
+}

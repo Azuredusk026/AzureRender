@@ -1,0 +1,107 @@
+{
+  "status": "measured",
+  "onlyRenderDifference": "renderSettings.gradeLut",
+  "scope": "Actual production Player with identical normalized material documents, pose, camera, light rig and render settings. Fog and SSR remain disabled and bloom remains off in both isolated captures. The full-world image provides a separate postprocess comparison.",
+  "inputs": {
+    "control": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\near-normalized-isolated\\frames\\frame_000000.png",
+      "sha256": "b4faa0fa3d806b16b12d31234a1eb3082df4eddea730fb96e8fb9a3066e18eeb"
+    },
+    "gradeOnly": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-035644-material-display-domain-0ebb85\\grade-only-capture\\frames\\frame_000000.png",
+      "sha256": "4cba8a1cb23f867f73bb3a0a92fb5f475697bb4eaad830e17e4cf665f8b220b2"
+    },
+    "world": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\near-world-normalized\\frames\\frame_000000.png",
+      "sha256": "b90867247f6c203ecae94c921438e8e67bd9c481b8d1f0511c51f2e57e7e3517"
+    }
+  },
+  "regions": [
+    {
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "medianLinearDisplay": {
+        "control": 0.08709970069185466,
+        "gradeOnly": 0.04914601909835606,
+        "world": 0.04889255614760246
+      },
+      "gradeOnlyRelativeLuminanceChange": -0.43574985094119767,
+      "remainingWorldRelativeLuminanceChange": -0.0051573444890081754,
+      "gradeOnlyMaximumChannelDifference": 36
+    },
+    {
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "medianLinearDisplay": {
+        "control": 0.10638851735723548,
+        "gradeOnly": 0.0695032074966766,
+        "world": 0.06949749759403366
+      },
+      "gradeOnlyRelativeLuminanceChange": -0.34670386219129234,
+      "remainingWorldRelativeLuminanceChange": -8.215308111081399e-05,
+      "gradeOnlyMaximumChannelDifference": 35
+    },
+    {
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "medianLinearDisplay": {
+        "control": 0.24342624543598126,
+        "gradeOnly": 0.2039900137184289,
+        "world": 0.2039057800516856
+      },
+      "gradeOnlyRelativeLuminanceChange": -0.162004847287199,
+      "remainingWorldRelativeLuminanceChange": -0.00041293034500977654,
+      "gradeOnlyMaximumChannelDifference": 17
+    },
+    {
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "medianLinearDisplay": {
+        "control": 0.23468898465164917,
+        "gradeOnly": 0.19531791988365646,
+        "world": 0.19531791988365646
+      },
+      "gradeOnlyRelativeLuminanceChange": -0.16775846904971492,
+      "remainingWorldRelativeLuminanceChange": 0.0,
+      "gradeOnlyMaximumChannelDifference": 15
+    },
+    {
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "medianLinearDisplay": {
+        "control": 0.1015269684618973,
+        "gradeOnly": 0.06319815612626509,
+        "world": 0.06490604691589451
+      },
+      "gradeOnlyRelativeLuminanceChange": -0.3775234591981034,
+      "remainingWorldRelativeLuminanceChange": 0.027024376885572243,
+      "gradeOnlyMaximumChannelDifference": 136
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}
