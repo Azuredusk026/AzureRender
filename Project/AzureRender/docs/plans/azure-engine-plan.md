@@ -50,6 +50,9 @@ Q0 至 Q4 汇总当前执行顺序及完成证据。
 Q0 的两组真实输入及错配拒绝见[校验记录](../acceptance/recovery/evidence/2026-10-31/reference-input-lock/summary.json)。
 参考清单的具体约束见[参考基准](../acceptance/nr/reference-baseline.md)。
 
+每份校验结果对应记录的程序及输入摘要。
+构建候选使用其实际采集记录建立独立清单。
+
 ## 结构与实现约束
 
 生产代码沿用现有目录、模块边界及 CMake 目标。
@@ -111,6 +114,11 @@ Vulkan 三份完整输出及双配置回归见[参考验证](../acceptance/nr/na
 原始正面角色图已按独立项目重跑三十三帧。
 入口差异与剩余像素条件见[角色参考](../acceptance/recovery/character-reference.md)。
 联合画面继续按相同材质与颜色来源校正。
+
+完整照明候选的隐藏环境十二帧严格兼容。
+参数、近景及时间采样见[照明联合验证](../acceptance/nr/character-illumination-integration.md)。
+无光照雾图层的接口配对按既有渲染模块验证。
+Q1 的整体外观和时间稳定性继续验收。
 
 ## 代码检索与证据管理
 

@@ -1,0 +1,27 @@
+{
+  "status": "input-validated-visual-candidate",
+  "sourcePresetFieldsVerified": 16,
+  "objectShadowPrepared": true,
+  "objectShadowPages": 1,
+  "screenReflectionAlgorithm": "linear",
+  "upperEnvironmentRegionXYXY": [
+    0,
+    0,
+    1280,
+    450
+  ],
+  "upperEnvironmentMaximumByteDifference": 1,
+  "upperEnvironmentChangedPixels": 6,
+  "hairMaskPixels": 6581,
+  "baselineHairMeanRgb": [
+    138.24312414526668,
+    23.64671022640936,
+    36.623461480018236
+  ],
+  "candidateHairMeanRgb": [
+    181.31530162589272,
+    56.871600060781034,
+    68.94453730436103
+  ],
+  "hairMaximumChannelSaturationPixels": 1
+}

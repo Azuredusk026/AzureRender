@@ -1,0 +1,181 @@
+{
+  "status": "input-integrity-and-hidden-compatibility-passed",
+  "visualAcceptance": "pending",
+  "cases": [
+    {
+      "case": "near",
+      "projectSha256": "2b575c1b87e294baec5173cb9e0e8930e64bbf62008a3d171cca47c3d4e9dfc7",
+      "levelSha256": "aa5cb1f3a1feb257940ea8c2e34d765d803ca6060ab751ab36eb288b49a3a35a",
+      "presetFieldsVerified": 16,
+      "sceneIntegrity": "passed",
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1
+    },
+    {
+      "case": "full",
+      "projectSha256": "f8ca28a54f446c624b526f5ae507109c7ab6184b94d839456b52d83f40549b25",
+      "levelSha256": "aece548b38ac31c3d59d212e39e42944f439d4c786598e3d9cc6dd84e1215139",
+      "presetFieldsVerified": 16,
+      "sceneIntegrity": "passed",
+      "objectShadowPrepared": true,
+      "objectShadowPages": 1
+    },
+    {
+      "case": "hidden",
+      "projectSha256": "044d085bfa2489c54f8b798b3583681ae9d43633e35d2a6ab79be7641524325d",
+      "levelSha256": "a558bafd077961404b057e654e5359a4c90ed016823d72f18e5fefb193293e7b",
+      "presetFieldsVerified": 16,
+      "sceneIntegrity": "passed",
+      "objectShadowPrepared": true,
+      "objectShadowPages": 0
+    },
+    {
+      "case": "control-hidden",
+      "projectSha256": "d15e020102ac630f45767d2699f0f819fc237d6a53fa3a27a3f12051742d3577",
+      "levelSha256": "7ff5e644a50afedec28cb432a493b685897cf025adc799afb74b965cfd41861e",
+      "presetFieldsVerified": 4,
+      "sceneIntegrity": "passed",
+      "objectShadowPrepared": true,
+      "objectShadowPages": 0
+    }
+  ],
+  "unchangedCharacterFiles": [
+    {
+      "path": "assets\\restored-character-materials\\material-0.azurematerial",
+      "bytes": 28005,
+      "sha256": "b959f3c38e6be013641ad68221bdbeb1ea1b58ebf74892a290a991893022fad7"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-0.azurematerial.azmeta",
+      "bytes": 300,
+      "sha256": "18b36cb93a512d8164ec77467de16706cbedf2adfce4cec94a8dae5624dcbe67"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-1.azurematerial",
+      "bytes": 31909,
+      "sha256": "7b05827ef427a5137ff194a0b271ca2796c857d0a81b187c7897f835e140986d"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-1.azurematerial.azmeta",
+      "bytes": 390,
+      "sha256": "162f1074e72598301b6f04c66911d7121312887efc077317447522dd6029f8af"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-10.azurematerial",
+      "bytes": 21533,
+      "sha256": "1207dd33c57674142f54985a991a73475a2929c397a81f356ed8a7e448843348"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-10.azurematerial.azmeta",
+      "bytes": 165,
+      "sha256": "7e850e768adb22b7f1cda2936348be75027be16d8f653025e0ec25a1e219f440"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-11.azurematerial",
+      "bytes": 22418,
+      "sha256": "501827cef6d5b914db31794f61b8858015167ec6552c8c8a9015b05ff42c4665"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-11.azurematerial.azmeta",
+      "bytes": 255,
+      "sha256": "0041f321951dcbf39f8ac883fd7dc8a7bf883baad0647ba5088694efbb5e5ef7"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-12.azurematerial",
+      "bytes": 20012,
+      "sha256": "cefbf58df2ac625fbbbaf96be68a89d0beea7b11bec33cc6a93598f168979682"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-12.azurematerial.azmeta",
+      "bytes": 117,
+      "sha256": "20226fe2184d85d9a6f304f6dbb11362dddaaddbbd780a673e887674b6a2487b"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-2.azurematerial",
+      "bytes": 31413,
+      "sha256": "63465376ec9a222028f8e0400ca015b9054523d37eff2ef360d1033685a2d539"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-2.azurematerial.azmeta",
+      "bytes": 345,
+      "sha256": "1052a5e8c00a05ddd4e22d12070f743488e8f4320cca94ee1d16bcdcba1290b7"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-3.azurematerial",
+      "bytes": 30741,
+      "sha256": "55e4b31fff80d95b5e14685efc08c512444a70015aa0433aacc7485e6050221b"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-3.azurematerial.azmeta",
+      "bytes": 300,
+      "sha256": "1d43e93e2698fe0bdc39fc59c5ac1b0d0353947e90ca0aed7a5dec4ef400a3e4"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-4.azurematerial",
+      "bytes": 32627,
+      "sha256": "76ea758de67f868299b0dc6120c8ed7356a3076242da605345d82821b85a15e5"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-4.azurematerial.azmeta",
+      "bytes": 345,
+      "sha256": "f33f76fe0a405a76d9adeee682b4a7f64608eb1ef21bd03c5a760fff1e532a29"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-5.azurematerial",
+      "bytes": 31413,
+      "sha256": "6216895e3fbf40146d4c09250c9111ccb7b35db91989624cbe4f0d3ff103a133"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-5.azurematerial.azmeta",
+      "bytes": 345,
+      "sha256": "6a345f9a902b6aeb84b78962a8eeae9a928f014d7aedfd631ebf93388a1a2e1c"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-6.azurematerial",
+      "bytes": 25478,
+      "sha256": "950d7bc898265fda9d0a50656ebb5302750779fd51d67dfaba326bec71d6b189"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-6.azurematerial.azmeta",
+      "bytes": 255,
+      "sha256": "8cd2f7baa4ff7dadc0081c306d5389e4c137dda7679d480197032dbb8afff018"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-7.azurematerial",
+      "bytes": 21591,
+      "sha256": "988af44d222563ff63279726c5417d99ba241cdba3c6dde6d0e9fb1b74d07914"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-7.azurematerial.azmeta",
+      "bytes": 165,
+      "sha256": "0a9ad8ab4ccf2c93aca6447b08cb9597b9b6aebba00dc084e3ab53b35f323d9d"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-8.azurematerial",
+      "bytes": 28252,
+      "sha256": "02ecdceafa9a95cc9fcd4abb8971f68e628839aed8a3e877b07fee0c4eb81959"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-8.azurematerial.azmeta",
+      "bytes": 345,
+      "sha256": "369ef820a6bdda2fb04cf3d69604ab76f8eec0791c216db717970bd82865d7e0"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-9.azurematerial",
+      "bytes": 30804,
+      "sha256": "4325859f1a6f7414ffe5d2eac331fbc26375c211782b92dae8cefb5322e81663"
+    },
+    {
+      "path": "assets\\restored-character-materials\\material-9.azurematerial.azmeta",
+      "bytes": 435,
+      "sha256": "4b95a015af3ca92b0ee69fad3d7faaf5ab9d459b58983795d07007bad38a5dff"
+    },
+    {
+      "path": "content-character\\hero-restored-inputs-v7.glb",
+      "bytes": 28283500,
+      "sha256": "af8ebb6d417899a6b74c97056ebbf636dd910ec9b1367045f65fc5f0ea7c2dfb"
+    }
+  ],
+  "hiddenFramesStrictlyEqual": 12,
+  "scope": "Data-only NPR preset candidate. Formal native visual, temporal, Debug and performance gates remain pending."
+}

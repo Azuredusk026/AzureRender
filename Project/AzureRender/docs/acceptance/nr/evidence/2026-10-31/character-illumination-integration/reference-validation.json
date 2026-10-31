@@ -1,0 +1,10 @@
+{
+  "eligible": [],
+  "pending": [],
+  "auxiliary": [
+    "full-release",
+    "full-debug",
+    "portrait-temporal",
+    "portrait-high"
+  ]
+}

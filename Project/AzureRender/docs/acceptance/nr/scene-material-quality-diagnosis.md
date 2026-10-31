@@ -63,6 +63,9 @@ Vulkan 实际帧的射线事件为 `21668`。
 对象阴影显示腿部和部分衣料的遮挡。
 该分项与材质本身的遮蔽量分别验收。
 
+完整风格化照明候选及时间采样见[照明联合验证](character-illumination-integration.md)。
+该候选通过隐藏环境兼容，整体角色外观继续验收。
+
 ![角色近景](evidence/2026-10-31/scene-material-quality/actor-beauty.png)
 
 近景采用新的相机位置和长宽比。

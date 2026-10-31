@@ -18,7 +18,8 @@ from test_unlit_texture_layers_gpu import profile, png_uri, linear
 
 
 CASES=('alpha','additive','none','disabled','absent','camera-mismatch','aspect-mismatch',
-       'near','orthographic','gradient','resize','document','msaa')
+       'near','orthographic','gradient','resize','document','msaa',
+       'object-shadow','object-shadow-additive','object-shadow-msaa','object-shadow-additive-msaa')
 
 
 def run(player, output, validation, selected):
@@ -32,19 +33,26 @@ def run(player, output, validation, selected):
     for fixed in (False,True):
         for kind in selected or CASES:
             name=('fixed-' if fixed else 'indexed-')+kind
+            additive='additive' in kind
+            multisample='msaa' in kind
+            object_shadow=kind.startswith('object-shadow')
             root=output/name;assets=root/'assets';assets.mkdir(parents=True)
             surface(assets/'surface.gltf',double_sided=True)
             model=json.loads((assets/'surface.gltf').read_text())
             p=profile();p.update(fogMode='none' if kind=='none' else 'scene',tint=[.45,.25,.1,.5],
                 blendTint=[0,0,0,0],softIntersection=dict(enabled=False,distance=1,bias=0),
                 highlightExpansion=dict(threshold=1,gain=0))
-            if kind=='additive':p['composite']='additive'
+            if additive:p['composite']='additive'
             model['images']=[dict(uri=png_uri(np.full((1,1,4),255,dtype=np.uint8)))]
             model['textures']=[dict(source=0)]
             model['materials']=[dict(name='FogSurface',alphaMode='BLEND',doubleSided=True,
                 extras=dict(azureSlotId='surface',azureRenderMaterial=dict(schemaVersion=2,
                 **{'class':'generic'},features=['unlit-surface','unlit-texture-layers'],surface=p)))]
             front=dict(id='surface',resourceId='surface',components={'azure.transform':component('azure.transform',dict(translation=[0,0,0]))})
+            if object_shadow:
+                front['components']['azure.object-shadow']=component('azure.object-shadow',dict(
+                    enabled=True,center=[0,0,0],halfExtents=[2,2,2],normalBias=.1,lightBias=.05,
+                    filterRadiusX=4,filterRadiusY=2,atlasPage=6))
             if kind=='document':
                 image_id='11111111-1111-4111-8111-111111111111';material_id='22222222-2222-4222-8222-222222222222'
                 Image.new('RGBA',(1,1),(255,255,255,255)).save(assets/'white.png')
@@ -82,7 +90,7 @@ def run(player, output, validation, selected):
                     for x in range(dims[0]):payload.extend(struct.pack('<4e',*(x*.125,y*.0625,.03125,.5) if gradient else (.03125,.0625,.125,.5)))
             (assets/'view.azfog').write_bytes(b'AZFOG001'+struct.pack('<3I',*dims)+payload)
             settings=dict(schemaVersion=20,sceneLighting=True,skyIntensity=0,platform=False,background=False,stylized=False,
-                silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=4 if kind=='msaa' else 0,
+                silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=4 if multisample else 0,
                 exposure=0,toneMapping=False,contrast=1,saturation=1)
             scene=dict(schemaVersion=1,id=name,sceneType='character',resources=[dict(id='surface',asset='assets:/surface.gltf'),dict(id='rear',asset='assets:/rear.gltf')],
                 nodes=[front,camera,dict(id='rear',resourceId='rear',components={'azure.transform':component('azure.transform',dict(translation=[0,0,-2],scale=[10,10,10]))})],
@@ -97,10 +105,11 @@ def run(player, output, validation, selected):
             (root/'command.json').write_text(json.dumps(command,indent=2))
             with (root/'player.log').open('w') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
             log=(root/'player.log').read_text(errors='replace')
-            assert 'Allocator after unload: buffers=0 images=0' in log and not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
+            assert 'Allocator after unload: buffers=0 images=0' in log and not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log,re.I),name
             if validation!='any':assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             manifest=json.loads((root/'frames/capture_manifest.json').read_text())
-            if kind=='msaa':assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
+            if multisample:assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
+            if object_shadow:assert manifest['objectShadowPrepared'] and manifest['objectShadowPages']==1,name
             assert manifest['materialSurfaceProfileLayoutVersion']==17 and manifest['cameraUniformBytes']==688,name
             expected_state=kind if kind in ('camera-mismatch','aspect-mismatch') else 'disabled' if kind in ('absent','disabled') else 'matched'
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])
@@ -116,8 +125,8 @@ def run(player, output, validation, selected):
                     return color*(1+(trans-1)*weight)+(0 if additive else scatter*weight)
                 expected=fog(np.array([.07,.09,.11]),5)
                 if covered:
-                    front_color=np.array([.45,.25,.1]) if kind=='none' else fog(np.array([.45,.25,.1]),3,kind=='additive')
-                    expected=expected+front_color*.5 if kind=='additive' else expected*.5+front_color*.5
+                    front_color=np.array([.45,.25,.1]) if kind=='none' else fog(np.array([.45,.25,.1]),3,additive)
+                    expected=expected+front_color*.5 if additive else expected*.5+front_color*.5
                 actual=linear(pixels[y,x]);error=float(np.max(abs(actual-expected)));errors.append(error)
                 assert error<=.008,(name,x,y,actual.tolist(),expected.tolist(),error)
             if fixed:assert np.array_equal(pixels,images[kind]),name

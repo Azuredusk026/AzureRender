@@ -3421,7 +3421,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             createFacingPipelines(additiveBlendPipelines_,composed);
             if(coloredAdditive){composed.vertexBindings[1].stride=sizeof(std::array<float,4>);
                 createFacingPipelines(vertexColorAdditiveBlendPipelines_,composed);}}
-        if(viewFog_)viewFog_->initializePipelines(context,materialDesc,bindlessTextures_,asset_,additionalResources_);
+        if(viewFog_)viewFog_->initializePipelines(context,materialDesc,bindlessTextures_,computeSkinningEnabled_,asset_,additionalResources_);
         materialDesc.cullMode=VK_CULL_MODE_NONE;
         initializeHairIntegralPipelines(context,integralBase);
         auto multiplyDesc=materialDesc;

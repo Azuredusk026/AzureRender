@@ -75,7 +75,7 @@
 时间边缘、采样与程序版本需要继续分项核对。
 
 历史 Player 摘要以 `e8b98db469` 开头。
-当前 Player 摘要以 `8bac912e35` 开头。
+参考复现批次的 Player 摘要以 `8bac912e35` 开头。
 自动开发已更新程序及着色产物，版本按清单记录。
 残余像素差异的代码与设备归因仍待确认。
 
@@ -101,6 +101,8 @@ $characterRun = & build/reinstall-environment/venv/Scripts/python.exe `
 原始模型、材质、纹理和场景均保留内容摘要。
 图片、完整序列及实际命令见[结构化记录](evidence/2026-10-31/character-reference/summary.json)。
 照明单参数候选的状态见[配置计划](../../plans/2026-10-31-native-character-visibility.md)。
+
+眼部固定区域及完整照明候选见[联合验证](../nr/character-illumination-integration.md)。
 
 ## 接续验证
 

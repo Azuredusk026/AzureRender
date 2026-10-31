@@ -21,9 +21,9 @@ struct CharacterSceneRenderer::ViewFogState {
         }
     }
     void initializePipelines(const RenderContext& context,const rhi::GraphicsPipelineDesc& base,
-        bool indexed,const LoadedAsset& primary,const std::vector<std::unique_ptr<AdditionalResource>>& additional){
+        bool indexed,bool computeSkinning,const LoadedAsset& primary,const std::vector<std::unique_ptr<AdditionalResource>>& additional){
         releasePipelines();
-        VkShaderModule vertex=VK_NULL_HANDLE,fragment=VK_NULL_HANDLE,layered=VK_NULL_HANDLE;
+        VkShaderModule vertex=VK_NULL_HANDLE,fragment=VK_NULL_HANDLE,layered=VK_NULL_HANDLE,layeredVertex=VK_NULL_HANDLE;
         try{
             vertex=backend.createShaderModule(readBinaryFile(context.shaderDirectory+"/background.vert.spv"));
             fragment=backend.createShaderModule(readBinaryFile(context.shaderDirectory+
@@ -48,8 +48,11 @@ struct CharacterSceneRenderer::ViewFogState {
             if(needed[0][0]||needed[0][1]||needed[1][0]||needed[1][1]){
                 const auto file=sceneFragmentVariant(indexed?"/mesh_fog_bindless.frag.spv":"/mesh_fog.frag.spv",context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT,false,false);
                 layered=backend.createShaderModule(readBinaryFile(context.shaderDirectory+file));
+                // Unlit fog layers do not consume the object-shadow varying.
+                layeredVertex=backend.createShaderModule(readBinaryFile(context.shaderDirectory+
+                    (computeSkinning?"/mesh_compute.vert.spv":"/mesh.vert.spv")));
                 for(unsigned additive=0;additive<2;++additive)for(unsigned color=0;color<2;++color)if(needed[additive][color]){
-                    auto material=base;material.fragmentShader=layered;
+                    auto material=base;material.vertexShader=layeredVertex;material.fragmentShader=layered;
                     material.alphaBlend=true;material.depthWrite=false;
                     material.primaryColorBlend=additive?rhi::PrimaryColorBlend::Additive:rhi::PrimaryColorBlend::Alpha;
                     material.vertexBindings[1].stride=color?sizeof(std::array<float,4>):0;
@@ -62,9 +65,11 @@ struct CharacterSceneRenderer::ViewFogState {
             }
         }catch(...){
             if(vertex)backend.destroyShaderModule(vertex);if(fragment)backend.destroyShaderModule(fragment);if(layered)backend.destroyShaderModule(layered);
+            if(layeredVertex)backend.destroyShaderModule(layeredVertex);
             releasePipelines();throw;
         }
         backend.destroyShaderModule(vertex);backend.destroyShaderModule(fragment);if(layered)backend.destroyShaderModule(layered);
+        if(layeredVertex)backend.destroyShaderModule(layeredVertex);
     }
     void update(unsigned frame,const CameraViewDescriptor& camera,std::array<std::uint32_t,2> extent){
         const auto current=gpu.updateFrame(frame,camera,extent);

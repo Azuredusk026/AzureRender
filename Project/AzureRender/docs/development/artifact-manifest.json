@@ -801,6 +801,14 @@
       "pinMarker": ".keep",
       "primaryProject": "project/native-visibility-near.azureproject",
       "evidence": "docs/plans/2026-10-31-native-character-visibility.md"
+    },
+    {
+      "path": "runs/20261031-155126-temporal-reference-quality-a9c045",
+      "pathBase": "build",
+      "purpose": "角色照明、时间采样及雾效接口回归。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/character-illumination-integration.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

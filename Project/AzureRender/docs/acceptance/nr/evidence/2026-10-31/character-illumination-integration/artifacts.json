@@ -1,0 +1,312 @@
+[
+  {
+    "path": "actor-near.png",
+    "bytes": 2979155,
+    "sha256": "8742be6ed6d8dd9da85dad78894d3bbdcdd18fc476d52571f52060766429bfad"
+  },
+  {
+    "path": "capture-illumination-full.py",
+    "bytes": 3270,
+    "sha256": "9ddef9321e54a4594190898ef23c2105e6c27a3371b206c3bd7b5c151cd79d61"
+  },
+  {
+    "path": "eye-comparison.json",
+    "bytes": 2759,
+    "sha256": "ee165c50fd4d9a38d2db7e62df101fae9f5400698befee2966217b4d21e57e59"
+  },
+  {
+    "path": "fog-fixtures-debug.json",
+    "bytes": 44241,
+    "sha256": "d89cd6f50d7d0e888695d2c691db797030f97c6ab516c75078d03e73f4639c80"
+  },
+  {
+    "path": "fog-fixtures-release.json",
+    "bytes": 44665,
+    "sha256": "ce592ce24dc0a03b1c5b937f3372e6378f2abbbee45711fdda50b5312211c1d9"
+  },
+  {
+    "path": "fog-interface-build-debug.log.gz",
+    "bytes": 349,
+    "sha256": "b2bb1755b4dc5f2ee1fb0a97036b7ea869058fd338f974baecf5392e18738db3"
+  },
+  {
+    "path": "fog-interface-build-release.log.gz",
+    "bytes": 350,
+    "sha256": "eedefc88ac97556d574e253041216c855c5420bdce9ed42802bf65fcbd15b5f3"
+  },
+  {
+    "path": "fog-interface-cpu-debug.log.gz",
+    "bytes": 381,
+    "sha256": "75ebaddab307c40d90a1922ec080d17269749d165e6426e645e800a418ebda3a"
+  },
+  {
+    "path": "fog-interface-cpu-release.log.gz",
+    "bytes": 374,
+    "sha256": "ae168c49884e33ec2d32811a05cc4339c4585f5bf681e133970100799c84a0fc"
+  },
+  {
+    "path": "fog-interface-green-debug.log.gz",
+    "bytes": 269,
+    "sha256": "bcb7d6627a754d6b46cc24ab0dc25d752d7e08842f8db42e8e7b0ff08d48598a"
+  },
+  {
+    "path": "fog-interface-red.log.gz",
+    "bytes": 346,
+    "sha256": "d735546976f66d392d30a77e1c536bca28a4cadd2172152bbfc24d463658d191"
+  },
+  {
+    "path": "fog-interface-regression.json",
+    "bytes": 76424,
+    "sha256": "bfb583eaa316f550f9a52afb4debc206e810280c6219a97b45e4bc7204e9e7ae"
+  },
+  {
+    "path": "fog-interface-regression.log.gz",
+    "bytes": 122,
+    "sha256": "a5d538885a49834a23afb5e316cdf77fecc93fb48559f05da346655d3c28ac07"
+  },
+  {
+    "path": "frames-manifest.json",
+    "bytes": 7431,
+    "sha256": "70291c3da7bc83f44290be14967d4b37bc007a1ef6458db1728ff795d8c40840"
+  },
+  {
+    "path": "full-debug/capture_manifest.json",
+    "bytes": 9104,
+    "sha256": "d1ad819e4600b24b96fea40078005fa3fe2d983c036b3b089094b7c8f2a1fe54"
+  },
+  {
+    "path": "full-debug/runtime.json.gz",
+    "bytes": 30458,
+    "sha256": "0f6b64768044961cb9cc4ee4311cee965dd0503dcd0b07bed7d87e3ff34e6896"
+  },
+  {
+    "path": "full-release/capture_manifest.json",
+    "bytes": 9107,
+    "sha256": "074bfac6286303d0976c588d496a831d7dabefc404a69b04fe77ffc419c147cb"
+  },
+  {
+    "path": "full-release/runtime.json.gz",
+    "bytes": 30456,
+    "sha256": "fd5ed2447fb2fd1ef5c20174af95b22aecb01da5b44a77e3d2342785e31c1e53"
+  },
+  {
+    "path": "full-scene.png",
+    "bytes": 5623569,
+    "sha256": "7b269a7fbb4a6ccd9dbcdf336ec1719b9a34463345552f7b3dac419885951c6c"
+  },
+  {
+    "path": "illumination-candidates.json",
+    "bytes": 2960,
+    "sha256": "330b6e5644588aebf36317035bbd6d7342ae33d5e293ff76e389426085fd2f90"
+  },
+  {
+    "path": "illumination-control-hidden/capture_manifest.json",
+    "bytes": 8974,
+    "sha256": "8d623d8edb5a74c7e9ee619ae54d50af2db27af9b9c470fedd4339e54044101d"
+  },
+  {
+    "path": "illumination-control-hidden/player.log.gz",
+    "bytes": 3273,
+    "sha256": "fb5695d9c0d02cfcd6becd6df18fb541af2047fcaec8e9695b5ff4e152b756f4"
+  },
+  {
+    "path": "illumination-control-hidden/runtime.json.gz",
+    "bytes": 30463,
+    "sha256": "901db963ea99103b1f37e10f0bad7a424210c06adf08338a530eeea0971398e4"
+  },
+  {
+    "path": "illumination-full/capture_manifest.json",
+    "bytes": 9107,
+    "sha256": "53b9946933a1f00ecbc0d3c78b6c6506bd46910ec16f7d4d7c16075ad3eec0a3"
+  },
+  {
+    "path": "illumination-full/player.log.gz",
+    "bytes": 3295,
+    "sha256": "fe1b874342f3e0dab99d7b3ad1c77b96c05f1a1b1b7a68147d389bbf85db121c"
+  },
+  {
+    "path": "illumination-full/runtime.json.gz",
+    "bytes": 30457,
+    "sha256": "57e90a414411d1b6b6b7c1ada2446fbaabde4ec50d91e3f77cc27e02ceacf8a5"
+  },
+  {
+    "path": "illumination-full-summary.json",
+    "bytes": 43869,
+    "sha256": "6870a4526ed9a14da69c86abf88fc8370a5fa8f54743fbd30e80d7ecad3123b7"
+  },
+  {
+    "path": "illumination-hidden/capture_manifest.json",
+    "bytes": 9097,
+    "sha256": "be89343c4d1db38fc7505213508a9e0b1832bf450949a90420f0668f51037c68"
+  },
+  {
+    "path": "illumination-hidden/player.log.gz",
+    "bytes": 3265,
+    "sha256": "8d13ee99a7414b9811d8690fa973562fc5a0b930a89aa56b712260de0e72c7e2"
+  },
+  {
+    "path": "illumination-hidden/runtime.json.gz",
+    "bytes": 30459,
+    "sha256": "97f0ed407579c4972e510ee1c8b2b5469a8d60741086ec0495974816f72d47dc"
+  },
+  {
+    "path": "illumination-near/capture_manifest.json",
+    "bytes": 9103,
+    "sha256": "920896e59bb86c505d330a4df9a9e04526c776010149b6a085cbba0a7bb53989"
+  },
+  {
+    "path": "illumination-near/player.log.gz",
+    "bytes": 3283,
+    "sha256": "dcb7f67d1837d9ed7be7c493195dc2de6bfb69ab94e2f1beacf208bc49eb917c"
+  },
+  {
+    "path": "illumination-near/runtime.json.gz",
+    "bytes": 30432,
+    "sha256": "447f28f3ec005fc9e80b371a796b75b9fa94cc10a461264b200c1ab111e8b073"
+  },
+  {
+    "path": "illumination-near-verification.json",
+    "bytes": 615,
+    "sha256": "381981c567ecd668f2b942d2f6e583acf271c005e6cd4b4dd5d0bffb8a578b2d"
+  },
+  {
+    "path": "illumination-verification.json",
+    "bytes": 7115,
+    "sha256": "2f532f337a0ae5a6202e1609607f16193f2e863a12341340baf73628babdbc8c"
+  },
+  {
+    "path": "logs/fog-interface-green-debug/fixed-object-shadow/player.log.gz",
+    "bytes": 1613,
+    "sha256": "8b0e25be0a80f104e20fcf0a6c00a68aedf7f5f292d876ecbba5bb9de5b11c43"
+  },
+  {
+    "path": "logs/fog-interface-green-debug/fixed-object-shadow-additive/player.log.gz",
+    "bytes": 1617,
+    "sha256": "51eaef446251eebf119484f0e0d50cf1574784e7c564ab2e0068112fe32cd342"
+  },
+  {
+    "path": "logs/fog-interface-green-debug/fixed-object-shadow-additive-msaa/player.log.gz",
+    "bytes": 1650,
+    "sha256": "22c66946383a63b6311167a5e244440b58cf65d1866bd69cca6914683ecf0a50"
+  },
+  {
+    "path": "logs/fog-interface-green-debug/fixed-object-shadow-msaa/player.log.gz",
+    "bytes": 1651,
+    "sha256": "e8a747781e13acc50c842c7b5878cc8c2d9ceadd8f31b32b602d73bdeb28028c"
+  },
+  {
+    "path": "logs/fog-interface-green-debug/indexed-object-shadow/player.log.gz",
+    "bytes": 1608,
+    "sha256": "f335b4d0f2303713e3a0f53f2bf834ed82b455427fa346393a0fa6ba887b523f"
+  },
+  {
+    "path": "logs/fog-interface-green-debug/indexed-object-shadow-additive/player.log.gz",
+    "bytes": 1619,
+    "sha256": "c43c4ae6f2f7008957e30060517300091e3dd7944d690dd66a7a956c55f809d2"
+  },
+  {
+    "path": "logs/fog-interface-green-debug/indexed-object-shadow-additive-msaa/player.log.gz",
+    "bytes": 1658,
+    "sha256": "6bbb16d18cedb45e96fe9bc6c441f8cf75ffa398d8c2615ac361ba99cc4673c8"
+  },
+  {
+    "path": "logs/fog-interface-green-debug/indexed-object-shadow-msaa/player.log.gz",
+    "bytes": 1655,
+    "sha256": "884b14eab3d4d53fe75ed76dbd7065df8042c1692ffa0d35f239da65ab6ae851"
+  },
+  {
+    "path": "logs/fog-interface-red/indexed-object-shadow/player.log.gz",
+    "bytes": 1867,
+    "sha256": "632f852b72c4c1dca6bfa6c387bd5b452022c7d73e2d898cd5f67677461645db"
+  },
+  {
+    "path": "logs/fog-interface-regression/full-debug/player.log.gz",
+    "bytes": 3382,
+    "sha256": "f96091b1bf6503ba92b65672ab48073f0b0f8f09c741b6348e71490340e15235"
+  },
+  {
+    "path": "logs/fog-interface-regression/full-release/player.log.gz",
+    "bytes": 3329,
+    "sha256": "ed67417598d0c440b09c85df68d14c7c5d52503a333dd11bc316cb63699ee1cb"
+  },
+  {
+    "path": "logs/fog-interface-regression/portrait-high/player.log.gz",
+    "bytes": 2306,
+    "sha256": "587f85e65c8576fc2bd8f944062e2309ee60c3273872f4c2662e7551cf3136ab"
+  },
+  {
+    "path": "logs/fog-interface-regression/portrait-temporal/player.log.gz",
+    "bytes": 2350,
+    "sha256": "4158662456516ed96149a86dea950348af70cf42c40c72aba7d46abedff5d69f"
+  },
+  {
+    "path": "measure-eyes.py",
+    "bytes": 1578,
+    "sha256": "1dcd8764e65429ba84c8af58fb59cca63906d62d9efd4719b7f64100f57c8099"
+  },
+  {
+    "path": "measure-temporal.py",
+    "bytes": 2528,
+    "sha256": "5985f87908b6dccb00760afe9b6a8078ef4e45a350d90cebb17d84036c14faf7"
+  },
+  {
+    "path": "portrait-high/capture_manifest.json",
+    "bytes": 12138,
+    "sha256": "80c38dc99a63da6f81577b13e9c26d318153b9759ac3231b6f459d38d84176c4"
+  },
+  {
+    "path": "portrait-high/runtime.json.gz",
+    "bytes": 655,
+    "sha256": "836c726d1ed51a1f7cddaffb9213aee15aa1b711956b012a70ebebc58aa2ed5f"
+  },
+  {
+    "path": "portrait-temporal/capture_manifest.json",
+    "bytes": 12152,
+    "sha256": "4bb8c1a1d59167aa7ebcc5e545a537d7be48c5d5d2f6948046941ecf69b63322"
+  },
+  {
+    "path": "portrait-temporal/runtime.json.gz",
+    "bytes": 660,
+    "sha256": "253189ff3d18aa4f34c5af647f1636471cdef9d31f76d40fd374023fcbd876da"
+  },
+  {
+    "path": "preserved-user-files-verification.json",
+    "bytes": 630,
+    "sha256": "340302664351dd69704fe9dd6ae379f10dc2724cc19962f9584893d7468818ab"
+  },
+  {
+    "path": "reference-manifest.json",
+    "bytes": 1215493,
+    "sha256": "24c7f0b18f639230013838803cbae02810c0d9f2b50013cb659e642c3c843659"
+  },
+  {
+    "path": "reference-validation.json",
+    "bytes": 143,
+    "sha256": "18ae75f88f54ccb44c5a3d810b034aa3b4c939b1b675c407fd63787ddf08b54f"
+  },
+  {
+    "path": "regress-fog-interface.py",
+    "bytes": 4177,
+    "sha256": "95039d42f02ffddbbfb02e8390d793d4b89068aaf38144baea6aa6e62a0a8aeb"
+  },
+  {
+    "path": "source-manifest.json",
+    "bytes": 549,
+    "sha256": "86d6acb5803aa79d51552b87ca86333a9226915f79163fad39da9567359bb893"
+  },
+  {
+    "path": "summary.json",
+    "bytes": 882,
+    "sha256": "d8de9ad8d7fc7742a8709dfcc4a6f8b0278ec65912f73563d95cc99f467d9b10"
+  },
+  {
+    "path": "temporal-comparison.json",
+    "bytes": 5368,
+    "sha256": "65f6b6e1c21849dc06d4aaabf9aee84a351c3a189254b7056424a92ad853ae1b"
+  },
+  {
+    "path": "verify-illumination.py",
+    "bytes": 3527,
+    "sha256": "ebb3f3498b0c3a9da81f1cd1e266c9782bbacc82645fdefc96f1ce104de303b9"
+  }
+]

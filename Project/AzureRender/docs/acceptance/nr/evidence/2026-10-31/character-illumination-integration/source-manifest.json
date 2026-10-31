@@ -1,0 +1,20 @@
+{
+  "baseCommit": "ca9a217",
+  "files": [
+    {
+      "path": "src/scenes/CharacterSceneRenderer.cpp",
+      "bytes": 283736,
+      "sha256": "f11fb492cc86055bbdea49927b85161df02a97c00986e8b91ab27f4dc520fb6c"
+    },
+    {
+      "path": "src/scenes/CharacterViewFog.inc",
+      "bytes": 6168,
+      "sha256": "4f815715e54fe30fda50d34fedb4be694c0edfb07fa9e943751ff61f5b1e444b"
+    },
+    {
+      "path": "tools/test_view_fog_gpu.py",
+      "bytes": 11478,
+      "sha256": "b788324a505ea20ce19380964c20a44a0a37e5a31fc7e0061ba123adc998674b"
+    }
+  ]
+}
