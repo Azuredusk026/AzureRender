@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "playerSha256": "2b28e97fbdce571087760f373fa693cc2c6a3bf1fd7d54deb5347b9e719ac3ab",
+  "linearErrorBudget": 0.008,
+  "captures": [
+    {
+      "name": "receiver-main",
+      "maximumLinearError": 0.024727974950557924,
+      "validationEnabled": false,
+      "imageSha256": "22739cb6d313b318f6c21dfcd25bfabff59158012018a65549ea9f2bbb4e7e21",
+      "measured": [
+        0.04518620438567554,
+        0.028426039504420793,
+        0.019382360956935723
+      ],
+      "expected": [
+        0.04308124354347473,
+        0.003698064553862868,
+        0.001582772228583815
+      ],
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    }
+  ],
+  "error": "('receiver-main', 0.024727974950557924, array([0.0451862 , 0.02842604, 0.01938236]), array([0.04308124, 0.00369806, 0.00158277]))"
+}

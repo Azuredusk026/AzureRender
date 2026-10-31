@@ -3,6 +3,7 @@
 最终交付目标与当前执行顺序见[开发总计划](docs/plans/azure-engine-plan.md)。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
+主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。
 

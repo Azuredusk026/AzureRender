@@ -1,0 +1,20 @@
+{
+  "status": "orientation-source-consistent-position-residual-retained",
+  "scope": "Current declared face/hair basis against previously captured head matrix and shared reserved material frame. Dynamic normals, tangent reconstruction and full visual appearance remain separate checks.",
+  "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-212213-native-binding-restoration-d39ea8\\frame10401\\frame-bone-comparison.json",
+  "sourceSha256": "c268a5f337c1bcf5ff360af10fda6542314cd83bb20906ee4b3d919333a336fd",
+  "node": "Bip001_Head",
+  "basis": [
+    -1.2556207821560323e-06,
+    2.7855764703915194e-06,
+    -0.9999999999953323,
+    0.999999999999211,
+    -4.4843204444759344e-08,
+    -1.2556209066996796e-06,
+    4.484670207260324e-08,
+    0.9999999999961199,
+    2.7855764142771456e-06
+  ],
+  "maximumOrientationComponentError": 2.874565536561957e-06,
+  "nativeOriginResidualMetres": 0.00041159141667899333
+}

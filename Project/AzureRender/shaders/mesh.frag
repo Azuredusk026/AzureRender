@@ -805,10 +805,27 @@ void main() {
         metallic = 0.0;
     }
     if(strandDiffuse)metallic=0.0;
+    int qaEffectMode = int(floor(camera.qaParameters.y + 0.5));
+    bool qaEffectDisabled = camera.qaParameters.z < 0.5;
+#if defined(AZURE_OPAQUE_SNAPSHOT)
+    // SSR radiance sources retain complete lighting under specular diagnostics.
+    if(camera.screenReflectionTrace.x>.5){qaEffectMode=0;qaEffectDisabled=false;}
+#endif
+    bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
+        &&!(qaEffectMode==1&&qaEffectDisabled);
     vec3 lightDirection = showcasePreset == 1.0
         ? normalize(vec3(0.62, 0.68, 0.38))
         : normalize(vec3(0.48, 0.82, 0.32));
     if (camera.mainLightDirection.w > 0.5) lightDirection = camera.mainLightDirection.xyz;
+    vec3 sceneShadowDirection=lightDirection;
+    bool independentNprMain=false;
+    if((sceneCharacter||nprDiffuse)&&camera.clusterLighting.x>.5
+        &&camera.nprLightingParameters.y>=0&&camera.nprLightingParameters.y<camera.clusterGrid.w){
+        ClusterLight characterMain=sceneLightData.lights[uint(camera.nprLightingParameters.y)];
+        // The shared surface key already has its exact host-authored direction.
+        independentNprMain=characterMain.directionOuter.w<.5;
+        if(independentNprMain)lightDirection=-characterMain.directionOuter.xyz;
+    }
     vec3 fillDirection = showcasePreset == 1.0
         ? normalize(vec3(-0.48, 0.24, -0.64))
         : normalize(vec3(-0.62, 0.34, -0.48));
@@ -817,16 +834,13 @@ void main() {
     vec3 reflectionDirection = reflect(-viewDirection, shadedNormal);
     float diffuse = max(dot(shadedNormal, lightDirection), 0.0);
     float fillDiffuse = max(dot(shadedNormal, fillDirection), 0.0);
-    float shadowVisibility = sampleShadowMap(max(dot(geometricNormal, lightDirection),0.0));
-    int qaEffectMode = int(floor(camera.qaParameters.y + 0.5));
-    bool qaEffectDisabled = camera.qaParameters.z < 0.5;
-#if defined(AZURE_OPAQUE_SNAPSHOT)
-    // SSR radiance sources retain complete lighting under specular diagnostics.
-    if(camera.screenReflectionTrace.x>.5){qaEffectMode=0;qaEffectDisabled=false;}
-#endif
+    float shadowVisibility = sampleShadowMap(max(dot(geometricNormal, sceneShadowDirection),0.0));
     if (qaEffectMode == 2 && qaEffectDisabled) {
         shadowVisibility = 1.0;
     }
+    // Surface cascades have one explicit light owner. An independent character
+    // key retains object visibility and cannot borrow another light's cascade.
+    float nprMainShadowVisibility=independentNprMain?1.0:shadowVisibility;
     float keyVisibility = mix(
         1.0,
         shadowVisibility,
@@ -852,8 +866,6 @@ void main() {
     float specularLobe = pow(
         max(dot(shadedNormal, halfDirection), 0.0),
         specularPower);
-    bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
-        &&!(qaEffectMode==1&&qaEffectDisabled);
     vec4 nprParameters=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[0];
     vec4 rampProfile=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[4];
     float aoSource=nprParameters.z;
@@ -866,7 +878,7 @@ void main() {
     if(specularRamp){
         SpecularRampCoordinates coordinates=specularRampCoordinates(shadedNormal,viewDirection,
             -camera.cameraForward.xyz,lightDirection,clamp(packedMaterial.g,0,1),metallic,
-            mix(shadowVisibility,1.0,camera.nprGainFloor.z),rampProfile.z);
+            mix(nprMainShadowVisibility,1.0,camera.nprGainFloor.z),rampProfile.z);
         vec2 uv=coordinates.uv;if(rampProfile.w<0)uv.y=1.0-uv.y;
         rampSample=textureLod(AZ_TEX_MATCAP,uv,0).rgb;rampSpecularLobe=coordinates.lobe;
         f0=specularRampEnvironment(f0,rampSample,rampProfile.z);
@@ -1008,9 +1020,9 @@ void main() {
         } else if(normalMode>.5)indirectDiffuseNormal=worldHorizontalDiffuseNormal(shadedNormal);
     }
     vec3 nprAmbientResponse=nprDiffuse
-        ?materialNprDiffuse(baseColor,metallic,classRampRgba,nprBaseAo,shadowVisibility,shadowVisibility,shadedNormal,viewDirection):diffuseColor;
+        ?materialNprDiffuse(baseColor,metallic,classRampRgba,nprBaseAo,nprMainShadowVisibility,nprMainShadowVisibility,shadedNormal,viewDirection):diffuseColor;
     float characterSceneVisibility=camera.nprLightingParameters.x>.5
-        ?mix(shadowVisibility,1.0,camera.nprGainFloor.z):shadowVisibility;
+        ?mix(nprMainShadowVisibility,1.0,camera.nprGainFloor.z):shadowVisibility;
     vec3 localCharacterDiffuse=diffuseColor;
     bool localCharacterResponseReady=false;
     float projectedVisibility=1.0,projectedOcclusion=physicalAo;
@@ -1019,7 +1031,7 @@ void main() {
     if(projectedLighting) {
         uint encoded=uint(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].x)>>1u;
         projectedVisibility=materialCharacterVisibility(encoded==0u?3u:encoded-1u,
-            shadedNormal,characterSceneVisibility,shadowVisibility);
+            shadedNormal,characterSceneVisibility,nprMainShadowVisibility);
         projectedOcclusion*=projectedVisibility;
         hairDiffuseResponse=projectedHairDiffuseResponse(baseColor.rgb,shadedNormal,lightDirection,projectedOcclusion,
             characterSceneVisibility,hairViewAlpha);
@@ -1190,7 +1202,7 @@ void main() {
         if(characterLight) {
             if(!localCharacterResponseReady) {
                 if(nprDiffuse)localCharacterDiffuse=materialNprDiffuse(baseColor,metallic,classRampRgba,nprBaseAo,
-                    characterSceneVisibility,shadowVisibility,shadedNormal,viewDirection);
+                    characterSceneVisibility,nprMainShadowVisibility,shadedNormal,viewDirection);
                 localCharacterResponseReady=true;
             }
             clusteredDiffuse+=localCharacterDiffuse*characterRadiance;
@@ -1201,7 +1213,7 @@ void main() {
                 CharacterDiffuseResponse response=characterEyeNprResponse(baseColor,eyeCoordinates.whiteMask,
                     eyeProfile.highlight.rgb,eyeProfile.scattering.rgb,metallic,
                     materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].x,
-                    ramp,eyeViewRampAlpha,light.coneType.y>1.5?shadowVisibility:1.0);
+                    ramp,eyeViewRampAlpha,light.coneType.y>1.5&&light.directionOuter.w>.5?shadowVisibility:1.0);
                 clusteredDiffuse+=response.color*radiance*(light.coneType.y>1.5?1.0:pointDiffuse);
             }
         } else if(nprDiffuse) {
@@ -1217,7 +1229,7 @@ void main() {
             // composition. This explicit host adapter retains cosine-weighted
             // local irradiance and the main-direction color response.
             vec3 response=light.coneType.y>1.5
-                ?materialNprDiffuse(baseColor,metallic,localRamp,nprBaseAo,visibility,shadowVisibility,shadedNormal,viewDirection)
+                ?materialNprDiffuse(baseColor,metallic,localRamp,nprBaseAo,visibility,nprMainShadowVisibility,shadedNormal,viewDirection)
                 :nprAmbientResponse*pointDiffuse;
             // Color selection and incident-energy visibility are independent.
             // The native illumination expression gates its main-light term
@@ -1600,7 +1612,7 @@ void main() {
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
     }
     if((nprDiffuse||projectedLighting||eyeNpr)&&camera.nprLightingParameters.x>.5){
-        float visibility=mix(shadowVisibility,1.0,camera.nprGainFloor.z);
+        float visibility=mix(nprMainShadowVisibility,1.0,camera.nprGainFloor.z);
         CharacterDiffuseResponse response;
         vec3 incident=camera.nprAmbientColor.rgb;
         vec4 mainRadiance=camera.nprMainRadiance;
@@ -1614,7 +1626,7 @@ void main() {
             response=hairDiffuseResponse;
             incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;
         } else {
-            response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,nprBaseAo,visibility,shadowVisibility,shadedNormal,viewDirection);
+            response=materialNprDiffuseResponse(baseColor,metallic,classRampRgba,nprBaseAo,visibility,nprMainShadowVisibility,shadedNormal,viewDirection);
             PackedMaterialSurfaceProfile profile=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
             if(profile.rows[10].w>.5) {
                 incident=profile.rows[10].rgb;mainRadiance.rgb=profile.rows[11].rgb;

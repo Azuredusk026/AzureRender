@@ -505,7 +505,7 @@ private:
     std::vector<NodeAnimationFrame> animationFrames_;
     std::uint32_t jointCapacity_ = 0, vertexCapacity_ = 0;
     void ensureInstanceCapacity();
-    internal::Vector3 frameMainLight_{0,1,0};
+    internal::Vector3 frameCharacterLight_{0,1,0};
     void prepareInstancePoses();
     std::array<float,4> instanceFaceLight(const LoadedAsset& mesh, const AssetPose& pose, const internal::Matrix4& model) const;
     internal::Matrix4 instanceFaceFrame(const LoadedAsset& mesh,const AssetPose& pose,const internal::Matrix4& model) const;

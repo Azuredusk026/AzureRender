@@ -1,0 +1,9 @@
+receiver-main
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_npr_illumination_gpu.py", line 223, in <module>
+    if args.output:run(args.executable,args.output.resolve(),args.require_validation,args.case,args.expected_validation)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_npr_illumination_gpu.py", line 193, in run
+    if error is not None:assert error<=.008,(name,error,measured,expected)
+                                ^^^^^^^^^^^
+AssertionError: ('receiver-main', 0.024727974950557924, array([0.0451862 , 0.02842604, 0.01938236]), array([0.04308124, 0.00369806, 0.00158277]))

@@ -1,0 +1,241 @@
+{
+  "status": "checks-recorded",
+  "visualAcceptance": "failed-user-review",
+  "scope": "Receiver-aware light selection, runtime resource ownership, baseline compatibility and diagnostic reference lighting; complete actor/scene quality remains unaccepted.",
+  "programs": {
+    "debug": {
+      "playerSha256": "dd9df30d37afe3dfada19404415adb7f8c54efaaf0fcf66445cb5a2f4065083a",
+      "editorSha256": "adc63e25436c5c74fef5f3fdeec404b1b9c04b556bbb70aa9b762cd43ca6b7c9"
+    },
+    "release": {
+      "playerSha256": "88ddbcafd7205aa6ab5cc94c71d507f61634058388e74d523e226d00e3d96e2f",
+      "editorSha256": "3978ca813457a46645e5274c084360fe1c3550492e003bc972b6207973d66f45"
+    }
+  },
+  "releaseNprCases": 54,
+  "finalReceiverCasesPerConfiguration": 7,
+  "finalRelatedCasesPerConfiguration": 22,
+  "releaseNprMaximumLinearError": 0.0012367431527445516,
+  "defaultNearPngExact": true,
+  "comparisons": [
+    {
+      "pair": "full-control-v8",
+      "frame": 0,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "2c282b56fd870fe24c748b079aae4c0b3286f9b67aab4795b88319d8b6e11bd7",
+      "referenceSha256": "2c282b56fd870fe24c748b079aae4c0b3286f9b67aab4795b88319d8b6e11bd7"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 1,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "d345eab489775e420efb944f3c9b763dcd0bbb44ff9812ec3f7491d74698ffda",
+      "referenceSha256": "d345eab489775e420efb944f3c9b763dcd0bbb44ff9812ec3f7491d74698ffda"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 2,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "5dc882f13c2be8b61f0740b9fa61f03e2f43903aea97696a85ca63d1a2b5219f",
+      "referenceSha256": "5dc882f13c2be8b61f0740b9fa61f03e2f43903aea97696a85ca63d1a2b5219f"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 3,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "87b343105c49492c697606b14e2ba39f8e4d1781f1bc929f2dde81c0891cbf19",
+      "referenceSha256": "87b343105c49492c697606b14e2ba39f8e4d1781f1bc929f2dde81c0891cbf19"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 4,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "962fa6c1ee3bd9fe4dbd9a8650d7c1f54638808256d17e6c4c049be134d5894d",
+      "referenceSha256": "962fa6c1ee3bd9fe4dbd9a8650d7c1f54638808256d17e6c4c049be134d5894d"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 5,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "d8f96e4e21f94acacf343dd1a635f9fd703927fd62149692c20545f48d35ff88",
+      "referenceSha256": "d8f96e4e21f94acacf343dd1a635f9fd703927fd62149692c20545f48d35ff88"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 6,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "220df589d9a215ddf5c1e2803b52f28c46c79f70e5898a38118c41f8d4bde1c0",
+      "referenceSha256": "220df589d9a215ddf5c1e2803b52f28c46c79f70e5898a38118c41f8d4bde1c0"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 7,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "628aff654559747f61bae1170d22415bbcb7f9cc26bdda49f3127413cb2a4711",
+      "referenceSha256": "628aff654559747f61bae1170d22415bbcb7f9cc26bdda49f3127413cb2a4711"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 8,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "7d99f4ef500247bdfc62d8348bdc3d23322bf4456173c43b23386ce1ccfd60d8",
+      "referenceSha256": "7d99f4ef500247bdfc62d8348bdc3d23322bf4456173c43b23386ce1ccfd60d8"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 9,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "6cb19304e24309ee11b5a0a59caa334f1a25e5f549ae12d5d5114fe45a4b2934",
+      "referenceSha256": "6cb19304e24309ee11b5a0a59caa334f1a25e5f549ae12d5d5114fe45a4b2934"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 10,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "e1f9a1cf2137377963c55723e62ffa171caee206e872d45f158550cf5fe4ab9b",
+      "referenceSha256": "e1f9a1cf2137377963c55723e62ffa171caee206e872d45f158550cf5fe4ab9b"
+    },
+    {
+      "pair": "full-control-v8",
+      "frame": 11,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "878e6bd96b7187c9e8f8126bf91c596c37754528ac01e7191d227fb98c97359b",
+      "referenceSha256": "878e6bd96b7187c9e8f8126bf91c596c37754528ac01e7191d227fb98c97359b"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 0,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4",
+      "referenceSha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 1,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19",
+      "referenceSha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 2,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216",
+      "referenceSha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 3,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b",
+      "referenceSha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 4,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b",
+      "referenceSha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 5,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6",
+      "referenceSha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 6,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d",
+      "referenceSha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 7,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d",
+      "referenceSha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 8,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89",
+      "referenceSha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 9,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e",
+      "referenceSha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 10,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed",
+      "referenceSha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed"
+    },
+    {
+      "pair": "hidden-environment",
+      "frame": 11,
+      "pngBytesExact": true,
+      "differentPixels": 0,
+      "maximumByteError": 0,
+      "imageSha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854",
+      "referenceSha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854"
+    }
+  ],
+  "fullControlExactFrames": 12,
+  "hiddenEnvironmentExactFrames": 12,
+  "visibleReferenceFullCapturedFrames": 12
+}

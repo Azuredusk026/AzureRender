@@ -1,0 +1,93 @@
+{
+  "status": "cpu-hypothesis-gpu-verification-required",
+  "regionMedianRelativeBudget": 0.1,
+  "scope": "Same-pose source display compared with actual scene LUT. LDR inference excludes clipped pixels; specular, eye saturation and bloom can violate uniform radiance scaling.",
+  "referenceImageSha256": "4a3cc3e46e7c5ea3d50a9b7d6be0b3ce447465a200f7eb52f2426e1302a370cf",
+  "currentImageSha256": "5d70d2a9a8da582505e1e00e1610bb0484d7a7c2859a2fd3a4ef1c1789d664af",
+  "lutSha256": "266d3041215d9b50e570a42a8d36241d217c3ffc6bc3b68b8a1a8f9009b00a11",
+  "regions": [
+    {
+      "name": "hair-crown",
+      "xyxy": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "samples": 4125,
+      "target": 0.0871143553057096,
+      "currentMedian": 0.0492050958005588,
+      "linearPredictionMeanAbsoluteError": 0.0005464794666342726,
+      "linearPredictionMaximumError": 0.004583908915886503
+    },
+    {
+      "name": "hair-fringe",
+      "xyxy": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "samples": 2000,
+      "target": 0.10567690029920564,
+      "currentMedian": 0.06939001663873484,
+      "linearPredictionMeanAbsoluteError": 0.0007517205845158313,
+      "linearPredictionMaximumError": 0.005652877811164969
+    },
+    {
+      "name": "face-cheek",
+      "xyxy": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "samples": 743,
+      "target": 0.24343275698367525,
+      "currentMedian": 0.20399661832037094,
+      "linearPredictionMeanAbsoluteError": 0.0009974460665594627,
+      "linearPredictionMaximumError": 0.0051255591498770015
+    },
+    {
+      "name": "face-chin",
+      "xyxy": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "samples": 250,
+      "target": 0.23375126421990197,
+      "currentMedian": 0.19512295357031503,
+      "linearPredictionMeanAbsoluteError": 0.001253353966722941,
+      "linearPredictionMaximumError": 0.003645872465415728
+    },
+    {
+      "name": "eye-left",
+      "xyxy": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "samples": 359,
+      "target": 0.07800680821861422,
+      "currentMedian": 0.04288841451434714,
+      "linearPredictionMeanAbsoluteError": 0.003351366636026854,
+      "linearPredictionMaximumError": 0.12503435825418818
+    }
+  ],
+  "best": {
+    "exposureEv": -1.6099999999999999,
+    "scale": 0.32759835096459083,
+    "maximumRegionMedianLuminanceError": 0.19177385039124556,
+    "regionErrors": [
+      0.14589359376337802,
+      0.050438794043260675,
+      0.1886146455449695,
+      0.1793696452559605,
+      0.19177385039124556
+    ]
+  },
+  "predictedBudgetPass": false
+}

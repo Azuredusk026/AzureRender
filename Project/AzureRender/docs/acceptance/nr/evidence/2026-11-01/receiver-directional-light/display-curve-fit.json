@@ -1,0 +1,243 @@
+{
+  "status": "cpu-output-curve-hypothesis-gpu-verification-required",
+  "scope": "A single shared monotonic outgoing-radiance response before scene grading. Reference LDR inference excludes clipped and near-zero pixels. Native HDR and whole-image qualification remain separate.",
+  "linearGain": [
+    0.3054724905924497,
+    0.2925048093715942,
+    0.3244126544950761
+  ],
+  "exponent": 0.8422268290477376,
+  "regions": [
+    {
+      "region": "hair-crown",
+      "targetMedian": 0.0871143553057096,
+      "predictedMedian": 0.07733646036797472,
+      "relativeMedianError": 0.11224206278542048,
+      "meanAbsoluteLinearError": 0.008570872797084045
+    },
+    {
+      "region": "hair-fringe",
+      "targetMedian": 0.10567690029920564,
+      "predictedMedian": 0.09656646910576316,
+      "relativeMedianError": 0.08621024242429406,
+      "meanAbsoluteLinearError": 0.007480487203122732
+    },
+    {
+      "region": "face-cheek",
+      "targetMedian": 0.24343275698367525,
+      "predictedMedian": 0.25854145963335845,
+      "relativeMedianError": 0.062065199593070365,
+      "meanAbsoluteLinearError": 0.021869340048838438
+    },
+    {
+      "region": "face-chin",
+      "targetMedian": 0.23375126421990197,
+      "predictedMedian": 0.24697839216787362,
+      "relativeMedianError": 0.05658633758458822,
+      "meanAbsoluteLinearError": 0.0200947973822461
+    },
+    {
+      "region": "eye-left",
+      "targetMedian": 0.07800680821861422,
+      "predictedMedian": 0.06745157927993964,
+      "relativeMedianError": 0.1353116372752175,
+      "meanAbsoluteLinearError": 0.014996332808525428
+    }
+  ],
+  "maximumRegionMedianLuminanceError": 0.1353116372752175,
+  "predictedBudgetPass": false,
+  "history": [
+    {
+      "iteration": 0,
+      "loss": 2.734686788781627,
+      "candidateLoss": 0.5089906181876643,
+      "accepted": true,
+      "parameters": [
+        -2.0,
+        -2.0,
+        -2.0,
+        0.0
+      ]
+    },
+    {
+      "iteration": 1,
+      "loss": 0.5089906181876643,
+      "candidateLoss": 0.4888091390580801,
+      "accepted": true,
+      "parameters": [
+        -1.691564048269669,
+        -1.7257291929920526,
+        -1.6,
+        -0.23509297670249585
+      ]
+    },
+    {
+      "iteration": 2,
+      "loss": 0.4888091390580801,
+      "candidateLoss": 0.48876275312412265,
+      "accepted": true,
+      "parameters": [
+        -1.7103827294929017,
+        -1.773066369767934,
+        -1.625281900360662,
+        -0.25079455264157335
+      ]
+    },
+    {
+      "iteration": 3,
+      "loss": 0.48876275312412265,
+      "candidateLoss": 0.48876263996075675,
+      "accepted": true,
+      "parameters": [
+        -1.710802810255243,
+        -1.7735441188880983,
+        -1.6240783173489297,
+        -0.2480498769651466
+      ]
+    },
+    {
+      "iteration": 4,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.48876269223336977,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 5,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.4887626922079813,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 6,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.4887626921067063,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 7,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.4887626917060284,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 8,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.4887626901706923,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 9,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.48876268492929087,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 10,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.48876267214296226,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 11,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.48876265571459854,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 12,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.4887626454137909,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 13,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.4887626414985067,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 14,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.4887626403589896,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    },
+    {
+      "iteration": 15,
+      "loss": 0.48876263996075675,
+      "candidateLoss": 0.4887626400612387,
+      "accepted": false,
+      "parameters": [
+        -1.7108856312847311,
+        -1.7734677491673638,
+        -1.624097998448034,
+        -0.24771926174840764
+      ]
+    }
+  ]
+}

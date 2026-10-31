@@ -1,0 +1,39 @@
+{
+  "sourceBaseCommit": "0f6ab81",
+  "sourceFiles": {
+    "src/scene/DirectionalLightSelection.hpp": {
+      "workingSha256": "d556bf1d4d700eb29bd895ca6a344b44f3dc9d18ce24f904fcffdf9a97a73220",
+      "lfSha256": "d556bf1d4d700eb29bd895ca6a344b44f3dc9d18ce24f904fcffdf9a97a73220"
+    },
+    "src/scenes/CharacterSceneRenderer.hpp": {
+      "workingSha256": "4e09c6bb8d1a447a7927017506ed19eda2a69d8f495d37611d2711f97b216428",
+      "lfSha256": "55bc75b4472c27dcfc1c86a00c6feeb3df308c469c1ff3c41b0410402b345156"
+    },
+    "src/scenes/CharacterSceneRenderer.cpp": {
+      "workingSha256": "63fd06a3483279c0866da5c034234111a6e1230ba6d3e50cfa661e4fafe4e3db",
+      "lfSha256": "d213abdd3617ceaf8dc308671ad38141d6efd116c368abb265e48e4e69845607"
+    },
+    "shaders/mesh.frag": {
+      "workingSha256": "33f6049f20b4e9bc7a2b71a7a88c6cb12fecf879c5e630aab540a07e52de5614",
+      "lfSha256": "82c1dfe1a60c56eb5b98f0e70f3ec59a1a45c80dda856b458384b5ff59e0bf0b"
+    },
+    "tests/SceneGraphTests.cpp": {
+      "workingSha256": "cac52b7e8cd1e28cfddfc28b45e4ddbe7a36e8714614c3833d2c2b443e9be2e0",
+      "lfSha256": "93a12b1bb4a024b049aa1dffa7d6af149171e14e06355289b54483743aef0350"
+    },
+    "tools/test_npr_illumination_gpu.py": {
+      "workingSha256": "13391b872af776da503c2a9888c00cce4b4e6fc1cac026a6c2d7490f12aada38",
+      "lfSha256": "0917dd6b826327cabf787a44f6f8b642d2533ac6201ec570794f99c21152364b"
+    }
+  },
+  "programs": {
+    "debug": {
+      "playerSha256": "dd9df30d37afe3dfada19404415adb7f8c54efaaf0fcf66445cb5a2f4065083a",
+      "editorSha256": "adc63e25436c5c74fef5f3fdeec404b1b9c04b556bbb70aa9b762cd43ca6b7c9"
+    },
+    "release": {
+      "playerSha256": "88ddbcafd7205aa6ab5cc94c71d507f61634058388e74d523e226d00e3d96e2f",
+      "editorSha256": "3978ca813457a46645e5274c084360fe1c3550492e003bc972b6207973d66f45"
+    }
+  }
+}

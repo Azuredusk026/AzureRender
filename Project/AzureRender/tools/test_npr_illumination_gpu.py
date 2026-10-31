@@ -40,6 +40,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
     names+=('material-colors-view-tint','material-colors-view-tint-document')
     names+=tuple('material-colors-main-ramp-'+suffix for suffix in ('front','side','back','biased','low','high','document','fixed'))
     names+=tuple('material-colors-character-'+suffix for suffix in ('main-shadow','scene-shadow','main-shadow-document','main-shadow-fixed','main-lit','mask-none'))
+    names+=('receiver-main','receiver-main-fixed','receiver-main-ramp-side','receiver-main-shadow','receiver-main-strong-shadow','receiver-main-strong-shadow-fixed','receiver-main-ramp-disabled')
     if selected:
         assert set(selected)<=set(names);names=tuple(name for name in names if name in selected)
     summary={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),
@@ -52,6 +53,9 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             view_tint='view-tint' in name
             main_ramp='main-ramp-' in name
             independent_character='character-' in name
+            receiver_main=name.startswith('receiver-main')
+            receiver_guard=name.startswith('receiver-main-strong-shadow')
+            if receiver_main and name.endswith('-disabled'):settings['enabled']=False
             character_shadow=independent_character and not name.endswith('main-lit')
             normal=np.array([0,0,-1] if name.endswith('ramp-back') else [1,0,0] if main_ramp and not name.endswith('ramp-front') else [0,0,1])
             ramp_bias=.25 if name.endswith('ramp-biased') else -1 if name.endswith('ramp-low') else 1 if name.endswith('ramp-high') else 0
@@ -101,13 +105,24 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             if name=='additional-directional':
                 extra=copy.deepcopy(level['lights'][0]);extra.update(id='additional',nodeId='additional',color=[1,1,1],intensity=.1)
                 level['lights'].append(extra);level['nodes'].append({'id':'additional','components':{'azure.transform':component('azure.transform',{'translation':[0,0,2]})}})
-            if character_shadow or name.startswith('main-shadow') or name in ('indoor-shadow','ambient-weight-shadow','offset-main-shadow'):
+            if receiver_main:
+                level['lights'][0]['shape']['receivers']={'schemaVersion':1,'surfaces':True,'characters':False}
+                extra=copy.deepcopy(level['lights'][0]);extra.update(id='character-key',nodeId='character-key',color=[1,.1,.05],intensity=3 if receiver_guard else .1)
+                extra['shape'].update(direction=[-1,0,0],receivers={'schemaVersion':1,'surfaces':False,'characters':True})
+                level['lights'].append(extra);level['nodes'].append({'id':'character-key','components':{'azure.transform':component('azure.transform',{'translation':[0,0,2]})}})
+            if character_shadow or name.startswith('main-shadow') or name in ('indoor-shadow','ambient-weight-shadow','offset-main-shadow','receiver-main-shadow') or receiver_guard:
                 surface(folder/'blocker.gltf');level['resources'].append({'id':'blocker','asset':'assets:/blocker.gltf'})
                 level['nodes'].append({'id':'blocker','resourceId':'blocker','components':{'azure.transform':component('azure.transform',{'translation':[1,0,1],'scale':[.6,.6,.6]})}})
                 level['lights'][0]['shape']['direction']=[-2**-.5,0,-2**-.5]
                 if name=='main-shadow-floor':settings['shadowOverride']=1
                 if name=='indoor-shadow':settings['indoorMix']=1
                 level['renderSettings']['nprLighting']=settings
+            if receiver_guard:
+                surface(folder/'surface-guard.gltf');surface(folder/'surface-blocker.gltf')
+                for resource in ['surface-guard','surface-blocker']:
+                    level['resources'].append({'id':resource,'asset':'assets:/'+resource+'.gltf'})
+                level['nodes'].append({'id':'surface-guard','resourceId':'surface-guard','components':{'azure.transform':component('azure.transform',{'translation':[0,-2,.1],'scale':[1.2,1.2,1.2]})}})
+                level['nodes'].append({'id':'surface-blocker','resourceId':'surface-blocker','components':{'azure.transform':component('azure.transform',{'translation':[1,-2,1.1],'scale':[.6,.6,.6]})}})
             if name in ('scene-volume','material-colors-volume'):
                 cell=[0,0,0,.4,0,0,0,.3,0,0,0,.2,1,0,0,0]
                 (folder/'field.aziv').write_bytes(struct.pack('<8s4f3I',b'AZIV0001',-4,-4,-4,8,2,2,2)+struct.pack('<128f',*(cell*8)))
@@ -125,7 +140,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             command=[str(player.resolve()),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128',
                 '--capture-dir',str(folder/'frames'),'--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene',
                 '--qa-effect','specular','--qa-effect-state','disabled','--runtime-report',str(folder/'runtime.json')]
-            if name in ('fixed','material-colors-fixed','material-colors-main-ramp-fixed','material-colors-character-main-shadow-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+            if name in ('fixed','material-colors-fixed','material-colors-main-ramp-fixed','material-colors-character-main-shadow-fixed','receiver-main-fixed','receiver-main-strong-shadow-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             if name in ('material-colors-direct','material-colors-ambient'):command+=['--qa-isolation','direct-diffuse' if name.endswith('direct') else 'ambient']
             (folder/'command.json').write_text(json.dumps(command,indent=2))
             with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
@@ -143,6 +158,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
             measured=linear(pixels[96 if name.startswith('offset-') else 64,96 if name.startswith('offset-') else 64]);color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
             if view_tint:color=reference(linear([90,80,70])*(1-.595+.595*np.array([.38,.12,.14])),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55)
             main=np.array([.8,.6,.4]);intensity=.7
+            if receiver_main:main=np.array([1,.1,.05]);intensity=3 if receiver_guard else .1
             if name in ('ambient','zero-radiance','point-only','surface-only'):main=np.ones(3);intensity=0
             if name=='material-colors-no-main':intensity=0
             visibility=0 if name in ('main-shadow','indoor-shadow','ambient-weight-shadow','offset-main-shadow') else 1
@@ -155,7 +171,7 @@ def run(player,output,require_validation=False,selected=None,expected_validation
                 color=reference(linear([90,80,70]),linear([60,50,40]),np.array([180,150,170,153])/255,204/255,.55,actor_visibility,mask)
                 lit_mask=min(204/255,actor_visibility if mask else 1,153/255)
             if main_ramp:
-                coordinate=np.clip(np.dot(normal,[0,0,1])+ramp_bias,-1,1)*.5+.5
+                coordinate=np.clip(np.dot(normal,[1,0,0] if receiver_main else [0,0,1])+ramp_bias,-1,1)*.5+.5
                 texel=np.clip(coordinate*len(ramp_texels)-.5,0,len(ramp_texels)-1);left=int(np.floor(texel));right=min(left+1,len(ramp_texels)-1)
                 ramp=(ramp_texels[left]*(1-(texel-left))+ramp_texels[right]*(texel-left))/255
                 color=reference(linear([90,80,70]),linear([60,50,40]),ramp,204/255,.55);lit_mask=min(204/255,ramp[3])
@@ -177,13 +193,20 @@ def run(player,output,require_validation=False,selected=None,expected_validation
                 attenuation=(1-distance/10)**2/(1+.12*distance*distance)
                 expected+=color*np.array([.8,.6,.4])*.7*attenuation*delta[2]/distance
             if name=='additional-directional':expected+=color*.1
-            if name in ('disabled','material-colors-disabled'):expected=color*main*intensity
+            if name in ('disabled','material-colors-disabled') or (receiver_main and not settings['enabled']):expected=color*main*intensity
             error=float(np.abs(measured-expected).max())
+            guard=None
+            if receiver_guard:
+                guard=linear(pixels[96,64]).tolist()
+                assert max(guard)<=.008,(name,'surface key shadow guard',guard)
             summary['captures'].append({'name':name,'maximumLinearError':error,'validationEnabled':validation,
+                'surfaceShadowGuard':guard,
                 'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'measured':measured.tolist(),'expected':expected.tolist(),
                 'allocatorAfterUnload':{'buffers':0,'images':0}})
             if error is not None:assert error<=.008,(name,error,measured,expected)
         if 'composed' in frames and 'fixed' in frames:assert np.array_equal(frames['composed'],frames['fixed'])
+        if 'receiver-main' in frames and 'receiver-main-fixed' in frames:assert np.array_equal(frames['receiver-main'],frames['receiver-main-fixed'])
+        if 'receiver-main-strong-shadow' in frames and 'receiver-main-strong-shadow-fixed' in frames:assert np.array_equal(frames['receiver-main-strong-shadow'],frames['receiver-main-strong-shadow-fixed'])
         if 'material-colors' in frames:
             for equivalent in ('material-colors-fixed','material-colors-fabric','material-colors-document'):
                 if equivalent in frames:assert np.array_equal(frames['material-colors'],frames[equivalent])

@@ -1,0 +1,154 @@
+{
+  "status": "cpu-output-radiance-hypothesis-gpu-verification-required",
+  "scope": "Per-channel scale of complete outgoing linear radiance, after nonlinear material response and before scene grading. This is not the existing input-light scale.",
+  "gain": [
+    0.3004264807954097,
+    0.30378797825441844,
+    0.3251157693967613
+  ],
+  "ev": [
+    -1.7349161115010476,
+    -1.718863315422279,
+    -1.620974560763881
+  ],
+  "regions": [
+    {
+      "region": "hair-crown",
+      "targetMedian": 0.0871143553057096,
+      "predictedMedian": 0.06672348705665164,
+      "relativeMedianError": 0.23407012744914976,
+      "meanAbsoluteLinearError": 0.019322196640318316
+    },
+    {
+      "region": "hair-fringe",
+      "targetMedian": 0.10567690029920564,
+      "predictedMedian": 0.08990617037413108,
+      "relativeMedianError": 0.14923535683221684,
+      "meanAbsoluteLinearError": 0.018081231891812034
+    },
+    {
+      "region": "face-cheek",
+      "targetMedian": 0.24343275698367525,
+      "predictedMedian": 0.26456124088477906,
+      "relativeMedianError": 0.08679392273621045,
+      "meanAbsoluteLinearError": 0.022680323226733856
+    },
+    {
+      "region": "face-chin",
+      "targetMedian": 0.23375126421990197,
+      "predictedMedian": 0.2509795016436249,
+      "relativeMedianError": 0.0737032908943562,
+      "meanAbsoluteLinearError": 0.019711673932949463
+    },
+    {
+      "region": "eye-left",
+      "targetMedian": 0.07800680821861422,
+      "predictedMedian": 0.055682450440880465,
+      "relativeMedianError": 0.28618473550628687,
+      "meanAbsoluteLinearError": 0.02220034620340965
+    }
+  ],
+  "maximumRegionMedianLuminanceError": 0.28618473550628687,
+  "predictedBudgetPass": false,
+  "history": [
+    {
+      "iteration": 0,
+      "loss": 2.734686788781627,
+      "candidateLoss": 0.7333960935426749,
+      "accepted": true,
+      "ev": [
+        -2.0,
+        -2.0,
+        -2.0
+      ]
+    },
+    {
+      "iteration": 1,
+      "loss": 0.7333960935426749,
+      "candidateLoss": 0.7169289848200339,
+      "accepted": true,
+      "ev": [
+        -1.7168685285219376,
+        -1.6729869809067721,
+        -1.6
+      ]
+    },
+    {
+      "iteration": 2,
+      "loss": 0.7169289848200339,
+      "candidateLoss": 0.7168826554333823,
+      "accepted": true,
+      "ev": [
+        -1.7347528013841929,
+        -1.7149236165243833,
+        -1.621906866717326
+      ]
+    },
+    {
+      "iteration": 3,
+      "loss": 0.7168826554333823,
+      "candidateLoss": 0.716881074067853,
+      "accepted": true,
+      "ev": [
+        -1.7349187568761173,
+        -1.7183734050614528,
+        -1.6209728648519395
+      ]
+    },
+    {
+      "iteration": 4,
+      "loss": 0.716881074067853,
+      "candidateLoss": 0.7168809560380758,
+      "accepted": true,
+      "ev": [
+        -1.7349178276600365,
+        -1.7188019563760644,
+        -1.6209787847634378
+      ]
+    },
+    {
+      "iteration": 5,
+      "loss": 0.7168809560380758,
+      "candidateLoss": 0.7168809417605279,
+      "accepted": true,
+      "ev": [
+        -1.734916425941497,
+        -1.7188556607672256,
+        -1.6209749214760565
+      ]
+    },
+    {
+      "iteration": 6,
+      "loss": 0.7168809417605279,
+      "candidateLoss": 0.7168809399631313,
+      "accepted": true,
+      "ev": [
+        -1.7349161571795422,
+        -1.7188623616199052,
+        -1.6209746120146986
+      ]
+    },
+    {
+      "iteration": 7,
+      "loss": 0.7168809399631313,
+      "candidateLoss": 0.7168809397359772,
+      "accepted": true,
+      "ev": [
+        -1.734916117562834,
+        -1.718863198043535,
+        -1.620974566837177
+      ]
+    },
+    {
+      "iteration": 8,
+      "loss": 0.7168809397359772,
+      "candidateLoss": 0.716880939707455,
+      "accepted": true,
+      "ev": [
+        -1.7349161121984593,
+        -1.7188633024018143,
+        -1.6209745614459856
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "playerSha256": "88ddbcafd7205aa6ab5cc94c71d507f61634058388e74d523e226d00e3d96e2f",
+  "captures": [
+    {
+      "name": "shadow",
+      "validationEnabled": false,
+      "objectPages": 1,
+      "center": [
+        11,
+        7,
+        4
+      ],
+      "shadowMean": 7.333333333333333,
+      "control": [
+        97,
+        83,
+        67
+      ],
+      "imageSha256": "352bb439566a4765d00ccd5812585088ebe695ad4b8e6e2df9fbac57f5522c2e"
+    },
+    {
+      "name": "shadow-fixed",
+      "validationEnabled": false,
+      "objectPages": 1,
+      "center": [
+        11,
+        7,
+        4
+      ],
+      "shadowMean": 7.333333333333333,
+      "control": [
+        97,
+        83,
+        67
+      ],
+      "imageSha256": "352bb439566a4765d00ccd5812585088ebe695ad4b8e6e2df9fbac57f5522c2e"
+    },
+    {
+      "name": "two-objects",
+      "validationEnabled": false,
+      "objectPages": 2,
+      "center": [
+        97,
+        83,
+        67
+      ],
+      "shadowMean": 7.645833333333333,
+      "control": [
+        97,
+        83,
+        67
+      ],
+      "imageSha256": "6a4886cbb36ef65912b645c87d4761bd4ac8f62412c553451968ddbb9595673f"
+    },
+    {
+      "name": "receiver-combined",
+      "validationEnabled": false,
+      "objectPages": 1,
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "shadowMean": 0.0,
+      "control": [
+        255,
+        255,
+        255
+      ],
+      "imageSha256": "865a118b5dab7ae01c86f1b946c23e9fde934877a8a8e418f51cd14b156a678f"
+    },
+    {
+      "name": "hair-object",
+      "validationEnabled": false,
+      "objectPages": 1,
+      "center": [
+        53,
+        45,
+        35
+      ],
+      "shadowMean": 44.333333333333336,
+      "control": [
+        96,
+        83,
+        68
+      ],
+      "imageSha256": "bebb890b416792d9ed6084c23d997e2fdb56d241d00dba8c0ea4554e32530c50"
+    },
+    {
+      "name": "hair-object-fixed",
+      "validationEnabled": false,
+      "objectPages": 1,
+      "center": [
+        53,
+        45,
+        35
+      ],
+      "shadowMean": 44.333333333333336,
+      "control": [
+        96,
+        83,
+        68
+      ],
+      "imageSha256": "bebb890b416792d9ed6084c23d997e2fdb56d241d00dba8c0ea4554e32530c50"
+    },
+    {
+      "name": "hair-object-ambient",
+      "validationEnabled": false,
+      "objectPages": 1,
+      "center": [
+        97,
+        83,
+        66
+      ],
+      "shadowMean": 82.0,
+      "control": [
+        167,
+        146,
+        122
+      ],
+      "imageSha256": "5b5984cd9168d9e22cc8dac05d0c47f7b296ae3ffdb2b54dd53269d0a2ecaab1"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "playerSha256": "88ddbcafd7205aa6ab5cc94c71d507f61634058388e74d523e226d00e3d96e2f",
+  "captures": [
+    {
+      "name": "direct",
+      "maximumLinearError": 0.001393519413900396,
+      "imageSha256": "19ada5995e3821a2ce31ec7eb740528ec8629273b13c5aef4731c79284e98cac",
+      "validationEnabled": false,
+      "measured": [
+        0.07036009569659588,
+        0.1301364766903643,
+        0.17788841598362912
+      ],
+      "expected": [
+        0.0693897902988546,
+        0.1287429572764639,
+        0.17899980458488898
+      ]
+    },
+    {
+      "name": "ambient",
+      "maximumLinearError": 0.0005263313360793359,
+      "imageSha256": "74344b5eb6fb0baf206fb06677d417740bde55a9ec115433d4a9330ae5b24020",
+      "validationEnabled": false,
+      "measured": [
+        0.028426039504420793,
+        0.05126945837404324,
+        0.07227185068231748
+      ],
+      "expected": [
+        0.028776682755789363,
+        0.051795789710122574,
+        0.07277992979605459
+      ]
+    },
+    {
+      "name": "kk",
+      "maximumLinearError": 0.0012530151755288377,
+      "imageSha256": "b6db390275479bc5709f9e271b2aba2c24a5a9959f044af1a8fed03346ba9288",
+      "validationEnabled": false,
+      "measured": [
+        0.03688945040110004,
+        0.0021246888848418626,
+        0.15292615199615017
+      ],
+      "expected": [
+        0.03742006095208272,
+        0.0022041505546221123,
+        0.15319943288598947
+      ]
+    },
+    {
+      "name": "kk-fixed",
+      "maximumLinearError": 0.0012530151755288377,
+      "imageSha256": "b6db390275479bc5709f9e271b2aba2c24a5a9959f044af1a8fed03346ba9288",
+      "validationEnabled": false,
+      "measured": [
+        0.03688945040110004,
+        0.0021246888848418626,
+        0.15292615199615017
+      ],
+      "expected": [
+        0.03742006095208272,
+        0.0022041505546221123,
+        0.15319943288598947
+      ]
+    },
+    {
+      "name": "local-kk",
+      "maximumLinearError": 0.00016799330948271703,
+      "imageSha256": "0700836bff4366745fae02f450a542473279931fd4b5fbe583098afec2c606a0",
+      "validationEnabled": false,
+      "measured": [
+        0.00121410793419535,
+        0.0003035269835488375,
+        0.0
+      ],
+      "expected": [
+        0.0012335114986603782,
+        0.00015897710344450723,
+        0.0
+      ]
+    },
+    {
+      "name": "extra-kk",
+      "maximumLinearError": 0.0017020742576044634,
+      "imageSha256": "6de768eab497d8c8c87b7ec046ed170e3caeb65c2f1a974d88fff3ae53865792",
+      "validationEnabled": false,
+      "measured": [
+        0.03954623527673284,
+        0.0024282158683907,
+        0.18116424424986022
+      ],
+      "expected": [
+        0.03942633608695726,
+        0.0024628647815768644,
+        0.1825894684093657
+      ]
+    },
+    {
+      "name": "no-main",
+      "maximumLinearError": 0.0,
+      "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+      "validationEnabled": false,
+      "measured": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "expected": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "disabled-lighting",
+      "maximumLinearError": 0.0006680981517253118,
+      "imageSha256": "bfeb7849efb7d97a68a7d11e7b97f257db78f08ec6a8876aa73c2d616495544c",
+      "validationEnabled": false,
+      "measured": [
+        0.016807375752887384,
+        0.05612849004960009,
+        0.14412847085805777
+      ],
+      "expected": [
+        0.0169519025887592,
+        0.0567965882013254,
+        0.14456490562100693
+      ]
+    },
+    {
+      "name": "local-specular-kk",
+      "maximumLinearError": 0.001415792242257713,
+      "imageSha256": "b37d71a7e72133319ccbf11fe051486ffd48481b58bf41ba30badecbbe9ceacf",
+      "validationEnabled": false,
+      "measured": [
+        0.03954623527673284,
+        0.005181516702338386,
+        0.0
+      ],
+      "expected": [
+        0.039177634110978694,
+        0.005049281500445065,
+        0.0
+      ]
+    }
+  ]
+}

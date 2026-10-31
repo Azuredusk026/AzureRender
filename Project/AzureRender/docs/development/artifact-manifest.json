@@ -855,6 +855,15 @@
       "pinMarker": ".keep",
       "primaryProject": "project/native-scene-near.azureproject",
       "evidence": "docs/acceptance/nr/joint-visual-input-isolation.md"
+    },
+    {
+      "path": "runs/20261031-231334-receiver-directional-light-911ab7",
+      "pathBase": "build",
+      "purpose": "主光接收范围修复、严格兼容及失败显示实验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-control.azureproject",
+      "evidence": "docs/acceptance/nr/receiver-directional-light.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

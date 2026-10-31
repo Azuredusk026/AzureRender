@@ -769,8 +769,8 @@ std::array<float,4> CharacterSceneRenderer::instanceFaceLight(
     if (!profile || profile->headNode >= pose.nodeWorldMatrices.size()) return {0,0,-1,0};
     const auto head = multiply(model, pose.nodeWorldMatrices[profile->headNode]);
     const auto& bind = mesh.nodeWorldMatrices.at(profile->headNode);
-    const Vector3 local{dot(frameMainLight_,normalize({head[0],head[1],head[2]})),
-        dot(frameMainLight_,normalize({head[4],head[5],head[6]})), dot(frameMainLight_,normalize({head[8],head[9],head[10]}))};
+    const Vector3 local{dot(frameCharacterLight_,normalize({head[0],head[1],head[2]})),
+        dot(frameCharacterLight_,normalize({head[4],head[5],head[6]})), dot(frameCharacterLight_,normalize({head[8],head[9],head[10]}))};
     const auto x = normalize({bind[0],bind[1],bind[2]});
     const auto y = normalize({bind[4],bind[5],bind[6]});
     const auto z = normalize({bind[8],bind[9],bind[10]});
@@ -1036,7 +1036,7 @@ void CharacterSceneRenderer::prepareObjectShadows(){
         if(found!=settings.end())inputs.push_back({*found->second,instance.model,instance.sourceIndex});
     }
     if(!inputs.empty()&&!objectShadowPrepared_)throw std::runtime_error("Object shadow layout is unavailable; reload the scene with a supported resource profile");
-    objectShadowPages_=buildObjectShadowFrame(inputs,internal::scaleVector(frameMainLight_,-1.F)).pages;
+    objectShadowPages_=buildObjectShadowFrame(inputs,internal::scaleVector(frameCharacterLight_,-1.F)).pages;
     if(!objectShadowPrepared_)return;
     std::vector<ObjectShadowGpuRecord> records;
     for(const auto& page:objectShadowPages_)records.push_back(page.gpu);
@@ -3778,7 +3778,10 @@ void CharacterSceneRenderer::updateUniformBuffer(
     Vector3 lightDirection = settings.showcasePreset == 1
         ? normalize({0.62F, 0.68F, 0.38F})
         : normalize({0.48F, 0.82F, 0.32F});
-    const auto* mainSceneLight=settings.sceneLightingEnabled?scene::primaryDirectionalLight(scene_.lights):nullptr;
+    const auto* mainSceneLight=settings.sceneLightingEnabled
+        ?scene::primaryDirectionalLight(scene_.lights,scene::DirectionalLightReceiver::Surfaces):nullptr;
+    const auto* mainCharacterLight=settings.sceneLightingEnabled
+        ?scene::primaryDirectionalLight(scene_.lights,scene::DirectionalLightReceiver::Characters):nullptr;
     if(mainSceneLight)lightDirection=scaleVector(mainSceneLight->shape.direction,-1.F);
     if (frame.qaLightScan&&!mainSceneLight) {
         const float angle = 2.0F * kPi * static_cast<float>(frame.capturedFrames % 120) / 119.0F;
@@ -3941,7 +3944,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
         qaEffectEnabled_ ? 1.0F : 0.0F,
         qaHarnessEnabled_ ? 1.0F : 0.0F,
     };
-    frameMainLight_ = lightDirection;
+    frameCharacterLight_ = mainCharacterLight&&mainCharacterLight!=mainSceneLight
+        ?scaleVector(mainCharacterLight->shape.direction,-1.F):lightDirection;
     uniform.faceLightDirection = {0, 0, -1, 0};
     uniform.faceSdfParameters = {
         faceSdfPrepared_&&settings.faceSdf.enabled ? 1.0F : 0.0F,
@@ -3957,8 +3961,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.nprAmbientColor={npr.ambientColor[0],npr.ambientColor[1],npr.ambientColor[2],npr.indoorMix};
     uniform.nprComposition={npr.outdoorGain,npr.shadowAmbientGain,npr.litAmbientMix,npr.mainColorMix};
     uniform.nprMainRadiance={1,1,1,0};uniform.nprLightingParameters={npr.enabled&&settings.sceneLightingEnabled?1.F:0.F,-1,npr.ambientWeight,npr.specularFloor};
-    if(mainSceneLight){
-        const auto id=stableSceneLightId(mainSceneLight->id);const auto& lights=frameLights_.lights();
+    if(mainCharacterLight){
+        const auto id=stableSceneLightId(mainCharacterLight->id);const auto& lights=frameLights_.lights();
         for(std::size_t index=0;index<lights.size();++index)if(lights[index].stableId==id){
             uniform.nprLightingParameters[1]=static_cast<float>(index);
             if(lights[index].shape.receivers.characters)
@@ -3994,7 +3998,8 @@ void CharacterSceneRenderer::updateClusteredLighting(
     (void)height;
     std::vector<RenderLight> lights;
     lights.reserve(scene_.lights.size());
-    const auto* mainSceneLight=renderSettings_->sceneLightingEnabled?scene::primaryDirectionalLight(scene_.lights):nullptr;
+    const auto* mainSceneLight=renderSettings_->sceneLightingEnabled
+        ?scene::primaryDirectionalLight(scene_.lights,scene::DirectionalLightReceiver::Surfaces):nullptr;
     for (const scene::SceneLightDesc& source : scene_.lights) {
         if (!source.enabled) {
             continue;
