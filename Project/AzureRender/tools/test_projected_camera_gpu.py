@@ -11,19 +11,23 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--executable',type=Path,required=True)
     parser.add_argument('--shader',type=Path,required=True)
+    parser.add_argument('--preparation',type=Path)
     args=parser.parse_args();engine=Path(__file__).resolve().parents[1]
     run=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','projected-camera-gpu'],cwd=engine,text=True).strip())
     report=dict(status='running',cases=[],shaderSha256=hashlib.sha256(args.shader.read_bytes()).hexdigest(),executableSha256=hashlib.sha256(args.executable.read_bytes()).hexdigest())
+    if args.preparation:report['preparationSha256']=hashlib.sha256(args.preparation.read_bytes()).hexdigest()
     try:
         for mode,success in (('positive',True),('wide-edge',True),('history-static',True),('nonfinite-motion',True),('wrong-convention',False),('wrong-motion',False)):
             output=run/mode
             command=[str(args.executable.resolve()),str(args.shader.resolve()),str(output),mode]
+            if args.preparation:command.append(str(args.preparation.resolve()))
             result=subprocess.run(command,cwd=engine,capture_output=True,timeout=60)
             (run/(mode+'.log')).write_bytes(result.stdout+result.stderr)
             child=json.loads((output/'result.json').read_text(encoding='utf-8'))
             report['cases'].append(dict(mode=mode,exitCode=result.returncode,result=child,command=command))
             assert child['validationErrors']==child['liveBuffers']==child['liveImages']==0,child
             assert child['regionPixels']==2432 and child['minimumFraction']==.75,child
+            assert child['surfacePreparation']==bool(args.preparation),child
             if success:assert result.returncode==0 and child['status']=='passed',child
             else:assert result.returncode!=0 and child['status']=='failed',child
         baseline=(run/'positive/2.bin').read_bytes();wide=(run/'wide-edge/2.bin').read_bytes()

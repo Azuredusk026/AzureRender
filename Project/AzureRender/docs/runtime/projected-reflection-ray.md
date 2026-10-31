@@ -140,4 +140,6 @@ python tools/compile_projected_reflection.py `
 
 实现及冻结来源检查见[公共接口验收](../acceptance/nr/projected-ray-contract.md)。
 相机、独立镜面及失败控制见[相机适配验收](../acceptance/nr/projected-camera-adapter.md)。
+公共快照的编码、预算及同步见[表面准备](projected-reflection-preparation.md)。
+
 场景合成及连续历史按[反射接入计划](../plans/2026-10-28-reflection-filter-integration.md)实施。

@@ -14,6 +14,8 @@
 
 相机变换、线性运动及独立镜面见[相机适配验证](docs/acceptance/nr/projected-camera-adapter.md)。
 
+投影深度、法线转换及分帧所有权见[表面准备](docs/runtime/projected-reflection-preparation.md)。
+
 重装与迁移后先阅读[恢复交接](docs/plans/2026-10-29-reinstall-handoff.md)。
 
 代码定位与有界读取见[源码导航](docs/development/source-navigation.md)。
