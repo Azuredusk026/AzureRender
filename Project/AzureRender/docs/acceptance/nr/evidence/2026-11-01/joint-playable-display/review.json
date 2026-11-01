@@ -1,0 +1,52 @@
+{
+  "status": "behavior-cross-configuration-passed",
+  "visualAcceptance": "failed-user-review",
+  "characterPositionMaximumConfigurationDifference": 1.1920928955078125e-07,
+  "selectedFrameDiagnostics": [
+    {
+      "frame": 0,
+      "maximumLinearError": 0.0,
+      "exactPixelFraction": 1.0
+    },
+    {
+      "frame": 100,
+      "maximumLinearError": 0.0,
+      "exactPixelFraction": 1.0
+    },
+    {
+      "frame": 190,
+      "maximumLinearError": 0.16734114173818815,
+      "exactPixelFraction": 0.9996624228395061
+    },
+    {
+      "frame": 299,
+      "maximumLinearError": 0.0,
+      "exactPixelFraction": 1.0
+    },
+    {
+      "frame": 360,
+      "maximumLinearError": 0.0,
+      "exactPixelFraction": 1.0
+    },
+    {
+      "frame": 410,
+      "maximumLinearError": 0.0,
+      "exactPixelFraction": 1.0
+    },
+    {
+      "frame": 451,
+      "maximumLinearError": 0.0,
+      "exactPixelFraction": 1.0
+    },
+    {
+      "frame": 539,
+      "maximumLinearError": 0.0,
+      "exactPixelFraction": 1.0
+    }
+  ],
+  "selectedFrameScope": "Configuration diagnostics use identical production inputs and fixed frame indices. Whole-body and dynamic visual acceptance remain separate.",
+  "programs": {
+    "release": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+    "debug": "74f7ada736a38e84a6a51f4600dbd3efe78ea01d1ea9168e12b5a484afb5111a"
+  }
+}

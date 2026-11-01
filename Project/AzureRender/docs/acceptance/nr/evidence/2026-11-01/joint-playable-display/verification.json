@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "visualAcceptance": "failed-user-review",
+  "scope": "Composition, input behavior, source reuse, native affected regions and lifecycle only.",
+  "frozenSourceFiles": 988,
+  "validatedPlayerInstances": 15,
+  "capturedFrames": 1095,
+  "framesPerInputRoute": 540,
+  "characterEffectComparisons": 20,
+  "environmentControlDiagnostics": 8,
+  "objectShadowSkinComparisons": 4,
+  "originalProjectInputFiles": 1642,
+  "preservedUserFiles": 4
+}

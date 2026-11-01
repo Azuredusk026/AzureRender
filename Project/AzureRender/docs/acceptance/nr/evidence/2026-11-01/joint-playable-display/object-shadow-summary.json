@@ -1,0 +1,128 @@
+{
+  "status": "measured",
+  "programSha256": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+  "scope": "Actual object-shadow component on/off in the combined world and original standalone lighting. Four skin rectangles were frozen before measurement.",
+  "cases": [
+    {
+      "name": "world",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\standalone-project\\object-shadow-disabled-world.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\object-shadow-captures\\world\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\object-shadow-captures\\world\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 158.96442859998206,
+      "baselineSha256": "368360534cdf731101794b4af511e91773b6d62ade57cf9203af1ec37767c0cb",
+      "imageSha256": "7a535124cfb997115bbe1edfe5d761bfa9abce7b2498697937eaded726cc070a",
+      "maximumImageResponse": 0.18985349058505502,
+      "changedPixels": 99120
+    },
+    {
+      "name": "source",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\standalone-project\\object-shadow-disabled-source.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\object-shadow-captures\\source\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\object-shadow-captures\\source\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 98.37054539998644,
+      "baselineSha256": "afa9c853774b446a87dd48f186bca9d73bd192f977b7d89ec74b8c16a808d068",
+      "imageSha256": "5d14947e41749b00ea0546fa0f9c433fafd2fb2cdc75f7f4a1faab7ba1e0b93b",
+      "maximumImageResponse": 0.18985349058505502,
+      "changedPixels": 98062
+    }
+  ],
+  "comparisons": [
+    {
+      "region": "neck",
+      "bounds": [
+        745,
+        1020,
+        815,
+        1040
+      ],
+      "referenceMaximumResponse": 0.1875421094798036,
+      "worldMaximumResponse": 0.1875421094798036,
+      "maximumResponseError": 0.004292097296925368,
+      "passed": true
+    },
+    {
+      "region": "chest-left",
+      "bounds": [
+        455,
+        1290,
+        565,
+        1370
+      ],
+      "referenceMaximumResponse": 0.1337810897211668,
+      "worldMaximumResponse": 0.1337810897211668,
+      "maximumResponseError": 0.0061713594407872,
+      "passed": true
+    },
+    {
+      "region": "chest-center",
+      "bounds": [
+        780,
+        1210,
+        850,
+        1290
+      ],
+      "referenceMaximumResponse": 0.0,
+      "worldMaximumResponse": 0.0028651797177861316,
+      "maximumResponseError": 0.0028651797177861316,
+      "passed": true
+    },
+    {
+      "region": "shoulder-right",
+      "bounds": [
+        1030,
+        1250,
+        1110,
+        1340
+      ],
+      "referenceMaximumResponse": 0.16767547286195852,
+      "worldMaximumResponse": 0.16767547286195852,
+      "maximumResponseError": 0.004481608747622268,
+      "passed": true
+    }
+  ],
+  "visualAcceptance": "failed-user-review",
+  "responseBudgetPassed": true,
+  "hasNonzeroSkinResponse": true
+}

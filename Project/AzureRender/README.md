@@ -10,6 +10,7 @@
 原生调色表的实际影响及颜色边界见[显示域核验](docs/acceptance/nr/material-display-domain.md)。
 材质显示归属及主辅视图契约见[显示变换](docs/runtime/material-display-transform.md)。
 原生角色关键区域及环境兼容见[显示验证](docs/acceptance/nr/material-display-transform.md)。
+联合可玩候选、普通启动入口及原生响应见[组合验证](docs/acceptance/nr/joint-playable-display.md)。
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。
 

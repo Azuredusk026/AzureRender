@@ -1,0 +1,675 @@
+{
+  "status": "measured",
+  "programSha256": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+  "cases": [
+    {
+      "name": "world-linear",
+      "effect": "hair-kk",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\near-world-linear.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\world-linear-hair-kk-disabled\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-effect",
+        "hair-kk",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\world-linear-hair-kk-disabled\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 165.32799439999508,
+      "imageSha256": "6de19f950a87532d620e5924b955456cc227e8fd668c88bba9964c834585be67"
+    },
+    {
+      "name": "linear-isolated",
+      "effect": "hair-kk",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\near-linear-isolated.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\linear-isolated-hair-kk-disabled\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-effect",
+        "hair-kk",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\linear-isolated-hair-kk-disabled\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 157.9796178000106,
+      "imageSha256": "fa17b7a50d4b51da49d0dad7c07cd3b13aa09f533c4f4c6a51c74492908c0697"
+    },
+    {
+      "name": "world-linear",
+      "effect": "face-sdf",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\near-world-linear.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\world-linear-face-sdf-disabled\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-effect",
+        "face-sdf",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\world-linear-face-sdf-disabled\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 159.87074820001726,
+      "imageSha256": "10a1e65e8869139d722f746145393c53c7694f9b75d738b0446c43a2515a836f"
+    },
+    {
+      "name": "linear-isolated",
+      "effect": "face-sdf",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\near-linear-isolated.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\linear-isolated-face-sdf-disabled\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-effect",
+        "face-sdf",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\linear-isolated-face-sdf-disabled\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 153.07826069998555,
+      "imageSha256": "05a3f3cba25aa18db11d01f0902e61b07da1a082cd3ee20afe4acc0d57e92ecf"
+    },
+    {
+      "name": "world-linear",
+      "effect": "shadow",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\near-world-linear.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\world-linear-shadow-disabled\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-effect",
+        "shadow",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\world-linear-shadow-disabled\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 156.90435880000587,
+      "imageSha256": "d5b70b25a49e31090ec4dfc825d0b089bc3f1384ae33881ce56cd821a0602841"
+    },
+    {
+      "name": "linear-isolated",
+      "effect": "shadow",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\near-linear-isolated.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\linear-isolated-shadow-disabled\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-effect",
+        "shadow",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\linear-isolated-shadow-disabled\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 154.65176790000987,
+      "imageSha256": "7d05e2ae978a45e20dc431b8424093b389dfdb5b5dcea3388e673de32f7c870c"
+    },
+    {
+      "name": "world-linear",
+      "effect": "toon",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\near-world-linear.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\world-linear-toon-disabled\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-effect",
+        "toon",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\world-linear-toon-disabled\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 162.20720560001791,
+      "imageSha256": "0ad8fae2fef44aaea9602678ceed2540be732bd6a9a111479b2e5b6f4e942494"
+    },
+    {
+      "name": "linear-isolated",
+      "effect": "toon",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\project\\near-linear-isolated.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\linear-isolated-toon-disabled\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--qa-effect",
+        "toon",
+        "--qa-effect-state",
+        "disabled",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-082926-joint-playable-display-c26c1b\\native-effects\\linear-isolated-toon-disabled\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 159.9659247000236,
+      "imageSha256": "48762ac0da7517eb5e4c93f6b9744b3b478e17df086174d3036b64992080d29e"
+    }
+  ],
+  "comparisons": [
+    {
+      "effect": "hair-kk",
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "maximumResponseError": 0.00494581581532999,
+      "referenceMaximumResponse": 0.10715468545268275,
+      "candidateMaximumResponse": 0.10715468545268275,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "maximumResponseError": 0.005342457364233721,
+      "referenceMaximumResponse": 0.1741986763729938,
+      "candidateMaximumResponse": 0.1741986763729938,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "environment-right-wall",
+      "bounds": [
+        1250,
+        300,
+        1450,
+        450
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "hair-kk",
+      "region": "environment-left-wall",
+      "bounds": [
+        30,
+        400,
+        230,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "maximumResponseError": 0.004634888943591431,
+      "referenceMaximumResponse": 0.02677612830755599,
+      "candidateMaximumResponse": 0.02677612830755599,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "maximumResponseError": 0.0045197905582090026,
+      "referenceMaximumResponse": 0.013216664252350407,
+      "candidateMaximumResponse": 0.013216664252350407,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "maximumResponseError": 0.0042169514164257516,
+      "referenceMaximumResponse": 0.017093337757151217,
+      "candidateMaximumResponse": 0.017093337757151217,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "environment-right-wall",
+      "bounds": [
+        1250,
+        300,
+        1450,
+        450
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "face-sdf",
+      "region": "environment-left-wall",
+      "bounds": [
+        30,
+        400,
+        230,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "environment-right-wall",
+      "bounds": [
+        1250,
+        300,
+        1450,
+        450
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "shadow",
+      "region": "environment-left-wall",
+      "bounds": [
+        30,
+        400,
+        230,
+        650
+      ],
+      "maximumResponseError": 0.1437125729738677,
+      "referenceMaximumResponse": 0.6337474044011605,
+      "candidateMaximumResponse": 0.4996425452833328,
+      "passed": false
+    },
+    {
+      "effect": "toon",
+      "region": "hair-crown",
+      "bounds": [
+        710,
+        400,
+        820,
+        550
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "hair-fringe",
+      "bounds": [
+        700,
+        570,
+        800,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "face-cheek",
+      "bounds": [
+        705,
+        852,
+        795,
+        885
+      ],
+      "maximumResponseError": 0.005463139560842323,
+      "referenceMaximumResponse": 0.18318273617759667,
+      "candidateMaximumResponse": 0.18318273617759667,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "face-chin",
+      "bounds": [
+        770,
+        960,
+        810,
+        985
+      ],
+      "maximumResponseError": 0.004634888943591431,
+      "referenceMaximumResponse": 0.0256404797852553,
+      "candidateMaximumResponse": 0.0256404797852553,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "eye-left",
+      "bounds": [
+        625,
+        784,
+        683,
+        814
+      ],
+      "maximumResponseError": 0.0047508098603305515,
+      "referenceMaximumResponse": 0.09157528353845484,
+      "candidateMaximumResponse": 0.09157528353845484,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "environment-right-wall",
+      "bounds": [
+        1250,
+        300,
+        1450,
+        450
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    },
+    {
+      "effect": "toon",
+      "region": "environment-left-wall",
+      "bounds": [
+        30,
+        400,
+        230,
+        650
+      ],
+      "maximumResponseError": 0.0,
+      "referenceMaximumResponse": 0.0,
+      "candidateMaximumResponse": 0.0,
+      "passed": true
+    }
+  ],
+  "visualAcceptance": "failed-user-review",
+  "scope": "Frozen five interior regions compare native effect response under the complete world presentation and isolated display control. World fog, grading, bloom and screen-space reflection remain enabled only in the world case. Whole-body, motion and final visual acceptance are separate.",
+  "responseBudgetPassed": false
+}

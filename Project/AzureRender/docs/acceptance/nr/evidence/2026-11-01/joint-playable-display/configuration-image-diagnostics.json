@@ -1,0 +1,2129 @@
+{
+  "status": "measured",
+  "scope": "All 540 engine configuration pairs. These diagnostics are separate from calibrated native references, exact compatibility controls and material interior pixel-oracle budgets.",
+  "exactImageFiles": 399,
+  "differentImageFiles": 141,
+  "maximumChangedPixels": 2860,
+  "maximumChangedPixelFraction": 0.005516975308641975,
+  "maximumLinearError": 0.6361971229969114,
+  "minimumSrgbLuminanceSsim": 0.9997645662479153,
+  "maximumMedianLuminanceRelativeError": 0.0004195487607597225,
+  "rows": [
+    {
+      "frame": 49,
+      "changedPixels": 59,
+      "changedPixelFraction": 0.00011381172839506173,
+      "maximumLinearError": 0.023760527999253957,
+      "meanAbsoluteLinearError": 1.7945209158686897e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999966752722159,
+      "bounds": [
+        324,
+        188,
+        540,
+        481
+      ]
+    },
+    {
+      "frame": 50,
+      "changedPixels": 67,
+      "changedPixelFraction": 0.00012924382716049382,
+      "maximumLinearError": 0.008966931681418967,
+      "meanAbsoluteLinearError": 1.1031396749306372e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999994202517793,
+      "bounds": [
+        380,
+        191,
+        553,
+        482
+      ]
+    },
+    {
+      "frame": 51,
+      "changedPixels": 17,
+      "changedPixelFraction": 3.279320987654321e-05,
+      "maximumLinearError": 0.030050365051499633,
+      "meanAbsoluteLinearError": 6.173371600233633e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999994651782103,
+      "bounds": [
+        411,
+        277,
+        521,
+        475
+      ]
+    },
+    {
+      "frame": 52,
+      "changedPixels": 5,
+      "changedPixelFraction": 9.645061728395062e-06,
+      "maximumLinearError": 0.0015524497694170865,
+      "meanAbsoluteLinearError": 5.2064965601296595e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999634541626,
+      "bounds": [
+        510,
+        442,
+        514,
+        462
+      ]
+    },
+    {
+      "frame": 53,
+      "changedPixels": 33,
+      "changedPixelFraction": 6.36574074074074e-05,
+      "maximumLinearError": 0.00793853068213917,
+      "meanAbsoluteLinearError": 5.358135273744507e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999989830755159,
+      "bounds": [
+        374,
+        281,
+        522,
+        460
+      ]
+    },
+    {
+      "frame": 54,
+      "changedPixels": 3,
+      "changedPixelFraction": 5.787037037037037e-06,
+      "maximumLinearError": 0.003771005221174687,
+      "meanAbsoluteLinearError": 5.57572531294109e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999834631614,
+      "bounds": [
+        404,
+        380,
+        520,
+        444
+      ]
+    },
+    {
+      "frame": 55,
+      "changedPixels": 16,
+      "changedPixelFraction": 3.08641975308642e-05,
+      "maximumLinearError": 0.08669191342721894,
+      "meanAbsoluteLinearError": 7.920960757726653e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999995252747836,
+      "bounds": [
+        389,
+        280,
+        541,
+        443
+      ]
+    },
+    {
+      "frame": 56,
+      "changedPixels": 4,
+      "changedPixelFraction": 7.71604938271605e-06,
+      "maximumLinearError": 0.06413188253829794,
+      "meanAbsoluteLinearError": 5.4286823991522793e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999171576628,
+      "bounds": [
+        503,
+        294,
+        541,
+        475
+      ]
+    },
+    {
+      "frame": 57,
+      "changedPixels": 3,
+      "changedPixelFraction": 5.787037037037037e-06,
+      "maximumLinearError": 0.001326394350427626,
+      "meanAbsoluteLinearError": 3.2326233605547235e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999655110013,
+      "bounds": [
+        524,
+        432,
+        533,
+        451
+      ]
+    },
+    {
+      "frame": 58,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.0010543622674882673,
+      "meanAbsoluteLinearError": 1.083226108763874e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999989686947,
+      "bounds": [
+        517,
+        281,
+        528,
+        433
+      ]
+    },
+    {
+      "frame": 59,
+      "changedPixels": 6,
+      "changedPixelFraction": 1.1574074074074073e-05,
+      "maximumLinearError": 0.004411634623116171,
+      "meanAbsoluteLinearError": 1.1868671433192117e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999997186382193,
+      "bounds": [
+        400,
+        322,
+        531,
+        440
+      ]
+    },
+    {
+      "frame": 60,
+      "changedPixels": 10,
+      "changedPixelFraction": 1.9290123456790123e-05,
+      "maximumLinearError": 0.0012881355260796964,
+      "meanAbsoluteLinearError": 6.021888833006083e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999987782779,
+      "bounds": [
+        513,
+        429,
+        532,
+        452
+      ]
+    },
+    {
+      "frame": 61,
+      "changedPixels": 8,
+      "changedPixelFraction": 1.54320987654321e-05,
+      "maximumLinearError": 0.001341863681386335,
+      "meanAbsoluteLinearError": 4.7201967493567315e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999828936407,
+      "bounds": [
+        521,
+        430,
+        536,
+        455
+      ]
+    },
+    {
+      "frame": 62,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.0006742431771719869,
+      "meanAbsoluteLinearError": 8.528770257379283e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999998957431,
+      "bounds": [
+        517,
+        447,
+        519,
+        457
+      ]
+    },
+    {
+      "frame": 63,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.000719050705116674,
+      "meanAbsoluteLinearError": 4.6235256244642103e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999925809807,
+      "bounds": [
+        514,
+        431,
+        515,
+        432
+      ]
+    },
+    {
+      "frame": 64,
+      "changedPixels": 9,
+      "changedPixelFraction": 1.736111111111111e-05,
+      "maximumLinearError": 0.00283159841634866,
+      "meanAbsoluteLinearError": 1.0275670785652092e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999998171981364,
+      "bounds": [
+        519,
+        277,
+        540,
+        446
+      ]
+    },
+    {
+      "frame": 65,
+      "changedPixels": 3,
+      "changedPixelFraction": 5.787037037037037e-06,
+      "maximumLinearError": 0.0015347417572378133,
+      "meanAbsoluteLinearError": 2.9356913260469247e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999788861332,
+      "bounds": [
+        523,
+        423,
+        534,
+        438
+      ]
+    },
+    {
+      "frame": 72,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0004632577697374213,
+      "meanAbsoluteLinearError": 2.978766523517369e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999998944168,
+      "bounds": [
+        469,
+        357,
+        470,
+        358
+      ]
+    },
+    {
+      "frame": 76,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0006742431771719869,
+      "meanAbsoluteLinearError": 4.335411375848681e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999879411078,
+      "bounds": [
+        458,
+        354,
+        459,
+        355
+      ]
+    },
+    {
+      "frame": 84,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.005366509040499998,
+      "meanAbsoluteLinearError": 5.388995023693729e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999978514,
+      "bounds": [
+        490,
+        370,
+        491,
+        371
+      ]
+    },
+    {
+      "frame": 85,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0009794813847230285,
+      "meanAbsoluteLinearError": 6.298105611644988e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999357819,
+      "bounds": [
+        496,
+        363,
+        497,
+        364
+      ]
+    },
+    {
+      "frame": 86,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0008582656399956194,
+      "meanAbsoluteLinearError": 5.518683384745495e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999994600459,
+      "bounds": [
+        477,
+        335,
+        478,
+        336
+      ]
+    },
+    {
+      "frame": 87,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0007646708268201647,
+      "meanAbsoluteLinearError": 4.916864884388919e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999998949127,
+      "bounds": [
+        489,
+        366,
+        490,
+        367
+      ]
+    },
+    {
+      "frame": 122,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0006742431771719869,
+      "meanAbsoluteLinearError": 4.335411375848681e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999998392748,
+      "bounds": [
+        446,
+        361,
+        447,
+        362
+      ]
+    },
+    {
+      "frame": 125,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0014236186361637898,
+      "meanAbsoluteLinearError": 9.153926415662229e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999995760802,
+      "bounds": [
+        558,
+        329,
+        559,
+        330
+      ]
+    },
+    {
+      "frame": 126,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.000719050705116674,
+      "meanAbsoluteLinearError": 4.6235256244642103e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999999573803,
+      "bounds": [
+        518,
+        359,
+        519,
+        360
+      ]
+    },
+    {
+      "frame": 139,
+      "changedPixels": 23,
+      "changedPixelFraction": 4.436728395061728e-05,
+      "maximumLinearError": 0.01062189086893936,
+      "meanAbsoluteLinearError": 4.699818833241306e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999805732506,
+      "bounds": [
+        415,
+        178,
+        573,
+        378
+      ]
+    },
+    {
+      "frame": 140,
+      "changedPixels": 23,
+      "changedPixelFraction": 4.436728395061728e-05,
+      "maximumLinearError": 0.005544020675309069,
+      "meanAbsoluteLinearError": 2.813843379564634e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999666211029,
+      "bounds": [
+        395,
+        221,
+        581,
+        383
+      ]
+    },
+    {
+      "frame": 141,
+      "changedPixels": 43,
+      "changedPixelFraction": 8.294753086419753e-05,
+      "maximumLinearError": 0.08832445655520149,
+      "meanAbsoluteLinearError": 2.3744687439681978e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999979542445057,
+      "bounds": [
+        395,
+        211,
+        631,
+        492
+      ]
+    },
+    {
+      "frame": 142,
+      "changedPixels": 121,
+      "changedPixelFraction": 0.00023341049382716048,
+      "maximumLinearError": 0.10526379564226004,
+      "meanAbsoluteLinearError": 2.870903199941935e-07,
+      "medianLuminanceRelativeError": 0.00013652210680708206,
+      "srgbLuminanceSsim": 0.999997366968186,
+      "bounds": [
+        382,
+        188,
+        649,
+        522
+      ]
+    },
+    {
+      "frame": 143,
+      "changedPixels": 68,
+      "changedPixelFraction": 0.00013117283950617284,
+      "maximumLinearError": 0.010354571053605682,
+      "meanAbsoluteLinearError": 1.0833960993949056e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.99999945421418,
+      "bounds": [
+        403,
+        196,
+        643,
+        480
+      ]
+    },
+    {
+      "frame": 144,
+      "changedPixels": 48,
+      "changedPixelFraction": 9.259259259259259e-05,
+      "maximumLinearError": 0.013774772907696506,
+      "meanAbsoluteLinearError": 6.768080352202774e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999997607930141,
+      "bounds": [
+        461,
+        195,
+        652,
+        457
+      ]
+    },
+    {
+      "frame": 145,
+      "changedPixels": 21,
+      "changedPixelFraction": 4.050925925925926e-05,
+      "maximumLinearError": 0.0024437737356706388,
+      "meanAbsoluteLinearError": 1.2991343925145018e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999248167767,
+      "bounds": [
+        529,
+        195,
+        653,
+        326
+      ]
+    },
+    {
+      "frame": 146,
+      "changedPixels": 19,
+      "changedPixelFraction": 3.6651234567901234e-05,
+      "maximumLinearError": 0.0015628923899160055,
+      "meanAbsoluteLinearError": 1.1791859342955425e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999435850393,
+      "bounds": [
+        573,
+        198,
+        658,
+        274
+      ]
+    },
+    {
+      "frame": 147,
+      "changedPixels": 8,
+      "changedPixelFraction": 1.54320987654321e-05,
+      "maximumLinearError": 0.001182589340017897,
+      "meanAbsoluteLinearError": 5.344688925797694e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999777632244,
+      "bounds": [
+        559,
+        240,
+        648,
+        321
+      ]
+    },
+    {
+      "frame": 148,
+      "changedPixels": 29,
+      "changedPixelFraction": 5.594135802469136e-05,
+      "maximumLinearError": 0.04049807903230923,
+      "meanAbsoluteLinearError": 1.359848999864118e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999221055435,
+      "bounds": [
+        427,
+        200,
+        625,
+        427
+      ]
+    },
+    {
+      "frame": 149,
+      "changedPixels": 11,
+      "changedPixelFraction": 2.1219135802469135e-05,
+      "maximumLinearError": 0.02076608449883935,
+      "meanAbsoluteLinearError": 1.894929497176265e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999318641242,
+      "bounds": [
+        562,
+        198,
+        660,
+        264
+      ]
+    },
+    {
+      "frame": 150,
+      "changedPixels": 28,
+      "changedPixelFraction": 5.401234567901235e-05,
+      "maximumLinearError": 0.003416147700784411,
+      "meanAbsoluteLinearError": 2.9749160425340862e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999530237149,
+      "bounds": [
+        443,
+        197,
+        811,
+        456
+      ]
+    },
+    {
+      "frame": 151,
+      "changedPixels": 23,
+      "changedPixelFraction": 4.436728395061728e-05,
+      "maximumLinearError": 0.024687613844976475,
+      "meanAbsoluteLinearError": 8.70746702463559e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999787590069,
+      "bounds": [
+        373,
+        198,
+        632,
+        441
+      ]
+    },
+    {
+      "frame": 152,
+      "changedPixels": 71,
+      "changedPixelFraction": 0.00013695987654320987,
+      "maximumLinearError": 0.09762799807408634,
+      "meanAbsoluteLinearError": 4.7320848454460756e-07,
+      "medianLuminanceRelativeError": 8.493164173063309e-05,
+      "srgbLuminanceSsim": 0.9999892562342723,
+      "bounds": [
+        399,
+        182,
+        607,
+        460
+      ]
+    },
+    {
+      "frame": 153,
+      "changedPixels": 33,
+      "changedPixelFraction": 6.36574074074074e-05,
+      "maximumLinearError": 0.017748714582682873,
+      "meanAbsoluteLinearError": 1.0392046209325004e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999989536293638,
+      "bounds": [
+        397,
+        261,
+        593,
+        514
+      ]
+    },
+    {
+      "frame": 154,
+      "changedPixels": 124,
+      "changedPixelFraction": 0.00023919753086419754,
+      "maximumLinearError": 0.0321903465239063,
+      "meanAbsoluteLinearError": 2.679941897532268e-07,
+      "medianLuminanceRelativeError": 0.0004195487607597225,
+      "srgbLuminanceSsim": 0.99999796134751,
+      "bounds": [
+        369,
+        170,
+        765,
+        483
+      ]
+    },
+    {
+      "frame": 155,
+      "changedPixels": 43,
+      "changedPixelFraction": 8.294753086419753e-05,
+      "maximumLinearError": 0.006686639498981933,
+      "meanAbsoluteLinearError": 8.26438170839129e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999994074204861,
+      "bounds": [
+        483,
+        207,
+        749,
+        480
+      ]
+    },
+    {
+      "frame": 156,
+      "changedPixels": 42,
+      "changedPixelFraction": 8.101851851851852e-05,
+      "maximumLinearError": 0.39696150136796376,
+      "meanAbsoluteLinearError": 4.8000266307075e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999990648550147,
+      "bounds": [
+        501,
+        224,
+        729,
+        475
+      ]
+    },
+    {
+      "frame": 157,
+      "changedPixels": 20,
+      "changedPixelFraction": 3.8580246913580246e-05,
+      "maximumLinearError": 0.09164999539044971,
+      "meanAbsoluteLinearError": 1.0297291824436255e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999996192375197,
+      "bounds": [
+        505,
+        248,
+        726,
+        471
+      ]
+    },
+    {
+      "frame": 158,
+      "changedPixels": 103,
+      "changedPixelFraction": 0.00019868827160493828,
+      "maximumLinearError": 0.08180955532464267,
+      "meanAbsoluteLinearError": 4.142885987125283e-07,
+      "medianLuminanceRelativeError": 3.5214558752306087e-06,
+      "srgbLuminanceSsim": 0.999996528926957,
+      "bounds": [
+        405,
+        180,
+        723,
+        508
+      ]
+    },
+    {
+      "frame": 159,
+      "changedPixels": 395,
+      "changedPixelFraction": 0.0007619598765432099,
+      "maximumLinearError": 0.10311050235621683,
+      "meanAbsoluteLinearError": 1.1966476702424185e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999962955802506,
+      "bounds": [
+        0,
+        28,
+        958,
+        538
+      ]
+    },
+    {
+      "frame": 160,
+      "changedPixels": 466,
+      "changedPixelFraction": 0.0008989197530864198,
+      "maximumLinearError": 0.19557193705724685,
+      "meanAbsoluteLinearError": 1.138877510036478e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999947693662411,
+      "bounds": [
+        53,
+        20,
+        931,
+        540
+      ]
+    },
+    {
+      "frame": 161,
+      "changedPixels": 723,
+      "changedPixelFraction": 0.001394675925925926,
+      "maximumLinearError": 0.057685263516340846,
+      "meanAbsoluteLinearError": 1.1580224256321645e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999941783833615,
+      "bounds": [
+        0,
+        0,
+        957,
+        540
+      ]
+    },
+    {
+      "frame": 162,
+      "changedPixels": 592,
+      "changedPixelFraction": 0.0011419753086419754,
+      "maximumLinearError": 0.08491237418719928,
+      "meanAbsoluteLinearError": 2.504581706702181e-06,
+      "medianLuminanceRelativeError": 7.039409926535182e-05,
+      "srgbLuminanceSsim": 0.9999957401882785,
+      "bounds": [
+        1,
+        7,
+        915,
+        534
+      ]
+    },
+    {
+      "frame": 163,
+      "changedPixels": 418,
+      "changedPixelFraction": 0.0008063271604938271,
+      "maximumLinearError": 0.1352841975077661,
+      "meanAbsoluteLinearError": 1.4951226692297357e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999988770332232,
+      "bounds": [
+        0,
+        0,
+        959,
+        533
+      ]
+    },
+    {
+      "frame": 164,
+      "changedPixels": 2860,
+      "changedPixelFraction": 0.005516975308641975,
+      "maximumLinearError": 0.5850134492951342,
+      "meanAbsoluteLinearError": 1.3989343886198793e-05,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9997645662479153,
+      "bounds": [
+        0,
+        0,
+        960,
+        540
+      ]
+    },
+    {
+      "frame": 165,
+      "changedPixels": 1552,
+      "changedPixelFraction": 0.002993827160493827,
+      "maximumLinearError": 0.6361971229969114,
+      "meanAbsoluteLinearError": 5.382222686840562e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999602223173241,
+      "bounds": [
+        54,
+        1,
+        959,
+        540
+      ]
+    },
+    {
+      "frame": 166,
+      "changedPixels": 1171,
+      "changedPixelFraction": 0.0022588734567901233,
+      "maximumLinearError": 0.05048935958351802,
+      "meanAbsoluteLinearError": 1.8698100954438969e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999908649882607,
+      "bounds": [
+        45,
+        31,
+        947,
+        540
+      ]
+    },
+    {
+      "frame": 167,
+      "changedPixels": 1237,
+      "changedPixelFraction": 0.0023861882716049382,
+      "maximumLinearError": 0.042142855852121464,
+      "meanAbsoluteLinearError": 1.3907136374991918e-06,
+      "medianLuminanceRelativeError": 1.415144913317601e-05,
+      "srgbLuminanceSsim": 0.9999939389557312,
+      "bounds": [
+        9,
+        30,
+        909,
+        538
+      ]
+    },
+    {
+      "frame": 168,
+      "changedPixels": 1062,
+      "changedPixelFraction": 0.0020486111111111113,
+      "maximumLinearError": 0.29337047094036156,
+      "meanAbsoluteLinearError": 2.154922872084566e-06,
+      "medianLuminanceRelativeError": 0.00016176867002052215,
+      "srgbLuminanceSsim": 0.9999921940637982,
+      "bounds": [
+        0,
+        22,
+        957,
+        540
+      ]
+    },
+    {
+      "frame": 169,
+      "changedPixels": 1016,
+      "changedPixelFraction": 0.0019598765432098765,
+      "maximumLinearError": 0.10971495537570757,
+      "meanAbsoluteLinearError": 2.5719780880871205e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999886209775664,
+      "bounds": [
+        4,
+        15,
+        949,
+        540
+      ]
+    },
+    {
+      "frame": 170,
+      "changedPixels": 794,
+      "changedPixelFraction": 0.0015316358024691358,
+      "maximumLinearError": 0.04725525539897752,
+      "meanAbsoluteLinearError": 1.3450147057327524e-06,
+      "medianLuminanceRelativeError": 0.0001707175611574353,
+      "srgbLuminanceSsim": 0.9999911135704035,
+      "bounds": [
+        15,
+        21,
+        960,
+        540
+      ]
+    },
+    {
+      "frame": 171,
+      "changedPixels": 1130,
+      "changedPixelFraction": 0.002179783950617284,
+      "maximumLinearError": 0.05083521973905952,
+      "meanAbsoluteLinearError": 1.804803260361446e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999864044437359,
+      "bounds": [
+        1,
+        14,
+        952,
+        539
+      ]
+    },
+    {
+      "frame": 172,
+      "changedPixels": 1402,
+      "changedPixelFraction": 0.0027044753086419753,
+      "maximumLinearError": 0.063701287184251,
+      "meanAbsoluteLinearError": 2.5612630911491993e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999864579930717,
+      "bounds": [
+        31,
+        9,
+        958,
+        540
+      ]
+    },
+    {
+      "frame": 173,
+      "changedPixels": 940,
+      "changedPixelFraction": 0.0018132716049382715,
+      "maximumLinearError": 0.055805860454121725,
+      "meanAbsoluteLinearError": 1.212239151204638e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999959351594098,
+      "bounds": [
+        37,
+        29,
+        954,
+        539
+      ]
+    },
+    {
+      "frame": 174,
+      "changedPixels": 993,
+      "changedPixelFraction": 0.0019155092592592592,
+      "maximumLinearError": 0.060574521314116225,
+      "meanAbsoluteLinearError": 1.311626631290368e-06,
+      "medianLuminanceRelativeError": 5.497539449789453e-05,
+      "srgbLuminanceSsim": 0.9999955070436628,
+      "bounds": [
+        1,
+        12,
+        954,
+        540
+      ]
+    },
+    {
+      "frame": 175,
+      "changedPixels": 907,
+      "changedPixelFraction": 0.001749614197530864,
+      "maximumLinearError": 0.09623896026772727,
+      "meanAbsoluteLinearError": 1.460121600642339e-06,
+      "medianLuminanceRelativeError": 3.6758030868717924e-05,
+      "srgbLuminanceSsim": 0.9999962390444846,
+      "bounds": [
+        35,
+        46,
+        932,
+        534
+      ]
+    },
+    {
+      "frame": 176,
+      "changedPixels": 724,
+      "changedPixelFraction": 0.001396604938271605,
+      "maximumLinearError": 0.02299585717243379,
+      "meanAbsoluteLinearError": 1.0088897134069301e-06,
+      "medianLuminanceRelativeError": 2.8762025567601493e-05,
+      "srgbLuminanceSsim": 0.9999895944542737,
+      "bounds": [
+        17,
+        26,
+        936,
+        540
+      ]
+    },
+    {
+      "frame": 177,
+      "changedPixels": 508,
+      "changedPixelFraction": 0.0009799382716049383,
+      "maximumLinearError": 0.01669079042241034,
+      "meanAbsoluteLinearError": 5.791516437521741e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999984240229824,
+      "bounds": [
+        25,
+        29,
+        942,
+        512
+      ]
+    },
+    {
+      "frame": 178,
+      "changedPixels": 461,
+      "changedPixelFraction": 0.0008892746913580247,
+      "maximumLinearError": 0.05483678775267037,
+      "meanAbsoluteLinearError": 6.542685655154309e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999978592451286,
+      "bounds": [
+        21,
+        20,
+        929,
+        522
+      ]
+    },
+    {
+      "frame": 179,
+      "changedPixels": 385,
+      "changedPixelFraction": 0.0007426697530864198,
+      "maximumLinearError": 0.045166546926077855,
+      "meanAbsoluteLinearError": 6.551674629604302e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999982271082157,
+      "bounds": [
+        24,
+        21,
+        929,
+        537
+      ]
+    },
+    {
+      "frame": 180,
+      "changedPixels": 377,
+      "changedPixelFraction": 0.0007272376543209876,
+      "maximumLinearError": 0.06392538435325812,
+      "meanAbsoluteLinearError": 5.93161270819711e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999983618241404,
+      "bounds": [
+        32,
+        40,
+        941,
+        500
+      ]
+    },
+    {
+      "frame": 181,
+      "changedPixels": 494,
+      "changedPixelFraction": 0.0009529320987654321,
+      "maximumLinearError": 0.011120195772312044,
+      "meanAbsoluteLinearError": 5.35586655919838e-07,
+      "medianLuminanceRelativeError": 0.00016345601498947096,
+      "srgbLuminanceSsim": 0.9999982103706899,
+      "bounds": [
+        14,
+        42,
+        937,
+        514
+      ]
+    },
+    {
+      "frame": 182,
+      "changedPixels": 406,
+      "changedPixelFraction": 0.000783179012345679,
+      "maximumLinearError": 0.005870909791765244,
+      "meanAbsoluteLinearError": 3.3340876926986644e-07,
+      "medianLuminanceRelativeError": 0.000269930586424544,
+      "srgbLuminanceSsim": 0.9999982495750375,
+      "bounds": [
+        1,
+        22,
+        953,
+        502
+      ]
+    },
+    {
+      "frame": 183,
+      "changedPixels": 281,
+      "changedPixelFraction": 0.0005420524691358025,
+      "maximumLinearError": 0.006582947444426446,
+      "meanAbsoluteLinearError": 2.2136287959695796e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999267516058,
+      "bounds": [
+        15,
+        31,
+        921,
+        512
+      ]
+    },
+    {
+      "frame": 184,
+      "changedPixels": 276,
+      "changedPixelFraction": 0.0005324074074074074,
+      "maximumLinearError": 0.09286386609632102,
+      "meanAbsoluteLinearError": 4.368485054080467e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999998835185651,
+      "bounds": [
+        2,
+        32,
+        925,
+        515
+      ]
+    },
+    {
+      "frame": 185,
+      "changedPixels": 271,
+      "changedPixelFraction": 0.0005227623456790124,
+      "maximumLinearError": 0.010745247185468904,
+      "meanAbsoluteLinearError": 3.414009224046851e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999984197030318,
+      "bounds": [
+        5,
+        47,
+        921,
+        430
+      ]
+    },
+    {
+      "frame": 186,
+      "changedPixels": 228,
+      "changedPixelFraction": 0.0004398148148148148,
+      "maximumLinearError": 0.03003294620968378,
+      "meanAbsoluteLinearError": 4.100239671761261e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999970764150989,
+      "bounds": [
+        10,
+        33,
+        923,
+        491
+      ]
+    },
+    {
+      "frame": 187,
+      "changedPixels": 232,
+      "changedPixelFraction": 0.0004475308641975309,
+      "maximumLinearError": 0.11026142612029137,
+      "meanAbsoluteLinearError": 5.727220162248244e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999973022900401,
+      "bounds": [
+        15,
+        22,
+        917,
+        493
+      ]
+    },
+    {
+      "frame": 188,
+      "changedPixels": 193,
+      "changedPixelFraction": 0.00037229938271604937,
+      "maximumLinearError": 0.02873597874685696,
+      "meanAbsoluteLinearError": 3.6308369080150936e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999993015866022,
+      "bounds": [
+        1,
+        16,
+        916,
+        512
+      ]
+    },
+    {
+      "frame": 189,
+      "changedPixels": 244,
+      "changedPixelFraction": 0.000470679012345679,
+      "maximumLinearError": 0.012876386340725465,
+      "meanAbsoluteLinearError": 3.0127112852967687e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999994546439036,
+      "bounds": [
+        13,
+        25,
+        936,
+        501
+      ]
+    },
+    {
+      "frame": 190,
+      "changedPixels": 175,
+      "changedPixelFraction": 0.00033757716049382714,
+      "maximumLinearError": 0.16734114173818815,
+      "meanAbsoluteLinearError": 8.811963090948424e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999954533110021,
+      "bounds": [
+        12,
+        2,
+        928,
+        484
+      ]
+    },
+    {
+      "frame": 191,
+      "changedPixels": 231,
+      "changedPixelFraction": 0.00044560185185185187,
+      "maximumLinearError": 0.04068088652864349,
+      "meanAbsoluteLinearError": 3.944470006102159e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999995927051429,
+      "bounds": [
+        8,
+        14,
+        924,
+        481
+      ]
+    },
+    {
+      "frame": 192,
+      "changedPixels": 162,
+      "changedPixelFraction": 0.0003125,
+      "maximumLinearError": 0.026113179696854727,
+      "meanAbsoluteLinearError": 4.804136681493254e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999272554905,
+      "bounds": [
+        5,
+        7,
+        921,
+        489
+      ]
+    },
+    {
+      "frame": 193,
+      "changedPixels": 197,
+      "changedPixelFraction": 0.00038001543209876545,
+      "maximumLinearError": 0.16512389007490835,
+      "meanAbsoluteLinearError": 7.026142896601017e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999955438532365,
+      "bounds": [
+        4,
+        19,
+        906,
+        399
+      ]
+    },
+    {
+      "frame": 194,
+      "changedPixels": 181,
+      "changedPixelFraction": 0.00034915123456790125,
+      "maximumLinearError": 0.14916610403267333,
+      "meanAbsoluteLinearError": 6.438787105064135e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999927562196442,
+      "bounds": [
+        2,
+        15,
+        920,
+        485
+      ]
+    },
+    {
+      "frame": 195,
+      "changedPixels": 230,
+      "changedPixelFraction": 0.00044367283950617285,
+      "maximumLinearError": 0.025319882150883766,
+      "meanAbsoluteLinearError": 5.152460932013105e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999986218209,
+      "bounds": [
+        1,
+        13,
+        900,
+        424
+      ]
+    },
+    {
+      "frame": 196,
+      "changedPixels": 205,
+      "changedPixelFraction": 0.00039544753086419754,
+      "maximumLinearError": 0.02838939038748861,
+      "meanAbsoluteLinearError": 4.271541744871339e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999990026884314,
+      "bounds": [
+        15,
+        42,
+        909,
+        440
+      ]
+    },
+    {
+      "frame": 197,
+      "changedPixels": 157,
+      "changedPixelFraction": 0.0003028549382716049,
+      "maximumLinearError": 0.15709932188326597,
+      "meanAbsoluteLinearError": 7.058350268118671e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999959140299932,
+      "bounds": [
+        185,
+        114,
+        900,
+        454
+      ]
+    },
+    {
+      "frame": 198,
+      "changedPixels": 188,
+      "changedPixelFraction": 0.00036265432098765433,
+      "maximumLinearError": 0.008696498670336922,
+      "meanAbsoluteLinearError": 4.214037663564145e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999993961841865,
+      "bounds": [
+        7,
+        93,
+        904,
+        414
+      ]
+    },
+    {
+      "frame": 199,
+      "changedPixels": 201,
+      "changedPixelFraction": 0.00038773148148148147,
+      "maximumLinearError": 0.23008424626626328,
+      "meanAbsoluteLinearError": 9.001830832906366e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999933770778829,
+      "bounds": [
+        7,
+        61,
+        900,
+        408
+      ]
+    },
+    {
+      "frame": 200,
+      "changedPixels": 243,
+      "changedPixelFraction": 0.00046875,
+      "maximumLinearError": 0.167651632294277,
+      "meanAbsoluteLinearError": 9.959675886948802e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999948529521336,
+      "bounds": [
+        126,
+        101,
+        896,
+        398
+      ]
+    },
+    {
+      "frame": 201,
+      "changedPixels": 335,
+      "changedPixelFraction": 0.0006462191358024692,
+      "maximumLinearError": 0.06539822227397196,
+      "meanAbsoluteLinearError": 1.0181266235834485e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999967246955433,
+      "bounds": [
+        95,
+        13,
+        907,
+        425
+      ]
+    },
+    {
+      "frame": 202,
+      "changedPixels": 259,
+      "changedPixelFraction": 0.0004996141975308642,
+      "maximumLinearError": 0.1628753862906311,
+      "meanAbsoluteLinearError": 1.065403862490714e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999953760660104,
+      "bounds": [
+        108,
+        58,
+        898,
+        406
+      ]
+    },
+    {
+      "frame": 203,
+      "changedPixels": 299,
+      "changedPixelFraction": 0.0005767746913580247,
+      "maximumLinearError": 0.16787557760013866,
+      "meanAbsoluteLinearError": 1.042027002694566e-06,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999947205478541,
+      "bounds": [
+        72,
+        59,
+        899,
+        424
+      ]
+    },
+    {
+      "frame": 204,
+      "changedPixels": 199,
+      "changedPixelFraction": 0.0003838734567901235,
+      "maximumLinearError": 0.010567550585306895,
+      "meanAbsoluteLinearError": 4.4700884117574844e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999992694353683,
+      "bounds": [
+        92,
+        72,
+        894,
+        416
+      ]
+    },
+    {
+      "frame": 205,
+      "changedPixels": 188,
+      "changedPixelFraction": 0.00036265432098765433,
+      "maximumLinearError": 0.012513672116075809,
+      "meanAbsoluteLinearError": 4.940742429815108e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999982717843767,
+      "bounds": [
+        45,
+        61,
+        882,
+        382
+      ]
+    },
+    {
+      "frame": 206,
+      "changedPixels": 202,
+      "changedPixelFraction": 0.0003896604938271605,
+      "maximumLinearError": 0.014955343207396998,
+      "meanAbsoluteLinearError": 4.4668727919049227e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999995130077878,
+      "bounds": [
+        86,
+        12,
+        889,
+        419
+      ]
+    },
+    {
+      "frame": 207,
+      "changedPixels": 100,
+      "changedPixelFraction": 0.00019290123456790122,
+      "maximumLinearError": 0.2253331270899446,
+      "meanAbsoluteLinearError": 9.030962904210805e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999904924826073,
+      "bounds": [
+        72,
+        4,
+        884,
+        314
+      ]
+    },
+    {
+      "frame": 208,
+      "changedPixels": 91,
+      "changedPixelFraction": 0.00017554012345679014,
+      "maximumLinearError": 0.2253331270899446,
+      "meanAbsoluteLinearError": 7.133964879002364e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999933752603348,
+      "bounds": [
+        78,
+        104,
+        893,
+        397
+      ]
+    },
+    {
+      "frame": 209,
+      "changedPixels": 67,
+      "changedPixelFraction": 0.00012924382716049382,
+      "maximumLinearError": 0.020970135734180495,
+      "meanAbsoluteLinearError": 2.03718294646226e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999996409084433,
+      "bounds": [
+        302,
+        90,
+        885,
+        204
+      ]
+    },
+    {
+      "frame": 210,
+      "changedPixels": 37,
+      "changedPixelFraction": 7.137345679012346e-05,
+      "maximumLinearError": 0.05810909152339999,
+      "meanAbsoluteLinearError": 1.449133668691743e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999982584522225,
+      "bounds": [
+        59,
+        107,
+        877,
+        321
+      ]
+    },
+    {
+      "frame": 211,
+      "changedPixels": 7,
+      "changedPixelFraction": 1.3503086419753087e-05,
+      "maximumLinearError": 0.0006302709768613093,
+      "meanAbsoluteLinearError": 2.305435032533992e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999576077865,
+      "bounds": [
+        64,
+        111,
+        634,
+        432
+      ]
+    },
+    {
+      "frame": 212,
+      "changedPixels": 33,
+      "changedPixelFraction": 6.36574074074074e-05,
+      "maximumLinearError": 0.0015347417572378133,
+      "meanAbsoluteLinearError": 1.765769456868976e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999996709004761,
+      "bounds": [
+        58,
+        112,
+        641,
+        457
+      ]
+    },
+    {
+      "frame": 213,
+      "changedPixels": 7,
+      "changedPixelFraction": 1.3503086419753087e-05,
+      "maximumLinearError": 0.000719050705116674,
+      "meanAbsoluteLinearError": 2.4908306949507907e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999502241362,
+      "bounds": [
+        64,
+        114,
+        642,
+        452
+      ]
+    },
+    {
+      "frame": 214,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.00034820969444887074,
+      "meanAbsoluteLinearError": 2.2390026649232943e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999867434229,
+      "bounds": [
+        617,
+        173,
+        618,
+        174
+      ]
+    },
+    {
+      "frame": 215,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.0011051478653458999,
+      "meanAbsoluteLinearError": 1.308896080695122e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999993802383,
+      "bounds": [
+        628,
+        117,
+        629,
+        121
+      ]
+    },
+    {
+      "frame": 216,
+      "changedPixels": 8,
+      "changedPixelFraction": 1.54320987654321e-05,
+      "maximumLinearError": 0.003345777800236871,
+      "meanAbsoluteLinearError": 6.0667309254832344e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999805218232,
+      "bounds": [
+        32,
+        114,
+        647,
+        336
+      ]
+    },
+    {
+      "frame": 217,
+      "changedPixels": 7,
+      "changedPixelFraction": 1.3503086419753087e-05,
+      "maximumLinearError": 0.00247071705860627,
+      "meanAbsoluteLinearError": 4.425405454985973e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999806605291,
+      "bounds": [
+        124,
+        124,
+        649,
+        440
+      ]
+    },
+    {
+      "frame": 218,
+      "changedPixels": 21,
+      "changedPixelFraction": 4.050925925925926e-05,
+      "maximumLinearError": 0.0016196294192621224,
+      "meanAbsoluteLinearError": 8.53439364725347e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999950565632,
+      "bounds": [
+        113,
+        117,
+        635,
+        469
+      ]
+    },
+    {
+      "frame": 219,
+      "changedPixels": 4,
+      "changedPixelFraction": 7.71604938271605e-06,
+      "maximumLinearError": 0.0009062020997166777,
+      "meanAbsoluteLinearError": 2.4347154500693746e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999908770275,
+      "bounds": [
+        24,
+        116,
+        639,
+        341
+      ]
+    },
+    {
+      "frame": 220,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.0009794813847230285,
+      "meanAbsoluteLinearError": 1.166448122569266e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999978930485,
+      "bounds": [
+        90,
+        118,
+        625,
+        440
+      ]
+    },
+    {
+      "frame": 221,
+      "changedPixels": 7,
+      "changedPixelFraction": 1.3503086419753087e-05,
+      "maximumLinearError": 0.006455610964777536,
+      "meanAbsoluteLinearError": 7.119396284233055e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999945911213,
+      "bounds": [
+        89,
+        103,
+        362,
+        460
+      ]
+    },
+    {
+      "frame": 224,
+      "changedPixels": 10,
+      "changedPixelFraction": 1.9290123456790123e-05,
+      "maximumLinearError": 0.0016769401414671384,
+      "meanAbsoluteLinearError": 5.094943839259013e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999214969542,
+      "bounds": [
+        59,
+        446,
+        103,
+        479
+      ]
+    },
+    {
+      "frame": 225,
+      "changedPixels": 4,
+      "changedPixelFraction": 7.71604938271605e-06,
+      "maximumLinearError": 0.05264850123934965,
+      "meanAbsoluteLinearError": 9.482109673950668e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999988858109918,
+      "bounds": [
+        51,
+        444,
+        56,
+        461
+      ]
+    },
+    {
+      "frame": 227,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.0007417605488028584,
+      "meanAbsoluteLinearError": 8.139927282418192e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999980417961,
+      "bounds": [
+        27,
+        447,
+        33,
+        467
+      ]
+    },
+    {
+      "frame": 228,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0029325233130135797,
+      "meanAbsoluteLinearError": 1.8856245582649047e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999941761937,
+      "bounds": [
+        283,
+        128,
+        284,
+        129
+      ]
+    },
+    {
+      "frame": 231,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0025677602298347785,
+      "meanAbsoluteLinearError": 1.6510803946982886e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999998436763,
+      "bounds": [
+        294,
+        142,
+        295,
+        143
+      ]
+    },
+    {
+      "frame": 238,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.0022798805108977527,
+      "meanAbsoluteLinearError": 2.470918789103497e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999364421,
+      "bounds": [
+        306,
+        122,
+        308,
+        124
+      ]
+    },
+    {
+      "frame": 256,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.0022798805108977527,
+      "meanAbsoluteLinearError": 3.6410935084097614e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999938408944,
+      "bounds": [
+        286,
+        121,
+        301,
+        127
+      ]
+    },
+    {
+      "frame": 257,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.001079669744224996,
+      "meanAbsoluteLinearError": 6.942320886220396e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999960906709,
+      "bounds": [
+        299,
+        118,
+        300,
+        119
+      ]
+    },
+    {
+      "frame": 259,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0011307949333880067,
+      "meanAbsoluteLinearError": 7.271057956455804e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999761993,
+      "bounds": [
+        291,
+        121,
+        292,
+        122
+      ]
+    },
+    {
+      "frame": 262,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.001478881951204554,
+      "meanAbsoluteLinearError": 9.509271805584838e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999645383,
+      "bounds": [
+        301,
+        123,
+        302,
+        124
+      ]
+    },
+    {
+      "frame": 269,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0022798805108977527,
+      "meanAbsoluteLinearError": 1.4659725507315797e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999610817,
+      "bounds": [
+        289,
+        125,
+        290,
+        126
+      ]
+    },
+    {
+      "frame": 278,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0011307949333880067,
+      "meanAbsoluteLinearError": 7.271057956455804e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999752641,
+      "bounds": [
+        294,
+        120,
+        295,
+        121
+      ]
+    },
+    {
+      "frame": 325,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0020628868153464708,
+      "meanAbsoluteLinearError": 1.3264447115139344e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999992134037,
+      "bounds": [
+        299,
+        122,
+        300,
+        123
+      ]
+    },
+    {
+      "frame": 418,
+      "changedPixels": 95,
+      "changedPixelFraction": 0.00018325617283950618,
+      "maximumLinearError": 0.031274288973113004,
+      "meanAbsoluteLinearError": 2.1743306919497406e-07,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999998163414148,
+      "bounds": [
+        1,
+        14,
+        934,
+        530
+      ]
+    },
+    {
+      "frame": 420,
+      "changedPixels": 10,
+      "changedPixelFraction": 1.9290123456790123e-05,
+      "maximumLinearError": 0.002311381105251434,
+      "meanAbsoluteLinearError": 9.023836226996377e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999106153877,
+      "bounds": [
+        25,
+        266,
+        157,
+        447
+      ]
+    },
+    {
+      "frame": 421,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0020628868153464708,
+      "meanAbsoluteLinearError": 1.3264447115139344e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999998737402,
+      "bounds": [
+        120,
+        408,
+        121,
+        409
+      ]
+    },
+    {
+      "frame": 422,
+      "changedPixels": 3,
+      "changedPixelFraction": 5.787037037037037e-06,
+      "maximumLinearError": 0.005788686952817257,
+      "meanAbsoluteLinearError": 8.800272717241664e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999443715017,
+      "bounds": [
+        28,
+        258,
+        66,
+        288
+      ]
+    },
+    {
+      "frame": 424,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0018819258521957094,
+      "meanAbsoluteLinearError": 1.2100860675126732e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999094453,
+      "bounds": [
+        28,
+        265,
+        29,
+        266
+      ]
+    },
+    {
+      "frame": 426,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0016482136071577225,
+      "meanAbsoluteLinearError": 3.0338761622294785e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999969570894,
+      "bounds": [
+        28,
+        263,
+        29,
+        264
+      ]
+    },
+    {
+      "frame": 428,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.001478881951204554,
+      "meanAbsoluteLinearError": 9.509271805584838e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999998416605,
+      "bounds": [
+        26,
+        262,
+        27,
+        263
+      ]
+    },
+    {
+      "frame": 430,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.006077907827832907,
+      "meanAbsoluteLinearError": 4.859046925821412e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999984524509,
+      "bounds": [
+        25,
+        262,
+        35,
+        281
+      ]
+    },
+    {
+      "frame": 434,
+      "changedPixels": 3,
+      "changedPixelFraction": 5.787037037037037e-06,
+      "maximumLinearError": 0.008546574250107075,
+      "meanAbsoluteLinearError": 1.764100011670473e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999947715472,
+      "bounds": [
+        9,
+        263,
+        31,
+        268
+      ]
+    },
+    {
+      "frame": 436,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0016482136071577225,
+      "meanAbsoluteLinearError": 3.0338761622294785e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999964331052,
+      "bounds": [
+        24,
+        263,
+        25,
+        264
+      ]
+    },
+    {
+      "frame": 437,
+      "changedPixels": 2,
+      "changedPixelFraction": 3.858024691358025e-06,
+      "maximumLinearError": 0.001763963421550066,
+      "meanAbsoluteLinearError": 4.168111901394902e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999996460407,
+      "bounds": [
+        24,
+        263,
+        26,
+        265
+      ]
+    },
+    {
+      "frame": 438,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0018819258521957094,
+      "meanAbsoluteLinearError": 1.2100860675126732e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999999011591,
+      "bounds": [
+        27,
+        265,
+        28,
+        266
+      ]
+    },
+    {
+      "frame": 440,
+      "changedPixels": 6,
+      "changedPixelFraction": 1.1574074074074073e-05,
+      "maximumLinearError": 0.001763963421550066,
+      "meanAbsoluteLinearError": 1.3661076363770765e-08,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999763258443,
+      "bounds": [
+        16,
+        257,
+        35,
+        265
+      ]
+    },
+    {
+      "frame": 441,
+      "changedPixels": 4,
+      "changedPixelFraction": 7.71604938271605e-06,
+      "maximumLinearError": 0.0018819258521957094,
+      "meanAbsoluteLinearError": 8.41087895321382e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.999999989443796,
+      "bounds": [
+        8,
+        263,
+        28,
+        266
+      ]
+    },
+    {
+      "frame": 442,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0016196294192621224,
+      "meanAbsoluteLinearError": 2.0102670455706317e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999980392862,
+      "bounds": [
+        27,
+        263,
+        28,
+        264
+      ]
+    },
+    {
+      "frame": 444,
+      "changedPixels": 4,
+      "changedPixelFraction": 7.71604938271605e-06,
+      "maximumLinearError": 0.005625240342181204,
+      "meanAbsoluteLinearError": 7.61245489053611e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999995802342,
+      "bounds": [
+        23,
+        264,
+        41,
+        278
+      ]
+    },
+    {
+      "frame": 445,
+      "changedPixels": 3,
+      "changedPixelFraction": 5.787037037037037e-06,
+      "maximumLinearError": 0.00494581581532999,
+      "meanAbsoluteLinearError": 5.600352057434034e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999985442549,
+      "bounds": [
+        27,
+        265,
+        30,
+        269
+      ]
+    },
+    {
+      "frame": 446,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0014511751287020758,
+      "meanAbsoluteLinearError": 9.331115796695446e-10,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999982610459,
+      "bounds": [
+        27,
+        262,
+        28,
+        263
+      ]
+    },
+    {
+      "frame": 449,
+      "changedPixels": 1,
+      "changedPixelFraction": 1.9290123456790124e-06,
+      "maximumLinearError": 0.0016482136071577225,
+      "meanAbsoluteLinearError": 3.0338761622294785e-09,
+      "medianLuminanceRelativeError": 0.0,
+      "srgbLuminanceSsim": 0.9999999964588182,
+      "bounds": [
+        24,
+        263,
+        25,
+        264
+      ]
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}
