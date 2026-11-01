@@ -16,6 +16,7 @@ public:
         observation_->framebuffers.push_back(context.sceneFramebuffer);
         rhi::RenderPassBeginDesc begin;begin.renderPass=context.sceneRenderPass;begin.framebuffer=context.sceneFramebuffer;begin.extent=context.renderExtent;
         begin.clearValues.resize(3);begin.clearValues[0].color={{.25F,.5F,2.F,1}};begin.clearValues[1].depthStencil={.4F,0};begin.clearValues[2].color={{.5F,.5F,1,0}};
+        if(context.displayMaskEnabled)begin.clearValues.push_back(sceneDisplayMaskClearValue());
         context.commands->beginRenderPass(begin);context.commands->endRenderPass();
     }
 private:std::shared_ptr<MultisampleSceneObservation> observation_;

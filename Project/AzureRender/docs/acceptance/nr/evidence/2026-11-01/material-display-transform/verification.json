@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "visualAcceptance": "failed-user-review",
+  "frozenSourceFiles": 988,
+  "cpuChecksPerConfiguration": 12,
+  "publicCapturesPerConfiguration": 53,
+  "publicFramesPerConfiguration": 146,
+  "nativeFrames": 59,
+  "relatedChecks": 18,
+  "validatedPlayerLogs": 452,
+  "preservedUserFiles": 4
+}

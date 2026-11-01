@@ -14,6 +14,7 @@ layout(push_constant) uniform ShellInputs {
     uint alphaMode;
     uint features;
     layout(offset=120) uint textureBase;
+    layout(offset=124) uint materialIndex;
     layout(offset=136) uint tile;
     layout(offset=140) float opacity;
 } shell;

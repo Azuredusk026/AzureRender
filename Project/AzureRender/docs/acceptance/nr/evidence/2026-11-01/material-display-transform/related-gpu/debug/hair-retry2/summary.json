@@ -1,0 +1,672 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "caseCount": 25,
+  "captures": [
+    {
+      "name": "baseline",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\baseline\\frames\\frame_000000.png",
+      "imageSha256": "7809a09f05d0f4dfcb25a259a17a8759e566256e9768fcd1c200b26f203d2aba",
+      "maximumLinearError": 0.0008097507748809421,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.04856251063300598,
+        0.0031714486791680927,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.006109217290459617,
+        0.012075787364049625,
+        0.04856251063300598
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "reverse-light",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\reverse-light\\frames\\frame_000000.png",
+      "imageSha256": "5fff271d4d2a9f10506206ce6755b5eb2efbae9ca16d808f3be2a513f5b5096a",
+      "maximumLinearError": 0.0008097507748809421,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.006109217290459617,
+        0.012075787364049625,
+        0.048562510633006005
+      ],
+      "rightMeasuredMean": [
+        0.048562510633006005,
+        0.0031714486791680945,
+        0.0
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "zero-parameters",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\zero-parameters\\frames\\frame_000000.png",
+      "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+      "maximumLinearError": 0.0,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "secondary-directional",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\secondary-directional\\frames\\frame_000000.png",
+      "imageSha256": "ea0151fad0f8f30d173f039ebb807e7dc5ae576d93a7285bb04c9270dbb7f891",
+      "maximumLinearError": 0.002741651722259708,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.3674988668176669
+      ],
+      "rightMeasuredMean": [
+        0.006109217290459617,
+        0.012075787364049625,
+        0.04856251063300598
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "secondary-local",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\secondary-local\\frames\\frame_000000.png",
+      "imageSha256": "22136d799a31581ff973aa0fe666eea6407431bd15ce362a70b911475caf0f96",
+      "maximumLinearError": 0.00020477824064939285,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.0007588174588720934,
+        0.001517634917744187,
+        0.0058271123235298875
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "split-normals",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\split-normals\\frames\\frame_000000.png",
+      "imageSha256": "a3d1e1e014ca29acaa7217edc13ec178ff435795b120b7829378799c75607fc1",
+      "maximumLinearError": 0.0008097507748809421,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.04856251063300598,
+        0.0031714486791680927,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.011954915869830066,
+        0.019342253686080963,
+        0.002903444148293501
+      ],
+      "sampledRampRows": [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "name": "mirrored",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\mirrored\\frames\\frame_000000.png",
+      "imageSha256": "86259ace478400c5cfbe2ce70acde7e38232a0161c8999556d4e647e3d14b3e7",
+      "maximumLinearError": 0.0008097507748809421,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.04856251063300598,
+        0.0031714486791680927,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.006109217290459617,
+        0.012075787364049625,
+        0.04856251063300598
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "rotated",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\rotated\\frames\\frame_000000.png",
+      "imageSha256": "917b74f396f07c4c62936d3fe2f8caa8408c74087957318c72763a3c9f897977",
+      "maximumLinearError": 0.0008097507748809421,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.04856251063300598,
+        0.0031714486791680927,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.006109217290459617,
+        0.012075787364049625,
+        0.04856251063300598
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "dark",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\dark\\frames\\frame_000000.png",
+      "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+      "maximumLinearError": 0.0,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "disabled",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\disabled\\frames\\frame_000000.png",
+      "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+      "maximumLinearError": 0.0,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "fixed",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\fixed\\frames\\frame_000000.png",
+      "imageSha256": "7809a09f05d0f4dfcb25a259a17a8759e566256e9768fcd1c200b26f203d2aba",
+      "maximumLinearError": 0.0008097507748809421,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.04856251063300598,
+        0.0031714486791680927,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.006109217290459617,
+        0.012075787364049625,
+        0.04856251063300598
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "linear-control",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\linear-control\\frames\\frame_000000.png",
+      "imageSha256": "111c6487ac11e5935f7b36f8f916cf8a5089b06ea19c23c4bafb029a97aaf582",
+      "maximumLinearError": 0.0,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.2501582847299534,
+        0.5028864580325686,
+        0.7529422167760776
+      ],
+      "rightMeasuredMean": [
+        0.2501582847299534,
+        0.5028864580325686,
+        0.7529422167760776
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "frame-identity",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\frame-identity\\frames\\frame_000000.png",
+      "imageSha256": "7809a09f05d0f4dfcb25a259a17a8759e566256e9768fcd1c200b26f203d2aba",
+      "maximumLinearError": 0.0008097507748809421,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.04856251063300598,
+        0.0031714486791680927,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.006109217290459617,
+        0.012075787364049625,
+        0.04856251063300598
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "frame-turned",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\frame-turned\\frames\\frame_000000.png",
+      "imageSha256": "e20b650439e61b54a3a077a37a93e0e47586a444cb30a0391124c6ecb0d3d56b",
+      "maximumLinearError": 0.0006875314657232012,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0029613228258166526,
+        0.005957787884165887,
+        0.024220031955137625
+      ],
+      "rightMeasuredMean": [
+        0.0062804619077257645,
+        0.01229206355893716,
+        0.04971360364229678
+      ],
+      "sampledRampRows": [
+        7
+      ]
+    },
+    {
+      "name": "frame-turned-fixed",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\frame-turned-fixed\\frames\\frame_000000.png",
+      "imageSha256": "e20b650439e61b54a3a077a37a93e0e47586a444cb30a0391124c6ecb0d3d56b",
+      "maximumLinearError": 0.0006875314657232012,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0029613228258166526,
+        0.005957787884165887,
+        0.024220031955137625
+      ],
+      "rightMeasuredMean": [
+        0.0062804619077257645,
+        0.01229206355893716,
+        0.04971360364229678
+      ],
+      "sampledRampRows": [
+        7
+      ]
+    },
+    {
+      "name": "virtual-main",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\virtual-main\\frames\\frame_000000.png",
+      "imageSha256": "33a05cabf25b6cced372872382d83767073dc5086931633abf48632a9d123a98",
+      "maximumLinearError": 0.0006122281902636584,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.04376947456255462,
+        0.0028835063437139554,
+        0.0
+      ],
+      "sampledRampRows": [
+        0
+      ]
+    },
+    {
+      "name": "virtual-fixed",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\virtual-fixed\\frames\\frame_000000.png",
+      "imageSha256": "33a05cabf25b6cced372872382d83767073dc5086931633abf48632a9d123a98",
+      "maximumLinearError": 0.0006122281902636584,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.04376947456255462,
+        0.0028835063437139554,
+        0.0
+      ],
+      "sampledRampRows": [
+        0
+      ]
+    },
+    {
+      "name": "virtual-zero-gain",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\virtual-zero-gain\\frames\\frame_000000.png",
+      "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+      "maximumLinearError": 0.0,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sampledRampRows": [
+        0
+      ]
+    },
+    {
+      "name": "virtual-point",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\virtual-point\\frames\\frame_000000.png",
+      "imageSha256": "7e59e7b7fb7e37c10eb8072b56c984e477ff2ff37b782f79a3e9108dc727574e",
+      "maximumLinearError": 7.810780123830941e-07,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sampledRampRows": [
+        0
+      ]
+    },
+    {
+      "name": "virtual-control",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\virtual-control\\frames\\frame_000000.png",
+      "imageSha256": "f1fea1b260673f4a3dd05eb043c345ed1e052f7ed48503c62e8749d448e1fc88",
+      "maximumLinearError": 0.0007701377957621547,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.026192888400049363,
+        0.008767065089178204,
+        0.02883907033539932
+      ],
+      "sampledRampRows": [
+        0,
+        7
+      ]
+    },
+    {
+      "name": "fractional-frame",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\fractional-frame\\frames\\frame_000000.png",
+      "imageSha256": "6ac7fd04e45c60ca1d2fbbbb3c240398621ad2ddb65fb66a4d42af7692f0442a",
+      "maximumLinearError": 0.001414209884201434,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0031406026344282206,
+        0.006285145427589163,
+        0.02487289351957763
+      ],
+      "rightMeasuredMean": [
+        0.020234956077874417,
+        0.040150246488742006,
+        0.15975785444790583
+      ],
+      "sampledRampRows": [
+        7
+      ]
+    },
+    {
+      "name": "fractional-frame-mirrored",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\fractional-frame-mirrored\\frames\\frame_000000.png",
+      "imageSha256": "a53d9c54c6d7cbfe1f5c4b0879fc1a1c11f2e56e72bad8aca66f99ab5cabdf86",
+      "maximumLinearError": 0.001414209884201434,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0031406026344282206,
+        0.006285145427589163,
+        0.02487289351957763
+      ],
+      "rightMeasuredMean": [
+        0.020234956077874417,
+        0.040150246488742006,
+        0.15975785444790583
+      ],
+      "sampledRampRows": [
+        7
+      ]
+    },
+    {
+      "name": "tangent-normal-control",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\tangent-normal-control\\frames\\frame_000000.png",
+      "imageSha256": "2fd81d2559cd93eccf81927b5d636434177c1c18a604dd9e7e0ac12f4f0b4f84",
+      "maximumLinearError": 0.0008513309801163049,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.05000664596540602,
+        0.0032687192817964644,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.04981128441666653,
+        0.0032687192817964644,
+        0.0
+      ],
+      "sampledRampRows": [
+        0
+      ]
+    },
+    {
+      "name": "tangent-normal",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\tangent-normal\\frames\\frame_000000.png",
+      "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+      "maximumLinearError": 5.7809760376798275e-65,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sampledRampRows": [
+        0
+      ]
+    },
+    {
+      "name": "tangent-normal-fixed",
+      "validationEnabled": true,
+      "allocatorAfterUnload": {
+        "buffers": 0,
+        "images": 0
+      },
+      "image": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\related-gpu\\debug\\hair-retry2\\tangent-normal-fixed\\frames\\frame_000000.png",
+      "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781",
+      "maximumLinearError": 5.7809760376798275e-65,
+      "linearErrorBudget": 0.008,
+      "leftMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rightMeasuredMean": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sampledRampRows": [
+        0
+      ]
+    }
+  ],
+  "maximumLinearError": 0.008,
+  "outputEncoding": "sRGB",
+  "cpuPreflightPassed": true,
+  "rayContract": {
+    "camera": [
+      0.0,
+      0.0,
+      3.0
+    ],
+    "fieldOfView": 55,
+    "planeZ": 0,
+    "size": [
+      128,
+      128
+    ]
+  },
+  "limitations": [
+    "Main-light blend and object gain use explicit material inputs; captured shadow-field derivation is separate.",
+    "This suite validates the explicit host projected-ramp contract and actual scene lights.",
+    "Native SPECULAR_LINE and runtime object-frame equivalence require separate evidence.",
+    "Prepared CPU expectations are not GPU execution evidence."
+  ],
+  "player": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe",
+  "playerSha256": "74f7ada736a38e84a6a51f4600dbd3efe78ea01d1ea9168e12b5a484afb5111a",
+  "fixedPathMaximumByteDifference": 0
+}

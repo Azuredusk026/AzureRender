@@ -57,6 +57,8 @@ void PathTracingSceneRenderer::onLoad(const RenderContext& c){
   if(c.preparedMeshes&&c.preparedMeshes->count(resource.path))mesh.asset=*c.preparedMeshes->at(resource.path);else mesh.asset=loadGltfAsset(resource.path);
   applyMaterialBindings(mesh.asset,resource.materials);mesh.materialBase=static_cast<unsigned>(materials.size());
   for(const auto& m:mesh.asset.materials){
+   if(m.displayTransform!=MaterialDisplayTransform::Scene)
+    throw std::invalid_argument("Path tracing does not support displayTransform linear");
    tracing::Material material;
    material.albedo=tracing::appendTexture(pixels,m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,true);
    material.surface=tracing::appendTexture(pixels,m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,false);
@@ -82,7 +84,8 @@ void PathTracingSceneRenderer::onLoad(const RenderContext& c){
  const auto module=[&](const char* file){return rhi_->createShaderModule(readBinaryFile(c.shaderDirectory+"/"+file));};
  auto cs=module("pathtracing.comp.spv");try{compute_=rhi_->createComputePipeline({cs,layout_});}catch(...){rhi_->destroyShaderModule(cs);throw;}rhi_->destroyShaderModule(cs);
  auto vs=module("blackhole.vert.spv"),fs=module("pathtracing.frag.spv");
- rhi::GraphicsPipelineDesc desc{};desc.vertexShader=vs;desc.fragmentShader=fs;desc.cullMode=VK_CULL_MODE_NONE;desc.depthTest=true;desc.depthWrite=true;desc.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;desc.colorAttachmentCount=2;desc.renderPass=c.sceneRenderPass;desc.layout=layout_;
+ rhi::GraphicsPipelineDesc desc{};desc.vertexShader=vs;desc.fragmentShader=fs;desc.cullMode=VK_CULL_MODE_NONE;desc.depthTest=true;desc.depthWrite=true;desc.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;desc.colorAttachmentCount=sceneColorAttachmentCount(c);desc.renderPass=c.sceneRenderPass;desc.layout=layout_;
+ if(c.displayMaskEnabled){desc.colorWriteMasks.assign(desc.colorAttachmentCount,0xf);desc.colorWriteMasks[2]=0;}
  try{display_=rhi_->createGraphicsPipeline(desc);}catch(...){rhi_->destroyShaderModule(vs);rhi_->destroyShaderModule(fs);throw;}
  rhi_->destroyShaderModule(vs);rhi_->destroyShaderModule(fs);
  allocateHistory(c);
@@ -143,7 +146,8 @@ void PathTracingSceneRenderer::recordScene(const RenderContext& c){
  if(c.shadowRenderPass&&c.shadowFramebuffer){VkClearValue clear{};clear.depthStencil={1,0};cmd.beginRenderPass({c.shadowRenderPass,c.shadowFramebuffer,{c.shadowMapSize,c.shadowMapSize},{clear}});cmd.endRenderPass();}
  if(c.gpuTimingEnabled)cmd.writeTimestamp(c.timestampQueryPool,1,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
  VkClearValue color{},depth{},normal{};depth.depthStencil={1,0};normal.color={{.5F,.5F,1,0}};
- cmd.beginRenderPass({c.sceneRenderPass,c.sceneFramebuffer,c.renderExtent,{color,depth,normal}});
+ rhi::RenderPassBeginDesc begin{c.sceneRenderPass,c.sceneFramebuffer,c.renderExtent,{color,depth,normal}};
+ if(c.displayMaskEnabled)begin.clearValues.push_back(sceneDisplayMaskClearValue());cmd.beginRenderPass(begin);
  cmd.setViewport(static_cast<float>(width_),static_cast<float>(height_));cmd.setScissor(c.renderExtent);cmd.bindPipeline(display_);cmd.bindDescriptorSet(layout_,sets_.at(current_));cmd.draw(3);cmd.endRenderPass();
  if(c.gpuTimingEnabled)cmd.writeTimestamp(c.timestampQueryPool,2,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
 }

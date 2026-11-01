@@ -1,0 +1,30 @@
+{
+  "rows": [
+    {
+      "region": "hair-crown",
+      "medianLuminanceRelativeError": 0.0,
+      "staticSsim": 0.9998374037865481
+    },
+    {
+      "region": "hair-fringe",
+      "medianLuminanceRelativeError": 0.00044616577081012525,
+      "staticSsim": 0.9998433148393197
+    },
+    {
+      "region": "face-cheek",
+      "medianLuminanceRelativeError": 0.0,
+      "staticSsim": 0.9997730808342687
+    },
+    {
+      "region": "face-chin",
+      "medianLuminanceRelativeError": 0.0,
+      "staticSsim": 0.9997533314820359
+    },
+    {
+      "region": "eye-left",
+      "medianLuminanceRelativeError": 0.01735456498490053,
+      "staticSsim": 0.9986740962004589
+    }
+  ],
+  "scope": "Five fixed interior rectangles; other native checks remain in progress."
+}

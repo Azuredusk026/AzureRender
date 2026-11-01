@@ -1,0 +1,47 @@
+{
+  "checks": [
+    {
+      "backgroundPixels": 662,
+      "interiorPixels": 1325,
+      "maximumByteError": 0,
+      "phase": 7,
+      "quality": 0
+    },
+    {
+      "backgroundPixels": 1247,
+      "interiorPixels": 968,
+      "maximumByteError": 0,
+      "phase": 9,
+      "quality": 0
+    },
+    {
+      "backgroundPixels": 667,
+      "interiorPixels": 1326,
+      "maximumByteError": 0,
+      "phase": 7,
+      "quality": 3
+    },
+    {
+      "backgroundPixels": 1247,
+      "interiorPixels": 968,
+      "maximumByteError": 0,
+      "phase": 9,
+      "quality": 3
+    },
+    {
+      "backgroundPixels": 631,
+      "interiorPixels": 1364,
+      "maximumByteError": 0,
+      "phase": 7,
+      "quality": 4
+    },
+    {
+      "backgroundPixels": 1214,
+      "interiorPixels": 1009,
+      "maximumByteError": 0,
+      "phase": 9,
+      "quality": 4
+    }
+  ],
+  "status": "passed"
+}

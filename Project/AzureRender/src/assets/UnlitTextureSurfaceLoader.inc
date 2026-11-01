@@ -7,7 +7,8 @@ void loadUnlitTextureSurface(const tinygltf::Material& source,const tinygltf::Mo
         ||(result.materialFeatures&~allowed)||result.alphaMode!=AssetAlphaMode::Blend
         ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Emissive))fail("material capability ownership");
     for(const auto& field:profile.items())if(field.key()!="schemaVersion"&&field.key()!="class"
-        &&field.key()!="features"&&field.key()!="surface")fail("profile field ownership");
+        &&field.key()!="features"&&field.key()!="surface"
+        &&field.key()!="radianceScale"&&field.key()!="displayTransform")fail("profile field ownership");
     const auto& pbr=source.pbrMetallicRoughness;
     if(!source.extensions.empty()||source.normalTexture.index>=0||source.occlusionTexture.index>=0
         ||source.emissiveTexture.index>=0||pbr.metallicRoughnessTexture.index>=0)fail("standard material channel ownership");

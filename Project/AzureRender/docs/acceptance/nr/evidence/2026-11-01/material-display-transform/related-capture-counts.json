@@ -1,0 +1,106 @@
+[
+  {
+    "configuration": "release",
+    "status": "passed",
+    "checks": [
+      {
+        "name": "radiance",
+        "captures": 36,
+        "status": "passed"
+      },
+      {
+        "name": "hair",
+        "captures": 25,
+        "status": "passed"
+      },
+      {
+        "name": "layers",
+        "captures": 16,
+        "status": "passed"
+      },
+      {
+        "name": "uv-distortion",
+        "captures": 18,
+        "status": "passed"
+      },
+      {
+        "name": "npr",
+        "captures": 54,
+        "status": "passed"
+      },
+      {
+        "name": "reflection-history-shared",
+        "captures": 1,
+        "status": "passed"
+      },
+      {
+        "name": "reflection-history-msaa",
+        "captures": 1,
+        "status": "passed"
+      },
+      {
+        "name": "eye",
+        "captures": 15,
+        "status": "passed"
+      },
+      {
+        "name": "view-fog",
+        "captures": 14,
+        "status": "passed"
+      },
+      {
+        "name": "scene-fog",
+        "captures": 6,
+        "status": "passed"
+      },
+      {
+        "name": "fog-msaa",
+        "captures": 12,
+        "status": "passed"
+      }
+    ],
+    "totalCaptures": 198
+  },
+  {
+    "configuration": "debug",
+    "status": "passed",
+    "checks": [
+      {
+        "name": "radiance",
+        "captures": 36,
+        "status": "passed"
+      },
+      {
+        "name": "eye",
+        "captures": 15,
+        "status": "passed"
+      },
+      {
+        "name": "hair",
+        "captures": 25,
+        "status": "passed"
+      },
+      {
+        "name": "layers",
+        "captures": 16,
+        "status": "passed"
+      },
+      {
+        "name": "uv-distortion",
+        "captures": 18,
+        "status": "passed"
+      },
+      {
+        "name": "view-fog",
+        "captures": 14,
+        "status": "passed"
+      },
+      {
+        "name": "scene-fog",
+        "captures": 6,
+        "status": "passed"
+      }
+    ],
+    "totalCaptures": 130
+  }
+]

@@ -284,6 +284,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     caps.supportsProjectionOffset=true;
     caps.supportsMotionVectors=true;
     caps.supportsMultisampleShading=true;
+    caps.supportsMaterialDisplayTransform=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -502,7 +503,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     ResourceAccessRequirements requirements{indexedSlots+5+irradianceSlots+2*fogSlots,16+irradianceSlots+2*fogSlots,7+(probeFieldActive_?1U:0U)+fogSlots};
     requirements.separateImageSlots=requirements.fixedSeparateImageSlots=1;
     requirements.separateSamplerSlots=requirements.fixedSeparateSamplerSlots=1;
-    requirements.fragmentColorAttachments=kMaterialColorAttachmentCount;
+    requirements.fragmentColorAttachments=sceneColorAttachmentCount(context);
     requirements.vertexCombinedImageSamplers=outlineProjectionEnabled_?totalMaterialCount():0;
     requirements.fixedVertexCombinedImageSamplers=outlineProjectionEnabled_?1:0;
     requirements.vertexBuffers=outlineProjectionEnabled_?7:6;
@@ -1463,6 +1464,10 @@ void CharacterSceneRenderer::registerPasses(
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     graph.attachment(main, resources.normal, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    if(context.displayMaskEnabled){
+        if(resources.displayMask==UINT32_MAX)throw std::invalid_argument("Display transform requires an imported view mask");
+        graph.attachment(main,resources.displayMask,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+    }
     if(motionPass_&&context.motionOutput){
         if(resources.motion==UINT32_MAX||resources.motionSurfaceDepth==UINT32_MAX)
             throw std::invalid_argument("Motion-enabled renderer requires imported view outputs");
@@ -1672,6 +1677,19 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"materialDisplayTransforms\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];
+                     if(material.displayTransform!=MaterialDisplayTransform::Scene)
+                         values.push_back({{"materialIndex",base+index},{"name",material.name},
+                             {"displayTransform",materialDisplayTransformName(material.displayTransform)}});
+                 }
+             };
+             append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
          << "  \"materialRadianceScales\": " << [&] {
              nlohmann::json values=nlohmann::json::array();
              const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
@@ -3249,6 +3267,12 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
 void CharacterSceneRenderer::createGraphicsPipeline(
     const RenderContext& context) {
+    if(!context.displayMaskEnabled){
+        const auto requireScene=[](const LoadedAsset& asset){for(const auto& material:asset.materials)
+            if(material.displayTransform!=MaterialDisplayTransform::Scene)
+                throw std::invalid_argument("displayTransform linear requires a view display-mask attachment");};
+        requireScene(asset_);for(const auto& resource:additionalResources_)requireScene(resource->asset);
+    }
     const std::string shaderDirectory = context.shaderDirectory;
     rasterizationSamples_=context.rasterizationSamples;
     const auto mainFragment=[&](std::string file,bool material=false){
@@ -3366,7 +3390,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         materialDesc.vertexBindings={{0,static_cast<std::uint32_t>(sizeof(AssetVertex)),VK_VERTEX_INPUT_RATE_VERTEX},
             {1,0,VK_VERTEX_INPUT_RATE_VERTEX}};
         materialDesc.vertexAttributes = materialAttributes;
-        materialDesc.colorAttachmentCount = kMaterialColorAttachmentCount;
+        materialDesc.colorAttachmentCount = sceneColorAttachmentCount(context);
+        materialDesc.colorWriteMasks.assign(materialDesc.colorAttachmentCount,0xf);
+        if(context.displayMaskEnabled)materialDesc.colorWriteMasks[2]=VK_COLOR_COMPONENT_R_BIT;
         materialDesc.renderPass = context.sceneRenderPass;
         materialDesc.rasterizationSamples=context.rasterizationSamples;materialDesc.minSampleShading=context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT?1.F:0.F;
         materialDesc.layout = pipelineLayout_;
@@ -3389,6 +3415,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         auto depthModule=rhi_->createShaderModule(mainFragment((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")),true));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
         depthDesc.colorAttachmentCount=2;
+        depthDesc.colorWriteMasks.assign(2,0xf);
         createFacingPipelines(overlayDepthPipelines_,depthDesc);
         try{initializeMaterialClassPipelines(context,integralBase,depthDesc);}
         catch(...){rhi_->destroyShaderModule(depthModule);throw;}
@@ -3411,6 +3438,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
                 prefill.depthBiasConstant=1.F;prefill.depthBiasSlope=0.F;
                 snapshotPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
                 prefill.renderPass=context.sceneRenderPass;
+                prefill.colorAttachmentCount=sceneColorAttachmentCount(context);
+                prefill.colorWriteMasks.assign(prefill.colorAttachmentCount,0);
                 mainPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
             }
         }catch(...){if(simpleDepthVertex)rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);throw;}
@@ -3431,6 +3460,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             }};
         inspectAdditive(asset_);for(const auto& resource:additionalResources_)inspectAdditive(resource->asset);
         if(additive){auto composed=materialDesc;composed.primaryColorBlend=rhi::PrimaryColorBlend::Additive;
+            if(context.displayMaskEnabled){composed.colorWriteMasks.assign(composed.colorAttachmentCount,0xf);composed.colorWriteMasks[2]=0;}
             createFacingPipelines(additiveBlendPipelines_,composed);
             if(coloredAdditive){composed.vertexBindings[1].stride=sizeof(std::array<float,4>);
                 createFacingPipelines(vertexColorAdditiveBlendPipelines_,composed);}}
@@ -3454,6 +3484,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         maskDesc.vertexShader=maskVertex;
         maskDesc.vertexAttributes.pop_back();maskDesc.vertexBindings.resize(1);
         maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;
+        maskDesc.colorWriteMasks.assign(1,0xf);
         maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
         maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
         outlineMaskPipeline_=rhi_->createGraphicsPipeline(maskDesc);
@@ -3479,6 +3510,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             try {
                 auto shell=outlineDesc;shell.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 shell.fragmentShader=depthModule;shell.renderPass=snapshotPass();
+                shell.colorAttachmentCount=2;
                 shell.depthTest=true;shell.depthWrite=true;shell.depthCompare=VK_COMPARE_OP_LESS;
                 shell.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
                 outlineDepthPipeline_=rhi_->createGraphicsPipeline(shell);
@@ -3512,6 +3544,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         shadowDesc.depthWrite = true;
         shadowDesc.alphaBlend = false;
         shadowDesc.colorAttachmentCount = 0;
+        shadowDesc.colorWriteMasks.clear();
         shadowDesc.renderPass = context.shadowRenderPass;
         shadowPipeline_ = rhi_->createGraphicsPipeline(shadowDesc);
         if(objectShadowPrepared_){
@@ -4303,6 +4336,7 @@ rhi::RenderPassBeginDesc CharacterSceneRenderer::mainPassDescription(const Rende
     renderPassInfo.extent = context.renderExtent;
     renderPassInfo.clearValues.assign(
         clearValues.begin(), clearValues.end());
+    if(context.displayMaskEnabled){VkClearValue mask{};mask.color.float32[0]=1;renderPassInfo.clearValues.push_back(mask);}
     return renderPassInfo;
 }
 

@@ -1,0 +1,68 @@
+[
+  {
+    "renderer": "sample",
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+      "--project",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\sample\\project.azureproject",
+      "--width",
+      "128",
+      "--height",
+      "128",
+      "--fixed-frame-step",
+      "--capture-frames",
+      "2",
+      "--capture-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\sample\\frames",
+      "--runtime-report",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\sample\\runtime.json"
+    ],
+    "exitCode": 0,
+    "programSha256": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+    "status": "passed"
+  },
+  {
+    "renderer": "blackhole",
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+      "--project",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\blackhole\\project.azureproject",
+      "--width",
+      "128",
+      "--height",
+      "128",
+      "--fixed-frame-step",
+      "--capture-frames",
+      "2",
+      "--capture-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\blackhole\\frames",
+      "--runtime-report",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\blackhole\\runtime.json"
+    ],
+    "exitCode": 0,
+    "programSha256": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+    "status": "passed"
+  },
+  {
+    "renderer": "pathtracing",
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+      "--project",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\pathtracing\\project\\project.azureproject",
+      "--width",
+      "128",
+      "--height",
+      "128",
+      "--fixed-frame-step",
+      "--capture-frames",
+      "4",
+      "--capture-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\pathtracing\\frames",
+      "--runtime-report",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\backend-gpu\\release\\pathtracing\\runtime.json"
+    ],
+    "exitCode": 0,
+    "programSha256": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+    "status": "passed"
+  }
+]

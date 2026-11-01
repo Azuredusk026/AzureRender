@@ -40,6 +40,36 @@ int main(int argc,char** argv)try{
         rhi::NullCommandRecorder commands;graph.execute(&commands);check(graph.passes().size()==2&&graph.executionOrder().back()==1,"Resolve follows all source writers");
     }
     check(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,"Target destruction releases allocations");
+    {
+        destination.images[3]=reinterpret_cast<VkImage>(106);destination.views[3]=reinterpret_cast<VkImageView>(107);
+        auto target=create({64,48});check(target->hasDisplayMask(),"Display destination selects the optional source attachment");
+        check(target->byteSize()==64*48*68*2,"Display samples count one additional byte per sample within the existing budget");
+        check(backend.allocator().statistics().liveImages==8,"Each display-enabled source slot owns four images");
+        check(target->sourceImage(0,3)!=VK_NULL_HANDLE,"Display source image is observable");
+        reject([&]{target->sourceImage(0,4);});reject([&]{target->sourceView(0,4);});
+        RenderGraph graph;auto sources=target->importSources(graph,0,"display");
+        const auto sourceMask=target->importDisplayMaskSource(graph,0,"display");
+        std::array<RenderGraph::ResourceId,3> outputs{};
+        for(unsigned i=0;i<3;++i){rhi::ImageBarrierDesc b;b.image=destination.images[i];if(i==1)b.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;outputs[i]=graph.importImage("display-output",b);}
+        rhi::ImageBarrierDesc maskState;maskState.image=destination.images[3];maskState.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;
+        const auto targetMask=graph.importImage("display-output-mask",maskState);
+        const auto producer=graph.addPass("display-scene");
+        for(unsigned i=0;i<3;++i)graph.attachment(producer,sources[i],i==1?RenderGraphUsage::DepthAttachment:RenderGraphUsage::ColorAttachment,
+            i==1?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        const std::array<RenderGraph::ResourceId,2> masks{sourceMask,targetMask};
+        reject([&]{target->schedule(graph,0,0,sources,outputs,"missing-mask-producer",masks);});
+        reject([&]{target->schedule(graph,0,0,sources,outputs,"missing-mask-contract");});
+        check(graph.passes().size()==1,"Missing display dependencies reject before pass insertion");
+        graph.attachment(producer,sourceMask,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        reject([&]{target->schedule(graph,0,0,sources,outputs,"aliased-mask",std::array<RenderGraph::ResourceId,2>{sourceMask,outputs[0]});});
+        target->schedule(graph,0,0,sources,outputs,"display-resolve",masks);
+        std::string error;check(graph.compile(error),error.c_str());rhi::NullCommandRecorder commands;graph.execute(&commands);
+        check(graph.executionOrder().back()==1,"Display resolution follows all surface producers");
+    }
+    check(backend.allocator().statistics().liveImages==0,"Display source destruction releases every allocation");
+    const auto beforeInvalid=backend.calls.size();destination.views[3]=VK_NULL_HANDLE;
+    reject([&]{create({64,48});});check(backend.calls.size()==beforeInvalid,"Partial display destinations reject before allocation");
+    destination=invalidDestination;
     reject([&]{SceneMultisampling broken(backend,backend.allocator(),{64,48},VK_FORMAT_D32_SFLOAT,VK_FORMAT_R8G8B8A8_UNORM,SceneSecondaryResolve::Average,2,{destination},"missing-shaders");});
     check(backend.allocator().statistics().liveImages==0,"Shader load failure rolls back allocations");
     std::cout<<"Scene multisampling ownership, bounded budget, source slots, graph validation and failure rollback passed\n";return 0;

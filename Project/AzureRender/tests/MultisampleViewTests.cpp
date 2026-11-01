@@ -15,7 +15,7 @@ int main(int argc,char** argv)try{
     RenderViewService service(base,[&](const std::string&){auto observation=std::make_shared<test::MultisampleSceneObservation>();observation->supported=rendererSupport;observations.push_back(observation);return std::make_unique<test::MultisampleSceneProbe>(observation);},[]{});
     RenderViewDescriptor descriptor;descriptor.extent={64,48};descriptor.settings.antiAliasing=4;
     const auto a=service.create(descriptor);require(observations.back()->loadedSamples==VK_SAMPLE_COUNT_4_BIT,"Renderer consumes actual four-sample context");
-    require(service.describe(a).at("multisampleBytes")==64*48*64*2&&service.describe(a).at("temporalBytes")==0,"Pure multisampling has bounded sources and no history");
+    require(service.describe(a).at("multisampleBytes")==64*48*68*2&&service.describe(a).at("temporalBytes")==0,"Pure multisampling includes four R8 display samples per pixel and has no history");
     require(service.describe(a).at("sceneExtent")==nlohmann::json({64,48}),"Multisampling preserves scene pixel extent");
     descriptor.settings.antiAliasing=1;const auto b=service.create(descriptor);require(observations.back()->loadedSamples==VK_SAMPLE_COUNT_1_BIT,"Single-sample auxiliary view cannot inherit main sample count");
     descriptor.settings.antiAliasing=4;rendererSupport=false;const auto c=service.create(descriptor);
@@ -26,7 +26,7 @@ int main(int argc,char** argv)try{
         require(std::count_if(graph.passes().begin(),graph.passes().end(),[](const auto& pass){return pass.name.find("view-multisample-")==0;})==1,"Only capable requested view resolves multisample attachments");}
     require(observations[0]->framebuffers.size()==2&&observations[0]->framebuffers[0]!=observations[0]->framebuffers[1],"Consecutive in-flight slots use distinct source framebuffers");
     rendererSupport=true;service.resize(a,{80,60});service.request(a);RenderGraph resized;service.schedule(resized,frame,base,3);require(resized.compile(error),error.c_str());resized.execute(&commands);require(service.submitted(3),"Resized sample target records");service.complete(3);
-    require(service.describe(a).at("multisampleBytes")==80*60*64*2,"Resize rebuilds sample budget from actual extent");
+    require(service.describe(a).at("multisampleBytes")==80*60*68*2,"Resize rebuilds the complete HDR, depth, normal and display sample budget");
     service.release(a);service.release(b);service.release(c);service.complete(3);require(!backend.allocator().statistics().liveImages,"Retired view sources and outputs release together");
     backend.sampleShadingSupported=false;const auto noDevice=service.create(descriptor);require(service.describe(noDevice).at("rasterizationSamples")==1&&!service.describe(noDevice).at("multisampleFallback").get<std::string>().empty(),"Disabled device capability produces explicit fallback");service.release(noDevice);
     backend.sampleShadingSupported=true;descriptor.extent={4096,4096};const auto overBudget=service.create(descriptor);

@@ -1,13 +1,15 @@
 #pragma once
 #include "render/RenderGraph.hpp"
 #include <array>
+#include <optional>
+#include <stdexcept>
 namespace azurerender {
 enum class SceneSecondaryResolve : std::uint32_t { Average, Minimum, MinimumDepthSample };
-// Attachment order: HDR color, depth, secondary color. Destination images and
+// Attachment order: HDR color, depth, secondary color, optional display mask. Destination images and
 // views are borrowed. Retire GPU work before replacement; destinations outlive us.
 struct SceneMultisampleDestination {
-    std::array<VkImage,3> images{};
-    std::array<VkImageView,3> views{};
+    std::array<VkImage,4> images{};
+    std::array<VkImageView,4> views{};
 };
 class SceneMultisampling final {
 public:
@@ -20,18 +22,28 @@ public:
     SceneMultisampling& operator=(const SceneMultisampling&)=delete;
     VkRenderPass renderPass() const noexcept{return sourcePass_;}
     VkFramebuffer framebuffer(std::uint32_t slot) const{return sources_.at(slot).framebuffer;}
-    VkImage sourceImage(std::uint32_t slot,std::uint32_t attachment) const{return sources_.at(slot).images.at(attachment).image;}
+    VkImage sourceImage(std::uint32_t slot,std::uint32_t attachment) const {
+        if(attachment>=attachmentCount_)throw std::out_of_range("Multisample source attachment index");
+        return sources_.at(slot).images.at(attachment).image;
+    }
     // Borrowed source view; source slots share this owner's GPU retirement boundary.
-    VkImageView sourceView(std::uint32_t slot,std::uint32_t attachment) const{return sources_.at(slot).views.at(attachment);}
+    VkImageView sourceView(std::uint32_t slot,std::uint32_t attachment) const {
+        if(attachment>=attachmentCount_)throw std::out_of_range("Multisample source view index");
+        return sources_.at(slot).views.at(attachment);
+    }
     std::uint64_t allocatedByteSize() const noexcept{return allocatedBytes_;}
     std::uint64_t byteSize() const noexcept{return bytes_;}
     std::array<RenderGraph::ResourceId,3> importSources(RenderGraph&,std::uint32_t slot,const std::string&) const;
+    bool hasDisplayMask() const noexcept{return attachmentCount_==4;}
+    RenderGraph::ResourceId importDisplayMaskSource(RenderGraph&,std::uint32_t slot,const std::string&) const;
     // Caller supplies source attachment-write to fragment-read synchronization.
     void recordResolve(rhi::ICommandRecorder&,std::uint32_t slot,std::uint32_t destination) const;
     void schedule(RenderGraph&,std::uint32_t slot,std::uint32_t destination,
-        std::array<RenderGraph::ResourceId,3> sources,std::array<RenderGraph::ResourceId,3> outputs,const std::string&) const;
+        std::array<RenderGraph::ResourceId,3> sources,std::array<RenderGraph::ResourceId,3> outputs,const std::string&,
+        std::optional<std::array<RenderGraph::ResourceId,2>> displayMask=std::nullopt) const;
 private:
-    struct Source {std::array<rhi::GpuImage,3> images{};std::array<VkImageView,3> views{};VkFramebuffer framebuffer{};};
+    struct Source {std::array<rhi::GpuImage,4> images{};std::array<VkImageView,4> views{};VkFramebuffer framebuffer{};};
+    std::uint32_t attachmentCount_=3;
     rhi::IRhi& rhi_;rhi::IGpuAllocator& allocator_;VkExtent2D extent_{};SceneSecondaryResolve secondaryResolve_{};
     std::vector<Source> sources_;std::vector<SceneMultisampleDestination> destinations_;
     std::vector<VkFramebuffer> outputs_;std::vector<VkDescriptorSet> sets_;

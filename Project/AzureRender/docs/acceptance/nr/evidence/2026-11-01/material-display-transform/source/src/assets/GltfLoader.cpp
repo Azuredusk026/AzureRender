@@ -1,0 +1,3137 @@
+#include "GltfLoader.hpp"
+#include "assets/image/ImageCodec.hpp"
+#include "BrowRegions.hpp"
+#include "scene/TransformParity.hpp"
+#include "scene/TransformEditing.hpp"
+#include "diagnostics/RuntimeDiagnostics.hpp"
+
+#define TINYGLTF_IMPLEMENTATION
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <tiny_gltf.h>
+
+#include <algorithm>
+#include <array>
+#include <cctype>
+#include <cmath>
+#include <cstring>
+#include <filesystem>
+#include <fstream>
+#include <nlohmann/json.hpp>
+#include <functional>
+#include <iostream>
+#include <initializer_list>
+#include <limits>
+#include <optional>
+#include <set>
+#include <stdexcept>
+#include <utility>
+
+#include "assets/GltfAccessorValidation.hpp"
+#include "assets/ShadowColorLut.hpp"
+#include "assets/MaterialFrame.hpp"
+
+namespace {
+
+using Matrix4 = std::array<double, 16>;
+
+std::array<float, 4> readMaterialVectorExtra(
+    const tinygltf::Value& extras,
+    const std::string& key,
+    const std::array<float, 4>& fallback);
+
+AssetMaterialClass materialClassFromName(const std::string& value) {
+    std::string normalized = value;
+    std::transform(
+        normalized.begin(),
+        normalized.end(),
+        normalized.begin(),
+        [](const unsigned char character) {
+            return static_cast<char>(std::tolower(character));
+        });
+    if (normalized == "skin") return AssetMaterialClass::Skin;
+    if (normalized == "face") return AssetMaterialClass::Face;
+    if (normalized == "hair") return AssetMaterialClass::Hair;
+    if (normalized == "fabric") return AssetMaterialClass::Fabric;
+    if (normalized == "metal") return AssetMaterialClass::Metal;
+    if (normalized == "eye") return AssetMaterialClass::Eye;
+    if (normalized == "overlay") return AssetMaterialClass::Overlay;
+    if (normalized == "emissive") return AssetMaterialClass::Emissive;
+    if (normalized == "showcase") return AssetMaterialClass::Showcase;
+    return AssetMaterialClass::Generic;
+}
+
+std::uint32_t defaultMaterialFeatures(const AssetMaterialClass value) {
+    switch (value) {
+        case AssetMaterialClass::Hair:
+            return MaterialFeatureStylizedShadow
+                | MaterialFeatureHairAnisotropy;
+        case AssetMaterialClass::Face:
+            return MaterialFeatureStylizedShadow
+                | MaterialFeatureFaceSdfEligible;
+        case AssetMaterialClass::Overlay:
+            return MaterialFeatureOverlay;
+        case AssetMaterialClass::Emissive:
+            return MaterialFeatureEmissiveMask;
+        case AssetMaterialClass::Showcase:
+            return 0;
+        case AssetMaterialClass::Generic:
+            return MaterialFeatureNeutralFallback;
+        default:
+            return MaterialFeatureStylizedShadow;
+    }
+}
+
+bool isBrowMaterialName(const std::string& name) {
+    std::string normalized = name;
+    std::transform(
+        normalized.begin(),
+        normalized.end(),
+        normalized.begin(),
+        [](const unsigned char character) {
+            return static_cast<char>(std::tolower(character));
+        });
+    return normalized.find("brow") != std::string::npos;
+}
+
+std::array<float, 4> defaultStyleParameters(
+    const AssetMaterialClass value) {
+    switch (value) {
+        case AssetMaterialClass::Skin: return {0.90F, 0.80F, 0.35F, 0.35F};
+        case AssetMaterialClass::Face: return {0.85F, 0.75F, 0.15F, 0.25F};
+        case AssetMaterialClass::Hair: return {1.00F, 1.00F, 0.40F, 0.65F};
+        case AssetMaterialClass::Fabric: return {1.00F, 1.00F, 0.60F, 0.50F};
+        case AssetMaterialClass::Metal: return {0.85F, 0.75F, 1.35F, 0.75F};
+        case AssetMaterialClass::Eye: return {0.65F, 0.50F, 0.65F, 0.25F};
+        case AssetMaterialClass::Overlay: return {0.00F, 0.00F, 0.00F, 0.00F};
+        case AssetMaterialClass::Emissive: return {0.50F, 0.00F, 0.00F, 0.00F};
+        default: return {1.00F, 1.00F, 1.00F, 1.00F};
+    }
+}
+
+std::array<float, 4> defaultFeatureParameters(
+    const AssetMaterialClass value) {
+    switch (value) {
+        case AssetMaterialClass::Skin: return {0.75F, 0.00F, 1.00F, 0.00F};
+        case AssetMaterialClass::Face: return {0.65F, 0.00F, 1.00F, 1.00F};
+        case AssetMaterialClass::Hair: return {0.85F, 1.00F, 1.00F, 0.00F};
+        case AssetMaterialClass::Eye: return {0.50F, 0.00F, 1.00F, 0.00F};
+        case AssetMaterialClass::Overlay: return {0.00F, 0.00F, 0.00F, 0.00F};
+        case AssetMaterialClass::Emissive: return {0.50F, 0.00F, 1.50F, 0.00F};
+        default: return {1.00F, 0.00F, 1.00F, 0.00F};
+    }
+}
+
+AssetMaterialClass inferLegacyMaterialClass(const std::string& name) {
+    std::string normalized = name;
+    std::transform(
+        normalized.begin(),
+        normalized.end(),
+        normalized.begin(),
+        [](const unsigned char character) {
+            return static_cast<char>(std::tolower(character));
+        });
+    if (normalized.find("hairshadow") != std::string::npos
+        || normalized.find("eyeshadow") != std::string::npos
+        || normalized.find("brow") != std::string::npos) {
+        return AssetMaterialClass::Overlay;
+    }
+    if (normalized.find("face") != std::string::npos) {
+        return AssetMaterialClass::Face;
+    }
+    if (normalized.find("iris") != std::string::npos
+        || normalized.find("eye") != std::string::npos) {
+        return AssetMaterialClass::Eye;
+    }
+    if (normalized.find("hair") != std::string::npos) {
+        return AssetMaterialClass::Hair;
+    }
+    if (normalized.find("body") != std::string::npos
+        || normalized.find("skin") != std::string::npos) {
+        return AssetMaterialClass::Skin;
+    }
+    if (normalized.find("cloth") != std::string::npos
+        || normalized.find("fabric") != std::string::npos) {
+        return AssetMaterialClass::Fabric;
+    }
+    if (normalized.find("metal") != std::string::npos) {
+        return AssetMaterialClass::Metal;
+    }
+    return AssetMaterialClass::Generic;
+}
+
+std::uint32_t materialFeatureFromName(const std::string& value) {
+    if (value == "stylized-shadow") return MaterialFeatureStylizedShadow;
+    if (value == "hair-anisotropy") return MaterialFeatureHairAnisotropy;
+    if (value == "face-sdf-eligible") return MaterialFeatureFaceSdfEligible;
+    if (value == "emissive-mask") return MaterialFeatureEmissiveMask;
+    if (value == "overlay") return MaterialFeatureOverlay;
+    if (value == "neutral-fallback") return MaterialFeatureNeutralFallback;
+    if (value == "brow-overlay") return MaterialFeatureBrowOverlay;
+    if (value == "surface-ao") return MaterialFeatureSurfaceAo;
+    if (value == "scene-tint") return MaterialFeatureSceneTint;
+    if (value == "hair-ramp") return MaterialFeatureHairRamp;
+    if (value == "scene-refraction") return MaterialFeatureSceneRefraction;
+    if (value == "diffuse-ramp") return MaterialFeatureDiffuseRamp;
+    if (value == "silhouette-outline") return MaterialFeatureSilhouetteOutline;
+    if (value == "multiply-composite") return MaterialFeatureMultiplyComposite;
+    if (value == "hair-projected-ramp") return MaterialFeatureHairProjectedRamp;
+    if (value == "hair-pixel-integral") return MaterialFeatureHairPixelIntegral;
+    if (value == "eye-radial-surface") return MaterialFeatureEyeRadialSurface;
+    if (value == "unlit-surface") return MaterialFeatureUnlitSurface;
+    if (value == "unlit-texture-layers") return MaterialFeatureUnlitTextureLayers;
+    if (value == "geometry-shadow") return MaterialFeatureGeometryShadow;
+    if (value == "sqrt-alpha-shadow") return MaterialFeatureSqrtAlphaShadow;
+    return 0;
+}
+
+void loadMaterialProfile(
+    const tinygltf::Material& material,
+    AssetMaterial& result) {
+    result.name = material.name.empty() ? "UnnamedMaterial" : material.name;
+    if(!material.extras_json_string.empty()) {
+        const auto authored=nlohmann::json::parse(material.extras_json_string);
+        if(authored.is_object()&&authored.contains("azureRenderMaterial")) {
+            const auto& profile=authored.at("azureRenderMaterial");
+            const std::string context="azureRenderMaterial "+result.name
+                +(profile.is_object()&&profile.contains("composite")?" composite":"")
+                +(profile.is_object()&&profile.contains("surface")?" unlit surface":"")
+                +(profile.is_object()&&profile.contains("eyeSurface")?" eyeSurface":"");
+            if(!profile.is_object()||!profile.contains("schemaVersion")
+                ||!profile.at("schemaVersion").is_number_integer()
+                ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
+                throw std::invalid_argument(context+": unsupported schemaVersion");
+            const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform"};
+            for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
+            if(profile.contains("displayTransform")) {
+                const auto& value=profile.at("displayTransform");
+                if(profile.at("schemaVersion")!=2||!value.is_string()
+                    ||(value!="scene"&&value!="linear"))
+                    throw std::invalid_argument(context+": displayTransform requires scene or linear and profile version two");
+                result.displayTransform=value=="linear"?azurerender::MaterialDisplayTransform::Linear:azurerender::MaterialDisplayTransform::Scene;
+            }
+            if(profile.contains("radianceScale")) {
+                const auto& value=profile.at("radianceScale");
+                if(profile.at("schemaVersion")!=2||!value.is_number())
+                    throw std::invalid_argument(context+": radianceScale requires a number and profile version two");
+                const double authoredScale=value.get<double>();
+                if(!std::isfinite(authoredScale)||authoredScale<0||authoredScale>16)
+                    throw std::invalid_argument(context+": radianceScale requires a finite number within zero and sixteen");
+                result.radianceScale=static_cast<float>(authoredScale);
+                azurerender::validateMaterialRadianceScale(result.radianceScale);
+            }
+            for(const char* key:{"styleParameters","featureParameters"})if(profile.contains(key)) {
+                const auto& vector=profile.at(key);
+                if(!vector.is_array()||vector.size()!=4)throw std::invalid_argument(context+": invalid "+key);
+                for(const auto& value:vector)if(!value.is_number()||!std::isfinite(value.get<double>()))
+                    throw std::invalid_argument(context+": invalid "+key);
+            }
+            if(profile.contains("features")) {
+                const auto& features=profile.at("features");std::set<std::string> unique;
+                if(!features.is_array())throw std::invalid_argument(context+": features require a string array");
+                for(const auto& feature:features)if(!feature.is_string()||!unique.insert(feature.get<std::string>()).second)
+                    throw std::invalid_argument(context+": features require unique strings");
+            }
+        }
+    }
+    if(material.extras.IsObject()&&material.extras.Has("azureSlotId")){
+        const auto& identity=material.extras.Get("azureSlotId");
+        if(!identity.IsString()||identity.Get<std::string>().empty())throw std::invalid_argument("azureSlotId requires a nonempty string");
+        result.slotId=identity.Get<std::string>();
+    }
+    result.materialClass = inferLegacyMaterialClass(result.name);
+    result.materialFeatures = defaultMaterialFeatures(result.materialClass);
+    if (isBrowMaterialName(result.name)) {
+        result.materialFeatures |= MaterialFeatureBrowOverlay;
+        // Brow-only card expansion in metres and Face-D reconstruction radius.
+        result.styleParameters = {0.0012F, 0.0F, 0.0F, 0.0F};
+        // Unreal centimetres converted to glTF metres, then opacity,
+        // fade distance and base power.
+        result.featureParameters = {0.02F, 0.95F, 0.02F, 1.0F};
+    }
+    if (!material.extras.IsObject()
+        || !material.extras.Has("azureRenderMaterial")) {
+        return;
+    }
+    const tinygltf::Value& profile =
+        material.extras.Get("azureRenderMaterial");
+    if (!profile.IsObject()) {
+        throw std::runtime_error(
+            "azureRenderMaterial must be an object for " + result.name);
+    }
+    if (!profile.Has("schemaVersion")
+        || !profile.Get("schemaVersion").IsNumber()
+        || static_cast<int>(
+            profile.Get("schemaVersion").GetNumberAsDouble()) < 1 || static_cast<int>(profile.Get("schemaVersion").GetNumberAsDouble()) > 2) {
+        throw std::runtime_error(
+            "Unsupported azureRenderMaterial schemaVersion for "
+            + result.name);
+    }
+    if (!profile.Has("class") || !profile.Get("class").IsString()) {
+        throw std::runtime_error(
+            "azureRenderMaterial.class is required for " + result.name);
+    }
+    result.materialProfileVersion = static_cast<std::uint32_t>(profile.Get("schemaVersion").GetNumberAsDouble());
+    result.materialProfileExplicit = true;
+    const std::string className = profile.Get("class").Get<std::string>();
+    result.materialClass = materialClassFromName(className);
+    std::string normalizedClassName = className;
+    std::transform(
+        normalizedClassName.begin(),
+        normalizedClassName.end(),
+        normalizedClassName.begin(),
+        [](const unsigned char character) {
+            return static_cast<char>(std::tolower(character));
+        });
+    if (result.materialClass == AssetMaterialClass::Generic
+        && normalizedClassName != "generic") {
+        throw std::runtime_error(
+            "Unknown azureRenderMaterial class '" + className
+            + "' for " + result.name);
+    }
+    result.materialFeatures = defaultMaterialFeatures(result.materialClass);
+    result.styleParameters = defaultStyleParameters(result.materialClass);
+    result.featureParameters = defaultFeatureParameters(result.materialClass);
+    result.styleParameters = readMaterialVectorExtra(
+        profile, "styleParameters", result.styleParameters);
+    result.featureParameters = readMaterialVectorExtra(
+        profile, "featureParameters", result.featureParameters);
+    if (profile.Has("features")) {
+        const tinygltf::Value& features = profile.Get("features");
+        if (!features.IsArray()) {
+            throw std::runtime_error(
+                "azureRenderMaterial.features must be an array for "
+                + result.name);
+        }
+        result.materialFeatures = 0;
+        for (std::size_t index = 0; index < features.ArrayLen(); ++index) {
+            const tinygltf::Value& feature = features.Get(index);
+            if (!feature.IsString()) {
+                throw std::runtime_error(
+                    "azureRenderMaterial feature must be a string for "
+                    + result.name);
+            }
+            const std::string featureName = feature.Get<std::string>();
+            const std::uint32_t flag = materialFeatureFromName(featureName);
+            if (flag == 0) {
+                throw std::runtime_error(
+                    "Unknown azureRenderMaterial feature '" + featureName
+                    + "' for " + result.name);
+            }
+            result.materialFeatures |= flag;
+        }
+    }
+    if(result.materialFeatures&MaterialFeatureHairPixelIntegral){
+        constexpr auto required=MaterialFeatureHairAnisotropy|MaterialFeatureHairProjectedRamp;
+        if(result.materialProfileVersion!=2||result.materialClass!=AssetMaterialClass::Hair
+            ||(result.materialFeatures&required)!=required)
+            throw std::runtime_error("hair-pixel-integral requires schema 2 projected hair for "+result.name);
+    }
+    const auto coverage=result.materialFeatures&MaterialFeatureShadowCoverageMask;
+    if(coverage&&(result.materialProfileVersion!=2||coverage==MaterialFeatureShadowCoverageMask||result.materialClass==AssetMaterialClass::Showcase))
+        throw std::runtime_error("Shadow coverage requires schema 2, a regular surface and one explicit mode for "+result.name);
+    if ((result.materialFeatures & MaterialFeatureBrowOverlay) && result.materialProfileVersion == 1) {
+        result.featureParameters[0] = std::min(result.featureParameters[0], 0.02F);
+        result.styleParameters[0] = std::min(result.styleParameters[0], 0.0012F);
+    }
+}
+
+Matrix4 identityMatrix() {
+    return {
+        1.0, 0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0, 0.0,
+        0.0, 0.0, 1.0, 0.0,
+        0.0, 0.0, 0.0, 1.0,
+    };
+}
+
+Matrix4 multiply(const Matrix4& left, const Matrix4& right) {
+    Matrix4 result{};
+    for (std::size_t column = 0; column < 4; ++column) {
+        for (std::size_t row = 0; row < 4; ++row) {
+            for (std::size_t inner = 0; inner < 4; ++inner) {
+                result[column * 4 + row] +=
+                    left[inner * 4 + row] * right[column * 4 + inner];
+            }
+        }
+    }
+    return result;
+}
+
+Matrix4 nodeTransform(const tinygltf::Node& node) {
+    if (node.matrix.size() == 16) {
+        Matrix4 result{};
+        std::copy(node.matrix.begin(), node.matrix.end(), result.begin());
+        return result;
+    }
+
+    const double translationX = node.translation.size() == 3 ? node.translation[0] : 0.0;
+    const double translationY = node.translation.size() == 3 ? node.translation[1] : 0.0;
+    const double translationZ = node.translation.size() == 3 ? node.translation[2] : 0.0;
+    const double scaleX = node.scale.size() == 3 ? node.scale[0] : 1.0;
+    const double scaleY = node.scale.size() == 3 ? node.scale[1] : 1.0;
+    const double scaleZ = node.scale.size() == 3 ? node.scale[2] : 1.0;
+    const double x = node.rotation.size() == 4 ? node.rotation[0] : 0.0;
+    const double y = node.rotation.size() == 4 ? node.rotation[1] : 0.0;
+    const double z = node.rotation.size() == 4 ? node.rotation[2] : 0.0;
+    const double w = node.rotation.size() == 4 ? node.rotation[3] : 1.0;
+
+    Matrix4 result = {
+        (1.0 - 2.0 * y * y - 2.0 * z * z) * scaleX,
+        (2.0 * x * y + 2.0 * w * z) * scaleX,
+        (2.0 * x * z - 2.0 * w * y) * scaleX,
+        0.0,
+        (2.0 * x * y - 2.0 * w * z) * scaleY,
+        (1.0 - 2.0 * x * x - 2.0 * z * z) * scaleY,
+        (2.0 * y * z + 2.0 * w * x) * scaleY,
+        0.0,
+        (2.0 * x * z + 2.0 * w * y) * scaleZ,
+        (2.0 * y * z - 2.0 * w * x) * scaleZ,
+        (1.0 - 2.0 * x * x - 2.0 * y * y) * scaleZ,
+        0.0,
+        translationX, translationY, translationZ, 1.0,
+    };
+    return result;
+}
+
+std::array<float,3> orthogonalTangentFallback(const std::array<float,3>& normal) {
+    std::array<float,3> tangent=std::abs(normal[0])<.9F?std::array<float,3>{1,0,0}:std::array<float,3>{0,1,0};
+    const float projection=tangent[0]*normal[0]+tangent[1]*normal[1]+tangent[2]*normal[2];
+    for(unsigned i=0;i<3;++i)tangent[i]-=projection*normal[i];
+    const float length=std::sqrt(tangent[0]*tangent[0]+tangent[1]*tangent[1]+tangent[2]*tangent[2]);
+    if(!std::isfinite(length)||length<1e-8F)throw std::invalid_argument("Tangent fallback requires a finite normal");
+    for(auto& value:tangent)value/=length;
+    return tangent;
+}
+
+void transformVertex(AssetVertex& vertex, const Matrix4& transform, std::array<float,2>* directionLengths=nullptr) {
+    const auto position = vertex.position;
+    vertex.position = {
+        static_cast<float>(
+            transform[0] * position[0] + transform[4] * position[1]
+            + transform[8] * position[2] + transform[12]),
+        static_cast<float>(
+            transform[1] * position[0] + transform[5] * position[1]
+            + transform[9] * position[2] + transform[13]),
+        static_cast<float>(
+            transform[2] * position[0] + transform[6] * position[1]
+            + transform[10] * position[2] + transform[14]),
+    };
+
+    const double a00 = transform[0];
+    const double a01 = transform[4];
+    const double a02 = transform[8];
+    const double a10 = transform[1];
+    const double a11 = transform[5];
+    const double a12 = transform[9];
+    const double a20 = transform[2];
+    const double a21 = transform[6];
+    const double a22 = transform[10];
+    const double determinant =
+        a00 * (a11 * a22 - a12 * a21)
+        - a01 * (a10 * a22 - a12 * a20)
+        + a02 * (a10 * a21 - a11 * a20);
+    if (std::abs(determinant) < 1.0e-10) {
+        throw std::runtime_error("glTF node has a non-invertible transform");
+    }
+
+    const auto normal = vertex.normal;
+    const double nx =
+        ((a11 * a22 - a12 * a21) * normal[0]
+         + (a12 * a20 - a10 * a22) * normal[1]
+         + (a10 * a21 - a11 * a20) * normal[2]) / determinant;
+    const double ny =
+        ((a02 * a21 - a01 * a22) * normal[0]
+         + (a00 * a22 - a02 * a20) * normal[1]
+         + (a01 * a20 - a00 * a21) * normal[2]) / determinant;
+    const double nz =
+        ((a01 * a12 - a02 * a11) * normal[0]
+         + (a02 * a10 - a00 * a12) * normal[1]
+         + (a00 * a11 - a01 * a10) * normal[2]) / determinant;
+    const double length = std::sqrt(nx * nx + ny * ny + nz * nz);
+    vertex.normal = {
+        static_cast<float>(nx / length),
+        static_cast<float>(ny / length),
+        static_cast<float>(nz / length),
+    };
+
+    const auto tangent = vertex.tangent;
+    double tx =
+        a00 * tangent[0] + a01 * tangent[1] + a02 * tangent[2];
+    double ty =
+        a10 * tangent[0] + a11 * tangent[1] + a12 * tangent[2];
+    double tz =
+        a20 * tangent[0] + a21 * tangent[1] + a22 * tangent[2];
+    const double tangentDotNormal =
+        tx * vertex.normal[0] + ty * vertex.normal[1] + tz * vertex.normal[2];
+    tx -= tangentDotNormal * vertex.normal[0];
+    ty -= tangentDotNormal * vertex.normal[1];
+    tz -= tangentDotNormal * vertex.normal[2];
+    double tangentLength = std::sqrt(tx * tx + ty * ty + tz * tz);
+    if(!std::isfinite(tangentLength)||tangentLength<1e-8) {
+        const auto fallback=orthogonalTangentFallback(vertex.normal);
+        tx=fallback[0];ty=fallback[1];tz=fallback[2];tangentLength=1;
+    }
+    if(directionLengths)*directionLengths={static_cast<float>(length),static_cast<float>(tangentLength)};
+    vertex.tangent = {
+        static_cast<float>(tx / tangentLength),
+        static_cast<float>(ty / tangentLength),
+        static_cast<float>(tz / tangentLength),
+        tangent[3] * (determinant < 0.0 ? -1.0F : 1.0F),
+    };
+}
+
+const unsigned char* accessorData(
+    const tinygltf::Model& model,
+    const tinygltf::Accessor& accessor) {
+    const auto& view = model.bufferViews.at(static_cast<std::size_t>(accessor.bufferView));
+    const auto& buffer = model.buffers.at(static_cast<std::size_t>(view.buffer));
+    return buffer.data.data() + view.byteOffset + accessor.byteOffset;
+}
+
+std::size_t accessorStride(
+    const tinygltf::Model& model,
+    const tinygltf::Accessor& accessor) {
+    const auto& view = model.bufferViews.at(static_cast<std::size_t>(accessor.bufferView));
+    const int stride = accessor.ByteStride(view);
+    if (stride <= 0) {
+        throw std::runtime_error("glTF accessor has an invalid byte stride");
+    }
+    return static_cast<std::size_t>(stride);
+}
+
+std::vector<std::array<float,4>> readVertexColors(const tinygltf::Model& model,
+    const tinygltf::Primitive& primitive,std::size_t count) {
+    const auto found=primitive.attributes.find("COLOR_0");if(found==primitive.attributes.end())return {};
+    const auto fail=[](){throw std::invalid_argument("Invalid glTF COLOR_0 layout, range or storage");};
+    const auto& accessor=model.accessors.at(static_cast<std::size_t>(found->second));
+    const unsigned components=accessor.type==TINYGLTF_TYPE_VEC3?3:accessor.type==TINYGLTF_TYPE_VEC4?4:0;
+    const bool floating=accessor.componentType==TINYGLTF_COMPONENT_TYPE_FLOAT;
+    const unsigned bytes=floating?4:accessor.componentType==TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT?2:
+        accessor.componentType==TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE?1:0;
+    if(!components||!bytes||!count||accessor.count!=count||accessor.sparse.isSparse
+        ||accessor.bufferView<0||accessor.normalized==floating)fail();
+    const auto& view=model.bufferViews.at(static_cast<std::size_t>(accessor.bufferView));
+    const auto& buffer=model.buffers.at(static_cast<std::size_t>(view.buffer));
+    const auto stride=accessorStride(model,accessor);const std::size_t element=components*bytes;
+    if(stride<element||accessor.byteOffset%bytes||view.byteOffset%bytes
+        ||view.byteOffset>buffer.data.size()||view.byteLength>buffer.data.size()-view.byteOffset
+        ||accessor.byteOffset>view.byteLength||element>view.byteLength-accessor.byteOffset
+        ||count-1>(view.byteLength-accessor.byteOffset-element)/stride)fail();
+    const auto* data=buffer.data.data()+view.byteOffset+accessor.byteOffset;
+    std::vector<std::array<float,4>> result(count,{1,1,1,1});
+    for(std::size_t i=0;i<count;++i)for(unsigned channel=0;channel<components;++channel) {
+        const auto* input=data+i*stride+channel*bytes;float value=0;
+        if(floating)std::memcpy(&value,input,4);
+        else if(bytes==2){std::uint16_t raw=0;std::memcpy(&raw,input,2);value=static_cast<float>(raw)/65535.F;}
+        else value=static_cast<float>(*input)/255.F;
+        if(!std::isfinite(value)||value<0||value>1)fail();result[i][channel]=value;
+    }
+    return result;
+}
+
+void copyFloatAttribute(
+    const tinygltf::Model& model,
+    const tinygltf::Primitive& primitive,
+    const char* name,
+    const std::size_t componentCount,
+    std::vector<AssetVertex>& vertices) {
+    const auto attribute = primitive.attributes.find(name);
+    if (attribute == primitive.attributes.end()) {
+        return;
+    }
+    const auto& accessor = model.accessors.at(static_cast<std::size_t>(attribute->second));
+    if (accessor.componentType != TINYGLTF_COMPONENT_TYPE_FLOAT
+        || tinygltf::GetNumComponentsInType(static_cast<std::uint32_t>(accessor.type)) != static_cast<int>(componentCount)
+        || accessor.count != vertices.size()) {
+        throw std::runtime_error(std::string("Unsupported glTF attribute layout: ") + name);
+    }
+
+    const unsigned char* source = accessorData(model, accessor);
+    const std::size_t stride = accessorStride(model, accessor);
+    for (std::size_t index = 0; index < vertices.size(); ++index) {
+        std::array<float, 4> values{};
+        std::memcpy(values.data(), source + index * stride, componentCount * sizeof(float));
+        for(std::size_t c=0;c<componentCount;++c)if(!std::isfinite(values[c]))throw std::invalid_argument("Vertex attribute must be finite");
+        if (std::strcmp(name, "POSITION") == 0) {
+            std::copy_n(values.begin(), componentCount, vertices[index].position.begin());
+        } else if (std::strcmp(name, "NORMAL") == 0) {
+            std::copy_n(values.begin(), componentCount, vertices[index].normal.begin());
+        } else if (std::strcmp(name, "TANGENT") == 0) {
+            std::copy_n(values.begin(), componentCount, vertices[index].tangent.begin());
+        } else {
+            std::copy_n(values.begin(), componentCount, vertices[index].texcoord.begin());
+        }
+    }
+}
+
+std::uint32_t readUnsignedComponent(
+    const unsigned char* source,
+    const int componentType) {
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
+        return *source;
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
+        std::uint16_t value = 0;
+        std::memcpy(&value, source, sizeof(value));
+        return value;
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT) {
+        std::uint32_t value = 0;
+        std::memcpy(&value, source, sizeof(value));
+        return value;
+    }
+    throw std::runtime_error("Unsupported JOINTS_0 component type");
+}
+
+float readWeightComponent(
+    const unsigned char* source,
+    const int componentType,
+    const bool normalized) {
+    if (componentType == TINYGLTF_COMPONENT_TYPE_FLOAT) {
+        float value = 0.0F;
+        std::memcpy(&value, source, sizeof(value));
+        return value;
+    }
+    if (!normalized) {
+        throw std::runtime_error(
+            "Integer WEIGHTS_0 accessor must be normalized");
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
+        return static_cast<float>(*source) / 255.0F;
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
+        std::uint16_t value = 0;
+        std::memcpy(&value, source, sizeof(value));
+        return static_cast<float>(value) / 65535.0F;
+    }
+    throw std::runtime_error("Unsupported WEIGHTS_0 component type");
+}
+
+std::size_t componentByteSize(const int componentType) {
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
+        return sizeof(std::uint8_t);
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
+        return sizeof(std::uint16_t);
+    }
+    if (componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT
+        || componentType == TINYGLTF_COMPONENT_TYPE_FLOAT) {
+        return sizeof(std::uint32_t);
+    }
+    throw std::runtime_error("Unsupported glTF skin component type");
+}
+
+void copySkinAttributes(
+    const tinygltf::Model& model,
+    const tinygltf::Primitive& primitive,
+    std::vector<AssetVertex>& vertices) {
+    const auto jointsAttribute = primitive.attributes.find("JOINTS_0");
+    const auto weightsAttribute = primitive.attributes.find("WEIGHTS_0");
+    if (jointsAttribute == primitive.attributes.end()
+        && weightsAttribute == primitive.attributes.end()) {
+        return;
+    }
+    if (jointsAttribute == primitive.attributes.end()
+        || weightsAttribute == primitive.attributes.end()) {
+        throw std::runtime_error(
+            "Skinned glTF primitive must provide both JOINTS_0 and WEIGHTS_0");
+    }
+
+    const auto& jointsAccessor =
+        model.accessors.at(static_cast<std::size_t>(jointsAttribute->second));
+    const auto& weightsAccessor =
+        model.accessors.at(static_cast<std::size_t>(weightsAttribute->second));
+    if (jointsAccessor.type != TINYGLTF_TYPE_VEC4
+        || weightsAccessor.type != TINYGLTF_TYPE_VEC4
+        || jointsAccessor.count != vertices.size()
+        || weightsAccessor.count != vertices.size()) {
+        throw std::runtime_error("Unsupported glTF skin attribute layout");
+    }
+
+    const unsigned char* jointsSource = accessorData(model, jointsAccessor);
+    const unsigned char* weightsSource = accessorData(model, weightsAccessor);
+    const std::size_t jointsStride = accessorStride(model, jointsAccessor);
+    const std::size_t weightsStride = accessorStride(model, weightsAccessor);
+    const std::size_t jointComponentSize =
+        componentByteSize(jointsAccessor.componentType);
+    const std::size_t weightComponentSize =
+        componentByteSize(weightsAccessor.componentType);
+    for (std::size_t vertexIndex = 0;
+         vertexIndex < vertices.size();
+         ++vertexIndex) {
+        float weightSum = 0.0F;
+        for (std::size_t component = 0; component < 4; ++component) {
+            vertices[vertexIndex].joints[component] =
+                readUnsignedComponent(
+                    jointsSource + vertexIndex * jointsStride
+                        + component * jointComponentSize,
+                    jointsAccessor.componentType);
+            const float weight = readWeightComponent(
+                weightsSource + vertexIndex * weightsStride
+                    + component * weightComponentSize,
+                weightsAccessor.componentType,
+                weightsAccessor.normalized);
+            vertices[vertexIndex].weights[component] = weight;
+            weightSum += weight;
+        }
+        if (weightSum <= 1.0e-8F) {
+            vertices[vertexIndex].joints = {};
+            vertices[vertexIndex].weights = {1.0F, 0.0F, 0.0F, 0.0F};
+            continue;
+        }
+        for (float& weight : vertices[vertexIndex].weights) {
+            weight /= weightSum;
+        }
+    }
+}
+
+void copyMorphTargets(const tinygltf::Model& model,const tinygltf::Primitive& primitive,
+    std::vector<AssetVertex>& vertices,std::uint32_t& morphCount) {
+    morphCount=static_cast<std::uint32_t>(primitive.targets.size());
+    // The first two position streams retain the legacy vertex layout.
+    for(std::size_t t=0;t<std::min<std::size_t>(2,primitive.targets.size());++t){
+        const auto found=primitive.targets[t].find("POSITION");if(found==primitive.targets[t].end())continue;
+        const auto& a=model.accessors.at(found->second);
+        if(a.type!=TINYGLTF_TYPE_VEC3||a.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||a.count!=vertices.size())
+            throw std::invalid_argument("Invalid morph POSITION accessor");
+        for(std::size_t v=0;v<vertices.size();++v)
+            std::memcpy((t?vertices[v].morph1:vertices[v].morph0).data(),accessorData(model,a)+v*accessorStride(model,a),12);
+    }
+}
+
+void generateTangents(
+    std::vector<AssetVertex>& vertices,
+    const std::vector<std::uint32_t>& indices) {
+    std::vector<std::array<float, 3>> tangentSums(vertices.size());
+    std::vector<std::array<float, 3>> bitangentSums(vertices.size());
+    for (std::size_t triangle = 0; triangle + 2 < indices.size(); triangle += 3) {
+        const std::uint32_t i0 = indices[triangle];
+        const std::uint32_t i1 = indices[triangle + 1];
+        const std::uint32_t i2 = indices[triangle + 2];
+        const auto& p0 = vertices[i0].position;
+        const auto& p1 = vertices[i1].position;
+        const auto& p2 = vertices[i2].position;
+        const auto& uv0 = vertices[i0].texcoord;
+        const auto& uv1 = vertices[i1].texcoord;
+        const auto& uv2 = vertices[i2].texcoord;
+        const float edge1X = p1[0] - p0[0];
+        const float edge1Y = p1[1] - p0[1];
+        const float edge1Z = p1[2] - p0[2];
+        const float edge2X = p2[0] - p0[0];
+        const float edge2Y = p2[1] - p0[1];
+        const float edge2Z = p2[2] - p0[2];
+        const float deltaU1 = uv1[0] - uv0[0];
+        const float deltaV1 = uv1[1] - uv0[1];
+        const float deltaU2 = uv2[0] - uv0[0];
+        const float deltaV2 = uv2[1] - uv0[1];
+        const float denominator = deltaU1 * deltaV2 - deltaU2 * deltaV1;
+        if (std::abs(denominator) < 1.0e-8F) {
+            continue;
+        }
+        const float reciprocal = 1.0F / denominator;
+        const std::array<float, 3> tangent = {
+            (edge1X * deltaV2 - edge2X * deltaV1) * reciprocal,
+            (edge1Y * deltaV2 - edge2Y * deltaV1) * reciprocal,
+            (edge1Z * deltaV2 - edge2Z * deltaV1) * reciprocal,
+        };
+        const std::array<float, 3> bitangent = {
+            (edge2X * deltaU1 - edge1X * deltaU2) * reciprocal,
+            (edge2Y * deltaU1 - edge1Y * deltaU2) * reciprocal,
+            (edge2Z * deltaU1 - edge1Z * deltaU2) * reciprocal,
+        };
+        for (const std::uint32_t vertexIndex : {i0, i1, i2}) {
+            for (std::size_t component = 0; component < 3; ++component) {
+                tangentSums[vertexIndex][component] += tangent[component];
+                bitangentSums[vertexIndex][component] += bitangent[component];
+            }
+        }
+    }
+
+    for (std::size_t index = 0; index < vertices.size(); ++index) {
+        const auto& normal = vertices[index].normal;
+        auto tangent = tangentSums[index];
+        const float projection =
+            tangent[0] * normal[0] + tangent[1] * normal[1] + tangent[2] * normal[2];
+        for (std::size_t component = 0; component < 3; ++component) {
+            tangent[component] -= projection * normal[component];
+        }
+        const float length = std::sqrt(
+            tangent[0] * tangent[0] + tangent[1] * tangent[1]
+            + tangent[2] * tangent[2]);
+        if (!std::isfinite(length)||length < 1.0e-8F) {
+            const auto fallback=orthogonalTangentFallback(normal);
+            vertices[index].tangent = {fallback[0],fallback[1],fallback[2],1.0F};
+            continue;
+        }
+        for (float& component : tangent) {
+            component /= length;
+        }
+        const std::array<float, 3> crossNormalTangent = {
+            normal[1] * tangent[2] - normal[2] * tangent[1],
+            normal[2] * tangent[0] - normal[0] * tangent[2],
+            normal[0] * tangent[1] - normal[1] * tangent[0],
+        };
+        const auto& bitangent = bitangentSums[index];
+        const float handedness =
+            crossNormalTangent[0] * bitangent[0]
+                + crossNormalTangent[1] * bitangent[1]
+                + crossNormalTangent[2] * bitangent[2] < 0.0F
+            ? -1.0F
+            : 1.0F;
+        vertices[index].tangent = {
+            tangent[0], tangent[1], tangent[2], handedness};
+    }
+}
+
+std::vector<std::uint32_t> readIndices(
+    const tinygltf::Model& model,
+    const tinygltf::Primitive& primitive,
+    const std::size_t vertexCount) {
+    if (primitive.indices < 0) {
+        std::vector<std::uint32_t> sequential(vertexCount);
+        for (std::size_t index = 0; index < vertexCount; ++index) {
+            sequential[index] = static_cast<std::uint32_t>(index);
+        }
+        return sequential;
+    }
+
+    const auto& accessor = model.accessors.at(static_cast<std::size_t>(primitive.indices));
+    const unsigned char* source = accessorData(model, accessor);
+    const std::size_t stride = accessorStride(model, accessor);
+    std::vector<std::uint32_t> result(accessor.count);
+    for (std::size_t index = 0; index < accessor.count; ++index) {
+        const unsigned char* element = source + index * stride;
+        if (accessor.componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE) {
+            result[index] = *element;
+        } else if (accessor.componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT) {
+            std::uint16_t value = 0;
+            std::memcpy(&value, element, sizeof(value));
+            result[index] = value;
+        } else if (accessor.componentType == TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT) {
+            std::memcpy(&result[index], element, sizeof(result[index]));
+        } else {
+            throw std::runtime_error("Unsupported glTF index component type");
+        }
+    }
+    return result;
+}
+
+struct AuthoredImageData{std::vector<azurerender::ImageMipLevel> levels;std::string compression;};
+using AuthoredImageMips=std::map<int,AuthoredImageData>;
+std::vector<std::uint8_t> decodeImageRgba(
+    const tinygltf::Model& model,
+    const int imageIndex,
+    const std::array<double, 4>& factor,
+    std::uint32_t& width,
+    std::uint32_t& height,bool encodedColor=true,const AuthoredImageMips* authored=nullptr,unsigned* levelCount=nullptr,bool normalUsage=false) {
+    const auto& image = model.images.at(static_cast<std::size_t>(imageIndex));
+    if (image.width <= 0 || image.height <= 0 || image.image.empty()) {
+        throw std::runtime_error("glTF material image did not decode");
+    }
+    width = static_cast<std::uint32_t>(image.width);
+    height = static_cast<std::uint32_t>(image.height);
+    azurerender::DecodedImage typed;typed.width=width;typed.height=height;typed.sourceChannels=4;
+    const auto count=static_cast<std::size_t>(width)*height*4;
+    if(image.component!=4)throw std::runtime_error("Material decoder requires RGBA image data");
+    if(image.bits==8)typed.rgba8=image.image;
+    else if(image.bits==16) {
+        if(image.image.size()!=count*2)throw std::runtime_error("Invalid sixteen-bit image storage");
+        typed.precision=azurerender::ImagePrecision::UInt16;typed.rgba16.resize(count);std::memcpy(typed.rgba16.data(),image.image.data(),count*2);
+    } else if(image.bits==32) {
+        if(image.image.size()!=count*4)throw std::runtime_error("Invalid float image storage");
+        typed.precision=azurerender::ImagePrecision::Float32;typed.colorSpace=azurerender::ImageColorSpace::Linear;
+        typed.rgba32.resize(count);std::memcpy(typed.rgba32.data(),image.image.data(),count*4);
+    } else throw std::runtime_error("Unsupported image precision");
+    const auto converted=azurerender::convertImageToRgba8(typed,encodedColor);
+    std::vector<std::uint8_t> pixels(
+        static_cast<std::size_t>(width) * height * 4);
+    for (std::size_t pixel = 0;
+         pixel < static_cast<std::size_t>(width) * height;
+         ++pixel) {
+        const std::size_t source = pixel * static_cast<std::size_t>(image.component);
+        for (std::size_t channel = 0; channel < 4; ++channel) {
+            const std::uint8_t sourceValue = channel < static_cast<std::size_t>(image.component)
+                ? converted.pixels[source + channel]
+                : (channel == 3 ? 255 : converted.pixels[source]);
+            pixels[pixel * 4 + channel] = static_cast<std::uint8_t>(
+                static_cast<double>(sourceValue) * std::clamp(factor[channel], 0.0, 1.0));
+        }
+    }
+    if(authored){const auto found=authored->find(imageIndex);if(found!=authored->end()){
+        if(levelCount)*levelCount=static_cast<unsigned>(found->second.levels.size());
+        for(std::size_t level=1;level<found->second.levels.size();++level){const auto& samples=found->second.levels[level].rgba8;for(std::size_t i=0;i<samples.size();++i)pixels.push_back(static_cast<std::uint8_t>(samples[i]*std::clamp(factor[i%4],0.,1.)));}
+        if(normalUsage&&found->second.compression=="bc5")azurerender::reconstructBc5NormalPixels(pixels);
+    }}
+    return pixels;
+}
+
+std::array<float, 4> readMaterialColorExtra(
+    const tinygltf::Value& extras,
+    const std::string& key) {
+    std::array<float, 4> result{1.0F, 1.0F, 1.0F, 0.0F};
+    if (!extras.IsObject() || !extras.Has(key)) {
+        return result;
+    }
+    const tinygltf::Value& value = extras.Get(key);
+    if (!value.IsArray() || value.ArrayLen() < 3) {
+        return result;
+    }
+    for (std::size_t channel = 0; channel < 3; ++channel) {
+        const tinygltf::Value& component = value.Get(channel);
+        if (!component.IsNumber()) {
+            return {1.0F, 1.0F, 1.0F, 0.0F};
+        }
+        result[channel] = static_cast<float>(
+            std::clamp(component.GetNumberAsDouble(), 0.0, 1.0));
+    }
+    result[3] = 1.0F;
+    return result;
+}
+
+std::array<float, 4> readMaterialVectorExtra(
+    const tinygltf::Value& extras,
+    const std::string& key,
+    const std::array<float, 4>& fallback) {
+    if (!extras.IsObject() || !extras.Has(key)) {
+        return fallback;
+    }
+    const tinygltf::Value& value = extras.Get(key);
+    if (!value.IsArray() || value.ArrayLen() < 4) {
+        return fallback;
+    }
+    std::array<float, 4> result{};
+    for (std::size_t channel = 0; channel < 4; ++channel) {
+        const tinygltf::Value& component = value.Get(channel);
+        if (!component.IsNumber()) {
+            return fallback;
+        }
+        result[channel] =
+            static_cast<float>(component.GetNumberAsDouble());
+    }
+    return result;
+}
+
+#include "UnlitTextureSurfaceLoader.inc"
+
+void loadUnlitSurface(const tinygltf::Material& material,const tinygltf::Model& model,
+    AssetMaterial& result,int& baseImage,int& secondImage,int& coverageImage,int& distortionImage) {
+    if(!material.extras.IsObject()||!material.extras.Has("azureRenderMaterial"))return;
+    const auto& profile=material.extras.Get("azureRenderMaterial");
+    const bool enabled=(result.materialFeatures&MaterialFeatureUnlitSurface)!=0;
+    // Authored JSON retains null and unknown fields that TinyGLTF omits.
+    nlohmann::json authored;
+    if(!material.extras_json_string.empty())authored=nlohmann::json::parse(material.extras_json_string);
+    const bool authoredSurface=authored.is_object()&&authored.contains("azureRenderMaterial")
+        &&authored["azureRenderMaterial"].is_object()&&authored["azureRenderMaterial"].contains("surface");
+    const bool layered=(result.materialFeatures&MaterialFeatureUnlitTextureLayers)!=0;
+    if(!enabled&&!layered&&!profile.Has("surface")&&!authoredSurface)return;
+    if(layered) {
+        if(!authoredSurface)throw std::invalid_argument("unlit texture layers require an authored surface");
+        loadUnlitTextureSurface(material,model,authored.at("azureRenderMaterial"),result,baseImage,secondImage,coverageImage,distortionImage);
+        return;
+    }
+    if(authored.is_object()&&authored.contains("azureRenderMaterial")) {
+        const auto& raw=authored["azureRenderMaterial"];
+        if(!raw.contains("features")||!raw["features"].is_array())
+            throw std::invalid_argument("unlit surface requires explicit features");
+        std::vector<std::string> names;
+        for(const auto& value:raw["features"]) {
+            if(!value.is_string()||value.get<std::string>().empty())
+                throw std::invalid_argument("Invalid unlit surface feature");
+            const auto name=value.get<std::string>();
+            if(std::find(names.begin(),names.end(),name)!=names.end())
+                throw std::invalid_argument("Duplicate unlit surface feature");
+            names.push_back(name);
+        }
+    }
+    constexpr std::uint32_t allowed=MaterialFeatureUnlitSurface|MaterialFeatureEmissiveMask|MaterialFeatureShadowCoverageMask;
+    if(!enabled||!profile.Has("surface")||profile.Get("schemaVersion").GetNumberAsDouble()!=2
+        ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Emissive)
+        ||(result.materialFeatures&~allowed)||result.transmission!=0||result.thickness!=0)
+        throw std::invalid_argument("unlit surface requires schema 2, generic or emissive class and compatible features");
+    const auto& surface=profile.Get("surface");
+    if(!surface.IsObject()||!surface.Has("schemaVersion")||!surface.Get("schemaVersion").IsNumber()
+        ||surface.Get("schemaVersion").GetNumberAsDouble()!=1||!surface.Has("lighting")
+        ||!surface.Get("lighting").IsString()||surface.Get("lighting").Get<std::string>()!="unlit")
+        throw std::invalid_argument("Invalid unlit surface schemaVersion or lighting");
+    for(const auto& field:surface.Get<tinygltf::Value::Object>())
+        if(field.first!="schemaVersion"&&field.first!="lighting")
+            throw std::invalid_argument("Unknown unlit surface field: "+field.first);
+    if(authoredSurface)for(const auto& field:authored["azureRenderMaterial"]["surface"].items())
+        if((field.key()!="schemaVersion"&&field.key()!="lighting")||field.value().is_null())
+            throw std::invalid_argument("Invalid unlit surface field: "+field.key());
+}
+
+void loadMaterialComposite(const tinygltf::Material& material, const AssetMaterial& result) {
+    if(!material.extras.IsObject() || !material.extras.Has("azureRenderMaterial"))return;
+    const auto& profile=material.extras.Get("azureRenderMaterial");
+    const bool enabled=(result.materialFeatures&MaterialFeatureMultiplyComposite)!=0;
+    if(!enabled&&!profile.Has("composite"))return;
+    constexpr std::uint32_t allowed=MaterialFeatureMultiplyComposite
+        |MaterialFeatureOverlay|MaterialFeatureNeutralFallback|MaterialFeatureShadowCoverageMask;
+    if(!enabled||!profile.Has("composite")
+        ||profile.Get("schemaVersion").GetNumberAsDouble()!=2
+        ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Overlay)
+        ||result.alphaMode!=AssetAlphaMode::Blend||(result.materialFeatures&~allowed))
+        throw std::invalid_argument("multiply composite requires schema 2, generic or overlay class, BLEND and compatible features");
+    const auto& composite=profile.Get("composite");
+    if(!composite.IsObject()||!composite.Has("schemaVersion")
+        ||!composite.Get("schemaVersion").IsNumber()
+        ||composite.Get("schemaVersion").GetNumberAsDouble()!=1
+        ||!composite.Has("mode")||!composite.Get("mode").IsString()
+        ||composite.Get("mode").Get<std::string>()!="multiply")
+        throw std::invalid_argument("Invalid composite schemaVersion or mode");
+    for(const auto& field:composite.Get<tinygltf::Value::Object>())
+        if(field.first!="schemaVersion"&&field.first!="mode")
+            throw std::invalid_argument("Unknown composite field: "+field.first);
+}
+
+int loadSceneRefraction(const tinygltf::Material& material,
+    const tinygltf::Model& model, AssetMaterial& result) {
+    if(!material.extras.IsObject() || !material.extras.Has("azureRenderMaterial"))return -1;
+    const auto& profile=material.extras.Get("azureRenderMaterial");
+    const bool enabled=(result.materialFeatures&MaterialFeatureSceneRefraction)!=0;
+    if(!enabled && !profile.Has("sceneRefraction"))return -1;
+    if(!enabled || !profile.Has("sceneRefraction") || result.materialProfileVersion!=2
+        || result.materialClass!=AssetMaterialClass::Generic || result.alphaMode!=AssetAlphaMode::Blend
+        || (result.materialFeatures&~(MaterialFeatureSceneRefraction|MaterialFeatureSurfaceAo|MaterialFeatureEmissiveMask|MaterialFeatureShadowCoverageMask)))
+        throw std::invalid_argument("sceneRefraction requires generic schema 2, transparent queue and compatible features");
+    const auto& glass=profile.Get("sceneRefraction");
+    if(!glass.IsObject())throw std::invalid_argument("sceneRefraction must be an object");
+    const auto scalar=[&](const char* name,float fallback,float maximum) {
+        if(!glass.Has(name))return fallback;
+        const auto& v=glass.Get(name);
+        if(!v.IsNumber())throw std::invalid_argument("Invalid sceneRefraction numeric field");
+        const double number=v.GetNumberAsDouble();
+        if(!std::isfinite(number)||number<0||number>maximum)throw std::invalid_argument("sceneRefraction field outside range");
+        return static_cast<float>(number);
+    };
+    const auto vector=[&](const char* name,std::array<float,4> fallback) {
+        if(!glass.Has(name))return fallback;
+        const auto& v=glass.Get(name);
+        if(!v.IsArray()||v.ArrayLen()!=4)throw std::invalid_argument("sceneRefraction vector requires four numbers");
+        for(unsigned i=0;i<4;++i) {
+            const auto& c=v.Get(static_cast<int>(i));
+            if(!c.IsNumber()||!std::isfinite(c.GetNumberAsDouble())||std::abs(c.GetNumberAsDouble())>65536)
+                throw std::invalid_argument("Invalid sceneRefraction vector component");
+            fallback[i]=static_cast<float>(c.GetNumberAsDouble());
+        }
+        return fallback;
+    };
+    // Material constants form a per-feature union. Public authoring uses the
+    // named object; glass reserves these slots instead of character styling.
+    result.styleParameters=vector("uvTransform",{1,1,0,0});
+    result.matcapColor=vector("tint",{1,1,1,1});
+    for(float c:result.matcapColor)if(c<0)throw std::invalid_argument("Refraction tint must be nonnegative");
+    result.hairParameters={scalar("contribution",.8F,1),scalar("brightness",1,64),scalar("distortionStrength",0,1),0};
+    result.featureParameters={0,0,0,0};
+    if(!glass.Has("texture"))throw std::invalid_argument("sceneRefraction requires a distortion texture");
+    const auto& texture=glass.Get("texture");
+    const double index=texture.IsNumber()?texture.GetNumberAsDouble():-1;
+    if(!std::isfinite(index)||index<0||std::floor(index)!=index||index>=model.textures.size())
+        throw std::invalid_argument("Invalid sceneRefraction texture index");
+    const int image=model.textures[static_cast<std::size_t>(index)].source;
+    if(image<0||static_cast<std::size_t>(image)>=model.images.size())
+        throw std::invalid_argument("sceneRefraction distortion image is missing");
+    return image;
+}
+
+AssetMaterial::CharacterVisibility parseCharacterVisibility(const nlohmann::json& value,const char* field) {
+    using Source=AssetMaterial::CharacterVisibility;
+    if(value.is_string()) {
+        if(value=="one")return Source::One;
+        if(value=="scene-visibility")return Source::SceneVisibility;
+        if(value=="main-light-shadow")return Source::MainLightShadow;
+        if(value=="object-shadow")return Source::ObjectShadow;
+    }
+    throw std::invalid_argument(std::string("Invalid ")+field);
+}
+
+int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Model& model,
+    AssetMaterial& result,int& rampImage) {
+    if(!material.extras.IsObject()||!material.extras.Has("azureRenderMaterial"))return -1;
+    const auto& profile=material.extras.Get("azureRenderMaterial");
+    const bool enabled=(result.materialFeatures&MaterialFeatureHairProjectedRamp)!=0;
+    const bool declared=profile.IsObject()&&profile.Has("hair")&&profile.Get("hair").IsObject()
+        &&profile.Get("hair").Has("projectedRamp");
+    if(!enabled&&!declared)return -1;
+    constexpr auto conflicts=MaterialFeatureHairRamp|MaterialFeatureFaceSdfEligible|MaterialFeatureDualFaceSdf
+        |MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite
+        |MaterialFeatureOverlay|MaterialFeatureBrowOverlay;
+    if(!enabled||!declared||profile.Get("schemaVersion").GetNumberAsDouble()!=2||result.materialClass!=AssetMaterialClass::Hair
+        ||!(result.materialFeatures&MaterialFeatureHairAnisotropy)||(result.materialFeatures&conflicts)
+        ||profile.Has("faceSdf")||profile.Get("hair").Has("rampTexture")
+        ||!profile.Get("hair").Has("dataTexture"))
+        throw std::invalid_argument("projectedRamp requires schema 2 hair, packed normals and exclusive texture slots");
+    const auto& source=profile.Get("hair").Get("projectedRamp");
+    if(!source.IsObject()||!source.Has("schemaVersion")||!source.Get("schemaVersion").IsNumber()
+        ||source.Get("schemaVersion").GetNumberAsDouble()!=1)
+        throw std::invalid_argument("Unsupported projectedRamp schemaVersion");
+    const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
+        "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
+        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign","lighting"};
+    // TinyGLTF omits null extras. Retain the authored object so optional typed
+    // fields cannot silently turn invalid null values into their defaults.
+    if(!material.extras_json_string.empty()) {
+        const auto authored=nlohmann::json::parse(material.extras_json_string);
+        const auto& object=authored.at("azureRenderMaterial").at("hair").at("projectedRamp");
+        for(const auto& field:object.items()) {
+            if(std::find(fields.begin(),fields.end(),field.key())==fields.end())
+                throw std::invalid_argument("Unknown projectedRamp field: "+field.key());
+            if(field.value().is_null())throw std::invalid_argument("Invalid projectedRamp."+field.key());
+        }
+    }
+    for(const auto& field:source.Get<tinygltf::Value::Object>())
+        if(std::find(fields.begin(),fields.end(),field.first)==fields.end())
+            throw std::invalid_argument("Unknown projectedRamp field: "+field.first);
+    const auto scalar=[&](const char* name,float minimum,float maximum) {
+        const auto& value=source.Get(name);
+        const double number=value.IsNumber()?value.GetNumberAsDouble():std::numeric_limits<double>::quiet_NaN();
+        if(!std::isfinite(number)||number<minimum||number>maximum)
+            throw std::invalid_argument(std::string("Invalid projectedRamp.")+name);
+        return static_cast<float>(number);
+    };
+    auto& target=result.projectedHairRamp;
+    if(source.Has("tangentSign")){
+        target.tangentSign=scalar("tangentSign",-1,1);
+        if(target.tangentSign!=1&&target.tangentSign!=-1)throw std::invalid_argument("Invalid projectedRamp.tangentSign");
+    }
+    if(source.Has("line")) {
+        const auto& line=source.Get("line");
+        const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("line");
+        if(!raw.is_object()||raw.size()!=9+(raw.contains("diffuseTarget")?1:0)||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+            ||profile.Has("shadowColorLut")||(result.materialFeatures&MaterialFeatureShadowColorLut))
+            throw std::invalid_argument("projectedRamp.line requires version 1 and exclusive slot 8 ownership");
+        const auto number=[&](const char* name,float minimum,float maximum) {
+            if(!raw.contains(name)||!raw.at(name).is_number())throw std::invalid_argument(std::string("Invalid projectedRamp.line.")+name);
+            const auto value=raw.at(name).get<double>();
+            if(!std::isfinite(value)||value<minimum||value>maximum)throw std::invalid_argument(std::string("Invalid projectedRamp.line.")+name);
+            return static_cast<float>(value);
+        };
+        auto& input=target.line;
+        if(raw.contains("diffuseTarget")) {
+            const auto& value=raw.at("diffuseTarget");
+            if(!value.is_string()||(value!="ambient"&&value!="main-and-ambient"))
+                throw std::invalid_argument("Invalid projectedRamp.line.diffuseTarget");
+            input.mainDiffuse=value=="main-and-ambient";
+        }
+        input.frequency=number("frequency",0,65536);input.strandShift=number("strandShift",-1,1);
+        input.range=number("range",0,1);input.depth=number("depth",0,1);
+        input.alternation=number("alternation",0,1);input.saturation=number("saturation",0,16);
+        if(!raw.contains("uvTransform")||!raw.at("uvTransform").is_array()||raw.at("uvTransform").size()!=4)
+            throw std::invalid_argument("Invalid projectedRamp.line.uvTransform");
+        for(unsigned i=0;i<4;++i){const auto& value=raw.at("uvTransform")[i];
+            if(!value.is_number()||!std::isfinite(value.get<double>())||std::abs(value.get<double>())>65536)
+                throw std::invalid_argument("Invalid projectedRamp.line.uvTransform");
+            input.uvTransform[i]=value.get<float>();}
+        if(!line.Has("texture")||!line.Get("texture").IsInt())throw std::invalid_argument("Invalid projectedRamp.line.texture");
+        const auto texture=line.Get("texture").Get<int>();
+        if(texture<0||static_cast<std::size_t>(texture)>=model.textures.size()||model.textures[texture].source<0
+            ||static_cast<std::size_t>(model.textures[texture].source)>=model.images.size())
+            throw std::invalid_argument("Invalid projectedRamp.line.texture");
+        input.present=true;
+        result.textureSettings[8].usage="linear";result.textureSettings[8].colorSpace="linear";
+        result.textureSettings[8].wrapU=result.textureSettings[8].wrapV="repeat";
+        result.textureSettings[8].mipPolicy="generate";result.textureSettings[8].anisotropy=8;
+    }
+    if(source.Has("virtualLight")){
+        const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("virtualLight");
+        if(!raw.is_object()||raw.size()!=3||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+            ||!raw.at("blend").is_number()||!std::isfinite(raw.at("blend").get<double>())||raw.at("blend").get<double>()<0||raw.at("blend").get<double>()>1
+            ||!raw.at("objectGain").is_number()||!std::isfinite(raw.at("objectGain").get<double>())||raw.at("objectGain").get<double>()<0||raw.at("objectGain").get<double>()>16)
+            throw std::invalid_argument("Invalid projectedRamp.virtualLight");
+        target.virtualLight=true;target.virtualBlend=raw.at("blend").get<float>();target.objectGain=raw.at("objectGain").get<float>();
+    }
+    if(source.Has("frame")){
+        const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("frame");
+        if(!raw.is_object()||raw.size()!=3||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+            ||!raw.at("node").is_string()||raw.at("node").get<std::string>().empty()
+            ||!raw.at("basis").is_array()||raw.at("basis").size()!=9)throw std::invalid_argument("Invalid projectedRamp.frame");
+        auto& frame=target.frame;frame.nodeName=raw.at("node").get<std::string>();
+        unsigned found=0;for(std::size_t index=0;index<model.nodes.size();++index)if(model.nodes[index].name==frame.nodeName){frame.node=static_cast<std::uint32_t>(index);++found;}
+        if(found!=1)throw std::invalid_argument("projectedRamp.frame requires one unique named node");
+        for(unsigned index=0;index<9;++index){const auto& value=raw.at("basis")[index];
+            if(!value.is_number()||!std::isfinite(value.get<double>())||std::abs(value.get<double>())>1.0001)throw std::invalid_argument("Invalid projectedRamp.frame basis");frame.basis[index]=value.get<float>();}
+        for(unsigned a=0;a<3;++a)for(unsigned b=0;b<3;++b){float dot=0;for(unsigned c=0;c<3;++c)dot+=frame.basis[a*3+c]*frame.basis[b*3+c];
+            if(std::abs(dot-(a==b?1.F:0.F))>1e-4F)throw std::invalid_argument("projectedRamp.frame basis must be orthonormal");}
+        frame.present=true;
+        result.materialFeatures|=MaterialFeatureExplicitHairFrame;
+    }
+    if(source.Has("surfaceResponse")) {
+        const auto& mode=source.Get("surfaceResponse");
+        if(!mode.IsString()||(mode.Get<std::string>()!="layered"&&mode.Get<std::string>()!="strand-diffuse"))
+            throw std::invalid_argument("Invalid projectedRamp.surfaceResponse");
+        target.surfaceResponse=mode.Get<std::string>()=="strand-diffuse"
+            ?AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
+            :AssetMaterial::ProjectedHairRamp::SurfaceResponse::Layered;
+    }
+    if(source.Has("diffuseScale"))target.diffuseScale=scalar("diffuseScale",0,1);
+    if(source.Has("lighting")) {
+        const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("lighting");
+        const std::set<std::string> fields{"schemaVersion","shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor","characterVisibility"};
+        if(!raw.is_object()||(raw.size()!=6&&raw.size()!=7)||!raw.contains("schemaVersion")
+            ||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+            ||target.surfaceResponse!=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
+            ||!(result.materialFeatures&MaterialFeatureDiffuseRamp))
+            throw std::invalid_argument("Invalid projectedRamp.lighting ownership or version");
+        for(const auto& field:raw.items())if(!fields.count(field.key()))throw std::invalid_argument("Unknown projectedRamp.lighting field");
+        for(const char* field:{"shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor"})
+            if(!raw.contains(field))throw std::invalid_argument("Missing projectedRamp.lighting field");
+        const auto number=[&](const nlohmann::json& value,float maximum) {
+            if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>maximum)
+                throw std::invalid_argument("Invalid projectedRamp.lighting value");
+            return value.get<float>();
+        };
+        auto& lighting=target.lighting;
+        if(raw.contains("characterVisibility"))lighting.characterVisibility=parseCharacterVisibility(
+            raw.at("characterVisibility"),"projectedRamp.lighting.characterVisibility");
+        lighting.shadowBrightness=number(raw.at("shadowBrightness"),16);
+        lighting.shadowSaturation=number(raw.at("shadowSaturation"),16);
+        lighting.shadowScale=number(raw.at("shadowScale"),16);
+        for(const auto* field:{"ambientColor","mainColor"}) {
+            const auto& value=raw.at(field);
+            if(!value.is_array()||value.size()!=3)throw std::invalid_argument("Invalid projectedRamp.lighting color");
+            auto& color=std::string(field)=="ambientColor"?lighting.ambientColor:lighting.mainColor;
+            for(unsigned i=0;i<3;++i)color[i]=number(value[i],64);
+        }
+        lighting.present=true;
+    }
+    target.primaryShift=scalar("primaryShift",-1,1);target.secondaryShift=scalar("secondaryShift",-1,1);
+    target.intensity=scalar("intensity",0,16);target.secondaryRange=scalar("secondaryRange",0,1);
+    target.edgeFade=scalar("edgeFade",0,64);target.specularNormalScale=scalar("specularNormalScale",0,8);
+    target.surfaceNormalScale=scalar("surfaceNormalScale",0,8);target.directionX=scalar("directionX",-16,16);
+    const auto vector=[&](const char* name,float* destination,unsigned count,float minimum,float maximum) {
+        const auto& values=source.Get(name);
+        if(!values.IsArray()||values.ArrayLen()!=count)
+            throw std::invalid_argument(std::string("Invalid projectedRamp.")+name);
+        for(unsigned i=0;i<count;++i) {
+            const auto& value=values.Get(i);
+            const double number=value.IsNumber()?value.GetNumberAsDouble():std::numeric_limits<double>::quiet_NaN();
+            if(!std::isfinite(number)||number<minimum||number>maximum)
+                throw std::invalid_argument(std::string("Invalid projectedRamp.")+name);
+            destination[i]=static_cast<float>(number);
+        }
+    };
+    vector("secondaryColor",target.secondaryColor.data(),3,0,64);
+    vector("objectBasis",target.objectBasis.data(),9,-1,1);
+    for(unsigned a=0;a<3;++a)for(unsigned b=a;b<3;++b) {
+        float product=0;for(unsigned c=0;c<3;++c)product+=target.objectBasis[a*3+c]*target.objectBasis[b*3+c];
+        if(std::abs(product-(a==b?1.F:0.F))>.001F)
+            throw std::invalid_argument("projectedRamp.objectBasis must be orthonormal");
+    }
+    const auto texture=[&](const char* name) {
+        const auto& value=source.Get(name);
+        const double index=value.IsNumber()?value.GetNumberAsDouble():-1;
+        if(!std::isfinite(index)||index<0||std::floor(index)!=index||index>=model.textures.size())
+            throw std::invalid_argument(std::string("Invalid projectedRamp texture: ")+name);
+        const int image=model.textures[static_cast<std::size_t>(index)].source;
+        if(image<0||static_cast<std::size_t>(image)>=model.images.size())
+            throw std::invalid_argument("projectedRamp texture has no image");
+        return image;
+    };
+    const int parameterImage=texture("parameterTexture");rampImage=texture("rampTexture");
+    target.present=true;
+    for(unsigned slot:{5U,7U}) {
+        result.textureSettings[slot].usage="linear";result.textureSettings[slot].colorSpace="linear";
+    }
+    auto& sampler=result.textureSettings[5];sampler.wrapU=sampler.wrapV="clamp";sampler.mipPolicy="none";sampler.anisotropy=1;
+    return parameterImage;
+}
+
+#include "EyeSurfaceLoader.inc"
+#include "OutlineSurfaceLoader.inc"
+
+int loadSpecularRamp(const tinygltf::Material& material,const tinygltf::Model& model,
+    AssetMaterial& result,int previousImage) {
+    if(material.extras_json_string.empty())return previousImage;
+    const auto extras=nlohmann::json::parse(material.extras_json_string);
+    if(!extras.contains("azureRenderMaterial"))return previousImage;
+    const auto& parent=extras.at("azureRenderMaterial");
+    if(!parent.contains("specularRamp"))return previousImage;
+    const auto& raw=parent.at("specularRamp");
+    const std::set<std::string> fields{"schemaVersion","texture","flipV","iridescence","lightingInputs"};
+    if(!raw.is_object()||raw.size()!=fields.size())throw std::invalid_argument("Invalid specularRamp fields");
+    for(const auto& field:fields)if(!raw.contains(field))throw std::invalid_argument("Missing specularRamp field "+field);
+    if(!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+        ||!raw.at("texture").is_number_integer()||raw.at("texture").get<double>()<0
+        ||raw.at("texture").get<double>()>=model.textures.size()||!raw.at("flipV").is_boolean()
+        ||!raw.at("lightingInputs").is_string()||raw.at("lightingInputs")!="host-main-light")
+        throw std::invalid_argument("Invalid specularRamp contract");
+    if(parent.at("schemaVersion")!=2||!parent.contains("nprDiffuse")
+        ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Fabric
+            &&result.materialClass!=AssetMaterialClass::Metal)
+        ||previousImage>=0||(result.materialFeatures&MaterialFeatureFaceSdfEligible)
+        ||parent.contains("surface")||parent.contains("composite")||parent.contains("sceneRefraction")
+        ||result.transmission!=0||result.thickness!=0)
+        throw std::invalid_argument("Incompatible specularRamp material owners");
+    const auto number=[&](const char* name,double maximum){const auto& value=raw.at(name);
+        if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>maximum)
+            throw std::invalid_argument(std::string("Invalid specularRamp.")+name);
+        return value.get<float>();};
+    result.specularRamp={true,raw.at("flipV").get<bool>(),number("iridescence",1)};
+    const int image=model.textures.at(raw.at("texture").get<std::size_t>()).source;
+    if(image<0||static_cast<std::size_t>(image)>=model.images.size())throw std::invalid_argument("specularRamp requires a valid image");
+    auto& sampler=result.textureSettings[5];sampler.usage=sampler.colorSpace="linear";sampler.filter="linear";
+    sampler.wrapU=sampler.wrapV="clamp";sampler.mipPolicy="none";
+    sampler.mipFilter=azurerender::TextureImportSettings::MipFilter::Nearest;sampler.anisotropy=1;sampler.mipBias=0;
+    return image;
+}
+
+AssetMaterial loadMaterial(
+    const tinygltf::Model& model,
+    const tinygltf::Material* material,const AuthoredImageMips* authored=nullptr,
+    const std::vector<nlohmann::json>* imageSettings=nullptr) {
+    AssetMaterial result;
+    int baseColorImage = -1;
+    int normalImage = -1;
+    int metallicRoughnessImage = -1;
+    int specularEmissiveImage = -1;
+    int styleMaskImage = -1;
+    int matcapImage = -1;
+    int hairDataImage = -1;
+    bool positiveHairNormalY=false;
+    int faceSdfImage = -1;
+    int projectedHairParameterImage=-1;
+    int projectedHairLineImage=-1;
+    int shadowColorLutImage=-1;
+    int unlitCoverageImage=-1;
+    std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
+    if (material != nullptr) {
+        loadMaterialProfile(*material, result);
+        const auto scalar=[&](const char* extension,const char* field,float fallback){
+            const auto it=material->extensions.find(extension);if(it==material->extensions.end()||!it->second.Has(field))return fallback;
+            const auto& v=it->second.Get(field);if(!v.IsNumber()||!std::isfinite(v.GetNumberAsDouble()))throw std::runtime_error("Invalid physical material field");return static_cast<float>(v.GetNumberAsDouble());};
+        result.transmission=scalar("KHR_materials_transmission","transmissionFactor",0);
+        result.ior=scalar("KHR_materials_ior","ior",1.5F);result.thickness=scalar("KHR_materials_volume","thicknessFactor",0);
+        result.attenuationDistance=scalar("KHR_materials_volume","attenuationDistance",0);
+        if(result.transmission<0||result.transmission>1||result.ior<1||result.ior>3||result.thickness<0||result.attenuationDistance<0)throw std::runtime_error("Physical material parameter outside supported range");
+        const auto volume=material->extensions.find("KHR_materials_volume");
+        if(volume!=material->extensions.end()&&volume->second.Has("attenuationColor")){
+            const auto& color=volume->second.Get("attenuationColor");if(!color.IsArray()||color.ArrayLen()!=3)throw std::runtime_error("Invalid attenuation color");
+            for(unsigned channel=0;channel<3;++channel){if(!color.Get(static_cast<int>(channel)).IsNumber())throw std::runtime_error("Invalid attenuation channel");result.attenuationColor[channel]=static_cast<float>(color.Get(static_cast<int>(channel)).GetNumberAsDouble());if(result.attenuationColor[channel]<0||result.attenuationColor[channel]>1)throw std::runtime_error("Attenuation color outside unit range");}
+        }
+        const auto transmission=material->extensions.find("KHR_materials_transmission");
+        if(transmission!=material->extensions.end()&&transmission->second.Has("transmissionTexture")){
+            const auto& info=transmission->second.Get("transmissionTexture");const int texture=info.Get("index").GetNumberAsInt();
+            if(info.Has("texCoord")&&info.Get("texCoord").GetNumberAsInt()!=0)throw std::runtime_error("Transmission requires texture coordinates zero");
+            result.transmissionPixels=decodeImageRgba(model,model.textures.at(static_cast<std::size_t>(texture)).source,{1,1,1,1},result.transmissionWidth,result.transmissionHeight,false,authored,nullptr);
+        }
+        for(const auto& extension:material->extensions)if(extension.first!="KHR_materials_transmission"&&extension.first!="KHR_materials_volume"&&extension.first!="KHR_materials_ior"&&extension.first!="KHR_materials_emissive_strength")
+            azurerender::RuntimeDiagnostics::instance().warning("asset","Unsupported material extension: "+extension.first);
+
+        const auto& sourceFactor = material->pbrMetallicRoughness.baseColorFactor;
+        if (sourceFactor.size() == 4) {
+            std::copy(sourceFactor.begin(), sourceFactor.end(), factor.begin());
+        }
+        const int baseColorTexture = material->pbrMetallicRoughness.baseColorTexture.index;
+        if (baseColorTexture >= 0) {
+            baseColorImage =
+                model.textures.at(static_cast<std::size_t>(baseColorTexture)).source;
+        }
+        const int normalTexture = material->normalTexture.index;
+        if (normalTexture >= 0) {
+            normalImage = model.textures.at(static_cast<std::size_t>(normalTexture)).source;
+        }
+        const int metallicRoughnessTexture =
+            material->pbrMetallicRoughness.metallicRoughnessTexture.index;
+        if (metallicRoughnessTexture >= 0) {
+            metallicRoughnessImage = model.textures.at(
+                static_cast<std::size_t>(metallicRoughnessTexture)).source;
+        }
+        const int emissiveTexture = material->emissiveTexture.index;
+        if (emissiveTexture >= 0) {
+            specularEmissiveImage =
+                model.textures.at(static_cast<std::size_t>(emissiveTexture)).source;
+        }
+        const int styleMaskTexture = material->occlusionTexture.index;
+        if (styleMaskTexture >= 0) {
+            styleMaskImage =
+                model.textures.at(static_cast<std::size_t>(styleMaskTexture)).source;
+        }
+        if (material->emissiveFactor.size() == 3) {
+            result.emissiveStrength = static_cast<float>(std::max({
+                material->emissiveFactor[0],
+                material->emissiveFactor[1],
+                material->emissiveFactor[2],
+            }));
+            if (result.emissiveStrength > 0.0F) {
+                result.materialFeatures |= MaterialFeatureEmissiveMask;
+            }
+        }
+        result.aoColor =
+            readMaterialColorExtra(material->extras, "afterglowAoColor");
+        result.lamShadowColor =
+            readMaterialColorExtra(material->extras, "afterglowLamShadowColor");
+        result.matcapColor =
+            readMaterialColorExtra(material->extras, "afterglowMatcapColor");
+        result.hairParameters = readMaterialVectorExtra(
+            material->extras,
+            "afterglowHairParameters",
+            result.hairParameters);
+        if(result.materialClass==AssetMaterialClass::Hair && result.materialProfileVersion<2)
+            result.hairParameters[3]=.1F;
+        if(material->extras.IsObject() && material->extras.Has("azureRenderMaterial")){
+            const auto& p=material->extras.Get("azureRenderMaterial");
+            const auto typedTexture=[&](const tinygltf::Value& owner,const char* field) {
+                const double index=owner.Has(field)&&owner.Get(field).IsNumber()?owner.Get(field).GetNumberAsDouble():-1;
+                if(!std::isfinite(index)||std::floor(index)!=index||index<0||index>=model.textures.size())
+                    throw std::runtime_error(std::string("Invalid character texture: ")+field+" for "+result.name);
+                const int image=model.textures[static_cast<std::size_t>(index)].source;
+                if(image<0||static_cast<std::size_t>(image)>=model.images.size())
+                    throw std::runtime_error("Character texture has no image for "+result.name);
+                return image;
+            };
+            if(p.Has("diffuseRamp")) {
+                const auto& ramp=p.Get("diffuseRamp");
+                if(!ramp.IsObject()||!ramp.Has("schemaVersion")||!ramp.Get("schemaVersion").IsNumber()
+                    ||ramp.Get("schemaVersion").GetNumberAsDouble()!=1
+                    ||!(result.materialFeatures&MaterialFeatureDiffuseRamp)
+                    ||result.materialClass==AssetMaterialClass::Face||p.Has("faceSdf"))
+                    throw std::runtime_error("Invalid diffuseRamp profile for "+result.name);
+                for(const auto& field:ramp.Get<tinygltf::Value::Object>())
+                    if(field.first!="schemaVersion"&&field.first!="texture")throw std::runtime_error("Unknown diffuseRamp field");
+                styleMaskImage=typedTexture(ramp,"texture");
+                result.textureSettings[4].mipPolicy="none";
+                result.textureSettings[4].wrapU=result.textureSettings[4].wrapV="clamp";
+                result.textureSettings[4].anisotropy=1;
+            } else if(result.materialFeatures&MaterialFeatureDiffuseRamp)
+                throw std::runtime_error("diffuse-ramp requires a profile for "+result.name);
+            if(p.Has("hair")){
+                const auto& h=p.Get("hair");
+                if(!h.IsObject() || !h.Has("power") || !h.Has("strength") || !h.Has("rampRow") || !h.Has("strandShift"))
+                    throw std::runtime_error("Incomplete hair profile: "+result.name);
+                const char* fields[]={"power","strength","rampRow","strandShift"};
+                for(unsigned i=0;i<4;++i){if(!h.Get(fields[i]).IsNumber())throw std::runtime_error("Hair profile requires numeric fields");result.hairParameters[i]=static_cast<float>(h.Get(fields[i]).GetNumberAsDouble());}
+                auto& v=result.hairParameters;
+                if(!std::isfinite(v[0]) || v[0]<1 || v[0]>2048 || !std::isfinite(v[1]) || v[1]<0 || v[1]>4 || !std::isfinite(v[2]) || v[2]<0 || v[2]>9 || std::floor(v[2])!=v[2] || !std::isfinite(v[3]) || std::abs(v[3])>1)
+                    throw std::runtime_error("Hair profile is outside supported ranges");
+                if(h.Has("cameraOffset")){
+                    const auto& offset=h.Get("cameraOffset");
+                    if(!offset.IsArray() || offset.ArrayLen()!=3)throw std::runtime_error("Hair cameraOffset requires three components");
+                    for(unsigned i=0;i<3;++i){if(!offset.Get(i).IsNumber())throw std::runtime_error("Hair cameraOffset must be numeric");result.hairViewParameters[i]=static_cast<float>(offset.Get(i).GetNumberAsDouble());}
+                }
+                if(h.Has("upperLimit")){if(!h.Get("upperLimit").IsNumber())throw std::runtime_error("Hair upperLimit must be numeric");result.hairViewParameters[3]=static_cast<float>(h.Get("upperLimit").GetNumberAsDouble());}
+                for(float value:result.hairViewParameters)if(!std::isfinite(value)||std::abs(value)>16)throw std::runtime_error("Hair view profile is outside supported ranges");
+                if(result.hairViewParameters[3]<=0)throw std::runtime_error("Hair highlight limit must be positive");
+                if(h.Has("dataTexture")) {
+                    if(result.materialClass!=AssetMaterialClass::Hair||!(result.materialFeatures&MaterialFeatureHairAnisotropy))
+                        throw std::runtime_error("hair.dataTexture requires hair anisotropy");
+                    hairDataImage=typedTexture(h,"dataTexture");
+                    if(h.Has("dataNormalY")) {
+                        if(!h.Get("dataNormalY").IsString())throw std::runtime_error("hair.dataNormalY requires a direction");
+                        const auto direction=h.Get("dataNormalY").Get<std::string>();
+                        if(direction!="positive"&&direction!="negative")throw std::runtime_error("Invalid hair.dataNormalY direction");
+                        positiveHairNormalY=direction=="positive";
+                    }
+                } else if(h.Has("dataNormalY"))throw std::runtime_error("hair.dataNormalY requires dataTexture");
+            }
+        }
+        if (
+            material->extras.IsObject()
+            && material->extras.Has("afterglowMatcapTexture")) {
+            const tinygltf::Value& matcapTexture =
+                material->extras.Get("afterglowMatcapTexture");
+            if (matcapTexture.IsNumber()) {
+                const int textureIndex =
+                    static_cast<int>(matcapTexture.GetNumberAsDouble());
+                if (
+                    textureIndex >= 0
+                    && static_cast<std::size_t>(textureIndex)
+                        < model.textures.size()) {
+                    matcapImage =
+                        model.textures[static_cast<std::size_t>(textureIndex)].source;
+                }
+            }
+        }
+        if (
+            material->extras.IsObject()
+            && material->extras.Has("afterglowHairDataTexture")) {
+            const tinygltf::Value& hairDataTexture =
+                material->extras.Get("afterglowHairDataTexture");
+            if (hairDataTexture.IsNumber()) {
+                const int textureIndex =
+                    static_cast<int>(hairDataTexture.GetNumberAsDouble());
+                if (
+                    textureIndex >= 0
+                    && static_cast<std::size_t>(textureIndex)
+                        < model.textures.size()) {
+                    hairDataImage =
+                        model.textures[static_cast<std::size_t>(textureIndex)].source;
+                }
+            }
+        }
+        if (material->extras.IsObject()
+            && material->extras.Has("azureRenderMaterial")) {
+            const tinygltf::Value& profile =
+                material->extras.Get("azureRenderMaterial");
+            if (profile.IsObject() && profile.Has("hair") && profile.Get("hair").Has("rampTexture")) {
+                const auto& ramp=profile.Get("hair").Get("rampTexture");
+                const double index=ramp.IsNumber()?ramp.GetNumberAsDouble():-1;
+                if (!std::isfinite(index) || std::floor(index)!=index || index<0 || index>=model.textures.size()
+                    || result.materialClass!=AssetMaterialClass::Hair || !(result.materialFeatures&MaterialFeatureHairRamp)) {
+                    throw std::runtime_error("Invalid hair.rampTexture for "+result.name);
+                }
+                // Hair ramp and matcap are exclusive material-class uses of this slot.
+                matcapImage=model.textures[static_cast<std::size_t>(index)].source;
+            }
+            if (profile.IsObject() && profile.Has("faceSdf")) {
+                const tinygltf::Value& faceSdf = profile.Get("faceSdf");
+                if (!faceSdf.IsObject()) {
+                    throw std::runtime_error(
+                        "azureRenderMaterial.faceSdf must be an object for "
+                        + result.name);
+                }
+                if ((result.materialFeatures
+                     & MaterialFeatureFaceSdfEligible) == 0) {
+                    throw std::runtime_error(
+                        "faceSdf requires the face-sdf-eligible feature for "
+                        + result.name);
+                }
+                const auto requireNumber = [&](const char* key) -> int {
+                    if (!faceSdf.Has(key) || !faceSdf.Get(key).IsNumber()) {
+                        throw std::runtime_error(
+                            std::string("faceSdf.") + key
+                            + " must be a number for " + result.name);
+                    }
+                    const double value =
+                        faceSdf.Get(key).GetNumberAsDouble();
+                    if (!std::isfinite(value) || std::floor(value) != value
+                        || value < static_cast<double>(
+                            std::numeric_limits<int>::min())
+                        || value > static_cast<double>(
+                            std::numeric_limits<int>::max())) {
+                        throw std::runtime_error(
+                            std::string("faceSdf.") + key
+                            + " must be an integer for " + result.name);
+                    }
+                    return static_cast<int>(value);
+                };
+                const auto requireString = [&](const char* key) -> std::string {
+                    if (!faceSdf.Has(key) || !faceSdf.Get(key).IsString()) {
+                        throw std::runtime_error(
+                            std::string("faceSdf.") + key
+                            + " must be a string for " + result.name);
+                    }
+                    return faceSdf.Get(key).Get<std::string>();
+                };
+                const int sdfVersion=requireNumber("schemaVersion");
+                if (sdfVersion!=1 && sdfVersion!=2) {
+                    throw std::runtime_error(
+                        "Unsupported faceSdf schemaVersion for "
+                        + result.name);
+                }
+                const int textureIndex = requireNumber("texture");
+                if (textureIndex < 0
+                    || static_cast<std::size_t>(textureIndex)
+                        >= model.textures.size()) {
+                    throw std::runtime_error(
+                        "faceSdf.texture is out of range for " + result.name);
+                }
+                faceSdfImage = model.textures[
+                    static_cast<std::size_t>(textureIndex)].source;
+                if (faceSdfImage < 0
+                    || static_cast<std::size_t>(faceSdfImage)
+                        >= model.images.size()) {
+                    throw std::runtime_error(
+                        "faceSdf.texture has no valid image for "
+                        + result.name);
+                }
+                if (requireNumber("texCoord") != 0) {
+                    throw std::runtime_error(
+                        "Face SDF supports only TEXCOORD_0 for "
+                        + result.name);
+                }
+                result.faceSdf.schemaVersion=static_cast<std::uint32_t>(sdfVersion);
+                if(sdfVersion==2) {
+                    if(result.materialClass!=AssetMaterialClass::Face || result.materialProfileVersion!=2)
+                        throw std::runtime_error("Face SDF v2 requires a version 2 face material for "+result.name);
+                    const auto imageFor=[&](const char* key){const int index=requireNumber(key);
+                        if(index<0 || static_cast<std::size_t>(index)>=model.textures.size())
+                            throw std::runtime_error(std::string("Invalid faceSdf.")+key+" for "+result.name);
+                        const int image=model.textures[static_cast<std::size_t>(index)].source;
+                        if(image<0 || static_cast<std::size_t>(image)>=model.images.size())
+                            throw std::runtime_error(std::string("Missing faceSdf.")+key+" image for "+result.name);
+                        return image;};
+                    styleMaskImage=imageFor("maskTexture");matcapImage=imageFor("rampTexture");
+                    if(!faceSdf.Has("headBasis")||!faceSdf.Get("headBasis").IsArray()||faceSdf.Get("headBasis").ArrayLen()!=9)
+                        throw std::runtime_error("faceSdf.headBasis requires nine numbers for "+result.name);
+                    for(std::size_t i=0;i<9;++i){const auto& v=faceSdf.Get("headBasis").Get(static_cast<int>(i));
+                        if(!v.IsNumber()||!std::isfinite(v.GetNumberAsDouble())||std::abs(v.GetNumberAsDouble())>1.0001)
+                            throw std::runtime_error("Invalid faceSdf.headBasis value for "+result.name);
+                        result.faceSdf.headBasis[i]=static_cast<float>(v.GetNumberAsDouble());}
+                    for(unsigned a=0;a<3;++a)for(unsigned b=0;b<3;++b){float d=0;
+                        for(unsigned c=0;c<3;++c)d+=result.faceSdf.headBasis[a*3+c]*result.faceSdf.headBasis[b*3+c];
+                        if(std::abs(d-(a==b?1.F:0.F))>1e-4F)throw std::runtime_error("faceSdf.headBasis must be orthonormal for "+result.name);}
+                    result.hairParameters={0,0,0,0};
+                    if(faceSdf.Has("lightAdjustment")) {
+                        const auto& adjustment=faceSdf.Get("lightAdjustment");
+                        if(!adjustment.IsArray()||adjustment.ArrayLen()!=3)throw std::runtime_error("faceSdf.lightAdjustment requires three numbers");
+                        for(int i=0;i<3;++i){const auto& v=adjustment.Get(i);
+                            if(!v.IsNumber()||!std::isfinite(v.GetNumberAsDouble())||v.GetNumberAsDouble()<(i==0?0.:-1.)||v.GetNumberAsDouble()>1.)
+                                throw std::runtime_error("Invalid faceSdf.lightAdjustment value for "+result.name);
+                            result.hairParameters[static_cast<std::size_t>(i)]=static_cast<float>(v.GetNumberAsDouble());}
+                    }
+                    result.materialFeatures|=MaterialFeatureDualFaceSdf;
+                    result.textureSettings[5].usage="linear";result.textureSettings[5].colorSpace="linear";
+                    for(const unsigned slot:{4U,5U,7U}) {
+                        result.textureSettings[slot].wrapU="clamp";result.textureSettings[slot].wrapV="clamp";
+                        result.textureSettings[slot].mipPolicy="none";
+                    }
+                } else {
+                const std::string channel = requireString("channel");
+                const auto parseChannel = [&](const std::string& value,
+                                              const char* key) {
+                    if (value == "r") return AssetFaceSdfChannel::Red;
+                    if (value == "g") return AssetFaceSdfChannel::Green;
+                    if (value == "b") return AssetFaceSdfChannel::Blue;
+                    if (value == "a") return AssetFaceSdfChannel::Alpha;
+                    throw std::runtime_error(
+                        std::string("Unknown faceSdf.") + key
+                        + " for " + result.name);
+                };
+                result.faceSdf.channel = parseChannel(channel, "channel");
+                result.faceSdf.maskChannel = parseChannel(
+                    requireString("maskChannel"),
+                    "maskChannel");
+                if (!faceSdf.Has("shadowOnLowValues")
+                    || !faceSdf.Get("shadowOnLowValues").IsBool()) {
+                    throw std::runtime_error(
+                        "faceSdf.shadowOnLowValues must be boolean for "
+                        + result.name);
+                }
+                result.faceSdf.shadowOnLowValues =
+                    faceSdf.Get("shadowOnLowValues").Get<bool>();
+                const std::string horizontalAxis =
+                    requireString("horizontalAxis");
+                if (horizontalAxis == "left-to-right") {
+                    result.faceSdf.mirrorHorizontal = false;
+                } else if (horizontalAxis == "right-to-left") {
+                    result.faceSdf.mirrorHorizontal = true;
+                } else {
+                    throw std::runtime_error(
+                        "Unknown faceSdf.horizontalAxis for " + result.name);
+                }
+                }
+                result.faceSdf.headNodeName = requireString("headNode");
+                std::optional<std::uint32_t> headNode;
+                for (std::size_t nodeIndex = 0;
+                     nodeIndex < model.nodes.size();
+                     ++nodeIndex) {
+                    if (model.nodes[nodeIndex].name
+                        != result.faceSdf.headNodeName) {
+                        continue;
+                    }
+                    if (headNode.has_value()) {
+                        throw std::runtime_error(
+                            "faceSdf.headNode is not unique for "
+                            + result.name);
+                    }
+                    headNode = static_cast<std::uint32_t>(nodeIndex);
+                }
+                if (!headNode.has_value()) {
+                    throw std::runtime_error(
+                        "faceSdf.headNode does not resolve for "
+                        + result.name);
+                }
+                result.faceSdf.headNode = *headNode;
+                result.faceSdf.present = true;
+            }
+        }
+        result.alphaCutoff = static_cast<float>(material->alphaCutoff);
+        result.doubleSided = material->doubleSided;
+        if (material->alphaMode == "MASK") {
+            result.alphaMode = AssetAlphaMode::Mask;
+        } else if (material->alphaMode == "BLEND") {
+            result.alphaMode = AssetAlphaMode::Blend;
+        }
+        loadUnlitSurface(*material,model,result,baseColorImage,styleMaskImage,unlitCoverageImage,specularEmissiveImage);
+        loadMaterialComposite(*material,result);
+        const int distortionImage=loadSceneRefraction(*material,model,result);
+        if(distortionImage>=0)styleMaskImage=distortionImage;
+        projectedHairParameterImage=loadProjectedHairRamp(*material,model,result,matcapImage);
+        loadEyeSurface(*material,model,result,styleMaskImage,matcapImage);
+        loadOutlineSurface(*material,model,result,imageSettings);
+        matcapImage=loadSpecularRamp(*material,model,result,matcapImage);
+    }
+
+    if (baseColorImage >= 0) {
+        result.baseColorPixels = decodeImageRgba(
+            model,
+            baseColorImage,
+            {1.0, 1.0, 1.0, 1.0},
+            result.baseColorWidth,
+            result.baseColorHeight,true,authored,&result.authoredMipLevels[0]);
+    } else {
+        result.baseColorWidth = 2;
+        result.baseColorHeight = 2;
+        result.baseColorPixels.resize(16);
+        for (std::size_t pixel = 0; pixel < 4; ++pixel) {
+            for (std::size_t channel = 0; channel < 4; ++channel) {
+                const double value = std::clamp(factor[channel], 0.0, 1.0);
+                const double encoded = channel == 3 ? value : (value <= 0.0031308
+                    ? 12.92 * value : 1.055 * std::pow(value, 1.0 / 2.4) - 0.055);
+                result.baseColorPixels[pixel * 4 + channel] =
+                    static_cast<std::uint8_t>(
+                        std::round(std::clamp(encoded, 0.0, 1.0) * 255.0));
+            }
+        }
+    }
+
+    if (baseColorImage >= 0) {
+        for (std::size_t i = 0; i < result.baseColorPixels.size(); ++i) {
+            if (factor[i % 4] == 1.0) continue;
+            const double value = result.baseColorPixels[i] / 255.0;
+            const double linear = i % 4 == 3 ? value : (value <= .04045 ? value / 12.92 : std::pow((value + .055) / 1.055, 2.4));
+            const double scaled = linear * std::clamp(factor[i % 4], 0.0, 1.0);
+            const double encoded = i % 4 == 3 ? scaled : (scaled <= .0031308 ? scaled * 12.92 : 1.055 * std::pow(scaled, 1.0 / 2.4) - .055);
+            result.baseColorPixels[i] = static_cast<std::uint8_t>(std::round(std::clamp(encoded, 0.0, 1.0) * 255.0));
+        }
+    }
+    if (normalImage >= 0) {
+        constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
+        result.normalPixels = decodeImageRgba(
+            model,
+            normalImage,
+            kNoFactor,
+            result.normalWidth,
+            result.normalHeight,false,authored,&result.authoredMipLevels[1],true);
+    } else {
+        result.normalWidth = 2;
+        result.normalHeight = 2;
+        result.normalPixels = {
+            128, 128, 255, 255, 128, 128, 255, 255,
+            128, 128, 255, 255, 128, 128, 255, 255,
+        };
+    }
+    if (metallicRoughnessImage >= 0) {
+        constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
+        result.metallicRoughnessPixels = decodeImageRgba(
+            model,
+            metallicRoughnessImage,
+            kNoFactor,
+            result.metallicRoughnessWidth,
+            result.metallicRoughnessHeight,false,authored,&result.authoredMipLevels[2]);
+    } else {
+        result.metallicRoughnessWidth = 2;
+        result.metallicRoughnessHeight = 2;
+        result.metallicRoughnessPixels = {
+            255, 191, 0, 255, 255, 191, 0, 255,
+            255, 191, 0, 255, 255, 191, 0, 255,
+        };
+    }
+    const double roughnessFactor = material ? material->pbrMetallicRoughness.roughnessFactor : 1.0;
+    const double metallicFactor = material ? material->pbrMetallicRoughness.metallicFactor : 1.0;
+    for (std::size_t i = 0; i < result.metallicRoughnessPixels.size(); i += 4) {
+        result.metallicRoughnessPixels[i+1] = static_cast<std::uint8_t>(std::round((metallicRoughnessImage >= 0 ? result.metallicRoughnessPixels[i+1] : 255) * std::clamp(roughnessFactor, 0.0, 1.0)));
+        result.metallicRoughnessPixels[i+2] = static_cast<std::uint8_t>(std::round((metallicRoughnessImage >= 0 ? result.metallicRoughnessPixels[i+2] : 255) * std::clamp(metallicFactor, 0.0, 1.0)));
+    }
+    if (material && normalImage >= 0 && material->normalTexture.scale != 1.0) {
+        for (std::size_t i=0;i<result.normalPixels.size();i+=4) {
+            double x=(result.normalPixels[i]/255.0*2-1)*material->normalTexture.scale;
+            double y=(result.normalPixels[i+1]/255.0*2-1)*material->normalTexture.scale;
+            double z=result.normalPixels[i+2]/255.0*2-1;
+            const double length=std::max(std::sqrt(x*x+y*y+z*z),1e-8);
+            result.normalPixels[i]=static_cast<std::uint8_t>(std::round((x/length*.5+.5)*255));
+            result.normalPixels[i+1]=static_cast<std::uint8_t>(std::round((y/length*.5+.5)*255));
+            result.normalPixels[i+2]=static_cast<std::uint8_t>(std::round((z/length*.5+.5)*255));
+        }
+    }
+    if (specularEmissiveImage >= 0) {
+        constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
+        result.specularEmissivePixels = decodeImageRgba(
+            model,
+            specularEmissiveImage,
+            kNoFactor,
+            result.specularEmissiveWidth,
+            result.specularEmissiveHeight,true,authored,&result.authoredMipLevels[3]);
+    } else {
+        result.specularEmissiveWidth = 2;
+        result.specularEmissiveHeight = 2;
+        result.specularEmissivePixels = {
+            0, 0, 0, 255, 0, 0, 0, 255,
+            0, 0, 0, 255, 0, 0, 0, 255,
+        };
+    }
+    if(material&&result.emissiveStrength>0){
+        for(std::size_t i=0;i<result.specularEmissivePixels.size();++i){const unsigned channel=static_cast<unsigned>(i%4);if(channel==3)continue;
+            double value=specularEmissiveImage>=0?result.specularEmissivePixels[i]/255.:1.;value=value<=.04045?value/12.92:std::pow((value+.055)/1.055,2.4);
+            value*=material->emissiveFactor[channel]/result.emissiveStrength;value=value<=.0031308?value*12.92:1.055*std::pow(value,1/2.4)-.055;
+            result.specularEmissivePixels[i]=static_cast<std::uint8_t>(std::round(std::clamp(value,0.,1.)*255));}
+        const auto strength=material->extensions.find("KHR_materials_emissive_strength");if(strength!=material->extensions.end()&&strength->second.Has("emissiveStrength"))result.emissiveStrength*=static_cast<float>(strength->second.Get("emissiveStrength").GetNumberAsDouble());
+    }
+    if (styleMaskImage >= 0) {
+        constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
+        result.styleMaskPixels = decodeImageRgba(
+            model,
+            styleMaskImage,
+            kNoFactor,
+            result.styleMaskWidth,
+            result.styleMaskHeight,false,authored,&result.authoredMipLevels[4]);
+        if((result.materialFeatures&MaterialFeatureDiffuseRamp)
+            &&(result.styleMaskWidth<2||result.styleMaskHeight!=1))
+            throw std::runtime_error("diffuseRamp requires a horizontal single-row image");
+    } else {
+        result.styleMaskWidth = 2;
+        result.styleMaskHeight = 2;
+        result.styleMaskPixels = {
+            0, 0, 0, 255, 0, 0, 0, 255,
+            0, 0, 0, 255, 0, 0, 0, 255,
+        };
+    }
+    if (matcapImage >= 0) {
+        constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
+        result.matcapPixels = decodeImageRgba(
+            model,
+            matcapImage,
+            kNoFactor,
+            result.matcapWidth,
+            result.matcapHeight,result.faceSdf.schemaVersion!=2&&!result.projectedHairRamp.present&&!result.specularRamp.present,authored,&result.authoredMipLevels[5]);
+        if(result.projectedHairRamp.present&&(result.matcapWidth<2||result.matcapHeight<2))
+            throw std::invalid_argument("projectedRamp requires a two-dimensional ramp image");
+        if(result.specularRamp.present&&(result.matcapWidth<2||result.matcapHeight<2))
+            throw std::invalid_argument("specularRamp requires a two-dimensional ramp image");
+    } else {
+        result.matcapWidth = 2;
+        result.matcapHeight = 2;
+        result.matcapPixels = {
+            0, 0, 0, 255, 0, 0, 0, 255,
+            0, 0, 0, 255, 0, 0, 0, 255,
+        };
+    }
+    if(unlitCoverageImage>=0) {
+        result.shadowColorLutPixels=decodeImageRgba(model,unlitCoverageImage,{1,1,1,1},
+            result.shadowColorLutWidth,result.shadowColorLutHeight,true,authored,&result.authoredMipLevels[8]);
+    }
+    if (hairDataImage >= 0) {
+        constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
+        result.hairDataPixels = decodeImageRgba(
+            model,
+            hairDataImage,
+            kNoFactor,
+            result.hairDataWidth,
+            result.hairDataHeight,false,authored,&result.authoredMipLevels[6]);
+        if(positiveHairNormalY)for(std::size_t i=0;i<result.hairDataPixels.size();i+=4) {
+            result.hairDataPixels[i+1]=static_cast<std::uint8_t>(255-result.hairDataPixels[i+1]);
+            result.hairDataPixels[i+3]=static_cast<std::uint8_t>(255-result.hairDataPixels[i+3]);
+        }
+    } else {
+        result.hairDataWidth = 2;
+        result.hairDataHeight = 2;
+        result.hairDataPixels = {
+            128, 128, 128, 128, 128, 128, 128, 128,
+            128, 128, 128, 128, 128, 128, 128, 128,
+        };
+    }
+    if (faceSdfImage >= 0) {
+        constexpr std::array<double, 4> kNoFactor{1.0, 1.0, 1.0, 1.0};
+        result.faceSdf.pixels = decodeImageRgba(
+            model,
+            faceSdfImage,
+            kNoFactor,
+            result.faceSdf.width,
+            result.faceSdf.height,false,authored,&result.authoredMipLevels[7]);
+        const std::size_t distanceChannel =
+            static_cast<std::size_t>(result.faceSdf.channel);
+        const std::size_t maskChannel =
+            static_cast<std::size_t>(result.faceSdf.maskChannel);
+        for (std::size_t pixel = 0; result.faceSdf.schemaVersion==1 &&
+             pixel < result.faceSdf.pixels.size();
+             pixel += 4) {
+            std::uint8_t distance =
+                result.faceSdf.pixels[pixel + distanceChannel];
+            if (!result.faceSdf.shadowOnLowValues) {
+                distance = static_cast<std::uint8_t>(255U - distance);
+            }
+            if (result.faceSdf.mirrorHorizontal) {
+                distance = static_cast<std::uint8_t>(255U - distance);
+            }
+            const std::uint8_t mask =
+                result.faceSdf.pixels[pixel + maskChannel];
+            result.faceSdf.pixels[pixel] = distance;
+            result.faceSdf.pixels[pixel + 1] = distance;
+            result.faceSdf.pixels[pixel + 2] = distance;
+            result.faceSdf.pixels[pixel + 3] = mask;
+        }
+    }
+    if(projectedHairParameterImage>=0) {
+        constexpr std::array<double,4> noFactor{1,1,1,1};auto& hair=result.projectedHairRamp;
+        hair.parameterPixels=decodeImageRgba(model,projectedHairParameterImage,noFactor,
+            hair.parameterWidth,hair.parameterHeight,false,authored,&result.authoredMipLevels[7]);
+        if(hair.line.present){
+            const auto& profile=material->extras.Get("azureRenderMaterial").Get("hair").Get("projectedRamp").Get("line");
+            const auto texture=profile.Get("texture").Get<int>();auto& line=hair.line;
+            projectedHairLineImage=model.textures.at(texture).source;
+            line.pixels=decodeImageRgba(model,projectedHairLineImage,noFactor,
+                line.width,line.height,false,authored,&result.authoredMipLevels[8]);
+        }
+    }
+    if(material && material->extras.Has("azureRenderMaterial")) {
+        const auto& profile=material->extras.Get("azureRenderMaterial");
+        if(profile.Has("shadowColorLut")) {
+            const auto& lut=profile.Get("shadowColorLut");
+            if(!lut.IsObject())throw std::invalid_argument("shadowColorLut requires an object");
+            for(const auto& field:lut.Get<tinygltf::Value::Object>())
+                if(field.first!="schemaVersion"&&field.first!="texture"&&field.first!="flipV")
+                    throw std::invalid_argument("Unknown shadowColorLut field: "+field.first);
+            if(!lut.Has("schemaVersion")||!lut.Get("schemaVersion").IsNumber()||lut.Get("schemaVersion").GetNumberAsDouble()!=1)
+                throw std::invalid_argument("Unsupported shadowColorLut schemaVersion");
+            const double index=lut.Has("texture")&&lut.Get("texture").IsNumber()?lut.Get("texture").GetNumberAsDouble():-1;
+            if(!std::isfinite(index)||std::floor(index)!=index||index<0||index>=model.textures.size())
+                throw std::invalid_argument("Invalid shadowColorLut.texture");
+            if(lut.Has("flipV")&&!lut.Get("flipV").IsBool())throw std::invalid_argument("shadowColorLut.flipV requires a boolean");
+            shadowColorLutImage=model.textures.at(static_cast<std::size_t>(index)).source;
+            result.shadowColorLutPixels=decodeImageRgba(model,shadowColorLutImage,
+                {1,1,1,1},result.shadowColorLutWidth,result.shadowColorLutHeight,true,authored,nullptr);
+            azurerender::validateShadowColorLutDimensions(result.shadowColorLutWidth,result.shadowColorLutHeight);
+            if(result.shadowColorLutPixels.size()!=static_cast<std::size_t>(result.shadowColorLutWidth)*result.shadowColorLutHeight*4)
+                throw std::invalid_argument("shadowColorLut requires exactly one image level");
+            if(lut.Has("flipV")&&lut.Get("flipV").Get<bool>()) {
+                const auto stride=static_cast<std::size_t>(result.shadowColorLutWidth)*4;
+                for(std::uint32_t y=0;y<result.shadowColorLutHeight/2;++y)
+                    std::swap_ranges(result.shadowColorLutPixels.begin()+y*stride,result.shadowColorLutPixels.begin()+(y+1)*stride,
+                        result.shadowColorLutPixels.begin()+(result.shadowColorLutHeight-1-y)*stride);
+            }
+            result.materialFeatures|=MaterialFeatureShadowColorLut;
+        }
+    }
+    if(material && !material->extras_json_string.empty()) {
+        const auto authoredProfile=nlohmann::json::parse(material->extras_json_string);
+        if(authoredProfile.contains("azureRenderMaterial")&&authoredProfile["azureRenderMaterial"].is_object()
+            &&authoredProfile["azureRenderMaterial"].contains("specularInput")) {
+            const auto& parent=authoredProfile["azureRenderMaterial"];
+            const auto& input=parent["specularInput"];
+            if(!input.is_object()||input.size()!=3||!input.contains("schemaVersion")
+                ||!input.contains("source")||!input.contains("scale")
+                ||!input["schemaVersion"].is_number_integer()||input["schemaVersion"]!=1
+                ||!input["source"].is_string()
+                ||(input["source"]!="emissive-alpha"&&input["source"]!="metallic-roughness-alpha")
+                ||!input["scale"].is_number()||!std::isfinite(input["scale"].get<double>())
+                ||input["scale"].get<double>()<0||input["scale"].get<double>()>1)
+                throw std::invalid_argument("Invalid specularInput contract");
+            if(!parent.contains("schemaVersion")||!parent["schemaVersion"].is_number_integer()
+                ||parent["schemaVersion"]!=2
+                ||(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Fabric
+                    &&result.materialClass!=AssetMaterialClass::Metal)
+                ||result.projectedHairRamp.present||result.eyeSurface.present||result.faceSdf.present
+                ||(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite))
+                ||result.transmission!=0||result.thickness!=0)
+                throw std::invalid_argument("Incompatible specularInput material owners");
+            const bool orm=input["source"]=="metallic-roughness-alpha";
+            if(orm&&metallicRoughnessImage<0)
+                throw std::invalid_argument("specularInput requires a metallic roughness texture");
+            result.specularInput={true,orm?AssetMaterial::SpecularInput::Source::MetallicRoughnessAlpha
+                :AssetMaterial::SpecularInput::Source::EmissiveAlpha,input["scale"].get<float>()};
+        }
+        if(authoredProfile.contains("azureRenderMaterial")&&authoredProfile["azureRenderMaterial"].is_object()
+            &&authoredProfile["azureRenderMaterial"].contains("nprDiffuse")) {
+            const auto& npr=authoredProfile["azureRenderMaterial"]["nprDiffuse"];
+            const std::set<std::string> fields{"schemaVersion","shadowScale","lightingInputs","shadowMask","baseAo"};
+            if(!npr.is_object())throw std::invalid_argument("nprDiffuse requires an object");
+            for(const auto& field:fields)if(!npr.contains(field))throw std::invalid_argument("nprDiffuse requires all versioned fields");
+            for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
+                &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
+                &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
+                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo")throw std::invalid_argument("Unknown nprDiffuse field");
+            if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
+                ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
+                ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
+                ||npr["lightingInputs"]!="host-scene-radiance"
+                ||(npr["shadowMask"]!="none"&&npr["shadowMask"]!="style-mask-gb"&&npr["shadowMask"]!="one")
+                ||(npr["baseAo"]!="one"&&npr["baseAo"]!="albedo-alpha"&&npr["baseAo"]!="metallic-roughness-red"))
+                throw std::invalid_argument("Invalid nprDiffuse input contract");
+            if(npr.contains("shadowAlbedo")&&(!npr.at("shadowAlbedo").is_string()
+                ||(npr.at("shadowAlbedo")!="lookup"&&npr.at("shadowAlbedo")!="base-color")))
+                throw std::invalid_argument("Invalid nprDiffuse.shadowAlbedo");
+            const bool baseShadow=npr.contains("shadowAlbedo")&&npr.at("shadowAlbedo")=="base-color";
+            if(npr.contains("indirectNormal")&&(!npr["indirectNormal"].is_string()
+                ||(npr["indirectNormal"]!="surface"&&npr["indirectNormal"]!="world-horizontal"
+                    &&npr["indirectNormal"]!="face-frame-radial-horizontal")))
+                throw std::invalid_argument("Invalid nprDiffuse indirect normal mode");
+            const auto indirectNormal=npr.value("indirectNormal",std::string("surface"));
+            if(indirectNormal=="face-frame-radial-horizontal"&&(result.materialClass!=AssetMaterialClass::Face
+                ||!result.faceSdf.present||result.faceSdf.schemaVersion!=2))
+                throw std::invalid_argument("Face-frame radial indirect normal requires a version 2 face SDF material");
+            const auto& parentVersion=authoredProfile["azureRenderMaterial"]["schemaVersion"];
+            if(!parentVersion.is_number_integer()||parentVersion!=2
+                ||(baseShadow?bool(result.materialFeatures&MaterialFeatureShadowColorLut):!(result.materialFeatures&MaterialFeatureShadowColorLut))
+                ||result.projectedHairRamp.present||result.eyeSurface.present
+                ||(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureSceneRefraction|MaterialFeatureMultiplyComposite))
+                ||result.transmission!=0||result.thickness!=0
+                ||result.materialClass==AssetMaterialClass::Hair||result.materialClass==AssetMaterialClass::Eye
+                ||result.materialClass==AssetMaterialClass::Overlay||result.materialClass==AssetMaterialClass::Emissive
+                ||result.materialClass==AssetMaterialClass::Showcase
+                ||((result.materialFeatures&MaterialFeatureDiffuseRamp)&&npr["shadowMask"]=="style-mask-gb"))
+                throw std::invalid_argument("Incompatible nprDiffuse material owners");
+            result.nprDiffuse={true,npr["shadowScale"].get<float>(),
+                npr["shadowMask"]=="one"?AssetMaterial::NprDiffuse::ShadowMask::One
+                    :npr["shadowMask"]=="style-mask-gb"?AssetMaterial::NprDiffuse::ShadowMask::StyleMaskGb
+                    :AssetMaterial::NprDiffuse::ShadowMask::None,
+                npr["baseAo"]=="metallic-roughness-red"?AssetMaterial::NprDiffuse::BaseAo::MetallicRoughnessRed
+                    :npr["baseAo"]=="albedo-alpha"?AssetMaterial::NprDiffuse::BaseAo::AlbedoAlpha:AssetMaterial::NprDiffuse::BaseAo::One,
+                indirectNormal=="face-frame-radial-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal
+                    :indirectNormal=="world-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal
+                    :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
+            if(npr.contains("characterVisibility")) {
+                result.nprDiffuse.characterVisibility=parseCharacterVisibility(
+                    npr.at("characterVisibility"),"nprDiffuse.characterVisibility");
+            }
+            if(npr.contains("localDiffuseFloorScale")) {
+                const auto& value=npr.at("localDiffuseFloorScale");
+                if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>4)
+                    throw std::invalid_argument("Invalid nprDiffuse.localDiffuseFloorScale");
+                result.nprDiffuse.localDiffuseFloorScale=value.get<float>();
+            }
+            if(npr.contains("rimOrigin")) {
+                const auto& raw=npr.at("rimOrigin");
+                if(!raw.is_object()||raw.size()!=2||!raw.contains("schemaVersion")
+                    ||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+                    ||!raw.contains("node")||!raw.at("node").is_string()||raw.at("node").get<std::string>().empty())
+                    throw std::invalid_argument("Invalid nprDiffuse.rimOrigin contract");
+                if(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Skin
+                    &&result.materialClass!=AssetMaterialClass::Fabric&&result.materialClass!=AssetMaterialClass::Metal)
+                    throw std::invalid_argument("nprDiffuse.rimOrigin requires a generic, skin, fabric or metal surface");
+                auto& origin=result.nprDiffuse.rimOrigin;
+                origin.nodeName=raw.at("node").get<std::string>();
+                unsigned matches=0;
+                for(std::size_t index=0;index<model.nodes.size();++index)
+                    if(model.nodes[index].name==origin.nodeName){origin.node=static_cast<std::uint32_t>(index);++matches;}
+                if(matches!=1)throw std::invalid_argument("nprDiffuse.rimOrigin requires one unique named node");
+                origin.present=true;
+            }
+            if(npr.contains("lighting")) {
+                const auto& raw=npr.at("lighting");
+                if(!raw.is_object()||raw.size()!=3||!raw.contains("schemaVersion")
+                    ||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
+                    ||!raw.contains("ambientColor")||!raw.contains("mainColor"))
+                    throw std::invalid_argument("Invalid nprDiffuse.lighting fields or version");
+                auto& lighting=result.nprDiffuse.lighting;
+                for(const auto* field:{"ambientColor","mainColor"}) {
+                    const auto& value=raw.at(field);
+                    if(!value.is_array()||value.size()!=3)throw std::invalid_argument("Invalid nprDiffuse.lighting color");
+                    auto& color=std::string(field)=="ambientColor"?lighting.ambientColor:lighting.mainColor;
+                    for(unsigned i=0;i<3;++i) {
+                        if(!value[i].is_number()||!std::isfinite(value[i].get<double>())||value[i].get<double>()<0||value[i].get<double>()>64)
+                            throw std::invalid_argument("Invalid nprDiffuse.lighting color component");
+                        color[i]=value[i].get<float>();
+                    }
+                }
+                lighting.present=true;
+            }
+            if(npr.contains("rimResponse")) {
+                const auto& mode=npr.at("rimResponse");
+                if(!mode.is_string()||(mode!="screen-depth"&&mode!="view-facing"))
+                    throw std::invalid_argument("Invalid nprDiffuse.rimResponse");
+                result.nprDiffuse.rimResponse=mode=="view-facing"?AssetMaterial::NprDiffuse::RimResponse::ViewFacing
+                    :AssetMaterial::NprDiffuse::RimResponse::ScreenDepth;
+            }
+            if(npr.contains("viewTint")) {
+                const auto& raw=npr.at("viewTint");
+                if(!raw.is_object()||raw.size()!=3||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()
+                    ||raw.at("schemaVersion")!=1||!raw.contains("scale")||!raw.at("scale").is_number()
+                    ||!std::isfinite(raw.at("scale").get<double>())||raw.at("scale").get<double>()<0||raw.at("scale").get<double>()>64
+                    ||!raw.contains("color")||!raw.at("color").is_array()||raw.at("color").size()!=3)
+                    throw std::invalid_argument("Invalid nprDiffuse.viewTint fields or scale");
+                auto& tint=result.nprDiffuse.viewTint;tint.scale=raw.at("scale").get<float>();
+                for(unsigned i=0;i<3;++i) {
+                    const auto& value=raw.at("color").at(i);
+                    if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>64)
+                        throw std::invalid_argument("Invalid nprDiffuse.viewTint color");
+                    tint.color[i]=value.get<float>();
+                }
+                tint.present=true;
+            }
+            if(npr.contains("mainRamp")) {
+                const auto& raw=npr.at("mainRamp");
+                if(!raw.is_object()||raw.size()!=2||!raw.contains("schemaVersion")||!raw.at("schemaVersion").is_number_integer()
+                    ||raw.at("schemaVersion")!=1||!raw.contains("bias")||!raw.at("bias").is_number()
+                    ||!std::isfinite(raw.at("bias").get<double>())||raw.at("bias").get<double>()<-1||raw.at("bias").get<double>()>1)
+                    throw std::invalid_argument("Invalid nprDiffuse.mainRamp fields or bias");
+                if((result.materialFeatures&MaterialFeatureDiffuseRamp)==0)
+                    throw std::invalid_argument("nprDiffuse.mainRamp requires diffuseRamp");
+                result.nprDiffuse.mainRamp={true,raw.at("bias").get<float>()};
+            }
+            result.materialFeatures|=MaterialFeatureNprDiffuse;
+        }
+    }
+    const int images[]={baseColorImage,normalImage,metallicRoughnessImage,specularEmissiveImage,
+        styleMaskImage,matcapImage,hairDataImage,
+        projectedHairParameterImage>=0?projectedHairParameterImage:faceSdfImage,
+        unlitCoverageImage>=0?unlitCoverageImage:projectedHairLineImage>=0?projectedHairLineImage:shadowColorLutImage};
+    if(material&&!result.unlitTextureLayers.present
+        &&(result.materialClass==AssetMaterialClass::Generic||result.materialClass==AssetMaterialClass::Emissive)) {
+        const int textures[]={material->pbrMetallicRoughness.baseColorTexture.index,material->normalTexture.index,
+            material->pbrMetallicRoughness.metallicRoughnessTexture.index,material->emissiveTexture.index,material->occlusionTexture.index};
+        for(std::size_t slot=0;slot<5;++slot) {
+            if(slot==4&&((result.materialFeatures&(MaterialFeatureDiffuseRamp|MaterialFeatureDualFaceSdf|MaterialFeatureSceneRefraction))
+                ||result.eyeSurface.present))continue;
+            if(textures[slot]<0)continue;
+            const auto& texture=model.textures.at(static_cast<std::size_t>(textures[slot]));
+            if(texture.source!=images[slot])continue;
+            if(texture.sampler== -1)continue;
+            if(texture.sampler< -1||static_cast<std::size_t>(texture.sampler)>=model.samplers.size())
+                throw std::invalid_argument(result.name+" invalid glTF sampler reference");
+            const auto& sampler=model.samplers[static_cast<std::size_t>(texture.sampler)];
+            auto& settings=result.textureSettings[slot];
+            using Settings=azurerender::TextureImportSettings;
+            switch(sampler.minFilter) {
+            case -1:break;
+            case 9728:case 9729:
+                settings.filter=sampler.minFilter==9728?"nearest":"linear";
+                settings.mipPolicy="none";settings.mipFilter=Settings::MipFilter::Nearest;break;
+            case 9984:case 9985:case 9986:case 9987:
+                settings.filter=(sampler.minFilter==9984||sampler.minFilter==9986)?"nearest":"linear";
+                settings.mipPolicy="generate";
+                settings.mipFilter=sampler.minFilter>=9986?Settings::MipFilter::Linear:Settings::MipFilter::Nearest;break;
+            default:throw std::invalid_argument(result.name+" unsupported glTF minFilter");
+            }
+            switch(sampler.magFilter) {
+            case -1:break;
+            case 9728:settings.magFilter=Settings::MagFilter::Nearest;break;
+            case 9729:settings.magFilter=Settings::MagFilter::Linear;break;
+            default:throw std::invalid_argument(result.name+" unsupported glTF magFilter");
+            }
+            const auto wrap=[&](int value)->std::string {
+                switch(value) {
+                case 10497:return "repeat";
+                case 33071:return "clamp";
+                case 33648:return "mirror";
+                default:throw std::invalid_argument(result.name+" unsupported glTF wrap mode");
+                }
+            };
+            settings.wrapU=wrap(sampler.wrapS);settings.wrapV=wrap(sampler.wrapT);
+        }
+    }
+    if(imageSettings) {
+        for(std::size_t slot=0;slot<9;++slot) {
+            if(images[slot]<0)continue;
+            const auto& raw=imageSettings->at(static_cast<std::size_t>(images[slot]));
+            if(raw.is_null())continue;
+            const auto defaults=result.textureSettings[slot];
+            auto settings=azurerender::TextureImportSettings::parse(raw,defaults);
+            const bool layer=result.unlitTextureLayers.present&&(slot==0||(slot==4&&result.unlitTextureLayers.layerCount==2)
+                ||(slot==8&&result.unlitTextureLayers.coverageLayer.present)
+                ||(slot==3&&result.unlitTextureLayers.baseUvDistortion.present));
+            const bool magChanged=settings.sampler(1,1).effectiveMagFilter()!=defaults.sampler(1,1).effectiveMagFilter();
+            if(layer&&(settings.filter!=defaults.filter||magChanged||settings.wrapU!=defaults.wrapU||settings.wrapV!=defaults.wrapV
+                ||settings.mipPolicy!=defaults.mipPolicy||settings.mipFilter!=defaults.mipFilter
+                ||settings.anisotropy!=defaults.anisotropy))
+                throw std::invalid_argument(result.name+" unlit layer sampler ownership violated");
+            const bool lookup=(slot==4&&((result.materialFeatures&MaterialFeatureDiffuseRamp)
+                ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||result.eyeSurface.present))
+                ||(slot==5&&(result.projectedHairRamp.present||result.specularRamp.present
+                    ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||(result.eyeSurface.present&&!result.eyeSurface.nprLighting)))
+                ||(slot==8&&shadowColorLutImage>=0);
+            const bool typed=lookup||slot==6||slot==7||(slot==8&&!result.unlitTextureLayers.coverageLayer.present);
+            if(typed&&settings.colorSpace!=defaults.colorSpace)
+                throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));
+            if(lookup&&(settings.filter!=defaults.filter||magChanged||settings.wrapU!=defaults.wrapU
+                ||settings.wrapV!=defaults.wrapV||settings.mipPolicy!=defaults.mipPolicy
+                ||settings.anisotropy!=defaults.anisotropy||settings.mipBias!=defaults.mipBias
+                ||(slot==5&&result.specularRamp.present&&settings.mipFilter!=defaults.mipFilter)))
+                throw std::invalid_argument(result.name+" fixed lookup sampler violated at slot "+std::to_string(slot));
+            result.textureSettings[slot]=std::move(settings);
+        }
+    }
+    azurerender::validateMaterialRadianceScale(result.radianceScale,
+        (result.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
+    azurerender::validateMaterialDisplayTransform(result.displayTransform,
+        (result.materialFeatures&MaterialFeatureMultiplyComposite)!=0
+        ||(result.unlitTextureLayers.present&&result.unlitTextureLayers.composite==azurerender::UnlitTextureLayers::Composite::Additive));
+    return result;
+}
+
+std::vector<Matrix4> calculateNodeWorldTransforms(
+    const tinygltf::Model& model) {
+    std::vector<int> parents(model.nodes.size(), -1);
+    for (std::size_t parent = 0; parent < model.nodes.size(); ++parent) {
+        for (const int child : model.nodes[parent].children) {
+            parents.at(static_cast<std::size_t>(child)) =
+                static_cast<int>(parent);
+        }
+    }
+
+    std::vector<Matrix4> worldTransforms(
+        model.nodes.size(),
+        identityMatrix());
+    std::vector<bool> calculated(model.nodes.size(), false);
+    std::function<const Matrix4&(std::size_t)> calculate =
+        [&](const std::size_t index) -> const Matrix4& {
+        if (calculated[index]) {
+            return worldTransforms[index];
+        }
+        const Matrix4 local = nodeTransform(model.nodes[index]);
+        const int parent = parents[index];
+        worldTransforms[index] = parent >= 0
+            ? multiply(calculate(static_cast<std::size_t>(parent)), local)
+            : local;
+        calculated[index] = true;
+        return worldTransforms[index];
+    };
+    for (std::size_t index = 0; index < model.nodes.size(); ++index) {
+        calculate(index);
+    }
+    return worldTransforms;
+}
+
+const tinygltf::Value* nodeOpacityExtension(const tinygltf::ExtensionMap& extensions,
+    const tinygltf::Model& model, std::initializer_list<const char*> fields) {
+    const auto found=extensions.find("AZURE_node_opacity");
+    if(found==extensions.end())return nullptr;
+    const auto& value=found->second;
+    if(std::find(model.extensionsUsed.begin(),model.extensionsUsed.end(),"AZURE_node_opacity")==model.extensionsUsed.end())
+        throw std::invalid_argument("AZURE_node_opacity must be declared in extensionsUsed");
+    if(!value.IsObject()||!value.Has("schemaVersion")||!value.Get("schemaVersion").IsNumber()
+        ||value.Get("schemaVersion").GetNumberAsDouble()!=1)
+        throw std::invalid_argument("AZURE_node_opacity requires schemaVersion 1");
+    for(const auto& field:value.Get<tinygltf::Value::Object>()) {
+        const bool known=std::any_of(fields.begin(),fields.end(),[&](const char* name){return field.first==name;});
+        if(!known)throw std::invalid_argument("AZURE_node_opacity contains an unknown field: "+field.first);
+    }
+    return &value;
+}
+
+std::uint32_t nodeOpacityIndex(const tinygltf::Value& owner,const char* field,std::size_t limit) {
+    if(!owner.IsObject()||!owner.Has(field)||!owner.Get(field).IsNumber())
+        throw std::invalid_argument(std::string("AZURE_node_opacity requires index ")+field);
+    const double value=owner.Get(field).GetNumberAsDouble();
+    if(!std::isfinite(value)||value<0||value>=limit||std::floor(value)!=value)
+        throw std::invalid_argument(std::string("AZURE_node_opacity invalid index ")+field);
+    return static_cast<std::uint32_t>(value);
+}
+
+void loadNodes(const tinygltf::Model& model, LoadedAsset& asset) {
+    asset.nodes.resize(model.nodes.size());
+    for (std::size_t index = 0; index < model.nodes.size(); ++index) {
+        const tinygltf::Node& source = model.nodes[index];
+        AssetNode& destination = asset.nodes[index];
+        destination.name = source.name;
+        if(const auto* extension=nodeOpacityExtension(source.extensions,model,{"schemaVersion","opacity"})) {
+            if(!extension->Has("opacity")||!extension->Get("opacity").IsNumber())
+                throw std::invalid_argument("AZURE_node_opacity requires numeric opacity");
+            const double value=extension->Get("opacity").GetNumberAsDouble();
+            if(!std::isfinite(value)||value<0||value>1)
+                throw std::invalid_argument("AZURE_node_opacity opacity must be in [0,1]");
+            destination.opacity=static_cast<float>(value);
+        }
+        if (source.translation.size() == 3) {
+            std::transform(
+                source.translation.begin(),
+                source.translation.end(),
+                destination.translation.begin(),
+                [](const double value) { return static_cast<float>(value); });
+        }
+        if (source.rotation.size() == 4) {
+            std::transform(
+                source.rotation.begin(),
+                source.rotation.end(),
+                destination.rotation.begin(),
+                [](const double value) { return static_cast<float>(value); });
+        }
+        if (source.scale.size() == 3) {
+            std::transform(
+                source.scale.begin(),
+                source.scale.end(),
+                destination.scale.begin(),
+                [](const double value) { return static_cast<float>(value); });
+        }
+        destination.usesMatrix = source.matrix.size() == 16;
+        const Matrix4 local = nodeTransform(source);
+        std::transform(
+            local.begin(),
+            local.end(),
+            destination.localMatrix.begin(),
+            [](const double value) { return static_cast<float>(value); });
+        for (const int child : source.children) {
+            asset.nodes.at(static_cast<std::size_t>(child)).parent =
+                static_cast<std::int32_t>(index);
+        }
+    }
+}
+
+void loadJointMatrices(
+    const tinygltf::Model& model,
+    const std::vector<Matrix4>& nodeWorldTransforms,
+    LoadedAsset& asset) {
+    if (model.skins.empty()) {
+        std::array<float, 16> identity{};
+        const Matrix4 sourceIdentity = identityMatrix();
+        std::transform(
+            sourceIdentity.begin(),
+            sourceIdentity.end(),
+            identity.begin(),
+            [](const double value) { return static_cast<float>(value); });
+        asset.jointMatrices.push_back(identity);
+        return;
+    }
+    if (model.skins.size() != 1) {
+        throw std::runtime_error(
+            "The current renderer supports one glTF skin per asset");
+    }
+
+    const tinygltf::Skin& skin = model.skins.front();
+    if (skin.joints.empty()) {
+        throw std::runtime_error("glTF skin contains no joints");
+    }
+    std::vector<Matrix4> inverseBindMatrices(
+        skin.joints.size(),
+        identityMatrix());
+    if (skin.inverseBindMatrices >= 0) {
+        const auto& accessor = model.accessors.at(
+            static_cast<std::size_t>(skin.inverseBindMatrices));
+        if (accessor.type != TINYGLTF_TYPE_MAT4
+            || accessor.componentType != TINYGLTF_COMPONENT_TYPE_FLOAT
+            || accessor.count != skin.joints.size()) {
+            throw std::runtime_error(
+                "Unsupported inverse bind matrix accessor layout");
+        }
+        const unsigned char* source = accessorData(model, accessor);
+        const std::size_t stride = accessorStride(model, accessor);
+        for (std::size_t index = 0; index < skin.joints.size(); ++index) {
+            std::array<float, 16> values{};
+            std::memcpy(
+                values.data(),
+                source + index * stride,
+                sizeof(values));
+            std::transform(
+                values.begin(),
+                values.end(),
+                inverseBindMatrices[index].begin(),
+                [](const float value) { return static_cast<double>(value); });
+        }
+    }
+
+    asset.jointMatrices.reserve(skin.joints.size());
+    asset.jointNodes.reserve(skin.joints.size());
+    asset.inverseBindMatrices.reserve(skin.joints.size());
+    for (std::size_t index = 0; index < skin.joints.size(); ++index) {
+        const int jointNode = skin.joints[index];
+        const Matrix4 jointMatrix = multiply(
+            nodeWorldTransforms.at(static_cast<std::size_t>(jointNode)),
+            inverseBindMatrices[index]);
+        std::array<float, 16> gpuMatrix{};
+        std::transform(
+            jointMatrix.begin(),
+            jointMatrix.end(),
+            gpuMatrix.begin(),
+            [](const double value) { return static_cast<float>(value); });
+        std::array<float, 16> inverseBind{};
+        std::transform(
+            inverseBindMatrices[index].begin(),
+            inverseBindMatrices[index].end(),
+            inverseBind.begin(),
+            [](const double value) { return static_cast<float>(value); });
+        asset.jointNodes.push_back(
+            static_cast<std::uint32_t>(jointNode));
+        asset.inverseBindMatrices.push_back(inverseBind);
+        asset.jointMatrices.push_back(gpuMatrix);
+    }
+    asset.hasSkin = true;
+}
+
+// Rigid mesh nodes share the deformation palette with real skin joints.
+// Vertices retain their baked bind placement; pose * inverse(bind) supplies
+// only the node's animated delta. Existing skin indices remain unchanged.
+std::vector<int> loadRigidNodeJoints(const tinygltf::Model& model,
+    const std::vector<Matrix4>& world, LoadedAsset& asset) {
+    std::vector<int> mapping(model.nodes.size(),-1);
+    if(model.animations.empty() && model.skins.empty())return mapping;
+    for(std::size_t node=0;node<model.nodes.size();++node) {
+        if(model.nodes[node].mesh<0 || model.nodes[node].skin>=0)continue;
+        if(!asset.hasSkin)asset.jointMatrices.clear(); // Remove fallback identity.
+        std::array<float,16> bind{};
+        std::transform(world[node].begin(),world[node].end(),bind.begin(),
+            [](double v){return static_cast<float>(v);});
+        const auto inverse=azurerender::scene::inverseAffine(bind);
+        mapping[node]=static_cast<int>(asset.jointMatrices.size());
+        asset.jointNodes.push_back(static_cast<std::uint32_t>(node));
+        asset.inverseBindMatrices.push_back(inverse);
+        asset.jointMatrices.push_back({1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1});
+        asset.hasSkin=true;
+    }
+    return mapping;
+}
+
+void loadAnimations(const tinygltf::Model& model,LoadedAsset& asset) {
+    asset.defaultMorphWeights.resize(model.nodes.size());
+    for(std::size_t i=0;i<model.nodes.size();++i){
+        const auto& n=model.nodes[i];if(n.mesh<0)continue;const auto& m=model.meshes.at(n.mesh);
+        const auto count=m.primitives.empty()?0:m.primitives.front().targets.size();
+        if(count>kMorphTargetBudget)throw std::invalid_argument("glTF node "+std::to_string(i)+" has "+std::to_string(count)+" Morph targets; this renderer supports at most "+std::to_string(kMorphTargetBudget));
+        for(const auto& primitive:m.primitives)if(primitive.targets.size()!=count)throw std::invalid_argument("Mesh primitive morph counts differ");
+        const auto& source=n.weights.empty()?m.weights:n.weights;
+        if(!source.empty()&&source.size()!=count)throw std::invalid_argument("Morph default weight count mismatch");
+        auto& weights=asset.defaultMorphWeights[i];weights.assign(count,0);
+        for(std::size_t t=0;t<source.size();++t){if(!std::isfinite(source[t]))throw std::invalid_argument("Morph default weight must be finite");weights[t]=static_cast<float>(source[t]);}
+    }
+    for(const auto& source:model.animations){
+        AssetAnimation animation;animation.name=source.name;animation.startTime=std::numeric_limits<float>::max();
+        const auto appendChannel=[&](int sourceSampler,std::uint32_t nodeIndex,AssetAnimationPath path){
+            if(nodeIndex>=asset.nodes.size()||sourceSampler<0||static_cast<std::size_t>(sourceSampler)>=source.samplers.size())
+                throw std::invalid_argument("Invalid animation channel target");
+            AssetAnimationChannel channel;channel.nodeIndex=nodeIndex;channel.path=path;
+            if(path!=AssetAnimationPath::Weights&&path!=AssetAnimationPath::Opacity&&asset.nodes[channel.nodeIndex].usesMatrix)throw std::invalid_argument("Animation cannot target a matrix-authored node");
+            const auto& src=source.samplers.at(sourceSampler);AssetAnimationSampler sampler;auto& curve=sampler.curve;
+            curve.rotation=channel.path==AssetAnimationPath::Rotation;
+            curve.width=path==AssetAnimationPath::Opacity?1:path==AssetAnimationPath::Weights?asset.defaultMorphWeights[channel.nodeIndex].size():curve.rotation?4:3;
+            if(src.interpolation=="STEP"){curve.interpolation=CurveInterpolation::Step;sampler.interpolation=AssetAnimationInterpolation::Step;}
+            else if(src.interpolation=="CUBICSPLINE"){curve.interpolation=CurveInterpolation::CubicSpline;sampler.interpolation=AssetAnimationInterpolation::CubicSpline;}
+            else if(src.interpolation!="LINEAR"&&!src.interpolation.empty())throw std::invalid_argument("Unknown animation interpolation");
+            const auto& input=model.accessors.at(src.input);const auto& output=model.accessors.at(src.output);
+            const bool scalar=path==AssetAnimationPath::Weights||path==AssetAnimationPath::Opacity;
+            const int expected=scalar?TINYGLTF_TYPE_SCALAR:curve.rotation?TINYGLTF_TYPE_VEC4:TINYGLTF_TYPE_VEC3;
+            if(input.type!=TINYGLTF_TYPE_SCALAR||input.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||output.type!=expected||output.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT)
+                throw std::invalid_argument("Animation accessor does not match target path");
+            curve.times.resize(input.count);for(std::size_t i=0;i<input.count;++i)std::memcpy(&curve.times[i],accessorData(model,input)+i*accessorStride(model,input),4);
+            const std::size_t components=scalar?1:curve.width;
+            curve.values.resize(output.count*components);for(std::size_t i=0;i<output.count;++i)std::memcpy(curve.values.data()+i*components,accessorData(model,output)+i*accessorStride(model,output),components*4);
+            validateCurve(curve);sampler.inputTimes=curve.times;
+            if(path==AssetAnimationPath::Opacity) {
+                const std::size_t stride=curve.interpolation==CurveInterpolation::CubicSpline?3:1;
+                for(std::size_t key=0;key<curve.times.size();++key) {
+                    const float value=curve.values[key*stride+(stride==3?1:0)];
+                    if(value<0||value>1)throw std::invalid_argument("AZURE_node_opacity animation keys must be in [0,1]");
+                }
+            }
+            if(channel.path!=AssetAnimationPath::Weights){sampler.outputValues.resize(output.count);for(std::size_t i=0;i<output.count;++i)std::copy_n(curve.values.begin()+i*components,components,sampler.outputValues[i].begin());}
+            animation.startTime=std::min(animation.startTime,curve.times.front());animation.endTime=std::max(animation.endTime,curve.times.back());
+            channel.samplerIndex=static_cast<std::uint32_t>(animation.samplers.size());animation.samplers.push_back(std::move(sampler));animation.channels.push_back(channel);
+        };
+        for(const auto& c:source.channels){
+            AssetAnimationPath path;
+            if(c.target_path=="translation")path=AssetAnimationPath::Translation;
+            else if(c.target_path=="rotation")path=AssetAnimationPath::Rotation;
+            else if(c.target_path=="scale")path=AssetAnimationPath::Scale;
+            else if(c.target_path=="weights")path=AssetAnimationPath::Weights;
+            else throw std::invalid_argument("Unsupported glTF animation target path");
+            appendChannel(c.sampler,static_cast<std::uint32_t>(c.target_node),path);
+        }
+        if(const auto* extension=nodeOpacityExtension(source.extensions,model,{"schemaVersion","channels"})) {
+            if(!extension->Has("channels")||!extension->Get("channels").IsArray()||extension->Get("channels").ArrayLen()==0)
+                throw std::invalid_argument("AZURE_node_opacity requires nonempty channels");
+            std::set<std::uint32_t> targets;
+            for(const auto& channel:extension->Get("channels").Get<tinygltf::Value::Array>()) {
+                const auto node=nodeOpacityIndex(channel,"node",asset.nodes.size());
+                const auto sampler=nodeOpacityIndex(channel,"sampler",source.samplers.size());
+                if(channel.Get<tinygltf::Value::Object>().size()!=2||!targets.insert(node).second)
+                    throw std::invalid_argument("AZURE_node_opacity contains unknown fields or a duplicate node channel");
+                appendChannel(static_cast<int>(sampler),node,AssetAnimationPath::Opacity);
+            }
+        }
+        if(animation.channels.empty())animation.startTime=animation.endTime=0;
+        asset.animations.push_back(std::move(animation));
+    }
+}
+
+unsigned surfaceUvSet(const tinygltf::Model& model,int materialIndex) {
+    if(materialIndex<0)return 0;
+    const auto& material=model.materials.at(static_cast<std::size_t>(materialIndex));
+    int selected=-1;
+    const auto include=[&](const auto& texture) {
+        if(texture.index<0)return;
+        if(texture.texCoord<0||texture.texCoord>1)
+            throw std::runtime_error("Surface textures require TEXCOORD_0 or TEXCOORD_1");
+        if(texture.extensions.count("KHR_texture_transform"))
+            throw std::runtime_error("Surface texture transforms require a baked surface UV domain");
+        if(selected>=0&&selected!=texture.texCoord)
+            throw std::runtime_error("Mixed surface UV sets require mesh material baking");
+        selected=texture.texCoord;
+    };
+    include(material.pbrMetallicRoughness.baseColorTexture);
+    include(material.pbrMetallicRoughness.metallicRoughnessTexture);
+    include(material.normalTexture);include(material.emissiveTexture);include(material.occlusionTexture);
+    return selected<0?0U:static_cast<unsigned>(selected);
+}
+
+void appendPrimitive(
+    const tinygltf::Model& model,
+    const tinygltf::Primitive& primitive,
+    const Matrix4& transform,
+    const bool skinned,
+    const std::uint32_t fallbackMaterial,
+    const std::uint32_t nodeIndex,
+    const int rigidJoint,
+    LoadedAsset& asset) {
+    if (primitive.mode != TINYGLTF_MODE_TRIANGLES) {
+        throw std::runtime_error("Only triangle-list glTF primitives are supported");
+    }
+    constexpr std::size_t kSupportedMorphTargetCount = kMorphTargetBudget;
+    if (primitive.targets.size() > kSupportedMorphTargetCount) {
+        throw std::runtime_error(
+            "glTF primitive has "
+            + std::to_string(primitive.targets.size())
+            + " Morph targets; this renderer supports at most "
+            + std::to_string(kSupportedMorphTargetCount));
+    }
+    const auto position = primitive.attributes.find("POSITION");
+    if (position == primitive.attributes.end()) {
+        throw std::runtime_error("glTF primitive has no POSITION attribute");
+    }
+
+    const auto& positionAccessor =
+        model.accessors.at(static_cast<std::size_t>(position->second));
+    std::vector<AssetVertex> vertices(positionAccessor.count);
+    copyFloatAttribute(model, primitive, "POSITION", 3, vertices);
+    copyFloatAttribute(model, primitive, "NORMAL", 3, vertices);
+    copyFloatAttribute(model, primitive, "TANGENT", 4, vertices);
+    copyFloatAttribute(model, primitive, "TEXCOORD_0", 2, vertices);
+    const auto vertexColors=readVertexColors(model,primitive,vertices.size());
+    const auto secondary=primitive.attributes.find("TEXCOORD_1");
+    std::vector<std::array<float,2>> texcoord1;
+    if(secondary!=primitive.attributes.end()) {
+        const auto& accessor=model.accessors.at(static_cast<std::size_t>(secondary->second));
+        if(accessor.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||accessor.type!=TINYGLTF_TYPE_VEC2
+            ||accessor.count!=vertices.size())throw std::invalid_argument("Unsupported glTF TEXCOORD_1 layout");
+        texcoord1.resize(vertices.size());const auto* data=accessorData(model,accessor);
+        const auto stride=accessorStride(model,accessor);
+        for(std::size_t i=0;i<texcoord1.size();++i) {
+            std::memcpy(texcoord1[i].data(),data+i*stride,2*sizeof(float));
+            for(float value:texcoord1[i])if(!std::isfinite(value))throw std::invalid_argument("TEXCOORD_1 must be finite");
+        }
+    }
+    if(surfaceUvSet(model,primitive.material)==1) {
+        if(texcoord1.empty())throw std::runtime_error("Surface texture requires missing TEXCOORD_1");
+        for(std::size_t i=0;i<vertices.size();++i)vertices[i].texcoord=texcoord1[i];
+    }
+    copySkinAttributes(model, primitive, vertices);
+    std::uint32_t morphCount = 0;
+    copyMorphTargets(model, primitive, vertices, morphCount);
+    if (morphCount > asset.morphTargetCount) {
+        asset.morphTargetCount = morphCount;
+    }
+    std::vector<std::uint32_t> indices = readIndices(model, primitive, vertices.size());
+    if (primitive.attributes.find("TANGENT") == primitive.attributes.end()) {
+        generateTangents(vertices, indices);
+    }
+    std::vector<std::array<float,2>> directionLengths(vertices.size(),{1,1});
+    if (!skinned) {
+        for (std::size_t i=0;i<vertices.size();++i) {
+            transformVertex(vertices[i], transform, &directionLengths[i]);
+            if(rigidJoint>=0) {
+                vertices[i].joints={static_cast<std::uint32_t>(rigidJoint),0,0,0};
+                vertices[i].weights={1,0,0,0};
+            }
+        }
+        if (azurerender::scene::mirroredTransform(transform)) {
+            for (std::size_t i=0; i+2<indices.size(); i+=3)
+                std::swap(indices[i+1],indices[i+2]);
+        }
+    } else {
+        for (const AssetVertex& vertex : vertices) {
+            for (const std::uint32_t joint : vertex.joints) {
+                if (joint >= model.skins.at(0).joints.size()) {
+                    throw std::runtime_error(
+                        "JOINTS_0 index exceeds the glTF skin joint count");
+                }
+            }
+        }
+    }
+
+    const std::uint32_t baseVertex = static_cast<std::uint32_t>(asset.vertices.size());
+    for (auto& index : indices) {
+        index += baseVertex;
+    }
+
+    AssetPrimitive draw{};
+    draw.firstIndex = static_cast<std::uint32_t>(asset.indices.size());
+    draw.indexCount = static_cast<std::uint32_t>(indices.size());
+    draw.materialIndex = primitive.material >= 0
+        ? static_cast<std::uint32_t>(primitive.material)
+        : fallbackMaterial;
+    draw.nodeIndex = nodeIndex;
+    draw.hasTexcoord1=!texcoord1.empty();
+    if(!vertexColors.empty()||!asset.vertexColors.empty()) {
+        asset.vertexColors.resize(baseVertex+vertices.size(),{1,1,1,1});
+        if(!vertexColors.empty())std::copy(vertexColors.begin(),vertexColors.end(),asset.vertexColors.begin()+baseVertex);
+    }
+    if(!texcoord1.empty()||!asset.texcoord1.empty()) {
+        asset.texcoord1.resize(baseVertex+vertices.size());
+        if(!texcoord1.empty())std::copy(texcoord1.begin(),texcoord1.end(),asset.texcoord1.begin()+baseVertex);
+    }
+    std::array<float, 3> primitiveMin{};
+    std::array<float, 3> primitiveMax{};
+    primitiveMin.fill(std::numeric_limits<float>::max());
+    primitiveMax.fill(std::numeric_limits<float>::lowest());
+    for (const AssetVertex& vertex : vertices) {
+        for (std::size_t component = 0; component < 3; ++component) {
+            primitiveMin[component] =
+                std::min(primitiveMin[component], vertex.position[component]);
+            primitiveMax[component] =
+                std::max(primitiveMax[component], vertex.position[component]);
+        }
+    }
+    for (std::size_t component = 0; component < 3; ++component) {
+        draw.center[component] =
+            (primitiveMin[component] + primitiveMax[component]) * 0.5F;
+    }
+    if(!primitive.targets.empty()) {
+        MorphTargetRange range;range.node=nodeIndex;range.firstVertex=baseVertex;range.vertexCount=static_cast<std::uint32_t>(vertices.size());
+        const auto& mesh=model.meshes.at(model.nodes.at(nodeIndex).mesh);
+        for(std::size_t t=0;t<primitive.targets.size();++t){
+            MorphTargetData target;target.name="target-"+std::to_string(t);
+            if(mesh.extras.IsObject()&&mesh.extras.Has("targetNames")){
+                const auto& names=mesh.extras.Get("targetNames");
+                if(!names.IsArray()||names.ArrayLen()!=primitive.targets.size()||!names.Get(static_cast<int>(t)).IsString())throw std::invalid_argument("Invalid morph target names");
+                target.name=names.Get(static_cast<int>(t)).Get<std::string>();
+            }
+            const char* semantics[]={"POSITION","NORMAL","TANGENT"};
+            std::vector<std::array<float,3>>* outputs[]={&target.positions,&target.normals,&target.tangents};
+            for(unsigned semantic=0;semantic<3;++semantic){
+                auto& values=*outputs[semantic];values.resize(vertices.size());
+                const auto found=primitive.targets[t].find(semantics[semantic]);if(found==primitive.targets[t].end())continue;
+                const auto& a=model.accessors.at(found->second);
+                if(a.type!=TINYGLTF_TYPE_VEC3||a.componentType!=TINYGLTF_COMPONENT_TYPE_FLOAT||a.count!=vertices.size())throw std::invalid_argument("Invalid morph target accessor");
+                for(std::size_t v=0;v<values.size();++v){
+                    std::memcpy(values[v].data(),accessorData(model,a)+v*accessorStride(model,a),12);
+                    for(float value:values[v])if(!std::isfinite(value))throw std::invalid_argument("Morph delta must be finite");
+                    if(!skinned){
+                        const auto delta=values[v];
+                        // Position and tangent deltas transform as vectors. Normal deltas
+                        // use the same inverse transpose as the base normal.
+                        if(semantic==1){
+                            const double a00=transform[0],a01=transform[4],a02=transform[8],a10=transform[1],a11=transform[5],a12=transform[9],a20=transform[2],a21=transform[6],a22=transform[10];
+                            const double det=a00*(a11*a22-a12*a21)-a01*(a10*a22-a12*a20)+a02*(a10*a21-a11*a20);
+                            if(std::abs(det)<1e-12)throw std::invalid_argument("Singular morph node transform");
+                            values[v]={static_cast<float>(((a11*a22-a12*a21)*delta[0]+(a12*a20-a10*a22)*delta[1]+(a10*a21-a11*a20)*delta[2])/det),
+                                static_cast<float>(((a02*a21-a01*a22)*delta[0]+(a00*a22-a02*a20)*delta[1]+(a01*a20-a00*a21)*delta[2])/det),
+                                static_cast<float>(((a01*a12-a02*a11)*delta[0]+(a02*a10-a00*a12)*delta[1]+(a00*a11-a01*a10)*delta[2])/det)};
+                        }else for(unsigned axis=0;axis<3;++axis)values[v][axis]=static_cast<float>(transform[axis]*delta[0]+transform[4+axis]*delta[1]+transform[8+axis]*delta[2]);
+                        if(semantic>0){const float length=directionLengths[v][semantic-1];
+                            if(length<1e-12F)throw std::invalid_argument("Degenerate morph direction basis");
+                            for(auto& value:values[v])value/=length;
+                        }
+                    }
+                }
+            }
+            range.targets.push_back(std::move(target));
+        }
+        asset.morphRanges.push_back(std::move(range));
+    }
+    asset.vertices.insert(asset.vertices.end(), vertices.begin(), vertices.end());
+    asset.indices.insert(asset.indices.end(), indices.begin(), indices.end());
+    asset.primitives.push_back(draw);
+}
+
+void visitNode(
+    const tinygltf::Model& model,
+    const int nodeIndex,
+    const Matrix4& parentTransform,
+    const std::uint32_t fallbackMaterial,
+    const std::vector<int>& rigidJoints,
+    LoadedAsset& asset) {
+    const auto& node = model.nodes.at(static_cast<std::size_t>(nodeIndex));
+    const Matrix4 worldTransform = multiply(parentTransform, nodeTransform(node));
+    if (node.mesh >= 0) {
+        const bool skinned = node.skin >= 0;
+        if (skinned && node.skin != 0) {
+            throw std::runtime_error(
+                "The current renderer supports only glTF skin index 0");
+        }
+        const auto& mesh = model.meshes.at(static_cast<std::size_t>(node.mesh));
+        for (const auto& primitive : mesh.primitives) {
+            appendPrimitive(
+                model,
+                primitive,
+                worldTransform,
+                skinned,
+                fallbackMaterial,
+                static_cast<std::uint32_t>(nodeIndex),
+                rigidJoints.at(static_cast<std::size_t>(nodeIndex)),
+                asset);
+        }
+    }
+    for (const int child : node.children) {
+        visitNode(model, child, worldTransform, fallbackMaterial, rigidJoints, asset);
+    }
+}
+
+Matrix4 composeTransform(
+    const std::array<float, 3>& translation,
+    const std::array<float, 4>& rotation,
+    const std::array<float, 3>& scale) {
+    const double x = rotation[0];
+    const double y = rotation[1];
+    const double z = rotation[2];
+    const double w = rotation[3];
+    return {
+        (1.0 - 2.0 * y * y - 2.0 * z * z) * scale[0],
+        (2.0 * x * y + 2.0 * w * z) * scale[0],
+        (2.0 * x * z - 2.0 * w * y) * scale[0],
+        0.0,
+        (2.0 * x * y - 2.0 * w * z) * scale[1],
+        (1.0 - 2.0 * x * x - 2.0 * z * z) * scale[1],
+        (2.0 * y * z + 2.0 * w * x) * scale[1],
+        0.0,
+        (2.0 * x * z + 2.0 * w * y) * scale[2],
+        (2.0 * y * z - 2.0 * w * x) * scale[2],
+        (1.0 - 2.0 * x * x - 2.0 * y * y) * scale[2],
+        0.0,
+        translation[0], translation[1], translation[2], 1.0,
+    };
+}
+
+std::array<float, 4> normalizeQuaternion(
+    std::array<float, 4> quaternion) {
+    const float length = std::sqrt(
+        quaternion[0] * quaternion[0]
+        + quaternion[1] * quaternion[1]
+        + quaternion[2] * quaternion[2]
+        + quaternion[3] * quaternion[3]);
+    if (length <= 1.0e-8F) {
+        return {0.0F, 0.0F, 0.0F, 1.0F};
+    }
+    for (float& component : quaternion) {
+        component /= length;
+    }
+    return quaternion;
+}
+
+std::array<float, 4> slerp(
+    const std::array<float, 4>& start,
+    std::array<float, 4> end,
+    const float factor) {
+    float cosine =
+        start[0] * end[0] + start[1] * end[1]
+        + start[2] * end[2] + start[3] * end[3];
+    if (cosine < 0.0F) {
+        cosine = -cosine;
+        for (float& component : end) {
+            component = -component;
+        }
+    }
+    if (cosine > 0.9995F) {
+        std::array<float, 4> result{};
+        for (std::size_t component = 0; component < 4; ++component) {
+            result[component] =
+                start[component]
+                + (end[component] - start[component]) * factor;
+        }
+        return normalizeQuaternion(result);
+    }
+    const float angle = std::acos(std::clamp(cosine, -1.0F, 1.0F));
+    const float denominator = std::sin(angle);
+    const float startWeight =
+        std::sin((1.0F - factor) * angle) / denominator;
+    const float endWeight = std::sin(factor * angle) / denominator;
+    std::array<float, 4> result{};
+    for (std::size_t component = 0; component < 4; ++component) {
+        result[component] =
+            start[component] * startWeight
+            + end[component] * endWeight;
+    }
+    return normalizeQuaternion(result);
+}
+
+std::array<float, 4> sampleAnimationSampler(
+    const AssetAnimationSampler& sampler,
+    const float time,
+    const bool rotation) {
+    if (time <= sampler.inputTimes.front()) {
+        return sampler.outputValues.front();
+    }
+    if (time >= sampler.inputTimes.back()) {
+        return sampler.outputValues.back();
+    }
+    const auto upper = std::upper_bound(
+        sampler.inputTimes.begin(),
+        sampler.inputTimes.end(),
+        time);
+    const std::size_t endIndex =
+        static_cast<std::size_t>(
+            std::distance(sampler.inputTimes.begin(), upper));
+    const std::size_t startIndex = endIndex - 1;
+    if (sampler.interpolation == AssetAnimationInterpolation::Step) {
+        return sampler.outputValues[startIndex];
+    }
+    const float interval =
+        sampler.inputTimes[endIndex] - sampler.inputTimes[startIndex];
+    const float factor = interval > 1.0e-8F
+        ? (time - sampler.inputTimes[startIndex]) / interval
+        : 0.0F;
+    if (rotation) {
+        return slerp(
+            sampler.outputValues[startIndex],
+            sampler.outputValues[endIndex],
+            factor);
+    }
+    std::array<float, 4> result{};
+    for (std::size_t component = 0; component < 4; ++component) {
+        result[component] =
+            sampler.outputValues[startIndex][component]
+            + (sampler.outputValues[endIndex][component]
+               - sampler.outputValues[startIndex][component])
+                * factor;
+    }
+    return result;
+}
+
+}  // namespace
+
+const char* assetMaterialClassName(const AssetMaterialClass value) {
+    switch (value) {
+        case AssetMaterialClass::Generic: return "generic";
+        case AssetMaterialClass::Skin: return "skin";
+        case AssetMaterialClass::Face: return "face";
+        case AssetMaterialClass::Hair: return "hair";
+        case AssetMaterialClass::Fabric: return "fabric";
+        case AssetMaterialClass::Metal: return "metal";
+        case AssetMaterialClass::Eye: return "eye";
+        case AssetMaterialClass::Overlay: return "overlay";
+        case AssetMaterialClass::Emissive: return "emissive";
+        case AssetMaterialClass::Showcase: return "showcase";
+    }
+    return "generic";
+}
+
+namespace {
+LoadedAsset importGltfModel(tinygltf::Model&,const AuthoredImageMips* authored=nullptr,
+    const std::vector<nlohmann::json>* imageSettings=nullptr);
+bool decodeGltfImage(tinygltf::Image* image,int imageIndex,std::string* error,std::string* warning,
+    int requestedWidth,int requestedHeight,const unsigned char* bytes,int size,void* userData) {
+    try {
+        if(size<=0||size>64*1024*1024)throw std::invalid_argument("glTF image exceeds the source budget");
+        const auto decoded=azurerender::decodeImageBytes({bytes,bytes+size});
+        if((requestedWidth>0&&decoded.width!=static_cast<unsigned>(requestedWidth))||
+           (requestedHeight>0&&decoded.height!=static_cast<unsigned>(requestedHeight)))throw std::invalid_argument("glTF image dimensions differ from the declaration");
+        if(userData&&!decoded.mipLevels.empty())(*static_cast<AuthoredImageMips*>(userData))[imageIndex]={decoded.mipLevels,decoded.sourceCompression};
+        auto material=azurerender::convertImageToRgba8(decoded);
+        image->width=static_cast<int>(decoded.width);image->height=static_cast<int>(decoded.height);
+        image->component=4;
+        if(decoded.precision==azurerender::ImagePrecision::UInt8) {
+            image->bits=8;image->pixel_type=TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE;image->image=decoded.rgba8;
+        }else if(decoded.precision==azurerender::ImagePrecision::UInt16) {
+            image->bits=16;image->pixel_type=TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT;image->image.resize(decoded.rgba16.size()*2);
+            std::memcpy(image->image.data(),decoded.rgba16.data(),image->image.size());
+        }else {
+            image->bits=32;image->pixel_type=TINYGLTF_COMPONENT_TYPE_FLOAT;image->image.resize(decoded.rgba32.size()*4);
+            std::memcpy(image->image.data(),decoded.rgba32.data(),image->image.size());
+        }
+        if(warning)for(const auto& loss:material.losses)*warning+="Image "+image->name+": "+loss+"\n";
+        return true;
+    }catch(const std::exception& e){if(error)*error+=e.what();return false;}
+}
+}
+LoadedAsset loadGltfAsset(const std::string& path) {
+    tinygltf::TinyGLTF loader;
+    loader.SetStoreOriginalJSONForExtrasAndExtensions(true);
+    AuthoredImageMips authored;loader.SetImageLoader(decodeGltfImage,&authored);
+    tinygltf::Model model;
+    std::string warning;
+    std::string error;
+    const auto filePath = std::filesystem::u8path(path);
+    auto extension=filePath.extension().u8string();
+    std::transform(extension.begin(),extension.end(),extension.begin(),[](unsigned char c){return static_cast<char>(std::tolower(c));});
+    // Observe the existing source read; external image/buffer reads remain unchanged.
+    std::vector<bool> authoredAlpha;bool readRoot=false;
+    tinygltf::FsCallbacks fs{&tinygltf::FileExists,&tinygltf::ExpandFilePath,
+        [&](std::vector<unsigned char>* output,std::string* diagnostic,const std::string& file,void* user) {
+            const bool success=tinygltf::ReadWholeFile(output,diagnostic,file,user);
+            if(success&&!readRoot) {
+                authoredAlpha=readAuthoredMaterialAlpha(output->data(),output->size(),extension==".glb");
+                readRoot=true;
+            }
+            return success;
+        },&tinygltf::WriteWholeFile,&tinygltf::GetFileSizeInBytes,nullptr};
+    if(!loader.SetFsCallbacks(fs,&error))throw std::runtime_error("Cannot observe authored material fields: "+error);
+    const bool loaded = extension == ".glb"
+        ? loader.LoadBinaryFromFile(&model, &error, &warning, path)
+        : loader.LoadASCIIFromFile(&model, &error, &warning, path);
+    if (!warning.empty()) {
+        azurerender::RuntimeDiagnostics::instance().warning(
+            "asset", "[glTF] " + warning);
+    }
+    if (!loaded) {
+        throw std::runtime_error("Unable to load glTF asset: " + error);
+    }
+    validateEyeAuthoredAlpha(model,authoredAlpha);
+    std::vector<nlohmann::json> imageSettings(model.images.size());
+    for(std::size_t index=0;index<model.images.size();++index) {
+        const auto& uri=model.images[index].uri;
+        if(uri.empty()||uri.rfind("data:",0)==0)continue;
+        const auto sidecar=filePath.parent_path()/std::filesystem::u8path(uri+".azmeta");
+        if(!std::filesystem::exists(sidecar))continue;
+        std::ifstream input(sidecar);nlohmann::json metadata;input>>metadata;
+        const auto settings=metadata.value("settings",nlohmann::json::object());
+        if(settings.contains("texture"))imageSettings[index]=settings.at("texture");
+    }
+    auto asset=importGltfModel(model,&authored,&imageSettings);
+    for(const auto& material:asset.materials)validateEyeTextureSettings(material);
+    validateOutlineMaterialInputs(asset);
+    return asset;
+}
+namespace {
+void parseEmbeddedGltf(const std::string& bytes,bool binary,tinygltf::Model& model,AuthoredImageMips& authored){
+    if(bytes.empty()||bytes.size()>128*1024*1024)throw std::invalid_argument("Embedded glTF source exceeds byte budget");
+    tinygltf::TinyGLTF loader;loader.SetImageLoader(decodeGltfImage,&authored);std::string error,warning;bool external=false;
+    loader.SetStoreOriginalJSONForExtrasAndExtensions(true);
+    tinygltf::FsCallbacks fs;
+    fs.FileExists=[&](const std::string&,void*){external=true;return false;};
+    fs.ExpandFilePath=[](const std::string& path,void*){return path;};
+    fs.ReadWholeFile=[&](std::vector<unsigned char>*,std::string*,const std::string&,void*){external=true;return false;};
+    fs.WriteWholeFile=[&](std::string*,const std::string&,const std::vector<unsigned char>&,void*){external=true;return false;};
+    fs.GetFileSizeInBytes=[&](std::size_t*,std::string*,const std::string&,void*){external=true;return false;};fs.user_data=nullptr;
+    if(!loader.SetFsCallbacks(fs,&error))throw std::runtime_error("Cannot establish embedded asset filesystem boundary: "+error);
+    const auto size=static_cast<unsigned>(bytes.size());
+    const bool loaded=binary?loader.LoadBinaryFromMemory(&model,&error,&warning,reinterpret_cast<const unsigned char*>(bytes.data()),size)
+        :loader.LoadASCIIFromString(&model,&error,&warning,bytes.data(),size,"");
+    if(external)throw std::invalid_argument("Embedded model candidates require embedded buffers and images");
+    if(!loaded)throw std::invalid_argument("Invalid embedded model candidate: "+error);
+    validateEyeAuthoredAlpha(model,readAuthoredMaterialAlpha(
+        reinterpret_cast<const unsigned char*>(bytes.data()),bytes.size(),binary));
+}
+}
+void validateOutlineMaterialInputs(const LoadedAsset& asset) {
+    if(!asset.texcoord1.empty()&&asset.texcoord1.size()!=asset.vertices.size())
+        throw std::invalid_argument("TEXCOORD_1 stream must match the vertex table");
+    for(const auto& primitive:asset.primitives) {
+        const auto& material=asset.materials.at(primitive.materialIndex);
+        if(!material.outlineSurface.present
+            ||material.outlineSurface.normalSource==AssetMaterial::OutlineSurface::NormalSource::Geometry)continue;
+        if(!primitive.hasTexcoord1||asset.texcoord1.empty())
+            throw std::invalid_argument(material.name+" outlineSurface.normalSource requires TEXCOORD_1");
+        for(std::size_t i=0;i<primitive.indexCount;++i) {
+            const auto vertex=asset.indices.at(static_cast<std::size_t>(primitive.firstIndex)+i);
+            for(float value:asset.texcoord1.at(vertex))if(!std::isfinite(value)||value< -1||value>1)
+                throw std::invalid_argument(material.name+" outlineSurface.normalSource requires signed unit TEXCOORD_1 values");
+        }
+    }
+}
+LoadedAsset loadEmbeddedGltfAsset(const std::string& bytes,bool binary){
+    tinygltf::Model model;AuthoredImageMips authored;parseEmbeddedGltf(bytes,binary,model,authored);
+    auto asset=importGltfModel(model,&authored);validateOutlineMaterialInputs(asset);return asset;
+}
+std::vector<AssetMaterial> loadEmbeddedGltfMaterials(const std::string& bytes,bool binary,
+    const std::vector<nlohmann::json>& imageSettings){
+    tinygltf::Model model;AuthoredImageMips authored;parseEmbeddedGltf(bytes,binary,model,authored);
+    if(!imageSettings.empty()&&imageSettings.size()!=model.images.size())
+        throw std::invalid_argument("Image import settings must match the glTF image table");
+    std::vector<AssetMaterial> materials;materials.reserve(model.materials.size());
+    for(const auto& source:model.materials){auto material=loadMaterial(model,&source,&authored,imageSettings.empty()?nullptr:&imageSettings);validateEyeTextureSettings(material);materials.push_back(std::move(material));}
+    return materials;
+}
+namespace {
+LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* authored,
+    const std::vector<nlohmann::json>* imageSettings){
+    normalizeGltfAccessors(model);
+    LoadedAsset asset;
+    asset.materials.reserve(model.materials.size() + 1);
+    for (const auto& material : model.materials) {
+        asset.materials.push_back(loadMaterial(model, &material,authored,imageSettings));
+    }
+    const AssetFaceSdfProfile* faceFrame=nullptr;
+    for(const auto& material:asset.materials)if(material.faceSdf.present) {
+        if(faceFrame && (faceFrame->schemaVersion==2 || material.faceSdf.schemaVersion==2)
+            && (faceFrame->schemaVersion!=material.faceSdf.schemaVersion || faceFrame->headNode!=material.faceSdf.headNode
+                ||faceFrame->headBasis!=material.faceSdf.headBasis))
+            throw std::runtime_error("A mesh resource requires a consistent dual face SDF frame");
+        faceFrame=&material.faceSdf;
+    }
+    const std::uint32_t fallbackMaterial =
+        static_cast<std::uint32_t>(asset.materials.size());
+    asset.materials.push_back(loadMaterial(model, nullptr,authored));
+    loadNodes(model, asset);
+    static_cast<void>(azurerender::resolveMaterialFrame(asset));
+    const std::vector<Matrix4> nodeWorldTransforms =
+        calculateNodeWorldTransforms(model);
+    asset.nodeWorldMatrices.resize(nodeWorldTransforms.size());
+    for (std::size_t index = 0; index < nodeWorldTransforms.size(); ++index) {
+        std::transform(
+            nodeWorldTransforms[index].begin(),
+            nodeWorldTransforms[index].end(),
+            asset.nodeWorldMatrices[index].begin(),
+            [](const double value) { return static_cast<float>(value); });
+    }
+    loadJointMatrices(model, nodeWorldTransforms, asset);
+    const auto rigidJoints=loadRigidNodeJoints(model,nodeWorldTransforms,asset);
+    loadAnimations(model, asset);
+
+    if (!model.scenes.empty()) {
+        const int sceneIndex = model.defaultScene >= 0 ? model.defaultScene : 0;
+        const auto& scene = model.scenes.at(static_cast<std::size_t>(sceneIndex));
+        for (const int node : scene.nodes) {
+            visitNode(model, node, identityMatrix(), fallbackMaterial, rigidJoints, asset);
+        }
+    } else {
+        for (std::size_t index = 0; index < model.nodes.size(); ++index) {
+            if (model.nodes[index].mesh >= 0) {
+                visitNode(
+                    model,
+                    static_cast<int>(index),
+                    identityMatrix(),
+                    fallbackMaterial,
+                    rigidJoints,
+                    asset);
+            }
+        }
+    }
+
+    if (asset.primitives.empty()) {
+        throw std::runtime_error("glTF scene contains no triangle mesh primitive");
+    }
+    azurerender::prepareBrowRegions(asset);
+    asset.boundsMin.fill(std::numeric_limits<float>::max());
+    asset.boundsMax.fill(std::numeric_limits<float>::lowest());
+    for (const auto& vertex : asset.vertices) {
+        for (std::size_t component = 0; component < 3; ++component) {
+            asset.boundsMin[component] =
+                std::min(asset.boundsMin[component], vertex.position[component]);
+            asset.boundsMax[component] =
+                std::max(asset.boundsMax[component], vertex.position[component]);
+        }
+    }
+    return asset;
+}
+}
+
+namespace {
+void resolvePose(const LoadedAsset& asset, AssetPose& pose) {
+    std::vector<Matrix4> worldTransforms(
+        asset.nodes.size(),
+        identityMatrix());
+    std::vector<bool> calculated(asset.nodes.size(), false);
+    pose.nodeWorldOpacities.resize(asset.nodes.size());
+    std::function<const Matrix4&(std::size_t)> calculate =
+        [&](const std::size_t index) -> const Matrix4& {
+        if (calculated[index]) {
+            return worldTransforms[index];
+        }
+        const float opacity=pose.local[index].opacity;
+        if(!std::isfinite(opacity)||opacity<0||opacity>1)
+            throw std::invalid_argument("Pose node opacity must be in [0,1]");
+        Matrix4 local{};
+        if (asset.nodes[index].usesMatrix) {
+            std::transform(
+                asset.nodes[index].localMatrix.begin(),
+                asset.nodes[index].localMatrix.end(),
+                local.begin(),
+                [](const float value) {
+                    return static_cast<double>(value);
+                });
+        } else {
+            local = composeTransform(
+                pose.local[index].translation,
+                pose.local[index].rotation,
+                pose.local[index].scale);
+        }
+        const std::int32_t parent = asset.nodes[index].parent;
+        worldTransforms[index] = parent >= 0
+            ? multiply(
+                  calculate(static_cast<std::size_t>(parent)),
+                  local)
+            : local;
+        pose.nodeWorldOpacities[index]=opacity*(parent>=0?pose.nodeWorldOpacities[parent]:1.0F);
+        calculated[index] = true;
+        return worldTransforms[index];
+    };
+    for (std::size_t index = 0; index < asset.nodes.size(); ++index) {
+        calculate(index);
+    }
+
+    pose.nodeWorldMatrices.resize(worldTransforms.size());
+    for (std::size_t index = 0; index < worldTransforms.size(); ++index) {
+        std::transform(
+            worldTransforms[index].begin(),
+            worldTransforms[index].end(),
+            pose.nodeWorldMatrices[index].begin(),
+            [](const double value) { return static_cast<float>(value); });
+    }
+
+    if (!asset.hasSkin) {
+        pose.jointMatrices = asset.jointMatrices;
+        return;
+    }
+    pose.jointMatrices.resize(asset.jointNodes.size());
+    for (std::size_t joint = 0;
+         joint < asset.jointNodes.size();
+         ++joint) {
+        Matrix4 inverseBind{};
+        std::transform(
+            asset.inverseBindMatrices[joint].begin(),
+            asset.inverseBindMatrices[joint].end(),
+            inverseBind.begin(),
+            [](const float value) {
+                return static_cast<double>(value);
+            });
+        const Matrix4 matrix = multiply(
+            worldTransforms.at(asset.jointNodes[joint]),
+            inverseBind);
+        std::transform(
+            matrix.begin(),
+            matrix.end(),
+            pose.jointMatrices[joint].begin(),
+            [](const double value) {
+                return static_cast<float>(value);
+            });
+    }
+}
+}
+void resolveAssetPose(const LoadedAsset& asset, AssetPose& pose) {
+    if(pose.local.size()!=asset.nodes.size())throw std::invalid_argument("Pose skeleton mismatch");
+    resolvePose(asset,pose);
+}
+AssetPose bindAnimationPose(const LoadedAsset& asset) {
+    AssetPose pose;
+    for (const auto& node : asset.nodes) pose.local.push_back({node.translation, node.rotation, node.scale,node.opacity});
+    pose.morphWeights=asset.defaultMorphWeights;
+    resolvePose(asset, pose);
+    return pose;
+}
+AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop) {
+    if (animationIndex >= asset.animations.size()) throw std::runtime_error("Animation index is out of range");
+    if (!std::isfinite(time)) throw std::invalid_argument("Animation time must be finite");
+    auto pose = bindAnimationPose(asset);
+    const auto& animation = asset.animations[animationIndex];
+    const float duration = animation.endTime - animation.startTime;
+    const float sampleTime = duration > 1e-8F
+        ? animation.startTime + (loop ? std::fmod(std::max(time, 0.0F), duration) : std::clamp(time, 0.0F, duration))
+        : animation.startTime;
+    for (const auto& channel : animation.channels) {
+        const auto& sampler = animation.samplers.at(channel.samplerIndex);
+        if(channel.path==AssetAnimationPath::Weights){pose.morphWeights.at(channel.nodeIndex)=sampleCurve(sampler.curve,sampleTime);continue;}
+        auto value = std::array<float,4>{};
+        if(sampler.curve.width){const auto sampled=sampleCurve(sampler.curve,sampleTime);std::copy(sampled.begin(),sampled.end(),value.begin());}
+        else value=sampleAnimationSampler(sampler,sampleTime,channel.path==AssetAnimationPath::Rotation);
+        auto& node = pose.local.at(channel.nodeIndex);
+        if (channel.path == AssetAnimationPath::Opacity) node.opacity=std::clamp(value[0],0.0F,1.0F);
+        else if (channel.path == AssetAnimationPath::Rotation) node.rotation = normalizeQuaternion(value);
+        else if (channel.path == AssetAnimationPath::Translation) std::copy_n(value.begin(), 3, node.translation.begin());
+        else std::copy_n(value.begin(), 3, node.scale.begin());
+    }
+    resolvePose(asset, pose);
+    return pose;
+}
+AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, const AssetPose& to, float weight) {
+    if (!std::isfinite(weight) || weight < 0 || weight > 1) throw std::invalid_argument("Pose blend weight must be in [0,1]");
+    if (from.local.size() != asset.nodes.size() || to.local.size() != asset.nodes.size()) throw std::invalid_argument("Pose skeleton mismatch");
+    AssetPose result;
+    result.local.resize(asset.nodes.size());
+    for (std::size_t i = 0; i < result.local.size(); ++i) {
+        auto& node = result.local[i];
+        for (unsigned axis = 0; axis < 3; ++axis) {
+            node.translation[axis] = from.local[i].translation[axis] * (1-weight) + to.local[i].translation[axis] * weight;
+            node.scale[axis] = from.local[i].scale[axis] * (1-weight) + to.local[i].scale[axis] * weight;
+        }
+        node.rotation = slerp(from.local[i].rotation, to.local[i].rotation, weight);
+        node.opacity=from.local[i].opacity*(1-weight)+to.local[i].opacity*weight;
+    }
+    result.morphWeights=from.morphWeights;
+    if(result.morphWeights.size()!=to.morphWeights.size())throw std::invalid_argument("Morph pose node count mismatch");
+    for(std::size_t n=0;n<result.morphWeights.size();++n){
+        if(result.morphWeights[n].size()!=to.morphWeights[n].size())throw std::invalid_argument("Morph pose width mismatch");
+        for(std::size_t t=0;t<result.morphWeights[n].size();++t)result.morphWeights[n][t]=from.morphWeights[n][t]*(1-weight)+to.morphWeights[n][t]*weight;
+    }
+    resolvePose(asset, result);
+    return result;
+}
+void sampleAnimation(const LoadedAsset& asset, std::size_t animationIndex, float time,
+                     std::vector<std::array<float,16>>& jointMatrices) {
+    jointMatrices = sampleAnimationPose(asset, animationIndex, time).jointMatrices;
+}
+
+AssetImage loadAssetImage(const std::string& path){
+    const auto image=azurerender::decodeImageFile(std::filesystem::u8path(path));
+    auto converted=azurerender::convertImageToRgba8(image);
+    AssetImage result;result.width=image.width;result.height=image.height;
+    result.pixels=std::move(converted.pixels);result.losses=std::move(converted.losses);result.mipLevels=image.mipLevels;result.sourceCompression=image.sourceCompression;return result;
+}

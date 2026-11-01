@@ -56,7 +56,7 @@ def run(player,output,case,validation):
             assert manifest['screenReflectionReprojectionBytes']==source.WIDTH//2*(source.HEIGHT//2)*20*2
             assert manifest['temporalMotionShared']==(aa==3)
             assert manifest['temporalMaterialSamples']==(aa==3)
-            assert manifest['temporalBytes']==(source.WIDTH*source.HEIGHT*52 if aa==3 else 0)
+            assert manifest['temporalBytes']==(source.WIDTH*source.HEIGHT*60 if aa==3 else 0)
         elif case=='multisample':
             assert manifest['rasterizationSamples']==4 and not manifest['multisampleFallback']
             assert manifest['screenReflectionTemporalPreparation']=='multisample-motion-unavailable'

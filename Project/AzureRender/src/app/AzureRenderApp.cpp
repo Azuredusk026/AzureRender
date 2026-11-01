@@ -479,14 +479,13 @@ void AzureRenderApp::mainLoop(const std::uint64_t smokeFrameLimit) {
 
 void AzureRenderApp::createTemporalResources(){
     temporalReconstruction_.reset();sharedMotion_.reset();temporalFallback_.clear();temporalRequested_=effectiveRenderSettings_.antiAliasing==3;
-    if(!temporalRequested_)return;
-    try{
+    if(temporalRequested_)try{
         VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
         if(properties.limits.maxPerStageDescriptorStorageBuffers<6)throw std::runtime_error("Temporal geometry requires six vertex storage bindings");
-        if(std::uint64_t(sceneRenderExtent_.width)*sceneRenderExtent_.height>azurerender::TemporalReconstruction::kMaximumBytes/azurerender::TemporalReconstruction::kBytesPerPixel)
+        if(std::uint64_t(sceneRenderExtent_.width)*sceneRenderExtent_.height>azurerender::TemporalReconstruction::kMaximumBytes/(azurerender::TemporalReconstruction::kBytesPerPixel+azurerender::TemporalReconstruction::kDisplayMaskBytesPerPixel))
             throw std::invalid_argument("Temporal resources exceed the combined view budget");
         std::vector<azurerender::TemporalSceneSource> sources;
-        for(std::size_t i=0;i<sceneColorImages_.size();++i)sources.push_back({sceneColorImages_[i].image,sceneColorImageViews_[i],depthImages_[i].image,depthImageViews_[i]});
+        for(std::size_t i=0;i<sceneColorImages_.size();++i)sources.push_back({sceneColorImages_[i].image,sceneColorImageViews_[i],depthImages_[i].image,depthImageViews_[i],displayMaskImages_[i].image,displayMaskImageViews_[i]});
         std::string shaders=resourceLocator_.shaderDirectory().u8string();
 #if AZURE_WITH_EDITOR
         if(!activeShaderDirectory_.empty())shaders=activeShaderDirectory_;
@@ -495,6 +494,7 @@ void AzureRenderApp::createTemporalResources(){
         sharedMotion_=std::make_unique<azurerender::MotionVectorTarget>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,depths);
         temporalReconstruction_=std::make_unique<azurerender::TemporalReconstruction>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,std::move(sources),shaders,sharedMotion_.get());
     }catch(const std::exception& error){temporalReconstruction_.reset();sharedMotion_.reset();temporalFallback_=error.what();azurerender::RuntimeDiagnostics::instance().info("render","Temporal AA spatial fallback: "+temporalFallback_);}
+    updateTemporalDisplayDescriptors();
 }
 void AzureRenderApp::createMultisampleResources(){
     sceneMultisampling_.reset();multisampleFallback_.clear();multisampleRequested_=effectiveRenderSettings_.antiAliasing==4;
@@ -504,8 +504,8 @@ void AzureRenderApp::createMultisampleResources(){
             if(!sceneRenderer_->capabilities().supportsMultisampleShading)throw std::runtime_error("Renderer does not provide multisample shading");
             if(!rhi_->supportsSampleShading()||!context.descriptorLimits.standardSampleLocations)throw std::runtime_error("Device lacks enabled standard sample shading");
             std::vector<azurerender::SceneMultisampleDestination> destinations;
-            for(std::size_t i=0;i<sceneColorImages_.size();++i)destinations.push_back({{sceneColorImages_[i].image,depthImages_[i].image,normalImages_[i].image},
-                {sceneColorImageViews_[i],depthImageViews_[i],normalImageViews_[i]}});
+            for(std::size_t i=0;i<sceneColorImages_.size();++i)destinations.push_back({{sceneColorImages_[i].image,depthImages_[i].image,normalImages_[i].image,displayMaskImages_[i].image},
+                {sceneColorImageViews_[i],depthImageViews_[i],normalImageViews_[i],displayMaskImageViews_[i]}});
             sceneMultisampling_=std::make_unique<azurerender::SceneMultisampling>(*rhi_,gpuAllocator_,sceneRenderExtent_,depthFormat_,normalFormat_,
                 azurerender::SceneSecondaryResolve::Average,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),context.shaderDirectory);
         }catch(const std::exception& error){multisampleFallback_=error.what();azurerender::RuntimeDiagnostics::instance().info("render","Multisample AA spatial fallback: "+multisampleFallback_);}
@@ -584,6 +584,7 @@ void AzureRenderApp::buildRenderContext(
     context.sceneColorFormat = kHdrSceneColorFormat;
     context.depthFormat = depthFormat_;
     context.normalFormat = normalFormat_;
+    context.displayMaskEnabled=!displayMaskImages_.empty();
     context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
     context.sceneRenderPass = sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
     context.postProcessRenderPass = postProcessRenderPass_;

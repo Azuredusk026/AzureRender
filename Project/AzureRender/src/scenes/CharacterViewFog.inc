@@ -55,6 +55,7 @@ struct CharacterSceneRenderer::ViewFogState {
                     auto material=base;material.vertexShader=layeredVertex;material.fragmentShader=layered;
                     material.alphaBlend=true;material.depthWrite=false;
                     material.primaryColorBlend=additive?rhi::PrimaryColorBlend::Additive:rhi::PrimaryColorBlend::Alpha;
+                    if(additive&&context.displayMaskEnabled){material.colorWriteMasks.assign(material.colorAttachmentCount,0xf);material.colorWriteMasks[2]=0;}
                     material.vertexBindings[1].stride=color?sizeof(std::array<float,4>):0;
                     for(unsigned facing=0;facing<4;++facing){
                         material.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;

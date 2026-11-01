@@ -83,14 +83,16 @@ def run(player,output,selected=None,validation=None):
                 '--qa-light','scene','--runtime-report',str(folder/'runtime.json')]
             if name=='fixed':command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             with (folder/'player.log').open('w',encoding='utf-8') as log:
-                subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
+                subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180,cwd=folder)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace')
-            assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
-            assert 'Allocator after unload: buffers=0 images=0' in log,name
+            assert not re.search(r'VUID-|Validation (?:Error|Warning)|SYNC-HAZARD|\[error\]',log,re.I),name
+            diagnostics=[json.loads(line) for line in (folder/'captures/azureplayer.log.jsonl').read_text().splitlines()]
+            assert not any(row['level']=='error' for row in diagnostics),name
+            assert any(row['message']=='Allocator after unload: buffers=0 images=0' for row in diagnostics),name
             if validation:assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             runtime=json.loads((folder/'runtime.json').read_text(encoding='utf-8'));assert not runtime['scriptErrors'] and not runtime['presentationErrors']
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text(encoding='utf-8'))
-            assert manifest['materialSurfaceProfileLayoutVersion']==18
+            assert manifest['materialSurfaceProfileLayoutVersion']==19
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name
             error=None;expected=None

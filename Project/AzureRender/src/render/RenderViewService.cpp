@@ -32,8 +32,8 @@ struct View {
     std::unique_ptr<TemporalReconstruction> temporal;
     std::string temporalFallback,multisampleFallback;
     std::unique_ptr<SceneMultisampling> multisampling;
-    std::array<rhi::GpuImage,4> images{};
-    std::array<VkImageView,4> views{};
+    std::array<rhi::GpuImage,5> images{};
+    std::array<VkImageView,5> views{};
     VkRenderPass scenePass=VK_NULL_HANDLE,shadowPass=VK_NULL_HANDLE;
     VkFramebuffer framebuffer=VK_NULL_HANDLE,shadowFramebuffer=VK_NULL_HANDLE;
     VkSampler sampler=VK_NULL_HANDLE;
@@ -82,6 +82,7 @@ struct RenderViewService::State {
         auto view=std::make_shared<View>();view->descriptor=descriptor;view->context=base;
         auto& context=view->context;context.scene=descriptor.scene;context.renderSettings=&view->descriptor.settings;context.motionOutput=nullptr;context.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;
         context.sceneWorldCoordinates=descriptor.sceneWorldCoordinates;
+        context.displayMaskEnabled=true;
         context.gpuTimingEnabled=false;context.timestampQueryPool=VK_NULL_HANDLE;context.submissionCounters=nullptr;
         context.renderExtent=descriptor.extent;context.swapchainExtent=descriptor.extent;
         if(descriptor.settings.antiAliasing==2){context.renderExtent.width*=2;context.renderExtent.height*=2;}
@@ -91,8 +92,8 @@ struct RenderViewService::State {
         context.qaInstanceCount=1;context.preparedMeshes=nullptr;
         auto& rhi=*context.rhi;
         const auto shadowExtent=std::max(1u,context.shadowMapSize);
-        const std::array<VkFormat,4> formats{context.sceneColorFormat,context.depthFormat,context.normalFormat,context.shadowFormat};
-        for(std::size_t i=0;i<4;++i){
+        const std::array<VkFormat,5> formats{context.sceneColorFormat,context.depthFormat,context.normalFormat,context.shadowFormat,VK_FORMAT_R8_UNORM};
+        for(std::size_t i=0;i<5;++i){
             const bool depth=i==1 || i==3;const auto width=i==3?shadowExtent:context.renderExtent.width;
             const auto height=i==3?shadowExtent:context.renderExtent.height;
             view->images[i]=context.allocator->createImage2D(width,height,formats[i],
@@ -102,12 +103,13 @@ struct RenderViewService::State {
         rhi::RenderPassDesc pass;
         pass.attachments={{formats[0],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
             {formats[1],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,true,true,true},
-            {formats[2],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false}};
+            {formats[2],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+            {formats[4],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false}};
         pass.depthAttachment=1;pass.externalReadDependency=true;
         view->scenePass=rhi.createRenderPass(pass);
         rhi::RenderPassDesc shadow;shadow.attachments={{formats[3],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,true,true,true}};
         shadow.depthAttachment=0;shadow.externalReadDependency=true;view->shadowPass=rhi.createRenderPass(shadow);
-        view->framebuffer=rhi.createFramebuffer({view->scenePass,{view->views[0],view->views[1],view->views[2]},context.renderExtent.width,context.renderExtent.height});
+        view->framebuffer=rhi.createFramebuffer({view->scenePass,{view->views[0],view->views[1],view->views[2],view->views[4]},context.renderExtent.width,context.renderExtent.height});
         view->shadowFramebuffer=rhi.createFramebuffer({view->shadowPass,{view->views[3]},shadowExtent,shadowExtent});
         view->sampler=rhi.createSampler({VK_FILTER_LINEAR,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,0,false});
         context.sceneRenderPass=view->scenePass;context.sceneFramebuffer=view->framebuffer;
@@ -119,7 +121,7 @@ struct RenderViewService::State {
         if(descriptor.settings.antiAliasing==3){
             if(view->renderer->capabilities().supportsMotionVectors){
                 try{view->temporal=std::make_unique<TemporalReconstruction>(rhi,*context.allocator,context.renderExtent,context.depthFormat,
-                    std::vector<TemporalSceneSource>{{view->images[0].image,view->views[0],view->images[1].image,view->views[1]}},context.shaderDirectory);
+                    std::vector<TemporalSceneSource>{{view->images[0].image,view->views[0],view->images[1].image,view->views[1],view->images[4].image,view->views[4]}},context.shaderDirectory);
                     context.motionOutput=&view->temporal->motion();}
                 catch(const std::exception& error){view->temporalFallback=error.what();}
             }else view->temporalFallback="Renderer does not provide motion vectors";
@@ -130,12 +132,15 @@ struct RenderViewService::State {
                 if(!rhi.supportsSampleShading()||!context.descriptorLimits.standardSampleLocations)throw std::runtime_error("Device lacks enabled standard sample shading");
                 view->multisampling=std::make_unique<SceneMultisampling>(rhi,*context.allocator,context.renderExtent,context.depthFormat,context.normalFormat,
                     SceneSecondaryResolve::Average,context.maxFramesInFlight,std::vector<SceneMultisampleDestination>{{
-                        {view->images[0].image,view->images[1].image,view->images[2].image},{view->views[0],view->views[1],view->views[2]}}},context.shaderDirectory);
+                        {view->images[0].image,view->images[1].image,view->images[2].image,view->images[4].image},
+                        {view->views[0],view->views[1],view->views[2],view->views[4]}}},context.shaderDirectory);
                 context.rasterizationSamples=SceneMultisampling::kSamples;context.sceneRenderPass=view->multisampling->renderPass();
                 context.sceneFramebuffer=view->multisampling->framebuffer(0);
             }catch(const std::exception& error){view->multisampleFallback=error.what();}
         }
-        view->output=std::make_unique<RenderViewOutput>(context,view->views[0],view->sampler,descriptor.transfer);
+        const std::array<VkImageView,2> displayHistory=view->temporal
+            ?std::array<VkImageView,2>{view->temporal->displayMaskView(0),view->temporal->displayMaskView(1)}:std::array<VkImageView,2>{};
+        view->output=std::make_unique<RenderViewOutput>(context,view->views[0],view->sampler,descriptor.transfer,view->views[4],displayHistory);
         view->renderer->onLoad(context);view->loaded=true;
         return view;
     }
@@ -211,6 +216,7 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
             initial.aspectMask=(i==1 || i==3)?VK_IMAGE_ASPECT_DEPTH_BIT:VK_IMAGE_ASPECT_COLOR_BIT;
             return graph.importImage("view-"+std::to_string(index)+"-"+std::to_string(i),initial);};
         SceneGraphResources resources{import(0),import(1),import(2),import(3)};
+        resources.displayMask=import(4);
         bool temporalReady=false;std::array<RenderGraph::ResourceId,2> motion{};
         if(view->temporal){motion=view->temporal->importMotion(graph,"view-"+std::to_string(index));resources.motion=motion[0];resources.motionSurfaceDepth=motion[1];
             const auto* rendererState=view->renderer->sceneState();
@@ -219,11 +225,15 @@ void RenderViewService::schedule(RenderGraph& graph,const SceneFrameData& frame,
         const auto firstPass=graph.passes().size();
         auto sceneResources=resources;std::array<RenderGraph::ResourceId,3> samples{};
         if(view->multisampling){samples=view->multisampling->importSources(graph,recording.currentFrame,"view-samples-"+std::to_string(index));
-            sceneResources.color=samples[0];sceneResources.depth=samples[1];sceneResources.normal=samples[2];}
+            sceneResources.color=samples[0];sceneResources.depth=samples[1];sceneResources.normal=samples[2];
+            sceneResources.displayMask=view->multisampling->importDisplayMaskSource(graph,recording.currentFrame,"view-samples-"+std::to_string(index));}
         view->renderer->registerPasses(graph,sceneResources,view->context);
-        if(view->multisampling)view->multisampling->schedule(graph,recording.currentFrame,0,samples,{resources.color,resources.depth,resources.normal},"view-multisample-"+std::to_string(index));
-        if(temporalReady)view->temporal->schedule(graph,resources.color,resources.depth,motion,"view-"+std::to_string(index));
-        view->output->schedule(graph,resources.color,"view-"+std::to_string(index),temporalReady);
+        if(view->multisampling)view->multisampling->schedule(graph,recording.currentFrame,0,samples,{resources.color,resources.depth,resources.normal},"view-multisample-"+std::to_string(index),
+            std::array<RenderGraph::ResourceId,2>{sceneResources.displayMask,resources.displayMask});
+        auto displayMaskForGrade=resources.displayMask;unsigned displayHistorySelector=0;
+        if(temporalReady){const auto resolved=view->temporal->schedule(graph,resources.color,resources.depth,motion,"view-"+std::to_string(index),resources.displayMask);
+            if(resolved){displayMaskForGrade=*resolved;displayHistorySelector=1+view->temporal->preparedDisplayMaskIndex();}}
+        view->output->schedule(graph,resources.color,"view-"+std::to_string(index),temporalReady,displayMaskForGrade,displayHistorySelector);
         // The one-shot graph retains the owner through recording and worker joins.
         const auto lease=std::make_shared<std::shared_ptr<View>>(view);
         const auto recorded=std::make_shared<bool>(false);
@@ -278,6 +288,8 @@ nlohmann::json RenderViewService::describe(RenderViewHandle handle) const{
         {"renderCount",view.renderCount},{"colorImage",reinterpret_cast<std::uintptr_t>(view.images[0].image)},
         {"lastRenderSubmission",view.lastRenderSubmission},{"submittedRenderCount",view.submittedRenderCount},
         {"sceneAttachmentFormats",{view.context.sceneColorFormat,view.context.depthFormat,view.context.normalFormat}},
+        {"displayMaskFormat",VK_FORMAT_R8_UNORM},{"displayMaskBytes",std::uint64_t(view.context.renderExtent.width)*view.context.renderExtent.height},
+        {"temporalDisplayMaskFormat",TemporalReconstruction::kDisplayMaskHistoryFormat},{"temporalDisplayMaskBytes",view.temporal?view.temporal->displayMaskByteSize():0},
         {"rasterizationSamples",static_cast<unsigned>(view.context.rasterizationSamples)},{"multisampleSourceSlots",view.multisampling?view.context.maxFramesInFlight:0},
         {"multisampleBytes",view.multisampling?view.multisampling->byteSize():0},{"multisampleAllocatedBytes",view.multisampling?view.multisampling->allocatedByteSize():0},
         {"multisampleFallback",view.multisampleFallback},{"temporalAvailable",view.temporal!=nullptr},{"temporalHistorySubmission",view.temporal?view.temporal->historySubmission():0},

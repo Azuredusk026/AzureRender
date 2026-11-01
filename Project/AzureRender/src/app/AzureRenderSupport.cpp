@@ -295,6 +295,7 @@ void AzureRenderApp::cleanupEditorViewportResources(
         sceneColorImages_);
     destroyImages(depthImageViews_, depthImages_);
     destroyImages(normalImageViews_, normalImages_);
+    destroyImages(displayMaskImageViews_,displayMaskImages_);
 
     if (destroySampler && editorViewportSampler_ != VK_NULL_HANDLE) {
         vkDestroySampler(device_, editorViewportSampler_, nullptr);

@@ -25,6 +25,9 @@ void AzureRenderApp::createPostProcessDescriptorSetLayout() {
     VkDescriptorSetLayoutBinding gridBinding=normalBinding;
     gridBinding.binding=4;gridBinding.descriptorType=VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
     VkDescriptorSetLayoutBinding lutBinding=normalBinding;lutBinding.binding=5;
+    VkDescriptorSetLayoutBinding displayMaskBinding=normalBinding;displayMaskBinding.binding=6;
+    VkDescriptorSetLayoutBinding historyDisplay0Binding=normalBinding;historyDisplay0Binding.binding=7;
+    VkDescriptorSetLayoutBinding historyDisplay1Binding=normalBinding;historyDisplay1Binding.binding=8;
     const std::array bindings = {
         normalBinding,
         depthBinding,
@@ -32,6 +35,8 @@ void AzureRenderApp::createPostProcessDescriptorSetLayout() {
         sceneColorBinding,
         gridBinding,
         lutBinding,
+        displayMaskBinding,
+        historyDisplay0Binding,historyDisplay1Binding,
     };
     VkDescriptorSetLayoutCreateInfo layoutInfo{
         VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO};
@@ -72,7 +77,7 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
         static_cast<std::uint32_t>(swapchainImages_.size());
     VkDescriptorPoolSize poolSize{};
     poolSize.type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    poolSize.descriptorCount = descriptorCount * 5;
+    poolSize.descriptorCount = descriptorCount * 8;
     VkDescriptorPoolCreateInfo poolInfo{
         VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO};
     const std::array poolSizes{poolSize,VkDescriptorPoolSize{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,descriptorCount}};
@@ -126,7 +131,8 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
         sceneColorInfo.imageView = sceneColorImageViews_[index];
         sceneColorInfo.sampler = screenAttachmentSampler_;
         const VkDescriptorImageInfo lutInfo{colorGradingLut_->sampler(),colorGradingLut_->view(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
-        std::array<VkWriteDescriptorSet, 6> writes{};
+        const VkDescriptorImageInfo displayMaskInfo{screenAttachmentSampler_,displayMaskImageViews_[index],VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
+        std::array<VkWriteDescriptorSet, 9> writes{};
         writes[0] = {VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};
         writes[0].dstSet = postProcessDescriptorSets_[index];
         writes[0].dstBinding = 0;
@@ -161,12 +167,29 @@ void AzureRenderApp::createPostProcessDescriptorSets() {
         writes[4].descriptorType=VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;writes[4].descriptorCount=1;writes[4].pBufferInfo=&gridInfo;
         writes[5]={VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};writes[5].dstSet=postProcessDescriptorSets_[index];writes[5].dstBinding=5;
         writes[5].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;writes[5].descriptorCount=1;writes[5].pImageInfo=&lutInfo;
+        writes[6]={VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};writes[6].dstSet=postProcessDescriptorSets_[index];writes[6].dstBinding=6;
+        writes[6].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;writes[6].descriptorCount=1;writes[6].pImageInfo=&displayMaskInfo;
+        for(unsigned i=7;i<9;++i){writes[i]=writes[6];writes[i].dstBinding=i;}
         vkUpdateDescriptorSets(
             device_,
             static_cast<std::uint32_t>(writes.size()),
             writes.data(),
             0,
             nullptr);
+    }
+}
+
+void AzureRenderApp::updateTemporalDisplayDescriptors(){
+    for(std::size_t index=0;index<postProcessDescriptorSets_.size();++index){
+        std::array<VkDescriptorImageInfo,2> images{};std::array<VkWriteDescriptorSet,2> writes{};
+        for(unsigned history=0;history<2;++history){
+            images[history]={screenAttachmentSampler_,temporalReconstruction_&&temporalReconstruction_->hasDisplayMask()
+                ?temporalReconstruction_->displayMaskView(history):displayMaskImageViews_.at(index),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
+            writes[history]={VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET};writes[history].dstSet=postProcessDescriptorSets_[index];
+            writes[history].dstBinding=7+history;writes[history].descriptorCount=1;writes[history].descriptorType=VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+            writes[history].pImageInfo=&images[history];
+        }
+        vkUpdateDescriptorSets(device_,2,writes.data(),0,nullptr);
     }
 }
 

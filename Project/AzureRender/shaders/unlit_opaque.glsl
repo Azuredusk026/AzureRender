@@ -26,6 +26,7 @@ bool azureWritePlainUnlitBeauty(vec4 baseColor,vec3 geometricNormal,float platfo
         *mix(1.0,.68,clamp(material.matcapColor.a,0.0,1.0));
     if(camera.clusterLighting.x>.5)participation=0;
     outputNormal=vec4(geometricNormal*.5+.5,participation);
+    azureWriteDisplayMask(1.0);
 #endif
     return true;
 }

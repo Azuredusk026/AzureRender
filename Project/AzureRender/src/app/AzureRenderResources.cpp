@@ -107,6 +107,8 @@ void AzureRenderApp::createDepthResources() {
 void AzureRenderApp::createNormalResources() {
     normalImages_.resize(swapchainImages_.size());
     normalImageViews_.resize(swapchainImages_.size());
+    displayMaskImages_.resize(swapchainImages_.size());
+    displayMaskImageViews_.resize(swapchainImages_.size());
     for (std::size_t index = 0; index < swapchainImages_.size(); ++index) {
         normalImages_[index] = gpuAllocator_.createImage2D(
             sceneRenderExtent_.width,
@@ -118,6 +120,9 @@ void AzureRenderApp::createNormalResources() {
             normalImages_[index].image,
             normalFormat_,
             VK_IMAGE_ASPECT_COLOR_BIT);
+        displayMaskImages_[index]=gpuAllocator_.createImage2D(sceneRenderExtent_.width,sceneRenderExtent_.height,
+            VK_FORMAT_R8_UNORM,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT);
+        displayMaskImageViews_[index]=createImageView(displayMaskImages_[index].image,VK_FORMAT_R8_UNORM,VK_IMAGE_ASPECT_COLOR_BIT);
     }
 }
 

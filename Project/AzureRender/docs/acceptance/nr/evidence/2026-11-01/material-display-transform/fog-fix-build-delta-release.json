@@ -1,0 +1,12 @@
+{
+  "sourceChanges": [
+    "shaders/view_fog_material.glsl"
+  ],
+  "shaderChanges": [
+    "mesh_fog.frag.spv",
+    "mesh_fog_bindless.frag.spv",
+    "mesh_fog_bindless_samples.frag.spv",
+    "mesh_fog_samples.frag.spv"
+  ],
+  "programsIdentical": true
+}

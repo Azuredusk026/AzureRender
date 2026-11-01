@@ -1,6 +1,7 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
 #include "fragment_sampling.glsl"
+layout(location=2) out vec4 outputDisplayMask;
 #if defined(AZURE_GEOMETRY_SAMPLES)
 #define AZURE_MASK_TYPE sampler2DMS
 #define AZURE_MASK_SIZE textureSize(outlineMask)
@@ -12,6 +13,8 @@
 #endif
 #if defined(AZURE_VIEW_SCALED_OUTLINE)
 #include "outline_surface_fragment.glsl"
+struct PackedDisplayProfile { vec4 rows[22]; };
+layout(std430,binding=27) readonly buffer MaterialDisplayProfiles { PackedDisplayProfile profiles[]; } displayProfiles;
 layout(binding=0) uniform Camera { vec4 position; vec4 forward; vec4 grid; vec4 depth; } camera;
 layout(binding=26) uniform AZURE_MASK_TYPE outlineMask;
 layout(location=0) out vec4 outputColor;
@@ -26,6 +29,7 @@ void main() {
     }
     outputColor=shellColor;
     outputNormal=vec4(.5,.5,1,0);
+    outputDisplayMask=vec4(1.0-displayProfiles.profiles[shell.materialIndex].rows[21].x,0,0,1);
 }
 #else
 #include "node_opacity.glsl"
@@ -48,5 +52,6 @@ void main() {
     if(!azureNodeOpacityCovered(opacityCoordinate,nodeOpacity.value)) discard;
     outputColor = vec4(0.018, 0.028, 0.042, 1.0);
     outputNormal = vec4(0.5, 0.5, 1.0, 0.0);
+    outputDisplayMask=vec4(1,0,0,1);
 }
 #endif

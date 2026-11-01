@@ -687,6 +687,46 @@ void testMaterialRadianceScale(const nlohmann::json& fixture,const std::filesyst
     }
 }
 
+void testMaterialDisplayTransform(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;
+    auto source=fixture;
+    source["materials"][0]["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","generic"},
+        {"features",Json::array()},{"radianceScale",.25},{"displayTransform","linear"}};
+    const auto path=directory/"display-transform.gltf";
+    const auto load=[&](const Json& value){std::ofstream(path)<<value.dump();return loadGltfAsset(path.string());};
+    const auto material=load(source).materials.at(0);const auto packed=packMaterialSurfaceProfile(material);
+    require(material.displayTransform==MaterialDisplayTransform::Linear&&packed.rows[21][0]==1&&packed.rows[19][3]==.25F,
+        "Linear display must reach the common profile tail without changing radiance units");
+    auto defaults=source;auto& profile=defaults["materials"][0]["extras"]["azureRenderMaterial"];
+    profile.erase("displayTransform");
+    require(load(defaults).materials.at(0).displayTransform==MaterialDisplayTransform::Scene,
+        "Omitted display transform must retain the scene policy");
+    profile["displayTransform"]="scene";
+    require(packMaterialSurfaceProfile(load(defaults).materials.at(0)).rows[21][0]==0,
+        "Explicit scene display must retain the neutral common tail");
+    for(const auto& value:Json::array({nullptr,false,1,"Linear","aces",Json::array()})) {
+        auto invalid=source;invalid["materials"][0]["extras"]["azureRenderMaterial"]["displayTransform"]=value;
+        std::string failure;try{(void)load(invalid);}catch(const std::exception& error){failure=error.what();}
+        require(failure.find("displayTransform")!=std::string::npos,"Invalid display policy must name displayTransform");
+    }
+    auto legacy=defaults;auto& legacyProfile=legacy["materials"][0]["extras"]["azureRenderMaterial"];
+    legacyProfile.erase("radianceScale");legacyProfile["schemaVersion"]=1;
+    std::string failure;try{(void)load(legacy);}catch(const std::exception& error){failure=error.what();}
+    require(failure.find("displayTransform")!=std::string::npos,"Explicit display policies require profile version two");
+    for(bool additive:{false,true}) {
+        AssetMaterial composed;composed.displayTransform=MaterialDisplayTransform::Linear;
+        if(additive){composed.unlitTextureLayers.present=true;composed.unlitTextureLayers.composite=UnlitTextureLayers::Composite::Additive;}
+        else composed.materialFeatures|=MaterialFeatureMultiplyComposite;
+        failure.clear();try{(void)packMaterialSurfaceProfile(composed);}catch(const std::exception& error){failure=error.what();}
+        require(failure.find("displayTransform")!=std::string::npos,"Inherited composites reject a separate display policy");
+        composed.displayTransform=MaterialDisplayTransform::Scene;
+        require(packMaterialSurfaceProfile(composed).rows[21][0]==0,"Inherited composites retain the scene sentinel");
+    }
+    AssetMaterial invalid;invalid.displayTransform=static_cast<MaterialDisplayTransform>(99);
+    failure.clear();try{(void)packMaterialSurfaceProfile(invalid);}catch(const std::exception& error){failure=error.what();}
+    require(failure.find("displayTransform")!=std::string::npos,"Typed invalid display enums must be rejected");
+}
+
 void testEyeRadialSurface(const nlohmann::json& fixture,const std::filesystem::path& directory) {
     using Json=nlohmann::json;
     constexpr std::uint32_t eyeBit=1U<<17U;
@@ -1045,6 +1085,7 @@ int main(int argc,char** argv) { try {
     testProjectedHairRamp(input,directory);
     testOutlineSurface(input,directory);
     testMaterialRadianceScale(input,directory);
+    testMaterialDisplayTransform(input,directory);
     testEyeRadialSurface(input,directory);
     testMaterialSurfacePacking();
     testMultiplyComposite(input,directory);

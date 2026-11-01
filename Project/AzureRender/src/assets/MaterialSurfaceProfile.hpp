@@ -6,14 +6,14 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=18;
+    static constexpr unsigned kLayoutVersion=19;
     using Row=std::array<float,4>;
-    std::array<Row,21> rows=[] {
-        std::array<Row,21> value{};value[19][3]=1;return value;
+    std::array<Row,22> rows=[] {
+        std::array<Row,22> value{};value[19][3]=1;return value;
     }();
 };
 static_assert(std::is_standard_layout_v<PackedMaterialSurfaceProfile>);
-static_assert(sizeof(PackedMaterialSurfaceProfile)==336);
+static_assert(sizeof(PackedMaterialSurfaceProfile)==352);
 static_assert(alignof(PackedMaterialSurfaceProfile)==16);
 static_assert(offsetof(PackedMaterialSurfaceProfile,rows)==0);
 static_assert(sizeof(PackedMaterialSurfaceProfile::Row)==16);
@@ -64,6 +64,9 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
     validateMaterialRadianceScale(material.radianceScale,
         (material.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
+    validateMaterialDisplayTransform(material.displayTransform,
+        (material.materialFeatures&MaterialFeatureMultiplyComposite)!=0
+        ||(material.unlitTextureLayers.present&&material.unlitTextureLayers.composite==UnlitTextureLayers::Composite::Additive));
     PackedMaterialSurfaceProfile result;
     if(material.unlitTextureLayers.present) {
         const auto& p=material.unlitTextureLayers;auto& r=result.rows;
@@ -95,6 +98,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         r[16][3]=p.fogMode==UnlitTextureLayers::FogMode::Scene?1.F:0.F;
         r[15][3]=p.composite==UnlitTextureLayers::Composite::Additive?1.F:0.F;
         r[19][3]=material.radianceScale;
+        r[21][0]=static_cast<float>(material.displayTransform);
         return result;
     }
     if(material.nprDiffuse.present) {
@@ -131,6 +135,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         }
     }
     result.rows[19][3]=material.radianceScale;
+    result.rows[21][0]=static_cast<float>(material.displayTransform);
     return result;
 }
 }

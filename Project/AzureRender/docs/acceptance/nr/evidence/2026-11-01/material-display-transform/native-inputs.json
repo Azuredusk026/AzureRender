@@ -1,0 +1,174 @@
+{
+  "status": "prepared",
+  "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project",
+  "sourceProject": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\project",
+  "linkedFiles": 624,
+  "copiedFiles": 983,
+  "materials": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-0.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "bf50b644-fbea-5aa8-bbab-bb984f13b2d1",
+      "id": "89d76420-10fe-5b1a-80a3-0880ad842506"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-1.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "8a456d3a-da1d-5b0c-b2a0-31a5ab4b07b6",
+      "id": "0b6c1249-422e-595b-8136-bf97f576c3a4"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-10.azurematerial",
+      "displayTransform": "scene",
+      "radianceScale": 1,
+      "sourceId": "3422c27c-6277-5f21-97f6-64d29085459e",
+      "id": "033cb597-27a2-515e-9be9-471d50743988"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-11.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "536f27d7-ab2e-5c77-b01b-1147c97507ea",
+      "id": "f919b7a6-ca12-5772-b0e2-83cd5b5a046a"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-12.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "595af35d-e311-5dc0-93a9-a38a3717837c",
+      "id": "f9be5436-d208-55cb-b9dd-b06f75b8d97a"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-2.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "c65283bc-edbe-5b0a-b2b7-a5146eaf927a",
+      "id": "4d656751-73ae-598b-b3b2-18a2d52de04e"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-3.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "1480f515-c499-5594-8c39-8b3ed93ad0b8",
+      "id": "17024246-ec8a-5c32-b68c-b6f1f9d8ff10"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-4.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "0fe35d5e-6bb1-5f5e-ac67-dde1c9acf832",
+      "id": "fe57daa9-d6e6-595a-a4d2-f9414f268e9a"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-5.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "e2a5305d-7528-594d-869e-e7916f72a77c",
+      "id": "3944184e-5029-5eea-9cb5-5dac2a74b0bf"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-6.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "e4dee7bf-981b-5ff7-b37d-0fda9508dd7e",
+      "id": "c9dae682-c00f-59c0-bb84-e447c181e6a1"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-7.azurematerial",
+      "displayTransform": "scene",
+      "radianceScale": 1,
+      "sourceId": "6e3a0089-a684-57fd-923f-8b0670d2bfed",
+      "id": "67d632b6-c69f-5d87-9728-9da8bbedef8d"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-8.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "ca67e029-fd24-5a75-b8d3-1da645fea58f",
+      "id": "bb40e191-8bee-50ec-9830-2f6656e3ec3a"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\assets\\linear-display-materials\\material-9.azurematerial",
+      "displayTransform": "linear",
+      "radianceScale": 0.25,
+      "sourceId": "6478487e-fb6e-5083-bff3-77a22eb329b2",
+      "id": "596a1696-19c2-57af-b0dc-378a6effa15b"
+    }
+  ],
+  "cases": [
+    {
+      "name": "near-linear-isolated",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\near-linear-isolated.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\scene\\near-linear-isolated.azurelevel",
+      "captureFrames": 1,
+      "width": 1536,
+      "height": 1536,
+      "normalized": true,
+      "isolated": true,
+      "antiAliasing": 0,
+      "displayPolicy": "linear"
+    },
+    {
+      "name": "near-world-linear",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\near-world-linear.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\scene\\near-world-linear.azurelevel",
+      "captureFrames": 1,
+      "width": 1536,
+      "height": 1536,
+      "normalized": true,
+      "isolated": false,
+      "antiAliasing": 0,
+      "displayPolicy": "linear"
+    },
+    {
+      "name": "near-world-temporal",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\near-world-temporal.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\scene\\near-world-temporal.azurelevel",
+      "captureFrames": 32,
+      "width": 1536,
+      "height": 1536,
+      "normalized": true,
+      "isolated": false,
+      "antiAliasing": 3,
+      "displayPolicy": "linear"
+    },
+    {
+      "name": "full-world-linear",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\full-world-linear.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\scene\\full-world-linear.azurelevel",
+      "captureFrames": 12,
+      "width": 2560,
+      "height": 1440,
+      "normalized": true,
+      "isolated": false,
+      "antiAliasing": 1,
+      "displayPolicy": "linear"
+    },
+    {
+      "name": "full-world-hidden",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\full-world-hidden.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\scene\\full-world-hidden.azurelevel",
+      "captureFrames": 12,
+      "width": 2560,
+      "height": 1440,
+      "normalized": true,
+      "isolated": false,
+      "antiAliasing": 1,
+      "displayPolicy": "linear"
+    },
+    {
+      "name": "near-default-compatibility",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\near-default-compatibility.azureproject",
+      "level": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\project\\scene\\near-default-compatibility.azurelevel",
+      "captureFrames": 1,
+      "width": 1536,
+      "height": 1536,
+      "normalized": false,
+      "isolated": false,
+      "antiAliasing": 0,
+      "displayPolicy": "linear"
+    }
+  ]
+}

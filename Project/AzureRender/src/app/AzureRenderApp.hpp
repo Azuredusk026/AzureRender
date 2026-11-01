@@ -306,6 +306,8 @@ private:
     VkFormat normalFormat_ = VK_FORMAT_R8G8B8A8_UNORM;
     std::vector<azurerender::rhi::GpuImage> normalImages_;
     std::vector<VkImageView> normalImageViews_;
+    std::vector<azurerender::rhi::GpuImage> displayMaskImages_;
+    std::vector<VkImageView> displayMaskImageViews_;
     VkFormat shadowFormat_ = VK_FORMAT_UNDEFINED;
     azurerender::rhi::GpuImage shadowImage_;
     VkImageView shadowImageView_ = VK_NULL_HANDLE;
@@ -435,6 +437,7 @@ private:
     void createSwapchainSemaphores();
     void createCommandPool();
     void createPostProcessDescriptorSets();
+    void updateTemporalDisplayDescriptors();
     void createCommandBuffers();
     void createSyncObjects();
 

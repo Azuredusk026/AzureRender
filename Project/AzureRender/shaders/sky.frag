@@ -6,6 +6,7 @@ layout(binding=1) uniform sampler2D environmentTexture;
 layout(location = 0) in vec2 screenUv;
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
+layout(location=2) out vec4 outputDisplayMask;
 
 vec2 directionToEquirectangular(vec3 direction) {
     const float pi = 3.14159265358979323846;
@@ -32,4 +33,5 @@ void main() {
     }
     outputColor=vec4(color*camera.parameters.y,1.0);
     outputNormal=vec4(.5,.5,1.0,0.0);
+    outputDisplayMask=vec4(1,0,0,1);
 }

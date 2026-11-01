@@ -899,6 +899,15 @@
       "pinMarker": ".keep",
       "primaryProject": "project/near-grade-only.azureproject",
       "evidence": "docs/acceptance/nr/material-display-domain.md"
+    },
+    {
+      "path": "runs/20261101-043757-material-display-transform-93d6e0",
+      "pathBase": "build",
+      "purpose": "材质显示策略、时间覆盖历史及原生联合画质核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-world-linear.azureproject",
+      "evidence": "docs/acceptance/nr/material-display-transform.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

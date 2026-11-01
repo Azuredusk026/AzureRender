@@ -98,6 +98,7 @@ void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext
                 hairIntegralPipelines_[kind*4+facing]=rhi_->createGraphicsPipeline(desc);
                 if(kind==0){
                     desc.fragmentShader=snapshot;desc.renderPass=overlayDepthPass_;desc.colorAttachmentCount=2;
+                    desc.colorWriteMasks.assign(2,0xf);
                     desc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;desc.minSampleShading=0;
                     hairIntegralSnapshotPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
                 }

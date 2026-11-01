@@ -17,6 +17,7 @@ struct SceneGraphResources {
     RenderGraph::ResourceId shadow;
     RenderGraph::ResourceId motion=UINT32_MAX;
     RenderGraph::ResourceId motionSurfaceDepth=UINT32_MAX;
+    RenderGraph::ResourceId displayMask=UINT32_MAX;
 };
 
 // A pluggable scene renderer: the unit that draws a scene into the engine's
@@ -81,6 +82,8 @@ public:
         VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
         graph.attachment(pass, resources.normal, RenderGraphUsage::ColorAttachment,
         VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        if(resources.displayMask!=UINT32_MAX)
+            graph.attachment(pass,resources.displayMask,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     }
 
     // Destroys every resource created in onLoad. The context remains valid.

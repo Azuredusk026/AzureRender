@@ -133,13 +133,16 @@ def run(player, output, validation, selected):
                 '--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene']
             if fixed:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             (root/'command.json').write_text(json.dumps(command,indent=2))
-            with (root/'player.log').open('w') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
+            with (root/'player.log').open('w') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120,cwd=root)
             log=(root/'player.log').read_text(errors='replace')
-            assert 'Allocator after unload: buffers=0 images=0' in log and not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
+            diagnostics=[json.loads(line) for line in (root/'captures/azureplayer.log.jsonl').read_text().splitlines()]
+            assert any(row['message']=='Allocator after unload: buffers=0 images=0' for row in diagnostics),name
+            assert not any(row['level']=='error' for row in diagnostics),name
+            assert not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log),name
             if validation!='any':assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             manifest=json.loads((root/'frames/capture_manifest.json').read_text())
             if kind=='msaa':assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
-            assert manifest['materialSurfaceProfileLayoutVersion']==18 and manifest['cameraUniformBytes']==688,name
+            assert manifest['materialSurfaceProfileLayoutVersion']==19 and manifest['cameraUniformBytes']==688,name
             expected_state='analytic-only' if independent else 'camera-mismatch' if kind=='camera-mismatch' else 'matched'
             assert manifest['viewFogAnalyticEnabled'] and manifest['viewFogFrameBytes']==336 and manifest['viewFogFrameLayoutVersion']==2,name
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])

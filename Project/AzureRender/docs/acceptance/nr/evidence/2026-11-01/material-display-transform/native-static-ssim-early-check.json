@@ -1,0 +1,27 @@
+{
+  "domain": "sRGB luminance",
+  "window": 11,
+  "sigma": 1.5,
+  "rows": [
+    {
+      "region": "hair-crown",
+      "ssim": 0.9998374037865481
+    },
+    {
+      "region": "hair-fringe",
+      "ssim": 0.9998433148393197
+    },
+    {
+      "region": "face-cheek",
+      "ssim": 0.9997730808342687
+    },
+    {
+      "region": "face-chin",
+      "ssim": 0.9997533314820359
+    },
+    {
+      "region": "eye-left",
+      "ssim": 0.9986740962004589
+    }
+  ]
+}

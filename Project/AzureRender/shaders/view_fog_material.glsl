@@ -2,6 +2,8 @@
 void main(){
     PackedMaterialSurfaceProfile p=materialSurfaceProfiles.profiles[material.materialPadding>>1U];
     vec4 baseColor;vec4 color=azureSampleUnlitSurface(p,baseColor);
+    float radianceScale=azureMaterialRadianceScale();
+    if(radianceScale!=1.0)color.rgb*=radianceScale;
     float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
     if(p.rows[16].w>.5)color.rgb=azureApplyFogTransport(azureSampleViewFog(AZURE_FRAGMENT_COORD.xy,depth),color.rgb,p.rows[15].w>.5?0.0:1.0);
     int effect=int(floor(camera.qaParameters.y+.5));
@@ -18,6 +20,7 @@ void main(){
     outputColor=vec4(diagnostic,color.a);
     if((material.materialPadding&AZURE_SELECTED_PADDING)!=0U){outputColor.rgb=mix(outputColor.rgb,vec3(.96,.62,.10),.42);outputColor.a=1;}
     outputColor.a*=material.nodeOpacity;
+    azureWriteDisplayMask(outputColor.a);
     float participation=(1.0-clamp(material.showcasePlatform,0.0,1.0))*material.featureParameters.x
         *mix(1.0,.68,clamp(material.matcapColor.a,0.0,1.0));
     if(camera.clusterLighting.x>.5)participation=0;

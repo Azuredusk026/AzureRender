@@ -217,6 +217,9 @@ float materialCharacterVisibility(uint source,vec3 normal,float sceneVisibility,
 }
 layout(location = 0) out vec4 outputColor;
 layout(location = 1) out vec4 outputNormal;
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+layout(location=2) out vec4 outputDisplayMask;
+#endif
 
 struct SceneLightSample { vec3 incoming;vec3 direction;float distanceSquared;float attenuation; };
 SceneLightSample sampleSceneLight(ClusterLight light,vec3 position,bool projectedDistance) {
@@ -244,7 +247,7 @@ struct ProjectedHairProfile {
     vec4 secondaryColor;
     vec4 objectX,objectY,objectZ;
 };
-struct PackedMaterialSurfaceProfile { vec4 rows[21]; };
+struct PackedMaterialSurfaceProfile { vec4 rows[22]; };
 #include "unlit_texture_layers.glsl"
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
@@ -252,6 +255,12 @@ layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
 float azureMaterialRadianceScale() {
     return materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[19].w;
 }
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+void azureWriteDisplayMask(float coverage) {
+    float sceneWeight=1.0-materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[21].x;
+    outputDisplayMask=vec4(sceneWeight,0,0,coverage);
+}
+#endif
 ProjectedHairProfile loadProjectedHairSurfaceProfile(uint index) {
     PackedMaterialSurfaceProfile p=materialSurfaceProfiles.profiles[index];
     return ProjectedHairProfile(p.rows[0],p.rows[1],p.rows[2],p.rows[3],p.rows[4],p.rows[5]);
@@ -1902,6 +1911,9 @@ void main() {
         outputColor.rgb=mix(vec3(1.0),outputColor.rgb,compositeCoverage);
         outputColor.a=0.0;
     }
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+    azureWriteDisplayMask(outputColor.a);
+#endif
     float innerOutlineParticipation =
         (1.0 - platformMask)
         * (overlayMaterial ? 0.0 : 1.0)

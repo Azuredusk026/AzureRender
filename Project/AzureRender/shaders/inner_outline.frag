@@ -7,6 +7,9 @@ layout(binding = 1) uniform sampler2D depthTexture;
 layout(binding = 2) uniform sampler2D shadowTexture;
 layout(binding = 3) uniform sampler2D sceneColorTexture;
 layout(binding = 5) uniform sampler2D colorGradingLutTexture;
+layout(binding=6) uniform sampler2D displayMaskTexture;
+layout(binding=7) uniform sampler2D historyDisplayMask0;
+layout(binding=8) uniform sampler2D historyDisplayMask1;
 layout(std140,binding=4) uniform GroundGrid {
     mat4 viewProjection;
     vec4 minorColor,majorColor,xAxis,zAxis,options;
@@ -153,9 +156,16 @@ vec4 shadePixel(vec2 screenUv) {
         hdrColor += bloom;
         hdrColor = mix(hdrColor, outline.outlineColor.rgb, edge);
         hdrColor *= exp2(outline.exposureEv);
-        if(outline.colorGradingLut.x>1.5)
-            return vec4(sampleColorGradingLut(colorGradingLutTexture,hdrColor,outline.colorGradingLut.x,
-                outline.colorGradingLut.y,outline.colorGradingLut.z),1);
+        float sceneWeight=outline.gradeParameters.w>.5?clamp(texture(displayMaskTexture,screenUv).r,0,1):1;
+        if(outline.gradeParameters.w>1.5)sceneWeight=clamp(outline.gradeParameters.w<2.5
+            ?texture(historyDisplayMask0,screenUv).g:texture(historyDisplayMask1,screenUv).g,0,1);
+        vec3 linearDisplay=clamp(hdrColor,0,1);
+        if(sceneWeight<=0)return vec4(linearDisplay,1);
+        if(outline.colorGradingLut.x>1.5){
+            vec3 graded=sampleColorGradingLut(colorGradingLutTexture,hdrColor,outline.colorGradingLut.x,
+                outline.colorGradingLut.y,outline.colorGradingLut.z);
+            return vec4(sceneWeight>=1?graded:mix(linearDisplay,graded,sceneWeight),1);
+        }
         vec3 displayLinear = outline.toneMappingEnabled > 0.5
             ? acesFitted(hdrColor)
             : clamp(hdrColor, 0.0, 1.0);
@@ -170,6 +180,7 @@ vec4 shadePixel(vec2 screenUv) {
         displayLinear = (displayLinear - vec3(0.5))
             * outline.gradeParameters.y + vec3(0.5);
         displayLinear = clamp(displayLinear, vec3(0.0), vec3(1.0));
+        if(sceneWeight<1)displayLinear=mix(linearDisplay,displayLinear,sceneWeight);
         return vec4(displayLinear, 1.0);
     }
 }

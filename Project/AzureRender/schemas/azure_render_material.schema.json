@@ -30,6 +30,11 @@
         "showcase"
       ]
     },
+    "displayTransform": {
+      "type": "string",
+      "enum": ["scene", "linear"],
+      "default": "scene"
+    },
     "radianceScale": {
       "type": "number",
       "minimum": 0,
@@ -165,12 +170,16 @@
   },
   "allOf": [
     {
+      "if": {"required": ["displayTransform"]},
+      "then": {"properties": {"schemaVersion": {"const": 2}}}
+    },
+    {
       "if": {"required": ["radianceScale"]},
       "then": {"properties": {"schemaVersion": {"const": 2}}}
     },
     {
       "if": {"required": ["features"], "properties": {"features": {"contains": {"const": "multiply-composite"}}}},
-      "then": {"properties": {"radianceScale": {"const": 1}}}
+      "then": {"properties": {"radianceScale": {"const": 1}, "displayTransform": {"const": "scene"}}}
     }
   ],
   "$defs": {

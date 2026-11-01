@@ -28,7 +28,7 @@ void SkyPass::load(const RenderContext& c){
   for(auto set:sets_){uniforms_.push_back(allocator_->createBuffer(sizeof(Uniform),VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,true));rhi_->writeDescriptorBuffer({set,0,VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,uniforms_.back().buffer,sizeof(Uniform)});rhi_->writeDescriptorImage({set,1,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,view_,sampler_,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});}
   layout_=rhi_->createPipelineLayout(setLayout_,nullptr);
   auto vertex=rhi_->createShaderModule(readBinaryFile(c.shaderDirectory+"/blackhole.vert.spv"));VkShaderModule fragment=VK_NULL_HANDLE;
-  try{fragment=rhi_->createShaderModule(readBinaryFile(c.shaderDirectory+"/sky.frag.spv"));rhi::GraphicsPipelineDesc desc;desc.vertexShader=vertex;desc.fragmentShader=fragment;desc.cullMode=VK_CULL_MODE_NONE;desc.depthTest=false;desc.depthWrite=false;desc.colorAttachmentCount=2;desc.layout=layout_;desc.renderPass=c.sceneRenderPass;pipeline_=rhi_->createGraphicsPipeline(desc);}
+  try{fragment=rhi_->createShaderModule(readBinaryFile(c.shaderDirectory+"/sky.frag.spv"));rhi::GraphicsPipelineDesc desc;desc.vertexShader=vertex;desc.fragmentShader=fragment;desc.cullMode=VK_CULL_MODE_NONE;desc.depthTest=false;desc.depthWrite=false;desc.colorAttachmentCount=sceneColorAttachmentCount(c);desc.layout=layout_;desc.renderPass=c.sceneRenderPass;pipeline_=rhi_->createGraphicsPipeline(desc);}
   catch(...){rhi_->destroyShaderModule(vertex);rhi_->destroyShaderModule(fragment);throw;}
   rhi_->destroyShaderModule(vertex);rhi_->destroyShaderModule(fragment);
  }catch(...){release();throw;}

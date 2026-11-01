@@ -1,0 +1,62 @@
+[
+  {
+    "file": "tools/test_character_screen_rim_gpu.py",
+    "sourceSha256": "91703098e7a6c4a9750ca38d37549a23c59a9a8965eb57d786c7fb0e956058b5",
+    "resultSha256": "c33371153b397ebbf4ec0746f3c9f5693ae3215422f6c99def03c785ac82cfb0",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_eye_npr_gpu.py",
+    "sourceSha256": "99212d4241bca4f54096db952602001d06c20a11d84e5c1304ff2ada007a00e3",
+    "resultSha256": "670f161ac2de32422d04272c641f35ec25d17090b899b2b6d7a15f0a8c7ed510",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_material_radiance_gpu.py",
+    "sourceSha256": "89fc1156468a5d095ec6345789403261e455103e19d9e5d2a2a9277880703dd3",
+    "resultSha256": "2d1cfe4276acf840d310910667b60e06d180902245ce2c0e97f4d1087f19076c",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_npr_illumination_gpu.py",
+    "sourceSha256": "03220708dbb5ee36673efc35cad55aa02cd7f1e3c3f4483b6abf0f71bd6ad501",
+    "resultSha256": "a22cf872169c268e636822163f252ef19a43a6192ebd877cdf2f3dd6a8ec58f9",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_object_shadow_gpu.py",
+    "sourceSha256": "acef69fe02809fb8e0b642f653fc38f5ab191152f2bb1e334a9471486a6dd9ae",
+    "resultSha256": "8760b50a0220ef4c00e3d25adfdd7a6cce1d652cc1652abaa19ef9830f538637",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_scene_fog_gpu.py",
+    "sourceSha256": "0168f2e652d646bc5d597fa2ef29e34a7fd17cdf5f500bf45e802d96b663b4ed",
+    "resultSha256": "50d65813128e6bb6e32108f3d558f6f6a368a7942db4a7d66bf46aa4e6f6dc5a",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_unlit_texture_layers_gpu.py",
+    "sourceSha256": "cc2bc94f9b8ceac59836a3fcc1ba1753a25f1338976fd30bb391495cae9281ee",
+    "resultSha256": "931716ceb839e0abe366e9414d657cee76aaab217c16be00ad5f4c80bc46d2d0",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_vertex_color_gpu.py",
+    "sourceSha256": "7eed8c927736aa4def31b7e7fabc0ffdba54535657dd23beaa62b969cf41793e",
+    "resultSha256": "f3674242e2b609f71b57de1aa95e1530da3a33bf7ffa7f6b9a20f31273a93a15",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_view_fog_gpu.py",
+    "sourceSha256": "d05a90d22a55c7cf16fceab3d899b8b0956fcc11079f8c1a757acb00e262350d",
+    "resultSha256": "c125881f566035835b8324f66697cadaf88d8591085019c4799aab1f352953e0",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  },
+  {
+    "file": "tools/test_capture_camera_gpu.py",
+    "sourceSha256": "a4e6faae12ffc23fca22e6c9ed9833ed60c59226c1d00a812649d1655521bad9",
+    "resultSha256": "9dabd46155e31c1f0e0c9f6b0f177d4498f19458ee00a994aaa25dcccb5c27b6",
+    "change": "Version expectation only; numeric and visual budgets unchanged."
+  }
+]

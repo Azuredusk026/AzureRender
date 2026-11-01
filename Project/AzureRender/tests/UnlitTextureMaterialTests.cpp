@@ -56,6 +56,13 @@ int main(int argc,char** argv){try{
  require(!m.styleMaskPixels.empty()&&m.styleMaskWidth>0,"Second layer image reaches owned slot");
  const auto packed=packMaterialSurfaceProfile(m);
  require(packed.rows[16][3]==0,"Unlit material defaults to disabled scene fog");
+ auto displaySource=source;auto& displayProfile=displaySource["materials"][0]["extras"]["azureRenderMaterial"];
+ displayProfile["radianceScale"]=.25;displayProfile["displayTransform"]="linear";
+ const auto displayMaterial=load(displaySource).materials.at(0);const auto displayPacked=packMaterialSurfaceProfile(displayMaterial);
+ require(displayMaterial.displayTransform==MaterialDisplayTransform::Linear&&displayPacked.rows[21][0]==1&&displayPacked.rows[19][3]==.25F,
+  "Layered materials consume common radiance and display fields independently of surface ownership");
+ displayProfile["displayTransform"]="scene";
+ require(packMaterialSurfaceProfile(load(displaySource).materials.at(0)).rows[21][0]==0,"Layered scene display retains its neutral common tail");
  auto fogSource=source;auto& fogSurface=fogSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
  fogSurface["fogMode"]="scene";fogSurface["composite"]="additive";
  const auto fogMaterial=load(fogSource).materials.at(0);const auto fogPacked=packMaterialSurfaceProfile(fogMaterial);

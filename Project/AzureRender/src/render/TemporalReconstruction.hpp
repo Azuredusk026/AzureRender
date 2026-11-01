@@ -10,12 +10,15 @@ namespace azurerender {
 struct TemporalSceneSource {
     VkImage color=VK_NULL_HANDLE;VkImageView colorView=VK_NULL_HANDLE;
     VkImage depth=VK_NULL_HANDLE;VkImageView depthView=VK_NULL_HANDLE;
+    VkImage displayMask=VK_NULL_HANDLE;VkImageView displayMaskView=VK_NULL_HANDLE;
 };
 // One view's native-resolution HDR history. Sources and their depth views are
 // borrowed. Retire recording and GPU work before destruction or replacement.
 class TemporalReconstruction final {
 public:
     static constexpr std::uint64_t kBytesPerPixel=52,kMaximumBytes=512ULL*1024*1024;
+    static constexpr std::uint64_t kDisplayMaskBytesPerPixel=8;
+    static constexpr VkFormat kDisplayMaskHistoryFormat=VK_FORMAT_R16G16_SFLOAT;
     TemporalReconstruction(rhi::IRhi&,rhi::IGpuAllocator&,VkExtent2D,VkFormat depthFormat,
         std::vector<TemporalSceneSource>,const std::string& shaderDirectory,MotionVectorTarget* sharedMotion=nullptr);
     ~TemporalReconstruction();
@@ -24,8 +27,12 @@ public:
     MotionVectorTarget& motion() noexcept{return *motion_;}
     std::array<RenderGraph::ResourceId,2> importMotion(RenderGraph&,const std::string&) const;
     void prepare(const TemporalPreparedFrame&,std::uint32_t frame,std::uint32_t source);
-    void schedule(RenderGraph&,RenderGraph::ResourceId color,RenderGraph::ResourceId depth,
-        std::array<RenderGraph::ResourceId,2> motion,const std::string& name);
+    std::optional<RenderGraph::ResourceId> schedule(RenderGraph&,RenderGraph::ResourceId color,RenderGraph::ResourceId depth,
+        std::array<RenderGraph::ResourceId,2> motion,const std::string& name,RenderGraph::ResourceId displayMask=UINT32_MAX);
+    bool hasDisplayMask() const noexcept{return displayMaskEnabled_;}
+    std::uint64_t displayMaskByteSize() const noexcept{return hasDisplayMask()?std::uint64_t(extent_.width)*extent_.height*kDisplayMaskBytesPerPixel:0;}
+    VkImageView displayMaskView(unsigned index)const{if(!hasDisplayMask()||index>=2)throw std::out_of_range("Display history index");return views_[5+index];}
+    unsigned preparedDisplayMaskIndex()const {if(!pending_)throw std::logic_error("Display history requires a prepared frame");return pending_->next;}
     bool commit(std::uint64_t submission) noexcept;
     void cancel() noexcept {pending_.reset();recorded_=false;}
     std::uint64_t byteSize() const noexcept{return bytes_;}
@@ -39,7 +46,8 @@ private:
     std::unique_ptr<MotionVectorTarget> ownedMotion_;
     MotionVectorTarget* motion_=nullptr;
     // Scratch HDR, two HDR histories, two colour-surface depth histories.
-    std::array<rhi::GpuImage,5> images_{};std::array<VkImageView,5> views_{};
+    std::array<rhi::GpuImage,7> images_{};std::array<VkImageView,7> views_{};
+    bool displayMaskEnabled_=false;
     std::array<rhi::GpuBuffer,2> uniforms_{};
     VkSampler sampler_=VK_NULL_HANDLE;VkRenderPass copyPass_=VK_NULL_HANDLE,resolvePass_=VK_NULL_HANDLE;
     VkFramebuffer copyFramebuffer_=VK_NULL_HANDLE;std::vector<VkFramebuffer> resolveFramebuffers_;

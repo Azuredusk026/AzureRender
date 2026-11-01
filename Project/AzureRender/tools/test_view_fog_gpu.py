@@ -19,7 +19,8 @@ from test_unlit_texture_layers_gpu import profile, png_uri, linear
 
 CASES=('alpha','additive','none','disabled','absent','camera-mismatch','aspect-mismatch',
        'near','orthographic','gradient','resize','document','msaa',
-       'object-shadow','object-shadow-additive','object-shadow-msaa','object-shadow-additive-msaa')
+       'object-shadow','object-shadow-additive','object-shadow-msaa','object-shadow-additive-msaa',
+       'radiance-quarter','linear-display','linear-additive')
 
 
 def run(player, output, validation, selected):
@@ -36,6 +37,7 @@ def run(player, output, validation, selected):
             additive='additive' in kind
             multisample='msaa' in kind
             object_shadow=kind.startswith('object-shadow')
+            normalized=kind in ('radiance-quarter','linear-display','linear-additive')
             root=output/name;assets=root/'assets';assets.mkdir(parents=True)
             surface(assets/'surface.gltf',double_sided=True)
             model=json.loads((assets/'surface.gltf').read_text())
@@ -49,6 +51,8 @@ def run(player, output, validation, selected):
                 extras=dict(azureSlotId='surface',azureRenderMaterial=dict(schemaVersion=2,
                 **{'class':'generic'},features=['unlit-surface','unlit-texture-layers'],surface=p)))]
             front=dict(id='surface',resourceId='surface',components={'azure.transform':component('azure.transform',dict(translation=[0,0,0]))})
+            if normalized:model['materials'][0]['extras']['azureRenderMaterial']['radianceScale']=.25
+            if kind=='linear-display':model['materials'][0]['extras']['azureRenderMaterial']['displayTransform']='linear'
             if object_shadow:
                 front['components']['azure.object-shadow']=component('azure.object-shadow',dict(
                     enabled=True,center=[0,0,0],halfExtents=[2,2,2],normalBias=.1,lightBias=.05,
@@ -70,6 +74,7 @@ def run(player, output, validation, selected):
             rear['materials']=[dict(pbrMetallicRoughness=dict(baseColorFactor=[.07,.09,.11,1]),
                 extras=dict(azureRenderMaterial=dict(schemaVersion=2,**{'class':'generic'},features=['unlit-surface'],
                 surface=dict(schemaVersion=1,lighting='unlit'))))]
+            if kind=='linear-additive':rear['materials'][0]['extras']['azureRenderMaterial'].update(radianceScale=.25,displayTransform='linear')
             (assets/'rear.gltf').write_text(json.dumps(rear))
             size=256 if kind=='resize' else 128
             camera=dict(id='camera',components={'azure.transform':component('azure.transform',dict(translation=[0,0,3])),
@@ -92,6 +97,12 @@ def run(player, output, validation, selected):
             settings=dict(schemaVersion=20,sceneLighting=True,skyIntensity=0,platform=False,background=False,stylized=False,
                 silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=4 if multisample else 0,
                 exposure=0,toneMapping=False,contrast=1,saturation=1)
+            if kind in ('linear-display','linear-additive'):
+                header=dict(schemaVersion=1,dimension=2,inputDomain='linear',outputDomain='linear',layout='strip-rgb',precision='float32-le',channels=4,width=4,height=2,
+                    source=dict(generator='azure.view-fog-display.fixture',generatorVersion=1,inputFingerprint='constant-rgb-003-005-008-v1',evidence=0))
+                encoded=json.dumps(header,separators=(',',':')).encode()
+                (assets/'display.azlut').write_bytes(b'AZLUT001'+struct.pack('<I',len(encoded))+encoded+struct.pack('<32f',*([.03,.05,.08,1]*8)))
+                settings['gradeLut']=dict(schemaVersion=1,asset='assets:/display.azlut',exposureMultiplier=1)
             scene=dict(schemaVersion=1,id=name,sceneType='character',resources=[dict(id='surface',asset='assets:/surface.gltf'),dict(id='rear',asset='assets:/rear.gltf')],
                 nodes=[front,camera,dict(id='rear',resourceId='rear',components={'azure.transform':component('azure.transform',dict(translation=[0,0,-2],scale=[10,10,10]))})],
                 lights=[],renderSettings=settings)
@@ -103,14 +114,17 @@ def run(player, output, validation, selected):
                 '--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene']
             if fixed:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             (root/'command.json').write_text(json.dumps(command,indent=2))
-            with (root/'player.log').open('w') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
+            with (root/'player.log').open('w') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120,cwd=root)
             log=(root/'player.log').read_text(errors='replace')
-            assert 'Allocator after unload: buffers=0 images=0' in log and not re.search(r'VUID-|Validation (?:Error|Warning)|\[error\]',log,re.I),name
+            diagnostics=[json.loads(line) for line in (root/'captures/azureplayer.log.jsonl').read_text().splitlines()]
+            assert any(row['message']=='Allocator after unload: buffers=0 images=0' for row in diagnostics),name
+            assert not any(row['level']=='error' or row['subsystem']=='validation' and row['level']=='warning' for row in diagnostics),name
+            assert not re.search(r'VUID-|Validation (?:Error|Warning)|SYNC-HAZARD|\[error\]',log,re.I),name
             if validation!='any':assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             manifest=json.loads((root/'frames/capture_manifest.json').read_text())
             if multisample:assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
             if object_shadow:assert manifest['objectShadowPrepared'] and manifest['objectShadowPages']==1,name
-            assert manifest['materialSurfaceProfileLayoutVersion']==18 and manifest['cameraUniformBytes']==688,name
+            assert manifest['materialSurfaceProfileLayoutVersion']==19 and manifest['cameraUniformBytes']==688,name
             expected_state=kind if kind in ('camera-mismatch','aspect-mismatch') else 'disabled' if kind in ('absent','disabled') else 'matched'
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])
             pixels=np.asarray(Image.open(root/'frames/frame_000000.png').convert('RGB'));errors=[]
@@ -123,10 +137,12 @@ def run(player, output, validation, selected):
                 def fog(color,depth,additive=False):
                     weight=np.clip((depth-projection['minimumViewDepth'])/projection['nearFadeWidth'],0,1) if active else 0
                     return color*(1+(trans-1)*weight)+(0 if additive else scatter*weight)
-                expected=fog(np.array([.07,.09,.11]),5)
+                expected=fog(np.array([.07,.09,.11])*(.25 if kind=='linear-additive' else 1),5)
                 if covered:
-                    front_color=np.array([.45,.25,.1]) if kind=='none' else fog(np.array([.45,.25,.1]),3,additive)
+                    raw_front=np.array([.45,.25,.1])*(.25 if normalized else 1)
+                    front_color=raw_front if kind=='none' else fog(raw_front,3,additive)
                     expected=expected+front_color*.5 if additive else expected*.5+front_color*.5
+                if kind=='linear-display':expected=expected*.5+np.array([.03,.05,.08])*.5 if covered else np.array([.03,.05,.08])
                 actual=linear(pixels[y,x]);error=float(np.max(abs(actual-expected)));errors.append(error)
                 assert error<=.008,(name,x,y,actual.tolist(),expected.tolist(),error)
             if fixed:assert np.array_equal(pixels,images[kind]),name

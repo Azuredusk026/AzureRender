@@ -203,7 +203,8 @@ void AzureRenderApp::writeCaptureManifest(
                 << ':' << material.materialProfileExplicit
                 << ':' << material.doubleSided
                 << ':' << material.emissiveStrength
-                << ':' << material.radianceScale;
+                << ':' << material.radianceScale
+                << ':' << static_cast<unsigned>(material.displayTransform);
             for (const float parameter : material.styleParameters) {
             qaState << ':' << parameter;
         }
@@ -349,14 +350,19 @@ void AzureRenderApp::writeCaptureManifest(
         << "  \"temporalHistorySubmission\": " << (temporalReconstruction_?temporalReconstruction_->historySubmission():0) << ",\n"
         << "  \"temporalBytes\": " << (temporalReconstruction_?temporalReconstruction_->byteSize()+(sharedMotion_?sharedMotion_->byteSize():0):0) << ",\n"
         << "  \"temporalHistoryBytes\": " << (temporalReconstruction_?temporalReconstruction_->byteSize():0) << ",\n"
+        << "  \"temporalDisplayMaskFormat\": \"R16G16_SFLOAT\",\n"
+        << "  \"temporalDisplayMaskBytes\": " << (temporalReconstruction_?temporalReconstruction_->displayMaskByteSize():0) << ",\n"
         << "  \"motionBytes\": " << (sharedMotion_?sharedMotion_->byteSize():0) << ",\n"
         << "  \"temporalMotionShared\": " << (temporalReconstruction_&&sharedMotion_&& &temporalReconstruction_->motion()==sharedMotion_.get()?"true":"false") << ",\n"
         << "  \"temporalFallback\": " << std::quoted(temporalFallback_) << ",\n"
         << "  \"sceneRenderWidth\": " << sceneRenderExtent_.width << ",\n"
         << "  \"sceneRenderHeight\": " << sceneRenderExtent_.height << ",\n"
+        << "  \"sceneDisplayMaskFormat\": \"R8_UNORM\",\n"
+        << "  \"sceneDisplayMaskImages\": " << displayMaskImages_.size() << ",\n"
+        << "  \"sceneDisplayMaskBytes\": " << std::uint64_t(sceneRenderExtent_.width)*sceneRenderExtent_.height*displayMaskImages_.size() << ",\n"
         << "  \"shadowDistance\": " << effectiveRenderSettings_.shadowDistance << ",\n"
         << "  \"qaStateHashAlgorithm\": \"FNV-1a-64\",\n"
-        << "  \"qaStateFingerprintVersion\": 3,\n"
+        << "  \"qaStateFingerprintVersion\": 4,\n"
         << "  \"qaStateHash\": " << std::quoted(qaStateHash) << ",\n"
         << "  \"toonRampFormat\": \"AzureRender Toon Ramp Profiles v1\",\n"
         << "  \"toonRampVersion\": 1,\n"
@@ -407,6 +413,7 @@ void AzureRenderApp::writeCaptureManifest(
                 << ", \"emissiveStrength\": "
                 << material.emissiveStrength
                 << ", \"radianceScale\": " << material.radianceScale
+                << ", \"displayTransform\": " << std::quoted(azurerender::materialDisplayTransformName(material.displayTransform))
                 << ", \"styleParameters\": ["
                 << material.styleParameters[0] << ", "
                 << material.styleParameters[1] << ", "

@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "configuration": "debug",
+  "checks": [
+    {
+      "name": "display-views",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialDisplayViewGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\display-views-debug-final"
+      ],
+      "exitCode": 0,
+      "seconds": 194.4724150000111,
+      "programSha256": "0fa22af27cb3fc341f2ed8c780bf09f0423fe91ae321ce6e44817a7157990f51"
+    },
+    {
+      "name": "scene-resolve",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureSceneMultisamplingGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+      ],
+      "exitCode": 0,
+      "seconds": 1.9617329000029713,
+      "programSha256": "10b2b421bdbbefcdec11c21afb77a55bcaede99d979d8a8d17b983d02401c394"
+    },
+    {
+      "name": "multisample-views",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMultisampleViewGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders"
+      ],
+      "exitCode": 0,
+      "seconds": 1.679197400007979,
+      "programSha256": "30187e22c58848a7c6448f7fcb08954921197208f7ba45fb1790c35bb47c9917"
+    },
+    {
+      "name": "temporal-views",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureTemporalViewGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\shaders",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\temporal-views-debug-final"
+      ],
+      "exitCode": 0,
+      "seconds": 55.253367800003616,
+      "programSha256": "a35c5f9463453f9431fe74114a0057864152bc5a0ca0dc808fdcccce2ae87668"
+    }
+  ]
+}

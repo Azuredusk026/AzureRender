@@ -1009,6 +1009,7 @@ void AzureRenderApp::recordCommandBuffer(
         importAttachment("scene-depth", depthImages_[imageIndex].image, VK_IMAGE_ASPECT_DEPTH_BIT),
         importAttachment("scene-normal", normalImages_[imageIndex].image, VK_IMAGE_ASPECT_COLOR_BIT),
         importAttachment("shadow-map", shadowImage_.image, VK_IMAGE_ASPECT_DEPTH_BIT)};
+    resources.displayMask=importAttachment("display-mask",displayMaskImages_[imageIndex].image,VK_IMAGE_ASPECT_COLOR_BIT);
     azurerender::rhi::ImageBarrierDesc outputState{};
     outputState.image = swapchainImages_[imageIndex];
     // The attachment passes finish in PRESENT before graph capture starts.
@@ -1028,10 +1029,17 @@ void AzureRenderApp::recordCommandBuffer(
     auto sceneResources=resources;
     std::array<azurerender::RenderGraph::ResourceId,3> multisampleSources{};
     if(sceneMultisampling_){multisampleSources=sceneMultisampling_->importSources(graph,sceneContext.currentFrame,"main-samples");
-        sceneResources.color=multisampleSources[0];sceneResources.depth=multisampleSources[1];sceneResources.normal=multisampleSources[2];}
+        sceneResources.color=multisampleSources[0];sceneResources.depth=multisampleSources[1];sceneResources.normal=multisampleSources[2];
+        sceneResources.displayMask=sceneMultisampling_->importDisplayMaskSource(graph,sceneContext.currentFrame,"main-samples");}
     if (sceneRenderer_ != nullptr) sceneRenderer_->registerPasses(graph, sceneResources, sceneContext);
-    if(sceneMultisampling_)sceneMultisampling_->schedule(graph,sceneContext.currentFrame,imageIndex,multisampleSources,{resources.color,resources.depth,resources.normal},"main-multisample-resolve");
-    if(temporalReady)temporalReconstruction_->schedule(graph,resources.color,resources.depth,temporalMotion,"main");
+    if(sceneMultisampling_)sceneMultisampling_->schedule(graph,sceneContext.currentFrame,imageIndex,multisampleSources,{resources.color,resources.depth,resources.normal},"main-multisample-resolve",
+        std::array<azurerender::RenderGraph::ResourceId,2>{sceneResources.displayMask,resources.displayMask});
+    auto displayMaskForGrade=resources.displayMask;
+    float displayMaskSelector=1;
+    if(temporalReady){
+        const auto resolvedMask=temporalReconstruction_->schedule(graph,resources.color,resources.depth,temporalMotion,"main",resources.displayMask);
+        if(resolvedMask){displayMaskForGrade=*resolvedMask;displayMaskSelector=2.F+temporalReconstruction_->preparedDisplayMaskIndex();}
+    }
 #if AZURE_WITH_EDITOR
     // All views consume the same snapshot after the host advances simulation.
     if(renderViews_)renderViews_->schedule(graph,frame,sceneContext,graphicsSubmission_+1);
@@ -1096,7 +1104,7 @@ void AzureRenderApp::recordCommandBuffer(
             effectiveRenderSettings_.grade.saturation,
             effectiveRenderSettings_.grade.contrast,
             effectiveRenderSettings_.bloom.threshold,
-            0.0F,
+            displayMaskSelector,
         },
         {
             effectiveRenderSettings_.grade.tint[0],
@@ -1123,6 +1131,7 @@ void AzureRenderApp::recordCommandBuffer(
     graph.use(gradePass,resources.color,azurerender::RenderGraphUsage::Sampled,false);
     graph.use(gradePass,resources.depth,azurerender::RenderGraphUsage::Sampled,false);
     graph.use(gradePass,resources.normal,azurerender::RenderGraphUsage::Sampled,false);
+    graph.use(gradePass,displayMaskForGrade,azurerender::RenderGraphUsage::Sampled,false);
     graph.use(gradePass,resources.shadow,azurerender::RenderGraphUsage::Sampled,false);
     graph.attachment(gradePass,linearDisplay,azurerender::RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     const auto composite=graph.addPass("post-process-hud",[&]{

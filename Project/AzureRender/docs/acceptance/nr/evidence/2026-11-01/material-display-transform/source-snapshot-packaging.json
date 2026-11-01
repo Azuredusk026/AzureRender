@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "reason": "Canonical source snapshot retains exact trailing whitespace in a gzip stream. Compiled source and Git index are checked independently.",
+  "path": "source/src/app/AzureRenderResources.cpp.gz",
+  "canonicalSha256": "4ed748262bf723d5a118f46aaedd5adb4e1633a14e00d0b46f711933522bc7e7"
+}

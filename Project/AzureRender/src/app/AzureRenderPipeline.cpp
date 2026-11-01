@@ -54,6 +54,7 @@ void AzureRenderApp::createRenderPass() {
     const std::array colorReferences = {
         colorReference,
         normalReference,
+        VkAttachmentReference{3,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL},
     };
 
     VkSubpassDescription subpass{};
@@ -89,10 +90,12 @@ void AzureRenderApp::createRenderPass() {
         | VK_ACCESS_COLOR_ATTACHMENT_READ_BIT
         | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
 
+    auto displayMaskAttachment=colorAttachment;displayMaskAttachment.format=VK_FORMAT_R8_UNORM;
     const std::array attachments = {
         colorAttachment,
         depthAttachment,
         normalAttachment,
+        displayMaskAttachment,
     };
     VkRenderPassCreateInfo createInfo{VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO};
     createInfo.attachmentCount = static_cast<std::uint32_t>(attachments.size());
@@ -446,6 +449,7 @@ void AzureRenderApp::createFramebuffers() {
             sceneColorImageViews_[index],
             depthImageViews_[index],
             normalImageViews_[index],
+            displayMaskImageViews_[index],
         };
         VkFramebufferCreateInfo createInfo{VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO};
         createInfo.renderPass = renderPass_;

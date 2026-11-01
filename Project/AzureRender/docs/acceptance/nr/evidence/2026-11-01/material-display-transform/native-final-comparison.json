@@ -1,0 +1,356 @@
+{
+  "status": "measured",
+  "visualAcceptance": "pending-five-defects",
+  "scope": "Interior rectangles measure linear-display values. They are diagnostics, not final material visibility masks. Isolated pair shares zero fog, zero SSR and no grading; exposure differs by exactly two EV.",
+  "comparisons": [
+    {
+      "name": "isolated-exposure-equivalence",
+      "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\near-source-isolated\\frames\\frame_000000.png",
+      "candidate": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\native-final-captures\\near-linear-isolated\\frames\\frame_000000.png",
+      "referenceSha256": "a5741544d3be8c0aab82bfb3a09239354f57a5cf9ad9cfb5e55676600c4ae81a",
+      "candidateSha256": "b4faa0fa3d806b16b12d31234a1eb3082df4eddea730fb96e8fb9a3066e18eeb",
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "referenceMedianLinearDisplay": 0.08709970069185466,
+          "candidateMedianLinearDisplay": 0.08709970069185466,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "meanAbsoluteChannelError": 0.0,
+          "exactPixelFraction": 1.0
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "referenceMedianLinearDisplay": 0.10638851735723548,
+          "candidateMedianLinearDisplay": 0.10638851735723548,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "meanAbsoluteChannelError": 0.0,
+          "exactPixelFraction": 1.0
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "referenceMedianLinearDisplay": 0.24342624543598126,
+          "candidateMedianLinearDisplay": 0.24342624543598126,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "meanAbsoluteChannelError": 0.0,
+          "exactPixelFraction": 1.0
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "referenceMedianLinearDisplay": 0.23468898465164917,
+          "candidateMedianLinearDisplay": 0.23468898465164917,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "meanAbsoluteChannelError": 0.0,
+          "exactPixelFraction": 1.0
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "referenceMedianLinearDisplay": 0.1015269684618973,
+          "candidateMedianLinearDisplay": 0.1015269684618973,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "meanAbsoluteChannelError": 0.0,
+          "exactPixelFraction": 1.0
+        },
+        {
+          "region": "environment-right-wall",
+          "bounds": [
+            1250,
+            300,
+            1450,
+            450
+          ],
+          "referenceMedianLinearDisplay": 0.02303860066115831,
+          "candidateMedianLinearDisplay": 0.09428187507899491,
+          "medianLuminanceRelativeError": 3.092343821816767,
+          "maximumLinearError": 0.6346424740958028,
+          "meanAbsoluteChannelError": 44.77188888888889,
+          "exactPixelFraction": 0.0
+        },
+        {
+          "region": "environment-left-wall",
+          "bounds": [
+            30,
+            400,
+            230,
+            650
+          ],
+          "referenceMedianLinearDisplay": 0.027192016257639253,
+          "candidateMedianLinearDisplay": 0.10817026552693199,
+          "medianLuminanceRelativeError": 2.9780156242199554,
+          "maximumLinearError": 0.7175757794370151,
+          "meanAbsoluteChannelError": 55.738886666666666,
+          "exactPixelFraction": 0.0
+        }
+      ],
+      "maximumLinearErrorBudget": 0.008,
+      "budgetScope": "Normalized character interiors only; unscaled environment has two EV of intentional exposure difference.",
+      "passed": true
+    },
+    {
+      "name": "world-grade-versus-isolated-source",
+      "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-021345-material-radiance-normalization-1e6231\\native-captures\\near-source-isolated\\frames\\frame_000000.png",
+      "candidate": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-043757-material-display-transform-93d6e0\\native-final-captures\\near-world-linear\\frames\\frame_000000.png",
+      "referenceSha256": "a5741544d3be8c0aab82bfb3a09239354f57a5cf9ad9cfb5e55676600c4ae81a",
+      "candidateSha256": "368360534cdf731101794b4af511e91773b6d62ade57cf9203af1ec37767c0cb",
+      "regions": [
+        {
+          "region": "hair-crown",
+          "bounds": [
+            710,
+            400,
+            820,
+            550
+          ],
+          "referenceMedianLinearDisplay": 0.08709970069185466,
+          "candidateMedianLinearDisplay": 0.08709970069185466,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.00494581581532999,
+          "meanAbsoluteChannelError": 0.02690909090909091,
+          "exactPixelFraction": 0.9212727272727272,
+          "staticLuminanceSsim": 0.9998374037865481
+        },
+        {
+          "region": "hair-fringe",
+          "bounds": [
+            700,
+            570,
+            800,
+            650
+          ],
+          "referenceMedianLinearDisplay": 0.10638851735723548,
+          "candidateMedianLinearDisplay": 0.10634105044238344,
+          "medianLuminanceRelativeError": 0.00044616577081012525,
+          "maximumLinearError": 0.005342457364233721,
+          "meanAbsoluteChannelError": 0.03258333333333333,
+          "exactPixelFraction": 0.905375,
+          "staticLuminanceSsim": 0.9998433148393197
+        },
+        {
+          "region": "face-cheek",
+          "bounds": [
+            705,
+            852,
+            795,
+            885
+          ],
+          "referenceMedianLinearDisplay": 0.24342624543598126,
+          "candidateMedianLinearDisplay": 0.24342624543598126,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.004634888943591431,
+          "meanAbsoluteChannelError": 0.031088664421997755,
+          "exactPixelFraction": 0.9084175084175085,
+          "staticLuminanceSsim": 0.9997730808342687
+        },
+        {
+          "region": "face-chin",
+          "bounds": [
+            770,
+            960,
+            810,
+            985
+          ],
+          "referenceMedianLinearDisplay": 0.23468898465164917,
+          "candidateMedianLinearDisplay": 0.23468898465164917,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0045197905582090026,
+          "meanAbsoluteChannelError": 0.03966666666666667,
+          "exactPixelFraction": 0.883,
+          "staticLuminanceSsim": 0.9997533314820359
+        },
+        {
+          "region": "eye-left",
+          "bounds": [
+            625,
+            784,
+            683,
+            814
+          ],
+          "referenceMedianLinearDisplay": 0.1015269684618973,
+          "candidateMedianLinearDisplay": 0.10328892483378924,
+          "medianLuminanceRelativeError": 0.01735456498490053,
+          "maximumLinearError": 0.1788863356492898,
+          "meanAbsoluteChannelError": 1.3157088122605365,
+          "exactPixelFraction": 0.6793103448275862,
+          "staticLuminanceSsim": 0.9986740962004589
+        },
+        {
+          "region": "environment-right-wall",
+          "bounds": [
+            1250,
+            300,
+            1450,
+            450
+          ],
+          "referenceMedianLinearDisplay": 0.02303860066115831,
+          "candidateMedianLinearDisplay": 0.05110201440711446,
+          "medianLuminanceRelativeError": 1.2181040922884423,
+          "maximumLinearError": 0.597546484220012,
+          "meanAbsoluteChannelError": 23.629077777777777,
+          "exactPixelFraction": 0.0
+        },
+        {
+          "region": "environment-left-wall",
+          "bounds": [
+            30,
+            400,
+            230,
+            650
+          ],
+          "referenceMedianLinearDisplay": 0.027192016257639253,
+          "candidateMedianLinearDisplay": 0.06460331214040127,
+          "medianLuminanceRelativeError": 1.3758191201526582,
+          "maximumLinearError": 0.5259763432659795,
+          "meanAbsoluteChannelError": 38.471513333333334,
+          "exactPixelFraction": 0.0
+        }
+      ]
+    }
+  ],
+  "hiddenEnvironmentFrames": [
+    {
+      "frame": 0,
+      "referenceSha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4",
+      "candidateSha256": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 1,
+      "referenceSha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19",
+      "candidateSha256": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 2,
+      "referenceSha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216",
+      "candidateSha256": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 3,
+      "referenceSha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b",
+      "candidateSha256": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 4,
+      "referenceSha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b",
+      "candidateSha256": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 5,
+      "referenceSha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6",
+      "candidateSha256": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 6,
+      "referenceSha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d",
+      "candidateSha256": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 7,
+      "referenceSha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d",
+      "candidateSha256": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 8,
+      "referenceSha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89",
+      "candidateSha256": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 9,
+      "referenceSha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e",
+      "candidateSha256": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 10,
+      "referenceSha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed",
+      "candidateSha256": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    },
+    {
+      "frame": 11,
+      "referenceSha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854",
+      "candidateSha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854",
+      "exact": true,
+      "differentPixels": 0,
+      "maximumChannelError": 0
+    }
+  ],
+  "hiddenEnvironmentExact": true,
+  "defaultNativeExact": true,
+  "defaultNativeReferenceSha256": "259ffbb4c4da4b20bd2f1b24fe0d9e7fe84ee40bf75847731a951832cc6a1bf9",
+  "defaultNativeCandidateSha256": "259ffbb4c4da4b20bd2f1b24fe0d9e7fe84ee40bf75847731a951832cc6a1bf9",
+  "ssimMethod": {
+    "domain": "sRGB luminance",
+    "window": 11,
+    "sigma": 1.5,
+    "c1": 0.0001,
+    "c2": 0.0009,
+    "borderExcluded": 5,
+    "minimum": 0.95
+  },
+  "characterInteriorMedianLuminancePassed": true,
+  "characterInteriorStaticSsimPassed": true
+}

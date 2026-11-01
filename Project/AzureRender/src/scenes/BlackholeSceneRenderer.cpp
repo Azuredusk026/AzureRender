@@ -553,6 +553,7 @@ void BlackholeSceneRenderer::recordComposite(const RenderContext& context) {
     compositePass.extent = context.renderExtent;
     compositePass.clearValues.assign(
         clearValues.begin(), clearValues.end());
+    if(context.displayMaskEnabled)compositePass.clearValues.push_back(sceneDisplayMaskClearValue());
     commands.beginRenderPass(compositePass);
     commands.setViewport(
         static_cast<float>(context.renderExtent.width),
@@ -720,6 +721,7 @@ VkPipeline BlackholeSceneRenderer::createFullscreenPipeline(
     desc.depthTest = false;
     desc.depthWrite = false;
     desc.colorAttachmentCount = colorAttachmentCount;
+    if(colorAttachmentCount>2){desc.colorWriteMasks.assign(colorAttachmentCount,0xf);desc.colorWriteMasks[2]=0;}
     desc.renderPass = renderPass;
     desc.layout = layout;
     VkPipeline pipeline = VK_NULL_HANDLE;
@@ -1072,7 +1074,7 @@ void BlackholeSceneRenderer::createCompositePipeline(
         "blackhole_composite.frag",
         compositePipelineLayout_,
         context.sceneRenderPass,
-        2);
+        sceneColorAttachmentCount(context));
 }
 
 void BlackholeSceneRenderer::destroySizeDependentResources() {

@@ -202,8 +202,15 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
+            if(profile.contains("displayTransform")) {
+                const auto& value=profile.at("displayTransform");
+                if(profile.at("schemaVersion")!=2||!value.is_string()
+                    ||(value!="scene"&&value!="linear"))
+                    throw std::invalid_argument(context+": displayTransform requires scene or linear and profile version two");
+                result.displayTransform=value=="linear"?azurerender::MaterialDisplayTransform::Linear:azurerender::MaterialDisplayTransform::Scene;
+            }
             if(profile.contains("radianceScale")) {
                 const auto& value=profile.at("radianceScale");
                 if(profile.at("schemaVersion")!=2||!value.is_number())
@@ -2129,6 +2136,9 @@ AssetMaterial loadMaterial(
     }
     azurerender::validateMaterialRadianceScale(result.radianceScale,
         (result.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
+    azurerender::validateMaterialDisplayTransform(result.displayTransform,
+        (result.materialFeatures&MaterialFeatureMultiplyComposite)!=0
+        ||(result.unlitTextureLayers.present&&result.unlitTextureLayers.composite==azurerender::UnlitTextureLayers::Composite::Additive));
     return result;
 }
 

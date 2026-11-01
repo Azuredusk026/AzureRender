@@ -79,6 +79,7 @@ void SampleSceneRenderer::recordScene(const RenderContext& context) {
     VkClearValue clearNormal{};
     clearNormal.color = {{0.5F, 0.5F, 1.0F, 0.0F}};
     pass.clearValues = {clearColor, clearDepth, clearNormal};
+    if(context.displayMaskEnabled)pass.clearValues.push_back(sceneDisplayMaskClearValue());
     context.commands->beginRenderPass(pass);
     context.commands->setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));
     context.commands->setScissor(context.renderExtent);
