@@ -1,0 +1,98 @@
+{
+  "status": "verified-variant-specular-intermediates",
+  "draws": [
+    {
+      "event": 910,
+      "inputs": {
+        "normal": [
+          0.031195592135190964,
+          -0.630119800567627,
+          0.7758709192276001
+        ],
+        "view": [
+          0.09231775999069214,
+          0.10671825706958771,
+          0.9899942278862
+        ],
+        "light": [
+          0.14726203680038452,
+          0.5299192667007446,
+          0.8351643085479736
+        ],
+        "visibility": 1.0,
+        "roughness": 0.8660258054733276,
+        "metallic": 0.0,
+        "iridescence": 0.0,
+        "fullDiffuse": 0.0,
+        "specularFloor": 0.550000011920929
+      },
+      "uv": [
+        0.41909785246797104,
+        0.8660258054733276
+      ],
+      "nativeUv": [
+        0.4190979301929474,
+        0.8660258054733276
+      ],
+      "halfError": 2.501338980387402e-08,
+      "uvError": 7.772497634395137e-08,
+      "alphaError": 1.9510011384227255e-08,
+      "rampError": 2.1971908292783837e-08,
+      "specularError": 1.02262871781722e-10,
+      "lobeError": 1.0477413464604624e-08,
+      "mainError": 3.0021042639674644e-10
+    },
+    {
+      "event": 928,
+      "inputs": {
+        "normal": [
+          0.6667301654815674,
+          0.30104878544807434,
+          0.681792140007019
+        ],
+        "view": [
+          -0.011273213662207127,
+          0.009426170028746128,
+          0.999891996383667
+        ],
+        "light": [
+          0.14726203680038452,
+          0.5299192667007446,
+          0.8351643085479736
+        ],
+        "visibility": 1.0,
+        "roughness": 0.5943236351013184,
+        "metallic": 0.0,
+        "iridescence": 0.0,
+        "fullDiffuse": 0.8382086157798767,
+        "specularFloor": 0.550000011920929
+      },
+      "uv": [
+        0.06021278932127761,
+        0.5943236351013184
+      ],
+      "nativeUv": [
+        0.060212794691324234,
+        0.5943236351013184
+      ],
+      "halfError": 2.3059843090589283e-08,
+      "uvError": 5.370046622654723e-09,
+      "alphaError": 1.231683199875988e-09,
+      "rampError": 1.1585272994718565e-05,
+      "specularError": 4.641328261792421e-07,
+      "lobeError": 5.657958823679365e-10,
+      "mainError": 1.1438932602872431e-07
+    }
+  ],
+  "budgets": {
+    "half": 1e-05,
+    "uv": 1e-05,
+    "alpha": 1e-06,
+    "ramp": 0.001,
+    "specular": 0.001,
+    "lobe": 1e-05,
+    "main": 1e-05
+  },
+  "budgetSource": "Existing cloth-specular-formula-proof verification; alpha additionally checks the observed packed roughness convention.",
+  "qualification": "Debugger intermediate reconstruction; hardware and full material output require separate qualification."
+}

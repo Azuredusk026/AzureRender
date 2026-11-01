@@ -935,6 +935,14 @@
       "pinMarker": ".keep",
       "primaryProject": "project/fullbody-world-aa3.azureproject",
       "evidence": "docs/acceptance/nr/full-body-native-comparison.md"
+    },
+    {
+      "path": "runs/20261101-143507-native-cloth-variants-d877ef",
+      "pathBase": "build",
+      "purpose": "原生服饰高光绑定、片元中间量及完整材质输入核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/native-cloth-inputs.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

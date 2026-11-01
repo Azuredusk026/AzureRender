@@ -1,0 +1,41 @@
+{
+  "status": "pixel-differences",
+  "shape": [
+    256,
+    256,
+    4
+  ],
+  "maximumByteError": 152,
+  "authoredMaterialIdentitiesVerified": 5,
+  "commonAsset": {
+    "source": "CAB-fff078017aaea35c73aeda4a76467a17",
+    "path_id": 4523718382697154697,
+    "type": "Texture2D",
+    "name": "T_actor_common_cloth_04_RS"
+  },
+  "nativeCloth4DdsSha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a",
+  "authoredPngSha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148",
+  "qualification": "Captured cloth four input and shared authored source are verified; captured bindings for other draws remain independently required.",
+  "orientationControls": [
+    {
+      "transform": "identity",
+      "maximumByteError": 152,
+      "meanByteError": 42.10997009277344
+    },
+    {
+      "transform": "flip-y",
+      "maximumByteError": 0,
+      "meanByteError": 0.0
+    },
+    {
+      "transform": "flip-x",
+      "maximumByteError": 152,
+      "meanByteError": 43.669281005859375
+    },
+    {
+      "transform": "flip-xy",
+      "maximumByteError": 96,
+      "meanByteError": 12.0830078125
+    }
+  ]
+}

@@ -1,0 +1,1158 @@
+{
+  "status": "exported-variant-targets",
+  "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+  "draws": [
+    {
+      "event": 889,
+      "outputs": [
+        {
+          "event": 888,
+          "resource": "ResourceId::141976",
+          "width": 2560,
+          "height": 1440,
+          "format": "R11G11B10_FLOAT",
+          "path": "e889/target-888.bin",
+          "bytes": 14745600,
+          "sha256": "87258f1d79af1d10ea2dafcb9409454019d6770a8fff78c4bac3a65e99531aed"
+        },
+        {
+          "event": 889,
+          "resource": "ResourceId::141976",
+          "width": 2560,
+          "height": 1440,
+          "format": "R11G11B10_FLOAT",
+          "path": "e889/target-889.bin",
+          "bytes": 14745600,
+          "sha256": "592031a8b565f674669ef8ea164c591db0a8b557444d633cda012265100610e7"
+        }
+      ],
+      "shader": {
+        "path": "e889/ps.dxbc",
+        "bytes": 65780,
+        "sha256": "3d0f59dc13470cc6a6b40786bbcbef515b1fc352d96945ed5218b0140cd28d42"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::141931",
+          "width": 2560,
+          "height": 1440,
+          "mips": 1,
+          "format": "R8G8_UNORM"
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::6172",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "e889/t11.dds",
+            "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+          }
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "e889/t12.dds",
+            "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+          }
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::13540",
+          "width": 1024,
+          "height": 32,
+          "mips": 1,
+          "format": "BC7_SRGB"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "e889/t16.dds",
+            "sha256": "50d95d65b0c381592105fdd6106d390ca56d8baebda0f3b5b9c6da4f0672be93"
+          }
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::87491",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "e889/t17.dds",
+            "sha256": "92e3d28b774e2ac77c2e722c79cf6282d6a678397e4268d4c407328893c83488"
+          }
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::87551",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "e889/t18.dds",
+            "sha256": "aa7372235c3af7b08f62111bf0e5dff1c734f43f2309960ec866657afa1a6da7"
+          }
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::87521",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM",
+          "export": {
+            "path": "e889/t19.dds",
+            "sha256": "10b2344c795a70eb99cd3aac64b21be241668828cdc23c2b2deaf8632307d3b0"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::87433",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_SRGB"
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT"
+        },
+        {
+          "slot": 22,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 23,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constants": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "path": "e889/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "path": "e889/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "path": "e889/cb2.bin",
+          "bytes": 65536,
+          "sha256": "6f9b21fa964bf4e15a6e025be47f8ac7b4cbe95636b523d34a8e57084ef218cd"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "path": "e889/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "path": "e889/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "path": "e889/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "path": "e889/cb6.bin",
+          "bytes": 512,
+          "sha256": "16c261dd94e6d006b6f743e6a0acd60d8ddeb6a58f13d05886a3d3ded6b21bec"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "path": "e889/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    },
+    {
+      "event": 910,
+      "outputs": [
+        {
+          "event": 909,
+          "resource": "ResourceId::141976",
+          "width": 2560,
+          "height": 1440,
+          "format": "R11G11B10_FLOAT",
+          "path": "e910/target-909.bin",
+          "bytes": 14745600,
+          "sha256": "592031a8b565f674669ef8ea164c591db0a8b557444d633cda012265100610e7"
+        },
+        {
+          "event": 910,
+          "resource": "ResourceId::141976",
+          "width": 2560,
+          "height": 1440,
+          "format": "R11G11B10_FLOAT",
+          "path": "e910/target-910.bin",
+          "bytes": 14745600,
+          "sha256": "c6cd59006d8d6bdbdb0438c1e7ae814c0b5206557a691921ce5fbf017a117a85"
+        }
+      ],
+      "shader": {
+        "path": "e910/ps.dxbc",
+        "bytes": 70060,
+        "sha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::141931",
+          "width": 2560,
+          "height": 1440,
+          "mips": 1,
+          "format": "R8G8_UNORM"
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::6172",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "e910/t11.dds",
+            "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+          }
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "e910/t12.dds",
+            "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+          }
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::85388",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "e910/t16.dds",
+            "sha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c"
+          }
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::85393",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "e910/t17.dds",
+            "sha256": "3411adc70aa616bda10f3227e10981e042f540f1acd0bdf45bd13bb0ee3d464b"
+          }
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::85362",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM",
+          "export": {
+            "path": "e910/t18.dds",
+            "sha256": "ee233da7cb029be0373fabb3d90ff6b33c49c0b5587c796a931c2fd8012deb2b"
+          }
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::85312",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "e910/t19.dds",
+            "sha256": "eb070fb00928039be1a867553296f605363f6fd761bc903c24a3705edbf9e914"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT"
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 22,
+          "resource": "ResourceId::139834",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 23,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 24,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constants": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "path": "e910/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "path": "e910/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "path": "e910/cb2.bin",
+          "bytes": 65536,
+          "sha256": "26f5752c301eae6e3f51e34fde8b1214b85f576e1d0e43f51854c18865aac795"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "path": "e910/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "path": "e910/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "path": "e910/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "path": "e910/cb6.bin",
+          "bytes": 768,
+          "sha256": "00d31c096fa65027b1397ede018dcd36cd8f56017460f156c40ef617776854b6"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "path": "e910/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    },
+    {
+      "event": 928,
+      "outputs": [
+        {
+          "event": 927,
+          "resource": "ResourceId::141976",
+          "width": 2560,
+          "height": 1440,
+          "format": "R11G11B10_FLOAT",
+          "path": "e928/target-927.bin",
+          "bytes": 14745600,
+          "sha256": "c6cd59006d8d6bdbdb0438c1e7ae814c0b5206557a691921ce5fbf017a117a85"
+        },
+        {
+          "event": 928,
+          "resource": "ResourceId::141976",
+          "width": 2560,
+          "height": 1440,
+          "format": "R11G11B10_FLOAT",
+          "path": "e928/target-928.bin",
+          "bytes": 14745600,
+          "sha256": "72a2b02bfe274fde9eb44d696a768b9d019276852e7e068be565d5322ce8f336"
+        }
+      ],
+      "shader": {
+        "path": "e928/ps.dxbc",
+        "bytes": 70060,
+        "sha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::141931",
+          "width": 2560,
+          "height": 1440,
+          "mips": 1,
+          "format": "R8G8_UNORM"
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::6172",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "e928/t11.dds",
+            "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+          }
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "e928/t12.dds",
+            "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+          }
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::85388",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "e928/t16.dds",
+            "sha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c"
+          }
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::85393",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "e928/t17.dds",
+            "sha256": "3411adc70aa616bda10f3227e10981e042f540f1acd0bdf45bd13bb0ee3d464b"
+          }
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::85362",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM",
+          "export": {
+            "path": "e928/t18.dds",
+            "sha256": "ee233da7cb029be0373fabb3d90ff6b33c49c0b5587c796a931c2fd8012deb2b"
+          }
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::85312",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "e928/t19.dds",
+            "sha256": "eb070fb00928039be1a867553296f605363f6fd761bc903c24a3705edbf9e914"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT"
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 22,
+          "resource": "ResourceId::13555",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_SRGB"
+        },
+        {
+          "slot": 23,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 24,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constants": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "path": "e928/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "path": "e928/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "path": "e928/cb2.bin",
+          "bytes": 65536,
+          "sha256": "53daf1ba2fb37751e9c5b857463508aca525857855c792a88c7419d73ad2b71d"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "path": "e928/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "path": "e928/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "path": "e928/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "path": "e928/cb6.bin",
+          "bytes": 768,
+          "sha256": "66738da3f8f8531e8103a1d9ce9a90e5637dfe6af9781ed29f1f2abe71202500"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "path": "e928/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    },
+    {
+      "event": 1383,
+      "outputs": [
+        {
+          "event": 1382,
+          "resource": "ResourceId::141925",
+          "width": 2560,
+          "height": 1440,
+          "format": "R11G11B10_FLOAT",
+          "path": "e1383/target-1382.bin",
+          "bytes": 14745600,
+          "sha256": "f296f8072c0a7b81f1527571e7a9ec8ca5f393f78d29b691af34541f6c602930"
+        },
+        {
+          "event": 1383,
+          "resource": "ResourceId::141925",
+          "width": 2560,
+          "height": 1440,
+          "format": "R11G11B10_FLOAT",
+          "path": "e1383/target-1383.bin",
+          "bytes": 14745600,
+          "sha256": "b742829a6c1b20917dc88a25670090509ec89d7a5885add5931acd40d87ff484"
+        }
+      ],
+      "shader": {
+        "path": "e1383/ps.dxbc",
+        "bytes": 75584,
+        "sha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::957",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::158089",
+          "width": 4096,
+          "height": 2048,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::957",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "e1383/t11.dds",
+            "sha256": "f274e77ab8d7f166570b3e5991965c86aabe5587d4179a5745bdc31d28b20b1e"
+          }
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT",
+          "export": {
+            "path": "e1383/t12.dds",
+            "sha256": "2014178ec81f0d4b31cdcfff15fa928156cde13834abefba93c203888592a8e0"
+          }
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::13537",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "e1383/t16.dds",
+            "sha256": "142d482940555b829e748aa06814114e3677bacf4bbede12f99544c0164a3071"
+          }
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "e1383/t17.dds",
+            "sha256": "59a131442d7b0401f116a4cecdee506e58580a4c2400926445cbd0a1dfe00212"
+          }
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "e1383/t18.dds",
+            "sha256": "50d95d65b0c381592105fdd6106d390ca56d8baebda0f3b5b9c6da4f0672be93"
+          }
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::85388",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "e1383/t19.dds",
+            "sha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::85393",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::85362",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM"
+        },
+        {
+          "slot": 22,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT"
+        },
+        {
+          "slot": 23,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 24,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constants": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "path": "e1383/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "path": "e1383/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "path": "e1383/cb2.bin",
+          "bytes": 65536,
+          "sha256": "bdb2c22e17bd3447844f0729101ef790316c5f3d2ae58c06095c22b313606af4"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "path": "e1383/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "path": "e1383/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "path": "e1383/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "path": "e1383/cb6.bin",
+          "bytes": 512,
+          "sha256": "115af0699656f84d89d6921ad47e953e77db1d37016678011d1b37511002c3ea"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "path": "e1383/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    }
+  ]
+}

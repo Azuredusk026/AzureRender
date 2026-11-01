@@ -1,0 +1,1708 @@
+{
+  "schemaVersion": 1,
+  "status": "qualified-source-inputs",
+  "scope": "Native clothing resource bindings and two debugger specular reconstructions; complete appearance remains failed.",
+  "sourceCommit": "518895dfc325030c658a085840a8cecef9978129",
+  "sourceRun": "build/runs/20261101-143507-native-cloth-variants-d877ef",
+  "capture": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+    "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90"
+  },
+  "files": [
+    {
+      "path": "source-manifest.json",
+      "sha256": "20908839cdec607ff13c4c282d31ad50b06ab41b8923f3531c8466bb2f5378a7",
+      "bytes": 4115,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source-manifest.json",
+        "sha256": "20908839cdec607ff13c4c282d31ad50b06ab41b8923f3531c8466bb2f5378a7",
+        "bytes": 4115
+      },
+      "gzip": false
+    },
+    {
+      "path": "authored-texture-sources.json",
+      "sha256": "886e1933574e8cc23868907a167e25cd1e7a1d54f1d51285da31218627e5080c",
+      "bytes": 13895,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/authored-texture-sources.json",
+        "sha256": "886e1933574e8cc23868907a167e25cd1e7a1d54f1d51285da31218627e5080c",
+        "bytes": 13895
+      },
+      "gzip": false
+    },
+    {
+      "path": "shared-specular-ramp-verification.json",
+      "sha256": "1c7aa008512d6b5c3057672e2062c0ca93727e830226e27ae04bcba46397387d",
+      "bytes": 1138,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/shared-specular-ramp-verification.json",
+        "sha256": "1c7aa008512d6b5c3057672e2062c0ca93727e830226e27ae04bcba46397387d",
+        "bytes": 1138
+      },
+      "gzip": false
+    },
+    {
+      "path": "native-bindings.json",
+      "sha256": "fef254170e64b77568a30f97c664b3f059ad5e3cf92495f4defa6f5c02bfccf3",
+      "bytes": 33240,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings.json",
+        "sha256": "fef254170e64b77568a30f97c664b3f059ad5e3cf92495f4defa6f5c02bfccf3",
+        "bytes": 33240
+      },
+      "gzip": false
+    },
+    {
+      "path": "variant-targets.json",
+      "sha256": "78574503d907dc819ee0100ab8ae6083b736b926e640bc689817710b7f8d683b",
+      "bytes": 31421,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets.json",
+        "sha256": "78574503d907dc819ee0100ab8ae6083b736b926e640bc689817710b7f8d683b",
+        "bytes": 31421
+      },
+      "gzip": false
+    },
+    {
+      "path": "variant-traces.json",
+      "sha256": "88d0ecf59413973e46add01183eb14f5c18d25a0106eb30a3baf1b14638e113f",
+      "bytes": 1226,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-traces.json",
+        "sha256": "88d0ecf59413973e46add01183eb14f5c18d25a0106eb30a3baf1b14638e113f",
+        "bytes": 1226
+      },
+      "gzip": false
+    },
+    {
+      "path": "variant-pixel-selection.json",
+      "sha256": "6c968ebe64ab148e4c083c221c403664c8c44d593da929463d72955dee8cff85",
+      "bytes": 2287,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-pixel-selection.json",
+        "sha256": "6c968ebe64ab148e4c083c221c403664c8c44d593da929463d72955dee8cff85",
+        "bytes": 2287
+      },
+      "gzip": false
+    },
+    {
+      "path": "native-binding-qualified.json",
+      "sha256": "d2f9aa20789f192d2bcd4675ebcef3aa7c088f46f046f5d45e67df3b06ae0628",
+      "bytes": 2683,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-binding-qualified.json",
+        "sha256": "d2f9aa20789f192d2bcd4675ebcef3aa7c088f46f046f5d45e67df3b06ae0628",
+        "bytes": 2683
+      },
+      "gzip": false
+    },
+    {
+      "path": "variant-specular-proof.json",
+      "sha256": "dc8049e2c4bcc135dc6ec072ba7d8d8ed193df24cad9b24d1044b897b8c38f04",
+      "bytes": 2663,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-specular-proof.json",
+        "sha256": "dc8049e2c4bcc135dc6ec072ba7d8d8ed193df24cad9b24d1044b897b8c38f04",
+        "bytes": 2663
+      },
+      "gzip": false
+    },
+    {
+      "path": "transparent-bindings.json",
+      "sha256": "41dcf34df1b504c5829c3ebbd23529ff5c829e5a41519cb00461517d7ee13d01",
+      "bytes": 8266,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings.json",
+        "sha256": "41dcf34df1b504c5829c3ebbd23529ff5c829e5a41519cb00461517d7ee13d01",
+        "bytes": 8266
+      },
+      "gzip": false
+    },
+    {
+      "path": "transparent-texture-identity.json",
+      "sha256": "433e01cdc8123bb8c7072e82b11af496b4c6714e27005c0a54bcd06ee58e9fa3",
+      "bytes": 2149,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-texture-identity.json",
+        "sha256": "433e01cdc8123bb8c7072e82b11af496b4c6714e27005c0a54bcd06ee58e9fa3",
+        "bytes": 2149
+      },
+      "gzip": false
+    },
+    {
+      "path": "native-npr-constant-rows.json",
+      "sha256": "a06b0b36013a97df19c998d1bf6fa8e9ae12ea81fcb04d9466a8726fa3ca4718",
+      "bytes": 5131,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-npr-constant-rows.json",
+        "sha256": "a06b0b36013a97df19c998d1bf6fa8e9ae12ea81fcb04d9466a8726fa3ca4718",
+        "bytes": 5131
+      },
+      "gzip": false
+    },
+    {
+      "path": "profile-lighting-differences.json",
+      "sha256": "04bbcc495ee85dbd1eef49f68be295bcdf1572833e81df0ef3d44fcec679e5b9",
+      "bytes": 1706,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/profile-lighting-differences.json",
+        "sha256": "04bbcc495ee85dbd1eef49f68be295bcdf1572833e81df0ef3d44fcec679e5b9",
+        "bytes": 1706
+      },
+      "gzip": false
+    },
+    {
+      "path": "scene-npr-source-controls.json",
+      "sha256": "43cf4f579eaf6b792eb73e4fab5e99bb3dedb4a20d03ee49c7ed7bb8072e6824",
+      "bytes": 2482,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/scene-npr-source-controls.json",
+        "sha256": "43cf4f579eaf6b792eb73e4fab5e99bb3dedb4a20d03ee49c7ed7bb8072e6824",
+        "bytes": 2482
+      },
+      "gzip": false
+    },
+    {
+      "path": "asset-image-index.json",
+      "sha256": "bcbdbdcc0f5099d66722f8c4e223bba6fdb5aa94660bbc3f93e731b64de45861",
+      "bytes": 12801,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/asset-image-index.json",
+        "sha256": "bcbdbdcc0f5099d66722f8c4e223bba6fdb5aa94660bbc3f93e731b64de45861",
+        "bytes": 12801
+      },
+      "gzip": false
+    },
+    {
+      "path": "native-variant-contact.png",
+      "sha256": "503ab57a8dbf81c3da909127a8f775f8e96e5e1c3b54e978239e13c366e40200",
+      "bytes": 219114,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-variant-contact.png",
+        "sha256": "503ab57a8dbf81c3da909127a8f775f8e96e5e1c3b54e978239e13c366e40200",
+        "bytes": 219114
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/archive_inputs.py",
+      "sha256": "8ed65c7ea0cccc20b471704c5aa6b3f8323af56d08834ae1685062231708cfc4",
+      "bytes": 3944,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/archive_inputs.py",
+        "sha256": "8ed65c7ea0cccc20b471704c5aa6b3f8323af56d08834ae1685062231708cfc4",
+        "bytes": 3944
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/compare_profile_controls.py",
+      "sha256": "27f056ed53b6d197b61d31253c2222308fab18446dcde8953d0aebf5dc82afdc",
+      "bytes": 1377,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/compare_profile_controls.py",
+        "sha256": "27f056ed53b6d197b61d31253c2222308fab18446dcde8953d0aebf5dc82afdc",
+        "bytes": 1377
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/export_native_bindings.py",
+      "sha256": "437015d951f1d2a97b8fb8e1987a4ff812fd3006486de2acd2a20dc9a4f81f2b",
+      "bytes": 3126,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/export_native_bindings.py",
+        "sha256": "437015d951f1d2a97b8fb8e1987a4ff812fd3006486de2acd2a20dc9a4f81f2b",
+        "bytes": 3126
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/export_transparent_bindings.py",
+      "sha256": "d0d760f1d3fcb255742dd082aaf75c3f160a543f047d08276f2496e8ab1617b7",
+      "bytes": 3124,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/export_transparent_bindings.py",
+        "sha256": "d0d760f1d3fcb255742dd082aaf75c3f160a543f047d08276f2496e8ab1617b7",
+        "bytes": 3124
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/export_variant_targets.py",
+      "sha256": "fc02c5baa2d3bc584e366623e3162c7d48a87d6d5d0738f2026bcd82778ae36e",
+      "bytes": 3110,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/export_variant_targets.py",
+        "sha256": "fc02c5baa2d3bc584e366623e3162c7d48a87d6d5d0738f2026bcd82778ae36e",
+        "bytes": 3110
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/export_variant_traces.py",
+      "sha256": "90852fbd700d2b1cbdb34cfb712b57211e872cee6380a4236ddfcf904c2b64e4",
+      "bytes": 3042,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/export_variant_traces.py",
+        "sha256": "90852fbd700d2b1cbdb34cfb712b57211e872cee6380a4236ddfcf904c2b64e4",
+        "bytes": 3042
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/freeze_sources.py",
+      "sha256": "6b91883dc2dc6a3d29301b397c03e501f29d81566a2da5a86125fc6524b7b846",
+      "bytes": 1832,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/freeze_sources.py",
+        "sha256": "6b91883dc2dc6a3d29301b397c03e501f29d81566a2da5a86125fc6524b7b846",
+        "bytes": 1832
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/inspect_assets.py",
+      "sha256": "083d1adf840bde15e52e110acda7058d8420fc310115feb8d97b956461e7ecd8",
+      "bytes": 1081,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/inspect_assets.py",
+        "sha256": "083d1adf840bde15e52e110acda7058d8420fc310115feb8d97b956461e7ecd8",
+        "bytes": 1081
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/inspect_npr_constants.py",
+      "sha256": "3b1805bdfbcd896c43aa1f139e2c1219d7563c8438e582d7d563d3018eaa5af4",
+      "bytes": 697,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/inspect_npr_constants.py",
+        "sha256": "3b1805bdfbcd896c43aa1f139e2c1219d7563c8438e582d7d563d3018eaa5af4",
+        "bytes": 697
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/inspect_scene_floors.py",
+      "sha256": "f233bc1c4c112047a506f758684c4f567b30d66db554f7c4cb96af77b9c9ccc8",
+      "bytes": 832,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/inspect_scene_floors.py",
+        "sha256": "f233bc1c4c112047a506f758684c4f567b30d66db554f7c4cb96af77b9c9ccc8",
+        "bytes": 832
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/inspect_source_textures.py",
+      "sha256": "524294ea6c4744ab3279fcea5a5f2bf7d6b7708604ea0fefa2fc44d47884858f",
+      "bytes": 1782,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/inspect_source_textures.py",
+        "sha256": "524294ea6c4744ab3279fcea5a5f2bf7d6b7708604ea0fefa2fc44d47884858f",
+        "bytes": 1782
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/qualify_native_bindings.py",
+      "sha256": "bc3be39181a502f9aa9d7e149525be6cc8ac41253acac86053cb5521889bb899",
+      "bytes": 1773,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/qualify_native_bindings.py",
+        "sha256": "bc3be39181a502f9aa9d7e149525be6cc8ac41253acac86053cb5521889bb899",
+        "bytes": 1773
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/renderdoc_smoke.py",
+      "sha256": "713db68179aa3d7a42a3f4aa93d9264de1999be211d7a24699720cc9a30b5d0e",
+      "bytes": 565,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/renderdoc_smoke.py",
+        "sha256": "713db68179aa3d7a42a3f4aa93d9264de1999be211d7a24699720cc9a30b5d0e",
+        "bytes": 565
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/select_variant_pixels.py",
+      "sha256": "898ef7a118dc98c1475b6170ce5c84d6b80853b1fd2cb061444c88049170020d",
+      "bytes": 2582,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/select_variant_pixels.py",
+        "sha256": "898ef7a118dc98c1475b6170ce5c84d6b80853b1fd2cb061444c88049170020d",
+        "bytes": 2582
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/summarize_bindings.py",
+      "sha256": "8401bc14d923adb9c2d5ffca5f9c31972cdfd209895d7f368f0da226345aefb1",
+      "bytes": 1366,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/summarize_bindings.py",
+        "sha256": "8401bc14d923adb9c2d5ffca5f9c31972cdfd209895d7f368f0da226345aefb1",
+        "bytes": 1366
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/verify_input_phase.py",
+      "sha256": "3ac0e052840def68f7c58832e9439a021a0ca0a8996b0517144c092515a1428a",
+      "bytes": 2437,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/verify_input_phase.py",
+        "sha256": "3ac0e052840def68f7c58832e9439a021a0ca0a8996b0517144c092515a1428a",
+        "bytes": 2437
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/verify_shared_ramp.py",
+      "sha256": "818a477fa96ad72712fbb5d7d5eb56434dea32d4dee8afb2a9e1052dcf344210",
+      "bytes": 1867,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/verify_shared_ramp.py",
+        "sha256": "818a477fa96ad72712fbb5d7d5eb56434dea32d4dee8afb2a9e1052dcf344210",
+        "bytes": 1867
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/verify_transparent_texture_identity.py",
+      "sha256": "fb4ee8288a3e0e1de3d1e049b01e2275cf6dc2f49bc2211dfe8d07fb02506618",
+      "bytes": 2031,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/verify_transparent_texture_identity.py",
+        "sha256": "fb4ee8288a3e0e1de3d1e049b01e2275cf6dc2f49bc2211dfe8d07fb02506618",
+        "bytes": 2031
+      },
+      "gzip": false
+    },
+    {
+      "path": "tools/verify_variant_specular.py",
+      "sha256": "35ad931e20569b568d21281ab6d1feedf01206df9c90037732d7527d8b147558",
+      "bytes": 3658,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/verify_variant_specular.py",
+        "sha256": "35ad931e20569b568d21281ab6d1feedf01206df9c90037732d7527d8b147558",
+        "bytes": 3658
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/clothing-source-brief.json.gz",
+      "sha256": "6bc21ac0e3e2696bd364163f1ac7412803b6a9d29729ec7ddfb0be82d91889a0",
+      "bytes": 1209,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/clothing-source-brief.json.gz",
+        "sha256": "6bc21ac0e3e2696bd364163f1ac7412803b6a9d29729ec7ddfb0be82d91889a0",
+        "bytes": 1209
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/e868-ps.asm.gz",
+      "sha256": "43c8f357ec656e84909ae842f0a572434835e536c94b5a8eac3b24c05ea65904",
+      "bytes": 20277,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/e868-ps.asm.gz",
+        "sha256": "43c8f357ec656e84909ae842f0a572434835e536c94b5a8eac3b24c05ea65904",
+        "bytes": 20277
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/e889-pipeline.json.gz",
+      "sha256": "842f3ec773e09544a05cb3b53c051c8ba9ade2df0eb87d195b66d59d841bcd1c",
+      "bytes": 430,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/e889-pipeline.json.gz",
+        "sha256": "842f3ec773e09544a05cb3b53c051c8ba9ade2df0eb87d195b66d59d841bcd1c",
+        "bytes": 430
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/e889-ps-complete.asm.gz",
+      "sha256": "c1f336185200fc89a2090691148c55de899312e0ca2ac975b832f428776d2267",
+      "bytes": 20498,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/e889-ps-complete.asm.gz",
+        "sha256": "c1f336185200fc89a2090691148c55de899312e0ca2ac975b832f428776d2267",
+        "bytes": 20498
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/e910-pipeline.json.gz",
+      "sha256": "6b91755c4fe7b40f258d79b64f92be928e21a673dc4b33925ccd1145150d312d",
+      "bytes": 437,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/e910-pipeline.json.gz",
+        "sha256": "6b91755c4fe7b40f258d79b64f92be928e21a673dc4b33925ccd1145150d312d",
+        "bytes": 437
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/e910-ps-complete.asm.gz",
+      "sha256": "e4797f7cfb9580cc68aaa6daa3df05f62f22b8f8f0b884771f878a9f3d94427a",
+      "bytes": 21977,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/e910-ps-complete.asm.gz",
+        "sha256": "e4797f7cfb9580cc68aaa6daa3df05f62f22b8f8f0b884771f878a9f3d94427a",
+        "bytes": 21977
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/e928-pipeline.json.gz",
+      "sha256": "d5214ffbb9ad5f786620fc925690beb531df5b8b8433f2c275f8e97951720dc9",
+      "bytes": 437,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/e928-pipeline.json.gz",
+        "sha256": "d5214ffbb9ad5f786620fc925690beb531df5b8b8433f2c275f8e97951720dc9",
+        "bytes": 437
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/e928-ps-complete.asm.gz",
+      "sha256": "e4797f7cfb9580cc68aaa6daa3df05f62f22b8f8f0b884771f878a9f3d94427a",
+      "bytes": 21977,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/e928-ps-complete.asm.gz",
+        "sha256": "e4797f7cfb9580cc68aaa6daa3df05f62f22b8f8f0b884771f878a9f3d94427a",
+        "bytes": 21977
+      },
+      "gzip": false
+    },
+    {
+      "path": "source/lighting-candidate.json.gz",
+      "sha256": "12242ead68fe7149dbb6fd6c34c24f99de0b9fb96aa2ba6c7c7dc4ca34ee3882",
+      "bytes": 146846,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/source/lighting-candidate.json.gz",
+        "sha256": "12242ead68fe7149dbb6fd6c34c24f99de0b9fb96aa2ba6c7c7dc4ca34ee3882",
+        "bytes": 146846
+      },
+      "gzip": false
+    },
+    {
+      "path": "variant-trace-1383.json.gz",
+      "sha256": "61399ec5001ab262098e2db9457a6c3123cd684c555195ca6930954c2fdd6f7f",
+      "bytes": 107262,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-trace-1383.json",
+        "sha256": "66da9660c046dbb03142c5dcac6dcf8872acb1de54c4b302725c2b1c49b115c3",
+        "bytes": 1799055
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-trace-889.json.gz",
+      "sha256": "1b52afabfbdafa3981edfa7b48d6200fe01efa4698ca45f90974d3ecadc7d50f",
+      "bytes": 99637,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-trace-889.json",
+        "sha256": "b5ab8cc3d4b1d0048e1bb7c08d5e8731b437ebf1a611a636faedc21528783771",
+        "bytes": 1663831
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-trace-910.json.gz",
+      "sha256": "3967dfd4f68bcc5ad63cd264e19cdfcf6d4bbd8b7468af53242e6fe42b321e4d",
+      "bytes": 96347,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-trace-910.json",
+        "sha256": "c0fc9a7dfed703101a749a3328b8525c0d71d07d73a888fff6d9ab4fa4a7969e",
+        "bytes": 1615259
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-trace-928.json.gz",
+      "sha256": "9982bd2297d7d1b47e42b159aa0037ee8ac0181fbc155d41fb1333b5f104076a",
+      "bytes": 94702,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-trace-928.json",
+        "sha256": "b68532740e69601feae2dd119b851cec42f5f65008f24414120811b351e39c60",
+        "bytes": 1589098
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/cb2.bin.gz",
+      "sha256": "96da6a6f42b5944d954ebf4de77b6a6e7e418d66f7967c6a701be87e957b8fe1",
+      "bytes": 4884,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/cb2.bin",
+        "sha256": "bdb2c22e17bd3447844f0729101ef790316c5f3d2ae58c06095c22b313606af4",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/cb6.bin.gz",
+      "sha256": "62dd056230655e2b25f96aba089b1a698a8df3f673cb14f351ae5c105d4987a2",
+      "bytes": 75,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/cb6.bin",
+        "sha256": "115af0699656f84d89d6921ad47e953e77db1d37016678011d1b37511002c3ea",
+        "bytes": 512
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/ps.asm.gz",
+      "sha256": "f4357ce9d40889979543079305b8bcc8c50363327ef5ac3c9f4e6bed676f7ddb",
+      "bytes": 23705,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/ps.asm",
+        "sha256": "0f7b49c43aa50006c3567ba7e0e5dc8389f96353d5335de740c417ea3b0cf93d",
+        "bytes": 111272
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e1383/ps.dxbc.gz",
+      "sha256": "cc073604f004e165354c729e5fb4c2f7974c0fb1d37093474998e2607c516790",
+      "bytes": 16917,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e1383/ps.dxbc",
+        "sha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680",
+        "bytes": 75584
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/cb2.bin.gz",
+      "sha256": "ec5390586205dc3789810785e5809901702c355d4b438d0ba02092a562904ca5",
+      "bytes": 5065,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/cb2.bin",
+        "sha256": "4693d0e1c15f2198ed3d7c09096f1a59ec4d0b09c0540acf755d45123e148465",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/cb6.bin.gz",
+      "sha256": "a7317a7ec0cecea6107b266016d06c887c4ad7e5db23144d1a25242a465ca0f8",
+      "bytes": 61,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/cb6.bin",
+        "sha256": "c55b70d2a272df5cc21ad4baf1a4bc8bbc9be32d1ea4d35b561a6c9d9af9544d",
+        "bytes": 512
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/ps.asm.gz",
+      "sha256": "1e5837be8cfd071de54d1c6a2e85374b9de07b8d465d474bd0c518b4128f244d",
+      "bytes": 20211,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/ps.asm",
+        "sha256": "c0a19512aae268c6b112007da32d6c03a4a50f81fba167a0da950d1dceac653d",
+        "bytes": 95500
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e868/ps.dxbc.gz",
+      "sha256": "52a88abc4ea635ccbc62b170425289b2fdb1e2e12dffe1026a2a7cfc74a3f374",
+      "bytes": 14400,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e868/ps.dxbc",
+        "sha256": "9f3e5a0ef3e820e863d2c0571cd8b6facc3e02c3433c4ee15364c0058da33ec2",
+        "bytes": 65100
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/cb2.bin.gz",
+      "sha256": "2857195c2b79b1a6c990f36830bee7b49c2db2372e4b56d7034ae0a0dd0820c1",
+      "bytes": 5094,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/cb2.bin",
+        "sha256": "26f5752c301eae6e3f51e34fde8b1214b85f576e1d0e43f51854c18865aac795",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/cb6.bin.gz",
+      "sha256": "9c99ad4f90c85020332729f01c9f1fb8f8fb407c622fe3fa7a8811a84de3e266",
+      "bytes": 104,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/cb6.bin",
+        "sha256": "00d31c096fa65027b1397ede018dcd36cd8f56017460f156c40ef617776854b6",
+        "bytes": 768
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/ps.asm.gz",
+      "sha256": "0141fd22c2053bf515bf990e22c36e66226413a0bc60698df4e0bb69a1e2f4d8",
+      "bytes": 21918,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/ps.asm",
+        "sha256": "6f8921a8ea2627231160c8de7c090e718abac0561a5c01a677f061b8edcc6911",
+        "bytes": 102219
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e910/ps.dxbc.gz",
+      "sha256": "838da6ec382e162cbe54f246fb1e62ff3e601978964decf30219b34dcaa80f45",
+      "bytes": 15563,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e910/ps.dxbc",
+        "sha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753",
+        "bytes": 70060
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/cb2.bin.gz",
+      "sha256": "1613df8749fee2240da72e54d0888a013e5d1812f79d059c55a7ab116b4da7f2",
+      "bytes": 5118,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/cb2.bin",
+        "sha256": "53daf1ba2fb37751e9c5b857463508aca525857855c792a88c7419d73ad2b71d",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/cb6.bin.gz",
+      "sha256": "0518bec49ebd3ecde55abc6ccc6f82ca6bfe4b709ec4d1f48a959f622775a699",
+      "bytes": 104,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/cb6.bin",
+        "sha256": "66738da3f8f8531e8103a1d9ce9a90e5637dfe6af9781ed29f1f2abe71202500",
+        "bytes": 768
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/ps.asm.gz",
+      "sha256": "0141fd22c2053bf515bf990e22c36e66226413a0bc60698df4e0bb69a1e2f4d8",
+      "bytes": 21918,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/ps.asm",
+        "sha256": "6f8921a8ea2627231160c8de7c090e718abac0561a5c01a677f061b8edcc6911",
+        "bytes": 102219
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/e928/ps.dxbc.gz",
+      "sha256": "838da6ec382e162cbe54f246fb1e62ff3e601978964decf30219b34dcaa80f45",
+      "bytes": 15563,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/e928/ps.dxbc",
+        "sha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753",
+        "bytes": 70060
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/cb2.bin.gz",
+      "sha256": "96da6a6f42b5944d954ebf4de77b6a6e7e418d66f7967c6a701be87e957b8fe1",
+      "bytes": 4884,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/cb2.bin",
+        "sha256": "bdb2c22e17bd3447844f0729101ef790316c5f3d2ae58c06095c22b313606af4",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/cb6.bin.gz",
+      "sha256": "62dd056230655e2b25f96aba089b1a698a8df3f673cb14f351ae5c105d4987a2",
+      "bytes": 75,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/cb6.bin",
+        "sha256": "115af0699656f84d89d6921ad47e953e77db1d37016678011d1b37511002c3ea",
+        "bytes": 512
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/ps.asm.gz",
+      "sha256": "f4357ce9d40889979543079305b8bcc8c50363327ef5ac3c9f4e6bed676f7ddb",
+      "bytes": 23705,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/ps.asm",
+        "sha256": "0f7b49c43aa50006c3567ba7e0e5dc8389f96353d5335de740c417ea3b0cf93d",
+        "bytes": 111272
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e1383/ps.dxbc.gz",
+      "sha256": "cc073604f004e165354c729e5fb4c2f7974c0fb1d37093474998e2607c516790",
+      "bytes": 16917,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e1383/ps.dxbc",
+        "sha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680",
+        "bytes": 75584
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/cb2.bin.gz",
+      "sha256": "a994e4e3c6ac4590f190800e49c35a0dd468b30e98e2e04607122fa59e72d015",
+      "bytes": 5074,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/cb2.bin",
+        "sha256": "6f9b21fa964bf4e15a6e025be47f8ac7b4cbe95636b523d34a8e57084ef218cd",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/cb6.bin.gz",
+      "sha256": "ab590ef9e0805e183c98c6a59ba73197126c86c36b1687acaea0a3ed4a0b4201",
+      "bytes": 57,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/cb6.bin",
+        "sha256": "16c261dd94e6d006b6f743e6a0acd60d8ddeb6a58f13d05886a3d3ded6b21bec",
+        "bytes": 512
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/ps.asm.gz",
+      "sha256": "7d1230281e595c37fe747467cb6ad5e6391e1ab3672c6cf230aab9e886159049",
+      "bytes": 20437,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/ps.asm",
+        "sha256": "cb55378c781eb26ca9643bf4787788ccdcfc060b2bf198e958c31eb4d0da1407",
+        "bytes": 96603
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e889/ps.dxbc.gz",
+      "sha256": "39978df3a0ff4d125d68a688d4bdc6addc815caba62257a292386e235f11db28",
+      "bytes": 14552,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e889/ps.dxbc",
+        "sha256": "3d0f59dc13470cc6a6b40786bbcbef515b1fc352d96945ed5218b0140cd28d42",
+        "bytes": 65780
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/cb2.bin.gz",
+      "sha256": "2857195c2b79b1a6c990f36830bee7b49c2db2372e4b56d7034ae0a0dd0820c1",
+      "bytes": 5094,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/cb2.bin",
+        "sha256": "26f5752c301eae6e3f51e34fde8b1214b85f576e1d0e43f51854c18865aac795",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/cb6.bin.gz",
+      "sha256": "9c99ad4f90c85020332729f01c9f1fb8f8fb407c622fe3fa7a8811a84de3e266",
+      "bytes": 104,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/cb6.bin",
+        "sha256": "00d31c096fa65027b1397ede018dcd36cd8f56017460f156c40ef617776854b6",
+        "bytes": 768
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/ps.asm.gz",
+      "sha256": "0141fd22c2053bf515bf990e22c36e66226413a0bc60698df4e0bb69a1e2f4d8",
+      "bytes": 21918,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/ps.asm",
+        "sha256": "6f8921a8ea2627231160c8de7c090e718abac0561a5c01a677f061b8edcc6911",
+        "bytes": 102219
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e910/ps.dxbc.gz",
+      "sha256": "838da6ec382e162cbe54f246fb1e62ff3e601978964decf30219b34dcaa80f45",
+      "bytes": 15563,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e910/ps.dxbc",
+        "sha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753",
+        "bytes": 70060
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/cb2.bin.gz",
+      "sha256": "1613df8749fee2240da72e54d0888a013e5d1812f79d059c55a7ab116b4da7f2",
+      "bytes": 5118,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/cb2.bin",
+        "sha256": "53daf1ba2fb37751e9c5b857463508aca525857855c792a88c7419d73ad2b71d",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/cb6.bin.gz",
+      "sha256": "0518bec49ebd3ecde55abc6ccc6f82ca6bfe4b709ec4d1f48a959f622775a699",
+      "bytes": 104,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/cb6.bin",
+        "sha256": "66738da3f8f8531e8103a1d9ce9a90e5637dfe6af9781ed29f1f2abe71202500",
+        "bytes": 768
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/ps.asm.gz",
+      "sha256": "0141fd22c2053bf515bf990e22c36e66226413a0bc60698df4e0bb69a1e2f4d8",
+      "bytes": 21918,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/ps.asm",
+        "sha256": "6f8921a8ea2627231160c8de7c090e718abac0561a5c01a677f061b8edcc6911",
+        "bytes": 102219
+      },
+      "gzip": true
+    },
+    {
+      "path": "variant-targets/e928/ps.dxbc.gz",
+      "sha256": "838da6ec382e162cbe54f246fb1e62ff3e601978964decf30219b34dcaa80f45",
+      "bytes": 15563,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/variant-targets/e928/ps.dxbc",
+        "sha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753",
+        "bytes": 70060
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/cb0.bin.gz",
+      "sha256": "0dcd6973ba9319c35bf6391800a3ade8e217f8c7eeb26ca21acaca2a73061b0c",
+      "bytes": 660,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/cb0.bin",
+        "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+        "bytes": 1536
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/cb1.bin.gz",
+      "sha256": "c194b174e8ad34076820eb68a646cc264b9cd42d67ce990cdf98045e201c6228",
+      "bytes": 868,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/cb1.bin",
+        "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+        "bytes": 3328
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/cb2.bin.gz",
+      "sha256": "96da6a6f42b5944d954ebf4de77b6a6e7e418d66f7967c6a701be87e957b8fe1",
+      "bytes": 4884,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/cb2.bin",
+        "sha256": "bdb2c22e17bd3447844f0729101ef790316c5f3d2ae58c06095c22b313606af4",
+        "bytes": 65536
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/cb3.bin.gz",
+      "sha256": "7d78088732144d543d3bcccb69fb342a062de5fae1dfd0f99aa4b72322fd3377",
+      "bytes": 3123,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/cb3.bin",
+        "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4",
+        "bytes": 33024
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/cb4.bin.gz",
+      "sha256": "e9c511ef6df9df3a5aadbf7725bd151df71511958b362af4198332a6ecb6adc2",
+      "bytes": 66,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/cb4.bin",
+        "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434",
+        "bytes": 256
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/cb5.bin.gz",
+      "sha256": "0927c492fa5562da13d10ed3d6fa70928d35870db84f41b909b248b441ed8e16",
+      "bytes": 732,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/cb5.bin",
+        "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f",
+        "bytes": 6400
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/cb6.bin.gz",
+      "sha256": "62dd056230655e2b25f96aba089b1a698a8df3f673cb14f351ae5c105d4987a2",
+      "bytes": 75,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/cb6.bin",
+        "sha256": "115af0699656f84d89d6921ad47e953e77db1d37016678011d1b37511002c3ea",
+        "bytes": 512
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/cb7.bin.gz",
+      "sha256": "7f1b9163d9e838fdb984798258c3347f71704952938f9852923f85e52b3da7b2",
+      "bytes": 1112,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/cb7.bin",
+        "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030",
+        "bytes": 2560
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/ps.asm.gz",
+      "sha256": "f4357ce9d40889979543079305b8bcc8c50363327ef5ac3c9f4e6bed676f7ddb",
+      "bytes": 23705,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/ps.asm",
+        "sha256": "0f7b49c43aa50006c3567ba7e0e5dc8389f96353d5335de740c417ea3b0cf93d",
+        "bytes": 111272
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/e1383/ps.dxbc.gz",
+      "sha256": "cc073604f004e165354c729e5fb4c2f7974c0fb1d37093474998e2607c516790",
+      "bytes": 16917,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/e1383/ps.dxbc",
+        "sha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680",
+        "bytes": 75584
+      },
+      "gzip": true
+    },
+    {
+      "path": "native-bindings/textures/ResourceId-6177.dds.gz",
+      "sha256": "aa58989ecdc89baf62edf2d8d7a5c4777c9243ab45e88f558d9cbbd0387838ce",
+      "bytes": 22914,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-bindings/textures/ResourceId-6177.dds",
+        "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a",
+        "bytes": 262272
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/textures/ResourceId-6177.dds.gz",
+      "sha256": "aa58989ecdc89baf62edf2d8d7a5c4777c9243ab45e88f558d9cbbd0387838ce",
+      "bytes": 22914,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/textures/ResourceId-6177.dds",
+        "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a",
+        "bytes": 262272
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/textures/ResourceId-85388.dds.gz",
+      "sha256": "10f30ff2b2fe0c7f9aa2b000339f3c90750390948d908c70597bd7f722c997e9",
+      "bytes": 3821829,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/textures/ResourceId-85388.dds",
+        "sha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c",
+        "bytes": 5592580
+      },
+      "gzip": true
+    },
+    {
+      "path": "transparent-bindings/textures/ResourceId-85393.dds.gz",
+      "sha256": "7833c4456e6a461c0342f40d92a4c058f3740814bcf732d11000b47493adc7d1",
+      "bytes": 4398556,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/transparent-bindings/textures/ResourceId-85393.dds",
+        "sha256": "3411adc70aa616bda10f3227e10981e042f540f1acd0bdf45bd13bb0ee3d464b",
+        "bytes": 5592580
+      },
+      "gzip": true
+    },
+    {
+      "path": "diagnostics/unqualified-binding-measurement.json",
+      "sha256": "00e726ea1c0cf24ce5c0cf8070e0b6fb2de924c9f7819a833b65e1e34b150682",
+      "bytes": 2481,
+      "source": {
+        "path": "build/runs/20261101-143507-native-cloth-variants-d877ef/native-binding-measurement.json",
+        "sha256": "00e726ea1c0cf24ce5c0cf8070e0b6fb2de924c9f7819a833b65e1e34b150682",
+        "bytes": 2481
+      },
+      "gzip": false
+    },
+    {
+      "path": "author/source_audit.json.gz",
+      "sha256": "095e5a6a05d24349a6ea9adb4abc7e9ea6eb5f88f8794fcdea36fa9a2462119a",
+      "bytes": 166826,
+      "source": {
+        "path": "build/runs/20261017-000956-endfield-native-3caf73/laevat-static/source_audit.json",
+        "sha256": "26b40382c63a4783ed1576bf42e9f6a9241623d90b69eb49a74b9ceca4269858",
+        "bytes": 2122196
+      },
+      "gzip": true
+    },
+    {
+      "path": "author/source_texture_artifacts.json.gz",
+      "sha256": "02cf1fcad8ac9322a699e8aa161faaadb2c16b9646c76c102a9c5abe8cb58438",
+      "bytes": 6673,
+      "source": {
+        "path": "build/runs/20261017-000956-endfield-native-3caf73/laevat-static/source_texture_artifacts.json",
+        "sha256": "f62e86bfa4d3e98ff933535c7207efa00de20d89ba7834101bc7386b36b4f409",
+        "bytes": 28092
+      },
+      "gzip": true
+    },
+    {
+      "path": "author/T_actor_laevat_cloth_02_D.png",
+      "sha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "bytes": 3368813,
+      "source": {
+        "path": "build/runs/20261017-000956-endfield-native-3caf73/laevat-static/source_textures/2E8BB013EBC28F010557636EF7A789425594E43F5E6675612A2C489BD4A427DC_B0FF4A6FB15D8738.png",
+        "sha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+        "bytes": 3368813
+      },
+      "gzip": false
+    },
+    {
+      "path": "author/T_actor_laevat_cloth_02_P.png",
+      "sha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651",
+      "bytes": 5399421,
+      "source": {
+        "path": "build/runs/20261017-000956-endfield-native-3caf73/laevat-static/source_textures/2E8BB013EBC28F010557636EF7A789425594E43F5E6675612A2C489BD4A427DC_A2D77C4AE1500715.png",
+        "sha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651",
+        "bytes": 5399421
+      },
+      "gzip": false
+    },
+    {
+      "path": "author/T_actor_common_cloth_04_RS.png",
+      "sha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148",
+      "bytes": 8429,
+      "source": {
+        "path": "build/runs/20261017-000956-endfield-native-3caf73/laevat-static/source_textures/39878777EA493946FDDC3E66CB66E39CF12DD8A544D7EB49012E95D767FB1D4C_3EC779E6C0918889.png",
+        "sha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148",
+        "bytes": 8429
+      },
+      "gzip": false
+    },
+    {
+      "path": "current/material-1.azurematerial.gz",
+      "sha256": "93df7868cc97ff18364f569326c301a6ca47510026d17173ab76faa7109794a1",
+      "bytes": 3806,
+      "source": {
+        "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project/assets/linear-display-materials/material-1.azurematerial",
+        "sha256": "3231ed4cb8b1630e872d097e86b7d055af2d50ac90d009d700fcf7f04620fbb9",
+        "bytes": 30758
+      },
+      "gzip": true
+    },
+    {
+      "path": "current/material-2.azurematerial.gz",
+      "sha256": "adf448e3167d08062930998a905a1859d14f97c98577b5320b01e26df5b8c800",
+      "bytes": 3755,
+      "source": {
+        "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project/assets/linear-display-materials/material-2.azurematerial",
+        "sha256": "084240409fd278244d14d5a594f6638d4471268ade588fa908f8a47816e1c1de",
+        "bytes": 30329
+      },
+      "gzip": true
+    },
+    {
+      "path": "current/material-3.azurematerial.gz",
+      "sha256": "50ea66b51bd955561d61d529851fb9324075a576a9266fa287785bcc114d935c",
+      "bytes": 3624,
+      "source": {
+        "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project/assets/linear-display-materials/material-3.azurematerial",
+        "sha256": "2f40acc04e7430aac178fe910f6efde52adeb34d94578f0cee6a11cbe37693c2",
+        "bytes": 29684
+      },
+      "gzip": true
+    },
+    {
+      "path": "current/material-4.azurematerial.gz",
+      "sha256": "15250fa7db263ff6bc2b3425a8ad98987cd16ab594859c7515c3be29434f0f54",
+      "bytes": 3954,
+      "source": {
+        "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project/assets/linear-display-materials/material-4.azurematerial",
+        "sha256": "6751c584e7c39343d18224abf11d626f9d8798cf392b85c8f1d4675f764be5da",
+        "bytes": 31454
+      },
+      "gzip": true
+    },
+    {
+      "path": "current/material-5.azurematerial.gz",
+      "sha256": "2234bc75c72f34b89e12517bca6a6d28448f1561d5e687d4898e008041f3895d",
+      "bytes": 3753,
+      "source": {
+        "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project/assets/linear-display-materials/material-5.azurematerial",
+        "sha256": "dafea1495656b5baad40cd5857363d1b5f87234b6751397b98c855e439db6132",
+        "bytes": 30329
+      },
+      "gzip": true
+    },
+    {
+      "path": "current/fullbody-world-aa0.azurelevel.gz",
+      "sha256": "7c9123f3a02424acb6c45f80954d4a45c70ab6d35d90dbf2b2819bbb6d7d4601",
+      "bytes": 217618,
+      "source": {
+        "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project/scene/fullbody-world-aa0.azurelevel",
+        "sha256": "ccbd47c9f644d5d6e15e780972f198f80b5db2b16c6106610a6865e521730fca",
+        "bytes": 3770477
+      },
+      "gzip": true
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project/scene/fullbody-world-aa0.azurelevel",
+    "nprLighting": {
+      "schemaVersion": 1,
+      "enabled": true,
+      "ambientColor": [
+        1.1870100498199463,
+        0.9272286891937256,
+        0.8129898905754089
+      ],
+      "ambientDirection": [
+        -0.0,
+        0.9999999999999991,
+        4.371138828673789e-08
+      ],
+      "directionBias": 0.15000000596046448,
+      "directionGain": 1.5,
+      "directionFloor": 0.5,
+      "outdoorGain": 1.0499999523162842,
+      "shadowAmbientGain": 0.800000011920929,
+      "indoorMix": 0.0,
+      "litAmbientMix": 1.0,
+      "mainColorMix": 1.0,
+      "shadowOverride": 1.0,
+      "useSceneIrradiance": false,
+      "ambientWeight": 0.28772246837615967,
+      "specularFloor": 0
+    }
+  },
+  {
+    "path": "build/runs/20261101-120125-character-environment-reception-fa70a7/candidate-project/scene/fullbody-source-aa0.azurelevel",
+    "nprLighting": {
+      "schemaVersion": 1,
+      "enabled": true,
+      "ambientColor": [
+        1.1870100498199463,
+        0.9272286891937256,
+        0.8129898905754089
+      ],
+      "ambientDirection": [
+        -0.0,
+        0.9999999999999991,
+        4.371138828673789e-08
+      ],
+      "directionBias": 0.15000000596046448,
+      "directionGain": 1.5,
+      "directionFloor": 0.5,
+      "outdoorGain": 1.0499999523162842,
+      "shadowAmbientGain": 0.800000011920929,
+      "indoorMix": 0.0,
+      "litAmbientMix": 1.0,
+      "mainColorMix": 1.0,
+      "shadowOverride": 1.0,
+      "useSceneIrradiance": false,
+      "ambientWeight": 0.28772246837615967
+    }
+  },
+  {
+    "path": "build/runs/20261031-135416-character-portrait-recovery-0773ca/original-reference/project/high/reference.azurelevel",
+    "nprLighting": {
+      "schemaVersion": 1,
+      "enabled": true,
+      "ambientColor": [
+        1.1870100498199463,
+        0.9272286891937256,
+        0.8129898905754089
+      ],
+      "ambientDirection": [
+        -0.0,
+        0.9999999999999991,
+        4.371138828673789e-08
+      ],
+      "directionBias": 0.15000000596046448,
+      "directionGain": 1.5,
+      "directionFloor": 0.5,
+      "outdoorGain": 1.0499999523162842,
+      "shadowAmbientGain": 0.800000011920929,
+      "indoorMix": 0.0,
+      "litAmbientMix": 1.0,
+      "mainColorMix": 1.0,
+      "shadowOverride": 1.0,
+      "useSceneIrradiance": false,
+      "ambientWeight": 0.28772246837615967
+    }
+  }
+]

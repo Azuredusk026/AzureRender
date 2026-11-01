@@ -1,0 +1,1195 @@
+{
+  "status": "exported-native-bindings",
+  "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+  "draws": [
+    {
+      "event": 868,
+      "shader": {
+        "path": "e868/ps.dxbc",
+        "bytes": 65100,
+        "sha256": "9f3e5a0ef3e820e863d2c0571cd8b6facc3e02c3433c4ee15364c0058da33ec2"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::141931",
+          "width": 2560,
+          "height": 1440,
+          "mips": 1,
+          "format": "R8G8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-141931.dds",
+            "bytes": 7372928,
+            "sha256": "a270a018469c9726414daf88fc0471d5754fcee19ffe0e4a675be43c37e5ea29"
+          }
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::6172",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-6172.dds",
+            "bytes": 1152,
+            "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+          }
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-6177.dds",
+            "bytes": 262272,
+            "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+          }
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::87399",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "textures/ResourceId-87399.dds",
+            "bytes": 5592580,
+            "sha256": "c7ea4150acd1461cfe37bf7bfacdb197dd05ab7193e1ca245ab445c4e2fb2324"
+          }
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::87371",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "textures/ResourceId-87371.dds",
+            "bytes": 5592580,
+            "sha256": "e2abd7e0ecceae68833c2675f8fcbf632a2881d3cd5a57e551fdaeb43cd8e127"
+          }
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::87341",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM",
+          "export": {
+            "path": "textures/ResourceId-87341.dds",
+            "bytes": 5592560,
+            "sha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a"
+          }
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT",
+          "export": {
+            "path": "textures/ResourceId-11467.dds",
+            "bytes": 131380,
+            "sha256": "3b0aa26b56ede6b780c186add2778d7155931fa9797ee513db6cd7c2a345b223"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constantBuffers": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "resource": "ResourceId::611",
+          "offset": 64256,
+          "size": 1536,
+          "path": "e868/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "resource": "ResourceId::611",
+          "offset": 65792,
+          "size": 3328,
+          "path": "e868/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "resource": "ResourceId::611",
+          "offset": 254720,
+          "size": 65536,
+          "path": "e868/cb2.bin",
+          "bytes": 65536,
+          "sha256": "4693d0e1c15f2198ed3d7c09096f1a59ec4d0b09c0540acf755d45123e148465"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "resource": "ResourceId::611",
+          "offset": 21504,
+          "size": 33024,
+          "path": "e868/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "resource": "ResourceId::611",
+          "offset": 54528,
+          "size": 256,
+          "path": "e868/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "resource": "ResourceId::611",
+          "offset": 136448,
+          "size": 6400,
+          "path": "e868/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "resource": "ResourceId::466",
+          "offset": 3503872,
+          "size": 512,
+          "path": "e868/cb6.bin",
+          "bytes": 512,
+          "sha256": "c55b70d2a272df5cc21ad4baf1a4bc8bbc9be32d1ea4d35b561a6c9d9af9544d"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "resource": "ResourceId::611",
+          "offset": 69120,
+          "size": 2560,
+          "path": "e868/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    },
+    {
+      "event": 910,
+      "shader": {
+        "path": "e910/ps.dxbc",
+        "bytes": 70060,
+        "sha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::141931",
+          "width": 2560,
+          "height": 1440,
+          "mips": 1,
+          "format": "R8G8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-141931.dds",
+            "bytes": 7372928,
+            "sha256": "a270a018469c9726414daf88fc0471d5754fcee19ffe0e4a675be43c37e5ea29"
+          }
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::6172",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-6172.dds",
+            "bytes": 1152,
+            "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+          }
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-6177.dds",
+            "bytes": 262272,
+            "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+          }
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::85388",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "textures/ResourceId-85388.dds",
+            "bytes": 5592580,
+            "sha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c"
+          }
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::85393",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "textures/ResourceId-85393.dds",
+            "bytes": 5592580,
+            "sha256": "3411adc70aa616bda10f3227e10981e042f540f1acd0bdf45bd13bb0ee3d464b"
+          }
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::85362",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM",
+          "export": {
+            "path": "textures/ResourceId-85362.dds",
+            "bytes": 5592560,
+            "sha256": "ee233da7cb029be0373fabb3d90ff6b33c49c0b5587c796a931c2fd8012deb2b"
+          }
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::85312",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "textures/ResourceId-85312.dds",
+            "bytes": 1398276,
+            "sha256": "eb070fb00928039be1a867553296f605363f6fd761bc903c24a3705edbf9e914"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT"
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 22,
+          "resource": "ResourceId::139834",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 23,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 24,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constantBuffers": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "resource": "ResourceId::611",
+          "offset": 64256,
+          "size": 1536,
+          "path": "e910/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "resource": "ResourceId::611",
+          "offset": 65792,
+          "size": 3328,
+          "path": "e910/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "resource": "ResourceId::611",
+          "offset": 255232,
+          "size": 65536,
+          "path": "e910/cb2.bin",
+          "bytes": 65536,
+          "sha256": "26f5752c301eae6e3f51e34fde8b1214b85f576e1d0e43f51854c18865aac795"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "resource": "ResourceId::611",
+          "offset": 21504,
+          "size": 33024,
+          "path": "e910/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "resource": "ResourceId::611",
+          "offset": 54528,
+          "size": 256,
+          "path": "e910/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "resource": "ResourceId::611",
+          "offset": 136448,
+          "size": 6400,
+          "path": "e910/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "resource": "ResourceId::466",
+          "offset": 3528704,
+          "size": 768,
+          "path": "e910/cb6.bin",
+          "bytes": 768,
+          "sha256": "00d31c096fa65027b1397ede018dcd36cd8f56017460f156c40ef617776854b6"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "resource": "ResourceId::611",
+          "offset": 69120,
+          "size": 2560,
+          "path": "e910/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    },
+    {
+      "event": 928,
+      "shader": {
+        "path": "e928/ps.dxbc",
+        "bytes": 70060,
+        "sha256": "0d164a79b4c079e6d90f53fafb8eecb52119d06503b6dbb79f2749362012e753"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::141931",
+          "width": 2560,
+          "height": 1440,
+          "mips": 1,
+          "format": "R8G8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-141931.dds",
+            "bytes": 7372928,
+            "sha256": "a270a018469c9726414daf88fc0471d5754fcee19ffe0e4a675be43c37e5ea29"
+          }
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::6172",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-6172.dds",
+            "bytes": 1152,
+            "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+          }
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-6177.dds",
+            "bytes": 262272,
+            "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+          }
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::85388",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "textures/ResourceId-85388.dds",
+            "bytes": 5592580,
+            "sha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c"
+          }
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::85393",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "textures/ResourceId-85393.dds",
+            "bytes": 5592580,
+            "sha256": "3411adc70aa616bda10f3227e10981e042f540f1acd0bdf45bd13bb0ee3d464b"
+          }
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::85362",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM",
+          "export": {
+            "path": "textures/ResourceId-85362.dds",
+            "bytes": 5592560,
+            "sha256": "ee233da7cb029be0373fabb3d90ff6b33c49c0b5587c796a931c2fd8012deb2b"
+          }
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::85312",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "textures/ResourceId-85312.dds",
+            "bytes": 1398276,
+            "sha256": "eb070fb00928039be1a867553296f605363f6fd761bc903c24a3705edbf9e914"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT"
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 22,
+          "resource": "ResourceId::13555",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_SRGB"
+        },
+        {
+          "slot": 23,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 24,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constantBuffers": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "resource": "ResourceId::611",
+          "offset": 64256,
+          "size": 1536,
+          "path": "e928/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "resource": "ResourceId::611",
+          "offset": 65792,
+          "size": 3328,
+          "path": "e928/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "resource": "ResourceId::611",
+          "offset": 255488,
+          "size": 65536,
+          "path": "e928/cb2.bin",
+          "bytes": 65536,
+          "sha256": "53daf1ba2fb37751e9c5b857463508aca525857855c792a88c7419d73ad2b71d"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "resource": "ResourceId::611",
+          "offset": 21504,
+          "size": 33024,
+          "path": "e928/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "resource": "ResourceId::611",
+          "offset": 54528,
+          "size": 256,
+          "path": "e928/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "resource": "ResourceId::611",
+          "offset": 136448,
+          "size": 6400,
+          "path": "e928/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "resource": "ResourceId::466",
+          "offset": 3257088,
+          "size": 768,
+          "path": "e928/cb6.bin",
+          "bytes": 768,
+          "sha256": "66738da3f8f8531e8103a1d9ce9a90e5637dfe6af9781ed29f1f2abe71202500"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "resource": "ResourceId::611",
+          "offset": 69120,
+          "size": 2560,
+          "path": "e928/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    },
+    {
+      "event": 1383,
+      "shader": {
+        "path": "e1383/ps.dxbc",
+        "bytes": 75584,
+        "sha256": "135b25965ed786752775596a86f4069f58942eae340be4d143d291eea9429680"
+      },
+      "textures": [
+        {
+          "slot": 3,
+          "resource": "ResourceId::957",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 4,
+          "resource": "ResourceId::14647",
+          "width": 6144,
+          "height": 4096,
+          "mips": 1,
+          "format": "R16_TYPELESS",
+          "export": {
+            "path": "textures/ResourceId-14647.dds",
+            "bytes": 50331796,
+            "sha256": "fda5ef689240d69bcde6d5f5b91f8bc59dcf1dceda2a67b0a6c7086ed3c246c1"
+          }
+        },
+        {
+          "slot": 5,
+          "resource": "ResourceId::158089",
+          "width": 4096,
+          "height": 2048,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 6,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 7,
+          "resource": "ResourceId::957",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R16_TYPELESS"
+        },
+        {
+          "slot": 8,
+          "resource": "ResourceId::11293",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 9,
+          "resource": "ResourceId::11296",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 10,
+          "resource": "ResourceId::11299",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT"
+        },
+        {
+          "slot": 11,
+          "resource": "ResourceId::11302",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "export": {
+            "path": "textures/ResourceId-11302.dds",
+            "bytes": 12583040,
+            "sha256": "f274e77ab8d7f166570b3e5991965c86aabe5587d4179a5745bdc31d28b20b1e"
+          }
+        },
+        {
+          "slot": 12,
+          "resource": "ResourceId::11305",
+          "width": 128,
+          "height": 64,
+          "mips": 1,
+          "format": "R11G11B10_FLOAT",
+          "export": {
+            "path": "textures/ResourceId-11305.dds",
+            "bytes": 4194452,
+            "sha256": "2014178ec81f0d4b31cdcfff15fa928156cde13834abefba93c203888592a8e0"
+          }
+        },
+        {
+          "slot": 13,
+          "resource": "ResourceId::11308",
+          "width": 128,
+          "height": 192,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 14,
+          "resource": "ResourceId::13537",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 15,
+          "resource": "ResourceId::6177",
+          "width": 256,
+          "height": 256,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM"
+        },
+        {
+          "slot": 16,
+          "resource": "ResourceId::688",
+          "width": 1024,
+          "height": 1024,
+          "mips": 11,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "textures/ResourceId-688.dds",
+            "bytes": 1398276,
+            "sha256": "142d482940555b829e748aa06814114e3677bacf4bbede12f99544c0164a3071"
+          }
+        },
+        {
+          "slot": 17,
+          "resource": "ResourceId::674",
+          "width": 256,
+          "height": 256,
+          "mips": 9,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "textures/ResourceId-674.dds",
+            "bytes": 87556,
+            "sha256": "59a131442d7b0401f116a4cecdee506e58580a4c2400926445cbd0a1dfe00212"
+          }
+        },
+        {
+          "slot": 18,
+          "resource": "ResourceId::701",
+          "width": 512,
+          "height": 512,
+          "mips": 10,
+          "format": "BC7_UNORM",
+          "export": {
+            "path": "textures/ResourceId-701.dds",
+            "bytes": 349700,
+            "sha256": "50d95d65b0c381592105fdd6106d390ca56d8baebda0f3b5b9c6da4f0672be93"
+          }
+        },
+        {
+          "slot": 19,
+          "resource": "ResourceId::85388",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_SRGB",
+          "export": {
+            "path": "textures/ResourceId-85388.dds",
+            "bytes": 5592580,
+            "sha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c"
+          }
+        },
+        {
+          "slot": 20,
+          "resource": "ResourceId::85393",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC7_UNORM"
+        },
+        {
+          "slot": 21,
+          "resource": "ResourceId::85362",
+          "width": 2048,
+          "height": 2048,
+          "mips": 12,
+          "format": "BC5_UNORM"
+        },
+        {
+          "slot": 22,
+          "resource": "ResourceId::11467",
+          "width": 128,
+          "height": 128,
+          "mips": 8,
+          "format": "BC6_UFLOAT"
+        },
+        {
+          "slot": 23,
+          "resource": "ResourceId::339",
+          "width": 4,
+          "height": 4,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        },
+        {
+          "slot": 24,
+          "resource": "ResourceId::345",
+          "width": 1,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_SRGB"
+        }
+      ],
+      "constantBuffers": [
+        {
+          "index": 0,
+          "name": "cbuffer0",
+          "resource": "ResourceId::611",
+          "offset": 64256,
+          "size": 1536,
+          "path": "e1383/cb0.bin",
+          "bytes": 1536,
+          "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+        },
+        {
+          "index": 1,
+          "name": "cbuffer1",
+          "resource": "ResourceId::611",
+          "offset": 65792,
+          "size": 3328,
+          "path": "e1383/cb1.bin",
+          "bytes": 3328,
+          "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+        },
+        {
+          "index": 2,
+          "name": "cbuffer2",
+          "resource": "ResourceId::611",
+          "offset": 250112,
+          "size": 65536,
+          "path": "e1383/cb2.bin",
+          "bytes": 65536,
+          "sha256": "bdb2c22e17bd3447844f0729101ef790316c5f3d2ae58c06095c22b313606af4"
+        },
+        {
+          "index": 3,
+          "name": "cbuffer3",
+          "resource": "ResourceId::611",
+          "offset": 21504,
+          "size": 33024,
+          "path": "e1383/cb3.bin",
+          "bytes": 33024,
+          "sha256": "f2d88c0157d2d1d6da57a727a182b9567fff8ba45b1c152b91236c1e55dcffb4"
+        },
+        {
+          "index": 4,
+          "name": "cbuffer4",
+          "resource": "ResourceId::611",
+          "offset": 54528,
+          "size": 256,
+          "path": "e1383/cb4.bin",
+          "bytes": 256,
+          "sha256": "ca9b7d8ee3dd35bed9213fe001a1a678ab67691f0ec9571730ac7009794b2434"
+        },
+        {
+          "index": 5,
+          "name": "cbuffer5",
+          "resource": "ResourceId::611",
+          "offset": 136448,
+          "size": 6400,
+          "path": "e1383/cb5.bin",
+          "bytes": 6400,
+          "sha256": "6772e014450bc19f0424ab477ccf6fe6adda77820074af43756bb669c8cb6b0f"
+        },
+        {
+          "index": 6,
+          "name": "cbuffer6",
+          "resource": "ResourceId::466",
+          "offset": 3237376,
+          "size": 512,
+          "path": "e1383/cb6.bin",
+          "bytes": 512,
+          "sha256": "115af0699656f84d89d6921ad47e953e77db1d37016678011d1b37511002c3ea"
+        },
+        {
+          "index": 7,
+          "name": "cbuffer7",
+          "resource": "ResourceId::611",
+          "offset": 69120,
+          "size": 2560,
+          "path": "e1383/cb7.bin",
+          "bytes": 2560,
+          "sha256": "7e41d89d0bd17dd179c6bda05b9fba8728f76246e7a59efd58b915700b0e2030"
+        }
+      ]
+    }
+  ],
+  "captureSha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90"
+}

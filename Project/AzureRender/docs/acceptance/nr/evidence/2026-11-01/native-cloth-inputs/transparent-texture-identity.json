@@ -1,0 +1,58 @@
+{
+  "status": "qualified-transparent-author-textures",
+  "event": 1383,
+  "material": {
+    "source": "CAB-ed76ec5bde9521d32a608106bc8e3c58",
+    "path_id": -8392104132147645647,
+    "type": "Material",
+    "name": "M_actor_laevat_cloth_03"
+  },
+  "textures": [
+    {
+      "authorSlot": "_BaseMap",
+      "runtimeSlot": 19,
+      "sourceName": "T_actor_laevat_cloth_02_D",
+      "authorIdentity": {
+        "source": "CAB-ede90f10394caadec66317875dce622e",
+        "path_id": -5692749560395495624,
+        "type": "Texture2D",
+        "name": "T_actor_laevat_cloth_02_D"
+      },
+      "pngSha256": "868fc8ba103737fbebd7950e5c36bb581a39ccd317189da244fa1b709c3dc59e",
+      "ddsSha256": "312f4c792e310dc70040f1f9ea544892a84065b5b1c20147fa4f932c32b1d85c",
+      "flipYMaximumByteError": 0,
+      "flipYDifferentValues": 0
+    },
+    {
+      "authorSlot": "_MetallicGlossMap",
+      "runtimeSlot": 20,
+      "sourceName": "T_actor_laevat_cloth_02_P",
+      "authorIdentity": {
+        "source": "CAB-ede90f10394caadec66317875dce622e",
+        "path_id": -6712760058522892523,
+        "type": "Texture2D",
+        "name": "T_actor_laevat_cloth_02_P"
+      },
+      "pngSha256": "7427f9ff68c4cab77dca5bf373d683bc5731b28d21ffb024779a47b35ac00651",
+      "ddsSha256": "3411adc70aa616bda10f3227e10981e042f540f1acd0bdf45bd13bb0ee3d464b",
+      "flipYMaximumByteError": 0,
+      "flipYDifferentValues": 0
+    },
+    {
+      "authorSlot": "_SpecRampMap",
+      "runtimeSlot": 15,
+      "sourceName": "T_actor_common_cloth_04_RS",
+      "authorIdentity": {
+        "source": "CAB-fff078017aaea35c73aeda4a76467a17",
+        "path_id": 4523718382697154697,
+        "type": "Texture2D",
+        "name": "T_actor_common_cloth_04_RS"
+      },
+      "pngSha256": "bdf45f9f6c3b9b2d924dbcbd4ab33598b3c285106381f778c6113c86cdf0a148",
+      "ddsSha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a",
+      "flipYMaximumByteError": 0,
+      "flipYDifferentValues": 0
+    }
+  ],
+  "qualification": "Exact decompressed texture equality after the established vertical storage conversion; author identity and actual sampling slots are both recorded."
+}
