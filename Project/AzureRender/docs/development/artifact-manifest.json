@@ -926,6 +926,15 @@
       "pinMarker": ".keep",
       "primaryProject": "project/playable.azureproject",
       "evidence": "docs/acceptance/recovery/view-fog-resource-reuse.md"
+    },
+    {
+      "path": "runs/20261101-113436-full-body-native-comparison-0a653b",
+      "pathBase": "build",
+      "purpose": "全身动态、材质身份及环境照明单变量核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/fullbody-world-aa3.azureproject",
+      "evidence": "docs/acceptance/nr/full-body-native-comparison.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

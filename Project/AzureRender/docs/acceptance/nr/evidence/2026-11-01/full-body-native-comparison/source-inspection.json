@@ -1,0 +1,1146 @@
+[
+  {
+    "index": 1,
+    "name": "M_actor_laevat_cloth_01",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "shadowColorLut": {
+        "schemaVersion": 1,
+        "texture": 2,
+        "flipV": true
+      },
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 3
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 1,
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "none",
+        "baseAo": "albedo-alpha"
+      },
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    },
+    "sourceKeys": [
+      "material",
+      "floats",
+      "colors",
+      "keywords"
+    ],
+    "floats": {
+      "_Albedo": 0,
+      "_AlphaDstBlend": 0,
+      "_AlphaSrcBlend": 1,
+      "_BlendMode": 0,
+      "_ClearCoatMetallic": 0,
+      "_DisableSelfShadow": 0,
+      "_DstBlend": 0,
+      "_EnableRealisticLighting": 0,
+      "_ErosionMetallic": 0.5,
+      "_MVDstBlend": 0,
+      "_MVSrcBlend": 1,
+      "_Metallic": 0,
+      "_PantyhoseSpecularInt": 0,
+      "_PantyhoseSpecularValue": 0,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorInput": 1,
+      "_ShadowColorSaturation": 1,
+      "_SpecRampIridescentMode": 0,
+      "_SpecialDissolveScheduleOffset": 0,
+      "_Specular": 1,
+      "_SrcBlend": 1,
+      "_SurfaceType": 0,
+      "_UseDiffRampMap": 1,
+      "_UseMetallicGlossMap": 1,
+      "_UseShadowLutTex": 1,
+      "_UseSpecRampMap": 1
+    },
+    "colors": {
+      "_BaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ClearCoatColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ColorAdjustmentColorBlend": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "_ColorAdjustmentRimColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeAddTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CutOffDirection": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "_DissolveEmissiveColor": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "_DissolveUVSpeed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_EmissionColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ErosionBaseColor": [
+        0.03,
+        0.29999998,
+        0.39999998,
+        1
+      ],
+      "_ErosionBaseRootColor": [
+        0.09999997,
+        0.09999997,
+        0.09999997,
+        1
+      ],
+      "_ErosionBaseTopColor": [
+        0.75,
+        0.75,
+        0.75,
+        1
+      ],
+      "_ErosionPatternTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraDepthTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraRootTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_FurColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_MatcapColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_PantyhoseColor": [
+        0.35999995,
+        0.16999993,
+        0.15999994,
+        0.5
+      ],
+      "_ParallaxColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXBlendTint": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXFresnelColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXSpecialParam": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_VertexAnimationDirection": [
+        1,
+        0,
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "index": 2,
+    "name": "M_actor_laevat_cloth_02",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 2
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    },
+    "sourceKeys": [
+      "material",
+      "floats",
+      "colors",
+      "keywords"
+    ],
+    "floats": {
+      "_Albedo": 0,
+      "_AlphaDstBlend": 0,
+      "_AlphaSrcBlend": 1,
+      "_BlendMode": 0,
+      "_ClearCoatMetallic": 0,
+      "_DisableSelfShadow": 0,
+      "_DstBlend": 0,
+      "_EnableRealisticLighting": 0,
+      "_ErosionMetallic": 0.5,
+      "_MVDstBlend": 0,
+      "_MVSrcBlend": 1,
+      "_Metallic": 0,
+      "_PantyhoseSpecularInt": 0,
+      "_PantyhoseSpecularValue": 0,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorInput": 0,
+      "_ShadowColorSaturation": 1,
+      "_SpecRampIridescentMode": 0,
+      "_SpecialDissolveScheduleOffset": 0.505,
+      "_Specular": 1,
+      "_SrcBlend": 1,
+      "_SurfaceType": 0,
+      "_UseDiffRampMap": 1,
+      "_UseMetallicGlossMap": 1,
+      "_UseShadowLutTex": 0,
+      "_UseSpecRampMap": 1
+    },
+    "colors": {
+      "_BaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ClearCoatColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ColorAdjustmentColorBlend": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "_ColorAdjustmentRimColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeAddTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CutOffDirection": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "_DissolveEmissiveColor": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "_DissolveUVSpeed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_EmissionColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ErosionBaseColor": [
+        0.03,
+        0.29999998,
+        0.39999998,
+        1
+      ],
+      "_ErosionBaseRootColor": [
+        0.09999997,
+        0.09999997,
+        0.09999997,
+        1
+      ],
+      "_ErosionBaseTopColor": [
+        0.75,
+        0.75,
+        0.75,
+        1
+      ],
+      "_ErosionPatternTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraDepthTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraRootTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_FurColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_MatcapColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_PantyhoseColor": [
+        0.35999995,
+        0.16999993,
+        0.15999994,
+        0.5
+      ],
+      "_ParallaxColor": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "_VFXBlendTint": [
+        8.47419,
+        1.3310245,
+        0,
+        1
+      ],
+      "_VFXColor": [
+        1,
+        0.13834947,
+        0,
+        1
+      ],
+      "_VFXFresnelColor": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "_VFXSpecialParam": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_VertexAnimationDirection": [
+        1,
+        0,
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "index": 3,
+    "name": "M_actor_laevat_cloth_03",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 3
+      },
+      "features": [
+        "diffuse-ramp",
+        "stylized-shadow",
+        "surface-ao",
+        "sqrt-alpha-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    },
+    "sourceKeys": [
+      "material",
+      "floats",
+      "colors",
+      "keywords"
+    ],
+    "floats": {
+      "_Albedo": 0,
+      "_AlphaDstBlend": 10,
+      "_AlphaSrcBlend": 1,
+      "_BlendMode": 0,
+      "_ClearCoatMetallic": 0,
+      "_DisableSelfShadow": 0,
+      "_DstBlend": 10,
+      "_EnableRealisticLighting": 0,
+      "_ErosionMetallic": 0.5,
+      "_MVDstBlend": 6,
+      "_MVSrcBlend": 3,
+      "_Metallic": 0,
+      "_PantyhoseSpecularInt": 0.323,
+      "_PantyhoseSpecularValue": 0.62,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorInput": 0,
+      "_ShadowColorSaturation": 1,
+      "_SpecRampIridescentMode": 0,
+      "_SpecialDissolveScheduleOffset": 0,
+      "_Specular": 1,
+      "_SrcBlend": 5,
+      "_SurfaceType": 1,
+      "_UseDiffRampMap": 1,
+      "_UseMetallicGlossMap": 1,
+      "_UseShadowLutTex": 0,
+      "_UseSpecRampMap": 1
+    },
+    "colors": {
+      "_BaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ClearCoatColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ColorAdjustmentColorBlend": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "_ColorAdjustmentRimColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeAddTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CutOffDirection": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "_DissolveEmissiveColor": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "_DissolveUVSpeed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_EmissionColor": [
+        0,
+        1.1789012,
+        1.1561946,
+        1
+      ],
+      "_ErosionBaseColor": [
+        0.03,
+        0.29999998,
+        0.39999998,
+        1
+      ],
+      "_ErosionBaseRootColor": [
+        0.09999997,
+        0.09999997,
+        0.09999997,
+        1
+      ],
+      "_ErosionBaseTopColor": [
+        0.75,
+        0.75,
+        0.75,
+        1
+      ],
+      "_ErosionPatternTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraDepthTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraRootTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_FurColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_MatcapColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_PantyhoseColor": [
+        0.8415094,
+        0.30326095,
+        0.30326095,
+        0.5
+      ],
+      "_ParallaxColor": [
+        0.2528302,
+        0.2528302,
+        0.2528302,
+        1
+      ],
+      "_VFXBlendTint": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXFresnelColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXSpecialParam": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_VertexAnimationDirection": [
+        1,
+        0,
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "index": 4,
+    "name": "M_actor_laevat_cloth_04",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 2
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "specularRamp": {
+        "schemaVersion": 1,
+        "texture": 3,
+        "flipV": false,
+        "iridescence": 0,
+        "lightingInputs": "host-main-light"
+      },
+      "nprDiffuse": {
+        "schemaVersion": 1,
+        "shadowScale": 0.5,
+        "shadowAlbedo": "base-color",
+        "lightingInputs": "host-scene-radiance",
+        "shadowMask": "one",
+        "baseAo": "metallic-roughness-red",
+        "indirectNormal": "surface",
+        "characterVisibility": "object-shadow",
+        "mainRamp": {
+          "schemaVersion": 1,
+          "bias": 0
+        },
+        "rimOrigin": {
+          "schemaVersion": 1,
+          "node": "quan_jnt"
+        },
+        "lighting": {
+          "schemaVersion": 1,
+          "ambientColor": [
+            0.8783068656921387,
+            0.9302293062210083,
+            1.1216931343078613
+          ],
+          "mainColor": [
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "styleParameters": [
+        1,
+        1,
+        1,
+        0.5
+      ],
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    },
+    "sourceKeys": [
+      "material",
+      "floats",
+      "colors",
+      "keywords"
+    ],
+    "floats": {
+      "_Albedo": 0,
+      "_AlphaDstBlend": 0,
+      "_AlphaSrcBlend": 1,
+      "_BlendMode": 0,
+      "_ClearCoatMetallic": 0,
+      "_DisableSelfShadow": 0,
+      "_DstBlend": 0,
+      "_EnableRealisticLighting": 0,
+      "_ErosionMetallic": 0.5,
+      "_MVDstBlend": 0,
+      "_MVSrcBlend": 1,
+      "_Metallic": 1,
+      "_PantyhoseSpecularInt": 0,
+      "_PantyhoseSpecularValue": 0,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorInput": 0,
+      "_ShadowColorSaturation": 1,
+      "_SpecRampIridescentMode": 0,
+      "_SpecialDissolveScheduleOffset": 0,
+      "_Specular": 1,
+      "_SrcBlend": 1,
+      "_SurfaceType": 0,
+      "_UseDiffRampMap": 1,
+      "_UseMetallicGlossMap": 1,
+      "_UseShadowLutTex": 0,
+      "_UseSpecRampMap": 1
+    },
+    "colors": {
+      "_BaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ClearCoatColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ColorAdjustmentColorBlend": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "_ColorAdjustmentRimColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeAddTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CutOffDirection": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "_DissolveEmissiveColor": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "_DissolveUVSpeed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_EmissionColor": [
+        0.90188676,
+        0.90188676,
+        0.90188676,
+        1
+      ],
+      "_ErosionBaseColor": [
+        0.03,
+        0.29999998,
+        0.39999998,
+        1
+      ],
+      "_ErosionBaseRootColor": [
+        0.09999997,
+        0.09999997,
+        0.09999997,
+        1
+      ],
+      "_ErosionBaseTopColor": [
+        0.75,
+        0.75,
+        0.75,
+        1
+      ],
+      "_ErosionPatternTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraDepthTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraRootTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_FurColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_MatcapColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_PantyhoseColor": [
+        0.35999995,
+        0.16999993,
+        0.15999994,
+        0.5
+      ],
+      "_ParallaxColor": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "_VFXBlendTint": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXFresnelColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_VFXSpecialParam": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_VertexAnimationDirection": [
+        1,
+        0,
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "index": 5,
+    "name": "M_actor_laevat_cloth_05",
+    "profile": {
+      "schemaVersion": 2,
+      "class": "fabric",
+      "diffuseRamp": {
+        "schemaVersion": 1,
+        "texture": 2
+      },
+      "features": [
+        "diffuse-ramp",
+        "silhouette-outline",
+        "stylized-shadow",
+        "surface-ao",
+        "geometry-shadow"
+      ],
+      "specularInput": {
+        "schemaVersion": 1,
+        "source": "metallic-roughness-alpha",
+        "scale": 0.5
+      },
+      "radianceScale": 0.25,
+      "displayTransform": "linear"
+    },
+    "sourceKeys": [
+      "material",
+      "floats",
+      "colors",
+      "keywords"
+    ],
+    "floats": {
+      "_Albedo": 0,
+      "_AlphaDstBlend": 0,
+      "_AlphaSrcBlend": 1,
+      "_BlendMode": 0,
+      "_ClearCoatMetallic": 0,
+      "_DisableSelfShadow": 0,
+      "_DstBlend": 0,
+      "_EnableRealisticLighting": 0,
+      "_ErosionMetallic": 0.5,
+      "_MVDstBlend": 0,
+      "_MVSrcBlend": 1,
+      "_Metallic": 0,
+      "_PantyhoseSpecularInt": 0,
+      "_PantyhoseSpecularValue": 0,
+      "_ShadowColorBrightness": 0.5,
+      "_ShadowColorInput": 0,
+      "_ShadowColorSaturation": 1,
+      "_SpecRampIridescentMode": 0,
+      "_SpecialDissolveScheduleOffset": 0.505,
+      "_Specular": 1,
+      "_SrcBlend": 1,
+      "_SurfaceType": 0,
+      "_UseDiffRampMap": 1,
+      "_UseMetallicGlossMap": 1,
+      "_UseShadowLutTex": 0,
+      "_UseSpecRampMap": 1
+    },
+    "colors": {
+      "_BaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ClearCoatColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ColorAdjustmentColorBlend": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "_ColorAdjustmentRimColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeAddTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CustomizeBaseTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_CutOffDirection": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "_DissolveEmissiveColor": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "_DissolveUVSpeed": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_EmissionColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ErosionBaseColor": [
+        0.03,
+        0.29999998,
+        0.39999998,
+        1
+      ],
+      "_ErosionBaseRootColor": [
+        0.09999997,
+        0.09999997,
+        0.09999997,
+        1
+      ],
+      "_ErosionBaseTopColor": [
+        0.75,
+        0.75,
+        0.75,
+        1
+      ],
+      "_ErosionPatternTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraDepthTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_ExtraRootTintColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_FurColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_MatcapColor": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "_PantyhoseColor": [
+        0.35999995,
+        0.16999993,
+        0.15999994,
+        0.5
+      ],
+      "_ParallaxColor": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "_VFXBlendTint": [
+        8.47419,
+        1.3310245,
+        0,
+        1
+      ],
+      "_VFXColor": [
+        1,
+        0.13834947,
+        0,
+        1
+      ],
+      "_VFXFresnelColor": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "_VFXSpecialParam": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "_VertexAnimationDirection": [
+        1,
+        0,
+        1,
+        0
+      ]
+    }
+  }
+]

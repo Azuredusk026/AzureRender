@@ -1,0 +1,10 @@
+import json
+from pathlib import Path
+root=Path.cwd();run=Path(__file__).resolve().parent
+def write(p,text):
+ with (root/p).open('r+b') as f:f.write(text.encode());f.truncate()
+p='README.md';t=(root/p).read_text();anchor='含雾关卡的资源身份、重开复用及画面兼容见[复用验证](docs/acceptance/recovery/view-fog-resource-reuse.md)。\n';assert anchor in t;t=t.replace(anchor,anchor+'\n全身衣料的实际差异、材质区域及辐照响应见[全身对照](docs/acceptance/nr/full-body-native-comparison.md)。\n');write(p,t)
+p='CHANGELOG.md';t=(root/p).read_text();t=t.replace('# Changelog\n','# Changelog\n\n## 全身动态照明对照 2026-11-01\n\n- 四组独立与完整入口各采集 64 帧，锁定相同机位和动画时间。\n- 生产材质身份图核对六组时点及不透明内部像素。\n- 两份衣料的中位亮度误差超过 110%，联合画质继续未通过。\n- 三组单变量采集区分雾、探针及辐照贡献。\n- 实际采集共 323 帧，八组成功 GPU 进程均正常释放。\n- 保存全轮廓、材质分区、输入拒绝及实际来源证据。\n- 接续核对剩余衣料的原生照明和环境反射消费。\n',1);write(p,t)
+p='docs/plans/azure-engine-plan.md';t=(root/p).read_text();anchor='加载复用结果按其范围归档，联合画质继续未通过。\n';assert anchor in t;t=t.replace(anchor,anchor+'\n[全身动态对照](../acceptance/nr/full-body-native-comparison.md)确认衣料仍有明显照明差异。\n不透明服饰二、五的中位亮度误差超过 110%。\n单变量采集确认环境辐照及反射对差异有明显贡献。\n继续核对衣料原生输入及消费，联合画质保持未通过。\n');write(p,t)
+p='docs/plans/2026-11-01-full-body-native-comparison.md';t=(root/p).read_text();t=t.replace('- [ ] 冻结','- [x] 冻结').replace('- [ ] 采集','- [x] 采集').replace('- [ ] 核对皮肤','- [x] 核对皮肤').replace('- [ ] 检查完整环境','- [x] 检查完整环境');t+='\n## 当前结果\n\n八组生产采集共 323 帧，均正常退出并释放资源。\n全身掩码及材质区域保存了明显的衣料照明差异。\n单变量检查显示辐照及探针具有实际贡献。\n数值、图像与范围见[全身对照](../acceptance/nr/full-body-native-comparison.md)。\n\n继续核对服饰二、三、五的原生照明输入。\n服饰四的环境镜面响应具有独立检查范围。\n';write(p,t)
+p='docs/development/artifact-manifest.json';m=json.loads((root/p).read_text());entry=dict(path='runs/'+run.name,pathBase='build',purpose='全身动态、材质身份及环境照明单变量核验。',retention='相应画质门禁完成并归档后另行清理。',pinMarker='.keep',primaryProject='project/fullbody-world-aa3.azureproject',evidence='docs/acceptance/nr/full-body-native-comparison.md');assert not any(r['path']==entry['path'] for r in m['preservedRuns']);m['preservedRuns'].append(entry);write(p,json.dumps(m,ensure_ascii=False,indent=2)+'\n');print('Updated documentation')

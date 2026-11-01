@@ -1,0 +1,106 @@
+{
+  "status": "captured-inputs-unchanged",
+  "visualAcceptance": "failed-user-review",
+  "programSha256": "c630f233cfda22d88a98884358773bf37da6399e3d90d0910a6654cdad20a192",
+  "cases": [
+    {
+      "name": "fullbody-no-fog",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-project-v2\\fullbody-no-fog.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--qa-animation",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-captures\\fullbody-no-fog\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-captures\\fullbody-no-fog\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 115.10152180001023,
+      "images": {
+        "frame_000000.png": "1fa07ec710bc69446fb7d58a8eb0d757cd65676be6a39b37f1ea2825e164084a"
+      },
+      "manifestSha256": "cae07173f2f17c30156d5fd3ca711ed3af335dc66785f8282521fbfd9a0ead38"
+    },
+    {
+      "name": "fullbody-no-probes",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-project-v2\\fullbody-no-probes.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--qa-animation",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-captures\\fullbody-no-probes\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-captures\\fullbody-no-probes\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 126.15262040001107,
+      "images": {
+        "frame_000000.png": "9e836865175c10ffedc489cd006f9605da6069cd393445d01d28bcd38bc628df"
+      },
+      "manifestSha256": "f9082d3ba1522e879c1466e4c4936cf0bc66f23e9dce6c6ba9ec58e33b194baf"
+    },
+    {
+      "name": "fullbody-no-gi",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-project-v2\\fullbody-no-gi.azureproject",
+        "--width",
+        "1536",
+        "--height",
+        "1536",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "60",
+        "--qa-animation",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-captures\\fullbody-no-gi\\frames",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-captures\\fullbody-no-gi\\runtime.json"
+      ],
+      "status": "captured",
+      "exitCode": 0,
+      "seconds": 125.12397399998736,
+      "images": {
+        "frame_000000.png": "92cac1cc40bcbb184aca5d6bb1fb0c5270edb40bdc9278a1931b761b70e2a5fb"
+      },
+      "manifestSha256": "8b9be742cc022b46b62b5afc7969ee2035b2629a1d0c5dcbe40be31f9b2c5e11"
+    }
+  ]
+}

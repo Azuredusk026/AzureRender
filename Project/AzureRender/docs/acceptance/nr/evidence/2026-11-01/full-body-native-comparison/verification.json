@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "visualAcceptance": "failed-user-review",
+  "capturedFrames": 323,
+  "successfulPlayerInstances": 8,
+  "sourceFiles": 988,
+  "comparedWholeSilhouettePairs": 128,
+  "materialComparisonCases": 6,
+  "materialDiagnostics": 3,
+  "preservedUserFiles": 4
+}

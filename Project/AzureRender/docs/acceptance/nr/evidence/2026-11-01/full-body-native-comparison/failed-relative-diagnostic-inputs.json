@@ -1,0 +1,43 @@
+{
+  "status": "prepared",
+  "cases": [
+    {
+      "name": "fullbody-no-fog",
+      "kind": "diagnostic",
+      "aa": 0,
+      "frames": 1,
+      "width": 1536,
+      "height": 1536,
+      "removedBinding": "viewFog",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-project\\fullbody-no-fog.azureproject"
+    },
+    {
+      "name": "fullbody-no-probes",
+      "kind": "diagnostic",
+      "aa": 0,
+      "frames": 1,
+      "width": 1536,
+      "height": 1536,
+      "removedBinding": "reflectionProbe",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-project\\fullbody-no-probes.azureproject"
+    },
+    {
+      "name": "fullbody-no-gi",
+      "kind": "diagnostic",
+      "aa": 0,
+      "frames": 1,
+      "width": 1536,
+      "height": 1536,
+      "removedBinding": "irradianceVolume",
+      "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-113436-full-body-native-comparison-0a653b\\diagnostic-project\\fullbody-no-gi.azureproject"
+    }
+  ],
+  "inputs": {
+    "fullbody-no-fog.azureproject": "be4e56201ee85785031d13a1a4084a802185495428e89cde5524ef17d3bd3b99",
+    "fullbody-no-gi.azureproject": "49bf15160f6b723b0e3219bfee520c1ffd8340f3ee2375d23fa5b62e371b12dd",
+    "fullbody-no-probes.azureproject": "fc2a519491420446c318fbd873947f7eefc56061f4e2528f3567334e7b49e63a",
+    "scene/fullbody-no-fog.azurelevel": "c1bb8e6509827cbdc6963e97d8c3cb6524408ba6475e669a6f49eee91ca896cf",
+    "scene/fullbody-no-gi.azurelevel": "5837a00c46bd33349e302d1b51dde60f4f4de14886dea30098bdc9eeed8515f9",
+    "scene/fullbody-no-probes.azurelevel": "7ff45dee36ddd237c7d85d0a97f5fce20b6f7304672694566aa9104d8987e264"
+  }
+}
