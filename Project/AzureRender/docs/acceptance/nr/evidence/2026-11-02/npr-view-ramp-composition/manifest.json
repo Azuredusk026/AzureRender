@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "status": "verified-native-inputs-public-integration-pending",
+  "visualAcceptance": "failed-user-review",
+  "baseCommit": "e2c5bbb21fbe3ac52e5265b9009954e5dd39437a",
+  "originalRun": "build/runs/20261101-143507-native-cloth-variants-d877ef",
+  "reusedEvidence": {
+    "path": "docs/acceptance/nr/evidence/2026-11-01/native-cloth-inputs/manifest.json",
+    "sha256": "1bd57156f78caadcf2884604e8fc97f7b9b60ba30fb202e020885d062b17ba4d"
+  },
+  "traces": [
+    {
+      "event": 868,
+      "trace": "traces/cloth-868-850-780-trace.json.gz",
+      "sourceSha256": "4a80f2747266eff0948d0c98205cb8c6ccb2effb73aa9d1c2d4ab7f27a467467"
+    },
+    {
+      "event": 868,
+      "trace": "traces/cloth-868-957-821-trace.json.gz",
+      "sourceSha256": "5a75016b88d171a09dcccacfa8395214c6a35e7ad55b7966864bcbcf840fc8b7"
+    },
+    {
+      "event": 868,
+      "trace": "traces/cloth-868-1484-777-trace.json.gz",
+      "sourceSha256": "c087edc6a836163e59b604537ccf45d3de44ac646405cd427a94a11e2bdc6624"
+    },
+    {
+      "event": 868,
+      "trace": "traces/cloth-868-1660-810-trace.json.gz",
+      "sourceSha256": "e519661a3736684c9a02fe485ec4fe95f438ddfca056ebe2b1e2054766502909"
+    },
+    {
+      "event": 889,
+      "trace": "docs/acceptance/nr/evidence/2026-11-01/native-cloth-inputs/variant-trace-889.json.gz",
+      "sourceSha256": "b5ab8cc3d4b1d0048e1bb7c08d5e8731b437ebf1a611a636faedc21528783771"
+    },
+    {
+      "event": 910,
+      "trace": "docs/acceptance/nr/evidence/2026-11-01/native-cloth-inputs/variant-trace-910.json.gz",
+      "sourceSha256": "c0fc9a7dfed703101a749a3328b8525c0d71d07d73a888fff6d9ab4fa4a7969e"
+    },
+    {
+      "event": 928,
+      "trace": "docs/acceptance/nr/evidence/2026-11-01/native-cloth-inputs/variant-trace-928.json.gz",
+      "sourceSha256": "b68532740e69601feae2dd119b851cec42f5f65008f24414120811b351e39c60"
+    },
+    {
+      "event": 1383,
+      "trace": "docs/acceptance/nr/evidence/2026-11-01/native-cloth-inputs/variant-trace-1383.json.gz",
+      "sourceSha256": "66da9660c046dbb03142c5dcac6dcf8872acb1de54c4b302725c2b1c49b115c3"
+    }
+  ],
+  "files": [
+    {
+      "path": "cloth4-diffuse-proof.json.gz",
+      "bytes": 785,
+      "sha256": "771e7d3c6c5767473078be925c7cac5ff865128209363dccb9afd4dd3a10e020"
+    },
+    {
+      "path": "traces/cloth-868-1484-777-trace.json.gz",
+      "bytes": 115725,
+      "sha256": "f160acf31469b26eee36b787bf2213eff0b16fceecbc85690b3689bd875da2ca"
+    },
+    {
+      "path": "traces/cloth-868-1660-810-trace.json.gz",
+      "bytes": 113881,
+      "sha256": "f52580f7e7ba7770d51ceb65e065d76f00ab387c80ea6b5546dcb4be358d0d70"
+    },
+    {
+      "path": "traces/cloth-868-850-780-trace.json.gz",
+      "bytes": 111972,
+      "sha256": "8ca483692ae7eb7fb5fd69e9fd8220290479226b7f84dd42890ee53b3f7a7b22"
+    },
+    {
+      "path": "traces/cloth-868-957-821-trace.json.gz",
+      "bytes": 112210,
+      "sha256": "00baa7fecef7a030d55866017fdccedb40e219e809663722ed625dd2bd400648"
+    },
+    {
+      "path": "verify_cloth4_diffuse.py.gz",
+      "bytes": 1247,
+      "sha256": "308c8b59934327c85c1110d7fe429aecf519a4aac85573170b6c7fdc2f73f3da"
+    },
+    {
+      "path": "verify_view_ramp_composition.py.gz",
+      "bytes": 1628,
+      "sha256": "8c46df54d35d188dbb0aecd796b69595e6718bcbc91a04afc789822643698a26"
+    },
+    {
+      "path": "view-ramp-composition-proof.json.gz",
+      "bytes": 1742,
+      "sha256": "12c23c8f99831f06b658e7e8bca43559ae1547176d9dcb57df766d271bfa7a08"
+    }
+  ]
+}

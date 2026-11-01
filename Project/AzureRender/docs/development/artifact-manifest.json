@@ -942,7 +942,8 @@
       "purpose": "原生服饰高光绑定、片元中间量及完整材质输入核验。",
       "retention": "相应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
-      "evidence": "docs/acceptance/nr/native-cloth-inputs.md"
+      "evidence": "docs/acceptance/nr/native-cloth-inputs.md",
+      "compositionEvidence": "docs/acceptance/nr/npr-view-ramp-composition.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
