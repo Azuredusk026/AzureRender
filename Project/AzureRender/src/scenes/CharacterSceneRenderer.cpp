@@ -7,6 +7,7 @@
 #include "render/IrradianceClipmapGpu.hpp"
 #include "render/IrradianceResource.hpp"
 #include "render/ViewFogGpu.hpp"
+#include "render/ViewFogBindingJson.hpp"
 #include "render/FogVolumeData.hpp"
 #include "scene/DirectionalLightSelection.hpp"
 #include "assets/MaterialData.hpp"
@@ -560,7 +561,7 @@ bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(scene_.reflectionProbe.field.has_value()!=context.scene.reflectionProbe.field.has_value())return false;
     if(scene_.reflectionProbe.field&&scene_.reflectionProbe.field->gpuRows({1,1,0,0},false)!=context.scene.reflectionProbe.field->gpuRows({1,1,0,0},false))return false;
     if(scene_.irradianceVolume.asset!=context.scene.irradianceVolume.asset)return false;
-    if(scene_.viewFog.enabled||context.scene.viewFog.enabled)return false;
+    if(nlohmann::json(scene_.viewFog)!=nlohmann::json(context.scene.viewFog))return false;
     if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
     if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
     scene_=context.scene;animationIndex_=0;animationTime_=0;++temporalSceneGeneration_;temporalView_.clear();motionPoses_.clear();return true;

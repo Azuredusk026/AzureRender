@@ -49,7 +49,6 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
     }
     if(expanded.contains("viewFog")){
         level.scene.viewFog=expanded.at("viewFog").get<ViewFogBinding>();
-        if(level.scene.viewFog.analytic)level.resourceKey+="fogAnalytic:"+nlohmann::json(level.scene.viewFog).dump();
         auto& reference=level.scene.viewFog.asset;
         if(!reference.empty()){
             reference=assets.resolveReference(reference).u8string();
@@ -59,6 +58,7 @@ Level Level::parse(const nlohmann::json& document, const AssetDatabase& assets,c
             level.resourceKey+=key;
             level.reloadKey_+=key;
         }
+        level.resourceKey+="viewFogBinding:"+nlohmann::json(level.scene.viewFog).dump();
     }
     std::set<std::string> resources;
     for (const auto& source : expanded.at("resources")) {

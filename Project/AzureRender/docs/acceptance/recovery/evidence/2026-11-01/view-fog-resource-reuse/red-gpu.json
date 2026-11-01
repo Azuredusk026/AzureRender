@@ -1,0 +1,7 @@
+{
+  "status": "red-confirmed",
+  "expectedEntriesAfterIdenticalRestart": 1,
+  "observedEntriesAfterIdenticalRestart": 2,
+  "playerSha256": "3c30e2fcbf0c3c29d86b6e177952c6f9aaa443726a9d8bd60f001e5f6fecaeac",
+  "testScriptSha256": "8d0f636448b3cc0f79564c6243d368ae13a0e461a70b4fbc292c22bef57f23f9"
+}

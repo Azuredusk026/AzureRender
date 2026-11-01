@@ -1,0 +1,10 @@
+{
+  "status": "verified-tool-deadline-correction",
+  "previousScriptSha256": "02c0e684587c5721519355075dbe1f124d3811e25b31f82341df5024456ea9ca",
+  "scriptSha256": "57d0c9fd2f7f4d34d1de1059920acf1b3e2609920481f681a93bc17491cda610",
+  "protocolHelperSha256": "8ae937f27fa162e067df861dde33b7ea2d2041cc77616acc8ab6afbe2f689480",
+  "transitionDeadlineSeconds": 45,
+  "unchangedOuterProcessDeadlineSeconds": 300,
+  "observedPipelinePreparationMilliseconds": 12390.9815,
+  "reason": "观察请求使用剩余转场期限，图像及资源验收条件保持原值。"
+}

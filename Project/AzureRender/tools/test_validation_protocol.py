@@ -10,10 +10,10 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 
-def exchange(endpoint, token, request):
+def exchange(endpoint, token, request, *, io_timeout=None):
     request = dict(request, schemaVersion=1, token=token)
     with socket.create_connection((endpoint['address'], endpoint['port']), timeout=3) as client:
-        client.settimeout(max(3, min(62, request.get('timeoutMs', 10000) / 1000 + 2)))
+        client.settimeout(io_timeout if io_timeout is not None else max(3, min(62, request.get('timeoutMs', 10000) / 1000 + 2)))
         client.sendall((json.dumps(request) + '\n').encode())
         with client.makefile('rb') as stream:
             line = stream.readline(1024 * 1024 + 1)

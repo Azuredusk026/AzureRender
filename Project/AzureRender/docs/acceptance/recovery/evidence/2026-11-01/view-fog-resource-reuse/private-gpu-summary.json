@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "configuration": "release",
+      "status": "captured",
+      "programSha256": "c630f233cfda22d88a98884358773bf37da6399e3d90d0910a6654cdad20a192",
+      "elapsedSeconds": 298.08058609999716,
+      "frames": 540,
+      "baselineIdenticalImages": 540,
+      "differentImages": [],
+      "rendererCpuPreparations": 1,
+      "preparationMessages": [
+        "Scene load CPU preparation: 59364.087000 ms, materialPixelBytes=6034774532"
+      ]
+    },
+    {
+      "configuration": "debug",
+      "status": "captured",
+      "programSha256": "bc46041b969feb34aeebbdf8b5ce1f4bd26b87a2f75920d79d14b908b7914437",
+      "elapsedSeconds": 1122.9855419000087,
+      "frames": 540,
+      "baselineIdenticalImages": 540,
+      "differentImages": [],
+      "rendererCpuPreparations": 1,
+      "preparationMessages": [
+        "Scene load CPU preparation: 315891.326000 ms, materialPixelBytes=6034774532"
+      ]
+    }
+  ]
+}

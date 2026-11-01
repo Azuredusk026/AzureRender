@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "status": "failures-retained-with-successful-retests",
+  "failures": [
+    {"case": "captured-fog-resource-identity", "evidence": "red-cpu.json", "cause": "Captured camera changes did not participate in the resource key."},
+    {"case": "same-fog-restart", "evidence": "red-gpu.json", "cause": "Enabled view fog unconditionally rejected renderer reuse."},
+    {"case": "temporal-fixture-schema", "evidence": "red-temporal-gpu", "cause": "TAA fixture required schema version 18; fixture was corrected before observing the reuse failure."},
+    {"case": "same-fog-temporal-restart", "evidence": "red-temporal-gpu.json", "cause": "Valid temporal fixture reproduced two renderer preparations on identical restart."},
+    {"case": "cold-pipeline-observation-timeout", "evidence": "public-gpu/release", "cause": "A 12.3909815-second pipeline preparation exceeded the helper default 12-second read timeout; rendering subsequently committed and released normally.", "retest": "public-gpu-green", "contract": "45-second transition and 300-second process deadlines retained; observation reads use the remaining transition deadline."}
+  ],
+  "visualAcceptance": "failed-user-review"
+}

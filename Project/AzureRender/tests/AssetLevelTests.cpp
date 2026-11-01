@@ -154,6 +154,16 @@ int main() {
   check(reopened.scene.reflectionProbe.blendDistance==.75F);
   check(reopened.scene.viewFog.asset==parsed.scene.viewFog.asset);
   const auto fogResourceKey=parsed.resourceKey;
+  const auto capturedFogResourceKey=Level::parse(level,db).resourceKey;
+  check(Level::parse(level,db).resourceKey==capturedFogResourceKey);
+  auto movedFogCapture=level;movedFogCapture["viewFog"]["captureView"]["position"][0]=.25;
+  check(Level::parse(movedFogCapture,db).resourceKey!=capturedFogResourceKey);
+  auto phasedFog=level;phasedFog["viewFog"]["projection"]["framePhase"]=1;
+  check(Level::parse(phasedFog,db).resourceKey!=capturedFogResourceKey);
+  auto disabledFog=level;disabledFog["viewFog"]["enabled"]=false;
+  check(Level::parse(disabledFog,db).resourceKey!=capturedFogResourceKey);
+  auto shiftedFogLens=level;shiftedFogLens["viewFog"]["captureView"]["projectionOffset"][0]=.1;
+  check(Level::parse(shiftedFogLens,db).resourceKey!=capturedFogResourceKey);
   fogVolume.rgba16f[0]=0x3800;fogVolume.save(root/"assets/view.azfog");db.refresh();
   check(Level::parse(level,db).resourceKey!=fogResourceKey);
   check(Level::parse(level,db).reloadKey()!=parsed.reloadKey());

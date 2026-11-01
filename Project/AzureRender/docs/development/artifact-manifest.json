@@ -917,6 +917,15 @@
       "pinMarker": ".keep",
       "primaryProject": "project/playable.azureproject",
       "evidence": "docs/acceptance/nr/joint-playable-display.md"
+    },
+    {
+      "path": "runs/20261101-101614-view-fog-reuse-814a54",
+      "pathBase": "build",
+      "purpose": "视图雾完整资源身份、重开复用及原生画面兼容核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/playable.azureproject",
+      "evidence": "docs/acceptance/recovery/view-fog-resource-reuse.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

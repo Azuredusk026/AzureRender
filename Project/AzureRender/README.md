@@ -12,6 +12,8 @@
 原生角色关键区域及环境兼容见[显示验证](docs/acceptance/nr/material-display-transform.md)。
 联合可玩候选、普通启动入口及原生响应见[组合验证](docs/acceptance/nr/joint-playable-display.md)。
 
+含雾关卡的资源身份、重开复用及画面兼容见[复用验证](docs/acceptance/recovery/view-fog-resource-reuse.md)。
+
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。
 
 完整物流场景的当前截图与启动入口见[画面恢复](docs/acceptance/recovery/full-scene-visual.md)。

@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "visualAcceptance": "failed-user-review",
+  "frozenSourceFiles": 988,
+  "cpuChecksPerConfiguration": 11,
+  "publicWorkflowsPerConfiguration": 4,
+  "publicTransitionsPerConfiguration": 32,
+  "routeFramesPerConfiguration": 540,
+  "fixedWorldExactFrames": 12,
+  "capturedFrames": 1092,
+  "validatedSuccessfulPlayerInstances": 11,
+  "rendererPreparationsPerFullRoute": 1,
+  "preservedUserFiles": 4
+}

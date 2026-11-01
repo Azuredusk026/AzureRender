@@ -1,0 +1,2245 @@
+{
+  "schemaVersion": 1,
+  "visualAcceptance": "failed-user-review",
+  "baseCommit": "bc90025616c43b407bf94e5d6ec3b7ad7250bd0d",
+  "canonicalText": "UTF-8 with LF. Captured logs, inputs and source snapshots retain exact raw bytes in gzip streams.",
+  "sourceChanges": [
+    {
+      "path": "src/runtime/Level.cpp",
+      "canonicalSha256": "84ef50cc19a779c66bb33c484abd9531bcad68b8e22d82b871fb29253df3e561",
+      "rawSha256": "dff2819e21967201115ae00d64007da76ab9fe9fe282ccef3bdb73f10846f43b"
+    },
+    {
+      "path": "src/scenes/CharacterSceneRenderer.cpp",
+      "canonicalSha256": "8bc99890e0b45362b6a513379a045a451004f1796ee4d65d14f0115c174a5a78",
+      "rawSha256": "e9410cfa2d032ec610eba081e90b6df92245372bfd2fc5a47524285404d4f849"
+    },
+    {
+      "path": "tests/AssetLevelTests.cpp",
+      "canonicalSha256": "250d92fa79661a139009fac59027c3dc61897cc2d7c5d7b080fc379af6ccee75",
+      "rawSha256": "5b0d028cfe56d25896de1cb0a6162d47f6d0d21d38faa6c19148daa128eba18b"
+    },
+    {
+      "path": "tools/test_renderer_residency.py",
+      "canonicalSha256": "57d0c9fd2f7f4d34d1de1059920acf1b3e2609920481f681a93bc17491cda610",
+      "rawSha256": "57d0c9fd2f7f4d34d1de1059920acf1b3e2609920481f681a93bc17491cda610"
+    },
+    {
+      "path": "tools/test_validation_protocol.py",
+      "canonicalSha256": "8ae937f27fa162e067df861dde33b7ea2d2041cc77616acc8ab6afbe2f689480",
+      "rawSha256": "8ae937f27fa162e067df861dde33b7ea2d2041cc77616acc8ab6afbe2f689480"
+    }
+  ],
+  "reusedEvidence": {
+    "path": "docs/acceptance/nr/evidence/2026-11-01/joint-playable-display/manifest.json",
+    "sha256": "598150b7cfff07d11be50e0a7888497642ef0f35ba23435b616b5a3f96cd2719",
+    "scope": "Frozen project inputs, source appearance controls and original route image fingerprints."
+  },
+  "files": [
+    {
+      "path": "archive.py",
+      "bytes": 3722,
+      "sha256": "f536aa9a5f2a5ed4a9ed3ca7b1664791f4e7b5f0a7d0004987ebda3ac8f5e285"
+    },
+    {
+      "path": "before/before-CharacterSceneRenderer.cpp.gz",
+      "bytes": 54715,
+      "sha256": "e83f86e439dd0f28dc521eb70a2931e3fcf34b2de8c40121b495210f19e16621"
+    },
+    {
+      "path": "before/before-deadline-test_renderer_residency.py.gz",
+      "bytes": 3140,
+      "sha256": "55fd6f026c5705db6f93df39b7fa685abc04402f7099471694149fa264ce0cc2"
+    },
+    {
+      "path": "before/before-deadline-test_validation_protocol.py.gz",
+      "bytes": 1404,
+      "sha256": "13c181554ced93a2572aa7a8d6c5265d45b5a1ad7238759a248dd47f66dcffac"
+    },
+    {
+      "path": "before/before-Level.cpp.gz",
+      "bytes": 2356,
+      "sha256": "c4eab8072412211dd1e9a82702eafb6f7651be590c314e3fc590af7623a35a56"
+    },
+    {
+      "path": "before/before-test_renderer_residency.py.gz",
+      "bytes": 2959,
+      "sha256": "16e6e0b45b42b8c569016d9d9c1bea79039330e5dbf1afdceb6208e4aac3fa95"
+    },
+    {
+      "path": "before/red-temporal-test-script.py.gz",
+      "bytes": 3016,
+      "sha256": "685a9d476f36f79f856dd5a675f335336fbfb3e1df14226f6ae6dfeb3dfb25e1"
+    },
+    {
+      "path": "build_green.py",
+      "bytes": 3368,
+      "sha256": "0cb3d5db9280e73532020f100071eeb195bc651136d8734bb15cb4bfb3b669f3"
+    },
+    {
+      "path": "candidate.json",
+      "bytes": 524662,
+      "sha256": "b99eac5c4430e5459d03d4788162650a95a6845f8abdd1c82e26b0d6d2d4eba8"
+    },
+    {
+      "path": "capture_fixed.py",
+      "bytes": 2626,
+      "sha256": "8241f8fa24f407fced88117c92bad7d419cc3f9515e96c70de26d0bba0777fe5"
+    },
+    {
+      "path": "capture_route.py",
+      "bytes": 3410,
+      "sha256": "cadcbcc28ec88b3306ba2ff5451cd432e1c869626f3dc79de1717648e464f716"
+    },
+    {
+      "path": "debug-build.json",
+      "bytes": 131760,
+      "sha256": "ef62feb09ab944f5fea49b2c0526c41dd218146853bafc5bc045d601da93ffcf"
+    },
+    {
+      "path": "failure-index.json",
+      "bytes": 1200,
+      "sha256": "90e474e5aca5d4a7be6341d148b5f69b4a3d2604ed3ff5a2b42b0f038cbdabaa"
+    },
+    {
+      "path": "fixed-world/diagnostics.jsonl.gz",
+      "bytes": 3460,
+      "sha256": "1050ee541a94bf5b990de7b251b6ce985790e692af76533cb3e2d2bc9f17e0d7"
+    },
+    {
+      "path": "fixed-world/frames/capture_manifest.json.gz",
+      "bytes": 3494,
+      "sha256": "b21aab84d03a06c624f810e13a3af0f3d6933ea337b35472af2a1de7264bfb49"
+    },
+    {
+      "path": "fixed-world/frames/frame_000000.png",
+      "bytes": 5611926,
+      "sha256": "e0327478c3a1a2fd3822db7a21c4e15637ab29e2b77b511156cac72dacb96ddc"
+    },
+    {
+      "path": "fixed-world/frames/frame_000011.png",
+      "bytes": 5614603,
+      "sha256": "bfcee579f550762df291f4a8c95d77dcc8641323d0f14b067e73d4e126fa268d"
+    },
+    {
+      "path": "fixed-world/player.log.gz",
+      "bytes": 3264,
+      "sha256": "bbcc890f50eb56fbc501abb6148c64c98a6d44e18cc7385bb601a71551384ddd"
+    },
+    {
+      "path": "fixed-world/runtime.json.gz",
+      "bytes": 30898,
+      "sha256": "2f65aa71b13cd58fb4a42e4d9ed80eae2a3249389cba1eb51d4ff83080275367"
+    },
+    {
+      "path": "fixed-world-summary.json",
+      "bytes": 2077,
+      "sha256": "4d388322a2b8215e8e9fd0d32d41d2c43b121b7514ba8cb4f77cb5da3fad309b"
+    },
+    {
+      "path": "input-route.json",
+      "bytes": 1226,
+      "sha256": "34c24f47c37742d1404322eb88f85633cc38f8a0782133a8ff7a19cec4e02cde"
+    },
+    {
+      "path": "inputs/full-world-linear.azureproject.gz",
+      "bytes": 405,
+      "sha256": "013de258215d72ebe0a6fe3473bb160688138583ac8713e577468d9192e16b91"
+    },
+    {
+      "path": "inputs/playable.azureproject.gz",
+      "bytes": 464,
+      "sha256": "137a7c7a8131c3a2468f7758868fc2cfbd44818399f7211dcf8d52e0378a0c81"
+    },
+    {
+      "path": "inputs/scene/full-world-linear.azurelevel.gz",
+      "bytes": 219424,
+      "sha256": "9e5fbcdf0cdde1f7e528b976d3b0437300c8b5d2d28de30408671ae9f286c13f"
+    },
+    {
+      "path": "inputs/scene/playable.azurelevel.gz",
+      "bytes": 217906,
+      "sha256": "32e4dec54738f893e139c641d85b5d4ea57c31ca9e085b392b861effad989ba9"
+    },
+    {
+      "path": "logs/build-debug.log.gz",
+      "bytes": 558,
+      "sha256": "40161f5de0edd806488d21b21c7f0cf744a266a3aed61eedc1d8d52bc457b592"
+    },
+    {
+      "path": "logs/build-driver.log.gz",
+      "bytes": 66,
+      "sha256": "6821a62103acaa7a732189ea348eb8a813510dc535db3f499e906d801196869e"
+    },
+    {
+      "path": "logs/build-release.log.gz",
+      "bytes": 543,
+      "sha256": "e819183a06eee74cecb5354d9e03dc6096c510dc1dbda17756e69fb21c729615"
+    },
+    {
+      "path": "logs/cpu-debug.log.gz",
+      "bytes": 447,
+      "sha256": "d1cc3aba67a127ce962ae3f7642e0ac0c6890e528e46486ecc242de7313ccc66"
+    },
+    {
+      "path": "logs/cpu-release.log.gz",
+      "bytes": 443,
+      "sha256": "2d773e0d5e92c15fb540d412f2bec2647a6403be9e71b264c0115acc55da633e"
+    },
+    {
+      "path": "logs/fixed-driver.log.gz",
+      "bytes": 164,
+      "sha256": "5be5ec19e69f965fff4780767c17a9707f328f33f84503404a9f0c7836fd18bc"
+    },
+    {
+      "path": "logs/prepare-private-driver.log.gz",
+      "bytes": 69,
+      "sha256": "37fb7b66277f5366bf2f243afce6072fbcfe672d88624cfb34ec417e98ee7266"
+    },
+    {
+      "path": "logs/private-gpu-driver.log.gz",
+      "bytes": 92,
+      "sha256": "999ea2f9579c9e848620cc11b4434c194a9b928fd4b15629c564076abe5fbd03"
+    },
+    {
+      "path": "logs/protocol-build-debug.log.gz",
+      "bytes": 111,
+      "sha256": "b50e99212288c453d075a39b3ecddab94cbe57a5bf9acc1052049619e9cf1a04"
+    },
+    {
+      "path": "logs/protocol-build-release.log.gz",
+      "bytes": 111,
+      "sha256": "b50e99212288c453d075a39b3ecddab94cbe57a5bf9acc1052049619e9cf1a04"
+    },
+    {
+      "path": "logs/protocol-driver.log.gz",
+      "bytes": 72,
+      "sha256": "b28e698068295c6a728d6734db6691590315878998c91f63004673b47ba56bc2"
+    },
+    {
+      "path": "logs/protocol-test-debug.log.gz",
+      "bytes": 228,
+      "sha256": "111eb274ee612f347633ce5245f3832bae0283e1a86bc6c3a84aeb527ce01159"
+    },
+    {
+      "path": "logs/protocol-test-release.log.gz",
+      "bytes": 228,
+      "sha256": "079bca241fc4ca856df69aa89ab35dfec318c827b098b5c649213068af4e4a6f"
+    },
+    {
+      "path": "logs/public-debug-green.log.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "logs/public-gpu-driver.log.gz",
+      "bytes": 325,
+      "sha256": "e198db419322f0c638e79063a7717a719e8c29092ed329e0752171a50221f734"
+    },
+    {
+      "path": "logs/public-gpu-green-driver.log.gz",
+      "bytes": 52,
+      "sha256": "8ae7b06daecae7c46e0c22ed23a4f80a3f5f2622f2fd90cf967b731052b0a7c3"
+    },
+    {
+      "path": "logs/public-release-green.log.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "logs/public-release.log.gz",
+      "bytes": 527,
+      "sha256": "f2dd24e07c95c6638cfe6b88613cc567ebae7761b4c2a74814d27484323402be"
+    },
+    {
+      "path": "logs/red-cpu-build.log.gz",
+      "bytes": 156,
+      "sha256": "bd3ad475dfa3f3214a873b33771e08190d5e37c0e3d714a4cb398974a5da2881"
+    },
+    {
+      "path": "logs/red-cpu-driver.log.gz",
+      "bytes": 88,
+      "sha256": "d5386fdd5c5696051bff6969e063a7e298feddb7ca654af0db9319cc0cd22024"
+    },
+    {
+      "path": "logs/red-cpu-test.log.gz",
+      "bytes": 292,
+      "sha256": "8c52ba3f1ee8b0b91ea00035fb023337b74855277f0491a39397260de1a12ac9"
+    },
+    {
+      "path": "logs/red-gpu-driver.log.gz",
+      "bytes": 951,
+      "sha256": "1638f9bea45d59706739fbeae8e05728e6ed1ba80b2c02f311ea6287fb720017"
+    },
+    {
+      "path": "logs/red-temporal-gpu-driver.log.gz",
+      "bytes": 264,
+      "sha256": "2dede9978ca19d32313ceabb63ef3dbc4c6d04bdb91aeeb4cc4be54247a7b173"
+    },
+    {
+      "path": "logs/red-temporal-valid-gpu-driver.log.gz",
+      "bytes": 959,
+      "sha256": "fa54b35f69d564b9b211950b9cdcd3dd89940ab0f104b4b2fcb2de0156dfaaa4"
+    },
+    {
+      "path": "logs/route-debug-driver.log.gz",
+      "bytes": 271,
+      "sha256": "7fdaee76a9f86693fdeaaed0ca4c37fc492c48f4f814c9a5cd0143ee8f82233f"
+    },
+    {
+      "path": "logs/route-release-driver.log.gz",
+      "bytes": 269,
+      "sha256": "5755c00034d42c5ffa9b9a961b7a83e4440b3821a9a04c5ea7129016e776fda7"
+    },
+    {
+      "path": "logs/verify-driver.log.gz",
+      "bytes": 284,
+      "sha256": "720715b2fedc33864b623e576e324e504bf5cf52ccc34d55a7203d06e3e85171"
+    },
+    {
+      "path": "prepare_private.py",
+      "bytes": 1563,
+      "sha256": "cc4431dc83bfe596c4ea83c91ddb27bc4be8e618cccfa57775e25c5ca3e701e1"
+    },
+    {
+      "path": "private-gpu-summary.json",
+      "bytes": 958,
+      "sha256": "ff74214dfc5158e320d6eecd7c68ff3b269ace4d24362e0317556cd3dcb05b2c"
+    },
+    {
+      "path": "private_gpu.py",
+      "bytes": 2541,
+      "sha256": "01b05308b763b8e80dcad836118edf55da314a207646316c9e93eca38437708e"
+    },
+    {
+      "path": "protocol-summary.json",
+      "bytes": 363,
+      "sha256": "c5a7c47c69044be2fd5f66ab864c92aca250fcd795633ee56c1e2c884bc2a994"
+    },
+    {
+      "path": "protocol_regression.py",
+      "bytes": 1578,
+      "sha256": "87fdbf470f636e2e3723fcb2c4179bfb6e438a03b5cf8b0baf2265c522401b7b"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 1916,
+      "sha256": "14f2d3998118a954e4be3587b0facb971ba4ebc30b7b8bf90b58616ddd7ebb80"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/changed-fog.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "6435d10ef0626a3fbc0b3cd5924e03876269a946ca3fdd78b138e8113e7c472b"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/changed-fog.azurelevel.gz",
+      "bytes": 668,
+      "sha256": "2cb961c0d34795b4dd4a43aa84b55febbdd2e43e201caf1516b78c20bbaeb70a"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/disabled-fog.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "7f0e70761bcb459b038517184bfcb097c6cdd167fa279b34fa291cd865528477"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/disabled-fog.azurelevel.gz",
+      "bytes": 666,
+      "sha256": "4142444931a3ad69ef4c1c95a272f391672c06f906af993cbe775134e9e18458"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "6ec656f65de63410a2a58e499e0105e8d98595587f06e5e731cc68029bdaa8df"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 663,
+      "sha256": "b285c2ca5f93dd09c82cdf974aa6ba4b8cc563c94dc5f4ded4c4c1f73f619386"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "257b96ee549b0b06bbe43dfe2c935a9fa5136128d6fef6d452f126465731ec3b"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 668,
+      "sha256": "e376079d2ef2a72034251f5b3187246d22fd80e43bbf327f28d9fe7348e39d2a"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "65c003f4c07442e2bf94e83b8d06e1166c914a608e431e4b323dea0882c48860"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/view.azfog.azmeta.gz",
+      "bytes": 117,
+      "sha256": "50521a704e0c02f732d994cc15e028ba017d137e3572628dcba947db59a80c27"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/assets/view.azfog.gz",
+      "bytes": 41,
+      "sha256": "2a49a97d3ca4fc3907fe25de0cb71ca444704198f62b9cdf260e9246d13ae9d3"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/observations.json",
+      "bytes": 7251,
+      "sha256": "ca8dcdcf4b1ced4880ab9e33858ba4206142c4b9eee9f5ee65b4f2d8e2ea3895"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/stderr.log.gz",
+      "bytes": 824,
+      "sha256": "3d32cbf79ce6c160aee6fc8a7181fcdf523171b255b2618366e1cf40a8855d4d"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/captured_fog_scene_inspector/stdout.log.gz",
+      "bytes": 935,
+      "sha256": "6be2703d7d5c7ad3cee510225363c40332f2f0118938036b5ff182d2ea51272f"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2121,
+      "sha256": "73ac856202832fc15691c325768b1dfa6184cf9449cf9513bb9152e0868cc6e9"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 115,
+      "sha256": "fb1cda72e558af7c93c044a7179dc6e4daaed270b41906ce818fa39d002ea34e"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 594,
+      "sha256": "7099763a9f60a25406b0338cb36940fc45ac3d1c92af790625f9d9ff8186fba8"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "9a89e2a5e780330608f183200ec881c96bc8b6d08b22926157269ee40e642265"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 602,
+      "sha256": "24451ca78150ddfa9126ed23634132e1a0840d40222fdd467d9c798689f7a84d"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "770cfbbf6a125c7b6f1cb6c58d2ab5daa838e86309cde15b4a77bad8360ba67d"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/observations.json",
+      "bytes": 9902,
+      "sha256": "7e237a10467a9819bc4b92bb4223b864ae84f3a2735a0ce2972cd87bd8f5862c"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/stderr.log.gz",
+      "bytes": 918,
+      "sha256": "67a3d9b50ff1812bbc2eda61af9d432ffa2a2049a05ea792908c943802571ca6"
+    },
+    {
+      "path": "public-gpu/release/run-1e42662b/fogged_scene_inspector/stdout.log.gz",
+      "bytes": 973,
+      "sha256": "87869f2edb517d7715981a7420a37abcab0b2af0d0d53b07c87cdf15136c2a0e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2464,
+      "sha256": "1fc4def9eb4a61d925d3f1770013f92b3d3d9dfc0281d940778953d99364ba79"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/changed-fog.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "4feed0ed1144b284bd655d2861424e29aa691611039fc02fa58363e7dd3dcfa5"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/changed-fog.azurelevel.gz",
+      "bytes": 668,
+      "sha256": "2cb961c0d34795b4dd4a43aa84b55febbdd2e43e201caf1516b78c20bbaeb70a"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/disabled-fog.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3f17152119c6006f4457e042bd7008d626373dca673eb5626b291d70ef33873f"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/disabled-fog.azurelevel.gz",
+      "bytes": 666,
+      "sha256": "4142444931a3ad69ef4c1c95a272f391672c06f906af993cbe775134e9e18458"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "907fef7e4b8a85336310c7e806ad8ee57a3679fd587bd3643270c2d1f7e96cea"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 663,
+      "sha256": "b285c2ca5f93dd09c82cdf974aa6ba4b8cc563c94dc5f4ded4c4c1f73f619386"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 118,
+      "sha256": "8080fa0fd6c89af325bb40100acfb2145203806acdb75e5c2ee542bf9709eb22"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 668,
+      "sha256": "e376079d2ef2a72034251f5b3187246d22fd80e43bbf327f28d9fe7348e39d2a"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "f9468e035641432bbaf1ad8bac88a630f938223d9af98960843c764312406722"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/view.azfog.azmeta.gz",
+      "bytes": 118,
+      "sha256": "5205c1d63421ac793f6fb7736b6637e5897c1b300737532f7c69456aa52b0ef5"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/assets/view.azfog.gz",
+      "bytes": 41,
+      "sha256": "2a49a97d3ca4fc3907fe25de0cb71ca444704198f62b9cdf260e9246d13ae9d3"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/observations.json",
+      "bytes": 23991,
+      "sha256": "d6791073852e03f1e378af940aa0e777b14f7f9ec0f06b836552d0cfcd44de9f"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/stderr.log.gz",
+      "bytes": 1106,
+      "sha256": "a04be37259a5100e8e5a89b159b9b3be2d41f3870e42f056e138001948458fb2"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/captured_fog_scene_inspector/stdout.log.gz",
+      "bytes": 994,
+      "sha256": "b942252320f11b979cf7b1a3099869b5eda9a46a0a4c525005d3066b09e2bd62"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2147,
+      "sha256": "d8d5e45035a69fef97f221b31adcd63cb8d545118dc4503e37da98f5b83bd325"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "763bb7fee4c92f55b5847136cf7881628d8a67eb9061af136e2aadba25e0718c"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 594,
+      "sha256": "7099763a9f60a25406b0338cb36940fc45ac3d1c92af790625f9d9ff8186fba8"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "80f39eb56f9ce90c0ea7bf419eb431fcacc569b9f5e5f04ad4ae8f7cbb64c287"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 602,
+      "sha256": "24451ca78150ddfa9126ed23634132e1a0840d40222fdd467d9c798689f7a84d"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 116,
+      "sha256": "4ed5958f3085796b1672433b337a349899bdc7244bc2abc68d521c9a02283726"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/observations.json",
+      "bytes": 9934,
+      "sha256": "7376a96eda267c6f82c37e9410d294af33d9fd369b795f2db685c63278849b0d"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/stderr.log.gz",
+      "bytes": 927,
+      "sha256": "7a3cfc0eac0833d9091d4a447bb19fd790c2fdebde86bc43f7ed93ff1217d748"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/fogged_scene_inspector/stdout.log.gz",
+      "bytes": 975,
+      "sha256": "6ab28ef20fd84c6c34d9086670303f03f2c81bf1bca0b4e7ff0b53ca61b9ea7a"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2569,
+      "sha256": "917f2739009e50c2ee2f916a2ef34759dee57ad52770721a58e6bc9c7bbd45ec"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/audio/coin.wav.azmeta.gz",
+      "bytes": 117,
+      "sha256": "5f71c573ded4a4de4c5ec8398c168d014c6fa54d5b6fae32d3636ac7b6ff7a5a"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/audio/finish.wav.azmeta.gz",
+      "bytes": 117,
+      "sha256": "57cfe57fa20d9b0633902359cac13522f9ef22889340d859747f3b9b9e26f3e0"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/audio/jump.wav.azmeta.gz",
+      "bytes": 116,
+      "sha256": "312dff1aac06efacff8c6ce8ed91b020e38dbc543b279e9676249d07659638fe"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/audio/land.wav.azmeta.gz",
+      "bytes": 118,
+      "sha256": "7fa15effa0a34c2dba2901c581e2725b49f6f07aeb82e9e5ff6f1eb6ad729b20"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/audio/respawn.wav.azmeta.gz",
+      "bytes": 118,
+      "sha256": "5a3a7c73ba9d7d0aaccab90d586cab134e6beadf3b18d7484c9c6f6f128b46e2"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/CHARACTER-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "02b33f0e62809d80604b095ee560d891103b753bf992c5cf5eb5d8b948aa0027"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/checkpoint.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "2b767db270b9b00e00895af28eb3d8a76c631d0f5942dee73d90ecb6e80f3577"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/checkpoint.lua.gz",
+      "bytes": 215,
+      "sha256": "63b7f5bdec67eb1583b3a2ce1ed1c009529c928a2fda59748fa4485cdd434953"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/coin.lua.azmeta.gz",
+      "bytes": 116,
+      "sha256": "ee7a948f556b08ef47879e9507d020939184d6b6d849d3db0b886d99014d37b0"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/coin.lua.gz",
+      "bytes": 310,
+      "sha256": "bdc3ffbb022fe2d6f056c1788fab958ba86a39e2eb41815efdbaa72851ad0b06"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "4ef5950c4c755aa5b49ffb14ffaca11a0e7bf33272dd6e643cc382495b17639c"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/arch.glb.azmeta.gz",
+      "bytes": 118,
+      "sha256": "fb258d50b587cbadd4bcd6d0f18f1db939d2297bd76fe19673fe522b1b3f69a4"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/blender-version.txt.azmeta.gz",
+      "bytes": 117,
+      "sha256": "6bb3e45c926d51a363a9e33ae2225d85a03c8385778f6aa30c89944887238e8d"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/challenge.glb.azmeta.gz",
+      "bytes": 117,
+      "sha256": "304dd4050f8fa54f9bac1927451f1ebe9dc1abdc28f3bd01651b2cc7c689e47c"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/coin.glb.azmeta.gz",
+      "bytes": 116,
+      "sha256": "6f51ac88e10efded74cbfeaca15ec60ee286cc27e5fbae2058c99943adc0beb4"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/moving.glb.azmeta.gz",
+      "bytes": 116,
+      "sha256": "2542ab93e01ed3adb23d61f40f460a058f095d246eb9b7ecb846e5172e881e8f"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/platform.glb.azmeta.gz",
+      "bytes": 117,
+      "sha256": "bc8252dc70f7df1e85b9d39f96472661c39c91cfa998615d9cd574be7401d3c5"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/practice.glb.azmeta.gz",
+      "bytes": 118,
+      "sha256": "1447531b3ce0e553599282f1b2fd77618fe133eae9903db4484536e5c4e6ba63"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/rock.glb.azmeta.gz",
+      "bytes": 117,
+      "sha256": "262111d362ff4174dd755e88746af06970464fdc5c9632d2b627418d88b61c03"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/stone-albedo.png.azmeta.gz",
+      "bytes": 117,
+      "sha256": "e8920c68da98fc25c8e732e1de4ff7a78b514a907ed94fb99a543c6b250c074f"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/stone-normal.png.azmeta.gz",
+      "bytes": 117,
+      "sha256": "53cab51015291af8c714d73974458e2464fdad55642389e83618004473959a58"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/environment/stone-orm.png.azmeta.gz",
+      "bytes": 116,
+      "sha256": "286d6ff1b477f218d9ad8f4c726410174fa2bdcd8ca17709af05ecc144fe0759"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/goal.lua.azmeta.gz",
+      "bytes": 116,
+      "sha256": "847a67988d758f83b7b9192e82e61b848f5c19ad5d668bb7d00c1c125843fe15"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/goal.lua.gz",
+      "bytes": 271,
+      "sha256": "537103088ea7e7d856ec31577041aae2a430244995dfcdf1ba70e1af9d75d1a9"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/hero.gltf.azmeta.gz",
+      "bytes": 118,
+      "sha256": "860ad216c7ee0e96a7b1409acc47bcfc83c03d35ae17ea92e9306f58b3c64968"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/hero.gltf.gz",
+      "bytes": 5766,
+      "sha256": "24b91eadac5aaf64eb925566948d5091904eb7f123bad1a5c07ff6e20fcdbe5a"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/hero.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "5b9879cdf3dfdef918ce7e5ca9a5034dda5f595689416ebfef71796e8c7e9809"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/hero.lua.gz",
+      "bytes": 616,
+      "sha256": "23f36e9cabd5ed336bdfd1d1c1694396b88f32f8aa2b6da2f98fe4fe14cbc1d3"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/hud.rml.azmeta.gz",
+      "bytes": 118,
+      "sha256": "a8c7789f2c5d4f9bd437d60b4ab0416b69d6e31ea6903fbc6f98e92f4c387232"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/locomotion.json.azmeta.gz",
+      "bytes": 117,
+      "sha256": "83f6f5373126f8d660b7c82d7f694fcc311527856d5f35e29f02d65f7e1edf82"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/motion.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "0c6019155add1f9482076cd583b347310c94efe1f550b15ece6a7755678977f3"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/motion.lua.gz",
+      "bytes": 412,
+      "sha256": "90a54ede47775d90f04191c5fc59192a5bd2354c02dd644c030431d0a54b1ec0"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/platformer.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "ca7f3297bdcaadc52d8cad808da56f27df68589ffefbfe7cb55a3701ab93cea2"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/platformer.azurelevel.gz",
+      "bytes": 1732,
+      "sha256": "4466dfead5c2d1ee5ff0845a75560f102e37bb31879edc972b03af9754ddacdd"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "6c85ca27e7fd753311b54c33eed64f5507cc7368dece108a4ece2c50f35e6836"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 1520,
+      "sha256": "669cdebfa496407a6430f8540d8c994863b9e4d008734a93d9a4211e151b8ea8"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3ab472878e74bb7c5bd6f1efdf8b25471c63ffecfbeba32de929f37ff7915682"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/assets/residency-alias.gltf.gz",
+      "bytes": 5766,
+      "sha256": "24b91eadac5aaf64eb925566948d5091904eb7f123bad1a5c07ff6e20fcdbe5a"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/BLENDER-GENERATION.log.gz",
+      "bytes": 407,
+      "sha256": "2163301bb62057ad3ab0317b65bded15be78926b9af182d2daf36f11e4c685d7"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/game/project.azureproject.gz",
+      "bytes": 466,
+      "sha256": "d4e53f4a702ef1fef35803b46248c7188baacff552a7e10cf1385c203d656395"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/observations.json",
+      "bytes": 17768,
+      "sha256": "6195e59a1d1aed042ec3cce4249df3a5c9a53124e0635e840face8860f63388a"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/stderr.log.gz",
+      "bytes": 1411,
+      "sha256": "5bed1136f2d702ac091ddd5c8a500a89dd72318d0268ea05e78c79cfa441ea5e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/platformer/stdout.log.gz",
+      "bytes": 992,
+      "sha256": "911f5fa4138dcc4f0dcd7a1679acb173cd91e02021e49d0fe31337396f5d5b75"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2054,
+      "sha256": "2ba5c72bb49e4b4098881765bd37b21a5b443115b9f9c15be0c098e50f96519a"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 118,
+      "sha256": "4d220fd531e34e2d8eee364f6d1a18c9c7cdfa6645e02da6fe554b32ea4691a1"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 387,
+      "sha256": "f9e6d0e39fb899d293df4e79b9a9785b4846f18cd1313637691e6d1ad379492e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "6ccc254abd3c71752e123d4542ce56c6362b6181cdffecf7bc815fbdab9a87c5"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 330,
+      "sha256": "fb6b13394237a1570d787f148b18faf58ac8e4375a2cf0bd84c64f834f1fc596"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 116,
+      "sha256": "4da6685539cb23d9d6f4407fbf3d04de78b0acf8c9e7442b7947cfac58c023b6"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/observations.json",
+      "bytes": 4726,
+      "sha256": "599b12fbfebe4554d8f663f3178487e6ea385673471b7555ae6dad6c1095f48b"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/stderr.log.gz",
+      "bytes": 880,
+      "sha256": "85dfddbf92a88917ff1d686856e0da50e8ae38c04892d9e6606d5eeac62d69cd"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/scene_inspector/stdout.log.gz",
+      "bytes": 946,
+      "sha256": "0bc1d99942b9c0012f6963d3b19fae860691fafebcd0eac36961236d35404448"
+    },
+    {
+      "path": "public-gpu-green/debug/run-d634004a/summary.json",
+      "bytes": 1074,
+      "sha256": "e019d5e4e92bcf27f9ae1d207b09484eb8f20a8d282b3c1ac6e4515b28d37671"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2446,
+      "sha256": "7e12303c12fd56a48bc9b8a3ac320dba2d8a22ee98ace9e29e2ca44adb19eae4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/changed-fog.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "83e210a8362c54575245fb5f77d8649bab5265fe290c725ec5156c39389c3aeb"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/changed-fog.azurelevel.gz",
+      "bytes": 668,
+      "sha256": "2cb961c0d34795b4dd4a43aa84b55febbdd2e43e201caf1516b78c20bbaeb70a"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/disabled-fog.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "8aa7a99fb67d048d40437a0cbcecb366a2acfaccff23acc597b7730fb3ebaceb"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/disabled-fog.azurelevel.gz",
+      "bytes": 666,
+      "sha256": "4142444931a3ad69ef4c1c95a272f391672c06f906af993cbe775134e9e18458"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "0d4ea8112842b55e5e4b154445805c610434d1df87540574f8e115e40269631d"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 663,
+      "sha256": "b285c2ca5f93dd09c82cdf974aa6ba4b8cc563c94dc5f4ded4c4c1f73f619386"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "88492e75cfdc3619fff853df3adeefb73759df1c65f4d630c2d79e1ec83592be"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 668,
+      "sha256": "e376079d2ef2a72034251f5b3187246d22fd80e43bbf327f28d9fe7348e39d2a"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "a3b7e71afcb651961552141b127815582dee4f1ebe6d2a2f2e82f30be3607dff"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/view.azfog.azmeta.gz",
+      "bytes": 116,
+      "sha256": "a2d1f9fb8c44ffff168660040a662e6601b778073cce1811893856124d71a97d"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/assets/view.azfog.gz",
+      "bytes": 41,
+      "sha256": "2a49a97d3ca4fc3907fe25de0cb71ca444704198f62b9cdf260e9246d13ae9d3"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/observations.json",
+      "bytes": 24087,
+      "sha256": "3c7363d586fd27e36d1e169bb2901b054b842250e7b9f9f667dde2933817dedb"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/stderr.log.gz",
+      "bytes": 1093,
+      "sha256": "ae6b3dc611b0428141489098846fdb5040050c39ecb3f272562bd41b9f2218b6"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/captured_fog_scene_inspector/stdout.log.gz",
+      "bytes": 996,
+      "sha256": "d36fc3459e624a882c0add95f54f91a2b0642f753da0f21655196005c74b2d0a"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2130,
+      "sha256": "d414dbdf2d94166e70d8b543ce33f4418e55699b72eca8ff20e3c09e36d48714"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 118,
+      "sha256": "616cde1ef1b94570a0f9d32e3cc716b53181e57270c3099d7d38aac9dc22a678"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 594,
+      "sha256": "7099763a9f60a25406b0338cb36940fc45ac3d1c92af790625f9d9ff8186fba8"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "6ccfb4e01170db26e54e28733304fa76861345b936f77eb083ad3da5cca6604a"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 602,
+      "sha256": "24451ca78150ddfa9126ed23634132e1a0840d40222fdd467d9c798689f7a84d"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "d3e62d27ee59ee721927598a430d7ed0bed56b135dfbbd97cce474dea6ec1694"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/observations.json",
+      "bytes": 9948,
+      "sha256": "9a2e62a1c7eda080e41a58839e4b7094834306b0604e6d76c8ca46cce71f05b6"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/stderr.log.gz",
+      "bytes": 916,
+      "sha256": "bdbdd80350d40dc42bbd78308019afd26232b29636ee2f0fb088e53864b73705"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/fogged_scene_inspector/stdout.log.gz",
+      "bytes": 977,
+      "sha256": "c5eb58c3b5f8f806c11a1462e952e0449a95f01549690f040e42ce40c608638f"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2530,
+      "sha256": "696956ccb48c9db59c098a672029aab6a195779df7bd348d4125145d0e5c92e4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/audio/coin.wav.azmeta.gz",
+      "bytes": 117,
+      "sha256": "5f71c573ded4a4de4c5ec8398c168d014c6fa54d5b6fae32d3636ac7b6ff7a5a"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/audio/finish.wav.azmeta.gz",
+      "bytes": 117,
+      "sha256": "57cfe57fa20d9b0633902359cac13522f9ef22889340d859747f3b9b9e26f3e0"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/audio/jump.wav.azmeta.gz",
+      "bytes": 116,
+      "sha256": "312dff1aac06efacff8c6ce8ed91b020e38dbc543b279e9676249d07659638fe"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/audio/land.wav.azmeta.gz",
+      "bytes": 118,
+      "sha256": "7fa15effa0a34c2dba2901c581e2725b49f6f07aeb82e9e5ff6f1eb6ad729b20"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/audio/respawn.wav.azmeta.gz",
+      "bytes": 118,
+      "sha256": "5a3a7c73ba9d7d0aaccab90d586cab134e6beadf3b18d7484c9c6f6f128b46e2"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/CHARACTER-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "02b33f0e62809d80604b095ee560d891103b753bf992c5cf5eb5d8b948aa0027"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/checkpoint.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "2b767db270b9b00e00895af28eb3d8a76c631d0f5942dee73d90ecb6e80f3577"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/checkpoint.lua.gz",
+      "bytes": 215,
+      "sha256": "63b7f5bdec67eb1583b3a2ce1ed1c009529c928a2fda59748fa4485cdd434953"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/coin.lua.azmeta.gz",
+      "bytes": 116,
+      "sha256": "ee7a948f556b08ef47879e9507d020939184d6b6d849d3db0b886d99014d37b0"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/coin.lua.gz",
+      "bytes": 310,
+      "sha256": "bdc3ffbb022fe2d6f056c1788fab958ba86a39e2eb41815efdbaa72851ad0b06"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "480fa3f15edba16d52395cd13113737add18a47cccd98a7bb42834e84ef97fe6"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/arch.glb.azmeta.gz",
+      "bytes": 118,
+      "sha256": "fb258d50b587cbadd4bcd6d0f18f1db939d2297bd76fe19673fe522b1b3f69a4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/blender-version.txt.azmeta.gz",
+      "bytes": 117,
+      "sha256": "6bb3e45c926d51a363a9e33ae2225d85a03c8385778f6aa30c89944887238e8d"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/challenge.glb.azmeta.gz",
+      "bytes": 117,
+      "sha256": "304dd4050f8fa54f9bac1927451f1ebe9dc1abdc28f3bd01651b2cc7c689e47c"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/coin.glb.azmeta.gz",
+      "bytes": 116,
+      "sha256": "6f51ac88e10efded74cbfeaca15ec60ee286cc27e5fbae2058c99943adc0beb4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/moving.glb.azmeta.gz",
+      "bytes": 116,
+      "sha256": "2542ab93e01ed3adb23d61f40f460a058f095d246eb9b7ecb846e5172e881e8f"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/platform.glb.azmeta.gz",
+      "bytes": 117,
+      "sha256": "bc8252dc70f7df1e85b9d39f96472661c39c91cfa998615d9cd574be7401d3c5"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/practice.glb.azmeta.gz",
+      "bytes": 118,
+      "sha256": "1447531b3ce0e553599282f1b2fd77618fe133eae9903db4484536e5c4e6ba63"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/rock.glb.azmeta.gz",
+      "bytes": 117,
+      "sha256": "262111d362ff4174dd755e88746af06970464fdc5c9632d2b627418d88b61c03"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/stone-albedo.png.azmeta.gz",
+      "bytes": 117,
+      "sha256": "e8920c68da98fc25c8e732e1de4ff7a78b514a907ed94fb99a543c6b250c074f"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/stone-normal.png.azmeta.gz",
+      "bytes": 117,
+      "sha256": "53cab51015291af8c714d73974458e2464fdad55642389e83618004473959a58"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/environment/stone-orm.png.azmeta.gz",
+      "bytes": 116,
+      "sha256": "286d6ff1b477f218d9ad8f4c726410174fa2bdcd8ca17709af05ecc144fe0759"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/goal.lua.azmeta.gz",
+      "bytes": 116,
+      "sha256": "847a67988d758f83b7b9192e82e61b848f5c19ad5d668bb7d00c1c125843fe15"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/goal.lua.gz",
+      "bytes": 271,
+      "sha256": "537103088ea7e7d856ec31577041aae2a430244995dfcdf1ba70e1af9d75d1a9"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/hero.gltf.azmeta.gz",
+      "bytes": 118,
+      "sha256": "860ad216c7ee0e96a7b1409acc47bcfc83c03d35ae17ea92e9306f58b3c64968"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/hero.gltf.gz",
+      "bytes": 5766,
+      "sha256": "24b91eadac5aaf64eb925566948d5091904eb7f123bad1a5c07ff6e20fcdbe5a"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/hero.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "5b9879cdf3dfdef918ce7e5ca9a5034dda5f595689416ebfef71796e8c7e9809"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/hero.lua.gz",
+      "bytes": 616,
+      "sha256": "23f36e9cabd5ed336bdfd1d1c1694396b88f32f8aa2b6da2f98fe4fe14cbc1d3"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/hud.rml.azmeta.gz",
+      "bytes": 118,
+      "sha256": "a8c7789f2c5d4f9bd437d60b4ab0416b69d6e31ea6903fbc6f98e92f4c387232"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/locomotion.json.azmeta.gz",
+      "bytes": 117,
+      "sha256": "83f6f5373126f8d660b7c82d7f694fcc311527856d5f35e29f02d65f7e1edf82"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/motion.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "0c6019155add1f9482076cd583b347310c94efe1f550b15ece6a7755678977f3"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/motion.lua.gz",
+      "bytes": 412,
+      "sha256": "90a54ede47775d90f04191c5fc59192a5bd2354c02dd644c030431d0a54b1ec0"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/platformer.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "ca7f3297bdcaadc52d8cad808da56f27df68589ffefbfe7cb55a3701ab93cea2"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/platformer.azurelevel.gz",
+      "bytes": 1732,
+      "sha256": "4466dfead5c2d1ee5ff0845a75560f102e37bb31879edc972b03af9754ddacdd"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "eb4f23176de58d3093e7032e4ea23e5de88634f9b21a5e0ae54d09afcdfc7def"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 1520,
+      "sha256": "669cdebfa496407a6430f8540d8c994863b9e4d008734a93d9a4211e151b8ea8"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "dd214d4af79658a43fe16cf7bf78ed3d9181f338a2d02b2fe37265d23c94ec88"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/assets/residency-alias.gltf.gz",
+      "bytes": 5766,
+      "sha256": "24b91eadac5aaf64eb925566948d5091904eb7f123bad1a5c07ff6e20fcdbe5a"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/BLENDER-GENERATION.log.gz",
+      "bytes": 407,
+      "sha256": "2163301bb62057ad3ab0317b65bded15be78926b9af182d2daf36f11e4c685d7"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/game/project.azureproject.gz",
+      "bytes": 466,
+      "sha256": "d4e53f4a702ef1fef35803b46248c7188baacff552a7e10cf1385c203d656395"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/observations.json",
+      "bytes": 17923,
+      "sha256": "a2f074bcb8913236456cbe722cebdf388e444ee574ae6ab7e06c38ce20c4a522"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/stderr.log.gz",
+      "bytes": 1391,
+      "sha256": "fb4fa234ad681162ca633108d5d214cc63922317959d2809ce92b1fdb4fe96f3"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/platformer/stdout.log.gz",
+      "bytes": 996,
+      "sha256": "439f641da33823db94adb380a2afab36dd6c5cb2e4c25bfc8bc7b3951c851653"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 2059,
+      "sha256": "59fa1844bf9da886a4337ecfd65053bb39563720d50e8554b362028d89a5a065"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "450bfc10cfce09117dcb200a1e6dad0e5503a5d0b403ab123b13b03db148d1db"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 387,
+      "sha256": "f9e6d0e39fb899d293df4e79b9a9785b4846f18cd1313637691e6d1ad379492e"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "10b57ee21bce39035bdfb5b62c4235197036e6debb01707ce7d2122271fdd500"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 330,
+      "sha256": "fb6b13394237a1570d787f148b18faf58ac8e4375a2cf0bd84c64f834f1fc596"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "fd768693585ab4486871a7bfc8f0e15214cbe4a90d1cc637952d666903e1e8d8"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/observations.json",
+      "bytes": 4744,
+      "sha256": "9c1c6ea39c758f3052de47cb6acdf7ecfc3eb062d01b3600b240fb89e6d479e4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/stderr.log.gz",
+      "bytes": 878,
+      "sha256": "677a6898ee1b70e6a424bb5062938df4da989f5a4244e529d3577aa5c3926f7c"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/scene_inspector/stdout.log.gz",
+      "bytes": 948,
+      "sha256": "93a76348326e12e06bf15c653b1b28d9ed28f47f7c0159bea1b40e039a3945c4"
+    },
+    {
+      "path": "public-gpu-green/release/run-125a754c/summary.json",
+      "bytes": 1074,
+      "sha256": "e019d5e4e92bcf27f9ae1d207b09484eb8f20a8d282b3c1ac6e4515b28d37671"
+    },
+    {
+      "path": "public-gpu-summary.json",
+      "bytes": 2329,
+      "sha256": "3a0e893ade5d77ac2614fcd1740ecba95ccf6e44159042bf7daa9440b1c85207"
+    },
+    {
+      "path": "public_gpu.py",
+      "bytes": 2274,
+      "sha256": "0c1d41639fd826ddca4e3f62ca918ebbc8db8ff03cfadc851309bd8b7b9cbef5"
+    },
+    {
+      "path": "raw/archive.py.gz",
+      "bytes": 1653,
+      "sha256": "31d2caa50e03a13068f12733caa16a185e6edbebb9cb48da164954728a1c6bad"
+    },
+    {
+      "path": "raw/build_green.py.gz",
+      "bytes": 1635,
+      "sha256": "35492f534cffa81fc7e76d18662bfa1116264400f2e1f278c5300c79ce76ebb7"
+    },
+    {
+      "path": "raw/candidate.json.gz",
+      "bytes": 145860,
+      "sha256": "479d86fdbc86637bd2ee60e651814f1d474ee4f68f05cd54f6eb431ce0a14036"
+    },
+    {
+      "path": "raw/capture_fixed.py.gz",
+      "bytes": 1308,
+      "sha256": "f309eca35d92cf9c525f06ad3f91da19c6267a40e444b334d869f98b5ae0c4f2"
+    },
+    {
+      "path": "raw/capture_route.py.gz",
+      "bytes": 1573,
+      "sha256": "c68ac6bf02ef1916500f29e8b5f3ed586a531c091734e9249b3c29e9aaf55309"
+    },
+    {
+      "path": "raw/debug-build.json.gz",
+      "bytes": 57431,
+      "sha256": "689a0cb4da4da3381a859785783393c1a65fe9b662d14551091a39a4bcbfb489"
+    },
+    {
+      "path": "raw/failure-index.json.gz",
+      "bytes": 567,
+      "sha256": "82123587ba19c21fd9b7ca24d5669f7452db509c76739e505fd16f3ee66d9b89"
+    },
+    {
+      "path": "raw/fixed-world-summary.json.gz",
+      "bytes": 957,
+      "sha256": "cfad54bcb818bdf77bf95f1eee929d5d8d5e840adbbc7b907e1af0bcf30f20e0"
+    },
+    {
+      "path": "raw/input-route.json.gz",
+      "bytes": 239,
+      "sha256": "64480e6c80f4e5f63523ae157cdb66bfda284c0fb706044cf9f7793da8d85ddc"
+    },
+    {
+      "path": "raw/prepare_private.py.gz",
+      "bytes": 845,
+      "sha256": "b5507ed66e43e076d85876b8b251e38915a96b446e5fa6fee59957b86c6cf6e7"
+    },
+    {
+      "path": "raw/private-gpu-summary.json.gz",
+      "bytes": 400,
+      "sha256": "426cc6b0ad052f93c514888d2557388b33c6be8fc3f61747f4004c3b1996edcc"
+    },
+    {
+      "path": "raw/private_gpu.py.gz",
+      "bytes": 1214,
+      "sha256": "339134c66332639c8fb5c837601bd0357ff691e22679ff52f5e35850c8b22fc2"
+    },
+    {
+      "path": "raw/protocol-summary.json.gz",
+      "bytes": 214,
+      "sha256": "764231fb77ecaa29ac10f2ef6dec155fb9aaae7e44ab82207ea1845881280862"
+    },
+    {
+      "path": "raw/protocol_regression.py.gz",
+      "bytes": 845,
+      "sha256": "d0a15888a85284b90eaf332302e92fae17ccf113a68047381b37d1361faafb54"
+    },
+    {
+      "path": "raw/public-gpu-summary.json.gz",
+      "bytes": 676,
+      "sha256": "d4dbe77561aa226e75f8c467224c88b82dc0b878e1a18adc219afa5de8945d36"
+    },
+    {
+      "path": "raw/public_gpu.py.gz",
+      "bytes": 1068,
+      "sha256": "2a15f1551c42fc1f0439854ed8b4d37f49b8c811d76874d079287aff92bc9a71"
+    },
+    {
+      "path": "raw/red-cpu.json.gz",
+      "bytes": 47523,
+      "sha256": "195b371355cde983cc03625e030dcdeae239732e0d6846a033fdec47a21d29ef"
+    },
+    {
+      "path": "raw/red-gpu.json.gz",
+      "bytes": 219,
+      "sha256": "8016e621e8a5f6d0efec401fa10802c7bc7b76556de52233ea0559fc39f327a9"
+    },
+    {
+      "path": "raw/red-temporal-gpu.json.gz",
+      "bytes": 167,
+      "sha256": "f814f1dfad8b043d73050a4c8f90cae7482a0e19159c43fa36e65875e0c33df4"
+    },
+    {
+      "path": "raw/red_cpu.py.gz",
+      "bytes": 1228,
+      "sha256": "2cd410f065b59b30a8c5aaaf1503f5c009b6fbfc048cc588d35395e70955c7ea"
+    },
+    {
+      "path": "raw/release-build.json.gz",
+      "bytes": 57430,
+      "sha256": "9a7c07b769245a8bcf46bb7c7c2b971b88a873545c2bc626e2716c61e3417343"
+    },
+    {
+      "path": "raw/seal.py.gz",
+      "bytes": 455,
+      "sha256": "a6e1d7f7e8d549b4e7151ef5a4a4df2a9ffa39e472bb44ea04d1e5e03b95180d"
+    },
+    {
+      "path": "raw/stage.py.gz",
+      "bytes": 1457,
+      "sha256": "6890e7ed278392cec6fda2abe4907c1145765b1376d1e940eda55f98446d3479"
+    },
+    {
+      "path": "raw/tool-deadline-fix.json.gz",
+      "bytes": 443,
+      "sha256": "af115f8ff7933d29efb1544e7149cbc3f7113642ff9acf4f223224171c7c1aed"
+    },
+    {
+      "path": "raw/update_docs.py.gz",
+      "bytes": 1812,
+      "sha256": "7fe7863d0f2aeb1f700a4a3fc5a8ef426bcece4d693349be7719d89470a0f9c0"
+    },
+    {
+      "path": "raw/verify.py.gz",
+      "bytes": 2263,
+      "sha256": "c6fb00f02c889d778eaeccbe6e21b3858952c12a64bf325e9b7646811b7b3b00"
+    },
+    {
+      "path": "raw/verify_behavior.py.gz",
+      "bytes": 1609,
+      "sha256": "4b6740835153e3c24ba3107a5676b93731650078f25846319ab20f8f993b7ff2"
+    },
+    {
+      "path": "red-cpu.json",
+      "bytes": 107420,
+      "sha256": "b3f222036d58fc2dd9c8a815d80b74a7b511e1d06e013e51ceceb93db10eee21"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 1727,
+      "sha256": "696a935d4fd5cc0d69e1d70bc79828d116731ca073b1bff05605586c5f1f46f8"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "a138a72b9d4658fc30685a85ae9f32009283a42ea5676894a45103c3058560e3"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 576,
+      "sha256": "2bfb094c5a6d39b0796f07b09709d16b53cef9f0bc0a3ad7f742234bcddb5809"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "188bef92b411ef33c82e970130be2bc72e6d10d4286043fe593b5f26b1a585b4"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 586,
+      "sha256": "c744b60f9713183fcc3b142bab957202ac63eca652d3f3126d40c804ae47a3d4"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 118,
+      "sha256": "0dd954020214175b3396f63860561c7b284694ee7326e244d06877479f802089"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/observations.json",
+      "bytes": 2135,
+      "sha256": "cdecc14ba8310a50be8c60abfa31d0ed8a1c321b5a20bc36d2fc2f00730b5bd5"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/stderr.log.gz",
+      "bytes": 713,
+      "sha256": "ad2d107250752d9dd132ece3b1cc4441e376bfbb98a02bdeb44f7e1748144451"
+    },
+    {
+      "path": "red-gpu/run-c2029e2f/fogged_scene_inspector/stdout.log.gz",
+      "bytes": 915,
+      "sha256": "a974679e89661e74cbaf421026b912dc87f168a29c36435c8a15f6cc4bab8239"
+    },
+    {
+      "path": "red-gpu.json",
+      "bytes": 298,
+      "sha256": "91146d59175559757b7f337d927a4b38324b91497ddb6f814009d54e1dbc3521"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 118,
+      "sha256": "dfac046b94011317656d8df2f0987b8ba3af60a5fe4bd80b6a7c57f283a8ee49"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 590,
+      "sha256": "1d64abc1697786ea032ea364f6a756b4d037ad33906f43bfa9a3eda1dc0cb989"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "95fc5a9cad5ca9d5c83fc01e58253a530fb047e94de57df0dada0e2a3ecd293d"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 597,
+      "sha256": "480875317247c9a7ca2ffa369af79dbf3469406dcebe5dfc4449ec5b2c4c9aa2"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 116,
+      "sha256": "202606f8fb5a8c007dd7ca2ad1c02a807287aab6aa62c2fe567befca3476e4d3"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/observations.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/stderr.log.gz",
+      "bytes": 109,
+      "sha256": "ab0d008ba9fd6083c8465362cdb361a7045f054425a1886404cf0f9a8fc944a1"
+    },
+    {
+      "path": "red-temporal-gpu/run-72fcf593/fogged_scene_inspector/stdout.log.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "red-temporal-gpu.json",
+      "bytes": 189,
+      "sha256": "c3d4cc58b89be3957c8809c41ad3b1b5f2cbc98a4159a90876396f371a461017"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/diagnostics/azureplayer.log.jsonl.gz",
+      "bytes": 1724,
+      "sha256": "3fdbe5023a9e1f90877b7170191fb71c67d6c565bd533c54d7876d033bc9a9e0"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/ASSET-LICENSE.txt.azmeta.gz",
+      "bytes": 118,
+      "sha256": "6cbdb4b44261571cdb5a09694dafb4d2d80f7469bfc0af818545f72d974a67fc"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/cube.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3a4e8c6dc960c77605d2bf649ca19338e454586ea4902f2a3ed11a00a8b5dc7c"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/cube.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/empty.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "36a0f9b4f46b0870997b94c000c8c73c236407e52d100467c686a7da8b51cfdb"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/empty.azurelevel.gz",
+      "bytes": 100,
+      "sha256": "b0ad824aa1d07c546112dc9073ceab742bf3429c148418d5d13915a6d906d170"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/inspect.lua.azmeta.gz",
+      "bytes": 117,
+      "sha256": "883f3dcb75f1c4fc4916a3fc7653950608a15c5fe4594c560f3a69f5c7cf45d4"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/inspect.lua.gz",
+      "bytes": 115,
+      "sha256": "2614c48eb9739b58b8aa668d0cc7144a6b07734cab2a0d125af917750c94b7cb"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/inspection.azurelevel.azmeta.gz",
+      "bytes": 116,
+      "sha256": "e65083f7f20b23035958d68c23beaa3afc8e37446b43b1e02a60c203c3e6523e"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/inspection.azurelevel.gz",
+      "bytes": 594,
+      "sha256": "7099763a9f60a25406b0338cb36940fc45ac3d1c92af790625f9d9ff8186fba8"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/residency-alias.azurelevel.azmeta.gz",
+      "bytes": 117,
+      "sha256": "3e2c471a3047bd091729bc1cfa068885e503cda3ab41bf34ad52c92d459125c7"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/residency-alias.azurelevel.gz",
+      "bytes": 602,
+      "sha256": "24451ca78150ddfa9126ed23634132e1a0840d40222fdd467d9c798689f7a84d"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/residency-alias.gltf.azmeta.gz",
+      "bytes": 117,
+      "sha256": "998ef38a1eed27ff7218847dcfe22afe41667841473387f236c8a89e318e74e0"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/assets/residency-alias.gltf.gz",
+      "bytes": 1245,
+      "sha256": "bd8722b7291965770c2fc30196b421760aec9ebc308d27fc1980cc3bbab7bc58"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/game/project.azureproject.gz",
+      "bytes": 310,
+      "sha256": "2f818f0036b2d235acd60ef9d57c42423b01d00393fa3df64c3bac1b0fbc039e"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/observations.json",
+      "bytes": 2162,
+      "sha256": "0eba50b48a239ba1d14bc686a193cbbde2fb23255ad78bd5363b59208130e5fa"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/stderr.log.gz",
+      "bytes": 708,
+      "sha256": "e3fce5a0d974ff1f069e9ebac31bd6998407f3b9311cbbf22acbd89c07f62716"
+    },
+    {
+      "path": "red-temporal-valid-gpu/run-148352cb/fogged_scene_inspector/stdout.log.gz",
+      "bytes": 929,
+      "sha256": "be141c71a679549b77d9ff7c6621d33f13fca18586e0ee26beb84adb1d8f92d7"
+    },
+    {
+      "path": "red_cpu.py",
+      "bytes": 2343,
+      "sha256": "59582c57e87b9b4c4dd6811df2f702d36faee05a70c648b38b5bee50e5e2933e"
+    },
+    {
+      "path": "release-build.json",
+      "bytes": 131760,
+      "sha256": "c09a23fc5953099c12d309acd4e4706ecc124b77f9a3045f02e0547f86daafd2"
+    },
+    {
+      "path": "route-debug/diagnostics.jsonl.gz",
+      "bytes": 3606,
+      "sha256": "c7f5b0fdb69c7f08b6657f869af761d9259bb6ced6fc88b2ea46f1cb6ad0b6e8"
+    },
+    {
+      "path": "route-debug/frames/capture_manifest.json.gz",
+      "bytes": 3419,
+      "sha256": "170445fd7592f103b78cdd1fb3679fda24c204191e123e8c2717161fa5a3a048"
+    },
+    {
+      "path": "route-debug/frames/frame_000000.png",
+      "bytes": 919277,
+      "sha256": "59fe3a4d41a9f7f27957a29adcb04589f2f53c0bb878b3d6a4453d8606e5a225"
+    },
+    {
+      "path": "route-debug/frames/frame_000100.png",
+      "bytes": 918806,
+      "sha256": "098efe8c1c27afde30f574f66f6f856e8c812158d653c5feaab4a3a588137d0c"
+    },
+    {
+      "path": "route-debug/frames/frame_000190.png",
+      "bytes": 924599,
+      "sha256": "b2698535130ce396542e43383bc84b7df11be31fdd30fe02a18c9060cd180040"
+    },
+    {
+      "path": "route-debug/frames/frame_000299.png",
+      "bytes": 1026801,
+      "sha256": "5a969b1d834d8536ec47b5d8caa4e1d0c53078cb7b3a6a7d1e5624044fe47a55"
+    },
+    {
+      "path": "route-debug/frames/frame_000360.png",
+      "bytes": 925193,
+      "sha256": "8222c5b64d5e828b93960bcff4be5f97dc77dbbaba74fe46292f428353e5e079"
+    },
+    {
+      "path": "route-debug/frames/frame_000410.png",
+      "bytes": 884161,
+      "sha256": "26493dd648b4362c4abe45307a71679b90644b96be85dab7adb269c00ca3859b"
+    },
+    {
+      "path": "route-debug/frames/frame_000451.png",
+      "bytes": 917101,
+      "sha256": "54f4e7f3a7efdf1e36fb795bea4471e0d11689aab80c9f68348c523e31435b69"
+    },
+    {
+      "path": "route-debug/frames/frame_000539.png",
+      "bytes": 918524,
+      "sha256": "9ba2e0a058db7a747268fa1a029237e36e2976cec517cdd421d9043be6cb1241"
+    },
+    {
+      "path": "route-debug/player.log.gz",
+      "bytes": 3482,
+      "sha256": "f99f4fc80b03e375572097104ef14fa2010790ccf8e04eb846b35021ac6d35bc"
+    },
+    {
+      "path": "route-debug/runtime.json.gz",
+      "bytes": 100819,
+      "sha256": "d0a9884bcd7e416acb48e0564fcc76c486292b24500c677dc0af9d56840547a6"
+    },
+    {
+      "path": "route-debug/summary.json.gz",
+      "bytes": 10287,
+      "sha256": "cb030570b597d4498b4f9a2411d4a8c03ff48609bfcbdc717f332883ec2d3f11"
+    },
+    {
+      "path": "route-release/diagnostics.jsonl.gz",
+      "bytes": 3576,
+      "sha256": "fa098249d99686c5bd5b18c2e241884ecc8924d14d08723b0d22c289590bcd5f"
+    },
+    {
+      "path": "route-release/frames/capture_manifest.json.gz",
+      "bytes": 3415,
+      "sha256": "6de1d8373a73877556e276f3e64bb4e6dd35b682c19db65ec26dafc85cb35da8"
+    },
+    {
+      "path": "route-release/frames/frame_000000.png",
+      "bytes": 919277,
+      "sha256": "59fe3a4d41a9f7f27957a29adcb04589f2f53c0bb878b3d6a4453d8606e5a225"
+    },
+    {
+      "path": "route-release/frames/frame_000100.png",
+      "bytes": 918806,
+      "sha256": "098efe8c1c27afde30f574f66f6f856e8c812158d653c5feaab4a3a588137d0c"
+    },
+    {
+      "path": "route-release/frames/frame_000190.png",
+      "bytes": 924740,
+      "sha256": "24b14540e6c0855ed702d431c68ce75103fe36fbdb5cbe31b64c7680dcfc7bda"
+    },
+    {
+      "path": "route-release/frames/frame_000299.png",
+      "bytes": 1026801,
+      "sha256": "5a969b1d834d8536ec47b5d8caa4e1d0c53078cb7b3a6a7d1e5624044fe47a55"
+    },
+    {
+      "path": "route-release/frames/frame_000360.png",
+      "bytes": 925193,
+      "sha256": "8222c5b64d5e828b93960bcff4be5f97dc77dbbaba74fe46292f428353e5e079"
+    },
+    {
+      "path": "route-release/frames/frame_000410.png",
+      "bytes": 884161,
+      "sha256": "26493dd648b4362c4abe45307a71679b90644b96be85dab7adb269c00ca3859b"
+    },
+    {
+      "path": "route-release/frames/frame_000451.png",
+      "bytes": 917101,
+      "sha256": "54f4e7f3a7efdf1e36fb795bea4471e0d11689aab80c9f68348c523e31435b69"
+    },
+    {
+      "path": "route-release/frames/frame_000539.png",
+      "bytes": 918524,
+      "sha256": "9ba2e0a058db7a747268fa1a029237e36e2976cec517cdd421d9043be6cb1241"
+    },
+    {
+      "path": "route-release/player.log.gz",
+      "bytes": 3458,
+      "sha256": "b89ef689878e1a5af3607c0c58cde6ee0d7c108c78932e4595630d5bb80e4e02"
+    },
+    {
+      "path": "route-release/runtime.json.gz",
+      "bytes": 100783,
+      "sha256": "ac3b932c886ef632374243ad28e46e41decc397aa504cddb13c4ac7498f00bca"
+    },
+    {
+      "path": "route-release/summary.json.gz",
+      "bytes": 10285,
+      "sha256": "e9cb68c951c450e0e7bec102b496d39396e9168f3ecca8e571760174da552211"
+    },
+    {
+      "path": "seal.py",
+      "bytes": 800,
+      "sha256": "4a6eb2fb522fdaf8fb71867ed9294f0bfecbc73f72b07695eed48e9ffdacca47"
+    },
+    {
+      "path": "source/src/runtime/Level.cpp.gz",
+      "bytes": 2329,
+      "sha256": "fa3e83e6990eae9e4731caadc7f819b1ce9576ff7780931c5922577a55104f3d"
+    },
+    {
+      "path": "source/src/scenes/CharacterSceneRenderer.cpp.gz",
+      "bytes": 54549,
+      "sha256": "bc62cf9a809fb0c1b1f13fb3dbe05752e2c27b009e7aa3632ce75844a7a151c2"
+    },
+    {
+      "path": "source/tests/AssetLevelTests.cpp.gz",
+      "bytes": 6549,
+      "sha256": "c1c6b70e1f8ca34b07fae6662b1730faa00e18464a3e14091fba3947d8f434aa"
+    },
+    {
+      "path": "source/tools/test_renderer_residency.py.gz",
+      "bytes": 3193,
+      "sha256": "0bb0c9a7843bd72a3bda24b83fd9da6f061ac4456a760e7d4ef342225917bc5d"
+    },
+    {
+      "path": "source/tools/test_validation_protocol.py.gz",
+      "bytes": 1430,
+      "sha256": "7c13316e18757eef582de880c85015fa0494287817d60f573a44c9018ac8ee70"
+    },
+    {
+      "path": "source-raw/src/runtime/Level.cpp.gz",
+      "bytes": 2342,
+      "sha256": "5000dca71c684a6b838760d8777df3e8eab83e7bc56f7eead0d27153c1a181f6"
+    },
+    {
+      "path": "source-raw/src/scenes/CharacterSceneRenderer.cpp.gz",
+      "bytes": 54742,
+      "sha256": "239b081fe87311718ef4f7be0d4d250c4796927b9b0e9ec055e6521e34e408ea"
+    },
+    {
+      "path": "source-raw/tests/AssetLevelTests.cpp.gz",
+      "bytes": 6566,
+      "sha256": "6a13e578cd66a882e1147c0fd202453bb868e7c494d8c842e8c5e7a5147c9c1a"
+    },
+    {
+      "path": "source-raw/tools/test_renderer_residency.py.gz",
+      "bytes": 3193,
+      "sha256": "0bb0c9a7843bd72a3bda24b83fd9da6f061ac4456a760e7d4ef342225917bc5d"
+    },
+    {
+      "path": "source-raw/tools/test_validation_protocol.py.gz",
+      "bytes": 1430,
+      "sha256": "7c13316e18757eef582de880c85015fa0494287817d60f573a44c9018ac8ee70"
+    },
+    {
+      "path": "stage.py",
+      "bytes": 3472,
+      "sha256": "7992ba7c6def225b5d5d675e5fec22855dc1c1a6fa2977ef800ab05e6fd80871"
+    },
+    {
+      "path": "tool-deadline-fix.json",
+      "bytes": 562,
+      "sha256": "a77ab0e735bfe903e0d48750986b4494b3c0f6b76fcd2d83015a5aa22ffe81a4"
+    },
+    {
+      "path": "update_docs.py",
+      "bytes": 3707,
+      "sha256": "44016ee9a4bb008eddaa086023f033f487136168c1f9f2712708a164bab09f20"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 422,
+      "sha256": "cd2e7ed3dc011e79309ea3bc4618a14741b7c253cd3f314eef0df1446d459f9e"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 5947,
+      "sha256": "a11970cef0b569bdf8f89dd51d10d4f8480a603d08250aced34d499a21788512"
+    },
+    {
+      "path": "verify_behavior.py",
+      "bytes": 3517,
+      "sha256": "4a97cfba125ca4dc96f69cfd5ddba7cc423fc5974a7b91ae8ce18b32a9b3d083"
+    }
+  ]
+}

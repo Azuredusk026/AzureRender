@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_renderer_residency.py",
+        "--player",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-101614-view-fog-reuse-814a54\\public-gpu-green\\release"
+      ],
+      "exitCode": 0,
+      "seconds": 80.36286309998832,
+      "playerSha256": "c630f233cfda22d88a98884358773bf37da6399e3d90d0910a6654cdad20a192",
+      "scriptSha256": "57d0c9fd2f7f4d34d1de1059920acf1b3e2609920481f681a93bc17491cda610",
+      "protocolHelperSha256": "8ae937f27fa162e067df861dde33b7ea2d2041cc77616acc8ab6afbe2f689480",
+      "status": "passed",
+      "workflows": 4,
+      "transitions": 32,
+      "initialRestartEntries": {
+        "captured_fog_scene_inspector": 1,
+        "fogged_scene_inspector": 1,
+        "platformer": 1,
+        "scene_inspector": 1
+      }
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\test_renderer_residency.py",
+        "--player",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe",
+        "--output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-101614-view-fog-reuse-814a54\\public-gpu-green\\debug"
+      ],
+      "exitCode": 0,
+      "seconds": 73.42614569998113,
+      "playerSha256": "bc46041b969feb34aeebbdf8b5ce1f4bd26b87a2f75920d79d14b908b7914437",
+      "scriptSha256": "57d0c9fd2f7f4d34d1de1059920acf1b3e2609920481f681a93bc17491cda610",
+      "protocolHelperSha256": "8ae937f27fa162e067df861dde33b7ea2d2041cc77616acc8ab6afbe2f689480",
+      "status": "passed",
+      "workflows": 4,
+      "transitions": 32,
+      "initialRestartEntries": {
+        "captured_fog_scene_inspector": 1,
+        "fogged_scene_inspector": 1,
+        "platformer": 1,
+        "scene_inspector": 1
+      }
+    }
+  ]
+}
