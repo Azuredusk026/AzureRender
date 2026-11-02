@@ -973,6 +973,23 @@
       "retention": "所属画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/material-coverage-mips.md"
+    },
+    {
+      "path": "runs/20261103-002134-joint-visual-state-c58ad8",
+      "pathBase": "build",
+      "purpose": "角色展示站位、头发对象阴影与场景反射单变量核验。",
+      "retention": "所属画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/full-world-foreground.azureproject",
+      "evidence": "docs/acceptance/nr/joint-visual-state.md"
+    },
+    {
+      "path": "runs/20261102-022046-user-scene-reference-36dcc3",
+      "pathBase": "build",
+      "purpose": "用户场景参考的画幅、对齐及压缩诊断。",
+      "retention": "所属画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/recovery/full-scene-visual.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
