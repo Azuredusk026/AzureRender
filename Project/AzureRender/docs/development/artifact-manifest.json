@@ -944,7 +944,8 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/native-cloth-inputs.md",
       "compositionEvidence": "docs/acceptance/nr/npr-view-ramp-composition.md",
-      "runtimeEvidence": "docs/acceptance/nr/npr-ramp-runtime.md"
+      "runtimeEvidence": "docs/acceptance/nr/npr-ramp-runtime.md",
+      "portraitEvidence": "docs/acceptance/nr/portrait-input-recovery.md"
     },
     {
       "path": "runs/20261101-120125-character-environment-reception-fa70a7",
@@ -954,6 +955,14 @@
       "pinMarker": ".keep",
       "primaryProject": "candidate-project/playable.azureproject",
       "evidence": "docs/acceptance/nr/material-lighting-reception.md"
+    },
+    {
+      "path": "runs/20261102-211519-native-hair-coverage-293d4c",
+      "pathBase": "build",
+      "purpose": "独立裁剪图的来源、硬件采样和公共机制核验。",
+      "retention": "所属画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/plans/2026-11-02-independent-coverage.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
