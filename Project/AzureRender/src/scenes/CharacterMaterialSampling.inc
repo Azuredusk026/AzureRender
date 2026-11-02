@@ -2,7 +2,9 @@
 void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
     lightingOrdinaryNeeded_=lightingBlendNeeded_=lightingFallbackNeeded_=lightingIntegralNeeded_=false;
     lightingClassesNeeded_={};
+    independentCoverageNeeded_=false;
     const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
+        independentCoverageNeeded_|=material.coverageTexture.present;
         if(!extendedMaterialLighting(material))continue;
         const bool integral=(material.materialFeatures&MaterialFeatureHairPixelIntegral)!=0;
         if(integral&&rasterizationSamples_!=VK_SAMPLE_COUNT_4_BIT)lightingIntegralNeeded_=true;
@@ -27,6 +29,8 @@ void CharacterSceneRenderer::destroyMaterialShaderModule(VkShaderModule module) 
         [&](const auto& variant){return variant.scene==module;});
     if(it!=materialShaderVariants_.end()){
         if(it->lighting)rhi_->destroyShaderModule(it->lighting);
+        if(it->coverage)rhi_->destroyShaderModule(it->coverage);
+        if(it->lightingCoverage)rhi_->destroyShaderModule(it->lightingCoverage);
         materialShaderVariants_.erase(it);
     }
     rhi_->destroyShaderModule(module);
@@ -41,30 +45,44 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
         if(value.id==0&&value.value)needed=lightingOrdinaryNeeded_;
         if(value.id==1)needed=value.value<lightingClassesNeeded_.size()&&lightingClassesNeeded_[value.value];
     }
-    if(it==materialShaderVariants_.end()||!needed)return rhi_->createGraphicsPipeline(desc);
-    if(!it->lighting)it->lighting=rhi_->createShaderModule(readBinaryFile(
-        sceneFragmentVariant(it->path,false,false,false,true)));
+    if(it==materialShaderVariants_.end()||(!needed&&!independentCoverageNeeded_))return rhi_->createGraphicsPipeline(desc);
     const auto scene=rhi_->createGraphicsPipeline(desc);
-    VkPipeline lighting=VK_NULL_HANDLE;
+    std::array<VkPipeline,3> variants{};
     try{
-        auto extended=desc;extended.fragmentShader=it->lighting;
-        lighting=rhi_->createGraphicsPipeline(extended);
-        materialLightingPipelines_.emplace_back(scene,lighting);
-    }catch(...){if(lighting)rhi_->destroyPipeline(lighting);rhi_->destroyPipeline(scene);throw;}
+        for(unsigned policy=1;policy<4;++policy){
+            if((policy&1U)&&!needed)continue;
+            if((policy&2U)&&!independentCoverageNeeded_)continue;
+            auto& module=policy==1?it->lighting:policy==2?it->coverage:it->lightingCoverage;
+            if(!module)module=rhi_->createShaderModule(readBinaryFile(
+                sceneFragmentVariant(it->path,false,false,false,(policy&1U)!=0,(policy&2U)!=0)));
+            auto extended=desc;extended.fragmentShader=module;
+            variants[policy-1]=rhi_->createGraphicsPipeline(extended);
+        }
+        materialLightingPipelines_.emplace_back(scene,variants);
+    }catch(...){for(auto pipeline:variants)if(pipeline)rhi_->destroyPipeline(pipeline);rhi_->destroyPipeline(scene);throw;}
     return scene;
 }
+VkPipeline CharacterSceneRenderer::createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc& desc,const std::string& path) {
+    const auto module=rhi_->createShaderModule(readBinaryFile(sceneFragmentVariant(path,false,false,false,false,true)));
+    try{auto variant=desc;variant.fragmentShader=module;const auto pipeline=rhi_->createGraphicsPipeline(variant);
+        rhi_->destroyShaderModule(module);return pipeline;
+    }catch(...){rhi_->destroyShaderModule(module);throw;}
+}
 VkPipeline CharacterSceneRenderer::materialLightingPipeline(const AssetMaterial& material,VkPipeline scene) const {
-    if(!extendedMaterialLighting(material))return scene;
+    const auto policy=(extendedMaterialLighting(material)?1U:0U)|(material.coverageTexture.present?2U:0U);
+    if(!policy)return scene;
     const auto it=std::find_if(materialLightingPipelines_.begin(),materialLightingPipelines_.end(),
         [&](const auto& variant){return variant.first==scene;});
-    if(it==materialLightingPipelines_.end())throw std::logic_error("Explicit material lighting pipeline is unavailable");
-    return it->second;
+    if(it==materialLightingPipelines_.end()||!it->second[policy-1])throw std::logic_error("Explicit material lighting/coverage pipeline is unavailable");
+    return it->second[policy-1];
 }
 void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
     if(rhi_){
-        for(const auto& variant:materialLightingPipelines_)rhi_->destroyPipeline(variant.second);
+        for(const auto& variant:materialLightingPipelines_)for(auto pipeline:variant.second)if(pipeline)rhi_->destroyPipeline(pipeline);
         for(const auto& variant:materialShaderVariants_){
             if(variant.lighting)rhi_->destroyShaderModule(variant.lighting);
+            if(variant.coverage)rhi_->destroyShaderModule(variant.coverage);
+            if(variant.lightingCoverage)rhi_->destroyShaderModule(variant.lightingCoverage);
             rhi_->destroyShaderModule(variant.scene);
         }
     }

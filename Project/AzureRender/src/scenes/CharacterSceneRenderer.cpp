@@ -288,6 +288,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     caps.supportsMaterialDisplayTransform=true;
     caps.supportsMaterialLightingReception=true;
     caps.supportsNprRampComposition=true;
+    caps.supportsMaterialCoverage=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -1680,6 +1681,20 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"materialCoverageSources\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];if(!material.coverageTexture.present)continue;
+                     values.push_back({{"materialIndex",base+index},{"name",material.name},
+                         {"channel",material.coverageTexture.channel==AssetMaterial::CoverageTexture::Channel::Red?"red":"alpha"},
+                         {"width",material.metallicRoughnessWidth},{"height",material.metallicRoughnessHeight},
+                         {"authoredMipLevels",material.authoredMipLevels[2]},{"sampler",material.textureSettings[2].describe()}});
+                 }
+             };
+             append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
          << "  \"nprRampCompositions\": " << [&] {
              nlohmann::json values=nlohmann::json::array();
              const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
@@ -2731,7 +2746,8 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
                     if(run.opacity==0)return;
                     const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(instance).model,
                         snapshot.gizmo,&primitive-mesh.primitives.data());
-                    commands.bindPipeline(m.doubleSided?outlineMaskDoubleSidedPipeline_
+                    commands.bindPipeline(m.coverageTexture.present?outlineMaskCoveragePipelines_[m.doubleSided?2:mirrored?1:0]
+                        :m.doubleSided?outlineMaskDoubleSidedPipeline_
                         :mirrored?outlineMaskMirroredPipeline_:outlineMaskPipeline_);
                     const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
                     if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
@@ -2809,7 +2825,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
             const auto classPipeline=materialClassPipeline(m,mirrored,true);
             const auto depthPipeline=prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
-                :simpleDepth?snapshotDepthOnlyPipelines_[m.doubleSided?2:mirrored?1:0]
+                :simpleDepth?(m.coverageTexture.present?snapshotCoveragePipelines_:snapshotDepthOnlyPipelines_)[m.doubleSided?2:mirrored?1:0]
                 :ordinaryOpaqueMaterial(m)?ordinaryOpaqueSnapshotPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :classPipeline?classPipeline
@@ -3467,6 +3483,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
                 desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
                 snapshotDepthOnlyPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+                if(independentCoverageNeeded_)snapshotCoveragePipelines_[facing]=createCoverageGraphicsPipeline(desc,
+                    shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv",
+                        rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false));
                 // Only prefill is biased; strict LESS color keeps coplanar draw order.
                 auto prefill=desc;prefill.colorWriteMasks={0,0};prefill.depthBias=true;
                 prefill.depthBiasConstant=1.F;prefill.depthBiasSlope=0.F;
@@ -3513,19 +3532,30 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
         const auto maskModule=rhi_->createShaderModule(mainFragment((bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
-        const auto maskVertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv")));
-        auto maskDesc=materialDesc;maskDesc.fragmentShader=maskModule;maskDesc.renderPass=outlineMaskPass_;
-        maskDesc.vertexShader=maskVertex;
-        maskDesc.vertexAttributes.pop_back();maskDesc.vertexBindings.resize(1);
-        maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;
-        maskDesc.colorWriteMasks.assign(1,0xf);
-        maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
-        maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
-        outlineMaskPipeline_=rhi_->createGraphicsPipeline(maskDesc);
-        maskDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
-        outlineMaskMirroredPipeline_=rhi_->createGraphicsPipeline(maskDesc);
-        maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;maskDesc.cullMode=VK_CULL_MODE_NONE;
-        outlineMaskDoubleSidedPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+        VkShaderModule maskVertex=VK_NULL_HANDLE;
+        try {
+            maskVertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv")));
+            auto maskDesc=materialDesc;maskDesc.fragmentShader=maskModule;maskDesc.renderPass=outlineMaskPass_;
+            maskDesc.vertexShader=maskVertex;
+            maskDesc.vertexAttributes.pop_back();maskDesc.vertexBindings.resize(1);
+            maskDesc.colorAttachmentCount=1;maskDesc.depthTest=false;maskDesc.depthWrite=false;maskDesc.alphaBlend=false;
+            maskDesc.colorWriteMasks.assign(1,0xf);
+            maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+            maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
+            outlineMaskPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+            const auto coverageMaskPath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
+            if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[0]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
+            maskDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
+            outlineMaskMirroredPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+            if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[1]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
+            maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;maskDesc.cullMode=VK_CULL_MODE_NONE;
+            outlineMaskDoubleSidedPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+            if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[2]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
+        } catch (...) {
+            if(maskVertex)rhi_->destroyShaderModule(maskVertex);
+            rhi_->destroyShaderModule(maskModule);
+            throw;
+        }
         rhi_->destroyShaderModule(maskModule);rhi_->destroyShaderModule(maskVertex);
 
         rhi::GraphicsPipelineDesc outlineDesc = materialDesc;
@@ -3536,8 +3566,11 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         outlineDesc.alphaBlend = false;
         outlineDesc.depthWrite = false;
         outlinePipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
+        const auto coverageOutlinePath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_view_scaled_bindless.frag.spv":"/outline_view_scaled.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
+        if(independentCoverageNeeded_&&outlineProjectionEnabled_)outlineCoveragePipelines_[0]=createCoverageGraphicsPipeline(outlineDesc,coverageOutlinePath);
         outlineDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
         outlineMirroredPipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
+        if(independentCoverageNeeded_&&outlineProjectionEnabled_)outlineCoveragePipelines_[1]=createCoverageGraphicsPipeline(outlineDesc,coverageOutlinePath);
         if(outlineProjectionEnabled_) {
             const auto depthModule=rhi_->createShaderModule(mainFragment(
                 (bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv")));
@@ -3548,8 +3581,11 @@ void CharacterSceneRenderer::createGraphicsPipeline(
                 shell.depthTest=true;shell.depthWrite=true;shell.depthCompare=VK_COMPARE_OP_LESS;
                 shell.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
                 outlineDepthPipeline_=rhi_->createGraphicsPipeline(shell);
+                const auto coverageDepthPath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
+                if(independentCoverageNeeded_)outlineDepthCoveragePipelines_[0]=createCoverageGraphicsPipeline(shell,coverageDepthPath);
                 shell.frontFace=VK_FRONT_FACE_CLOCKWISE;
                 outlineDepthMirroredPipeline_=rhi_->createGraphicsPipeline(shell);
+                if(independentCoverageNeeded_)outlineDepthCoveragePipelines_[1]=createCoverageGraphicsPipeline(shell,coverageDepthPath);
             }catch(...){rhi_->destroyShaderModule(depthModule);throw;}
             rhi_->destroyShaderModule(depthModule);
         }
@@ -3581,11 +3617,15 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         shadowDesc.colorWriteMasks.clear();
         shadowDesc.renderPass = context.shadowRenderPass;
         shadowPipeline_ = rhi_->createGraphicsPipeline(shadowDesc);
+        if(independentCoverageNeeded_)shadowCoveragePipeline_=createCoverageGraphicsPipeline(shadowDesc,
+            shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
         if(objectShadowPrepared_){
             shadowDesc.renderPass=objectShadowAtlas_->renderPass();
             shadowDesc.depthBiasConstant=8.F;shadowDesc.depthBiasSlope=0.F;
             shadowDesc.depthBiasExact=rhi_->supportsExactDepthBias();
             objectShadowPipeline_=rhi_->createGraphicsPipeline(shadowDesc);
+            if(independentCoverageNeeded_)objectShadowCoveragePipeline_=createCoverageGraphicsPipeline(shadowDesc,
+                shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
         }
     } catch (...) {
         rhi_->destroyShaderModule(shadowFragmentModule);
@@ -3641,6 +3681,10 @@ void CharacterSceneRenderer::destroyResources() {
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
+             &shadowCoveragePipeline_,&objectShadowCoveragePipeline_,
+             &outlineMaskCoveragePipelines_[0],&outlineMaskCoveragePipelines_[1],&outlineMaskCoveragePipelines_[2],
+             &outlineCoveragePipelines_[0],&outlineCoveragePipelines_[1],&outlineDepthCoveragePipelines_[0],&outlineDepthCoveragePipelines_[1],
+             &snapshotCoveragePipelines_[0],&snapshotCoveragePipelines_[1],&snapshotCoveragePipelines_[2],
              &overlayDepthPipelines_[0],&overlayDepthPipelines_[1],&overlayDepthPipelines_[2],&overlayDepthPipelines_[3],&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
@@ -3794,6 +3838,10 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
+             &shadowCoveragePipeline_,&objectShadowCoveragePipeline_,
+             &outlineMaskCoveragePipelines_[0],&outlineMaskCoveragePipelines_[1],&outlineMaskCoveragePipelines_[2],
+             &outlineCoveragePipelines_[0],&outlineCoveragePipelines_[1],&outlineDepthCoveragePipelines_[0],&outlineDepthCoveragePipelines_[1],
+             &snapshotCoveragePipelines_[0],&snapshotCoveragePipelines_[1],&snapshotCoveragePipelines_[2],
              &overlayDepthPipelines_[0],&overlayDepthPipelines_[1],&overlayDepthPipelines_[2],&overlayDepthPipelines_[3],&snapshotDepthOnlyPipelines_[0],&snapshotDepthOnlyPipelines_[1],&snapshotDepthOnlyPipelines_[2],&snapshotPrefillPipelines_[0],&snapshotPrefillPipelines_[1],&snapshotPrefillPipelines_[2],&mainPrefillPipelines_[0],&mainPrefillPipelines_[1],&mainPrefillPipelines_[2],&outlineMaskPipeline_,
              &outlineMaskMirroredPipeline_,&outlineMaskDoubleSidedPipeline_}) {
         if (*pipeline != VK_NULL_HANDLE) {
@@ -4256,6 +4304,11 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
             for (const AssetPrimitive& primitive : mesh.primitives) {
                 const AssetMaterial& material =
                     mesh.materials[primitive.materialIndex];
+                if(independentCoverageNeeded_){commands.bindPipeline(material.coverageTexture.present
+                    ?(objectPage?objectShadowCoveragePipeline_:shadowCoveragePipeline_)
+                    :(objectPage?objectShadowPipeline_:shadowPipeline_));
+                    if(context.submissionCounters)++context.submissionCounters->pipelineBinds;
+                }
                 const bool explicitCoverage=(material.materialFeatures&MaterialFeatureShadowCoverageMask)!=0;
                 if (material.showcasePlatform > 0.5F
                     || (!explicitCoverage&&(material.materialClass == AssetMaterialClass::Overlay

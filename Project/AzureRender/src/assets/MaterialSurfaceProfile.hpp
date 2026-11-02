@@ -62,6 +62,7 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 }
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
+    validateMaterialCoverage(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;
     const bool ordinary=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric

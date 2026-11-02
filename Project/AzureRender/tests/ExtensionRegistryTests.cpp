@@ -106,10 +106,10 @@ int main() {
     // Scene renderer registry reuses the same dependency/version contract and
     // the default diagnostic view lookup comes from capabilities.
     azurerender::SceneRendererRegistry sceneRegistry;
-    if(sceneRegistry.kApiVersion!=8||azurerender::SceneRendererCapabilities::kApiVersion!=8){
-        std::cerr<<"NPR ramp composition requires scene renderer API version eight\n";return 1;
+    if(sceneRegistry.kApiVersion!=9||azurerender::SceneRendererCapabilities::kApiVersion!=9){
+        std::cerr<<"Independent material coverage requires scene renderer API version nine\n";return 1;
     }
-    for(const auto legacyApi:{1U,2U,3U,4U,5U,6U,7U}){
+    for(const auto legacyApi:{1U,2U,3U,4U,5U,6U,7U,8U}){
         bool oldSceneApiRejected=false;
         try{sceneRegistry.registerFactory({"scene.old",legacyApi,{"render"},{}},[]{return std::make_unique<TestSceneRenderer>();});}
         catch(const std::runtime_error&){oldSceneApiRejected=true;}

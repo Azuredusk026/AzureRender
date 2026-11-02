@@ -62,6 +62,7 @@ UV、几何基底及位置采用片元内梯度展开。
 当前布局版本为二十一。
 环境选择及主光阴影来源见[材质照明接收](material-lighting-reception.md)。
 `rows[19].w` 保存公共出射辐亮度倍率。
+
 该倍率的输入及消费见[材质辐亮度](material-radiance.md)。
 
 该特征复用现有资源、描述符及材质文档入口。
@@ -172,6 +173,7 @@ R 控制各向异性轴，G 控制主叶，A 控制次叶。
 其余字段必须出现，未知字段和版本在加载时拒绝。
 偏移使用有符号值，源值转换式为 `2 * value - 1`。
 `objectBasis` 为列主序的正交单位基。
+
 对象基随实例和图元变换进入世界空间。
 
 `surfaceResponse` 默认为 `layered`。
@@ -289,6 +291,7 @@ glTF 的 `alphaMode` 必须为 `BLEND`。
 法线附件和深度保持接收表面的值。
 覆盖层参与深度测试，阴影绘制跳过该模式。
 深度比较为 `LESS_OR_EQUAL`，支持同面滤片。
+
 透明实例及图元保持内容规定的提交顺序。
 
 特征表允许 `overlay` 与 `neutral-fallback` 配合使用。
@@ -367,6 +370,7 @@ glTF 的 `alphaMode` 必须为 `BLEND`。
 `AzureTools.NativeCharacter` 验证原生材质转换。
 `AzureRender.OutlineCoverageRecording` 验证瓦片归属与剔除。
 `AzureEngine.SilhouetteCoverageGpu` 验证内部覆盖与实例重叠。
+
 场景灯光图像验证使用 `test_scene_character_gpu.py`。
 测试证据按程序与着色器指纹关联到验收批次。
 
@@ -381,6 +385,10 @@ glTF 的 `alphaMode` 必须为 `BLEND`。
 特化常量一记录材质类别，动态特征位保持帧级语义。
 每个类别有四种朝向配置，两类通道分别持有资源。
 每类通道的类别管线上限为四十份。
+
+该计数对应基础类别管线。
+显式照明及[独立裁剪](material-coverage.md)选择附加管线。
+附加资源按场景材质集合的策略建立并回收。
 
 主颜色数量由 `materialClassPipelineCount` 记录。
 未准备的类别采用动态材质管线。

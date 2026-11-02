@@ -6,6 +6,7 @@
 #include "assets/MaterialRadiance.hpp"
 #include "assets/MaterialDisplayTransform.hpp"
 #include "assets/MaterialLighting.hpp"
+#include "assets/MaterialCoverage.hpp"
 #include "animation/AnimationCurve.hpp"
 #include "animation/AnimationClipSample.hpp"
 #include "assets/image/ImageCodec.hpp"
@@ -73,6 +74,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureSqrtAlphaShadow = 1U << 22U,
     MaterialFeatureHairPixelIntegral = 1U << 23U,
     MaterialFeatureUnlitTextureLayers = 1U << 24U,
+    MaterialFeatureIndependentCoverage = 1U << 25U,
     MaterialFeatureShadowCoverageMask = MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow,
 };
 
@@ -131,6 +133,8 @@ struct AssetMaterial {
     azurerender::MaterialDisplayTransform displayTransform=azurerender::MaterialDisplayTransform::Scene;
     azurerender::MaterialEnvironmentLighting environmentLighting;
     azurerender::MaterialMainLightShadow mainLightShadow=azurerender::MaterialMainLightShadow::Scene;
+    using CoverageTexture=azurerender::MaterialCoverageTexture;
+    CoverageTexture coverageTexture;
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;
@@ -271,6 +275,19 @@ struct AssetMaterial {
     float alphaCutoff = 0.5F;
     bool doubleSided = false;
 };
+
+inline void validateMaterialCoverage(const AssetMaterial& material) {
+    azurerender::validateMaterialCoverageTexture(material.coverageTexture,material.materialProfileVersion,material.alphaMode==AssetAlphaMode::Mask,
+        material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric||material.materialClass==AssetMaterialClass::Hair,
+        material.unlitTextureLayers.present||material.eyeSurface.present||material.faceSdf.present
+        ||material.specularInput.source==AssetMaterial::SpecularInput::Source::MetallicRoughnessAlpha
+        ||material.nprDiffuse.baseAo==AssetMaterial::NprDiffuse::BaseAo::MetallicRoughnessRed);
+    if(material.coverageTexture.present!=((material.materialFeatures&MaterialFeatureIndependentCoverage)!=0))
+        throw std::invalid_argument("coverageTexture feature ownership is inconsistent");
+    if(material.coverageTexture.present&&(!material.metallicRoughnessWidth||!material.metallicRoughnessHeight
+        ||material.textureSettings[2].colorSpace!="linear"))
+        throw std::invalid_argument("coverageTexture requires a complete linear image");
+}
 
 struct AssetPrimitive {
     std::uint32_t firstIndex = 0;

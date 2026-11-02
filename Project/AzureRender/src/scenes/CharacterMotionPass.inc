@@ -80,9 +80,11 @@ void CharacterSceneRenderer::prepareMotion(){
     MotionVectorInputs inputs;inputs.instances=&instanceBuffers_.at(currentFrame_);inputs.joints=&jointBuffers_.at(currentFrame_);
     inputs.weights=&morphWeightBuffers_.at(currentFrame_);inputs.targets=&morphTargetBuffer_;
     inputs.outline=outlineProjectionEnabled_?&outlineProjection_->buffer():inputs.instances;
-    const auto addMaterials=[&](const std::vector<GpuMaterial>& materials){for(const auto& material:materials)inputs.colors.push_back(material.baseColor);};
-    addMaterials(gpuMaterials_);for(const auto& resource:additionalResources_)addMaterials(resource->gpuMaterials);
-    if(outlineProjectionEnabled_)inputs.masks=outlineProjection_->masks();else inputs.masks=inputs.colors;
+    const auto addMaterials=[&](const LoadedAsset& asset,const std::vector<GpuMaterial>& materials){
+        for(std::size_t index=0;index<materials.size();++index){inputs.colors.push_back(asset.materials.at(index).coverageTexture.present
+            ?materials[index].metallicRoughness:materials[index].baseColor);inputs.masks.push_back(materials[index].baseColor);}};
+    addMaterials(asset_,gpuMaterials_);for(const auto& resource:additionalResources_)addMaterials(resource->asset,resource->gpuMaterials);
+    if(outlineProjectionEnabled_)inputs.masks=outlineProjection_->masks();
     inputs.coverage={outlineMasks_[currentFrame_].view,outlineMasks_[currentFrame_].sampler};
     if(!inputs.coverage.view||!inputs.coverage.sampler)inputs.coverage=inputs.colors.front();
     motionPass_->prepare(static_cast<unsigned>(currentFrame_),packed,inputs);

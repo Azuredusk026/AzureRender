@@ -253,6 +253,29 @@
     "sceneRefraction": {
       "type": "object",
       "description": "Typed fields and ownership are validated by the production material interpreter."
+    },
+    "coverageTexture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "texture"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "texture": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "channel": {
+          "enum": [
+            "red",
+            "alpha"
+          ]
+        }
+      }
     }
   },
   "allOf": [

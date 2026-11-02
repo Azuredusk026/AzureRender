@@ -26,6 +26,8 @@ int main(){
     material.nprDiffuse.present=false;
     if(sceneFragmentVariant("mesh.frag.spv",true,true,true,true)
         !="mesh_samples_clipmap_field_lighting.frag.spv")return 27;
+    if(sceneFragmentVariant("mesh.frag.spv",true,true,true,true,true)
+        !="mesh_samples_clipmap_field_lighting_coverage.frag.spv")return 35;
     if(!ordinaryOpaqueMaterial(material))return 1;
     material.materialFeatures=0xffffffffU;
     if(ordinaryOpaqueMaterial(material))return 2;

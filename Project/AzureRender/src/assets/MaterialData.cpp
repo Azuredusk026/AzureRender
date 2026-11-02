@@ -105,6 +105,8 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
     AssetMaterial result=parameterOverride?*source:AssetMaterial{};if(!parameterOverride){result.name=typeId;result.materialProfileExplicit=true;}
     if(parameterOverride&&result.unlitTextureLayers.present)
         throw std::invalid_argument("Unlit texture layers require a complete profile document");
+    if(parameterOverride&&result.coverageTexture.present&&textures.contains("metallicRoughness"))
+        throw std::invalid_argument("coverageTexture owns the metallicRoughness image slot during parameter overrides");
     if(parameterOverride&&(result.materialClass!=AssetMaterialClass::Generic
         ||result.specularInput.present||result.nprDiffuse.present||result.eyeSurface.present
         ||result.projectedHairRamp.present||result.faceSdf.present||result.outlineSurface.present
@@ -207,6 +209,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.materialClass!=replacement.materialClass,"class");
         lost(source.faceSdf.present&&!replacement.faceSdf.present,"faceSdf");
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
+        lost(source.coverageTexture.present&&!replacement.coverageTexture.present,"coverageTexture");
         lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
         lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
         lost(source.unlitTextureLayers.present&&!replacement.unlitTextureLayers.present,"surface.layers");

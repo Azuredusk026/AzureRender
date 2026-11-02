@@ -36,13 +36,14 @@ inline bool extendedMaterialLighting(const AssetMaterial& material) noexcept {
         ||material.mainLightShadow!=MaterialMainLightShadow::Scene
         ||(material.nprDiffuse.present&&material.nprDiffuse.rampComposition!=NprRampComposition::MaskVisibility);
 }
-inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false,bool lighting=false){
+inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false,bool lighting=false,bool coverage=false){
     auto at=file.rfind(".frag.spv");
     if(at==std::string::npos||at+9!=file.size())throw std::invalid_argument("Expected a fragment SPIR-V program");
     if(multisampled){file.insert(at,"_samples");at+=8;}
     if(clipmap){file.insert(at,"_clipmap");at+=8;}
     if(field){file.insert(at,"_field");at+=6;}
-    if(lighting)file.insert(at,"_lighting");
+    if(lighting){file.insert(at,"_lighting");at+=9;}
+    if(coverage)file.insert(at,"_coverage");
     return file;
 }
 }

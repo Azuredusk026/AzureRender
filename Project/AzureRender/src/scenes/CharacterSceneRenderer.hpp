@@ -98,14 +98,19 @@ private:
     VkShaderModule createMaterialShaderModule(const std::string&);
     void destroyMaterialShaderModule(VkShaderModule);
     VkPipeline createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
+    VkPipeline createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc&,const std::string&);
     VkPipeline materialLightingPipeline(const AssetMaterial&,VkPipeline) const;
     void destroyMaterialLightingPipelines() noexcept;
     struct MaterialShaderVariant {
         VkShaderModule scene=VK_NULL_HANDLE,lighting=VK_NULL_HANDLE;
         std::string path;
+        VkShaderModule coverage=VK_NULL_HANDLE,lightingCoverage=VK_NULL_HANDLE;
     };
     std::vector<MaterialShaderVariant> materialShaderVariants_;
-    std::vector<std::pair<VkPipeline,VkPipeline>> materialLightingPipelines_;
+    std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialLightingPipelines_;
+    bool independentCoverageNeeded_=false;
+    std::array<VkPipeline,3> outlineMaskCoveragePipelines_{};
+    std::array<VkPipeline,2> outlineCoveragePipelines_{},outlineDepthCoveragePipelines_{};
     bool lightingOrdinaryNeeded_=false,lightingBlendNeeded_=false;
     bool lightingFallbackNeeded_=false,lightingIntegralNeeded_=false;
     std::array<VkPipeline,4> ordinaryOpaquePipelines_{};
@@ -224,6 +229,7 @@ private:
     std::array<VkFramebuffer,kMaxFramesInFlight> overlayDepthFramebuffers_{};
     VkRenderPass overlayDepthPass_=VK_NULL_HANDLE;
     std::array<VkPipeline,3> snapshotDepthOnlyPipelines_{};
+    std::array<VkPipeline,3> snapshotCoveragePipelines_{};
     std::array<VkPipeline,3> snapshotPrefillPipelines_{};
     std::array<VkPipeline,3> mainPrefillPipelines_{};
     std::array<VkPipeline,4> overlayDepthPipelines_{};
@@ -472,6 +478,8 @@ private:
     VkPipeline outlineMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;
     VkPipeline shadowPipeline_ = VK_NULL_HANDLE;
+    VkPipeline shadowCoveragePipeline_ = VK_NULL_HANDLE;
+    VkPipeline objectShadowCoveragePipeline_ = VK_NULL_HANDLE;
     VkPipeline objectShadowPipeline_ = VK_NULL_HANDLE;
 
     // Per-frame state.

@@ -40,7 +40,9 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
             if(!eligible(material))continue;
             const auto primitiveIndex=static_cast<std::size_t>(&primitive-mesh.primitives.data());
             const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(first).model,snapshot.gizmo,primitiveIndex);
-            commands.bindPipeline(depthShell?(mirrored?outlineDepthMirroredPipeline_:outlineDepthPipeline_)
+            commands.bindPipeline(material.coverageTexture.present&&outlineProjectionEnabled_
+                ?(depthShell?outlineDepthCoveragePipelines_:outlineCoveragePipelines_)[mirrored?1:0]
+                :depthShell?(mirrored?outlineDepthMirroredPipeline_:outlineDepthPipeline_)
                 :(mirrored?outlineMirroredPipeline_:outlinePipeline_));
             if(counters)++counters->pipelineBinds;
             const auto identity=static_cast<std::uint32_t>(materialBase+primitive.materialIndex);

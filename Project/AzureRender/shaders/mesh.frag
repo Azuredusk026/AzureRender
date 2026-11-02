@@ -678,8 +678,10 @@ void main() {
 #else
     vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
 #endif
+#if !defined(AZURE_INDEPENDENT_COVERAGE)
     if(AZURE_ALPHA_MODE==1&&(AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
         baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
+#endif
     if(AZURE_ALPHA_MODE==2&&(AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
 #if defined(AZURE_GEOMETRY_SAMPLES)
         baseColor.a=azureTemporalMaskAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx,alphaUvDy);
@@ -738,7 +740,20 @@ void main() {
         baseColor.rgb += vec3(0.34, 0.105, 0.012)
             * signalRing * ticks * platformMask;
     }
+#if defined(AZURE_INDEPENDENT_COVERAGE)
+    // Coverage has its own dimensions, mip chain and sampler. Base alpha stays
+    // available to material color calculations independently of the cutout.
+#if defined(AZURE_GEOMETRY_SAMPLES)
+    float coverageAlpha=textureGrad(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate,alphaUvDx*.25,alphaUvDy*.25).a;
+#else
+    float coverageAlpha=texture(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate).a;
+#endif
+    if((AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
+        coverageAlpha=azureTemporalMaskAlpha(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate,alphaUvDx,alphaUvDy);
+    if (AZURE_ALPHA_MODE == 1 && coverageAlpha < material.alphaCutoff) {
+#else
     if (AZURE_ALPHA_MODE == 1 && baseColor.a < material.alphaCutoff) {
+#endif
         discard;
     }
 

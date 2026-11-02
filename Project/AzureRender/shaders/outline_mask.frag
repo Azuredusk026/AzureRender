@@ -10,6 +10,15 @@ layout(binding=1) uniform sampler2D baseColor;
 layout(push_constant) uniform Material { float cutoff; int alphaMode; layout(offset=116) uint features; } material;
 #define BASE baseColor
 #endif
+#if defined(AZURE_INDEPENDENT_COVERAGE)
+#undef BASE
+#if defined(AZURE_BINDLESS)
+#define BASE textures[nonuniformEXT(material.textureBase+2u)]
+#else
+layout(binding=3) uniform sampler2D independentCoverage;
+#define BASE independentCoverage
+#endif
+#endif
 #include "material_sampling.glsl"
 #include "fragment_sampling.glsl"
 layout(location=2) AZURE_SAMPLE in vec2 textureCoordinate;

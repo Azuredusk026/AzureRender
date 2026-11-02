@@ -202,7 +202,7 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
             if(profile.contains("environmentLighting")) {
                 const auto& value=profile.at("environmentLighting");
@@ -1330,6 +1330,7 @@ AssetMaterial loadMaterial(
     int projectedHairLineImage=-1;
     int shadowColorLutImage=-1;
     int unlitCoverageImage=-1;
+    int independentCoverageTexture=-1;
     std::array<double, 4> factor{1.0, 1.0, 1.0, 1.0};
     if (material != nullptr) {
         loadMaterialProfile(*material, result);
@@ -1681,6 +1682,32 @@ AssetMaterial loadMaterial(
         }
         loadUnlitSurface(*material,model,result,baseColorImage,styleMaskImage,unlitCoverageImage,specularEmissiveImage);
         loadMaterialComposite(*material,result);
+        if(!material->extras_json_string.empty()) {
+            const auto extras=nlohmann::json::parse(material->extras_json_string);
+            if(extras.contains("azureRenderMaterial")&&extras.at("azureRenderMaterial").contains("coverageTexture")) {
+                const auto& value=extras.at("azureRenderMaterial").at("coverageTexture");
+                if(!value.is_object()||!value.contains("schemaVersion")||!value.at("schemaVersion").is_number_integer()
+                    ||value.at("schemaVersion")!=1||!value.contains("texture")||!value.at("texture").is_number_integer())
+                    throw std::invalid_argument("coverageTexture requires schemaVersion one and an integer texture index");
+                for(const auto& field:value.items())if(field.key()!="schemaVersion"&&field.key()!="texture"&&field.key()!="channel")
+                    throw std::invalid_argument("coverageTexture has an unknown field");
+                const auto index=value.at("texture").get<std::int64_t>();
+                if(index<0||static_cast<std::uint64_t>(index)>=model.textures.size())
+                    throw std::invalid_argument("coverageTexture texture index is outside the source table");
+                if(value.contains("channel")&&(!value.at("channel").is_string()
+                    ||(value.at("channel")!="red"&&value.at("channel")!="alpha")))
+                    throw std::invalid_argument("coverageTexture requires red or alpha");
+                result.coverageTexture={true,value.value("channel",std::string("red"))=="red"
+                    ?AssetMaterial::CoverageTexture::Channel::Red:AssetMaterial::CoverageTexture::Channel::Alpha};
+                if(metallicRoughnessImage>=0)throw std::invalid_argument("coverageTexture conflicts with metallicRoughnessTexture");
+                independentCoverageTexture=static_cast<int>(index);
+                metallicRoughnessImage=model.textures.at(static_cast<std::size_t>(index)).source;
+                if(metallicRoughnessImage<0||static_cast<std::size_t>(metallicRoughnessImage)>=model.images.size())
+                    throw std::invalid_argument("coverageTexture has no source image");
+                result.materialFeatures|=MaterialFeatureIndependentCoverage;
+                result.textureSettings[2].usage="mask";
+            }
+        }
         const int distortionImage=loadSceneRefraction(*material,model,result);
         if(distortionImage>=0)styleMaskImage=distortionImage;
         projectedHairParameterImage=loadProjectedHairRamp(*material,model,result,matcapImage);
@@ -1757,6 +1784,14 @@ AssetMaterial loadMaterial(
     const double roughnessFactor = material ? material->pbrMetallicRoughness.roughnessFactor : 1.0;
     const double metallicFactor = material ? material->pbrMetallicRoughness.metallicFactor : 1.0;
     for (std::size_t i = 0; i < result.metallicRoughnessPixels.size(); i += 4) {
+        if(result.coverageTexture.present) {
+            const auto channel=result.coverageTexture.channel==AssetMaterial::CoverageTexture::Channel::Red?0U:3U;
+            result.metallicRoughnessPixels[i+3]=result.metallicRoughnessPixels[i+channel];
+            // RGB retains the texture-free physical factors at every authored level.
+            result.metallicRoughnessPixels[i]=255;
+            result.metallicRoughnessPixels[i+1]=255;
+            result.metallicRoughnessPixels[i+2]=255;
+        }
         result.metallicRoughnessPixels[i+1] = static_cast<std::uint8_t>(std::round((metallicRoughnessImage >= 0 ? result.metallicRoughnessPixels[i+1] : 255) * std::clamp(roughnessFactor, 0.0, 1.0)));
         result.metallicRoughnessPixels[i+2] = static_cast<std::uint8_t>(std::round((metallicRoughnessImage >= 0 ? result.metallicRoughnessPixels[i+2] : 255) * std::clamp(metallicFactor, 0.0, 1.0)));
     }
@@ -2101,11 +2136,13 @@ AssetMaterial loadMaterial(
         styleMaskImage,matcapImage,hairDataImage,
         projectedHairParameterImage>=0?projectedHairParameterImage:faceSdfImage,
         unlitCoverageImage>=0?unlitCoverageImage:projectedHairLineImage>=0?projectedHairLineImage:shadowColorLutImage};
-    if(material&&!result.unlitTextureLayers.present
-        &&(result.materialClass==AssetMaterialClass::Generic||result.materialClass==AssetMaterialClass::Emissive)) {
+    if(material&&!result.unlitTextureLayers.present) {
         const int textures[]={material->pbrMetallicRoughness.baseColorTexture.index,material->normalTexture.index,
-            material->pbrMetallicRoughness.metallicRoughnessTexture.index,material->emissiveTexture.index,material->occlusionTexture.index};
+            independentCoverageTexture>=0?independentCoverageTexture:material->pbrMetallicRoughness.metallicRoughnessTexture.index,
+            material->emissiveTexture.index,material->occlusionTexture.index};
         for(std::size_t slot=0;slot<5;++slot) {
+            if(result.materialClass!=AssetMaterialClass::Generic&&result.materialClass!=AssetMaterialClass::Emissive
+                &&!(slot==2&&result.coverageTexture.present))continue;
             if(slot==4&&((result.materialFeatures&(MaterialFeatureDiffuseRamp|MaterialFeatureDualFaceSdf|MaterialFeatureSceneRefraction))
                 ||result.eyeSurface.present))continue;
             if(textures[slot]<0)continue;
@@ -2165,7 +2202,8 @@ AssetMaterial loadMaterial(
                 ||(slot==5&&(result.projectedHairRamp.present||result.specularRamp.present
                     ||(result.materialFeatures&MaterialFeatureDualFaceSdf)||(result.eyeSurface.present&&!result.eyeSurface.nprLighting)))
                 ||(slot==8&&shadowColorLutImage>=0);
-            const bool typed=lookup||slot==6||slot==7||(slot==8&&!result.unlitTextureLayers.coverageLayer.present);
+            const bool typed=lookup||slot==6||slot==7||(slot==8&&!result.unlitTextureLayers.coverageLayer.present)
+                ||(slot==2&&result.coverageTexture.present);
             if(typed&&settings.colorSpace!=defaults.colorSpace)
                 throw std::invalid_argument(result.name+" typed texture color space violated at slot "+std::to_string(slot));
             if(lookup&&(settings.filter!=defaults.filter||magChanged||settings.wrapU!=defaults.wrapU
@@ -2186,6 +2224,7 @@ AssetMaterial loadMaterial(
     const bool ordinary=(result.materialClass==AssetMaterialClass::Generic||result.materialClass==AssetMaterialClass::Fabric
         ||result.materialClass==AssetMaterialClass::Metal)&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
     azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary);
+    validateMaterialCoverage(result);
     return result;
 }
 

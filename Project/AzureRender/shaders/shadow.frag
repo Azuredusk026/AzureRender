@@ -36,6 +36,15 @@ layout(push_constant) uniform MaterialData {
 #else
 #define AZ_TEX_BASE_COLOR baseColorTexture
 #endif
+#if defined(AZURE_INDEPENDENT_COVERAGE)
+#undef AZ_TEX_BASE_COLOR
+#if defined(AZURE_BINDLESS)
+#define AZ_TEX_BASE_COLOR textureArray[nonuniformEXT(material.textureBase+2u)]
+#else
+layout(binding=3) uniform sampler2D independentCoverage;
+#define AZ_TEX_BASE_COLOR independentCoverage
+#endif
+#endif
 
 layout(location = 0) in vec2 textureCoordinate;
 layout(location = 1) in vec3 opacityCoordinate;

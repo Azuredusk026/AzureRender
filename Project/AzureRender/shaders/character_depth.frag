@@ -18,6 +18,15 @@ layout(binding=1) uniform sampler2D baseColor;
 layout(push_constant) uniform Material { float alphaCutoff; int alphaMode; DEPTH_FEATURES layout(offset=140) float nodeOpacity; } material;
 #define BASE baseColor
 #endif
+#if defined(AZURE_INDEPENDENT_COVERAGE)
+#undef BASE
+#if defined(AZURE_BINDLESS)
+#define BASE textures[nonuniformEXT(material.textureBase+2u)]
+#else
+layout(binding=3) uniform sampler2D independentCoverage;
+#define BASE independentCoverage
+#endif
+#endif
 layout(binding=0) uniform Camera { vec4 position; vec4 forward; } camera;
 layout(location=2) AZURE_SAMPLE in vec2 textureCoordinate;
 layout(location=3) AZURE_SAMPLE in vec3 worldPosition;

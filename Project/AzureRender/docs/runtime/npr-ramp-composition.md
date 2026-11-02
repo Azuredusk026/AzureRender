@@ -60,7 +60,7 @@ NPR 画像第二行的第四分量保存颜色合成策略。
 显式视角策略使用 `_lighting` 着色程序族。
 主视图与颜色快照按同一材质条件选择程序。
 
-场景渲染器 API 版本为八。
+场景渲染器 API 版本为九。
 能力字段 `supportsNprRampComposition` 用于支持查询。
 角色渲染器声明支持该能力。
 采集清单通过 `nprRampCompositions` 记录显式视角策略。

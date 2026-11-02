@@ -9,6 +9,15 @@ layout(binding=1) uniform sampler2D textures[];
 layout(binding=1) uniform sampler2D baseColor;
 #define SHELL_BASE baseColor
 #endif
+#if defined(AZURE_INDEPENDENT_COVERAGE)
+#undef SHELL_BASE
+#if defined(AZURE_BINDLESS)
+#define SHELL_BASE textures[nonuniformEXT(shell.textureBase+2u)]
+#else
+layout(binding=3) uniform sampler2D independentCoverage;
+#define SHELL_BASE independentCoverage
+#endif
+#endif
 layout(push_constant) uniform ShellInputs {
     float alphaCutoff;
     uint alphaMode;

@@ -6,10 +6,12 @@
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。
 原生姿态、同条件材质对照及 GI 覆盖见[输入核验](docs/acceptance/nr/native-material-input-audit.md)。
 直接贡献、环境贡献与阴影差异见[照明分项](docs/acceptance/nr/joint-lighting-components.md)。
+
 完整线性输出、眼睛自发光及曝光换算见[辐亮度验证](docs/acceptance/nr/material-radiance-normalization.md)。
 原生调色表的实际影响及颜色边界见[显示域核验](docs/acceptance/nr/material-display-domain.md)。
 材质显示归属及主辅视图契约见[显示变换](docs/runtime/material-display-transform.md)。
 原生角色关键区域及环境兼容见[显示验证](docs/acceptance/nr/material-display-transform.md)。
+
 联合可玩候选、普通启动入口及原生响应见[组合验证](docs/acceptance/nr/joint-playable-display.md)。
 
 含雾关卡的资源身份、重开复用及画面兼容见[复用验证](docs/acceptance/recovery/view-fog-resource-reuse.md)。
@@ -20,8 +22,10 @@
 五份衣料的实际高光资源及参数差异见[原生输入核验](docs/acceptance/nr/native-cloth-inputs.md)。
 视角色带、室内颜色及漫反射权重见[颜色合成核验](docs/acceptance/nr/npr-view-ramp-composition.md)。
 公共接入与三十六个匹配区域的检查见[运行时验证](docs/acceptance/nr/npr-ramp-runtime.md)。
+
 原始角色入口及动态近景见[参考核验](docs/acceptance/nr/portrait-input-recovery.md)。
 头发覆盖按[独立裁剪图计划](docs/plans/2026-11-02-independent-coverage.md)推进。
+公共输入、来源层级及失败回收见[覆盖验证](docs/acceptance/nr/material-coverage.md)。
 
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。
