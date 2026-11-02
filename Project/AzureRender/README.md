@@ -30,6 +30,7 @@
 原生动态接入及完整头发失败范围见[联合验证](docs/acceptance/nr/native-coverage-integration.md)。
 角色展示站位与阴影输入见[构图核验](docs/acceptance/nr/joint-visual-state.md)。
 近侧站位与中央物流见[动态验收](docs/acceptance/nr/joint-conveyor-motion.md)。
+原生待机与循环输入见[循环验收](docs/acceptance/nr/joint-idle-loop.md)。
 
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。

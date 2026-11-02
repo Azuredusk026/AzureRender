@@ -997,15 +997,21 @@
       "purpose": "近侧静态展示、中央物流和角色循环的实际采集。",
       "retention": "联合动态及画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
-      "primaryProject": "project/joint-dynamic.azureproject",
+      "primaryProject": "project/joint-dynamic-loop-v2.azureproject",
       "evidence": "docs/acceptance/nr/joint-conveyor-motion.md",
       "videos": [
         {
           "path": "media/joint-motion-original-idle.mp4",
           "bytes": 4823661,
           "sha256": "bc23b111fb21a36554fcd50e19015f9d8ad9608a131e4176234bc8dbe915a34b"
+        },
+        {
+          "path": "media/joint-motion-closed-idle.mp4",
+          "bytes": 4817677,
+          "sha256": "6d1347b55ccaf59e14ce50db3bb79f41ffdbdfb2e7feb68f77dcb4fffd1a217f"
         }
-      ]
+      ],
+      "idleEvidence": "docs/acceptance/nr/joint-idle-loop.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
