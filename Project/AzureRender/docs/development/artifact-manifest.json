@@ -998,7 +998,7 @@
       "retention": "联合动态及画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "primaryProject": "project/joint-dynamic-loop-v2.azureproject",
-      "evidence": "docs/acceptance/nr/joint-conveyor-motion.md",
+      "evidence": "docs/acceptance/nr/joint-dynamics-regression.md",
       "videos": [
         {
           "path": "media/joint-motion-original-idle.mp4",
@@ -1011,7 +1011,8 @@
           "sha256": "6d1347b55ccaf59e14ce50db3bb79f41ffdbdfb2e7feb68f77dcb4fffd1a217f"
         }
       ],
-      "idleEvidence": "docs/acceptance/nr/joint-idle-loop.md"
+      "idleEvidence": "docs/acceptance/nr/joint-idle-loop.md",
+      "conveyorEvidence": "docs/acceptance/nr/joint-conveyor-motion.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

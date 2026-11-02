@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-scoped-joint-dynamics-regression",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "0cca3532b03d8fc28de2eeef54bb63786a2a2da1",
+  "successfulJointPlayerProcesses": 4,
+  "capturedJointFrames": 400,
+  "ctestCasesPerConfiguration": 14,
+  "pythonCases": {
+    "NativeCharacter": 52,
+    "EndfieldNative": 205
+  },
+  "bundles": [
+    {
+      "path": "execution.json.gz",
+      "sha256": "8f3825ad9538450645f8777b81a1dc99ce44d6d8c20e2111463e128d011a149a",
+      "sourceFiles": 19
+    }
+  ],
+  "relatedManifests": [
+    {
+      "path": "docs/acceptance/nr/evidence/2026-11-03/joint-conveyor-motion/manifest.json",
+      "sha256": "6b479d5cf098fbf563f52d726a2830dd9e3d39f6040a757361bcd2fa3871c6b4"
+    },
+    {
+      "path": "docs/acceptance/nr/evidence/2026-11-03/joint-idle-loop/manifest.json",
+      "sha256": "27eb4d31e54cefb4d75c66764bec4bc8d53db426e0fae923e01b47034d923685"
+    }
+  ],
+  "programs": [
+    {
+      "path": "build/ninja-msvc-release/AzurePlayer.exe",
+      "sha256": "e0c47f0f99be428145af067501b2a5b3ace5437e62948043ae8f1f86e5aadce5",
+      "bytes": 6117376
+    },
+    {
+      "path": "build/ninja-msvc-release/AzureNodeOpacityRecordingTests.exe",
+      "sha256": "65368140f150d3c21087904b0f9c92071a67b5657b1ee469748f66b59418dd59",
+      "bytes": 1990656
+    },
+    {
+      "path": "build/ninja-msvc-debug/AzurePlayer.exe",
+      "sha256": "78979854403904005a518fb54b73d8bef2ada68c4b199924f2b60b69f01f7b42",
+      "bytes": 21689344
+    },
+    {
+      "path": "build/ninja-msvc-debug/AzureNodeOpacityRecordingTests.exe",
+      "sha256": "14e269f32d1a1c195d006692f2036fbc602a12adb616527fb403d2c5a3e7b646",
+      "bytes": 7485440
+    }
+  ],
+  "retainedProject": "build/runs/20261103-012115-joint-scene-dynamics-e9e4e1/project/joint-dynamic-loop-v2.azureproject",
+  "remaining": [
+    "Q1-static-visual-acceptance",
+    "native-logistics-activation-and-global-phase",
+    "Q3-playable-delivery",
+    "Q4-formal-acceptance-and-performance"
+  ]
+}
