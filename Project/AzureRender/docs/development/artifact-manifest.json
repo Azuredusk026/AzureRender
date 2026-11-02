@@ -990,6 +990,22 @@
       "retention": "所属画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/recovery/full-scene-visual.md"
+    },
+    {
+      "path": "runs/20261103-012115-joint-scene-dynamics-e9e4e1",
+      "pathBase": "build",
+      "purpose": "近侧静态展示、中央物流和角色循环的实际采集。",
+      "retention": "联合动态及画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "project/joint-dynamic.azureproject",
+      "evidence": "docs/acceptance/nr/joint-conveyor-motion.md",
+      "videos": [
+        {
+          "path": "media/joint-motion-original-idle.mp4",
+          "bytes": 4823661,
+          "sha256": "bc23b111fb21a36554fcd50e19015f9d8ad9608a131e4176234bc8dbe915a34b"
+        }
+      ]
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

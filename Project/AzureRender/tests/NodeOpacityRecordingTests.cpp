@@ -19,6 +19,7 @@ public:
     unsigned pass=0;
     bool materialUpdated=false;
     unsigned indirectCalls=0;
+    unsigned colorStreamBindings=0;
     void beginRenderPass(const rhi::RenderPassBeginDesc&) override{++pass;}
     void endRenderPass() override{}
     void setViewport(float,float,float=0,float=0) override{}
@@ -33,6 +34,15 @@ public:
         if(offset<=124&&offset+size>=128)materialUpdated=true;
     }
     void bindVertexBuffer(VkBuffer,VkDeviceSize) override{}
+    void bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset) override {
+        require(binding<rhi::kMaximumVertexBindings&&buffer!=VK_NULL_HANDLE,
+            "Recorded vertex streams must have a valid binding and buffer");
+        if(binding==0)bindVertexBuffer(buffer,offset);
+        else {
+            require(binding==1&&offset==0,"Material colors must use the full auxiliary stream");
+            ++colorStreamBindings;
+        }
+    }
     void bindIndexBuffer(VkBuffer,VkDeviceSize) override{}
     void draw(unsigned) override{}
     void drawIndexed(unsigned,unsigned first,unsigned count=1,unsigned source=0) override {
@@ -114,6 +124,7 @@ void verify(const std::filesystem::path& shaders,bool bindless,bool compute,bool
     frame.gizmoTranslation[0]=.75F;frame.gizmoRotation[1]=30;frame.gizmoScale[0]=2;
     renderer.updateFrame(frame);
     Capture capture;context.commands=&capture;renderer.recordScene(context);
+    require(capture.colorStreamBindings>0,"Material recording must bind its vertex color stream");
     unsigned selected=0,unselected=0,originBatches=0;
     for(const auto& draw:capture.draws) {
         if(materialOrigin&&draw.source==3&&draw.instances==3)++originBatches;
