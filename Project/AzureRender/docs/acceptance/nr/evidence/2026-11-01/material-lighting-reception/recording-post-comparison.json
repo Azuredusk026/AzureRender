@@ -1,0 +1,79 @@
+{
+  "status": "measured-post-differences",
+  "passes": [
+    {
+      "program": "inner_outline.frag.spv",
+      "events": [
+        26570,
+        25688
+      ],
+      "constantsEqual": true,
+      "textures": [
+        {
+          "name": "normalTexture",
+          "equal": true
+        },
+        {
+          "name": "depthTexture",
+          "equal": true
+        },
+        {
+          "name": "sceneColorTexture",
+          "equal": true
+        },
+        {
+          "name": "colorGradingLutTexture",
+          "equal": true
+        },
+        {
+          "name": "displayMaskTexture",
+          "equal": true
+        }
+      ],
+      "outputEqual": true,
+      "pixels": [
+        [
+          0.1279296875,
+          0.234619140625,
+          0.654296875,
+          1.0
+        ],
+        [
+          0.1279296875,
+          0.234619140625,
+          0.654296875,
+          1.0
+        ]
+      ]
+    },
+    {
+      "program": "spatial_antialiasing.frag.spv",
+      "events": [
+        26579,
+        25697
+      ],
+      "constantsEqual": true,
+      "textures": [
+        {
+          "name": "linearSource",
+          "equal": true
+        }
+      ],
+      "outputEqual": true,
+      "pixels": [
+        [
+          0.1298828125,
+          0.23828125,
+          0.65234375,
+          1.0
+        ],
+        [
+          0.1298828125,
+          0.23828125,
+          0.65234375,
+          1.0
+        ]
+      ]
+    }
+  ]
+}

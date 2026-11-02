@@ -1,0 +1,54 @@
+{
+  "status": "compiled-isolated-derivative-controls",
+  "variants": [
+    {
+      "mode": "original",
+      "shader": "unlit-derivative-experiment/original.spv",
+      "sha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "sourceSha256": "e0558240b66b72fce1fe1b20f26e1d55beaa16f385786a8c7d8bee5802a066dc",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-derivative-experiment\\original\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-derivative-experiment\\original.spv"
+      ]
+    },
+    {
+      "mode": "fine",
+      "shader": "unlit-derivative-experiment/fine.spv",
+      "sha256": "5cc65f73ea38438dd7db4530e4aee844d8163418ba4e8cd6d70b66ea2facb799",
+      "sourceSha256": "07576ed52edfa6d288b2a2cd660b2f7ac7c1204adca9c071d82142d9d387379f",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-derivative-experiment\\fine\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-derivative-experiment\\fine.spv"
+      ]
+    },
+    {
+      "mode": "coarse",
+      "shader": "unlit-derivative-experiment/coarse.spv",
+      "sha256": "38b9c9d19f5207df65dccbaa55309aab9fb5c20213ea11d273d891e945c6d2e6",
+      "sourceSha256": "774d6f95dd320223feefcb0f66103cf7834db64ba7796c7866b8073ce537e37b",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-derivative-experiment\\coarse\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\unlit-derivative-experiment\\coarse.spv"
+      ]
+    }
+  ],
+  "scope": "Capture-only material 703 diagnostic; production source and installed shaders remain frozen."
+}

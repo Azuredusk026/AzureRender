@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "configuration": "debug",
+  "programSha256": "2e106231ff6c9d610dcbcbeff0f990e399a6b37578c7db2a178d9364daef8e5d",
+  "scriptSha256": "a50b0f54c01ef474408f2b1c752aceba916349dbe7813788eb27c9db5649458d",
+  "exitCode": 0,
+  "seconds": 335.20037439998123,
+  "captures": 84,
+  "backends": [
+    "indexed",
+    "fixed"
+  ],
+  "classes": [
+    "generic",
+    "fabric"
+  ]
+}

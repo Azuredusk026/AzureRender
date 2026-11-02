@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "configuration": "release",
+  "programSha256": "936406a81fbf658dcd751c34b0fcf5249c93414024a2d1c0571af4edb5e6991a",
+  "scriptSha256": "a50b0f54c01ef474408f2b1c752aceba916349dbe7813788eb27c9db5649458d",
+  "exitCode": 0,
+  "seconds": 152.21332989999792,
+  "captures": 84,
+  "backends": [
+    "indexed",
+    "fixed"
+  ],
+  "classes": [
+    "generic",
+    "fabric"
+  ]
+}

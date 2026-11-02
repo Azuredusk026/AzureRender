@@ -35,6 +35,25 @@
       "enum": ["scene", "linear"],
       "default": "scene"
     },
+    "environmentLighting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion"],
+      "properties": {
+        "schemaVersion": {"type": "integer", "const": 1},
+        "diffuse": {"type": "string", "enum": ["scene", "global-environment"], "default": "scene"},
+        "reflection": {"type": "string", "enum": ["scene", "global-environment"], "default": "scene"},
+        "globalIntensity": {"type": "number", "minimum": 0, "maximum": 16}
+      },
+      "allOf": [{
+        "if": {"required": ["globalIntensity"]},
+        "then": {"anyOf": [
+          {"required": ["diffuse"], "properties": {"diffuse": {"const": "global-environment"}}},
+          {"required": ["reflection"], "properties": {"reflection": {"const": "global-environment"}}}
+        ]}
+      }]
+    },
+    "mainLightShadow": {"type": "string", "enum": ["scene", "object-shadow"], "default": "scene"},
     "radianceScale": {
       "type": "number",
       "minimum": 0,
@@ -169,6 +188,10 @@
     }
   },
   "allOf": [
+    {
+      "if": {"anyOf": [{"required": ["environmentLighting"]}, {"required": ["mainLightShadow"]}]},
+      "then": {"properties": {"schemaVersion": {"const": 2}}}
+    },
     {
       "if": {"required": ["displayTransform"]},
       "then": {"properties": {"schemaVersion": {"const": 2}}}

@@ -1,0 +1,5 @@
+import hashlib,json,shutil
+from pathlib import Path
+root=Path.cwd();run=Path(__file__).resolve().parent;source=root/'build/runs/20261101-101614-view-fog-reuse-814a54';candidate=json.loads((run/'lighting-candidate.json').read_text());original=json.loads((run/'candidate.json').read_text());route=dict(project=str((run/'candidate-project/playable.azureproject').relative_to(root)),inputs=candidate['inputs'],frozenSourceFiles=original['frozenSourceFiles']);(run/'route-spec.json').write_bytes((json.dumps(route,indent=2)+'\n').encode())
+for name in ['verify_behavior.py','input-route.json']:shutil.copy2(source/name,run/name)
+text=(source/'capture_route.py').read_text();text=text.replace("(run/'candidate.json')","(run/'route-spec.json')").replace("materialSurfaceProfileLayoutVersion']==19","materialSurfaceProfileLayoutVersion']==20");needle="assert len(manifest['materialRadianceScales'])==11";assert needle in text;text=text.replace(needle,"assert len(manifest['materialLightingReceivers'])==5\n "+needle);(run/'capture_route.py').write_bytes(text.encode());print('Prepared unchanged 540-frame input route with lighting metadata checks')

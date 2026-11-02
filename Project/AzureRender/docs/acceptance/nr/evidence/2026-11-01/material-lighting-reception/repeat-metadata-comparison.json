@@ -1,0 +1,83 @@
+{
+  "status": "measured",
+  "differences": [
+    {
+      "path": "runtime.json/simulationMilliseconds",
+      "kind": "value",
+      "before": 157.80710000000002,
+      "after": 178.06790000000004
+    },
+    {
+      "path": "frames/capture_manifest.json/materialTextureCache/hashMs",
+      "kind": "value",
+      "before": 8104.23,
+      "after": 7714.03
+    },
+    {
+      "path": "frames/capture_manifest.json/materialTextureCache/matchMs",
+      "kind": "value",
+      "before": 961.778,
+      "after": 873.883
+    },
+    {
+      "path": "frames/capture_manifest.json/materialTextureCache/mipMs",
+      "kind": "value",
+      "before": 11308.2,
+      "after": 10535.2
+    },
+    {
+      "path": "frames/capture_manifest.json/materialTextureCache/uploadMs",
+      "kind": "value",
+      "before": 1900.67,
+      "after": 2661.25
+    },
+    {
+      "path": "frames/capture_manifest.json/sceneLoad/buffersMs",
+      "kind": "value",
+      "before": 117.85,
+      "after": 123.146
+    },
+    {
+      "path": "frames/capture_manifest.json/sceneLoad/cpuPrepareMs",
+      "kind": "value",
+      "before": 68895.9,
+      "after": 66998.1
+    },
+    {
+      "path": "frames/capture_manifest.json/sceneLoad/descriptorsMs",
+      "kind": "value",
+      "before": 145.92,
+      "after": 152.852
+    },
+    {
+      "path": "frames/capture_manifest.json/sceneLoad/materialUploadMs",
+      "kind": "value",
+      "before": 22404.8,
+      "after": 21910.2
+    },
+    {
+      "path": "frames/capture_manifest.json/sceneLoad/meshUploadMs",
+      "kind": "value",
+      "before": 546.88,
+      "after": 645.516
+    },
+    {
+      "path": "frames/capture_manifest.json/sceneLoad/pipelinesMs",
+      "kind": "value",
+      "before": 94.0728,
+      "after": 120.627
+    },
+    {
+      "path": "frames/capture_manifest.json/sceneLoad/sharedTexturesMs",
+      "kind": "value",
+      "before": 421.296,
+      "after": 854.726
+    },
+    {
+      "path": "frames/capture_manifest.json/sceneLoad/skinningMs",
+      "kind": "value",
+      "before": 6.0984,
+      "after": 6.0109
+    }
+  ]
+}

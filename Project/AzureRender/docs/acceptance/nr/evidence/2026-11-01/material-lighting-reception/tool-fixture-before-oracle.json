@@ -1,0 +1,14 @@
+{
+  "status": "fixture-directory-ownership-corrected",
+  "previousScriptSha256": "147fcf1ad3d579847d095dc56976b0201c79620fd59e7bbf03663ca67bba27eb",
+  "scriptSha256": "17a793f8fb577733906a2a3871740c84774061de9577be5ee1b2a3032c1ccd5e",
+  "linearBudget": 0.008,
+  "perPlayerDeadlineSeconds": 120,
+  "wholeSuiteDeadlineSeconds": 600,
+  "reason": "Object fixture generator owns creation of its root directory; environment fixture setup owns its own existing directory. Rendering assertions and expected radiance remain unchanged.",
+  "isolationCorrection": {
+    "beforeSha256": "bef24f36db9e9cbee12042e0412254373336163842a845b857e7c3311c4f96f6",
+    "argument": "direct-diffuse",
+    "reason": "Use the production CLI enumeration for the direct diffuse component."
+  }
+}

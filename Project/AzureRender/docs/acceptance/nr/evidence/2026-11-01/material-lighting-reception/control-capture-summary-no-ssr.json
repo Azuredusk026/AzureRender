@@ -1,0 +1,30 @@
+{
+  "status": "captured",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\project\\source-environment-no-ssr.azureproject",
+    "--width",
+    "1536",
+    "--height",
+    "1536",
+    "--capture-frames",
+    "1",
+    "--capture-fps",
+    "60",
+    "--fixed-frame-step",
+    "--qa-animation",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\source-environment-control-no-ssr\\frames",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\source-environment-control-no-ssr\\runtime.json"
+  ],
+  "programSha256": "c630f233cfda22d88a98884358773bf37da6399e3d90d0910a6654cdad20a192",
+  "exitCode": 0,
+  "seconds": 122.89074590001837,
+  "imageSha256": "9b0571de50eb2fe0fce79a63f7cd019b005971c9ddd10feae2851fd618d06761"
+}

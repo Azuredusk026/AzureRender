@@ -1,0 +1,87 @@
+{
+  "status": "measured",
+  "visualAcceptance": "failed-user-review",
+  "scope": "Independent global environment inputs substituted as a diagnostic group in the full world; opaque material interiors reuse the frozen material-ID pass.",
+  "ssrEnabled": false,
+  "materials": [
+    {
+      "index": 0,
+      "name": "M_actor_laevat_body_01",
+      "pixels": 11876,
+      "coverage": "measured",
+      "ssim": 0.9997667670249939,
+      "medianLuminanceRelativeError": 0.0,
+      "maximumLinearError": 0.004481583833694458,
+      "p95LinearError": 0.0030685365200042725,
+      "passed": true
+    },
+    {
+      "index": 1,
+      "name": "M_actor_laevat_cloth_01",
+      "pixels": 35109,
+      "coverage": "measured",
+      "ssim": 0.9999421238899231,
+      "medianLuminanceRelativeError": 0.0,
+      "maximumLinearError": 0.005788683891296387,
+      "p95LinearError": 0.0,
+      "passed": true
+    },
+    {
+      "index": 2,
+      "name": "M_actor_laevat_cloth_02",
+      "pixels": 87267,
+      "coverage": "measured",
+      "ssim": 0.999707818031311,
+      "medianLuminanceRelativeError": 0.0,
+      "maximumLinearError": 0.03864189237356186,
+      "p95LinearError": 0.0,
+      "passed": true
+    },
+    {
+      "index": 4,
+      "name": "M_actor_laevat_cloth_04",
+      "pixels": 28506,
+      "coverage": "measured",
+      "ssim": 0.9999297261238098,
+      "medianLuminanceRelativeError": 3.998025660699442e-05,
+      "maximumLinearError": 0.008346199989318848,
+      "p95LinearError": 0.0,
+      "passed": true
+    },
+    {
+      "index": 5,
+      "name": "M_actor_laevat_cloth_05",
+      "pixels": 38306,
+      "coverage": "measured",
+      "ssim": 0.9998690485954285,
+      "medianLuminanceRelativeError": 0.0013200526398178952,
+      "maximumLinearError": 0.002502948045730591,
+      "p95LinearError": 0.0006521511822938919,
+      "passed": true
+    },
+    {
+      "index": 6,
+      "name": "M_actor_laevat_brow_01",
+      "pixels": 0,
+      "coverage": "insufficient-visible-interior"
+    },
+    {
+      "index": 8,
+      "name": "M_actor_laevat_face_01",
+      "pixels": 593,
+      "coverage": "measured",
+      "ssim": 0.9998384118080139,
+      "medianLuminanceRelativeError": 0.0,
+      "maximumLinearError": 0.00467345118522644,
+      "p95LinearError": 0.004397982265800238,
+      "passed": true
+    },
+    {
+      "index": 11,
+      "name": "M_actor_laevat_iris_01",
+      "pixels": 0,
+      "coverage": "insufficient-visible-interior"
+    }
+  ],
+  "measuredInteriorCriteriaPassed": true
+}

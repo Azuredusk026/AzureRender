@@ -6,7 +6,7 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=19;
+    static constexpr unsigned kLayoutVersion=20;
     using Row=std::array<float,4>;
     std::array<Row,22> rows=[] {
         std::array<Row,22> value{};value[19][3]=1;return value;
@@ -62,6 +62,11 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 }
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
+    const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
+        &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;
+    const bool ordinary=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric
+        ||material.materialClass==AssetMaterialClass::Metal)&&!material.nprDiffuse.present&&!material.projectedHairRamp.present&&!material.eyeSurface.present;
+    validateMaterialLighting(material.environmentLighting,material.mainLightShadow,material.materialProfileVersion,lit,ordinary);
     validateMaterialRadianceScale(material.radianceScale,
         (material.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
     validateMaterialDisplayTransform(material.displayTransform,
@@ -136,6 +141,10 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     }
     result.rows[19][3]=material.radianceScale;
     result.rows[21][0]=static_cast<float>(material.displayTransform);
+    const auto environmentFlags=materialEnvironmentFlags(material.environmentLighting);
+    result.rows[21][1]=static_cast<float>(environmentFlags);
+    result.rows[21][2]=environmentFlags?material.environmentLighting.globalIntensity.value_or(-1.F):0.F;
+    result.rows[21][3]=static_cast<float>(material.mainLightShadow);
     return result;
 }
 }

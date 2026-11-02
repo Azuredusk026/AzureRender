@@ -15,6 +15,8 @@
 含雾关卡的资源身份、重开复用及画面兼容见[复用验证](docs/acceptance/recovery/view-fog-resource-reuse.md)。
 
 全身衣料的实际差异、材质区域及辐照响应见[全身对照](docs/acceptance/nr/full-body-native-comparison.md)。
+
+材质环境来源、主光对象阴影及原生对照见[接收验证](docs/acceptance/nr/material-lighting-reception.md)。
 五份衣料的实际高光资源及参数差异见[原生输入核验](docs/acceptance/nr/native-cloth-inputs.md)。
 视角色带、室内颜色及漫反射权重见[颜色合成核验](docs/acceptance/nr/npr-view-ramp-composition.md)。
 

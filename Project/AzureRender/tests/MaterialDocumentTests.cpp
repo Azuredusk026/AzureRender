@@ -1,5 +1,6 @@
 #include "assets/MaterialData.hpp"
 #include "assets/MaterialGraph.hpp"
+#include "assets/MaterialSurfaceProfile.hpp"
 #include "assets/PrimitiveGenerator.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <chrono>
@@ -26,6 +27,55 @@ int main(){try{
         &&completeMaterial.materialClass==AssetMaterialClass::Fabric&&completeMaterial.doubleSided
         &&completeMaterial.alphaMode==AssetAlphaMode::Mask&&std::abs(completeMaterial.alphaCutoff-.37F)<.00001F
         &&(completeMaterial.materialFeatures&MaterialFeatureSilhouetteOutline),"Complete documents must consume profile and render state");
+    auto lightingDocument=complete;
+    auto& lightingProfile=lightingDocument["surface"]["materials"][0]["extras"]["azureRenderMaterial"];
+    lightingProfile["environmentLighting"]={{"schemaVersion",1},{"diffuse","global-environment"},
+        {"reflection","global-environment"},{"globalIntensity",.5}};
+    lightingProfile["mainLightShadow"]="object-shadow";
+    const auto lightingData=MaterialData::parse(lightingDocument);
+    require(lightingData.encode()==lightingDocument&&MaterialGraph::fromMaterial(lightingData).compile().encode()==lightingDocument,
+        "Material documents and graphs must preserve explicit lighting reception");
+    const auto lightingMaterial=lightingData.interpret([](const auto&){return std::filesystem::path();});
+    const auto lightingPacked=packMaterialSurfaceProfile(lightingMaterial);
+    require(lightingPacked.rows[21]==std::array<float,4>{1,3,.5F,1},
+        "Environment sources, intensity and object-shadow ownership must reach the common profile tail");
+    for(const auto& value:nlohmann::json::array({nullptr,true,"scene",nlohmann::json::object(),
+        {{"schemaVersion",2}},{{"schemaVersion",1.0}},{{"schemaVersion",1},{"diffuse","unknown"}},
+        {{"schemaVersion",1},{"reflection",false}},{{"schemaVersion",1},{"extra",0}},
+        {{"schemaVersion",1},{"globalIntensity",.5}}})) {
+        auto invalid=lightingDocument;invalid["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["environmentLighting"]=value;
+        bool rejected=false;try{(void)MaterialData::parse(invalid).interpret([](const auto&){return std::filesystem::path();});}
+        catch(const std::exception& error){rejected=std::string(error.what()).find("environmentLighting")!=std::string::npos;}
+        require(rejected,"Invalid environment reception must name environmentLighting");
+    }
+    for(const auto& value:nlohmann::json::array({nullptr,true,".5",-.001,-1e-50,16.0000001})) {
+        auto invalid=lightingDocument;invalid["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["environmentLighting"]["globalIntensity"]=value;
+        bool rejected=false;try{(void)MaterialData::parse(invalid).interpret([](const auto&){return std::filesystem::path();});}
+        catch(const std::exception& error){rejected=std::string(error.what()).find("environmentLighting")!=std::string::npos;}
+        require(rejected,"Invalid environment intensity must be rejected before float narrowing");
+    }
+    for(float intensity:{0.F,16.F}) {
+        auto selected=lightingDocument;selected["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["environmentLighting"]["globalIntensity"]=intensity;
+        const auto loaded=MaterialData::parse(selected).interpret([](const auto&){return std::filesystem::path();});
+        require(packMaterialSurfaceProfile(loaded).rows[21][2]==intensity,"Global environment intensity preserves its legal endpoints");
+    }
+    for(const auto& value:nlohmann::json::array({nullptr,true,1,"main-shadow"})) {
+        auto invalid=lightingDocument;invalid["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["mainLightShadow"]=value;
+        bool rejected=false;try{(void)MaterialData::parse(invalid).interpret([](const auto&){return std::filesystem::path();});}
+        catch(const std::exception& error){rejected=std::string(error.what()).find("mainLightShadow")!=std::string::npos;}
+        require(rejected,"Invalid object-shadow ownership must name mainLightShadow");
+    }
+    AssetMaterial typedLighting;typedLighting.materialProfileVersion=2;typedLighting.mainLightShadow=MaterialMainLightShadow::ObjectShadow;
+    require(packMaterialSurfaceProfile(typedLighting).rows[21][3]==1,"Generic lit objects support explicit character-main object shadows");
+    typedLighting.nprDiffuse.present=true;
+    bool incompatibleLightingRejected=false;try{(void)packMaterialSurfaceProfile(typedLighting);}
+    catch(const std::exception& error){incompatibleLightingRejected=std::string(error.what()).find("mainLightShadow")!=std::string::npos;}
+    require(incompatibleLightingRejected,"Dedicated NPR visibility and ordinary object-shadow ownership are mutually exclusive");
+    typedLighting={};typedLighting.materialProfileVersion=2;typedLighting.environmentLighting.diffuse=MaterialEnvironmentSource::GlobalEnvironment;
+    typedLighting.environmentLighting.globalIntensity=std::numeric_limits<float>::quiet_NaN();
+    bool nonFiniteLightingRejected=false;try{(void)packMaterialSurfaceProfile(typedLighting);}
+    catch(const std::exception& error){nonFiniteLightingRejected=std::string(error.what()).find("environmentLighting")!=std::string::npos;}
+    require(nonFiniteLightingRejected,"Typed packing rejects non-finite environment intensity");
     auto invalidComplete=complete;invalidComplete["surface"]["buffers"]=nlohmann::json::array();
     bool geometryRejected=false;try{(void)MaterialData::parse(invalidComplete);}catch(const std::exception&){geometryRejected=true;}
     require(geometryRejected,"Material documents must reject geometry and external resource containers");

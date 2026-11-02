@@ -26,12 +26,22 @@ struct MaterialFeatureSpecialization {
     const auto mask=~(intersection^combined)&std::uint32_t{0x3fffffffU};
     return {mask,intersection&mask};
 }
-inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false){
+inline bool integralMaterialProgram(const std::string& path) noexcept {
+    const auto separator=path.find_last_of("/\\");
+    return path.find("_integral",separator==std::string::npos?0:separator+1)!=std::string::npos;
+}
+inline bool extendedMaterialLighting(const AssetMaterial& material) noexcept {
+    return material.environmentLighting.diffuse!=MaterialEnvironmentSource::Scene
+        ||material.environmentLighting.reflection!=MaterialEnvironmentSource::Scene
+        ||material.mainLightShadow!=MaterialMainLightShadow::Scene;
+}
+inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false,bool lighting=false){
     auto at=file.rfind(".frag.spv");
     if(at==std::string::npos||at+9!=file.size())throw std::invalid_argument("Expected a fragment SPIR-V program");
     if(multisampled){file.insert(at,"_samples");at+=8;}
     if(clipmap){file.insert(at,"_clipmap");at+=8;}
-    if(field)file.insert(at,"_field");
+    if(field){file.insert(at,"_field");at+=6;}
+    if(lighting)file.insert(at,"_lighting");
     return file;
 }
 }

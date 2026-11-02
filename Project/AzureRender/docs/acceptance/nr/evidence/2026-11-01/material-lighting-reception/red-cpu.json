@@ -1,0 +1,7 @@
+{
+  "status": "red-confirmed",
+  "target": "AzureMaterialDocumentTests",
+  "test": "AzureAssets.MaterialDocument",
+  "reason": "Complete material import rejects the missing environmentLighting contract.",
+  "exitCode": 8
+}

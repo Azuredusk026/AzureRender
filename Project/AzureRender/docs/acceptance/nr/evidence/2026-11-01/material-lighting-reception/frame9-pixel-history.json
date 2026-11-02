@@ -1,0 +1,1351 @@
+{
+  "status": "measured-frame9-history",
+  "pixels": [
+    {
+      "pixel": [
+        911,
+        4
+      ],
+      "modifications": [
+        {
+          "event": 21515,
+          "draw": false,
+          "primitive": 0,
+          "pre": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "post": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ],
+          "shader": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false
+        },
+        {
+          "event": 21762,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+          "material": {
+            "textureBase": [
+              965
+            ]
+          }
+        },
+        {
+          "event": 21772,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": true,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+          "material": {
+            "textureBase": [
+              1001
+            ]
+          }
+        },
+        {
+          "event": 23307,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              0
+            ],
+            "materialFeatures": [
+              40
+            ],
+            "materialPadding": [
+              214
+            ],
+            "textureBase": [
+              965
+            ]
+          }
+        },
+        {
+          "event": 23321,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": true,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              0
+            ],
+            "materialFeatures": [
+              40
+            ],
+            "materialPadding": [
+              222
+            ],
+            "textureBase": [
+              1001
+            ]
+          }
+        },
+        {
+          "event": 25212,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0"
+        },
+        {
+          "event": 25214,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            5.39453125,
+            4.28125,
+            3.548828125,
+            1.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0"
+        },
+        {
+          "event": 26380,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            5.39453125,
+            4.28125,
+            3.548828125,
+            1.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1342
+            ],
+            "textureBase": [
+              6041
+            ]
+          }
+        },
+        {
+          "event": 26458,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1386
+            ],
+            "textureBase": [
+              6239
+            ]
+          }
+        },
+        {
+          "event": 26466,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": true,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1394
+            ],
+            "textureBase": [
+              6275
+            ]
+          }
+        },
+        {
+          "event": 26473,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1398
+            ],
+            "textureBase": [
+              6293
+            ]
+          }
+        },
+        {
+          "event": 26483,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            0.1456298828125,
+            0.26611328125,
+            0.92724609375,
+            1.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1406
+            ],
+            "textureBase": [
+              6329
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pixel": [
+        912,
+        4
+      ],
+      "modifications": [
+        {
+          "event": 21515,
+          "draw": false,
+          "primitive": 0,
+          "pre": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "post": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ],
+          "shader": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false
+        },
+        {
+          "event": 21762,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+          "material": {
+            "textureBase": [
+              965
+            ]
+          }
+        },
+        {
+          "event": 21772,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": true,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+          "material": {
+            "textureBase": [
+              1001
+            ]
+          }
+        },
+        {
+          "event": 23307,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              0
+            ],
+            "materialFeatures": [
+              40
+            ],
+            "materialPadding": [
+              214
+            ],
+            "textureBase": [
+              965
+            ]
+          }
+        },
+        {
+          "event": 23321,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": true,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              0
+            ],
+            "materialFeatures": [
+              40
+            ],
+            "materialPadding": [
+              222
+            ],
+            "textureBase": [
+              1001
+            ]
+          }
+        },
+        {
+          "event": 25212,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0"
+        },
+        {
+          "event": 25214,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            2.802734375,
+            2.212890625,
+            1.8359375,
+            1.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0"
+        },
+        {
+          "event": 26380,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            2.802734375,
+            2.212890625,
+            1.8359375,
+            1.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1342
+            ],
+            "textureBase": [
+              6041
+            ]
+          }
+        },
+        {
+          "event": 26458,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1386
+            ],
+            "textureBase": [
+              6239
+            ]
+          }
+        },
+        {
+          "event": 26466,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": true,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1394
+            ],
+            "textureBase": [
+              6275
+            ]
+          }
+        },
+        {
+          "event": 26473,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1398
+            ],
+            "textureBase": [
+              6293
+            ]
+          }
+        },
+        {
+          "event": 26483,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            0.14453125,
+            0.2470703125,
+            0.916015625,
+            1.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1406
+            ],
+            "textureBase": [
+              6329
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "pixel": [
+        910,
+        4
+      ],
+      "modifications": [
+        {
+          "event": 21515,
+          "draw": false,
+          "primitive": 0,
+          "pre": [
+            1000.0,
+            1000.0,
+            1000.0,
+            1000.0
+          ],
+          "post": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ],
+          "shader": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false
+        },
+        {
+          "event": 21762,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            0.03497314453125,
+            0.05499267578125,
+            0.074951171875,
+            1.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+          "material": {
+            "textureBase": [
+              965
+            ]
+          }
+        },
+        {
+          "event": 21772,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": true,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+          "material": {
+            "textureBase": [
+              1001
+            ]
+          }
+        },
+        {
+          "event": 23307,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              0
+            ],
+            "materialFeatures": [
+              40
+            ],
+            "materialPadding": [
+              214
+            ],
+            "textureBase": [
+              965
+            ]
+          }
+        },
+        {
+          "event": 23321,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": true,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              0
+            ],
+            "materialFeatures": [
+              40
+            ],
+            "materialPadding": [
+              222
+            ],
+            "textureBase": [
+              1001
+            ]
+          }
+        },
+        {
+          "event": 25212,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0"
+        },
+        {
+          "event": 25214,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            8.484375,
+            6.703125,
+            5.55859375,
+            1.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0"
+        },
+        {
+          "event": 26380,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            8.484375,
+            6.703125,
+            5.55859375,
+            1.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1342
+            ],
+            "textureBase": [
+              6041
+            ]
+          }
+        },
+        {
+          "event": 26458,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1386
+            ],
+            "textureBase": [
+              6239
+            ]
+          }
+        },
+        {
+          "event": 26473,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1398
+            ],
+            "textureBase": [
+              6293
+            ]
+          }
+        },
+        {
+          "event": 26483,
+          "draw": true,
+          "primitive": 4294967295,
+          "pre": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "post": [
+            0.1822509765625,
+            0.392333984375,
+            0.966796875,
+            1.0
+          ],
+          "shader": [
+            -6.259853398707798e+18,
+            -6.266766028311626e+18,
+            0.0,
+            0.0
+          ],
+          "shaderDiscarded": false,
+          "depthTestFailed": false,
+          "stencilTestFailed": false,
+          "backfaceCulled": false,
+          "unboundPS": false,
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "material": {
+            "materialClass": [
+              8
+            ],
+            "materialFeatures": [
+              17039360
+            ],
+            "materialPadding": [
+              1406
+            ],
+            "textureBase": [
+              6329
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

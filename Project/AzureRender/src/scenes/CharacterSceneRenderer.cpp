@@ -286,6 +286,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     caps.supportsMotionVectors=true;
     caps.supportsMultisampleShading=true;
     caps.supportsMaterialDisplayTransform=true;
+    caps.supportsMaterialLightingReception=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -1678,6 +1679,25 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"materialLightingReceivers\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];
+                     const auto flags=materialEnvironmentFlags(material.environmentLighting);
+                     if(flags==0&&material.mainLightShadow==MaterialMainLightShadow::Scene)continue;
+                     nlohmann::json value={{"materialIndex",base+index},{"name",material.name},
+                         {"diffuse",flags&1?"global-environment":"scene"},
+                         {"reflection",flags&2?"global-environment":"scene"},
+                         {"mainLightShadow",material.mainLightShadow==MaterialMainLightShadow::ObjectShadow?"object-shadow":"scene"},
+                         {"globalIntensity",nullptr}};
+                     if(material.environmentLighting.globalIntensity)value["globalIntensity"]=*material.environmentLighting.globalIntensity;
+                     values.push_back(std::move(value));
+                 }
+             };
+             append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
          << "  \"materialDisplayTransforms\": " << [&] {
              nlohmann::json values=nlohmann::json::array();
              const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
@@ -2775,12 +2795,13 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
             const bool simpleDepth=!colorRequired&&!(m.alphaMode==AssetAlphaMode::Mask
                 &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
             const auto classPipeline=materialClassPipeline(m,mirrored,true);
-            commands.bindPipeline(prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
+            const auto depthPipeline=prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
                 :simpleDepth?snapshotDepthOnlyPipelines_[m.doubleSided?2:mirrored?1:0]
                 :ordinaryOpaqueMaterial(m)?ordinaryOpaqueSnapshotPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :classPipeline?classPipeline
-                :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]);
+                :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)];
+            commands.bindPipeline(prefill||simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline));
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
             if(counters)++counters->pipelineBinds;
@@ -3284,10 +3305,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         azurerender::readBinaryFile(shaderDirectory + (objectShadowPrepared_
             ? (computeSkinningEnabled_?"/mesh_object_compute.vert.spv":"/mesh_object.vert.spv")
             : (computeSkinningEnabled_?"/mesh_compute.vert.spv":"/mesh.vert.spv")));
-    const auto fragmentCode =
-        mainFragment((objectShadowPrepared_
+    const auto materialFragmentPath=shaderDirectory+sceneFragmentVariant((objectShadowPrepared_
             ? (bindlessTextures_?"/mesh_object_bindless.frag.spv":"/mesh_object.frag.spv")
-            : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")),true);
+            : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")),rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,irradianceClipmapActive_,probeFieldActive_);
     const auto outlineVertexCode =
         azurerender::readBinaryFile(shaderDirectory + (outlineProjectionEnabled_
             ? (computeSkinningEnabled_?(bindlessTextures_?"/outline_view_scaled_compute_bindless.vert.spv":"/outline_view_scaled_compute.vert.spv")
@@ -3311,8 +3331,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             ? "/shadow_bindless.frag.spv"
             : "/shadow.frag.spv"));
     const VkShaderModule vertexModule = rhi_->createShaderModule(vertexCode);
-    const VkShaderModule fragmentModule =
-        rhi_->createShaderModule(fragmentCode);
+    prepareMaterialLightingPipelines();
+    const VkShaderModule fragmentModule = createMaterialShaderModule(materialFragmentPath);
     const VkShaderModule outlineVertexModule =
         rhi_->createShaderModule(outlineVertexCode);
     const VkShaderModule outlineFragmentModule =
@@ -3409,18 +3429,18 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             for(unsigned facing=0;facing<4;++facing){auto desc=base;
                 desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing>=2||!context.faceCullingEnabled?VK_CULL_MODE_NONE:VK_CULL_MODE_BACK_BIT;
-                pipelines[facing]=rhi_->createGraphicsPipeline(desc);}
+                pipelines[facing]=createMaterialGraphicsPipeline(desc);}
         };
         const auto integralBase=materialDesc;
         createFacingPipelines(opaquePipelines_,materialDesc);
-        auto depthModule=rhi_->createShaderModule(mainFragment((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")),true));
+        auto depthModule=createMaterialShaderModule(shaderDirectory+sceneFragmentVariant((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")),rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,irradianceClipmapActive_,probeFieldActive_));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
         depthDesc.colorAttachmentCount=2;
         depthDesc.colorWriteMasks.assign(2,0xf);
         createFacingPipelines(overlayDepthPipelines_,depthDesc);
         try{initializeMaterialClassPipelines(context,integralBase,depthDesc);}
-        catch(...){rhi_->destroyShaderModule(depthModule);throw;}
-        rhi_->destroyShaderModule(depthModule);
+        catch(...){destroyMaterialShaderModule(depthModule);throw;}
+        destroyMaterialShaderModule(depthModule);
         const auto simpleDepthModule=rhi_->createShaderModule(mainFragment(bindlessTextures_
             ?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv"));
         VkShaderModule simpleDepthVertex=VK_NULL_HANDLE;
@@ -3476,7 +3496,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         auto tintDesc=materialDesc;
         for(unsigned mirrored=0;mirrored<2;++mirrored){
             tintDesc.frontFace=mirrored?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
-            sceneTintPipelines_[mirrored]=rhi_->createGraphicsPipeline(tintDesc);}
+            sceneTintPipelines_[mirrored]=createMaterialGraphicsPipeline(tintDesc);}
 
 
         const auto maskModule=rhi_->createShaderModule(mainFragment((bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
@@ -3561,7 +3581,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         rhi_->destroyShaderModule(backgroundVertexModule);
         rhi_->destroyShaderModule(outlineFragmentModule);
         rhi_->destroyShaderModule(outlineVertexModule);
-        rhi_->destroyShaderModule(fragmentModule);
+        destroyMaterialShaderModule(fragmentModule);
         rhi_->destroyShaderModule(vertexModule);
         throw;
     }
@@ -3571,13 +3591,14 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     rhi_->destroyShaderModule(backgroundVertexModule);
     rhi_->destroyShaderModule(outlineFragmentModule);
     rhi_->destroyShaderModule(outlineVertexModule);
-    rhi_->destroyShaderModule(fragmentModule);
+    destroyMaterialShaderModule(fragmentModule);
     rhi_->destroyShaderModule(vertexModule);
 }
 
 
 void CharacterSceneRenderer::destroyResources() {
     viewFog_.reset();
+    destroyMaterialLightingPipelines();
     destroyMaterialClassPipelines();
     destroyHairIntegralPipelines();
     motionPass_.reset();motionTarget_=nullptr;motionDraws_.clear();reflectionMotionDraws_.clear();motionPreviousValidObjects_=0;
@@ -3737,6 +3758,7 @@ void CharacterSceneRenderer::destroyResources() {
 
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
     if(viewFog_)viewFog_->releasePipelines();
+    destroyMaterialLightingPipelines();
     destroyMaterialClassPipelines();
     destroyHairIntegralPipelines();
     for (VkPipeline* pipeline : {
@@ -4626,7 +4648,7 @@ void CharacterSceneRenderer::drawPrimitive(
         ?snapshot->buffers.vertexColors.at(snapshot->instances.at(firstInstance).meshKey):whiteVertexColorBuffer_.buffer;
     if(!snapshot&&!mesh.vertexColors.empty())throw std::logic_error("Vertex colors require immutable recording buffers");
     commands.bindVertexStream(1,colorBuffer,0);
-    commands.bindPipeline(pipeline);
+    commands.bindPipeline(materialLightingPipeline(material,pipeline));
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =
             frameIndex * totalMaterialCount()

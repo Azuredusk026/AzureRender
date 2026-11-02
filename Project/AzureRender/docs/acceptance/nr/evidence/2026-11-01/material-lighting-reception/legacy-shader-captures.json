@@ -1,0 +1,139 @@
+{
+  "status": "measured-legacy-shader-controls",
+  "programSha256": "936406a81fbf658dcd751c34b0fcf5249c93414024a2d1c0571af4edb5e6991a",
+  "cases": [
+    {
+      "name": "main-only-a",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\candidate-project\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-captures\\main-only-a\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-captures\\main-only-a\\runtime.json"
+      ],
+      "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\main-only",
+      "exitCode": 0,
+      "seconds": 212.90260449999914,
+      "versusFrozenDifferentFrames": []
+    },
+    {
+      "name": "main-only-b",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\candidate-project\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-captures\\main-only-b\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-captures\\main-only-b\\runtime.json"
+      ],
+      "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\main-only",
+      "exitCode": 0,
+      "seconds": 196.7182814000007,
+      "versusFrozenDifferentFrames": []
+    },
+    {
+      "name": "all-legacy-a",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\candidate-project\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-captures\\all-legacy-a\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-captures\\all-legacy-a\\runtime.json"
+      ],
+      "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy",
+      "exitCode": 0,
+      "seconds": 200.38091760000316,
+      "versusFrozenDifferentFrames": []
+    },
+    {
+      "name": "all-legacy-b",
+      "status": "captured",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\candidate-project\\full-world-hidden.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "12",
+        "--capture-fps",
+        "60",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-captures\\all-legacy-b\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-captures\\all-legacy-b\\runtime.json"
+      ],
+      "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy",
+      "exitCode": 0,
+      "seconds": 197.01478409999982,
+      "versusFrozenDifferentFrames": []
+    }
+  ],
+  "comparisons": [
+    {
+      "mode": "main-only",
+      "differentRepeatFrames": [],
+      "exactRepeat": true
+    },
+    {
+      "mode": "all-legacy",
+      "differentRepeatFrames": [],
+      "exactRepeat": true
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}

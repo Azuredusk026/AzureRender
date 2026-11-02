@@ -1,0 +1,99 @@
+{
+  "status": "measured",
+  "cases": [
+    {
+      "frame": "frame_000000.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000001.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000002.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000003.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 12,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000004.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000005.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000006.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000007.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000008.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    },
+    {
+      "frame": "frame_000009.png",
+      "serialPixels": 13,
+      "serialMax": 5,
+      "firstPixels": 13,
+      "bounds": [
+        908,
+        4,
+        947,
+        650
+      ]
+    },
+    {
+      "frame": "frame_000010.png",
+      "serialPixels": 13,
+      "serialMax": 1,
+      "firstPixels": 13,
+      "bounds": [
+        908,
+        4,
+        947,
+        650
+      ]
+    },
+    {
+      "frame": "frame_000011.png",
+      "serialPixels": 0,
+      "serialMax": 0,
+      "firstPixels": 0,
+      "bounds": null
+    }
+  ]
+}

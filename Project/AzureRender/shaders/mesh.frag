@@ -825,13 +825,27 @@ void main() {
 #endif
     bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
         &&!(qaEffectMode==1&&qaEffectDisabled);
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    vec4 lightingInputs=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[21];
+    uint environmentSources=uint(lightingInputs.y+.5);
+    bool globalDiffuseEnvironment=(environmentSources&1U)!=0U;
+    bool globalReflectionEnvironment=(environmentSources&2U)!=0U;
+    float globalEnvironmentIntensity=environmentSources!=0U&&lightingInputs.z>=0.0
+        ?lightingInputs.z:camera.clusterLighting.y;
+    bool objectMainShadow=lightingInputs.w>.5;
+    bool characterLightReceiver=sceneCharacter||nprDiffuse||objectMainShadow;
+#endif
     vec3 lightDirection = showcasePreset == 1.0
         ? normalize(vec3(0.62, 0.68, 0.38))
         : normalize(vec3(0.48, 0.82, 0.32));
     if (camera.mainLightDirection.w > 0.5) lightDirection = camera.mainLightDirection.xyz;
     vec3 sceneShadowDirection=lightDirection;
     bool independentNprMain=false;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    if(characterLightReceiver&&camera.clusterLighting.x>.5
+#else
     if((sceneCharacter||nprDiffuse)&&camera.clusterLighting.x>.5
+#endif
         &&camera.nprLightingParameters.y>=0&&camera.nprLightingParameters.y<camera.clusterGrid.w){
         ClusterLight characterMain=sceneLightData.lights[uint(camera.nprLightingParameters.y)];
         // The shared surface key already has its exact host-authored direction.
@@ -846,8 +860,14 @@ void main() {
     vec3 reflectionDirection = reflect(-viewDirection, shadedNormal);
     float diffuse = max(dot(shadedNormal, lightDirection), 0.0);
     float fillDiffuse = max(dot(shadedNormal, fillDirection), 0.0);
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    float shadowVisibility = objectMainShadow?materialObjectVisibility(shadedNormal)
+        :sampleShadowMap(max(dot(geometricNormal, sceneShadowDirection),0.0));
+    if (qaEffectMode == 2 && qaEffectDisabled && !objectMainShadow) {
+#else
     float shadowVisibility = sampleShadowMap(max(dot(geometricNormal, sceneShadowDirection),0.0));
     if (qaEffectMode == 2 && qaEffectDisabled) {
+#endif
         shadowVisibility = 1.0;
     }
     // Surface cascades have one explicit light owner. An independent character
@@ -1124,7 +1144,11 @@ void main() {
             continue;
         }
         ClusterLight light = sceneLightData.lights[lightIndex];
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        uint receiverBit=characterLightReceiver?2U:1U;
+#else
         uint receiverBit=sceneCharacter||nprDiffuse?2U:1U;
+#endif
         if((uint(light.boxParameters.w)&receiverBit)==0U)continue;
         bool colorBlend=light.characterResponse.x==2.0||light.characterResponse.x==3.0;
         bool materialRim=light.characterResponse.x==6.0;
@@ -1152,7 +1176,12 @@ void main() {
         float pointDiffuse = max(dot(localLightingNormal, pointDirection), 0.0);
         vec3 radiance = light.colorIntensity.rgb
             * light.colorIntensity.w * attenuation;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(objectMainShadow&&float(lightIndex)==camera.nprLightingParameters.y)radiance*=shadowVisibility;
+        else if(light.coneType.y>1.5&&light.directionOuter.w>.5&&!objectMainShadow)radiance*=shadowVisibility;
+#else
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
+#endif
         if(screenRim) {
             bool facingRim=materialRim&&nprDiffuse
                 &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1].x>.5;
@@ -1572,7 +1601,11 @@ void main() {
     vec3 sceneReflectionRadiance=vec3(0);
     vec3 sceneReflectionResponse=environmentResponse;
 #if defined(AZURE_PROBE_FIELD)
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    vec3 reflectionDiffuseIncident=textureLod(AZ_TEX_ENVIRONMENT,directionToEquirectangular(indirectDiffuseNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*(globalDiffuseEnvironment?globalEnvironmentIntensity:camera.clusterLighting.y);
+#else
     vec3 reflectionDiffuseIncident=textureLod(AZ_TEX_ENVIRONMENT,directionToEquirectangular(indirectDiffuseNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*camera.clusterLighting.y;
+#endif
 #endif
     bool overlayDisabled = qaEffectMode == 9 && qaEffectDisabled;
     float overlayVisible = overlayMaterial && !overlayDisabled ? 1.0 : 0.0;
@@ -1590,9 +1623,17 @@ void main() {
         envReflection.xz = mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envReflection.xz;
         float lastMip = float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1);
         ambientDiffuse = (nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo) * textureLod(AZ_TEX_ENVIRONMENT,
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+            directionToEquirectangular(envNormal),lastMip).rgb * (globalDiffuseEnvironment?globalEnvironmentIntensity:camera.clusterLighting.y);
+#else
             directionToEquirectangular(envNormal),lastMip).rgb * camera.clusterLighting.y;
+#endif
         sceneReflectionRadiance=textureLod(AZ_TEX_ENVIRONMENT,
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+            directionToEquirectangular(envReflection),roughness*lastMip).rgb*(globalReflectionEnvironment?globalEnvironmentIntensity:camera.clusterLighting.y);
+#else
             directionToEquirectangular(envReflection),roughness*lastMip).rgb*camera.clusterLighting.y;
+#endif
         if(sceneCharacter)sceneReflectionResponse*=material.styleParameters.z*dielectricSpecularWeight;
         if(qaEffectMode==5&&qaEffectDisabled)sceneReflectionResponse=vec3(0);
         ambientSpecular=sceneReflectionResponse*sceneReflectionRadiance;
@@ -1615,7 +1656,11 @@ void main() {
             + emissive + kkSpecular + secondaryKkSpecular + rimLighting;
         if(overlayMaterial)beautyColor=overlayVisible>.5?baseColor.rgb:vec3(0);
     }
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    if(camera.irradianceDimensionsEnabled.w>.5&&!globalDiffuseEnvironment){
+#else
     if(camera.irradianceDimensionsEnabled.w>.5){
+#endif
         vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal,!(nprDiffuse||projectedLighting||eyeNpr));
 #if defined(AZURE_PROBE_FIELD)
         reflectionDiffuseIncident=mix(reflectionDiffuseIncident,volume.rgb,volume.w);
@@ -1647,8 +1692,13 @@ void main() {
         if(camera.nprGainFloor.w>.5){
             vec3 envNormal=indirectDiffuseNormal;float angle=camera.clusterLighting.z;
             envNormal.xz=mat2(cos(angle),sin(angle),-sin(angle),cos(angle))*envNormal.xz;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+            incident=textureLod(AZ_TEX_ENVIRONMENT,directionToEquirectangular(envNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*(globalDiffuseEnvironment?globalEnvironmentIntensity:camera.clusterLighting.y);
+            if(camera.irradianceDimensionsEnabled.w>.5&&!globalDiffuseEnvironment){vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal,false);incident=mix(incident,volume.rgb,volume.w);}
+#else
             incident=textureLod(AZ_TEX_ENVIRONMENT,directionToEquirectangular(envNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*camera.clusterLighting.y;
             if(camera.irradianceDimensionsEnabled.w>.5){vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal,false);incident=mix(incident,volume.rgb,volume.w);}
+#endif
         }
         CharacterDiffuseIllumination illumination=characterDiffuseIllumination(indirectDiffuseNormal,incident,mainRadiance,
             camera.nprDirectionBias,camera.nprGainFloor,camera.nprComposition,camera.nprAmbientColor.a,
@@ -1708,7 +1758,21 @@ void main() {
         }
     }
 #if defined(AZURE_PROBE_FIELD)
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    if(globalDiffuseEnvironment&&!globalReflectionEnvironment){
+        // Scene reflection adaptation keeps its own incident-light source.
+        // Selecting global diffuse changes only the material's diffuse term.
+        reflectionDiffuseIncident=textureLod(AZ_TEX_ENVIRONMENT,
+            directionToEquirectangular(indirectDiffuseNormal),float(textureQueryLevels(AZ_TEX_ENVIRONMENT)-1)).rgb*camera.clusterLighting.y;
+        if(camera.irradianceDimensionsEnabled.w>.5){
+            vec4 volume=evaluateIrradianceVolume(worldPosition,indirectDiffuseNormal,!(nprDiffuse||projectedLighting||eyeNpr));
+            reflectionDiffuseIncident=mix(reflectionDiffuseIncident,volume.rgb,volume.w);
+        }
+    }
+    if(camera.probeParameters.x>.5&&!globalReflectionEnvironment){
+#else
     if(camera.probeParameters.x>.5){
+#endif
         float lastMip=float(textureQueryLevels(reflectionProbeTexture)-1);
         float lod=reflectionProbeLod(roughness,lastMip,vec3(camera.probeCenter.w,camera.probeHalfExtents.w,camera.probeCapture.w));
         vec3 radiance=reflectionProbeFieldRadiance(reflectionProbeTexture,worldPosition,reflectionDirection,indirectDiffuseNormal,
@@ -1721,7 +1785,11 @@ void main() {
         beautyColor+=blended-ambientSpecular;ambientSpecular=blended;
     }
 #else
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    if(camera.probeParameters.x>.5&&!globalReflectionEnvironment){
+#else
     if(camera.probeParameters.x>.5){
+#endif
         vec3 edge=camera.probeHalfExtents.xyz-abs(worldPosition-camera.probeCenter.xyz);
         float distanceToEdge=min(edge.x,min(edge.y,edge.z));
         float weight=distanceToEdge>0.0?(camera.probeParameters.z>0.0?clamp(distanceToEdge/camera.probeParameters.z,0.0,1.0):1.0):0.0;
@@ -1751,7 +1819,11 @@ void main() {
     }
 #endif
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface&&!globalReflectionEnvironment
+#else
     if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface
+#endif
         &&!overlayMaterial&&!(qaEffectMode==5&&qaEffectDisabled)){
         vec4 screenReflection;
         if(camera.screenReflectionTrace.x>1.5)

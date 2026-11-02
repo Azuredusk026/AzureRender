@@ -1,0 +1,3337 @@
+{
+  "status": "measured-recording-pair-inputs",
+  "captures": [
+    {
+      "kind": "parallel",
+      "stage": "complete",
+      "buffers": [
+        {
+          "name": "ShaderStage.Vertex-storage-0-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Vertex-storage-0-0.gz",
+          "bytes": 829312,
+          "sha256": "f29d2087cd50094df43e69039283fa765b4388c3b9f42d06ece87513a757b897"
+        },
+        {
+          "name": "ShaderStage.Vertex-storage-1-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Vertex-storage-1-0.gz",
+          "bytes": 89128836,
+          "sha256": "f9352cfaafbce1772089fd4a320a4335f178edb84bcaedf15273252b86f35dc4"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-0-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Pixel-storage-0-0.gz",
+          "bytes": 18432,
+          "sha256": "5a741b67cd3017b52adbb7bf65c376244b4b8ce501c6b99e098e047cfa5df607"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-1-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Pixel-storage-1-0.gz",
+          "bytes": 27648,
+          "sha256": "1db80733f8dc9dc560819efca134e4592cf9f67dddf13349a96bb8ae43a8fd60"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-2-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Pixel-storage-2-0.gz",
+          "bytes": 1769472,
+          "sha256": "8bda71eacaa4ed474b8f7d75f5aee01c7a1efa20ee96f4e39350d4a22a610ce5"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-3-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Pixel-storage-3-0.gz",
+          "bytes": 2098064,
+          "sha256": "165c020dc9644bf8e6cd59ba523a1a862907a6e9016c70a75fe802a47317153c"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-4-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Pixel-storage-4-0.gz",
+          "bytes": 208,
+          "sha256": "a5562f7476a8aaa694d6c9bf68ec61133e66613e498500f304ea35215691af32"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-5-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Pixel-storage-5-0.gz",
+          "bytes": 261536,
+          "sha256": "b8d05a37f341526d85e6c4a277ff5dd5532b301ce97f2938996d0865dc954170"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-6-0",
+          "offset": 0,
+          "path": "parallel/ShaderStage.Pixel-storage-6-0.gz",
+          "bytes": 1456,
+          "sha256": "f405628e9c9881386efccc912b724b696801dfadbd8f3c25d5536ca719dd7a58"
+        },
+        {
+          "name": "vertex-0",
+          "offset": 0,
+          "path": "parallel/vertex-0.gz",
+          "bytes": 46116,
+          "sha256": "fef4588ff4b1465acb571ac8a93975d2e676f121ea2980eb6cc09c70e2b7503a"
+        },
+        {
+          "name": "vertex-1",
+          "offset": 0,
+          "path": "parallel/vertex-1.gz",
+          "bytes": 6832,
+          "sha256": "6087bd2f99047be4ecfbd1608690352170a175080f186c1eeeb1f323c4f5369f"
+        },
+        {
+          "name": "index",
+          "offset": 61320,
+          "path": "parallel/index.gz",
+          "bytes": 22548,
+          "sha256": "96c6b3d29d1a8bf0657d05431a2ff9d50ae75832265119c1734df25600e8fb85"
+        }
+      ],
+      "textures": [
+        {
+          "name": "overlaySceneDepth-0",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT",
+          "path": "parallel/overlaySceneDepth-0.gz",
+          "bytes": 58982400,
+          "sha256": "2ca93c358e238b3dd566d1d5e1779cb896bdc945259cc61c2965680fbe1b761f"
+        },
+        {
+          "name": "textureArray-6329",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB",
+          "path": "parallel/textureArray-6329.gz",
+          "bytes": 262144,
+          "sha256": "e6f519a698ba3d0ab2dcff4b333dc6f434adaa27f6eda73e7b2a7553ae7a8839"
+        },
+        {
+          "name": "textureArray-6330",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM",
+          "path": "parallel/textureArray-6330.gz",
+          "bytes": 16,
+          "sha256": "d24ef7993b6b2b8365793ad54ef0e0eba80d428c340de27f664fc993f50e90f3"
+        },
+        {
+          "name": "textureArray-6331",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM",
+          "path": "parallel/textureArray-6331.gz",
+          "bytes": 16,
+          "sha256": "5ac6a5945f16500911219129984ba8b387a06f24fe383ce4e81a73294065461b"
+        },
+        {
+          "name": "textureArray-6332",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB",
+          "path": "parallel/textureArray-6332.gz",
+          "bytes": 16,
+          "sha256": "cc0fa51d4d0a97b664030be5052f3b2b69a1267f89ace4c9bbc65007566725df"
+        },
+        {
+          "name": "textureArray-6333",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB",
+          "path": "parallel/textureArray-6333.gz",
+          "bytes": 262144,
+          "sha256": "e1acb054021218a6bd66033e661e369b15bcad993af546c7640a45c9e01aac8a"
+        },
+        {
+          "name": "textureArray-6335",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM",
+          "path": "parallel/textureArray-6335.gz",
+          "bytes": 16,
+          "sha256": "4e972baaee2ad54f78153134ef6484cd1a8e383d21582a21a481d4d214161916"
+        }
+      ],
+      "constants": [
+        {
+          "stage": "ShaderStage.Vertex",
+          "shaderSha256": "edaa575d1dd7a1401110c0f1b0fe30abfca33ffdbf49ef710bed412bcc246a4c",
+          "blocks": [
+            {
+              "name": "camera",
+              "variables": [
+                {
+                  "name": "cameraPosition",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.26604312658309937,
+                    2.262058973312378,
+                    -24.905324935913086,
+                    1.0
+                  ],
+                  "uint32": [
+                    3196597966,
+                    1074840979,
+                    3251060251,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cameraForward",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.004926738329231739,
+                    0.05969472974538803,
+                    0.9982045888900757,
+                    0.0
+                  ],
+                  "uint32": [
+                    1000435834,
+                    1031045750,
+                    1065323094,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterGrid",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    16.0,
+                    9.0,
+                    24.0,
+                    16.0
+                  ],
+                  "uint32": [
+                    1098907648,
+                    1091567616,
+                    1103101952,
+                    1098907648
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterDepth",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.10000000149011612,
+                    10000.0,
+                    2560.0,
+                    1440.0
+                  ],
+                  "uint32": [
+                    1036831949,
+                    1176256512,
+                    1159725056,
+                    1152647168
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterLighting",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.25,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1048576000,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeSplits",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    4.708616256713867,
+                    10.220945358276367,
+                    20.006664276123047,
+                    50.0
+                  ],
+                  "uint32": [
+                    1083616508,
+                    1092847870,
+                    1101008294,
+                    1112014848
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "renderingParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.800000011920929,
+                    0.0,
+                    -1.0,
+                    8.0
+                  ],
+                  "uint32": [
+                    1061997773,
+                    0,
+                    3212836864,
+                    1090519040
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "showcaseParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    1.0800000429153442,
+                    0.23999999463558197,
+                    0.18000000715255737
+                  ],
+                  "uint32": [
+                    0,
+                    1066024305,
+                    1047904911,
+                    1043878380
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "qaParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    1065353216,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceLightDirection",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    -1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    3212836864,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceSdfParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.5,
+                    0.07999999821186066,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1056964608,
+                    1034147594,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceSdfShadowColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.550000011920929,
+                    0.36000001430511475,
+                    0.3400000035762787,
+                    0.550000011920929
+                  ],
+                  "uint32": [
+                    1057803469,
+                    1052266988,
+                    1051595899,
+                    1057803469
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "mainLightDirection",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.702724277973175,
+                    0.4663866460323334,
+                    -0.5372729301452637,
+                    1.0
+                  ],
+                  "uint32": [
+                    3207849405,
+                    1055836731,
+                    3205073592,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeDepthRanges",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    67.7249984741211,
+                    86.32500457763672,
+                    120.6187515258789,
+                    236.16249084472656
+                  ],
+                  "uint32": [
+                    1116173107,
+                    1118611047,
+                    1123105997,
+                    1131162009
+                  ],
+                  "members": []
+                }
+              ]
+            },
+            {
+              "name": "morphWeights",
+              "variables": [
+                {
+                  "name": "styleParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1056964608,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "featureParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.5,
+                    0.0,
+                    1.5,
+                    0.0
+                  ],
+                  "uint32": [
+                    1056964608,
+                    0,
+                    1069547520,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialFeatures",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    2.424457098570968e-38
+                  ],
+                  "uint32": [
+                    17039360
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "weights",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 2,
+                  "float32": [
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "gizmoTransform",
+                  "type": "VarType.Float",
+                  "rows": 4,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1065353216,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1065353216,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": "ShaderStage.Pixel",
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "blocks": [
+            {
+              "name": "camera",
+              "variables": [
+                {
+                  "name": "cameraPosition",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.26604312658309937,
+                    2.262058973312378,
+                    -24.905324935913086,
+                    1.0
+                  ],
+                  "uint32": [
+                    3196597966,
+                    1074840979,
+                    3251060251,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cameraForward",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.004926738329231739,
+                    0.05969472974538803,
+                    0.9982045888900757,
+                    0.0
+                  ],
+                  "uint32": [
+                    1000435834,
+                    1031045750,
+                    1065323094,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterGrid",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    16.0,
+                    9.0,
+                    24.0,
+                    16.0
+                  ],
+                  "uint32": [
+                    1098907648,
+                    1091567616,
+                    1103101952,
+                    1098907648
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterDepth",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.10000000149011612,
+                    10000.0,
+                    2560.0,
+                    1440.0
+                  ],
+                  "uint32": [
+                    1036831949,
+                    1176256512,
+                    1159725056,
+                    1152647168
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterLighting",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.25,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1048576000,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeSplits",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    4.708616256713867,
+                    10.220945358276367,
+                    20.006664276123047,
+                    50.0
+                  ],
+                  "uint32": [
+                    1083616508,
+                    1092847870,
+                    1101008294,
+                    1112014848
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "renderingParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.800000011920929,
+                    0.0,
+                    -1.0,
+                    8.0
+                  ],
+                  "uint32": [
+                    1061997773,
+                    0,
+                    3212836864,
+                    1090519040
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "showcaseParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    1.0800000429153442,
+                    0.23999999463558197,
+                    0.18000000715255737
+                  ],
+                  "uint32": [
+                    0,
+                    1066024305,
+                    1047904911,
+                    1043878380
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "qaParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    1065353216,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceLightDirection",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    -1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    3212836864,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceSdfParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.5,
+                    0.07999999821186066,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1056964608,
+                    1034147594,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceSdfShadowColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.550000011920929,
+                    0.36000001430511475,
+                    0.3400000035762787,
+                    0.550000011920929
+                  ],
+                  "uint32": [
+                    1057803469,
+                    1052266988,
+                    1051595899,
+                    1057803469
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "mainLightDirection",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.702724277973175,
+                    0.4663866460323334,
+                    -0.5372729301452637,
+                    1.0
+                  ],
+                  "uint32": [
+                    3207849405,
+                    1055836731,
+                    3205073592,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeDepthRanges",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    67.7249984741211,
+                    86.32500457763672,
+                    120.6187515258789,
+                    236.16249084472656
+                  ],
+                  "uint32": [
+                    1116173107,
+                    1118611047,
+                    1123105997,
+                    1131162009
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyRight",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.9696853756904602,
+                    3.011276206166258e-08,
+                    0.004785976838320494,
+                    0.0
+                  ],
+                  "uint32": [
+                    3212328269,
+                    855725397,
+                    1000133551,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyUp",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.00016068799595814198,
+                    0.5444819331169128,
+                    -0.03256037086248398,
+                    0.0
+                  ],
+                  "uint32": [
+                    3106438747,
+                    1057710891,
+                    3171245574,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyForward",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.004642638843506575,
+                    0.05973675101995468,
+                    0.998203456401825,
+                    0.0
+                  ],
+                  "uint32": [
+                    999825735,
+                    1031057030,
+                    1065323075,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.03500000014901161,
+                    0.04500000178813934,
+                    0.06499999761581421,
+                    1.0
+                  ],
+                  "uint32": [
+                    1024416809,
+                    1027101164,
+                    1032134328,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.25,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    1048576000,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "probeCenter",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.2000000476837158
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    1067030938
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "probeHalfExtents",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    5.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    1084227584
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "probeCapture",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0010000000474974513
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    981668463
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "probeParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "irradianceOriginSpacing",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "irradianceDimensionsEnabled",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    128.0,
+                    64.0,
+                    128.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1124073472,
+                    1115684864,
+                    1124073472,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "irradianceParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cameraRight",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.9999878406524658,
+                    3.105378354462118e-08,
+                    0.004935537930577993,
+                    0.0
+                  ],
+                  "uint32": [
+                    3212836660,
+                    855990271,
+                    1000454731,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cameraUp",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.00029459461802616715,
+                    0.9982167482376099,
+                    -0.05969400331377983,
+                    0.0
+                  ],
+                  "uint32": [
+                    3113907154,
+                    1065323298,
+                    3178529203,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "screenReflectionWorldToClip",
+                  "type": "VarType.Float",
+                  "rows": 4,
+                  "columns": 4,
+                  "float32": [
+                    -1.0312387943267822,
+                    -1.7456650311942212e-05,
+                    0.004797330591827631,
+                    -0.15483541786670685,
+                    0.0005404702969826758,
+                    -1.8300591707229614,
+                    0.10951603204011917,
+                    6.867377758026123,
+                    0.004926787689328194,
+                    0.059695325791835785,
+                    0.998214602470398,
+                    24.627134323120117,
+                    0.004926738329231739,
+                    0.05969472974538803,
+                    0.9982045888900757,
+                    24.726886749267578
+                  ],
+                  "uint32": [
+                    3213098914,
+                    3079827423,
+                    1000157933,
+                    3189673261,
+                    973975129,
+                    3219799905,
+                    1038109169,
+                    1088143759,
+                    1000435940,
+                    1031045910,
+                    1065323262,
+                    1103430751,
+                    1000435834,
+                    1031045750,
+                    1065323094,
+                    1103483050
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "screenReflectionTrace",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    2.0,
+                    32.0,
+                    0.15000000596046448,
+                    0.029999999329447746
+                  ],
+                  "uint32": [
+                    1073741824,
+                    1107296256,
+                    1041865114,
+                    1022739087
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "screenReflectionQuality",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    128.0,
+                    0.699999988079071,
+                    0.07999999821186066,
+                    1.0
+                  ],
+                  "uint32": [
+                    1124073472,
+                    1060320051,
+                    1034147594,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprDirectionBias",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.0,
+                    1.0,
+                    4.371138828673793e-08,
+                    0.15000000596046448
+                  ],
+                  "uint32": [
+                    2147483648,
+                    1065353216,
+                    859553070,
+                    1041865114
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprGainFloor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.5,
+                    0.5,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1069547520,
+                    1056964608,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprAmbientColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.1870100498199463,
+                    0.9272286891937256,
+                    0.8129898905754089,
+                    0.0
+                  ],
+                  "uint32": [
+                    1066921970,
+                    1064132316,
+                    1062215707,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprComposition",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0499999523162842,
+                    0.800000011920929,
+                    1.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065772646,
+                    1061997773,
+                    1065353216,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprMainRadiance",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.6243867874145508
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    1070590952
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprLightingParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.0,
+                    0.28772246837615967,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    0,
+                    1049841756,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeWorldDiameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    11.5,
+                    23.5,
+                    45.625,
+                    115.25
+                  ],
+                  "uint32": [
+                    1094189056,
+                    1102839808,
+                    1110867968,
+                    1122402304
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "unlitTimeExposure",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.1666666716337204,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1042983595,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "unlitColorGain",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                }
+              ]
+            },
+            {
+              "name": "Specialization Constants",
+              "variables": [
+                {
+                  "name": "azureOrdinaryOpaque",
+                  "type": "VarType.Bool",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "azureFixedMaterialFeatureMask",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "azureFixedMaterialFeatureValue",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "azureFixedMaterialClass",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    "nan"
+                  ],
+                  "uint32": [
+                    4294967295
+                  ],
+                  "members": []
+                }
+              ]
+            },
+            {
+              "name": "material",
+              "variables": [
+                {
+                  "name": "alphaCutoff",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.5
+                  ],
+                  "uint32": [
+                    1056964608
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "alphaMode",
+                  "type": "VarType.SInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    2.802596928649634e-45
+                  ],
+                  "uint32": [
+                    2
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "emissiveStrength",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "showcasePlatform",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "aoColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "lamShadowColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "matcapColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "hairParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    64.0,
+                    0.15000000596046448,
+                    4.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1115684864,
+                    1041865114,
+                    1082130432,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "styleParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1056964608,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "featureParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.5,
+                    0.0,
+                    1.5,
+                    0.0
+                  ],
+                  "uint32": [
+                    1056964608,
+                    0,
+                    1069547520,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialClass",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    1.1210387714598537e-44
+                  ],
+                  "uint32": [
+                    8
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialFeatures",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    2.424457098570968e-38
+                  ],
+                  "uint32": [
+                    17039360
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialProfileVersion",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    2.802596928649634e-45
+                  ],
+                  "uint32": [
+                    2
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialPadding",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    1.9702256408406928e-42
+                  ],
+                  "uint32": [
+                    1406
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "textureBase",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    8.868817980711767e-42
+                  ],
+                  "uint32": [
+                    6329
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nodeOpacity",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216
+                  ],
+                  "members": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "candidateEvents": [
+        26466,
+        26473,
+        26483
+      ],
+      "event": 26483,
+      "pixel911x4": [
+        0.1455078125,
+        0.265869140625,
+        0.92724609375,
+        1.0
+      ],
+      "mainHdr": {
+        "path": "parallel/main-hdr.gz",
+        "bytes": 29491200,
+        "sha256": "e6987c1ea72eecc04515ba86ac5f78c020c7a8c694b839bb5304220952edc724"
+      }
+    },
+    {
+      "kind": "serial",
+      "stage": "complete",
+      "buffers": [
+        {
+          "name": "ShaderStage.Vertex-storage-0-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Vertex-storage-0-0.gz",
+          "bytes": 829312,
+          "sha256": "f29d2087cd50094df43e69039283fa765b4388c3b9f42d06ece87513a757b897"
+        },
+        {
+          "name": "ShaderStage.Vertex-storage-1-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Vertex-storage-1-0.gz",
+          "bytes": 89128836,
+          "sha256": "f9352cfaafbce1772089fd4a320a4335f178edb84bcaedf15273252b86f35dc4"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-0-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Pixel-storage-0-0.gz",
+          "bytes": 18432,
+          "sha256": "5a741b67cd3017b52adbb7bf65c376244b4b8ce501c6b99e098e047cfa5df607"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-1-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Pixel-storage-1-0.gz",
+          "bytes": 27648,
+          "sha256": "1db80733f8dc9dc560819efca134e4592cf9f67dddf13349a96bb8ae43a8fd60"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-2-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Pixel-storage-2-0.gz",
+          "bytes": 1769472,
+          "sha256": "8bda71eacaa4ed474b8f7d75f5aee01c7a1efa20ee96f4e39350d4a22a610ce5"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-3-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Pixel-storage-3-0.gz",
+          "bytes": 2098064,
+          "sha256": "165c020dc9644bf8e6cd59ba523a1a862907a6e9016c70a75fe802a47317153c"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-4-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Pixel-storage-4-0.gz",
+          "bytes": 208,
+          "sha256": "a5562f7476a8aaa694d6c9bf68ec61133e66613e498500f304ea35215691af32"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-5-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Pixel-storage-5-0.gz",
+          "bytes": 261536,
+          "sha256": "b8d05a37f341526d85e6c4a277ff5dd5532b301ce97f2938996d0865dc954170"
+        },
+        {
+          "name": "ShaderStage.Pixel-storage-6-0",
+          "offset": 0,
+          "path": "serial/ShaderStage.Pixel-storage-6-0.gz",
+          "bytes": 1456,
+          "sha256": "f405628e9c9881386efccc912b724b696801dfadbd8f3c25d5536ca719dd7a58"
+        },
+        {
+          "name": "vertex-0",
+          "offset": 0,
+          "path": "serial/vertex-0.gz",
+          "bytes": 46116,
+          "sha256": "fef4588ff4b1465acb571ac8a93975d2e676f121ea2980eb6cc09c70e2b7503a"
+        },
+        {
+          "name": "vertex-1",
+          "offset": 0,
+          "path": "serial/vertex-1.gz",
+          "bytes": 6832,
+          "sha256": "6087bd2f99047be4ecfbd1608690352170a175080f186c1eeeb1f323c4f5369f"
+        },
+        {
+          "name": "index",
+          "offset": 61320,
+          "path": "serial/index.gz",
+          "bytes": 22548,
+          "sha256": "96c6b3d29d1a8bf0657d05431a2ff9d50ae75832265119c1734df25600e8fb85"
+        }
+      ],
+      "textures": [
+        {
+          "name": "overlaySceneDepth-0",
+          "width": 2560,
+          "height": 1440,
+          "format": "R32G32B32A32_FLOAT",
+          "path": "serial/overlaySceneDepth-0.gz",
+          "bytes": 58982400,
+          "sha256": "2ca93c358e238b3dd566d1d5e1779cb896bdc945259cc61c2965680fbe1b761f"
+        },
+        {
+          "name": "textureArray-6329",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB",
+          "path": "serial/textureArray-6329.gz",
+          "bytes": 262144,
+          "sha256": "e6f519a698ba3d0ab2dcff4b333dc6f434adaa27f6eda73e7b2a7553ae7a8839"
+        },
+        {
+          "name": "textureArray-6330",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM",
+          "path": "serial/textureArray-6330.gz",
+          "bytes": 16,
+          "sha256": "d24ef7993b6b2b8365793ad54ef0e0eba80d428c340de27f664fc993f50e90f3"
+        },
+        {
+          "name": "textureArray-6331",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM",
+          "path": "serial/textureArray-6331.gz",
+          "bytes": 16,
+          "sha256": "5ac6a5945f16500911219129984ba8b387a06f24fe383ce4e81a73294065461b"
+        },
+        {
+          "name": "textureArray-6332",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_SRGB",
+          "path": "serial/textureArray-6332.gz",
+          "bytes": 16,
+          "sha256": "cc0fa51d4d0a97b664030be5052f3b2b69a1267f89ace4c9bbc65007566725df"
+        },
+        {
+          "name": "textureArray-6333",
+          "width": 256,
+          "height": 256,
+          "format": "R8G8B8A8_SRGB",
+          "path": "serial/textureArray-6333.gz",
+          "bytes": 262144,
+          "sha256": "e1acb054021218a6bd66033e661e369b15bcad993af546c7640a45c9e01aac8a"
+        },
+        {
+          "name": "textureArray-6335",
+          "width": 2,
+          "height": 2,
+          "format": "R8G8B8A8_UNORM",
+          "path": "serial/textureArray-6335.gz",
+          "bytes": 16,
+          "sha256": "4e972baaee2ad54f78153134ef6484cd1a8e383d21582a21a481d4d214161916"
+        }
+      ],
+      "constants": [
+        {
+          "stage": "ShaderStage.Vertex",
+          "shaderSha256": "edaa575d1dd7a1401110c0f1b0fe30abfca33ffdbf49ef710bed412bcc246a4c",
+          "blocks": [
+            {
+              "name": "camera",
+              "variables": [
+                {
+                  "name": "cameraPosition",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.26604312658309937,
+                    2.262058973312378,
+                    -24.905324935913086,
+                    1.0
+                  ],
+                  "uint32": [
+                    3196597966,
+                    1074840979,
+                    3251060251,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cameraForward",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.004926738329231739,
+                    0.05969472974538803,
+                    0.9982045888900757,
+                    0.0
+                  ],
+                  "uint32": [
+                    1000435834,
+                    1031045750,
+                    1065323094,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterGrid",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    16.0,
+                    9.0,
+                    24.0,
+                    16.0
+                  ],
+                  "uint32": [
+                    1098907648,
+                    1091567616,
+                    1103101952,
+                    1098907648
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterDepth",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.10000000149011612,
+                    10000.0,
+                    2560.0,
+                    1440.0
+                  ],
+                  "uint32": [
+                    1036831949,
+                    1176256512,
+                    1159725056,
+                    1152647168
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterLighting",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.25,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1048576000,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeSplits",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    4.708616256713867,
+                    10.220945358276367,
+                    20.006664276123047,
+                    50.0
+                  ],
+                  "uint32": [
+                    1083616508,
+                    1092847870,
+                    1101008294,
+                    1112014848
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "renderingParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.800000011920929,
+                    0.0,
+                    -1.0,
+                    8.0
+                  ],
+                  "uint32": [
+                    1061997773,
+                    0,
+                    3212836864,
+                    1090519040
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "showcaseParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    1.0800000429153442,
+                    0.23999999463558197,
+                    0.18000000715255737
+                  ],
+                  "uint32": [
+                    0,
+                    1066024305,
+                    1047904911,
+                    1043878380
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "qaParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    1065353216,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceLightDirection",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    -1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    3212836864,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceSdfParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.5,
+                    0.07999999821186066,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1056964608,
+                    1034147594,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceSdfShadowColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.550000011920929,
+                    0.36000001430511475,
+                    0.3400000035762787,
+                    0.550000011920929
+                  ],
+                  "uint32": [
+                    1057803469,
+                    1052266988,
+                    1051595899,
+                    1057803469
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "mainLightDirection",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.702724277973175,
+                    0.4663866460323334,
+                    -0.5372729301452637,
+                    1.0
+                  ],
+                  "uint32": [
+                    3207849405,
+                    1055836731,
+                    3205073592,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeDepthRanges",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    67.7249984741211,
+                    86.32500457763672,
+                    120.6187515258789,
+                    236.16249084472656
+                  ],
+                  "uint32": [
+                    1116173107,
+                    1118611047,
+                    1123105997,
+                    1131162009
+                  ],
+                  "members": []
+                }
+              ]
+            },
+            {
+              "name": "morphWeights",
+              "variables": [
+                {
+                  "name": "styleParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1056964608,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "featureParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.5,
+                    0.0,
+                    1.5,
+                    0.0
+                  ],
+                  "uint32": [
+                    1056964608,
+                    0,
+                    1069547520,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialFeatures",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    2.424457098570968e-38
+                  ],
+                  "uint32": [
+                    17039360
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "weights",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 2,
+                  "float32": [
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "gizmoTransform",
+                  "type": "VarType.Float",
+                  "rows": 4,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1065353216,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1065353216,
+                    0,
+                    0,
+                    0,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "stage": "ShaderStage.Pixel",
+          "shaderSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+          "blocks": [
+            {
+              "name": "camera",
+              "variables": [
+                {
+                  "name": "cameraPosition",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.26604312658309937,
+                    2.262058973312378,
+                    -24.905324935913086,
+                    1.0
+                  ],
+                  "uint32": [
+                    3196597966,
+                    1074840979,
+                    3251060251,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cameraForward",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.004926738329231739,
+                    0.05969472974538803,
+                    0.9982045888900757,
+                    0.0
+                  ],
+                  "uint32": [
+                    1000435834,
+                    1031045750,
+                    1065323094,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterGrid",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    16.0,
+                    9.0,
+                    24.0,
+                    16.0
+                  ],
+                  "uint32": [
+                    1098907648,
+                    1091567616,
+                    1103101952,
+                    1098907648
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterDepth",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.10000000149011612,
+                    10000.0,
+                    2560.0,
+                    1440.0
+                  ],
+                  "uint32": [
+                    1036831949,
+                    1176256512,
+                    1159725056,
+                    1152647168
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "clusterLighting",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.25,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1048576000,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeSplits",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    4.708616256713867,
+                    10.220945358276367,
+                    20.006664276123047,
+                    50.0
+                  ],
+                  "uint32": [
+                    1083616508,
+                    1092847870,
+                    1101008294,
+                    1112014848
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "renderingParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.800000011920929,
+                    0.0,
+                    -1.0,
+                    8.0
+                  ],
+                  "uint32": [
+                    1061997773,
+                    0,
+                    3212836864,
+                    1090519040
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "showcaseParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    1.0800000429153442,
+                    0.23999999463558197,
+                    0.18000000715255737
+                  ],
+                  "uint32": [
+                    0,
+                    1066024305,
+                    1047904911,
+                    1043878380
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "qaParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    1065353216,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceLightDirection",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    -1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    3212836864,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceSdfParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.5,
+                    0.07999999821186066,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1056964608,
+                    1034147594,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "faceSdfShadowColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.550000011920929,
+                    0.36000001430511475,
+                    0.3400000035762787,
+                    0.550000011920929
+                  ],
+                  "uint32": [
+                    1057803469,
+                    1052266988,
+                    1051595899,
+                    1057803469
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "mainLightDirection",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.702724277973175,
+                    0.4663866460323334,
+                    -0.5372729301452637,
+                    1.0
+                  ],
+                  "uint32": [
+                    3207849405,
+                    1055836731,
+                    3205073592,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeDepthRanges",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    67.7249984741211,
+                    86.32500457763672,
+                    120.6187515258789,
+                    236.16249084472656
+                  ],
+                  "uint32": [
+                    1116173107,
+                    1118611047,
+                    1123105997,
+                    1131162009
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyRight",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.9696853756904602,
+                    3.011276206166258e-08,
+                    0.004785976838320494,
+                    0.0
+                  ],
+                  "uint32": [
+                    3212328269,
+                    855725397,
+                    1000133551,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyUp",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.00016068799595814198,
+                    0.5444819331169128,
+                    -0.03256037086248398,
+                    0.0
+                  ],
+                  "uint32": [
+                    3106438747,
+                    1057710891,
+                    3171245574,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyForward",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.004642638843506575,
+                    0.05973675101995468,
+                    0.998203456401825,
+                    0.0
+                  ],
+                  "uint32": [
+                    999825735,
+                    1031057030,
+                    1065323075,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.03500000014901161,
+                    0.04500000178813934,
+                    0.06499999761581421,
+                    1.0
+                  ],
+                  "uint32": [
+                    1024416809,
+                    1027101164,
+                    1032134328,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "skyParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.25,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    0,
+                    1048576000,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "probeCenter",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.2000000476837158
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    1067030938
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "probeHalfExtents",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    5.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    1084227584
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "probeCapture",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0010000000474974513
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    981668463
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "probeParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "irradianceOriginSpacing",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    0,
+                    0,
+                    0,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "irradianceDimensionsEnabled",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    128.0,
+                    64.0,
+                    128.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1124073472,
+                    1115684864,
+                    1124073472,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "irradianceParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cameraRight",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.9999878406524658,
+                    3.105378354462118e-08,
+                    0.004935537930577993,
+                    0.0
+                  ],
+                  "uint32": [
+                    3212836660,
+                    855990271,
+                    1000454731,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cameraUp",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.00029459461802616715,
+                    0.9982167482376099,
+                    -0.05969400331377983,
+                    0.0
+                  ],
+                  "uint32": [
+                    3113907154,
+                    1065323298,
+                    3178529203,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "screenReflectionWorldToClip",
+                  "type": "VarType.Float",
+                  "rows": 4,
+                  "columns": 4,
+                  "float32": [
+                    -1.0312387943267822,
+                    -1.7456650311942212e-05,
+                    0.004797330591827631,
+                    -0.15483541786670685,
+                    0.0005404702969826758,
+                    -1.8300591707229614,
+                    0.10951603204011917,
+                    6.867377758026123,
+                    0.004926787689328194,
+                    0.059695325791835785,
+                    0.998214602470398,
+                    24.627134323120117,
+                    0.004926738329231739,
+                    0.05969472974538803,
+                    0.9982045888900757,
+                    24.726886749267578
+                  ],
+                  "uint32": [
+                    3213098914,
+                    3079827423,
+                    1000157933,
+                    3189673261,
+                    973975129,
+                    3219799905,
+                    1038109169,
+                    1088143759,
+                    1000435940,
+                    1031045910,
+                    1065323262,
+                    1103430751,
+                    1000435834,
+                    1031045750,
+                    1065323094,
+                    1103483050
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "screenReflectionTrace",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    2.0,
+                    32.0,
+                    0.15000000596046448,
+                    0.029999999329447746
+                  ],
+                  "uint32": [
+                    1073741824,
+                    1107296256,
+                    1041865114,
+                    1022739087
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "screenReflectionQuality",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    128.0,
+                    0.699999988079071,
+                    0.07999999821186066,
+                    1.0
+                  ],
+                  "uint32": [
+                    1124073472,
+                    1060320051,
+                    1034147594,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprDirectionBias",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    -0.0,
+                    1.0,
+                    4.371138828673793e-08,
+                    0.15000000596046448
+                  ],
+                  "uint32": [
+                    2147483648,
+                    1065353216,
+                    859553070,
+                    1041865114
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprGainFloor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.5,
+                    0.5,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1069547520,
+                    1056964608,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprAmbientColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.1870100498199463,
+                    0.9272286891937256,
+                    0.8129898905754089,
+                    0.0
+                  ],
+                  "uint32": [
+                    1066921970,
+                    1064132316,
+                    1062215707,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprComposition",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0499999523162842,
+                    0.800000011920929,
+                    1.0,
+                    1.0
+                  ],
+                  "uint32": [
+                    1065772646,
+                    1061997773,
+                    1065353216,
+                    1065353216
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprMainRadiance",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.6243867874145508
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    1070590952
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nprLightingParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    0.0,
+                    0.28772246837615967,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    0,
+                    1049841756,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "cascadeWorldDiameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    11.5,
+                    23.5,
+                    45.625,
+                    115.25
+                  ],
+                  "uint32": [
+                    1094189056,
+                    1102839808,
+                    1110867968,
+                    1122402304
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "unlitTimeExposure",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.1666666716337204,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1042983595,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "unlitColorGain",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                }
+              ]
+            },
+            {
+              "name": "Specialization Constants",
+              "variables": [
+                {
+                  "name": "azureOrdinaryOpaque",
+                  "type": "VarType.Bool",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "azureFixedMaterialFeatureMask",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "azureFixedMaterialFeatureValue",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "azureFixedMaterialClass",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    "nan"
+                  ],
+                  "uint32": [
+                    4294967295
+                  ],
+                  "members": []
+                }
+              ]
+            },
+            {
+              "name": "material",
+              "variables": [
+                {
+                  "name": "alphaCutoff",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.5
+                  ],
+                  "uint32": [
+                    1056964608
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "alphaMode",
+                  "type": "VarType.SInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    2.802596928649634e-45
+                  ],
+                  "uint32": [
+                    2
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "emissiveStrength",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "showcasePlatform",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    0.0
+                  ],
+                  "uint32": [
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "aoColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "lamShadowColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "matcapColor",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1065353216,
+                    1065353216,
+                    1065353216,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "hairParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    64.0,
+                    0.15000000596046448,
+                    4.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1115684864,
+                    1041865114,
+                    1082130432,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "styleParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                  ],
+                  "uint32": [
+                    1056964608,
+                    0,
+                    0,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "featureParameters",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 4,
+                  "float32": [
+                    0.5,
+                    0.0,
+                    1.5,
+                    0.0
+                  ],
+                  "uint32": [
+                    1056964608,
+                    0,
+                    1069547520,
+                    0
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialClass",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    1.1210387714598537e-44
+                  ],
+                  "uint32": [
+                    8
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialFeatures",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    2.424457098570968e-38
+                  ],
+                  "uint32": [
+                    17039360
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialProfileVersion",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    2.802596928649634e-45
+                  ],
+                  "uint32": [
+                    2
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "materialPadding",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    1.9702256408406928e-42
+                  ],
+                  "uint32": [
+                    1406
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "textureBase",
+                  "type": "VarType.UInt",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    8.868817980711767e-42
+                  ],
+                  "uint32": [
+                    6329
+                  ],
+                  "members": []
+                },
+                {
+                  "name": "nodeOpacity",
+                  "type": "VarType.Float",
+                  "rows": 1,
+                  "columns": 1,
+                  "float32": [
+                    1.0
+                  ],
+                  "uint32": [
+                    1065353216
+                  ],
+                  "members": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "candidateEvents": [
+        25586,
+        25593,
+        25603
+      ],
+      "event": 25603,
+      "pixel911x4": [
+        0.1455078125,
+        0.265869140625,
+        0.92724609375,
+        1.0
+      ],
+      "mainHdr": {
+        "path": "serial/main-hdr.gz",
+        "bytes": 29491200,
+        "sha256": "e6987c1ea72eecc04515ba86ac5f78c020c7a8c694b839bb5304220952edc724"
+      }
+    }
+  ]
+}

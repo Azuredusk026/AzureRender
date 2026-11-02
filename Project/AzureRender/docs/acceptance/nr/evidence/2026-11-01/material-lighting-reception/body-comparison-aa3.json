@@ -1,0 +1,767 @@
+{
+  "status": "measured",
+  "antiAliasing": 3,
+  "visualAcceptance": "failed-user-review",
+  "thresholds": {
+    "ssim": 0.95,
+    "medianLuminanceRelativeError": 0.1
+  },
+  "cases": [
+    {
+      "frame": 0,
+      "pair": "world-vs-original-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 11876,
+          "coverage": "measured",
+          "ssim": 0.9995845556259155,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.004781365394592285,
+          "p95LinearError": 0.0030685365200042725,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 35109,
+          "coverage": "measured",
+          "ssim": 0.997786819934845,
+          "medianLuminanceRelativeError": 0.025844874787373198,
+          "maximumLinearError": 0.10791271924972534,
+          "p95LinearError": 0.00243343785405159,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 87267,
+          "coverage": "measured",
+          "ssim": 0.9545382261276245,
+          "medianLuminanceRelativeError": 0.1707894600988373,
+          "maximumLinearError": 0.17538762092590332,
+          "p95LinearError": 0.007185322232544422,
+          "passed": false
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 28506,
+          "coverage": "measured",
+          "ssim": 0.9994824528694153,
+          "medianLuminanceRelativeError": 0.0048223367442385805,
+          "maximumLinearError": 0.008346199989318848,
+          "p95LinearError": 0.0008345767855644226,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 38306,
+          "coverage": "measured",
+          "ssim": 0.9339571595191956,
+          "medianLuminanceRelativeError": 0.049732397812518134,
+          "maximumLinearError": 0.04161033779382706,
+          "p95LinearError": 0.021068252623081207,
+          "passed": false
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 593,
+          "coverage": "measured",
+          "ssim": 0.999819278717041,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.00467345118522644,
+          "p95LinearError": 0.004077172372490168,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    },
+    {
+      "frame": 0,
+      "pair": "world-vs-matched-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 11876,
+          "coverage": "measured",
+          "ssim": 0.9995845556259155,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.004781365394592285,
+          "p95LinearError": 0.0030685365200042725,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 35109,
+          "coverage": "measured",
+          "ssim": 0.997786819934845,
+          "medianLuminanceRelativeError": 0.025844874787373198,
+          "maximumLinearError": 0.10791271924972534,
+          "p95LinearError": 0.00243343785405159,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 87267,
+          "coverage": "measured",
+          "ssim": 0.9997190833091736,
+          "medianLuminanceRelativeError": 0.002213504315487446,
+          "maximumLinearError": 0.03864189237356186,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 28506,
+          "coverage": "measured",
+          "ssim": 0.9994824528694153,
+          "medianLuminanceRelativeError": 0.0048223367442385805,
+          "maximumLinearError": 0.008346199989318848,
+          "p95LinearError": 0.0008345767855644226,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 38306,
+          "coverage": "measured",
+          "ssim": 0.9998763799667358,
+          "medianLuminanceRelativeError": 0.0008902730621507112,
+          "maximumLinearError": 0.002502948045730591,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 593,
+          "coverage": "measured",
+          "ssim": 0.999819278717041,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.00467345118522644,
+          "p95LinearError": 0.004077172372490168,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    },
+    {
+      "frame": 0,
+      "pair": "standalone-vs-original-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 11876,
+          "coverage": "measured",
+          "ssim": 1.0,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 35109,
+          "coverage": "measured",
+          "ssim": 1.0,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 87267,
+          "coverage": "measured",
+          "ssim": 0.9546915888786316,
+          "medianLuminanceRelativeError": 0.1682036363085003,
+          "maximumLinearError": 0.17538762092590332,
+          "p95LinearError": 0.006640389561653137,
+          "passed": false
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 28506,
+          "coverage": "measured",
+          "ssim": 1.0,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 38306,
+          "coverage": "measured",
+          "ssim": 0.9339002966880798,
+          "medianLuminanceRelativeError": 0.05066777903346134,
+          "maximumLinearError": 0.04161033779382706,
+          "p95LinearError": 0.021093904972076416,
+          "passed": false
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 593,
+          "coverage": "measured",
+          "ssim": 1.0,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    },
+    {
+      "frame": 31,
+      "pair": "world-vs-original-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 11288,
+          "coverage": "measured",
+          "ssim": 0.9996909499168396,
+          "medianLuminanceRelativeError": 0.00040803436882051107,
+          "maximumLinearError": 0.004481583833694458,
+          "p95LinearError": 0.0031371712684631348,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 34083,
+          "coverage": "measured",
+          "ssim": 0.9976550936698914,
+          "medianLuminanceRelativeError": 0.03127296452772309,
+          "maximumLinearError": 0.06271495670080185,
+          "p95LinearError": 0.0024066194891929626,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 90052,
+          "coverage": "measured",
+          "ssim": 0.953589916229248,
+          "medianLuminanceRelativeError": 0.17116091584819107,
+          "maximumLinearError": 0.1871483325958252,
+          "p95LinearError": 0.006421931087970734,
+          "passed": false
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 28665,
+          "coverage": "measured",
+          "ssim": 0.9994257092475891,
+          "medianLuminanceRelativeError": 0.006148714551992169,
+          "maximumLinearError": 0.006753802299499512,
+          "p95LinearError": 0.0008582659065723419,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 39118,
+          "coverage": "measured",
+          "ssim": 0.9419589638710022,
+          "medianLuminanceRelativeError": 0.07711528403707696,
+          "maximumLinearError": 0.040186721831560135,
+          "p95LinearError": 0.020004967227578163,
+          "passed": false
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 539,
+          "coverage": "measured",
+          "ssim": 0.9997828006744385,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.00467345118522644,
+          "p95LinearError": 0.003850656794384122,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    },
+    {
+      "frame": 31,
+      "pair": "world-vs-matched-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 11288,
+          "coverage": "measured",
+          "ssim": 0.9996909499168396,
+          "medianLuminanceRelativeError": 0.00040803436882051107,
+          "maximumLinearError": 0.004481583833694458,
+          "p95LinearError": 0.0031371712684631348,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 34083,
+          "coverage": "measured",
+          "ssim": 0.9976548552513123,
+          "medianLuminanceRelativeError": 0.03127296452772309,
+          "maximumLinearError": 0.06271495670080185,
+          "p95LinearError": 0.0024066194891929626,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 90052,
+          "coverage": "measured",
+          "ssim": 0.9997898936271667,
+          "medianLuminanceRelativeError": 1.8851182660620383e-05,
+          "maximumLinearError": 0.026840776205062866,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 28665,
+          "coverage": "measured",
+          "ssim": 0.9994258880615234,
+          "medianLuminanceRelativeError": 0.006148714551992169,
+          "maximumLinearError": 0.006753802299499512,
+          "p95LinearError": 0.0008582659065723419,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 39118,
+          "coverage": "measured",
+          "ssim": 0.9998713731765747,
+          "medianLuminanceRelativeError": 0.0002544681914760655,
+          "maximumLinearError": 0.002535291016101837,
+          "p95LinearError": 0.0003035269910469651,
+          "passed": true
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 539,
+          "coverage": "measured",
+          "ssim": 0.9997828006744385,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.00467345118522644,
+          "p95LinearError": 0.003850656794384122,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    },
+    {
+      "frame": 31,
+      "pair": "standalone-vs-original-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 11288,
+          "coverage": "measured",
+          "ssim": 1.0,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 34083,
+          "coverage": "measured",
+          "ssim": 0.9999994039535522,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0034161359071731567,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 90052,
+          "coverage": "measured",
+          "ssim": 0.9536461234092712,
+          "medianLuminanceRelativeError": 0.17113883849602562,
+          "maximumLinearError": 0.19114214181900024,
+          "p95LinearError": 0.00620304886251688,
+          "passed": false
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 28665,
+          "coverage": "measured",
+          "ssim": 0.999999463558197,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0006302706897258759,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 39118,
+          "coverage": "measured",
+          "ssim": 0.9419097304344177,
+          "medianLuminanceRelativeError": 0.0773894453807584,
+          "maximumLinearError": 0.040186721831560135,
+          "p95LinearError": 0.020056895911693573,
+          "passed": false
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 539,
+          "coverage": "measured",
+          "ssim": 1.0,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    },
+    {
+      "frame": 63,
+      "pair": "world-vs-original-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 12146,
+          "coverage": "measured",
+          "ssim": 0.999697744846344,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.004481583833694458,
+          "p95LinearError": 0.0030685365200042725,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 34050,
+          "coverage": "measured",
+          "ssim": 0.9977021217346191,
+          "medianLuminanceRelativeError": 0.025459412522082822,
+          "maximumLinearError": 0.0366630032658577,
+          "p95LinearError": 0.002391321584582329,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 91404,
+          "coverage": "measured",
+          "ssim": 0.9500569105148315,
+          "medianLuminanceRelativeError": 0.16751618035318688,
+          "maximumLinearError": 0.18168018758296967,
+          "p95LinearError": 0.006887973286211491,
+          "passed": false
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 29365,
+          "coverage": "measured",
+          "ssim": 0.999370813369751,
+          "medianLuminanceRelativeError": 0.006101760352400523,
+          "maximumLinearError": 0.005526583641767502,
+          "p95LinearError": 0.0008582659065723419,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 40857,
+          "coverage": "measured",
+          "ssim": 0.9297530055046082,
+          "medianLuminanceRelativeError": 0.02373223503885274,
+          "maximumLinearError": 0.040186721831560135,
+          "p95LinearError": 0.019617076963186264,
+          "passed": false
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 535,
+          "coverage": "measured",
+          "ssim": 0.9997740983963013,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.00467345118522644,
+          "p95LinearError": 0.004367619752883911,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    },
+    {
+      "frame": 63,
+      "pair": "world-vs-matched-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 12146,
+          "coverage": "measured",
+          "ssim": 0.999697208404541,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.004481583833694458,
+          "p95LinearError": 0.0030685365200042725,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 34050,
+          "coverage": "measured",
+          "ssim": 0.9977021217346191,
+          "medianLuminanceRelativeError": 0.025459412522082822,
+          "maximumLinearError": 0.0366630032658577,
+          "p95LinearError": 0.002391321584582329,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 91404,
+          "coverage": "measured",
+          "ssim": 0.9997543692588806,
+          "medianLuminanceRelativeError": 0.0027282731676711997,
+          "maximumLinearError": 0.027344398200511932,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 29365,
+          "coverage": "measured",
+          "ssim": 0.999370813369751,
+          "medianLuminanceRelativeError": 0.006101760352400523,
+          "maximumLinearError": 0.005526583641767502,
+          "p95LinearError": 0.0008582659065723419,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 40857,
+          "coverage": "measured",
+          "ssim": 0.9969921708106995,
+          "medianLuminanceRelativeError": 0.0005089649329908076,
+          "maximumLinearError": 0.01786472648382187,
+          "p95LinearError": 0.0006302706897258759,
+          "passed": true
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 535,
+          "coverage": "measured",
+          "ssim": 0.9997740983963013,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.00467345118522644,
+          "p95LinearError": 0.004367619752883911,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    },
+    {
+      "frame": 63,
+      "pair": "standalone-vs-original-standalone",
+      "materials": [
+        {
+          "index": 0,
+          "name": "M_actor_laevat_body_01",
+          "pixels": 12146,
+          "coverage": "measured",
+          "ssim": 0.9999993443489075,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0016482137143611908,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 1,
+          "name": "M_actor_laevat_cloth_01",
+          "pixels": 34050,
+          "coverage": "measured",
+          "ssim": 0.9999997615814209,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.002062886953353882,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 2,
+          "name": "M_actor_laevat_cloth_02",
+          "pixels": 91404,
+          "coverage": "measured",
+          "ssim": 0.9501442313194275,
+          "medianLuminanceRelativeError": 0.16433954401718628,
+          "maximumLinearError": 0.18168018758296967,
+          "p95LinearError": 0.006477552466094494,
+          "passed": false
+        },
+        {
+          "index": 4,
+          "name": "M_actor_laevat_cloth_04",
+          "pixels": 29365,
+          "coverage": "measured",
+          "ssim": 0.9999995827674866,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.003275826573371887,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 5,
+          "name": "M_actor_laevat_cloth_05",
+          "pixels": 40857,
+          "coverage": "measured",
+          "ssim": 0.9318972826004028,
+          "medianLuminanceRelativeError": 0.024253544175329534,
+          "maximumLinearError": 0.040186721831560135,
+          "p95LinearError": 0.019617076963186264,
+          "passed": false
+        },
+        {
+          "index": 6,
+          "name": "M_actor_laevat_brow_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        },
+        {
+          "index": 8,
+          "name": "M_actor_laevat_face_01",
+          "pixels": 535,
+          "coverage": "measured",
+          "ssim": 1.0,
+          "medianLuminanceRelativeError": 0.0,
+          "maximumLinearError": 0.0,
+          "p95LinearError": 0.0,
+          "passed": true
+        },
+        {
+          "index": 11,
+          "name": "M_actor_laevat_iris_01",
+          "pixels": 0,
+          "coverage": "insufficient-visible-interior"
+        }
+      ]
+    }
+  ]
+}

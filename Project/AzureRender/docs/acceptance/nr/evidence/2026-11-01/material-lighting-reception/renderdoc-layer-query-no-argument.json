@@ -1,0 +1,6 @@
+{
+  "status": "failed",
+  "version": "1.46",
+  "documentation": "\nNeedVulkanLayerRegistration(info)\n\nINTERNAL: Determine vulkan layer registration status.\n",
+  "error": "Traceback (most recent call last):\n  File \"D:/Projects/FYP/Project/AzureRender/build/runs/20261101-120125-character-environment-reception-fa70a7/query_renderdoc_layer.py\", line 6, in <module>\n    value=rd.NeedVulkanLayerRegistration();result['returnType']=type(value).__name__;result['value']=str(value)\nTypeError: NeedVulkanLayerRegistration() takes exactly one argument (0 given)\n"
+}

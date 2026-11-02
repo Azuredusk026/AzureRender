@@ -1,4 +1,75 @@
 // Optional material shader variants share the renderer's layout and ownership.
+void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
+    lightingOrdinaryNeeded_=lightingBlendNeeded_=lightingFallbackNeeded_=lightingIntegralNeeded_=false;
+    lightingClassesNeeded_={};
+    const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
+        if(!extendedMaterialLighting(material))continue;
+        const bool integral=(material.materialFeatures&MaterialFeatureHairPixelIntegral)!=0;
+        if(integral&&rasterizationSamples_!=VK_SAMPLE_COUNT_4_BIT)lightingIntegralNeeded_=true;
+        else if(material.alphaMode==AssetAlphaMode::Blend)lightingBlendNeeded_=true;
+        else if(integral)lightingFallbackNeeded_=true;
+        else if(ordinaryOpaqueMaterial(material))lightingOrdinaryNeeded_=true;
+        else if(unsigned(material.materialClass)<lightingClassesNeeded_.size())
+            lightingClassesNeeded_[unsigned(material.materialClass)]=true;
+        else lightingFallbackNeeded_=true;
+        if(material.materialFeatures&MaterialFeatureSceneTint)lightingBlendNeeded_=true;
+    }};
+    inspect(asset_);for(const auto& resource:additionalResources_)inspect(resource->asset);
+}
+VkShaderModule CharacterSceneRenderer::createMaterialShaderModule(const std::string& path) {
+    const auto module=rhi_->createShaderModule(readBinaryFile(path));
+    try{materialShaderVariants_.push_back({module,VK_NULL_HANDLE,path});}
+    catch(...){rhi_->destroyShaderModule(module);throw;}
+    return module;
+}
+void CharacterSceneRenderer::destroyMaterialShaderModule(VkShaderModule module) {
+    const auto it=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),
+        [&](const auto& variant){return variant.scene==module;});
+    if(it!=materialShaderVariants_.end()){
+        if(it->lighting)rhi_->destroyShaderModule(it->lighting);
+        materialShaderVariants_.erase(it);
+    }
+    rhi_->destroyShaderModule(module);
+}
+VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc& desc) {
+    auto it=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),
+        [&](const auto& variant){return variant.scene==desc.fragmentShader;});
+    bool needed=desc.alphaBlend?lightingBlendNeeded_:lightingFallbackNeeded_;
+    if(it!=materialShaderVariants_.end()&&integralMaterialProgram(it->path))
+        needed=lightingIntegralNeeded_;
+    else for(const auto& value:desc.fragmentSpecialization){
+        if(value.id==0&&value.value)needed=lightingOrdinaryNeeded_;
+        if(value.id==1)needed=value.value<lightingClassesNeeded_.size()&&lightingClassesNeeded_[value.value];
+    }
+    if(it==materialShaderVariants_.end()||!needed)return rhi_->createGraphicsPipeline(desc);
+    if(!it->lighting)it->lighting=rhi_->createShaderModule(readBinaryFile(
+        sceneFragmentVariant(it->path,false,false,false,true)));
+    const auto scene=rhi_->createGraphicsPipeline(desc);
+    VkPipeline lighting=VK_NULL_HANDLE;
+    try{
+        auto extended=desc;extended.fragmentShader=it->lighting;
+        lighting=rhi_->createGraphicsPipeline(extended);
+        materialLightingPipelines_.emplace_back(scene,lighting);
+    }catch(...){if(lighting)rhi_->destroyPipeline(lighting);rhi_->destroyPipeline(scene);throw;}
+    return scene;
+}
+VkPipeline CharacterSceneRenderer::materialLightingPipeline(const AssetMaterial& material,VkPipeline scene) const {
+    if(!extendedMaterialLighting(material))return scene;
+    const auto it=std::find_if(materialLightingPipelines_.begin(),materialLightingPipelines_.end(),
+        [&](const auto& variant){return variant.first==scene;});
+    if(it==materialLightingPipelines_.end())throw std::logic_error("Explicit material lighting pipeline is unavailable");
+    return it->second;
+}
+void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
+    if(rhi_){
+        for(const auto& variant:materialLightingPipelines_)rhi_->destroyPipeline(variant.second);
+        for(const auto& variant:materialShaderVariants_){
+            if(variant.lighting)rhi_->destroyShaderModule(variant.lighting);
+            rhi_->destroyShaderModule(variant.scene);
+        }
+    }
+    materialLightingPipelines_.clear();materialShaderVariants_.clear();
+}
 void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContext& context,
     const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot) {
     bool needed=false;
@@ -25,12 +96,12 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
             desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
             desc.fragmentSpecialization={{0,VK_TRUE}};
-            ordinaryOpaquePipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+            ordinaryOpaquePipelines_[facing]=createMaterialGraphicsPipeline(desc);
             desc=snapshot;
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
             desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
             desc.fragmentSpecialization={{0,VK_TRUE}};
-            ordinaryOpaqueSnapshotPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+            ordinaryOpaqueSnapshotPipelines_[facing]=createMaterialGraphicsPipeline(desc);
         }
         for(unsigned index=0;index<classes.size();++index)if(classes[index]){
             const auto policy=fixedMaterialFeatures(intersections[index],combined[index]);
@@ -40,12 +111,12 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                 desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
                 desc.fragmentSpecialization={{1,index},{2,policy.fixedMask},{3,policy.fixedValue}};
-                materialClassPipelines_[index][facing]=rhi_->createGraphicsPipeline(desc);
+                materialClassPipelines_[index][facing]=createMaterialGraphicsPipeline(desc);
                 desc=snapshot;
                 desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
                 desc.fragmentSpecialization={{1,index},{2,policy.fixedMask},{3,policy.fixedValue}};
-                materialClassSnapshotPipelines_[index][facing]=rhi_->createGraphicsPipeline(desc);
+                materialClassSnapshotPipelines_[index][facing]=createMaterialGraphicsPipeline(desc);
             }
         }
     }catch(...){destroyMaterialClassPipelines();throw;}
@@ -86,8 +157,8 @@ void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext
     if(bindlessTextures_)suffix+="_bindless";
     VkShaderModule color=VK_NULL_HANDLE,snapshot=VK_NULL_HANDLE;
     try {
-        color=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+sceneFragmentVariant("/mesh_integral"+suffix+".frag.spv",false,irradianceClipmapActive_,probeFieldActive_)));
-        if(opaque)snapshot=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+sceneFragmentVariant("/character_snapshot_integral"+suffix+".frag.spv",false,irradianceClipmapActive_,probeFieldActive_)));
+        color=createMaterialShaderModule(shaderDirectory_+sceneFragmentVariant("/mesh_integral"+suffix+".frag.spv",false,irradianceClipmapActive_,probeFieldActive_));
+        if(opaque)snapshot=createMaterialShaderModule(shaderDirectory_+sceneFragmentVariant("/character_snapshot_integral"+suffix+".frag.spv",false,irradianceClipmapActive_,probeFieldActive_));
         for(unsigned kind=0;kind<2;++kind){
             if(kind==0?!opaque:!blend)continue;
             for(unsigned facing=0;facing<4;++facing){
@@ -95,22 +166,22 @@ void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext
                 desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
                 desc.alphaBlend=kind==1;desc.depthWrite=kind==0;
-                hairIntegralPipelines_[kind*4+facing]=rhi_->createGraphicsPipeline(desc);
+                hairIntegralPipelines_[kind*4+facing]=createMaterialGraphicsPipeline(desc);
                 if(kind==0){
                     desc.fragmentShader=snapshot;desc.renderPass=overlayDepthPass_;desc.colorAttachmentCount=2;
                     desc.colorWriteMasks.assign(2,0xf);
                     desc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;desc.minSampleShading=0;
-                    hairIntegralSnapshotPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+                    hairIntegralSnapshotPipelines_[facing]=createMaterialGraphicsPipeline(desc);
                 }
             }
         }
     }catch(...){
-        if(color)rhi_->destroyShaderModule(color);
-        if(snapshot)rhi_->destroyShaderModule(snapshot);
+        if(color)destroyMaterialShaderModule(color);
+        if(snapshot)destroyMaterialShaderModule(snapshot);
         destroyHairIntegralPipelines();throw;
     }
-    if(color)rhi_->destroyShaderModule(color);
-    if(snapshot)rhi_->destroyShaderModule(snapshot);
+    if(color)destroyMaterialShaderModule(color);
+    if(snapshot)destroyMaterialShaderModule(snapshot);
 }
 void CharacterSceneRenderer::destroyHairIntegralPipelines() noexcept {
     if(!rhi_)return;

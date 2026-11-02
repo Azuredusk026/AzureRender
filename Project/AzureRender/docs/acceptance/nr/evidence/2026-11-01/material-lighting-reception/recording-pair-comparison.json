@@ -1,0 +1,201 @@
+{
+  "status": "measured-recording-input-differences",
+  "events": [
+    26483,
+    25603
+  ],
+  "constantDifferences": [],
+  "resources": [
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Vertex-storage-0-0",
+      "identical": true,
+      "bytes": [
+        829312,
+        829312
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Vertex-storage-1-0",
+      "identical": true,
+      "bytes": [
+        89128836,
+        89128836
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Pixel-storage-0-0",
+      "identical": true,
+      "bytes": [
+        18432,
+        18432
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Pixel-storage-1-0",
+      "identical": true,
+      "bytes": [
+        27648,
+        27648
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Pixel-storage-2-0",
+      "identical": true,
+      "bytes": [
+        1769472,
+        1769472
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Pixel-storage-3-0",
+      "identical": true,
+      "bytes": [
+        2098064,
+        2098064
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Pixel-storage-4-0",
+      "identical": true,
+      "bytes": [
+        208,
+        208
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Pixel-storage-5-0",
+      "identical": true,
+      "bytes": [
+        261536,
+        261536
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "ShaderStage.Pixel-storage-6-0",
+      "identical": true,
+      "bytes": [
+        1456,
+        1456
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "vertex-0",
+      "identical": true,
+      "bytes": [
+        46116,
+        46116
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "vertex-1",
+      "identical": true,
+      "bytes": [
+        6832,
+        6832
+      ]
+    },
+    {
+      "group": "buffers",
+      "name": "index",
+      "identical": true,
+      "bytes": [
+        22548,
+        22548
+      ]
+    },
+    {
+      "group": "textures",
+      "name": "overlaySceneDepth-0",
+      "identical": true,
+      "bytes": [
+        58982400,
+        58982400
+      ]
+    },
+    {
+      "group": "textures",
+      "name": "textureArray-6329",
+      "identical": true,
+      "bytes": [
+        262144,
+        262144
+      ]
+    },
+    {
+      "group": "textures",
+      "name": "textureArray-6330",
+      "identical": true,
+      "bytes": [
+        16,
+        16
+      ]
+    },
+    {
+      "group": "textures",
+      "name": "textureArray-6331",
+      "identical": true,
+      "bytes": [
+        16,
+        16
+      ]
+    },
+    {
+      "group": "textures",
+      "name": "textureArray-6332",
+      "identical": true,
+      "bytes": [
+        16,
+        16
+      ]
+    },
+    {
+      "group": "textures",
+      "name": "textureArray-6333",
+      "identical": true,
+      "bytes": [
+        262144,
+        262144
+      ]
+    },
+    {
+      "group": "textures",
+      "name": "textureArray-6335",
+      "identical": true,
+      "bytes": [
+        16,
+        16
+      ]
+    }
+  ],
+  "mainHdr": {
+    "differentPixels": 0,
+    "maximumFloatError": 0.0,
+    "bounds": null,
+    "pixel911x4": [
+      [
+        0.1455078125,
+        0.265869140625,
+        0.92724609375,
+        1.0
+      ],
+      [
+        0.1455078125,
+        0.265869140625,
+        0.92724609375,
+        1.0
+      ]
+    ]
+  },
+  "visualAcceptance": "failed-user-review"
+}

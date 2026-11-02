@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "jobs": [
+    {
+      "name": "related-release-resume",
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 206.0731988
+    },
+    {
+      "name": "related-debug",
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 835.9084101999999
+    },
+    {
+      "name": "route-release",
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 465.6853062
+    },
+    {
+      "name": "route-debug",
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 1384.8687152999996
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "status": "failed-command-parser",
+  "changedShaders": 96,
+  "missingCommand": "mesh.frag.spv",
+  "cause": "The unspecialized compile command has no macro arguments."
+}

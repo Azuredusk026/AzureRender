@@ -94,9 +94,24 @@ private:
     void destroyHairIntegralPipelines() noexcept;
     void initializeMaterialClassPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&,const rhi::GraphicsPipelineDesc&);
     void destroyMaterialClassPipelines() noexcept;
+    void prepareMaterialLightingPipelines();
+    VkShaderModule createMaterialShaderModule(const std::string&);
+    void destroyMaterialShaderModule(VkShaderModule);
+    VkPipeline createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
+    VkPipeline materialLightingPipeline(const AssetMaterial&,VkPipeline) const;
+    void destroyMaterialLightingPipelines() noexcept;
+    struct MaterialShaderVariant {
+        VkShaderModule scene=VK_NULL_HANDLE,lighting=VK_NULL_HANDLE;
+        std::string path;
+    };
+    std::vector<MaterialShaderVariant> materialShaderVariants_;
+    std::vector<std::pair<VkPipeline,VkPipeline>> materialLightingPipelines_;
+    bool lightingOrdinaryNeeded_=false,lightingBlendNeeded_=false;
+    bool lightingFallbackNeeded_=false,lightingIntegralNeeded_=false;
     std::array<VkPipeline,4> ordinaryOpaquePipelines_{};
     std::array<VkPipeline,4> ordinaryOpaqueSnapshotPipelines_{};
     static constexpr unsigned kMaterialClassVariantCount=unsigned(AssetMaterialClass::Showcase)+1;
+    std::array<bool,kMaterialClassVariantCount> lightingClassesNeeded_{};
     std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassPipelines_{};
     std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassSnapshotPipelines_{};
     std::array<MaterialFeatureSpecialization,kMaterialClassVariantCount> materialClassFeatureSpecializations_{};

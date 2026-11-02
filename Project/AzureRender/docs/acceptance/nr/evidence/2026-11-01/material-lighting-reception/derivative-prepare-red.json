@@ -1,0 +1,6 @@
+{
+  "status": "failed-fixture-assumption",
+  "expectedLayerSamples": 5,
+  "actualLayerSamples": 4,
+  "sourceSha256": "1c41efb6339b42dea0970f2fd5a346ef9bebda9d475c519ace61d845b1947c97"
+}

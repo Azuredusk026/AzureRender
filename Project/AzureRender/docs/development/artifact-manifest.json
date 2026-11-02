@@ -944,6 +944,15 @@
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/native-cloth-inputs.md",
       "compositionEvidence": "docs/acceptance/nr/npr-view-ramp-composition.md"
+    },
+    {
+      "path": "runs/20261101-120125-character-environment-reception-fa70a7",
+      "pathBase": "build",
+      "purpose": "材质环境来源、主光对象阴影及原生全身兼容核验。",
+      "retention": "相应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "candidate-project/playable.azureproject",
+      "evidence": "docs/acceptance/nr/material-lighting-reception.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

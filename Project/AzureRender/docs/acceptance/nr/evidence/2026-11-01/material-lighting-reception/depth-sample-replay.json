@@ -1,0 +1,42 @@
+{
+  "status": "measured-depth-sampling-controls",
+  "stage": "shutdown",
+  "variants": [
+    {
+      "mode": "captured-control",
+      "bytes": 14745600,
+      "path": "depth-sample-replay/captured-control.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "original",
+      "bytes": 14745600,
+      "path": "depth-sample-replay/original.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "point-depth",
+      "bytes": 14745600,
+      "path": "depth-sample-replay/point-depth.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    }
+  ]
+}

@@ -202,8 +202,41 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
+            if(profile.contains("environmentLighting")) {
+                const auto& value=profile.at("environmentLighting");
+                if(profile.at("schemaVersion")!=2||!value.is_object()||!value.contains("schemaVersion")
+                    ||!value.at("schemaVersion").is_number_integer()||value.at("schemaVersion")!=1)
+                    throw std::invalid_argument(context+": environmentLighting requires schemaVersion one and profile version two");
+                for(const auto& field:value.items())if(field.key()!="schemaVersion"&&field.key()!="diffuse"
+                    &&field.key()!="reflection"&&field.key()!="globalIntensity")
+                    throw std::invalid_argument(context+": unknown environmentLighting field "+field.key());
+                const auto source=[&](const char* key) {
+                    if(!value.contains(key))return azurerender::MaterialEnvironmentSource::Scene;
+                    const auto& selected=value.at(key);
+                    if(!selected.is_string()||(selected!="scene"&&selected!="global-environment"))
+                        throw std::invalid_argument(context+": environmentLighting sources require scene or global-environment");
+                    return selected=="scene"?azurerender::MaterialEnvironmentSource::Scene
+                        :azurerender::MaterialEnvironmentSource::GlobalEnvironment;
+                };
+                result.environmentLighting.diffuse=source("diffuse");
+                result.environmentLighting.reflection=source("reflection");
+                if(value.contains("globalIntensity")) {
+                    const auto& intensity=value.at("globalIntensity");
+                    if(!intensity.is_number()||!std::isfinite(intensity.get<double>())
+                        ||intensity.get<double>()<0||intensity.get<double>()>16)
+                        throw std::invalid_argument(context+": environmentLighting globalIntensity requires zero through sixteen");
+                    result.environmentLighting.globalIntensity=static_cast<float>(intensity.get<double>());
+                }
+            }
+            if(profile.contains("mainLightShadow")) {
+                const auto& value=profile.at("mainLightShadow");
+                if(profile.at("schemaVersion")!=2||!value.is_string()||(value!="scene"&&value!="object-shadow"))
+                    throw std::invalid_argument(context+": mainLightShadow requires scene or object-shadow and profile version two");
+                result.mainLightShadow=value=="scene"?azurerender::MaterialMainLightShadow::Scene
+                    :azurerender::MaterialMainLightShadow::ObjectShadow;
+            }
             if(profile.contains("displayTransform")) {
                 const auto& value=profile.at("displayTransform");
                 if(profile.at("schemaVersion")!=2||!value.is_string()
@@ -2139,6 +2172,11 @@ AssetMaterial loadMaterial(
     azurerender::validateMaterialDisplayTransform(result.displayTransform,
         (result.materialFeatures&MaterialFeatureMultiplyComposite)!=0
         ||(result.unlitTextureLayers.present&&result.unlitTextureLayers.composite==azurerender::UnlitTextureLayers::Composite::Additive));
+    const bool lit=(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
+        &&!result.unlitTextureLayers.present&&result.materialClass!=AssetMaterialClass::Overlay;
+    const bool ordinary=(result.materialClass==AssetMaterialClass::Generic||result.materialClass==AssetMaterialClass::Fabric
+        ||result.materialClass==AssetMaterialClass::Metal)&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
+    azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary);
     return result;
 }
 

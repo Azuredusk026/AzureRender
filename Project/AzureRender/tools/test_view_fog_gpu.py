@@ -124,7 +124,7 @@ def run(player, output, validation, selected):
             manifest=json.loads((root/'frames/capture_manifest.json').read_text())
             if multisample:assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
             if object_shadow:assert manifest['objectShadowPrepared'] and manifest['objectShadowPages']==1,name
-            assert manifest['materialSurfaceProfileLayoutVersion']==19 and manifest['cameraUniformBytes']==688,name
+            assert manifest['materialSurfaceProfileLayoutVersion']==20 and manifest['cameraUniformBytes']==688,name
             expected_state=kind if kind in ('camera-mismatch','aspect-mismatch') else 'disabled' if kind in ('absent','disabled') else 'matched'
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])
             pixels=np.asarray(Image.open(root/'frames/frame_000000.png').convert('RGB'));errors=[]

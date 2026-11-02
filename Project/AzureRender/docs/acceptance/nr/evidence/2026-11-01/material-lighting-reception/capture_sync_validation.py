@@ -1,0 +1,12 @@
+import hashlib,json,os,re,subprocess,time
+from pathlib import Path
+root=Path.cwd();run=Path(__file__).resolve().parent;out=run/'sync-validation';out.mkdir(exist_ok=False);player=root/'build/ninja-msvc-release/AzurePlayer.exe';build=json.loads((run/'release-build.json').read_text());assert hashlib.sha256(player.read_bytes()).hexdigest()==build['programs']['AzurePlayer']
+settings='khronos_validation.validate_sync = true\nkhronos_validation.syncval_submit_time_validation = true\nkhronos_validation.debug_action = VK_DBG_LAYER_ACTION_LOG_MSG\nkhronos_validation.log_filename = stdout\nkhronos_validation.report_flags = error,warn,info\nkhronos_validation.enable_message_limit = false\n';(out/'vk_layer_settings.txt').write_bytes(settings.encode())
+env=os.environ.copy();env['DOTNET_ROOT']='D:/Tools/dotnet9';env['VK_INSTANCE_LAYERS']='VK_LAYER_KHRONOS_validation';env['VK_LAYER_VALIDATE_SYNC']='1';env['VK_LAYER_SETTINGS_PATH']=str(out)
+command=[str(player),'--project',str(run/'candidate-project/full-world-hidden.azureproject'),'--width','2560','--height','1440','--capture-frames','12','--capture-fps','60','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--capture-dir',str(out/'frames'),'--runtime-report',str(out/'runtime.json')];record=dict(status='running',command=command,environment={k:env[k] for k in ['VK_INSTANCE_LAYERS','VK_LAYER_VALIDATE_SYNC','VK_LAYER_SETTINGS_PATH']},configurationSource='https://github.com/KhronosGroup/Vulkan-ValidationLayers/blob/main/docs/updating_from_VK_EXT_validation_features.md',programSha256=build['programs']['AzurePlayer']);start=time.perf_counter()
+try:
+ with (out/'player.log').open('wb') as log:result=subprocess.run(command,cwd=out,env=env,stdout=log,stderr=log,timeout=700)
+ text=(out/'player.log').read_text(errors='replace');lines=[line for line in text.splitlines() if re.search('SYNC-HAZARD|Validation (?:Error|Warning)|VUID-',line)]
+ record.update(status='diagnostic-completed',exitCode=result.returncode,seconds=time.perf_counter()-start,frames=len(list((out/'frames').glob('frame_*.png'))),validationMessageLines=len(lines),firstValidationMessages=lines[:16],syncHazards=len(re.findall('SYNC-HAZARD',text)),unloadZero='Allocator after unload: buffers=0 images=0' in text)
+except Exception as error:record.update(status='failed',error=repr(error),seconds=time.perf_counter()-start)
+finally:(run/'sync-validation.json').write_bytes((json.dumps(record,indent=2)+'\n').encode());print(json.dumps({k:v for k,v in record.items() if k not in ['command','firstValidationMessages','environment']}))

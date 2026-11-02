@@ -1,0 +1,8 @@
+{
+  "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\project\\source-environment-no-ssr.azureproject",
+  "baseLevelSha256": "220d9317edaa2d1b281586908ec6d23e160e204e3c6370f8e552519921d22643",
+  "inputs": {
+    "scene\\source-environment-no-ssr.azurelevel": "8a00caabc3dacb661098fd6891848ec8c9b67ff4e136e877d5490020a0de39d6",
+    "source-environment-no-ssr.azureproject": "d541ccadf16fd56761a952d079294d01b006f0bfc2f81b8fb44012732e90fbff"
+  }
+}

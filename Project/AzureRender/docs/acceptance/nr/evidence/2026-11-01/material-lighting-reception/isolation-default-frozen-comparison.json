@@ -1,0 +1,76 @@
+{
+  "status": "measured",
+  "cases": [
+    {
+      "name": "default-a",
+      "differentFrames": [
+        {
+          "frame": "frame_000003.png",
+          "pixels": 12,
+          "maximum": 6
+        },
+        {
+          "frame": "frame_000004.png",
+          "pixels": 15,
+          "maximum": 1
+        },
+        {
+          "frame": "frame_000005.png",
+          "pixels": 14,
+          "maximum": 1
+        },
+        {
+          "frame": "frame_000006.png",
+          "pixels": 14,
+          "maximum": 1
+        },
+        {
+          "frame": "frame_000007.png",
+          "pixels": 13,
+          "maximum": 1
+        },
+        {
+          "frame": "frame_000008.png",
+          "pixels": 9,
+          "maximum": 1
+        }
+      ]
+    },
+    {
+      "name": "default-b",
+      "differentFrames": [
+        {
+          "frame": "frame_000003.png",
+          "pixels": 12,
+          "maximum": 6
+        },
+        {
+          "frame": "frame_000004.png",
+          "pixels": 15,
+          "maximum": 1
+        },
+        {
+          "frame": "frame_000005.png",
+          "pixels": 14,
+          "maximum": 1
+        },
+        {
+          "frame": "frame_000006.png",
+          "pixels": 14,
+          "maximum": 1
+        },
+        {
+          "frame": "frame_000007.png",
+          "pixels": 13,
+          "maximum": 1
+        },
+        {
+          "frame": "frame_000008.png",
+          "pixels": 9,
+          "maximum": 1
+        }
+      ]
+    }
+  ],
+  "strictThreshold": 0
+}

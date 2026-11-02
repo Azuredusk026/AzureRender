@@ -1,0 +1,1469 @@
+{
+  "status": "compiled-byte-exact-legacy-shader-controls",
+  "meshSourceCommit": "e2c5bbb",
+  "meshSourceSha256": "530b3c95b76217f6c37be346b9ce343833107819be66bda084dae18fb8036d24",
+  "referenceRun": "build/runs/20261101-043757-material-display-transform-93d6e0",
+  "shaderRoots": {
+    "main-only": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\main-only",
+    "all-legacy": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy"
+  },
+  "replacedShaders": [
+    {
+      "name": "character_snapshot.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "0983857bd26e8e9b32d50ea47c067e55141086b2816e00dbd066e65d9efddef6",
+      "currentSha256": "cc2bb0c373ef5bf29a1c847d0144ba4f051800936a1d7187aa941eb57abcead6",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_bindless.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "c7f483bb3bb9b5a2920c9afc8015566675c2540c976631c1fd6b78033969015c",
+      "currentSha256": "c9658572b37452e14e64c2dc8ca274b17474389e15ff845a3fd51fa2adf3fe51",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_bindless.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_bindless_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "ff39dc60aaf1f9220a8837c2be8decf412fbb0cdebafef265665f77f9e96358f",
+      "currentSha256": "bc2179f40a10177c92e56f09af12bf2dcb5f531304d9630027b99dc44ccb2255",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_bindless_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_bindless_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "c842405b1fcbd8c4ea188ce43c93149f0daaee1054c4fa94c3164953aedd925c",
+      "currentSha256": "dd40a33f67123150ac2487644f00f999923a14994d4f35084212abc3d1848d11",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_bindless_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "0f18b4fc40616baac4d7cf83f45ba1f114821613ac6ef1fbfdceb78cdbfd6f39",
+      "currentSha256": "b61266a0d4b2c82a8ec798dad48d16a62bdd31da3d69c5acb2160798dfc35e97",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_bindless_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_bindless_samples.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "2373a45563c679e3600bbfe77fedc92df497a18cc27b40a694dbf04a807d59eb",
+      "currentSha256": "20a6a088815b508af5b170c95e073730160cf1e696296699b8355dc9aa6fc5a3",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_bindless_samples.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_bindless_samples_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "575fb40bb9992eb2a81dd6a3eff15d5c0997bcff61638eb02d4c31af48cbe46c",
+      "currentSha256": "57a8b44a86236bbebb7a517780b8a14ce8243a6f94778fb106b0239c5b5a9e48",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_bindless_samples_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_bindless_samples_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "68f275f944e131edca264836360b3a3d6bca6378a3658e2078b86a1ac6bc795b",
+      "currentSha256": "631433f04837bb6161af435327095dc4de86a6169bdcc1a0ce819e5d5caa0797",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_bindless_samples_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_bindless_samples_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "3c3c249ca5bc776843218428423811e48d776580a2c1e5e2b2f26930db91fbdd",
+      "currentSha256": "222514102147688b3c072168209681c16d25fddb0dd911988caf21f00b8ac5af",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_bindless_samples_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "9071c3e583e47745ed20d0fc6691a6d6b9b2728fa8ed7c191968251b9c97a75d",
+      "currentSha256": "282ceb9d644aec271211b86d59e1170c8979b53cdd03ff29757fdf53709cae3f",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "8b09ce70291fa3dae1ea1a0c63069e71c949209d1b04e4f37bd2b6cbc5e3a9b1",
+      "currentSha256": "d8cbd7056c385c18050341e1517b99e9f7a37628af48a0962b923aa1e9c97c08",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "998efadc77a7c59d0a64f24aef78a9984b1638d074a51f1f270d522ffdd90e17",
+      "currentSha256": "f12a56897a645b3ee9706b416b526052aedcf3bbac25fcead80605b0a6617ecc",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "c6f612a49df3c8b6e5e218e2195ee6a46a9328e08ee45a1ebc8fe6ffafd89625",
+      "currentSha256": "6550011ef1a79db8b59e10bd3294626cca6855d40206bee0da86742dd06ce818",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_bindless.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "ef79228da214b1561ae63522464eec9331352e83b56d57c5c1e4f1c381e3281f",
+      "currentSha256": "93d7bdce5c5e362d54fbef0b49010d724443f2464721e0f288df02edf75ced74",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_bindless.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_bindless_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "ae2eefca16bc66e7bab9c7d4897d207c49237903e204cb90720f3539513384fd",
+      "currentSha256": "d51b5e34b862230177ba29abb085d260c609c165ad5c21dd82426738f4737b15",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_bindless_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_bindless_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "dc1576c80044184a8c9f99129dd332309558866793a50082ef5ce66be3597151",
+      "currentSha256": "501e386c3358f60bd77be2a5f046b9b94afdddeda01b132d5ca57443a946e82e",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_bindless_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "f3e0ae3da3661a996404063f799a233f33e1f68da52f06031453445023503449",
+      "currentSha256": "d9e03ef6914dd3af455e2488ca609923d22194b28816e23f46a89eb0444d4f16",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_bindless_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "5eab7b0219aba20d7b4889b5c2cd9a82c3effdb52ff81131362e52bd64807961",
+      "currentSha256": "9a8dd148afeab0a260425d87fef0507d578261c193bdce5d6c7186ce2a16f355",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "664107fe07371905d4c5deb9f9fdcb813d8c5dcca85d62987a606f40a387fc20",
+      "currentSha256": "0ad84b524740db8a9c7599dfd85f41135b9e3fd7de70570dd79de18c7d143fc8",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "57c8bfd996e8cf841a5eb4ef0eb073a201261ab3302ef457732154b292b22698",
+      "currentSha256": "5fd2ea5e3acf666513113c3138f9a5713e135d36bc5c1b48acdb8f48ed06694d",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_object.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "b0c5b3a7ba80b3d86daba84104d3326c752d9eb087dd0374f4dd7f5c96a5e1a6",
+      "currentSha256": "ee3e99377c0b3191c522ff7ce4188f9b6b29ebd1e07c652dfaad18c4f484ad4e",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_object.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_object_bindless.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "80ec417b3871d761921e05b2cda428addf4b3214748dc0f376bdca154ad60a89",
+      "currentSha256": "dee2ef2ba6fac71011648f308863ff9c7e0463540ed36372e738283d17f157ea",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_object_bindless.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_object_bindless_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "0447ae0af984dbed6947ae3c79280a9233247fa7e6dfd50bd327f26318baec3e",
+      "currentSha256": "9f7cf96c40e5101f9e1f5609bcc268f6eaa03f8114b555f599c76a9d6d1debdd",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_object_bindless_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_object_bindless_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "149a29ea26ae072d48ac9ca45dba9564ea74453fcfb55036f97fae7a17f59864",
+      "currentSha256": "76591077491b1cf2e8d13064c812aa26c4de7f9ff72d93f1323758dd5883f76a",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_object_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_object_bindless_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "b3f8b20a7c30f6727e3212c7252bbebcfb081d09f5615e4d8463af713719c766",
+      "currentSha256": "279f7f0ace3dc4f8c0114d5605bdcf9722ed4eafcfd1c011888a276fffad1513",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_object_bindless_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_object_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "7860f3201487af67aaacbb959c28d503d80a16e106554d68052bce5625ca9f48",
+      "currentSha256": "499acbe7aea23bac86f180e5f22633f5b03f0a90fa9f063d56ea05f6a7651a79",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_object_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_object_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "8832bd46dc1d9ad9f1e9db468dde70904c2aba6505968b3dd6be5b2b0e143dca",
+      "currentSha256": "56fb2d0456127c606cebbc56fd1fe14d68a365dcd435a6fec32a79e244c40f34",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_object_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_integral_object_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "d2eb8c03cd29c04a4f7ad579414945ec6b3b84fd5b9055a2b5820e3673ca314b",
+      "currentSha256": "50de9ce41667c0cc175237f8aad274cbf916f6ee7dd3d0b7ddf61877e69d7017",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_integral_object_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "76fe91c65deaf1e6aa1d56e915e396e7bb39fe50a708eea778b37b15b1aa2395",
+      "currentSha256": "4aa5c223ed3264d446f8e4327a4a3ef26ac78a44796749e061d0567c5ca9c268",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_bindless.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "1f335149f98aa2c29d5f541eb5ecb1c8d84d118100323fc8d7e86804ae2e437c",
+      "currentSha256": "f089096994701522c58b5254d121d01bb4ed193709797df8490fb56c6cdce484",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_bindless.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_bindless_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "6579bf0e250ea548470f7e8bdeab68d297cd23d505db7b2eb1ed31f8339824e8",
+      "currentSha256": "faa7b88fdebc5b7c6ed1f63b5610e508d76f12061b8146c544b2de7d0ea57908",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_bindless_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "e63a2102576d3194c53c4ba197017a915ec2c69503517c48860da8b6718a7656",
+      "currentSha256": "f2e0eff3add926391b2f0da3d7752b6aa396c474756a72a0c349ea85a3cd7160",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_bindless_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "6c331549d926cf36048ea1c5771b87bcc6a8190c2ad9446c6a46f607acf59406",
+      "currentSha256": "1a0c5bc7fd5f208244defad3a4463463e98d0e0190cb2aac35c72ad2120026e1",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_bindless_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_bindless_samples.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "2c17f6e60781809c8b1caa8f213692ca0b0a58128bef26c5d6dc61b0ea0f2a51",
+      "currentSha256": "5c735131d97ea4a10e785f79dbd2165d0ad9b49198916777c81071f238171b9f",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_bindless_samples.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_bindless_samples_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "3e9a8c41f46abc9ccac57654817dee5f1022621bb134d3e524c02ada81a10354",
+      "currentSha256": "ea306cea28eb8cc81e4bbfb4e842189e4606bd034a1a5c46b96576d4efaff2d6",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_bindless_samples_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_bindless_samples_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "2f6ebdb0670c8c25e608029106e8b5fefbe2b9c32a6bfc3ba1152bd8797785c7",
+      "currentSha256": "10adb6eff4a768f4aa820bcb629717a730c67760160d50f43924dd932392c7ed",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_bindless_samples_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_bindless_samples_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "ad4d26f06596a80f6496f41cbc1a02235e601a1a89972052d10bb7a175136f28",
+      "currentSha256": "5671c9536b01f5a8f9a915dca3080887141683c1c664fcf0e0694b4bda0f992f",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_bindless_samples_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "4b6e949a3386fad5f9233c972a50691b93c1a892f6558ed9e7209fe3571f6bf6",
+      "currentSha256": "3bbf00320e19e453b8d48338eaf64539f1ede388de7e8cba81e135a4746e1ec0",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "26d554be54e6efeb18d15b11f1d287591adb979199043830423e61d819c658b7",
+      "currentSha256": "2c6060aabbc94dd0e89bc07647a5f82fbc5b089684955dba939abe99ceb256b7",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "703f62b43c8b8cc912337390ed72f6bdca282b603348afb32fc9847a184d4b56",
+      "currentSha256": "a0bc239be3d59c63fddf056a7201736c357f70c31d0a4a327dc7604323974cf9",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_samples.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "434a8a2a8ca5390a2b6252bafce9cac2f1559832f7d7f11fd14912afcbb0004d",
+      "currentSha256": "ed129977e6956c30f3d4613c76e9c6ce3fa54597b496d16f463976757829f266",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_samples.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_samples_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "7bb33e2555ebd424c9f35d0e356fe7d53defc261877ab09edee1145a25fb3c53",
+      "currentSha256": "5daafec50af16a9d43f2208d8be686d53b56b9d1c605b7842ac28e4031eb27b0",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_samples_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_samples_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "41c65c0f5b80a179ab5e569d26971b17638c1be950301dab07c4e7111bbaca75",
+      "currentSha256": "36597a5ef1e0d13316fad0e24718333738586500b61120cddcdaff86186c49a0",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_samples_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_object_samples_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "fb8ce89f3d159a507909f1e24cb0bff4de4f24399fb5bd73432be55b2844d287",
+      "currentSha256": "6873de5d3b1eadda7141060203d414195e6cc29e1909b9cd714f706b448082b3",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_object_samples_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_samples.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "e8d3b2608ad19bc46d1d9e4855041b6f33562be7611e4699210016f0b9bfdd68",
+      "currentSha256": "eccb9596df4ab30ad1282ed22619ec0277605a4d25e46b68054076a1ac86a784",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_samples.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_samples_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "75a87e5064e33d9fe510254f79448247cea8a8ae2cec934b98fcb3bd65c6c26d",
+      "currentSha256": "94c9ec00cd45a409126264b89389e6067516a847fa3eefe8a361d178a6a57e74",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_samples_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_samples_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "c93684eb0e5738f8e4368200e411c51a4a2566965586b97be4f4d0f0c640f119",
+      "currentSha256": "0cff64fd25bdd036a76dd997990b453ced68291ee281ab8608ead1bf55b41b96",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_samples_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "character_snapshot_samples_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "eba9b05799010d0c514b4f6b1aa48ce88cf9ca3efce8d623789fc54a776767da",
+      "currentSha256": "820ae2c55db5177feba07f4375486e1e17ba1e9f7142dc353d4a03de52483630",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OPAQUE_SNAPSHOT=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\character_snapshot_samples_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "45c2065f52cea36c9a6fb7b173656400a713251deb716d3481aa93a39868fbe5",
+      "currentSha256": "f51eac8d54b9e422063c114fd190a8323e96c552bd944623ddaae03facfd44a3",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_bindless.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "6188b2dfbf816f70dc6ea0aba232d8598c092507d7781a67b91a9d25ab4277d2",
+      "currentSha256": "258cf7677c25881e041c83490ced1dd37a33d5ddd010119015290de562cd7464",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_bindless.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_bindless_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "175955875329277b981b21b797909e3eaa9a6480b6cbb64231128e473bc07967",
+      "currentSha256": "5bc4ab5e778db70fa8db9950dd51c5383271a81a7056e3efe65cd123206c954d",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_bindless_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_bindless_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "808919cfa447c81fae88be9ed75d5128283d960b54852b35836aff36371a70ee",
+      "currentSha256": "8e84f6deeda8f7926efb50466aa3dd5c7bebd4b23e4a66f47a0e6a45798c0e6f",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_bindless_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "84ce8daaa2f1e86bb61b734f9382344dfda0732a4ef6c07959babd8acf4d61d0",
+      "currentSha256": "f863699dc4d01b3e0bfec3cb6a198211f45183ffc6bcf7596ef63fbc984abf84",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_bindless_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_bindless_samples.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "64700701c5493b7852646c22566a4a85d458a1dede5da3db2aae838cfb416481",
+      "currentSha256": "4567e09394f1022a407e0326238a448e7684d69e99ac30334c105ae9a581fbb1",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_bindless_samples.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_bindless_samples_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "b8e84ed6b09218c172aa1fcf3e3f65af7879da8f3e9861dff63ad80ce287e439",
+      "currentSha256": "171ff11b26037578e1d4f84afe6f6239d40b4c229af9f94d792d3b33b0e8fe78",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_bindless_samples_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_bindless_samples_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "3e8a380487d8f8db67f46da70413fbccbfbe834ebd4434cf34ea3ec4c104b7fc",
+      "currentSha256": "b305d86a528771d1abc9e21a6221cf40bbc314777816f4dfbc27573950153ac1",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_bindless_samples_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_bindless_samples_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "1f46e84b90ebc9e423450602a4452bf50b0f88a23a46d656f485a8dc9e3024a7",
+      "currentSha256": "6f730b7b836f57bcb7e8f46760ddd33f441f29e8e5e1709d0055be5f4073198e",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_bindless_samples_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "1b57d303f653ba79056a2fca23a097bd3441cc9f3b0d5c18fecbc398ce1f93e4",
+      "currentSha256": "84c14e84775c5c7957f684938962a55577027dc2a85b95691ff999c50d79e703",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "81f6247ebaef56a05a83bf96aa717bd48dbe19715c8fe9c71ba244802e23a8de",
+      "currentSha256": "b6d9055fcba9f3f5cc044e1a08197f589e87d4e2cd576d70dfb54d2bfd062619",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "21029685c3e87f787075012adb9328ee4f795d6319592bc79d29e0507785fa32",
+      "currentSha256": "0e5627c8479a38f3f89705f1b73afe1fcbe4450b257d5c03ddf04e3a9968e978",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "d9bef11836deb33fdf52693431cdc289bb295f4724a997424bb565512481839c",
+      "currentSha256": "fa72a58646e4cf515549b7234d0e3015d37ede3c024f6f2603d1fd73f1182c45",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_bindless.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "0594aabe025e11106876886cdd1a8a89615b59557fecaa5a5c480650571977d3",
+      "currentSha256": "a37a065823808a32ac43dd12179beaed1653c405f2401eed7235b2fe391deb9b",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_bindless.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_bindless_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "f9c29074463c70a24ec8450e27d53325a0d46a047d84df507b61e91382c142d6",
+      "currentSha256": "9611b2c8c7ad3a9f8e033c79726a73ccb2ea44219ecb5e9556b7d78d99af2c15",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_bindless_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_bindless_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "798433c9045eede93569b14e4da165fe01c221a20f3e43774920896a012c9418",
+      "currentSha256": "393518da37b1ffb32c9baec9437e4293d225c879b4a18ab5ac1e7027e194affd",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_bindless_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "4623ee84a49e28e2e1fa872faf8360fe85e4e4d9d47ee40152cf1cd11f64b0ec",
+      "currentSha256": "e0be69a87398650f5fa5bd16698d805d248cd58dce062bf5ac1092576b303664",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_bindless_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "ab1819c659a1780db16086c16842e7a8388dd08210f43490ebe256afb1bbb834",
+      "currentSha256": "d753e9edb4b69e1944574b211bf90df56d0639a01bb328dc42e588ae09c669e9",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "8cdbe0be3120c3f5bda011995b9e25c0ad9a3bd5f8629225f8c5c31cd5a1fc36",
+      "currentSha256": "bdac1708887c0d5d13202a2166e5541089e828ced427c4af37bc758b2ac0e74d",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "660107332a42812f510970979965bf7a684a6fd96071bcdb6e7031d3052014e7",
+      "currentSha256": "d92282dcb0000514a1fca1ddb14fe0094b675f0fb6eed78455f1fdd4a43e5ae8",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_object.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "76ee5a3870e80e680723ab8c167acbe1d82752e3912ab279435283cfebdcf11f",
+      "currentSha256": "1473a05c5032e5017c2138c8e94fc8b5f149954e6afdfdbb8d2567ace3380c0d",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_object.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_object_bindless.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "d9c07ec32d96cb6840d7f3656ec7f0362496a058404518555ad87e4629308019",
+      "currentSha256": "10a1faaa920c33ee125585d5bad597d50c4af0b9e5edb3735ac892b68cade987",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_object_bindless.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_object_bindless_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "cdd122a41dd758bc77dd9dc11751fdd71432a3cbae761dc7c06a52e22cea4887",
+      "currentSha256": "122dbe5fecd04d39d57abd8657269eefe67f26b834d34b758614c2872c04e5c5",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_object_bindless_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_object_bindless_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "f99f380f777f087781140e2f0fd7cca3220e993b3b5c13c898f050d7e48a60ce",
+      "currentSha256": "dd95582b1bd9b609022ee1291aa37aad2afc8852cb029fd3759d13715e48eebb",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_object_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_object_bindless_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "caa05e2c92244c7e03c5d1ef91ab469e9c29c06d66bcd4dc9cf85f9ae3223b40",
+      "currentSha256": "6cdf30c6303dc56b5316b748273650699e2972f1f3eb663468d02c10fd6c4192",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_object_bindless_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_object_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "31da9528299ef5f4a539b9c4dafca404cd8f004be23443ea174c0131aae5dbe3",
+      "currentSha256": "09e1954572ad5340ed19b1636fc07b8ecbb043a8b3191019fb38ddb04100d1a6",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_object_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_object_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "e98ed52a2634ddbe1301e717f176af9821bb844c4cb208a4b37749b68277b3d8",
+      "currentSha256": "1b876895a65b6a6e6bc2f3945455d62ab14d8998cb0cbb5b962da881ccf22c2a",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_object_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_integral_object_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "8cc6041cdc87274d9ac734ed530f26284de5f631e767c3ab8b6fdce481ea52da",
+      "currentSha256": "67aa07db8d159b126f46f03fedb6e94ef349fbc96166491049a208c6f889fe71",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_HAIR_PIXEL_INTEGRAL=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_integral_object_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "84393c63f0637ecca19a428b77f9a6cff1f366530f621a072de5471464f4150a",
+      "currentSha256": "5ed8a9fed2fe764d21addc984d45cf86fa21fffd505a7e5d36b11f6ed96120d3",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_bindless.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "8f6e102d68a1cd9d171379da4784578d2ebb9d441cc6ad13327d279ac16c6e6e",
+      "currentSha256": "658ab9376950c7fd122d7285ab9969f245e8120f133a1b835cf298b7bc8dec95",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_bindless.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_bindless_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "bdb9fc191f7b55f9ae91447b0dfdbce016b64569a11f2278fdaa4f2305d78a3a",
+      "currentSha256": "35a9fbe4c1c187a29080c9f99b04a098aa492d052692e59f4ddcb862f35746f3",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_bindless_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_bindless_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "8e0a65f9d3582ed468d65721c01ac18ad80b5354e3668bdfaff099e686d2e190",
+      "currentSha256": "f5f09d40eb5840e151f16b27ee80c353d1602361bbb69a2f87940f51362ce780",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_bindless_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_bindless_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "bf4aaeb1fc06e1732128b5e3bf8450b8d852301fa5d7cc6cae0a2d4b1d663df9",
+      "currentSha256": "a22348264158a46039a342afcc77ac76f4a45cbd312854f4146530c1577438bd",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_bindless_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_bindless_samples.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "4ec11598d5e6bae7ba2d5a40ef6224a9f69560bd57978befe3e77ec139576840",
+      "currentSha256": "9abc3926b544ff26e605033a770e33d65d0745fd349da9d098f1bde0b4721244",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_bindless_samples.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_bindless_samples_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "4314f7eda5146fd93a4a063154b285881fed534d9d1b444c6b18b0fca6999567",
+      "currentSha256": "7c82e4574d7dd5eefe563c887325e9821ea0f6f6b565b4c0891f90bbbcc1f887",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_bindless_samples_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_bindless_samples_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "6fef8914524d68e0b57ae2cac641cd789374a7b8584a66dcda7abd827ba1a37e",
+      "currentSha256": "b13467c6f7dccfdac85856927dd2bb3e12a84b46a1e6409095a8bbee5cbbd987",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_bindless_samples_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_bindless_samples_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "6a966014eeb122872eeb1278dbb282f2a64b96f6252739507bc0e80328e3ad78",
+      "currentSha256": "76164ffaed0d5a1a08accd92b19b0383c40c792d9eaf9f0258d6d05d790ddb25",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "-DAZURE_BINDLESS=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_bindless_samples_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "ae79debab46230fae51dac013c1272a86ec42577032deb0d29877b0d81ea99ad",
+      "currentSha256": "442c2175239fd36ad4cec26b7134f08c694c0ced98c69f9bef33fdbacbd39078",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "2d94e260cb8ab2e5920cb720f8ebc4dce73096f9c5af7926cc106e408d5b411a",
+      "currentSha256": "be2626ccf3aa9d2bedef1e385eca8ebd0eeafba0bbd443d49a6ff361c9cb2018",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "ef5e3ed7a6cf3b37030012c3834d87e02cc292fb30fa13da81fb440e0257f83c",
+      "currentSha256": "d25bb2f3e31676062aabe8ee1ab87f15db16c0c5fbe678ad7c6ccd6a3da28be7",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_samples.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "33d5b91c631745815e845df949159b051106750bc4d116ef4f6acc09153950ff",
+      "currentSha256": "d89a836e01286f547e6acc3fa3705ed99f1a3e703999de08caf0e6d3e713b739",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_samples.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_samples_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "69bc63691a719aa94930b0a5cf076dc567707122e44695714f699e27e9d6ec9e",
+      "currentSha256": "ae0ebd002f58965273d3ffe951be4ab34b1aa5b804419c2a7db3462b5c10a33a",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_samples_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_samples_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "5047845035b5e6ec42bb119176affab901dd41c4da08bf5db0fae3b64cc4396c",
+      "currentSha256": "b6d41ba0a6ebc423dcb20086293270e0683f91689ddfd1624857d74daeb0bf42",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_samples_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_object_samples_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "841353727d95755f7d4febe52d443828595f1bcd874f717d4f608bc76db191b2",
+      "currentSha256": "b5b6ee1a03cc1a6b74edf41423877bb5244178e5806905761c777399ba2a54ff",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "-DAZURE_OBJECT_SHADOW=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_object_samples_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_samples.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "ec09eb6310a1323955285dc13d96da0d904799e81b25ed98b446b312cb9505a2",
+      "currentSha256": "d83c4814bc35084c4170e98b6e4d0bf9ca15cc60f649f313529567e1e1102953",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_samples.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_samples_clipmap.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "885eea4a2e570bbaf25d6d26df6d0405760acf3850b7501b1be6f0fd6cd967e4",
+      "currentSha256": "15bea3c36143eec11c7b6b235c1e490867aae340dfac247993a2e7bfe68159e5",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_samples_clipmap.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_samples_clipmap_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "8ebca61a8461f025fa1b57d1def1e95b9728ba78233fa1eb86e980b59d071194",
+      "currentSha256": "f087fc8c08198942f2c99537c05bc239b8ec28b751126a75bbd01978ea7fad30",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_IRRADIANCE_CLIPMAP=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_samples_clipmap_field.frag.spv"
+      ]
+    },
+    {
+      "name": "mesh_samples_field.frag.spv",
+      "source": "mesh.frag",
+      "sha256": "4417835416933b3f90fc196a1b5a62c09e35cff26446924e588d3e3c3353c5ff",
+      "currentSha256": "4a9c93c1357994c989dffe7507b729da5c9daea001656cff5fcbf109f90e1ff6",
+      "command": [
+        "D:/Tools/VulkanSDK/1.4.350.0/Bin/glslc.exe",
+        "-DAZURE_PROBE_FIELD=1",
+        "-DAZURE_GEOMETRY_SAMPLES=1",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\source\\mesh.frag",
+        "-o",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\legacy-shader-control\\all-legacy\\shaders\\mesh_samples_field.frag.spv"
+      ]
+    }
+  ],
+  "scope": "Hidden-character default-environment diagnosis only; installed shaders and production files remain frozen."
+}

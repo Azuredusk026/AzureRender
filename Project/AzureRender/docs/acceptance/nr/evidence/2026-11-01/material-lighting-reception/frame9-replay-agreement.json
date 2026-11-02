@@ -1,0 +1,57 @@
+{
+  "status": "measured-frame9-agreement",
+  "captures": [
+    {
+      "kind": "parallel",
+      "replayToOriginalPixels": 0,
+      "replayToOriginalMaximum": 0,
+      "replayToBaselinePixels": 13,
+      "pixel": [
+        [
+          104,
+          139,
+          212,
+          255
+        ],
+        [
+          104,
+          139,
+          212,
+          255
+        ],
+        [
+          101,
+          134,
+          211,
+          255
+        ]
+      ]
+    },
+    {
+      "kind": "serial",
+      "replayToOriginalPixels": 0,
+      "replayToOriginalMaximum": 0,
+      "replayToBaselinePixels": 13,
+      "pixel": [
+        [
+          104,
+          139,
+          212,
+          255
+        ],
+        [
+          104,
+          139,
+          212,
+          255
+        ],
+        [
+          101,
+          134,
+          211,
+          255
+        ]
+      ]
+    }
+  ]
+}

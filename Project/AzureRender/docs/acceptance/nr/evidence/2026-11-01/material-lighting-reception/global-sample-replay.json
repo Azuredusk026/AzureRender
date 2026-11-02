@@ -1,0 +1,101 @@
+{
+  "status": "measured-qualified-global-sample-controls",
+  "stage": "shutdown",
+  "shaderResources": [
+    {
+      "event": 26380,
+      "shader": "ResourceId::10088"
+    },
+    {
+      "event": 26458,
+      "shader": "ResourceId::10088"
+    },
+    {
+      "event": 26473,
+      "shader": "ResourceId::10088"
+    },
+    {
+      "event": 26483,
+      "shader": "ResourceId::10088"
+    }
+  ],
+  "variants": [
+    {
+      "mode": "captured-control",
+      "path": "global-sample-replay/captured-control.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "original",
+      "path": "global-sample-replay/original.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "positive-color",
+      "path": "global-sample-replay/positive-color.bin.gz",
+      "sha256": "91663ec41439e8a293ea9d23594cba4b0870f486fd68f2c36e0d147160365848",
+      "pixel911x4": [
+        1.0,
+        0.921875,
+        0.77734375,
+        1.0
+      ]
+    },
+    {
+      "mode": "fine-all",
+      "path": "global-sample-replay/fine-all.bin.gz",
+      "sha256": "5a5a5c737238744a8c026834fef76af55ed6a1dc5f725757ecdecb1be97e6aa5",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "coarse-all",
+      "path": "global-sample-replay/coarse-all.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "point-depth",
+      "path": "global-sample-replay/point-depth.bin.gz",
+      "sha256": "e1cc15389b38103ea083f8b80cf72ece3d8c275e7ea389a7a428af768eb9e4ae",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    },
+    {
+      "mode": "precise-uv",
+      "path": "global-sample-replay/precise-uv.bin.gz",
+      "sha256": "da1898e6526792bdc5d6bd7397e78fa84b2ab1c21a2d13abb8276ca4884ce029",
+      "pixel911x4": [
+        0.138671875,
+        0.2578125,
+        0.66015625,
+        1.0
+      ]
+    }
+  ]
+}

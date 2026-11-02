@@ -1,0 +1,39 @@
+{
+  "status": "diagnostic-completed",
+  "command": [
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+    "--project",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\candidate-project\\full-world-hidden.azureproject",
+    "--width",
+    "2560",
+    "--height",
+    "1440",
+    "--capture-frames",
+    "12",
+    "--capture-fps",
+    "60",
+    "--fixed-frame-step",
+    "--qa-camera",
+    "scene",
+    "--qa-light",
+    "scene",
+    "--capture-dir",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\sync-validation\\frames",
+    "--runtime-report",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\sync-validation\\runtime.json"
+  ],
+  "environment": {
+    "VK_INSTANCE_LAYERS": "VK_LAYER_KHRONOS_validation",
+    "VK_LAYER_VALIDATE_SYNC": "1",
+    "VK_LAYER_SETTINGS_PATH": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-120125-character-environment-reception-fa70a7\\sync-validation"
+  },
+  "configurationSource": "https://github.com/KhronosGroup/Vulkan-ValidationLayers/blob/main/docs/updating_from_VK_EXT_validation_features.md",
+  "programSha256": "936406a81fbf658dcd751c34b0fcf5249c93414024a2d1c0571af4edb5e6991a",
+  "exitCode": 0,
+  "seconds": 244.9449671000002,
+  "frames": 12,
+  "validationMessageLines": 0,
+  "firstValidationMessages": [],
+  "syncHazards": 0,
+  "unloadZero": true
+}

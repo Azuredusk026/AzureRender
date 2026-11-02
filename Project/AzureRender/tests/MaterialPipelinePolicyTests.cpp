@@ -2,7 +2,24 @@
 #include <iostream>
 using namespace azurerender;
 int main(){
+    if(integralMaterialProgram("/resources_integral/shaders/mesh.frag.spv"))return 30;
+    if(integralMaterialProgram(R"(D:\resources_integral\shaders\mesh.frag.spv)"))return 31;
+    if(!integralMaterialProgram("/shaders/mesh_integral_object_bindless_clipmap_field.frag.spv"))return 32;
+    if(!integralMaterialProgram("character_snapshot_integral.frag.spv"))return 33;
+    if(integralMaterialProgram("mesh.frag.spv"))return 34;
     AssetMaterial material;
+    if(extendedMaterialLighting(material))return 23;
+    material.environmentLighting.diffuse=MaterialEnvironmentSource::GlobalEnvironment;
+    if(!extendedMaterialLighting(material))return 24;
+    material.environmentLighting={};
+    material.environmentLighting.reflection=MaterialEnvironmentSource::GlobalEnvironment;
+    if(!extendedMaterialLighting(material))return 25;
+    material.environmentLighting={};
+    material.mainLightShadow=MaterialMainLightShadow::ObjectShadow;
+    if(!extendedMaterialLighting(material))return 26;
+    material.mainLightShadow=MaterialMainLightShadow::Scene;
+    if(sceneFragmentVariant("mesh.frag.spv",true,true,true,true)
+        !="mesh_samples_clipmap_field_lighting.frag.spv")return 27;
     if(!ordinaryOpaqueMaterial(material))return 1;
     material.materialFeatures=0xffffffffU;
     if(ordinaryOpaqueMaterial(material))return 2;

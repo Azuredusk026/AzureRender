@@ -5,6 +5,7 @@
 #include "assets/MorphTargetData.hpp"
 #include "assets/MaterialRadiance.hpp"
 #include "assets/MaterialDisplayTransform.hpp"
+#include "assets/MaterialLighting.hpp"
 #include "animation/AnimationCurve.hpp"
 #include "animation/AnimationClipSample.hpp"
 #include "assets/image/ImageCodec.hpp"
@@ -128,6 +129,8 @@ struct AssetMaterial {
     bool materialProfileExplicit = false;
     float radianceScale = 1.0F;
     azurerender::MaterialDisplayTransform displayTransform=azurerender::MaterialDisplayTransform::Scene;
+    azurerender::MaterialEnvironmentLighting environmentLighting;
+    azurerender::MaterialMainLightShadow mainLightShadow=azurerender::MaterialMainLightShadow::Scene;
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;

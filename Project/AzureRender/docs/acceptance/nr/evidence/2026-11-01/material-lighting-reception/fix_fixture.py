@@ -1,0 +1,10 @@
+import gzip,hashlib,json
+from pathlib import Path
+root=Path.cwd();run=Path(__file__).resolve().parent;path=root/'tools/test_material_lighting_gpu.py';old=path.read_bytes();before=hashlib.sha256(old).hexdigest();a="folder=output/name;folder.mkdir();is_object=mode.startswith('object-');project,extra,expected=";b="folder=output/name;is_object=mode.startswith('object-')\n                if not is_object:folder.mkdir()\n                project,extra,expected=";text=old.decode();assert a in text;text=text.replace(a,b);(run/'before/test_material_lighting_gpu-before-directory-fix.py.gz').write_bytes(gzip.compress(old,mtime=0))
+for cfg in ['release','debug']:
+ build=json.loads((run/(cfg+'-build.json')).read_text());assert build['status']=='built-contract-tests-passed' and build['toolFiles']['tools/test_material_lighting_gpu.py']==before
+ for name,digest in build['sourceFiles'].items():assert hashlib.sha256((root/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()==digest,name
+path.write_bytes(text.encode());after=hashlib.sha256(path.read_bytes()).hexdigest();record=dict(status='fixture-directory-ownership-corrected',previousScriptSha256=before,scriptSha256=after,linearBudget=.008,perPlayerDeadlineSeconds=120,wholeSuiteDeadlineSeconds=600,reason='Object fixture generator owns creation of its root directory; environment fixture setup owns its own existing directory. Rendering assertions and expected radiance remain unchanged.');(run/'tool-fixture-fix.json').write_bytes((json.dumps(record,indent=2)+'\n').encode());destination=run/'public-gpu-failed-fixture/release';destination.parent.mkdir();source=run/'public-gpu/release';assert source.resolve().is_relative_to(run.resolve()) and destination.resolve().is_relative_to(run.resolve()) and not destination.exists();source.rename(destination)
+for name in ['public-release.log','public-release-driver.log','public-gpu-release.json']:
+ p=run/name;q=destination.parent/name;assert p.resolve().parent==run.resolve() and q.resolve().is_relative_to(run.resolve()) and not q.exists();p.rename(q)
+print('Corrected fixture setup; preserved 13 successful controls and the interrupted fixture run')
