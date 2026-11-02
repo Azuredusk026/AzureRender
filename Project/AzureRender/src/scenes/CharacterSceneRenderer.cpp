@@ -287,6 +287,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     caps.supportsMultisampleShading=true;
     caps.supportsMaterialDisplayTransform=true;
     caps.supportsMaterialLightingReception=true;
+    caps.supportsNprRampComposition=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -1679,6 +1680,18 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"temporalCameraStateValid\": " << (temporalView_.committed()?"true":"false") << ",\n"
          << "  \"temporalViewSampleIndex\": " << (temporalView_.committed()?temporalView_.committed()->sampleIndex:0) << ",\n"
          << "  \"materialSurfaceProfileLayoutVersion\": " << PackedMaterialSurfaceProfile::kLayoutVersion << ",\n"
+         << "  \"nprRampCompositions\": " << [&] {
+             nlohmann::json values=nlohmann::json::array();
+             const auto append=[&](const LoadedAsset& mesh,std::size_t base) {
+                 for(std::size_t index=0;index<mesh.materials.size();++index) {
+                     const auto& material=mesh.materials[index];
+                     if(!material.nprDiffuse.present||material.nprDiffuse.rampComposition==NprRampComposition::MaskVisibility)continue;
+                     values.push_back({{"materialIndex",base+index},{"name",material.name},{"rampComposition","view-ramp-alpha"}});
+                 }
+             };
+             append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
+             return values.dump();
+         }() << ",\n"
          << "  \"materialLightingReceivers\": " << [&] {
              nlohmann::json values=nlohmann::json::array();
              const auto append=[&](const LoadedAsset& mesh,std::size_t base) {

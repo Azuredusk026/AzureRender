@@ -486,6 +486,18 @@ CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec
     vec2 mask=parameters.y>1.5?vec2(1,0):parameters.y>.5?textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).gb:vec2(0);
     vec3 shadow=materialFeatureEnabled(4096U)>.5?sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,base.rgb):base.rgb;
     float characterVisibility=materialCharacterVisibility(uint(profile.rows[3].x),normal,visibility,mainShadow);
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    if(profile.rows[1].w>.5) {
+        CharacterDiffuseResponse masks=characterDiffuseResponse(materialNprLitAlbedo(base.rgb,normal,view),shadow,
+            metallic,parameters.x,ramp,baseAo,mask,dot(normal,view),characterVisibility,visibility);
+        float viewAlpha=textureLod(AZ_TEX_STYLE_MASK,
+            vec2(specularRampDot(normal,-camera.cameraForward.xyz)*.5+.5,.5),0).a;
+        float colorAo=masks.aoMask*viewAlpha;
+        CharacterDiffuseResponse color=characterDiffuseWeightedResponse(materialNprLitAlbedo(base.rgb,normal,view),shadow,
+            metallic,parameters.x,ramp,masks.litMask,colorAo,clamp(colorAo+ramp.a,0,1),visibility);
+        return CharacterDiffuseResponse(color.color,masks.litMask,masks.aoMask);
+    }
+#endif
     return characterDiffuseResponse(materialNprLitAlbedo(base.rgb,normal,view),shadow,metallic,parameters.x,ramp,
         baseAo,mask,dot(normal,view),characterVisibility,visibility);
 }

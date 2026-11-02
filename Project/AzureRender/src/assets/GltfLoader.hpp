@@ -248,6 +248,8 @@ struct AssetMaterial {
         using CharacterVisibility=AssetMaterial::CharacterVisibility;
         CharacterVisibility characterVisibility=CharacterVisibility::SceneVisibility;
         float localDiffuseFloorScale=1;
+        using RampComposition=azurerender::NprRampComposition;
+        RampComposition rampComposition=RampComposition::MaskVisibility;
     } nprDiffuse;
     struct SpecularInput {
         enum class Source : std::uint8_t { EmissiveAlpha, MetallicRoughnessAlpha };

@@ -7,6 +7,13 @@
 namespace azurerender {
 enum class MaterialEnvironmentSource : std::uint32_t { Scene, GlobalEnvironment };
 enum class MaterialMainLightShadow : std::uint32_t { Scene, ObjectShadow };
+enum class NprRampComposition : std::uint32_t { MaskVisibility, ViewRampAlpha };
+inline void validateNprRampComposition(NprRampComposition policy,bool supportedNpr,unsigned profileVersion,bool diffuseRamp) {
+    if(policy!=NprRampComposition::MaskVisibility&&policy!=NprRampComposition::ViewRampAlpha)
+        throw std::invalid_argument("Invalid nprDiffuse.rampComposition policy");
+    if(policy==NprRampComposition::ViewRampAlpha&&(!supportedNpr||profileVersion!=2||!diffuseRamp))
+        throw std::invalid_argument("nprDiffuse.rampComposition view-ramp-alpha requires a lit NPR surface and diffuse-ramp profile version two");
+}
 struct MaterialEnvironmentLighting {
     MaterialEnvironmentSource diffuse=MaterialEnvironmentSource::Scene;
     MaterialEnvironmentSource reflection=MaterialEnvironmentSource::Scene;

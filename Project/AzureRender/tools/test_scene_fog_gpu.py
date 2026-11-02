@@ -142,7 +142,7 @@ def run(player, output, validation, selected):
             if validation!='any':assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             manifest=json.loads((root/'frames/capture_manifest.json').read_text())
             if kind=='msaa':assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
-            assert manifest['materialSurfaceProfileLayoutVersion']==20 and manifest['cameraUniformBytes']==688,name
+            assert manifest['materialSurfaceProfileLayoutVersion']==21 and manifest['cameraUniformBytes']==688,name
             expected_state='analytic-only' if independent else 'camera-mismatch' if kind=='camera-mismatch' else 'matched'
             assert manifest['viewFogAnalyticEnabled'] and manifest['viewFogFrameBytes']==336 and manifest['viewFogFrameLayoutVersion']==2,name
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])

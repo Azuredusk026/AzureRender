@@ -67,7 +67,7 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 7;
+    static constexpr std::uint32_t kApiVersion = 8;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;
@@ -79,6 +79,7 @@ struct SceneRendererCapabilities {
     bool supportsMultisampleShading=false;
     bool supportsMaterialDisplayTransform=false;
     bool supportsMaterialLightingReception=false;
+    bool supportsNprRampComposition=false;
 };
 inline void validateSceneRendererCamera(const SceneRendererCapabilities& capabilities,const CameraViewDescriptor& camera){
     if((camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)&&!capabilities.supportsProjectionOffset)

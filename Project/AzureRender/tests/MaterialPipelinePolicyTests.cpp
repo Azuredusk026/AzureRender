@@ -18,6 +18,12 @@ int main(){
     material.mainLightShadow=MaterialMainLightShadow::ObjectShadow;
     if(!extendedMaterialLighting(material))return 26;
     material.mainLightShadow=MaterialMainLightShadow::Scene;
+    material.nprDiffuse.present=true;
+    material.nprDiffuse.rampComposition=AssetMaterial::NprDiffuse::RampComposition::ViewRampAlpha;
+    if(!extendedMaterialLighting(material))return 28;
+    material.nprDiffuse.rampComposition=AssetMaterial::NprDiffuse::RampComposition::MaskVisibility;
+    if(extendedMaterialLighting(material))return 29;
+    material.nprDiffuse.present=false;
     if(sceneFragmentVariant("mesh.frag.spv",true,true,true,true)
         !="mesh_samples_clipmap_field_lighting.frag.spv")return 27;
     if(!ordinaryOpaqueMaterial(material))return 1;

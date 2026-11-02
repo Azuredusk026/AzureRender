@@ -134,7 +134,7 @@ def run(player,output,selected,expected_validation):
             assert any(row['message']=='Allocator after unload: buffers=0 images=0' for row in diagnostics),name
             if expected_validation!='any':assert ('Validation layer: enabled' in log)==(expected_validation=='enabled'),name
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text())
-            assert manifest['materialSurfaceProfileLayoutVersion']==20 and manifest['qaStateFingerprintVersion']==4,name
+            assert manifest['materialSurfaceProfileLayoutVersion']==21 and manifest['qaStateFingerprintVersion']==4,name
             assert manifest['sceneDisplayMaskFormat']=='R8_UNORM' and manifest['sceneDisplayMaskBytes']>0,name
             overrides=manifest['materialDisplayTransforms']
             assert bool(overrides)==(mode=='linear'),(name,overrides)

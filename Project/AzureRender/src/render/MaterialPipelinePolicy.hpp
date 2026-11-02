@@ -33,7 +33,8 @@ inline bool integralMaterialProgram(const std::string& path) noexcept {
 inline bool extendedMaterialLighting(const AssetMaterial& material) noexcept {
     return material.environmentLighting.diffuse!=MaterialEnvironmentSource::Scene
         ||material.environmentLighting.reflection!=MaterialEnvironmentSource::Scene
-        ||material.mainLightShadow!=MaterialMainLightShadow::Scene;
+        ||material.mainLightShadow!=MaterialMainLightShadow::Scene
+        ||(material.nprDiffuse.present&&material.nprDiffuse.rampComposition!=NprRampComposition::MaskVisibility);
 }
 inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false,bool lighting=false){
     auto at=file.rfind(".frag.spv");

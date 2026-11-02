@@ -6,7 +6,7 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=20;
+    static constexpr unsigned kLayoutVersion=21;
     using Row=std::array<float,4>;
     std::array<Row,22> rows=[] {
         std::array<Row,22> value{};value[19][3]=1;return value;
@@ -67,6 +67,11 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     const bool ordinary=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric
         ||material.materialClass==AssetMaterialClass::Metal)&&!material.nprDiffuse.present&&!material.projectedHairRamp.present&&!material.eyeSurface.present;
     validateMaterialLighting(material.environmentLighting,material.mainLightShadow,material.materialProfileVersion,lit,ordinary);
+    const bool nprColorSurface=material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Skin
+        ||material.materialClass==AssetMaterialClass::Fabric||material.materialClass==AssetMaterialClass::Metal;
+    validateNprRampComposition(material.nprDiffuse.rampComposition,material.nprDiffuse.present&&lit&&nprColorSurface
+        &&!material.projectedHairRamp.present&&!material.eyeSurface.present,material.materialProfileVersion,
+        (material.materialFeatures&MaterialFeatureDiffuseRamp)!=0);
     validateMaterialRadianceScale(material.radianceScale,
         (material.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
     validateMaterialDisplayTransform(material.displayTransform,
@@ -111,6 +116,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
             static_cast<float>(material.nprDiffuse.baseAo),
             static_cast<float>(material.nprDiffuse.indirectNormal)};
         result.rows[1][0]=static_cast<float>(material.nprDiffuse.rimResponse);
+        result.rows[1][3]=static_cast<float>(material.nprDiffuse.rampComposition);
         result.rows[3][0]=static_cast<float>(material.nprDiffuse.characterVisibility);
         result.rows[3][1]=material.nprDiffuse.localDiffuseFloorScale;
         if(material.nprDiffuse.mainRamp.present) {

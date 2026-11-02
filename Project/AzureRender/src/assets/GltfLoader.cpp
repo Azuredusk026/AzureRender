@@ -1966,7 +1966,7 @@ AssetMaterial loadMaterial(
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
                 &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
-                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -2006,6 +2006,15 @@ AssetMaterial loadMaterial(
                 indirectNormal=="face-frame-radial-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::FaceFrameRadialHorizontal
                     :indirectNormal=="world-horizontal"?AssetMaterial::NprDiffuse::IndirectNormal::WorldHorizontal
                     :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
+            if(npr.contains("rampComposition")) {
+                const auto& policy=npr.at("rampComposition");
+                if(!policy.is_string()||(policy!="mask-visibility"&&policy!="view-ramp-alpha"))
+                    throw std::invalid_argument("Invalid nprDiffuse.rampComposition policy");
+                result.nprDiffuse.rampComposition=policy=="view-ramp-alpha"
+                    ?azurerender::NprRampComposition::ViewRampAlpha:azurerender::NprRampComposition::MaskVisibility;
+            }
+            azurerender::validateNprRampComposition(result.nprDiffuse.rampComposition,true,result.materialProfileVersion,
+                (result.materialFeatures&MaterialFeatureDiffuseRamp)!=0);
             if(npr.contains("characterVisibility")) {
                 result.nprDiffuse.characterVisibility=parseCharacterVisibility(
                     npr.at("characterVisibility"),"nprDiffuse.characterVisibility");

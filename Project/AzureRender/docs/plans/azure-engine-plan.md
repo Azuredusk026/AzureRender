@@ -100,7 +100,9 @@ KK、脸部阴影和色带具有非零的原生区域响应。
 
 [原生衣料输入](../acceptance/nr/native-cloth-inputs.md)核验五次绘制的公共高光色带。
 五份服饰的八个片元通过[视角色带合成核验](../acceptance/nr/npr-view-ramp-composition.md)。
-公共配置接入按[色带合成计划](2026-11-02-npr-shadow-composition.md)执行。
+公共[颜色合成接入](../acceptance/nr/npr-ramp-runtime.md)通过两配置回归。
+四组全身运动采集的三十六个匹配区域通过静态门槛。
+原冻结服饰对照及联合画质继续保留失败状态。
 透明衣料按实际程序使用十五号纹理槽。
 服饰二、五的指定片元通过既有高光公式核验。
 完整材质接入、联合外观及运动稳定性继续验收。

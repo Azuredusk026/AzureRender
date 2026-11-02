@@ -74,6 +74,61 @@ int main(){
   npr={{"schemaVersion",1},{"shadowScale",.7},{"lightingInputs","host-scene-radiance"},
     {"shadowMask","none"},{"baseAo","albedo-alpha"}};
   const auto response=load(composed);
+  auto viewComposed=composed;
+  const unsigned char viewRampPixels[]={180,150,170,64,180,150,170,64};
+  require(stbi_write_png((root/"view-ramp.png").string().c_str(),2,1,4,viewRampPixels,8)!=0,
+    "Cannot create view-ramp fixture");
+  viewComposed["images"].push_back({{"uri","view-ramp.png"}});
+  const auto viewRampTexture=viewComposed["textures"].size();
+  viewComposed["textures"].push_back({{"source",viewComposed["images"].size()-1}});
+  auto& rampColorProfile=viewComposed["materials"][0]["extras"]["azureRenderMaterial"];
+  rampColorProfile["features"]={"diffuse-ramp"};
+  rampColorProfile["diffuseRamp"]={{"schemaVersion",1},{"texture",viewRampTexture}};
+  rampColorProfile["nprDiffuse"]["rampComposition"]="view-ramp-alpha";
+  const auto viewMaterial=load(viewComposed).materials[0];
+  require(azurerender::packMaterialSurfaceProfile(viewMaterial).rows[1][3]==1,
+    "View-ramp color composition must reach the shared NPR profile");
+  auto defaultComposed=viewComposed;
+  defaultComposed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"].erase("rampComposition");
+  auto explicitDefault=defaultComposed;
+  explicitDefault["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rampComposition"]="mask-visibility";
+  require(azurerender::packMaterialSurfaceProfile(load(defaultComposed).materials[0]).rows
+      ==azurerender::packMaterialSurfaceProfile(load(explicitDefault).materials[0]).rows,
+    "Explicit default composition must retain every packed byte");
+  for(const auto& invalidValue:std::vector<Json>{nullptr,true,1,"unknown",Json::object()}) {
+    auto invalid=viewComposed;
+    invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rampComposition"]=invalidValue;
+    bool rejected=false;try{load(invalid);}catch(const std::exception& error){
+      rejected=std::string(error.what()).find("rampComposition")!=std::string::npos;
+    }
+    require(rejected,"Invalid composition policies must identify rampComposition");
+  }
+  auto missingViewRamp=viewComposed;
+  missingViewRamp["materials"][0]["extras"]["azureRenderMaterial"].erase("diffuseRamp");
+  missingViewRamp["materials"][0]["extras"]["azureRenderMaterial"]["features"]=Json::array();
+  bool missingViewRampRejected=false;try{load(missingViewRamp);}catch(const std::exception&){missingViewRampRejected=true;}
+  require(missingViewRampRejected,"View-ramp color composition requires a diffuse-ramp owner");
+  auto invalidTypedComposition=viewMaterial;
+  invalidTypedComposition.nprDiffuse.rampComposition=static_cast<azurerender::NprRampComposition>(42);
+  bool invalidTypedCompositionRejected=false;
+  try{(void)azurerender::packMaterialSurfaceProfile(invalidTypedComposition);}
+  catch(const std::exception&){invalidTypedCompositionRejected=true;}
+  require(invalidTypedCompositionRejected,"Typed packing must reject unknown composition policies");
+  for(unsigned variant=0;variant<4;++variant) {
+    auto incompatible=viewMaterial;
+    if(variant==0)incompatible.nprDiffuse.present=false;
+    if(variant==1)incompatible.materialProfileVersion=1;
+    if(variant==2)incompatible.materialFeatures&=~MaterialFeatureDiffuseRamp;
+    if(variant==3)incompatible.materialFeatures|=MaterialFeatureUnlitSurface;
+    bool rejected=false;try{(void)azurerender::packMaterialSurfaceProfile(incompatible);}
+    catch(const std::exception&){rejected=true;}
+    require(rejected,"View-ramp policy must reject incompatible typed owners");
+  }
+  const Json compositionPatch={{"schemaVersion",2},{"mode","parameters"},{"typeId","azure.pbr"},
+    {"parameters",{{"roughness",.4}}},{"textures",Json::object()}};
+  require(azurerender::packMaterialSurfaceProfile(azurerender::MaterialData::parse(compositionPatch).interpret(
+      [](const auto&){return std::filesystem::path();},&viewMaterial)).rows[1][3]==1,
+    "Parameter overrides must preserve the inherited ramp composition");
   auto anchored=composed;
   anchored["nodes"].push_back({{"name","material-rim-origin"},{"translation",{.25,.5,.75}}});
   anchored["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rimOrigin"]={
@@ -113,6 +168,20 @@ int main(){
     {"surface",{{"asset",{{"version","2.0"}}},{"materials",Json::array({surfaceMaterial})},
       {"textures",Json::array({{{"source",0}}})},{"nodes",Json::array({{{"name","material-rim-origin"}}})}}}};
   const auto document=azurerender::MaterialData::parse(complete);
+  auto colorComplete=complete;
+  auto& colorCompleteProfile=colorComplete["surface"]["materials"][0]["extras"]["azureRenderMaterial"];
+  colorCompleteProfile["features"]={"diffuse-ramp"};
+  colorCompleteProfile["diffuseRamp"]={{"schemaVersion",1},{"texture",1}};
+  colorCompleteProfile["nprDiffuse"]["rampComposition"]="view-ramp-alpha";
+  colorComplete["surface"]["textures"].push_back({{"source",1}});
+  colorComplete["textures"]["1"]={{"asset","00000000-0000-4000-8000-000000000018"},{"usage","mask"}};
+  const auto colorDocument=azurerender::MaterialData::parse(colorComplete);
+  require(colorDocument.encode()==colorComplete&&azurerender::MaterialGraph::fromMaterial(colorDocument).compile().encode()==colorComplete,
+    "Full documents and graphs must preserve the ramp composition policy");
+  const auto colorLoaded=colorDocument.interpret([&](const auto& identity){
+    return root/(identity=="00000000-0000-4000-8000-000000000018"?"view-ramp.png":"lut.png");});
+  require(azurerender::packMaterialSurfaceProfile(colorLoaded).rows[1][3]==1,
+    "Standalone material documents must consume the explicit ramp composition");
   require(document.encode()==complete&&azurerender::MaterialGraph::fromMaterial(document).compile().encode()==complete,
     "Complete material documents and graphs must preserve the rim origin by name");
   require(document.interpret([&](const auto&){return root/"lut.png";}).nprDiffuse.rimOrigin.node==0,
