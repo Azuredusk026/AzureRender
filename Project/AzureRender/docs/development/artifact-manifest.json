@@ -963,7 +963,8 @@
       "retention": "所属画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/plans/2026-11-02-independent-coverage.md",
-      "runtimeEvidence": "docs/acceptance/nr/material-coverage.md"
+      "runtimeEvidence": "docs/acceptance/nr/material-coverage.md",
+      "nativeIntegrationEvidence": "docs/acceptance/nr/native-coverage-integration.md"
     },
     {
       "path": "runs/20261103-000151-material-coverage-mips-14fff6",

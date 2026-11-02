@@ -59,7 +59,7 @@ Release 与 Debug 各通过十九项受影响 CPU 检查。
 完整头发的一字节门禁保持未通过。
 
 裁剪采样、着色、高光和皮肤分别保存验收范围。
-原生运动与世界组合继续按[实施计划](../../plans/2026-11-02-independent-coverage.md)推进。
+原生运动与世界组合见[联合验证](native-coverage-integration.md)。
 完整交付条件见[开发总计划](../../plans/azure-engine-plan.md)。
 
 ## 失败控制
