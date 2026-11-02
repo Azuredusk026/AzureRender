@@ -1078,6 +1078,10 @@ if(BUILD_TESTING)
         COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_coverage_failure_gpu.py"
             --executable "$<TARGET_FILE:AzurePlayer>")
     set_tests_properties(AzureRender.MaterialCoverageFailureGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.MaterialCoverageMipsGpu
+        COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_coverage_mips_gpu.py"
+            --executable "$<TARGET_FILE:AzurePlayer>")
+    set_tests_properties(AzureRender.MaterialCoverageMipsGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_executable(AzureMaterialPipelinePolicyTests tests/MaterialPipelinePolicyTests.cpp)
     target_link_libraries(AzureMaterialPipelinePolicyTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.MaterialPipelinePolicy COMMAND AzureMaterialPipelinePolicyTests)

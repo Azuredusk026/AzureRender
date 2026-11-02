@@ -1979,9 +1979,11 @@ void CharacterSceneRenderer::uploadMaterialTexture(LoadedAsset& asset,std::vecto
         binding=materialTextureCache_->acquire(std::move(pixels),request);
     };
     switch(slot){
-    case 0:upload(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,g.baseColor,mipLevels,m.alphaMode==AssetAlphaMode::Mask?m.alphaCutoff:0);break;
+    case 0:upload(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,g.baseColor,mipLevels,
+        m.alphaMode==AssetAlphaMode::Mask&&!m.coverageTexture.present?m.alphaCutoff:0);break;
     case 1:upload(m.normalPixels,m.normalWidth,m.normalHeight,g.normal,mipLevels);break;
-    case 2:upload(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,g.metallicRoughness,mipLevels);break;
+    case 2:upload(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,g.metallicRoughness,mipLevels,
+        m.coverageTexture.present?m.alphaCutoff:0);break;
     case 3:upload(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,g.specularEmissive,mipLevels);break;
     case 4:upload(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,g.styleMask,mipLevels);break;
     case 5:upload(m.matcapPixels,m.matcapWidth,m.matcapHeight,g.matcap,mipLevels);break;

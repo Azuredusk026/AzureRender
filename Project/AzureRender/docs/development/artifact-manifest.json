@@ -964,6 +964,14 @@
       "pinMarker": ".keep",
       "evidence": "docs/plans/2026-11-02-independent-coverage.md",
       "runtimeEvidence": "docs/acceptance/nr/material-coverage.md"
+    },
+    {
+      "path": "runs/20261103-000151-material-coverage-mips-14fff6",
+      "pathBase": "build",
+      "purpose": "独立裁剪图生成层级与来源层级的硬件回归。",
+      "retention": "所属画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/material-coverage-mips.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

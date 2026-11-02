@@ -26,6 +26,7 @@
 原始角色入口及动态近景见[参考核验](docs/acceptance/nr/portrait-input-recovery.md)。
 头发覆盖按[独立裁剪图计划](docs/plans/2026-11-02-independent-coverage.md)推进。
 公共输入、来源层级及失败回收见[覆盖验证](docs/acceptance/nr/material-coverage.md)。
+自动生成层级的覆盖保持见[层级验证](docs/acceptance/nr/material-coverage-mips.md)。
 
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。
