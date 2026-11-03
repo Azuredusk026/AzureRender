@@ -32,6 +32,7 @@
 近侧站位与中央物流见[动态验收](docs/acceptance/nr/joint-conveyor-motion.md)。
 原生待机与循环输入见[循环验收](docs/acceptance/nr/joint-idle-loop.md)。
 实例时钟、透明度及项目重开见[动态回归](docs/acceptance/nr/joint-dynamics-regression.md)。
+衣料与头部角饰的法线方向见[原生核验](docs/acceptance/nr/native-normal-orientation.md)。
 
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。

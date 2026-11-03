@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-scoped-normal-orientation",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "89a0a9576836dd8fc026afa7ece81a2afc2c48f8",
+  "programSha256": "e0c47f0f99be428145af067501b2a5b3ace5437e62948043ae8f1f86e5aadce5",
+  "successfulPlayerProcesses": 5,
+  "capturedFrames": 8,
+  "rejectedFixtureProcesses": 2,
+  "pythonCasesPerConfiguration": 57,
+  "bundles": [
+    {
+      "path": "execution.json.gz",
+      "sha256": "3e8ca944761b11aeb093dfb3e3fdf2c906c0acd59b46c395c47ead0145b8fe7d",
+      "sourceFiles": 108
+    }
+  ],
+  "directFiles": [
+    {
+      "path": "native-hair-visible-mask.png",
+      "sha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7",
+      "bytes": 8418
+    },
+    {
+      "path": "native-normal-comparison.png",
+      "sha256": "c3a2a7c1ec30a0abf833e6ac39f380347622c47165338feb4003f38df78a07cb",
+      "bytes": 1413225
+    },
+    {
+      "path": "normal-y-capture/frames/frame_000000.png",
+      "sha256": "2394e2edae48a7c596243111fde2d386ac238cf6e803850a62b73f28fd641f8b",
+      "bytes": 902408
+    },
+    {
+      "path": "static-qualified-capture/frames/frame_000000.png",
+      "sha256": "bf7bfab0cabb14902a89984944a8df6f3823f2f2b9df9267af33010497949279",
+      "bytes": 897632
+    }
+  ],
+  "compiledSourceReceipt": {
+    "path": "docs/acceptance/nr/evidence/2026-11-03/material-coverage-mips/manifest.json",
+    "sha256": "1d261325c7deb78dbb9ef399ca4510977670c00201cb21e26c30ef07de54649e"
+  },
+  "retainedCaptures": [
+    {
+      "path": "build/runs/20261103-130954-native-material-composition-221ac2/current-cloth-capture/cloth_frame2.rdc",
+      "sha256": "d737a0346cb6dd82ac9b0f914acc1b910839ee348798876cf3cde02fbc67209b",
+      "bytes": 251043716
+    },
+    {
+      "path": "build/runs/20261022-201845-endfield-capture-954719/Endfield-games-child_frame10401.rdc",
+      "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+      "bytes": 345416012
+    }
+  ]
+}

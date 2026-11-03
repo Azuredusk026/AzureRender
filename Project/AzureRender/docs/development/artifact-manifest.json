@@ -1013,6 +1013,15 @@
       ],
       "idleEvidence": "docs/acceptance/nr/joint-idle-loop.md",
       "conveyorEvidence": "docs/acceptance/nr/joint-conveyor-motion.md"
+    },
+    {
+      "path": "runs/20261103-130954-native-material-composition-221ac2",
+      "pathBase": "build",
+      "purpose": "固定原生材质组合、法线方向及近侧动态候选。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "primaryProject": "joint-current/joint-normal.azureproject",
+      "evidence": "docs/acceptance/nr/native-normal-orientation.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
