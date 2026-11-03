@@ -35,6 +35,7 @@
 衣料与头部角饰的法线方向见[原生核验](docs/acceptance/nr/native-normal-orientation.md)。
 对应的角色、物流及倒影见[联合回归](docs/acceptance/nr/joint-normal-orientation.md)。
 材质覆盖层的深度、混合及场景雾见[公共验收](docs/acceptance/nr/material-overlay-depth.md)。
+覆盖图元的资产保留及来源追踪见[工具验收](docs/acceptance/nr/material-overlays.md)。
 
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。

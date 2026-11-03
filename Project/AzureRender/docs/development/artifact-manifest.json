@@ -1038,7 +1038,18 @@
       "retention": "对应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "evidence": "docs/acceptance/nr/material-overlay-depth.md",
-      "implementationPlan": "docs/plans/2026-11-03-material-overlay-depth.md"
+      "implementationPlan": "docs/plans/2026-11-03-material-overlay-depth.md",
+      "primaryProject": "joint-materials/joint-materials.azureproject",
+      "contentEvidence": "docs/acceptance/nr/material-overlays.md",
+      "visualAcceptance": "failed-user-review",
+      "strictReopen": "failed",
+      "videos": [
+        {
+          "path": "media/joint-source-materials.mp4",
+          "bytes": 4971253,
+          "sha256": "bffbfb7a51aaeeb046d064c36fc91994a1995dc08c2ff1110a6a3ce6c35d2fb9"
+        }
+      ]
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

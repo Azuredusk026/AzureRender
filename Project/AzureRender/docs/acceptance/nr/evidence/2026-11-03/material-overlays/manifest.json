@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "status": "tool-passed-integration-active",
+  "visualAcceptance": "failed-user-review",
+  "strictReopen": "failed",
+  "rendererSourceCommit": "74ca402",
+  "rendererEvidence": "../material-overlay-depth/manifest.json",
+  "originalRun": "build/runs/20261103-151310-material-stage-qualification-cedf81",
+  "bundles": [
+    {
+      "path": "source.json.gz",
+      "bytes": 86600,
+      "sha256": "8ea15221c8b29b4d4b487e1a3f5aeda02ac1bccff5dbd2a6642a5998b177a252",
+      "files": 7
+    },
+    {
+      "path": "gpu-release.json.gz",
+      "bytes": 81657,
+      "sha256": "9ce29dc75680f462832dc0b1cd79f92d930ba97bc41ca20fcc46677d23667d41",
+      "files": 61
+    },
+    {
+      "path": "gpu-debug.json.gz",
+      "bytes": 81635,
+      "sha256": "af17faf1fe1aca6ace1606e1d9c7d393d9a09f37d2413e45f2131d26ad298125",
+      "files": 61
+    },
+    {
+      "path": "qualification.json.gz",
+      "bytes": 143216,
+      "sha256": "04971b44c81997c58ff4539bae385a1060ad40f7e4f955e8d99199da3972e063",
+      "files": 34
+    },
+    {
+      "path": "images.json.gz",
+      "bytes": 35049741,
+      "sha256": "453d18632bb8937381f12ada3fc86e53b9f566cb078b5662ddfad8570d2ca22e",
+      "files": 18
+    },
+    {
+      "path": "runtime.json.gz",
+      "bytes": 182066,
+      "sha256": "13f6d07d252e41f9a9b8b0e41255633e7b7f91ee5825ecd55859685d6e1d610b",
+      "files": 15
+    },
+    {
+      "path": "native-trace.json.gz",
+      "bytes": 220640,
+      "sha256": "3d188790cac251ee94fc2c0ad18464e5f4bc1cc265f1ca11e8533edb3b3942ae",
+      "files": 7
+    }
+  ],
+  "gpuFrames": 8,
+  "toolCases": 5,
+  "characterToolCasesPerConfiguration": 62,
+  "jointFrames": 192,
+  "archivedJointFrames": 13,
+  "video": {
+    "path": "joint-source-materials.mp4",
+    "bytes": 4971253,
+    "sha256": "bffbfb7a51aaeeb046d064c36fc91994a1995dc08c2ff1110a6a3ce6c35d2fb9"
+  },
+  "verification": {
+    "status": "scoped-checks-passed-reopen-failed",
+    "toolStatus": "passed",
+    "toolCpuCases": 5,
+    "characterToolSuiteCases": 62,
+    "sourceOverlayModelExact": true,
+    "staticPixelExact": true,
+    "jointFrames": 192,
+    "reopenFrames": 4,
+    "fiveFrameControl": 5,
+    "reopenPixelExact": false,
+    "reopenDifference": {
+      "frame": 3,
+      "pixels": 14,
+      "maximumByteError": 1
+    },
+    "animationInstances": 11,
+    "animationStateExact": true,
+    "fixedSteps": 477,
+    "rendererProgramSha256": "29c56a483b4a4058cd4edae2a760b14b851f3671da9be7ba7328373158fc820d",
+    "rendererSourceCommit": "74ca402",
+    "rendererEvidence": "docs/acceptance/nr/material-overlay-depth.md",
+    "componentComparison": "opaque-stage-native-comparison.json",
+    "fullComparison": "view-facing-native-comparison.json",
+    "visualAcceptance": "failed-user-review"
+  }
+}
