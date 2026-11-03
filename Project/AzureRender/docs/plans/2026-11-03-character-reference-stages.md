@@ -55,5 +55,6 @@
 
 服饰五的发光边缘另按原生事件 910 核验。
 时序细线按近远八相位各自的 2% 预算核验。
+投影描边的前帧有效性及深度覆盖见[历史深度核验](../acceptance/nr/outline-temporal-footprint.md)。
 配置、覆盖及联合动画见[实测记录](../acceptance/nr/evidence/2026-11-04/cloth-outline-coverage/results.json)。
 固定姿态的局部图见[衣料对照](../acceptance/nr/evidence/2026-11-04/cloth-outline-coverage/comparison.png)。

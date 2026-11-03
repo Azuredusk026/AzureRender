@@ -12,7 +12,7 @@ namespace {
 void fixture(test::VulkanComputeFixture& host,const std::vector<char>& shader,unsigned divisor,unsigned width=17,unsigned height=9){
     const unsigned ow=std::max(1U,width/divisor),oh=std::max(1U,height/divisor),pixels=ow*oh;
     ReflectionReprojectionGpu resource(*host.backend,{width,height},2,shader,divisor);
-    for(unsigned mode=0;mode<26;++mode){
+    for(unsigned mode=0;mode<28;++mode){
         std::vector<float> surface,motion,previous;
         const float nan=std::numeric_limits<float>::quiet_NaN();
         for(unsigned y=0;y<height;++y)for(unsigned x=0;x<width;++x){
@@ -23,6 +23,7 @@ void fixture(test::VulkanComputeFixture& host,const std::vector<char>& shader,un
             if(mode==8)dx=2;if(mode==10)dx=nan;if(mode==14)z=.2F;if(mode==15)z=500.F/999.F;
             if(mode==16||mode==17)z=.5F;if(mode==18)dx=std::numeric_limits<float>::infinity();if(mode==19)z=-.1F;if(mode==20)response=.5F;
             if(mode==22)z=1;if(mode==23)z=0;
+            if(mode==26)response=4; if(mode==27)response=-4;
             if(mode>=24){dx=0;z=1-.1F/depth;}
             motion.insert(motion.end(),{dx,0,z,response});
         }
@@ -60,7 +61,7 @@ void fixture(test::VulkanComputeFixture& host,const std::vector<char>& shader,un
                 for(unsigned y=0;y<oh;++y)for(unsigned x=0;x<ow;++x){
                     const unsigned sourceX=((2*x+1)*width)/(2*ow),i=y*ow+x;
                     const bool usable=mode!=2&&mode!=12,moving=mode!=10&&mode!=18;
-                    const float weight=mode==0||mode==14||mode==15||mode==16||mode==25?1.F:mode==5?.5F:mode==6?.75F:0.F;
+                    const float weight=mode==0||mode==14||mode==15||mode==16||mode==25||mode==26?1.F:mode==5?.5F:mode==6?.75F:0.F;
                     const float expected[]{moving?(mode==8?2.F:mode>=24?0:sourceX*.0001F):0,0,usable?2+.001F*sourceX:0,usable?1.F:0,weight};
                     for(unsigned c=0;c<5;++c){const auto actual=result[c<4?i*4+c:pixels*4+i];
                         if(!std::isfinite(actual)||std::abs(actual-expected[c])>2e-6F){
@@ -80,5 +81,5 @@ int main(int argc,char** argv)try{
     const auto shader=readBinaryFile(argv[1]);fixture(host,shader,1);fixture(host,shader,2);
     fixture(host,shader,2,1,9);fixture(host,shader,2,17,1);
     if(host.errors||host.allocator.statistics().liveImages||host.allocator.statistics().liveBuffers)throw std::runtime_error("Reprojection validation or retirement failed");
-    std::cout<<"PASS: 208 full/half/single-axis outputs, 51220 source/depth/response/cross-slot scalars, validation=0 resources=0\n";return 0;
+    std::cout<<"PASS: full/half/single-axis outputs, projected-outline motion, depth rejection and cross-slot history, validation=0 resources=0\n";return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}

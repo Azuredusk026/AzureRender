@@ -18,7 +18,7 @@ void main(){
     float acceptance=0;
     bool cutout=moving&&motion.w>=2&&motion.w<3;
     bool partial=moving&&motion.w>-1&&motion.w<0;
-    bool tracked=moving&&(motion.w==1||cutout||partial);
+    bool tracked=moving&&(motion.w==1||motion.w==4||cutout||partial);
     vec2 previousUv=(vec2(pixel)+.5)/vec2(extent)-delta;
     if(frame.limits.z>.5&&usable&&tracked&&motion.z>=0&&motion.z<=1
         &&all(greaterThanEqual(previousUv,vec2(0)))&&all(lessThanEqual(previousUv,vec2(1)))){

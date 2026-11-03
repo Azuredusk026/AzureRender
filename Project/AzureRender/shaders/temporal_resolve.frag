@@ -27,6 +27,8 @@ float reconstructedDisplayHistory(vec2 uv){
     return value;
 }
 #endif
+// Subpixel velocities below this threshold share the stationary history sample.
+const float stationaryPixelSpeed=.01;
 bool cutoutMotion(float value){return value>=2&&value<3;}
 bool finite4(vec4 value){return !any(isnan(value))&&!any(isinf(value));}
 vec3 reconstructedHistory(vec2 uv){
@@ -54,6 +56,8 @@ void main(){
     float currentPolicy=texelFetch(currentDisplayMask,pixel,0).r;
     float basePolicyLow=currentPolicy,basePolicyHigh=currentPolicy,edgePolicyLow=currentPolicy,edgePolicyHigh=currentPolicy;
 #endif
+    bool projected=abs(motion.w)==4;
+    if(projected)motion.w=sign(motion.w);
     bool reusable=finite4(current)&&finite4(motion)&&motion.w>-2;
     bool currentCutout=cutoutMotion(motion.w);
     bool responsive=motion.w<=-1||!finite4(motion);
@@ -61,6 +65,8 @@ void main(){
     if(motion.w!=0)depth=texelFetch(surfaceDepth,pixel,0).r;
     vec3 baseLow=current.rgb,baseHigh=current.rgb,edgeLow=current.rgb,edgeHigh=current.rgb;
     float minimumDepth=depth,maximumDepth=depth;
+    float innerMin=depth,innerMax=depth,innerDepth=depth;
+    vec4 innerMotion=motion;
     // One bounded footprint supplies foreground motion, conservative depth
     // and colour bounds. It does not spatially average the current colour.
     for(int y=-2;y<=2;++y)for(int x=-2;x<=2;++x){
@@ -74,9 +80,23 @@ void main(){
         if(abs(x)<=1&&abs(y)<=1){basePolicyLow=min(basePolicyLow,policy);basePolicyHigh=max(basePolicyHigh,policy);}
 #endif
         vec4 candidate=texelFetch(vectors,neighbour,0);
+        if(abs(candidate.w)==4){
+            projected=true;
+            candidate.w=sign(candidate.w);
+        }
         float candidateDepth=candidate.w!=0?texelFetch(surfaceDepth,neighbour,0).r:texelFetch(hardwareDepth,neighbour,0).r;
-        if(abs(x)<=1&&abs(y)<=1){minimumDepth=min(minimumDepth,candidateDepth);maximumDepth=max(maximumDepth,candidateDepth);}
-        if((abs(x)<=1&&abs(y)<=1||cutoutMotion(candidate.w))&&candidateDepth<depth){depth=candidateDepth;motion=candidate;}
+        minimumDepth=min(minimumDepth,candidateDepth);maximumDepth=max(maximumDepth,candidateDepth);
+        bool inner=abs(x)<=1&&abs(y)<=1;
+        if(inner){innerMin=min(innerMin,candidateDepth);innerMax=max(innerMax,candidateDepth);}
+        if((inner||cutoutMotion(candidate.w))&&candidateDepth<innerDepth){
+            innerDepth=candidateDepth;innerMotion=candidate;
+        }
+        bool stationary=length(candidate.xy*temporal.frame.xy)<=stationaryPixelSpeed;
+        if((inner||stationary||cutoutMotion(candidate.w))&&candidateDepth<depth){depth=candidateDepth;motion=candidate;}
+    }
+    if(!projected){
+        minimumDepth=innerMin;maximumDepth=innerMax;
+        depth=innerDepth;motion=innerMotion;
     }
     vec2 previousUv=uv-motion.xy;float expectedDepth=motion.z;
     bool valid=temporal.frame.z>.5&&!responsive&&motion.w>-1&&finite4(current)&&finite4(motion);
@@ -96,22 +116,24 @@ void main(){
     float policyLow=coverageEdge?edgePolicyLow:basePolicyLow,policyHigh=coverageEdge?edgePolicyHigh:basePolicyHigh;
     float accumulatedPolicy=currentPolicy;
 #endif
+    float speed=length(motion.xy*temporal.frame.xy);
     if(valid){
         ivec2 center=clamp(ivec2(previousUv*temporal.frame.xy),ivec2(0),extent-1);
         float expectedViewDepth=previousViewDepth(expectedDepth),sampledViewDepth=previousViewDepth(texelFetch(historyDepth,center,0).r);
         float tolerance=temporal.limits.x+temporal.limits.y*expectedViewDepth;
         vec4 history=texture(historyColor,previousUv);
-        if(length((uv-previousUv)*temporal.frame.xy)>.01)history.rgb=reconstructedHistory(previousUv);
+        if(length((uv-previousUv)*temporal.frame.xy)>stationaryPixelSpeed)history.rgb=reconstructedHistory(previousUv);
         valid=abs(expectedViewDepth-sampledViewDepth)<=tolerance&&finite4(history)&&history.a>.5;
 #ifdef AZURE_TEMPORAL_DISPLAY_MASK
         float historyPolicy=texture(historyDisplayMask,previousUv).r;
-        if(length((uv-previousUv)*temporal.frame.xy)>.01)historyPolicy=reconstructedDisplayHistory(previousUv);
+        if(length((uv-previousUv)*temporal.frame.xy)>stationaryPixelSpeed)historyPolicy=reconstructedDisplayHistory(previousUv);
         valid=valid&&!isnan(historyPolicy)&&!isinf(historyPolicy);
 #endif
-        if(valid){float speed=length(motion.xy*temporal.frame.xy);float weight=mix(temporal.limits.z,.8,clamp(speed/8,0,1));
+        if(valid){float weight=mix(temporal.limits.z,.8,clamp(speed/8,0,1));
             if(!coverageEdge)weight*=1-(cutoutMotion(motion.w)?motion.w-2:clamp(-motion.w,0,1));
             float contrast=max(max(high.r-low.r,high.g-low.g),high.b-low.b);
-            float clipping=coverageEdge&&cutoutMotion(motion.w)&&contrast>1e-5?mix(temporal.limits.w,1,clamp(speed,0,1)):1;
+            bool preserveCoverage=cutoutMotion(motion.w)||(projected&&speed<=stationaryPixelSpeed);
+            float clipping=coverageEdge&&preserveCoverage&&contrast>1e-5?mix(temporal.limits.w,1,clamp(speed,0,1)):1;
             vec3 bounded=mix(history.rgb,clamp(history.rgb,low,high),clipping);
             accumulated=mix(current.rgb,bounded,weight);
 #ifdef AZURE_TEMPORAL_DISPLAY_MASK
@@ -126,9 +148,9 @@ void main(){
 #ifdef AZURE_TEMPORAL_DISPLAY_MASK
     float displayedPolicy=accumulatedPolicy;
 #endif
-    if(valid&&coverageEdge&&!currentCutout&&!responsive&&motion.w==1){
+    if(valid&&coverageEdge&&!currentCutout&&!responsive&&motion.w==1&&(!projected||speed>stationaryPixelSpeed)){
         vec3 midpoint=(low+high)*.5;
-        float gain=1+.5*clamp(length(motion.xy*temporal.frame.xy)*4,0,1);
+        float gain=1+.5*clamp(speed*4,0,1);
         displayed=clamp(midpoint+(accumulated-midpoint)*gain,low,high);
 #ifdef AZURE_TEMPORAL_DISPLAY_MASK
         float policyMidpoint=(policyLow+policyHigh)*.5;

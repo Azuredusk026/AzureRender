@@ -31,7 +31,7 @@ float2 linearMotion(float2 value){
 float trackedMotionAcceptance(float4 motion,float2 previousUv,float depth){
     if(!all(isfinite(motion))||!all(isfinite(previousUv))||motion.z<0||motion.z>1||!isfinite(depth)||depth<=0
         ||any(previousUv<float2(0,0))||any(previousUv>float2(1,1)))return 0;
-    if(motion.w==1)return 1;
+    if(motion.w==1||motion.w==4)return 1;
     if(motion.w>=2&&motion.w<3)return 3-motion.w;
     if(motion.w>-1&&motion.w<0)return 1+motion.w;
     return 0;

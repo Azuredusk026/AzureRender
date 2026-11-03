@@ -112,6 +112,7 @@ void CharacterSceneRenderer::prepareMotion(){
                 auto& push=draw.push;push.alphaCutoff=m.alphaCutoff;push.material=static_cast<std::uint32_t>(materialBase+primitive.materialIndex);
                 push.primitive=static_cast<unsigned>(primitiveIndex);push.gizmo=primitiveGizmoTransform(snapshot.gizmo,primitiveIndex);
                 push.flags=static_cast<unsigned>(m.alphaMode)|(reactive?16U:0U)|(outlineProjectionEnabled_?256U:0U)|(shell?512U:0U);
+                if(m.outlineSurface.present&&(m.materialFeatures&MaterialFeatureSilhouetteOutline)!=0)push.flags|=1024U;
                 push.camera={cameraPosition_[0],cameraPosition_[1],cameraPosition_[2],0};
                 const auto tile=shell&&m.outlineSurface.maskInstanceInterior?snapshot.buffers.outlineMaskTiles.at(source):UINT32_MAX;std::memcpy(&push.camera[3],&tile,4);
                 push.detail={m.featureParameters[0],0,0,0};const auto frameFeatures=materialFeaturesForFrame(m);std::memcpy(&push.detail[1],&frameFeatures,4);

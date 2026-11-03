@@ -50,5 +50,8 @@ void main(){
     else if(outputMotion.w==0)outputMotion.w=-1;
     else if(alphaMode==1u&&sampledCoverage)outputMotion.w=2+(integrated?.5:0);
     else if(integrated)outputMotion.w=-.5;
+    // Retain projected coverage when a new view has no usable previous transform.
+    if((motion.flags&1024u)!=0u&&alphaMode==0u&&abs(outputMotion.w)==1.0)
+        outputMotion.w*=4.0;
     outputSurfaceDepth=gl_FragCoord.z;
 }
