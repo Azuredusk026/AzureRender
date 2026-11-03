@@ -1,0 +1,723 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "regions": {
+    "ceiling": [
+      0,
+      0,
+      2560,
+      210
+    ],
+    "leftDoor": [
+      70,
+      300,
+      720,
+      690
+    ],
+    "rightWall": [
+      1920,
+      390,
+      2480,
+      620
+    ],
+    "centerFloor": [
+      1010,
+      990,
+      1550,
+      1170
+    ],
+    "cyanRing": [
+      1040,
+      1060,
+      1270,
+      1180
+    ],
+    "leftFloor": [
+      60,
+      950,
+      545,
+      1090
+    ]
+  },
+  "frames": {
+    "backup": {
+      "file": "build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/candidate-capture/frames/frame_000011.png",
+      "sha256": "98817473a51f6544c2287223b2ff36d71da6e42d25790ae48767ca2dd653aebc"
+    },
+    "hidden": {
+      "file": "build/runs/20261103-234012-character-reference-stages-5abe6c/floor-fixed-hidden/frames/frame_000011.png",
+      "sha256": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854"
+    },
+    "visible": {
+      "file": "build/runs/20261103-234012-character-reference-stages-5abe6c/floor-fixed-visible/frames/frame_000011.png",
+      "sha256": "72213166bd89049cff0b81b307e456a3bd3d743aad0069cbd74490ba13acecd9"
+    },
+    "moving": {
+      "file": "build/runs/20261103-234012-character-reference-stages-5abe6c/emission-motion/frames/frame_000011.png",
+      "sha256": "e93d071a0cb387d82d4532b8c4ff1b2db2fbbbd2861056da0256492c8840822e"
+    }
+  },
+  "comparisons": [
+    {
+      "pair": [
+        "backup",
+        "hidden"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "exact": 0.9999125744047619,
+          "withinOne": 1.0,
+          "max": 1,
+          "mean": 2.9761904761904762e-05,
+          "ssim": 0.9999998807907104
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "exact": 1.0,
+          "withinOne": 1.0,
+          "max": 0,
+          "mean": 0.0,
+          "ssim": 1.0
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "exact": 1.0,
+          "withinOne": 1.0,
+          "max": 0,
+          "mean": 0.0,
+          "ssim": 1.0
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "exact": 0.999238683127572,
+          "withinOne": 1.0,
+          "max": 1,
+          "mean": 0.0003120713305898491,
+          "ssim": 0.9999993443489075
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "exact": 0.9973188405797101,
+          "withinOne": 1.0,
+          "max": 1,
+          "mean": 0.0010990338164251208,
+          "ssim": 0.9999977946281433
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "exact": 1.0,
+          "withinOne": 1.0,
+          "max": 0,
+          "mean": 0.0,
+          "ssim": 1.0
+        }
+      }
+    },
+    {
+      "pair": [
+        "hidden",
+        "visible"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "exact": 0.9905078125,
+          "withinOne": 0.9982756696428572,
+          "max": 78,
+          "mean": 0.009318576388888888,
+          "ssim": 0.9999758005142212
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "exact": 0.9990532544378699,
+          "withinOne": 0.9999763313609468,
+          "max": 5,
+          "mean": 0.00039842209072978306,
+          "ssim": 0.9999982714653015
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "exact": 0.9999922360248448,
+          "withinOne": 0.9999922360248448,
+          "max": 2,
+          "mean": 1.5527950310559007e-05,
+          "ssim": 0.9999998211860657
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "exact": 0.8163065843621399,
+          "withinOne": 0.8275,
+          "max": 211,
+          "mean": 5.88914951989026,
+          "ssim": 0.9107981324195862
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "exact": 0.9925362318840579,
+          "withinOne": 0.9989855072463768,
+          "max": 4,
+          "mean": 0.004480676328502416,
+          "ssim": 0.9999749660491943
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "exact": 1.0,
+          "withinOne": 1.0,
+          "max": 0,
+          "mean": 0.0,
+          "ssim": 1.0
+        }
+      }
+    },
+    {
+      "pair": [
+        "visible",
+        "moving"
+      ],
+      "regions": {
+        "ceiling": {
+          "pixels": 537600,
+          "exact": 0.8302232142857143,
+          "withinOne": 0.8648660714285714,
+          "max": 248,
+          "mean": 7.519636036706349,
+          "ssim": 0.9052570462226868
+        },
+        "leftDoor": {
+          "pixels": 253500,
+          "exact": 0.9890256410256411,
+          "withinOne": 0.9998816568047337,
+          "max": 71,
+          "mean": 0.004661406969099276,
+          "ssim": 0.9999635815620422
+        },
+        "rightWall": {
+          "pixels": 128800,
+          "exact": 0.935807453416149,
+          "withinOne": 0.9792391304347826,
+          "max": 54,
+          "mean": 0.12756469979296067,
+          "ssim": 0.9971805810928345
+        },
+        "centerFloor": {
+          "pixels": 97200,
+          "exact": 0.49186213991769545,
+          "withinOne": 0.5773868312757202,
+          "max": 215,
+          "mean": 7.844506172839506,
+          "ssim": 0.8671420216560364
+        },
+        "cyanRing": {
+          "pixels": 27600,
+          "exact": 0.3821014492753623,
+          "withinOne": 0.44217391304347825,
+          "max": 109,
+          "mean": 12.141485507246378,
+          "ssim": 0.8468912243843079
+        },
+        "leftFloor": {
+          "pixels": 67900,
+          "exact": 1.0,
+          "withinOne": 1.0,
+          "max": 0,
+          "mean": 0.0,
+          "ssim": 1.0
+        }
+      }
+    }
+  ],
+  "relativeToUserJpeg": "qualitative; PNG reference is the frozen project output",
+  "framesCompared": [
+    {
+      "frame": 0,
+      "hashes": {
+        "backup": "f1a358c5177a74170a7ff802f067cdaa8daccea6782d8bec1355aca747480547",
+        "hidden": "0fda0452feef2f4df5b9bc8c51aa47df8354834d04e4a19e62998f3a2d78e7d4",
+        "visible": "d3d8b40d89a66a050a9889659096863d8ecf43e3f683a273a91bcb7c6074e214"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537593,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253500,
+          "maximum": 0,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97200,
+          "maximum": 0,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27600,
+          "maximum": 0,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 1,
+      "hashes": {
+        "backup": "1d541cd88d89133f82c94beca52d8a64e52e12efc742dd0b12c5279335cabc8c",
+        "hidden": "5532c8d1176f00adf257a628b03fb72d0195659e3354639949bb4ef14c960c19",
+        "visible": "87188ab4147dcdf52904b8cc31ab35099cf2320097935a19a93c065ff77c4d80"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537552,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253500,
+          "maximum": 0,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97193,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27593,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 2,
+      "hashes": {
+        "backup": "ed3307ca4ac1c040e57e06f5cc293e90a306ecaaa1aff6d16ae24f19baaf5857",
+        "hidden": "91cc7197980d975bb177754f95ed004330b8ced920b9ab59d745eb2573c4e216",
+        "visible": "42db8fb88c22a37d6dce2e40fadc573a33b7aa6637154499acdd0042f6416970"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537553,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253499,
+          "maximum": 1,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97164,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27564,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 3,
+      "hashes": {
+        "backup": "80a4066cdbc8d567ee81208b7aa0112398e51fcf85e16679f82094a34232e7ca",
+        "hidden": "9b77c2e35db0d4cd1d9cef7d85bfd4c9b13b94ea595df70deac0c61562c2549b",
+        "visible": "0103195cc1353964f50f4c8922459501568edb20f012a582a4544b062052ddb8"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537553,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253500,
+          "maximum": 0,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97139,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27539,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 4,
+      "hashes": {
+        "backup": "c94d16596fda9a9303106990fbdc90660157a55273133df36443e790b30c358c",
+        "hidden": "8c18aa7ed46e72a7e76a1729a07b5a35b9185b9ad3c1ae3ff172be80c7f5540b",
+        "visible": "d351afae1d37e6396d11d9e1323fbc1385155a7a5f9c082e9ab81910adfcd54d"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537553,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253500,
+          "maximum": 0,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97137,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27537,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 5,
+      "hashes": {
+        "backup": "9261d0bbe885448597ea8b2223f966f9ba2ff647328f9b69a4ee77c3f4846b10",
+        "hidden": "28f7a1aacb77315b4195d1a2aaed6414501876bd9322dcce91e5b8143f8781b6",
+        "visible": "95f0609d78550830b975248229b7a19899ce2c7a8e80bb516eacce125bd697a5"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537553,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253499,
+          "maximum": 9,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97100,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27500,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 6,
+      "hashes": {
+        "backup": "8c7a405bede1658b25973c5773af715aa723fe0edaee083f6da69e35841e0b92",
+        "hidden": "85a2a0b7c53dd55f38efecf5573cb7117b1d2afb6700bd9296004f38d1b6fa9d",
+        "visible": "1dcf7537f2029e97695bd88b88475f4839eec21c5d5c320222e36c345c75fd18"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537552,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253499,
+          "maximum": 9,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97118,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27518,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 7,
+      "hashes": {
+        "backup": "2d8178594d60614a2df830e51ad37eaf1a9f5ff07934fba9730e0653116e41ff",
+        "hidden": "20151f1cf58155198593b3d482987b38e36f1896cdedec65ffbc414b78bb4d9d",
+        "visible": "67a636fe13bb674103ceda358d83a3c8f1fbffc014827346747aa855864fcf1b"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537552,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253499,
+          "maximum": 9,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97122,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27522,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 8,
+      "hashes": {
+        "backup": "033bca09ef84fba00e063bced290ebce38a1e871487c67501175e82f597d152b",
+        "hidden": "34b39e70c53dfc3f68b81c157f8410821a6bfa475a5f340a0dcf586b21d4dc89",
+        "visible": "43b44d79a732039fdaab0bb3a285b89f3a926acfc9832468b4af7a4838f7f585"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537552,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253499,
+          "maximum": 9,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97126,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27526,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 9,
+      "hashes": {
+        "backup": "e06e5e96925538c8f167d67c8e8e52a7da45b7cef0aaa1831a27ffa312cc316d",
+        "hidden": "6eb6bccc3aefaa63efce32fb534e6c6bcc353aa94d709719616c217e0826975e",
+        "visible": "2753f9bcaa573b9e749f0577c3ed7cae2d22e1b9d45ae358f09670c871c3f3b3"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537553,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253500,
+          "maximum": 0,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97126,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27526,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 10,
+      "hashes": {
+        "backup": "ecdb7f791d70c2f55ecdb5a99e8609d7c407059e5f01aa412ed8b86f30ab4d3f",
+        "hidden": "168769447af1ca56aa8ec4c2a5bf32828cfa79ec90e4bf39fc9ba0149ee5a1ed",
+        "visible": "6158809431c2bed2a025fade54bf990fdb686c76bac22c782b465c79db0bdbe9"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537553,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253500,
+          "maximum": 0,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97126,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27526,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    },
+    {
+      "frame": 11,
+      "hashes": {
+        "backup": "98817473a51f6544c2287223b2ff36d71da6e42d25790ae48767ca2dd653aebc",
+        "hidden": "fcd8ffeed8fe9eede0cbe4b80b15adbb7f360bf3c530db82bb75ff7dcbc4a854",
+        "visible": "72213166bd89049cff0b81b307e456a3bd3d743aad0069cbd74490ba13acecd9"
+      },
+      "regions": {
+        "ceiling": {
+          "exactPixels": 537553,
+          "maximum": 1,
+          "pixels": 537600
+        },
+        "leftDoor": {
+          "exactPixels": 253500,
+          "maximum": 0,
+          "pixels": 253500
+        },
+        "rightWall": {
+          "exactPixels": 128800,
+          "maximum": 0,
+          "pixels": 128800
+        },
+        "centerFloor": {
+          "exactPixels": 97126,
+          "maximum": 1,
+          "pixels": 97200
+        },
+        "cyanRing": {
+          "exactPixels": 27526,
+          "maximum": 1,
+          "pixels": 27600
+        },
+        "leftFloor": {
+          "exactPixels": 67900,
+          "maximum": 0,
+          "pixels": 67900
+        }
+      }
+    }
+  ],
+  "configuration": {
+    "sameCamera": true,
+    "fixedBoxPose": true,
+    "visibilityOnly": true,
+    "referenceFps": 60,
+    "visibleFps": 60,
+    "hiddenFps": 60,
+    "movingFps": 24
+  },
+  "nativeJpeg": "qualitative",
+  "giLightingEquivalence": "not-verified-independently"
+}

@@ -190,6 +190,7 @@ KK、脸部阴影和色带具有非零的原生区域响应。
 完整角色的皮肤、发丝、描边及透明阶段继续执行 Q1。
 服饰一、二的描边覆盖见[固定姿态核验](2026-11-03-character-reference-stages.md)。
 虹膜按[眼部输入](../acceptance/nr/eye-npr-inputs.md)核验独立基准和联合动作。
+地面倒影按[固定箱体对照](../acceptance/nr/scene-material-quality-diagnosis.md)核验备份机位的十二帧输出。
 
 Q0 至 Q4 汇总当前执行顺序及完成证据。
 正式范围和阈值由 NR、引擎交付及 P8 计划持有。
