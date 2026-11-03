@@ -7,7 +7,20 @@
 画面与范围见[完整场景复核](../acceptance/recovery/full-scene-visual.md)。
 联合角色画质验收未通过，诊断状态见[输入核验](../acceptance/nr/joint-visual-input-isolation.md)。
 
-## 启动
+## 联合场景验收入口
+
+当前联合入口包含完整物流场景和待机角色。角色按原始比例放置，镜头距离为 3.82 米。以每秒 24 帧采集时，八秒内共有 192 帧。
+
+```powershell
+$run = Get-Content build/current-character-reference-run.txt
+& build/ninja-msvc-release/AzurePlayer.exe `
+  --project "$run/qualified-albedo-delivery-joint/joint-materials.azureproject" `
+  --width 2560 --height 1440 --qa-camera scene --qa-light scene
+```
+
+程序、动画帧及重开校验值见[联合动画记录](../acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json)。以下命令用于单独检查环境。
+
+## 独立场景启动
 
 在工程目录运行以下命令。
 

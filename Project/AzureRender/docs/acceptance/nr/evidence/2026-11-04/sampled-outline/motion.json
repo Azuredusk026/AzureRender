@@ -1,0 +1,68 @@
+{
+  "status": "captured-and-strict-reopen-passed",
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "playerSha256": "b553c19aa6ea7181a79a9215a13f8072b11d4c7e8ac3cace8757948a45a15b9b",
+  "frames": 192,
+  "uniqueImages": 192,
+  "animationsPerFrame": 11,
+  "referenceFrames": [
+    {
+      "frame": 0,
+      "controls": {
+        "ceiling": 0,
+        "rightWall": 0
+      },
+      "wholeFrameChangedPixels": 9572
+    },
+    {
+      "frame": 64,
+      "controls": {
+        "ceiling": 0,
+        "rightWall": 0
+      },
+      "wholeFrameChangedPixels": 9437
+    },
+    {
+      "frame": 128,
+      "controls": {
+        "ceiling": 0,
+        "rightWall": 0
+      },
+      "wholeFrameChangedPixels": 9492
+    },
+    {
+      "frame": 191,
+      "controls": {
+        "ceiling": 0,
+        "rightWall": 0
+      },
+      "wholeFrameChangedPixels": 9348
+    }
+  ],
+  "strictReopen": {
+    "frame_000000.png": "3e2bb1f8339813b89cbf34064ad62054579c226b4311a3a6100fc24a312eba8c",
+    "frame_000001.png": "11898e460817b0ed61271d9fdfb95a2ed7bf0c599146a9b121858c4ea102f014",
+    "frame_000002.png": "91eeca347c196b0170831faffc8c810b983bd0329948ab5161dde7a8114fa8da",
+    "frame_000003.png": "cadaaedc47b35c5042c114d7b74b79e77197e4e8c731339e53ed87b2a9e96b53"
+  },
+  "video": {
+    "sha256": "6aa884e02f3b76f3c7251763acd68798f93a5eb20e42c1ce9a1a36ff785ffef6",
+    "bytes": 5206843,
+    "width": 2560,
+    "height": 1440,
+    "frames": 192,
+    "fps": 24,
+    "durationSeconds": 8
+  },
+  "assets": {
+    "static": "b1b98b927cd101b42ca1651a94a0dacf4c632577f43afec62fdda9ab98537f4c",
+    "joint": "01a34627fad3d6b7bf68fdd8296db78f4040f74fa2cb7174b5d6281204fa0f6f"
+  },
+  "validatedNormalEntry": {
+    "status": "passed",
+    "playerSha256": "63d7557ee97363f1bf2204050b2bd013be76a6c7c47e26e2e544ce9e268697a6",
+    "entry": "qualified-albedo-delivery-joint/joint-materials.azureproject",
+    "legacyIdleSha256": "b1f9d78053c0e36c966502847c0a90688307a3d98808db93ff8465a620e6e883",
+    "matched": 4
+  }
+}

@@ -1091,7 +1091,7 @@
       "retention": "对应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "implementationPlan": "docs/plans/2026-11-03-character-reference-stages.md",
-      "primaryProject": "qualified-emission-joint/joint-materials.azureproject",
+      "primaryProject": "qualified-albedo-delivery-joint/joint-materials.azureproject",
       "outlineTemporalCoverage": "docs/acceptance/nr/evidence/2026-11-04/outline-temporal-coverage/results.json",
       "fixedFloorControls": "docs/acceptance/nr/evidence/2026-11-04/floor-fixed-controls/results.json",
       "evidence": "docs/acceptance/nr/evidence/2026-11-04/cloth-emission/results.json",
@@ -1107,8 +1107,17 @@
           "path": "media/joint-native-emission.mp4",
           "bytes": 5185136,
           "sha256": "3ccd2af1a7c476d9a1b284b795f0740c49b1bcf15b9c518309b095b7501a9ca5"
+        },
+        {
+          "path": "media/joint-sampled-outline.mp4",
+          "bytes": 5206843,
+          "sha256": "6aa884e02f3b76f3c7251763acd68798f93a5eb20e42c1ce9a1a36ff785ffef6"
         }
-      ]
+      ],
+      "sampledOutline": "docs/acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json",
+      "capturedHead": "docs/acceptance/nr/evidence/2026-11-04/captured-head-frame/results.json",
+      "floorIrradiance": "docs/acceptance/nr/evidence/2026-11-04/floor-irradiance/results.json",
+      "playableRoute": "docs/acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json"
     },
     {
       "path": "runs/20261104-001359-face-masked-rim-ff43bf",
