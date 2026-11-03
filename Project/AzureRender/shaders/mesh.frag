@@ -1214,10 +1214,19 @@ void main() {
                 &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1].x>.5;
             vec3 radial=worldPosition-instanceFaceFrame[3].xyz;radial.y=1.0/16384.0;radial=normalize(radial);
             if(facingRim) {
-                if(!(qaEffectMode==4&&qaEffectDisabled)&&attenuation>.0001)
+                if(!(qaEffectMode==4&&qaEffectDisabled)&&attenuation>.0001) {
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+                    if(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1].x>1.5)
+                        sceneRim+=radiance*characterFaceMaskedRimResponse(materialNprLitAlbedo(baseColor.rgb,shadedNormal,viewDirection),
+                            light.characterResponse.z,light.characterResponse.y,faceLightingNormal,viewDirection,
+                            pointDirection,camera.cameraForward.xyz,radial,instanceFaceFrame[0].xyz,instanceFaceFrame[2].xyz,
+                            textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).a);
+                    else
+#endif
                     sceneRim+=radiance*characterFacingRimResponse(materialNprLitAlbedo(baseColor.rgb,shadedNormal,viewDirection),
                         light.characterResponse.z,light.characterResponse.y,shadedNormal,viewDirection,
                         pointDirection,camera.cameraForward.xyz,radial);
+                }
             } else {
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
             if(!(qaEffectMode==4&&qaEffectDisabled)&&attenuation>.0001) {

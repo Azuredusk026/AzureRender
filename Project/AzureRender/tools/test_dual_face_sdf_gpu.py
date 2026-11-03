@@ -15,7 +15,7 @@ from PIL import Image
 from create_visibility_fixture import surface, component
 
 
-def run_normal_checks(executable, root):
+def run_normal_checks(executable, root, expected_validation='enabled'):
     root.mkdir(parents=True, exist_ok=True)
     assets = root / 'assets'
     assets.mkdir(exist_ok=False)
@@ -84,7 +84,7 @@ def run_normal_checks(executable, root):
         with (output / 'player.log').open('w', encoding='utf8') as log:
             subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True, timeout=120)
         log = (output / 'player.log').read_text(encoding='utf8', errors='replace')
-        assert 'Validation layer: enabled' in log and not re.search(r'VUID-|Validation Error|\[error\]', log), name
+        assert f'Validation layer: {expected_validation}' in log and not re.search(r'VUID-|Validation Error|\[error\]', log), name
         assert 'Allocator after unload: buffers=0 images=0' in log, name
         report = json.loads((output / 'runtime.json').read_text())
         assert not report['scriptErrors'] and not report['presentationErrors'], name
@@ -150,7 +150,7 @@ def run_normal_checks(executable, root):
     return summary
 
 
-def run(executable, root):
+def run(executable, root, expected_validation='enabled'):
     assets = root / 'assets'
     assets.mkdir(parents=True, exist_ok=False)
     surface(assets / 'face.gltf', double_sided=True)
@@ -239,7 +239,7 @@ def run(executable, root):
         result = subprocess.run(command, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
         (root / (mode + '.log')).write_text(result.stdout + result.stderr, encoding='utf-8')
         assert result.returncode == 0 and not re.search(r'VUID-|Validation Error|\[error\]', result.stdout + result.stderr), mode
-        assert 'Validation layer: enabled' in result.stdout, mode
+        assert f'Validation layer: {expected_validation}' in result.stdout, mode
         assert 'Allocator after unload: buffers=0 images=0' in result.stdout, mode
         data = json.loads((root / (mode + '-runtime.json')).read_text())
         assert not data['scriptErrors'] and not data['presentationErrors']
@@ -260,7 +260,8 @@ def run(executable, root):
         'sceneHeadRotationResponse': scene_head, 'sceneIndependentMaskResponse': scene_mask,
         'sceneFixedDescriptorCpuDifference': scene_fallback, 'sceneDarkMaximum': scene_dark,
         'headAnimationResponse': animation, 'fixedDescriptorCpuDifference': fallback, 'validationErrors': 0}
-    summary['normal'] = run_normal_checks(executable, root / 'blue-normal')
+    summary['expectedValidation'] = expected_validation
+    summary['normal'] = run_normal_checks(executable, root / 'blue-normal', expected_validation)
     (root / 'summary.json').write_text(json.dumps(summary, indent=2))
     print(json.dumps(summary))
 
@@ -269,10 +270,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument('--executable', required=True, type=Path)
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--expected-validation', choices=['enabled','disabled'], default='enabled')
     args = parser.parse_args()
     if args.output:
-        run(args.executable, args.output.resolve())
+        run(args.executable, args.output.resolve(), args.expected_validation)
     else:
         runs = Path(__file__).resolve().parents[1] / 'build/runs'
         with tempfile.TemporaryDirectory(prefix='dual-face-', dir=runs) as temporary:
-            run(args.executable, Path(temporary))
+            run(args.executable, Path(temporary), args.expected_validation)

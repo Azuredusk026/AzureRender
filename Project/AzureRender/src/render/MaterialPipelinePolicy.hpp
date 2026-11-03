@@ -38,7 +38,8 @@ inline bool extendedMaterialLighting(const AssetMaterial& material) noexcept {
     return material.environmentLighting.diffuse!=MaterialEnvironmentSource::Scene
         ||material.environmentLighting.reflection!=MaterialEnvironmentSource::Scene
         ||material.mainLightShadow!=MaterialMainLightShadow::Scene
-        ||(material.nprDiffuse.present&&material.nprDiffuse.rampComposition!=NprRampComposition::MaskVisibility);
+        ||(material.nprDiffuse.present&&(material.nprDiffuse.rampComposition!=NprRampComposition::MaskVisibility
+            ||material.nprDiffuse.rimResponse==AssetMaterial::NprDiffuse::RimResponse::FaceMasked));
 }
 inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false,bool lighting=false,bool coverage=false){
     auto at=file.rfind(".frag.spv");

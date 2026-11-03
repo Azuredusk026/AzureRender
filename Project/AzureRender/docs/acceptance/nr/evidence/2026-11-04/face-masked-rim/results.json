@@ -1,0 +1,251 @@
+{
+  "status": "public-response-passed",
+  "visualAcceptance": "open",
+  "cases": [
+    {
+      "run": "normal-green",
+      "frames": 28,
+      "maxError": 0.0014750755501749813,
+      "programs": {
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe": "1c3c845dfa627b488c1d5c13027ca19fcba82f5258d669b64821ca19a799aa0f"
+      }
+    },
+    {
+      "run": "normal-release-aa4",
+      "frames": 28,
+      "maxError": 0.001630385230012188,
+      "programs": {
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe": "1c3c845dfa627b488c1d5c13027ca19fcba82f5258d669b64821ca19a799aa0f"
+      }
+    },
+    {
+      "run": "normal-debug-aa0",
+      "frames": 28,
+      "maxError": 0.0014750755501749813,
+      "programs": {
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe": "cbb1dc92d9e6846846b6216c8bbd1004a227d98d263778664bfa372934e35cc6"
+      }
+    },
+    {
+      "run": "normal-debug-aa4",
+      "frames": 28,
+      "maxError": 0.001630385230012188,
+      "programs": {
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe": "cbb1dc92d9e6846846b6216c8bbd1004a227d98d263778664bfa372934e35cc6"
+      }
+    }
+  ],
+  "probes": [
+    {
+      "disabled": [],
+      "pixel": [
+        184,
+        151,
+        133
+      ],
+      "faceMAE": 3.26465395480226,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\pose-face-masked\\local-probe-full.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--disable-bindless",
+        "--disable-compute-skinning",
+        "--disable-parallel-recording",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\local-probe-full\\frames"
+      ]
+    },
+    {
+      "disabled": [
+        1
+      ],
+      "pixel": [
+        184,
+        151,
+        133
+      ],
+      "faceMAE": 3.263241525423729,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\pose-face-masked\\local-probe-1.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--disable-bindless",
+        "--disable-compute-skinning",
+        "--disable-parallel-recording",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\local-probe-1\\frames"
+      ]
+    },
+    {
+      "disabled": [
+        3
+      ],
+      "pixel": [
+        157,
+        131,
+        117
+      ],
+      "faceMAE": 3.2424081920903953,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\pose-face-masked\\local-probe-3.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--disable-bindless",
+        "--disable-compute-skinning",
+        "--disable-parallel-recording",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\local-probe-3\\frames"
+      ]
+    },
+    {
+      "disabled": [
+        5
+      ],
+      "pixel": [
+        184,
+        151,
+        133
+      ],
+      "faceMAE": 3.26465395480226,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\pose-face-masked\\local-probe-5.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--disable-bindless",
+        "--disable-compute-skinning",
+        "--disable-parallel-recording",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\local-probe-5\\frames"
+      ]
+    },
+    {
+      "disabled": [
+        1,
+        3,
+        5
+      ],
+      "pixel": [
+        157,
+        131,
+        117
+      ],
+      "faceMAE": 3.2432909604519775,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\pose-face-masked\\local-probe-1-3-5.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--capture-frames",
+        "1",
+        "--fixed-frame-step",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--disable-bindless",
+        "--disable-compute-skinning",
+        "--disable-parallel-recording",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261104-001359-face-masked-rim-ff43bf\\local-probe-1-3-5\\frames"
+      ]
+    }
+  ],
+  "native": {
+    "status": "passed",
+    "scope": "First native face rim response in two complete hardware-qualified traces; nose residual probes",
+    "samples": [
+      {
+        "pixel": [
+          1282,
+          277
+        ],
+        "width": 0.4000000059604645,
+        "maskAlpha": 0.9369649887084961,
+        "headWeight": 0.9987070514546452,
+        "viewBand": 0.0,
+        "finalWeight": 0.9357535411892971,
+        "maximumFormulaError": 1.6885860820714527e-08,
+        "errors": {
+          "headWeight": 4.5908870038857685e-09,
+          "viewBand": 0.0,
+          "maskBlend": 1.6885860820714527e-08
+        },
+        "maximumHardwareTraceError": 1.1920928955078125e-07,
+        "traceSha256": "41aa5f32b992529f34d7622aec8989b2e7cf0ac2cb65bc301147a66df70ab384"
+      },
+      {
+        "pixel": [
+          1281,
+          279
+        ],
+        "width": 0.4000000059604645,
+        "maskAlpha": 0.9389638900756836,
+        "headWeight": 0.9987070514546452,
+        "viewBand": 0.0,
+        "finalWeight": 0.9377498580798695,
+        "maximumFormulaError": 4.591028890388316e-09,
+        "errors": {
+          "headWeight": 4.5908870038857685e-09,
+          "viewBand": 0.0,
+          "maskBlend": 4.591028890388316e-09
+        },
+        "maximumHardwareTraceError": 2.384185791015625e-07,
+        "traceSha256": "579b381ca0098ff4872a7cdd221f35b226877cde6d4e087fe4b27669c9865f00"
+      }
+    ]
+  },
+  "binding": {
+    "slot": "name:M_actor_laevat_face_01",
+    "changedPixels": 1193,
+    "headChangedPixels": 1184,
+    "headMaximumByteDifference": 170
+  },
+  "sourceRun": "20261104-001359-face-masked-rim-ff43bf"
+}

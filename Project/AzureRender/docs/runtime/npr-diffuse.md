@@ -88,6 +88,8 @@
 完整材质文档与 glTF 共用解析和校验。
 
 `rimResponse` 为可选字符串，默认 `screen-depth`。
+`face-masked` 选择[脸部遮罩响应](face-masked-rim.md)。
+它消费双图脸部模型的透明度及头部坐标。
 `view-facing` 为版本五材质边缘灯选择视角带状响应。
 灯响应及规范公式见[局部灯契约](character-local-light-response.md)。
 

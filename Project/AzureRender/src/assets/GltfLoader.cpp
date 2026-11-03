@@ -1,5 +1,6 @@
 #include "GltfLoader.hpp"
 #include "assets/MaterialBlendDepth.hpp"
+#include "assets/MaterialRimResponse.hpp"
 #include "assets/image/ImageCodec.hpp"
 #include "BrowRegions.hpp"
 #include "scene/TransformParity.hpp"
@@ -2115,9 +2116,15 @@ AssetMaterial loadMaterial(
             }
             if(npr.contains("rimResponse")) {
                 const auto& mode=npr.at("rimResponse");
-                if(!mode.is_string()||(mode!="screen-depth"&&mode!="view-facing"))
+                if(!mode.is_string()||(mode!="screen-depth"&&mode!="view-facing"&&mode!="face-masked"))
                     throw std::invalid_argument("Invalid nprDiffuse.rimResponse");
-                result.nprDiffuse.rimResponse=mode=="view-facing"?AssetMaterial::NprDiffuse::RimResponse::ViewFacing
+                const auto& owner=authoredProfile["azureRenderMaterial"];
+                // tinygltf can omit empty extra arrays; retain explicit ownership rejection.
+                if(mode=="face-masked"&&owner.contains("features")
+                    &&std::find(owner["features"].begin(),owner["features"].end(),"face-sdf-eligible")==owner["features"].end())
+                    throw std::invalid_argument("nprDiffuse.rimResponse face-masked requires face-sdf-eligible ownership");
+                result.nprDiffuse.rimResponse=mode=="face-masked"?AssetMaterial::NprDiffuse::RimResponse::FaceMasked
+                    :mode=="view-facing"?AssetMaterial::NprDiffuse::RimResponse::ViewFacing
                     :AssetMaterial::NprDiffuse::RimResponse::ScreenDepth;
             }
             if(npr.contains("viewTint")) {
@@ -2243,6 +2250,7 @@ AssetMaterial loadMaterial(
     azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary);
     validateMaterialCoverage(result);
     azurerender::validateMaterialBlendDepth(result);
+    azurerender::validateMaterialRimResponse(result);
     return result;
 }
 

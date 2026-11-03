@@ -177,6 +177,7 @@ Lit 法线阈值、重建下限及实际材质见[解码验收](docs/acceptance/
 材质变体资源归属与实际片元核对见[合成验证](docs/acceptance/nr/character-composite-diagnosis.md)。
 逐材质 NPR 光色及真实皮肤色带见[光色验证](docs/acceptance/nr/npr-material-lighting.md)。
 材质边缘响应、视角色彩及正交切线见[边缘验证](docs/acceptance/nr/material-rim-and-view-tint.md)。
+脸部遮罩、头部朝向及宽度混合见[脸部轮廓光](docs/runtime/face-masked-rim.md)。
 有符号主光色带及身体输入见[色带验证](docs/acceptance/nr/signed-main-ramp.md)。
 
 角色可见量来源及对象阴影生产见[阴影验证](docs/acceptance/nr/character-visibility-inputs.md)。

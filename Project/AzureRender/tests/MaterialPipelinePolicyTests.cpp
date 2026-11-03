@@ -23,6 +23,9 @@ int main(){
     if(!extendedMaterialLighting(material))return 28;
     material.nprDiffuse.rampComposition=AssetMaterial::NprDiffuse::RampComposition::MaskVisibility;
     if(extendedMaterialLighting(material))return 29;
+    material.nprDiffuse.rimResponse=AssetMaterial::NprDiffuse::RimResponse::FaceMasked;
+    if(!extendedMaterialLighting(material))return 36;
+    material.nprDiffuse.rimResponse=AssetMaterial::NprDiffuse::RimResponse::ScreenDepth;
     material.nprDiffuse.present=false;
     if(sceneFragmentVariant("mesh.frag.spv",true,true,true,true)
         !="mesh_samples_clipmap_field_lighting.frag.spv")return 27;

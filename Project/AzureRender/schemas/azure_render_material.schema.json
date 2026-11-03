@@ -219,6 +219,15 @@
             "mask-visibility",
             "view-ramp-alpha"
           ]
+        },
+        "rimResponse": {
+          "type": "string",
+          "enum": [
+            "screen-depth",
+            "view-facing",
+            "face-masked"
+          ],
+          "default": "screen-depth"
         }
       }
     },
@@ -375,6 +384,45 @@
           },
           "displayTransform": {
             "const": "scene"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "nprDiffuse"
+        ],
+        "properties": {
+          "nprDiffuse": {
+            "required": [
+              "rimResponse"
+            ],
+            "properties": {
+              "rimResponse": {
+                "const": "face-masked"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "faceSdf"
+        ],
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          },
+          "faceSdf": {
+            "properties": {
+              "schemaVersion": {
+                "const": 2
+              }
+            }
+          },
+          "class": {
+            "const": "face"
           }
         }
       }

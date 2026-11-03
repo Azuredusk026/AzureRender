@@ -1,5 +1,7 @@
 #include "assets/GltfLoader.hpp"
 #include "assets/TextureImportSettings.hpp"
+#include "assets/MaterialSurfaceProfile.hpp"
+#include "assets/MaterialData.hpp"
 #include "resources/ResourceLocator.hpp"
 #include <stb_image_write.h>
 #include <webp/encode.h>
@@ -161,6 +163,54 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
          {"headBasis",{1,0,0,0,1,0,0,0,1}},{"lightAdjustment",{0,0,0}}}}};
  std::ofstream(root/"face.gltf")<<face.dump();
  const auto dualFace=loadGltfAsset((root/"face.gltf").u8string());const auto& f=dualFace.materials[0];
+ auto maskedRim=face;
+ maskedRim["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]={
+     {"schemaVersion",1},{"shadowScale",1},{"lightingInputs","host-scene-radiance"},
+     {"shadowMask","none"},{"baseAo","one"},{"shadowAlbedo","base-color"},{"rimResponse","face-masked"}};
+ std::ofstream(root/"masked-rim.gltf")<<maskedRim.dump();
+ const auto rimFace=loadGltfAsset((root/"masked-rim.gltf").u8string()).materials[0];
+ if(static_cast<unsigned>(rimFace.nprDiffuse.rimResponse)!=2||packMaterialSurfaceProfile(rimFace).rows[1][0]!=2)
+     throw std::runtime_error("Face-masked rim must retain its explicit typed response");
+ auto documentProfile=maskedRim["materials"][0]["extras"]["azureRenderMaterial"];
+ documentProfile["faceSdf"]["texture"]=0;documentProfile["faceSdf"]["maskTexture"]=1;documentProfile["faceSdf"]["rampTexture"]=2;
+ const nlohmann::json rimSurface={{"asset",{{"version","2.0"}}},{"nodes",{{{"name","FaceHead"}}}},
+     {"textures",{{{"source",0}},{{"source",1}},{{"source",2}}}},
+     {"materials",{{{"extras",{{"azureRenderMaterial",documentProfile}}}}}}};
+ const std::array<std::string,3> imageIds={"11111111-1111-1111-1111-111111111111","22222222-2222-2222-2222-222222222222","33333333-3333-3333-3333-333333333333"};
+ nlohmann::json documentTextures=nlohmann::json::object();
+ for(std::size_t index=0;index<imageIds.size();++index)documentTextures[std::to_string(index)]={{"asset",imageIds[index]},{"usage","linear"}};
+ const nlohmann::json rimDocument={{"schemaVersion",3},{"typeId","azure.profile"},
+     {"parameters",nlohmann::json::object()},{"textures",documentTextures},{"surface",rimSurface}};
+ const auto rimData=MaterialData::parse(rimDocument);
+ std::ofstream(root/"face-rim.azurematerial")<<rimData.encode();
+ std::ifstream reopenedRim(root/"face-rim.azurematerial");nlohmann::json reopenedRimJson;reopenedRim>>reopenedRimJson;reopenedRim.close();
+ const auto reopenedRimMaterial=MaterialData::parse(reopenedRimJson).interpret([&](const auto& id){return root/(id==imageIds[1]?"face-mask.png":"face-sdf.png");});
+ if(reopenedRimJson!=rimDocument||reopenedRimMaterial.nprDiffuse.rimResponse!=rimFace.nprDiffuse.rimResponse)
+     throw std::runtime_error("Complete face-masked material documents must survive save and reopen");
+ const auto inheritedRim=MaterialData::parse({{"schemaVersion",2},{"mode","parameters"},{"typeId","azure.pbr"},
+     {"parameters",{{"emissiveStrength",.25}}},{"textures",nlohmann::json::object()}}).interpret(
+         [](const auto&){return std::filesystem::path();},&rimFace);
+ if(inheritedRim.nprDiffuse.rimResponse!=rimFace.nprDiffuse.rimResponse||packMaterialSurfaceProfile(inheritedRim).rows[1][0]!=2)
+     throw std::runtime_error("Parameter edits must retain the inherited face response");
+ auto invalidEnum=rimFace;invalidEnum.nprDiffuse.rimResponse=static_cast<AssetMaterial::NprDiffuse::RimResponse>(3);
+ bool enumRejected=false;try{(void)packMaterialSurfaceProfile(invalidEnum);}catch(const std::exception&){enumRejected=true;}
+ if(!enumRejected)throw std::runtime_error("Unknown typed rim response must be rejected");
+ for(bool missingNpr:{false,true}) {
+     auto invalid=rimFace;
+     if(missingNpr)invalid.nprDiffuse.present=false;
+     else invalid.faceSdf.schemaVersion=1;
+     bool denied=false;try{(void)packMaterialSurfaceProfile(invalid);}catch(const std::exception&){denied=true;}
+     if(!denied)throw std::runtime_error("Programmatic face-masked surfaces must retain typed ownership");
+ }
+ for(const char* field:{"faceSdf","class","features"}) {
+     auto bad=maskedRim;
+     if(std::string(field)=="class")bad["materials"][0]["extras"]["azureRenderMaterial"][field]="generic";
+     else if(std::string(field)=="features")bad["materials"][0]["extras"]["azureRenderMaterial"][field]=nlohmann::json::array();
+     else bad["materials"][0]["extras"]["azureRenderMaterial"].erase(field);
+     std::ofstream(root/"bad-masked-rim.gltf")<<bad.dump();bool denied=false;
+     try{(void)loadGltfAsset((root/"bad-masked-rim.gltf").u8string());}catch(const std::exception&){denied=true;}
+     if(!denied)throw std::runtime_error("Face-masked rim requires explicit face ownership");
+ }
  if(f.faceSdf.pixels!=std::vector<std::uint8_t>(sdfPixels,sdfPixels+16)
      ||f.styleMaskPixels!=std::vector<std::uint8_t>(maskPixels,maskPixels+16)
      ||f.matcapPixels!=f.faceSdf.pixels||f.textureSettings[5].colorSpace!="linear"||!(f.materialFeatures&2048U))

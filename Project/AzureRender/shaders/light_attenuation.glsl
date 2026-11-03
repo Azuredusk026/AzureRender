@@ -3,6 +3,27 @@
 #define AZURE_LINE_LIGHT_GEOMETRY 1
 #define AZURE_CHARACTER_SCREEN_RIM 1
 #define AZURE_CHARACTER_FACING_RIM 1
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+vec3 characterFaceMaskedRimResponse(vec3 base,float tint,float width,vec3 normal,vec3 view,
+    vec3 light,vec3 cameraAxis,vec3 radial,vec3 headRight,vec3 headForward,float faceMask) {
+    vec3 planar=light-cameraAxis*dot(light,cameraAxis);
+    float squared=dot(planar,planar);
+    planar=squared>1e-12?planar*inversesqrt(squared):vec3(0);
+    vec2 cameraHead=vec2(dot(cameraAxis,headRight),dot(cameraAxis,headForward));
+    float cameraLength=dot(cameraHead,cameraHead);
+    float alignment=cameraLength>1e-12?abs(cameraHead.y)*inversesqrt(cameraLength):0.0;
+    float headWeight=clamp((alignment-.9)*10.0,0.0,1.0);
+    headWeight=headWeight*headWeight*(3.0-2.0*headWeight);
+    float edge=1.0-abs(dot(normal,view));
+    float band=clamp((edge-(.8-.6*width))/(.1+.2*width),0.0,1.0);
+    band=band*band*(3.0-2.0*band);
+    float hemisphere=dot(cameraAxis,-planar)<-.01?1.0:0.0;
+    float weight=mix(headWeight*band,max(headWeight,hemisphere)*clamp(faceMask,0.0,1.0),
+        clamp(width*10.0-3.0,0.0,1.0));
+    float visibility=clamp(dot(radial,light)+1.0,0.0,1.0);
+    return (.5+tint*(base*.96-.5))*(weight*visibility*clamp(dot(normal,planar),0.0,1.0));
+}
+#endif
 vec3 characterFacingRimResponse(vec3 base,float tint,float width,vec3 normal,vec3 view,
     vec3 light,vec3 cameraAxis,vec3 radial) {
     vec3 planar=light-cameraAxis*dot(light,cameraAxis);

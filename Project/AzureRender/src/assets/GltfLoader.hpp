@@ -238,7 +238,7 @@ struct AssetMaterial {
             bool present=false;
             std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
         } lighting;
-        enum class RimResponse : std::uint8_t { ScreenDepth,ViewFacing };
+        enum class RimResponse : std::uint8_t { ScreenDepth,ViewFacing,FaceMasked };
         RimResponse rimResponse=RimResponse::ScreenDepth;
         struct RimOrigin {
             bool present=false;
