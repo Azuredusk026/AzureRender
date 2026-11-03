@@ -1,0 +1,204 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "gate": "measured-independent-iris-comparison",
+  "fullCharacterAcceptance": "open",
+  "opaqueEvent": 846,
+  "samplePixels": 255,
+  "exactPixelsAgainstIndependent": 252,
+  "maximumAgainstIndependent": 1,
+  "strictByteIdentity": false,
+  "sourceInputs": [
+    {
+      "project": "qualified-iris-static",
+      "asset": "character/captured-opaque-overlays.glb",
+      "before": "3568ee48d24ae4d7d46b3915d3e9c67c681b2796614e8145845c285c1e89e9d2",
+      "after": "30c3a49d9c4032d8227df8b62d3bd8dac4069a2ea7107a04889e58707afd019b"
+    },
+    {
+      "project": "qualified-iris-joint",
+      "asset": "content-character/hero-idle-opaque-overlays.glb",
+      "before": "0fd4cdee21b4b24d1984a3a757f655cbc708182622a1d55dba1d813d7c76f60c",
+      "after": "a86c9aaf803cce852418eaf49df2fc991494b45d57162e04a64b14aef02cecd0"
+    }
+  ],
+  "cases": [
+    {
+      "case": "independent",
+      "probe": [
+        36,
+        96,
+        255
+      ],
+      "opaque": {
+        "pixels": 255,
+        "mean": 1.031372549019608,
+        "maximum": 20,
+        "withinOne": 215
+      },
+      "unoccluded": {
+        "pixels": 161,
+        "mean": 1.3250517598343685,
+        "maximum": 20,
+        "withinOne": 124
+      },
+      "full": {
+        "pixels": 255,
+        "mean": 8.590849673202614,
+        "maximum": 95,
+        "withinOne": 124
+      }
+    },
+    {
+      "case": "jointMaterials",
+      "probe": [
+        98,
+        39,
+        96
+      ],
+      "opaque": {
+        "pixels": 255,
+        "mean": 32.21699346405229,
+        "maximum": 168,
+        "withinOne": 3
+      },
+      "unoccluded": {
+        "pixels": 161,
+        "mean": 36.75983436853002,
+        "maximum": 168,
+        "withinOne": 0
+      },
+      "full": {
+        "pixels": 255,
+        "mean": 37.76862745098039,
+        "maximum": 189,
+        "withinOne": 0
+      }
+    },
+    {
+      "case": "both",
+      "probe": [
+        36,
+        96,
+        255
+      ],
+      "opaque": {
+        "pixels": 255,
+        "mean": 1.031372549019608,
+        "maximum": 20,
+        "withinOne": 215
+      },
+      "unoccluded": {
+        "pixels": 161,
+        "mean": 1.3250517598343685,
+        "maximum": 20,
+        "withinOne": 124
+      },
+      "full": {
+        "pixels": 255,
+        "mean": 8.590849673202614,
+        "maximum": 95,
+        "withinOne": 124
+      }
+    },
+    {
+      "case": "uv",
+      "probe": [
+        106,
+        100,
+        255
+      ],
+      "opaque": {
+        "pixels": 255,
+        "mean": 16.215686274509803,
+        "maximum": 136,
+        "withinOne": 30
+      },
+      "unoccluded": {
+        "pixels": 161,
+        "mean": 16.96687370600414,
+        "maximum": 136,
+        "withinOne": 16
+      },
+      "full": {
+        "pixels": 255,
+        "mean": 16.88888888888889,
+        "maximum": 136,
+        "withinOne": 18
+      }
+    },
+    {
+      "case": "hand",
+      "probe": [
+        134,
+        60,
+        118
+      ],
+      "opaque": {
+        "pixels": 255,
+        "mean": 35.26274509803922,
+        "maximum": 167,
+        "withinOne": 3
+      },
+      "unoccluded": {
+        "pixels": 161,
+        "mean": 37.84472049689441,
+        "maximum": 167,
+        "withinOne": 1
+      },
+      "full": {
+        "pixels": 255,
+        "mean": 37.34771241830065,
+        "maximum": 189,
+        "withinOne": 1
+      }
+    }
+  ],
+  "joint": {
+    "frames": 192,
+    "reopenExactFrames": 4,
+    "selectedFrameChanges": [
+      {
+        "frame": 0,
+        "pixels": 68,
+        "bounds": [
+          1382,
+          676,
+          1434,
+          737
+        ]
+      },
+      {
+        "frame": 48,
+        "pixels": 66,
+        "bounds": [
+          1410,
+          676,
+          1435,
+          689
+        ]
+      },
+      {
+        "frame": 96,
+        "pixels": 69,
+        "bounds": [
+          1410,
+          676,
+          1438,
+          689
+        ]
+      },
+      {
+        "frame": 144,
+        "pixels": 67,
+        "bounds": [
+          1367,
+          676,
+          1436,
+          696
+        ]
+      }
+    ],
+    "videoFile": "media/joint-native-iris.mp4",
+    "sha256": "fa6e8e798d4bc15983dae4d386f2c3b7587a78edda47f723001b1d8d9ff4a19f"
+  }
+}

@@ -1090,7 +1090,18 @@
       "purpose": "原生角色绘制阶段、轮廓光及完整区域的来源核验。",
       "retention": "对应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
-      "implementationPlan": "docs/plans/2026-11-03-character-reference-stages.md"
+      "implementationPlan": "docs/plans/2026-11-03-character-reference-stages.md",
+      "primaryProject": "qualified-iris-joint/joint-materials.azureproject",
+      "evidence": "docs/acceptance/nr/evidence/2026-11-04/iris-vertex-basis/results.json",
+      "strictReopen": "passed",
+      "visualAcceptance": "failed-user-review",
+      "videos": [
+        {
+          "path": "media/joint-native-iris.mp4",
+          "bytes": 5063917,
+          "sha256": "fa6e8e798d4bc15983dae4d386f2c3b7587a78edda47f723001b1d8d9ff4a19f"
+        }
+      ]
     },
     {
       "path": "runs/20261104-001359-face-masked-rim-ff43bf",
