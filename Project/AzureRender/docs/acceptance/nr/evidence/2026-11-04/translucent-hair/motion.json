@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "frames": 192,
+  "animationNodeSamples": 2112,
+  "animationNodes": 11,
+  "reopen": {
+    "frame_000000.png": "211beb589bb1d6eda399e4574e91f5a9b39494dad263a74cc2493e1851cd90de",
+    "frame_000001.png": "a9892ee8edac3008cbfed10e1f124bd9be190d20dd3b462fa7e20e0d7e0cd0e2",
+    "frame_000002.png": "570e74ae0658b268e3f213bee26827393711545fb997940256c7799b8bd47872",
+    "frame_000003.png": "da6277e00c52bf951884dc7e1882b448974a478c0d61d4976d27325ed5c318b6"
+  },
+  "changes": [
+    {
+      "frame": 0,
+      "pixels": 3251,
+      "bounds": [
+        1380,
+        622,
+        1487,
+        744
+      ]
+    },
+    {
+      "frame": 64,
+      "pixels": 3208,
+      "bounds": [
+        1382,
+        629,
+        1487,
+        744
+      ]
+    },
+    {
+      "frame": 128,
+      "pixels": 3228,
+      "bounds": [
+        1381,
+        629,
+        1487,
+        744
+      ]
+    },
+    {
+      "frame": 191,
+      "pixels": 3180,
+      "bounds": [
+        1378,
+        629,
+        1495,
+        744
+      ]
+    }
+  ],
+  "playerSha256": "f1df27e871497f99d9666a3d6ba0ffd412a0f25bd460ce43dc05573be4003c52",
+  "project": "qualified-hair-facing-joint/joint-materials.azureproject",
+  "asset": {
+    "sourceSha256": "01a34627fad3d6b7bf68fdd8296db78f4040f74fa2cb7174b5d6281204fa0f6f",
+    "sha256": "f1c10b1ec6e3c88ec3e33a9a8036e2ff9534b6ea25160d427ee48102d1c0de67",
+    "materialSha256": "c6f6c58d084302114c0f1d6efe5ba9f88f23346e95f58bd4f256d48274493cc8",
+    "opaqueSha256": "261fe90554255d9b26f3264364d44663f2c08b1bc9e30bb2cd59bf2007f28b7b",
+    "newGuid": "8709e04a-561b-519d-adc5-dbe6fd17494a",
+    "reusedSkinnedPrimitives": 1,
+    "headFrame": {
+      "schemaVersion": 1,
+      "node": "Bip001_Head",
+      "basis": [
+        -1.2556207821560323e-06,
+        2.7855764703915194e-06,
+        -0.9999999999953323,
+        0.999999999999211,
+        -4.4843204444759344e-08,
+        -1.2556209066996796e-06,
+        4.484670207260324e-08,
+        0.9999999999961199,
+        2.7855764142771456e-06
+      ]
+    }
+  },
+  "video": {
+    "status": "encoded-and-header-verified",
+    "capture": "facing-joint-motion",
+    "frames": 192,
+    "fps": 24,
+    "durationSeconds": 8,
+    "width": 2560,
+    "height": 1440,
+    "sha256": "2872ae61eae82cb947daefb9bf108b1a7bff158cc38bad2d41918a1b31cf9f11",
+    "bytes": 5237051
+  }
+}

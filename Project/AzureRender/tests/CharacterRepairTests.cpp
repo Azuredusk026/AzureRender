@@ -392,6 +392,21 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     litProfile["diffuseRamp"]={{"schemaVersion",1},{"texture",litStrand["textures"].size()-1}};
     litProfile["hair"]["projectedRamp"]["lighting"]={{"schemaVersion",1},{"shadowBrightness",.55},
         {"shadowSaturation",1.1},{"shadowScale",.4},{"ambientColor",{.8,.9,1.1}},{"mainColor",{1,.9,.7}}};
+    auto translucentStrand=litStrand;
+    auto& translucentMaterial=translucentStrand["materials"][0];
+    translucentMaterial["alphaMode"]="BLEND";
+    translucentMaterial["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"]["transparentHighlights"]=true;
+    auto& translucentLighting=translucentMaterial["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"];
+    translucentLighting["characterVisibility"]="main-light-shadow";
+    translucentLighting["transparentHighlights"]=1;
+    reject(translucentStrand,"transparentHighlights");
+    translucentLighting["transparentHighlights"]=true;
+    translucentMaterial["alphaMode"]="OPAQUE";
+    reject(translucentStrand,"transparentHighlights");
+    translucentMaterial["alphaMode"]="BLEND";
+    const auto translucentAsset=load(translucentStrand);
+    require(packMaterialSurfaceProfile(translucentAsset.materials[0]).rows[6][3]==2.F,
+        "Transparent projected hair must retain its explicit highlight receiver policy");
     const auto litAsset=load(litStrand);const auto litPacked=packMaterialSurfaceProfile(litAsset.materials[0]);
     require(litPacked.rows[5][3]==.4F&&litPacked.rows[6][3]==1
         &&litPacked.rows[10]==std::array<float,4>{.8F,.9F,1.1F,.55F}

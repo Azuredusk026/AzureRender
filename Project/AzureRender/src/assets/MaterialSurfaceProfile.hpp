@@ -42,7 +42,7 @@ inline PackedMaterialSurfaceProfile packProjectedHairSurfaceProfile(const AssetM
         const auto source=light.characterVisibility==AssetMaterial::CharacterVisibility::One
             ?0U:static_cast<unsigned>(light.characterVisibility)+1U;
         rows[6][0]=static_cast<float>((hair.virtualLight?1U:0U)|(source<<1U));
-        rows[5][3]=light.shadowScale;rows[6][3]=1;
+        rows[5][3]=light.shadowScale;rows[6][3]=light.transparentHighlights?2.F:1.F;
         rows[10]={light.ambientColor[0],light.ambientColor[1],light.ambientColor[2],light.shadowBrightness};
         rows[11]={light.mainColor[0],light.mainColor[1],light.mainColor[2],light.shadowSaturation};
     }
@@ -67,6 +67,9 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateUnlitSubmission(material.unlitTextureLayers);
     validateMaterialBlendDepth(material);
     validateMaterialRimResponse(material);
+    if(material.projectedHairRamp.lighting.transparentHighlights&&
+        (!material.projectedHairRamp.present||!material.projectedHairRamp.lighting.present||material.alphaMode!=AssetAlphaMode::Blend))
+        throw std::invalid_argument("Transparent highlights require a lit projected hair profile on a transparent receiver");
     validateMaterialCoverage(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;

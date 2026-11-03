@@ -35,10 +35,17 @@ def color_response(base,ramp,visibility,view_alpha,scale,brightness,sat):
     return tinted*np.clip(np.dot(untinted,LUMA)/max(np.dot(tinted,LUMA),.001),0,1.5),lit_mask
 
 
-def run(player,output,selected=None,expected_validation=None):
+def run(player,output,selected=None,expected_validation=None,group=None):
     output.mkdir(parents=True,exist_ok=False)
     names=('direct','ambient','dim-visibility','diffuse-scale','kk','kk-fixed','kk-zero-ambient','kk-disabled','local-kk','extra-kk','no-main','direct-fixed','disabled-lighting','absent-input','local-response-kk','local-response-zero-kk','local-line-kk','local-line-kk-fixed',
-        'local-specular-kk','local-specular-zero-kk','local-specular-kk-fixed','local-specular-diffuse')
+        'local-specular-kk','local-specular-zero-kk','local-specular-kk-fixed','local-specular-diffuse','local-specular-blend-kk','local-specular-blend-kk-fixed','local-specular-blend-zero-kk',
+        'local-facing-blend-rim','local-facing-blend-rim-fixed','local-facing-blend-zero-rim')
+    if group:
+        def category(name):
+            if name.startswith('local-specular-'):
+                return 'specular'
+            return 'local' if name.startswith('local-') else 'surface'
+        names=tuple(name for name in names if category(name)==group)
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]}
@@ -48,6 +55,10 @@ def run(player,output,selected=None,expected_validation=None):
             print(name,flush=True);folder=output/name;case=copy.deepcopy(hair.cases()[0]);case['name']=name
             # Both panels supply a primary lobe; the left also supplies a blue secondary lobe.
             case['left'].update(r=0,g=128,a=128);case['right'].update(r=255,g=128,a=0)
+            facing_blend=name.startswith('local-facing-blend-')
+            if facing_blend:
+                for side in ('left','right'):
+                    case[side].update(normal=(255,128,128,128),surfaceScale=1)
             project,_=hair.prepare(case,folder);model_path=folder/'assets/panels.gltf';model=json.loads(model_path.read_text())
             ramp=np.array([180,150,170,153])/255;vis=12 if name=='dim-visibility' else 225
             model['images'].append({'uri':hair.image_uri(Image.new('RGBA',(2,1),tuple((ramp*255).astype(int))))})
@@ -56,6 +67,9 @@ def run(player,output,selected=None,expected_validation=None):
                 p=material['extras']['azureRenderMaterial'];p['features'].append('diffuse-ramp')
                 p['diffuseRamp']={'schemaVersion':1,'texture':ramp_index};p['styleParameters']=[1,1,0,0]
                 h=p['hair']['projectedRamp'];h.update(surfaceResponse='strand-diffuse',diffuseScale=.48 if name=='diffuse-scale' else .96,lighting=LIGHTING)
+                if name.startswith('local-specular-blend') or facing_blend:
+                    material['alphaMode']='BLEND'
+                    if 'zero' not in name:h['lighting']=dict(LIGHTING,transparentHighlights=True)
                 if name=='absent-input':del h['lighting']
                 image=model['textures'][h['parameterTexture']]['source'];side=case[material['name']]
                 model['images'][image]['uri']=hair.image_uri(Image.new('RGBA',(2,2),(side['r'],side['g'],vis,side['a'])))
@@ -78,10 +92,15 @@ def run(player,output,selected=None,expected_validation=None):
                 light=copy.deepcopy(level['lights'][0]);light.update(id='extra',color=[.1,.2,.3],intensity=.2);level['lights'].append(light)
             if name.startswith('local-specular-'):
                 level['lights'][0].update(intensity=8)
-                level['lights'][0]['shape'].update(specularScale=0 if 'zero' in name else 2,
+                level['lights'][0]['shape'].update(specularScale=0 if name=='local-specular-zero-kk' else 2,
                     characterResponse={'schemaVersion':4,'composition':'specular-only'})
+            if facing_blend:
+                level['nodes'][2]['components']['azure.transform']['data']['translation']=[3,0,1]
+                level['lights'][0].update(intensity=2,radius=10)
+                level['lights'][0]['shape'].update(characterResponse=dict(schemaVersion=5,composition='material-rim',width=1,surfaceTint=0))
             level_path.write_text(json.dumps(level),encoding='utf-8')
             isolation='hair-kk' if 'kk' in name or name=='no-main' else 'ambient' if name=='ambient' else 'direct-diffuse'
+            if facing_blend:isolation='rim'
             command=[str(player.resolve()),'--project',str(project),'--width','128','--height','128','--capture-dir',str(folder/'frames'),
                 '--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--qa-isolation',isolation]
             if name.endswith('fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
@@ -132,13 +151,28 @@ def run(player,output,selected=None,expected_validation=None):
                     if name=='extra-kk':expected+=raw*np.array([.1,.2,.3])*.2*3
                 else:expected=response*(ambient if isolation=='ambient' else direct)*(.5 if name=='diffuse-scale' else 1)
                 if name in ('disabled-lighting','absent-input'):expected=hair.linear(hair.CONTROL[:3])*.96*np.array([.2,.4,.6])*.5*ramp[:3]
+                if facing_blend:
+                    point=np.asarray(sample['worldPoint'])
+                    incoming=np.array([3,0,1])-point
+                    distance=np.linalg.norm(incoming)
+                    light=incoming/distance
+                    planar=hair.normalized([light[0],light[1],0])
+                    normal=hair.normalized([1,-1/255,0])
+                    radial=hair.normalized([point[0],1/16384,point[2]])
+                    view=hair.normalized(hair.CAMERA-point)
+                    band=np.clip((1-abs(normal@view)-.2)/.3,0,1)
+                    weight=band*band*(3-2*band)*np.clip(radial@light+1,0,1)*max(normal@planar,0)
+                    attenuation=(1-distance/10)**2/(1+.12*distance*distance)
+                    expected=np.array([.2,.4,.6])*attenuation*weight*3  # Rim isolation displays triple radiance.
+                    if 'zero' in name:expected*=0
                 wanted.append(expected)
             maximum=float(np.abs(np.asarray(measured)-wanted).max())
-            if name=='local-response-kk' or name.startswith('local-line-') or name in ('local-specular-kk','local-specular-kk-fixed'):assert np.max(wanted)>.015,'KK positive control must exceed quantization and comparison budget'
+            if facing_blend and 'zero' not in name:assert np.max(wanted)>.03
+            if name=='local-response-kk' or name.startswith('local-line-') or name in ('local-specular-kk','local-specular-kk-fixed','local-specular-blend-kk','local-specular-blend-kk-fixed'):assert np.max(wanted)>.015,'KK positive control must exceed quantization and comparison budget'
             report['captures'].append({'name':name,'maximumLinearError':maximum,'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),
                 'validationEnabled':validation,'measured':measured[0].tolist(),'expected':np.asarray(wanted[0]).tolist()})
             assert maximum<=.008,(name,maximum,measured[0],wanted[0])
-        for a,b in (('direct','direct-fixed'),('kk','kk-fixed'),('local-line-kk','local-line-kk-fixed'),('local-specular-kk','local-specular-kk-fixed')):
+        for a,b in (('direct','direct-fixed'),('kk','kk-fixed'),('local-line-kk','local-line-kk-fixed'),('local-specular-kk','local-specular-kk-fixed'),('local-specular-blend-kk','local-specular-blend-kk-fixed'),('local-facing-blend-rim','local-facing-blend-rim-fixed')):
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b])
         if 'disabled-lighting' in frames and 'absent-input' in frames:assert np.array_equal(frames['disabled-lighting'],frames['absent-input'])
         report['status']='passed'
@@ -148,8 +182,9 @@ def run(player,output,selected=None,expected_validation=None):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__);p.add_argument('--executable',type=Path,required=True);p.add_argument('--output',type=Path)
+    p.add_argument('--group',choices=('surface','local','specular'))
     p.add_argument('--case',action='append');p.add_argument('--expected-validation',choices=('enabled','disabled'));args=p.parse_args()
-    if args.output:run(args.executable,args.output.resolve(),args.case,args.expected_validation)
+    if args.output:run(args.executable,args.output.resolve(),args.case,args.expected_validation,args.group)
     else:
         with tempfile.TemporaryDirectory(prefix='projected-lighting-',dir=Path(__file__).resolve().parents[1]/'build/runs') as temporary:
-            run(args.executable,Path(temporary)/'capture',args.case,args.expected_validation)
+            run(args.executable,Path(temporary)/'capture',args.case,args.expected_validation,args.group)

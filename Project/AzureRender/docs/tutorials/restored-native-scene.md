@@ -14,11 +14,11 @@
 ```powershell
 $run = Get-Content build/current-character-reference-run.txt
 & build/ninja-msvc-release/AzurePlayer.exe `
-  --project "$run/qualified-albedo-delivery-joint/joint-materials.azureproject" `
+  --project "$run/qualified-hair-facing-joint/joint-materials.azureproject" `
   --width 2560 --height 1440 --qa-camera scene --qa-light scene
 ```
 
-程序、动画帧及重开校验值见[联合动画记录](../acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json)。以下命令用于单独检查环境。
+程序、动画帧及重开校验值见[联合动画记录](../acceptance/nr/evidence/2026-11-04/translucent-hair/motion.json)。以下命令用于单独检查环境。
 
 ## 可玩交付候选
 

@@ -1091,7 +1091,7 @@
       "retention": "对应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "implementationPlan": "docs/plans/2026-11-03-character-reference-stages.md",
-      "primaryProject": "qualified-albedo-delivery-joint/joint-materials.azureproject",
+      "primaryProject": "qualified-hair-facing-joint/joint-materials.azureproject",
       "outlineTemporalCoverage": "docs/acceptance/nr/evidence/2026-11-04/outline-temporal-coverage/results.json",
       "fixedFloorControls": "docs/acceptance/nr/evidence/2026-11-04/floor-fixed-controls/results.json",
       "evidence": "docs/acceptance/nr/evidence/2026-11-04/cloth-emission/results.json",
@@ -1112,9 +1112,15 @@
           "path": "media/joint-sampled-outline.mp4",
           "bytes": 5206843,
           "sha256": "6aa884e02f3b76f3c7251763acd68798f93a5eb20e42c1ce9a1a36ff785ffef6"
+        },
+        {
+          "path": "media/joint-hair-facing.mp4",
+          "bytes": 5237051,
+          "sha256": "2872ae61eae82cb947daefb9bf108b1a7bff158cc38bad2d41918a1b31cf9f11"
         }
       ],
       "sampledOutline": "docs/acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json",
+      "translucentHair": "docs/acceptance/nr/evidence/2026-11-04/translucent-hair/motion.json",
       "capturedHead": "docs/acceptance/nr/evidence/2026-11-04/captured-head-frame/results.json",
       "floorIrradiance": "docs/acceptance/nr/evidence/2026-11-04/floor-irradiance/results.json",
       "playableRoute": "docs/acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json",

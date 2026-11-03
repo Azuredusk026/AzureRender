@@ -1221,8 +1221,8 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
     if(source.Has("diffuseScale"))target.diffuseScale=scalar("diffuseScale",0,1);
     if(source.Has("lighting")) {
         const auto raw=nlohmann::json::parse(material.extras_json_string).at("azureRenderMaterial").at("hair").at("projectedRamp").at("lighting");
-        const std::set<std::string> fields{"schemaVersion","shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor","characterVisibility"};
-        if(!raw.is_object()||(raw.size()!=6&&raw.size()!=7)||!raw.contains("schemaVersion")
+        const std::set<std::string> fields{"schemaVersion","shadowBrightness","shadowSaturation","shadowScale","ambientColor","mainColor","characterVisibility","transparentHighlights"};
+        if(!raw.is_object()||!raw.contains("schemaVersion")
             ||!raw.at("schemaVersion").is_number_integer()||raw.at("schemaVersion")!=1
             ||target.surfaceResponse!=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
             ||!(result.materialFeatures&MaterialFeatureDiffuseRamp))
@@ -1236,6 +1236,12 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
             return value.get<float>();
         };
         auto& lighting=target.lighting;
+        if(raw.contains("transparentHighlights")) {
+            const auto& value=raw.at("transparentHighlights");
+            if(!value.is_boolean()||(value.get<bool>()&&result.alphaMode!=AssetAlphaMode::Blend))
+                throw std::invalid_argument("projectedRamp.lighting.transparentHighlights requires a boolean and a transparent receiver");
+            lighting.transparentHighlights=value.get<bool>();
+        }
         if(raw.contains("characterVisibility"))lighting.characterVisibility=parseCharacterVisibility(
             raw.at("characterVisibility"),"projectedRamp.lighting.characterVisibility");
         lighting.shadowBrightness=number(raw.at("shadowBrightness"),16);

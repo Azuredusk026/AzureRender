@@ -1,0 +1,297 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "scope": "Fixed pose at native resolution",
+  "events": {
+    "1138": {
+      "pixels": 2832,
+      "head": {
+        "withinOne": 5,
+        "meanChannelError": 26.912312,
+        "max": 196
+      },
+      "frontAndOutline": {
+        "withinOne": 14,
+        "meanChannelError": 15.209863,
+        "max": 133
+      },
+      "depthRim": {
+        "withinOne": 14,
+        "meanChannelError": 15.209863,
+        "max": 133
+      },
+      "litFront": {
+        "withinOne": 14,
+        "meanChannelError": 15.209863,
+        "max": 133
+      }
+    },
+    "1291": {
+      "pixels": 725,
+      "head": {
+        "withinOne": 48,
+        "meanChannelError": 18.104368,
+        "max": 198
+      },
+      "frontAndOutline": {
+        "withinOne": 476,
+        "meanChannelError": 7.158161,
+        "max": 122
+      },
+      "depthRim": {
+        "withinOne": 486,
+        "meanChannelError": 6.194943,
+        "max": 105
+      },
+      "litFront": {
+        "withinOne": 531,
+        "meanChannelError": 2.71954,
+        "max": 54
+      }
+    },
+    "1314": {
+      "pixels": 236,
+      "head": {
+        "withinOne": 0,
+        "meanChannelError": 37.70904,
+        "max": 180
+      },
+      "frontAndOutline": {
+        "withinOne": 0,
+        "meanChannelError": 36.635593,
+        "max": 180
+      },
+      "depthRim": {
+        "withinOne": 0,
+        "meanChannelError": 36.635593,
+        "max": 180
+      },
+      "litFront": {
+        "withinOne": 0,
+        "meanChannelError": 36.519774,
+        "max": 180
+      }
+    }
+  },
+  "probes": [
+    {
+      "event": 1291,
+      "pixel": [
+        1333,
+        185
+      ],
+      "native": [
+        255,
+        141,
+        132
+      ],
+      "before": [
+        192,
+        97,
+        93
+      ],
+      "actual": [
+        255,
+        141,
+        133
+      ],
+      "sourceShaderOutput": [
+        4.867392063140869,
+        1.2124348878860474,
+        1.0749059915542603,
+        0.5764400959014893
+      ],
+      "traceSha256": "fcca6356d269d3d9b28c52a6f4eef0c3a15bd826306b4c56cf1f80ba9b7a90e4"
+    },
+    {
+      "event": 1291,
+      "pixel": [
+        1334,
+        186
+      ],
+      "native": [
+        218,
+        115,
+        106
+      ],
+      "before": [
+        118,
+        47,
+        50
+      ],
+      "actual": [
+        219,
+        115,
+        107
+      ],
+      "sourceShaderOutput": [
+        4.532479763031006,
+        1.1364977359771729,
+        0.9679909348487854,
+        0.5672541260719299
+      ],
+      "traceSha256": "223d07066bc09b6bff8ebbc608ff051ec9acdadbd315edf5a20ceca7b4da62a0"
+    },
+    {
+      "event": 1314,
+      "pixel": [
+        1356,
+        257
+      ],
+      "native": [
+        148,
+        83,
+        77
+      ],
+      "before": [
+        117,
+        41,
+        45
+      ],
+      "actual": [
+        117,
+        41,
+        45
+      ],
+      "sourceShaderOutput": [
+        1.1900768280029297,
+        0.3514972925186157,
+        0.3037324547767639,
+        1.0
+      ],
+      "traceSha256": "fe01c6f6f4746f432fe2121dc15eaa97047d6966bf28fc59b23c3391957f8fe5"
+    },
+    {
+      "event": 1314,
+      "pixel": [
+        1324,
+        175
+      ],
+      "native": [
+        59,
+        12,
+        16
+      ],
+      "before": [
+        239,
+        121,
+        115
+      ],
+      "actual": [
+        239,
+        121,
+        115
+      ],
+      "sourceShaderOutput": [
+        0.17587153613567352,
+        0.015492728911340237,
+        0.020522309467196465,
+        1.0
+      ],
+      "traceSha256": "76de93c8a1e425c6aea2b5bcd3073faea919c9a684ff09866283e6470ca643fa"
+    }
+  ],
+  "release": {
+    "configuration": "release",
+    "exactDiagnosticFrame": true,
+    "pixelsChanged": 96,
+    "probe": [
+      255,
+      141,
+      133,
+      255
+    ]
+  },
+  "debug": {
+    "configuration": "debug",
+    "exactDiagnosticFrame": true,
+    "pixelsChanged": 96,
+    "probe": [
+      255,
+      141,
+      133,
+      255
+    ]
+  },
+  "fixedCaptures": {
+    "release": "a401d7b99c8a5479bdc92b1fcbf408a0f2d3cc3789ae76073b007dd09c645d57",
+    "debug": "a401d7b99c8a5479bdc92b1fcbf408a0f2d3cc3789ae76073b007dd09c645d57"
+  },
+  "tests": {
+    "release": [
+      "CharacterRepair",
+      "ProjectedHairLightingGpu",
+      "ProjectedHairLightingGpu.local",
+      "ProjectedHairLightingGpu.specular"
+    ],
+    "debug": [
+      "CharacterRepair",
+      "ProjectedHairLightingGpu",
+      "ProjectedHairLightingGpu.local",
+      "ProjectedHairLightingGpu.specular"
+    ],
+    "viewFacingRelease": [
+      {
+        "name": "local-facing-blend-rim",
+        "maximumLinearError": 0.002855757691458849,
+        "imageSha256": "580fbfecf3f0c8c24967503387b1e32a6bac1e9fe4d3d327e843f36e869552ff"
+      },
+      {
+        "name": "local-facing-blend-rim-fixed",
+        "maximumLinearError": 0.002855757691458849,
+        "imageSha256": "580fbfecf3f0c8c24967503387b1e32a6bac1e9fe4d3d327e843f36e869552ff"
+      },
+      {
+        "name": "local-facing-blend-zero-rim",
+        "maximumLinearError": 0.0,
+        "imageSha256": "3a55849e25b8946b19d13a5948a9518ae10b4d47d2fd463e1870323eaa29c781"
+      }
+    ]
+  },
+  "sourceMaterialRim": [
+    {
+      "pixel": "1333-185",
+      "light": 3,
+      "contribution": [
+        4.11428,
+        1.07826,
+        0.90703
+      ]
+    },
+    {
+      "pixel": "1334-186",
+      "light": 3,
+      "contribution": [
+        3.94154,
+        1.04609,
+        0.85473
+      ]
+    }
+  ],
+  "rimRegression": {
+    "debug": {
+      "sha256": "e38b39189bf7b4e675b182da67e4fe4527dc6ad97eb5e68a9852d30c344ebe3d",
+      "tests": [
+        "AzureRender.MultisampleScreenRimGpu",
+        "AzureRender.MultisampleScreenRimGpu.Modulation",
+        "AzureRender.MultisampleScreenRimGpu.Physical",
+        "AzureRender.MultisampleScreenRimGpu.Facing",
+        "AzureRender.CharacterScreenRimGpu",
+        "AzureRender.CharacterScreenRimGpu.Modulation",
+        "AzureRender.CharacterScreenRimGpu.Physical",
+        "AzureRender.CharacterScreenRimGpu.Facing"
+      ],
+      "scope": "四个分组覆盖完整的三十一个用例。"
+    },
+    "release": {
+      "sha256": "949f81e10974bba139f09fb92a0a24dde857df5a4a8a574bede4201f14a275d8",
+      "tests": [
+        "AzureRender.CharacterScreenRimGpu",
+        "AzureRender.CharacterScreenRimGpu.Modulation",
+        "AzureRender.CharacterScreenRimGpu.Physical",
+        "AzureRender.CharacterScreenRimGpu.Facing"
+      ],
+      "scope": "四个分组覆盖完整的三十一个用例。"
+    },
+    "releaseMultisample": "31 cases, 581.61 seconds"
+  }
+}

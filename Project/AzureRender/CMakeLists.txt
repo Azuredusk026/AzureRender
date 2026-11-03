@@ -1270,8 +1270,21 @@ if(BUILD_TESTING)
         --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.MultisampleOutlineProjectionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_test(NAME AzureRender.MultisampleScreenRimGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
-        --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+        --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --case edge --case interior --case near-depth --case mid-depth --case far-depth --case fixed --case material-depth
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.MultisampleScreenRimGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.MultisampleScreenRimGpu.Modulation COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --case zero-offset --case zero-tint --case spot --case disabled --case effect-disabled --case no-receiver --case parallel --case blend --case rim-isolation --case smooth
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.MultisampleScreenRimGpu.Modulation PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.MultisampleScreenRimGpu.Physical COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --case pbr --case pbr-control --case pbr-specular --case pbr-material --case pbr-material-control
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.MultisampleScreenRimGpu.Physical PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
+    add_test(NAME AzureRender.MultisampleScreenRimGpu.Facing COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --case material-facing --case material-facing-fixed --case material-facing-near-depth --case material-facing-far-depth --case material-facing-front --case material-facing-disabled --case material-facing-effect-disabled --case material-facing-no-receiver --case material-facing-generic
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.MultisampleScreenRimGpu.Facing PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_test(NAME AzureRender.MultisampleRefractionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_scene_refraction_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --quality multisample --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.MultisampleRefractionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 300)
@@ -2932,9 +2945,15 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.NprIlluminationGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_illumination_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.NprIlluminationGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
-    add_test(NAME AzureRender.ProjectedHairLightingGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_lighting_gpu.py"
-        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
-    set_tests_properties(AzureRender.ProjectedHairLightingGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    foreach(hair_group IN ITEMS surface local specular)
+        set(hair_test "AzureRender.ProjectedHairLightingGpu")
+        if(NOT hair_group STREQUAL "surface")
+            string(APPEND hair_test ".${hair_group}")
+        endif()
+        add_test(NAME "${hair_test}" COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_lighting_gpu.py"
+            --executable $<TARGET_FILE:AzurePlayer> --group "${hair_group}" --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+        set_tests_properties("${hair_test}" PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    endforeach()
     add_test(NAME AzureRender.CharacterLocalLightGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_local_light_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CharacterLocalLightGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
@@ -2942,8 +2961,21 @@ if(BUILD_TESTING)
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CharacterColorBlendGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureRender.CharacterScreenRimGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
-        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+        --executable $<TARGET_FILE:AzurePlayer> --case edge --case interior --case near-depth --case mid-depth --case far-depth --case fixed --case material-depth
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CharacterScreenRimGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureRender.CharacterScreenRimGpu.Modulation COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --case zero-offset --case zero-tint --case spot --case disabled --case effect-disabled --case no-receiver --case parallel --case blend --case rim-isolation --case smooth
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.CharacterScreenRimGpu.Modulation PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureRender.CharacterScreenRimGpu.Physical COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --case pbr --case pbr-control --case pbr-specular --case pbr-material --case pbr-material-control
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.CharacterScreenRimGpu.Physical PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureRender.CharacterScreenRimGpu.Facing COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_screen_rim_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --case material-facing --case material-facing-fixed --case material-facing-near-depth --case material-facing-far-depth --case material-facing-front --case material-facing-disabled --case material-facing-effect-disabled --case material-facing-no-receiver --case material-facing-generic
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.CharacterScreenRimGpu.Facing PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureRender.ClusteredLightProjectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_local_light_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --case upper-light --case lower-light --case offset-camera
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

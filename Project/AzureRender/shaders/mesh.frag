@@ -1194,7 +1194,9 @@ void main() {
             }
             continue;
         }
-        if((screenRim||specularOnly)&&(!characterLightComposition||AZURE_ALPHA_MODE==2))continue;
+        bool transparentHairHighlights=AZURE_ALPHA_MODE==2&&projectedLighting
+            &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>1.5;
+        if((screenRim||specularOnly)&&(!characterLightComposition||(AZURE_ALPHA_MODE==2&&!transparentHairHighlights)))continue;
         SceneLightSample sampled=sampleSceneLight(light,worldPosition,false);
         // Exact zero incident energy has no ordinary-surface BRDF contribution.
         // Character composition keeps its material-frame and main-light state.
@@ -1213,20 +1215,21 @@ void main() {
         if(light.coneType.y>1.5&&light.directionOuter.w>.5)radiance*=shadowVisibility;
 #endif
         if(screenRim) {
-            bool facingRim=materialRim&&nprDiffuse
-                &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1].x>.5;
+            bool facingRim=materialRim&&(transparentHairHighlights||(nprDiffuse
+                &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1].x>.5));
             vec3 radial=worldPosition-instanceFaceFrame[3].xyz;radial.y=1.0/16384.0;radial=normalize(radial);
             if(facingRim) {
                 if(!(qaEffectMode==4&&qaEffectDisabled)&&attenuation>.0001) {
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
-                    if(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1].x>1.5)
+                    if(nprDiffuse&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[1].x>1.5)
                         sceneRim+=radiance*characterFaceMaskedRimResponse(materialNprLitAlbedo(baseColor.rgb,shadedNormal,viewDirection),
                             light.characterResponse.z,light.characterResponse.y,faceLightingNormal,viewDirection,
                             pointDirection,camera.cameraForward.xyz,radial,instanceFaceFrame[0].xyz,instanceFaceFrame[2].xyz,
                             textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0.0).a);
                     else
 #endif
-                    sceneRim+=radiance*characterFacingRimResponse(materialNprLitAlbedo(baseColor.rgb,shadedNormal,viewDirection),
+                    sceneRim+=radiance*characterFacingRimResponse(transparentHairHighlights?baseColor.rgb:
+                        materialNprLitAlbedo(baseColor.rgb,shadedNormal,viewDirection),
                         light.characterResponse.z,light.characterResponse.y,shadedNormal,viewDirection,
                         pointDirection,camera.cameraForward.xyz,radial);
                 }

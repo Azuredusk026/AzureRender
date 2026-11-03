@@ -5,6 +5,8 @@
 它要求 `strand-diffuse` 和独立漫反射色带。
 加载器校验全部字段、范围和输入所有权。
 
+半透明发片可在照明字段中设置布尔值 `transparentHighlights`。取值为 `true` 时，发片接收局部镜面高光及轮廓光，再按材质透明度混合。材质轮廓灯使用发片法线、观察方向与灯光方向计算亮边。屏幕空间轮廓灯按邻接深度取样。默认值为 `false`。可与 `characterVisibility` 同时使用。
+
 ```json
 {
   "schemaVersion": 1,
