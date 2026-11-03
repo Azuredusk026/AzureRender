@@ -217,6 +217,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.specularInput.present&&!replacement.specularInput.present,"specularInput");
         lost(source.specularRamp.present&&!replacement.specularRamp.present,"specularRamp");
         lost(source.alphaMode!=replacement.alphaMode,"alphaMode");
+        lost(source.blendDepth.present&&!replacement.blendDepth.present,"blendDepth");
         lost(source.doubleSided!=replacement.doubleSided,"doubleSided");
         const auto removed=source.materialFeatures&~replacement.materialFeatures;
         for(const auto& [feature,label]:std::initializer_list<std::pair<std::uint32_t,const char*>>{

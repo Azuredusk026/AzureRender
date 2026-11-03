@@ -50,6 +50,26 @@ int main(int argc,char** argv){try{
  const auto load=[&](const Json& doc){std::ofstream(path)<<doc.dump();return loadGltfAsset(path.string());};
  const auto reject=[&](const Json& doc){bool failed=false;try{(void)load(doc);}catch(const std::exception& e){failed=std::string(e.what()).find("unlit")!=std::string::npos;}require(failed,"Invalid graph must identify unlit ownership");};
  const auto asset=load(source);const auto& m=asset.materials.at(0);
+ auto litSource=source;
+ auto& litProfile=litSource["materials"][0]["extras"]["azureRenderMaterial"];
+ litProfile={{"schemaVersion",2},{"class","fabric"},{"features",Json::array()},
+  {"blendDepth",{{"schemaVersion",1},{"write",true},{"compare","less-or-equal"}}}};
+ require(load(litSource).materials.at(0).blendDepth.write,"Lit transparent material retains explicit depth writing");
+ for(const Json invalid:{Json(true),Json{{"schemaVersion",1},{"write",1}},
+     Json{{"schemaVersion",1},{"compare","always"}},Json{{"schemaVersion",true}},
+     Json{{"schemaVersion",1},{"unknown",false}}}) {
+  auto bad=litSource;bad["materials"][0]["extras"]["azureRenderMaterial"]["blendDepth"]=invalid;
+  bool failed=false;try{(void)load(bad);}catch(const std::exception& e){failed=std::string(e.what()).find("blendDepth")!=std::string::npos;}
+  require(failed,"Invalid blend depth fields are rejected with ownership");
+ }
+ for(const char* mode:{"OPAQUE","MASK"}) {
+  auto bad=litSource;bad["materials"][0]["alphaMode"]=mode;
+  bool failed=false;try{(void)load(bad);}catch(const std::exception& e){failed=std::string(e.what()).find("blendDepth")!=std::string::npos;}
+  require(failed,"Blend depth requires transparent material ownership");
+ }
+ auto unlitDepth=source;unlitDepth["materials"][0]["extras"]["azureRenderMaterial"]["blendDepth"]=litProfile["blendDepth"];
+ bool unlitRejected=false;try{(void)load(unlitDepth);}catch(const std::exception& e){unlitRejected=std::string(e.what()).find("blendDepth")!=std::string::npos;}
+ require(unlitRejected,"Layered unlit material retains its own depth ownership");
  require(!asset.vertices.empty()&&(m.materialFeatures&(1U<<24U)),"Layer capability reaches production material");
  require(m.textureSettings[0].wrapU=="repeat"&&m.textureSettings[4].wrapU=="clamp"&&m.textureSettings[4].wrapV=="repeat","Independent per-axis samplers reach material slots");
  require(m.textureSettings[0].mipPolicy=="none"&&m.textureSettings[4].mipFilter==TextureImportSettings::MipFilter::Nearest,"Layer mip sampling preserved");
@@ -102,6 +122,12 @@ int main(int argc,char** argv){try{
  require(packMaterialSurfaceProfile(load(coloredSource).materials.at(0)).rows[11][1]==1,
   "Explicit vertex color consumption reaches the material table");
  auto document=MaterialData::defaults("azure.profile");
+ auto litDocument=MaterialData::defaults("azure.profile");
+ litDocument.surface={{"asset",{{"version","2.0"}}},{"materials",litSource["materials"]}};
+ const auto litRestored=MaterialData::parse(litDocument.encode()).interpret({});
+ require(litRestored.blendDepth.present&&litRestored.blendDepth.write
+  &&litRestored.blendDepth.compare==AssetMaterial::BlendDepth::Compare::LessOrEqual,
+  "Complete material documents preserve blend depth through save and interpretation");
  auto viewSource=source;auto& viewSurface=viewSource["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
  viewSurface["viewCoverage"]={{"bias",1.23},{"exponent",1},{"invertWeight",0},{"weight",.988}};
  viewSurface["softIntersection"]["enabled"]=false;

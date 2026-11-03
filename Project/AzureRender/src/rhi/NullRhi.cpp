@@ -287,6 +287,7 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
         + " blend=" + std::to_string(desc.alphaBlend)
         + " depth=" + std::to_string(desc.depthTest)
         + "/" + std::to_string(desc.depthWrite)
+        + " compare="+std::to_string(desc.depthCompare)
         + " samples="+std::to_string(desc.rasterizationSamples)
         + " sampleShading="+std::to_string(desc.minSampleShading);
     if(desc.depthBias)calls.back().detail+=" depthBias="+std::to_string(desc.depthBiasConstant)+"/"+std::to_string(desc.depthBiasSlope);

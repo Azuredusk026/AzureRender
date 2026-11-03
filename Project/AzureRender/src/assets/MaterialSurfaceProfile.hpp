@@ -1,5 +1,6 @@
 #pragma once
 #include "assets/GltfLoader.hpp"
+#include "assets/MaterialBlendDepth.hpp"
 #include <cstddef>
 #include <type_traits>
 
@@ -62,6 +63,7 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 }
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
+    validateMaterialBlendDepth(material);
     validateMaterialCoverage(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;

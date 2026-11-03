@@ -110,8 +110,8 @@ private:
     std::vector<MaterialShaderVariant> materialShaderVariants_;
     std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialLightingPipelines_;
     bool independentCoverageNeeded_=false;
-    bool inclusiveSurfaceDepthNeeded_=false;
-    std::vector<std::pair<VkPipeline,VkPipeline>> materialDepthPipelines_;
+    std::array<bool,4> materialDepthPoliciesNeeded_{};
+    std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialDepthPipelines_;
     std::array<VkPipeline,3> outlineMaskCoveragePipelines_{};
     std::array<VkPipeline,2> outlineCoveragePipelines_{},outlineDepthCoveragePipelines_{};
     bool lightingOrdinaryNeeded_=false,lightingBlendNeeded_=false;

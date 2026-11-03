@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <iostream>
 #include <stdexcept>
+#include <sstream>
 
 using namespace azurerender;
 namespace {
@@ -20,13 +21,14 @@ public:
     bool materialUpdated=false;
     unsigned indirectCalls=0;
     unsigned colorStreamBindings=0;
+    std::vector<VkPipeline> boundPipelines;
     void beginRenderPass(const rhi::RenderPassBeginDesc&) override{++pass;}
     void endRenderPass() override{}
     void setViewport(float,float,float=0,float=0) override{}
     void setScissor(VkExtent2D,VkOffset2D={}) override{}
     void bindComputePipeline(VkPipeline) override{}
     void bindComputeDescriptorSet(VkPipelineLayout,VkDescriptorSet) override{}
-    void bindPipeline(VkPipeline) override{}
+    void bindPipeline(VkPipeline pipeline) override{boundPipelines.push_back(pipeline);}
     void bindDescriptorSet(VkPipelineLayout,VkDescriptorSet) override{}
     void pushConstants(VkPipelineLayout,VkShaderStageFlags,unsigned offset,const void* data,unsigned size) override {
         require(offset+size<=constants.size(),"Push constants exceed the shared range");
@@ -156,7 +158,7 @@ void verify(const std::filesystem::path& shaders,bool bindless,bool compute,bool
     require(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,
         "Gizmo opacity fixture must release all renderer resources");
 }
-void verifyOverlayLifetime(const std::filesystem::path& shaders,bool inclusive,bool additive,bool colored) {
+void verifyOverlayLifetime(const std::filesystem::path& shaders,bool inclusive,bool additive,bool colored,bool lit=false,bool write=false) {
     rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
     context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=shaders.string();
     context.renderExtent={128,128};context.cullingEnabled=false;
@@ -173,13 +175,37 @@ void verifyOverlayLifetime(const std::filesystem::path& shaders,bool inclusive,b
         layers.depthCompare=inclusive?UnlitTextureLayers::DepthCompare::LessOrEqual:UnlitTextureLayers::DepthCompare::Less;
         layers.composite=additive?UnlitTextureLayers::Composite::Additive:UnlitTextureLayers::Composite::Alpha;
         layers.useVertexColor=colored;
+        if(lit) {
+            material.unlitTextureLayers={};material.materialClass=AssetMaterialClass::Fabric;
+            material.materialFeatures=MaterialFeatureNeutralFallback;
+            material.blendDepth.present=true;material.blendDepth.write=write;
+            material.blendDepth.compare=inclusive?AssetMaterial::BlendDepth::Compare::LessOrEqual:AssetMaterial::BlendDepth::Compare::Less;
+        }
     }
     if(colored)asset->vertexColors.assign(asset->vertices.size(),{1,1,1,1});
     std::map<std::string,std::shared_ptr<const LoadedAsset>> prepared{{path,asset}};
     context.preparedMeshes=&prepared;context.scene.resources.push_back({"overlay",path});
     scene::SceneNodeDesc node;node.id="overlay";node.resourceId="overlay";context.scene.nodes.push_back(node);
-    RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;context.renderSettings=&settings;
-    renderer.onLoad(context);renderer.onSwapchainRecreate(context);renderer.onUnload(context);
+    RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;
+    settings.characterPresentation.backgroundEnabled=false;context.renderSettings=&settings;
+    renderer.onLoad(context);
+    if(lit) {
+        SceneFrameData frame;frame.renderSettings=&settings;frame.swapchainWidth=128;frame.swapchainHeight=128;
+        renderer.updateFrame(frame);Capture capture;context.commands=&capture;renderer.recordScene(context);
+        bool selected=false;
+        for(auto pipeline:capture.boundPipelines)for(const auto& call:backend.calls) {
+            if(call.name!="createGraphicsPipeline"||call.detail.find("blend=1")==std::string::npos)continue;
+            const auto handle=call.detail.substr(0,call.detail.find(' '));
+            if(std::stoull(handle,nullptr,16)==reinterpret_cast<std::uintptr_t>(pipeline)) {
+                require(call.detail.find(std::string("depth=1/")+(write?"1":"0"))!=std::string::npos,"Recorded blend pipeline preserves explicit depth writing");
+                require(call.detail.find(std::string("compare=")+std::to_string(inclusive?VK_COMPARE_OP_LESS_OR_EQUAL:VK_COMPARE_OP_LESS)+" ")!=std::string::npos,"Recorded blend pipeline preserves explicit compare");
+                selected=true;
+            }
+        }
+        require(selected,"Explicit blend depth reaches actual surface recording");
+        context.commands=nullptr;
+    }
+    renderer.onSwapchainRecreate(context);renderer.onUnload(context);
     std::set<std::string> pipelines;
     for(const auto& call:backend.calls) {
         const auto handle=call.detail.substr(0,call.detail.find(' '));
@@ -199,5 +225,7 @@ int main(int argc,char** argv){try {
     verify(argv[1],false,false,true,true);
     for(bool inclusive:{false,true})for(bool additive:{false,true})for(bool colored:{false,true})
         verifyOverlayLifetime(argv[1],inclusive,additive,colored);
+    for(bool inclusive:{false,true})for(bool write:{false,true})
+        verifyOverlayLifetime(argv[1],inclusive,false,false,true,write);
     std::cout<<"Node opacity consuming passes share selected primitive transforms\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

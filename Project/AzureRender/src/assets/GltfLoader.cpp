@@ -1,4 +1,5 @@
 #include "GltfLoader.hpp"
+#include "assets/MaterialBlendDepth.hpp"
 #include "assets/image/ImageCodec.hpp"
 #include "BrowRegions.hpp"
 #include "scene/TransformParity.hpp"
@@ -202,8 +203,24 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture","blendDepth"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
+            if(profile.contains("blendDepth")) {
+                const auto& value=profile.at("blendDepth");
+                if(profile.contains("surface"))throw std::invalid_argument(context+": blendDepth conflicts with unlit surface ownership");
+                if(profile.at("schemaVersion")!=2||!value.is_object()||!value.contains("schemaVersion")
+                    ||!value.at("schemaVersion").is_number_integer()||value.at("schemaVersion")!=1)
+                    throw std::invalid_argument(context+": blendDepth requires schemaVersion one and profile version two");
+                for(const auto& field:value.items())if(field.key()!="schemaVersion"&&field.key()!="write"&&field.key()!="compare")
+                    throw std::invalid_argument(context+": unknown blendDepth field "+field.key());
+                if(value.contains("write")&&!value.at("write").is_boolean())throw std::invalid_argument(context+": blendDepth.write requires boolean");
+                if(value.contains("compare")&&(!value.at("compare").is_string()
+                    ||(value.at("compare")!="less"&&value.at("compare")!="less-or-equal")))
+                    throw std::invalid_argument(context+": blendDepth.compare requires less or less-or-equal");
+                result.blendDepth.present=true;result.blendDepth.write=value.value("write",false);
+                result.blendDepth.compare=value.value("compare",std::string("less"))=="less"
+                    ?AssetMaterial::BlendDepth::Compare::Less:AssetMaterial::BlendDepth::Compare::LessOrEqual;
+            }
             if(profile.contains("environmentLighting")) {
                 const auto& value=profile.at("environmentLighting");
                 if(profile.at("schemaVersion")!=2||!value.is_object()||!value.contains("schemaVersion")
@@ -2225,6 +2242,7 @@ AssetMaterial loadMaterial(
         ||result.materialClass==AssetMaterialClass::Metal)&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
     azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary);
     validateMaterialCoverage(result);
+    azurerender::validateMaterialBlendDepth(result);
     return result;
 }
 

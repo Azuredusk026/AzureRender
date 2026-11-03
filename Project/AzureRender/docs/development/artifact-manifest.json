@@ -1050,6 +1050,18 @@
           "sha256": "bffbfb7a51aaeeb046d064c36fc91994a1995dc08c2ff1110a6a3ce6c35d2fb9"
         }
       ]
+    },
+    {
+      "path": "runs/20261103-211019-blend-depth-a96c63",
+      "pathBase": "build",
+      "purpose": "受光透明材质的深度配置、遮挡与资源生命周期核验。",
+      "retention": "专项验收归档后按清单管理。",
+      "pinMarker": ".keep",
+      "implementationPlan": "docs/plans/2026-11-03-blend-depth.md",
+      "evidence": "docs/acceptance/nr/blend-depth.md",
+      "publicContractStatus": "passed",
+      "visualAcceptance": "failed-user-review",
+      "diagnosticProject": "pose-depth/qualified.azureproject"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

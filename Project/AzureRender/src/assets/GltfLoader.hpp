@@ -110,6 +110,11 @@ struct AssetMaterialFrame {
 };
 
 struct AssetMaterial {
+    struct BlendDepth {
+        enum class Compare : std::uint8_t { Less,LessOrEqual };
+        bool present=false,write=false;
+        Compare compare=Compare::Less;
+    } blendDepth;
     azurerender::UnlitTextureLayers unlitTextureLayers;
     enum class CharacterVisibility : std::uint8_t { SceneVisibility,MainLightShadow,ObjectShadow,One };
     std::array<unsigned,9> authoredMipLevels{};

@@ -276,6 +276,31 @@
           ]
         }
       }
+    },
+    "blendDepth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "write": {
+          "type": "boolean",
+          "default": false
+        },
+        "compare": {
+          "type": "string",
+          "enum": [
+            "less",
+            "less-or-equal"
+          ],
+          "default": "less"
+        }
+      }
     }
   },
   "allOf": [
