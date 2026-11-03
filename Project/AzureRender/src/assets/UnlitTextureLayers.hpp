@@ -23,6 +23,7 @@ struct UnlitTextureLayers {
     FogMode fogMode=FogMode::None;
     DepthCompare depthCompare=DepthCompare::Less;
     Submission submission=Submission::Transparent;
+    bool attenuateColorBlend=false;
     bool present=false;
     unsigned layerCount=0;
     std::array<UnlitTextureLayer,2> layers{};

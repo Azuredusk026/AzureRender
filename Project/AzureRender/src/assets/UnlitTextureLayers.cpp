@@ -57,7 +57,7 @@ void layerSample(const Json& input,UnlitTextureLayer& layer,std::size_t textureC
 }
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion","fogMode","depthCompare","submission"});
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion","fogMode","depthCompare","submission","colorBlendResponse"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
@@ -65,6 +65,10 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
     if(source.contains("submission")) {
         if(source.at("submission")=="opaque-overlay")result.submission=UnlitTextureLayers::Submission::OpaqueOverlay;
         else if(source.at("submission")!="transparent")invalid("submission");
+    }
+    if(source.contains("colorBlendResponse")) {
+        if(source.at("colorBlendResponse")=="attenuate-emission")result.attenuateColorBlend=true;
+        else if(source.at("colorBlendResponse")!="none")invalid("colorBlendResponse");
     }
     if(source.contains("depthCompare")) {
         if(source.at("depthCompare")=="less-or-equal")result.depthCompare=UnlitTextureLayers::DepthCompare::LessOrEqual;
@@ -140,6 +144,8 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
     result.present=true;validateUnlitSubmission(result);return result;
 }
 void validateUnlitSubmission(const UnlitTextureLayers& profile) {
+    if(profile.attenuateColorBlend&&profile.submission!=UnlitTextureLayers::Submission::OpaqueOverlay)
+        invalid("colorBlendResponse requires opaque overlay submission");
     if(profile.submission==UnlitTextureLayers::Submission::Transparent)return;
     if(profile.submission!=UnlitTextureLayers::Submission::OpaqueOverlay||!profile.present
         ||profile.composite!=UnlitTextureLayers::Composite::Additive

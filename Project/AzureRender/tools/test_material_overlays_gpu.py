@@ -27,8 +27,10 @@ def run(player, output, validation):
     fingerprint=lambda:{str(p.resolve()):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs}
     frozen=fingerprint();records=[];images={}
     for fixed in [False, True]:
-        for additive in [False, True]:
-            name=('fixed-' if fixed else 'indexed-')+('emission' if additive else 'annotation')
+        for kind in ['annotation','emission','attenuated-emission']:
+            additive=kind!='annotation'
+            attenuated=kind=='attenuated-emission'
+            name=('fixed-' if fixed else 'indexed-')+kind
             folder=output/name;assets=folder/'assets';assets.mkdir(parents=True)
             source=assets/'source.gltf';surface(source, double_sided=True)
             model=json.loads(source.read_text())
@@ -46,6 +48,8 @@ def run(player, output, validation):
             p=profile();p.update(depthCompare='less-or-equal', composite='additive' if additive else 'alpha',
                 tint=[.2,.4,.1,.5],blendTint=[0,0,0,0],layers=[layer('base',0)],
                 softIntersection=dict(enabled=False,distance=1,bias=0),highlightExpansion=dict(threshold=1,gain=0))
+            if attenuated:
+                p.update(submission='opaque-overlay',colorBlendResponse='attenuate-emission')
             config=dict(schemaVersion=1, images=[dict(uri=png_uri(np.full((1,1,4),255,dtype=np.uint8)))],
                 samplers=[dict(wrapS=33071,wrapT=33071,minFilter=9729,magFilter=9729)],textures=[dict(source=0,sampler=0)],
                 overlays=[dict(sourceSlot='target',uvSet=0,material=dict(name='Overlay',alphaMode='BLEND',doubleSided=True,
@@ -61,6 +65,18 @@ def run(player, output, validation):
                 lights=[],renderSettings=dict(schemaVersion=20,sceneLighting=True,skyIntensity=0,platform=False,background=False,
                     stylized=False,silhouetteOutline=False,innerOutline=False,bloomEnabled=False,antiAliasing=0,
                     exposure=0,toneMapping=False,contrast=1,saturation=1))
+            if attenuated:
+                level['renderSettings']['nprLighting']=dict(schemaVersion=1,enabled=True,
+                    ambientColor=[0,0,0],ambientDirection=[0,1,0],directionBias=0,directionGain=0,
+                    directionFloor=1,outdoorGain=1,shadowAmbientGain=1,indoorMix=0,
+                    litAmbientMix=0,mainColorMix=0,shadowOverride=1,useSceneIrradiance=False)
+                level['nodes'].append(dict(id='modifier',components={'azure.transform':
+                    component('azure.transform',dict(translation=[0,0,1]))}))
+                level['lights']=[dict(id='modifier',nodeId='modifier',enabled=True,color=[0,1,1],intensity=1,radius=2,
+                    shape=dict(type='point',direction=[0,0,-1],falloff='range-power',falloffExponent=2,
+                        innerCone=.25,outerCone=.5,receivers=dict(schemaVersion=1,surfaces=False,characters=True),
+                        characterResponse=dict(schemaVersion=3,composition='color-blend',strength=.8,
+                            facingWeight=0,projectedDistance=False,order=0)))]
             (assets/'scene.azurelevel').write_text(json.dumps(level))
             project=folder/'project.azureproject';project.write_text(json.dumps(dict(schemaVersion=1,id=name,name=name,
                 mounts=[dict(name='assets',path='assets')],startupScene='assets:/scene.azurelevel')))
@@ -77,9 +93,13 @@ def run(player, output, validation):
             if validation!='any':assert ('Validation layer: enabled' in text)==(validation=='enabled'),name
             image=np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))
             expected=np.array(p['tint'][:3])*.5+receiver*(1 if additive else .5)
+            if attenuated:
+                half_pixel=3*np.tan(np.radians(55)/2)/128
+                weight=.8*(1-(1+2*half_pixel**2)/4)**2
+                expected=receiver+np.array(p['tint'][:3])*.5*(1-weight)
             error=float(np.max(abs(linear(image[64,64])-expected)));assert error<=.008,(name,error)
-            if fixed:assert np.array_equal(image,images[additive]),name
-            else:images[additive]=image
+            if fixed:assert np.array_equal(image,images[kind]),name
+            else:images[kind]=image
             assert hashlib.sha256(source.read_bytes()).hexdigest()==json.loads(Path(str(model_path)+'.overlays.json').read_text())['sourceSha256']
             records.append(dict(name=name,maximumLinearError=error,command=command));print(name,'passed',flush=True)
     assert fingerprint()==frozen

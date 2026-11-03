@@ -113,6 +113,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         }
         r[16][3]=p.fogMode==UnlitTextureLayers::FogMode::Scene?1.F:0.F;
         r[15][3]=p.composite==UnlitTextureLayers::Composite::Additive?1.F:0.F;
+        if(p.attenuateColorBlend)r[15][3]=2.F;
         r[19][3]=material.radianceScale;
         r[21][0]=static_cast<float>(material.displayTransform);
         return result;

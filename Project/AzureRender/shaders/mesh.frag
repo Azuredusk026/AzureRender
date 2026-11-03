@@ -1162,6 +1162,8 @@ void main() {
             localCharacterDiffuse=eyeDiffuseResponse.color;localCharacterResponseReady=true;
         }
     }
+    bool attenuateEmission=camera.nprLightingParameters.x>.5&&materialFeatureEnabled(16777216U)>.5
+        &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[15].w>1.5;
     bool characterLightComposition=(nprDiffuse||projectedLighting||eyeNpr)&&camera.nprLightingParameters.x>.5;
     vec4 characterBlend=vec4(0,0,0,1);
     uint sceneLightCount = uint(max(camera.clusterGrid.w, 0.0));
@@ -1176,16 +1178,17 @@ void main() {
 #else
         uint receiverBit=sceneCharacter||nprDiffuse?2U:1U;
 #endif
-        if((uint(light.boxParameters.w)&receiverBit)==0U)continue;
         bool colorBlend=light.characterResponse.x==2.0||light.characterResponse.x==3.0;
+        if(colorBlend&&attenuateEmission)receiverBit=2U;
+        if((uint(light.boxParameters.w)&receiverBit)==0U)continue;
         bool materialRim=light.characterResponse.x==6.0;
         bool screenRim=light.characterResponse.x==4.0||materialRim,specularOnly=light.characterResponse.x==5.0;
         if(colorBlend) {
-            if(characterLightComposition) {
+            if(characterLightComposition||attenuateEmission) {
                 SceneLightSample blendSample=sampleSceneLight(light,worldPosition,light.characterResponse.x==3.0);
                 if(blendSample.attenuation>.0001) {
                     float weight=characterColorBlendWeight(blendSample.attenuation,dot(geometricNormal,blendSample.direction),light.characterResponse.yz);
-                    characterBlend.rgb=mix(characterBlend.rgb,light.colorIntensity.rgb*light.colorIntensity.w,weight);
+                    if(!attenuateEmission)characterBlend.rgb=mix(characterBlend.rgb,light.colorIntensity.rgb*light.colorIntensity.w,weight);
                     characterBlend.a*=1.0-weight;
                 }
             }

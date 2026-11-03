@@ -149,10 +149,11 @@ int main(int argc,char** argv){try{
  auto overlayDocument=depthDocument;
  auto& overlaySurface=overlayDocument.surface["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
  overlaySurface["submission"]="opaque-overlay";overlaySurface["composite"]="additive";
- overlaySurface["softIntersection"]["enabled"]=false;
+ overlaySurface["softIntersection"]["enabled"]=false;overlaySurface["colorBlendResponse"]="attenuate-emission";
  const auto overlayRestored=MaterialData::parse(overlayDocument.encode()).interpret(
   [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
- require(overlayRestored.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay,
+ require(packMaterialSurfaceProfile(overlayRestored).rows[15][3]==2.F
+  &&overlayRestored.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay,
   "Complete material documents preserve opaque overlay submission");
  auto distortionDocument=document;distortionDocument.surface["materials"]=distortionSource["materials"];
  const auto distortionStandalone=MaterialData::parse(distortionDocument.encode()).interpret(

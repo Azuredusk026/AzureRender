@@ -541,6 +541,14 @@
         "less-or-equal"
       ],
       "default": "less"
+    },
+    "colorBlendResponse": {
+      "type": "string",
+      "enum": [
+        "none",
+        "attenuate-emission"
+      ],
+      "default": "none"
     }
   },
   "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。",
@@ -580,6 +588,28 @@
                 "const": false
               }
             }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "colorBlendResponse"
+        ],
+        "properties": {
+          "colorBlendResponse": {
+            "const": "attenuate-emission"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "submission"
+        ],
+        "properties": {
+          "submission": {
+            "const": "opaque-overlay"
           }
         }
       }

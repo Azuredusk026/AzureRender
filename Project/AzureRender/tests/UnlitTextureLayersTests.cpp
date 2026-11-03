@@ -41,6 +41,11 @@ void parsing() {
      {"composite","alpha"},{"depthCompare","less"},{"fogMode","scene"},{"submission","opaque"},{"submission",true}}) {
   auto invalid=surfaceOverlay;invalid[pair.first]=pair.second;reject(invalid);
  }
+ auto attenuated=surfaceOverlay;attenuated["colorBlendResponse"]="attenuate-emission";
+ require(parseUnlitTextureLayers(attenuated,2).attenuateColorBlend,"Overlay emission responds to color blend attenuation");
+ attenuated["submission"]="transparent";reject(attenuated);
+ attenuated["colorBlendResponse"]="none";require(!parseUnlitTextureLayers(attenuated,2).attenuateColorBlend,"Explicit neutral response");
+ attenuated["colorBlendResponse"]="unknown";reject(attenuated);
  auto softOverlay=surfaceOverlay;softOverlay["softIntersection"]["enabled"]=true;reject(softOverlay);
  coplanar["depthCompare"]="less";require(parseUnlitTextureLayers(coplanar,2).present,"Explicit strict depth parses");
  for(const Json& value:Json::array({true,1,"always","equal",nullptr})) {coplanar["depthCompare"]=value;reject(coplanar);}

@@ -58,3 +58,11 @@
 投影描边的前帧有效性及深度覆盖见[历史深度核验](../acceptance/nr/outline-temporal-footprint.md)。
 配置、覆盖及联合动画见[实测记录](../acceptance/nr/evidence/2026-11-04/cloth-outline-coverage/results.json)。
 固定姿态的局部图见[衣料对照](../acceptance/nr/evidence/2026-11-04/cloth-outline-coverage/comparison.png)。
+
+## 裙摆发光
+
+原生事件 910 用第二组纹理坐标读取线性发光遮罩。
+转换时按原始纹理格式解码，并保留原始透明度。
+两层发光均绑定服饰五的同一图元，使用对应的骨骼动画。
+混色灯的处理见[表面覆盖](../runtime/opaque-surface-overlays.md)。
+验收分别核对裙边的来源像素、其他衣料、联合动画和独立重开。
