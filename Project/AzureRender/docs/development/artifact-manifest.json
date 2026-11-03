@@ -1021,7 +1021,15 @@
       "retention": "对应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "primaryProject": "joint-current/joint-normal.azureproject",
-      "evidence": "docs/acceptance/nr/native-normal-orientation.md"
+      "evidence": "docs/acceptance/nr/joint-normal-orientation.md",
+      "nativeEvidence": "docs/acceptance/nr/native-normal-orientation.md",
+      "videos": [
+        {
+          "path": "media/joint-normal-orientation.mp4",
+          "bytes": 4818526,
+          "sha256": "a77859da077285d108d71290af5a711292b4320b0a72b63a1faec2b7d6fddd33"
+        }
+      ]
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"
