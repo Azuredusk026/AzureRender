@@ -71,6 +71,9 @@
 局部灯的最终贡献与整幅角色画质仍待核对。
 
 固定与索引描述符路径通过 112 帧数值验证。
+联合场景包含角色待机与十个物流节点。
+固定步长产生 192 张不同画面，重开首四帧逐字节一致。
+帧序列、视频及运行报告摘要见[联合采集记录](../acceptance/nr/evidence/2026-11-04/face-masked-rim/joint-sequence.json)。
 零亮度绑定控制在联合机位改变头部 1,184 个像素。
 采样、误差及绑定记录见[实测结果](../acceptance/nr/evidence/2026-11-04/face-masked-rim/results.json)。
 固定姿态的三个视图见[脸部对照](../acceptance/nr/evidence/2026-11-04/face-masked-rim/comparison.png)。
