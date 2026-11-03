@@ -14,6 +14,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <limits>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -211,6 +212,7 @@ struct AssetMaterial {
         bool maskInstanceInterior=true;
         NormalSource normalSource=NormalSource::Geometry;
         float width=.5F,minimumPixels=.5F,depthOffset=0;
+        std::optional<float> baseColorSaturation;
         std::array<float,4> uvScaleOffset{1,1,0,0};
         std::array<float,3> color{.018F,.028F,.042F};
         std::vector<std::uint8_t> maskPixels{255,0,0,255};

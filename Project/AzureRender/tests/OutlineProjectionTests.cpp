@@ -18,6 +18,7 @@ int main() try {
     shape.normalSource=AssetMaterial::OutlineSurface::NormalSource::TangentUv1;shape.width=.75F;shape.depthOffset=.02F;
     LoadedAsset second;second.vertices.resize(4);second.materials.resize(2);
     second.materials[0].outlineSurface.present=true;second.materials[0].outlineSurface.width=1.5F;
+    second.materials[0].outlineSurface.baseColorSaturation=1.5F;
     const auto data=buildOutlineProjectionData({&first,&second},4096);
     requireOutline(data.header[0]==1&&data.header[1]==3&&data.header[2]==52&&data.header[3]==3,
         "Outline header must declare version, record count and the compact UV1 stream");
@@ -26,8 +27,17 @@ int main() try {
     requireOutline(data.records[0].indices==std::array<std::uint32_t,4>{1,1,52,3},"UV1 addresses must use absolute word offsets");
     requireOutline(data.records[1].parameters[0]==1.5F&&data.records[1].indices[2]==0&&data.records[1].indices[3]==0,
         "Geometry normals must not borrow another asset's stream");
+    requireOutline(data.records[0].color[3]==1.F&&data.records[1].color[3]==-2.5F,
+        "Solid and textured outlines must have distinct modes in the packed record");
     requireOutline(data.records[2].parameters[3]==0,"An absent profile must keep the fixed-pixel path");
     requireOutline(data.byteSize()==232,"Storage size includes the header, records and optional data");
+    auto invalidColor=first;
+    for(float invalid:{-0.1F,4.1F,std::numeric_limits<float>::quiet_NaN()}) {
+        invalidColor.materials[0].outlineSurface.baseColorSaturation=invalid;
+        bool rejected=false;
+        try{(void)buildOutlineProjectionData({&invalidColor},4096);}catch(const std::invalid_argument&){rejected=true;}
+        requireOutline(rejected,"Procedural outline color must reject invalid saturation before packing");
+    }
     auto octahedral=first;
     octahedral.materials[0].outlineSurface.normalSource=AssetMaterial::OutlineSurface::NormalSource::TangentOctahedralUv1;
     const auto fullSphere=buildOutlineProjectionData({&octahedral},4096);

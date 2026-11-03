@@ -20,6 +20,7 @@
       "items": {"type": "number", "minimum": -65536, "maximum": 65536},
       "default": [1, 1, 0, 0]
     },
+    "baseColorSaturation": {"type": "number", "minimum": 0, "maximum": 4},
     "color": {
       "type": "array", "minItems": 3, "maxItems": 3,
       "items": {"type": "number", "minimum": 0, "maximum": 64},

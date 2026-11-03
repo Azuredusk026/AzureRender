@@ -14,7 +14,7 @@ void loadOutlineSurface(const tinygltf::Material& material,const tinygltf::Model
         fail("material");
     const auto& source=profile["outlineSurface"];
     const std::set<std::string> fields{"schemaVersion","mode","width","minimumPixels","depthOffset",
-        "normalSource","coverage","depthPrepass","maskTexture","uvScaleOffset","color"};
+        "normalSource","coverage","depthPrepass","maskTexture","uvScaleOffset","color","baseColorSaturation"};
     if(!source.is_object())fail("object");
     for(const auto& item:source.items())if(!fields.count(item.key()))fail(item.key());
     if(!source.contains("schemaVersion")||!source["schemaVersion"].is_number_integer()
@@ -31,6 +31,8 @@ void loadOutlineSurface(const tinygltf::Material& material,const tinygltf::Model
     target.width=number(source["width"],"width",0,8);
     if(source.contains("minimumPixels"))target.minimumPixels=number(source["minimumPixels"],"minimumPixels",0,8);
     if(source.contains("depthOffset"))target.depthOffset=number(source["depthOffset"],"depthOffset",-4,4);
+    if(source.contains("baseColorSaturation"))
+        target.baseColorSaturation=number(source["baseColorSaturation"],"baseColorSaturation",0,4);
     if(source.contains("normalSource")) {
         if(source["normalSource"]=="tangent-uv1")target.normalSource=AssetMaterial::OutlineSurface::NormalSource::TangentUv1;
         else if(source["normalSource"]=="tangent-octahedral-uv1")target.normalSource=AssetMaterial::OutlineSurface::NormalSource::TangentOctahedralUv1;

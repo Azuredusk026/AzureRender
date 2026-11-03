@@ -4,11 +4,12 @@
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
 layout(binding=1) uniform sampler2D textures[];
-#define SHELL_BASE textures[nonuniformEXT(shell.textureBase)]
+#define SHELL_ALBEDO textures[nonuniformEXT(shell.textureBase)]
 #else
 layout(binding=1) uniform sampler2D baseColor;
-#define SHELL_BASE baseColor
+#define SHELL_ALBEDO baseColor
 #endif
+#define SHELL_BASE SHELL_ALBEDO
 #if defined(AZURE_INDEPENDENT_COVERAGE)
 #undef SHELL_BASE
 #if defined(AZURE_BINDLESS)

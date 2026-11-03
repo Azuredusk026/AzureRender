@@ -27,7 +27,13 @@ void main() {
         ivec2 offset=ivec2(shell.tile%columns,shell.tile/columns)*viewSize;
         if(texelFetch(outlineMask,offset+ivec2(AZURE_FRAGMENT_COORD.xy),AZURE_MASK_SAMPLE).r>.5)discard;
     }
-    outputColor=shellColor;
+    vec3 color=shellColor.rgb;
+    if(shellColor.w<0.0) {
+        vec3 albedo=texture(SHELL_ALBEDO,textureCoordinate).rgb;
+        float luminance=dot(albedo,vec3(.212673,.715152,.072175));
+        color*=max(vec3(0),mix(vec3(luminance),albedo,-shellColor.w-1.0));
+    }
+    outputColor=vec4(color,1);
     outputNormal=vec4(.5,.5,1,0);
     outputDisplayMask=vec4(1.0-displayProfiles.profiles[shell.materialIndex].rows[21].x,0,0,1);
 }

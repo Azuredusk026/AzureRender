@@ -63,7 +63,7 @@ def run(player,output,selected=None,validation=None,quality="existing"):
     names=['wide','zero','mask-zero','mask-half','fixed','document','uv1-zero','uv1-tilt','depth-only',
            'masked-clear','hidden','near','far','narrow-fov','resize','depth-positive','depth-negative',
            'two-assets','two-assets-fixed','uv1-mirror','fading','near-plane','morph','translated',
-           'octahedral-forward','octahedral-back','color-only',
+           'octahedral-forward','octahedral-back','color-only','textured','textured-fixed','textured-gray','textured-coverage','textured-coverage-fixed',
            'minimum-supersample','minimum-supersample-fixed','minimum-reference',
            'minimum-temporal','minimum-temporal-far','minimum-reference-far']
     if quality=='multisample' and selected is None:
@@ -98,7 +98,8 @@ def run(player,output,selected=None,validation=None,quality="existing"):
             model['buffers']=[dict(byteLength=len(payload),uri='data:application/octet-stream;base64,'+base64.b64encode(payload).decode())]
             mask=0 if name=='mask-zero' else 128 if name=='mask-half' else 255
             Image.new('RGBA',(4,4),(mask,255,0,255)).save(folder/'mask.png')
-            Image.new('RGBA',(4,4),(160,160,160,0 if name=='masked-clear' else 255)).save(folder/'base.png')
+            base=(220,80,40) if name.startswith('textured') else (160,160,160)
+            Image.new('RGBA',(4,4),(*base,0 if name=='masked-clear' else 255)).save(folder/'base.png')
             model['images']=[dict(uri='mask.png'),dict(uri='base.png')]
             model['textures']=[dict(source=0,sampler=0),dict(source=1,sampler=0)]
             model['samplers']=[dict(wrapS=33071,wrapT=33071,magFilter=9729,minFilter=9729)]
@@ -106,6 +107,8 @@ def run(player,output,selected=None,validation=None,quality="existing"):
                 depthOffset=.1 if name=='depth-positive' else -.2 if name=='near-plane' else -.1 if name=='depth-negative' else 0,
                 depthPrepass=name!='color-only',normalSource='tangent-octahedral-uv1' if name.startswith('octahedral-') else 'tangent-uv1' if uv1 else 'geometry',
                 maskTexture=0,color=[1,0,0])
+            if name.startswith('textured'):
+                shape.update(color=[.5,.5,.5],baseColorSaturation=0 if name=='textured-gray' else 1.5)
             if name.startswith('minimum-'):
                 shape['width']=.01
                 shape['minimumPixels']=2 if name.startswith('minimum-reference') else .5
@@ -113,6 +116,9 @@ def run(player,output,selected=None,validation=None,quality="existing"):
                 pbrMetallicRoughness=dict(baseColorTexture=dict(index=1),metallicFactor=0,roughnessFactor=1),
                 extras=dict(azureSlotId='outline',azureRenderMaterial=dict(schemaVersion=2,**{'class':'generic'},
                     features=[] if name=='depth-only' else ['silhouette-outline'],outlineSurface=shape)))
+            if name.startswith('textured-coverage'):
+                material['alphaMode']='MASK'
+                material['extras']['azureRenderMaterial']['coverageTexture']=dict(schemaVersion=1,texture=0,channel='red')
             model['materials']=[material]
             if name in ['hidden','fading']:
                 model['extensionsUsed']=['AZURE_node_opacity']
@@ -166,7 +172,7 @@ def run(player,output,selected=None,validation=None,quality="existing"):
                 '--runtime-report',str(folder/'runtime.json'),'--set','render.features.showcase-platform=false','--set','render.features.face-sdf=false']
             sampled=quality=='multisample' and not name.startswith('minimum-reference')
             if sampled:command+=['--set','render.antiAliasing=4']
-            if name in ['fixed','two-assets-fixed','minimum-supersample-fixed']:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
+            if name in ['fixed','two-assets-fixed','minimum-supersample-fixed','textured-fixed','textured-coverage-fixed']:command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             with (folder/'player.log').open('w',encoding='utf-8') as log:
                 subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
             log=(folder/'player.log').read_text(encoding='utf-8',errors='replace')
@@ -196,6 +202,19 @@ def run(player,output,selected=None,validation=None,quality="existing"):
                 assert count>8 and green.sum()>8,(name,count,int(green.sum()))
             if name in ['fading','uv1-mirror']:assert count>8,name
             if name in ['masked-clear','hidden']:assert np.all(pixels==pixels[0,0]),name
+            if name.startswith('textured'):
+                # Compare linear sampling and final sRGB encoding against an independent CPU calculation.
+                albedo=((np.array(base)/255+.055)/1.055)**2.4
+                luminance=albedo @ np.array([.212673,.715152,.072175])
+                linear=.5*np.maximum(0,luminance+shape['baseColorSaturation']*(albedo-luminance))
+                expected=np.rint(255*np.where(linear<=.0031308,12.92*linear,1.055*linear**(1/2.4)-.055))
+                matches=np.max(np.abs(pixels.astype(int)-expected),axis=2)<=1
+                assert matches.sum()>8,(name,expected)
+                if 'wide' in frames:
+                    shell=(frames['wide'][:,:,0]>240)&(frames['wide'][:,:,1]<4)&(frames['wide'][:,:,2]<4)
+                    assert matches[shell].all(),(name,expected,pixels[shell][0])
+                if name in ['textured-fixed','textured-coverage','textured-coverage-fixed'] and 'textured' in frames:
+                    assert np.array_equal(pixels,frames['textured'])
             boundary_error=None
             if name in ['wide','fixed','document','uv1-zero','near','narrow-fov','resize']:
                 columns=np.where(red)[1];measured=np.array([columns.min()+.5,columns.max()+.5])

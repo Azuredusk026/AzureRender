@@ -48,6 +48,7 @@ inline void validateOutlineProjectionShape(const AssetMaterial& material) {
         throw std::invalid_argument(material.name+" outlineSurface requires an opaque or masked surface");
     range(shape.width,0,8);range(shape.minimumPixels,0,8);range(shape.depthOffset,-4,4);
     for(float value:shape.uvScaleOffset)range(value,-65536,65536);
+    if(shape.baseColorSaturation)range(*shape.baseColorSaturation,0,4);
     for(float value:shape.color)range(value,0,64);
     if(shape.normalSource!=AssetMaterial::OutlineSurface::NormalSource::Geometry
         &&shape.normalSource!=AssetMaterial::OutlineSurface::NormalSource::TangentUv1
@@ -104,7 +105,7 @@ inline OutlineProjectionData buildOutlineProjectionData(const std::vector<Loaded
                     tangent?static_cast<std::uint32_t>(asset.vertices.size()):0U};
                 record.uvScaleOffset=shape.uvScaleOffset;
                 record.color={shape.color[0]*material.radianceScale,shape.color[1]*material.radianceScale,
-                    shape.color[2]*material.radianceScale,1};
+                    shape.color[2]*material.radianceScale,shape.baseColorSaturation?-(1.F+*shape.baseColorSaturation):1.F};
             }
             result.records.push_back(record);result.masks.push_back(&shape);
         }
