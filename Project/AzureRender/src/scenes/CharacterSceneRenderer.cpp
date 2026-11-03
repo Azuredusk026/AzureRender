@@ -2682,6 +2682,7 @@ void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::
         for(const auto& primitive:mesh.primitives){
             const auto& material=mesh.materials[primitive.materialIndex];
             if(material.alphaMode==AssetAlphaMode::Blend||material.materialClass==AssetMaterialClass::Overlay||material.showcasePlatform>.5F)continue;
+            if(!material.outlineSurface.maskInstanceInterior)continue;
             const bool explicitOutline=(material.materialFeatures&MaterialFeatureSilhouetteOutline)!=0;
             if((renderSettings_->sceneLightingEnabled||!renderSettings_->silhouetteOutlineEnabled)
                 &&!explicitOutline)continue;

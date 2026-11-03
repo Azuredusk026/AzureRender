@@ -14,7 +14,7 @@ void loadOutlineSurface(const tinygltf::Material& material,const tinygltf::Model
         fail("material");
     const auto& source=profile["outlineSurface"];
     const std::set<std::string> fields{"schemaVersion","mode","width","minimumPixels","depthOffset",
-        "normalSource","depthPrepass","maskTexture","uvScaleOffset","color"};
+        "normalSource","coverage","depthPrepass","maskTexture","uvScaleOffset","color"};
     if(!source.is_object())fail("object");
     for(const auto& item:source.items())if(!fields.count(item.key()))fail(item.key());
     if(!source.contains("schemaVersion")||!source["schemaVersion"].is_number_integer()
@@ -35,6 +35,11 @@ void loadOutlineSurface(const tinygltf::Material& material,const tinygltf::Model
         if(source["normalSource"]=="tangent-uv1")target.normalSource=AssetMaterial::OutlineSurface::NormalSource::TangentUv1;
         else if(source["normalSource"]=="tangent-octahedral-uv1")target.normalSource=AssetMaterial::OutlineSurface::NormalSource::TangentOctahedralUv1;
         else if(source["normalSource"]!="geometry")fail("normalSource");
+    }
+    if(source.contains("coverage")) {
+        const auto& coverage=source["coverage"];
+        if(coverage=="depth-tested")target.maskInstanceInterior=false;
+        else if(coverage!="outside-instance")fail("coverage");
     }
     if(source.contains("depthPrepass")) {
         if(!source["depthPrepass"].is_boolean())fail("depthPrepass");

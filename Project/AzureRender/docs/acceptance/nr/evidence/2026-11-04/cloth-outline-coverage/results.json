@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "visualAcceptance": "open",
+  "referenceStage": 1383,
+  "score": [
+    {
+      "event": 889,
+      "qualifiedPixels": 45988,
+      "ssim": 0.9109967575052309,
+      "nativeMedianLuminance": 0.02662850351388315,
+      "currentMedianLuminance": 0.024386019762063917,
+      "medianLuminanceRelativeError": 0.08421366039777943,
+      "p95ByteError": 18.0,
+      "maximumByteError": 156,
+      "worstPixel": [
+        1399,
+        621
+      ],
+      "passed": false
+    },
+    {
+      "event": 910,
+      "qualifiedPixels": 17990,
+      "ssim": 0.9956082606942036,
+      "nativeMedianLuminance": 0.014355474145918727,
+      "currentMedianLuminance": 0.014246552491091293,
+      "medianLuminanceRelativeError": 0.007587464804037823,
+      "p95ByteError": 1.0,
+      "maximumByteError": 44,
+      "worstPixel": [
+        1134,
+        1064
+      ],
+      "passed": true
+    },
+    {
+      "event": 928,
+      "qualifiedPixels": 118661,
+      "ssim": 0.947969512053782,
+      "nativeMedianLuminance": 0.022130240144565362,
+      "currentMedianLuminance": 0.020423076372612255,
+      "medianLuminanceRelativeError": 0.07714167405329055,
+      "p95ByteError": 17.0,
+      "maximumByteError": 140,
+      "worstPixel": [
+        1368,
+        807
+      ],
+      "passed": false
+    }
+  ],
+  "nativeCloth2Event": 1116,
+  "cloth2ChangeOverlap": {
+    "nativeChanged": 8173,
+    "candidateNewlyChanged": 7940,
+    "overlap": 7716,
+    "candidateOnly": 224,
+    "nativeOnly": 457,
+    "sampleNative": true,
+    "sampleCandidate": true
+  },
+  "fixedPoseSha256": "fe3917cc4e31e2349b910f1903b51c6b62c61070aeb9696eadfea9b2b8df5a58",
+  "joint": {
+    "frames": 192,
+    "exactReopenFrames": 4,
+    "videoSha256": "3ea49aa8847149b2e64cd3258d09a096ea7ee8701f442500f0572d8ac011b713",
+    "controls": [
+      {
+        "frame": 0,
+        "changedPixels": 13037,
+        "regions": {
+          "ceiling": 0,
+          "leftWall": 0,
+          "rightWall": 0,
+          "head": 7208,
+          "floor": 2038
+        }
+      },
+      {
+        "frame": 48,
+        "changedPixels": 13223,
+        "regions": {
+          "ceiling": 0,
+          "leftWall": 0,
+          "rightWall": 0,
+          "head": 7266,
+          "floor": 1968
+        }
+      },
+      {
+        "frame": 96,
+        "changedPixels": 13295,
+        "regions": {
+          "ceiling": 0,
+          "leftWall": 0,
+          "rightWall": 0,
+          "head": 7290,
+          "floor": 1949
+        }
+      },
+      {
+        "frame": 144,
+        "changedPixels": 12589,
+        "regions": {
+          "ceiling": 0,
+          "leftWall": 0,
+          "rightWall": 0,
+          "head": 6953,
+          "floor": 1941
+        }
+      }
+    ]
+  },
+  "nativeOwnership": [
+    {
+      "opaqueEvent": 889,
+      "ownership": [
+        {
+          "lastEvent": 0,
+          "pixels": 43942,
+          "absoluteErrorShare": 0.6865070468561788,
+          "meanByteError": 2.7409767420690914
+        },
+        {
+          "lastEvent": 1079,
+          "pixels": 2046,
+          "absoluteErrorShare": 0.31349295314382125,
+          "meanByteError": 26.882046269143046
+        }
+      ]
+    },
+    {
+      "opaqueEvent": 910,
+      "ownership": [
+        {
+          "lastEvent": 0,
+          "pixels": 17976,
+          "absoluteErrorShare": 0.9631959735765964,
+          "meanByteError": 0.28389704791573955
+        },
+        {
+          "lastEvent": 1099,
+          "pixels": 14,
+          "absoluteErrorShare": 0.03680402642340358,
+          "meanByteError": 13.928571428571432
+        }
+      ]
+    },
+    {
+      "opaqueEvent": 928,
+      "ownership": [
+        {
+          "lastEvent": 0,
+          "pixels": 95003,
+          "absoluteErrorShare": 0.648423995700636,
+          "meanByteError": 2.7389906985393444
+        },
+        {
+          "lastEvent": 1116,
+          "pixels": 3216,
+          "absoluteErrorShare": 0.20024105012131416,
+          "meanByteError": 24.986525704809285
+        },
+        {
+          "lastEvent": 1383,
+          "pixels": 20442,
+          "absoluteErrorShare": 0.15133495417804982,
+          "meanByteError": 2.970876952679125
+        }
+      ]
+    }
+  ],
+  "sourceStreams": [
+    {
+      "name": "M_actor_laevat_cloth_01",
+      "vertices": 32031,
+      "source": "TEXCOORD_1",
+      "sha256": "b51ed31aa8437e1c0fa7ff8bcbfeb277ce233dc0842a297061d899d41d03aa2e"
+    },
+    {
+      "name": "M_actor_laevat_cloth_02",
+      "vertices": 17541,
+      "source": "TEXCOORD_2",
+      "sha256": "567106f0a398321c54d7cdf9b95f6068300645a04e6b8788328e2459988e97d1"
+    }
+  ],
+  "fixedAndIndexedSha256": "fe3917cc4e31e2349b910f1903b51c6b62c61070aeb9696eadfea9b2b8df5a58",
+  "builds": {
+    "debug": {
+      "cpuChecks": 4,
+      "playerSha256": "af292ebad8d7e9a5f80fd222df49ba0428bcf1a1f407c4aca14c2dafd821c33a"
+    },
+    "release": {
+      "cpuChecks": 4,
+      "playerSha256": "4cc39f40e561dd2ecae8f94bba02da99d8b1c9267876aa2af054b031e67f20df"
+    }
+  },
+  "temporalFineLineGate": "open"
+}

@@ -12,6 +12,7 @@
     "minimumPixels": {"type": "number", "minimum": 0, "maximum": 8, "default": 0.5},
     "depthOffset": {"type": "number", "minimum": -4, "maximum": 4, "default": 0},
     "normalSource": {"enum": ["geometry", "tangent-uv1", "tangent-octahedral-uv1"], "default": "geometry"},
+    "coverage": {"enum": ["outside-instance", "depth-tested"], "default": "outside-instance"},
     "depthPrepass": {"type": "boolean", "default": false},
     "maskTexture": {"type": "integer", "minimum": 0},
     "uvScaleOffset": {

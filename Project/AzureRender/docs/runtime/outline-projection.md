@@ -48,6 +48,10 @@
 字段及范围见[接入计划](../plans/2026-10-23-outline-projection-integration.md)。
 颜色参与由 `silhouette-outline` 控制。
 `depthPrepass` 独立控制外扩深度壳。
+`coverage` 定义颜色壳与运动矢量壳的覆盖范围。
+缺省值 `outside-instance` 按实例遮罩剔除内部片元。
+`depth-tested` 按场景深度保留可见片元。
+同一实例的各份材质可分别选择覆盖范围。
 
 颜色壳与深度壳共用当前蒙皮、形变和节点透明度。
 深度壳写入硬件深度和线性视深度附件。

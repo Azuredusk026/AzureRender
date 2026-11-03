@@ -97,6 +97,20 @@ int main(){try{
     require(outlineMaterial.outlineSurface.present&&outlineMaterial.outlineSurface.depthPrepass
         &&std::abs(outlineMaterial.outlineSurface.width-.7F)<1e-6F&&outlineMaterial.outlineSurface.color[1]==.2F,
         "Complete material interpretation must consume depth, color and projection inputs");
+    require(outlineMaterial.outlineSurface.maskInstanceInterior,"Outline coverage defaults to the instance silhouette");
+    auto& coverage=outlined["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["outlineSurface"]["coverage"];
+    for(const auto* mode:{"depth-tested","outside-instance"}){
+        coverage=mode;
+        const auto document=MaterialData::parse(outlined);
+        const auto loaded=document.interpret([](const auto&){return std::filesystem::path();});
+        require(document.encode()==outlined&&loaded.outlineSurface.maskInstanceInterior==(coverage=="outside-instance"),
+            "Complete documents must preserve and interpret the selected shell coverage");
+    }
+    coverage="unknown";
+    bool rejectedCoverage=false;
+    try{MaterialData::parse(outlined).interpret([](const auto&){return std::filesystem::path();});}
+    catch(const std::exception&){rejectedCoverage=true;}
+    require(rejectedCoverage,"Unknown shell coverage must fail during material loading");
     auto pbr=MaterialData::defaults("azure.pbr");pbr.parameters["baseColor"]={.5,.25,.125,1};pbr.parameters["roughness"]=.3;pbr.parameters["metallic"]=.8;
     const auto material=MaterialData::parse(pbr.encode()).interpret([](const auto&)->std::filesystem::path{throw std::runtime_error("No texture expected");});
     require(material.baseColorPixels[0]>material.baseColorPixels[1]&&material.metallicRoughnessPixels[1]==77&&material.metallicRoughnessPixels[2]==204,"Runtime interpretation must consume actual linear color and PBR parameters");

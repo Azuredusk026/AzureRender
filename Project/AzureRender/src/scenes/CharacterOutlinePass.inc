@@ -63,14 +63,16 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,
                 sizeof(MaterialPushConstants),&morph,sizeof(morph));
             if(counters)++counters->pushConstantUpdates;
+            const bool maskInterior=!depthShell&&material.outlineSurface.maskInstanceInterior;
             forEachPrimitiveOpacityRun(snapshot.nodeWorldOpacities,primitive.nodeIndex,first,count,[&](const PrimitiveOpacityRun& run) {
                 if(run.opacity==0)return;
                 for(std::uint32_t index=0;index<run.instanceCount;) {
                     const auto source=run.firstInstance+index;
-                    const auto tile=depthShell?std::numeric_limits<std::uint32_t>::max():snapshot.buffers.outlineMaskTiles.at(source);
+                    const auto tile=maskInterior?snapshot.buffers.outlineMaskTiles.at(source):UINT32_MAX;
                     std::uint32_t batch=1;
-                    if(depthShell||tile==std::numeric_limits<std::uint32_t>::max())
-                        while(index+batch<run.instanceCount&&(depthShell||snapshot.buffers.outlineMaskTiles.at(source+batch)==tile))++batch;
+                    if(!maskInterior)batch=run.instanceCount-index;
+                    else if(tile==UINT32_MAX)
+                        while(index+batch<run.instanceCount&&snapshot.buffers.outlineMaskTiles.at(source+batch)==tile)++batch;
                     struct MaskPush {std::uint32_t tile;float opacity;};
                     const MaskPush coverage{tile,run.opacity};
                     commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,

@@ -66,6 +66,9 @@ public:
         if(offset==136&&size==8)fresh=true;
     }
     void bindVertexBuffer(VkBuffer,VkDeviceSize)override{}
+    void bindVertexStream(std::uint32_t binding,VkBuffer buffer,VkDeviceSize offset)override{
+        require(binding==1&&buffer!=VK_NULL_HANDLE&&offset==0,"Material colors require a bound auxiliary vertex stream");
+    }
     void bindIndexBuffer(VkBuffer,VkDeviceSize)override{}
     void draw(unsigned)override{if(pass==mainPass)++mainDrawCalls;}
     void drawIndexed(unsigned,unsigned,unsigned count=1,unsigned first=0)override{
@@ -107,7 +110,7 @@ public:
 };
 
 enum class Kind {Explicit,Legacy,Fading,Hidden,Blend,Platform,Mixed,DoubleSided,Mirrored,GizmoMirrored,CullingDisabled,HiddenExplicitLegacy,
-    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth,MainNoLighting,MainMultiply};
+    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,DepthTested,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth,MainNoLighting,MainMultiply};
 void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool compute,bool multisample=false){
     rhi::NullRhi backend;
     if(multisample){backend.supportedSamples=VK_SAMPLE_COUNT_1_BIT|VK_SAMPLE_COUNT_4_BIT;backend.sampleShadingSupported=true;}
@@ -149,9 +152,10 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     const bool explicitOutline=kind!=Kind::Legacy&&kind!=Kind::Fading;
     if(explicitOutline)material.materialFeatures|=MaterialFeatureSilhouetteOutline;
     const bool projection=kind==Kind::Projected||kind==Kind::DepthOnly||kind==Kind::ProjectedUv1
-        ||kind==Kind::ProjectedMixed||kind==Kind::ProjectedFading||kind==Kind::ProjectedPlatform||kind==Kind::ColorOnly||kind==Kind::MaskedEye;
+        ||kind==Kind::ProjectedMixed||kind==Kind::ProjectedFading||kind==Kind::ProjectedPlatform||kind==Kind::DepthTested||kind==Kind::ColorOnly||kind==Kind::MaskedEye;
     if(projection) {
         material.outlineSurface.present=true;material.outlineSurface.depthPrepass=kind!=Kind::ColorOnly;
+        material.outlineSurface.maskInstanceInterior=kind!=Kind::DepthTested;
         material.outlineSurface.width=.75F;
         if(kind==Kind::DepthOnly)material.materialFeatures&=~MaterialFeatureSilhouetteOutline;
         if(kind==Kind::ProjectedUv1||kind==Kind::ProjectedPlatform) {
@@ -227,7 +231,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     }
     for(const auto& pass:graph.passes())if(pass.name=="character-opaque-depth")capture.opaqueDepthPass=pass.renderPass.renderPass;
     require(capture.depthShellPipelines.size()==(projection?2U:0U),"Only projection materials allocate depth shell pipelines");
-    const bool masks=kind!=Kind::Legacy&&kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::HiddenExplicitLegacy&&kind!=Kind::DepthOnly;
+    const bool masks=kind!=Kind::DepthTested&&kind!=Kind::Legacy&&kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::HiddenExplicitLegacy&&kind!=Kind::DepthOnly;
     if(multisample){
         for(const auto pass:{capture.opaqueDepthPass,capture.maskPass}){
             bool sampled=false;
@@ -320,7 +324,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
         if(binding.binding==31){vertexMask=true;require(binding.stages==VK_SHADER_STAGE_VERTEX_BIT,"Width mask is vertex-only");}
     }
     require(projectionBuffer==projection&&vertexMask==projection,"Legacy layouts must retain their optional resource boundary");
-    require(unmaskedBatches==unsigned(kind==Kind::Legacy||kind==Kind::Mixed||kind==Kind::HiddenExplicitLegacy),
+    require(unmaskedBatches==unsigned(kind==Kind::DepthTested||kind==Kind::Legacy||kind==Kind::Mixed||kind==Kind::HiddenExplicitLegacy),
         "Legacy and explicit draw states must retain separate ownership");
     renderer.onUnload(context);
     std::set<std::uint64_t> created,destroyed;
@@ -339,7 +343,7 @@ int main(int argc,char** argv){try{
     for(bool multisample:{false,true})for(bool bindless:{false,true})for(bool compute:{false,true})
         for(auto kind:{Kind::Explicit,Kind::Legacy,Kind::Fading,Kind::Hidden,Kind::Blend,Kind::Platform,Kind::Mixed,
                 Kind::DoubleSided,Kind::Mirrored,Kind::GizmoMirrored,Kind::CullingDisabled,Kind::HiddenExplicitLegacy,
-                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth,Kind::MainNoLighting,Kind::MainMultiply})
+                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::DepthTested,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth,Kind::MainNoLighting,Kind::MainMultiply})
             verify(argv[1],kind,bindless,compute,multisample);
     std::cout<<"Explicit silhouettes retain independent coverage and legacy batching\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}
