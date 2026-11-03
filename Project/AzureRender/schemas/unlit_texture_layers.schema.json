@@ -17,7 +17,14 @@
     "globalColorWeight"
   ],
   "properties": {
-    "fogMode": {"type": "string", "enum": ["none", "scene"], "default": "none"},
+    "fogMode": {
+      "type": "string",
+      "enum": [
+        "none",
+        "scene"
+      ],
+      "default": "none"
+    },
     "schemaVersion": {
       "type": "integer",
       "const": 2
@@ -518,7 +525,64 @@
           }
         }
       }
+    },
+    "submission": {
+      "type": "string",
+      "enum": [
+        "transparent",
+        "opaque-overlay"
+      ],
+      "default": "transparent"
+    },
+    "depthCompare": {
+      "type": "string",
+      "enum": [
+        "less",
+        "less-or-equal"
+      ],
+      "default": "less"
     }
   },
-  "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。"
+  "description": "公共材质解释器另行验证能力组合、纹理资源及采样器所有权。",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "submission": {
+            "const": "opaque-overlay"
+          }
+        },
+        "required": [
+          "submission"
+        ]
+      },
+      "then": {
+        "required": [
+          "composite",
+          "depthCompare"
+        ],
+        "properties": {
+          "composite": {
+            "const": "additive"
+          },
+          "depthCompare": {
+            "const": "less-or-equal"
+          },
+          "fogMode": {
+            "const": "none"
+          },
+          "softIntersection": {
+            "required": [
+              "enabled"
+            ],
+            "properties": {
+              "enabled": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

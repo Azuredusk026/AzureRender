@@ -1062,6 +1062,27 @@
       "publicContractStatus": "passed",
       "visualAcceptance": "failed-user-review",
       "diagnosticProject": "pose-depth/qualified.azureproject"
+    },
+    {
+      "path": "runs/20261103-215658-opaque-surface-overlays-d378bd",
+      "pathBase": "build",
+      "purpose": "不透明表面覆盖的提交顺序、反射快照及附件归属核验。",
+      "retention": "专项验收归档后按清单管理。",
+      "pinMarker": ".keep",
+      "implementationPlan": "docs/plans/2026-11-03-opaque-surface-overlays.md",
+      "primaryProject": "joint-overlay/joint-materials.azureproject",
+      "evidence": "docs/acceptance/nr/opaque-surface-overlays.md",
+      "publicContractStatus": "passed",
+      "jointDynamicStatus": "passed",
+      "strictReopen": "passed",
+      "visualAcceptance": "failed-user-review",
+      "videos": [
+        {
+          "path": "media/joint-opaque-surface-overlays.mp4",
+          "bytes": 4968181,
+          "sha256": "a585f8d7e6e8bf30875923b259386796315c7fc98597241abc1cf71f1ad631d7"
+        }
+      ]
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

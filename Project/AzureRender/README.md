@@ -37,6 +37,7 @@
 材质覆盖层的深度、混合及场景雾见[公共验收](docs/acceptance/nr/material-overlay-depth.md)。
 覆盖图元的资产保留及来源追踪见[工具验收](docs/acceptance/nr/material-overlays.md)。
 受光透明表面的深度配置及遮挡见[深度验收](docs/acceptance/nr/blend-depth.md)。
+表面发光的反射快照、附件归属及联合重开见[覆盖验收](docs/acceptance/nr/opaque-surface-overlays.md)。
 
 
 本机环境与后续任务见[环境恢复与开发计划](docs/plans/2026-10-30-development-recovery.md)。

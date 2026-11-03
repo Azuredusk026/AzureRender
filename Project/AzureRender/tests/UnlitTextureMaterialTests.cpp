@@ -146,6 +146,14 @@ int main(int argc,char** argv){try{
  require(depthStandalone.unlitTextureLayers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual
   &&packMaterialSurfaceProfile(depthStandalone).rows==packed.rows,
   "Saved complete documents preserve surface depth without changing the GPU material layout");
+ auto overlayDocument=depthDocument;
+ auto& overlaySurface=overlayDocument.surface["materials"][0]["extras"]["azureRenderMaterial"]["surface"];
+ overlaySurface["submission"]="opaque-overlay";overlaySurface["composite"]="additive";
+ overlaySurface["softIntersection"]["enabled"]=false;
+ const auto overlayRestored=MaterialData::parse(overlayDocument.encode()).interpret(
+  [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
+ require(overlayRestored.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay,
+  "Complete material documents preserve opaque overlay submission");
  auto distortionDocument=document;distortionDocument.surface["materials"]=distortionSource["materials"];
  const auto distortionStandalone=MaterialData::parse(distortionDocument.encode()).interpret(
   [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});

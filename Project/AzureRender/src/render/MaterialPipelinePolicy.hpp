@@ -4,6 +4,10 @@
 #include <string>
 #include <stdexcept>
 namespace azurerender {
+inline bool opaqueSurfaceOverlay(const AssetMaterial& material) noexcept {
+    return material.unlitTextureLayers.present
+        &&material.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay;
+}
 // Cull policy and authored front-face orientation are independent.
 inline constexpr unsigned surfaceFacingIndex(bool doubleSided,bool mirrored) noexcept {
     return (doubleSided?2U:0U)+(mirrored?1U:0U);

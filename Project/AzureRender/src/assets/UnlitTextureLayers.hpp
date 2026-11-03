@@ -18,9 +18,11 @@ struct UnlitTextureLayers {
     enum class Composite { Alpha, Additive };
     enum class FogMode { None, Scene };
     enum class DepthCompare { Less, LessOrEqual };
+    enum class Submission { Transparent,OpaqueOverlay };
     Composite composite=Composite::Alpha;
     FogMode fogMode=FogMode::None;
     DepthCompare depthCompare=DepthCompare::Less;
+    Submission submission=Submission::Transparent;
     bool present=false;
     unsigned layerCount=0;
     std::array<UnlitTextureLayer,2> layers{};
@@ -55,6 +57,7 @@ void validateUnlitEffectFrame(const UnlitEffectFrame&);
 // Parsing returns an owned value; resource and feature compatibility is checked
 // by the material loader before accepting this surface model.
 UnlitTextureLayers parseUnlitTextureLayers(const nlohmann::json&,std::size_t textureCount);
+void validateUnlitSubmission(const UnlitTextureLayers&);
 double evaluateUnlitMaterialTime(const UnlitTextureLayers&,double presentationSeconds);
 std::array<float,2> evaluateUnlitLayerUv(const UnlitTextureLayer&,std::array<float,2>,double materialSeconds);
 float evaluateSoftIntersection(float sceneViewZ,float effectViewZ,float distance,float bias);

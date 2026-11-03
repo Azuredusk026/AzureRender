@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <sstream>
+#include <nlohmann/json.hpp>
 
 using namespace azurerender;
 namespace {
@@ -158,7 +159,7 @@ void verify(const std::filesystem::path& shaders,bool bindless,bool compute,bool
     require(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,
         "Gizmo opacity fixture must release all renderer resources");
 }
-void verifyOverlayLifetime(const std::filesystem::path& shaders,bool inclusive,bool additive,bool colored,bool lit=false,bool write=false) {
+void verifyOverlayLifetime(const std::filesystem::path& shaders,bool inclusive,bool additive,bool colored,bool lit=false,bool write=false,bool surfaceOverlay=false) {
     rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
     context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=shaders.string();
     context.renderExtent={128,128};context.cullingEnabled=false;
@@ -175,6 +176,7 @@ void verifyOverlayLifetime(const std::filesystem::path& shaders,bool inclusive,b
         layers.depthCompare=inclusive?UnlitTextureLayers::DepthCompare::LessOrEqual:UnlitTextureLayers::DepthCompare::Less;
         layers.composite=additive?UnlitTextureLayers::Composite::Additive:UnlitTextureLayers::Composite::Alpha;
         layers.useVertexColor=colored;
+        if(surfaceOverlay)layers.submission=UnlitTextureLayers::Submission::OpaqueOverlay;
         if(lit) {
             material.unlitTextureLayers={};material.materialClass=AssetMaterialClass::Fabric;
             material.materialFeatures=MaterialFeatureNeutralFallback;
@@ -189,20 +191,29 @@ void verifyOverlayLifetime(const std::filesystem::path& shaders,bool inclusive,b
     RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;
     settings.characterPresentation.backgroundEnabled=false;context.renderSettings=&settings;
     renderer.onLoad(context);
-    if(lit) {
+    if(lit||surfaceOverlay) {
         SceneFrameData frame;frame.renderSettings=&settings;frame.swapchainWidth=128;frame.swapchainHeight=128;
         renderer.updateFrame(frame);Capture capture;context.commands=&capture;renderer.recordScene(context);
-        bool selected=false;
+        bool selected=false;unsigned surfaceSelections=0;
         for(auto pipeline:capture.boundPipelines)for(const auto& call:backend.calls) {
             if(call.name!="createGraphicsPipeline"||call.detail.find("blend=1")==std::string::npos)continue;
             const auto handle=call.detail.substr(0,call.detail.find(' '));
             if(std::stoull(handle,nullptr,16)==reinterpret_cast<std::uintptr_t>(pipeline)) {
                 require(call.detail.find(std::string("depth=1/")+(write?"1":"0"))!=std::string::npos,"Recorded blend pipeline preserves explicit depth writing");
                 require(call.detail.find(std::string("compare=")+std::to_string(inclusive?VK_COMPARE_OP_LESS_OR_EQUAL:VK_COMPARE_OP_LESS)+" ")!=std::string::npos,"Recorded blend pipeline preserves explicit compare");
+                if(surfaceOverlay){require(call.detail.find("masks=7/0/")!=std::string::npos,"Surface overlays preserve coverage and non-color attachments");++surfaceSelections;}
                 selected=true;
             }
         }
         require(selected,"Explicit blend depth reaches actual surface recording");
+        if(surfaceOverlay) {
+            require(capture.draws.size()==asset->primitives.size()*2,"Surface overlays leave shadow depth ownership with the underlying surface");
+            std::ostringstream fields;renderer.appendCaptureManifestFields(fields);
+            const auto manifest=nlohmann::json::parse("{"+fields.str()+"\"fixture\":true}");
+            require(manifest.at("transparentTriangles")==0,"Opaque overlays are excluded from transparent triangle work");
+            require(surfaceSelections==asset->primitives.size()*2,"Surface overlays draw exactly once in snapshot and main color");
+            for(const auto& draw:capture.draws)require(std::any_of(asset->primitives.begin(),asset->primitives.end(),[&](const auto& p){return p.firstIndex==draw.first;}),"Surface overlays retain original index ordering");
+        }
         context.commands=nullptr;
     }
     renderer.onSwapchainRecreate(context);renderer.onUnload(context);
@@ -227,5 +238,6 @@ int main(int argc,char** argv){try {
         verifyOverlayLifetime(argv[1],inclusive,additive,colored);
     for(bool inclusive:{false,true})for(bool write:{false,true})
         verifyOverlayLifetime(argv[1],inclusive,false,false,true,write);
+    for(bool colored:{false,true})verifyOverlayLifetime(argv[1],true,true,colored,false,false,true);
     std::cout<<"Node opacity consuming passes share selected primitive transforms\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

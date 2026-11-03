@@ -33,6 +33,15 @@ void parsing() {
  require(parseUnlitTextureLayers(coplanar,2).present,"Coplanar transparent overlays parse");
  require(parseUnlitTextureLayers(coplanar,2).depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual,"Inclusive surface depth is owned by the parsed material");
  require(p.depthCompare==UnlitTextureLayers::DepthCompare::Less,"Default depth is strict");
+ auto surfaceOverlay=base;surfaceOverlay["submission"]="opaque-overlay";
+ surfaceOverlay["composite"]="additive";surfaceOverlay["depthCompare"]="less-or-equal";
+ surfaceOverlay["softIntersection"]["enabled"]=false;
+ require(parseUnlitTextureLayers(surfaceOverlay,2).present,"Opaque surface overlays accept explicit compatible ownership");
+ for(const auto& pair:std::initializer_list<std::pair<const char*,Json>>{
+     {"composite","alpha"},{"depthCompare","less"},{"fogMode","scene"},{"submission","opaque"},{"submission",true}}) {
+  auto invalid=surfaceOverlay;invalid[pair.first]=pair.second;reject(invalid);
+ }
+ auto softOverlay=surfaceOverlay;softOverlay["softIntersection"]["enabled"]=true;reject(softOverlay);
  coplanar["depthCompare"]="less";require(parseUnlitTextureLayers(coplanar,2).present,"Explicit strict depth parses");
  for(const Json& value:Json::array({true,1,"always","equal",nullptr})) {coplanar["depthCompare"]=value;reject(coplanar);}
  auto fogged=base;fogged["fogMode"]="scene";

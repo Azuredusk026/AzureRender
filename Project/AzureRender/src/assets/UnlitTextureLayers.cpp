@@ -57,11 +57,15 @@ void layerSample(const Json& input,UnlitTextureLayer& layer,std::size_t textureC
 }
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion","fogMode","depthCompare"});
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion","fogMode","depthCompare","submission"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
     UnlitTextureLayers result;result.layerCount=static_cast<unsigned>(layers.size());
+    if(source.contains("submission")) {
+        if(source.at("submission")=="opaque-overlay")result.submission=UnlitTextureLayers::Submission::OpaqueOverlay;
+        else if(source.at("submission")!="transparent")invalid("submission");
+    }
     if(source.contains("depthCompare")) {
         if(source.at("depthCompare")=="less-or-equal")result.depthCompare=UnlitTextureLayers::DepthCompare::LessOrEqual;
         else if(source.at("depthCompare")!="less")invalid("depthCompare");
@@ -133,7 +137,15 @@ UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textur
         result.viewDepthFadePresent=true;result.viewDepthFade={nearRange[0],nearRange[1],farRange[0],farRange[1]};
         (void)evaluateUnlitViewDepthFade(result,0);
     }
-    result.present=true;return result;
+    result.present=true;validateUnlitSubmission(result);return result;
+}
+void validateUnlitSubmission(const UnlitTextureLayers& profile) {
+    if(profile.submission==UnlitTextureLayers::Submission::Transparent)return;
+    if(profile.submission!=UnlitTextureLayers::Submission::OpaqueOverlay||!profile.present
+        ||profile.composite!=UnlitTextureLayers::Composite::Additive
+        ||profile.depthCompare!=UnlitTextureLayers::DepthCompare::LessOrEqual
+        ||profile.softIntersectionEnabled||profile.fogMode!=UnlitTextureLayers::FogMode::None)
+        invalid("submission requires additive inclusive opaque overlay without soft intersection or per-layer fog");
 }
 double evaluateUnlitMaterialTime(const UnlitTextureLayers& profile,double presentationSeconds) {
     const double tau=profile.clockRate*presentationSeconds+profile.clockOffsetSeconds;

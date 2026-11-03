@@ -1626,7 +1626,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     for(const auto& instance:instances){
         const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
         triangles+=mesh.indices.size()/3;if(mesh.hasSkin)skinned+=mesh.vertices.size();
-        for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend)transparent+=primitive.indexCount/3;
+        for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend
+            &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
@@ -2594,7 +2595,7 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
     std::size_t totalIndices = 0;
     for (const AssetPrimitive& primitive : asset_.primitives) {
         if (asset_.materials[primitive.materialIndex].alphaMode
-            == AssetAlphaMode::Blend) {
+            == AssetAlphaMode::Blend&&!opaqueSurfaceOverlay(asset_.materials[primitive.materialIndex])) {
             totalIndices += primitive.indexCount;
         }
     }
@@ -2787,7 +2788,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
         const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
         for(const auto& material:mesh.materials) {
             sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureUnlitTextureLayers))!=0;
-            colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0;
+            colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0||opaqueSurfaceOverlay(material);
             depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
         }
     }
@@ -2795,6 +2796,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
     if(colorRequired&&context.depthTestEnabled)
         recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
     recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);
+    if(colorRequired)recordSurfaceOverlays(context,snapshot,commands,true);
     if(depthShell)recordOutlineShells(context,snapshot,commands,true);
 }
 
@@ -2859,6 +2861,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
 #include "CharacterOutlinePass.inc"
 #include "CharacterMotionPass.inc"
 #include "CharacterMaterialSampling.inc"
+#include "CharacterSurfaceOverlays.inc"
 #include "CharacterScreenReflection.inc"
 
 void CharacterSceneRenderer::createDescriptorPool() {
@@ -3469,7 +3472,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         depthDesc.colorAttachmentCount=2;
         depthDesc.colorWriteMasks.assign(2,0xf);
         createFacingPipelines(overlayDepthPipelines_,depthDesc);
-        try{initializeMaterialClassPipelines(context,integralBase,depthDesc);}
+        try{initializeMaterialClassPipelines(context,integralBase,depthDesc);initializeSurfaceOverlayPipelines(integralBase,depthDesc);}
         catch(...){destroyMaterialShaderModule(depthModule);throw;}
         destroyMaterialShaderModule(depthModule);
         const auto simpleDepthModule=rhi_->createShaderModule(mainFragment(bindlessTextures_
@@ -4306,6 +4309,7 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
             for (const AssetPrimitive& primitive : mesh.primitives) {
                 const AssetMaterial& material =
                     mesh.materials[primitive.materialIndex];
+                if(opaqueSurfaceOverlay(material))continue;
                 if(independentCoverageNeeded_){commands.bindPipeline(material.coverageTexture.present
                     ?(objectPage?objectShadowCoveragePipeline_:shadowCoveragePipeline_)
                     :(objectPage?objectShadowPipeline_:shadowPipeline_));
@@ -4436,7 +4440,8 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
     for (std::size_t key = 0; key < transparentPrimitivesByMesh_.size(); ++key) {
         const auto& mesh = key == 0 ? asset_ : additionalResources_[key - 1]->asset;
         for (const auto& primitive : mesh.primitives)
-            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend)
+            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend
+                &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))
                 transparentPrimitivesByMesh_[key].push_back(&primitive);
     }
     transparentIndexOffsets_.assign(sceneInstances_.size(), 0);
@@ -4445,7 +4450,8 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         transparentIndexOffsets_[instance.sourceIndex] = total;
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
         for (const auto& primitive : mesh.primitives)
-            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend) total += primitive.indexCount;
+            if (mesh.materials[primitive.materialIndex].alphaMode == AssetAlphaMode::Blend
+                &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex])) total += primitive.indexCount;
     }
     transparentDrawsPrepared_ = total != 0;
     if (total == 0) return;
@@ -4611,6 +4617,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
         }
     }
     }
+    if(stage==0||stage==2||stage==4)recordSurfaceOverlays(context,*snapshot,commands,false,counters);
     if(stage==0||stage==1||stage==4)recordOutlineShells(context,*snapshot,commands,false,counters);
     if((stage==0||stage==4)&&viewFog_){
         const auto descriptor=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount();
@@ -4678,7 +4685,7 @@ void CharacterSceneRenderer::drawPrimitive(
     const std::uint32_t firstInstance,
     const std::uint32_t textureBase,
     const std::size_t globalMaterialBase,
-    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot) {
+    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot,bool snapshotSurfaceOverlay) {
     const auto recordRun = [&](const PrimitiveOpacityRun& run) {
     if (run.opacity == 0) return;
     const auto firstInstance=run.firstInstance;
@@ -4704,7 +4711,9 @@ void CharacterSceneRenderer::drawPrimitive(
     const auto fogPipeline=viewFog_&&blend&&material.unlitTextureLayers.fogMode==UnlitTextureLayers::FogMode::Scene
         ?viewFog_->materialPipeline(additive,vertexColor,surfaceFacingIndex(material.doubleSided,mirrored)):VK_NULL_HANDLE;
     const auto classPipeline=materialClassPipeline(material,mirrored,false);
-    const VkPipeline pipeline = fogPipeline?fogPipeline:(material.materialFeatures&MaterialFeatureHairPixelIntegral)
+    const bool surfaceOverlay=opaqueSurfaceOverlay(material);
+    const auto& surfacePipelines=snapshotSurfaceOverlay?surfaceOverlaySnapshotPipelines_:surfaceOverlayPipelines_;
+    const VkPipeline pipeline = surfaceOverlay?surfacePipelines[vertexColor][surfaceFacingIndex(material.doubleSided,mirrored)]:fogPipeline?fogPipeline:(material.materialFeatures&MaterialFeatureHairPixelIntegral)
         ?hairIntegralPipeline(material,mirrored,false):multiplyComposite
         ? (multiplyPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
         : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipelines_[mirrored?1:0] : blend
@@ -4716,7 +4725,7 @@ void CharacterSceneRenderer::drawPrimitive(
         ?snapshot->buffers.vertexColors.at(snapshot->instances.at(firstInstance).meshKey):whiteVertexColorBuffer_.buffer;
     if(!snapshot&&!mesh.vertexColors.empty())throw std::logic_error("Vertex colors require immutable recording buffers");
     commands.bindVertexStream(1,colorBuffer,0);
-    commands.bindPipeline(materialLightingPipeline(material,pipeline));
+    commands.bindPipeline(surfaceOverlay?pipeline:materialLightingPipeline(material,pipeline));
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =
             frameIndex * totalMaterialCount()

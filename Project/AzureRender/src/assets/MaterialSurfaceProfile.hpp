@@ -63,6 +63,7 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 }
 
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
+    validateUnlitSubmission(material.unlitTextureLayers);
     validateMaterialBlendDepth(material);
     validateMaterialCoverage(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0

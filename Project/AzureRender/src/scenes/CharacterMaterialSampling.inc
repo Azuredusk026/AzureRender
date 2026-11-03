@@ -113,6 +113,10 @@ VkPipeline CharacterSceneRenderer::materialLightingPipeline(const AssetMaterial&
 }
 void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
     if(rhi_){
+        for(auto* group:{&surfaceOverlayPipelines_,&surfaceOverlaySnapshotPipelines_})
+            for(auto& facing:*group)for(auto& pipeline:facing) {
+                if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
+            }
         for(const auto& variant:materialDepthPipelines_)for(auto pipeline:variant.second)if(pipeline)rhi_->destroyPipeline(pipeline);
         for(const auto& variant:materialLightingPipelines_)for(auto pipeline:variant.second)if(pipeline)rhi_->destroyPipeline(pipeline);
         for(const auto& variant:materialShaderVariants_){

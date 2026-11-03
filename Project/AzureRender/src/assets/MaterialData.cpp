@@ -213,6 +213,8 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
         lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
         lost(source.unlitTextureLayers.present&&!replacement.unlitTextureLayers.present,"surface.layers");
+        lost(source.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay
+            &&replacement.unlitTextureLayers.submission!=UnlitTextureLayers::Submission::OpaqueOverlay,"surface.submission");
         lost(source.outlineSurface.present&&!replacement.outlineSurface.present,"outlineSurface");
         lost(source.specularInput.present&&!replacement.specularInput.present,"specularInput");
         lost(source.specularRamp.present&&!replacement.specularRamp.present,"specularRamp");

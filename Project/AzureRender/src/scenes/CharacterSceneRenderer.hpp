@@ -249,6 +249,9 @@ private:
     void createOverlayDepth(const RenderContext& context);
     void destroyOverlayDepth();
     void recordOverlayDepth(const RenderContext& context, const SceneInstanceSnapshot& snapshot, rhi::ICommandRecorder& commands);
+    void initializeSurfaceOverlayPipelines(const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot);
+    void recordSurfaceOverlays(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+        rhi::ICommandRecorder& commands,bool snapshotColor,SceneSubmissionCounters* counters=nullptr);
     enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill};
     void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
@@ -473,6 +476,7 @@ private:
     std::array<VkPipeline,4> blendPipelines_{};
     std::array<VkPipeline,4> vertexColorBlendPipelines_{};
     std::array<VkPipeline,4> additiveBlendPipelines_{},vertexColorAdditiveBlendPipelines_{};
+    std::array<std::array<VkPipeline,4>,2> surfaceOverlayPipelines_{},surfaceOverlaySnapshotPipelines_{};
     std::array<VkPipeline,4> multiplyPipelines_{};
     std::array<VkPipeline,2> sceneTintPipelines_{};
     VkPipeline outlinePipeline_ = VK_NULL_HANDLE;
@@ -626,7 +630,7 @@ private:
         std::uint32_t textureBase = 0,
         std::size_t globalMaterialBase = 0,
         SceneSubmissionCounters* counters = nullptr,
-        const SceneInstanceSnapshot* snapshot = nullptr);
+        const SceneInstanceSnapshot* snapshot = nullptr, bool snapshotSurfaceOverlay=false);
     void buildSceneState();
     void destroyGraphicsPipelinesForRecreate();
 };
