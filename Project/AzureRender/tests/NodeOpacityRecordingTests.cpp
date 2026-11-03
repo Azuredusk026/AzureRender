@@ -156,10 +156,48 @@ void verify(const std::filesystem::path& shaders,bool bindless,bool compute,bool
     require(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,
         "Gizmo opacity fixture must release all renderer resources");
 }
+void verifyOverlayLifetime(const std::filesystem::path& shaders,bool inclusive,bool additive,bool colored) {
+    rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
+    context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=shaders.string();
+    context.renderExtent={128,128};context.cullingEnabled=false;
+    const auto source=std::filesystem::path(AZURERENDER_TEST_SOURCE_DIR);
+    const auto path=(source/"assets_public/scene_inspector/assets/cube.gltf").generic_string();
+    context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();
+    auto asset=std::make_shared<LoadedAsset>(loadGltfAsset(path));
+    for(auto& material:asset->materials) {
+        material.materialClass=AssetMaterialClass::Generic;material.materialProfileVersion=2;
+        material.materialFeatures=MaterialFeatureUnlitSurface|MaterialFeatureUnlitTextureLayers;
+        material.alphaMode=AssetAlphaMode::Blend;
+        auto& layers=material.unlitTextureLayers;layers.present=true;layers.layerCount=1;
+        layers.layers[0].texture=0;layers.softIntersectionEnabled=false;
+        layers.depthCompare=inclusive?UnlitTextureLayers::DepthCompare::LessOrEqual:UnlitTextureLayers::DepthCompare::Less;
+        layers.composite=additive?UnlitTextureLayers::Composite::Additive:UnlitTextureLayers::Composite::Alpha;
+        layers.useVertexColor=colored;
+    }
+    if(colored)asset->vertexColors.assign(asset->vertices.size(),{1,1,1,1});
+    std::map<std::string,std::shared_ptr<const LoadedAsset>> prepared{{path,asset}};
+    context.preparedMeshes=&prepared;context.scene.resources.push_back({"overlay",path});
+    scene::SceneNodeDesc node;node.id="overlay";node.resourceId="overlay";context.scene.nodes.push_back(node);
+    RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;context.renderSettings=&settings;
+    renderer.onLoad(context);renderer.onSwapchainRecreate(context);renderer.onUnload(context);
+    std::set<std::string> pipelines;
+    for(const auto& call:backend.calls) {
+        const auto handle=call.detail.substr(0,call.detail.find(' '));
+        if(call.name=="createGraphicsPipeline"||call.name=="createComputePipeline")
+            require(pipelines.insert(handle).second,"Pipeline handles have one owner");
+        if(call.name=="destroyPipeline"&&handle!="0x0")
+            require(pipelines.erase(handle)==1,"Each pipeline is destroyed once");
+    }
+    require(pipelines.empty(),"Surface pipeline recreation and unload release every depth variant");
+    require(backend.allocator().statistics().liveImages==0&&backend.allocator().statistics().liveBuffers==0,
+        "Overlay recreation releases buffers and images");
+}
 }
 int main(int argc,char** argv){try {
     require(argc==2,"Expected compiled shader directory");
     for(bool bindless:{false,true})for(bool compute:{false,true})for(bool origin:{false,true})verify(argv[1],bindless,compute,origin);
     verify(argv[1],false,false,true,true);
+    for(bool inclusive:{false,true})for(bool additive:{false,true})for(bool colored:{false,true})
+        verifyOverlayLifetime(argv[1],inclusive,additive,colored);
     std::cout<<"Node opacity consuming passes share selected primitive transforms\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

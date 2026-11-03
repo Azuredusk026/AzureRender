@@ -113,6 +113,13 @@ int main(int argc,char** argv){try{
  const std::string baseId="11111111-1111-4111-8111-111111111111",maskId="22222222-2222-4222-8222-222222222222";
  document.textures={{"0",{{"asset",baseId},{"usage","albedo"}}},{"1",{{"asset",maskId},{"usage","albedo"}}}};
  const auto restored=MaterialData::parse(document.encode());
+ auto depthDocument=document;
+ depthDocument.surface["materials"][0]["extras"]["azureRenderMaterial"]["surface"]["depthCompare"]="less-or-equal";
+ const auto depthStandalone=MaterialData::parse(depthDocument.encode()).interpret(
+  [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});
+ require(depthStandalone.unlitTextureLayers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual
+  &&packMaterialSurfaceProfile(depthStandalone).rows==packed.rows,
+  "Saved complete documents preserve surface depth without changing the GPU material layout");
  auto distortionDocument=document;distortionDocument.surface["materials"]=distortionSource["materials"];
  const auto distortionStandalone=MaterialData::parse(distortionDocument.encode()).interpret(
   [&](const std::string& id){return folder/(id==baseId?"base.png":"mask.png");});

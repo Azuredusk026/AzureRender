@@ -3,8 +3,11 @@ void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
     lightingOrdinaryNeeded_=lightingBlendNeeded_=lightingFallbackNeeded_=lightingIntegralNeeded_=false;
     lightingClassesNeeded_={};
     independentCoverageNeeded_=false;
+    inclusiveSurfaceDepthNeeded_=false;
     const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
         independentCoverageNeeded_|=material.coverageTexture.present;
+        inclusiveSurfaceDepthNeeded_|=material.unlitTextureLayers.present
+            &&material.unlitTextureLayers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual;
         if(!extendedMaterialLighting(material))continue;
         const bool integral=(material.materialFeatures&MaterialFeatureHairPixelIntegral)!=0;
         if(integral&&rasterizationSamples_!=VK_SAMPLE_COUNT_4_BIT)lightingIntegralNeeded_=true;
@@ -45,8 +48,8 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
         if(value.id==0&&value.value)needed=lightingOrdinaryNeeded_;
         if(value.id==1)needed=value.value<lightingClassesNeeded_.size()&&lightingClassesNeeded_[value.value];
     }
-    if(it==materialShaderVariants_.end()||(!needed&&!independentCoverageNeeded_))return rhi_->createGraphicsPipeline(desc);
-    const auto scene=rhi_->createGraphicsPipeline(desc);
+    if(it==materialShaderVariants_.end()||(!needed&&!independentCoverageNeeded_))return createMaterialDepthPipeline(desc);
+    const auto scene=createMaterialDepthPipeline(desc);
     std::array<VkPipeline,3> variants{};
     try{
         for(unsigned policy=1;policy<4;++policy){
@@ -56,10 +59,25 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
             if(!module)module=rhi_->createShaderModule(readBinaryFile(
                 sceneFragmentVariant(it->path,false,false,false,(policy&1U)!=0,(policy&2U)!=0)));
             auto extended=desc;extended.fragmentShader=module;
-            variants[policy-1]=rhi_->createGraphicsPipeline(extended);
+            variants[policy-1]=createMaterialDepthPipeline(extended);
         }
         materialLightingPipelines_.emplace_back(scene,variants);
     }catch(...){for(auto pipeline:variants)if(pipeline)rhi_->destroyPipeline(pipeline);rhi_->destroyPipeline(scene);throw;}
+    return scene;
+}
+VkPipeline CharacterSceneRenderer::createMaterialDepthPipeline(const rhi::GraphicsPipelineDesc& desc) {
+    const auto scene=rhi_->createGraphicsPipeline(desc);
+    if(!inclusiveSurfaceDepthNeeded_||!desc.alphaBlend||!desc.depthTest
+        ||desc.depthWrite||desc.depthCompare!=VK_COMPARE_OP_LESS)return scene;
+    VkPipeline inclusive=VK_NULL_HANDLE;
+    try {
+        auto overlay=desc;overlay.depthCompare=VK_COMPARE_OP_LESS_OR_EQUAL;
+        inclusive=rhi_->createGraphicsPipeline(overlay);
+        materialDepthPipelines_.emplace_back(scene,inclusive);
+    }catch(...) {
+        if(inclusive)rhi_->destroyPipeline(inclusive);
+        rhi_->destroyPipeline(scene);throw;
+    }
     return scene;
 }
 VkPipeline CharacterSceneRenderer::createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc& desc,const std::string& path) {
@@ -70,14 +88,24 @@ VkPipeline CharacterSceneRenderer::createCoverageGraphicsPipeline(const rhi::Gra
 }
 VkPipeline CharacterSceneRenderer::materialLightingPipeline(const AssetMaterial& material,VkPipeline scene) const {
     const auto policy=(extendedMaterialLighting(material)?1U:0U)|(material.coverageTexture.present?2U:0U);
-    if(!policy)return scene;
-    const auto it=std::find_if(materialLightingPipelines_.begin(),materialLightingPipelines_.end(),
-        [&](const auto& variant){return variant.first==scene;});
-    if(it==materialLightingPipelines_.end()||!it->second[policy-1])throw std::logic_error("Explicit material lighting/coverage pipeline is unavailable");
-    return it->second[policy-1];
+    if(policy) {
+        const auto it=std::find_if(materialLightingPipelines_.begin(),materialLightingPipelines_.end(),
+            [&](const auto& variant){return variant.first==scene;});
+        if(it==materialLightingPipelines_.end()||!it->second[policy-1])throw std::logic_error("Explicit material lighting/coverage pipeline is unavailable");
+        scene=it->second[policy-1];
+    }
+    if(material.unlitTextureLayers.present
+        &&material.unlitTextureLayers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual) {
+        const auto it=std::find_if(materialDepthPipelines_.begin(),materialDepthPipelines_.end(),
+            [&](const auto& variant){return variant.first==scene;});
+        if(it==materialDepthPipelines_.end())throw std::logic_error("Explicit surface depth pipeline is unavailable");
+        return it->second;
+    }
+    return scene;
 }
 void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
     if(rhi_){
+        for(const auto& variant:materialDepthPipelines_)if(variant.second)rhi_->destroyPipeline(variant.second);
         for(const auto& variant:materialLightingPipelines_)for(auto pipeline:variant.second)if(pipeline)rhi_->destroyPipeline(pipeline);
         for(const auto& variant:materialShaderVariants_){
             if(variant.lighting)rhi_->destroyShaderModule(variant.lighting);
@@ -86,7 +114,7 @@ void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
             rhi_->destroyShaderModule(variant.scene);
         }
     }
-    materialLightingPipelines_.clear();materialShaderVariants_.clear();
+    materialDepthPipelines_.clear();materialLightingPipelines_.clear();materialShaderVariants_.clear();
 }
 void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContext& context,
     const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot) {

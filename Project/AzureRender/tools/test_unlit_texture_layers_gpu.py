@@ -68,6 +68,11 @@ def run(player,root,expected_validation='any',selected=None):
         delta=.75 if kind in ('soft-half','node-opacity','diagonal','orthographic') else 2
         if kind=='soft-zero':delta=0
         if kind=='depth-occluded':delta=-.25
+        if kind.startswith('coplanar-'):
+            delta=-.25 if kind=='coplanar-occluded' else .25 if kind=='coplanar-separated' else 0
+            p['softIntersection']['enabled']=False
+            if kind not in ('coplanar-default','coplanar-mixed-strict'):p['depthCompare']='less' if kind=='coplanar-less' else 'less-or-equal'
+            if kind=='coplanar-additive':p['composite']='additive'
         if kind=='coverage-clamp':p['tint'][3]=3;delta=1.125
         if kind=='coverage-soft':p['tint'][3]=2;delta=.75
         if kind=='coverage-negative':p['tint'][3]=-1
@@ -121,10 +126,15 @@ def run(player,root,expected_validation='any',selected=None):
         if document_id:nodes[0]['materialSlots']={'surface':document_id}
         if kind=='clear-only':nodes=[node for node in nodes if node['id']=='camera']
         if kind not in ('empty-background','clear-only'):nodes.append(dict(id='rear',resourceId='rear',components={'azure.transform':component('azure.transform',dict(translation=[0,0,-delta],scale=[10,10,10]))}))
+        if kind=='coplanar-mixed-strict':
+            other=copy.deepcopy(model);other['materials'][0]['extras']['azureRenderMaterial']['surface']['depthCompare']='less-or-equal'
+            (assets/'inclusive.gltf').write_text(json.dumps(other))
+            nodes.append(dict(id='inclusive',resourceId='inclusive',components={'azure.transform':component('azure.transform',dict(translation=[100,0,0]))}))
         settings=dict(schemaVersion=20,unlitEffects=colors,sceneLighting=True,skyIntensity=0,cameraNear=.1,cameraFar=20,
             shadowDistance=20,platform=False,background=False,silhouetteOutline=False,innerOutline=False,
             stylized=False,bloomEnabled=False,antiAliasing=0,exposure=0,toneMapping=False,contrast=1,saturation=1)
         scene=dict(schemaVersion=1,id=name,sceneType='character',resources=[dict(id='surface',asset='assets:/surface.gltf'),dict(id='rear',asset='assets:/rear.gltf')],nodes=nodes,lights=[],renderSettings=settings)
+        if kind=='coplanar-mixed-strict':scene['resources'].append(dict(id='inclusive',asset='assets:/inclusive.gltf'))
         (assets/'scene.azurelevel').write_text(json.dumps(scene));out=root/name;out.mkdir()
         command=[str(player.resolve()),'--project',str(project.resolve()),'--width','128','--height','128',
             '--capture-dir',str((out/'frames').resolve()),'--capture-frames',str(frames),'--capture-fps','4',
@@ -168,13 +178,14 @@ def run(player,root,expected_validation='any',selected=None):
                 if kind in ('highlight','node-opacity'):expected+=np.maximum(expected-1,0)*3
                 expected=np.clip(expected*colors['exposureGain'],0,1000)
                 luminance=np.dot(expected,[.212673,.715152,.072175]);expected=(luminance+colors['saturation']*(expected-luminance))*np.array(colors['colorGain'])
-                soft=1 if kind=='empty-background' else min(1,max(0,delta/math.cos(math.radians(yaw))/1.5))
+                soft=1 if kind=='empty-background' or not p['softIntersection'].get('enabled',True) else min(1,max(0,delta/math.cos(math.radians(yaw))/1.5))
                 fade=1
                 if kind.startswith('view-'):
                     depth=3/math.cos(math.radians(yaw));ranges=p['viewDepthFade'];near=ranges['near'];far=ranges['far']
                     fade=min(1,max(0,(depth-near[0])/(near[1]-near[0])))*min(1,max(0,(far[1]-depth)/(far[1]-far[0])))
                 alpha=np.clip(alpha*soft*fade,0,1)*opacity;receiver=clear_background if kind=='empty-background' else np.array([.07,.09,.11])
-                expected=receiver if kind=='depth-occluded' else expected*alpha+receiver*(1-alpha)
+                occluded=kind in ('depth-occluded','coplanar-occluded','coplanar-less','coplanar-default','coplanar-mixed-strict')
+                expected=receiver if occluded else expected*alpha+receiver*(1 if p.get('composite')=='additive' else 1-alpha)
             # The target is an eight-bit presentation image. HDR survives the
             # transparent blend, then the display attachment clips its range.
             expected=np.clip(expected,0,1)
@@ -194,7 +205,8 @@ def run(player,root,expected_validation='any',selected=None):
 
     kinds=['clear-only','base','mask','document-mask','blend','red-alpha','highlight','node-opacity','soft-half','soft-zero','depth-occluded',
         'empty-background','diagonal','orthographic','frame-color','repeat','clamp','independent-samplers','scroll','clock-frozen','clock-reverse',
-        'coverage-clamp','coverage-soft','coverage-negative','view-near','view-far','view-zero','view-soft','view-diagonal','view-orthographic','view-mask']
+        'coverage-clamp','coverage-soft','coverage-negative','view-near','view-far','view-zero','view-soft','view-diagonal','view-orthographic','view-mask',
+        'coplanar-default','coplanar-less','coplanar-equal','coplanar-additive','coplanar-occluded','coplanar-separated','coplanar-mixed-strict']
     if selected:
         assert set(selected)<=set(kinds),'Unknown layer case';kinds=[kind for kind in kinds if kind in selected]
         if 'clear-only' not in kinds:kinds.insert(0,'clear-only')

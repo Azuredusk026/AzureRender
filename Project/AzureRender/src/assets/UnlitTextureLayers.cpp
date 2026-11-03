@@ -57,11 +57,15 @@ void layerSample(const Json& input,UnlitTextureLayer& layer,std::size_t textureC
 }
 }
 UnlitTextureLayers parseUnlitTextureLayers(const Json& source,std::size_t textureCount) {
-    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion","fogMode"});
+    fields(source,{"schemaVersion","lighting","layers","tint","blendTint","clock","softIntersection","highlightExpansion","postExposureWeight","globalColorWeight"},"surface",{"viewDepthFade","vertexColor","viewCoverage","composite","coverageLayer","baseUvDistortion","fogMode","depthCompare"});
     if(!integer(source.at("schemaVersion"))||source.at("schemaVersion")!=2||source.at("lighting")!="unlit")invalid("schemaVersion or lighting");
     const auto& layers=source.at("layers");
     if(!layers.is_array()||layers.empty()||layers.size()>2)invalid("layers");
     UnlitTextureLayers result;result.layerCount=static_cast<unsigned>(layers.size());
+    if(source.contains("depthCompare")) {
+        if(source.at("depthCompare")=="less-or-equal")result.depthCompare=UnlitTextureLayers::DepthCompare::LessOrEqual;
+        else if(source.at("depthCompare")!="less")invalid("depthCompare");
+    }
     if(source.contains("fogMode")){
         if(source.at("fogMode")=="scene")result.fogMode=UnlitTextureLayers::FogMode::Scene;
         else if(source.at("fogMode")!="none")invalid("fogMode");

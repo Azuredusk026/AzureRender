@@ -1030,6 +1030,15 @@
           "sha256": "a77859da077285d108d71290af5a711292b4320b0a72b63a1faec2b7d6fddd33"
         }
       ]
+    },
+    {
+      "path": "runs/20261103-151310-material-stage-qualification-cedf81",
+      "pathBase": "build",
+      "purpose": "材质特效、覆盖层深度与原生区域的组合核验。",
+      "retention": "对应画质门禁完成并归档后另行清理。",
+      "pinMarker": ".keep",
+      "evidence": "docs/acceptance/nr/material-overlay-depth.md",
+      "implementationPlan": "docs/plans/2026-11-03-material-overlay-depth.md"
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json"

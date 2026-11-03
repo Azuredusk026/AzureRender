@@ -98,6 +98,7 @@ private:
     VkShaderModule createMaterialShaderModule(const std::string&);
     void destroyMaterialShaderModule(VkShaderModule);
     VkPipeline createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
+    VkPipeline createMaterialDepthPipeline(const rhi::GraphicsPipelineDesc&);
     VkPipeline createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc&,const std::string&);
     VkPipeline materialLightingPipeline(const AssetMaterial&,VkPipeline) const;
     void destroyMaterialLightingPipelines() noexcept;
@@ -109,6 +110,8 @@ private:
     std::vector<MaterialShaderVariant> materialShaderVariants_;
     std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialLightingPipelines_;
     bool independentCoverageNeeded_=false;
+    bool inclusiveSurfaceDepthNeeded_=false;
+    std::vector<std::pair<VkPipeline,VkPipeline>> materialDepthPipelines_;
     std::array<VkPipeline,3> outlineMaskCoveragePipelines_{};
     std::array<VkPipeline,2> outlineCoveragePipelines_{},outlineDepthCoveragePipelines_{};
     bool lightingOrdinaryNeeded_=false,lightingBlendNeeded_=false;

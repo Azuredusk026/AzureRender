@@ -29,6 +29,12 @@ void reject(const Json& json,std::size_t textures=2) {
 void parsing() {
  const auto base=fixture();const auto p=parseUnlitTextureLayers(base,2);
  require(p.present&&p.layerCount==1&&p.layers[0].texture==0,"Base layer binding");
+ auto coplanar=base;coplanar["depthCompare"]="less-or-equal";
+ require(parseUnlitTextureLayers(coplanar,2).present,"Coplanar transparent overlays parse");
+ require(parseUnlitTextureLayers(coplanar,2).depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual,"Inclusive surface depth is owned by the parsed material");
+ require(p.depthCompare==UnlitTextureLayers::DepthCompare::Less,"Default depth is strict");
+ coplanar["depthCompare"]="less";require(parseUnlitTextureLayers(coplanar,2).present,"Explicit strict depth parses");
+ for(const Json& value:Json::array({true,1,"always","equal",nullptr})) {coplanar["depthCompare"]=value;reject(coplanar);}
  auto fogged=base;fogged["fogMode"]="scene";
  require(parseUnlitTextureLayers(fogged,2).fogMode==UnlitTextureLayers::FogMode::Scene,"Scene fog is an optional unlit surface mode");
  require(p.fogMode==UnlitTextureLayers::FogMode::None,"Scene fog defaults to none");
@@ -221,6 +227,22 @@ void numerical() {
  bad([&]{(void)evaluateUnlitTextureLayers(p,{1,1,1,1},{},1,1.1F,frame);});
  frame.exposureGain=-1;bad([&]{(void)evaluateUnlitTextureLayers(p,{1,1,1,1},{},1,1,frame);});
 }
+void capturedOverlayComposition() {
+ auto main=parseUnlitTextureLayers(fixture(),2);
+ main.layerCount=2;main.layers[0].sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
+ main.layers[1].role=UnlitTextureLayer::Role::Blend;
+ main.tint={10,.17037950456F,0,1.01999998F};main.blendTint={110.1072845F,1.87589848F,0,1};
+ main.highlightGain=0;main.viewCoveragePresent=true;main.viewCoverage={0,1,1,1};
+ main.coverageLayer.present=true;main.coverageLayer.sample.sampleMode=UnlitTextureLayer::SampleMode::RedAsAlpha;
+ main.coverageLayer.threshold=.0100999899F;
+ auto edge=main;edge.layerCount=1;edge.tint={1,0,0,1.01999998F};edge.viewCoverage[2]=0;
+ const std::array<float,4> noise{.3564453125F,.3564453125F,.3564453125F,1};
+ const auto a=evaluateUnlitTextureLayers(main,{1,1,1,1},noise,1,1,{},std::nullopt,{1,1,1,1},.929989278F,noise);
+ const auto b=evaluateUnlitTextureLayers(edge,{1,1,1,1},{},1,1,{},std::nullopt,{1,1,1,1},.929989278F,noise);
+ require(std::abs(a[0]*a[3]+b[0]*b[3]-16.20438576F)<4e-6F,"Captured HDR effect decomposes into two straight-alpha additive layers");
+ near(a[1]*a[3]+b[1]*b[3],.275655925F,"Captured effect green retains independent coverage and view interpolation");
+ near(a[2]*a[3]+b[2]*b[3],0,"Captured effect has no blue contribution");
+}
 void capturedExamples(const char* path) {
  std::ifstream stream(path);if(!stream)throw std::runtime_error("Cannot open supplied source contract");const Json contract=Json::parse(stream);
  unsigned profiles=0;
@@ -238,4 +260,4 @@ void capturedExamples(const char* path) {
  require(profiles==2,"Both recorded source examples verified");
 }
 }
-int main(int argc,char** argv){try{if(argc>2)throw std::invalid_argument("Expected optional source contract path");parsing();numerical();if(argc==2)capturedExamples(argv[1]);std::cout<<"Passed "<<checks<<" unlit layer checks\n";return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
+int main(int argc,char** argv){try{if(argc>2)throw std::invalid_argument("Expected optional source contract path");parsing();numerical();capturedOverlayComposition();if(argc==2)capturedExamples(argv[1]);std::cout<<"Passed "<<checks<<" unlit layer checks\n";return 0;}catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

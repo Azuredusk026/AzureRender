@@ -20,7 +20,8 @@ from test_unlit_texture_layers_gpu import profile, png_uri, linear
 CASES=('alpha','additive','none','disabled','absent','camera-mismatch','aspect-mismatch',
        'near','orthographic','gradient','resize','document','msaa',
        'object-shadow','object-shadow-additive','object-shadow-msaa','object-shadow-additive-msaa',
-       'radiance-quarter','linear-display','linear-additive')
+       'radiance-quarter','linear-display','linear-additive',
+       'coplanar-alpha','coplanar-additive','coplanar-document','coplanar-msaa','coplanar-less')
 
 
 def run(player, output, validation, selected):
@@ -38,6 +39,7 @@ def run(player, output, validation, selected):
             multisample='msaa' in kind
             object_shadow=kind.startswith('object-shadow')
             normalized=kind in ('radiance-quarter','linear-display','linear-additive')
+            coplanar=kind.startswith('coplanar-')
             root=output/name;assets=root/'assets';assets.mkdir(parents=True)
             surface(assets/'surface.gltf',double_sided=True)
             model=json.loads((assets/'surface.gltf').read_text())
@@ -45,6 +47,7 @@ def run(player, output, validation, selected):
                 blendTint=[0,0,0,0],softIntersection=dict(enabled=False,distance=1,bias=0),
                 highlightExpansion=dict(threshold=1,gain=0))
             if additive:p['composite']='additive'
+            if coplanar:p['depthCompare']='less' if kind=='coplanar-less' else 'less-or-equal'
             model['images']=[dict(uri=png_uri(np.full((1,1,4),255,dtype=np.uint8)))]
             model['textures']=[dict(source=0)]
             model['materials']=[dict(name='FogSurface',alphaMode='BLEND',doubleSided=True,
@@ -57,7 +60,7 @@ def run(player, output, validation, selected):
                 front['components']['azure.object-shadow']=component('azure.object-shadow',dict(
                     enabled=True,center=[0,0,0],halfExtents=[2,2,2],normalBias=.1,lightBias=.05,
                     filterRadiusX=4,filterRadiusY=2,atlasPage=6))
-            if kind=='document':
+            if kind in ('document','coplanar-document'):
                 image_id='11111111-1111-4111-8111-111111111111';material_id='22222222-2222-4222-8222-222222222222'
                 Image.new('RGBA',(1,1),(255,255,255,255)).save(assets/'white.png')
                 (assets/'white.png.azmeta').write_text(json.dumps(dict(schemaVersion=1,id=image_id,settings={},dependencies=[])))
@@ -104,7 +107,7 @@ def run(player, output, validation, selected):
                 (assets/'display.azlut').write_bytes(b'AZLUT001'+struct.pack('<I',len(encoded))+encoded+struct.pack('<32f',*([.03,.05,.08,1]*8)))
                 settings['gradeLut']=dict(schemaVersion=1,asset='assets:/display.azlut',exposureMultiplier=1)
             scene=dict(schemaVersion=1,id=name,sceneType='character',resources=[dict(id='surface',asset='assets:/surface.gltf'),dict(id='rear',asset='assets:/rear.gltf')],
-                nodes=[front,camera,dict(id='rear',resourceId='rear',components={'azure.transform':component('azure.transform',dict(translation=[0,0,-2],scale=[10,10,10]))})],
+                nodes=[front,camera,dict(id='rear',resourceId='rear',components={'azure.transform':component('azure.transform',dict(translation=[0,0,0 if coplanar else -2],scale=[10,10,10]))})],
                 lights=[],renderSettings=settings)
             if kind!='absent':scene['viewFog']=dict(schemaVersion=1,asset='assets:/view.azfog',enabled=kind!='disabled',projection=projection,captureView=view)
             (assets/'scene.azurelevel').write_text(json.dumps(scene))
@@ -137,8 +140,8 @@ def run(player, output, validation, selected):
                 def fog(color,depth,additive=False):
                     weight=np.clip((depth-projection['minimumViewDepth'])/projection['nearFadeWidth'],0,1) if active else 0
                     return color*(1+(trans-1)*weight)+(0 if additive else scatter*weight)
-                expected=fog(np.array([.07,.09,.11])*(.25 if kind=='linear-additive' else 1),5)
-                if covered:
+                expected=fog(np.array([.07,.09,.11])*(.25 if kind=='linear-additive' else 1),3 if coplanar else 5)
+                if covered and kind!='coplanar-less':
                     raw_front=np.array([.45,.25,.1])*(.25 if normalized else 1)
                     front_color=raw_front if kind=='none' else fog(raw_front,3,additive)
                     expected=expected+front_color*.5 if additive else expected*.5+front_color*.5

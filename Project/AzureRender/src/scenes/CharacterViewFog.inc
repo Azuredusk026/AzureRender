@@ -20,7 +20,7 @@ struct CharacterSceneRenderer::ViewFogState {
             if(pipeline)backend.destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
         }
     }
-    void initializePipelines(const RenderContext& context,const rhi::GraphicsPipelineDesc& base,
+    void initializePipelines(CharacterSceneRenderer& owner,const RenderContext& context,const rhi::GraphicsPipelineDesc& base,
         bool indexed,bool computeSkinning,const LoadedAsset& primary,const std::vector<std::unique_ptr<AdditionalResource>>& additional){
         releasePipelines();
         VkShaderModule vertex=VK_NULL_HANDLE,fragment=VK_NULL_HANDLE,layered=VK_NULL_HANDLE,layeredVertex=VK_NULL_HANDLE;
@@ -60,7 +60,7 @@ struct CharacterSceneRenderer::ViewFogState {
                     for(unsigned facing=0;facing<4;++facing){
                         material.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                         material.cullMode=facing>=2||!context.faceCullingEnabled?VK_CULL_MODE_NONE:VK_CULL_MODE_BACK_BIT;
-                        materials[additive][color][facing]=backend.createGraphicsPipeline(material);
+                        materials[additive][color][facing]=owner.createMaterialDepthPipeline(material);
                     }
                 }
             }
