@@ -1,0 +1,35 @@
+{
+  "status": "failed",
+  "cases": [
+    {
+      "log": "release-final-build.log",
+      "exitCode": 0,
+      "elapsedSeconds": 3.7292768000042997
+    },
+    {
+      "log": "release-final-contracts.log",
+      "exitCode": 0,
+      "elapsedSeconds": 36.87883519998286
+    },
+    {
+      "log": "debug-final-build.log",
+      "exitCode": 0,
+      "elapsedSeconds": 7.815333800041117
+    },
+    {
+      "log": "debug-final-contracts.log",
+      "exitCode": 0,
+      "elapsedSeconds": 56.191245800000615
+    },
+    {
+      "log": "devtools-final-release.log",
+      "exitCode": 0,
+      "elapsedSeconds": 158.01148649997776
+    },
+    {
+      "log": "devtools-final-debug.log",
+      "exitCode": 1,
+      "elapsedSeconds": 76.89212370000314
+    }
+  ]
+}

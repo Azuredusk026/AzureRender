@@ -1420,6 +1420,11 @@ if(BUILD_TESTING)
             --executable "$<TARGET_FILE:AzureShaderCompilerContractTests>"
             --config "${CMAKE_CURRENT_BINARY_DIR}/shader-reload.json" --dxc "${AZURE_DXC_EXECUTABLE}")
         set_tests_properties(AzureRender.ShaderCompilerContract PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
+        add_test(NAME AzureRender.ShaderCatalogCompilation COMMAND "${Python3_EXECUTABLE}"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shader_catalog.py"
+            --executable "$<TARGET_FILE:AzureShaderCompilerContractTests>"
+            --config "${CMAKE_CURRENT_BINARY_DIR}/shader-reload.json")
+        set_tests_properties(AzureRender.ShaderCatalogCompilation PROPERTIES TIMEOUT 120 RUN_SERIAL TRUE)
     endif()
     if(WIN32)
         add_test(NAME AzureRender.HotReload COMMAND AzureHotReloadTests
@@ -1438,6 +1443,11 @@ if(BUILD_TESTING)
         add_test(NAME AzureEditor.DevtoolsHost COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_devtools_host.py"
             --executable "$<TARGET_FILE:AzureRender>" --shader-config "${CMAKE_BINARY_DIR}/shader-reload.json")
         set_tests_properties(AzureEditor.DevtoolsHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
+        add_test(NAME AzureEditor.ShaderReloadHost COMMAND "${Python3_EXECUTABLE}"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shader_reload_host.py"
+            --executable "$<TARGET_FILE:AzureRender>"
+            --config "${CMAKE_BINARY_DIR}/shader-reload.json")
+        set_tests_properties(AzureEditor.ShaderReloadHost PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 420)
     endif()
     add_executable(AzureModelProtocolTests tests/ModelProtocolTests.cpp)
     target_link_libraries(AzureModelProtocolTests PRIVATE AzureAI)

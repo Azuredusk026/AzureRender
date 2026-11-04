@@ -30,6 +30,23 @@ void wait(ShaderHotReloader& service){const auto deadline=std::chrono::steady_cl
 }
 int main(int argc,char** argv)try{
     if(argc==3&&std::string(argv[1])=="--snapshot-timing")return snapshotTiming(argv[2]);
+    if(argc==4&&std::string(argv[1])=="--compile-catalog"){
+        auto options=loadShaderReloadOptions(argv[2]);
+        options.scratchRoot=std::filesystem::absolute(std::filesystem::u8path(argv[3]));
+        const auto snapshot=snapshotShaders(options);const std::atomic<bool> cancelled{false};
+        const auto start=std::chrono::steady_clock::now();
+        const auto result=compileShaderCandidate(options,snapshot,1,cancelled);
+        std::size_t exact=0;
+        if(result.passed)for(const auto& program:options.programs)
+            if(read(result.candidate.directory/program.output)==read(options.binaryRoot/program.output))++exact;
+        const nlohmann::json report={{"status",result.passed&&exact==options.programs.size()?"passed":"failed"},
+            {"programs",options.programs.size()},{"byteExactPrograms",exact},{"passed",result.passed},
+            {"cancelled",result.cancelled},{"diagnostic",result.diagnostic},{"timeoutMs",options.timeoutMs},
+            {"elapsedSeconds",std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count()},
+            {"fingerprint",snapshot.fingerprint}};
+        write(options.scratchRoot/"result.json",report.dump(2)+"\n");std::cout<<report.dump()<<'\n';
+        return result.passed&&exact==options.programs.size()?0:1;
+    }
     require(argc==4,"Expected generated descriptor, DXC and new work directory");
     const auto generated=loadShaderReloadOptions(argv[1]);const auto complete=snapshotShaders(generated);
     require(!complete.files.empty()&&!complete.fingerprint.empty(),"Complete source snapshot is empty");
@@ -66,6 +83,24 @@ int main(int argc,char** argv)try{
     auto candidate=service.candidate();require(candidate.has_value(),"Complete mixed candidate missing");
     for(const auto name:{"probe.comp.spv","probe.hlsl.spv"}){require(read(candidate->directory/name).size()>20,"Real SPIR-V output missing");std::filesystem::copy_file(candidate->directory/name,root/"verified"/name);}
     service.finishCandidate(true,{});const auto active=service.status().activeGeneration;
+    auto ordered=options;ordered.scratchRoot=root/"ordered";ordered.programs.clear();
+    auto earlier=options.programs[1];earlier.defines={"VALUE=8u"};earlier.output="ordered.spv";
+    auto later=options.programs[1];later.output="./ordered.spv";
+    ordered.programs={earlier,later};const std::atomic<bool> notCancelled{false};
+    const auto orderedResult=compileShaderCandidate(ordered,snapshotShaders(ordered),1,notCancelled);
+    require(orderedResult.passed,"Repeated-output compilation failed");
+    require(read(orderedResult.candidate.directory/"ordered.spv")==read(candidate->directory/"probe.hlsl.spv"),
+        "Repeated outputs must preserve descriptor order");
+
+    auto longOutput=options;longOutput.scratchRoot=root/"long-output";
+    longOutput.programs[0].output=std::string(190,'g')+".spv";
+    longOutput.programs[1].output=std::string(190,'h')+".spv";
+    const auto longResult=compileShaderCandidate(longOutput,snapshotShaders(longOutput),1,notCancelled);
+    require(longResult.passed,"Long GLSL and HLSL output paths must compile");
+    require(read(longResult.candidate.directory/longOutput.programs[0].output)==read(candidate->directory/"probe.comp.spv"),
+        "Long GLSL output differs from regular compilation");
+    require(read(longResult.candidate.directory/longOutput.programs[1].output)==read(candidate->directory/"probe.hlsl.spv"),
+        "Long HLSL output differs from regular compilation");
     write(root/"source/probe.hlsl","invalid shader syntax\n");service.requestRebuild();wait(service);
     require(service.status().state==ShaderReloadState::Error&&service.status().activeGeneration==active,"HLSL failure must preserve active generation");
     require(read(candidate->directory/"probe.hlsl.spv")==read(root/"verified/probe.hlsl.spv"),"Failed HLSL changed active bytes");

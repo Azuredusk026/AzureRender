@@ -12,6 +12,11 @@ CMake 从实际程序列表生成该文件。
 一版描述的程序容量为 512。二版描述通过必填字段 `maximumPrograms` 声明容量，允许一至 1024 的整数。实际程序列表须位于一至所选容量之间。构建描述按完整着色器目录的项数生成容量。
 候选编译和取消共用所属任务的六十秒上限。
 
+独立输出最多使用八个并行编译进程。
+重复输出及非 ASCII 输出名称采用声明顺序。
+全部编译任务结束后，服务才发布或回收候选。
+每个进程保持独立句柄、输出管道及任务所有权。
+
 | 字段 | 作用 |
 | --- | --- |
 | `sourceRoot` | 源文件及包含依赖的快照根目录 |
@@ -47,6 +52,10 @@ CMake 从实际程序列表生成该文件。
 最后使用所属程序的输出选项和候选目标。
 编译失败与诊断关联所属事务。
 
+Windows 长输出路径采用完整路径前缀。
+GLSL 与 HLSL 共用输出路径转换。
+工作目录遵循系统进程创建约束。
+
 ## DXC 与投影程序
 
 GLSL 程序使用生成描述中的 glslc。
@@ -65,6 +74,10 @@ GLSL 程序使用生成描述中的 glslc。
 两类读取和指纹循环同时核对完整内容。
 该输出用于定位编辑帧成本。
 
+`AzureRender.ShaderCatalogCompilation` 检查完整目录。
+测试使用生产编译预算，并逐份对照常规构建。
+重复输出顺序及长路径由混合编译夹具验证。
+
 ```powershell
 .\build\ninja-msvc-debug\AzureShaderCompilerContractTests.exe `
   --snapshot-timing .\build\ninja-msvc-debug\shader-reload.json
@@ -81,3 +94,4 @@ GLSL 程序使用生成描述中的 glslc。
 文件锁导致的退休延迟由服务记录并重试。
 重载选项的容量、字段及路径校验发生在编译前。
 双配置及混合编译证据见[契约验证](../acceptance/recovery/shader-compiler-contract.md)。
+完整目录、长路径及独立宿主恢复见[重载核验](../acceptance/recovery/shader-catalog-reload.md)。

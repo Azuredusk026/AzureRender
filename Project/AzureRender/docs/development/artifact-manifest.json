@@ -1140,7 +1140,10 @@
       "litSurfacesPlayableCandidate": "qualified-lit-surfaces-playable/playable.azureproject",
       "warmPlayableDelivery": "docs/acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json",
       "litSurfacesPackage": "lit-surfaces-delivery/独立游戏 中文 空格/完整联合场景显示验证.exe",
-      "litSurfacesManifestSha256": "a41a2fee04cb51e2b9f3c21e46b1ea1f0688f8c4466706b7100d71526761b3d0"
+      "litSurfacesManifestSha256": "a41a2fee04cb51e2b9f3c21e46b1ea1f0688f8c4466706b7100d71526761b3d0",
+      "shaderCatalogReload": "docs/acceptance/recovery/evidence/2026-11-05/shader-catalog-reload/results.json",
+      "shaderReloadHostStatus": "passed-debug-release-two-workflows",
+      "fullDebugEditorStatus": "failed-thumbnail-refresh-before-shader-recovery"
     },
     {
       "path": "runs/20261104-001359-face-masked-rim-ff43bf",

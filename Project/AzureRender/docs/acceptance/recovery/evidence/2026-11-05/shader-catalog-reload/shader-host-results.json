@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "configuration": "release",
+      "exitCode": 0,
+      "elapsedSeconds": 92.84353170002578,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/test_shader_reload_host.py",
+        "--executable",
+        "build/ninja-msvc-release/AzureRender.exe",
+        "--config",
+        "build/ninja-msvc-release/shader-reload.json",
+        "--output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-release"
+      ]
+    },
+    {
+      "configuration": "debug",
+      "exitCode": 0,
+      "elapsedSeconds": 140.75350380002055,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/test_shader_reload_host.py",
+        "--executable",
+        "build/ninja-msvc-debug/AzureRender.exe",
+        "--config",
+        "build/ninja-msvc-debug/shader-reload.json",
+        "--output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug"
+      ]
+    }
+  ]
+}

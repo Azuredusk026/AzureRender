@@ -1,9 +1,13 @@
 #include "ShaderCompileJob.hpp"
 #include "platform/ProcessRunner.hpp"
 #include <chrono>
+#include <algorithm>
 #include <cstring>
 #include <fstream>
+#include <future>
 #include <iomanip>
+#include <mutex>
+#include <set>
 #include <sstream>
 #include <stdexcept>
 namespace azurerender {
@@ -17,6 +21,17 @@ std::string read(const std::filesystem::path& path){
     std::ifstream input(path,std::ios::binary);
     if(!input)throw std::runtime_error("Shader input unavailable: "+path.u8string());
     return {std::istreambuf_iterator<char>(input),std::istreambuf_iterator<char>()};
+}
+std::string compilerOutputPath(const std::filesystem::path& path){
+#ifdef _WIN32
+    auto value=std::filesystem::absolute(path).lexically_normal().native();
+    if(value.size()>=260 && value.rfind(L"\\\\?\\",0)!=0){
+        value=value.rfind(L"\\\\",0)==0?L"\\\\?\\UNC\\"+value.substr(2):L"\\\\?\\"+value;
+    }
+    return std::filesystem::path(value).u8string();
+#else
+    return path.u8string();
+#endif
 }
 }
 ShaderSourceSnapshot snapshotShaders(const ShaderReloadOptions& options){
@@ -77,8 +92,25 @@ ShaderCompileResult compileShaderCandidate(const ShaderReloadOptions& options,co
                     std::filesystem::create_directories(target.parent_path());std::filesystem::copy_file(entry.path(),target);
                 }
         const auto deadline=std::chrono::steady_clock::now()+std::chrono::milliseconds(options.timeoutMs);
+        // Compilers own separate processes and distinct outputs. Preserve the
+        // declared order for aliases or non-ASCII output names, whose filesystem
+        // case rules may differ from the portable catalog comparison.
+        std::set<std::string> outputs;bool independent=true;
         for(const auto& program:options.programs){
-            if(cancelled){result.cancelled=true;throw std::runtime_error("Shader compilation cancelled");}
+            auto key=program.output.lexically_normal().generic_u8string();
+            for(auto& c:key){const auto value=static_cast<unsigned char>(c);
+                if(value>=128)independent=false;
+                if(c>='A'&&c<='Z')c=static_cast<char>(c-'A'+'a');
+            }
+            if(!outputs.insert(key).second)independent=false;
+        }
+        std::atomic<std::size_t> next{0};std::atomic<bool> failed{false};
+        std::mutex diagnosticMutex;std::string diagnostic;
+        const auto compile=[&]{try{while(!failed){
+            const auto index=next.fetch_add(1);
+            if(index>=options.programs.size())return;
+            const auto& program=options.programs[index];
+            if(cancelled)throw std::runtime_error("Shader compilation cancelled");
             const auto remaining=std::chrono::duration_cast<std::chrono::milliseconds>(deadline-std::chrono::steady_clock::now()).count();
             if(remaining<=0)throw std::runtime_error("Shader compilation deadline exceeded");
             const auto target=result.candidate.directory/program.output;
@@ -87,13 +119,22 @@ ShaderCompileResult compileShaderCandidate(const ShaderReloadOptions& options,co
             request.timeoutMs=static_cast<std::uint32_t>(remaining);
             request.arguments=program.arguments;
             for(const auto& define:program.defines)request.arguments.push_back("-D"+define);
-            request.arguments.insert(request.arguments.end(),{"-I",sources.u8string(),(sources/program.source).u8string(),program.outputOption,target.u8string()});
+            request.arguments.insert(request.arguments.end(),{"-I",sources.u8string(),(sources/program.source).u8string(),program.outputOption,compilerOutputPath(target)});
             const auto process=runProcess(request,cancelled);
-            if(!process.passed){result.cancelled=process.cancelled;throw std::runtime_error(process.diagnostic+"\n"+process.output);}
+            if(!process.passed)throw std::runtime_error(process.diagnostic+"\n"+process.output);
             const auto code=read(target);std::uint32_t magic=0;
             if(code.size()>=4)std::memcpy(&magic,code.data(),4);
             if(code.size()<20 || code.size()%4 || magic!=0x07230203)throw std::runtime_error("Compiler candidate is not SPIR-V");
-        }
+        }}catch(const std::exception& error){
+            std::lock_guard<std::mutex> lock(diagnosticMutex);
+            if(diagnostic.empty())diagnostic=error.what();failed=true;
+        }};
+        const auto workers=independent?std::min<std::size_t>(8,options.programs.size()):1;
+        std::vector<std::future<void>> jobs;jobs.reserve(workers);
+        for(std::size_t i=0;i<workers;++i)jobs.push_back(std::async(std::launch::async,compile));
+        for(auto& job:jobs)job.get();
+        result.cancelled=cancelled;
+        if(failed)throw std::runtime_error(diagnostic);
         result.passed=true;
     }catch(const std::exception& error){result.diagnostic=std::string(error.what()).substr(0,65536);}
     return result;

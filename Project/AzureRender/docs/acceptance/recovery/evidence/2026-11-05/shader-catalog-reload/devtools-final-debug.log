@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 209, in <module>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 209, in <listcomp>
+    results = [run(args.executable.resolve(), output, workflow, args.shader_config.resolve())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 130, in run
+    asset_path.write_text(json.dumps(content),encoding='utf-8');frames(25)
+                                                                ^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 80, in frames
+    call('wait-frames', frames=count, timeoutMs=10000)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_devtools_host.py", line 70, in call
+    response = exchange(endpoint, token, dict(op=op, **fields))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_validation_protocol.py", line 19, in exchange
+    line = stream.readline(1024 * 1024 + 1)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Tools\Python311\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out

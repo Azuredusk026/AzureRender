@@ -211,6 +211,9 @@ Debug 重开的四帧与 Release 逐字节一致。
 受光表面的[独立交付](../acceptance/nr/lit-surfaces-delivery.md)检查通过。
 移动目录重开的三帧逐字节一致。
 隔离源工程和安装目录后完成 540 帧路线。
+完整着色目录及独立编辑恢复见[工作流核验](../acceptance/recovery/shader-catalog-reload.md)。
+两种构建的 535 份输出与常规构建逐字节一致。
+Debug 综合交互保留资产刷新超时待项。
 严格字节及完整联合画质继续核验。
 完整角色的皮肤、发丝、描边及透明阶段继续执行 Q1。
 服饰一、二的描边覆盖见[固定姿态核验](2026-11-03-character-reference-stages.md)。

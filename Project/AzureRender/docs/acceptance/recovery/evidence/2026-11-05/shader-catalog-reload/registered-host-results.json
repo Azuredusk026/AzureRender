@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "configuration": "release",
+      "exitCode": 0
+    },
+    {
+      "configuration": "debug",
+      "exitCode": 0
+    }
+  ]
+}

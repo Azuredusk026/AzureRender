@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "workflow": "exploration",
+      "status": "passed",
+      "programs": 535,
+      "activeGeneration": 2,
+      "outputBytesExact": true,
+      "timings": {
+        "Error": 9.34299999999348,
+        "Idle": 45.07799999997951,
+        "Cancelled": 1.5940000000409782
+      },
+      "physicalKeyboardMouse": "not performed",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe",
+        "--editor-project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration\\Project with spaces\\project.azureproject",
+        "--editor-close-policy",
+        "save",
+        "--width",
+        "960",
+        "--height",
+        "540",
+        "--fixed-frame-step",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration",
+        "--shader-reload",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration\\reload.json",
+        "--validation-token-env",
+        "AZURE_SHADER_HOST_TOKEN",
+        "--validation-endpoint",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration\\endpoint.json",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\exploration\\runtime.json"
+      ]
+    },
+    {
+      "workflow": "inspector",
+      "status": "passed",
+      "programs": 535,
+      "activeGeneration": 2,
+      "outputBytesExact": true,
+      "timings": {
+        "Error": 6.9689999999827705,
+        "Idle": 43.84399999998277,
+        "Cancelled": 2.047000000020489
+      },
+      "physicalKeyboardMouse": "not performed",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRender.exe",
+        "--editor-project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector\\Project with spaces\\project.azureproject",
+        "--editor-close-policy",
+        "save",
+        "--width",
+        "960",
+        "--height",
+        "540",
+        "--fixed-frame-step",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector",
+        "--shader-reload",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector\\reload.json",
+        "--validation-token-env",
+        "AZURE_SHADER_HOST_TOKEN",
+        "--validation-endpoint",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector\\endpoint.json",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-host-regression\\shader-host-final-debug\\inspector\\runtime.json"
+      ]
+    }
+  ]
+}
