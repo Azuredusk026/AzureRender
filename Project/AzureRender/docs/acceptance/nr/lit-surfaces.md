@@ -89,9 +89,9 @@ Debug 重开的四帧与 Release 逐字节一致。
 
 路线核对行走、疾跑、焦点释放及脚本重启。
 相机遮挡、实际位移和最终站立状态均通过。
-独立发布及编辑器保存继续按交付条件核验。
+编辑器保存、目录移动及[独立发布](lit-surfaces-delivery.md)检查通过。
 测量和输入见[运动收据](evidence/2026-11-05/lit-surfaces-motion/results.json)。
 
-主候选继续采用已核验的暖肤色工程。
+主候选采用完成交付检查的受光表面联合工程。
 候选入口和状态由[开发总计划](../../plans/azure-engine-plan.md)持有。
 测量及程序摘要见[验证收据](evidence/2026-11-05/lit-surfaces/results.json)。

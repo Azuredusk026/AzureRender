@@ -13,3 +13,4 @@ assets_public/resource_validation/game/** -text whitespace=blank-at-eol,blank-at
 docs/acceptance/ev/evidence/** -text -whitespace
 docs/acceptance/nr/evidence/2026-11-05/lit-surfaces/** -text -whitespace
 docs/acceptance/nr/evidence/2026-11-05/lit-surfaces-motion/** -text -whitespace
+docs/acceptance/nr/evidence/2026-11-05/lit-surfaces-delivery/** -text -whitespace

@@ -208,7 +208,10 @@ KK、脸部阴影和色带具有非零的原生区域响应。
 受光表面的[联合序列](../acceptance/nr/evidence/2026-11-05/lit-surfaces-motion/results.json)完成 192 帧采集。
 Debug 重开的四帧与 Release 逐字节一致。
 两种构建各完成 540 帧可玩输入回放。
-严格字节条件与独立交付继续核验。
+受光表面的[独立交付](../acceptance/nr/lit-surfaces-delivery.md)检查通过。
+移动目录重开的三帧逐字节一致。
+隔离源工程和安装目录后完成 540 帧路线。
+严格字节及完整联合画质继续核验。
 完整角色的皮肤、发丝、描边及透明阶段继续执行 Q1。
 服饰一、二的描边覆盖见[固定姿态核验](2026-11-03-character-reference-stages.md)。
 虹膜按[眼部输入](../acceptance/nr/eye-npr-inputs.md)核验独立基准和联合动作。

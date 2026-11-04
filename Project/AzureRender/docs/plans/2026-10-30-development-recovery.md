@@ -200,6 +200,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/reinstall/Restore-Evid
 
 ### 构建与环境验收
 
+编辑器可执行文件的构建目标为 `AzureRender`。
+`AzureEditor` 提供宿主使用的静态库。
+实际入口及更新命令见[源码导航](../development/source-navigation.md#宿主构建与运行入口)。
+交付验证核对宿主、着色器与内容输入指纹。
+
 主构建复用 `msvc-debug` 和 `msvc-release` 预设。
 现有备份缺少这两份主构建产物，需要重新配置。
 恢复脚本的 `-Configure` 可用于独立迁移诊断。

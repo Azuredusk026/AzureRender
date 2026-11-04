@@ -1091,7 +1091,7 @@
       "retention": "对应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "implementationPlan": "docs/plans/2026-11-03-character-reference-stages.md",
-      "primaryProject": "skin-warm-joint/joint-materials.azureproject",
+      "primaryProject": "qualified-lit-surfaces-joint-v4/joint-materials.azureproject",
       "outlineTemporalCoverage": "docs/acceptance/nr/evidence/2026-11-04/outline-temporal-coverage/results.json",
       "fixedFloorControls": "docs/acceptance/nr/evidence/2026-11-04/floor-fixed-controls/results.json",
       "evidence": "docs/acceptance/nr/evidence/2026-11-04/cloth-emission/results.json",
@@ -1125,7 +1125,7 @@
       "clothReflection": "docs/acceptance/nr/evidence/2026-11-04/cloth-reflection/results.json",
       "floorIrradiance": "docs/acceptance/nr/evidence/2026-11-04/floor-irradiance/results.json",
       "playableRoute": "docs/acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json",
-      "playableDelivery": "docs/acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json",
+      "playableDelivery": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces-delivery/results.json",
       "skinWarmth": "docs/acceptance/nr/evidence/2026-11-04/skin-warmth/results.json",
       "shaderReloadCapacity": "docs/acceptance/nr/evidence/2026-11-04/shader-reload-capacity/results.json",
       "projectedSurface": "docs/acceptance/nr/evidence/2026-11-04/projected-surface/results.json",
@@ -1135,9 +1135,12 @@
       "litSurfaces": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces/results.json",
       "litSurfacesStaticProject": "qualified-lit-surfaces-static/qualified.azureproject",
       "litSurfacesJointCandidate": "qualified-lit-surfaces-joint-v4/joint-materials.azureproject",
-      "litSurfacesJointStatus": "motion-and-development-route-passed",
+      "litSurfacesJointStatus": "motion-route-and-package-passed",
       "litSurfacesMotion": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces-motion/results.json",
-      "litSurfacesPlayableCandidate": "qualified-lit-surfaces-playable/playable.azureproject"
+      "litSurfacesPlayableCandidate": "qualified-lit-surfaces-playable/playable.azureproject",
+      "warmPlayableDelivery": "docs/acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json",
+      "litSurfacesPackage": "lit-surfaces-delivery/独立游戏 中文 空格/完整联合场景显示验证.exe",
+      "litSurfacesManifestSha256": "a41a2fee04cb51e2b9f3c21e46b1ea1f0688f8c4466706b7100d71526761b3d0"
     },
     {
       "path": "runs/20261104-001359-face-masked-rim-ff43bf",

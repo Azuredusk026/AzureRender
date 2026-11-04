@@ -1,0 +1,333 @@
+{
+  "status": "passed",
+  "scope": "Q3 playable delivery; complete visual acceptance remains failed-user-review",
+  "source": "qualified-lit-surfaces-playable/playable.azureproject",
+  "primaryJoint": "qualified-lit-surfaces-joint-v4/joint-materials.azureproject",
+  "package": "lit-surfaces-delivery/独立游戏 中文 空格/完整联合场景显示验证.exe",
+  "files": 2718,
+  "manifestSha256": "a41a2fee04cb51e2b9f3c21e46b1ea1f0688f8c4466706b7100d71526761b3d0",
+  "playerSha256": "642ad4d341fc9652aa41c796cca0b43debc9c3706ea68aa8e4ef5a0193e245fc",
+  "editorSha256": "dad759e9ad4e1ccd8764e27d2d827139ffef72b841ddcd1bede0be60e090088e",
+  "staleEditorSha256": "ffc88204f4c973c1233e90ca8b0326bc16a3e1393f6cc9e63156eb7984f3945b",
+  "editorExecutableTarget": "AzureRender",
+  "editorLibraryTarget": "AzureEditor",
+  "materialSlots": 14,
+  "reflectionLayers": 33,
+  "reflectionAtlasSha256": "be02661d0e6030f7c572a78805e096c27342bc12bb00aaeda26c92582ff1e0c7",
+  "warmSkinFactor": [
+    0.98,
+    0.93,
+    0.89,
+    1
+  ],
+  "savedAndMovedFrames": [
+    {
+      "frame": 0,
+      "changedPixels": 0,
+      "referenceSha256": "3a6e2595193e083ebdc74bc628a55a37d564ae6064f804ff7fde7e10ebcb44fe",
+      "actualSha256": "3a6e2595193e083ebdc74bc628a55a37d564ae6064f804ff7fde7e10ebcb44fe"
+    },
+    {
+      "frame": 1,
+      "changedPixels": 0,
+      "referenceSha256": "4df57d1cdf6d7bb9e77eb2806eaa0b4fa982fa01b777834e95f2449fd2dccde9",
+      "actualSha256": "4df57d1cdf6d7bb9e77eb2806eaa0b4fa982fa01b777834e95f2449fd2dccde9"
+    },
+    {
+      "frame": 2,
+      "changedPixels": 0,
+      "referenceSha256": "fd13bf4ff3fb093941f25564d28208aafe4e559688af5da9c2e2bde6a16ecea7",
+      "actualSha256": "fd13bf4ff3fb093941f25564d28208aafe4e559688af5da9c2e2bde6a16ecea7"
+    }
+  ],
+  "sourceAndEngineUnavailable": true,
+  "manifestTamperRejected": true,
+  "route": {
+    "status": "passed",
+    "frames": 540,
+    "actions": 13,
+    "walkSpeed": 1.1999988555908203,
+    "sprintSpeed": 3.000011444091797,
+    "walkClip": 7,
+    "sprintClip": 8,
+    "focusReleased": true,
+    "revisionTransitions": [
+      [
+        451,
+        2,
+        3
+      ]
+    ],
+    "finalIdleGrounded": true,
+    "obstructedFrames": 136,
+    "cameraDistanceRange": [
+      1.0000006646093962,
+      1.0000006646093962
+    ],
+    "cameraRelativeForwardCosine": 0.9999999998540834,
+    "rawLensForwardCosine": -0.3872228649121946,
+    "cameraYawDegrees": -67.5,
+    "cameraSensitivitySource": "src/ecs/GameComponents.hpp: default .15 degrees per input unit",
+    "minimumCharacterHeight": 1.0317745208740234,
+    "scope": "Production fixed-step input, actual displacement, animation samples, focus, camera collision and script restart. Planter traversal is not a wall-blocking or native-collision-equivalence result."
+  },
+  "defaultResolution": [
+    1920,
+    1080
+  ],
+  "programCatalogSha256": "7ce3d2559a8603f1e358531ad5abfab4478f5222742cb6d45575f19ad4409341",
+  "records": [
+    {
+      "path": "isolation-summary.json",
+      "sha256": "0d79aedd37ad8c5cec200d4d15ccdc9fd37701f43851a8f52f1e2cf68b20cd67",
+      "source": "isolation-summary.json",
+      "sourceSha256": "0d79aedd37ad8c5cec200d4d15ccdc9fd37701f43851a8f52f1e2cf68b20cd67",
+      "sourceBytes": 2579
+    },
+    {
+      "path": "publication.json",
+      "sha256": "038c3ea7224a3bca6253c991a94babea7f585faacaee1f506cb6b19dbbf08b2a",
+      "source": "publication.json",
+      "sourceSha256": "038c3ea7224a3bca6253c991a94babea7f585faacaee1f506cb6b19dbbf08b2a",
+      "sourceBytes": 1752
+    },
+    {
+      "path": "save-semantic-verification.json",
+      "sha256": "ffc38b4876df56d3d3f40b92a62f81245d4fcb0a8b928256a6c2ace754af092e",
+      "source": "save-semantic-verification.json",
+      "sourceSha256": "ffc38b4876df56d3d3f40b92a62f81245d4fcb0a8b928256a6c2ace754af092e",
+      "sourceBytes": 948
+    },
+    {
+      "path": "package-reference-closure.json.gz",
+      "sha256": "1d9e2190e9af00bd4a2111607170b4df8156ab199a5d75f7d7f4679c89523d28",
+      "source": "package-reference-closure.json",
+      "sourceSha256": "b4a965b581dd846da882aa97ecee44d63f3eae3066a81b771989937aff0ae2f5",
+      "sourceBytes": 189162
+    },
+    {
+      "path": "source-inputs.json.gz",
+      "sha256": "315891d375f578ea5b7595780467d80debf40c67abdba8d692c75f4081b57b23",
+      "source": "source-inputs.json",
+      "sourceSha256": "97130cc753333368a4936ead27c830e8bcb4124938a5e02a5510be5ed0683fdb",
+      "sourceBytes": 325528
+    },
+    {
+      "path": "install-verification.json",
+      "sha256": "0290a25f342318b47499af6dabeea614b09e1059f756c2cb3471c604447425cb",
+      "source": "install-verification.json",
+      "sourceSha256": "0290a25f342318b47499af6dabeea614b09e1059f756c2cb3471c604447425cb",
+      "sourceBytes": 1794
+    },
+    {
+      "path": "install-verification-before-host-relink.json",
+      "sha256": "78e9f5d532883de86ec9ea0c4ba34a6ee60be364881c4adce896d3d4fa433e57",
+      "source": "install-verification-before-host-relink.json",
+      "sourceSha256": "78e9f5d532883de86ec9ea0c4ba34a6ee60be364881c4adce896d3d4fa433e57",
+      "sourceBytes": 1794
+    },
+    {
+      "path": "editor-save-red-stale-host--summary.json",
+      "sha256": "4d663c5788968146c839a8ca9dd0501e391a94c5db78eb3e998be7edee68bf4e",
+      "source": "editor-save-red-stale-host/summary.json",
+      "sourceSha256": "4d663c5788968146c839a8ca9dd0501e391a94c5db78eb3e998be7edee68bf4e",
+      "sourceBytes": 1242
+    },
+    {
+      "path": "editor-save-red-stale-host--editor.log",
+      "sha256": "665b6769351519dce5fff35dad79cdb171373808e25975ee0715e5a62e5611f5",
+      "source": "editor-save-red-stale-host/editor.log",
+      "sourceSha256": "665b6769351519dce5fff35dad79cdb171373808e25975ee0715e5a62e5611f5",
+      "sourceBytes": 2026
+    },
+    {
+      "path": "editor-save--summary.json",
+      "sha256": "690e05d1aae92e2b04961a0be7c25dd4f4f20bb3d3ce52ac8cf82c2bab018d52",
+      "source": "editor-save/summary.json",
+      "sourceSha256": "690e05d1aae92e2b04961a0be7c25dd4f4f20bb3d3ce52ac8cf82c2bab018d52",
+      "sourceBytes": 1491
+    },
+    {
+      "path": "editor-save--editor.log",
+      "sha256": "cde053c8942bb44b059054b853551415928c107b485a799945b9ed9e54c969a1",
+      "source": "editor-save/editor.log",
+      "sourceSha256": "cde053c8942bb44b059054b853551415928c107b485a799945b9ed9e54c969a1",
+      "sourceBytes": 13957
+    },
+    {
+      "path": "moved-reopen--summary.json",
+      "sha256": "2687d99e79eb46768ea10b79bc30c31a26aa9d6d2d2c05f0826fdaee165ce23e",
+      "source": "moved-reopen/summary.json",
+      "sourceSha256": "2687d99e79eb46768ea10b79bc30c31a26aa9d6d2d2c05f0826fdaee165ce23e",
+      "sourceBytes": 2125
+    },
+    {
+      "path": "moved-reopen--player.log",
+      "sha256": "c8391ec0b2c8b09a6f06485931b8f14a5b59b878bab9be6dbc8fb7d6a300ace7",
+      "source": "moved-reopen/player.log",
+      "sourceSha256": "c8391ec0b2c8b09a6f06485931b8f14a5b59b878bab9be6dbc8fb7d6a300ace7",
+      "sourceBytes": 13680
+    },
+    {
+      "path": "native-default--pixel-verification.json",
+      "sha256": "6e416e56b76b7c2ab71fc96891e7c3bdd714ef0e2b48aa6cd1ce3e14f4185350",
+      "source": "native-default/pixel-verification.json",
+      "sourceSha256": "6e416e56b76b7c2ab71fc96891e7c3bdd714ef0e2b48aa6cd1ce3e14f4185350",
+      "sourceBytes": 905
+    },
+    {
+      "path": "native-default--launcher.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "native-default/launcher.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceBytes": 0
+    },
+    {
+      "path": "native-route--behavior-verification.json",
+      "sha256": "43c9ff37075e9410d9779b628e0e724a07de12325212fc58ddd0c9cb54a5f8a4",
+      "source": "native-route/behavior-verification.json",
+      "sourceSha256": "43c9ff37075e9410d9779b628e0e724a07de12325212fc58ddd0c9cb54a5f8a4",
+      "sourceBytes": 878
+    },
+    {
+      "path": "native-route--launcher.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "native-route/launcher.log",
+      "sourceSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceBytes": 0
+    },
+    {
+      "path": "relink-editor-release.log",
+      "sha256": "71db034421af64067b5e6d11a4046ccdc50df3781c8e90b4ab91ecab697f5a56",
+      "source": "relink-editor-release.log",
+      "sourceSha256": "71db034421af64067b5e6d11a4046ccdc50df3781c8e90b4ab91ecab697f5a56",
+      "sourceBytes": 1728
+    },
+    {
+      "path": "relink-editor-debug.log",
+      "sha256": "5fb7576966cadbd637e6b211a591f5c90de720ce1d6f122c8152a4f6946cb35c",
+      "source": "relink-editor-debug.log",
+      "sourceSha256": "5fb7576966cadbd637e6b211a591f5c90de720ce1d6f122c8152a4f6946cb35c",
+      "sourceBytes": 1726
+    },
+    {
+      "path": "editor-actions.json",
+      "sha256": "fe869a5fb7aa43aadcfafa4a6972b3af69d476b9725d8acb562698bcfb852ab9",
+      "source": "editor-actions.json",
+      "sourceSha256": "fe869a5fb7aa43aadcfafa4a6972b3af69d476b9725d8acb562698bcfb852ab9",
+      "sourceBytes": 50
+    },
+    {
+      "path": "package-actions.json",
+      "sha256": "b0547d75e4426d96d683709aa8f627d5646bff38ed19ff243869cfe563576ad6",
+      "source": "package-actions.json",
+      "sourceSha256": "b0547d75e4426d96d683709aa8f627d5646bff38ed19ff243869cfe563576ad6",
+      "sourceBytes": 1307
+    },
+    {
+      "path": "prepare.py",
+      "sha256": "48b6abcb58c92e911eae5e016710b1cce3d1239c0acdbf7fd8012a5921e1304b",
+      "source": "prepare.py",
+      "sourceSha256": "48b6abcb58c92e911eae5e016710b1cce3d1239c0acdbf7fd8012a5921e1304b",
+      "sourceBytes": 1363
+    },
+    {
+      "path": "save_editor.py",
+      "sha256": "a8f02ac25d795e3958634828e791d2685e79a4c937900f3cbd220dadb6e99a36",
+      "source": "save_editor.py",
+      "sourceSha256": "a8f02ac25d795e3958634828e791d2685e79a4c937900f3cbd220dadb6e99a36",
+      "sourceBytes": 1885
+    },
+    {
+      "path": "verify_saved.py",
+      "sha256": "eaf5ba1b388c2cb86d0250513af464c6219f203b116accf7f88cfe2552609ef9",
+      "source": "verify_saved.py",
+      "sourceSha256": "eaf5ba1b388c2cb86d0250513af464c6219f203b116accf7f88cfe2552609ef9",
+      "sourceBytes": 6030
+    },
+    {
+      "path": "move_reopen.py",
+      "sha256": "14e238fca82270dc50fda3524442c7f8528891d7a9ea962b5da54e454f871ea2",
+      "source": "move_reopen.py",
+      "sourceSha256": "14e238fca82270dc50fda3524442c7f8528891d7a9ea962b5da54e454f871ea2",
+      "sourceBytes": 2672
+    },
+    {
+      "path": "verify_install.py",
+      "sha256": "82e6adfcf4c904e5cdeafcde26595cea94286168faa79bcc9e3a4030c3cdc7d9",
+      "source": "verify_install.py",
+      "sourceSha256": "82e6adfcf4c904e5cdeafcde26595cea94286168faa79bcc9e3a4030c3cdc7d9",
+      "sourceBytes": 1925
+    },
+    {
+      "path": "publish.py",
+      "sha256": "e2a53cd3010dc2a026b5e5a953e8c0ad0f3483276cc28c03f8e1d144ab845af8",
+      "source": "publish.py",
+      "sourceSha256": "e2a53cd3010dc2a026b5e5a953e8c0ad0f3483276cc28c03f8e1d144ab845af8",
+      "sourceBytes": 3047
+    },
+    {
+      "path": "test_isolated_package.py",
+      "sha256": "6a868f9363ed206a099bd686cc1376a74d8a6e9e06d3d38fad1aad85bdf96e06",
+      "source": "test_isolated_package.py",
+      "sourceSha256": "6a868f9363ed206a099bd686cc1376a74d8a6e9e06d3d38fad1aad85bdf96e06",
+      "sourceBytes": 6767
+    },
+    {
+      "path": "verify_package_behavior.py",
+      "sha256": "4a97cfba125ca4dc96f69cfd5ddba7cc423fc5974a7b91ae8ce18b32a9b3d083",
+      "source": "verify_package_behavior.py",
+      "sourceSha256": "4a97cfba125ca4dc96f69cfd5ddba7cc423fc5974a7b91ae8ce18b32a9b3d083",
+      "sourceBytes": 3517
+    },
+    {
+      "path": "独立游戏 中文 空格--QUALITY.json",
+      "sha256": "00474324584a53cecc0d8433b2a96a43539908cf9000bb45e63cfdc0fc4b6c04",
+      "source": "独立游戏 中文 空格/QUALITY.json",
+      "sourceSha256": "00474324584a53cecc0d8433b2a96a43539908cf9000bb45e63cfdc0fc4b6c04",
+      "sourceBytes": 187
+    },
+    {
+      "path": "独立游戏 中文 空格--GAME-GUIDE.md",
+      "sha256": "750d37e2cc8575433c548dce907e27e7ece5e6959a60e1a1e4b28148f553da1f",
+      "source": "独立游戏 中文 空格/GAME-GUIDE.md",
+      "sourceSha256": "750d37e2cc8575433c548dce907e27e7ece5e6959a60e1a1e4b28148f553da1f",
+      "sourceBytes": 567
+    },
+    {
+      "path": "editor-save--runtime.json.gz",
+      "sha256": "a4a017a0a3136c3c96cd9654ceb64454d26e197a73827b02e4372cea91d37007",
+      "source": "editor-save/runtime.json",
+      "sourceSha256": "ff0304a30e6737a1f8bf8694dbd84404355f5b976d0643c576c35b3b6c35dfa6",
+      "sourceBytes": 440209
+    },
+    {
+      "path": "moved-reopen--runtime.json.gz",
+      "sha256": "860d046f300374c0b93d18db74ea928bd211a001a8e30b7ef5abe562fbd940b7",
+      "source": "moved-reopen/runtime.json",
+      "sourceSha256": "79b0a1eb309fec9516dc527b0e764a9de6c08432e3f6efca90c5634905c60fd4",
+      "sourceBytes": 318256
+    },
+    {
+      "path": "native-default--runtime.json.gz",
+      "sha256": "7ed2d8f9e79991c74f39c258bf015e10c9ca9fa6c1df1c5cfc986a7afd5b76f5",
+      "source": "native-default/runtime.json",
+      "sourceSha256": "8e980b85ac6e244e6fd2ff874115311d60039f6bfea3ca74dbb481fbb64c53c3",
+      "sourceBytes": 318256
+    },
+    {
+      "path": "native-route--runtime.json.gz",
+      "sha256": "9efa2654ac96b7e3fa059f162306eec4ce24d279941644820ca7a047f852f1c3",
+      "source": "native-route/runtime.json",
+      "sourceSha256": "603a71d5f871129382610ee10235c6354c004ff6a941271922e078c40f7266ec",
+      "sourceBytes": 2964006
+    },
+    {
+      "path": "独立游戏 中文 空格--game_manifest.json.gz",
+      "sha256": "125de56e1eb0b65ac0949cfdc7da2767c74d3c22229a401e7e8def3f22b2976a",
+      "source": "独立游戏 中文 空格/game_manifest.json",
+      "sourceSha256": "a41a2fee04cb51e2b9f3c21e46b1ea1f0688f8c4466706b7100d71526761b3d0",
+      "sourceBytes": 524701
+    }
+  ]
+}

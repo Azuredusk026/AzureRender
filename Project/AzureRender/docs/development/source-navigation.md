@@ -33,6 +33,23 @@
 | 应用装配与帧循环 | `src/app/`、`src/player/` | `AzureRenderHost`、`AzurePlayerHost` |
 | 自动验证服务 | `src/validation/` | `AzureValidation` |
 
+## 宿主构建与运行入口
+
+编辑器可执行文件由 `AzureRender` 目标生成。
+`AzureEditor` 是供宿主链接的静态库。
+修改共享代码或材质契约后，构建实际运行的宿主。
+Player 与编辑器分别核对程序和着色器指纹。
+
+```powershell
+.\tools\msvc_env.bat cmake --build --preset msvc-release --target AzureRender AzurePlayer AzureGameLauncher -j 3
+.\tools\msvc_env.bat cmake --build --preset msvc-debug --target AzureRender AzurePlayer AzureGameLauncher -j 3
+```
+
+安装包核对构建目录与安装目录的文件哈希。
+编辑器还需执行材质加载、保存与重开。
+发布包需在移动目录后独立运行。
+源码版本与实际宿主版本分别记录。
+
 ## 检索顺序
 
 `tools/code_query.py` 提供有界查询。
