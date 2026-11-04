@@ -73,9 +73,10 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateMaterialCoverage(material);
     const bool lit=(material.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!material.unlitTextureLayers.present&&material.materialClass!=AssetMaterialClass::Overlay;
-    const bool ordinary=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric
-        ||material.materialClass==AssetMaterialClass::Metal)&&!material.nprDiffuse.present&&!material.projectedHairRamp.present&&!material.eyeSurface.present;
-    validateMaterialLighting(material.environmentLighting,material.mainLightShadow,material.materialProfileVersion,lit,ordinary);
+    const bool microfacetClass=(material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Fabric
+        ||material.materialClass==AssetMaterialClass::Metal);
+    const bool ordinary=microfacetClass&&!material.nprDiffuse.present&&!material.projectedHairRamp.present&&!material.eyeSurface.present;
+    validateMaterialLighting(material.environmentLighting,material.mainLightShadow,material.materialProfileVersion,lit,ordinary,microfacetClass);
     const bool nprColorSurface=material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Skin
         ||material.materialClass==AssetMaterialClass::Fabric||material.materialClass==AssetMaterialClass::Metal;
     validateNprRampComposition(material.nprDiffuse.rampComposition,material.nprDiffuse.present&&lit&&nprColorSurface

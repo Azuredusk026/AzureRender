@@ -76,6 +76,38 @@ int main(){try{
     bool nonFiniteLightingRejected=false;try{(void)packMaterialSurfaceProfile(typedLighting);}
     catch(const std::exception& error){nonFiniteLightingRejected=std::string(error.what()).find("environmentLighting")!=std::string::npos;}
     require(nonFiniteLightingRejected,"Typed packing rejects non-finite environment intensity");
+    auto fitted=complete;
+    auto& fittedProfile=fitted["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["environmentLighting"];
+    fittedProfile={{"schemaVersion",1},{"specularModel","ggx-multiscatter-fit"}};
+    const auto fittedMaterial=MaterialData::parse(fitted).interpret([](const auto&){return std::filesystem::path();});
+    require(packMaterialSurfaceProfile(fittedMaterial).rows[21][1]==4.F,
+        "A fitted reflection receiver must preserve both scene source bindings");
+    auto rampFabric=fittedMaterial;
+    rampFabric.materialClass=AssetMaterialClass::Fabric;
+    rampFabric.nprDiffuse.present=true;
+    require(packMaterialSurfaceProfile(rampFabric).rows[21][1]==4.F,
+        "A diffuse ramp fabric must support a fitted specular response");
+    fittedProfile["reflectionLayer"]=0;
+    const auto layerZero=MaterialData::parse(fitted).interpret([](const auto&){return std::filesystem::path();});
+    require(packMaterialSurfaceProfile(layerZero).rows[21][1]==12.F,"Layer zero is distinct from the spatial probe field");
+    for(const auto& layer:nlohmann::json::array({-1,256,0.5,nullptr})) {
+        fittedProfile["reflectionLayer"]=layer;
+        bool rejected=false;try{(void)MaterialData::parse(fitted).interpret([](const auto&){return std::filesystem::path();});}
+        catch(const std::exception& error){rejected=std::string(error.what()).find("reflectionLayer")!=std::string::npos;}
+        require(rejected,"Reflection layers must be integral and in range");
+    }
+    fittedProfile.erase("reflectionLayer");
+    fittedProfile["globalIntensity"]=.5;
+    bool noGlobal=false;try{(void)MaterialData::parse(fitted).interpret([](const auto&){return std::filesystem::path();});}
+    catch(const std::exception& error){noGlobal=std::string(error.what()).find("globalIntensity")!=std::string::npos;}
+    require(noGlobal,"A fitted model alone must not enable global intensity");
+    fittedProfile.erase("globalIntensity");
+    for(const auto& model:nlohmann::json::array({nullptr,false,2,"unsupported"})) {
+        fittedProfile["specularModel"]=model;
+        bool rejected=false;try{(void)MaterialData::parse(fitted).interpret([](const auto&){return std::filesystem::path();});}
+        catch(const std::exception& error){rejected=std::string(error.what()).find("specularModel")!=std::string::npos;}
+        require(rejected,"Invalid material specular models must name the field");
+    }
     auto invalidComplete=complete;invalidComplete["surface"]["buffers"]=nlohmann::json::array();
     bool geometryRejected=false;try{(void)MaterialData::parse(invalidComplete);}catch(const std::exception&){geometryRejected=true;}
     require(geometryRejected,"Material documents must reject geometry and external resource containers");

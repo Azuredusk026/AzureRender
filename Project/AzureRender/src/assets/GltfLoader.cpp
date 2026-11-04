@@ -228,7 +228,7 @@ void loadMaterialProfile(
                     ||!value.at("schemaVersion").is_number_integer()||value.at("schemaVersion")!=1)
                     throw std::invalid_argument(context+": environmentLighting requires schemaVersion one and profile version two");
                 for(const auto& field:value.items())if(field.key()!="schemaVersion"&&field.key()!="diffuse"
-                    &&field.key()!="reflection"&&field.key()!="globalIntensity")
+                    &&field.key()!="reflection"&&field.key()!="globalIntensity"&&field.key()!="specularModel"&&field.key()!="reflectionLayer")
                     throw std::invalid_argument(context+": unknown environmentLighting field "+field.key());
                 const auto source=[&](const char* key) {
                     if(!value.contains(key))return azurerender::MaterialEnvironmentSource::Scene;
@@ -240,6 +240,18 @@ void loadMaterialProfile(
                 };
                 result.environmentLighting.diffuse=source("diffuse");
                 result.environmentLighting.reflection=source("reflection");
+                if(value.contains("reflectionLayer")) {
+                    const auto& layer=value.at("reflectionLayer");
+                    if(!layer.is_number_integer()||layer<0||layer>255)
+                        throw std::invalid_argument(context+": invalid environmentLighting.reflectionLayer");
+                    result.environmentLighting.reflectionLayer=layer.get<unsigned>();
+                }
+                if(value.contains("specularModel")) {
+                    const auto& model=value.at("specularModel");
+                    if(!model.is_string()||(model!="scene"&&model!="ggx-multiscatter-fit"))
+                        throw std::invalid_argument(context+": invalid environmentLighting.specularModel");
+                    result.environmentLighting.fittedSpecular=model=="ggx-multiscatter-fit";
+                }
                 if(value.contains("globalIntensity")) {
                     const auto& intensity=value.at("globalIntensity");
                     if(!intensity.is_number()||!std::isfinite(intensity.get<double>())
@@ -2251,9 +2263,10 @@ AssetMaterial loadMaterial(
         ||(result.unlitTextureLayers.present&&result.unlitTextureLayers.composite==azurerender::UnlitTextureLayers::Composite::Additive));
     const bool lit=(result.materialFeatures&(MaterialFeatureUnlitSurface|MaterialFeatureMultiplyComposite|MaterialFeatureOverlay))==0
         &&!result.unlitTextureLayers.present&&result.materialClass!=AssetMaterialClass::Overlay;
-    const bool ordinary=(result.materialClass==AssetMaterialClass::Generic||result.materialClass==AssetMaterialClass::Fabric
-        ||result.materialClass==AssetMaterialClass::Metal)&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
-    azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary);
+    const bool microfacetClass=(result.materialClass==AssetMaterialClass::Generic||result.materialClass==AssetMaterialClass::Fabric
+        ||result.materialClass==AssetMaterialClass::Metal);
+    const bool ordinary=microfacetClass&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
+    azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary,microfacetClass);
     validateMaterialCoverage(result);
     azurerender::validateMaterialBlendDepth(result);
     azurerender::validateMaterialRimResponse(result);

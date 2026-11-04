@@ -1776,9 +1776,17 @@ if(BUILD_TESTING)
         --player $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.ReflectionLodGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.EnvironmentSpecularGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_environment_specular_gpu.py"
-        --executable $<TARGET_FILE:AzurePlayer>
+        --group global --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureEngine.EnvironmentSpecularGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.EnvironmentSpecularGpu.Local COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_environment_specular_gpu.py"
+        --group local --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.EnvironmentSpecularGpu.Local PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    add_test(NAME AzureEngine.EnvironmentSpecularGpu.Compatibility COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_environment_specular_gpu.py"
+        --group compatibility --executable $<TARGET_FILE:AzurePlayer>
+        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureEngine.EnvironmentSpecularGpu.Compatibility PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.ScreenSpaceReflectionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_screen_space_reflections_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer>
         --suite extended --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

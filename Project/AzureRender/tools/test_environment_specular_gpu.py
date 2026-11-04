@@ -52,9 +52,14 @@ def fixture(root,case):
     return project
 
 
-def run(player,output,reference,prepare_only,expected_validation):
+def run(player,output,reference,prepare_only,expected_validation,group=None):
     output.mkdir(parents=True,exist_ok=False)
     frozen=json.loads(reference.read_text())
+    def case_group(name):
+        prefix=name.split('-',1)[0]
+        return prefix if prefix in ('global','local') else 'compatibility'
+    cases=[case for case in frozen['cases'] if group is None or case_group(case['name'])==group]
+    assert cases,'Empty environment specular test group'
     report={'schemaVersion':1,'status':'preparing','linearBudget':BUDGET,
         'scope':'Public fitted environment response; game-frame conformance remains independent.',
         'referenceSha256':hashlib.sha256(reference.read_bytes()).hexdigest(),
@@ -69,7 +74,7 @@ def run(player,output,reference,prepare_only,expected_validation):
     images={}
     try:
         for backend in ('indexed','fixed'):
-            for case in frozen['cases']:
+            for case in cases:
                 name=backend+'-'+case['name'];root=output/name
                 project=fixture(root,case)
                 inputs={path.relative_to(root).as_posix():hashlib.sha256(path.read_bytes()).hexdigest()
@@ -116,6 +121,8 @@ def run(player,output,reference,prepare_only,expected_validation):
             pairs += [(source+'-alpha-zero',source+'-alpha-full') for source in ('global','local')]
             for backend in ('indexed','fixed'):
                 for left,right in pairs:
+                    assert case_group(left)==case_group(right)
+                    if group is not None and case_group(left)!=group:continue
                     delta=int(abs(images[backend+'-'+left].astype(int)-images[backend+'-'+right].astype(int)).max())
                     report['comparisons'].append({'left':backend+'-'+left,'right':backend+'-'+right,'maximumByteDelta':delta,'budget':0})
                     assert delta==0,(backend,left,right,'compatibility or alpha coupling')
@@ -143,10 +150,11 @@ if __name__=='__main__':
     parser.add_argument('--reference',type=Path,default=Path(__file__).resolve().parents[1]/'tests/fixtures/environment_specular/gpu_reference.json')
     parser.add_argument('--prepare-only',action='store_true')
     parser.add_argument('--expected-validation',choices=('any','enabled','disabled'),default='any')
+    parser.add_argument('--group',choices=('global','local','compatibility'))
     args=parser.parse_args()
     if not args.prepare_only and not args.executable:parser.error('--executable is required for GPU execution')
     if args.output:
-        run(args.executable,args.output,args.reference,args.prepare_only,args.expected_validation)
+        run(args.executable,args.output,args.reference,args.prepare_only,args.expected_validation,args.group)
     else:
         with tempfile.TemporaryDirectory(prefix='environment-specular-',dir=Path(__file__).resolve().parents[1]/'build/runs') as folder:
-            run(args.executable,Path(folder)/'capture',args.reference,args.prepare_only,args.expected_validation)
+            run(args.executable,Path(folder)/'capture',args.reference,args.prepare_only,args.expected_validation,args.group)

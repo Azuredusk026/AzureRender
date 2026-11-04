@@ -92,3 +92,9 @@ GPU 画像布局版本为二十一，大小为 352 字节。
 
 来源差异与执行范围见[实施计划](../plans/2026-11-01-material-environment-reception.md)。
 整体联合画质按[开发总计划](../plans/azure-engine-plan.md)验收。
+
+## 材质反射
+
+二版受光材质在 `environmentLighting` 中声明反射来源。通用、布料和金属材质可以将 `specularModel` 设为 `ggx-multiscatter-fit`，按粗糙度、法线与视线夹角以及基础反射率计算多次散射响应。缺省值 `scene` 沿用场景的响应方式。
+
+使用八面体反射图集的关卡可以通过 `reflectionLayer` 指定材质的反射层。层号从零开始，实际图集必须包含该层，且 `reflection` 须为 `scene`。着色器按世界反射方向与关卡的粗糙度映射采样该层。图层内的线性辐亮度包含材质所需的强度。空间探针混合及屏幕空间反射继续服务于由场景决定反射的表面。漫反射按材质的 `diffuse` 设置取样。

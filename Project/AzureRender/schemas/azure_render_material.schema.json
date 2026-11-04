@@ -65,6 +65,12 @@
           ],
           "default": "scene"
         },
+        "reflectionLayer": {"type": "integer", "minimum": 0, "maximum": 255},
+        "specularModel": {
+          "type": "string",
+          "enum": ["scene", "ggx-multiscatter-fit"],
+          "default": "scene"
+        },
         "globalIntensity": {
           "type": "number",
           "minimum": 0,
@@ -72,6 +78,7 @@
         }
       },
       "allOf": [
+        {"if": {"required": ["reflectionLayer"]}, "then": {"properties": {"reflection": {"const": "scene"}}}},
         {
           "if": {
             "required": [

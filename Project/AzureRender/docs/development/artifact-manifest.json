@@ -1122,6 +1122,7 @@
       "sampledOutline": "docs/acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json",
       "translucentHair": "docs/acceptance/nr/evidence/2026-11-04/translucent-hair/motion.json",
       "capturedHead": "docs/acceptance/nr/evidence/2026-11-04/captured-head-frame/results.json",
+      "clothReflection": "docs/acceptance/nr/evidence/2026-11-04/cloth-reflection/results.json",
       "floorIrradiance": "docs/acceptance/nr/evidence/2026-11-04/floor-irradiance/results.json",
       "playableRoute": "docs/acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json",
       "playableDelivery": "docs/acceptance/nr/evidence/2026-11-04/joint-playable-delivery/results.json"

@@ -10,12 +10,14 @@ COLORS=np.asarray([[.125,.25,.5],[.5,.125,.25],[.25,.5,.125]])
 def volume(layer=1,fade=1):
  return dict(luminanceSH=[0,0,0,1],halfExtents=[2,2,2],worldToLocal=[[1,0,0,0],[0,1,0,0],[0,0,1,0]],inverseBlendWidths=[1,1,1],arrayLayer=layer,intensity=1,fade=fade,shape='box',projection=True)
 def cases():
- return [dict(name='inner',wanted=COLORS[1]),dict(name='boundary',wanted=(COLORS[0]+COLORS[1])*.5),
+ return [dict(name='inner',wanted=COLORS[1]),dict(name='material-layer',wanted=COLORS[2]),dict(name='boundary',wanted=(COLORS[0]+COLORS[1])*.5),
   dict(name='nested',wanted=(COLORS[1]+COLORS[2])*.5),dict(name='priority',wanted=COLORS[2]),
   dict(name='fallback',wanted=COLORS[0]),dict(name='adapted',wanted=COLORS[1]*.5),
   dict(name='snapshot',wanted=COLORS[1],snapshot=True),dict(name='msaa4',wanted=COLORS[1],msaa=True)]
 def prepare(root,case):
  project=fixture(root,4,.25);p=root/'assets/scene.azurelevel';level=json.loads(p.read_text());v=volume();field=dict(schemaVersion=1,probes=[v],defaultLayer=0,defaultLuminanceSH=[0,0,0,1],adaptation=0,intensity=1,worldToField=[[1,0,0],[0,1,0],[0,0,1]])
+ if case['name']=='material-layer':
+  asset=root/'assets/surface.gltf';model=json.loads(asset.read_text());model['materials'][0]['extras']={'azureRenderMaterial':dict(schemaVersion=2,**{'class':'generic'},features=[],environmentLighting=dict(schemaVersion=1,reflectionLayer=2))};asset.write_text(json.dumps(model))
  if case['name']=='boundary':v['worldToLocal'][2][3]=1.5
  if case['name']=='nested':v['fade']=.5;field['probes'].append(volume(2))
  if case['name']=='priority':field['probes'].insert(0,volume(2))

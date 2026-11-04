@@ -1718,8 +1718,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
                      nlohmann::json value={{"materialIndex",base+index},{"name",material.name},
                          {"diffuse",flags&1?"global-environment":"scene"},
                          {"reflection",flags&2?"global-environment":"scene"},
+                         {"specularModel",material.environmentLighting.fittedSpecular?"ggx-multiscatter-fit":"scene"},
                          {"mainLightShadow",material.mainLightShadow==MaterialMainLightShadow::ObjectShadow?"object-shadow":"scene"},
                          {"globalIntensity",nullptr}};
+                     if(material.environmentLighting.reflectionLayer)value["reflectionLayer"]=*material.environmentLighting.reflectionLayer;
                      if(material.environmentLighting.globalIntensity)value["globalIntensity"]=*material.environmentLighting.globalIntensity;
                      values.push_back(std::move(value));
                  }
@@ -2500,7 +2502,12 @@ void CharacterSceneRenderer::createUniformBuffers() {
     // One typed, immutable record per stable asset material index.
     std::vector<PackedMaterialSurfaceProfile> profiles;
     const auto appendProfiles=[&](const LoadedAsset& mesh) {
-        for(const auto& material:mesh.materials)profiles.push_back(packMaterialSurfaceProfile(material));
+        for(const auto& material:mesh.materials){
+            const auto layer=material.environmentLighting.reflectionLayer;
+            if(layer&&(!probeFieldTexture_||*layer>=probeFieldTexture_->image().arrayLayers))
+                throw std::runtime_error("Material "+material.name+" reflectionLayer exceeds the scene reflection field");
+            profiles.push_back(packMaterialSurfaceProfile(material));
+        }
     };
     appendProfiles(asset_);for(const auto& resource:additionalResources_)appendProfiles(resource->asset);
     const auto profileBytes=sizeof(PackedMaterialSurfaceProfile)*profiles.size();

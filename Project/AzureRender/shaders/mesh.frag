@@ -855,6 +855,7 @@ void main() {
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
     vec4 lightingInputs=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[21];
     uint environmentSources=uint(lightingInputs.y+.5);
+    uint reflectionLayerPlusOne=environmentSources>>3U;
     bool globalDiffuseEnvironment=(environmentSources&1U)!=0U;
     bool globalReflectionEnvironment=(environmentSources&2U)!=0U;
     float globalEnvironmentIntensity=environmentSources!=0U&&lightingInputs.z>=0.0
@@ -951,6 +952,9 @@ void main() {
     if(strandDiffuse)fresnel=vec3(0);
     bool fittedEnvironment=camera.clusterLighting.x>.5&&camera.clusterLighting.w>.5
         &&AZURE_MATERIAL_CLASS==0U;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    fittedEnvironment=fittedEnvironment||(environmentSources&4U)!=0U;
+#endif
     vec3 environmentResponse=fittedEnvironment
         ?ggxMultiscatterEnvironment(specularRamp?f0:mix(vec3(.04),baseColor.rgb,metallic),roughness,normalDotView)
         :fresnel;
@@ -1817,7 +1821,14 @@ void main() {
 #endif
         float lastMip=float(textureQueryLevels(reflectionProbeTexture)-1);
         float lod=reflectionProbeLod(roughness,lastMip,vec3(camera.probeCenter.w,camera.probeHalfExtents.w,camera.probeCapture.w));
-        vec3 radiance=reflectionProbeFieldRadiance(reflectionProbeTexture,worldPosition,reflectionDirection,indirectDiffuseNormal,
+        vec3 radiance;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+        if(reflectionLayerPlusOne!=0U){
+            vec2 uv=octahedralEnvironmentUv(reflectionDirection,probeFieldRows[2],probeFieldRows[3].x>.5);
+            radiance=textureLod(reflectionProbeTexture,vec3(uv,float(reflectionLayerPlusOne-1U)),lod).rgb;
+        }else
+#endif
+        radiance=reflectionProbeFieldRadiance(reflectionProbeTexture,worldPosition,reflectionDirection,indirectDiffuseNormal,
             dot(reflectionDiffuseIncident,vec3(.212673,.715152,.072175)),lod).rgb;
         sceneReflectionRadiance=radiance;
         vec3 blended=environmentResponse*radiance;
@@ -1862,7 +1873,7 @@ void main() {
 #endif
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
-    if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface&&!globalReflectionEnvironment
+    if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface&&!globalReflectionEnvironment&&reflectionLayerPlusOne==0U
 #else
     if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface
 #endif

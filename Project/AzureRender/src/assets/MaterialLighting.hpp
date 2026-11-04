@@ -18,21 +18,29 @@ struct MaterialEnvironmentLighting {
     MaterialEnvironmentSource diffuse=MaterialEnvironmentSource::Scene;
     MaterialEnvironmentSource reflection=MaterialEnvironmentSource::Scene;
     std::optional<float> globalIntensity;
+    bool fittedSpecular=false;
+    std::optional<unsigned> reflectionLayer;
 };
 inline unsigned materialEnvironmentFlags(const MaterialEnvironmentLighting& value) {
     const auto valid=[](auto source){return source==MaterialEnvironmentSource::Scene
         ||source==MaterialEnvironmentSource::GlobalEnvironment;};
     if(!valid(value.diffuse)||!valid(value.reflection))
         throw std::invalid_argument("environmentLighting requires scene or global-environment sources");
+    if(value.reflectionLayer&&(*value.reflectionLayer>=256||value.reflection!=MaterialEnvironmentSource::Scene))
+        throw std::invalid_argument("environmentLighting.reflectionLayer requires a scene reflection source and a layer within zero through 255");
     return (value.diffuse==MaterialEnvironmentSource::GlobalEnvironment?1U:0U)
-        |(value.reflection==MaterialEnvironmentSource::GlobalEnvironment?2U:0U);
+        |(value.reflection==MaterialEnvironmentSource::GlobalEnvironment?2U:0U)
+        |(value.fittedSpecular?4U:0U)
+        |(value.reflectionLayer?((*value.reflectionLayer+1U)<<3U):0U);
 }
 inline void validateMaterialLighting(const MaterialEnvironmentLighting& environment,
-    MaterialMainLightShadow shadow,unsigned profileVersion,bool lit,bool ordinaryLit) {
+    MaterialMainLightShadow shadow,unsigned profileVersion,bool lit,bool ordinaryLit,bool microfacetClass) {
     const auto flags=materialEnvironmentFlags(environment);
+    if(environment.fittedSpecular&&!microfacetClass)
+        throw std::invalid_argument("environmentLighting.specularModel requires a lit generic, fabric or metal surface");
     if(environment.globalIntensity) {
         const auto value=*environment.globalIntensity;
-        if(!std::isfinite(value)||value<0||value>16||flags==0)
+        if(!std::isfinite(value)||value<0||value>16||(flags&3U)==0)
             throw std::invalid_argument("environmentLighting globalIntensity requires a global source and a finite value within zero and sixteen");
     }
     if(flags&&(profileVersion!=2||!lit))
