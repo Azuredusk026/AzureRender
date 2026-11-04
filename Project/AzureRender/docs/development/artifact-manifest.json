@@ -1126,7 +1126,8 @@
       "floorIrradiance": "docs/acceptance/nr/evidence/2026-11-04/floor-irradiance/results.json",
       "playableRoute": "docs/acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json",
       "playableDelivery": "docs/acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json",
-      "skinWarmth": "docs/acceptance/nr/evidence/2026-11-04/skin-warmth/results.json"
+      "skinWarmth": "docs/acceptance/nr/evidence/2026-11-04/skin-warmth/results.json",
+      "shaderReloadCapacity": "docs/acceptance/nr/evidence/2026-11-04/shader-reload-capacity/results.json"
     },
     {
       "path": "runs/20261104-001359-face-masked-rim-ff43bf",

@@ -20,7 +20,8 @@ std::string read(const std::filesystem::path& path){
 }
 }
 ShaderSourceSnapshot snapshotShaders(const ShaderReloadOptions& options){
-    if(options.programs.empty() || options.programs.size()>512 || options.sourceBytes==0 || options.sourceBytes>16*1024*1024
+    if(options.maximumPrograms==0 || options.maximumPrograms>1024
+        || options.programs.empty() || options.programs.size()>options.maximumPrograms || options.sourceBytes==0 || options.sourceBytes>16*1024*1024
         || options.timeoutMs==0 || options.timeoutMs>60000 || options.pollIntervalMs==0)
         throw std::invalid_argument("Invalid shader reload configuration");
     std::size_t metadataBytes=0;

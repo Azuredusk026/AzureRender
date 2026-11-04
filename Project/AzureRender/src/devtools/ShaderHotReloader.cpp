@@ -11,13 +11,20 @@ namespace azurerender {
 ShaderReloadOptions loadShaderReloadOptions(const std::filesystem::path& path){
     if(std::filesystem::file_size(path)>1024*1024)throw std::invalid_argument("Shader reload descriptor exceeds budget");
     std::ifstream input(path);nlohmann::json data;input>>data;
-    if(data.at("schemaVersion")!=1)throw std::invalid_argument("Unsupported shader reload descriptor");
+    const auto version=data.at("schemaVersion");
+    if(version!=1&&version!=2)throw std::invalid_argument("Unsupported shader reload descriptor");
     const auto resolve=[&](const std::string& value){auto p=std::filesystem::u8path(value);return std::filesystem::absolute(p.is_absolute()?p:path.parent_path()/p);};
     ShaderReloadOptions options;options.sourceRoot=resolve(data.at("sourceRoot").get<std::string>());
     options.binaryRoot=resolve(data.at("binaryRoot").get<std::string>());options.scratchRoot=resolve(data.at("scratchRoot").get<std::string>());
     options.compiler=resolve(data.at("compiler").get<std::string>());
     options.pollIntervalMs=data.value("pollIntervalMs",500u);options.timeoutMs=data.value("timeoutMs",60000u);
     options.sourceBytes=data.value("sourceBytes",static_cast<std::size_t>(16*1024*1024));
+    if(version==2) {
+        const auto& limit=data.at("maximumPrograms");
+        if(!limit.is_number_integer()||limit<1||limit>1024)
+            throw std::invalid_argument("Shader maximumPrograms must be an integer within one through 1024");
+        options.maximumPrograms=limit.get<std::size_t>();
+    }
     for(const auto& program:data.at("programs")){
         ShaderProgramDescriptor description{std::filesystem::u8path(program.at("source").get<std::string>()),
             std::filesystem::u8path(program.at("output").get<std::string>()),program.value("defines",std::vector<std::string>())};

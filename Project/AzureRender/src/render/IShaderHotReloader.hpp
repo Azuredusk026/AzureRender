@@ -18,6 +18,7 @@ struct ShaderReloadOptions {
     std::vector<ShaderProgramDescriptor> programs;
     std::uint32_t pollIntervalMs=500, timeoutMs=60000;
     std::size_t sourceBytes=16*1024*1024;
+    std::size_t maximumPrograms=512;
 };
 struct ShaderReloadCandidate {
     std::uint64_t generation=0;

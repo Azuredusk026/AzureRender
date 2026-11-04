@@ -51,6 +51,17 @@ int main(int argc,char** argv)try{
     changed=options;changed.programs[1].outputOption="--unknown";rejects([&]{snapshotShaders(changed);});
     changed=options;changed.programs.clear();for(unsigned i=0;i<512;++i){auto program=options.programs[0];program.output="probe-"+std::to_string(i)+".spv";changed.programs.push_back(program);}require(!snapshotShaders(changed).fingerprint.empty(),"512 bounded programs must be supported");
     changed.programs.push_back(options.programs[1]);rejects([&]{snapshotShaders(changed);});
+    auto largerDescriptor=descriptor;largerDescriptor["schemaVersion"]=2;largerDescriptor["maximumPrograms"]=1024;
+    write(root/"larger.json",largerDescriptor.dump());
+    auto larger=loadShaderReloadOptions(root/"larger.json");
+    larger.programs.clear();
+    for(unsigned i=0;i<1024;++i){auto program=options.programs[0];program.output="expanded-"+std::to_string(i)+".spv";larger.programs.push_back(program);}
+    require(!snapshotShaders(larger).fingerprint.empty(),"Explicit version-two capacity must support its bounded catalog");
+    larger.programs.push_back(options.programs[1]);rejects([&]{snapshotShaders(larger);});
+    for(const auto& invalid:nlohmann::json::array({0,-1,1025,1.5,nullptr,"512"})){
+        auto bad=largerDescriptor;bad["maximumPrograms"]=invalid;write(root/"invalid-capacity.json",bad.dump());
+        rejects([&]{loadShaderReloadOptions(root/"invalid-capacity.json");});
+    }
     ShaderHotReloader service(options);service.requestRebuild();wait(service);require(service.status().state==ShaderReloadState::Ready,"Mixed GLSL/HLSL compilation failed");
     auto candidate=service.candidate();require(candidate.has_value(),"Complete mixed candidate missing");
     for(const auto name:{"probe.comp.spv","probe.hlsl.spv"}){require(read(candidate->directory/name).size()>20,"Real SPIR-V output missing");std::filesystem::copy_file(candidate->directory/name,root/"verified"/name);}

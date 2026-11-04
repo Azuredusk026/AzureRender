@@ -575,8 +575,12 @@ endif()
 include(cmake/AzureShaderModules.cmake)
 get_property(AZURE_SHADER_DESCRIPTORS GLOBAL PROPERTY AZURE_SHADER_DESCRIPTORS)
 list(JOIN AZURE_SHADER_DESCRIPTORS ",\n" AZURE_SHADER_DESCRIPTORS_JSON)
+list(LENGTH AZURE_SHADER_DESCRIPTORS AZURE_SHADER_PROGRAM_COUNT)
+if(AZURE_SHADER_PROGRAM_COUNT GREATER 1024)
+    message(FATAL_ERROR "Shader program catalog exceeds the bounded reload capacity")
+endif()
 file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/shader-reload.json" CONTENT
-    "{\"schemaVersion\":1,\"sourceRoot\":\"${SHADER_SOURCE_DIR}\",\"binaryRoot\":\"${SHADER_BINARY_DIR}\",\"scratchRoot\":\"${CMAKE_CURRENT_BINARY_DIR}/developer/shaders\",\"compiler\":\"$<TARGET_FILE:Vulkan::glslc>\",\"programs\":[${AZURE_SHADER_DESCRIPTORS_JSON}]}\n")
+    "{\"schemaVersion\":2,\"maximumPrograms\":${AZURE_SHADER_PROGRAM_COUNT},\"sourceRoot\":\"${SHADER_SOURCE_DIR}\",\"binaryRoot\":\"${SHADER_BINARY_DIR}\",\"scratchRoot\":\"${CMAKE_CURRENT_BINARY_DIR}/developer/shaders\",\"compiler\":\"$<TARGET_FILE:Vulkan::glslc>\",\"programs\":[${AZURE_SHADER_DESCRIPTORS_JSON}]}\n")
 
 # Engine targets expose explicit ownership and dependency boundaries.
 add_library(AzureBuildOptions INTERFACE)
