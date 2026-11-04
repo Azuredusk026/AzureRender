@@ -1,0 +1,71 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "scope": "径向法线公共材质契约与固定姿态诊断。完整发片画质继续验收。",
+  "gpu": {
+    "release": {
+      "tests": 2,
+      "cases": 8,
+      "passed": true,
+      "log": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\radial-main-tests-release.log",
+      "sha256": "c9f9e9b1c3abad1cdc77853e1a315e88446abfef5bc4417cb4922942cc0921eb"
+    },
+    "debug": {
+      "tests": 2,
+      "cases": 8,
+      "passed": true,
+      "log": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\radial-main-tests-debug.log",
+      "sha256": "672710ad41c27ea2f0d6ceb84cb25dfc1906685af2831496d97273f4ba665764"
+    }
+  },
+  "fixedPose": {
+    "production-hair-facing-release": {
+      "0": {
+        "count": 16459,
+        "mean": 0.29031735423375254,
+        "within1": 16387
+      },
+      "1138": {
+        "count": 2832,
+        "mean": 15.209863465160076,
+        "within1": 14
+      },
+      "1291": {
+        "count": 725,
+        "mean": 2.7195402298850575,
+        "within1": 531
+      },
+      "1314": {
+        "count": 236,
+        "mean": 36.51977401129943,
+        "within1": 0
+      }
+    },
+    "public-radial-shell-capture": {
+      "0": {
+        "count": 16459,
+        "mean": 0.45664985722097334,
+        "within1": 15858
+      },
+      "1138": {
+        "count": 2832,
+        "mean": 21.1519538606403,
+        "within1": 11
+      },
+      "1291": {
+        "count": 725,
+        "mean": 2.7770114942528736,
+        "within1": 535
+      },
+      "1314": {
+        "count": 236,
+        "mean": 5.168079096045198,
+        "within1": 4
+      }
+    }
+  },
+  "implementation": {
+    "src/assets/MaterialRimResponse.hpp": "ff9ea828501acc453197e83ffe81d62e5035fa631259768df3e1f9f9e825faee",
+    "shaders/mesh.frag": "1c6a4704e4a7169995d034de97e44157109d77254e3e80913db6a6740067a813",
+    "tools/test_material_origin_gpu.py": "b09e9e597dcffc922354b082c9fd637187a27b6bac9b452b026a813aa952cfa0"
+  }
+}

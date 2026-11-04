@@ -130,6 +130,8 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         result.rows[1][3]=static_cast<float>(material.nprDiffuse.rampComposition);
         result.rows[3][0]=static_cast<float>(material.nprDiffuse.characterVisibility);
         result.rows[3][1]=material.nprDiffuse.localDiffuseFloorScale;
+        result.rows[3][2]=material.nprDiffuse.radialLightingNormal?1.F:0.F;
+        result.rows[3][3]=material.nprDiffuse.transparentHighlights?1.F:0.F;
         if(material.nprDiffuse.mainRamp.present) {
             result.rows[1][1]=1;
             result.rows[1][2]=material.nprDiffuse.mainRamp.bias;

@@ -27,7 +27,7 @@ def linear(value):
     return np.where(value <= .04045, value / 12.92, ((value + .055) / 1.055) ** 2.4)
 
 
-def reference(pixel, origin_x, translation, scale, light):
+def reference(pixel, origin_x, translation, scale, light, radial_normal=False):
     # Orthographic camera at (0,0,5), height 2; authored tangent and neutral map.
     position = np.array([(pixel[0] + .5) / 128 - 1, 1 - (pixel[1] + .5) / 128, 0])
     authored = unit([.98, 0, .2])
@@ -40,18 +40,20 @@ def reference(pixel, origin_x, translation, scale, light):
     incoming = np.asarray(light) - position
     direction = unit(incoming)
     planar = unit([direction[0], direction[1], 0])
-    edge = 1 - abs(np.dot(normal, view))
-    band = np.clip((edge - .62) / .16, 0, 1)
-    band = band * band * (3 - 2 * band)
     origin = np.asarray(translation) + np.asarray(scale) * [origin_x, 0, 0]
     radial = position - origin
     radial[1] = 1 / 16384
+    if radial_normal:
+        normal = unit(radial)
+    edge = 1 - abs(np.dot(normal, view))
+    band = np.clip((edge - .62) / .16, 0, 1)
+    band = band * band * (3 - 2 * band)
     visibility = np.clip(np.dot(unit(radial), direction) + 1, 0, 1)
     attenuation = (1 - min(np.dot(incoming, incoming) / 100, 1)) ** 2
     return np.full(3, .5 * band * visibility * max(np.dot(normal, planar), 0) * .1 * attenuation * 3)
 
 
-def prepare(folder, name):
+def prepare(folder, name, radial_normal=False):
     generate(folder, 'point')
     model = json.loads((folder / 'plane.gltf').read_text())
     payload = bytearray(base64.b64decode(model['buffers'][0]['uri'].split(',', 1)[1]))
@@ -86,6 +88,9 @@ def prepare(folder, name):
     profile = dict(schemaVersion=2, **{'class': 'generic'}, features=[], shadowColorLut=dict(schemaVersion=1, texture=0, flipV=False),
                    nprDiffuse=dict(schemaVersion=1, shadowScale=1, lightingInputs='host-scene-radiance', shadowMask='none', baseAo='one',
                                    rimResponse='view-facing', rimOrigin=dict(schemaVersion=1, node='Origin')))
+    if radial_normal and name != 'omitted':
+        material['alphaMode'] = 'BLEND'
+        profile['nprDiffuse'].update(lightingNormal='origin-radial-horizontal', transparentHighlights=True)
     if name == 'omitted':
         profile['nprDiffuse'].pop('rimOrigin')
     material['extras'] = dict(azureSlotId='surface', azureRenderMaterial=profile)
@@ -114,13 +119,13 @@ def prepare(folder, name):
     return pixel, x, translation, scale, light
 
 
-def run(player, output, expected_validation=None):
+def run(player, output, expected_validation=None, radial_normal=False):
     output.mkdir(parents=True, exist_ok=False)
     summary = dict(schemaVersion=1, executableSha256=hashlib.sha256(player.read_bytes()).hexdigest(), linearErrorBudget=.008, captures=[])
     images = {}
     for name in ['left', 'left-fixed', 'right', 'omitted', 'transformed', 'mirrored', 'document', 'animated']:
         folder = output / name
-        pixel, x, translation, scale, light = prepare(folder, name)
+        pixel, x, translation, scale, light = prepare(folder, name, radial_normal)
         count = 32 if name == 'animated' else 1
         command = [str(player.resolve()), '--project', str(folder / 'lab.azureproject'), '--width', '256', '--height', '256',
                    '--capture-dir', str(folder / 'frames'), '--capture-frames', str(count), '--capture-fps', '30', '--fixed-frame-step',
@@ -144,7 +149,7 @@ def run(player, output, expected_validation=None):
         frames = sorted((folder / 'frames').glob('frame_*.png'))
         assert len(frames) == count, name
         values = [linear(np.asarray(Image.open(path).convert('RGB'))[pixel[1], pixel[0]]) for path in frames]
-        expected = reference(pixel, 0 if name == 'omitted' else x, translation, scale, light)
+        expected = reference(pixel, 0 if name == 'omitted' else x, translation, scale, light, radial_normal and name != 'omitted')
         error = float(np.max(np.abs(values[0] - expected)))
         row = dict(name=name, validationEnabled=validation, frames=count, pixel=pixel, expected=expected.tolist(),
                    measured=values[0].tolist(), maximumLinearError=error)
@@ -169,9 +174,10 @@ if __name__ == '__main__':
     parser.add_argument('--executable', type=Path, required=True)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--expected-validation', choices=['enabled', 'disabled'])
+    parser.add_argument('--radial-normal', action='store_true')
     args = parser.parse_args()
     if args.output:
-        run(args.executable, args.output.resolve(), args.expected_validation)
+        run(args.executable, args.output.resolve(), args.expected_validation, args.radial_normal)
     else:
         with tempfile.TemporaryDirectory(prefix='azure-material-origin-') as temporary:
-            run(args.executable, Path(temporary) / 'capture', args.expected_validation)
+            run(args.executable, Path(temporary) / 'capture', args.expected_validation, args.radial_normal)

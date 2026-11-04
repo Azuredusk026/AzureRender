@@ -2037,6 +2037,7 @@ AssetMaterial loadMaterial(
             for(const auto& field:npr.items())if(!fields.count(field.key())&&field.key()!="indirectNormal"&&field.key()!="lighting"
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
                 &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
+                &&field.key()!="lightingNormal"&&field.key()!="transparentHighlights"
                 &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
@@ -2095,6 +2096,17 @@ AssetMaterial loadMaterial(
                 if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>4)
                     throw std::invalid_argument("Invalid nprDiffuse.localDiffuseFloorScale");
                 result.nprDiffuse.localDiffuseFloorScale=value.get<float>();
+            }
+            if(npr.contains("lightingNormal")) {
+                const auto& mode=npr.at("lightingNormal");
+                if(!mode.is_string()||(mode!="surface"&&mode!="origin-radial-horizontal"))
+                    throw std::invalid_argument("Invalid nprDiffuse.lightingNormal");
+                result.nprDiffuse.radialLightingNormal=mode=="origin-radial-horizontal";
+            }
+            if(npr.contains("transparentHighlights")) {
+                const auto& value=npr.at("transparentHighlights");
+                if(!value.is_boolean())throw std::invalid_argument("Invalid nprDiffuse.transparentHighlights");
+                result.nprDiffuse.transparentHighlights=value.get<bool>();
             }
             if(npr.contains("rimOrigin")) {
                 const auto& raw=npr.at("rimOrigin");

@@ -220,6 +220,8 @@
       "type": "object",
       "description": "Typed fields and ownership are validated by the production material interpreter.",
       "properties": {
+        "lightingNormal": {"type": "string", "enum": ["surface", "origin-radial-horizontal"]},
+        "transparentHighlights": {"type": "boolean", "default": false},
         "rampComposition": {
           "type": "string",
           "enum": [

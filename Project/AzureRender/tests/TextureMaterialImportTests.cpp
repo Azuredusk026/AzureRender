@@ -192,6 +192,37 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
          [](const auto&){return std::filesystem::path();},&rimFace);
  if(inheritedRim.nprDiffuse.rimResponse!=rimFace.nprDiffuse.rimResponse||packMaterialSurfaceProfile(inheritedRim).rows[1][0]!=2)
      throw std::runtime_error("Parameter edits must retain the inherited face response");
+ auto radialRim=maskedRim;
+ auto& radialMaterial=radialRim["materials"][0];
+ radialMaterial["alphaMode"]="BLEND";
+ auto& profile=radialMaterial["extras"]["azureRenderMaterial"];
+ profile["class"]="generic";
+ profile["features"]=nlohmann::json::array();
+ profile.erase("faceSdf");
+ auto& radial=profile["nprDiffuse"];
+ radial["rimResponse"]="view-facing";
+ radial["lightingNormal"]="origin-radial-horizontal";
+ radial["rimOrigin"]={{"schemaVersion",1},{"node","FaceHead"}};
+ radial["transparentHighlights"]=true;
+ const auto radialPath=root/"radial-material.gltf";
+ std::ofstream(radialPath)<<radialRim.dump();
+ const auto radialAsset=loadGltfAsset(radialPath.u8string());
+ const auto packedRadial=packMaterialSurfaceProfile(radialAsset.materials[0]);
+ if(packedRadial.rows[3][2]!=1||packedRadial.rows[3][3]!=1)
+     throw std::runtime_error("A radial blended material must retain both lighting controls");
+ for(const std::string field:{"rimOrigin","lightingNormal","transparentHighlights","alphaMode"}) {
+     auto bad=radialRim;
+     auto& material=bad["materials"][0];
+     auto& profile=material["extras"]["azureRenderMaterial"]["nprDiffuse"];
+     if(field=="rimOrigin")profile.erase(field);
+     else if(field=="lightingNormal")profile[field]="world";
+     else if(field=="transparentHighlights")profile[field]=1;
+     else material[field]="OPAQUE";
+     std::ofstream(radialPath)<<bad.dump();
+     bool denied=false;
+     try{(void)loadGltfAsset(radialPath.u8string());}catch(const std::exception&){denied=true;}
+     if(!denied)throw std::runtime_error("Invalid radial material accepted: "+field);
+ }
  auto invalidEnum=rimFace;invalidEnum.nprDiffuse.rimResponse=static_cast<AssetMaterial::NprDiffuse::RimResponse>(3);
  bool enumRejected=false;try{(void)packMaterialSurfaceProfile(invalidEnum);}catch(const std::exception&){enumRejected=true;}
  if(!enumRejected)throw std::runtime_error("Unknown typed rim response must be rejected");

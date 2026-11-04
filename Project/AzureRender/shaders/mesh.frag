@@ -852,6 +852,10 @@ void main() {
 #endif
     bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
         &&!(qaEffectMode==1&&qaEffectDisabled);
+    if(nprDiffuse&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].z>.5){
+        vec3 offset=worldPosition-instanceFaceFrame[3].xyz;
+        shadedNormal=normalize(vec3(offset.x,1.0/16384.0,offset.z));
+    }
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
     vec4 lightingInputs=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[21];
     uint environmentSources=uint(lightingInputs.y+.5);
@@ -1200,7 +1204,8 @@ void main() {
         }
         bool transparentHairHighlights=AZURE_ALPHA_MODE==2&&projectedLighting
             &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>1.5;
-        if((screenRim||specularOnly)&&(!characterLightComposition||(AZURE_ALPHA_MODE==2&&!transparentHairHighlights)))continue;
+        bool transparentNprHighlights=nprDiffuse&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].w>.5;
+        if((screenRim||specularOnly)&&(!characterLightComposition||(AZURE_ALPHA_MODE==2&&!transparentHairHighlights&&!transparentNprHighlights)))continue;
         SceneLightSample sampled=sampleSceneLight(light,worldPosition,false);
         // Exact zero incident energy has no ordinary-surface BRDF contribution.
         // Character composition keeps its material-frame and main-light state.

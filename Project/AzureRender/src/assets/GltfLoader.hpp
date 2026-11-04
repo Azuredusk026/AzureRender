@@ -237,6 +237,8 @@ struct AssetMaterial {
         enum class BaseAo : std::uint8_t { One,AlbedoAlpha,MetallicRoughnessRed };
         BaseAo baseAo=BaseAo::One;
         IndirectNormal indirectNormal=IndirectNormal::Surface;
+        bool radialLightingNormal=false;
+        bool transparentHighlights=false;
         struct Lighting {
             bool present=false;
             std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
