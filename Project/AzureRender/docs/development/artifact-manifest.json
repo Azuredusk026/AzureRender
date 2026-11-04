@@ -1129,7 +1129,8 @@
       "skinWarmth": "docs/acceptance/nr/evidence/2026-11-04/skin-warmth/results.json",
       "shaderReloadCapacity": "docs/acceptance/nr/evidence/2026-11-04/shader-reload-capacity/results.json",
       "projectedSurface": "docs/acceptance/nr/evidence/2026-11-04/projected-surface/results.json",
-      "screenSurfaceNormal": "docs/acceptance/nr/evidence/2026-11-05/screen-normal/results.json"
+      "screenSurfaceNormal": "docs/acceptance/nr/evidence/2026-11-05/screen-normal/results.json",
+      "nprViewMask": "docs/acceptance/nr/evidence/2026-11-05/npr-view-mask/results.json"
     },
     {
       "path": "runs/20261104-001359-face-masked-rim-ff43bf",

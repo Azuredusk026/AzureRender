@@ -228,13 +228,15 @@
       "type": "object",
       "description": "Typed fields and ownership are validated by the production material interpreter.",
       "properties": {
+        "shadowSaturation": {"type": "number", "minimum": 0, "maximum": 4, "default": 1},
         "lightingNormal": {"type": "string", "enum": ["surface", "origin-radial-horizontal", "screen-surface"]},
         "transparentHighlights": {"type": "boolean", "default": false},
         "rampComposition": {
           "type": "string",
           "enum": [
             "mask-visibility",
-            "view-ramp-alpha"
+            "view-ramp-alpha",
+            "view-facing-mask"
           ]
         },
         "rimResponse": {

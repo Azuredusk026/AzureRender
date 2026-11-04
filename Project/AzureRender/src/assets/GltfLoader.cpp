@@ -2044,7 +2044,7 @@ AssetMaterial loadMaterial(
                 &&field.key()!="rimResponse"&&field.key()!="viewTint"&&field.key()!="mainRamp"
                 &&field.key()!="characterVisibility"&&field.key()!="localDiffuseFloorScale"
                 &&field.key()!="lightingNormal"&&field.key()!="transparentHighlights"
-                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition")throw std::invalid_argument("Unknown nprDiffuse field");
+                &&field.key()!="rimOrigin"&&field.key()!="shadowAlbedo"&&field.key()!="rampComposition"&&field.key()!="shadowSaturation")throw std::invalid_argument("Unknown nprDiffuse field");
             if(!npr["schemaVersion"].is_number_integer()||npr["schemaVersion"]!=1
                 ||!npr["shadowScale"].is_number()||!std::isfinite(npr["shadowScale"].get<double>())
                 ||npr["shadowScale"].get<double>()<0||npr["shadowScale"].get<double>()>64
@@ -2086,13 +2086,20 @@ AssetMaterial loadMaterial(
                     :AssetMaterial::NprDiffuse::IndirectNormal::Surface};
             if(npr.contains("rampComposition")) {
                 const auto& policy=npr.at("rampComposition");
-                if(!policy.is_string()||(policy!="mask-visibility"&&policy!="view-ramp-alpha"))
+                if(!policy.is_string()||(policy!="mask-visibility"&&policy!="view-ramp-alpha"&&policy!="view-facing-mask"))
                     throw std::invalid_argument("Invalid nprDiffuse.rampComposition policy");
                 result.nprDiffuse.rampComposition=policy=="view-ramp-alpha"
-                    ?azurerender::NprRampComposition::ViewRampAlpha:azurerender::NprRampComposition::MaskVisibility;
+                    ?azurerender::NprRampComposition::ViewRampAlpha:policy=="view-facing-mask"
+                        ?azurerender::NprRampComposition::ViewFacingMask:azurerender::NprRampComposition::MaskVisibility;
             }
             azurerender::validateNprRampComposition(result.nprDiffuse.rampComposition,true,result.materialProfileVersion,
                 (result.materialFeatures&MaterialFeatureDiffuseRamp)!=0);
+            if(npr.contains("shadowSaturation")) {
+                const auto& value=npr.at("shadowSaturation");
+                if(!value.is_number()||!std::isfinite(value.get<double>())||value.get<double>()<0||value.get<double>()>4)
+                    throw std::invalid_argument("Invalid nprDiffuse.shadowSaturation");
+                result.nprDiffuse.shadowSaturation=value.get<float>();
+            }
             if(npr.contains("characterVisibility")) {
                 result.nprDiffuse.characterVisibility=parseCharacterVisibility(
                     npr.at("characterVisibility"),"nprDiffuse.characterVisibility");

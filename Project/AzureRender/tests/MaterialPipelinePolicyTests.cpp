@@ -21,6 +21,8 @@ int main(){
     material.nprDiffuse.present=true;
     material.nprDiffuse.rampComposition=AssetMaterial::NprDiffuse::RampComposition::ViewRampAlpha;
     if(!extendedMaterialLighting(material))return 28;
+    material.nprDiffuse.rampComposition=AssetMaterial::NprDiffuse::RampComposition::ViewFacingMask;
+    if(!extendedMaterialLighting(material))return 37;
     material.nprDiffuse.rampComposition=AssetMaterial::NprDiffuse::RampComposition::MaskVisibility;
     if(extendedMaterialLighting(material))return 29;
     material.nprDiffuse.rimResponse=AssetMaterial::NprDiffuse::RimResponse::FaceMasked;

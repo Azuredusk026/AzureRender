@@ -7,12 +7,16 @@
 namespace azurerender {
 enum class MaterialEnvironmentSource : std::uint32_t { Scene, GlobalEnvironment };
 enum class MaterialMainLightShadow : std::uint32_t { Scene, ObjectShadow };
-enum class NprRampComposition : std::uint32_t { MaskVisibility, ViewRampAlpha };
+enum class NprRampComposition : std::uint32_t { MaskVisibility, ViewRampAlpha, ViewFacingMask };
 inline void validateNprRampComposition(NprRampComposition policy,bool supportedNpr,unsigned profileVersion,bool diffuseRamp) {
-    if(policy!=NprRampComposition::MaskVisibility&&policy!=NprRampComposition::ViewRampAlpha)
+    if(policy!=NprRampComposition::MaskVisibility&&policy!=NprRampComposition::ViewRampAlpha&&policy!=NprRampComposition::ViewFacingMask)
         throw std::invalid_argument("Invalid nprDiffuse.rampComposition policy");
-    if(policy==NprRampComposition::ViewRampAlpha&&(!supportedNpr||profileVersion!=2||!diffuseRamp))
-        throw std::invalid_argument("nprDiffuse.rampComposition view-ramp-alpha requires a lit NPR surface and diffuse-ramp profile version two");
+    if(policy!=NprRampComposition::MaskVisibility&&(!supportedNpr||profileVersion!=2||!diffuseRamp))
+        throw std::invalid_argument("nprDiffuse.rampComposition requires a lit NPR surface and diffuse-ramp profile version two");
+}
+inline void validateNprShadowSaturation(float value,bool supportedNpr,unsigned profileVersion) {
+    if(!std::isfinite(value)||value<0||value>4||(value!=1&&(!supportedNpr||profileVersion!=2)))
+        throw std::invalid_argument("nprDiffuse.shadowSaturation requires zero through four and a lit version-two NPR owner");
 }
 struct MaterialEnvironmentLighting {
     MaterialEnvironmentSource diffuse=MaterialEnvironmentSource::Scene;

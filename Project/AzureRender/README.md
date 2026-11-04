@@ -597,3 +597,5 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 历史画面基准与 GPU 性能验收保留待项。
 实施范围见[资源验证计划](docs/plans/2026-10-16-endfield-resource-validation.md)。
 当前证据见[联合验收](docs/acceptance/ev/2026-10-16.md)。
+
+视角颜色遮罩、影色饱和度及来源片元见[颜色核验](docs/acceptance/nr/npr-view-mask.md)。

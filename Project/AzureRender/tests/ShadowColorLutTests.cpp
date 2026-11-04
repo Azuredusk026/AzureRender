@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include <nlohmann/json.hpp>
 
 using Json=nlohmann::json;
@@ -88,6 +89,49 @@ int main(){
   const auto viewMaterial=load(viewComposed).materials[0];
   require(azurerender::packMaterialSurfaceProfile(viewMaterial).rows[1][3]==1,
     "View-ramp color composition must reach the shared NPR profile");
+  auto facingComposed=viewComposed;
+  facingComposed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["rampComposition"]="view-facing-mask";
+  facingComposed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowSaturation"]=1.1;
+  const auto facingMaterial=load(facingComposed).materials[0];
+  const auto packedFacing=azurerender::packMaterialSurfaceProfile(facingMaterial);
+  require(packedFacing.rows[1][3]==2&&std::abs(packedFacing.rows[6][0]-.1F)<1e-6F,
+    "Procedural view masks and independent shadow saturation must reach the GPU profile");
+  require(viewMaterial.nprDiffuse.shadowSaturation==1&&azurerender::packMaterialSurfaceProfile(viewMaterial).rows[6][0]==0,
+    "Default shadow saturation must preserve the packed zero lane");
+  for(const auto& value:std::vector<Json>{nullptr,true,"1",-1,4.001}) {
+    auto invalid=facingComposed;
+    invalid["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowSaturation"]=value;
+    bool rejected=false;try{load(invalid);}catch(const std::exception& error){
+      rejected=std::string(error.what()).find("shadowSaturation")!=std::string::npos;
+    }
+    require(rejected,"Invalid shadow saturation must identify its field");
+  }
+  for(float value:{0.F,4.F}) {
+    auto boundary=facingComposed;boundary["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"]["shadowSaturation"]=value;
+    require(load(boundary).materials[0].nprDiffuse.shadowSaturation==value,"Shadow saturation boundaries must remain valid");
+  }
+  for(unsigned invalidCase=0;invalidCase<4;++invalidCase) {
+    auto invalid=facingMaterial;
+    if(invalidCase==0)invalid.nprDiffuse.present=false;
+    else if(invalidCase==1)invalid.materialProfileVersion=1;
+    else if(invalidCase==2)invalid.nprDiffuse.shadowSaturation=-1;
+    else invalid.materialFeatures|=MaterialFeatureUnlitSurface;
+    bool rejected=false;try{(void)azurerender::packMaterialSurfaceProfile(invalid);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Procedural view inputs require a valid lit version-two NPR owner");
+  }
+  for(unsigned invalidCase=0;invalidCase<5;++invalidCase) {
+    auto invalid=facingMaterial;
+    invalid.nprDiffuse.rampComposition=azurerender::NprRampComposition::MaskVisibility;
+    if(invalidCase==0)invalid.nprDiffuse.present=false;
+    else if(invalidCase==1)invalid.materialProfileVersion=1;
+    else if(invalidCase==2)invalid.nprDiffuse.shadowSaturation=std::numeric_limits<float>::quiet_NaN();
+    else if(invalidCase==3)invalid.nprDiffuse.shadowSaturation=std::numeric_limits<float>::infinity();
+    else invalid.materialFeatures|=MaterialFeatureUnlitSurface;
+    bool rejected=false;try{(void)azurerender::packMaterialSurfaceProfile(invalid);}catch(const std::exception& error){
+      rejected=std::string(error.what()).find("shadowSaturation")!=std::string::npos;
+    }
+    require(rejected,"Shadow saturation must independently validate its typed owner and finite input");
+  }
   auto defaultComposed=viewComposed;
   defaultComposed["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"].erase("rampComposition");
   auto explicitDefault=defaultComposed;

@@ -86,6 +86,8 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateNprRampComposition(material.nprDiffuse.rampComposition,material.nprDiffuse.present&&lit&&nprColorSurface
         &&!material.projectedHairRamp.present&&!material.eyeSurface.present,material.materialProfileVersion,
         (material.materialFeatures&MaterialFeatureDiffuseRamp)!=0);
+    validateNprShadowSaturation(material.nprDiffuse.shadowSaturation,material.nprDiffuse.present&&lit
+        &&(nprColorSurface||material.materialClass==AssetMaterialClass::Face),material.materialProfileVersion);
     validateMaterialRadianceScale(material.radianceScale,
         (material.materialFeatures&MaterialFeatureMultiplyComposite)!=0);
     validateMaterialDisplayTransform(material.displayTransform,
@@ -132,6 +134,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
             static_cast<float>(material.nprDiffuse.indirectNormal)};
         result.rows[1][0]=static_cast<float>(material.nprDiffuse.rimResponse);
         result.rows[1][3]=static_cast<float>(material.nprDiffuse.rampComposition);
+        result.rows[6][0]=material.nprDiffuse.shadowSaturation-1;
         result.rows[3][0]=static_cast<float>(material.nprDiffuse.characterVisibility);
         result.rows[3][1]=material.nprDiffuse.localDiffuseFloorScale;
         result.rows[3][2]=material.nprDiffuse.screenLightingNormal?2.F:material.nprDiffuse.radialLightingNormal?1.F:0.F;

@@ -1702,7 +1702,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
                  for(std::size_t index=0;index<mesh.materials.size();++index) {
                      const auto& material=mesh.materials[index];
                      if(!material.nprDiffuse.present||material.nprDiffuse.rampComposition==NprRampComposition::MaskVisibility)continue;
-                     values.push_back({{"materialIndex",base+index},{"name",material.name},{"rampComposition","view-ramp-alpha"}});
+                     values.push_back({{"materialIndex",base+index},{"name",material.name},{"rampComposition",
+                         material.nprDiffuse.rampComposition==NprRampComposition::ViewFacingMask?"view-facing-mask":"view-ramp-alpha"}});
                  }
              };
              append(asset_,0);for(const auto& resource:additionalResources_)append(resource->asset,resource->globalMaterialBase);
