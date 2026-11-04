@@ -599,3 +599,5 @@ $env:VCPKG_ROOT = "C:/path/to/vcpkg"
 当前证据见[联合验收](docs/acceptance/ev/2026-10-16.md)。
 
 视角颜色遮罩、影色饱和度及来源片元见[颜色核验](docs/acceptance/nr/npr-view-mask.md)。
+
+屏幕法线的对象阴影偏置及径向控制见[阴影核验](docs/acceptance/nr/screen-normal-shadow.md)。

@@ -196,6 +196,8 @@ KK、脸部阴影和色带具有非零的原生区域响应。
 程序化视角遮罩与影色饱和度见[颜色核验](../acceptance/nr/npr-view-mask.md)。
 两种构建及两种采样配置完成 56 次独立颜色检查。
 完整轮廓的阴影可见度按实际输入继续核验。
+屏幕法线的偏置通过[独立阴影核验](../acceptance/nr/screen-normal-shadow.md)。
+两种构建及三种采样配置完成 36 次图像检查。
 完整角色的皮肤、发丝、描边及透明阶段继续执行 Q1。
 服饰一、二的描边覆盖见[固定姿态核验](2026-11-03-character-reference-stages.md)。
 虹膜按[眼部输入](../acceptance/nr/eye-npr-inputs.md)核验独立基准和联合动作。

@@ -2968,6 +2968,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.NprViewMaskGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_view_mask_gpu.py"
         --executable "$<TARGET_FILE:AzurePlayer>" --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.NprViewMaskGpu PROPERTIES TIMEOUT 1800 LABELS gpu RUN_SERIAL TRUE)
+    add_test(NAME AzureRender.ScreenSurfaceNormalShadowGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_screen_normal_shadow_gpu.py"
+        --executable "$<TARGET_FILE:AzurePlayer>" --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.ScreenSurfaceNormalShadowGpu PROPERTIES TIMEOUT 1800 LABELS gpu RUN_SERIAL TRUE)
     add_test(NAME AzureRender.MaterialOriginGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_origin_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     add_test(NAME AzureRender.MaterialRadialNormalGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_origin_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --radial-normal --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
