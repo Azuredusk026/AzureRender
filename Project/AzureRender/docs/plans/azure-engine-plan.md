@@ -189,7 +189,11 @@ KK、脸部阴影和色带具有非零的原生区域响应。
 联合镜头完成 192 帧回归，角色和物流共采样 2,112 次。
 普通入口通过全项目检查，起始四帧与[衣料描边联合序列](../acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json)逐字节一致。
 两种构建分别完成[可玩路线](../acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json)的 540 帧输入和碰撞核验。
-可玩候选完成编辑器保存、目录移动和独立发布。隔离源工程和引擎后，游戏程序以包内资源完成 540 帧路线，三帧默认画面逐字节匹配。发布包包含 14 个生效的角色材质槽及 33 层场景反射图集。皮肤材质按肤色核验采用暖色基础颜色因子，Debug 与 Release 的可玩候选均完成 540 帧路线。候选指纹见[可玩交付记录](../acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json)。
+可玩候选完成编辑器保存、目录移动和独立发布。
+隔离源工程和引擎后，游戏程序以包内资源完成 540 帧路线，三帧默认画面逐字节匹配。
+发布包包含 14 个生效的角色材质槽及 33 层场景反射图集。
+皮肤材质按肤色核验采用暖色基础颜色因子，Debug 与 Release 的可玩候选均完成 540 帧路线。
+候选指纹见[可玩交付记录](../acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json)。
 屏幕法线按[专项核验](../acceptance/nr/screen-surface-normal.md)完成公共机制验证。
 两种构建、三种采样配置共通过八十四项 GPU 检查。
 暖肤色联合镜头的八帧输出逐像素一致。
@@ -201,7 +205,10 @@ KK、脸部阴影和色带具有非零的原生区域响应。
 受光描边与匹配背景完成[固定姿态核验](../acceptance/nr/lit-surfaces.md)。
 服饰一、二的区域相似度为 0.96499、0.96409。
 完整头发及后续阶段的区域相似度为 0.98887。
-严格字节条件、联合长序列和可玩候选继续核验。
+受光表面的[联合序列](../acceptance/nr/evidence/2026-11-05/lit-surfaces-motion/results.json)完成 192 帧采集。
+Debug 重开的四帧与 Release 逐字节一致。
+两种构建各完成 540 帧可玩输入回放。
+严格字节条件与独立交付继续核验。
 完整角色的皮肤、发丝、描边及透明阶段继续执行 Q1。
 服饰一、二的描边覆盖见[固定姿态核验](2026-11-03-character-reference-stages.md)。
 虹膜按[眼部输入](../acceptance/nr/eye-npr-inputs.md)核验独立基准和联合动作。

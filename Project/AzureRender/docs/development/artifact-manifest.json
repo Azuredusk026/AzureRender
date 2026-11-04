@@ -1135,7 +1135,9 @@
       "litSurfaces": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces/results.json",
       "litSurfacesStaticProject": "qualified-lit-surfaces-static/qualified.azureproject",
       "litSurfacesJointCandidate": "qualified-lit-surfaces-joint-v4/joint-materials.azureproject",
-      "litSurfacesJointStatus": "motion-validation-running"
+      "litSurfacesJointStatus": "motion-and-development-route-passed",
+      "litSurfacesMotion": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces-motion/results.json",
+      "litSurfacesPlayableCandidate": "qualified-lit-surfaces-playable/playable.azureproject"
     },
     {
       "path": "runs/20261104-001359-face-masked-rim-ff43bf",

@@ -1,0 +1,120 @@
+Project loaded: 完整联合场景显示验证 (joint-playable-linear-display)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+[1793827401547][info][startup][code=0] Starting logical device
+[1793827401584][info][gpu][code=0] GPU capability report: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\lit-surfaces-game-release\frames\gpu_capabilities.json
+[1793827401586][info][startup][code=0] Completed logical device in 38 ms
+[1793827401586][info][startup][code=0] Starting shadow resources
+[1793827401590][info][startup][code=0] Completed shadow resources in 4 ms
+[1793827401767][info][startup][code=0] Starting graphics pipelines
+[1793827401772][info][startup][code=0] Completed graphics pipelines in 4 ms
+[1793827401777][info][startup][code=0] Starting scene renderer
+Turntable foot pivot: [0.000000, -0.000000, -0.518535]
+Asset path: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\qualified-lit-surfaces-playable\content-central\mesh-5e30159980a5a31b.glb
+Loaded asset: 597 vertices, 1452 indices, 2 primitives, 3 materials
+Material Class v1 inventory:
+  [0] M_prop_map01_box+1_002_07 -> generic, flags=0x28, source=fallback/inferred
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [2] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793827464038][info][render][code=0] Character texture access: indexed, requested slots=6932, stage sampler limit=1048576
+[1793827464039][info][render][code=0] Scene load CPU preparation: 62256.197000 ms, materialPixelBytes=6365826224
+[1793827464185][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1793827464354][info][render][code=0] Reflection field: 12 local probes
+[1793827464542][info][render][code=0] Irradiance clipmap: 3 layers, 6 volume textures
+[1793827464546][info][render][code=0] Scene load shared textures: 370.610500 ms
+[1793827464647][info][render][code=0] Scene material texture begin: M_common_glass+1_001_02, slot=4, bytes=16777216
+[1793827465505][info][render][code=0] Scene material texture begin: M_common_glass+1_001_02, slot=4, bytes=16777216
+[1793827465838][info][render][code=0] Scene material texture begin: M_common_glass+1_001_02, slot=4, bytes=16777216
+[1793827466220][info][render][code=0] Scene material progress: resource=16, elapsedMs=1791.325200, hashMs=328.003300, mipMs=1161.288900, uploadMs=276.206200, transferredBytes=184549524, discardedBytes=150997720
+[1793827467681][info][render][code=0] Scene material progress: resource=32, elapsedMs=3232.036800, hashMs=595.751400, mipMs=2142.579400, uploadMs=445.193000, transferredBytes=318767252, discardedBytes=293606712
+[1793827468253][info][render][code=0] Scene material texture begin: M_common_glass+1_001_02, slot=4, bytes=16777216
+[1793827468653][info][render][code=0] Scene material progress: resource=48, elapsedMs=4181.467100, hashMs=871.997700, mipMs=2657.491800, uploadMs=576.121800, transferredBytes=398459028, discardedBytes=499130280
+[1793827469052][info][render][code=0] Scene material texture begin: M_mod_map01_zmdbuliding+1_002_07.001, slot=0, bytes=16777216
+[1793827469196][info][render][code=0] Scene material texture begin: M_mod_map01_zmdbuliding+1_002_07.001, slot=1, bytes=16777216
+[1793827469319][info][render][code=0] Scene material texture begin: M_mod_map01_zmdbuliding+1_002_07.001, slot=2, bytes=16777216
+[1793827469422][info][render][code=0] Scene material texture begin: M_mod_map01_zmdbuliding+1_002_07.001, slot=3, bytes=16777216
+[1793827469885][info][render][code=0] Scene material progress: resource=64, elapsedMs=5390.235900, hashMs=1177.382100, mipMs=3352.967400, uploadMs=756.662700, transferredBytes=532676756, discardedBytes=683682344
+[1793827470279][info][render][code=0] Scene material texture begin: M_common_glass+1_001_02, slot=4, bytes=16777216
+[1793827470582][info][render][code=0] Scene material progress: resource=80, elapsedMs=6066.313600, hashMs=1481.937400, mipMs=3632.329800, uploadMs=815.790900, transferredBytes=578814100, discardedBytes=922760344
+[1793827471831][info][render][code=0] Scene material progress: resource=96, elapsedMs=7294.428800, hashMs=1817.654600, mipMs=4372.876200, uploadMs=929.498400, transferredBytes=666894484, discardedBytes=1103118104
+[1793827472990][info][render][code=0] Scene material progress: resource=112, elapsedMs=8431.927700, hashMs=2130.458200, mipMs=5025.007900, uploadMs=1066.692400, transferredBytes=750780564, discardedBytes=1287670168
+[1793827473824][info][render][code=0] Scene material progress: resource=128, elapsedMs=9244.144100, hashMs=2428.921300, mipMs=5422.642500, uploadMs=1146.174700, transferredBytes=813695124, discardedBytes=1493193752
+[1793827474520][info][render][code=0] Scene material progress: resource=144, elapsedMs=9921.622700, hashMs=2696.658600, mipMs=5728.516500, uploadMs=1215.539900, transferredBytes=868221076, discardedBytes=1707105944
+[1793827474918][info][render][code=0] Scene material progress: resource=160, elapsedMs=10293.964200, hashMs=2948.770300, mipMs=5793.641000, uploadMs=1231.112500, transferredBytes=880803988, discardedBytes=1962961176
+[1793827475347][info][render][code=0] Scene material progress: resource=176, elapsedMs=10699.001000, hashMs=3205.053700, mipMs=5882.220300, uploadMs=1253.358600, transferredBytes=897581204, discardedBytes=2214622104
+[1793827475848][info][render][code=0] Scene material progress: resource=192, elapsedMs=11172.543500, hashMs=3465.525000, mipMs=5998.866400, uploadMs=1309.287500, transferredBytes=918552724, discardedBytes=2462088728
+[1793827476599][info][render][code=0] Scene material progress: resource=208, elapsedMs=11901.277300, hashMs=3723.995000, mipMs=6351.701700, uploadMs=1392.347900, transferredBytes=985661588, discardedBytes=2663418008
+[1793827476974][info][render][code=0] Scene material progress: resource=224, elapsedMs=12254.151400, hashMs=3978.340500, mipMs=6401.088300, uploadMs=1402.618900, transferredBytes=994050196, discardedBytes=2923467544
+[1793827477881][info][render][code=0] Scene material progress: resource=240, elapsedMs=13140.208800, hashMs=4240.038400, mipMs=6899.146400, uploadMs=1496.096900, transferredBytes=1069547668, discardedBytes=3116408216
+[1793827478739][info][render][code=0] Scene material progress: resource=256, elapsedMs=13978.776900, hashMs=4498.531800, mipMs=7332.118200, uploadMs=1610.453000, transferredBytes=1136656532, discardedBytes=3317737496
+[1793827479649][info][render][code=0] Scene material progress: resource=272, elapsedMs=14867.302300, hashMs=4760.168600, mipMs=7830.113900, uploadMs=1707.140400, transferredBytes=1212154004, discardedBytes=3510678168
+[1793827480486][info][render][code=0] Scene material progress: resource=288, elapsedMs=15679.811100, hashMs=5019.353300, mipMs=8251.005700, uploadMs=1807.557000, transferredBytes=1291845780, discardedBytes=3699424536
+[1793827480526][info][render][code=0] Scene material texture begin: M_common_glass+1_001_02, slot=4, bytes=16777216
+[1793827480929][info][render][code=0] Scene material progress: resource=304, elapsedMs=16101.767400, hashMs=5287.511600, mipMs=8315.699500, uploadMs=1854.326000, transferredBytes=1304428692, discardedBytes=3972056968
+[1793827481238][info][render][code=0] Scene material progress: resource=320, elapsedMs=16388.578400, hashMs=5535.823000, mipMs=8315.699500, uploadMs=1854.326000, transferredBytes=1304428692, discardedBytes=4240495112
+[1793827481347][info][render][code=0] Scene material progress: resource=336, elapsedMs=16485.215500, hashMs=5615.382300, mipMs=8315.699800, uploadMs=1859.132900, transferredBytes=1305035048, discardedBytes=4324690284
+[1793827481364][info][render][code=0] Scene material progress: resource=352, elapsedMs=16497.407700, hashMs=5621.176400, mipMs=8315.700300, uploadMs=1865.301900, transferredBytes=1309426100, discardedBytes=4326583596
+[1793827481419][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_01, slot=0, bytes=16777216
+[1793827481560][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_01, slot=1, bytes=16777216
+[1793827481677][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_01, slot=2, bytes=16777216
+[1793827481811][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_02, slot=0, bytes=16777216
+[1793827481953][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_02, slot=1, bytes=16777216
+[1793827482074][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_02, slot=2, bytes=16777216
+[1793827482210][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_03, slot=0, bytes=16777216
+[1793827482229][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_03, slot=1, bytes=16777216
+[1793827482248][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_03, slot=2, bytes=16777216
+[1793827482270][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_04, slot=0, bytes=22369620
+[1793827482310][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_04, slot=1, bytes=22369620
+[1793827482350][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_04, slot=2, bytes=22369620
+[1793827482390][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_05, slot=0, bytes=16777216
+[1793827482408][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_05, slot=1, bytes=16777216
+[1793827482426][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_05, slot=2, bytes=16777216
+[1793827482565][info][render][code=0] Scene material texture begin: M_actor_laevat_hair_01, slot=0, bytes=22369620
+[1793827482607][info][render][code=0] Scene material texture begin: M_actor_laevat_hair_01, slot=1, bytes=22369620
+[1793827482651][info][render][code=0] Scene material texture begin: M_actor_laevat_hair_01, slot=6, bytes=22369620
+[1793827482690][info][render][code=0] Scene material texture begin: M_actor_laevat_hair_01, slot=7, bytes=22369620
+[1793827482760][info][render][code=0] Scene material texture begin: captured-hair-front-blend, slot=0, bytes=22369620
+[1793827482784][info][render][code=0] Scene material texture begin: captured-hair-front-blend, slot=6, bytes=22369620
+[1793827482808][info][render][code=0] Scene material texture begin: captured-hair-front-blend, slot=7, bytes=22369620
+[1793827482832][info][render][code=0] Scene material texture begin: hair-back-projected-surface, slot=0, bytes=16777216
+[1793827482979][info][render][code=0] Scene material texture begin: hair-opaque-projected-surface, slot=0, bytes=16777216
+[1793827482999][info][render][code=0] Scene material texture begin: cloth-one-projected-surface, slot=0, bytes=16777216
+[1793827483144][info][render][code=0] Scene material texture begin: cloth-two-projected-surface, slot=0, bytes=16777216
+[1793827483454][info][render][code=0] Scene material progress: resource=368, elapsedMs=18557.564300, hashMs=6266.618600, mipMs=9309.718500, uploadMs=2235.827500, transferredBytes=1663772864, discardedBytes=4615020696
+[1793827483567][info][render][code=0] Scene material progress: resource=373, elapsedMs=18662.434300, hashMs=6361.807400, mipMs=9309.718500, uploadMs=2235.827500, transferredBytes=1663772864, discardedBytes=4698907616
+[1793827483671][info][render][code=0] Scene load buffers: 93.893500 ms
+[1793827483674][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1793827483675][info][render][code=0] Scene load skinning: 2.962800 ms
+[1793827483723][info][render][code=0] Scene load descriptors: 48.408000 ms
+[1793827585129][info][render][code=0] Scene load pipelines: 101405.011500 ms
+[1793827585129][info][render][code=0] Optional resources: faceSdfTextures=1, showcasePlatform=true
+Scene renderer: character (sceneType=character)
+[1793827585129][info][startup][code=0] Completed scene renderer in 183351 ms
+[1793827585130][info][startup][code=0] Starting editor interface
+[1793827585130][info][startup][code=0] Completed editor interface in 0 ms
+CQ-0 QA: camera=scene, light=scene, effect=none, state=enabled, isolation=beauty
+Diagnostic view: Beauty, stylized lighting: off, internal outline: off, HUD: off
+[1793827585161][info][render][code=0] View fog: matched
+Clustered lighting: 16 lights, 17605 cluster references
+[1793827585202][info][render][code=0] Outline mask allocated: frame=0, instances=1, bytes=518400
+[1793827585535][info][capture][code=0] Capture progress: 1 / 540
+[1793827585649][info][render][code=0] Outline mask allocated: frame=1, instances=1, bytes=518400
+[1793827599938][info][capture][code=0] Capture progress: 60 / 540
+[1793827614285][info][capture][code=0] Capture progress: 120 / 540
+[1793827628647][info][capture][code=0] Capture progress: 180 / 540
+[1793827642886][info][capture][code=0] Capture progress: 240 / 540
+[1793827657277][info][capture][code=0] Capture progress: 300 / 540
+[1793827674801][info][capture][code=0] Capture progress: 360 / 540
+[1793827690873][info][capture][code=0] Capture progress: 420 / 540
+[1793827698177][info][runtime][code=0] Level committed: native-captured-camera-3534
+[1793827705443][info][capture][code=0] Capture progress: 480 / 540
+[1793827719727][info][capture][code=0] Capture progress: 540 / 540
+Rendered frames: 540
+Capture manifest: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\lit-surfaces-game-release\frames\capture_manifest.json
+Captured frames: 540 at 60 fps
+Allocator after unload: buffers=0 images=0

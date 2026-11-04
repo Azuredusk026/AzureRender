@@ -1,0 +1,119 @@
+{
+  "status": "prepared",
+  "sourceProject": "qualified-lit-surfaces-joint-v4",
+  "sourceMaterialSlots": 14,
+  "records": [
+    {
+      "path": "assets/linear-display-materials/material-1.azurematerial",
+      "sha256": "df179f82351d0ca2393020225d1cb29fea13aba4132a6e35d8cf2d8da395ad78"
+    },
+    {
+      "path": "assets/linear-display-materials/material-2.azurematerial",
+      "sha256": "844f6be888769ef4bb182bc7e575fb861163f68ed355b0a4d8b53159b0cf11dc"
+    },
+    {
+      "path": "assets/linear-display-materials/material-9.azurematerial",
+      "sha256": "f3189b7b2253b06f8880d7a574bf6522230b71d189c2faffda3534efc83094b0"
+    },
+    {
+      "path": "content-character/derived-textures/14453157-b37c-504b-bc5a-35d882da0975.dds",
+      "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+    },
+    {
+      "path": "content-character/derived-textures/14453157-b37c-504b-bc5a-35d882da0975.dds.azmeta",
+      "sha256": "db74eeb2df9e956ec533d3cdd77dac5fadf813a3340a898c67edcf39083bec22"
+    },
+    {
+      "path": "content-character/derived-textures/19be636f-ddfe-5c9b-a0f0-85da6acdbc99.png",
+      "sha256": "8d3a0684e90b4fa957ebef0dd45e76a44c793453cbb8b485e25d037ddf7a84c3"
+    },
+    {
+      "path": "content-character/derived-textures/19be636f-ddfe-5c9b-a0f0-85da6acdbc99.png.azmeta",
+      "sha256": "75815e4912c8d35be42f15a92582ad65fd6262c74c103e9ae1cdc8b5f143dc7f"
+    },
+    {
+      "path": "content-character/derived-textures/29878ca4-6b39-5d28-9de6-5ed6d77a5211.png",
+      "sha256": "28fb686ce781ae7647550ae8c67dbddccf723bbd2f01433f9eef6054e6f3a34c"
+    },
+    {
+      "path": "content-character/derived-textures/29878ca4-6b39-5d28-9de6-5ed6d77a5211.png.azmeta",
+      "sha256": "92328219bbafc104c237cd2879cc8784ae8e7aacaa0b5710b1aff68ee3fd4741"
+    },
+    {
+      "path": "content-character/derived-textures/37395a96-8ce7-50eb-a102-b757978e70f0.png",
+      "sha256": "ff12009a3f80f1542591d90ec301b09eaadb752aed10d4206e26936dfe6f9685"
+    },
+    {
+      "path": "content-character/derived-textures/37395a96-8ce7-50eb-a102-b757978e70f0.png.azmeta",
+      "sha256": "a5fbc2f16c097de564e26cdd5c8b7fc52304067ad9af216270c65bd0410f9de4"
+    },
+    {
+      "path": "content-character/derived-textures/44fa21a9-65de-54d5-9bfd-679d3adfd61e.png",
+      "sha256": "051c14bb6766f3fd39c2c1dcaa5cb218670fcb187304c6300759c94b3877e8c2"
+    },
+    {
+      "path": "content-character/derived-textures/44fa21a9-65de-54d5-9bfd-679d3adfd61e.png.azmeta",
+      "sha256": "ca4cbe15f798f1be17e8168f954b1eb0aa34692d8bd389d96f9bce50573d67f1"
+    },
+    {
+      "path": "content-character/derived-textures/aad8a550-3e3c-562a-a7a9-bd391f4c5931.dds",
+      "sha256": "debaf3800b2f6fe068dfb792dff1ed252fcf31c5bc56bd589eaa3ece6b51a705"
+    },
+    {
+      "path": "content-character/derived-textures/aad8a550-3e3c-562a-a7a9-bd391f4c5931.dds.azmeta",
+      "sha256": "71bb23b983d2aa9a527fdeeac73fcc56c7638220c41a6e588038a42287794fb4"
+    },
+    {
+      "path": "content-character/derived-textures/d8826617-5a94-5d17-a07e-996dfc6c9706.dds",
+      "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+    },
+    {
+      "path": "content-character/derived-textures/d8826617-5a94-5d17-a07e-996dfc6c9706.dds.azmeta",
+      "sha256": "786d9232a227271ae7c5f796c64b95b6ede2c1bf22f0e7d942368956273c9d72"
+    },
+    {
+      "path": "content-character/derived-textures/dd77642f-01c4-5906-89c0-c882ea46aa05.dds",
+      "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05"
+    },
+    {
+      "path": "content-character/derived-textures/dd77642f-01c4-5906-89c0-c882ea46aa05.dds.azmeta",
+      "sha256": "5beb109f04271144dc58e3a37984d00bc713ce438f63106e3cbfa87fab882bc7"
+    },
+    {
+      "path": "content-character/derived-textures/f70febd6-669f-5213-bdc6-ff8efb51d602.png",
+      "sha256": "0f35dac606646a5badb7f3702ea740b8d80a5f8a0568f270dfdcb73c5b68c43d"
+    },
+    {
+      "path": "content-character/derived-textures/f70febd6-669f-5213-bdc6-ff8efb51d602.png.azmeta",
+      "sha256": "49551232347a60b369f755de17031dfa23d62cbc35e9ee940b71cd61669637ec"
+    },
+    {
+      "path": "content-character/derived-textures/f761aec7-ccd5-57d5-897d-7f0c5d31e6b6.png",
+      "sha256": "8d3a0684e90b4fa957ebef0dd45e76a44c793453cbb8b485e25d037ddf7a84c3"
+    },
+    {
+      "path": "content-character/derived-textures/f761aec7-ccd5-57d5-897d-7f0c5d31e6b6.png.azmeta",
+      "sha256": "37a14e2c445119c704df098bef15937891b370bcbc4c505f619f9a96d7fd92fd"
+    },
+    {
+      "path": "content-character/hero-idle-opaque-overlays.glb",
+      "sha256": "9143d47429a20fbc9b545745ff18b8d2f4f940206d602b7075d89192aef58898"
+    },
+    {
+      "path": "content-character\\derived-textures\\14453157-b37c-504b-bc5a-35d882da0975.dds.azmeta",
+      "sha256": "db74eeb2df9e956ec533d3cdd77dac5fadf813a3340a898c67edcf39083bec22"
+    },
+    {
+      "path": "content-character\\hair-base-coverage.dds.azmeta",
+      "sha256": "89f3a09368493d4152d2cc2e9eb1358bd7aa57c0e47bd178d818c3b02370606a"
+    },
+    {
+      "path": "content-character\\restored-images\\image-49.dds.azmeta",
+      "sha256": "df024cc2a03e46715b888464ddaddbf1892407363ed9e64e19a22d9f641f1be2"
+    },
+    {
+      "path": "content-character\\restored-images\\image-50.dds.azmeta",
+      "sha256": "5a52104e813dc2cb87dfb322bddd3f8ee529679db8b0811288b4b7cb0aa85840"
+    }
+  ]
+}

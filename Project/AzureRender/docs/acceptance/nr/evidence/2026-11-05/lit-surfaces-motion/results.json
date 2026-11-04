@@ -1,0 +1,260 @@
+{
+  "status": "passed",
+  "scope": "Q2 joint animation and Q3 development playable route; overall visual acceptance remains failed-user-review",
+  "jointProject": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+  "playableProject": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-playable\\playable.azureproject",
+  "releaseMotion": {
+    "frames": 192,
+    "width": 2560,
+    "height": 1440,
+    "fps": 24,
+    "nodeSamples": 2112
+  },
+  "debugReopen": {
+    "frames": 4,
+    "byteExact": true
+  },
+  "playableRoute": {
+    "configurations": [
+      "Debug",
+      "Release"
+    ],
+    "framesEach": 540,
+    "width": 960,
+    "height": 540,
+    "actions": 13
+  },
+  "warmSkinFactor": [
+    0.98,
+    0.93,
+    0.89,
+    1
+  ],
+  "materialSlots": 14,
+  "reflectionLayers": 33,
+  "pending": [
+    "Independent package and editor-save delivery",
+    "Strict complete-hair byte gate",
+    "Scene GI and reflection formal acceptance",
+    "NR and P8 formal gates"
+  ],
+  "files": [
+    {
+      "path": "lit-surfaces-joint-motion-results.json",
+      "sha256": "216d451d852ce924d99cfeee8b1ebeae97ff0c793c854f7086df02eb121b984b",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-results.json",
+      "sourceSha256": "216d451d852ce924d99cfeee8b1ebeae97ff0c793c854f7086df02eb121b984b",
+      "sourceBytes": 19587
+    },
+    {
+      "path": "lit-surfaces-playable-results.json",
+      "sha256": "58593ee12d93086e48ce7759e7d3581188d2757b7f2c881e17a2ab70aa0a4120",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-playable-results.json",
+      "sourceSha256": "58593ee12d93086e48ce7759e7d3581188d2757b7f2c881e17a2ab70aa0a4120",
+      "sourceBytes": 4821
+    },
+    {
+      "path": "lit-surfaces-joint-motion-release--player.log",
+      "sha256": "1d6618166c97f388254b45f226d48cdcc13269b554cc4774f04ad4fa66fc9390",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-release\\player.log",
+      "sourceSha256": "1d6618166c97f388254b45f226d48cdcc13269b554cc4774f04ad4fa66fc9390",
+      "sourceBytes": 14153
+    },
+    {
+      "path": "lit-surfaces-joint-motion-release--command.json",
+      "sha256": "9849c9b7e4d0c440faab1d2061f6a47a2aaaad9f6bcceea7d496b729ddf321e6",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-release\\command.json",
+      "sourceSha256": "9849c9b7e4d0c440faab1d2061f6a47a2aaaad9f6bcceea7d496b729ddf321e6",
+      "sourceBytes": 834
+    },
+    {
+      "path": "lit-surfaces-joint-motion-release--runtime.json.gz",
+      "sha256": "aac03bc3979bb03cad618543cee39cc96ded280321371b77153e4e8dca517bde",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-release\\runtime.json",
+      "sourceSha256": "3f7a72a3ff60f3d176dd0728369addbde61f13cc5d1569202836a292e2af197f",
+      "sourceBytes": 317946
+    },
+    {
+      "path": "lit-surfaces-joint-motion-release--frames--capture_manifest.json",
+      "sha256": "e3985ef423b7fcb02a58c67a2043e1b5f779c388e3304bad79d2477e33a3fb10",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-release\\frames\\capture_manifest.json",
+      "sourceSha256": "e3985ef423b7fcb02a58c67a2043e1b5f779c388e3304bad79d2477e33a3fb10",
+      "sourceBytes": 15388
+    },
+    {
+      "path": "lit-surfaces-joint-motion-debug--player.log",
+      "sha256": "f24206ee57472681ad6e73f71c002f4c7f57d289121407f7ad7dcf5ac15f4b38",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-debug\\player.log",
+      "sourceSha256": "f24206ee57472681ad6e73f71c002f4c7f57d289121407f7ad7dcf5ac15f4b38",
+      "sourceBytes": 13919
+    },
+    {
+      "path": "lit-surfaces-joint-motion-debug--command.json",
+      "sha256": "629c8cd33b32b6a852e90605ba334c70b39dbc73b76f6a463899e18b01429bd3",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-debug\\command.json",
+      "sourceSha256": "629c8cd33b32b6a852e90605ba334c70b39dbc73b76f6a463899e18b01429bd3",
+      "sourceBytes": 826
+    },
+    {
+      "path": "lit-surfaces-joint-motion-debug--runtime.json.gz",
+      "sha256": "ec2064b260bb19543326dd39befe58ee24b2c1e0ca33801cdbb1878f4900ebeb",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-debug\\runtime.json",
+      "sourceSha256": "cc41518733ec1eb2cfeb57e2aa1848e9fef41bafc80d1aff94f91b241b093942",
+      "sourceBytes": 317963
+    },
+    {
+      "path": "lit-surfaces-joint-motion-debug--frames--capture_manifest.json",
+      "sha256": "dccb566f1aa4a85a844915f495e605b4d0ea3aae969fc7647025ff712c70243c",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-debug\\frames\\capture_manifest.json",
+      "sourceSha256": "dccb566f1aa4a85a844915f495e605b4d0ea3aae969fc7647025ff712c70243c",
+      "sourceBytes": 15388
+    },
+    {
+      "path": "lit-surfaces-game-release--player.log",
+      "sha256": "3d06063f2c3a670ada3c77ce80f1968481423c20ac8fad0c888ef5e0b14f7d72",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-release\\player.log",
+      "sourceSha256": "3d06063f2c3a670ada3c77ce80f1968481423c20ac8fad0c888ef5e0b14f7d72",
+      "sourceBytes": 14295
+    },
+    {
+      "path": "lit-surfaces-game-release--command.json",
+      "sha256": "5222082ca9e4920882ae61ba3f68c8fc195f570d7fa80e1f2df5ceca94265823",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-release\\command.json",
+      "sourceSha256": "5222082ca9e4920882ae61ba3f68c8fc195f570d7fa80e1f2df5ceca94265823",
+      "sourceBytes": 988
+    },
+    {
+      "path": "lit-surfaces-game-release--runtime.json.gz",
+      "sha256": "80296b608b50226900eb15f64176c63e5890564179cdc493139da460d620b10a",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-release\\runtime.json",
+      "sourceSha256": "3dfa5aac240c8911e7e995c555dd7126c6c26b0272de8539999ae6537a448fd2",
+      "sourceBytes": 2964064
+    },
+    {
+      "path": "lit-surfaces-game-release--frames--capture_manifest.json",
+      "sha256": "445e990ba37b4aba854526015e96642a45dd816dbabb1441d27e024de99a260c",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-release\\frames\\capture_manifest.json",
+      "sourceSha256": "445e990ba37b4aba854526015e96642a45dd816dbabb1441d27e024de99a260c",
+      "sourceBytes": 15380
+    },
+    {
+      "path": "lit-surfaces-game-release--behavior-verification.json",
+      "sha256": "43c9ff37075e9410d9779b628e0e724a07de12325212fc58ddd0c9cb54a5f8a4",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-release\\behavior-verification.json",
+      "sourceSha256": "43c9ff37075e9410d9779b628e0e724a07de12325212fc58ddd0c9cb54a5f8a4",
+      "sourceBytes": 878
+    },
+    {
+      "path": "lit-surfaces-game-debug--player.log",
+      "sha256": "b6284263a2b3d9f151439e0929b1f826c50e2efb9001f4716ccd26172af7d5df",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-debug\\player.log",
+      "sourceSha256": "b6284263a2b3d9f151439e0929b1f826c50e2efb9001f4716ccd26172af7d5df",
+      "sourceBytes": 14324
+    },
+    {
+      "path": "lit-surfaces-game-debug--command.json",
+      "sha256": "6c1e71bcd8ddbe3faa20a480e439062be77f0980bcb1bf205f637e7df2295b5c",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-debug\\command.json",
+      "sourceSha256": "6c1e71bcd8ddbe3faa20a480e439062be77f0980bcb1bf205f637e7df2295b5c",
+      "sourceBytes": 982
+    },
+    {
+      "path": "lit-surfaces-game-debug--runtime.json.gz",
+      "sha256": "705c079b244346facccb6d4f15d8ca56d05bdb6b43e1c21dbcfa78e975bee0ff",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-debug\\runtime.json",
+      "sourceSha256": "c81f0a5fd5c0f840dc260421e1d2d2ee418d1826fcb21fe930fd2347ed688123",
+      "sourceBytes": 2963885
+    },
+    {
+      "path": "lit-surfaces-game-debug--frames--capture_manifest.json",
+      "sha256": "dbd9c28d1261d950a386baa5c12b6c21cf8f6f093e978003b6dbec672b4bfbe4",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-debug\\frames\\capture_manifest.json",
+      "sourceSha256": "dbd9c28d1261d950a386baa5c12b6c21cf8f6f093e978003b6dbec672b4bfbe4",
+      "sourceBytes": 15384
+    },
+    {
+      "path": "lit-surfaces-game-debug--behavior-verification.json",
+      "sha256": "43c9ff37075e9410d9779b628e0e724a07de12325212fc58ddd0c9cb54a5f8a4",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-game-debug\\behavior-verification.json",
+      "sourceSha256": "43c9ff37075e9410d9779b628e0e724a07de12325212fc58ddd0c9cb54a5f8a4",
+      "sourceBytes": 878
+    },
+    {
+      "path": "run_lit_surfaces_joint_motion.py",
+      "sha256": "e1a152da96f62c63cb48a150bbc282265bff7578008faffb938437b2032f2ad8",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\run_lit_surfaces_joint_motion.py",
+      "sourceSha256": "e1a152da96f62c63cb48a150bbc282265bff7578008faffb938437b2032f2ad8",
+      "sourceBytes": 2239
+    },
+    {
+      "path": "run_lit_surfaces_playable.py",
+      "sha256": "ed9431f01acd9aa0ae81a987b8f354535e6214cd19f49ff743c7ddb356f55d58",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\run_lit_surfaces_playable.py",
+      "sourceSha256": "ed9431f01acd9aa0ae81a987b8f354535e6214cd19f49ff743c7ddb356f55d58",
+      "sourceBytes": 2241
+    },
+    {
+      "path": "prepare_lit_surfaces_joint_v3.py",
+      "sha256": "995ad2d2cd49208ff5244c54d7dc9c60080045d3328a20c61dc23ce2614d065c",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\prepare_lit_surfaces_joint_v3.py",
+      "sourceSha256": "995ad2d2cd49208ff5244c54d7dc9c60080045d3328a20c61dc23ce2614d065c",
+      "sourceBytes": 8276
+    },
+    {
+      "path": "prepare_lit_surfaces_joint_v4.py",
+      "sha256": "0f9b043782c8e9b07d28cdd779ad3ebb63f3488f00fecc06c1ded025cdfc2b7f",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\prepare_lit_surfaces_joint_v4.py",
+      "sourceSha256": "0f9b043782c8e9b07d28cdd779ad3ebb63f3488f00fecc06c1ded025cdfc2b7f",
+      "sourceBytes": 2261
+    },
+    {
+      "path": "prepare_lit_surfaces_playable.py",
+      "sha256": "ed9837332ee73327fbd944a97c89231f0de73b67bf211e3faa4d66d9fb29b355",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\prepare_lit_surfaces_playable.py",
+      "sourceSha256": "ed9837332ee73327fbd944a97c89231f0de73b67bf211e3faa4d66d9fb29b355",
+      "sourceBytes": 1647
+    },
+    {
+      "path": "verify_playable_route.py",
+      "sha256": "4a97cfba125ca4dc96f69cfd5ddba7cc423fc5974a7b91ae8ce18b32a9b3d083",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\verify_playable_route.py",
+      "sourceSha256": "4a97cfba125ca4dc96f69cfd5ddba7cc423fc5974a7b91ae8ce18b32a9b3d083",
+      "sourceBytes": 3517
+    },
+    {
+      "path": "qualified-lit-surfaces-playable--derived-surfaces-playable.json",
+      "sha256": "896ef4a2abc2f0758248c1e8d38d6ec9c5af75649cfea02c66ad04d7d60dd46e",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-playable\\derived-surfaces-playable.json",
+      "sourceSha256": "896ef4a2abc2f0758248c1e8d38d6ec9c5af75649cfea02c66ad04d7d60dd46e",
+      "sourceBytes": 5465
+    },
+    {
+      "path": "video.json",
+      "sha256": "9e79caedac4f2597da0fd9d7ffbb4d6f0aeaa7e038656a600c99650ef63ec9c8",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-release\\motion.delivery.json",
+      "sourceSha256": "9e79caedac4f2597da0fd9d7ffbb4d6f0aeaa7e038656a600c99650ef63ec9c8",
+      "sourceBytes": 1014
+    },
+    {
+      "path": "frame-000000.png",
+      "sha256": "c4fa3e85b3e6b6b5aa249b77c5616ccf9168dc6cb802b0c3a9532139d46c3deb",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-release\\frames\\frame_000000.png",
+      "sourceSha256": "c4fa3e85b3e6b6b5aa249b77c5616ccf9168dc6cb802b0c3a9532139d46c3deb",
+      "sourceBytes": 5714863
+    },
+    {
+      "path": "frame-000191.png",
+      "sha256": "17d452bfcc9cc23fb1ac451bb464e240bebb57bd78208ed0e05a24195939738a",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-motion-release\\frames\\frame_000191.png",
+      "sourceSha256": "17d452bfcc9cc23fb1ac451bb464e240bebb57bd78208ed0e05a24195939738a",
+      "sourceBytes": 5717782
+    },
+    {
+      "path": "head-review.png",
+      "sha256": "970d0fc9c2bb90b26d30838ed65a91d7c2434338cd36a518c604d056de24d214",
+      "source": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\lit-surfaces-joint-head-review.png",
+      "sourceSha256": "970d0fc9c2bb90b26d30838ed65a91d7c2434338cd36a518c604d056de24d214",
+      "sourceBytes": 85094
+    }
+  ]
+}
