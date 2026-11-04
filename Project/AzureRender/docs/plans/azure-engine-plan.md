@@ -189,7 +189,7 @@ KK、脸部阴影和色带具有非零的原生区域响应。
 联合镜头完成 192 帧回归，角色和物流共采样 2,112 次。
 普通入口通过全项目检查，起始四帧与[衣料描边联合序列](../acceptance/nr/evidence/2026-11-04/sampled-outline/motion.json)逐字节一致。
 两种构建分别完成[可玩路线](../acceptance/nr/evidence/2026-11-04/joint-playable-route/results.json)的 540 帧输入和碰撞核验。
-可玩候选完成编辑器保存、目录移动和独立发布。隔离源工程和引擎后，游戏程序以包内资源完成 540 帧路线，三帧默认画面逐字节匹配。发布包包含 14 个生效的角色材质槽及 33 层场景反射图集。候选指纹见[可玩交付记录](../acceptance/nr/evidence/2026-11-04/cloth-field-delivery/results.json)。
+可玩候选完成编辑器保存、目录移动和独立发布。隔离源工程和引擎后，游戏程序以包内资源完成 540 帧路线，三帧默认画面逐字节匹配。发布包包含 14 个生效的角色材质槽及 33 层场景反射图集。皮肤材质按肤色核验采用暖色基础颜色因子，Debug 与 Release 的可玩候选均完成 540 帧路线。候选指纹见[可玩交付记录](../acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json)。
 完整角色的皮肤、发丝、描边及透明阶段继续执行 Q1。
 服饰一、二的描边覆盖见[固定姿态核验](2026-11-03-character-reference-stages.md)。
 虹膜按[眼部输入](../acceptance/nr/eye-npr-inputs.md)核验独立基准和联合动作。

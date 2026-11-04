@@ -22,7 +22,7 @@ $run = Get-Content build/current-character-reference-run.txt
 
 ## 可玩交付候选
 
-在当前运行目录的 `cloth-field-delivery/独立游戏 中文 空格` 中双击 `完整联合场景显示验证.exe`。操作说明见包内 `GAME-GUIDE.md`。该候选使用包内固定版本的场景和播放器，功能范围及校验值见[独立发布核验](../acceptance/nr/evidence/2026-11-04/cloth-field-delivery/results.json)。
+在当前运行目录的 `skin-warm-delivery/独立游戏 中文 空格` 中双击 `完整联合场景显示验证.exe`。操作说明见包内 `GAME-GUIDE.md`。该候选使用包内固定版本的场景和播放器，功能范围及校验值见[独立发布核验](../acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json)。
 
 ## 独立场景启动
 
