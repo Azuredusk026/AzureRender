@@ -101,6 +101,6 @@ GPU 画像布局版本为二十一，大小为 352 字节。
 
 ## 径向照明法线
 
-二版的通用、皮肤、布料和金属材质可在 `nprDiffuse` 中将 `lightingNormal` 设为 `origin-radial-horizontal`。材质必须通过 `rimOrigin` 显式绑定原点节点。世界位置减去该节点的世界原点后，纵轴分量取 1/16384，其余分量归一化后参与 NPR 照明。原点随节点动画更新。缺省值 `surface` 使用表面法线。
+二版的通用、皮肤、布料和金属材质可在 `nprDiffuse` 中将 `lightingNormal` 设为 `origin-radial-horizontal`。材质必须通过 `rimOrigin` 显式绑定原点节点。世界位置减去该节点的世界原点后，纵轴分量取 1/16384，其余分量归一化后参与 NPR 照明。原点随节点动画更新。对象阴影的法线偏移使用几何法线。缺省值 `surface` 使用表面法线。
 
 混合透明材质可将 `nprDiffuse.transparentHighlights` 设为 `true`，接收已配置的角色高光与轮廓光。该值缺省为 `false`。配置解析同时核验材质版本、透明队列及原点绑定。独立夹具覆盖两个原点、变换、镜像、固定描述符、外部材质和动画。

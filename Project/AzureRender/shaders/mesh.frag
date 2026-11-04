@@ -485,7 +485,8 @@ CharacterDiffuseResponse materialNprDiffuseResponse(vec4 base,float metallic,vec
     vec4 parameters=profile.rows[0];
     vec2 mask=parameters.y>1.5?vec2(1,0):parameters.y>.5?textureLod(AZ_TEX_STYLE_MASK,textureCoordinate,0).gb:vec2(0);
     vec3 shadow=materialFeatureEnabled(4096U)>.5?sampleShadowColorLut(AZ_TEX_SHADOW_COLOR_LUT,base.rgb):base.rgb;
-    float characterVisibility=materialCharacterVisibility(uint(profile.rows[3].x),normal,visibility,mainShadow);
+    vec3 shadowNormal=profile.rows[3].z>.5?normalize(worldNormal):normal;
+    float characterVisibility=materialCharacterVisibility(uint(profile.rows[3].x),shadowNormal,visibility,mainShadow);
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
     if(profile.rows[1].w>.5) {
         CharacterDiffuseResponse masks=characterDiffuseResponse(materialNprLitAlbedo(base.rgb,normal,view),shadow,

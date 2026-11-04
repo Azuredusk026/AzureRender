@@ -65,7 +65,70 @@
   },
   "implementation": {
     "src/assets/MaterialRimResponse.hpp": "ff9ea828501acc453197e83ffe81d62e5035fa631259768df3e1f9f9e825faee",
-    "shaders/mesh.frag": "1c6a4704e4a7169995d034de97e44157109d77254e3e80913db6a6740067a813",
+    "shaders/mesh.frag": "58e7a925f48b5af282e9be3d893fb2516481c26c5c2580a65e258aecd8573973",
     "tools/test_material_origin_gpu.py": "b09e9e597dcffc922354b082c9fd637187a27b6bac9b452b026a813aa952cfa0"
+  },
+  "geometryShadowNormal": {
+    "scope": "径向法线参与照明。对象阴影偏移使用几何法线。",
+    "production": {
+      "public-radial-shell-capture": {
+        "0": {
+          "count": 16459,
+          "mean": 0.45664985722097334,
+          "within1": 15858
+        },
+        "1138": {
+          "count": 2832,
+          "mean": 21.1519538606403,
+          "within1": 11
+        },
+        "1291": {
+          "count": 725,
+          "mean": 2.7770114942528736,
+          "within1": 535
+        },
+        "1314": {
+          "count": 236,
+          "mean": 5.168079096045198,
+          "within1": 4
+        }
+      },
+      "radial-geometry-shadow-production-release": {
+        "0": {
+          "count": 16459,
+          "mean": 0.45664985722097334,
+          "within1": 15858
+        },
+        "1138": {
+          "count": 2832,
+          "mean": 21.152071563088512,
+          "within1": 11
+        },
+        "1291": {
+          "count": 725,
+          "mean": 2.7770114942528736,
+          "within1": 535
+        },
+        "1314": {
+          "count": 236,
+          "mean": 4.372881355932203,
+          "within1": 4
+        }
+      }
+    },
+    "regression": {
+      "release": {
+        "tests": 3,
+        "passed": true,
+        "sha256": "b20bb4abff5a2e5f186fd05178d50e8692352cbcec9cf52b5281b3d4f634b1f8",
+        "log": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\radial-geometry-shadow-tests-release.log"
+      },
+      "debug": {
+        "tests": 3,
+        "passed": true,
+        "sha256": "a42e19cce6404df0c30db920e87952786d3997646349e7fa2974891e76067869",
+        "log": "build\\runs\\20261103-234012-character-reference-stages-5abe6c\\radial-geometry-shadow-tests-debug.log"
+      }
+    }
   }
 }
