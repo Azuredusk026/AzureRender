@@ -195,6 +195,14 @@
     },
     "hair": {
       "type": "object",
+      "properties": {
+        "projectedRamp": {
+          "type": "object",
+          "properties": {
+            "snapshotNormal": {"type": "string", "enum": ["lighting", "material-normal-rg"], "default": "lighting"}
+          }
+        }
+      },
       "description": "Typed fields and ownership are validated by the production material interpreter."
     },
     "diffuseRamp": {
@@ -220,7 +228,7 @@
       "type": "object",
       "description": "Typed fields and ownership are validated by the production material interpreter.",
       "properties": {
-        "lightingNormal": {"type": "string", "enum": ["surface", "origin-radial-horizontal"]},
+        "lightingNormal": {"type": "string", "enum": ["surface", "origin-radial-horizontal", "screen-surface"]},
         "transparentHighlights": {"type": "boolean", "default": false},
         "rampComposition": {
           "type": "string",

@@ -195,6 +195,7 @@ struct AssetMaterial {
         SurfaceResponse surfaceResponse=SurfaceResponse::Layered;
         float diffuseScale=1;
         float tangentSign=1;
+        bool materialSnapshotNormal=false;
         struct Lighting {
             bool present=false,transparentHighlights=false;
             float shadowBrightness=1,shadowSaturation=1,shadowScale=1;
@@ -239,6 +240,7 @@ struct AssetMaterial {
         BaseAo baseAo=BaseAo::One;
         IndirectNormal indirectNormal=IndirectNormal::Surface;
         bool radialLightingNormal=false;
+        bool screenLightingNormal=false;
         bool transparentHighlights=false;
         struct Lighting {
             bool present=false;

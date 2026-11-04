@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_screen_normal_gpu.py", line 226, in <module>
+    run(args.executable.resolve(), args.output.resolve(), args.quality, args.case, args.expected_validation)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_screen_normal_gpu.py", line 195, in run
+    assert np.max(np.abs(actual - expected)) <= .008, (name, actual, expected)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('empty', array([0., 0., 0.]), array([0.13278946, 0.13278946, 0.13278946]))

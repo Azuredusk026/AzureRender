@@ -260,6 +260,26 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     require(std::abs(hair.primaryShift+.02F)<.000001F&&std::abs(hair.secondaryShift-.02F)<.000001F
         &&std::abs(hair.specularNormalScale-1.4F)<.000001F&&hair.objectBasis[2]==-1,
         "Signed shifts, independent normal scales and rotated source basis must survive loading");
+    auto snapshotSource=source;
+    snapshotSource["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["snapshotNormal"]="material-normal-rg";
+    const auto snapshotAsset=load(snapshotSource);
+    require(packMaterialSurfaceProfile(snapshotAsset.materials[0]).rows[6][3]==4,
+        "Independent material snapshot normals must retain their own flag");
+    for(unsigned invalid=0;invalid<3;++invalid) {
+        auto orphan=snapshotAsset.materials[0];
+        if(invalid==0)orphan.projectedHairRamp.present=false;
+        if(invalid==1)orphan.materialProfileVersion=1;
+        if(invalid==2)orphan.materialClass=AssetMaterialClass::Generic;
+        bool denied=false;try{(void)packMaterialSurfaceProfile(orphan);}catch(const std::invalid_argument&){denied=true;}
+        require(denied,"Independent snapshot normal ownership must be validated before packing");
+    }
+    snapshotSource["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["snapshotNormal"]="lighting";
+    require(packMaterialSurfaceProfile(load(snapshotSource).materials[0]).rows==packMaterialSurfaceProfile(material).rows,
+        "Explicit lighting snapshot normals must retain the default profile");
+    for(const auto& invalid:Json::array({nullptr,true,12.5,"unknown"})){
+        auto bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["snapshotNormal"]=invalid;
+        reject(bad);
+    }
     auto handed=source;handed["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["tangentSign"]=-1;
     auto integrated=source;
     integrated["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back("hair-pixel-integral");
@@ -407,6 +427,14 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
     const auto translucentAsset=load(translucentStrand);
     require(packMaterialSurfaceProfile(translucentAsset.materials[0]).rows[6][3]==2.F,
         "Transparent projected hair must retain its explicit highlight receiver policy");
+    for(const auto& document:{litStrand,translucentStrand}) {
+        auto independent=document;
+        independent["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["snapshotNormal"]="material-normal-rg";
+        const auto original=packMaterialSurfaceProfile(load(document).materials[0]);
+        const auto selected=packMaterialSurfaceProfile(load(independent).materials[0]);
+        require(selected.rows[6][3]==original.rows[6][3]+4,
+            "Snapshot normals must compose independently with opaque and transparent hair lighting");
+    }
     const auto litAsset=load(litStrand);const auto litPacked=packMaterialSurfaceProfile(litAsset.materials[0]);
     require(litPacked.rows[5][3]==.4F&&litPacked.rows[6][3]==1
         &&litPacked.rows[10]==std::array<float,4>{.8F,.9F,1.1F,.55F}

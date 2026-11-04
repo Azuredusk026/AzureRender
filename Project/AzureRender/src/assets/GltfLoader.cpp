@@ -1134,7 +1134,7 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         throw std::invalid_argument("Unsupported projectedRamp schemaVersion");
     const std::vector<std::string> fields={"schemaVersion","parameterTexture","rampTexture","primaryShift",
         "secondaryShift","intensity","secondaryRange","edgeFade","specularNormalScale","surfaceNormalScale",
-        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign","lighting"};
+        "directionX","secondaryColor","objectBasis","surfaceResponse","diffuseScale","frame","virtualLight","line","tangentSign","lighting","snapshotNormal"};
     // TinyGLTF omits null extras. Retain the authored object so optional typed
     // fields cannot silently turn invalid null values into their defaults.
     if(!material.extras_json_string.empty()) {
@@ -1157,6 +1157,12 @@ int loadProjectedHairRamp(const tinygltf::Material& material,const tinygltf::Mod
         return static_cast<float>(number);
     };
     auto& target=result.projectedHairRamp;
+    if(source.Has("snapshotNormal")) {
+        const auto& mode=source.Get("snapshotNormal");
+        if(!mode.IsString()||(mode.Get<std::string>()!="lighting"&&mode.Get<std::string>()!="material-normal-rg"))
+            throw std::invalid_argument("Invalid projectedRamp.snapshotNormal");
+        target.materialSnapshotNormal=mode.Get<std::string>()=="material-normal-rg";
+    }
     if(source.Has("tangentSign")){
         target.tangentSign=scalar("tangentSign",-1,1);
         if(target.tangentSign!=1&&target.tangentSign!=-1)throw std::invalid_argument("Invalid projectedRamp.tangentSign");
@@ -2099,9 +2105,10 @@ AssetMaterial loadMaterial(
             }
             if(npr.contains("lightingNormal")) {
                 const auto& mode=npr.at("lightingNormal");
-                if(!mode.is_string()||(mode!="surface"&&mode!="origin-radial-horizontal"))
+                if(!mode.is_string()||(mode!="surface"&&mode!="origin-radial-horizontal"&&mode!="screen-surface"))
                     throw std::invalid_argument("Invalid nprDiffuse.lightingNormal");
                 result.nprDiffuse.radialLightingNormal=mode=="origin-radial-horizontal";
+                result.nprDiffuse.screenLightingNormal=mode=="screen-surface";
             }
             if(npr.contains("transparentHighlights")) {
                 const auto& value=npr.at("transparentHighlights");

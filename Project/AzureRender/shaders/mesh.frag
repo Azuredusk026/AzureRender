@@ -15,9 +15,7 @@
 #include "specular_ramp.glsl"
 #include "environment_specular.glsl"
 #include "reflection_lod.glsl"
-#if defined(AZURE_OPAQUE_SNAPSHOT)
 #include "reflection_surface.glsl"
-#endif
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
 #include "material_sampling.glsl"
@@ -783,8 +781,9 @@ void main() {
     bool projectedHair=hairActive>0.0&&materialFeatureEnabled(65536U)>.5;
     bool strandDiffuse=projectedHair
         &&loadProjectedHairSurfaceProfile(material.materialPadding>>1U).secondaryColor.w>.5;
+    uint projectedHairFlags=uint(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w+.5);
     bool projectedLighting=strandDiffuse&&camera.clusterLighting.x>.5&&camera.nprLightingParameters.x>.5
-        &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>.5;
+        &&(projectedHairFlags&3U)!=0U;
     float projectedDiffuseScale=projectedHair
         ?loadProjectedHairSurfaceProfile(material.materialPadding>>1U).objectX.w:1.0;
     float hairBasePeak = max(
@@ -853,9 +852,27 @@ void main() {
 #endif
     bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
         &&!(qaEffectMode==1&&qaEffectDisabled);
-    if(nprDiffuse&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].z>.5){
-        vec3 offset=worldPosition-instanceFaceFrame[3].xyz;
-        shadedNormal=normalize(vec3(offset.x,1.0/16384.0,offset.z));
+    if(nprDiffuse) {
+        float normalSource=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].z;
+        if(normalSource>1.5) {
+#if defined(AZURE_OPAQUE_SNAPSHOT)
+            discard;
+#else
+            vec4 clip=camera.screenReflectionWorldToClip*vec4(worldPosition,1);
+            if(clip.w>0) {
+                ivec2 extent=textureSize(overlaySceneDepth,0);
+                ivec2 pixel=ivec2(floor((clip.xy/clip.w*.5+.5)*vec2(extent)));
+                if(all(greaterThanEqual(pixel,ivec2(0)))&&all(lessThan(pixel,extent))) {
+                    vec4 surface=texelFetch(overlaySceneDepth,pixel,0);
+                    if(!any(isnan(surface))&&!any(isinf(surface))&&surface.r>0&&surface.r<100000)
+                        shadedNormal=decodeReflectionSurfaceNormal(surface);
+                }
+            }
+#endif
+        } else if(normalSource>.5) {
+            vec3 offset=worldPosition-instanceFaceFrame[3].xyz;
+            shadedNormal=normalize(vec3(offset.x,1.0/16384.0,offset.z));
+        }
     }
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
     vec4 lightingInputs=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[21];
@@ -1204,7 +1221,7 @@ void main() {
             continue;
         }
         bool transparentHairHighlights=AZURE_ALPHA_MODE==2&&projectedLighting
-            &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>1.5;
+            &&(projectedHairFlags&3U)==2U;
         bool transparentNprHighlights=nprDiffuse&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].w>.5;
         if((screenRim||specularOnly)&&(!characterLightComposition||(AZURE_ALPHA_MODE==2&&!transparentHairHighlights&&!transparentNprHighlights)))continue;
         SceneLightSample sampled=sampleSceneLight(light,worldPosition,false);
@@ -2056,7 +2073,12 @@ void main() {
     if(camera.clusterLighting.x>.5 && !sceneCharacter)innerOutlineParticipation=0.0;
     vec3 innerOutlineNormal = geometricNormal;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
-    outputNormal=encodeReflectionSurface(dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz),shadedNormal,microfacetSurface&&!overlayMaterial?roughness:1.0);
+    vec3 snapshotNormal=shadedNormal;
+    if(projectedHair&&(projectedHairFlags&4U)!=0U) {
+        ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
+        snapshotNormal=projectedHairNormal(vec2(normalSample.r,1.0-normalSample.g),p.edgeNormalDirection.w,p.objectY.w)*(gl_FrontFacing?1.0:-1.0);
+    }
+    outputNormal=encodeReflectionSurface(dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz),snapshotNormal,microfacetSurface&&!overlayMaterial?roughness:1.0);
 #else
     outputNormal = vec4(
         innerOutlineNormal * 0.5 + 0.5,

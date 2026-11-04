@@ -4,6 +4,10 @@
 namespace azurerender {
 inline void validateMaterialRimResponse(const AssetMaterial& material) {
     const auto& npr=material.nprDiffuse;
+    const bool screenClass=material.materialClass==AssetMaterialClass::Generic||material.materialClass==AssetMaterialClass::Skin
+        ||material.materialClass==AssetMaterialClass::Fabric||material.materialClass==AssetMaterialClass::Metal;
+    if(npr.screenLightingNormal&&(!npr.present||material.materialProfileVersion!=2||npr.radialLightingNormal||!screenClass))
+        throw std::invalid_argument("Screen surface normals require a supported version-two NPR material");
     if(npr.radialLightingNormal&&(!npr.present||material.materialProfileVersion!=2||!npr.rimOrigin.present))
         throw std::invalid_argument("nprDiffuse.lightingNormal requires an explicit material rim origin in profile version two");
     if(npr.transparentHighlights&&(!npr.present||material.materialProfileVersion!=2||material.alphaMode!=AssetAlphaMode::Blend))

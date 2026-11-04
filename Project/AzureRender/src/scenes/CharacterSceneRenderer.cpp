@@ -2622,12 +2622,21 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
 void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     rasterizationSamples_=context.rasterizationSamples;
     const auto surfaceUsage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;
-    const bool requested=context.renderSettings&&context.renderSettings->screenSpaceReflection.enabled;
+    const auto needsScreenNormal=[](const LoadedAsset& mesh) {
+        return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material) {
+            return material.nprDiffuse.screenLightingNormal;
+        });
+    };
+    bool screenNormals=needsScreenNormal(asset_);
+    for(const auto& resource:additionalResources_)screenNormals|=needsScreenNormal(resource->asset);
+    const bool requested=screenNormals||(context.renderSettings&&context.renderSettings->screenSpaceReflection.enabled);
     const bool multisample=context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT;
     const bool fits=!multisample||std::uint64_t(context.renderExtent.width)*context.renderExtent.height*112*kMaxFramesInFlight<=SceneMultisampling::kMaximumBytes;
     const auto supported=rhi_->imageSampleCounts(VK_FORMAT_R32G32B32A32_SFLOAT,surfaceUsage);
     reflectionSurfaceFormat_=requested&&fits&&(supported&context.rasterizationSamples)
         &&rhi_->supportsSampledImage(VK_FORMAT_R32G32B32A32_SFLOAT,false)?VK_FORMAT_R32G32B32A32_SFLOAT:VK_FORMAT_R32_SFLOAT;
+    if(screenNormals&&reflectionSurfaceFormat_!=VK_FORMAT_R32G32B32A32_SFLOAT)
+        throw std::runtime_error("Screen surface normal snapshot exceeds format, sample or memory capabilities");
     outlineMaskViewExtent_=context.renderExtent;
     outlineMaskMaxDimension_=context.descriptorLimits.maxImageDimension2D;
     rhi::RenderPassDesc maskPass;
@@ -2795,6 +2804,8 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
     for(const auto& span:snapshot.visibleSpans){
         const auto& mesh=span[0]==0?asset_:additionalResources_[span[0]-1]->asset;
         for(const auto& material:mesh.materials) {
+            sampled|=material.nprDiffuse.screenLightingNormal;
+            colorRequired|=material.nprDiffuse.screenLightingNormal;
             sampled|=(material.materialFeatures&(MaterialFeatureBrowOverlay|MaterialFeatureSceneTint|MaterialFeatureSceneRefraction|MaterialFeatureUnlitTextureLayers))!=0;
             colorRequired|=(material.materialFeatures&(MaterialFeatureSceneRefraction|MaterialFeatureSceneTint))!=0||opaqueSurfaceOverlay(material);
             depthShell|=material.outlineSurface.present&&material.outlineSurface.depthPrepass;
@@ -2827,6 +2838,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
         commands.bindVertexBuffer(snapshot.buffers.vertices.at(key),0);commands.bindIndexBuffer(snapshot.buffers.indices.at(key),0);
         for(const auto& primitive:mesh.primitives){
             const auto& m=mesh.materials[primitive.materialIndex];if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay)continue;
+            if(!mainPrefill&&m.nprDiffuse.screenLightingNormal)continue;
             if(prefill&&m.alphaMode!=AssetAlphaMode::Opaque)continue;
             if(mainPrefill&&(m.materialFeatures&(MaterialFeatureSceneTint|MaterialFeatureMultiplyComposite))!=0)continue;
             if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;

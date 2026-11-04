@@ -32,7 +32,8 @@ void CharacterSceneRenderer::recordSurfaceOverlays(const RenderContext& context,
         commands.bindIndexBuffer(snapshot.buffers.indices.at(key),0);
         const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
         const auto materialBase=key==0?0:additionalResources_[key-1]->globalMaterialBase;
-        for(const auto& primitive:mesh.primitives)if(opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))
+        for(const auto& primitive:mesh.primitives)if(opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex])
+            &&(!snapshotColor||!mesh.materials[primitive.materialIndex].nprDiffuse.screenLightingNormal))
             drawPrimitive(commands,mesh,primitive,primitive.firstIndex,span[2],span[1],textureBase,
                 materialBase,counters,&snapshot,snapshotColor);
     }

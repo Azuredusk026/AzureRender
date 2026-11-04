@@ -2962,6 +2962,9 @@ if(BUILD_TESTING)
     add_test(NAME AzureEngine.SpecularInputGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_specular_input_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     set_tests_properties(AzureEngine.SpecularInputGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureEngine.ShadowColorLutGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_shadow_color_lut_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
+    add_test(NAME AzureRender.ScreenSurfaceNormalGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_screen_normal_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.ScreenSurfaceNormalGpu PROPERTIES TIMEOUT 1800 LABELS gpu RUN_SERIAL TRUE)
     add_test(NAME AzureRender.MaterialOriginGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_origin_gpu.py" --executable $<TARGET_FILE:AzurePlayer>)
     add_test(NAME AzureRender.MaterialRadialNormalGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_origin_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --radial-normal --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

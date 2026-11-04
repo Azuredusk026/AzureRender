@@ -1,0 +1,1995 @@
+{
+  "schemaVersion": 1,
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "status": "public-contracts-passed",
+  "scope": "屏幕法线接收、头发独立法线生产及缺省场景兼容。完整发片轮廓继续验收。",
+  "recordedAt": "2026-11-05T01:20:40.740584+08:00",
+  "repositoryHeadBeforeCommit": "dd2ff9e76ea22267c370287cb146cef3d0951706",
+  "linearErrorBudget": 0.008,
+  "configurations": {
+    "release": {
+      "playerSha256": "711ad94dc2d391b865f24b5583227bb8beaab90e15f7ade1fae45d2fa0c1b892",
+      "editorSha256": "ffc88204f4c973c1233e90ca8b0326bc16a3e1393f6cc9e63156eb7984f3945b",
+      "compiledShaderFiles": 535,
+      "shaderDirectorySha256": "8e133c83815b02feb7882fe7cb1aa288c4a58f1def2c73c6d6080afc43abdb6a",
+      "qualities": {
+        "existing": {
+          "status": "passed",
+          "quality": "existing",
+          "captures": [
+            {
+              "name": "screen",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "a704423283fb29c8620ccd7240399425c69ff38bbd3d1259d9cfbd34e0c5f000",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "omitted",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "2e585776062f24406efe2975cd443fecea9524658e5c3c5264ebb5638426e717",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "fixed",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "fd82fc98d04024ade32689a149ed4915296a1c7d2d552da505c813604a60af08",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "document",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "428803f8dda52616d007abffe563133c4f7bf0f1f6d408f85c578c6b5f9deb8f",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "projected",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.13256525709795053,
+                0.13256525709795053,
+                0.13256525709795053
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0003030644558674467,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "6e3cb3a41babc41c0f8fc506cd79bdf6c1ae6ddafc24d843db0586026699e195",
+              "frameSha256": "c36fb455d18c7713f746241e0f2cdf073705b13637decdac31c55f30f33285d5"
+            },
+            {
+              "name": "empty",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "ae36bc2809dae3721e29ac81d6e790e91ce5e922e254d6d22370c0bd2e7b9549",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "opaque",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "e437ce2ba9c8cedd3d043cc1e01d468e45b9d4ccbcba7385e95e059691c6628f",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "mask",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "973ebfd30db669268ba95bd2b53fb1dbab5002891c5074ddb99ed093245ad720",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "hair-default",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "6c1146beb76b5cc5c324431256a7f6d421cbd0b5d2e770a45099021c1ff62f69",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "hair-normal",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "fbd72dbcede7ce179b086086e3c69ba714ebd5c743de7748faed7435d2a9257e",
+              "frameSha256": "70d2fbfbe509951706d15f55154c95fbe825336efce14d302d5bc17cddf88cab"
+            },
+            {
+              "name": "hair-fixed",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "a7de9965d59b64ed89fe63c3ee9999c47f75aa4d34824198d0452bd32165fa47",
+              "frameSha256": "70d2fbfbe509951706d15f55154c95fbe825336efce14d302d5bc17cddf88cab"
+            },
+            {
+              "name": "hair-document",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "e90eb1d921658ab0235a6a60bccab9b3996a1a3f7a2ffd619bbff5abfba9e5bf",
+              "frameSha256": "70d2fbfbe509951706d15f55154c95fbe825336efce14d302d5bc17cddf88cab"
+            },
+            {
+              "name": "hair-beauty-default",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "f756e375709e990c23f32b59c654d764618d7478e14d0e295f4d3ae3f8de2cd8",
+              "frameSha256": "634a1c17e32de92de67186fa03ab8f2643285e9486dbc19a6e42777211b35352"
+            },
+            {
+              "name": "hair-beauty-normal",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "64999c3373a8153bb5f41cf4fbcc3a7e20421400909038e8fbb54ebcaef22f03",
+              "frameSha256": "634a1c17e32de92de67186fa03ab8f2643285e9486dbc19a6e42777211b35352"
+            }
+          ],
+          "executableSha256": "711ad94dc2d391b865f24b5583227bb8beaab90e15f7ade1fae45d2fa0c1b892"
+        },
+        "multisample": {
+          "status": "passed",
+          "quality": "multisample",
+          "captures": [
+            {
+              "name": "screen",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "9e867300de2a322e88e8db40c5402b5725163297f7762c49cd6eca2b851115d6",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "omitted",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "4722fef7fa8018d330ebcea29779dca37a239c677b0099fac78bb66a573a89e2",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "fixed",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "44b4b3dea42c39217edf1724255a9115a43e410d571f6a03e45dd93c7817358a",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "document",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "fce03d1b497f9f567acbb2eecec3c16a161633df091ab013054473d23898fe88",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "projected",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.13256525709795053,
+                0.13256525709795053,
+                0.13256525709795053
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0003030644558674467,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "a956a8dd94b30a6198add2560e3569e83b4feed0c80fcbc1f3a01ddcd3eca5a3",
+              "frameSha256": "1de5c2e6e323ac4748738d1979ba9ec71346de4d82cd05fdcbfa1b00522ea425"
+            },
+            {
+              "name": "empty",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "2103f4fe29aec0d01c7479459d5ce7953212c38bc586d72f309eec78d2bb42f7",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "opaque",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "945132b34c01c599a6412590394df7daf2e99eccd6c8c965c77c84305e662db9",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "mask",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "104dda0e72df9b68123c280b622ee95fbb5012db31ff67b813f36c67ed3b6760",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "hair-default",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "75220c7d19613553789d7af84c8484dbdfc7aadedaf97f51c39139d5e6a9febc",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "hair-normal",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "4755fb2684a01a11c88b75e42ca0972c12e16209c6014c8374c20d5bae1aa2b0",
+              "frameSha256": "2afd2191b306b61ab0c7081850da8e869325941ab028d372c2203ee04d5700a4"
+            },
+            {
+              "name": "hair-fixed",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "d8d5bcf9b1c772b24dd87c19adee86f9d36c142ee3aff1d8df88a28f9a47cee9",
+              "frameSha256": "2afd2191b306b61ab0c7081850da8e869325941ab028d372c2203ee04d5700a4"
+            },
+            {
+              "name": "hair-document",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "afe2645d68611a66de2b2c9509eb90f59cacf3a0b032d9aaac8f46b160eaaea3",
+              "frameSha256": "2afd2191b306b61ab0c7081850da8e869325941ab028d372c2203ee04d5700a4"
+            },
+            {
+              "name": "hair-beauty-default",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "48b4441f79e06f7263ee7675dca1019f96a165b5bae1e267e3396fc86f8c9ac1",
+              "frameSha256": "b67bfdc810003210c4b4f46c0c736c669fc36836d7d1ee880e275abdda2f2f8a"
+            },
+            {
+              "name": "hair-beauty-normal",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "86c8d3f067bb3250ca9d8e32afce4426a15193fe4c7ac9a5e762818bc50d9ab9",
+              "frameSha256": "b67bfdc810003210c4b4f46c0c736c669fc36836d7d1ee880e275abdda2f2f8a"
+            }
+          ],
+          "executableSha256": "711ad94dc2d391b865f24b5583227bb8beaab90e15f7ade1fae45d2fa0c1b892"
+        },
+        "supersample": {
+          "status": "passed",
+          "quality": "supersample",
+          "captures": [
+            {
+              "name": "screen",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "635fc7f98999707f2e5d6ae65817749a7b17f283f42a661893ab093925dceba6",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "omitted",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "4538536149f705c14572b8cf961ea375ab397a7491218b3f9f0d9d85bc222536",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "fixed",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "e410532deb8688bd318f601c6a9bd347b88629e876c5468f90c89ccc2795f075",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "document",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "78f5a21e664e289dc462811c32fe0884ba459cf3c0fdb1303789d9fb1d8be30e",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "projected",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.13256525709795053,
+                0.13256525709795053,
+                0.13256525709795053
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0003030644558674467,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "75fd4d67cbbb622706fde31083b4b2140752b997f2094dbf2049f42693c65e41",
+              "frameSha256": "a2c29668a8b535f31e8b412fdbb88f4a395d8009bb27efd354fd34ff3693cdfd"
+            },
+            {
+              "name": "empty",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "917175a3b0f4b99e0bf335f03dbd838c88574d85498d71178e35bbec9fa455b7",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "opaque",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "7af3898adac4e6c4f89262323e3bc252677da831e504ab139877224aeb84ce2d",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "mask",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "b0f8ed0e385d6a6212d49bf53824939c98043d41ba298045e245c11f126f0f33",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "hair-default",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "be25e9df9bae8f563b0a5df63840585125d2f41e7becaede1520a2f1dc705636",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "hair-normal",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "2fa9231534bc2282dbe3cd0ca7f6528dbbd08c102db1238cd1f310fbdc394de6",
+              "frameSha256": "9c2129566ba088eccf8b3398fa43ff7dae956dfbf5a93c88a5f75cead59d3a8e"
+            },
+            {
+              "name": "hair-fixed",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "deb4d8447a2ba18de9b22ac2ec0c42b05537626a305b2c9aa446e32c0e3c8262",
+              "frameSha256": "9c2129566ba088eccf8b3398fa43ff7dae956dfbf5a93c88a5f75cead59d3a8e"
+            },
+            {
+              "name": "hair-document",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "0fe095cfb036eac933141380f00057a00ff1b004e2bb879dc0e5d821875eca19",
+              "frameSha256": "9c2129566ba088eccf8b3398fa43ff7dae956dfbf5a93c88a5f75cead59d3a8e"
+            },
+            {
+              "name": "hair-beauty-default",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "73ec66597a727d4a87426981fd3285472e5cae78e2b6b20e39d94f8c77f43d49",
+              "frameSha256": "aecbd153fdb9cca324c45349d28b9aa91fc051c1778f4eadd36c1b83433b8dba"
+            },
+            {
+              "name": "hair-beauty-normal",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": false,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "68ed5a4a4b804f37037fb574d3f9472db226640bbc6710cb30131270c8f2dbd8",
+              "frameSha256": "aecbd153fdb9cca324c45349d28b9aa91fc051c1778f4eadd36c1b83433b8dba"
+            }
+          ],
+          "executableSha256": "711ad94dc2d391b865f24b5583227bb8beaab90e15f7ade1fae45d2fa0c1b892"
+        }
+      },
+      "cpuTests": [
+        {
+          "kind": "character-repair",
+          "path": "character-repair-release.log",
+          "sha256": "345ef8070621efc2d54f0d5a7f47744c49d98b754686a64bd3eeebb88c0694e7"
+        },
+        {
+          "kind": "texture-import",
+          "path": "texture-import-release.log",
+          "sha256": "5615209936a062aa8bf6ad6c595f99b3f1f97a86a2a1c1f8fbba8f93eefef653"
+        },
+        {
+          "kind": "contracts",
+          "path": "contracts-release.log",
+          "sha256": "ad959292be0c42863a76cc0a153af97bff8c0f34260aa3e2937b91e0916b392e"
+        }
+      ],
+      "compatibility": {
+        "warmJoint": {
+          "status": "passed",
+          "frames": 4,
+          "pixelIdentical": true,
+          "validationEnabled": false,
+          "executableSha256": "711ad94dc2d391b865f24b5583227bb8beaab90e15f7ade1fae45d2fa0c1b892"
+        },
+        "legacySnapshot": {
+          "schemaVersion": 1,
+          "cases": [
+            {
+              "antiAliasing": 0,
+              "requested": false,
+              "surfaceMetadata": false,
+              "validationErrors": 0,
+              "resourcesReleased": true
+            },
+            {
+              "antiAliasing": 0,
+              "requested": true,
+              "surfaceMetadata": true,
+              "validationErrors": 0,
+              "resourcesReleased": true
+            },
+            {
+              "antiAliasing": 4,
+              "requested": false,
+              "surfaceMetadata": false,
+              "validationErrors": 0,
+              "resourcesReleased": true
+            },
+            {
+              "antiAliasing": 4,
+              "requested": true,
+              "surfaceMetadata": true,
+              "validationErrors": 0,
+              "resourcesReleased": true
+            }
+          ],
+          "status": "passed"
+        }
+      }
+    },
+    "debug": {
+      "playerSha256": "9d9ea9cdc18e8152619baa57671ec91b3282d4a2b77347e93403483a239c9a76",
+      "editorSha256": "62af59b794f27faeec5672e4746e7901334c6f81000190012ac39d612a97c5e0",
+      "compiledShaderFiles": 535,
+      "shaderDirectorySha256": "8e133c83815b02feb7882fe7cb1aa288c4a58f1def2c73c6d6080afc43abdb6a",
+      "qualities": {
+        "existing": {
+          "status": "passed",
+          "quality": "existing",
+          "captures": [
+            {
+              "name": "screen",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "81bf6582039a531db5888646d26205bb522953601468df08c8430aa5bfd98040",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "omitted",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "e4159ebf07839309f79af54c12b1d50a99a4a0120d94e4995dfed5fd203809b3",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "fixed",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "426b87f9d3da1d07844e05ec88721cbc0f0f254161d736bc9dc452788a59dde7",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "document",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "4e96f398ab8527ad0bbdcbf6109c3f9f9124ffe3ae358bc765ddf153ffcfde90",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "projected",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.13256525709795053,
+                0.13256525709795053,
+                0.13256525709795053
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0003030644558674467,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "07000933208cbc1dcc8094bf0da5f7adc517c7af55b3f093932e2bf4fbba07a4",
+              "frameSha256": "c36fb455d18c7713f746241e0f2cdf073705b13637decdac31c55f30f33285d5"
+            },
+            {
+              "name": "empty",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "8ea26fe9a90da923469897fab5de655f873e4d3eab1f891a746993175982a237",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "opaque",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "46bf0647bbfb1aac058ddcf053c3d7c7876813ab8c1485c4baffef8a4eae2bbc",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "mask",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "7fa01b48057cd84b2507d1b5dcd30525fa4816ebd816efefe3969ffc844cff9c",
+              "frameSha256": "b540057de8b6adbd665b2a49b08753f5b78f831f385c3c9316ebd76374b93412"
+            },
+            {
+              "name": "hair-default",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "db47ad7695ef46d93a9153eccdf05dccba6deedd5bf69128af3e6339aa2b35ac",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "hair-normal",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "9037aa1f4f20af398a7bd069b6287889de7a56177aa66ac1631144b315cebbab",
+              "frameSha256": "70d2fbfbe509951706d15f55154c95fbe825336efce14d302d5bc17cddf88cab"
+            },
+            {
+              "name": "hair-fixed",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "95d8eed9d37ec27d5753aad8f6b35bbd78ad1807aa38ef74bc89676d0c7bf17a",
+              "frameSha256": "70d2fbfbe509951706d15f55154c95fbe825336efce14d302d5bc17cddf88cab"
+            },
+            {
+              "name": "hair-document",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "fdea8411ac3447222d70d039a8168459245a92476e70a32150f224ab07d238db",
+              "frameSha256": "70d2fbfbe509951706d15f55154c95fbe825336efce14d302d5bc17cddf88cab"
+            },
+            {
+              "name": "hair-beauty-default",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "dbab64354e3ca5451969ddced8d5e9bff37b4d71bb8c24a66760e083ea6481be",
+              "frameSha256": "634a1c17e32de92de67186fa03ab8f2643285e9486dbc19a6e42777211b35352"
+            },
+            {
+              "name": "hair-beauty-normal",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "511bc85e06c65f1fe65a1bbce4b487e355e2c479b0bf18465f5f7514a1ba887d",
+              "frameSha256": "634a1c17e32de92de67186fa03ab8f2643285e9486dbc19a6e42777211b35352"
+            }
+          ],
+          "executableSha256": "9d9ea9cdc18e8152619baa57671ec91b3282d4a2b77347e93403483a239c9a76"
+        },
+        "multisample": {
+          "status": "passed",
+          "quality": "multisample",
+          "captures": [
+            {
+              "name": "screen",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "5faa192a7cb9892044ffa0857ea5e4a9a9002d557cfa5b132f94090a009f6515",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "omitted",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "34423652808393f7222c28eb9b0af4356a4ac89619e5fc2ded876123679dea54",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "fixed",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "61a08ace558f1bcf78672347a9a31279caab5c23868e8143313d8c559eb52daa",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "document",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "59262acd1904c3c1d6fa1b9f9793c4347f6a4e88944667c3e6bd538b38ae3be8",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "projected",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.13256525709795053,
+                0.13256525709795053,
+                0.13256525709795053
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0003030644558674467,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "d0de872c46e201f280adf02e7b412cc90862350db530bd94cb44a03ffa59db4a",
+              "frameSha256": "1de5c2e6e323ac4748738d1979ba9ec71346de4d82cd05fdcbfa1b00522ea425"
+            },
+            {
+              "name": "empty",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "d76de9f27e0a909cde4bfd7fc9a6651467e26851c1ec9ca4a2556e221b70d123",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "opaque",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "9cc1cf3b078040461c8039137549220b4e39743827312903e58857f1e1db5f52",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "mask",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "186fd242f0ed7c79873e34b7763d889c1353f827014f9cfc2f6faf31d003d878",
+              "frameSha256": "3f9f6c206051392a9fdeb445e1e0672c1d32569704af712790511cd0184c48e1"
+            },
+            {
+              "name": "hair-default",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "bd736cfbd0a643348481173a585d8fc84b311a98959c2dd0fda3886eb8fa4661",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "hair-normal",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "cdf090ff13efd9a71be0d2bb2f62b3c512af196b282c5855250249495c287ab1",
+              "frameSha256": "2afd2191b306b61ab0c7081850da8e869325941ab028d372c2203ee04d5700a4"
+            },
+            {
+              "name": "hair-fixed",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "47c049e078912efdccc81f16e61161fbc835972ed35e3b44eea817bfa2b80699",
+              "frameSha256": "2afd2191b306b61ab0c7081850da8e869325941ab028d372c2203ee04d5700a4"
+            },
+            {
+              "name": "hair-document",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "ed572f352730d206b3a3be9725c62d8f04387c94f146626265ed2e901f4adbcc",
+              "frameSha256": "2afd2191b306b61ab0c7081850da8e869325941ab028d372c2203ee04d5700a4"
+            },
+            {
+              "name": "hair-beauty-default",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "0ef12b3aa40c47323dc0edeccf950319a3acbe5b4908ee3f4b6ad0c850669f38",
+              "frameSha256": "b67bfdc810003210c4b4f46c0c736c669fc36836d7d1ee880e275abdda2f2f8a"
+            },
+            {
+              "name": "hair-beauty-normal",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 4,
+              "captureManifestSha256": "fff008bcd14698a9e1508ac4ecd71cd07351e14f7658070b54478efd12bc0e23",
+              "frameSha256": "b67bfdc810003210c4b4f46c0c736c669fc36836d7d1ee880e275abdda2f2f8a"
+            }
+          ],
+          "executableSha256": "9d9ea9cdc18e8152619baa57671ec91b3282d4a2b77347e93403483a239c9a76"
+        },
+        "supersample": {
+          "status": "passed",
+          "quality": "supersample",
+          "captures": [
+            {
+              "name": "screen",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "ffb7453a47277e5727f5dbbdb226f781cf3b541f73fda07b27e919103cfd39bb",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "omitted",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "848efcd6d4fb17af34f043b804e7a47ade9b8ee0033f151b10fdd860fc462058",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "fixed",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "76a913be91836ec19171828d706b5caa93d21ad2132358330d19403a25430b93",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "document",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "e9a04c4ec2d74276d9a73e56750405f4eb97c78bdb2a326e94e16f5b186b01e2",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "projected",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.13256525709795053,
+                0.13256525709795053,
+                0.13256525709795053
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0003030644558674467,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "f7f032d3b7215bec882cf335ee3dcee4495dc46ae2690abad9b73e2211204ed0",
+              "frameSha256": "a2c29668a8b535f31e8b412fdbb88f4a395d8009bb27efd354fd34ff3693cdfd"
+            },
+            {
+              "name": "empty",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "faaf48d62bfd2a73bdf430adc951e11603476c73fae317d361d10f4fe3d87bc7",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "opaque",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "63a54b5eb467152afa2a59a6514617fe5a1e4ed96ed65bd8b1051e0b2fa19401",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "mask",
+              "actual": [
+                0.13286832155381798,
+                0.13286832155381798,
+                0.13286832155381798
+              ],
+              "expected": [
+                0.1327894576727941,
+                0.1327894576727941,
+                0.1327894576727941
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 7.886388102387731e-05,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "d96968658daa656427ec30ea332172dbdffae0463ccd445c1719f912f92388f9",
+              "frameSha256": "41114b7529d24110b71d417d174b2cd78ea47ad4d5da0d7fee9ee345a1115030"
+            },
+            {
+              "name": "hair-default",
+              "actual": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "expected": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.0,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "c9d41c20d0bee1adc66d20b4b44cdcad3d12c00fa5b7011585a34d34491ed7cf",
+              "frameSha256": "f0381761598a8a2b38efc8a8736000bb22910ce0c92d9378efbbd747afa5cafd"
+            },
+            {
+              "name": "hair-normal",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "ac1e0cb08eae505f8d520c6ff11eb1a959f34c2fa0ba10d3890c3f919c2cb816",
+              "frameSha256": "9c2129566ba088eccf8b3398fa43ff7dae956dfbf5a93c88a5f75cead59d3a8e"
+            },
+            {
+              "name": "hair-fixed",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "fixed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "c2ccac81914869b6107b842ab02b27af3d7d65425f08c235d0974de6d948d830",
+              "frameSha256": "9c2129566ba088eccf8b3398fa43ff7dae956dfbf5a93c88a5f75cead59d3a8e"
+            },
+            {
+              "name": "hair-document",
+              "actual": [
+                0.1301364766903643,
+                0.1301364766903643,
+                0.1301364766903643
+              ],
+              "expected": [
+                0.12907480038308106,
+                0.12907480038308106,
+                0.12907480038308106
+              ],
+              "comparison": "independent-linear-rim",
+              "maximumLinearError": 0.001061676307283238,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "684e723b17eafcf249e3a34344bfcc2d25af6ad52ff6edb871502679a0428eb2",
+              "frameSha256": "9c2129566ba088eccf8b3398fa43ff7dae956dfbf5a93c88a5f75cead59d3a8e"
+            },
+            {
+              "name": "hair-beauty-default",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "cc753681cdec147a0b991b374b3b807937e0bbe2f4036ba547a9f59e4f4e3e85",
+              "frameSha256": "aecbd153fdb9cca324c45349d28b9aa91fc051c1778f4eadd36c1b83433b8dba"
+            },
+            {
+              "name": "hair-beauty-normal",
+              "actual": [
+                0.06662593864377289,
+                0.04970656598412723,
+                0.07421356838014963
+              ],
+              "expected": null,
+              "comparison": "pairwise",
+              "maximumLinearError": null,
+              "validationEnabled": true,
+              "descriptorBinding": "indexed",
+              "rasterizationSamples": 1,
+              "captureManifestSha256": "c38dd0d1f3ee47ee2f60cbb26a68c7666ab208798ffdd1689c546a35b0e56988",
+              "frameSha256": "aecbd153fdb9cca324c45349d28b9aa91fc051c1778f4eadd36c1b83433b8dba"
+            }
+          ],
+          "executableSha256": "9d9ea9cdc18e8152619baa57671ec91b3282d4a2b77347e93403483a239c9a76"
+        }
+      },
+      "cpuTests": [
+        {
+          "kind": "character-repair",
+          "path": "character-repair-debug.log",
+          "sha256": "6e260e3b893fe72e0bb7a12c238aebf2dfa4a261e972c2b7a6bd27b145ea12ad"
+        },
+        {
+          "kind": "texture-import",
+          "path": "texture-import-debug.log",
+          "sha256": "ffb4200913ff988f1f9d95200aa83819cac7982792c393ef64552aabe3e81cd1"
+        },
+        {
+          "kind": "contracts",
+          "path": "contracts-debug.log",
+          "sha256": "0bc4055821dcd79b4737f9ca7b985bb51d36f3ecf0dc95d0710eae6d3bce3fdc"
+        }
+      ],
+      "compatibility": {
+        "warmJoint": {
+          "status": "passed",
+          "frames": 4,
+          "pixelIdentical": true,
+          "validationEnabled": true,
+          "executableSha256": "9d9ea9cdc18e8152619baa57671ec91b3282d4a2b77347e93403483a239c9a76"
+        },
+        "legacySnapshot": {
+          "schemaVersion": 1,
+          "cases": [
+            {
+              "antiAliasing": 0,
+              "requested": false,
+              "surfaceMetadata": false,
+              "validationErrors": 0,
+              "resourcesReleased": true
+            },
+            {
+              "antiAliasing": 0,
+              "requested": true,
+              "surfaceMetadata": true,
+              "validationErrors": 0,
+              "resourcesReleased": true
+            },
+            {
+              "antiAliasing": 4,
+              "requested": false,
+              "surfaceMetadata": false,
+              "validationErrors": 0,
+              "resourcesReleased": true
+            },
+            {
+              "antiAliasing": 4,
+              "requested": true,
+              "surfaceMetadata": true,
+              "validationErrors": 0,
+              "resourcesReleased": true
+            }
+          ],
+          "status": "passed"
+        }
+      }
+    }
+  },
+  "nativeVisualAcceptance": "pending",
+  "sourceFiles": {
+    "CMakeLists.txt": "dd51822fa53708742cd718fb1e8f740efce915c5fd1b1a6c107db9b176e4b80a",
+    "shaders/mesh.frag": "edd387003239f61d7866ddfa7c7b6b6f9973383816bd9ed64932346875db1b3a",
+    "src/assets/GltfLoader.cpp": "5331cc4219dfcfe2b6a6f9cf3fe1fffeee7c6b29f1cd6e2f9ad04eb6c38ddd46",
+    "src/assets/GltfLoader.hpp": "2c8204c88f07890d9a2322e967cbc942eabb879052fd582f2d10040fc1baa2cc",
+    "src/assets/MaterialRimResponse.hpp": "eab89c8d411b53198b4fe663abcd631349b35efcbce62b80843a2ea34fe4faab",
+    "src/assets/MaterialSurfaceProfile.hpp": "7af197f4b60cb6d0b8fb29cc6910d2eee2c3ef78126c25803daaefc40c849f52",
+    "src/scenes/CharacterSceneRenderer.cpp": "c1c1db0f18799843e6d157f0913e849cfb90ea1ab0ac2ca0053d6ce6b3c6907f",
+    "src/scenes/CharacterSurfaceOverlays.inc": "65c06fe3e87230b8247637d49d23c70cb36b7f8f080235c7f9b57559ef159877",
+    "schemas/azure_render_material.schema.json": "9b64d6097082e831442fb34b2377831f9b73b2d8613ce263b4daa15b27c1ab6d",
+    "tests/CharacterRepairTests.cpp": "953ebcaf33152554f3db8b541df2d3ea80b7811add9c81215de5777d856458db",
+    "tests/TextureMaterialImportTests.cpp": "f078a544d4397401043c3c46a494567c546a57897c1c8766b6cbe830b70724c3",
+    "tools/test_screen_normal_gpu.py": "3458fad03d86e52d33f3147942c94b821b15c131d7a21134aa230dd74e08034f"
+  },
+  "gpuCases": 84,
+  "maximumLinearError": 0.001061676307283238,
+  "cpuCasesPerConfiguration": 8,
+  "defaultJointFramesPerConfiguration": 4,
+  "legacySnapshotCasesPerConfiguration": 4,
+  "redEvidence": [
+    "hair-snapshot-normal-red.log",
+    "hair-normal-y-red.log",
+    "screen-normal-clear-depth-red.log"
+  ],
+  "nativeNormalDiagnostic": {
+    "sourceAxisConversion": [
+      -1,
+      1,
+      1
+    ],
+    "pixels": 17017,
+    "validPixels": 17017,
+    "angleDegrees": {
+      "median": 0.0811447229014115,
+      "p95": 0.1547956880667831,
+      "maximum": 11.441246142696265
+    },
+    "probes": [
+      {
+        "nativePixel": [
+          1359,
+          1207
+        ],
+        "enginePixel": [
+          1359,
+          232
+        ],
+        "sourceEngineNormal": [
+          0.9224381835090644,
+          0.32832545514729394,
+          0.20324909128165838
+        ],
+        "engineNormal": [
+          0.9229470923117781,
+          0.3273584700710492,
+          0.20249715273547997
+        ],
+        "depth": 3.302565336227417,
+        "angleDegrees": 0.07599978241698616
+      },
+      {
+        "nativePixel": [
+          1333,
+          1256
+        ],
+        "enginePixel": [
+          1333,
+          183
+        ],
+        "sourceEngineNormal": [
+          0.6954299472491245,
+          0.4519460808261698,
+          0.5586787346006156
+        ],
+        "engineNormal": [
+          0.694919168281073,
+          0.4513005070550702,
+          0.5598349773704554
+        ],
+        "depth": 3.2828140258789062,
+        "angleDegrees": 0.08132284350140204
+      },
+      {
+        "nativePixel": [
+          1367,
+          1182
+        ],
+        "enginePixel": [
+          1367,
+          257
+        ],
+        "sourceEngineNormal": [
+          0.9088340589937122,
+          0.21887391213405186,
+          0.35512654617776634
+        ],
+        "engineNormal": [
+          0.9084896862569084,
+          0.22178574083089367,
+          0.3541999084259001
+        ],
+        "depth": 3.3242814540863037,
+        "angleDegrees": 0.17618805209398605
+      },
+      {
+        "nativePixel": [
+          1326,
+          1229
+        ],
+        "enginePixel": [
+          1326,
+          210
+        ],
+        "sourceEngineNormal": [
+          0.8545820200658808,
+          0.3365595251439132,
+          0.3954962161829394
+        ],
+        "engineNormal": [
+          0.8551120008891634,
+          0.33422592059157913,
+          0.3963287775825052
+        ],
+        "depth": 3.2094566822052,
+        "angleDegrees": 0.14517162935203567
+      },
+      {
+        "nativePixel": [
+          1303,
+          1281
+        ],
+        "enginePixel": [
+          1303,
+          158
+        ],
+        "sourceEngineNormal": [
+          0.6362015783192032,
+          0.7496447513207,
+          0.18242888631321716
+        ],
+        "engineNormal": [
+          0.6352654717891619,
+          0.7503398800769959,
+          0.1828328327148408
+        ],
+        "depth": 3.211780071258545,
+        "angleDegrees": 0.07070104903215874
+      }
+    ],
+    "scope": "固定 2560×1440 镜头的缓冲角度对照；完整轮廓颜色继续验收。"
+  },
+  "nativeColorDiagnostic": {
+    "0": {
+      "count": 16459,
+      "mean": 0.29031735423375254,
+      "within1": 16387
+    },
+    "1138": {
+      "count": 2832,
+      "mean": 11.137829566854991,
+      "within1": 186
+    },
+    "1291": {
+      "count": 725,
+      "mean": 2.59632183908046,
+      "within1": 531
+    },
+    "1314": {
+      "count": 236,
+      "mean": 4.436440677966102,
+      "within1": 4
+    }
+  }
+}

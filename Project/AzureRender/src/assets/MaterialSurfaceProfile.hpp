@@ -46,6 +46,7 @@ inline PackedMaterialSurfaceProfile packProjectedHairSurfaceProfile(const AssetM
         rows[10]={light.ambientColor[0],light.ambientColor[1],light.ambientColor[2],light.shadowBrightness};
         rows[11]={light.mainColor[0],light.mainColor[1],light.mainColor[2],light.shadowSaturation};
     }
+    if(hair.materialSnapshotNormal)rows[6][3]+=4.F;
     return result;
 }
 
@@ -67,6 +68,9 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateUnlitSubmission(material.unlitTextureLayers);
     validateMaterialBlendDepth(material);
     validateMaterialRimResponse(material);
+    if(material.projectedHairRamp.materialSnapshotNormal&&(!material.projectedHairRamp.present
+        ||material.materialProfileVersion!=2||material.materialClass!=AssetMaterialClass::Hair))
+        throw std::invalid_argument("projectedRamp.snapshotNormal requires a version 2 projected hair profile");
     if(material.projectedHairRamp.lighting.transparentHighlights&&
         (!material.projectedHairRamp.present||!material.projectedHairRamp.lighting.present||material.alphaMode!=AssetAlphaMode::Blend))
         throw std::invalid_argument("Transparent highlights require a lit projected hair profile on a transparent receiver");
@@ -130,7 +134,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
         result.rows[1][3]=static_cast<float>(material.nprDiffuse.rampComposition);
         result.rows[3][0]=static_cast<float>(material.nprDiffuse.characterVisibility);
         result.rows[3][1]=material.nprDiffuse.localDiffuseFloorScale;
-        result.rows[3][2]=material.nprDiffuse.radialLightingNormal?1.F:0.F;
+        result.rows[3][2]=material.nprDiffuse.screenLightingNormal?2.F:material.nprDiffuse.radialLightingNormal?1.F:0.F;
         result.rows[3][3]=material.nprDiffuse.transparentHighlights?1.F:0.F;
         if(material.nprDiffuse.mainRamp.present) {
             result.rows[1][1]=1;

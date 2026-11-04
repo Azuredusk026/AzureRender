@@ -210,6 +210,19 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  const auto packedRadial=packMaterialSurfaceProfile(radialAsset.materials[0]);
  if(packedRadial.rows[3][2]!=1||packedRadial.rows[3][3]!=1)
      throw std::runtime_error("A radial blended material must retain both lighting controls");
+ auto screenRim=radialRim;
+ auto& screenProfile=screenRim["materials"][0]["extras"]["azureRenderMaterial"]["nprDiffuse"];
+ screenProfile["lightingNormal"]="screen-surface";
+ screenProfile.erase("rimOrigin");
+ std::ofstream(root/"screen-normal.gltf")<<screenRim.dump();
+ auto screenMaterial=loadGltfAsset((root/"screen-normal.gltf").u8string()).materials[0];
+ if(!screenMaterial.nprDiffuse.screenLightingNormal||screenMaterial.nprDiffuse.radialLightingNormal
+     ||packMaterialSurfaceProfile(screenMaterial).rows[3][2]!=2)
+     throw std::runtime_error("Screen normal policy must retain its explicit typed mode");
+ screenMaterial.nprDiffuse.radialLightingNormal=true;
+ bool normalConflict=false;
+ try{(void)packMaterialSurfaceProfile(screenMaterial);}catch(const std::exception&){normalConflict=true;}
+ if(!normalConflict)throw std::runtime_error("Conflicting radial and screen normal sources must be rejected");
  auto projected=radialRim;
  projected["materials"][0]["extras"]["azureRenderMaterial"]["outlineSurface"]={
      {"schemaVersion",1},{"mode","view-scaled"},{"target","surface"},{"width",.5},{"minimumPixels",.5}};
