@@ -84,7 +84,14 @@ layout(push_constant) uniform MorphWeights {
     layout(offset = 80) vec4 styleParameters;
     layout(offset = 96) vec4 featureParameters;
     layout(offset = 116) uint materialFeatures;
+#if defined(AZURE_PROJECTED_SURFACE)
+    layout(offset = 124) uint packedMaterial;
+#endif
+#if defined(AZURE_PROJECTED_SURFACE)
+    layout(offset = 132) float samplingScale;
+#else
     layout(offset = 128) vec2 weights;
+#endif
     layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
 
@@ -92,6 +99,9 @@ layout(push_constant) uniform MorphWeights {
 layout(std430, binding = 17) readonly buffer InstanceSkinnedVertices { uint words[]; } computed;
 float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceData.instances[gl_InstanceIndex].meta.y + uint(gl_VertexIndex))*27u+offset]); }
 vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
+#endif
+#if defined(AZURE_PROJECTED_SURFACE)
+#include "outline_projected_surface.glsl"
 #endif
 void main() {
 #if !defined(AZURE_OUTLINE_MASK) && !defined(AZURE_SNAPSHOT_DEPTH)
@@ -156,6 +166,9 @@ void main() {
     worldTangent = vec4(
         normalize(mat3(instanceData.instances[gl_InstanceIndex].model) * gizmoTangent),
         tangent.w * sign(determinant(modelLinear) * determinant(mat3(morphWeights.gizmoTransform))));
+#if defined(AZURE_PROJECTED_SURFACE)
+    gl_Position=projectMaterialSurface(gl_Position,worldNormal,worldTangent);
+#endif
     textureCoordinate = texcoord;
     worldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
     for (int cascadeIndex = 0; cascadeIndex < 4; ++cascadeIndex) {

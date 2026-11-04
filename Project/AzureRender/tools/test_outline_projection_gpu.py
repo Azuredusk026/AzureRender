@@ -45,12 +45,13 @@ def sphere():
     return model,payload,vertices
 
 
-def reference_bounds(positions,size,distance,fov,width):
+def reference_bounds(positions,size,distance,fov,width,normals=None):
     # Independent double-precision projection uses the mathematical half FOV;
     # the production shader's source-matching polynomial has a 1 px budget.
     p=np.asarray(positions,dtype=float);w=distance-p[:,2]
     half=math.radians(fov)/2;scale=1/math.tan(half)
-    xy=p[:,:2]*[scale,-scale]
+    directions=p if normals is None else np.asarray(normals,dtype=float)
+    xy=directions[:,:2]*[scale,-scale]
     xy/=np.maximum(np.linalg.norm(xy,axis=1,keepdims=True),1e-12)
     offset=xy*(math.pi/8/half)*width*np.clip(w*half*4.58366251,0,1)[:,None]*.005
     minimum=np.minimum(w,math.pi/2/half)/size

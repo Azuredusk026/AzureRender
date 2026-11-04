@@ -276,6 +276,8 @@ private:
     static_assert(sizeof(MaterialPushConstants) == 128);
 
     struct MorphPushConstants {
+        // Projected mesh programs consume word one as output-pixel sampling
+        // scale. Their morph weights come from the instance records.
         std::array<float, 2> weights{{0.0F, 0.0F}};
         // Bindless mode: the draw's first material slot in the global texture
         // array. Ignored by the fixed-table shaders.

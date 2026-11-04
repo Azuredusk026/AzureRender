@@ -2853,6 +2853,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));
             if(counters)++counters->pushConstantUpdates;
             MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
+            if(m.outlineSurface.projectSurface)morph.weights[1]=snapshot.settings.antiAliasing==2?2.F:1.F;
             morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());
             forEachPrimitiveOpacityRun(snapshot.nodeWorldOpacities,primitive.nodeIndex,first,count,[&](const PrimitiveOpacityRun& run) {
                 if (run.opacity == 0) return;
@@ -3343,10 +3344,19 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         return azurerender::readBinaryFile(shaderDirectory+sceneFragmentVariant(std::move(file),
             rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,material&&irradianceClipmapActive_,material&&probeFieldActive_));
     };
-    const auto vertexCode =
-        azurerender::readBinaryFile(shaderDirectory + (objectShadowPrepared_
-            ? (computeSkinningEnabled_?"/mesh_object_compute.vert.spv":"/mesh_object.vert.spv")
-            : (computeSkinningEnabled_?"/mesh_compute.vert.spv":"/mesh.vert.spv")));
+    const auto hasProjectedSurface=[](const LoadedAsset& mesh) {
+        return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material) {
+            return material.outlineSurface.present&&material.outlineSurface.projectSurface;
+        });
+    };
+    bool projectedSurface=hasProjectedSurface(asset_);
+    for(const auto& resource:additionalResources_)projectedSurface|=hasProjectedSurface(resource->asset);
+    const auto meshVertexPath=[&](std::string base) {
+        if(projectedSurface)base+=bindlessTextures_?"_projected_bindless":"_projected";
+        if(computeSkinningEnabled_)base+="_compute";
+        return shaderDirectory+"/"+base+".vert.spv";
+    };
+    const auto vertexCode=azurerender::readBinaryFile(meshVertexPath(objectShadowPrepared_?"mesh_object":"mesh"));
     const auto materialFragmentPath=shaderDirectory+sceneFragmentVariant((objectShadowPrepared_
             ? (bindlessTextures_?"/mesh_object_bindless.frag.spv":"/mesh_object.frag.spv")
             : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")),rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,irradianceClipmapActive_,probeFieldActive_);
@@ -3487,8 +3497,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             ?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv"));
         VkShaderModule simpleDepthVertex=VK_NULL_HANDLE;
         try{
-            simpleDepthVertex=rhi_->createShaderModule(azurerender::readBinaryFile(shaderDirectory+(computeSkinningEnabled_
-                ?"/character_snapshot_depth_compute.vert.spv":"/character_snapshot_depth.vert.spv")));
+            simpleDepthVertex=rhi_->createShaderModule(azurerender::readBinaryFile(meshVertexPath("character_snapshot_depth")));
             auto desc=depthDesc;desc.vertexShader=simpleDepthVertex;desc.fragmentShader=simpleDepthModule;desc.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
             // Snapshot-depth vertices consume the mesh stream without vertex colors.
             desc.vertexAttributes.pop_back();desc.vertexBindings.resize(1);
@@ -4773,7 +4782,9 @@ void CharacterSceneRenderer::drawPrimitive(
         sizeof(materialConstants));
     MorphPushConstants morphConstants{};
     morphConstants.nodeOpacity=run.opacity;
-    morphConstants.weights = (snapshot != nullptr ? snapshot->settings : *renderSettings_).morphWeights;
+    const auto& drawSettings=snapshot != nullptr ? snapshot->settings : *renderSettings_;
+    morphConstants.weights = drawSettings.morphWeights;
+    if(material.outlineSurface.projectSurface)morphConstants.weights[1]=drawSettings.antiAliasing==2?2.F:1.F;
     if (bindlessTextures_) {
         morphConstants.textureBaseIndex =
             textureBase

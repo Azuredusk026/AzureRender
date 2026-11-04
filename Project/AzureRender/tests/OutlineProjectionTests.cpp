@@ -50,6 +50,13 @@ int main() try {
     LoadedAsset third=first;const auto pair=buildOutlineProjectionData({&first,&third},4096);
     requireOutline(pair.header[2]==36&&pair.header[3]==6&&pair.records[1].indices[2]==42,
         "A second asset must receive its own vertex base");
+    auto projected=first;
+    projected.materials[0].alphaMode=AssetAlphaMode::Blend;
+    projected.materials[0].outlineSurface.projectSurface=true;
+    const auto projectedData=buildOutlineProjectionData({&projected},4096);
+    requireOutline(projectedData.records[0].parameters[3]==2
+        &&projectedData.records[0].parameters[0]==first.materials[0].outlineSurface.width,
+        "Projected blend surfaces must preserve shape parameters and a distinct target");
     rhi::NullRhi backend;SampledTextureCache cache(backend.allocator(),backend);
     {
         OutlineProjectionResources projection(backend.allocator(),4096);

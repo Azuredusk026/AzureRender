@@ -210,6 +210,19 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  const auto packedRadial=packMaterialSurfaceProfile(radialAsset.materials[0]);
  if(packedRadial.rows[3][2]!=1||packedRadial.rows[3][3]!=1)
      throw std::runtime_error("A radial blended material must retain both lighting controls");
+ auto projected=radialRim;
+ projected["materials"][0]["extras"]["azureRenderMaterial"]["outlineSurface"]={
+     {"schemaVersion",1},{"mode","view-scaled"},{"target","surface"},{"width",.5},{"minimumPixels",.5}};
+ std::ofstream(root/"projected-surface.gltf")<<projected.dump();
+ const auto projectedAsset=loadGltfAsset((root/"projected-surface.gltf").u8string());
+ if(!projectedAsset.materials[0].outlineSurface.present||!projectedAsset.materials[0].outlineSurface.projectSurface)
+     throw std::runtime_error("Projected transparent material must load its surface projection");
+ auto invalidTarget=projected;
+ invalidTarget["materials"][0]["extras"]["azureRenderMaterial"]["outlineSurface"]["target"]="unknown";
+ std::ofstream(root/"invalid-projection-target.gltf")<<invalidTarget.dump();
+ bool targetRejected=false;
+ try{(void)loadGltfAsset((root/"invalid-projection-target.gltf").u8string());}catch(const std::exception&){targetRejected=true;}
+ if(!targetRejected)throw std::runtime_error("Unknown projection target must be rejected");
  for(const std::string field:{"rimOrigin","lightingNormal","transparentHighlights","alphaMode"}) {
      auto bad=radialRim;
      auto& material=bad["materials"][0];

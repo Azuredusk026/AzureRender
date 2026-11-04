@@ -209,6 +209,7 @@ struct AssetMaterial {
     struct OutlineSurface {
         enum class NormalSource : std::uint8_t { Geometry,TangentUv1,TangentOctahedralUv1 };
         bool present=false,depthPrepass=false;
+        bool projectSurface=false;
         bool maskInstanceInterior=true;
         NormalSource normalSource=NormalSource::Geometry;
         float width=.5F,minimumPixels=.5F,depthOffset=0;

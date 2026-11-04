@@ -3,7 +3,11 @@
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
 layout(binding=31) uniform sampler2D projectionMasks[];
+#if defined(AZURE_PROJECTED_SURFACE)
+#define PROJECTION_MASK projectionMasks[nonuniformEXT(morphWeights.packedMaterial>>1u)]
+#else
 #define PROJECTION_MASK projectionMasks[nonuniformEXT(morphWeights.materialIndex)]
+#endif
 #else
 layout(binding=31) uniform sampler2D projectionMask;
 #define PROJECTION_MASK projectionMask

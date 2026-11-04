@@ -44,7 +44,7 @@ inline void validateOutlineProjectionShape(const AssetMaterial& material) {
         if(!std::isfinite(value)||value<low||value>high)
             throw std::invalid_argument(material.name+" outlineSurface parameter outside legal range");
     };
-    if(material.alphaMode==AssetAlphaMode::Blend||material.materialClass==AssetMaterialClass::Overlay)
+    if((material.alphaMode==AssetAlphaMode::Blend&&!shape.projectSurface)||material.materialClass==AssetMaterialClass::Overlay)
         throw std::invalid_argument(material.name+" outlineSurface requires an opaque or masked surface");
     range(shape.width,0,8);range(shape.minimumPixels,0,8);range(shape.depthOffset,-4,4);
     for(float value:shape.uvScaleOffset)range(value,-65536,65536);
@@ -100,7 +100,7 @@ inline OutlineProjectionData buildOutlineProjectionData(const std::vector<Loaded
             auto& shape=material.outlineSurface;PackedOutlineProjectionRecord record{};
             if(shape.present) {
                 const bool tangent=shape.normalSource!=AssetMaterial::OutlineSurface::NormalSource::Geometry;
-                record.parameters={shape.width,shape.minimumPixels,shape.depthOffset,1};
+                record.parameters={shape.width,shape.minimumPixels,shape.depthOffset,shape.projectSurface?2.F:1.F};
                 record.indices={static_cast<std::uint32_t>(shape.normalSource),shape.depthPrepass?1U:0U,tangent?base:0U,
                     tangent?static_cast<std::uint32_t>(asset.vertices.size()):0U};
                 record.uvScaleOffset=shape.uvScaleOffset;

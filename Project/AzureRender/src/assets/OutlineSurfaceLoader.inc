@@ -10,11 +10,10 @@ void loadOutlineSurface(const tinygltf::Material& material,const tinygltf::Model
     const auto fail=[&](const std::string& field) {
         throw std::invalid_argument(result.name+" outlineSurface."+field+": invalid outline input");
     };
-    if(result.alphaMode==AssetAlphaMode::Blend||result.materialClass==AssetMaterialClass::Overlay)
-        fail("material");
+
     const auto& source=profile["outlineSurface"];
     const std::set<std::string> fields{"schemaVersion","mode","width","minimumPixels","depthOffset",
-        "normalSource","coverage","depthPrepass","maskTexture","uvScaleOffset","color","baseColorSaturation"};
+        "normalSource","coverage","depthPrepass","target","maskTexture","uvScaleOffset","color","baseColorSaturation"};
     if(!source.is_object())fail("object");
     for(const auto& item:source.items())if(!fields.count(item.key()))fail(item.key());
     if(!source.contains("schemaVersion")||!source["schemaVersion"].is_number_integer()
@@ -27,6 +26,13 @@ void loadOutlineSurface(const tinygltf::Material& material,const tinygltf::Model
         return static_cast<float>(result);
     };
     auto& target=result.outlineSurface;
+    if(source.contains("target")) {
+        if(!source["target"].is_string()
+            ||(source["target"]!="silhouette"&&source["target"]!="surface"))fail("target");
+        target.projectSurface=source["target"]=="surface";
+    }
+    if((result.alphaMode==AssetAlphaMode::Blend&&!target.projectSurface)
+        ||result.materialClass==AssetMaterialClass::Overlay)fail("material");
     if(!source.contains("width"))fail("width");
     target.width=number(source["width"],"width",0,8);
     if(source.contains("minimumPixels"))target.minimumPixels=number(source["minimumPixels"],"minimumPixels",0,8);
@@ -47,7 +53,7 @@ void loadOutlineSurface(const tinygltf::Material& material,const tinygltf::Model
         if(!source["depthPrepass"].is_boolean())fail("depthPrepass");
         target.depthPrepass=source["depthPrepass"].get<bool>();
     }
-    if(!(result.materialFeatures&MaterialFeatureSilhouetteOutline)&&!target.depthPrepass)fail("participation");
+    if(!(result.materialFeatures&MaterialFeatureSilhouetteOutline)&&!target.depthPrepass&&!target.projectSurface)fail("participation");
     const auto vector=[&](const char* field,auto& output,double low,double high) {
         if(!source.contains(field))return;
         const auto& values=source[field];
