@@ -1,0 +1,191 @@
+{
+  "run": "20261103-234012-character-reference-stages-5abe6c",
+  "status": "fixed-and-motion-passed",
+  "scope": "按肤色反馈试调脸部及身体的基础颜色因子。整体画质继续验收。",
+  "referenceSha256": "61aa9d420cc23e60e81503a7855a2de7688cdb76e069d5192f9b92599c374a0f",
+  "project": "skin-warm-joint/joint-materials.azureproject",
+  "materials": [
+    {
+      "path": "skin-warm-joint/assets/linear-display-materials/material-0.azurematerial",
+      "name": "M_actor_laevat_body_01",
+      "baseColorFactor": [
+        0.98,
+        0.93,
+        0.89,
+        1
+      ],
+      "sha256": "14d304b0f39380a4189ed7c27bcbb118f34ae80214ca39193082fb12404bf596"
+    },
+    {
+      "path": "skin-warm-joint/assets/linear-display-materials/material-8.azurematerial",
+      "name": "M_actor_laevat_face_01",
+      "baseColorFactor": [
+        0.98,
+        0.93,
+        0.89,
+        1
+      ],
+      "sha256": "eda060bb74915b70beeeb8a29e70b956633ad72612d1d8229377a8730f9db195"
+    }
+  ],
+  "static": {
+    "skin": {
+      "pixels": 28966,
+      "ssim": 0.9874421265636502,
+      "medianLuminanceRelativeError": 0.05794346758991619,
+      "medianRgbError": 3.0,
+      "maxRgbError": 41
+    },
+    "face": {
+      "pixels": 1176,
+      "ssim": 0.9950358150600968,
+      "medianLuminanceRelativeError": 0.036272222618005605,
+      "medianRgbError": 2.0,
+      "maxRgbError": 47
+    }
+  },
+  "motion": {
+    "status": "passed",
+    "frames": 192,
+    "animationNodeSamples": 2112,
+    "animationNodes": 11,
+    "reopen": {
+      "frame_000000.png": "d35b325050f21ca99a6a363b8cd2570057119557ace03931c26f9bc5af19cfdb",
+      "frame_000001.png": "34d8dfc7750f4bb8869563724dbc69437028b3e704d14dcff04146710c7b30a4",
+      "frame_000002.png": "700c152758d09953aea85ec0fac8be2a6a2f141ab3763a49a598e42fb7eed2f7",
+      "frame_000003.png": "924c544f5e3a3e98da7e3c53868813850362d1369f7fea6ed5345adbb1c67707"
+    },
+    "changes": [
+      {
+        "frame": 0,
+        "pixels": 12060,
+        "bounds": [
+          1257,
+          649,
+          1666,
+          1439
+        ]
+      },
+      {
+        "frame": 64,
+        "pixels": 12018,
+        "bounds": [
+          1280,
+          666,
+          1529,
+          1439
+        ]
+      },
+      {
+        "frame": 128,
+        "pixels": 11923,
+        "bounds": [
+          1286,
+          666,
+          1528,
+          1439
+        ]
+      },
+      {
+        "frame": 191,
+        "pixels": 11717,
+        "bounds": [
+          1081,
+          664,
+          1543,
+          1439
+        ]
+      }
+    ],
+    "playerSha256": "9148542685600dcc938a7e2a5ca4914324bac72acc938f6583e1d25e8715964f",
+    "project": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\skin-warm-joint\\joint-materials.azureproject"
+  },
+  "jointChanges": [
+    {
+      "frame": "frame_000000.png",
+      "changedPixels": 12060,
+      "bounds": [
+        1257,
+        649,
+        1666,
+        1439
+      ]
+    },
+    {
+      "frame": "frame_000001.png",
+      "changedPixels": 12014,
+      "bounds": [
+        1259,
+        665,
+        1673,
+        1439
+      ]
+    },
+    {
+      "frame": "frame_000002.png",
+      "changedPixels": 12025,
+      "bounds": [
+        1282,
+        665,
+        1679,
+        1439
+      ]
+    },
+    {
+      "frame": "frame_000003.png",
+      "changedPixels": 11981,
+      "bounds": [
+        1278,
+        666,
+        1666,
+        1439
+      ]
+    }
+  ],
+  "video": {
+    "status": "encoded-and-header-verified",
+    "capture": "skin-warm-joint-motion",
+    "frames": 192,
+    "fps": 24,
+    "durationSeconds": 8,
+    "width": 2560,
+    "height": 1440,
+    "sha256": "47dabd8a31a24038351694cc3d5b0239c24490b6060fe3d618f49404042daf05",
+    "bytes": 5204808,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-framerate",
+      "24",
+      "-start_number",
+      "0",
+      "-i",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\skin-warm-joint-motion\\frames\\frame_%06d.png",
+      "-frames:v",
+      "192",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "fast",
+      "-crf",
+      "18",
+      "-profile:v",
+      "high",
+      "-pix_fmt",
+      "yuv420p",
+      "-color_primaries",
+      "bt709",
+      "-color_trc",
+      "bt709",
+      "-colorspace",
+      "bt709",
+      "-movflags",
+      "+faststart",
+      "-an",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\media\\joint-skin-warm.mp4"
+    ],
+    "ffmpegVersion": "ffmpeg version 7.1-essentials_build-www.gyan.dev Copyright (c) 2000-2024 the FFmpeg developers"
+  }
+}
