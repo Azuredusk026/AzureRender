@@ -1,0 +1,59 @@
+{
+  "status": "measured-native-cloth-interiors",
+  "geometry": "captured fixed pose",
+  "referenceStage": "native event 1383 after transparent cloth; mask retains event 950 opaque ownership",
+  "qualification": "Actual draw changes whose final opaque words retain draw ownership, eroded six pixels",
+  "thresholds": {
+    "ssim": 0.95,
+    "medianLuminanceRelativeError": 0.1
+  },
+  "candidateSha256": "fcb3f17a2e126dd2850f7af4659820ed2ee80859eaea8a550735e53a25951a22",
+  "cases": [
+    {
+      "event": 889,
+      "qualifiedPixels": 45988,
+      "ssim": 0.9583625912507107,
+      "nativeMedianLuminance": 0.02662850351388315,
+      "currentMedianLuminance": 0.02572652922674392,
+      "medianLuminanceRelativeError": 0.03387251133616922,
+      "p95ByteError": 11.0,
+      "maximumByteError": 111,
+      "worstPixel": [
+        1422,
+        390
+      ],
+      "passed": true
+    },
+    {
+      "event": 910,
+      "qualifiedPixels": 17990,
+      "ssim": 0.9971133404550964,
+      "nativeMedianLuminance": 0.014355474145918727,
+      "currentMedianLuminance": 0.014246552491091293,
+      "medianLuminanceRelativeError": 0.007587464804037823,
+      "p95ByteError": 1.0,
+      "maximumByteError": 41,
+      "worstPixel": [
+        1557,
+        1130
+      ],
+      "passed": true
+    },
+    {
+      "event": 928,
+      "qualifiedPixels": 118661,
+      "ssim": 0.9631507974486359,
+      "nativeMedianLuminance": 0.022130240144565362,
+      "currentMedianLuminance": 0.021990602175170466,
+      "medianLuminanceRelativeError": 0.0063098262143887005,
+      "p95ByteError": 12.0,
+      "maximumByteError": 127,
+      "worstPixel": [
+        1069,
+        703
+      ],
+      "passed": true
+    }
+  ],
+  "visualAcceptance": "failed-user-review"
+}

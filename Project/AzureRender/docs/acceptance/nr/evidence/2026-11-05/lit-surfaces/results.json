@@ -1,0 +1,389 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "status": "fixed-pose-regional-passed-strict-byte-pending",
+  "visualAcceptance": "failed-user-review",
+  "sourceCommit": "2cf9e94f6e2bddbe375f866a2e948b92773fa0d1",
+  "cases": [
+    {
+      "configuration": "release",
+      "imageSha256": "65e8889711179452d75b4f25e1e22f6e6653c175809c75608861aa11e08f90f0",
+      "executableSha256": "642ad4d341fc9652aa41c796cca0b43debc9c3706ea68aa8e4ef5a0193e245fc",
+      "shaderManifest": {
+        "path": "release-program.json",
+        "sha256": "bfdb866427ae16e0f5ca65195d97d4d4d6e08a777aae57c95f153ffa5bb5e903",
+        "bytes": 65083
+      },
+      "captureManifest": {
+        "path": "release-capture.json",
+        "sha256": "65846b1dead1dc02af8c24750ea37753f13687dbdb60baeddf6b29c7354952c8",
+        "bytes": 21832
+      },
+      "log": {
+        "path": "release.log",
+        "sha256": "619dc54241f304a01a7c3a79f6f0a7fc6ba469e9ef76ad2eb70310ed56fef5fe",
+        "bytes": 9532
+      },
+      "body": [
+        {
+          "event": 889,
+          "qualifiedPixels": 45988,
+          "ssim": 0.9649861059263044,
+          "nativeMedianLuminance": 0.02662850351388315,
+          "currentMedianLuminance": 0.025955994609967937,
+          "medianLuminanceRelativeError": 0.025255227112728665,
+          "p95ByteError": 9.0,
+          "maximumByteError": 111,
+          "worstPixel": [
+            1067,
+            616
+          ],
+          "passed": true
+        },
+        {
+          "event": 910,
+          "qualifiedPixels": 17990,
+          "ssim": 0.9971133404550964,
+          "nativeMedianLuminance": 0.014355474145918727,
+          "currentMedianLuminance": 0.014246552491091293,
+          "medianLuminanceRelativeError": 0.007587464804037823,
+          "p95ByteError": 1.0,
+          "maximumByteError": 41,
+          "worstPixel": [
+            1557,
+            1130
+          ],
+          "passed": true
+        },
+        {
+          "event": 928,
+          "qualifiedPixels": 118661,
+          "ssim": 0.9640891217258782,
+          "nativeMedianLuminance": 0.022130240144565362,
+          "currentMedianLuminance": 0.02178462034880006,
+          "medianLuminanceRelativeError": 0.015617534807916595,
+          "p95ByteError": 9.0,
+          "maximumByteError": 127,
+          "worstPixel": [
+            1069,
+            703
+          ],
+          "passed": true
+        }
+      ],
+      "hair": [
+        {
+          "name": "source-hair-visible",
+          "pixels": 17017,
+          "ssim": 0.9901313800249995,
+          "medianLuminanceRelativeError": 0.0066986347459679985,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 215,
+          "maximumByteError": 90.0,
+          "meanMaximumByteError": 0.8046659223129812
+        },
+        {
+          "name": "hair-opaque-owner",
+          "pixels": 16459,
+          "ssim": 0.9905414143676685,
+          "medianLuminanceRelativeError": 0.00800284966464992,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 72,
+          "maximumByteError": 6.0,
+          "meanMaximumByteError": 0.6358831034692266
+        },
+        {
+          "name": "hair-complete-stages",
+          "pixels": 20361,
+          "ssim": 0.9888697718433799,
+          "medianLuminanceRelativeError": 0.004418209098420816,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 1080,
+          "maximumByteError": 108.0,
+          "meanMaximumByteError": 1.0581503855409853
+        },
+        {
+          "name": "hair-outline",
+          "pixels": 2832,
+          "ssim": 0.9886416318331831,
+          "medianLuminanceRelativeError": 0.010298226327711284,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 661,
+          "maximumByteError": 108.0,
+          "meanMaximumByteError": 1.9064265536723164
+        },
+        {
+          "name": "hair-front-blend",
+          "pixels": 725,
+          "ssim": 0.9623988610130378,
+          "medianLuminanceRelativeError": 0.0031680617743832015,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 176,
+          "maximumByteError": 43.0,
+          "meanMaximumByteError": 3.510344827586207
+        },
+        {
+          "name": "hair-back-blend",
+          "pixels": 236,
+          "ssim": 0.9904018032068437,
+          "medianLuminanceRelativeError": 0.017686263544832593,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 63,
+          "maximumByteError": 55.0,
+          "meanMaximumByteError": 2.059322033898305
+        }
+      ],
+      "backgroundMaximumByteError": 0,
+      "resourceUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    },
+    {
+      "configuration": "debug",
+      "imageSha256": "65e8889711179452d75b4f25e1e22f6e6653c175809c75608861aa11e08f90f0",
+      "executableSha256": "a1fd5dfe919d091ce2cf8b9d10b3c0512f90425eff2a9c4f837d816c6dc2f1e9",
+      "shaderManifest": {
+        "path": "debug-program.json",
+        "sha256": "bc02a84bef972049084a74760274b83ce6901424784f92b77a487b6d26cc278d",
+        "bytes": 65081
+      },
+      "captureManifest": {
+        "path": "debug-capture.json",
+        "sha256": "449716403b87fb9e02fb582ef338722a158844d55fef00ea8186d0c28b13e99c",
+        "bytes": 21831
+      },
+      "log": {
+        "path": "debug.log",
+        "sha256": "b1d318ca5f9525a9d8430ff78476d5fd93fb0c55784e327dd40d2de687ff1758",
+        "bytes": 9528
+      },
+      "body": [
+        {
+          "event": 889,
+          "qualifiedPixels": 45988,
+          "ssim": 0.9649861059263044,
+          "nativeMedianLuminance": 0.02662850351388315,
+          "currentMedianLuminance": 0.025955994609967937,
+          "medianLuminanceRelativeError": 0.025255227112728665,
+          "p95ByteError": 9.0,
+          "maximumByteError": 111,
+          "worstPixel": [
+            1067,
+            616
+          ],
+          "passed": true
+        },
+        {
+          "event": 910,
+          "qualifiedPixels": 17990,
+          "ssim": 0.9971133404550964,
+          "nativeMedianLuminance": 0.014355474145918727,
+          "currentMedianLuminance": 0.014246552491091293,
+          "medianLuminanceRelativeError": 0.007587464804037823,
+          "p95ByteError": 1.0,
+          "maximumByteError": 41,
+          "worstPixel": [
+            1557,
+            1130
+          ],
+          "passed": true
+        },
+        {
+          "event": 928,
+          "qualifiedPixels": 118661,
+          "ssim": 0.9640891217258782,
+          "nativeMedianLuminance": 0.022130240144565362,
+          "currentMedianLuminance": 0.02178462034880006,
+          "medianLuminanceRelativeError": 0.015617534807916595,
+          "p95ByteError": 9.0,
+          "maximumByteError": 127,
+          "worstPixel": [
+            1069,
+            703
+          ],
+          "passed": true
+        }
+      ],
+      "hair": [
+        {
+          "name": "source-hair-visible",
+          "pixels": 17017,
+          "ssim": 0.9901313800249995,
+          "medianLuminanceRelativeError": 0.0066986347459679985,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 215,
+          "maximumByteError": 90.0,
+          "meanMaximumByteError": 0.8046659223129812
+        },
+        {
+          "name": "hair-opaque-owner",
+          "pixels": 16459,
+          "ssim": 0.9905414143676685,
+          "medianLuminanceRelativeError": 0.00800284966464992,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 72,
+          "maximumByteError": 6.0,
+          "meanMaximumByteError": 0.6358831034692266
+        },
+        {
+          "name": "hair-complete-stages",
+          "pixels": 20361,
+          "ssim": 0.9888697718433799,
+          "medianLuminanceRelativeError": 0.004418209098420816,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 1080,
+          "maximumByteError": 108.0,
+          "meanMaximumByteError": 1.0581503855409853
+        },
+        {
+          "name": "hair-outline",
+          "pixels": 2832,
+          "ssim": 0.9886416318331831,
+          "medianLuminanceRelativeError": 0.010298226327711284,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 661,
+          "maximumByteError": 108.0,
+          "meanMaximumByteError": 1.9064265536723164
+        },
+        {
+          "name": "hair-front-blend",
+          "pixels": 725,
+          "ssim": 0.9623988610130378,
+          "medianLuminanceRelativeError": 0.0031680617743832015,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 176,
+          "maximumByteError": 43.0,
+          "meanMaximumByteError": 3.510344827586207
+        },
+        {
+          "name": "hair-back-blend",
+          "pixels": 236,
+          "ssim": 0.9904018032068437,
+          "medianLuminanceRelativeError": 0.017686263544832593,
+          "regionalPassed": true,
+          "pixelsOverOneByte": 63,
+          "maximumByteError": 55.0,
+          "meanMaximumByteError": 2.059322033898305
+        }
+      ],
+      "backgroundMaximumByteError": 0,
+      "resourceUnload": {
+        "buffers": 0,
+        "images": 0
+      }
+    }
+  ],
+  "thresholds": {
+    "ssim": 0.95,
+    "medianLuminanceRelativeError": 0.1,
+    "strictByteBudget": 1
+  },
+  "sourceRun": "build/runs/20261103-234012-character-reference-stages-5abe6c",
+  "nativeBackground": {
+    "shaderReplacementScope": "vertex shaders of explicit character normal and color draws; all character primitives clipped outside the frustum",
+    "target": "ResourceId::141925",
+    "replacementShaders": 26,
+    "changedPixels": 367283,
+    "changedBounds": [
+      804,
+      125,
+      1713,
+      1373
+    ],
+    "qualifiedBackgroundPixels": 2310900,
+    "originalMatchesSourceReference": true,
+    "backgroundPlateContainsCharacter": false,
+    "receipt": {
+      "path": "native-background.json",
+      "sha256": "e51c0faa03dca8da44520e0c91a280ef47f13771e90f87242944965e35ae28d3",
+      "bytes": 45587
+    },
+    "sourceCapture": {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+      "bytes": 345416012,
+      "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90"
+    },
+    "originalTargetSha256": "b742829a6c1b20917dc88a25670090509ec89d7a5885add5931acd40d87ff484",
+    "backgroundTargetSha256": "2e6b0a5eba238b70011728fa5387ffb52235f550393ba7ab18f888482519a441"
+  },
+  "debugReleaseByteExact": true,
+  "embeddedMaterialEquivalence": {
+    "fullDocumentImageSha256": "bcd6693287514e1e2aa394dd6c6078473ae6e6c63726f3d631cdf5e5aca714e7",
+    "embeddedImageSha256": "bcd6693287514e1e2aa394dd6c6078473ae6e6c63726f3d631cdf5e5aca714e7",
+    "maximumByteError": 0,
+    "explicitMaterialSlots": 14
+  },
+  "inputManifest": {
+    "path": "inputs.json",
+    "sha256": "2541a98ae852f56af5e37b77776f2c9f2b8c0f9321833b32ba2455805091d144",
+    "bytes": 39037
+  },
+  "inputProject": "build/runs/20261103-234012-character-reference-stages-5abe6c/qualified-lit-surfaces-static/qualified.azureproject",
+  "sourceSamplers": {
+    "status": "configured",
+    "materialSlots": 14,
+    "hairImplicitSamplerImages": [
+      "351b1c1e-a9d3-558e-a94e-905cc2f43919",
+      "8f873e5f-9141-59f1-a941-e044877267cb",
+      "a391bc8e-7107-56fa-b010-2f1ed821c9b0",
+      "d72fd433-9a10-4c78-a00e-8c4b832d2850"
+    ],
+    "backgroundSource": "native-empty-stage-v2",
+    "backgroundOnly": true,
+    "bodySamplingPreserved": true
+  },
+  "initialJointProbe": {
+    "status": "four-frames-captured",
+    "frames": 4,
+    "structure": {
+      "path": "joint-structure.json",
+      "sha256": "630f7222f0ec0a6a3a03774398167edba985d6d6d9370d2f934bef18a41873d9",
+      "bytes": 590
+    },
+    "localizedDifferences": {
+      "path": "joint-differences.json",
+      "sha256": "1ed4f73c9368aa670b6625bcbf705149164b6c62546d811ec241cc5248271cfa",
+      "bytes": 735
+    },
+    "motionStatus": "pending",
+    "primaryProject": "skin-warm-joint/joint-materials.azureproject"
+  },
+  "controls": [
+    {
+      "path": "native-samplers-full-comparison.json",
+      "sha256": "659a5f2496c469338f6717138cafa16b5ddec9197b093b9b0fa9da7909456f40",
+      "bytes": 1798
+    },
+    {
+      "path": "public-source-cube-full-comparison.json",
+      "sha256": "b361b4223582c7532f3d2bbcabe0a44bc236f27e251a4d67aba75ba757c8ced8",
+      "bytes": 1796
+    },
+    {
+      "path": "public-restored-cloth-full-comparison.json",
+      "sha256": "fd05b355cd46b90b42c77a89dda4446a95d7ca30acbdcbc91d7916223b4208ce",
+      "bytes": 1798
+    },
+    {
+      "path": "lit-cloth-shell-v6-full-comparison.json",
+      "sha256": "60d01abcf04fcac6bc45b66b6428117c3b113708d670db95ff1ccd9c2e41f8e3",
+      "bytes": 1798
+    },
+    {
+      "path": "lit-cloth-shell-v7-full-comparison.json",
+      "sha256": "0c1184ad7c6032c79dc55def0d3dd784c3cb07c86b51d0e1793b42459d6bd0d3",
+      "bytes": 1796
+    }
+  ],
+  "comparison": {
+    "path": "comparison.png",
+    "sha256": "2351c8896daf5098d8854f8de75cff6317c62a6daa30db2789ce47de80a789f2"
+  },
+  "remaining": [
+    "Strict one-byte comparison for original and later hair stages",
+    "Joint 192-frame sequence and Debug reopen",
+    "Playable route and isolated delivery of the candidate",
+    "Scene reflections, GI and formal NR/P8 acceptance"
+  ]
+}

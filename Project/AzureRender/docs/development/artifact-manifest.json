@@ -1131,7 +1131,11 @@
       "projectedSurface": "docs/acceptance/nr/evidence/2026-11-04/projected-surface/results.json",
       "screenSurfaceNormal": "docs/acceptance/nr/evidence/2026-11-05/screen-normal/results.json",
       "nprViewMask": "docs/acceptance/nr/evidence/2026-11-05/npr-view-mask/results.json",
-      "screenNormalShadow": "docs/acceptance/nr/evidence/2026-11-05/screen-normal-shadow/results.json"
+      "screenNormalShadow": "docs/acceptance/nr/evidence/2026-11-05/screen-normal-shadow/results.json",
+      "litSurfaces": "docs/acceptance/nr/evidence/2026-11-05/lit-surfaces/results.json",
+      "litSurfacesStaticProject": "qualified-lit-surfaces-static/qualified.azureproject",
+      "litSurfacesJointCandidate": "qualified-lit-surfaces-joint-v4/joint-materials.azureproject",
+      "litSurfacesJointStatus": "motion-validation-running"
     },
     {
       "path": "runs/20261104-001359-face-masked-rim-ff43bf",

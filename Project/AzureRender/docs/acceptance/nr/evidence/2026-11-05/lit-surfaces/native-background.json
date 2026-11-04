@@ -1,0 +1,1431 @@
+{
+  "status": "exported",
+  "target": "ResourceId::141925",
+  "actorEvents": [
+    296,
+    310,
+    328,
+    345,
+    363,
+    377,
+    391,
+    404,
+    422,
+    440,
+    460,
+    783,
+    804,
+    825,
+    846,
+    868,
+    889,
+    910,
+    928,
+    950,
+    1018,
+    1038,
+    1059,
+    1079,
+    1099,
+    1116,
+    1138,
+    1230,
+    1245,
+    1291,
+    1314,
+    1339,
+    1358,
+    1383
+  ],
+  "shaders": [
+    {
+      "shader": "ResourceId::15974",
+      "replacement": "ResourceId::1000000000000000351",
+      "events": [
+        296,
+        310
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float3 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; uint q6 : TEXCOORD5;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::15982",
+      "replacement": "ResourceId::1000000000000000352",
+      "events": [
+        328
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19918",
+      "replacement": "ResourceId::1000000000000000353",
+      "events": [
+        345
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float3 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; uint q6 : TEXCOORD5;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::15978",
+      "replacement": "ResourceId::1000000000000000354",
+      "events": [
+        363,
+        377,
+        391,
+        404
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19922",
+      "replacement": "ResourceId::1000000000000000355",
+      "events": [
+        422
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19928",
+      "replacement": "ResourceId::1000000000000000356",
+      "events": [
+        440
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::16046",
+      "replacement": "ResourceId::1000000000000000357",
+      "events": [
+        460
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float2 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float4 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; uint q8 : TEXCOORD7;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::16140",
+      "replacement": "ResourceId::1000000000000000358",
+      "events": [
+        783
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD9",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float4 q8 : TEXCOORD7; float3 q9 : TEXCOORD8; uint q10 : TEXCOORD9;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0; o.q10=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19942",
+      "replacement": "ResourceId::1000000000000000359",
+      "events": [
+        804
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float3 q8 : TEXCOORD7; uint q9 : TEXCOORD8;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19944",
+      "replacement": "ResourceId::1000000000000000360",
+      "events": [
+        825
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float3 q8 : TEXCOORD7; uint q9 : TEXCOORD8;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19946",
+      "replacement": "ResourceId::1000000000000000361",
+      "events": [
+        846
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float3 q8 : TEXCOORD7; uint q9 : TEXCOORD8;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19948",
+      "replacement": "ResourceId::1000000000000000362",
+      "events": [
+        868
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float3 q8 : TEXCOORD7; uint q9 : TEXCOORD8;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::25962",
+      "replacement": "ResourceId::1000000000000000363",
+      "events": [
+        889
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float3 q8 : TEXCOORD7; uint q9 : TEXCOORD8;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::139565",
+      "replacement": "ResourceId::1000000000000000364",
+      "events": [
+        910,
+        928
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD9",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float2 q2 : TEXCOORD4; float3 q3 : TEXCOORD1; float3 q4 : TEXCOORD2; float4 q5 : TEXCOORD3; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float3 q8 : TEXCOORD7; float3 q9 : TEXCOORD8; uint q10 : TEXCOORD9;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0; o.q10=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19950",
+      "replacement": "ResourceId::1000000000000000365",
+      "events": [
+        950
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD9",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float4 q8 : TEXCOORD7; float3 q9 : TEXCOORD8; uint q10 : TEXCOORD9;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0; o.q10=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::16199",
+      "replacement": "ResourceId::1000000000000000366",
+      "events": [
+        1018
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::16197",
+      "replacement": "ResourceId::1000000000000000367",
+      "events": [
+        1038
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::16201",
+      "replacement": "ResourceId::1000000000000000368",
+      "events": [
+        1059,
+        1099,
+        1116
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::25976",
+      "replacement": "ResourceId::1000000000000000369",
+      "events": [
+        1079
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19955",
+      "replacement": "ResourceId::1000000000000000370",
+      "events": [
+        1138
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19957",
+      "replacement": "ResourceId::1000000000000000371",
+      "events": [
+        1230,
+        1245
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; uint q3 : TEXCOORD2;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19963",
+      "replacement": "ResourceId::1000000000000000372",
+      "events": [
+        1291
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD9",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float4 q8 : TEXCOORD7; float3 q9 : TEXCOORD8; uint q10 : TEXCOORD9;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0; o.q10=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19965",
+      "replacement": "ResourceId::1000000000000000373",
+      "events": [
+        1314
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; uint q7 : TEXCOORD6;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19959",
+      "replacement": "ResourceId::1000000000000000374",
+      "events": [
+        1339
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; uint q3 : TEXCOORD2;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19961",
+      "replacement": "ResourceId::1000000000000000375",
+      "events": [
+        1358
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; uint q3 : TEXCOORD2;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0;return o;}",
+      "warnings": ""
+    },
+    {
+      "shader": "ResourceId::19967",
+      "replacement": "ResourceId::1000000000000000376",
+      "events": [
+        1383
+      ],
+      "signature": [
+        {
+          "semantic": "SV_Position0",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Position"
+        },
+        {
+          "semantic": "TEXCOORD0",
+          "type": "float2",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD1",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD2",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD3",
+          "type": "float4",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD4",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD5",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD6",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD7",
+          "type": "float3",
+          "systemValue": "ShaderBuiltin.Undefined"
+        },
+        {
+          "semantic": "TEXCOORD8",
+          "type": "uint",
+          "systemValue": "ShaderBuiltin.Undefined"
+        }
+      ],
+      "source": "struct Output {float4 q0 : SV_Position0; float2 q1 : TEXCOORD0; float3 q2 : TEXCOORD1; float3 q3 : TEXCOORD2; float4 q4 : TEXCOORD3; float3 q5 : TEXCOORD4; float3 q6 : TEXCOORD5; float3 q7 : TEXCOORD6; float3 q8 : TEXCOORD7; uint q9 : TEXCOORD8;}; Output main(){Output o;o.q0=float4(0,0,2,1); o.q1=0; o.q2=0; o.q3=0; o.q4=0; o.q5=0; o.q6=0; o.q7=0; o.q8=0; o.q9=0;return o;}",
+      "warnings": ""
+    }
+  ]
+}

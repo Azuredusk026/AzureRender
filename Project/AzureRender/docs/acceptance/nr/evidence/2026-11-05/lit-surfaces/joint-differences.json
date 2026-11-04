@@ -1,0 +1,50 @@
+[
+  {
+    "frame": 0,
+    "pixels": 14221,
+    "bounds": [
+      1277,
+      612,
+      1582,
+      1249
+    ],
+    "wallByteExact": true,
+    "ceilingByteExact": true
+  },
+  {
+    "frame": 1,
+    "pixels": 14213,
+    "bounds": [
+      1270,
+      612,
+      1580,
+      1249
+    ],
+    "wallByteExact": true,
+    "ceilingByteExact": true
+  },
+  {
+    "frame": 2,
+    "pixels": 14167,
+    "bounds": [
+      1285,
+      613,
+      1581,
+      1249
+    ],
+    "wallByteExact": true,
+    "ceilingByteExact": true
+  },
+  {
+    "frame": 3,
+    "pixels": 14221,
+    "bounds": [
+      1277,
+      612,
+      1579,
+      1249
+    ],
+    "wallByteExact": true,
+    "ceilingByteExact": true
+  }
+]
