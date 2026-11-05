@@ -3,9 +3,25 @@
 #include <cassert>
 #include <filesystem>
 #include <fstream>
+#include <iostream>
+#include <sstream>
 #include <string>
 
 namespace {
+
+class ObservedOutput final : public std::stringbuf {
+public:
+    int sync() override { ++commits; return std::stringbuf::sync(); }
+    int commits=0;
+};
+
+bool completeStdoutLine(azurerender::RuntimeDiagnostics& diagnostics) {
+    ObservedOutput output;
+    auto* original=std::cout.rdbuf(&output);
+    diagnostics.print("test", "committed lifecycle line");
+    std::cout.rdbuf(original);
+    return output.commits>0&&output.str()=="committed lifecycle line\n";
+}
 
 bool fileContains(
     const std::filesystem::path& path,
@@ -28,6 +44,10 @@ int main() {
         / "azurerender-diagnostics-test.jsonl";
     auto& diagnostics = RuntimeDiagnostics::instance();
     diagnostics.configure(path);
+    if(!completeStdoutLine(diagnostics)) {
+        std::cerr << "print must commit a complete stdout line before returning\n";
+        return 1;
+    }
     diagnostics.info("test", "hello");
     diagnostics.warning("test", "soft warning");
     diagnostics.error("test", DiagnosticCode::Asset, "missing asset");

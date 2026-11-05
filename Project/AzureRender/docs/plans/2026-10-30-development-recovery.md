@@ -107,6 +107,7 @@ Debug 完整场景的资源扫描与加载成本继续诊断。
 | E10 | 文档工具 | `requirements-docs.txt` | 文档校验及需要时的站点构建通过 |
 | E11 | .NET SDK | 9.0.319，启用托管脚本原型 | CoreCLR 与 NativeAOT 构建和测试通过 |
 | E12 | 扩展工具 | Blender、视频工具按任务安装 | 对应工具链任务可以运行 |
+| E13 | Slang | SDK 内的 2026.8 | 原型模块构建、接口布局和算法组合通过所属检查 |
 
 vcpkg 内置基线为 `2bc124dac8436f5d8e108273aacf3f68d9824185`。
 工具检出提交同时覆盖 `libwebp 1.6.0#3` 等修订。
@@ -117,6 +118,8 @@ GLFW、Jolt、RmlUi、音频和图像库由清单安装。
 
 .NET SDK 9.0.319 用于托管工具及当前候选复现。
 本轮构建启用 `AZURE_ENABLE_MANAGED_SCRIPT_PROTOTYPE`。
+完整验收配置同时启用 `AZURE_ENABLE_SHADER_MODULE_PROTOTYPE`。
+构建来源及跨设备检查见[入口恢复](2026-11-05-acceptance-preflight.md)。
 Blender 5.1.2 用于原生离线转换任务。
 视频工具优先使用 `imageio-ffmpeg` 提供的程序。
 

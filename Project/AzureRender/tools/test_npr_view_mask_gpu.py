@@ -13,6 +13,7 @@ import numpy as np
 from PIL import Image
 
 from convert_material_semantics import complete_material_document
+from gpu_texture_access import require_texture_access
 from test_npr_ramp_composition_gpu import BASE, RAMP, LUMA, linear, prepare, write
 
 
@@ -100,7 +101,7 @@ def run(player, output, cases=None, expected_validation=None, quality="existing"
             validation = "Validation layer: enabled" in text
             if expected_validation:
                 assert validation == (expected_validation == "enabled"), name
-            assert "Character texture access: " + ("fixed" if name == "fixed" else "indexed") in text, name
+            access = require_texture_access(text, fixed_requested=name == "fixed")
             manifest = json.loads((folder / "frames/capture_manifest.json").read_bytes())
             assert manifest["rasterizationSamples"] == (4 if quality == "multisample" else 1), name
             assert len(manifest["nprRampCompositions"]) == (0 if procedural is None else 1), name
@@ -114,7 +115,7 @@ def run(player, output, cases=None, expected_validation=None, quality="existing"
             assert error <= .008, (name, error, expected.tolist(), actual.mean((0, 1)).tolist())
             images[name] = image
             report["captures"].append(dict(name=name, maximumLinearError=error, expected=expected.tolist(), actual=actual.mean((0, 1)).tolist(),
-                validationEnabled=validation, imageSha256=hashlib.sha256(frame.read_bytes()).hexdigest()))
+                validationEnabled=validation, textureAccess=access, imageSha256=hashlib.sha256(frame.read_bytes()).hexdigest()))
         for name in ("fixed", "document"):
             if name in images and "saturated" in images:
                 assert np.array_equal(images[name], images["saturated"]), name

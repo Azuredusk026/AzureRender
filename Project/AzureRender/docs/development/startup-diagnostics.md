@@ -33,3 +33,12 @@ Release 场景渲染器调用记录为 48,967 毫秒。
 `startup-diagnostics/verification.json` 保存双配置结果。
 `high-detail-joint/playable-release/stderr.log` 保存计时。
 各收据记录对应源码和宿主摘要。
+
+## 终端输出
+
+面向用户的诊断在返回前提交完整标准输出行。
+内存消息及 JSON 日志同时保留该事件。
+资源释放记录与进程退出结果分别核对。
+输出提交使用独立流缓冲检查覆盖两种构建。
+
+当前验收入口及跨设备范围见[恢复计划](../plans/2026-11-05-acceptance-preflight.md)。

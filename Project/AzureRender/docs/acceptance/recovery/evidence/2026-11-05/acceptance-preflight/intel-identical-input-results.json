@@ -1,0 +1,23 @@
+[
+  {
+    "run": 0,
+    "exitCode": 0,
+    "differentPixels": 12,
+    "maximumByteError": 2,
+    "normalUnload": true
+  },
+  {
+    "run": 1,
+    "exitCode": 0,
+    "differentPixels": 11,
+    "maximumByteError": 2,
+    "normalUnload": true
+  },
+  {
+    "run": 2,
+    "exitCode": 0,
+    "differentPixels": 8,
+    "maximumByteError": 2,
+    "normalUnload": true
+  }
+]

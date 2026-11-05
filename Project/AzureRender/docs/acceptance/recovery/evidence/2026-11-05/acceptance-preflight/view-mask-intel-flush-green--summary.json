@@ -1,0 +1,330 @@
+{
+  "status": "failed",
+  "quality": "existing",
+  "executableSha256": "d20f8927e118a698b437995aed8dd8a3af55f81ad3fa3e6a97ffc127e5abb719",
+  "captures": [
+    {
+      "name": "generic-0",
+      "maximumLinearError": 0.0012107628177074614,
+      "expected": [
+        0.274509113093794,
+        0.1156461366446812,
+        0.0350337258490987
+      ],
+      "actual": [
+        0.2746773120603847,
+        0.11443537382697389,
+        0.03433980680868219
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "96247931ffa25c7dae33ec6b19c10cb2dfcf2dc3c832206906f4a661fdaae272"
+    },
+    {
+      "name": "generic-0.5",
+      "maximumLinearError": 0.0011957937509446404,
+      "expected": [
+        0.2569870591706512,
+        0.11034649560360386,
+        0.03699426352723384
+      ],
+      "actual": [
+        0.25818285292159604,
+        0.10946171077829916,
+        0.03688945040110007
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "111a00e5a1a4213adbe51737ea66d1c21eaccdb2e82dc9530b1264f136598326"
+    },
+    {
+      "name": "generic-1",
+      "maximumLinearError": 0.001067431435237326,
+      "expected": [
+        0.23946500524750833,
+        0.10504685456252653,
+        0.038954801205368976
+      ],
+      "actual": [
+        0.23839757381227134,
+        0.10461648409110415,
+        0.03820437159534645
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "12f50e439c74a5c537f0a24611d3545d69821e95c4a38a8a10b7c2a210ab8024"
+    },
+    {
+      "name": "fabric-0",
+      "maximumLinearError": 0.0012107628177074614,
+      "expected": [
+        0.274509113093794,
+        0.1156461366446812,
+        0.0350337258490987
+      ],
+      "actual": [
+        0.2746773120603847,
+        0.11443537382697389,
+        0.03433980680868219
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "65315078b2306b6f141d5dae8d3d87f74ac6882dbcc707f0dbb46ab92b3ca002"
+    },
+    {
+      "name": "fabric-0.5",
+      "maximumLinearError": 0.0011957937509446404,
+      "expected": [
+        0.2569870591706512,
+        0.11034649560360386,
+        0.03699426352723384
+      ],
+      "actual": [
+        0.25818285292159604,
+        0.10946171077829916,
+        0.03688945040110007
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "111a00e5a1a4213adbe51737ea66d1c21eaccdb2e82dc9530b1264f136598326"
+    },
+    {
+      "name": "fabric-1",
+      "maximumLinearError": 0.001067431435237326,
+      "expected": [
+        0.23946500524750833,
+        0.10504685456252653,
+        0.038954801205368976
+      ],
+      "actual": [
+        0.23839757381227134,
+        0.10461648409110415,
+        0.03820437159534645
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "12f50e439c74a5c537f0a24611d3545d69821e95c4a38a8a10b7c2a210ab8024"
+    },
+    {
+      "name": "low",
+      "maximumLinearError": 0.0005492561453886262,
+      "expected": [
+        0.19143438674393326,
+        0.08451070155575399,
+        0.03126269987838226
+      ],
+      "actual": [
+        0.19120168274079138,
+        0.08437621154414884,
+        0.03071344373299366
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "38c5ff5f1e04d6e925ee6b8f252326c5cf790c55be5d0e7d3298d2276be18bb2"
+    },
+    {
+      "name": "front",
+      "maximumLinearError": 0.0006508582710913757,
+      "expected": [
+        0.33708291725421413,
+        0.14191414941136302,
+        0.04399749458377071
+      ],
+      "actual": [
+        0.33716361504833026,
+        0.14126329114027153,
+        0.04373502925697347
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "d63c39bec3a8ec906adc4cb3492862963003e233d33f4735c81f30a6943a1dc8"
+    },
+    {
+      "name": "saturated",
+      "maximumLinearError": 0.0004531757526100022,
+      "expected": [
+        0.2617974817770862,
+        0.10931882064162524,
+        0.03300253298558062
+      ],
+      "actual": [
+        0.26225065752969623,
+        0.10946171077829916,
+        0.03310476657088504
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "f8c8c2bf8f814d9107fbe95e665fec0f7eb6005753ffb5eb6ab0f8d65c6d552f"
+    },
+    {
+      "name": "shadow-only",
+      "maximumLinearError": 0.0014089728882568098,
+      "expected": [
+        0.2331416092727484,
+        0.09781711588765613,
+        0.03018360285887314
+      ],
+      "actual": [
+        0.2345505821610056,
+        0.09758734714186261,
+        0.029556834437808776
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "3d4a9a2cbff4e3d81fe1b4f9d196f316b5094ed688a9548f1bc1695f114db15f"
+    },
+    {
+      "name": "shadow-default",
+      "maximumLinearError": 0.0009652898303109114,
+      "expected": [
+        0.34094913507835,
+        0.1410882287977841,
+        0.04078888586451128
+      ],
+      "actual": [
+        0.34191442490866103,
+        0.14126329114027153,
+        0.04091519690685312
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "69c86a421c894ab022b49105feb66b36cf3141e9f1bccd129997a7de4e20c8cf"
+    },
+    {
+      "name": "fixed",
+      "maximumLinearError": 0.0004531757526100022,
+      "expected": [
+        0.2617974817770862,
+        0.10931882064162524,
+        0.03300253298558062
+      ],
+      "actual": [
+        0.26225065752969623,
+        0.10946171077829916,
+        0.03310476657088504
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "fixed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": true,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "f90039c1f808ce00fcd5705231834f6da7ac68d9763675c1bc84ccc2d417e8d9"
+    },
+    {
+      "name": "document",
+      "maximumLinearError": 0.0004531757526100022,
+      "expected": [
+        0.2617974817770862,
+        0.10931882064162524,
+        0.03300253298558062
+      ],
+      "actual": [
+        0.26225065752969623,
+        0.10946171077829916,
+        0.03310476657088504
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "indexed",
+        "requestedSlots": 56,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": false
+      },
+      "imageSha256": "fb8967997972c7553f9069c0f89a34163f476b2fbfbebfbc5fbee9b282e48fe2"
+    },
+    {
+      "name": "blend",
+      "maximumLinearError": 0.0011520253584243467,
+      "expected": [
+        0.15707848906625174,
+        0.06559129238497514,
+        0.01980151979134837
+      ],
+      "actual": [
+        0.1559264637078274,
+        0.06480326669290583,
+        0.019382360956935702
+      ],
+      "validationEnabled": false,
+      "textureAccess": {
+        "mode": "fixed",
+        "requestedSlots": 74,
+        "stageSamplerLimit": 64,
+        "fixedRequested": false,
+        "capacityRequiresFixed": true
+      },
+      "imageSha256": "0f9e78daa3fd2fd1a008e8b4589602f2764e4703b0a1f06d61364c2b49e51fe3"
+    }
+  ],
+  "error": "fixed"
+}

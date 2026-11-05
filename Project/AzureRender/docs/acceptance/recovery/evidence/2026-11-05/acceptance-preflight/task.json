@@ -1,0 +1,15 @@
+{
+  "state": "release-cpu-failed",
+  "startedUtc": "2026-11-05T04:55:50.367613+00:00",
+  "sourceCommit": "004fcee6eb38bd0de84aaa3a62694001c01c5502",
+  "purpose": "Establish source-associated products before formal regression and performance.",
+  "reason": "Current local Release build has no build-provenance.json, so formal measurements cannot use it yet.",
+  "commandBudgetSeconds": 1200,
+  "verificationBudgetMinutes": 30,
+  "next": "Run registered non-GPU regression once; preserve all failures and diagnose each independently.",
+  "buildExitCode": 0,
+  "buildSeconds": 635.9689999999828,
+  "regressionStartedUtc": "2026-11-05T05:07:04.505905+00:00",
+  "regressionExitCode": 8,
+  "regressionSeconds": 630.844000000041
+}

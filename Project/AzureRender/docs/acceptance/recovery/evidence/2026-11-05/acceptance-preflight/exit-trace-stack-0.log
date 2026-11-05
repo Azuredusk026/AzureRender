@@ -1,0 +1,10 @@
+pid=13176 exitBreakpoint=1
+RtlExitUserProcess breakpoint
+thread=9356 rcx=0 rip=7ffed059eef1
+7ffed059eef1 ntdll+7eef1 RtlExitUserProcess+1
+7ffecee417ab KERNEL32+417ab ExitProcess+b
+7ffecd7b0813 ucrtbase+a0813 logbf+2c3
+7ff7fa104773 AzurePlayer+484773
+7ffecee2dda7 KERNEL32+2dda7 BaseThreadInitThunk+17
+7ffed059ee4c ntdll+7ee4c RtlUserThreadStart+2c
+Exit event 0

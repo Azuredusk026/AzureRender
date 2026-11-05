@@ -54,6 +54,11 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 场景反射与最终照明外观继续核验。
 当前开发和冻结交付入口见[完整场景显示](../tutorials/restored-native-scene.md)。
 
+正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
+两种配置各八项定向检查通过，历史字节归因按原范围保留。
+Intel 的整图稳定性仍有少量像素差异。
+编辑预览与正式测量按各自依赖接续。
+
 材质[照明接收](../acceptance/nr/material-lighting-reception.md)通过两配置公共回归。
 匹配输入的三十六个不透明区域均通过静态门槛。
 原冻结独立对照的服饰二、五仍有失败项。

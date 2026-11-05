@@ -1,0 +1,12 @@
+[
+  {
+    "configuration": "release",
+    "exitCode": 0,
+    "seconds": 68.23399999999674
+  },
+  {
+    "configuration": "debug",
+    "exitCode": 0,
+    "seconds": 40.98399999999674
+  }
+]

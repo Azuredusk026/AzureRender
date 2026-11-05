@@ -1,0 +1,9 @@
+{
+  "state": "capacity-and-color-verified-strict-stability-pending",
+  "startedUtc": "2026-11-05T05:15:15+00:00",
+  "source": "ResourceAccessProfile::select; actual requestedSlots=74, maxPerStageDescriptorSamplers=64",
+  "scope": "Capacity guard retains strict backend expectations unless material slots exceed the physical stage limit; color and cleanup budgets unchanged.",
+  "unchangedMaximumLinearColorError": 0.008,
+  "pending": "Intel full-image equality fails at 6 fixed and 15 document pixels; identical-input repeats differ at 8, 11, 12 pixels, maximum 2 bytes.",
+  "retryCondition": "New evidence identifies synchronization, shadow or input stability changes; repeat only affected diagnosis."
+}

@@ -1,0 +1,22 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+    Start   4: AzureEngine.EvolutionCoverage
+1/8 Test   #4: AzureEngine.EvolutionCoverage ....   Passed   38.90 sec
+    Start  56: AzureRender.ShaderModule
+2/8 Test  #56: AzureRender.ShaderModule .........   Passed    2.41 sec
+    Start  58: AzureTools.ShaderModule
+3/8 Test  #58: AzureTools.ShaderModule ..........   Passed   18.59 sec
+    Start  59: AzureTools.ShaderTypes
+4/8 Test  #59: AzureTools.ShaderTypes ...........   Passed    0.89 sec
+    Start  60: AzureTools.ShaderComposition
+5/8 Test  #60: AzureTools.ShaderComposition .....   Passed    2.55 sec
+    Start 222: AzureEngine.BuildProvenance
+6/8 Test #222: AzureEngine.BuildProvenance ......   Passed    0.87 sec
+    Start 344: AzureRender.RuntimeDiagnostics
+7/8 Test #344: AzureRender.RuntimeDiagnostics ...   Passed    3.04 sec
+    Start 416: AzureTools.GpuTextureAccess
+8/8 Test #416: AzureTools.GpuTextureAccess ......   Passed    0.12 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Total Test time (real) =  67.43 sec

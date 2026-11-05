@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Win32-ninja"
+	tests="8"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="AZUREDUSK"
+	time="40"
+	timestamp="2026-11-05T13:43:05"
+	>
+	<testcase name="AzureEngine.EvolutionCoverage" classname="AzureEngine.EvolutionCoverage" time="19.9722" status="run">
+		<properties/>
+		<system-out>{"status": "passed", "coveredItems": 18, "phases": 11, "historicalByteAudit": "incomplete", "unverifiedHistoricalInputs": 24}
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ShaderModule" classname="AzureRender.ShaderModule" time="3.0741" status="run">
+		<properties/>
+		<system-out>Shared host offsets, constant span and two compiled module layouts passed
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ShaderModule" classname="AzureTools.ShaderModule" time="13.9663" status="run">
+		<properties/>
+		<system-out>...........
+----------------------------------------------------------------------
+Ran 11 tests in 13.779s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ShaderTypes" classname="AzureTools.ShaderTypes" time="0.603249" status="run">
+		<properties/>
+		<system-out>.
+----------------------------------------------------------------------
+Ran 1 test in 0.473s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ShaderComposition" classname="AzureTools.ShaderComposition" time="2.33561" status="run">
+		<properties/>
+		<system-out>.
+----------------------------------------------------------------------
+Ran 1 test in 2.135s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.BuildProvenance" classname="AzureEngine.BuildProvenance" time="0.66052" status="run">
+		<properties/>
+		<system-out>.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.540s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.RuntimeDiagnostics" classname="AzureRender.RuntimeDiagnostics" time="0.161245" status="run">
+		<properties/>
+		<system-out>[1793857426031][info][test][code=0] hello
+[1793857426032][warning][test][code=0] soft warning
+[1793857426032][error][test][code=3] missing asset
+user-facing line
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.GpuTextureAccess" classname="AzureTools.GpuTextureAccess" time="0.113917" status="run">
+		<properties/>
+		<system-out>.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+</testsuite>

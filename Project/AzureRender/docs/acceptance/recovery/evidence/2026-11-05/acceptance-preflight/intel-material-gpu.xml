@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Win32-ninja"
+	tests="3"
+	failures="1"
+	disabled="0"
+	skipped="0"
+	hostname="AZUREDUSK"
+	time="273"
+	timestamp="2026-11-05T13:10:01"
+	>
+	<testcase name="AzureRender.ScreenSurfaceNormalGpu" classname="AzureRender.ScreenSurfaceNormalGpu" time="99.2074" status="run">
+		<properties>
+			<property name="cmake_labels" value="gpu"/>
+		</properties>
+		<system-out>{"status": "passed", "cases": 14, "quality": "existing"}
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.NprViewMaskGpu" classname="AzureRender.NprViewMaskGpu" time="129.423" status="fail">
+		<failure message="Failed"/>
+		<properties>
+			<property name="cmake_labels" value="gpu"/>
+		</properties>
+		<system-out>generic-0
+generic-0.5
+generic-1
+fabric-0
+fabric-0.5
+fabric-1
+low
+front
+saturated
+shadow-only
+shadow-default
+fixed
+document
+blend
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_npr_view_mask_gpu.py", line 142, in &lt;module&gt;
+    run(args.executable, Path(temporary) / "capture", args.case, args.expected_validation, args.quality)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_npr_view_mask_gpu.py", line 103, in run
+    assert "Character texture access: " + ("fixed" if name == "fixed" else "indexed") in text, name
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: blend
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ScreenSurfaceNormalShadowGpu" classname="AzureRender.ScreenSurfaceNormalShadowGpu" time="45.0005" status="run">
+		<properties>
+			<property name="cmake_labels" value="gpu"/>
+		</properties>
+		<system-out>surface
+screen
+geometry
+radial-geometry
+fixed
+document
+</system-out>
+	</testcase>
+</testsuite>

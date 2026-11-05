@@ -2,6 +2,7 @@
 
 最终交付目标与当前执行顺序见[开发总计划](docs/plans/azure-engine-plan.md)。
 任务预算、失败转交和验证分级见[协作与验收](docs/development-workflow.md)。
+当前完整构建、跨设备纹理容量及输出提交见[入口核验](docs/acceptance/recovery/acceptance-preflight.md)。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。

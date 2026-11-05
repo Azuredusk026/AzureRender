@@ -95,7 +95,8 @@ void RuntimeDiagnostics::print(
         messages_.erase(messages_.begin());
     }
     messages_.push_back(line);
-    std::cout << line << '\n';
+    // Commit lifecycle output before returning to resource and device teardown.
+    std::cout << line << std::endl;
     if (fileWritable_) {
         std::ofstream output(logPath_, std::ios::app);
         if (output) {

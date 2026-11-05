@@ -1,0 +1,2547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Win32-ninja"
+	tests="287"
+	failures="1"
+	disabled="0"
+	skipped="0"
+	hostname="AZUREDUSK"
+	time="630"
+	timestamp="2026-11-05T13:07:04"
+	>
+	<testcase name="AzureTools.EvolutionCoverage" classname="AzureTools.EvolutionCoverage" time="14.6237" status="run">
+		<properties/>
+		<system-out>warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/docs/acceptance/f4/evidence/tests.log', LF will be replaced by CRLF the next time Git touches it
+.warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Project/Engine/src/Contract.hpp', LF will be replaced by CRLF the next time Git...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.EngineContracts" classname="AzureTools.EngineContracts" time="0.315001" status="run">
+		<properties/>
+		<system-out>......
+----------------------------------------------------------------------
+Ran 6 tests in 0.144s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ContractsSnapshot" classname="AzureEngine.ContractsSnapshot" time="0.162934" status="run">
+		<properties/>
+		<system-out>{"status": "passed", "coveredItems": 18, "files": 46}
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.EvolutionCoverage" classname="AzureEngine.EvolutionCoverage" time="28.3509" status="fail">
+		<failure message="Failed"/>
+		<properties/>
+		<system-out>Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 155, in &lt;module&gt;
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 149, in main
+    report=verify(args.source,json.loads(args.manifest.read_text(encoding='utf-8-sig')),json.loads(discovery.read_text(encoding='utf-8-sig')),args.historical_policy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projects\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 116, in verify
+    require(implementation.get('tests') and set(implementation['tests'])&lt;=tests,'Missing discovered test: '+ident)
+  File "D:\Projects\FYP\Project\AzureRender\tools\verify_evolution_coverage.py", line 14, in require
+    if not condition:raise ValueError(message)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Missing discovered test: C2
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ScreenSpaceReflection" classname="AzureRender.ScreenSpaceReflection" time="1.505" status="run">
+		<properties/>
+		<system-out>PASS: default, legal domain, version, atomic decode, level JSON, azscene save/reopen, snapshot activation
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ProjectedReflectionScene" classname="AzureRender.ProjectedReflectionScene" time="2.4757" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793855580631][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793855580631][info][render][code=0] Scene load CPU preparation: 0.243800 ms, materialPixelBytes=232
+[1793855580638][info][render][code=0] Character IBL: hardware mip fallback path
+[1793855580639][info][render][code=0] Scene load shared textures: 8.301900 ms
+[1793855580640][info][render][code=0] Scene load buffers: 0.997600 ms
+[1793855580640][info][render][code=0] Character skinning and morph: vertex-shader fallback pa...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.EnvironmentSpecular" classname="AzureRender.EnvironmentSpecular" time="1.5564" status="run">
+		<properties/>
+		<system-out>Instruction grid: 1764; maximum absolute error: 1.19209e-07
+Environment specular CPU contract passed
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ScriptBindings" classname="AzureTools.ScriptBindings" time="1.22997" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 1.067s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.PerformanceBudget" classname="AzureTools.PerformanceBudget" time="0.196052" status="run">
+		<properties/>
+		<system-out>............
+----------------------------------------------------------------------
+Ran 12 tests in 0.011s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.GpuEnvironment" classname="AzureTools.GpuEnvironment" time="0.240915" status="run">
+		<properties/>
+		<system-out>....................
+----------------------------------------------------------------------
+Ran 20 tests in 0.056s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.PerformanceProvenance" classname="AzureTools.PerformanceProvenance" time="0.823569" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 0.433s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.PlatformerLongRunRules" classname="AzureTools.PlatformerLongRunRules" time="0.667945" status="run">
+		<properties/>
+		<system-out>.......................................................
+----------------------------------------------------------------------
+Ran 55 tests in 0.092s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.LongRunCleanup" classname="AzureTools.LongRunCleanup" time="4.44268" status="run">
+		<properties/>
+		<system-out>......
+----------------------------------------------------------------------
+Ran 6 tests in 4.015s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.MemoryResidency" classname="AzureTools.MemoryResidency" time="0.257036" status="run">
+		<properties/>
+		<system-out>......
+----------------------------------------------------------------------
+Ran 6 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.VirtualAllocationTrace" classname="AzureTools.VirtualAllocationTrace" time="0.242283" status="run">
+		<properties/>
+		<system-out>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.VisibilityPrototype" classname="AzureRender.VisibilityPrototype" time="2.88374" status="run">
+		<properties/>
+		<system-out>Stable surface identities, picking, scene/camera/frame history rejection and bounds passed
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.VisibilityBenchmark" classname="AzureTools.VisibilityBenchmark" time="0.255679" status="run">
+		<properties/>
+		<system-out>.
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.PipelineInspection" classname="AzureRender.PipelineInspection" time="4.0686" status="run">
+		<properties/>
+		<system-out>Pipeline inspection capability, errors, bounds and borrowed ownership passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ResourceAccessProfile" classname="AzureRender.ResourceAccessProfile" time="2.34359" status="run">
+		<properties/>
+		<system-out>Device limits, enabled capabilities, immutable index generations and fence retirement passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.SkinningBatch" classname="AzureRender.SkinningBatch" time="2.92877" status="run">
+		<properties/>
+		<system-out>Skinning slices, independent joints, morph boundaries and dispatch limits passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ViewBatching" classname="AzureRender.ViewBatching" time="3.65088" status="run">
+		<properties/>
+		<system-out>Per-view spans, mesh boundaries and culling bypass passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.PrimitiveOpacity" classname="AzureRender.PrimitiveOpacity" time="2.8119" status="run">
+		<properties/>
+		<system-out>Primitive opacity preserves default batches and independent node coverage
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.NodeOpacityRecording" classname="AzureRender.NodeOpacityRecording" time="3.99427" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; hair, flags=0x14022, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.400000, 0.600000
+Animations: 0
+[1793855559664][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793855559664][info][render][code=0] Scene load CPU preparation: 0.273600 ms, materialPixelBytes=248
+[1793855559672][info][render][code=0] Character IBL: hardware mip fallback path
+[1793855559673][info][render][code=0] Scene load shared textures: 8.865100 ms
+[1793855559675][info][render][code=0] Scene load buffers: 1.286300 ms
+[1793855559675][info][render][code=0] Character skinning and morph: vertex-shader fallback ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.OutlineCoverageRecording" classname="AzureRender.OutlineCoverageRecording" time="8.63067" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: coverage-fixture/subject.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x4020, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793855419963][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793855419964][info][render][code=0] Scene load CPU preparation: 0.141000 ms, materialPixelBytes=116
+[1793855419968][info][render][code=0] Character IBL: hardware mip fallback path
+[1793855419969][info][render][code=0] Scene load shared textures: 5.489800 ms
+[1793855419970][info][render][code=0] Scene load buffers: 0.838200 ms
+[1793855419970][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793855419970][info][render][code=0] Scene load skinning: 0.010100 ms
+[1793855419971][info][render][code=0] Scene load ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.SceneMultisampling" classname="AzureRender.SceneMultisampling" time="5.0453" status="run">
+		<properties/>
+		<system-out>Scene multisampling ownership, bounded budget, source slots, graph validation and failure rollback passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MultisampleContract" classname="AzureRender.MultisampleContract" time="2.54489" status="run">
+		<properties/>
+		<system-out>Multisample defaults, capabilities, atomic validation, attachment matching and allocation accounting passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MaterialCoverage" classname="AzureRender.MaterialCoverage" time="4.13466" status="run">
+		<properties/>
+		<system-out>[1793855535576][warning][material][code=0] Full material replacement at slot coverage-slot from C:\Users\admin\AppData\Local\Temp\azure-coverage-324674544614700\replacement.azurematerial discards source semantics: coverageTexture, alphaMode
+Independent coverage image size, channels, version and ownership passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MaterialPipelinePolicy" classname="AzureRender.MaterialPipelinePolicy" time="1.70363" status="run">
+		<properties/>
+		<system-out>Ordinary opaque policy: final class/alpha eligibility passed
+Material feature policy: common bits, varying bits, view ownership and changed-material fallback passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.ProceduralGeometry" classname="AzureAssets.ProceduralGeometry" time="4.2156" status="run">
+		<properties/>
+		<system-out>Geometry, booleans, modules, seeds, coordinates, budgets, cancellation and provenance passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.RigText" classname="AzureAssets.RigText" time="5.55481" status="run">
+		<properties/>
+		<system-out>Rigid hierarchy, ownership, coordinates, channels, loops, independent poses and failures passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.ProceduralProcess" classname="AzureAssets.ProceduralProcess" time="6.12948" status="run">
+		<properties/>
+		<system-out>Real compiler process, deadlines, cancellation, cleanup and recovery passed
+</system-out>
+	</testcase>
+	<testcase name="AzureUi.Localization" classname="AzureUi.Localization" time="4.92118" status="run">
+		<properties/>
+		<system-out>Language switching, stable panel IDs, formatting and user text passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRuntime.CameraSystem" classname="AzureRuntime.CameraSystem" time="5.00648" status="run">
+		<properties/>
+		<system-out>Camera registration, hierarchy, selection and render ownership passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.PathTracing" classname="AzureRender.PathTracing" time="2.96979" status="run">
+		<properties/>
+		<system-out>Path tracing BVH, hierarchy, visibility and atlas passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ColorGradingLut" classname="AzureRender.ColorGradingLut" time="7.1902" status="run">
+		<properties/>
+		<system-out>Color grading LUT resource, interpolation, domains and portable persistence passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.FogTransport" classname="AzureRender.FogTransport" time="2.56745" status="run">
+		<properties/>
+		<system-out>Fog transport checks: 30
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.AerialFog" classname="AzureRender.AerialFog" time="2.7254" status="run">
+		<properties/>
+		<system-out>32 aerial fog checks passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.FogVolumeData" classname="AzureRender.FogVolumeData" time="3.22691" status="run">
+		<properties/>
+		<system-out>Fog volume checks: 28
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.FogViewProjection" classname="AzureRender.FogViewProjection" time="1.93775" status="run">
+		<properties/>
+		<system-out>Fog view projection checks: 18
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ViewFogBinding" classname="AzureRender.ViewFogBinding" time="3.2595" status="run">
+		<properties/>
+		<system-out>View fog binding checks: 41
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ViewFogGpu" classname="AzureRender.ViewFogGpu" time="4.402" status="run">
+		<properties/>
+		<system-out>View fog GPU frame ownership, mismatch, resize and release passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ViewFogShaderContract" classname="AzureRender.ViewFogShaderContract" time="0.177767" status="run">
+		<properties/>
+		<system-out>{
+  "status": "passed",
+  "programs": [
+    {
+      "program": "mesh_fog.frag.spv",
+      "directlyUsedBindings": [
+        0,
+        1,
+        5,
+        6,
+        18,
+        25,
+        27,
+        34,
+        35
+      ]
+    },
+    {
+      "program": "mesh_fog_bindless.frag.spv",
+      "directlyUsedBindings": [
+        0,
+        1,
+        18,
+        27,
+        34,
+        35
+      ]
+    },
+    {
+      "program": "mesh_fog_samples.frag.spv",
+      "directlyUsedBindings": [
+        0,
+        1,
+        5,
+        6,
+        18,
+        25,
+        27,
+        34,
+        35
+      ]
+    },
+    {
+      "program": "mesh_fog_bindless_samples.frag.spv",
+      "directlyUsedBindings": [
+        0,
+        1,
+        18,
+        27,
+        34,
+        35
+      ]
+    }
+  ],
+  "scope": "Direct loads, access chains, copies, array lengths, stores and function pointer arguments; no general control-flow reflection."
+}
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.FogVolumeOwner" classname="AzureRender.FogVolumeOwner" time="4.40186" status="run">
+		<properties/>
+		<system-out>Fog volume ownership passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.UnlitTextureLayers" classname="AzureRender.UnlitTextureLayers" time="3.77677" status="run">
+		<properties/>
+		<system-out>Passed 226 unlit layer checks
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.UnlitTextureMaterial" classname="AzureRender.UnlitTextureMaterial" time="4.02776" status="run">
+		<properties/>
+		<system-out>[1793855572289][warning][material][code=0] Full material replacement at slot name:PublicSignalLayers from C:\Users\admin\AppData\Local\Temp\azure-unlit-material-324711381922700\layers.azmat discards source semantics: surface.layers, unlit-texture-layers
+Passed 72 unlit material checks
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.TextureMipCoverage" classname="AzureRender.TextureMipCoverage" time="3.81658" status="run">
+		<properties/>
+		<system-out>shape=0 level=2 coverage=0.28156 target=0.28125 relativeError=0.00110202
+shape=0 level=3 coverage=0.281101 target=0.28125 relativeError=0.000528971
+shape=0 level=4 coverage=0.280457 target=0.28125 relativeError=0.00282118
+shape=1 level=2 coverage=0.0616319 target=0.061615 relativeError=0.000274734
+shape=1 level=3 coverage=0.061223 target=0.061615 relativeError=0.00636144
+shape=1 level=4 coverage=0.0624847 target=0.061615 relativeError=0.0141159
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.SampledTextureCache" classname="AzureRender.SampledTextureCache" time="3.06886" status="run">
+		<properties/>
+		<system-out>PASS shared multi-resource texture
+PASS complete key isolation
+PASS content hash collision
+PASS invalid input recovery
+PASS authored mip bytes
+PASS partial upload recovery
+PASS transferred input ownership
+7/7 sampled texture cache cases passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MaterialTextureSharing" classname="AzureRender.MaterialTextureSharing" time="4.69917" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, 0.000000, 0.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender\assets_public/texture_sharing\material-a.gltf
+Loaded asset: 3 vertices, 3 indices, 1 primitives, 2 materials
+Material Class v1 inventory:
+  [0] SyntheticSharedMaterial-a -&gt; generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793855567281][info][render][code=0] Character texture access: fixed, requested slots=38, stage sampler limit=4096
+[1793855567281][info][render][code=0] Scene load CPU preparation: 2.384000 ms, materialPixelBytes=464
+[1793855567293][info][render][code=0] Character IBL: hardware mip fallback path
+[1793855567294][info][render][code=0] Scene load shared textures: 12.985400 ms
+[1793855567294][info][render][code=0] Scene material progress: resource=1, elapsedMs=0.161100, hashMs=0.002400, mipMs=0.064300, uploadMs=0.051600,...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.TextureFiltering" classname="AzureRender.TextureFiltering" time="2.14111" status="run">
+		<properties/>
+		<system-out>Linear color, normal normalization and variance passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.CoverageDetailMetrics" classname="AzureRender.CoverageDetailMetrics" time="1.94703" status="run">
+		<properties/>
+		<system-out>.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.109s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.CharacterRepair" classname="AzureRender.CharacterRepair" time="23.5578" status="run">
+		<properties/>
+		<system-out>[1793855495082][warning][asset][code=0] Unsupported material extension: KHR_materials_unlit
+[1793855495170][warning][asset][code=0] Unsupported material extension: unknown
+Surface factors, character texture profiles, linear color and anti-aliasing settings passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.TemporalReconstruction" classname="AzureRender.TemporalReconstruction" time="3.90896" status="run">
+		<properties/>
+		<system-out>Temporal reconstruction: ownership, budget, graph, actual submission, cancel and camera reset passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MultisampleViews" classname="AzureRender.MultisampleViews" time="6.47231" status="run">
+		<properties/>
+		<system-out>Multisample views: actual samples, independent single-sample view, renderer/device/budget fallback, frame slots, resize and retirement passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MotionRecording" classname="AzureRender.MotionRecording" time="4.6479" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: motion-fixture/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793855514460][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=4096
+[1793855514460][info][render][code=0] Scene load CPU preparation: 0.157400 ms, materialPixelBytes=116
+[1793855514466][info][render][code=0] Character IBL: hardware mip fallback path
+[1793855514467][info][render][code=0] Scene load shared textures: 6.590700 ms
+[1793855514468][info][render][code=0] Scene load buffers: 0.911600 ms
+[1793855514468][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793855514468][info][render][code=0] Scene load skinning: 0.012600 ms
+[1793855514469][info][render][code=0] Scene load descrip...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MotionVectorTarget" classname="AzureRender.MotionVectorTarget" time="3.74502" status="run">
+		<properties/>
+		<system-out>Motion target precision, source binding, ownership and input checks passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.TemporalSettings" classname="AzureRender.TemporalSettings" time="1.65144" status="run">
+		<properties/>
+		<system-out>Temporal settings version, migration, overlays and metadata passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReadOnlyDepthContract" classname="AzureRender.ReadOnlyDepthContract" time="3.46978" status="run">
+		<properties/>
+		<system-out>Read-only depth descriptor, graph dependency and failure checks passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MotionPoseData" classname="AzureRender.MotionPoseData" time="1.96629" status="run">
+		<properties/>
+		<system-out>Motion pose identity, layout, bounds and transaction checks passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.RenderViewSubmission" classname="AzureRender.RenderViewSubmission" time="2.29211" status="run">
+		<properties/>
+		<system-out>Render view submission contract passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.TemporalViewState" classname="AzureRender.TemporalViewState" time="5.12486" status="run">
+		<properties/>
+		<system-out>Temporal view state contract passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.OutlineProjection" classname="AzureRender.OutlineProjection" time="5.83357" status="run">
+		<properties/>
+		<system-out>Outline record and optional-stream checks passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.SurfaceConversion" classname="AzureRender.SurfaceConversion" time="1.83379" status="run">
+		<properties/>
+		<system-out>Surface channel separation and source interpolation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.SettingsOverlay" classname="AzureEngine.SettingsOverlay" time="5.00887" status="run">
+		<properties/>
+		<system-out>Rendering overlay, source and reset passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.SettingRegistry" classname="AzureEngine.SettingRegistry" time="3.2248" status="run">
+		<properties/>
+		<system-out>Setting sources, boundaries and persistence passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.UiFoundation" classname="AzureEditor.UiFoundation" time="5.1397" status="run">
+		<properties/>
+		<system-out>UI tokens, metrics and scopes passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ConsoleLogModel" classname="AzureEditor.ConsoleLogModel" time="5.88221" status="run">
+		<properties/>
+		<system-out>Console severity, filtering, pause and copy passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.PanelContext" classname="AzureEditor.PanelContext" time="3.36065" status="run">
+		<properties/>
+		<system-out>[1793855355532][info][editor][code=0] Opened scene: untitled
+[1793855355536][info][editor][code=0] Opened scene: untitled
+[1793855355538][info][editor][code=0] Opened scene: untitled
+[1793855355541][info][editor][code=0] Undo
+[1793855355541][info][editor][code=0] Opened scene: untitled
+[1793855355559][info][editor][code=0] ERROR [settings.set]: Setting outside range: editor.scale
+Minimal panel context and shared identity passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.RenderView" classname="AzureRender.RenderView" time="4.10425" status="run">
+		<properties/>
+		<system-out>View isolation, demand scheduling, generation and sampled-resource retirement passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.Thumbnail" classname="AzureEditor.Thumbnail" time="3.7285" status="run">
+		<properties/>
+		<system-out>Thumbnail fingerprint reuse, static suspension and invalidation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ShaderCompilerContract" classname="AzureRender.ShaderCompilerContract" time="1.79116" status="run">
+		<properties/>
+		<system-out>Shader compiler contract passed: D:\Projects\FYP\Project\AzureRender\build\runs\20261105-131656-shader-compiler-tests-af3df4
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ShaderCatalogCompilation" classname="AzureRender.ShaderCatalogCompilation" time="24.0801" status="run">
+		<properties/>
+		<system-out>{"run": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-131632-shader-catalog-3c765e", "byteExactPrograms": 535, "cancelled": false, "diagnostic": "", "elapsedSeconds": 22.8699114, "fingerprint": "a5e4e23e4cd63977", "passed": true, "programs": 535, "status": "passed", "timeoutMs": 60000, "command": ["D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureShaderCompilerContractTests.exe", "--compile-catalog", "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shader-reload.json", "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-131632-shader-catalog-3c765e\\work"], "exitCode": 0, "executableSha256": "788da3ba1f0d07e6367463203cad1f56c8d9f059e0026c7becb1a5e9ff15d65d", "configSha256": "5732cdbe9db93575699010451e33cc46c629c31aee4fdb78fb9c7219a1cb6bc1"}
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.HotReload" classname="AzureRender.HotReload" time="4.71207" status="run">
+		<properties/>
+		<system-out>Shader dependencies, candidate preservation, recovery and cancellation passed
+</system-out>
+	</testcase>
+	<testcase name="AzurePlatform.ProcessRunner" classname="AzurePlatform.ProcessRunner" time="1.20383" status="run">
+		<properties/>
+		<system-out>Controlled process arguments, deadlines, cancellation and output budgets passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAI.ModelProtocol" classname="AzureAI.ModelProtocol" time="2.57693" status="run">
+		<properties/>
+		<system-out>Model framing, version, ordering, bounds and platform transport contract passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAI.Bridge" classname="AzureAI.Bridge" time="3.13319" status="run">
+		<properties/>
+		<system-out>.......
+----------------------------------------------------------------------
+Ran 7 tests in 2.724s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ProposalController" classname="AzureEditor.ProposalController" time="4.15679" status="run">
+		<properties/>
+		<system-out>[1793855330756][info][editor][code=0] Opened scene: test
+[1793855330762][info][editor][code=0] Opened scene: test
+[1793855330763][info][editor][code=0] Opened scene: test
+[1793855330764][info][editor][code=0] Selected node: Empty0
+[1793855330765][info][editor][code=0] Opened scene: test
+[1793855330766][info][editor][code=0] Opened scene: test
+[1793855330766][info][editor][code=0] Selected node: Empty0
+[1793855330768][info][editor][code=0] Opened scene: test
+[1793855330768][info][editor][code=0] Selected node: Empty0
+[1793855330769][info][editor][code=0] Undo
+[1793855330775][info][editor][code=0] Opened scene: test
+[1793855330776][info][editor][code=0] Opened scene: test
+[1793855330776][info][editor][code=0] Selected node: Empty0
+[1793855330786][info][editor][code=0] Opened scene: test
+[1793855330787][info][editor][code=0] Opened scene: test
+[1793855330788][info][editor][code=0] Selected node: Empty0
+[1793855330790][info][editor][code=0] Opened scene: test
+[1793855330790][info][editor][code=0] Selected node: E...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ProposalAdapter" classname="AzureEditor.ProposalAdapter" time="6.84682" status="run">
+		<properties/>
+		<system-out>[1793855348341][info][editor][code=0] Opened scene: test
+[1793855348345][info][editor][code=0] Opened scene: test
+[1793855348347][info][editor][code=0] Opened scene: test
+[1793855348348][info][editor][code=0] Selected node: Empty0
+[1793855348350][info][editor][code=0] Opened scene: test
+[1793855348351][info][editor][code=0] Opened scene: test
+[1793855348352][info][editor][code=0] Opened scene: test
+[1793855348353][info][editor][code=0] Opened scene: test
+[1793855348354][info][editor][code=0] Opened scene: test
+[1793855348356][info][editor][code=0] Opened scene: test
+[1793855348356][info][editor][code=0] Selected node: Empty0
+[1793855348358][info][editor][code=0] Opened scene: test
+[1793855348360][info][editor][code=0] Opened scene: test
+[1793855348360][info][editor][code=0] Selected node: test
+[1793855348460][info][editor][code=0] Opened scene: courtyard
+[1793855348515][info][editor][code=0] Generated asset: assets:/generated-ai.json
+[1793855348560][info][editor][code=0] Generated asset: assets:/generated-ai....
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.Observation" classname="AzureEditor.Observation" time="6.61302" status="run">
+		<properties/>
+		<system-out>[1793855372717][info][editor][code=0] Opened scene: untitled
+[1793855372723][info][editor][code=0] Opened scene: untitled
+[1793855372723][info][editor][code=0] Selected node: Empty0
+[1793855372763][info][editor][code=0] ERROR [asset.generate]: Asset generation requires a project session
+Editor conditional observation gates passed
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.Cli" classname="AzureTools.Cli" time="1.20137" status="run">
+		<properties/>
+		<system-out>......
+----------------------------------------------------------------------
+Ran 6 tests in 0.738s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.GenerationManifest" classname="AzureAssets.GenerationManifest" time="6.30095" status="run">
+		<properties/>
+		<system-out>Generated content provenance, rollback, movement and pack passed
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ValidationProtocol" classname="AzureTools.ValidationProtocol" time="4.25032" status="run">
+		<properties/>
+		<system-out>Validation transport: discovery, authentication, limits, timeout and shutdown passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.Observation" classname="AzureEngine.Observation" time="2.19227" status="run">
+		<properties/>
+		<system-out>Observation and validation contracts passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.EditService" classname="AzureEditor.EditService" time="1.92734" status="run">
+		<properties/>
+		<system-out>[1793855342720][info][editor][code=0] Opened scene: test
+[1793855342721][info][editor][code=0] Opened scene: test
+[1793855342727][info][editor][code=0] Opened scene: test
+[1793855342741][info][editor][code=0] Opened scene: test
+[1793855342744][info][editor][code=0] Undo
+[1793855342744][info][editor][code=0] Undo
+[1793855342747][info][editor][code=0] Opened scene: test
+[1793855342749][info][editor][code=0] Play started
+[1793855342749][info][editor][code=0] ERROR [extension.play-write]: Operation requires an idle edit session
+[1793855342750][info][editor][code=0] Play stopped; edit state restored
+[1793855342750][info][editor][code=0] Opened scene: test
+[1793855342766][info][editor][code=0] Opened scene: test
+[1793855342768][info][editor][code=0] ERROR [extension.failure]: Failure after mutation
+[1793855342769][info][editor][code=0] Opened scene: test
+[1793855342770][info][editor][code=0] ERROR [extension.invalid]: Duplicate or empty runtime node id
+[1793855342771][info][editor][code=0] Opened scene: test
+[17938...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.EditTransaction" classname="AzureEditor.EditTransaction" time="6.02829" status="run">
+		<properties/>
+		<system-out>[1793855321628][info][editor][code=0] Opened scene: test
+[1793855321631][info][editor][code=0] Opened scene: test
+[1793855321631][info][editor][code=0] Selected node: Empty0
+[1793855321632][info][editor][code=0] Opened scene: test
+[1793855321633][info][editor][code=0] Selected node: Empty0
+[1793855321634][info][editor][code=0] Undo
+[1793855321635][info][editor][code=0] Redo
+[1793855321636][info][editor][code=0] Undo
+[1793855321637][info][editor][code=0] Redo
+[1793855321639][info][editor][code=0] Opened scene: test
+[1793855321643][info][editor][code=0] Opened scene: test
+[1793855321646][info][editor][code=0] Opened scene: test
+[1793855321649][info][editor][code=0] Undo
+[1793855321650][info][editor][code=0] Redo
+[1793855321652][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-edit-transaction.azscene
+[1793855321659][info][editor][code=0] Reloaded scene: test
+[1793855321659][info][editor][code=0] Opened scene: test
+[1793855321661][info][editor][code=0] Selected node: Batch object
+[17938...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.SystemComposition" classname="AzureEngine.SystemComposition" time="2.30044" status="run">
+		<properties/>
+		<system-out>Generic target selection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ModuleAssembly" classname="AzureEngine.ModuleAssembly" time="3.42437" status="run">
+		<properties/>
+		<system-out>Module lifecycle, graph rejection and rollback passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ComponentRegistry" classname="AzureEngine.ComponentRegistry" time="5.1808" status="run">
+		<properties/>
+		<system-out>Registered components, metadata, migration and production codec passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.MetadataGeneration" classname="AzureEngine.MetadataGeneration" time="4.79805" status="run">
+		<properties/>
+		<system-out>Generated metadata and content loading passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.RegisteredComponentWorkflow" classname="AzureEngine.RegisteredComponentWorkflow" time="3.18258" status="run">
+		<properties/>
+		<system-out>[1793855681216][info][editor][code=0] Opened scene: inspection
+[1793855681217][info][editor][code=0] Selected node: tool
+[1793855681270][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure_registered_324820649277500\assets\inspect.azurelevel
+[1793855681292][info][editor][code=0] Opened scene: inspection
+[1793855681874][info][editor][code=0] Play started
+[1793855682001][info][editor][code=0] Play stopped; edit state restored
+Independent tool component: editor, save/reopen, Lua and preview isolation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ObjectShadow" classname="AzureRender.ObjectShadow" time="5.67205" status="run">
+		<properties/>
+		<system-out>Object shadow projection, bounded ownership and invalid inputs passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ObjectShadowAtlas" classname="AzureRender.ObjectShadowAtlas" time="1.40456" status="run">
+		<properties/>
+		<system-out>Object depth ownership, deferred allocation and bounded record suffix passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ObjectShadowRecording" classname="AzureRender.ObjectShadowRecording" time="7.76288" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: D:/Projects/FYP/Project/AzureRender\assets_public/scene_inspector/assets/cube.gltf
+Loaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials
+Material Class v1 inventory:
+  [0] stone -&gt; generic, flags=0x20, source=fallback/inferred
+  [1] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793855393472][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096
+[1793855393472][info][render][code=0] Scene load CPU preparation: 1.267100 ms, materialPixelBytes=232
+[1793855393478][info][render][code=0] Character IBL: hardware mip fallback path
+[1793855393479][info][render][code=0] Scene load shared textures: 6.452700 ms
+[1793855393480][info][render][code=0] Scene load buffers: 0.834900 ms
+[1793855393480][info][render][code=0] Character skinning and morph: vertex-shader fallback pa...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ObjectShadowDocument" classname="AzureEngine.ObjectShadowDocument" time="5.33418" status="run">
+		<properties/>
+		<system-out>[1793855412956][info][editor][code=0] Opened scene: inspection
+[1793855412956][info][editor][code=0] Selected node: tool
+[1793855413002][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure_object_shadow_324552333255100\project\assets\inspect.azurelevel
+[1793855413022][info][editor][code=0] Opened scene: inspection
+[1793855413023][info][editor][code=0] Selected node: tool
+[1793855413023][info][editor][code=0] Undo
+[1793855413024][info][editor][code=0] Redo
+Object shadow metadata, documents, snapshots, runtime and editor roundtrip passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ModuleBoundaryFixtures" classname="AzureEngine.ModuleBoundaryFixtures" time="4.05583" status="run">
+		<properties/>
+		<system-out>..........
+----------------------------------------------------------------------
+Ran 10 tests in 1.930s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ModuleBoundaries" classname="AzureEngine.ModuleBoundaries" time="24.9809" status="run">
+		<properties/>
+		<system-out>{
+  "status": "passed",
+  "targets": 18,
+  "includes": 28208,
+  "violations": []
+}
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.GameUiRenderer" classname="AzureEngine.GameUiRenderer" time="2.30521" status="run">
+		<properties/>
+		<system-out>UI geometry submission, deferred retirement and resource cleanup passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.GameUi" classname="AzureEngine.GameUi" time="3.855" status="run">
+		<properties/>
+		<system-out>button: 28,61.6,90,37
+RmlUi document, text binding, button action, DPI resize and invalid element handling passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.Workspace" classname="AzureEditor.Workspace" time="5.36349" status="run">
+		<properties/>
+		<system-out>Editor workspace: passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.EditorWorkflow" classname="AzureEngine.EditorWorkflow" time="5.36319" status="run">
+		<properties/>
+		<system-out>[1793855686524][info][editor][code=0] Opened scene: courtyard
+[1793855686590][info][editor][code=0] Imported asset: test_model.gltf
+[1793855686651][info][editor][code=0] Selected node: Placed Object
+[1793855686651][info][editor][code=0] Selected node: Empty0
+[1793855686652][info][editor][code=0] Undo
+[1793855686652][info][editor][code=0] Selected node: Placed Object
+[1793855686653][info][editor][code=0] Undo
+[1793855686653][info][editor][code=0] Redo
+[1793855686654][info][editor][code=0] Undo
+[1793855686654][info][editor][code=0] Selected node: hero
+[1793855686688][info][editor][code=0] Undo
+[1793855686739][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure_editor_workflow\assets\courtyard.azurelevel
+[1793855686766][info][editor][code=0] Opened scene: courtyard
+[1793855686808][info][editor][code=0] Generated asset: assets:/generated.azurelevel
+[1793855687375][info][editor][code=0] Play started
+[sol2] An exception occurred: UI handler unavailable
+[1793855687377][warning][script][code=0]...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PresentationRuntime" classname="AzureEngine.PresentationRuntime" time="3.76387" status="run">
+		<properties/>
+		<system-out>[1793855592513][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\gameplay\assets\portal.wav
+[1793855592514][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\gameplay\assets\portal.wav
+[1793855592522][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\gameplay\assets\portal.wav
+World animation, real audio, pause, entity destruction and level replacement passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.GameplayPresentation" classname="AzureEngine.GameplayPresentation" time="4.32257" status="run">
+		<properties/>
+		<system-out>[1793855688831][info][audio][code=0] Decoded source: D:/Projects/FYP/Project/AzureRender/assets_public/gameplay/assets/portal.wav
+Animation transitions and real offline miniaudio decoding, playback, pause and release passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ResourceFrameTrace" classname="AzureEngine.ResourceFrameTrace" time="2.95223" status="run">
+		<properties/>
+		<system-out>Retained resource trace private bytes: 790528 -&gt; 2039808
+Trace schema, bounded ordered retention and memory budgets passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ScriptBackendContract" classname="AzureEngine.ScriptBackendContract" time="1.84176" status="run">
+		<properties/>
+		<system-out>Script entity identities, binding permissions and shared initialization transactions passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ScriptInterop" classname="AzureEngine.ScriptInterop" time="2.69556" status="run">
+		<properties/>
+		<system-out>Real script interop, output ownership, version, owner thread and expired session passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ManagedModule.coreclr" classname="AzureEngine.ManagedModule.coreclr" time="6.15616" status="run">
+		<properties/>
+		<system-out>{"backend":"coreclr","diagnostics":{"liveContexts":0,"objects":0,"sessions":0},"startupMs":71.7647,"status":"passed"}
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ManagedModule.nativeaot" classname="AzureEngine.ManagedModule.nativeaot" time="1.3147" status="run">
+		<properties/>
+		<system-out>{"backend":"nativeaot","diagnostics":{"liveContexts":0,"objects":0,"sessions":0},"startupMs":2.5909,"status":"passed"}
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ManagedRuntime.coreclr" classname="AzureEngine.ManagedRuntime.coreclr" time="6.3011" status="run">
+		<properties/>
+		<system-out>[1793855511733][warning][script][code=0] assets:/control.azscript: Managed script: 候选初始化失败
+[1793855511802][warning][script][code=0] assets:/broken.azscript: Managed script: 运行回调失败
+Registered coreclr service, components, events, reload, scene lifetime and shutdown passed
+{"backend":"coreclr","iterations":1000,"startupMs":102.5122,"stepMsPerIteration":0.031918}
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ManagedRuntime.nativeaot" classname="AzureEngine.ManagedRuntime.nativeaot" time="3.10317" status="run">
+		<properties/>
+		<system-out>[1793855571787][warning][script][code=0] NativeAOT reload requires a rebuilt module and a new process
+[1793855571892][warning][script][code=0] assets:/broken.azscript: Managed script: 运行回调失败
+Registered nativeaot service, components, events, reload, scene lifetime and shutdown passed
+{"backend":"nativeaot","iterations":1000,"startupMs":2754.0851,"stepMsPerIteration":0.0516716}
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ScriptBackendParity.lua" classname="AzureEngine.ScriptBackendParity.lua" time="0.160954" status="run">
+		<properties/>
+		<system-out>[1793855581986][warning][script][code=0] assets:/control.lua: ...emp/azure-managed-lua-324721383329700/assets/control.lua:1: 候选初始化失败
+stack traceback:
+	[C]: in function 'base.error'
+	...emp/azure-managed-lua-324721383329700/assets/control.lua:1: in function &lt;...emp/azure-managed-lua-324721383329700/assets/control.lua:1&gt;
+[1793855582029][warning][script][code=0] assets:/broken.lua: ...Temp/azure-managed-lua-324721383329700/assets/broken.lua:1: 运行回调失败
+stack traceback:
+	[C]: in function 'base.error'
+	...Temp/azure-managed-lua-324721383329700/assets/broken.lua:1: in function &lt;...Temp/azure-managed-lua-324721383329700/assets/broken.lua:1&gt;
+Registered lua service, components, events, reload, scene lifetime and shutdown passed
+{"backend":"lua","iterations":1000,"startupMs":0.1538,"stepMsPerIteration":0.015362}
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ScriptRuntime" classname="AzureEngine.ScriptRuntime" time="7.78079" status="run">
+		<properties/>
+		<system-out>[1793855358951][warning][script][code=0] assets:/bad.lua: ...l/Temp/azure_script_tests_324498361600200/assets/bad.lua:1: isolated error
+stack traceback:
+	[C]: in function 'base.error'
+	...l/Temp/azure_script_tests_324498361600200/assets/bad.lua:1: in function &lt;...l/Temp/azure_script_tests_324498361600200/assets/bad.lua:1&gt;
+[1793855358951][warning][script][code=0] assets:/loop.lua: Script instruction budget exceeded
+stack traceback:
+	.../Temp/azure_script_tests_324498361600200/assets/loop.lua:1: in function &lt;.../Temp/azure_script_tests_324498361600200/assets/loop.lua:1&gt;
+[1793855358973][warning][script][code=0] assets:/good.lua: .../Temp/azure_script_tests_324498361600200/assets/good.lua:1: &lt;name&gt; or '...' expected near &lt;eof&gt;
+[1793855358989][warning][script][code=0] assets:/good.lua: .../Temp/azure_script_tests_324498361600200/assets/good.lua:1: init failed
+stack traceback:
+	[C]: in function 'base.error'
+	.../Temp/azure_script_tests_324498361600200/assets/good.lua:1: in function &lt;.../Temp/azure_script_tests_3244...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ThirdPerson" classname="AzureEngine.ThirdPerson" time="4.90838" status="run">
+		<properties/>
+		<system-out>Third-person camera, obstruction, camera-relative motion, fixed-step, focus, sweep and migration passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.Locomotion" classname="AzureEngine.Locomotion" time="1.8723" status="run">
+		<properties/>
+		<system-out>PASS both Shift keys and release
+PASS Character migration and limits
+PASS walk sprint diagonal and idle
+PASS blocked motion returns locomotion to idle
+PASS wall sliding retains tangential locomotion
+PASS moving support does not drive idle locomotion
+PASS pause releases held controls
+PASS restart preserves focus and clears controls
+PASS 30 60 144 Hz fixed step
+PASS replay accepts both Shift keys
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.Interaction" classname="AzureEngine.Interaction" time="3.39631" status="run">
+		<properties/>
+		<system-out>Interaction range, visibility, stable identity, press edges, spawn and task storage passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ScriptEntities" classname="AzureEngine.ScriptEntities" time="3.54425" status="run">
+		<properties/>
+		<system-out>[1793855695227][warning][script][code=0] assets:/controller.lua: .../Temp/azure_script_entity_contract/assets/controller.lua:1: transaction rollback
+stack traceback:
+	[C]: in function 'base.error'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function &lt;.../Temp/azure_script_entity_contract/assets/controller.lua:1&gt;
+[sol2] An exception occurred: Script entity handle is stale
+[1793855695240][warning][script][code=0] assets:/controller.lua: Script entity handle is stale
+stack traceback:
+	[C]: in method 'get'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function &lt;.../Temp/azure_script_entity_contract/assets/controller.lua:1&gt;
+[1793855695251][warning][script][code=0] assets:/controller.lua: .../Temp/azure_script_entity_contract/assets/controller.lua:1: abort structural effects
+stack traceback:
+	[C]: in function 'base.error'
+	.../Temp/azure_script_entity_contract/assets/controller.lua:1: in function &lt;.../Temp/azure_script_entity_contract/assets/controller.lua:1&gt;
+Lua entity q...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PlayableQuest" classname="AzureEngine.PlayableQuest" time="4.04663" status="run">
+		<properties/>
+		<system-out>Production quest, duplicate input, goal prerequisites, UI, destruction, stale events and restart passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.LocomotionBlend" classname="AzureEngine.LocomotionBlend" time="4.06294" status="run">
+		<properties/>
+		<system-out>Locomotion blend contracts passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.AnimationPose" classname="AzureRender.AnimationPose" time="5.25997" status="run">
+		<properties/>
+		<system-out>Immutable sampling, independent instances, local blend and nonloop endpoint passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.NodeOpacity" classname="AzureRender.NodeOpacity" time="5.61659" status="run">
+		<properties/>
+		<system-out>Node opacity defaults, hierarchy, sampling, blending, expressions and validation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.MorphTargets" classname="AzureAssets.MorphTargets" time="3.70353" status="run">
+		<properties/>
+		<system-out>Morph target budgets and weight animation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.AnimationCurve" classname="AzureRender.AnimationCurve" time="4.67204" status="run">
+		<properties/>
+		<system-out>Curve interpolation, time scaling, quaternion and invalid inputs passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ExpressionPose" classname="AzureRender.ExpressionPose" time="1.94977" status="run">
+		<properties/>
+		<system-out>Expression body coexistence, layers, mechanical target and rejection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.SceneImport" classname="AzureAssets.SceneImport" time="4.62895" status="run">
+		<properties/>
+		<system-out>[1793855698985][info][editor][code=0] Opened scene: exchange-test
+[1793855698988][info][editor][code=0] Opened scene: exchange-test
+[1793855699006][info][editor][code=0] Opened scene: exchange-test
+[1793855699013][info][editor][code=0] Opened scene: exchange-test
+[1793855699015][info][editor][code=0] ERROR [scene.import]: Cyclic scene parent chain
+[1793855699017][info][editor][code=0] Undo
+[1793855699018][info][editor][code=0] Redo
+[1793855699019][info][editor][code=0] Opened scene: exchange-test
+[1793855699024][info][editor][code=0] Selected node: left
+[1793855699024][info][editor][code=0] Opened scene: exchange-test
+[1793855699027][info][editor][code=0] ERROR [scene.import]: Scene reimport conflict: edited or deleted node exchange-node-17938556990090908-6
+[1793855699028][info][editor][code=0] Undo
+[1793855699029][info][editor][code=0] Opened scene: exchange-test
+[1793855699101][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-scene-exchange-324838310782900\assets\main.azurelevel
+[1...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.SceneImportWorkflow" classname="AzureEditor.SceneImportWorkflow" time="3.72554" status="run">
+		<properties/>
+		<system-out>Scene exchange parser, transactions, async import, cancellation, reimport and relocation passed
+[1793855291570][info][editor][code=0] Opened scene: exchange-test
+[1793855291573][info][editor][code=0] Opened scene: exchange-test
+[1793855291581][info][editor][code=0] Opened scene: exchange-test
+[1793855291587][info][editor][code=0] Opened scene: exchange-test
+[1793855291589][info][editor][code=0] ERROR [scene.import]: Cyclic scene parent chain
+[1793855291591][info][editor][code=0] Undo
+[1793855291592][info][editor][code=0] Redo
+[1793855291593][info][editor][code=0] Opened scene: exchange-test
+[1793855291598][info][editor][code=0] Selected node: left
+[1793855291599][info][editor][code=0] Opened scene: exchange-test
+[1793855291602][info][editor][code=0] ERROR [scene.import]: Scene reimport conflict: edited or deleted node exchange-node-17938552915838499-6
+[1793855291603][info][editor][code=0] Undo
+[1793855291604][info][editor][code=0] Opened scene: exchange-test
+[1793855291656][info][editor][code=0] Saved scene: ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.BrowRegions" classname="AzureRender.BrowRegions" time="1.25508" status="run">
+		<properties/>
+		<system-out>Brow named regions and eyelash preservation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PhysicsInput" classname="AzureEngine.PhysicsInput" time="4.62126" status="run">
+		<properties/>
+		<system-out>Jolt character, raycast, triggers, fixed-step, pause, input focus and deletion passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.AssetLevel" classname="AzureEngine.AssetLevel" time="3.10908" status="run">
+		<properties/>
+		<system-out>[1793855541430][warning][runtime][code=0] GPU preparation failed
+[1793855541437][warning][runtime][code=0] Asset reference missing: assets:/missing.azurelevel
+Asset relocation, cache repair, dependencies, prefab overrides, pack and transactional level switch passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.ProjectStartup" classname="AzureEngine.ProjectStartup" time="4.37748" status="run">
+		<properties/>
+		<system-out>Startup context reuse passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.AssetDependencyIndex" classname="AzureEngine.AssetDependencyIndex" time="6.94665" status="run">
+		<properties/>
+		<system-out>Retained index allocation: 16200 bytes for four 4 MiB documents
+Dependency budget, nested references, relative resources, warm reuse, invalidation and transactional rejection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.AssetDependencyIndex.Contracts" classname="AzureEngine.AssetDependencyIndex.Contracts" time="0.786729" status="run">
+		<properties/>
+		<system-out>Retained index allocation: 16200 bytes for four 4 MiB documents
+Dependency budget, nested references, relative resources, warm reuse, invalidation and transactional rejection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.Reflection" classname="AzureEngine.Reflection" time="6.25324" status="run">
+		<properties/>
+		<system-out>Reflection roundtrip, metadata, migration and transactional validation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.SceneVisibility" classname="AzureRender.SceneVisibility" time="3.39131" status="run">
+		<properties/>
+		<system-out>Baked mirror retains twelve outward-facing triangles
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.RepositoryAudit" classname="AzureEngine.RepositoryAudit" time="4.00258" status="run">
+		<properties/>
+		<system-out>.........
+----------------------------------------------------------------------
+Ran 9 tests in 3.857s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PublicGait" classname="AzureEngine.PublicGait" time="0.0883169" status="run">
+		<properties/>
+		<system-out>Public knees and loop continuity: passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.AnimationRetarget" classname="AzureEngine.AnimationRetarget" time="0.400572" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 0.121s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.SourceSkinRestore" classname="AzureEngine.SourceSkinRestore" time="0.303432" status="run">
+		<properties/>
+		<system-out>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.GamePackageRules" classname="AzureEngine.GamePackageRules" time="5.34003" status="run">
+		<properties/>
+		<system-out>.[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+.[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+.[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+.[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+..[stage] Validating project and installed runtime (timeout 61.25 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 61.25 s)
+[stage] Checking hashes and committing package
+.[stage] Validating project and installed runtime (timeout 1800 s)
+[stage] Copying runtime and project resources
+[stage] Validating packaged project (timeout 1800 s)
+[stage] Checking hashes and committing package
+[stage] Validating project and installed ru...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PlayableDeliveryRules" classname="AzureEngine.PlayableDeliveryRules" time="0.378273" status="run">
+		<properties/>
+		<system-out>........
+----------------------------------------------------------------------
+Ran 8 tests in 0.036s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.BuildConfiguration" classname="AzureEngine.BuildConfiguration" time="6.13758" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 5.263s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ManagedWorkflowCleanup" classname="AzureTools.ManagedWorkflowCleanup" time="0.693806" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 0.248s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ShaderArithmeticOrder" classname="AzureTools.ShaderArithmeticOrder" time="3.00057" status="run">
+		<properties/>
+		<system-out>............
+----------------------------------------------------------------------
+Ran 12 tests in 0.252s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.BuildProvenance" classname="AzureEngine.BuildProvenance" time="2.22438" status="run">
+		<properties/>
+		<system-out>.......
+----------------------------------------------------------------------
+Ran 7 tests in 1.030s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeWindow" classname="AzureTools.NativeWindow" time="0.378309" status="run">
+		<properties/>
+		<system-out>.
+----------------------------------------------------------------------
+Ran 1 test in 0.014s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.CharacterIntake" classname="AzureEngine.CharacterIntake" time="0.166566" status="run">
+		<properties/>
+		<system-out>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.CharacterPreparation" classname="AzureEngine.CharacterPreparation" time="0.188376" status="run">
+		<properties/>
+		<system-out>.
+----------------------------------------------------------------------
+Ran 1 test in 0.034s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.CubemapEnvironment" classname="AzureTools.CubemapEnvironment" time="0.818821" status="run">
+		<properties/>
+		<system-out>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.532s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.MetaGenerator" classname="AzureEngine.MetaGenerator" time="2.34987" status="run">
+		<properties/>
+		<system-out>Incremental generation, source diagnostics and failed-output retention passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.Project" classname="AzureEngine.Project" time="5.36619" status="run">
+		<properties/>
+		<system-out>Project contracts passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.RuntimeLifecycle" classname="AzureEngine.RuntimeLifecycle" time="3.17746" status="run">
+		<properties/>
+		<system-out>Runtime lifecycle contracts passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.EnvironmentAsset" classname="AzureRender.EnvironmentAsset" time="4.14234" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.RenderGraph" classname="AzureRender.RenderGraph" time="2.35484" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.TransientResourcePool" classname="AzureRender.TransientResourcePool" time="4.1978" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.LightBuffer" classname="AzureRender.LightBuffer" time="2.39985" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionProbe" classname="AzureRender.ReflectionProbe" time="2.61583" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionProbeField" classname="AzureRender.ReflectionProbeField" time="4.24672" status="run">
+		<properties/>
+		<system-out>PASS: ordered volumes, blend, projection, luminance, fallback and bounds
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.OctahedralEnvironment" classname="AzureRender.OctahedralEnvironment" time="4.86955" status="run">
+		<properties/>
+		<system-out>PASS: octahedral asset budgets, finite HDR, subresources, padding and explicit zero-sign convention
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.OctahedralEnvironmentOwner" classname="AzureRender.OctahedralEnvironmentOwner" time="2.78591" status="run">
+		<properties/>
+		<system-out>PASS: octahedral array ownership, exact payload, ABI and bounded rejection
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.IrradianceVolume" classname="AzureRender.IrradianceVolume" time="2.1484" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.IrradianceClipmap" classname="AzureRender.IrradianceClipmap" time="4.49402" status="run">
+		<properties/>
+		<system-out>PASS: clipmap asset, interpolation, independent colors, transforms, transitions and invalid input
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.IrradianceClipmapOwner" classname="AzureRender.IrradianceClipmapOwner" time="4.28647" status="run">
+		<properties/>
+		<system-out>PASS: complete payloads, parameter ABI, GPU bounds, format rejection and lifetime
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.IrradianceQuery" classname="AzureRender.IrradianceQuery" time="4.2194" status="run">
+		<properties/>
+		<system-out>Receiver query: native noise exact, maximum position error=0
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.CascadedShadow" classname="AzureRender.CascadedShadow" time="4.61656" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.ClusteredLightGrid" classname="AzureRender.ClusteredLightGrid" time="4.59571" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.ComputePass" classname="AzureRender.ComputePass" time="4.20836" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.FrameTaskScheduler" classname="AzureRender.FrameTaskScheduler" time="3.27736" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.SurfaceLifecycle" classname="AzureRender.SurfaceLifecycle" time="4.83333" status="run">
+		<properties/>
+		<system-out>Surface lifecycle: bounded waiting, production services, deadlines and closure passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.CommandLine" classname="AzureRender.CommandLine" time="2.94332" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.EditorCameraController" classname="AzureRender.EditorCameraController" time="4.16927" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureEditor.SelectionBounds" classname="AzureEditor.SelectionBounds" time="4.6324" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureEditor.TransformEditing" classname="AzureEditor.TransformEditing" time="1.63736" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.AssetDeformation" classname="AzureRender.AssetDeformation" time="4.1471" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureEditor.GizmoController" classname="AzureEditor.GizmoController" time="6.43217" status="run">
+		<properties/>
+		<system-out>[1793855369669][info][editor][code=0] Opened scene: gizmo
+[1793855369672][info][editor][code=0] Opened scene: gizmo
+[1793855369675][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-gizmo-324509142313900\scene.azscene
+[1793855369676][info][editor][code=0] Opened scene: gizmo
+[1793855369680][info][editor][code=0] ERROR [viewport.gizmo-mode]: Operation requires an idle edit session
+[1793855369680][info][editor][code=0] ERROR [preview.play]: Operation requires an idle edit session
+[1793855369681][info][editor][code=0] Opened scene: gizmo
+[1793855369684][info][editor][code=0] Opened scene: gizmo
+[1793855369689][info][editor][code=0] Opened scene: gizmo
+[1793855369693][info][editor][code=0] Undo
+[1793855369695][info][editor][code=0] Opened scene: gizmo
+[1793855369699][info][editor][code=0] Opened scene: gizmo
+[1793855369702][info][editor][code=0] Opened scene: gizmo
+[1793855369705][info][editor][code=0] Undo
+[1793855369706][info][editor][code=0] Opened scene: gizmo
+[1793855369708][info][ed...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.NodeAddition" classname="AzureEditor.NodeAddition" time="6.47305" status="run">
+		<properties/>
+		<system-out>[1793855363391][info][editor][code=0] Opened scene: blank
+[1793855363395][info][editor][code=0] Opened scene: blank
+[1793855363396][info][editor][code=0] Opened scene: blank
+[1793855363396][info][editor][code=0] Selected node: Empty0
+[1793855363398][info][editor][code=0] Opened scene: blank
+[1793855363398][info][editor][code=0] Selected node: Empty1
+[1793855363400][info][editor][code=0] Undo
+[1793855363401][info][editor][code=0] Undo
+[1793855363401][info][editor][code=0] Redo
+[1793855363402][info][editor][code=0] Redo
+[1793855363403][info][editor][code=0] Opened scene: inspection
+[1793855363405][info][editor][code=0] Opened scene: inspection
+[1793855363407][info][editor][code=0] Opened scene: inspection
+[1793855363408][info][editor][code=0] Selected node: Empty0
+[1793855363409][info][editor][code=0] Opened scene: inspection
+[1793855363410][info][editor][code=0] Selected node: Empty1
+[1793855363412][info][editor][code=0] Undo
+[1793855363413][info][editor][code=0] Undo
+[1793855363414][info][editor][code=0] Redo...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.SelectionService" classname="AzureEditor.SelectionService" time="5.38648" status="run">
+		<properties/>
+		<system-out>[1793855345405][info][editor][code=0] Opened scene: selection
+[1793855345408][info][editor][code=0] Opened scene: selection
+[1793855345410][info][editor][code=0] Opened scene: selection
+[1793855345413][info][editor][code=0] Opened scene: selection
+[1793855345415][info][editor][code=0] Opened scene: selection
+[1793855345418][info][editor][code=0] Opened scene: selection
+[1793855345421][info][editor][code=0] ERROR [selection.click]: Unknown selection identity
+[1793855345422][info][editor][code=0] Opened scene: selection
+[1793855345424][info][editor][code=0] Opened scene: selection
+[1793855345427][info][editor][code=0] ERROR [viewport.gizmo-options]: Unknown gizmo pivot
+Active identity, filtered range and shared click semantics passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ContentWorkflow" classname="AzureEditor.ContentWorkflow" time="2.3191" status="run">
+		<properties/>
+		<system-out>[1793855311625][info][editor][code=0] Opened scene: content
+[1793855311628][info][editor][code=0] Opened scene: content
+[1793855311631][info][editor][code=0] Opened scene: content
+[1793855311635][info][editor][code=0] Opened scene: content
+[1793855311639][info][editor][code=0] Opened scene: content
+[1793855311641][info][editor][code=0] Opened scene: content
+[1793855311645][info][editor][code=0] Opened scene: content
+[1793855311649][info][editor][code=0] Opened scene: content
+[1793855311651][info][editor][code=0] Opened scene: content
+[1793855311656][info][editor][code=0] Undo
+[1793855311657][info][editor][code=0] Opened scene: content
+[1793855311659][info][editor][code=0] Opened scene: content
+subtree: passed
+[1793855311662][info][editor][code=0] Opened scene: content
+[1793855311665][info][editor][code=0] Opened scene: content
+[1793855311668][info][editor][code=0] Undo
+[1793855311668][info][editor][code=0] Opened scene: content
+[1793855311669][info][editor][code=0] ERROR [node.reparent]: Reparent would create...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.TaskService" classname="AzureEditor.TaskService" time="7.09494" status="run">
+		<properties/>
+		<system-out>[1793855324978][info][editor][code=0] Opened scene: startup
+[1793855325082][info][editor][code=0] Imported asset: test_model.gltf
+[1793855325121][info][editor][code=0] ERROR [asset.import]: [{"code":"OperationFailed","message":"Asset source is unavailable: C:\\Users\\admin\\AppData\\Local\\Temp\\azure-tasks-324464421784900\\missing.gltf"}]
+[1793855325177][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-tasks-324464421784900\assets\startup.azscene
+[1793855325202][info][editor][code=0] Opened scene: startup
+Panel-independent import, cancellation, failure and saved identity passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.AssetWorkflow" classname="AzureEditor.AssetWorkflow" time="7.96389" status="run">
+		<properties/>
+		<system-out>[1793855398942][info][editor][code=0] Opened scene: startup
+Verified format matrix: [{"domain":"audio","exportSettings":{},"extensions":[".aac"],"features":["sample-rate","channels","loop","streaming","float32"],"generatorVersion":1,"id":"aac","label":"aac","read":true,"settingsVersion":1,"transformsSource":false,"write":false},{"domain":"image","exportSettings":{"additionalProperties":false,"properties":{},"type":"object"},"extensions":[".bmp"],"features":["rgba","top-left","precision","color-space"],"generatorVersion":1,"id":"bmp","label":"bmp","read":true,"settingsVersion":1,"transformsSource":false,"write":true},{"domain":"model","exportSettings":{},"extensions":[".dae"],"features":["geometry","materials","canonical-glb","axis-unit-settings","loss-report"],"generatorVersion":1,"id":"dae","label":"dae","read":true,"settingsVersion":1,"transformsSource":true,"write":false},{"domain":"image","exportSettings":{"additionalProperties":false,"properties":{"compression":{"default":"rgba","enum":["rgba","bc1","bc3...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.EditorInputRouter" classname="AzureRender.EditorInputRouter" time="2.48205" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.EditorCameraService" classname="AzureRender.EditorCameraService" time="3.97218" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.DocumentBackup" classname="AzureRender.DocumentBackup" time="4.40809" status="run">
+		<properties/>
+		<system-out>[1793855749086][info][editor][code=0] Opened scene: mesh
+[1793855749088][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-document-backup-324888559196100\scene.azscene
+[1793855749116][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-document-backup-324888559196100\scene.azscene
+[1793855749163][info][editor][code=0] Opened scene: startup
+[1793855749186][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-document-backup-324888559196100\project\assets\startup.azscene
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.DocumentActionGuard" classname="AzureRender.DocumentActionGuard" time="3.43763" status="run">
+		<properties/>
+		<system-out>[1793855750617][info][editor][code=0] Opened scene: mesh
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ContentScanWait" classname="AzureEditor.ContentScanWait" time="0.138619" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.EditorSession" classname="AzureRender.EditorSession" time="3.5015" status="run">
+		<properties/>
+		<system-out>[1793855752502][info][editor][code=0] Opened scene: test
+[1793855752505][info][editor][code=0] Opened scene: test
+[1793855752545][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azurerender-session-324891974501600-relative-grade\scene.azscene
+[1793855752550][info][editor][code=0] Reloaded scene: test
+[1793855752552][info][editor][code=0] Opened scene: test
+[1793855752553][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azurerender-session-324892025088200-multiple-lights.azscene
+[1793855752581][info][editor][code=0] Opened scene: azurerender-session-324892053572600
+[1793855752601][info][editor][code=0] Opened scene: azurerender-session-324892053572600
+[1793855752604][info][editor][code=0] Undo
+[1793855752604][info][editor][code=0] Redo
+[1793855752604][info][editor][code=0] Opened scene: azurerender-session-324892053572600
+[1793855752605][info][editor][code=0] ERROR [render.settings]: Unknown sky mode
+[1793855752605][info][editor][code=0] Undo
+[1793855752606][info][edit...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.Ecs" classname="AzureRender.Ecs" time="3.2548" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.PickMath" classname="AzureRender.PickMath" time="4.41992" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.SceneModel" classname="AzureRender.SceneModel" time="3.96359" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.RuntimeDiagnostics" classname="AzureRender.RuntimeDiagnostics" time="3.87788" status="run">
+		<properties/>
+		<system-out>[1793855759705][info][test][code=0] hello
+[1793855759705][warning][test][code=0] soft warning
+[1793855759705][error][test][code=3] missing asset
+user-facing line
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.GpuCapabilityReport" classname="AzureRender.GpuCapabilityReport" time="5.7033" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.ResourceLocator" classname="AzureRender.ResourceLocator" time="5.94888" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.ExtensionRegistry" classname="AzureRender.ExtensionRegistry" time="4.37204" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.UploadRing" classname="AzureRender.UploadRing" time="5.79329" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.NullRhi" classname="AzureRender.NullRhi" time="2.86914" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.NullRhiPass" classname="AzureRender.NullRhiPass" time="9.4026" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: composite-fixture/mesh.gltf
+Loaded asset: 3 vertices, 3 indices, 1 primitives, 1 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -&gt; generic, flags=0x20, source=asset-extras
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793855472069][info][render][code=0] Character texture access: fixed, requested slots=11, stage sampler limit=0
+[1793855472069][info][render][code=0] Scene load CPU preparation: 0.176900 ms, materialPixelBytes=116
+[1793855472075][info][render][code=0] Character IBL: hardware mip fallback path
+[1793855472076][info][render][code=0] Scene load shared textures: 6.305300 ms
+[1793855472077][info][render][code=0] Scene load buffers: 0.775400 ms
+[1793855472077][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793855472077][info][render][code=0] Scene load skinning: 0.009400 ms
+[1793855472077][info][render][code=0] Scene load d...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.SceneGraph" classname="AzureRender.SceneGraph" time="1.40834" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.R4AcceptanceRules" classname="AzureRender.R4AcceptanceRules" time="0.308499" status="run">
+		<properties/>
+		<system-out>....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PlayerCli" classname="AzureEngine.PlayerCli" time="0.779335" status="run">
+		<properties/>
+		<system-out>Player CLI: creation, migration, validation and error contracts passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.BlackholeOptimizationRules" classname="AzureRender.BlackholeOptimizationRules" time="0.301985" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReleaseGateMissingBuild" classname="AzureRender.ReleaseGateMissingBuild" time="0.0438111" status="run">
+		<properties/>
+		<system-out>CMake Error at D:/Projects/FYP/Project/AzureRender/tools/run_release_gate.cmake:11 (message):
+  Release gate requires a configured build directory:
+  D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release/missing-release-gate-build
+
+
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.InstallManifestRoundTrip" classname="AzureRender.InstallManifestRoundTrip" time="2.13478" status="run">
+		<properties/>
+		<system-out>-- Install manifest: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release/install-manifest-test-manifest.json (23 files, 21 licenses)
+-- Install manifest: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release/verify-install-manifest/manifest.regenerated (23 files, 21 licenses)
+-- Install tree verified against manifest
+-- Install manifest: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release/verify-install-manifest/manifest.regenerated (23 files, 21 licenses)
+CMake Error at D:/Projects/FYP/Project/AzureRender/tools/verify_install_manifest.cmake:78 (message):
+  Install tree verification failed:
+
+  tree contents differ from the recorded manifest (added/missing files or
+  hash/size changes)
+
+
+
+-- Install manifest round-trip test passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ProjectFlow" classname="AzureEditor.ProjectFlow" time="5.9716" status="run">
+		<properties/>
+		<system-out>[1793855379132][info][editor][code=0] Opened scene: startup
+[1793855379159][info][editor][code=0] Opened scene: startup
+[1793855379182][info][editor][code=0] Opened scene: startup
+[1793855379202][info][editor][code=0] Opened scene: startup
+[1793855379227][info][editor][code=0] Opened scene: startup
+[1793855379249][info][editor][code=0] Opened scene: startup
+[1793855379252][info][editor][code=0] Opened scene: startup
+[1793855379254][info][editor][code=0] Opened scene: startup
+[1793855379316][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-project-flow-324518574749400\涓枃椤圭洰\assets\startup.azurelevel
+[1793855379323][info][editor][code=0] Opened scene: startup
+[1793855379351][info][editor][code=0] Opened scene: startup
+[1793855379383][info][editor][code=0] Opened scene: startup
+[1793855379411][info][editor][code=0] Opened scene: startup
+[1793855379428][info][editor][code=0] Opened scene: startup
+[1793855379451][info][editor][code=0] Opened scene: startup
+[1793855379533][inf...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.PropertyEditing" classname="AzureEditor.PropertyEditing" time="3.68707" status="run">
+		<properties/>
+		<system-out>[1793855302494][info][editor][code=0] Opened scene: properties
+[1793855302498][info][editor][code=0] Opened scene: properties
+[1793855302501][info][editor][code=0] Opened scene: properties
+[1793855302502][info][editor][code=0] Selected node: First
+[1793855302502][info][editor][code=0] Selected node: Second
+[1793855302505][info][editor][code=0] Undo
+[1793855302506][info][editor][code=0] Redo
+[1793855302507][info][editor][code=0] Opened scene: properties
+[1793855302509][info][editor][code=0] ERROR [component.batch-field]: Invalid batch target: missing
+[1793855302509][info][editor][code=0] Opened scene: properties
+[1793855302510][info][editor][code=0] Selected node: First
+[1793855302510][info][editor][code=0] ERROR [component.batch-field]: Transform scale must have absolute magnitude at least 0.001
+[1793855302511][info][editor][code=0] Opened scene: properties
+[1793855302512][info][editor][code=0] Selected node: First
+[1793855302512][info][editor][code=0] Selected node: Second
+[1793855302515][info][editor][code=...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ReferencePicker" classname="AzureEditor.ReferencePicker" time="2.46431" status="run">
+		<properties/>
+		<system-out>[1793855316691][info][editor][code=0] Opened scene: references
+[1793855316694][info][editor][code=0] Opened scene: references
+[1793855316696][info][editor][code=0] Opened scene: references
+[1793855316699][info][editor][code=0] Opened scene: references
+[1793855316701][info][editor][code=0] Opened scene: references
+[1793855316704][info][editor][code=0] Opened scene: references
+[1793855316706][info][editor][code=0] Opened scene: references
+[1793855316707][info][editor][code=0] ERROR [reference.deliver]: Reference candidate has an incompatible kind
+[1793855316707][info][editor][code=0] Opened scene: references
+[1793855316708][info][editor][code=0] Selected node: a
+[1793855316708][info][editor][code=0] Selected node: b
+[1793855316712][info][editor][code=0] Undo
+[1793855316713][info][editor][code=0] Opened scene: references
+[1793855316716][info][editor][code=0] Opened scene: references
+[1793855316717][info][editor][code=0] ERROR [reference.deliver]: Reference picker belongs to an expired document version
+[179385531...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRuntime.SceneRenderSnapshot" classname="AzureRuntime.SceneRenderSnapshot" time="2.90094" status="run">
+		<properties/>
+		<system-out>Material variant ownership, aliasing and source-document isolation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ContentOperations" classname="AzureEditor.ContentOperations" time="4.15562" status="run">
+		<properties/>
+		<system-out>[1793855289346][info][editor][code=0] Opened scene: startup
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.TextureImportContract" classname="AzureAssets.TextureImportContract" time="3.39278" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionSpatialFilter" classname="AzureRender.ReflectionSpatialFilter" time="4.11434" status="run">
+		<properties/>
+		<system-out>PASS: reflection filter bounds, HDR transport, independent frame ownership and transactional recording
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionRay" classname="AzureRender.ReflectionRay" time="2.06767" status="run">
+		<properties/>
+		<system-out>PASS: reflection ray projection and frame bounds
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ProjectedReflectionRay" classname="AzureRender.ProjectedReflectionRay" time="1.10541" status="run">
+		<properties/>
+		<system-out>PASS: projected ray parameters, borrowed views, rejection and frame ownership
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ProjectedReflectionCamera" classname="AzureRender.ProjectedReflectionCamera" time="4.0055" status="run">
+		<properties/>
+		<system-out>PASS: projected camera depth, world transforms, offsets, roll and encoding contracts
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ProjectedReflectionPreparation" classname="AzureRender.ProjectedReflectionPreparation" time="3.5969" status="run">
+		<properties/>
+		<system-out>PASS: projected preparation ownership, tiles, bounds, aliases and retry contract
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ProjectedScreenReflection" classname="AzureRender.ProjectedScreenReflection" time="5.69798" status="run">
+		<properties/>
+		<system-out>PASS: projected composition budgets, inputs, history, mutation boundaries and retry
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionReprojection" classname="AzureRender.ReflectionReprojection" time="2.15348" status="run">
+		<properties/>
+		<system-out>PASS: reflection reprojection ownership, budgets, aliases and mutation boundaries
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionTemporal" classname="AzureRender.ReflectionTemporal" time="4.62374" status="run">
+		<properties/>
+		<system-out>PASS: temporal frame, bounds, aliases, borrowed outputs and retirement
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ScreenReflection" classname="AzureRender.ScreenReflection" time="2.23711" status="run">
+		<properties/>
+		<system-out>PASS: composed reflection budgets, ownership and recording
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeRayFixture" classname="AzureTools.NativeRayFixture" time="3.07022" status="run">
+		<properties/>
+		<system-out>...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.062s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.DepthPyramid" classname="AzureRender.DepthPyramid" time="3.7105" status="run">
+		<properties/>
+		<system-out>PASS: depth bounds, capabilities, aliases, slots and retirement
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.ReflectionSignalPyramid" classname="AzureRender.ReflectionSignalPyramid" time="4.55528" status="run">
+		<properties/>
+		<system-out>PASS: pyramid bounds, format selection, base-write ordering, dependent mips and frame ownership
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.TextureMaterialImport" classname="AzureAssets.TextureMaterialImport" time="5.194" status="run">
+		<properties/>
+		<system-out>[1793855589684][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589697][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589714][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589729][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589744][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589760][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589775][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589792][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589807][warning][asset][code=0] [glTF] Image PublicTestNormal: Pixel precision converted to UInt8
+
+[1793855589837][warning][asset][code=0] [glTF] Image PublicTe...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.MaterialUvImport" classname="AzureAssets.MaterialUvImport" time="3.98502" status="run">
+		<properties/>
+		<system-out>Material UV import checks passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.ShadowColorLut" classname="AzureAssets.ShadowColorLut" time="6.07152" status="run">
+		<properties/>
+		<system-out>Shadow LUT import, sampling semantics and invalid inputs passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.MaterialOriginInstances" classname="AzureRender.MaterialOriginInstances" time="1.26524" status="run">
+		<properties/>
+		<system-out>Material origin reuse, source ownership, contiguous batches and invalid runs passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.SpecularInput" classname="AzureAssets.SpecularInput" time="2.56318" status="run">
+		<properties/>
+		<system-out>Specular input loading and packing passed
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeNprLighting" classname="AzureTools.NativeNprLighting" time="2.86697" status="run">
+		<properties/>
+		<system-out>...............
+----------------------------------------------------------------------
+Ran 15 tests in 0.002s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeSurfaceColors" classname="AzureTools.NativeSurfaceColors" time="0.186374" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 0.010s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeProjectedHairMath" classname="AzureTools.NativeProjectedHairMath" time="0.26446" status="run">
+		<properties/>
+		<system-out>...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.001s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.OutlineDirections" classname="AzureTools.OutlineDirections" time="0.495591" status="run">
+		<properties/>
+		<system-out>....
+----------------------------------------------------------------------
+Ran 4 tests in 0.135s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeTemporalCapture" classname="AzureTools.NativeTemporalCapture" time="0.498627" status="run">
+		<properties/>
+		<system-out>....
+----------------------------------------------------------------------
+Ran 4 tests in 0.113s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeCapturedLights" classname="AzureTools.NativeCapturedLights" time="0.216385" status="run">
+		<properties/>
+		<system-out>................
+----------------------------------------------------------------------
+Ran 16 tests in 0.002s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeCameraProjection" classname="AzureTools.NativeCameraProjection" time="0.192982" status="run">
+		<properties/>
+		<system-out>......
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeCapturePixels" classname="AzureTools.NativeCapturePixels" time="0.199379" status="run">
+		<properties/>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativePostVs" classname="AzureTools.NativePostVs" time="2.13846" status="run">
+		<properties/>
+		<system-out>.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.205s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ContentEditingWorkflow" classname="AzureEditor.ContentEditingWorkflow" time="2.15069" status="run">
+		<properties/>
+		<system-out>[1793855318719][info][editor][code=0] Opened scene: startup
+[1793855318778][info][editor][code=0] Opened scene: startup
+[1793855318807][info][editor][code=0] Opened scene: startup
+[1793855318813][info][editor][code=0] ERROR [asset.rename]: Operation requires an idle edit session
+[1793855318815][info][editor][code=0] ERROR [asset.reimport]: Reimport fingerprint is expired
+[1793855318842][info][editor][code=0] Opened scene: startup
+[1793855318856][info][editor][code=0] ERROR [asset.reimport]: Content plan is expired
+[1793855318857][info][editor][code=0] Opened scene: startup
+[1793855318858][info][editor][code=0] Opened scene: startup
+[1793855318867][info][editor][code=0] ERROR [asset.rename]: Save scene changes before applying content operations
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ContentNavigation" classname="AzureEditor.ContentNavigation" time="3.72512" status="run">
+		<properties/>
+		<system-out>[1793855306110][info][editor][code=0] Opened scene: startup
+[1793855306132][info][editor][code=0] ERROR [content.directory]: Directory escapes its mount
+[1793855306133][info][editor][code=0] ERROR [content.directory]: Unknown content mount
+[1793855306133][info][editor][code=0] ERROR [asset.open]: Unknown asset
+[1793855306178][info][editor][code=0] Generated asset: assets:/nested/shape.glb
+[1793855306183][info][editor][code=0] ERROR [asset.generate]: Asset already exists; choose a new output name
+[1793855306184][info][editor][code=0] Opened scene: startup
+[1793855306185][info][editor][code=0] Selected node: Empty0
+[1793855306187][info][editor][code=0] Undo
+[1793855306188][info][editor][code=0] Opened scene: startup
+[1793855306188][info][editor][code=0] Selected node: Empty0
+[1793855306192][info][editor][code=0] Undo
+[1793855306258][info][editor][code=0] Opened scene: startup
+Empty folders, scoped snapshots, cache reuse, external changes and registered asset opening passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.AssetOpen" classname="AzureEditor.AssetOpen" time="3.16703" status="run">
+		<properties/>
+		<system-out>Custom asset editor registration, rejection and production target selection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.PrimitiveGenerator" classname="AzureAssets.PrimitiveGenerator" time="3.57851" status="run">
+		<properties/>
+		<system-out>Six loaded primitives, sizes, unit normals, deterministic provenance and input budgets passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.Creation" classname="AzureEditor.Creation" time="2.3454" status="run">
+		<properties/>
+		<system-out>[1793855298250][info][editor][code=0] Opened scene: inspection
+[1793855298253][info][editor][code=0] Opened scene: inspection
+[1793855298254][info][editor][code=0] Selected node: Empty0
+[1793855298257][info][editor][code=0] Opened scene: inspection
+[1793855298258][info][editor][code=0] ERROR [node.prefab-source]: Prefab provenance is read-only; use prefab placement and authoring operations
+[1793855298258][info][editor][code=0] Opened scene: inspection
+[1793855298299][info][editor][code=0] Selected node: Placed Object
+[1793855298304][info][editor][code=0] Opened scene: inspection
+[1793855298307][info][editor][code=0] Selected node: Placed Object
+[1793855298312][info][editor][code=0] Undo
+[1793855298313][info][editor][code=0] Opened scene: inspection
+[1793855298315][info][editor][code=0] Selected node: Placed Object
+[1793855298320][info][editor][code=0] Opened scene: inspection
+[1793855298362][info][editor][code=0] Selected node: Placed Object
+[1793855298367][info][editor][code=0] Opened scene: inspection
+[1793...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ContentDirectoryScale" classname="AzureEditor.ContentDirectoryScale" time="94.0624" status="run">
+		<properties/>
+		<system-out>{"elapsedMs":4074.3448,"phase":"fixture-created"}
+[1793855308197][info][editor][code=0] Opened scene: startup
+{"elapsedMs":77568.3609,"phase":"project-opened"}
+{"elapsedMs":78451.8497,"phase":"first-snapshot"}
+{"elapsedMs":78454.0947,"phase":"cached-samples"}
+{"elapsedMs":81786.7299,"phase":"external-refresh"}
+{"directoryResetMs":1.9703,"scanCancellationMs":1.9571,"snapshotReleaseMs":0.0132}
+{"elapsedMs":82116.6378,"phase":"reset-cycle-start"}
+{"directoryResetCycle":0,"unretainedSnapshotResetMs":0.0239}
+{"elapsedMs":82807.5293,"phase":"reset-cycle-start"}
+{"directoryResetCycle":1,"unretainedSnapshotResetMs":0.0261}
+{"elapsedMs":83654.283,"phase":"reset-cycle-start"}
+{"directoryResetCycle":2,"unretainedSnapshotResetMs":0.025}
+{"assets":10000,"cachedP95Ms":0.0011,"firstSnapshotMs":883.4804,"peakWorkingSetBytes":119230464,"samples":1800,"statistics":{"catalogBuilds":5,"directoryEnumerations":5,"refreshing":false,"snapshots":0},"warmup":300}
+</system-out>
+	</testcase>
+	<testcase name="AzureGame.PlatformerPhysics" classname="AzureGame.PlatformerPhysics" time="3.89507" status="run">
+		<properties/>
+		<system-out>Horizontal and vertical support, idle braking, jump detachment and script observations passed
+</system-out>
+	</testcase>
+	<testcase name="AzureGame.PlatformerFlow" classname="AzureGame.PlatformerFlow" time="3.01883" status="run">
+		<properties/>
+		<system-out>[1793855781159][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\coin.wav
+[1793855781160][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\finish.wav
+[1793855781160][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\jump.wav
+[1793855781161][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\land.wav
+[1793855781162][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\respawn.wav
+Actual physics route completed with 8 coins and 7 mandatory landings
+</system-out>
+	</testcase>
+	<testcase name="AzureGame.PlatformerPhase4" classname="AzureGame.PlatformerPhase4" time="0.817536" status="run">
+		<properties/>
+		<system-out>[1793855781158][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\coin.wav
+[1793855781159][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\finish.wav
+[1793855781160][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\jump.wav
+[1793855781160][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\land.wav
+[1793855781161][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\respawn.wav
+Actual physics route completed with 8 coins and 7 mandatory landings
+</system-out>
+	</testcase>
+	<testcase name="AzureGame.PlatformerPhase9" classname="AzureGame.PlatformerPhase9" time="1.23593" status="run">
+		<properties/>
+		<system-out>[1793855781721][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\coin.wav
+[1793855781722][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\finish.wav
+[1793855781723][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\jump.wav
+[1793855781724][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\land.wav
+[1793855781724][info][audio][code=0] Decoded source: D:\Projects\FYP\Project\AzureRender\assets_public\platformer\assets\audio\respawn.wav
+Actual physics route completed with 8 coins and 7 mandatory landings
+</system-out>
+	</testcase>
+	<testcase name="AzureGame.ExplorationDesign" classname="AzureGame.ExplorationDesign" time="3.09783" status="run">
+		<properties/>
+		<system-out>Exploration scale, Blender mesh loading and PBR interpretation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.MaterialSlotEditing" classname="AzureEditor.MaterialSlotEditing" time="5.50456" status="run">
+		<properties/>
+		<system-out>[1793855501703][info][editor][code=0] Opened scene: startup
+[1793855502011][info][editor][code=0] ERROR [material.field]: Unknown material texture
+[1793855502016][info][editor][code=0] ERROR [material.create]: Material asset already exists
+[1793855502017][info][editor][code=0] ERROR [material.create]: Unknown material type: unknown
+[1793855502046][info][editor][code=0] ERROR [material.field]: Invalid material parameter: roughness
+[1793855502225][info][editor][code=0] ERROR [material.field]: Material texture must reference an image asset
+[1793855502278][info][editor][code=0] ERROR [material.field]: Invalid material texture slot or usage
+[1793855502460][info][editor][code=0] Generated asset: assets:/cube.glb
+[1793855502461][info][editor][code=0] Opened scene: startup
+[1793855502462][info][editor][code=0] Selected node: Placed Object
+[1793855502465][info][editor][code=0] Opened scene: startup
+[1793855502467][info][editor][code=0] Selected node: Placed Object
+[1793855502471][info][editor][code=0] Opened scene: st...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRender.Renderer2D" classname="AzureRender.Renderer2D" time="2.18101" status="run">
+		<properties/>
+		<system-out>2D primitives, batching, projection and retirement passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.Scene2DDependencies" classname="AzureAssets.Scene2DDependencies" time="5.32227" status="run">
+		<properties/>
+		<system-out>2D dependencies, invalidation, moved pack and missing image rejection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.Scene2DWorkflow" classname="AzureEngine.Scene2DWorkflow" time="4.74348" status="run">
+		<properties/>
+		<system-out>2D level, Chinese text, projected world label and resource teardown passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ExtendedAssetWorkflow" classname="AzureEditor.ExtendedAssetWorkflow" time="3.04565" status="run">
+		<properties/>
+		<system-out>[1793855401431][info][editor][code=0] Opened scene: startup
+[1793855401506][info][editor][code=0] Imported asset: 中文图标.svg
+[1793855401554][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855401587][info][editor][code=0] Imported asset: mesh.glb
+[1793855401654][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855401665][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-extended-workflow-324540874026800\azure.pbr\assets\startup.azscene
+[1793855401676][info][editor][code=0] Opened scene: startup
+[1793855401693][info][editor][code=0] Opened scene: startup
+[1793855401733][info][editor][code=0] Imported asset: 中文图标.svg
+[1793855401748][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855401775][info][editor][code=0] Imported asset: mesh.glb
+[1793855401831][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855401840][info][editor][code=0] ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureRuntime.AudioDeviceShutdown" classname="AzureRuntime.AudioDeviceShutdown" time="8.73755" status="run">
+		<properties/>
+		<system-out>Eight live-device initialization and teardown cycles passed
+</system-out>
+	</testcase>
+	<testcase name="AzureRuntime.AudioNotificationQueue" classname="AzureRuntime.AudioNotificationQueue" time="3.50658" status="run">
+		<properties/>
+		<system-out>Asynchronous device notifications and idempotent shutdown passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.UsdaFormat" classname="AzureAssets.UsdaFormat" time="5.01735" status="run">
+		<properties/>
+		<system-out>[1793855457101][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855457102][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855457153][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855457154][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+USDA static mesh conversion, two axes, publication and rejection passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.ExtendedImageFormats" classname="AzureAssets.ExtendedImageFormats" time="5.29095" status="run">
+		<properties/>
+		<system-out>GIF, PSD, SVG pixels, losses, rejection and cancellation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.Scene2D" classname="AzureAssets.Scene2D" time="3.64289" status="run">
+		<properties/>
+		<system-out>2D scene schema, Chinese labels and safe content passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.MaterialGraphEditing" classname="AzureEditor.MaterialGraphEditing" time="2.88161" status="run">
+		<properties/>
+		<system-out>[1793855495647][info][editor][code=0] Opened scene: startup
+[1793855495786][info][editor][code=0] ERROR [material.graph]: Invalid graph connection
+[1793855495799][info][editor][code=0] Opened scene: startup
+[1793855495943][info][editor][code=0] ERROR [material.graph]: Invalid graph connection
+[1793855495949][info][editor][code=0] Opened scene: startup
+[1793855496086][info][editor][code=0] ERROR [material.graph]: Invalid graph connection
+[1793855496094][info][editor][code=0] Opened scene: startup
+[1793855496246][info][editor][code=0] ERROR [material.graph]: Invalid graph connection
+[1793855496252][info][editor][code=0] Opened scene: startup
+Two material graph workflows, undo, redo, rejection and reopen passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.MaterialGraph" classname="AzureAssets.MaterialGraph" time="3.08639" status="run">
+		<properties/>
+		<system-out>Material graph compilation, layouts, links and persistence passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.MaterialDocument" classname="AzureAssets.MaterialDocument" time="3.52084" status="run">
+		<properties/>
+		<system-out>[1793855561959][warning][asset][code=0] [glTF] File not found : missing-slot-inspection-image.png
+Failed to load external 'uri' for image[0] name = "missing-slot-inspection-image.png"
+
+[1793855562151][warning][material][code=0] Full material replacement at slot source-slot from C:\Users\admin\AppData\Local\Temp\azure-replacement-324701623128600.azurematerial discards source semantics: class, faceSdf, nprDiffuse, outlineSurface, diffuse-ramp, geometry-shadow
+Material round trip, physical parameters, registered style interpretation and stable slot identities passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ManagedAuthoring" classname="AzureEditor.ManagedAuthoring" time="29.6987" status="run">
+		<properties/>
+		<system-out>[1793855233017][info][editor][code=0] Opened scene: startup
+Managed authoring create passed
+  Determining projects to restore...
+  Restored D:\Projects\FYP\Project\AzureRender\build\ninja-msvc-release\managed-authoring-Release\run-dd263b68\ProjectScripts.csproj (in 310 ms).
+  ProjectScripts -&gt; D:\Projects\FYP\Project\AzureRender\build\ninja-msvc-release\managed-authoring-Release\run-dd263b68\game\assets\compiled\ProjectScripts.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:19.19
+[1793855259262][info][editor][code=0] Opened scene: generated-templates
+[1793855260097][info][editor][code=0] Play started
+[1793855260279][info][editor][code=0] Play stopped; edit state restored
+Managed authoring verify passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.PrefabAuthoring" classname="AzureEditor.PrefabAuthoring" time="2.49469" status="run">
+		<properties/>
+		<system-out>[1793855313697][info][editor][code=0] Opened scene: physics-arm
+[1793855313765][info][editor][code=0] ERROR [prefab.create]: Prefab source already exists
+[1793855313766][info][editor][code=0] ERROR [prefab.create]: Prefab component depends on an external object
+[1793855313766][info][editor][code=0] Opened scene: physics-arm
+[1793855313771][info][editor][code=0] Selected node: fixed
+[1793855313771][info][editor][code=0] Placed prefab: one
+[1793855313802][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-prefab-authoring-324453130141600\assets\mechanism.azurelevel
+[1793855313803][info][editor][code=0] Opened scene: physics-arm
+[1793855313804][info][editor][code=0] Selected node: moving
+[1793855313806][info][editor][code=0] Opened scene: physics-arm
+[1793855313814][info][editor][code=0] Opened scene: physics-arm
+[1793855313828][info][editor][code=0] Undo
+[1793855313853][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-prefab-authoring-324453130141600\assets\mech...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.DomainAuthoring" classname="AzureEditor.DomainAuthoring" time="6.39793" status="run">
+		<properties/>
+		<system-out>[1793855376338][info][editor][code=0] Opened scene: startup
+[1793855376478][info][editor][code=0] Opened scene: startup
+[1793855376500][info][editor][code=0] Opened scene: startup
+[1793855376504][info][editor][code=0] Opened scene: startup
+[1793855376505][info][editor][code=0] Opened scene: startup
+[1793855376506][info][editor][code=0] Selected node: test_model
+[1793855376508][info][editor][code=0] Opened scene: startup
+[1793855376509][info][editor][code=0] Opened scene: startup
+[1793855376510][info][editor][code=0] Selected node: test_model
+[1793855376513][info][editor][code=0] Opened scene: startup
+[1793855376513][info][editor][code=0] Selected node: test_model
+[1793855376517][info][editor][code=0] Undo
+Material, texture and physics proposals, source conflicts and shared undo passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.AuthoringWorkflow" classname="AzureEditor.AuthoringWorkflow" time="4.52846" status="run">
+		<properties/>
+		<system-out>[1793855339383][info][editor][code=0] Opened scene: inspection
+[1793855339440][info][editor][code=0] ERROR [script.template]: Script destination already exists
+[1793855339441][info][editor][code=0] ERROR [script.template]: Unknown script authoring backend
+[1793855339442][info][editor][code=0] ERROR [script.template]: Project path escapes mount: ../outside.lua
+[1793855339443][info][editor][code=0] ERROR [script.template]: Script extension does not match backend
+[1793855339444][info][editor][code=0] ERROR [script.template]: Managed template filename requires a valid ASCII class identifier
+[1793855339445][info][editor][code=0] Opened scene: inspection
+[1793855339446][info][editor][code=0] Selected node: observer
+[1793855339449][info][editor][code=0] Undo
+[1793855339450][info][editor][code=0] Opened scene: inspection
+[1793855339451][info][editor][code=0] ERROR [script.attach]: Attach a Lua script or a built .azscript manifest; managed source must be built first
+[1793855339453][info][editor][code=0] Opened scene: ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.AnimationAuthoring" classname="AzureEditor.AnimationAuthoring" time="7.02273" status="run">
+		<properties/>
+		<system-out>[1793855466912][info][editor][code=0] Opened scene: third-person-courtyard
+[1793855466933][info][editor][code=0] Opened scene: third-person-courtyard
+[1793855466934][info][editor][code=0] Selected node: guide
+[1793855466941][info][editor][code=0] ERROR [animation.seek]: Unknown animation state: missing
+[1793855466943][info][editor][code=0] ERROR [animation.seek]: Timeline time must be between 0 and 600 seconds
+[1793855466943][info][editor][code=0] Opened scene: third-person-courtyard
+[1793855466945][info][editor][code=0] Selected node: hero
+[1793855466958][info][editor][code=0] ERROR [animation.configure]: Animation preview speed must be between 0.05 and 4
+[1793855466968][info][editor][code=0] Opened scene: third-person-courtyard
+[1793855466984][info][editor][code=0] Opened scene: third-person-courtyard
+[1793855466999][info][editor][code=0] Undo
+[1793855467000][info][editor][code=0] Redo
+[1793855467088][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-animation-authoring-324606279195...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.DocumentManager" classname="AzureEditor.DocumentManager" time="5.95504" status="run">
+		<properties/>
+		<system-out>[1793855382286][info][editor][code=0] Opened scene: first
+[1793855382289][info][editor][code=0] Opened scene: first
+[1793855382292][info][editor][code=0] Opened scene: second
+[1793855382294][info][editor][code=0] Opened scene: second
+[1793855382296][info][editor][code=0] Undo
+[1793855382297][info][editor][code=0] ERROR [document.close]: Choose Save, Discard or Cancel for the dirty document
+[1793855382307][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-documents-324521757543000\second.azscene
+[1793855382319][info][editor][code=0] ERROR [document.activate]: Unknown open document: missing
+[1793855382320][info][editor][code=0] ERROR [document.open]: Unable to open scene: C:\Users\admin\AppData\Local\Temp\azure-documents-324521757543000\missing.azscene
+[1793855382321][info][editor][code=0] Simulation started
+[1793855382321][info][editor][code=0] ERROR [document.open]: Operation requires an idle edit session
+[1793855382322][info][editor][code=0] Play stopped; edit state restored
+[1793855...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.PreviewSimulation" classname="AzureEditor.PreviewSimulation" time="5.84509" status="run">
+		<properties/>
+		<system-out>[1793855385062][info][editor][code=0] Opened scene: untitled
+[1793855385065][info][editor][code=0] Simulation started
+[1793855385066][info][editor][code=0] ERROR [node.rename]: Operation requires an idle edit session
+[1793855385066][info][editor][code=0] Play stopped; edit state restored
+[1793855385067][info][editor][code=0] Simulation started
+[1793855385067][info][editor][code=0] Play stopped; edit state restored
+[1793855385068][info][editor][code=0] Simulation started
+[1793855385068][info][editor][code=0] Play stopped; edit state restored
+[1793855385069][info][editor][code=0] Simulation started
+[1793855385070][info][editor][code=0] Play stopped; edit state restored
+[1793855385070][info][editor][code=0] Simulation started
+[1793855385070][info][editor][code=0] Play stopped; edit state restored
+[1793855385071][info][editor][code=0] Simulation started
+[1793855385072][info][editor][code=0] Play stopped; edit state restored
+[1793855385072][info][editor][code=0] Simulation started
+[1793855385073][info][editor][cod...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEngine.PhysicsAuthoring" classname="AzureEngine.PhysicsAuthoring" time="1.1639" status="run">
+		<properties/>
+		<system-out>ball=0.38 capsule=0.88 arm=3.98557
+Sphere, capsule, reflected mesh, arm/door hinges, endpoint deletion and authoring validation passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.EditorProjection" classname="AzureEditor.EditorProjection" time="1.9942" status="run">
+		<properties/>
+		<system-out>[1793855395426][info][editor][code=0] Opened scene: untitled
+[1793855395433][info][editor][code=0] ERROR [viewport.orientation]: Unknown viewport orientation
+[1793855395434][info][editor][code=0] ERROR [viewport.fly-speed]: Flight wheel steps must be finite and within 100
+[1793855395435][info][editor][code=0] ERROR [viewport.overlay-policy]: Invalid viewport helper category or visibility policy
+View operations, six orientations and independent workspace state passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.ViewportOverlays" classname="AzureEditor.ViewportOverlays" time="4.01999" status="run">
+		<properties/>
+		<system-out>[1793855408057][info][editor][code=0] Opened scene: overlay-fixture
+Built-in helpers, selected policies, registration, budgets and persistence passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.FormatRegistry" classname="AzureAssets.FormatRegistry" time="5.09655" status="run">
+		<properties/>
+		<system-out>Format detection, versions, cancellation, stale publication and conflict recovery passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.ModelFormats" classname="AzureAssets.ModelFormats" time="2.85569" status="run">
+		<properties/>
+		<system-out>[1793855484065][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484068][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484099][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484102][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484132][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484135][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484197][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484197][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484200][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484200][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855484326][warning][asset][code=0] Unsupported material extension: KH...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.ImageFormats" classname="AzureAssets.ImageFormats" time="3.24626" status="run">
+		<properties/>
+		<system-out>Image readers, precision, orientation, transfer, material and environment passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.TextureContainers" classname="AzureAssets.TextureContainers" time="7.88938" status="run">
+		<properties/>
+		<system-out>Turntable foot pivot: [1.000000, -1.000000, 1.000000]
+Asset path: C:\Users\admin\AppData\Local\Temp\azure-containers-324585594979500\authored.gltf
+Loaded asset: 337 vertices, 900 indices, 3 primitives, 4 materials
+Material Class v1 inventory:
+  [0] PublicTestMaterial -&gt; generic, flags=0x20, source=asset-extras
+  [1] PublicTestMaterialB -&gt; generic, flags=0x20, source=asset-extras
+  [2] FallbackMaterial -&gt; generic, flags=0x20, source=fallback/inferred
+  [3] AzureRender_ShowcasePlatform -&gt; showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 1 joint matrices, 1 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 1 (playing "MorphJointPulse", 0.250000 s loop)
+[1793855446153][info][render][code=0] Character texture access: fixed, requested slots=38, stage sampler limit=4096
+[1793855446153][info][render][code=0] Scene load CPU preparation: 1.105400 ms, materialPixelBytes=492
+[1793855446159][info][render][code=0] Character IBL: hardware mip fallback path
+[1793855446159][info][render][code=0] Scene loa...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.CompressedAudioFormats" classname="AzureAssets.CompressedAudioFormats" time="6.05135" status="run">
+		<properties/>
+		<system-out>[1793855328798][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-compressed-audio-324468183753600\opus-output\立体声 🎵.opus
+[1793855328853][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-compressed-audio-324468183753600\mp3-output\立体声 🎵.mp3
+[1793855328950][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-compressed-audio-324468183753600\平台音频 🎵.aac
+[1793855329075][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-compressed-audio-324468183753600\平台音频 🎵.m4a
+[1793855329664][info][audio][code=0] Streaming source: C:\Users\admin\AppData\Local\Temp\azure-compressed-audio-324468183753600\long\opus-output\long.opus
+[1793855329966][info][audio][code=0] Streaming source: D:/Projects/FYP/Project/AzureRender/docs/acceptance/g23/evidence/2026-10-12/audio-fixtures\long.m4a
+[1793855330065][info][editor][code=0] Opened scene: opus
+[1793855330158][info][editor][code=0] Imported ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.AudioFormats" classname="AzureAssets.AudioFormats" time="6.0053" status="run">
+		<properties/>
+		<system-out>[1793855227576][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-audio-codec-324367016182900\tone.wav
+[1793855227589][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-audio-codec-324367016182900\tone.flac
+[1793855227600][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-audio-codec-324367016182900\tone.mp3
+[1793855227614][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-audio-codec-324367016182900\tone.ogg
+[1793855227860][info][audio][code=0] Streaming source: C:\Users\admin\AppData\Local\Temp\azure-audio-codec-324367016182900\long.ogg
+[1793855227863][info][audio][code=0] Streaming source: C:\Users\admin\AppData\Local\Temp\azure-audio-codec-324367016182900\long.wav
+[1793855227880][info][audio][code=0] Decoded source: C:\Users\admin\AppData\Local\Temp\azure-audio-codec-324367016182900\🎵 音频 样本.FLAC
+Four audio readers, PCM, rate, channels, loop, stream and ownership passed
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.AudioWorkflow" classname="AzureEditor.AudioWorkflow" time="5.37363" status="run">
+		<properties/>
+		<system-out>[1793855332910][info][editor][code=0] Opened scene: audio
+[1793855332987][info][editor][code=0] Imported asset: input.wav
+[1793855332988][info][editor][code=0] Opened scene: audio
+[1793855332988][info][editor][code=0] Selected node: Empty0
+[1793855332989][info][editor][code=0] Opened scene: audio
+[1793855332991][info][editor][code=0] Opened scene: audio
+[1793855333042][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-audio-workflow-324472344564800\assets\audio.azurelevel
+[1793855333092][info][editor][code=0] Opened scene: audio
+[1793855333162][info][editor][code=0] Imported asset: input.flac
+[1793855333162][info][editor][code=0] Opened scene: audio
+[1793855333163][info][editor][code=0] Selected node: Empty1
+[1793855333164][info][editor][code=0] Opened scene: audio
+[1793855333167][info][editor][code=0] Opened scene: audio
+[1793855333187][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-audio-workflow-324472344564800\assets\audio.azurelevel
+[1793855333213][inf...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.FirstBatchAuthoring" classname="AzureEditor.FirstBatchAuthoring" time="3.33798" status="run">
+		<properties/>
+		<system-out>[1793855294872][info][editor][code=0] Opened scene: workshop
+[1793855294931][info][editor][code=0] Imported asset: test_model.gltf
+[1793855295038][info][editor][code=0] Imported asset: alpha.png
+[1793855295078][info][editor][code=0] Imported asset: tone.wav
+[1793855295079][info][editor][code=0] Opened scene: workshop
+[1793855295079][info][editor][code=0] Selected node: Placed Object
+[1793855295081][info][editor][code=0] Opened scene: workshop
+[1793855295229][info][editor][code=0] Opened scene: workshop
+[1793855295233][info][editor][code=0] Undo
+[1793855295234][info][editor][code=0] Redo
+[1793855295234][info][editor][code=0] Opened scene: workshop
+[1793855295235][info][editor][code=0] Selected node: Empty0
+[1793855295237][info][editor][code=0] Opened scene: workshop
+[1793855295239][info][editor][code=0] Opened scene: workshop
+[1793855295266][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-first-batch-324434298869400\workshop\assets\creation.azurelevel
+[1793855295275][info][editor][co...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureEditor.AssetTransfer" classname="AzureEditor.AssetTransfer" time="6.38359" status="run">
+		<properties/>
+		<system-out>[1793855336405][info][editor][code=0] Opened scene: startup
+[1793855336481][info][editor][code=0] Imported asset: alpha.png
+[1793855336504][info][editor][code=0] Saved scene: C:\Users\admin\AppData\Local\Temp\azure-transfer-324475863805300\assets\startup.azscene
+[1793855336538][info][editor][code=0] ERROR [asset.export-plan]: Unknown image export setting: unknown
+[1793855336538][info][editor][code=0] ERROR [asset.export-plan]: Image quality must be within [1,100]
+[1793855336539][info][editor][code=0] ERROR [asset.export-plan]: Unsupported export format, version or source budget
+[1793855336539][info][editor][code=0] ERROR [asset.export-plan]: Unknown parameter: unknown
+[1793855336550][info][editor][code=0] ERROR [asset.export]: Unknown or consumed export plan
+[1793855336557][info][editor][code=0] ERROR [asset.export]: Asset destination is occupied or staging is unavailable
+[1793855336572][info][editor][code=0] Opened scene: startup
+[1793855336573][info][editor][code=0] Selected node: Empty0
+[1793855336574][inf...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.AssetExchange" classname="AzureTools.AssetExchange" time="3.56982" status="run">
+		<properties/>
+		<system-out>Independent exchange: Unicode, plan, publication, replacement and deadline passed
+</system-out>
+	</testcase>
+	<testcase name="AzureAssets.RoundTrip" classname="AzureAssets.RoundTrip" time="6.03652" status="run">
+		<properties/>
+		<system-out>[1793855388616][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855388616][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855388617][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855388617][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855388646][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855388646][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855388648][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+[1793855388648][warning][asset][code=0] Unsupported material extension: KHR_materials_specular
+Sixteen writers, geometry, color, alpha, PCM, lossy budgets and recovery passed
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ResourceManifest" classname="AzureTools.ResourceManifest" time="0.25273" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>....
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ResourceReader" classname="AzureTools.ResourceReader" time="0.817329" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>...
+----------------------------------------------------------------------
+Ran 3 tests in 0.502s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ResourceValidationRunner" classname="AzureTools.ResourceValidationRunner" time="0.998866" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.773s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.ValidationAssetExport" classname="AzureTools.ValidationAssetExport" time="0.379122" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>.s.............
+----------------------------------------------------------------------
+Ran 15 tests in 0.005s
+
+OK (skipped=1)
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.SceneExchange" classname="AzureTools.SceneExchange" time="0.245432" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>..
+----------------------------------------------------------------------
+Ran 2 tests in 0.031s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.MaterialSemantics" classname="AzureTools.MaterialSemantics" time="0.391999" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.188s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeRenderEvidence" classname="AzureTools.NativeRenderEvidence" time="1.75507" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>..............................................................
+----------------------------------------------------------------------
+Ran 62 tests in 1.268s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeCharacter" classname="AzureTools.NativeCharacter" time="1.90589" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>................................................................
+----------------------------------------------------------------------
+Ran 64 tests in 0.710s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeMeshUv" classname="AzureTools.NativeMeshUv" time="3.22053" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.858s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeVfxProfile" classname="AzureTools.NativeVfxProfile" time="0.21056" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.004s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.NativeColorSpace" classname="AzureTools.NativeColorSpace" time="0.234372" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>....
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK
+</system-out>
+	</testcase>
+	<testcase name="AzureTools.EndfieldNative" classname="AzureTools.EndfieldNative" time="3.04695" status="run">
+		<properties>
+			<property name="cmake_labels" value="tools"/>
+		</properties>
+		<system-out>.............................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 205 tests in 2.303s
+
+OK
+</system-out>
+	</testcase>
+</testsuite>

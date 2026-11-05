@@ -1,0 +1,20 @@
+[
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+  "--project",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\intel-blend-diagnosis\\blend\\lab.azureproject",
+  "--width",
+  "128",
+  "--height",
+  "128",
+  "--capture-frames",
+  "1",
+  "--fixed-frame-step",
+  "--qa-camera",
+  "scene",
+  "--qa-light",
+  "scene",
+  "--qa-isolation",
+  "ambient",
+  "--capture-dir",
+  "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\intel-blend-diagnosis\\blend\\frames"
+]

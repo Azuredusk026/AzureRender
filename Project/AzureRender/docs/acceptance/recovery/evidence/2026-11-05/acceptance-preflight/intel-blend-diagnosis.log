@@ -1,0 +1,8 @@
+blend
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_npr_view_mask_gpu.py", line 139, in <module>
+    run(args.executable, args.output.resolve(), args.case, args.expected_validation, args.quality)
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_npr_view_mask_gpu.py", line 103, in run
+    assert "Character texture access: " + ("fixed" if name == "fixed" else "indexed") in text, name
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: blend
