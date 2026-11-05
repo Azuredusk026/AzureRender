@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "status": "failed-isolated",
+  "sourceBase": "aa24bd4",
+  "scope": "Editor-only graphics pipeline idle reuse; no candidate code in production",
+  "originalWaitBudgetMs": 10000,
+  "observations": [
+    {
+      "case": "first-debug",
+      "result": "grid-wait-timeout",
+      "milliseconds": 10009.7448
+    },
+    {
+      "case": "idle-debug",
+      "result": "refresh-wait-timeout",
+      "milliseconds": 10040.4961
+    },
+    {
+      "case": "native-pass-debug",
+      "result": "first-query-socket-timeout",
+      "seconds": 12
+    },
+    {
+      "case": "native-pass-short-smoke",
+      "result": "access-violation",
+      "exitCode": "0xC0000005",
+      "seconds": 5.563
+    }
+  ],
+  "retryCondition": "Native exception stack and resource ownership diagnosis; preserve original budgets and image gates",
+  "archive": {
+    "path": "isolated-candidate.zip",
+    "sha256": "6a5e5e1b1e085ef0385060e19cc00081b104b97e4f79989d8ea92f053057279e",
+    "files": [
+      {
+        "path": "debug-devtools/exploration/control-results.json",
+        "sha256": "6533323d9070cde8134d15870ed4f1b725bef3c2aba06c569725b7552039d54a",
+        "bytes": 31560
+      },
+      {
+        "path": "debug-devtools/exploration/stderr.log",
+        "sha256": "a13e94b7c5a4cda9c93a2b2dd7246fe50b226aaa1a251f3d7f04834d69d6cfaf",
+        "bytes": 6574
+      },
+      {
+        "path": "debug-devtools/exploration/stdout.log",
+        "sha256": "ba1e501b88a539986d20737efbe0dcf315d67cb6743b980c7bdbc73a0d4eacd1",
+        "bytes": 4487
+      },
+      {
+        "path": "debug-devtools-idle/exploration/control-results.json",
+        "sha256": "13039b8b827de042fe85a433d72e3d1ee28445ce748f91dcf888bf8f6a2ff565",
+        "bytes": 45570
+      },
+      {
+        "path": "debug-devtools-idle/exploration/stderr.log",
+        "sha256": "0dd54456811e95634e788c126f28f3f0cbbd8d465b8b74bbef85c34badfb3971",
+        "bytes": 11562
+      },
+      {
+        "path": "debug-devtools-idle/exploration/stdout.log",
+        "sha256": "1fcf1abdd55773225a0044c647eabd6bc0d183f98d73c21a79fd389e8761128f",
+        "bytes": 8270
+      },
+      {
+        "path": "debug-devtools-idle.log",
+        "sha256": "32ba4b211aa71356997d70b4c66e89d7682f58370af07c53612847585e4b3c05",
+        "bytes": 1328
+      },
+      {
+        "path": "debug-devtools.log",
+        "sha256": "98c316e898006b36c388532cf81620f682d7ba1a10439fd622fdc3b538a1d570",
+        "bytes": 1476
+      },
+      {
+        "path": "debug-native-pass-devtools/exploration/control-results.json",
+        "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+        "bytes": 4
+      },
+      {
+        "path": "debug-native-pass-devtools/exploration/stderr.log",
+        "sha256": "0187a2f3f140b09dc45d2e3bea526163834567ed1bd9feff5a0721fc529a7350",
+        "bytes": 2204
+      },
+      {
+        "path": "debug-native-pass-devtools/exploration/stdout.log",
+        "sha256": "a16c80bc97c34f95a4cf245f02eabeb3fab71bfe118d744b80c738db3951fdf4",
+        "bytes": 1532
+      },
+      {
+        "path": "debug-native-pass-devtools.log",
+        "sha256": "f91f3e011c20a5561f1fc2db4353f6431477c24a59645fb7ddf4bdd80d838f60",
+        "bytes": 1446
+      },
+      {
+        "path": "isolated-candidate/candidate.patch",
+        "sha256": "fd3b15515ac01be84d6ca8102745f5b6184f49dcb8ec06060f74bea2ddbbbdf7",
+        "bytes": 18401
+      },
+      {
+        "path": "isolated-candidate/CMakeLists.txt",
+        "sha256": "4b4c0d3c84e848dbc408479872668ac006adad0b3998f16d18c04c863b85ecbf",
+        "bytes": 256223
+      },
+      {
+        "path": "isolated-candidate/src/app/AzureRenderApp.cpp",
+        "sha256": "405aa4b68d4b193a016bc97999c39c8d08c068ddf0a07f8966d3bfd3d98fef19",
+        "bytes": 93975
+      },
+      {
+        "path": "isolated-candidate/src/app/AzureRenderApp.hpp",
+        "sha256": "6fbcd475c1329b13ee9e303de7466e33bbf87f21fd3e8fc40ea403f94b6167ba",
+        "bytes": 22937
+      },
+      {
+        "path": "isolated-candidate/src/app/AzureRenderPipeline.cpp",
+        "sha256": "35ba2ace4173864c2b34f1b906b78b60dadc43cfcc1ab9919af4695b67fbeb85",
+        "bytes": 22547
+      },
+      {
+        "path": "isolated-candidate/src/app/AzureRenderSupport.cpp",
+        "sha256": "43a54e517057a84d5c623abdebe5529ce97a742a9e0eb6d61110a974b9d0081a",
+        "bytes": 30590
+      },
+      {
+        "path": "isolated-candidate/src/rhi/GraphicsPipelineReuse.cpp",
+        "sha256": "dcd3ad4835835724bbea1c62167dba890a6dcf4c716dafae5c555fa785e1cd6b",
+        "bytes": 6630
+      },
+      {
+        "path": "isolated-candidate/src/rhi/GraphicsPipelineReuse.hpp",
+        "sha256": "2754abc0d93fff444b327796df536652d2e307fb488b8d071e8a7989b1635b05",
+        "bytes": 2353
+      },
+      {
+        "path": "isolated-candidate/src/rhi/VulkanRhi.cpp",
+        "sha256": "9d4b95583444cdf87e72f1bd1f937cca51fdd85bf0eba4908b2e62c6af2a9319",
+        "bytes": 52284
+      },
+      {
+        "path": "isolated-candidate/src/rhi/VulkanRhi.hpp",
+        "sha256": "fa81ea3e78f431ea8caea48d37d76d8797c91c5e61e043b5d51444ba04907843",
+        "bytes": 8590
+      },
+      {
+        "path": "isolated-candidate/tests/GraphicsPipelineReuseTests.cpp",
+        "sha256": "9601b50ace792530b08e6ec38de19b69afd21197c0ece35f3e87d2446f974e4f",
+        "bytes": 7157
+      },
+      {
+        "path": "native-pass-smoke/result.json",
+        "sha256": "da9034f9c196f1d95774da3dc4e2cd688d4515a0a961d5b5dd5c0be3bb916885",
+        "bytes": 773
+      },
+      {
+        "path": "native-pass-smoke/stderr.log",
+        "sha256": "f0223cced1a71dea94edf6cdceec816c165fc50e2aa5b6eb7c0feb786f58cf00",
+        "bytes": 2200
+      },
+      {
+        "path": "native-pass-smoke/stdout.log",
+        "sha256": "a16c80bc97c34f95a4cf245f02eabeb3fab71bfe118d744b80c738db3951fdf4",
+        "bytes": 1532
+      },
+      {
+        "path": "task.json",
+        "sha256": "613d216c4a08227b2815107c6fd4e4d82c80c51a2b7351f8266b506959980667",
+        "bytes": 3409
+      }
+    ]
+  },
+  "isolatedCpuContract": {
+    "exitCode": 0,
+    "executableSha256": "b63d4031e6d2d7bffbe6e2f54cd3ba76ae04500c545a5783ba39fcf911bb736c",
+    "sourcePath": "isolated-candidate/tests/GraphicsPipelineReuseTests.cpp",
+    "scope": "Retained privately linked candidate executable; not registered in restored production CTest",
+    "log": "isolated-cpu.log",
+    "logSha256": "4c413fb3b2cd8e5e3d87f84d63d3162accf96e257f566a4021847b89c3683eae"
+  },
+  "restoredSource": {
+    "CMakeLists.txt": "1eb68bf9b8cee577861953f870f2c52f580a8ef1e8287bc84fdd2b7fa9cc8bb1",
+    "src/rhi/VulkanRhi.hpp": "2558041b5574635501f4da21da287560401289d01a97c9671c1353445eb880fc",
+    "src/rhi/VulkanRhi.cpp": "a14b5d502f07eaaf0403fcd82069c3680d54cb360ea79a4f97dfab98e50e6eca",
+    "src/app/AzureRenderApp.hpp": "8d285e2cb0c7ff05b467f673692d40f8e8161d15866796df118fb11c0ca1d878",
+    "src/app/AzureRenderApp.cpp": "37c8fe99094af20a6ab8795c136b972c0d8c7d60671759f38c843cfff226db5d",
+    "src/app/AzureRenderPipeline.cpp": "1a94015ed5edc7a34e35dbb946c102d16f6b43ca993ceec722bf2d21f475720c",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201"
+  }
+}
