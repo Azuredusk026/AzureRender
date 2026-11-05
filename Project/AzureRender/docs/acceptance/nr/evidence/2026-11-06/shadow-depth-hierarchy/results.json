@@ -1,0 +1,629 @@
+{
+  "schemaVersion": 1,
+  "status": "isolated-candidate-production-source-and-shaders-restored",
+  "sourceBase": "9a9d9aa",
+  "productionAdoption": false,
+  "checks": {
+    "candidate": {
+      "release": {
+        "count": 20,
+        "exitCode": 0,
+        "buildSeconds": 7.2810000000172295,
+        "checksSeconds": 24.875,
+        "productCount": 625
+      },
+      "debug": {
+        "count": 20,
+        "exitCode": 0,
+        "buildSeconds": 81.95299999997951,
+        "checksSeconds": 49.51500000001397,
+        "productCount": 625
+      }
+    },
+    "restored": {
+      "release": {
+        "count": 20,
+        "exitCode": 0,
+        "buildSeconds": 109.25,
+        "checksSeconds": 26.030999999959022,
+        "productCount": 625
+      },
+      "debug": {
+        "count": 20,
+        "exitCode": 0,
+        "buildSeconds": 78.29700000002049,
+        "checksSeconds": 49.42099999997299,
+        "productCount": 625
+      }
+    }
+  },
+  "gpuMechanisms": {
+    "candidate": {
+      "status": "passed",
+      "scope": "6 actual GPU cases x2configurations x2devices; fine/coarse shadow extrema, partial tiles, original PCSS/object math included; synchronization validation across cases; original skinning/motion zero-resource assertions retained; full native renderer separately checks zero resources; skinning includes actual normalized output reuse/cancel/dynamic overwrite and raw81word equivalence; individual/bulk barriers remain covered",
+      "rows": [
+        {
+          "configuration": "release",
+          "device": "nvidia",
+          "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "deviceUUIDs": [
+            "961ce778-109e-0976-8431-c5edc76ff622"
+          ],
+          "enumerationEntries": 1,
+          "filter": "*nv-vk64*",
+          "exitCode": 0,
+          "seconds": 10.280999999959022,
+          "actualChecks": [
+            "AzureRender.MotionVectorGpu",
+            "AzureRender.ObjectShadowFilteringGpu",
+            "AzureRender.ShadowFilteringGpu",
+            "AzureRender.ShadowTileBoundsGpu",
+            "AzureRender.SharedMotionGpu",
+            "AzureRender.SkinningGpu"
+          ],
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "-R",
+            "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|ShadowTileBoundsGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-depth-hierarchy\\gpu\\release-nvidia-tests.xml"
+          ]
+        },
+        {
+          "configuration": "release",
+          "device": "intel",
+          "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "deviceUUIDs": [
+            "868088a7-0400-0000-0002-000000000000"
+          ],
+          "enumerationEntries": 2,
+          "filter": "*igvk64*",
+          "exitCode": 0,
+          "seconds": 3.01500000001397,
+          "actualChecks": [
+            "AzureRender.MotionVectorGpu",
+            "AzureRender.ObjectShadowFilteringGpu",
+            "AzureRender.ShadowFilteringGpu",
+            "AzureRender.ShadowTileBoundsGpu",
+            "AzureRender.SharedMotionGpu",
+            "AzureRender.SkinningGpu"
+          ],
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "-R",
+            "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|ShadowTileBoundsGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-depth-hierarchy\\gpu\\release-intel-tests.xml"
+          ]
+        },
+        {
+          "configuration": "debug",
+          "device": "nvidia",
+          "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "deviceUUIDs": [
+            "961ce778-109e-0976-8431-c5edc76ff622"
+          ],
+          "enumerationEntries": 1,
+          "filter": "*nv-vk64*",
+          "exitCode": 0,
+          "seconds": 10.562000000034459,
+          "actualChecks": [
+            "AzureRender.MotionVectorGpu",
+            "AzureRender.ObjectShadowFilteringGpu",
+            "AzureRender.ShadowFilteringGpu",
+            "AzureRender.ShadowTileBoundsGpu",
+            "AzureRender.SharedMotionGpu",
+            "AzureRender.SkinningGpu"
+          ],
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "-R",
+            "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|ShadowTileBoundsGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-depth-hierarchy\\gpu\\debug-nvidia-tests.xml"
+          ]
+        },
+        {
+          "configuration": "debug",
+          "device": "intel",
+          "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "deviceUUIDs": [
+            "868088a7-0400-0000-0002-000000000000"
+          ],
+          "enumerationEntries": 2,
+          "filter": "*igvk64*",
+          "exitCode": 0,
+          "seconds": 2.187000000034459,
+          "actualChecks": [
+            "AzureRender.MotionVectorGpu",
+            "AzureRender.ObjectShadowFilteringGpu",
+            "AzureRender.ShadowFilteringGpu",
+            "AzureRender.ShadowTileBoundsGpu",
+            "AzureRender.SharedMotionGpu",
+            "AzureRender.SkinningGpu"
+          ],
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "-R",
+            "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|ShadowTileBoundsGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-depth-hierarchy\\gpu\\debug-intel-tests.xml"
+          ]
+        }
+      ],
+      "sourceInputsUnchanged": true,
+      "allRecordedProductsVerified": true
+    },
+    "restored": {
+      "status": "passed",
+      "scope": "6 actual GPU cases x2configurations x2devices; restored original one-level depth bounds and PCSS/object math included; synchronization validation across cases; original skinning/motion zero-resource assertions retained; full native renderer separately checks zero resources; skinning includes actual normalized output reuse/cancel/dynamic overwrite and raw81word equivalence; individual/bulk barriers remain covered",
+      "rows": [
+        {
+          "configuration": "release",
+          "device": "nvidia",
+          "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "deviceUUIDs": [
+            "961ce778-109e-0976-8431-c5edc76ff622"
+          ],
+          "enumerationEntries": 1,
+          "filter": "*nv-vk64*",
+          "exitCode": 0,
+          "seconds": 9.10999999998603,
+          "actualChecks": [
+            "AzureRender.MotionVectorGpu",
+            "AzureRender.ObjectShadowFilteringGpu",
+            "AzureRender.ShadowFilteringGpu",
+            "AzureRender.ShadowTileBoundsGpu",
+            "AzureRender.SharedMotionGpu",
+            "AzureRender.SkinningGpu"
+          ],
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "-R",
+            "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|ShadowTileBoundsGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-depth-hierarchy\\restored\\gpu\\release-nvidia-tests.xml"
+          ]
+        },
+        {
+          "configuration": "release",
+          "device": "intel",
+          "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "deviceUUIDs": [
+            "868088a7-0400-0000-0002-000000000000"
+          ],
+          "enumerationEntries": 2,
+          "filter": "*igvk64*",
+          "exitCode": 0,
+          "seconds": 2.1089999999967404,
+          "actualChecks": [
+            "AzureRender.MotionVectorGpu",
+            "AzureRender.ObjectShadowFilteringGpu",
+            "AzureRender.ShadowFilteringGpu",
+            "AzureRender.ShadowTileBoundsGpu",
+            "AzureRender.SharedMotionGpu",
+            "AzureRender.SkinningGpu"
+          ],
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+            "-R",
+            "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|ShadowTileBoundsGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-depth-hierarchy\\restored\\gpu\\release-intel-tests.xml"
+          ]
+        },
+        {
+          "configuration": "debug",
+          "device": "nvidia",
+          "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "deviceUUIDs": [
+            "961ce778-109e-0976-8431-c5edc76ff622"
+          ],
+          "enumerationEntries": 1,
+          "filter": "*nv-vk64*",
+          "exitCode": 0,
+          "seconds": 10.563000000023749,
+          "actualChecks": [
+            "AzureRender.MotionVectorGpu",
+            "AzureRender.ObjectShadowFilteringGpu",
+            "AzureRender.ShadowFilteringGpu",
+            "AzureRender.ShadowTileBoundsGpu",
+            "AzureRender.SharedMotionGpu",
+            "AzureRender.SkinningGpu"
+          ],
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "-R",
+            "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|ShadowTileBoundsGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-depth-hierarchy\\restored\\gpu\\debug-nvidia-tests.xml"
+          ]
+        },
+        {
+          "configuration": "debug",
+          "device": "intel",
+          "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "deviceUUIDs": [
+            "868088a7-0400-0000-0002-000000000000"
+          ],
+          "enumerationEntries": 2,
+          "filter": "*igvk64*",
+          "exitCode": 0,
+          "seconds": 1.9689999999827705,
+          "actualChecks": [
+            "AzureRender.MotionVectorGpu",
+            "AzureRender.ObjectShadowFilteringGpu",
+            "AzureRender.ShadowFilteringGpu",
+            "AzureRender.ShadowTileBoundsGpu",
+            "AzureRender.SharedMotionGpu",
+            "AzureRender.SkinningGpu"
+          ],
+          "command": [
+            "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+            "--test-dir",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+            "-R",
+            "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|ShadowTileBoundsGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu)$",
+            "--output-on-failure",
+            "--no-tests=error",
+            "--output-junit",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shadow-depth-hierarchy\\restored\\gpu\\debug-intel-tests.xml"
+          ]
+        }
+      ],
+      "sourceInputsUnchanged": true,
+      "allRecordedProductsVerified": true
+    }
+  },
+  "nativeImage": {
+    "status": "passed",
+    "sourceBase": "9a9d9aa",
+    "executableSha256": "6e2b10a29b663ca546cec028a991c89a88bcafce8a464cccce81aadca8a21533",
+    "exitCode": 0,
+    "seconds": 279.594000000041,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShadersMatchRecordedHierarchyCandidate": true,
+    "unaffectedProductionShadersByteIdentical": true,
+    "intentionalShaderChangeCount": 385,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Conservative fine/coarse shadow depth hierarchy candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "nativeTiming": {
+    "status": "measured",
+    "sourceBase": "9a9d9aa",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 130.875,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.5252136,
+        "p95": 2.6044528,
+        "p99": 2.63532672
+      },
+      "sceneMs": {
+        "mean": 29.402274133333332,
+        "p95": 30.8457984,
+        "p99": 31.077376
+      },
+      "postProcessMs": {
+        "mean": 0.2830933333333333,
+        "p95": 0.294912,
+        "p99": 0.29842432
+      },
+      "frameMs": {
+        "mean": 32.21058106666667,
+        "p95": 33.646744,
+        "p99": 33.8779184
+      }
+    },
+    "cpu": {
+      "mean": 20.471021666666665,
+      "p95": 22.80672000000041,
+      "p99": 34.47798899999932
+    },
+    "wait": {
+      "mean": 11.635746666666668,
+      "p95": 14.311495000000582,
+      "p99": 14.847760000000072
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985839128,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415873000,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7402979328,
+    "environmentFailures": [
+      "run observation 23: driver relative thermal headroom is insufficient",
+      "run observation 23: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true,
+    "timingBenefitQualified": false,
+    "timingScope": "Current candidate only; no paired timing benefit or original1800sample acceptance claim"
+  },
+  "timingBenefitQualified": false,
+  "shaderChanges": {
+    "candidateChangedCount": 385,
+    "unaffectedCount": 150,
+    "changedBytesMatchAcrossConfigurations": true,
+    "producerCommandCount": 389
+  },
+  "restoration": {
+    "runtimeInputsExactlyPreCandidate": true,
+    "testTextMatchesHeadAfterEolNormalization": true,
+    "productionShaders535ExactlyPreCandidateEachConfiguration": true,
+    "restoredOriginalGpuChecks": 24,
+    "scope": "Restored runtime source and shader bytes plus fresh CPU/GPU checks; native image evidence for identical original source is cited from loaded-bind-pose, no new restored native frames claimed"
+  },
+  "primarySource": {
+    "title": "Advanced Soft Shadow Mapping Techniques",
+    "author": "Louis Bavoil, NVIDIA Developer Technology",
+    "url": "https://developer.download.nvidia.com/presentations/2008/GDC/GDC08_SoftShadowMapping.pdf",
+    "sha256": "8e54f773e3da69647f8c418fafddebd27e216cb4a17e65b8c3182c0efb07114d",
+    "bytes": 6267419,
+    "retrievedUtc": "2026-11-05T22:21:58.777209+00:00",
+    "pages": [
+      57,
+      58,
+      69
+    ],
+    "scope": "Primary source used for hierarchical min/max pruning rationale; buffer layout and shader implementation authored locally; no upstream code copied",
+    "response": {
+      "status": 200,
+      "contentType": "application/pdf"
+    }
+  },
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformance": "failed",
+  "canonicalPngArchive": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip",
+  "archiveMembers": {
+    "archive_shadow_hierarchy.py": "27d539eac49c1b6b03310d613764391d9229e9f23833b853e5293c2d7e3f87ec",
+    "capture_shadow_hierarchy.py": "0fa98247cbad534fea352d9a564d6a2009905987f5762c93880af97668d91c84",
+    "fix_shadow_hierarchy_shader_scope.py": "26608f8ab4c93cb3fd3e482b19709a5e12cca17b7f40c78467b4dbbce9d906d7",
+    "isolate_shadow_hierarchy.py": "35d7edba1c3bc022cb7cde9b7134a3700b57c80f3db8aa6fd2d1f71acaf790ac",
+    "measure_shadow_hierarchy.py": "1cb3c4ed50eeea8678fa33c39f5abc2eacc2240f8f7a70188e3adfe6dd23d1bd",
+    "prepare_shadow_hierarchy_checks.py": "5d4e421966f6be801c5d0145d82b804e763c923621894703feaa05e25c2a1d52",
+    "prepare_shadow_hierarchy_native.py": "8082ca1528f2d051bf8496d0dc2c8e0d256e00653726668d8beaaeee1459911d",
+    "prepare_shadow_hierarchy_restored.py": "a43df9cd194166aefea1b2993d123970e93e1e39196b86ed391c32826a1a1471",
+    "resume_shadow_hierarchy_restore.py": "d525570597e001574776cf1d933c769803c0ce63e880868d1d4cfc6b6e2a60d1",
+    "run_shadow_hierarchy_gpu_checks.py": "ec325d9f7a08e8adeb998868445055c6a45318cfa5855e0f18ec25009cb3cb2f",
+    "run_shadow_hierarchy_restored_gpu.py": "2a32ba2d0b0059688945c8d15095a304464b3c4a3141bac5710c6b7860f5b106",
+    "shadow-depth-hierarchy/build-driver.log": "18ff78fa74385c91955205ce0049d89448d8b3cac81b7f99a8c0cab73b877f81",
+    "shadow-depth-hierarchy/candidate-source-hashes.json": "342fc2d4aa1a2dacea2aa1a406c24b82d3930917f89f44a3bf297ddaf18f2a18",
+    "shadow-depth-hierarchy/engine-debug-build.json": "e1d7f4654e715edf74d23b02d6e8ec9de26edfc374db7b6f151f338b9cbd9f81",
+    "shadow-depth-hierarchy/engine-debug-build.log": "a67e6e492f9dfe2611ca6c5912ec66af9f20881267d26c0e5ba5378993d6bd1e",
+    "shadow-depth-hierarchy/engine-debug-checks-full.log": "567700c0abe816896091e4a73a8584282ee2aaaae91d603d81f676f1156e3817",
+    "shadow-depth-hierarchy/engine-debug-checks.json": "6a282fd6b3fc429ab6a82a2020e52734eeb07353fa90ef2ec96641d6835dc4b4",
+    "shadow-depth-hierarchy/engine-debug-checks.log": "52cbcfc8122e624e4bc94d3ffdf357c49c091cc2fe9189950675e91189f198d1",
+    "shadow-depth-hierarchy/engine-debug-checks.xml": "bbee4097e6931d62ce52430804054e5a38b7bf3dd5555ecbb6a977c2fabe6320",
+    "shadow-depth-hierarchy/engine-debug-provenance.json": "8d1e073d482927611341fcaed40865bc433b1f63b41c7cb3705e5d5c2c2ba0b3",
+    "shadow-depth-hierarchy/engine-debug-shader-changes.json": "372a1800203ad76f48222e04d21a3c39d637224a8ecbd4c64f4ad6d999a83423",
+    "shadow-depth-hierarchy/engine-release-build.json": "fa95aee4047344b571b8c56c710780b6a606f400b159b9f99f8c24f08c290cf1",
+    "shadow-depth-hierarchy/engine-release-build.log": "aa1e59b53085112c278f8106278baf20e35bb8eef7256397e51c96004946e325",
+    "shadow-depth-hierarchy/engine-release-checks-full.log": "78fb91ec667e05d394e3835118beac25adba51518d4c02f1fd7fe5fece141840",
+    "shadow-depth-hierarchy/engine-release-checks.json": "d1396c3890a05c37b12da5642c9cef37840e3ac87c5cf7501a40fef03a4f6eba",
+    "shadow-depth-hierarchy/engine-release-checks.log": "0ad3063f7b3c819a5861b6a8f1c26843b94d70b53486fe130a1a9841a013d73d",
+    "shadow-depth-hierarchy/engine-release-checks.xml": "c58e5119412973bcb96bfc45e6a33ad86af7b7d1843d032e72d56c7e09b4b5ed",
+    "shadow-depth-hierarchy/engine-release-provenance.json": "eb564dc3ee2c0e08db7e4d00e2cf9acc8006eff1bcbfd3d223f4edc7e470bb07",
+    "shadow-depth-hierarchy/engine-release-shader-changes.json": "372a1800203ad76f48222e04d21a3c39d637224a8ecbd4c64f4ad6d999a83423",
+    "shadow-depth-hierarchy/gpu/debug-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "shadow-depth-hierarchy/gpu/debug-intel-tests-full.log": "bf8db271afe5cc28af125ce1f3796e8c432f7f2eb4f8ebccf940bdac5a0ad585",
+    "shadow-depth-hierarchy/gpu/debug-intel-tests.log": "2672c6f454c2520d0f3485e7f5d9be6b5a6496301f4285722c3c0be5676316aa",
+    "shadow-depth-hierarchy/gpu/debug-intel-tests.xml": "da17023ddf9337f4d15e5abd3102d29c68967a4d3c8b10e9ef4fe743b50943d2",
+    "shadow-depth-hierarchy/gpu/debug-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "shadow-depth-hierarchy/gpu/debug-nvidia-tests-full.log": "a986072ddc9d4a29c3cd8596819018f6c86e9bfc2e385f44fc2cf22591e5d69f",
+    "shadow-depth-hierarchy/gpu/debug-nvidia-tests.log": "15565186d8de410eb52e63c2e6d547c1c47be27190c8066d37101269def6cf8f",
+    "shadow-depth-hierarchy/gpu/debug-nvidia-tests.xml": "359eccdb277eeeb68a988f43fb3509626a3127fcd7601bc00a5f8cbf7f47e64d",
+    "shadow-depth-hierarchy/gpu/gpu-checks.json": "bccb01ce89ee895ac5739e01882d5538296128afde8d5741d3dee4f42b9fd592",
+    "shadow-depth-hierarchy/gpu/release-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "shadow-depth-hierarchy/gpu/release-intel-tests-full.log": "244c80bd4ceba5096f94d8eb838650de841ba106a304d9c4ba3b065d943f6701",
+    "shadow-depth-hierarchy/gpu/release-intel-tests.log": "1fed9e8210979e4b0ccecaaa50e11794799ad05873e7302f87e8cd1c37cd7c94",
+    "shadow-depth-hierarchy/gpu/release-intel-tests.xml": "71e0a7f3a92d886066569b4f01e5af7fd19f25e12eb7f2d444c9f95024ea4a91",
+    "shadow-depth-hierarchy/gpu/release-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "shadow-depth-hierarchy/gpu/release-nvidia-tests-full.log": "2a192f69b16bf6f7f213793de7bbf568df38e173cd935cb56d2dfe7e57247fc2",
+    "shadow-depth-hierarchy/gpu/release-nvidia-tests.log": "90c1721d9f8cbcdd1259dfe6a6dad8cf50b26368e904cd08f1ba32d85d40eaf1",
+    "shadow-depth-hierarchy/gpu/release-nvidia-tests.xml": "6b087fe66d7a0640df501bf1f7285bbd3890a79b153f8079f22ef923d1d515df",
+    "shadow-depth-hierarchy/gpu/startup-environment.json": "814f682229d12d29aafabe0cc4665351940c3926e6fbbb064f3a2b1dc96a5f7b",
+    "shadow-depth-hierarchy/gpu-driver.log": "7d93b5914a03be208e6f45d0d1da44bf43e0c7aae44b9060679154f67fda4259",
+    "shadow-depth-hierarchy/image/bind-pose-workload.json": "4e8211c617939f54bac403c4d5f7daddb94feaf002400bd2fd29b7647ed871c3",
+    "shadow-depth-hierarchy/image/command.json": "0e88a13cad4bba0fb81e2172909abdb71fc9830e9487f979fdea0e1574c87a97",
+    "shadow-depth-hierarchy/image/frames/capture_manifest.json": "fc73566c6595994bf290f019f925d9758d8cb5a1631953b64ec3a9dceedd8ebf",
+    "shadow-depth-hierarchy/image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "shadow-depth-hierarchy/image/frozen-inputs.json": "051af1558257966061c8ee6689935ca00b8c5b524454bd9ad38c7ce5463e8889",
+    "shadow-depth-hierarchy/image/results.json": "14c945f0ddb1d69a4542569285aa10af7d7c8f7a5d4dc875d2b381dee3260c6a",
+    "shadow-depth-hierarchy/image/runtime.json": "2857578699b76f64112e08bcdbdd9226413e6f6366683a94107ae22099cf70f5",
+    "shadow-depth-hierarchy/image/stderr.log": "22226616c61520e68b6525c5544c257feae73df673d618bdf787a394efe0c11a",
+    "shadow-depth-hierarchy/image/stdout.log": "81390b08cb6b0a0bd61f5ad4b3711b09ce58a0bd8148e8a54de4de8ff5283595",
+    "shadow-depth-hierarchy/image/workload.json": "914510df2c090eb8efc35d59fa5bddb29a5956b573040a1d3e0a90b9b2cbe634",
+    "shadow-depth-hierarchy/image-driver.log": "7d99d3fb16b6553ec7b615b5962486adf320e8dccd8d2a8aa2b4fbc80d3fbda8",
+    "shadow-depth-hierarchy/initial-output-name-scope-failure.log": "8b77462264bf3376f9f029c9b83975ed0efc86d31c556ab1f1bcd11ac76261bf",
+    "shadow-depth-hierarchy/initial-release-build.log": "ab7199f8d6bae1838ae4a89817669c43510445d4d576160a6cbd9dc5452ab69d",
+    "shadow-depth-hierarchy/isolated-candidate/candidate-debug-provenance.json": "8d1e073d482927611341fcaed40865bc433b1f63b41c7cb3705e5d5c2c2ba0b3",
+    "shadow-depth-hierarchy/isolated-candidate/candidate-release-provenance.json": "eb564dc3ee2c0e08db7e4d00e2cf9acc8006eff1bcbfd3d223f4edc7e470bb07",
+    "shadow-depth-hierarchy/isolated-candidate/candidate.diff": "f413bda9788968cf3b79d749657734806e74d13486cbcf3e9fd112c8c3234cbb",
+    "shadow-depth-hierarchy/isolated-candidate/runtime-products.json": "ebadc008ad677ce0b2cf6425372f3c614d0b217630ab42074c064e64fafdb3ce",
+    "shadow-depth-hierarchy/isolated-candidate/source/CMakeLists.txt": "11825676142066b85064e57cee0d45be3e4aa60d83f7e8b8ff94f458bf2bda79",
+    "shadow-depth-hierarchy/isolated-candidate/source/shaders/mesh.frag": "2895a5dabe9ddaa1c527d1fa48103436a99a55f7a3e3994badff7f385b8f8814",
+    "shadow-depth-hierarchy/isolated-candidate/source/shaders/shadow_bounds.comp": "b138bcbce7e70556440e6a70d6ebdfade1063200074eeef2967baff65b8ddc4c",
+    "shadow-depth-hierarchy/isolated-candidate/source/shaders/shadow_bounds_layout.glsl": "99e4482d401ae78a554ded8e9ac6abfdcb40a03f9af3082105915c18df237738",
+    "shadow-depth-hierarchy/isolated-candidate/source/src/render/ShadowTileBounds.hpp": "aa7529f5133af95ba9b0a37cc5be93c3cb4fd93fe88bcbe8bfb878f2a3ecb239",
+    "shadow-depth-hierarchy/isolated-candidate/source/tests/ObjectShadowAtlasTests.cpp": "dc2d0ab6284b277871fb7aad849f4eff47fadd29884a247089d3eea2a11777b6",
+    "shadow-depth-hierarchy/isolated-candidate/source/tests/ShadowTileBoundsGpuTests.cpp": "debec182bb11c70cee9bbf196ae30096c0bcca85e1dfbc791aa9fdefd14eb51c",
+    "shadow-depth-hierarchy/missing-interface-red.log": "9017c088e19b95c069f956c3b7a7655016007a29a1f707c0053c30a5ce6bb3ac",
+    "shadow-depth-hierarchy/performance/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "shadow-depth-hierarchy/performance/environment.json": "d2ed2562a290d82f5fa33bae50fd49a5e780cfb83d7abc4fd67eb070cb96eb84",
+    "shadow-depth-hierarchy/performance/frozen-inputs.json": "cdf16c070518f8f6171cd656c6e15b3ad973fd9aefaa57c36d42da9a3038bd2e",
+    "shadow-depth-hierarchy/performance/memory.json": "4bd5db6757c3fa77be9c2b877681a6c0c659add2927906bd57ede265767ce058",
+    "shadow-depth-hierarchy/performance/results.json": "aa36ed7a57792adac2dc1d0b5e0d1e3493fdee7f3784a5f2be0aac5ee721885e",
+    "shadow-depth-hierarchy/performance/runtime.json": "b081886ff0f9e2e7acc57eb31cb1e633e611863a949b22ffdc57774a29dc43a4",
+    "shadow-depth-hierarchy/performance/stderr.log": "c2e72b272fa2452e5c4d510c73e1a5effc0662c2893f9cc737c1611307a41f1d",
+    "shadow-depth-hierarchy/performance/stdout.log": "cecb97bcc4c1c0a4ede24f778e6376156967aa8565dc7140fd5e5bcf5898a3ab",
+    "shadow-depth-hierarchy/performance/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "shadow-depth-hierarchy/performance/task.json": "47d9009b9d2bb98b5891e6799c5ea214fc42e2fc0ece46a06862e9ed3c6bbbf6",
+    "shadow-depth-hierarchy/performance/timing.csv": "47e005faab1f5badae1c56fe0724e7aa9e8a531695c7cf5d7acb047e12dee61b",
+    "shadow-depth-hierarchy/performance/timing.json": "7385d048d5b55d0b2f268284bb45e7f40435bfa89131927b29300e47fa3bec8e",
+    "shadow-depth-hierarchy/performance/workload.json": "1a55b90c0790a84b0651d310dcc7f67e04c679ffcffba6ba6b823055348ca733",
+    "shadow-depth-hierarchy/performance-driver.log": "8d1ce4cd599f72fee076f47b332ee6a35ed92a0cde40535faa558a8277ae95b8",
+    "shadow-depth-hierarchy/research/source.json": "324519df417979f5ffce4a84f3968ac052d5ffa86f9a02b979daeec97f5fc322",
+    "shadow-depth-hierarchy/restore-source-initial.log": "28668ecfe1b28fe7d516491769a74b9bcf326f2eac35e898b5b8598a83f26df4",
+    "shadow-depth-hierarchy/restore-source.json": "4841497fc687a3514831ebe0b16cd9cc50ddb2b514523f9d7ff759bfa7949c57",
+    "shadow-depth-hierarchy/restore-source.log": "f8206948fc597805bab6dc3789668d98b09f45892f8688d1ca9b2ea10c42cf2f",
+    "shadow-depth-hierarchy/restore-test-scope-failure.log": "703832cde55b88c2993dd9e1c783d7a93b95a87770468decd8f28cac8fab7498",
+    "shadow-depth-hierarchy/restored/build-driver.log": "21d81c9da393b9cbe2af399df7f4bb254db3d0e3f3d60231b3ad403143b95fa7",
+    "shadow-depth-hierarchy/restored/engine-debug-build.json": "f247c77ad764731ab5704aa5d99f0ae881d7964971398954d7d658f0bb7c5a68",
+    "shadow-depth-hierarchy/restored/engine-debug-build.log": "a9e2cbeb5a70d5f0a433a807ea3d501145f4fb7f2d8515f3461e213777df2942",
+    "shadow-depth-hierarchy/restored/engine-debug-checks-full.log": "b80b63c72a8e44dbe4d734a34adae85d33cb5a884c9e01aaee665ee5032fcd57",
+    "shadow-depth-hierarchy/restored/engine-debug-checks.json": "9565312811649283b12b27a1c2485a5effccde603f5bef3584eda7d8c9dfd2d2",
+    "shadow-depth-hierarchy/restored/engine-debug-checks.log": "28ff35f2a75d482ba33a705b5458ea033297663682870bd8a9219702eaa125c4",
+    "shadow-depth-hierarchy/restored/engine-debug-checks.xml": "668442da925c0ab34a5852dc235a43ebc372d5fed4804244eb7c61674798d885",
+    "shadow-depth-hierarchy/restored/engine-debug-provenance.json": "b77f555f5433dcd71e63ae61eb658505f89053a49e5163d79533a16ee4a3e8c6",
+    "shadow-depth-hierarchy/restored/engine-release-build.json": "7624fdb74a3f1c0f442ef03cf3596c94d18d1cb651a216f6343e3d77c2de76ce",
+    "shadow-depth-hierarchy/restored/engine-release-build.log": "5c0e03e12e0c72b262e21913d18252927779f4080be3b98fbfb9183fd092e146",
+    "shadow-depth-hierarchy/restored/engine-release-checks-full.log": "415c153aabcc7e674106a7f4e635948839614fc4dbbb0fc13e482854d26dcb4c",
+    "shadow-depth-hierarchy/restored/engine-release-checks.json": "df70de85b752ab9ab7276660076b281613834fce5d011d5a16e6cd1f8c732171",
+    "shadow-depth-hierarchy/restored/engine-release-checks.log": "b13c87bde651b6576df7c6775599869d4865f35f846105f73997b8bf2b7d0fa9",
+    "shadow-depth-hierarchy/restored/engine-release-checks.xml": "0f14646279341c856601cff3ecd828ef8556cc94ac86412295309876ecefbaf9",
+    "shadow-depth-hierarchy/restored/engine-release-provenance.json": "36569f029c41906f2427526e7108b5685059bd7beccf6143e4093c1c97eb06d8",
+    "shadow-depth-hierarchy/restored/gpu/debug-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "shadow-depth-hierarchy/restored/gpu/debug-intel-tests-full.log": "fb5eff1b41b92a482d806c0b7c98f5d67c2ae5fb60562dcee2651d4a7186a6f4",
+    "shadow-depth-hierarchy/restored/gpu/debug-intel-tests.log": "c8c8f53790d9dfb4a03e98e5832c67c5a426983a9f8bd952fbf97ae76a2b284b",
+    "shadow-depth-hierarchy/restored/gpu/debug-intel-tests.xml": "de80c1446af9cb523269ab45c0a47f3f3a4cddd553d751e680d0ba6d161506a4",
+    "shadow-depth-hierarchy/restored/gpu/debug-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "shadow-depth-hierarchy/restored/gpu/debug-nvidia-tests-full.log": "8c6625d31ce5a10fbaa0e1bb12cc08006e113a55ce4fff35dd937eade887c8d5",
+    "shadow-depth-hierarchy/restored/gpu/debug-nvidia-tests.log": "568590f0b66a62d989514aa6137a17962731de736a107f0966f1f1dcfd17d7e8",
+    "shadow-depth-hierarchy/restored/gpu/debug-nvidia-tests.xml": "18e03486ecf5e3c7ab3f0caf8745f70da359ffab322d4ae4f4acd95ec362fa38",
+    "shadow-depth-hierarchy/restored/gpu/gpu-checks.json": "279474a7644698ee5b0def9f1139e702770640058520f682159887e6eba931e5",
+    "shadow-depth-hierarchy/restored/gpu/release-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "shadow-depth-hierarchy/restored/gpu/release-intel-tests-full.log": "d889a9d03aa518574237449087e486d6f3b8128a54ca04342170a50cf6101a8f",
+    "shadow-depth-hierarchy/restored/gpu/release-intel-tests.log": "a5cdf4bff6e8997f0f00b09fecd201083b7f794a3a70685d6085a7d6f6bd1c46",
+    "shadow-depth-hierarchy/restored/gpu/release-intel-tests.xml": "6e5ef1af0bc7bee1feb7afce7049c547166adffb3c5cb3cb04dfef9b93a0ea85",
+    "shadow-depth-hierarchy/restored/gpu/release-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "shadow-depth-hierarchy/restored/gpu/release-nvidia-tests-full.log": "3c6e3bb4489aea993f976bf1df8357b1146976fc8337417dede240523ebb662c",
+    "shadow-depth-hierarchy/restored/gpu/release-nvidia-tests.log": "fc863593e749740be81cc2c329a457080b0bf7017c98051a7406fa9d203b8c6d",
+    "shadow-depth-hierarchy/restored/gpu/release-nvidia-tests.xml": "b94370998d1a9dca50c5d4afe5aea9d684e53cc59a37cc0e633b63215034f62c",
+    "shadow-depth-hierarchy/restored/gpu/startup-environment.json": "42d842677c598c34bf359f0a83728685fe36a79c1bb5fd1148c82b1bd4866896",
+    "shadow-depth-hierarchy/restored/gpu-driver.log": "ff115892c5191adeb8432a3c5098d62056c5a52eeac3e7324412093bc30f0c4b",
+    "shadow-depth-hierarchy/restored/selected.json": "d679fee01f185a32bfdf1c039bb9ef6b147ae74292f672f6b778e7e3bfa93076",
+    "shadow-depth-hierarchy/selected.json": "d679fee01f185a32bfdf1c039bb9ef6b147ae74292f672f6b778e7e3bfa93076",
+    "shadow-depth-hierarchy/shader-source-scope.json": "7eb94a3b334082c833879b870d7be07cdaa769ceaf72ff50da3b5a15a002cb16",
+    "validate_shadow_hierarchy.py": "64c19217b66a0d1a9b34e63306f37e5b7cd960f15a18129c4dc990b2a6d33985",
+    "validate_shadow_hierarchy_restored.py": "14d5ed119b709a632a609863295f78dce7bf70f6d1eb50b6261b206cbd995eea"
+  },
+  "archiveSha256": "ffc8c6d55db946218826d3ccdd9af7aca2345fd8428c9f71ce77fb65b74efd0c"
+}

@@ -110,6 +110,11 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 实际末帧有 860 个实例按值复制绑定姿态。
 短时 CPU 工作 P95 为 20.68 毫秒，GPU 为 33.77 毫秒。
 软件热降频及热余量不足触发环境失败，整帧收益资格未成立。
+阴影[深度范围分层](../acceptance/nr/shadow-depth-hierarchy.md)保留为隔离候选。
+候选通过两配置各二十项 CPU、二十四项双设备 GPU 及四帧冻结对照。
+单候选 GPU 帧均值为 32.21 毫秒，热状态未通过。
+正式运行输入按受检单层范围的来源核对。
+接续 CPU 资源身份表的重复构建范围。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
