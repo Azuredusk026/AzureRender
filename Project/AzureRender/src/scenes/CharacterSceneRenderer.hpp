@@ -1,3 +1,5 @@
+#include "render/StaticSkinningOutputCache.hpp"
+#include <mutex>
 #include "assets/TextureMipChain.hpp"
 #pragma once
 #include "render/IrradianceVolume.hpp"
@@ -463,6 +465,14 @@ private:
     std::uint32_t instanceCapacity_ = 0;
     std::uint32_t qaInstanceCount_ = 1;
     std::vector<rhi::GpuBuffer> skinnedVertexBuffers_;
+    struct SkinningOutputTicket {std::uint32_t slot=0;std::uint64_t generation=0;};
+    std::array<StaticSkinningOutputCache,kMaxFramesInFlight> staticSkinningOutputs_;
+    SkinningOutputTicket skinningOutputTicket_{};
+    std::mutex skinningRecordedMutex_;
+    std::vector<SkinningOutputTicket> recordedSkinningOutputs_;
+    void noteSkinningOutputRecorded(SkinningOutputTicket ticket);
+    void commitSkinningOutputs(std::uint64_t submission) noexcept;
+    void abandonSkinningOutputs() noexcept;
     VkDescriptorSetLayout skinningDescriptorSetLayout_ = VK_NULL_HANDLE;
     VkDescriptorPool skinningDescriptorPool_ = VK_NULL_HANDLE;
     VkPipelineLayout skinningPipelineLayout_ = VK_NULL_HANDLE;

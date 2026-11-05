@@ -1,3 +1,4 @@
+#include "render/StaticSkinningOutputCache.hpp"
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
 #include "resources/BinaryFile.hpp"
@@ -110,6 +111,45 @@ int main(int argc,char** argv) try {
         ++barrierCase;
     }
     }
+    // Reuse the computed, normalized vertex words; source attributes are not
+    // interchangeable with the compute output even for a static producer.
+    number(3,.3F);number(4,.7F);number(5,.2F);number(6,.8F);number(7,.3F);number(8,.1F);
+    std::memcpy(input.mapped,source.data(),sizeof(source));host.allocator.flush(input,0,input.size);
+    std::memset(output.mapped,0xCD,static_cast<std::size_t>(output.size));host.allocator.flush(output,0,output.size);
+    StaticSkinningOutputCache cache;std::vector<std::uint32_t> staticReference;
+    const std::array<unsigned,7> expectedDispatches{2,0,0,2,2,2,0};
+    for(unsigned step=0;step<expectedDispatches.size();++step){
+        if(step==2)cache.invalidate();
+        joints[0][12]=step==4?30.F:10.F;
+        std::memcpy(matrices.mapped,joints.data(),sizeof(joints));host.allocator.flush(matrices,0,matrices.size);
+        cache.begin(2);const auto generation=cache.generation();std::vector<unsigned> writes;
+        for(unsigned slice=0;slice<2;++slice)
+            if(cache.prepareRange(slice,{0,1+slice,1},step!=4,true))writes.push_back(slice);
+        if(step==2){cache.cancel();continue;}
+        if(writes.size()!=expectedDispatches[step])throw std::runtime_error("Static output cache scheduled the wrong producers");
+        host.submit([&](rhi::ICommandRecorder& recorder,VkCommandBuffer){
+            for(const auto* buffer:buffers){
+                recorder.bufferBarrier({buffer->buffer,0,buffer->size,
+                    VK_PIPELINE_STAGE_HOST_BIT|VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                    VK_ACCESS_HOST_WRITE_BIT|VK_ACCESS_SHADER_WRITE_BIT,
+                    static_cast<VkAccessFlags>(buffer==&output?VK_ACCESS_SHADER_WRITE_BIT:VK_ACCESS_SHADER_READ_BIT)});
+            }
+            recorder.bindComputePipeline(pipeline);recorder.bindComputeDescriptorSet(layout,set);
+            for(unsigned slice:writes){
+                SkinningBatch parameters{1,slice,{0,0},1+slice,1,1};
+                recorder.pushConstants(layout,VK_SHADER_STAGE_COMPUTE_BIT,0,&parameters,sizeof(parameters));recorder.dispatch(1,1,1);
+            }
+            recorder.bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+                VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+        });
+        if(!cache.commit(generation,100+step))throw std::runtime_error("Actual GPU producer submission did not commit");
+        host.allocator.invalidate(output,0,output.size);const auto* words=static_cast<const std::uint32_t*>(output.mapped);
+        if(step==0)staticReference.assign(words,words+81);
+        const bool same=std::memcmp(staticReference.data(),words,output.size)==0;
+        if((step==4)==same)throw std::runtime_error("Cached/dynamic/rebuilt deformation output bytes differ from contract");
+        for(unsigned i=0;i<27;++i)if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Static cache overwrote another output range");
+    }
+    std::cout<<"Static compute content: cold/warm, cancelled producer, dynamic overwrite and rebuild, normalized81words byte exact\n";
     cleanup.reset();
     if(host.errors || host.allocator.statistics().liveBuffers || host.allocator.statistics().liveImages)
         throw std::runtime_error("Skinning validation or release failed");

@@ -683,6 +683,7 @@ void CharacterSceneRenderer::ensureInstanceCapacity() {
     bool changed=false;
     for(unsigned i=0;i<slots.size();++i)if(candidates[i].buffer){
         allocator_->destroyBuffer(*slots[i]);*slots[i]=candidates[i];changed=true;
+        if(i==1)staticSkinningOutputs_.at(currentFrame_).invalidate();
     }
     if(!changed)return;
     const auto count=bindlessTextures_?1:totalMaterialCount();
@@ -706,6 +707,10 @@ void CharacterSceneRenderer::prepareInstancePoses() {
     constexpr float kPi = 3.14159265358979323846F;
     instancePoses_.clear();
     skinningDispatches_.clear();
+    if(computeSkinningEnabled_){
+        auto& cache=staticSkinningOutputs_.at(currentFrame_);cache.begin(sceneInstances_.size());
+        skinningOutputTicket_={static_cast<std::uint32_t>(currentFrame_),cache.generation()};
+    }
     std::uint32_t jointBase = 0, vertexBase = 0, morphWeightBase=0;
     for (auto& instance : sceneInstances_) {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey-1]->asset;
@@ -751,7 +756,15 @@ void CharacterSceneRenderer::prepareInstancePoses() {
             shadowCascadeFrusta_.end(), [&](const scene::FrustumPlanes& frustum) {
                 return scene::boundsInsideFrustum(frustum, worldBounds.minimum, worldBounds.maximum);
             });
-        if (!cullingEnabled_ || requiredByMain || requiredByShadow) {
+        const bool consumed=!cullingEnabled_||requiredByMain||requiredByShadow;
+        const bool reusable=!mesh.hasSkin&&mesh.animations.empty()&&mesh.morphRanges.empty()
+            &&animation==animationFrames_.end()&&morph[0]==0.F&&morph[1]==0.F
+            &&!std::signbit(morph[0])&&!std::signbit(morph[1]);
+        const bool produce=computeSkinningEnabled_
+            ?staticSkinningOutputs_.at(currentFrame_).prepareRange(instance.sourceIndex,
+                {instance.meshKey,vertexBase,static_cast<std::uint32_t>(mesh.vertices.size())},reusable,consumed)
+            :consumed;
+        if (produce) {
             const SkinningBatch slice{static_cast<std::uint32_t>(mesh.vertices.size()),jointBase,morph,
                 vertexBase,static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size()),1,
                 morphGpuMeshes_.at(instance.meshKey).tableBase,morphWeightBase,morphGpuMeshes_.at(instance.meshKey).weightCount};
@@ -1127,10 +1140,11 @@ void CharacterSceneRenderer::registerPasses(
     std::optional<RenderGraph::PassId> skinningPass;
     if (computeSkinningEnabled_) {
         skinningPass = graph.addCommandPass("character-skinning",
-            [this, frozenContext, dispatches = skinningDispatches_,
+            [this, frozenContext, dispatches = skinningDispatches_,ticket=skinningOutputTicket_,
              meshCount = meshResourceCount_](rhi::ICommandRecorder& commands) {
                 for (std::uint32_t meshKey = 0; meshKey < meshCount; ++meshKey)
                     recordComputeSkinningMesh(*frozenContext, meshKey, &commands, &dispatches);
+                noteSkinningOutputRecorded(ticket);
             }, true);
         graph.use(*skinningPass, jointResource, RenderGraphUsage::Storage, false);
         graph.use(*skinningPass,morphTargetResource,RenderGraphUsage::Storage,false);
@@ -1625,6 +1639,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
         ? std::string()
         : asset_.animations[animationIndex_].name;
     std::size_t triangles=0,skinned=0,transparent=0;
+    std::uint64_t preparedSkinningVertices=0;
+    if(computeSkinningEnabled_)for(const auto& dispatch:skinningDispatches_)
+        preparedSkinningVertices+=std::uint64_t(dispatch.parameters.vertexCount)*dispatch.parameters.instanceCount;
     const auto& instances=instanceSnapshot_?instanceSnapshot_->instances:sceneInstances_;
     for(const auto& instance:instances){
         const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
@@ -1633,6 +1650,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
             &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"computeSkinningPreparedDispatches\": " << (computeSkinningEnabled_?skinningDispatches_.size():0) << ",\n"
+         << "  \"computeSkinningPreparedVertices\": " << preparedSkinningVertices << ",\n"
+         << "  \"staticSkinningReusedInstances\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedCount():0) << ",\n"
+         << "  \"staticSkinningReusedVertices\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedVertexCount():0) << ",\n"
          << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
          << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
@@ -2400,6 +2421,7 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
                 false);
         }
     };
+    for(auto& cache:staticSkinningOutputs_)cache.reset();
     createOutputBuffers(static_cast<VkDeviceSize>(vertexCapacity_) * sizeof(AssetVertex), skinnedVertexBuffers_);
 
     skinningDescriptorSetLayout_ = rhi_->createDescriptorSetLayout({
@@ -2500,6 +2522,7 @@ void CharacterSceneRenderer::recordComputeSkinning(
     const auto& output=skinnedVertexBuffers_[context.currentFrame];
     context.commands->bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
         VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    noteSkinningOutputRecorded(skinningOutputTicket_);
 }
 
 void CharacterSceneRenderer::createUniformBuffers() {
@@ -2888,6 +2911,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
 }
 
 #include "CharacterOutlinePass.inc"
+#include "CharacterSkinningCache.inc"
 #include "CharacterMotionPass.inc"
 #include "CharacterMaterialSampling.inc"
 #include "CharacterSurfaceOverlays.inc"
@@ -3807,6 +3831,7 @@ void CharacterSceneRenderer::destroyResources() {
         allocator_->destroyBuffer(buffer);
     }
     skinnedVertexBuffers_.clear();
+    abandonSkinningOutputs();for(auto& cache:staticSkinningOutputs_)cache.reset();
     allocator_->destroyBuffer(indexBuffer_);
     allocator_->destroyBuffer(vertexBuffer_);
     allocator_->destroyBuffer(vertexColorBuffer_);allocator_->destroyBuffer(whiteVertexColorBuffer_);

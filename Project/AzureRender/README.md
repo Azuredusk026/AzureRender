@@ -22,6 +22,8 @@
 本轮短时 GPU 帧 P95 为 33.93 毫秒，正式预算继续待验收。
 相机[物化输入共享](docs/acceptance/nr/materialized-camera-input.md)通过两配置各十四项及原生四帧检查。
 短时成对 CPU 均值降低约百分之 6.06，工作 P95 为 21.79 毫秒。
+[静态变形输出复用](docs/acceptance/nr/static-skinning-output.md)通过双设备、生命周期及原生四帧检查。
+实际帧复用 742,213 个顶点请求，完整帧预算与热状态继续未通过。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。

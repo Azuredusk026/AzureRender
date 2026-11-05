@@ -37,6 +37,7 @@ void CharacterSceneRenderer::initializeMotion(const RenderContext& context){
         static_cast<std::uint32_t>(totalMaterialCount()),static_cast<std::uint32_t>(kMaxFramesInFlight),context.faceCullingEnabled,context.depthTestEnabled);
 }
 void CharacterSceneRenderer::onFrameSubmitted(std::uint64_t submission) noexcept{
+    commitSkinningOutputs(submission);
     if(temporalView_.commit(submission)){
         motionPoses_.commit(submission);
         if(reflectionPendingSlot_&&submission>reflectionHistorySubmission_){
@@ -48,6 +49,7 @@ void CharacterSceneRenderer::onFrameSubmitted(std::uint64_t submission) noexcept
     state_.temporalFrame=temporalView_.committed()?&*temporalView_.committed():nullptr;
 }
 void CharacterSceneRenderer::onFrameAbandoned() noexcept{
+    abandonSkinningOutputs();
     temporalView_.cancel();motionPoses_.cancel();reflectionPendingSlot_.reset();reflectionPendingView_.reset();
     state_.temporalFrame=temporalView_.committed()?&*temporalView_.committed():nullptr;
 }

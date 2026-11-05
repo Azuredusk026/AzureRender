@@ -1,3 +1,4 @@
+#include "render/StaticSkinningOutputCache.hpp"
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
 #include <iostream>
@@ -6,6 +7,40 @@
 using namespace azurerender;
 void check(bool condition, const char* reason) { if (!condition) throw std::runtime_error(reason); }
 int main() { try {
+    {
+        StaticSkinningOutputCache cache;
+        const StaticSkinningRange a{1,0,64},b{2,64,32};
+        cache.begin(2);const auto first=cache.generation();
+        check(cache.prepareRange(0,a,true,true),"Cold static output requires production");
+        check(!cache.prepareRange(1,b,true,false),"Invisible cold output remains unproduced");
+        check(cache.commit(first,1),"Successfully submitted producer can publish content");
+        cache.begin(2);
+        check(!cache.prepareRange(0,a,true,true),"Submitted static output reuses contents");
+        check(cache.prepareRange(1,b,true,true),"Culled output cannot inherit another range validity");
+        check(cache.reusedCount()==1&&cache.reusedVertexCount()==64,"Reuse metadata counts only consumed valid ranges");
+        cache.cancel();cache.begin(2);
+        check(cache.prepareRange(1,b,true,true),"Cancelled production stays cold");
+        check(!cache.prepareRange(0,a,true,true),"Cancellation preserves prior valid content");
+        check(cache.commit(cache.generation(),2),"Fresh producer submission succeeds");
+        cache.begin(2);check(cache.prepareRange(0,a,false,true),"Dynamic output must always produce");
+        cache.cancel();cache.begin(2);
+        check(cache.prepareRange(0,a,true,true),"Dynamic overwrite conservatively invalidates static content");
+        check(cache.commit(cache.generation(),3),"Rebuilt static content commits");
+        cache.begin(2);auto changed=a;changed.meshKey=3;
+        check(cache.prepareRange(0,changed,true,true),"Mesh identity invalidates equal output addresses");
+        const auto obsolete=cache.generation();cache.begin(2);
+        check(!cache.commit(obsolete,4),"Old preparation cannot publish current contents");
+        cache.begin(2);check(cache.prepareRange(1,b,true,true),"Old graph conflict invalidates contents conservatively");
+        check(cache.commit(cache.generation(),5),"New producer after conflict succeeds");
+        cache.invalidate();cache.begin(2);
+        check(cache.prepareRange(1,b,true,true),"Buffer replacement invalidates even reused addresses");
+        check(!cache.commit(cache.generation(),5),"Duplicate submission cannot publish pending contents");
+        cache.begin(2);check(cache.prepareRange(1,b,true,true),"Rejected submission remains cold");
+        cache.reset();cache.begin(0);check(cache.commit(cache.generation(),1),"New lifecycle accepts an empty producer");
+        bool rejected=false;try{cache.prepareRange(0,a,true,true);}catch(const std::out_of_range&){rejected=true;}
+        check(rejected,"Unknown range index rejects");
+    }
+    std::cout<<"Static output content lifecycle: identity, commit, cancel, overwrite, stale preparation and reset passed\n";
     LoadedAsset asset;asset.vertices.resize(1);asset.nodes.resize(1);
     MorphTargetRange range;range.node=0;range.vertexCount=1;range.targets.resize(3);
     range.targets[2].positions={{{2,3,4}}};range.targets[2].normals={{{1,0,0}}};range.targets[2].tangents={{{0,1,0}}};asset.morphRanges={range};

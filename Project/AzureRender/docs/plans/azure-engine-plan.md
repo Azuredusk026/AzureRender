@@ -93,7 +93,12 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 私有[阶段成本](../acceptance/nr/cpu-stage-cost.md)定位到实例准备及透明排序。
 透明[世界坐标候选](../acceptance/nr/transparent-world-position.md)通过四帧兼容，成本比较受热状态限制。
 生产源码及代码段恢复为候选前字节，两配置各十二项回归通过。
-接续静态变形输出复用的内容有效性与生命周期验证。
+[静态变形输出复用](../acceptance/nr/static-skinning-output.md)通过两配置各十四项 CPU 检查。
+十二项双设备 GPU 检查及原生四帧冻结对照通过。
+实际帧复用 742,213 个顶点请求，动态输入继续生成。
+短时 CPU 工作 P95 为 21.74 毫秒，GPU 帧为 35.09 毫秒。
+单候选计时的热状态未通过，整帧因果收益资格未成立。
+接续实例准备的 CPU 子阶段定位。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
