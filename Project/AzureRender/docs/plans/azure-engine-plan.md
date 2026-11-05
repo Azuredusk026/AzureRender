@@ -47,6 +47,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 管线复用为[未接入候选](2026-11-05-pipeline-reuse.md)。
 生产构建保持受检实现，原十秒预算继续有效。
 
+相机精度的[单变量分项](../acceptance/nr/outline-snapshot-order.md)完成。
+私有候选仍有 1,057 个头发像素超出一字节。
+生产接口保持受检基线，下一单元核验场景反射及间接照明。
+
 材质[照明接收](../acceptance/nr/material-lighting-reception.md)通过两配置公共回归。
 匹配输入的三十六个不透明区域均通过静态门槛。
 原冻结独立对照的服饰二、五仍有失败项。

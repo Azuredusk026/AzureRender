@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-complete-original-byte-gate-failed",
+  "visualAcceptance": "failed-user-review",
+  "sourceBase": "cd8d95d",
+  "workflowCommit": "b968e12",
+  "productionChanged": false,
+  "privateChangedPrograms": 26,
+  "productionProgramsUnchanged": 535,
+  "metrics": {
+    "baseline": [
+      {
+        "name": "source-hair-visible",
+        "pixels": 17017,
+        "ssim": 0.9901299028807041,
+        "medianLuminanceRelativeError": 0.0066986347459679985,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 215,
+        "maximumByteError": 90.0,
+        "meanMaximumByteError": 0.8046659223129812
+      },
+      {
+        "name": "hair-opaque-owner",
+        "pixels": 16459,
+        "ssim": 0.9905399273891877,
+        "medianLuminanceRelativeError": 0.00800284966464992,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 72,
+        "maximumByteError": 6.0,
+        "meanMaximumByteError": 0.6358831034692266
+      },
+      {
+        "name": "hair-complete-stages",
+        "pixels": 20361,
+        "ssim": 0.9889305404056262,
+        "medianLuminanceRelativeError": 0.005165617227883023,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 1059,
+        "maximumByteError": 108.0,
+        "meanMaximumByteError": 1.0455773292077992
+      },
+      {
+        "name": "hair-outline",
+        "pixels": 2832,
+        "ssim": 0.9887400074318425,
+        "medianLuminanceRelativeError": 0.010298226327711284,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 660,
+        "maximumByteError": 108.0,
+        "meanMaximumByteError": 1.8697033898305084
+      },
+      {
+        "name": "hair-front-blend",
+        "pixels": 725,
+        "ssim": 0.9631629221486834,
+        "medianLuminanceRelativeError": 0.008207790365465054,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 156,
+        "maximumByteError": 43.0,
+        "meanMaximumByteError": 3.300689655172414
+      },
+      {
+        "name": "hair-back-blend",
+        "pixels": 236,
+        "ssim": 0.9925574983044438,
+        "medianLuminanceRelativeError": 0.017686263544832593,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 63,
+        "maximumByteError": 55.0,
+        "meanMaximumByteError": 2.059322033898305
+      }
+    ],
+    "captured-matrix": [
+      {
+        "name": "source-hair-visible",
+        "pixels": 17017,
+        "ssim": 0.9901569573826478,
+        "medianLuminanceRelativeError": 0.0066986347459679985,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 213,
+        "maximumByteError": 90.0,
+        "meanMaximumByteError": 0.804607157548334
+      },
+      {
+        "name": "hair-opaque-owner",
+        "pixels": 16459,
+        "ssim": 0.9905320211107456,
+        "medianLuminanceRelativeError": 0.00800284966464992,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 70,
+        "maximumByteError": 6.0,
+        "meanMaximumByteError": 0.6358223464366001
+      },
+      {
+        "name": "hair-complete-stages",
+        "pixels": 20361,
+        "ssim": 0.9889741573396053,
+        "medianLuminanceRelativeError": 0.005605575585815239,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 1057,
+        "maximumByteError": 90.0,
+        "meanMaximumByteError": 1.0420902706153923
+      },
+      {
+        "name": "hair-outline",
+        "pixels": 2832,
+        "ssim": 0.9888512194843196,
+        "medianLuminanceRelativeError": 0.010662686536342036,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 660,
+        "maximumByteError": 43.0,
+        "meanMaximumByteError": 1.8453389830508475
+      },
+      {
+        "name": "hair-front-blend",
+        "pixels": 725,
+        "ssim": 0.9637323401783989,
+        "medianLuminanceRelativeError": 0.008207790365465054,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 156,
+        "maximumByteError": 43.0,
+        "meanMaximumByteError": 3.2993103448275862
+      },
+      {
+        "name": "hair-back-blend",
+        "pixels": 236,
+        "ssim": 0.9937822399281045,
+        "medianLuminanceRelativeError": 0.017686263544832593,
+        "regionalPassed": true,
+        "pixelsOverOneByte": 63,
+        "maximumByteError": 55.0,
+        "meanMaximumByteError": 2.059322033898305
+      }
+    ]
+  },
+  "records": [
+    {
+      "path": "captured-camera-background-order-task.json",
+      "source": "captured-camera-background-order-task.json",
+      "bytes": 1376,
+      "sha256": "7d340360b3d134c14f5ef9cb5b05c3e3312208447be115f57f291a282592a3ce"
+    },
+    {
+      "path": "captured-camera-background-complete-hair.json",
+      "source": "captured-camera-background-complete-hair.json",
+      "bytes": 3848,
+      "sha256": "b55ba3de1aae0f679ffe72ae0de307a1ea2444225fcaac2982eb19b1791ddc44"
+    },
+    {
+      "path": "captured-camera-background-comparison.json",
+      "source": "captured-camera-background-comparison.json",
+      "bytes": 3663,
+      "sha256": "9c66e7131ad6b088c30b3119a00fa69f0e44ec0b7131a43d83a85a047b75b2df"
+    },
+    {
+      "path": "captured-camera-background-head-review.png",
+      "source": "captured-camera-background-head-review.png",
+      "bytes": 232143,
+      "sha256": "639b0ee046943585ee351f0b1dd6512dd1b89239af3a9aac5a92c42fbdcabd99"
+    },
+    {
+      "path": "capture_camera_background_order.py",
+      "source": "capture_camera_background_order.py",
+      "bytes": 1606,
+      "sha256": "bb77d4c825034470ce96d3f0e30b57abb7316c8681d80a633e515f0be239ae6a"
+    },
+    {
+      "path": "score_camera_background_order.py",
+      "source": "score_camera_background_order.py",
+      "bytes": 2382,
+      "sha256": "f0f5422c40e637a571ad0b23b466eb22753d8f7c45f271d818e2633bb5b11ae5"
+    },
+    {
+      "path": "probe_captured_camera_matrix.py",
+      "source": "probe_captured_camera_matrix.py",
+      "bytes": 3098,
+      "sha256": "3dcc23e9bb5136a893b07beab8148a86e1c646cac686c4e2f457edc1914a29e7"
+    },
+    {
+      "path": "captured-camera-matrix-program--source-inputs.json",
+      "source": "captured-camera-matrix-program/source-inputs.json",
+      "bytes": 1030,
+      "sha256": "99910c7b821f893b27d4c89b2b3440ccdb5004760710323694f6fd44a35bac45"
+    },
+    {
+      "path": "captured-camera-matrix-program--source--instance_data.glsl",
+      "source": "captured-camera-matrix-program/source/instance_data.glsl",
+      "bytes": 1017,
+      "sha256": "f8f6c3ada90a1e71d4c0cfe909cfb68783f29b60b7ca8bab4e7f8e7c2b3fac10"
+    },
+    {
+      "path": "captured-camera-background-order-capture--command.json",
+      "source": "captured-camera-background-order-capture/command.json",
+      "bytes": 749,
+      "sha256": "9ea5c1af5f09f7dfa33636afa483b3d1cdac441be54ee56e5d3ba066523d2472"
+    },
+    {
+      "path": "captured-camera-background-order-capture--player.log",
+      "source": "captured-camera-background-order-capture/player.log",
+      "bytes": 9553,
+      "sha256": "6ca9f91e7585d8ac9ea84c25523483bb32ff0faa426ed4664853a69bd99d47b1"
+    },
+    {
+      "path": "captured-camera-background-order-capture--summary.json",
+      "source": "captured-camera-background-order-capture/summary.json",
+      "bytes": 65163,
+      "sha256": "213f1674b7127f079ceee0f9240f7e118d7fd935d6bc10fe34c78eccc86eb18a"
+    },
+    {
+      "path": "captured-camera-background-order-capture--frames--capture_manifest.json",
+      "source": "captured-camera-background-order-capture/frames/capture_manifest.json",
+      "bytes": 21888,
+      "sha256": "924bb8af4dfceb128058d535ee263c6b586b78cf959a4bf84fb2d2ed87ee46db"
+    },
+    {
+      "path": "captured-camera-background-order-capture--frames--frame_000000.png",
+      "source": "captured-camera-background-order-capture/frames/frame_000000.png",
+      "bytes": 1419485,
+      "sha256": "ff45b277376634f14f4149d7d4f6c1c7a52476e030007c21cf079089577bd767"
+    }
+  ]
+}

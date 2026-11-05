@@ -1,0 +1,129 @@
+{
+  "status": "measured-private-camera-diagnosis",
+  "visualAcceptance": "failed-user-review",
+  "cases": {
+    "baseline": [
+      {
+        "region": "sourceHairVisible",
+        "pixels": 17017,
+        "withinOneByte": 16802,
+        "failedPixels": 215,
+        "maximumByteError": 90,
+        "meanAbsoluteByteError": 0.42843431078725197,
+        "ssim": 0.9901299028807041,
+        "medianLuminanceRelativeError": 0.0066986347459679985
+      },
+      {
+        "region": "primary",
+        "pixels": 16459,
+        "withinOneByte": 16387,
+        "failedPixels": 72,
+        "maximumByteError": 6,
+        "meanAbsoluteByteError": 0.29031735423375254,
+        "ssim": 0.9905399273891877,
+        "medianLuminanceRelativeError": 0.00800284966464992
+      },
+      {
+        "region": "outline",
+        "pixels": 2832,
+        "withinOneByte": 2172,
+        "failedPixels": 660,
+        "maximumByteError": 108,
+        "meanAbsoluteByteError": 1.0574387947269304,
+        "ssim": 0.9887400074318425,
+        "medianLuminanceRelativeError": 0.010298226327711284
+      },
+      {
+        "region": "front",
+        "pixels": 725,
+        "withinOneByte": 569,
+        "failedPixels": 156,
+        "maximumByteError": 43,
+        "meanAbsoluteByteError": 2.2960919540229887,
+        "ssim": 0.9631629221486834,
+        "medianLuminanceRelativeError": 0.008207790365465054
+      },
+      {
+        "region": "back",
+        "pixels": 236,
+        "withinOneByte": 173,
+        "failedPixels": 63,
+        "maximumByteError": 55,
+        "meanAbsoluteByteError": 1.2175141242937852,
+        "ssim": 0.9925574983044438,
+        "medianLuminanceRelativeError": 0.017686263544832593
+      }
+    ],
+    "capturedMatrix": [
+      {
+        "region": "sourceHairVisible",
+        "pixels": 17017,
+        "withinOneByte": 16804,
+        "failedPixels": 213,
+        "maximumByteError": 90,
+        "meanAbsoluteByteError": 0.4282188399835459,
+        "ssim": 0.9901569573826478,
+        "medianLuminanceRelativeError": 0.0066986347459679985
+      },
+      {
+        "region": "primary",
+        "pixels": 16459,
+        "withinOneByte": 16389,
+        "failedPixels": 70,
+        "maximumByteError": 6,
+        "meanAbsoluteByteError": 0.2900945784474553,
+        "ssim": 0.9905320211107456,
+        "medianLuminanceRelativeError": 0.00800284966464992
+      },
+      {
+        "region": "outline",
+        "pixels": 2832,
+        "withinOneByte": 2172,
+        "failedPixels": 660,
+        "maximumByteError": 43,
+        "meanAbsoluteByteError": 1.0361346516007532,
+        "ssim": 0.9888512194843196,
+        "medianLuminanceRelativeError": 0.010662686536342036
+      },
+      {
+        "region": "front",
+        "pixels": 725,
+        "withinOneByte": 569,
+        "failedPixels": 156,
+        "maximumByteError": 43,
+        "meanAbsoluteByteError": 2.2960919540229887,
+        "ssim": 0.9637323401783989,
+        "medianLuminanceRelativeError": 0.008207790365465054
+      },
+      {
+        "region": "back",
+        "pixels": 236,
+        "withinOneByte": 173,
+        "failedPixels": 63,
+        "maximumByteError": 55,
+        "meanAbsoluteByteError": 1.2175141242937852,
+        "ssim": 0.9937822399281045,
+        "medianLuminanceRelativeError": 0.017686263544832593
+      }
+    ]
+  },
+  "changedPixels": 791,
+  "changedHairPixels": 44,
+  "sample1328_177": {
+    "native": [
+      199,
+      102,
+      97
+    ],
+    "baseline": [
+      91,
+      27,
+      28
+    ],
+    "candidate": [
+      199,
+      103,
+      97
+    ]
+  }
+}

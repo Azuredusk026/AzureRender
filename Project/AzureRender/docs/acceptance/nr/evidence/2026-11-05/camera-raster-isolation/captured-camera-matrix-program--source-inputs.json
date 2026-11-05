@@ -1,0 +1,52 @@
+{
+  "programs": 26,
+  "changes": [
+    "mesh.vert",
+    "outline.vert",
+    "outline_projected_surface.glsl",
+    "outline_view_scaled.glsl"
+  ],
+  "nativeViewProjectionColumns": [
+    [
+      -1.7840224504470825,
+      -2.150621521146423e-11,
+      5.351822670196949e-15,
+      -5.376568079640265e-10
+    ],
+    [
+      -1.5473923996398058e-18,
+      -3.171342372894287,
+      -1.25528785588358e-07,
+      0.01261091884225607
+    ],
+    [
+      9.592677763237134e-10,
+      -0.03999672085046768,
+      9.953185326594394e-06,
+      -0.9999206066131592
+    ],
+    [
+      0.0,
+      0.0,
+      0.10000099241733551,
+      0.0
+    ]
+  ],
+  "nativeJitter": [
+    -0.25,
+    0.1666666865348816,
+    -9.765625145519152e-05,
+    0.00011574075324460864
+  ],
+  "localCameraOrigin": [
+    0.0,
+    0.8800048828125,
+    3.29998779296875
+  ],
+  "sourceSceneOrigin": [
+    -300,
+    300,
+    -300
+  ],
+  "scope": "Private captured-camera projection diagnosis; production programs unchanged"
+}

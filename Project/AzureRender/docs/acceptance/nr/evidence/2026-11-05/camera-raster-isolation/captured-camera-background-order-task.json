@@ -1,0 +1,18 @@
+{
+  "state": "diagnostic-finished-acceptance-failed",
+  "startedUtc": "2026-11-05T02:58:18.904016+00:00",
+  "investigationMinutes": 10,
+  "totalMinutes": 30,
+  "baseCommit": "cd8d95d",
+  "playerSha256": "f36ae780a645c69c680c46d7325b997a077350dd364a17bdcd74bb9191888cd4",
+  "hypothesis": "Captured matrix arithmetic improves near-triangle hair raster coverage with the validated background normal and snapshot draw order.",
+  "onlyVariable": "26 vertex program outputs use original captured view-projection matrix and jitter; all remaining 509 programs unchanged.",
+  "baseline": "snapshot-shell-order-capture",
+  "project": "qualified-background-geometry-static/qualified.azureproject",
+  "validation": "Original complete hair mask, every pixel within one byte; retain SSIM/luminance results separately.",
+  "stopCondition": "One capture plus masked comparison; preserve diagnosis without a camera API implementation.",
+  "finishedUtc": "2026-11-05T02:59:56.937280+00:00",
+  "result": "Private captured camera arithmetic addresses some near-triangle raster differences but complete hair remains outside original one-byte gate; no production changes.",
+  "report": "captured-camera-background-comparison.json",
+  "retryCondition": "A generic calibrated-camera contract is independently required or a new source identifies remaining coverage/sampling errors."
+}

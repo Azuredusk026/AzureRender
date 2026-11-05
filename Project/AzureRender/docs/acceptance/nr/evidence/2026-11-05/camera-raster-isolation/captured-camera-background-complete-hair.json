@@ -1,0 +1,126 @@
+{
+  "baseline": [
+    {
+      "name": "source-hair-visible",
+      "pixels": 17017,
+      "ssim": 0.9901299028807041,
+      "medianLuminanceRelativeError": 0.0066986347459679985,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 215,
+      "maximumByteError": 90.0,
+      "meanMaximumByteError": 0.8046659223129812
+    },
+    {
+      "name": "hair-opaque-owner",
+      "pixels": 16459,
+      "ssim": 0.9905399273891877,
+      "medianLuminanceRelativeError": 0.00800284966464992,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 72,
+      "maximumByteError": 6.0,
+      "meanMaximumByteError": 0.6358831034692266
+    },
+    {
+      "name": "hair-complete-stages",
+      "pixels": 20361,
+      "ssim": 0.9889305404056262,
+      "medianLuminanceRelativeError": 0.005165617227883023,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 1059,
+      "maximumByteError": 108.0,
+      "meanMaximumByteError": 1.0455773292077992
+    },
+    {
+      "name": "hair-outline",
+      "pixels": 2832,
+      "ssim": 0.9887400074318425,
+      "medianLuminanceRelativeError": 0.010298226327711284,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 660,
+      "maximumByteError": 108.0,
+      "meanMaximumByteError": 1.8697033898305084
+    },
+    {
+      "name": "hair-front-blend",
+      "pixels": 725,
+      "ssim": 0.9631629221486834,
+      "medianLuminanceRelativeError": 0.008207790365465054,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 156,
+      "maximumByteError": 43.0,
+      "meanMaximumByteError": 3.300689655172414
+    },
+    {
+      "name": "hair-back-blend",
+      "pixels": 236,
+      "ssim": 0.9925574983044438,
+      "medianLuminanceRelativeError": 0.017686263544832593,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 63,
+      "maximumByteError": 55.0,
+      "meanMaximumByteError": 2.059322033898305
+    }
+  ],
+  "captured-matrix": [
+    {
+      "name": "source-hair-visible",
+      "pixels": 17017,
+      "ssim": 0.9901569573826478,
+      "medianLuminanceRelativeError": 0.0066986347459679985,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 213,
+      "maximumByteError": 90.0,
+      "meanMaximumByteError": 0.804607157548334
+    },
+    {
+      "name": "hair-opaque-owner",
+      "pixels": 16459,
+      "ssim": 0.9905320211107456,
+      "medianLuminanceRelativeError": 0.00800284966464992,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 70,
+      "maximumByteError": 6.0,
+      "meanMaximumByteError": 0.6358223464366001
+    },
+    {
+      "name": "hair-complete-stages",
+      "pixels": 20361,
+      "ssim": 0.9889741573396053,
+      "medianLuminanceRelativeError": 0.005605575585815239,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 1057,
+      "maximumByteError": 90.0,
+      "meanMaximumByteError": 1.0420902706153923
+    },
+    {
+      "name": "hair-outline",
+      "pixels": 2832,
+      "ssim": 0.9888512194843196,
+      "medianLuminanceRelativeError": 0.010662686536342036,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 660,
+      "maximumByteError": 43.0,
+      "meanMaximumByteError": 1.8453389830508475
+    },
+    {
+      "name": "hair-front-blend",
+      "pixels": 725,
+      "ssim": 0.9637323401783989,
+      "medianLuminanceRelativeError": 0.008207790365465054,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 156,
+      "maximumByteError": 43.0,
+      "meanMaximumByteError": 3.2993103448275862
+    },
+    {
+      "name": "hair-back-blend",
+      "pixels": 236,
+      "ssim": 0.9937822399281045,
+      "medianLuminanceRelativeError": 0.017686263544832593,
+      "regionalPassed": true,
+      "pixelsOverOneByte": 63,
+      "maximumByteError": 55.0,
+      "meanMaximumByteError": 2.059322033898305
+    }
+  ]
+}
