@@ -85,6 +85,8 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 四组双设备深度检查与原生四帧冻结对照通过。
 短时 GPU 帧 P95 为 33.93 毫秒，阴影为 4.50 毫秒。
 短时环境检查通过，正式帧预算保持原标准。
+当前原生的[CPU 调用栈](../acceptance/nr/current-cpu-hotspots.md)已取得实际模块与符号来源。
+接续相机及呈现输入的物化复用，资源解析与关卡轮询独立定位。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
