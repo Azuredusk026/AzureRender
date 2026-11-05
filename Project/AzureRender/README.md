@@ -20,6 +20,8 @@
 阴影接收的[成本分项](docs/acceptance/nr/shadow-receiver-cost.md)持有诊断范围。
 完整覆盖阴影的[纯深度提交](docs/acceptance/nr/depth-only-shadow.md)通过双设备及原生四帧检查。
 本轮短时 GPU 帧 P95 为 33.93 毫秒，正式预算继续待验收。
+相机[物化输入共享](docs/acceptance/nr/materialized-camera-input.md)通过两配置各十四项及原生四帧检查。
+短时成对 CPU 均值降低约百分之 6.06，工作 P95 为 21.79 毫秒。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。

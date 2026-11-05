@@ -6,6 +6,7 @@
 namespace azurerender {
 class RuntimeLifecycle;
 struct SceneDocument;
+namespace scene {struct SceneDescription;}
 struct GameCameraSelection {
     std::optional<CameraViewDescriptor> view;
     std::string node;
@@ -15,4 +16,5 @@ CameraViewDescriptor gameCameraView(const game::GameCamera& camera,const std::ar
 // Resolves authored cameras from the interpolated scene and live components.
 // Highest priority wins; equal priorities use the stable node identifier.
 GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const SceneDocument& scene);
+GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const scene::SceneDescription& scene);
 }

@@ -1,3 +1,4 @@
+#include "scene/SceneDescription.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/GameComponents.hpp"
 #include <chrono>
@@ -103,6 +104,9 @@ GameCameraSelection GameRuntime::renderCamera(){
     return renderCamera(renderScene());
 }
 GameCameraSelection GameRuntime::renderCamera(const SceneDocument& scene){
+    return renderCamera(scene.renderDescription());
+}
+GameCameraSelection GameRuntime::renderCamera(const scene::SceneDescription& scene){
     auto selected=resolveGameCamera(runtime_,scene);
     if(!selected.view&&hasCamera_){
         CameraViewDescriptor view;view.position=renderCameraPosition();view.target=renderCameraTarget();

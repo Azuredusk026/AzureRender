@@ -6,6 +6,7 @@
 #include "render/RenderCamera.hpp"
 #include "scene/TransformMath.hpp"
 #include <iostream>
+#include "scene/SceneDescription.hpp"
 using namespace azurerender;
 void check(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 void checkSharedRenderScene(){
@@ -21,15 +22,25 @@ void checkSharedRenderScene(){
     game.advance(1.0/60);game.advance(1.0/120);
     const auto snapshot=game.renderScene();const auto selected=game.renderCamera(snapshot);
     check(selected.node=="camera"&&selected.view.has_value(),"Rendered scene camera must preserve authored selection");
+    const auto prepared=snapshot.renderDescription();
+    const auto preparedSelection=game.renderCamera(prepared);
+    check(preparedSelection.node==selected.node&&preparedSelection.view->position==selected.view->position
+        &&preparedSelection.view->target==selected.view->target&&preparedSelection.view->up==selected.view->up
+        &&preparedSelection.view->fov==selected.view->fov,"Prepared render description must preserve camera selection and lens");
+    check(resolveGameCamera(runtime,prepared).node==selected.node,"Camera service must accept the shared render description");
     check(std::abs(snapshot.nodes[0].translation[0]-12)<1e-5F,"Frame scene must retain the interpolation phase");
     check(selected.view->position==std::array<float,3>{12,2,4.5F},"Camera and geometry must share interpolated parent and local transforms");
     runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("parent"))->translation[0]=40;
     check(game.renderCamera(snapshot).view->position==selected.view->position,"Camera selection must use the caller's scene instead of fetching a newer scene");
+    check(game.renderCamera(prepared).view->position==selected.view->position,"Prepared camera input must remain independent of newer world transforms");
     const auto live=game.renderScene();check(game.renderCamera().view->position==game.renderCamera(live).view->position,"Standalone camera calls must preserve their existing scene acquisition behavior");
     camera->enabled=false;game.activateCamera(game::ThirdPersonCamera{},std::array<float,3>{1,2,3});
     const auto followed=game.renderCamera(snapshot);
+    const auto preparedFollow=game.renderCamera(prepared);
+    check(preparedFollow.node==followed.node&&preparedFollow.view->position==followed.view->position,
+        "Prepared render input must retain the live follow-camera fallback");
     check(followed.node=="follow-camera"&&followed.view->position==game.renderCameraPosition(),"Missing authored cameras must preserve interpolated follow-camera selection");
-    game.deactivateCamera();check(!game.renderCamera(snapshot).view,"Missing authored and follow cameras must remain observable");
+    game.deactivateCamera();check(!game.renderCamera(prepared).view,"Prepared input retains missing-camera fallback");check(!game.renderCamera(snapshot).view,"Missing authored and follow cameras must remain observable");
     check(snapshot.nodes[0].translation[0]==12&&selected.view->position[0]==12,"Returned camera and frame scene must retain their owned values");
 }
 int main(){try{
@@ -80,8 +91,10 @@ int main(){try{
     check(selected.view->target==std::array<float,3>{10,2,2}&&selected.view->projection==CameraProjectionKind::Orthographic,"Game camera uses local minus Z and authored lens");
     runtime.world().addComponent(runtime.entity("a"),component);
     check(resolveGameCamera(runtime,scene).node=="a","Equal priority uses stable identity");
+    check(resolveGameCamera(runtime,scene.renderDescription()).node=="a","Prepared render description retains stable priority ties");
     runtime.world().tryGet<game::GameCamera>(runtime.entity("a"))->enabled=false;
     check(resolveGameCamera(runtime,scene).node=="b","Disabled cameras are excluded");
+    check(resolveGameCamera(runtime,scene.renderDescription()).node=="b","Prepared render description retains live disabled-camera exclusion");
     CameraViewDescriptor editing;editing.position={50,50,50};editing.target={0,0,0};
     const auto finalEdit=selectRenderCamera(editing,selected.view,{});
     check(finalEdit.source==RenderCameraSource::SceneView&&finalEdit.view.position==editing.position,"Simulation preserves SceneViewCamera");

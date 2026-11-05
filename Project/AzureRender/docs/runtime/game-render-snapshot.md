@@ -6,10 +6,13 @@
 
 ```cpp
 auto scene = game.renderScene();
-auto camera = game.renderCamera(scene);
+auto description = scene.renderDescription();
+auto camera = game.renderCamera(description);
 ```
 
-`renderCamera(const SceneDocument&)` 借用输入至调用结束。
+`renderCamera(const scene::SceneDescription&)` 借用物化输入至调用结束。
+宿主同时将同一份描述交给本帧几何消费者。
+`renderCamera(const SceneDocument&)` 按需转换调用方文档。
 位置与父级变换来自输入场景。
 相机组件选择和跟随策略来自当前运行时。
 返回的相机数据由调用方持有。
@@ -37,3 +40,5 @@ CPU 与延期图像范围见[共享输入验证](../acceptance/nr/render-camera-
 节点数据在文档副本上更新和压缩。
 
 CPU 分配与回归范围见[节点快照验证](../acceptance/nr/runtime-snapshot-copy.md)。
+
+物化输入的兼容与短时成本见[相机输入验证](../acceptance/nr/materialized-camera-input.md)。

@@ -18,8 +18,10 @@ CameraViewDescriptor gameCameraView(const game::GameCamera& camera,const std::ar
     validateCameraView(view,1.F);return view;
 }
 GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const SceneDocument& sceneDocument){
+    return resolveGameCamera(runtime,sceneDocument.renderDescription());
+}
+GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const scene::SceneDescription& scene){
     GameCameraSelection result;std::int64_t priority=-1;
-    const auto scene=sceneDocument.renderDescription();
     const auto matrices=scene::resolveNodeWorldTransforms(scene);
     for(std::size_t i=0;i<scene.nodes.size();++i){
         const auto& node=scene.nodes[i];
