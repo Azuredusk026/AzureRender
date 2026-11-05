@@ -74,6 +74,8 @@ Debug 目录规模的[局部候选](../acceptance/recovery/directory-scale-diagn
 该候选已隔离，继续推进具备条件的渲染架构单元。
 缓冲依赖的[批量入口](../acceptance/nr/buffer-barrier-batching.md)通过两配置各七项 CPU 检查。
 该候选的双设备同步、画面及原生收益等待复测。
+节点[快照复制](../acceptance/nr/runtime-snapshot-copy.md)通过两配置各十五项 CPU 检查。
+实际帧成本与图像检查继续等待复测。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

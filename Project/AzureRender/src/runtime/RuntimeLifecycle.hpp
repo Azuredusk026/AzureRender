@@ -103,8 +103,9 @@ class RuntimeLifecycle final {
     }
     SceneDocument snapshotScene() {
         SceneDocument result = scene_;
-        result.nodes.clear();
-        for (auto node : scene_.nodes) {
+        auto output = result.nodes.begin();
+        for (auto current = result.nodes.begin(); current != result.nodes.end(); ++current) {
+            auto& node = *current;
             const auto entity = nodes_.at(node.id);
             if (!nodeValid(node.id)) continue;
             if (const auto* transform = world_.tryGet<ecs::TransformComponent>(entity)) {
@@ -118,8 +119,10 @@ class RuntimeLifecycle final {
                 shadow->validate();node.objectShadow=*shadow;
             }else node.objectShadow.reset();
             if (!node.parentId.empty() && !nodeValid(node.parentId)) node.parentId.clear();
-            result.nodes.push_back(std::move(node));
+            if (output != current) *output = std::move(node);
+            ++output;
         }
+        result.nodes.erase(output, result.nodes.end());
         result.lights.erase(
             std::remove_if(result.lights.begin(), result.lights.end(),
                            [&](const auto& light) { return !nodeValid(light.nodeId); }),

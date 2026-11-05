@@ -155,3 +155,14 @@ NVIDIA 的[管线建议](https://developer.nvidia.com/blog/vulkan-dos-donts/)说
 批量入口及图接入通过两配置各七项 CPU 检查。
 具体范围见[批量提交验证](../acceptance/nr/buffer-barrier-batching.md)。
 设备同步、实际数量及性能收益等待空闲 GPU 验证。
+
+## 节点快照复制
+
+运行时在场景文档副本上更新并稳定压缩节点。
+一千零二十四节点的分配夹具具有四组材质槽。
+Release 失败控制分配 8,512,487 字节。
+候选分配 4,301,847 字节，等于一次场景值复制。
+
+两配置各十五项 CPU 检查通过。
+输入、预算和范围见[节点快照验证](../acceptance/nr/runtime-snapshot-copy.md)。
+原生画面和实际帧耗时等待空闲 GPU 复测。

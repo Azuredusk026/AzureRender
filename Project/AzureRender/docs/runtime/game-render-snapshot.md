@@ -23,3 +23,17 @@ auto camera = game.renderCamera(scene);
 两类相机均不可用时，返回明确的缺省状态。
 
 CPU 与延期图像范围见[共享输入验证](../acceptance/nr/render-camera-snapshot.md)。
+
+## 节点值快照
+
+`RuntimeLifecycle::snapshotScene` 返回独立的场景文档。
+节点变换、可见性及对象阴影取自当前世界。
+失效节点通过稳定压缩处理，存活节点保持文档顺序。
+失效父节点引用清空，对应灯光按节点有效性筛选。
+
+节点名称、材质槽、已解析材质和预制来源随文档保留。
+运行时持有源文档，调用方持有返回值。
+修改返回节点及材质表保持源文档和已有快照的独立性。
+节点数据在文档副本上更新和压缩。
+
+CPU 分配与回归范围见[节点快照验证](../acceptance/nr/runtime-snapshot-copy.md)。

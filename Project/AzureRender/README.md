@@ -9,6 +9,7 @@
 运动向量的命令复用和双设备结果见[绑定验证](docs/acceptance/nr/motion-bindings.md)。
 同帧场景输入及性能采集条件见[快照验证](docs/acceptance/nr/frame-context-snapshot.md)。
 相机与场景的共享输入见[呈现契约](docs/runtime/game-render-snapshot.md)和[CPU 验证](docs/acceptance/nr/render-camera-snapshot.md)。
+节点快照的分配和完整性见[复制验证](docs/acceptance/nr/runtime-snapshot-copy.md)。
 日常短检与集中构建入口见[构建范围](docs/development/build-scopes.md)。
 缓冲依赖的 CPU 契约及设备待项见[批量提交验证](docs/acceptance/nr/buffer-barrier-batching.md)。
 
