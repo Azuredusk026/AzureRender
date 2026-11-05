@@ -98,7 +98,9 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 实际帧复用 742,213 个顶点请求，动态输入继续生成。
 短时 CPU 工作 P95 为 21.74 毫秒，GPU 帧为 35.09 毫秒。
 单候选计时的热状态未通过，整帧因果收益资格未成立。
-接续实例准备的 CPU 子阶段定位。
+实例准备的[子阶段观察](../acceptance/nr/instance-preparation-cost.md)取得一百条同帧记录。
+节点分组均值为 2.20 毫秒，姿态采样为 2.42 毫秒。
+接续保持实例身份及顺序的稳定资源分组候选。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

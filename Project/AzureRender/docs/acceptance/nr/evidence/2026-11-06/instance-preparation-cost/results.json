@@ -1,0 +1,329 @@
+{
+  "schemaVersion": 1,
+  "status": "measured-private-cpu-stages",
+  "sourceBase": "a269247",
+  "productionAdoption": false,
+  "scope": "20steady frames310..329; scene preparation and renderer-update subphases belong to corresponding host buckets; logging overhead exists; frameindex derives from fixed-step time*captureFps+1; instance and pose loops include local per-instance timing overhead; diagnostic only",
+  "recordCount": 100,
+  "groups": {
+    "scene-preparation": {
+      "cameraMs": {
+        "mean": 0.88464,
+        "p95": 1.0226100000000002,
+        "p99": 1.072922
+      },
+      "materializeAndResourcesMs": {
+        "mean": 2.856015,
+        "p95": 3.1347150000000004,
+        "p99": 3.4100629999999996
+      },
+      "remainingPrepareMs": {
+        "mean": 0.27203,
+        "p95": 0.36321000000000003,
+        "p99": 0.4120019999999999
+      },
+      "sceneSnapshotMs": {
+        "mean": 1.545375,
+        "p95": 1.7261,
+        "p99": 1.75346
+      },
+      "simulationAndInputMs": {
+        "mean": 0.86002,
+        "p95": 1.13012,
+        "p99": 1.2626639999999998
+      }
+    },
+    "pose-preparation": {
+      "animationLookupMs": {
+        "mean": 0.025474999999999907,
+        "p95": 0.02935499999999988,
+        "p99": 0.030190999999999905
+      },
+      "boundsMs": {
+        "mean": 0.14480000000000134,
+        "p95": 0.16264000000000145,
+        "p99": 0.1814880000000006
+      },
+      "dispatchPreparationMs": {
+        "mean": 0.05608500000000055,
+        "p95": 0.06082000000000069,
+        "p99": 0.06264400000000075
+      },
+      "finalFlushMs": {
+        "mean": 0.00084,
+        "p95": 0.001,
+        "p99": 0.001
+      },
+      "poseSamplingMs": {
+        "mean": 2.424445000000002,
+        "p95": 2.8143100000000025,
+        "p99": 2.8919820000000023
+      },
+      "setupMs": {
+        "mean": 0.10722,
+        "p95": 0.14208500000000007,
+        "p99": 0.2102569999999999
+      },
+      "totalMs": {
+        "mean": 2.80332,
+        "p95": 3.2152100000000003,
+        "p99": 3.2898419999999997
+      },
+      "weightsAndJointUploadMs": {
+        "mean": 0.023949999999999916,
+        "p95": 0.0268699999999999,
+        "p99": 0.027933999999999893
+      }
+    },
+    "instance-rebuild": {
+      "boundsSetupMs": {
+        "mean": 0.08153,
+        "p95": 0.09904000000000002,
+        "p99": 0.10876799999999998
+      },
+      "gpuCullingPreparationMs": {
+        "mean": 0.05992,
+        "p95": 0.07693,
+        "p99": 0.08498599999999998
+      },
+      "instanceUploadMs": {
+        "mean": 0.17814,
+        "p95": 0.19780000000000006,
+        "p99": 0.2692399999999999
+      },
+      "materialOriginsMs": {
+        "mean": 0.015045,
+        "p95": 0.016645000000000004,
+        "p99": 0.018848999999999998
+      },
+      "nodeGroupingMs": {
+        "mean": 2.20015,
+        "p95": 2.48165,
+        "p99": 2.57361
+      },
+      "posesMs": {
+        "mean": 3.0314550000000002,
+        "p95": 3.4859050000000003,
+        "p99": 3.501181
+      },
+      "totalMs": {
+        "mean": 5.64504,
+        "p95": 6.28763,
+        "p99": 6.446166
+      },
+      "visibilityAndObjectsMs": {
+        "mean": 0.0788,
+        "p95": 0.09734000000000001,
+        "p99": 0.11162799999999998
+      }
+    },
+    "renderer-update": {
+      "copyInputMs": {
+        "mean": 0.06645,
+        "p95": 0.083925,
+        "p99": 0.08734499999999999
+      },
+      "immutableSnapshotMs": {
+        "mean": 0.058415,
+        "p95": 0.08751500000000001,
+        "p99": 0.092303
+      },
+      "instancesMs": {
+        "mean": 5.81512,
+        "p95": 6.464885,
+        "p99": 6.602977
+      },
+      "motionMs": {
+        "mean": 1.098665,
+        "p95": 1.313175,
+        "p99": 1.318875
+      },
+      "outlineResourcesMs": {
+        "mean": 0.027585,
+        "p95": 0.03177,
+        "p99": 0.032833999999999995
+      },
+      "recordingPreparationMs": {
+        "mean": 0.090135,
+        "p95": 0.10334,
+        "p99": 0.10698799999999999
+      },
+      "sceneStateMs": {
+        "mean": 0.05648,
+        "p95": 0.075505,
+        "p99": 0.077101
+      },
+      "transparentMs": {
+        "mean": 3.45946,
+        "p95": 3.9753800000000004,
+        "p99": 4.079955999999999
+      },
+      "uniformsMs": {
+        "mean": 0.76709,
+        "p95": 0.8546400000000001,
+        "p99": 0.8734879999999999
+      }
+    },
+    "host-frame": {
+      "framePrepareMs": {
+        "mean": 6.644905,
+        "p95": 7.579675,
+        "p99": 7.743455
+      },
+      "frameSnapshotMs": {
+        "mean": 0.001705,
+        "p95": 0.0020050000000000003,
+        "p99": 0.002081
+      },
+      "hostSyncMs": {
+        "mean": 0.348025,
+        "p95": 0.51012,
+        "p99": 0.6122639999999998
+      },
+      "levelPollMs": {
+        "mean": 0.71469,
+        "p95": 0.7258700000000101,
+        "p99": 11.537173999999982
+      },
+      "lutMs": {
+        "mean": 0.017235,
+        "p95": 0.023570000000000004,
+        "p99": 0.027673999999999994
+      },
+      "miscBeforeRecordMs": {
+        "mean": 0.024305,
+        "p95": 0.034030000000000005,
+        "p99": 0.034485999999999996
+      },
+      "recordMs": {
+        "mean": 3.22748,
+        "p95": 3.517185,
+        "p99": 3.6613569999999998
+      },
+      "rendererUpdateMs": {
+        "mean": 11.662345,
+        "p95": 12.590985000000002,
+        "p99": 12.646996999999999
+      }
+    }
+  },
+  "native": {
+    "status": "measured",
+    "sourceBase": "a269247",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 110.84299999999348,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.589983466666667,
+        "p95": 2.7939088,
+        "p99": 2.85790976
+      },
+      "sceneMs": {
+        "mean": 30.256597333333332,
+        "p95": 32.444620799999996,
+        "p99": 34.31790592
+      },
+      "postProcessMs": {
+        "mean": 0.304384,
+        "p95": 0.3196928,
+        "p99": 0.34898944
+      },
+      "frameMs": {
+        "mean": 33.1509648,
+        "p95": 35.515064,
+        "p99": 37.44349728
+      }
+    },
+    "cpu": {
+      "mean": 19.68487833333332,
+      "p95": 22.78626999999978,
+      "p99": 28.711294999999783
+    },
+    "wait": {
+      "mean": 13.349137500000014,
+      "p95": 16.441920000000163,
+      "p99": 19.384397999999866
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7403028480,
+    "environmentFailures": [
+      "run observation 20: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "instrumented": true,
+    "privateFilesUnchanged": true,
+    "privateFiles": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\instance-preparation-cost\\source\\AzureRenderApp.cpp": "64b9cbbc2d13e8596de5e4189aef9ad012cf74e6a3bdf2ba6cc2053b5dc405a5",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\instance-preparation-cost\\source\\AzureRenderFrame.cpp": "cf71e9a09cc6ff61b7c077d9b305a4b3ff4a756922e91300be20178ced842469",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\instance-preparation-cost\\source\\CharacterSceneRenderer.cpp": "7cfe78b397b18db6918d33b44cc226d614e13bf4c434caf676581851dd7c49ca",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\instance-preparation-cost\\private-link\\AzurePlayer.exe": "b1f15b9ce06b88ae4069ba3170e906c2f494fcb2491b69d58ae87753a8032d8b"
+    },
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true
+  },
+  "archiveMembers": {
+    "archive_instance_cost.py": "02fab7160aea8e22123ffcd9e41864f6ecfd2c89e093d5e744e8d55be1198182",
+    "build_instance_preparation_diagnostic.py": "9d16dc3edf3f988cef9cfbd9102643acdcfa04bd6a7ab1fd1c6dc3964839a49e",
+    "instance-preparation-cost/AzureRenderApp-compile.log": "9f9662106720f4dce455595fc0372810d6c6f79a4b589718cfd161c385c16e2d",
+    "instance-preparation-cost/AzureRenderFrame-compile.log": "f1fa9ada4d4e341d4d5cf191e40f07f7aae7f66c47fedc3f161f0334704814d8",
+    "instance-preparation-cost/build-result.json": "54cc307078c4a54831d1b49a3dae37339e4635e6435e8ac509f7c74498c201b8",
+    "instance-preparation-cost/CharacterSceneRenderer-compile.log": "0d086624a866504ddca2223eb480a89ac6eac86b03f209a7fd7fe527eb2b9f85",
+    "instance-preparation-cost/compile-results.json": "96c7ad1f7afb4e4d789ec304abf84eb97b7fac01d21bc5c3197cdcb337a805bc",
+    "instance-preparation-cost/native/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "instance-preparation-cost/native/environment.json": "343b7072cf1aa515e4c7d824cd56252c72e92de488ec1e66b5e3c2465d23090c",
+    "instance-preparation-cost/native/frozen-inputs.json": "002a5d277c587e4c7db969b0130b0e32a0669c8e01c47461dc15c8c4b9e5225e",
+    "instance-preparation-cost/native/memory.json": "c091edb970b8ef2ff23d600b9291d5f25d370e44f28d84d2073f01fd222dc5be",
+    "instance-preparation-cost/native/results.json": "8a12511feedffbca26757c1c24bf3e04c7c0789a1060cc21bf4e3cc461ad775b",
+    "instance-preparation-cost/native/runtime.json": "c680e9e4cfd3a3cf383fbe2706bcaa85a2d219b2868be71be0c506cb4e897e56",
+    "instance-preparation-cost/native/stage-results.json": "83b7e2207b319ae823c1f3400830649d87f56b4ab999f3ce479e94eb22924fc3",
+    "instance-preparation-cost/native/stderr.log": "b6d0d0365139ed49d91dbcf7dfb06d97f7eca12a63f30ef174e3a1457c3a1b36",
+    "instance-preparation-cost/native/stdout.log": "9df80703b7066b3b336ffc76f4c74113a0bd24386179ca9d58435c5197e05d14",
+    "instance-preparation-cost/native/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "instance-preparation-cost/native/task.json": "7378d2506f84678e895f1d9f0ecab7d2eb20cbf504debb54071f83cd4de75607",
+    "instance-preparation-cost/native/timing.csv": "5b979a81b6c5d1e8e2b51dc73dd25af03989a5c8f4788ed085d5995afdf87cac",
+    "instance-preparation-cost/native/timing.json": "e3c73c0bbdad076aaae1d6c3892625467baa79cb278eda9a73b50629fefe3e85",
+    "instance-preparation-cost/native-driver.log": "6c95ca708f81cee4e0072dc283a9fcb0fa9aafd91126ec5063a9568de87d8919",
+    "instance-preparation-cost/original-compile-commands.json": "8fd0cd69041f11ed6777de334e27900ee0112dec79f2e260342bddcb7ef579d9",
+    "instance-preparation-cost/private-link/AzurePlayer.map": "39700cca5d81c04a4a5af1250f2d6ce72c5f9f72e6def81e4deded6c2786f79f",
+    "instance-preparation-cost/private-link/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "instance-preparation-cost/private-link/link.rsp": "dd8bce7a8562bca106e351a272409d9d43075ecb1bce7a9158654f0229a27314",
+    "instance-preparation-cost/production-before.json": "d060055598887232bc75643f8f9a67a06bef027c2ccb497a87e3b15474c28a11",
+    "instance-preparation-cost/source/AzureRenderApp.cpp": "64b9cbbc2d13e8596de5e4189aef9ad012cf74e6a3bdf2ba6cc2053b5dc405a5",
+    "instance-preparation-cost/source/AzureRenderFrame.cpp": "cf71e9a09cc6ff61b7c077d9b305a4b3ff4a756922e91300be20178ced842469",
+    "instance-preparation-cost/source/CharacterSceneRenderer.cpp": "7cfe78b397b18db6918d33b44cc226d614e13bf4c434caf676581851dd7c49ca",
+    "measure_instance_preparation_cost.py": "d16bce540ba5b4f0cce1132be859e6f2696e2a07f6dbccc7b059cbf45455649c"
+  },
+  "archiveSha256": "917d6a18699386a45531eb75a7cae9f047907c77d71c9b04f04ecb72291ca0ee",
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformance": "failed",
+  "next": "One instance grouping candidate with exact stable resource/source ordering; uploads not selected as dominant cost"
+}
