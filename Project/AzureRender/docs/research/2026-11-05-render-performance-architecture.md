@@ -143,3 +143,13 @@ NVIDIA 的[管线建议](https://developer.nvidia.com/blog/vulkan-dos-donts/)说
 
 实现与原始记录见[帧场景快照验证](../acceptance/nr/frame-context-snapshot.md)。
 后续帧数据架构按静态资源、动态变换及修订边界划分。
+
+## 资源依赖候选
+
+实际主命令缓冲包含 4,934 次管线屏障调用。
+图像及缓冲的组成和位置仍需分解。
+渲染图的逐资源记录路径提供批量提交的候选位置。
+
+候选保留每条依赖的范围、访问条件及顺序。
+依据与验证边界见[资源依赖批量提交](../plans/2026-11-05-resource-barrier-batching.md)。
+该候选尚未实现，收益以实际负载验证为准。
