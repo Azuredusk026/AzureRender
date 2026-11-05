@@ -1,0 +1,622 @@
+{
+  "schemaVersion": 1,
+  "status": "camera-scene-sharing-cpu-verified-gpu-deferred-by-user",
+  "sourceBase": "5c61efb",
+  "sourceSha256": {
+    "src/runtime/GameRuntime.hpp": "eed4492625e78534c50812c3fa372bcf4d5857eddeb97cd8cfe65efd37e45f1c",
+    "src/runtime/GameRuntime.cpp": "9bf211e51a35cac03098bae05c6f2871eddab072ee0bf8cc697efdbfa7256709",
+    "src/app/AzureRenderApp.cpp": "f75c6d596101382b3223b4374ca8c912f9830626fe87b1e906b2a5e119c34257",
+    "tests/CameraSystemTests.cpp": "fc2b0f96a2c0adce99313d2ed7f85a9c961997fcfb269ab74ea84da63f9a6468"
+  },
+  "patchSha256": "87bfacbaa7bdb9b308df011a6842d8e43f966ee1380994283148a40bf48cc750",
+  "targetedCpuChecksPerConfiguration": 14,
+  "releaseFullCpu": {
+    "batchPassed": 289,
+    "total": 292,
+    "batchFailed": 3,
+    "serialDiagnosticPassed": 3,
+    "scope": "All292 have passing records across original batch and original-timeout serial diagnosis; original batch3timeouts retained"
+  },
+  "debugFullCpu": {
+    "batchPassed": 252,
+    "directoryScaleFailed": true,
+    "outerBudgetSeconds": 1200,
+    "outerBudgetStatus": "failed-timeout",
+    "remainingChecksPassed": 39,
+    "totalFunctionalPassed": 291,
+    "scope": "291/292 functional checks passed across partial batch and39 original-timeout checks; directory-scale failure and whole-batch timeout remain unresolved"
+  },
+  "productionShaderCountPerConfiguration": 535,
+  "productionShadersBaselineIdentical": true,
+  "nativeImageRegression": "deferred-not-run-for-this-candidate",
+  "nativePerformance": "deferred-not-run-for-this-candidate",
+  "fullVisualAcceptance": "failed-user-review",
+  "pinnedProducts": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\AzurePlayer.exe",
+      "sha256": "6b42468ed91e2bc2b99a8560fa3e64563aa9e01e99c1345fd9bdf76fb10594b0",
+      "bytes": 6136832
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\AzureRender.exe",
+      "sha256": "f4a5f7788b9ae4a2c5df70e230d2eb4e78d6f23e3242b0840cce0858459019db",
+      "bytes": 9639424
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\assimp-vc143-mt.dll",
+      "sha256": "2acf16a9392849e96c8f415f9d1ae4aa16c96f88b029d7c8afe90a08273bcf57",
+      "bytes": 4526080
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\brotlicommon.dll",
+      "sha256": "2c76417ac9cb1e3203e94c3751bc3c7860ccff406954a41172c07e96522046bb",
+      "bytes": 137728
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\brotlidec.dll",
+      "sha256": "34edc8f02180aa16e0215b49643fa972dda64527ef9823fca42920db080d227e",
+      "bytes": 52224
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\bz2.dll",
+      "sha256": "f1a9ac696ca0c1ddcd578926aca96149069805910fb4ad6212d827791ae8991c",
+      "bytes": 76800
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\deflate.dll",
+      "sha256": "c4a174c08d0aa3f69699ff46174a54838d64a3762621adb63bd87302b0ac8ac5",
+      "bytes": 84992
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\DirectXTex.dll",
+      "sha256": "295b5ed0af3fc1d2040f571b70064c1cb0161a22bb8c848471383e466f0e77cd",
+      "bytes": 379904
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\FLAC.dll",
+      "sha256": "b02df99b0f0b53f1c56b568e2ddc9d059eb5e19361ded0a1763a242ed7dce287",
+      "bytes": 262656
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\freetype.dll",
+      "sha256": "ea8c4fcefbf224a1c22e7eafdc6940a14652832a1f8ad387b8766672716df77e",
+      "bytes": 701440
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\glfw3.dll",
+      "sha256": "a11bb4d9b2a9d249ed610c946b5199df322d31a5ce662a161c4e245b42df1c1e",
+      "bytes": 235008
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\Iex-3_4.dll",
+      "sha256": "9ffceedbcf3d32a4ad0e1226948066312c4921691adc1bb1cbcef4a5e784f158",
+      "bytes": 292864
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\IlmThread-3_4.dll",
+      "sha256": "98bd8f40376dba07c7fdabc855b450f9f25e7dda9fa60860d897123d3eab5a2a",
+      "bytes": 45568
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\Imath-3_2.dll",
+      "sha256": "b97a40e93f8eec6cb4e0ded871c30fc1c047b2bcaab6ce7949bed4bffb35a070",
+      "bytes": 338944
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\jpeg62.dll",
+      "sha256": "32706a49e09e190e0385d9a4a74a119ce78803663ebb1df13986ca04179b8a02",
+      "bytes": 694272
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\ktx.dll",
+      "sha256": "e7a9f73ff3216c5c74ef1b97eaf6afc18b5d0f0cc0737e2b43b566fd64eae8c6",
+      "bytes": 1620992
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\kubazip.dll",
+      "sha256": "f55c17f5b9dde9d8a7b6eb5e7d58ace2a4ab6977805dc93a31cd50fb5323b303",
+      "bytes": 80896
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\liblzma.dll",
+      "sha256": "55876afe06bd7803e66c5b353f696d0da51fb52194dba3450d36d80740eca5ac",
+      "bytes": 188928
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\libmp3lame.DLL",
+      "sha256": "da526e069824937e8069f6dc34ce313f5ad98d54e7431fecdffe71cdf77de17e",
+      "bytes": 372736
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\libpng16.dll",
+      "sha256": "f33bf57620eb33c38e6db3fe6eb4333b1a78dae868f3841145830b5e598bcac2",
+      "bytes": 198656
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\libsharpyuv.dll",
+      "sha256": "1d311a1367d1bb7b2b586f180778857eeeba91f7b93eb3fd72b55243c8e43a5e",
+      "bytes": 25600
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\libwebp.dll",
+      "sha256": "5ba51bf7e842b62df454d25a8769e2e5917da30aaa9be7121cd17979daedd971",
+      "bytes": 372224
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\lua.dll",
+      "sha256": "6f8240c01d093de47d0ecbaaefaa9466a0e111e7bd7fb1d4f8f8df42620453c0",
+      "bytes": 240640
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\manifold.dll",
+      "sha256": "39d9e858f7647a9de0b58ba0badf24dca5af224e8ecdd44d0f93eb127c7fae7b",
+      "bytes": 2380800
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\minizip.dll",
+      "sha256": "91bb4fe316834ccedde9045f14fcc97b31019e9a2ff79ef70f51b3c4ee26a86e",
+      "bytes": 50176
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\ogg.dll",
+      "sha256": "080f93d18c1c54df19bdbd5cc7b45804f8b9cce4fbad69a9c6df6acf5bfe9bb2",
+      "bytes": 31232
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\OpenEXR-3_4.dll",
+      "sha256": "2f67b4fd19b3696d42783174d618a42298428313538dbc935800db9d4785599b",
+      "bytes": 850944
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\OpenEXRCore-3_4.dll",
+      "sha256": "30e09aec457c1ed2b624a5f69326efb069386e92d1a4ba4399610d656e01f13c",
+      "bytes": 312320
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\openjph.0.31.dll",
+      "sha256": "98c2c17eb13dd32d85c0361b372b3b1d4b51c0aba3594299349785cf694ecbc9",
+      "bytes": 356864
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\opus.dll",
+      "sha256": "825634299cd31d482e37c0e837bb2d045866f3c145f28ec58b5890eb1a1ca555",
+      "bytes": 461312
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\pugixml.dll",
+      "sha256": "bdbe32c2748bc1acaa4003d1b19956378335ae863f062ae8efb9a82f0cb44837",
+      "bytes": 203776
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\rmlui.dll",
+      "sha256": "42ae16c60b317fb8fe526878e81038c1bb3e905c0c2f54eee334214997475cfc",
+      "bytes": 1755648
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\tiff.dll",
+      "sha256": "46b1a9184409cd54653aed627aa048536067bd056a684d77cfd2a348dc7fc4cd",
+      "bytes": 489984
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\vorbis.dll",
+      "sha256": "e9dcc5337bb52b09fbecbf2e6ae05f8118df0fdb6638ff1bb61e2a03d973a6a7",
+      "bytes": 721920
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\vorbisenc.dll",
+      "sha256": "6bf8c1aa28905ed9bc4c03d377037046637dfff29b8e1b5a2a1b39a96d89c7e2",
+      "bytes": 565248
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\z.dll",
+      "sha256": "d2d6e24fdbfabcc02e1bc08b48c23b16d6b05d4caaa4e709ea38a8ba515592f5",
+      "bytes": 91136
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\release\\zstd.dll",
+      "sha256": "f0dac30f0c645dc91c20b24bb2a5e93d77b9aa5f0fef0136ebcdfe5d77a06d79",
+      "bytes": 657920
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\AzurePlayer.exe",
+      "sha256": "6360d2187904c26a9870fd73bd79c7d961026077c6936b1064cb75ef342a4e33",
+      "bytes": 21737472
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\AzureRender.exe",
+      "sha256": "165431654162e87550781a831daa809308f32282742f41c4fbb758a9b8ab2e55",
+      "bytes": 30527488
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\assimp-vc143-mtd.dll",
+      "sha256": "15bb0ea6fd67400297eb3db1770c5bc89979289bf8f7c88cc977c805d0ef8696",
+      "bytes": 16251904
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\brotlicommon.dll",
+      "sha256": "aaafbbd331474b787f7ec89b4ee5717f1a9b5f3eb2bfd8d1da1203c21d8b5e79",
+      "bytes": 208384
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\brotlidec.dll",
+      "sha256": "0b2c0c6dd462ecb81bb96c7093c79a950c3f0941aece8bed99dcee42c016ceec",
+      "bytes": 132608
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\bz2d.dll",
+      "sha256": "31d72c52a807aba0eaa374e4107fc5cc19795120b0534f815bfd4a8e8e49c20c",
+      "bytes": 190464
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\deflate.dll",
+      "sha256": "ae0ad9969a7caf1338e6eaad02f97d0358fe6a14dfb4b908f8adafd73a33d956",
+      "bytes": 218112
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\DirectXTex.dll",
+      "sha256": "3730fdaafa71d35af0256605802f26b6bd9a24eef0a41c42867a1b4d7144ebd5",
+      "bytes": 904704
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\FLAC.dll",
+      "sha256": "8ef45bc3f90c584a1e5c6feec5c65efb1b1be0e6a61661d5fc8b5d433744d662",
+      "bytes": 785920
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\freetyped.dll",
+      "sha256": "5e8ef8167fcac2032ead44566590519f8c1ad96bb803ed7ed1c1f03b3debf60c",
+      "bytes": 1552384
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\glfw3.dll",
+      "sha256": "70f64ba6e0c69fd6e3f9021ebaddf7cca835969f0bde20d2347d236eeba588ec",
+      "bytes": 483840
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\Iex-3_4_d.dll",
+      "sha256": "f0725e50911d431183478f02a34d3399dc55c9c005ee5e17b81dd4f1b51fd622",
+      "bytes": 977920
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\IlmThread-3_4_d.dll",
+      "sha256": "b7a1b2cd8bf770d67c57f192875e339470a8bc7eec301710cbc87065c4ae5408",
+      "bytes": 175616
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\Imath-3_2_d.dll",
+      "sha256": "2b5890f473059f961ae411da1dcc22ddc69d90d424f42332f5cf6a551483670f",
+      "bytes": 530944
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\jpeg62.dll",
+      "sha256": "409afc967fa61047efea61a9a543f686b35658218f7294e6bf2c0327dd5fa5e1",
+      "bytes": 1461248
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\ktx.dll",
+      "sha256": "d792b15cd7412a7a049f6d3c17eb8521290998d601dc2c6d77a3bc8f9aaf2ec4",
+      "bytes": 4353024
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\kubazip.dll",
+      "sha256": "2a0361031d02eb912b5f0822f7a95218321b5b896077110861953dd611559eaf",
+      "bytes": 294400
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\liblzma.dll",
+      "sha256": "a7961aa5db34a3cc38b24e6e5dd06d5ad41d4a71df02dd83ec5cdf422088e243",
+      "bytes": 542208
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\libmp3lame.DLL",
+      "sha256": "e3c1266eaba44cee2d07a9600caeaacff3549d0b7e29a6aa9fa456b320535a55",
+      "bytes": 520192
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\libpng16d.dll",
+      "sha256": "892c75e7c727f88d9b8f6ae2fd2d9153cf979de5e4172e34b87731b1fb257c56",
+      "bytes": 428032
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\libsharpyuv.dll",
+      "sha256": "c207623d981c5e3683fef719f8f668733ac3f22313614a6f1acd3e71ff507600",
+      "bytes": 83456
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\libwebp.dll",
+      "sha256": "0f30990cc7122cde07d3d5098b357957ed49a82d59f2f42275fb685330cf6a75",
+      "bytes": 864768
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\lua.dll",
+      "sha256": "82304ec1fdd274aeae2a36bd3f703b150b8dfceb40ab81a2453f4b4052a740e8",
+      "bytes": 500736
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\manifold.dll",
+      "sha256": "37ba21b39d5948875c3ae612963d7f477ed645b48d2a695415e657ecf209cde6",
+      "bytes": 5952512
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\minizipd.dll",
+      "sha256": "ecc5bd8c8e0dd484ef931de6d71240baedbc69c8031ecadb4b3578b21381df55",
+      "bytes": 131072
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\ogg.dll",
+      "sha256": "8b71e6e6a96f8e15517b2e4beced96cced23704907ea5c32b4b42151f23128c4",
+      "bytes": 89600
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\OpenEXR-3_4_d.dll",
+      "sha256": "6aa1d396d843066d15435e69f6934ebf9b66cb4abc5b60ca3ef51f1eff72248b",
+      "bytes": 3075072
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\OpenEXRCore-3_4_d.dll",
+      "sha256": "a407c25d0d41dc088dc7a7c30987f4ec4237d575678722f6ac590a0c08fcf65c",
+      "bytes": 766464
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\openjph.0.31d.dll",
+      "sha256": "789ab0807ac81b51ae000109ccaa6f76fc00ab7770004b6113ace8466ef4f9ea",
+      "bytes": 1473536
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\opus.dll",
+      "sha256": "504f6c7f0f8ceac97d98f2ca60563a9256fa88e096a3c0cb8afa4e3c2de121f0",
+      "bytes": 949248
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\poly2tri.dll",
+      "sha256": "13f111cc4b14f8f584c7f69096767502c397f6675029fef75c1a020f937db6cb",
+      "bytes": 196608
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\pugixml.dll",
+      "sha256": "1a9c1aacbb2dd03f03cb6ef2a956829903018ec17616c2462833253115672813",
+      "bytes": 537088
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\rmlui.dll",
+      "sha256": "72b2281a2cb62c32abb137333b9323214a99eb581c36e30daf144c0ef8ee45ab",
+      "bytes": 6662656
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\tiffd.dll",
+      "sha256": "dfe4ac2a635291131338cf0d83dc91329473c02dc86cdd12fd9a54c822fcfa4f",
+      "bytes": 1152000
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\vorbis.dll",
+      "sha256": "ce22725ec463ca49330ed8e5dacef50f9e69e26b6dd278e8fa5767686ebec4e8",
+      "bytes": 994816
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\vorbisenc.dll",
+      "sha256": "8445dfcd023576ff24c9bfc3bc06dd55f98c9279ebacb83aa81c1bf695a4828f",
+      "bytes": 718848
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\zd.dll",
+      "sha256": "16b4a4de0d69de2046a46ac0f0a4533ada012d330580a9e569b6394105221274",
+      "bytes": 214016
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\pinned-camera-candidate\\debug\\zstd.dll",
+      "sha256": "e42f67f091849aa0aac776a81c279bd399eb59b0a34de5e48506deb1bad03e6d",
+      "bytes": 1786368
+    }
+  ],
+  "archive": {
+    "path": "measurements.zip",
+    "sha256": "4bbe252e9fe89a95f530ee2dd7cd97d544004cc3cd671cea54f58709e0aa13d8",
+    "entries": [
+      {
+        "path": "render-camera-snapshot/debug-build.json",
+        "bytes": 552,
+        "sha256": "c7e551a8848fbac2534abadbaed6fb1e403fd1b4a5aaee4ecdbc875ad2749c04"
+      },
+      {
+        "path": "render-camera-snapshot/debug-build.log",
+        "bytes": 21837,
+        "sha256": "cfd18616c81294f5c589060c716119daf7b9255aebe4b5a048a35e2a556a4499"
+      },
+      {
+        "path": "render-camera-snapshot/debug-full-cpu.json",
+        "bytes": 619,
+        "sha256": "b99cdbbe01b6cad4c967d9042245eb8e0e456c44155797c364337111e6f02d31"
+      },
+      {
+        "path": "render-camera-snapshot/debug-full-cpu.log",
+        "bytes": 34435,
+        "sha256": "6061946983fd1e28e5e7a536b05ff3026697af5cbdc5d80d702b06d5bb1119f0"
+      },
+      {
+        "path": "render-camera-snapshot/debug-partial-summary.json",
+        "bytes": 1888,
+        "sha256": "cff73c7de8069f059b2d9dab3f7bc02d682987c315067dfd58923534a4164f07"
+      },
+      {
+        "path": "render-camera-snapshot/debug-remaining.json",
+        "bytes": 1917,
+        "sha256": "74516a54ec3b6cbde5b26a1729480f30123d3df52dedd447c9dfe7407e232562"
+      },
+      {
+        "path": "render-camera-snapshot/debug-remaining.log",
+        "bytes": 5112,
+        "sha256": "dff366b2f10b89c7c61092dba68bbd730a04a4ec8b38454ac8ddc72774068cce"
+      },
+      {
+        "path": "render-camera-snapshot/debug-remaining.xml",
+        "bytes": 28377,
+        "sha256": "74bc3648294b5d0116b716a6f3289f3bb2b59a98ecabc3fe14c12b0b571c07db"
+      },
+      {
+        "path": "render-camera-snapshot/debug-targeted.json",
+        "bytes": 965,
+        "sha256": "a51df04a1dfd8e37dab487f11c0815273c3080ad8daecd7b466c26db846b9ea0"
+      },
+      {
+        "path": "render-camera-snapshot/debug-targeted.log",
+        "bytes": 1938,
+        "sha256": "e35d1dc274013c74175f3078cfbaa03657546ca83930980509f8583a452bbe4e"
+      },
+      {
+        "path": "render-camera-snapshot/debug-targeted.xml",
+        "bytes": 6238,
+        "sha256": "07a8658546731999f161ae3e6b03c1b2f0c52d16ff5ab986fc92c46997d4acd3"
+      },
+      {
+        "path": "render-camera-snapshot/full-cpu-debug-task.json",
+        "bytes": 421,
+        "sha256": "c8a607a12997b0d7829e1377e9cc9c74adb567e7a6154df05d0d67ad203fa341"
+      },
+      {
+        "path": "render-camera-snapshot/full-cpu-launch-setup.json",
+        "bytes": 272,
+        "sha256": "4754796c32bff23727d1174c5d2878c1047c10ac3d9f1c0181da505a981de0df"
+      },
+      {
+        "path": "render-camera-snapshot/full-cpu-task.json",
+        "bytes": 410,
+        "sha256": "0b39a8c8f57d1c0248c64b6ea592a708e3211987d275c0e03ccd2a73a86dcc91"
+      },
+      {
+        "path": "render-camera-snapshot/pinned-products.json",
+        "bytes": 20702,
+        "sha256": "96d68c5f638536015ef96d6af7b9853ff64fb64eb04dcd01082fe34418016679"
+      },
+      {
+        "path": "render-camera-snapshot/red-build.log",
+        "bytes": 3943,
+        "sha256": "5bcb5be835d6bad05a4868609e4e2b62ce2e8532f3e04ea011a8254435c66ecf"
+      },
+      {
+        "path": "render-camera-snapshot/red-overload-build.log",
+        "bytes": 3691,
+        "sha256": "715bb21343d78b91165bb5533bf70e1d791b3c86c036933a3676adebc1cc6aa2"
+      },
+      {
+        "path": "render-camera-snapshot/red-overload.json",
+        "bytes": 1008,
+        "sha256": "2c5250aba489e334d4c4fe215ebe9f03d66f522b5daf34afd709ae3dd1d55643"
+      },
+      {
+        "path": "render-camera-snapshot/red.json",
+        "bytes": 238,
+        "sha256": "0301d51e23942d39d5d59c01761fbed2084408b13bb5cf7b92ab8a36f6c9757a"
+      },
+      {
+        "path": "render-camera-snapshot/release-build.json",
+        "bytes": 546,
+        "sha256": "c05da13a5a0225b37c585f40b31cba1cf30a405b8cb469632cc4fc28589de5df"
+      },
+      {
+        "path": "render-camera-snapshot/release-build.log",
+        "bytes": 21843,
+        "sha256": "35aedaad7d34b32d0f80e38bf2fc76419bb35aee80467706e36cce49a9b1c0c6"
+      },
+      {
+        "path": "render-camera-snapshot/release-full-cpu.json",
+        "bytes": 568,
+        "sha256": "fa11ab9d33f833b639665d39fdc1a70aed18ce528bbf3213ed4e7ea9924c5038"
+      },
+      {
+        "path": "render-camera-snapshot/release-full-cpu.log",
+        "bytes": 40046,
+        "sha256": "a648c995f6c4c2b1dc68465ccca9e0c5333a6312e01c263ce6a05d2553ba166c"
+      },
+      {
+        "path": "render-camera-snapshot/release-full-cpu.xml",
+        "bytes": 137066,
+        "sha256": "92e02eac9c998b0b45bf788821be6d4237d2163f2e481e466aa8a3c13d1ead43"
+      },
+      {
+        "path": "render-camera-snapshot/release-serial-diagnosis.json",
+        "bytes": 810,
+        "sha256": "474e5a3eb526a1fc1983bc807061cdf79f25a14fee8fc89e79595f7a6870b4a3"
+      },
+      {
+        "path": "render-camera-snapshot/release-serial-diagnosis.log",
+        "bytes": 632,
+        "sha256": "560dd1d452b3d3ae5d1c97ef70c843185f689917c248c33ba62e14d76c78abc8"
+      },
+      {
+        "path": "render-camera-snapshot/release-serial-diagnosis.xml",
+        "bytes": 1875,
+        "sha256": "8bd1249c66ee4554e24499519e7cdcfee7257ab1d621316a523fdeffef985ba1"
+      },
+      {
+        "path": "render-camera-snapshot/release-targeted.json",
+        "bytes": 969,
+        "sha256": "04b47646d699e7b0ed729cc2965bdba779bb5bc01c2d98b16a0e4a2e9000cb85"
+      },
+      {
+        "path": "render-camera-snapshot/release-targeted.log",
+        "bytes": 1942,
+        "sha256": "c36c752e747e4af121d3bfb7eb3327c3b078f480a62b1a2dbad08756c0bd5d05"
+      },
+      {
+        "path": "render-camera-snapshot/release-targeted.xml",
+        "bytes": 6235,
+        "sha256": "b5209078d69f5be1ac5b225dbdcfe6a81c676c2c21eb67c774ae12835573e351"
+      },
+      {
+        "path": "render-camera-snapshot/selected-tests.json",
+        "bytes": 484,
+        "sha256": "79a08abde6f49eeca3ccdb2d0a0569240be35a4c93d1e8f70bc3e16ce0a613b8"
+      },
+      {
+        "path": "render-camera-snapshot-task.json",
+        "bytes": 1545,
+        "sha256": "23b9a326f9a7317b0f8cf1cf00bc0a217a7725a84e592038eaaff4704bfb9a88"
+      },
+      {
+        "path": "retry_camera_cpu_failures.py",
+        "bytes": 1393,
+        "sha256": "4c7efa3c958fcbdd3d453bd9b7f137f12870a2258a5a463d51433d5c3c19a182"
+      },
+      {
+        "path": "run_camera_cpu_regression.py",
+        "bytes": 2194,
+        "sha256": "631746be1681fdc3a670b54ba489b3590ab06387d37d62dbf062912108e12af1"
+      },
+      {
+        "path": "run_debug_camera_cpu_regression.py",
+        "bytes": 2177,
+        "sha256": "8730a3c8cc8e9d267032c1be11a2e9b4368e584f2acb64e7eb430187243a0898"
+      },
+      {
+        "path": "run_remaining_camera_cpu.py",
+        "bytes": 2135,
+        "sha256": "feae4bd4bebe4b2ef3e2030d8fcf41bea3d118dea3996c9097aa048e32d43834"
+      },
+      {
+        "path": "run_render_camera_build.py",
+        "bytes": 1865,
+        "sha256": "54502c8c11bd24df42491e8b16d86f06868245610ed26776d14e6f718e28d995"
+      },
+      {
+        "path": "source/src/runtime/GameRuntime.hpp",
+        "bytes": 3863,
+        "sha256": "eed4492625e78534c50812c3fa372bcf4d5857eddeb97cd8cfe65efd37e45f1c"
+      },
+      {
+        "path": "source/src/runtime/GameRuntime.cpp",
+        "bytes": 7261,
+        "sha256": "9bf211e51a35cac03098bae05c6f2871eddab072ee0bf8cc697efdbfa7256709"
+      },
+      {
+        "path": "source/src/app/AzureRenderApp.cpp",
+        "bytes": 93722,
+        "sha256": "f75c6d596101382b3223b4374ca8c912f9830626fe87b1e906b2a5e119c34257"
+      },
+      {
+        "path": "source/tests/CameraSystemTests.cpp",
+        "bytes": 7785,
+        "sha256": "fc2b0f96a2c0adce99313d2ed7f85a9c961997fcfb269ab74ea84da63f9a6468"
+      }
+    ]
+  }
+}

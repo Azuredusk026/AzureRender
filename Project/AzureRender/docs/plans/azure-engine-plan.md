@@ -66,6 +66,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 该候选 CPU P95 为 33.85 毫秒，GPU 为 38.94 毫秒。
 帧场景[快照复用](../acceptance/nr/frame-context-snapshot.md)通过两配置各九项检查。
 该候选四帧输出一致，性能采集待空闲 GPU。
+相机与场景共享输入通过两配置各十四项 CPU 检查。
+扩展回归及延期范围见[共享输入验证](../acceptance/nr/render-camera-snapshot.md)。
+用户已将 GPU 复测延期，当前推进帧数据与构建流程。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

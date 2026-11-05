@@ -39,6 +39,8 @@ public:
     void cameraInput(float x, float y, float scroll);
     SceneDocument renderScene();
     GameCameraSelection renderCamera();
+    // The caller retains this frame's interpolated scene through selection.
+    GameCameraSelection renderCamera(const SceneDocument& scene);
     std::array<float,3> renderCameraPosition() const;
     std::array<float,3> renderCameraTarget() const;
 private:

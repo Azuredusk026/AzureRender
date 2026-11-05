@@ -6,6 +6,8 @@
 实际命令数量和完整帧耗时见[绑定验证](acceptance/nr/motion-bindings.md)。
 帧场景快照复用通过两配置各九项检查。
 原生四帧一致，性能条件见[快照验证](acceptance/nr/frame-context-snapshot.md)。
+相机共享场景输入通过两配置各十四项 CPU 检查。
+完整批次及目录规模待项见[共享输入验证](acceptance/nr/render-camera-snapshot.md)。
 完整画质与实时性能仍待验收。
 
 原生可玩还原按 NR0 至 NR12 推进。

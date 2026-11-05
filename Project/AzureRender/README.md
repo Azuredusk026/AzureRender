@@ -8,6 +8,7 @@
 运行时身份直接查询及双配置检查见[身份验证](docs/acceptance/nr/runtime-node-identity.md)。
 运动向量的命令复用和双设备结果见[绑定验证](docs/acceptance/nr/motion-bindings.md)。
 同帧场景输入及性能采集条件见[快照验证](docs/acceptance/nr/frame-context-snapshot.md)。
+相机与场景的共享输入见[呈现契约](docs/runtime/game-render-snapshot.md)和[CPU 验证](docs/acceptance/nr/render-camera-snapshot.md)。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。

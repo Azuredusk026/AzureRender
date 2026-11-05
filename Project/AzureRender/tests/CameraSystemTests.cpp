@@ -1,13 +1,39 @@
 #include "runtime/ComponentRegistry.hpp"
 #include "runtime/camera/GameCameraService.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
+#include "runtime/GameRuntime.hpp"
 #include "ecs/CameraComponents.hpp"
 #include "render/RenderCamera.hpp"
 #include "scene/TransformMath.hpp"
 #include <iostream>
 using namespace azurerender;
 void check(bool value,const char* message){if(!value)throw std::runtime_error(message);}
+void checkSharedRenderScene(){
+    SceneDocument document;document.nodes={{"parent","Parent"},{"camera","Camera","parent"}};
+    document.nodes[0].translation={10,0,0};document.nodes[1].translation={0,2,3};
+    RuntimeLifecycle runtime;runtime.loadScene(document);runtime.start();
+    runtime.world().addComponent(runtime.entity("camera"),game::GameCamera{});
+    auto* camera=runtime.world().tryGet<game::GameCamera>(runtime.entity("camera"));
+    GameRuntime game(runtime);game.setBeforeStep([&](double){
+        runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("parent"))->translation[0]=14;
+        runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("camera"))->translation[2]=6;
+    });
+    game.advance(1.0/60);game.advance(1.0/120);
+    const auto snapshot=game.renderScene();const auto selected=game.renderCamera(snapshot);
+    check(selected.node=="camera"&&selected.view.has_value(),"Rendered scene camera must preserve authored selection");
+    check(std::abs(snapshot.nodes[0].translation[0]-12)<1e-5F,"Frame scene must retain the interpolation phase");
+    check(selected.view->position==std::array<float,3>{12,2,4.5F},"Camera and geometry must share interpolated parent and local transforms");
+    runtime.world().tryGet<ecs::TransformComponent>(runtime.entity("parent"))->translation[0]=40;
+    check(game.renderCamera(snapshot).view->position==selected.view->position,"Camera selection must use the caller's scene instead of fetching a newer scene");
+    const auto live=game.renderScene();check(game.renderCamera().view->position==game.renderCamera(live).view->position,"Standalone camera calls must preserve their existing scene acquisition behavior");
+    camera->enabled=false;game.activateCamera(game::ThirdPersonCamera{},std::array<float,3>{1,2,3});
+    const auto followed=game.renderCamera(snapshot);
+    check(followed.node=="follow-camera"&&followed.view->position==game.renderCameraPosition(),"Missing authored cameras must preserve interpolated follow-camera selection");
+    game.deactivateCamera();check(!game.renderCamera(snapshot).view,"Missing authored and follow cameras must remain observable");
+    check(snapshot.nodes[0].translation[0]==12&&selected.view->position[0]==12,"Returned camera and frame scene must retain their owned values");
+}
 int main(){try{
+    checkSharedRenderScene();
     auto registry=makeRuntimeComponentRegistry();
     const auto camera=registry.defaults("azure.camera");registry.validate("azure.camera",camera);
     check(camera.at("version")==2,"Projection offsets require camera component version two");

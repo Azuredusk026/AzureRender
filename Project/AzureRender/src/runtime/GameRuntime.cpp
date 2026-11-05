@@ -100,7 +100,10 @@ SceneDocument GameRuntime::renderScene() {
     return scene;
 }
 GameCameraSelection GameRuntime::renderCamera(){
-    auto selected=resolveGameCamera(runtime_,renderScene());
+    return renderCamera(renderScene());
+}
+GameCameraSelection GameRuntime::renderCamera(const SceneDocument& scene){
+    auto selected=resolveGameCamera(runtime_,scene);
     if(!selected.view&&hasCamera_){
         CameraViewDescriptor view;view.position=renderCameraPosition();view.target=renderCameraTarget();
         selected.view=view;selected.node="follow-camera";selected.diagnostic.clear();
