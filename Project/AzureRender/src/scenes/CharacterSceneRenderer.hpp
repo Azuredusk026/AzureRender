@@ -545,6 +545,10 @@ private:
         std::uint32_t morphWeightBase=0;
     };
     std::vector<InstancePose> instancePoses_;
+    // Loaded resource skeletons are immutable; each instance receives a value
+    // copy so per-frame morph/expression edits cannot affect another instance.
+    std::vector<AssetPose> loadedBindPoses_;
+    std::size_t bindPoseCachedCopies_ = 0;
     struct SkinningDispatch { std::uint32_t meshKey; SkinningPushConstants parameters; };
     std::vector<SkinningDispatch> skinningDispatches_;
     std::vector<NodeAnimationFrame> animationFrames_;

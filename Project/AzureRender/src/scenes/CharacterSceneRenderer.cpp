@@ -536,7 +536,13 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + ", requested slots=" + std::to_string(indexedSlots)
             + ", stage sampler limit="
             + std::to_string(limits.maxPerStageDescriptorSamplers));
-    enqueue("buffers",loadTimings_.buffersMs,[this]{createUniformBuffers();createJointBuffers();if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));},true);
+    enqueue("buffers",loadTimings_.buffersMs,[this]{
+        loadedBindPoses_.clear();loadedBindPoses_.reserve(additionalResources_.size()+1);
+        loadedBindPoses_.push_back(bindAnimationPose(asset_));
+        for(const auto& resource:additionalResources_)loadedBindPoses_.push_back(bindAnimationPose(resource->asset));
+        createUniformBuffers();createJointBuffers();
+        if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));
+    },true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
     enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
     enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);initializeMotion(context);buildSceneState();},true);
@@ -707,6 +713,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
     ensureInstanceCapacity();
     constexpr float kPi = 3.14159265358979323846F;
     instancePoses_.clear();
+    bindPoseCachedCopies_=0;
     skinningDispatches_.clear();
     if(computeSkinningEnabled_){
         auto& cache=staticSkinningOutputs_.at(currentFrame_);cache.begin(sceneInstances_.size());
@@ -717,7 +724,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey-1]->asset;
         const auto animation = std::find_if(animationFrames_.begin(), animationFrames_.end(),
             [&](const auto& value) { return value.node == instance.nodeId; });
-        auto pose = bindAnimationPose(mesh);
+        AssetPose pose;
         auto morph = renderSettings_->morphWeights;
         if (animation != animationFrames_.end()) {
             pose = samplePresentedAnimationPose(mesh,*animation);
@@ -726,6 +733,9 @@ void CharacterSceneRenderer::prepareInstancePoses() {
         } else if (!mesh.animations.empty()) {
             pose = sampleAnimationPose(mesh, instance.meshKey == 0 ? animationIndex_ : 0,
                 animationTime_);
+        } else {
+            pose = loadedBindPoses_.at(instance.meshKey);
+            ++bindPoseCachedCopies_;
         }
         if(animation!=animationFrames_.end()&&animation->expression)
             pose=applyExpressionPose(mesh,pose,*animation->expression,animation->expressionWeight);
@@ -1647,6 +1657,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
             &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"bindPoseCacheEntries\": " << loadedBindPoses_.size() << ",\n"
+         << "  \"bindPoseCachedCopies\": " << bindPoseCachedCopies_ << ",\n"
          << "  \"computeSkinningPreparedDispatches\": " << (computeSkinningEnabled_?skinningDispatches_.size():0) << ",\n"
          << "  \"computeSkinningPreparedVertices\": " << preparedSkinningVertices << ",\n"
          << "  \"staticSkinningReusedInstances\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedCount():0) << ",\n"
@@ -3717,6 +3729,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
 void CharacterSceneRenderer::destroyResources() {
+    loadedBindPoses_.clear();bindPoseCachedCopies_=0;
     viewFog_.reset();
     destroyMaterialLightingPipelines();
     destroyMaterialClassPipelines();
