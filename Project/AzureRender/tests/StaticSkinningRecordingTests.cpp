@@ -41,7 +41,8 @@ void verify(const std::string& shaders,bool bindless){
      require(state.at("staticSkinningReusedInstances")==2&&state.at("computeSkinningPreparedDispatches")==0&&state.at("staticSkinningReusedVertices").get<unsigned>()>0,
          "Capture metadata must report prepared work and actual content-reuse decisions");
      require(state.at("bindPoseCacheEntries")==1&&state.at("bindPoseCachedCopies")==2,
-         "Static instances copy a loaded bind pose instead of resolving the resource hierarchy every frame");}
+         "Static instances copy a loaded bind pose instead of resolving the resource hierarchy every frame");
+     require(state.at("loadedResourceIdentityEntries")==1,"Loaded identity map must describe current resource ids");}
     settings.morphWeights={-0.F,0};graph=prepare(0);
     require(record(graph)>0,"Signed-zero legacy weights require recomputation to preserve exact vertex words");renderer.onFrameAbandoned();
     settings.morphWeights={.5F,0};graph=prepare(0);require(record(graph)>0,"Dynamic morph inputs bypass static reuse");renderer.onFrameAbandoned();
@@ -63,11 +64,13 @@ void verify(const std::string& shaders,bool bindless){
     graph=prepare(0);require(record(graph)==0,"Fresh production after a version conflict is reusable");renderer.onFrameSubmitted(13);
     renderer.onUnload(context);
     {std::ostringstream text;renderer.appendCaptureManifestFields(text);const auto state=nlohmann::json::parse("{"+text.str()+"\"end\":true}");
-     require(state.at("bindPoseCacheEntries")==0&&state.at("bindPoseCachedCopies")==0,"Unloading releases loaded bind-pose content");}
+     require(state.at("bindPoseCacheEntries")==0&&state.at("bindPoseCachedCopies")==0&&state.at("loadedResourceIdentityEntries")==0,"Unloading releases bind-pose content and resource identities");}
     require(!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers,"Static output lifecycle must release every resource");
-    frame.sceneSnapshot.reset();renderer.onLoad(context);graph=prepare(0);
+    frame.sceneSnapshot.reset();auto alias=context.scene.resources.front();alias.id="alias-mesh";
+    context.scene.resources.push_back(alias);context.scene.nodes.front().resourceId=alias.id;
+    renderer.onLoad(context);graph=prepare(0);
     {std::ostringstream text;renderer.appendCaptureManifestFields(text);const auto state=nlohmann::json::parse("{"+text.str()+"\"end\":true}");
-     require(state.at("bindPoseCacheEntries")==1&&state.at("bindPoseCachedCopies")==2,"Reloading establishes independent current bind-pose content");}
+     require(state.at("bindPoseCacheEntries")==1&&state.at("bindPoseCachedCopies")==2&&state.at("loadedResourceIdentityEntries")==2,"Reloading resolves aliases into their shared mesh and retains both physical instances");}
     require(record(graph)>0,"Reloaded GPU output is cold independently of CPU bind-pose content");
     renderer.onFrameAbandoned();frame.animations.push_back({});frame.animations.back().node="first";graph=prepare(0);
     {std::ostringstream text;renderer.appendCaptureManifestFields(text);const auto state=nlohmann::json::parse("{"+text.str()+"\"end\":true}");
@@ -75,6 +78,13 @@ void verify(const std::string& shaders,bool bindless){
     renderer.onFrameAbandoned();frame.animations.clear();graph=prepare(0);
     {std::ostringstream text;renderer.appendCaptureManifestFields(text);const auto state=nlohmann::json::parse("{"+text.str()+"\"end\":true}");
      require(state.at("bindPoseCachedCopies")==2,"Returning to static input restores independent bind-pose copies");}
+    renderer.onFrameAbandoned();context.scene.resources[0].id="reused-mesh";context.scene.resources[1].id="reused-alias";
+    context.scene.nodes[0].resourceId="reused-alias";context.scene.nodes[1].resourceId="reused-mesh";
+    require(renderer.reuseScene(context),"Same mesh keys must support new scene resource identities without GPU reload");
+    graph=prepare(0);
+    {std::ostringstream text;renderer.appendCaptureManifestFields(text);const auto state=nlohmann::json::parse("{"+text.str()+"\"end\":true}");
+     require(state.at("loadedResourceIdentityEntries")==2&&state.at("bindPoseCachedCopies")==2,"Reused scenes must resolve their current resource identities into both existing mesh instances");}
+    require(renderer.sceneState()&&renderer.sceneState()->pickables.size()==2,"Scene reuse must preserve both current pickable instances");
     renderer.onFrameAbandoned();renderer.onUnload(context);
     require(!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers,"Reloaded renderer releases every resource");
 }

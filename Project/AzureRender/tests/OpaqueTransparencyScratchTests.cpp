@@ -58,7 +58,7 @@ void operator delete[](void* pointer,std::align_val_t,const std::nothrow_t&) noe
 using namespace azurerender;
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 struct Measurement {std::size_t bytes;std::vector<rhi::RecordedCall> commands;};
-Measurement measure(const std::filesystem::path& shaders,const std::filesystem::path& source,std::size_t vertexCount,bool bindless) {
+Measurement measure(const std::filesystem::path& shaders,const std::filesystem::path& source,std::size_t vertexCount,bool bindless,unsigned aliases=0) {
     rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
     context.allocator=&backend.allocator();context.rhi=&backend;context.shaderDirectory=shaders.string();
     context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();
@@ -78,6 +78,7 @@ Measurement measure(const std::filesystem::path& shaders,const std::filesystem::
     std::map<std::string,std::shared_ptr<const LoadedAsset>> prepared{{path,opaque},{other,transparent}};
     context.preparedMeshes=&prepared;
     context.scene.resources.push_back({"opaque",path});context.scene.resources.push_back({"transparent",other});
+    for(unsigned i=0;i<aliases;++i)context.scene.resources.push_back({"unused-alias-"+std::to_string(i),path});
     for(const auto* id:{"opaque","transparent"}) {scene::SceneNodeDesc node;node.id=id;node.resourceId=id;context.scene.nodes.push_back(node);}
     RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;context.renderSettings=&settings;
     renderer.onLoad(context);
@@ -101,6 +102,12 @@ int main(int argc,char** argv) try {
         require(small.commands.size()==large.commands.size(),"Opaque-only vertex capacity must preserve recorded commands");
         for(std::size_t i=0;i<small.commands.size();++i)
             require(small.commands[i].name==large.commands[i].name&&small.commands[i].detail==large.commands[i].detail,"Opaque vertex capacity must preserve transparent ordering and draw inputs");
+        const auto alias=measure(argv[1],argv[2],0,bindless,1024);
+        std::cout<<"bindless="<<bindless<<" ordinaryAllocationBytes="<<small.bytes<<" alias1024AllocationBytes="<<alias.bytes<<std::endl;
+        require(alias.bytes<=small.bytes+4096,"Unused loaded resource aliases must not scale per-frame layout allocations");
+        require(small.commands.size()==alias.commands.size(),"Unused aliases must preserve the recorded draw count");
+        for(std::size_t i=0;i<small.commands.size();++i)
+            require(small.commands[i].name==alias.commands[i].name&&small.commands[i].detail==alias.commands[i].detail,"Unused aliases must preserve transparent ordering and every draw input");
     }
     std::cout<<"Opaque transparency scratch, descriptor paths, draw commands and resource release passed\n";return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<std::endl;return 1;}

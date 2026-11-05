@@ -42,6 +42,7 @@
 #include <vector>
 #include <deque>
 #include <functional>
+#include <unordered_map>
 
 namespace azurerender {
 
@@ -407,6 +408,7 @@ private:
     std::optional<std::uint32_t> faceSdfHeadNode_;
     // Scene content snapshot from onLoad; nodes drive instance building.
     scene::SceneDescription scene_;
+    std::unordered_map<std::string,std::size_t> loadedResourceMeshKeys_;
     bool sceneWorldCoordinates_ = false;
     std::vector<std::unique_ptr<AdditionalResource>> additionalResources_;
     // Normalized bind-pose head basis. Imported joint axes are not guaranteed

@@ -430,6 +430,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     animationPlaying_ = true;
 
     const scene::ResourceLayout layout(scene_);
+    loadedResourceMeshKeys_=layout.identities;
     applyMaterialBindings(asset_,layout.materials.at(0));
     jointBounds_.clear();jointBounds_.push_back(JointBounds::build(asset_));
     const auto enqueue=[this](std::string label,double& elapsed,std::function<void()> action,bool alwaysReport=false) {
@@ -573,8 +574,11 @@ bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(scene_.irradianceVolume.asset!=context.scene.irradianceVolume.asset)return false;
     if(nlohmann::json(scene_.viewFog)!=nlohmann::json(context.scene.viewFog))return false;
     if(context.renderSettings->faceSdfFeature!=faceSdfPrepared_||context.renderSettings->showcasePlatformFeature!=platformPrepared_)return false;
-    if(scene::ResourceLayout(scene_).keys!=scene::ResourceLayout(context.scene).keys)return false;
-    scene_=context.scene;animationIndex_=0;animationTime_=0;++temporalSceneGeneration_;temporalView_.clear();motionPoses_.clear();return true;
+    const scene::ResourceLayout layout(context.scene);
+    if(scene::ResourceLayout(scene_).keys!=layout.keys)return false;
+    auto identities=layout.identities;
+    scene_=context.scene;loadedResourceMeshKeys_=std::move(identities);
+    animationIndex_=0;animationTime_=0;++temporalSceneGeneration_;temporalView_.clear();motionPoses_.clear();return true;
 }
 
 void CharacterSceneRenderer::onSwapchainRecreate(
@@ -876,11 +880,12 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     } else {
         const std::vector<Matrix4> nodeWorldTransforms =
             scene::resolveNodeWorldTransforms(scene_);
-        const scene::ResourceLayout layout(scene_);
         std::vector<std::size_t> nodeMeshKeys;
         nodeMeshKeys.reserve(scene_.nodes.size());
-        for (const auto& node : scene_.nodes)
-            nodeMeshKeys.push_back(node.visible ? layout.meshKey(node.resourceId) : meshBounds.size());
+        for (const auto& node : scene_.nodes) {
+            const auto found=node.visible?loadedResourceMeshKeys_.find(node.resourceId):loadedResourceMeshKeys_.end();
+            nodeMeshKeys.push_back(found==loadedResourceMeshKeys_.end()?meshBounds.size():found->second);
+        }
         // Instances are grouped by resource so each draw section gets one
         // contiguous span in the instance buffer.
         const auto nodeOrder = scene::stableMeshNodeOrder(nodeMeshKeys,meshBounds.size());
@@ -1657,6 +1662,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
             &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"loadedResourceIdentityEntries\": " << loadedResourceMeshKeys_.size() << ",\n"
          << "  \"bindPoseCacheEntries\": " << loadedBindPoses_.size() << ",\n"
          << "  \"bindPoseCachedCopies\": " << bindPoseCachedCopies_ << ",\n"
          << "  \"computeSkinningPreparedDispatches\": " << (computeSkinningEnabled_?skinningDispatches_.size():0) << ",\n"
@@ -3729,6 +3735,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 
 
 void CharacterSceneRenderer::destroyResources() {
+    loadedResourceMeshKeys_.clear();
     loadedBindPoses_.clear();bindPoseCachedCopies_=0;
     viewFog_.reset();
     destroyMaterialLightingPipelines();
