@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "status": "cpu-verified-native-gpu-deferred-by-user",
+  "sourceBase": "43681b6",
+  "sourceSha256": {
+    "CMakeLists.txt": "fcda7c41736b8328bd23ad66af35092e305d32f6dc7a62d244589449cf61b2bb",
+    "src/rhi/Rhi.hpp": "3e1fd3ee0d7ca4fb701fb907b52e29d9fb83737f502fe1e385daa4be0d3f8a85",
+    "src/rhi/VulkanRhi.hpp": "26154e2225e15a612f233963200e745981b3f80eadc5c271d8f96ec830116b6c",
+    "src/rhi/VulkanRhi.cpp": "c7f51458a426324ca3367ed05e98e714d19226ef861db0d863c31a4f877071ba",
+    "src/render/RenderGraph.hpp": "c54f00f112028cf792ce761459556992c3a804a551d9c67147c1f01e2f4b6a74",
+    "src/render/RenderGraph.cpp": "5f28e99b8675a0816e2636c93041df6d507c14520fdb4083beeffc6c2349fe43",
+    "tests/BufferBarrierBatchTests.cpp": "d4f591497d219a059ff5f84cab2a464bfba7ae163485f1cf3683b6265c99b452"
+  },
+  "patchSha256": "a229b04a1a416e1766b36d13fafaf53157e8f6ca2137b00045aa15377722bd97",
+  "redMissingApi": {
+    "exitCode": 1,
+    "seconds": 69.09299999999348,
+    "command": [
+      "cmake",
+      "--build",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+      "--target",
+      "AzureBufferBarrierBatchTests"
+    ]
+  },
+  "redGraphUnbatched": {
+    "exitCode": 1
+  },
+  "greenCommandConversion": {
+    "exitCode": 0
+  },
+  "engine": {
+    "release": {
+      "build": {
+        "status": "passed",
+        "exitCode": 0,
+        "seconds": 435.01600000000326,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+          "build",
+          "--source",
+          "D:\\Projects\\FYP\\Project\\AzureRender",
+          "--build-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "--config",
+          "Release",
+          "--test-target",
+          "AzureBufferBarrierBatchTests",
+          "--test-target",
+          "AzureRenderRenderGraphTests",
+          "--test-target",
+          "AzureRenderNullRhiTests",
+          "--test-target",
+          "AzureRenderNullRhiPassTests",
+          "--test-target",
+          "AzureRenderTransientResourcePoolTests",
+          "--test-target",
+          "AzureMotionVectorTargetTests"
+        ],
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "AzureBufferBarrierBatchTests",
+            "AzureRenderRenderGraphTests",
+            "AzureRenderNullRhiTests",
+            "AzureRenderNullRhiPassTests",
+            "AzureRenderTransientResourcePoolTests",
+            "AzureMotionVectorTargetTests"
+          ],
+          "testProducts": {
+            "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureBufferBarrierBatchTests.exe",
+            "AzureRenderRenderGraphTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderRenderGraphTests.exe",
+            "AzureRenderNullRhiTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderNullRhiTests.exe",
+            "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderNullRhiPassTests.exe",
+            "AzureRenderTransientResourcePoolTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderTransientResourcePoolTests.exe",
+            "AzureMotionVectorTargetTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionVectorTargetTests.exe"
+          }
+        },
+        "productCount": 606,
+        "productionShaders535ByteIdentical": true,
+        "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+      },
+      "checks": {
+        "exitCode": 0,
+        "seconds": 7.703000000037719,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^(AzureRender.(BufferBarrierBatch|RenderGraph|NullRhi|NullRhiPass|TransientResourcePool|MotionVectorTarget)|AzureEngine.BuildProvenance)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\buffer-barrier-validation\\engine-release-checks.xml"
+        ],
+        "expectedChecks": 7
+      }
+    },
+    "debug": {
+      "build": {
+        "status": "passed",
+        "exitCode": 0,
+        "seconds": 341.719000000041,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+          "build",
+          "--source",
+          "D:\\Projects\\FYP\\Project\\AzureRender",
+          "--build-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "--config",
+          "Debug",
+          "--test-target",
+          "AzureBufferBarrierBatchTests",
+          "--test-target",
+          "AzureRenderRenderGraphTests",
+          "--test-target",
+          "AzureRenderNullRhiTests",
+          "--test-target",
+          "AzureRenderNullRhiPassTests",
+          "--test-target",
+          "AzureRenderTransientResourcePoolTests",
+          "--test-target",
+          "AzureMotionVectorTargetTests"
+        ],
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "AzureBufferBarrierBatchTests",
+            "AzureRenderRenderGraphTests",
+            "AzureRenderNullRhiTests",
+            "AzureRenderNullRhiPassTests",
+            "AzureRenderTransientResourcePoolTests",
+            "AzureMotionVectorTargetTests"
+          ],
+          "testProducts": {
+            "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureBufferBarrierBatchTests.exe",
+            "AzureRenderRenderGraphTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderRenderGraphTests.exe",
+            "AzureRenderNullRhiTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderNullRhiTests.exe",
+            "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderNullRhiPassTests.exe",
+            "AzureRenderTransientResourcePoolTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderTransientResourcePoolTests.exe",
+            "AzureMotionVectorTargetTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMotionVectorTargetTests.exe"
+          }
+        },
+        "productCount": 606,
+        "productionShaders535ByteIdentical": true,
+        "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+      },
+      "checks": {
+        "exitCode": 0,
+        "seconds": 29.98499999998603,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^(AzureRender.(BufferBarrierBatch|RenderGraph|NullRhi|NullRhiPass|TransientResourcePool|MotionVectorTarget)|AzureEngine.BuildProvenance)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\buffer-barrier-validation\\engine-debug-checks.xml"
+        ],
+        "expectedChecks": 7
+      }
+    }
+  },
+  "cpuChecksPerConfiguration": 7,
+  "mockDriverScope": "CPU interception of actual VulkanCommandRecorder conversion using fake handles, without creating a device; not driver synchronization or GPU performance evidence",
+  "nativeChecks": "Both-device synchronization/lifetime, four frozen images, actual barrier counts and original2100-frame performance deferred by user",
+  "fullVisualAcceptance": "failed-user-review",
+  "fullPerformance": "failed",
+  "archiveSha256": "a3687dd1f0e61928878341513e8cb203a48b66c6dd038176e2cd025c3b35c2de",
+  "archiveMembers": {
+    "buffer-barrier-batch/graph-red-test.json": "34be0b6510f051149591d2934713f8a01714d50d299e9a2c8baed5f22d975860",
+    "buffer-barrier-batch/graph-red-test.log": "7ad499b60b34bcabbda2b509bdcf555b1c16e9fce8a8f130901fdc902dd2173f",
+    "buffer-barrier-batch/graph-red.json": "36ff375e2a49872e60681ba2f05c4ce485833269f6f1bd1d9db9935b90e45ab5",
+    "buffer-barrier-batch/graph-red.log": "234f83b9ee629742a32daab0aad1b843215ba94800283c11269d637746d396c2",
+    "buffer-barrier-batch/green-test.json": "2c3265f2c8bbea5b81766f695a9df10dc49ae21d5e4c841fcfafacea2bd7cf99",
+    "buffer-barrier-batch/green-test.log": "9a61d82cbbe4e88e537d8986dcca361019cc5cd1cc5c47f48021b3acf340a32b",
+    "buffer-barrier-batch/green.json": "faf1eee33e0bc026d4a751a068d7e42bde580dc9b5affb6ccda98dd3fc6ce29b",
+    "buffer-barrier-batch/green.log": "466be19f942e7c1430c28f8d210bc99b56777d59818ff90aa4a67bd345349a97",
+    "buffer-barrier-batch/red.json": "e4d36fcc2e7ce43517c364d37c86fa4ea5a404868a57d9fa23a935e62d880936",
+    "buffer-barrier-batch/red.log": "03bb463983a978e2f52e6458eaf56236e14c9f56f2836aaea390f8f88027edb9",
+    "buffer-barrier-validation/engine-debug-build.json": "1c2e82b915901d1d8e1636499dbd20cf0c1ab8f157fa010ac491c3ef73450315",
+    "buffer-barrier-validation/engine-debug-build.log": "1073666f7b406b452cc460b19fce330d1e816d71085dc326fd3694754a9020a9",
+    "buffer-barrier-validation/engine-debug-checks.json": "e14c9332c11304e89edeb336f50519cbaf611f96629b5a33bc2ba2c34b0c5c88",
+    "buffer-barrier-validation/engine-debug-checks.log": "4557a7d3000c0bf7ddaf7dccadfb4cb36aaa7ed8ac25c750df6041876514fc8b",
+    "buffer-barrier-validation/engine-debug-checks.xml": "a601564e2d32af464d77671cd6860c11088f63332a679f62b7773f092c55f639",
+    "buffer-barrier-validation/engine-release-build.json": "ba6633a1bf676f3d2f933015e9019c70ce40a2e9106c145da194afdea86b6b6f",
+    "buffer-barrier-validation/engine-release-build.log": "b0760c4180508885b09a24e82bf81b5ed880c2fe74a1fe75079503549ce853a6",
+    "buffer-barrier-validation/engine-release-checks.json": "9ed98ad3c948bfd7581ea57d68f1ee8c239e4b3747281d69621c63ab4acf691c",
+    "buffer-barrier-validation/engine-release-checks.log": "e7201a13f2a8471c1a62407b719d600b2ee2d7e0e1f2b046cbee591a754f3b1e",
+    "buffer-barrier-validation/engine-release-checks.xml": "5b79c4f84feba37178b9dfd3961da9e3284ce8dc58fe6f3a6d33173494180ca7",
+    "drivers/build_barrier_red.py": "4b7723d2611d67e989ac6470ef0b084b044c57883b39e4e6b838872b3a392e3a",
+    "drivers/build_barrier_graph_red.py": "67bfb2e3f58cdd0f0d68ad8271872a286fffd08c25a15b6457274c392b147815",
+    "drivers/build_barrier_green.py": "281dd95029d58a5f0dd6791e9fae433979b48ba2ff4b411b83c66db7c6785eac",
+    "drivers/validate_barrier_candidate.py": "e849ed1fd5e4d08e5a274a6c64022ce71e548c2fed7674f64a0d3fd25ad7ce4d",
+    "source/CMakeLists.txt": "fcda7c41736b8328bd23ad66af35092e305d32f6dc7a62d244589449cf61b2bb",
+    "source/src/rhi/Rhi.hpp": "3e1fd3ee0d7ca4fb701fb907b52e29d9fb83737f502fe1e385daa4be0d3f8a85",
+    "source/src/rhi/VulkanRhi.hpp": "26154e2225e15a612f233963200e745981b3f80eadc5c271d8f96ec830116b6c",
+    "source/src/rhi/VulkanRhi.cpp": "c7f51458a426324ca3367ed05e98e714d19226ef861db0d863c31a4f877071ba",
+    "source/src/render/RenderGraph.hpp": "c54f00f112028cf792ce761459556992c3a804a551d9c67147c1f01e2f4b6a74",
+    "source/src/render/RenderGraph.cpp": "5f28e99b8675a0816e2636c93041df6d507c14520fdb4083beeffc6c2349fe43",
+    "source/tests/BufferBarrierBatchTests.cpp": "d4f591497d219a059ff5f84cab2a464bfba7ae163485f1cf3683b6265c99b452",
+    "engine-release/build-provenance.json": "a527d6170016bd2aff067b9acd830cd3f9e8c0e4065a58cac64d0af8e0896719",
+    "engine-debug/build-provenance.json": "89d65d42310b69fea94d8989112b8a28f2876a859289bea583dc8b0050d2c700"
+  }
+}

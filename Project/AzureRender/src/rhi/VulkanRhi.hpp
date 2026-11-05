@@ -171,6 +171,7 @@ public:
         std::uint32_t groupCountZ) override;
     void imageBarrier(const ImageBarrierDesc& barrier) override;
     void bufferBarrier(const BufferBarrierDesc& barrier) override;
+    void bufferBarriers(const BufferBarrierDesc* barriers, std::size_t count) override;
     void clearColorImage(
         VkImage image,
         VkImageLayout layout,

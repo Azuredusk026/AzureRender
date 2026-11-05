@@ -5,6 +5,7 @@
 #include <vulkan/vulkan.h>
 
 #include <cstdint>
+#include <cstddef>
 #include <functional>
 #include <optional>
 #include <cmath>
@@ -344,6 +345,13 @@ public:
 
     virtual void imageBarrier(const ImageBarrierDesc& barrier) = 0;
     virtual void bufferBarrier(const BufferBarrierDesc& barrier) = 0;
+    // Caller-owned storage remains valid through this call. All entries are
+    // dependencies at the same command position; fallback preserves order.
+    virtual void bufferBarriers(const BufferBarrierDesc* barriers, std::size_t count) {
+        if (count && !barriers) throw std::invalid_argument("Missing buffer barrier storage");
+        if (count > UINT32_MAX) throw std::length_error("Too many buffer barriers");
+        for (std::size_t i = 0; i < count; ++i) bufferBarrier(barriers[i]);
+    }
     virtual void clearColorImage(
         VkImage image,
         VkImageLayout layout,

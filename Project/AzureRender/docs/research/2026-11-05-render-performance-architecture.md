@@ -152,4 +152,6 @@ NVIDIA 的[管线建议](https://developer.nvidia.com/blog/vulkan-dos-donts/)说
 
 候选保留每条依赖的范围、访问条件及顺序。
 依据与验证边界见[资源依赖批量提交](../plans/2026-11-05-resource-barrier-batching.md)。
-该候选尚未实现，收益以实际负载验证为准。
+批量入口及图接入通过两配置各七项 CPU 检查。
+具体范围见[批量提交验证](../acceptance/nr/buffer-barrier-batching.md)。
+设备同步、实际数量及性能收益等待空闲 GPU 验证。

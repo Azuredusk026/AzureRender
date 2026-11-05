@@ -72,6 +72,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 构建目标选择通过[两配置增量核验](../acceptance/recovery/scoped-build-provenance.md)。
 Debug 目录规模的[局部候选](../acceptance/recovery/directory-scale-diagnosis.md)仍在原期限超时。
 该候选已隔离，继续推进具备条件的渲染架构单元。
+缓冲依赖的[批量入口](../acceptance/nr/buffer-barrier-batching.md)通过两配置各七项 CPU 检查。
+该候选的双设备同步、画面及原生收益等待复测。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

@@ -102,7 +102,7 @@ private:
     std::vector<RenderGraphBarrier> barriers_;
     std::vector<RenderGraphBufferBarrier> bufferBarriers_;
     std::vector<std::vector<std::size_t>> imageBarrierIndices_;
-    std::vector<std::vector<std::size_t>> bufferBarrierIndices_;
+    std::vector<std::vector<rhi::BufferBarrierDesc>> passBufferBarriers_;
 };
 
 }  // namespace azurerender

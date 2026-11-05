@@ -1030,6 +1030,42 @@ void VulkanCommandRecorder::bufferBarrier(const BufferBarrierDesc& barrier) {
         &bufferBarrier, 0, nullptr);
 }
 
+void VulkanCommandRecorder::bufferBarriers(const BufferBarrierDesc* barriers, std::size_t count) {
+    if (count && !barriers) throw std::invalid_argument("Missing buffer barrier storage");
+    if (count > UINT32_MAX) throw std::length_error("Too many buffer barriers");
+    if (!count) return;
+    std::vector<VkBufferMemoryBarrier> batch;
+    batch.reserve(count);
+    VkPipelineStageFlags sourceStage = 0, destinationStage = 0;
+    const auto flush = [&] {
+        if (batch.empty()) return;
+        vkCmdPipelineBarrier(commandBuffer_, sourceStage, destinationStage, 0,
+            0, nullptr, static_cast<std::uint32_t>(batch.size()), batch.data(), 0, nullptr);
+        batch.clear();
+    };
+    for (std::size_t i = 0; i < count; ++i) {
+        const auto& barrier = barriers[i];
+        const VkPipelineStageFlags source = barrier.srcStageMask == 0
+            ? VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT : barrier.srcStageMask;
+        const VkPipelineStageFlags destination = barrier.dstStageMask == 0
+            ? VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT : barrier.dstStageMask;
+        // Keep stage boundaries and repeated-handle dependency chains intact.
+        if (!batch.empty() && (source != sourceStage || destination != destinationStage
+            || std::any_of(batch.begin(), batch.end(), [&](const auto& entry) {
+                return entry.buffer == barrier.buffer;
+            }))) flush();
+        sourceStage = source; destinationStage = destination;
+        VkBufferMemoryBarrier entry{VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER};
+        entry.srcAccessMask = barrier.srcAccessMask;
+        entry.dstAccessMask = barrier.dstAccessMask;
+        entry.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        entry.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+        entry.buffer = barrier.buffer; entry.offset = barrier.offset; entry.size = barrier.size;
+        batch.push_back(entry);
+    }
+    flush();
+}
+
 void VulkanCommandRecorder::clearColorImage(
     const VkImage image,
     const VkImageLayout layout,

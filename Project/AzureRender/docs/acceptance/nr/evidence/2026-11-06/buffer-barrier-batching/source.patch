@@ -1,0 +1,145 @@
+diff --git a/Project/AzureRender/CMakeLists.txt b/Project/AzureRender/CMakeLists.txt
+index 5010210..a43b6da 100644
+--- a/Project/AzureRender/CMakeLists.txt
++++ b/Project/AzureRender/CMakeLists.txt
+@@ -1134,6 +1134,11 @@ if(BUILD_TESTING)
+     add_dependencies(AzureSurfaceResponseGpuTests AzureRenderShaders)
+     add_test(NAME AzureRender.SurfaceResponseGpu COMMAND AzureSurfaceResponseGpuTests "${SHADER_BINARY_DIR}/surface_response_test.comp.spv" "${CMAKE_CURRENT_SOURCE_DIR}/assets_public/showcase_looks.json")
+     set_tests_properties(AzureRender.SurfaceResponseGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
++    add_executable(AzureBufferBarrierBatchTests tests/BufferBarrierBatchTests.cpp)
++    target_link_libraries(AzureBufferBarrierBatchTests PRIVATE AzureRenderCore)
++    add_test(NAME AzureRender.BufferBarrierBatch COMMAND AzureBufferBarrierBatchTests)
++    set_tests_properties(AzureRender.BufferBarrierBatch PROPERTIES TIMEOUT 30)
++
+     add_executable(AzureSampledUploadGpuTests tests/SampledUploadGpuTests.cpp)
+     target_link_libraries(AzureSampledUploadGpuTests PRIVATE AzureRenderCore)
+     add_dependencies(AzureSampledUploadGpuTests AzureRenderShaders)
+diff --git a/Project/AzureRender/src/render/RenderGraph.cpp b/Project/AzureRender/src/render/RenderGraph.cpp
+index ad60ee2..0babc4d 100644
+--- a/Project/AzureRender/src/render/RenderGraph.cpp
++++ b/Project/AzureRender/src/render/RenderGraph.cpp
+@@ -136,8 +136,8 @@ void RenderGraph::execute(rhi::ICommandRecorder* recorder,
+         if (pass.recordCommands && recorder == nullptr)
+             throw std::logic_error("Command pass requires command recorder");
+     for (const auto pass : executionOrder_) {
+-        for (const auto index : bufferBarrierIndices_[pass])
+-            recorder->bufferBarrier(bufferBarriers_[index].buffer);
++        const auto& buffers = passBufferBarriers_[pass];
++        if (!buffers.empty()) recorder->bufferBarriers(buffers.data(), buffers.size());
+         for (const auto index : imageBarrierIndices_[pass])
+             recorder->imageBarrier(barriers_[index].image);
+         if (passes_[pass].record) passes_[pass].record();
+@@ -369,12 +369,12 @@ bool RenderGraph::compile(std::string& error) {
+         }
+     }
+     imageBarrierIndices_.assign(passes_.size(), {});
+-    bufferBarrierIndices_.assign(passes_.size(), {});
++    passBufferBarriers_.assign(passes_.size(), {});
+     for (std::size_t i = 0; i < barriers_.size(); ++i)
+         if (barriers_[i].image.image != VK_NULL_HANDLE)
+             imageBarrierIndices_[barriers_[i].pass].push_back(i);
+-    for (std::size_t i = 0; i < bufferBarriers_.size(); ++i)
+-        bufferBarrierIndices_[bufferBarriers_[i].pass].push_back(i);
++    for (const auto& barrier : bufferBarriers_)
++        passBufferBarriers_[barrier.pass].push_back(barrier.buffer);
+     compiled_ = true;
+     return true;
+ }
+diff --git a/Project/AzureRender/src/render/RenderGraph.hpp b/Project/AzureRender/src/render/RenderGraph.hpp
+index aa311a7..b76082b 100644
+--- a/Project/AzureRender/src/render/RenderGraph.hpp
++++ b/Project/AzureRender/src/render/RenderGraph.hpp
+@@ -102,7 +102,7 @@ private:
+     std::vector<RenderGraphBarrier> barriers_;
+     std::vector<RenderGraphBufferBarrier> bufferBarriers_;
+     std::vector<std::vector<std::size_t>> imageBarrierIndices_;
+-    std::vector<std::vector<std::size_t>> bufferBarrierIndices_;
++    std::vector<std::vector<rhi::BufferBarrierDesc>> passBufferBarriers_;
+ };
+ 
+ }  // namespace azurerender
+diff --git a/Project/AzureRender/src/rhi/Rhi.hpp b/Project/AzureRender/src/rhi/Rhi.hpp
+index 822cdc2..997a79e 100644
+--- a/Project/AzureRender/src/rhi/Rhi.hpp
++++ b/Project/AzureRender/src/rhi/Rhi.hpp
+@@ -5,6 +5,7 @@
+ #include <vulkan/vulkan.h>
+ 
+ #include <cstdint>
++#include <cstddef>
+ #include <functional>
+ #include <optional>
+ #include <cmath>
+@@ -344,6 +345,13 @@ public:
+ 
+     virtual void imageBarrier(const ImageBarrierDesc& barrier) = 0;
+     virtual void bufferBarrier(const BufferBarrierDesc& barrier) = 0;
++    // Caller-owned storage remains valid through this call. All entries are
++    // dependencies at the same command position; fallback preserves order.
++    virtual void bufferBarriers(const BufferBarrierDesc* barriers, std::size_t count) {
++        if (count && !barriers) throw std::invalid_argument("Missing buffer barrier storage");
++        if (count > UINT32_MAX) throw std::length_error("Too many buffer barriers");
++        for (std::size_t i = 0; i < count; ++i) bufferBarrier(barriers[i]);
++    }
+     virtual void clearColorImage(
+         VkImage image,
+         VkImageLayout layout,
+diff --git a/Project/AzureRender/src/rhi/VulkanRhi.cpp b/Project/AzureRender/src/rhi/VulkanRhi.cpp
+index 0c754bb..7700f22 100644
+--- a/Project/AzureRender/src/rhi/VulkanRhi.cpp
++++ b/Project/AzureRender/src/rhi/VulkanRhi.cpp
+@@ -1030,6 +1030,42 @@ void VulkanCommandRecorder::bufferBarrier(const BufferBarrierDesc& barrier) {
+         &bufferBarrier, 0, nullptr);
+ }
+ 
++void VulkanCommandRecorder::bufferBarriers(const BufferBarrierDesc* barriers, std::size_t count) {
++    if (count && !barriers) throw std::invalid_argument("Missing buffer barrier storage");
++    if (count > UINT32_MAX) throw std::length_error("Too many buffer barriers");
++    if (!count) return;
++    std::vector<VkBufferMemoryBarrier> batch;
++    batch.reserve(count);
++    VkPipelineStageFlags sourceStage = 0, destinationStage = 0;
++    const auto flush = [&] {
++        if (batch.empty()) return;
++        vkCmdPipelineBarrier(commandBuffer_, sourceStage, destinationStage, 0,
++            0, nullptr, static_cast<std::uint32_t>(batch.size()), batch.data(), 0, nullptr);
++        batch.clear();
++    };
++    for (std::size_t i = 0; i < count; ++i) {
++        const auto& barrier = barriers[i];
++        const VkPipelineStageFlags source = barrier.srcStageMask == 0
++            ? VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT : barrier.srcStageMask;
++        const VkPipelineStageFlags destination = barrier.dstStageMask == 0
++            ? VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT : barrier.dstStageMask;
++        // Keep stage boundaries and repeated-handle dependency chains intact.
++        if (!batch.empty() && (source != sourceStage || destination != destinationStage
++            || std::any_of(batch.begin(), batch.end(), [&](const auto& entry) {
++                return entry.buffer == barrier.buffer;
++            }))) flush();
++        sourceStage = source; destinationStage = destination;
++        VkBufferMemoryBarrier entry{VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER};
++        entry.srcAccessMask = barrier.srcAccessMask;
++        entry.dstAccessMask = barrier.dstAccessMask;
++        entry.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++        entry.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++        entry.buffer = barrier.buffer; entry.offset = barrier.offset; entry.size = barrier.size;
++        batch.push_back(entry);
++    }
++    flush();
++}
++
+ void VulkanCommandRecorder::clearColorImage(
+     const VkImage image,
+     const VkImageLayout layout,
+diff --git a/Project/AzureRender/src/rhi/VulkanRhi.hpp b/Project/AzureRender/src/rhi/VulkanRhi.hpp
+index 64f0eee..b2f8ca6 100644
+--- a/Project/AzureRender/src/rhi/VulkanRhi.hpp
++++ b/Project/AzureRender/src/rhi/VulkanRhi.hpp
+@@ -171,6 +171,7 @@ public:
+         std::uint32_t groupCountZ) override;
+     void imageBarrier(const ImageBarrierDesc& barrier) override;
+     void bufferBarrier(const BufferBarrierDesc& barrier) override;
++    void bufferBarriers(const BufferBarrierDesc* barriers, std::size_t count) override;
+     void clearColorImage(
+         VkImage image,
+         VkImageLayout layout,

@@ -136,8 +136,8 @@ void RenderGraph::execute(rhi::ICommandRecorder* recorder,
         if (pass.recordCommands && recorder == nullptr)
             throw std::logic_error("Command pass requires command recorder");
     for (const auto pass : executionOrder_) {
-        for (const auto index : bufferBarrierIndices_[pass])
-            recorder->bufferBarrier(bufferBarriers_[index].buffer);
+        const auto& buffers = passBufferBarriers_[pass];
+        if (!buffers.empty()) recorder->bufferBarriers(buffers.data(), buffers.size());
         for (const auto index : imageBarrierIndices_[pass])
             recorder->imageBarrier(barriers_[index].image);
         if (passes_[pass].record) passes_[pass].record();
@@ -369,12 +369,12 @@ bool RenderGraph::compile(std::string& error) {
         }
     }
     imageBarrierIndices_.assign(passes_.size(), {});
-    bufferBarrierIndices_.assign(passes_.size(), {});
+    passBufferBarriers_.assign(passes_.size(), {});
     for (std::size_t i = 0; i < barriers_.size(); ++i)
         if (barriers_[i].image.image != VK_NULL_HANDLE)
             imageBarrierIndices_[barriers_[i].pass].push_back(i);
-    for (std::size_t i = 0; i < bufferBarriers_.size(); ++i)
-        bufferBarrierIndices_[bufferBarriers_[i].pass].push_back(i);
+    for (const auto& barrier : bufferBarriers_)
+        passBufferBarriers_[barrier.pass].push_back(barrier.buffer);
     compiled_ = true;
     return true;
 }

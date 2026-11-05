@@ -2,7 +2,7 @@
 
 > 文档类型：运行时说明
 > 状态：生效
-> 更新日期：2026-09-26
+> 更新日期：2026-11-06
 > 适用范围：R1 Windows Vulkan 渲染核心
 > 源码入口：`src/rhi/Rhi.hpp`、`src/rhi/VulkanRhi.cpp`、`src/rhi/NullRhi.cpp`
 > 关联测试：`tests/NullRhiTests.cpp`、`tests/NullRhiPassTests.cpp`
@@ -28,6 +28,23 @@ RHI 同步契约把图像和缓冲区的布局、访问类型与流水线阶段�
 `mipLevels` 至少为 1。仅指定一侧阶段、空子资源范围、无阶段的显式访问掩码会抛出 `std::invalid_argument`，两个后端使用相同检查。
 
 `bufferBarrier()` 使用显式阶段和访问掩码。阶段为零时分别回退到 `TOP_OF_PIPE` 与 `BOTTOM_OF_PIPE`。`size` 可使用 `VK_WHOLE_SIZE`。队列族在当前单图形队列契约中固定为 `VK_QUEUE_FAMILY_IGNORED`。
+
+## 缓冲屏障批量记录
+
+`bufferBarriers(data, count)` 接收同一命令位置的描述集合。
+调用方持有描述存储至调用返回。
+空集合产生零条命令，非空集合要求有效存储。
+集合数量至多为三十二位无符号整数的最大值。
+
+公共回退按输入顺序调用 `bufferBarrier`。
+Vulkan 路径合并规范化阶段相同的连续条目。
+阶段变化或同一缓冲句柄再次出现时开始新组。
+每条资源的访问、字节范围及队列族条件保持完整。
+
+编译后的渲染图在每个过程入口提交对应集合。
+该入口位于绘制和分发之前。
+CPU 后端转换检查见[批量提交验证](../acceptance/nr/buffer-barrier-batching.md)。
+设备同步、画面及性能验证按当前延期清单执行。
 
 ## 线程与同步
 
