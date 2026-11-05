@@ -4,10 +4,69 @@
 #include "runtime/RuntimeLifecycle.hpp"
 #include "scene/SceneDescription.hpp"
 using azurerender::RuntimeLifecycle;
-void require(bool v) {
-    if (!v) throw std::runtime_error("Lifecycle assertion failed");
+void require(bool v, const char* message = "Lifecycle assertion failed") {
+    if (!v) throw std::runtime_error(message);
 }
+void checkNodeIdentityLookup() {
+    RuntimeLifecycle runtime;
+    require(runtime.nodeId(azurerender::ecs::kInvalidEntity).empty(), "Invalid entity has no node identity");
+    azurerender::SceneDocument document;
+    for (const auto* id : {"first", "second"}) {
+        azurerender::SceneNode node;
+        node.id = id;
+        document.nodes.push_back(node);
+    }
+    runtime.loadScene(document);
+    const auto first = runtime.entity("first");
+    const auto second = runtime.entity("second");
+    require(runtime.nodeId(first) == "first" && runtime.nodeId(second) == "second",
+        "Live node identities must resolve through the owning runtime");
+    const auto anonymous = runtime.world().createEntity();
+    require(runtime.nodeId(anonymous).empty(), "Anonymous ECS entities have no document identity");
+
+    RuntimeLifecycle other;
+    auto foreign = document;
+    foreign.nodes.resize(1);
+    foreign.nodes[0].id = "foreign";
+    other.loadScene(foreign);
+    runtime.world().swap(other.world());
+    require(runtime.nodeId(first).empty() && other.nodeId(first).empty(),
+        "An identity component from another document must reject despite matching numeric entity IDs");
+    runtime.world().swap(other.world());
+    require(runtime.nodeId(first) == "first", "Restored ownership must resolve the original node");
+
+    runtime.world().destroyEntity(first);
+    const auto recycled = runtime.world().createEntity();
+    require(recycled == first && runtime.nodeId(recycled).empty(),
+        "A recycled entity must not inherit the destroyed document node identity");
+    require(runtime.entity("first") == azurerender::ecs::kInvalidEntity,
+        "The forward lookup must also reject a recycled anonymous entity");
+    auto replacement = foreign;
+    replacement.nodes[0].id = "replacement";
+    runtime.replaceScene(replacement);
+    const auto current = runtime.entity("replacement");
+    require(runtime.nodeId(current) == "replacement" && runtime.entity("second") == azurerender::ecs::kInvalidEntity,
+        "Scene replacement must publish only the replacement document identities");
+    bool rejected = false;
+    try {
+        runtime.replaceScene(document, [](RuntimeLifecycle&) { throw std::runtime_error("configuration rejected"); });
+    } catch (const std::runtime_error&) { rejected = true; }
+    require(rejected && runtime.nodeId(current) == "replacement",
+        "Failed scene replacement must preserve the original identity ownership");
+    runtime.start();
+    azurerender::SceneNode spawned;
+    spawned.id = "spawned";
+    runtime.deferSpawn(spawned);
+    require(runtime.entity("spawned") == azurerender::ecs::kInvalidEntity,
+        "Deferred nodes acquire identities at their commit boundary");
+    runtime.beginFrame(.1);
+    require(runtime.nodeId(runtime.entity("spawned")) == "spawned", "Committed spawns must resolve their identity");
+    runtime.stop();
+    require(runtime.nodeId(current).empty(), "Stopped worlds release node identities");
+}
+
 int main() {
+    checkNodeIdentityLookup();
     RuntimeLifecycle runtime;
     int updates = 0;
     azurerender::SceneDocument document;

@@ -58,6 +58,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 联合性能按[渲染架构调研](../research/2026-11-05-render-performance-architecture.md)推进。
 稳定身份、帧数据索引及 GPU 事件分解为当前执行范围。
 资源键候选的四帧及 535 份生产程序逐字节一致。
+实体身份直接查询通过两配置各十九项检查。
+四帧冻结对照一致，详见[身份验证](../acceptance/nr/runtime-node-identity.md)。
+交流供电下 CPU P95 为 38.30 毫秒，GPU 为 40.38 毫秒。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 1,
+  "status": "runtime-identity-functional-verified-full-performance-failed",
+  "sourceBase": "b8f5f17",
+  "sourceSha256": "752dbb31f1c2a6f9bfb093be6b8bf3fd43d5fa9675da901ddbebc426fc213d74",
+  "patchSha256": "d6c0787a61e1ae2baf6a86916b1c7b8d778a1262c725eb4b245a209582aafc0e",
+  "fullVisualAcceptance": "failed-user-review",
+  "cpuTargeted": {
+    "Release": 19,
+    "Debug": 19
+  },
+  "productionShaders": {
+    "release": {
+      "count": 535,
+      "identical": true
+    },
+    "debug": {
+      "count": 535,
+      "identical": true
+    }
+  },
+  "releaseJoint": {
+    "status": "passed",
+    "visualAcceptance": "failed-user-review",
+    "executableSha256": "826f0a441763045bea9c51a3ebf8ff8734d7c033a2358cd1afbb7a46d3536210",
+    "seconds": 132.3279999999795,
+    "zeroAllocator": true,
+    "productionShaderBytesUnchanged": true,
+    "validationClean": true,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ]
+  },
+  "nativePerformance": {
+    "status": "measured",
+    "sourceBase": "b8f5f17",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 847.3279999999795,
+    "warmup": 300,
+    "samples": 1800,
+    "gpu": {
+      "shadowMs": {
+        "mean": 5.221505457777778,
+        "p95": 5.6864528,
+        "p99": 5.93591296
+      },
+      "sceneMs": {
+        "mean": 31.20550912,
+        "p95": 34.49195519999999,
+        "p99": 36.834396160000004
+      },
+      "postProcessMs": {
+        "mean": 0.2956066133333333,
+        "p95": 0.329728,
+        "p99": 0.34816
+      },
+      "frameMs": {
+        "mean": 36.72262119111111,
+        "p95": 40.3762528,
+        "p99": 43.14630944
+      }
+    },
+    "cpu": {
+      "mean": 32.034588944444444,
+      "p95": 38.298840000001,
+      "p99": 46.61636199999983
+    },
+    "wait": {
+      "mean": 5.000791222222222,
+      "p95": 9.181865000000856,
+      "p99": 12.80384500000037
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 2077,
+      "imageAllocations": 524,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2986910552,
+      "imageBytes": 3585217024,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3289043680
+    },
+    "peakWorkingSetBytes": 7425576960,
+    "environmentFailures": [
+      "run observation 151: driver relative thermal headroom is insufficient",
+      "run observation 152: driver relative thermal headroom is insufficient",
+      "run observation 152: software thermal slowdown is active",
+      "run observation 153: driver relative thermal headroom is insufficient",
+      "run observation 153: software thermal slowdown is active",
+      "run observation 154: software thermal slowdown is active",
+      "run observation 155: software thermal slowdown is active",
+      "run observation 156: driver relative thermal headroom is insufficient",
+      "run observation 156: software thermal slowdown is active",
+      "run observation 157: software thermal slowdown is active",
+      "run observation 158: software thermal slowdown is active",
+      "run observation 159: software thermal slowdown is active",
+      "run observation 160: driver relative thermal headroom is insufficient",
+      "run observation 160: software thermal slowdown is active",
+      "run observation 161: software thermal slowdown is active",
+      "run observation 162: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "timingBudgetPassed": false,
+    "powerProfileStable": true,
+    "environmentPassed": false
+  },
+  "comparisonScope": "AC retry has stable supply and80W. Original minimization pause excluded by300 warmup and raw2100 frame samples; walltime847s within900s. Thermal slowdown persists, so whole-performance acceptance remains failed. Battery40W control retained as incomparable.",
+  "archive": {
+    "path": "measurements.zip",
+    "sha256": "876b90db1b07857ee0f67246035b78d954de9a1413818fbbc8f7f5a325c62490",
+    "entries": [
+      {
+        "path": "capture_runtime_node_identity.py",
+        "bytes": 2490,
+        "sha256": "68d15eda710b52e50a2110216f3b07c19a040384669a804e3de62f028b9c11c0"
+      },
+      {
+        "path": "measure_joint_node_identity.py",
+        "bytes": 4098,
+        "sha256": "e111ff3950b3db434b771f4cdae15cab2ab9777c64bcea1ceaebf2b843d24bab"
+      },
+      {
+        "path": "measure_joint_node_identity_ac.py",
+        "bytes": 5015,
+        "sha256": "c4e06f86022d5a8222b4cc13087adb472c44fe4a873cc50827c465e48da0e62b"
+      },
+      {
+        "path": "runtime-node-identity/baseline-contract-build.log",
+        "bytes": 208,
+        "sha256": "f73d603723c2d71bb4f6b88980414e70d56d21707f3c18728fa8023e9a9d1431"
+      },
+      {
+        "path": "runtime-node-identity/baseline-contract.json",
+        "bytes": 232,
+        "sha256": "b83e7c42bd4f65bc1b0d582c3a81875d2f1029d87548d967f01c92300beeb411"
+      },
+      {
+        "path": "runtime-node-identity/baseline-contract.log",
+        "bytes": 36,
+        "sha256": "af15c6147ca84f8ce498dd6a0c5145ffa64f0aec563e75b0f45c5a693ab3d675"
+      },
+      {
+        "path": "runtime-node-identity/debug-build.json",
+        "bytes": 553,
+        "sha256": "78ceca6dfd81569a68406426d050519aabc5b18a5b691c35fd3c410d0b87eeea"
+      },
+      {
+        "path": "runtime-node-identity/debug-build.log",
+        "bytes": 26521,
+        "sha256": "ec380adfe5ccbad1f7b1e1b1486aeedab3e3d7c742f07967bab7db1d12e1c3c6"
+      },
+      {
+        "path": "runtime-node-identity/debug-targeted.json",
+        "bytes": 1145,
+        "sha256": "cfc734d83a1b81582cd2f6e75cbb9e88fbee0df8aa944802b602a46e512ba6ca"
+      },
+      {
+        "path": "runtime-node-identity/debug-targeted.log",
+        "bytes": 2643,
+        "sha256": "f3486f6613cb4d6bc32a8911ee4a30edb678c9f222dadfb82e0b924b42913903"
+      },
+      {
+        "path": "runtime-node-identity/debug-targeted.xml",
+        "bytes": 10685,
+        "sha256": "83cb1c19dc8965afb1b27a19594408dfc08c71eb2b2385a6b2f9272fc1907e54"
+      },
+      {
+        "path": "runtime-node-identity/release-build.json",
+        "bytes": 557,
+        "sha256": "823ae6d61ae469d88da82420d79f8ec17860e507655a07335490e02185466dce"
+      },
+      {
+        "path": "runtime-node-identity/release-build.log",
+        "bytes": 26527,
+        "sha256": "92dab0f8fac7edd4c5cacb640f69a4aa506d979f573a568927a3701da25f09f5"
+      },
+      {
+        "path": "runtime-node-identity/release-targeted.json",
+        "bytes": 1150,
+        "sha256": "2b07054bd4f70a947a7e3ceb9e70fdb340fcdf54e5b0e38c18db71ceb7f617f0"
+      },
+      {
+        "path": "runtime-node-identity/release-targeted.log",
+        "bytes": 2647,
+        "sha256": "26bb503fba3c983ea95397fd96e919a780da780623dba67e5d0e2f525782fda1"
+      },
+      {
+        "path": "runtime-node-identity/release-targeted.xml",
+        "bytes": 10713,
+        "sha256": "3ad418beaa0d2222a8eaa7766cd39b2ceb9d1f13bba1f6e6e535fa8230af408b"
+      },
+      {
+        "path": "runtime-node-identity/selected-tests.json",
+        "bytes": 683,
+        "sha256": "a1eedbb86742d7f72f9b49ad579b68438edadb7b622425e558bb62d90e4ea5b7"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/captures/gpu_capabilities.json",
+        "bytes": 11108,
+        "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/environment.json",
+        "bytes": 12155625,
+        "sha256": "8803784a06f2821aa7055193f8aaec46978ac2095ed913214a735e9f329646a0"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/frozen-inputs.json",
+        "bytes": 305792,
+        "sha256": "b25436658146b1884f47dbddf6c343d13376fff62fafe089f8c1e3bdf26fc72d"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/memory.json",
+        "bytes": 2143384,
+        "sha256": "4bae88e15991bf5fa0fb9d15c878239fad33e626a7621f71950cfb4f52f110ce"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/results.json",
+        "bytes": 2695,
+        "sha256": "9e147e34cf91c88c79e3a06727c14c91d914b32497ce2485ae7f5d9ed16926b8"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/runtime.json",
+        "bytes": 317957,
+        "sha256": "4877f36695077eb408c5e0f1e15389bca1b6b02d7c8ed81a51abdd64937f5298"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/stderr.log",
+        "bytes": 11777,
+        "sha256": "07ba2d51d23e8cb999b90f6c79ee0d5ff6e6cf27c807909fef04f8f17ce49ae4"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/stdout.log",
+        "bytes": 2290,
+        "sha256": "cd4b0d9e45de4b3e45fefe98cfc22d427cd5765b7dbe7bb0ef85d7fff5e162a4"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/surface-intervention.json",
+        "bytes": 213,
+        "sha256": "67f8f62ffc22b4c19053e0def0c5843e53393848a064b7d288ae02060f4a4f2e"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/task.json",
+        "bytes": 1283,
+        "sha256": "a76ecb8c7df8b98a7962a04e4167b99fd1d16157f72a262d25c180784d916f35"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/timing.csv",
+        "bytes": 114455,
+        "sha256": "7e0b419752fd39e51a07885d61232a3dad6404d4a25c1d3e5dc3afedcf7b52d0"
+      },
+      {
+        "path": "runtime-node-identity-ac-performance/timing.json",
+        "bytes": 142968,
+        "sha256": "aabf3b622034df60726db8dc474dbfbba3ad7be628a7daf013f247d669e637ca"
+      },
+      {
+        "path": "runtime-node-identity-joint/command.json",
+        "bytes": 808,
+        "sha256": "674aa9246013e2d1124de10c440b41db0ec9be92c2c76479dd466e09e20e4547"
+      },
+      {
+        "path": "runtime-node-identity-joint/frames/capture_manifest.json",
+        "bytes": 15387,
+        "sha256": "bbccacbadce87aed5614b68a679098cc5a9dec1b07deb6d57e900ed7750f5354"
+      },
+      {
+        "path": "runtime-node-identity-joint/frames/frame_000000.png",
+        "bytes": 5714675,
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387"
+      },
+      {
+        "path": "runtime-node-identity-joint/frames/frame_000001.png",
+        "bytes": 5713820,
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab"
+      },
+      {
+        "path": "runtime-node-identity-joint/frames/frame_000002.png",
+        "bytes": 5713834,
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79"
+      },
+      {
+        "path": "runtime-node-identity-joint/frames/frame_000003.png",
+        "bytes": 5714218,
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574"
+      },
+      {
+        "path": "runtime-node-identity-joint/frames/gpu_capabilities.json",
+        "bytes": 11108,
+        "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+      },
+      {
+        "path": "runtime-node-identity-joint/results.json",
+        "bytes": 1822,
+        "sha256": "9ad7dd095f41a3d0e3db1e65889a285be00ac7f79aa7b72f01d8de177bc238fa"
+      },
+      {
+        "path": "runtime-node-identity-joint/runtime.json",
+        "bytes": 317961,
+        "sha256": "871a58dfab271a5a941ceb3472ea2ff2b76270b6e999f6f6970dee07f3f60929"
+      },
+      {
+        "path": "runtime-node-identity-joint/stderr.log",
+        "bytes": 11831,
+        "sha256": "bd08ac057b59956a9ac3240ed71adbdff94a464cc420b5e3073219df77514e4d"
+      },
+      {
+        "path": "runtime-node-identity-joint/stdout.log",
+        "bytes": 1819,
+        "sha256": "9636892f93dbfbeeaf4e5051f755e5f6f922d47007f26bcb8ecf2a23934a165d"
+      },
+      {
+        "path": "runtime-node-identity-performance/captures/gpu_capabilities.json",
+        "bytes": 11108,
+        "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+      },
+      {
+        "path": "runtime-node-identity-performance/environment.json",
+        "bytes": 6029481,
+        "sha256": "568330ccd1514d38f81890e221f7c63157ff82a7559d995e8568d67cffd6ae65"
+      },
+      {
+        "path": "runtime-node-identity-performance/frozen-inputs.json",
+        "bytes": 305792,
+        "sha256": "b25436658146b1884f47dbddf6c343d13376fff62fafe089f8c1e3bdf26fc72d"
+      },
+      {
+        "path": "runtime-node-identity-performance/memory.json",
+        "bytes": 1028333,
+        "sha256": "8d4abfe481eab5977bd2eb7a2c9de8b496f663e75cc6413178748c7aab3d42c2"
+      },
+      {
+        "path": "runtime-node-identity-performance/results.json",
+        "bytes": 3666,
+        "sha256": "86d1d4d2e105e297bc65ab51e093f8c36e12d207a7f609b28846dd2a43763b11"
+      },
+      {
+        "path": "runtime-node-identity-performance/runtime.json",
+        "bytes": 317957,
+        "sha256": "d2334a1c6cdd78228a80a3cb0e8defd3fa51f8216525f3d384a6ea14bf4ea2fa"
+      },
+      {
+        "path": "runtime-node-identity-performance/stderr.log",
+        "bytes": 11584,
+        "sha256": "f1dc515cd09a9b824317ff6ccf2db987f39f6f5163272ff68a35a99a75d87ec5"
+      },
+      {
+        "path": "runtime-node-identity-performance/stdout.log",
+        "bytes": 2227,
+        "sha256": "5c0330d020a681bc3c6e65aee9e8a3f013de80d68e302c959efda7b8a41a0299"
+      },
+      {
+        "path": "runtime-node-identity-performance/task.json",
+        "bytes": 1277,
+        "sha256": "3bde50029aaf45c8fbd5e1087877ce6260050ab3a523749b597b408dacba3e8d"
+      },
+      {
+        "path": "runtime-node-identity-performance/timing.csv",
+        "bytes": 115408,
+        "sha256": "251a2a6c5dfb56ca80eb81564fce560d893e5cfe66808d3845a76afefcf695f5"
+      },
+      {
+        "path": "runtime-node-identity-performance/timing.json",
+        "bytes": 143248,
+        "sha256": "b76b79ff19405c3d249009549a3ba2ae8d5771716266dfa85c123d9572656cc0"
+      },
+      {
+        "path": "runtime-node-identity-task.json",
+        "bytes": 1656,
+        "sha256": "de76650a1aa2d72b83d24a40ff6f575d60147fd58c26209885d462226d2c361a"
+      },
+      {
+        "path": "source/src/runtime/RuntimeLifecycle.hpp",
+        "bytes": 10309,
+        "sha256": "752dbb31f1c2a6f9bfb093be6b8bf3fd43d5fa9675da901ddbebc426fc213d74"
+      },
+      {
+        "path": "source/tests/RuntimeLifecycleTests.cpp",
+        "bytes": 5908,
+        "sha256": "fe04f60a26f0e514dca37e9d15bd407571bfcd5d48332a3157b56850a638c8c6"
+      }
+    ]
+  }
+}

@@ -23,8 +23,12 @@ class RuntimeLifecycle final {
         return nodeValid(nodeId) ? nodes_.at(nodeId) : ecs::kInvalidEntity;
     }
     std::string nodeId(ecs::Entity entityId) {
-        for (const auto& node : nodes_) if (node.second == entityId && nodeValid(node.first)) return node.first;
-        return {};
+        if (!world_.valid(entityId)) return {};
+        const auto* identity = world_.tryGet<NodeIdentity>(entityId);
+        if (identity == nullptr) return {};
+        const auto found = nodes_.find(identity->id);
+        return found != nodes_.end() && found->second == entityId
+            ? identity->id : std::string{};
     }
     void replaceScene(const SceneDocument& scene, const std::function<void(RuntimeLifecycle&)>& configure = {}) {
         if (state_ == State::Stopped) throw std::logic_error("Cannot replace a stopped runtime");
