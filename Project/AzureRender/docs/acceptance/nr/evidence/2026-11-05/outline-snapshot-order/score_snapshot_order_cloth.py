@@ -1,0 +1,17 @@
+import hashlib,json
+from pathlib import Path
+import cv2,numpy as np
+from PIL import Image
+cv2.setNumThreads(1);run=Path(__file__).resolve().parent;root=run.parents[2];prior=root/'build/runs/20261101-143507-native-cloth-variants-d877ef';native=root/'build/runs/20261023-105023-character-composite-contribution-diagnosis-acb8e5';sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();capture=run/'snapshot-shell-order-regression/release-background/frames/frame_000000.png';candidate=np.asarray(Image.open(capture).convert('RGB'));packed=np.fromfile(native/'after-hair.bin',dtype='<u4').reshape(1440,2560)[::-1]
+def decode(raw):
+ def uf(value,bits):
+  exponent=value>>bits;mantissa=value&((1<<bits)-1);return np.where(exponent==0,mantissa.astype(float)*2**(-14-bits),(1+mantissa/(1<<bits))*np.exp2(exponent.astype(float)-15))
+ return np.stack((uf(raw&2047,6),uf((raw>>11)&2047,6),uf((raw>>22)&1023,5)),axis=2)
+finalPacked=np.fromfile(Path('D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261101-143507-native-cloth-variants-d877ef\\variant-targets\\e1383\\target-1383.bin'),dtype='<u4').reshape(1440,2560)[::-1]
+encode=lambda x:np.rint(np.clip(np.where(x<=.0031308,12.92*x,1.055*np.maximum(x,0)**(1/2.4)-.055),0,1)*255).astype(np.uint8);reference=encode(decode(finalPacked)*.25);weights=np.array([.2126,.7152,.0722]);linear=lambda a:np.where(a<=.04045,a/12.92,((a+.055)/1.055)**2.4);x=reference.astype(np.float64)/255;y=candidate.astype(np.float64)/255;ax=x@weights;by=y@weights;blur=lambda v:cv2.GaussianBlur(v,(11,11),1.5);ma=blur(ax);mb=blur(by);ssim=((2*ma*mb+.01**2)*(2*(blur(ax*by)-ma*mb)+.03**2))/((ma*ma+mb*mb+.01**2)*(blur(ax*ax)-ma*ma+blur(by*by)-mb*mb+.03**2));lx=linear(x)@weights;ly=linear(y)@weights;rows=[];union=np.zeros((1440,2560),bool)
+for draw in json.loads((prior/'variant-targets.json').read_text())['draws']:
+ if draw['event']==1383:continue
+ before,after=draw['outputs'];a=np.fromfile(prior/'variant-targets'/before['path'],dtype='<u4').reshape(1440,2560)[::-1];b=np.fromfile(prior/'variant-targets'/after['path'],dtype='<u4').reshape(1440,2560)[::-1];mask=(a!=b)&(b==packed);mask=cv2.erode(mask.astype(np.uint8),np.ones((13,13),np.uint8)).astype(bool);count=int(mask.sum());assert count>=50
+ meda=float(np.median(lx[mask]));medb=float(np.median(ly[mask]));score=float(ssim[mask].mean());err=abs(medb-meda)/max(meda,1e-12);delta=np.abs(candidate.astype(int)-reference.astype(int))[mask].max(axis=1);ys,xs=np.where(mask);worst=int(np.argmax(delta));rows.append(dict(event=draw['event'],qualifiedPixels=count,ssim=score,nativeMedianLuminance=meda,currentMedianLuminance=medb,medianLuminanceRelativeError=err,p95ByteError=float(np.quantile(delta,.95)),maximumByteError=int(delta.max()),worstPixel=[int(xs[worst]),int(ys[worst])],passed=score>=.95 and err<=.1));union|=mask
+report=dict(status='measured-native-cloth-interiors',geometry='captured fixed pose',referenceStage='native event 1383 after transparent cloth; mask retains event 950 opaque ownership',qualification='Actual draw changes whose final opaque words retain draw ownership, eroded six pixels',thresholds=dict(ssim=.95,medianLuminanceRelativeError=.1),candidateSha256=sha(capture),cases=rows,visualAcceptance='failed-user-review');(run/'snapshot-shell-cloth-comparison.json').write_text(json.dumps(report,indent=2)+'\n');Image.fromarray(reference).save(run/'snapshot-shell-cloth-reference.png');Image.fromarray(union.astype(np.uint8)*255).save(run/'snapshot-shell-cloth-mask.png');print(json.dumps(rows,indent=2))
+

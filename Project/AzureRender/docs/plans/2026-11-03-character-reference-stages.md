@@ -152,10 +152,12 @@ Debug 与 Release 的材质原点、径向法线及对象阴影三项 GPU 回归
 
 脸部肤色按用户提供的角色参考图与联合场景实拍共同核验。
 检查范围包括面颊、额头、下颌、颈部和肩部。
-皮肤材质通过基础颜色因子试调暖色比例，照明、曝光、色带与阴影输入保持逐项可追溯。
+皮肤材质的基础颜色因子为 `[0.98,0.93,0.89,1]`。
+照明、曝光、色带与阴影输入保持逐项可追溯。
 固定姿态与联合镜头分别采集，既定相似性和亮度门槛参与复验。
 固定姿态下，脸部 SSIM 为 0.99504，中位亮度相对误差为 3.63%。
 身体皮肤的两项值为 0.98744 和 5.79%。
 联合镜头完成 192 帧角色及物流动画，重开的四帧逐字节一致。
-当前联合候选为 `skin-warm-joint/joint-materials.azureproject`。
+当前联合候选为 `qualified-lit-surfaces-joint-v4/joint-materials.azureproject`。
+深度壳顺序的影响见[快照核验](../acceptance/nr/outline-snapshot-order.md)。
 参数、原图指纹与实拍见[肤色核验](../acceptance/nr/evidence/2026-11-04/skin-warmth/results.json)。

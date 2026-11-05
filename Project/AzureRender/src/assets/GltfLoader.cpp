@@ -907,24 +907,20 @@ std::vector<std::uint8_t> decodeImageRgba(
         typed.precision=azurerender::ImagePrecision::Float32;typed.colorSpace=azurerender::ImageColorSpace::Linear;
         typed.rgba32.resize(count);std::memcpy(typed.rgba32.data(),image.image.data(),count*4);
     } else throw std::runtime_error("Unsupported image precision");
-    const auto converted=azurerender::convertImageToRgba8(typed,encodedColor);
-    std::vector<std::uint8_t> pixels(
-        static_cast<std::size_t>(width) * height * 4);
-    for (std::size_t pixel = 0;
-         pixel < static_cast<std::size_t>(width) * height;
-         ++pixel) {
-        const std::size_t source = pixel * static_cast<std::size_t>(image.component);
-        for (std::size_t channel = 0; channel < 4; ++channel) {
-            const std::uint8_t sourceValue = channel < static_cast<std::size_t>(image.component)
-                ? converted.pixels[source + channel]
-                : (channel == 3 ? 255 : converted.pixels[source]);
-            pixels[pixel * 4 + channel] = static_cast<std::uint8_t>(
-                static_cast<double>(sourceValue) * std::clamp(factor[channel], 0.0, 1.0));
-        }
-    }
+    auto converted=azurerender::convertImageToRgba8(typed,encodedColor);
+    auto pixels=std::move(converted.pixels);
+    std::array<double,4> factors{};
+    for(std::size_t channel=0;channel<4;++channel)factors[channel]=std::clamp(factor[channel],0.0,1.0);
+    const bool identity=std::all_of(factors.begin(),factors.end(),[](double value){return value==1.0;});
+    if(!identity)for(std::size_t index=0;index<pixels.size();++index)
+        pixels[index]=static_cast<std::uint8_t>(static_cast<double>(pixels[index])*factors[index%4]);
     if(authored){const auto found=authored->find(imageIndex);if(found!=authored->end()){
         if(levelCount)*levelCount=static_cast<unsigned>(found->second.levels.size());
-        for(std::size_t level=1;level<found->second.levels.size();++level){const auto& samples=found->second.levels[level].rgba8;for(std::size_t i=0;i<samples.size();++i)pixels.push_back(static_cast<std::uint8_t>(samples[i]*std::clamp(factor[i%4],0.,1.)));}
+        for(std::size_t level=1;level<found->second.levels.size();++level){
+            const auto& samples=found->second.levels[level].rgba8;
+            if(identity)pixels.insert(pixels.end(),samples.begin(),samples.end());
+            else for(std::size_t i=0;i<samples.size();++i)pixels.push_back(static_cast<std::uint8_t>(samples[i]*factors[i%4]));
+        }
         if(normalUsage&&found->second.compression=="bc5")azurerender::reconstructBc5NormalPixels(pixels);
     }}
     return pixels;

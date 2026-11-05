@@ -1,0 +1,12 @@
+[OUTPUT] 
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+
+[HANDLER_OUTPUT] 
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-release
+
+    Start 25: AzureRender.OutlineCoverageRecording
+1/1 Test #25: AzureRender.OutlineCoverageRecording ...   Passed    5.27 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   5.31 sec

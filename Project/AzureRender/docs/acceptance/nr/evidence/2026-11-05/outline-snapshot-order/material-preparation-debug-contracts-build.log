@@ -1,0 +1,4 @@
+[0/2] Re-checking globbed directories...
+[1/4] Linking CXX executable AzureOutlineCoverageRecordingTests.exe
+[2/4] Building CXX object CMakeFiles\AzureMaterialDocumentTests.dir\tests\MaterialDocumentTests.cpp.obj
+[3/4] Linking CXX executable AzureMaterialDocumentTests.exe

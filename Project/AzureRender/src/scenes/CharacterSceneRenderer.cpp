@@ -2817,7 +2817,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
         recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
     recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);
     if(colorRequired)recordSurfaceOverlays(context,snapshot,commands,true);
-    if(depthShell)recordOutlineShells(context,snapshot,commands,true);
+    if(depthShell&&!colorRequired)recordOutlineShells(context,snapshot,commands,true);
 }
 
 void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
@@ -2832,7 +2832,8 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
         commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
         if(counters)++counters->descriptorSetBinds;
     }
-    for(const auto& span:snapshot.visibleSpans){
+    for(std::size_t spanIndex=0;spanIndex<snapshot.visibleSpans.size();++spanIndex){
+        const auto& span=snapshot.visibleSpans[spanIndex];
         const auto key=span[0],first=span[1],count=span[2];const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
         const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
         const auto materialBase=key==0?0:additionalResources_[key-1]->globalMaterialBase;
@@ -2877,6 +2878,9 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 if(counters){++counters->pushConstantUpdates;++counters->drawCalls;}
             });
         }
+        // Finish this resource's depth footprint before a later resource can
+        // contribute background colors or normals behind the expanded shell.
+        if(colorRequired)recordOutlineShells(context,snapshot,commands,true,counters,spanIndex);
     }
 }
 

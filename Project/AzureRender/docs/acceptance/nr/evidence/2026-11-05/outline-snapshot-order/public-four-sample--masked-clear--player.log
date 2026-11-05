@@ -1,0 +1,47 @@
+Project loaded: Local light laboratory (light-lab)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: enabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+[1793843622923][info][startup][code=0] Starting logical device
+[1793843623231][info][gpu][code=0] GPU capability report: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\snapshot-shell-public-msaa-debug\masked-clear\frames\gpu_capabilities.json
+[1793843623255][info][startup][code=0] Completed logical device in 331 ms
+[1793843623256][info][startup][code=0] Starting shadow resources
+[1793843623260][info][startup][code=0] Completed shadow resources in 2 ms
+[1793843623543][info][startup][code=0] Starting graphics pipelines
+[1793843623553][info][startup][code=0] Completed graphics pipelines in 8 ms
+[1793843623555][info][startup][code=0] Starting scene renderer
+Turntable foot pivot: [0.000000, -1.000000, 0.000000]
+Asset path: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\snapshot-shell-public-msaa-debug\masked-clear\plane.gltf
+Loaded asset: 2145 vertices, 12288 indices, 1 primitives, 2 materials
+Material Class v1 inventory:
+  [0] public-outline -> generic, flags=0x4000, source=asset-extras
+  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+Skinning: static fallback, 1 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793843623814][info][render][code=0] Character texture access: indexed, requested slots=20, stage sampler limit=1048576
+[1793843623815][info][render][code=0] Scene load CPU preparation: 254.373400 ms, materialPixelBytes=344
+[1793843623876][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1793843623884][info][render][code=0] Scene load shared textures: 53.440300 ms
+[1793843623886][info][render][code=0] Scene load buffers: 0.240500 ms
+[1793843623888][info][render][code=0] Character skinning and morph: Vulkan compute path
+[1793843623888][info][render][code=0] Scene load skinning: 1.692500 ms
+[1793843623895][info][render][code=0] Scene load descriptors: 6.415500 ms
+[1793843629201][info][render][code=0] Scene load pipelines: 5305.482500 ms
+[1793843629201][info][render][code=0] Optional resources: faceSdfTextures=0, showcasePlatform=false
+Scene renderer: character (sceneType=character)
+[1793843629202][info][startup][code=0] Completed scene renderer in 5646 ms
+[1793843629202][info][startup][code=0] Starting editor interface
+[1793843629202][info][startup][code=0] Completed editor interface in 0 ms
+CQ-0 QA: camera=scene, light=scene, effect=none, state=enabled, isolation=beauty
+Diagnostic view: Beauty, stylized lighting: off, internal outline: off, HUD: off
+Clustered lighting: 1 lights, 3456 cluster references
+[1793843629211][info][render][code=0] Outline mask allocated: frame=0, instances=1, bytes=262144
+[1793843629234][info][capture][code=0] Capture progress: 1 / 2
+[1793843629251][info][render][code=0] Outline mask allocated: frame=1, instances=1, bytes=262144
+[1793843629272][info][capture][code=0] Capture progress: 2 / 2
+Rendered frames: 2
+Capture manifest: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\snapshot-shell-public-msaa-debug\masked-clear\frames\capture_manifest.json
+Captured frames: 2 at 60 fps
+Allocator after unload: buffers=0 images=0

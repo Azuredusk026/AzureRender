@@ -1,0 +1,235 @@
+{
+  "copy": {
+    "source": "ResourceId::0",
+    "destination": "ResourceId::0",
+    "name": "ID3D11DeviceContext::DrawInstanced()"
+  },
+  "textures": [
+    {
+      "id": "ResourceId::15751",
+      "format": "R10G10B10A2_UNORM",
+      "history": []
+    },
+    {
+      "id": "ResourceId::141846",
+      "format": "R10G10B10A2_UNORM",
+      "history": []
+    },
+    {
+      "id": "ResourceId::141946",
+      "format": "R10G10B10A2_UNORM",
+      "history": [
+        {
+          "event": 522,
+          "primitive": 0,
+          "depthFailed": false,
+          "discarded": false,
+          "post": [
+            0.6256109476089478,
+            0.9960899353027344,
+            1.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ResourceId::141952",
+      "format": "R10G10B10A2_UNORM",
+      "history": [
+        {
+          "event": 275,
+          "primitive": 0,
+          "depthFailed": false,
+          "discarded": false,
+          "post": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 422,
+          "primitive": 10175,
+          "depthFailed": false,
+          "discarded": true,
+          "post": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 440,
+          "primitive": 10172,
+          "depthFailed": false,
+          "discarded": true,
+          "post": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 460,
+          "primitive": 745,
+          "depthFailed": false,
+          "discarded": false,
+          "post": [
+            0.6256109476089478,
+            0.9960899353027344,
+            1.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ResourceId::141955",
+      "format": "R10G10B10A2_UNORM",
+      "history": [
+        {
+          "event": 274,
+          "primitive": 0,
+          "depthFailed": false,
+          "discarded": false,
+          "post": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 422,
+          "primitive": 10175,
+          "depthFailed": false,
+          "discarded": true,
+          "post": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 440,
+          "primitive": 10172,
+          "depthFailed": false,
+          "discarded": true,
+          "post": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 460,
+          "primitive": 745,
+          "depthFailed": false,
+          "discarded": false,
+          "post": [
+            0.0,
+            1.0,
+            0.6197458505630493,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ResourceId::141973",
+      "format": "R10G10B10A2_UNORM",
+      "history": [
+        {
+          "event": 273,
+          "primitive": 0,
+          "depthFailed": false,
+          "discarded": false,
+          "post": [
+            0.4995112419128418,
+            0.4995112419128418,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 422,
+          "primitive": 10175,
+          "depthFailed": false,
+          "discarded": true,
+          "post": [
+            0.4995112419128418,
+            0.4995112419128418,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 440,
+          "primitive": 10172,
+          "depthFailed": false,
+          "discarded": true,
+          "post": [
+            0.4995112419128418,
+            0.4995112419128418,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 460,
+          "primitive": 745,
+          "depthFailed": false,
+          "discarded": false,
+          "post": [
+            0.4985337257385254,
+            0.4995112419128418,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 950,
+          "primitive": 10175,
+          "depthFailed": true,
+          "discarded": false,
+          "post": [
+            0.4985337257385254,
+            0.4995112419128418,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "event": 975,
+          "primitive": 1490,
+          "depthFailed": false,
+          "discarded": false,
+          "post": [
+            0.497556209564209,
+            0.5034213066101074,
+            1.0,
+            0.0
+          ]
+        },
+        {
+          "event": 1138,
+          "primitive": 10172,
+          "depthFailed": false,
+          "discarded": true,
+          "post": [
+            0.497556209564209,
+            0.5034213066101074,
+            1.0,
+            0.0
+          ]
+        }
+      ]
+    }
+  ]
+}

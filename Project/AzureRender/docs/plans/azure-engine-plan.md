@@ -215,6 +215,9 @@ Debug 重开的四帧与 Release 逐字节一致。
 两种构建的 535 份输出与常规构建逐字节一致。
 Debug 综合交互保留资产刷新超时待项。
 严格字节及完整联合画质继续核验。
+快照的深度壳顺序及背景法线见[来源核验](../acceptance/nr/outline-snapshot-order.md)。
+图像准备保持原始字节，两配置联合四帧逐字节一致。
+Debug 联合回归在九百秒预算内完成，资源正常卸载。
 完整角色的皮肤、发丝、描边及透明阶段继续执行 Q1。
 服饰一、二的描边覆盖见[固定姿态核验](2026-11-03-character-reference-stages.md)。
 虹膜按[眼部输入](../acceptance/nr/eye-npr-inputs.md)核验独立基准和联合动作。

@@ -1,0 +1,98 @@
+Project loaded: Native fixed-pose current complete materials (native-static-minimal)
+Controls: Space pause/resume, R auto rotate, 1/2/3/4 full-body angles, 5 face close-up, 6 portfolio orbit, Left/Right fine rotate, F1/F2/F3 showcase presets, F4 animation pause/resume, F11 animation restart, 7/8 previous/next animation, 9 timeline status, 0 diagnostic view, H HUD, F10 inner outlines, F9 style toggle, F7/F8 mask strength, F5/F6 band threshold, F12 screenshot
+Validation layer: disabled
+Selected GPU: NVIDIA GeForce RTX 4060 Laptop GPU
+HDR scene color candidate: VK_FORMAT_R16G16B16A16_SFLOAT (supported)
+[1793842068599][info][startup][code=0] Starting logical device
+[1793842068937][info][gpu][code=0] GPU capability report: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\snapshot-shell-warm-capture\frames\gpu_capabilities.json
+[1793842068939][info][startup][code=0] Completed logical device in 339 ms
+[1793842068940][info][startup][code=0] Starting shadow resources
+[1793842068945][info][startup][code=0] Completed shadow resources in 4 ms
+[1793842069316][info][startup][code=0] Starting graphics pipelines
+[1793842069340][info][startup][code=0] Completed graphics pipelines in 23 ms
+[1793842069343][info][startup][code=0] Starting scene renderer
+Face SDF: material=M_actor_laevat_face_01, texture=1024x1024, headNode=capture_material_frame_10401, schemaVersion=2
+Face SDF light frame: evaluated per instance
+Turntable foot pivot: [0.014996, -0.000126, -0.081833]
+Asset path: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\qualified-warm-background-static\character\captured-opaque-overlays.glb
+Loaded asset: 206906 vertices, 738030 indices, 20 primitives, 24 materials
+Material Class v1 inventory:
+  [0] M_actor_laevat_body_01 -> skin, flags=0x287001, source=asset-extras
+  [1] M_actor_laevat_cloth_01 -> fabric, flags=0x283089, source=asset-extras
+  [2] M_actor_laevat_cloth_02 -> fabric, flags=0x202089, source=asset-extras
+  [3] M_actor_laevat_cloth_03 -> fabric, flags=0x402081, source=asset-extras
+  [4] M_actor_laevat_cloth_04 -> fabric, flags=0x286001, source=asset-extras
+  [5] M_actor_laevat_cloth_05 -> fabric, flags=0x206089, source=asset-extras
+  [6] M_actor_laevat_brow_01 -> skin, flags=0x283001, source=asset-extras
+  [7] M_eyewhiteshadow_common_01 -> overlay, flags=0x8010, source=asset-extras
+  [8] M_actor_laevat_face_01 -> face, flags=0x285805, source=asset-extras
+  [9] M_actor_laevat_hair_01 -> hair, flags=0x2312003, source=asset-extras
+  [10] M_hairshadow_common_04 -> overlay, flags=0x8010, source=asset-extras
+  [11] M_actor_laevat_iris_01 -> eye, flags=0x202001, source=asset-extras
+  [12] M_fx_laevat_toppotential_01 -> generic, flags=0x20, source=fallback/inferred
+  [13] source-cloth2-vfx-0 -> generic, flags=0x1040000, source=asset-extras
+  [14] source-cloth2-vfx-1 -> generic, flags=0x1040000, source=asset-extras
+  [15] source-cloth5-vfx-0 -> generic, flags=0x1040000, source=asset-extras
+  [16] source-cloth5-vfx-1 -> generic, flags=0x1040000, source=asset-extras
+  [17] captured-hair-front-blend -> hair, flags=0x112003, source=asset-extras
+  [18] diagnostic-expanded-hair-back -> skin, flags=0x82001, source=asset-extras
+  [19] diagnostic-lit-opaque-shell -> fabric, flags=0x2082001, source=asset-extras
+  [20] captured-lit-cloth-1-outline -> fabric, flags=0x283001, source=asset-extras
+  [21] captured-lit-cloth-2-outline -> fabric, flags=0x282001, source=asset-extras
+  [22] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred
+  [23] AzureRender_ShowcasePlatform -> showcase, flags=0x0, source=asset-extras
+Skinning: enabled, 323 joint matrices, 0 Morph targets
+Morph weights: 0.000000, 0.000000
+Animations: 0
+[1793842096269][warning][material][code=0] Full material replacement at slot name:M_actor_laevat_iris_01 from D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\qualified-warm-background-static\materials\f919b7a6-ca12-5772-b0e2-83cd5b5a046a.azurematerial discards source semantics: diffuse-ramp
+[1793842098057][info][render][code=0] Character texture access: fixed, requested slots=236, stage sampler limit=1048576
+[1793842098057][info][render][code=0] Scene load CPU preparation: 28712.821300 ms, materialPixelBytes=572220564
+[1793842098119][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_01, slot=0, bytes=16777216
+[1793842098295][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_01, slot=1, bytes=16777216
+[1793842098441][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_01, slot=2, bytes=16777216
+[1793842098616][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_02, slot=0, bytes=16777216
+[1793842098792][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_02, slot=1, bytes=16777216
+[1793842098938][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_02, slot=2, bytes=16777216
+[1793842099096][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_03, slot=0, bytes=16777216
+[1793842099119][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_03, slot=1, bytes=16777216
+[1793842099141][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_03, slot=2, bytes=16777216
+[1793842099166][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_04, slot=0, bytes=22369620
+[1793842099210][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_04, slot=1, bytes=22369620
+[1793842099284][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_04, slot=2, bytes=22369620
+[1793842099328][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_05, slot=0, bytes=16777216
+[1793842099350][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_05, slot=1, bytes=16777216
+[1793842099372][info][render][code=0] Scene material texture begin: M_actor_laevat_cloth_05, slot=2, bytes=16777216
+[1793842099500][info][render][code=0] Scene material texture begin: M_actor_laevat_hair_01, slot=0, bytes=22369620
+[1793842099544][info][render][code=0] Scene material texture begin: M_actor_laevat_hair_01, slot=1, bytes=22369620
+[1793842099593][info][render][code=0] Scene material texture begin: M_actor_laevat_hair_01, slot=6, bytes=22369620
+[1793842099637][info][render][code=0] Scene material texture begin: M_actor_laevat_hair_01, slot=7, bytes=22369620
+[1793842099720][info][render][code=0] Scene material texture begin: captured-hair-front-blend, slot=0, bytes=22369620
+[1793842099749][info][render][code=0] Scene material texture begin: captured-hair-front-blend, slot=6, bytes=22369620
+[1793842099778][info][render][code=0] Scene material texture begin: captured-hair-front-blend, slot=7, bytes=22369620
+[1793842099809][info][render][code=0] Scene material texture begin: diagnostic-expanded-hair-back, slot=0, bytes=16777216
+[1793842099987][info][render][code=0] Scene material texture begin: diagnostic-lit-opaque-shell, slot=0, bytes=16777216
+[1793842100012][info][render][code=0] Scene material texture begin: captured-lit-cloth-1-outline, slot=0, bytes=16777216
+[1793842100193][info][render][code=0] Scene material texture begin: captured-lit-cloth-2-outline, slot=0, bytes=16777216
+[1793842100383][info][render][code=0] Character IBL: GPU-prefiltered environment mip chain
+[1793842100407][info][render][code=0] Local reflection probe: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\qualified-warm-background-static\scene\cloth-captured-environment.azenv (authored six-face linear HDR mip chain)
+[1793842100412][info][render][code=0] Scene load shared textures: 40.657700 ms
+[1793842100444][info][render][code=0] Scene material progress: resource=1, elapsedMs=2321.527800, hashMs=674.098600, mipMs=1183.181200, uploadMs=422.938300, transferredBytes=365466264, discardedBytes=203608556
+[1793842100456][info][render][code=0] Scene load buffers: 0.146200 ms
+[1793842100456][info][render][code=0] Character skinning and morph: vertex-shader fallback path
+[1793842100456][info][render][code=0] Scene load skinning: 0.207200 ms
+[1793842100537][info][render][code=0] Scene load descriptors: 80.949400 ms
+[1793842100643][info][render][code=0] Scene load pipelines: 105.312200 ms
+[1793842100643][info][render][code=0] Optional resources: faceSdfTextures=1, showcasePlatform=true
+Scene renderer: character (sceneType=character)
+[1793842100643][info][startup][code=0] Completed scene renderer in 31299 ms
+[1793842100643][info][startup][code=0] Starting editor interface
+[1793842100644][info][startup][code=0] Completed editor interface in 0 ms
+CQ-0 QA: camera=scene, light=scene, effect=none, state=enabled, isolation=beauty
+Diagnostic view: Beauty, stylized lighting: off, internal outline: off, HUD: off
+Clustered lighting: 10 lights, 7648 cluster references
+[1793842100650][info][render][code=0] Outline mask allocated: frame=0, instances=1, bytes=3686400
+[1793842101288][info][capture][code=0] Capture progress: 1 / 1
+Rendered frames: 1
+Capture manifest: D:\Projects\FYP\Project\AzureRender\build\runs\20261103-234012-character-reference-stages-5abe6c\snapshot-shell-warm-capture\frames\capture_manifest.json
+Captured frames: 1 at 24 fps
+Allocator after unload: buffers=0 images=0

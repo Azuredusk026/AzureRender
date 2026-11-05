@@ -35,6 +35,7 @@ public:
     unsigned prefillDraws=0;
     std::set<std::uint64_t> prefillPipelines;
     std::vector<bool> snapshotPrefillOrder;
+    std::vector<bool> snapshotShellOrder;
     std::set<std::uint64_t> depthOnlyPipelines;
     std::set<std::uint64_t> outlinePipelines;
     std::set<std::uint64_t> depthShellPipelines;
@@ -80,6 +81,7 @@ public:
         if(pass==opaqueDepthPass&&pass!=VK_NULL_HANDLE&&!depthShellPipelines.count(pipeline)){
             ++ordinaryDepthDraws;if(depthOnlyPipelines.count(pipeline))++depthOnlyDraws;
             const bool prefill=prefillPipelines.count(pipeline)!=0;prefillDraws+=prefill;snapshotPrefillOrder.push_back(prefill);
+            if(!prefill)snapshotShellOrder.push_back(false);
         }
         if(pass==maskPass&&pass!=VK_NULL_HANDLE){
             require(count==1,"Coverage tiles must rasterize only their owning instance");
@@ -93,6 +95,7 @@ public:
             outlines.push_back(draw);
         }
         if(depthShellPipelines.count(pipeline)) {
+            snapshotShellOrder.push_back(true);
             Draw draw{first,count,0,0,fresh};
             std::memcpy(&draw.tile,constants.data()+136,4);
             std::memcpy(&draw.opacity,constants.data()+140,4);
@@ -110,7 +113,7 @@ public:
 };
 
 enum class Kind {Explicit,Legacy,Fading,Hidden,Blend,Platform,Mixed,DoubleSided,Mirrored,GizmoMirrored,CullingDisabled,HiddenExplicitLegacy,
-    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,DepthTested,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth,MainNoLighting,MainMultiply};
+    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,DepthTested,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth,MainNoLighting,MainMultiply,ReflectionProjectedMixed};
 void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool compute,bool multisample=false){
     rhi::NullRhi backend;
     if(multisample){backend.supportedSamples=VK_SAMPLE_COUNT_1_BIT|VK_SAMPLE_COUNT_4_BIT;backend.sampleShadingSupported=true;}
@@ -121,7 +124,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     settings.characterPresentation.platformEnabled=false;
     settings.innerOutlineEnabled=false;
     const bool reflection=kind==Kind::ReflectionConsumer||kind==Kind::ReflectionMirrored||kind==Kind::ReflectionDoubleSided
-        ||kind==Kind::ReflectionFading||kind==Kind::ReflectionMasked||kind==Kind::ReflectionNoDepth;
+        ||kind==Kind::ReflectionFading||kind==Kind::ReflectionMasked||kind==Kind::ReflectionNoDepth||kind==Kind::ReflectionProjectedMixed;
     settings.screenSpaceReflection.enabled=reflection;
     settings.silhouetteOutlineEnabled=kind==Kind::Legacy||kind==Kind::Fading||kind==Kind::Mixed||kind==Kind::HiddenExplicitLegacy;
     settings.sceneLightingEnabled=!settings.silhouetteOutlineEnabled;
@@ -151,7 +154,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     material.doubleSided=kind==Kind::DoubleSided||kind==Kind::ReflectionDoubleSided;
     const bool explicitOutline=kind!=Kind::Legacy&&kind!=Kind::Fading;
     if(explicitOutline)material.materialFeatures|=MaterialFeatureSilhouetteOutline;
-    const bool projection=kind==Kind::Projected||kind==Kind::DepthOnly||kind==Kind::ProjectedUv1
+    const bool projection=kind==Kind::ReflectionProjectedMixed||kind==Kind::Projected||kind==Kind::DepthOnly||kind==Kind::ProjectedUv1
         ||kind==Kind::ProjectedMixed||kind==Kind::ProjectedFading||kind==Kind::ProjectedPlatform||kind==Kind::DepthTested||kind==Kind::ColorOnly||kind==Kind::MaskedEye;
     if(projection) {
         material.outlineSurface.present=true;material.outlineSurface.depthPrepass=kind!=Kind::ColorOnly;
@@ -190,7 +193,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     add("subject",mesh);
     if(kind==Kind::Mirrored||kind==Kind::ReflectionMirrored)for(auto& node:context.scene.nodes)node.scale[0]=-1;
     if(kind==Kind::Mixed){auto legacy=mesh;legacy.materials.front().materialFeatures=MaterialFeatureNeutralFallback;add("legacy",legacy);}
-    if(kind==Kind::ProjectedMixed) {
+    if(kind==Kind::ProjectedMixed||kind==Kind::ReflectionProjectedMixed) {
         auto second=mesh;second.materials.front().outlineSurface.width=1.25F;
         add("second-projection",second);
     }
@@ -277,7 +280,12 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
     if(colorConsumer||kind==Kind::MaskedEye)require(capture.ordinaryDepthDraws>0&&capture.depthOnlyDraws==0,"Color consumers retain fully shaded snapshots");
     else require(capture.depthOnlyDraws==capture.ordinaryDepthDraws,"Depth consumers must avoid unused snapshot color shading");
     const bool visible=kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::DepthOnly;
-    const unsigned instances=kind==Kind::ProjectedMixed?4:2;
+    const unsigned instances=kind==Kind::ProjectedMixed||kind==Kind::ReflectionProjectedMixed?4:2;
+    if(kind==Kind::ReflectionProjectedMixed) {
+        const std::vector<bool> expected{false,true,false,true};
+        if(capture.snapshotShellOrder!=expected){std::cerr<<"Snapshot shell order: ";for(bool shell:capture.snapshotShellOrder)std::cerr<<shell;std::cerr<<"\n";}
+        require(capture.snapshotShellOrder==expected,"Each snapshot resource must complete its depth shell before later resource colors");
+    }
     require(capture.covered.size()==(masks?instances:0U),"Only eligible visible instances may own coverage tiles");
     std::set<unsigned> tiles;
     for(const auto& [instance,coverage]:capture.covered){
@@ -343,7 +351,7 @@ int main(int argc,char** argv){try{
     for(bool multisample:{false,true})for(bool bindless:{false,true})for(bool compute:{false,true})
         for(auto kind:{Kind::Explicit,Kind::Legacy,Kind::Fading,Kind::Hidden,Kind::Blend,Kind::Platform,Kind::Mixed,
                 Kind::DoubleSided,Kind::Mirrored,Kind::GizmoMirrored,Kind::CullingDisabled,Kind::HiddenExplicitLegacy,
-                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::DepthTested,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth,Kind::MainNoLighting,Kind::MainMultiply})
+                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::DepthTested,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth,Kind::MainNoLighting,Kind::MainMultiply,Kind::ReflectionProjectedMixed})
             verify(argv[1],kind,bindless,compute,multisample);
     std::cout<<"Explicit silhouettes retain independent coverage and legacy batching\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

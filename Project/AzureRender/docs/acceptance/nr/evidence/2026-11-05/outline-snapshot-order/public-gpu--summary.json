@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "qualityMode": "existing",
+  "playerSha256": "2a079225f4b60cdec94d3030f92332c042d9f75b54f803b6a93bf12042f95da8",
+  "captures": [
+    {
+      "name": "depth-only",
+      "outlinePixels": 0,
+      "playerSha256": "2a079225f4b60cdec94d3030f92332c042d9f75b54f803b6a93bf12042f95da8",
+      "imageSha256": "7e8a00a5049eacbfe1ac4edded02ab85cbbd1dca2cbfca8861bf5d0e0dae7933",
+      "validationEnabled": false,
+      "antiAliasing": 0,
+      "rasterizationSamples": 1,
+      "outlineBytes": 144,
+      "size": 256,
+      "distance": 5,
+      "maximumHorizontalBoundaryErrorPixels": null
+    },
+    {
+      "name": "masked-clear",
+      "outlinePixels": 0,
+      "playerSha256": "2a079225f4b60cdec94d3030f92332c042d9f75b54f803b6a93bf12042f95da8",
+      "imageSha256": "ec7c9b13b56a0cbd1a8e1194c5ce7221d300909ce5524ac12bd3d59b5d3cf79c",
+      "validationEnabled": false,
+      "antiAliasing": 0,
+      "rasterizationSamples": 1,
+      "outlineBytes": 144,
+      "size": 256,
+      "distance": 5,
+      "maximumHorizontalBoundaryErrorPixels": null
+    },
+    {
+      "name": "two-assets",
+      "outlinePixels": 86,
+      "playerSha256": "2a079225f4b60cdec94d3030f92332c042d9f75b54f803b6a93bf12042f95da8",
+      "imageSha256": "73dd05711003e63b857b7683c2cc6abc2ed2d91b82ff91ab3eece5824d0e8dc3",
+      "validationEnabled": false,
+      "antiAliasing": 0,
+      "rasterizationSamples": 1,
+      "outlineBytes": 17432,
+      "size": 256,
+      "distance": 5,
+      "maximumHorizontalBoundaryErrorPixels": null
+    },
+    {
+      "name": "two-assets-fixed",
+      "outlinePixels": 86,
+      "playerSha256": "2a079225f4b60cdec94d3030f92332c042d9f75b54f803b6a93bf12042f95da8",
+      "imageSha256": "73dd05711003e63b857b7683c2cc6abc2ed2d91b82ff91ab3eece5824d0e8dc3",
+      "validationEnabled": false,
+      "antiAliasing": 0,
+      "rasterizationSamples": 1,
+      "outlineBytes": 17432,
+      "size": 256,
+      "distance": 5,
+      "maximumHorizontalBoundaryErrorPixels": null
+    },
+    {
+      "name": "color-only",
+      "outlinePixels": 154,
+      "playerSha256": "2a079225f4b60cdec94d3030f92332c042d9f75b54f803b6a93bf12042f95da8",
+      "imageSha256": "ed241e6c302fb96cc5dc7752bd99cb73c85a2096819698b5a151cd9630bc493d",
+      "validationEnabled": false,
+      "antiAliasing": 0,
+      "rasterizationSamples": 1,
+      "outlineBytes": 144,
+      "size": 256,
+      "distance": 5,
+      "maximumHorizontalBoundaryErrorPixels": null
+    }
+  ],
+  "scope": "Public color, coverage and lifecycle controls; raw depth and native rim are separate acceptance evidence.",
+  "minimumTemporal": []
+}

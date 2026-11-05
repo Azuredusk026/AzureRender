@@ -1,0 +1,240 @@
+diff --git a/Project/AzureRender/src/assets/GltfLoader.cpp b/Project/AzureRender/src/assets/GltfLoader.cpp
+index 8516f6b..2a70842 100644
+--- a/Project/AzureRender/src/assets/GltfLoader.cpp
++++ b/Project/AzureRender/src/assets/GltfLoader.cpp
+@@ -907,24 +907,20 @@ std::vector<std::uint8_t> decodeImageRgba(
+         typed.precision=azurerender::ImagePrecision::Float32;typed.colorSpace=azurerender::ImageColorSpace::Linear;
+         typed.rgba32.resize(count);std::memcpy(typed.rgba32.data(),image.image.data(),count*4);
+     } else throw std::runtime_error("Unsupported image precision");
+-    const auto converted=azurerender::convertImageToRgba8(typed,encodedColor);
+-    std::vector<std::uint8_t> pixels(
+-        static_cast<std::size_t>(width) * height * 4);
+-    for (std::size_t pixel = 0;
+-         pixel < static_cast<std::size_t>(width) * height;
+-         ++pixel) {
+-        const std::size_t source = pixel * static_cast<std::size_t>(image.component);
+-        for (std::size_t channel = 0; channel < 4; ++channel) {
+-            const std::uint8_t sourceValue = channel < static_cast<std::size_t>(image.component)
+-                ? converted.pixels[source + channel]
+-                : (channel == 3 ? 255 : converted.pixels[source]);
+-            pixels[pixel * 4 + channel] = static_cast<std::uint8_t>(
+-                static_cast<double>(sourceValue) * std::clamp(factor[channel], 0.0, 1.0));
+-        }
+-    }
++    auto converted=azurerender::convertImageToRgba8(typed,encodedColor);
++    auto pixels=std::move(converted.pixels);
++    std::array<double,4> factors{};
++    for(std::size_t channel=0;channel<4;++channel)factors[channel]=std::clamp(factor[channel],0.0,1.0);
++    const bool identity=std::all_of(factors.begin(),factors.end(),[](double value){return value==1.0;});
++    if(!identity)for(std::size_t index=0;index<pixels.size();++index)
++        pixels[index]=static_cast<std::uint8_t>(static_cast<double>(pixels[index])*factors[index%4]);
+     if(authored){const auto found=authored->find(imageIndex);if(found!=authored->end()){
+         if(levelCount)*levelCount=static_cast<unsigned>(found->second.levels.size());
+-        for(std::size_t level=1;level<found->second.levels.size();++level){const auto& samples=found->second.levels[level].rgba8;for(std::size_t i=0;i<samples.size();++i)pixels.push_back(static_cast<std::uint8_t>(samples[i]*std::clamp(factor[i%4],0.,1.)));}
++        for(std::size_t level=1;level<found->second.levels.size();++level){
++            const auto& samples=found->second.levels[level].rgba8;
++            if(identity)pixels.insert(pixels.end(),samples.begin(),samples.end());
++            else for(std::size_t i=0;i<samples.size();++i)pixels.push_back(static_cast<std::uint8_t>(samples[i]*factors[i%4]));
++        }
+         if(normalUsage&&found->second.compression=="bc5")azurerender::reconstructBc5NormalPixels(pixels);
+     }}
+     return pixels;
+diff --git a/Project/AzureRender/src/scenes/CharacterOutlinePass.inc b/Project/AzureRender/src/scenes/CharacterOutlinePass.inc
+index 1a265dd..27ba069 100644
+--- a/Project/AzureRender/src/scenes/CharacterOutlinePass.inc
++++ b/Project/AzureRender/src/scenes/CharacterOutlinePass.inc
+@@ -13,7 +13,7 @@ static_assert(offsetof(OutlinePushConstants,gizmoTransform)==16);
+ }
+ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
+     const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands,
+-    bool depthShell,SceneSubmissionCounters* counters) {
++    bool depthShell,SceneSubmissionCounters* counters,std::optional<std::size_t> spanIndex) {
+     if(depthShell&&!outlineProjectionEnabled_)return;
+     const auto& settings=snapshot.settings;
+     // Both callers bind the global indexed set before their ordinary draws.
+@@ -25,7 +25,9 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
+             :((material.materialFeatures&MaterialFeatureSilhouetteOutline)!=0
+                 ||(!settings.sceneLightingEnabled&&settings.silhouetteOutlineEnabled));
+     };
+-    for(const auto& span:snapshot.visibleSpans) {
++    for(std::size_t index=spanIndex.value_or(0);index<snapshot.visibleSpans.size();++index) {
++        if(spanIndex&&index!=*spanIndex)break;
++        const auto& span=snapshot.visibleSpans[index];
+         const auto key=span[0],first=span[1],count=span[2];
+         const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+         if(std::none_of(mesh.primitives.begin(),mesh.primitives.end(),[&](const AssetPrimitive& primitive) {
+diff --git a/Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp b/Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp
+index be58065..7e4ebe6 100644
+--- a/Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp
++++ b/Project/AzureRender/src/scenes/CharacterSceneRenderer.cpp
+@@ -2817,7 +2817,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
+         recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
+     recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);
+     if(colorRequired)recordSurfaceOverlays(context,snapshot,commands,true);
+-    if(depthShell)recordOutlineShells(context,snapshot,commands,true);
++    if(depthShell&&!colorRequired)recordOutlineShells(context,snapshot,commands,true);
+ }
+ 
+ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+@@ -2832,7 +2832,8 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
+         commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
+         if(counters)++counters->descriptorSetBinds;
+     }
+-    for(const auto& span:snapshot.visibleSpans){
++    for(std::size_t spanIndex=0;spanIndex<snapshot.visibleSpans.size();++spanIndex){
++        const auto& span=snapshot.visibleSpans[spanIndex];
+         const auto key=span[0],first=span[1],count=span[2];const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+         const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
+         const auto materialBase=key==0?0:additionalResources_[key-1]->globalMaterialBase;
+@@ -2877,6 +2878,9 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
+                 if(counters){++counters->pushConstantUpdates;++counters->drawCalls;}
+             });
+         }
++        // Finish this resource's depth footprint before a later resource can
++        // contribute background colors or normals behind the expanded shell.
++        if(colorRequired)recordOutlineShells(context,snapshot,commands,true,counters,spanIndex);
+     }
+ }
+ 
+diff --git a/Project/AzureRender/src/scenes/CharacterSceneRenderer.hpp b/Project/AzureRender/src/scenes/CharacterSceneRenderer.hpp
+index 412eded..ec773a3 100644
+--- a/Project/AzureRender/src/scenes/CharacterSceneRenderer.hpp
++++ b/Project/AzureRender/src/scenes/CharacterSceneRenderer.hpp
+@@ -256,7 +256,8 @@ private:
+     void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+         rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
+     void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
+-        rhi::ICommandRecorder& commands,bool depthShell,SceneSubmissionCounters* counters=nullptr);
++        rhi::ICommandRecorder& commands,bool depthShell,SceneSubmissionCounters* counters=nullptr,
++        std::optional<std::size_t> spanIndex=std::nullopt);
+     struct MaterialPushConstants {
+         float alphaCutoff = 0.5F;
+         std::uint32_t alphaMode = 0;
+diff --git a/Project/AzureRender/tests/CharacterRepairTests.cpp b/Project/AzureRender/tests/CharacterRepairTests.cpp
+index e2282c2..d9a1e9b 100644
+--- a/Project/AzureRender/tests/CharacterRepairTests.cpp
++++ b/Project/AzureRender/tests/CharacterRepairTests.cpp
+@@ -12,6 +12,28 @@
+ using namespace azurerender;
+ void require(bool value, const char* message) { if (!value) throw std::runtime_error(message); }
+ 
++void testIdentityImageSamples(const nlohmann::json& fixture,const std::filesystem::path& directory) {
++    std::vector<std::uint8_t> samples(256*4);
++    for(unsigned value=0;value<256;++value) {
++        samples[value*4]=static_cast<std::uint8_t>(value);
++        samples[value*4+1]=static_cast<std::uint8_t>(255-value);
++        samples[value*4+2]=static_cast<std::uint8_t>(value^85);
++        samples[value*4+3]=static_cast<std::uint8_t>(value*37);
++    }
++    require(stbi_write_png((directory/"byte-sweep.png").string().c_str(),256,1,4,samples.data(),1024)!=0,"Cannot write byte sweep");
++    auto source=fixture;
++    source["images"]=nlohmann::json::array({{{"uri","byte-sweep.png"}}});
++    source["textures"]=nlohmann::json::array({{{"source",0}}});
++    source["materials"]=nlohmann::json::array({{{"name","byte-sweep"},
++        {"pbrMetallicRoughness",{{"baseColorTexture",{{"index",0}}},{"metallicRoughnessTexture",{{"index",0}}},
++            {"roughnessFactor",1},{"metallicFactor",1}}},{"normalTexture",{{"index",0}}}}});
++    for(auto& mesh:source["meshes"])for(auto& primitive:mesh["primitives"])primitive["material"]=0;
++    const auto file=directory/"byte-sweep.gltf";std::ofstream(file)<<source.dump();
++    const auto material=loadGltfAsset(file.string()).materials.at(0);
++    require(material.baseColorPixels==samples&&material.normalPixels==samples&&material.metallicRoughnessPixels==samples,
++        "Identity image preparation must retain all byte values in albedo, normal, physical and alpha channels");
++}
++
+ void testOutlineSurface(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+     using Json=nlohmann::json;
+     auto source=fixture;
+@@ -1126,6 +1148,7 @@ int main(int argc,char** argv) { try {
+     require(duplicateRejected,"Duplicate material features must be rejected");
+     testCharacterProfileTextures(input,directory);
+     testProjectedHairRamp(input,directory);
++    testIdentityImageSamples(input,directory);
+     testOutlineSurface(input,directory);
+     testMaterialRadianceScale(input,directory);
+     testMaterialDisplayTransform(input,directory);
+diff --git a/Project/AzureRender/tests/OutlineCoverageRecordingTests.cpp b/Project/AzureRender/tests/OutlineCoverageRecordingTests.cpp
+index 0fcf9bf..d3380e8 100644
+--- a/Project/AzureRender/tests/OutlineCoverageRecordingTests.cpp
++++ b/Project/AzureRender/tests/OutlineCoverageRecordingTests.cpp
+@@ -35,6 +35,7 @@ public:
+     unsigned prefillDraws=0;
+     std::set<std::uint64_t> prefillPipelines;
+     std::vector<bool> snapshotPrefillOrder;
++    std::vector<bool> snapshotShellOrder;
+     std::set<std::uint64_t> depthOnlyPipelines;
+     std::set<std::uint64_t> outlinePipelines;
+     std::set<std::uint64_t> depthShellPipelines;
+@@ -80,6 +81,7 @@ public:
+         if(pass==opaqueDepthPass&&pass!=VK_NULL_HANDLE&&!depthShellPipelines.count(pipeline)){
+             ++ordinaryDepthDraws;if(depthOnlyPipelines.count(pipeline))++depthOnlyDraws;
+             const bool prefill=prefillPipelines.count(pipeline)!=0;prefillDraws+=prefill;snapshotPrefillOrder.push_back(prefill);
++            if(!prefill)snapshotShellOrder.push_back(false);
+         }
+         if(pass==maskPass&&pass!=VK_NULL_HANDLE){
+             require(count==1,"Coverage tiles must rasterize only their owning instance");
+@@ -93,6 +95,7 @@ public:
+             outlines.push_back(draw);
+         }
+         if(depthShellPipelines.count(pipeline)) {
++            snapshotShellOrder.push_back(true);
+             Draw draw{first,count,0,0,fresh};
+             std::memcpy(&draw.tile,constants.data()+136,4);
+             std::memcpy(&draw.opacity,constants.data()+140,4);
+@@ -110,7 +113,7 @@ public:
+ };
+ 
+ enum class Kind {Explicit,Legacy,Fading,Hidden,Blend,Platform,Mixed,DoubleSided,Mirrored,GizmoMirrored,CullingDisabled,HiddenExplicitLegacy,
+-    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,DepthTested,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth,MainNoLighting,MainMultiply};
++    Projected,DepthOnly,ProjectedUv1,ProjectedMixed,ProjectedFading,ProjectedPlatform,DepthTested,ColorOnly,RefractionConsumer,TintConsumer,MaskedEye,ReflectionConsumer,ReflectionMirrored,ReflectionDoubleSided,ReflectionFading,ReflectionMasked,ReflectionNoDepth,MainNoLighting,MainMultiply,ReflectionProjectedMixed};
+ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool compute,bool multisample=false){
+     rhi::NullRhi backend;
+     if(multisample){backend.supportedSamples=VK_SAMPLE_COUNT_1_BIT|VK_SAMPLE_COUNT_4_BIT;backend.sampleShadingSupported=true;}
+@@ -121,7 +124,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
+     settings.characterPresentation.platformEnabled=false;
+     settings.innerOutlineEnabled=false;
+     const bool reflection=kind==Kind::ReflectionConsumer||kind==Kind::ReflectionMirrored||kind==Kind::ReflectionDoubleSided
+-        ||kind==Kind::ReflectionFading||kind==Kind::ReflectionMasked||kind==Kind::ReflectionNoDepth;
++        ||kind==Kind::ReflectionFading||kind==Kind::ReflectionMasked||kind==Kind::ReflectionNoDepth||kind==Kind::ReflectionProjectedMixed;
+     settings.screenSpaceReflection.enabled=reflection;
+     settings.silhouetteOutlineEnabled=kind==Kind::Legacy||kind==Kind::Fading||kind==Kind::Mixed||kind==Kind::HiddenExplicitLegacy;
+     settings.sceneLightingEnabled=!settings.silhouetteOutlineEnabled;
+@@ -151,7 +154,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
+     material.doubleSided=kind==Kind::DoubleSided||kind==Kind::ReflectionDoubleSided;
+     const bool explicitOutline=kind!=Kind::Legacy&&kind!=Kind::Fading;
+     if(explicitOutline)material.materialFeatures|=MaterialFeatureSilhouetteOutline;
+-    const bool projection=kind==Kind::Projected||kind==Kind::DepthOnly||kind==Kind::ProjectedUv1
++    const bool projection=kind==Kind::ReflectionProjectedMixed||kind==Kind::Projected||kind==Kind::DepthOnly||kind==Kind::ProjectedUv1
+         ||kind==Kind::ProjectedMixed||kind==Kind::ProjectedFading||kind==Kind::ProjectedPlatform||kind==Kind::DepthTested||kind==Kind::ColorOnly||kind==Kind::MaskedEye;
+     if(projection) {
+         material.outlineSurface.present=true;material.outlineSurface.depthPrepass=kind!=Kind::ColorOnly;
+@@ -190,7 +193,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
+     add("subject",mesh);
+     if(kind==Kind::Mirrored||kind==Kind::ReflectionMirrored)for(auto& node:context.scene.nodes)node.scale[0]=-1;
+     if(kind==Kind::Mixed){auto legacy=mesh;legacy.materials.front().materialFeatures=MaterialFeatureNeutralFallback;add("legacy",legacy);}
+-    if(kind==Kind::ProjectedMixed) {
++    if(kind==Kind::ProjectedMixed||kind==Kind::ReflectionProjectedMixed) {
+         auto second=mesh;second.materials.front().outlineSurface.width=1.25F;
+         add("second-projection",second);
+     }
+@@ -277,7 +280,12 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
+     if(colorConsumer||kind==Kind::MaskedEye)require(capture.ordinaryDepthDraws>0&&capture.depthOnlyDraws==0,"Color consumers retain fully shaded snapshots");
+     else require(capture.depthOnlyDraws==capture.ordinaryDepthDraws,"Depth consumers must avoid unused snapshot color shading");
+     const bool visible=kind!=Kind::Hidden&&kind!=Kind::Blend&&kind!=Kind::Platform&&kind!=Kind::DepthOnly;
+-    const unsigned instances=kind==Kind::ProjectedMixed?4:2;
++    const unsigned instances=kind==Kind::ProjectedMixed||kind==Kind::ReflectionProjectedMixed?4:2;
++    if(kind==Kind::ReflectionProjectedMixed) {
++        const std::vector<bool> expected{false,true,false,true};
++        if(capture.snapshotShellOrder!=expected){std::cerr<<"Snapshot shell order: ";for(bool shell:capture.snapshotShellOrder)std::cerr<<shell;std::cerr<<"\n";}
++        require(capture.snapshotShellOrder==expected,"Each snapshot resource must complete its depth shell before later resource colors");
++    }
+     require(capture.covered.size()==(masks?instances:0U),"Only eligible visible instances may own coverage tiles");
+     std::set<unsigned> tiles;
+     for(const auto& [instance,coverage]:capture.covered){
+@@ -343,7 +351,7 @@ int main(int argc,char** argv){try{
+     for(bool multisample:{false,true})for(bool bindless:{false,true})for(bool compute:{false,true})
+         for(auto kind:{Kind::Explicit,Kind::Legacy,Kind::Fading,Kind::Hidden,Kind::Blend,Kind::Platform,Kind::Mixed,
+                 Kind::DoubleSided,Kind::Mirrored,Kind::GizmoMirrored,Kind::CullingDisabled,Kind::HiddenExplicitLegacy,
+-                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::DepthTested,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth,Kind::MainNoLighting,Kind::MainMultiply})
++                Kind::Projected,Kind::DepthOnly,Kind::ProjectedUv1,Kind::ProjectedMixed,Kind::ProjectedFading,Kind::ProjectedPlatform,Kind::DepthTested,Kind::ColorOnly,Kind::RefractionConsumer,Kind::TintConsumer,Kind::MaskedEye,Kind::ReflectionConsumer,Kind::ReflectionMirrored,Kind::ReflectionDoubleSided,Kind::ReflectionFading,Kind::ReflectionMasked,Kind::ReflectionNoDepth,Kind::MainNoLighting,Kind::MainMultiply,Kind::ReflectionProjectedMixed})
+             verify(argv[1],kind,bindless,compute,multisample);
+     std::cout<<"Explicit silhouettes retain independent coverage and legacy batching\n";
+ }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}}

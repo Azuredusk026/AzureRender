@@ -1,0 +1,20 @@
+pid=38168 thread=5356 cumulativeCpuSeconds=116.438
+0 AzurePlayer!`anonymous namespace'::loadMaterial+23992 D:\Projects\FYP\Project\AzureRender\src\assets\GltfLoader.cpp:1838
+1 AzurePlayer!`anonymous namespace'::loadMaterial+23992 D:\Projects\FYP\Project\AzureRender\src\assets\GltfLoader.cpp:1838
+2 AzurePlayer!`anonymous namespace'::importGltfModel+362 D:\Projects\FYP\Project\AzureRender\src\assets\GltfLoader.cpp:3077
+3 AzurePlayer!loadGltfAsset+2572 D:\Projects\FYP\Project\AzureRender\src\assets\GltfLoader.cpp:3015
+4 AzurePlayer!azurerender::CharacterSceneRenderer::initializeLoad+11118 D:\Projects\FYP\Project\AzureRender\src\scenes\CharacterSceneRenderer.cpp:456
+5 AzurePlayer!azurerender::CharacterSceneRenderer::prepareLoad+133 D:\Projects\FYP\Project\AzureRender\src\scenes\CharacterSceneRenderer.cpp:553
+6 AzurePlayer!azurerender::CharacterSceneRenderer::onLoad+65 D:\Projects\FYP\Project\AzureRender\src\scenes\CharacterSceneRenderer.cpp:548
+7 AzurePlayer!AzureRenderApp::createSceneRenderer+780 D:\Projects\FYP\Project\AzureRender\src\app\AzureRenderApp.cpp:536
+8 AzurePlayer!`AzureRenderApp::initVulkan'::`2'::<lambda_7>::operator()+23 D:\Projects\FYP\Project\AzureRender\src\app\AzureRenderApp.cpp:332
+9 AzurePlayer!`AzureRenderApp::initVulkan'::`2'::<lambda_1>::operator()<`AzureRenderApp::initVulkan'::`2'::<lambda_7> >+323 D:\Projects\FYP\Project\AzureRender\src\app\AzureRenderApp.cpp:272
+10 AzurePlayer!AzureRenderApp::initVulkan+2548 D:\Projects\FYP\Project\AzureRender\src\app\AzureRenderApp.cpp:332
+11 AzurePlayer!AzureRenderApp::run+2405 D:\Projects\FYP\Project\AzureRender\src\app\AzureRenderApp.cpp:163
+12 AzurePlayer!main+6012 D:\Projects\FYP\Project\AzureRender\src\player\main.cpp:125
+13 AzurePlayer!invoke_main+57 D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:79
+14 AzurePlayer!__scrt_common_main_seh+306 D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:288
+15 AzurePlayer!__scrt_common_main+14 D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl:331
+16 AzurePlayer!mainCRTStartup+14 D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_main.cpp:17
+17 KERNEL32!BaseThreadInitThunk+23
+18 ntdll!RtlUserThreadStart+44

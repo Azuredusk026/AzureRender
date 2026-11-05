@@ -1,0 +1,47 @@
+{
+  "primary": {
+    "pixels": 16459,
+    "ssim": 0.9905399273891877,
+    "medianLuminanceRelativeError": 0.00800284966464992,
+    "within1": 16387,
+    "failed1": 72,
+    "maximum": 6,
+    "meanChannelError": 0.29031735423375254
+  },
+  "fullHair": {
+    "pixels": 20361,
+    "ssim": 0.9889305404056262,
+    "medianLuminanceRelativeError": 0.005165617227883023,
+    "within1": 19302,
+    "failed1": 1059,
+    "maximum": 108,
+    "meanChannelError": 0.5852364815087667
+  },
+  "outline": {
+    "pixels": 2832,
+    "ssim": 0.9887400074318425,
+    "medianLuminanceRelativeError": 0.010298226327711284,
+    "within1": 2172,
+    "failed1": 660,
+    "maximum": 108,
+    "meanChannelError": 1.0574387947269304
+  },
+  "front": {
+    "pixels": 725,
+    "ssim": 0.9631629221486834,
+    "medianLuminanceRelativeError": 0.008207790365465054,
+    "within1": 569,
+    "failed1": 156,
+    "maximum": 43,
+    "meanChannelError": 2.2960919540229887
+  },
+  "back": {
+    "pixels": 236,
+    "ssim": 0.9925574983044438,
+    "medianLuminanceRelativeError": 0.017686263544832593,
+    "within1": 173,
+    "failed1": 63,
+    "maximum": 55,
+    "meanChannelError": 1.2175141242937852
+  }
+}

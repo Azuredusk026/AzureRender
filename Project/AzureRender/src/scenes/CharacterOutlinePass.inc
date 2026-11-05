@@ -13,7 +13,7 @@ static_assert(offsetof(OutlinePushConstants,gizmoTransform)==16);
 }
 void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
     const SceneInstanceSnapshot& snapshot,rhi::ICommandRecorder& commands,
-    bool depthShell,SceneSubmissionCounters* counters) {
+    bool depthShell,SceneSubmissionCounters* counters,std::optional<std::size_t> spanIndex) {
     if(depthShell&&!outlineProjectionEnabled_)return;
     const auto& settings=snapshot.settings;
     // Both callers bind the global indexed set before their ordinary draws.
@@ -25,7 +25,9 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
             :((material.materialFeatures&MaterialFeatureSilhouetteOutline)!=0
                 ||(!settings.sceneLightingEnabled&&settings.silhouetteOutlineEnabled));
     };
-    for(const auto& span:snapshot.visibleSpans) {
+    for(std::size_t index=spanIndex.value_or(0);index<snapshot.visibleSpans.size();++index) {
+        if(spanIndex&&index!=*spanIndex)break;
+        const auto& span=snapshot.visibleSpans[index];
         const auto key=span[0],first=span[1],count=span[2];
         const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
         if(std::none_of(mesh.primitives.begin(),mesh.primitives.end(),[&](const AssetPrimitive& primitive) {

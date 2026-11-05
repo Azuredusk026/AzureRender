@@ -12,6 +12,28 @@
 using namespace azurerender;
 void require(bool value, const char* message) { if (!value) throw std::runtime_error(message); }
 
+void testIdentityImageSamples(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    std::vector<std::uint8_t> samples(256*4);
+    for(unsigned value=0;value<256;++value) {
+        samples[value*4]=static_cast<std::uint8_t>(value);
+        samples[value*4+1]=static_cast<std::uint8_t>(255-value);
+        samples[value*4+2]=static_cast<std::uint8_t>(value^85);
+        samples[value*4+3]=static_cast<std::uint8_t>(value*37);
+    }
+    require(stbi_write_png((directory/"byte-sweep.png").string().c_str(),256,1,4,samples.data(),1024)!=0,"Cannot write byte sweep");
+    auto source=fixture;
+    source["images"]=nlohmann::json::array({{{"uri","byte-sweep.png"}}});
+    source["textures"]=nlohmann::json::array({{{"source",0}}});
+    source["materials"]=nlohmann::json::array({{{"name","byte-sweep"},
+        {"pbrMetallicRoughness",{{"baseColorTexture",{{"index",0}}},{"metallicRoughnessTexture",{{"index",0}}},
+            {"roughnessFactor",1},{"metallicFactor",1}}},{"normalTexture",{{"index",0}}}}});
+    for(auto& mesh:source["meshes"])for(auto& primitive:mesh["primitives"])primitive["material"]=0;
+    const auto file=directory/"byte-sweep.gltf";std::ofstream(file)<<source.dump();
+    const auto material=loadGltfAsset(file.string()).materials.at(0);
+    require(material.baseColorPixels==samples&&material.normalPixels==samples&&material.metallicRoughnessPixels==samples,
+        "Identity image preparation must retain all byte values in albedo, normal, physical and alpha channels");
+}
+
 void testOutlineSurface(const nlohmann::json& fixture,const std::filesystem::path& directory) {
     using Json=nlohmann::json;
     auto source=fixture;
@@ -1126,6 +1148,7 @@ int main(int argc,char** argv) { try {
     require(duplicateRejected,"Duplicate material features must be rejected");
     testCharacterProfileTextures(input,directory);
     testProjectedHairRamp(input,directory);
+    testIdentityImageSamples(input,directory);
     testOutlineSurface(input,directory);
     testMaterialRadianceScale(input,directory);
     testMaterialDisplayTransform(input,directory);

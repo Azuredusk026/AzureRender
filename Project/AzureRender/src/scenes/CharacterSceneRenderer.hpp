@@ -256,7 +256,8 @@ private:
     void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
     void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
-        rhi::ICommandRecorder& commands,bool depthShell,SceneSubmissionCounters* counters=nullptr);
+        rhi::ICommandRecorder& commands,bool depthShell,SceneSubmissionCounters* counters=nullptr,
+        std::optional<std::size_t> spanIndex=std::nullopt);
     struct MaterialPushConstants {
         float alphaCutoff = 0.5F;
         std::uint32_t alphaMode = 0;
