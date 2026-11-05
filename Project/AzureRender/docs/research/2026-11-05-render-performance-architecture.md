@@ -117,3 +117,19 @@ NVIDIA 的[管线建议](https://developer.nvidia.com/blog/vulkan-dos-donts/)说
 [着色建议](https://developer.nvidia.com/blog/advanced-api-performance-shaders/)覆盖寄存器压力及数据访问。
 资料提供待验证的方向，当前实例以实测事件决定接入次序。
 完整原件与未分类范围见[事件收据](../acceptance/nr/evidence/2026-11-05/performance-architecture/event-results.json)。
+
+## 编译优化分项
+
+四个主要表面程序已做隔离重放。
+实验使用原 GLSL、原宏与原资源绑定。
+唯一变量为 `glslc -O -fpreserve-bindings`。
+四份程序均通过 Vulkan 1.0 的 SPIR-V 校验。
+
+[Shaderc 文档](https://github.com/google/shaderc/blob/main/glslc/README.asciidoc#452--o0--os)规定 `-O` 的性能优化含义。
+三次重放的最终 RGB 输出逐字节一致。
+基线、候选、基线的事件耗时和为 42.75、45.09、39.25 毫秒。
+基线漂移约为 8.20%，本次实验未证明性能收益。
+
+该编译候选保留在隔离目录，生产程序保持受检字节。
+耗时和用于本次重放诊断，完整运行帧耗时独立解释。
+源程序与原始结果见[编译分项收据](../acceptance/nr/evidence/2026-11-05/shader-optimization/results.json)。

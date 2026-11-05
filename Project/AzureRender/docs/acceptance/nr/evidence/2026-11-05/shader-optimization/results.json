@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "status": "private-control-no-demonstrated-performance-benefit",
+  "productionChanged": false,
+  "sourceBase": "143ec60",
+  "sourceShaderSha256": "f1fcdafe056186daf4cd02e46a460ac50a0380ea9263daf570ecca8250d44c9b",
+  "compiler": {
+    "path": "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+    "sha256": "93898530ea4f2e809733ea8a839d09d4b947bd6e853c84670923ac4414f41eb3"
+  },
+  "reference": "https://github.com/google/shaderc/blob/main/glslc/README.asciidoc#452--o0--os",
+  "control": {
+    "status": "profiled",
+    "scope": "Private compiler optimization cost and output control; independent of formal runtime P95",
+    "imageDifference": {
+      "changedPixels": 0,
+      "changedOverOneBytePixels": 0,
+      "maxChannelByteDifference": 0,
+      "meanRgbByteDifference": 0.0
+    },
+    "baselineImageDrift": {
+      "changedPixels": 0,
+      "changedOverOneBytePixels": 0,
+      "maxChannelByteDifference": 0,
+      "meanRgbByteDifference": 0.0
+    },
+    "measurements": [
+      {
+        "label": "baseline-before",
+        "events": 3786,
+        "sumEventMs": 42.7506880000009
+      },
+      {
+        "label": "optimized",
+        "events": 3786,
+        "sumEventMs": 45.091136000000894
+      },
+      {
+        "label": "baseline-after",
+        "events": 3786,
+        "sumEventMs": 39.24537600000051
+      }
+    ],
+    "changedPrograms": [
+      "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv",
+      "mesh_object_bindless_clipmap_field.frag.spv",
+      "mesh_object_bindless_clipmap_field_lighting.frag.spv"
+    ],
+    "onlyVariable": "Compile four original common fragment programs with -O and -fpreserve-bindings. Original GLSL includes, defines, resource interfaces, sampling and lighting remain the selected input.",
+    "baselineDriftFraction": 0.08199428275868481,
+    "controlDifferenceMs": -4.093104000000189
+  },
+  "images": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shader-optimization-control\\baseline-after.png",
+      "sha256": "9a4212eb956981ecba08e28014ca3c2b47504ec8ed3367f5ee73bfc94aaff0af",
+      "bytes": 3429080
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shader-optimization-control\\baseline-before.png",
+      "sha256": "9a4212eb956981ecba08e28014ca3c2b47504ec8ed3367f5ee73bfc94aaff0af",
+      "bytes": 3429080
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\shader-optimization-control\\optimized.png",
+      "sha256": "9a4212eb956981ecba08e28014ca3c2b47504ec8ed3367f5ee73bfc94aaff0af",
+      "bytes": 3429080
+    }
+  ],
+  "archive": {
+    "path": "measurements.zip",
+    "sha256": "28f9f3b060c9c5abfedfb378cfd34de61ac5b21e45253eb6677a7d9d54b737ab",
+    "entries": [
+      {
+        "path": "profile_shader_optimization.py",
+        "bytes": 4883,
+        "sha256": "ef295829e2caf178da5908b3bee74334606c4ebadac2454cb7be9e13c0de3a27"
+      },
+      {
+        "path": "shader-optimization-control/baseline-after.json",
+        "bytes": 215365,
+        "sha256": "e04a7a3f7082f8ff27afb3cbdedb82aa01ef9bf807fe54a40088897c55b0cea2"
+      },
+      {
+        "path": "shader-optimization-control/baseline-before.json",
+        "bytes": 215802,
+        "sha256": "d6dc03fa4a3d9fff97d0f1757f34741f0a0e1c2de188f30f5e79aff18454dc31"
+      },
+      {
+        "path": "shader-optimization-control/launch.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "shader-optimization-control/optimized.json",
+        "bytes": 215914,
+        "sha256": "312a374a0978c4a2a7784b256f5c9e96603c0dd7fffedf8a74b4661c5dd2cf92"
+      },
+      {
+        "path": "shader-optimization-control/programs/character_snapshot_object_bindless_clipmap_field.frag.spv",
+        "bytes": 294812,
+        "sha256": "8cbcb0e53cb665fbd759e90f37c5a31b11dc4c3b82afaa76359a076ad2107219"
+      },
+      {
+        "path": "shader-optimization-control/programs/character_snapshot_object_bindless_clipmap_field.frag.spv.d",
+        "bytes": 1649,
+        "sha256": "a25f5e3cd28d26f084a14439bed43ded578020cb64285260c329da045a77bc98"
+      },
+      {
+        "path": "shader-optimization-control/programs/character_snapshot_object_bindless_clipmap_field_lighting.frag.spv",
+        "bytes": 329428,
+        "sha256": "51086c01131e0ea9ede1cc3797565942e200a5fb51234cbdf08c87073121ca5d"
+      },
+      {
+        "path": "shader-optimization-control/programs/character_snapshot_object_bindless_clipmap_field_lighting.frag.spv.d",
+        "bytes": 1658,
+        "sha256": "2137a5d22d7ef5432f689740e27b9926eefcee622fdc1bd1280e3308c26b0624"
+      },
+      {
+        "path": "shader-optimization-control/programs/mesh_object_bindless_clipmap_field.frag.spv",
+        "bytes": 318764,
+        "sha256": "ddb525773fd32721b4019e8d5ac81aea61d547c6d675ca97f37a071d6aae5dc6"
+      },
+      {
+        "path": "shader-optimization-control/programs/mesh_object_bindless_clipmap_field.frag.spv.d",
+        "bytes": 1708,
+        "sha256": "3b6a9d1a0c5655561605ec51047d15df743dc9520254e83bce923f475fcd5c79"
+      },
+      {
+        "path": "shader-optimization-control/programs/mesh_object_bindless_clipmap_field_lighting.frag.spv",
+        "bytes": 353424,
+        "sha256": "8071d7dceff193ac5d6e38ea9a7305dfa623c89e34641255f20abcb65a532872"
+      },
+      {
+        "path": "shader-optimization-control/programs/mesh_object_bindless_clipmap_field_lighting.frag.spv.d",
+        "bytes": 1717,
+        "sha256": "0d49416f242c0bf102d55853a0c2cfd58c4a0a314d6c840ce9e0aa2848825f1d"
+      },
+      {
+        "path": "shader-optimization-control/state.json",
+        "bytes": 1395,
+        "sha256": "662d42bd8c4e57936f9c69b908e8c173dd4ab594119bca77bd5e04b18028cad8"
+      },
+      {
+        "path": "shader-optimization-control/task.json",
+        "bytes": 5768,
+        "sha256": "262e16928ba9c6821be2159542b1095b254329004c7b49ec0608770ebc053825"
+      }
+    ]
+  }
+}
