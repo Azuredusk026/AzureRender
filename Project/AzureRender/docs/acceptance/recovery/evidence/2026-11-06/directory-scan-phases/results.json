@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "status": "original-debug-case-passed-historical-timeouts-retained",
+  "sourceBase": "78f2fe2",
+  "phaseObservation": {
+    "status": "passed",
+    "exitCode": 0,
+    "seconds": 73.17199999996228,
+    "fixture": "C:\\Users\\admin\\AppData\\Local\\Temp\\azure-directory-scale-368153657633900",
+    "rows": [
+      {
+        "seconds": 7.952999999979511,
+        "metadataFiles": 514,
+        "cacheUuidDirectories": 0,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 12.98499999998603,
+        "metadataFiles": 2375,
+        "cacheUuidDirectories": 0,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 18.01600000000326,
+        "metadataFiles": 4410,
+        "cacheUuidDirectories": 0,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 23.06299999996554,
+        "metadataFiles": 6484,
+        "cacheUuidDirectories": 0,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 28.09399999998277,
+        "metadataFiles": 8582,
+        "cacheUuidDirectories": 0,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 33.15599999995902,
+        "metadataFiles": 10001,
+        "cacheUuidDirectories": 750,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 38.20299999997951,
+        "metadataFiles": 10001,
+        "cacheUuidDirectories": 3213,
+        "cacheStagingDirectories": 1,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 43.25,
+        "metadataFiles": 10001,
+        "cacheUuidDirectories": 5657,
+        "cacheStagingDirectories": 1,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 48.31299999996554,
+        "metadataFiles": 10001,
+        "cacheUuidDirectories": 8112,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 53.375,
+        "metadataFiles": 10001,
+        "cacheUuidDirectories": 10001,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 58.42199999996228,
+        "metadataFiles": 10001,
+        "cacheUuidDirectories": 10002,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 63.46899999998277,
+        "metadataFiles": 10001,
+        "cacheUuidDirectories": 10002,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      },
+      {
+        "seconds": 68.51600000000326,
+        "metadataFiles": 10001,
+        "cacheUuidDirectories": 10002,
+        "cacheStagingDirectories": 0,
+        "fixturePresent": true
+      }
+    ],
+    "sourceInputsUnchanged": true
+  },
+  "originalCtest": {
+    "status": "passed",
+    "exitCode": 0,
+    "seconds": 68.03099999995902,
+    "command": [
+      "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+      "--test-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+      "-R",
+      "^AzureEditor.ContentDirectoryScale$",
+      "--output-on-failure",
+      "--no-tests=error",
+      "--output-junit",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\directory-scale-original-retest\\test.xml"
+    ],
+    "originalCaseTimeoutSeconds": 180,
+    "scope": "Original registered CTest with no external file-count observer; previous180s failures retained"
+  },
+  "sourceAndProductVerification": {
+    "exitCode": 0,
+    "evidence": "directory-scale-original-retest/post-verify.log",
+    "basis": "Independent actual build_provenance verify, not the observer v1 prefilled flag"
+  },
+  "observationScope": "Initial assets root+large sidecars and cache UUID directory names every5s; directory count does not attest each payload and observation is not formal timing",
+  "productionScanAlgorithmChanged": false,
+  "cause": "Elapsed-time variation not causally attributed; external game now absent, GPU0%/48C observed; no claim that rendering changes fix asset scanning",
+  "historicalFailures": "OriginalDebug180s timeout, local parent-directory candidate180s timeout and prior full-batch outer1200s failure retained",
+  "fullCpuBatch": "Not rerun in this unit; only original directory CTest executed without observer",
+  "archiveSha256": "bac50b8194ca52d0bcb0ed84e109b7c5c514700269dc870d839051befa38185f",
+  "archiveMembers": {
+    "directory-scale-phase-observation/engine-debug-build.json": "8a92f3fefe86853254d4d379f95be4b226a9eed63d5a76ca4688d9dbfc6c463b",
+    "directory-scale-phase-observation/engine-debug-build.log": "7c20e9bd3ba9018c36ceb4fef88661adef6ad4a74c07a3eca36ed556758c0ca8",
+    "directory-scale-phase-observation/post-verify.log": "46ae5d7547a9a9afde2c6c06af31c50281c737e08fd88b34fac1eeaf13777d7a",
+    "directory-scale-phase-observation/progress.json": "d8a4dcf6b8f7b086345930523b4b67a56decefb6191cc3e2c423801bb5ddc2ef",
+    "directory-scale-phase-observation/results.json": "757a66877d5d5b726215085a88a6c091d36bd07212d174177c2853dd7a7c47e5",
+    "directory-scale-phase-observation/task.json": "0373bdf1d476c5e2c26fcc9db414fa0fc157a8833f07dbead2cd9d239b52263a",
+    "directory-scale-phase-observation/test.log": "2a299682555190cee771e3dfb9e30e01d92064884a6e52e7acac7ac639cb3bbc",
+    "directory-scale-original-retest/post-verify.json": "2c3265f2c8bbea5b81766f695a9df10dc49ae21d5e4c841fcfafacea2bd7cf99",
+    "directory-scale-original-retest/post-verify.log": "46ae5d7547a9a9afde2c6c06af31c50281c737e08fd88b34fac1eeaf13777d7a",
+    "directory-scale-original-retest/results.json": "d17a62da3133eb75b0a3c2832ea54abfb4f528f677521e5d66cdca1803267a08",
+    "directory-scale-original-retest/test-full.log": "7d9709fb2c7181adebef5d238a4dd0ce460b6f8f10747c5889c7ef69a96b4857",
+    "directory-scale-original-retest/test.log": "beda8865fb237625468f29926d821f3f75b032ff936a830ddab4afb73aa69c82",
+    "directory-scale-original-retest/test.xml": "784fe3e7b1000e31e6d88aa2387b048f8c939f6510acf765c581dc751a18ed59",
+    "drivers/build_directory_phase.py": "6f9f58013ac863953b90e00d4c327bbb34bfa2fcc1904ba2a103550fd744e86e",
+    "drivers/observe_directory_phases-running-v1.py": "a0a14d13598508b4df1f8c69af8c8d089a597b512f8244ad063761ab18d37ac2",
+    "drivers/run_directory_original_case.py": "96f8290ecda5debdfc420190a1a35b39ac369f0d9094da4b7ff125c766d81bf5",
+    "build-provenance.json": "64e57d470dd5cd7132d015f2bfcc895b02d4526352687a9642d0fd73df9a3b0a"
+  }
+}

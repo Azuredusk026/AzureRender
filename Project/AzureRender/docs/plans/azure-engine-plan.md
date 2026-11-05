@@ -70,8 +70,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 扩展回归及延期范围见[共享输入验证](../acceptance/nr/render-camera-snapshot.md)。
 用户已将 GPU 复测延期，当前推进帧数据与构建流程。
 构建目标选择通过[两配置增量核验](../acceptance/recovery/scoped-build-provenance.md)。
-Debug 目录规模的[局部候选](../acceptance/recovery/directory-scale-diagnosis.md)仍在原期限超时。
-该候选已隔离，继续推进具备条件的渲染架构单元。
+Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosis.md)本轮 67.95 秒通过。
+历史超时和隔离候选保留原证据，耗时差异仍需归因。
 缓冲依赖的[批量入口](../acceptance/nr/buffer-barrier-batching.md)通过两配置各七项 CPU 检查。
 该候选的双设备同步、画面及原生收益等待复测。
 节点[快照复制](../acceptance/nr/runtime-snapshot-copy.md)通过两配置各十五项 CPU 检查。
