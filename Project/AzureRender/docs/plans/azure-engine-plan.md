@@ -80,7 +80,8 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 混合场景的[透明临时分配](../acceptance/nr/opaque-transparency-scratch.md)通过两配置各十二项检查。
 不透明顶点扩容时，候选的逐帧分配保持稳定。
 阴影[接收分项](../acceptance/nr/shadow-receiver-cost.md)保留热状态条件失败。
-当前评估[同帧不透明照明复用](2026-11-06-opaque-lighting-reuse.md)的私有原型。
+[同帧照明原型](../acceptance/nr/opaque-lighting-reuse.md)通过像素与分支检查，收益未成立。
+当前生产保持受检实现，接续纯深度阴影单元。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

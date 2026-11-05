@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "status": "prototype-compatible-and-active-performance-benefit-unqualified",
+  "sourceBase": "a5f4d86",
+  "productionAdoption": false,
+  "programPreparation": {
+    "status": "private-programs-ready",
+    "sourceBase": "a5f4d86",
+    "onlyVariable": "Two main ordinary fragment programs try subgroup-coherent reuse of same-frame opaque lighting when computedSSR contribution is zero; requiredVulkan1.1/SPIRV1.3 target; snapshots, shadow reception and other production programs remain",
+    "production535Unchanged": true,
+    "sourceUnchanged": true,
+    "seconds": 3.077999999979511,
+    "programs": [
+      {
+        "name": "mesh_object_bindless_clipmap_field.frag.spv",
+        "productionSha256": "59f0d8eef463bdd103cc163d9736698113ec6a4964198fd4eac05e8b65057ffe",
+        "reconstructed": {
+          "sha256": "59f0d8eef463bdd103cc163d9736698113ec6a4964198fd4eac05e8b65057ffe",
+          "bytes": 428120,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\reconstructed\\mesh_object_bindless_clipmap_field.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\reconstructed\\mesh_object_bindless_clipmap_field.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\reconstructed\\mesh_object_bindless_clipmap_field.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        },
+        "control": {
+          "sha256": "1ee6d01871c0dbfa7b45d5500f5256042fe74cc83845e63a333cf5a2dd8349a7",
+          "bytes": 431528,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\resource-b\\shaders\\mesh_object_bindless_clipmap_field.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\source\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\resource-b\\shaders\\mesh_object_bindless_clipmap_field.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.1",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\resource-b\\shaders\\mesh_object_bindless_clipmap_field.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        }
+      },
+      {
+        "name": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+        "productionSha256": "60c24954cb4a3a2184a124eb37b082febf197ed4ab56d55802cdfa48eeaaa246",
+        "reconstructed": {
+          "sha256": "60c24954cb4a3a2184a124eb37b082febf197ed4ab56d55802cdfa48eeaaa246",
+          "bytes": 441156,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\reconstructed\\mesh_object_bindless_clipmap_field_lighting.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\shaders\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\reconstructed\\mesh_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.0",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\reconstructed\\mesh_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        },
+        "control": {
+          "sha256": "db05e4d53095a876ed21053153b38e636540a28e8af1c884bb845f9eef0ba1bf",
+          "bytes": 444564,
+          "compileCommand": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-ID:\\Projects\\FYP\\Project\\AzureRender\\shaders",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_BINDLESS=1",
+            "-MD",
+            "-MF",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\resource-b\\shaders\\mesh_object_bindless_clipmap_field_lighting.frag.spv.d",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\source\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\resource-b\\shaders\\mesh_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "validationCommand": [
+            "D:/Tools/VulkanSDK/1.4.350.0/Bin/spirv-val.exe",
+            "--target-env",
+            "vulkan1.1",
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\resource-b\\shaders\\mesh_object_bindless_clipmap_field_lighting.frag.spv"
+          ],
+          "spirvValidationPassed": true
+        }
+      }
+    ],
+    "allPrivateAByteIdentical": true,
+    "changedPrivateBPrograms": [
+      "mesh_object_bindless_clipmap_field.frag.spv",
+      "mesh_object_bindless_clipmap_field_lighting.frag.spv"
+    ]
+  },
+  "nativeFourFrames": {
+    "status": "passed",
+    "sourceBase": "a5f4d86",
+    "executableSha256": "1cae1fe3b619667dd989ecf450c495946c898cd426c73733c64c1c3e2952a857",
+    "exitCode": 0,
+    "seconds": 144.81300000002375,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Private current-frame opaque-lighting reuse prototype; original four frozen native RGB references, zero-pixel gate unchanged; not yet a production feature"
+  },
+  "markerConsumption": {
+    "status": "passed",
+    "sourceBase": "a5f4d86",
+    "executableSha256": "1cae1fe3b619667dd989ecf450c495946c898cd426c73733c64c1c3e2952a857",
+    "exitCode": 0,
+    "seconds": 140.5,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "cf85d4a1a48619fbbaaf59a8055ab2e49be9ccfb72e672855f5c255906c4c8b6",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 919809,
+          "maxByteDifference": 254
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 919809,
+          "maxByteDifference": 254
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Private magenta marker only on lighting-reuse branch to prove actual execution; expected visible difference, not production quality"
+  },
+  "diagnosticPerformance": {
+    "status": "measured",
+    "sourceBase": "926b277",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 112.01500000001397,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 5.081623466666667,
+        "p95": 5.2451584,
+        "p99": 5.36859552
+      },
+      "sceneMs": {
+        "mean": 29.026116266666666,
+        "p95": 30.3267328,
+        "p99": 31.045969919999997
+      },
+      "postProcessMs": {
+        "mean": 0.2832213333333333,
+        "p95": 0.29393919999999996,
+        "p99": 0.3041792
+      },
+      "frameMs": {
+        "mean": 34.39096106666667,
+        "p95": 35.9005296,
+        "p99": 36.55259712
+      }
+    },
+    "cpu": {
+      "mean": 22.255239166666648,
+      "p95": 24.69746999999937,
+      "p99": 35.26259700000008
+    },
+    "wait": {
+      "mean": 11.99334083333335,
+      "p95": 14.350560000000495,
+      "p99": 15.675350999999692
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7402160128,
+    "environmentFailures": [
+      "run observation 19: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "privateResourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\opaque-lighting-reuse-prototype\\resource-b",
+    "privateShaderFilesUnchanged": true
+  },
+  "adjacentBaselineContext": {
+    "scope": "Borrowed prior unmodified nativeA/B/A baseline only as context, not a new matched comparison",
+    "meanGpuFrameMs": 34.96106373333333,
+    "baselineDriftFraction": 0.02101603439952139,
+    "differenceMs": 0.5701026666666635,
+    "bothBaselinesThermalFailed": true
+  },
+  "benefitQualified": false,
+  "shaderTargetScope": "2privateVulkan1.1/SPIRV1.3main modules for subgroup vote; original535production programs unchanged",
+  "pixelReference": "Canonical four original PNGs remain in docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip with recorded matching hashes",
+  "archiveSha256": "91273446703d64381c976198c4455949ff80b65f5721a3a5c453de0c75f797fe",
+  "archiveMembers": {
+    "capabilities-parse-initial.json": "d7afbf68525f63fb305e2a79ffae5a26cbd7bdb4eae07997f6eb5b3700a777f3",
+    "intel-capabilities.json": "b1fc0b34680b34372b1b8d8e8282c743565b9c8c96c5286c4a3c551fd61df327",
+    "intel-capabilities.log": "1df81d3883d3adb229a4b1c82aef55ebaac605f68a8270ad0866032de93ea433",
+    "marker-programs.json": "27713582cc394e26e7fe8590c55b13e5e51dfa47b1b3fc9f0a6bf09773b78619",
+    "mesh_object_bindless_clipmap_field.frag.spv.control.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field.frag.spv.control.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field.frag.spv.marker.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field.frag.spv.reconstructed.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field.frag.spv.reconstructed.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.control.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.control.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.marker.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.reconstructed.compile.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mesh_object_bindless_clipmap_field_lighting.frag.spv.reconstructed.validate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "nvidia-capabilities.json": "b5f55ed3b0af86be9d95ca526a3c82f5a3e396e87d1d3e4e934960b7b4200387",
+    "nvidia-capabilities.log": "7912a9310ce217d0d80650b891d3d1c579d5bfb06d8a6c9243ea52a91cf5a92d",
+    "programs.json": "64cacfdbfaa9f2bb3c129d8a945cf46a0a02c76a7987101aab34bf3731af408e",
+    "source/marker.frag": "eb24c92a69287a5e6dd755a862c43c5068400a8f6bb242aaf1eee8d3935b2b8e",
+    "source/mesh.frag": "dbf035e0b8aaf0a79bee41aab13c18038dfbfa8c8059c6e41f51361c5810d208",
+    "image/command.json": "b2fda4a8bb968f8a87a9cfc72dc933c26479fee4800e11a03681a1075efc1b37",
+    "image/frozen-inputs.json": "608ed660e6585467749b4c66275d84d4e8639ce6dee716a5d6217c4ac620dbbf",
+    "image/results.json": "110f777b6e53aabcf3ea0628bd63165ab0f98db054d7546db9eff5cccd4bb5be",
+    "image/runtime.json": "15f132e7a0fd4b713c089cb9e972131081020c019eba5a1f825ad14653e5f147",
+    "image/stderr.log": "5e1911146be944b9ac67809db4463c3915d70362fcbea97ded7c105e0ba845ce",
+    "image/stdout.log": "9384d2da28502d2082c5651b0dfb0986f113d535df4ae97339ba665cd41f0ed5",
+    "image/captures/azureplayer.log.jsonl": "bc08fb3ee15b08cc0c84673b03f8e443660c9a0e6a27188b844010d23e6f1a84",
+    "marker-image/command.json": "b0d8ea810dbf11747c5fddf989e920d4e1b87762b53618a4eb8fb4ee04d9dfa1",
+    "marker-image/frozen-inputs.json": "608ed660e6585467749b4c66275d84d4e8639ce6dee716a5d6217c4ac620dbbf",
+    "marker-image/results.json": "443a01ae5c30fc7e438306e322513eedabba346d20efef2acba2821b6155ea29",
+    "marker-image/runtime.json": "05406e3ef9f1cd987f2d2a5a8678ef0b299c44d50e787f18840503c6976c6e22",
+    "marker-image/stderr.log": "ae02e778239bf4c610ebe3fc132106ac719fd47bde27526b585d3c4c8ecc7562",
+    "marker-image/stdout.log": "e79dd8cd4edb92deb7326c5011a86b127e07b37e3ec5fba0c1615cd1acc3b7e0",
+    "marker-image/captures/azureplayer.log.jsonl": "bb56c1908e4632c6d08c46ec907707cc06b385cd80a27fb7c1163f932fb76b39",
+    "b-control/environment.json": "f958a08c054c7212f3251a15715776284289ffe500c418757765ed48b5b95553",
+    "b-control/frozen-inputs.json": "26ade4d444e2a09261a3848e33f7328c4ed767e8fc363fd034b2b563cd48b604",
+    "b-control/memory.json": "fbff2ba6a41599e209f33b00a3e12e46775687e87e9a918953a49cdd796dae04",
+    "b-control/results.json": "9666e797ed0d21af23c06091e70a02532cf5ae1986e32e92dfa56e0ceefb2c5a",
+    "b-control/runtime.json": "78189a496156fec272920154e402559e980241214e05d39823dedda78fea5788",
+    "b-control/stderr.log": "708064e7c198d1c08fcd600464186ec3c29beca8bafcd837086ffc1a404fa387",
+    "b-control/stdout.log": "238221efa55eb29ea3903c3e8b17551641369576d06aeda18ea957152b9cdda5",
+    "b-control/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "b-control/task.json": "355a341ad849b8fdcf2439895218b74431c2dd229066c295e1a5a2c582df3e5b",
+    "b-control/timing.csv": "56ee6b9d268a7c86483b99e9dd8851b39eb82f7cc091402821fbcc1206e031f9",
+    "b-control/timing.json": "479e98dbb507f2a06b6275577f47d43fa7fb34a0d182d0f867d2432ee6572211",
+    "b-control/captures/azureplayer.log.jsonl": "9cc52a13640d188041c896d553ca499770de27814c5759f2cc3d5e34447c03d4",
+    "b-control/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "marker-image/frame_000000.png": "cf85d4a1a48619fbbaaf59a8055ab2e49be9ccfb72e672855f5c255906c4c8b6",
+    "control-programs/mesh_object_bindless_clipmap_field.frag.spv": "1ee6d01871c0dbfa7b45d5500f5256042fe74cc83845e63a333cf5a2dd8349a7",
+    "marker-programs/mesh_object_bindless_clipmap_field.frag.spv": "f071e325ba4e8f4679eb8c1c27ddd48f4bc4967dfda24c6ca2b6df891ad067c7",
+    "control-programs/mesh_object_bindless_clipmap_field_lighting.frag.spv": "db05e4d53095a876ed21053153b38e636540a28e8af1c884bb845f9eef0ba1bf",
+    "marker-programs/mesh_object_bindless_clipmap_field_lighting.frag.spv": "552980989fe0e90eca14bbe745f5864acabed1ab243cf3d95bd663025119e0dc",
+    "drivers/prepare_opaque_lighting_reuse.py": "880e51c03e0a5f345a07772a6d9f6acf085d45b3963bffca7eb95914da1747d7",
+    "drivers/capture_opaque_lighting_reuse.py": "e49b9c8b4f1491550cc05e1ae5d1a90e716d5c5bf5b85a3f6b38b357547f0788",
+    "drivers/capture_opaque_lighting_marker.py": "83d34569ed4f14c74927f8e6be899daab382c7352356d62e903fc20eb148c3eb",
+    "drivers/measure_opaque_lighting_reuse.py": "49742fd885c57ab226935b8f3c91a0843d29ca76c419159da9cca0bfc95b44f6"
+  }
+}

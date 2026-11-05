@@ -205,3 +205,10 @@ Godot 的源码固定为 `8cc3a574e26e`，许可为 MIT。
 分离高光合成与上一帧反射投影用于核对资源职责。
 [版本与许可清单](../acceptance/nr/evidence/2026-11-06/opaque-lighting-research/sources.json)保存来源摘要。
 本项目的复用候选仍需完成像素、来源失效及设备检查。
+
+## 照明复用原型结果
+
+私有原型四帧 RGB 保持原参考字节，标记覆盖约九十二万像素。
+短时 GPU 均值为 34.39 毫秒，热状态未通过。
+约 0.57 毫秒的上下文差异未形成合格收益证据。
+实际范围见[原型记录](../acceptance/nr/opaque-lighting-reuse.md)，当前生产保持受检实现。
