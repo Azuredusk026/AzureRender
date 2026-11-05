@@ -978,7 +978,7 @@ void AzureRenderApp::recordCommandBuffer(
     auto& gridBuffer=groundGridUniforms_.at(imageIndex);
     std::memcpy(gridBuffer.mapped,&grid,sizeof(grid));gpuAllocator_.flush(gridBuffer,0,sizeof(grid));
     azurerender::RenderContext sceneContext;
-    buildRenderContext(sceneContext,frame.renderSettings);
+    buildRenderContext(sceneContext,frame.renderSettings,frame.sceneSnapshot.get());
     sceneContext.currentFrame = static_cast<std::uint32_t>(currentFrame_);
     sceneContext.imageIndex = imageIndex;
     sceneContext.commandBuffer = commandBuffer;

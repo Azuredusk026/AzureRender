@@ -551,7 +551,8 @@ azurerender::scene::SceneDescription AzureRenderApp::resolveRenderDescription(
 }
 
 void AzureRenderApp::buildRenderContext(
-    azurerender::RenderContext& context,const azurerender::RenderSettings* frameSettings) {
+    azurerender::RenderContext& context,const azurerender::RenderSettings* frameSettings,
+    const azurerender::scene::SceneDescription* frameScene) {
     context.device = device_;
     context.physicalDevice = physicalDevice_;
     context.graphicsQueue = graphicsQueue_;
@@ -598,7 +599,12 @@ void AzureRenderApp::buildRenderContext(
     context.shadowImageView = shadowImageView_;
     context.shadowSampler = shadowSampler_;
     context.shadowMapSize = kShadowMapSize;
-    {
+    if (frameScene != nullptr) {
+        // Frame preparation resolves resource paths once. Recording consumes
+        // the same immutable scene that supplied the renderer update.
+        context.scene = *frameScene;
+        context.sceneWorldCoordinates = true;
+    } else {
         const azurerender::SceneDocument* document = nullptr;
 #if AZURE_WITH_EDITOR
         azurerender::SceneDocument editorDocument;

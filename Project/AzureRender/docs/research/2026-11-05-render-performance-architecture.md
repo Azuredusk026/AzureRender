@@ -133,3 +133,13 @@ NVIDIA 的[管线建议](https://developer.nvidia.com/blog/vulkan-dos-donts/)说
 该编译候选保留在隔离目录，生产程序保持受检字节。
 耗时和用于本次重放诊断，完整运行帧耗时独立解释。
 源程序与原始结果见[编译分项收据](../acceptance/nr/evidence/2026-11-05/shader-optimization/results.json)。
+
+## 同帧场景输入
+
+更新和记录共用已经解析路径的帧场景快照。
+原生栈确认两处文档转换与文件查询。
+复用实现通过两配置各九项检查及四帧冻结对照。
+本候选的完整性能采集因后台 GPU 占用而待执行。
+
+实现与原始记录见[帧场景快照验证](../acceptance/nr/frame-context-snapshot.md)。
+后续帧数据架构按静态资源、动态变换及修订边界划分。

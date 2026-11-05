@@ -455,7 +455,9 @@ private:
     azurerender::GameRuntime* activeGame();
     azurerender::IScriptRuntime* activeScripts();
     azurerender::AssetDatabase* activeAssets();
-    void buildRenderContext(azurerender::RenderContext& context,const azurerender::RenderSettings* frameSettings=nullptr);
+    void buildRenderContext(azurerender::RenderContext& context,
+        const azurerender::RenderSettings* frameSettings=nullptr,
+        const azurerender::scene::SceneDescription* frameScene=nullptr);
     azurerender::scene::SceneDescription resolveRenderDescription(
         const azurerender::SceneDocument& document) const;
     void buildSceneFrameData(azurerender::SceneFrameData& frame);
