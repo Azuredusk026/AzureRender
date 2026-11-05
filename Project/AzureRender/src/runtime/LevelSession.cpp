@@ -53,8 +53,12 @@ void LevelSession::preload(const std::string& reference){
 void LevelSession::cancelPending(){++generation_;if(cancelled_)*cancelled_=true;pending_.reset();preload_.reset();preparing_.reset();}
 void LevelSession::startWork(const std::string& reference,bool refresh){
     auto database=assets_;const auto project=project_;const auto generation=generation_;
+    auto retired=std::move(retiredRefresh_);retiredRefresh_.reset();
     cancelled_=std::make_shared<std::atomic<bool>>(false);auto cancelled=cancelled_;const auto activeKey=level_.resourceKey;const auto meshes=level_.preparedMeshes;
-    work_=std::async(std::launch::async,[database=std::move(database),project,reference,generation,refresh,cancelled,activeKey,meshes]()mutable{
+    work_=std::async(std::launch::async,[database=std::move(database),project,reference,generation,refresh,cancelled,activeKey,meshes,retired=std::move(retired)]()mutable{
+        // Explicit reset keeps large destruction on the worker even when the
+        // async callable's shared state is later released by main-thread get().
+        retired.reset();
         auto check=[&]{if(*cancelled)throw std::runtime_error("Level preparation cancelled");};
         check();database.refresh(false,check);check();
         auto level=loadProjectLevel(project,database,reference);
@@ -88,7 +92,11 @@ bool LevelSession::poll() {
                     if(candidate.generation==generation_){
                         if(candidate.refresh){
                             if(candidate.level.reloadKey()!=level_.reloadKey()){prepared_.clear();preparing_=std::move(candidate);}
-                            else{assets_=std::move(candidate.assets);error_.clear();}
+                            else{
+                                std::swap(assets_,candidate.assets);
+                                retiredRefresh_=std::move(candidate);
+                                error_.clear();
+                            }
                         }else{
                             preparing_=std::move(candidate);
                         }

@@ -65,6 +65,9 @@ private:
     std::future<Candidate> work_;
     std::map<std::string,Candidate> prepared_;
     std::optional<Candidate> preparing_;
+    // At most one unchanged result awaits retirement. The next worker takes
+    // ownership and explicitly destroys it before preparing another result.
+    std::optional<Candidate> retiredRefresh_;
     std::function<bool(const Level&)> upload_;
     std::function<bool(const Level&)> ready_;
     std::optional<std::string> preload_;
