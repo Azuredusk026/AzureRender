@@ -81,7 +81,10 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 不透明顶点扩容时，候选的逐帧分配保持稳定。
 阴影[接收分项](../acceptance/nr/shadow-receiver-cost.md)保留热状态条件失败。
 [同帧照明原型](../acceptance/nr/opaque-lighting-reuse.md)通过像素与分支检查，收益未成立。
-当前生产保持受检实现，接续纯深度阴影单元。
+完整覆盖阴影的[纯深度提交](../acceptance/nr/depth-only-shadow.md)通过两配置各十二项 CPU 检查。
+四组双设备深度检查与原生四帧冻结对照通过。
+短时 GPU 帧 P95 为 33.93 毫秒，阴影为 4.50 毫秒。
+短时环境检查通过，正式帧预算保持原标准。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

@@ -290,6 +290,7 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
         + " compare="+std::to_string(desc.depthCompare)
         + " samples="+std::to_string(desc.rasterizationSamples)
         + " sampleShading="+std::to_string(desc.minSampleShading);
+    calls.back().detail+=" fragment="+std::to_string(desc.fragmentShader!=VK_NULL_HANDLE);
     if(desc.depthBias)calls.back().detail+=" depthBias="+std::to_string(desc.depthBiasConstant)+"/"+std::to_string(desc.depthBiasSlope);
     if(desc.depthBiasExact)calls.back().detail+=" exactDepthBias=1";
     const auto recordSpecialization=[&](const char* name,const ShaderSpecialization& values){

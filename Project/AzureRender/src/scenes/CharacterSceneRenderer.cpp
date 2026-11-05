@@ -3659,6 +3659,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         shadowDesc.colorWriteMasks.clear();
         shadowDesc.renderPass = context.shadowRenderPass;
         shadowPipeline_ = rhi_->createGraphicsPipeline(shadowDesc);
+        auto depthOnlyDesc=shadowDesc;depthOnlyDesc.fragmentShader=VK_NULL_HANDLE;
+        shadowDepthOnlyPipeline_=rhi_->createGraphicsPipeline(depthOnlyDesc);
         if(independentCoverageNeeded_)shadowCoveragePipeline_=createCoverageGraphicsPipeline(shadowDesc,
             shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
         if(objectShadowPrepared_){
@@ -3666,6 +3668,8 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             shadowDesc.depthBiasConstant=8.F;shadowDesc.depthBiasSlope=0.F;
             shadowDesc.depthBiasExact=rhi_->supportsExactDepthBias();
             objectShadowPipeline_=rhi_->createGraphicsPipeline(shadowDesc);
+            depthOnlyDesc=shadowDesc;depthOnlyDesc.fragmentShader=VK_NULL_HANDLE;
+            objectShadowDepthOnlyPipeline_=rhi_->createGraphicsPipeline(depthOnlyDesc);
             if(independentCoverageNeeded_)objectShadowCoveragePipeline_=createCoverageGraphicsPipeline(shadowDesc,
                 shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
         }
@@ -3723,6 +3727,7 @@ void CharacterSceneRenderer::destroyResources() {
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
+             &shadowDepthOnlyPipeline_,&objectShadowDepthOnlyPipeline_,
              &shadowCoveragePipeline_,&objectShadowCoveragePipeline_,
              &outlineMaskCoveragePipelines_[0],&outlineMaskCoveragePipelines_[1],&outlineMaskCoveragePipelines_[2],
              &outlineCoveragePipelines_[0],&outlineCoveragePipelines_[1],&outlineDepthCoveragePipelines_[0],&outlineDepthCoveragePipelines_[1],
@@ -3880,6 +3885,7 @@ void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
              &backgroundPipeline_,
              &shadowPipeline_,
              &objectShadowPipeline_,
+             &shadowDepthOnlyPipeline_,&objectShadowDepthOnlyPipeline_,
              &shadowCoveragePipeline_,&objectShadowCoveragePipeline_,
              &outlineMaskCoveragePipelines_[0],&outlineMaskCoveragePipelines_[1],&outlineMaskCoveragePipelines_[2],
              &outlineCoveragePipelines_[0],&outlineCoveragePipelines_[1],&outlineDepthCoveragePipelines_[0],&outlineDepthCoveragePipelines_[1],
@@ -4297,7 +4303,8 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
     rhi::ICommandRecorder& commands = recordingCommands != nullptr ? *recordingCommands : *context.commands;
 
     const std::uint32_t cascadeResolution = objectPage?kObjectShadowTileSize:context.shadowMapSize/2;
-    commands.bindPipeline(objectPage?objectShadowPipeline_:shadowPipeline_);
+    VkPipeline boundPipeline=objectPage?objectShadowPipeline_:shadowPipeline_;
+    commands.bindPipeline(boundPipeline);
     if (context.submissionCounters != nullptr) {
         ++context.submissionCounters->pipelineBinds;
     }
@@ -4347,11 +4354,6 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                 const AssetMaterial& material =
                     mesh.materials[primitive.materialIndex];
                 if(opaqueSurfaceOverlay(material))continue;
-                if(independentCoverageNeeded_){commands.bindPipeline(material.coverageTexture.present
-                    ?(objectPage?objectShadowCoveragePipeline_:shadowCoveragePipeline_)
-                    :(objectPage?objectShadowPipeline_:shadowPipeline_));
-                    if(context.submissionCounters)++context.submissionCounters->pipelineBinds;
-                }
                 const bool explicitCoverage=(material.materialFeatures&MaterialFeatureShadowCoverageMask)!=0;
                 if (material.showcasePlatform > 0.5F
                     || (!explicitCoverage&&(material.materialClass == AssetMaterialClass::Overlay
@@ -4402,6 +4404,14 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                 }
                 forEachPrimitiveOpacityRun(snapshot->nodeWorldOpacities,primitive.nodeIndex,firstInstance,instanceCount,[&](const PrimitiveOpacityRun& run) {
                 if (run.opacity == 0) return;
+                const VkPipeline pipeline=fullyCoveredShadow(material,run.opacity)
+                    ?(objectPage?objectShadowDepthOnlyPipeline_:shadowDepthOnlyPipeline_)
+                    :independentCoverageNeeded_&&material.coverageTexture.present
+                        ?(objectPage?objectShadowCoveragePipeline_:shadowCoveragePipeline_)
+                        :(objectPage?objectShadowPipeline_:shadowPipeline_);
+                if(pipeline!=boundPipeline){commands.bindPipeline(pipeline);boundPipeline=pipeline;
+                    if(context.submissionCounters)++context.submissionCounters->pipelineBinds;
+                }
                 morphConstants.nodeOpacity=run.opacity;
                 commands.pushConstants(
                     pipelineLayout_,

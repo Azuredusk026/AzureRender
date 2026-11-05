@@ -488,6 +488,8 @@ private:
     VkPipeline outlineMirroredPipeline_ = VK_NULL_HANDLE;
     VkPipeline backgroundPipeline_ = VK_NULL_HANDLE;
     VkPipeline shadowPipeline_ = VK_NULL_HANDLE;
+    VkPipeline shadowDepthOnlyPipeline_ = VK_NULL_HANDLE;
+    VkPipeline objectShadowDepthOnlyPipeline_ = VK_NULL_HANDLE;
     VkPipeline shadowCoveragePipeline_ = VK_NULL_HANDLE;
     VkPipeline objectShadowCoveragePipeline_ = VK_NULL_HANDLE;
     VkPipeline objectShadowPipeline_ = VK_NULL_HANDLE;

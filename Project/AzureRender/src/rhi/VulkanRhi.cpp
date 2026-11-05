@@ -571,8 +571,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
 
     VkGraphicsPipelineCreateInfo pipelineInfo{
         VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO};
-    pipelineInfo.stageCount =
-        static_cast<std::uint32_t>(shaderStages.size());
+    pipelineInfo.stageCount = desc.fragmentShader == VK_NULL_HANDLE ? 1U : 2U;
     pipelineInfo.pStages = shaderStages.data();
     pipelineInfo.pVertexInputState = &vertexInput;
     pipelineInfo.pInputAssemblyState = &inputAssembly;

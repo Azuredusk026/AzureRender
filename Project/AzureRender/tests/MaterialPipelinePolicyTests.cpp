@@ -1,5 +1,6 @@
 #include "render/MaterialPipelinePolicy.hpp"
 #include <iostream>
+#include <limits>
 using namespace azurerender;
 int main(){
     if(integralMaterialProgram("/resources_integral/shaders/mesh.frag.spv"))return 30;
@@ -8,6 +9,18 @@ int main(){
     if(!integralMaterialProgram("character_snapshot_integral.frag.spv"))return 33;
     if(integralMaterialProgram("mesh.frag.spv"))return 34;
     AssetMaterial material;
+    for(auto mode:{AssetAlphaMode::Opaque,AssetAlphaMode::Mask,AssetAlphaMode::Blend}){
+        material.alphaMode=mode;
+        for(auto flags:{0U,std::uint32_t(MaterialFeatureGeometryShadow),std::uint32_t(MaterialFeatureSqrtAlphaShadow),
+            std::uint32_t(MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow)}){
+            material.materialFeatures=flags;
+            const bool expected=(flags&MaterialFeatureGeometryShadow)||(mode==AssetAlphaMode::Opaque&&!(flags&MaterialFeatureSqrtAlphaShadow));
+            if(fullyCoveredShadow(material,1.F)!=expected)return 40;
+            for(float opacity:{0.F,.5F,1.1F,-.1F,std::numeric_limits<float>::quiet_NaN()})
+                if(fullyCoveredShadow(material,opacity))return 41;
+        }
+    }
+    material={};
     if(extendedMaterialLighting(material))return 23;
     material.environmentLighting.diffuse=MaterialEnvironmentSource::GlobalEnvironment;
     if(!extendedMaterialLighting(material))return 24;

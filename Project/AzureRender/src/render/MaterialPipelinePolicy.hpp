@@ -8,6 +8,12 @@ inline bool opaqueSurfaceOverlay(const AssetMaterial& material) noexcept {
     return material.unlitTextureLayers.present
         &&material.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay;
 }
+// Matches shadow.frag priority: geometry coverage precedes alpha policies.
+inline bool fullyCoveredShadow(const AssetMaterial& material,float nodeOpacity) noexcept {
+    return nodeOpacity==1.F&&((material.materialFeatures&MaterialFeatureGeometryShadow)!=0
+        ||(material.alphaMode==AssetAlphaMode::Opaque
+            &&(material.materialFeatures&MaterialFeatureSqrtAlphaShadow)==0));
+}
 // Cull policy and authored front-face orientation are independent.
 inline constexpr unsigned surfaceFacingIndex(bool doubleSided,bool mirrored) noexcept {
     return (doubleSided?2U:0U)+(mirrored?1U:0U);
