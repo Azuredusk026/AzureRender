@@ -16,7 +16,7 @@ Release 与 Debug 完整来源构建通过。
 
 构建命令分别耗时约 893 秒与 732 秒。
 两配置各 535 份生产着色程序保持受检字节。
-本候选的原生图像与 GPU 性能检查按用户安排延期。
+组合来源的原生图像与 GPU 性能结果见后续复测。
 联合画质继续为 `failed-user-review`。
 
 ## 扩展回归
@@ -44,3 +44,10 @@ Debug 批次总预算超时及目录规模失败继续保留。
 [结构化收据](evidence/2026-11-05/render-camera-snapshot/results.json)列出源码、范围及产物摘要。
 [原始记录](evidence/2026-11-05/render-camera-snapshot/measurements.zip)保留构建、定向检查及全部扩展失败。
 实施顺序见[相机与场景快照](../../plans/2026-11-05-render-camera-snapshot.md)。
+
+## 组合候选复测
+
+组合来源的[双设备及原生复测](idle-gpu-validation.md)保存后续设备结果。
+十二项机制检查与 NVIDIA Release 原生四帧对照通过。
+完整帧预算、热状态及用户整体画质验收保持未通过。
+本页局部 CPU 证据和组合候选的实际测量分别持有范围。

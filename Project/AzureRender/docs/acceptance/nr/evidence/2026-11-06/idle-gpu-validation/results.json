@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "status": "dual-device-gpu-and-native-image-passed-performance-and-thermal-failed",
+  "sourceBase": "f538c1f",
+  "sourceSha256": {
+    "tests/SkinningGpuTests.cpp": "7dcdbdfaacee6e445927fcea43196d63ca9f0e83290d705fd25ad87d2060ae09"
+  },
+  "patchSha256": "f5ace65233f6b79602b7704461e9676f6f7506a705d15b9dbb871e9a4ef67180",
+  "gpuChecks": {
+    "status": "passed",
+    "scope": "3 actual GPU cases x2configurations x2devices; synchronization validation and zero-resource assertions inside each original case; skinning adds byte comparison of individual/bulk buffer barriers",
+    "rows": [
+      {
+        "configuration": "release",
+        "device": "nvidia",
+        "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "filter": "*nv-vk64*",
+        "exitCode": 0,
+        "seconds": 6.437999999965541,
+        "actualChecks": [
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\idle-gpu-validation\\release-nvidia-tests.xml"
+        ]
+      },
+      {
+        "configuration": "release",
+        "device": "intel",
+        "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "deviceUUIDs": [
+          "868088a7-0400-0000-0002-000000000000"
+        ],
+        "enumerationEntries": 2,
+        "filter": "*igvk64*",
+        "exitCode": 0,
+        "seconds": 1.125,
+        "actualChecks": [
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\idle-gpu-validation\\release-intel-tests.xml"
+        ]
+      },
+      {
+        "configuration": "debug",
+        "device": "nvidia",
+        "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "deviceUUIDs": [
+          "961ce778-109e-0976-8431-c5edc76ff622"
+        ],
+        "enumerationEntries": 1,
+        "filter": "*nv-vk64*",
+        "exitCode": 0,
+        "seconds": 5.297000000020489,
+        "actualChecks": [
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\idle-gpu-validation\\debug-nvidia-tests.xml"
+        ]
+      },
+      {
+        "configuration": "debug",
+        "device": "intel",
+        "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "deviceUUIDs": [
+          "868088a7-0400-0000-0002-000000000000"
+        ],
+        "enumerationEntries": 2,
+        "filter": "*igvk64*",
+        "exitCode": 0,
+        "seconds": 1.202999999979511,
+        "actualChecks": [
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\idle-gpu-validation\\debug-intel-tests.xml"
+        ]
+      }
+    ],
+    "sourceInputsUnchanged": true,
+    "allRecordedProductsVerified": true
+  },
+  "nativeFourFrames": {
+    "status": "passed",
+    "sourceBase": "f538c1f-with-skinning-test-extension",
+    "executableSha256": "1cae1fe3b619667dd989ecf450c495946c898cd426c73733c64c1c3e2952a857",
+    "exitCode": 0,
+    "seconds": 112.42199999996228,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Four original native2560x1440 fixed24fps RGB frames compared with frozen reference; user visual quality acceptance remains failed"
+  },
+  "nativeFrameScope": "NVIDIA Release2560x1440 fixed24fps, four RGB frames; Release application validation disabled,12standalone GPU tests explicitly enabled synchronization validation",
+  "nativePerformance": {
+    "status": "measured",
+    "sourceBase": "f538c1f-with-skinning-test-extension",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 171.0779999999795,
+    "warmup": 300,
+    "samples": 1800,
+    "gpu": {
+      "shadowMs": {
+        "mean": 5.280976977777778,
+        "p95": 5.647958399999999,
+        "p99": 5.78936416
+      },
+      "sceneMs": {
+        "mean": 31.119275235555556,
+        "p95": 33.9200512,
+        "p99": 35.31208704
+      },
+      "postProcessMs": {
+        "mean": 0.29726492444444447,
+        "p95": 0.323584,
+        "p99": 0.33485824
+      },
+      "frameMs": {
+        "mean": 36.69751713777778,
+        "p95": 39.8096512,
+        "p99": 41.2795536
+      }
+    },
+    "cpu": {
+      "mean": 22.30767799999999,
+      "p95": 24.8320850000007,
+      "p99": 32.77664499999556
+    },
+    "wait": {
+      "mean": 14.240492611111124,
+      "p95": 17.869884999999886,
+      "p99": 19.831763999999513
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7403032576,
+    "environmentFailures": [
+      "run observation 19: driver relative thermal headroom is insufficient",
+      "run observation 21: driver relative thermal headroom is insufficient",
+      "run observation 21: software thermal slowdown is active",
+      "run observation 22: software thermal slowdown is active",
+      "run observation 23: software thermal slowdown is active",
+      "run observation 24: software thermal slowdown is active",
+      "run observation 25: driver relative thermal headroom is insufficient",
+      "run observation 25: software thermal slowdown is active",
+      "run observation 26: driver relative thermal headroom is insufficient",
+      "run observation 26: software thermal slowdown is active",
+      "run observation 27: software thermal slowdown is active",
+      "run observation 28: software thermal slowdown is active",
+      "run observation 29: software thermal slowdown is active",
+      "run observation 30: driver relative thermal headroom is insufficient",
+      "run observation 30: software thermal slowdown is active",
+      "run observation 31: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "timingBudgetPassed": false,
+    "powerProfileStable": true,
+    "environmentPassed": false
+  },
+  "performanceScope": "Original2100 native1080p frames,300warmup1800samples, no changes to8ms/16.6ms or thermal gates; stableAC80W, thermal failures retained",
+  "canonicalImages": [
+    {
+      "frame": "frame_000000.png",
+      "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+      "canonicalArchive": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip",
+      "member": "runtime-node-identity-joint/frames/frame_000000.png"
+    },
+    {
+      "frame": "frame_000001.png",
+      "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+      "canonicalArchive": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip",
+      "member": "runtime-node-identity-joint/frames/frame_000001.png"
+    },
+    {
+      "frame": "frame_000002.png",
+      "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+      "canonicalArchive": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip",
+      "member": "runtime-node-identity-joint/frames/frame_000002.png"
+    },
+    {
+      "frame": "frame_000003.png",
+      "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+      "canonicalArchive": "docs/acceptance/nr/evidence/2026-11-05/runtime-node-identity/measurements.zip",
+      "member": "runtime-node-identity-joint/frames/frame_000003.png"
+    }
+  ],
+  "canonicalImageArchiveSha256": "876b90db1b07857ee0f67246035b78d954de9a1413818fbbc8f7f5a325c62490",
+  "fullVisualAcceptance": "failed-user-review",
+  "allAcceptanceItemsComplete": false,
+  "archiveSha256": "fd38a0a3fb19f04f2b2e10da55c22a2773c7ec7366327e9b6cd7afa3e7c0ba8c",
+  "archiveMembers": {
+    "idle-gpu-validation/debug-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "idle-gpu-validation/debug-intel-tests-full.log": "1dd692449d28d9d36cdb97562fc9704bc88382052b966c6fd676b38a1ff1b4c5",
+    "idle-gpu-validation/debug-intel-tests.log": "f8918dc74531777269f8fa46bc72668ac5b18b03f1acd0443b09cacb759e9b26",
+    "idle-gpu-validation/debug-intel-tests.xml": "7173a9495061ec575abe60a75a0d38f4ca9428b809d61eb1950e80fb2bd1ba8e",
+    "idle-gpu-validation/debug-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "idle-gpu-validation/debug-nvidia-tests-full.log": "8292c60077f3030d61fd269dbc908a7b6e5698e485275ffd60d5f77b07a5b5c0",
+    "idle-gpu-validation/debug-nvidia-tests.log": "e0bc295ada6ec679b20e6387281aef3fb1247acae9e65b7cc05c0ddc1b4459c3",
+    "idle-gpu-validation/debug-nvidia-tests.xml": "a643314ffdda3d35e47cc45ba21e37602426c8d0e6e959e3881da374ba25a032",
+    "idle-gpu-validation/duplicate-device-enumeration/gpu-checks.json": "f6ba99d05449898fe127403094856d0cc9c7f8137db4ea50fae9cb09938a651c",
+    "idle-gpu-validation/duplicate-device-enumeration/release-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "idle-gpu-validation/duplicate-device-enumeration/result.json": "4037e2ac307759dad4d013501097dbe8bdb0710f914e39fc616159fdc50846f3",
+    "idle-gpu-validation/duplicate-device-enumeration/run_idle_gpu_checks.py": "5a4c63e03b891ebc49ac595fdd2abe681b27cf2b8735dba3d224e2d25461c03f",
+    "idle-gpu-validation/duplicate-device-enumeration/startup-environment.json": "8a22e208be91d7b483fc76ccce97fcf6321e7ac7683ec229895afa91004416a2",
+    "idle-gpu-validation/engine-debug-build.json": "185ec9237d18bebc7503f5ed7754a49157c84983b7184abeea9700fec89e6d4c",
+    "idle-gpu-validation/engine-debug-build.log": "b862ed3b2e4a194f55b8fb3339c4c4ef69eff245311c1656d3c10967a8561d28",
+    "idle-gpu-validation/engine-release-build.json": "14064609afc4d3c77f5fecaa3289f3d5bd27a9244d2ae7140fd476530d277c5c",
+    "idle-gpu-validation/engine-release-build.log": "f5e85e2119fc02374cbf693eb5156e82f15f0fef7dd5aebcba8a3cab33a7078e",
+    "idle-gpu-validation/gpu-checks.json": "c8f27255add24715a167ca4847427b6ddd387eb48ad82027c2c79644e13260ea",
+    "idle-gpu-validation/initial-enumerator-path-error/result.json": "8791cef6b504bcf08c1abf73f7a972ce9faba96671bd9cb25ee74c7541c2fe27",
+    "idle-gpu-validation/initial-enumerator-path-error/run_idle_gpu_checks.py": "57a5db6eff6abebb12fbff974bc3aabea860454bf4391751fa8906384d3c1d82",
+    "idle-gpu-validation/initial-enumerator-path-error/startup-environment.json": "6fa8659fadeedb025950d0be17532456a4ed648cf6a91a211ef1784c28ad5d42",
+    "idle-gpu-validation/release-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "idle-gpu-validation/release-intel-tests-full.log": "a492ca67c052982ab3918232a9b5a4ed156ba7949bf02e19b1acf7bd86b4d195",
+    "idle-gpu-validation/release-intel-tests.log": "1c47e33fa9af2a724fc7c9776850720e7a94bc08ca496a8a4674e489d8b2c7d1",
+    "idle-gpu-validation/release-intel-tests.xml": "082315b15820400ab5768a20c65816b6c8274269d233c871ea1f3f6f953ee649",
+    "idle-gpu-validation/release-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "idle-gpu-validation/release-nvidia-tests-full.log": "20562fe7b3bb504814a4c0d39e10ef266ba8af11666c8f8d37a38fafb6ff6f69",
+    "idle-gpu-validation/release-nvidia-tests.log": "abd84ece67342964be77d52a48ffc2a0a587bb02b7b736ed12b750d9015c6b6f",
+    "idle-gpu-validation/release-nvidia-tests.xml": "d96629b51fbeecb038e66817a69fa4c386edf8b281935f0e3a64c641ac914a0e",
+    "idle-gpu-validation/startup-environment.json": "55652fc55a4498e14a948d7d0f91535b4132c4f200d97bf22989e8a3e19cbd33",
+    "idle-gpu-joint/captures/azureplayer.log.jsonl": "5c695b68d74f05fa07c049a5ca1e08d354b9a21b75cfbede871055c9a0b8126d",
+    "idle-gpu-joint/command.json": "e46498cde295ec8164e1ca04ee1f603facc248479a6be1c59563dcff52edaf16",
+    "idle-gpu-joint/frozen-inputs.json": "608ed660e6585467749b4c66275d84d4e8639ce6dee716a5d6217c4ac620dbbf",
+    "idle-gpu-joint/results.json": "78d9533f9032708ddfd95fda61b3b8a25148c92003fd371f5861e4ce45651436",
+    "idle-gpu-joint/runtime.json": "c431dc4715ee5709ae7a80a22d762404dde14ec694eb8b6950ea46baaeb22f1e",
+    "idle-gpu-joint/stderr.log": "a6d438039b82eb324822cc334365bb5277efa83c508050c12d0a73f0cc9a8d79",
+    "idle-gpu-joint/stdout.log": "32bb5d0ad8eacf22b5d4b7175e4b334d2d853faf7843894703bb394c391a34e9",
+    "idle-native-performance/captures/azureplayer.log.jsonl": "be104343ac9031ac1d669db1fd86f488b345010710d94498c73135115ed36715",
+    "idle-native-performance/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "idle-native-performance/environment.json": "06dd5368d680371888dc01788d245c8833e96f725b310dff3561f7e16540eeb5",
+    "idle-native-performance/frozen-inputs.json": "ac07b3ad5137d1f5a64747431f91d331b91ca08157e6192ad32a164dfd042321",
+    "idle-native-performance/memory.json": "358913f09a7c3207aeefc58d85e5af1ee8b172362baaa2df2ea02cdb95e590a1",
+    "idle-native-performance/results.json": "3a55d54060d89f2daea6363632de8021b1708f4b0e78a996b0e4af5ac5ae8b3e",
+    "idle-native-performance/runtime.json": "a94d1d5a8cce57049938589880ab15c09d9e484c692c4600a67293f2e160dfed",
+    "idle-native-performance/stderr.log": "d34b2dcad87f573bbc2e0422618d3cdd729a21306225879628718fe245999c59",
+    "idle-native-performance/stdout.log": "9c2e6d3fc57b097331c175c6ed3013281e708fdec1e3a3973703e6237644d955",
+    "idle-native-performance/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "idle-native-performance/task.json": "d16dba0fc5cd2bd05a79e32fe560b8b672358ed56968dbb7c5c5b079b04e6a76",
+    "idle-native-performance/timing.csv": "e3f31b8ba8bd69a21833e02ef49db2e5dde1f3a66087df49ae29da69ce970691",
+    "idle-native-performance/timing.json": "f5364b3e2a506504f8e99a2be70569553df3e32d2906dada1014bb76ac6a3456",
+    "drivers/build_idle_gpu_candidate.py": "9da6cc29184b23adcc629f41d1402d729d1eb758503d09b8ceeffd97893a37b2",
+    "drivers/run_idle_gpu_checks.py": "25291cbc176a164194e34be02a4d4c6bb00eb5c4c57baa0bab301577767901a9",
+    "drivers/capture_idle_gpu_joint.py": "701b320c83bcb35a699514e9a2ae4b12a90653d43a92d622cdfbd8d39e434b41",
+    "drivers/measure_idle_native_performance.py": "9426263068f2de2d520263b56e4cb854f3e4e2e090f3d4290280801472439649",
+    "source/tests/SkinningGpuTests.cpp": "7dcdbdfaacee6e445927fcea43196d63ca9f0e83290d705fd25ad87d2060ae09",
+    "engine-release/build-provenance.json": "e2b3ec70585c17b18d1dd603ae8adbbadd488b00df8679dd0de8b386f190a8f3",
+    "engine-debug/build-provenance.json": "77231b8824aeddc7104c911a742dca736050da6781a88ba2002b909d88078371"
+  }
+}

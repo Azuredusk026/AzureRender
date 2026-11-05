@@ -45,3 +45,10 @@ CPU 八毫秒、GPU 16.6 毫秒及热状态门槛保持有效。
 [结构化收据](evidence/2026-11-05/frame-context-snapshot/results.json)保存来源、范围及环境失败。
 [原始记录](evidence/2026-11-05/frame-context-snapshot/measurements.zip)保存构建、测试、原生栈和符号映射。
 相同图像按 SHA-256 引用已归档原件。
+
+## 组合候选复测
+
+组合来源的[双设备及原生复测](idle-gpu-validation.md)保存后续设备结果。
+十二项机制检查与 NVIDIA Release 原生四帧对照通过。
+完整帧预算、热状态及用户整体画质验收保持未通过。
+本页局部 CPU 证据和组合候选的实际测量分别持有范围。

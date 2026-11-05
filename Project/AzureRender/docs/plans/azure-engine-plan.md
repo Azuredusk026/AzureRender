@@ -68,14 +68,15 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 该候选四帧输出一致，性能采集待空闲 GPU。
 相机与场景共享输入通过两配置各十四项 CPU 检查。
 扩展回归及延期范围见[共享输入验证](../acceptance/nr/render-camera-snapshot.md)。
-用户已将 GPU 复测延期，当前推进帧数据与构建流程。
+外部游戏退出后恢复[设备及原生复测](../acceptance/nr/idle-gpu-validation.md)。
+两配置双设备各三项检查通过，原生四帧与冻结参考一致。
 构建目标选择通过[两配置增量核验](../acceptance/recovery/scoped-build-provenance.md)。
 Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosis.md)本轮 67.95 秒通过。
 历史超时和隔离候选保留原证据，耗时差异仍需归因。
 缓冲依赖的[批量入口](../acceptance/nr/buffer-barrier-batching.md)通过两配置各七项 CPU 检查。
-该候选的双设备同步、画面及原生收益等待复测。
+双设备的蒙皮与运动机制检查通过，原生收益按本轮范围记录。
 节点[快照复制](../acceptance/nr/runtime-snapshot-copy.md)通过两配置各十五项 CPU 检查。
-实际帧成本与图像检查继续等待复测。
+本轮 CPU 工作 P95 为 24.83 毫秒，GPU 为 39.81 毫秒。
 混合场景的[透明临时分配](../acceptance/nr/opaque-transparency-scratch.md)通过两配置各十二项检查。
 不透明顶点扩容时，候选的逐帧分配保持稳定。
 完整 CPU、GPU 和热状态预算继续保留失败。

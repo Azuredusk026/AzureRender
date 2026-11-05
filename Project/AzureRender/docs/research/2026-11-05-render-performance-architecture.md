@@ -18,6 +18,7 @@ GPU P95 目标为 16.6 毫秒，CPU 工作目标为八毫秒。
 | 每帧资源键候选 | 46.35 毫秒 | 42.99 毫秒 | 时间与热状态未通过 |
 | 实体身份候选 | 38.30 毫秒 | 40.38 毫秒 | 交流供电稳定，时间与热状态未通过 |
 | 运动向量绑定候选 | 33.85 毫秒 | 38.94 毫秒 | 交流供电稳定，时间与热状态未通过 |
+| 帧数据与批量屏障候选 | 24.83 毫秒 | 39.81 毫秒 | 交流供电稳定，时间与热状态未通过 |
 
 六份 CPU 原生采样保留调用地址与符号映射。
 五份位于资源键查询，一份位于运行时实体身份查询。
@@ -173,3 +174,15 @@ Release 失败控制分配 8,512,487 字节。
 不透明顶点容量的扩展通过 CPU 分配控制定位。
 两配置各十二项检查通过，详见[分配验证](../acceptance/nr/opaque-transparency-scratch.md)。
 实际帧的 CPU、GPU 及图像结果等待复测。
+
+## 空闲设备复测
+
+十二项双设备机制检查及 NVIDIA 原生四帧对照通过。
+完整场景的 GPU 场景 P95 为 33.92 毫秒。
+GPU 阴影 P95 为 5.65 毫秒，完整帧预算与热状态未通过。
+实际来源和范围见[空闲显卡复测](../acceptance/nr/idle-gpu-validation.md)。
+
+后续先分离阴影接收算法与主要着色路径的成本。
+[NVIDIA PCSS 资料](https://developer.download.nvidia.com/assets/gamedev/docs/PCSS_Integration.pdf)说明遮挡搜索和过滤的采样成本。
+[NVIDIA 管线资料](https://developer.nvidia.com/gpugems/gpugems/part-v-performance-and-practicalities/chapter-28-graphics-pipeline-performance)说明纯深度工作与片元着色的关系。
+这些资料用于提出可验证假设，实际采用保持本项目画质门槛。

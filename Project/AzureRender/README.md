@@ -14,6 +14,10 @@
 日常短检与集中构建入口见[构建范围](docs/development/build-scopes.md)。
 缓冲依赖的 CPU 契约及设备待项见[批量提交验证](docs/acceptance/nr/buffer-barrier-batching.md)。
 
+最新[双设备及原生复测](docs/acceptance/nr/idle-gpu-validation.md)完成。
+完整场景 CPU 工作 P95 为 24.83 毫秒，GPU 为 39.81 毫秒。
+原帧预算和热状态检查未通过。
+
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。
 原生姿态、同条件材质对照及 GI 覆盖见[输入核验](docs/acceptance/nr/native-material-input-audit.md)。

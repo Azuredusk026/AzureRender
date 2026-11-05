@@ -62,13 +62,22 @@ int main(int argc,char** argv) try {
     shader=backend.createShaderModule(readBinaryFile(argv[1]));
     pipeline=backend.createComputePipeline({shader,layout});backend.destroyShaderModule(shader);shader=VK_NULL_HANDLE;
     std::vector<std::uint32_t> baseline;
+    std::vector<std::vector<std::uint32_t>> barrierBaselines;
+    for(bool bulkBarriers:{false,true}) {
+    std::size_t barrierCase=0;
     for(bool full:{false,true})for(bool batched:{false,true}) {
         std::memset(output.mapped,0xCD,static_cast<std::size_t>(output.size));
         host.allocator.flush(output,0,output.size);
         host.submit([&](rhi::ICommandRecorder& recorder,VkCommandBuffer) {
-            for(const auto* buffer:buffers)recorder.bufferBarrier({buffer->buffer,0,buffer->size,
-                VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,
-                static_cast<VkAccessFlags>(buffer==&output?VK_ACCESS_SHADER_WRITE_BIT:VK_ACCESS_SHADER_READ_BIT)});
+            std::array<rhi::BufferBarrierDesc,5> barriers{};
+            for(std::size_t i=0;i<barriers.size();++i) {
+                const auto* buffer=buffers[i];
+                barriers[i]={buffer->buffer,0,buffer->size,VK_PIPELINE_STAGE_HOST_BIT,
+                    VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,
+                    static_cast<VkAccessFlags>(buffer==&output?VK_ACCESS_SHADER_WRITE_BIT:VK_ACCESS_SHADER_READ_BIT)};
+            }
+            if(bulkBarriers)recorder.bufferBarriers(barriers.data(),barriers.size());
+            else for(const auto& barrier:barriers)recorder.bufferBarrier(barrier);
             recorder.bindComputePipeline(pipeline);recorder.bindComputeDescriptorSet(layout,set);
             for(unsigned slice=0;slice<(batched?1U:2U);++slice) {
                 SkinningBatch parameters{1,slice,{.25F,.5F},1+slice,1,batched?2U:1U};
@@ -95,10 +104,15 @@ int main(int argc,char** argv) try {
         }
         if(!batched)baseline.assign(words,words+81);
         else if(std::memcmp(baseline.data(),words,output.size))throw std::runtime_error("Batched deformation differs from individual slices");
+        if(!bulkBarriers)barrierBaselines.emplace_back(words,words+81);
+        else if(std::memcmp(barrierBaselines.at(barrierCase).data(),words,output.size))
+            throw std::runtime_error("Batched buffer barriers changed deformation output bytes");
+        ++barrierCase;
+    }
     }
     cleanup.reset();
     if(host.errors || host.allocator.statistics().liveBuffers || host.allocator.statistics().liveImages)
         throw std::runtime_error("Skinning validation or release failed");
-    std::cout<<"GPU independent joints, exact batched equivalence and output isolation passed\n";
+    std::cout<<"GPU independent joints, exact deformation and buffer-barrier batching, output isolation passed\n";
     return 0;
 } catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}
