@@ -17,7 +17,7 @@
 | 终端诊断 | 返回前提交完整输出行 | 失败控制与两配置的同步检查通过 |
 | 图像稳定性 | Intel 的严格整图对照 | 保留重复输入的少量差异，等待新的归因证据 |
 | 编辑预览 | 满足十秒预算的资源复用 | 按[管线计划](2026-11-05-pipeline-reuse.md)接续 |
-| 正式测量 | 同源负载、原始计时及设备状态 | 功能候选冻结后执行原预算 |
+| 正式测量 | 同源负载、原始计时及设备状态 | 受检基线十五轮完成，八轮通过，七轮热状态失败 |
 
 ## 构建与设备
 
@@ -30,6 +30,18 @@ Intel 使用已登记驱动的筛选入口。
 参数为 `VK_LOADER_DRIVERS_SELECT=*igvk64*`。
 NVIDIA 的对应参数为 `*nv-vk64*`。
 筛选语义见[加载器说明](https://github.com/KhronosGroup/Vulkan-Loader/blob/main/docs/LoaderDriverInterface.md)。
+
+## Windows 检查入口
+
+构建与 CTest 均通过 `tools/msvc_env.bat` 启动。
+该入口装配 MSVC、CMake 与 Ninja 的搜索路径。
+测试子进程使用同一环境，按原用例和预算检查。
+以下命令在工程目录运行。
+
+```powershell
+.\tools\msvc_env.bat ctest --test-dir build/ninja-msvc-debug -LE gpu --output-on-failure
+.\tools\msvc_env.bat ctest --test-dir build/ninja-msvc-release -LE gpu --output-on-failure
+```
 
 ## 判据与证据
 

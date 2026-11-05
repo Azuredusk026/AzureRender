@@ -66,3 +66,18 @@ Intel 的三项容量与颜色定向用例通过。
 后续诊断需提供同步、阴影或输入稳定性的新证据。
 
 完整命令、失败记录、测试来源及摘要见[结构化记录](evidence/2026-11-05/acceptance-preflight/results.json)。
+
+## 受检基线完整回归
+
+受检基线为 `aa24bd4`，工作流提交为 `01b66e5`。
+Debug 与 Release 各执行二百九十二项非 GPU 检查。
+每种配置有两项因 CMake 和 CTest 搜索路径缺失而失败。
+通过项目 MSVC 环境入口复测，两项均通过。
+
+完整批次与复测原件共同保存，全部用例均有通过记录。
+基线正式性能的十五轮中，八轮通过全部条件。
+七轮触发热状态条件，时间及内存数值满足公共预算。
+当前代码的新增范围按所属任务另行核验。
+
+本轮来源及后续架构范围见[渲染性能](../../research/2026-11-05-render-performance-architecture.md)。
+原件与逐轮结果见[基线收据](../nr/evidence/2026-11-05/performance-architecture/baseline-results.json)。

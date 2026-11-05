@@ -853,7 +853,10 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         const std::vector<Matrix4> nodeWorldTransforms =
             scene::resolveNodeWorldTransforms(scene_);
         const scene::ResourceLayout layout(scene_);
-        const auto meshKeyOf = [&](const scene::SceneNodeDesc& node) { return layout.meshKey(node.resourceId); };
+        std::vector<std::size_t> nodeMeshKeys;
+        nodeMeshKeys.reserve(scene_.nodes.size());
+        for (const auto& node : scene_.nodes)
+            nodeMeshKeys.push_back(node.visible ? layout.meshKey(node.resourceId) : 0);
         // Instances are grouped by resource so each draw section gets one
         // contiguous span in the instance buffer.
         for (std::size_t meshKey = 0; meshKey < meshBounds.size();
@@ -861,7 +864,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             for (std::size_t nodeIndex = 0; nodeIndex < scene_.nodes.size();
                  ++nodeIndex) {
                 const scene::SceneNodeDesc& node = scene_.nodes[nodeIndex];
-                if (!node.visible || meshKeyOf(node) != meshKey) {
+                if (!node.visible || nodeMeshKeys[nodeIndex] != meshKey) {
                     continue;
                 }
                 const scene::AxisAlignedBounds& localBounds = meshBounds.at(meshKey);
