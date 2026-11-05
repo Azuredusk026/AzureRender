@@ -1,133 +1,90 @@
 # 完整原生场景显示
 
-本页使用恢复后的完整物流场景。
+本页提供当前联合画面、可玩项目及冻结交付入口。
 工作目录为 `D:/Projects/FYP/Project/AzureRender`。
+运行前完成[环境恢复](../plans/2026-10-30-development-recovery.md)。
+任务顺序见[开发总计划](../plans/azure-engine-plan.md)。
 
-先完成[环境恢复](../plans/2026-10-30-development-recovery.md)。
-画面与范围见[完整场景复核](../acceptance/recovery/full-scene-visual.md)。
-联合角色画质验收未通过，诊断状态见[输入核验](../acceptance/nr/joint-visual-input-isolation.md)。
+完整联合画质保持 `failed-user-review` 状态。
+功能验证、局部数值与用户外观复核分别登记。
+任务预算及验证范围见[协作与验收](../development-workflow.md)。
 
-## 联合场景验收入口
+## 联合场景入口
 
-当前联合入口包含完整物流场景和待机角色。角色按原始比例放置，镜头距离为 3.82 米。以每秒 24 帧采集时，八秒内共有 192 帧。
+当前项目使用完整物流场景、十四个角色材质槽及十段动画。
+皮肤基础颜色因子为 `[0.98,0.93,0.89,1]`。
+场景使用三十三层反射图集及原生辐照体。
+待机角色与中央物流采用项目声明的动画时钟。
 
 ```powershell
 $run = Get-Content build/current-character-reference-run.txt
 & build/ninja-msvc-release/AzurePlayer.exe `
-  --project "$run/qualified-hair-facing-joint/joint-materials.azureproject" `
+  --project "$run/qualified-lit-surfaces-joint-v4/joint-materials.azureproject" `
   --width 2560 --height 1440 --qa-camera scene --qa-light scene
 ```
 
-程序、动画帧及重开校验值见[联合动画记录](../acceptance/nr/evidence/2026-11-04/translucent-hair/motion.json)。以下命令用于单独检查环境。
-
-## 可玩交付候选
-
-在当前运行目录的 `skin-warm-delivery/独立游戏 中文 空格` 中双击 `完整联合场景显示验证.exe`。操作说明见包内 `GAME-GUIDE.md`。该候选使用包内固定版本的场景和播放器，功能范围及校验值见[独立发布核验](../acceptance/nr/evidence/2026-11-04/skin-warm-delivery/results.json)。
-
-## 独立场景启动
-
-在工程目录运行以下命令。
-
-```powershell
-& build/ninja-msvc-release/AzurePlayer.exe `
-  --project build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/full-candidate/enclosure-sampler.azureproject `
-  --width 1920 --height 1080 `
-  --qa-camera scene --qa-light scene --qa-isolation beauty
-```
-
-项目绑定原生调色查找表及完整物流图层。
-相机采用捕获场景中声明的机位。
-默认配置使用模式一及线性时间反射。
-首次启动需要扫描资源并准备图形管线。
+该入口消费当前构建的 Player 及着色程序。
+两配置的四帧与资源释放见[快照验证](../acceptance/nr/outline-snapshot-order.md)。
+192 帧动画及可玩路线见[联合记录](../acceptance/nr/evidence/2026-11-05/lit-surfaces-motion/results.json)。
 
 ## 固定序列采集
 
-任务目录通过产物工具生成。
-以下命令采集与归档对应的十二帧序列。
+运行目录由[产物工具](../development/artifact-retention.md)管理。
+以下命令采用固定步长，每秒采样二十四帧。
+输出路径用于本次独立采集。
 
 ```powershell
-$sceneRun = & build/reinstall-environment/venv/Scripts/python.exe `
-  tools/artifact_cleanup.py --new-run full-scene-capture
+$run = Get-Content build/current-character-reference-run.txt
+$captureRun = & build/reinstall-environment/venv/Scripts/python.exe `
+  tools/artifact_cleanup.py --new-run joint-visual-capture
 & build/ninja-msvc-release/AzurePlayer.exe `
-  --project build/runs/20261029-045743-snapshot-shading-budget-8ee0b1/full-candidate/enclosure-sampler.azureproject `
+  --project "$run/qualified-lit-surfaces-joint-v4/joint-materials.azureproject" `
   --width 2560 --height 1440 `
-  --capture-frames 12 --capture-fps 60 --fixed-frame-step `
-  --capture-dir "$sceneRun/frames" `
-  --qa-camera scene --qa-light scene --qa-isolation beauty
+  --capture-frames 4 --capture-fps 24 --fixed-frame-step `
+  --capture-dir "$captureRun/frames" --qa-camera scene --qa-light scene
 ```
 
-输出目录包含 PNG、采集清单及设备信息。
-序列帧率用于固定时间取样，持续性能另行测量。
-归档前保存命令、日志和输入指纹。
-任务完成后按[产物规则](../development/artifact-retention.md)标记目录。
+输出包含 PNG、设备信息及实际采集清单。
+采样帧率描述固定时间取样，持续性能单独测量。
+复现记录包含程序、着色目录、关卡及依赖摘要。
+同时记录机位、姿态、灯组、曝光、反射路径及时间。
 
-## 完整场景操控
+## 可玩项目
 
-独立游戏的入口与范围见[保存迁移与独立运行](../acceptance/recovery/full-scene-delivery.md)。
-该目录包含实际原生入口、Player 及完整项目资源。
-开发态项目使用以下命令启动。
+开发入口使用当前构建程序及可编辑的项目资源。
 
 ```powershell
+$run = Get-Content build/current-character-reference-run.txt
 & build/ninja-msvc-release/AzurePlayer.exe `
-  --project build/runs/20261031-183314-full-scene-playable-validation-d5257e/project/playable.azureproject `
-  --width 1920 --height 1080 `
-  --qa-camera scene --qa-light scene --qa-isolation beauty
+  --project "$run/qualified-lit-surfaces-playable/playable.azureproject" `
+  --width 1920 --height 1080 --qa-camera scene --qa-light scene
 ```
 
 单击游戏窗口获取操控焦点。
 WASD 移动，Shift 冲刺，移动鼠标转动相机。
 R 重开当前关卡，Esc 释放鼠标和焦点。
-同关卡重开包含较长的备用资源准备。
+首次启动和重开需要准备完整场景资源。
 
-该入口使用完整环境与 V8 动态角色。
-独立回放、碰撞及画面范围见[操控验收](../acceptance/recovery/full-scene-playable.md)。
-保存、移动和独立发布按交付接续验收。
+## 冻结交付入口
 
-控制组件及原生片段的来源见[角色项目](../acceptance/nr/main-character-integration.md)。
-该来源项目具有独立的相机、照明和内容组合。
+在当前运行目录中打开：
+`lit-surfaces-delivery/独立游戏 中文 空格/完整联合场景显示验证.exe`。
+该包使用固定版本的 Player、项目及着色程序。
+操作说明位于包内 `GAME-GUIDE.md`。
 
-## 完整环境与角色
+交付包含 2,718 个文件，默认分辨率为 1920×1080。
+保存、目录移动及隔离运行见[交付核验](../acceptance/nr/lit-surfaces-delivery.md)。
+实际包与程序摘要见[交付清单](../acceptance/nr/evidence/2026-11-05/lit-surfaces-delivery/results.json)。
+包内版本与当前构建分别记录来源及验收范围。
 
-联合项目的画面与范围见[组合验证](../acceptance/recovery/full-scene-character.md)。
-该项目保留完整环境的挂载、原机位及调色配置。
-角色采用恢复主坐标的动态资产及原待机动画。
-项目目录带有保留标记，挂载资源与来源项目共同维护。
+## 场景与角色参考
 
-```powershell
-& build/ninja-msvc-release/AzurePlayer.exe `
-  --project build/runs/20261031-172112-hair-source-inputs-14d199/project/full-restored.azureproject `
-  --width 1920 --height 1080 `
-  --qa-camera scene --qa-light scene --qa-isolation beauty
-```
+独立场景采用备份机位及其来源资源。
+启动和严格对照见[完整场景复核](../acceptance/recovery/full-scene-visual.md)。
+反射细节、间接照明及固定箱体见[场景分项](../acceptance/nr/scene-material-quality-diagnosis.md)。
+当前辐照体的实际贡献具有同机位启停对照。
 
-固定序列采用 `--capture-frames 12 --capture-fps 60`。
-同时传入 `--fixed-frame-step` 及独立的 `--capture-dir`。
-对照项目为同目录的 `hidden-restored.azureproject`。
-头发坐标及严格隐藏对照见[坐标验收](../acceptance/nr/hair-source-uv.md)。
-
-严格环境像素兼容按组合验证页记录实际状态。
-
-## 正面角色参考
-
-用户提供的正面双图具有独立项目和捕获姿态。
-材质、曝光及时间采样按[角色参考](../acceptance/recovery/character-reference.md)执行。
-该入口用于核对眼睛、头发和服装的实际外观。
-完整环境组合继续使用本页的联合场景入口。
-
-## 动态角色正面诊断
-
-完整环境中的角色近景见[照明联合验证](../acceptance/nr/character-illumination-integration.md)。
-诊断保持动态模型、原待机动画及完整材质。
-项目的输入资产均位于自身挂载目录中。
-
-```powershell
-& build/ninja-msvc-release/AzurePlayer.exe `
-  --project build/runs/20261031-172112-hair-source-inputs-14d199/project/near-restored.azureproject `
-  --width 1536 --height 1536 `
-  --qa-camera scene --qa-light scene --qa-isolation beauty
-```
-
-该入口采用关闭抗锯齿的固定诊断机位。
-底色诊断使用 `--qa-isolation albedo`。
-照明候选及输入条件见[联合验证](../acceptance/nr/character-illumination-integration.md)。
-整体外观及时间稳定性仍按正式门禁验收。
+正面角色具有独立机位、灯组、曝光及捕获姿态。
+输入及运行方法见[角色参考](../acceptance/recovery/character-reference.md)。
+完整角色、皮肤及头发的固定输入见[阶段计划](../plans/2026-11-03-character-reference-stages.md)。
+各参考按自身输入条件解释结果。

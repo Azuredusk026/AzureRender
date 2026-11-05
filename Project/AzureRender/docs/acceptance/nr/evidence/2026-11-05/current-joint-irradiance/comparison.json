@@ -1,0 +1,68 @@
+{
+  "status": "passed-irradiance-consumption-control",
+  "visualAcceptance": "failed-user-review",
+  "frames": {
+    "enabled": {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000000.png",
+      "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387"
+    },
+    "disabled": {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\current-joint-gi-off-capture\\frames\\frame_000000.png",
+      "sha256": "33560f3cbeec77d1d75c979fea4d51dfe0c072730bffe5c9f332d8bd258f0d2d"
+    }
+  },
+  "irradianceSha256": "f57b41da8b1d8baf65834b09de54896b00e7cbe4ce86b7d39a3ceefd90c7107f",
+  "onlyVariable": "irradianceVolume.enabled",
+  "matchingCaptureFields": {
+    "qaCameraPosition": [
+      -0.266043,
+      2.26206,
+      -24.9053
+    ],
+    "qaCameraTarget": [
+      -0.261116,
+      2.32175,
+      -23.9071
+    ],
+    "cameraLens": {
+      "farPlane": 10000.0,
+      "nearPlane": 0.10000000149011612,
+      "offsetNdc": [
+        -0.0002929684706032276,
+        7.717559492448345e-05
+      ],
+      "projection": "perspective",
+      "schemaVersion": 1,
+      "verticalFovRadians": 0.9986935257911682
+    },
+    "cameraUp": [
+      -0.0002945943851955235,
+      0.9982167482376099,
+      -0.05969396233558655
+    ],
+    "screenReflectionAlgorithm": "linear",
+    "screenReflectionProducer": "linear-temporal",
+    "screenReflectionLevels": 7
+  },
+  "regions": {
+    "centerFloor": {
+      "pixels": 97200,
+      "changedPixels": 83794,
+      "meanAbsoluteRgbByteDifference": 38.05212620027435,
+      "maximumByteDifference": 175
+    },
+    "leftFloor": {
+      "pixels": 67900,
+      "changedPixels": 67900,
+      "meanAbsoluteRgbByteDifference": 73.800088365243,
+      "maximumByteDifference": 136
+    },
+    "rightWall": {
+      "pixels": 128800,
+      "changedPixels": 128800,
+      "meanAbsoluteRgbByteDifference": 64.5031185300207,
+      "maximumByteDifference": 207
+    }
+  },
+  "scope": "Output display-byte differences show GI consumption; no source-energy or final quality equivalence claimed."
+}
