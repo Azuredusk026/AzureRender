@@ -91,7 +91,9 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 三次环境检查通过，候选 CPU 工作 P95 为 21.79 毫秒。
 资源解析与关卡轮询继续独立定位。
 私有[阶段成本](../acceptance/nr/cpu-stage-cost.md)定位到实例准备及透明排序。
-接续透明顶点世界坐标复用，细分采集的热状态失败完整保留。
+透明[世界坐标候选](../acceptance/nr/transparent-world-position.md)通过四帧兼容，成本比较受热状态限制。
+生产源码及代码段恢复为候选前字节，两配置各十二项回归通过。
+接续静态变形输出复用的内容有效性与生命周期验证。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
