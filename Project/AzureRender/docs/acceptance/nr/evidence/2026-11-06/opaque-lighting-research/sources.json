@@ -1,0 +1,35 @@
+{
+  "repository": "godotengine/godot",
+  "commit": "8cc3a574e26e3640227861aef8266f2fd4fbb650",
+  "committedAt": "2026-11-05T14:53:37Z",
+  "license": "MIT",
+  "scope": "Architecture research only; no upstream code copied into production",
+  "files": [
+    {
+      "file": "LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/8cc3a574e26e3640227861aef8266f2fd4fbb650/LICENSE.txt",
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+      "bytes": 1149
+    },
+    {
+      "file": "servers/rendering/renderer_rd/forward_clustered/render_forward_clustered.cpp",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/8cc3a574e26e3640227861aef8266f2fd4fbb650/servers/rendering/renderer_rd/forward_clustered/render_forward_clustered.cpp",
+      "sha256": "fe12b0c967a255ced4d14542936839a8d6330edc7a9164d2b191e04b3c20f037",
+      "bytes": 245468
+    },
+    {
+      "file": "servers/rendering/renderer_rd/effects/copy_effects.cpp",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/8cc3a574e26e3640227861aef8266f2fd4fbb650/servers/rendering/renderer_rd/effects/copy_effects.cpp",
+      "sha256": "5c4d90165de78ddf7bab0745793e6610dd4e6c184c1ec6600c168e61c01bf0b4",
+      "bytes": 75869
+    },
+    {
+      "file": "servers/rendering/renderer_rd/shaders/effects/specular_merge.glsl",
+      "url": "https://raw.githubusercontent.com/godotengine/godot/8cc3a574e26e3640227861aef8266f2fd4fbb650/servers/rendering/renderer_rd/shaders/effects/specular_merge.glsl",
+      "sha256": "0081876008fd3469f8e51a85b3b3103044820ef4bca11fdb4d213b55f0cb5dcb",
+      "bytes": 1779
+    }
+  ],
+  "status": "research-only-no-production-adoption",
+  "sourceArchiveSha256": "68edf6874b7cc9aef572b675fd330ed5ee694371137a7edf9307c30c1d956652"
+}
