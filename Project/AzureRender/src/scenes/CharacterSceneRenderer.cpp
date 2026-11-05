@@ -10,6 +10,7 @@
 #include "render/ViewFogBindingJson.hpp"
 #include "render/FogVolumeData.hpp"
 #include "scene/DirectionalLightSelection.hpp"
+#include "scene/SceneNodeGrouping.hpp"
 #include "assets/MaterialData.hpp"
 #include "assets/MaterialSurfaceProfile.hpp"
 #include "assets/MaterialFrame.hpp"
@@ -869,35 +870,31 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         std::vector<std::size_t> nodeMeshKeys;
         nodeMeshKeys.reserve(scene_.nodes.size());
         for (const auto& node : scene_.nodes)
-            nodeMeshKeys.push_back(node.visible ? layout.meshKey(node.resourceId) : 0);
+            nodeMeshKeys.push_back(node.visible ? layout.meshKey(node.resourceId) : meshBounds.size());
         // Instances are grouped by resource so each draw section gets one
         // contiguous span in the instance buffer.
-        for (std::size_t meshKey = 0; meshKey < meshBounds.size();
-             ++meshKey) {
-            for (std::size_t nodeIndex = 0; nodeIndex < scene_.nodes.size();
-                 ++nodeIndex) {
-                const scene::SceneNodeDesc& node = scene_.nodes[nodeIndex];
-                if (!node.visible || nodeMeshKeys[nodeIndex] != meshKey) {
-                    continue;
-                }
-                const scene::AxisAlignedBounds& localBounds = meshBounds.at(meshKey);
-                const Matrix4 nodeTransform = nodeIndex
-                    < nodeWorldTransforms.size()
-                    ? nodeWorldTransforms[nodeIndex]
-                    : scene::composeTrs(
-                        node.translation, node.rotation, node.scale);
-                scene::SceneInstance instance{};
-                instance.model = meshKey == 0
-                    ? multiply(nodeTransform, currentModel_)
-                    : nodeTransform;
-                instance.worldBounds =
-                    scene::transformBounds(localBounds, instance.model);
-                instance.sourceIndex =
-                    static_cast<std::uint32_t>(sceneInstances_.size());
-                instance.meshKey = static_cast<std::uint32_t>(meshKey);
-                instance.nodeId = node.id;
-                sceneInstances_.push_back(instance);
-            }
+        const auto nodeOrder = scene::stableMeshNodeOrder(nodeMeshKeys,meshBounds.size());
+        sceneInstances_.reserve(nodeOrder.size());
+        for (const auto nodeIndex : nodeOrder) {
+            const auto meshKey = nodeMeshKeys[nodeIndex];
+            const scene::SceneNodeDesc& node = scene_.nodes[nodeIndex];
+            const scene::AxisAlignedBounds& localBounds = meshBounds.at(meshKey);
+            const Matrix4 nodeTransform = nodeIndex
+                < nodeWorldTransforms.size()
+                ? nodeWorldTransforms[nodeIndex]
+                : scene::composeTrs(
+                    node.translation, node.rotation, node.scale);
+            scene::SceneInstance instance{};
+            instance.model = meshKey == 0
+                ? multiply(nodeTransform, currentModel_)
+                : nodeTransform;
+            instance.worldBounds =
+                scene::transformBounds(localBounds, instance.model);
+            instance.sourceIndex =
+                static_cast<std::uint32_t>(sceneInstances_.size());
+            instance.meshKey = static_cast<std::uint32_t>(meshKey);
+            instance.nodeId = node.id;
+            sceneInstances_.push_back(instance);
         }
     }
 

@@ -100,7 +100,12 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 单候选计时的热状态未通过，整帧因果收益资格未成立。
 实例准备的[子阶段观察](../acceptance/nr/instance-preparation-cost.md)取得一百条同帧记录。
 节点分组均值为 2.20 毫秒，姿态采样为 2.42 毫秒。
-接续保持实例身份及顺序的稳定资源分组候选。
+[稳定资源分组](../acceptance/nr/stable-instance-grouping.md)通过两配置各十五项 CPU 检查。
+实际联合场景四帧与原冻结参考逐字节一致。
+组内源节点顺序及连续实例身份保持一致。
+单候选短时 CPU 工作 P95 为 32.92 毫秒，GPU 为 34.70 毫秒。
+软件热降频触发环境失败，整帧收益资格未成立。
+接续姿态准备的独立候选。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
