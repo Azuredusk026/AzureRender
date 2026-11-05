@@ -76,6 +76,8 @@ Debug 目录规模的[局部候选](../acceptance/recovery/directory-scale-diagn
 该候选的双设备同步、画面及原生收益等待复测。
 节点[快照复制](../acceptance/nr/runtime-snapshot-copy.md)通过两配置各十五项 CPU 检查。
 实际帧成本与图像检查继续等待复测。
+混合场景的[透明临时分配](../acceptance/nr/opaque-transparency-scratch.md)通过两配置各十二项检查。
+不透明顶点扩容时，候选的逐帧分配保持稳定。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

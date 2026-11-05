@@ -166,3 +166,10 @@ Release 失败控制分配 8,512,487 字节。
 两配置各十五项 CPU 检查通过。
 输入、预算和范围见[节点快照验证](../acceptance/nr/runtime-snapshot-copy.md)。
 原生画面和实际帧耗时等待空闲 GPU 复测。
+
+## 透明排序临时数据
+
+渲染器按实际透明图元筛选需要逐顶点临时数据的网格。
+不透明顶点容量的扩展通过 CPU 分配控制定位。
+两配置各十二项检查通过，详见[分配验证](../acceptance/nr/opaque-transparency-scratch.md)。
+实际帧的 CPU、GPU 及图像结果等待复测。

@@ -4502,6 +4502,7 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
     for (const auto& instance : sceneInstances_) {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
+        if (transparentPrimitives.empty()) continue;
         const auto& pose = instancePoses_.at(instance.sourceIndex);
         std::vector<Vector3> positions(mesh.vertices.size());
         std::vector<bool> prepared(mesh.vertices.size(),false);
