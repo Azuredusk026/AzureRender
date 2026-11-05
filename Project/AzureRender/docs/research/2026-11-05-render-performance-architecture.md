@@ -186,3 +186,10 @@ GPU 阴影 P95 为 5.65 毫秒，完整帧预算与热状态未通过。
 [NVIDIA PCSS 资料](https://developer.download.nvidia.com/assets/gamedev/docs/PCSS_Integration.pdf)说明遮挡搜索和过滤的采样成本。
 [NVIDIA 管线资料](https://developer.nvidia.com/gpugems/gpugems/part-v-performance-and-practicalities/chapter-28-graphics-pipeline-performance)说明纯深度工作与片元着色的关系。
 这些资料用于提出可验证假设，实际采用保持本项目画质门槛。
+
+## 阴影接收分项
+
+私有原生控制取得约 9.78 毫秒的帧均值差。
+两次基线均值漂移约百分之 2.10。
+基线热状态未通过，该差值持有诊断范围。
+实际程序、图像和条件见[接收成本分项](../acceptance/nr/shadow-receiver-cost.md)。

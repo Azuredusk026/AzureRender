@@ -17,6 +17,7 @@
 最新[双设备及原生复测](docs/acceptance/nr/idle-gpu-validation.md)完成。
 完整场景 CPU 工作 P95 为 24.83 毫秒，GPU 为 39.81 毫秒。
 原帧预算和热状态检查未通过。
+阴影接收的[成本分项](docs/acceptance/nr/shadow-receiver-cost.md)持有诊断范围。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。
