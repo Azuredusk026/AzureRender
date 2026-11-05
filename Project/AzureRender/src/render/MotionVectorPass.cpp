@@ -88,8 +88,13 @@ void MotionVectorPass::recordToFramebuffer(rhi::ICommandRecorder& commands,std::
         VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_ACCESS_MEMORY_READ_BIT|VK_ACCESS_MEMORY_WRITE_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT});
     rhi::RenderPassBeginDesc pass;pass.renderPass=target_.renderPass();pass.framebuffer=framebuffer;pass.extent=extent;pass.clearValues.resize(3);
     pass.clearValues[1].color.float32[0]=1;commands.beginRenderPass(pass);commands.setViewport(float(extent.width),float(extent.height));commands.setScissor(extent);
-    for(const auto& draw:draws){commands.bindPipeline(pipelines_.at((draw.shell?4:0)|(draw.doubleSided?2:0)|(draw.mirrored?1:0)));
-        commands.bindDescriptorSet(layout_,sets_.at(frame*materials_+draw.push.material));
+    VkPipeline boundPipeline=VK_NULL_HANDLE;
+    VkDescriptorSet boundSet=VK_NULL_HANDLE;
+    for(const auto& draw:draws){
+        const auto pipeline=pipelines_.at((draw.shell?4:0)|(draw.doubleSided?2:0)|(draw.mirrored?1:0));
+        if(pipeline!=boundPipeline){commands.bindPipeline(pipeline);boundPipeline=pipeline;}
+        const auto set=sets_.at(frame*materials_+draw.push.material);
+        if(set!=boundSet){commands.bindDescriptorSet(layout_,set);boundSet=set;}
         commands.bindVertexBuffer(draw.vertices,0);commands.bindIndexBuffer(draw.indices,0);
         commands.pushConstants(layout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&draw.push,sizeof(draw.push));
         commands.drawIndexed(draw.indexCount,draw.firstIndex,1,draw.instance);}

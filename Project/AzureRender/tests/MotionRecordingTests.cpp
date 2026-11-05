@@ -1,5 +1,6 @@
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "render/MotionVectorTarget.hpp"
+#include "render/MotionVectorPass.hpp"
 #include "render/TemporalViewState.hpp"
 #include "render/RenderViewService.hpp"
 #include "rhi/NullRhi.hpp"
@@ -10,6 +11,44 @@
 using namespace azurerender;
 void checkMotionRecording(bool value,const char* why){if(!value)throw std::runtime_error(why);}
 nlohmann::json motionManifest(const CharacterSceneRenderer& renderer){std::ostringstream text;renderer.appendCaptureManifestFields(text);return nlohmann::json::parse("{"+text.str()+"\"end\":true}");}
+void verifyMotionBindingTransitions(const char* shaders){
+    rhi::NullRhi backend;
+    const auto depth=reinterpret_cast<VkImageView>(0x1000);
+    MotionVectorTarget target(backend,backend.allocator(),{32,24},VK_FORMAT_D32_SFLOAT,{depth,depth});
+    MotionVectorPass pass(backend,backend.allocator(),target,shaders,2,2,true,true);
+    MotionVectorDraw a;a.vertices=reinterpret_cast<VkBuffer>(0x2000);a.indices=reinterpret_cast<VkBuffer>(0x3000);a.indexCount=3;
+    auto b=a;b.mirrored=true;b.firstIndex=3;b.instance=1;
+    auto c=b;c.push.material=1;c.firstIndex=6;c.push.flags=7;
+    const std::vector<MotionVectorDraw> draws{a,a,b,c,c,a};
+    std::vector<std::array<std::string,3>> expected;
+    for(const auto& draw:draws){
+        rhi::NullCommandRecorder single;pass.record(single,0,0,{32,24},{draw});
+        std::array<std::string,3> state;
+        for(const auto& call:single.calls){
+            if(call.name=="bindPipeline")state[0]=call.detail;
+            if(call.name=="bindDescriptorSet")state[1]=call.detail;
+            if(call.name=="drawIndexed")state[2]=call.detail;
+        }
+        expected.push_back(state);
+    }
+    rhi::NullCommandRecorder commands;
+    for(unsigned invocation=0;invocation<2;++invocation){
+        const auto start=commands.calls.size();
+        pass.recordToFramebuffer(commands,0,target.framebuffer(invocation),{32,24},draws);
+        std::array<std::string,3> state;unsigned pipelines=0,sets=0,pushes=0,index=0;
+        for(std::size_t i=start;i<commands.calls.size();++i){const auto& call=commands.calls[i];
+            if(call.name=="bindPipeline"){state[0]=call.detail;++pipelines;}
+            if(call.name=="bindDescriptorSet"){state[1]=call.detail;++sets;}
+            if(call.name=="pushConstants")++pushes;
+            if(call.name=="drawIndexed"){state[2]=call.detail;
+                checkMotionRecording(index<expected.size()&&state==expected[index],"Every motion draw must retain its own pipeline, descriptor and draw order");++index;}
+        }
+        checkMotionRecording(index==draws.size()&&pushes==draws.size(),"Binding reuse must preserve every motion draw and constant update");
+        checkMotionRecording(pipelines==3&&sets==3,"Motion recording must reuse adjacent bindings and rebind after each variant transition or invocation");
+    }
+    commands.calls.clear();pass.record(commands,1,0,{32,24},{});
+    for(const auto& call:commands.calls)checkMotionRecording(call.name!="bindPipeline"&&call.name!="bindDescriptorSet"&&call.name!="drawIndexed","Empty motion work must leave binding state untouched");
+}
 void verifyMotionRecording(const char* shaders,bool indexed,bool compute,bool outlined){
     rhi::NullRhi backend;RenderSettings settings;settings.antiAliasing=3;
     settings.faceSdfFeature=settings.showcasePlatformFeature=false;settings.characterPresentation.platformEnabled=false;
@@ -68,6 +107,7 @@ void verifyMotionRecording(const char* shaders,bool indexed,bool compute,bool ou
 }
 int main(int argc,char** argv)try{
     if(argc!=2)throw std::invalid_argument("Expected shader directory");
+    verifyMotionBindingTransitions(argv[1]);
     for(bool indexed:{false,true})for(bool compute:{false,true})for(bool outlined:{false,true})verifyMotionRecording(argv[1],indexed,compute,outlined);
     {
         rhi::NullRhi backend;backend.unavailableSampledFormats.insert(MotionVectorTarget::kFormat);

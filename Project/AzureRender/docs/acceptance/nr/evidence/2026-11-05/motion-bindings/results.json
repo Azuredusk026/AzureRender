@@ -1,0 +1,545 @@
+{
+  "schemaVersion": 1,
+  "status": "motion-binding-functional-and-api-count-verified-full-performance-failed",
+  "sourceBase": "4cd2e41",
+  "sourceSha256": "6bbb99af1d1c08acd4917a157f56d873015ab25d975f4828760fc498348f048a",
+  "patchSha256": "5d685fe43b17cae0a4be513299b675260035fb4906e157a12fc9f9490e66dc17",
+  "visualAcceptance": "failed-user-review",
+  "cpuChecksPerConfiguration": 5,
+  "gpuChecks": {
+    "Release": {
+      "NVIDIA": 2,
+      "Intel": 2
+    },
+    "Debug": {
+      "NVIDIA": 2,
+      "Intel": 2
+    }
+  },
+  "productionShadersPerConfiguration": {
+    "count": 535,
+    "baselineByteIdentical": true
+  },
+  "releaseJoint": {
+    "status": "passed",
+    "visualAcceptance": "failed-user-review",
+    "executableSha256": "0ed605afb23d03f3ccd4ccbf90dfbd829151609b65983c9fa27423055792bc84",
+    "seconds": 198.4529999999795,
+    "zeroAllocator": true,
+    "productionShaderBytesUnchanged": true,
+    "validationClean": true,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ]
+  },
+  "imageReferences": [
+    {
+      "frame": "frame_000000.png",
+      "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+      "archive": "../runtime-node-identity/measurements.zip",
+      "entry": "runtime-node-identity-joint/frames/frame_000000.png"
+    },
+    {
+      "frame": "frame_000001.png",
+      "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+      "archive": "../runtime-node-identity/measurements.zip",
+      "entry": "runtime-node-identity-joint/frames/frame_000001.png"
+    },
+    {
+      "frame": "frame_000002.png",
+      "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+      "archive": "../runtime-node-identity/measurements.zip",
+      "entry": "runtime-node-identity-joint/frames/frame_000002.png"
+    },
+    {
+      "frame": "frame_000003.png",
+      "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+      "archive": "../runtime-node-identity/measurements.zip",
+      "entry": "runtime-node-identity-joint/frames/frame_000003.png"
+    }
+  ],
+  "actualApi": {
+    "baseline": {
+      "pipeline": 804,
+      "descriptor": 1007,
+      "repeatedPipeline": 595
+    },
+    "candidate": {
+      "pipeline": 209,
+      "descriptor": 642,
+      "repeatedPipeline": 0
+    },
+    "unchanged": {
+      "indexedDraw": 2791,
+      "indexedIndirectCall": 348,
+      "executeSecondary": 8
+    },
+    "parseFailures": []
+  },
+  "capture": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\motion-bindings-rdc\\joint_frame320.rdc",
+    "bytes": 2204797977,
+    "sha256": "12310eb27fafcb84168685f5f4d0d4ed14a766af368551be7bf714c2185844a2",
+    "scope": "Raw2.2GB capture retained under build/runs; indexed API receipt is in the archive"
+  },
+  "nativePerformance": {
+    "status": "measured",
+    "sourceBase": "4cd2e41",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 266.25,
+    "warmup": 300,
+    "samples": 1800,
+    "gpu": {
+      "shadowMs": {
+        "mean": 5.212651893333334,
+        "p95": 5.5310128,
+        "p99": 5.7823535999999995
+      },
+      "sceneMs": {
+        "mean": 30.81119687111111,
+        "p95": 33.1912704,
+        "p99": 35.39877888
+      },
+      "postProcessMs": {
+        "mean": 0.29285660444444445,
+        "p95": 0.316416,
+        "p99": 0.33383424
+      },
+      "frameMs": {
+        "mean": 36.31670536888889,
+        "p95": 38.9420304,
+        "p99": 41.59042752
+      }
+    },
+    "cpu": {
+      "mean": 29.774044611111105,
+      "p95": 33.84811999999939,
+      "p99": 41.199871000000726
+    },
+    "wait": {
+      "mean": 6.531502777777784,
+      "p95": 9.930859999999665,
+      "p99": 11.358012000000873
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7424540672,
+    "environmentFailures": [
+      "run observation 38: driver relative thermal headroom is insufficient",
+      "run observation 39: driver relative thermal headroom is insufficient",
+      "run observation 40: software thermal slowdown is active",
+      "run observation 41: driver relative thermal headroom is insufficient",
+      "run observation 41: software thermal slowdown is active",
+      "run observation 42: software thermal slowdown is active",
+      "run observation 43: software thermal slowdown is active",
+      "run observation 44: driver relative thermal headroom is insufficient",
+      "run observation 44: software thermal slowdown is active",
+      "run observation 45: driver relative thermal headroom is insufficient",
+      "run observation 46: driver relative thermal headroom is insufficient",
+      "run observation 46: software thermal slowdown is active",
+      "run observation 47: software thermal slowdown is active",
+      "run observation 48: driver relative thermal headroom is insufficient"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "timingBudgetPassed": false,
+    "powerProfileStable": true,
+    "environmentPassed": false
+  },
+  "archive": {
+    "path": "measurements.zip",
+    "sha256": "2457df347703ae318cd1fbc3f07e9411a2550e9e24c18d3f95e603ac2679dbbd",
+    "entries": [
+      {
+        "path": "capture_motion_bindings.py",
+        "bytes": 2484,
+        "sha256": "35111a61b2746b67d4814eaf1d85922d95db88370facb1f69d2fc277c7458ff8"
+      },
+      {
+        "path": "capture_motion_bindings_rd.py",
+        "bytes": 4778,
+        "sha256": "e9fe86c7962275503f9908f8805f94cd368365c588f089414974ca52ed893aae"
+      },
+      {
+        "path": "command-state-diagnosis-v2/pixel-counters.json",
+        "bytes": 532464,
+        "sha256": "463f1f2782bc80ca1ca1e6548c6849d9c262dbd3877bcd0b9b35421375942892"
+      },
+      {
+        "path": "command-state-diagnosis-v2/results.json",
+        "bytes": 5016,
+        "sha256": "ebe8267a77d9cbf50f3e0d1a300a44b87e715d6aeab1801e48791f9856f2560d"
+      },
+      {
+        "path": "inspect_joint_command_state_v2.py",
+        "bytes": 3242,
+        "sha256": "5652547a70ce0bc4d5d9df4d69d76cebb53f2f37de1d7667ba0e0f1ce1cd321d"
+      },
+      {
+        "path": "inspect_joint_pixels.py",
+        "bytes": 2886,
+        "sha256": "0160351c0cb4997d7d4a1f5ad917cb17ab96977e900e5b1ec1042d2dd8aae425"
+      },
+      {
+        "path": "measure_motion_bindings.py",
+        "bytes": 5652,
+        "sha256": "12bdf0b2dff6f035308d7658ba52b056c5d054756b9a2325e9afbe72853e9a3c"
+      },
+      {
+        "path": "motion-bindings/capture-api-launch.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-bindings/debug-build.json",
+        "bytes": 552,
+        "sha256": "2c1a84689180fc93fc94e1c3b8f4d1a87b9ed3e237038d33f6a863e8519c8726"
+      },
+      {
+        "path": "motion-bindings/debug-build.log",
+        "bytes": 15885,
+        "sha256": "5e058f2a7200cd76f9c2dfa2552ad203be4bdbe3f6bf1feaa98520ba5bbe32fd"
+      },
+      {
+        "path": "motion-bindings/debug-intel-gpu.json",
+        "bytes": 588,
+        "sha256": "40a02b3f5ca25c2eb8af61f918a53b1617d56fb8461f3e88d24c2ceb6fee271d"
+      },
+      {
+        "path": "motion-bindings/debug-intel-gpu.log",
+        "bytes": 536,
+        "sha256": "6ab123b48b95243dd8e0fd295e88f4e924665d6b3019c49e0cee2640f2853e92"
+      },
+      {
+        "path": "motion-bindings/debug-intel-gpu.xml",
+        "bytes": 946,
+        "sha256": "dc9cf04415e756ffabfec11e7284b05d4a3939b3f87d1165bb1963f81796666f"
+      },
+      {
+        "path": "motion-bindings/debug-nvidia-gpu.json",
+        "bytes": 588,
+        "sha256": "b56584711183b2391e529f1c01872dd35691271ae24632c9864b238ce59ad6de"
+      },
+      {
+        "path": "motion-bindings/debug-nvidia-gpu.log",
+        "bytes": 536,
+        "sha256": "69128e99fffd6e0be9da5f6141c3a9f4d827839ec455975e1dfa446906243c7f"
+      },
+      {
+        "path": "motion-bindings/debug-nvidia-gpu.xml",
+        "bytes": 944,
+        "sha256": "956713c49466df8fc462c9547a30f9c47e938fe83d8749abede7bdacbc086e13"
+      },
+      {
+        "path": "motion-bindings/debug-targeted.json",
+        "bytes": 686,
+        "sha256": "450f0c3e8eff5c67d883933b637ca28d005326d78e7ac795e2f8a40566b0adbe"
+      },
+      {
+        "path": "motion-bindings/debug-targeted.log",
+        "bytes": 835,
+        "sha256": "7c0a330219ba0e2991406f73695849615b5e5c7766be54eef2550de5737da383"
+      },
+      {
+        "path": "motion-bindings/debug-targeted.xml",
+        "bytes": 2456,
+        "sha256": "0d157a5dfb5744195a309164c753ede76d1a08bcda76a114d13d757cefdc73d1"
+      },
+      {
+        "path": "motion-bindings/red-build.log",
+        "bytes": 205,
+        "sha256": "66971d6efac74be2ed66b292699efd26b179c9c982a5bf478bedc0cf577ecda0"
+      },
+      {
+        "path": "motion-bindings/red.json",
+        "bytes": 180,
+        "sha256": "cc2061b145353f5c87160cfee9c5d0b49b89a57e9c9775ffad9b8a8df05dd4eb"
+      },
+      {
+        "path": "motion-bindings/red.log",
+        "bytes": 102,
+        "sha256": "7f2b7b8d6acba7c1536a40205a9dab465e5c39135f9a4baa24e993e28bd89a29"
+      },
+      {
+        "path": "motion-bindings/release-build.json",
+        "bytes": 556,
+        "sha256": "8272a7a49334acca547b9b33e9549e4a9e8940b4db436a202ff8e426269efea3"
+      },
+      {
+        "path": "motion-bindings/release-build.log",
+        "bytes": 15784,
+        "sha256": "47b57de03b6a2d79f8d4ca4e44ce017089f3c869cb4d5326546613a718067ee9"
+      },
+      {
+        "path": "motion-bindings/release-intel-gpu.json",
+        "bytes": 591,
+        "sha256": "41a5cf223c0bdf721fd91918e9984b59ec9aa0ff4d3f45ad52790d1f9664236c"
+      },
+      {
+        "path": "motion-bindings/release-intel-gpu.log",
+        "bytes": 540,
+        "sha256": "c56cf972ef2b128e7cff6811baa0ba53f0fb8b06c54d29ac45a4402bbdf509ad"
+      },
+      {
+        "path": "motion-bindings/release-intel-gpu.xml",
+        "bytes": 944,
+        "sha256": "dcde5781e0fa6370d0b6f6deef4b0783c534e9b554eecc9c35c8aca58d1cd231"
+      },
+      {
+        "path": "motion-bindings/release-nvidia-gpu.json",
+        "bytes": 593,
+        "sha256": "9765dc62f38c29ed2f06c7ef40db2521670a599028eada331bf7b95380f6beed"
+      },
+      {
+        "path": "motion-bindings/release-nvidia-gpu.log",
+        "bytes": 540,
+        "sha256": "747b1310b9424803d4ec3a315e4d4e3643196664ec8b0284715a7c30bf7cb787"
+      },
+      {
+        "path": "motion-bindings/release-nvidia-gpu.xml",
+        "bytes": 944,
+        "sha256": "24b4649f6439f922a92084b11f562af020adda3b93fbb0769c184d226c0aaa72"
+      },
+      {
+        "path": "motion-bindings/release-targeted.json",
+        "bytes": 689,
+        "sha256": "a516fecc968e3d5ad60f45d6de4624655155dd0d425492d9746d3b1d7d66d6a2"
+      },
+      {
+        "path": "motion-bindings/release-targeted.log",
+        "bytes": 839,
+        "sha256": "f07fb7258976ddf75c7616e979eda582f4cff58b3a52e5e663760cf9398a080f"
+      },
+      {
+        "path": "motion-bindings/release-targeted.xml",
+        "bytes": 2455,
+        "sha256": "ff9707ecae766bde5609158710c22baa9a4b8e9d6aca2eee453e5dcd8629548a"
+      },
+      {
+        "path": "motion-bindings/selected-tests.json",
+        "bytes": 176,
+        "sha256": "6ea69c84c208c10c3bc5808596287b5f6779caa7713e942a553d9645eadff436"
+      },
+      {
+        "path": "motion-bindings-joint/command.json",
+        "bytes": 796,
+        "sha256": "7c98b5ffb48396b1d51ce5463398583bb6f79e7221ad6bc803f7b1199f84ea58"
+      },
+      {
+        "path": "motion-bindings-joint/frames/capture_manifest.json",
+        "bytes": 15391,
+        "sha256": "8a2d49661bbaa933fad916d039fa17977435a293c5369abf28c0361e568d5439"
+      },
+      {
+        "path": "motion-bindings-joint/frames/gpu_capabilities.json",
+        "bytes": 11108,
+        "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+      },
+      {
+        "path": "motion-bindings-joint/results.json",
+        "bytes": 1822,
+        "sha256": "75d830480dae14da5284db071ff2e28e4ccb0f197ea1724e96e995de55d4c6c9"
+      },
+      {
+        "path": "motion-bindings-joint/runtime.json",
+        "bytes": 317962,
+        "sha256": "5bff72eb44be925c9acc1c81ab984c59f8af1f8ca4d1e578c45ddcfbd421145b"
+      },
+      {
+        "path": "motion-bindings-joint/stderr.log",
+        "bytes": 11818,
+        "sha256": "21da2face80fa0fa29c74e9413a860165570afbd25ad3f93096b55df82d6ee6c"
+      },
+      {
+        "path": "motion-bindings-joint/stdout.log",
+        "bytes": 1813,
+        "sha256": "9173c492279f51a0fcb40940ea83913ee5c2bb4c5cee4160fa43ed68a1a768b3"
+      },
+      {
+        "path": "motion-bindings-performance/captures/gpu_capabilities.json",
+        "bytes": 11108,
+        "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+      },
+      {
+        "path": "motion-bindings-performance/environment.json",
+        "bytes": 4043890,
+        "sha256": "f951e69f14062691a029a4883f3e799193cb4c3e217e8f5b5b4b96b1e0711a72"
+      },
+      {
+        "path": "motion-bindings-performance/frozen-inputs.json",
+        "bytes": 305792,
+        "sha256": "491293b7a67a3fd6c58c375d7d72b987c5d1f04190400843709c5055e3b81c10"
+      },
+      {
+        "path": "motion-bindings-performance/memory.json",
+        "bytes": 647863,
+        "sha256": "c27a5eae1afe42d91d0749f553be9a6f08d7ff740b3afca8e5bfc495d5ae365a"
+      },
+      {
+        "path": "motion-bindings-performance/results.json",
+        "bytes": 2574,
+        "sha256": "2bcd66acf76cfe78db0109fbae5d5b1c1a3d1d1202b0c434027e48aa4a0e9e78"
+      },
+      {
+        "path": "motion-bindings-performance/runtime.json",
+        "bytes": 317956,
+        "sha256": "14a64f028af56373bbd47d0097acea4316b56d48a7500487a89928f429b14971"
+      },
+      {
+        "path": "motion-bindings-performance/stderr.log",
+        "bytes": 11577,
+        "sha256": "aab72a6d42a4e024d5d8d67c0f9211c096b28bcd34d70ddb693b095c81d92078"
+      },
+      {
+        "path": "motion-bindings-performance/stdout.log",
+        "bytes": 2217,
+        "sha256": "5f9fcda7d9853a0a3c8c140c162568f3fbed1b16b56320f4445809a5d3077065"
+      },
+      {
+        "path": "motion-bindings-performance/surface-interventions.json",
+        "bytes": 2,
+        "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      },
+      {
+        "path": "motion-bindings-performance/task.json",
+        "bytes": 1265,
+        "sha256": "91006850848ff51afb1e7dfe185c98c24f0ccfcc48a8bf9d759f885ba1d5a8e5"
+      },
+      {
+        "path": "motion-bindings-performance/timing.csv",
+        "bytes": 114453,
+        "sha256": "1d9ae1a94249a56cefa1b9559b92ee3578f4b3e5912dc151fd60fa722cfb26fc"
+      },
+      {
+        "path": "motion-bindings-performance/timing.json",
+        "bytes": 142952,
+        "sha256": "9e7edf876fda99dce31f42488912e9cc214996c50265f71c822c698a788cd518"
+      },
+      {
+        "path": "motion-bindings-rdc/captures/gpu_capabilities.json",
+        "bytes": 8589,
+        "sha256": "48ca0deb3d9ad1f925d18a7594607fdc43c9cbd2a37696fa46e107c9f9bd9656"
+      },
+      {
+        "path": "motion-bindings-rdc/runtime-timing.csv",
+        "bytes": 17505,
+        "sha256": "4e3844e313ab389ceb113781afba8d45680d56c7368273dbdea569fcc80c6c1b"
+      },
+      {
+        "path": "motion-bindings-rdc/runtime-timing.json",
+        "bytes": 45586,
+        "sha256": "6ea9bab2a3fd73ffcd07d1224c79e3d0c227bcdf79aa7a6d4ab0e265332d562b"
+      },
+      {
+        "path": "motion-bindings-rdc/state.json",
+        "bytes": 1436,
+        "sha256": "62db7a94aa8d55caa4f2233988e1af5a560843e29c19bf47c24f68036420dcc3"
+      },
+      {
+        "path": "motion-bindings-rdc/surface-intervention.json",
+        "bytes": 117,
+        "sha256": "bee7d84ccb28b649d8db116079d199648aaf50c7bb4323b54e2f8dbe832eea99"
+      },
+      {
+        "path": "motion-bindings-task.json",
+        "bytes": 1812,
+        "sha256": "bce4abed009b0b790d4a0d62bf97b3ee99bf48ec92e0529efb2dbf05179df58e"
+      },
+      {
+        "path": "pixel-cost-diagnosis/results.json",
+        "bytes": 1020071,
+        "sha256": "ae203b889361e4ce8b2443ad4b48abf4eca71b5d319e628bc91c6054e314864f"
+      },
+      {
+        "path": "run_motion_build.py",
+        "bytes": 1858,
+        "sha256": "f6c876315be2471d5c918a5a46218bc7e15fb780eda167b6fede5ecc320d38fd"
+      },
+      {
+        "path": "source/src/render/MotionVectorPass.cpp",
+        "bytes": 8594,
+        "sha256": "6bbb99af1d1c08acd4917a157f56d873015ab25d975f4828760fc498348f048a"
+      },
+      {
+        "path": "source/tests/MotionRecordingTests.cpp",
+        "bytes": 12436,
+        "sha256": "22ca8942a62252c99007da238d46266b2b3f75821d995f3ea15b2125543cfefb"
+      }
+    ]
+  }
+}

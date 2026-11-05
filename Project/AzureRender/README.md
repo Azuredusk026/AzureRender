@@ -6,6 +6,7 @@
 编辑预览复用处于[候选隔离](docs/plans/2026-11-05-pipeline-reuse.md)状态。
 完整联合性能的来源、方案和落地顺序见[渲染架构调研](docs/research/2026-11-05-render-performance-architecture.md)。
 运行时身份直接查询及双配置检查见[身份验证](docs/acceptance/nr/runtime-node-identity.md)。
+运动向量的命令复用和双设备结果见[绑定验证](docs/acceptance/nr/motion-bindings.md)。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。

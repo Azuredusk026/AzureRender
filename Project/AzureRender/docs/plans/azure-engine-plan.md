@@ -61,6 +61,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 实体身份直接查询通过两配置各十九项检查。
 四帧冻结对照一致，详见[身份验证](../acceptance/nr/runtime-node-identity.md)。
 交流供电下 CPU P95 为 38.30 毫秒，GPU 为 40.38 毫秒。
+运动向量绑定的[双设备验证](../acceptance/nr/motion-bindings.md)通过。
+实际管线绑定为 209 次，重复绑定为零。
+该候选 CPU P95 为 33.85 毫秒，GPU 为 38.94 毫秒。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

@@ -2,6 +2,8 @@
 
 运行时身份查询通过两配置各十九项检查。
 联合性能及供电范围见[身份验证](acceptance/nr/runtime-node-identity.md)。
+运动向量绑定通过两配置与双设备检查。
+实际命令数量和完整帧耗时见[绑定验证](acceptance/nr/motion-bindings.md)。
 完整画质与实时性能仍待验收。
 
 原生可玩还原按 NR0 至 NR12 推进。
