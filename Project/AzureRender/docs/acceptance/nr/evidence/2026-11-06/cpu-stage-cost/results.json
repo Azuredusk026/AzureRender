@@ -1,0 +1,1485 @@
+{
+  "schemaVersion": 1,
+  "status": "private-stage-diagnosis-only",
+  "sourceBase": "724a202",
+  "productionAdoption": false,
+  "coarse": {
+    "status": "measured-stage-diagnostic",
+    "sourceBase": "724a202",
+    "instrumented": true,
+    "productionAdoption": false,
+    "scope": "20steady frames310..329; inclusive scene preparation subphases belong to host framePrepareMs; local logging overhead exists; no formal native timing claim",
+    "groups": {
+      "scene-preparation": {
+        "cameraMs": {
+          "mean": 0.9009550000000001,
+          "p95": 0.9899450000000001,
+          "p99": 1.040789
+        },
+        "materializeAndResourcesMs": {
+          "mean": 2.85539,
+          "p95": 3.0576,
+          "p99": 3.202
+        },
+        "remainingPrepareMs": {
+          "mean": 0.245435,
+          "p95": 0.32954,
+          "p99": 0.348388
+        },
+        "sceneSnapshotMs": {
+          "mean": 1.558785,
+          "p95": 1.8297750000000002,
+          "p99": 1.853715
+        },
+        "simulationAndInputMs": {
+          "mean": 0.819025,
+          "p95": 0.9017000000000001,
+          "p99": 0.9366599999999999
+        }
+      },
+      "host-frame": {
+        "framePrepareMs": {
+          "mean": 6.63096,
+          "p95": 7.239255,
+          "p99": 7.5197709999999995
+        },
+        "frameSnapshotMs": {
+          "mean": 0.001855,
+          "p95": 0.0022800000000000025,
+          "p99": 0.005015999999999996
+        },
+        "hostSyncMs": {
+          "mean": 0.295175,
+          "p95": 0.37746,
+          "p99": 0.382932
+        },
+        "levelPollMs": {
+          "mean": 0.53125,
+          "p95": 0.5320400000000075,
+          "p99": 8.590167999999986
+        },
+        "lutMs": {
+          "mean": 0.01844,
+          "p95": 0.024550000000000002,
+          "p99": 0.028349999999999993
+        },
+        "miscBeforeRecordMs": {
+          "mean": 0.02651,
+          "p95": 0.028125000000000063,
+          "p99": 0.09386499999999988
+        },
+        "recordMs": {
+          "mean": 3.140415,
+          "p95": 3.39883,
+          "p99": 3.4996059999999996
+        },
+        "rendererUpdateMs": {
+          "mean": 10.636515,
+          "p95": 11.600340000000001,
+          "p99": 11.670867999999999
+        }
+      }
+    },
+    "rawRows": [
+      {
+        "cameraMs": 0.9422,
+        "frame": 310,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.0137,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2178,
+        "resources": 374,
+        "sceneSnapshotMs": 1.6627,
+        "simulationAndInputMs": 0.7957
+      },
+      {
+        "frame": 310,
+        "framePrepareMs": 6.8713,
+        "frameSnapshotMs": 0.0018,
+        "hostSyncMs": 0.2774,
+        "kind": "host-frame",
+        "levelPollMs": 0.0014,
+        "lutMs": 0.017,
+        "miscBeforeRecordMs": 0.0221,
+        "recordMs": 3.1945,
+        "rendererUpdateMs": 10.6808
+      },
+      {
+        "cameraMs": 0.9371,
+        "frame": 311,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9742,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2795,
+        "resources": 374,
+        "sceneSnapshotMs": 1.8282,
+        "simulationAndInputMs": 0.9454
+      },
+      {
+        "frame": 311,
+        "framePrepareMs": 7.2208,
+        "frameSnapshotMs": 0.0016,
+        "hostSyncMs": 0.3108,
+        "kind": "host-frame",
+        "levelPollMs": 0.0015,
+        "lutMs": 0.018,
+        "miscBeforeRecordMs": 0.0231,
+        "recordMs": 3.3922,
+        "rendererUpdateMs": 11.6885
+      },
+      {
+        "cameraMs": 0.8968,
+        "frame": 312,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.0109,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.207,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5856,
+        "simulationAndInputMs": 0.8659
+      },
+      {
+        "frame": 312,
+        "framePrepareMs": 6.8684,
+        "frameSnapshotMs": 0.0015,
+        "hostSyncMs": 0.3108,
+        "kind": "host-frame",
+        "levelPollMs": 0.0015,
+        "lutMs": 0.0221,
+        "miscBeforeRecordMs": 0.0231,
+        "recordMs": 3.3155,
+        "rendererUpdateMs": 10.6903
+      },
+      {
+        "cameraMs": 0.8422,
+        "frame": 313,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.0481,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.1979,
+        "resources": 374,
+        "sceneSnapshotMs": 1.7489,
+        "simulationAndInputMs": 0.8231
+      },
+      {
+        "frame": 313,
+        "framePrepareMs": 6.8797,
+        "frameSnapshotMs": 0.0017,
+        "hostSyncMs": 0.3014,
+        "kind": "host-frame",
+        "levelPollMs": 0.0018,
+        "lutMs": 0.0165,
+        "miscBeforeRecordMs": 0.0217,
+        "recordMs": 2.9182,
+        "rendererUpdateMs": 10.5148
+      },
+      {
+        "cameraMs": 0.9201,
+        "frame": 314,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.8257,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2905,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5579,
+        "simulationAndInputMs": 0.8365
+      },
+      {
+        "frame": 314,
+        "framePrepareMs": 6.709,
+        "frameSnapshotMs": 0.0021,
+        "hostSyncMs": 0.335,
+        "kind": "host-frame",
+        "levelPollMs": 0.0013,
+        "lutMs": 0.0163,
+        "miscBeforeRecordMs": 0.0238,
+        "recordMs": 3.3797,
+        "rendererUpdateMs": 11.5957
+      },
+      {
+        "cameraMs": 0.8666,
+        "frame": 315,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9776,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2172,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5593,
+        "simulationAndInputMs": 0.8028
+      },
+      {
+        "frame": 315,
+        "framePrepareMs": 6.6846,
+        "frameSnapshotMs": 0.0018,
+        "hostSyncMs": 0.2926,
+        "kind": "host-frame",
+        "levelPollMs": 0.0016,
+        "lutMs": 0.0175,
+        "miscBeforeRecordMs": 0.0233,
+        "recordMs": 3.3356,
+        "rendererUpdateMs": 10.6101
+      },
+      {
+        "cameraMs": 1.0535,
+        "frame": 316,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.2381,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3283,
+        "resources": 374,
+        "sceneSnapshotMs": 1.8223,
+        "simulationAndInputMs": 0.8761
+      },
+      {
+        "frame": 316,
+        "framePrepareMs": 7.5899,
+        "frameSnapshotMs": 0.0016,
+        "hostSyncMs": 0.3843,
+        "kind": "host-frame",
+        "levelPollMs": 0.0017,
+        "lutMs": 0.0189,
+        "miscBeforeRecordMs": 0.0225,
+        "recordMs": 3.2793,
+        "rendererUpdateMs": 11.3164
+      },
+      {
+        "cameraMs": 0.9352,
+        "frame": 317,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9835,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.227,
+        "resources": 374,
+        "sceneSnapshotMs": 1.8597,
+        "simulationAndInputMs": 0.8272
+      },
+      {
+        "frame": 317,
+        "framePrepareMs": 7.0621,
+        "frameSnapshotMs": 0.002,
+        "hostSyncMs": 0.2992,
+        "kind": "host-frame",
+        "levelPollMs": 0.0019,
+        "lutMs": 0.019,
+        "miscBeforeRecordMs": 0.0237,
+        "recordMs": 2.9951,
+        "rendererUpdateMs": 11.1493
+      },
+      {
+        "cameraMs": 0.8469,
+        "frame": 318,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6736,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2248,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3934,
+        "simulationAndInputMs": 0.7812
+      },
+      {
+        "frame": 318,
+        "framePrepareMs": 6.2038,
+        "frameSnapshotMs": 0.0013,
+        "hostSyncMs": 0.3356,
+        "kind": "host-frame",
+        "levelPollMs": 10.6047,
+        "lutMs": 0.0175,
+        "miscBeforeRecordMs": 0.021,
+        "recordMs": 2.9594,
+        "rendererUpdateMs": 11.2098
+      },
+      {
+        "cameraMs": 0.8919,
+        "frame": 319,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.847,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2366,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4541,
+        "simulationAndInputMs": 0.8047
+      },
+      {
+        "frame": 319,
+        "framePrepareMs": 6.4763,
+        "frameSnapshotMs": 0.0057,
+        "hostSyncMs": 0.2377,
+        "kind": "host-frame",
+        "levelPollMs": 0.0008,
+        "lutMs": 0.0184,
+        "miscBeforeRecordMs": 0.0205,
+        "recordMs": 3.2041,
+        "rendererUpdateMs": 10.091
+      },
+      {
+        "cameraMs": 0.9866,
+        "frame": 320,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.5816,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2744,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5193,
+        "simulationAndInputMs": 0.7473
+      },
+      {
+        "frame": 320,
+        "framePrepareMs": 6.4121,
+        "frameSnapshotMs": 0.0018,
+        "hostSyncMs": 0.264,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.0243,
+        "miscBeforeRecordMs": 0.1103,
+        "recordMs": 3.0219,
+        "rendererUpdateMs": 10.0848
+      },
+      {
+        "cameraMs": 0.8407,
+        "frame": 321,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7154,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2433,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4198,
+        "simulationAndInputMs": 0.8421
+      },
+      {
+        "frame": 321,
+        "framePrepareMs": 6.2958,
+        "frameSnapshotMs": 0.0017,
+        "hostSyncMs": 0.2655,
+        "kind": "host-frame",
+        "levelPollMs": 0.0006,
+        "lutMs": 0.0159,
+        "miscBeforeRecordMs": 0.0229,
+        "recordMs": 3.0865,
+        "rendererUpdateMs": 10.0813
+      },
+      {
+        "cameraMs": 0.9134,
+        "frame": 322,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.8487,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2299,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3512,
+        "simulationAndInputMs": 0.743
+      },
+      {
+        "frame": 322,
+        "framePrepareMs": 6.379,
+        "frameSnapshotMs": 0.002,
+        "hostSyncMs": 0.2561,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.0293,
+        "miscBeforeRecordMs": 0.0219,
+        "recordMs": 3.2072,
+        "rendererUpdateMs": 10.3253
+      },
+      {
+        "cameraMs": 0.8935,
+        "frame": 323,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7834,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2698,
+        "resources": 374,
+        "sceneSnapshotMs": 1.6307,
+        "simulationAndInputMs": 0.8198
+      },
+      {
+        "frame": 323,
+        "framePrepareMs": 6.6304,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.2761,
+        "kind": "host-frame",
+        "levelPollMs": 0.0008,
+        "lutMs": 0.0174,
+        "miscBeforeRecordMs": 0.0229,
+        "recordMs": 3.3893,
+        "rendererUpdateMs": 10.3361
+      },
+      {
+        "cameraMs": 0.9666,
+        "frame": 324,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6687,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3531,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4755,
+        "simulationAndInputMs": 0.7582
+      },
+      {
+        "frame": 324,
+        "framePrepareMs": 6.4346,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.2785,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.0185,
+        "miscBeforeRecordMs": 0.0201,
+        "recordMs": 3.5248,
+        "rendererUpdateMs": 10.0455
+      },
+      {
+        "cameraMs": 0.9675,
+        "frame": 325,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9421,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2338,
+        "resources": 374,
+        "sceneSnapshotMs": 1.6224,
+        "simulationAndInputMs": 0.8041
+      },
+      {
+        "frame": 325,
+        "framePrepareMs": 6.8171,
+        "frameSnapshotMs": 0.0016,
+        "hostSyncMs": 0.2734,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.0186,
+        "miscBeforeRecordMs": 0.0214,
+        "recordMs": 2.8777,
+        "rendererUpdateMs": 10.2074
+      },
+      {
+        "cameraMs": 0.7879,
+        "frame": 326,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7343,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2093,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3749,
+        "simulationAndInputMs": 0.7758
+      },
+      {
+        "frame": 326,
+        "framePrepareMs": 6.111,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.3003,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.0149,
+        "miscBeforeRecordMs": 0.0219,
+        "recordMs": 3.0407,
+        "rendererUpdateMs": 10.2741
+      },
+      {
+        "cameraMs": 0.948,
+        "frame": 327,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.8929,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2255,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5477,
+        "simulationAndInputMs": 0.809
+      },
+      {
+        "frame": 327,
+        "framePrepareMs": 6.6535,
+        "frameSnapshotMs": 0.0016,
+        "hostSyncMs": 0.2556,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.0186,
+        "miscBeforeRecordMs": 0.0212,
+        "recordMs": 2.8979,
+        "rendererUpdateMs": 11.001
+      },
+      {
+        "cameraMs": 0.811,
+        "frame": 328,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6645,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2159,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3553,
+        "simulationAndInputMs": 0.8232
+      },
+      {
+        "frame": 328,
+        "framePrepareMs": 6.0832,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.2721,
+        "kind": "host-frame",
+        "levelPollMs": 0.0006,
+        "lutMs": 0.0146,
+        "miscBeforeRecordMs": 0.0207,
+        "recordMs": 2.76,
+        "rendererUpdateMs": 9.8715
+      },
+      {
+        "cameraMs": 0.7714,
+        "frame": 329,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6838,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2271,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4068,
+        "simulationAndInputMs": 0.8994
+      },
+      {
+        "frame": 329,
+        "framePrepareMs": 6.2366,
+        "frameSnapshotMs": 0.0017,
+        "hostSyncMs": 0.3771,
+        "kind": "host-frame",
+        "levelPollMs": 0.0006,
+        "lutMs": 0.0155,
+        "miscBeforeRecordMs": 0.0221,
+        "recordMs": 3.0287,
+        "rendererUpdateMs": 10.9566
+      }
+    ],
+    "sourceProductsAndPrivateFilesUnchanged": true,
+    "zeroAllocator": true,
+    "validationClean": true
+  },
+  "refined": {
+    "status": "measured-stage-diagnostic",
+    "sourceBase": "724a202",
+    "instrumented": true,
+    "productionAdoption": false,
+    "scope": "20steady frames310..329; scene preparation and renderer-update subphases belong to corresponding host buckets; logging overhead exists; renderer frameindex derives from fixed-step time*captureFps+1; diagnostic only",
+    "groups": {
+      "scene-preparation": {
+        "cameraMs": {
+          "mean": 0.80699,
+          "p95": 0.99123,
+          "p99": 1.038806
+        },
+        "materializeAndResourcesMs": {
+          "mean": 2.741635,
+          "p95": 3.0928050000000002,
+          "p99": 3.621840999999999
+        },
+        "remainingPrepareMs": {
+          "mean": 0.22977,
+          "p95": 0.30369500000000005,
+          "p99": 0.3583389999999999
+        },
+        "sceneSnapshotMs": {
+          "mean": 1.39573,
+          "p95": 1.59931,
+          "p99": 1.643542
+        },
+        "simulationAndInputMs": {
+          "mean": 0.79563,
+          "p95": 0.9332200000000002,
+          "p99": 1.1539239999999997
+        }
+      },
+      "renderer-update": {
+        "copyInputMs": {
+          "mean": 0.05803,
+          "p95": 0.073175,
+          "p99": 0.07431499999999999
+        },
+        "immutableSnapshotMs": {
+          "mean": 0.0416,
+          "p95": 0.052660000000000005,
+          "p99": 0.06269199999999998
+        },
+        "instancesMs": {
+          "mean": 4.87124,
+          "p95": 5.54419,
+          "p99": 5.705158
+        },
+        "motionMs": {
+          "mean": 1.001745,
+          "p95": 1.08993,
+          "p99": 1.1101459999999999
+        },
+        "outlineResourcesMs": {
+          "mean": 0.02581,
+          "p95": 0.029535,
+          "p99": 0.030067
+        },
+        "recordingPreparationMs": {
+          "mean": 0.08166999999999999,
+          "p95": 0.09878000000000002,
+          "p99": 0.12279599999999996
+        },
+        "sceneStateMs": {
+          "mean": 0.04472,
+          "p95": 0.052795,
+          "p99": 0.054239
+        },
+        "transparentMs": {
+          "mean": 2.85782,
+          "p95": 3.218735,
+          "p99": 3.249667
+        },
+        "uniformsMs": {
+          "mean": 0.689755,
+          "p95": 0.7592450000000001,
+          "p99": 0.779689
+        }
+      },
+      "host-frame": {
+        "framePrepareMs": {
+          "mean": 6.18048,
+          "p95": 7.234014999999999,
+          "p99": 7.290483
+        },
+        "frameSnapshotMs": {
+          "mean": 0.00137,
+          "p95": 0.0016200000000000003,
+          "p99": 0.0019239999999999995
+        },
+        "hostSyncMs": {
+          "mean": 0.29716,
+          "p95": 0.41246000000000005,
+          "p99": 0.45137199999999994
+        },
+        "levelPollMs": {
+          "mean": 0.58266,
+          "p95": 1.376340000000007,
+          "p99": 8.867507999999987
+        },
+        "lutMs": {
+          "mean": 0.017615,
+          "p95": 0.028440000000000003,
+          "p99": 0.029048
+        },
+        "miscBeforeRecordMs": {
+          "mean": 0.022225,
+          "p95": 0.02951000000000001,
+          "p99": 0.03726199999999999
+        },
+        "recordMs": {
+          "mean": 3.15803,
+          "p95": 3.85862,
+          "p99": 4.111244
+        },
+        "rendererUpdateMs": {
+          "mean": 10.146105,
+          "p95": 11.604175000000001,
+          "p99": 13.935474999999997
+        }
+      }
+    },
+    "rawRows": [
+      {
+        "cameraMs": 0.816,
+        "frame": 310,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.5915,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2376,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3164,
+        "simulationAndInputMs": 0.7395
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0486,
+        "frame": 310,
+        "immutableSnapshotMs": 0.0652,
+        "instancesMs": 5.2001,
+        "kind": "renderer-update",
+        "motionMs": 1.0484,
+        "outlineResourcesMs": 0.0272,
+        "recordingPreparationMs": 0.0795,
+        "sceneStateMs": 0.0454,
+        "transparentMs": 3.1622,
+        "uniformsMs": 0.7578
+      },
+      {
+        "frame": 310,
+        "framePrepareMs": 5.9755,
+        "frameSnapshotMs": 0.0016,
+        "hostSyncMs": 0.3165,
+        "kind": "host-frame",
+        "levelPollMs": 10.7403,
+        "lutMs": 0.0162,
+        "miscBeforeRecordMs": 0.0229,
+        "recordMs": 3.476,
+        "rendererUpdateMs": 10.7143
+      },
+      {
+        "cameraMs": 1.0507,
+        "frame": 311,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.058,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.372,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5964,
+        "simulationAndInputMs": 0.9187
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0731,
+        "frame": 311,
+        "immutableSnapshotMs": 0.052,
+        "instancesMs": 5.7454,
+        "kind": "renderer-update",
+        "motionMs": 1.0876,
+        "outlineResourcesMs": 0.0289,
+        "recordingPreparationMs": 0.0972,
+        "sceneStateMs": 0.0527,
+        "transparentMs": 3.2574,
+        "uniformsMs": 0.7848
+      },
+      {
+        "frame": 311,
+        "framePrepareMs": 7.2303,
+        "frameSnapshotMs": 0.0016,
+        "hostSyncMs": 0.2833,
+        "kind": "host-frame",
+        "levelPollMs": 0.0006,
+        "lutMs": 0.0181,
+        "miscBeforeRecordMs": 0.0213,
+        "recordMs": 3.3509,
+        "rendererUpdateMs": 11.4508
+      },
+      {
+        "cameraMs": 0.8408,
+        "frame": 312,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6989,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2044,
+        "resources": 374,
+        "sceneSnapshotMs": 1.308,
+        "simulationAndInputMs": 0.9092
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0506,
+        "frame": 312,
+        "immutableSnapshotMs": 0.0364,
+        "instancesMs": 4.9318,
+        "kind": "renderer-update",
+        "motionMs": 0.9213,
+        "outlineResourcesMs": 0.0243,
+        "recordingPreparationMs": 0.0685,
+        "sceneStateMs": 0.0406,
+        "transparentMs": 2.8922,
+        "uniformsMs": 0.7579
+      },
+      {
+        "frame": 312,
+        "framePrepareMs": 6.1539,
+        "frameSnapshotMs": 0.0011,
+        "hostSyncMs": 0.2966,
+        "kind": "host-frame",
+        "levelPollMs": 0.0008,
+        "lutMs": 0.0148,
+        "miscBeforeRecordMs": 0.0225,
+        "recordMs": 3.048,
+        "rendererUpdateMs": 9.9721
+      },
+      {
+        "cameraMs": 0.7889,
+        "frame": 313,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6358,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2431,
+        "resources": 374,
+        "sceneSnapshotMs": 1.2558,
+        "simulationAndInputMs": 0.7301
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0457,
+        "frame": 313,
+        "immutableSnapshotMs": 0.0394,
+        "instancesMs": 4.5171,
+        "kind": "renderer-update",
+        "motionMs": 0.981,
+        "outlineResourcesMs": 0.0241,
+        "recordingPreparationMs": 0.085,
+        "sceneStateMs": 0.0514,
+        "transparentMs": 2.7248,
+        "uniformsMs": 0.6973
+      },
+      {
+        "frame": 313,
+        "framePrepareMs": 5.8838,
+        "frameSnapshotMs": 0.0012,
+        "hostSyncMs": 0.2148,
+        "kind": "host-frame",
+        "levelPollMs": 0.0009,
+        "lutMs": 0.0198,
+        "miscBeforeRecordMs": 0.0177,
+        "recordMs": 3.0234,
+        "rendererUpdateMs": 9.3888
+      },
+      {
+        "cameraMs": 0.6896,
+        "frame": 314,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.0383,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2311,
+        "resources": 374,
+        "sceneSnapshotMs": 1.6546,
+        "simulationAndInputMs": 1.2091
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0598,
+        "frame": 314,
+        "immutableSnapshotMs": 0.0474,
+        "instancesMs": 4.8005,
+        "kind": "renderer-update",
+        "motionMs": 1.1152,
+        "outlineResourcesMs": 0.025,
+        "recordingPreparationMs": 0.0936,
+        "sceneStateMs": 0.0525,
+        "transparentMs": 2.5002,
+        "uniformsMs": 0.6603
+      },
+      {
+        "frame": 314,
+        "framePrepareMs": 7.0419,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.2959,
+        "kind": "host-frame",
+        "levelPollMs": 0.0012,
+        "lutMs": 0.0175,
+        "miscBeforeRecordMs": 0.0242,
+        "recordMs": 3.4177,
+        "rendererUpdateMs": 9.6125
+      },
+      {
+        "cameraMs": 0.8176,
+        "frame": 315,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7384,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2154,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3537,
+        "simulationAndInputMs": 0.6977
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0474,
+        "frame": 315,
+        "immutableSnapshotMs": 0.0358,
+        "instancesMs": 4.807,
+        "kind": "renderer-update",
+        "motionMs": 0.9977,
+        "outlineResourcesMs": 0.0295,
+        "recordingPreparationMs": 0.0774,
+        "sceneStateMs": 0.0546,
+        "transparentMs": 2.4961,
+        "uniformsMs": 0.6843
+      },
+      {
+        "frame": 315,
+        "framePrepareMs": 6.0128,
+        "frameSnapshotMs": 0.0013,
+        "hostSyncMs": 0.2922,
+        "kind": "host-frame",
+        "levelPollMs": 0.0008,
+        "lutMs": 0.018,
+        "miscBeforeRecordMs": 0.0223,
+        "recordMs": 4.1744,
+        "rendererUpdateMs": 9.4922
+      },
+      {
+        "cameraMs": 0.7268,
+        "frame": 316,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.4395,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2136,
+        "resources": 374,
+        "sceneSnapshotMs": 1.312,
+        "simulationAndInputMs": 0.6614
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0513,
+        "frame": 316,
+        "immutableSnapshotMs": 0.0389,
+        "instancesMs": 4.5116,
+        "kind": "renderer-update",
+        "motionMs": 0.9948,
+        "outlineResourcesMs": 0.0302,
+        "recordingPreparationMs": 0.0817,
+        "sceneStateMs": 0.0396,
+        "transparentMs": 2.7589,
+        "uniformsMs": 0.7186
+      },
+      {
+        "frame": 316,
+        "framePrepareMs": 5.5549,
+        "frameSnapshotMs": 0.0013,
+        "hostSyncMs": 0.2978,
+        "kind": "host-frame",
+        "levelPollMs": 0.0006,
+        "lutMs": 0.0139,
+        "miscBeforeRecordMs": 0.0205,
+        "recordMs": 2.9932,
+        "rendererUpdateMs": 9.4987
+      },
+      {
+        "cameraMs": 0.8982,
+        "frame": 317,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.601,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2411,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3738,
+        "simulationAndInputMs": 0.7636
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0746,
+        "frame": 317,
+        "immutableSnapshotMs": 0.0392,
+        "instancesMs": 4.705,
+        "kind": "renderer-update",
+        "motionMs": 0.9151,
+        "outlineResourcesMs": 0.024,
+        "recordingPreparationMs": 0.0757,
+        "sceneStateMs": 0.0415,
+        "transparentMs": 2.7228,
+        "uniformsMs": 0.7022
+      },
+      {
+        "frame": 317,
+        "framePrepareMs": 6.1049,
+        "frameSnapshotMs": 0.002,
+        "hostSyncMs": 0.4099,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.015,
+        "miscBeforeRecordMs": 0.0199,
+        "recordMs": 2.7374,
+        "rendererUpdateMs": 9.5665
+      },
+      {
+        "cameraMs": 0.7533,
+        "frame": 318,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.7541,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2078,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5339,
+        "simulationAndInputMs": 0.852
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.058,
+        "frame": 318,
+        "immutableSnapshotMs": 0.0359,
+        "instancesMs": 4.6233,
+        "kind": "renderer-update",
+        "motionMs": 1.0645,
+        "outlineResourcesMs": 0.0278,
+        "recordingPreparationMs": 0.0853,
+        "sceneStateMs": 0.0491,
+        "transparentMs": 2.7561,
+        "uniformsMs": 0.611
+      },
+      {
+        "frame": 318,
+        "framePrepareMs": 7.3046,
+        "frameSnapshotMs": 0.0013,
+        "hostSyncMs": 0.3905,
+        "kind": "host-frame",
+        "levelPollMs": 0.0012,
+        "lutMs": 0.0138,
+        "miscBeforeRecordMs": 0.0214,
+        "recordMs": 2.8295,
+        "rendererUpdateMs": 9.5418
+      },
+      {
+        "cameraMs": 0.7104,
+        "frame": 319,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9107,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2019,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4988,
+        "simulationAndInputMs": 0.8034
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0599,
+        "frame": 319,
+        "immutableSnapshotMs": 0.0397,
+        "instancesMs": 5.0639,
+        "kind": "renderer-update",
+        "motionMs": 0.9787,
+        "outlineResourcesMs": 0.0291,
+        "recordingPreparationMs": 0.0761,
+        "sceneStateMs": 0.0406,
+        "transparentMs": 2.7864,
+        "uniformsMs": 0.6438
+      },
+      {
+        "frame": 319,
+        "framePrepareMs": 6.36,
+        "frameSnapshotMs": 0.0015,
+        "hostSyncMs": 0.4611,
+        "kind": "host-frame",
+        "levelPollMs": 0.0008,
+        "lutMs": 0.0197,
+        "miscBeforeRecordMs": 0.0233,
+        "recordMs": 3.144,
+        "rendererUpdateMs": 10.0041
+      },
+      {
+        "cameraMs": 0.9881,
+        "frame": 320,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6883,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2419,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3207,
+        "simulationAndInputMs": 0.7526
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0582,
+        "frame": 320,
+        "immutableSnapshotMs": 0.0433,
+        "instancesMs": 4.7598,
+        "kind": "renderer-update",
+        "motionMs": 1.0886,
+        "outlineResourcesMs": 0.025,
+        "recordingPreparationMs": 0.0797,
+        "sceneStateMs": 0.0479,
+        "transparentMs": 2.9864,
+        "uniformsMs": 0.6491
+      },
+      {
+        "frame": 320,
+        "framePrepareMs": 6.1872,
+        "frameSnapshotMs": 0.0011,
+        "hostSyncMs": 0.2871,
+        "kind": "host-frame",
+        "levelPollMs": 0.0006,
+        "lutMs": 0.0284,
+        "miscBeforeRecordMs": 0.0221,
+        "recordMs": 2.8639,
+        "rendererUpdateMs": 9.9908
+      },
+      {
+        "cameraMs": 0.7554,
+        "frame": 321,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7787,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3001,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4141,
+        "simulationAndInputMs": 0.7898
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.063,
+        "frame": 321,
+        "immutableSnapshotMs": 0.04,
+        "instancesMs": 4.4246,
+        "kind": "renderer-update",
+        "motionMs": 0.9557,
+        "outlineResourcesMs": 0.0243,
+        "recordingPreparationMs": 0.1288,
+        "sceneStateMs": 0.0429,
+        "transparentMs": 3.0259,
+        "uniformsMs": 0.6266
+      },
+      {
+        "frame": 321,
+        "framePrepareMs": 6.2372,
+        "frameSnapshotMs": 0.0013,
+        "hostSyncMs": 0.326,
+        "kind": "host-frame",
+        "levelPollMs": 0.0009,
+        "lutMs": 0.0144,
+        "miscBeforeRecordMs": 0.0209,
+        "recordMs": 2.8886,
+        "rendererUpdateMs": 9.5722
+      },
+      {
+        "cameraMs": 0.7203,
+        "frame": 322,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6193,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.218,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3988,
+        "simulationAndInputMs": 0.6879
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.072,
+        "frame": 322,
+        "immutableSnapshotMs": 0.0358,
+        "instancesMs": 4.9698,
+        "kind": "renderer-update",
+        "motionMs": 1.0157,
+        "outlineResourcesMs": 0.0249,
+        "recordingPreparationMs": 0.073,
+        "sceneStateMs": 0.0387,
+        "transparentMs": 2.9719,
+        "uniformsMs": 0.6309
+      },
+      {
+        "frame": 322,
+        "framePrepareMs": 5.8188,
+        "frameSnapshotMs": 0.0015,
+        "hostSyncMs": 0.2133,
+        "kind": "host-frame",
+        "levelPollMs": 0.0137,
+        "lutMs": 0.0138,
+        "miscBeforeRecordMs": 0.0219,
+        "recordMs": 3.4962,
+        "rendererUpdateMs": 10.0751
+      },
+      {
+        "cameraMs": 0.6783,
+        "frame": 323,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.3634,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.1887,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3132,
+        "simulationAndInputMs": 0.6947
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.061,
+        "frame": 323,
+        "immutableSnapshotMs": 0.0437,
+        "instancesMs": 4.7527,
+        "kind": "renderer-update",
+        "motionMs": 0.9637,
+        "outlineResourcesMs": 0.0285,
+        "recordingPreparationMs": 0.0707,
+        "sceneStateMs": 0.0498,
+        "transparentMs": 2.6542,
+        "uniformsMs": 0.7545
+      },
+      {
+        "frame": 323,
+        "framePrepareMs": 5.4677,
+        "frameSnapshotMs": 0.0012,
+        "hostSyncMs": 0.2253,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.0144,
+        "miscBeforeRecordMs": 0.0188,
+        "recordMs": 2.8812,
+        "rendererUpdateMs": 9.6265
+      },
+      {
+        "cameraMs": 0.9791,
+        "frame": 324,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.4284,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2037,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4086,
+        "simulationAndInputMs": 0.8405
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0649,
+        "frame": 324,
+        "immutableSnapshotMs": 0.0342,
+        "instancesMs": 4.6289,
+        "kind": "renderer-update",
+        "motionMs": 0.8534,
+        "outlineResourcesMs": 0.0226,
+        "recordingPreparationMs": 0.0659,
+        "sceneStateMs": 0.0376,
+        "transparentMs": 2.7338,
+        "uniformsMs": 0.6749
+      },
+      {
+        "frame": 324,
+        "framePrepareMs": 6.0657,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.2739,
+        "kind": "host-frame",
+        "levelPollMs": 0.0006,
+        "lutMs": 0.0154,
+        "miscBeforeRecordMs": 0.0219,
+        "recordMs": 2.9822,
+        "rendererUpdateMs": 9.335
+      },
+      {
+        "cameraMs": 0.7511,
+        "frame": 325,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7547,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2143,
+        "resources": 374,
+        "sceneSnapshotMs": 1.216,
+        "simulationAndInputMs": 0.7533
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0487,
+        "frame": 325,
+        "immutableSnapshotMs": 0.0325,
+        "instancesMs": 4.8308,
+        "kind": "renderer-update",
+        "motionMs": 0.9814,
+        "outlineResourcesMs": 0.0215,
+        "recordingPreparationMs": 0.0767,
+        "sceneStateMs": 0.0352,
+        "transparentMs": 2.6702,
+        "uniformsMs": 0.6921
+      },
+      {
+        "frame": 325,
+        "framePrepareMs": 5.9062,
+        "frameSnapshotMs": 0.0013,
+        "hostSyncMs": 0.3241,
+        "kind": "host-frame",
+        "levelPollMs": 0.0007,
+        "lutMs": 0.0187,
+        "miscBeforeRecordMs": 0.0162,
+        "recordMs": 2.7913,
+        "rendererUpdateMs": 9.6233
+      },
+      {
+        "cameraMs": 0.7679,
+        "frame": 326,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.5862,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.1957,
+        "resources": 374,
+        "sceneSnapshotMs": 1.3927,
+        "simulationAndInputMs": 0.7132
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0586,
+        "frame": 326,
+        "immutableSnapshotMs": 0.0512,
+        "instancesMs": 4.618,
+        "kind": "renderer-update",
+        "motionMs": 1.0192,
+        "outlineResourcesMs": 0.0246,
+        "recordingPreparationMs": 0.075,
+        "sceneStateMs": 0.0399,
+        "transparentMs": 2.707,
+        "uniformsMs": 0.7174
+      },
+      {
+        "frame": 326,
+        "framePrepareMs": 5.8424,
+        "frameSnapshotMs": 0.0013,
+        "hostSyncMs": 0.2196,
+        "kind": "host-frame",
+        "levelPollMs": 0.8835,
+        "lutMs": 0.0134,
+        "miscBeforeRecordMs": 0.029,
+        "recordMs": 2.7923,
+        "rendererUpdateMs": 9.528
+      },
+      {
+        "cameraMs": 0.7963,
+        "frame": 327,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6858,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.257,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4133,
+        "simulationAndInputMs": 0.7591
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0594,
+        "frame": 327,
+        "immutableSnapshotMs": 0.0403,
+        "instancesMs": 5.2413,
+        "kind": "renderer-update",
+        "motionMs": 1.0082,
+        "outlineResourcesMs": 0.0235,
+        "recordingPreparationMs": 0.0778,
+        "sceneStateMs": 0.0433,
+        "transparentMs": 3.2167,
+        "uniformsMs": 0.73
+      },
+      {
+        "frame": 327,
+        "framePrepareMs": 6.1345,
+        "frameSnapshotMs": 0.0015,
+        "hostSyncMs": 0.2474,
+        "kind": "host-frame",
+        "levelPollMs": 0.0014,
+        "lutMs": 0.0231,
+        "miscBeforeRecordMs": 0.0202,
+        "recordMs": 3.407,
+        "rendererUpdateMs": 10.656
+      },
+      {
+        "cameraMs": 0.8813,
+        "frame": 328,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6744,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2095,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4125,
+        "simulationAndInputMs": 0.8041
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0598,
+        "frame": 328,
+        "immutableSnapshotMs": 0.0394,
+        "instancesMs": 4.7596,
+        "kind": "renderer-update",
+        "motionMs": 0.9792,
+        "outlineResourcesMs": 0.0232,
+        "recordingPreparationMs": 0.0837,
+        "sceneStateMs": 0.0486,
+        "transparentMs": 3.099,
+        "uniformsMs": 0.6648
+      },
+      {
+        "frame": 328,
+        "framePrepareMs": 6.1629,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.2359,
+        "kind": "host-frame",
+        "levelPollMs": 0.0016,
+        "lutMs": 0.0147,
+        "miscBeforeRecordMs": 0.0392,
+        "recordMs": 3.842,
+        "rendererUpdateMs": 14.5183
+      },
+      {
+        "cameraMs": 0.7297,
+        "frame": 329,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7873,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.1985,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4213,
+        "simulationAndInputMs": 0.8327
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.046,
+        "frame": 329,
+        "immutableSnapshotMs": 0.0417,
+        "instancesMs": 5.5336,
+        "kind": "renderer-update",
+        "motionMs": 1.0655,
+        "outlineResourcesMs": 0.028,
+        "recordingPreparationMs": 0.0821,
+        "sceneStateMs": 0.0425,
+        "transparentMs": 3.0342,
+        "uniformsMs": 0.6368
+      },
+      {
+        "frame": 329,
+        "framePrepareMs": 6.1644,
+        "frameSnapshotMs": 0.0011,
+        "hostSyncMs": 0.332,
+        "kind": "host-frame",
+        "levelPollMs": 0.0016,
+        "lutMs": 0.0292,
+        "miscBeforeRecordMs": 0.0183,
+        "recordMs": 3.0214,
+        "rendererUpdateMs": 10.7551
+      }
+    ],
+    "sourceProductsAndPrivateFilesUnchanged": true,
+    "zeroAllocator": true,
+    "validationClean": true
+  },
+  "coarseEnvironmentPassed": true,
+  "refinedEnvironmentFailures": [
+    "run observation 20: driver relative thermal headroom is insufficient",
+    "run observation 20: software thermal slowdown is active"
+  ],
+  "sourceAndProductsUnchanged": true,
+  "scope": "Private local chrono and log instrumentation, unchanged class ABI; inclusive nested phases with log overhead; refined thermal failure retained; not a formal performance or optimized-implementation acceptance",
+  "next": "Per-instance world-position reuse in transparent triangle preparation; preserve original arithmetic and stable sorting",
+  "archiveSha256": "ddb57505c0ae17044186128cf73b5c28fffed44e885ce996a943073178ae7e94",
+  "archiveMembers": {
+    "AzureRenderApp-compile.log": "9f9662106720f4dce455595fc0372810d6c6f79a4b589718cfd161c385c16e2d",
+    "AzureRenderFrame-compile.log": "f1fa9ada4d4e341d4d5cf191e40f07f7aae7f66c47fedc3f161f0334704814d8",
+    "CharacterSceneRenderer-compile.log": "81f737fd6239bd342500189ba12891760469385c6ce43b9bd615a5117a9f82ef",
+    "build-result.json": "f76abf0a5a254260dfd132b067d9bf39b1cf6d1d598415585d2a4b0cf3f67b57",
+    "compile-results.json": "c46721b5e9550cfc4b856ca66a186474cd13b1e6328442fb8ee94a0fea842c10",
+    "drivers/build_cpu_stage_diagnostic.py": "3a089ee3609b77fb1997703e22dacf437f1aa415484923c19f50090cf53836c0",
+    "drivers/build_cpu_stage_refinement.py": "ed073b648563b21e91f1fbeb35a7cc450ef15fbe2a1a16ae8ca2c38e56d5ac6e",
+    "drivers/measure_cpu_stage_cost.py": "55206b17e6a17947def0b56be856bc0b9438199e2c486a8b98e7e26b74de7ada",
+    "drivers/measure_cpu_stage_refinement.py": "22aea0362754ddd29d5fd20236c2b5d599231d63d75e562ab77eed106e62936f",
+    "native/captures/azureplayer.log.jsonl": "97d0beb10fcf8b4df273baf5e57a2d66f28286e914a129dea5d5c64b37b50d17",
+    "native/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "native/environment.json": "615f9efdf744c09d7d44ebd4bf685398eefa9ac989c9cbbe34af07a696e2af56",
+    "native/frozen-inputs.json": "06a0431fbfc9534c4389685f00a8f03a780463a733fac25293628e68564eb556",
+    "native/memory.json": "64249d68240a8ce0057594736371b95b696f3aef7efe1421674f6f0bc8a31621",
+    "native/results.json": "c5563f3f5ee53271636b1ecd911f192674a2b61f9eeb8dabc3cffb182106542e",
+    "native/runtime.json": "cd9320f36a931c0058224b2bc9c5ce58e6501d7d2431632202e09aa35c8688a5",
+    "native/stage-results.json": "c56dc90b5543c7401ada9fd5c0acbbb9f75a357ee4fb6d1a60d5f29112d11d02",
+    "native/stderr.log": "baa69d87a2d4c5e36f7da5967b35f1a7da659101a36e33ebfe93e7e5e1e7b5b2",
+    "native/stdout.log": "22b9da79d8355811df3cb95582cea677aaf0e7e47c7ee6b8a284a29de4248a27",
+    "native/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "native/task.json": "00288b92c316ce46d8bf17160fb8fee8e3bed23cf6cf4de89250a77db8aa5e26",
+    "native/timing.csv": "b998ec5e51a4dc9113153a70a94e51957b7b7c2e41e705d6d97a894dcdcf1c3f",
+    "native/timing.json": "6d3e1a73c97f5d6fd4ea7cee844e2533168160774e89c0349e184c5d7ea732fc",
+    "original-compile-commands.json": "f2a20b5ae77ef5e34e57cd304a7591c0bba047518dfda7a0fd3be2ed80b768b0",
+    "private-link-refined/AzurePlayer.map": "fbd70791a2874d215813276933793b006386c125446092bfdee544fff31a5cac",
+    "private-link-refined/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "private-link-refined/link.rsp": "72229c78411fa3dadf8c1c79803c3c4aa1892954882fd117274519e888d35a40",
+    "private-link/AzurePlayer.map": "c6b4c1b0472424b4f6a3aa0133730887e01ae7c09e4467f58f2ebdfbc393e6f5",
+    "private-link/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "private-link/link.rsp": "007765699fa8de30fa89e238e6950c9b5abe8a544e5d1ea3b661a570352b30a1",
+    "production-before.json": "441b8dc81ffb6bea6d2a214966531ed29f9a9e65412ed7e8d75bbc823b0b1adf",
+    "refined-build-result.json": "c3fb1d4d052582b99b16373d582a7abc6f1bbb2e69e7f93ead04b64756c63a78",
+    "refined-compile-results.json": "d770316941eea9886f18a2f508172eaaa10bfc7c0cf5c906cded47891ca54a81",
+    "refined-native/captures/azureplayer.log.jsonl": "448b97420fcb72dffba9dfbcb831959419f518e4717ef96ea153a7284a318610",
+    "refined-native/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "refined-native/environment.json": "8ac079499e247645644df9c8f696369e4b9791915ecc62546507635d99c4b107",
+    "refined-native/frozen-inputs.json": "06a0431fbfc9534c4389685f00a8f03a780463a733fac25293628e68564eb556",
+    "refined-native/memory.json": "7fb9a25cf54652c6948df6c4add282933b579635eaddaa46817e4286b837cb2f",
+    "refined-native/results.json": "c99b2e03cf24024ffafe1bdeb6b8882ae453c60212de7adc85f32e0728e5697a",
+    "refined-native/runtime.json": "addb0269b074ff7e51a5ce78a6953e57a6c8b709c37d03f0e4887c91ff9c9c5e",
+    "refined-native/stage-results.json": "b43b852623a54956ebf1886863a07b5d1a0f78f3a3e5c715e24630fda69a5eeb",
+    "refined-native/stderr.log": "010e8d31263e02f87abe5887fb5aacb27493f0d0462770022dd090234cfaeddc",
+    "refined-native/stdout.log": "17518c968894a562937a7ab5049ee8acb6928278d7982ae179b72326b51bff57",
+    "refined-native/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "refined-native/task.json": "f116f77adb9ed54f5e8128cc7bd4907b7526de2aaa75c138a1d1f28605210e72",
+    "refined-native/timing.csv": "8d9e71456b932c54acdabc1c71e9a6ab9032b0a734b3e4d66f916084790c4d94",
+    "refined-native/timing.json": "5abedf111b4241ada85d8623e8e624223206a3b04e42624a80c0179b4c7b4ac9",
+    "refined-original-compile-command.json": "021e286e0994d70a24e3c5d26f6dd9efe9fca648a02e81ebcd0a7f22f55c8b4d",
+    "refined-production-before.json": "441b8dc81ffb6bea6d2a214966531ed29f9a9e65412ed7e8d75bbc823b0b1adf",
+    "source/AzureRenderApp.cpp": "64b9cbbc2d13e8596de5e4189aef9ad012cf74e6a3bdf2ba6cc2053b5dc405a5",
+    "source/AzureRenderApp.diff": "aef261881ee9ee6c47a910519b8caccd0b634b1d7e3774bb7afc71ec17a4a287",
+    "source/AzureRenderFrame.cpp": "cf71e9a09cc6ff61b7c077d9b305a4b3ff4a756922e91300be20178ced842469",
+    "source/AzureRenderFrame.diff": "35f967e773b35bdd9d39ca1e1241b11e1e54413bd92073d725d3d5e7b5a811c0",
+    "source/CharacterSceneRenderer.cpp": "dd3e94aa0ec3ab8cf6dc22ead28ea6dc2bceb8ac82a15633a8bb6bc998ebcf77",
+    "source/CharacterSceneRenderer.diff": "92cee8b8b99da4f86fcb17ab1a64bb9d486efbe3ee149f4f42d9959aa2f65ca6"
+  }
+}
