@@ -1307,6 +1307,18 @@
       "purpose": "主角色联合预算、内存诊断与原生捕获。",
       "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
       "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261107-061745-current-gpu-cost-2de6bc",
+      "pathBase": "build",
+      "purpose": "当前 GPU 单帧成本定位及后续局部控制输入。",
+      "retention": "性能候选完成且捕获已核验归档后清理。",
+      "pinMarker": ".keep",
+      "capture": {
+        "path": "current_frame320.rdc",
+        "bytes": 2116148716,
+        "sha256": "9079f51daf9e3d39a3de717a64f226080a86e013d379ea2e5a7eedcbf47ee103"
+      }
     }
   ],
   "evidenceRetentionManifest": "evidence-retention.json",
