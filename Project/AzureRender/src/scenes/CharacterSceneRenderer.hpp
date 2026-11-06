@@ -238,6 +238,9 @@ private:
     std::array<VkPipeline,3> snapshotCoveragePipelines_{};
     std::array<VkPipeline,3> snapshotPrefillPipelines_{};
     std::array<VkPipeline,3> mainPrefillPipelines_{};
+    std::array<VkPipeline,3> snapshotCoveredPrefillPipelines_{};
+    std::array<VkPipeline,3> mainCoveredPrefillPipelines_{};
+    void destroyCoveredPrefillPipelines();
     std::array<VkPipeline,4> overlayDepthPipelines_{};
     std::array<GpuTexture,kMaxFramesInFlight> outlineMasks_;
     std::array<VkFramebuffer,kMaxFramesInFlight> outlineMaskFramebuffers_{};

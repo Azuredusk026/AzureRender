@@ -14,6 +14,10 @@ inline bool fullyCoveredShadow(const AssetMaterial& material,float nodeOpacity) 
         ||(material.alphaMode==AssetAlphaMode::Opaque
             &&(material.materialFeatures&MaterialFeatureSqrtAlphaShadow)==0));
 }
+// character_depth.frag only clips opaque prefill through node opacity.
+inline bool fullyCoveredPrefill(const AssetMaterial& material,float nodeOpacity) noexcept {
+    return material.alphaMode==AssetAlphaMode::Opaque&&nodeOpacity==1.F;
+}
 // Cull policy and authored front-face orientation are independent.
 inline constexpr unsigned surfaceFacingIndex(bool doubleSided,bool mirrored) noexcept {
     return (doubleSided?2U:0U)+(mirrored?1U:0U);

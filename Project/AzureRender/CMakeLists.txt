@@ -1157,6 +1157,13 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.DepthOnlyShadowRecording COMMAND AzureDepthOnlyShadowRecordingTests "${SHADER_BINARY_DIR}")
     set_tests_properties(AzureRender.DepthOnlyShadowRecording PROPERTIES TIMEOUT 120)
 
+    add_executable(AzureDepthPrefillRecordingTests tests/DepthPrefillRecordingTests.cpp)
+    target_link_libraries(AzureDepthPrefillRecordingTests PRIVATE AzureRenderCore)
+    target_compile_definitions(AzureDepthPrefillRecordingTests PRIVATE AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+    add_dependencies(AzureDepthPrefillRecordingTests AzureRenderShaders)
+    add_test(NAME AzureRender.DepthPrefillRecording COMMAND AzureDepthPrefillRecordingTests "${SHADER_BINARY_DIR}")
+    set_tests_properties(AzureRender.DepthPrefillRecording PROPERTIES TIMEOUT 120)
+
     add_executable(AzureDepthOnlyGpuTests tests/DepthOnlyGpuTests.cpp)
     target_link_libraries(AzureDepthOnlyGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureDepthOnlyGpuTests AzureRenderShaders)

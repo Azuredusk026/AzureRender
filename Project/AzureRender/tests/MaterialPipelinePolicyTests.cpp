@@ -16,8 +16,9 @@ int main(){
             material.materialFeatures=flags;
             const bool expected=(flags&MaterialFeatureGeometryShadow)||(mode==AssetAlphaMode::Opaque&&!(flags&MaterialFeatureSqrtAlphaShadow));
             if(fullyCoveredShadow(material,1.F)!=expected)return 40;
+            if(fullyCoveredPrefill(material,1.F)!=(mode==AssetAlphaMode::Opaque))return 42;
             for(float opacity:{0.F,.5F,1.1F,-.1F,std::numeric_limits<float>::quiet_NaN()})
-                if(fullyCoveredShadow(material,opacity))return 41;
+                if(fullyCoveredShadow(material,opacity)||fullyCoveredPrefill(material,opacity))return 41;
         }
     }
     material={};

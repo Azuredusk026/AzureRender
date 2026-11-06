@@ -28,7 +28,7 @@ void verify(const std::string& shaders,bool bindless,AssetAlphaMode mode,unsigne
     SceneGraphResources resources{graph.addResource("color"),graph.addResource("depth"),graph.addResource("normal"),graph.addResource("shadow")};
     renderer.registerPasses(graph,resources,context);std::string error;require(graph.compile(error),error.c_str());
     std::set<std::string> depthOnly;
-    for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"&&call.detail.find("fragment=0")!=std::string::npos)
+    for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"&&call.detail.find("fragment=0")!=std::string::npos&&call.detail.find(" masks=")==std::string::npos)
         depthOnly.insert(call.detail.substr(0,call.detail.find(' ')));
     require(depthOnly.size()==2,"Renderer must own separate cascade and object depth-only pipelines");
     unsigned checked=0;

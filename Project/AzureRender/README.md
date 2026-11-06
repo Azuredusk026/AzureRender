@@ -24,6 +24,8 @@
 短时成对 CPU 均值降低约百分之 6.06，工作 P95 为 21.79 毫秒。
 [静态变形输出复用](docs/acceptance/nr/static-skinning-output.md)通过双设备、生命周期及原生四帧检查。
 实际帧复用 742,213 个顶点请求，完整帧预算与热状态继续未通过。
+完整覆盖的[深度预填充](docs/acceptance/nr/covered-depth-prefill.md)通过两配置各三十二项及双设备检查。
+原生四帧冻结对照一致，完整画质及帧预算保持待验收。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。

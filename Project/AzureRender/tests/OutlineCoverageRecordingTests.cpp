@@ -259,7 +259,7 @@ void verify(const std::filesystem::path& shaders,Kind kind,bool bindless,bool co
         &&counters.descriptorSetBinds==capture.mainDescriptorBinds&&counters.pushConstantUpdates==capture.mainPushConstantUpdates,
         "Submission counters must include every actual main prefill and color command");
     const bool colorConsumer=kind==Kind::RefractionConsumer||kind==Kind::TintConsumer||reflection;
-    require(capture.prefillPipelines.size()==6,"Snapshot and main prefill each require three winding pipelines");
+    require(capture.prefillPipelines.size()==(multisample?6:12),"Snapshot and main prefill each require three winding pipelines per coverage path");
     const bool mainPrefill=settings.sceneLightingEnabled&&context.depthTestEnabled
         &&material.alphaMode==AssetAlphaMode::Opaque&&kind!=Kind::TintConsumer&&kind!=Kind::MainMultiply
         &&kind!=Kind::Hidden&&kind!=Kind::Platform;

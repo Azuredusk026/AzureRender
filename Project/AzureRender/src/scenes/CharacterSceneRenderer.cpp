@@ -2868,6 +2868,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
     const bool colorRequired=mode==DepthCoverageMode::SnapshotColor;
     commands.bindVertexStream(1,whiteVertexColorBuffer_.buffer,0);
     const auto& prefillPipelines=mainPrefill?mainPrefillPipelines_:snapshotPrefillPipelines_;
+    const auto& coveredPrefillPipelines=mainPrefill?mainCoveredPrefillPipelines_:snapshotCoveredPrefillPipelines_;
     commands.setViewport(static_cast<float>(context.renderExtent.width),static_cast<float>(context.renderExtent.height));commands.setScissor(context.renderExtent);
     if(bindlessTextures_){
         commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
@@ -2897,10 +2898,10 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :classPipeline?classPipeline
                 :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)];
-            commands.bindPipeline(prefill||simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline));
+            if(!prefill)commands.bindPipeline(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline));
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
-            if(counters)++counters->pipelineBinds;
+            if(counters&&!prefill)++counters->pipelineBinds;
             MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
                 m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
                 m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),materialFeaturesForFrame(m),m.materialProfileVersion,
@@ -2910,8 +2911,15 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
             MorphPushConstants morph{};morph.weights=snapshot.settings.morphWeights;morph.textureBaseIndex=textureBase+primitive.materialIndex*kMaterialTextureSlots;
             if(m.outlineSurface.projectSurface)morph.weights[1]=snapshot.settings.antiAliasing==2?2.F:1.F;
             morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());
+            VkPipeline boundPrefill=VK_NULL_HANDLE;
             forEachPrimitiveOpacityRun(snapshot.nodeWorldOpacities,primitive.nodeIndex,first,count,[&](const PrimitiveOpacityRun& run) {
                 if (run.opacity == 0) return;
+                if(prefill){
+                    const auto facing=m.doubleSided?2:mirrored?1:0;
+                    const auto selected=rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT&&fullyCoveredPrefill(m,run.opacity)
+                        ?coveredPrefillPipelines[facing]:depthPipeline;
+                    if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
+                }
                 morph.nodeOpacity=run.opacity;
                 commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
                 commands.drawIndexed(primitive.indexCount,primitive.firstIndex,run.instanceCount,
@@ -3571,10 +3579,14 @@ void CharacterSceneRenderer::createGraphicsPipeline(
                 auto prefill=desc;prefill.colorWriteMasks={0,0};prefill.depthBias=true;
                 prefill.depthBiasConstant=1.F;prefill.depthBiasSlope=0.F;
                 snapshotPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
+                if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT){auto covered=prefill;covered.fragmentShader=VK_NULL_HANDLE;
+                    snapshotCoveredPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(covered);}
                 prefill.renderPass=context.sceneRenderPass;
                 prefill.colorAttachmentCount=sceneColorAttachmentCount(context);
                 prefill.colorWriteMasks.assign(prefill.colorAttachmentCount,0);
                 mainPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
+                if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT){auto covered=prefill;covered.fragmentShader=VK_NULL_HANDLE;
+                    mainCoveredPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(covered);}
             }
         }catch(...){if(simpleDepthVertex)rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);throw;}
         rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);
@@ -3734,7 +3746,14 @@ void CharacterSceneRenderer::createGraphicsPipeline(
 }
 
 
+void CharacterSceneRenderer::destroyCoveredPrefillPipelines() {
+    if(!rhi_)return;
+    for(auto* pipelines:{&snapshotCoveredPrefillPipelines_,&mainCoveredPrefillPipelines_})
+        for(auto& pipeline:*pipelines)if(pipeline){rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;}
+}
+
 void CharacterSceneRenderer::destroyResources() {
+    destroyCoveredPrefillPipelines();
     loadedResourceMeshKeys_.clear();
     loadedBindPoses_.clear();bindPoseCachedCopies_=0;
     viewFog_.reset();
@@ -3903,6 +3922,7 @@ void CharacterSceneRenderer::destroyResources() {
 }
 
 void CharacterSceneRenderer::destroyGraphicsPipelinesForRecreate() {
+    destroyCoveredPrefillPipelines();
     if(viewFog_)viewFog_->releasePipelines();
     destroyMaterialLightingPipelines();
     destroyMaterialClassPipelines();
