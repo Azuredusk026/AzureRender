@@ -539,8 +539,8 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + std::to_string(limits.maxPerStageDescriptorSamplers));
     enqueue("buffers",loadTimings_.buffersMs,[this]{
         loadedBindPoses_.clear();loadedBindPoses_.reserve(additionalResources_.size()+1);
-        loadedBindPoses_.push_back(bindAnimationPose(asset_));
-        for(const auto& resource:additionalResources_)loadedBindPoses_.push_back(bindAnimationPose(resource->asset));
+        loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(asset_)));
+        for(const auto& resource:additionalResources_)loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(resource->asset)));
         createUniformBuffers();createJointBuffers();
         if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));
     },true);
@@ -657,7 +657,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     std::vector<std::vector<float>> nodeOpacities;
     nodeOpacities.reserve(sceneInstances_.size());
     for (const auto& instance : sceneInstances_)
-        nodeOpacities.push_back(instancePoses_.at(instance.sourceIndex).pose.nodeWorldOpacities);
+        nodeOpacities.push_back(instancePoses_.at(instance.sourceIndex).pose->nodeWorldOpacities);
     prepareOutlineMaskResources(nodeOpacities,recordingBuffers);
     instanceSnapshot_ = std::make_shared<const SceneInstanceSnapshot>(
         std::move(sceneInstances_), std::move(visibleIndices), std::move(opaqueRecordingSpans_),
@@ -717,7 +717,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
     ensureInstanceCapacity();
     constexpr float kPi = 3.14159265358979323846F;
     instancePoses_.clear();
-    bindPoseCachedCopies_=0;
+    bindPoseCachedCopies_=0;bindPoseSharedInstances_=0;
     skinningDispatches_.clear();
     if(computeSkinningEnabled_){
         auto& cache=staticSkinningOutputs_.at(currentFrame_);cache.begin(sceneInstances_.size());
@@ -728,26 +728,36 @@ void CharacterSceneRenderer::prepareInstancePoses() {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey-1]->asset;
         const auto animation = std::find_if(animationFrames_.begin(), animationFrames_.end(),
             [&](const auto& value) { return value.node == instance.nodeId; });
-        AssetPose pose;
+        AssetPose writablePose;
+        std::shared_ptr<const AssetPose> preparedPose;
         auto morph = renderSettings_->morphWeights;
         if (animation != animationFrames_.end()) {
-            pose = samplePresentedAnimationPose(mesh,*animation);
+            writablePose = samplePresentedAnimationPose(mesh,*animation);
             morph = animation->morph;
             if (instance.meshKey == 0) { animationIndex_ = animation->clip; }
         } else if (!mesh.animations.empty()) {
-            pose = sampleAnimationPose(mesh, instance.meshKey == 0 ? animationIndex_ : 0,
+            writablePose = sampleAnimationPose(mesh, instance.meshKey == 0 ? animationIndex_ : 0,
                 animationTime_);
         } else {
-            pose = loadedBindPoses_.at(instance.meshKey);
-            ++bindPoseCachedCopies_;
+            if(mesh.morphRanges.empty()||(morph[0]==0.F&&morph[1]==0.F)){
+                preparedPose=loadedBindPoses_.at(instance.meshKey);
+                ++bindPoseSharedInstances_;
+            }else{
+                writablePose=*loadedBindPoses_.at(instance.meshKey);
+                ++bindPoseCachedCopies_;
+            }
         }
-        if(animation!=animationFrames_.end()&&animation->expression)
-            pose=applyExpressionPose(mesh,pose,*animation->expression,animation->expressionWeight);
-        if(!mesh.morphRanges.empty()){
-            for(auto& values:pose.morphWeights)for(unsigned index=0;index<std::min<std::size_t>(2,values.size());++index)
-                if(morph[index]!=0)values[index]=morph[index];
-            if(animation!=animationFrames_.end())applyMorphOverrides(mesh,pose,animation->morphOverrides);
+        if(!preparedPose){
+            if(animation!=animationFrames_.end()&&animation->expression)
+                writablePose=applyExpressionPose(mesh,writablePose,*animation->expression,animation->expressionWeight);
+            if(!mesh.morphRanges.empty()){
+                for(auto& values:writablePose.morphWeights)for(unsigned index=0;index<std::min<std::size_t>(2,values.size());++index)
+                    if(morph[index]!=0)values[index]=morph[index];
+                if(animation!=animationFrames_.end())applyMorphOverrides(mesh,writablePose,animation->morphOverrides);
+            }
+            preparedPose=std::make_shared<const AssetPose>(std::move(writablePose));
         }
+        const auto& pose=*preparedPose;
         const auto weights=flattenMorphGpuWeights(mesh,pose);
         if(!weights.empty())std::memcpy(static_cast<float*>(morphWeightBuffers_[currentFrame_].mapped)+morphWeightBase,weights.data(),weights.size()*sizeof(float));
         std::memcpy(static_cast<std::array<float,16>*>(jointBuffers_[currentFrame_].mapped) + jointBase,
@@ -761,7 +771,7 @@ void CharacterSceneRenderer::prepareInstancePoses() {
             bounds = includeTransformedBounds(bounds, gizmo);
         }
         instance.worldBounds = scene::transformBounds(bounds, instance.model);
-        instancePoses_.push_back({std::move(pose), instance.meshKey, jointBase, vertexBase, morph,morphWeightBase});
+        instancePoses_.push_back({std::move(preparedPose), instance.meshKey, jointBase, vertexBase, morph,morphWeightBase});
         // Preserve stable pose slices for every instance. Only views that
         // consume deformed geometry require writing the GPU vertex slice.
         const auto& worldBounds = instance.worldBounds;
@@ -781,13 +791,13 @@ void CharacterSceneRenderer::prepareInstancePoses() {
             :consumed;
         if (produce) {
             const SkinningBatch slice{static_cast<std::uint32_t>(mesh.vertices.size()),jointBase,morph,
-                vertexBase,static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size()),1,
+                vertexBase,static_cast<std::uint32_t>(instancePoses_.back().pose->jointMatrices.size()),1,
                 morphGpuMeshes_.at(instance.meshKey).tableBase,morphWeightBase,morphGpuMeshes_.at(instance.meshKey).weightCount};
             if (skinningDispatches_.empty() || skinningDispatches_.back().meshKey!=instance.meshKey
                 || !appendSkinningSlice(skinningDispatches_.back().parameters,slice))
                 skinningDispatches_.push_back({instance.meshKey,slice});
         }
-        jointBase += static_cast<std::uint32_t>(instancePoses_.back().pose.jointMatrices.size());
+        jointBase += static_cast<std::uint32_t>(instancePoses_.back().pose->jointMatrices.size());
         vertexBase += static_cast<std::uint32_t>(mesh.vertices.size());
         morphWeightBase+=static_cast<std::uint32_t>(weights.size());
     }
@@ -1022,11 +1032,11 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         const auto& pose = instancePoses_.at(slot);
         const auto& mesh = meshKey == 0 ? asset_ : additionalResources_[meshKey-1]->asset;
         destination[slot].meta = {pose.jointBase, pose.vertexBase, morphGpuMeshes_.at(meshKey).tableBase, pose.morphWeightBase};
-        destination[slot].faceLight = instanceFaceLight(mesh, pose.pose, model);
+        destination[slot].faceLight = instanceFaceLight(mesh, *pose.pose, model);
         destination[slot].morph = {pose.morph[0], pose.morph[1]};
         destination[slot].objectShadowIndex=0;
         destination[slot].instanceFlags=0;
-        destination[slot].faceFrame = instanceFaceFrame(mesh,pose.pose,model);
+        destination[slot].faceFrame = instanceFaceFrame(mesh,*pose.pose,model);
         // The same association as the per-frame uniform path so a single
         // instance reproduces the original values exactly.
         destination[slot].modelViewProjection =
@@ -1043,7 +1053,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
     if(materialOriginInstances_)for(const auto& copy:materialOriginInstances_->copies()) {
         const auto& instance=sceneInstances_.at(copy.sourceIndex);
         const auto& pose=instancePoses_.at(copy.sourceIndex).pose;
-        const auto origin=multiply(instance.model,pose.nodeWorldMatrices.at(copy.node));
+        const auto origin=multiply(instance.model,pose->nodeWorldMatrices.at(copy.node));
         auto& alias=destination[copy.gpuIndex];alias=destination[copy.sourceIndex];
         for(unsigned axis=0;axis<3;++axis)alias.faceFrame[12+axis]=origin[12+axis];
         alias.instanceFlags|=InstanceGpuData::kMaterialRimOrigin;
@@ -1665,6 +1675,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"loadedResourceIdentityEntries\": " << loadedResourceMeshKeys_.size() << ",\n"
          << "  \"bindPoseCacheEntries\": " << loadedBindPoses_.size() << ",\n"
          << "  \"bindPoseCachedCopies\": " << bindPoseCachedCopies_ << ",\n"
+         << "  \"bindPoseSharedInstances\": " << bindPoseSharedInstances_ << ",\n"
          << "  \"computeSkinningPreparedDispatches\": " << (computeSkinningEnabled_?skinningDispatches_.size():0) << ",\n"
          << "  \"computeSkinningPreparedVertices\": " << preparedSkinningVertices << ",\n"
          << "  \"staticSkinningReusedInstances\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedCount():0) << ",\n"
@@ -3755,7 +3766,7 @@ void CharacterSceneRenderer::destroyCoveredPrefillPipelines() {
 void CharacterSceneRenderer::destroyResources() {
     destroyCoveredPrefillPipelines();
     loadedResourceMeshKeys_.clear();
-    loadedBindPoses_.clear();bindPoseCachedCopies_=0;
+    loadedBindPoses_.clear();bindPoseCachedCopies_=0;bindPoseSharedInstances_=0;
     viewFog_.reset();
     destroyMaterialLightingPipelines();
     destroyMaterialClassPipelines();
@@ -4580,7 +4591,7 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         std::vector<bool> prepared(mesh.vertices.size(),false);
         const auto vertexPosition = [&](std::uint32_t index) {
             if(prepared.at(index))return positions[index];
-            positions[index]=deformedVertexPosition(mesh,index,&pose.pose,pose.morph);
+            positions[index]=deformedVertexPosition(mesh,index,pose.pose.get(),pose.morph);
             prepared[index]=true;return positions[index];
         };
         std::size_t oitWriteIndex = transparentIndexOffsets_[instance.sourceIndex];
@@ -4936,7 +4947,7 @@ void CharacterSceneRenderer::buildSceneState() {
     for(const auto& instance:sceneInstances_) {
         const auto* mesh=instance.meshKey==0?&asset_:&additionalResources_[instance.meshKey-1]->asset;
         const auto* pose=instance.sourceIndex<instancePoses_.size()?&instancePoses_[instance.sourceIndex]:nullptr;
-        state_.pickables.push_back({instance.nodeId,mesh,instance.model,pose?&pose->pose:nullptr,pose?pose->morph:std::array<float,2>{}});
+        state_.pickables.push_back({instance.nodeId,mesh,instance.model,pose?pose->pose.get():nullptr,pose?pose->morph:std::array<float,2>{}});
     }
     state_.asset = &asset_;
     state_.modelMatrix = currentModel_.data();

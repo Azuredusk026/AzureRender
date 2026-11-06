@@ -58,7 +58,7 @@ void operator delete[](void* pointer,std::align_val_t,const std::nothrow_t&) noe
 using namespace azurerender;
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 struct Measurement {std::size_t bytes;std::vector<rhi::RecordedCall> commands;};
-Measurement measure(const std::filesystem::path& shaders,const std::filesystem::path& source,std::size_t vertexCount,bool bindless,unsigned aliases=0) {
+Measurement measure(const std::filesystem::path& shaders,const std::filesystem::path& source,std::size_t vertexCount,bool bindless,unsigned aliases=0,unsigned staticNodes=0) {
     rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
     context.allocator=&backend.allocator();context.rhi=&backend;context.shaderDirectory=shaders.string();
     context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();
@@ -72,6 +72,7 @@ Measurement measure(const std::filesystem::path& shaders,const std::filesystem::
     if(!vertexCount)vertexCount=opaque->vertices.size();
     require(vertexCount>=opaque->vertices.size(),"Opaque fixture must retain every referenced vertex");
     opaque->vertices.resize(vertexCount);
+    if(staticNodes)opaque->nodes.resize(std::max<std::size_t>(staticNodes,opaque->nodes.size()));
     for(auto& material:opaque->materials)material.alphaMode=AssetAlphaMode::Opaque;
     auto transparent=std::make_shared<LoadedAsset>(loadGltfAsset(path));
     for(auto& material:transparent->materials)material.alphaMode=AssetAlphaMode::Blend;
@@ -102,6 +103,14 @@ int main(int argc,char** argv) try {
         require(small.commands.size()==large.commands.size(),"Opaque-only vertex capacity must preserve recorded commands");
         for(std::size_t i=0;i<small.commands.size();++i)
             require(small.commands[i].name==large.commands[i].name&&small.commands[i].detail==large.commands[i].detail,"Opaque vertex capacity must preserve transparent ordering and draw inputs");
+        const auto denseSkeleton=measure(argv[1],argv[2],0,bindless,0,65536);
+        std::cout<<"bindless="<<bindless<<" ordinaryAllocationBytes="<<small.bytes<<" static65536NodeAllocationBytes="<<denseSkeleton.bytes<<std::endl;
+        require(denseSkeleton.bytes<=small.bytes+65536*2*sizeof(float)+64*1024,
+            "Static skeletons may copy frame opacity inputs but must share immutable transform and local-pose arrays");
+        require(small.commands.size()==denseSkeleton.commands.size(),"Unused static nodes preserve the recording workload");
+        for(std::size_t i=0;i<small.commands.size();++i)
+            require(small.commands[i].name==denseSkeleton.commands[i].name&&small.commands[i].detail==denseSkeleton.commands[i].detail,
+                "Static pose sharing preserves geometry, opacity and ordering");
         const auto alias=measure(argv[1],argv[2],0,bindless,1024);
         std::cout<<"bindless="<<bindless<<" ordinaryAllocationBytes="<<small.bytes<<" alias1024AllocationBytes="<<alias.bytes<<std::endl;
         require(alias.bytes<=small.bytes+4096,"Unused loaded resource aliases must not scale per-frame layout allocations");

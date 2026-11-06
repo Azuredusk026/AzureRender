@@ -544,16 +544,16 @@ private:
     std::vector<scene::SceneInstance> sceneInstances_;
     std::vector<const scene::SceneInstance*> visibleInstances_;
     struct InstancePose {
-        AssetPose pose;
+        std::shared_ptr<const AssetPose> pose;
         std::uint32_t meshKey = 0, jointBase = 0, vertexBase = 0;
         std::array<float, 2> morph{};
         std::uint32_t morphWeightBase=0;
     };
     std::vector<InstancePose> instancePoses_;
-    // Loaded resource skeletons are immutable; each instance receives a value
-    // copy so per-frame morph/expression edits cannot affect another instance.
-    std::vector<AssetPose> loadedBindPoses_;
-    std::size_t bindPoseCachedCopies_ = 0;
+    // Loaded bind poses are shared immutable inputs. Animated or edited poses
+    // own separate values, while every instance retains its model and GPU slice.
+    std::vector<std::shared_ptr<const AssetPose>> loadedBindPoses_;
+    std::size_t bindPoseCachedCopies_ = 0, bindPoseSharedInstances_ = 0;
     struct SkinningDispatch { std::uint32_t meshKey; SkinningPushConstants parameters; };
     std::vector<SkinningDispatch> skinningDispatches_;
     std::vector<NodeAnimationFrame> animationFrames_;

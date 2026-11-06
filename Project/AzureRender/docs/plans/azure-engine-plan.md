@@ -145,7 +145,11 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 [性能归因](../acceptance/nr/performance-bottlenecks.md)取得当前 CPU 阶段记录。
 场景准备均值为 7.11 毫秒，渲染器更新为 10.44 毫秒。
 厂商硬件计数返回零条样本，带宽归因保持待验证。
-静态实例的[只读姿态共享](2026-11-06-shared-bind-pose.md)为下一项定向修改。
+静态实例的[只读姿态共享](../acceptance/nr/shared-bind-pose.md)通过两配置各三十二项 CPU 检查。
+实际帧有八百六十个共享实例，原生四帧逐像素一致。
+二十四项 GPU 检查中二十二项通过，Intel 时间解析继续待修复。
+实际静态资源的值复制局部均值为 0.128 毫秒。
+场景准备、透明排序和动态求解继续按实测成本推进。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。

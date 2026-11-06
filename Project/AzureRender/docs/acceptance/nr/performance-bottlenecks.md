@@ -8,7 +8,7 @@ CPU 场景准备也独立超出原八毫秒预算。
 当前结论限定为已取得的工作量与阶段证据。
 
 GPU 事件来源为 `0694263` 的实际原生第三百二十帧。
-该版本的运行源码与受检生产基线逐文件一致。
+该帧的运行源码与 `f224da9` 基线逐文件一致。
 [事件分解](current-gpu-events.md)记录捕获及程序身份。
 重放的主颜色与快照通用程序合计约 17.86 毫秒。
 
@@ -38,7 +38,7 @@ GPU 叶级片元调用总数为 27,853,535。
 子阶段包含在所属父阶段内。
 插桩计时有本地记录开销，该批热状态检查失败。
 数据用于选择修改位置，完整帧收益仍需独立采集。
-静态实例的只读姿态共享为下一项定向修改。
+静态实例的[只读姿态共享](shared-bind-pose.md)已取得独立验证。
 
 ## 计数器与存储
 
@@ -69,7 +69,7 @@ Nsight 的本机接口已完成协议和工具清单查询。
 候选已隔离，生产源码及默认程序采用受检输入。
 完整画质、CPU、GPU 和长跑条件继续有效。
 
-CPU 后续按[共享绑定姿态计划](../../plans/2026-11-06-shared-bind-pose.md)执行。
+CPU 后续按场景准备、透明排序及动态姿态求解继续定位。
 硬件计数恢复需有相关工具修正或有效设备变化。
 方法参考 [NVIDIA Shader Profiler](https://docs.nvidia.com/nsight-graphics/UserGuide/shader-profiler.html)。
 接口诊断参考 [RenderDoc NVIDIA 后端](https://github.com/baldurk/renderdoc/blob/v1.46/renderdoc/driver/ihv/nv/nv_vk_counters.cpp)。

@@ -66,8 +66,8 @@ void CharacterSceneRenderer::prepareMotion(){
         MotionPoseState previous;previous.identity.node=instance.nodeId.empty()?"$default":instance.nodeId;
         previous.identity.geometry=instance.meshKey;
         previous.identity.replica=replicas[{previous.identity.node,instance.meshKey}]++;
-        previous.model=instance.model;previous.joints=pose.pose.jointMatrices;
-        previous.morphWeights=flattenMorphGpuWeights(mesh,pose.pose);previous.legacyMorph=pose.morph;
+        previous.model=instance.model;previous.joints=pose.pose->jointMatrices;
+        previous.morphWeights=flattenMorphGpuWeights(mesh,*pose.pose);previous.legacyMorph=pose.morph;
         previous.vertexCount=static_cast<std::uint32_t>(mesh.vertices.size());previous.morphTableBase=morphGpuMeshes_.at(instance.meshKey).tableBase;
         poses.push_back(std::move(previous));
     }
