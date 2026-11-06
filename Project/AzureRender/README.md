@@ -14,6 +14,7 @@
 自动空间恢复、缓存备份及复测见[执行记录](docs/acceptance/nr/autonomous-cleanup-performance.md)。
 场景着色、透明准备及光照存储的批次优化见[性能记录](docs/acceptance/nr/batched-performance.md)。
 场景快照复用、摄像机准备及阶段测量见[CPU 优化](docs/acceptance/nr/cpu-scene-preparation.md)。
+反射探针空间候选的范围、结果及恢复见[候选评估](docs/acceptance/nr/probe-spatial-candidates.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。
 加载会话的路径复用、失效及同输入收益见[活动表验证](docs/acceptance/nr/prepared-resource-paths.md)。

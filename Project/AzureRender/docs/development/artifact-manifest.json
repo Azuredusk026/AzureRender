@@ -18,6 +18,17 @@
   },
   "milestones": [
     {
+      "path": "runs/20261107-005507-probe-field-spatial-candidates-382990",
+      "name": "反射探针空间候选评估",
+      "status": "DiagnosticIsolated",
+      "sourceBase": "725dfdd",
+      "evidence": "docs/acceptance/nr/probe-spatial-candidates.md",
+      "candidateAdopted": false,
+      "restoredProgramsByteIdentical": 663,
+      "restoredPlayerCodeSectionIdentical": true,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261106-220323-autonomous-cleanup-performance-70496b",
       "name": "CPU 场景准备集中评估",
       "status": "DiagnosticMeasured",
