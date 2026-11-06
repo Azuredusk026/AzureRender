@@ -216,6 +216,34 @@ int main() {
         auto invalidPose=middle;invalidPose.local[1].opacity=-.1F;
         rejected=false;try{resolveAssetPose(asset,invalidPose);}catch(const std::exception&){rejected=true;}
         check(rejected,"Externally supplied invalid pose opacity must reject");
+
+        for(const auto* input : {&asset,&step,&cubic,&mixedAsset,&signAsset}){
+            PreparedAssetAnimations prepared(*input);
+            for(float time : {-1.F,0.F,.25F,1.F,2.F,5.F})for(bool loop : {false,true}){
+                const auto raw=sampleAnimationPose(*input,0,time,loop);
+                const auto cached=sampleAnimationPose(*input,0,time,loop,&prepared);
+                check(raw.nodeWorldMatrices==cached.nodeWorldMatrices&&raw.nodeWorldOpacities==cached.nodeWorldOpacities
+                    &&raw.jointMatrices==cached.jointMatrices&&raw.morphWeights==cached.morphWeights,"Prepared sample must preserve resolved outputs");
+                for(std::size_t n=0;n<raw.local.size();++n)check(raw.local[n].translation==cached.local[n].translation
+                    &&raw.local[n].rotation==cached.local[n].rotation&&raw.local[n].scale==cached.local[n].scale
+                    &&raw.local[n].opacity==cached.local[n].opacity,"Prepared sample must preserve local outputs");
+            }
+            const std::vector<azurerender::AnimationClipSample> samples{{0,0,.25F,false,2},{0,2,.75F,false,2}};
+            check(sampleAnimationBlend(*input,samples).nodeWorldOpacities==sampleAnimationBlend(*input,samples,&prepared).nodeWorldOpacities,
+                "Prepared weighted samples must preserve hierarchy opacity");
+            bool mismatch=false;auto another=*input;
+            try{(void)sampleAnimationPose(another,0,1,false,&prepared);}catch(const std::invalid_argument&){mismatch=true;}
+            check(mismatch,"Prepared animation must reject another resource binding");
+        }
+        auto editableAsset=asset;PreparedAssetAnimations frozenAnimations(editableAsset);
+        const auto frozenPose=sampleAnimationPose(editableAsset,0,1,false,&frozenAnimations);
+        editableAsset.animations[0].samplers[0].curve.values[0]=std::numeric_limits<float>::quiet_NaN();
+        bool rawRejected=false;try{(void)sampleAnimationPose(editableAsset,0,1,false);}catch(const std::invalid_argument&){rawRejected=true;}
+        check(rawRejected,"Mutable curve sampling must retain full validation");
+        check(sampleAnimationPose(editableAsset,0,1,false,&frozenAnimations).nodeWorldOpacities==frozenPose.nodeWorldOpacities,
+            "Prepared data must own an independent animation snapshot");
+        bool rebuildRejected=false;try{PreparedAssetAnimations invalid(editableAsset);}catch(const std::invalid_argument&){rebuildRejected=true;}
+        check(rebuildRejected,"Rebuilding must validate current curve input");
         std::cout << "Node opacity defaults, hierarchy, sampling, blending, expressions and validation passed\n";
     } catch (const std::exception& error) {
         std::cerr << error.what() << '\n';

@@ -37,6 +37,8 @@ int main(){try{
     auto animated=loadEmbeddedGltfAsset(fixture(8,true).dump());
     require(animated.animations.size()==1,"Weights clip must import");
     const auto middle=sampleAnimationPose(animated,0,1,false);
+    PreparedAssetAnimations prepared(animated);
+    require(sampleAnimationPose(animated,0,1,false,&prepared).morphWeights==middle.morphWeights,"Prepared variable-width weights must match raw sampling");
     require(middle.morphWeights.at(0).at(7)==4,"Variable-width weights must interpolate");
     require(bindAnimationPose(animated).morphWeights.at(0).at(0)==.25F,"Mesh defaults must survive");
     auto defaults=fixture(8);defaults["nodes"][0]["weights"]=std::vector<float>(8,.75F);

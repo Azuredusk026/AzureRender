@@ -553,6 +553,7 @@ private:
     // Loaded bind poses are shared immutable inputs. Animated or edited poses
     // own separate values, while every instance retains its model and GPU slice.
     std::vector<std::shared_ptr<const AssetPose>> loadedBindPoses_;
+    std::vector<PreparedAssetAnimations> loadedAnimations_;
     std::size_t bindPoseCachedCopies_ = 0, bindPoseSharedInstances_ = 0;
     struct SkinningDispatch { std::uint32_t meshKey; SkinningPushConstants parameters; };
     std::vector<SkinningDispatch> skinningDispatches_;

@@ -541,6 +541,9 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         loadedBindPoses_.clear();loadedBindPoses_.reserve(additionalResources_.size()+1);
         loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(asset_)));
         for(const auto& resource:additionalResources_)loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(resource->asset)));
+        loadedAnimations_.clear();loadedAnimations_.reserve(additionalResources_.size()+1);
+        loadedAnimations_.emplace_back(asset_);
+        for(const auto& resource:additionalResources_)loadedAnimations_.emplace_back(resource->asset);
         createUniformBuffers();createJointBuffers();
         if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));
     },true);
@@ -732,12 +735,12 @@ void CharacterSceneRenderer::prepareInstancePoses() {
         std::shared_ptr<const AssetPose> preparedPose;
         auto morph = renderSettings_->morphWeights;
         if (animation != animationFrames_.end()) {
-            writablePose = samplePresentedAnimationPose(mesh,*animation);
+            writablePose = samplePresentedAnimationPose(mesh,*animation,&loadedAnimations_.at(instance.meshKey));
             morph = animation->morph;
             if (instance.meshKey == 0) { animationIndex_ = animation->clip; }
         } else if (!mesh.animations.empty()) {
             writablePose = sampleAnimationPose(mesh, instance.meshKey == 0 ? animationIndex_ : 0,
-                animationTime_);
+                animationTime_,true,&loadedAnimations_.at(instance.meshKey));
         } else {
             if(mesh.morphRanges.empty()||(morph[0]==0.F&&morph[1]==0.F)){
                 preparedPose=loadedBindPoses_.at(instance.meshKey);
@@ -3766,6 +3769,7 @@ void CharacterSceneRenderer::destroyCoveredPrefillPipelines() {
 void CharacterSceneRenderer::destroyResources() {
     destroyCoveredPrefillPipelines();
     loadedResourceMeshKeys_.clear();
+    loadedAnimations_.clear();
     loadedBindPoses_.clear();bindPoseCachedCopies_=0;bindPoseSharedInstances_=0;
     viewFog_.reset();
     destroyMaterialLightingPipelines();

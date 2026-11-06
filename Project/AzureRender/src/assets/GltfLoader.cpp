@@ -3238,21 +3238,43 @@ AssetPose bindAnimationPose(const LoadedAsset& asset) {
     resolvePose(asset, pose);
     return pose;
 }
-AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop) {
-    if (animationIndex >= asset.animations.size()) throw std::runtime_error("Animation index is out of range");
+PreparedAssetAnimations::PreparedAssetAnimations(const LoadedAsset& asset):source_(&asset),animations_(asset.animations){
+    curves_.resize(animations_.size());
+    for(std::size_t c=0;c<animations_.size();++c){
+        auto& prepared=curves_[c];prepared.reserve(animations_[c].samplers.size());
+        for(auto& sampler:animations_[c].samplers){
+            if(sampler.curve.width)prepared.emplace_back(std::in_place,std::move(sampler.curve));
+            else prepared.emplace_back(std::nullopt);
+        }
+    }
+}
+const AssetAnimation& PreparedAssetAnimations::animation(const LoadedAsset& asset,std::size_t index) const {
+    if(source_!=&asset)throw std::invalid_argument("Prepared animation resource binding mismatch");
+    if(index>=animations_.size())throw std::runtime_error("Animation index is out of range");
+    return animations_[index];
+}
+AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop, const PreparedAssetAnimations* prepared) {
+    if (!prepared && animationIndex >= asset.animations.size()) throw std::runtime_error("Animation index is out of range");
     if (!std::isfinite(time)) throw std::invalid_argument("Animation time must be finite");
     // Channels consume local input; the completed sample resolves its hierarchy.
     auto pose = localBindPose(asset);
-    const auto& animation = asset.animations[animationIndex];
+    const auto& animation = prepared ? prepared->animation(asset,animationIndex) : asset.animations[animationIndex];
     const float duration = animation.endTime - animation.startTime;
     const float sampleTime = duration > 1e-8F
         ? animation.startTime + (loop ? std::fmod(std::max(time, 0.0F), duration) : std::clamp(time, 0.0F, duration))
         : animation.startTime;
+    const auto curveSample=[&](std::uint32_t samplerIndex){
+        if(prepared){
+            const auto& curve=prepared->curves_.at(animationIndex).at(samplerIndex);
+            if(curve)return curve->sample(sampleTime);
+        }
+        return sampleCurve(animation.samplers.at(samplerIndex).curve,sampleTime);
+    };
     for (const auto& channel : animation.channels) {
         const auto& sampler = animation.samplers.at(channel.samplerIndex);
-        if(channel.path==AssetAnimationPath::Weights){pose.morphWeights.at(channel.nodeIndex)=sampleCurve(sampler.curve,sampleTime);continue;}
+        if(channel.path==AssetAnimationPath::Weights){pose.morphWeights.at(channel.nodeIndex)=curveSample(channel.samplerIndex);continue;}
         auto value = std::array<float,4>{};
-        if(sampler.curve.width){const auto sampled=sampleCurve(sampler.curve,sampleTime);std::copy(sampled.begin(),sampled.end(),value.begin());}
+        if(sampler.curve.width){const auto sampled=curveSample(channel.samplerIndex);std::copy(sampled.begin(),sampled.end(),value.begin());}
         else value=sampleAnimationSampler(sampler,sampleTime,channel.path==AssetAnimationPath::Rotation);
         auto& node = pose.local.at(channel.nodeIndex);
         if (channel.path == AssetAnimationPath::Opacity) node.opacity=std::clamp(value[0],0.0F,1.0F);

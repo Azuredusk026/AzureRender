@@ -407,12 +407,24 @@ struct AssetPose {
     std::vector<MorphWeightState> morphWeights;
     std::vector<float> nodeWorldOpacities;
 };
+// Immutable clip snapshot, bound to one loaded resource. Rebuild on reload.
+class PreparedAssetAnimations {
+public:
+    explicit PreparedAssetAnimations(const LoadedAsset& asset);
+private:
+    const LoadedAsset* source_;
+    std::vector<AssetAnimation> animations_;
+    std::vector<std::vector<std::optional<PreparedAnimationCurve>>> curves_;
+    const AssetAnimation& animation(const LoadedAsset& asset,std::size_t index) const;
+    friend AssetPose sampleAnimationPose(const LoadedAsset&,std::size_t,float,bool,const PreparedAssetAnimations*);
+    friend AssetPose sampleAnimationBlend(const LoadedAsset&,const std::vector<azurerender::AnimationClipSample>&,const PreparedAssetAnimations*);
+};
 [[nodiscard]] AssetPose bindAnimationPose(const LoadedAsset& asset);
 void resolveAssetPose(const LoadedAsset& asset,AssetPose& pose);
-[[nodiscard]] AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop = true);
+[[nodiscard]] AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop = true, const PreparedAssetAnimations* prepared = nullptr);
 [[nodiscard]] AssetPose blendAnimationPoses(const LoadedAsset& asset, const AssetPose& from, const AssetPose& to, float weight);
 [[nodiscard]] AssetPose sampleAnimationBlend(const LoadedAsset& asset,
-    const std::vector<azurerender::AnimationClipSample>& samples);
+    const std::vector<azurerender::AnimationClipSample>& samples, const PreparedAssetAnimations* prepared = nullptr);
 void sampleAnimation(
     const LoadedAsset& asset,
     std::size_t animationIndex,

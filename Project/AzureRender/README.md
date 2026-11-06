@@ -34,6 +34,9 @@
 动画[局部初始化](docs/acceptance/nr/animation-local-pose.md)通过双配置、姿态及运动检查。
 原生四帧与二百二十次同输入姿态的原字检查通过。
 
+动画[曲线预备采样](docs/acceptance/nr/animation-curve-validation.md)通过双配置及双设备检查。
+同输入采样局部合计均值为 0.431 毫秒，完整帧收益单独验收。
+
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。
 原生姿态、同条件材质对照及 GI 覆盖见[输入核验](docs/acceptance/nr/native-material-input-audit.md)。

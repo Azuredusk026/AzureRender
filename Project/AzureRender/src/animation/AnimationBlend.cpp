@@ -4,14 +4,14 @@
 #include <stdexcept>
 
 AssetPose sampleAnimationBlend(const LoadedAsset& asset,
-        const std::vector<azurerender::AnimationClipSample>& samples){
+        const std::vector<azurerender::AnimationClipSample>& samples,const PreparedAssetAnimations* prepared){
     if(samples.empty()||samples.size()>32)throw std::invalid_argument("Animation blend needs one to 32 samples");
     double total=0;
     for(const auto& sample:samples){
         if(sample.clip>=asset.animations.size()||!std::isfinite(sample.time)||sample.time<0
             ||!std::isfinite(sample.weight)||sample.weight<0||!std::isfinite(sample.duration)||sample.duration<0)
             throw std::invalid_argument("Invalid animation blend sample");
-        const auto& clip=asset.animations[sample.clip];
+        const auto& clip=prepared?prepared->animation(asset,sample.clip):asset.animations[sample.clip];
         const double actual=clip.endTime-clip.startTime;
         if(sample.duration>0&&std::abs(actual-sample.duration)>1e-4*std::max(1.,sample.duration))
             throw std::invalid_argument("Animation blend duration does not match bound clip");
@@ -23,7 +23,7 @@ AssetPose sampleAnimationBlend(const LoadedAsset& asset,
     for(auto& weights:result.morphWeights)std::fill(weights.begin(),weights.end(),0.F);
     for(const auto& sample:samples){
         if(sample.weight==0)continue;
-        const auto pose=sampleAnimationPose(asset,sample.clip,static_cast<float>(sample.time),sample.loop);
+        const auto pose=sampleAnimationPose(asset,sample.clip,static_cast<float>(sample.time),sample.loop,prepared);
         if(reference.empty())for(const auto& node:pose.local)reference.push_back(node.rotation);
         const float weight=static_cast<float>(sample.weight/total);
         for(std::size_t i=0;i<pose.local.size();++i){

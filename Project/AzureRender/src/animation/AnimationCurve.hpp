@@ -3,6 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <vector>
+#include <utility>
 
 enum class CurveInterpolation { Step, Linear, CubicSpline };
 struct AnimationCurve {
@@ -26,8 +27,15 @@ inline void validateCurve(const AnimationCurve& curve) {
         if(length<1e-16F)throw std::invalid_argument("Quaternion key must have nonzero length");
     }
 }
-inline std::vector<float> sampleCurve(const AnimationCurve& curve,float time) {
-    validateCurve(curve);
+// Owns validated input; mutable authoring curves keep the checked entry point.
+class PreparedAnimationCurve {
+public:
+    explicit PreparedAnimationCurve(AnimationCurve curve):curve_(std::move(curve)){validateCurve(curve_);}
+    std::vector<float> sample(float time) const {return interpolate(curve_,time);}
+private:
+    AnimationCurve curve_;
+    friend std::vector<float> sampleCurve(const AnimationCurve&,float);
+    static std::vector<float> interpolate(const AnimationCurve& curve,float time) {
     if(!std::isfinite(time))throw std::invalid_argument("Animation sample time must be finite");
     const std::size_t stride=curve.interpolation==CurveInterpolation::CubicSpline?3:1;
     auto upper=std::upper_bound(curve.times.begin(),curve.times.end(),time);
@@ -58,4 +66,9 @@ inline std::vector<float> sampleCurve(const AnimationCurve& curve,float time) {
     }
     if(curve.rotation){float length=0;for(float v:out)length+=v*v;if(length<1e-16F)throw std::invalid_argument("Interpolated quaternion has zero length");for(float& v:out)v/=std::sqrt(length);}
     return out;
+}
+};
+inline std::vector<float> sampleCurve(const AnimationCurve& curve,float time) {
+    validateCurve(curve);
+    return PreparedAnimationCurve::interpolate(curve,time);
 }
