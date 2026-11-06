@@ -76,7 +76,9 @@ RenderDoc 已接入 NVIDIA 性能计数库。
 GPU P95 为 33.31 毫秒，热状态条件未通过。
 [CPU 长时诊断](cpu-long-run-growth.md)显示输入规模稳定，多个阶段同步变慢。
 高性能进程状态的控制仍未消除后段增长。
-独立研发接续透明准备的同输入局部运算验证。
+[透明准备控制](transparent-world-control.md)的局部均值为 3.937 与 3.663 毫秒。
+约百分之八十二的三角形使用动态姿态。
+独立研发接续稳定深度排序的成本验证。
 场景准备和透明排序按所属阶段继续核对。
 硬件计数使用具备分析权限的运行会话。
 管理员启动方式按 [NVIDIA 权限说明](https://developer.nvidia.com/ERR_NVGPUCTRPERM)执行。

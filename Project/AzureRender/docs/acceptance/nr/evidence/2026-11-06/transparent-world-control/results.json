@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "status": "same-input-control-completed-production-unchanged",
+  "sourceBase": "51ed5cd",
+  "productionAdoption": false,
+  "control": {
+    "status": "measured",
+    "sourceBase": "51ed5cd",
+    "scope": "Same frozen actual frame inputs, alternating order, final index and draw metadata identity; local cost only; private reference and verification overhead in native frame timing",
+    "records": [
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 4.0741,
+        "frame": 310,
+        "referenceFirst": false,
+        "referenceMs": 4.3755,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.8022,
+        "frame": 311,
+        "referenceFirst": true,
+        "referenceMs": 4.042,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 4.145,
+        "frame": 312,
+        "referenceFirst": false,
+        "referenceMs": 3.9108,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.7664,
+        "frame": 313,
+        "referenceFirst": true,
+        "referenceMs": 3.9803,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.9985,
+        "frame": 314,
+        "referenceFirst": false,
+        "referenceMs": 4.224,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.8162,
+        "frame": 315,
+        "referenceFirst": true,
+        "referenceMs": 4.0838,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.682,
+        "frame": 316,
+        "referenceFirst": false,
+        "referenceMs": 4.039,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 4.0935,
+        "frame": 317,
+        "referenceFirst": true,
+        "referenceMs": 4.1325,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.7938,
+        "frame": 318,
+        "referenceFirst": false,
+        "referenceMs": 4.8245,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.5759,
+        "frame": 319,
+        "referenceFirst": true,
+        "referenceMs": 4.1336,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.3285,
+        "frame": 320,
+        "referenceFirst": false,
+        "referenceMs": 3.9099,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.5779,
+        "frame": 321,
+        "referenceFirst": true,
+        "referenceMs": 3.9908,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.4467,
+        "frame": 322,
+        "referenceFirst": false,
+        "referenceMs": 3.7005,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.4823,
+        "frame": 323,
+        "referenceFirst": true,
+        "referenceMs": 3.5352,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.5506,
+        "frame": 324,
+        "referenceFirst": false,
+        "referenceMs": 3.824,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.4679,
+        "frame": 325,
+        "referenceFirst": true,
+        "referenceMs": 3.5692,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.4892,
+        "frame": 326,
+        "referenceFirst": false,
+        "referenceMs": 3.7087,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.3806,
+        "frame": 327,
+        "referenceFirst": true,
+        "referenceMs": 3.6747,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.3632,
+        "frame": 328,
+        "referenceFirst": false,
+        "referenceMs": 3.5861,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      },
+      {
+        "allIndicesAndDrawMetadataIdentical": true,
+        "cachedWorldMs": 3.4276,
+        "frame": 329,
+        "referenceFirst": true,
+        "referenceMs": 3.5013,
+        "staticSharedPoseTriangles": 6989,
+        "triangles": 39431,
+        "uniqueReferencedVertices": 33015,
+        "usedIndices": 118293
+      }
+    ],
+    "means": {
+      "referenceMs": 3.9373199999999997,
+      "cachedWorldMs": 3.6631049999999994,
+      "triangles": 39431.0,
+      "staticSharedPoseTriangles": 6989.0,
+      "uniqueReferencedVertices": 33015.0,
+      "usedIndices": 118293.0
+    }
+  },
+  "privateNative": {
+    "status": "measured",
+    "sourceBase": "51ed5cd",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 131.60899999999674,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.7640218666666665,
+        "p95": 2.9209248,
+        "p99": 3.08857888
+      },
+      "sceneMs": {
+        "mean": 27.906542933333334,
+        "p95": 29.2087808,
+        "p99": 30.138337280000002
+      },
+      "postProcessMs": {
+        "mean": 0.33145173333333333,
+        "p95": 0.342016,
+        "p99": 0.344064
+      },
+      "frameMs": {
+        "mean": 31.002016533333332,
+        "p95": 32.470457599999996,
+        "p99": 33.28602752
+      }
+    },
+    "cpu": {
+      "mean": 20.582219166666682,
+      "p95": 27.77168499999982,
+      "p99": 30.24704400000024
+    },
+    "wait": {
+      "mean": 10.176211666666651,
+      "p95": 13.60592999999958,
+      "p99": 14.790584000000838
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7405207552,
+    "environmentFailures": [
+      "run observation 22: software thermal slowdown is active",
+      "run observation 23: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "instrumented": true,
+    "privateFilesUnchanged": true,
+    "privateFiles": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\transparent-world-control\\source\\CharacterSceneRenderer.cpp": "85ae4f946a4c1cf40d4b27cdfeda0409f28f45fd478dad617f0746911d226790",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\transparent-world-control\\private-link\\AzurePlayer.exe": "e0e545f885266f6e8044b548a0b58f0177c0434a645e91c171e9c420ae641e46"
+    },
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true
+  },
+  "localMeanReductionMs": 0.2742150000000003,
+  "nativeFrameSpeedupQualified": false,
+  "archiveMembers": {
+    "build_transparent_world_control.py": "a9ecd7fb7327ccc502418d12aa1689caea7b77d9fa3a58c957bf919e0b0df9ac",
+    "measure_transparent_world_control.py": "3ada3d26056cf275212cf45577514e22e1bf7c71db7f95ecadafe3aae9cb6b29",
+    "transparent-world-control/build-result.json": "e8a10c4e42302b73a3fbc6b5f1bbf094e465ea6de4d456236a62747c40862319",
+    "transparent-world-control/CharacterSceneRenderer-compile.log": "433e9f4a6b41ecd96f71a6a1eeb6928856178d5cc67836d4506d41b2343bdf3a",
+    "transparent-world-control/compile-results.json": "bdde5cd45d53bd8f57ed0b181c77051dd502d96bbfc58978f01936c600f0bd25",
+    "transparent-world-control/native/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "transparent-world-control/native/control-results.json": "ac6be755714aa59de95abd1a2e496eee3d1d38560c4defa5cc4f5711b47e3cc8",
+    "transparent-world-control/native/environment.json": "2c0917bb39ecf12a920cfcef818c8f8c5c48843edcc29bf41638f475c97f3bf8",
+    "transparent-world-control/native/frozen-inputs.json": "f3ccabb1ffc942ae184deb763f5ddc5a8fe0173348bb4d8070b09a02d9185ade",
+    "transparent-world-control/native/memory.json": "cfe51a4789e4048a7371a3c1feddf267495179f95e132625f258c6f5297d1d13",
+    "transparent-world-control/native/results.json": "ad932439cd1645cad1a74c60b73baf8035f8da1722976b597fe9d3b16cc0e95d",
+    "transparent-world-control/native/runtime.json": "f9f8ddd73694179f6d12db51c9ffa70951c1e5243083c84856f0d4b0391a5e85",
+    "transparent-world-control/native/stderr.log": "340516a0f9480b352873c11d68cb51caa9f0771a79144361d99a3948ce219f01",
+    "transparent-world-control/native/stdout.log": "7ac974439d4200041188e46ea479e8839c73be2abf7989066cb00c7ff79bbb5b",
+    "transparent-world-control/native/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "transparent-world-control/native/task.json": "a3865f44f39e16ddc125b7bed21324f78fc9cc0aa5b144c4138ef348fbaf8c94",
+    "transparent-world-control/native/timing.csv": "bc48cb688f218415644865db754a8a29360df5b8e7f9e1cd9b45122078efc566",
+    "transparent-world-control/native/timing.json": "f5085b4b9c6dab3401db317c4807b6c399d264e0b2b0174dc6730a5a68990f5d",
+    "transparent-world-control/original-compile-commands.json": "67531496ccef4ba52c91a1184efa90fed5d92e4134934d2c776c952520c78275",
+    "transparent-world-control/private-link/link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "transparent-world-control/production-before.json": "d97a3558771e0e1164daff8ef7cd8e26f943fdd1d58c8ec884689c7fcda116e2",
+    "transparent-world-control/source/CharacterSceneRenderer.cpp": "85ae4f946a4c1cf40d4b27cdfeda0409f28f45fd478dad617f0746911d226790"
+  },
+  "archiveSha256": "a2d34439c0eea619d91e3579d5243eac7ace8a9e782c7a78e8f6a3373186d09d"
+}
