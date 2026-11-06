@@ -47,6 +47,11 @@ CPU 使用率约百分之十四，观察期间负载有变化。
 默认上限为八十瓦，两项数据分别解释。
 正式比较继续核对实际功率、背景工作及热状态。
 
+进程观察发现多个后台 Git 差异统计任务。
+部分任务由 `ChatGPT.exe` 启动。
+单项处理器计数接近百分之一百，约占一个逻辑核心。
+记录显示间歇任务，持续影响及长时因果独立核验。
+
 ## 结论与范围
 
 本单元取得官方温度读数及组件依赖证据。
@@ -59,3 +64,4 @@ CPU 热降频、功耗限制及核心调度仍需分别核验。
 [重启检查点](evidence/2026-11-06/thermal-environment/authorized-restart.json)记录授权及安装前状态。
 [安装结果](evidence/2026-11-06/thermal-environment/installation-result.json)记录重启及风扇控制核验。
 [安装归档](evidence/2026-11-06/thermal-environment/installation-measurements.zip)保存实际日志和观察数据。
+[背景进程记录](evidence/2026-11-06/thermal-environment/background-cpu.json)保存查询命令及处理器计数。
