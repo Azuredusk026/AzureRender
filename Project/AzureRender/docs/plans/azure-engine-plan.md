@@ -144,7 +144,8 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 原生四帧逐像素一致，Intel 时间检查及热状态仍未通过。
 [性能归因](../acceptance/nr/performance-bottlenecks.md)取得当前 CPU 阶段记录。
 场景准备均值为 7.11 毫秒，渲染器更新为 10.44 毫秒。
-厂商硬件计数返回零条样本，带宽归因保持待验证。
+厂商硬件计数被[驱动分析权限](../acceptance/nr/evidence/2026-11-06/gpu-counter-permission/results.json)拒绝。
+管理员分析会话等待用户确认，带宽归因继续待验证。
 静态实例的[只读姿态共享](../acceptance/nr/shared-bind-pose.md)通过两配置各三十二项 CPU 检查。
 实际帧有八百六十个共享实例，原生四帧逐像素一致。
 二十四项 GPU 检查中二十二项通过，Intel 时间解析继续待修复。

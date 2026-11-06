@@ -50,7 +50,9 @@ RenderDoc 已接入 NVIDIA 性能计数库。
 混合计数与单独 DRAM 计数均返回零条厂商样本。
 同一重放的通用计时返回三千四百二十四条样本。
 官方 Perf SDK 2025.1 的控制也未取得厂商样本。
-接口未返回有效错误信息，原因继续保留为未确定。
+原生界面复核确认驱动未开启性能分析权限。
+计数会话在 `BeginSession` 阶段被拒绝。
+[权限证据](evidence/2026-11-06/gpu-counter-permission/results.json)保存实际界面的错误文本。
 
 Nsight 的本机接口已完成协议和工具清单查询。
 其实际跟踪启动返回分发后的工具失败。
@@ -70,7 +72,9 @@ Nsight 的本机接口已完成协议和工具清单查询。
 完整画质、CPU、GPU 和长跑条件继续有效。
 
 CPU 后续按场景准备、透明排序及动态姿态求解继续定位。
-硬件计数恢复需有相关工具修正或有效设备变化。
+硬件计数恢复需要具备分析权限的运行会话。
+管理员启动方式按 [NVIDIA 权限说明](https://developer.nvidia.com/ERR_NVGPUCTRPERM)执行。
+管理员提示由用户确认，独立 CPU 工作继续推进。
 方法参考 [NVIDIA Shader Profiler](https://docs.nvidia.com/nsight-graphics/UserGuide/shader-profiler.html)。
 接口诊断参考 [RenderDoc NVIDIA 后端](https://github.com/baldurk/renderdoc/blob/v1.46/renderdoc/driver/ihv/nv/nv_vk_counters.cpp)。
 

@@ -1,0 +1,136 @@
+Window: "current_frame320.rdc - RenderDoc v1.46", App: qrenderdoc.exe.
+	0 窗口 (settable, string) current_frame320.rdc - RenderDoc v1.46 Secondary Actions: Raise ID: MainWindow
+		1 标题栏 (settable, string) Value: current_frame320.rdc - RenderDoc v1.46
+			2 菜单栏 系统 ID: MenuBar
+				3 菜单项 系统
+			4 按钮 最小化
+			5 按钮 最大化
+			6 按钮 关闭
+		1257 组 (settable, string) ID: MainWindow.centralWidget
+			1258 组 (settable, string) ID: MainWindow.centralWidget.toolWindowManager
+				1259 组 (settable, string)
+					1260 自定义 (settable, string)
+						1261 组 (settable, string)
+							1262 自定义 (settable, string)
+								1263 组 (settable, string)
+									1264 组 (settable, string)
+									1265 组 (settable, string)
+										1266 滚动条 (settable, float) Value: 0
+							1267 选项卡 (settable, string) Timeline - Frame #320
+								1268 选项卡项目 (settable, string) Timeline - Frame #320
+						1269 自定义 (settable, string)
+							1270 自定义 (settable, string)
+								1271 组 (settable, string)
+									1272 自定义 (settable, string)
+										1273 自定义 (settable, string)
+											1274 自定义 (settable, string)
+												1275 列表 (settable, string)
+												1276 树 (settable, string)
+													18694 标头 (settable, string) EID
+													18695 标头 (settable, string) Event
+													18696 树项目 (settable, string) 26552
+													18697 树项目 (settable, string) vkQueuePresentKHR({ { Swapchain 151 }, { 1 } })
+												1281 缩略图 (settable, string)
+									1282 选项卡 (settable, string) API Inspector
+										1283 选项卡项目 (settable, string) API Inspector
+								1284 组 (settable, string)
+									1285 自定义 (settable, string)
+										1286 自定义 (settable, string)
+											1287 文本 Controls
+											1288 自定义 (settable, string)
+											1289 按钮 (settable, string)
+											1290 按钮 (settable, string)
+											1291 自定义 (settable, string)
+											1292 复选框 (settable, string)
+											1293 按钮 (settable, string)
+											1294 按钮 (settable, string)
+											1295 按钮 (settable, string)
+											1296 按钮 (settable, string)
+											1297 按钮 (settable, string)
+											1298 组 (settable, string)
+												1299 图像
+												1300 文本 Filter
+												1301 编辑 (settable, string) Value: $action()
+													1302 组 (settable, string)
+													1303 按钮 (settable, string)
+												1304 按钮 (settable, string) Settings & Help
+											1305 组 (settable, string)
+												1306 自定义 (settable, string)
+													1307 按钮 (settable, string) ...
+													1308 按钮 (settable, string)
+												1309 按钮 (settable, string)
+											1310 树 (settable, string)
+												18698 标头 (settable, string) Name
+												18699 标头 (settable, string) EID
+												18700 标头 (settable, string) Action #
+												18701 标头 (settable, string) Duration (µs)
+												18702 标头 (settable, string) Annotation
+												18703 树项目 (settable, string) Frame #320
+												18704 树项目 (settable, string)
+												18705 树项目 (settable, string) Capture Start
+												18706 树项目 (settable, string) 0
+												18707 树项目 (settable, string) Depth-only Pass #1
+												18708 树项目 (settable, string) 1-7056
+												18709 树项目 (settable, string) Depth-only Pass #2
+												18710 树项目 (settable, string) 7058-13099
+												18711 树项目 (settable, string) Depth-only Pass #3
+												18712 树项目 (settable, string) 13100-13169
+												18713 树项目 (settable, string) Colour Pass #1 (1 Targets)
+												18714 树项目 (settable, string) 13170-13832
+												18715 树项目 (settable, string) vkCmdDispatch(512, 512, 1)
+												18716 树项目 (settable, string) 13837
+												18717 树项目 (settable, string) Colour Pass #2 (2 Targets + Depth)
+												18718 树项目 (settable, string) 13838-17196
+												18719 树项目 (settable, string) Colour Pass #3 (1-2 Targets)
+												18720 树项目 (settable, string) 17197-20704
+												18721 树项目 (settable, string) Colour Pass #4 (3 Targets + Depth)
+												18722 树项目 (settable, string) 20706-26526
+									1336 选项卡 (settable, string) Event Browser
+										1337 选项卡项目 (settable, string) Event Browser
+								1338 缩略图 (settable, string)
+							1339 组 (settable, string)
+								1340 自定义 (settable, string)
+									13887 自定义 (settable, string)
+										13888 表格 (settable, string)
+											13889 窗格 (settable, string)
+											13890 标头 (settable, string) EID
+											13891 标头 (settable, string) Source
+											13892 标头 (settable, string) Severity
+											13893 标头 (settable, string) Category
+											13894 标头 (settable, string) ID
+											13895 标头 (settable, string) Description
+											13896 项 (settable, string) 0
+											13897 项 (settable, string) Runtime Warning
+											13898 项 (settable, string) High
+											13899 项 (settable, string) Miscellaneous
+											13900 项 (settable, string) 0
+											13901 项 (settable, string) NVIDIA Nsight Perf SDK NVPERF|ERR|nv::perf::profiler::RangeProfilerVulkan::BeginSession Failed to start profiler session: profiling permissions not enabled. Please follow these instructions: https://developer.nvidia.com/ERR_NVGPUCTRPERM
+											13902 项 (settable, string) 0
+											13903 项 (settable, string) Runtime Warning
+											13904 项 (settable, string) High
+											13905 项 (settable, string) Miscellaneous
+											13906 项 (settable, string) 0
+											13907 项 (settable, string) NVIDIA Nsight Perf SDK NVVulkanCounters::FetchCounters NvPerf failed to start profiling session
+								1382 选项卡 (settable, string) Errors and Warnings
+									1383 选项卡项目 (settable, string) Texture Viewer
+									1384 选项卡项目 (settable, string) Pipeline State
+									1385 选项卡项目 (settable, string) Mesh Viewer
+									1386 选项卡项目 (settable, string) Launch Application
+									5343 选项卡项目 (settable, string) Performance Counter Viewer
+									13908 选项卡项目 (settable, string) Errors and Warnings
+							1387 缩略图 (settable, string)
+						1388 缩略图 (settable, string)
+		1389 菜单栏 (settable, string) ID: MainWindow.menuBar
+			1390 菜单项 (settable, string) File
+			1391 菜单项 (settable, string) Window
+			1392 菜单项 (settable, string) Tools
+			1393 菜单项 (settable, string) Help
+		1394 状态栏 ID: MainWindow.statusBar
+			1395 缩略图 (settable, string)
+			1396 按钮 (disabled, settable, string) Replay Context: Local
+			1397 图像
+			1398 文本 current_frame320.rdc loaded. Capture has 2 issues.
+
+Document text: ```
+$action()
+```

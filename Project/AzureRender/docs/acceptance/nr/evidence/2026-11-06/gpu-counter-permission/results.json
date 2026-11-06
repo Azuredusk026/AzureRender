@@ -1,0 +1,23 @@
+{
+  "status": "blocked-driver-profiling-permission",
+  "observedUtc": "2026-11-06T05:17:55.599693+00:00",
+  "sourceBase": "0694263",
+  "captureSha256": "3f59645268af50b60d0700f147e9c65fde1aa3901ef4c679fe60658a0f639512",
+  "capturePath": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\current-gpu-events\\current_frame320.rdc",
+  "renderdocVersion": "1.46",
+  "counter": "dram__bytes.sum",
+  "vendorSampleCount": 0,
+  "evidence": {
+    "file": "errors-accessibility.txt",
+    "sha256": "9f83301563887d2ee9ab95f5589a74efb0471785162237a8593997ea6a3dee20"
+  },
+  "diagnostics": [
+    "RangeProfilerVulkan::BeginSession: profiling permissions not enabled",
+    "NVVulkanCounters::FetchCounters: failed to start profiling session"
+  ],
+  "source": "Actual native RenderDoc counter selection and Errors and Warnings panel; observed through Windows computer-use accessibility",
+  "applicationClosedAfterInspection": true,
+  "driverSettingsChanged": false,
+  "followUp": "User availability requested for a one-session administrator launch; independent CPU development continues",
+  "officialGuidance": "https://developer.nvidia.com/ERR_NVGPUCTRPERM"
+}
