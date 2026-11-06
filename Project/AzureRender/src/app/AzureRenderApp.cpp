@@ -132,6 +132,7 @@ void AzureRenderApp::run(
     if(!options.editorActionsPath.empty())editorAutomation_=std::make_unique<azurerender::EditorAutomation>(options.editorActionsPath);
 #endif
     resourceLocator_ = azurerender::ResourceLocator(std::filesystem::u8path(options.resourceRoot));
+    sceneResourcePaths_.reset();
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
     azurerender::SceneView sceneView;
     sceneView.assetPath = resourceLocator_.resolveAsset(std::filesystem::u8path(options.assetPath)).u8string();
@@ -512,6 +513,7 @@ void AzureRenderApp::createMultisampleResources(){
     }
 }
 void AzureRenderApp::createSceneRenderer() {
+    sceneResourcePaths_.reset();
     azurerender::RenderContext context;
     buildRenderContext(context);
     createTemporalResources();context.motionOutput=sharedMotion_.get();
@@ -544,9 +546,13 @@ void AzureRenderApp::createSceneRenderer() {
 azurerender::scene::SceneDescription AzureRenderApp::resolveRenderDescription(
     const azurerender::SceneDocument& document) const {
     auto description = document.renderDescription();
-    for (auto& resource : description.resources) {
-        resource.path = resourceLocator_.resolveAsset(std::filesystem::u8path(resource.path)).u8string();
-    }
+    if (!sceneResourcePaths_) sceneResourcePaths_.emplace(resourceLocator_);
+    std::vector<std::string> requested;
+    requested.reserve(description.resources.size());
+    for (const auto& resource : description.resources) requested.push_back(resource.path);
+    auto resolved = sceneResourcePaths_->resolve(requested);
+    for (std::size_t index = 0; index < description.resources.size(); ++index)
+        description.resources[index].path.swap(resolved[index]);
     return description;
 }
 

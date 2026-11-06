@@ -25,6 +25,7 @@
 #include "render/SceneMultisampling.hpp"
 #include "render/TransientResourcePool.hpp"
 #include "resources/ResourceLocator.hpp"
+#include "resources/PreparedResourcePaths.hpp"
 #include "rhi/GpuAllocator.hpp"
 #include "rhi/UploadRingBuffer.hpp"
 #include "rhi/VulkanRhi.hpp"
@@ -336,6 +337,7 @@ private:
     azurerender::RecordingWorkerPool recordingWorkers_{4};
     AzureRenderOptions runOptions_;
     azurerender::ResourceLocator resourceLocator_;
+    mutable std::optional<azurerender::PreparedResourcePaths> sceneResourcePaths_;
     std::string resolvedAssetPath_;
     std::string selectedGpuName_;
     // Byte offsets of this frame's HUD vertex slice inside uploadRing_.

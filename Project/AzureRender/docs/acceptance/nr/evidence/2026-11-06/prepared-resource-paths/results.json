@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 1,
+  "status": "implemented-compatible-local-path-resolution-reduction-global-acceptance-open",
+  "sourceBase": "26a73cb",
+  "productionAdoption": true,
+  "localControl": {
+    "status": "measured",
+    "sourceBase": "26a73cb",
+    "scope": "Same actual scene description inputs, alternating execution order, exact resolved paths; input copies and verification are outside local timers; extra control work in diagnostic native frame times",
+    "records": [
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 310,
+        "preparedMs": 0.4859,
+        "referenceFirst": true,
+        "referenceMs": 3.2845,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 311,
+        "preparedMs": 0.5287,
+        "referenceFirst": false,
+        "referenceMs": 3.4114,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 312,
+        "preparedMs": 0.5162,
+        "referenceFirst": true,
+        "referenceMs": 3.3988,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 313,
+        "preparedMs": 0.6247,
+        "referenceFirst": false,
+        "referenceMs": 3.1961,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 314,
+        "preparedMs": 0.6423,
+        "referenceFirst": true,
+        "referenceMs": 3.3347,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 315,
+        "preparedMs": 0.5085,
+        "referenceFirst": false,
+        "referenceMs": 3.6213,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 316,
+        "preparedMs": 0.5503,
+        "referenceFirst": true,
+        "referenceMs": 3.3948,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 317,
+        "preparedMs": 0.6199,
+        "referenceFirst": false,
+        "referenceMs": 3.5184,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 318,
+        "preparedMs": 0.5256,
+        "referenceFirst": true,
+        "referenceMs": 3.4517,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 319,
+        "preparedMs": 0.5868,
+        "referenceFirst": false,
+        "referenceMs": 3.4114,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 320,
+        "preparedMs": 0.535,
+        "referenceFirst": true,
+        "referenceMs": 3.1424,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 321,
+        "preparedMs": 0.5042,
+        "referenceFirst": false,
+        "referenceMs": 3.5953,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 322,
+        "preparedMs": 0.6154,
+        "referenceFirst": true,
+        "referenceMs": 3.4285,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 323,
+        "preparedMs": 0.6613,
+        "referenceFirst": false,
+        "referenceMs": 3.1688,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 324,
+        "preparedMs": 0.5791,
+        "referenceFirst": true,
+        "referenceMs": 3.4097,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 325,
+        "preparedMs": 0.5042,
+        "referenceFirst": false,
+        "referenceMs": 3.762,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 326,
+        "preparedMs": 0.5542,
+        "referenceFirst": true,
+        "referenceMs": 3.3917,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 327,
+        "preparedMs": 0.5531,
+        "referenceFirst": false,
+        "referenceMs": 3.4521,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 328,
+        "preparedMs": 0.4941,
+        "referenceFirst": true,
+        "referenceMs": 3.6328,
+        "resources": 374
+      },
+      {
+        "allPathsIdentical": true,
+        "callOrdinal": 329,
+        "preparedMs": 0.4988,
+        "referenceFirst": false,
+        "referenceMs": 3.4951,
+        "resources": 374
+      }
+    ],
+    "means": {
+      "referenceMs": 3.4250749999999996,
+      "preparedMs": 0.5544149999999999,
+      "resources": 374.0
+    }
+  },
+  "localSavingMs": 2.87066,
+  "localSavingPercent": 83.81305518857252,
+  "checks": {
+    "release": {
+      "count": 39,
+      "status": "passed",
+      "selectedNames": [
+        "AzureRender.ProjectedReflectionScene",
+        "AzureRender.SceneNodeGrouping",
+        "AzureRender.StaticSkinningRecording",
+        "AzureRender.SkinningBatch",
+        "AzureRender.PrimitiveOpacity",
+        "AzureRender.NodeOpacityRecording",
+        "AzureRender.OutlineCoverageRecording",
+        "AzureRender.MaterialPipelinePolicy",
+        "AzureRender.OpaqueTransparencyScratch",
+        "AzureRender.DepthOnlyShadowRecording",
+        "AzureRender.DepthPrefillRecording",
+        "AzureRender.DepthOnlyPipeline",
+        "AzureRender.BufferBarrierBatch",
+        "AzureRender.MaterialTextureSharing",
+        "AzureRender.MotionRecording",
+        "AzureRender.MotionPoseData",
+        "AzureEngine.SystemComposition",
+        "AzureRender.ObjectShadowAtlas",
+        "AzureRender.ObjectShadowRecording",
+        "AzureEngine.PresentationRuntime",
+        "AzureEngine.ScriptRuntime",
+        "AzureEngine.PlayableQuest",
+        "AzureEngine.LocomotionBlend",
+        "AzureRender.AnimationPose",
+        "AzureRender.NodeOpacity",
+        "AzureAssets.MorphTargets",
+        "AzureRender.StableDepthOrder",
+        "AzureRender.AnimationCurve",
+        "AzureRender.ExpressionPose",
+        "AzureEngine.AssetLevel",
+        "AzureEngine.ProjectStartup",
+        "AzureEngine.LevelRefreshRetirement",
+        "AzureEngine.BuildProvenance",
+        "AzureRender.AssetDeformation",
+        "AzureRender.ResourceLocator",
+        "AzureRender.NullRhiPass",
+        "AzureRuntime.SceneRenderSnapshot",
+        "AzureGame.PlatformerFlow",
+        "AzureEditor.AnimationAuthoring"
+      ]
+    },
+    "debug": {
+      "count": 39,
+      "status": "passed",
+      "selectedNames": [
+        "AzureRender.ProjectedReflectionScene",
+        "AzureRender.SceneNodeGrouping",
+        "AzureRender.StaticSkinningRecording",
+        "AzureRender.SkinningBatch",
+        "AzureRender.PrimitiveOpacity",
+        "AzureRender.NodeOpacityRecording",
+        "AzureRender.OutlineCoverageRecording",
+        "AzureRender.MaterialPipelinePolicy",
+        "AzureRender.OpaqueTransparencyScratch",
+        "AzureRender.DepthOnlyShadowRecording",
+        "AzureRender.DepthPrefillRecording",
+        "AzureRender.DepthOnlyPipeline",
+        "AzureRender.BufferBarrierBatch",
+        "AzureRender.MaterialTextureSharing",
+        "AzureRender.MotionRecording",
+        "AzureRender.MotionPoseData",
+        "AzureEngine.SystemComposition",
+        "AzureRender.ObjectShadowAtlas",
+        "AzureRender.ObjectShadowRecording",
+        "AzureEngine.PresentationRuntime",
+        "AzureEngine.ScriptRuntime",
+        "AzureEngine.PlayableQuest",
+        "AzureEngine.LocomotionBlend",
+        "AzureRender.AnimationPose",
+        "AzureRender.NodeOpacity",
+        "AzureAssets.MorphTargets",
+        "AzureRender.StableDepthOrder",
+        "AzureRender.AnimationCurve",
+        "AzureRender.ExpressionPose",
+        "AzureEngine.AssetLevel",
+        "AzureEngine.ProjectStartup",
+        "AzureEngine.LevelRefreshRetirement",
+        "AzureEngine.BuildProvenance",
+        "AzureRender.AssetDeformation",
+        "AzureRender.ResourceLocator",
+        "AzureRender.NullRhiPass",
+        "AzureRuntime.SceneRenderSnapshot",
+        "AzureGame.PlatformerFlow",
+        "AzureEditor.AnimationAuthoring"
+      ]
+    }
+  },
+  "isolationChecks": "Both configurations passed additional simultaneous live root fixture; runtime executable unchanged",
+  "image": {
+    "status": "passed",
+    "sourceBase": "26a73cb",
+    "executableSha256": "83304ac0a57077d46d45c9a8227093658af2d9aefcbe0564194e157733d46019",
+    "exitCode": 0,
+    "seconds": 171.78100000001723,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Prepared resource path candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "nativeDiagnostic": {
+    "status": "measured",
+    "sourceBase": "26a73cb",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 144.51600000000326,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.8405221333333333,
+        "p95": 2.8902,
+        "p99": 2.9548294399999997
+      },
+      "sceneMs": {
+        "mean": 29.280896,
+        "p95": 30.592512,
+        "p99": 32.2910208
+      },
+      "postProcessMs": {
+        "mean": 0.353408,
+        "p95": 0.354304,
+        "p99": 0.36611072000000006
+      },
+      "frameMs": {
+        "mean": 32.47482613333333,
+        "p95": 33.814641599999995,
+        "p99": 35.47938528
+      }
+    },
+    "cpu": {
+      "mean": 23.060148333333352,
+      "p95": 27.94204000000028,
+      "p99": 29.440743999999803
+    },
+    "wait": {
+      "mean": 9.048729999999981,
+      "p95": 12.442339999999785,
+      "p99": 14.623079000000267
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7405559808,
+    "environmentFailures": [
+      "run observation 24: driver relative thermal headroom is insufficient",
+      "run observation 24: software thermal slowdown is active",
+      "run observation 25: driver relative thermal headroom is insufficient",
+      "run observation 25: software thermal slowdown is active",
+      "run observation 26: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": false,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "instrumented": true,
+    "privateFilesUnchanged": true,
+    "privateFiles": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\prepared-resource-paths\\source\\AzureRenderApp.cpp": "1cf66c82e33dd3d29beeb60aee1c6660e83ede87ecc4f0c518a9f61dd97f58d5",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\prepared-resource-paths\\private-link\\AzurePlayer.exe": "066c2b248fd679fd2f2ec8a15bfd93b732566ec279d7bc9fa12d62f07414e261"
+    },
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true
+  },
+  "verificationNotes": {
+    "initialFixtureFailure": {
+      "exitCode": "0xc0000409",
+      "reason": "Expected UTF-8 file strings contained mixed Windows separators; fixture now compares canonical expected files",
+      "correction": "Normalize expected fixture paths; production path semantics retained"
+    },
+    "releaseChecks": "Explicit throwing checks execute in both Release and Debug",
+    "formalEnvironment": "Thermal and stable power conditions failed; local same-input timing only"
+  },
+  "productionShaders": {
+    "count": 663,
+    "byteIdentical": true
+  },
+  "implementation": {
+    "src/resources/PreparedResourcePaths.hpp": "0bf02be022cf85d122d8ef3dbf6f1e82c4719d8d368c7d83eda94482346b6f4e",
+    "src/app/AzureRenderApp.cpp": "44b4f3466fd1463c51652ecc692e2ee1a0dd19f8f8bd6765e0c29d45895aefcf",
+    "src/app/AzureRenderApp.hpp": "012d53f463983df58fd60fd4f8b095599b89c39829e5617e356987419e23f444",
+    "tests/ResourceLocatorTests.cpp": "9fa9243fb6c4856137e0a8e9a97b3c1d52523f1256c891c3d09b2050c2fafeb6"
+  },
+  "runtimeContract": "A loading-session-owned active table; explicit reload invalidates confirmed paths; direct ResourceLocator checks remain strict; failed batch keeps previous state",
+  "remaining": [
+    "Stable environment after authorized HP SDK installation/restart",
+    "Original CPU P95<=8ms and GPU P95<=16.6ms",
+    "Original user visual acceptance failed-user-review",
+    "Existing Intel TemporalViewGpu zero-history resolve failure",
+    "Original sustained-run and delivery conditions"
+  ],
+  "archive": {
+    "path": "measurements.zip",
+    "sha256": "aaaffbf05a12e35b77f36dfc4833ea68c598824170174869ba5f0a6ee4b4e846",
+    "bytes": 1557857,
+    "members": 65
+  },
+  "sourceFiles": {
+    "build-result.json": "0c8ac009f4d91bb852dcb4bc6c82979d0186bdf59f631c235bc28d1f34cef586",
+    "compile.log": "786f1ff977c62142a90b1e81c8fa69aecc51075828f7360dbf65294577d28426",
+    "engine-debug-build.json": "0baff47fa48572aa3b5c9c449672adac22e5ebcc2fe39915def4a8bc39fa5dfb",
+    "engine-debug-build.log": "ed48e35a48e087834f495e9977379728bb3b358a968da269b0357844c7bb1259",
+    "engine-debug-checks-full.log": "293d84d1cf20659a86605c951f6a5c711bfbc31e28c2276717225de7acf0dbd2",
+    "engine-debug-checks.json": "83ef399791706a04a6a068ea25a8e9925a35324da9fd41192719644b679083b8",
+    "engine-debug-checks.log": "794e87e2d4ab8539abccc132b77e5a6d1ef3adf1ebe58473ed4b6b0ac6009e21",
+    "engine-debug-checks.xml": "0e02f0e9dfdd4a2d2327c937f38f9f90991711b8ee0ae4ef54bd82a570b5b9d6",
+    "engine-debug-provenance.json": "3a4be92244da6c153328b403fc12f1bc6294cc329a8eb618a798bec58abb3fb3",
+    "engine-release-build.json": "dd58a0f3eff5e7be3f221d71ffe2244978db647fc193bbeca4bd3b8fbf6b0960",
+    "engine-release-build.log": "1f6f669d9fc38bb347b1da80533ac7c608c9610694a8c7d4689c2fb4956f11b1",
+    "engine-release-checks-full.log": "d1da4eb8527307de39147d3743b659aa631ff5eeb9379ce5158335e544b7bbb6",
+    "engine-release-checks.json": "f8dc00f6e58899a16cda5f7b3200082015a70de9dfcfc3b9cf4ef789461d03fa",
+    "engine-release-checks.log": "88c9c1c5831073b3ad5e481315faa5e2607546e57bfe2f8895e953973d7ccde7",
+    "engine-release-checks.xml": "daf1be62f65a09bb4af5b75612ec2d617c2b49016e77efb7c6587a45349703e0",
+    "engine-release-provenance.json": "809f1bd159119d12a93828808c9571ce9b72734a62a9191bebee79632a7a08ec",
+    "link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "production-before.json": "eb10f886348918d54a3365e18c15d9f9e9283bdff8c62ab9565d30cf1bc16637",
+    "program-baseline.json": "7793109eea8fbcd49f6aa10a6682a8dca01df2bd7a784f7bfa693eb6ddf9c2ab",
+    "red-control.json": "9dbc9168b8d59f9b0e15efd89c5b02b8e222f953cb1d3dc18823d4eec73d7e5f",
+    "selected.json": "8d48f6d8109bbe1ed06c629b1bd85fe3ab4f2faf0eafb7cbb2de839e5876ece9",
+    "verification-notes.json": "9c2d36fa4620da4b32a95a6cf66c699c1bfd9394e8dc270dfbb3d81ef23124f9",
+    "image/bind-pose-workload.json": "801624fe52377c10ea1fa5ab4a6129d69ddb5c452720fdfc9b747bb7fba19050",
+    "image/command.json": "b5dccd87fd0ecb64dcd9b6ed996fdedff09d14624940c8a66351cab2918e6d7d",
+    "image/frozen-inputs.json": "5eca66b9987097ed5dccdc24bcd99ef3a4ff21c2b1eaea04bb242b2a9bc29757",
+    "image/identity-workload.json": "99835e64bab80baa2120034780f5bbd0e926efc0e5083f09b938e8cf348d2713",
+    "image/results.json": "cfa9723d208b0d1afb32d4db12d16fd0934f24913443ac23696029369c853392",
+    "image/runtime.json": "474e0763a62367f7b466a1dd712e1b21d1b4aec87edffc12f73591dfd6aa7e7b",
+    "image/stderr.log": "32ea6ff3f373f0d5623166b89bf1470c6c0085179dd504041c5d4b0f5ad21235",
+    "image/stdout.log": "3fc23e10da15ca924a288fff2dac3f284bd332b1f50be290f6f401e382eb0685",
+    "image/workload.json": "914510df2c090eb8efc35d59fa5bddb29a5956b573040a1d3e0a90b9b2cbe634",
+    "image/captures/azureplayer.log.jsonl": "f191d6240ec7b336fe76695f8223af034a89c3a1246bbfa1182a1fcffd6c79fd",
+    "image/frames/capture_manifest.json": "128f80d6592d3d4d1c43efb4f40e76ab87678eaf274438113f1a2edea6d42378",
+    "image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "implementation/src/app/AzureRenderApp.cpp": "44b4f3466fd1463c51652ecc692e2ee1a0dd19f8f8bd6765e0c29d45895aefcf",
+    "implementation/src/app/AzureRenderApp.hpp": "012d53f463983df58fd60fd4f8b095599b89c39829e5617e356987419e23f444",
+    "implementation/src/resources/PreparedResourcePaths.hpp": "0bf02be022cf85d122d8ef3dbf6f1e82c4719d8d368c7d83eda94482346b6f4e",
+    "implementation/tests/ResourceLocatorTests.cpp": "9fa9243fb6c4856137e0a8e9a97b3c1d52523f1256c891c3d09b2050c2fafeb6",
+    "isolation-checks/debug-build.log": "5c4ee458eb81f1d5fa00382a1760141c88e684488f53e98be8d115c1680c8622",
+    "isolation-checks/debug-checks-full.log": "b327a9ea2bfa6c873f89f3c81e9480a87c781a03d30886a3ec48a39889a3e9c0",
+    "isolation-checks/debug-checks.log": "42403ad07c05f5687d21e1552810998493a4282526c79fd14bda07fad150a579",
+    "isolation-checks/debug-checks.xml": "9b1a0ea23b321ff2905e38d1efab7d2824cfc217606b5ad50acc942bb615abc2",
+    "isolation-checks/debug-provenance.json": "fd2dde186528dfa747464ada927333688da996096cabe2e1455716ec34445028",
+    "isolation-checks/release-build.log": "3d8e8a0650c5bf2e21351846f5acb9a3f9929825bd173fe32605cf1306c686e6",
+    "isolation-checks/release-checks-full.log": "6711f5545fd21f9e6f87bd189eda5291cdba5edd98aaa6b0f90d6a402f7cbb1e",
+    "isolation-checks/release-checks.log": "da1d76e272a07944b562b1c3bb557b9566d14c9f0b04770b130844424497bf5f",
+    "isolation-checks/release-checks.xml": "91c48cea76905bbf12ef81324cee76c0e11f8a9f810df567f89a167f26ea39b3",
+    "isolation-checks/release-provenance.json": "7b47c0902c07a5d420d3019b7f32328109beb29dd969c063efc4dfe0c3985ff9",
+    "isolation-checks/results.json": "287f6bd6fc30c7743a66e11d24ed126f9108814b559cf65f7408312d94fadee0",
+    "native-local-diagnostic/control-results.json": "f8a65c56a8cd556f1bb213591e1d2da04a616785ea3666db98a2aab11a01f7ff",
+    "native-local-diagnostic/environment.json": "c6de4ef3ce4c690dfff9568d95cb93e64c2731e7bffe40fbb36c0adf6d0da9f8",
+    "native-local-diagnostic/frozen-inputs.json": "7d1afcf9bdcd3cdb534f07ddf5b463199acaddfcc81f3e7297127c4a751854f0",
+    "native-local-diagnostic/memory.json": "fc68b09b85fe0b02e31af63937a252ad58feeda7fad27179f3a4a685ab14efa6",
+    "native-local-diagnostic/results.json": "4e3f6139154aaa1261c903e43b8e7bb2bfd306313d14ebba2b75fe4b3db50904",
+    "native-local-diagnostic/runtime.json": "db8f0f16c548e8e793c5c771e7f078104a24cbdb7a08c31e759216b8b106a13e",
+    "native-local-diagnostic/stderr.log": "55c251002ddedfb4cbf851460fafbd6e302736971192ea0509a4bf1d367701a2",
+    "native-local-diagnostic/stdout.log": "78c06b00ee7d40f8be1d9d9e78da53fdc982d6fc0b34af582c6d4434a3ecf8c9",
+    "native-local-diagnostic/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "native-local-diagnostic/task.json": "79ad9857d0014345fffe11a9c6699308e5a6f2875bd6bf6fc99985b52d570215",
+    "native-local-diagnostic/timing.csv": "42eea01b38ca6a078c47525fc8eabe6a37b435e50371d16f1dc80f41a5f4232b",
+    "native-local-diagnostic/timing.json": "54d8d7ec96756873d49e00d9dcf4e6ee4170b1f8ebec9c50557580e146ee3dbc",
+    "native-local-diagnostic/captures/azureplayer.log.jsonl": "44534a2257677b742ea47e7533e92d57d90f647a37af75f9dce17f8d8d072a5e",
+    "native-local-diagnostic/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "private-link/link.rsp": "af86b3f107fd2c3af8bd38e6e647d7afbe55600437352842e54f8c90bcab6538",
+    "source/AzureRenderApp.cpp": "1cf66c82e33dd3d29beeb60aee1c6660e83ede87ecc4f0c518a9f61dd97f58d5"
+  }
+}

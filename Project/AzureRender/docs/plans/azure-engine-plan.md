@@ -62,6 +62,11 @@ GPU 的[硬件采样](../acceptance/nr/gpu-hardware-counters.md)取得实际指�
 组合局部均值为 4.243 与 2.834 毫秒。
 [厂商环境核验](../acceptance/nr/thermal-environment.md)取得温度及组件依赖证据。
 官方组件已校验，安装及重启等待用户授权。
+
+[活动路径表](../acceptance/nr/prepared-resource-paths.md)通过双配置及原生四帧检查。
+同输入路径解析均值为 3.425 与 0.554 毫秒。
+正式整帧及热状态仍由原门槛独立验收。
+
 反射依赖等待、峰值吞吐及正式帧预算各自独立验收。
 
 动画的[预备曲线](../acceptance/nr/animation-curve-validation.md)通过双配置及双设备检查。
