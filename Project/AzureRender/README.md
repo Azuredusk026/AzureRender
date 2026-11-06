@@ -16,6 +16,7 @@
 场景快照复用、摄像机准备及阶段测量见[CPU 优化](docs/acceptance/nr/cpu-scene-preparation.md)。
 反射探针空间候选的范围、结果及恢复见[候选评估](docs/acceptance/nr/probe-spatial-candidates.md)。
 场景变换与透明缓存的隔离结果见[准备评估](docs/acceptance/nr/static-transparent-preparation.md)。
+当前子阶段及实际资源控制见[CPU 热点](docs/acceptance/nr/cpu-substage-update.md)。
 当前验收的持续执行顺序见[自主执行](docs/plans/2026-11-07-autonomous-acceptance.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。

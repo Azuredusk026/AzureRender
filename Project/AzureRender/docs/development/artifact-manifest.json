@@ -18,6 +18,14 @@
   },
   "milestones": [
     {
+      "path": "runs/20261107-024335-current-cpu-hotspots-5b7d2c",
+      "name": "当前 CPU 子阶段定位",
+      "status": "DiagnosticMeasured",
+      "sourceBase": "cb82fcf",
+      "evidence": "docs/acceptance/nr/cpu-substage-update.md",
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261107-013603-static-transparent-preparation-049ee8",
       "name": "场景变换与透明准备评估",
       "status": "DiagnosticIsolated",
