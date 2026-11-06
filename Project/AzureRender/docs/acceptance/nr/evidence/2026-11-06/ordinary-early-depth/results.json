@@ -1,0 +1,191 @@
+{
+  "status": "isolated",
+  "sourceBase": "f224da9",
+  "nativeImage": {
+    "status": "passed",
+    "sourceBase": "f224da9",
+    "executableSha256": "c40007e9ba385c14e3137444b2788b382a5f0b4197e50e37b917a05ba15a4d32",
+    "exitCode": 0,
+    "seconds": 138.01500000001397,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "defaultProductionShaders535ByteIdentical": true,
+    "earlyPrograms128MatchRecordedSource": true,
+    "productionShaderCount": 663,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Ordinary opaque explicit early-depth candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "nativeTiming": {
+    "status": "measured",
+    "sourceBase": "f224da9",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 109.31199999997625,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.5610650666666666,
+        "p95": 2.6320384,
+        "p99": 2.65651808
+      },
+      "sceneMs": {
+        "mean": 25.38409813333333,
+        "p95": 26.40128,
+        "p99": 26.77777408
+      },
+      "postProcessMs": {
+        "mean": 0.28985173333333336,
+        "p95": 0.30208,
+        "p99": 0.30495743999999997
+      },
+      "frameMs": {
+        "mean": 28.235014933333332,
+        "p95": 29.3068624,
+        "p99": 29.711804800000003
+      }
+    },
+    "cpu": {
+      "mean": 19.500344166666654,
+      "p95": 21.865360000000127,
+      "p99": 25.78805500000039
+    },
+    "wait": {
+      "mean": 8.598718333333345,
+      "p95": 10.20414500000029,
+      "p99": 10.843516999999789
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7402786816,
+    "environmentFailures": [
+      "run observation 19: driver relative thermal headroom is insufficient",
+      "run observation 19: software thermal slowdown is active",
+      "run observation 20: driver relative thermal headroom is insufficient",
+      "run observation 20: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchangedDuringRun": true,
+    "timingBenefitQualified": false,
+    "timingScope": "Current candidate only; no paired timing benefit or original1800sample acceptance claim"
+  },
+  "restoredIntelTemporalControl": {
+    "command": [
+      "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+      "--test-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+      "-R",
+      "^AzureRender.TemporalViewGpu$",
+      "--output-on-failure",
+      "--no-tests=error",
+      "--output-junit",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\ordinary-early-depth\\restored-gpu-link\\intel-temporal-control.xml"
+    ],
+    "exitCode": 8,
+    "seconds": 10.655999999959022,
+    "filter": "*igvk64*",
+    "gpuTestExecutableSha256": "6c80ae0bb92e2319d844593227dcb3abd8c116c7a774a62c87a61d126f6f9026",
+    "scope": "Actual restored runtime and GPU fixture both rebuilt; original 535shader controls; prior setup failures retained separately"
+  },
+  "productionSourceInputs1603ByteIdentical": true,
+  "restoredCpuChecksPerConfiguration": 32,
+  "restoredGpuFixturesRebuilt": true,
+  "candidateDebugGpuNotRun": true,
+  "visualAcceptance": "failed-user-review",
+  "timingBenefitQualified": false,
+  "archive": {
+    "path": "measurements.zip",
+    "bytes": 1625944,
+    "sha256": "aa3e8c7dd368ed83612ad2a5299c58514b54decf6f701c2c61fe8c6e5808fc44",
+    "members": 116,
+    "memberHashesVerified": true
+  }
+}

@@ -1,0 +1,1589 @@
+{
+  "status": "diagnosed-with-hardware-counter-limitation",
+  "sourceBase": "f224da9",
+  "cpuStages": {
+    "status": "measured-stage-diagnostic",
+    "sourceBase": "f224da9-with-ordinary-early-depth-candidate",
+    "instrumented": true,
+    "productionAdoption": false,
+    "scope": "20steady frames310..329; scene preparation and renderer-update subphases belong to corresponding host buckets; logging overhead exists; frameindex derives from fixed-step time*captureFps+1; instance and pose loops include local per-instance timing overhead; diagnostic only",
+    "groups": {
+      "scene-preparation": {
+        "cameraMs": {
+          "mean": 0.9966,
+          "p95": 1.13772,
+          "p99": 1.3280239999999996
+        },
+        "materializeAndResourcesMs": {
+          "mean": 2.897585,
+          "p95": 3.1009700000000002,
+          "p99": 3.1917139999999997
+        },
+        "remainingPrepareMs": {
+          "mean": 0.28251,
+          "p95": 0.38028500000000004,
+          "p99": 0.41349699999999995
+        },
+        "sceneSnapshotMs": {
+          "mean": 1.71818,
+          "p95": 2.0201300000000004,
+          "p99": 2.104186
+        },
+        "simulationAndInputMs": {
+          "mean": 0.932105,
+          "p95": 1.303945,
+          "p99": 1.3775889999999997
+        }
+      },
+      "pose-preparation": {
+        "animationLookupMs": {
+          "mean": 0.0279449999999999,
+          "p95": 0.03146999999999989,
+          "p99": 0.03405399999999994
+        },
+        "boundsMs": {
+          "mean": 0.16371000000000108,
+          "p95": 0.19178499999999965,
+          "p99": 0.20827699999999846
+        },
+        "dispatchPreparationMs": {
+          "mean": 0.06051000000000066,
+          "p95": 0.06544500000000078,
+          "p99": 0.06612900000000069
+        },
+        "finalFlushMs": {
+          "mean": 0.000875,
+          "p95": 0.001205,
+          "p99": 0.0012809999999999998
+        },
+        "poseSamplingMs": {
+          "mean": 2.3370000000000006,
+          "p95": 2.5676750000000013,
+          "p99": 2.751215000000001
+        },
+        "setupMs": {
+          "mean": 0.10598,
+          "p95": 0.12090500000000001,
+          "p99": 0.131621
+        },
+        "totalMs": {
+          "mean": 2.74621,
+          "p95": 2.97673,
+          "p99": 3.1808659999999995
+        },
+        "weightsAndJointUploadMs": {
+          "mean": 0.027294999999999903,
+          "p95": 0.030869999999999877,
+          "p99": 0.03193399999999989
+        }
+      },
+      "instance-rebuild": {
+        "boundsSetupMs": {
+          "mean": 0.092485,
+          "p95": 0.157715,
+          "p99": 0.167063
+        },
+        "gpuCullingPreparationMs": {
+          "mean": 0.067945,
+          "p95": 0.08429500000000001,
+          "p99": 0.08877899999999998
+        },
+        "instanceUploadMs": {
+          "mean": 0.16565,
+          "p95": 0.18492499999999998,
+          "p99": 0.18986499999999998
+        },
+        "materialOriginsMs": {
+          "mean": 0.0174,
+          "p95": 0.02538,
+          "p99": 0.026595999999999998
+        },
+        "nodeGroupingMs": {
+          "mean": 0.687895,
+          "p95": 0.7752450000000001,
+          "p99": 0.795689
+        },
+        "posesMs": {
+          "mean": 3.045065,
+          "p95": 3.515165,
+          "p99": 3.8262329999999993
+        },
+        "totalMs": {
+          "mean": 4.157435,
+          "p95": 4.7582450000000005,
+          "p99": 4.941329
+        },
+        "visibilityAndObjectsMs": {
+          "mean": 0.080995,
+          "p95": 0.09984000000000001,
+          "p99": 0.10500799999999999
+        }
+      },
+      "renderer-update": {
+        "copyInputMs": {
+          "mean": 0.067815,
+          "p95": 0.089025,
+          "p99": 0.10460499999999998
+        },
+        "immutableSnapshotMs": {
+          "mean": 0.04779,
+          "p95": 0.05979,
+          "p99": 0.061158
+        },
+        "instancesMs": {
+          "mean": 4.358915,
+          "p95": 5.0223,
+          "p99": 5.215339999999999
+        },
+        "motionMs": {
+          "mean": 1.15475,
+          "p95": 1.269595,
+          "p99": 1.3075189999999999
+        },
+        "outlineResourcesMs": {
+          "mean": 0.028075,
+          "p95": 0.03488,
+          "p99": 0.03913599999999999
+        },
+        "recordingPreparationMs": {
+          "mean": 0.09182,
+          "p95": 0.10748,
+          "p99": 0.11325599999999998
+        },
+        "sceneStateMs": {
+          "mean": 0.062275000000000004,
+          "p95": 0.088825,
+          "p99": 0.090725
+        },
+        "transparentMs": {
+          "mean": 3.58928,
+          "p95": 3.85177,
+          "p99": 3.886274
+        },
+        "uniformsMs": {
+          "mean": 0.794675,
+          "p95": 0.8744850000000001,
+          "p99": 0.8833770000000001
+        }
+      },
+      "host-frame": {
+        "framePrepareMs": {
+          "mean": 7.105465,
+          "p95": 7.511415,
+          "p99": 7.618043
+        },
+        "frameSnapshotMs": {
+          "mean": 0.00177,
+          "p95": 0.0022050000000000004,
+          "p99": 0.002281
+        },
+        "hostSyncMs": {
+          "mean": 0.404965,
+          "p95": 0.55459,
+          "p99": 0.6015579999999999
+        },
+        "levelPollMs": {
+          "mean": 0.012785000000000001,
+          "p95": 0.013560000000000159,
+          "p99": 0.18167199999999972
+        },
+        "lutMs": {
+          "mean": 0.02059,
+          "p95": 0.029720000000000024,
+          "p99": 0.05890399999999994
+        },
+        "miscBeforeRecordMs": {
+          "mean": 0.026245,
+          "p95": 0.03498,
+          "p99": 0.03771599999999999
+        },
+        "recordMs": {
+          "mean": 3.337335,
+          "p95": 3.696885,
+          "p99": 3.8304169999999997
+        },
+        "rendererUpdateMs": {
+          "mean": 10.438835000000001,
+          "p95": 11.324240000000001,
+          "p99": 11.346128
+        }
+      }
+    },
+    "rawRows": [
+      {
+        "cameraMs": 0.9707,
+        "frame": 310,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9182,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3093,
+        "resources": 374,
+        "sceneSnapshotMs": 1.8347,
+        "simulationAndInputMs": 0.8372
+      },
+      {
+        "animationLookupMs": 0.025799999999999906,
+        "boundsMs": 0.15340000000000165,
+        "dispatchPreparationMs": 0.05950000000000064,
+        "finalFlushMs": 0.001,
+        "frame": 310,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.555600000000001,
+        "setupMs": 0.1195,
+        "totalMs": 2.9633,
+        "weightsAndJointUploadMs": 0.0275999999999999
+      },
+      {
+        "boundsSetupMs": 0.0792,
+        "frame": 310,
+        "gpuCullingPreparationMs": 0.0781,
+        "instanceUploadMs": 0.1769,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0182,
+        "nodeGroupingMs": 0.7394,
+        "posesMs": 3.2364,
+        "totalMs": 4.4195,
+        "visibilityAndObjectsMs": 0.0913
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0774,
+        "frame": 310,
+        "immutableSnapshotMs": 0.0541,
+        "instancesMs": 4.6272,
+        "kind": "renderer-update",
+        "motionMs": 1.1751,
+        "outlineResourcesMs": 0.0253,
+        "recordingPreparationMs": 0.086,
+        "sceneStateMs": 0.0912,
+        "transparentMs": 3.5314,
+        "uniformsMs": 0.8856
+      },
+      {
+        "frame": 310,
+        "framePrepareMs": 7.1837,
+        "frameSnapshotMs": 0.0022,
+        "hostSyncMs": 0.3536,
+        "kind": "host-frame",
+        "levelPollMs": 0.0015,
+        "lutMs": 0.0199,
+        "miscBeforeRecordMs": 0.0221,
+        "recordMs": 3.2779,
+        "rendererUpdateMs": 10.7829
+      },
+      {
+        "cameraMs": 1.0346,
+        "frame": 311,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.095,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3245,
+        "resources": 374,
+        "sceneSnapshotMs": 1.8299,
+        "simulationAndInputMs": 0.9128
+      },
+      {
+        "animationLookupMs": 0.02989999999999988,
+        "boundsMs": 0.17040000000000136,
+        "dispatchPreparationMs": 0.06540000000000079,
+        "finalFlushMs": 0.001,
+        "frame": 311,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.7971000000000013,
+        "setupMs": 0.1201,
+        "totalMs": 3.2319,
+        "weightsAndJointUploadMs": 0.02619999999999991
+      },
+      {
+        "boundsSetupMs": 0.0996,
+        "frame": 311,
+        "gpuCullingPreparationMs": 0.0671,
+        "instanceUploadMs": 0.1846,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0168,
+        "nodeGroupingMs": 0.8008,
+        "posesMs": 3.4947,
+        "totalMs": 4.7462,
+        "visibilityAndObjectsMs": 0.0826
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0757,
+        "frame": 311,
+        "immutableSnapshotMs": 0.0515,
+        "instancesMs": 5.0096,
+        "kind": "renderer-update",
+        "motionMs": 1.1502,
+        "outlineResourcesMs": 0.0251,
+        "recordingPreparationMs": 0.1071,
+        "sceneStateMs": 0.0854,
+        "transparentMs": 3.7766,
+        "uniformsMs": 0.8331
+      },
+      {
+        "frame": 311,
+        "framePrepareMs": 7.4513,
+        "frameSnapshotMs": 0.0019,
+        "hostSyncMs": 0.3773,
+        "kind": "host-frame",
+        "levelPollMs": 0.0017,
+        "lutMs": 0.0195,
+        "miscBeforeRecordMs": 0.0225,
+        "recordMs": 3.4187,
+        "rendererUpdateMs": 11.3516
+      },
+      {
+        "cameraMs": 1.0247,
+        "frame": 312,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.049,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3204,
+        "resources": 374,
+        "sceneSnapshotMs": 1.7677,
+        "simulationAndInputMs": 0.8754
+      },
+      {
+        "animationLookupMs": 0.031299999999999883,
+        "boundsMs": 0.1560000000000016,
+        "dispatchPreparationMs": 0.05950000000000066,
+        "finalFlushMs": 0.0006,
+        "frame": 312,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.4282000000000004,
+        "setupMs": 0.1122,
+        "totalMs": 2.8357,
+        "weightsAndJointUploadMs": 0.025999999999999905
+      },
+      {
+        "boundsSetupMs": 0.0807,
+        "frame": 312,
+        "gpuCullingPreparationMs": 0.0755,
+        "instanceUploadMs": 0.1675,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0253,
+        "nodeGroupingMs": 0.6839,
+        "posesMs": 3.0311,
+        "totalMs": 4.1443,
+        "visibilityAndObjectsMs": 0.0803
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0842,
+        "frame": 312,
+        "immutableSnapshotMs": 0.0485,
+        "instancesMs": 4.476,
+        "kind": "renderer-update",
+        "motionMs": 1.1721,
+        "outlineResourcesMs": 0.0234,
+        "recordingPreparationMs": 0.084,
+        "sceneStateMs": 0.0614,
+        "transparentMs": 3.7997,
+        "uniformsMs": 0.7541
+      },
+      {
+        "frame": 312,
+        "framePrepareMs": 7.2545,
+        "frameSnapshotMs": 0.0022,
+        "hostSyncMs": 0.4293,
+        "kind": "host-frame",
+        "levelPollMs": 0.0015,
+        "lutMs": 0.016,
+        "miscBeforeRecordMs": 0.034,
+        "recordMs": 3.8638,
+        "rendererUpdateMs": 10.7167
+      },
+      {
+        "cameraMs": 0.9995,
+        "frame": 313,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7968,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3169,
+        "resources": 374,
+        "sceneSnapshotMs": 1.6859,
+        "simulationAndInputMs": 0.8635
+      },
+      {
+        "animationLookupMs": 0.022799999999999928,
+        "boundsMs": 0.1520000000000017,
+        "dispatchPreparationMs": 0.06200000000000068,
+        "finalFlushMs": 0.0011,
+        "frame": 313,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.3240000000000007,
+        "setupMs": 0.0939,
+        "totalMs": 2.7059,
+        "weightsAndJointUploadMs": 0.02829999999999991
+      },
+      {
+        "boundsSetupMs": 0.0769,
+        "frame": 313,
+        "gpuCullingPreparationMs": 0.068,
+        "instanceUploadMs": 0.173,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0166,
+        "nodeGroupingMs": 0.6415,
+        "posesMs": 2.9896,
+        "totalMs": 4.0411,
+        "visibilityAndObjectsMs": 0.0755
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0715,
+        "frame": 313,
+        "immutableSnapshotMs": 0.0388,
+        "instancesMs": 4.2065,
+        "kind": "renderer-update",
+        "motionMs": 1.1715,
+        "outlineResourcesMs": 0.0265,
+        "recordingPreparationMs": 0.0854,
+        "sceneStateMs": 0.0492,
+        "transparentMs": 3.4662,
+        "uniformsMs": 0.8516
+      },
+      {
+        "frame": 313,
+        "framePrepareMs": 6.9435,
+        "frameSnapshotMs": 0.0015,
+        "hostSyncMs": 0.313,
+        "kind": "host-frame",
+        "levelPollMs": 0.0017,
+        "lutMs": 0.0175,
+        "miscBeforeRecordMs": 0.0219,
+        "recordMs": 3.2095,
+        "rendererUpdateMs": 10.1796
+      },
+      {
+        "cameraMs": 1.0162,
+        "frame": 314,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.0027,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.4218,
+        "resources": 374,
+        "sceneSnapshotMs": 1.7965,
+        "simulationAndInputMs": 0.8793
+      },
+      {
+        "animationLookupMs": 0.030099999999999884,
+        "boundsMs": 0.17420000000000052,
+        "dispatchPreparationMs": 0.06280000000000073,
+        "finalFlushMs": 0.0012,
+        "frame": 314,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.223700000000001,
+        "setupMs": 0.1178,
+        "totalMs": 2.6731,
+        "weightsAndJointUploadMs": 0.026199999999999907
+      },
+      {
+        "boundsSetupMs": 0.1571,
+        "frame": 314,
+        "gpuCullingPreparationMs": 0.084,
+        "instanceUploadMs": 0.1911,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0164,
+        "nodeGroupingMs": 0.7739,
+        "posesMs": 2.9523,
+        "totalMs": 4.2546,
+        "visibilityAndObjectsMs": 0.0798
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0877,
+        "frame": 314,
+        "immutableSnapshotMs": 0.0507,
+        "instancesMs": 4.4736,
+        "kind": "renderer-update",
+        "motionMs": 1.2454,
+        "outlineResourcesMs": 0.0402,
+        "recordingPreparationMs": 0.0978,
+        "sceneStateMs": 0.053,
+        "transparentMs": 3.6367,
+        "uniformsMs": 0.8409
+      },
+      {
+        "frame": 314,
+        "framePrepareMs": 7.4062,
+        "frameSnapshotMs": 0.0017,
+        "hostSyncMs": 0.3778,
+        "kind": "host-frame",
+        "levelPollMs": 0.0019,
+        "lutMs": 0.0184,
+        "miscBeforeRecordMs": 0.0384,
+        "recordMs": 3.3002,
+        "rendererUpdateMs": 10.7756
+      },
+      {
+        "cameraMs": 0.9868,
+        "frame": 315,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9007,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2785,
+        "resources": 374,
+        "sceneSnapshotMs": 1.7867,
+        "simulationAndInputMs": 0.9592
+      },
+      {
+        "animationLookupMs": 0.03469999999999995,
+        "boundsMs": 0.16400000000000148,
+        "dispatchPreparationMs": 0.0618000000000007,
+        "finalFlushMs": 0.0009,
+        "frame": 315,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.3617000000000017,
+        "setupMs": 0.1009,
+        "totalMs": 2.7737,
+        "weightsAndJointUploadMs": 0.0270999999999999
+      },
+      {
+        "boundsSetupMs": 0.0796,
+        "frame": 315,
+        "gpuCullingPreparationMs": 0.062,
+        "instanceUploadMs": 0.1769,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.017,
+        "nodeGroupingMs": 0.7232,
+        "posesMs": 3.0502,
+        "totalMs": 4.1881,
+        "visibilityAndObjectsMs": 0.0792
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0552,
+        "frame": 315,
+        "immutableSnapshotMs": 0.0562,
+        "instancesMs": 4.3857,
+        "kind": "renderer-update",
+        "motionMs": 1.2237,
+        "outlineResourcesMs": 0.028,
+        "recordingPreparationMs": 0.0916,
+        "sceneStateMs": 0.0497,
+        "transparentMs": 3.6695,
+        "uniformsMs": 0.763
+      },
+      {
+        "frame": 315,
+        "framePrepareMs": 7.1637,
+        "frameSnapshotMs": 0.0017,
+        "hostSyncMs": 0.3156,
+        "kind": "host-frame",
+        "levelPollMs": 0.0018,
+        "lutMs": 0.017,
+        "miscBeforeRecordMs": 0.0237,
+        "recordMs": 3.5295,
+        "rendererUpdateMs": 10.5783
+      },
+      {
+        "cameraMs": 1.0469,
+        "frame": 316,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7199,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3149,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5696,
+        "simulationAndInputMs": 0.8328
+      },
+      {
+        "animationLookupMs": 0.03059999999999988,
+        "boundsMs": 0.2123999999999982,
+        "dispatchPreparationMs": 0.06630000000000066,
+        "finalFlushMs": 0.0009,
+        "frame": 316,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.4433000000000007,
+        "setupMs": 0.1202,
+        "totalMs": 2.9233,
+        "weightsAndJointUploadMs": 0.027699999999999895
+      },
+      {
+        "boundsSetupMs": 0.1694,
+        "frame": 316,
+        "gpuCullingPreparationMs": 0.0658,
+        "instanceUploadMs": 0.1623,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0164,
+        "nodeGroupingMs": 0.7146,
+        "posesMs": 3.1779,
+        "totalMs": 4.3878,
+        "visibilityAndObjectsMs": 0.0814
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.088,
+        "frame": 316,
+        "immutableSnapshotMs": 0.0615,
+        "instancesMs": 4.5663,
+        "kind": "renderer-update",
+        "motionMs": 1.1849,
+        "outlineResourcesMs": 0.0285,
+        "recordingPreparationMs": 0.0926,
+        "sceneStateMs": 0.0774,
+        "transparentMs": 3.7661,
+        "uniformsMs": 0.8535
+      },
+      {
+        "frame": 316,
+        "framePrepareMs": 6.755,
+        "frameSnapshotMs": 0.0018,
+        "hostSyncMs": 0.3272,
+        "kind": "host-frame",
+        "levelPollMs": 0.0017,
+        "lutMs": 0.0177,
+        "miscBeforeRecordMs": 0.0235,
+        "recordMs": 3.6881,
+        "rendererUpdateMs": 10.9703
+      },
+      {
+        "cameraMs": 0.9051,
+        "frame": 317,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6652,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2328,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5832,
+        "simulationAndInputMs": 0.772
+      },
+      {
+        "animationLookupMs": 0.031099999999999902,
+        "boundsMs": 0.1481000000000015,
+        "dispatchPreparationMs": 0.056500000000000536,
+        "finalFlushMs": 0.0008,
+        "frame": 317,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.3038,
+        "setupMs": 0.1005,
+        "totalMs": 2.6874,
+        "weightsAndJointUploadMs": 0.025299999999999913
+      },
+      {
+        "boundsSetupMs": 0.0855,
+        "frame": 317,
+        "gpuCullingPreparationMs": 0.0584,
+        "instanceUploadMs": 0.1641,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0192,
+        "nodeGroupingMs": 0.7265,
+        "posesMs": 2.9832,
+        "totalMs": 4.1432,
+        "visibilityAndObjectsMs": 0.1063
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0676,
+        "frame": 317,
+        "immutableSnapshotMs": 0.0537,
+        "instancesMs": 4.3617,
+        "kind": "renderer-update",
+        "motionMs": 1.0832,
+        "outlineResourcesMs": 0.023,
+        "recordingPreparationMs": 0.0864,
+        "sceneStateMs": 0.0624,
+        "transparentMs": 3.5502,
+        "uniformsMs": 0.7709
+      },
+      {
+        "frame": 317,
+        "framePrepareMs": 6.4682,
+        "frameSnapshotMs": 0.0018,
+        "hostSyncMs": 0.4129,
+        "kind": "host-frame",
+        "levelPollMs": 0.0015,
+        "lutMs": 0.0662,
+        "miscBeforeRecordMs": 0.0348,
+        "recordMs": 3.4246,
+        "rendererUpdateMs": 10.2651
+      },
+      {
+        "cameraMs": 1.1252,
+        "frame": 318,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9806,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3132,
+        "resources": 374,
+        "sceneSnapshotMs": 2.0146,
+        "simulationAndInputMs": 0.9768
+      },
+      {
+        "animationLookupMs": 0.027499999999999896,
+        "boundsMs": 0.16990000000000088,
+        "dispatchPreparationMs": 0.06520000000000081,
+        "finalFlushMs": 0.0013,
+        "frame": 318,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.316900000000001,
+        "setupMs": 0.1022,
+        "totalMs": 2.7281,
+        "weightsAndJointUploadMs": 0.025799999999999906
+      },
+      {
+        "boundsSetupMs": 0.1404,
+        "frame": 318,
+        "gpuCullingPreparationMs": 0.0631,
+        "instanceUploadMs": 0.1523,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0155,
+        "nodeGroupingMs": 0.6421,
+        "posesMs": 2.9402,
+        "totalMs": 4.037,
+        "visibilityAndObjectsMs": 0.0834
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0765,
+        "frame": 318,
+        "immutableSnapshotMs": 0.0454,
+        "instancesMs": 4.1995,
+        "kind": "renderer-update",
+        "motionMs": 1.1292,
+        "outlineResourcesMs": 0.0335,
+        "recordingPreparationMs": 0.0917,
+        "sceneStateMs": 0.0507,
+        "transparentMs": 3.4266,
+        "uniformsMs": 0.7566
+      },
+      {
+        "frame": 318,
+        "framePrepareMs": 7.6447,
+        "frameSnapshotMs": 0.0023,
+        "hostSyncMs": 0.4921,
+        "kind": "host-frame",
+        "levelPollMs": 0.0018,
+        "lutMs": 0.0163,
+        "miscBeforeRecordMs": 0.0238,
+        "recordMs": 3.4976,
+        "rendererUpdateMs": 10.0429
+      },
+      {
+        "cameraMs": 0.9828,
+        "frame": 319,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.0511,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2317,
+        "resources": 374,
+        "sceneSnapshotMs": 1.8708,
+        "simulationAndInputMs": 0.8869
+      },
+      {
+        "animationLookupMs": 0.027299999999999894,
+        "boundsMs": 0.15530000000000171,
+        "dispatchPreparationMs": 0.05950000000000065,
+        "finalFlushMs": 0.0009,
+        "frame": 319,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.2951000000000006,
+        "setupMs": 0.0979,
+        "totalMs": 2.6917,
+        "weightsAndJointUploadMs": 0.030799999999999876
+      },
+      {
+        "boundsSetupMs": 0.079,
+        "frame": 319,
+        "gpuCullingPreparationMs": 0.0899,
+        "instanceUploadMs": 0.1524,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0165,
+        "nodeGroupingMs": 0.6789,
+        "posesMs": 2.9304,
+        "totalMs": 4.0234,
+        "visibilityAndObjectsMs": 0.0763
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0584,
+        "frame": 319,
+        "immutableSnapshotMs": 0.0405,
+        "instancesMs": 4.2147,
+        "kind": "renderer-update",
+        "motionMs": 1.2671,
+        "outlineResourcesMs": 0.0267,
+        "recordingPreparationMs": 0.0885,
+        "sceneStateMs": 0.0516,
+        "transparentMs": 3.4557,
+        "uniformsMs": 0.7916
+      },
+      {
+        "frame": 319,
+        "framePrepareMs": 7.2859,
+        "frameSnapshotMs": 0.0019,
+        "hostSyncMs": 0.4132,
+        "kind": "host-frame",
+        "levelPollMs": 0.0015,
+        "lutMs": 0.0194,
+        "miscBeforeRecordMs": 0.0236,
+        "recordMs": 3.5223,
+        "rendererUpdateMs": 10.2574
+      },
+      {
+        "cameraMs": 0.9753,
+        "frame": 320,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.8029,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2222,
+        "resources": 374,
+        "sceneSnapshotMs": 2.1252,
+        "simulationAndInputMs": 0.8202
+      },
+      {
+        "animationLookupMs": 0.02779999999999989,
+        "boundsMs": 0.15490000000000148,
+        "dispatchPreparationMs": 0.061100000000000695,
+        "finalFlushMs": 0.0006,
+        "frame": 320,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.275900000000001,
+        "setupMs": 0.095,
+        "totalMs": 2.675,
+        "weightsAndJointUploadMs": 0.02879999999999989
+      },
+      {
+        "boundsSetupMs": 0.0779,
+        "frame": 320,
+        "gpuCullingPreparationMs": 0.0638,
+        "instanceUploadMs": 0.1562,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0165,
+        "nodeGroupingMs": 0.6553,
+        "posesMs": 2.9212,
+        "totalMs": 3.9688,
+        "visibilityAndObjectsMs": 0.0779
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.1085,
+        "frame": 320,
+        "immutableSnapshotMs": 0.0445,
+        "instancesMs": 4.1909,
+        "kind": "renderer-update",
+        "motionMs": 1.2416,
+        "outlineResourcesMs": 0.0252,
+        "recordingPreparationMs": 0.0933,
+        "sceneStateMs": 0.0626,
+        "transparentMs": 3.6584,
+        "uniformsMs": 0.7521
+      },
+      {
+        "frame": 320,
+        "framePrepareMs": 7.2076,
+        "frameSnapshotMs": 0.0018,
+        "hostSyncMs": 0.4048,
+        "kind": "host-frame",
+        "levelPollMs": 0.0025,
+        "lutMs": 0.0173,
+        "miscBeforeRecordMs": 0.0223,
+        "recordMs": 3.2398,
+        "rendererUpdateMs": 10.4144
+      },
+      {
+        "cameraMs": 0.9011,
+        "frame": 321,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7759,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.236,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5845,
+        "simulationAndInputMs": 0.8052
+      },
+      {
+        "animationLookupMs": 0.02599999999999991,
+        "boundsMs": 0.16060000000000163,
+        "dispatchPreparationMs": 0.0579000000000006,
+        "finalFlushMs": 0.001,
+        "frame": 321,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.188800000000001,
+        "setupMs": 0.0992,
+        "totalMs": 2.5797,
+        "weightsAndJointUploadMs": 0.02599999999999991
+      },
+      {
+        "boundsSetupMs": 0.0779,
+        "frame": 321,
+        "gpuCullingPreparationMs": 0.0656,
+        "instanceUploadMs": 0.153,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0161,
+        "nodeGroupingMs": 0.7724,
+        "posesMs": 2.8295,
+        "totalMs": 3.993,
+        "visibilityAndObjectsMs": 0.0785
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0675,
+        "frame": 321,
+        "immutableSnapshotMs": 0.045,
+        "instancesMs": 4.2052,
+        "kind": "renderer-update",
+        "motionMs": 1.0834,
+        "outlineResourcesMs": 0.0319,
+        "recordingPreparationMs": 0.1006,
+        "sceneStateMs": 0.0519,
+        "transparentMs": 3.4129,
+        "uniformsMs": 0.7525
+      },
+      {
+        "frame": 321,
+        "framePrepareMs": 6.5763,
+        "frameSnapshotMs": 0.0018,
+        "hostSyncMs": 0.3825,
+        "kind": "host-frame",
+        "levelPollMs": 0.0015,
+        "lutMs": 0.0173,
+        "miscBeforeRecordMs": 0.0227,
+        "recordMs": 3.0119,
+        "rendererUpdateMs": 9.9711
+      },
+      {
+        "cameraMs": 0.8979,
+        "frame": 322,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9119,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.233,
+        "resources": 374,
+        "sceneSnapshotMs": 1.8164,
+        "simulationAndInputMs": 1.2991
+      },
+      {
+        "animationLookupMs": 0.028599999999999893,
+        "boundsMs": 0.1620000000000015,
+        "dispatchPreparationMs": 0.059200000000000585,
+        "finalFlushMs": 0.0006,
+        "frame": 322,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.4953000000000007,
+        "setupMs": 0.11,
+        "totalMs": 2.9068,
+        "weightsAndJointUploadMs": 0.02929999999999989
+      },
+      {
+        "boundsSetupMs": 0.0787,
+        "frame": 322,
+        "gpuCullingPreparationMs": 0.0601,
+        "instanceUploadMs": 0.1533,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0156,
+        "nodeGroupingMs": 0.61,
+        "posesMs": 3.1726,
+        "totalMs": 4.1669,
+        "visibilityAndObjectsMs": 0.0766
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0527,
+        "frame": 322,
+        "immutableSnapshotMs": 0.0597,
+        "instancesMs": 4.3341,
+        "kind": "renderer-update",
+        "motionMs": 1.317,
+        "outlineResourcesMs": 0.0283,
+        "recordingPreparationMs": 0.0934,
+        "sceneStateMs": 0.0791,
+        "transparentMs": 3.8949,
+        "uniformsMs": 0.8259
+      },
+      {
+        "frame": 322,
+        "framePrepareMs": 7.5044,
+        "frameSnapshotMs": 0.0015,
+        "hostSyncMs": 0.4233,
+        "kind": "host-frame",
+        "levelPollMs": 0.0023,
+        "lutMs": 0.0193,
+        "miscBeforeRecordMs": 0.0256,
+        "recordMs": 3.3894,
+        "rendererUpdateMs": 10.9413
+      },
+      {
+        "cameraMs": 0.9115,
+        "frame": 323,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7985,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2288,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5269,
+        "simulationAndInputMs": 0.8079
+      },
+      {
+        "animationLookupMs": 0.02609999999999991,
+        "boundsMs": 0.1906999999999997,
+        "dispatchPreparationMs": 0.06080000000000069,
+        "finalFlushMs": 0.001,
+        "frame": 323,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.197500000000001,
+        "setupMs": 0.0933,
+        "totalMs": 2.6192,
+        "weightsAndJointUploadMs": 0.026199999999999907
+      },
+      {
+        "boundsSetupMs": 0.0772,
+        "frame": 323,
+        "gpuCullingPreparationMs": 0.0582,
+        "instanceUploadMs": 0.1489,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0162,
+        "nodeGroupingMs": 0.6482,
+        "posesMs": 2.8689,
+        "totalMs": 3.8902,
+        "visibilityAndObjectsMs": 0.0726
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0538,
+        "frame": 323,
+        "immutableSnapshotMs": 0.0383,
+        "instancesMs": 4.0457,
+        "kind": "renderer-update",
+        "motionMs": 1.0818,
+        "outlineResourcesMs": 0.0263,
+        "recordingPreparationMs": 0.0881,
+        "sceneStateMs": 0.051,
+        "transparentMs": 3.5351,
+        "uniformsMs": 0.7468
+      },
+      {
+        "frame": 323,
+        "framePrepareMs": 6.5431,
+        "frameSnapshotMs": 0.0018,
+        "hostSyncMs": 0.3723,
+        "kind": "host-frame",
+        "levelPollMs": 0.0017,
+        "lutMs": 0.0176,
+        "miscBeforeRecordMs": 0.0248,
+        "recordMs": 3.2126,
+        "rendererUpdateMs": 9.9161
+      },
+      {
+        "cameraMs": 0.9915,
+        "frame": 324,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 3.2144,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2438,
+        "resources": 374,
+        "sceneSnapshotMs": 1.6677,
+        "simulationAndInputMs": 1.1237
+      },
+      {
+        "animationLookupMs": 0.025599999999999904,
+        "boundsMs": 0.16630000000000164,
+        "dispatchPreparationMs": 0.05960000000000065,
+        "finalFlushMs": 0.0006,
+        "frame": 324,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.2166,
+        "setupMs": 0.1343,
+        "totalMs": 2.6559,
+        "weightsAndJointUploadMs": 0.029599999999999887
+      },
+      {
+        "boundsSetupMs": 0.0798,
+        "frame": 324,
+        "gpuCullingPreparationMs": 0.0552,
+        "instanceUploadMs": 0.1745,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0162,
+        "nodeGroupingMs": 0.6773,
+        "posesMs": 2.9018,
+        "totalMs": 3.9819,
+        "visibilityAndObjectsMs": 0.0771
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0498,
+        "frame": 324,
+        "immutableSnapshotMs": 0.039,
+        "instancesMs": 4.161,
+        "kind": "renderer-update",
+        "motionMs": 1.1559,
+        "outlineResourcesMs": 0.0299,
+        "recordingPreparationMs": 0.0859,
+        "sceneStateMs": 0.0494,
+        "transparentMs": 3.6496,
+        "uniformsMs": 0.7764
+      },
+      {
+        "frame": 324,
+        "framePrepareMs": 7.4797,
+        "frameSnapshotMs": 0.0015,
+        "hostSyncMs": 0.5515,
+        "kind": "host-frame",
+        "levelPollMs": 0.0024,
+        "lutMs": 0.017,
+        "miscBeforeRecordMs": 0.0241,
+        "recordMs": 3.3435,
+        "rendererUpdateMs": 10.2905
+      },
+      {
+        "cameraMs": 0.9509,
+        "frame": 325,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9543,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.233,
+        "resources": 374,
+        "sceneSnapshotMs": 1.7118,
+        "simulationAndInputMs": 0.8662
+      },
+      {
+        "animationLookupMs": 0.02839999999999989,
+        "boundsMs": 0.14900000000000152,
+        "dispatchPreparationMs": 0.0614000000000007,
+        "finalFlushMs": 0.0006,
+        "frame": 325,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.258700000000001,
+        "setupMs": 0.0971,
+        "totalMs": 2.6404,
+        "weightsAndJointUploadMs": 0.024899999999999912
+      },
+      {
+        "boundsSetupMs": 0.0778,
+        "frame": 325,
+        "gpuCullingPreparationMs": 0.0604,
+        "instanceUploadMs": 0.1743,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0156,
+        "nodeGroupingMs": 0.6177,
+        "posesMs": 2.8801,
+        "totalMs": 3.9011,
+        "visibilityAndObjectsMs": 0.0752
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0517,
+        "frame": 325,
+        "immutableSnapshotMs": 0.0407,
+        "instancesMs": 4.0714,
+        "kind": "renderer-update",
+        "motionMs": 1.135,
+        "outlineResourcesMs": 0.0269,
+        "recordingPreparationMs": 0.089,
+        "sceneStateMs": 0.0504,
+        "transparentMs": 3.5233,
+        "uniformsMs": 0.7737
+      },
+      {
+        "frame": 325,
+        "framePrepareMs": 6.9666,
+        "frameSnapshotMs": 0.0016,
+        "hostSyncMs": 0.3571,
+        "kind": "host-frame",
+        "levelPollMs": 0.0019,
+        "lutMs": 0.0176,
+        "miscBeforeRecordMs": 0.0236,
+        "recordMs": 3.1492,
+        "rendererUpdateMs": 9.986
+      },
+      {
+        "cameraMs": 1.3756,
+        "frame": 326,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.6948,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3781,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5447,
+        "simulationAndInputMs": 0.7851
+      },
+      {
+        "animationLookupMs": 0.02539999999999991,
+        "boundsMs": 0.1386000000000013,
+        "dispatchPreparationMs": 0.05270000000000047,
+        "finalFlushMs": 0.0009,
+        "frame": 326,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.195100000000001,
+        "setupMs": 0.1141,
+        "totalMs": 2.571,
+        "weightsAndJointUploadMs": 0.024699999999999923
+      },
+      {
+        "boundsSetupMs": 0.0849,
+        "frame": 326,
+        "gpuCullingPreparationMs": 0.0814,
+        "instanceUploadMs": 0.1703,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0147,
+        "nodeGroupingMs": 0.7409,
+        "posesMs": 2.8083,
+        "totalMs": 3.9758,
+        "visibilityAndObjectsMs": 0.0753
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0681,
+        "frame": 326,
+        "immutableSnapshotMs": 0.0364,
+        "instancesMs": 4.144,
+        "kind": "renderer-update",
+        "motionMs": 1.0342,
+        "outlineResourcesMs": 0.0254,
+        "recordingPreparationMs": 0.0803,
+        "sceneStateMs": 0.0464,
+        "transparentMs": 3.2321,
+        "uniformsMs": 0.7882
+      },
+      {
+        "frame": 326,
+        "framePrepareMs": 7.0418,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.3993,
+        "kind": "host-frame",
+        "levelPollMs": 0.2237,
+        "lutMs": 0.0186,
+        "miscBeforeRecordMs": 0.0347,
+        "recordMs": 3.1362,
+        "rendererUpdateMs": 9.7024
+      },
+      {
+        "cameraMs": 1.0441,
+        "frame": 327,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.7879,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.3626,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5891,
+        "simulationAndInputMs": 0.9751
+      },
+      {
+        "animationLookupMs": 0.025099999999999918,
+        "boundsMs": 0.15510000000000135,
+        "dispatchPreparationMs": 0.06100000000000069,
+        "finalFlushMs": 0.0012,
+        "frame": 327,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.204200000000001,
+        "setupMs": 0.1003,
+        "totalMs": 2.5964,
+        "weightsAndJointUploadMs": 0.027099999999999902
+      },
+      {
+        "boundsSetupMs": 0.0876,
+        "frame": 327,
+        "gpuCullingPreparationMs": 0.063,
+        "instanceUploadMs": 0.154,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0159,
+        "nodeGroupingMs": 0.6852,
+        "posesMs": 2.8776,
+        "totalMs": 3.9609,
+        "visibilityAndObjectsMs": 0.0776
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0583,
+        "frame": 327,
+        "immutableSnapshotMs": 0.0468,
+        "instancesMs": 4.1466,
+        "kind": "renderer-update",
+        "motionMs": 1.0611,
+        "outlineResourcesMs": 0.0346,
+        "recordingPreparationMs": 0.1147,
+        "sceneStateMs": 0.065,
+        "transparentMs": 3.3518,
+        "uniformsMs": 0.8739
+      },
+      {
+        "frame": 327,
+        "framePrepareMs": 7.2343,
+        "frameSnapshotMs": 0.0021,
+        "hostSyncMs": 0.6133,
+        "kind": "host-frame",
+        "levelPollMs": 0.0013,
+        "lutMs": 0.0278,
+        "miscBeforeRecordMs": 0.0316,
+        "recordMs": 3.2536,
+        "rendererUpdateMs": 9.9895
+      },
+      {
+        "cameraMs": 0.8889,
+        "frame": 328,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.8912,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2228,
+        "resources": 374,
+        "sceneSnapshotMs": 1.5688,
+        "simulationAndInputMs": 1.396
+      },
+      {
+        "animationLookupMs": 0.026799999999999897,
+        "boundsMs": 0.18459999999999957,
+        "dispatchPreparationMs": 0.06070000000000066,
+        "finalFlushMs": 0.0006,
+        "frame": 328,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.337000000000001,
+        "setupMs": 0.099,
+        "totalMs": 2.7559,
+        "weightsAndJointUploadMs": 0.026099999999999908
+      },
+      {
+        "boundsSetupMs": 0.0831,
+        "frame": 328,
+        "gpuCullingPreparationMs": 0.0788,
+        "instanceUploadMs": 0.1715,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0164,
+        "nodeGroupingMs": 0.6338,
+        "posesMs": 3.904,
+        "totalMs": 4.9871,
+        "visibilityAndObjectsMs": 0.0995
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0509,
+        "frame": 328,
+        "immutableSnapshotMs": 0.0516,
+        "instancesMs": 5.2636,
+        "kind": "renderer-update",
+        "motionMs": 1.1081,
+        "outlineResourcesMs": 0.027,
+        "recordingPreparationMs": 0.0915,
+        "sceneStateMs": 0.0887,
+        "transparentMs": 3.5993,
+        "uniformsMs": 0.7865
+      },
+      {
+        "frame": 328,
+        "framePrepareMs": 7.2245,
+        "frameSnapshotMs": 0.0015,
+        "hostSyncMs": 0.4006,
+        "kind": "host-frame",
+        "levelPollMs": 0.0009,
+        "lutMs": 0.0157,
+        "miscBeforeRecordMs": 0.0224,
+        "recordMs": 3.2484,
+        "rendererUpdateMs": 11.3228
+      },
+      {
+        "cameraMs": 0.9027,
+        "frame": 329,
+        "kind": "scene-preparation",
+        "materializeAndResourcesMs": 2.9407,
+        "nodes": 1679,
+        "remainingPrepareMs": 0.2259,
+        "resources": 374,
+        "sceneSnapshotMs": 1.4889,
+        "simulationAndInputMs": 0.9677
+      },
+      {
+        "animationLookupMs": 0.027999999999999893,
+        "boundsMs": 0.15670000000000145,
+        "dispatchPreparationMs": 0.05730000000000057,
+        "finalFlushMs": 0.0007,
+        "frame": 329,
+        "instances": 871,
+        "kind": "pose-preparation",
+        "poseSamplingMs": 2.3215000000000003,
+        "setupMs": 0.0921,
+        "totalMs": 2.7098,
+        "weightsAndJointUploadMs": 0.0321999999999999
+      },
+      {
+        "boundsSetupMs": 0.0774,
+        "frame": 329,
+        "gpuCullingPreparationMs": 0.0605,
+        "instanceUploadMs": 0.1559,
+        "kind": "instance-rebuild",
+        "materialOriginsMs": 0.0269,
+        "nodeGroupingMs": 0.5923,
+        "posesMs": 2.9513,
+        "totalMs": 3.9378,
+        "visibilityAndObjectsMs": 0.0735
+      },
+      {
+        "captureFps": 60,
+        "copyInputMs": 0.0528,
+        "frame": 329,
+        "immutableSnapshotMs": 0.0529,
+        "instancesMs": 4.095,
+        "kind": "renderer-update",
+        "motionMs": 1.0745,
+        "outlineResourcesMs": 0.0258,
+        "recordingPreparationMs": 0.0885,
+        "sceneStateMs": 0.069,
+        "transparentMs": 3.8495,
+        "uniformsMs": 0.7166
+      },
+      {
+        "frame": 329,
+        "framePrepareMs": 6.7743,
+        "frameSnapshotMs": 0.0014,
+        "hostSyncMs": 0.3826,
+        "kind": "host-frame",
+        "levelPollMs": 0.0009,
+        "lutMs": 0.0157,
+        "miscBeforeRecordMs": 0.0248,
+        "recordMs": 3.0299,
+        "rendererUpdateMs": 10.3222
+      }
+    ],
+    "sourceProductsAndPrivateFilesUnchanged": true,
+    "zeroAllocator": true,
+    "validationClean": true
+  },
+  "nativeTiming": {
+    "status": "measured",
+    "sourceBase": "f224da9-with-ordinary-early-depth-candidate",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 117.5,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.6076026666666667,
+        "p95": 2.7076192,
+        "p99": 2.73737472
+      },
+      "sceneMs": {
+        "mean": 32.09706666666666,
+        "p95": 40.10368,
+        "p99": 40.35062784
+      },
+      "postProcessMs": {
+        "mean": 0.30724266666666666,
+        "p95": 0.3226112,
+        "p99": 0.323584
+      },
+      "frameMs": {
+        "mean": 35.011912,
+        "p95": 42.8423216,
+        "p99": 43.2976672
+      }
+    },
+    "cpu": {
+      "mean": 19.23697333333332,
+      "p95": 22.242810000000055,
+      "p99": 23.53183199999966
+    },
+    "wait": {
+      "mean": 15.623203333333345,
+      "p95": 23.772024999998848,
+      "p99": 25.027415999999878
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7404773376,
+    "environmentFailures": [
+      "run observation 20: driver relative thermal headroom is insufficient",
+      "run observation 20: software thermal slowdown is active",
+      "run observation 21: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "instrumented": true,
+    "privateFilesUnchanged": true,
+    "privateFiles": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\performance-bottlenecks\\cpu\\source\\AzureRenderApp.cpp": "64b9cbbc2d13e8596de5e4189aef9ad012cf74e6a3bdf2ba6cc2053b5dc405a5",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\performance-bottlenecks\\cpu\\source\\AzureRenderFrame.cpp": "cf71e9a09cc6ff61b7c077d9b305a4b3ff4a756922e91300be20178ced842469",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\performance-bottlenecks\\cpu\\source\\CharacterSceneRenderer.cpp": "1e88956e9f892f3e246fe76670ef1acd5c8931f2adb78789fbf94876ab77b613",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\performance-bottlenecks\\cpu\\private-link\\AzurePlayer.exe": "c184bfc6076c88b850e2720fb15a305cc90c141f76dd4de8cf4c93d5c78adeb6"
+    },
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true
+  },
+  "gpuCaptureSource": {
+    "status": "captured",
+    "sourceBase": "0694263",
+    "scope": "Actual current capture and replay event diagnosis; independent of native performance acceptance",
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+      "--project",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+      "--width",
+      "1920",
+      "--height",
+      "1080",
+      "--qa-camera",
+      "scene",
+      "--qa-light",
+      "scene",
+      "--fixed-frame-step",
+      "--smoke-frames",
+      "325",
+      "--gpu-timing",
+      "--gpu-timing-output",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\current-gpu-events\\runtime-timing.json"
+    ],
+    "executableSha256": "1c61ee95913bd863df773e5089696fdaefd469de093bba0d4dc1033aa683e5d3",
+    "captureFrame": 320,
+    "renderdocVersion": "1.46",
+    "pid": 24932,
+    "capture": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\current-gpu-events\\current_frame320.rdc",
+    "bytes": 2204755187,
+    "captureSha256": "3f59645268af50b60d0700f147e9c65fde1aa3901ef4c679fe60658a0f639512"
+  },
+  "hardware": {
+    "enumerated": 3631,
+    "vendorSamples": 0,
+    "genericSamples": 3424,
+    "scope": "Vendor samples unavailable; no bandwidth saturation or SM saturation conclusion"
+  },
+  "productionRestored": true,
+  "visualAcceptance": "failed-user-review",
+  "archive": {
+    "path": "measurements.zip",
+    "bytes": 1160456,
+    "sha256": "a9e6384a6e1caf0b77cc9f8a7b2b0faddbd6d538aac6bcd4ac9f7088110fd04f",
+    "members": 72,
+    "memberHashesVerified": true
+  }
+}
