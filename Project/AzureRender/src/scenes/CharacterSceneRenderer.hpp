@@ -121,6 +121,8 @@ private:
     bool lightingFallbackNeeded_=false,lightingIntegralNeeded_=false;
     std::array<VkPipeline,4> ordinaryOpaquePipelines_{};
     std::array<VkPipeline,4> ordinaryOpaqueSnapshotPipelines_{};
+    std::array<VkPipeline,4> ordinaryEarlyDepthPipelines_{},ordinaryEarlyDepthSnapshotPipelines_{};
+    VkPipeline ordinaryOpaquePipeline(const AssetMaterial&,bool mirrored,bool snapshot,float nodeOpacity) const noexcept;
     static constexpr unsigned kMaterialClassVariantCount=unsigned(AssetMaterialClass::Showcase)+1;
     std::array<bool,kMaterialClassVariantCount> lightingClassesNeeded_{};
     std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassPipelines_{};

@@ -42,7 +42,21 @@
         "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 3.2762949812134625,
         "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.018115481142899816
       },
-      "dramGBperSecondUsingNvPerfDuration": 0.06611698580879401
+      "dramGBperSecondUsingNvPerfDuration": 0.06611698580879401,
+      "materialIdentity": {
+        "alphaMode": 0,
+        "materialClass": 0,
+        "features": 40,
+        "profileVersion": 1,
+        "textureBase": 2045,
+        "nodeOpacity": 1.0
+      },
+      "pipelineSpecialization": {
+        "azureOrdinaryOpaque": 1,
+        "azureFixedMaterialFeatureMask": 0,
+        "azureFixedMaterialFeatureValue": 0,
+        "azureFixedMaterialClass": 4294967295
+      }
     },
     {
       "event": 16036,
@@ -76,7 +90,21 @@
         "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 4.812099745922821,
         "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.03804580583740712
       },
-      "dramGBperSecondUsingNvPerfDuration": 1.5625139654129112
+      "dramGBperSecondUsingNvPerfDuration": 1.5625139654129112,
+      "materialIdentity": {
+        "alphaMode": 0,
+        "materialClass": 0,
+        "features": 40,
+        "profileVersion": 1,
+        "textureBase": 2045,
+        "nodeOpacity": 1.0
+      },
+      "pipelineSpecialization": {
+        "azureOrdinaryOpaque": 1,
+        "azureFixedMaterialFeatureMask": 0,
+        "azureFixedMaterialFeatureValue": 0,
+        "azureFixedMaterialClass": 4294967295
+      }
     },
     {
       "event": 20664,
@@ -139,7 +167,21 @@
         "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 2.8111305707997114,
         "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.06955544473793544
       },
-      "dramGBperSecondUsingNvPerfDuration": 7.441841972432537
+      "dramGBperSecondUsingNvPerfDuration": 7.441841972432537,
+      "materialIdentity": {
+        "alphaMode": 2,
+        "materialClass": 8,
+        "features": 17039360,
+        "profileVersion": 2,
+        "textureBase": 6041,
+        "nodeOpacity": 1.0
+      },
+      "pipelineSpecialization": {
+        "azureOrdinaryOpaque": 0,
+        "azureFixedMaterialFeatureMask": 0,
+        "azureFixedMaterialFeatureValue": 0,
+        "azureFixedMaterialClass": 4294967295
+      }
     },
     {
       "event": 16855,
@@ -173,7 +215,21 @@
         "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 0.721419097200386,
         "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.018096638388652872
       },
-      "dramGBperSecondUsingNvPerfDuration": 9.618269998158265
+      "dramGBperSecondUsingNvPerfDuration": 9.618269998158265,
+      "materialIdentity": {
+        "alphaMode": 0,
+        "materialClass": 4,
+        "features": 2633737,
+        "profileVersion": 2,
+        "textureBase": 6554,
+        "nodeOpacity": 1.0
+      },
+      "pipelineSpecialization": {
+        "azureOrdinaryOpaque": 0,
+        "azureFixedMaterialFeatureMask": 1038069751,
+        "azureFixedMaterialFeatureValue": 532481,
+        "azureFixedMaterialClass": 4
+      }
     },
     {
       "event": 24579,
@@ -209,7 +265,21 @@
         "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 0.7547280972791539,
         "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.019739733823890708
       },
-      "dramGBperSecondUsingNvPerfDuration": 9.916375995659251
+      "dramGBperSecondUsingNvPerfDuration": 9.916375995659251,
+      "materialIdentity": {
+        "alphaMode": 0,
+        "materialClass": 4,
+        "features": 2633737,
+        "profileVersion": 2,
+        "textureBase": 6554,
+        "nodeOpacity": 1.0
+      },
+      "pipelineSpecialization": {
+        "azureOrdinaryOpaque": 0,
+        "azureFixedMaterialFeatureMask": 1038069751,
+        "azureFixedMaterialFeatureValue": 532481,
+        "azureFixedMaterialClass": 4
+      }
     },
     {
       "event": 7015,

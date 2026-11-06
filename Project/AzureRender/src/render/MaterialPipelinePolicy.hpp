@@ -27,6 +27,9 @@ inline bool ordinaryOpaqueMaterial(const AssetMaterial& material) noexcept {
     return material.materialClass==AssetMaterialClass::Generic&&material.alphaMode==AssetAlphaMode::Opaque
         &&(material.materialFeatures&~std::uint32_t{MaterialFeatureNeutralFallback|MaterialFeatureEmissiveMask})==0;
 }
+inline bool fullyCoveredOrdinaryMaterial(const AssetMaterial& material,float nodeOpacity) noexcept {
+    return ordinaryOpaqueMaterial(material)&&nodeOpacity==1.F;
+}
 struct MaterialFeatureSpecialization {
     std::uint32_t fixedMask=0,fixedValue=0;
     [[nodiscard]] constexpr bool matches(std::uint32_t features) const noexcept {
@@ -52,12 +55,13 @@ inline bool extendedMaterialLighting(const AssetMaterial& material) noexcept {
         ||(material.nprDiffuse.present&&(material.nprDiffuse.rampComposition!=NprRampComposition::MaskVisibility
             ||material.nprDiffuse.rimResponse==AssetMaterial::NprDiffuse::RimResponse::FaceMasked));
 }
-inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false,bool lighting=false,bool coverage=false){
+inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool clipmap,bool field=false,bool lighting=false,bool coverage=false,bool earlyDepth=false){
     auto at=file.rfind(".frag.spv");
     if(at==std::string::npos||at+9!=file.size())throw std::invalid_argument("Expected a fragment SPIR-V program");
     if(multisampled){file.insert(at,"_samples");at+=8;}
     if(clipmap){file.insert(at,"_clipmap");at+=8;}
     if(field){file.insert(at,"_field");at+=6;}
+    if(earlyDepth){file.insert(at,"_early");at+=6;}
     if(lighting){file.insert(at,"_lighting");at+=9;}
     if(coverage)file.insert(at,"_coverage");
     return file;

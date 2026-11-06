@@ -1,0 +1,1199 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted-work-elimination-original-global-gates-open",
+  "sourceBase": "1eee6d6",
+  "productionAdoption": true,
+  "isolatedCaptureSource": "f224da9",
+  "baselineCaptureSource": "0694263",
+  "comparison": {
+    "status": "qualified-work-elimination-control",
+    "scope": "Frozen-capture generic replay A/B/A; all3424 leaf action signatures and per-action passing samples identical; percentages describe replay only; no native thermal/frame acceptance claim",
+    "events": 3424,
+    "actionSignaturesIdentical": true,
+    "perActionPassingSamplesIdentical": true,
+    "totals": [
+      {
+        "tag": "baseline-before",
+        "GPU Duration": 0.04033260799999938,
+        "PS Invocations": 27849008,
+        "Samples Passed": 64679603
+      },
+      {
+        "tag": "early-depth",
+        "GPU Duration": 0.032357824000000035,
+        "PS Invocations": 24994062,
+        "Samples Passed": 64679603
+      },
+      {
+        "tag": "baseline-after",
+        "GPU Duration": 0.04007519999999951,
+        "PS Invocations": 27852148,
+        "Samples Passed": 64679603
+      }
+    ],
+    "selectedShaders": [
+      {
+        "leafIndex": 0,
+        "baselineEvent": 7015,
+        "candidateEvent": 7015,
+        "baselineFiles": [
+          "skin.comp.spv"
+        ],
+        "candidateFiles": [
+          "skin.comp.spv"
+        ],
+        "shaderUnchanged": true,
+        "onlyEarlyExecutionModeAdded": false,
+        "measurements": [
+          {
+            "tag": "baseline-before",
+            "event": 7015,
+            "metrics": {
+              "GPU Duration": 0.000545792,
+              "Samples Passed": 0,
+              "PS Invocations": 0
+            }
+          },
+          {
+            "tag": "early-depth",
+            "event": 7015,
+            "metrics": {
+              "GPU Duration": 0.000546816,
+              "Samples Passed": 0,
+              "PS Invocations": 0
+            }
+          },
+          {
+            "tag": "baseline-after",
+            "event": 7015,
+            "metrics": {
+              "GPU Duration": 0.000555008,
+              "Samples Passed": 0,
+              "PS Invocations": 0
+            }
+          }
+        ]
+      },
+      {
+        "leafIndex": 1573,
+        "baselineEvent": 16036,
+        "candidateEvent": 16036,
+        "baselineFiles": [
+          "character_snapshot_object_bindless_clipmap_field.frag.spv"
+        ],
+        "candidateFiles": [
+          "character_snapshot_object_bindless_clipmap_field_early.frag.spv"
+        ],
+        "shaderUnchanged": false,
+        "onlyEarlyExecutionModeAdded": true,
+        "measurements": [
+          {
+            "tag": "baseline-before",
+            "event": 16036,
+            "metrics": {
+              "GPU Duration": 0.000850944,
+              "Samples Passed": 93542,
+              "PS Invocations": 371593
+            }
+          },
+          {
+            "tag": "early-depth",
+            "event": 16036,
+            "metrics": {
+              "GPU Duration": 0.00025088,
+              "Samples Passed": 93542,
+              "PS Invocations": 93542
+            }
+          },
+          {
+            "tag": "baseline-after",
+            "event": 16036,
+            "metrics": {
+              "GPU Duration": 0.000868352,
+              "Samples Passed": 93542,
+              "PS Invocations": 371593
+            }
+          }
+        ]
+      },
+      {
+        "leafIndex": 1720,
+        "baselineEvent": 16855,
+        "candidateEvent": 16855,
+        "baselineFiles": [
+          "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv"
+        ],
+        "candidateFiles": [
+          "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv"
+        ],
+        "shaderUnchanged": true,
+        "onlyEarlyExecutionModeAdded": false,
+        "measurements": [
+          {
+            "tag": "baseline-before",
+            "event": 16855,
+            "metrics": {
+              "GPU Duration": 0.000910336,
+              "Samples Passed": 10447,
+              "PS Invocations": 25474
+            }
+          },
+          {
+            "tag": "early-depth",
+            "event": 16855,
+            "metrics": {
+              "GPU Duration": 0.00088576,
+              "Samples Passed": 10447,
+              "PS Invocations": 25339
+            }
+          },
+          {
+            "tag": "baseline-after",
+            "event": 16855,
+            "metrics": {
+              "GPU Duration": 0.00089088,
+              "Samples Passed": 10447,
+              "PS Invocations": 25389
+            }
+          }
+        ]
+      },
+      {
+        "leafIndex": 2431,
+        "baselineEvent": 20664,
+        "candidateEvent": 20679,
+        "baselineFiles": [
+          "reflection_trace_packed.comp.spv"
+        ],
+        "candidateFiles": [
+          "reflection_trace_packed.comp.spv"
+        ],
+        "shaderUnchanged": true,
+        "onlyEarlyExecutionModeAdded": false,
+        "measurements": [
+          {
+            "tag": "baseline-before",
+            "event": 20664,
+            "metrics": {
+              "GPU Duration": 0.000992256,
+              "Samples Passed": 0,
+              "PS Invocations": 0
+            }
+          },
+          {
+            "tag": "early-depth",
+            "event": 20679,
+            "metrics": {
+              "GPU Duration": 0.00099328,
+              "Samples Passed": 0,
+              "PS Invocations": 0
+            }
+          },
+          {
+            "tag": "baseline-after",
+            "event": 20664,
+            "metrics": {
+              "GPU Duration": 0.000992448,
+              "Samples Passed": 0,
+              "PS Invocations": 0
+            }
+          }
+        ]
+      },
+      {
+        "leafIndex": 2972,
+        "baselineEvent": 23277,
+        "candidateEvent": 23292,
+        "baselineFiles": [
+          "mesh_object_bindless_clipmap_field.frag.spv"
+        ],
+        "candidateFiles": [
+          "mesh_object_bindless_clipmap_field_early.frag.spv"
+        ],
+        "shaderUnchanged": false,
+        "onlyEarlyExecutionModeAdded": true,
+        "measurements": [
+          {
+            "tag": "baseline-before",
+            "event": 23277,
+            "metrics": {
+              "GPU Duration": 0.000515072,
+              "Samples Passed": 52,
+              "PS Invocations": 185347
+            }
+          },
+          {
+            "tag": "early-depth",
+            "event": 23292,
+            "metrics": {
+              "GPU Duration": 3.1744e-05,
+              "Samples Passed": 52,
+              "PS Invocations": 52
+            }
+          },
+          {
+            "tag": "baseline-after",
+            "event": 23277,
+            "metrics": {
+              "GPU Duration": 0.000521216,
+              "Samples Passed": 52,
+              "PS Invocations": 185347
+            }
+          }
+        ]
+      },
+      {
+        "leafIndex": 3268,
+        "baselineEvent": 24579,
+        "candidateEvent": 24594,
+        "baselineFiles": [
+          "mesh_object_bindless_clipmap_field_lighting.frag.spv"
+        ],
+        "candidateFiles": [
+          "mesh_object_bindless_clipmap_field_lighting.frag.spv"
+        ],
+        "shaderUnchanged": true,
+        "onlyEarlyExecutionModeAdded": false,
+        "measurements": [
+          {
+            "tag": "baseline-before",
+            "event": 24579,
+            "metrics": {
+              "GPU Duration": 0.0008448,
+              "Samples Passed": 9544,
+              "PS Invocations": 23893
+            }
+          },
+          {
+            "tag": "early-depth",
+            "event": 24594,
+            "metrics": {
+              "GPU Duration": 0.000831488,
+              "Samples Passed": 9544,
+              "PS Invocations": 23879
+            }
+          },
+          {
+            "tag": "baseline-after",
+            "event": 24579,
+            "metrics": {
+              "GPU Duration": 0.000838656,
+              "Samples Passed": 9544,
+              "PS Invocations": 23860
+            }
+          }
+        ]
+      },
+      {
+        "leafIndex": 3393,
+        "baselineEvent": 26298,
+        "candidateEvent": 26328,
+        "baselineFiles": [
+          "mesh_object_bindless_clipmap_field.frag.spv"
+        ],
+        "candidateFiles": [
+          "mesh_object_bindless_clipmap_field.frag.spv"
+        ],
+        "shaderUnchanged": true,
+        "onlyEarlyExecutionModeAdded": false,
+        "measurements": [
+          {
+            "tag": "baseline-before",
+            "event": 26298,
+            "metrics": {
+              "GPU Duration": 0.00129024,
+              "Samples Passed": 459796,
+              "PS Invocations": 459796
+            }
+          },
+          {
+            "tag": "early-depth",
+            "event": 26328,
+            "metrics": {
+              "GPU Duration": 0.00126464,
+              "Samples Passed": 459796,
+              "PS Invocations": 459796
+            }
+          },
+          {
+            "tag": "baseline-after",
+            "event": 26298,
+            "metrics": {
+              "GPU Duration": 0.001286144,
+              "Samples Passed": 459796,
+              "PS Invocations": 459796
+            }
+          }
+        ]
+      }
+    ],
+    "replayReductionFraction": 0.19515716682637385,
+    "baselineReplayDriftFraction": 0.006402562298424361,
+    "psReductionAgainstMean": 2856516.0,
+    "hardwareCandidateCounters": "not-collected-second-administrator-launch-cancelled",
+    "nativeVisual": "prior-isolated-candidate-four-frozen-RGB-identical-current-source-regression-pending"
+  },
+  "buildAndCpu": {
+    "release": {
+      "build": {
+        "status": "passed",
+        "exitCode": 0,
+        "seconds": 169.03100000001723,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+          "build",
+          "--source",
+          "D:\\Projects\\FYP\\Project\\AzureRender",
+          "--build-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "--config",
+          "Release",
+          "--test-target",
+          "AzureOpaqueTransparencyScratchTests",
+          "--test-target",
+          "AzureRenderNullRhiPassTests",
+          "--test-target",
+          "AzureNodeOpacityRecordingTests",
+          "--test-target",
+          "AzureMaterialTextureSharingTests",
+          "--test-target",
+          "AzureMotionRecordingTests",
+          "--test-target",
+          "AzureProjectedReflectionSceneTests",
+          "--test-target",
+          "AzureObjectShadowRecordingTests",
+          "--test-target",
+          "AzureOutlineCoverageRecordingTests",
+          "--test-target",
+          "AzureBufferBarrierBatchTests",
+          "--test-target",
+          "AzurePrimitiveOpacityTests",
+          "--test-target",
+          "AzureNodeOpacityTests",
+          "--test-target",
+          "AzureSkinningBatchTests",
+          "--test-target",
+          "AzureStaticSkinningRecordingTests",
+          "--test-target",
+          "AzureSkinningGpuTests",
+          "--test-target",
+          "AzureMotionVectorGpuTests",
+          "--test-target",
+          "AzureSharedMotionGpuTests",
+          "--test-target",
+          "AzureSceneNodeGroupingTests",
+          "--test-target",
+          "AzureAnimationPoseTests",
+          "--test-target",
+          "AzureExpressionPoseTests",
+          "--test-target",
+          "AzureMorphTargetTests",
+          "--test-target",
+          "AzureMotionPoseDataTests",
+          "--test-target",
+          "AzureObjectShadowAtlasTests",
+          "--test-target",
+          "AzureLevelRefreshRetirementTests",
+          "--test-target",
+          "AzureAssetLevelTests",
+          "--test-target",
+          "AzureProjectStartupTests",
+          "--test-target",
+          "AzurePresentationRuntimeTests",
+          "--test-target",
+          "AzurePlayableQuestTests",
+          "--test-target",
+          "AzureScriptRuntimeTests",
+          "--test-target",
+          "AzureSystemCompositionTests",
+          "--test-target",
+          "AzurePlatformerFlowTests",
+          "--test-target",
+          "AzureMaterialPipelinePolicyTests",
+          "--test-target",
+          "AzureDepthOnlyPipelineTests",
+          "--test-target",
+          "AzureDepthOnlyShadowRecordingTests",
+          "--test-target",
+          "AzureDepthPrefillRecordingTests",
+          "--test-target",
+          "AzureDepthOnlyGpuTests",
+          "--test-target",
+          "AzureTemporalViewGpuTests",
+          "--test-target",
+          "AzureShaderSpecializationGpuTests",
+          "--test-target",
+          "AzureAssetDeformationTests",
+          "--test-target",
+          "AzureAnimationCurveTests",
+          "--test-target",
+          "AzureLocomotionBlendTests",
+          "--test-target",
+          "AzureAnimationAuthoringTests"
+        ],
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "AzureOpaqueTransparencyScratchTests",
+            "AzureRenderNullRhiPassTests",
+            "AzureNodeOpacityRecordingTests",
+            "AzureMaterialTextureSharingTests",
+            "AzureMotionRecordingTests",
+            "AzureProjectedReflectionSceneTests",
+            "AzureObjectShadowRecordingTests",
+            "AzureOutlineCoverageRecordingTests",
+            "AzureBufferBarrierBatchTests",
+            "AzurePrimitiveOpacityTests",
+            "AzureNodeOpacityTests",
+            "AzureSkinningBatchTests",
+            "AzureStaticSkinningRecordingTests",
+            "AzureSkinningGpuTests",
+            "AzureMotionVectorGpuTests",
+            "AzureSharedMotionGpuTests",
+            "AzureSceneNodeGroupingTests",
+            "AzureAnimationPoseTests",
+            "AzureExpressionPoseTests",
+            "AzureMorphTargetTests",
+            "AzureMotionPoseDataTests",
+            "AzureObjectShadowAtlasTests",
+            "AzureLevelRefreshRetirementTests",
+            "AzureAssetLevelTests",
+            "AzureProjectStartupTests",
+            "AzurePresentationRuntimeTests",
+            "AzurePlayableQuestTests",
+            "AzureScriptRuntimeTests",
+            "AzureSystemCompositionTests",
+            "AzurePlatformerFlowTests",
+            "AzureMaterialPipelinePolicyTests",
+            "AzureDepthOnlyPipelineTests",
+            "AzureDepthOnlyShadowRecordingTests",
+            "AzureDepthPrefillRecordingTests",
+            "AzureDepthOnlyGpuTests",
+            "AzureTemporalViewGpuTests",
+            "AzureShaderSpecializationGpuTests",
+            "AzureAssetDeformationTests",
+            "AzureAnimationCurveTests",
+            "AzureLocomotionBlendTests",
+            "AzureAnimationAuthoringTests"
+          ],
+          "testProducts": {
+            "AzureOpaqueTransparencyScratchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureOpaqueTransparencyScratchTests.exe",
+            "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderNullRhiPassTests.exe",
+            "AzureNodeOpacityRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNodeOpacityRecordingTests.exe",
+            "AzureMaterialTextureSharingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialTextureSharingTests.exe",
+            "AzureMotionRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionRecordingTests.exe",
+            "AzureProjectedReflectionSceneTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectedReflectionSceneTests.exe",
+            "AzureObjectShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureObjectShadowRecordingTests.exe",
+            "AzureOutlineCoverageRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureOutlineCoverageRecordingTests.exe",
+            "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureBufferBarrierBatchTests.exe",
+            "AzurePrimitiveOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePrimitiveOpacityTests.exe",
+            "AzureNodeOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNodeOpacityTests.exe",
+            "AzureSkinningBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSkinningBatchTests.exe",
+            "AzureStaticSkinningRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureStaticSkinningRecordingTests.exe",
+            "AzureSkinningGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSkinningGpuTests.exe",
+            "AzureMotionVectorGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionVectorGpuTests.exe",
+            "AzureSharedMotionGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSharedMotionGpuTests.exe",
+            "AzureSceneNodeGroupingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSceneNodeGroupingTests.exe",
+            "AzureAnimationPoseTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureAnimationPoseTests.exe",
+            "AzureExpressionPoseTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureExpressionPoseTests.exe",
+            "AzureMorphTargetTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMorphTargetTests.exe",
+            "AzureMotionPoseDataTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionPoseDataTests.exe",
+            "AzureObjectShadowAtlasTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureObjectShadowAtlasTests.exe",
+            "AzureLevelRefreshRetirementTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureLevelRefreshRetirementTests.exe",
+            "AzureAssetLevelTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureAssetLevelTests.exe",
+            "AzureProjectStartupTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureProjectStartupTests.exe",
+            "AzurePresentationRuntimeTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePresentationRuntimeTests.exe",
+            "AzurePlayableQuestTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayableQuestTests.exe",
+            "AzureScriptRuntimeTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureScriptRuntimeTests.exe",
+            "AzureSystemCompositionTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSystemCompositionTests.exe",
+            "AzurePlatformerFlowTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlatformerFlowTests.exe",
+            "AzureMaterialPipelinePolicyTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialPipelinePolicyTests.exe",
+            "AzureDepthOnlyPipelineTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureDepthOnlyPipelineTests.exe",
+            "AzureDepthOnlyShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureDepthOnlyShadowRecordingTests.exe",
+            "AzureDepthPrefillRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureDepthPrefillRecordingTests.exe",
+            "AzureDepthOnlyGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureDepthOnlyGpuTests.exe",
+            "AzureTemporalViewGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureTemporalViewGpuTests.exe",
+            "AzureShaderSpecializationGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureShaderSpecializationGpuTests.exe",
+            "AzureAssetDeformationTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureAssetDeformationTests.exe",
+            "AzureAnimationCurveTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureAnimationCurveTests.exe",
+            "AzureLocomotionBlendTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureLocomotionBlendTests.exe",
+            "AzureAnimationAuthoringTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureAnimationAuthoringTests.exe"
+          }
+        },
+        "productCount": 769,
+        "productionShaders535ByteIdentical": true,
+        "additionalEarlyPrograms128OnlyExecutionModeChanged": true,
+        "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+      },
+      "checks": {
+        "exitCode": 0,
+        "seconds": 55.03100000001723,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^(AzureRender.OpaqueTransparencyScratch|AzureRender.NullRhiPass|AzureRender.NodeOpacityRecording|AzureRender.MaterialTextureSharing|AzureRender.MotionRecording|AzureRender.ProjectedReflectionScene|AzureRender.ObjectShadowRecording|AzureRender.OutlineCoverageRecording|AzureRender.BufferBarrierBatch|AzureRender.PrimitiveOpacity|AzureRender.NodeOpacity|AzureEngine.BuildProvenance|AzureRender.SkinningBatch|AzureRender.StaticSkinningRecording|AzureRender.SceneNodeGrouping|AzureRender.AnimationPose|AzureRender.ExpressionPose|AzureAssets.MorphTargets|AzureRender.MotionPoseData|AzureRender.ObjectShadowAtlas|AzureEngine.LevelRefreshRetirement|AzureEngine.AssetLevel|AzureEngine.ProjectStartup|AzureEngine.PresentationRuntime|AzureEngine.PlayableQuest|AzureEngine.ScriptRuntime|AzureEngine.SystemComposition|AzureGame.PlatformerFlow|AzureRender.MaterialPipelinePolicy|AzureRender.DepthOnlyPipeline|AzureRender.DepthOnlyShadowRecording|AzureRender.DepthPrefillRecording|AzureRender.AssetDeformation|AzureRender.AnimationCurve|AzureEngine.LocomotionBlend|AzureEditor.AnimationAuthoring)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\early-depth-counter-control\\engine-release-checks.xml"
+        ],
+        "expectedChecks": 36
+      }
+    },
+    "debug": {
+      "build": {
+        "status": "passed",
+        "exitCode": 0,
+        "seconds": 143.23399999999674,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+          "build",
+          "--source",
+          "D:\\Projects\\FYP\\Project\\AzureRender",
+          "--build-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "--config",
+          "Debug",
+          "--test-target",
+          "AzureOpaqueTransparencyScratchTests",
+          "--test-target",
+          "AzureRenderNullRhiPassTests",
+          "--test-target",
+          "AzureNodeOpacityRecordingTests",
+          "--test-target",
+          "AzureMaterialTextureSharingTests",
+          "--test-target",
+          "AzureMotionRecordingTests",
+          "--test-target",
+          "AzureProjectedReflectionSceneTests",
+          "--test-target",
+          "AzureObjectShadowRecordingTests",
+          "--test-target",
+          "AzureOutlineCoverageRecordingTests",
+          "--test-target",
+          "AzureBufferBarrierBatchTests",
+          "--test-target",
+          "AzurePrimitiveOpacityTests",
+          "--test-target",
+          "AzureNodeOpacityTests",
+          "--test-target",
+          "AzureSkinningBatchTests",
+          "--test-target",
+          "AzureStaticSkinningRecordingTests",
+          "--test-target",
+          "AzureSkinningGpuTests",
+          "--test-target",
+          "AzureMotionVectorGpuTests",
+          "--test-target",
+          "AzureSharedMotionGpuTests",
+          "--test-target",
+          "AzureSceneNodeGroupingTests",
+          "--test-target",
+          "AzureAnimationPoseTests",
+          "--test-target",
+          "AzureExpressionPoseTests",
+          "--test-target",
+          "AzureMorphTargetTests",
+          "--test-target",
+          "AzureMotionPoseDataTests",
+          "--test-target",
+          "AzureObjectShadowAtlasTests",
+          "--test-target",
+          "AzureLevelRefreshRetirementTests",
+          "--test-target",
+          "AzureAssetLevelTests",
+          "--test-target",
+          "AzureProjectStartupTests",
+          "--test-target",
+          "AzurePresentationRuntimeTests",
+          "--test-target",
+          "AzurePlayableQuestTests",
+          "--test-target",
+          "AzureScriptRuntimeTests",
+          "--test-target",
+          "AzureSystemCompositionTests",
+          "--test-target",
+          "AzurePlatformerFlowTests",
+          "--test-target",
+          "AzureMaterialPipelinePolicyTests",
+          "--test-target",
+          "AzureDepthOnlyPipelineTests",
+          "--test-target",
+          "AzureDepthOnlyShadowRecordingTests",
+          "--test-target",
+          "AzureDepthPrefillRecordingTests",
+          "--test-target",
+          "AzureDepthOnlyGpuTests",
+          "--test-target",
+          "AzureTemporalViewGpuTests",
+          "--test-target",
+          "AzureShaderSpecializationGpuTests",
+          "--test-target",
+          "AzureAssetDeformationTests",
+          "--test-target",
+          "AzureAnimationCurveTests",
+          "--test-target",
+          "AzureLocomotionBlendTests",
+          "--test-target",
+          "AzureAnimationAuthoringTests"
+        ],
+        "buildScope": {
+          "kind": "runtime-and-tests",
+          "targets": [
+            "AzureRender",
+            "AzurePlayer",
+            "AzureMetaGen",
+            "AzureGeometryCompiler",
+            "AzureAssetExchange",
+            "AzureMaterialValidator",
+            "AzureGameLauncher",
+            "AzureEngineContracts",
+            "AzureManagedArtifacts",
+            "AzureShaderModulePrototypes",
+            "AzureOpaqueTransparencyScratchTests",
+            "AzureRenderNullRhiPassTests",
+            "AzureNodeOpacityRecordingTests",
+            "AzureMaterialTextureSharingTests",
+            "AzureMotionRecordingTests",
+            "AzureProjectedReflectionSceneTests",
+            "AzureObjectShadowRecordingTests",
+            "AzureOutlineCoverageRecordingTests",
+            "AzureBufferBarrierBatchTests",
+            "AzurePrimitiveOpacityTests",
+            "AzureNodeOpacityTests",
+            "AzureSkinningBatchTests",
+            "AzureStaticSkinningRecordingTests",
+            "AzureSkinningGpuTests",
+            "AzureMotionVectorGpuTests",
+            "AzureSharedMotionGpuTests",
+            "AzureSceneNodeGroupingTests",
+            "AzureAnimationPoseTests",
+            "AzureExpressionPoseTests",
+            "AzureMorphTargetTests",
+            "AzureMotionPoseDataTests",
+            "AzureObjectShadowAtlasTests",
+            "AzureLevelRefreshRetirementTests",
+            "AzureAssetLevelTests",
+            "AzureProjectStartupTests",
+            "AzurePresentationRuntimeTests",
+            "AzurePlayableQuestTests",
+            "AzureScriptRuntimeTests",
+            "AzureSystemCompositionTests",
+            "AzurePlatformerFlowTests",
+            "AzureMaterialPipelinePolicyTests",
+            "AzureDepthOnlyPipelineTests",
+            "AzureDepthOnlyShadowRecordingTests",
+            "AzureDepthPrefillRecordingTests",
+            "AzureDepthOnlyGpuTests",
+            "AzureTemporalViewGpuTests",
+            "AzureShaderSpecializationGpuTests",
+            "AzureAssetDeformationTests",
+            "AzureAnimationCurveTests",
+            "AzureLocomotionBlendTests",
+            "AzureAnimationAuthoringTests"
+          ],
+          "testProducts": {
+            "AzureOpaqueTransparencyScratchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureOpaqueTransparencyScratchTests.exe",
+            "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderNullRhiPassTests.exe",
+            "AzureNodeOpacityRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNodeOpacityRecordingTests.exe",
+            "AzureMaterialTextureSharingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialTextureSharingTests.exe",
+            "AzureMotionRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMotionRecordingTests.exe",
+            "AzureProjectedReflectionSceneTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectedReflectionSceneTests.exe",
+            "AzureObjectShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureObjectShadowRecordingTests.exe",
+            "AzureOutlineCoverageRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureOutlineCoverageRecordingTests.exe",
+            "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureBufferBarrierBatchTests.exe",
+            "AzurePrimitiveOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePrimitiveOpacityTests.exe",
+            "AzureNodeOpacityTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureNodeOpacityTests.exe",
+            "AzureSkinningBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureSkinningBatchTests.exe",
+            "AzureStaticSkinningRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureStaticSkinningRecordingTests.exe",
+            "AzureSkinningGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureSkinningGpuTests.exe",
+            "AzureMotionVectorGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMotionVectorGpuTests.exe",
+            "AzureSharedMotionGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureSharedMotionGpuTests.exe",
+            "AzureSceneNodeGroupingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureSceneNodeGroupingTests.exe",
+            "AzureAnimationPoseTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureAnimationPoseTests.exe",
+            "AzureExpressionPoseTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureExpressionPoseTests.exe",
+            "AzureMorphTargetTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMorphTargetTests.exe",
+            "AzureMotionPoseDataTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMotionPoseDataTests.exe",
+            "AzureObjectShadowAtlasTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureObjectShadowAtlasTests.exe",
+            "AzureLevelRefreshRetirementTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureLevelRefreshRetirementTests.exe",
+            "AzureAssetLevelTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureAssetLevelTests.exe",
+            "AzureProjectStartupTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureProjectStartupTests.exe",
+            "AzurePresentationRuntimeTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePresentationRuntimeTests.exe",
+            "AzurePlayableQuestTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayableQuestTests.exe",
+            "AzureScriptRuntimeTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureScriptRuntimeTests.exe",
+            "AzureSystemCompositionTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureSystemCompositionTests.exe",
+            "AzurePlatformerFlowTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlatformerFlowTests.exe",
+            "AzureMaterialPipelinePolicyTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialPipelinePolicyTests.exe",
+            "AzureDepthOnlyPipelineTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureDepthOnlyPipelineTests.exe",
+            "AzureDepthOnlyShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureDepthOnlyShadowRecordingTests.exe",
+            "AzureDepthPrefillRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureDepthPrefillRecordingTests.exe",
+            "AzureDepthOnlyGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureDepthOnlyGpuTests.exe",
+            "AzureTemporalViewGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureTemporalViewGpuTests.exe",
+            "AzureShaderSpecializationGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureShaderSpecializationGpuTests.exe",
+            "AzureAssetDeformationTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureAssetDeformationTests.exe",
+            "AzureAnimationCurveTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureAnimationCurveTests.exe",
+            "AzureLocomotionBlendTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureLocomotionBlendTests.exe",
+            "AzureAnimationAuthoringTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureAnimationAuthoringTests.exe"
+          }
+        },
+        "productCount": 769,
+        "productionShaders535ByteIdentical": true,
+        "additionalEarlyPrograms128OnlyExecutionModeChanged": true,
+        "scope": "Actual incremental engine build and complete runtime/selected product fingerprint validation; not a cold-build performance comparison"
+      },
+      "checks": {
+        "exitCode": 0,
+        "seconds": 117.79699999996228,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^(AzureRender.OpaqueTransparencyScratch|AzureRender.NullRhiPass|AzureRender.NodeOpacityRecording|AzureRender.MaterialTextureSharing|AzureRender.MotionRecording|AzureRender.ProjectedReflectionScene|AzureRender.ObjectShadowRecording|AzureRender.OutlineCoverageRecording|AzureRender.BufferBarrierBatch|AzureRender.PrimitiveOpacity|AzureRender.NodeOpacity|AzureEngine.BuildProvenance|AzureRender.SkinningBatch|AzureRender.StaticSkinningRecording|AzureRender.SceneNodeGrouping|AzureRender.AnimationPose|AzureRender.ExpressionPose|AzureAssets.MorphTargets|AzureRender.MotionPoseData|AzureRender.ObjectShadowAtlas|AzureEngine.LevelRefreshRetirement|AzureEngine.AssetLevel|AzureEngine.ProjectStartup|AzureEngine.PresentationRuntime|AzureEngine.PlayableQuest|AzureEngine.ScriptRuntime|AzureEngine.SystemComposition|AzureGame.PlatformerFlow|AzureRender.MaterialPipelinePolicy|AzureRender.DepthOnlyPipeline|AzureRender.DepthOnlyShadowRecording|AzureRender.DepthPrefillRecording|AzureRender.AssetDeformation|AzureRender.AnimationCurve|AzureEngine.LocomotionBlend|AzureEditor.AnimationAuthoring)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\early-depth-counter-control\\engine-debug-checks.xml"
+        ],
+        "expectedChecks": 36
+      }
+    }
+  },
+  "gpu": {
+    "status": "completed-with-known-failures",
+    "scope": "6 actual GPU cases x2configurations x2devices; each retains original output/synchronization/lifecycle assertions; includes real scene renderer temporal views, specialization, skinning, motion and masked depth; functional evidence only",
+    "rows": [
+      {
+        "configuration": "release",
+        "device": "nvidia",
+        "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "deviceUUIDs": [
+          "961ce778-109e-0976-8431-c5edc76ff622"
+        ],
+        "enumerationEntries": 1,
+        "filter": "*nv-vk64*",
+        "exitCode": 0,
+        "seconds": 33.14100000000326,
+        "actualChecks": [
+          "AzureRender.DepthOnlyGpu",
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.ShaderSpecializationGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu",
+          "AzureRender.TemporalViewGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|DepthOnlyGpu|ShaderSpecializationGpu|TemporalViewGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\early-depth-counter-control\\gpu\\release-nvidia-tests.xml"
+        ],
+        "failedChecks": [],
+        "passingChecks": 6
+      },
+      {
+        "configuration": "release",
+        "device": "intel",
+        "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "deviceUUIDs": [
+          "868088a7-0400-0000-0002-000000000000"
+        ],
+        "enumerationEntries": 2,
+        "filter": "*igvk64*",
+        "exitCode": 8,
+        "seconds": 19.43699999997625,
+        "actualChecks": [
+          "AzureRender.DepthOnlyGpu",
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.ShaderSpecializationGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu",
+          "AzureRender.TemporalViewGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|DepthOnlyGpu|ShaderSpecializationGpu|TemporalViewGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\early-depth-counter-control\\gpu\\release-intel-tests.xml"
+        ],
+        "failedChecks": [
+          "AzureRender.TemporalViewGpu"
+        ],
+        "passingChecks": 5
+      },
+      {
+        "configuration": "debug",
+        "device": "nvidia",
+        "enumeratedDevice": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "deviceUUIDs": [
+          "961ce778-109e-0976-8431-c5edc76ff622"
+        ],
+        "enumerationEntries": 1,
+        "filter": "*nv-vk64*",
+        "exitCode": 0,
+        "seconds": 33.51600000000326,
+        "actualChecks": [
+          "AzureRender.DepthOnlyGpu",
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.ShaderSpecializationGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu",
+          "AzureRender.TemporalViewGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|DepthOnlyGpu|ShaderSpecializationGpu|TemporalViewGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\early-depth-counter-control\\gpu\\debug-nvidia-tests.xml"
+        ],
+        "failedChecks": [],
+        "passingChecks": 6
+      },
+      {
+        "configuration": "debug",
+        "device": "intel",
+        "enumeratedDevice": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "deviceUUIDs": [
+          "868088a7-0400-0000-0002-000000000000"
+        ],
+        "enumerationEntries": 2,
+        "filter": "*igvk64*",
+        "exitCode": 8,
+        "seconds": 19.82900000002701,
+        "actualChecks": [
+          "AzureRender.DepthOnlyGpu",
+          "AzureRender.MotionVectorGpu",
+          "AzureRender.ShaderSpecializationGpu",
+          "AzureRender.SharedMotionGpu",
+          "AzureRender.SkinningGpu",
+          "AzureRender.TemporalViewGpu"
+        ],
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender.(SkinningGpu|MotionVectorGpu|SharedMotionGpu|DepthOnlyGpu|ShaderSpecializationGpu|TemporalViewGpu)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\early-depth-counter-control\\gpu\\debug-intel-tests.xml"
+        ],
+        "failedChecks": [
+          "AzureRender.TemporalViewGpu"
+        ],
+        "passingChecks": 5
+      }
+    ],
+    "sourceInputsUnchanged": true,
+    "allRecordedProductsVerified": true
+  },
+  "nativeImage": {
+    "status": "passed",
+    "sourceBase": "1eee6d6",
+    "executableSha256": "4bf95cf5ed15d000235707ec7571136edda04542d48840709e3cb11b5665aa63",
+    "exitCode": 0,
+    "seconds": 173.26500000001397,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "productionShaders535ByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Adopted early-depth candidate; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "nativePerformance": {
+    "status": "measured",
+    "sourceBase": "1eee6d6",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 192.375,
+    "warmup": 300,
+    "samples": 1800,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.6598763733333333,
+        "p95": 2.9137391999999998,
+        "p99": 3.0170963200000003
+      },
+      "sceneMs": {
+        "mean": 28.299999573333334,
+        "p95": 30.1527552,
+        "p99": 31.474513919999996
+      },
+      "postProcessMs": {
+        "mean": 0.33959594666666665,
+        "p95": 0.3564032,
+        "p99": 0.377856
+      },
+      "frameMs": {
+        "mean": 31.299471893333333,
+        "p95": 33.308118400000005,
+        "p99": 34.669347519999995
+      }
+    },
+    "cpu": {
+      "mean": 29.380677666666674,
+      "p95": 49.82390499999981,
+      "p99": 64.5801800000019
+    },
+    "wait": {
+      "mean": 5.795397277777771,
+      "p95": 12.851480000000265,
+      "p99": 14.079947999999812
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7404322816,
+    "environmentFailures": [
+      "run observation 22: driver relative thermal headroom is insufficient",
+      "run observation 22: software thermal slowdown is active",
+      "run observation 23: software thermal slowdown is active",
+      "run observation 24: driver relative thermal headroom is insufficient",
+      "run observation 24: software thermal slowdown is active",
+      "run observation 25: driver relative thermal headroom is insufficient",
+      "run observation 25: software thermal slowdown is active",
+      "run observation 26: driver relative thermal headroom is insufficient",
+      "run observation 26: software thermal slowdown is active",
+      "run observation 27: driver relative thermal headroom is insufficient",
+      "run observation 27: software thermal slowdown is active",
+      "run observation 28: driver relative thermal headroom is insufficient",
+      "run observation 28: software thermal slowdown is active",
+      "run observation 29: driver relative thermal headroom is insufficient",
+      "run observation 29: software thermal slowdown is active",
+      "run observation 30: driver relative thermal headroom is insufficient",
+      "run observation 30: software thermal slowdown is active",
+      "run observation 31: driver relative thermal headroom is insufficient",
+      "run observation 31: software thermal slowdown is active",
+      "run observation 32: software thermal slowdown is active",
+      "run observation 33: driver relative thermal headroom is insufficient",
+      "run observation 33: software thermal slowdown is active",
+      "run observation 34: driver relative thermal headroom is insufficient",
+      "run observation 34: software thermal slowdown is active",
+      "run observation 35: driver relative thermal headroom is insufficient",
+      "run observation 35: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": true,
+    "environmentPassed": false,
+    "diagnosticOnly": false,
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchangedDuringRun": true,
+    "timingBenefitQualified": false,
+    "timingScope": "Current candidate only; No paired native speedup claim; original1800sample budgets evaluated with environmental qualification"
+  },
+  "workReductionQualified": true,
+  "nativeFrameSpeedupQualified": false,
+  "fullVisualAcceptance": "failed-user-review",
+  "globalPerformance": "failed",
+  "archiveMembers": {
+    "capture_adopted_early_depth.py": "d8355bdeb972fe7d9084759884a51964eac460c0834c9561232ac8daab98a4bc",
+    "capture_early_counter_control.py": "63352ddadccb825ac4bb1d7a75e1dac688b938537096fd9f744a53c5a410d299",
+    "collect_early_depth_counter_batch.py": "9fee4f62e273c45806cb0824b70c6db0a6be3e8bc46c4b17bfc046e6ae189fd9",
+    "collect_early_depth_generic_batch.py": "faf335d9ed3506537186fb43058d2566f5181b9a1e1f3e3e88e137aa249b0281",
+    "early-depth-counter-control/admin-launch.json": "b0074f0091283b594873ef8942f40cb0b8333d984bdf4c5781ed2d55b9550292",
+    "early-depth-counter-control/capture-driver.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "early-depth-counter-control/capture-result.json": "840a21fd7f1f673c127f92a04c5a232fe5d06aceb41ef0a64f8679c61082d945",
+    "early-depth-counter-control/captures/gpu_capabilities.json": "48ca0deb3d9ad1f925d18a7594607fdc43c9cbd2a37696fa46e107c9f9bd9656",
+    "early-depth-counter-control/comparison-results.json": "0ed056d5990545fdb4bb5b70d3689c97045b2d924252483e570707651b30e715",
+    "early-depth-counter-control/counter-environment-final.json": "d99da97ac0a5a99180913c136fa3aa9abf04874d31db95bcc6110b996d05ccfc",
+    "early-depth-counter-control/counter-environment-start.json": "f7fb2c814d9fcca78038630749e357fa1780a0a23ff854a618355912f6e8b330",
+    "early-depth-counter-control/engine-debug-build.json": "4ceb946390f55d55c02467da2c28422cb613d908449b046be7580bc634e6d861",
+    "early-depth-counter-control/engine-debug-build.log": "6855dcf3987ad8f03ac7ebca25aa4dfce8e36f49514f8d4b319a5f0eaf5e1789",
+    "early-depth-counter-control/engine-debug-checks-full.log": "fa327fee6c2b7905402fe3ab789705ed9bc16d557cde831e2c3975e729de97b8",
+    "early-depth-counter-control/engine-debug-checks.json": "c27e33b1484bfa91ac08dbf1d2004853d125ee6181d4a10721e4e2715fe278f6",
+    "early-depth-counter-control/engine-debug-checks.log": "56f8386deda2f599650d0a16aabb4a94a2b7d14c50fea5bca4cb967f3be6cc00",
+    "early-depth-counter-control/engine-debug-checks.xml": "fe0b6be554e3c92a47a41e2a28871b95123e5978968d3b4a42ff15ddbbe18e92",
+    "early-depth-counter-control/engine-debug-provenance.json": "e69f41b123d49a229e6a6c492adcca1e1eea0cbeb2011b42d8effe852098af8f",
+    "early-depth-counter-control/engine-release-build.json": "2ad04f61ee3738623ba6d2a7fe762ba0feb2ca043f6eaa5c418a2f5a253ec9c5",
+    "early-depth-counter-control/engine-release-build.log": "00d33b6f667e5616ee1f0f2544cc21fe9c22d8edf48eaac3452c27c1d0095486",
+    "early-depth-counter-control/engine-release-checks-full.log": "0612cc1883437c5cacac9a91e1acabde3c4056a3cb33f8b1ce0bd25a5b8486d7",
+    "early-depth-counter-control/engine-release-checks.json": "18fe94fbfd27eda6c26075a4da35caeeea4f8e815c6b281142131192a6e08457",
+    "early-depth-counter-control/engine-release-checks.log": "ef8749a3ea56bd03d42decac8527abc5dc262ac727aed6b03fde8bc1a3b7f72a",
+    "early-depth-counter-control/engine-release-checks.xml": "9132e11e321aca5d666a27df85b96ba1e65d47796517adbddd7e2574627264a8",
+    "early-depth-counter-control/engine-release-provenance.json": "82cf21207afb09baa64eb93c675da5384bb2550122627c5fa4f6cb08874352fb",
+    "early-depth-counter-control/frozen-inputs.json": "0afe9d1059f7426ebd584fa4ee951edea01dfd11da75be1b60f654e58587663c",
+    "early-depth-counter-control/generic-control/baseline-after-counters.json": "afaf16c8aa9ff0aa2f8dda6b4f889d401b381a1292381a1a533232036a6f3465",
+    "early-depth-counter-control/generic-control/baseline-before-counters.json": "77935cb6621e7ddfe977806960382e0a47b629be385508198317b1e3aea09a2c",
+    "early-depth-counter-control/generic-control/counter-batch.json": "ba0a6fad3983acfca63fb3634f7833dd59c84c594e1882af5c52dc476c69b2de",
+    "early-depth-counter-control/generic-control/early-depth-counters.json": "b86d52cd7eb54e876d37572b4cd9f6dd604b8c8cec19dddf4d1db28590bdcdd9",
+    "early-depth-counter-control/generic-launch.json": "16abc0a54363cb4f0be98283daf046c5f189777e4220ceb3e23beecc9e730143",
+    "early-depth-counter-control/gpu/debug-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "early-depth-counter-control/gpu/debug-intel-tests-full.log": "9f542a23aff25bd1e3a32bf0a72e162f033bdd1d0a33ef2215395b5fbe401ed4",
+    "early-depth-counter-control/gpu/debug-intel-tests.log": "1adcf758b704266f47f097c6f0ae9befab85902f8868926ad6df665a18cff721",
+    "early-depth-counter-control/gpu/debug-intel-tests.xml": "5dc445b6ac44a114aed509c591d44327fff3b26c31e02548fe9935f868304dbf",
+    "early-depth-counter-control/gpu/debug-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "early-depth-counter-control/gpu/debug-nvidia-tests-full.log": "f4b6bad8b9f9dcbbcd9acef64146c062f1d2b428342145c3f12d3e681ca6bd0d",
+    "early-depth-counter-control/gpu/debug-nvidia-tests.log": "3399968404f84c1a88eb922fcd7f258bcbb48e6ead6e765e25ce54fc399bd4c9",
+    "early-depth-counter-control/gpu/debug-nvidia-tests.xml": "03a6c8106d9b3f91ff24034d20c1b4f8034bce3bf869a49c96f4b9f8a36ec81a",
+    "early-depth-counter-control/gpu/gpu-checks.json": "423ec98d29cab44a78c060b6034d4d194fb43f98a1474ffb139cb75fb4e31abb",
+    "early-depth-counter-control/gpu/release-intel-devices.log": "5a49792c56fb5d1f4701698fa47c103c64c68d8a8525520c7dfc7d3a8b4786e4",
+    "early-depth-counter-control/gpu/release-intel-tests-full.log": "d3bf4956c6ca3a659c431cb0eb018d147a5433b2f07fea3b5d45b3854da1d6a6",
+    "early-depth-counter-control/gpu/release-intel-tests.log": "2e65f9acb9429604bf06a2f616247420c8bcafbf5c4104013b7fcc60cb37e7c9",
+    "early-depth-counter-control/gpu/release-intel-tests.xml": "23ae33df3b4499e49f9f8e01cc27e5ecfeaee468027d965450219a46ef74eedf",
+    "early-depth-counter-control/gpu/release-nvidia-devices.log": "c8ebe5dfa03e4f311ecec8380ec5766d22426825e284e04b662db78bd5ae2bff",
+    "early-depth-counter-control/gpu/release-nvidia-tests-full.log": "95e0f9d1b03a5bab2e1b4d27a39da73ebb525968f9f66660ed245015ba1245f3",
+    "early-depth-counter-control/gpu/release-nvidia-tests.log": "6638a2b527ee6f515c02c946ed2331c7c68d8c3046a539b9a0bc2a36d571d209",
+    "early-depth-counter-control/gpu/release-nvidia-tests.xml": "3513a682dfac9802298a5de3a7ce5190176743e0347fe6074b284ab70fbf12e7",
+    "early-depth-counter-control/gpu/startup-environment.json": "519065ba4129a9b1a5c6d40b1018f3385e13e22f01f18f782734cfa101a7e970",
+    "early-depth-counter-control/image/bind-pose-workload.json": "801624fe52377c10ea1fa5ab4a6129d69ddb5c452720fdfc9b747bb7fba19050",
+    "early-depth-counter-control/image/command.json": "b9b22b503e40da01f6e2713ceaae001343978f9a0b294364678958ac942da893",
+    "early-depth-counter-control/image/frames/capture_manifest.json": "ca1fa177dd42ecdeda9965b77ceb76064ff17cad533d685abf9c36bb1a71e461",
+    "early-depth-counter-control/image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "early-depth-counter-control/image/frozen-inputs.json": "38cc92ef9bb96582de088ac61df255750ab8f3b3c40dfbdd60e1c881d5d587b0",
+    "early-depth-counter-control/image/identity-workload.json": "99835e64bab80baa2120034780f5bbd0e926efc0e5083f09b938e8cf348d2713",
+    "early-depth-counter-control/image/results.json": "02d8422e291e47b0e67b6b67fabaf214f9e633d49b6e190ccc4682fd172d6f62",
+    "early-depth-counter-control/image/runtime.json": "42dd97b5c2b5113411489f12c757873cd00f1d50c652b5a4d81ddbecb82de01b",
+    "early-depth-counter-control/image/stderr.log": "c9f9afc3668a76222255a8307d77bcd0a0bb788ee67f36475c83f0cacf9df57f",
+    "early-depth-counter-control/image/stdout.log": "ebbb88a565c2f7795e6dc1237f1d44c5139a000bd1312025fe1877d3887ffba4",
+    "early-depth-counter-control/image/workload.json": "914510df2c090eb8efc35d59fa5bddb29a5956b573040a1d3e0a90b9b2cbe634",
+    "early-depth-counter-control/performance/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "early-depth-counter-control/performance/environment.json": "f33046bcb520cd67bfa64a4066704bfafc8daf77af81199960a345f7b5ed0e07",
+    "early-depth-counter-control/performance/frozen-inputs.json": "f3ccabb1ffc942ae184deb763f5ddc5a8fe0173348bb4d8070b09a02d9185ade",
+    "early-depth-counter-control/performance/memory.json": "b4581d65232cf61e48e3c84cc292ea8b967b36ed032ab2e4a285bbc7349a9cba",
+    "early-depth-counter-control/performance/results.json": "b67264d17bc70c61198c2ddfd43d2b0a6cb3449ed8cbb6624fa3e1a59eed8b23",
+    "early-depth-counter-control/performance/runtime.json": "d4507c575f60b9cdbb66d31fe94ac8b0565e80ff1e29bdaf2efc0d62587629ee",
+    "early-depth-counter-control/performance/stderr.log": "e85fed6787603b6254114e68cb86cd71cecb1efac3b71d4e6aa8dbce25d82f8f",
+    "early-depth-counter-control/performance/stdout.log": "97387d1deeafb497f62a83577630cbd7898130ec9ad01a9f911a355b2553effc",
+    "early-depth-counter-control/performance/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "early-depth-counter-control/performance/task.json": "e50d6d57ca85c2202ca50ed499cdb0cc39cc53658922111db7d68c1a9e5cffa8",
+    "early-depth-counter-control/performance/timing.csv": "8a7062ed74d1f46b30f49c53df9f833a1f3024f5b8dfa9aea796be8a8264d88b",
+    "early-depth-counter-control/performance/timing.json": "09d05b4983c3186c3e07e3203dbb84c996b0990ff8ff344266b7f88ba114a436",
+    "early-depth-counter-control/performance/workload.json": "1a55b90c0790a84b0651d310dcc7f67e04c679ffcffba6ba6b823055348ca733",
+    "early-depth-counter-control/production-source/changes.diff": "b9410243fa268a14ba4a8f660b3673412b92e757115b6c454443a735cd451640",
+    "early-depth-counter-control/production-source/CMakeLists.txt": "8874c9592ca9761e1e986d37c40e33dce6efd8861b705bfd3ac96b26a31f0f67",
+    "early-depth-counter-control/production-source/shaders/mesh.frag": "95d8ba47280935ea58046f1bcabe3cc49a9ca88770aef89fdb213428a73b2977",
+    "early-depth-counter-control/production-source/src/render/MaterialPipelinePolicy.hpp": "508c725f7f1eb0ffed2b91280933357df0dab6eec2c80ea2737d21e1cae954cc",
+    "early-depth-counter-control/production-source/src/rhi/NullRhi.cpp": "9ccf640c4775f9f35bb31bf91f08252be565b6fd0067c4a0d73a5dff922957f6",
+    "early-depth-counter-control/production-source/src/scenes/CharacterSceneRenderer.cpp": "b436c451003e29e97559866c83ce9e03a82c94ac4069e586c05bb9c30fa2d21e",
+    "early-depth-counter-control/production-source/src/scenes/CharacterSceneRenderer.hpp": "a309843543a14176f6020d488c261a52c4e57595027df164ee8d321298c978be",
+    "early-depth-counter-control/production-source/tests/DepthPrefillRecordingTests.cpp": "9f67157bb6a39a9fc049504daa7c6a8ff138508ef828144e1e10b209a0b663c9",
+    "early-depth-counter-control/red-build.log": "e84583937f714d8ab030a880e6456d46556598854a49f4419b78670fd788a1e8",
+    "early-depth-counter-control/red-checks.log": "c23a7ddc2f11869aff22fefab5ab3e5bfbc34f8de36f8300397bf71333c53bc4",
+    "early-depth-counter-control/runtime-timing.csv": "6621f15ab1db90569febb44f9a62430f5ebb1aedd32b78720950256a4494f523",
+    "early-depth-counter-control/runtime-timing.json": "e6a5d6040909af5a7ac285207280c042cb9d595f7b61b29d99c5ea7bb349911e",
+    "early-depth-counter-control/selected.json": "49bf2ce78ed054f7214cc13e069ffa874b001aeb2ada6998ada42e476c31143a",
+    "early-depth-counter-control/state.json": "f565472d18cac5abcc5484cef1d533185dbb25b32976f72585d1ef5b37c42b70",
+    "measure_adopted_early_depth.py": "73f6261ed4ac4157f8a63a6dc23e1d72fbfdf284713e1c73ac8763b6768a4649",
+    "queue_adopted_early_depth_checks.py": "4f5948a5100d9f490fb6f53dc5f35f41ae6918893d296592a614741d820e2f0a",
+    "run_adopted_early_depth_gpu_checks.py": "88249f9c27e4fe51fe33bfe2d506058beac4af31d2ed224b6b1c260401057aa0",
+    "run_early_counter_capture.py": "e1729bc76c46561e968f068bfe34e4577725300f9c72b6ebcfc13f5cf23998d5",
+    "validate_adopted_early_depth.py": "4debcade79f6e489ba9b3f0df86c6b0a4bbc2a2d663c5fd58c9a6d4f10531bf7"
+  },
+  "archiveSha256": "eb6342e932d6f9f8e4fa8719b44599a4fab9607ebfcc8d814ae575f717fd0f72"
+}

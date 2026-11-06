@@ -2,11 +2,28 @@
 
 #include <algorithm>
 #include <cstdio>
+#include <cstring>
 #include <type_traits>
 
 namespace azurerender::rhi {
 
 namespace {
+
+bool earlyFragmentMain(const std::vector<char>& code) noexcept {
+    if(code.size()<20||code.size()%4)return false;
+    const auto word=[&](std::size_t index){std::uint32_t value;std::memcpy(&value,code.data()+index*4,4);return value;};
+    if(word(0)!=0x07230203U)return false;
+    std::uint32_t main=0;
+    for(std::size_t index=5;index<code.size()/4;){
+        const auto instruction=word(index),size=instruction>>16,opcode=instruction&65535U;
+        if(!size||size>code.size()/4-index)return false;
+        if(opcode==15&&size>=5&&word(index+1)==4
+            &&std::memcmp(code.data()+(index+3)*4,"main",5)==0)main=word(index+2);
+        if(opcode==16&&size>=3&&main&&word(index+1)==main&&word(index+2)==9)return true;
+        index+=size;
+    }
+    return false;
+}
 
 template <typename Handle>
 Handle fakeHandle(const std::uint64_t value) {
@@ -229,8 +246,9 @@ void NullRhi::executeOneShot(
 }
 
 VkShaderModule NullRhi::createShaderModule(const std::vector<char>& code) {
-    (void)code;
-    return mint<VkShaderModule>("createShaderModule");
+    const auto module=mint<VkShaderModule>("createShaderModule");
+    if(earlyFragmentMain(code))calls.back().detail+=" earlyFragmentTests=1";
+    return module;
 }
 
 void NullRhi::destroyShaderModule(const VkShaderModule shader) {
@@ -291,6 +309,7 @@ VkPipeline NullRhi::createGraphicsPipeline(const GraphicsPipelineDesc& desc) {
         + " samples="+std::to_string(desc.rasterizationSamples)
         + " sampleShading="+std::to_string(desc.minSampleShading);
     calls.back().detail+=" fragment="+std::to_string(desc.fragmentShader!=VK_NULL_HANDLE);
+    calls.back().detail+=" fragmentModule="+hexHandle(desc.fragmentShader);
     if(desc.depthBias)calls.back().detail+=" depthBias="+std::to_string(desc.depthBiasConstant)+"/"+std::to_string(desc.depthBiasSlope);
     if(desc.depthBiasExact)calls.back().detail+=" exactDepthBias=1";
     const auto recordSpecialization=[&](const char* name,const ShaderSpecialization& values){

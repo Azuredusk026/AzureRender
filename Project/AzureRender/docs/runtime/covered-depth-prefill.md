@@ -19,3 +19,20 @@
 颜色附件的格式及数量由所属通道描述。
 同步及资源关闭遵守场景渲染器的生命周期。
 范围及验证见[实施计划](../plans/2026-11-06-covered-depth-prefill.md)。
+
+## 普通材质颜色绘制
+
+完整覆盖的普通不透明材质使用提前深度片元程序。
+适用条件为单样本、普通材质资格及节点透明度恰为一。
+主颜色与快照通道分别持有四种正面及剔除变体。
+淡出、遮罩、多重采样及特定角色材质使用所属管线。
+
+`fullyCoveredOrdinaryMaterial` 表达完整覆盖资格。
+`sceneFragmentVariant` 定位对应的 `_early` 程序。
+提前深度程序声明 `EarlyFragmentTests` 执行模式。
+插值、材质、照明及纹理计算遵循所属程序。
+
+提前深度测试按 [Vulkan 片元操作](https://docs.vulkan.org/spec/latest/chapters/fragops.html)执行。
+全覆盖资格约束片元丢弃及覆盖相关的深度语义。
+管线及程序由场景渲染器拥有，重建和卸载逐一释放。
+工作量与兼容范围见[成本对照](../plans/2026-11-06-early-depth-counter-control.md)。

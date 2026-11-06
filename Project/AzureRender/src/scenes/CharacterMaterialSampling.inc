@@ -149,17 +149,31 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
     inspect(asset_);for(const auto& resource:additionalResources_)inspect(resource->asset);
     if(!needed&&std::none_of(classes.begin(),classes.end(),[](bool value){return value;}))return;
     try{
+        const auto earlyModule=[&](VkShaderModule module){
+            const auto found=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),
+                [&](const auto& variant){return variant.scene==module;});
+            if(found==materialShaderVariants_.end())throw std::logic_error("Ordinary material program identity is unavailable");
+            const auto file=sceneFragmentVariant(found->path,false,false,false,false,false,true);
+            return createMaterialShaderModule(file);
+        };
+        const bool early=needed&&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT;
+        const auto earlyColorModule=early?earlyModule(color.fragmentShader):VK_NULL_HANDLE;
+        const auto earlySnapshotModule=early?earlyModule(snapshot.fragmentShader):VK_NULL_HANDLE;
         if(needed)for(unsigned facing=0;facing<4;++facing){
             auto desc=color;
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
             desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaquePipelines_[facing]=createMaterialGraphicsPipeline(desc);
+            if(early){auto covered=desc;covered.fragmentShader=earlyColorModule;
+                ordinaryEarlyDepthPipelines_[facing]=createMaterialGraphicsPipeline(covered);}
             desc=snapshot;
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
             desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaqueSnapshotPipelines_[facing]=createMaterialGraphicsPipeline(desc);
+            if(early){auto covered=desc;covered.fragmentShader=earlySnapshotModule;
+                ordinaryEarlyDepthSnapshotPipelines_[facing]=createMaterialGraphicsPipeline(covered);}
         }
         for(unsigned index=0;index<classes.size();++index)if(classes[index]){
             const auto policy=fixedMaterialFeatures(intersections[index],combined[index]);
@@ -186,12 +200,15 @@ void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
         for(auto& facing:*variants)for(auto& pipeline:facing){
             if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
         }
-    for(auto& pipeline:ordinaryOpaquePipelines_){
-        if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
-    }
-    for(auto& pipeline:ordinaryOpaqueSnapshotPipelines_){
-        if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
-    }
+    for(auto* pipelines:{&ordinaryOpaquePipelines_,&ordinaryOpaqueSnapshotPipelines_,&ordinaryEarlyDepthPipelines_,&ordinaryEarlyDepthSnapshotPipelines_})
+        for(auto& pipeline:*pipelines){if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;}
+}
+
+VkPipeline CharacterSceneRenderer::ordinaryOpaquePipeline(const AssetMaterial& material,bool mirrored,bool snapshot,float nodeOpacity) const noexcept {
+    const auto facing=surfaceFacingIndex(material.doubleSided,mirrored);
+    if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT&&fullyCoveredOrdinaryMaterial(material,nodeOpacity))
+        return (snapshot?ordinaryEarlyDepthSnapshotPipelines_:ordinaryEarlyDepthPipelines_)[facing];
+    return (snapshot?ordinaryOpaqueSnapshotPipelines_:ordinaryOpaquePipelines_)[facing];
 }
 
 VkPipeline CharacterSceneRenderer::materialClassPipeline(const AssetMaterial& material,bool mirrored,bool snapshot) const noexcept {

@@ -2905,6 +2905,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
             // Radial eyes can transform the alpha-test UV before coverage.
             const bool simpleDepth=!colorRequired&&!(m.alphaMode==AssetAlphaMode::Mask
                 &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
+            const bool ordinaryColor=colorRequired&&ordinaryOpaqueMaterial(m)&&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT;
             const auto classPipeline=materialClassPipeline(m,mirrored,true);
             const auto depthPipeline=prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
                 :simpleDepth?(m.coverageTexture.present?snapshotCoveragePipelines_:snapshotDepthOnlyPipelines_)[m.doubleSided?2:mirrored?1:0]
@@ -2912,10 +2913,10 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :classPipeline?classPipeline
                 :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)];
-            if(!prefill)commands.bindPipeline(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline));
+            if(!prefill&&!ordinaryColor)commands.bindPipeline(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline));
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
-            if(counters&&!prefill)++counters->pipelineBinds;
+            if(counters&&!prefill&&!ordinaryColor)++counters->pipelineBinds;
             MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
                 m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
                 m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),materialFeaturesForFrame(m),m.materialProfileVersion,
@@ -2932,6 +2933,9 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                     const auto facing=m.doubleSided?2:mirrored?1:0;
                     const auto selected=rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT&&fullyCoveredPrefill(m,run.opacity)
                         ?coveredPrefillPipelines[facing]:depthPipeline;
+                    if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
+                }else if(ordinaryColor){
+                    const auto selected=materialLightingPipeline(m,ordinaryOpaquePipeline(m,mirrored,true,run.opacity));
                     if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
                 }
                 morph.nodeOpacity=run.opacity;
@@ -4843,7 +4847,7 @@ void CharacterSceneRenderer::drawPrimitive(
         ? (multiplyPipelines_[surfaceFacingIndex(material.doubleSided,mirrored)])
         : (material.materialFeatures & MaterialFeatureSceneTint) ? sceneTintPipelines_[mirrored?1:0] : blend
         ? transparentPipelines[surfaceFacingIndex(material.doubleSided,mirrored)]
-        : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]
+        : ordinaryOpaqueMaterial(material)?ordinaryOpaquePipeline(material,mirrored,false,run.opacity)
         :classPipeline?classPipeline
         : (opaquePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]);
     const auto colorBuffer=snapshot&&!snapshot->buffers.vertexColors.empty()

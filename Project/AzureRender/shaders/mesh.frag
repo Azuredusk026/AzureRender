@@ -1,5 +1,8 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
+#ifdef AZURE_ORDINARY_EARLY_DEPTH
+layout(early_fragment_tests) in;
+#endif
 #include "node_opacity.glsl"
 #if defined(AZURE_VIEW_FOG)
 #include "view_fog.glsl"
