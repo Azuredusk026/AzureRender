@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <queue>
+#include <limits>
 
 namespace azurerender {
 
@@ -235,6 +236,8 @@ bool RenderGraph::compile(std::string& error) {
         VkImageLayout layout = VK_IMAGE_LAYOUT_UNDEFINED;
     };
     std::vector<ResourceState> states(resources_.size());
+    const auto noReadScope=std::numeric_limits<std::size_t>::max();
+    std::vector<std::size_t> bufferReadScopes(resources_.size(),noReadScope);
     for (std::size_t i = 0; i < resources_.size(); ++i) {
         const auto& initial = resources_[i].initial;
         const auto& buffer = resources_[i].initialBuffer;
@@ -341,6 +344,16 @@ bool RenderGraph::compile(std::string& error) {
                 next.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
             const ResourceState previous = states[use.resource];
             if (resources_[use.resource].initialBuffer.buffer != VK_NULL_HANDLE) {
+                auto& scope=bufferReadScopes[use.resource];
+                if(!use.write&&scope!=noReadScope){
+                    // Publish the producer's writes to every consumer stage
+                    // at the barrier preceding this complete read streak.
+                    auto& first=bufferBarriers_[scope].buffer;
+                    first.dstStageMask|=next.stage;first.dstAccessMask|=next.access;
+                    states[use.resource].stage|=next.stage;
+                    states[use.resource].access|=next.access;
+                    continue;
+                }
                 RenderGraphBufferBarrier barrier{};
                 barrier.pass = pass;
                 barrier.resource = use.resource;
@@ -349,6 +362,7 @@ bool RenderGraph::compile(std::string& error) {
                 barrier.buffer.srcAccessMask = previous.access;
                 barrier.buffer.dstStageMask = next.stage;
                 barrier.buffer.dstAccessMask = next.access;
+                scope=use.write?noReadScope:bufferBarriers_.size();
                 bufferBarriers_.push_back(barrier);
                 states[use.resource] = next;
                 continue;

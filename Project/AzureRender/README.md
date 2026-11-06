@@ -21,7 +21,8 @@
 无光照混合表面的主输出、零像素对照及约 12% 短时 GPU 改善见[着色优化](docs/acceptance/nr/unlit-blend-fast-path.md)。
 专用场景快照与渲染描述的复用、失效及约 23% 短时 CPU 改善见[宿主优化](docs/acceptance/nr/host-scene-preparation.md)。
 透明几何并行准备与运动历史复用见[动态几何优化](docs/acceptance/nr/dynamic-geometry-preparation.md)。
-当前短时 CPU P95 为 11.51 毫秒，完整帧预算及整体画质继续验收。
+命令准备与缓冲读取范围的合并见[同步优化](docs/acceptance/nr/read-scope-barriers.md)。
+当前短时 CPU P95 为 10.31 毫秒，完整帧预算及整体画质继续验收。
 当前验收的持续执行顺序见[自主执行](docs/plans/2026-11-07-autonomous-acceptance.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。

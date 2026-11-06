@@ -53,6 +53,21 @@ int main() try {
     const std::vector<BufferBarrierDesc> stages{a,b,stageChange,a};
     native.bufferBarriers(stages.data(),stages.size());
     require(calls.size()==3 && calls[0].buffers.size()==2 && calls[1].destination==VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT && calls[2].destination==a.dstStageMask,"Stage boundaries must preserve sequence");
+    calls.clear();auto transfer=c;transfer.srcStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;transfer.srcAccessMask=VK_ACCESS_TRANSFER_WRITE_BIT;
+    const std::vector<BufferBarrierDesc> interleaved{a,transfer,b};
+    native.bufferBarriers(interleaved.data(),interleaved.size());
+    require(calls.size()==2&&calls[0].buffers.size()==2&&calls[1].buffers.size()==1,
+        "Independent interleaved stage pairs share their matching batch");
+    require(calls[0].buffers[0].buffer==a.buffer&&calls[0].buffers[1].buffer==b.buffer
+        &&calls[1].buffers[0].buffer==transfer.buffer&&calls[1].source==VK_PIPELINE_STAGE_TRANSFER_BIT
+        &&calls[1].buffers[0].srcAccessMask==VK_ACCESS_TRANSFER_WRITE_BIT,
+        "Stage grouping preserves resource fields and stage scopes");
+    calls.clear();auto overlapping=a;overlapping.offset=48;overlapping.size=16;
+    const std::vector<BufferBarrierDesc> overlap{a,transfer,b,overlapping};
+    native.bufferBarriers(overlap.data(),overlap.size());
+    require(calls.size()==3&&calls[0].buffers.size()==2&&calls[1].buffers[0].buffer==transfer.buffer
+        &&calls[2].buffers[0].buffer==a.buffer&&calls[2].buffers[0].offset==48,
+        "A repeated handle flushes all independent groups before a possible alias");
     calls.clear();a.srcStageMask=0;a.dstStageMask=0;b=a;b.buffer=c.buffer;
     const BufferBarrierDesc defaults[]{a,b};native.bufferBarriers(defaults,2);
     require(calls.size()==1 && calls[0].source==VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT && calls[0].destination==VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,"Zero stages must retain single-barrier defaults");

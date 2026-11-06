@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "kind": "NativeOptimizationEvidence",
+  "sourceBase": "956f501",
+  "status": "adopted-diagnostic-cpu-improvement",
+  "sourceChanges": {
+    "src/app/AzureRenderApp.cpp": "8808c91b7638f539b148fe3e57ec890b831c2e3e8433fbeab7ee8f326200ffa8",
+    "src/app/AzureRenderApp.hpp": "3aefddc8811ba749e2482dae73b782964597836505d660ec1f6eea618aa83571",
+    "src/app/AzureRenderFrame.cpp": "9bfc9ecb30b0dd8ba7eca82ea8b0d808d3d3a4ac40b050dbd61eb82e137e0f5c",
+    "src/render/RenderGraph.cpp": "116ea0aea3bf59c3d4ea2177e8349d9318fcda11e6b9f151df031a8182ebfab5",
+    "src/rhi/VulkanRhi.cpp": "3a2e289733594d964e661adc31292fc6d8ecd36cda41013d33c82e4844f74a07"
+  },
+  "tests": {
+    "tests/RenderGraphTests.cpp": "d8455e46e2c356e93d3e572454033a1650817466339f4861447f4316226bdca4",
+    "tests/BufferBarrierBatchTests.cpp": "bce98b2ffa15c15214aebf594d232cec3698af2d3c005a9bd76bb9750ea0e390"
+  },
+  "configuration": "Release",
+  "buildProvenanceSha256": "37a844b7985d2ade41cb258a04c85290e574cf53ed946dcac529badb74d77191",
+  "buildScope": {
+    "kind": "runtime-and-tests",
+    "targets": [
+      "AzureRender",
+      "AzurePlayer",
+      "AzureMetaGen",
+      "AzureGeometryCompiler",
+      "AzureAssetExchange",
+      "AzureMaterialValidator",
+      "AzureGameLauncher",
+      "AzureEngineContracts",
+      "AzureManagedArtifacts",
+      "AzureShaderModulePrototypes",
+      "AzureRenderRenderGraphTests",
+      "AzureBufferBarrierBatchTests",
+      "AzureRenderNullRhiPassTests",
+      "AzureStaticSkinningRecordingTests",
+      "AzureNodeOpacityRecordingTests",
+      "AzureDepthOnlyShadowRecordingTests"
+    ],
+    "testProducts": {
+      "AzureRenderRenderGraphTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderRenderGraphTests.exe",
+      "AzureBufferBarrierBatchTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureBufferBarrierBatchTests.exe",
+      "AzureRenderNullRhiPassTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderNullRhiPassTests.exe",
+      "AzureStaticSkinningRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureStaticSkinningRecordingTests.exe",
+      "AzureNodeOpacityRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureNodeOpacityRecordingTests.exe",
+      "AzureDepthOnlyShadowRecordingTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureDepthOnlyShadowRecordingTests.exe"
+    }
+  },
+  "playerSha256": "3b35281f1648c919e57ed233944653c5f8ba64e811ef6bf326fbc17e2e95bb1e",
+  "programCount": 663,
+  "allProgramsByteIdentical": true,
+  "results": {
+    "file": "results.json",
+    "sha256": "1d356023508a5f80deef8021ff983689d7c58a4f1e0820b7a8c297a80704fbcc"
+  },
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1441953,
+    "sha256": "7fdaebee12327f03a2e01eab41b2e4289a980d9a13aa673e1caa3ca03021c5e1"
+  },
+  "phaseChecksPassed": true,
+  "formalPerformanceAccepted": false,
+  "overallVisualAccepted": false
+}

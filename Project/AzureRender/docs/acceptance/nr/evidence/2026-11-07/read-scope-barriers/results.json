@@ -1,0 +1,429 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted-diagnostic-cpu-improvement",
+  "sourceBase": "956f501",
+  "localControl": {
+    "backendBaselineMs": 0.36117850000000035,
+    "backendCandidateMs": 0.04264500000000001,
+    "backendReduction": 0.8819281878627881,
+    "baselineCalls": 1525,
+    "baselineEntries": 4913,
+    "candidateCalls": 15,
+    "candidateEntries": 768,
+    "checksum": 6720192921,
+    "contextBaselineMs": 0.4458255000000001,
+    "contextCandidateMs": 0.00021549999999999968,
+    "contextScope": "Native description value copy into frame context, subsequent context copy and discarded scene; excludes unrelated context setup",
+    "rounds": 200,
+    "sceneNodes": 1679,
+    "sceneResources": 374,
+    "scope": "Actual captured barrier ranges grouped by consecutive API windows; production literal baseline and private candidate; backend CPU conversion excludes GPU/driver latency and graph compile; coalescing is prepared outside this timing",
+    "windows": 9,
+    "sourceBase": "956f501",
+    "seconds": 74.18800000000192,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\CommandControls.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\audit-results.json",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject"
+    ],
+    "inputs": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\audit-results.json": "1050d017e8777af404bc8f651a3507d196c2eac3b730376bcb166c67a13659e1",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\CommandControls.exe": "8db0a258b8d99c27a795e9b9dd3eb4716c604bded25385739b94a4d9f4a0013d",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\CommandControls.cpp": "22822ff21abaa2acaa4a252170e0dcbc266a8843a0787268ddb2ddee4ee170c8",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\BarrierReference.inc": "b00f153bc1cac7e0f7334989a959ebd670567ac2618b09bb7af419bfb5bf3cb3",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\BarrierCandidate.inc": "6625d5dc69033368f1323c2c530a230690427bdf0ddedf70c31055295ba44b05"
+    },
+    "productionUnchanged": true
+  },
+  "qualification": {
+    "kind": "AffectedCommandRecordingHotspot",
+    "affectedMeanMs": 3.7234499999999997,
+    "referenceCpuMeanMs": 10.760145000000003,
+    "affectedCpuFraction": 0.34604087584321575,
+    "measuredLocalConversionAndCopySavedMs": 0.7641435000000004,
+    "expectedReducedWorkFraction": 0.2052245900978932,
+    "baselineBarrierCalls": 1525,
+    "candidateControlBarrierCalls": 15,
+    "qualified": true,
+    "scope": "Actual recorded resource ranges and native description; CPU conversion and two discarded scene copies only. Driver recording latency, graph compilation and per-frame read-scope preparation are outside the local timing. The production graph already walks the same uses; its modified work and all driver effects remain subject to native measurement."
+  },
+  "recording": {
+    "baseline": {
+      "frames": 420,
+      "scope": "All 420 recorded frames including warmup; native CPU/GPU summary uses final 120 samples",
+      "recordingMeanMs": 4.014921428571428,
+      "graphPreparationMeanMs": 1.8367985714285715,
+      "workerWaitMeanMs": 0.5905266666666666,
+      "graphExecutionMeanMs": 1.5874497619047618
+    },
+    "candidate": {
+      "frames": 420,
+      "scope": "All 420 recorded frames including warmup; native CPU/GPU summary uses final 120 samples",
+      "recordingMeanMs": 1.8114654761904763,
+      "graphPreparationMeanMs": 0.79092,
+      "workerWaitMeanMs": 0.5651857142857143,
+      "graphExecutionMeanMs": 0.45525166666666667
+    }
+  },
+  "native": {
+    "baseline": {
+      "status": "measured",
+      "sourceBase": "956f501",
+      "visualAcceptance": "failed-user-review",
+      "seconds": 111.67199999999866,
+      "warmup": 300,
+      "samples": 120,
+      "gpu": {
+        "shadowMs": {
+          "mean": 2.520537066666667,
+          "p95": 2.6031264,
+          "p99": 2.62072736
+        },
+        "sceneMs": {
+          "mean": 18.9736448,
+          "p95": 19.968204800000002,
+          "p99": 20.0695808
+        },
+        "postProcessMs": {
+          "mean": 0.28276053333333334,
+          "p95": 0.29696,
+          "p99": 0.30086144
+        },
+        "frameMs": {
+          "mean": 21.7769424,
+          "p95": 22.8005264,
+          "p99": 22.98739392
+        }
+      },
+      "cpu": {
+        "mean": 12.166420833333333,
+        "p95": 14.393199999999803,
+        "p99": 15.745228000000045
+      },
+      "wait": {
+        "mean": 9.486718333333332,
+        "p95": 11.336335000000009,
+        "p99": 11.430265999999687
+      },
+      "sceneExtent": [
+        1920,
+        1080
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 5,
+        "waitMilliseconds": 15.232300000000002
+      },
+      "allocator": {
+        "bufferAllocations": 1997,
+        "imageAllocations": 440,
+        "liveBuffers": 834,
+        "liveImages": 440,
+        "bufferBytes": 2985576984,
+        "imageBytes": 2779192832,
+        "liveBufferBytes": 415610856,
+        "liveImageBytes": 2779192832,
+        "deviceLocalPeakBytes": 3291255520
+      },
+      "peakWorkingSetBytes": 7405158400,
+      "environmentFailures": [],
+      "zeroAllocator": true,
+      "validationClean": true,
+      "diagnosticOnly": true,
+      "formalSampleCountSatisfied": false,
+      "allMountedProjectBytesUnchanged": true,
+      "powerAcceptanceUnchanged": true,
+      "powerDeviationIsFailure": true,
+      "timingBudgetPassed": false,
+      "powerProfileStable": false,
+      "environmentPassed": false,
+      "executableSha256": "64e8050fc1d4b359c3ac5f8733ecc2917e2064d656a05344c11dccb6567c49ea",
+      "pairRole": "baseline",
+      "instrumented": false
+    },
+    "candidate": {
+      "status": "measured",
+      "sourceBase": "956f501-with-read-scope-barriers",
+      "visualAcceptance": "failed-user-review",
+      "seconds": 115.03199999999924,
+      "warmup": 300,
+      "samples": 120,
+      "gpu": {
+        "shadowMs": {
+          "mean": 2.5188344,
+          "p95": 2.5810432000000003,
+          "p99": 2.58538688
+        },
+        "sceneMs": {
+          "mean": 19.018581333333334,
+          "p95": 19.5103232,
+          "p99": 19.76635392
+        },
+        "postProcessMs": {
+          "mean": 0.28432213333333334,
+          "p95": 0.292864,
+          "p99": 0.29471744
+        },
+        "frameMs": {
+          "mean": 21.821737866666666,
+          "p95": 22.297025599999998,
+          "p99": 22.61894848
+        }
+      },
+      "cpu": {
+        "mean": 9.023319166666637,
+        "p95": 10.309335000000594,
+        "p99": 12.6508059999997
+      },
+      "wait": {
+        "mean": 12.676736666666697,
+        "p95": 14.135009999999692,
+        "p99": 14.580920000000178
+      },
+      "sceneExtent": [
+        1920,
+        1080
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 5,
+        "waitMilliseconds": 16.8662
+      },
+      "allocator": {
+        "bufferAllocations": 1997,
+        "imageAllocations": 440,
+        "liveBuffers": 834,
+        "liveImages": 440,
+        "bufferBytes": 2985576984,
+        "imageBytes": 2779192832,
+        "liveBufferBytes": 415610856,
+        "liveImageBytes": 2779192832,
+        "deviceLocalPeakBytes": 3291255520
+      },
+      "peakWorkingSetBytes": 7403540480,
+      "environmentFailures": [
+        "run observation 20: software thermal slowdown is active"
+      ],
+      "zeroAllocator": true,
+      "validationClean": true,
+      "diagnosticOnly": true,
+      "formalSampleCountSatisfied": false,
+      "allMountedProjectBytesUnchanged": true,
+      "powerAcceptanceUnchanged": true,
+      "powerDeviationIsFailure": true,
+      "timingBudgetPassed": false,
+      "powerProfileStable": false,
+      "environmentPassed": false,
+      "executableSha256": "3b35281f1648c919e57ed233944653c5f8ba64e811ef6bf326fbc17e2e95bb1e",
+      "pairRole": "candidate",
+      "instrumented": false
+    },
+    "savedCpuMeanMs": 3.1431016666666967,
+    "savedCpuP95Ms": 4.083864999999209,
+    "cpuMeanReduction": 0.2583423432185812,
+    "all663ProgramsByteIdentical": true,
+    "gpuBenefitClaimed": false,
+    "formalAcceptance": false
+  },
+  "image": {
+    "status": "passed",
+    "sourceBase": "956f501-with-read-scope-barriers",
+    "executableSha256": "3b35281f1648c919e57ed233944653c5f8ba64e811ef6bf326fbc17e2e95bb1e",
+    "exitCode": 0,
+    "seconds": 125.09399999999732,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "all663ProgramsByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Complete buffer read scopes, grouped stage pairs and recording context preparation; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "checks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 75.95299999999406,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureRenderRenderGraphTests",
+        "--test-target",
+        "AzureBufferBarrierBatchTests",
+        "--test-target",
+        "AzureRenderNullRhiPassTests",
+        "--test-target",
+        "AzureStaticSkinningRecordingTests",
+        "--test-target",
+        "AzureNodeOpacityRecordingTests",
+        "--test-target",
+        "AzureDepthOnlyShadowRecordingTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 7.76600000000326,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(RenderGraph|BufferBarrierBatch|NullRhiPass|StaticSkinningRecording|NodeOpacityRecording|DepthOnlyShadowRecording)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\release-checks.xml"
+      ]
+    }
+  ],
+  "batch": [
+    {
+      "name": "module-boundaries",
+      "exitCode": 0,
+      "seconds": 15.343999999997322,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\check_module_boundaries.py",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release"
+      ]
+    },
+    {
+      "name": "capture",
+      "exitCode": 0,
+      "seconds": 135.625,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\capture.py"
+      ]
+    },
+    {
+      "name": "measure_baseline",
+      "exitCode": 0,
+      "seconds": 141.15600000000268,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\measure_baseline.py"
+      ]
+    },
+    {
+      "name": "measure_candidate",
+      "exitCode": 0,
+      "seconds": 137.03199999999924,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-062757-read-scope-barriers-3c24e5\\measure_candidate.py"
+      ]
+    }
+  ],
+  "required": {
+    "cpuP95Ms": 8,
+    "gpuP95Ms": 16.6,
+    "samples": 1800,
+    "stablePowerWatts": 80,
+    "overallVisual": "failed-user-review"
+  },
+  "limitations": [
+    "Projected 15 barrier calls and 768 entries belong to the private range-based input control; native candidate API counts were not captured.",
+    "The local backend timer excludes read-scope preparation, graph compilation and GPU driver cost.",
+    "Recording stage averages cover all 420 frames; native CPU and GPU comparison uses final 120 samples.",
+    "Candidate telemetry includes one software thermal slowdown observation.",
+    "All-observation 80 W stability remains failed.",
+    "Formal frame budgets and overall visual acceptance remain failed."
+  ],
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1441953,
+    "sha256": "7fdaebee12327f03a2e01eab41b2e4289a980d9a13aa673e1caa3ca03021c5e1"
+  }
+}

@@ -463,7 +463,8 @@ private:
     azurerender::AssetDatabase* activeAssets();
     void buildRenderContext(azurerender::RenderContext& context,
         const azurerender::RenderSettings* frameSettings=nullptr,
-        const azurerender::scene::SceneDescription* frameScene=nullptr);
+        const azurerender::scene::SceneDescription* frameScene=nullptr,
+        bool includeScene=true);
     azurerender::scene::SceneDescription resolveRenderDescription(
         const azurerender::SceneDocument& document) const;
     void buildSceneFrameData(azurerender::SceneFrameData& frame);

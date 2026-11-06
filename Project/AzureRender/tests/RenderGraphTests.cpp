@@ -178,6 +178,39 @@ int main() {
             && indirectBarrier.dstStageMask == VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT
             && indirectBarrier.dstAccessMask == VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
             "compute parameters visible to indirect command fetch");
+        RenderGraph readScopes;
+        const auto shared=readScopes.importBuffer("shared-read-scope",hostState);
+        const auto firstRead=readScopes.addPass("compute-reader");
+        const auto secondRead=readScopes.addPass("vertex-reader");
+        const auto thirdRead=readScopes.addPass("fragment-reader");
+        const auto overwrite=readScopes.addPass("overwrite");
+        const auto indexRead=readScopes.addPass("index-reader");
+        const auto finalRead=readScopes.addPass("final-vertex-reader");
+        readScopes.use(firstRead,shared,RenderGraphUsage::Storage,false);
+        readScopes.use(secondRead,shared,RenderGraphUsage::VertexBuffer,false);
+        readScopes.use(thirdRead,shared,RenderGraphUsage::FragmentStorage,false);
+        readScopes.use(overwrite,shared,RenderGraphUsage::Storage,true);
+        readScopes.use(indexRead,shared,RenderGraphUsage::IndexBuffer,false);
+        readScopes.use(finalRead,shared,RenderGraphUsage::VertexStorage,false);
+        check(readScopes.compile(error),"Multiple reader scopes and later overwrite compile");
+        const auto& scopes=readScopes.bufferBarriers();
+        check(scopes.size()==3,"Read streaks share one producer visibility barrier");
+        const auto firstStages=VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT|VK_PIPELINE_STAGE_VERTEX_INPUT_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+        check(scopes[0].pass==firstRead&&scopes[0].buffer.srcStageMask==VK_PIPELINE_STAGE_HOST_BIT
+            &&scopes[0].buffer.srcAccessMask==VK_ACCESS_HOST_WRITE_BIT
+            &&scopes[0].buffer.dstStageMask==firstStages
+            &&scopes[0].buffer.dstAccessMask==(VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT),
+            "Producer visibility reaches every stage and access in the read streak");
+        check(scopes[1].pass==overwrite&&scopes[1].buffer.srcStageMask==firstStages
+            &&scopes[1].buffer.srcAccessMask==(VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT)
+            &&scopes[1].buffer.dstAccessMask==VK_ACCESS_SHADER_WRITE_BIT,
+            "Overwrite waits for all preceding readers");
+        check(scopes[2].pass==indexRead&&scopes[2].buffer.srcStageMask==VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT
+            &&scopes[2].buffer.srcAccessMask==VK_ACCESS_SHADER_WRITE_BIT
+            &&scopes[2].buffer.dstStageMask==(VK_PIPELINE_STAGE_VERTEX_INPUT_BIT|VK_PIPELINE_STAGE_VERTEX_SHADER_BIT)
+            &&scopes[2].buffer.dstAccessMask==(VK_ACCESS_INDEX_READ_BIT|VK_ACCESS_SHADER_READ_BIT),
+            "A new writer starts an independent complete visibility scope");
+        check(readScopes.compile(error)&&readScopes.bufferBarriers().size()==3,"Repeated compilation preserves read scopes");
         RenderGraph attachments;
         const auto hdr = attachments.importImage("hdr", initial);
         const auto opaque = attachments.addPass("opaque");
