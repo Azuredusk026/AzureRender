@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "status": "ConfiguredAndReadBack",
+  "automationId": "azurerender",
+  "name": "AzureRender 产物清理",
+  "schedule": "每周日当地时间十点",
+  "projectRoot": "D:/Projects/FYP/Project/AzureRender",
+  "kind": "heartbeat",
+  "active": true,
+  "targetThreadId": "01a12b76-a9c0-7ac1-a6be-7008b9548b78",
+  "configurationSha256": "49eccdd24147449f00d68974c0ed05bfa72ea9e17decf1624f7ba71964b65a73",
+  "updatedAt": 1794008902043,
+  "retentionDays": 7,
+  "maximumDirectoriesPerBatch": 10,
+  "mode": "DefaultPreviewThenReviewedRunListsApply",
+  "userAuthorization": "当前会话授予项目目录自动清理权限",
+  "safetyConditions": [
+    "核对 .keep 与 preservedRuns",
+    "构建、测试、捕获及目录写入期间延后",
+    "默认候选保护 Git 文件并拒绝链接",
+    "每批保存完整绝对路径及 applied 收据",
+    "每批复核卷余量、主构建和用户修改"
+  ],
+  "verification": "Connected automation update succeeded; local configuration was read back and checked. This receipt records configuration only; a scheduled cleanup invocation was not started.",
+  "documentation": "https://learn.chatgpt.com/docs/automations?surface=app"
+}

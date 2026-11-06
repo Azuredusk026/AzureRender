@@ -78,10 +78,15 @@ python tools/artifact_cleanup.py
 python tools/artifact_cleanup.py --apply
 ```
 
-每周日 10:00 的 Codex 自动任务执行只读候选扫描。
+每周日 10:00 的 Codex 自动任务执行默认候选扫描及分批清理。
+任务标识为 `azurerender`，工作目录为 `D:/Projects/FYP/Project/AzureRender`。
+每批最多十个目录，采用七天保留期及当前有效清理授权。
+清单、实际删除结果与空间复核写入 `build/maintenance/`。
 自动任务依赖 Codex 的本机调度与执行环境。
 构建或测试运行期间，自动任务延后清理。
 离线期间可用上述命令手动补做。
+配置核对见[自动任务收据](artifact-automation.json)。
+本机调度要求见[官方说明](https://learn.chatgpt.com/docs/automations?surface=app)。
 
 实际删除前保存该批次的全部绝对路径。
 执行依据为当前会话的有效授权。

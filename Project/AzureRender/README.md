@@ -26,6 +26,7 @@
 当前短时 CPU P95 为 10.31 毫秒，完整帧预算及整体画质继续验收。
 当前验收的持续执行顺序见[自主执行](docs/plans/2026-11-07-autonomous-acceptance.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
+每周清理任务的目录、期限及执行状态见[调度收据](docs/development/artifact-automation.json)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。
 加载会话的路径复用、失效及同输入收益见[活动表验证](docs/acceptance/nr/prepared-resource-paths.md)。
 
