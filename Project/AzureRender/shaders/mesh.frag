@@ -656,6 +656,7 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 
 #include "unlit_surface_sample.glsl"
 #include "unlit_opaque.glsl"
+#include "unlit_blend.glsl"
 #if defined(AZURE_VIEW_FOG)
 #include "view_fog_material.glsl"
 #else
@@ -765,6 +766,9 @@ void main() {
         geometricNormal = -geometricNormal;
     }
     if(azureWritePlainUnlitBeauty(baseColor,geometricNormal,platformMask))return;
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+    if(azureWriteUnlitBlendBeauty(baseColor,geometricNormal,platformMask,vec3(0),1.0))return;
+#endif
     vec3 tangent = normalize(
         worldTangent.xyz
         - geometricNormal * dot(geometricNormal, worldTangent.xyz));
@@ -827,6 +831,9 @@ void main() {
     vec3 dx=dFdx(shadedNormal),dy=dFdy(shadedNormal);
     normalVariance+=min(dot(dx,dx)+dot(dy,dy),.25);
     float roughness = clamp(sqrt(packedMaterial.g*packedMaterial.g+normalVariance*.25), 0.08, 1.0);
+#if defined(AZURE_OPAQUE_SNAPSHOT)
+    if(azureWriteUnlitBlendBeauty(baseColor,geometricNormal,platformMask,shadedNormal,roughness))return;
+#endif
     float metallic = clamp(packedMaterial.b, 0.0, 1.0);
     float specularLevel = clamp(specularEmissive.a, 0.0, 1.0);
     if(AZURE_MATERIAL_CLASS==0U||AZURE_MATERIAL_CLASS==4U||AZURE_MATERIAL_CLASS==5U) {

@@ -1,5 +1,9 @@
 # 项目现状
 
+无光照混合主输出通过所属检查及原生四帧严格对照。
+短时 GPU 均值改善约 12%，证据见[着色优化](acceptance/nr/unlit-blend-fast-path.md)。
+CPU 成本、完整帧预算、供电及整体画质继续验收。
+
 运行时身份查询通过两配置各十九项检查。
 联合性能及供电范围见[身份验证](acceptance/nr/runtime-node-identity.md)。
 运动向量绑定通过两配置与双设备检查。
