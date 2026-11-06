@@ -130,7 +130,10 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 原生四帧冻结对照一致，淡出及四样本保持覆盖规则。
 单候选 CPU 工作 P95 为 20.47 毫秒，GPU 为 34.45 毫秒。
 热状态未通过，整帧收益资格未成立。
-接续当前运行产物的 GPU 事件分解。
+[当前 GPU 事件分解](../acceptance/nr/current-gpu-events.md)取得实际运行产物的捕获。
+重放计时及材质查询均核对冻结输入。
+受检主颜色通用程序的七十一个事件合计 11.84 毫秒。
+接续普通不透明材质的编译期完整覆盖资格验证。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
