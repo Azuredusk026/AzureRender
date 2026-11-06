@@ -61,7 +61,8 @@ GPU 的[硬件采样](../acceptance/nr/gpu-hardware-counters.md)取得实际指�
 [稳定深度准备](../acceptance/nr/stable-depth-sort.md)通过双配置、双设备及原生四帧检查。
 组合局部均值为 4.243 与 2.834 毫秒。
 [厂商环境核验](../acceptance/nr/thermal-environment.md)取得温度及组件依赖证据。
-官方组件已校验，用户已授权安装及重启。
+官方组件安装及系统重启已核验，风扇控制可用。
+正式性能继续等待稳定背景工作及功率、热状态条件。
 
 [活动路径表](../acceptance/nr/prepared-resource-paths.md)通过双配置及原生四帧检查。
 同输入路径解析均值为 3.425 与 0.554 毫秒。
