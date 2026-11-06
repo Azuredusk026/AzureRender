@@ -24,9 +24,11 @@ GPU 功率基线为八十瓦，正式帧预算保持有效。
 安装包的 HP 数字签名有效。
 SHA-256 与[官方组件清单](https://ftp.hp.com/pub/softpaq/sp166001-166500/sp166157.cva)一致。
 
-安装包已准备，安装及重启等待用户明确授权。
+用户已授权安装及重启，并确认其他工作已保存。
+安装前的开发状态与复核步骤已写入接续检查点。
 机器上的当前电源及散热配置保持所记录状态。
 安装后重新读取性能控制、风扇和温度。
+
 稳定环境及实际来源共同决定正式采集资格。
 
 ## 结论与范围
@@ -38,3 +40,4 @@ CPU 热降频、功耗限制及核心调度仍需分别核验。
 
 [结构化收据](evidence/2026-11-06/thermal-environment/results.json)记录来源、摘要和待项。
 [原始归档](evidence/2026-11-06/thermal-environment/measurements.zip)保存组件清单及服务状态。
+[重启检查点](evidence/2026-11-06/thermal-environment/authorized-restart.json)记录授权及安装前状态。

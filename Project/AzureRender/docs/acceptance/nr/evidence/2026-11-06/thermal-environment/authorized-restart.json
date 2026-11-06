@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "status": "authorized-installation-ready-pre-restart",
+  "recordedAt": "2026-11-06T18:38:11.076864+08:00",
+  "sourceCommit": "3c46f48f6bbb8beeedb09e97cccb011e2dfa0dc7",
+  "authorization": "允许安装并重启，其他工作已保存",
+  "scope": "Install verified HP SDK SP166157 1.0.91 and restart this computer",
+  "sdk": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\thermal-environment\\sp166157.exe",
+    "sha256": "25e38bb3d94bcf71ef7fec7679ef5100382cb5ce7c14d3522279103d27b4564d",
+    "bytes": 221403808,
+    "signature": "Valid HP Inc. signature rechecked before launch"
+  },
+  "development": {
+    "latestImplementation": "3c46f48",
+    "localPathResolutionReferenceMs": 3.425075,
+    "localPathResolutionPreparedMs": 0.554415,
+    "cpuChecksPerConfiguration": 39,
+    "frozenNativeFrames": 4,
+    "changedRgbPixels": 0,
+    "overallAcceptance": "open"
+  },
+  "resume": [
+    "Verify actual boot time changed and installer result",
+    "Check installed HP SDK/service versions and performance control availability",
+    "Observe CPU/GPU temperature and supported fan mode; record any setting changes",
+    "Run qualified native performance only when actual environment permits original conditions"
+  ],
+  "installerOutcome": "not-started-at-checkpoint",
+  "restartOutcome": "not-observed-at-checkpoint",
+  "localCheckpoint": "build/runs/20261105-125529-automatic-acceptance-3d5b54/thermal-environment/authorized-restart/checkpoint.json"
+}

@@ -20,7 +20,7 @@ GPU 场景着色及 CPU 场景准备已有实际阶段证据。
 重点绘制支持优先处理隐藏片元执行。
 采样范围及异常见[硬件归因](../acceptance/nr/gpu-hardware-counters.md)。
 CPU 路径解析的[活动表](../acceptance/nr/prepared-resource-paths.md)通过局部控制及严格兼容。
-厂商组件安装及重启等待用户授权。
+厂商组件安装及重启已获用户授权。
 正式整帧及热状态保持原有验收条件。
 
 ## 执行顺序
