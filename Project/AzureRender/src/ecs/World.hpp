@@ -95,6 +95,15 @@ public:
         return *static_cast<ComponentArray<T>*>(iterator->second.get());
     }
 
+    // Borrow for a read-only traversal. Structural world changes invalidate
+    // the view; an absent component type leaves the world unchanged.
+    template <typename T>
+    [[nodiscard]] const ComponentArray<T>* findComponentArray() const noexcept {
+        const auto found = componentArrays_.find(std::type_index(typeid(T)));
+        return found == componentArrays_.end() ? nullptr
+            : static_cast<const ComponentArray<T>*>(found->second.get());
+    }
+
     template <typename T>
     void addComponent(const Entity entity, T component) {
         componentArray<T>().insert(entity, std::move(component));

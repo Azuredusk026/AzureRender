@@ -91,14 +91,18 @@ float GameRuntime::renderAlpha() const {
         ? static_cast<float>(std::clamp(accumulator_*60,0.0,1.0)):1;
 }
 SceneDocument GameRuntime::renderScene() {
-    auto scene=runtime_.snapshotScene();const float alpha=renderAlpha();
+    SceneDocument scene;
+    renderScene(scene);
+    return scene;
+}
+void GameRuntime::renderScene(SceneDocument& scene) {
+    runtime_.snapshotScene(scene);const float alpha=renderAlpha();
     for(auto& node:scene.nodes){const auto previous=previousTransforms_.find(node.id);if(previous==previousTransforms_.end())continue;
         for(unsigned axis=0;axis<3;++axis){
             node.translation[axis]=previous->second.translation[axis]+(node.translation[axis]-previous->second.translation[axis])*alpha;
             node.rotation[axis]=previous->second.rotation[axis]+std::remainder(node.rotation[axis]-previous->second.rotation[axis],360.0F)*alpha;
         }
     }
-    return scene;
 }
 GameCameraSelection GameRuntime::renderCamera(){
     return renderCamera(renderScene());

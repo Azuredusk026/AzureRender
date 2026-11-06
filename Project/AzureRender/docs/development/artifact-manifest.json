@@ -18,6 +18,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261106-220323-autonomous-cleanup-performance-70496b",
+      "name": "CPU 场景准备集中评估",
+      "status": "DiagnosticMeasured",
+      "sourceBase": "c61ed88",
+      "exeSha256": "bb85e7a3d868a8d9d029fcaa1a939fd598968fd055522931a9f55d62873f0d36",
+      "evidence": "docs/acceptance/nr/cpu-scene-preparation.md",
+      "visualAcceptance": "failed-user-review",
+      "cpuBudgetPassed": false,
+      "gpuBudgetPassed": false,
+      "environmentPassed": false
+    },
+    {
       "path": "p8-final-2026-10-14",
       "name": "P8 集中交付",
       "status": "Ready",

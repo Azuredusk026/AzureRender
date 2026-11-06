@@ -38,6 +38,7 @@ public:
     bool hasCamera() const { return hasCamera_; }
     void cameraInput(float x, float y, float scroll);
     SceneDocument renderScene();
+    void renderScene(SceneDocument& scene);
     GameCameraSelection renderCamera();
     // The caller retains this frame's interpolated scene through selection.
     GameCameraSelection renderCamera(const SceneDocument& scene);

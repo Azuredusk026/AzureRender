@@ -700,8 +700,17 @@ void AzureRenderApp::buildSceneFrameData(
 #endif
     {elapsed=game?game->advance(rawDeltaSeconds):runtime_.beginFrame(rawDeltaSeconds);if(presentationRuntime_)presentationRuntime_->update(elapsed);}
     const float deltaSeconds=static_cast<float>(elapsed);
-    std::optional<azurerender::SceneDocument> gameScene;
-    if(game)gameScene=game->renderScene();
+    std::optional<azurerender::SceneDocument> ownedGameScene;
+    azurerender::SceneDocument* gameScene = nullptr;
+    if(game) {
+        if(runOptions_.sceneDocument.has_value()&&!runOptions_.editorMode) {
+            game->renderScene(playerSceneScratch_);
+            gameScene=&playerSceneScratch_;
+        } else {
+            ownedGameScene=game->renderScene();
+            gameScene=&*ownedGameScene;
+        }
+    }
     std::shared_ptr<const azurerender::scene::SceneDescription> gameDescription;
     bool needsSceneSnapshot=runOptions_.sceneDocument.has_value()&&!runOptions_.editorMode;
 #if AZURE_WITH_EDITOR
@@ -735,8 +744,13 @@ void AzureRenderApp::buildSceneFrameData(
     }
 #endif
     pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
-    if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
-        runOptions_.sceneDocument = gameScene?std::move(*gameScene):runtime_.snapshotScene();
+    if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode) {
+        if(gameScene)std::swap(*runOptions_.sceneDocument,*gameScene);
+        else {
+            runtime_.snapshotScene(playerSceneScratch_);
+            std::swap(*runOptions_.sceneDocument,playerSceneScratch_);
+        }
+    }
     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
         frame.sceneSnapshot = gameDescription?gameDescription:
             std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(*runOptions_.sceneDocument));

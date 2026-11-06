@@ -9,6 +9,65 @@
 #include "scene/SceneDescription.hpp"
 using namespace azurerender;
 void check(bool value,const char* message){if(!value)throw std::runtime_error(message);}
+GameCameraSelection fullTraversalCamera(RuntimeLifecycle& runtime,const scene::SceneDescription& scene){
+    GameCameraSelection result;std::int64_t priority=-1;
+    const auto matrices=scene::resolveNodeWorldTransforms(scene);
+    for(std::size_t i=0;i<scene.nodes.size();++i){
+        const auto& node=scene.nodes[i];
+        const auto* camera=runtime.world().tryGet<game::GameCamera>(runtime.entity(node.id));
+        if(!camera||!camera->enabled||camera->priority<priority
+            ||(camera->priority==priority&&!result.node.empty()&&node.id>=result.node))continue;
+        CameraViewDescriptor view;
+        try{view=gameCameraView(*camera,matrices[i]);}catch(const std::exception& error){result.diagnostic=node.id+": "+error.what();continue;}
+        result.view=view;result.node=node.id;priority=camera->priority;
+    }
+    if(!result.view&&result.diagnostic.empty())result.diagnostic="No enabled GameCamera";
+    return result;
+}
+void checkCameraTraversal(){
+    SceneDocument document;
+    for(unsigned i=0;i<256;++i){
+        SceneNode node;node.id="node-"+std::to_string(i);
+        if(i)node.parentId="node-"+std::to_string((i-1)/3);
+        node.translation={float(i)*.125F,-float(i%7),float(i%11)};
+        node.rotation={float(i%17),float(i%31),-float(i%13)};
+        node.scale={1.F+float(i%3)*.1F,1,1};document.nodes.push_back(node);
+    }
+    RuntimeLifecycle runtime;runtime.loadScene(document);
+    const auto verify=[&](const scene::SceneDescription& description){
+        const auto a=resolveGameCamera(runtime,description);const auto b=fullTraversalCamera(runtime,description);
+        check(a.node==b.node&&a.diagnostic==b.diagnostic&&a.view.has_value()==b.view.has_value(),
+            "Sparse camera traversal must preserve selection and diagnostics");
+        if(a.view){const auto& x=*a.view;const auto& y=*b.view;
+            check(x.position==y.position&&x.target==y.target&&x.up==y.up&&x.projection==y.projection
+                &&x.fov==y.fov&&x.orthoHeight==y.orthoHeight&&x.nearPlane==y.nearPlane&&x.farPlane==y.farPlane
+                &&x.projectionOffsetX==y.projectionOffsetX&&x.projectionOffsetY==y.projectionOffsetY,
+                "Sparse camera transforms and lenses must exactly match complete traversal");}
+    };
+    auto description=document.renderDescription();verify(description);
+    for(unsigned i:{13U,127U,255U})runtime.world().addComponent(runtime.entity("node-"+std::to_string(i)),game::GameCamera{});
+    for(unsigned pass=0;pass<24;++pass){
+        for(unsigned i:{13U,127U,255U}){
+            auto& camera=*runtime.world().tryGet<game::GameCamera>(runtime.entity("node-"+std::to_string(i)));
+            camera.priority=(pass+i)%4;camera.enabled=(pass+i)%5!=0;
+            camera.orthographic=pass%2!=0;camera.projectionOffsetX=float(pass%3)*.125F;
+            camera.nearPlane=(pass+i)%7==0?0.F:.1F;
+        }
+        verify(description);std::reverse(description.nodes.begin(),description.nodes.end());verify(description);
+    }
+    auto* camera=runtime.world().tryGet<game::GameCamera>(runtime.entity("node-13"));
+    camera->enabled=true;camera->nearPlane=.1F;camera->priority=100;
+    description=document.renderDescription();description.nodes[1].parentId="node-13";
+    verify(description);std::reverse(description.nodes.begin(),description.nodes.end());verify(description);
+    description=document.renderDescription();description.nodes.push_back(description.nodes[13]);
+    description.nodes.back().parentId.clear();description.nodes.back().translation={99,88,77};
+    description.nodes[13].scale={0,0,0};verify(description);
+    runtime.world().destroyEntity(runtime.entity("node-13"));
+    const auto recycled=runtime.world().createEntity();runtime.world().addComponent(recycled,game::GameCamera{});
+    verify(description);
+    for(unsigned i:{127U,255U})runtime.world().removeComponent<game::GameCamera>(runtime.entity("node-"+std::to_string(i)));
+    verify(description);
+}
 void checkSharedRenderScene(){
     SceneDocument document;document.nodes={{"parent","Parent"},{"camera","Camera","parent"}};
     document.nodes[0].translation={10,0,0};document.nodes[1].translation={0,2,3};
@@ -21,6 +80,11 @@ void checkSharedRenderScene(){
     });
     game.advance(1.0/60);game.advance(1.0/120);
     const auto snapshot=game.renderScene();const auto selected=game.renderCamera(snapshot);
+    SceneDocument reusable;game.renderScene(reusable);
+    const auto* retained=reusable.nodes.data();game.renderScene(reusable);
+    check(reusable.nodes.data()==retained&&reusable.nodes[0].translation==snapshot.nodes[0].translation
+        &&reusable.nodes[1].translation==snapshot.nodes[1].translation,
+        "Owned render-scene reuse must preserve storage and interpolation arithmetic");
     check(selected.node=="camera"&&selected.view.has_value(),"Rendered scene camera must preserve authored selection");
     const auto prepared=snapshot.renderDescription();
     const auto preparedSelection=game.renderCamera(prepared);
@@ -44,6 +108,7 @@ void checkSharedRenderScene(){
     check(snapshot.nodes[0].translation[0]==12&&selected.view->position[0]==12,"Returned camera and frame scene must retain their owned values");
 }
 int main(){try{
+    checkCameraTraversal();
     checkSharedRenderScene();
     auto registry=makeRuntimeComponentRegistry();
     const auto camera=registry.defaults("azure.camera");registry.validate("azure.camera",camera);

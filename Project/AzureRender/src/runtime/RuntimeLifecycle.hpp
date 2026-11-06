@@ -102,32 +102,49 @@ class RuntimeLifecycle final {
         }
     }
     SceneDocument snapshotScene() {
-        SceneDocument result = scene_;
+        SceneDocument result;
+        snapshotScene(result);
+        return result;
+    }
+    // The destination retains its vector/string storage across frames.
+    // It remains an owned document, independent of subsequent world changes.
+    void snapshotScene(SceneDocument& result) {
+        result = scene_;
+        const auto* identities = world_.findComponentArray<NodeIdentity>();
+        const auto* transforms = world_.findComponentArray<ecs::TransformComponent>();
+        const auto* renderables = world_.findComponentArray<ecs::RenderableComponent>();
+        const auto* shadows = world_.findComponentArray<ecs::ObjectShadowComponent>();
+        const auto validEntity = [&](const std::string& id) {
+            const auto found = nodes_.find(id);
+            if (found == nodes_.end() || !world_.valid(found->second))
+                return ecs::kInvalidEntity;
+            const auto* identity = identities ? identities->tryGet(found->second) : nullptr;
+            return identity && identity->id == id ? found->second : ecs::kInvalidEntity;
+        };
         auto output = result.nodes.begin();
         for (auto current = result.nodes.begin(); current != result.nodes.end(); ++current) {
             auto& node = *current;
-            const auto entity = nodes_.at(node.id);
-            if (!nodeValid(node.id)) continue;
-            if (const auto* transform = world_.tryGet<ecs::TransformComponent>(entity)) {
+            const auto entity = validEntity(node.id);
+            if (entity == ecs::kInvalidEntity) continue;
+            if (const auto* transform = transforms ? transforms->tryGet(entity) : nullptr) {
                 node.translation = transform->translation;
                 node.rotation = transform->rotation;
                 node.scale = transform->scale;
             }
-            if (const auto* renderable = world_.tryGet<ecs::RenderableComponent>(entity))
+            if (const auto* renderable = renderables ? renderables->tryGet(entity) : nullptr)
                 node.visible = renderable->visible;
-            if(const auto* shadow=world_.tryGet<ecs::ObjectShadowComponent>(entity)){
+            if(const auto* shadow=shadows ? shadows->tryGet(entity) : nullptr){
                 shadow->validate();node.objectShadow=*shadow;
             }else node.objectShadow.reset();
-            if (!node.parentId.empty() && !nodeValid(node.parentId)) node.parentId.clear();
+            if (!node.parentId.empty() && validEntity(node.parentId) == ecs::kInvalidEntity) node.parentId.clear();
             if (output != current) *output = std::move(node);
             ++output;
         }
         result.nodes.erase(output, result.nodes.end());
         result.lights.erase(
             std::remove_if(result.lights.begin(), result.lights.end(),
-                           [&](const auto& light) { return !nodeValid(light.nodeId); }),
+                           [&](const auto& light) { return validEntity(light.nodeId) == ecs::kInvalidEntity; }),
             result.lights.end());
-        return result;
     }
     void defer(ecs::System operation) {
         if (state_ == State::Stopped) throw std::logic_error("Runtime is stopped");

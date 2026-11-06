@@ -145,6 +145,15 @@ void checkSnapshotCopyBudget() {
     std::cout<<"Snapshot allocation bytes: "<<snapshotBytes<<", one document copy: "<<ordinaryBytes<<'\n';
     require(snapshotBytes<=ordinaryBytes+64*1024,"Snapshot allocations exceed one owned document copy plus64KiB working allowance");
     require(first.nodes.size()==source.nodes.size() && first.sceneId==source.sceneId && first.resources.size()==source.resources.size(),"Snapshot must preserve document metadata");
+    const auto* retainedNodes=warmup.nodes.data();
+    const auto* retainedIdentity=warmup.nodes.front().id.data();
+    warmup.nodes.front().translation={91,92,93};warmup.renderSettings.shadowDistance=123.F;
+    runtime.snapshotScene(warmup);
+    require(warmup.nodes.data()==retainedNodes && warmup.nodes.front().id.data()==retainedIdentity,
+        "Equal-sized owned snapshots must retain node and identity storage");
+    require(warmup.nodes.front().translation==source.nodes.front().translation
+        && warmup.renderSettings.shadowDistance==source.renderSettings.shadowDistance,
+        "Reused snapshots must refresh caller edits from runtime-owned inputs");
     for(std::size_t i=0;i<first.nodes.size();++i) {
         const auto& actual=first.nodes[i];const auto& expected=source.nodes[i];
         require(actual.id==expected.id && actual.name==expected.name && actual.parentId==expected.parentId && actual.prefabSource==expected.prefabSource && actual.instanceOf==expected.instanceOf && actual.materialSlots==expected.materialSlots,"Snapshot must preserve node order and authoring data");
@@ -169,10 +178,23 @@ void checkSnapshotCopyBudget() {
         if(i==14)require(!actual.objectShadow,"Removed object-shadow component must clear the snapshot field");
     }
     require(cursor==1021 && compacted.lights.size()==1 && compacted.lights.front().nodeId==source.nodes[13].id,"Removed-node lights must be filtered");
+    runtime.snapshotScene(warmup);
+    require(warmup.nodes.size()==compacted.nodes.size() && warmup.lights.size()==1,
+        "Reused snapshots must compact dead nodes and lights on every acquisition");
+    for(std::size_t i=0;i<warmup.nodes.size();++i) {
+        const auto& a=warmup.nodes[i];const auto& b=compacted.nodes[i];
+        require(a.id==b.id&&a.parentId==b.parentId&&a.translation==b.translation&&a.visible==b.visible
+            &&a.objectShadow.has_value()==b.objectShadow.has_value(),"Reused and returned snapshots must preserve live state and ordering");
+    }
     require(first.nodes.size()==1024 && first.nodes[13].translation==source.nodes[13].translation && first.nodes[13].visible && first.nodes[13].objectShadow->normalBias!=.025F,"Earlier snapshots must retain independent values");
     compacted.nodes.front().materialSlots.clear();compacted.nodes.front().resolvedMaterials.clear();compacted.nodes.front().name="edited-copy";
     const auto again=runtime.snapshotScene();
     require(again.nodes.front().name==source.nodes[1].name && again.nodes.front().materialSlots.size()==4 && again.nodes.front().resolvedMaterials.size()==4,"Caller edits must preserve runtime-owned material data");
+    auto replacement=source;replacement.sceneId="replacement";replacement.nodes.resize(1);
+    replacement.nodes.front().parentId.clear();replacement.lights.clear();
+    runtime.replaceScene(replacement);runtime.snapshotScene(warmup);
+    require(warmup.sceneId=="replacement" && warmup.nodes.size()==1 && warmup.lights.empty(),
+        "Destination reuse must refresh metadata and release removed scene entries after replacement");
 }
 
 int main() {

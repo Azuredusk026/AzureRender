@@ -215,6 +215,7 @@ private:
     float editorCameraNear_=0,editorCameraFar_=0;
 #endif
     azurerender::RuntimeLifecycle runtime_;
+    azurerender::SceneDocument playerSceneScratch_;
     azurerender::ModuleAssembly runtimeModules_;
     std::unique_ptr<azurerender::LevelSession> levelSession_;
     std::unique_ptr<azurerender::GameRuntime> gameRuntime_;
