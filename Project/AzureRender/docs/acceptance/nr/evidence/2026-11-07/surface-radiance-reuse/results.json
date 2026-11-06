@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "status": "isolated-native-zero-pixel-gate-failed",
+  "sourceBase": "521e002",
+  "production": "521e002 runtime inputs restored exactly",
+  "candidateProgramsAdded": 47,
+  "existing663ProgramsByteIdentical": true,
+  "cacheBytesAt1440": 471859200,
+  "required": {
+    "cpuP95Ms": 8,
+    "gpuP95Ms": 16.6,
+    "formalSamples": 1800,
+    "frozenNativeRgbChangedPixels": 0,
+    "overallVisual": "failed-user-review"
+  },
+  "costControl": {
+    "status": "compared",
+    "seconds": 21.3440000000046,
+    "productionUnchanged": true,
+    "summary": [
+      {
+        "mode": "baseline",
+        "allEventMs": 16.886720000000057,
+        "matchedEventMs": 2.4651519999999993
+      },
+      {
+        "mode": "ablation",
+        "allEventMs": 15.189887999999954,
+        "matchedEventMs": 0.348352
+      },
+      {
+        "mode": "ablation",
+        "allEventMs": 14.736095999999865,
+        "matchedEventMs": 0.337504
+      },
+      {
+        "mode": "baseline",
+        "allEventMs": 16.481695999999996,
+        "matchedEventMs": 2.4725760000000006
+      }
+    ]
+  },
+  "qualification": {
+    "kind": "MatchedOrdinaryOpaqueShaderCost",
+    "sourceBase": "521e002",
+    "referenceSource": "35cc28f GPU programs byte-identical through 521e002",
+    "control": "720p current captured programs with actual ordinary-opaque specialization; output-changing SSR ablation is a cost upper bound only",
+    "matchedBaselineMs": 2.468864,
+    "matchedAblationMs": 0.342928,
+    "estimated1080GrossSavedMs": 4.7833559999999995,
+    "estimatedAdditionalCacheMs": 1.5,
+    "expectedGpuSavedMs": 3.2833559999999995,
+    "qualified": true,
+    "limitations": "Pixel scaling, cache bandwidth, hit coverage and quad fallbacks are inferences; actual visual and native timing gates remain authoritative."
+  },
+  "image": {
+    "surfaceRadiancePrepared": true,
+    "surfaceRadianceBytes": 471859200,
+    "newProgramCount": 47,
+    "status": "failed",
+    "sourceBase": "521e002-with-surface-radiance-reuse",
+    "executableSha256": "e894558008aca8bbbb81f4c55a5a1bfef65d4be2b7fc2a1cb01e86dc8c5e6037",
+    "exitCode": 0,
+    "seconds": 272.7190000000046,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "a0be810c2c9692dff3c564378d8ed4588bdd16723072189792d6e7785d49c52b",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 2,
+          "maxByteDifference": 1
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 2,
+          "maxByteDifference": 1
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "22bc84d38b091f3d806680b5d2ee3f925695f4c59b55bde83b690ae29c1442af",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 2,
+          "maxByteDifference": 1
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 2,
+          "maxByteDifference": 1
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "a2a65fc55e4bc45405199a747db41bf929bb46851c0be3ea292a90366949caaa",
+        "frozen": {
+          "identical": false,
+          "changedPixels": 1,
+          "maxByteDifference": 1
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 15,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "all663ProgramsByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Single-frame FP32 surface radiance with exact geometry identity and quad-uniform fallback; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "checks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 273.26600000000326,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureSurfaceRadianceCacheTests",
+        "--test-target",
+        "AzureSurfaceRadianceCacheGpuTests",
+        "--test-target",
+        "AzureSurfaceRadianceRecordingTests",
+        "--test-target",
+        "AzureDepthPrefillRecordingTests",
+        "--test-target",
+        "AzureDepthOnlyShadowRecordingTests",
+        "--test-target",
+        "AzureMaterialPipelinePolicyTests",
+        "--test-target",
+        "AzureRenderNullRhiPassTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 9.421999999998661,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(SurfaceRadianceCache|SurfaceRadianceCacheGpu|SurfaceRadianceRecording|DepthPrefillRecording|DepthOnlyShadowRecording|MaterialPipelinePolicy|NullRhiPass)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-070333-surface-radiance-reuse-bdfb96\\release-checks.xml"
+      ]
+    }
+  ],
+  "restoration": {
+    "status": "restored",
+    "sourceInputsByteIdentical": true,
+    "all663ProgramsByteIdentical": true,
+    "playerCodeSectionIdentical": true,
+    "playerSha256": "53d3dd3a6bcc42f403bdde650339f4ea587c316bb71704cb512ccaf893b9bd4d",
+    "playerCodeSectionSha256": "0dc45fab4431c6ff2a47c1290228f9a0704fa54c44b2a0431002aa1003f63ae0",
+    "seconds": 265.29700000000594,
+    "buildCommand": [
+      "cmd",
+      "/d",
+      "/c",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+      "build",
+      "--source",
+      "D:\\Projects\\FYP\\Project\\AzureRender",
+      "--build-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+      "--config",
+      "Release",
+      "--test-target",
+      "AzureDepthPrefillRecordingTests",
+      "--test-target",
+      "AzureDepthOnlyShadowRecordingTests",
+      "--test-target",
+      "AzureMaterialPipelinePolicyTests",
+      "--test-target",
+      "AzureRenderNullRhiPassTests"
+    ],
+    "checkCommand": [
+      "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+      "--test-dir",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+      "-R",
+      "^AzureRender\\.(DepthPrefillRecording|DepthOnlyShadowRecording|MaterialPipelinePolicy|NullRhiPass)$",
+      "--output-on-failure",
+      "--no-tests=error",
+      "--output-junit",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-070333-surface-radiance-reuse-bdfb96\\restore-checks.xml"
+    ],
+    "checksPassed": 4,
+    "retainedTestCorrection": "Depth prefill recording separately verifies existing ordinary and fixed-class early-depth pipelines, material eligibility, opacity and MSAA. The class implementation is present in the frozen baseline source.",
+    "provenanceVerified": true
+  },
+  "performancePairExecuted": false,
+  "formalPerformanceAccepted": false,
+  "overallVisualAccepted": false,
+  "precisionCause": "Unconfirmed: producer/consumer arithmetic, intermediate precision and compiler contraction require independent investigation.",
+  "implementationBoundary": "Exact depth/instance/triangle/material identity, full FP32 payloads, nearest integer sampling, quad-uniform reuse with full-quads/quad-derivatives/maximal-reconvergence support. Unsupported capability and format use complete shading.",
+  "limitations": [
+    "Output-changing ablation is a cost upper-bound experiment, not a compatible optimization.",
+    "Four-frame candidate image time was 272.719 seconds; the earlier original four-frame batch took 125.094 seconds. Sources and cold shader caches differ, so this is an observed startup cost rather than a controlled compilation benchmark.",
+    "Mechanism GPU probe passed on RTX 4060 Laptop; unsupported-quad recording fallback is a NullRhi check, not dual-device native acceptance.",
+    "Native image RGB zero-pixel gate failed; the planned performance pair was skipped.",
+    "Formal frame budgets, power qualification and overall appearance remain pending."
+  ],
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 23517166,
+    "sha256": "6efaffa9603acca29275d20951a46631f46bec96df3f4f5c459760a81851797b"
+  }
+}

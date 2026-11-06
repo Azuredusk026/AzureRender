@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "kind": "NativeOptimizationEvidence",
+  "sourceBase": "521e002",
+  "status": "isolated-native-zero-pixel-gate-failed",
+  "candidateSourceHashes": {
+    "CMakeLists.txt": "92c16d12abc1489ec579fd905521974505f6a047d75bb5b84c4be1e7435b9bcc",
+    "shaders/mesh.frag": "9e620ce4dda00200fa88ae4c47b83a5bb0e2f028d23a18aead0f913aa9b418c7",
+    "shaders/mesh.vert": "8dd928048acf3877ef97878a2d0deaf0e13dcd8e96956f72cc6d312ec2e8190d",
+    "src/app/AzureRenderApp.cpp": "8aebadbe11998844f49faf194b1746a6ff6a221565f5194f3f06ff0e85fd8f39",
+    "src/app/AzureRenderApp.hpp": "ff00d0eb8a9a51b0e7d828512b4d932e4d7de1cf46ab6ee65b5c2c1759d995cf",
+    "src/render/MaterialPipelinePolicy.hpp": "d7262329863b11d93a682d1aa53017c54bf0418fb7487c9dc8344091622db5df",
+    "src/render/RenderContext.hpp": "01c2f9ca27400eb30ad53897a163014533a2b11c7ea142d2a94536df202435cc",
+    "src/scenes/CharacterMaterialSampling.inc": "45b47a51580b53dac2997bb1aa050a43b92041ee260075bbd648c3946db85201",
+    "src/scenes/CharacterSceneRenderer.cpp": "4b1d260aa71252047ac11b07cf72abf9c7c8f486a2ac2506265e631a90463bc1",
+    "src/scenes/CharacterSceneRenderer.hpp": "f1e1b441fa8c198605920dca4a40b531dbc81bad1c404c8d94a43952558e850b",
+    "tests/support/VulkanComputeFixture.hpp": "23df1b97f3ef8adc78d6199e4146f14947b743bd295732e460df82322333c42f",
+    "shaders/surface_radiance.glsl": "61b760ffe54ca9517d723dbccc51666cfa5c57356f5029123dcd3fc24c9ec789",
+    "shaders/surface_radiance_identity.glsl": "54d44baff9c08f9ef6823c2878da929b90d21f9c3d945a9f1dbc3c79ef9c7556",
+    "shaders/surface_radiance_probe.frag": "90d14b0574579c6acea53d60f3deb2ad2bf396447700c99d943c33d6963bd8ba",
+    "shaders/surface_radiance_probe.vert": "e7534785aa63d53a04097b6707e19d651c60f08891d6909d6af12d9bbba20858",
+    "src/render/SurfaceRadianceCache.hpp": "44ea429548d250d8400f3d52029f9010cb8f4f3df6f6859804d270073c388061",
+    "src/render/SurfaceRadianceCache.cpp": "470f2badc7ebaf8718d878aac810e27f7864f7f80d6181bb657c5b249d9ccfb8",
+    "tests/SurfaceRadianceCacheTests.cpp": "ce3643cbd3aeb58b031c2734eba2c82300cdf94baabd0025dd9e5eac3a6118c1",
+    "tests/SurfaceRadianceCacheGpuTests.cpp": "73248bf43ca712b81f3c85663a50728bf1d3ea5486b7d02d2afadc853728fbce",
+    "tests/SurfaceRadianceRecordingTests.cpp": "b2656770b65bd3d5ee1fd619079c9f294223c480a9fe23ec30621381bb80d915",
+    "tests/DepthPrefillRecordingTests.cpp": "01aa031b2881be66f1e12dd936f9d4e3e5c277380a6ca62783fa1f62d64df3d4"
+  },
+  "candidatePlayerSha256": "e894558008aca8bbbb81f4c55a5a1bfef65d4be2b7fc2a1cb01e86dc8c5e6037",
+  "candidateBuildProvenanceSha256": "3612a84a6658345f585f285d95821d3a26c25c956b7ca60f2b143b093d332c9a",
+  "restoredBuildProvenanceSha256": "9bc0b019167c7ce4af894aa7cf07e6fa1817fc781eae4b1b8c439a3928767096",
+  "retainedTest": {
+    "path": "tests/DepthPrefillRecordingTests.cpp",
+    "sha256": "01aa031b2881be66f1e12dd936f9d4e3e5c277380a6ca62783fa1f62d64df3d4"
+  },
+  "sourceCapture": {
+    "path": "build/runs/20261107-061745-current-gpu-cost-2de6bc/current_frame320.rdc",
+    "sha256": "9079f51daf9e3d39a3de717a64f226080a86e013d379ea2e5a7eedcbf47ee103",
+    "preserved": true
+  },
+  "results": {
+    "file": "results.json",
+    "sha256": "08c2d6662031e2e7e6fcf77146bbf3dfe8dd8e81ec99827960a5f70b7a8edbec"
+  },
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 23517166,
+    "sha256": "6efaffa9603acca29275d20951a46631f46bec96df3f4f5c459760a81851797b"
+  }
+}

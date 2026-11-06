@@ -60,6 +60,8 @@ CPU 与 GPU 成本下降为当前首要开发目标。
 当前程序的[GPU 定位](../acceptance/nr/current-gpu-cost.md)完成单帧及视图模式局部控制。
 本候选保持隔离，命令准备与缓冲同步的[批次优化](../acceptance/nr/read-scope-barriers.md)完成原生集中评估。
 短时 CPU 均值为 12.17 与 9.02 毫秒，P95 为 14.39 与 10.31 毫秒。
+同帧照明的[复用评估](../acceptance/nr/surface-radiance-reuse.md)未通过原生零像素条件，候选处于隔离状态。
+生产代码段、源码及原有着色程序恢复核对一致，性能配对未执行。
 继续处理 GPU 场景着色及剩余 CPU 准备。
 完整验收按[自主执行](2026-11-07-autonomous-acceptance.md)连续推进。
 正式环境、帧预算和整体画质继续待通过。

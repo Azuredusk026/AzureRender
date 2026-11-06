@@ -31,7 +31,7 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
         renderer.updateFrame(frame);RenderGraph graph;
         SceneGraphResources resources{graph.addResource("color"),graph.addResource("depth"),graph.addResource("normal"),graph.addResource("shadow")};
         renderer.registerPasses(graph,resources,context);std::string error;require(graph.compile(error),error.c_str());
-        std::set<std::string> prefill,covered,ordinaryCovered,earlyModules;
+        std::set<std::string> prefill,covered,ordinaryCovered,classCovered,earlyModules;
         for(const auto& call:backend.calls)if(call.name=="createShaderModule"&&call.detail.find(" earlyFragmentTests=1")!=std::string::npos)
             earlyModules.insert(call.detail.substr(0,call.detail.find(' ')));
         allEarlyModules.insert(earlyModules.begin(),earlyModules.end());
@@ -39,11 +39,15 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
             const auto at=call.detail.find(" fragmentModule=");if(at==std::string::npos)continue;
             const auto first=at+16;const auto module=call.detail.substr(first,call.detail.find(' ',first)-first);
             if(!earlyModules.count(module))continue;
-            require(call.detail.find("fragmentSpec=0:1/")!=std::string::npos,"Early-depth programs require ordinary opaque specialization");
-            const auto handle=call.detail.substr(0,call.detail.find(' '));ordinaryCovered.insert(handle);allCovered.insert(handle);
+            const bool ordinaryProgram=call.detail.find("fragmentSpec=0:1/")!=std::string::npos;
+            require(ordinaryProgram||call.detail.find("fragmentSpec=1:0/2:")!=std::string::npos,"Early-depth programs require ordinary or fixed material-class specialization");
+            const auto handle=call.detail.substr(0,call.detail.find(' '));
+            (ordinaryProgram?ordinaryCovered:classCovered).insert(handle);allCovered.insert(handle);
         }
         const bool ordinary=mode==AssetAlphaMode::Opaque&&features==0;
         require(ordinaryCovered.size()==(!multisample&&ordinary?8*(generation+1):0),"Ordinary covered color pipelines require explicit single-sample qualification");
+        const bool fixedClass=mode==AssetAlphaMode::Opaque&&features==MaterialFeatureSqrtAlphaShadow;
+        require(classCovered.size()==(!multisample&&fixedClass?8*(generation+1):0),"Fixed-class covered pipelines require opaque single-sample qualification");
         for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"&&call.detail.find("depthBias=1.000000/0.000000")!=std::string::npos&&call.detail.find(" masks=0/0/")!=std::string::npos){
             const auto handle=call.detail.substr(0,call.detail.find(' '));prefill.insert(handle);
             if(call.detail.find("fragment=0")!=std::string::npos){covered.insert(handle);allCovered.insert(handle);}
@@ -51,16 +55,18 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
         require(covered.size()==(multisample?0:6*(generation+1)),"Each generation must own six single-sample covered pipelines");
         unsigned checked=0;
         for(const auto& pass:graph.passes())if(pass.name=="character-opaque-depth"||pass.name=="character-main"){
-            rhi::NullCommandRecorder commands;pass.recordCommands(commands);std::string current;unsigned draws=0,coveredColors=0;
+            rhi::NullCommandRecorder commands;pass.recordCommands(commands);std::string current;unsigned draws=0,coveredColors=0,coveredClasses=0;
             for(const auto& call:commands.calls){
                 if(call.name=="bindPipeline")current=call.detail;
                 if(call.name=="drawIndexed"&&prefill.count(current)){
                     ++draws;require((covered.count(current)!=0)==(!multisample&&opacity==1.F),"Covered pipeline must preserve fade and MSAA fallback");
                 }
                 if(call.name=="drawIndexed"&&ordinaryCovered.count(current))++coveredColors;
+                if(call.name=="drawIndexed"&&classCovered.count(current))++coveredClasses;
             }
             require((draws>0)==(mode==AssetAlphaMode::Opaque&&opacity>0),"Both workflows must preserve opaque-only prefill submission");++checked;
             require((coveredColors>0)==(!multisample&&ordinary&&opacity==1.F),"Both color workflows must preserve ordinary/fade/MSAA specialization eligibility");
+            require((coveredClasses>0)==(!multisample&&fixedClass&&opacity==1.F),"Fixed-class submissions require qualified material, opacity and sample count");
         }
         require(checked==2,"Snapshot and main workflows must both execute");
     }
