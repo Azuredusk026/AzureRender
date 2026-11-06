@@ -133,7 +133,12 @@ Debug 目录规模的[原用例](../acceptance/recovery/directory-scale-diagnosi
 [当前 GPU 事件分解](../acceptance/nr/current-gpu-events.md)取得实际运行产物的捕获。
 重放计时及材质查询均核对冻结输入。
 受检主颜色通用程序的七十一个事件合计 11.84 毫秒。
-接续普通不透明材质的编译期完整覆盖资格验证。
+普通不透明[完整覆盖专用常量](../acceptance/nr/opaque-coverage-specialization.md)保留为隔离原型。
+两配置各三十二项 CPU 及二十四项双设备 GPU 检查通过。
+原生后两帧分别有九个及七个像素相差一字节。
+短时 GPU 帧 P95 为 27.65 毫秒，热状态检查通过。
+原型未通过零像素差条件，整帧收益资格未成立。
+接续[提前深度测试](2026-11-06-ordinary-early-depth.md)的独立程序验证。
 完整 CPU、GPU 和热状态预算继续保留失败。
 
 正式检查的[构建与设备入口](2026-11-05-acceptance-preflight.md)已经恢复。
