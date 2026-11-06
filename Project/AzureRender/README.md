@@ -31,6 +31,8 @@
 当前运行产物的捕获、程序身份及材质常量见[GPU 事件分解](docs/acceptance/nr/current-gpu-events.md)。
 静态实例的[只读姿态共享](docs/acceptance/nr/shared-bind-pose.md)通过双配置 CPU 及原生四帧检查。
 完整场景每帧有八百六十个共享实例，Intel 时间解析条件继续待修复。
+动画[局部初始化](docs/acceptance/nr/animation-local-pose.md)通过双配置、姿态及运动检查。
+原生四帧与二百二十次同输入姿态的原字检查通过。
 
 联合画质验收未通过，当前诊断见[输入核验](docs/acceptance/nr/joint-visual-input-isolation.md)。
 主光接收范围、阴影来源及参考灯实验见[机制验证](docs/acceptance/nr/receiver-directional-light.md)。

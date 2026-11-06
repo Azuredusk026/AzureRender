@@ -58,7 +58,7 @@ void operator delete[](void* pointer,std::align_val_t,const std::nothrow_t&) noe
 using namespace azurerender;
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 struct Measurement {std::size_t bytes;std::vector<rhi::RecordedCall> commands;};
-Measurement measure(const std::filesystem::path& shaders,const std::filesystem::path& source,std::size_t vertexCount,bool bindless,unsigned aliases=0,unsigned staticNodes=0) {
+Measurement measure(const std::filesystem::path& shaders,const std::filesystem::path& source,std::size_t vertexCount,bool bindless,unsigned aliases=0,unsigned staticNodes=0,bool animatedSkeleton=false) {
     rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
     context.allocator=&backend.allocator();context.rhi=&backend;context.shaderDirectory=shaders.string();
     context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();
@@ -73,6 +73,7 @@ Measurement measure(const std::filesystem::path& shaders,const std::filesystem::
     require(vertexCount>=opaque->vertices.size(),"Opaque fixture must retain every referenced vertex");
     opaque->vertices.resize(vertexCount);
     if(staticNodes)opaque->nodes.resize(std::max<std::size_t>(staticNodes,opaque->nodes.size()));
+    if(animatedSkeleton){opaque->animations.emplace_back();opaque->animations.back().endTime=1;}
     for(auto& material:opaque->materials)material.alphaMode=AssetAlphaMode::Opaque;
     auto transparent=std::make_shared<LoadedAsset>(loadGltfAsset(path));
     for(auto& material:transparent->materials)material.alphaMode=AssetAlphaMode::Blend;
@@ -111,6 +112,14 @@ int main(int argc,char** argv) try {
         for(std::size_t i=0;i<small.commands.size();++i)
             require(small.commands[i].name==denseSkeleton.commands[i].name&&small.commands[i].detail==denseSkeleton.commands[i].detail,
                 "Static pose sharing preserves geometry, opacity and ordering");
+        const auto animatedSkeleton=measure(argv[1],argv[2],0,bindless,0,65536,true);
+        std::cout<<"bindless="<<bindless<<" animation65536NodeAllocationBytes="<<animatedSkeleton.bytes<<std::endl;
+        require(animatedSkeleton.bytes<=small.bytes+65536*448+64*1024,
+            "Animation evaluation must keep final pose and hierarchy workspace within its per-node frame allocation budget");
+        require(small.commands.size()==animatedSkeleton.commands.size(),"Identity animation preserves recording workload");
+        for(std::size_t i=0;i<small.commands.size();++i)
+            require(small.commands[i].name==animatedSkeleton.commands[i].name&&small.commands[i].detail==animatedSkeleton.commands[i].detail,
+                "Identity animation preserves geometry and every recorded input");
         const auto alias=measure(argv[1],argv[2],0,bindless,1024);
         std::cout<<"bindless="<<bindless<<" ordinaryAllocationBytes="<<small.bytes<<" alias1024AllocationBytes="<<alias.bytes<<std::endl;
         require(alias.bytes<=small.bytes+4096,"Unused loaded resource aliases must not scale per-frame layout allocations");

@@ -104,6 +104,11 @@ int main() {
 
         auto fixture = animated();
         const auto asset = loadEmbeddedGltfAsset(fixture.glb(), true);
+        for(float invalidOpacity:{-.1F,1.1F,std::numeric_limits<float>::quiet_NaN(),std::numeric_limits<float>::infinity()}){
+            auto invalidBind=asset;invalidBind.nodes.at(1).opacity=invalidOpacity;bool rejectedBind=false;
+            try{(void)sampleAnimationPose(invalidBind,0,1,false);}catch(const std::invalid_argument&){rejectedBind=true;}
+            check(rejectedBind,"Animation override must not accept invalid authored bind opacity");
+        }
         const auto bind = bindAnimationPose(asset);
         near(bind.nodeWorldOpacities[1], .4F, "Parent and child authored opacity must multiply");
         const auto middle = sampleAnimationPose(asset,0,1,false);

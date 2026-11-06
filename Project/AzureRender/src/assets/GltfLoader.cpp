@@ -3138,6 +3138,16 @@ LoadedAsset importGltfModel(tinygltf::Model& model,const AuthoredImageMips* auth
 }
 
 namespace {
+AssetPose localBindPose(const LoadedAsset& asset) {
+    AssetPose pose;
+    for(const auto& node:asset.nodes){
+        if(!std::isfinite(node.opacity)||node.opacity<0||node.opacity>1)
+            throw std::invalid_argument("Pose node opacity must be in [0,1]");
+        pose.local.push_back({node.translation,node.rotation,node.scale,node.opacity});
+    }
+    pose.morphWeights=asset.defaultMorphWeights;
+    return pose;
+}
 void resolvePose(const LoadedAsset& asset, AssetPose& pose) {
     std::vector<Matrix4> worldTransforms(
         asset.nodes.size(),
@@ -3224,16 +3234,15 @@ void resolveAssetPose(const LoadedAsset& asset, AssetPose& pose) {
     resolvePose(asset,pose);
 }
 AssetPose bindAnimationPose(const LoadedAsset& asset) {
-    AssetPose pose;
-    for (const auto& node : asset.nodes) pose.local.push_back({node.translation, node.rotation, node.scale,node.opacity});
-    pose.morphWeights=asset.defaultMorphWeights;
+    auto pose=localBindPose(asset);
     resolvePose(asset, pose);
     return pose;
 }
 AssetPose sampleAnimationPose(const LoadedAsset& asset, std::size_t animationIndex, float time, bool loop) {
     if (animationIndex >= asset.animations.size()) throw std::runtime_error("Animation index is out of range");
     if (!std::isfinite(time)) throw std::invalid_argument("Animation time must be finite");
-    auto pose = bindAnimationPose(asset);
+    // Channels consume local input; the completed sample resolves its hierarchy.
+    auto pose = localBindPose(asset);
     const auto& animation = asset.animations[animationIndex];
     const float duration = animation.endTime - animation.startTime;
     const float sampleTime = duration > 1e-8F
