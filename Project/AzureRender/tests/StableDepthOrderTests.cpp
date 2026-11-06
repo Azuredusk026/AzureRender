@@ -27,6 +27,21 @@ int main(){try{
   std::stable_sort(expected.begin(),expected.end(),[&](auto x,auto y){return depth[x]>depth[y];});azurerender::stableDepthOrder(order,depth);
   if(order!=expected)throw std::runtime_error("Infinite, signed-zero and subnormal keys must retain comparator order");
  }
+ {
+  azurerender::DepthOrderWorkspace workspace;
+  for(unsigned count:{32768U,256U,8192U,65536U}){
+   std::vector<float> depth(count);std::vector<std::uint32_t> order(count);std::iota(order.begin(),order.end(),0U);
+   for(unsigned i=0;i<count;++i)depth[i]=3.F+float(random()%4096)/8192.F;
+   auto expected=order;std::stable_sort(expected.begin(),expected.end(),[&](auto x,auto y){return depth[x]>depth[y];});
+   const auto keys=workspace.keyEvaluations,skipped=workspace.skippedPasses;
+   azurerender::stableDepthOrder(order,depth,workspace);
+   if(order!=expected||workspace.keyEvaluations-keys!=count||workspace.skippedPasses==skipped)
+       throw std::runtime_error("Dense depth preparation must reuse exact keys and omit constant radix passes");
+  }
+  auto& aliased=workspace.scratch;aliased={0};bool rejected=false;
+  try{azurerender::stableDepthOrder(aliased,{1},workspace);}catch(const std::invalid_argument&){rejected=true;}
+  if(!rejected||aliased!=std::vector<std::uint32_t>{0})throw std::runtime_error("Workspace alias must reject before input mutation");
+ }
  std::vector<std::uint32_t> bad{0,2};const auto prior=bad;bool rejected=false;try{azurerender::stableDepthOrder(bad,{1,2});}catch(const std::out_of_range&){rejected=true;}
  if(!rejected||bad!=prior)throw std::runtime_error("Invalid depth index must reject without mutation");std::cout<<"Stable depth oracle passed "<<cases<<" distributions and invalid input\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

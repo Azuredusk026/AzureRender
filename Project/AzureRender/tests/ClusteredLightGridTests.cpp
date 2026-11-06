@@ -110,5 +110,24 @@ int main() try {
         local.viewSpaceBounds=false;offsetGrid.assign({local});
         if(indexed!=offsetGrid.gpuHeaderData())throw std::runtime_error("Fallback NDC bounds must consume the offset exactly once");
     }
+    {
+        azurerender::ClusteredLightGrid reused({16,9,24});
+        for(bool orthographic:{false,true})for(unsigned x:{16U,8U,16U}){
+            azurerender::ClusterGridDesc desc{x,9,24,.2F,120.F,1.5F,2.F,orthographic,.125F,-.125F};
+            azurerender::ClusteredLightGrid fresh(desc);
+            auto light=behind;light.shape.type=azurerender::LightKind::Directional;
+            reused.configure(desc);reused.assign({first,second,light});fresh.assign({first,second,light});
+            if(reused.gpuHeaderData()!=fresh.gpuHeaderData()||reused.gpuIndexData()!=fresh.gpuIndexData())
+                throw std::runtime_error("Reconfigured storage must preserve fresh-grid GPU bytes and light order");
+            std::vector<std::uint32_t> indices{123};std::vector<std::array<std::uint32_t,2>> headers{{123,456}};
+            reused.gpuIndexData(indices);reused.gpuHeaderData(headers);
+            if(indices!=fresh.gpuIndexData()||headers!=fresh.gpuHeaderData())
+                throw std::runtime_error("Caller-owned packing storage must replace prior values with the exact GPU data");
+            const auto before=reused.gpuHeaderData();auto invalid=desc;invalid.nearPlane=0;
+            bool rejected=false;try{reused.configure(invalid);}catch(const std::invalid_argument&){rejected=true;}
+            if(!rejected||reused.gpuHeaderData()!=before)
+                throw std::runtime_error("Invalid reconfiguration must preserve prior memberships");
+        }
+    }
     return 0;
 } catch(const std::exception& error) {std::cerr<<error.what()<<'\n';return 1;}

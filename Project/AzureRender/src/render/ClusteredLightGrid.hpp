@@ -26,14 +26,24 @@ struct ClusterGridDesc {
 
 class ClusteredLightGrid final {
 public:
-    explicit ClusteredLightGrid(ClusterGridDesc desc) : desc_(desc) {
-        if (desc_.x == 0 || desc_.y == 0 || desc_.z == 0
-            || !(desc_.nearPlane > 0.0F) || !(desc_.farPlane > desc_.nearPlane)) {
+    explicit ClusteredLightGrid(ClusterGridDesc desc) { configure(desc); }
+
+    // Starts a new assignment while retaining storage for an equal cell count.
+    // References to prior memberships are invalidated by configure()/assign().
+    // Invalid configuration or allocation failure preserves the previous grid.
+    void configure(ClusterGridDesc desc) {
+        if (desc.x == 0 || desc.y == 0 || desc.z == 0
+            || !(desc.nearPlane > 0.0F) || !(desc.farPlane > desc.nearPlane)) {
             throw std::invalid_argument("Invalid clustered light grid");
         }
-        for(float offset:{desc_.projectionOffsetX,desc_.projectionOffsetY})if(!std::isfinite(offset)||std::abs(offset)>2)
+        for(float offset:{desc.projectionOffsetX,desc.projectionOffsetY})if(!std::isfinite(offset)||std::abs(offset)>2)
             throw std::invalid_argument("Invalid clustered projection offset");
-        clusters_.resize(clusterCount());
+        const auto count=static_cast<std::size_t>(desc.x)*desc.y*desc.z;
+        if(count!=clusters_.size()){
+            std::vector<std::vector<std::uint32_t>> replacement(count);
+            clusters_.swap(replacement);
+        }else for(auto& cluster:clusters_)cluster.clear();
+        desc_=desc;
     }
 
     void assign(const std::vector<RenderLight>& lights) {
@@ -131,18 +141,27 @@ public:
     }
     [[nodiscard]] std::vector<std::uint32_t> gpuIndexData() const {
         std::vector<std::uint32_t> result;
-        for (const auto& cluster : clusters_) result.insert(result.end(), cluster.begin(), cluster.end());
+        gpuIndexData(result);
         return result;
+    }
+    void gpuIndexData(std::vector<std::uint32_t>& result) const {
+        std::size_t count=0;for(const auto& cluster:clusters_)count+=cluster.size();
+        result.reserve(count);result.clear();
+        for (const auto& cluster : clusters_) result.insert(result.end(), cluster.begin(), cluster.end());
     }
     [[nodiscard]] std::vector<std::array<std::uint32_t, 2>> gpuHeaderData() const {
         std::vector<std::array<std::uint32_t, 2>> result;
+        gpuHeaderData(result);
+        return result;
+    }
+    void gpuHeaderData(std::vector<std::array<std::uint32_t, 2>>& result) const {
         result.reserve(clusters_.size());
+        result.clear();
         std::uint32_t offset = 0;
         for (const auto& cluster : clusters_) {
             result.push_back({offset, static_cast<std::uint32_t>(cluster.size())});
             offset += static_cast<std::uint32_t>(cluster.size());
         }
-        return result;
     }
     [[nodiscard]] const ClusterGridDesc& desc() const noexcept { return desc_; }
 

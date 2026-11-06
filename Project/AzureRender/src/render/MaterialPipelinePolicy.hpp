@@ -30,6 +30,13 @@ inline bool ordinaryOpaqueMaterial(const AssetMaterial& material) noexcept {
 inline bool fullyCoveredOrdinaryMaterial(const AssetMaterial& material,float nodeOpacity) noexcept {
     return ordinaryOpaqueMaterial(material)&&nodeOpacity==1.F;
 }
+// mesh.frag clips opaque color only for node fade or screen-normal snapshots.
+// Integral, composite and overlay programs retain their own submission rules.
+inline bool fullyCoveredClassMaterial(const AssetMaterial& material,float nodeOpacity) noexcept {
+    return material.alphaMode==AssetAlphaMode::Opaque&&nodeOpacity==1.F
+        &&!material.nprDiffuse.screenLightingNormal&&!opaqueSurfaceOverlay(material)
+        &&(material.materialFeatures&(MaterialFeatureHairPixelIntegral|MaterialFeatureSceneTint|MaterialFeatureMultiplyComposite))==0;
+}
 struct MaterialFeatureSpecialization {
     std::uint32_t fixedMask=0,fixedValue=0;
     [[nodiscard]] constexpr bool matches(std::uint32_t features) const noexcept {

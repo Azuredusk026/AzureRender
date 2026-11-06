@@ -132,6 +132,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
     const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot) {
     bool needed=false;
     std::array<bool,kMaterialClassVariantCount> classes{};
+    std::array<bool,kMaterialClassVariantCount> coveredClasses{};
     std::array<std::uint32_t,kMaterialClassVariantCount> intersections{},combined{};
     intersections.fill(~std::uint32_t{0});
     materialClassFeatureSpecializations_={};
@@ -141,6 +142,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             const auto index=unsigned(material.materialClass);
             if(index<classes.size()){
                 classes[index]=true;
+                coveredClasses[index]=coveredClasses[index]||fullyCoveredClassMaterial(material,1.F);
                 intersections[index]&=material.materialFeatures;
                 combined[index]|=material.materialFeatures;
             }
@@ -156,7 +158,8 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             const auto file=sceneFragmentVariant(found->path,false,false,false,false,false,true);
             return createMaterialShaderModule(file);
         };
-        const bool early=needed&&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT;
+        const bool early=(needed||std::any_of(coveredClasses.begin(),coveredClasses.end(),[](bool value){return value;}))
+            &&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT;
         const auto earlyColorModule=early?earlyModule(color.fragmentShader):VK_NULL_HANDLE;
         const auto earlySnapshotModule=early?earlyModule(snapshot.fragmentShader):VK_NULL_HANDLE;
         if(needed)for(unsigned facing=0;facing<4;++facing){
@@ -184,11 +187,15 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                 desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
                 desc.fragmentSpecialization={{1,index},{2,policy.fixedMask},{3,policy.fixedValue}};
                 materialClassPipelines_[index][facing]=createMaterialGraphicsPipeline(desc);
+                if(early&&coveredClasses[index]){auto covered=desc;covered.fragmentShader=earlyColorModule;
+                    materialClassEarlyDepthPipelines_[index][facing]=createMaterialGraphicsPipeline(covered);}
                 desc=snapshot;
                 desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
                 desc.fragmentSpecialization={{1,index},{2,policy.fixedMask},{3,policy.fixedValue}};
                 materialClassSnapshotPipelines_[index][facing]=createMaterialGraphicsPipeline(desc);
+                if(early&&coveredClasses[index]){auto covered=desc;covered.fragmentShader=earlySnapshotModule;
+                    materialClassEarlyDepthSnapshotPipelines_[index][facing]=createMaterialGraphicsPipeline(covered);}
             }
         }
     }catch(...){destroyMaterialClassPipelines();throw;}
@@ -196,7 +203,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
 void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
     materialClassFeatureSpecializations_={};
     if(!rhi_)return;
-    for(auto* variants:{&materialClassPipelines_,&materialClassSnapshotPipelines_})
+    for(auto* variants:{&materialClassPipelines_,&materialClassSnapshotPipelines_,&materialClassEarlyDepthPipelines_,&materialClassEarlyDepthSnapshotPipelines_})
         for(auto& facing:*variants)for(auto& pipeline:facing){
             if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
         }
@@ -211,10 +218,14 @@ VkPipeline CharacterSceneRenderer::ordinaryOpaquePipeline(const AssetMaterial& m
     return (snapshot?ordinaryOpaqueSnapshotPipelines_:ordinaryOpaquePipelines_)[facing];
 }
 
-VkPipeline CharacterSceneRenderer::materialClassPipeline(const AssetMaterial& material,bool mirrored,bool snapshot) const noexcept {
+VkPipeline CharacterSceneRenderer::materialClassPipeline(const AssetMaterial& material,bool mirrored,bool snapshot,float nodeOpacity) const noexcept {
     const auto index=unsigned(material.materialClass);
     if(material.alphaMode==AssetAlphaMode::Blend||index>=kMaterialClassVariantCount)return VK_NULL_HANDLE;
     if(!materialClassFeatureSpecializations_[index].matches(material.materialFeatures))return VK_NULL_HANDLE;
+    if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT&&fullyCoveredClassMaterial(material,nodeOpacity)){
+        const auto early=(snapshot?materialClassEarlyDepthSnapshotPipelines_:materialClassEarlyDepthPipelines_)[index][surfaceFacingIndex(material.doubleSided,mirrored)];
+        if(early)return early;
+    }
     return (snapshot?materialClassSnapshotPipelines_:materialClassPipelines_)[index][surfaceFacingIndex(material.doubleSided,mirrored)];
 }
 

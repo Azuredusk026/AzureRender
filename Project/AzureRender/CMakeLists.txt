@@ -1146,6 +1146,11 @@ if(BUILD_TESTING)
     add_executable(AzureMaterialPipelinePolicyTests tests/MaterialPipelinePolicyTests.cpp)
     target_link_libraries(AzureMaterialPipelinePolicyTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.MaterialPipelinePolicy COMMAND AzureMaterialPipelinePolicyTests)
+    add_executable(AzureMaterialClassEarlyDepthTests tests/MaterialClassEarlyDepthTests.cpp)
+    target_link_libraries(AzureMaterialClassEarlyDepthTests PRIVATE AzureRenderCore)
+    target_compile_definitions(AzureMaterialClassEarlyDepthTests PRIVATE AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
+    add_dependencies(AzureMaterialClassEarlyDepthTests AzureRenderShaders)
+    add_test(NAME AzureRender.MaterialClassEarlyDepth COMMAND AzureMaterialClassEarlyDepthTests "${SHADER_BINARY_DIR}")
     foreach(AZURE_FEATURE_AA 0 3 4)
         add_test(NAME AzureRender.MaterialFeatureSpecializationGpu.aa${AZURE_FEATURE_AA}
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_feature_specialization_gpu.py"

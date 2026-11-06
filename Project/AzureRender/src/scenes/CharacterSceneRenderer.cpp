@@ -1588,6 +1588,8 @@ void CharacterSceneRenderer::onUnload(const RenderContext& context) {
     motionPoses_.clear();state_.temporalFrame=nullptr;
     (void)context;
     loadJobs_.clear();loadInitialized_=false;destroyResources();
+    transparencyScratch_={};
+    clusteredLightGrid_.reset();
     faceSdfHeadNode_.reset();faceSdfTextureCount_=0;
 }
 
@@ -2908,16 +2910,18 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 &&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0);
             const bool ordinaryColor=colorRequired&&ordinaryOpaqueMaterial(m)&&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT;
             const auto classPipeline=materialClassPipeline(m,mirrored,true);
+            const bool classColor=colorRequired&&!ordinaryOpaqueMaterial(m)&&fullyCoveredClassMaterial(m,1.F)
+                &&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT&&classPipeline!=VK_NULL_HANDLE;
             const auto depthPipeline=prefill?prefillPipelines[m.doubleSided?2:mirrored?1:0]
                 :simpleDepth?(m.coverageTexture.present?snapshotCoveragePipelines_:snapshotDepthOnlyPipelines_)[m.doubleSided?2:mirrored?1:0]
                 :ordinaryOpaqueMaterial(m)?ordinaryOpaqueSnapshotPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :classPipeline?classPipeline
                 :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)];
-            if(!prefill&&!ordinaryColor)commands.bindPipeline(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline));
+            if(!prefill&&!ordinaryColor&&!classColor)commands.bindPipeline(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline));
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
-            if(counters&&!prefill&&!ordinaryColor)++counters->pipelineBinds;
+            if(counters&&!prefill&&!ordinaryColor&&!classColor)++counters->pipelineBinds;
             MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
                 m.aoColor,m.lamShadowColor,m.materialClass==AssetMaterialClass::Hair?m.hairViewParameters:m.matcapColor,
                 m.hairParameters,m.styleParameters,m.featureParameters,static_cast<unsigned>(m.materialClass),materialFeaturesForFrame(m),m.materialProfileVersion,
@@ -2937,6 +2941,9 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                     if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
                 }else if(ordinaryColor){
                     const auto selected=materialLightingPipeline(m,ordinaryOpaquePipeline(m,mirrored,true,run.opacity));
+                    if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
+                }else if(classColor){
+                    const auto selected=materialLightingPipeline(m,materialClassPipeline(m,mirrored,true,run.opacity));
                     if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
                 }
                 morph.nodeOpacity=run.opacity;
@@ -4299,7 +4306,7 @@ void CharacterSceneRenderer::updateClusteredLighting(
         lights.push_back(light);
     }
     frameLights_.setLights(std::move(lights), kMaxSceneLights);
-    ClusteredLightGrid grid({
+    const ClusterGridDesc gridDesc{
         kClusterGridX,
         kClusterGridY,
         kClusterGridZ,
@@ -4311,11 +4318,14 @@ void CharacterSceneRenderer::updateClusteredLighting(
             == CameraProjectionKind::Orthographic,
         renderSettings_->cameraView&&renderSettings_->cameraView->projection==CameraProjectionKind::Orthographic?projection[12]:-projection[8],
         renderSettings_->cameraView&&renderSettings_->cameraView->projection==CameraProjectionKind::Orthographic?projection[13]:-projection[9],
-    });
+    };
+    if(!clusteredLightGrid_)clusteredLightGrid_=std::make_unique<ClusteredLightGrid>(gridDesc);
+    else clusteredLightGrid_->configure(gridDesc);
+    auto& grid=*clusteredLightGrid_;
     grid.assign(frameLights_.lights());
     packedLights_ = frameLights_.gpuData();
-    packedClusterHeaders_ = grid.gpuHeaderData();
-    packedClusterIndices_ = grid.gpuIndexData();
+    grid.gpuHeaderData(packedClusterHeaders_);
+    grid.gpuIndexData(packedClusterIndices_);
     if (!clusteredLightingReported_) {
         azurerender::RuntimeDiagnostics::instance().print(
             "render",
@@ -4596,8 +4606,10 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
         if (transparentPrimitives.empty()) continue;
         const auto& pose = instancePoses_.at(instance.sourceIndex);
-        std::vector<Vector3> worldPositions(mesh.vertices.size());
-        std::vector<bool> prepared(mesh.vertices.size(),false);
+        auto& worldPositions=transparencyScratch_.worldPositions;
+        auto& prepared=transparencyScratch_.prepared;
+        worldPositions.resize(mesh.vertices.size());prepared.resize(mesh.vertices.size());
+        std::fill(prepared.begin(),prepared.end(),std::uint8_t{0});
         const auto vertexWorldPosition = [&](std::uint32_t index) {
             if(prepared.at(index))return worldPositions[index];
             worldPositions[index]=deformedVertexPosition(mesh,index,pose.pose.get(),pose.morph);
@@ -4610,8 +4622,9 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
                 oitIndexBuffers_[currentFrame_].mapped);
             for (const AssetPrimitive* primitive : transparentPrimitives) {
                 const std::uint32_t triangleCount = primitive->indexCount / 3;
-                std::vector<std::uint32_t> triangleOrder(triangleCount);
-                std::vector<float> triangleDepth(triangleCount);
+                auto& triangleOrder=transparencyScratch_.order;
+                auto& triangleDepth=transparencyScratch_.depths;
+                triangleOrder.resize(triangleCount);triangleDepth.resize(triangleCount);
                 for (std::uint32_t triangle = 0; triangle < triangleCount;
                      ++triangle) {
                     triangleOrder[triangle] = triangle;
@@ -4633,7 +4646,7 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
                     triangleDepth[triangle] =
                         dot(cameraOffset, cameraForward);
                 }
-                azurerender::stableDepthOrder(triangleOrder,triangleDepth);
+                azurerender::stableDepthOrder(triangleOrder,triangleDepth,transparencyScratch_.sort);
                 for (std::uint32_t triangle = 0; triangle < triangleCount;
                      ++triangle) {
                     const std::uint32_t ordered = triangleOrder[triangle];
@@ -4833,7 +4846,7 @@ void CharacterSceneRenderer::drawPrimitive(
         :(vertexColor?vertexColorBlendPipelines_:blendPipelines_);
     const auto fogPipeline=viewFog_&&blend&&material.unlitTextureLayers.fogMode==UnlitTextureLayers::FogMode::Scene
         ?viewFog_->materialPipeline(additive,vertexColor,surfaceFacingIndex(material.doubleSided,mirrored)):VK_NULL_HANDLE;
-    const auto classPipeline=materialClassPipeline(material,mirrored,false);
+    const auto classPipeline=materialClassPipeline(material,mirrored,false,run.opacity);
     const bool surfaceOverlay=opaqueSurfaceOverlay(material);
     const auto& surfacePipelines=snapshotSurfaceOverlay?surfaceOverlaySnapshotPipelines_:surfaceOverlayPipelines_;
     const VkPipeline pipeline = surfaceOverlay?surfacePipelines[vertexColor][surfaceFacingIndex(material.doubleSided,mirrored)]:fogPipeline?fogPipeline:(material.materialFeatures&MaterialFeatureHairPixelIntegral)

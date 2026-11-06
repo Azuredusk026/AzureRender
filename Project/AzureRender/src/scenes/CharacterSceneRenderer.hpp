@@ -7,6 +7,7 @@
 #include "render/OctahedralEnvironmentGpu.hpp"
 #include "render/SampledTextureCache.hpp"
 #include "render/MaterialPipelinePolicy.hpp"
+#include "render/StableDepthOrder.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
@@ -127,8 +128,9 @@ private:
     std::array<bool,kMaterialClassVariantCount> lightingClassesNeeded_{};
     std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassPipelines_{};
     std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassSnapshotPipelines_{};
+    std::array<std::array<VkPipeline,4>,kMaterialClassVariantCount> materialClassEarlyDepthPipelines_{},materialClassEarlyDepthSnapshotPipelines_{};
     std::array<MaterialFeatureSpecialization,kMaterialClassVariantCount> materialClassFeatureSpecializations_{};
-    VkPipeline materialClassPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const noexcept;
+    VkPipeline materialClassPipeline(const AssetMaterial&,bool mirrored,bool snapshot,float nodeOpacity=0) const noexcept;
     VkPipeline hairIntegralPipeline(const AssetMaterial&,bool mirrored,bool snapshot) const;
     std::array<VkPipeline,8> hairIntegralPipelines_{};
     std::array<VkPipeline,4> hairIntegralSnapshotPipelines_{};
@@ -386,6 +388,13 @@ private:
     std::vector<std::size_t> transparentIndexOffsets_;
     bool transparentDrawsPrepared_ = false;
     std::vector<std::vector<const AssetPrimitive*>> transparentPrimitivesByMesh_;
+    struct TransparencyPreparationScratch {
+        std::vector<std::array<float,3>> worldPositions;
+        std::vector<std::uint8_t> prepared;
+        std::vector<std::uint32_t> order;
+        std::vector<float> depths;
+        DepthOrderWorkspace sort;
+    } transparencyScratch_;
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
     std::shared_ptr<const MaterialOriginInstances> materialOriginInstances_;
     std::vector<std::vector<std::uint32_t>> materialOriginNodes_;
@@ -465,6 +474,7 @@ private:
     std::vector<rhi::GpuBuffer> clusterHeaderBuffers_;
     std::vector<rhi::GpuBuffer> clusterIndexBuffers_;
     LightBuffer frameLights_;
+    std::unique_ptr<ClusteredLightGrid> clusteredLightGrid_;
     std::vector<RenderLightGpu> packedLights_;
     std::vector<std::array<std::uint32_t, 2>> packedClusterHeaders_;
     std::vector<std::uint32_t> packedClusterIndices_;

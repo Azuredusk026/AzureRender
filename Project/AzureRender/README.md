@@ -12,6 +12,7 @@
 厂商温度、组件依赖及复测条件见[环境核验](docs/acceptance/nr/thermal-environment.md)。
 接手环境、空间分级及当前复测条件见[恢复核验](docs/acceptance/nr/resume-storage-performance.md)。
 自动空间恢复、缓存备份及复测见[执行记录](docs/acceptance/nr/autonomous-cleanup-performance.md)。
+场景着色、透明准备及光照存储的批次优化见[性能记录](docs/acceptance/nr/batched-performance.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。
 加载会话的路径复用、失效及同输入收益见[活动表验证](docs/acceptance/nr/prepared-resource-paths.md)。
