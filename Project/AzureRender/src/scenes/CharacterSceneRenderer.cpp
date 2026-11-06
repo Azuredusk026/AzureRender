@@ -1,5 +1,6 @@
 #include "animation/PresentedPose.hpp"
 #include "assets/AssetDeformation.hpp"
+#include "render/StableDepthOrder.hpp"
 #include "animation/ExpressionPose.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
 #include "render/MaterialSampling.hpp"
@@ -4595,12 +4596,13 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
         if (transparentPrimitives.empty()) continue;
         const auto& pose = instancePoses_.at(instance.sourceIndex);
-        std::vector<Vector3> positions(mesh.vertices.size());
+        std::vector<Vector3> worldPositions(mesh.vertices.size());
         std::vector<bool> prepared(mesh.vertices.size(),false);
-        const auto vertexPosition = [&](std::uint32_t index) {
-            if(prepared.at(index))return positions[index];
-            positions[index]=deformedVertexPosition(mesh,index,pose.pose.get(),pose.morph);
-            prepared[index]=true;return positions[index];
+        const auto vertexWorldPosition = [&](std::uint32_t index) {
+            if(prepared.at(index))return worldPositions[index];
+            worldPositions[index]=deformedVertexPosition(mesh,index,pose.pose.get(),pose.morph);
+            worldPositions[index]=transformPosition(instance.model,worldPositions[index]);
+            prepared[index]=true;return worldPositions[index];
         };
         std::size_t oitWriteIndex = transparentIndexOffsets_[instance.sourceIndex];
         if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
@@ -4618,12 +4620,9 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
                     const std::uint32_t i0 = mesh.indices[base];
                     const std::uint32_t i1 = mesh.indices[base + 1];
                     const std::uint32_t i2 = mesh.indices[base + 2];
-                    const Vector3 v0 = transformPosition(
-                        instance.model, vertexPosition(i0));
-                    const Vector3 v1 = transformPosition(
-                        instance.model, vertexPosition(i1));
-                    const Vector3 v2 = transformPosition(
-                        instance.model, vertexPosition(i2));
+                    const Vector3 v0 = vertexWorldPosition(i0);
+                    const Vector3 v1 = vertexWorldPosition(i1);
+                    const Vector3 v2 = vertexWorldPosition(i2);
                     const Vector3 centroid = {
                         (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
                         (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
@@ -4634,12 +4633,7 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
                     triangleDepth[triangle] =
                         dot(cameraOffset, cameraForward);
                 }
-                std::stable_sort(
-                    triangleOrder.begin(),
-                    triangleOrder.end(),
-                    [&](const std::uint32_t left, const std::uint32_t right) {
-                        return triangleDepth[left] > triangleDepth[right];
-                    });
+                azurerender::stableDepthOrder(triangleOrder,triangleDepth);
                 for (std::uint32_t triangle = 0; triangle < triangleCount;
                      ++triangle) {
                     const std::uint32_t ordered = triangleOrder[triangle];

@@ -2,7 +2,8 @@
 
 ## 来源与范围
 
-状态：候选隔离，生产保持受检实现。
+本记录持有候选隔离及生产恢复的范围。
+现行实现见[稳定深度准备](../acceptance/nr/stable-depth-sort.md)。
 源码基线为 `4abd900`。
 原 CPU 工作预算仍未通过。
 私有[阶段观察](../acceptance/nr/cpu-stage-cost.md)记录透明准备约 2.86 毫秒。
