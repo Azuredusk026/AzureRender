@@ -18,6 +18,17 @@
   },
   "milestones": [
     {
+      "path": "runs/20261107-013603-static-transparent-preparation-049ee8",
+      "name": "场景变换与透明准备评估",
+      "status": "DiagnosticIsolated",
+      "sourceBase": "95f0f38",
+      "evidence": "docs/acceptance/nr/static-transparent-preparation.md",
+      "candidateAdopted": false,
+      "restoredProgramsByteIdentical": 663,
+      "restoredPlayerCodeSectionIdentical": true,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261107-005507-probe-field-spatial-candidates-382990",
       "name": "反射探针空间候选评估",
       "status": "DiagnosticIsolated",
