@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "status": "observed-service-dependency-awaiting-restart-authorization",
+  "sourceBase": "58a3f43",
+  "runtimeChanges": false,
+  "officialApp": {
+    "Name": "AD2F1837.OMENCommandCenter",
+    "Version": "1101.2609.11.0",
+    "PackageFullName": "AD2F1837.OMENCommandCenter_1101.2609.11.0_x64__v10z8vjag6ke6"
+  },
+  "hardware": {
+    "Manufacturer": "HP",
+    "Product": "8BAB"
+  },
+  "ui": {
+    "source": "Observed official OMEN Gaming Hub UI through sky",
+    "temperatureC": {
+      "cpu": 91,
+      "gpu": 60
+    },
+    "utilizationPercent": {
+      "cpu": 17,
+      "gpu": 0
+    },
+    "performanceProfile": "Balanced",
+    "fanRpm": null,
+    "fanMode": null,
+    "performanceControl": "required HP service not found; Update warns restart",
+    "privacyChoiceHandledByUser": true,
+    "appClosedObserved": true,
+    "scope": "Point-in-time visual observation, not a continuous trace or proof of CPU thermal throttling"
+  },
+  "sdk": {
+    "id": "SP166157",
+    "version": "1.0.91",
+    "publisher": "HP Inc.",
+    "signature": "Valid",
+    "sha256": "25e38bb3d94bcf71ef7fec7679ef5100382cb5ce7c14d3522279103d27b4564d",
+    "bytes": 221403808,
+    "supportedBoard": "8BAB",
+    "installed": false,
+    "restartRequired": true,
+    "noRestartArgumentDocumented": false,
+    "metadataUrl": "https://ftp.hp.com/pub/softpaq/sp166001-166500/sp166157.cva",
+    "downloadUrl": "https://ftp.hp.com/pub/softpaq/sp166001-166500/sp166157.exe"
+  },
+  "pending": [
+    "User authorization for installation and restart",
+    "Post-install service, fan and temperature verification",
+    "Stable-environment native performance collection"
+  ],
+  "acceptance": {
+    "cpuP95Ms": 8,
+    "gpuP95Ms": 16.6,
+    "visual": "failed-user-review",
+    "overall": "open"
+  },
+  "archive": {
+    "path": "measurements.zip",
+    "sha256": "64f56ca1a4dce7772a7a96f251b0065382c13fca152b6e4054c327b4f6d56c30",
+    "bytes": 6378,
+    "members": 6
+  },
+  "sourceFiles": {
+    "install.log": "9b37630a7a1eaad02b722b5ab6835f50be60e1c066b24623fa95c4219260ae36",
+    "install-result.json": "84bd0977a06c15b9acf82bf0f7cbec93401239b870fc8d35fc2b32fd32818f20",
+    "store-package.txt": "cae3016e3ada06aec791b18b55f4aee493e8f2e5f1a11324a5b0969089a74218",
+    "sp166157.cva": "d3adbe9748ce25a0f9efd9f790bc60e72226cba7eb89d21422a0c3bb300f2bae",
+    "verified-state.json": "1a55b39715cbd1242665550c6ece1f8fe33c2099b9c19058fb6f4309fd77b121",
+    "observed-ui.json": "01b541fd2731aa968d6df8c95029e2fead7468a336c18f14a70789e48aadbd89"
+  }
+}

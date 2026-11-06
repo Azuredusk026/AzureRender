@@ -60,7 +60,8 @@ GPU 的[硬件采样](../acceptance/nr/gpu-hardware-counters.md)取得实际指�
 该候选保持诊断用途，后续复测需具备新的执行状态证据。
 [稳定深度准备](../acceptance/nr/stable-depth-sort.md)通过双配置、双设备及原生四帧检查。
 组合局部均值为 4.243 与 2.834 毫秒。
-当前继续核验热状态及厂商性能工具。
+[厂商环境核验](../acceptance/nr/thermal-environment.md)取得温度及组件依赖证据。
+官方组件已校验，安装及重启等待用户授权。
 反射依赖等待、峰值吞吐及正式帧预算各自独立验收。
 
 动画的[预备曲线](../acceptance/nr/animation-curve-validation.md)通过双配置及双设备检查。
