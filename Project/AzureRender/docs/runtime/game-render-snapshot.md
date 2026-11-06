@@ -42,3 +42,25 @@ CPU 与延期图像范围见[共享输入验证](../acceptance/nr/render-camera-
 CPU 分配与回归范围见[节点快照验证](../acceptance/nr/runtime-snapshot-copy.md)。
 
 物化输入的兼容与短时成本见[相机输入验证](../acceptance/nr/materialized-camera-input.md)。
+
+## 专用输出复用
+
+`RuntimeSceneSnapshotCache` 为宿主线程的专用文档提供准备状态。
+输出对象的地址在缓存生存期内保持稳定。
+文档发布使用 `exchange`，内容及对应状态一同交换。
+外部修改或替换输出内容前调用 `clear`。
+公开独立副本接口继续适用于调用方自行编辑的文档。
+
+运行时维护不透明的源身份。
+场景初始化、替换及节点新增会更新该身份。
+缓存保存实体代际，当前世界决定节点、父级及灯光有效性。
+组件移除时使用作者声明的变换和可见性默认值。
+
+`RuntimeRenderSnapshotCache::prepare` 返回共享只读的渲染描述。
+静态解析器保持节点和灯光顺序，并提供绑定后的资源路径。
+源身份或成员布局变化时重新执行静态解析。
+每帧刷新节点动态字段，以及灯光的世界位置和方向。
+已发布帧由共享所有权保护，后续刷新使用可用槽位。
+复用池至多保存三个槽位，额外保留帧由调用方独立持有。
+
+完整原生结果及边界见[宿主准备验证](../acceptance/nr/host-scene-preparation.md)。

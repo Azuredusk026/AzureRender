@@ -8,6 +8,7 @@
 #include "runtime/SystemRegistry.hpp"
 #include <functional>
 namespace azurerender {
+class RuntimeSceneSnapshotCache;
 class GameRuntime {
 public:
     explicit GameRuntime(RuntimeLifecycle& runtime);
@@ -39,6 +40,7 @@ public:
     void cameraInput(float x, float y, float scroll);
     SceneDocument renderScene();
     void renderScene(SceneDocument& scene);
+    void renderScene(SceneDocument& scene,RuntimeSceneSnapshotCache& snapshots);
     GameCameraSelection renderCamera();
     // The caller retains this frame's interpolated scene through selection.
     GameCameraSelection renderCamera(const SceneDocument& scene);
@@ -68,6 +70,7 @@ private:
     std::array<float,3> previousCameraPosition_{}, previousCameraTarget_{};
     bool interpolationReady_ = false;
     float renderAlpha() const;
+    void interpolateScene(SceneDocument& scene) const;
     InteractionRuntime interactions_;
     std::function<void(const InteractionTarget&)> interactionHandler_;
     RuntimeSystemContext systemContext();

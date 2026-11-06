@@ -133,6 +133,7 @@ void AzureRenderApp::run(
 #endif
     resourceLocator_ = azurerender::ResourceLocator(std::filesystem::u8path(options.resourceRoot));
     sceneResourcePaths_.reset();
+    playerSceneSnapshots_.clear();playerRenderSceneCache_.clear();
     azurerender::loadShowcasePresetCatalog(resourceLocator_.showcaseLooks());
     azurerender::SceneView sceneView;
     sceneView.assetPath = resourceLocator_.resolveAsset(std::filesystem::u8path(options.assetPath)).u8string();
@@ -514,6 +515,7 @@ void AzureRenderApp::createMultisampleResources(){
 }
 void AzureRenderApp::createSceneRenderer() {
     sceneResourcePaths_.reset();
+    playerSceneSnapshots_.clear();playerRenderSceneCache_.clear();
     azurerender::RenderContext context;
     buildRenderContext(context);
     createTemporalResources();context.motionOutput=sharedMotion_.get();
@@ -704,7 +706,7 @@ void AzureRenderApp::buildSceneFrameData(
     azurerender::SceneDocument* gameScene = nullptr;
     if(game) {
         if(runOptions_.sceneDocument.has_value()&&!runOptions_.editorMode) {
-            game->renderScene(playerSceneScratch_);
+            game->renderScene(playerSceneScratch_,playerSceneSnapshots_);
             gameScene=&playerSceneScratch_;
         } else {
             ownedGameScene=game->renderScene();
@@ -716,8 +718,11 @@ void AzureRenderApp::buildSceneFrameData(
 #if AZURE_WITH_EDITOR
     needsSceneSnapshot=needsSceneSnapshot||static_cast<bool>(runOptions_.editorSession);
 #endif
-    if(gameScene&&needsSceneSnapshot)
-        gameDescription=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(*gameScene));
+    if(gameScene&&needsSceneSnapshot){
+        if(runOptions_.sceneDocument.has_value()&&!runOptions_.editorMode)gameDescription=playerRenderSceneCache_.prepare(*gameScene,
+            playerSceneSnapshots_.sourceIdentity(*gameScene),[this](const auto& document){return resolveRenderDescription(document);});
+        else gameDescription=std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(*gameScene));
+    }
     std::optional<azurerender::CameraViewDescriptor> gameView;
     bool sceneViewActive=false;
 #if AZURE_WITH_EDITOR
@@ -745,15 +750,15 @@ void AzureRenderApp::buildSceneFrameData(
 #endif
     pausedTimeOffset_ += static_cast<double>(rawDeltaSeconds - deltaSeconds);
     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode) {
-        if(gameScene)std::swap(*runOptions_.sceneDocument,*gameScene);
+        if(gameScene)playerSceneSnapshots_.exchange(*runOptions_.sceneDocument,*gameScene);
         else {
-            runtime_.snapshotScene(playerSceneScratch_);
-            std::swap(*runOptions_.sceneDocument,playerSceneScratch_);
+            runtime_.snapshotScene(playerSceneScratch_,playerSceneSnapshots_);
+            playerSceneSnapshots_.exchange(*runOptions_.sceneDocument,playerSceneScratch_);
         }
     }
     if (runOptions_.sceneDocument.has_value() && !runOptions_.editorMode)
-        frame.sceneSnapshot = gameDescription?gameDescription:
-            std::make_shared<const azurerender::scene::SceneDescription>(resolveRenderDescription(*runOptions_.sceneDocument));
+        frame.sceneSnapshot = gameDescription?gameDescription:playerRenderSceneCache_.prepare(*runOptions_.sceneDocument,
+            playerSceneSnapshots_.sourceIdentity(*runOptions_.sceneDocument),[this](const auto& document){return resolveRenderDescription(document);});
     fixedSimulationStarted_ = true;
     lastRotationTime_ = currentTime;
     if (autoRotate_) {

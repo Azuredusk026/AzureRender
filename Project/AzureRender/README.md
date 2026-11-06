@@ -19,6 +19,7 @@
 同帧阴影结果复用的兼容、分支及成本见[阴影评估](docs/acceptance/nr/shadow-visibility-reuse.md)。
 当前子阶段及实际资源控制见[CPU 热点](docs/acceptance/nr/cpu-substage-update.md)。
 无光照混合表面的主输出、零像素对照及约 12% 短时 GPU 改善见[着色优化](docs/acceptance/nr/unlit-blend-fast-path.md)。
+专用场景快照与渲染描述的复用、失效及约 23% 短时 CPU 改善见[宿主优化](docs/acceptance/nr/host-scene-preparation.md)。
 当前验收的持续执行顺序见[自主执行](docs/plans/2026-11-07-autonomous-acceptance.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。

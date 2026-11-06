@@ -6,6 +6,7 @@
 #endif
 #include "AzureRenderOptions.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
+#include "runtime/RuntimeRenderSnapshotCache.hpp"
 #include "runtime/ResourceFrameTrace.hpp"
 #include "runtime/ModuleAssembly.hpp"
 #include "validation/ValidationTransport.hpp"
@@ -339,6 +340,8 @@ private:
     AzureRenderOptions runOptions_;
     azurerender::ResourceLocator resourceLocator_;
     mutable std::optional<azurerender::PreparedResourcePaths> sceneResourcePaths_;
+    azurerender::RuntimeSceneSnapshotCache playerSceneSnapshots_;
+    azurerender::RuntimeRenderSnapshotCache playerRenderSceneCache_;
     std::string resolvedAssetPath_;
     std::string selectedGpuName_;
     // Byte offsets of this frame's HUD vertex slice inside uploadRing_.

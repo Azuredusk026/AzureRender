@@ -96,7 +96,13 @@ SceneDocument GameRuntime::renderScene() {
     return scene;
 }
 void GameRuntime::renderScene(SceneDocument& scene) {
-    runtime_.snapshotScene(scene);const float alpha=renderAlpha();
+    runtime_.snapshotScene(scene);interpolateScene(scene);
+}
+void GameRuntime::renderScene(SceneDocument& scene,RuntimeSceneSnapshotCache& snapshots) {
+    runtime_.snapshotScene(scene,snapshots);interpolateScene(scene);
+}
+void GameRuntime::interpolateScene(SceneDocument& scene) const {
+    const float alpha=renderAlpha();
     for(auto& node:scene.nodes){const auto previous=previousTransforms_.find(node.id);if(previous==previousTransforms_.end())continue;
         for(unsigned axis=0;axis<3;++axis){
             node.translation[axis]=previous->second.translation[axis]+(node.translation[axis]-previous->second.translation[axis])*alpha;

@@ -772,6 +772,7 @@ add_library(AzureRuntime STATIC
     src/app/CommandLine.cpp
     src/runtime/SceneDocument.cpp
     src/runtime/SceneRenderSnapshot.cpp
+    src/runtime/RuntimeRenderSnapshotCache.cpp
     src/runtime/Project.cpp
     src/runtime/AssetDatabase.cpp
     src/runtime/AssetGeneration.cpp
@@ -1958,6 +1959,12 @@ if(BUILD_TESTING)
     add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
     target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.RuntimeLifecycle COMMAND AzureRuntimeLifecycleTests)
+    add_executable(AzureRuntimeSceneSnapshotCacheTests tests/RuntimeSceneSnapshotCacheTests.cpp)
+    target_link_libraries(AzureRuntimeSceneSnapshotCacheTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.RuntimeSceneSnapshotCache COMMAND AzureRuntimeSceneSnapshotCacheTests)
+    add_executable(AzureRuntimeRenderSnapshotCacheTests tests/RuntimeRenderSnapshotCacheTests.cpp)
+    target_link_libraries(AzureRuntimeRenderSnapshotCacheTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.RuntimeRenderSnapshotCache COMMAND AzureRuntimeRenderSnapshotCacheTests)
     add_executable(AzureRenderEnvironmentAssetTests tests/EnvironmentAssetTests.cpp src/render/EnvironmentAsset.cpp src/render/EnvironmentCubeTexture.cpp src/rhi/NullRhi.cpp src/assets/image/ImageCodec.cpp
     src/assets/image/TextureContainerAdapter.cpp)
     target_include_directories(AzureRenderEnvironmentAssetTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src" "${STB_INCLUDE_DIR}")

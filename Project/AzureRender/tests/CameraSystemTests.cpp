@@ -85,6 +85,19 @@ void checkSharedRenderScene(){
     check(reusable.nodes.data()==retained&&reusable.nodes[0].translation==snapshot.nodes[0].translation
         &&reusable.nodes[1].translation==snapshot.nodes[1].translation,
         "Owned render-scene reuse must preserve storage and interpolation arithmetic");
+    RuntimeSceneSnapshotCache snapshots;SceneDocument cached,published;
+    game.renderScene(cached,snapshots);const auto* cachedStorage=cached.nodes.data();
+    game.renderScene(cached,snapshots);
+    check(cached.nodes.data()==cachedStorage&&game.renderCamera(cached).view->position==selected.view->position,
+        "Cached snapshots must retain interpolation and camera input");
+    snapshots.exchange(cached,published);game.renderScene(cached,snapshots);snapshots.exchange(cached,published);
+    game.renderScene(cached,snapshots);
+    check(cached.nodes[0].translation==snapshot.nodes[0].translation&&cached.nodes[1].translation==snapshot.nodes[1].translation,
+        "Published document exchange must preserve the snapshot preparation owner");
+    runtime.pause();game.renderScene(cached,snapshots);
+    check(cached.nodes[0].translation==game.renderScene().nodes[0].translation,"Paused cached scenes must use the live fixed-step transform");
+    runtime.resume();game.renderScene(cached,snapshots);
+    check(cached.nodes[0].translation==snapshot.nodes[0].translation,"Resuming must preserve the interpolation phase");
     check(selected.node=="camera"&&selected.view.has_value(),"Rendered scene camera must preserve authored selection");
     const auto prepared=snapshot.renderDescription();
     const auto preparedSelection=game.renderCamera(prepared);
