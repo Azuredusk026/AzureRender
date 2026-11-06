@@ -47,21 +47,18 @@ GPU 叶级片元调用总数为 27,853,535。
 RenderDoc 已接入 NVIDIA 性能计数库。
 实际可枚举三千六百三十一项计数器。
 
-混合计数与单独 DRAM 计数均返回零条厂商样本。
-同一重放的通用计时返回三千四百二十四条样本。
-官方 Perf SDK 2025.1 的控制也未取得厂商样本。
-原生界面复核确认驱动未开启性能分析权限。
-计数会话在 `BeginSession` 阶段被拒绝。
-[权限证据](evidence/2026-11-06/gpu-counter-permission/results.json)保存实际界面的错误文本。
+管理员会话取得三万四千二百四十条厂商样本。
+通用计时取得三千四百二十四条样本。
+重点绘制及指标异常见[硬件归因](gpu-hardware-counters.md)。
+驱动的全局性能计数访问设置保持原有配置。
 
-Nsight 的本机接口已完成协议和工具清单查询。
-其实际跟踪启动返回分发后的工具失败。
-该启动拥有的场景进程及本机服务已经停止。
-工具连接成功和指标枚举成功分别保留适用范围。
+非管理员会话的权限失败见[权限记录](evidence/2026-11-06/gpu-counter-permission/results.json)。
+官方工具的接口连接、失败控制及版本摘要各有独立记录。
 
 短时记录的设备本地分配峰值约为 3.29 GB。
 设备容量为 8 GB，容量指标与带宽指标分别解释。
-当前未取得有效 VRAM、SM、缓存或 PCIe 吞吐样本。
+本轮取得设备字节、指令、缓存及停顿样本。
+峰值 SM 吞吐及显存总线饱和度继续独立核对。
 内存忙碌比例和资源容量仅作为设备状态。
 
 ## 措施与限制
@@ -76,9 +73,9 @@ Nsight 的本机接口已完成协议和工具清单查询。
 [预备曲线](animation-curve-validation.md)的同输入采样局部均值为 0.431 毫秒。
 对应全量校验均值为 2.685 毫秒，二百二十次姿态原字一致。
 场景准备和透明排序按所属阶段继续定位。
-硬件计数恢复需要具备分析权限的运行会话。
+硬件计数使用具备分析权限的运行会话。
 管理员启动方式按 [NVIDIA 权限说明](https://developer.nvidia.com/ERR_NVGPUCTRPERM)执行。
-管理员提示由用户确认，独立 CPU 工作继续推进。
+管理员提示由用户确认，独立研发按任务计划推进。
 方法参考 [NVIDIA Shader Profiler](https://docs.nvidia.com/nsight-graphics/UserGuide/shader-profiler.html)。
 接口诊断参考 [RenderDoc NVIDIA 后端](https://github.com/baldurk/renderdoc/blob/v1.46/renderdoc/driver/ihv/nv/nv_vk_counters.cpp)。
 

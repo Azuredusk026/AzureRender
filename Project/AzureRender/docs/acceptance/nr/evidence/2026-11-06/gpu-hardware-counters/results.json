@@ -1,0 +1,1112 @@
+{
+  "schemaVersion": 1,
+  "status": "collected-vendor-hardware-samples",
+  "captureSource": "0694263",
+  "captureSha256": "3f59645268af50b60d0700f147e9c65fde1aa3901ef4c679fe60658a0f639512",
+  "currentCpuImplementation": "390e1e6",
+  "vendorSamples": 34240,
+  "genericSamples": 3424,
+  "events": 3424,
+  "selectedEvents": [
+    {
+      "event": 23277,
+      "eventIdentity": {
+        "event": 23277,
+        "parent": 23275,
+        "hasChildren": false,
+        "name": "Indirect sub-command[1](<474, 1>)",
+        "shader": "ResourceId::10313",
+        "samplesPassed": 52,
+        "ps": 185347,
+        "depthTarget": "ResourceId::186",
+        "colorTargets": [
+          "ResourceId::177",
+          "ResourceId::198",
+          "ResourceId::201",
+          "ResourceId::0",
+          "ResourceId::0",
+          "ResourceId::0"
+        ],
+        "milliseconds": 0.53376
+      },
+      "metrics": {
+        "eventDurationSeconds": 0.000531872,
+        "dram__bytes.sum": 35072.0,
+        "gpu__time_duration.sum": 530453.7037037037,
+        "pcie__read_bytes.sum": 3072.0,
+        "pcie__write_bytes.sum": 4096.0,
+        "smsp__inst_executed.sum": 70967174.0,
+        "l1tex__t_sector_hit_rate.avg.pct": 95.17793613316097,
+        "lts__t_sector_hit_rate.avg.pct": 100.22888440724975,
+        "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct": 22.309202212973727,
+        "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 3.2762949812134625,
+        "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.018115481142899816
+      },
+      "dramGBperSecondUsingNvPerfDuration": 0.06611698580879401
+    },
+    {
+      "event": 16036,
+      "eventIdentity": {
+        "event": 16036,
+        "parent": 13847,
+        "hasChildren": false,
+        "name": "vkCmdDrawIndexed()",
+        "shader": "ResourceId::10330",
+        "samplesPassed": 93542,
+        "ps": 371593,
+        "depthTarget": "ResourceId::10066",
+        "colorTargets": [
+          "ResourceId::10059",
+          "ResourceId::10062",
+          "ResourceId::0",
+          "ResourceId::0"
+        ],
+        "milliseconds": 0.8345600000000001
+      },
+      "metrics": {
+        "eventDurationSeconds": 0.00082944,
+        "dram__bytes.sum": 1362816.0,
+        "gpu__time_duration.sum": 872194.4444444445,
+        "pcie__read_bytes.sum": 2560.0,
+        "pcie__write_bytes.sum": 2560.0,
+        "smsp__inst_executed.sum": 143085463.0,
+        "l1tex__t_sector_hit_rate.avg.pct": 92.41069409374109,
+        "lts__t_sector_hit_rate.avg.pct": 99.44205838937884,
+        "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct": 20.804372264410933,
+        "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 4.812099745922821,
+        "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.03804580583740712
+      },
+      "dramGBperSecondUsingNvPerfDuration": 1.5625139654129112
+    },
+    {
+      "event": 20664,
+      "eventIdentity": {
+        "event": 20664,
+        "parent": 20622,
+        "hasChildren": false,
+        "name": "vkCmdDispatch()",
+        "shader": "uninspected",
+        "samplesPassed": 0,
+        "ps": 0,
+        "milliseconds": 0.990304
+      },
+      "metrics": {
+        "eventDurationSeconds": 0.000994624,
+        "dram__bytes.sum": 35652352.0,
+        "gpu__time_duration.sum": 995879.6296296297,
+        "pcie__read_bytes.sum": 512.0,
+        "pcie__write_bytes.sum": 2048.0,
+        "smsp__inst_executed.sum": 150566729.0,
+        "l1tex__t_sector_hit_rate.avg.pct": 52.98635310495654,
+        "lts__t_sector_hit_rate.avg.pct": 97.89459132191955,
+        "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct": 61.494354219166624,
+        "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 3.94521282242689,
+        "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.02022919174088246
+      },
+      "dramGBperSecondUsingNvPerfDuration": 35.79986068523081
+    },
+    {
+      "event": 26298,
+      "eventIdentity": {
+        "event": 26298,
+        "parent": 20720,
+        "hasChildren": false,
+        "name": "vkCmdDrawIndexed()",
+        "shader": "ResourceId::10313",
+        "samplesPassed": 459796,
+        "ps": 459796,
+        "depthTarget": "ResourceId::186",
+        "colorTargets": [
+          "ResourceId::177",
+          "ResourceId::198",
+          "ResourceId::201",
+          "ResourceId::0",
+          "ResourceId::0",
+          "ResourceId::0"
+        ],
+        "milliseconds": 1.265664
+      },
+      "metrics": {
+        "eventDurationSeconds": 0.001294336,
+        "dram__bytes.sum": 9583232.0,
+        "gpu__time_duration.sum": 1287750.0,
+        "pcie__read_bytes.sum": 10752.0,
+        "pcie__write_bytes.sum": 5632.0,
+        "smsp__inst_executed.sum": 102051463.0,
+        "l1tex__t_sector_hit_rate.avg.pct": 76.5392839192339,
+        "lts__t_sector_hit_rate.avg.pct": 96.14488037511511,
+        "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct": 23.243986390483162,
+        "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 2.8111305707997114,
+        "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.06955544473793544
+      },
+      "dramGBperSecondUsingNvPerfDuration": 7.441841972432537
+    },
+    {
+      "event": 16855,
+      "eventIdentity": {
+        "event": 16855,
+        "parent": 13847,
+        "hasChildren": false,
+        "name": "vkCmdDrawIndexed()",
+        "shader": "ResourceId::10395",
+        "samplesPassed": 10447,
+        "ps": 25519,
+        "depthTarget": "ResourceId::10066",
+        "colorTargets": [
+          "ResourceId::10059",
+          "ResourceId::10062",
+          "ResourceId::0",
+          "ResourceId::0"
+        ],
+        "milliseconds": 0.8509439999999999
+      },
+      "metrics": {
+        "eventDurationSeconds": 0.000859136,
+        "dram__bytes.sum": 8704000.0,
+        "gpu__time_duration.sum": 904944.4444444445,
+        "pcie__read_bytes.sum": 4608.0,
+        "pcie__write_bytes.sum": 3072.0,
+        "smsp__inst_executed.sum": 49933781.0,
+        "l1tex__t_sector_hit_rate.avg.pct": 86.41904185711196,
+        "lts__t_sector_hit_rate.avg.pct": 91.27262841938567,
+        "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct": 28.650010262016508,
+        "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 0.721419097200386,
+        "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.018096638388652872
+      },
+      "dramGBperSecondUsingNvPerfDuration": 9.618269998158265
+    },
+    {
+      "event": 24579,
+      "eventIdentity": {
+        "event": 24579,
+        "parent": 20720,
+        "hasChildren": false,
+        "name": "vkCmdDrawIndexedIndirect(1) => <102927, 1>",
+        "shader": "ResourceId::10389",
+        "samplesPassed": 9544,
+        "ps": 23905,
+        "depthTarget": "ResourceId::186",
+        "colorTargets": [
+          "ResourceId::177",
+          "ResourceId::198",
+          "ResourceId::201",
+          "ResourceId::0",
+          "ResourceId::0",
+          "ResourceId::0"
+        ],
+        "milliseconds": 0.7884800000000001
+      },
+      "metrics": {
+        "eventDurationSeconds": 0.000792576,
+        "dram__bytes.sum": 8461056.0,
+        "gpu__time_duration.sum": 853240.7407407408,
+        "pcie__read_bytes.sum": 18432.0,
+        "pcie__write_bytes.sum": 30720.0,
+        "smsp__inst_executed.sum": 47614753.0,
+        "l1tex__t_sector_hit_rate.avg.pct": 86.43167870864275,
+        "lts__t_sector_hit_rate.avg.pct": 91.01197915121169,
+        "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct": 28.86757954041082,
+        "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 0.7547280972791539,
+        "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.019739733823890708
+      },
+      "dramGBperSecondUsingNvPerfDuration": 9.916375995659251
+    },
+    {
+      "event": 7015,
+      "eventIdentity": {
+        "event": 7015,
+        "parent": 7010,
+        "hasChildren": false,
+        "name": "vkCmdDispatch()",
+        "shader": "uninspected",
+        "samplesPassed": 0,
+        "ps": 0,
+        "milliseconds": 0.546816
+      },
+      "metrics": {
+        "eventDurationSeconds": 0.000553984,
+        "dram__bytes.sum": 28778752.0,
+        "gpu__time_duration.sum": 562916.6666666666,
+        "pcie__read_bytes.sum": 3154944.0,
+        "pcie__write_bytes.sum": 440832.0,
+        "smsp__inst_executed.sum": 3774121.0,
+        "l1tex__t_sector_hit_rate.avg.pct": 79.02080082527429,
+        "lts__t_sector_hit_rate.avg.pct": 92.74337984711333,
+        "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct": 19.97402696322715,
+        "smsp__warp_issue_stalled_math_pipe_throttle_per_warp_active.avg.pct": 0.018718542471132246,
+        "smsp__warp_issue_stalled_tex_throttle_per_warp_active.avg.pct": 0.0
+      },
+      "dramGBperSecondUsingNvPerfDuration": 51.12435588452998
+    }
+  ],
+  "outOfRangePercentageCount": 168,
+  "percentageAnomalies": [
+    {
+      "event": 7886,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 109.47998542823096
+    },
+    {
+      "event": 7948,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 109.81046065722155
+    },
+    {
+      "event": 7965,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 230.24336485073107
+    },
+    {
+      "event": 7982,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 209.3655074520937
+    },
+    {
+      "event": 8070,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 896.2470991652524
+    },
+    {
+      "event": 8277,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 105.39377038455584
+    },
+    {
+      "event": 8551,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 185.37484685703515
+    },
+    {
+      "event": 8667,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 193.5398686074971
+    },
+    {
+      "event": 8715,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 124.84544049459043
+    },
+    {
+      "event": 8970,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 151.79779280882877
+    },
+    {
+      "event": 9304,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 100.93726304684667
+    },
+    {
+      "event": 9309,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 101.64744754885895
+    },
+    {
+      "event": 9380,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 188.316900793997
+    },
+    {
+      "event": 9439,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 109.82552204511104
+    },
+    {
+      "event": 9483,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 101.24050632911393
+    },
+    {
+      "event": 9517,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 960.7746386620672
+    },
+    {
+      "event": 9569,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 298.5161419691197
+    },
+    {
+      "event": 9626,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 518.7547367807381
+    },
+    {
+      "event": 9777,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 106.19753214875212
+    },
+    {
+      "event": 9896,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 121.15284187397731
+    },
+    {
+      "event": 9911,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 101.83943960630788
+    },
+    {
+      "event": 10000,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 355.0798623196813
+    },
+    {
+      "event": 10091,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 694.8787353832828
+    },
+    {
+      "event": 10402,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 162.42758299356356
+    },
+    {
+      "event": 10417,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.44742729306489
+    },
+    {
+      "event": 10417,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 131.71047925608013
+    },
+    {
+      "event": 10801,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 163.351677148847
+    },
+    {
+      "event": 10821,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 123.08056042031524
+    },
+    {
+      "event": 11006,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 106.08020790333403
+    },
+    {
+      "event": 11126,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 339.60282816665796
+    },
+    {
+      "event": 11212,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 105.02859204614181
+    },
+    {
+      "event": 11228,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 116.09255107806149
+    },
+    {
+      "event": 11695,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 126.35552230031266
+    },
+    {
+      "event": 11700,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 105.84763521578822
+    },
+    {
+      "event": 11846,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 127.84959696328544
+    },
+    {
+      "event": 11936,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 111.75428486051524
+    },
+    {
+      "event": 11983,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 102.9540828831133
+    },
+    {
+      "event": 12214,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 102.41796200345424
+    },
+    {
+      "event": 12290,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 131.24542189984456
+    },
+    {
+      "event": 12473,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 111.98636336007984
+    },
+    {
+      "event": 12510,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 276.5798752373203
+    },
+    {
+      "event": 12624,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 102.11693548387098
+    },
+    {
+      "event": 12649,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.02389078498292
+    },
+    {
+      "event": 13870,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 257.9275198187995
+    },
+    {
+      "event": 13899,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 586.5413915693244
+    },
+    {
+      "event": 13943,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 198.6634967551243
+    },
+    {
+      "event": 14069,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 103.47191261703077
+    },
+    {
+      "event": 14135,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 199.176804923549
+    },
+    {
+      "event": 14214,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 122.15964620797497
+    },
+    {
+      "event": 14382,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 238.8708681278188
+    },
+    {
+      "event": 14489,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 213.99199550206282
+    },
+    {
+      "event": 14524,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 102.39651416122004
+    },
+    {
+      "event": 14623,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 106.41724134730512
+    },
+    {
+      "event": 14683,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 105.57678947500446
+    },
+    {
+      "event": 14890,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 104.66884605587161
+    },
+    {
+      "event": 15147,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 151.32453169874407
+    },
+    {
+      "event": 15294,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 314.57535043895814
+    },
+    {
+      "event": 15412,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 107.04284573014337
+    },
+    {
+      "event": 15791,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 232.9601155771116
+    },
+    {
+      "event": 15988,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 166.2786958053203
+    },
+    {
+      "event": 16183,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 102.25099903889927
+    },
+    {
+      "event": 16461,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 107.52882579301708
+    },
+    {
+      "event": 16557,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 100.46997380253364
+    },
+    {
+      "event": 18011,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.00713386487621
+    },
+    {
+      "event": 18052,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.00913022585296
+    },
+    {
+      "event": 18085,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 121.8673126843257
+    },
+    {
+      "event": 18113,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.56131260794474
+    },
+    {
+      "event": 18142,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.57569818716317
+    },
+    {
+      "event": 18146,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.69747166521361
+    },
+    {
+      "event": 18154,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.30461800901669
+    },
+    {
+      "event": 18175,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 143.10536123368152
+    },
+    {
+      "event": 18179,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.08673779165582
+    },
+    {
+      "event": 18204,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.33550110324003
+    },
+    {
+      "event": 18264,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 269.8186948624806
+    },
+    {
+      "event": 18441,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 146.5349187740747
+    },
+    {
+      "event": 18460,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.45794392523364
+    },
+    {
+      "event": 18460,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 148.9643078946407
+    },
+    {
+      "event": 18476,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 131.18206751769205
+    },
+    {
+      "event": 18480,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.86289120715351
+    },
+    {
+      "event": 18505,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 270.86606690319314
+    },
+    {
+      "event": 18509,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 104.82437579348287
+    },
+    {
+      "event": 18513,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 129.8512658227848
+    },
+    {
+      "event": 18571,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 249.5850312161202
+    },
+    {
+      "event": 18600,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 102.92249047013978
+    },
+    {
+      "event": 18608,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 136.62573411639082
+    },
+    {
+      "event": 18656,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.31164742917105
+    },
+    {
+      "event": 18680,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.265604249668
+    },
+    {
+      "event": 18684,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.36436597110755
+    },
+    {
+      "event": 18714,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 148.84543641860168
+    },
+    {
+      "event": 18726,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 119.94645247657296
+    },
+    {
+      "event": 18746,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 103.33778371161549
+    },
+    {
+      "event": 18759,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.44968732234223
+    },
+    {
+      "event": 18763,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 103.27116212338593
+    },
+    {
+      "event": 18783,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 102.51283436908945
+    },
+    {
+      "event": 18787,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.44557823129252
+    },
+    {
+      "event": 18791,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.34336378291242
+    },
+    {
+      "event": 18795,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 148.6717978408201
+    },
+    {
+      "event": 18822,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 101.18696058071524
+    },
+    {
+      "event": 18915,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.3164823591364
+    },
+    {
+      "event": 18920,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 125.43420218418211
+    },
+    {
+      "event": 19218,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.3728129205922
+    },
+    {
+      "event": 19235,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 103.70096225018506
+    },
+    {
+      "event": 19385,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.0752688172043
+    },
+    {
+      "event": 19452,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.17785630153122
+    },
+    {
+      "event": 19482,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 119.45098101567717
+    },
+    {
+      "event": 19529,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 124.15977277380625
+    },
+    {
+      "event": 19643,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 242.6555778606252
+    },
+    {
+      "event": 19837,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.75892857142857
+    },
+    {
+      "event": 19845,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.28402670775552
+    },
+    {
+      "event": 19857,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.36217948717949
+    },
+    {
+      "event": 19926,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.31544330439357
+    },
+    {
+      "event": 19943,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 104.13193185936933
+    },
+    {
+      "event": 19947,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.52096254031258
+    },
+    {
+      "event": 19967,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 103.21357801326785
+    },
+    {
+      "event": 19976,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 101.63051390304265
+    },
+    {
+      "event": 19984,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 104.37116564417177
+    },
+    {
+      "event": 20017,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 144.2596234897443
+    },
+    {
+      "event": 20025,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 200.80762759394278
+    },
+    {
+      "event": 20070,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.79828062634326
+    },
+    {
+      "event": 20078,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.41282946967291
+    },
+    {
+      "event": 20078,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 144.19872491487357
+    },
+    {
+      "event": 20082,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 101.58881474420083
+    },
+    {
+      "event": 20111,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 102.59402291938801
+    },
+    {
+      "event": 20119,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 105.61706594443432
+    },
+    {
+      "event": 20139,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 105.93258573548516
+    },
+    {
+      "event": 20169,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 100.63350356711238
+    },
+    {
+      "event": 20526,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 149.80620003594677
+    },
+    {
+      "event": 20548,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 131.83467401698823
+    },
+    {
+      "event": 20646,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 103.01813650837602
+    },
+    {
+      "event": 20976,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 102.50200502140486
+    },
+    {
+      "event": 21227,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 101.09782326109051
+    },
+    {
+      "event": 21384,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 110.51018343917754
+    },
+    {
+      "event": 21394,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 102.58766688732044
+    },
+    {
+      "event": 21404,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 101.26960551862356
+    },
+    {
+      "event": 21424,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 101.17984589577172
+    },
+    {
+      "event": 21513,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 104.9804317636662
+    },
+    {
+      "event": 21796,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 140.02126412686204
+    },
+    {
+      "event": 22399,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 119.57525689575557
+    },
+    {
+      "event": 22468,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 136.14218191266906
+    },
+    {
+      "event": 22730,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 102.9875518672199
+    },
+    {
+      "event": 22937,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 162.12096106048054
+    },
+    {
+      "event": 22974,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 126.55644008981423
+    },
+    {
+      "event": 23003,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 102.37188365650968
+    },
+    {
+      "event": 23046,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 137.1084130347632
+    },
+    {
+      "event": 23117,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 502.6874848872154
+    },
+    {
+      "event": 23206,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 466.2464089304769
+    },
+    {
+      "event": 23277,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.22888440724975
+    },
+    {
+      "event": 23696,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 166.09164708395642
+    },
+    {
+      "event": 23709,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 105.89868147120056
+    },
+    {
+      "event": 23732,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 102.98507462686568
+    },
+    {
+      "event": 23748,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 192.03189448538507
+    },
+    {
+      "event": 23863,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 154.0638680165153
+    },
+    {
+      "event": 24035,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 164.8758933518656
+    },
+    {
+      "event": 24037,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 109.76477573764501
+    },
+    {
+      "event": 24112,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.63307834344499
+    },
+    {
+      "event": 24130,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 107.44186046511628
+    },
+    {
+      "event": 24130,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 173.55634232694422
+    },
+    {
+      "event": 24153,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 134.6939492249406
+    },
+    {
+      "event": 24225,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 103.68032754883698
+    },
+    {
+      "event": 24280,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.52317977038221
+    },
+    {
+      "event": 24363,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 106.26014793433158
+    },
+    {
+      "event": 24377,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 297.91471030143674
+    },
+    {
+      "event": 24465,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 298.2824820020569
+    },
+    {
+      "event": 24690,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 486.4855003490069
+    },
+    {
+      "event": 24782,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 209.33803090051072
+    },
+    {
+      "event": 24977,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 156.623092339984
+    },
+    {
+      "event": 26312,
+      "metric": "lts__t_sector_hit_rate.avg.pct",
+      "value": 100.1048401188188
+    },
+    {
+      "event": 26460,
+      "metric": "smsp__warp_issue_stalled_long_scoreboard_per_warp_active.avg.pct",
+      "value": 124.18066798681488
+    }
+  ],
+  "scope": "Single frozen Vulkan capture; hardware ranges and generic timestamps are independent replay metrics; no aggregate roofline/peak utilization or original native frame-time acceptance claim; uninspected event identities retain original profile limitations",
+  "inferences": [
+    "Hot ordinary occluded draws execute many instructions for few passing samples with low observed DRAM bytes; prioritize eliminating hidden fragment execution",
+    "Reflection trace has high long-scoreboard dependency stalls and lower L1 hit rate; prioritize dependent-load/locality analysis after dominant draw cost",
+    "No measured peak SM utilization or VRAM bus saturation percentage; memory busy time and capacity are not used to assert bandwidth saturation"
+  ],
+  "archiveMembers": {
+    "collect_admin_gpu_counters.py": "aecf855a790df0175791a47f69796279e1785faadd4a535922b6dc2e527bcf4a",
+    "collect_nvidia_hardware_counters.py": "caac5927552dfa16757be3bb82a8bf5ddbb04215c1ad2aab28cd2a512c120006",
+    "current-gpu-events/material-summary.json": "0cc87c5102b30efbaddd7d91d5cff7789dffc9cfac24313567b90ff230d99ffb",
+    "current-gpu-events/profile-state.json": "ecc7e1f06d2c3a39c75f9aa751fc1340b610f0f8bc51313639f3335eead311b1",
+    "current-gpu-events/shader-products.json": "de74041912678eb826ecc9df70bd1c0a6fe838e536ab7732ff3888548703290b",
+    "current-gpu-events/state.json": "51c5d1cffb448ee845a90657998712a6f37dbb397cbc2217e2bd3ce45618eb73",
+    "performance-bottlenecks/admin-counter-control/analysis.json": "c5154460b068f058347e64bf0a70c12df8b550fe546673c7beff26256b0641c6",
+    "performance-bottlenecks/admin-counter-control/launch-initial.json": "7ec39d3eabc7e0d6ae44ab6aaf5db37083bb7a5092df298fa805604976190829",
+    "performance-bottlenecks/admin-counter-control/launch.json": "aa474d75d0927aafd4d0c0df599c0d6d55fd807efe651e3e92bae00c718b3628",
+    "performance-bottlenecks/admin-counter-control/nv-hardware-counters.json": "df3507ba0f27b2e846c6afd5917bfcd60ce292a332f9f2f70e25f5cadefad6a9",
+    "performance-bottlenecks/admin-counter-control/nv-sdk-retained.log": "6fa0d55216fba658ce65dff25a6dbc6e212a90f1630166735c47c8f9b28db074",
+    "performance-bottlenecks/admin-counter-control/progress.json": "cb1cbfb7ba7cc3e472dbde3f7815cc9697d58b47559a7e900254130510a9ef10",
+    "performance-bottlenecks/admin-counter-control/retry-launch.json": "05435cd68277a9113a209a254abe8f84a5013a07b1f8a109372e8830228ecfba",
+    "performance-bottlenecks/nvperf-active-library.json": "06dcd4ec19fe4f0e6d8eb3fa0255dd5eae26f107fae55aac093b827e1b76d4a8"
+  },
+  "archiveSha256": "5d7a6352a54de4fd8b17acf111db432e0c86a4c91bb40f68454da8940f03a4d3",
+  "administratorSession": true,
+  "globalProfilingAccessSettingModified": false,
+  "nativeAcceptance": "not-qualified-by-replay",
+  "fullVisualAcceptance": "failed-user-review"
+}

@@ -5,7 +5,8 @@
 当前完整构建、跨设备纹理容量及输出提交见[入口核验](docs/acceptance/recovery/acceptance-preflight.md)。
 编辑预览复用处于[候选隔离](docs/plans/2026-11-05-pipeline-reuse.md)状态。
 完整联合性能的来源、方案和落地顺序见[渲染架构调研](docs/research/2026-11-05-render-performance-architecture.md)。
-当前 CPU 阶段、GPU 热点及带宽指标限制见[性能归因](docs/acceptance/nr/performance-bottlenecks.md)。
+当前 CPU 阶段、GPU 热点及带宽指标见[性能归因](docs/acceptance/nr/performance-bottlenecks.md)。
+实际指令、存储及缓存计数见[GPU 硬件归因](docs/acceptance/nr/gpu-hardware-counters.md)。
 提前深度程序的严格图像和隔离范围见[候选验证](docs/acceptance/nr/ordinary-early-depth.md)。
 运行时身份直接查询及双配置检查见[身份验证](docs/acceptance/nr/runtime-node-identity.md)。
 运动向量的命令复用和双设备结果见[绑定验证](docs/acceptance/nr/motion-bindings.md)。
