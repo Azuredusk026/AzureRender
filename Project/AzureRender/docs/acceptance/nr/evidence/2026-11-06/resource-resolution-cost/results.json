@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "status": "measured-local-path-resolution-cost-production-unchanged",
+  "sourceBase": "27fe011",
+  "local": {
+    "status": "measured",
+    "sourceBase": "27fe011",
+    "environmentQualification": "Not qualified for formal 80W comparison; original startup failure preserved; local CPU stage attribution only",
+    "scope": "Twenty consecutive resolveRenderDescription calls; ordinal is not a frame number; private instrumentation, local diagnosis only",
+    "records": [
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 310,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.2882,
+        "nodes": 1679,
+        "resolvePathsMs": 3.0815,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 311,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.1135,
+        "nodes": 1679,
+        "resolvePathsMs": 2.988,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 312,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.2156,
+        "nodes": 1679,
+        "resolvePathsMs": 3.1721,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 313,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.1605,
+        "nodes": 1679,
+        "resolvePathsMs": 3.0503,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 314,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.3471,
+        "nodes": 1679,
+        "resolvePathsMs": 2.9198,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 315,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.1537,
+        "nodes": 1679,
+        "resolvePathsMs": 2.9412,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 316,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.1272,
+        "nodes": 1679,
+        "resolvePathsMs": 2.9313,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 317,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.3097,
+        "nodes": 1679,
+        "resolvePathsMs": 3.1478,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 318,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.5719,
+        "nodes": 1679,
+        "resolvePathsMs": 3.3015,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 319,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.1961,
+        "nodes": 1679,
+        "resolvePathsMs": 3.0235,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 320,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.4833,
+        "nodes": 1679,
+        "resolvePathsMs": 3.4003,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 321,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.2675,
+        "nodes": 1679,
+        "resolvePathsMs": 3.1637,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 322,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.2708,
+        "nodes": 1679,
+        "resolvePathsMs": 3.2687,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 323,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.1915,
+        "nodes": 1679,
+        "resolvePathsMs": 3.0705,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 324,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.3692,
+        "nodes": 1679,
+        "resolvePathsMs": 3.3673,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 325,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.3108,
+        "nodes": 1679,
+        "resolvePathsMs": 3.3248,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 326,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.2128,
+        "nodes": 1679,
+        "resolvePathsMs": 3.026,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 327,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.2907,
+        "nodes": 1679,
+        "resolvePathsMs": 3.3635,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 328,
+        "inputPathBytes": 65685,
+        "materializeMs": 1.2826,
+        "nodes": 1679,
+        "resolvePathsMs": 3.2416,
+        "resources": 374
+      },
+      {
+        "absoluteInputPaths": 374,
+        "callOrdinal": 329,
+        "inputPathBytes": 65685,
+        "materializeMs": 2.612,
+        "nodes": 1679,
+        "resolvePathsMs": 7.2726,
+        "resources": 374
+      }
+    ],
+    "means": {
+      "materializeMs": 1.3387350000000002,
+      "resolvePathsMs": 3.3528000000000007,
+      "resources": 374.0,
+      "nodes": 1679.0,
+      "absoluteInputPaths": 374.0,
+      "inputPathBytes": 65685.0
+    }
+  },
+  "nativeDiagnostic": {
+    "status": "measured",
+    "sourceBase": "27fe011",
+    "visualAcceptance": "failed-user-review",
+    "seconds": 271.8429999999935,
+    "warmup": 300,
+    "samples": 120,
+    "gpu": {
+      "shadowMs": {
+        "mean": 2.634070933333333,
+        "p95": 2.8920096,
+        "p99": 2.94475936
+      },
+      "sceneMs": {
+        "mean": 28.7252224,
+        "p95": 29.4666752,
+        "p99": 29.5345664
+      },
+      "postProcessMs": {
+        "mean": 0.33964373333333336,
+        "p95": 0.349184,
+        "p99": 0.349184
+      },
+      "frameMs": {
+        "mean": 31.698937066666666,
+        "p95": 32.6771936,
+        "p99": 32.721097920000005
+      }
+    },
+    "cpu": {
+      "mean": 31.307538333333323,
+      "p95": 47.83065499999974,
+      "p99": 50.52566700000004
+    },
+    "wait": {
+      "mean": 3.066954166666676,
+      "p95": 7.445099999999752,
+      "p99": 8.072506999999778
+    },
+    "sceneExtent": [
+      1920,
+      1080
+    ],
+    "framePacing": {
+      "maximumRate": 60,
+      "presentMode": "FIFO",
+      "vsync": true,
+      "waitFrames": 0,
+      "waitMilliseconds": 0.0
+    },
+    "allocator": {
+      "bufferAllocations": 1997,
+      "imageAllocations": 440,
+      "liveBuffers": 834,
+      "liveImages": 440,
+      "bufferBytes": 2985576984,
+      "imageBytes": 2779192832,
+      "liveBufferBytes": 415610856,
+      "liveImageBytes": 2779192832,
+      "deviceLocalPeakBytes": 3291255520
+    },
+    "peakWorkingSetBytes": 7403880448,
+    "environmentFailures": [
+      "run observation 38: driver relative thermal headroom is insufficient",
+      "run observation 39: driver relative thermal headroom is insufficient",
+      "run observation 39: software thermal slowdown is active",
+      "run observation 40: software thermal slowdown is active"
+    ],
+    "zeroAllocator": true,
+    "validationClean": true,
+    "allMountedProjectBytesUnchanged": true,
+    "originalLimitsNumericallyMet": false,
+    "powerProfileStable": false,
+    "environmentPassed": false,
+    "diagnosticOnly": true,
+    "instrumented": true,
+    "privateFilesUnchanged": true,
+    "privateFiles": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\resource-resolution-cost\\source\\AzureRenderApp.cpp": "91f98c0d3a2035762a1c907a3201b02d8478d5c857b308290f07901977ab653b",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261105-125529-automatic-acceptance-3d5b54\\resource-resolution-cost\\private-link\\AzurePlayer.exe": "43fb3b0e11f185f8581eeb7fe6f1ef5fa4606fe5a776e9aeb7580108f10c43c9"
+    },
+    "resourceRoot": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+    "productionShaderFilesUnchanged": true
+  },
+  "formalAcceptance": false,
+  "originalStartupRejected": {
+    "status": "rejected-before-native-launch",
+    "reason": "AC/80W startup condition failed",
+    "nativeLaunched": false,
+    "powerLimitWatts": [
+      80.35,
+      80.11,
+      78.8
+    ],
+    "ac": [
+      1,
+      1,
+      1
+    ],
+    "scope": "Original stable-80W comparison condition retained. Separate CPU-stage attribution may record unqualified environment."
+  },
+  "candidate": "A host-owned active path table with explicit load/reload invalidation and transactional replacement; independent contract and native image validation required",
+  "archive": {
+    "path": "measurements.zip",
+    "sha256": "81f60a9445d11300c4490f9a07e72a7f0a75e31edc08fcb605aa226aac4eb3b1",
+    "bytes": 953810,
+    "members": 24
+  },
+  "sourceFiles": {
+    "build-result.json": "ec92c75b62af3435ee948e77fdd7bf335d5a3c9749b721031dc504f48c688e8e",
+    "compile.log": "9f9662106720f4dce455595fc0372810d6c6f79a4b589718cfd161c385c16e2d",
+    "link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "production-before.json": "ba6670448622975bf0599861d9a03b37c23d761a9c288ae46bfbf8023383be72",
+    "native/environment.json": "800ee1a8c7e2a0640ecaac17ecb5cd13e24e2e0b855894bdeaa1593235f07d06",
+    "native/frozen-inputs.json": "ddd204c712dbdd31ed8ae4c4a37bdead6220be1e0ce09e050a1bad536897249f",
+    "native/startup-rejection.json": "9b3dee47cb6932578a4e0cf8f4f4ce72a1b7a257daaf93f87e609926e860f545",
+    "native/task.json": "20ed4dce2cf1f3a38931276ef54560a40a7b1d9971c70c79f9df6ea837267e4f",
+    "native-local-diagnostic/control-results.json": "4a8aa867a670789c7aeede922206c0310abde5ec991f3a539183ee4c381b4ab7",
+    "native-local-diagnostic/environment.json": "db8427a7d23fe986ca74ea9fa4c224871679c2defbfc51410f2fcba534736606",
+    "native-local-diagnostic/frozen-inputs.json": "ddd204c712dbdd31ed8ae4c4a37bdead6220be1e0ce09e050a1bad536897249f",
+    "native-local-diagnostic/memory.json": "a56c27d2088537de40ee307f276934fd457aab55ea35559872ba5c9fb5176839",
+    "native-local-diagnostic/results.json": "1ebff8fa35dc95bc74e2b01978076f9b0bc4670cc00faa8bc95fd72ca4885f2b",
+    "native-local-diagnostic/runtime.json": "bdbf3cdcc7032b2ce2ef9a3bfb74565cb90e8ad2743f16eca1ae51239b4c009a",
+    "native-local-diagnostic/stderr.log": "d41fe01696cfc876ca74955a5747f00968caeccbe982cf1baa7fe874a21f8b10",
+    "native-local-diagnostic/stdout.log": "80d4340b7d31b53b38a0575f50a6cfb4f03a301cf221d808ccfcee267396d600",
+    "native-local-diagnostic/surface-interventions.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "native-local-diagnostic/task.json": "a54671e3994b4357c9279b5b4fc479b99644dea51f38794908ce79b917d15e2b",
+    "native-local-diagnostic/timing.csv": "9d1a66c87f23e4a697915a1a074f1b470ce0e56f2ceb8cd81caba541472cea84",
+    "native-local-diagnostic/timing.json": "0020ac932b624c416a6d2e8144140ee25916bd66244e5e156eb532763ade38f9",
+    "native-local-diagnostic/captures/azureplayer.log.jsonl": "9b7a772eb822d77a49600f2ce01ae768cba514c3d4aca658f15bdc652622ca64",
+    "native-local-diagnostic/captures/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+    "private-link/link.rsp": "eabc6c21f319486d925da5bcf0c09493575d95d0deb9ea1a270656ba6bd15232",
+    "source/AzureRenderApp.cpp": "91f98c0d3a2035762a1c907a3201b02d8478d5c857b308290f07901977ab653b"
+  }
+}

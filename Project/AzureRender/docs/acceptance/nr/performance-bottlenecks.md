@@ -84,6 +84,8 @@ GPU P95 为 33.31 毫秒，热状态条件未通过。
 完整帧收益及热状态继续独立核验。
 厂商面板及组件依赖见[散热环境核验](thermal-environment.md)。
 场景准备和透明排序按所属阶段继续核对。
+[路径解析诊断](resource-resolution-cost.md)取得物化及文件查询的独立成本。
+二十次局部均值分别为 1.339 与 3.353 毫秒。
 硬件计数使用具备分析权限的运行会话。
 管理员启动方式按 [NVIDIA 权限说明](https://developer.nvidia.com/ERR_NVGPUCTRPERM)执行。
 管理员提示由用户确认，独立研发按任务计划推进。
