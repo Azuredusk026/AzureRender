@@ -1,0 +1,15 @@
+{
+  "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+  "manifestSha256": "8741261ebd1093dd53e39056bac17532904a6bdb76c5022740ff981a1a72a877",
+  "hashesRecomputedMatch": true,
+  "memberCoverageReverified": false,
+  "NR12ClosureReverified": false,
+  "applied": false,
+  "candidates": 62,
+  "logicalBytes": 34656019441,
+  "deletionBlockedBy": [
+    "explicit-batch-confirmation-required",
+    "user-worktree-dirty",
+    "archive-members-and-current-baselines-require-review"
+  ]
+}

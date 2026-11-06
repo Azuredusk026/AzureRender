@@ -78,10 +78,22 @@ python tools/artifact_cleanup.py
 python tools/artifact_cleanup.py --apply
 ```
 
-每周日 10:00 由 Codex 自动任务执行。
+每周日 10:00 的 Codex 自动任务执行只读候选扫描。
 自动任务依赖 Codex 的本机调度与执行环境。
 构建或测试运行期间，自动任务延后清理。
 离线期间可用上述命令手动补做。
+
+实际删除须先展示该批次的全部绝对路径。
+用户明确确认后，每批至多删除十个目录。
+每批复核卷余量、主构建完整性及 Git 修改。
+`--run-list` 接收已审阅任务绝对路径的 JSON 数组。
+`--apply` 在候选超过十项时拒绝整批执行。
+指定任务仍须满足期限、标记、跟踪及路径规则。
+
+```powershell
+python tools/artifact_cleanup.py --run-list build/maintenance/batch-01.json
+python tools/artifact_cleanup.py --run-list build/maintenance/batch-01.json --apply
+```
 
 默认范围仅含符合保留期的任务目录。
 目录内任何新写入都会延后清理时间。
@@ -120,3 +132,46 @@ python tools/artifact_cleanup.py --apply
 运行前核对可用空间，验证结束后清理可重新生成的缓存。
 原始截帧、固定输入、验收截图和收据按所属保留规则保存。
 清理前核对绝对路径、资源用途及活动进程，并保存清理记录。
+
+## 空间门禁
+
+`tools/artifact_budget.py` 提供创建前与写入前检查。
+`--new-run` 在创建目录前执行同一门禁。
+单任务逻辑占用与预计新增量合计至多为 2 GiB。
+预计新增量预留后，卷余量须至少为 50 GiB。
+同时须至少保留卷总容量的 10%。
+任务目录保存创建时的 `budget.json`。
+
+```powershell
+python tools/artifact_budget.py --planned-bytes 2147483648
+python tools/artifact_budget.py --run "build/runs/<任务目录>" --planned-bytes 1048576
+```
+
+低空间诊断须显式声明 `--diagnostic`。
+计划输出至多为 64 MiB，预留后须剩余 5 GiB。
+诊断复用现有输入，输出以日志及结构化摘要为主。
+
+```powershell
+python tools/artifact_cleanup.py --new-run performance-check --diagnostic --planned-bytes 67108864
+```
+
+门禁返回非零状态时，调用方停止对应写入。
+每次采集、安装及复制边界重新检查任务实际占用。
+本工具提供调用方门禁，文件系统配额需独立配置。
+外部程序的持续写入由其调用方预算管理。
+当前超额目录保留文件，并进入人工审阅清单。
+
+任务通过共享资产路径引用已有内容。
+项目挂载和资源根负责定位，输入锁记录资产摘要。
+截图按每组首、中、末帧及必要失败帧保留。
+`.keep` 与 `preservedRuns` 应一一对应。
+每项保留记录包含用途、基准入口及复核条件。
+
+归档释放前，核对包及清单的 SHA-256。
+同时核对成员覆盖、当前基准及 NR12 归档状态。
+归档收据的历史 `verified` 状态供复核使用。
+历史根目录需映射到本次确认的项目根目录。
+归档以外的文件先完成增量归档及恢复检查。
+正式证据与 Git 仓库由版本管理规则保护。
+
+本次分级策略与空间事实见[恢复核验](../acceptance/nr/resume-storage-performance.md)。

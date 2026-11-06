@@ -10,6 +10,8 @@
 持续运行的 CPU 阶段及执行状态见[长时诊断](docs/acceptance/nr/cpu-long-run-growth.md)。
 
 厂商温度、组件依赖及复测条件见[环境核验](docs/acceptance/nr/thermal-environment.md)。
+接手环境、空间分级及当前复测条件见[恢复核验](docs/acceptance/nr/resume-storage-performance.md)。
+任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。
 加载会话的路径复用、失效及同输入收益见[活动表验证](docs/acceptance/nr/prepared-resource-paths.md)。
 

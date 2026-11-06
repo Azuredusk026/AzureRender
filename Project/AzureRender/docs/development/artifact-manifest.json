@@ -1,5 +1,16 @@
 {
   "schemaVersion": 1,
+  "storageBudget": {
+    "policy": "artifact-retention.md#空间门禁",
+    "runQuotaBytes": 2147483648,
+    "minimumFreeBytes": 53687091200,
+    "minimumFreeFraction": 0.1,
+    "diagnosticOutputLimitBytes": 67108864,
+    "diagnosticMinimumFreeBytes": 5368709120,
+    "deletionBatchLimit": 10,
+    "deletionApproval": "explicit-per-batch",
+    "automaticCleanupMode": "preview"
+  },
   "current": {
     "path": "ux-2026-10-14/Engine",
     "sourceCommit": "2065b6f",

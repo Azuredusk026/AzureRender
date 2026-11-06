@@ -78,16 +78,29 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--legacy-list", type=Path)
+    parser.add_argument("--run-list", type=Path, help="JSON array of explicit direct run paths for a reviewed batch")
     parser.add_argument("--new-run", metavar="TASK")
+    parser.add_argument("--planned-bytes", type=int, default=2**31)
+    parser.add_argument("--diagnostic", action="store_true")
     parser.add_argument("--finish", type=Path)
     args = parser.parse_args()
     runs = BUILD / "runs"
+    if any(is_link(p) for p in (BUILD, *BUILD.parents, runs) if p.exists() or p.is_symlink()):
+        parser.error('Link in artifact output path')
     runs.mkdir(parents=True, exist_ok=True)
     if args.new_run:
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", args.new_run):
             parser.error("TASK must be lowercase words separated by hyphens")
+        from artifact_budget import check
+        try:
+            budget = check(BUILD, planned=args.planned_bytes, diagnostic=args.diagnostic)
+        except (ValueError, OSError) as error:
+            parser.error(str(error))
+        if not budget['allowed']:
+            parser.error('Artifact budget refused: ' + json.dumps(budget))
         path = runs / (time.strftime("%Y%m%d-%H%M%S-") + args.new_run + "-" + uuid.uuid4().hex[:6])
         path.mkdir()
+        (path / 'budget.json').write_text(json.dumps(budget, indent=2), encoding='utf-8')
         print(path)
         return
     if args.finish:
@@ -101,6 +114,15 @@ def main():
         ["git", "ls-files", "-z"], cwd=repo).decode("utf-8").split("\0") if p }
     now = time.time()
     paths = [p for p in runs.iterdir() if eligible(p, RETENTION_DAYS, now)]
+    if args.run_list:
+        selected = json.loads(args.run_list.read_text(encoding='utf-8'))
+        if not isinstance(selected, list) or not selected or any(not isinstance(p, str) for p in selected):
+            parser.error('--run-list requires a nonempty JSON array of paths')
+        requested = {Path(p).absolute() for p in selected}
+        available = {p.absolute() for p in paths}
+        if not requested <= available:
+            parser.error('--run-list contains an ineligible or out-of-scope run')
+        paths = [p for p in paths if p.absolute() in requested]
     if args.legacy_list:
         for name in json.loads(args.legacy_list.read_text(encoding="utf-8")):
             if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", name):
@@ -110,6 +132,9 @@ def main():
             p = BUILD / name
             if p.exists():
                 paths.append(p)
+    paths = list(dict.fromkeys(paths))
+    if args.apply and len(paths) > 10:
+        parser.error('Deletion batch exceeds 10 directories; use a reviewed --run-list')
     report = {"time": time.strftime("%Y-%m-%dT%H:%M:%S"), "applied": args.apply, "items": [], "bytes": 0}
     receipt = BUILD / "maintenance"
     receipt.mkdir(exist_ok=True)

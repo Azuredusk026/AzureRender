@@ -1,0 +1,255 @@
+{
+  "time": "2026-11-06T21:50:47",
+  "applied": false,
+  "items": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261021-203307-nr2-base-color-quantization-96ed2f",
+      "bytes": 218526
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261021-205039-nr6-face-blue-normal-105d10",
+      "bytes": 2772912
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261021-213933-nr0-renderdoc-layout-audit-f831d0",
+      "bytes": 4690528
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261021-223027-nr7-color-lut-review-df0af1",
+      "bytes": 8545
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261021-231456-nr11-observed-motion-c34afc",
+      "bytes": 19131
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-071136-character-local-light-response-17b93e",
+      "bytes": 382171026
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-073632-clustered-signed-projection-3dd20e",
+      "bytes": 7000467
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-075015-character-line-light-d58610",
+      "bytes": 378223622
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-082551-ordered-character-color-blend-1a34c0",
+      "bytes": 382360089
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-084651-character-screen-light-modes-0347ad",
+      "bytes": 411332082
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-093843-character-multipixel-input-diagnosis-92843a",
+      "bytes": 384649813
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-135236-c17-positive-primary-validation-65aa55",
+      "bytes": 391926880
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-140322-skin-ramp-capture-validation-4e1751",
+      "bytes": 813540369
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-143654-character-visibility-and-skin-contributions-0bc2c9",
+      "bytes": 979818964
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-161800-body-postvs-light-input-validation-f58330",
+      "bytes": 1335015909
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-165425-character-visibility-producer-audit-9c2ea6",
+      "bytes": 1757140882
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-173532-object-shadow-contract-91a092",
+      "bytes": 7994483
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-180520-object-shadow-atlas-e0651a",
+      "bytes": 1837495220
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-190255-object-shadow-config-0c8cdf",
+      "bytes": 1524324
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-193204-shared-depth-sampling-090d6a",
+      "bytes": 4915756
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-195500-object-shadow-gpu-6d1c49",
+      "bytes": 1943704149
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-205700-character-visibility-inputs-01a025",
+      "bytes": 983596
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-210826-material-local-wrap-89eb2f",
+      "bytes": 2036760471
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-211640-captured-caster-geometry-40d999",
+      "bytes": 2064476475
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-215043-captured-eye-inputs-05c1e1",
+      "bytes": 2223240875
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-232311-captured-hair-ring-closure-a1b608",
+      "bytes": 41174546
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261023-235559-material-outline-binding-fb611b",
+      "bytes": 2730336454
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-034455-temporal-aa-inputs-77fd31",
+      "bytes": 119629882
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-035347-temporal-motion-contract-066065",
+      "bytes": 394179
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-042710-temporal-motion-output-de038d",
+      "bytes": 33258650
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-062736-temporal-coverage-quality-eeef75",
+      "bytes": 32018423
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-064930-outline-aa-footprint-923102",
+      "bytes": 67340908
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-081424-projected-hair-pixel-integral-2990a6",
+      "bytes": 341493736
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-101602-native-hair-coverage-motion-90e55c",
+      "bytes": 488152340
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-123840-alpha-clothing-motion-6cc1c9",
+      "bytes": 109627336
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-133121-alpha-mip-footprint-008937",
+      "bytes": 32105033
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-142358-blend-fade-motion-7e378a",
+      "bytes": 313913877
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-150621-native-motion-history-f4d899",
+      "bytes": 85242140
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-153235-cutout-temporal-footprint-9c5e55",
+      "bytes": 20962274
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-162103-native-hair-motion-response-580cde",
+      "bytes": 31652575
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-172000-multisample-rhi-contract-d44491",
+      "bytes": 3665206
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-183512-multisample-scene-target-4968f3",
+      "bytes": 208965
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261024-184956-multisample-view-quality-6be5b8",
+      "bytes": 1851540
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261025-132646-character-multisample-shading-4083bb",
+      "bytes": 90078042
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261025-134845-multisample-snapshot-outline-8300a8",
+      "bytes": 32570082
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261025-143316-multisample-joint-quality-budget-472cac",
+      "bytes": 48055667
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261025-150907-native-camera-motion-quality-17fa15",
+      "bytes": 919359807
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261025-211745-main-npr-joint-quality-budget-e0cdf1",
+      "bytes": 2407963224
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261026-002936-opaque-snapshot-depth-prefill-89dbc6",
+      "bytes": 46875060
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261026-014328-native-eye-mip-boundary-585769",
+      "bytes": 21867330
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261026-021403-opaque-main-depth-prefill-157394",
+      "bytes": 135774769
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261026-031533-complete-asset-cache-reuse-b836e7",
+      "bytes": 3779625
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261026-033134-material-frame-instance-producer-4b5fee",
+      "bytes": 4433986
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261026-233116-repository-structure-audit-18fda4",
+      "bytes": 731165
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261026-234733-workspace-cleanup-195b9a",
+      "bytes": 2545851
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261026-235925-retrieval-implementation-d1130b",
+      "bytes": 769624172
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-025624-main-reflection-history-3693f3",
+      "bytes": 3353389343
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-044333-reflection-pass-profile-087370",
+      "bytes": 4845220386
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-052336-native-hierarchical-reflection-52b603",
+      "bytes": 17976793
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-060530-temporal-cloth-edge-74920a",
+      "bytes": 57463771
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-064955-temporal-display-edges-dbab0a",
+      "bytes": 93296871
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261029-070733-temporal-cutout-detail-848ab8",
+      "bytes": 339
+    }
+  ],
+  "bytes": 34656019441
+}
