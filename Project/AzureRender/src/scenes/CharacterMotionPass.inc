@@ -58,23 +58,28 @@ void CharacterSceneRenderer::prepareMotion(){
     reflectionMotionUvOffsets_[currentFrame_]={};reflectionInputSubmissions_[currentFrame_]=0;
     motionPreviousValidObjects_=0;if(!motionPass_||!instanceSnapshot_)return;
     const auto& snapshot=*instanceSnapshot_;
-    std::vector<MotionPoseState> poses;poses.reserve(snapshot.instances.size());
+    auto& poses=motionPoseScratch_;
+    bool aligned=poses.size()==snapshot.instances.size();
+    for(std::size_t i=0;aligned&&i<poses.size();++i){const auto& instance=snapshot.instances[i];
+        const std::string_view node=instance.nodeId.empty()?std::string_view{"$default"}:std::string_view{instance.nodeId};
+        aligned=std::string_view{poses[i].identity.node}==node&&poses[i].identity.geometry==instance.meshKey;}
+    poses.resize(snapshot.instances.size());
     std::map<std::pair<std::string,std::uint32_t>,std::uint32_t> replicas;
-    for(const auto& instance:snapshot.instances){
+    for(std::size_t i=0;i<snapshot.instances.size();++i){const auto& instance=snapshot.instances[i];
         const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
         const auto& pose=instancePoses_.at(instance.sourceIndex);
-        MotionPoseState previous;previous.identity.node=instance.nodeId.empty()?"$default":instance.nodeId;
-        previous.identity.geometry=instance.meshKey;
-        previous.identity.replica=replicas[{previous.identity.node,instance.meshKey}]++;
+        auto& previous=poses[i];
+        if(!aligned){const std::string_view node=instance.nodeId.empty()?std::string_view{"$default"}:std::string_view{instance.nodeId};
+            previous.identity.node.assign(node.data(),node.size());previous.identity.geometry=instance.meshKey;
+            previous.identity.replica=replicas[{previous.identity.node,instance.meshKey}]++;}
         previous.model=instance.model;previous.joints=pose.pose->jointMatrices;
         previous.morphWeights=flattenMorphGpuWeights(mesh,*pose.pose);previous.legacyMorph=pose.morph;
         previous.vertexCount=static_cast<std::uint32_t>(mesh.vertices.size());previous.morphTableBase=morphGpuMeshes_.at(instance.meshKey).tableBase;
-        poses.push_back(std::move(previous));
     }
     MotionPoseView view;view.cameraPosition=cameraPosition_;view.outlinePixels=snapshot.settings.outline.silhouetteWidthPixels;
     if(snapshot.gizmo.active&&snapshot.gizmo.selectedPrimitive>=0){view.selectedPrimitive=static_cast<unsigned>(snapshot.gizmo.selectedPrimitive);
         view.gizmo=primitiveGizmoTransform(snapshot.gizmo,view.selectedPrimitive);}
-    motionPoses_.stage(std::move(poses),view);
+    motionPoses_.stageReusable(poses,view);
     const auto* temporal=state_.temporalFrame;
     const auto packed=motionPoses_.pack(temporal&&temporal->previous?temporal->previous->viewProjection:motionIdentityMatrix(),
         temporal?temporal->previousSubmission:0,128ULL*1024*1024);

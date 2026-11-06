@@ -13,7 +13,30 @@ MotionPoseState objectPose(const char* name,unsigned geometry,float x,unsigned w
     pose.morphWeights.resize(weights,.25F);pose.morphTableBase=weights?4U+geometry:0U;
     pose.legacyMorph={.1F,.2F};return pose;
 }
+void checkReusableMotionHistory(){
+    MotionPoseHistory owned,reused;std::uint64_t previous=0;
+    std::vector<MotionPoseState> poses={objectPose("a",1,1,1),objectPose("b",2,2,0)};
+    for(unsigned frame=1;frame<=14;++frame){
+        if(frame==4)std::swap(poses[0],poses[1]);
+        if(frame==6)poses.resize(1);
+        if(frame==8)poses.push_back(objectPose("new",3,3,2));
+        if(frame==10){owned.clear();reused.clear();}
+        for(auto& pose:poses){pose.model[12]+=1;pose.joints[0][13]+=2;}
+        MotionPoseView view;view.cameraPosition={float(frame),2,3};
+        owned.stage(poses,view);reused.stageReusable(poses,view);
+        const auto expected=owned.pack(motionIdentityMatrix(),previous,1024*1024);
+        auto actual=reused.pack(motionIdentityMatrix(),previous,1024*1024);
+        checkMotionPose(expected.words==actual.words&&expected.validObjects==actual.validObjects,"Reusable staging must retain exact motion words");
+        if(frame==9){auto duplicate=poses;duplicate.push_back(poses.front());
+            rejectMotionPose([&]{reused.stageReusable(duplicate,view);});
+            checkMotionPose(actual.words==reused.pack(motionIdentityMatrix(),previous,1024*1024).words,"Rejected staging preserves pending data");}
+        if(frame==11){owned.cancel();reused.cancel();rejectMotionPose([&]{reused.pack(motionIdentityMatrix(),previous,1024*1024);});continue;}
+        checkMotionPose(owned.commit(frame)&&reused.commit(frame),"Reusable staging must publish only through commit");previous=frame;
+        for(auto& pose:poses)pose.model[14]+=100;
+    }
+}
 int main()try{
+    checkReusableMotionHistory();
     MotionPoseHistory history;MotionPoseView view;view.cameraPosition={1,2,3};
     view.gizmo=motionIdentityMatrix();view.gizmo[14]=.4F;view.selectedPrimitive=2;
     view.outlinePixels=2.25F;

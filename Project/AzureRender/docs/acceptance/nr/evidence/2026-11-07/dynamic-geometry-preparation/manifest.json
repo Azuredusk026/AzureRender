@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "kind": "NativeOptimizationEvidence",
+  "sourceBase": "adfdc00",
+  "status": "adopted-diagnostic-cpu-improvement",
+  "sourceChanges": {
+    "CMakeLists.txt": "9ba2d44760ceaafe890066195625b618d8d5d778e684ddf7bbeb0c7fd63771fc",
+    "src/app/AzureRenderApp.cpp": "7de82c69be122cd32252046fc1622c81787e180d0fa62c6c8cb9b5d781ad711a",
+    "src/render/MotionPoseData.cpp": "2e4a999cd56541f0e2a5e3278c938868e908ef07f9dc737fefabedcd70ffbbe0",
+    "src/render/MotionPoseData.hpp": "623def51e2aa97bd379d9a8f6cd142bedea74d1dd03a6ed3566e7cccfbc2b03d",
+    "src/render/RenderContext.hpp": "1a8045879caace249ea095753aa28cba8db9188a05096cdef5141b0710f15dc2",
+    "src/render/TransparentTopology.hpp": "2339b84f9bbe8ed28631f4606a69e1849d24d9e7bae79e852ba7f650e24c44a1",
+    "src/scenes/CharacterMotionPass.inc": "1b4163b9ac7d6fcfafdd0c6441cdbd57257057bc5c4ca4edb63cacfbee071e58",
+    "src/scenes/CharacterSceneRenderer.cpp": "c1e1b62302723e8a1b9b6ea98d2d41ecce8d22295ab097f06b99b619bd718850",
+    "src/scenes/CharacterSceneRenderer.hpp": "1d91ae454379edca8df123bf1a7dbbaa798f5113cd757337867f2dd2c404318e"
+  },
+  "tests": {
+    "tests/TransparentTopologyTests.cpp": "9bebcf1dee5296e2b140ea1648c0fcffd2a53cbc88d69a94755347fb59175239",
+    "tests/MotionPoseDataTests.cpp": "8cdb77384f361b04314f8c1cb1b5680fb25b9c8b6ef52d0cf088da38740405fc"
+  },
+  "configuration": "Release",
+  "buildProvenanceSha256": "6466be248a1a526c8364d639e17638b5a0f36986ccb2b4b2e4bb5817b73ed4d5",
+  "buildScope": {
+    "kind": "runtime-and-tests",
+    "targets": [
+      "AzureRender",
+      "AzurePlayer",
+      "AzureMetaGen",
+      "AzureGeometryCompiler",
+      "AzureAssetExchange",
+      "AzureMaterialValidator",
+      "AzureGameLauncher",
+      "AzureEngineContracts",
+      "AzureManagedArtifacts",
+      "AzureShaderModulePrototypes",
+      "AzureTransparentTopologyTests",
+      "AzureMotionPoseDataTests",
+      "AzureStableDepthOrderTests",
+      "AzureMotionVectorTargetTests",
+      "AzureTemporalViewStateTests",
+      "AzureMotionPoseGpuTests",
+      "AzureMotionVectorGpuTests"
+    ],
+    "testProducts": {
+      "AzureTransparentTopologyTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureTransparentTopologyTests.exe",
+      "AzureMotionPoseDataTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionPoseDataTests.exe",
+      "AzureStableDepthOrderTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureStableDepthOrderTests.exe",
+      "AzureMotionVectorTargetTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionVectorTargetTests.exe",
+      "AzureTemporalViewStateTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureTemporalViewStateTests.exe",
+      "AzureMotionPoseGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionPoseGpuTests.exe",
+      "AzureMotionVectorGpuTests": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMotionVectorGpuTests.exe"
+    }
+  },
+  "playerSha256": "64e8050fc1d4b359c3ac5f8733ecc2917e2064d656a05344c11dccb6567c49ea",
+  "programCount": 663,
+  "allProgramsByteIdentical": true,
+  "results": {
+    "file": "results.json",
+    "sha256": "20274b0c90e7330562c75bbeb9400c479ad874bada05f91005e65236a3e835cb"
+  },
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1564025,
+    "sha256": "99e859707644c8b8adde0f9e9a77fc32504b992c0f83c9945fb00d834005b28e"
+  },
+  "phaseChecksPassed": true,
+  "formalPerformanceAccepted": false,
+  "overallVisualAccepted": false
+}

@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <utility>
 namespace azurerender {
 using MotionMatrix=std::array<float,16>;
 inline MotionMatrix motionIdentityMatrix(){return {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};}
@@ -38,15 +39,17 @@ struct PackedMotionPoseFrame {
 class MotionPoseHistory final {
 public:
     void stage(std::vector<MotionPoseState>,const MotionPoseView&);
+    void stageReusable(const std::vector<MotionPoseState>&,const MotionPoseView&);
     PackedMotionPoseFrame pack(const MotionMatrix& previousViewProjection,
         std::uint64_t previousCameraSubmission,std::uint64_t byteLimit) const;
     bool commit(std::uint64_t submission) noexcept;
-    void cancel() noexcept {pending_.reset();}
-    void clear() noexcept {pending_.reset();committed_.reset();}
+    void cancel() noexcept {if(pending_)spare_=std::move(pending_);}
+    void clear() noexcept {pending_.reset();committed_.reset();spare_.reset();}
     std::uint64_t lastSubmission() const noexcept {return lastSubmission_;}
 private:
     struct Snapshot;
-    std::shared_ptr<const Snapshot> pending_,committed_;
+    void validateAndIndex(Snapshot&,const std::vector<MotionPoseState>&,const MotionPoseView&) const;
+    std::shared_ptr<Snapshot> pending_,committed_,spare_;
     std::uint64_t lastSubmission_=0;
 };
 }

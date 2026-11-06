@@ -1,5 +1,9 @@
 # 项目现状
 
+动态几何准备通过七项所属检查及原生四帧零像素对照。
+短时 CPU 均值为 10.76 毫秒，P95 为 11.51 毫秒。
+原帧预算、环境及画质继续验收，来源见[动态几何优化](acceptance/nr/dynamic-geometry-preparation.md)。
+
 专用快照及渲染描述复用通过所属检查与原生零像素对照。
 短时 CPU 均值为 13.81 毫秒，P95 为 15.28 毫秒。
 原帧预算、环境及画质继续验收，来源见[宿主优化](acceptance/nr/host-scene-preparation.md)。

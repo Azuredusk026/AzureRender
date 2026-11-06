@@ -34,24 +34,41 @@ bool MotionObjectIdentity::operator<(const MotionObjectIdentity& other) const no
 }
 struct MotionPoseHistory::Snapshot {
     std::vector<MotionPoseState> poses;
-    std::map<MotionObjectIdentity,std::size_t> index;
+    std::shared_ptr<const std::map<MotionObjectIdentity,std::size_t>> index;
     MotionPoseView view;
 };
-void MotionPoseHistory::stage(std::vector<MotionPoseState> poses,const MotionPoseView& view){
+void MotionPoseHistory::validateAndIndex(Snapshot& snapshot,const std::vector<MotionPoseState>& poses,const MotionPoseView& view) const {
     if(!finiteMotion(view.cameraPosition)||!finiteMotion(view.gizmo)||!std::isfinite(view.outlinePixels)||view.outlinePixels<0||view.outlinePixels>8)
         throw std::invalid_argument("Motion view requires finite camera/gizmo and outline width within [0,8]");
     if(poses.size()>std::numeric_limits<std::uint32_t>::max())throw std::length_error("Motion instance count exceeds word addressing");
-    auto snapshot=std::make_shared<Snapshot>();snapshot->poses=std::move(poses);snapshot->view=view;
-    for(std::size_t i=0;i<snapshot->poses.size();++i){
-        const auto& pose=snapshot->poses[i];
+    bool aligned=committed_&&committed_->poses.size()==poses.size();
+    for(std::size_t i=0;i<poses.size();++i){
+        const auto& pose=poses[i];
         if(pose.identity.node.empty()||!pose.vertexCount||pose.joints.empty()
             ||!finiteMotion(pose.model)||!finiteMotion(pose.legacyMorph)||!finiteMotion(pose.morphWeights)
             ||(pose.morphTableBase==0)!=pose.morphWeights.empty())
             throw std::invalid_argument("Motion pose requires stable identity, finite transforms and compatible morph inputs");
         for(const auto& joint:pose.joints)if(!finiteMotion(joint))throw std::invalid_argument("Motion joints must be finite");
-        if(!snapshot->index.emplace(pose.identity,i).second)throw std::invalid_argument("Duplicate motion object identity");
+        if(aligned){const auto& previous=committed_->poses[i].identity;
+            aligned=pose.identity.node==previous.node&&pose.identity.geometry==previous.geometry&&pose.identity.replica==previous.replica;}
     }
+    if(aligned)snapshot.index=committed_->index;
+    else {
+        auto index=std::make_shared<std::map<MotionObjectIdentity,std::size_t>>();
+        for(std::size_t i=0;i<poses.size();++i)
+            if(!index->emplace(poses[i].identity,i).second)throw std::invalid_argument("Duplicate motion object identity");
+        snapshot.index=std::move(index);
+    }
+}
+void MotionPoseHistory::stage(std::vector<MotionPoseState> poses,const MotionPoseView& view){
+    auto snapshot=std::make_shared<Snapshot>();snapshot->poses=std::move(poses);snapshot->view=view;
+    validateAndIndex(*snapshot,snapshot->poses,view);
     pending_=std::move(snapshot);
+}
+void MotionPoseHistory::stageReusable(const std::vector<MotionPoseState>& poses,const MotionPoseView& view){
+    auto snapshot=spare_?spare_:std::make_shared<Snapshot>();
+    validateAndIndex(*snapshot,poses,view);snapshot->poses=poses;snapshot->view=view;
+    pending_=std::move(snapshot);spare_.reset();
 }
 PackedMotionPoseFrame MotionPoseHistory::pack(const MotionMatrix& previousViewProjection,
     std::uint64_t previousCameraSubmission,std::uint64_t byteLimit) const {
@@ -65,10 +82,14 @@ PackedMotionPoseFrame MotionPoseHistory::pack(const MotionMatrix& previousViewPr
     const auto jointsBegin=size;
     std::vector<const MotionPoseState*> matches(pending_->poses.size(),nullptr);
     if(committed_&&previousCameraSubmission&&previousCameraSubmission==lastSubmission_){
+        const bool aligned=pending_->index==committed_->index;
         for(std::size_t i=0;i<matches.size();++i){
-            const auto& current=pending_->poses[i];const auto found=committed_->index.find(current.identity);
-            if(found!=committed_->index.end()){
-                const auto& old=committed_->poses[found->second];
+            const auto& current=pending_->poses[i];const MotionPoseState* previous=nullptr;
+            if(aligned)previous=&committed_->poses[i];
+            else {const auto found=committed_->index->find(current.identity);
+                if(found!=committed_->index->end())previous=&committed_->poses[found->second];}
+            if(previous){
+                const auto& old=*previous;
                 if(compatiblePose(current,old)){
                     if(old.joints.size()>wordLimit/16)throw std::length_error("Motion joints exceed storage capacity");
                     add(old.joints.size()*16);matches[i]=&old;
@@ -109,6 +130,6 @@ PackedMotionPoseFrame MotionPoseHistory::pack(const MotionMatrix& previousViewPr
 }
 bool MotionPoseHistory::commit(std::uint64_t submission) noexcept {
     if(!pending_||!submission||submission<=lastSubmission_)return false;
-    committed_=std::move(pending_);lastSubmission_=submission;return true;
+    spare_=std::move(committed_);committed_=std::move(pending_);lastSubmission_=submission;return true;
 }
 }

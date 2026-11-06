@@ -3,6 +3,7 @@
 #include "render/StableDepthOrder.hpp"
 #include "animation/ExpressionPose.hpp"
 #include "scenes/CharacterSceneRenderer.hpp"
+#include <string_view>
 #include "render/MaterialSampling.hpp"
 #include "render/MaterialPipelinePolicy.hpp"
 #include "render/IrradianceClipmapGpu.hpp"
@@ -562,7 +563,7 @@ void CharacterSceneRenderer::onLoad(const RenderContext& context){
 }
 bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double budgetMs){
     const auto start=std::chrono::steady_clock::now();
-    if(!loadInitialized_){loadInitialized_=true;initializeLoad(context);}
+    if(!loadInitialized_){loadInitialized_=true;preparationWorkers_=context.preparationWorkers;initializeLoad(context);}
     do{
         if(loadJobs_.empty())return true;
         auto job=std::move(loadJobs_.front());loadJobs_.pop_front();job();
@@ -1585,10 +1586,10 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
 
 void CharacterSceneRenderer::onUnload(const RenderContext& context) {
     temporalView_.clear();
-    motionPoses_.clear();state_.temporalFrame=nullptr;
+    motionPoses_.clear();motionPoseScratch_.clear();state_.temporalFrame=nullptr;
     (void)context;
     loadJobs_.clear();loadInitialized_=false;destroyResources();
-    transparencyScratch_={};
+    transparencyScratch_={};transparentTopologies_.clear();preparationWorkers_=nullptr;
     clusteredLightGrid_.reset();
     faceSdfHeadNode_.reset();faceSdfTextureCount_=0;
 }
@@ -4583,6 +4584,20 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
                 &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))
                 transparentPrimitivesByMesh_[key].push_back(&primitive);
     }
+    transparentTopologies_.resize(transparentPrimitivesByMesh_.size());
+    for(std::size_t key=0;key<transparentTopologies_.size();++key){
+        const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+        const auto& primitives=transparentPrimitivesByMesh_[key];auto& topology=transparentTopologies_[key];
+        bool matches=topology.prepared&&topology.sourceIndices==mesh.indices.data()
+            &&topology.sourceIndexCount==mesh.indices.size()&&topology.sourceVertexCount==mesh.vertices.size()
+            &&topology.primitives.size()==primitives.size();
+        for(std::size_t i=0;matches&&i<primitives.size();++i)
+            matches=topology.primitives[i].range.firstIndex==primitives[i]->firstIndex
+                &&topology.primitives[i].range.indexCount==primitives[i]->indexCount;
+        if(!matches){std::vector<TransparentPrimitiveRange> ranges;ranges.reserve(primitives.size());
+            for(const auto* primitive:primitives)ranges.push_back({primitive->firstIndex,primitive->indexCount});
+            topology=prepareTransparentTopology(mesh.indices,mesh.vertices.size(),ranges);}
+    }
     transparentIndexOffsets_.assign(sceneInstances_.size(), 0);
     std::size_t total = 0;
     for (const auto& instance : sceneInstances_) {
@@ -4606,62 +4621,11 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
         if (transparentPrimitives.empty()) continue;
         const auto& pose = instancePoses_.at(instance.sourceIndex);
-        auto& worldPositions=transparencyScratch_.worldPositions;
-        auto& prepared=transparencyScratch_.prepared;
-        worldPositions.resize(mesh.vertices.size());prepared.resize(mesh.vertices.size());
-        std::fill(prepared.begin(),prepared.end(),std::uint8_t{0});
-        const auto vertexWorldPosition = [&](std::uint32_t index) {
-            if(prepared.at(index))return worldPositions[index];
-            worldPositions[index]=deformedVertexPosition(mesh,index,pose.pose.get(),pose.morph);
-            worldPositions[index]=transformPosition(instance.model,worldPositions[index]);
-            prepared[index]=true;return worldPositions[index];
-        };
-        std::size_t oitWriteIndex = transparentIndexOffsets_[instance.sourceIndex];
-        if (!transparentPrimitives.empty() && !oitIndexBuffers_.empty()) {
-            std::uint32_t* oitMapped = static_cast<std::uint32_t*>(
-                oitIndexBuffers_[currentFrame_].mapped);
-            for (const AssetPrimitive* primitive : transparentPrimitives) {
-                const std::uint32_t triangleCount = primitive->indexCount / 3;
-                auto& triangleOrder=transparencyScratch_.order;
-                auto& triangleDepth=transparencyScratch_.depths;
-                triangleOrder.resize(triangleCount);triangleDepth.resize(triangleCount);
-                for (std::uint32_t triangle = 0; triangle < triangleCount;
-                     ++triangle) {
-                    triangleOrder[triangle] = triangle;
-                    const std::uint32_t base =
-                        primitive->firstIndex + triangle * 3;
-                    const std::uint32_t i0 = mesh.indices[base];
-                    const std::uint32_t i1 = mesh.indices[base + 1];
-                    const std::uint32_t i2 = mesh.indices[base + 2];
-                    const Vector3 v0 = vertexWorldPosition(i0);
-                    const Vector3 v1 = vertexWorldPosition(i1);
-                    const Vector3 v2 = vertexWorldPosition(i2);
-                    const Vector3 centroid = {
-                        (v0[0] + v1[0] + v2[0]) * (1.0F / 3.0F),
-                        (v0[1] + v1[1] + v2[1]) * (1.0F / 3.0F),
-                        (v0[2] + v1[2] + v2[2]) * (1.0F / 3.0F),
-                    };
-                    const Vector3 cameraOffset =
-                        subtract(centroid, cameraPosition_);
-                    triangleDepth[triangle] =
-                        dot(cameraOffset, cameraForward);
-                }
-                azurerender::stableDepthOrder(triangleOrder,triangleDepth,transparencyScratch_.sort);
-                for (std::uint32_t triangle = 0; triangle < triangleCount;
-                     ++triangle) {
-                    const std::uint32_t ordered = triangleOrder[triangle];
-                    const std::uint32_t base =
-                        primitive->firstIndex + ordered * 3;
-                    oitMapped[oitWriteIndex + triangle * 3] =
-                        mesh.indices[base];
-                    oitMapped[oitWriteIndex + triangle * 3 + 1] =
-                        mesh.indices[base + 1];
-                    oitMapped[oitWriteIndex + triangle * 3 + 2] =
-                        mesh.indices[base + 2];
-                }
-                oitWriteIndex += primitive->indexCount;
-            }
-        }
+        auto* output=static_cast<std::uint32_t*>(oitIndexBuffers_[currentFrame_].mapped)
+            +transparentIndexOffsets_[instance.sourceIndex];
+        writeSortedTransparentIndices(transparentTopologies_[instance.meshKey],[&](std::uint32_t index){
+            return transformPosition(instance.model,deformedVertexPosition(mesh,index,pose.pose.get(),pose.morph));
+        },cameraPosition_,cameraForward,output,transparencyScratch_,preparationWorkers_);
     }
 }
 

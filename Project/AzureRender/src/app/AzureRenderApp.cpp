@@ -588,6 +588,7 @@ void AzureRenderApp::buildRenderContext(
         azurerender::VisibilityPrototype::supported(indirectProperties.limits);
     context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
+    context.preparationWorkers=runOptions_.parallelRecordingDisabled?nullptr:&recordingWorkers_;
     context.renderExtent = sceneRenderExtent_;
     context.swapchainExtent = swapchainExtent_;
     context.sceneColorFormat = kHdrSceneColorFormat;

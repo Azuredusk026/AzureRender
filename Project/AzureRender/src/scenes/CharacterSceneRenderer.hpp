@@ -8,6 +8,7 @@
 #include "render/SampledTextureCache.hpp"
 #include "render/MaterialPipelinePolicy.hpp"
 #include "render/StableDepthOrder.hpp"
+#include "render/TransparentTopology.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
@@ -85,6 +86,7 @@ public:
 private:
     TemporalViewState temporalView_;
     MotionPoseHistory motionPoses_;
+    std::vector<MotionPoseState> motionPoseScratch_;
     std::unique_ptr<MotionVectorPass> motionPass_;
     MotionVectorTarget* motionTarget_=nullptr;
     std::vector<MotionVectorDraw> motionDraws_,reflectionMotionDraws_;
@@ -388,13 +390,9 @@ private:
     std::vector<std::size_t> transparentIndexOffsets_;
     bool transparentDrawsPrepared_ = false;
     std::vector<std::vector<const AssetPrimitive*>> transparentPrimitivesByMesh_;
-    struct TransparencyPreparationScratch {
-        std::vector<std::array<float,3>> worldPositions;
-        std::vector<std::uint8_t> prepared;
-        std::vector<std::uint32_t> order;
-        std::vector<float> depths;
-        DepthOrderWorkspace sort;
-    } transparencyScratch_;
+    std::vector<TransparentTopology> transparentTopologies_;
+    RecordingWorkerPool* preparationWorkers_=nullptr;
+    TransparentTopologyWorkspace transparencyScratch_;
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
     std::shared_ptr<const MaterialOriginInstances> materialOriginInstances_;
     std::vector<std::vector<std::uint32_t>> materialOriginNodes_;

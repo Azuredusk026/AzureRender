@@ -31,6 +31,7 @@ class ICommandRecorder;
 
 struct RenderSettings;
 class MotionVectorTarget;
+class RecordingWorkerPool;
 struct TemporalPreparedFrame;
 
 // Opt-in per-frame submission counters. The engine owns the storage and passes
@@ -265,6 +266,7 @@ struct RenderContext {
     const RenderSettings* renderSettings = nullptr;
     // View-owned output. Retire renderer recording before replacing this target.
     MotionVectorTarget* motionOutput = nullptr;
+    RecordingWorkerPool* preparationWorkers = nullptr;
 };
 inline std::uint32_t sceneColorAttachmentCount(const RenderContext& context) noexcept {
     return context.displayMaskEnabled?3U:2U;
