@@ -1,0 +1,11 @@
+{
+  "identity": [
+    62901352215,
+    1793269776046488800,
+    562949953465633,
+    3838940640
+  ],
+  "sha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+  "verified": true,
+  "verification": "Observed successful archive and index digest assertions in first cleanup invocation, before process-query failure; no archive writes occurred"
+}

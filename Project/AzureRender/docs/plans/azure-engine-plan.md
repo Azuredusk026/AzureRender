@@ -34,6 +34,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 当前优先执行性能归因及定向优化。
 接手核验及空间前置条件见[恢复记录](../acceptance/nr/resume-storage-performance.md)。
 产物门禁按[空间计划](2026-11-06-storage-budget.md)执行。
+本轮自动清理与性能复测见[执行记录](../acceptance/nr/autonomous-cleanup-performance.md)。
 每次只验证一个原因，画质门槛保持有效。
 定位十分钟，候选修改与短检二十分钟。
 探索达到三十分钟后登记结论，并接续独立任务。

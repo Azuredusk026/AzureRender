@@ -8,7 +8,7 @@
     "diagnosticOutputLimitBytes": 67108864,
     "diagnosticMinimumFreeBytes": 5368709120,
     "deletionBatchLimit": 10,
-    "deletionApproval": "explicit-per-batch",
+    "deletionApproval": "current-session-authorization",
     "automaticCleanupMode": "preview"
   },
   "current": {
@@ -1163,7 +1163,494 @@
       "retention": "对应画质门禁完成并归档后另行清理。",
       "pinMarker": ".keep",
       "implementationPlan": "docs/plans/2026-11-04-face-masked-rim.md"
+    },
+    {
+      "path": "runs/20261016-140642-ev0-baseline-891c98",
+      "pathBase": "build",
+      "purpose": "私有来源导入基线及环境证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261016-142829-ev6-scene-exchange-41ac3c",
+      "pathBase": "build",
+      "purpose": "场景交换集成、导出夹具及构建证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261017-000956-endfield-native-3caf73",
+      "pathBase": "build",
+      "purpose": "原生资产调查、动画候选及来源数据库。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261017-141949-dijiang-lighting-video-7d7da0",
+      "pathBase": "build",
+      "purpose": "中庭展示工程、照明来源及原速视频。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261022-051129-character-logistics-restoration-0f2e71",
+      "pathBase": "build",
+      "purpose": "角色与物流还原的工具、候选及来源证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261022-201845-endfield-capture-954719",
+      "pathBase": "build",
+      "purpose": "原生抓帧及官方重放来源证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261022-210028-capture-plan-handoff-2e194d",
+      "pathBase": "build",
+      "purpose": "原生帧核对、会话收据及工作区快照。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261025-160544-main-material-frame-integration-1ad7a0",
+      "pathBase": "build",
+      "purpose": "主材质帧集成、材质槽与描边绑定证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-005117-shared-motion-history-a9430e",
+      "pathBase": "build",
+      "purpose": "运动向量与时间历史的共享所有权证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-015351-reflection-motion-depth-30af9d",
+      "pathBase": "build",
+      "purpose": "反射、运动及深度边缘的成对控制证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-021125-reflection-temporal-composition-f11a86",
+      "pathBase": "build",
+      "purpose": "反射时间合成的双配置构建及 GPU 证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-023153-reflection-reprojection-32dd36",
+      "pathBase": "build",
+      "purpose": "反射重投影、失败控制及 GPU 核验证据。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
+    },
+    {
+      "path": "runs/20261029-071130-main-character-joint-budget-2cddc4",
+      "pathBase": "build",
+      "purpose": "主角色联合预算、内存诊断与原生捕获。",
+      "retention": "逐文件归档覆盖及活动输入核验完成后，按当前会话授权释放。",
+      "pinMarker": ".keep"
     }
   ],
-  "evidenceRetentionManifest": "evidence-retention.json"
+  "evidenceRetentionManifest": "evidence-retention.json",
+  "archivedRuns": [
+    {
+      "path": "runs/20261021-203307-nr2-base-color-quantization-96ed2f",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 81,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261021-205039-nr6-face-blue-normal-105d10",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1004,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261021-213933-nr0-renderdoc-layout-audit-f831d0",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 49,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261021-223027-nr7-color-lut-review-df0af1",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 4,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261021-231456-nr11-observed-motion-c34afc",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 8,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-071136-character-local-light-response-17b93e",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1641,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-073632-clustered-signed-projection-3dd20e",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 633,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-075015-character-line-light-d58610",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 935,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-082551-ordered-character-color-blend-1a34c0",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2530,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-084651-character-screen-light-modes-0347ad",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2685,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-093843-character-multipixel-input-diagnosis-92843a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 164,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-135236-c17-positive-primary-validation-65aa55",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 169,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-140322-skin-ramp-capture-validation-4e1751",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1095,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-143654-character-visibility-and-skin-contributions-0bc2c9",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2641,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-161800-body-postvs-light-input-validation-f58330",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1398,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-165425-character-visibility-producer-audit-9c2ea6",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1704,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-173532-object-shadow-contract-91a092",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 65,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-180520-object-shadow-atlas-e0651a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1395,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-190255-object-shadow-config-0c8cdf",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 31,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-193204-shared-depth-sampling-090d6a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 632,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-195500-object-shadow-gpu-6d1c49",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1741,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-205700-character-visibility-inputs-01a025",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 159,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-210826-material-local-wrap-89eb2f",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 662,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-211640-captured-caster-geometry-40d999",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1064,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-215043-captured-eye-inputs-05c1e1",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1695,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-232311-captured-hair-ring-closure-a1b608",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 89,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261023-235559-material-outline-binding-fb611b",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 4380,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-034455-temporal-aa-inputs-77fd31",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 44,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-035347-temporal-motion-contract-066065",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 85,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-042710-temporal-motion-output-de038d",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 202,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-062736-temporal-coverage-quality-eeef75",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 129,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-064930-outline-aa-footprint-923102",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2796,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-081424-projected-hair-pixel-integral-2990a6",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2880,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-101602-native-hair-coverage-motion-90e55c",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 4695,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-123840-alpha-clothing-motion-6cc1c9",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 5910,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-133121-alpha-mip-footprint-008937",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2599,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-142358-blend-fade-motion-7e378a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2730,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-150621-native-motion-history-f4d899",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 607,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-153235-cutout-temporal-footprint-9c5e55",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2321,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-162103-native-hair-motion-response-580cde",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 476,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-172000-multisample-rhi-contract-d44491",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 71,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-183512-multisample-scene-target-4968f3",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 4,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261024-184956-multisample-view-quality-6be5b8",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 66,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-132646-character-multisample-shading-4083bb",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2816,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-134845-multisample-snapshot-outline-8300a8",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 3327,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-143316-multisample-joint-quality-budget-472cac",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 5622,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-150907-native-camera-motion-quality-17fa15",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1635,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261025-211745-main-npr-joint-quality-budget-e0cdf1",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2607,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-002936-opaque-snapshot-depth-prefill-89dbc6",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2360,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-014328-native-eye-mip-boundary-585769",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 155,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-021403-opaque-main-depth-prefill-157394",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 3823,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-031533-complete-asset-cache-reuse-b836e7",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 19,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-033134-material-frame-instance-producer-4b5fee",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 51,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-233116-repository-structure-audit-18fda4",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 6,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-234733-workspace-cleanup-195b9a",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 9,
+      "previousRegistration": []
+    }
+  ],
+  "recoveryArchives": [
+    {
+      "path": "archives/generated-cache-recovery-20261106.zip",
+      "sha256": "4d7b22cf9a104a25d23b86c216788a9ee9cb164e02bdc96e9cc17a5a0951eb3d",
+      "journal": "archives/generated-cache-recovery-20261106.zip.manifest.json",
+      "scope": "Inactive generated .azure/cache/*.azcache only; current joint project cache retained",
+      "journalSha256": "fa601e5e0da5ef83810da9529e3f81c78e30be89dfe24ffc8b2316256897a988"
+    }
+  ]
 }

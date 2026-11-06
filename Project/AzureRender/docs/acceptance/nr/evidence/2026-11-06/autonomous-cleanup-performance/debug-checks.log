@@ -1,0 +1,84 @@
+Internal ctest changing into directory: D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+Test project D:/Projects/FYP/Project/AzureRender/build/ninja-msvc-debug
+      Start   6: AzureRender.ProjectedReflectionScene
+ 1/39 Test   #6: AzureRender.ProjectedReflectionScene ....   Passed    7.28 sec
+      Start  21: AzureRender.SceneNodeGrouping
+ 2/39 Test  #21: AzureRender.SceneNodeGrouping ...........   Passed    3.96 sec
+      Start  22: AzureRender.StaticSkinningRecording
+ 3/39 Test  #22: AzureRender.StaticSkinningRecording .....   Passed    0.98 sec
+      Start  23: AzureRender.SkinningBatch
+ 4/39 Test  #23: AzureRender.SkinningBatch ...............   Passed    0.88 sec
+      Start  25: AzureRender.PrimitiveOpacity
+ 5/39 Test  #25: AzureRender.PrimitiveOpacity ............   Passed    0.09 sec
+      Start  26: AzureRender.NodeOpacityRecording
+ 6/39 Test  #26: AzureRender.NodeOpacityRecording ........   Passed    2.71 sec
+      Start  27: AzureRender.OutlineCoverageRecording
+ 7/39 Test  #27: AzureRender.OutlineCoverageRecording ....   Passed   23.33 sec
+      Start  48: AzureRender.MaterialPipelinePolicy
+ 8/39 Test  #48: AzureRender.MaterialPipelinePolicy ......   Passed    0.90 sec
+      Start  56: AzureRender.OpaqueTransparencyScratch
+ 9/39 Test  #56: AzureRender.OpaqueTransparencyScratch ...   Passed    2.73 sec
+      Start  57: AzureRender.DepthOnlyShadowRecording
+10/39 Test  #57: AzureRender.DepthOnlyShadowRecording ....   Passed    2.54 sec
+      Start  58: AzureRender.DepthPrefillRecording
+11/39 Test  #58: AzureRender.DepthPrefillRecording .......   Passed    3.43 sec
+      Start  60: AzureRender.DepthOnlyPipeline
+12/39 Test  #60: AzureRender.DepthOnlyPipeline ...........   Passed    1.33 sec
+      Start  61: AzureRender.BufferBarrierBatch
+13/39 Test  #61: AzureRender.BufferBarrierBatch ..........   Passed    1.09 sec
+      Start  91: AzureRender.MaterialTextureSharing
+14/39 Test  #91: AzureRender.MaterialTextureSharing ......   Passed    2.39 sec
+      Start 127: AzureRender.MotionRecording
+15/39 Test #127: AzureRender.MotionRecording .............   Passed    1.25 sec
+      Start 131: AzureRender.MotionPoseData
+16/39 Test #131: AzureRender.MotionPoseData ..............   Passed    1.21 sec
+      Start 167: AzureEngine.SystemComposition
+17/39 Test #167: AzureEngine.SystemComposition ...........   Passed    6.41 sec
+      Start 174: AzureRender.ObjectShadowAtlas
+18/39 Test #174: AzureRender.ObjectShadowAtlas ...........   Passed    0.95 sec
+      Start 175: AzureRender.ObjectShadowRecording
+19/39 Test #175: AzureRender.ObjectShadowRecording .......   Passed    2.29 sec
+      Start 184: AzureEngine.PresentationRuntime
+20/39 Test #184: AzureEngine.PresentationRuntime .........   Passed    2.45 sec
+      Start 196: AzureEngine.ScriptRuntime
+21/39 Test #196: AzureEngine.ScriptRuntime ...............   Passed   10.75 sec
+      Start 201: AzureEngine.PlayableQuest
+22/39 Test #201: AzureEngine.PlayableQuest ...............   Passed    5.71 sec
+      Start 202: AzureEngine.LocomotionBlend
+23/39 Test #202: AzureEngine.LocomotionBlend .............   Passed    0.13 sec
+      Start 203: AzureRender.AnimationPose
+24/39 Test #203: AzureRender.AnimationPose ...............   Passed    2.46 sec
+      Start 204: AzureRender.NodeOpacity
+25/39 Test #204: AzureRender.NodeOpacity .................   Passed    0.46 sec
+      Start 205: AzureAssets.MorphTargets
+26/39 Test #205: AzureAssets.MorphTargets ................   Passed    1.84 sec
+      Start 206: AzureRender.StableDepthOrder
+27/39 Test #206: AzureRender.StableDepthOrder ............   Passed    0.59 sec
+      Start 207: AzureRender.AnimationCurve
+28/39 Test #207: AzureRender.AnimationCurve ..............   Passed    0.12 sec
+      Start 208: AzureRender.ExpressionPose
+29/39 Test #208: AzureRender.ExpressionPose ..............   Passed    2.05 sec
+      Start 213: AzureEngine.AssetLevel
+30/39 Test #213: AzureEngine.AssetLevel ..................   Passed    2.48 sec
+      Start 214: AzureEngine.ProjectStartup
+31/39 Test #214: AzureEngine.ProjectStartup ..............   Passed    2.75 sec
+      Start 215: AzureEngine.LevelRefreshRetirement
+32/39 Test #215: AzureEngine.LevelRefreshRetirement ......   Passed    2.81 sec
+      Start 232: AzureEngine.BuildProvenance
+33/39 Test #232: AzureEngine.BuildProvenance .............   Passed    2.58 sec
+      Start 333: AzureRender.AssetDeformation
+34/39 Test #333: AzureRender.AssetDeformation ............   Passed    0.10 sec
+      Start 356: AzureRender.ResourceLocator
+35/39 Test #356: AzureRender.ResourceLocator .............   Passed    0.20 sec
+      Start 360: AzureRender.NullRhiPass
+36/39 Test #360: AzureRender.NullRhiPass .................   Passed   12.81 sec
+      Start 383: AzureRuntime.SceneRenderSnapshot
+37/39 Test #383: AzureRuntime.SceneRenderSnapshot ........   Passed    0.16 sec
+      Start 465: AzureGame.PlatformerFlow
+38/39 Test #465: AzureGame.PlatformerFlow ................   Passed    8.45 sec
+      Start 492: AzureEditor.AnimationAuthoring
+39/39 Test #492: AzureEditor.AnimationAuthoring ..........   Passed    5.83 sec
+
+100% tests passed, 0 tests failed out of 39
+
+Total Test time (real) = 130.61 sec
