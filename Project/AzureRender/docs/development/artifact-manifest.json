@@ -18,6 +18,17 @@
   },
   "milestones": [
     {
+      "path": "runs/20261107-030141-shadow-visibility-reuse-90fb90",
+      "name": "同帧阴影可见度候选评估",
+      "status": "DiagnosticIsolated",
+      "sourceBase": "8c78732",
+      "evidence": "docs/acceptance/nr/shadow-visibility-reuse.md",
+      "candidateAdopted": false,
+      "restoredProgramsByteIdentical": 663,
+      "restoredPlayerCodeSectionIdentical": true,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261107-024335-current-cpu-hotspots-5b7d2c",
       "name": "当前 CPU 子阶段定位",
       "status": "DiagnosticMeasured",

@@ -48,7 +48,8 @@ CPU 与 GPU 成本下降为当前首要开发目标。
 场景变换及透明缓存的[批次评估](../acceptance/nr/static-transparent-preparation.md)未取得整帧收益。
 生产已核对恢复，继续定位当前实例准备及宿主阶段。
 当前[子阶段定位](../acceptance/nr/cpu-substage-update.md)记录透明与运动准备。
-GPU 接续核对同帧阴影接收的精确复用条件。
+同帧阴影的[复用候选](../acceptance/nr/shadow-visibility-reuse.md)兼容通过，整帧收益未成立。
+后续按具体程序和材质匹配绘制成本，定位无效着色工作。
 完整验收按[自主执行](2026-11-07-autonomous-acceptance.md)连续推进。
 正式环境、帧预算和整体画质继续待通过。
 每批保留各机制的归因边界，画质门槛保持有效。
