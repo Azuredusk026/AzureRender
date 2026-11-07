@@ -78,6 +78,8 @@ GPU P95 为 22.744 毫秒，继续优先处理 GPU 场景成本。
 其余开发与验收准备按自主执行顺序推进。
 专用常量的[精度定位](../acceptance/nr/specialization-precision.md)完成前端及两项功能控制。
 细粒度梯度未恢复精确附件，生产保持受检基线。
+驱动的[可观察范围](../acceptance/nr/shader-machine-code-access.md)仅取得统计文本。
+替换统计存在身份限制，机器级浮点差异继续待证据支持。
 完整验收按[自主执行](2026-11-07-autonomous-acceptance.md)连续推进。
 正式环境、帧预算和整体画质继续待通过。
 每批保留各机制的归因边界，画质门槛保持有效。
