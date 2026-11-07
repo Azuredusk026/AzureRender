@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+材质程序的[离线优化](../acceptance/nr/material-spirv-optimization.md)完成九份附件字节核对。
+候选指令规模减少约 25.04%，退出与有效性能资格继续待验。
+
 执行采用[任务预算与调度](../development-workflow.md)。
 当前优先执行性能归因及定向优化。
 CPU 与 GPU 成本下降为当前首要开发目标。
