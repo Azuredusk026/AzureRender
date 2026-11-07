@@ -440,8 +440,17 @@ def active_processes(engine):
 
 
 def tracked_paths(engine):
-    repo = Path(subprocess.check_output(['git','-C',str(engine),'rev-parse','--show-toplevel'], text=True).strip())
-    return {(repo/p).resolve() for p in subprocess.check_output(['git','-C',str(repo),'ls-files','-z']).decode('utf-8').split('\0') if p}
+    repo = Path(subprocess.check_output(['git','-C',str(engine),'rev-parse','--show-toplevel'], text=True).strip()).resolve()
+    protected=set()
+    for entry in subprocess.check_output(['git','-C',str(repo),'ls-files','--stage','-z']).split(b'\0'):
+        if not entry:continue
+        metadata,name=entry.split(b'\t',1);relative=Path(os.fsdecode(name))
+        if relative.is_absolute() or '..' in relative.parts:raise ValueError('Git index path is outside its worktree')
+        path=repo/relative;protected.add(path)
+        # Indexed links protect both the link name and its referent. Ordinary
+        # entries need no per-file filesystem walk; deletion validates its own path.
+        if metadata.split(b' ',1)[0]==b'120000':protected.add(path.resolve())
+    return protected
 
 
 def git_state(engine):
@@ -730,12 +739,22 @@ def daily(build,apply=False):
     busy=active_processes(Path(build).parent) if apply else []
     result=(dict(status='deferred-active-work',activeProcesses=busy,applied=apply,items=[])
             if busy else maintain(build,apply=apply,busy=busy))
-    report=dict(managed=result,caches=None,pipelineCaches=None,externalStorageUsed=False)
+    report=dict(managed=result,caches=None,pipelineCaches=None,assetCopies=None,externalStorageUsed=False)
     if result['status']!='deferred-active-work':
         from artifact_pipeline_cache import clean as clean_pipelines
         remaining=POLICY['maintenanceSeconds']-(time.monotonic()-start)
         if remaining>5:
             report['pipelineCaches']=clean_pipelines(build,apply=apply,seconds=min(10,remaining))
+    asset_policy=metadata(build)/'asset-copy-cleanup-policy.json'
+    if apply and result['status']!='deferred-active-work' and asset_policy.is_file():
+        policy=json.loads(real_path(asset_policy).read_text(encoding='utf-8'))
+        remaining=POLICY['maintenanceSeconds']-(time.monotonic()-start)
+        if remaining>5:
+            from artifact_asset_cleanup import clean as clean_assets
+            assets=clean_assets(Path(build).parent,Path(policy['catalog']),Path(policy['lock']),apply=True,
+                                limit_bytes=min(int(policy.get('maximumBytes',32*GIB)),32*GIB),
+                                maximum_files=min(int(policy.get('maximumFiles',512)),512),seconds=remaining)
+            report['assetCopies']={k:v for k,v in assets.items() if k!='items'}|dict(files=len(assets['items']))
     policy_path=metadata(build)/'cache-cleanup-policy.json'
     if apply and result['status']!='deferred-active-work' and policy_path.is_file():
         policy=json.loads(real_path(policy_path).read_text(encoding='utf-8'))

@@ -81,6 +81,23 @@ python tools/artifact_maintenance.py resume --run task-directory-name
 
 ## 历史缓存
 
+每日入口读取 `build/maintenance/asset-copy-cleanup-policy.json`。
+模型清单在声明的历史任务范围建立一次，日常复用清单。
+与当前存活原件完整摘要一致的 `.glb` 副本按天回收。
+当前输入锁中的全部文件、Git 跟踪文件及嵌套工作树受到保护。
+源文件、输入锁及副本的身份在删除前再次核对。
+逐文件来源保存在项目内的累计映射和批次记录。
+同一文件标识的摘要在本次执行内复用，实际释放量按卷余量核对。
+
+模型副本每天至多 32 GiB、512 个文件。
+原缓存分项每天至多 10 GiB，全部每日维护共用一百二十秒。
+达到配额后继续下一天，活动开发进程结束后执行维护。
+声明新历史范围时使用：
+
+```powershell
+python tools/artifact_asset_cleanup.py inventory --root build/runs/history-task --lock current-input-lock.json --catalog build/maintenance/model-copies.json
+```
+
 每日入口读取 `build/maintenance/cache-cleanup-policy.json`。
 按缓存清单与当前输入锁核对冗余 `AZCACHE1` 载荷。
 只有与仍保留原始资产完全一致的副本才回收。

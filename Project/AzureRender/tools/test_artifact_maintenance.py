@@ -6,12 +6,50 @@ import tempfile
 import time
 import unittest
 import sys
+import subprocess
 from unittest.mock import patch
 
 import artifact_maintenance as maintenance
 
 
 class MaintenanceTests(unittest.TestCase):
+    def test_git_tracking_protection_uses_index_paths_with_one_root_resolution(self):
+        subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
+        folder=self.root/'sources';folder.mkdir()
+        expected=set()
+        for i in range(100):
+            path=folder/(str(i)+'.bin');path.write_bytes(b'source');expected.add(path.absolute())
+        subprocess.run(['git','-C',str(self.root),'add','sources'],check=True,capture_output=True)
+        resolve=Path.resolve;resolved=[]
+        def observed(path,*args,**kwargs):resolved.append(path);return resolve(path,*args,**kwargs)
+        with patch.object(Path,'resolve',observed):actual=maintenance.tracked_paths(self.root)
+        self.assertEqual(actual,expected);self.assertLessEqual(len(resolved),1)
+
+    def test_indexed_symbolic_link_protects_name_and_referent(self):
+        subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
+        source=self.root/'source.glb';source.write_bytes(b'canonical')
+        link=self.root/'indexed.glb'
+        try:link.symlink_to(source.name)
+        except OSError:self.skipTest('Symbolic link creation is unavailable')
+        subprocess.run(['git','-C',str(self.root),'-c','core.symlinks=true','add','indexed.glb'],check=True,capture_output=True)
+        actual=maintenance.tracked_paths(self.root)
+        self.assertIn(link.absolute(),actual);self.assertIn(source.absolute(),actual)
+
+    def test_daily_asset_copy_policy_removes_only_verified_model(self):
+        from test_artifact_asset_cleanup import AssetCopiesTests
+        _,source,target,catalog,lock=AssetCopiesTests().fixture(self.root)
+        maintenance.write_json(self.build/'maintenance/asset-copy-cleanup-policy.json',dict(catalog=str(catalog),lock=str(lock),maximumBytes=source.stat().st_size,maximumFiles=1))
+        with patch.object(maintenance,'active_processes',return_value=[]),patch('artifact_asset_cleanup.active_processes',return_value=[]):
+            result=maintenance.daily(self.build,apply=True)
+        self.assertFalse(target.exists());self.assertTrue(source.exists());self.assertEqual(result['assetCopies']['files'],1)
+
+    def test_daily_active_work_defers_model_cleanup_without_index(self):
+        from test_artifact_asset_cleanup import AssetCopiesTests
+        _,source,target,catalog,lock=AssetCopiesTests().fixture(self.root)
+        maintenance.write_json(self.build/'maintenance/asset-copy-cleanup-policy.json',dict(catalog=str(catalog),lock=str(lock)))
+        with patch.object(maintenance,'active_processes',return_value=['active-player']):result=maintenance.daily(self.build,apply=True)
+        self.assertTrue(target.exists());self.assertEqual(result['managed']['status'],'deferred-active-work');self.assertIsNone(result['assetCopies'])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)

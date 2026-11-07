@@ -30,6 +30,7 @@ python tools/artifact_maintenance.py daily --apply
 | 受管任务池 | 累计预留 16 GiB |
 | 外部程序日志 | 每份至多 16 MiB |
 | Vulkan 管线缓存 | 单文件 128 MiB、总池 256 MiB、最多八项，闲置七天过期 |
+| 历史模型副本 | 每天至多 32 GiB、512 个文件，与原件完整摘要一致 |
 
 普通生成任务在保留期后直接回收。
 精简证据包含源码、结果、命令、日志摘录和必要截图。
@@ -95,6 +96,26 @@ python tools/artifact_maintenance.py resume --run task-directory-name
 
 ## 旧任务缓存
 
+历史模型清单在声明范围建立一次：
+
+```powershell
+python tools/artifact_asset_cleanup.py inventory --root build/runs/history-task --lock current-input-lock.json --catalog build/maintenance/model-copies.json
+```
+
+`asset-copy-cleanup-policy.json` 在每日入口装配该清单。
+工具只回收同名同大小且完整摘要与存活原件一致的 `.glb` 副本。
+当前输入锁中的全部文件、Git 跟踪文件、嵌套工作树及链接受到保护。
+存活原件、输入锁和副本的身份在删除前再次核对。
+每批至多十项完整路径，删除前持久化记录并预留日配额。
+来源映射保存在 `build/maintenance/`，按回收路径记录原件及摘要。
+
+模型副本单日上限为 32 GiB、512 项，缓存分项上限为 10 GiB。
+每日全部维护共用一百二十秒，活动开发进程结束后执行。
+剩余配额先按清单预筛，同一文件标识的内容摘要在本次执行内复用。
+清单及累计来源映射各至多五万项、32 MiB。
+版本管理保护从 Git 索引读取路径，索引链接同时保护其名称和实际目标。
+普通任务按共享路径读取模型。
+
 开发构建共享 `build/cache/vulkan/`，按设备、驱动与缓存标识复用管线数据。
 写入持有文件锁并采用同目录原子替换，磁盘峰值至多为 384 MiB。
 每日维护检查该目录至多六十四个直接条目，每批至多处理十个缓存文件。
@@ -115,6 +136,8 @@ python tools/artifact_maintenance.py resume --run task-directory-name
 剩余配额按目录清单预筛，超出本次配额的文件直接跳过载荷读取。
 目录清单及不匹配证明复用，完整扫描按新增迁移范围安排。
 实际释放量以系统卷查询为准。
+模型的逻辑大小和文件标识分别统计。
+硬链接共享同一文件，容量说明见 [Microsoft 文件链接文档](https://learn.microsoft.com/en-us/windows/win32/fileio/hard-links-and-junctions)。
 每日自动任务的状态见[调度收据](artifact-automation.json)。
 
 ## 历史空间债务
