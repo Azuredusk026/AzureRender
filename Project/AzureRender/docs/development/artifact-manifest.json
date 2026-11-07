@@ -46,6 +46,17 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-034602-shadow-disk-native-bd3a36",
+      "name": "阴影圆盘权重局部成本",
+      "status": "IsolatedKernelSlower",
+      "sourceBase": "b1451cf",
+      "evidence": "docs/acceptance/nr/shadow-disk-kernel.md",
+      "candidateAdopted": false,
+      "localReductionPercent": -11.27491029533536,
+      "nativeBatchExecuted": false,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-033035-radiance-receiver-entry-c43d47",
       "name": "照明复用接收面入口核对",
       "status": "IsolatedZeroPixelGateFailed",

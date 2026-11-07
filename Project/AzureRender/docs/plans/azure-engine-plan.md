@@ -76,8 +76,8 @@ Q1 的[精确采样定位](../acceptance/nr/exact-hair-sampling-inputs.md)确认
 实际矩形的范围读取量减少约 68.41%，NVIDIA 局部合计降低约 56.66%。
 绝对收益及原生片元成本继续分项确认，生产候选保持隔离。
 圆盘权重的[空覆盖候选](../acceptance/nr/shadow-disk-work.md)减少约 35.51% 的可见调用工作。
-完整附件重放达到执行预算，候选计时尚未启动。
-该候选保持隔离，接续已有缓冲优化的未完成归因。
+独立[权重成本](../acceptance/nr/shadow-disk-kernel.md)保持逐像素工作形状及逐位相同输出。
+候选局部均值约慢 11.27%，原生四帧及成对测量未启动，候选保持隔离。
 
 材质程序的[离线优化](../acceptance/nr/material-spirv-optimization.md)完成九份附件字节核对。
 候选指令规模减少约 25.04%，退出与有效性能资格继续待验。

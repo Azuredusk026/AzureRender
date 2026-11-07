@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "status": "isolated-kernel-slower-no-native-batch",
+  "sourceBase": "b1451cf",
+  "summary": {
+    "status": "measured",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "phaseMeansMilliseconds": [
+      0.09048500000000001,
+      0.100894,
+      0.1006805,
+      0.09066499999999998
+    ],
+    "baselineMilliseconds": 0.09057499999999999,
+    "candidateMilliseconds": 0.10078725,
+    "reductionPercent": -11.27491029533536,
+    "savedMilliseconds": -0.010212250000000006,
+    "baselineEndpointDriftPercent": 0.19892799911584444,
+    "branchCountsExact": true,
+    "outputsBitExact": true,
+    "productionUnchanged": true,
+    "formalPerformancePassed": false,
+    "scope": "Captured per-pixel loop counts and empty-quad counts, with representative radius/fraction inputs. Not captured sample coordinates, full shadow shading, or native frame performance."
+  },
+  "kernel": {
+    "allOutputsBitExact": true,
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "dispatchesPerTimestampSample": 8,
+    "observedCalls": 11917189,
+    "observedSkips": 4232176,
+    "pixels": 921600,
+    "samples": [
+      {
+        "candidate": false,
+        "phase": 0,
+        "samplesMilliseconds": [
+          0.090664,
+          0.090496,
+          0.090112,
+          0.090368,
+          0.09088,
+          0.090368,
+          0.09024,
+          0.090752
+        ]
+      },
+      {
+        "candidate": true,
+        "phase": 1,
+        "samplesMilliseconds": [
+          0.100648,
+          0.100992,
+          0.100876,
+          0.100864,
+          0.100872,
+          0.100992,
+          0.100896,
+          0.101012
+        ]
+      },
+      {
+        "candidate": true,
+        "phase": 2,
+        "samplesMilliseconds": [
+          0.101016,
+          0.100992,
+          0.100228,
+          0.100364,
+          0.100608,
+          0.101248,
+          0.100356,
+          0.100632
+        ]
+      },
+      {
+        "candidate": false,
+        "phase": 3,
+        "samplesMilliseconds": [
+          0.090528,
+          0.09088,
+          0.090368,
+          0.091008,
+          0.090244,
+          0.090528,
+          0.09088,
+          0.090884
+        ]
+      }
+    ],
+    "scope": "Standalone disk-weight computation with captured per-pixel call/skip counts and representative geometry. Device-local input/output, readback after timestamps. Excludes shadow texture reads, rasterization, native frame budgets and formal power qualification.",
+    "status": "passed",
+    "validationErrors": 0,
+    "warmupDispatchesPerPhase": 256,
+    "zeroAllocator": true
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 3.313000000009197,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-034602-shadow-disk-native-bd3a36\\kernel.exe",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-034602-shadow-disk-native-bd3a36"
+    ]
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "status": "passed",
+      "sha256": "e6b5ae26b0356e567014bfb2d52d461f6d5c7bd3b16ef0417ce3b488f476a192"
+    },
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "sha256": "02f4730b3984dd124301b809ca8ca4b8e508d690d7afc8a0b00d376df3ec2e7b"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "nativeBatchExecuted": false,
+  "productionIntegrated": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 163104,
+  "evidenceSha256": "f8eddf82cc437eb50178c68145ef60a273cbd4fed67747d16d7d8a25a6a91717",
+  "members": [
+    {
+      "path": "baseline.spv",
+      "bytes": 3740,
+      "sha256": "accbb7f79849768d93ee92aa23c47d981c00583e5130c2a628c1fceb42f0663c"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 435,
+      "sha256": "a77a8a53f566d2f4f67fbff76d9aee19710a61f15193a855a60d037cc2f640d1"
+    },
+    {
+      "path": "candidate.spv",
+      "bytes": 4164,
+      "sha256": "b3f881ba2debc286d9bc07ae54e55387c8b3d4b4d4af2313585991ed862a9f28"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 12,
+      "sha256": "dd592f5f60b525dbfc99b140456383457d2c64c9edeb8892d8f3c6783ace4a0a"
+    },
+    {
+      "path": "counts.spv",
+      "bytes": 4380,
+      "sha256": "b671bdcca60f4fb6ec53ef7ef9403b37b84d39f8e29ab4b47242ed65ba93a47e"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 388,
+      "sha256": "576385e44c525413a91a7014bc310dff59a5da0ae89c6270cf45aaba9f42a4f7"
+    },
+    {
+      "path": "kernel-result.json",
+      "bytes": 1614,
+      "sha256": "41610474053daedd550477559194ef3b14e5914d74757a639da2b4bf5c5c92bd"
+    },
+    {
+      "path": "kernel-summary.json",
+      "bytes": 755,
+      "sha256": "97342aa3d82d8cc8cac315a8f01c8681e3aee2dc60193331524daf3e8ddb4940"
+    },
+    {
+      "path": "kernel.comp",
+      "bytes": 1332,
+      "sha256": "a663980e33920ecdccf561a07f77b30301842744c8b794fd939d76732d2e0bd3"
+    },
+    {
+      "path": "kernel.cpp",
+      "bytes": 7996,
+      "sha256": "36998572ba36bd4249c35a4e9faada228ec89f14969d3872130fe825209e37fc"
+    },
+    {
+      "path": "link.log",
+      "bytes": 118,
+      "sha256": "84292bacb31dc99f0a69c537aa6acc825f178fe47c65897baef1c81870c8504b"
+    },
+    {
+      "path": "package.py",
+      "bytes": 2679,
+      "sha256": "ef2c9b9c21f0f7a3654da9ce2f17080a3c46c024339962171cba5c944ec318cc"
+    },
+    {
+      "path": "parameters.json",
+      "bytes": 6631,
+      "sha256": "fa42aad03b7a42f048faf0a519c6ab39ebf7316ae368d9e53e1d44f0d47544cb"
+    },
+    {
+      "path": "preparation.json",
+      "bytes": 189031,
+      "sha256": "cec056613c6b3f168fbf1d4e5f305f1c84ff5c4f3f41e5f187f81cdb5fcccea4"
+    },
+    {
+      "path": "prepare_kernel.py",
+      "bytes": 4640,
+      "sha256": "25d9e5647b3a4dbc978958b1874366f6f24cb29b28a5f9d6e8fe8d77407e112e"
+    },
+    {
+      "path": "process.log",
+      "bytes": 1616,
+      "sha256": "4efbaf7e864a43ce6c8b8ed3f7514fa7730d0a83364a3772337437cb9cd2bb02"
+    },
+    {
+      "path": "run_kernel.py",
+      "bytes": 1953,
+      "sha256": "74e3fede60eb0edd18a6f75556373ba58f156aeecd009f48b5518def5d8c1ee2"
+    },
+    {
+      "path": "shape-ids.bin",
+      "bytes": 921600,
+      "sha256": "310f29d0232e5802d10f30c2092d41c68c48be82972c6f4ce84e4d45dcbf5dad"
+    }
+  ]
+}
