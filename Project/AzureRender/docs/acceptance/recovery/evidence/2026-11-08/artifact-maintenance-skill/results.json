@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "phase": "storage",
+  "status": "passed",
+  "tests": 43,
+  "verification": {
+    "status": "passed",
+    "projectInputFiles": 1729,
+    "projectInputsUnchanged": true,
+    "mainProducts": 1458,
+    "mainProductsUnchanged": true,
+    "runtimeInputsUnchanged": 1077,
+    "sourceWorktreeFilesUnchanged": 33,
+    "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+    "externalProjectArchiveFiles": 0,
+    "skillFilesMatch": true,
+    "automationActive": true,
+    "automationDaily": true,
+    "notifications": "failed_runs_only",
+    "scheduledExecutionObserved": false,
+    "actualCacheFilesRemoved": 104,
+    "actualCacheLogicalBytes": 10735362104,
+    "actualVolumeFreedBytes": 10735415296,
+    "wholeRunBackupCreated": false,
+    "lightweightStatus": {
+      "managedTasks": 1,
+      "residentReservationBytes": 67108864,
+      "poolLimitBytes": 17179869184,
+      "historicalTasks": 407,
+      "rootKeepMarkers": 120,
+      "activeInputTasks": [],
+      "coldStoreBytes": 0,
+      "coldStoreLimitBytes": 8589934592,
+      "blocked": {},
+      "volumeFreeBytes": 119729778688,
+      "volumeReserveBytes": 102420813824,
+      "recursiveScan": false,
+      "seconds": 0.07800000000861473
+    },
+    "seconds": 6.062000000005355,
+    "scope": "Development tools and indexed maintenance only; no C++ rebuild or GPU validation was performed for this phase."
+  },
+  "evidenceFiles": [
+    {
+      "path": "build/runs/20261107-230703-artifact-maintenance-skill-15ad89/verification.json",
+      "bytes": 1286,
+      "sha256": "51eb0657a7e7d684884c09f4ceff62a74a8180a1f01d064eb5e979749bb8966e"
+    },
+    {
+      "path": "build/runs/20261107-230703-artifact-maintenance-skill-15ad89/checks-final.log",
+      "bytes": 2057,
+      "sha256": "ab0c69ab3ef6d026a51efe93f424772883c90d452784556260c7ffdcf41f27e6"
+    },
+    {
+      "path": "build/runs/20261107-230703-artifact-maintenance-skill-15ad89/verify_delivery.py",
+      "bytes": 3330,
+      "sha256": "5dca6cf6dfc9a949cfe648b9442f1afd9da83cc334480b4f2980584e478f864c"
+    },
+    {
+      "path": "build/maintenance/cache-cleanup-latest.json",
+      "bytes": 99325,
+      "sha256": "786a14983e8782ea76b10655ce1889a5fcc1f8461d5a150fad6234b553c49f55"
+    },
+    {
+      "path": "build/maintenance/cache-cleanup-daily-budget.json",
+      "bytes": 136,
+      "sha256": "9d0a84c6ed238ce67359aba0eb09c788f5181433f6733bb148018ce200fd58ec"
+    },
+    {
+      "path": "build/maintenance/cache-cleanup-policy.json",
+      "bytes": 436,
+      "sha256": "8431586ed521f9543fe3fccf8ad69113318abb39a2ef39b748aef3af644f0018"
+    },
+    {
+      "path": "build/maintenance/20261107-c-drive-rollback.json",
+      "bytes": 310,
+      "sha256": "d628dccf961fb2bff953601d571fa474d3ebc4b0f416a260343a2a7bb78a842a"
+    },
+    {
+      "path": "build/maintenance/20261108-retire-generated-recovery-blocked.json",
+      "bytes": 418,
+      "sha256": "3194b3a0c811ecf50f8a5b4437b14c0f34bac3587b5274a8f87be14daae397ca"
+    },
+    {
+      "path": "build/maintenance/20261107-link-cache-blocked.json",
+      "bytes": 330,
+      "sha256": "4208d9186a5425598292e71de82830e53ab307e954bd01b30ad485365db149da"
+    },
+    {
+      "path": "build/maintenance/20261107-radiance-fixture-prune-blocked.json",
+      "bytes": 283,
+      "sha256": "b2c736deb6d8f2aca9787d275ce814ac8549f2bcc2a3866997df8f93154e7cb6"
+    },
+    {
+      "path": "docs/development/artifact-automation.json",
+      "bytes": 1823,
+      "sha256": "820fdcf5f333a9c68505a0e1ff40b574e1479b5416b44a9df8417754efb3d281"
+    },
+    {
+      "path": "tools/artifact_maintenance.py",
+      "bytes": 40494,
+      "sha256": "9a81f01c7150ac00ecb08ab968c490347ef27358b25526489baefc4842cee0a1"
+    },
+    {
+      "path": "tools/artifact_cache_cleanup.py",
+      "bytes": 7422,
+      "sha256": "d77d3af5a8bcbda2c640a76068af858f625bddf30355367148d5a72487b14735"
+    },
+    {
+      "path": "tools/artifact_budget.py",
+      "bytes": 3178,
+      "sha256": "e383e49ebc16a170b730615d6e9900eb2d4c3e5f4112951b23293181d9051b9a"
+    },
+    {
+      "path": "tools/artifact_cleanup.py",
+      "bytes": 8275,
+      "sha256": "ea3e02ef61bec31974e3eb4b38ac96b5c62d4ae83c2725bcbd07530660319a80"
+    },
+    {
+      "path": "tools/test_artifact_maintenance.py",
+      "bytes": 13726,
+      "sha256": "2e9bd141dd29e47150beffe73372950e5ef73931e9f0339a7c2bf50b5985aeb4"
+    },
+    {
+      "path": "tools/test_artifact_cache_cleanup.py",
+      "bytes": 3703,
+      "sha256": "2238b4091f85dfe3000019b338c61c5c690b260c3831f9d792564a704a1c66fd"
+    },
+    {
+      "path": "tools/skills/azurerender-artifact-maintenance/SKILL.md",
+      "bytes": 4199,
+      "sha256": "646de23147a83c74012667f0cd2d480ec88ded917f2e1ab6a70d8a203db18ab8"
+    },
+    {
+      "path": "tools/skills/azurerender-artifact-maintenance/agents/openai.yaml",
+      "bytes": 262,
+      "sha256": "eb1d09780722c8c5f3744db9f3de8b14a4f71ae6a638192d5216770d1a38db78"
+    },
+    {
+      "path": "tools/skills/azurerender-artifact-maintenance/references/legacy-recovery.md",
+      "bytes": 2607,
+      "sha256": "9f314126480b526942444414ee104468b8a8ef33b755f4fa5c8f53cd9bebd2b6"
+    },
+    {
+      "path": "tools/skills/azurerender-artifact-maintenance/scripts/maintain.py",
+      "bytes": 1346,
+      "sha256": "3b1649fcdfdf58aeb1c1b713b02a83d5ed842b9aa01ec11dfa9ed0677de63b9f"
+    }
+  ],
+  "evidenceBytes": 39618,
+  "evidenceSha256": "cce12bef166c9c5bfb3cfe6c995497475694f24b91feebce13f42acce8326d72",
+  "scheduledExecutionObserved": false,
+  "limitations": [
+    "Historical tasks remain separate from the new managed pool.",
+    "Automatic approval review rejected the legacy generated-cache recovery zip and manifest deletion.",
+    "Overall visual quality and frame budgets retain their original acceptance requirements."
+  ]
+}

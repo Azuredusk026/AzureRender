@@ -1758,18 +1758,20 @@
       "scope": "663 immutable production shader products matching e6c5b3e runtime inputs; retained once for verified recovery of generated shader fixtures."
     },
     {
-      "path": "C:/Users/admin/.codex/archives/AzureRender/20261107/q1-debug-generated.tar.zst",
+      "path": "archives/q1-debug-generated.tar.zst",
       "sha256": "b039217690f74dcc423e80ec6fee5b177122618b5575651412d7799ac84827f9",
-      "journal": "C:/Users/admin/.codex/archives/AzureRender/20261107/q1-debug-generated.tar.zst.manifest.json",
+      "journal": "archives/q1-debug-generated.tar.zst.manifest.json",
       "journalSha256": "9a935b78b8d02ce2c798e42ff11ab384bcafafed074f89a903a9c38bd38a3d62",
-      "scope": "历史 q1 工作树的 debug 生成产物；源文件与 Git 工作树完整保留。"
+      "scope": "历史 q1 工作树的 debug 生成产物；源文件与 Git 工作树完整保留。",
+      "retention": "历史生成构建的短期恢复包，源文件与 Git 工作树保持完整。"
     },
     {
-      "path": "C:/Users/admin/.codex/archives/AzureRender/20261107/q1-release-generated.tar.zst",
+      "path": "archives/q1-release-generated.tar.zst",
       "sha256": "5e25ec84d3cec85c76f038d7ffd2eda448ebfc258e38970c2e544917cecb1822",
-      "journal": "C:/Users/admin/.codex/archives/AzureRender/20261107/q1-release-generated.tar.zst.manifest.json",
+      "journal": "archives/q1-release-generated.tar.zst.manifest.json",
       "journalSha256": "c26a9f8614ef4c87b6a450f7910fa52f5552747e51805e0b0fd7fb8893f6cafd",
-      "scope": "历史 q1 工作树的 release 生成产物；源文件与 Git 工作树完整保留。"
+      "scope": "历史 q1 工作树的 release 生成产物；源文件与 Git 工作树完整保留。",
+      "retention": "历史生成构建的短期恢复包，源文件与 Git 工作树保持完整。"
     }
   ]
 }

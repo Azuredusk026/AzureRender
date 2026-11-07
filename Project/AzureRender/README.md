@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+开发产物使用[目录维护技能](tools/skills/azurerender-artifact-maintenance/SKILL.md)。
+按天回收、精简证据及累计预算见[产物规则](docs/development/artifact-retention.md)。
+
 GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/acceptance/nr/focused-device-buffers.md)。
 分配策略的原四帧证据对应 `f015e5d`，整帧收益待原功率条件确认。
 

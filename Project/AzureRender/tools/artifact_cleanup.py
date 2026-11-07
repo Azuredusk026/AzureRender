@@ -82,6 +82,9 @@ def main():
     parser.add_argument("--new-run", metavar="TASK")
     parser.add_argument("--planned-bytes", type=int, default=2**31)
     parser.add_argument("--diagnostic", action="store_true")
+    parser.add_argument("--input-run", action="append", default=[], help="Lease a direct input task until this task closes")
+    parser.add_argument("--retention-days",type=int,choices=[1,3,7],default=1)
+    parser.add_argument("--retain-recovery",action="store_true",help="Explicitly retain complete recovery for a unique required input")
     parser.add_argument("--finish", type=Path)
     args = parser.parse_args()
     runs = BUILD / "runs"
@@ -99,14 +102,22 @@ def main():
         if not budget['allowed']:
             parser.error('Artifact budget refused: ' + json.dumps(budget))
         path = runs / (time.strftime("%Y%m%d-%H%M%S-") + args.new_run + "-" + uuid.uuid4().hex[:6])
-        path.mkdir()
-        (path / 'budget.json').write_text(json.dumps(budget, indent=2), encoding='utf-8')
+        from artifact_maintenance import create_run
+        try:
+            create_run(BUILD, path, budget, args.input_run,retention_days=args.retention_days,retain_recovery=args.retain_recovery)
+        except (ValueError, OSError) as error:
+            parser.error(str(error))
         print(path)
         return
     if args.finish:
         path = args.finish.resolve()
         if path.parent != runs.resolve() or is_link(path):
             parser.error("--finish requires a direct child of build/runs")
+        from artifact_maintenance import seal
+        try:
+            seal(BUILD, path)
+        except (ValueError, OSError) as error:
+            parser.error(str(error))
         (path / ".finished").touch()
         return
     repo = Path(subprocess.check_output(["git", "rev-parse", "--show-toplevel"], cwd=ENGINE, text=True).strip())

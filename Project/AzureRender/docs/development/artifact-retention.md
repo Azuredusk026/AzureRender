@@ -1,205 +1,129 @@
-# 构建与临时产物管理
-
-本页供开发者和 AI 执行日常清理。
-清理入口为 `tools/artifact_cleanup.py`。
-命令均在引擎根目录执行。
-
-## 目录与保留规则
-
-| 用途 | 目录 | 保留规则 |
-| --- | --- | --- |
-| 主开发构建 | `build/ninja-msvc-debug` | 持续复用 |
-| 主发布构建 | `build/ninja-msvc-release` | 持续复用 |
-| 当前交付 | `build/ux-2026-10-14/Engine` | 保留可用安装 |
-| 重大交付留档 | `build/p8-final-2026-10-14` | 人工确认后才删除 |
-| 新任务临时产物 | `build/runs/` | 结束且停止写入 7 天后清理 |
-| 后续重大版本 | `build/archives/<版本号>-<提交短码>/` | 明确里程碑后留档 |
-| 清理结果 | `build/maintenance/cleanup-latest.json` | 覆盖保存最近一次结果 |
-| 正式证据 | `docs/acceptance/` | 由 Git 管理 |
-
-主构建依赖缓存与 `build/qa-python` 持续保留。
-依赖索引恢复前，应保留已有可用依赖。
-源码、用户项目和正式证据分别维护。
-安装副本应复用当前交付目录。
-
-## 创建与结束任务
-
-创建临时输出目录：
-
-```powershell
-python tools/artifact_cleanup.py --new-run ui-layout
-```
-
-目录名为 `YYYYMMDD-HHMMSS-任务名-随机短码`。
-任务名使用小写英文与连字符。
-日志、截图、临时脚本和测试包放入该目录。
-测试工具的输出参数也应指向该目录。
-
-任务结束后，先归档必要摘要和失败证据。
-随后标记目录可以进入保留期：
-
-```powershell
-python tools/artifact_cleanup.py --finish "build/runs/<目录名>"
-```
-
-需要继续使用时，先删除该目录的 `.finished`。
-需要长期保留时，在任务根目录创建 `.keep`。
-重大版本记录提交、构建配置、指纹和验证摘要。
-同一里程碑保存一份交付包。
-
-重大版本由正式交付计划明确指定。
-日常阶段产物按普通任务规则管理。
-
-保留标记位于 `build/runs/<任务目录>/.keep`。
-清理工具按任务根目录读取该标记。
-目录中的项目、视频及证据共同保留。
-长期保留任务登记于保留清单的 `preservedRuns`。
-
-角色参考、完整环境及画质诊断分别登记用途和入口。
-输入锁清单记录实际程序、着色器及资产摘要。
-当前可复现基准按清单路径与保留标记共同维护。
-
-原生中庭的可玩工程及来源按 NR12 归档周期保留。
-清单登记后廊四向画面、原速视频及抗锯齿对照。
-来源快照、几何误差与失败门禁收据共同保存。
-当前入口见[中庭完整性验收](../acceptance/nr/atrium-completeness.md)。
+# 产物管理
 
 ## 执行清理
 
-查看候选：
+项目产物与恢复包均存放在项目目录。
+本机使用[目录维护技能](../../tools/skills/azurerender-artifact-maintenance/SKILL.md)。
+日常会话至多执行一次轻量索引查询。
+历史大目录采用缓存清单和每日有界清理。
 
 ```powershell
-python tools/artifact_cleanup.py
+python tools/artifact_maintenance.py status
+python tools/artifact_maintenance.py daily --apply
 ```
 
-执行删除：
+正常状态直接继续开发，清理记录写入 `build/maintenance/`。
+活动构建、测试或采集期间延后回收。
+纯产物维护执行工具检查及源文件、主产物摘要核对。
+编译、画面、GPU 测量和长跑按所属开发任务安排。
 
-```powershell
-python tools/artifact_cleanup.py --apply
-```
+## 保留与预算
 
-每周日北京时间 10:00 执行默认候选扫描及分批清理。
-任务标识为 `azurerender`，工作目录为 `D:/Projects/FYP/Project/AzureRender`。
-每批最多十个目录，采用七天保留期及当前有效清理授权。
-清单、实际删除结果与空间复核写入 `build/maintenance/`。
-自动任务依赖 Codex 的本机调度与执行环境。
-构建或测试运行期间，自动任务延后清理。
-离线期间可用上述命令手动补做。
-配置核对见[自动任务收据](artifact-automation.json)。
-本机调度要求见[官方说明](https://learn.chatgpt.com/docs/automations?surface=app)。
+| 内容 | 规则 |
+| --- | --- |
+| 普通生成任务 | 完成后保留一天 |
+| 必要短期诊断 | 显式选择三天或七天 |
+| 当前基准与唯一输入 | 登记用途、活动引用或保留标记 |
+| 精简证据 | 每任务至多 8 MiB，总池 2 GiB，保留三十天 |
+| 显式完整恢复包 | 项目内保存，总池 8 GiB，释放后保留七天 |
+| 单任务 | 2 GiB、10000 个文件 |
+| 受管任务池 | 累计预留 16 GiB |
+| 外部程序日志 | 每份至多 16 MiB |
 
-实际删除前保存该批次的全部绝对路径。
-校验恢复归档及成员清单的 SHA-256。
-候选的全部当前文件须匹配已验证归档成员。
-硬链接条目沿 `link` 解析到实际内容摘要。
-归档以外的内容先完成增量归档及恢复核验。
-执行依据为当前会话的有效授权。
-用户授予自动清理权限后，核验通过的批次直接执行。
-每批至多删除十个目录。
-每批复核卷余量、主构建完整性及 Git 修改。
-`--run-list` 接收已审阅任务绝对路径的 JSON 数组。
-`--apply` 在候选超过十项时拒绝整批执行。
-指定任务仍须满足期限、标记、跟踪及路径规则。
+普通生成任务在保留期后直接回收。
+精简证据包含源码、结果、命令、日志摘录和必要截图。
+编译程序、中间件及可再生成缓存按生成产物处理。
+完整恢复包用于显式指定的必要唯一输入。
 
-```powershell
-python tools/artifact_cleanup.py --run-list build/maintenance/batch-01.json
-python tools/artifact_cleanup.py --run-list build/maintenance/batch-01.json --apply
-```
-
-默认范围仅含符合保留期的任务目录。
-目录内任何新写入都会延后清理时间。
-工具保护 Git 跟踪文件，并拒绝链接和目录联接。
-失败记录写入清理结果，命令返回非零状态。
-
-`--legacy-list` 用于一次性历史目录清理。
-清单内容必须经过逐项审阅。
-定时任务只使用默认清理范围。
-历史报告中的构建路径是当时的证据来源。
-
-查看当前结果应使用已归档的正式证据。
-
-## 本机清理记录
-
-2026 年 10 月 14 日完成历史产物清理。
-清理文件逻辑大小约为 91.3 GiB。
-清理后 D 盘可用空间约为 133 GB。
-详细目录与字节数见 [清理清单](cleanup-2026-10-14.json)。
-
-保留清单见 [交付与构建登记](artifact-manifest.json)。
-2026 年 10 月 26 日的任务、缓存与文档处理见[清理记录](cleanup-2026-10-26.json)。
-截图保留视频、命名图片和每组首、中、末帧。
-当前引擎入口指纹与清理前一致。
-
-主构建目录及其依赖已核对存在。
-
-清理工具的 6 项测试全部通过。
-检查覆盖预览、期限、保留标记和删除范围。
-同时覆盖 Git 文件、目录联接及只读文件保护。
-执行命令为 `python tools/test_artifact_cleanup.py`。
-
-## 本机空间管理
-
-本机阶段产物、候选项目和资产缓存保存在 D 盘。
-运行前核对可用空间，验证结束后清理可重新生成的缓存。
-原始截帧、固定输入、验收截图和收据按所属保留规则保存。
-清理前核对绝对路径、资源用途及活动进程，并保存清理记录。
+正式验收证据和历史原始采集按各自保留登记维护。
+正式长期结果进入版本管理及所属证据入口。
+临时目录的保留标记说明实际用途及复核条件。
+普通任务通过活动引用保持输入可用。
 
 ## 空间门禁
 
-`tools/artifact_budget.py` 提供创建前与写入前检查。
-`--new-run` 在创建目录前执行同一门禁。
-单任务逻辑占用与预计新增量合计至多为 2 GiB。
-预计新增量预留后，卷余量须至少为 50 GiB。
-同时须至少保留卷总容量的 10%。
-任务目录保存创建时的 `budget.json`。
-
 ```powershell
-python tools/artifact_budget.py --planned-bytes 2147483648
-python tools/artifact_budget.py --run "build/runs/<任务目录>" --planned-bytes 1048576
+python tools/artifact_cleanup.py --new-run task-name --planned-bytes 33554432
+python tools/artifact_cleanup.py --new-run task-name --planned-bytes 33554432 --input-run existing-run-name
+python tools/artifact_cleanup.py --new-run capture-task --planned-bytes 1073741824 --retention-days 3
 ```
 
-低空间诊断须显式声明 `--diagnostic`。
-目录现有占用与预计新增合计至多为 64 MiB。
-预留后须剩余 5 GiB。
-诊断复用现有输入，输出以日志及结构化摘要为主。
+任务名使用小写英文与连字符。
+返回路径采用日期、任务名和随机短码。
+资产、程序、着色器及项目挂载引用已有路径。
+独立构建及整套工程复制需有专项用途。
+
+追加写入前检查任务占用及累计预留：
 
 ```powershell
-python tools/artifact_cleanup.py --new-run performance-check --diagnostic --planned-bytes 67108864
+python tools/artifact_budget.py --run build/runs/task-directory-name --planned-bytes 1048576
 ```
 
-门禁返回非零状态时，调用方停止对应写入。
-每次采集、安装及复制边界重新检查任务实际占用。
-本工具提供调用方门禁，文件系统配额需独立配置。
-外部程序的持续写入由其调用方预算管理。
-当前超额目录保留文件，并进入人工审阅清单。
+普通任务预留后，卷余量至少为 50 GiB 及卷容量的 10%。
+低空间诊断须显式声明，已有与新增合计至多为 64 MiB。
+该类诊断预留后至少剩余 5 GiB。
+目录链接、联接及超额输出按门禁拒绝。
 
-空间恢复所需的增量备份写入 `build/archives/`。
-备份按文件预留原始大小及额外 64 MiB。
-整个过程保留至少 5 GiB 卷余量。
-每份备份先核对内容摘要，再释放对应展开副本。
-重复内容可引用已验证归档成员。
-恢复清单保存每份原路径、摘要和归档成员位置。
-当前项目的生成缓存继续保留，便于复测。
+持续写入的前台程序使用预算监控：
 
-任务通过共享资产路径引用已有内容。
-项目挂载和资源根负责定位，输入锁记录资产摘要。
-截图按每组首、中、末帧及必要失败帧保留。
-`.keep` 与 `preservedRuns` 应一一对应。
-每项保留记录包含用途、基准入口及复核条件。
+```powershell
+python tools/artifact_maintenance.py run --run task-directory-name --timeout 600 --command program.exe arguments
+```
 
-自动任务先保存预览，再按完整路径清单分批应用。
-每批至多十个目录，授权范围沿用当前有效授权。
-状态清单与任务收据共用 `DefaultPreviewThenReviewedRunListsApply`。
-累计诊断预算的检查见[预算计划](../plans/2026-11-07-cumulative-diagnostic-budget.md)。
+程序输出参数须指向该任务目录。
+监控每秒核对占用、卷余量及运行时限。
+超限只停止本次启动的子进程树，结果保持可检查。
+采样监控可能有一个周期的超量，文件系统硬配额独立配置。
 
-归档释放前，核对包及清单的 SHA-256。
-每份待释放文件逐字节摘要匹配归档成员。
-活动项目挂载及当前冻结输入所在任务持续保留。
-已验证展开副本可按当前授权释放并登记归档入口。
-重大里程碑的正式完成仍按 NR12 所属条件验收。
-归档收据的历史 `verified` 状态供复核使用。
-历史根目录需映射到本次确认的项目根目录。
-归档以外的文件先完成增量归档及恢复检查。
-正式证据与 Git 仓库由版本管理规则保护。
+## 封存与重建
 
-本次分级策略与空间事实见[恢复核验](../acceptance/nr/resume-storage-performance.md)。
+```powershell
+python tools/artifact_cleanup.py --finish build/runs/task-directory-name
+python tools/artifact_maintenance.py resume --run task-directory-name
+```
+
+封存记录完整文件摘要，并保存有上限的精简证据。
+继续写入先执行 `resume`。
+活动输入通过 `--input-run` 登记，消费者封存后解除。
+生命周期代次保护重开、封存、回收和恢复的并发状态。
+
+普通产物按证据中的源码和命令重建。
+必要完整恢复包在创建时显式声明 `--retain-recovery`。
+该类任务才提供 `artifact_maintenance.py restore --run`。
+恢复中断的目录继续计入预算并受保护。
+
+## 旧任务缓存
+
+`artifact_cache_cleanup.py` 使用一次性目录清单及当前输入锁。
+它仅识别 `.azure/cache/<资产标识>/<指纹>.azcache`。
+缓存须具有有效 `AZCACHE1` 头及相符长度、指纹。
+载荷摘要须与仍保留的原始资产完全一致。
+
+当前工程缓存、Git 跟踪文件、嵌套工作树及链接保持保护。
+冗余缓存可在保留任务内按上述证明回收。
+每批记录完整路径、缓存头、存活源文件及实际卷余量。
+缓存由源资产重新生成，整个任务保持原有必要证据。
+
+每天至多处理 10 GiB 缓存，维护预算为一百二十秒。
+目录清单及不匹配证明复用，完整扫描按新增迁移范围安排。
+实际释放量以系统卷查询为准。
+每日自动任务的状态见[调度收据](artifact-automation.json)。
+
+## 历史空间债务
+
+历史任务与新受管池分别登记。
+当前基准、正式原始采集及未提交源码保持各自地址和所有权。
+历史重复资产按当前输入、完整恢复覆盖及用途分别处理。
+自动审查拒绝的目标保留原状及阻断记录。
+
+历史专项删除每批最多十个目录。
+`artifact_cleanup.py --run-list` 接收已核验路径清单。
+`--legacy-list` 用于已审阅的独立生成目录。
+原始正式总归档在历史重复副本处理期间继续保留。
+
+空间来源见[恢复核验](../acceptance/nr/resume-storage-performance.md)。
+三个归档任务释放约 2.32 GiB，见[维护记录](../acceptance/nr/archived-p0-maintenance.md)。
+历史工作树的两个生成构建释放约 6.89 GiB，源文件完整保留，
+见[构建维护](../acceptance/nr/legacy-worktree-build-maintenance.md)。
+十月记录见[清理清单](cleanup-2026-10-14.json)
+及[后续记录](cleanup-2026-10-26.json)。

@@ -36,10 +36,24 @@ def check(build, *, run=None, planned=RUN_QUOTA, quota=RUN_QUOTA, diagnostic=Fal
         runs = build / 'runs'
         if run.parent != runs or is_link(runs) or is_link(run) or not run.is_dir():
             raise ValueError('Run must be a real direct child of build/runs')
-        used, _ = inspect_tree(run)
+        from artifact_maintenance import measure
+        used = measure(run)
     usage = shutil.disk_usage(build)
-    return evaluate(total=usage[0], free=usage[2], used=used, planned=planned,
-                    quota=quota, diagnostic=diagnostic)
+    result = evaluate(total=usage[0], free=usage[2], used=used, planned=planned,
+                      quota=quota, diagnostic=diagnostic)
+    from artifact_maintenance import pool_budget
+    pool = pool_budget(build, run=run, used=used, planned=planned)
+    result['managedPool'] = pool
+    if not pool['allowed']:
+        result['allowed'] = False
+        result['reasons'].extend(pool['reasons'])
+    elif run is not None and result['allowed']:
+        from artifact_maintenance import reserve_write
+        result['managedPool'] = reserve_write(build, run, used, planned)
+        if not result['managedPool']['allowed']:
+            result['allowed'] = False
+            result['reasons'].extend(result['managedPool']['reasons'])
+    return result
 
 
 def main():

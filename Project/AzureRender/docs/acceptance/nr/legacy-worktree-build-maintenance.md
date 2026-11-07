@@ -19,10 +19,10 @@ build/q1-ramp-source/Project/AzureRender/build/ninja-msvc-release
 
 ## 归档与空间
 
-归档存放于以下绝对目录：
+归档路径相对于引擎目录：
 
 ```text
-C:/Users/admin/.codex/archives/AzureRender/20261107/
+build/archives/
 ```
 
 | 生成目录 | 文件数 | 逻辑字节数 | 恢复归档 |
