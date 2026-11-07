@@ -102,6 +102,8 @@ CPU 与 GPU 成本下降为当前首要开发目标。
 本候选保持隔离，命令准备与缓冲同步的[批次优化](../acceptance/nr/read-scope-barriers.md)完成原生集中评估。
 短时 CPU 均值为 12.17 与 9.02 毫秒，P95 为 14.39 与 10.31 毫秒。
 同帧照明的[复用评估](../acceptance/nr/surface-radiance-reuse.md)未通过原生零像素条件，候选处于隔离状态。
+照明的[重组表示](../acceptance/nr/radiance-recomposition.md)仍有每帧三至六处一字节变化。
+候选保持隔离，生产源码、主构建及原验收门槛保持有效。
 生产代码段、源码及原有着色程序恢复核对一致，性能配对未执行。
 稳定场景的[准备优化](../acceptance/nr/stable-frame-preparation.md)通过十项关联检查及四帧零像素对照。
 短时 CPU 均值为 9.616 与 7.156 毫秒，P95 为 10.459 与 7.974 毫秒。

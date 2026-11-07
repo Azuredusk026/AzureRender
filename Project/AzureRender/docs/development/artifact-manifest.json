@@ -1749,6 +1749,13 @@
       "journal": "archives/generated-cache-recovery-20261106.zip.manifest.json",
       "scope": "Inactive generated .azure/cache/*.azcache only; current joint project cache retained",
       "journalSha256": "fa601e5e0da5ef83810da9529e3f81c78e30be89dfe24ffc8b2316256897a988"
+    },
+    {
+      "path": "archives/shader-baseline-e6c5b3e.zip",
+      "sha256": "874ed133ca5bbf0ed9cc27ab34e78bc8f7848dca38b3c245321755e50a8d6a1c",
+      "journal": "archives/shader-baseline-e6c5b3e.zip.manifest.json",
+      "journalSha256": "3671eb74400c29831e4c52b27211ab8cbe12e304a8aa01b8ab996b3b3027dae1",
+      "scope": "663 immutable production shader products matching e6c5b3e runtime inputs; retained once for verified recovery of generated shader fixtures."
     }
   ]
 }
