@@ -50,6 +50,16 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-055410-cpu-consumed-preparation-023e02",
+      "name": "CPU 准备消费范围核验",
+      "status": "PreparationScopeBelowBatchGate",
+      "sourceBase": "254cd03",
+      "evidence": "docs/acceptance/nr/cpu-consumed-preparation.md",
+      "candidateAdopted": false,
+      "diagnosticFrames": 8,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-051817-daily-asset-copies-d6af88",
       "name": "每日历史模型副本回收",
       "status": "DailyModelCopyMaintenanceDeployed",

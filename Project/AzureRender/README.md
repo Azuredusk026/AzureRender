@@ -10,6 +10,7 @@
 阴影圆盘的[局部成本](docs/acceptance/nr/shadow-disk-kernel.md)未形成收益，候选保持隔离。
 对象接收的[同输入模型](docs/acceptance/nr/object-receiver-input-model.md)复现 17017 处原生可见量，场景集成继续验收。
 [屏幕对象可见量](docs/acceptance/nr/screen-object-visibility.md)提供公共图形通道，双设备功能检查通过，Intel 原生精度及场景接入继续验收。
+CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际顶点和索引核对，后续批次沿用收益门槛。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。
 双设备时序检查与原冻结四帧通过，整体性能和画质按原门槛验收。
