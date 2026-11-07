@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "9979c70",
+  "status": "QualifiedPrivateControlProductionPending",
+  "capture": {
+    "path": "build/runs/20261107-061745-current-gpu-cost-2de6bc/current_frame320.rdc",
+    "sha256": "9079f51daf9e3d39a3de717a64f226080a86e013d379ea2e5a7eedcbf47ee103",
+    "preserved": true
+  },
+  "qualificationSource": {
+    "run": "20261107-111830-computed-specialization-cost-b26603",
+    "sha256": "0546bf5268081f7d60496020d9d10af7477fa69651f92b36327cac6642037f03"
+  },
+  "results": {
+    "file": "results.json",
+    "sha256": "3dfa18669a5384d321d623c79b66f4749e45dc4b4204198a5b777a592bb6597d"
+  },
+  "archive": {
+    "file": "controls.zip",
+    "bytes": 323714,
+    "sha256": "b16813361a34d9ba2b6938ff4fa344a07ae12012373cad13f4c2a787ca844075"
+  }
+}

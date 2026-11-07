@@ -19,6 +19,7 @@
 同帧阴影结果复用的兼容、分支及成本见[阴影评估](docs/acceptance/nr/shadow-visibility-reuse.md)。
 当前子阶段及实际资源控制见[CPU 热点](docs/acceptance/nr/cpu-substage-update.md)。
 当前源码的二十帧准备阶段及真实输入控制见[帧准备成本](docs/acceptance/nr/current-frame-preparation.md)。
+完整 GPU 叶绘制归因、计算反射模式与覆盖控制见[材质成本](docs/acceptance/nr/computed-material-cost.md)。
 无光照混合表面的主输出、零像素对照及约 12% 短时 GPU 改善见[着色优化](docs/acceptance/nr/unlit-blend-fast-path.md)。
 专用场景快照与渲染描述的复用、失效及约 23% 短时 CPU 改善见[宿主优化](docs/acceptance/nr/host-scene-preparation.md)。
 透明几何并行准备与运动历史复用见[动态几何优化](docs/acceptance/nr/dynamic-geometry-preparation.md)。

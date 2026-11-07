@@ -1,0 +1,577 @@
+{
+  "schemaVersion": 1,
+  "status": "QualifiedPrivateControlProductionPending",
+  "sourceBase": "9979c70",
+  "classification": {
+    "mappedLeafDraws": 3394,
+    "unmapped": [],
+    "knownShaderMismatches": [],
+    "groups": [
+      {
+        "key": [
+          "mesh_object_bindless_clipmap_field_early.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::209",
+          3,
+          true
+        ],
+        "events": 528,
+        "milliseconds": 5.344608000000016
+      },
+      {
+        "key": [
+          "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::10055",
+          2,
+          true
+        ],
+        "events": 301,
+        "milliseconds": 2.0449279999999943
+      },
+      {
+        "key": [
+          "mesh_object_bindless_clipmap_field.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::209",
+          3,
+          true
+        ],
+        "events": 68,
+        "milliseconds": 1.2714559999999993
+      },
+      {
+        "key": [
+          "ResourceId::0",
+          "ResourceId::10315",
+          "ResourceId::149",
+          0,
+          true
+        ],
+        "events": 852,
+        "milliseconds": 0.9451520000000145
+      },
+      {
+        "key": [
+          "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::209",
+          3,
+          true
+        ],
+        "events": 3,
+        "milliseconds": 0.6963199999999999
+      },
+      {
+        "key": [
+          "mesh_object_bindless_clipmap_field.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::209",
+          3,
+          false
+        ],
+        "events": 45,
+        "milliseconds": 0.5877760000000004
+      },
+      {
+        "key": [
+          "ResourceId::12511",
+          "ResourceId::12510",
+          "ResourceId::10096",
+          2,
+          false
+        ],
+        "events": 604,
+        "milliseconds": 0.5406720000000043
+      },
+      {
+        "key": [
+          "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::209",
+          3,
+          true
+        ],
+        "events": 5,
+        "milliseconds": 0.480256
+      },
+      {
+        "key": [
+          "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::10055",
+          2,
+          true
+        ],
+        "events": 5,
+        "milliseconds": 0.47513600000000006
+      },
+      {
+        "key": [
+          "character_snapshot_object_bindless_clipmap_field.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::10055",
+          2,
+          true
+        ],
+        "events": 43,
+        "milliseconds": 0.3553280000000004
+      },
+      {
+        "key": [
+          "ResourceId::0",
+          "ResourceId::10662",
+          "ResourceId::209",
+          3,
+          true
+        ],
+        "events": 308,
+        "milliseconds": 0.30105600000000077
+      },
+      {
+        "key": [
+          "ResourceId::10316",
+          "ResourceId::10315",
+          "ResourceId::149",
+          0,
+          true
+        ],
+        "events": 247,
+        "milliseconds": 0.2723840000000001
+      },
+      {
+        "key": [
+          "ResourceId::0",
+          "ResourceId::10662",
+          "ResourceId::10055",
+          2,
+          true
+        ],
+        "events": 306,
+        "milliseconds": 0.26623999999999975
+      },
+      {
+        "key": [
+          "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::10055",
+          2,
+          true
+        ],
+        "events": 1,
+        "milliseconds": 0.18329600000000001
+      },
+      {
+        "key": [
+          "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::209",
+          3,
+          true
+        ],
+        "events": 1,
+        "milliseconds": 0.18329600000000001
+      },
+      {
+        "key": [
+          "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::209",
+          3,
+          true
+        ],
+        "events": 1,
+        "milliseconds": 0.165888
+      },
+      {
+        "key": [
+          "view_fog_surface.frag.spv",
+          "ResourceId::10876",
+          "ResourceId::209",
+          3,
+          false
+        ],
+        "events": 2,
+        "milliseconds": 0.10547200000000001
+      },
+      {
+        "key": [
+          "ResourceId::0",
+          "ResourceId::10315",
+          "ResourceId::10290",
+          0,
+          true
+        ],
+        "events": 12,
+        "milliseconds": 0.075776
+      },
+      {
+        "key": [
+          "inner_outline.frag.spv",
+          "ResourceId::250",
+          "ResourceId::214",
+          1,
+          false
+        ],
+        "events": 1,
+        "milliseconds": 0.069632
+      },
+      {
+        "key": [
+          "ResourceId::10934",
+          "ResourceId::10935",
+          "ResourceId::10054",
+          1,
+          false
+        ],
+        "events": 11,
+        "milliseconds": 0.06553599999999998
+      },
+      {
+        "key": [
+          "spatial_antialiasing.frag.spv",
+          "ResourceId::221",
+          "ResourceId::210",
+          1,
+          false
+        ],
+        "events": 1,
+        "milliseconds": 0.055296
+      },
+      {
+        "key": [
+          "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::209",
+          3,
+          false
+        ],
+        "events": 1,
+        "milliseconds": 0.039936
+      },
+      {
+        "key": [
+          "ResourceId::10316",
+          "ResourceId::10315",
+          "ResourceId::10290",
+          0,
+          true
+        ],
+        "events": 3,
+        "milliseconds": 0.017408
+      },
+      {
+        "key": [
+          "ResourceId::10661",
+          "ResourceId::10662",
+          "ResourceId::10055",
+          2,
+          true
+        ],
+        "events": 13,
+        "milliseconds": 0.009216000000000004
+      },
+      {
+        "key": [
+          "ResourceId::10661",
+          "ResourceId::10662",
+          "ResourceId::209",
+          3,
+          true
+        ],
+        "events": 13,
+        "milliseconds": 0.009216000000000004
+      },
+      {
+        "key": [
+          "ResourceId::10961",
+          "ResourceId::10315",
+          "ResourceId::149",
+          0,
+          true
+        ],
+        "events": 4,
+        "milliseconds": 0.006144
+      },
+      {
+        "key": [
+          "ResourceId::10937",
+          "ResourceId::10935",
+          "ResourceId::10054",
+          1,
+          false
+        ],
+        "events": 2,
+        "milliseconds": 0.00512
+      },
+      {
+        "key": [
+          "ResourceId::10965",
+          "ResourceId::10315",
+          "ResourceId::10290",
+          0,
+          true
+        ],
+        "events": 1,
+        "milliseconds": 0.004096000000000001
+      },
+      {
+        "key": [
+          "ResourceId::10880",
+          "ResourceId::10881",
+          "ResourceId::209",
+          3,
+          false
+        ],
+        "events": 3,
+        "milliseconds": 0.004096000000000001
+      },
+      {
+        "key": [
+          "ResourceId::10312",
+          "ResourceId::10311",
+          "ResourceId::209",
+          3,
+          false
+        ],
+        "events": 4,
+        "milliseconds": 0.0030720000000000005
+      },
+      {
+        "key": [
+          "character_snapshot_object_bindless_clipmap_field.frag.spv",
+          "ResourceId::10309",
+          "ResourceId::10055",
+          2,
+          false
+        ],
+        "events": 4,
+        "milliseconds": 0.0020480000000000003
+      },
+      {
+        "key": [
+          "ResourceId::10953",
+          "ResourceId::10311",
+          "ResourceId::10055",
+          2,
+          true
+        ],
+        "events": 1,
+        "milliseconds": 0.0010240000000000002
+      }
+    ],
+    "scope": "Recorded structured API bindings joined to existing 720p leaf draw event durations. No new duration samples or SetFrameEvent replay loops."
+  },
+  "qualification": {
+    "kind": "ComputedSceneViewAndSafeEarlyTests",
+    "sourceBase": "9979c70",
+    "captureSourceBase": "35cc28f GPU program bytes unchanged",
+    "matchedBaselineMs": 8.317216,
+    "matchedCandidateMs": 6.647663999999998,
+    "matchedReduction": 0.20073447653637977,
+    "affectedGpuFraction": 0.5049560541183233,
+    "expectedNativeSavedMs": 3.756492000000005,
+    "expectationScope": "720p matched pixel-work savings scaled by 2.25 for equal-view 1080p; bandwidth, scheduling and native whole-frame gain remain unverified.",
+    "qualified": true,
+    "dynamicFallbackAllTargetsIdentical": true,
+    "optimizedDisplayIdentical": true,
+    "optimizedAllIntermediateTargetsIdentical": false,
+    "scope": "The existing capture selected expensive events before these controls. Full API classification separately covers all 3394 leaf draws. Fixed-view constants and main-lighting early tests are paired; all four newly early-tested draws were checked for opaque opacity 1 or blend mode."
+  },
+  "pairedControl": [
+    {
+      "mode": "baseline",
+      "allEventMs": 16.442656000000003,
+      "matchedEventMs": 8.269312000000001
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 14.610879999999995,
+      "matchedEventMs": 6.6373120000000005
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 14.596512000000015,
+      "matchedEventMs": 6.6580159999999955
+    },
+    {
+      "mode": "baseline",
+      "allEventMs": 16.499680000000016,
+      "matchedEventMs": 8.36512
+    }
+  ],
+  "dynamicComparisons": [
+    {
+      "event": 15752,
+      "target": 0,
+      "equal": true,
+      "baselineSha256": "88de4b520330839b75335fd82925060a327ec617e09ce74875642f2698af8661",
+      "dynamicSha256": "88de4b520330839b75335fd82925060a327ec617e09ce74875642f2698af8661"
+    },
+    {
+      "event": 15752,
+      "target": 1,
+      "equal": true,
+      "baselineSha256": "6c7cbeae9f9988d3a34c69722b9ba8aa1219d298578ef87ea57ae26a0dd2254c",
+      "dynamicSha256": "6c7cbeae9f9988d3a34c69722b9ba8aa1219d298578ef87ea57ae26a0dd2254c"
+    },
+    {
+      "event": 24600,
+      "target": 0,
+      "equal": true,
+      "baselineSha256": "24f4b5ee654d8373fdd83a34933f67f672935ca561162a404d5544e95fe22c10",
+      "dynamicSha256": "24f4b5ee654d8373fdd83a34933f67f672935ca561162a404d5544e95fe22c10"
+    },
+    {
+      "event": 24600,
+      "target": 1,
+      "equal": true,
+      "baselineSha256": "086834d1f16bad3965fcf155bbaf3a9ca57046301deaaca0537403d2a70d601f",
+      "dynamicSha256": "086834d1f16bad3965fcf155bbaf3a9ca57046301deaaca0537403d2a70d601f"
+    },
+    {
+      "event": 24600,
+      "target": 2,
+      "equal": true,
+      "baselineSha256": "35a17e21eab741e212c06f5692354c1570a1e17fe22ecf258e56213f10fd53dd",
+      "dynamicSha256": "35a17e21eab741e212c06f5692354c1570a1e17fe22ecf258e56213f10fd53dd"
+    },
+    {
+      "event": 26527,
+      "target": 0,
+      "equal": true,
+      "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+      "dynamicSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62"
+    },
+    {
+      "event": 26527,
+      "target": 1,
+      "equal": true,
+      "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+      "dynamicSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133"
+    },
+    {
+      "event": 26527,
+      "target": 2,
+      "equal": true,
+      "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+      "dynamicSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+    },
+    {
+      "event": 26578,
+      "target": 0,
+      "equal": true,
+      "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+      "dynamicSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11"
+    }
+  ],
+  "optimizedComparisons": [
+    {
+      "event": 15752,
+      "target": 0,
+      "bytes": 7372800,
+      "equal": false,
+      "baselineSha256": "88de4b520330839b75335fd82925060a327ec617e09ce74875642f2698af8661",
+      "candidateSha256": "caa0b65e33f2ac2af2bde77d81f3b0347d74800e9ad000d4697b6539efca2c84"
+    },
+    {
+      "event": 15752,
+      "target": 1,
+      "bytes": 14745600,
+      "equal": false,
+      "baselineSha256": "6c7cbeae9f9988d3a34c69722b9ba8aa1219d298578ef87ea57ae26a0dd2254c",
+      "candidateSha256": "54bbfe0e73cd58cd28e544d0f0166a2588d8282a899ab1209006fbfc3416431b"
+    },
+    {
+      "event": 24600,
+      "target": 0,
+      "bytes": 7372800,
+      "equal": false,
+      "baselineSha256": "24f4b5ee654d8373fdd83a34933f67f672935ca561162a404d5544e95fe22c10",
+      "candidateSha256": "4a949f56f8628c1d1a46ebcf0fc87b48a1b953d0c91f68e075935d797a4daa41"
+    },
+    {
+      "event": 24600,
+      "target": 1,
+      "bytes": 3686400,
+      "equal": true,
+      "baselineSha256": "086834d1f16bad3965fcf155bbaf3a9ca57046301deaaca0537403d2a70d601f",
+      "candidateSha256": "086834d1f16bad3965fcf155bbaf3a9ca57046301deaaca0537403d2a70d601f"
+    },
+    {
+      "event": 24600,
+      "target": 2,
+      "bytes": 921600,
+      "equal": true,
+      "baselineSha256": "35a17e21eab741e212c06f5692354c1570a1e17fe22ecf258e56213f10fd53dd",
+      "candidateSha256": "35a17e21eab741e212c06f5692354c1570a1e17fe22ecf258e56213f10fd53dd"
+    },
+    {
+      "event": 26527,
+      "target": 0,
+      "bytes": 7372800,
+      "equal": false,
+      "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+      "candidateSha256": "f687707aeed30df0b7b3dace2935b8ba735ab981e41f7bb65a5e5a3cf9fe886c"
+    },
+    {
+      "event": 26527,
+      "target": 1,
+      "bytes": 3686400,
+      "equal": true,
+      "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+      "candidateSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133"
+    },
+    {
+      "event": 26527,
+      "target": 2,
+      "bytes": 921600,
+      "equal": true,
+      "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+      "candidateSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+    },
+    {
+      "event": 26578,
+      "target": 0,
+      "bytes": 3686400,
+      "equal": true,
+      "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+      "candidateSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11"
+    }
+  ],
+  "earlyEligibility": [
+    {
+      "event": 24600,
+      "alphaMode": 0,
+      "nodeOpacity": 1.0
+    },
+    {
+      "event": 24610,
+      "alphaMode": 0,
+      "nodeOpacity": 1.0
+    },
+    {
+      "event": 26509,
+      "alphaMode": 2,
+      "nodeOpacity": 1.0
+    },
+    {
+      "event": 26527,
+      "alphaMode": 2,
+      "nodeOpacity": 1.0
+    }
+  ],
+  "modeOnlyControl": {
+    "firstBaselineInvalid": true,
+    "reason": "Initial baseline 30.249 ms versus final 16.480 ms; the warm final baseline and independent previous control place matched savings near 13%, below the entry threshold.",
+    "productionUnchanged": true
+  },
+  "formalPerformanceAccepted": false,
+  "overallVisualAccepted": false,
+  "productionSourceInputsUnchanged": true,
+  "archive": {
+    "file": "controls.zip",
+    "bytes": 323714,
+    "sha256": "b16813361a34d9ba2b6938ff4fa344a07ae12012373cad13f4c2a787ca844075"
+  }
+}
