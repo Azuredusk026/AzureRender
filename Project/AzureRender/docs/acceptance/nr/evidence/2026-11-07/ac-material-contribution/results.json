@@ -1,0 +1,134 @@
+{
+  "status": "measured",
+  "error": null,
+  "seconds": 121.46800000000803,
+  "summary": [
+    {
+      "control": "surface-shadow",
+      "baseline": [
+        {
+          "allEventMs": 16.608287999999995,
+          "matchedEventMs": 11.84291199999996
+        },
+        {
+          "allEventMs": 16.77964800000003,
+          "matchedEventMs": 11.992511999999941
+        }
+      ],
+      "candidate": [
+        {
+          "allEventMs": 12.73184,
+          "matchedEventMs": 7.81840000000001
+        },
+        {
+          "allEventMs": 12.603039999999998,
+          "matchedEventMs": 7.83782400000001
+        }
+      ],
+      "baselineMatchedMs": 11.91771199999995,
+      "candidateMatchedMs": 7.82811200000001,
+      "savedMatchedMs": 4.08959999999994,
+      "matchedReduction": 0.3431531152959526,
+      "bracketStable": true
+    },
+    {
+      "control": "irradiance",
+      "baseline": [
+        {
+          "allEventMs": 16.77964800000003,
+          "matchedEventMs": 11.992511999999941
+        },
+        {
+          "allEventMs": 16.595936000000016,
+          "matchedEventMs": 11.842527999999964
+        }
+      ],
+      "candidate": [
+        {
+          "allEventMs": 16.019200000000005,
+          "matchedEventMs": 11.266591999999939
+        },
+        {
+          "allEventMs": 16.115232,
+          "matchedEventMs": 11.29795199999994
+        }
+      ],
+      "baselineMatchedMs": 11.917519999999953,
+      "candidateMatchedMs": 11.282271999999939,
+      "savedMatchedMs": 0.6352480000000149,
+      "matchedReduction": 0.05330370748276636,
+      "bracketStable": true
+    },
+    {
+      "control": "reflection-field",
+      "baseline": [
+        {
+          "allEventMs": 16.595936000000016,
+          "matchedEventMs": 11.842527999999964
+        },
+        {
+          "allEventMs": 16.594912000000008,
+          "matchedEventMs": 11.870431999999946
+        }
+      ],
+      "candidate": [
+        {
+          "allEventMs": 15.545664000000002,
+          "matchedEventMs": 10.74659199999995
+        },
+        {
+          "allEventMs": 15.17321600000001,
+          "matchedEventMs": 10.579423999999937
+        }
+      ],
+      "baselineMatchedMs": 11.856479999999955,
+      "candidateMatchedMs": 10.663007999999945,
+      "savedMatchedMs": 1.1934720000000105,
+      "matchedReduction": 0.10065989231205341,
+      "bracketStable": true
+    },
+    {
+      "control": "direct-lights",
+      "baseline": [
+        {
+          "allEventMs": 16.594912000000008,
+          "matchedEventMs": 11.870431999999946
+        },
+        {
+          "allEventMs": 26.397055999999697,
+          "matchedEventMs": 19.724160000000058
+        }
+      ],
+      "candidate": [
+        {
+          "allEventMs": 13.393567999999998,
+          "matchedEventMs": 8.760991999999954
+        },
+        {
+          "allEventMs": 23.840799999999746,
+          "matchedEventMs": 16.406719999999908
+        }
+      ],
+      "baselineMatchedMs": 15.797296000000003,
+      "candidateMatchedMs": 12.58385599999993,
+      "savedMatchedMs": 3.213440000000073,
+      "matchedReduction": 0.20341709112749884,
+      "bracketStable": false
+    }
+  ],
+  "environmentErrors": [],
+  "sourceAndProductsUnchanged": true,
+  "replayProcessExitCode": 0,
+  "qualifiedControls": [
+    "surface-shadow",
+    "irradiance",
+    "reflection-field"
+  ],
+  "outputChangingControls": true,
+  "nativeBatchStarted": false,
+  "archive": {
+    "file": "checks.zip",
+    "bytes": 455633,
+    "sha256": "810c553e64d5c75ce40a31cbd4339359dbe2077421917b97d918c673ebb718b7"
+  }
+}

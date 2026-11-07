@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
+阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。
+
 材质程序的[离线优化](../acceptance/nr/material-spirv-optimization.md)完成九份附件字节核对。
 候选指令规模减少约 25.04%，退出与有效性能资格继续待验。
 
