@@ -50,6 +50,16 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-065642-receiver-linear-depth-ecc3b4",
+      "name": "线性接收深度核验",
+      "status": "LinearDepthInputNotQualified",
+      "sourceBase": "4d84626",
+      "evidence": "docs/acceptance/nr/receiver-linear-depth.md",
+      "mappedDepthVisibilityOverOneByte": 216,
+      "candidateAdopted": false,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-064259-visibility-phase-origin-42b3d6",
       "name": "屏幕可见量相位原点",
       "status": "PhaseOriginMechanismVerified",
