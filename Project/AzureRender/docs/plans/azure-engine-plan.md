@@ -78,6 +78,8 @@ CPU 与 GPU 成本下降为当前首要开发目标。
 本轮自动清理与性能复测见[执行记录](../acceptance/nr/autonomous-cleanup-performance.md)。
 三个过期任务的[归档维护](../acceptance/nr/archived-p0-maintenance.md)完成。
 实际卷余量增加约 2.32 GiB，两配置必要构建与回归通过。
+历史工作树的[生成构建维护](../acceptance/nr/legacy-worktree-build-maintenance.md)完成。
+另释放约 6.89 GiB，源文件完整保留，两配置必要检查通过。
 当前[批次优化](../acceptance/nr/batched-performance.md)通过冻结图像检查。
 后续以场景物化、复制及提交成本为 CPU 重点。
 当前[场景准备批次](../acceptance/nr/cpu-scene-preparation.md)已完成关联实现。
