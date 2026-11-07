@@ -71,6 +71,8 @@ Q1 的[精确采样定位](../acceptance/nr/exact-hair-sampling-inputs.md)确认
 向零转换及细粒度梯度仍有六十九处超差，候选继续隔离。
 对象接收的[同输入模型](../acceptance/nr/object-receiver-input-model.md)完成完整遮罩核对。
 真实八位附件的 17017 处可见量与原生逐字节一致，生产集成和完整颜色继续验收。
+[公共屏幕通道](../acceptance/nr/screen-object-visibility.md)通过两配置及双设备的六项功能检查。
+NVIDIA 原生区域逐字节一致；Intel 有 175 处超出一字节，设备精度与场景集成继续推进。
 
 交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
 阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。

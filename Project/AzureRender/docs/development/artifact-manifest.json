@@ -46,6 +46,20 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-045252-screen-object-visibility-ca2907",
+      "name": "公共屏幕对象可见量",
+      "status": "PublicMechanismVerifiedWithCalibrationPending",
+      "sourceBase": "093410c",
+      "evidence": "docs/acceptance/nr/screen-object-visibility.md",
+      "sceneIntegrated": false,
+      "scopedChecks": 6,
+      "nvidiaSourceVisibilityPixelsExact": 17017,
+      "intelSourcePixelsOverOneByte": 175,
+      "fullHairColorPassed": false,
+      "formalPerformancePassed": false,
+      "overallVisualAcceptance": "failed-user-review"
+    },
+    {
       "path": "runs/20261108-041637-object-receiver-origin-7a2735",
       "name": "对象接收输入与真实附件核验",
       "status": "SourceInputModelVerified",

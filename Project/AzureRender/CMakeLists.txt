@@ -293,6 +293,8 @@ compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHO
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_GEOMETRY_SAMPLES=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_depth_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/shadow_filter_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/object_shadow_filter_test.comp")
+compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.vert")
+compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.frag")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_bounds.comp")
 compile_shader("${SHADER_SOURCE_DIR}/surface_response_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/motion_projection_test.comp")
@@ -662,6 +664,7 @@ target_link_libraries(AzureGeometryCompiler PRIVATE AzureProcedural)
 add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
+    src/render/ScreenObjectVisibility.cpp
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
     src/render/ReflectionSpatialFilter.cpp
@@ -2989,6 +2992,13 @@ if(BUILD_TESTING)
     add_executable(AzureScreenReflectionTests tests/ScreenReflectionTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureScreenReflectionTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.ScreenReflection COMMAND AzureScreenReflectionTests)
+    add_executable(AzureScreenObjectVisibilityTests tests/ScreenObjectVisibilityTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureScreenObjectVisibilityTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ScreenObjectVisibility COMMAND AzureScreenObjectVisibilityTests)
+    add_executable(AzureScreenObjectVisibilityGpuTests tests/ScreenObjectVisibilityGpuTests.cpp)
+    target_link_libraries(AzureScreenObjectVisibilityGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureScreenObjectVisibilityGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ScreenObjectVisibilityGpu COMMAND AzureScreenObjectVisibilityGpuTests "${SHADER_BINARY_DIR}")
     add_executable(AzureReflectionRayGpuTests tests/ReflectionRayGpuTests.cpp)
     add_executable(AzureNativeRayReferenceGpuTests tests/NativeRayReferenceGpuTests.cpp)
     target_link_libraries(AzureNativeRayReferenceGpuTests PRIVATE AzureRenderCore AzurePlatform)
