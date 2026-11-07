@@ -32,7 +32,7 @@ Debug 与 Release 各通过四项所属检查。
 真实 glTF 夹具覆盖固定与索引描述符。
 重复加载、输入所有权及全部资源释放通过。
 两配置的六百六十三份着色程序保持字节一致。
-本批原生图像复核列入后续合格候选的集中批次。
+当前批次的[原生集中验证](consolidated-preparation-images.md)通过原四帧零像素条件。
 
 CPU、GPU 帧预算及整体画质状态保持原验收口径。
 [结果清单](evidence/2026-11-07/texture-content-buckets/results.json)

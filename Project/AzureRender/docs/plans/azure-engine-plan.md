@@ -38,8 +38,11 @@ GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通
 
 完整材质的[二进制准备](../acceptance/nr/binary-material-images.md)通过十六项双配置检查。
 十四份角色材质的局部耗时降低约 81.05%，十六份材质摘要一致。
-当前资源准备批次的原生复核待集中执行。
+当前三个生产批次通过[原冻结四帧核对](../acceptance/nr/consolidated-preparation-images.md)。
 模型加载的图像解码及项目初始化继续细分成本。
+
+有界解码缓存及 libpng 的[局部评估](../acceptance/nr/decoded-image-reuse.md)未达到收益门槛。
+候选保持隔离，生产来源与双配置恢复检查通过。
 
 交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
 阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。

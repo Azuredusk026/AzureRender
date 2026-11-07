@@ -1,0 +1,130 @@
+{
+  "status": "passed-original-four-frame-rgb-zero-gate",
+  "native": {
+    "sceneTransformCache": {
+      "sceneTransformCachedNodes": 1679,
+      "sceneTransformReusedWorld": 1679,
+      "sceneTransformLocalEvaluations": 0,
+      "sceneTransformFallback": false
+    },
+    "status": "passed",
+    "sourceBase": "e6c5b3e-consolidated-preparation",
+    "executableSha256": "4bf2a6aa91164bf2e1c7b71c56c2bc9db2135df65f5c746eed776e675314c7dd",
+    "exitCode": 0,
+    "seconds": 164.46899999999732,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "all663ProgramsByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Accepted allocator, texture word buckets and binary profile images; original frozen RGB zero-pixel gate"
+  },
+  "sourceBase": "e6c5b3e",
+  "all1615SourceInputsMatchAcceptedCandidate": true,
+  "sceneLoad": {
+    "cpuPrepareMs": 48052.2,
+    "meshUploadMs": 639.029,
+    "materialUploadMs": 14622.7,
+    "sharedTexturesMs": 449.13,
+    "buffersMs": 114.449,
+    "skinningMs": 7.4348,
+    "descriptorsMs": 174.756,
+    "pipelinesMs": 221.836,
+    "decodedMaterialPixelBytes": 6365826224,
+    "remainingMaterialPixelBytes": 8
+  },
+  "diagnosticBudget": {
+    "allowed": true,
+    "reasons": [],
+    "totalBytes": 1024208138240,
+    "freeBytes": 100444631040,
+    "usedBytes": 24203273,
+    "plannedBytes": 0,
+    "quotaBytes": 2147483648,
+    "reserveBytes": 5368709120,
+    "diagnostic": true
+  },
+  "framePerformance": "not-measured",
+  "overallVisual": "failed-user-review",
+  "archive": {
+    "path": "validation.zip",
+    "bytes": 300641,
+    "sha256": "2b25defef3ee9fed850244638c3dae9ae5b4cf9fbed4e5af20ddc5d7f6bdc2f5",
+    "members": {
+      "archive.py": "84928150888ce5365183594caccee426df56cbfa30602de804116aba8142ec32",
+      "baseline-products.json": "4a2228f804dd149db4392a75cebd1900b625eebe486bf43f52ffb4f162130496",
+      "budget-after.json": "bb315ca49e063e59862b72fecd66f21b1a7b40fdd08ccd39b216d7ca3278968f",
+      "budget.json": "acc094bd98f4216f0dcd1e173e4aea91316afdb82f7d2c4ddce77ae8c5c33bae",
+      "capture.py": "dfe0950af400a737def08e69e1bfa7086cd2df6402150ccdc7331fb1276fdab0",
+      "image/command.json": "e6a21ad9429363dc897300c35dc37f17b4021058f156f2366ded8b04cd94aed7",
+      "image/frozen-inputs.json": "11c2421fea1c1e7bbd7873d0a99ebf6698c891f1a3f7d26a68e7ad4bcdb396c7",
+      "image/results.json": "40d9086e39ebd96565531cd8df36cfca7637e5af3aef4dbbb1ddd6ffec9166ed",
+      "image/runtime.json": "00e7db0c213d5d803a523e8721ff5899c9bef88de5f24b06395eaed7818aeb4a",
+      "image/stderr.log": "e39abdc6a99ed8488fb667325298e59acb76b6551ce2da07eb5a3513508649bf",
+      "image/stdout.log": "1ad072406d56e42d76ba198761fd5773b4d39cd7957fc79cc0dd2e9f97975904",
+      "image/frames/capture_manifest.json": "40a179ba79ebf3fb328705777312dcfcd95c516fbd4cec3b575f8ddb113140fc",
+      "image/frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    }
+  }
+}

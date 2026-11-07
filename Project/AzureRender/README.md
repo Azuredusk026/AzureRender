@@ -8,7 +8,8 @@ GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/accep
 
 完整材质的[二进制图像准备](docs/acceptance/nr/binary-material-images.md)通过十六项检查。
 十四份角色材质的局部合计耗时降低约 81.05%。
-当前资源准备批次的原生图像复核待集中验证。
+当前三个生产批次通过[原生四帧集中验证](docs/acceptance/nr/consolidated-preparation-images.md)。
+正式帧预算及整体画质继续验收。
 
 最终交付目标与当前执行顺序见[开发总计划](docs/plans/azure-engine-plan.md)。
 任务预算、失败转交和验证分级见[协作与验收](docs/development-workflow.md)。
