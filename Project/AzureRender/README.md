@@ -21,6 +21,7 @@
 当前源码的二十帧准备阶段及真实输入控制见[帧准备成本](docs/acceptance/nr/current-frame-preparation.md)。
 完整 GPU 叶绘制归因、计算反射模式与覆盖控制见[材质成本](docs/acceptance/nr/computed-material-cost.md)。
 计算反射材质的原生失败、单因素控制及恢复核对见[候选核验](docs/acceptance/nr/computed-material-view.md)。
+逐绘制纹理索引的合法设备前提及收益判定见[索引核验](docs/acceptance/nr/uniform-material-index.md)。
 无光照混合表面的主输出、零像素对照及约 12% 短时 GPU 改善见[着色优化](docs/acceptance/nr/unlit-blend-fast-path.md)。
 专用场景快照与渲染描述的复用、失效及约 23% 短时 CPU 改善见[宿主优化](docs/acceptance/nr/host-scene-preparation.md)。
 透明几何并行准备与运动历史复用见[动态几何优化](docs/acceptance/nr/dynamic-geometry-preparation.md)。
