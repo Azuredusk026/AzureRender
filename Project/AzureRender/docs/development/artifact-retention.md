@@ -155,7 +155,8 @@ python tools/artifact_budget.py --run "build/runs/<任务目录>" --planned-byte
 ```
 
 低空间诊断须显式声明 `--diagnostic`。
-计划输出至多为 64 MiB，预留后须剩余 5 GiB。
+目录现有占用与预计新增合计至多为 64 MiB。
+预留后须剩余 5 GiB。
 诊断复用现有输入，输出以日志及结构化摘要为主。
 
 ```powershell
@@ -181,6 +182,11 @@ python tools/artifact_cleanup.py --new-run performance-check --diagnostic --plan
 截图按每组首、中、末帧及必要失败帧保留。
 `.keep` 与 `preservedRuns` 应一一对应。
 每项保留记录包含用途、基准入口及复核条件。
+
+自动任务先保存预览，再按完整路径清单分批应用。
+每批至多十个目录，授权范围沿用当前有效授权。
+状态清单与任务收据共用 `DefaultPreviewThenReviewedRunListsApply`。
+累计诊断预算的检查见[预算计划](../plans/2026-11-07-cumulative-diagnostic-budget.md)。
 
 归档释放前，核对包及清单的 SHA-256。
 每份待释放文件逐字节摘要匹配归档成员。

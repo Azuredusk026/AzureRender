@@ -9,7 +9,7 @@
     "diagnosticMinimumFreeBytes": 5368709120,
     "deletionBatchLimit": 10,
     "deletionApproval": "current-session-authorization",
-    "automaticCleanupMode": "preview"
+    "automaticCleanupMode": "DefaultPreviewThenReviewedRunListsApply"
   },
   "current": {
     "path": "ux-2026-10-14/Engine",

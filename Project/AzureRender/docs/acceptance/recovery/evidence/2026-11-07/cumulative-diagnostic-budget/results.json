@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "sourceBase": "fdb58bd",
+  "change": "Diagnostic budget compares existing bytes plus reserved bytes with 64 MiB.",
+  "controlledBaselineAllowed": true,
+  "controlledCandidateAllowed": false,
+  "pythonChecksPassed": 15,
+  "checks": [
+    {
+      "kind": "python-checks",
+      "exitCode": 0,
+      "seconds": 0.31300000000192085,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "test_artifact_budget",
+        "test_artifact_cleanup"
+      ]
+    },
+    {
+      "kind": "existing-run-refusal",
+      "exitCode": 2,
+      "expectedExitCode": 2,
+      "runBytesUnchanged": true
+    },
+    {
+      "kind": "retention-and-automation",
+      "keep": 120,
+      "registered": 120,
+      "mode": "DefaultPreviewThenReviewedRunListsApply",
+      "status": "matched"
+    },
+    {
+      "kind": "runtime-provenance",
+      "configuration": "Release",
+      "exitCode": 0,
+      "seconds": 12.25,
+      "allRuntimeProductsByteIdentical": true,
+      "programCount": 663
+    },
+    {
+      "kind": "runtime-provenance",
+      "configuration": "Debug",
+      "exitCode": 0,
+      "seconds": 14.889999999999418,
+      "allRuntimeProductsByteIdentical": true,
+      "programCount": 663
+    }
+  ],
+  "sourceChanges": {
+    "tools/artifact_budget.py": "6894534a76ca2ecd6114ce1403f658e1f09903252ed0645a8dec443928c1bb6a",
+    "tools/test_artifact_budget.py": "ae44d8cd16d9638560b713caad6d902e5533046edc65eb96678fc3cb3d1dedb9",
+    "docs/development/artifact-manifest.json": "fdc690895a3a03c0b7232fdd2e0b0ede0894aa654b1238d9aabfc7a05808483d",
+    "docs/development/artifact-retention.md": "ad009597f22beade0b903b8e75be214a63936beaa22534334e63db90d75af03f"
+  },
+  "rootRulesSha256": "c3dc4d298350125c3a51ba72200fec4e412f22958e9cdaefdb0117eb93f83c75",
+  "noProjectArtifactsDeleted": true,
+  "nativeRegressionRequired": false,
+  "reason": "Only storage policy/tooling changed; executable and shader products remain byte-identical in both configurations.",
+  "archive": {
+    "file": "checks.zip",
+    "bytes": 8204,
+    "sha256": "56f220cf716b7f6c746a7567ba90cd355b01c65ba6033a34d7216eaf9e714f42"
+  }
+}

@@ -116,6 +116,25 @@ class BudgetTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     check(build, run=junction, planned=0)
 
+    def test_diagnostic_budget_counts_existing_artifacts(self):
+        from artifact_budget import evaluate
+        result = evaluate(total=1000*2**30, free=32*2**30,
+                          used=63*2**20, planned=2*2**20, diagnostic=True)
+        self.assertFalse(result['allowed'])
+        self.assertIn('diagnostic-output-limit', result['reasons'])
+        exact = evaluate(total=1000*2**30, free=32*2**30,
+                         used=32*2**20, planned=32*2**20, diagnostic=True)
+        self.assertTrue(exact['allowed'])
+        next_write = evaluate(total=1000*2**30, free=32*2**30,
+                              used=64*2**20, planned=1, diagnostic=True)
+        self.assertFalse(next_write['allowed'])
+
+    def test_normal_budget_keeps_two_gibibyte_contract(self):
+        from artifact_budget import evaluate
+        result = evaluate(total=1000*2**30, free=500*2**30,
+                          used=64*2**20, planned=64*2**20)
+        self.assertTrue(result['allowed'])
+
 
 if __name__ == '__main__':
     unittest.main()

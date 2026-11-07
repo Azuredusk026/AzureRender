@@ -16,7 +16,7 @@ def evaluate(*, total, free, used, planned, quota=RUN_QUOTA, diagnostic=False):
     reasons = []
     if used + planned > quota:
         reasons.append('run-quota')
-    if diagnostic and planned > 64 * MIB:
+    if diagnostic and used + planned > 64 * MIB:
         reasons.append('diagnostic-output-limit')
     if free - planned < reserve:
         reasons.append('volume-reserve')
