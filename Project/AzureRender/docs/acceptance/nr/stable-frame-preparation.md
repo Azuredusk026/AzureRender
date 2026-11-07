@@ -49,6 +49,11 @@ GPU 帧预算仍未通过。
 构建、所属检查、模块核对及原生批次的命令耗时由收据逐项记录。
 局部控制与推断见[当前帧准备成本](current-frame-preparation.md)。
 
+同一生产源码的双配置检查已补齐。
+两配置各十三项恢复检查覆盖本批十项 CPU 用例。
+源码及全部 663 个 GPU 程序与本批生产基线一致。
+范围与摘要见[恢复核对](evidence/2026-11-07/computed-material-view/results.json)。
+
 [结果收据](evidence/2026-11-07/stable-frame-preparation/results.json)、
 [来源清单](evidence/2026-11-07/stable-frame-preparation/manifest.json)与
 [原始归档](evidence/2026-11-07/stable-frame-preparation/measurements.zip)保存本批证据。
