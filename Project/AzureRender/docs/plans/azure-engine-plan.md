@@ -43,6 +43,9 @@ GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通
 
 有界解码缓存及 libpng 的[局部评估](../acceptance/nr/decoded-image-reuse.md)未达到收益门槛。
 候选保持隔离，生产来源与双配置恢复检查通过。
+图像的[有界并行评估](../acceptance/nr/bounded-image-decode.md)完成单次集中批次。
+十六份材质摘要一致，样本漂移使收益资格未成立。
+候选保持隔离，生产加载入口及主构建产物保持原状态。
 材质的[直接编译定位](../acceptance/nr/direct-pipeline-compilation.md)完成。
 九项私有控制的寄存器均为一百二十八，显著收益依据尚未成立。
 Q1 的[精确采样定位](../acceptance/nr/exact-hair-sampling-inputs.md)确认一处层级差异。
