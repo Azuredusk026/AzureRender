@@ -112,6 +112,8 @@ CPU 与 GPU 成本下降为当前首要开发目标。
 GPU P95 为 22.744 毫秒，继续优先处理 GPU 场景成本。
 阴影过滤的[范围判定候选](../acceptance/nr/shadow-filter-range-culling.md)附件一致。
 局部匹配耗时增加约 8.57%，候选保持隔离，原生批次未启动。
+相邻深度读取的[预取候选](../acceptance/nr/shadow-filter-prefetch.md)附件一致。
+匹配耗时下降约 0.50%，候选保持隔离。
 计算反射材质的[专用候选](../acceptance/nr/computed-material-view.md)未通过原生零像素门槛。
 单因素控制定位到专用管线选择，候选计时未启动。
 生产源码、双配置程序和 Release Player 代码段恢复一致。
