@@ -50,6 +50,17 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-061129-receiver-device-depth-357a94",
+      "name": "屏幕接收设备深度核验",
+      "status": "SourceDepthProductionPrecisionPending",
+      "sourceBase": "2d69a86",
+      "evidence": "docs/acceptance/nr/receiver-device-depth.md",
+      "candidateAdopted": false,
+      "mainSnapshotExactRegionPixels": 17017,
+      "mappedDepthVisibilityOverOneByte": 221,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-055410-cpu-consumed-preparation-023e02",
       "name": "CPU 准备消费范围核验",
       "status": "PreparationScopeBelowBatchGate",
