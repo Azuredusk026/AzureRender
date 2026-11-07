@@ -31,6 +31,12 @@ class GpuEnvironmentTests(unittest.TestCase):
             self.assertTrue(module.device_errors(self.device(hostPower={'acLineStatus':status})))
         self.assertEqual(module.device_errors(self.device(hostPower={'acLineStatus':1})),[])
 
+    def test_existing_native_power_observations_keep_explicit_ac_contract(self):
+        module=self.module()
+        self.assertEqual(module.device_errors(self.device(hostPower={'ac':1,'saver':0})),[])
+        for power in ({'ac':0,'saver':0},{'ac':255},{'ac':True},{'acLineStatus':0,'ac':1}):
+            self.assertTrue(module.device_errors(self.device(hostPower=power)))
+
     def test_battery_preflight_records_failure_without_waiting(self):
         module=self.module()
         with tempfile.TemporaryDirectory() as directory:

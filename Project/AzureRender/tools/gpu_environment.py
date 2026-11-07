@@ -76,7 +76,7 @@ def power_errors(device):
     # Historical evidence retains its original observation scope.
     if 'hostPower' not in device:return []
     power=device['hostPower']
-    state=power.get('acLineStatus') if isinstance(power,dict) else None
+    state=power.get('acLineStatus',power.get('ac')) if isinstance(power,dict) else None
     if type(state) is not int or state!=1:
         return ['AC power is required; host power is battery, unknown or unavailable']
     return []

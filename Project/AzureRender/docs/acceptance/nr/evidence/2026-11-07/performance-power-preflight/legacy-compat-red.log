@@ -1,0 +1,20 @@
+.....F..................
+======================================================================
+FAIL: test_existing_native_power_observations_keep_explicit_ac_contract (test_gpu_environment.GpuEnvironmentTests.test_existing_native_power_observations_keep_explicit_ac_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Projects\FYP\Project\AzureRender\tools\test_gpu_environment.py", line 36, in test_existing_native_power_observations_keep_explicit_ac_contract
+    self.assertEqual(module.device_errors(self.device(hostPower={'ac':1,'saver':0})),[])
+AssertionError: Lists differ: ['AC power is required; host power is battery, unknown or unavailable'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'AC power is required; host power is battery, unknown or unavailable'
+
+- ['AC power is required; host power is battery, unknown or unavailable']
++ []
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.082s
+
+FAILED (failures=1)
