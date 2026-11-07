@@ -30,12 +30,11 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
-GPU 缓冲的[驻留候选](../acceptance/nr/gpu-buffer-residency.md)未通过第四帧零像素门槛。
-第三百二十帧的[有效缓冲内容](../acceptance/nr/mapped-buffer-content.md)核对一致，实际失败帧仍待定位。
-带上传读取的[同程序控制](../acceptance/nr/residency-runtime-control.md)两种策略均符合原生四帧。
-后续使用无上传读取的写入发布控制，原候选保持隔离。
-旧程序同输入控制通过，候选隔离，双配置生产恢复核验通过。
-后续先核对实际缓冲内容，原 80W 测量条件继续保持。
+GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通过二十二项检查。
+原冻结四帧均符合零像素条件，整帧收益待原 80W 条件确认。
+原[驻留候选](../acceptance/nr/gpu-buffer-residency.md)保持隔离，其像素差异根因未验证。
+无上传读取的[发布控制](../acceptance/nr/host-write-publication.md)未复现该差异。
+场景准备的哈希成本按[纹理分桶计划](2026-11-07-texture-content-buckets.md)优化。
 
 交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
 阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。

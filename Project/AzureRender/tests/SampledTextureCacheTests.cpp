@@ -2,6 +2,7 @@
 #include "rhi/NullRhi.hpp"
 
 #include <algorithm>
+#include <cstring>
 #include <functional>
 #include <iostream>
 #include <limits>
@@ -117,10 +118,13 @@ void isolated_keys() {
 
 void hash_collision() {
     rhi::NullRhi backend;SampledTextureCache cache(backend.allocator(),backend);
-    const std::vector<std::uint8_t> a={166,38,197,129,215,182,100,226},b={36,200,198,21,236,71,103,158};
+    std::vector<std::uint8_t> a(8),b(8);
+    // The second word cancels the first-word difference in the bucket state.
+    const std::uint32_t firstWord=1,secondWord=(2166136261U*16777619U)^((2166136261U^1U)*16777619U);
+    std::memcpy(b.data(),&firstWord,4);std::memcpy(b.data()+4,&secondWord,4);
     auto upload=request();upload.width=2;upload.height=1;upload.mipLevels=1;
     const auto first=cache.acquire(a,upload),second=cache.acquire(b,upload);
-    require(first.view!=second.view,"Equal FNV-1a bucket hashes with distinct bytes must have different GPU images");
+    require(first.view!=second.view,"Equal bucket hashes with distinct bytes must have different GPU images");
     require(cache.acquire(a,upload).view==first.view&&cache.acquire(b,upload).view==second.view,"A collision bucket must retain both exact content identities");
     require(cache.statistics().uniqueTextures==2&&cache.statistics().hits==2,"Collision buckets must count independent owners and exact hits");
 }
@@ -138,6 +142,23 @@ void invalid_inputs() {
     require(backend.allocator().statistics().imageAllocations==0&&backend.allocator().statistics().bufferAllocations==0,"Invalid requests must fail before native allocation");
     require(cache.statistics().requests==0,"Rejected requests must not publish cache success statistics");
     backend.unavailableSampledFormats.clear();require(cache.acquire(checker(),upload).view!=VK_NULL_HANDLE,"Input rejection leaves the cache usable");
+}
+
+void complete_content_identity() {
+    for(unsigned size=4;size<40;++size) {
+        rhi::NullRhi backend;SampledTextureCache cache(backend.allocator(),backend);
+        auto upload=request();upload.width=upload.height=upload.mipLevels=1;
+        std::vector<std::uint8_t> pixels(size,37);
+        const auto original=cache.acquire(pixels,upload);
+        for(unsigned index=0;index<size;++index) {
+            auto changed=pixels;changed[index]^=0x80;
+            const auto distinct=cache.acquire(changed,upload);
+            require(distinct.view!=original.view,"Every input byte must participate in exact content identity");
+            require(cache.acquire(changed,upload).view==distinct.view,"Changed word and tail content must retain stable identity");
+        }
+        require(cache.acquire(pixels,upload).view==original.view,"All content variants must preserve the original binding");
+        require(cache.statistics().uniqueTextures==size+1,"Every distinct content variant must retain an independent owner");
+    }
 }
 
 void authored_mips() {
@@ -192,9 +213,9 @@ int main() {
             {"shared multi-resource texture",shared_resources},{"complete key isolation",isolated_keys},
             {"content hash collision",hash_collision},{"invalid input recovery",invalid_inputs},
             {"authored mip bytes",authored_mips},{"partial upload recovery",failed_upload},
-            {"transferred input ownership",transferred_inputs}}) {
+            {"transferred input ownership",transferred_inputs},{"complete word and tail identity",complete_content_identity}}) {
         try {test.second();std::cout<<"PASS "<<test.first<<'\n';}
         catch(const std::exception& e) {++failed;std::cerr<<"FAIL "<<test.first<<": "<<e.what()<<'\n';}
     }
-    std::cout<<7-failed<<"/7 sampled texture cache cases passed\n";return failed?1:0;
+    std::cout<<8-failed<<"/8 sampled texture cache cases passed\n";return failed?1:0;
 }

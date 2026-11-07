@@ -12,10 +12,15 @@ std::uint32_t contentBucket(const std::vector<std::uint8_t>& pixels) {
     // This is only a bucket selector. Exact bytes and every effective upload
     // parameter are compared before a binding can be reused.
     std::uint32_t hash=2166136261U;
-    // The extent is already validated. Pointer traversal avoids checked
-    // iterator bookkeeping for each byte in development configurations.
-    const auto* end=pixels.data()+pixels.size();
-    for(const auto* at=pixels.data();at!=end;++at)hash=(hash^*at)*16777619U;
+    // Word loads reduce the serial multiply chain. memcpy permits unaligned
+    // input and reads only complete words; every remaining byte is included.
+    std::size_t offset=0;
+    for(;pixels.size()-offset>=sizeof(std::uint32_t);offset+=sizeof(std::uint32_t)) {
+        std::uint32_t word;
+        std::memcpy(&word,pixels.data()+offset,sizeof(word));
+        hash=(hash^word)*16777619U;
+    }
+    for(;offset<pixels.size();++offset)hash=(hash^pixels[offset])*16777619U;
     return hash;
 }
 struct TimedSection {

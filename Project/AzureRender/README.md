@@ -3,6 +3,9 @@
 GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/acceptance/nr/focused-device-buffers.md)。
 该实现通过原四帧兼容，整帧收益待原功率条件确认。
 
+纹理缓存的[分桶计算](docs/acceptance/nr/texture-content-buckets.md)通过八项双配置检查。
+局部哈希中位耗时降低约 73.62%，完整场景结果待集中验证。
+
 最终交付目标与当前执行顺序见[开发总计划](docs/plans/azure-engine-plan.md)。
 任务预算、失败转交和验证分级见[协作与验收](docs/development-workflow.md)。
 当前完整构建、跨设备纹理容量及输出提交见[入口核验](docs/acceptance/recovery/acceptance-preflight.md)。
