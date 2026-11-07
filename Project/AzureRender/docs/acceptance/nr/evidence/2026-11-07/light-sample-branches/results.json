@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "status": "isolated-insufficient-benefit",
+  "sourceBase": "e8fc568",
+  "captureSha256": "5cbfc0ecf9fa24a7a8d8949ed54c3fc3691b7a1a58075d68f63f257b34ca6942",
+  "allNineAttachmentsIdentical": true,
+  "matchedDraws": 1009,
+  "pairedTimings": [
+    {
+      "mode": "baseline",
+      "allEventMs": 16.356415999999975,
+      "matchedEventMs": 11.75087999999995
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 16.221023999999975,
+      "matchedEventMs": 11.588415999999953
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 16.444447999999994,
+      "matchedEventMs": 11.783711999999944
+    },
+    {
+      "mode": "baseline",
+      "allEventMs": 16.445728000000003,
+      "matchedEventMs": 11.841727999999959
+    }
+  ],
+  "qualification": {
+    "qualified": false,
+    "baselineMatchedMs": 11.796303999999955,
+    "candidateMatchedMs": 11.686063999999948,
+    "matchedReduction": 0.009345300019396485,
+    "reason": "Matched reduction below 20%; no native batch"
+  },
+  "nativeBatchRun": false,
+  "productionChanged": false,
+  "archive": {
+    "file": "controls.zip",
+    "bytes": 120441,
+    "sha256": "25ec4e429e7d099412464c1b8b35bd05ed3233a92a9fb35d35c2e061b7425e61"
+  }
+}
