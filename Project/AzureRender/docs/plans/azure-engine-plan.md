@@ -54,6 +54,8 @@ Q1 的[精确采样定位](../acceptance/nr/exact-hair-sampling-inputs.md)确认
 相同梯度的取样结果逐位一致，完整头发门禁继续验收。
 梯度候选的[整区评估](../acceptance/nr/hair-gradient-region.md)仍有七十二处超差。
 候选保持隔离，生产的原七十三处待项保持有效。
+头发的[输出精度定位](../acceptance/nr/hair-attachment-precision.md)确认附件转换的误差贡献。
+向零转换及细粒度梯度仍有六十九处超差，候选继续隔离。
 
 交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
 阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。
