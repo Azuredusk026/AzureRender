@@ -57,6 +57,8 @@ CPU 与 GPU 成本下降为当前首要开发目标。
 接手核验及空间前置条件见[恢复记录](../acceptance/nr/resume-storage-performance.md)。
 产物门禁按[空间计划](2026-11-06-storage-budget.md)执行。
 本轮自动清理与性能复测见[执行记录](../acceptance/nr/autonomous-cleanup-performance.md)。
+三个过期任务的[归档维护](../acceptance/nr/archived-p0-maintenance.md)完成。
+实际卷余量增加约 2.32 GiB，两配置必要构建与回归通过。
 当前[批次优化](../acceptance/nr/batched-performance.md)通过冻结图像检查。
 后续以场景物化、复制及提交成本为 CPU 重点。
 当前[场景准备批次](../acceptance/nr/cpu-scene-preparation.md)已完成关联实现。

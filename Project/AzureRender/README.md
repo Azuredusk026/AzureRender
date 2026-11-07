@@ -44,6 +44,7 @@ GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/accep
 实际 GPU 缓冲位置、驻留候选及原生差异见[驻留评估](docs/acceptance/nr/gpu-buffer-residency.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 每周清理任务的目录、期限及执行状态见[调度收据](docs/development/artifact-automation.json)。
+归档任务的实际释放及保护核对见[维护记录](docs/acceptance/nr/archived-p0-maintenance.md)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。
 加载会话的路径复用、失效及同输入收益见[活动表验证](docs/acceptance/nr/prepared-resource-paths.md)。
 

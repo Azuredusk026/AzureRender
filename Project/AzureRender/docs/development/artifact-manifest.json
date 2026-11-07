@@ -1719,6 +1719,27 @@
       "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
       "membersVerified": 9,
       "previousRegistration": []
+    },
+    {
+      "path": "runs/20261026-235925-retrieval-implementation-d1130b",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 17059,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261029-025624-main-reflection-history-3693f3",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 2616,
+      "previousRegistration": []
+    },
+    {
+      "path": "runs/20261029-044333-reflection-pass-profile-087370",
+      "archive": "archives/development-evidence-20261029.tar.zst",
+      "archiveSha256": "d14f54f3ede44d6591f43c24743017ad860581f012e2ef80b5a8168d8a1d2e51",
+      "membersVerified": 1538,
+      "previousRegistration": []
     }
   ],
   "recoveryArchives": [

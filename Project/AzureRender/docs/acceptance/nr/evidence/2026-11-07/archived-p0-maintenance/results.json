@@ -1,0 +1,25 @@
+{
+  "status": "verified-after-apply",
+  "beforeAvailableBytes": 100446539776,
+  "afterAvailableBytes": 102935339008,
+  "logicalDeletedBytes": 8968233901,
+  "directories": 3,
+  "productHashesChecked": 77,
+  "symbolMetadataChecked": 285,
+  "registeredPins": 120,
+  "actualPins": 120,
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "deletedPathsAbsent": true,
+  "postBuildProductsUnchanged": true,
+  "sourceInputs": 1615,
+  "shaderProductsPerConfiguration": 663,
+  "buildConfigurations": [
+    "Debug",
+    "Release"
+  ],
+  "ctestCasesPerConfiguration": 1,
+  "scheduledInvocationObserved": false,
+  "linkCacheDeletion": "Rejected by automatic review; all files preserved",
+  "sourceCommit": "57400abd691cbe1b3a9f882216d556f2897e5113",
+  "validationSha256": "c03df98488e31ecc296b5ba6c0acd1f552e31eaa8efc1b94ac9ea5a072f6f06e"
+}

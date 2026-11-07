@@ -78,7 +78,7 @@ python tools/artifact_cleanup.py
 python tools/artifact_cleanup.py --apply
 ```
 
-每周日 10:00 的 Codex 自动任务执行默认候选扫描及分批清理。
+每周日北京时间 10:00 执行默认候选扫描及分批清理。
 任务标识为 `azurerender`，工作目录为 `D:/Projects/FYP/Project/AzureRender`。
 每批最多十个目录，采用七天保留期及当前有效清理授权。
 清单、实际删除结果与空间复核写入 `build/maintenance/`。
@@ -89,6 +89,10 @@ python tools/artifact_cleanup.py --apply
 本机调度要求见[官方说明](https://learn.chatgpt.com/docs/automations?surface=app)。
 
 实际删除前保存该批次的全部绝对路径。
+校验恢复归档及成员清单的 SHA-256。
+候选的全部当前文件须匹配已验证归档成员。
+硬链接条目沿 `link` 解析到实际内容摘要。
+归档以外的内容先完成增量归档及恢复核验。
 执行依据为当前会话的有效授权。
 用户授予自动清理权限后，核验通过的批次直接执行。
 每批至多删除十个目录。
