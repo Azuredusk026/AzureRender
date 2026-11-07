@@ -3,6 +3,9 @@
 开发产物使用[目录维护技能](tools/skills/azurerender-artifact-maintenance/SKILL.md)。
 按天回收、精简证据及累计预算见[产物规则](docs/development/artifact-retention.md)。
 
+阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。
+双设备时序检查与原冻结四帧通过，整体性能和画质按原门槛验收。
+
 GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/acceptance/nr/focused-device-buffers.md)。
 分配策略的原四帧证据对应 `f015e5d`，整帧收益待原功率条件确认。
 

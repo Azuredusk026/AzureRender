@@ -1,0 +1,4770 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "phase": "nr-stability",
+  "sourceBase": "70c3e7f",
+  "sourceSha256": "e039715f257a9de538f67560c5da81e4b6e430c9b57e9f77e733362f20258b12",
+  "originalTestThresholdsUnchanged": true,
+  "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "builds": [
+    {
+      "configuration": "Release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureTemporalViewGpuTests",
+        "--test-target",
+        "AzureShadowFilteringGpuTests",
+        "--test-target",
+        "AzureObjectShadowFilteringGpuTests",
+        "--test-target",
+        "AzureShadowTileBoundsGpuTests"
+      ],
+      "exitCode": 0,
+      "seconds": 84.81200000000536
+    },
+    {
+      "configuration": "Debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "--config",
+        "Debug",
+        "--test-target",
+        "AzureTemporalViewGpuTests",
+        "--test-target",
+        "AzureShadowFilteringGpuTests",
+        "--test-target",
+        "AzureObjectShadowFilteringGpuTests",
+        "--test-target",
+        "AzureShadowTileBoundsGpuTests"
+      ],
+      "exitCode": 0,
+      "seconds": 87.73399999999674
+    }
+  ],
+  "deviceConfigurationTests": [
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "driver": "*igvk64*",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(TemporalViewGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu|ShadowTileBoundsGpu)$",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-002636-intel-shadow-derivative-bf54e1\\release-intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 99.625,
+      "privateCandidateMatches": 75
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "driver": "*nv-vk64*",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(TemporalViewGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu|ShadowTileBoundsGpu)$",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-002636-intel-shadow-derivative-bf54e1\\release-nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 144.67200000000594,
+      "privateCandidateMatches": 75
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "driver": "*igvk64*",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender\\.(TemporalViewGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu|ShadowTileBoundsGpu)$",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-002636-intel-shadow-derivative-bf54e1\\debug-intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 86.76600000000326,
+      "privateCandidateMatches": 75
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "driver": "*nv-vk64*",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender\\.(TemporalViewGpu|ShadowFilteringGpu|ObjectShadowFilteringGpu|ShadowTileBoundsGpu)$",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-002636-intel-shadow-derivative-bf54e1\\debug-nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 50.125,
+      "privateCandidateMatches": 75
+    }
+  ],
+  "testCount": 16,
+  "quality": {
+    "release-intel": [
+      {
+        "asset": 0,
+        "edgePixels": 1361,
+        "errorRatio": 0.6232993005796227,
+        "flatMaximumByteError": 0.0,
+        "offError": 6.797728385990693,
+        "temporalError": 4.237019348518246
+      },
+      {
+        "asset": 1,
+        "edgePixels": 3636,
+        "errorRatio": 0.677275113089538,
+        "flatMaximumByteError": 0.0,
+        "offError": 1.4300341492482582,
+        "temporalError": 0.9685265401540154
+      }
+    ],
+    "release-nvidia": [
+      {
+        "asset": 0,
+        "edgePixels": 1362,
+        "errorRatio": 0.6212179318975436,
+        "flatMaximumByteError": 0.0,
+        "offError": 6.82034691629956,
+        "temporalError": 4.236921806167401
+      },
+      {
+        "asset": 1,
+        "edgePixels": 3636,
+        "errorRatio": 0.6678354113929026,
+        "flatMaximumByteError": 0.0,
+        "offError": 1.45766868353502,
+        "temporalError": 0.973482764943161
+      }
+    ],
+    "debug-intel": [
+      {
+        "asset": 0,
+        "edgePixels": 1361,
+        "errorRatio": 0.6232993005796227,
+        "flatMaximumByteError": 0.0,
+        "offError": 6.797728385990693,
+        "temporalError": 4.237019348518246
+      },
+      {
+        "asset": 1,
+        "edgePixels": 3636,
+        "errorRatio": 0.677275113089538,
+        "flatMaximumByteError": 0.0,
+        "offError": 1.4300341492482582,
+        "temporalError": 0.9685265401540154
+      }
+    ],
+    "debug-nvidia": [
+      {
+        "asset": 0,
+        "edgePixels": 1362,
+        "errorRatio": 0.6212179318975436,
+        "flatMaximumByteError": 0.0,
+        "offError": 6.82034691629956,
+        "temporalError": 4.236921806167401
+      },
+      {
+        "asset": 1,
+        "edgePixels": 3636,
+        "errorRatio": 0.6678354113929026,
+        "flatMaximumByteError": 0.0,
+        "offError": 1.45766868353502,
+        "temporalError": 0.973482764943161
+      }
+    ]
+  },
+  "nativeFourFrames": {
+    "status": "passed",
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 361.5780000000086,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "4",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-002636-intel-shadow-derivative-bf54e1\\native-entry\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-002636-intel-shadow-derivative-bf54e1\\native-entry\\runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-002636-intel-shadow-derivative-bf54e1"
+      ]
+    },
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "identical": true,
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "identical": true,
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "identical": true,
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "identical": true,
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "originalProgramsUnchanged": true,
+    "sourceInputsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "validationLogClean": true,
+    "zeroAllocator": true,
+    "performanceQualification": false,
+    "shaderFixturePurpose": "Isolated native visual compatibility; shader-only dependencies, no project or asset copies."
+  },
+  "spirv": {
+    "status": "passed",
+    "programCount": 663,
+    "bothConfigurationsByteIdentical": true,
+    "buildProvenanceVerified": true,
+    "programs": [
+      {
+        "file": "background.frag.spv",
+        "sha256": "77d076347d4274597d367b218c49fbcac227fe24678d62fe4b724ce753f3aac8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "background.vert.spv",
+        "sha256": "8d188d24fe5be1dbffd00574f59d2ba583bd5e050f2ce46090e70c6dda1de7a6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "background_bindless.frag.spv",
+        "sha256": "72f6524525cbb7809d20a754f543eb9df1ede3c5c057d30ebbef418fbfd61116",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "background_bindless_samples.frag.spv",
+        "sha256": "7937f35e40fc9efc0d323b14c69f57088e8319316aad8e4a729cb17f11806ca0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "background_samples.frag.spv",
+        "sha256": "a73edda9980479f648b8a5d7bf8e90c7f702a85e6c43a985eaac2a690c2a49d3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "blackhole.frag.spv",
+        "sha256": "03d248d078a2037f1fea3e77b32642db45aacdea4e916e770c81e0fffae92ef5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "blackhole.vert.spv",
+        "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "blackhole_composite.frag.spv",
+        "sha256": "0dde504bdb5bb05f7bc97f206a87e75391e1384a643a5b5ff5df2d8ea5b514db",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "blackhole_taa.frag.spv",
+        "sha256": "2ce97ebb8191a5cffeda8e3fa58529ebdb314916e0abcd67d3b57b67495f0baf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "blackhole_taa_compute.frag.spv",
+        "sha256": "f6b3054ac3902f63b5ede1ec44ad7f9280c2473cf310d1159fbfeea2a29a50d2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "bloom_composite.comp.spv",
+        "sha256": "9af987cb832f5dd7da08abca5c4cdd2acbca9c3adfe5161b94eea6791721be42",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "bloom_downsample.comp.spv",
+        "sha256": "d792f2f8d24d9ab2d2e303d411b944706a6101a003048d3e4dc50773aa2aac26",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_depth.frag.spv",
+        "sha256": "319e5a9d9e978717d5744d488f1d6c99ec487c3ad474aa7ddf6a1ea8a458e98e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_depth_bindless.frag.spv",
+        "sha256": "5eb0f53a15bf00156a5c6480680fb4e4f9c78c8015b4e91852b407dec3d60bd6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_depth_bindless_coverage.frag.spv",
+        "sha256": "0b26d494b01f4a33e4063faa80a784656833566ff0a36beaf49053fb6b378072",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_depth_coverage.frag.spv",
+        "sha256": "09bb033889436e15abd608b70ffaf8392902387b01b4bc9287386fd79a77ce63",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot.frag.spv",
+        "sha256": "42dd874b19f4ac1a7aa559ed8d23b16889c89c05b3edfdb7b39a7f5b94ccd67f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless.frag.spv",
+        "sha256": "ce4e16f32f252e655592fb093c626158c4e16652ba5e10382c3ce9b5089be0a7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap.frag.spv",
+        "sha256": "473caab96fde5c27b918681ca53325321854355f3da9d767818dd5df0c542266",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_coverage.frag.spv",
+        "sha256": "69623896cea64e17e2187befb6b3becba1d12789d8dadda9703d5d56870f1a36",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_early.frag.spv",
+        "sha256": "5f369bc9fab1240f2f6f5f46e0a108ace2079f3d788860f3e90b008dc2759ea6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_early_coverage.frag.spv",
+        "sha256": "0808766a05a1a2b0f5b4dd3d35a4bbce117b4c50d9ec227d7e96dbb31f055da4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_early_lighting.frag.spv",
+        "sha256": "1dc146d52812ecd6a16662548a7e9291f4723881ecd9b52cff9523b47c3ac5ff",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_early_lighting_coverage.frag.spv",
+        "sha256": "53a4463267128318a5ee49488c3546d55a0b4fcf77407b10e141ef3ae01b2d72",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_field.frag.spv",
+        "sha256": "5f9c2d99bac93681635b4b33717ce52c3df0d0ef3ff7ef615af2f9efbf2a2242",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_field_coverage.frag.spv",
+        "sha256": "fa8665aeec5b62f7aa9c4dde0154426cc7b00ecc215dfa51fab94b2ca8d9289c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_field_early.frag.spv",
+        "sha256": "21d6832ff229efe6db0095bf16d2bf4e6f0f0e57e57e7332c371d1b19ba7e8da",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_field_early_coverage.frag.spv",
+        "sha256": "46b92fac0e1c7a921a47cfda9e8f426ff853fe38f1b5912a9ffa656ae5bc436f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_field_early_lighting.frag.spv",
+        "sha256": "e4f44703ea94a185ec4c8b23449a5ea31b2a89ba75f4ff2c6499e3e5b3ebfa20",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_field_early_lighting_coverage.frag.spv",
+        "sha256": "d13bbcb24c7c076e353ccc6f91ea236899d9fb6c8a055671c9513fceae77e762",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_field_lighting.frag.spv",
+        "sha256": "42c7c2aee2540496c25ccd04f3846677e765f25dd5393e1e24b9fb1a1b37752a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "7aa46a9c09bfeffb6398dbbdb5d4b467fbad8538a273c4fbde9663a03fe13bcb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_lighting.frag.spv",
+        "sha256": "40ed706ace144d3115038ce905ac5abf0cab98fab1e8384bf02aeed344f03670",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_clipmap_lighting_coverage.frag.spv",
+        "sha256": "cfbb701acf802c637d4adca0cea8dda69fced4ab05db37428a1222cdbfc2aed0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_coverage.frag.spv",
+        "sha256": "c2bb59cf6124d6ab4d2372a3b408dbcdf164b2f08cdd493aefc76b3f03e08cda",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_early.frag.spv",
+        "sha256": "6136782548f2fe29bb9668ca42d12aa5b1f29209fab97e0188a0813c6b45c28a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_early_coverage.frag.spv",
+        "sha256": "f18ff27c8291019374b0fb3f020b16ba7d66bd6e94c3c8bc646feef9dc4c2ed7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_early_lighting.frag.spv",
+        "sha256": "55adfcf492fdb8ede80562ec0eb21e743a1d64dff40568bb3b364c255ffdbfcc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_early_lighting_coverage.frag.spv",
+        "sha256": "fa541c5b40bd7255fe8354a9c0b23154f10792d2d325f0d761859003dc52fdf5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_field.frag.spv",
+        "sha256": "908a0e73ba32ecdcc675c1297fa075a311802788e0d408ab97998e608ef8ef45",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_field_coverage.frag.spv",
+        "sha256": "946281134b80bc606f1c6ffea63998c3cbdbc5cffadfd40c08024d83149bea1d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_field_early.frag.spv",
+        "sha256": "71a962ce09e5c63480335120a62842d0df86f267543289893421db122fd19163",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_field_early_coverage.frag.spv",
+        "sha256": "5b81e6a0b385505da7003e22c9eb4038c8d0bb7a399da4f8ab8ee260237c5196",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_field_early_lighting.frag.spv",
+        "sha256": "9543a7ea1e6b14d754c32f923af5477c574ced90ded5fd52378a2921cf999e62",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_field_early_lighting_coverage.frag.spv",
+        "sha256": "afac1b74050c1b1d7a75ededaf5313f3397eddb1cb429eb8b9e581f7ee8e5ff4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_field_lighting.frag.spv",
+        "sha256": "2b7ee72c30a53c8c552a4045ddaa70eb2df7fd27a638ce218fc6a88b16e4f429",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_field_lighting_coverage.frag.spv",
+        "sha256": "4da4fbe9fdb9d6bdcb7bf67f2b9964146db1e05a66504414f0a97521b399a792",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_lighting.frag.spv",
+        "sha256": "5b402b00270dfc981d4ff8d1bb34683d029c8599ede818fee8d3d6f9a3d81ca8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_lighting_coverage.frag.spv",
+        "sha256": "fdf9b4a5e6a550ee2bd5f12c114105054c0002626786fcad9454da1459c57d37",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples.frag.spv",
+        "sha256": "a4ef47a576b68ee4d032c8c6b687b5cea69062c58e7df8089697d2e4f2707669",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_clipmap.frag.spv",
+        "sha256": "18bdd0d797f7c354894ac0be9cecbc21bc615de5e7bb14e4228668a495b91d41",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_clipmap_coverage.frag.spv",
+        "sha256": "9cd20236445450609d9a77a8171d1ce0f2ed14d8effd4a99f0addfd42b3ba133",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_clipmap_field.frag.spv",
+        "sha256": "b3b7e05a566f190a66b9052f481a4d214cb3def681e3168618c9f6138a9188b0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_clipmap_field_coverage.frag.spv",
+        "sha256": "27f554988f94800c25bc447bb9baadb82013deb20e237b33c83fc668f686fa84",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_clipmap_field_lighting.frag.spv",
+        "sha256": "8f47516af3bdcba6e25f2be06d83b4a00427be6ca12b5603b25976abd25c0682",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "35c1cc6f6db63ae46aa26af3fff1f4daa002414e74777878fbc60f6844c15068",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_clipmap_lighting.frag.spv",
+        "sha256": "b53fae3cc56e9bd613cfc9b14e6869b8e2329de526ce230ae2496af5004efbdc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_clipmap_lighting_coverage.frag.spv",
+        "sha256": "92a58f46b19c1c718bedbbf4516c072c174682a8b5a1de8a9e88f95d5d3c0cd0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_coverage.frag.spv",
+        "sha256": "62b68368eccabb6c81334312eaef116e080e97c351cb91eba955d673d5a1ddd9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_field.frag.spv",
+        "sha256": "5ed839bca0fd320f251ff67d0e834ce70e1f7f649b368ce97cdfe7dec89d3a3a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_field_coverage.frag.spv",
+        "sha256": "c7202daf6ab317d0a12502982397df732d169b7a5dc8f318f6bdc2e35acae731",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_field_lighting.frag.spv",
+        "sha256": "7b04ea4a87bc4e02f01b7bb534783fd0565e6d65d22e29f190bc2ed08e1f4ae5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_field_lighting_coverage.frag.spv",
+        "sha256": "e01714af1520878695d70c620bfb12d06051b1576fe06f4b221aaedfd7488206",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_lighting.frag.spv",
+        "sha256": "b6856321e39e1fd6b196eb3b7f6435dba7b781352b7466c04b1a4b0a55ee83d2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_bindless_samples_lighting_coverage.frag.spv",
+        "sha256": "3a3064594eeb279b1570aaee633f251fdd9f66d3937a4fd6a1a81a7d660f8e2f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap.frag.spv",
+        "sha256": "d73866e82125de8852f95bff83deadae1da3a4dee31e908fa5dda3b663116997",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_coverage.frag.spv",
+        "sha256": "82a26d2b18cdfd47d9fe3e67e2447eafb279e833296406b506188ce0afd08e28",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_early.frag.spv",
+        "sha256": "347d077519c9ab7a5037d8e839ddaef9b7c0b87d0538169dd4cc1c0fdf20f1a9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_early_coverage.frag.spv",
+        "sha256": "2d69cf45b0ce0a765d6930d8971c9a62f78e66a7adad8a30953d02cc9550653c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_early_lighting.frag.spv",
+        "sha256": "d3e8cd2710becbf78dab33e011be0ff9dc712cea1e24af6a7df50a44eafabb71",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_early_lighting_coverage.frag.spv",
+        "sha256": "5b6c223aaf6000b3f4556d4b8f8e090ce56b0e08c03ee7d6e92b090bf3c3b07d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_field.frag.spv",
+        "sha256": "b38512f5748c1a11714842ad004a5f936e4064db1680895186998dc83c4a595c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_field_coverage.frag.spv",
+        "sha256": "c5b5e982d877aa44d8b7f7a10313f6804d665d4b40e959d90c4fc41356044276",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_field_early.frag.spv",
+        "sha256": "9800798bdd2bc3b6c91d0c9100cdbe0316dfb6e6741110d25874e8b355b269bf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_field_early_coverage.frag.spv",
+        "sha256": "e6f3d9a504c8f0703a6d7a623f6db98a5165d3ffd2839a7cedc03e5acc24f2d5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_field_early_lighting.frag.spv",
+        "sha256": "f879be5286b35b6727321621ae8129bdd73f1960c79097199d17b5b46ad55f33",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_field_early_lighting_coverage.frag.spv",
+        "sha256": "6ccbb91490f722239ec9caa54aa8188a0ef6c652bb807ee80fcfdbb669d5e366",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_field_lighting.frag.spv",
+        "sha256": "d7fd5eafd65105b1605c2b858bbb5cfba2afee645f889983078d5704eb114e7f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "96d05755265a0691fe9d66513d67ecdee47bc905ea91a2e0a5c3ad4ca4c824a9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_lighting.frag.spv",
+        "sha256": "e878dff5307e224c2f59c642047952563d29c2a8e67e96d7df2c48e5864dd946",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_clipmap_lighting_coverage.frag.spv",
+        "sha256": "f33692ba86c212fe5006df9090b9dfdebac4330d4c401842d0ac55d57e698c46",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_coverage.frag.spv",
+        "sha256": "5b5b93ae6e21593ac796a3b5f955861d65a9afe84c7e83b955a0a245c0522c39",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth.frag.spv",
+        "sha256": "beee6901bfb65d8c04d09ff20df76f49ea80045f5c14816cc1ad76fb55baf8e1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth.vert.spv",
+        "sha256": "c25cf604b8499b2c0a44f6507f6489b9d125514e53576e673ab1bb36f4915cde",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_bindless.frag.spv",
+        "sha256": "29df8e5514677d7653f41cb339d3d03fe2589e86163675be3570dec9d1ff678d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_bindless_coverage.frag.spv",
+        "sha256": "9d22a7aa35d0a467e577ef4ee86d9bc85ced0514ec4776c3cbdf6c46b440218f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_bindless_samples.frag.spv",
+        "sha256": "67ed2047713fe1a1e60816978b6c3464102fa36feae97bf30ec0245ce2adf11c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_bindless_samples_coverage.frag.spv",
+        "sha256": "3187a2c12ce3279415a603fa27e7f636bfe1e9a6a6efb59a863c22cc0755ffff",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_compute.vert.spv",
+        "sha256": "580b4777a721c1f6646be2d9fe618ed44f6f4c4fdb6fae877aab233462e977d9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_coverage.frag.spv",
+        "sha256": "11e28ab1f7e98ddf03b3498710ddbec2ae73799fb92914ba36fcacffaf577dea",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_projected.vert.spv",
+        "sha256": "828bab25c700f0743d4123656b962cca317dc5a7ea54444d115998cbc2746063",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_projected_bindless.vert.spv",
+        "sha256": "d17b4339ccc35aee8e49fee8254c438406fde39234768dc60986cf1ef7c4a2fb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_projected_bindless_compute.vert.spv",
+        "sha256": "4f4ce9a20fe9a5260e50fe1da8361df243a8b96451a7f6bc8df9c8d1486129bc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_projected_compute.vert.spv",
+        "sha256": "ee8c177036eda1b224e98bb0fd2aac1eb95d55c40d1e711b9f4fbb27a7bb43ff",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_samples.frag.spv",
+        "sha256": "83ce6bc8a4e7cb98aef5022dfbb7f88aeeacf75dbdf4f778769c7eebfe92cab3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_depth_samples_coverage.frag.spv",
+        "sha256": "786dcc467e9a1417191573992b724b1555dc79b6f258bba69359812904279f49",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_early.frag.spv",
+        "sha256": "e2459b6104b852d6b2a6c18a7c0da3b48e4a7fae590b8d6150a80599a0487f53",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_early_coverage.frag.spv",
+        "sha256": "09f061f1ccbc20acbbf44ab77e2fff66a9959cebbd85b6d14342868a5a611943",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_early_lighting.frag.spv",
+        "sha256": "d0e1409dfa97b2de48ca1a0050c833a6338772ecb9ced55f4974827447f335da",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_early_lighting_coverage.frag.spv",
+        "sha256": "beb1796be5f688ce14feefacc2a5f6e80263b36d135562c3c0d2adbf1371588f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_field.frag.spv",
+        "sha256": "c424050c3cb75b4e8a65f6381e907f1d2935d0fe35afe779166bb1ebe267a2a8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_field_coverage.frag.spv",
+        "sha256": "e6838b63b274d280910b22840ee9dac2a4569814ef6e54e4d7581ba4fe57f6e9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_field_early.frag.spv",
+        "sha256": "9dc14b3937013395566c66991aa17a410555e1ccb7901c5576c8500b9e923018",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_field_early_coverage.frag.spv",
+        "sha256": "8bff11a3396674d70e46efde087aa6bf4a0c6b498b214127a1bc491e620dd6fb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_field_early_lighting.frag.spv",
+        "sha256": "54493d4744197f3d5ce8c561e7acbfc04e42f55b703366cb2f8c2e9e223347f7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_field_early_lighting_coverage.frag.spv",
+        "sha256": "8c8b170884199fef8722a2db1e675fd54cb83e42051853c8d18d475131cfda58",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_field_lighting.frag.spv",
+        "sha256": "ed9b7515025815acc9c943b6430d9e19dcc36f83cdc1c8f2c93b9298ff00daf4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_field_lighting_coverage.frag.spv",
+        "sha256": "b8d7c601c50d4144d1b6c9abb3d9c4e5bd76f1803297ebf65fa5bfae2a5f455d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral.frag.spv",
+        "sha256": "b01c2b51c6e1764caa20380b9222ba24a515857ccd8ec5e9924ab1cabcb3421e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless.frag.spv",
+        "sha256": "dd92143dc29173c731accb85e7230bc4fa582e4d7d6454d5db3ce3a75bd505f9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_clipmap.frag.spv",
+        "sha256": "5db4f626fe3544e34086cd36684bdb55ac8d2b4f0fbb0fcf77f9dc3dbf6d6a44",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_clipmap_coverage.frag.spv",
+        "sha256": "43b33108abacd6221352570bafd96e656ab0b38bfa59dd5a11e9eada024901e5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_clipmap_field.frag.spv",
+        "sha256": "5187340f2372b9eca3cb1257c097b62513302c14ef06eff1ef7a06cfc3fb0364",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_clipmap_field_coverage.frag.spv",
+        "sha256": "75cfca131636e32621462d5d690acb83e33389e2a3eb66814254e1524da75b79",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_clipmap_field_lighting.frag.spv",
+        "sha256": "8910c4a2c65756c346b992cce2d3c7873a0d6429359da1832077f1b84a36a626",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "450b4a2ef853fab75d7d4811af33a9c186d33b935b6d73f852c3130225f992c7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_clipmap_lighting.frag.spv",
+        "sha256": "3f252379dc594d6145aeb2e18af0d8d06f54d3d143126ec4b023d3164a00d71c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_clipmap_lighting_coverage.frag.spv",
+        "sha256": "9e7678eb009962f33b4225dc36ea9af643e845d60cd01ec82247982a4006802f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_coverage.frag.spv",
+        "sha256": "63490382dbf1317c0bb897ba627afd07449fa133b0b17613ad0ee45c6fccd3ae",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_field.frag.spv",
+        "sha256": "8a99f94aab83da3c2bf79866e7660fc552fde8bbdefd35e7180644eb98d824ff",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_field_coverage.frag.spv",
+        "sha256": "a651eeefcc6514c410cdb79fad43ed00fa69d5486b3046217d667a6d5d7812fc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_field_lighting.frag.spv",
+        "sha256": "755e6da9cac572bed888bc406c09185e5255987e7004d2e71b507d52faddfca5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_field_lighting_coverage.frag.spv",
+        "sha256": "663ee68cd16fa1ef357daf84e44aca9cb72e5fad870d93b24fb53b3d735d8dca",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_lighting.frag.spv",
+        "sha256": "a35bb9216a64ff6725d7d0670aa674805c11b8b6fe20d63e423cd18357e21e7c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_bindless_lighting_coverage.frag.spv",
+        "sha256": "5735f9e97596421dd76052a26f37577ec8152b76c8e6d2e89234b7afe0979a94",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_clipmap.frag.spv",
+        "sha256": "fffa3d45fb5fd9fb4158eb23830d81a5ef2ddfa37a84fefd0187ef6125913f0f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_clipmap_coverage.frag.spv",
+        "sha256": "dc2481a092f36ad7b974e1116bed73873320a3ee444af0d614640e93062199f7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_clipmap_field.frag.spv",
+        "sha256": "1b9d3d80a3134657749349cab72477f4dd26eb1976a1883110a7dd7652e5ebb7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_clipmap_field_coverage.frag.spv",
+        "sha256": "617e1a9b5b4800e690fd449dfeae54df9dd153ce480793df1b0322abd5db8459",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_clipmap_field_lighting.frag.spv",
+        "sha256": "5d3834fed47b051ebb69a7c567004b92d940ff1884535294be2bc5267797d0ed",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "c51a1c79860518b55c2be28a653dbc4454e1b57489abadec76814502d3b6a5bf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_clipmap_lighting.frag.spv",
+        "sha256": "76a0e087acb60ccf69f11d9d18ae7dc7f74bf6a4978ab7cb044f43d2071c1277",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_clipmap_lighting_coverage.frag.spv",
+        "sha256": "d39ac5a531cd5169d6a6a84fd97e2eb1b2f2db6574b4af29bdf256aed23a3d37",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_coverage.frag.spv",
+        "sha256": "7d482bfd303d8bda268576938a7660d1ee14e529881040cfca1a0b2665ac723c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_field.frag.spv",
+        "sha256": "365e7ca6c6e0d3b335c23b05912dc29353e953eb7fef9e0afef263cca341e225",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_field_coverage.frag.spv",
+        "sha256": "a0652db046f4c980ee37861ac71bacd4f96491eb178ce9f96590c9dff00266b5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_field_lighting.frag.spv",
+        "sha256": "fd8a73136b287b2c6c9b92859a6ca4d0bf593810a3cbe3c578581d819505745e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_field_lighting_coverage.frag.spv",
+        "sha256": "3b3a28f31b3ce9d9748d27967b93a941fa38fe37e1cd693c2437ec465e8db24b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_lighting.frag.spv",
+        "sha256": "51c432855d8946aa849d6f1ca34ce1d1a98c47a2c84690a1424e8f785d52cf0d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_lighting_coverage.frag.spv",
+        "sha256": "34e2ff12e01d6dded110d9f3ca774da8fbd19d8f757086ee5805fe7436fc63b5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object.frag.spv",
+        "sha256": "3c49f875f249c45eaa544ad4e617c0864d2ee7c6b3f2cba9095608d3551e8288",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless.frag.spv",
+        "sha256": "7c6bdf472945cc052c4b23af350467172dadbd1469c25ef11bf27e33572aaff1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_clipmap.frag.spv",
+        "sha256": "552786e405979417233ef2c47e3bfb142bcceb5756e9225ccdbf082ae11b7d23",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_clipmap_coverage.frag.spv",
+        "sha256": "4bd75cfaf972ae2ceaedbe1b65093de0ae28a2a9b89d32c8e289f79cf44d88af",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_clipmap_field.frag.spv",
+        "sha256": "c7fc1ebb4a08f1f9329ea106570baecc11bc5714be1d61527da793bf5ac72f6f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_clipmap_field_coverage.frag.spv",
+        "sha256": "0212ea39d5178d3f4cd3bdb3f3ffd8af05d0bb7840422a5c32bcb89af99755f7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_clipmap_field_lighting.frag.spv",
+        "sha256": "bd11451cae6a83a06c6609d086f7c33ea6aa9ab6fa7ffe847dfd6847aaacf5c1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "3678a7883afc8b7ace4fc605cdd633938cab086608365895b866653fd538fa44",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_clipmap_lighting.frag.spv",
+        "sha256": "21aa72f20e87108b54de50ad148687e06d4bc13d389d0f9fa4269b087c5a35d3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_clipmap_lighting_coverage.frag.spv",
+        "sha256": "f0cd313a286fb8638f198cc8014de6e75a9b51551351cd0a1ce1fdd1cc12c95b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_coverage.frag.spv",
+        "sha256": "830d1179d6574d2b750193126e87ca43dfaaa995e234c92f167318ce5caee53a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_field.frag.spv",
+        "sha256": "1366e35644e6b7914d6318859a7d4c4aefb7741e88a561cd7dd32bd71c31a4b4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_field_coverage.frag.spv",
+        "sha256": "b09e306a01e9c8a035c5c4eea3a954faf567fd1a8b888e4eb8ebb785e4bb72a0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_field_lighting.frag.spv",
+        "sha256": "73f05a7099789f0b326c835430c023b08dd5413c3902c024e1a0e69bd3a6b444",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_field_lighting_coverage.frag.spv",
+        "sha256": "9fb2474a44ed708a93b659bbc1dd4f3c174a63cfa1bf930857887a2e05e2ece4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_lighting.frag.spv",
+        "sha256": "baf00efda40c0c501904748f44e2fd990c2507c56761da75154942595c26273c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_bindless_lighting_coverage.frag.spv",
+        "sha256": "0e8e290274a2932c074167490d87078f6155d3c92f204780246ea073e922a3c0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_clipmap.frag.spv",
+        "sha256": "794921bb5f1f807503fee810ab81022efb6e72edb7a8229c3c7780c6d5cc9875",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_clipmap_coverage.frag.spv",
+        "sha256": "a6155eaea97179fac376112a75b0875d30e73ebb9d9369c036bd521d0e3b2f9c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_clipmap_field.frag.spv",
+        "sha256": "25bbec1bd9cf79f5a83f676f1ece568e7fa9b630c8cb8d0160aded6cf3eb8f7b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_clipmap_field_coverage.frag.spv",
+        "sha256": "d03277caa4225b6c5c3cd8d68988bca8c9825fac6d29da4b0ce74f3514063f76",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_clipmap_field_lighting.frag.spv",
+        "sha256": "0bcc680b27ead7b3b2b5d36ff2887832ced0e3fa999dd896040e818c1fa10a16",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "9bba581944f446cc47f8a976a5e42c2d3e13d4a89fb8ecb9bf974f8ec399792a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_clipmap_lighting.frag.spv",
+        "sha256": "aab50933e73a1d4e1a9a39a46e1ca4307109a8a00e1111e44c80399b5309a02c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_clipmap_lighting_coverage.frag.spv",
+        "sha256": "e43b9e57258ef8ebcc3eed3986829ac3acbd208c61388265f1c50f7d8ad0eb68",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_coverage.frag.spv",
+        "sha256": "9cb0964c766125e08c0067f7065589d5df2a2c579b86b8452b486ca9ce691cdf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_field.frag.spv",
+        "sha256": "e47a37c56886e93e850ed9baaff700efca993cc671fd6d538d1b174a26ec33d5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_field_coverage.frag.spv",
+        "sha256": "1858263051d5cd8ed454c4e7ed8a6ef5ba01b0a7d27c7242c2d191888233254a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_field_lighting.frag.spv",
+        "sha256": "c7293f91cee0b9fe97314002909d8d8dcc2b5576585b24534439fba079f03dcc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_field_lighting_coverage.frag.spv",
+        "sha256": "1e7b91f5486370359430408e05c234ac5b9fc54850eb20660b362905ae648e45",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_lighting.frag.spv",
+        "sha256": "07d3b44661430ce570fa6a61650adfe1680676f20605aad3dcc328082ab6e3f5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_integral_object_lighting_coverage.frag.spv",
+        "sha256": "25a309fd695a4e4172a4f2f6dd340e257131aa6163867e7aee0e0511eb4e2521",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_lighting.frag.spv",
+        "sha256": "5dd30ca7d330358d05a228e8114a4d8c2251c9664a41cf0a921a52267c87e7a0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_lighting_coverage.frag.spv",
+        "sha256": "4bed20eea07e6944573dcf3af727beaf89cc0f5045a3ecc20cebf556f6aa5306",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object.frag.spv",
+        "sha256": "6a273a13704a8c97322b6f87ab92227bc859d638311c35bc48403b5ff708f7dd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless.frag.spv",
+        "sha256": "a2e88a30f9b682f5e985096a32ae52a3040229feb5797a88e7992e398d7a0df8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap.frag.spv",
+        "sha256": "0f2cb8a2bd3f3893e447c258dcadfb46e74b0e23f0f41b56d013df8adc0ae3d6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_coverage.frag.spv",
+        "sha256": "41e087f9fef026340ed45d346f137969a03338eda979c0743cec51eecee2de03",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_early.frag.spv",
+        "sha256": "bc7b6d5766a1a607f6a7b759dcc5478ba0581f19449c29ba02f1b3d9d2437bfd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_early_coverage.frag.spv",
+        "sha256": "d8692ca2049460adffd0da2cfa3cce3bab932d45895cf4413ef55753f01c84ff",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_early_lighting.frag.spv",
+        "sha256": "a83ae2da208b19d146461589d894ca5829a58d56efa6b9eced6c198ed2f6a55a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_early_lighting_coverage.frag.spv",
+        "sha256": "2be1c1ee8c4f968e90138a628dfd987ff005fe54c8e5156868926c4a33943add",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+        "sha256": "3f17a6a3f196e86b93b9fd6a55d04b8cdcf113d2689d276ee7203d07ccbf64ed",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+        "sha256": "221662c903c45bad65f97a06f1defb90def8c6823965383ada8710a35767d39b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+        "sha256": "c67ddfb2b64b71987735d37e8542b07be4d1d67d19422fb94a97853b2e7683a7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_field_early_coverage.frag.spv",
+        "sha256": "5a7f4eba15079d07ca058fa396b549dea3e79a9fc3b7e25a2d825c099546731c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+        "sha256": "90f5d1ebd4ddb3489b5076f385c5149b5ba4a8a1de0a6af921e159201ad01164",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_field_early_lighting_coverage.frag.spv",
+        "sha256": "a34bc8bc2a351b32d216e5cce0a2a889baf699c15218bac091a806f1e4ab6829",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_field_lighting.frag.spv",
+        "sha256": "cfac5d5eee60602e505d3f2b2411221cce23aefd4d82da9c654d33a760fb8828",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "cc9054e29d17e4c39f1388d654a0259ddc4ae0fda2ad15f512b73f6a7ad1c343",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_lighting.frag.spv",
+        "sha256": "a6833f1469d48f17675550a2b789426402daf3d67280c43be918afd66e23eb2e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_clipmap_lighting_coverage.frag.spv",
+        "sha256": "6677e37d56b28bc48cfc840a84d8138e6f3e38757ec33822480f3a86828c0876",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_coverage.frag.spv",
+        "sha256": "009f8a9c6b2cea6ef6ff1e10eb7e156e6656c0dab16d63b15b5c365dd266fa57",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_early.frag.spv",
+        "sha256": "f16dca3e1157885f2809eecabc6f1cf6018fe7948d3b538f589fa221922fc985",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_early_coverage.frag.spv",
+        "sha256": "32f70a48b4e783b0ec54f656bcf9c767dee7701ac152318c79cff836981a8437",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_early_lighting.frag.spv",
+        "sha256": "897c63b1d0ba831c8f17c0582f9b8c8e0a1b88704087cd4b42af0eb5c600cc83",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_early_lighting_coverage.frag.spv",
+        "sha256": "4b23bfbc9766233fcc4cb28da463d0926bc4441c428533667e934c6ce3a745f8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_field.frag.spv",
+        "sha256": "2e3ec91d2dbe80f543343859e4fd561faf31901c99779b020a8da02ab30c6347",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_field_coverage.frag.spv",
+        "sha256": "a5b25c016c27b2a2d69f446de017b5e57fe7959e0a856587d66520d01c1217af",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_field_early.frag.spv",
+        "sha256": "305d30f09f6799dbce538d2a5b69ba3179ea20ca6cb89c8867c38e45247177cf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_field_early_coverage.frag.spv",
+        "sha256": "59f4b4bd90eb7b32c6485bc73825bb4178dc10f096a25fa9d11d65ee10987b08",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_field_early_lighting.frag.spv",
+        "sha256": "d713ea7bf48e175e2dbbd6e9c46630cfb415e5f282084d0ebb96d888ef539717",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_field_early_lighting_coverage.frag.spv",
+        "sha256": "470d7aad60d30ef4f3d67f3802060d35af75c3629ff84a14aa32862479464267",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_field_lighting.frag.spv",
+        "sha256": "b0a575cda6f158244f8e60b5c09303f88950ab34e990fcb86322c45f9fc9288c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_field_lighting_coverage.frag.spv",
+        "sha256": "d3980a15b4895f9102064743a623c45277ca0a8a6d0567bb88515b360cdce2c4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_lighting.frag.spv",
+        "sha256": "6000ee3fa7748329b3acd5fcfa0d98c1dde8ef55b56dc3b29cfb0d32e606b36d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_lighting_coverage.frag.spv",
+        "sha256": "0cdad27cc2e80ab4533a11de0c22da9f898d1bf5bbf91c18f746ad2dbbeb4864",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples.frag.spv",
+        "sha256": "8f941b61245d718daa367d9fe3619ed998760d14b8c739c26c8834c47079f5ee",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_clipmap.frag.spv",
+        "sha256": "67a4347939a048faeaef245cd45d5c10b153c3d2ca92386b8f9275fa79375d26",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_clipmap_coverage.frag.spv",
+        "sha256": "ff67e16dd7e8ea775953668d2802561ea90195068b55ce7540916ad6688b8363",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_clipmap_field.frag.spv",
+        "sha256": "36dddbc581d1d7766af2a4ffddb5c3096044c82a0b20568bb0a8b167ce35b58c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_clipmap_field_coverage.frag.spv",
+        "sha256": "c9e31573d1b56aef1b1c537498d4fbd8df2515fc5ce0a436ed529c8fbf91d429",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_clipmap_field_lighting.frag.spv",
+        "sha256": "210c169bd4160bbdac2b7e3ad891070610380615716e8a48d23a073bb3f0ee5c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "27a7811f648d174bc9ba401861f507903bc4bdcb0e6f412c872680b9d823ace1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_clipmap_lighting.frag.spv",
+        "sha256": "ac75d706248c3da8241184f8fb27b7c5a14fd359dcb07ab56941b73c6dc6ad30",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_clipmap_lighting_coverage.frag.spv",
+        "sha256": "e0b818201fa46cc26c6491e10d03b7a09918d288ecd7b2ab008ccdced9b5f2bd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_coverage.frag.spv",
+        "sha256": "66c6beafe6a76273dff97715fe339a4860bb6452ae907746bc2533add509756c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_field.frag.spv",
+        "sha256": "19ba8d6f3e0e1f9a28bd3d690981034728e0a082ffc537fd98d7917172628433",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_field_coverage.frag.spv",
+        "sha256": "cab0f5ef83bc066bec9c18a60ab75cbdd9a5db3903cf8a44917ade23edb52e9f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_field_lighting.frag.spv",
+        "sha256": "f036112ff79d020053f9ceca6c825cf9ed3e45b90f1e2611386dd2fc3ef161b8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_field_lighting_coverage.frag.spv",
+        "sha256": "31d7a8aa54a24562c31798b0798a7c4b9592a41915977f214ba14b9da1b3e1dd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_lighting.frag.spv",
+        "sha256": "56efe5135ad2dc33072e7e6f34253b144eaea9bbdf0513229b5d65d554a256a5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_bindless_samples_lighting_coverage.frag.spv",
+        "sha256": "7c4075f01919b06a10f7e187a25d2cf6a7a896b98dc737c0e86342265bee0d81",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap.frag.spv",
+        "sha256": "7da0bdfb8245d663a9388cc90f25065a7395e5484080ad3c13f1599e64eab2e3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_coverage.frag.spv",
+        "sha256": "4586ce8af461a7630ced948c62cd83ada6b3ada28cc6f706bcc3ed188151ce12",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_early.frag.spv",
+        "sha256": "00900e103547e55001afd59f7a0e66870efc60df95b97c50f585bca3d5c1331b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_early_coverage.frag.spv",
+        "sha256": "c4bca07690e7b5db3660dbd4b61021a6e0495ed7abc63410d500c200de6718c9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_early_lighting.frag.spv",
+        "sha256": "d981ceedff612fbbafed7c535abb2e57dfb1050e3c1bc9f2830b452c42d8d323",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_early_lighting_coverage.frag.spv",
+        "sha256": "9a6f306ec6a3c26e62e3697c9877856d478b046339e96d9b3f1b752a66820919",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_field.frag.spv",
+        "sha256": "bb0f341eade3bc9b3b74254c2bc95c31beecbbd6cea85a3a0daa4064ab819eb2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_field_coverage.frag.spv",
+        "sha256": "036429f1984a0a65cf66f3cd14993c66b1fb17e2b4e134cbe31d494502986540",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_field_early.frag.spv",
+        "sha256": "c6d805ef5ffbd56f10207c65912564dd80c369487321a66455278358f3883c98",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_field_early_coverage.frag.spv",
+        "sha256": "88cca97ac98721ba4f9ce44ba9f27abe673e9070065a166d0bc120a914db93ff",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_field_early_lighting.frag.spv",
+        "sha256": "0eb551cc4b7d8f6e97b1563fbee9a3b2b270ebe22fee8b013ccd8c3e6e0cc229",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_field_early_lighting_coverage.frag.spv",
+        "sha256": "1426229a6ebaa8bba9d472b1f0ed5a9599b15d771cdea9a7be280147342c81c7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_field_lighting.frag.spv",
+        "sha256": "64edbda2d1cafd3d0f4ea5554756cdc4043e0146254ba5346ba9987afb24e959",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "d54b99b30ebf11476d677cd8ad40e2032e5c98bb36ed29b0c998cf487a9f1416",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_lighting.frag.spv",
+        "sha256": "e44eb11a7b0b6a534ff4294079561fabc163abcea3397e2db3faadf0b2e95581",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_clipmap_lighting_coverage.frag.spv",
+        "sha256": "9614d379551a862efd7c248927a47552c4cfe33ce2316b13d18390a2d1384e81",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_coverage.frag.spv",
+        "sha256": "26b2cc943f7f9bb8ed7f0041ca5f19c8e4ef945a09f7938f9d5e95933cd0c6e1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_early.frag.spv",
+        "sha256": "45f09eda501849ec814c98bcc53be71910fd645a607468fd53a107775c5f74a5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_early_coverage.frag.spv",
+        "sha256": "2bc84735f9fb2cc65607876cbdb286f4bf20c73344d9ed011b5abfb1bbef67ce",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_early_lighting.frag.spv",
+        "sha256": "02fe260802a863811e14e7775311bef7a926514ff38ef181ff1f0b436f43dba8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_early_lighting_coverage.frag.spv",
+        "sha256": "55acc36ed384b8e17c482e0d31701ace150bf799b304051b9fe5642ca5955410",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_field.frag.spv",
+        "sha256": "6764df4333f1222a10b128fe752c4de920f7db3ebc8e5a6537f0112d450484ed",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_field_coverage.frag.spv",
+        "sha256": "0c3889b1dd87169a9540258b7016b7a39cbdbfb693802f485ca4f8a205f4a5ea",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_field_early.frag.spv",
+        "sha256": "e724d64a8dbf5967d3459bddfe067632df7019ab885ff17e81adab3029bcc855",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_field_early_coverage.frag.spv",
+        "sha256": "3eca38de97bbdac6372f437bfedde1a345d9283c5e7234c63adf8ffe256e2575",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_field_early_lighting.frag.spv",
+        "sha256": "fb1449f695b4b6c095c0f211feb1cb0c978c7cbf874ca58ccd5792b7ab9d8b08",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_field_early_lighting_coverage.frag.spv",
+        "sha256": "209d28b1ee1c679599b6c3f40f50379677c7d2b7f33fd368d4f7b2a9a19127f5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_field_lighting.frag.spv",
+        "sha256": "34e47cecbcaac91c9a46e0d7110efb163f7f8989b45c3d6e7457966be2154841",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_field_lighting_coverage.frag.spv",
+        "sha256": "93b0cbb0d647d26abffbbd1cfa9cca49c28c4922c3500576f1f5e249acf97449",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_lighting.frag.spv",
+        "sha256": "6c60bc73b07a868742185f59fb91e441a8cd013b161dd5994c24608c450e58cb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_lighting_coverage.frag.spv",
+        "sha256": "23a3bd280de6c7266d463021315b6eae5b487ab4ecf68b6f2f5c5baa3dc6b249",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples.frag.spv",
+        "sha256": "da37c22c59ae5396d3ecadef48977b48496c04ff1424b1869349ced67fb62948",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_clipmap.frag.spv",
+        "sha256": "3235db91ccbb38c5162be616287b15cb799b3d5c958e82a4640f56d0706df533",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_clipmap_coverage.frag.spv",
+        "sha256": "1d57ab0c09a8666e64d27875f1d53902cabf88268f4cd3a292a330da497643f4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_clipmap_field.frag.spv",
+        "sha256": "b0962d34a95032e0d8635ae361d94ed786b52f37716c8dcda56e347744f528bf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_clipmap_field_coverage.frag.spv",
+        "sha256": "577696beb2a1693a82b1230ab7a6ff9552f9f63e59bc3c5b1edf394790d7a207",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_clipmap_field_lighting.frag.spv",
+        "sha256": "7192084dffd9b839a82350d952bf22abf1acb92c95412d2d6bba8138f492b533",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "95bd93ad4dd4ab70d23ca1ed3d532544dd00e836d06af84b2e79f058e3614a0f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_clipmap_lighting.frag.spv",
+        "sha256": "42955db74c74707dac961160e45e03b62072cbbfd48f756f615528ce04db6075",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_clipmap_lighting_coverage.frag.spv",
+        "sha256": "c8c85a2b5fc605e90b56f7068aabd9a165b52ab1befa9b80215c40e913646135",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_coverage.frag.spv",
+        "sha256": "dd48ac9d666eae5b7434f514baa198b12e669f452d1c9bd1121774911c5ecbfa",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_field.frag.spv",
+        "sha256": "4b6edd99fb574ae55c0fd3293605cc397712f033f90bb53bcdd828f54756b87d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_field_coverage.frag.spv",
+        "sha256": "d395e72ace6b2b512ad9dbf5c4195cae048d25d9788215dceef9d2d73c43eaca",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_field_lighting.frag.spv",
+        "sha256": "f2f728a5148c23b88f1e00f6772e898b6c29075d25790fd6e301796671d8acbc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_field_lighting_coverage.frag.spv",
+        "sha256": "39bc9aefb68bcf02b6dacdfc52d06bd4c41d98a84d393840c15e7d7c6c1613f1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_lighting.frag.spv",
+        "sha256": "aafbcfc3af1c3371aad43d28ce0a943fc6817b6608c911008d5ee8192d349c78",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_object_samples_lighting_coverage.frag.spv",
+        "sha256": "bc8397a7389cc78221f779385ed996ac7c2198054eaf7054dbc089adfee5b5c6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples.frag.spv",
+        "sha256": "a98d87700e0518776e733d2f5b64440dc830a30fb5f40b2be3616ae77074061d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_clipmap.frag.spv",
+        "sha256": "4d1a22a30dc71b2f659b2afdbd106850f0d21527d37482a1b05176aecc94528d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_clipmap_coverage.frag.spv",
+        "sha256": "3634a16a435dbe292bf50e9b8476b3868cfefae4cdf4196f629fac71ee1ec140",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_clipmap_field.frag.spv",
+        "sha256": "58d5192281d50a14ae6797b43ffa5c9b13723fd8571a1ed5ed8106b89b167585",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_clipmap_field_coverage.frag.spv",
+        "sha256": "9d37f60df13b10b8a81b042628c9e829c4d4c1395627e87a9609d3943f3abc7d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_clipmap_field_lighting.frag.spv",
+        "sha256": "482b892f1a50b0674cb1c52bafdaa398c23329501be2e574f48262cc3b5d73cc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "0f313f5e914be3dd5c504177a023dc658b44dba101eabe046f485271b764d563",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_clipmap_lighting.frag.spv",
+        "sha256": "828f09852b4bd6c38f21a7a7c74d88ddf5a17a7e6d3925fd094f0bd4bcce53ba",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_clipmap_lighting_coverage.frag.spv",
+        "sha256": "56ab3b367c783f6682dc94917300f173a312bcb0920d07dcc40f614cc3588a8f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_coverage.frag.spv",
+        "sha256": "7fdf833caa2c23aee195b34acd2f8855bce12906463614034c2726ff8b8fa414",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_field.frag.spv",
+        "sha256": "eaa8b696e3ebf0a26d8cae5b9e1801c67b1ba7d0c220619490cbe2db0d5d0af9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_field_coverage.frag.spv",
+        "sha256": "f4f59ad54bd93fa3c747051e186ed78f9fd544a9f0e788c3597a595be06b08e6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_field_lighting.frag.spv",
+        "sha256": "03a117d2e7659b26e2db918c03a9e74f1b09fe84987f38d2c662b2d65e07b9c7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_field_lighting_coverage.frag.spv",
+        "sha256": "a808c0628bbc5eb6360428fb48b4896d9d6fd9a24ce9768178d79b580527333a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_lighting.frag.spv",
+        "sha256": "f37d6d73a42abfd48036b0326157131c5d2502e6fee5fa242974b7b947d0feec",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "character_snapshot_samples_lighting_coverage.frag.spv",
+        "sha256": "4bd042e5e4095bb26266cee1368d470c8e30a4a1f3beeab11825d80aa2bc94fe",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "clear.comp.spv",
+        "sha256": "fa902403d0ae0b70563b4571688a0cabc410d3b4da0278ec6e32222c301c0ce3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "color_grading_lut_test.comp.spv",
+        "sha256": "8cdffed8758f0d2d9e753217eacb1e4600156291fdefcb830177a3c0b03f9447",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "cull_indirect.comp.spv",
+        "sha256": "a314aafe93450c5c5d9a5d913dd3456af9dc2634cef20fa2092cab1330f3c78a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "depth_bias_test.frag.spv",
+        "sha256": "d3a2d3f4239115d2744fc926736df58c11ab517e1522946d23e28408a821ccd9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "depth_pyramid.comp.spv",
+        "sha256": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "editor_ui.frag.spv",
+        "sha256": "3d2b5d4e1dfcb94e4a03f9edb4567972e7aa6e0a15661e39c0c90b66705f5550",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "editor_ui_srgb.frag.spv",
+        "sha256": "319d2544c231bef78bfa4d1ac5189fe31f53ad56bafa2f3442d64fe5de6a636b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "game-ui.frag.spv",
+        "sha256": "c7b3d1f0e07f514ca9055f83c04ba597fe2d52814949f91c2910f6bd2ecb484e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "game-ui.vert.spv",
+        "sha256": "0da6a7c7f26037e9eb7648f345e542c696d13015481ceb1a0f53044ee3551ca2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "hud.frag.spv",
+        "sha256": "0bef0e2184166951acbfadf7880304a1e9fe2976b78e76a95e01522f42d4cc73",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "hud.vert.spv",
+        "sha256": "586bca98eee248baa5ae2cbd33fc708c2c31e98b7065a65bf0d56e0fddf12789",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "ibl_prefilter.comp.spv",
+        "sha256": "445de8f59ba1a554c72fbafb6160ad340be03660f8d80b55ff07b5a20c506510",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "inner_outline.frag.spv",
+        "sha256": "20410105e596c990da8d11de6388b523a7b95c5c34d8a6c82c0a4a2a6acbde75",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "inner_outline.vert.spv",
+        "sha256": "04987f5816e3d12899729b79be274423bce370ceaf1014d9b26585d786d5d08f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "irradiance_clipmap_test.comp.spv",
+        "sha256": "18327769bd6bfc0fc9ce5274060e267fab85edea147a7d7076642b910bc926d5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "irradiance_query_test.comp.spv",
+        "sha256": "bd2ceb9f86c3a14a99b71945b8b7394a34a93239246310a16df997d392655553",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh.frag.spv",
+        "sha256": "8308652db81d2138b770fa6fa134ceeddf85afa06efaf545c14338ef1c1f56c1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh.vert.spv",
+        "sha256": "813283b39cb948a389b3fa674396df792bb88ed5cd481002bb6bd5a18d7bb84a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless.frag.spv",
+        "sha256": "983f8f0157c1ad0933126e7d186c77e79b5c75a440e0f7d66b25f54accf3e817",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap.frag.spv",
+        "sha256": "2b578f5b1459b85ffd9ba84998a4cfcf261e57bd8dd104dec32c0cd406589c2c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_coverage.frag.spv",
+        "sha256": "fe92c2fd37dac3c7bf797d62369f736e8fa7414291d9f61855b4f6174d894c67",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_early.frag.spv",
+        "sha256": "ebc4e51c00b04ddcf6525ef7df9d31d4d7c658c6abcb9b6dfd6cb9437b729c3d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_early_coverage.frag.spv",
+        "sha256": "169e48211a771719d0aafe7f93c48a436220ee27cca52c403a15fd02c795ab39",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_early_lighting.frag.spv",
+        "sha256": "911b7cafe5d57e58c293febc6154f7cb4ae259cd7225fa3c2070c9f5a75d2d9e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_early_lighting_coverage.frag.spv",
+        "sha256": "ff170c48170688f74e45559c15b1de69051ccb5f9a3b7700b45833358e0ac915",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_field.frag.spv",
+        "sha256": "cd994c0eadd4d00eb6d93a8e7a5d56434ea2193e3d7d177b5565236ca8c8d201",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_field_coverage.frag.spv",
+        "sha256": "ed2063118f16dc1659deea19f08465c15139cce962ef8dee62f2802c8c1e678d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_field_early.frag.spv",
+        "sha256": "a35a3837d3de1910c94bfe435cf3b7c2cf6ab6cd634203d8bf044a1a96d969c5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_field_early_coverage.frag.spv",
+        "sha256": "4de07db4a3d861a1dd8145b6387b741e844e1b25f515826d542eb05511fb0ca9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_field_early_lighting.frag.spv",
+        "sha256": "2a7bf387f7f50e5615447e7f22b839a7377b0a2ea29198ea88c0f61839d87c6f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_field_early_lighting_coverage.frag.spv",
+        "sha256": "0673776279c3a1bcbc9b9eebb513d2d73979571fd9c9f763e0f5147a6ed3de10",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_field_lighting.frag.spv",
+        "sha256": "a3c2653d461d5de85bbf63c02ec76ad58340394f853d7a066d64c02a88ede908",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "14afea42aa2d17222379c56ddb4e8c2121c9e1fbcb8a7a43e9e004d7cdb77872",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_lighting.frag.spv",
+        "sha256": "ac3943d63965910ccd8852d22657b8969d849ae1063b0b4ff49e2251d4f1cb3a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_clipmap_lighting_coverage.frag.spv",
+        "sha256": "91dc5a4e88e59c96a82cc41b2596f45ae8051e4cb18b7238065ce96e7131428e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_coverage.frag.spv",
+        "sha256": "5b0c7797b739416e0e9e3dd0a05c6eac333303e4b94868dcc4e16b9fb2611929",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_early.frag.spv",
+        "sha256": "be114c33614481f064eb26a5061e1c5aad81e830e2f5a3fc21f898bbbb95233d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_early_coverage.frag.spv",
+        "sha256": "05321659ce4bbcb9c360208292bfcd714362bd945cbc0ba663f2da68af562bd9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_early_lighting.frag.spv",
+        "sha256": "c5ef4eeafb1ab330e53fa22ea5e36ce41b2ca78e97010cd2f7b37086ae580a60",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_early_lighting_coverage.frag.spv",
+        "sha256": "1f66909cd4297e6330442da7f8ba750e2230099d8230cdc93b0335c3f3982b56",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_field.frag.spv",
+        "sha256": "49b0c1ee5cb4328dba3f019c147c0c4943a1d0ec05c8b15aa28368b3349b3e6a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_field_coverage.frag.spv",
+        "sha256": "b1ff36d6cfe4d742aa0bbdabbc21a0402dec816e34be408f2a0d334e2578dd3d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_field_early.frag.spv",
+        "sha256": "d9eff4b4d97f1492e546cf97b41c014a89af892fea485e85ba4b9c53127bc91b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_field_early_coverage.frag.spv",
+        "sha256": "360ccddf1bed2ce2ce73483513288344b3e00dbccedd3fc7e4471aec97d88050",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_field_early_lighting.frag.spv",
+        "sha256": "3c1f13f59e837fd7becabf1ec47e016edde5cb8bd154649a7ee2136e0b44842a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_field_early_lighting_coverage.frag.spv",
+        "sha256": "b2156c7e75682c42422b485036cdd3ec7ec826e9922487a9ec1f77984c748ae7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_field_lighting.frag.spv",
+        "sha256": "70bea69b3a5dc8b8286c0a380c7a660f0462edab37df2102577cc4a4667c7e2a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_field_lighting_coverage.frag.spv",
+        "sha256": "b1cb970a7a2bad9cabe9c993175c0cce4dcaca757b57882425450d05a8a4261f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_lighting.frag.spv",
+        "sha256": "c66b3ebc102470ad1b872cf14cd590b3abc070999ad6f27992a9fefc0de54a41",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_lighting_coverage.frag.spv",
+        "sha256": "bc8e2f731761efb4dc2904842630bde8af0f69583b154179d81bda2978600cc4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples.frag.spv",
+        "sha256": "e6171865640e08e569ce4cd20285480b17bab7e5cbd462009651b8012055164f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_clipmap.frag.spv",
+        "sha256": "f76508191cc0ed6df116436df0c6fac669cbcd3417414c493523f527bd4bcef5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_clipmap_coverage.frag.spv",
+        "sha256": "406593cfeb33e8190e8a690c3092e9b27bae25415b0c5b462a66a5509643e343",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_clipmap_field.frag.spv",
+        "sha256": "d4e95d430841b7d590c7ec225313aaef2a8c64db5ff8301a2fb10d0245ced3b3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_clipmap_field_coverage.frag.spv",
+        "sha256": "b135870910eb2f581d870897b34e9880482204eb86696ea84da6ce9f230cec2e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_clipmap_field_lighting.frag.spv",
+        "sha256": "5bcadd8ee27a629019be96de5d2bac135c1151e9d88a6bf886452f60dc814cff",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "5d083eb78899fab3c2c009e3df716d5708a95c786f2ae17670f36a9f8887c83a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_clipmap_lighting.frag.spv",
+        "sha256": "66edbd7762774b18fac068181f7713c51ac4885012d16a3c4d44e59d110be6a5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_clipmap_lighting_coverage.frag.spv",
+        "sha256": "43b288b92b9d43ff9ae25988bdfea1d99d0597ef3de52a23f130c8140332ebe7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_coverage.frag.spv",
+        "sha256": "5ff36c8db4892a4114b1c9402c16a6db8bbf984cd1142f8a95d8202237deaa8b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_field.frag.spv",
+        "sha256": "a9a33cd80ffb40b2d0a7134ff04a316cf4e6057d0158239a8414b81ee64b13e7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_field_coverage.frag.spv",
+        "sha256": "0d876d1f9c6add6c951ed6d9f552880d731394349ccdce5d7fd5e6907a05a3aa",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_field_lighting.frag.spv",
+        "sha256": "5b974405a5dfdfe82274f4c3bcbbb95f56b4f48964d1daebf2c8fee69cbd9178",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_field_lighting_coverage.frag.spv",
+        "sha256": "48edd0117a590a2f943d30bf2e47757e9ca81c0a45d4fea6995d0230dde704b7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_lighting.frag.spv",
+        "sha256": "13e6bd206c816ee51424859afbf03c8f466753daf55cb14cd9159920e422b92d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_bindless_samples_lighting_coverage.frag.spv",
+        "sha256": "087d89a965f4f5de178ab7bce9356146e3f533e915aa875d7a26d71f49ea8322",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap.frag.spv",
+        "sha256": "7ab294f0e9aed828fc288a71ec91e9079fe0a83fd4afd1bf2941686761912b4f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_coverage.frag.spv",
+        "sha256": "87b6e0c70c7f7cf07b220245cad402e0ed58a4c8157f1d832b27936d022f703b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_early.frag.spv",
+        "sha256": "3d57db9b455e8093148108243cfd67db5c15538b2fd66e772f7f42641121670c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_early_coverage.frag.spv",
+        "sha256": "78925722f8b6e208856562de8ecc85c3a83cd9f6978d140e489778a12a4f5b13",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_early_lighting.frag.spv",
+        "sha256": "6d52e335cc7cbfd30c1daedb95554b268599aa58f4ac423b4090828f377516ea",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_early_lighting_coverage.frag.spv",
+        "sha256": "4b153ebc7fcd6f8405c01dba17f72a836666ecc1c7430826da8382fc187b5638",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_field.frag.spv",
+        "sha256": "2becec5b6e325f5057d5ef153548a4b640333544e51d3fc12b0ac0bddb082eb6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_field_coverage.frag.spv",
+        "sha256": "660faca7dd39a2b5caeeedf47f45f5d8b200550bbb1ed0c1545b10301cfa6f3a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_field_early.frag.spv",
+        "sha256": "331b2f748715f5a52eedf1f8e56eec8e60b84437e80133fa1dbb65c4e5f0d1bd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_field_early_coverage.frag.spv",
+        "sha256": "c5546439f85a0a24482f9e1e0b6d905fd0a3787dcc5845a36271042ae318da90",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_field_early_lighting.frag.spv",
+        "sha256": "6b4dfbc1a2445dd3b9137cad1ca2957101d77fb8762006da0614aa234d04ee4d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_field_early_lighting_coverage.frag.spv",
+        "sha256": "8646d5f3862d65833dea260d7447c50a8d7abd4e42785d377f1f14593bf06c87",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_field_lighting.frag.spv",
+        "sha256": "c863c203bc245afd150b674fc97f01fcc0e4d4cd77b7c6cc1304dc52db3a06cd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "249d271e0d1cec56e04277c36d2de2b421c3ec353a0d5342ba09bc97d2435939",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_lighting.frag.spv",
+        "sha256": "54e42a7ef6c8cd3b297539c2d6f582b56ac3491d7ca58c2763577e03c45dff59",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_clipmap_lighting_coverage.frag.spv",
+        "sha256": "2d7090d9b54e88472ac33ee600e57627b5f7fc0b79f45e3d89fcfacb565b2a88",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_compute.vert.spv",
+        "sha256": "bb6f4d819030f26b041375782b49fe3142e1ed92acf02bda6805b0984533a550",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_coverage.frag.spv",
+        "sha256": "129bf72b532e7a5c113e2464c31d5b35a79c6faf369f51f2662f98f6bc40deb9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_early.frag.spv",
+        "sha256": "4d5f292b123f57e0082cf714cca867f41dee40b6e479db51bdd193304dca1733",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_early_coverage.frag.spv",
+        "sha256": "0b80d54a5fc00c326968d59c8a662d6aadfb35f8ab0734b71eb9944b5943f085",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_early_lighting.frag.spv",
+        "sha256": "ee1315ae1391f7ad68528c4a264d879eec19022ec91b7a45b47bb613dc64d6d9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_early_lighting_coverage.frag.spv",
+        "sha256": "6647fc085c79aa976f8364f88c5e76cd97b1744a1fc5fab16221d64df5b1f3d3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_field.frag.spv",
+        "sha256": "8911b74f90738141afa4e72940efa4a8ffd5d3aeb8e22b547ff5e71820a02609",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_field_coverage.frag.spv",
+        "sha256": "628d51fe98704506d02fbcc0fb9157aafc34f9ab67b26286dfe98e7b7e01e731",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_field_early.frag.spv",
+        "sha256": "452568bd9d48b38e5cdcb7c7e4e3eaa2e5ffbe482f4c6ad351d1959b012cdcfd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_field_early_coverage.frag.spv",
+        "sha256": "7e6243cf6fbc3adc78446b2b0d1144f74cf18a1698839001ca9a314ec838b1d9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_field_early_lighting.frag.spv",
+        "sha256": "e13e51bd5c3f8a9e2f11c14fa2a46f9b14210e962e5443882df056e33053efce",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_field_early_lighting_coverage.frag.spv",
+        "sha256": "eaadb2c0bc86d9234b2617d778708f9d1d84024aaa3c31a9463b592310f20fcf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_field_lighting.frag.spv",
+        "sha256": "e11cba2f79df865e29134bce6bc8733a49c5da0c3e520b6a37f11ad2e3d3c6ce",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_field_lighting_coverage.frag.spv",
+        "sha256": "e0ff70fc63bd96e671f0f5cef999bc05c795dce8a72ae77f83ddd8df9fb257ed",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_fog.frag.spv",
+        "sha256": "5deb535b049f7d9774ed4ed6516f40a04a494bb3e4ef47bac65f42ba47157a94",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_fog_bindless.frag.spv",
+        "sha256": "14b9e01cd2ab04e8ab945742c3b1269e8a23bef7ea628a55170698f21204fbd9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_fog_bindless_samples.frag.spv",
+        "sha256": "4833f614882a8745e73e174f7e26f70606fd300fcc7daa5b85275a4a286eb194",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_fog_samples.frag.spv",
+        "sha256": "de9dea74e88c906289c34167af56a5788b5f1638fafa1864128de9493f7891dc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral.frag.spv",
+        "sha256": "029757f9c858618718bebfb6b07b8d2cb3c4ef01a2e9f187b19b6c693f8e36d4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless.frag.spv",
+        "sha256": "346689824ab60568e521a89a9b7d124c85e313c7d3583913ae0d0a5a7046bc6d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_clipmap.frag.spv",
+        "sha256": "1a65e0ba8a143a0e3e4a0f8e401430722a71ef0f43ec2643496c3d192a9c66f2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_clipmap_coverage.frag.spv",
+        "sha256": "b7cd0379002143d52b3deb64c8396855c3e542b00b7679727c4e0e62275f3f59",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_clipmap_field.frag.spv",
+        "sha256": "49b52f7aef5d0fc4c019c6957f0c7a18bc1d8a8054cdb0453ea51fd7e9e5c1e3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_clipmap_field_coverage.frag.spv",
+        "sha256": "98b5162d15d8301bf2abfb670be318ec88ec59fc57ed452d4d27f7a96d5c5d63",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_clipmap_field_lighting.frag.spv",
+        "sha256": "70b77691b4867bae9539f793f951dd97b8665107ef97e7e4d37fa47097952221",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "fbee5f121a2571c97c65e6668a9314cc349275b521daaf80b90a596b11333269",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_clipmap_lighting.frag.spv",
+        "sha256": "9c49253d74c63a180bf717d076ea344db72d049ac20704e23e4cc3d824feeb8a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_clipmap_lighting_coverage.frag.spv",
+        "sha256": "bc6c8502c51f5af66d7cc6cf9dac31dace012b2a5a06aeb42e8a7618f17dca36",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_coverage.frag.spv",
+        "sha256": "59696a3669e5b2d587a967c9e3afdad12070eca1e3e3f739a3953fe583881c41",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_field.frag.spv",
+        "sha256": "f68dbef00f4f35ac65583e9dcf7aef306f6072282b3fabc13b387c0a6abee047",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_field_coverage.frag.spv",
+        "sha256": "f10ae6e13bb215a5023f22de96f40c1b6581d3705d54068a479eecdb53137a4d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_field_lighting.frag.spv",
+        "sha256": "b470dd31e4bec577ad25268de27baba32de77d35ec3dfe77d80de9bdf80cbfbb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_field_lighting_coverage.frag.spv",
+        "sha256": "1c72986db6e31579f98b9143fabd9f2a781e3e9e225f1ad7c3673305fdaa062b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_lighting.frag.spv",
+        "sha256": "51322e0cb35103e244e0e8656b6a7199880099bd05098733e0f7396a0d647167",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_bindless_lighting_coverage.frag.spv",
+        "sha256": "5dee7ce987683634225c96bae595c7a8aa762385cb7330aa3769f3adc21202a4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_clipmap.frag.spv",
+        "sha256": "f42fcfe1c3d3acc947228a769b969698bd1dff5c87846632fc1a42d371652814",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_clipmap_coverage.frag.spv",
+        "sha256": "2c3ca82786bb93489e6fdea3b68f422ae6944d874846595485b3f8fe1d1e82b3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_clipmap_field.frag.spv",
+        "sha256": "7528e9c9da2f1431493b2dc8eeb05de6b7d51d99f7a0711b20138d0126af524e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_clipmap_field_coverage.frag.spv",
+        "sha256": "79fbf7c50f5dcf5c8b7cb698f96421c7e5082e26c0a26c765ccbd6d34f989819",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_clipmap_field_lighting.frag.spv",
+        "sha256": "641c7079c43ae1c9ecd1960cdf3b73c19e802d1d612d2fffe5e6773ebfebfadb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "9a1faafdaae04f2c643b5bb94dafc312c1e48cd8383eb480ccf582e08a4e513c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_clipmap_lighting.frag.spv",
+        "sha256": "15d176a690d9e90855068686b28856125ab78045b19839ae4fb8c4b5df08c6a2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_clipmap_lighting_coverage.frag.spv",
+        "sha256": "720806e1087891a6268309fc23a8851869bcd7edc188aa45ff9631b953b0ea63",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_coverage.frag.spv",
+        "sha256": "e9300facbde4c9487c5f43fa1337554b06f1ee157bdddcf1ce54bea7023adda6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_field.frag.spv",
+        "sha256": "26d5d4c82e218b951bb72289c455a18c62a3c8257de3e1e77d9829058caa7264",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_field_coverage.frag.spv",
+        "sha256": "b2aeaa2de9bf21cd20347bee8d4886f949c94a004f4fde4fd960d5f9b938adff",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_field_lighting.frag.spv",
+        "sha256": "a718cc8c33c131a0760a62a78517502983529a834ebdd313276a63d989266cac",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_field_lighting_coverage.frag.spv",
+        "sha256": "a466f332c13e5bd0fecf4b30fa8188260c9137ba1e9aa8d545e7ab86cd6028cc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_lighting.frag.spv",
+        "sha256": "50b4f6df563181833aebfdb32370fbf5631d13ae465bb1fc5e3d4f702cca3a23",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_lighting_coverage.frag.spv",
+        "sha256": "655c6d6efe1aa7e2b8597c0f4756ad43b9fbe53a288cd4ec14db126d7bd1f2e4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object.frag.spv",
+        "sha256": "4222808adda10c55f937ef0dc6d2ddbc6b5954f0e79f75d494eab60eaeb20097",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless.frag.spv",
+        "sha256": "2b16fc07d8413bbcf00a213873f23a0d960f944a415cd01920c438c546aa1bdd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_clipmap.frag.spv",
+        "sha256": "4c629d7a964ead0539f423b44f77309e52b17e31cfba260fbd2dfcf89b383555",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_clipmap_coverage.frag.spv",
+        "sha256": "902e2a49f69ca2da0be8e39255d57f240d67c111d52daef25c6b3587bbfd341c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_clipmap_field.frag.spv",
+        "sha256": "f7883e48c9681ec00a194173c185acd3046e49fd726631bfb9e6cfe155d08be3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_clipmap_field_coverage.frag.spv",
+        "sha256": "29e10bfb4ef00a745bbeede1ee1a16774774362b517ab598694fdaf0028a91e3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_clipmap_field_lighting.frag.spv",
+        "sha256": "67d3685021ac560c48ef3fdb4b48400b491442626fd8f237cd381929157a39e7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "c0e153b8e190cfade36d7106a7edaf254e359ed8fd5d3e27d9b523eb11928922",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_clipmap_lighting.frag.spv",
+        "sha256": "b2f9da5700a5b8c5d12740de1c939a8557e063f3338f764e57682ae9c4dcbaaf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_clipmap_lighting_coverage.frag.spv",
+        "sha256": "cfebbf9beacb2076f23ad1e872d5586a28c70995b30382e8227e3f9990f30ae1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_coverage.frag.spv",
+        "sha256": "29ab38b8a046afd50ce3d76affa7203f57d6fa42256b7d8b6d612ad7b72e1dc8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_field.frag.spv",
+        "sha256": "a92d35341f9cde43b6797888192dde9ff207681f87cc0c2f0a3054a24be052ae",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_field_coverage.frag.spv",
+        "sha256": "e31f60808cbed77eda4f1c9ca4a55a180ee2ad567e2838001e908438e006c765",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_field_lighting.frag.spv",
+        "sha256": "62ed821595fe4dddfc2585346a7331875340b58afb97a5afd7afba933404c3ac",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_field_lighting_coverage.frag.spv",
+        "sha256": "ac1f5003c42b2c8f7d29f05c2b09007a0e77cde782cd5002289b60054469979c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_lighting.frag.spv",
+        "sha256": "1e623142f70d4f45db1c6137733cb31e511df0c3fdede9b23adc8cf7c332e9ab",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_bindless_lighting_coverage.frag.spv",
+        "sha256": "e67abc4207dbd5b1173bd682147651060b7888ae3cb892af06df39ef50c14980",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_clipmap.frag.spv",
+        "sha256": "1e043b26434358fe9dded376772e6a791f8e27bebaceb1c6e6c9d3da62bfc7cf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_clipmap_coverage.frag.spv",
+        "sha256": "7f13e01a7344f4b48005c62f9dc7718e73bec6524977966e5de10231bb517559",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_clipmap_field.frag.spv",
+        "sha256": "0c38bf3ec12522bf5cb444f29d085183d02ec8f53a5d085b27485df8f8832188",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_clipmap_field_coverage.frag.spv",
+        "sha256": "7c74d6ec1a378487f8eddc34bcd00c2024f9bb3319415b61b7c842c625f8df5f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_clipmap_field_lighting.frag.spv",
+        "sha256": "2329762ba59785ec5d425efc60d80de2c303bfacc9b3ab3efee3c874a0193dee",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "24a6a114d7aa05e6e37cecb4986c33c02e354c2d3d6c35dcc150914ba23e8742",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_clipmap_lighting.frag.spv",
+        "sha256": "44ab79e44f603a71d00029586df0d0b8c9ddc35ea9e198a0c8b9a35e26b25d38",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_clipmap_lighting_coverage.frag.spv",
+        "sha256": "349e6aab31a85336617f5e6a91fe82e9e1d2e84975d14385d9a0afedf2ec8579",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_coverage.frag.spv",
+        "sha256": "38087766f832c536905fa9dcfd46a0eaa3f6c7de7badc3e4af8aa013e38c2db6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_field.frag.spv",
+        "sha256": "e72b4d229873ad7446ff2773e5b99a1a360c3dc98a222f24fa6abdb0bed56c65",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_field_coverage.frag.spv",
+        "sha256": "6b48fe1f3ab5b24252ce1ca72ca1d9f9b453852715a339643c66f51e95f0978b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_field_lighting.frag.spv",
+        "sha256": "e0f6be150ae5d3944f6925b9b3f32e62d71bc7c519c72ca447eace371502949f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_field_lighting_coverage.frag.spv",
+        "sha256": "bb5a0c411eda75fd7ff45b732173db03e6f1d488622008a4bac028f4cda91039",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_lighting.frag.spv",
+        "sha256": "c61374a011a200e0be3ad4bf6cf9eb956f295fa838f638c492d86a5355fffe73",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_integral_object_lighting_coverage.frag.spv",
+        "sha256": "3b3bfa40b02ef8769e172eb038e8ead493d13ed0cb1c2481c6be29951b3c1d84",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_lighting.frag.spv",
+        "sha256": "c221c77e98b1a55c99d5b60dad5eb5c1a9d1c1b94f736324056476b8a492f891",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_lighting_coverage.frag.spv",
+        "sha256": "f39b690f637088dbf1f65ac3265433e139907f7e469281c29c79359c203d7e8a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object.frag.spv",
+        "sha256": "7406d6f737da350bbae829a0ed1697bf3585d4c77a6b215ec742965b136b5d1c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object.vert.spv",
+        "sha256": "cdb4e6f952a66fe9d7007271078ac2a4e7e1de86e5998291973ab93638841d54",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless.frag.spv",
+        "sha256": "b8de5bfb53112f1f54aa94f05c44f8f42852130c656848d5c483506885e64602",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap.frag.spv",
+        "sha256": "2a19a7e80fc0b5f88dab1ca44bbb827a8905f06f0e6c3907343b73a40fd86516",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_coverage.frag.spv",
+        "sha256": "fe46bd55b1e2268a986861f9d4389dc1655164ec121efc1e16910f3024d6bbfc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_early.frag.spv",
+        "sha256": "8b95589565daef619214eb4f5e6b27f7dcdbcce4ca1a3fb17ea3d5c02523af55",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_early_coverage.frag.spv",
+        "sha256": "6289f954297a2b0c315457a643fa5f9b92b374d0fb703abac4d43ca5b805dbbb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_early_lighting.frag.spv",
+        "sha256": "17208dbaa0c6b91c3bd93fa0b32cd82251f794a91a33a726ca31e87d2e69ec92",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_early_lighting_coverage.frag.spv",
+        "sha256": "76f8a7e875d82e6a213ea173f8db7c4f4b5677537c85517884d10c43eafaf241",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_field.frag.spv",
+        "sha256": "a2f7b1daf2ba9b0f8909fa2cfe8265689ebcd912ce876e1c68c4f982cc1765ba",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+        "sha256": "131ba5743086b65c11905c7cd05119fd69d6a8a5f4df72286ed7b91ed83e4001",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_field_early.frag.spv",
+        "sha256": "0ec83e14344534a2d12f0c46a1f21f77977db7a2c83c8c11b541e0917bdd9014",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_field_early_coverage.frag.spv",
+        "sha256": "c468a85a9b055f2ffafd2b8a9a50eae77273470110ccbc5698d0a9e630f34d02",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+        "sha256": "aedadf30608bdaeb1352536e915544010b22ac8fee604fcfca14478b9af5e94d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_field_early_lighting_coverage.frag.spv",
+        "sha256": "5310b4530a3d479a7564e247867f94f2e7f9960f9467b6cbecb90afbc161ed04",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+        "sha256": "264ea0d52930491e7c202b90f37a19ea4562b488dadab1596aa635e146784ae7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "ae7b05b79abc73903b6ecf0bfbf1f562afff6f735fc524aa55ac23ca526dc001",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_lighting.frag.spv",
+        "sha256": "12de125e2e6c85a0f20d42a2efb3af6f787a7f559ebe7935911e63b9184090f7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_clipmap_lighting_coverage.frag.spv",
+        "sha256": "06ad52d30123340c23edd5d2ade5bac672a338619b6ad6877311e3fe1d653ab1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_coverage.frag.spv",
+        "sha256": "ba4c8c958f4b3474c89b14a13026170498cc7d0b2fb85f659ab49c3e18fe7c7e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_early.frag.spv",
+        "sha256": "d24ea36bb7abccf53b039f7476c22301eab59a3d2c6293cf9cd1292ab88fecd6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_early_coverage.frag.spv",
+        "sha256": "8ab8a8d42872f6407f94568c46c9a43af176d1d3652ce306c7a19d89c7a94288",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_early_lighting.frag.spv",
+        "sha256": "da8c79be5071980595c95b26e28b5d89eb497d2ab727f9fb0a60e1c3ad967e36",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_early_lighting_coverage.frag.spv",
+        "sha256": "a540cece400d9dc3a57957fea55710d298d525c3296e122e274edcac2b985d24",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_field.frag.spv",
+        "sha256": "fa6eb9fcf4af5a5bdf3d213773a05b369f4a92f1daa2c3aa0ddfb37ec46d9a46",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_field_coverage.frag.spv",
+        "sha256": "ca578ad1543f0743d5191c7967d48f264d7984a7d6f7bdfde6e3bab5da41e306",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_field_early.frag.spv",
+        "sha256": "c444b84e32d1a6f47489488f2d1bee76065bb6e2824b01593b9eda2a80d82458",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_field_early_coverage.frag.spv",
+        "sha256": "7bbdad4e2898c1ddd7ce72f5c1bf0e848a685e7b5d4e478ad1a176e085683d25",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_field_early_lighting.frag.spv",
+        "sha256": "2b0c5e7ebd81a1d303b1822f748c3071c6f0389ff271cc4e7b7dbcf8915488dc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_field_early_lighting_coverage.frag.spv",
+        "sha256": "1dbc1112b473a491456986386138e59234bbbd53f12af7843443f4320de33fd9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_field_lighting.frag.spv",
+        "sha256": "806b2371b2c0adf421460e422b77351dd9b3a70e6ba36511e77f80beecf4a709",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_field_lighting_coverage.frag.spv",
+        "sha256": "ca976075bdc1792f6cd435e39edd002adddfa9561ec40356e5d3a012755e644c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_lighting.frag.spv",
+        "sha256": "7d0b023c929fee30b6ae302afb00c5292a00985d710707ffb10b473913a0082a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_lighting_coverage.frag.spv",
+        "sha256": "b7638b209cdf7c2013607de89baefcffb8eb5acd6f74eff3147f94974f9d49cf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples.frag.spv",
+        "sha256": "c596890b6aeb46b8365a49b4a4be9e95e8a26e69bfa92c55485df7d3872d06d2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_clipmap.frag.spv",
+        "sha256": "01e4826837202218fab76d341d3c30e2d73305a3b653d1ae6153509ad37ea85a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_clipmap_coverage.frag.spv",
+        "sha256": "23095130d65f1426e76f1756a1bc6afc35729e704d8dc565d99eea6f1eb14456",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_clipmap_field.frag.spv",
+        "sha256": "de54c1d561de6328dfd0df1ffef622896c3a3599b4fda563e8954cd20d24c98e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_clipmap_field_coverage.frag.spv",
+        "sha256": "6b77af1fa654c4e68941f4c679ff5cb0fef64f1d3b02a894fa822c32a45e3124",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_clipmap_field_lighting.frag.spv",
+        "sha256": "2592b64e322d986dc508217d2cecb54b26393043a452e3352c150c1bc756cbdc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "b6c31c06e160aaf31a6ce3509a120a187bd0ebb131ac3178b645ef48717c789e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_clipmap_lighting.frag.spv",
+        "sha256": "45ccad505a45560c144807b036a6f05a769f2b15d94228cd5e506a40ee69539c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_clipmap_lighting_coverage.frag.spv",
+        "sha256": "aeae6902b13e4c74fa71bcc1f8c8a996f372454ac01d73acfcc1f6872f0dd86b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_coverage.frag.spv",
+        "sha256": "71b375392a9c9dd166a8b87957d79ae07588cd55aee76809da1a74d99ebed750",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_field.frag.spv",
+        "sha256": "1fb7ec0ce7bf82c74c9a67ac070cf794e66b0b8e4e9d3086bd1c169cfabf4287",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_field_coverage.frag.spv",
+        "sha256": "c3dc4622877563cfc38b3d3d61254aca76da22b0d2a174cd99468650455b2df0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_field_lighting.frag.spv",
+        "sha256": "a08506cc3eec5342280b7c48b7dc1eb2c2b00cfc88030ee1ce612cb83aeebfce",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_field_lighting_coverage.frag.spv",
+        "sha256": "7cc8705118d0383f12235699ca4d23cb888b79ebffc54a91d2420326baa79540",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_lighting.frag.spv",
+        "sha256": "16841ad8e215eb3a36270fa1968b91a431878e19d4fe61841142f96012d9d86f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_bindless_samples_lighting_coverage.frag.spv",
+        "sha256": "8fd023fef09740024e9cfe8b3343f483ebc935c609741e54117a32577cc77186",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap.frag.spv",
+        "sha256": "a13d7b1ab0d25ca9240e516c0ca4c76b4b8354e8f74eda28a13786506f6593a8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_coverage.frag.spv",
+        "sha256": "53fa8cf4724ae422e06704035d64b17cea91d8683a0b992f0069989666c4f881",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_early.frag.spv",
+        "sha256": "fe3c8dbe8bacc7e08c0ac5a461d60f92f1c9132b9909401f910e841cbe716349",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_early_coverage.frag.spv",
+        "sha256": "439cf095c6dc25c66c2325aa3bf5378a3afd2581612314a65d460a0af5963fcb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_early_lighting.frag.spv",
+        "sha256": "6d4ecb58446f1659f847772cec26ee1961f80ca179188928dfbd25d563115362",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_early_lighting_coverage.frag.spv",
+        "sha256": "81c1dac709fb587eea9413a5581f402ab794e1924e2a3c6be3e0280099ff181d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_field.frag.spv",
+        "sha256": "4e7154b9fe87323f6e63cd1a85c48f52c21feb01dea7dafd8104a98bb859564c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_field_coverage.frag.spv",
+        "sha256": "82bbe308d63c1c140ff133a8cb4d6c0eb02cc456c22209ba0349ed2ecb61ebb9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_field_early.frag.spv",
+        "sha256": "10dd9a6d96d47e1187e18de93fa64b3901c0bfdb35e2c54fe3439783f6818ed4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_field_early_coverage.frag.spv",
+        "sha256": "9d61d10462cf810331c9a439bd218bfdef354b8178ba796b4e0ce4c63f3060eb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_field_early_lighting.frag.spv",
+        "sha256": "5eac93f78b71d5d9b84c21672a4c2f468dd044543944c8f151fec92e9c5ffe19",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_field_early_lighting_coverage.frag.spv",
+        "sha256": "49dad846176d17e16638d1761a5801c5841a29abb484774a5162d0b598fad12d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_field_lighting.frag.spv",
+        "sha256": "b3b0f0b40ddf6d32d02348e1760c4fa0001114d9991e660286e346b3497373e1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "d85d80a1b51ca41f71ca6a109e70c93f7adc8d351dffa28fc57a3d45e0878011",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_lighting.frag.spv",
+        "sha256": "ccba80b0070e7e29b5a75751fbfbe735edb8c5ee655eb0042dbfbd3fd7f2e629",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_clipmap_lighting_coverage.frag.spv",
+        "sha256": "cbc6f9c1fe360a409afe126f303815301669304d658e4a8ea7f776c7012dc635",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_compute.vert.spv",
+        "sha256": "edaa575d1dd7a1401110c0f1b0fe30abfca33ffdbf49ef710bed412bcc246a4c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_coverage.frag.spv",
+        "sha256": "d568f24dd3e24ef1c6430fb489decd6ad4d0d5c7088443356ebd95f9c3098747",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_early.frag.spv",
+        "sha256": "77d9bf6f5e7d5a1986964276a4eda214e222248063dca00e32ff5f01d400cc01",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_early_coverage.frag.spv",
+        "sha256": "f2590387685c011dd02da80fec47359f1aba1aa5412654ad70cd83cd37ca6c96",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_early_lighting.frag.spv",
+        "sha256": "55d0a7e31ab3c156054b547f93b9dbc68c077c908db7cca1776cc00b58dfde3b",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_early_lighting_coverage.frag.spv",
+        "sha256": "f49d4708bf4893bfaa2a5df148920de9e501230d8ea7fb48408bd56eaca679dc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_field.frag.spv",
+        "sha256": "182a47aad7d99d35a7f02aaac812fe6d3086584ddfd5e7db795e8c36367539f4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_field_coverage.frag.spv",
+        "sha256": "25e9de085d48cc9cf3e83d9d9ec74c2f941b1402bb200e1883dce91974da7fef",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_field_early.frag.spv",
+        "sha256": "b4cb39d860dc32059aba703ce6297a706640efac7e32fd06599e985bd6afc558",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_field_early_coverage.frag.spv",
+        "sha256": "197411a223fd4e4bb957ed1c57414ccd9ba645f69b247bfdaa19a881357e7a9a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_field_early_lighting.frag.spv",
+        "sha256": "61e86db6958a8e0ab5b6861789bc15b96fa2173e30e4aebd15f92dc488a09a3d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_field_early_lighting_coverage.frag.spv",
+        "sha256": "86f51233674f6ffc0833579a302c7bfd8aa2fd9b309d668e2fb96908d70347e6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_field_lighting.frag.spv",
+        "sha256": "c10e93786e77627f00ab200ca172c163fa0301995c8bceb26ddc951c180d0541",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_field_lighting_coverage.frag.spv",
+        "sha256": "f904c61dfcee7b36defb3c3bcf85dac4cdfa320019ce5c7fc65da2fe31ec855e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_lighting.frag.spv",
+        "sha256": "f98e65d136860fdaff4603c9d9072f87854ce1791c6aa1e1fd37d33fcd40c993",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_lighting_coverage.frag.spv",
+        "sha256": "48075a2eef6bf588bda4dc4ca457c5729689bf7f3df063f44caffaf1b7779471",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_projected.vert.spv",
+        "sha256": "fb495ad36d00ebde5410923b280f5105caa52e6e036be719177545c74cfa5ddd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_projected_bindless.vert.spv",
+        "sha256": "727c6e3b22e4146d65c0f78959417418f62b09697ee1b669f8f1100341a498c1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_projected_bindless_compute.vert.spv",
+        "sha256": "79560d5e8a1a06b0935ec25db96043e83ed0d73f8f5c7ba5bff233d71b5422e9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_projected_compute.vert.spv",
+        "sha256": "e9adaa64fbdb15048de7b0a4738c1edc719d7ffe22fe7069cea6c224de4f49e5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples.frag.spv",
+        "sha256": "6206c7568287fe750cc41968fcc3f937b599cc14d7db7cf38bc8caaf11110883",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_clipmap.frag.spv",
+        "sha256": "9e38279e0479da40f0ceb163ec981344a8c6ed0d9d42689a8567d04bda42dab4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_clipmap_coverage.frag.spv",
+        "sha256": "7c390a668aa1f9e9dbaa74cd0961d0cab4aa11c258035690aa8c9960b7f4c7f1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_clipmap_field.frag.spv",
+        "sha256": "dfad54dd7066bbbd4bc8e12d915a15a60375ef3e149be610d92f0507601385ee",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_clipmap_field_coverage.frag.spv",
+        "sha256": "c7698b15e169f9e2dce3d1fcd57ec5a833ed203a3f043ad258c77d4010efd108",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_clipmap_field_lighting.frag.spv",
+        "sha256": "f16266b585263dc90474eee407d8964f8f0d8b9b6bd7d15ec51156e7d1ee021d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "cf00be035ed1f565671f06c21d0a37caba756c1a71afb0d59e09122844e1c399",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_clipmap_lighting.frag.spv",
+        "sha256": "0d2ecceaf215921d5e406b06045c7d0dc0939f5fddb53290a740801d3aa296c8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_clipmap_lighting_coverage.frag.spv",
+        "sha256": "5f0d7bfdb86aa097184abff6fba590977b84a5840cc06740aff0f4fb6ae3d331",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_coverage.frag.spv",
+        "sha256": "154a8391e927dbc0a8fb1a05938fe703a44ae06b243cdfb08856d8566ea313df",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_field.frag.spv",
+        "sha256": "9bc63363ecfb0529a03fd7ba743d599b91260588d5af02816b0cb22389b945b1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_field_coverage.frag.spv",
+        "sha256": "a504b483f1665d97e86c9563d4c4c092bc3afb83cdb6926670a88a5811b15084",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_field_lighting.frag.spv",
+        "sha256": "6a9f25b4b7581eccbe7301c63ea43c8c5c80281a809baee2db46cbd6858e4d28",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_field_lighting_coverage.frag.spv",
+        "sha256": "5613253e8930e934db07ab9aa3e1c0b896c6c5f653947f5e73fcdb945a2d98df",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_lighting.frag.spv",
+        "sha256": "df1c72ce58426df7628696e5d0b04f29fd141d40fa1a2ad301eaec8747264820",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_object_samples_lighting_coverage.frag.spv",
+        "sha256": "dd631cda5c01a40e49558e643037b90914b271881ef3c5bc6c1190f9952e8c70",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_projected.vert.spv",
+        "sha256": "63e064e981bf28a2181a130069175572ba6ca7377441f689913a30bc87cf1d09",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_projected_bindless.vert.spv",
+        "sha256": "ab43936febb031dceff4b50d1755656884b2f167305e4aa2bc247af8a4972780",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_projected_bindless_compute.vert.spv",
+        "sha256": "960b2a8dc2ef7a976082c2b9aa93cd656734bf1407e8428ee4d559c886c337bf",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_projected_compute.vert.spv",
+        "sha256": "cf0b4ed1061ed6712f3695dd76b117e66025fddd8b6005bbc678e14efb05cdd9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples.frag.spv",
+        "sha256": "13efec7445baf8d63139907f133f7df412253e370da2635f8d5c5149972d5584",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_clipmap.frag.spv",
+        "sha256": "c6163bd2e43f70adf03a22f3ffb44b34c2b0ab7afcd3e22be6fe49e652adec75",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_clipmap_coverage.frag.spv",
+        "sha256": "d32894edc6eb604b5be45dedc6fac9a303bc502061d7c61b0e817af2d11885f9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_clipmap_field.frag.spv",
+        "sha256": "91871128f684b5cdab24de1f8fd61d84eb79b8018e70ea06654df2dc21ccce32",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_clipmap_field_coverage.frag.spv",
+        "sha256": "eb2a9b41ae5c204e0becccfb03c07cc98a4d1db246953665ba93569ad15089a9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_clipmap_field_lighting.frag.spv",
+        "sha256": "d241f6c1c325561159f7ff31cd0400eb80bc608c7203ad63e0d45076e21f7009",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_clipmap_field_lighting_coverage.frag.spv",
+        "sha256": "ed237dc8e46239d3bd283d59e5a05b4286ec73dfb924b7cb4f474de97c55d74d",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_clipmap_lighting.frag.spv",
+        "sha256": "59f4b9a93d77c15ac5e282510d5c256cceb154be90372a94a9d5a7d5a2bcfdfb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_clipmap_lighting_coverage.frag.spv",
+        "sha256": "c1f96a4e9a24251550c9b095daf641c67b3a211a46cdebcac93718c00ffddf70",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_coverage.frag.spv",
+        "sha256": "698373ca208ae91375618123d3f2ab9229cbc73dbad7015d6a6235c7ec30d620",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_field.frag.spv",
+        "sha256": "3e9624fde3de7661cb28e8e8bd05657df2ecf8bef95c448cc82c04ce550bfe1e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_field_coverage.frag.spv",
+        "sha256": "492bf2f215dede2174e5792fb0ffa90148a7dfd069fed1c10e2809560788ca9f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_field_lighting.frag.spv",
+        "sha256": "c11fdf256b7e090dbc4ab6561a982fd1757870763d7302a8813e920ec9468781",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_field_lighting_coverage.frag.spv",
+        "sha256": "7f87b1696ff376fe3cbecda1c2bfbb5cf52909dd5483284cb7b717719ded90af",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_lighting.frag.spv",
+        "sha256": "c1ecf8ec44ed1c7fade55fd4e1a7248366d1dcbf3ee97ee58fd6a6611bedf042",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "mesh_samples_lighting_coverage.frag.spv",
+        "sha256": "9990bb5a808769dc06a3d1adba307ef35086a2ba38bc2b6016958d89da8b946a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "motion_outline.vert.spv",
+        "sha256": "20bdc865d9d02cccd775ff18dc645675c32f0f1d17aac37e5867a574cb3d6875",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "motion_pose_test.comp.spv",
+        "sha256": "c657318588f6a94ba16b53a750ad3c59a13d9559012d740bcb0b374b58f3f2ec",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "motion_projection_test.comp.spv",
+        "sha256": "ba985c261cb80b1a0869152fc6b75b8c98f6813aa102b91c239171d7d99821ec",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "motion_vector.frag.spv",
+        "sha256": "e6254d24d6a658da3b71ee775a449a56305bfc32e0b1b3a557e7e26a5037cb2e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "motion_vector.vert.spv",
+        "sha256": "0b7450cba1a1fae84341b764777148c760874f6661a89627fcf47aa5f598e583",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "multisample_probe.frag.spv",
+        "sha256": "8f52538e91940803f1d514b0826b39b5b3c4873318b8f33fe5b92a8f7325a7ec",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "multisample_probe.vert.spv",
+        "sha256": "c926a7e110f846f93f37225b9739c0b92d240988c7dcd9a1ae6a4fadc18031dd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "object_shadow_filter_test.comp.spv",
+        "sha256": "290a118205df0b2a1efe23685536bce54c7199b46c5fc3acb6d9d46be74c3708",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "octahedral_environment_test.comp.spv",
+        "sha256": "1fc426b94f46af33bba7fb12fa06a5e55494e42252cda392ad9279725b46f630",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline.frag.spv",
+        "sha256": "bad9dc49751ea46513d20c946c2cad34a90b1e29d593d96314b365a037aa918a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline.vert.spv",
+        "sha256": "ab345fb7947c37da4d9154e4c38fc0fd695a0379ddaec4194c3253e207e80894",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_compute.vert.spv",
+        "sha256": "072ccaaaa6c3a8ee3c97a4cfbf1384c2463656ceecbb20def4772a2c0e802ece",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_coverage.frag.spv",
+        "sha256": "bad9dc49751ea46513d20c946c2cad34a90b1e29d593d96314b365a037aa918a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_depth.frag.spv",
+        "sha256": "9e8e154488e94119335e97397c1cb009578147d917a3e7bea8817c3b8f426d37",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_depth_bindless.frag.spv",
+        "sha256": "7e3aaecb38db528eb8f76013665571150ff88d490ae5625ca22ac480591e23bb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_depth_bindless_coverage.frag.spv",
+        "sha256": "54ff902ce7e7c826599337574ee9a19c63b2400512a134b9227c6edaffa96be1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_depth_bindless_samples.frag.spv",
+        "sha256": "9e65e3fba10c2659fa5d9c1f76f959ad869cf31082cb43f9c8ac5b5505e8b933",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_depth_bindless_samples_coverage.frag.spv",
+        "sha256": "514603f57adb764fe170d2f181a8c68d0cf6f86eb2f26de6226607344b660f11",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_depth_coverage.frag.spv",
+        "sha256": "f4d8ced2d07921ea992f337a535406e59f2a201b80785d04cca204d125c45b79",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_depth_samples.frag.spv",
+        "sha256": "407c661d86bc75137e27ea316c43cdb3a345cc1071ff47033356363f9687863a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_depth_samples_coverage.frag.spv",
+        "sha256": "c49d6255e16e812486074b60f32a318937d2986d8b2ac5468a20bfe748a90b18",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask.frag.spv",
+        "sha256": "2b31604545789a8c07a1d2d9b979d5352fdb1a9fbc5e1219fa5d8376bef23b86",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask.vert.spv",
+        "sha256": "254ea599605ab1d157f51102e049c089a7f64058f6d486a7776860efcca91e73",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask_bindless.frag.spv",
+        "sha256": "4cc56fc9d2ec292ca9eb164ba43c19e871afa9575e6d09b912705a63e3ddcfb3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask_bindless_coverage.frag.spv",
+        "sha256": "1ad2be53827b091137949e694aa1c58069f2c71c558fbc975e681b4f408c42d2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask_bindless_samples.frag.spv",
+        "sha256": "343b7b2a5deef6c97bbbccfb2557a725311f9d86a5c26db85d7849b80ac1d2be",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask_bindless_samples_coverage.frag.spv",
+        "sha256": "acd88cee61d28d14446a40dbb2691411f465a66eef0a8b804bb77bc90dc28ed3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask_compute.vert.spv",
+        "sha256": "86b117e98b537b5e3a2b96bd77af1a662597bc10c0cb7a4f6ad38def587e6e97",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask_coverage.frag.spv",
+        "sha256": "0481f943ea40dacf99b83c89cb02c2df8a9f18bac5bcbdd0174904192f197d12",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask_samples.frag.spv",
+        "sha256": "5247371d64a4782baf5487e47dd76d0046ddcb0afadafc313ecf43d1e64727c4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_mask_samples_coverage.frag.spv",
+        "sha256": "aa33bf9c4c03815c0c4e4800e8c2a040e3fab64db8fcbcbb2bf3a08ea4f37684",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_samples.frag.spv",
+        "sha256": "be5c6fd53713327c1ab490412bc118347ab73592eb75fb64289edd23b91afe24",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_samples_coverage.frag.spv",
+        "sha256": "be5c6fd53713327c1ab490412bc118347ab73592eb75fb64289edd23b91afe24",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled.frag.spv",
+        "sha256": "10f7bb346e0d7ae67c238361ecb33d098a52dc644f3684c29e279dbde83d6011",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled.vert.spv",
+        "sha256": "6832ed81cab49e76c25f3ff043c15ea0c62104c5fa92e3150d38132cff63e9f9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_bindless.frag.spv",
+        "sha256": "4b0c09fdeab72d354c50b7366339d9100cfe0411c8777e98805da68568705e41",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_bindless.vert.spv",
+        "sha256": "785773d452b53ad047d11b2643d3d6e29c562c3ada1fba3e7018d35bc726ba5a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_bindless_coverage.frag.spv",
+        "sha256": "de185bed833561e20f51ee56cc1c0f5a6a4a1024c6469c4797de9c2a9d850ffd",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_bindless_samples.frag.spv",
+        "sha256": "41065fd35c64f66c4e5ea30096fd710439bc8d1bd110a248ae395b9fe9074281",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_bindless_samples_coverage.frag.spv",
+        "sha256": "590a8f26b16e6e47425c89a7a4270e3a74a52a441c9aef87da8b88d447b4b6f4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_compute.vert.spv",
+        "sha256": "8af0169fb7d2cb5ebd92d589af6bcb117553d648dde9eaccbdcb0b34d95abe56",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_compute_bindless.vert.spv",
+        "sha256": "825bfc8694d71362793dc7865701a16aa115aa1417e420aa370f1c91f65469a2",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_coverage.frag.spv",
+        "sha256": "4ab1b3fede70c2125eac5dd35d93f51c42db4a9ac2d029fdba7d5ea0c66c7e7a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_samples.frag.spv",
+        "sha256": "d98b9c53cef69eebf57aa9f31de6b05c1833905308a7d791b81c906f61520370",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "outline_view_scaled_samples_coverage.frag.spv",
+        "sha256": "ada30095f9253b53c9f33e4bbd0f5cb03d23de919c601230d0646b2f34890003",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "pathtracing.comp.spv",
+        "sha256": "6f90a3444d1a07b8ead9eba67d063f70e9c46310058146a496c5e4eea47dfcec",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "pathtracing.frag.spv",
+        "sha256": "076fab7f9676eeba4d741485fe399579c2533ebacfc027e045021624d955760a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "projected_reflection_prepare.comp.spv",
+        "sha256": "7df185c8630c180a7d8d4bd8ace2a15572dc07e13e401140df595335d666e4da",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "projected_reflection_trace.comp.spv",
+        "sha256": "9b77643b12d533f69e7a159ba975dfaf75e56253429371d6f7470ea6a567e20a",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "readonly_depth_test.frag.spv",
+        "sha256": "b7afe007df9e050c21c89832a50e7cdb976e225c6ec6b5376589d1aa021352a9",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "readonly_depth_test.vert.spv",
+        "sha256": "11d36fc78f75992904f31c89130be22737be87dd4dd99b65508d6fcc40fe2ce3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_probe_field_test.comp.spv",
+        "sha256": "94135d202f7410504e29b1e9562421d1161c5f77c6e341a432eeb985164f5a1e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_reprojection.comp.spv",
+        "sha256": "8fed8e77c228e3c069ad95cb9624b9fd9fe03476a88b9d331304c5d7ffc60446",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_signal_pyramid_float.comp.spv",
+        "sha256": "5017c38801528ef1c47e3fabbd4d1d8417e5cfa729788fe54e13aeab9706d6c7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_signal_pyramid_packed.comp.spv",
+        "sha256": "9d9fc987c83a72728ac0296cdbf85596c658e1535a0ef72edc25aab44792926f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_spatial_filter.comp.spv",
+        "sha256": "7e305dcfc3227ad7f98d8a8832c976b378a4f62007b2044943e29fc98e1d76bc",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_surface_test.comp.spv",
+        "sha256": "d959c5051a98ef66fd9e46278dee1baaa248f30fbe536e39e869619f7a2552e1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_temporal_float.comp.spv",
+        "sha256": "66c44b623b83f9e6176e7c44f7039992ada997ac29933d4224cac71c7bc00020",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_temporal_packed.comp.spv",
+        "sha256": "3cf689766f41dfa0d0422942943cdd48702e2405c13b8f6d2ba4fd37b8ded9d3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_trace_float.comp.spv",
+        "sha256": "4e89f2e77717f918f86538b504a38d3469609848c4c59b8990d6c24625ee4351",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "reflection_trace_packed.comp.spv",
+        "sha256": "7e23f88e362db04579bd8b8e57094009325d7a246d4809d487b03b0d9b5a0de0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "sampled_upload_test.comp.spv",
+        "sha256": "a7b9be273214e05f06f7441f6e3a1187e929faa531beedf545eaf0291b3fd582",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "scene_instance_layout_test.comp.spv",
+        "sha256": "36d658cb7a429516ca78d6f99d9f72209dd98542374bb00dbb4fa8e428181984",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "scene_multisample_display_resolve.frag.spv",
+        "sha256": "4469adf8b765898cb38a42d5127e09ffa150220076cf4ce88c2710b04e4db2e8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "scene_multisample_probe.frag.spv",
+        "sha256": "b01b9af31ae9f4e53d16ec248c0ff6cba9dd320abd55e92d83eb1f68c4ad9dfb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "scene_multisample_resolve.frag.spv",
+        "sha256": "d4c34ee82573b8ecb6dbd96695645f6d3388aafd3fcf979c7d1bf71e1b49d514",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "shadow.frag.spv",
+        "sha256": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "shadow.vert.spv",
+        "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "shadow_bindless.frag.spv",
+        "sha256": "6d38dc03e16eda0b761a21b00ebea4a223e9046bc73b7ac5d531ff028b34f36f",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "shadow_bindless_coverage.frag.spv",
+        "sha256": "56caaac3f89e6ba50f070b88da80cb44310ea21fae0bff86dd435e507c4dad4e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "shadow_bounds.comp.spv",
+        "sha256": "d01efac00ff004ed46557f3cb9318d94dde41e851eff995857150a0a8aeded77",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "shadow_compute.vert.spv",
+        "sha256": "ac557aaeb75d6cf3e75af60d345a25e1cc78ee9b8c90943d05a73e9bfe66bc2e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "shadow_coverage.frag.spv",
+        "sha256": "24e9332e0774963638f1132dbc6e1f4bc9c146ccea86d41442c8aa6f12fabec6",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "shadow_filter_test.comp.spv",
+        "sha256": "116efa51829205f55dfeb2b6d5c9dd88c885eef681c96b55dd7c80f296f636f5",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "skin.comp.spv",
+        "sha256": "a0f5f99f22082c9e6550cc5f6926bb3df82db4f70ef1130f7130b51b204b6fe4",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "sky.frag.spv",
+        "sha256": "b932eb476618a3fef470a349a77748d14f8b23e1ba57261c91c7a39f474a3cbb",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "spatial_antialiasing.frag.spv",
+        "sha256": "cb04a3a35e63a10ad325a881e244d07333bd9a5c61f53bc76814d498b3e4ced1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "specialization_test.comp.spv",
+        "sha256": "b38e220726a262bbd12a1893fae88b010832f88f2381402e36a3d783f766ea96",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "specialization_test.frag.spv",
+        "sha256": "c3f301bbf5bdbe5c7279f138fc158f51bde7502a9e3a5042cfe5c264e22c44a8",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "specialization_test.vert.spv",
+        "sha256": "cd32916b0e5871e6206493e6fc9f4e9ddc9fd467f77126a3aa4ecdebdb435e41",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "specular_ramp_test.comp.spv",
+        "sha256": "579badc92e94a243bec3335fe5064122d6b65f93d64baf6b6e7fe74b0f2e6da3",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "surface_response_test.comp.spv",
+        "sha256": "afe36fc87f9472aa759275224bfff0b5d0c94bf22a1044de69c774dd2252ee76",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "temporal_copy.frag.spv",
+        "sha256": "b406af1147ab75cf5fdca93cccece032d0dfe1d0cf7fa1bab24e16024db65ce7",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "temporal_display_resolve.frag.spv",
+        "sha256": "d0e95e1e722683465ba2056cec562f43e30f6855f6dbec6c0fddc966da064c10",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "temporal_resolve.frag.spv",
+        "sha256": "9767410dd76a0146dae693ef8d4ccb004fcb35b05d9a9fbf62aaa77511773c7c",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "view_fog_surface.frag.spv",
+        "sha256": "dc39f5e71f1bea4c02ea40d48338794b76ef36692a2def0a593dc1aab930d3b0",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "view_fog_surface_samples.frag.spv",
+        "sha256": "4f9f518a961e886c094b92c70d4232b5e3ca70ece4721182dd4429f5b8673ef1",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "view_resolve.frag.spv",
+        "sha256": "934bfc302705c8fa05722d005736eec841306a37152e61c00b725f006bb1501e",
+        "exitCode": 0,
+        "errors": ""
+      },
+      {
+        "file": "visibility_prototype.comp.spv",
+        "sha256": "5f3c05546dd787b6ca0f4e09424d6d1486895bf66d71f88e0f61eec475b4c62a",
+        "exitCode": 0,
+        "errors": ""
+      }
+    ]
+  },
+  "replay": {
+    "status": "timed-out-before-candidate",
+    "timeoutSeconds": 120,
+    "stage": "starting",
+    "candidateReplacementPerformed": false,
+    "timingPerformed": false
+  },
+  "performanceQualification": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceFiles": [
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/analysis.json",
+      "bytes": 950,
+      "sha256": "b64a9c29d308c72151ef3637fb4b2e3869833f73b8b5f1ac5b8c9f9ecda09740"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/budget.json",
+      "bytes": 430,
+      "sha256": "29348cd65a146edb7cb835ea33e04c1c3594e62b75caac953c59b4cb5ea3ab4f"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/build_production.py",
+      "bytes": 1392,
+      "sha256": "fd36990126be99d2c24911e448fca3449b51e61219a92b8afa38dfab2b6478b7"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/candidate-build.json",
+      "bytes": 7838,
+      "sha256": "8fd17fde08000d0f92f97a64167e059acac4e1a9e9545fbb5ddec4f3510675d0"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/compare-state.json",
+      "bytes": 270,
+      "sha256": "a4d8c1ed67abf683eab84cbb3cc198a368a0442a8c2fefe9a41814560a7954d5"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/compare.py",
+      "bytes": 4221,
+      "sha256": "5c0e368729222161ebd5f70cf6cc38d0e005db8fb4f2341920af71eced1eee2e"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/compatibility-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/compatibility-result.json",
+      "bytes": 168,
+      "sha256": "8367bb65b843180712e1931ad97a3ee20b9336b3c4325b122ef1d254eb761d4a"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/debug-build.log",
+      "bytes": 36366,
+      "sha256": "ccca5274d840b846fc6fd3cdc8431a008152f8868bc815bf7e502505d881fb01"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/debug-intel-temporal-result.json",
+      "bytes": 35038,
+      "sha256": "982c8f347e88f0fe4ab4767a274adbd888ae3a7f8cebcddbd6e4a93617cbd952"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/debug-intel-tests.log",
+      "bytes": 796,
+      "sha256": "2d0a8cd4216e68c91831f7c4f4430897b5cf8d2b251503bae78a08b406d39342"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/debug-intel.xml",
+      "bytes": 2651,
+      "sha256": "5b6e6b600d268a99f6a33cc51012c767ceed4ef7bdc887b9615a94caf02d2e96"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/debug-nvidia-temporal-result.json",
+      "bytes": 35035,
+      "sha256": "ca9c67a4af023195f6922c5ef7c80381af254709e8aa2d8a3d389a7afa737e90"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/debug-nvidia-tests.log",
+      "bytes": 796,
+      "sha256": "62a8b3e10a85d793d4ffc4dcd358137260b874e9489ed52f4ded154df97dfb73"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/debug-nvidia.xml",
+      "bytes": 2656,
+      "sha256": "e7b28be63c9441c639b17c78f5101225f93a51c7323c61b185d32e782574cc2c"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic-analysis.json",
+      "bytes": 8249,
+      "sha256": "7690889aadd9a5a453b7bb63c3803d89e22ae2218b4c43d769aeee22acad3bc4"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic-compile.log",
+      "bytes": 35509,
+      "sha256": "47d826710ceb16b377412819e1290cb76b0384f242595300fdb4050b15ae67e0"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic-execution.json",
+      "bytes": 744,
+      "sha256": "1d9b37e65ab219c4856085af10e0f5a0f8526cc2e0b13cc9d9ba11516f3a9411"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic-link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic-mesh.frag",
+      "bytes": 117470,
+      "sha256": "82a424c289a60a0a88f4846d659be2a2c6fe086688193ec08beab53dbc7336bf"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic-preparation.json",
+      "bytes": 41020,
+      "sha256": "220951bb4b9759aaa7aebe037680c19ecdcc55607ab82e4ade0c7eedce250b3b"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/DiagnosticProbe.cpp",
+      "bytes": 9343,
+      "sha256": "9de4fa9a1a520ebbe03387656f67e83ab1b429bc9476ed85c095b0285da50522"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry-analysis.json",
+      "bytes": 945,
+      "sha256": "d2c45ce71ad45915e615c05e25d53c5ec3f15e2d6ce0e073d8ba360e1b5fcef0"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry-execution.json",
+      "bytes": 730,
+      "sha256": "9e50898a6265177bd66ad3667df3cad24ecf4c7b2563a7a26805bc84eb94a500"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry-mesh.frag",
+      "bytes": 117477,
+      "sha256": "6b04318a7ca0a3c4541dd1916b834a4939c6de2a39a19524c72272bc038d0490"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry-preparation.json",
+      "bytes": 47035,
+      "sha256": "7a0edab4d0ebe7dfc7c75e22ca6d3573cee3574195d5e95a939e7a01f017c2fb"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/execution.json",
+      "bytes": 743,
+      "sha256": "a191f478ae0168b8dc72a4a0488cf6b737f762acadd8c320a05583127d42421f"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/fixture-dependencies.json",
+      "bytes": 2698,
+      "sha256": "d0300ae6e2d1f8db6999e0ba31bf2d0a21e7ed8f52dde685ececef64604c9070"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/mesh.frag",
+      "bytes": 117342,
+      "sha256": "ee52f2e042e0a1365f91b891e7f72ad577b44a3defe7dd4e6b393cee889a2353"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/missing-fixture-execution.json",
+      "bytes": 743,
+      "sha256": "e884105c8779285615850eb42b785a0c92c2e2a82e8a1dd63c414917ceda1040"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/missing-fixture.log",
+      "bytes": 1837,
+      "sha256": "9a8732258dfaf084d23885061a2b3a7a94e30a706e5aef5f86361aeb15c83f35"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/missing-outline-execution.json",
+      "bytes": 729,
+      "sha256": "961b96e8892215b02acd35c621ba242176b9f3bf7341f9e01ee15bca983363db"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/missing-outline-fixture.log",
+      "bytes": 1838,
+      "sha256": "a59d36e21dbdf7217d394e2606bda8bd9c678f834f0f3035537f8de15052602e"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/native-entry-command.json",
+      "bytes": 734508,
+      "sha256": "4a326be83dd0b46256f1bdddfe7aabc69255e8adff226f716e09ef3a4cfc0408"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/native-entry-result.json",
+      "bytes": 2444,
+      "sha256": "9499730ea791b029128418ee12ad6c6a72d83223f90c05c255fd35b582698b2c"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/native-entry.log",
+      "bytes": 13606,
+      "sha256": "2efff88cf0a7816613192a45f642ae9335773014ca3664d6f61459ee2d3fdbd5"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/package_final.py",
+      "bytes": 3888,
+      "sha256": "b93590a67377b87d307535b368cc390b093c0f30ca1f8465f3866323ee344416"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/preparation.json",
+      "bytes": 43108,
+      "sha256": "493676296922d30ab443440c93e2fb4c34ddabafee9bf98ecbe3b73e64fbfef7"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/prepare.py",
+      "bytes": 2407,
+      "sha256": "ce4f7a60585e9feec30b0b4adc81a76b0d19ccf0be744031b8b6e07d3c50659d"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/prepare_compatibility.py",
+      "bytes": 3272,
+      "sha256": "57271e88ec852630b6eed10f6e7cf1561e2e1ed62f533f94fe2e562c6d12056d"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/prepare_diagnostic.py",
+      "bytes": 4087,
+      "sha256": "813534d61ec1d28c468602ca6b866566679ed24b0048333e8f94e818d97901dc"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/prepare_entry.py",
+      "bytes": 2168,
+      "sha256": "62a39678ee3fc8d7979dd56ff3cf7026a65a107d8fbb1cb2b65d2c290f9a4046"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/process.log",
+      "bytes": 13606,
+      "sha256": "2efff88cf0a7816613192a45f642ae9335773014ca3664d6f61459ee2d3fdbd5"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/production-builds.json",
+      "bytes": 1765,
+      "sha256": "d55175c3edd71030552bef40f35e22b89a9bcf263f052aecb8f047e91ac35ace"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/production-tests.json",
+      "bytes": 2836,
+      "sha256": "623d941ae789a0d9b71c0a105c51dd02cc42324667beb0b510fb6a395535f946"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/release-build.log",
+      "bytes": 36201,
+      "sha256": "9b884cb4d6e8353e74ede403cb249c8837e969380434bde9e118ad5ef20d46d9"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/release-intel-temporal-result.json",
+      "bytes": 35038,
+      "sha256": "982c8f347e88f0fe4ab4767a274adbd888ae3a7f8cebcddbd6e4a93617cbd952"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/release-intel-tests.log",
+      "bytes": 800,
+      "sha256": "6b40e07f73e73993c732e07d097314368442c24949df691cdc8ba2f57af4d1ae"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/release-intel.xml",
+      "bytes": 2654,
+      "sha256": "9efa4aa33beeff5e381d0cc5e3bfa510b4161e36f899266eae20f07f38c5a58b"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/release-nvidia-temporal-result.json",
+      "bytes": 35035,
+      "sha256": "ca9c67a4af023195f6922c5ef7c80381af254709e8aa2d8a3d389a7afa737e90"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/release-nvidia-tests.log",
+      "bytes": 800,
+      "sha256": "7869a6be252b1f8657ae15634b4a353cf589dfc6990fa6e663e8bf181f43cc7b"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/release-nvidia.xml",
+      "bytes": 2657,
+      "sha256": "efd5c6d22c978b35657b937832de64c38c5b4f65677720be23686c6f6d5e75cd"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/run_compatibility.py",
+      "bytes": 1495,
+      "sha256": "c166072131e6ca1e85c83123429dee88b65f519a5ed644892d01d724a0311147"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/run_diagnostic.py",
+      "bytes": 907,
+      "sha256": "5e7cf6946e964880bb7784399b0298433c5392bd3c939fd60d3e5f62d72b1819"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/run_entry.py",
+      "bytes": 960,
+      "sha256": "c965fcd19cb2a8a23d25928bc99ef3c5bb88e3e46f3c903211468c0b19089c7b"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/run_native.py",
+      "bytes": 3648,
+      "sha256": "0ac12aca9ea0052bfc45eb2a8d35ade696f509a5ff63dbba469667e1fee834f3"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/run_probe.py",
+      "bytes": 937,
+      "sha256": "f37c321f410d7b7f6a9f783ce8eaa2e1e383c0397740a04f22bae81e5693e533"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/run_temporal.py",
+      "bytes": 1010,
+      "sha256": "fd410aaad8948dac21ed359f075ddb181ecd455ba4ffafdfae2b5a7db0646c52"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/spirv-validation.json",
+      "bytes": 136954,
+      "sha256": "461c1cd06085f6e8c96df5e2dea23058d682d13c9900f4e1d840f539b34fc1c0"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/temporal-entry-execution.json",
+      "bytes": 676,
+      "sha256": "134cf6da971413c15d83a81e4a8cafed5c5ac9d1467939e861f94ba089949b37"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/validate_production.py",
+      "bytes": 2030,
+      "sha256": "bf68aa63eeddd1ab5bd1b0946ba424e4ce17b109dd98406dec2a0d6acb1de32b"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/validate_spirv.py",
+      "bytes": 1324,
+      "sha256": "34db739670e46e20c9e5fada4d4459e83cae731247289d6f5b837f7b46253a9e"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/baseline-command.json",
+      "bytes": 462,
+      "sha256": "9192cc6e57c28033ff9d2477a06da47ff8d2e92ae00ba3dc32c99fca7458356a"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/baseline-result.json",
+      "bytes": 184768,
+      "sha256": "108d668a77b8e2f032ed7b0a0926a776331d6a4441d92911d793beee4f4e50f5"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/baseline.log",
+      "bytes": 9151,
+      "sha256": "01a4f4b022eb99a81fba4f98647dc5e0104ebd4a949836e4c23a35bf7acad2f2"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/AttachmentProbe.cpp",
+      "bytes": 9342,
+      "sha256": "7118cbac8e684042d424aaab60c16e9567f883a46aea99e65b50a0d13f9432e9"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/attachment-analysis.json",
+      "bytes": 1326,
+      "sha256": "645be2150077d1a023264d0023616add7bc10bc2e602f0ffa1130a382dbf6fd6"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/repeat-analysis.json",
+      "bytes": 710,
+      "sha256": "43fdbc979525bdb9a8f094f9f1cda7fe8489449306ed77efe27e7092e2aef53b"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/shadow-control-analysis.json",
+      "bytes": 888,
+      "sha256": "cc2d7417fc89323e201947af94f907ea600bb15b6881262a534019b6febba92f"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/bounds-control-analysis.json",
+      "bytes": 1601,
+      "sha256": "0d4956370af95b50368513c8d586a3246c7e09547b6d742e1bc189dd57b476a9"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/probe-bounds-control/shadow-0-repeat-0-bounds.bin",
+      "bytes": 2048,
+      "sha256": "b0e4d05d288023b992571be462ac1074cb085d3673992192f54fb4de044cd8cf"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/probe-bounds-control/shadow-0-repeat-0-hdr.bin",
+      "bytes": 49152,
+      "sha256": "0f2d6cfb59c7365a77f044c8d6e2176f126c55487f01efe551d3c80a48f4df4d"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/probe-bounds-control/shadow-0-repeat-0-mask.bin",
+      "bytes": 6144,
+      "sha256": "884929e08ec0c709c085488ca1b0c61bb9749b0f38bd253c97c073657116f5be"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/probe-bounds-control/shadow-0-repeat-0-shadow-depth.bin",
+      "bytes": 65536,
+      "sha256": "1c531a4c01bcc0b9e55acbbeb18dfef7736a5c47fb2827263b52720035781424"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/probe-bounds-control/shadow-0-repeat-1-bounds.bin",
+      "bytes": 2048,
+      "sha256": "b0e4d05d288023b992571be462ac1074cb085d3673992192f54fb4de044cd8cf"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/probe-bounds-control/shadow-0-repeat-1-hdr.bin",
+      "bytes": 49152,
+      "sha256": "e2ee3e8e971df3910bc84d5ae0445c4a2d6682c0d0086e9345f1fbc6fdda219a"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/probe-bounds-control/shadow-0-repeat-1-mask.bin",
+      "bytes": 6144,
+      "sha256": "884929e08ec0c709c085488ca1b0c61bb9749b0f38bd253c97c073657116f5be"
+    },
+    {
+      "path": "build/runs/20261107-223416-intel-temporal-zero-history-c4cc50/probe-bounds-control/shadow-0-repeat-1-shadow-depth.bin",
+      "bytes": 65536,
+      "sha256": "1c531a4c01bcc0b9e55acbbeb18dfef7736a5c47fb2827263b52720035781424"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry/shadow-0-repeat-0-bounds.bin",
+      "bytes": 2048,
+      "sha256": "b0e4d05d288023b992571be462ac1074cb085d3673992192f54fb4de044cd8cf"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry/shadow-0-repeat-0-hdr.bin",
+      "bytes": 49152,
+      "sha256": "78f3d460778196d50d70eac198193752d8e0f0661788923212a29b767de3349c"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry/shadow-0-repeat-0-mask.bin",
+      "bytes": 6144,
+      "sha256": "884929e08ec0c709c085488ca1b0c61bb9749b0f38bd253c97c073657116f5be"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry/shadow-0-repeat-0-shadow-depth.bin",
+      "bytes": 65536,
+      "sha256": "1c531a4c01bcc0b9e55acbbeb18dfef7736a5c47fb2827263b52720035781424"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry/shadow-0-repeat-1-bounds.bin",
+      "bytes": 2048,
+      "sha256": "b0e4d05d288023b992571be462ac1074cb085d3673992192f54fb4de044cd8cf"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry/shadow-0-repeat-1-hdr.bin",
+      "bytes": 49152,
+      "sha256": "78f3d460778196d50d70eac198193752d8e0f0661788923212a29b767de3349c"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry/shadow-0-repeat-1-mask.bin",
+      "bytes": 6144,
+      "sha256": "884929e08ec0c709c085488ca1b0c61bb9749b0f38bd253c97c073657116f5be"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/entry/shadow-0-repeat-1-shadow-depth.bin",
+      "bytes": 65536,
+      "sha256": "1c531a4c01bcc0b9e55acbbeb18dfef7736a5c47fb2827263b52720035781424"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic/shadow-0-repeat-0-bounds.bin",
+      "bytes": 2048,
+      "sha256": "b0e4d05d288023b992571be462ac1074cb085d3673992192f54fb4de044cd8cf"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic/shadow-0-repeat-0-hdr.bin",
+      "bytes": 98304,
+      "sha256": "9aef61bf2c8f5c20b40794b54cc568a0514c10f7e6411b7e96c0af975782ae2b"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic/shadow-0-repeat-0-mask.bin",
+      "bytes": 6144,
+      "sha256": "531dc88c5e7a117dabbf0d8c8f71fc22f4ef52b7c998ca12e41b97ff82516738"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic/shadow-0-repeat-0-shadow-depth.bin",
+      "bytes": 65536,
+      "sha256": "1c531a4c01bcc0b9e55acbbeb18dfef7736a5c47fb2827263b52720035781424"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic/shadow-0-repeat-1-bounds.bin",
+      "bytes": 2048,
+      "sha256": "b0e4d05d288023b992571be462ac1074cb085d3673992192f54fb4de044cd8cf"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic/shadow-0-repeat-1-hdr.bin",
+      "bytes": 98304,
+      "sha256": "21006a9e06f1d8e16273fa2cf007e1bb919824aec3a3890563038aa0a8785dc2"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic/shadow-0-repeat-1-mask.bin",
+      "bytes": 6144,
+      "sha256": "531dc88c5e7a117dabbf0d8c8f71fc22f4ef52b7c998ca12e41b97ff82516738"
+    },
+    {
+      "path": "build/runs/20261108-002636-intel-shadow-derivative-bf54e1/diagnostic/shadow-0-repeat-1-shadow-depth.bin",
+      "bytes": 65536,
+      "sha256": "1c531a4c01bcc0b9e55acbbeb18dfef7736a5c47fb2827263b52720035781424"
+    },
+    {
+      "path": "shaders/mesh.frag",
+      "bytes": 117481,
+      "sha256": "e039715f257a9de538f67560c5da81e4b6e430c9b57e9f77e733362f20258b12"
+    },
+    {
+      "path": "build/ninja-msvc-debug/build-provenance.json",
+      "bytes": 375930,
+      "sha256": "24ac453fb7b77f1ee13d0b60488e19974004c1a7e168fce3da2e02b6d003e394"
+    },
+    {
+      "path": "build/ninja-msvc-release/build-provenance.json",
+      "bytes": 378611,
+      "sha256": "0663d65c7891b7cb488d4dbf7ece8ebdbc575fabe9caeee52dd3aa571e904789"
+    }
+  ],
+  "evidenceBytes": 858197,
+  "evidenceSha256": "4b4f4bf7305b091c606e6dfa48eed8dfacfe5de6b9492dd0f7cb4ed33deee297"
+}

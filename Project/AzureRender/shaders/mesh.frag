@@ -574,26 +574,29 @@ float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,fl
     }
     return visible/max(totalWeight,1e-6);
 }
-float sampleShadowMap(float normalDotLight) {
-    // Compute derivatives before nonuniform cascade selection. Each sampled
-    // depth is compared against the receiver plane at that texel centre.
-    vec2 gradients[4];
+vec2 shadowReceiverGradients[4];
+float shadowReceiverCurvature;
+void prepareShadowReceiver() {
+    // Invocation-local derivatives are prepared at entry, before coverage and
+    // material exits. Cascade selection and sampling consume these values.
     vec3 receiverNormal=normalize(worldNormal);
-    float normalCurvature=max(length(dFdx(receiverNormal)),length(dFdy(receiverNormal)))
+    shadowReceiverCurvature=max(length(dFdx(receiverNormal)),length(dFdy(receiverNormal)))
         /max(max(length(dFdx(worldPosition)),length(dFdy(worldPosition))),1e-6);
     for(int i=0;i<4;++i){
         vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
         vec2 uv=(p.xy*.5+.5)*.5;
         vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
         float determinant=dx.x*dy.y-dx.y*dy.x;
-        gradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+        shadowReceiverGradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
     }
+}
+float sampleShadowMap(float normalDotLight) {
     float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
     int c=depth<=camera.cascadeSplits.x?0:(depth<=camera.cascadeSplits.y?1:(depth<=camera.cascadeSplits.z?2:3));
-    float result=sampleCascadeShadow(c,normalDotLight,gradients[c],normalCurvature);
+    float result=sampleCascadeShadow(c,normalDotLight,shadowReceiverGradients[c],shadowReceiverCurvature);
     if(c<3){float previous=c==0?camera.clusterDepth.x:camera.cascadeSplits[c-1];
         float blend=smoothstep(mix(previous,camera.cascadeSplits[c],.90),camera.cascadeSplits[c],depth);
-        if(blend>0.0)result=mix(result,sampleCascadeShadow(c+1,normalDotLight,gradients[c+1],normalCurvature),blend);}
+        if(blend>0.0)result=mix(result,sampleCascadeShadow(c+1,normalDotLight,shadowReceiverGradients[c+1],shadowReceiverCurvature),blend);}
     return result;
 }
 
@@ -661,6 +664,7 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 #include "view_fog_material.glsl"
 #else
 void main() {
+    prepareShadowReceiver();
     vec2 alphaUvDx=vec2(0),alphaUvDy=vec2(0);
 #if defined(AZURE_GEOMETRY_SAMPLES)
     alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);
