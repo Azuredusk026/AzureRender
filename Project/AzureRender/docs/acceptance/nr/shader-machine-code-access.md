@@ -14,6 +14,8 @@ RenderDoc 1.46 的当前 Vulkan 后端提供可执行程序属性视图。
 该字段保留在记录中，内存预算继续使用分配器计量。
 本单元未读取性能计数器，生产源码及程序保持原内容。
 机器级浮点差异仍待具备相应可观察接口的证据。
+独立进程的[直接查询](direct-pipeline-compilation.md)已核对阶段身份。
+显式请求内部表示后，受检计算及图形管线仍返回空列表。
 
 [结果收据](evidence/2026-11-07/shader-machine-code-access/results.json)和
 [原始检查](evidence/2026-11-07/shader-machine-code-access/inspection.zip)

@@ -43,6 +43,8 @@ GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通
 
 有界解码缓存及 libpng 的[局部评估](../acceptance/nr/decoded-image-reuse.md)未达到收益门槛。
 候选保持隔离，生产来源与双配置恢复检查通过。
+材质的[直接编译定位](../acceptance/nr/direct-pipeline-compilation.md)完成。
+九项私有控制的寄存器均为一百二十八，显著收益依据尚未成立。
 
 交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
 阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。
