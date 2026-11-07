@@ -3,6 +3,9 @@
 开发产物使用[目录维护技能](tools/skills/azurerender-artifact-maintenance/SKILL.md)。
 按天回收、精简证据及累计预算见[产物规则](docs/development/artifact-retention.md)。
 
+开发管线采用[有界共享缓存](docs/acceptance/nr/pipeline-cache-workflow.md)。
+原生管线准备在跨进程复用时约为 0.140 秒，相关图像与设备检查通过。
+
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。
 双设备时序检查与原冻结四帧通过，整体性能和画质按原门槛验收。
 

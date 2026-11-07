@@ -407,8 +407,11 @@ VkPipeline VulkanRhi::createComputePipeline(const ComputePipelineDesc& desc) {
     info.stage.pName = "main";
     info.stage.pSpecializationInfo=specialization.get();
     info.layout = desc.layout;
+    VkPipelineCreationFeedback feedback{};VkPipelineCreationFeedbackCreateInfo cacheFeedback{VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO};cacheFeedback.pPipelineCreationFeedback=&feedback;
+    if(cacheFeedbackEnabled_)info.pNext=&cacheFeedback;
     VkPipeline pipeline = VK_NULL_HANDLE;
-    vkCheck(vkCreateComputePipelines(device_, VK_NULL_HANDLE, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
+    vkCheck(vkCreateComputePipelines(device_, pipelineCache_, 1, &info, nullptr, &pipeline), "vkCreateComputePipelines");
+    notePipelineCache(feedback);
     if (pipelineInspection_) pipelineInspection_->inspect(pipeline,info.flags);
     return pipeline;
 }
@@ -587,12 +590,15 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     pipelineInfo.renderPass = desc.renderPass;
     pipelineInfo.subpass = 0;
     pipelineInfo.flags=pipelineInspection_?pipelineInspection_->creationFlags():0;
+    VkPipelineCreationFeedback feedback{};VkPipelineCreationFeedbackCreateInfo cacheFeedback{VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO};cacheFeedback.pPipelineCreationFeedback=&feedback;
+    if(cacheFeedbackEnabled_)pipelineInfo.pNext=&cacheFeedback;
 
     VkPipeline pipeline = VK_NULL_HANDLE;
     vkCheck(
         vkCreateGraphicsPipelines(
-            device_, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &pipeline),
+            device_, pipelineCache_, 1, &pipelineInfo, nullptr, &pipeline),
         "vkCreateGraphicsPipelines");
+    notePipelineCache(feedback);
     if (pipelineInspection_) pipelineInspection_->inspect(pipeline,pipelineInfo.flags);
     return pipeline;
 }

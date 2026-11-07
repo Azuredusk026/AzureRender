@@ -1,8 +1,23 @@
 import hashlib,json,os,struct,tempfile,time,unittest
 from pathlib import Path
+from unittest.mock import patch
 from artifact_cache_cleanup import clean
 
 class CacheTests(unittest.TestCase):
+    def test_remaining_budget_skips_payload_hashing(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);run=root/'build/runs/legacy';run.mkdir(parents=True)
+            current=root/'current';current.mkdir();project=current/'project.azureproject';project.write_text('{}')
+            source=current/'model.glb';source.write_bytes(b'payload')
+            cache=run/'old/.azure/cache/id/42.azcache';cache.parent.mkdir(parents=True)
+            cache.write_bytes(b'AZCACHE1'+struct.pack('<QQ',42,7)+b'payload')
+            stamp=time.time()-3*86400;os.utime(cache,(stamp,stamp))
+            catalog=root/'catalog.json';catalog.write_text(json.dumps(dict(root=str(run),items=[dict(path=str(cache),bytes=cache.stat().st_size)])))
+            lock=root/'lock.json';lock.write_text(json.dumps(dict(project={str(project):hashlib.sha256(project.read_bytes()).hexdigest(),str(source):hashlib.sha256(source.read_bytes()).hexdigest()})))
+            with patch('artifact_cache_cleanup.payload_digest',side_effect=AssertionError('Unusable quota must skip payload I/O')) as payload:
+                result=clean(root,catalog,lock,apply=True,limit_bytes=30,busy=[],tracked=set())
+            payload.assert_not_called();self.assertTrue(cache.exists());self.assertFalse(result['items'])
+
     def test_catalog_parent_traversal_is_rejected(self):
         from artifact_maintenance import real_path
         with tempfile.TemporaryDirectory() as d:

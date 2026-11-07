@@ -33,6 +33,10 @@ python C:/Users/admin/.codex/skills/azurerender-artifact-maintenance/scripts/mai
 每次至多十个受管任务，维护预算一百二十秒。
 活动构建、测试及采集期间延后维护。
 
+开发管线缓存共享 `build/cache/vulkan/`。
+总池为 256 MiB、单文件至多 128 MiB、最多八项，闲置七天过期。
+每日入口核对至多六十四个直接条目，并与运行时写入共用文件锁。
+
 精简证据每任务至多 8 MiB，总池 2 GiB，保留三十天。
 证据保存源码、结果、命令、日志摘录和必要截图。
 正式长期结果按项目验收入口及版本管理保留。

@@ -726,8 +726,16 @@ def guarded_run(build, name, command, timeout=600):
 
 
 def daily(build,apply=False):
-    start=time.monotonic();result=maintain(build,apply=apply)
-    report=dict(managed=result,caches=None,externalStorageUsed=False)
+    start=time.monotonic()
+    busy=active_processes(Path(build).parent) if apply else []
+    result=(dict(status='deferred-active-work',activeProcesses=busy,applied=apply,items=[])
+            if busy else maintain(build,apply=apply,busy=busy))
+    report=dict(managed=result,caches=None,pipelineCaches=None,externalStorageUsed=False)
+    if result['status']!='deferred-active-work':
+        from artifact_pipeline_cache import clean as clean_pipelines
+        remaining=POLICY['maintenanceSeconds']-(time.monotonic()-start)
+        if remaining>5:
+            report['pipelineCaches']=clean_pipelines(build,apply=apply,seconds=min(10,remaining))
     policy_path=metadata(build)/'cache-cleanup-policy.json'
     if apply and result['status']!='deferred-active-work' and policy_path.is_file():
         policy=json.loads(real_path(policy_path).read_text(encoding='utf-8'))

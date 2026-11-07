@@ -29,6 +29,7 @@ python tools/artifact_maintenance.py daily --apply
 | 单任务 | 2 GiB、10000 个文件 |
 | 受管任务池 | 累计预留 16 GiB |
 | 外部程序日志 | 每份至多 16 MiB |
+| Vulkan 管线缓存 | 单文件 128 MiB、总池 256 MiB、最多八项，闲置七天过期 |
 
 普通生成任务在保留期后直接回收。
 精简证据包含源码、结果、命令、日志摘录和必要截图。
@@ -94,6 +95,12 @@ python tools/artifact_maintenance.py resume --run task-directory-name
 
 ## 旧任务缓存
 
+开发构建共享 `build/cache/vulkan/`，按设备、驱动与缓存标识复用管线数据。
+写入持有文件锁并采用同目录原子替换，磁盘峰值至多为 384 MiB。
+每日维护检查该目录至多六十四个直接条目，每批至多处理十个缓存文件。
+缓存清理与写入共用文件锁，Git 跟踪文件及链接保持保护。
+维护记录写入 `build/maintenance/pipeline-cache-cleanup-latest.json`。
+
 `artifact_cache_cleanup.py` 使用一次性目录清单及当前输入锁。
 它仅识别 `.azure/cache/<资产标识>/<指纹>.azcache`。
 缓存须具有有效 `AZCACHE1` 头及相符长度、指纹。
@@ -105,6 +112,7 @@ python tools/artifact_maintenance.py resume --run task-directory-name
 缓存由源资产重新生成，整个任务保持原有必要证据。
 
 每天至多处理 10 GiB 缓存，维护预算为一百二十秒。
+剩余配额按目录清单预筛，超出本次配额的文件直接跳过载荷读取。
 目录清单及不匹配证明复用，完整扫描按新增迁移范围安排。
 实际释放量以系统卷查询为准。
 每日自动任务的状态见[调度收据](artifact-automation.json)。

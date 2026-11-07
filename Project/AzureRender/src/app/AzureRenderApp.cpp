@@ -1,4 +1,5 @@
 #include "rhi/VulkanDepthBias.hpp"
+#include "rhi/VulkanPipelineCache.hpp"
 #include "runtime/InputPreferences.hpp"
 #include "foundation/FramePacing.hpp"
 #include "assets/AssetDeformation.hpp"
@@ -297,9 +298,15 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
         kMaxFramesInFlight,
         uploadRingAlignment_);
     createCommandPool();
+    try{
+        const auto base=resourceLocator_.generatedCacheDirectory(std::filesystem::u8path(runOptions_.projectFile));
+        const auto directory=base.empty()?std::filesystem::path{}:base/"vulkan";
+        pipelineCache_=std::make_unique<azurerender::rhi::VulkanPipelineCache>(device_,physicalDevice_,directory);
+        azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache loaded: bytes="+std::to_string(pipelineCache_->statistics().loadedBytes)+", state="+pipelineCache_->statistics().readState);
+    }catch(const std::exception&){pipelineCache_.reset();azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache unavailable; using normal pipeline creation");}
     rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
         device_, physicalDevice_, graphicsQueue_, commandPool_,
-        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get(), [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.sampleRateShading==VK_TRUE;}(physicalDevice_),exactDepthBiasEnabled_);
+        gpuAllocator_, [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.samplerAnisotropy==VK_TRUE;}(physicalDevice_), pipelineInspection_.get(), [] (VkPhysicalDevice physical) {VkPhysicalDeviceFeatures f{};vkGetPhysicalDeviceFeatures(physical,&f);return f.sampleRateShading==VK_TRUE;}(physicalDevice_),exactDepthBiasEnabled_,pipelineCache_?pipelineCache_->handle():VK_NULL_HANDLE);
     createPostProcessDescriptorSetLayout();
     resolvedAssetPath_ = resourceLocator_.resolveAsset(std::filesystem::u8path(assetPath)).u8string();
     phase("shadow resources", [this] { createShadowResources(); });
@@ -1210,7 +1217,14 @@ void AzureRenderApp::cleanup() {
         if (commandPool_ != VK_NULL_HANDLE) {
             vkDestroyCommandPool(device_, commandPool_, nullptr);
         }
+        const auto cacheUsage=rhi_?rhi_->pipelineCacheUsage():azurerender::rhi::VulkanRhi::CacheUsage{};
         rhi_.reset();
+        if(pipelineCache_){
+            pipelineCache_->flush();
+            const auto& cache=pipelineCache_->statistics();
+            azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache saved: bytes="+std::to_string(cache.writtenBytes)+", state="+cache.writeState+", requests="+std::to_string(cacheUsage.requests)+", hits="+std::to_string(cacheUsage.hits)+", feedback="+std::to_string(cacheUsage.feedback));
+            pipelineCache_.reset();
+        }
         const auto& unloaded = gpuAllocator_.statistics();
         azurerender::RuntimeDiagnostics::instance().print(
             "render", "Allocator after unload: buffers=" + std::to_string(unloaded.liveBuffers)

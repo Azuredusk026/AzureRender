@@ -53,8 +53,8 @@
 | 管线准备 | 117.408 |
 
 管线任务包含图形管线、运动初始化及场景状态准备。
-RHI 的图形和计算创建入口当前传入空管线缓存。
-持久缓存是后续启动候选，实际收益尚未测量。
+本页诊断输入的 RHI 图形及计算创建入口传入空缓存。
+生产持久机制及实际收益见[管线缓存](pipeline-cache-workflow.md)。
 跨运行复用依据为 [Vulkan 管线缓存示例](https://docs.vulkan.org/samples/latest/samples/performance/pipeline_cache/README.html)。
 
 ## 验证与状态

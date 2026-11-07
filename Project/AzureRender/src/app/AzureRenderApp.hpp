@@ -60,6 +60,8 @@ struct RenderContext;
 struct SceneFrameData;
 }
 
+namespace azurerender::rhi { class VulkanPipelineCache; }
+
 class AzureRenderApp final {
 public:
     AzureRenderApp();
@@ -273,6 +275,7 @@ private:
     // All per-frame CPU-to-GPU uploads are slices of this ring.
     azurerender::rhi::UploadRingBuffer uploadRing_;
     // Resource creation backend handed to scene renderers.
+    std::unique_ptr<azurerender::rhi::VulkanPipelineCache> pipelineCache_;
     std::unique_ptr<azurerender::rhi::VulkanRhi> rhi_;
     std::unique_ptr<azurerender::rhi::PipelineInspection> pipelineInspection_;
     bool exactDepthBiasEnabled_=false;

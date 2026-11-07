@@ -19,6 +19,7 @@ public:
     [[nodiscard]] std::filesystem::path rampAtlas() const;
     [[nodiscard]] std::filesystem::path showcaseLooks() const;
     [[nodiscard]] std::filesystem::path captureDirectory() const;
+    [[nodiscard]] std::filesystem::path generatedCacheDirectory(const std::filesystem::path& projectFile) const;
     [[nodiscard]] std::filesystem::path resolveAsset(
         const std::filesystem::path& requested) const;
     [[nodiscard]] const std::vector<std::filesystem::path>& searchRoots() const noexcept {

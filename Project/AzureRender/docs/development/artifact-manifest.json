@@ -1,5 +1,33 @@
 {
   "schemaVersion": 1,
+  "managedTaskPolicy": {
+    "root": "build/runs",
+    "retentionDays": 1,
+    "diagnosticRetentionDays": [3, 7],
+    "maximumTaskBytes": 2147483648,
+    "maximumTaskFiles": 10000,
+    "maximumReservedPoolBytes": 17179869184,
+    "evidenceMaximumTaskBytes": 8388608,
+    "evidenceMaximumPoolBytes": 2147483648,
+    "evidenceRetentionDays": 30,
+    "explicitRecoveryRoot": "build/archives/managed",
+    "explicitRecoveryMaximumPoolBytes": 8589934592,
+    "explicitRecoveryRetentionDays": 7,
+    "dailyMaximumCacheBytes": 10737418240,
+    "dailyMaximumSeconds": 120,
+    "externalProjectStorage": false,
+    "maintenance": "tools/artifact_maintenance.py daily --apply"
+  },
+  "pipelineCachePolicy": {
+    "developmentPath": "build/cache/vulkan",
+    "maximumFileBytes": 134217728,
+    "maximumPoolBytes": 268435456,
+    "maximumEntries": 8,
+    "retentionDays": 7,
+    "maximumWritePeakBytes": 402653184,
+    "dailyInspectionEntryLimit": 64,
+    "maintenance": "tools/artifact_maintenance.py daily --apply"
+  },
   "storageBudget": {
     "policy": "artifact-retention.md#空间门禁",
     "runQuotaBytes": 2147483648,
@@ -17,6 +45,19 @@
     "exeSha256": "1c06d440915d60a4ed9674c0232bf964bc9a9ec4418951fc7c3be2dc579904b1"
   },
   "milestones": [
+    {
+      "path": "runs/20261108-021544-pipeline-cache-workflow-7bb141",
+      "name": "有界管线缓存与每日维护",
+      "status": "AcceptedDevelopmentWorkflow",
+      "sourceBase": "8b6caac",
+      "evidence": "docs/acceptance/nr/pipeline-cache-workflow.md",
+      "candidateAdopted": true,
+      "scopedChecks": 12,
+      "artifactToolChecks": 51,
+      "nativeFramesIdentical": 5,
+      "formalPerformancePassed": false,
+      "overallVisualAcceptance": "failed-user-review"
+    },
     {
       "path": "runs/20261107-030141-shadow-visibility-reuse-90fb90",
       "name": "同帧阴影可见度候选评估",

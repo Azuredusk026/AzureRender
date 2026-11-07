@@ -7,6 +7,7 @@
 #include <functional>
 #include <unordered_map>
 #include <mutex>
+#include <atomic>
 
 namespace azurerender::rhi {
 
@@ -14,19 +15,24 @@ namespace azurerender::rhi {
 // callers destroy through the matching destroy methods.
 class VulkanRhi final : public IRhi {
 public:
+    struct CacheUsage {std::uint64_t requests=0,hits=0,feedback=0;};
+    CacheUsage pipelineCacheUsage()const noexcept{return {cacheRequests_.load(),cacheHits_.load(),cacheFeedback_.load()};}
     VulkanRhi(
         VkDevice device,
         VkPhysicalDevice physicalDevice,
         VkQueue graphicsQueue,
         VkCommandPool commandPool,
         GpuAllocator& allocator, bool samplerAnisotropyEnabled=false,
-        PipelineInspection* pipelineInspection=nullptr,bool sampleShadingEnabled=false,bool exactDepthBiasEnabled=false)
+        PipelineInspection* pipelineInspection=nullptr,bool sampleShadingEnabled=false,bool exactDepthBiasEnabled=false,
+        VkPipelineCache pipelineCache=VK_NULL_HANDLE)
         : device_(device),
           physicalDevice_(physicalDevice),
           graphicsQueue_(graphicsQueue),
           commandPool_(commandPool),
           samplerAnisotropyEnabled_(samplerAnisotropyEnabled),allocator_(&allocator),
-          pipelineInspection_(pipelineInspection),sampleShadingEnabled_(sampleShadingEnabled),exactDepthBiasEnabled_(exactDepthBiasEnabled) {}
+          pipelineInspection_(pipelineInspection),sampleShadingEnabled_(sampleShadingEnabled),exactDepthBiasEnabled_(exactDepthBiasEnabled),pipelineCache_(pipelineCache) {
+        if(pipelineCache_&&physicalDevice_){VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);cacheFeedbackEnabled_=properties.apiVersion>=VK_API_VERSION_1_3;}
+    }
 
     GpuAllocator& allocator() override { return *allocator_; }
     bool supportsSampledImage(VkFormat format,bool linearFilter) const override;
@@ -121,6 +127,15 @@ private:
     bool exactDepthBiasEnabled_=false;
     std::unordered_map<VkRenderPass,VkSampleCountFlagBits> renderPassSamples_;
     std::mutex renderPassMutex_;
+    VkPipelineCache pipelineCache_=VK_NULL_HANDLE;
+    bool cacheFeedbackEnabled_=false;
+    std::atomic<std::uint64_t> cacheRequests_{0},cacheHits_{0},cacheFeedback_{0};
+    void notePipelineCache(const VkPipelineCreationFeedback& feedback)noexcept{
+        if(!pipelineCache_)return;
+        cacheRequests_.fetch_add(1,std::memory_order_relaxed);
+        if(feedback.flags&VK_PIPELINE_CREATION_FEEDBACK_VALID_BIT){cacheFeedback_.fetch_add(1,std::memory_order_relaxed);
+            if(feedback.flags&VK_PIPELINE_CREATION_FEEDBACK_APPLICATION_PIPELINE_CACHE_HIT_BIT)cacheHits_.fetch_add(1,std::memory_order_relaxed);}
+    }
 };
 
 // Records onto a live VkCommandBuffer. Created per frame by the engine.

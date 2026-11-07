@@ -15,7 +15,7 @@ void require(bool condition, int line) {
 #define check(...) require((__VA_ARGS__), __LINE__)
 
 int main() try {
-    const auto root = std::filesystem::temp_directory_path()
+    const auto root = azurerender::ResourceLocator::executableDirectory()/"test-artifacts"
         / ("azurerender-resources-" + std::to_string(
             std::chrono::steady_clock::now().time_since_epoch().count()));
     std::filesystem::create_directories(root / "shaders");
@@ -33,6 +33,12 @@ int main() try {
     check(locator.rampProfile().filename() == "toon_ramp_profiles.json");
     check(locator.showcaseLooks().filename() == "showcase_looks.json");
     check(locator.rampAtlas().filename() == "toon_ramp_atlas.ppm");
+    check(locator.generatedCacheDirectory({}).empty());
+    const auto firstCache=locator.generatedCacheDirectory(root/"one"/"project.azureproject");
+    const auto secondCache=locator.generatedCacheDirectory(root/"two"/"project.azureproject");
+    check(firstCache!=secondCache);
+    check(firstCache==std::filesystem::absolute(root/"one"/".azure"/"cache"));
+    check(firstCache.is_absolute()&&firstCache.filename()=="cache");
 
     bool missingReported = false;
     try {

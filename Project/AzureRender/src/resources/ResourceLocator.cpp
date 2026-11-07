@@ -124,6 +124,16 @@ std::filesystem::path ResourceLocator::captureDirectory() const {
     return std::filesystem::current_path() / "captures";
 }
 
+std::filesystem::path ResourceLocator::generatedCacheDirectory(const std::filesystem::path& projectFile) const {
+    if(projectFile.empty())return {};
+#ifdef AZURERENDER_DEVELOPMENT_ROOT
+    const std::filesystem::path development=AZURERENDER_DEVELOPMENT_ROOT;
+    if(installationRoot().empty()&&std::filesystem::is_regular_file(development/"CMakeLists.txt"))
+        return development/"build"/"cache";
+#endif
+    return std::filesystem::absolute(projectFile).parent_path()/".azure"/"cache";
+}
+
 std::filesystem::path ResourceLocator::resolveAsset(
     const std::filesystem::path& requested) const {
     if (requested.empty()) {

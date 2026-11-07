@@ -735,6 +735,8 @@ add_library(AzureRenderCore STATIC
     src/render/TemporalReconstruction.cpp
     src/render/MotionVectorTarget.cpp
     src/rhi/PipelineInspection.cpp
+    src/rhi/PipelineCacheStore.cpp
+    src/rhi/VulkanPipelineCache.cpp
     src/rhi/UploadRingBuffer.cpp
     src/rhi/VulkanRhi.cpp
     src/rhi/VulkanMemoryAllocatorImpl.cpp
@@ -1054,6 +1056,14 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.SkinningGpu COMMAND AzureSkinningGpuTests "${SHADER_BINARY_DIR}/skin.comp.spv")
     set_tests_properties(AzureRender.SkinningGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureShadowFilteringGpuTests tests/ShadowFilteringGpuTests.cpp)
+    add_executable(AzurePipelineCacheStoreTests tests/PipelineCacheStoreTests.cpp)
+    target_link_libraries(AzurePipelineCacheStoreTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.PipelineCacheStore COMMAND AzurePipelineCacheStoreTests "${CMAKE_BINARY_DIR}/test-artifacts/pipeline-cache-store")
+    add_executable(AzureVulkanPipelineCacheTests tests/VulkanPipelineCacheTests.cpp)
+    target_link_libraries(AzureVulkanPipelineCacheTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureVulkanPipelineCacheTests AzureRenderShaders)
+    add_test(NAME AzureRender.VulkanPipelineCache COMMAND AzureVulkanPipelineCacheTests "${SHADER_BINARY_DIR}/shadow_bounds.comp.spv" "${CMAKE_BINARY_DIR}/test-artifacts/vulkan-pipeline-cache")
+    set_tests_properties(AzureRender.VulkanPipelineCache PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureObjectShadowFilteringGpuTests tests/ObjectShadowFilteringGpuTests.cpp)
     target_link_libraries(AzureObjectShadowFilteringGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureObjectShadowFilteringGpuTests AzureRenderShaders)

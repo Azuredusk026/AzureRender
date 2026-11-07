@@ -39,7 +39,7 @@ def _clean(engine,catalog,lock,*,apply=False,limit_bytes=10*2**30,seconds=120,bu
     used=ledger.get('reservedBytes',0) if ledger.get('date')==day else 0
     if type(used) is not int or not 0<=used<=10*2**30:raise ValueError('Invalid daily cache budget')
     limit_bytes=min(limit_bytes,10*2**30-used)
-    if limit_bytes<=0:return dict(status='daily-budget-used',items=[],logicalBytes=0,externalStorageUsed=False)
+    if limit_bytes<24:return dict(status='daily-budget-used',items=[],logicalBytes=0,externalStorageUsed=False)
     info=json.loads(catalog.read_text(encoding='utf-8'));root=real_path(info['root'])
     if root.parent!=build/'runs' or not root.is_dir():raise ValueError('Expected a direct historical task root')
     frozen=json.loads(lock.read_text(encoding='utf-8'))['project']
@@ -55,11 +55,14 @@ def _clean(engine,catalog,lock,*,apply=False,limit_bytes=10*2**30,seconds=120,bu
     tracked=tracked_paths(engine) if tracked is None else tracked
     progress_path=build/'maintenance'/(catalog.stem+'-proofs.json')
     progress=json.loads(progress_path.read_text(encoding='utf-8')) if progress_path.exists() else {}
-    verified_sources={};items=[];bytes_removed=0;reused=0;unknown=0
+    verified_sources={};items=[];bytes_removed=0;reused=0;unknown=0;budget_skipped=0
     import shutil
     free_before=shutil.disk_usage(engine).free
     for row in sorted(info['items'],key=lambda r:r['bytes'],reverse=True):
         if time.monotonic()>=deadline or bytes_removed>=limit_bytes:break
+        if type(row['bytes']) is not int or row['bytes']<0:raise ValueError('Invalid cache catalog size')
+        if row['bytes']>limit_bytes-bytes_removed:
+            budget_skipped+=1;continue
         path=real_path(row['path'])
         if root not in path.parents or path.suffix!='.azcache' or '.azure' not in path.parts:raise ValueError('Unexpected cache target')
         azure=next(p for p in path.parents if p.name=='.azure')
@@ -67,6 +70,8 @@ def _clean(engine,catalog,lock,*,apply=False,limit_bytes=10*2**30,seconds=120,bu
         if any(p==path or p in path.parents for p in protected) or path in tracked or not path.is_file():continue
         if any((p/'.git').exists() for p in path.parents if p==root or root in p.parents):raise ValueError('Nested Git worktree is protected')
         current=identity(path)
+        if current[0]>limit_bytes-bytes_removed:
+            budget_skipped+=1;continue
         if time.time()-path.stat().st_mtime<86400:continue
         previous=progress.get(str(path))
         if previous and previous['identity']==current and previous.get('unmatched'):
@@ -98,6 +103,7 @@ def _clean(engine,catalog,lock,*,apply=False,limit_bytes=10*2**30,seconds=120,bu
     result=dict(status='completed' if apply else 'preview',applied=apply,items=items,
                 logicalBytes=bytes_removed,volumeFreedBytes=shutil.disk_usage(engine).free-free_before,
                 unmatched=unknown,reusedUnmatchedProofs=reused,canonicalSourcesVerified=len(verified_sources),
+                skippedForRemainingBudget=budget_skipped,
                 sourceLock=str(lock),catalog=str(catalog),wholeRunBackupCreated=False,externalStorageUsed=False,
                 seconds=time.monotonic()-start)
     write_json(build/'maintenance'/'cache-cleanup-latest.json',result)
