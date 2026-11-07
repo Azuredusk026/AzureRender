@@ -5,6 +5,7 @@
 
 开发管线采用[有界共享缓存](docs/acceptance/nr/pipeline-cache-workflow.md)。
 原生管线准备在跨进程复用时约为 0.140 秒，相关图像与设备检查通过。
+照明复用的[接收面核对](docs/acceptance/nr/radiance-receiver-entry.md)保持原像素差异，候选继续隔离。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。
 双设备时序检查与原冻结四帧通过，整体性能和画质按原门槛验收。

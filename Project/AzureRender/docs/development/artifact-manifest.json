@@ -46,6 +46,16 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-033035-radiance-receiver-entry-c43d47",
+      "name": "照明复用接收面入口核对",
+      "status": "IsolatedZeroPixelGateFailed",
+      "sourceBase": "136dd99",
+      "evidence": "docs/acceptance/nr/radiance-receiver-entry.md",
+      "candidateAdopted": false,
+      "nativeFramesIdenticalToOriginalCandidate": 4,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-021544-pipeline-cache-workflow-7bb141",
       "name": "有界管线缓存与每日维护",
       "status": "AcceptedDevelopmentWorkflow",

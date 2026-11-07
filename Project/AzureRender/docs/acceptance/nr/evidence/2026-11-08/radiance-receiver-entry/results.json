@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "136dd99",
+  "result": {
+    "status": "isolated-zero-pixel-gate-failed",
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 237.78100000000268,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-070333-surface-radiance-reuse-bdfb96\\isolated-candidate.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "4",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-033035-radiance-receiver-entry-c43d47\\image\\frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-033035-radiance-receiver-entry-c43d47\\image\\runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-033035-radiance-receiver-entry-c43d47"
+      ]
+    },
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "positions": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "a0be810c2c9692dff3c564378d8ed4588bdd16723072189792d6e7785d49c52b",
+        "changedPixels": 2,
+        "maximumByteError": 1,
+        "positions": [
+          [
+            258,
+            488
+          ],
+          [
+            991,
+            1986
+          ]
+        ]
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "22bc84d38b091f3d806680b5d2ee3f925695f4c59b55bde83b690ae29c1442af",
+        "changedPixels": 2,
+        "maximumByteError": 1,
+        "positions": [
+          [
+            258,
+            488
+          ],
+          [
+            1106,
+            1252
+          ]
+        ]
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "a2a65fc55e4bc45405199a747db41bf929bb46851c0be3ea292a90366949caaa",
+        "changedPixels": 1,
+        "maximumByteError": 1,
+        "positions": [
+          [
+            258,
+            488
+          ]
+        ]
+      }
+    ],
+    "surfaceRadiancePrepared": true,
+    "cacheBytes": 471859200,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "allInputsUnchanged": true,
+    "formalPerformanceQualified": false,
+    "performancePairExecuted": false
+  },
+  "programsRecompiled": 32,
+  "allFourFramesIdenticalToOriginalCandidate": true,
+  "productionBuildProvenance": [
+    {
+      "configuration": "release",
+      "sha256": "e6b5ae26b0356e567014bfb2d52d461f6d5c7bd3b16ef0417ce3b488f476a192",
+      "status": "passed"
+    },
+    {
+      "configuration": "debug",
+      "sha256": "02f4730b3984dd124301b809ca8ca4b8e508d690d7afc8a0b00d376df3ec2e7b",
+      "status": "passed"
+    }
+  ],
+  "protectedUserDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "productionIntegrated": false,
+  "performancePairExecuted": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 412480,
+  "evidenceSha256": "f61e582616d290b8087f9926d80acd41d7e632ae2055aadd5c93d8c12535ef0d",
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 435,
+      "sha256": "2b3e548144581205c34f421a87222312e0591bfbdef01d0073080235560cc519"
+    },
+    {
+      "path": "command.json",
+      "bytes": 939,
+      "sha256": "9270a43d7ca137e3862ddd25b10fe1bb1341113e16c142efb880aea1f9b15f47"
+    },
+    {
+      "path": "entry.patch",
+      "bytes": 2769,
+      "sha256": "473ff023695bec5a01ff6f1bf7dd20d482bffb608e78ea8b715317f8023b476e"
+    },
+    {
+      "path": "frozen-inputs.json",
+      "bytes": 943024,
+      "sha256": "7d09751f5c429eec28f79fcab3473fed07ee7db6bb29f3de7616b32acbea3cd8"
+    },
+    {
+      "path": "image/frames/capture_manifest.json",
+      "bytes": 15802,
+      "sha256": "7274ecb02f683c5762f8f3b68acbef2acd91ca09dad146f908b1b5563d724d7e"
+    },
+    {
+      "path": "image/runtime.json",
+      "bytes": 317962,
+      "sha256": "f97b9bf2e5c36262316eb52a218ae9a81bd1a07e794b94a5674eef6f16ea4826"
+    },
+    {
+      "path": "native-result.json",
+      "bytes": 2687,
+      "sha256": "af311a5f8d301f332cbd8b42e54e881d7149bae6be34b004693fb199495c86ad"
+    },
+    {
+      "path": "native.py",
+      "bytes": 3513,
+      "sha256": "87a4136ca62dd34ea231d4044f3beec3db2883f5d4cea9f1f7afca86216b47b2"
+    },
+    {
+      "path": "package.py",
+      "bytes": 2948,
+      "sha256": "e767bcad5c8f76b70aa5b1a9a9c78c0646a968659d8ae7580e2554a8a5a603fa"
+    },
+    {
+      "path": "preparation.json",
+      "bytes": 316708,
+      "sha256": "99853eb553e7ca4caf7da04e044746fec93f230c00fc88f80128c9114dfab06e"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 4302,
+      "sha256": "0242a4b0b531fa1ef7aad8e3aa67fe5127dca6570960c5fd7c5c6e5d7f2f2542"
+    },
+    {
+      "path": "prior-pixel-positions.json",
+      "bytes": 515,
+      "sha256": "752b0692e67f46ee5895f52efe1fb2150018e5b8224885994eace8b218721632"
+    },
+    {
+      "path": "process.log",
+      "bytes": 13610,
+      "sha256": "555ecd7fcc45358d1ac756c2a7f6aca6c60c5c7ad496555205860801bb37db06"
+    },
+    {
+      "path": "source/mesh.frag",
+      "bytes": 118482,
+      "sha256": "668659c39e0ca41839d1792d30cd133417863e6e508f7edda00b258202c54b0c"
+    },
+    {
+      "path": "source/mesh.vert",
+      "bytes": 8738,
+      "sha256": "d6a77060ed90dc54d56ca41da31ca69833666e00f6daf679e75f555ea71a3311"
+    },
+    {
+      "path": "source/surface_radiance.glsl",
+      "bytes": 3157,
+      "sha256": "9f542c2624017ad92c2b13e11a773d79b4158d7e5db6003f4dead15189cb9656"
+    },
+    {
+      "path": "source/surface_radiance_identity.glsl",
+      "bytes": 716,
+      "sha256": "d454724dd8249b1d79e14d813cdf1458d59b00e3818cecb10922624a2c14f2af"
+    },
+    {
+      "path": "source/surface_radiance_probe.frag",
+      "bytes": 1892,
+      "sha256": "d1a4e9769d52c80b7994afdc5976a5bde8cc9bf2a5160271ec20f5b02b5345c1"
+    },
+    {
+      "path": "source/surface_radiance_probe.vert",
+      "bytes": 362,
+      "sha256": "678e9464d32074775a457924da2fd861e93af0ecd0361d94a369e3f0a6aacb1e"
+    }
+  ]
+}

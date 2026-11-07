@@ -40,6 +40,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。
 原四帧及复用帧保持零像素差，正式帧预算继续验收。
+照明复用的[接收面核对](../acceptance/nr/radiance-receiver-entry.md)完成。
+四帧与原候选摘要一致，原有一字节差异继续待定位，候选保持隔离。
 
 GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通过二十二项检查。
 原冻结四帧均符合零像素条件，整帧收益待原 80W 条件确认。
