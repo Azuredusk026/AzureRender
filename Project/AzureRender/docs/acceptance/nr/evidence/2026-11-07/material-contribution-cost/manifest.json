@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "sourceBase": "ce9616f",
+  "status": "unqualified-environment",
+  "captureSha256": "5cbfc0ecf9fa24a7a8d8949ed54c3fc3691b7a1a58075d68f63f257b34ca6942",
+  "archive": {
+    "file": "diagnosis.zip",
+    "bytes": 358471,
+    "sha256": "e2a115f7c93521d084af362441ebf48ba840d529afeeb35a44b28db032b9036f"
+  },
+  "resultsSha256": "79a4d312c21f7aac7b4fd03b5d682f80d0056170c8cba296f038a25299e4ab39"
+}
