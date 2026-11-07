@@ -47,6 +47,8 @@ GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通
 九项私有控制的寄存器均为一百二十八，显著收益依据尚未成立。
 Q1 的[精确采样定位](../acceptance/nr/exact-hair-sampling-inputs.md)确认一处层级差异。
 相同梯度的取样结果逐位一致，完整头发门禁继续验收。
+梯度候选的[整区评估](../acceptance/nr/hair-gradient-region.md)仍有七十二处超差。
+候选保持隔离，生产的原七十三处待项保持有效。
 
 交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
 阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。
