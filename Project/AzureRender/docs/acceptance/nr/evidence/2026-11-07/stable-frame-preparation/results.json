@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 1,
+  "status": "adopted-diagnostic-cpu-improvement",
+  "sourceBase": "aca7dfc",
+  "qualification": {
+    "kind": "HostFrameAndSceneInstancePreparation",
+    "affectedMeanMs": 4.638035,
+    "referenceInstrumentedCpuWorkMeanMs": 10.83438500000004,
+    "affectedCpuFraction": 0.42808475054190737,
+    "measuredHistorySavedMs": 0.7428439999999993,
+    "inferredHierarchySavedMs": 0.6923628129094946,
+    "expectedCpuSavedMs": 1.435206812909494,
+    "expectedReducedWorkFraction": 0.3094428595104379,
+    "qualified": true,
+    "scope": "Actual native ECS transform capture/interpolation operation savings; same-function hierarchy reduction applied to current native aggregate hierarchy stage. Instrumented work includes diagnostic overhead. No whole-frame improvement claim.",
+    "implementation": "PreviousTransformSnapshot plus SceneTransformCache only; immutable mesh bounds and description borrowing remain private controls."
+  },
+  "native": {
+    "baseline": {
+      "status": "measured",
+      "sourceBase": "aca7dfc",
+      "visualAcceptance": "failed-user-review",
+      "seconds": 117.75,
+      "warmup": 300,
+      "samples": 120,
+      "gpu": {
+        "shadowMs": {
+          "mean": 2.523508533333333,
+          "p95": 2.5827296,
+          "p99": 2.6021487999999997
+        },
+        "sceneMs": {
+          "mean": 19.263496533333335,
+          "p95": 20.379904,
+          "p99": 21.19538688
+        },
+        "postProcessMs": {
+          "mean": 0.2843136,
+          "p95": 0.2939904,
+          "p99": 0.29696
+        },
+        "frameMs": {
+          "mean": 22.071318666666667,
+          "p95": 23.23932,
+          "p99": 24.071313280000002
+        }
+      },
+      "cpu": {
+        "mean": 9.61633999999998,
+        "p95": 10.459480000000669,
+        "p99": 12.86152899999944
+      },
+      "wait": {
+        "mean": 12.364130833333354,
+        "p95": 13.495115000000032,
+        "p99": 14.370270999999194
+      },
+      "sceneExtent": [
+        1920,
+        1080
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 2,
+        "waitMilliseconds": 7.5028999999999995
+      },
+      "allocator": {
+        "bufferAllocations": 1997,
+        "imageAllocations": 440,
+        "liveBuffers": 834,
+        "liveImages": 440,
+        "bufferBytes": 2985576984,
+        "imageBytes": 2779192832,
+        "liveBufferBytes": 415610856,
+        "liveImageBytes": 2779192832,
+        "deviceLocalPeakBytes": 3291255520
+      },
+      "peakWorkingSetBytes": 7405547520,
+      "environmentFailures": [
+        "run observation 20: driver relative thermal headroom is insufficient"
+      ],
+      "zeroAllocator": true,
+      "validationClean": true,
+      "diagnosticOnly": true,
+      "formalSampleCountSatisfied": false,
+      "allMountedProjectBytesUnchanged": true,
+      "powerAcceptanceUnchanged": true,
+      "powerDeviationIsFailure": true,
+      "timingBudgetPassed": false,
+      "powerProfileStable": false,
+      "environmentPassed": false,
+      "executableSha256": "53d3dd3a6bcc42f403bdde650339f4ea587c316bb71704cb512ccaf893b9bd4d",
+      "pairRole": "baseline",
+      "instrumented": false
+    },
+    "candidate": {
+      "status": "measured",
+      "sourceBase": "aca7dfc-with-stable-frame-preparation",
+      "visualAcceptance": "failed-user-review",
+      "seconds": 112.57800000000134,
+      "warmup": 300,
+      "samples": 120,
+      "gpu": {
+        "shadowMs": {
+          "mean": 2.5014546666666666,
+          "p95": 2.5621296,
+          "p99": 2.56911424
+        },
+        "sceneMs": {
+          "mean": 19.0825984,
+          "p95": 19.9307776,
+          "p99": 20.18724864
+        },
+        "postProcessMs": {
+          "mean": 0.28251306666666665,
+          "p95": 0.288768,
+          "p99": 0.289792
+        },
+        "frameMs": {
+          "mean": 21.866566133333333,
+          "p95": 22.743751999999997,
+          "p99": 22.98263488
+        }
+      },
+      "cpu": {
+        "mean": 7.155967499999955,
+        "p95": 7.9741249999997565,
+        "p99": 10.363208000000125
+      },
+      "wait": {
+        "mean": 14.604710000000045,
+        "p95": 15.726370000000497,
+        "p99": 16.401890999999615
+      },
+      "sceneExtent": [
+        1920,
+        1080
+      ],
+      "framePacing": {
+        "maximumRate": 60,
+        "presentMode": "FIFO",
+        "vsync": true,
+        "waitFrames": 3,
+        "waitMilliseconds": 10.4388
+      },
+      "allocator": {
+        "bufferAllocations": 1997,
+        "imageAllocations": 440,
+        "liveBuffers": 834,
+        "liveImages": 440,
+        "bufferBytes": 2985576984,
+        "imageBytes": 2779192832,
+        "liveBufferBytes": 415610856,
+        "liveImageBytes": 2779192832,
+        "deviceLocalPeakBytes": 3291255520
+      },
+      "peakWorkingSetBytes": 7403028480,
+      "environmentFailures": [
+        "run observation 20: software thermal slowdown is active"
+      ],
+      "zeroAllocator": true,
+      "validationClean": true,
+      "diagnosticOnly": true,
+      "formalSampleCountSatisfied": false,
+      "allMountedProjectBytesUnchanged": true,
+      "powerAcceptanceUnchanged": true,
+      "powerDeviationIsFailure": true,
+      "timingBudgetPassed": false,
+      "powerProfileStable": false,
+      "environmentPassed": false,
+      "executableSha256": "99130ce546ed398cbb61b9bd20bc701d899556be9b6ef8b3bfba6262e8a3025f",
+      "pairRole": "candidate",
+      "instrumented": false
+    },
+    "savedCpuMeanMs": 2.460372500000025,
+    "savedCpuP95Ms": 2.4853550000009124,
+    "cpuMeanReduction": 0.2558533184142855,
+    "cpuShortWindowBudgetPassed": true,
+    "all663ProgramsByteIdentical": true,
+    "gpuBenefitClaimed": false,
+    "formalAcceptance": false
+  },
+  "image": {
+    "sceneTransformCache": {
+      "sceneTransformCachedNodes": 1679,
+      "sceneTransformReusedWorld": 1679,
+      "sceneTransformLocalEvaluations": 0,
+      "sceneTransformFallback": false
+    },
+    "status": "passed",
+    "sourceBase": "aca7dfc-with-stable-frame-preparation",
+    "executableSha256": "99130ce546ed398cbb61b9bd20bc701d899556be9b6ef8b3bfba6262e8a3025f",
+    "exitCode": 0,
+    "seconds": 115.43800000000192,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        }
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "frozen": {
+          "identical": true,
+          "changedPixels": 0,
+          "maxByteDifference": 0
+        },
+        "liveBaseline": {
+          "identical": false,
+          "changedPixels": 14,
+          "maxByteDifference": 1
+        }
+      }
+    ],
+    "all663ProgramsByteIdentical": true,
+    "zeroAllocator": true,
+    "validationLogClean": true,
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "allMountedProjectBytesUnchanged": true,
+    "projectFileCount": 1729,
+    "visualAcceptance": "failed-user-review",
+    "scope": "Generational transform history and exact hierarchy matrix reuse; original four frozen native RGB references, zero-pixel gate unchanged; full user visual acceptance remains failed"
+  },
+  "sceneTransformCache": {
+    "sceneTransformCachedNodes": 1679,
+    "sceneTransformReusedWorld": 1679,
+    "sceneTransformLocalEvaluations": 0,
+    "sceneTransformFallback": false
+  },
+  "checks": [
+    {
+      "kind": "build",
+      "exitCode": 0,
+      "seconds": 187.375,
+      "command": [
+        "cmd",
+        "/d",
+        "/c",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzurePreviousTransformSnapshotTests",
+        "--test-target",
+        "AzureSceneTransformCacheTests",
+        "--test-target",
+        "AzureCameraSystemTests",
+        "--test-target",
+        "AzureRuntimeSceneSnapshotCacheTests",
+        "--test-target",
+        "AzureRuntimeRenderSnapshotCacheTests",
+        "--test-target",
+        "AzureRuntimeLifecycleTests",
+        "--test-target",
+        "AzureRenderSceneGraphTests",
+        "--test-target",
+        "AzureRenderNullRhiPassTests",
+        "--test-target",
+        "AzureObjectShadowRecordingTests",
+        "--test-target",
+        "AzurePhysicsInputTests"
+      ]
+    },
+    {
+      "kind": "checks",
+      "exitCode": 0,
+      "seconds": 11.26600000000326,
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^(AzureEngine\\.(PreviousTransformSnapshot|RuntimeSceneSnapshotCache|RuntimeRenderSnapshotCache|RuntimeLifecycle|PhysicsInput)|AzureRender\\.(SceneTransformCache|SceneGraph|NullRhiPass|ObjectShadowRecording)|AzureRuntime\\.CameraSystem)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-082148-stable-frame-preparation-dcf3f3\\release-checks.xml"
+      ]
+    }
+  ],
+  "batch": [
+    {
+      "name": "module-boundaries",
+      "exitCode": 0,
+      "seconds": 12.297000000005937,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\check_module_boundaries.py",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release"
+      ]
+    },
+    {
+      "name": "capture",
+      "exitCode": 0,
+      "seconds": 124.5,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-082148-stable-frame-preparation-dcf3f3\\capture.py"
+      ]
+    },
+    {
+      "name": "measure_baseline",
+      "exitCode": 0,
+      "seconds": 148.95299999999406,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-082148-stable-frame-preparation-dcf3f3\\measure_baseline.py"
+      ]
+    },
+    {
+      "name": "measure_candidate",
+      "exitCode": 0,
+      "seconds": 135.93700000000536,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-082148-stable-frame-preparation-dcf3f3\\measure_candidate.py"
+      ]
+    }
+  ],
+  "measuredValidationCommandSeconds": 620.3280000000086,
+  "required": {
+    "cpuP95Ms": 8,
+    "gpuP95Ms": 16.6,
+    "samples": 1800,
+    "stablePowerWatts": 80,
+    "overallVisual": "failed-user-review"
+  },
+  "limitations": [
+    "CPU P95 meets 8 ms only in this 120-sample short window; formal 1800 samples were not run.",
+    "GPU frame budget remains failed; the existing 663 programs are byte-identical.",
+    "Baseline telemetry has one relative thermal headroom failure; candidate has one software thermal slowdown observation.",
+    "All-observation 80 W stability remains failed.",
+    "Overall appearance remains pending user review."
+  ],
+  "archive": {
+    "file": "measurements.zip",
+    "bytes": 1416106,
+    "sha256": "ca7583134db9973531bc075412bc72b1fd60cf20f0a452bfdcb91e58e29dbe20"
+  }
+}

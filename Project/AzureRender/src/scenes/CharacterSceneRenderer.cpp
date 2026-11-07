@@ -303,6 +303,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
 }
 
 void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
+    sceneTransforms_.clear();
     const auto prepareStart=std::chrono::steady_clock::now();
     loadTimings_={};decodedMaterialPixelBytes_=0;
     shadowCascadeResolution_=context.shadowMapSize/2;
@@ -893,8 +894,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             sceneInstances_.push_back(instance);
         }
     } else {
-        const std::vector<Matrix4> nodeWorldTransforms =
-            scene::resolveNodeWorldTransforms(scene_);
+        const auto& nodeWorldTransforms = sceneTransforms_.resolve(scene_);
         std::vector<std::size_t> nodeMeshKeys;
         nodeMeshKeys.reserve(scene_.nodes.size());
         for (const auto& node : scene_.nodes) {
@@ -1680,6 +1680,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"loadedResourceIdentityEntries\": " << loadedResourceMeshKeys_.size() << ",\n"
+         << "  \"sceneTransformCachedNodes\": " << sceneTransforms_.statistics().nodes << ",\n"
+         << "  \"sceneTransformReusedWorld\": " << sceneTransforms_.statistics().reusedWorld << ",\n"
+         << "  \"sceneTransformLocalEvaluations\": " << sceneTransforms_.statistics().localEvaluations << ",\n"
+         << "  \"sceneTransformFallback\": " << (sceneTransforms_.statistics().legacyFallback?"true":"false") << ",\n"
          << "  \"bindPoseCacheEntries\": " << loadedBindPoses_.size() << ",\n"
          << "  \"bindPoseCachedCopies\": " << bindPoseCachedCopies_ << ",\n"
          << "  \"bindPoseSharedInstances\": " << bindPoseSharedInstances_ << ",\n"
@@ -3780,6 +3784,7 @@ void CharacterSceneRenderer::destroyCoveredPrefillPipelines() {
 }
 
 void CharacterSceneRenderer::destroyResources() {
+    sceneTransforms_.clear();
     destroyCoveredPrefillPipelines();
     loadedResourceMeshKeys_.clear();
     loadedAnimations_.clear();

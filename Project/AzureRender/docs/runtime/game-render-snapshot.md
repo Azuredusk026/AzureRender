@@ -64,3 +64,16 @@ CPU 分配与回归范围见[节点快照验证](../acceptance/nr/runtime-snapsh
 复用池至多保存三个槽位，额外保留帧由调用方独立持有。
 
 完整原生结果及边界见[宿主准备验证](../acceptance/nr/host-scene-preparation.md)。
+
+## 变换历史与层级
+
+`PreviousTransformSnapshot` 在固定步长开始时独立捕获变换值。
+节点索引按运行时身份、场景修订及有序实体代际复用。
+组件成员变化重建索引，插值查询继续按节点身份取得前一步值。
+超额组件布局执行完整映射，场景同步清空历史状态。
+
+渲染器通过 `SceneTransformCache` 解析节点世界矩阵。
+拓扑及局部输入逐位验证，父级变化传播到后代。
+环路、非有限输入及容量边界执行完整解析。
+加载与资源释放清空该渲染器的解析状态。
+检查及原生范围见[稳定场景准备](../acceptance/nr/stable-frame-preparation.md)。

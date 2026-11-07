@@ -35,6 +35,7 @@
 #include "scene/Frustum.hpp"
 #include "scene/RenderBatching.hpp"
 #include "scene/SceneDescription.hpp"
+#include "scene/SceneTransformCache.hpp"
 
 #include <array>
 #include <cstdint>
@@ -420,6 +421,7 @@ private:
     std::optional<std::uint32_t> faceSdfHeadNode_;
     // Scene content snapshot from onLoad; nodes drive instance building.
     scene::SceneDescription scene_;
+    scene::SceneTransformCache sceneTransforms_;
     std::unordered_map<std::string,std::size_t> loadedResourceMeshKeys_;
     bool sceneWorldCoordinates_ = false;
     std::vector<std::unique_ptr<AdditionalResource>> additionalResources_;

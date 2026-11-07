@@ -783,6 +783,7 @@ add_library(AzureRuntime STATIC
     src/runtime/physics/PhysicsShapeFactory.cpp
     src/runtime/camera/GameCameraService.cpp
     src/runtime/GameRuntime.cpp
+    src/runtime/PreviousTransformSnapshot.cpp
     src/runtime/GameUi.cpp
     src/runtime/AnimationStateMachine.cpp
     src/runtime/PresentationRuntime.cpp
@@ -1963,6 +1964,12 @@ if(BUILD_TESTING)
     target_link_libraries(AzureRuntimeLifecycleTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.RuntimeLifecycle COMMAND AzureRuntimeLifecycleTests)
     add_executable(AzureRuntimeSceneSnapshotCacheTests tests/RuntimeSceneSnapshotCacheTests.cpp)
+    add_executable(AzurePreviousTransformSnapshotTests tests/PreviousTransformSnapshotTests.cpp)
+    target_link_libraries(AzurePreviousTransformSnapshotTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.PreviousTransformSnapshot COMMAND AzurePreviousTransformSnapshotTests)
+    add_executable(AzureSceneTransformCacheTests tests/SceneTransformCacheTests.cpp)
+    target_link_libraries(AzureSceneTransformCacheTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.SceneTransformCache COMMAND AzureSceneTransformCacheTests)
     target_link_libraries(AzureRuntimeSceneSnapshotCacheTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.RuntimeSceneSnapshotCache COMMAND AzureRuntimeSceneSnapshotCacheTests)
     add_executable(AzureRuntimeRenderSnapshotCacheTests tests/RuntimeRenderSnapshotCacheTests.cpp)

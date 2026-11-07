@@ -55,8 +55,7 @@ double GameRuntime::advance(double delta) {
         const auto elapsed = runtime_.beginFrame(fixed);
         if(sceneRevision_!=runtime_.sceneRevision())synchronizeSystemScene();
         if (!elapsed) { accumulator_=0; break; }
-        previousTransforms_.clear();
-        runtime_.world().each<ecs::TransformComponent>([&](auto entity,const auto& transform){previousTransforms_[runtime_.nodeId(entity)]=transform;});
+        previousTransforms_.capture(runtime_);
         previousCameraPosition_=camera_.position();previousCameraTarget_=camera_.target();interpolationReady_=true;
         motions_.clear();
         if (beforeStep_) beforeStep_(fixed);
@@ -103,10 +102,10 @@ void GameRuntime::renderScene(SceneDocument& scene,RuntimeSceneSnapshotCache& sn
 }
 void GameRuntime::interpolateScene(SceneDocument& scene) const {
     const float alpha=renderAlpha();
-    for(auto& node:scene.nodes){const auto previous=previousTransforms_.find(node.id);if(previous==previousTransforms_.end())continue;
+    for(auto& node:scene.nodes){const auto* previous=previousTransforms_.find(node.id);if(!previous)continue;
         for(unsigned axis=0;axis<3;++axis){
-            node.translation[axis]=previous->second.translation[axis]+(node.translation[axis]-previous->second.translation[axis])*alpha;
-            node.rotation[axis]=previous->second.rotation[axis]+std::remainder(node.rotation[axis]-previous->second.rotation[axis],360.0F)*alpha;
+            node.translation[axis]=previous->translation[axis]+(node.translation[axis]-previous->translation[axis])*alpha;
+            node.rotation[axis]=previous->rotation[axis]+std::remainder(node.rotation[axis]-previous->rotation[axis],360.0F)*alpha;
         }
     }
 }

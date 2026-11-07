@@ -24,7 +24,8 @@
 透明几何并行准备与运动历史复用见[动态几何优化](docs/acceptance/nr/dynamic-geometry-preparation.md)。
 命令准备与缓冲读取范围的合并见[同步优化](docs/acceptance/nr/read-scope-barriers.md)。
 同帧单精度照明复用的隔离原因及零像素边界见[着色复用评估](docs/acceptance/nr/surface-radiance-reuse.md)。
-当前短时 CPU P95 为 10.31 毫秒，完整帧预算及整体画质继续验收。
+稳定场景的变换历史与矩阵复用见[准备优化](docs/acceptance/nr/stable-frame-preparation.md)。
+当前短时 CPU P95 为 7.97 毫秒；GPU 帧预算、正式性能及整体画质继续验收。
 当前验收的持续执行顺序见[自主执行](docs/plans/2026-11-07-autonomous-acceptance.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 每周清理任务的目录、期限及执行状态见[调度收据](docs/development/artifact-automation.json)。

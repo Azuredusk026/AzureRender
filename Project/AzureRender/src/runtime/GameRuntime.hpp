@@ -6,6 +6,7 @@
 #include "runtime/ThirdPersonCamera.hpp"
 #include "runtime/InteractionRuntime.hpp"
 #include "runtime/SystemRegistry.hpp"
+#include "runtime/PreviousTransformSnapshot.hpp"
 #include <functional>
 namespace azurerender {
 class RuntimeSceneSnapshotCache;
@@ -66,7 +67,7 @@ private:
     game::ThirdPersonCamera cameraSettings_;
     std::vector<std::unique_ptr<IRuntimeSystem>> systems_;
     std::vector<PhysicsEvent> events_;
-    std::map<std::string,ecs::TransformComponent> previousTransforms_;
+    PreviousTransformSnapshot previousTransforms_;
     std::array<float,3> previousCameraPosition_{}, previousCameraTarget_{};
     bool interpolationReady_ = false;
     float renderAlpha() const;
