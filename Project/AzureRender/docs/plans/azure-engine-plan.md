@@ -33,6 +33,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 阴影接收面的[入口计算](../acceptance/nr/shadow-receiver-entry.md)已接入生产。
 原 Intel 零历史用例及十六项双设备、双配置检查通过，四帧保持 RGB 零像素差。
 该单元解决稳定性待项，CPU 与 GPU 的正式预算继续优化。
+帧场景的[来源成本](../acceptance/nr/frame-scene-source-cost.md)局部差值约为 0.037 毫秒。
+候选保持隔离，按热点门槛继续定位命令录制及状态提交。
 
 GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通过二十二项检查。
 原冻结四帧均符合零像素条件，整帧收益待原 80W 条件确认。
