@@ -50,6 +50,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-064259-visibility-phase-origin-42b3d6",
+      "name": "屏幕可见量相位原点",
+      "status": "PhaseOriginMechanismVerified",
+      "sourceBase": "a6d4e72",
+      "evidence": "docs/acceptance/nr/visibility-phase-origin.md",
+      "scopedChecks": 6,
+      "nvidiaSourcePixelsExact": 17017,
+      "intelSourcePixelsOverOneByte": 175,
+      "sceneIntegrated": false,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-061129-receiver-device-depth-357a94",
       "name": "屏幕接收设备深度核验",
       "status": "SourceDepthProductionPrecisionPending",

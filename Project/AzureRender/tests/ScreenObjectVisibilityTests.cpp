@@ -47,6 +47,7 @@ int main()try{
         rejects([&]{owner.record(commands,0,inputs,view,records);});backend.unavailableSampledFormats.clear();
         auto badView=view;badView.clipToWorld.fill(0);rejects([&]{owner.record(commands,0,inputs,badView,records);});
         badView=view;badView.pixelOffset[0]=std::numeric_limits<float>::infinity();rejects([&]{owner.record(commands,0,inputs,badView,records);});
+        badView=view;badView.phaseOrigin=static_cast<ScreenObjectVisibilityPhaseOrigin>(99);rejects([&]{owner.record(commands,0,inputs,badView,records);});
         auto badRecord=record;badRecord.atlasRect={.8F,0,.4F,1};rejects([&]{owner.record(commands,0,inputs,view,{badRecord});});
         badRecord=record;badRecord.lightDirection={0,0,0};rejects([&]{owner.record(commands,0,inputs,view,{badRecord});});
         badRecord=record;badRecord.filterRadiusUv[0]=-1;rejects([&]{owner.record(commands,0,inputs,view,{badRecord});});

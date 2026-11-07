@@ -83,6 +83,37 @@ int main(int argc,char** argv)try{
                     ++checked;
                 }
             }
+            // A nonuniform atlas makes the 4x4 rotation phase observable.
+            std::vector<std::uint16_t> irregular(16*16);
+            for(unsigned y=0;y<16;++y)for(unsigned x=0;x<16;++x)irregular[y*16+x]=(x*29+y*41+x*y*11)%127<60?65535:0;
+            std::vector<std::uint32_t> phaseIds(width*height,1);
+            inputs.atlas=uploaded.upload(16,16,VK_FORMAT_R16_UNORM,irregular.data(),irregular.size()*2);
+            inputs.objectIds=uploaded.upload(width,height,VK_FORMAT_R32_UINT,phaseIds.data(),phaseIds.size()*4);
+            auto phaseRecord=first;phaseRecord.atlasRect={0,0,1,1};phaseRecord.filterRadiusUv={.2F,.2F};
+            const auto phaseImage=[&](unsigned slot,ScreenObjectVisibilityPhaseOrigin origin){
+                view.phaseOrigin=origin;
+                host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer native){
+                    owner.record(commands,slot,inputs,view,{phaseRecord});const auto output=owner.output(slot);
+                    commands.imageBarrier({output.image,output.layout,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+                        VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+                    VkBufferImageCopy copy{};copy.imageSubresource={VK_IMAGE_ASPECT_COLOR_BIT,0,0,1};copy.imageExtent={width,height,1};
+                    vkCmdCopyImageToBuffer(native,output.image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,readback.buffer,1,&copy);
+                    commands.imageBarrier({output.image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,output.layout,1,VK_PIPELINE_STAGE_TRANSFER_BIT,
+                        VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_TRANSFER_READ_BIT,VK_ACCESS_SHADER_READ_BIT});
+                    commands.bufferBarrier({readback.buffer,0,readback.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+                });
+                host.allocator.invalidate(readback,0,readback.size);const auto* bytes=static_cast<const std::uint8_t*>(readback.mapped);
+                return std::vector<std::uint8_t>(bytes,bytes+readback.size);
+            };
+            const auto top=phaseImage(0,ScreenObjectVisibilityPhaseOrigin::TopLeft);
+            const auto bottom=phaseImage(1,ScreenObjectVisibilityPhaseOrigin::BottomLeft);
+            bool varies=false;
+            for(unsigned y=0;y<height;++y)for(unsigned x=0;x<width;++x){
+                const auto a=(y*width+x)*2,b=((height-1-y)*width+x)*2;
+                varies|=top[a+1]!=top[1];
+                require(top[a]==bottom[b]&&top[a+1]==bottom[b+1],"Object visibility phase origin did not mirror image rows");
+            }
+            require(varies,"Nonuniform phase fixture produced no observable phase variation");checked+=width*height*2;
         }catch(...){host.allocator.destroyBuffer(readback);throw;}
         host.allocator.destroyBuffer(readback);
     }

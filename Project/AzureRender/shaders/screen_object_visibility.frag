@@ -49,7 +49,8 @@ void main(){
     if(frame.control.z!=0u)q.z=1-q.z;q.z=max(q.z,record.normalFilter.w);if(q.z>=1)return;
     vec2 uv=fma(q.xy,record.rect.zw,record.rect.xy);vec2 size=vec2(textureSize(objectAtlas,0));
     ivec2 lo=ivec2(ceil(record.rect.xy*size-.5)),hi=ivec2(ceil((record.rect.xy+record.rect.zw)*size-.5));
-    uint phase=((uint(pixel.x)&3u)<<2)|(uint(pixel.y)&3u);vec2 rotation=uintBitsToFloat(disk[phase]).xy;
+    uint phaseY=frame.control.w!=0u?uint(textureSize(objectIds,0).y-1-pixel.y):uint(pixel.y);
+    uint phase=((uint(pixel.x)&3u)<<2)|(phaseY&3u);vec2 rotation=uintBitsToFloat(disk[phase]).xy;
     float count=0,delta=0;
     for(uint i=0;i<16;++i){
         vec2 offset=uintBitsToFloat(disk[i]).zw;vec2 rotated=vec2(dot(offset,vec2(rotation.x,-rotation.y)),dot(offset.yx,rotation));

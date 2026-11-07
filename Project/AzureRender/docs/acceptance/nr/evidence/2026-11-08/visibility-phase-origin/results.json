@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 1,
+  "status": "phase-origin-mechanism-verified",
+  "sourceBase": "a6d4e72",
+  "builds": [
+    {
+      "configuration": "Release",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "--config",
+        "Release",
+        "--test-target",
+        "AzureScreenObjectVisibilityTests",
+        "--test-target",
+        "AzureScreenObjectVisibilityGpuTests"
+      ],
+      "exitCode": 0,
+      "seconds": 10.047000000005937
+    },
+    {
+      "configuration": "Debug",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\msvc_env.bat",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\tools\\build_provenance.py",
+        "build",
+        "--source",
+        "D:\\Projects\\FYP\\Project\\AzureRender",
+        "--build-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "--config",
+        "Debug",
+        "--test-target",
+        "AzureScreenObjectVisibilityTests",
+        "--test-target",
+        "AzureScreenObjectVisibilityGpuTests"
+      ],
+      "exitCode": 0,
+      "seconds": 10.015999999988708
+    }
+  ],
+  "checks": [
+    {
+      "configuration": "Release",
+      "device": "contract",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender.ScreenObjectVisibility$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-064259-visibility-phase-origin-42b3d6\\release-contract.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 1.0930000000080327
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender.ScreenObjectVisibilityGpu$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-064259-visibility-phase-origin-42b3d6\\release-nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 1.2039999999979045
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender.ScreenObjectVisibilityGpu$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-064259-visibility-phase-origin-42b3d6\\release-intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5310000000026776
+    },
+    {
+      "configuration": "Debug",
+      "device": "contract",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender.ScreenObjectVisibility$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-064259-visibility-phase-origin-42b3d6\\debug-contract.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.75
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender.ScreenObjectVisibilityGpu$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-064259-visibility-phase-origin-42b3d6\\debug-nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 1.360000000000582
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender.ScreenObjectVisibilityGpu$",
+        "-V",
+        "--timeout",
+        "120",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-064259-visibility-phase-origin-42b3d6\\debug-intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.2649999999994179
+    }
+  ],
+  "checkedPixelsPerGpuCase": 1672,
+  "nvidiaDefaultRegion": {
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "exactPixels": 17017,
+    "maximumByteError": 0,
+    "mismatches": [],
+    "pixels": 17017,
+    "validationErrors": 0,
+    "withinOnePixels": 17017,
+    "zeroAllocator": true
+  },
+  "intelDefaultRegion": {
+    "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+    "exactPixels": 16719,
+    "maximumByteError": 33,
+    "mismatches": [
+      [
+        1301,
+        1284,
+        160,
+        139
+      ],
+      [
+        1304,
+        1284,
+        208,
+        219
+      ],
+      [
+        1282,
+        1279,
+        27,
+        31
+      ],
+      [
+        1296,
+        1274,
+        68,
+        69
+      ],
+      [
+        1276,
+        1273,
+        95,
+        105
+      ],
+      [
+        1299,
+        1273,
+        3,
+        2
+      ],
+      [
+        1302,
+        1273,
+        61,
+        54
+      ],
+      [
+        1278,
+        1272,
+        213,
+        214
+      ],
+      [
+        1302,
+        1271,
+        1,
+        2
+      ],
+      [
+        1290,
+        1270,
+        232,
+        228
+      ],
+      [
+        1291,
+        1270,
+        228,
+        232
+      ],
+      [
+        1302,
+        1270,
+        20,
+        16
+      ],
+      [
+        1291,
+        1269,
+        207,
+        208
+      ],
+      [
+        1297,
+        1268,
+        19,
+        20
+      ],
+      [
+        1305,
+        1268,
+        3,
+        2
+      ],
+      [
+        1277,
+        1267,
+        1,
+        2
+      ]
+    ],
+    "pixels": 17017,
+    "validationErrors": 0,
+    "withinOnePixels": 16842,
+    "zeroAllocator": true
+  },
+  "readOnlyInputHashes": {
+    "depth": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+    "normals": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+    "atlas": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+    "queries": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+    "expected": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50"
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "status": "passed",
+      "sha256": "6344daabeef69e9a6bbb65f843ab53fae9c937be24eba8e3b53c6e3632612cc8"
+    },
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "sha256": "ea9bff8710d4329fbd9f4a635c343645913bd0bf343164dc88cebc5872cf582b"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "sceneIntegrated": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 120424,
+  "evidenceSha256": "205b06775d833c2c968379c2cbfeb61c048c045bd6a9cb1fb183e6024f4205ce",
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 434,
+      "sha256": "c2a11f787568eea144d2099de3629edfd0ce90d8783a0124921b7a61f384e43a"
+    },
+    {
+      "path": "build_and_validate.py",
+      "bytes": 2679,
+      "sha256": "5ed9acb992a86976bc4bdc019729a7f88ee97824ecf853966de9340d14f32869"
+    },
+    {
+      "path": "calibrate.py",
+      "bytes": 1485,
+      "sha256": "13fcfff3d29de8ebfbe443ed51fe3849226a7d051c83e0fa14e2c91514dcd206"
+    },
+    {
+      "path": "calibration-build.json",
+      "bytes": 1463,
+      "sha256": "c26fb659247404e8d5e90755588b3ab6ec466bc8255dfa562a1db422e01e8d5c"
+    },
+    {
+      "path": "calibration-compile.log",
+      "bytes": 17,
+      "sha256": "50c6784c0466b5dcbcfe20db8f39dd3a1320ea47acd2bc9773ce6560447e2791"
+    },
+    {
+      "path": "calibration-execution.json",
+      "bytes": 1136,
+      "sha256": "82d2866cb6d7d28ef8d1623dc2b3a1c41be8ffe90f5d28be7931ab09e9bdcfe2"
+    },
+    {
+      "path": "calibration-inputs.json",
+      "bytes": 1990,
+      "sha256": "67879e15461174c74652ca0ab94af735250f241aac71f0cee320908f5be97669"
+    },
+    {
+      "path": "calibration-link.log",
+      "bytes": 118,
+      "sha256": "84292bacb31dc99f0a69c537aa6acc825f178fe47c65897baef1c81870c8504b"
+    },
+    {
+      "path": "calibration-source-inputs.json",
+      "bytes": 183733,
+      "sha256": "0c40e1748dc6b236b60e54524a8dc45227f67a13af7e87f3868800df224812ae"
+    },
+    {
+      "path": "calibration.cpp",
+      "bytes": 5904,
+      "sha256": "d978521a5e8a85e2740253f6008398061e1fee5645c19a85e8dc0688e3206ee3"
+    },
+    {
+      "path": "debug-contract-tests.log",
+      "bytes": 1388,
+      "sha256": "94d648018861688678adf6beb127e66d64d178843eabf8be70bc9d695d56715d"
+    },
+    {
+      "path": "debug-contract.xml",
+      "bytes": 469,
+      "sha256": "fd12e676bced8a729ec93dd4df228c5eaa6a6343fb65938102ed6982acea5821"
+    },
+    {
+      "path": "debug-intel-tests.log",
+      "bytes": 1531,
+      "sha256": "460ea258179dce1e31b30acfbf2d9e97f34245ee241f7c6f5d1db0ec4ce3fa9d"
+    },
+    {
+      "path": "debug-intel.xml",
+      "bytes": 537,
+      "sha256": "0a2f81be278900f3d0043db3c1baf80f874b241c3ce106fdd285211e8ce16f33"
+    },
+    {
+      "path": "debug-nvidia-tests.log",
+      "bytes": 1517,
+      "sha256": "ed077ea40c302a0fa26bfd9a3773d1b9f81e817e1adc6f401d9fa98de826420a"
+    },
+    {
+      "path": "debug-nvidia.xml",
+      "bytes": 522,
+      "sha256": "5483690a931867aada5db397bb0ac6238f9ee5c69f40e56d7bb26136a47a242d"
+    },
+    {
+      "path": "debug-production-build.log",
+      "bytes": 1965,
+      "sha256": "df0121a79a0bead2422fae6d46c11ce29d781ecbd188489999274df9c37f556c"
+    },
+    {
+      "path": "intel-calibration-rg8.bin",
+      "bytes": 34034,
+      "sha256": "14ea24a5230824b91111a237b7b436ce7b3c3707fcadc811e6e0d60ffb4ea5e3"
+    },
+    {
+      "path": "intel-calibration.json",
+      "bytes": 1242,
+      "sha256": "38d9ce83a66e63c3dbf84e473c1836b3b5f91e6d1cda1a3772538b3501343def"
+    },
+    {
+      "path": "intel-calibration.log",
+      "bytes": 1244,
+      "sha256": "9dbd3ef43f290a4d6d29bc26a02bec56efce26d964861e9962706af0d920b354"
+    },
+    {
+      "path": "nvidia-calibration-rg8.bin",
+      "bytes": 34034,
+      "sha256": "ec4fb9b7f81ea0d010b36c37c4b8d03325768fa19f8bd5d03d511f3f132f1a0e"
+    },
+    {
+      "path": "nvidia-calibration.json",
+      "bytes": 227,
+      "sha256": "86622f059753ccdee6b98b94ab04b5e6be7de18b69cbd2f43ad500487a5df844"
+    },
+    {
+      "path": "nvidia-calibration.log",
+      "bytes": 229,
+      "sha256": "d4e6d0246a856892ee690ed0c552446384cfb795207a0bf035400760639ffa47"
+    },
+    {
+      "path": "package.py",
+      "bytes": 4031,
+      "sha256": "369d7cf3182b7e8ad6aa2d0364b4fcdf717ee414d88705b87cc03d7faec8160d"
+    },
+    {
+      "path": "prepare_calibration.py",
+      "bytes": 1138,
+      "sha256": "64d35f673fa90b3e195ce26efe3b11e0484c482f66655ecabc64c1dd31582595"
+    },
+    {
+      "path": "process.log",
+      "bytes": 1244,
+      "sha256": "9dbd3ef43f290a4d6d29bc26a02bec56efce26d964861e9962706af0d920b354"
+    },
+    {
+      "path": "production-builds.json",
+      "bytes": 1529,
+      "sha256": "16a166113be801bb03b1ed964bac715483e8f7d67f86ac7d329c115744061ca0"
+    },
+    {
+      "path": "production-tests.json",
+      "bytes": 3652,
+      "sha256": "fbe077f9e8dbf22e96c4642549080d85a96eb9ef287a635ce66378a6073a405c"
+    },
+    {
+      "path": "red-build.log",
+      "bytes": 389,
+      "sha256": "8271bc6b973cc104c51ab0af94434c7019fd8350ffd7bf9f56a247e2e22008c2"
+    },
+    {
+      "path": "red-test.log",
+      "bytes": 567,
+      "sha256": "eda8bc054d822d0f5dbb6759d20b6f984b010bfb564fabc35a2d08e41ff32711"
+    },
+    {
+      "path": "release-contract-tests.log",
+      "bytes": 1404,
+      "sha256": "924e4ebf2faa7103dcfabc755c82dc9dd6bda7ee305f99f8de43be6431be492d"
+    },
+    {
+      "path": "release-contract.xml",
+      "bytes": 468,
+      "sha256": "50a9dc9f9dc399a98e9c65c6c452c1544ce2e50e60b1afea23debf0baf2b4356"
+    },
+    {
+      "path": "release-intel-tests.log",
+      "bytes": 1549,
+      "sha256": "1fb94fc61285944bda5a1fd410b2a1f1af228f2173796438a4059107e818f6f1"
+    },
+    {
+      "path": "release-intel.xml",
+      "bytes": 537,
+      "sha256": "559d2fbddefdc7c7a094a03510f20e6e68c565d32b56410ff5f598c49fc74936"
+    },
+    {
+      "path": "release-nvidia-tests.log",
+      "bytes": 1535,
+      "sha256": "918ab75b417840ab33eee5030cae060bddc3f2efb9b81504cc6cd1ef2461f66a"
+    },
+    {
+      "path": "release-nvidia.xml",
+      "bytes": 522,
+      "sha256": "fa07a6413aa35189edcb06624635b990c79845e3856e9e0d6269ef1253f0b52b"
+    },
+    {
+      "path": "release-production-build.log",
+      "bytes": 1971,
+      "sha256": "98ebc8526b1a6bd2e2c2ee19dce2cf991a10aaa0af0b7838a69ec79217f50843"
+    },
+    {
+      "path": "source/shaders/screen_object_visibility.frag",
+      "bytes": 4754,
+      "sha256": "7614513cd14c52283981982b7bfcbb74865ae09729cea46ba31095939c1bc205"
+    },
+    {
+      "path": "source/src/render/ScreenObjectVisibility.cpp",
+      "bytes": 13972,
+      "sha256": "20fdd5e6e44650db75cf2384fb53c1438745b52a882bcb4c580415f1cbbc28fc"
+    },
+    {
+      "path": "source/src/render/ScreenObjectVisibility.hpp",
+      "bytes": 3013,
+      "sha256": "0fd4446e1355fb155903bbdec1cd7506d0e36d48fffe3a49870cf28e1d1acc8e"
+    },
+    {
+      "path": "source/tests/ScreenObjectVisibilityGpuTests.cpp",
+      "bytes": 10066,
+      "sha256": "1c4a064c8e8226ef4a7d71686a51da9fea42afa490aac0da09a10463927bdfe1"
+    },
+    {
+      "path": "source/tests/ScreenObjectVisibilityTests.cpp",
+      "bytes": 5214,
+      "sha256": "9259d227118a7980bd37979107e8555fa1297aa56307518549df705b04a6e741"
+    }
+  ]
+}

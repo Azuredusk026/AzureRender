@@ -35,9 +35,10 @@ PackedFrame pack(VkExtent2D extent,const ScreenObjectVisibilityInputs& inputs,co
     require(records.size()<=8,"Visibility supports at most eight object records");
     require(finite(view.clipToWorld)&&invertible(view.clipToWorld),"Visibility inverse projection must be finite and invertible");
     require(finite(view.pixelOffset)&&std::abs(view.pixelOffset[0])<=1&&std::abs(view.pixelOffset[1])<=1,"Visibility pixel offset is outside -1..1");
+    require(view.phaseOrigin==ScreenObjectVisibilityPhaseOrigin::TopLeft||view.phaseOrigin==ScreenObjectVisibilityPhaseOrigin::BottomLeft,"Unknown visibility phase origin");
     require(inputs.objectDepth==ScreenObjectDepth::Forward||inputs.objectDepth==ScreenObjectDepth::Reversed,"Unknown object depth convention");
     PackedFrame result;result.clipToWorld=view.clipToWorld;result.reconstruction={1.F/extent.width,1.F/extent.height,view.pixelOffset[0],view.pixelOffset[1]};
-    result.control={static_cast<unsigned>(records.size()),view.flipNdcY?1U:0U,inputs.objectDepth==ScreenObjectDepth::Forward?1U:0U,0};
+    result.control={static_cast<unsigned>(records.size()),view.flipNdcY?1U:0U,inputs.objectDepth==ScreenObjectDepth::Forward?1U:0U,view.phaseOrigin==ScreenObjectVisibilityPhaseOrigin::BottomLeft?1U:0U};
     for(unsigned i=0;i<records.size();++i){
         const auto& record=records[i];
         require(finite(record.worldToUnitShadow)&&record.worldToUnitShadow[3]==0&&record.worldToUnitShadow[7]==0&&record.worldToUnitShadow[11]==0&&record.worldToUnitShadow[15]==1,"Visibility object projection must be finite and affine");

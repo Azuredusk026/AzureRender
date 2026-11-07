@@ -77,6 +77,8 @@ Q1 的[精确采样定位](../acceptance/nr/exact-hair-sampling-inputs.md)确认
 NVIDIA 原生区域逐字节一致；Intel 有 175 处超出一字节，设备精度与场景集成继续推进。
 [设备深度核对](../acceptance/nr/receiver-device-depth.md)确认主绘制与快照在该遮罩的 17017 处相同。
 深度换算的 GPU 模型仍有 221 处超差，源投影与深度生产精度为下一实施范围。
+[相位原点配置](../acceptance/nr/visibility-phase-origin.md)通过双设备、双配置功能检查。
+默认 NVIDIA 的 17017 处原生可见量保持逐字节一致，输入生产和 Intel 精度继续验收。
 
 交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
 阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。

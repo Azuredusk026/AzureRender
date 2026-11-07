@@ -5,11 +5,14 @@
 #include <string>
 namespace azurerender {
 enum class ScreenObjectDepth {Forward,Reversed};
+enum class ScreenObjectVisibilityPhaseOrigin {TopLeft,BottomLeft};
 struct ScreenObjectVisibilityView {
     // Column-major device-clip to world. Pixel offsets are applied before NDC conversion.
     std::array<float,16> clipToWorld{};
     std::array<float,2> pixelOffset{.5F,.5F};
     bool flipNdcY=true;
+    // Phase origin is independent of texture addressing and inverse-projection Y.
+    ScreenObjectVisibilityPhaseOrigin phaseOrigin=ScreenObjectVisibilityPhaseOrigin::TopLeft;
 };
 struct ScreenObjectVisibilityRecord {
     std::array<float,16> worldToUnitShadow{};
