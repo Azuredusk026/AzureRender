@@ -25,6 +25,30 @@ class GpuEnvironmentTests(unittest.TestCase):
     def test_stable_warm_computer_is_ready(self):
         self.assertEqual(self.module().startup_errors(self.window()),[])
 
+    def test_power_observation_requires_explicit_ac_status(self):
+        module=self.module()
+        for status in (0,255,None,True,'1'):
+            self.assertTrue(module.device_errors(self.device(hostPower={'acLineStatus':status})))
+        self.assertEqual(module.device_errors(self.device(hostPower={'acLineStatus':1})),[])
+
+    def test_battery_preflight_records_failure_without_waiting(self):
+        module=self.module()
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'power.json'
+            def sleep(seconds):self.fail('Battery preflight must not enter the idle wait')
+            with self.assertRaisesRegex(RuntimeError,'AC power'):
+                module.wait_and_record(path,read=lambda:self.device(hostPower={'acLineStatus':0}),sleep=sleep)
+            data=json.loads(path.read_text())
+        self.assertEqual(len(data['observations']),1)
+        self.assertEqual(data['observations'][0]['hostPower']['acLineStatus'],0)
+
+    def test_midrun_battery_transition_invalidates_ac_endpoints(self):
+        data=self.continuous()
+        for row in [*data['startup'],*data['runObservations'],data['final']]:
+            row['hostPower']={'acLineStatus':1}
+        data['runObservations'][2]['hostPower']={'acLineStatus':0}
+        self.assertTrue(any('AC power' in error for error in self.module().environment_errors(data)))
+
     def test_device_limit_is_respected(self):
         for temperature in (86,87,90):
             samples=[dict(self.device(temperature=temperature),seconds=s) for s in (0,5,10)]

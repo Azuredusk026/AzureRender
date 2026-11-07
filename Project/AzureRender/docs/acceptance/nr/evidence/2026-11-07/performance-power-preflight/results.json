@@ -1,0 +1,70 @@
+{
+  "status": "checked",
+  "power": {
+    "source": "Windows.GetSystemPowerStatus",
+    "status": "Reported",
+    "acLineStatus": 1,
+    "batteryFlags": 9,
+    "batteryPercent": 80,
+    "systemStatus": 0
+  },
+  "device": {
+    "temperature": 61.0,
+    "thermalLimit": null,
+    "thermalLimits": [],
+    "thermalMargin": 29.0,
+    "relativeThermalThreshold": 0.0,
+    "relativeThermalThresholds": [
+      -2.0,
+      0.0
+    ],
+    "targetTemperature": 87.0,
+    "thermalLimitStatus": "RelativeReported",
+    "thermalSlowdown": {
+      "hardware": false,
+      "software": false
+    },
+    "powerCap": "Not Active",
+    "gpuUtilization": 0.0,
+    "powerDrawWatts": 20.48,
+    "powerLimitWatts": 75.0,
+    "graphicsClockMHz": 2250.0,
+    "smClockMHz": 2250.0,
+    "memoryClockMHz": 8001.0,
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "driver": "592.82",
+    "deviceId": "00000000:01:00.0",
+    "hostPower": {
+      "source": "Windows.GetSystemPowerStatus",
+      "status": "Reported",
+      "acLineStatus": 1,
+      "batteryFlags": 9,
+      "batteryPercent": 80,
+      "systemStatus": 0
+    }
+  },
+  "builds": [
+    {
+      "config": "Release",
+      "exitCode": 0,
+      "seconds": 14.281000000002678
+    },
+    {
+      "config": "Debug",
+      "exitCode": 0,
+      "seconds": 15.718999999997322
+    }
+  ],
+  "allRuntimeAnd663ProgramsByteIdentical": true,
+  "gpuWorkloadsStarted": false,
+  "tests": {
+    "environment": 23,
+    "performanceBudget": 12
+  },
+  "sourceBase": "84b2897",
+  "archive": {
+    "file": "checks.zip",
+    "bytes": 9556,
+    "sha256": "3f30502ecf99d73bbed90c7b923393b141bae485c8ac0238d6bb27a32ac261d6"
+  }
+}

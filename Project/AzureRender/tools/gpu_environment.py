@@ -5,6 +5,7 @@ import re
 import subprocess
 import time
 import threading
+import sys
 import xml.etree.ElementTree as ET
 
 DEFAULT_POLICY=dict(idleSeconds=10,temperatureRange=4,maxIdleUtilization=10,startHeadroom=2)
@@ -53,9 +54,38 @@ def parse_snapshot(xml):
         deviceId=gpu.get('id'),rawXml=xml)
 
 
+def power_snapshot():
+    """Read host power without changing the power policy or device state."""
+    source='Windows.GetSystemPowerStatus'
+    if sys.platform!='win32':return dict(source=source,status='Unavailable',acLineStatus=None)
+    import ctypes
+    class PowerStatus(ctypes.Structure):
+        _fields_=[('ac',ctypes.c_ubyte),('flags',ctypes.c_ubyte),
+                  ('percent',ctypes.c_ubyte),('saving',ctypes.c_ubyte),
+                  ('remaining',ctypes.c_uint32),('full',ctypes.c_uint32)]
+    api=ctypes.WinDLL('kernel32',use_last_error=True).GetSystemPowerStatus
+    api.argtypes=[ctypes.POINTER(PowerStatus)];api.restype=ctypes.c_int
+    status=PowerStatus()
+    if not api(ctypes.byref(status)):
+        return dict(source=source,status='Failed',acLineStatus=None,error=ctypes.get_last_error())
+    return dict(source=source,status='Reported',acLineStatus=status.ac,
+                batteryFlags=status.flags,batteryPercent=status.percent,systemStatus=status.saving)
+
+
+def power_errors(device):
+    # Historical evidence retains its original observation scope.
+    if 'hostPower' not in device:return []
+    power=device['hostPower']
+    state=power.get('acLineStatus') if isinstance(power,dict) else None
+    if type(state) is not int or state!=1:
+        return ['AC power is required; host power is battery, unknown or unavailable']
+    return []
+
+
 def snapshot():
+    power=power_snapshot()
     result=subprocess.run(['nvidia-smi','-q','-x'],capture_output=True,text=True,check=True,timeout=15)
-    return parse_snapshot(result.stdout)
+    return dict(parse_snapshot(result.stdout),hostPower=power)
 
 
 def valid_number(value):
@@ -77,7 +107,7 @@ def policy_values(policy=None):
 def device_errors(device,*,startup=False,policy=None):
     policy=policy_values(policy)
     if not isinstance(device,dict):return ['device observation is missing']
-    errors=[]
+    errors=power_errors(device)
     temperature=device.get('temperature')
     if not valid_number(temperature) or temperature<=0:errors.append('temperature is missing or invalid')
     utilization=device.get('gpuUtilization')
@@ -161,6 +191,8 @@ def wait_until_ready(*,read=snapshot,clock=time.monotonic,sleep=time.sleep,timeo
     start=clock()
     while True:
         device=read();row=dict(device,seconds=clock()-start);observations.append(row)
+        errors=power_errors(row)
+        if errors:raise RuntimeError('; '.join(errors))
         window=observations[-3:]
         errors=startup_errors(window,policy)
         if not errors:
