@@ -32,6 +32,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通过二十二项检查。
 原冻结四帧均符合零像素条件，整帧收益待原 80W 条件确认。
+交流供电的[局部重放](../acceptance/nr/residency-ac-replay.md)完成九份代表附件核对。
+本地与主机捕获的绘制差约为 1.17 毫秒，因果及正式帧预算单独验收。
 原[驻留候选](../acceptance/nr/gpu-buffer-residency.md)保持隔离，其像素差异根因未验证。
 无上传读取的[发布控制](../acceptance/nr/host-write-publication.md)未复现该差异。
 场景准备的哈希成本按[纹理分桶计划](2026-11-07-texture-content-buckets.md)优化。
