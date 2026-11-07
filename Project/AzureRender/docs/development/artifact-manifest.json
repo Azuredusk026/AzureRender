@@ -50,6 +50,17 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-070144-cpu-preparation-batch-b386e7",
+      "name": "CPU 准备批次评估",
+      "status": "PreparationBatchBelowGate",
+      "sourceBase": "0a0429c",
+      "evidence": "docs/acceptance/nr/cpu-preparation-batch.md",
+      "updateReductionPercent": 7.459095704800545,
+      "candidateAdopted": false,
+      "nativeImageBatchStarted": false,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-065642-receiver-linear-depth-ecc3b4",
       "name": "线性接收深度核验",
       "status": "LinearDepthInputNotQualified",
