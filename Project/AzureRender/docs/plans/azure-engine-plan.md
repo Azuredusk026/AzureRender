@@ -55,6 +55,9 @@ Q1 的[精确采样定位](../acceptance/nr/exact-hair-sampling-inputs.md)确认
 
 交流供电的[材质归因](../acceptance/nr/ac-material-contribution.md)取得三项有效控制。
 阴影相关依赖占匹配材质成本约 34.3%，优先研究范围查询。
+精确范围的[分层机制](../acceptance/nr/shadow-range-work.md)通过双设备逐位核对。
+实际矩形的范围读取量减少约 68.41%，NVIDIA 局部合计降低约 56.66%。
+绝对收益及原生片元成本继续分项确认，生产候选保持隔离。
 
 材质程序的[离线优化](../acceptance/nr/material-spirv-optimization.md)完成九份附件字节核对。
 候选指令规模减少约 25.04%，退出与有效性能资格继续待验。
