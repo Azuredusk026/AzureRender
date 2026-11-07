@@ -6,9 +6,24 @@
 #include <cctype>
 #include <cmath>
 #include <fstream>
+#include <limits>
 #include <set>
 namespace azurerender {
 using Json=nlohmann::json;
+namespace {
+std::string materialBinaryDocument(Json document,std::string binary){
+    auto json=document.dump();while(json.size()%4)json+=' ';
+    while(binary.size()%4)binary+='\0';
+    const auto length=20+json.size()+(binary.empty()?0:8+binary.size());
+    if(length>128*1024*1024)throw std::invalid_argument("Embedded material source exceeds byte budget");
+    std::string result;result.reserve(length);
+    const auto word=[&](std::uint32_t value){for(unsigned i=0;i<4;++i)result+=static_cast<char>((value>>(i*8))&255U);};
+    word(0x46546c67U);word(2);word(static_cast<std::uint32_t>(length));
+    word(static_cast<std::uint32_t>(json.size()));word(0x4e4f534aU);result+=json;
+    if(!binary.empty()){word(static_cast<std::uint32_t>(binary.size()));word(0x004e4942U);result+=binary;}
+    return result;
+}
+}
 void MaterialTypeRegistry::add(MaterialTypeDescriptor value){
     if(value.id.empty()||value.label.empty()||!value.interpret||!value.parameters.is_object()||!value.textures.is_object())throw std::invalid_argument("Incomplete material type");
     const auto id=value.id;if(!types_.emplace(id,std::move(value)).second)throw std::invalid_argument("Duplicate material type");
@@ -83,23 +98,26 @@ void MaterialData::validate()const{
 AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(const std::string&)>& resolve,const AssetMaterial* source)const{
     if(typeId=="azure.profile"){
         validate();auto document=surface;document["images"]=Json::array();std::uintmax_t sourceBytes=0;
+        document["bufferViews"]=Json::array();std::string binary;
         std::vector<Json> imageSettings(textures.size());
         for(std::size_t index=0;index<textures.size();++index){
             const auto path=resolve(textures.at(std::to_string(index)).at("asset").get<std::string>());
             const auto size=std::filesystem::file_size(path);sourceBytes+=size;
             if(size>64*1024*1024||sourceBytes>64*1024*1024)throw std::invalid_argument("Profile images exceed aggregate source budget");
+            if(!size)throw std::invalid_argument("Profile image is empty");
             std::ifstream input(path,std::ios::binary);if(!input)throw std::invalid_argument("Cannot open profile image");
-            const std::vector<unsigned char> bytes{std::istreambuf_iterator<char>(input),{}};
-            if(bytes.size()>64*1024*1024)throw std::invalid_argument("Profile image exceeds source budget");
-            const char* alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";std::string encoded;unsigned accumulator=0;int bits=-6;
-            for(unsigned char byte:bytes){accumulator=(accumulator<<8)|byte;bits+=8;while(bits>=0){encoded+=alphabet[(accumulator>>bits)&63];bits-=6;}}
-            if(bits>-6)encoded+=alphabet[((accumulator<<8)>>(bits+8))&63];while(encoded.size()%4)encoded+='=';
-            document["images"].push_back({{"uri","data:application/octet-stream;base64,"+encoded}});
+            while(binary.size()%4)binary+='\0';const auto offset=binary.size();
+            binary.resize(offset+static_cast<std::size_t>(size));
+            input.read(binary.data()+offset,static_cast<std::streamsize>(size));
+            if(!input||input.peek()!=std::char_traits<char>::eof())throw std::invalid_argument("Profile image changed during read");
+            document["bufferViews"].push_back({{"buffer",0},{"byteOffset",offset},{"byteLength",size}});
+            document["images"].push_back({{"bufferView",index},{"mimeType","application/octet-stream"}});
             std::ifstream sidecar(std::filesystem::u8path(path.u8string()+".azmeta"));
             if(sidecar){Json metadata;sidecar>>metadata;const auto settings=metadata.value("settings",Json::object());
                 if(settings.contains("texture"))imageSettings[index]=settings.at("texture");}
         }
-        return loadEmbeddedGltfMaterials(document.dump(),false,imageSettings).at(0);
+        if(!binary.empty())document["buffers"]=Json::array({{{"byteLength",binary.size()}}});
+        return loadEmbeddedGltfMaterials(materialBinaryDocument(std::move(document),std::move(binary)),true,imageSettings).at(0);
     }
     validate();if(parameterOverride&&!source)throw std::invalid_argument("Parameter override requires a source material");
     AssetMaterial result=parameterOverride?*source:AssetMaterial{};if(!parameterOverride){result.name=typeId;result.materialProfileExplicit=true;}

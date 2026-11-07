@@ -16,6 +16,30 @@ int main(){const auto root=std::filesystem::temp_directory_path()/("azure-textur
  source["images"][image]["uri"]="normal.png";
  const unsigned char pixels[]={128,128,255,255,128,128,255,255,128,128,255,255,128,128,255,255};
  if(!stbi_write_png((root/"normal.png").string().c_str(),2,2,4,pixels,8))throw std::runtime_error("Cannot create image fixture");
+ // Independent profile images exercise all GLB alignment remainders.
+ for(unsigned padding=0;padding<4;++padding){
+  auto document=MaterialData::defaults("azure.profile");
+  std::map<std::string,std::filesystem::path> images;
+  document.surface["textures"]=nlohmann::json::array({{{"source",0}},{{"source",1}},{{"source",2}}});
+  auto& material=document.surface["materials"][0];
+  material["pbrMetallicRoughness"]={{"baseColorTexture",{{"index",0}}}};
+  material["normalTexture"]={{"index",1}};material["emissiveTexture"]={{"index",2}};
+  for(unsigned index=0;index<3;++index){
+   const auto id=std::string("00000000-0000-4000-8000-00000000000")+char('1'+index);
+   const auto path=root/("profile-"+std::to_string(index)+".png");
+   std::filesystem::copy_file(root/"normal.png",path,std::filesystem::copy_options::overwrite_existing);
+   {std::ofstream suffix(path,std::ios::binary|std::ios::app);for(unsigned i=0;i<(padding+index)%4;++i)suffix.put('\0');}
+   document.textures[std::to_string(index)]={{"asset",id},{"usage",index==0?"albedo":index==1?"normal":"emissive"}};
+   images[id]=path;
+  }
+  const auto imported=document.interpret([&](const auto& id){return images.at(id);});
+  const std::vector<std::uint8_t> expected(std::begin(pixels),std::end(pixels));
+  if(imported.baseColorPixels!=expected||imported.normalPixels!=expected||imported.specularEmissivePixels!=expected)
+   throw std::runtime_error("Profile image byte ranges or alignment changed decoded pixels");
+  {std::ofstream broken(images.begin()->second,std::ios::binary|std::ios::trunc);broken<<"bad";}
+  bool rejected=false;try{(void)document.interpret([&](const auto& id){return images.at(id);});}catch(const std::exception&){rejected=true;}
+  if(!rejected)throw std::runtime_error("Invalid profile image must be rejected before material publication");
+ }
  std::ofstream(root/"model.gltf")<<source.dump();
  // Material factors use nearest quantization on both image and constant paths.
  const unsigned char whitePixels[]={255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255};

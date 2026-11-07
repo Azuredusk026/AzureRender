@@ -10,6 +10,12 @@
 
 ## 创建与编辑
 
+完整表面文档通过内存 GLB 准备图像输入。
+图像按槽位索引与原导入设置进入统一解码器。
+单图及合计压缩输入各至多为六十四 MiB。
+读取期间的尺寸变化与空图会中止本次解释。
+来源和局部成本见[图像准备验证](../acceptance/nr/binary-material-images.md)。
+
 在内容浏览器打开 `Import / Create`。
 选择 `Create material`，填写文件名。
 文件使用 `.azurematerial` 扩展名。

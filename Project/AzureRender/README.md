@@ -1,10 +1,14 @@
 # AzureRender 工程
 
 GPU 可映射缓冲的用途选择及双设备检查见[内存分配](docs/acceptance/nr/focused-device-buffers.md)。
-该实现通过原四帧兼容，整帧收益待原功率条件确认。
+分配策略的原四帧证据对应 `f015e5d`，整帧收益待原功率条件确认。
 
 纹理缓存的[分桶计算](docs/acceptance/nr/texture-content-buckets.md)通过八项双配置检查。
 局部哈希中位耗时降低约 73.62%，完整场景结果待集中验证。
+
+完整材质的[二进制图像准备](docs/acceptance/nr/binary-material-images.md)通过十六项检查。
+十四份角色材质的局部合计耗时降低约 81.05%。
+当前资源准备批次的原生图像复核待集中验证。
 
 最终交付目标与当前执行顺序见[开发总计划](docs/plans/azure-engine-plan.md)。
 任务预算、失败转交和验证分级见[协作与验收](docs/development-workflow.md)。
