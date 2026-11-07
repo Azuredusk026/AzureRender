@@ -35,6 +35,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 该单元解决稳定性待项，CPU 与 GPU 的正式预算继续优化。
 帧场景的[来源成本](../acceptance/nr/frame-scene-source-cost.md)局部差值约为 0.037 毫秒。
 候选保持隔离，按热点门槛继续定位命令录制及状态提交。
+[分段归因](../acceptance/nr/cpu-recording-substages.md)确认渲染器更新占本轮 CPU 工作约 56.5%。
+阴影录制仅约 0.34 毫秒，帧内优先处理实例、透明索引和运动准备。
+管线加载约一百一十七秒，持久缓存作为启动与迭代效率候选评估。
 
 GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通过二十二项检查。
 原冻结四帧均符合零像素条件，整帧收益待原 80W 条件确认。

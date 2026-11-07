@@ -1,0 +1,320 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-complete-shadow-state-below-gate",
+  "sourceBase": "845c22f",
+  "runtimeBase": "c3def68",
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 305.4850000000006,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-013553-cpu-shadow-state-737223\\CpuStagesPlayer.exe",
+      "--project",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+      "--resource-root",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+      "--width",
+      "2560",
+      "--height",
+      "1440",
+      "--qa-camera",
+      "scene",
+      "--qa-light",
+      "scene",
+      "--fixed-frame-step",
+      "--smoke-frames",
+      "160",
+      "--gpu-timing",
+      "--gpu-timing-output",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-013553-cpu-shadow-state-737223\\timing.json",
+      "--runtime-report",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-013553-cpu-shadow-state-737223\\runtime.json"
+    ],
+    "productionAndProjectInputsUnchanged": true,
+    "validationLogClean": true,
+    "zeroAllocator": true,
+    "performanceQualification": false
+  },
+  "stages": {
+    "frames": 160,
+    "selectedFrames": 120,
+    "stages": {
+      "graph": {
+        "calls": 120,
+        "perCallMs": 0.2995508333333333,
+        "perFrameMs": 0.2995508333333333,
+        "totalMs": 35.9461
+      },
+      "instances": {
+        "calls": 120,
+        "perCallMs": 1.2761783333333334,
+        "perFrameMs": 1.2761783333333334,
+        "totalMs": 153.1414
+      },
+      "main": {
+        "calls": 600,
+        "perCallMs": 0.077399,
+        "perFrameMs": 0.386995,
+        "totalMs": 46.4394
+      },
+      "motion": {
+        "calls": 120,
+        "perCallMs": 0.6314741666666667,
+        "perFrameMs": 0.6314741666666667,
+        "totalMs": 75.7769
+      },
+      "opacities": {
+        "calls": 120,
+        "perCallMs": 0.03290166666666667,
+        "perFrameMs": 0.03290166666666667,
+        "totalMs": 3.9482
+      },
+      "outline": {
+        "calls": 120,
+        "perCallMs": 0.04523,
+        "perFrameMs": 0.04523,
+        "totalMs": 5.4276
+      },
+      "overlay": {
+        "calls": 120,
+        "perCallMs": 0.30178499999999997,
+        "perFrameMs": 0.30178499999999997,
+        "totalMs": 36.2142
+      },
+      "picking": {
+        "calls": 120,
+        "perCallMs": 0.0556575,
+        "perFrameMs": 0.0556575,
+        "totalMs": 6.6789
+      },
+      "sceneCopy": {
+        "calls": 120,
+        "perCallMs": 0.0576875,
+        "perFrameMs": 0.0576875,
+        "totalMs": 6.9225
+      },
+      "shadowViews": {
+        "calls": 120,
+        "perCallMs": 0.045177499999999995,
+        "perFrameMs": 0.045177499999999995,
+        "totalMs": 5.4213
+      },
+      "shadows": {
+        "calls": 240,
+        "perCallMs": 0.16859583333333333,
+        "perFrameMs": 0.33719166666666667,
+        "totalMs": 40.463
+      },
+      "skinning": {
+        "calls": 44880,
+        "perCallMs": 9.382130124777184e-05,
+        "perFrameMs": 0.035089166666666664,
+        "totalMs": 4.2107
+      },
+      "snapshot": {
+        "calls": 120,
+        "perCallMs": 0.18855999999999998,
+        "perFrameMs": 0.18855999999999998,
+        "totalMs": 22.6272
+      },
+      "transparent": {
+        "calls": 120,
+        "perCallMs": 1.1065533333333333,
+        "perFrameMs": 1.1065533333333333,
+        "totalMs": 132.7864
+      },
+      "uniforms": {
+        "calls": 120,
+        "perCallMs": 0.41413,
+        "perFrameMs": 0.41413,
+        "totalMs": 49.6956
+      },
+      "update": {
+        "calls": 120,
+        "perCallMs": 3.7325266666666668,
+        "perFrameMs": 3.7325266666666668,
+        "totalMs": 447.9032
+      }
+    }
+  },
+  "analysis": {
+    "samples": 120,
+    "cpuWorkMeanMs": 6.603853333333334,
+    "cpuWorkP95Ms": 7.716899999999548,
+    "rendererUpdateShare": 0.5652043554369267,
+    "shadowRecordingShare": 0.0510598357726499,
+    "candidateOperationScope": {
+      "depthOnlyShadowDraws": 864,
+      "fragmentShadowDraws": 255
+    },
+    "submission": {
+      "frames": 160,
+      "instances": 139360,
+      "indirectDrawCalls": 55441,
+      "visibleInstances": 90400,
+      "visibleRatio": 0.64868,
+      "recordingMilliseconds": 254.0058,
+      "graphPreparationMilliseconds": 107.7198,
+      "workerWaitMilliseconds": 81.589,
+      "graphExecutionMilliseconds": 64.6845,
+      "workerRecordedPasses": 1280,
+      "workerRecordedChunks": 1920,
+      "drawCalls": 296808,
+      "descriptorSetBinds": 1437,
+      "pipelineBinds": 164236,
+      "pushConstantUpdates": 596024,
+      "drawCallsPerFrame": 1855.05,
+      "descriptorSetBindsPerFrame": 8.98125
+    },
+    "load": {
+      "cpuPrepareMs": 44013.2927,
+      "meshUploadMs": 540.3023,
+      "materialUploadMs": 14094.3641,
+      "sharedTexturesMs": 390.808,
+      "buffersMs": 92.9449,
+      "skinningMs": 44.3091,
+      "descriptorsMs": 260.373,
+      "pipelinesMs": 117408.1128,
+      "decodedMaterialPixelBytes": 6365826224,
+      "remainingMaterialPixelBytes": 8
+    }
+  },
+  "drawScope": {
+    "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261107-120518-uniform-texture-index-cost-ebdc25\\profile.json",
+    "sha256": "aa2365b0709bb213bb349d210a03a6b001cea4ed61be4b3a3483b830335f03f5",
+    "depthOnlyShadowDraws": 864,
+    "fragmentShadowDraws": 255
+  },
+  "buildVerification": [
+    {
+      "configuration": "release",
+      "status": "passed",
+      "receiptSha256": "0663d65c7891b7cb488d4dbf7ece8ebdbc575fabe9caeee52dd3aa571e904789"
+    },
+    {
+      "configuration": "debug",
+      "status": "passed",
+      "receiptSha256": "24ac453fb7b77f1ee13d0b60488e19974004c1a7e168fce3da2e02b6d003e394"
+    }
+  ],
+  "protectedDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "performanceQualification": false,
+  "nativeImageCapturePerformed": false,
+  "evidenceFiles": [
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/analysis.json",
+      "bytes": 1262,
+      "sha256": "9e4e06e3886a1d2dde1e047ea226b9a226a7702e32bed87e9ae9b95c4c902a1b"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/budget.json",
+      "bytes": 434,
+      "sha256": "fa512fabead6a939b295351042abea253eb14635e6735ed97c42807918b8030b"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/build.json",
+      "bytes": 6906,
+      "sha256": "ba3886319b4e5caa84fdf5b02d97dd79e9cb29999c02ae125bd67731e0f08c02"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/build_probe.py",
+      "bytes": 2786,
+      "sha256": "cc9937107725b1e5a2c663efcf5a8aa7b9ae0d4ed79f36c7ce4678274b4bcd3f"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/CharacterSceneRenderer.cpp",
+      "bytes": 308701,
+      "sha256": "88949c7436e6ec89a0ae7b23ee1d367f289f5f3bc46472b4b019dc51df432a9f"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/command.json",
+      "bytes": 1159,
+      "sha256": "560343945195303fd5fd46c1bd5a3f7141e1d01379570c32a37a8a29a4001458"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/compile-command.txt",
+      "bytes": 1399,
+      "sha256": "06d6d54c9a9ec001b67c3a66c9cd9aaa36984b1ce721c7fbf8259679a04558ed"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/compile.log",
+      "bytes": 28,
+      "sha256": "54d23819c0081d5ff1a0a31d86acd76392df31c3433f0e3dab220bd0e8d13ab7"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/cpu-stages.json",
+      "bytes": 2458,
+      "sha256": "f59c7202514bc3e838ce33fbbca9a46b2a7185c6e4dff67fb07c4db5e8e86bca"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/draw-scope.json",
+      "bytes": 281,
+      "sha256": "a7c4d56327b0da8a4b9447dfd76f6c0e4c2238f442883a77b89814a31b0f4197"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/execution.json",
+      "bytes": 1219,
+      "sha256": "b31f080e75ab15599006423a79f5053270a1753e2921aad918b0c0ffbaac9903"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/link-command.txt",
+      "bytes": 4188,
+      "sha256": "cf0aaeb60eaac53367a0e623d1e0239d9a42e4d9d09a0f5ea34dc40d2801c240"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/link.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/missing-response-link.log",
+      "bytes": 193,
+      "sha256": "c73561606a6d50dc5cab73d9a489b5ab338500a403314fa5c382adb21716e2b1"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/package.py",
+      "bytes": 2746,
+      "sha256": "57bbaa8822093c1a9e63470644567aaf9e12e96f953b61eceeef4a7f9f6955f7"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/prepare_probe.py",
+      "bytes": 5627,
+      "sha256": "5f2b341f00354e3ccefc232977f6e18c3aa9dd0f79d84c8183063653450b7fd6"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/process.log",
+      "bytes": 13765,
+      "sha256": "b8c8e501a4ec5114b9325f4fa1313debb925111e756f66e1f8ca021233a9188b"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/runtime.json",
+      "bytes": 317965,
+      "sha256": "f33731666e1230457d7b498a8e459d2dffdf0f0d732017d92f2504c6827744f7"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/run_probe.py",
+      "bytes": 2459,
+      "sha256": "e5fa75efcb4119fcc937bb2867f953804738427fda36239b8ba174758e1d1318"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/source-inputs.json",
+      "bytes": 182427,
+      "sha256": "d5c96939d742b8a26258a3302145bbc4d792c8f092a906425b7b3e184f4bd730"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/timing.csv",
+      "bytes": 8591,
+      "sha256": "08fc7599dbe9b92e07ce5eda75d78c9520acc3b48951ab47c52800d5b0d68f88"
+    },
+    {
+      "path": "build/runs/20261108-013553-cpu-shadow-state-737223/timing.json",
+      "bytes": 36933,
+      "sha256": "4f49f03b4493ecb21ded1540f48b85fd7a02a438a710834e9562f3579554e216"
+    }
+  ],
+  "evidenceBytes": 198247,
+  "evidenceSha256": "bb822f50f1d2690dbcaf1f81a9fed3aebe4b56a27b4cef6301f3b01eec1a8e3c"
+}
