@@ -88,7 +88,12 @@ GpuBuffer GpuAllocator::createBuffer(
 
     VmaAllocationCreateInfo allocationInfo{};
     if (hostVisible) {
-        allocationInfo.usage = VMA_MEMORY_USAGE_AUTO_PREFER_HOST;
+        constexpr VkBufferUsageFlags deviceReadUsage = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT
+            | VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT
+            | VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT
+            | VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT | VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT;
+        allocationInfo.usage = (usage & deviceReadUsage) != 0
+            ? VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE : VMA_MEMORY_USAGE_AUTO_PREFER_HOST;
         allocationInfo.flags =
             VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT
             | VMA_ALLOCATION_CREATE_MAPPED_BIT;
