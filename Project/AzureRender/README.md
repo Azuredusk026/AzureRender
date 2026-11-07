@@ -30,6 +30,7 @@
 稳定场景的变换历史与矩阵复用见[准备优化](docs/acceptance/nr/stable-frame-preparation.md)。
 当前短时 CPU P95 为 7.97 毫秒；GPU 帧预算、正式性能及整体画质继续验收。
 当前验收的持续执行顺序见[自主执行](docs/plans/2026-11-07-autonomous-acceptance.md)。
+实际 GPU 缓冲位置、驻留候选及原生差异见[驻留评估](docs/acceptance/nr/gpu-buffer-residency.md)。
 任务配额、卷余量及逐批清理见[产物规则](docs/development/artifact-retention.md#空间门禁)。
 每周清理任务的目录、期限及执行状态见[调度收据](docs/development/artifact-automation.json)。
 文档物化及重复文件查询的局部成本见[路径诊断](docs/acceptance/nr/resource-resolution-cost.md)。
