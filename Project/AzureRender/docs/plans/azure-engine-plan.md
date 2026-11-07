@@ -76,6 +76,8 @@ GPU P95 为 22.744 毫秒，继续优先处理 GPU 场景成本。
 当前[分项环境](../acceptance/nr/material-contribution-cost.md)出现基线漂移及电池供电。
 附加预热复核已执行，计时待交流供电及稳定基线恢复。
 其余开发与验收准备按自主执行顺序推进。
+专用常量的[精度定位](../acceptance/nr/specialization-precision.md)完成前端及两项功能控制。
+细粒度梯度未恢复精确附件，生产保持受检基线。
 完整验收按[自主执行](2026-11-07-autonomous-acceptance.md)连续推进。
 正式环境、帧预算和整体画质继续待通过。
 每批保留各机制的归因边界，画质门槛保持有效。

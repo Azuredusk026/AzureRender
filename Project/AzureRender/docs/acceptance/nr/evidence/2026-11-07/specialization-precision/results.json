@@ -1,0 +1,450 @@
+{
+  "schemaVersion": 1,
+  "status": "isolated-precision-cause-unresolved",
+  "sourceBase": "9bf7454",
+  "frontend": {
+    "status": "analyzed",
+    "scope": "Offline SPIR-V frontend comparison only; derivative and contraction hypotheses remain unconfirmed at GPU instruction level.",
+    "rows": [
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          15534
+        ],
+        "instructions": 23551,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 29,
+        "noContractionDecorations": 44,
+        "baselineSha256": "684ae7bcb74bb391d7d8f9a6a604c91369f37251dabd6752ade2db395deb99fd",
+        "nativeCandidateSha256": "684ae7bcb74bb391d7d8f9a6a604c91369f37251dabd6752ade2db395deb99fd",
+        "specializedSha256": "040149b9172b8f3c64099b81ff56eccfe847dba44ca0166d2d2b6ba02c88221d"
+      },
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          15549
+        ],
+        "instructions": 23544,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 30,
+        "noContractionDecorations": 44,
+        "baselineSha256": "45fd754bd994a86c54a7f45dd262798933bba3648fde2c0e7ded91395052b16a",
+        "nativeCandidateSha256": "45fd754bd994a86c54a7f45dd262798933bba3648fde2c0e7ded91395052b16a",
+        "specializedSha256": "d52b5c7194b6305b15a9908b08185b1cce265ee6ec9d1fbedbe7ca5fdd64d061"
+      },
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          15537
+        ],
+        "instructions": 23552,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 29,
+        "noContractionDecorations": 44,
+        "baselineSha256": "9a246ccdc02db69c9900ae94f9a3250a4a8b15afffe6584fb0bb8e4d8692ffd9",
+        "nativeCandidateSha256": "9a246ccdc02db69c9900ae94f9a3250a4a8b15afffe6584fb0bb8e4d8692ffd9",
+        "specializedSha256": "44b91e22aa5e8993ef3848cb0142b83ea934c7c75a6bdb5b1978977b43b711d2"
+      },
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          15984
+        ],
+        "instructions": 24337,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 29,
+        "noContractionDecorations": 44,
+        "baselineSha256": "0f38eda62ec8be7efba689aabe038ae4be18328907b3955d06d27f37ab10beb5",
+        "nativeCandidateSha256": "0f38eda62ec8be7efba689aabe038ae4be18328907b3955d06d27f37ab10beb5",
+        "specializedSha256": "68f21fb7ef2d84e741e73cd0ac5f49ef40497bcbaf84470f0fa5f435006d03bc"
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          17401
+        ],
+        "instructions": 26352,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 40,
+        "noContractionDecorations": 44,
+        "baselineSha256": "f793a62ddfcba29a8e3cbd7ae5b27f119a69e4ea38829e54e849c9c908337478",
+        "nativeCandidateSha256": "f793a62ddfcba29a8e3cbd7ae5b27f119a69e4ea38829e54e849c9c908337478",
+        "specializedSha256": "078c386a8737f5f4d6072240a074dd3eabf62fca4b75ae2f1894e615f8420bfa"
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          17416
+        ],
+        "instructions": 26345,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 41,
+        "noContractionDecorations": 44,
+        "baselineSha256": "48aff99a842d2cdd7d746a2580c39e46b6a8d948730506b3eacee3d73b57d80d",
+        "nativeCandidateSha256": "48aff99a842d2cdd7d746a2580c39e46b6a8d948730506b3eacee3d73b57d80d",
+        "specializedSha256": "8200bdd714218e88eb9df60236979b961f9653c1c7eba85f3ae3991e8a86727e"
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          17404
+        ],
+        "instructions": 26353,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 40,
+        "noContractionDecorations": 44,
+        "baselineSha256": "d03c6aba66ab41b92d936c45b2135bd0165a1985cf95248be847c9d0812436fb",
+        "nativeCandidateSha256": "d03c6aba66ab41b92d936c45b2135bd0165a1985cf95248be847c9d0812436fb",
+        "specializedSha256": "89e1983706180817289c6d8e956b6570ac558f76354ee661814088f28b006702"
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          17843
+        ],
+        "instructions": 27143,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 40,
+        "noContractionDecorations": 44,
+        "baselineSha256": "e1ef6c950ecead971d240f67fa8d864861165f21e05439f74b17bf2a2c8d0a79",
+        "nativeCandidateSha256": "e1ef6c950ecead971d240f67fa8d864861165f21e05439f74b17bf2a2c8d0a79",
+        "specializedSha256": "a327a6520757096308fc8dd7567374da137d23fe5e4c60e15bd5a16ceda3c9bf"
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": false,
+        "specializationLiteralWordOffsets": [
+          17840
+        ],
+        "instructions": 27142,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 40,
+        "noContractionDecorations": 44,
+        "baselineSha256": "c333f800dfc7b1b6391dfcc2c137e8b5688385c454d7fa1da87f2574c899d2b3",
+        "nativeCandidateSha256": "c333f800dfc7b1b6391dfcc2c137e8b5688385c454d7fa1da87f2574c899d2b3",
+        "specializedSha256": "a327a6520757096308fc8dd7567374da137d23fe5e4c60e15bd5a16ceda3c9bf"
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "nativeCandidateMatchesDynamicDefault": true,
+        "defaultBooleanOnlyMatchesSpecialized": true,
+        "specializationLiteralWordOffsets": [
+          17855
+        ],
+        "instructions": 27135,
+        "defaultDx": 10,
+        "defaultDy": 10,
+        "fineDx": 0,
+        "fineDy": 0,
+        "implicitLod": 41,
+        "noContractionDecorations": 44,
+        "baselineSha256": "21a3b2d12368bfae09289553ea7e2addf08fc08b601bd88dace5e84b182023d7",
+        "nativeCandidateSha256": "21a3b2d12368bfae09289553ea7e2addf08fc08b601bd88dace5e84b182023d7",
+        "specializedSha256": "88b13787aafcec6f7cdafdd8c71f0474a2b8e8619abafdd9eb9da1a5e998ded5"
+      }
+    ]
+  },
+  "explicitFine": {
+    "allNineAttachmentsUnchangedFromPriorSpecialized": true,
+    "baselineAttachmentsIdentical": false,
+    "comparisons": [
+      {
+        "event": 15752,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": false,
+        "baselineSha256": "88de4b520330839b75335fd82925060a327ec617e09ce74875642f2698af8661",
+        "candidateSha256": "caa0b65e33f2ac2af2bde77d81f3b0347d74800e9ad000d4697b6539efca2c84"
+      },
+      {
+        "event": 15752,
+        "target": 1,
+        "bytes": 14745600,
+        "equal": false,
+        "baselineSha256": "6c7cbeae9f9988d3a34c69722b9ba8aa1219d298578ef87ea57ae26a0dd2254c",
+        "candidateSha256": "54bbfe0e73cd58cd28e544d0f0166a2588d8282a899ab1209006fbfc3416431b"
+      },
+      {
+        "event": 24600,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": false,
+        "baselineSha256": "24f4b5ee654d8373fdd83a34933f67f672935ca561162a404d5544e95fe22c10",
+        "candidateSha256": "4a949f56f8628c1d1a46ebcf0fc87b48a1b953d0c91f68e075935d797a4daa41"
+      },
+      {
+        "event": 24600,
+        "target": 1,
+        "bytes": 3686400,
+        "equal": true,
+        "baselineSha256": "086834d1f16bad3965fcf155bbaf3a9ca57046301deaaca0537403d2a70d601f",
+        "candidateSha256": "086834d1f16bad3965fcf155bbaf3a9ca57046301deaaca0537403d2a70d601f"
+      },
+      {
+        "event": 24600,
+        "target": 2,
+        "bytes": 921600,
+        "equal": true,
+        "baselineSha256": "35a17e21eab741e212c06f5692354c1570a1e17fe22ecf258e56213f10fd53dd",
+        "candidateSha256": "35a17e21eab741e212c06f5692354c1570a1e17fe22ecf258e56213f10fd53dd"
+      },
+      {
+        "event": 26527,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": false,
+        "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+        "candidateSha256": "f687707aeed30df0b7b3dace2935b8ba735ab981e41f7bb65a5e5a3cf9fe886c"
+      },
+      {
+        "event": 26527,
+        "target": 1,
+        "bytes": 3686400,
+        "equal": true,
+        "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+        "candidateSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133"
+      },
+      {
+        "event": 26527,
+        "target": 2,
+        "bytes": 921600,
+        "equal": true,
+        "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+        "candidateSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+      },
+      {
+        "event": 26578,
+        "target": 0,
+        "bytes": 3686400,
+        "equal": true,
+        "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+        "candidateSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11"
+      }
+    ],
+    "programCount": 10,
+    "validatorPassed": true
+  },
+  "completeFine": {
+    "baselineAttachmentsIdentical": false,
+    "comparisons": [
+      {
+        "event": 15752,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": false,
+        "baselineSha256": "88de4b520330839b75335fd82925060a327ec617e09ce74875642f2698af8661",
+        "candidateSha256": "9fdf8a99b2d4dc3713bf94ddbe97516d140d6bd850700f5be9d4329cb1accf69"
+      },
+      {
+        "event": 15752,
+        "target": 1,
+        "bytes": 14745600,
+        "equal": false,
+        "baselineSha256": "6c7cbeae9f9988d3a34c69722b9ba8aa1219d298578ef87ea57ae26a0dd2254c",
+        "candidateSha256": "7a8368392d183ba3a329155d3094d6541f206ea255fcea54df566a756264cde3"
+      },
+      {
+        "event": 24600,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": false,
+        "baselineSha256": "24f4b5ee654d8373fdd83a34933f67f672935ca561162a404d5544e95fe22c10",
+        "candidateSha256": "a2350ae1ffea72cd73fdaee1f7528b777617960bc630dff5c392f38891d0617b"
+      },
+      {
+        "event": 24600,
+        "target": 1,
+        "bytes": 3686400,
+        "equal": false,
+        "baselineSha256": "086834d1f16bad3965fcf155bbaf3a9ca57046301deaaca0537403d2a70d601f",
+        "candidateSha256": "56fe359cbb11b0c16ac350cabe0c8d08273c8069e3b8d7aa670aada676c2181d"
+      },
+      {
+        "event": 24600,
+        "target": 2,
+        "bytes": 921600,
+        "equal": true,
+        "baselineSha256": "35a17e21eab741e212c06f5692354c1570a1e17fe22ecf258e56213f10fd53dd",
+        "candidateSha256": "35a17e21eab741e212c06f5692354c1570a1e17fe22ecf258e56213f10fd53dd"
+      },
+      {
+        "event": 26527,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": false,
+        "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+        "candidateSha256": "3af823bc41250d713b5d8ab915536ed629516e3b419be505c91db4cf2d2f9933"
+      },
+      {
+        "event": 26527,
+        "target": 1,
+        "bytes": 3686400,
+        "equal": false,
+        "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+        "candidateSha256": "2b20306a325a324941c120bc78a6900cc69181de942345d883fa4fb891535630"
+      },
+      {
+        "event": 26527,
+        "target": 2,
+        "bytes": 921600,
+        "equal": true,
+        "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+        "candidateSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+      },
+      {
+        "event": 26578,
+        "target": 0,
+        "bytes": 3686400,
+        "equal": false,
+        "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+        "candidateSha256": "926236fe6ef90eaed48af3a677bd1aa580854fe1d8dfa2260a5481e72977f397"
+      }
+    ],
+    "programCount": 10,
+    "validatorPassed": true,
+    "validation": [
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+        "convertedImplicitSamples": 29,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+        "convertedImplicitSamples": 30,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+        "convertedImplicitSamples": 29,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+        "convertedImplicitSamples": 29,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field.frag.spv",
+        "convertedImplicitSamples": 40,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+        "convertedImplicitSamples": 41,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_early.frag.spv",
+        "convertedImplicitSamples": 40,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+        "convertedImplicitSamples": 40,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+        "convertedImplicitSamples": 40,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      },
+      {
+        "program": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+        "convertedImplicitSamples": 41,
+        "skippedImageOperandMasks": [],
+        "validatorExitCode": 0,
+        "stderr": ""
+      }
+    ]
+  },
+  "power": [
+    {
+      "ac": 0,
+      "batteryPercent": 82,
+      "saver": 0,
+      "performanceCountersRun": false
+    },
+    {
+      "ac": 0,
+      "batteryPercent": 79,
+      "saver": 0,
+      "performanceCountersRun": false
+    }
+  ],
+  "performanceCountersRun": false,
+  "nativeBatchRun": false,
+  "productionChanged": false,
+  "limitations": [
+    "Frontend single-boolean differences do not identify the driver machine-code transformation.",
+    "Explicit fine derivatives did not affect the nine examined attachments compared with the previous specialization.",
+    "Explicit and implicit fine gradients did not restore baseline attachments.",
+    "Battery functional readbacks are not performance acceptance."
+  ],
+  "archive": {
+    "file": "analysis.zip",
+    "bytes": 1816138,
+    "sha256": "a047bfedf3d77bb236dff75dc3b6d585bec3ad770c5c604e2c0b7615a0a2efe1"
+  }
+}
