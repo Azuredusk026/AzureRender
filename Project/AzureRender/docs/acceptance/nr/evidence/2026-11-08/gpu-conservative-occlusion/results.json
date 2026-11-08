@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 1,
+  "status": "bounded-mechanism-ready-scene-candidate-withdrawn",
+  "sourceBase": "a6d16c1",
+  "sourceHashes": {
+    "CMakeLists.txt": "b188b6fc4548ef4c2ddc59c9056879c3ec276080fb9866804a101004709b256f",
+    "src/render/GpuConservativeOcclusion.hpp": "a575511811793ec7acafaa560d211ed0323c014c5975b59ce4284a1514c324fb",
+    "src/render/GpuConservativeOcclusion.cpp": "1ac590b4d4588f954b519a935367a9b80c59d3ef9707867b2007ff1852e71cb5",
+    "shaders/conservative_occlusion.comp": "115c0b26f316f2bd82e3ecd53f936020676a3a84d9ff8b2a56a1e8e0c750a920",
+    "tests/GpuConservativeOcclusionTests.cpp": "2afea84b35948241d2503e85a0b8a1ec4ca83a1e395a467d7ef0fb70636c3877",
+    "tests/GpuConservativeOcclusionGpuTests.cpp": "fdd2e9b68dd5615eb1d33ad223e3205ec1b59847f0ee7ce1849301a745dbd7ff"
+  },
+  "checks": [
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.StaticSkinningRecording",
+      "seconds": "1.43088",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> generic, flags=0x20, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.000000, 0.000000\nAnimations: 0\n[1794112948042][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794112948042][info][render][code=0] Scene load CPU preparation: 1.010000 ms, materialPixelBytes=232\n[1794112948048][info][render][code=0] Character IBL: hardware mip fallback path\n[1794112948049][info][render][code=0] Scene load shared textures: 6.381200 ms\n[1794112948049][info][render][code=0] Scene load buffers: 0.919900 ms\n[1794112948050][info][render][code=0] Character skinning and morph: Vulkan compute path\n[1794...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.NodeOpacityRecording",
+      "seconds": "1.41905",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> hair, flags=0x14022, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x4020, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.400000, 0.600000\nAnimations: 0\n[1794112949293][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794112949293][info][render][code=0] Scene load CPU preparation: 0.194800 ms, materialPixelBytes=248\n[1794112949298][info][render][code=0] Character IBL: hardware mip fallback path\n[1794112949299][info][render][code=0] Scene load shared textures: 6.092900 ms\n[1794112949300][info][render][code=0] Scene load buffers: 0.848400 ms\n[1794112949300][info][render][code=0] Character skinning and morph: vertex-shader fallback ...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.DepthPrefillRecording",
+      "seconds": "1.6922",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> generic, flags=0x0, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x0, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.000000, 0.000000\nAnimations: 0\n[1794112951018][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794112951018][info][render][code=0] Scene load CPU preparation: 0.173800 ms, materialPixelBytes=232\n[1794112951024][info][render][code=0] Character IBL: hardware mip fallback path\n[1794112951024][info][render][code=0] Scene load shared textures: 6.085000 ms\n[1794112951025][info][render][code=0] Scene load buffers: 0.768100 ms\n[1794112951025][info][render][code=0] Character skinning and morph: vertex-shader fallback path...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.GpuConservativeOcclusion",
+      "seconds": "1.06659",
+      "output": "Conservative occlusion: capacities, input ranges, frame tickets and ownership passed"
+    },
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.GpuConservativeOcclusionGpu",
+      "seconds": "1.32195",
+      "output": "Conservative GPU occlusion: device=NVIDIA GeForce RTX 4060 Laptop GPU cases=4 commands=16432 culled=10182 conflicts=0 validationErrors=0 liveBuffers=0 liveImages=0"
+    },
+    {
+      "configuration": "release",
+      "label": "intel",
+      "name": "AzureRender.GpuConservativeOcclusionGpu",
+      "seconds": "0.260214",
+      "output": "Conservative GPU occlusion: device=Intel(R) RaptorLake-S Mobile Graphics Controller cases=4 commands=16432 culled=10182 conflicts=0 validationErrors=0 liveBuffers=0 liveImages=0"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.StaticSkinningRecording",
+      "seconds": "2.97301",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> generic, flags=0x20, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.000000, 0.000000\nAnimations: 0\n[1794112956574][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794112956574][info][render][code=0] Scene load CPU preparation: 7.043800 ms, materialPixelBytes=232\n[1794112956600][info][render][code=0] Character IBL: hardware mip fallback path\n[1794112956604][info][render][code=0] Scene load shared textures: 29.128800 ms\n[1794112956605][info][render][code=0] Scene load buffers: 1.015000 ms\n[1794112956605][info][render][code=0] Character skinning and morph: Vulkan compute path\n[179...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.NodeOpacityRecording",
+      "seconds": "3.3959",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> hair, flags=0x14022, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x4020, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.400000, 0.600000\nAnimations: 0\n[1794112959448][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794112959448][info][render][code=0] Scene load CPU preparation: 1.087300 ms, materialPixelBytes=248\n[1794112959472][info][render][code=0] Character IBL: hardware mip fallback path\n[1794112959475][info][render][code=0] Scene load shared textures: 26.697200 ms\n[1794112959476][info][render][code=0] Scene load buffers: 0.890600 ms\n[1794112959476][info][render][code=0] Character skinning and morph: vertex-shader fallback...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.DepthPrefillRecording",
+      "seconds": "3.01124",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> generic, flags=0x0, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x0, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.000000, 0.000000\nAnimations: 0\n[1794112962740][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794112962740][info][render][code=0] Scene load CPU preparation: 0.964600 ms, materialPixelBytes=232\n[1794112962766][info][render][code=0] Character IBL: hardware mip fallback path\n[1794112962769][info][render][code=0] Scene load shared textures: 28.329800 ms\n[1794112962770][info][render][code=0] Scene load buffers: 0.947200 ms\n[1794112962770][info][render][code=0] Character skinning and morph: vertex-shader fallback pat...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.GpuConservativeOcclusion",
+      "seconds": "1.04699",
+      "output": "Conservative occlusion: capacities, input ranges, frame tickets and ownership passed"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.GpuConservativeOcclusionGpu",
+      "seconds": "1.62302",
+      "output": "Conservative GPU occlusion: device=NVIDIA GeForce RTX 4060 Laptop GPU cases=4 commands=16432 culled=10182 conflicts=0 validationErrors=0 liveBuffers=0 liveImages=0"
+    },
+    {
+      "configuration": "debug",
+      "label": "intel",
+      "name": "AzureRender.GpuConservativeOcclusionGpu",
+      "seconds": "0.251287",
+      "output": "Conservative GPU occlusion: device=Intel(R) RaptorLake-S Mobile Graphics Controller cases=4 commands=16432 culled=10182 conflicts=0 validationErrors=0 liveBuffers=0 liveImages=0"
+    }
+  ],
+  "native": {
+    "rows": [
+      {
+        "device": "nvidia",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGpuConservativeOcclusionGpuTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-113315-conservative-depth-culling-079a96\\native-fixture"
+        ],
+        "exitCode": 0,
+        "result": {
+          "conflicts": 0,
+          "culled": 268,
+          "draws": 491,
+          "historicalMs": 1.1940479999999998,
+          "hotspotPotential": 0.23606669387057927,
+          "newGpuTimingExecuted": false,
+          "scope": "captured-depth-and-clip-bounds"
+        }
+      },
+      {
+        "device": "intel",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGpuConservativeOcclusionGpuTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-113315-conservative-depth-culling-079a96\\native-fixture"
+        ],
+        "exitCode": 0,
+        "result": {
+          "conflicts": 0,
+          "culled": 268,
+          "draws": 491,
+          "historicalMs": 1.1940479999999998,
+          "hotspotPotential": 0.23606669387057927,
+          "newGpuTimingExecuted": false,
+          "scope": "captured-depth-and-clip-bounds"
+        }
+      }
+    ],
+    "sourceAndProductsUnchanged": true,
+    "hashes": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGpuConservativeOcclusionGpuTests.exe": "061b9683fd90ef39ad5021a712d860ee4aaad85d02d58f8162f384ad436b987d",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\conservative_occlusion.comp.spv": "c2175e9cead1e2163ba12277be3c98b0586f70f3efa3a159e929549c773c5314",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\depth_pyramid.comp.spv": "65680553da6b44aa0d1c1f74d92e80aa8499f6a18c0cd22aa97b63d3686956f0",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-113315-conservative-depth-culling-079a96\\native-fixture\\depth.f32": "014b3ca67e5d92d893ead35a6e9d44bee87e7354d16c9105148ea7b952ceee37",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-113315-conservative-depth-culling-079a96\\native-fixture\\bounds.json": "883d82856fe8f88c7645df4855580ec32bebe11f8318c967f90dc1569db4f2ec"
+    }
+  },
+  "unchangedPrograms": {
+    "release": 669,
+    "debug": 669
+  },
+  "moduleBoundaries": {
+    "status": "passed",
+    "targets": 18,
+    "includes": 29532,
+    "violations": []
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "sha256": "b19656769becf973bbb96d85cc4fd837db55fea857e460dfb1d8a8d327992907"
+    },
+    {
+      "configuration": "debug",
+      "sha256": "9bff2a2bcdf80cfbb104237772401580289ef393baca7fce55fb756fec344265"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "sceneWithdrawal": {
+    "status": "withdrawn-no-net-frame-benefit",
+    "sourceBase": "a6d16c1",
+    "restoredHashes": {
+      "src/scenes/CharacterSceneRenderer.cpp": "6822d4781594faa0d4fbddb7f6e78ef5395bb1b847cb02da7a79dba35d20a604",
+      "src/scenes/CharacterSceneRenderer.hpp": "3acd11e0db4a83c20272bdf3cb4dff2fe6a4199c3d70e035bf145a7d8fd3fa40",
+      "src/render/SceneInstanceSnapshot.hpp": "2828da3f611c5963cdb8e22bf35bad80b615bf641a3be311d05d4d0682c85b6e",
+      "tests/DepthPrefillRecordingTests.cpp": "01aa031b2881be66f1e12dd936f9d4e3e5c277380a6ca62783fa1f62d64df3d4"
+    },
+    "exactSourceHashesRestored": true,
+    "prototypeIncludeSha256": "79626c26f918883ebc6c3051afef477af979a05d4c7583f9be76377022fb0001",
+    "candidateSourceInputSetSha256": "03c4ef72edebcd50ea6dcbeb17daadaee3d57c08d56ab336bcf196affefa691a"
+  },
+  "candidateCosts": {
+    "mappedReads": {
+      "status": "diagnosed",
+      "rows": [
+        {
+          "label": "baseline-before",
+          "selectedFrames": 60,
+          "summary": {
+            "gpu": {
+              "mean": 29.566101333333332,
+              "p95": 29.918424
+            },
+            "shadow": {
+              "mean": 2.6590165333333333,
+              "p95": 2.6917712
+            },
+            "main": {
+              "mean": 26.422306133333333,
+              "p95": 26.7265024
+            },
+            "post": {
+              "mean": 0.48477866666666675,
+              "p95": 0.49152
+            },
+            "cpu": {
+              "mean": 5.814299999999978,
+              "p95": 6.6125799999994115
+            }
+          },
+          "metadata": {
+            "conservativeOcclusionPrepared": false,
+            "conservativeOcclusionCommands": 0,
+            "conservativeOcclusionLastZeroCommands": 0,
+            "conservativeOcclusionFallback": ""
+          },
+          "sceneExtent": [
+            2560,
+            1410
+          ]
+        },
+        {
+          "label": "candidate",
+          "selectedFrames": 60,
+          "summary": {
+            "gpu": {
+              "mean": 30.333482133333337,
+              "p95": 31.044288
+            },
+            "shadow": {
+              "mean": 2.6944250666666667,
+              "p95": 2.7310512
+            },
+            "main": {
+              "mean": 27.14876586666667,
+              "p95": 27.8090752
+            },
+            "post": {
+              "mean": 0.4902912,
+              "p95": 0.5007872
+            },
+            "cpu": {
+              "mean": 7.984614999999997,
+              "p95": 8.723939999999946
+            }
+          },
+          "metadata": {
+            "conservativeOcclusionPrepared": true,
+            "conservativeOcclusionCommands": 440,
+            "conservativeOcclusionLastZeroCommands": 216,
+            "conservativeOcclusionFallback": ""
+          },
+          "sceneExtent": [
+            2560,
+            1410
+          ]
+        },
+        {
+          "label": "baseline-after",
+          "selectedFrames": 60,
+          "summary": {
+            "gpu": {
+              "mean": 30.242448533333334,
+              "p95": 30.9934768
+            },
+            "shadow": {
+              "mean": 2.7100922666666656,
+              "p95": 2.7493055999999996
+            },
+            "main": {
+              "mean": 27.036808533333335,
+              "p95": 27.723161599999997
+            },
+            "post": {
+              "mean": 0.4955477333333334,
+              "p95": 0.5069312
+            },
+            "cpu": {
+              "mean": 5.936353333333299,
+              "p95": 6.8628400000001655
+            }
+          },
+          "metadata": {
+            "conservativeOcclusionPrepared": false,
+            "conservativeOcclusionCommands": 0,
+            "conservativeOcclusionLastZeroCommands": 0,
+            "conservativeOcclusionFallback": ""
+          },
+          "sceneExtent": [
+            2560,
+            1410
+          ]
+        }
+      ],
+      "bracketDriftFraction": 0.022617074030646358,
+      "bracketStable": true,
+      "gpuBaselineMean": 29.904274933333333,
+      "gpuCandidateMean": 30.333482133333337,
+      "gpuSavedMs": -0.429207200000004,
+      "gpuReductionFraction": -0.014352703784219933,
+      "sourceAndProductsUnchanged": true,
+      "projectInputsVerified": 1729,
+      "scope": "Battery diagnosis, sixty warmup and sixty selected frames per process; before/candidate/after bracket; formal performance conditions remain pending",
+      "formalPerformancePassed": false
+    },
+    "gpuSummary": {
+      "status": "diagnosed",
+      "rows": [
+        {
+          "label": "baseline-before",
+          "selectedFrames": 60,
+          "summary": {
+            "gpu": {
+              "mean": 30.223359999999996,
+              "p95": 30.6690224
+            },
+            "shadow": {
+              "mean": 2.7086677333333338,
+              "p95": 2.7603376
+            },
+            "main": {
+              "mean": 27.019724800000002,
+              "p95": 27.4292736
+            },
+            "post": {
+              "mean": 0.4949674666666667,
+              "p95": 0.5069823999999999
+            },
+            "cpu": {
+              "mean": 5.682866666666656,
+              "p95": 6.697910000000094
+            }
+          },
+          "metadata": {
+            "conservativeOcclusionPrepared": false,
+            "conservativeOcclusionCommands": 0,
+            "conservativeOcclusionLastZeroCommands": 0,
+            "conservativeOcclusionFallback": ""
+          },
+          "sceneExtent": [
+            2560,
+            1410
+          ]
+        },
+        {
+          "label": "candidate",
+          "selectedFrames": 60,
+          "summary": {
+            "gpu": {
+              "mean": 29.910545600000003,
+              "p95": 30.3176336
+            },
+            "shadow": {
+              "mean": 2.6682202666666663,
+              "p95": 2.6935247999999996
+            },
+            "main": {
+              "mean": 26.75766613333333,
+              "p95": 27.1448064
+            },
+            "post": {
+              "mean": 0.4846592,
+              "p95": 0.4915712
+            },
+            "cpu": {
+              "mean": 6.528136666666678,
+              "p95": 7.1987950000001835
+            }
+          },
+          "metadata": {
+            "conservativeOcclusionPrepared": true,
+            "conservativeOcclusionCommands": 440,
+            "conservativeOcclusionLastZeroCommands": 216,
+            "conservativeOcclusionFallback": ""
+          },
+          "sceneExtent": [
+            2560,
+            1410
+          ]
+        },
+        {
+          "label": "baseline-after",
+          "selectedFrames": 60,
+          "summary": {
+            "gpu": {
+              "mean": 29.53712266666667,
+              "p95": 29.9326608
+            },
+            "shadow": {
+              "mean": 2.6696496,
+              "p95": 2.7013072
+            },
+            "main": {
+              "mean": 26.381841066666667,
+              "p95": 26.7567616
+            },
+            "post": {
+              "mean": 0.485632,
+              "p95": 0.4936704
+            },
+            "cpu": {
+              "mean": 6.0658766666666795,
+              "p95": 6.918575000000029
+            }
+          },
+          "metadata": {
+            "conservativeOcclusionPrepared": false,
+            "conservativeOcclusionCommands": 0,
+            "conservativeOcclusionLastZeroCommands": 0,
+            "conservativeOcclusionFallback": ""
+          },
+          "sceneExtent": [
+            2560,
+            1410
+          ]
+        }
+      ],
+      "bracketDriftFraction": 0.022966258059227435,
+      "bracketStable": true,
+      "gpuBaselineMean": 29.88024133333333,
+      "gpuCandidateMean": 29.910545600000003,
+      "gpuSavedMs": -0.030304266666671964,
+      "gpuReductionFraction": -0.0010141908269283295,
+      "sourceAndProductsUnchanged": true,
+      "projectInputsVerified": 1729,
+      "scope": "Battery diagnosis, sixty warmup and sixty selected frames per process; before/candidate/after bracket; formal performance conditions remain pending",
+      "formalPerformancePassed": false
+    }
+  },
+  "sceneIntegrated": false,
+  "candidateNativeImagesExact": true,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 2167158,
+  "evidenceSha256": "f59e6e123cc465c7677141e50c93ad5c1800bfc7aaa6c85365287a7855016e95"
+}

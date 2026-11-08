@@ -1,0 +1,57 @@
+#version 450
+layout(local_size_x=64) in;
+struct Bounds {mat4 clipFromLocal;vec4 minimum;vec4 maximum;};
+struct Draw {uint indexCount;uint instanceCount;uint firstIndex;int vertexOffset;uint firstInstance;};
+layout(std430,binding=0) readonly buffer BoundsInput {Bounds values[];} bounds;
+layout(std430,binding=1) readonly buffer SourceInput {Draw values[];} source;
+layout(std430,binding=2) writeonly buffer CommandsOutput {Draw values[];} outputCommands;
+layout(binding=3) uniform sampler2D maximumDepth;
+layout(std140,binding=4) uniform Settings {vec4 viewport;uvec4 dimensions;vec4 safety;} settings;
+layout(std430,binding=5) buffer Summary {uint zeroCommands;} summary;
+shared uint groupZero[64];
+bool finite4(vec4 v){return !any(isnan(v))&&!any(isinf(v));}
+bool occluded(Bounds box){
+    vec3 low=vec3(3.402823e38),high=vec3(-3.402823e38);
+    for(uint corner=0;corner<8;++corner){
+        vec3 point=mix(box.minimum.xyz,box.maximum.xyz,bvec3((corner&1u)!=0u,(corner&2u)!=0u,(corner&4u)!=0u));
+        precise vec4 a=box.clipFromLocal[0]*point.x,b=box.clipFromLocal[1]*point.y,c=box.clipFromLocal[2]*point.z;
+        precise vec4 clip=((a+b)+c)+box.clipFromLocal[3];
+        // Eight binary32 epsilons dominate the product/add rounding bounds.
+        precise vec4 error=(((abs(a)+abs(b))+abs(c))+abs(box.clipFromLocal[3]))*9.5367431640625e-7+vec4(1e-30);
+        if(!finite4(clip)||!finite4(error))return false;
+        vec4 lo=clip-error,hi=clip+error;if(lo.w<=1e-5)return false;
+        vec3 pmin=min(min(lo.xyz/lo.w,lo.xyz/hi.w),min(hi.xyz/lo.w,hi.xyz/hi.w));
+        vec3 pmax=max(max(lo.xyz/lo.w,lo.xyz/hi.w),max(hi.xyz/lo.w,hi.xyz/hi.w));
+        vec3 margin=(max(abs(pmin),abs(pmax))+vec3(1))*9.5367431640625e-7;
+        low=min(low,pmin-margin);high=max(high,pmax+margin);
+    }
+    if(any(isinf(low))||any(isinf(high))||any(isnan(low))||any(isnan(high)))return false;
+    if(high.x< -1||low.x>1||high.y< -1||low.y>1)return true;
+    if(low.z<0||high.z>1)return false;
+    vec2 first=settings.viewport.xy+(clamp(low.xy,vec2(-1),vec2(1))*.5+.5)*settings.viewport.zw;
+    vec2 last=settings.viewport.xy+(clamp(high.xy,vec2(-1),vec2(1))*.5+.5)*settings.viewport.zw;
+    ivec2 extent=ivec2(settings.dimensions.yz);
+    ivec2 begin=clamp(ivec2(floor(min(first,last)))-ivec2(settings.safety.y),ivec2(0),extent-1);
+    ivec2 end=clamp(ivec2(ceil(max(first,last)))+ivec2(settings.safety.y)-1,ivec2(0),extent-1);
+    if(any(lessThan(end,begin)))return false;
+    uint span=uint(max(end.x-begin.x,end.y-begin.y)+1),mip=0;
+    while((1u<<mip)<span&&mip+1<settings.dimensions.w)++mip;
+    ivec2 mipExtent=textureSize(maximumDepth,int(mip));
+    ivec2 a=clamp(begin>>int(mip),ivec2(0),mipExtent-1),b=clamp(end>>int(mip),ivec2(0),mipExtent-1);
+    if(any(greaterThan(b-a,ivec2(1))))return false;
+    vec4 depths=vec4(texelFetch(maximumDepth,a,int(mip)).r,texelFetch(maximumDepth,b,int(mip)).r,
+        texelFetch(maximumDepth,ivec2(a.x,b.y),int(mip)).r,texelFetch(maximumDepth,ivec2(b.x,a.y),int(mip)).r);
+    if(!finite4(depths)||any(lessThan(depths,vec4(0)))||any(greaterThan(depths,vec4(1))))return false;
+    return low.z-settings.safety.x>max(max(depths.x,depths.y),max(depths.z,depths.w));
+}
+void main(){
+    uint index=gl_GlobalInvocationID.x,local=gl_LocalInvocationIndex;groupZero[local]=0;
+    if(index<settings.dimensions.x){
+        Draw command=source.values[index];
+        if(command.instanceCount==1&&occluded(bounds.values[index]))command.instanceCount=0;
+        outputCommands.values[index]=command;groupZero[local]=command.instanceCount==0?1u:0u;
+    }
+    barrier();
+    for(uint stride=32;stride>0;stride/=2){if(local<stride)groupZero[local]+=groupZero[local+stride];barrier();}
+    if(local==0)atomicAdd(summary.zeroCommands,groupZero[0]);
+}

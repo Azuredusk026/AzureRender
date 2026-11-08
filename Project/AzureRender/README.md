@@ -23,6 +23,7 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [准备批次评估](docs/acceptance/nr/cpu-preparation-batch.md)的更新均值降低约 7.46%，未达到本批门槛，候选保持隔离。
 [GPU 透明索引准备](docs/acceptance/nr/gpu-transparent-index-sort.md)通过十二项所属检查及严格四帧，局部 CPU 准备减少约 0.99 毫秒。
 [绘制阶段归因](docs/acceptance/nr/gpu-draw-stage-cost.md)定位保守遮挡候选，调用统计与实际片元结果保持一致。
+[保守剔除机制](docs/acceptance/nr/gpu-conservative-occlusion.md)通过双设备检查，场景候选的整帧收益未成立。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。

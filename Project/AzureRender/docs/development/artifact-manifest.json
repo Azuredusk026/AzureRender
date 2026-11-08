@@ -50,6 +50,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-113315-conservative-depth-culling-079a96",
+      "name": "保守层级深度剔除机制",
+      "status": "MechanismReadySceneCandidateWithdrawn",
+      "sourceBase": "a6d16c1",
+      "evidence": "docs/acceptance/nr/gpu-conservative-occlusion.md",
+      "checksPassed": 12,
+      "sceneIntegrated": false,
+      "candidateNativeImagesExact": true,
+      "productionSceneRestored": true,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-111838-gpu-draw-stage-cost-4bb6b2",
       "name": "GPU 绘制阶段归因",
       "status": "BoundedCullingProposal",

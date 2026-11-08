@@ -298,6 +298,7 @@ compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.vert")
 compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.frag")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_bounds.comp")
 compile_shader("${SHADER_SOURCE_DIR}/stable_key_sort.comp")
+compile_shader("${SHADER_SOURCE_DIR}/conservative_occlusion.comp")
 compile_shader("${SHADER_SOURCE_DIR}/transparent_deform.comp")
 compile_shader("${SHADER_SOURCE_DIR}/transparent_depth_keys.comp")
 compile_shader("${SHADER_SOURCE_DIR}/transparent_index_scatter.comp")
@@ -670,6 +671,7 @@ add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/render/GpuStableKeySort.cpp
+    src/render/GpuConservativeOcclusion.cpp
     src/render/GpuTransparentIndexSort.cpp
     src/render/ScreenObjectVisibility.cpp
     src/render/ColorGradingLut.cpp
@@ -3006,6 +3008,14 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ScreenReflection COMMAND AzureScreenReflectionTests)
     add_executable(AzureScreenObjectVisibilityTests tests/ScreenObjectVisibilityTests.cpp src/rhi/NullRhi.cpp)
     add_executable(AzureGpuStableKeySortTests tests/GpuStableKeySortTests.cpp src/rhi/NullRhi.cpp)
+    add_executable(AzureGpuConservativeOcclusionTests tests/GpuConservativeOcclusionTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureGpuConservativeOcclusionTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.GpuConservativeOcclusion COMMAND AzureGpuConservativeOcclusionTests)
+    add_executable(AzureGpuConservativeOcclusionGpuTests tests/GpuConservativeOcclusionGpuTests.cpp)
+    target_link_libraries(AzureGpuConservativeOcclusionGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureGpuConservativeOcclusionGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.GpuConservativeOcclusionGpu COMMAND AzureGpuConservativeOcclusionGpuTests "${SHADER_BINARY_DIR}")
+    set_tests_properties(AzureRender.GpuConservativeOcclusionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureGpuTransparentIndexSortTests tests/GpuTransparentIndexSortTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureGpuTransparentIndexSortTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.GpuTransparentIndexSort COMMAND AzureGpuTransparentIndexSortTests)
