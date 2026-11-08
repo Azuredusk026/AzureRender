@@ -78,6 +78,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [紧凑蒙皮输出](../acceptance/nr/compact-skinning-output.md)已接入普通配置。
 十四项检查及严格四帧通过，缓冲逻辑容量减少约 62.96%。
 本地 GPU 均值减少约 0.43 毫秒，正式帧预算继续待通过。
+[计算归约门槛](../acceptance/nr/bounded-compute-reductions.md)完成数值与独立效率检查。
+局部差值小于参考漂移，候选保持隔离。
+后续核对对象阴影材质中未被消费的级联接收面计算。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

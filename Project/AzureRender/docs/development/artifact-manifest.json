@@ -57,6 +57,20 @@
   },
   "milestones": [
     {
+      "path": "runs/20261109-030048-bounded-compute-reductions-fec9f6",
+      "name": "计算归约效率门槛",
+      "status": "MicroGateNotPassedCandidateIsolated",
+      "sourceBase": "e0728cf",
+      "evidence": "docs/acceptance/nr/bounded-compute-reductions.md",
+      "checksPassed": 24,
+      "pairedReferenceProcesses": 4,
+      "canonicalNativeProcesses": 0,
+      "frameCostProcesses": 0,
+      "standaloneKernelTimingProcesses": 1,
+      "reclaimedFiles": 687,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261109-023357-compact-skinning-output-1c5f2c",
       "name": "紧凑蒙皮输出",
       "status": "CompactOutputIntegratedVisualExactLocalGpuGain",

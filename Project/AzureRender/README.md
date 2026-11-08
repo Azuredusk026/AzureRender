@@ -45,6 +45,7 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 十九个通道均有实际结果，后续核对共享形变输出的数据成本。
 [紧凑蒙皮输出](docs/acceptance/nr/compact-skinning-output.md)通过十四项检查及严格四帧。
 缓冲容量减少约 125.65 MiB，本地 GPU 均值减少约 0.43 毫秒。
+[计算归约门槛](docs/acceptance/nr/bounded-compute-reductions.md)完成局部评估，候选保持隔离。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。
