@@ -34,6 +34,9 @@ void expectError(
 }  // namespace
 
 int main() try {
+    require(!azurerender::parseCommandLine({}).options.qaDisableSurfaceRadianceReuse,"Radiance diagnostic defaults to off");
+    require(azurerender::parseCommandLine({"--qa-disable-surface-radiance"}).options.qaDisableSurfaceRadianceReuse,"Explicit complete shading control is preserved");
+    require(std::string(azurerender::commandLineHelp()).find("--qa-disable-surface-radiance")!=std::string::npos,"Radiance control is documented");
     require(azurerender::parseCommandLine({"--qa-isolation","hair-kk","--qa-exposure","-4"}).options.qaIsolation=="hair-kk",
         "Component isolation accepts explicit diagnostic exposure");
     require(azurerender::parseCommandLine({"--qa-isolation","hair-kk","--qa-exposure","-4"}).options.qaExposureEv==-4.F,

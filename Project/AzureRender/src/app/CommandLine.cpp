@@ -87,6 +87,7 @@ constexpr const char* kHelp =
     "  --disable-gpu-culling             Use CPU visibility and direct draws\n"
     "  --visibility-prototype            Emit stable GPU surface identities\n"
     "  --qa-disable-face-culling         Diagnose winding by rendering both faces\n"
+    "  --qa-disable-surface-radiance    Use complete shading for paired diagnostics\n"
     "  --qa-disable-depth-test           Diagnose depth by showing submission order\n"
     "  --disable-multi-draw-indirect     Use one indirect command per call\n"
     "  --fixed-frame-step                Use deterministic 1/capture-fps simulation steps\n"
@@ -446,6 +447,8 @@ ParsedCommandLine parseCommandLine(
             parsed.options.cullingDisabled = true;
         } else if (argument == "--qa-disable-face-culling") {
             parsed.options.qaDisableFaceCulling = true;
+        } else if (argument == "--qa-disable-surface-radiance") {
+            parsed.options.qaDisableSurfaceRadianceReuse = true;
         } else if (argument == "--qa-disable-depth-test") {
             parsed.options.qaDisableDepthTest = true;
         } else if (argument == "--disable-compute-skinning") {

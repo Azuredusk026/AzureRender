@@ -438,6 +438,10 @@ private:
     std::string radianceSelectionFallback_;
     VkRenderPass radianceValidationPass_=VK_NULL_HANDLE;
     VkPipeline radianceCommitPipeline_=VK_NULL_HANDLE;
+    VkPipeline radianceDepthCopyPipeline_=VK_NULL_HANDLE;
+    VkRenderPass radianceDepthCopyPass_=VK_NULL_HANDLE;
+    std::array<GpuTexture,kMaxFramesInFlight> radianceValidationDepth_{};
+    void recordRadianceDepthCopy(rhi::ICommandRecorder&,const RenderContext&);
     std::array<VkFramebuffer,kMaxFramesInFlight> radianceValidationFrames_{};
     std::array<VkImageView,kMaxFramesInFlight> radianceValidationViews_{};
     rhi::RenderPassBeginDesc radianceValidationDescription(const RenderContext&);

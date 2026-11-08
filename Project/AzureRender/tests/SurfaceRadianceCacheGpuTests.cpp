@@ -16,9 +16,15 @@ struct Resources{
  VkDescriptorSetLayout setLayout{};VkDescriptorPool pool{};VkPipelineLayout layout{};
  VkShaderModule vertex{},producer{},consumer{};VkPipeline produce{},consume{};
  rhi::GpuBuffer readValues{},readIds{};VkDescriptorSet set{};
+ rhi::GpuImage copySource{};VkImageView copySourceView{};rhi::GpuBuffer copyUpload{},copyRead{};
+ VkRenderPass copyPass{};VkFramebuffer copyFrame{};VkPipeline copyPipeline{};VkShaderModule copyVertex{},copyFragment{};
  bool diagnostics=false,selection=false;VkPipeline validate{},commit{};VkShaderModule validation{},commitModule{};
  explicit Resources(test::VulkanComputeFixture& h,bool statistics=false,bool frameSelection=false):host(h),rhi(*h.backend),diagnostics(statistics),selection(frameSelection){}
  ~Resources(){
+  if(copyFrame)rhi.destroyFramebuffer(copyFrame);if(copyPipeline)rhi.destroyPipeline(copyPipeline);
+  if(copyVertex)rhi.destroyShaderModule(copyVertex);if(copyFragment)rhi.destroyShaderModule(copyFragment);
+  if(copyPass)rhi.destroyRenderPass(copyPass);if(copySourceView)rhi.destroyImageView(copySourceView);
+  host.allocator.destroyImage(copySource);host.allocator.destroyBuffer(copyUpload);host.allocator.destroyBuffer(copyRead);
   for(auto frame:frames)if(frame)rhi.destroyFramebuffer(frame);
   if(validate)rhi.destroyPipeline(validate);if(validation)rhi.destroyShaderModule(validation);
   if(commit)rhi.destroyPipeline(commit);if(commitModule)rhi.destroyShaderModule(commitModule);
@@ -31,7 +37,7 @@ struct Resources{
  }
  void initialize(const std::string& shaders,bool withConsumer=true){
   source=std::make_unique<SurfaceRadianceCache>(rhi,extent,2,SurfaceRadianceCache::kMaximumBytes,diagnostics,selection);target=std::make_unique<SurfaceRadianceCache>(rhi,extent,1);
-  depth=host.allocator.createImage2D(extent.width,extent.height,VK_FORMAT_D32_SFLOAT,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+  depth=host.allocator.createImage2D(extent.width,extent.height,VK_FORMAT_D32_SFLOAT,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT);
   depthView=rhi.createImageView(depth.image,VK_FORMAT_D32_SFLOAT,VK_IMAGE_ASPECT_DEPTH_BIT,1);
   rhi::RenderPassDesc desc;
   for(unsigned kind=0;kind<4;++kind)desc.attachments.push_back({SurfaceRadianceCache::format(kind),VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false});
@@ -41,10 +47,10 @@ struct Resources{
    frames[i]=rhi.createFramebuffer({pass,{cache.texture(slot,0).view,cache.texture(slot,1).view,cache.texture(slot,2).view,cache.texture(slot,3).view,depthView},extent.width,extent.height});}
   std::vector<rhi::DescriptorBindingDesc> bindings;for(unsigned kind=0;kind<4;++kind)bindings.push_back({38+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
   if(diagnostics)bindings.push_back({42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
-  if(selection)bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
+  if(selection){bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});bindings.push_back({44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
   setLayout=rhi.createDescriptorSetLayout(bindings);
   rhi::PushConstantRangeDesc range{VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(Probe)};layout=rhi.createPipelineLayout(setLayout,&range);
-  rhi::DescriptorPoolDesc poolDesc;poolDesc.maxSets=1;poolDesc.sizes={{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,4}};if(diagnostics||selection)poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,(diagnostics?1U:0U)+(selection?1U:0U)});pool=rhi.createDescriptorPool(poolDesc);
+  rhi::DescriptorPoolDesc poolDesc;poolDesc.maxSets=1;poolDesc.sizes={{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,selection?5U:4U}};if(diagnostics||selection)poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,(diagnostics?1U:0U)+(selection?1U:0U)});pool=rhi.createDescriptorPool(poolDesc);
   set=rhi.allocateDescriptorSets(pool,setLayout,1).at(0);
   if(diagnostics){const auto& counter=source->statisticsBuffer(0);rhi.writeDescriptorBuffer({set,42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,counter.buffer,counter.size});}
   if(selection){const auto& flag=source->selectionBuffer(0);rhi.writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,flag.buffer,4});}
@@ -55,7 +61,7 @@ struct Resources{
   pipeline.colorAttachmentCount=4;pipeline.cullMode=VK_CULL_MODE_NONE;pipeline.depthCompare=VK_COMPARE_OP_LESS;
   produce=rhi.createGraphicsPipeline(pipeline);pipeline.fragmentShader=consumer;if(withConsumer)consume=rhi.createGraphicsPipeline(pipeline);
   if(selection){validation=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_validation_probe.frag.spv"));
-   pipeline.fragmentShader=validation;pipeline.depthWrite=false;pipeline.colorWriteMasks.assign(4,0);validate=rhi.createGraphicsPipeline(pipeline);
+   pipeline.fragmentShader=validation;pipeline.depthWrite=true;pipeline.colorWriteMasks.assign(4,0);validate=rhi.createGraphicsPipeline(pipeline);
    commitModule=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_selection_commit.comp.spv"));commit=rhi.createComputePipeline({commitModule,layout});}
 
   readValues=host.allocator.createBuffer(extent.width*extent.height*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
@@ -81,6 +87,40 @@ struct Resources{
     commands.bindComputePipeline(commit);commands.bindComputeDescriptorSet(layout,set);commands.dispatch(1,1,1);source->recordSelectionReady(commands,0);}
   });
  }
+ void verifyDepthCopy(const std::string& shaders){
+  const auto bytes=extent.width*extent.height*4;
+  copySource=host.allocator.createImage2D(extent.width,extent.height,VK_FORMAT_D32_SFLOAT,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_DST_BIT);
+  copySourceView=rhi.createImageView(copySource.image,VK_FORMAT_D32_SFLOAT,VK_IMAGE_ASPECT_DEPTH_BIT,1);
+  copyUpload=host.allocator.createBuffer(bytes,VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true);copyRead=host.allocator.createBuffer(bytes,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
+  rhi::RenderPassDesc desc;desc.depthAttachment=0;desc.attachments={{VK_FORMAT_D32_SFLOAT,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,true,true,true}};
+  copyPass=rhi.createRenderPass(desc);copyFrame=rhi.createFramebuffer({copyPass,{depthView},extent.width,extent.height});
+  copyVertex=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_depth_copy.vert.spv"));copyFragment=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_depth_copy.frag.spv"));
+  rhi::GraphicsPipelineDesc pipeline;pipeline.vertexShader=copyVertex;pipeline.fragmentShader=copyFragment;pipeline.layout=layout;pipeline.renderPass=copyPass;
+  pipeline.cullMode=VK_CULL_MODE_NONE;pipeline.depthCompare=VK_COMPARE_OP_ALWAYS;copyPipeline=rhi.createGraphicsPipeline(pipeline);
+  rhi.writeDescriptorImage({set,44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,copySourceView,source->sampler(),VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
+  const std::array<std::uint32_t,16> patterns{0x00800000,0x01000000,0x33000000,0x3e800000,0x3effffff,0x3f000000,0x3f000001,0x3f800000,0,1,0x007fffff,0x7f800000,0x7fc00001,0xbf800000,0x3f800001,0x80000000};
+  for(unsigned flow=0;flow<2;++flow){
+   auto* data=static_cast<std::uint32_t*>(copyUpload.mapped);for(unsigned i=0;i<bytes/4;++i)data[i]=patterns[i%(flow?16:8)];
+   host.allocator.flush(copyUpload,0,bytes);source->beginSelectionFrame(0,true);
+   host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer raw){
+    commands.bufferBarrier({copyUpload.buffer,0,bytes,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+    commands.imageBarrier({copySource.image,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,1,VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,0,VK_ACCESS_TRANSFER_WRITE_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    VkBufferImageCopy region{};region.imageSubresource={VK_IMAGE_ASPECT_DEPTH_BIT,0,0,1};region.imageExtent={extent.width,extent.height,1};
+    vkCmdCopyBufferToImage(raw,copyUpload.buffer,copySource.image,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,1,&region);
+    commands.imageBarrier({copySource.image,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    const auto& flag=source->selectionBuffer(0);commands.bufferBarrier({flag.buffer,0,4,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_WRITE_BIT});
+    VkClearValue clear{};clear.depthStencil={1,0};commands.beginRenderPass({copyPass,copyFrame,extent,{clear}});commands.setViewport(float(extent.width),float(extent.height));commands.setScissor(extent);
+    commands.bindPipeline(copyPipeline);commands.bindDescriptorSet(layout,set);commands.draw(3);commands.endRenderPass();
+    commands.imageBarrier({depth.image,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    vkCmdCopyImageToBuffer(raw,depth.image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,copyRead.buffer,1,&region);
+    commands.bufferBarrier({copyRead.buffer,0,bytes,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+    commands.bufferBarrier({flag.buffer,0,4,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+   });
+   host.allocator.invalidate(copyRead,0,bytes);const auto* actual=static_cast<const std::uint32_t*>(copyRead.mapped);
+   for(unsigned i=0;i<bytes/4;++i){const auto expected=i%(flow?16:8)<8?data[i]:0x3f800000U;require(actual[i]==expected,"Depth replay must preserve normal D32 bits and reject unsafe values");}
+   const auto& flag=source->selectionBuffer(0);host.allocator.invalidate(flag,0,4);std::uint32_t value=0;std::memcpy(&value,flag.mapped,4);require(value==(flow?1U:0U),"Unsafe depth must request complete shading");
+  }
+ }
  void bind(unsigned slot){for(unsigned kind=0;kind<4;++kind)rhi.writeDescriptorImage({set,38+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
   source->texture(slot,kind).view,source->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});}
  void read(const SurfaceRadianceCache& cache,unsigned slot,float expected,const SurfaceRadianceIdentity* identity=nullptr){
@@ -100,7 +140,7 @@ struct Resources{
 }
 int main(int argc,char** argv)try{
  require(argc==2,"Expected shader directory");
- {test::VulkanComputeFixture graphics(true,false,false,true);{
+ {test::VulkanComputeFixture graphics(true,false,false,true,false,AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION!=0);{
   Resources r(graphics);r.initialize(argv[1],false);
   for(const auto mode:{rhi::PrimaryColorBlend::Alpha,rhi::PrimaryColorBlend::Additive,rhi::PrimaryColorBlend::Multiply}){
    rhi::GraphicsPipelineDesc desc;desc.vertexShader=r.vertex;desc.fragmentShader=r.producer;desc.layout=r.layout;desc.renderPass=r.pass;
@@ -110,6 +150,10 @@ int main(int argc,char** argv)try{
    r.produce=original;r.rhi.destroyPipeline(pipeline);
   }
  }
+#if AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION
+ {Resources r(graphics,false,true);r.initialize(argv[1],false);r.verifyDepthCopy(argv[1]);}
+ std::cout<<"D32 depth replay bit precision and unsafe-value fallback passed on "<<graphics.properties.deviceName<<'\n';
+#endif
  require(graphics.errors==0,"Masked integer attachment blending must satisfy Vulkan");
  require(!graphics.allocator.statistics().liveBuffers&&!graphics.allocator.statistics().liveImages,"Masked blending must retire resources");
  std::cout<<"Masked integer attachment blending passed on "<<graphics.properties.deviceName<<'\n';}
@@ -160,7 +204,7 @@ int main(int argc,char** argv)try{
   require(selected.fullFrames==2&&selected.lastFallback,"Missing production is fail closed");
   r.source->beginSelectionFrame(0,true);p.value=1000.03125F;r.draw(0,p,7,6);r.draw(2,p,7,6,false,true);
   r.source->beginSelectionFrame(0);selected=r.source->selectionStatistics();
-  require(selected.fullFrames==3&&selected.lastFallback,"Read-only validation conservatively includes the hidden coplanar triangle");
+  require(selected.fastFrames==2&&selected.fullFrames==2&&!selected.lastFallback,"Depth-writing validation preserves the visible coplanar winner");
 
  }
 #endif

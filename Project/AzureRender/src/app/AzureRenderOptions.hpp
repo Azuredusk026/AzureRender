@@ -49,6 +49,7 @@ struct AzureRenderOptions {
     bool cullingDisabled = false;
     bool qaDisableFaceCulling = false;
     bool qaDisableDepthTest = false;
+    bool qaDisableSurfaceRadianceReuse = false;
     bool computeSkinningDisabled = false;
     bool parallelRecordingDisabled = false;
     bool pipelineInspectionDisabled = false;

@@ -61,7 +61,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [GPU 绘制选择](../acceptance/nr/gpu-predicate-draw-selection.md)通过六项所属检查。
 [同帧资格核验](../acceptance/nr/radiance-validation-path.md)保持严格四帧零差异。
 原生槽均选择完整回退，实验入口默认关闭。
-下一单元使用独立深度副本核对共面遮挡顺序。
+[独立深度重放](../acceptance/nr/radiance-depth-replay.md)通过共面及精度检查。
+严格四帧一致，原生退役槽仍为完整回退。
+帧收益计时保持未启动，后续处理资格影响范围。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

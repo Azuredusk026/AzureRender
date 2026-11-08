@@ -1484,7 +1484,7 @@ void AzureRenderApp::createLogicalDevice() {
     if(hasExtension(VK_KHR_SHADER_QUAD_CONTROL_EXTENSION_NAME)&&hasExtension(VK_KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION_NAME)){
         quadControl.pNext=&reconvergence;reconvergence.pNext=&demote;VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};available.pNext=&quadControl;
         vkGetPhysicalDeviceFeatures2(physicalDevice_,&available);
-        fragmentQuadControl_=quadControl.shaderQuadControl&&reconvergence.shaderMaximalReconvergence&&demote.shaderDemoteToHelperInvocation;
+        fragmentQuadControl_=!runOptions_.qaDisableSurfaceRadianceReuse&&quadControl.shaderQuadControl&&reconvergence.shaderMaximalReconvergence&&demote.shaderDemoteToHelperInvocation;
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS) || defined(AZURE_SURFACE_RADIANCE_FRAME_SELECTION)
         fragmentQuadControl_&=supportedSampler.fragmentStoresAndAtomics==VK_TRUE;
         deviceFeatures.fragmentStoresAndAtomics=fragmentQuadControl_?VK_TRUE:VK_FALSE;

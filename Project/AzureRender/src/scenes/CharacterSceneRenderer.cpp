@@ -546,7 +546,8 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
 #if defined(AZURE_SURFACE_RADIANCE_PROGRAMS)
     auto radianceRequirements=objectShadowPrepared_?objectRequirements:requirements;
     if(kSurfaceRadianceDiagnostics){++radianceRequirements.fragmentBuffers;++radianceRequirements.descriptorSetBuffers;}
-    if(kSurfaceRadianceFrameSelection){++radianceRequirements.fragmentBuffers;++radianceRequirements.descriptorSetBuffers;}
+    if(kSurfaceRadianceFrameSelection){++radianceRequirements.fragmentBuffers;++radianceRequirements.descriptorSetBuffers;
+        ++radianceRequirements.sampledImageSlots;++radianceRequirements.fixedSampledImageSlots;}
     radianceRequirements.sampledImageSlots+=4;radianceRequirements.fixedSampledImageSlots+=4;
     radianceRequirements.fragmentColorAttachments=std::max<std::uint64_t>(6,radianceRequirements.fragmentColorAttachments);
     const auto plainOrdinary=[](const LoadedAsset& mesh){return std::any_of(mesh.primitives.begin(),mesh.primitives.end(),[&](const AssetPrimitive& primitive){
@@ -1537,12 +1538,20 @@ void CharacterSceneRenderer::registerPasses(
     if(radianceSelectionActive(context)){
         const auto& predicate=surfaceRadiance_->selectionBuffer(static_cast<unsigned>(context.currentFrame));
         const auto flag=importHostStorage("character-radiance-predicate",predicate);
+        (void)radianceValidationDescription(context);
+        rhi::ImageBarrierDesc depthInitial{};depthInitial.image=radianceValidationDepth_.at(context.currentFrame).image.image;
+        depthInitial.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+        const auto depthReplay=graph.importImage("character-radiance-depth-replay",depthInitial);
+        const auto copy=graph.addCommandPass("character-radiance-depth-copy",[this,frozenContext](rhi::ICommandRecorder& commands){recordRadianceDepthCopy(commands,*frozenContext);});
+        graph.read(copy,*conservativeReady);graph.read(copy,resources.depth);
+        graph.attachment(copy,depthReplay,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+        graph.use(copy,flag,RenderGraphUsage::FragmentStorage,true);
         const auto validate=graph.addGraphicsPass("character-radiance-validation",radianceValidationDescription(context),
             [this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
                 recordDepthCoverage(*frozenContext,*frozenInstances,commands,DepthCoverageMode::RadianceValidation);
             });
         graph.read(validate,*conservativeReady);graph.use(validate,*conservativeIndirectResource,RenderGraphUsage::IndirectBuffer,false);
-        graph.attachment(validate,resources.depth,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+        graph.attachment(validate,depthReplay,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
         graph.use(validate,flag,RenderGraphUsage::FragmentStorage,true);
         graph.use(validate,radianceResources[3],RenderGraphUsage::Sampled,false);
         for(auto resource:{jointResource,morphTargetResource,morphWeightResource,instanceResource})graph.use(validate,resource,RenderGraphUsage::VertexStorage,false);
@@ -1730,6 +1739,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
         const auto& predicate=surfaceRadiance_->selectionBuffer(static_cast<unsigned>(context.currentFrame));
         context.commands->bufferBarrier({predicate.buffer,0,4,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
             VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});
+        recordRadianceDepthCopy(*context.commands,context);
         context.commands->beginRenderPass(radianceValidationDescription(context));
         recordDepthCoverage(context,*instanceSnapshot_,*context.commands,DepthCoverageMode::RadianceValidation);
         context.commands->endRenderPass();recordRadianceSelection(*context.commands,context);
@@ -2930,11 +2940,22 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
         snapshotMultisampling_=std::make_unique<SceneMultisampling>(*rhi_,*allocator_,context.renderExtent,context.depthFormat,reflectionSurfaceFormat_,
             reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?SceneSecondaryResolve::MinimumDepthSample:SceneSecondaryResolve::Minimum,static_cast<std::uint32_t>(kMaxFramesInFlight),std::move(destinations),shaderDirectory_);
     }
-    if(surfaceRadiance_&&kSurfaceRadianceFrameSelection&&context.scenePassDescription&&context.scenePassDescription->depthAttachment>=0){
+    if(surfaceRadiance_&&kSurfaceRadianceFrameSelection&&context.depthFormat==VK_FORMAT_D32_SFLOAT
+        &&std::uint64_t(context.renderExtent.width)*context.renderExtent.height*4*kMaxFramesInFlight<=64ULL*1024*1024
+        &&context.scenePassDescription&&context.scenePassDescription->depthAttachment>=0){
         auto depth=context.scenePassDescription->attachments.at(context.scenePassDescription->depthAttachment);
         depth.clear=false;depth.load=true;depth.store=true;depth.initialLayout=depth.finalLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
         rhi::RenderPassDesc validation;validation.attachments={depth};validation.depthAttachment=0;
         radianceValidationPass_=rhi_->createRenderPass(validation);
+        validation.attachments[0].clear=true;validation.attachments[0].load=false;
+        validation.attachments[0].initialLayout=VK_IMAGE_LAYOUT_UNDEFINED;
+        radianceDepthCopyPass_=rhi_->createRenderPass(validation);
+        for(unsigned slot=0;slot<kMaxFramesInFlight;++slot){
+            auto& target=radianceValidationDepth_[slot];
+            target.image=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,VK_FORMAT_D32_SFLOAT,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
+            target.view=rhi_->createImageView(target.image.image,VK_FORMAT_D32_SFLOAT,VK_IMAGE_ASPECT_DEPTH_BIT,1);
+            radianceValidationFrames_[slot]=rhi_->createFramebuffer({radianceValidationPass_,{target.view},context.renderExtent.width,context.renderExtent.height});
+        }
     }
     createScreenReflectionResources(context);
 }
@@ -3204,7 +3225,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * (textureSlots + 4 + (surfaceRadianceCapable_?4U:0U) + (irradianceClipmapActive_?6U:0U) + (viewFog_?2U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
+             frameCount * (textureSlots + 4 + (surfaceRadianceCapable_?(kSurfaceRadianceFrameSelection?5U:4U):0U) + (irradianceClipmapActive_?6U:0U) + (viewFog_?2U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
             {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection?1U:0U))},
@@ -3218,7 +3239,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(surfaceRadianceCapable_?4U:0U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?2U:0U))},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(surfaceRadianceCapable_?(kSurfaceRadianceFrameSelection?5U:4U):0U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?2U:0U))},
         {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection?1U:0U))},
@@ -3288,7 +3309,9 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         if(surfaceRadianceCapable_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
             bindings.push_back({38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics)bindings.push_back({42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
-        if(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection)bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
+        if(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection){
+            bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
+            bindings.push_back({44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
         return;
     }
@@ -3339,7 +3362,9 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         if(surfaceRadianceCapable_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
             bindings.push_back({38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics)bindings.push_back({42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
-        if(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection)bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
+        if(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection){
+            bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
+            bindings.push_back({44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
 }
 

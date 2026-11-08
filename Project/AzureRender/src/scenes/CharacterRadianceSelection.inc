@@ -42,8 +42,29 @@ void CharacterSceneRenderer::recordRadianceSelection(rhi::ICommandRecorder& comm
 }
 
 rhi::RenderPassBeginDesc CharacterSceneRenderer::radianceValidationDescription(const RenderContext& context){
-    auto& framebuffer=radianceValidationFrames_.at(context.currentFrame);auto& view=radianceValidationViews_.at(context.currentFrame);
-    if(view!=context.sceneDepthView){if(framebuffer)rhi_->destroyFramebuffer(framebuffer);framebuffer=VK_NULL_HANDLE;view=VK_NULL_HANDLE;
-        framebuffer=rhi_->createFramebuffer({radianceValidationPass_,{context.sceneDepthView},context.renderExtent.width,context.renderExtent.height});view=context.sceneDepthView;}
-    return {radianceValidationPass_,framebuffer,context.renderExtent,{}};
+    auto& view=radianceValidationViews_.at(context.currentFrame);
+    if(view!=context.sceneDepthView){
+        const auto first=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount();
+        for(std::size_t i=0;i<(bindlessTextures_?1:totalMaterialCount());++i)
+            rhi_->writeDescriptorImage({descriptorSets_.at(first+i),44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+                context.sceneDepthView,surfaceRadiance_->sampler(),VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL});
+        view=context.sceneDepthView;
+    }
+    return {radianceValidationPass_,radianceValidationFrames_.at(context.currentFrame),context.renderExtent,{}};
+}
+void CharacterSceneRenderer::recordRadianceDepthCopy(rhi::ICommandRecorder& commands,const RenderContext& context){
+    auto description=radianceValidationDescription(context);
+    commands.imageBarrier({context.sceneDepthImage,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,
+        VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT|VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+        VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    description.renderPass=radianceDepthCopyPass_;VkClearValue clear{};clear.depthStencil={1,0};description.clearValues={clear};
+    commands.beginRenderPass(description);commands.setViewport(float(context.renderExtent.width),float(context.renderExtent.height));commands.setScissor(context.renderExtent);
+    commands.bindPipeline(radianceDepthCopyPipeline_);commands.bindDescriptorSet(pipelineLayout_,descriptorSets_.at(bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()));
+    commands.draw(3);commands.endRenderPass();
+    commands.imageBarrier({context.sceneDepthImage,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,1,
+        VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT|VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,
+        VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT|VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    const auto& flag=surfaceRadiance_->selectionBuffer(static_cast<unsigned>(context.currentFrame));
+    commands.bufferBarrier({flag.buffer,0,4,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+        VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});
 }

@@ -3,7 +3,10 @@
   "managedTaskPolicy": {
     "root": "build/runs",
     "retentionDays": 1,
-    "diagnosticRetentionDays": [3, 7],
+    "diagnosticRetentionDays": [
+      3,
+      7
+    ],
     "maximumTaskBytes": 2147483648,
     "maximumTaskFiles": 10000,
     "maximumReservedPoolBytes": 17179869184,
@@ -53,6 +56,21 @@
     "exeSha256": "1c06d440915d60a4ed9674c0232bf964bc9a9ec4418951fc7c3be2dc579904b1"
   },
   "milestones": [
+    {
+      "path": "runs/20261108-231330-radiance-depth-replay-626cbb",
+      "name": "照明复用深度重放",
+      "status": "MechanismValidatedNativeFullFallbackDefaultDisabled",
+      "sourceBase": "31f4908",
+      "evidence": "docs/acceptance/nr/radiance-depth-replay.md",
+      "checksPassed": 25,
+      "checksSkipped": 3,
+      "pairedViewFlowsPassed": 2,
+      "nativeFourFramesExact": true,
+      "nativeLightweightActivationPassed": false,
+      "performanceTimingRuns": 0,
+      "reclaimedFiles": 170,
+      "formalPerformancePassed": false
+    },
     {
       "path": "runs/20261108-210615-radiance-validation-path-f6e4f5",
       "name": "同帧资格核验与照明消费",

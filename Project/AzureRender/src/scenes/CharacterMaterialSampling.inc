@@ -230,7 +230,18 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             if(kSurfaceRadianceFrameSelection)validationModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_validation.frag.spv"));
             if(kSurfaceRadianceFrameSelection){auto commit=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_selection_commit.comp.spv"));
                 try{radianceCommitPipeline_=rhi_->createComputePipeline({commit,pipelineLayout_});}catch(...){rhi_->destroyShaderModule(commit);throw;}
-                rhi_->destroyShaderModule(commit);}
+                rhi_->destroyShaderModule(commit);
+                if(radianceDepthCopyPass_){
+                    auto vertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_depth_copy.vert.spv"));
+                    VkShaderModule fragment=VK_NULL_HANDLE;
+                    try{fragment=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_depth_copy.frag.spv"));
+                        rhi::GraphicsPipelineDesc copy;copy.vertexShader=vertex;copy.fragmentShader=fragment;copy.layout=pipelineLayout_;
+                        copy.renderPass=radianceDepthCopyPass_;copy.colorAttachmentCount=0;copy.cullMode=VK_CULL_MODE_NONE;
+                        copy.depthWrite=true;copy.depthCompare=VK_COMPARE_OP_ALWAYS;
+                        radianceDepthCopyPipeline_=rhi_->createGraphicsPipeline(copy);
+                    }catch(...){if(fragment)rhi_->destroyShaderModule(fragment);rhi_->destroyShaderModule(vertex);throw;}
+                    rhi_->destroyShaderModule(fragment);rhi_->destroyShaderModule(vertex);
+                }}
 
         }
         if(needed)for(unsigned facing=0;facing<4;++facing){
@@ -245,7 +256,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                 if(identityVertex&&kSurfaceRadianceFrameSelection){
                     auto fast=covered;fast.vertexShader=identityVertex;fast.fragmentShader=cachedColor;
                     ordinaryRadiancePipelines_[facing]=rhi_->createGraphicsPipeline(fast);
-                    if(radianceValidationPass_){auto validation=fast;validation.fragmentShader=validationModule;validation.depthWrite=false;
+                    if(radianceValidationPass_){auto validation=fast;validation.fragmentShader=validationModule;validation.depthWrite=true;
                         validation.renderPass=radianceValidationPass_;validation.colorAttachmentCount=0;validation.colorWriteMasks.clear();
                         ordinaryRadianceValidationPipelines_[facing]=rhi_->createGraphicsPipeline(validation);}
                 }
@@ -287,6 +298,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
 void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
     materialClassFeatureSpecializations_={};
     if(!rhi_)return;
+    if(radianceDepthCopyPipeline_)rhi_->destroyPipeline(radianceDepthCopyPipeline_);radianceDepthCopyPipeline_=VK_NULL_HANDLE;
     if(radianceCommitPipeline_)rhi_->destroyPipeline(radianceCommitPipeline_);radianceCommitPipeline_=VK_NULL_HANDLE;
     for(auto* variants:{&materialClassPipelines_,&materialClassSnapshotPipelines_,&materialClassEarlyDepthPipelines_,&materialClassEarlyDepthSnapshotPipelines_})
         for(auto& facing:*variants)for(auto& pipeline:facing){
