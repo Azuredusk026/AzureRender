@@ -591,6 +591,7 @@ void CharacterSceneRenderer::onSwapchainRecreate(
     const RenderContext& context) {
     temporalView_.clear();
     motionPoses_.clear();motionPass_.reset();
+    gpuTransparentSort_.reset();gpuTransparentTickets_={};gpuTransparentAttempted_=false;gpuTransparentFallback_.clear();
     renderSettings_ = context.renderSettings;
     // The scene render pass is recreated by the engine; the character
     // pipelines reference it and must be rebuilt.
@@ -656,7 +657,8 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         const auto color=key==0?vertexColorBuffer_.buffer:additionalResources_[key-1]->vertexColorBuffer.buffer;
         recordingBuffers.vertexColors.push_back(color?color:whiteVertexColorBuffer_.buffer);
     }
-    if (!oitIndexBuffers_.empty()) recordingBuffers.transparentIndices = oitIndexBuffers_[currentFrame_].buffer;
+    if(gpuTransparentTickets_[currentFrame_])recordingBuffers.transparentIndices=gpuTransparentSort_->indices(static_cast<unsigned>(currentFrame_)).buffer;
+    else if (!oitIndexBuffers_.empty()) recordingBuffers.transparentIndices = oitIndexBuffers_[currentFrame_].buffer;
     std::vector<std::vector<std::array<std::uint32_t,3>>> shadowViews;
     for(const auto& frustum:shadowCascadeFrusta_)
         shadowViews.push_back(scene::visibleInstanceSpans(sceneInstances_,frustum,cullingEnabled_));
@@ -1164,6 +1166,16 @@ void CharacterSceneRenderer::registerPasses(
         "character-cluster-indices",
         clusterIndexBuffers_[context.currentFrame]);
 
+    std::optional<RenderGraph::ResourceId> gpuTransparentResource;
+    if(const auto ticket=gpuTransparentTickets_[context.currentFrame]){
+        auto* owner=gpuTransparentSort_.get();const auto& buffer=owner->indices(context.currentFrame);
+        rhi::BufferBarrierDesc initial{};initial.buffer=buffer.buffer;initial.size=buffer.size;
+        initial.dstStageMask=VK_PIPELINE_STAGE_VERTEX_INPUT_BIT;initial.dstAccessMask=VK_ACCESS_INDEX_READ_BIT;
+        gpuTransparentResource=graph.importBuffer("transparent-sorted-indices",initial);
+        const auto pass=graph.addCommandPass("character-transparent-prepare",[owner,ticket](rhi::ICommandRecorder& commands){owner->record(commands,*ticket);});
+        graph.use(pass,jointResource,RenderGraphUsage::Storage,false);
+        graph.use(pass,*gpuTransparentResource,RenderGraphUsage::Storage,true);
+    }
     std::optional<RenderGraph::PassId> skinningPass;
     if (computeSkinningEnabled_) {
         skinningPass = graph.addCommandPass("character-skinning",
@@ -1480,7 +1492,8 @@ void CharacterSceneRenderer::registerPasses(
     }
     if(outlineMaskResource)graph.use(main,*outlineMaskResource,RenderGraphUsage::Sampled,false);
     graph.use(main, resources.shadow, RenderGraphUsage::Sampled, false);
-    if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
+    if(gpuTransparentResource)graph.use(main,*gpuTransparentResource,RenderGraphUsage::IndexBuffer,false);
+    else if (!oitIndexBuffers_.empty() && oitIndexBuffers_[context.currentFrame].buffer != VK_NULL_HANDLE) {
         const auto& buffer = oitIndexBuffers_[context.currentFrame];
         rhi::BufferBarrierDesc initial{};
         initial.buffer = buffer.buffer;
@@ -1535,6 +1548,11 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     for(const auto* buffer:{&morphTargetBuffer_,&morphWeightBuffers_[context.currentFrame],&jointBuffers_[context.currentFrame],&instanceBuffers_[context.currentFrame]})
         context.commands->bufferBarrier({buffer->buffer,0,buffer->size,VK_PIPELINE_STAGE_HOST_BIT,
             VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    if(const auto ticket=gpuTransparentTickets_[context.currentFrame]){
+        gpuTransparentSort_->record(*context.commands,*ticket);const auto& buffer=gpuTransparentSort_->indices(context.currentFrame);
+        context.commands->bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+            VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_INDEX_READ_BIT});
+    }
     recordComputeSkinning(context);
     recordShadowPass(context);
     if(!instanceSnapshot_->objectShadowPages.empty()){
@@ -1689,6 +1707,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"bindPoseSharedInstances\": " << bindPoseSharedInstances_ << ",\n"
          << "  \"computeSkinningPreparedDispatches\": " << (computeSkinningEnabled_?skinningDispatches_.size():0) << ",\n"
          << "  \"computeSkinningPreparedVertices\": " << preparedSkinningVertices << ",\n"
+         << "  \"gpuTransparentSortingPrepared\": " << (gpuTransparentTickets_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"gpuTransparentSortingBytes\": " << (gpuTransparentSort_?gpuTransparentSort_->bytes():0) << ",\n"
+         << "  \"gpuTransparentSortingVertices\": " << (gpuTransparentTickets_[currentFrame_]?gpuTransparentTickets_[currentFrame_]->vertexCount:0) << ",\n"
+         << "  \"gpuTransparentSortingFallback\": " << std::quoted(gpuTransparentFallback_) << ",\n"
          << "  \"staticSkinningReusedInstances\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedCount():0) << ",\n"
          << "  \"staticSkinningReusedVertices\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedVertexCount():0) << ",\n"
          << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
@@ -3868,6 +3890,7 @@ void CharacterSceneRenderer::destroyResources() {
     }
     uniformBuffers_.clear();
     allocator_->destroyBuffer(materialSurfaceProfiles_);
+    gpuTransparentSort_.reset();gpuTransparentTickets_={};gpuTransparentInstances_.clear();gpuTransparentAttempted_=false;gpuTransparentFallback_.clear();
     for (auto& buffer : jointBuffers_) {
         allocator_->destroyBuffer(buffer);
     }
@@ -4580,7 +4603,50 @@ rhi::RenderPassBeginDesc CharacterSceneRenderer::mainPassDescription(const Rende
     return renderPassInfo;
 }
 
+bool CharacterSceneRenderer::prepareGpuTransparentIndices(std::size_t total,const Vector3& forward){
+    gpuTransparentInstances_.clear();std::uint64_t vertices=0;
+    for(const auto& instance:sceneInstances_){
+        const auto& topology=transparentTopologies_[instance.meshKey];if(topology.vertices.empty())continue;
+        const auto& pose=instancePoses_.at(instance.sourceIndex);
+        vertices+=topology.vertices.size();
+        gpuTransparentInstances_.push_back({instance.meshKey,instance.model,pose.pose.get(),pose.jointBase,pose.morph});
+    }
+    if(vertices<16384||total/3<4096){gpuTransparentFallback_="below-gpu-work-threshold";return false;}
+    const auto fail=[&](const std::string& reason){
+        if(gpuTransparentFallback_!=reason)RuntimeDiagnostics::instance().print("render","GPU transparent preparation fallback: "+reason);
+        gpuTransparentFallback_=reason;return false;};
+    if(!gpuTransparentSort_&&!gpuTransparentAttempted_){
+        gpuTransparentAttempted_=true;
+        try{
+            const auto capacity=[](std::uint64_t value,std::uint32_t maximum){
+                if(value>maximum)throw std::length_error("Transparent workload exceeds GPU capacity");
+                const auto requested=std::min<std::uint64_t>(maximum,value*2);std::uint32_t result=1;
+                while(result<requested)result*=2;return result;};
+            GpuTransparentSortLimits limits;limits.vertices=capacity(vertices,1048576);
+            limits.triangles=capacity(total/3,1048576);limits.instances=capacity(gpuTransparentInstances_.size(),65536);
+            limits.slots=static_cast<unsigned>(kMaxFramesInFlight);
+            GpuTransparentSortShaders shaders{readBinaryFile(shaderDirectory_+"/transparent_deform.comp.spv"),
+                readBinaryFile(shaderDirectory_+"/transparent_depth_keys.comp.spv"),readBinaryFile(shaderDirectory_+"/transparent_index_scatter.comp.spv"),
+                readBinaryFile(shaderDirectory_+"/stable_key_sort.comp.spv")};
+            std::vector<GpuTransparentSortGeometry> sources;sources.reserve(transparentTopologies_.size());
+            for(std::size_t key=0;key<transparentTopologies_.size();++key){
+                const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;sources.push_back({&mesh,&transparentTopologies_[key]});}
+            gpuTransparentSort_=std::make_unique<GpuTransparentIndexSort>(*rhi_,sources,limits,shaders);
+            RuntimeDiagnostics::instance().print("render","GPU transparent preparation initialized: bytes="+std::to_string(gpuTransparentSort_->bytes()));
+        }catch(const std::exception& error){return fail(error.what());}
+    }
+    if(!gpuTransparentSort_)return false;
+    for(std::size_t key=0;key<transparentTopologies_.size();++key){
+        const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
+        if(!gpuTransparentSort_->matchesGeometry(static_cast<unsigned>(key),mesh,transparentTopologies_[key]))return fail("Transparent topology requires a source reload");
+    }
+    try{
+        gpuTransparentTickets_[currentFrame_]=gpuTransparentSort_->prepare(static_cast<unsigned>(currentFrame_),jointBuffers_[currentFrame_],
+            gpuTransparentInstances_,cameraPosition_,forward);gpuTransparentFallback_.clear();return true;
+    }catch(const std::exception& error){return fail(error.what());}
+}
 void CharacterSceneRenderer::prepareTransparentIndices() {
+    gpuTransparentTickets_[currentFrame_].reset();
     transparentPrimitivesByMesh_.assign(additionalResources_.size() + 1, {});
     for (std::size_t key = 0; key < transparentPrimitivesByMesh_.size(); ++key) {
         const auto& mesh = key == 0 ? asset_ : additionalResources_[key - 1]->asset;
@@ -4613,14 +4679,15 @@ void CharacterSceneRenderer::prepareTransparentIndices() {
                 &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex])) total += primitive.indexCount;
     }
     transparentDrawsPrepared_ = total != 0;
-    if (total == 0) return;
+    if (total == 0){gpuTransparentFallback_="no-transparent-work";return;}
+    const Vector3 cameraForward = normalize(subtract(cameraTarget_, cameraPosition_));
+    if(prepareGpuTransparentIndices(total,cameraForward))return;
     oitIndexBuffers_.resize(kMaxFramesInFlight);
     auto& buffer = oitIndexBuffers_[currentFrame_];
     if (buffer.size < total * sizeof(std::uint32_t)) {
         allocator_->destroyBuffer(buffer);
         buffer = allocator_->createBuffer(total * sizeof(std::uint32_t), VK_BUFFER_USAGE_INDEX_BUFFER_BIT, true);
     }
-    const Vector3 cameraForward = normalize(subtract(cameraTarget_, cameraPosition_));
     for (const auto& instance : sceneInstances_) {
         const auto& mesh = instance.meshKey == 0 ? asset_ : additionalResources_[instance.meshKey - 1]->asset;
         const auto& transparentPrimitives = transparentPrimitivesByMesh_[instance.meshKey];
@@ -4758,12 +4825,12 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
             const auto* primitive = snapshot != nullptr
                 ? &mesh.primitives.at(snapshot->buffers.transparentPrimitives[meshKey][primitiveSlot])
                 : transparentPrimitivesByMesh_[meshKey][primitiveSlot];
-            if (!oitIndexBuffers_.empty()) {
+            if (snapshot->buffers.transparentIndices != VK_NULL_HANDLE) {
                 const VkDeviceSize offsetBytes =
                     static_cast<VkDeviceSize>(oitReadIndex)
                     * sizeof(std::uint32_t);
                 commands.bindIndexBuffer(
-                    (snapshot != nullptr ? snapshot->buffers.transparentIndices : oitIndexBuffers_[context.currentFrame].buffer),
+                    snapshot->buffers.transparentIndices,
                     offsetBytes);
             }
             drawPrimitive(

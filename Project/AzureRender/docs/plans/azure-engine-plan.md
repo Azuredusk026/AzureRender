@@ -40,7 +40,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 准备步骤的[消费范围](../acceptance/nr/cpu-consumed-preparation.md)完成八帧诊断。
 不可见透明顶点约占 4.99%，其局部约为 0.072 毫秒，相关单项候选未取得本批次准入依据。
 [准备批次评估](../acceptance/nr/cpu-preparation-batch.md)的更新均值降低约 7.46%，未达到本批门槛，候选保持隔离。
-[GPU 稳定排序机制](../acceptance/nr/gpu-stable-key-sort.md)通过六项双配置、双设备检查，透明场景集成继续实施。
+[GPU 透明索引准备](../acceptance/nr/gpu-transparent-index-sort.md)通过十二项所属检查及严格四帧，局部 CPU 准备减少约 0.99 毫秒。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

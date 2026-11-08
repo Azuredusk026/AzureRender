@@ -50,6 +50,16 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-101326-gpu-transparent-indices-8ef9c7",
+      "name": "GPU 透明索引准备",
+      "status": "IntegratedExactImagesLocalCpuImproved",
+      "sourceBase": "3b4fa9d",
+      "evidence": "docs/acceptance/nr/gpu-transparent-index-sort.md",
+      "checksPassed": 12,
+      "sceneIntegrated": true,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-094742-transparent-deformation-plan-48ebfd",
       "name": "GPU 分段稳定排序机制",
       "status": "MechanismReadyIntegrationPending",

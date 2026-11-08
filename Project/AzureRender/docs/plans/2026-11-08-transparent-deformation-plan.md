@@ -28,5 +28,6 @@
 
 第一阶段的有界稳定排序机制已交付。
 两配置和双设备的六项所属检查通过。
-透明变形、深度键与索引写入继续按第二阶段实施。
+第二阶段的透明变形、深度键及索引写入已接入场景。
+其结果见[透明索引验收](../acceptance/nr/gpu-transparent-index-sort.md)。
 机制结果见[排序器验收](../acceptance/nr/gpu-stable-key-sort.md)。

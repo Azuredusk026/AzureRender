@@ -51,7 +51,7 @@
 该机制适用于稳定键排序和透明深度排序。
 透明深度键的生成、变形精度及索引写入由适配层负责。
 当前机制独立于具体场景、资产及材质名称。
-场景宿主的透明索引准备继续使用既有路径。
+透明场景通过[索引准备机制](gpu-transparent-index-sort.md)提供变形及深度键。
 
 同步边界依据 [Vulkan 同步示例](https://docs.vulkan.org/guide/latest/synchronization_examples.html)。
 `GpuStableKeySortTests` 核对范围和生命周期。

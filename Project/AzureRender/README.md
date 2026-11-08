@@ -21,7 +21,7 @@
 [接收运算核对](docs/acceptance/nr/receiver-reciprocal-arithmetic.md)区分齐次计算及倒数误差，兼容实现继续待验收。
 CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际顶点和索引核对，后续批次沿用收益门槛。
 [准备批次评估](docs/acceptance/nr/cpu-preparation-batch.md)的更新均值降低约 7.46%，未达到本批门槛，候选保持隔离。
-[GPU 稳定排序机制](docs/acceptance/nr/gpu-stable-key-sort.md)通过六项双配置、双设备检查，透明场景集成继续实施。
+[GPU 透明索引准备](docs/acceptance/nr/gpu-transparent-index-sort.md)通过十二项所属检查及严格四帧，局部 CPU 准备减少约 0.99 毫秒。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。

@@ -298,6 +298,9 @@ compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.vert")
 compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.frag")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_bounds.comp")
 compile_shader("${SHADER_SOURCE_DIR}/stable_key_sort.comp")
+compile_shader("${SHADER_SOURCE_DIR}/transparent_deform.comp")
+compile_shader("${SHADER_SOURCE_DIR}/transparent_depth_keys.comp")
+compile_shader("${SHADER_SOURCE_DIR}/transparent_index_scatter.comp")
 compile_shader("${SHADER_SOURCE_DIR}/surface_response_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/motion_projection_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/motion_pose_test.comp")
@@ -667,6 +670,7 @@ add_library(AzureAI STATIC src/ai/ModelClient.cpp src/ai/ModelProcess.cpp)
 target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/render/GpuStableKeySort.cpp
+    src/render/GpuTransparentIndexSort.cpp
     src/render/ScreenObjectVisibility.cpp
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
@@ -3002,6 +3006,14 @@ if(BUILD_TESTING)
     add_test(NAME AzureRender.ScreenReflection COMMAND AzureScreenReflectionTests)
     add_executable(AzureScreenObjectVisibilityTests tests/ScreenObjectVisibilityTests.cpp src/rhi/NullRhi.cpp)
     add_executable(AzureGpuStableKeySortTests tests/GpuStableKeySortTests.cpp src/rhi/NullRhi.cpp)
+    add_executable(AzureGpuTransparentIndexSortTests tests/GpuTransparentIndexSortTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureGpuTransparentIndexSortTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.GpuTransparentIndexSort COMMAND AzureGpuTransparentIndexSortTests)
+    add_executable(AzureGpuTransparentIndexSortGpuTests tests/GpuTransparentIndexSortGpuTests.cpp)
+    target_link_libraries(AzureGpuTransparentIndexSortGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureGpuTransparentIndexSortGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.GpuTransparentIndexSortGpu COMMAND AzureGpuTransparentIndexSortGpuTests "${SHADER_BINARY_DIR}")
+    set_tests_properties(AzureRender.GpuTransparentIndexSortGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     target_link_libraries(AzureGpuStableKeySortTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.GpuStableKeySort COMMAND AzureGpuStableKeySortTests)
     add_executable(AzureGpuStableKeySortGpuTests tests/GpuStableKeySortGpuTests.cpp)

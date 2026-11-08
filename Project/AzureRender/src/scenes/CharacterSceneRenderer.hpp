@@ -9,6 +9,7 @@
 #include "render/MaterialPipelinePolicy.hpp"
 #include "render/StableDepthOrder.hpp"
 #include "render/TransparentTopology.hpp"
+#include "render/GpuTransparentIndexSort.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
@@ -392,6 +393,12 @@ private:
     bool transparentDrawsPrepared_ = false;
     std::vector<std::vector<const AssetPrimitive*>> transparentPrimitivesByMesh_;
     std::vector<TransparentTopology> transparentTopologies_;
+    std::unique_ptr<GpuTransparentIndexSort> gpuTransparentSort_;
+    std::array<std::optional<GpuTransparentIndexSort::Ticket>,kMaxFramesInFlight> gpuTransparentTickets_{};
+    std::vector<GpuTransparentSortInstance> gpuTransparentInstances_;
+    bool gpuTransparentAttempted_=false;
+    std::string gpuTransparentFallback_;
+    bool prepareGpuTransparentIndices(std::size_t,const internal::Vector3&);
     RecordingWorkerPool* preparationWorkers_=nullptr;
     TransparentTopologyWorkspace transparencyScratch_;
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;

@@ -1,0 +1,445 @@
+{
+  "schemaVersion": 1,
+  "status": "integrated-exact-images-local-cpu-preparation-improved",
+  "sourceBase": "3b4fa9d",
+  "sourceHashes": {
+    "CMakeLists.txt": "646023a403abf5ed4334c2a55fb07d06ae9e7b169746f3370fa169a9b82bb68d",
+    "src/render/GpuTransparentIndexSort.hpp": "d0d8a133e3138ad0c7390a18e68efc246de50f317963cd22e0c650461cd1aae8",
+    "src/render/GpuTransparentIndexSort.cpp": "421a7d460959fe3d267c23e350353c594b2f72b94097bdb8f50cf3aa17c72930",
+    "src/scenes/CharacterSceneRenderer.hpp": "3acd11e0db4a83c20272bdf3cb4dff2fe6a4199c3d70e035bf145a7d8fd3fa40",
+    "src/scenes/CharacterSceneRenderer.cpp": "6822d4781594faa0d4fbddb7f6e78ef5395bb1b847cb02da7a79dba35d20a604",
+    "shaders/transparent_deform.comp": "4491bc627a87cfe95820269f48389505b1277dd07ef0234d48f36172074f7792",
+    "shaders/transparent_depth_keys.comp": "593cc45ba7c7533eb9a21d5e027c7d16a5658c2eb6f4eebb899c4bfaee47a651",
+    "shaders/transparent_index_scatter.comp": "e3a9a07565ade6f2e3cff37dd3ee5192af83826844d265121ebe2fccb87d8a36",
+    "tests/GpuTransparentIndexSortTests.cpp": "25ac595ed3c456eeac3695472133b772dd388d52952d1cba2cbf43f0c3b139b8",
+    "tests/GpuTransparentIndexSortGpuTests.cpp": "8f77d0cce95967fd3efefab8dd698f982772df6491f6dd9c3e39f619b071a807",
+    "tests/StaticSkinningRecordingTests.cpp": "8550fb6d4f237d70592903f74ed35d99db003bb37ade44f59cdf67b2b988a5c3"
+  },
+  "checks": [
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.StaticSkinningRecording",
+      "seconds": "1.39917",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> generic, flags=0x20, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.000000, 0.000000\nAnimations: 0\n[1794107574170][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794107574170][info][render][code=0] Scene load CPU preparation: 0.712800 ms, materialPixelBytes=232\n[1794107574174][info][render][code=0] Character IBL: hardware mip fallback path\n[1794107574174][info][render][code=0] Scene load shared textures: 4.595000 ms\n[1794107574175][info][render][code=0] Scene load buffers: 0.724000 ms\n[1794107574175][info][render][code=0] Character skinning and morph: Vulkan compute path\n[1794...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.NodeOpacityRecording",
+      "seconds": "1.286",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> hair, flags=0x14022, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x4020, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.400000, 0.600000\nAnimations: 0\n[1794107575331][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794107575331][info][render][code=0] Scene load CPU preparation: 0.167000 ms, materialPixelBytes=248\n[1794107575335][info][render][code=0] Character IBL: hardware mip fallback path\n[1794107575335][info][render][code=0] Scene load shared textures: 4.406600 ms\n[1794107575336][info][render][code=0] Scene load buffers: 0.666800 ms\n[1794107575336][info][render][code=0] Character skinning and morph: vertex-shader fallback ...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.DepthPrefillRecording",
+      "seconds": "1.54983",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> generic, flags=0x0, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x0, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.000000, 0.000000\nAnimations: 0\n[1794107576918][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794107576918][info][render][code=0] Scene load CPU preparation: 0.162500 ms, materialPixelBytes=232\n[1794107576923][info][render][code=0] Character IBL: hardware mip fallback path\n[1794107576923][info][render][code=0] Scene load shared textures: 4.928500 ms\n[1794107576924][info][render][code=0] Scene load buffers: 0.670400 ms\n[1794107576924][info][render][code=0] Character skinning and morph: vertex-shader fallback path...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.GpuTransparentIndexSort",
+      "seconds": "0.880484",
+      "output": "GPU transparent source, capacity, frame tickets and lifecycle passed"
+    },
+    {
+      "configuration": "release",
+      "label": "nvidia",
+      "name": "AzureRender.GpuTransparentIndexSortGpu",
+      "seconds": "3.17529",
+      "output": "GPU transparent preparation: device=NVIDIA GeForce RTX 4060 Laptop GPU cases=3 positions=12312 indices=12312 validationErrors=0 liveBuffers=0 liveImages=0"
+    },
+    {
+      "configuration": "release",
+      "label": "intel",
+      "name": "AzureRender.GpuTransparentIndexSortGpu",
+      "seconds": "0.228258",
+      "output": "GPU transparent preparation: device=Intel(R) RaptorLake-S Mobile Graphics Controller cases=3 positions=12312 indices=12312 validationErrors=0 liveBuffers=0 liveImages=0"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.StaticSkinningRecording",
+      "seconds": "2.49007",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> generic, flags=0x20, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x20, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.000000, 0.000000\nAnimations: 0\n[1794107583634][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794107583634][info][render][code=0] Scene load CPU preparation: 5.178900 ms, materialPixelBytes=232\n[1794107583658][info][render][code=0] Character IBL: hardware mip fallback path\n[1794107583660][info][render][code=0] Scene load shared textures: 26.007500 ms\n[1794107583661][info][render][code=0] Scene load buffers: 0.801000 ms\n[1794107583661][info][render][code=0] Character skinning and morph: Vulkan compute path\n[179...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.NodeOpacityRecording",
+      "seconds": "2.90887",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> hair, flags=0x14022, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x4020, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.400000, 0.600000\nAnimations: 0\n[1794107586111][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794107586111][info][render][code=0] Scene load CPU preparation: 0.708400 ms, materialPixelBytes=248\n[1794107586130][info][render][code=0] Character IBL: hardware mip fallback path\n[1794107586133][info][render][code=0] Scene load shared textures: 21.536700 ms\n[1794107586134][info][render][code=0] Scene load buffers: 0.867000 ms\n[1794107586134][info][render][code=0] Character skinning and morph: vertex-shader fallback...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.DepthPrefillRecording",
+      "seconds": "2.37406",
+      "output": "Turntable foot pivot: [1.000000, -1.000000, 1.000000]\nAsset path: D:/Projects/FYP/Project/AzureRender/assets_public/scene_inspector/assets/cube.gltf\nLoaded asset: 48 vertices, 36 indices, 2 primitives, 2 materials\nMaterial Class v1 inventory:\n  [0] stone -> generic, flags=0x0, source=fallback/inferred\n  [1] FallbackMaterial -> generic, flags=0x0, source=fallback/inferred\nSkinning: static fallback, 1 joint matrices, 0 Morph targets\nMorph weights: 0.000000, 0.000000\nAnimations: 0\n[1794107588656][info][render][code=0] Character texture access: fixed, requested slots=20, stage sampler limit=4096\n[1794107588656][info][render][code=0] Scene load CPU preparation: 0.702300 ms, materialPixelBytes=232\n[1794107588676][info][render][code=0] Character IBL: hardware mip fallback path\n[1794107588680][info][render][code=0] Scene load shared textures: 23.300500 ms\n[1794107588680][info][render][code=0] Scene load buffers: 0.861600 ms\n[1794107588680][info][render][code=0] Character skinning and morph: vertex-shader fallback pat...\n[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.GpuTransparentIndexSort",
+      "seconds": "1.05134",
+      "output": "GPU transparent source, capacity, frame tickets and lifecycle passed"
+    },
+    {
+      "configuration": "debug",
+      "label": "nvidia",
+      "name": "AzureRender.GpuTransparentIndexSortGpu",
+      "seconds": "1.92665",
+      "output": "GPU transparent preparation: device=NVIDIA GeForce RTX 4060 Laptop GPU cases=3 positions=12312 indices=12312 validationErrors=0 liveBuffers=0 liveImages=0"
+    },
+    {
+      "configuration": "debug",
+      "label": "intel",
+      "name": "AzureRender.GpuTransparentIndexSortGpu",
+      "seconds": "0.234482",
+      "output": "GPU transparent preparation: device=Intel(R) RaptorLake-S Mobile Graphics Controller cases=3 positions=12312 indices=12312 validationErrors=0 liveBuffers=0 liveImages=0"
+    }
+  ],
+  "unchangedPrograms": {
+    "release": 666,
+    "debug": 666
+  },
+  "moduleBoundaries": {
+    "status": "passed",
+    "targets": 18,
+    "includes": 29524,
+    "violations": []
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "sha256": "03f5cfacc37910e2a6bc676d020386b837da7256549513540bc393788be20eea"
+    },
+    {
+      "configuration": "debug",
+      "sha256": "1a04d50335355c913131ff11e9eae6c734fb1ec81d20d25814f131549b4f6479"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "image": {
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 82.67200000002049,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "4",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\image\\frames-111537",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\image\\runtime.json"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\tmp"
+    },
+    "seconds": 83.57800000000861,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "shape": [
+          1440,
+          2560,
+          3
+        ]
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "shape": [
+          1440,
+          2560,
+          3
+        ]
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "shape": [
+          1440,
+          2560,
+          3
+        ]
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "shape": [
+          1440,
+          2560,
+          3
+        ]
+      }
+    ],
+    "gpuPrepared": true,
+    "gpuBytes": 30244800,
+    "gpuVertices": 33015,
+    "fallback": "",
+    "sourceInputsUnchanged": true,
+    "productionProductsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "projectFiles": 1729,
+    "validationLogClean": true,
+    "zeroAllocator": true,
+    "formalPerformancePassed": false,
+    "overallVisualAcceptance": "failed-user-review"
+  },
+  "cpuPreparation": {
+    "baseline": {
+      "frames": 40,
+      "gpuFrames": 0,
+      "gpuRecordedFrames": 0,
+      "gpuVertices": 0,
+      "selectedFrames": 36,
+      "stages": {
+        "instances": 1.2546555555555556,
+        "motion": 0.5703805555555556,
+        "transparent": 1.0387305555555555,
+        "update": 3.57155
+      },
+      "updateSamplesMs": [
+        3.5796,
+        3.2313,
+        3.6396,
+        3.6019,
+        3.3951,
+        3.1817,
+        2.7538,
+        2.9471,
+        2.9484,
+        3.0556,
+        3.2528,
+        2.9868,
+        2.9964,
+        3.6851,
+        3.1492,
+        3.4335,
+        3.0532,
+        3.0381,
+        3.3772,
+        3.5299,
+        3.9712,
+        4.0232,
+        3.9503,
+        4.5544,
+        3.905,
+        3.9883,
+        4.1018,
+        3.964,
+        4.0931,
+        4.0528,
+        3.851,
+        3.683,
+        3.8711,
+        3.5379,
+        4.1215,
+        4.0709
+      ]
+    },
+    "candidate": {
+      "frames": 40,
+      "gpuFrames": 36,
+      "gpuRecordedFrames": 36,
+      "gpuVertices": 1188540,
+      "selectedFrames": 36,
+      "stages": {
+        "instances": 1.1017777777777777,
+        "motion": 0.5379916666666666,
+        "transparent": 0.05070833333333333,
+        "update": 2.3242805555555552
+      },
+      "updateSamplesMs": [
+        2.3106,
+        2.7848,
+        2.6848,
+        2.2428,
+        2.2368,
+        2.6034,
+        2.1794,
+        2.2264,
+        2.3775,
+        2.1667,
+        2.3007,
+        2.4461,
+        1.9577,
+        2.0228,
+        2.9822,
+        2.1461,
+        2.158,
+        2.3131,
+        2.3768,
+        2.1806,
+        1.9953,
+        2.1375,
+        2.0789,
+        2.4315,
+        2.2839,
+        2.3727,
+        2.23,
+        2.3985,
+        2.4231,
+        2.4568,
+        2.4199,
+        2.5018,
+        2.3497,
+        2.4229,
+        2.2445,
+        2.2298
+      ]
+    },
+    "updateReductionPercent": 34.92235708430358,
+    "transparentReductionPercent": 95.11823994566016,
+    "sourceAndProductsUnchanged": true,
+    "frozenProjectInputsVerified": 1729,
+    "formalPerformancePassed": false,
+    "executions": [
+      {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 89.64100000000326,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\baseline\\ProbePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+          "--resource-root",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "--width",
+          "2560",
+          "--height",
+          "1440",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--fixed-frame-step",
+          "--capture-fps",
+          "24",
+          "--smoke-frames",
+          "40",
+          "--gpu-timing",
+          "--gpu-timing-output",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\baseline\\timing.json",
+          "--runtime-report",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\baseline\\runtime.json"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\tmp",
+        "variant": "baseline",
+        "validationLogClean": true,
+        "zeroAllocator": true
+      },
+      {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 81.32800000000861,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\candidate\\ProbePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+          "--resource-root",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "--width",
+          "2560",
+          "--height",
+          "1440",
+          "--qa-camera",
+          "scene",
+          "--qa-light",
+          "scene",
+          "--fixed-frame-step",
+          "--capture-fps",
+          "24",
+          "--smoke-frames",
+          "40",
+          "--gpu-timing",
+          "--gpu-timing-output",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\candidate\\timing.json",
+          "--runtime-report",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\candidate\\runtime.json"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-101326-gpu-transparent-indices-8ef9c7\\tmp",
+        "variant": "candidate",
+        "validationLogClean": true,
+        "zeroAllocator": true
+      }
+    ]
+  },
+  "realAsset": {
+    "asset": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-strand-line-013925.glb",
+    "assetSha256": "f91eb2c9cce2009d5c8753170e465b2c6151ddb5368859fa784fb0a8b7ee11f8",
+    "products": {
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGpuTransparentIndexSortGpuTests.exe": "79e1f216a7127b965309998d593c07726faaca35f3c60970c903a791096f950e",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\transparent_deform.comp.spv": "cfe751e9f44e391b2cf56b43f5bcd6661a4692e921a5eaec163c4b02573ffc41",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\transparent_depth_keys.comp.spv": "ea1ce5eca7ebe7bc58a20f7f8a231ec929b42c41722bf62be1f4b36130d04e6a",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\transparent_index_scatter.comp.spv": "2390c70b30699e4120645047be12f2701bdceb03d169115f4de5b9c1fc472627",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\stable_key_sort.comp.spv": "a9e4437a8c9a56e43b2542006b142424495ee0715a20332aede8ec03f7342a41"
+    },
+    "rows": [
+      {
+        "device": "nvidia",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGpuTransparentIndexSortGpuTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-strand-line-013925.glb"
+        ],
+        "exitCode": 0,
+        "seconds": 4.765999999974156
+      },
+      {
+        "device": "intel",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureGpuTransparentIndexSortGpuTests.exe",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\content-character\\hero-strand-line-013925.glb"
+        ],
+        "exitCode": 0,
+        "seconds": 4.687000000005355
+      }
+    ]
+  },
+  "cpuMeasurementScope": "36 selected preparation samples per variant; draw binding correction validated separately; no GPU timing claim",
+  "sceneIntegrated": true,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 756027,
+  "evidenceSha256": "d07eff400e94101a9bb2c7bc2e776d5f724f17f8ba700b1ba7d4aa57e94cadae"
+}

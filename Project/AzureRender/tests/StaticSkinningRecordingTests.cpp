@@ -101,6 +101,40 @@ void verify(const std::string& shaders,bool bindless){
     renderer.onFrameAbandoned();renderer.onUnload(context);
     require(!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers,"Reloaded renderer releases every resource");
 }
+void verifyAdditionalTransparentGpuBinding(const std::string& shaders){
+    rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
+    context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=shaders;
+    context.renderExtent={128,96};context.cullingEnabled=false;
+    auto& limits=context.descriptorLimits;limits.maxImageDimension2D=4096;limits.maxPerStageResources=4096;
+    limits.maxPerStageDescriptorSamplers=limits.maxDescriptorSetSamplers=4096;
+    limits.maxPerStageDescriptorSampledImages=limits.maxDescriptorSetSampledImages=4096;
+    const std::string root=AZURERENDER_TEST_SOURCE_DIR,path=root+"/assets_public/scene_inspector/assets/cube.gltf";
+    const auto second=root+"/assets_public/test_model.gltf";
+    context.rampAtlasPath=root+"/assets_public/toon_ramp_atlas.ppm";
+    auto opaque=std::make_shared<LoadedAsset>(loadGltfAsset(path));
+    auto transparent=std::make_shared<LoadedAsset>(*opaque);
+    for(auto& material:opaque->materials){material.alphaMode=AssetAlphaMode::Opaque;material.materialFeatures=0;}
+    for(auto& material:transparent->materials){material.alphaMode=AssetAlphaMode::Blend;material.materialFeatures=0;}
+    std::map<std::string,std::shared_ptr<const LoadedAsset>> meshes{{path,opaque},{second,transparent}};
+    context.preparedMeshes=&meshes;context.scene.resources.push_back({"opaque",path});context.scene.resources.push_back({"transparent",second});
+    scene::SceneNodeDesc node;node.id="opaque";node.resourceId="opaque";context.scene.nodes.push_back(node);
+    for(unsigned i=0;i<1000;++i){node.id="transparent-"+std::to_string(i);node.resourceId="transparent";context.scene.nodes.push_back(node);}
+    RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;context.renderSettings=&settings;
+    renderer.onLoad(context);SceneFrameData frame;frame.renderSettings=&settings;frame.swapchainWidth=128;frame.swapchainHeight=96;
+    frame.cameraPosition[2]=4;renderer.updateFrame(frame);
+    std::ostringstream text;renderer.appendCaptureManifestFields(text);const auto state=nlohmann::json::parse("{"+text.str()+"\"end\":true}");
+    require(state.at("gpuTransparentSortingPrepared")==true,"Additional transparent asset must qualify for GPU preparation");
+    RenderGraph graph;SceneGraphResources resources{graph.addResource("color"),graph.addResource("depth"),graph.addResource("normal"),graph.addResource("shadow")};
+    renderer.registerPasses(graph,resources,context);std::string error;require(graph.compile(error),error.c_str());
+    unsigned rangedBindings=0;
+    for(const auto& pass:graph.passes())if(pass.name=="character-main"){
+        rhi::NullCommandRecorder commands;pass.recordCommands(commands);
+        for(const auto& call:commands.calls)if(call.name=="bindIndexBuffer"&&call.detail.substr(call.detail.find(" +"))!=" +0")++rangedBindings;
+    }
+    require(rangedBindings>=999,"GPU transparent draws must bind sorted ranges when the primary asset is opaque");
+    renderer.onUnload(context);
+    require(!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers,"GPU transparent scene unload releases every resource");
+}
 void verifyMorphOwnership(const std::string& shaders,bool bindless){
     rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;
     context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=shaders;
@@ -135,6 +169,6 @@ void verifyMorphOwnership(const std::string& shaders,bool bindless){
 }
 }
 int main(int argc,char** argv)try{
-    require(argc==2,"Expected shader directory");for(bool indexed:{false,true}){verify(argv[1],indexed);verifyMorphOwnership(argv[1],indexed);}
+    require(argc==2,"Expected shader directory");for(bool indexed:{false,true}){verify(argv[1],indexed);verifyMorphOwnership(argv[1],indexed);}verifyAdditionalTransparentGpuBinding(argv[1]);
     std::cout<<"Static compute output recording: slots, commit/cancel, unrecorded frames, resize, old graphs, concurrent recording and release passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
