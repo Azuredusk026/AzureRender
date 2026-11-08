@@ -24,6 +24,8 @@ struct RecordingBufferSet {
     std::vector<VkBuffer> vertexColors;
     VkBuffer transparentIndices = VK_NULL_HANDLE;
     VkBuffer conservativeIndirect=VK_NULL_HANDLE;
+    VkBuffer radianceSelectionIndirect=VK_NULL_HANDLE;
+    VkDeviceSize radianceFastOffset=0;
     std::vector<std::size_t> conservativeOffsets;
     std::vector<std::uint32_t> conservativeSlots;
     bool multiDrawIndirect = false;

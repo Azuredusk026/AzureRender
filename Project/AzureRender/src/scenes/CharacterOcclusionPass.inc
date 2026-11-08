@@ -1,4 +1,7 @@
 void CharacterSceneRenderer::destroyConservativeOcclusion(){
+    for(auto& framebuffer:radianceValidationFrames_){if(framebuffer)rhi_->destroyFramebuffer(framebuffer);framebuffer=VK_NULL_HANDLE;}
+    radianceValidationViews_={};if(radianceValidationPass_)rhi_->destroyRenderPass(radianceValidationPass_);radianceValidationPass_=VK_NULL_HANDLE;
+
     for(auto& frame:conservativeFrames_){
         frame.commands.reset();frame.pyramid.reset();
         allocator_->destroyBuffer(frame.source);frame={};

@@ -54,6 +54,21 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-210615-radiance-validation-path-f6e4f5",
+      "name": "同帧资格核验与照明消费",
+      "status": "MechanismValidatedNativeFullFallbackDefaultDisabled",
+      "sourceBase": "5fdd002",
+      "evidence": "docs/acceptance/nr/radiance-validation-path.md",
+      "checksPassed": 21,
+      "checksSkipped": 3,
+      "pairedViewFlowsPassed": 2,
+      "nativeFourFramesExact": true,
+      "nativeLightweightActivationPassed": false,
+      "performanceTimingRuns": 0,
+      "reclaimedFiles": 170,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-204220-radiance-frame-selection-5dbd15",
       "name": "GPU 绘制路径选择",
       "status": "MechanismValidatedSceneIntegrationPending",

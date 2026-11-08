@@ -525,7 +525,7 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     for (std::size_t index=0;index<colorBlendAttachments.size();++index) {
         auto& attachment=colorBlendAttachments[index];
         attachment.colorWriteMask = graphicsColorWriteMask(desc,index);
-        if (desc.alphaBlend) {
+        if (desc.alphaBlend && attachment.colorWriteMask != 0) {
             if(index==0&&desc.primaryColorBlend==PrimaryColorBlend::Additive) {
                 attachment.blendEnable=VK_TRUE;
                 attachment.srcColorBlendFactor=desc.premultipliedAlpha?VK_BLEND_FACTOR_ONE:VK_BLEND_FACTOR_SRC_ALPHA;

@@ -1,6 +1,6 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
-#if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT) && !defined(AZURE_SURFACE_RADIANCE_FAST)
 #extension GL_KHR_shader_subgroup_vote : require
 #extension GL_EXT_shader_quad_control : require
 #extension GL_EXT_maximal_reconvergence : require
@@ -681,7 +681,7 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 #include "beauty_composition.glsl"
 #endif
 void main()
-#if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT) && !defined(AZURE_SURFACE_RADIANCE_FAST)
     [[maximally_reconverges]]
 #endif
 {
@@ -794,7 +794,11 @@ void main()
         geometricNormal = -geometricNormal;
     }
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
+#if defined(AZURE_SURFACE_RADIANCE_FAST)
+    azureWriteCachedSurfaceRadiance(ivec2(gl_FragCoord.xy),geometricNormal);return;
+#else
     if(azureWriteSurfaceRadiance(geometricNormal))return;
+#endif
 #endif
     if(azureWritePlainUnlitBeauty(baseColor,geometricNormal,platformMask))return;
 #if !defined(AZURE_OPAQUE_SNAPSHOT)

@@ -1,3 +1,4 @@
+#include "render/GpuPredicateDrawSelection.hpp"
 #include "render/StaticSkinningOutputCache.hpp"
 #include <mutex>
 #include "assets/TextureMipChain.hpp"
@@ -135,6 +136,7 @@ private:
     std::array<VkPipeline,4> ordinaryOpaquePipelines_{};
     std::array<VkPipeline,4> ordinaryOpaqueSnapshotPipelines_{};
     std::array<VkPipeline,4> ordinaryEarlyDepthPipelines_{},ordinaryEarlyDepthSnapshotPipelines_{};
+    std::array<VkPipeline,4> ordinaryRadiancePipelines_{},ordinaryRadianceValidationPipelines_{};
     VkPipeline ordinaryOpaquePipeline(const AssetMaterial&,bool mirrored,bool snapshot,float nodeOpacity) const noexcept;
     static constexpr unsigned kMaterialClassVariantCount=unsigned(AssetMaterialClass::Showcase)+1;
     std::array<bool,kMaterialClassVariantCount> lightingClassesNeeded_{};
@@ -274,7 +276,7 @@ private:
     void initializeSurfaceOverlayPipelines(const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot);
     void recordSurfaceOverlays(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,bool snapshotColor,SceneSubmissionCounters* counters=nullptr);
-    enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill};
+    enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill,RadianceValidation};
     void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
     void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
@@ -409,6 +411,8 @@ private:
     bool prepareGpuTransparentIndices(std::size_t,const internal::Vector3&);
     struct ConservativeFrame {
         std::unique_ptr<GpuConservativeOcclusion> commands;
+        std::unique_ptr<GpuPredicateDrawSelection> selection;
+        std::optional<GpuPredicateDrawSelection::Ticket> selectionTicket;
         std::unique_ptr<DepthPyramidGpu> pyramid;
         rhi::GpuBuffer source{};
         std::optional<GpuConservativeOcclusion::Ticket> ticket;
@@ -427,6 +431,18 @@ private:
     bool conservativeAllowed_=false;
     std::string conservativeFallback_;
     void prepareConservativeOcclusion();
+    void prepareRadianceSelection();
+    bool radianceSelectionActive(const RenderContext&) const;
+    static bool radianceSelectionMaterial(const AssetMaterial&) noexcept;
+    void recordRadianceSelection(rhi::ICommandRecorder&,const RenderContext&);
+    std::string radianceSelectionFallback_;
+    VkRenderPass radianceValidationPass_=VK_NULL_HANDLE;
+    VkPipeline radianceCommitPipeline_=VK_NULL_HANDLE;
+    std::array<VkFramebuffer,kMaxFramesInFlight> radianceValidationFrames_{};
+    std::array<VkImageView,kMaxFramesInFlight> radianceValidationViews_{};
+    rhi::RenderPassBeginDesc radianceValidationDescription(const RenderContext&);
+
+
     void destroyConservativeOcclusion();
     bool mainDepthSplitActive(const RenderContext&) const;
     rhi::RenderPassBeginDesc conservativeDepthPass(const RenderContext&) const;

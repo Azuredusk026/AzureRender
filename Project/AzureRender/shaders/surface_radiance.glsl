@@ -34,6 +34,19 @@ void azureStoreSurfaceRadiance(vec3 beauty,vec3 response,vec3 radiance,vec3 ambi
 #endif
 }
 #else
+void azureWriteCachedSurfaceRadiance(ivec2 pixel,vec3 geometricNormal){
+    vec4 a=texelFetch(surfaceRadianceA,pixel,0),b=texelFetch(surfaceRadianceB,pixel,0),c=texelFetch(surfaceRadianceC,pixel,0);
+    vec3 beauty=a.rgb;
+    if(camera.screenReflectionTrace.x>1.5){
+        vec4 reflection=sampleComputedScreenReflection(AZURE_FRAGMENT_COORD.xy/vec2(textureSize(opaqueSceneColor,0)));
+        beauty=azureComposeSurfaceRadiance(a,b,c,reflection);
+    }
+    float radianceScale=azureMaterialRadianceScale();if(radianceScale!=1.0)beauty*=radianceScale;
+    outputColor=vec4(beauty,1.0);
+    if((material.materialPadding&AZURE_SELECTED_PADDING)!=0U)outputColor.rgb=mix(outputColor.rgb,vec3(.96,.62,.10),.42);
+    outputNormal=vec4(geometricNormal*.5+.5,0);azureWriteDisplayMask(1.0);
+}
+#if !defined(AZURE_SURFACE_RADIANCE_FAST)
 bool azureWriteSurfaceRadiance(vec3 geometricNormal){
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
     azureRadianceCount(1u);
@@ -57,16 +70,8 @@ bool azureWriteSurfaceRadiance(vec3 geometricNormal){
 #else
     if(!subgroupQuadAll(matched))return false;
 #endif
-    vec4 a=texelFetch(surfaceRadianceA,pixel,0),b=texelFetch(surfaceRadianceB,pixel,0),c=texelFetch(surfaceRadianceC,pixel,0);
-    vec3 beauty=a.rgb;
-    if(camera.screenReflectionTrace.x>1.5){
-        vec4 reflection=sampleComputedScreenReflection(AZURE_FRAGMENT_COORD.xy/vec2(textureSize(opaqueSceneColor,0)));
-        beauty=azureComposeSurfaceRadiance(a,b,c,reflection);
-    }
-    float radianceScale=azureMaterialRadianceScale();if(radianceScale!=1.0)beauty*=radianceScale;
-    outputColor=vec4(beauty,1.0);
-    if((material.materialPadding&AZURE_SELECTED_PADDING)!=0U)outputColor.rgb=mix(outputColor.rgb,vec3(.96,.62,.10),.42);
-    outputNormal=vec4(geometricNormal*.5+.5,0);azureWriteDisplayMask(1.0);return true;
+    azureWriteCachedSurfaceRadiance(pixel,geometricNormal);return true;
 }
+#endif
 #endif
 #endif

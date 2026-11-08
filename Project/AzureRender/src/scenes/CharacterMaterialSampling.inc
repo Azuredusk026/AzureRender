@@ -183,6 +183,7 @@ void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
 void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContext& context,
     const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot,const std::string& vertexPath) {
     VkShaderModule identityVertex=VK_NULL_HANDLE;
+    VkShaderModule validationModule=VK_NULL_HANDLE;
     bool needed=false;
     std::array<bool,kMaterialClassVariantCount> classes{};
     std::array<bool,kMaterialClassVariantCount> coveredClasses{};
@@ -220,12 +221,17 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             auto vertex=vertexPath;const auto at=vertex.rfind(".vert.spv");
             if(at==std::string::npos)throw std::logic_error("Surface radiance identity requires a mesh vertex program");
             vertex.insert(at,"_radiance");identityVertex=rhi_->createShaderModule(readBinaryFile(vertex));
-            const auto cachedModule=[&](VkShaderModule module){
+            const auto cachedModule=[&](VkShaderModule module,bool fast=false){
                 const auto found=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),[&](const auto& v){return v.scene==module;});
                 if(found==materialShaderVariants_.end())throw std::logic_error("Surface radiance material program identity is unavailable");
-                auto file=found->path;file.insert(file.rfind(".frag.spv"),kSurfaceRadianceDiagnostics?"_radiance_stats":"_radiance");return createMaterialShaderModule(file);
+                auto file=found->path;file.insert(file.rfind(".frag.spv"),fast?"_radiance_fast":kSurfaceRadianceDiagnostics?"_radiance_stats":"_radiance");return createMaterialShaderModule(file);
             };
-            cachedColor=cachedModule(earlyColorModule);cachedSnapshot=cachedModule(earlySnapshotModule);
+            cachedColor=cachedModule(earlyColorModule,kSurfaceRadianceFrameSelection);cachedSnapshot=cachedModule(earlySnapshotModule);
+            if(kSurfaceRadianceFrameSelection)validationModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_validation.frag.spv"));
+            if(kSurfaceRadianceFrameSelection){auto commit=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_selection_commit.comp.spv"));
+                try{radianceCommitPipeline_=rhi_->createComputePipeline({commit,pipelineLayout_});}catch(...){rhi_->destroyShaderModule(commit);throw;}
+                rhi_->destroyShaderModule(commit);}
+
         }
         if(needed)for(unsigned facing=0;facing<4;++facing){
             auto desc=color;
@@ -234,8 +240,16 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaquePipelines_[facing]=createMaterialGraphicsPipeline(desc);
             if(early){auto covered=desc;covered.fragmentShader=earlyColorModule;
-                if(identityVertex){covered.vertexShader=identityVertex;covered.fragmentShader=cachedColor;}
-                ordinaryEarlyDepthPipelines_[facing]=createMaterialGraphicsPipeline(covered);}
+                if(identityVertex&&!kSurfaceRadianceFrameSelection){covered.vertexShader=identityVertex;covered.fragmentShader=cachedColor;}
+                ordinaryEarlyDepthPipelines_[facing]=createMaterialGraphicsPipeline(covered);
+                if(identityVertex&&kSurfaceRadianceFrameSelection){
+                    auto fast=covered;fast.vertexShader=identityVertex;fast.fragmentShader=cachedColor;
+                    ordinaryRadiancePipelines_[facing]=rhi_->createGraphicsPipeline(fast);
+                    if(radianceValidationPass_){auto validation=fast;validation.fragmentShader=validationModule;validation.depthWrite=false;
+                        validation.renderPass=radianceValidationPass_;validation.colorAttachmentCount=0;validation.colorWriteMasks.clear();
+                        ordinaryRadianceValidationPipelines_[facing]=rhi_->createGraphicsPipeline(validation);}
+                }
+            }
             desc=snapshot;
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
             desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
@@ -266,17 +280,19 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                     materialClassEarlyDepthSnapshotPipelines_[index][facing]=createMaterialGraphicsPipeline(covered);}
             }
         }
-    }catch(...){if(identityVertex)rhi_->destroyShaderModule(identityVertex);destroyMaterialClassPipelines();throw;}
+    }catch(...){if(validationModule)rhi_->destroyShaderModule(validationModule);if(identityVertex)rhi_->destroyShaderModule(identityVertex);destroyMaterialClassPipelines();throw;}
+    if(validationModule)rhi_->destroyShaderModule(validationModule);
     if(identityVertex)rhi_->destroyShaderModule(identityVertex);
 }
 void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
     materialClassFeatureSpecializations_={};
     if(!rhi_)return;
+    if(radianceCommitPipeline_)rhi_->destroyPipeline(radianceCommitPipeline_);radianceCommitPipeline_=VK_NULL_HANDLE;
     for(auto* variants:{&materialClassPipelines_,&materialClassSnapshotPipelines_,&materialClassEarlyDepthPipelines_,&materialClassEarlyDepthSnapshotPipelines_})
         for(auto& facing:*variants)for(auto& pipeline:facing){
             if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
         }
-    for(auto* pipelines:{&ordinaryOpaquePipelines_,&ordinaryOpaqueSnapshotPipelines_,&ordinaryEarlyDepthPipelines_,&ordinaryEarlyDepthSnapshotPipelines_})
+    for(auto* pipelines:{&ordinaryOpaquePipelines_,&ordinaryOpaqueSnapshotPipelines_,&ordinaryEarlyDepthPipelines_,&ordinaryEarlyDepthSnapshotPipelines_,&ordinaryRadiancePipelines_,&ordinaryRadianceValidationPipelines_})
         for(auto& pipeline:*pipelines){if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;}
 }
 

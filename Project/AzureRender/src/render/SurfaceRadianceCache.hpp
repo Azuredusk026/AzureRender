@@ -23,11 +23,12 @@ public:
         std::uint64_t producerStores=0,consumerVisits=0,eligibleRequests=0,pixelMatches=0,quadMatches=0,frames=0;
         bool overflow=false;
     };
+    struct SelectionStatistics {std::uint64_t frames=0,fastFrames=0,fullFrames=0;bool lastFallback=true;};
     static constexpr unsigned kAttachments=4;
     static constexpr std::uint64_t kMaximumBytes=512ULL*1024*1024;
     struct Texture {rhi::GpuImage image{};VkImageView view=VK_NULL_HANDLE;};
     static bool supported(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes);
-    SurfaceRadianceCache(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes,bool diagnostics=false);
+    SurfaceRadianceCache(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes,bool diagnostics=false,bool selection=false);
     ~SurfaceRadianceCache();
     SurfaceRadianceCache(const SurfaceRadianceCache&)=delete;
     SurfaceRadianceCache& operator=(const SurfaceRadianceCache&)=delete;
@@ -41,6 +42,13 @@ public:
     void beginStatisticsFrame(unsigned slot);
     void recordStatisticsReady(rhi::ICommandRecorder&,unsigned slot);
     Statistics statistics() const noexcept{return statistics_;}
+    bool selectionEnabled() const noexcept{return !selectionFrames_.empty();}
+    std::uint64_t selectionBytes() const noexcept{return selectionFrames_.size()*4ULL;}
+    const rhi::GpuBuffer& selectionBuffer(unsigned slot)const{return selectionFrames_.at(slot).buffer;}
+    void beginSelectionFrame(unsigned slot,bool permitted=false);
+    void recordSelectionReady(rhi::ICommandRecorder&,unsigned slot);
+    SelectionStatistics selectionStatistics()const noexcept{return selectionStatistics_;}
+
     static VkFormat format(unsigned attachment){return attachment==3?VK_FORMAT_R32G32B32A32_UINT:VK_FORMAT_R32G32B32A32_SFLOAT;}
     static VkClearValue clearValue(unsigned attachment) noexcept {
         VkClearValue value{};if(attachment==3)for(auto& word:value.color.uint32)word=UINT32_MAX;return value;
@@ -52,5 +60,7 @@ private:
     struct StatisticsFrame {rhi::GpuBuffer buffer{};bool recorded=false;};
     std::vector<StatisticsFrame> statisticsFrames_;
     Statistics statistics_{};
+    std::vector<StatisticsFrame> selectionFrames_;
+    SelectionStatistics selectionStatistics_{};
 };
 }

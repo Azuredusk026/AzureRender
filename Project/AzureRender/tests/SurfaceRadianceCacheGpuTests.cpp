@@ -16,10 +16,12 @@ struct Resources{
  VkDescriptorSetLayout setLayout{};VkDescriptorPool pool{};VkPipelineLayout layout{};
  VkShaderModule vertex{},producer{},consumer{};VkPipeline produce{},consume{};
  rhi::GpuBuffer readValues{},readIds{};VkDescriptorSet set{};
- bool diagnostics=false;
- explicit Resources(test::VulkanComputeFixture& h,bool statistics=false):host(h),rhi(*h.backend),diagnostics(statistics){}
+ bool diagnostics=false,selection=false;VkPipeline validate{},commit{};VkShaderModule validation{},commitModule{};
+ explicit Resources(test::VulkanComputeFixture& h,bool statistics=false,bool frameSelection=false):host(h),rhi(*h.backend),diagnostics(statistics),selection(frameSelection){}
  ~Resources(){
   for(auto frame:frames)if(frame)rhi.destroyFramebuffer(frame);
+  if(validate)rhi.destroyPipeline(validate);if(validation)rhi.destroyShaderModule(validation);
+  if(commit)rhi.destroyPipeline(commit);if(commitModule)rhi.destroyShaderModule(commitModule);
   if(produce)rhi.destroyPipeline(produce);if(consume)rhi.destroyPipeline(consume);
   if(vertex)rhi.destroyShaderModule(vertex);if(producer)rhi.destroyShaderModule(producer);if(consumer)rhi.destroyShaderModule(consumer);
   if(pool)rhi.destroyDescriptorPool(pool);if(layout)rhi.destroyPipelineLayout(layout);if(setLayout)rhi.destroyDescriptorSetLayout(setLayout);
@@ -27,8 +29,8 @@ struct Resources{
   if(depthView)rhi.destroyImageView(depthView);host.allocator.destroyImage(depth);
   host.allocator.destroyBuffer(readValues);host.allocator.destroyBuffer(readIds);
  }
- void initialize(const std::string& shaders){
-  source=std::make_unique<SurfaceRadianceCache>(rhi,extent,2,SurfaceRadianceCache::kMaximumBytes,diagnostics);target=std::make_unique<SurfaceRadianceCache>(rhi,extent,1);
+ void initialize(const std::string& shaders,bool withConsumer=true){
+  source=std::make_unique<SurfaceRadianceCache>(rhi,extent,2,SurfaceRadianceCache::kMaximumBytes,diagnostics,selection);target=std::make_unique<SurfaceRadianceCache>(rhi,extent,1);
   depth=host.allocator.createImage2D(extent.width,extent.height,VK_FORMAT_D32_SFLOAT,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
   depthView=rhi.createImageView(depth.image,VK_FORMAT_D32_SFLOAT,VK_IMAGE_ASPECT_DEPTH_BIT,1);
   rhi::RenderPassDesc desc;
@@ -39,32 +41,44 @@ struct Resources{
    frames[i]=rhi.createFramebuffer({pass,{cache.texture(slot,0).view,cache.texture(slot,1).view,cache.texture(slot,2).view,cache.texture(slot,3).view,depthView},extent.width,extent.height});}
   std::vector<rhi::DescriptorBindingDesc> bindings;for(unsigned kind=0;kind<4;++kind)bindings.push_back({38+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
   if(diagnostics)bindings.push_back({42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+  if(selection)bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
   setLayout=rhi.createDescriptorSetLayout(bindings);
   rhi::PushConstantRangeDesc range{VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(Probe)};layout=rhi.createPipelineLayout(setLayout,&range);
-  rhi::DescriptorPoolDesc poolDesc;poolDesc.maxSets=1;poolDesc.sizes={{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,4}};if(diagnostics)poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1});pool=rhi.createDescriptorPool(poolDesc);
+  rhi::DescriptorPoolDesc poolDesc;poolDesc.maxSets=1;poolDesc.sizes={{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,4}};if(diagnostics||selection)poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,(diagnostics?1U:0U)+(selection?1U:0U)});pool=rhi.createDescriptorPool(poolDesc);
   set=rhi.allocateDescriptorSets(pool,setLayout,1).at(0);
   if(diagnostics){const auto& counter=source->statisticsBuffer(0);rhi.writeDescriptorBuffer({set,42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,counter.buffer,counter.size});}
+  if(selection){const auto& flag=source->selectionBuffer(0);rhi.writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,flag.buffer,4});}
   const std::string suffix=diagnostics?"_stats":"";
   vertex=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_probe.vert.spv"));producer=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_probe"+suffix+".frag.spv"));
-  consumer=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_consumer"+suffix+".frag.spv"));
+  if(withConsumer)consumer=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_consumer"+suffix+".frag.spv"));
   rhi::GraphicsPipelineDesc pipeline;pipeline.vertexShader=vertex;pipeline.fragmentShader=producer;pipeline.layout=layout;pipeline.renderPass=pass;
   pipeline.colorAttachmentCount=4;pipeline.cullMode=VK_CULL_MODE_NONE;pipeline.depthCompare=VK_COMPARE_OP_LESS;
-  produce=rhi.createGraphicsPipeline(pipeline);pipeline.fragmentShader=consumer;consume=rhi.createGraphicsPipeline(pipeline);
+  produce=rhi.createGraphicsPipeline(pipeline);pipeline.fragmentShader=consumer;if(withConsumer)consume=rhi.createGraphicsPipeline(pipeline);
+  if(selection){validation=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_validation_probe.frag.spv"));
+   pipeline.fragmentShader=validation;pipeline.depthWrite=false;pipeline.colorWriteMasks.assign(4,0);validate=rhi.createGraphicsPipeline(pipeline);
+   commitModule=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_selection_commit.comp.spv"));commit=rhi.createComputePipeline({commitModule,layout});}
+
   readValues=host.allocator.createBuffer(extent.width*extent.height*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
   readIds=host.allocator.createBuffer(extent.width*extent.height*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
  }
- void draw(unsigned frame,Probe probe,unsigned instance,unsigned vertices,bool sampled=false){
+ void draw(unsigned frame,Probe probe,unsigned instance,unsigned vertices,bool sampled=false,bool validateOnly=false){
   host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer raw){
    if(diagnostics){const auto& counter=source->statisticsBuffer(0);commands.bufferBarrier({counter.buffer,0,counter.size,
     VK_PIPELINE_STAGE_HOST_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
     VK_ACCESS_HOST_WRITE_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});}
+   if(selection){const auto& flag=source->selectionBuffer(0);commands.bufferBarrier({flag.buffer,0,4,
+    VK_PIPELINE_STAGE_HOST_BIT|VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+    VK_ACCESS_HOST_WRITE_BIT|VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});}
    VkClearValue clearDepth{};clearDepth.depthStencil={1,0};
    commands.beginRenderPass({pass,frames.at(frame),extent,{SurfaceRadianceCache::clearValue(0),SurfaceRadianceCache::clearValue(1),SurfaceRadianceCache::clearValue(2),SurfaceRadianceCache::clearValue(3),clearDepth}});
-   commands.setViewport(float(extent.width),float(extent.height));commands.setScissor(extent);commands.bindPipeline(sampled?consume:produce);
-   if(sampled||diagnostics)commands.bindDescriptorSet(layout,set);
+   commands.setViewport(float(extent.width),float(extent.height));commands.setScissor(extent);commands.bindPipeline(validateOnly?validate:sampled?consume:produce);
+   if(sampled||diagnostics||validateOnly)commands.bindDescriptorSet(layout,set);
    commands.pushConstants(layout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&probe,sizeof(probe));
    if(vertices)vkCmdDraw(raw,vertices,1,0,instance);commands.endRenderPass();
    if(diagnostics)source->recordStatisticsReady(commands,0);
+   if(selection&&validateOnly){const auto& flag=source->selectionBuffer(0);commands.bufferBarrier({flag.buffer,0,4,
+    VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});
+    commands.bindComputePipeline(commit);commands.bindComputeDescriptorSet(layout,set);commands.dispatch(1,1,1);source->recordSelectionReady(commands,0);}
   });
  }
  void bind(unsigned slot){for(unsigned kind=0;kind<4;++kind)rhi.writeDescriptorImage({set,38+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
@@ -85,9 +99,29 @@ struct Resources{
 };
 }
 int main(int argc,char** argv)try{
- require(argc==2,"Expected shader directory");test::VulkanComputeFixture host(true,false,false,true,true,AZURE_TEST_SURFACE_RADIANCE_DIAGNOSTICS!=0);
+ require(argc==2,"Expected shader directory");
+ {test::VulkanComputeFixture graphics(true,false,false,true);{
+  Resources r(graphics);r.initialize(argv[1],false);
+  for(const auto mode:{rhi::PrimaryColorBlend::Alpha,rhi::PrimaryColorBlend::Additive,rhi::PrimaryColorBlend::Multiply}){
+   rhi::GraphicsPipelineDesc desc;desc.vertexShader=r.vertex;desc.fragmentShader=r.producer;desc.layout=r.layout;desc.renderPass=r.pass;
+   desc.colorAttachmentCount=4;desc.colorWriteMasks.assign(4,0);desc.alphaBlend=true;desc.primaryColorBlend=mode;
+   const auto pipeline=r.rhi.createGraphicsPipeline(desc),original=r.produce;r.produce=pipeline;
+   try{r.draw(0,Probe{},7,3);r.read(*r.source,0,0);}catch(...){r.produce=original;r.rhi.destroyPipeline(pipeline);throw;}
+   r.produce=original;r.rhi.destroyPipeline(pipeline);
+  }
+ }
+ require(graphics.errors==0,"Masked integer attachment blending must satisfy Vulkan");
+ require(!graphics.allocator.statistics().liveBuffers&&!graphics.allocator.statistics().liveImages,"Masked blending must retire resources");
+ std::cout<<"Masked integer attachment blending passed on "<<graphics.properties.deviceName<<'\n';}
+ test::VulkanComputeFixture host(true,false,false,true,true,(AZURE_TEST_SURFACE_RADIANCE_DIAGNOSTICS||AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION)!=0);
  if(!SurfaceRadianceCache::supported(*host.backend,extent,2))return 77;
  {Resources r(host);r.initialize(argv[1]);Probe p;
+  for(const auto mode:{rhi::PrimaryColorBlend::Alpha,rhi::PrimaryColorBlend::Additive,rhi::PrimaryColorBlend::Multiply}){
+   rhi::GraphicsPipelineDesc blend;blend.vertexShader=r.vertex;blend.fragmentShader=r.producer;blend.layout=r.layout;blend.renderPass=r.pass;
+   blend.colorAttachmentCount=4;blend.colorWriteMasks={0xf,0,0,0};blend.alphaBlend=true;blend.primaryColorBlend=mode;
+   const auto pipeline=r.rhi.createGraphicsPipeline(blend);r.rhi.destroyPipeline(pipeline);
+  }
+
   r.draw(0,p,7,6);auto identity=surfaceRadianceIdentity(.25F,7,123,0,19);r.read(*r.source,0,1000.03125F,&identity);
   r.draw(1,p,7,0);r.read(*r.source,1,0);r.bind(0);
   p.value=.75F;r.draw(2,p,7,3,true);r.read(*r.target,0,1000.53125F);
@@ -111,6 +145,23 @@ int main(int argc,char** argv)try{
   auto& counter=r.source->statisticsBuffer(0);std::array<std::uint32_t,6> saturated{UINT32_MAX,0,0,0,0,0};
   std::memcpy(counter.mapped,saturated.data(),24);host.allocator.flush(counter,0,24);p.value=1;r.draw(0,p,7,3);r.source->beginStatisticsFrame(0);
   require(r.source->statistics().overflow,"GPU counter overflow is observable");
+ }
+#endif
+#if AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION
+ {Resources r(host,false,true);r.initialize(argv[1]);Probe p;r.bind(0);
+  r.source->beginSelectionFrame(0,true);r.draw(0,p,7,3);r.draw(2,p,7,3,false,true);
+  r.source->beginSelectionFrame(0,true);auto selected=r.source->selectionStatistics();
+  require(selected.frames==1&&selected.fastFrames==1&&!selected.lastFallback,"Actual matching fragments preserve the fast predicate");
+  p.value=-2;r.draw(0,p,7,3);r.draw(2,p,7,3,false,true);
+  r.source->beginSelectionFrame(0,true);selected=r.source->selectionStatistics();
+  require(selected.frames==2&&selected.fullFrames==1&&selected.lastFallback,"Any real identity mismatch requests complete shading");
+  p.value=0;r.draw(0,p,7,0);r.draw(2,p,7,3,false,true);
+  r.source->beginSelectionFrame(0);selected=r.source->selectionStatistics();
+  require(selected.fullFrames==2&&selected.lastFallback,"Missing production is fail closed");
+  r.source->beginSelectionFrame(0,true);p.value=1000.03125F;r.draw(0,p,7,6);r.draw(2,p,7,6,false,true);
+  r.source->beginSelectionFrame(0);selected=r.source->selectionStatistics();
+  require(selected.fullFrames==3&&selected.lastFallback,"Read-only validation conservatively includes the hidden coplanar triangle");
+
  }
 #endif
  require(host.allocator.statistics().liveBuffers==0&&host.allocator.statistics().liveImages==0,"GPU resources must retire");require(host.errors==0,"Vulkan validation must remain clean");
