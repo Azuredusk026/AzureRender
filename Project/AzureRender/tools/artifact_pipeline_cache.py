@@ -9,7 +9,7 @@ import time
 
 from artifact_maintenance import real_path, write_json
 
-OWNED = re.compile(r'vk1-[0-9a-f]{1,8}-[0-9a-f]{1,8}-[0-9a-f]{1,8}-[0-9a-f]{32}\.azpc')
+OWNED = re.compile(r'vk1-[0-9a-f]{1,8}-[0-9a-f]{1,8}-[0-9a-f]{1,8}-[0-9a-f]{32}(-[0-9a-f]{16})?\.azpc')
 
 
 @contextmanager

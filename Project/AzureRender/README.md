@@ -8,7 +8,8 @@
 历史模型的[每日维护](docs/acceptance/nr/daily-asset-copies.md)已接入技能入口，项目产物均保存在 D 卷。
 
 开发管线采用[有界共享缓存](docs/acceptance/nr/pipeline-cache-workflow.md)。
-原生管线准备在跨进程复用时约为 0.140 秒，相关图像与设备检查通过。
+[程序代次缓存](docs/acceptance/nr/bounded-development-cache.md)的当前载荷约为 26.04 MiB，全部代次共用原容量上限。
+原生暖启动的 645 次创建全部命中，受管 SDK 缓存位于 D 盘任务内。
 照明复用的[接收面核对](docs/acceptance/nr/radiance-receiver-entry.md)保存入口位置与图像来源。
 阴影圆盘的[局部成本](docs/acceptance/nr/shadow-disk-kernel.md)未形成收益，候选保持隔离。
 [权重分类](docs/acceptance/nr/shadow-disk-classification.md)通过百万组逐位核对，局部效率门槛未通过。

@@ -4,15 +4,15 @@
 
 namespace azurerender::rhi {
 namespace {
-PipelineCacheIdentity identify(VkPhysicalDevice physical){
+PipelineCacheIdentity identify(VkPhysicalDevice physical,std::uint64_t profile){
     if(!physical)throw std::invalid_argument("Pipeline cache requires a physical device");
     VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physical,&properties);
     PipelineCacheIdentity result;result.vendor=properties.vendorID;result.device=properties.deviceID;result.driver=properties.driverVersion;
-    std::copy(std::begin(properties.pipelineCacheUUID),std::end(properties.pipelineCacheUUID),result.uuid.begin());return result;
+    std::copy(std::begin(properties.pipelineCacheUUID),std::end(properties.pipelineCacheUUID),result.uuid.begin());result.profile=profile;return result;
 }
 }
-VulkanPipelineCache::VulkanPipelineCache(VkDevice device,VkPhysicalDevice physical,std::filesystem::path directory,PipelineCacheLimits limits)
-    :device_(device),store_(std::move(directory),identify(physical),limits),limits_(limits){
+VulkanPipelineCache::VulkanPipelineCache(VkDevice device,VkPhysicalDevice physical,std::filesystem::path directory,PipelineCacheLimits limits,std::uint64_t profile)
+    :device_(device),store_(std::move(directory),identify(physical,profile),limits),limits_(limits){
     if(!device_)throw std::invalid_argument("Pipeline cache requires a device");
     const auto bytes=store_.load();statistics_.readState=store_.file().empty()?"memory-only":"empty";
     VkPipelineCacheCreateInfo info{VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO};info.initialDataSize=bytes.size();info.pInitialData=bytes.empty()?nullptr:bytes.data();

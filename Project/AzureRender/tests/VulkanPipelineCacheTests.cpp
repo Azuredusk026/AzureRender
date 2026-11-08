@@ -43,14 +43,15 @@ int main(int argc,char** argv)try{
     if(locations.installationRoot().empty())
         require(locations.generatedCacheDirectory("one/project.azureproject")==locations.generatedCacheDirectory("two/project.azureproject"),"Development projects must share the bounded cache pool");
     test::VulkanComputeFixture host(true);const auto code=readBinaryFile(argv[1]);const std::filesystem::path root=argv[2];
+    const auto profile=rhi::shaderCacheProfile(std::filesystem::path(argv[1]).parent_path());require(profile.has_value(),"Program catalogue must have a bounded cache profile");
     std::filesystem::path cacheFile;std::uint64_t saved=0,loaded=0,hits=0;
     {
-        rhi::VulkanPipelineCache cache(host.device,host.physical,root);require(cache.handle()!=VK_NULL_HANDLE,"Device cache must initialize");
+        rhi::VulkanPipelineCache cache(host.device,host.physical,root,{},*profile);require(cache.handle()!=VK_NULL_HANDLE,"Device cache must initialize");
         require(create(host,cache,code).requests==1,"RHI must record a cached creation request");
         require(cache.flush(),"Device cache must persist");saved=cache.statistics().writtenBytes;cacheFile=cache.file();
     }
     {
-        rhi::VulkanPipelineCache cache(host.device,host.physical,root);loaded=cache.statistics().loadedBytes;
+        rhi::VulkanPipelineCache cache(host.device,host.physical,root,{},*profile);loaded=cache.statistics().loadedBytes;
         require(loaded==saved&&loaded>=32,"A new cache owner must load the persisted driver payload");
         const auto usage=create(host,cache,code);require(usage.requests==1,"Reloaded cache must reach pipeline creation");hits=usage.hits;
         const auto control=render(host,*host.backend,std::filesystem::path(argv[1]).parent_path());
@@ -60,10 +61,13 @@ int main(int argc,char** argv)try{
         require(cache.flush(),"Reloaded cache must remain writable");
     }
     {
+        rhi::VulkanPipelineCache fresh(host.device,host.physical,root,{},*profile+1);
+        require(fresh.file()!=cacheFile&&fresh.handle()!=VK_NULL_HANDLE,"Another program generation must have an independent usable cache");
+        create(host,fresh,code);require(fresh.flush(),"Another generation must persist under the same pool");
         std::fstream file(cacheFile,std::ios::binary|std::ios::in|std::ios::out);file.seekg(-1,std::ios::end);char byte=0;file.read(&byte,1);byte^=1;file.seekp(-1,std::ios::end);file.write(&byte,1);require(bool(file),"Cache corruption control failed");
     }
     {
-        rhi::VulkanPipelineCache cache(host.device,host.physical,root);
+        rhi::VulkanPipelineCache cache(host.device,host.physical,root,{},*profile);
         require(cache.statistics().loadedBytes==0&&cache.handle()!=VK_NULL_HANDLE,"Damaged disk data must fall back to an empty device cache");
         create(host,cache,code);require(cache.flush(),"Fallback cache must recover persistent state");
     }

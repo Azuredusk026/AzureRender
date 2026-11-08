@@ -97,6 +97,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 最终三十六项检查通过，整帧收益未成立，候选隔离保存。
 通道结果分别记录最终绘制及不透明快照的变化。
 后续处理管线缓存上限与 D 盘工具缓存路径。
+[有界开发缓存](../acceptance/nr/bounded-development-cache.md)按程序内容划分代次。
+当前原生载荷约为 26.04 MiB，暖启动的 645 次创建全部命中。
+SDK 路径归属于 D 盘任务，两配置及设备检查通过。
+后续继续按实际 GPU 通道成本组织主场景优化。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

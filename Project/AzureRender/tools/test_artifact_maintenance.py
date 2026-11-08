@@ -14,6 +14,23 @@ import artifact_maintenance as maintenance
 
 
 class MaintenanceTests(unittest.TestCase):
+    def test_sdk_caches_inherit_the_managed_task_and_leave_parent_unchanged(self):
+        path=self.create(recovery=False)
+        keys=['DOTNET_CLI_HOME','NUGET_PACKAGES','NUGET_HTTP_CACHE_PATH',
+              'NUGET_PLUGINS_CACHE_PATH','NUGET_SCRATCH','DOTNET_BUNDLE_EXTRACT_BASE_DIR']
+        command=[sys.executable,'-c','import os,json; print(json.dumps({k:os.environ.get(k) for k in '+repr(keys)+'}))']
+        with patch.dict(os.environ,{key:'C:/inherited-cache' for key in keys}):
+            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
+            self.assertTrue(all(os.environ[key]=='C:/inherited-cache' for key in keys))
+        self.assertEqual(result['exitCode'],0)
+        actual=json.loads((path/'process.log').read_text())
+        for key in keys:
+            self.assertTrue(Path(actual[key]).is_relative_to(path/'tmp'),key)
+        environment=maintenance.managed_environment(path/'tmp',{'PATH':'preserved'})
+        self.assertEqual(environment['PATH'],'preserved')
+        self.assertEqual(environment['DOTNET_GENERATE_ASPNET_CERTIFICATE'],'false')
+        self.assertEqual(environment['DOTNET_ADD_GLOBAL_TOOLS_TO_PATH'],'false')
+
     def test_measure_bounds_filesystem_queries_for_nested_payload(self):
         path=self.build/'runs'/'bounded-scan';path.mkdir()
         for directory in range(10):

@@ -41,6 +41,7 @@ python D:/Projects/FYP/Project/AzureRender/tools/artifact_maintenance.py daily -
 本机按每日十点的既有日程执行，异常时通知。
 
 开发管线缓存共享 `build/cache/vulkan/`。
+程序名称及内容决定缓存代次，全部代次共享同一预算。
 总池为 256 MiB、单文件至多 128 MiB、最多八项，闲置七天过期。
 每日入口核对至多六十四个直接条目，并与运行时写入共用文件锁。
 
@@ -77,8 +78,15 @@ python tools/artifact_maintenance.py run --run task-directory-name --timeout 600
 普通写入边界通过 `artifact_budget.py` 追加预留。
 子进程的临时目录统一为任务目录下的 `tmp/`。
 `TEMP`、`TMP`、`TMPDIR` 及 `SQLITE_TMPDIR` 均采用该位置。
+运行器同时设置 .NET 主目录、解包目录及 NuGet 缓存。
+这些专用目录位于任务的 `tmp/` 内。
 临时文件计入任务配额，并按任务保留期回收。
 使用独立缓存配置的工具须将其缓存参数指向任务目录。
+
+Python 构建入口复用 `artifact_maintenance.managed_environment`。
+调用时传入任务内的 `tmp/`，将结果作为子进程环境。
+原型 Debug 可执行目标采用 `/INCREMENTAL:NO`。
+主构建配置按项目调试契约持续复用。
 
 ```powershell
 python tools/artifact_cleanup.py --finish build/runs/task-directory-name

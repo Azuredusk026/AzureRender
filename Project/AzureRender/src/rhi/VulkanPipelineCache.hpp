@@ -12,7 +12,7 @@ struct VulkanPipelineCacheStatistics {
 // and destroy this owner before destroying the device.
 class VulkanPipelineCache final {
 public:
-    VulkanPipelineCache(VkDevice,VkPhysicalDevice,std::filesystem::path directory,PipelineCacheLimits limits={});
+    VulkanPipelineCache(VkDevice,VkPhysicalDevice,std::filesystem::path directory,PipelineCacheLimits limits={},std::uint64_t profile=0);
     ~VulkanPipelineCache();
     VulkanPipelineCache(const VulkanPipelineCache&)=delete;
     VulkanPipelineCache& operator=(const VulkanPipelineCache&)=delete;

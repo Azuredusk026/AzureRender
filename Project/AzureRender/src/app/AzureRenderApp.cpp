@@ -300,9 +300,10 @@ void AzureRenderApp::initVulkan(const std::string& assetPath) {
     createCommandPool();
     try{
         const auto base=resourceLocator_.generatedCacheDirectory(std::filesystem::u8path(runOptions_.projectFile));
-        const auto directory=base.empty()?std::filesystem::path{}:base/"vulkan";
-        pipelineCache_=std::make_unique<azurerender::rhi::VulkanPipelineCache>(device_,physicalDevice_,directory);
-        azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache loaded: bytes="+std::to_string(pipelineCache_->statistics().loadedBytes)+", state="+pipelineCache_->statistics().readState);
+        const auto profile=azurerender::rhi::shaderCacheProfile(resourceLocator_.shaderDirectory());
+        const auto directory=base.empty()||!profile?std::filesystem::path{}:base/"vulkan";
+        pipelineCache_=std::make_unique<azurerender::rhi::VulkanPipelineCache>(device_,physicalDevice_,directory,azurerender::rhi::PipelineCacheLimits{},profile.value_or(0));
+        azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache loaded: bytes="+std::to_string(pipelineCache_->statistics().loadedBytes)+", state="+pipelineCache_->statistics().readState+", profile="+std::to_string(profile.value_or(0)));
     }catch(const std::exception&){pipelineCache_.reset();azurerender::RuntimeDiagnostics::instance().info("startup","Pipeline cache unavailable; using normal pipeline creation");}
     rhi_ = std::make_unique<azurerender::rhi::VulkanRhi>(
         device_, physicalDevice_, graphicsQueue_, commandPool_,

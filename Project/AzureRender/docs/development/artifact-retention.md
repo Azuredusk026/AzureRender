@@ -86,6 +86,8 @@ python tools/artifact_maintenance.py run --run task-directory-name --timeout 600
 程序输出参数须指向该任务目录。
 子进程临时文件统一放入该任务的 `tmp/`。
 运行器设置 `TEMP`、`TMP`、`TMPDIR` 及 `SQLITE_TMPDIR`。
+它同时将 .NET 主目录、解包目录及 NuGet 缓存设于任务内。
+自定义 Python 入口复用 `artifact_maintenance.managed_environment`。
 临时文件计入任务配额，并按任务保留期回收。
 独立缓存配置通过工具参数指定到任务目录。
 监控每秒核对占用、卷余量及运行时限。
@@ -134,6 +136,7 @@ python tools/artifact_asset_cleanup.py inventory --root build/runs/history-task 
 普通任务按共享路径读取模型。
 
 开发构建共享 `build/cache/vulkan/`，按设备、驱动与缓存标识复用管线数据。
+程序名称及内容共同决定缓存代次，所有代次共享容量上限。
 写入持有文件锁并采用同目录原子替换，磁盘峰值至多为 384 MiB。
 每日维护检查该目录至多六十四个直接条目，每批至多处理十个缓存文件。
 缓存清理与写入共用文件锁，Git 跟踪文件及链接保持保护。

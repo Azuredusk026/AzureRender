@@ -10,7 +10,10 @@ using PipelineCacheBytes=std::vector<std::uint8_t>;
 struct PipelineCacheIdentity {
     std::uint32_t vendor=0,device=0,driver=0;
     std::array<std::uint8_t,16> uuid{};
+    std::uint64_t profile=0;
 };
+// Bounded, relocation-stable namespace for the direct SPIR-V program set.
+std::optional<std::uint64_t> shaderCacheProfile(const std::filesystem::path&) noexcept;
 struct PipelineCacheLimits {
     std::uint64_t maximumFileBytes=128ULL*1024*1024;
     std::uint64_t maximumPoolBytes=256ULL*1024*1024;

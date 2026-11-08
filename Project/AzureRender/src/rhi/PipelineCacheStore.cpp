@@ -30,7 +30,7 @@ bool payloadMatches(const PipelineCacheIdentity& id,const PipelineCacheBytes& pa
     &&get(payload,0,4)>=32&&get(payload,0,4)<=payload.size()&&get(payload,4,4)==1
     &&get(payload,8,4)==id.vendor&&get(payload,12,4)==id.device
     &&std::equal(id.uuid.begin(),id.uuid.end(),payload.begin()+16);}
-std::string key(const PipelineCacheIdentity& id){std::ostringstream out;out<<"vk1-"<<std::hex<<id.vendor<<'-'<<id.device<<'-'<<id.driver<<'-'<<std::setfill('0');for(auto byte:id.uuid)out<<std::setw(2)<<static_cast<unsigned>(byte);return out.str()+".azpc";}
+std::string key(const PipelineCacheIdentity& id){std::ostringstream out;out<<"vk1-"<<std::hex<<id.vendor<<'-'<<id.device<<'-'<<id.driver<<'-'<<std::setfill('0');for(auto byte:id.uuid)out<<std::setw(2)<<static_cast<unsigned>(byte);if(id.profile)out<<'-'<<std::setw(16)<<id.profile;return out.str()+".azpc";}
 bool safePath(const std::filesystem::path& input){
     namespace fs=std::filesystem;
     for(auto path=input;!path.empty();path=path.parent_path()){
@@ -75,8 +75,34 @@ private:
     int handle_=-1;
 #endif
 };
-bool owned(const std::filesystem::path& path){static const std::regex pattern("vk1-[0-9a-f]{1,8}-[0-9a-f]{1,8}-[0-9a-f]{1,8}-[0-9a-f]{32}\\.azpc");return std::regex_match(path.filename().string(),pattern);}
+bool owned(const std::filesystem::path& path){static const std::regex pattern("vk1-[0-9a-f]{1,8}-[0-9a-f]{1,8}-[0-9a-f]{1,8}-[0-9a-f]{32}(-[0-9a-f]{16})?\\.azpc");return std::regex_match(path.filename().string(),pattern);}
 }
+
+std::optional<std::uint64_t> shaderCacheProfile(const std::filesystem::path& directory) noexcept{try{
+    namespace fs=std::filesystem;
+    if(directory.empty()||!safePath(directory)||!fs::is_directory(directory))return {};
+    std::vector<fs::path> programs;std::size_t inspected=0;
+    for(const auto& entry:fs::directory_iterator(directory)){
+        if(++inspected>2048)return {};
+        if(entry.path().extension()!=".spv")continue;
+        if(!safePath(entry.path())||!entry.is_regular_file()||programs.size()>=1024)return {};
+        programs.push_back(entry.path());
+    }
+    if(programs.empty())return {};
+    std::sort(programs.begin(),programs.end(),[](const auto& a,const auto& b){return a.filename().u8string()<b.filename().u8string();});
+    std::uint64_t hash=14695981039346656037ULL,total=0;
+    const auto feed=[&](const void* data,std::size_t size){const auto* bytes=static_cast<const unsigned char*>(data);for(std::size_t i=0;i<size;++i){hash^=bytes[i];hash*=1099511628211ULL;}};
+    const auto number=[&](std::uint64_t value){for(unsigned i=0;i<8;++i){const auto byte=static_cast<unsigned char>(value>>(i*8));feed(&byte,1);}};
+    std::array<char,65536> buffer{};number(programs.size());
+    for(const auto& path:programs){
+        const auto size=fs::file_size(path);if(!size||size>16ULL*1024*1024||size>512ULL*1024*1024-total)return {};
+        total+=size;const auto name=path.filename().u8string();number(name.size());feed(name.data(),name.size());number(size);
+        std::ifstream input(path,std::ios::binary);std::uint64_t remaining=size;
+        while(remaining){const auto count=static_cast<std::streamsize>(std::min<std::uint64_t>(remaining,buffer.size()));if(!input.read(buffer.data(),count))return {};feed(buffer.data(),static_cast<std::size_t>(count));remaining-=count;}
+        if(input.peek()!=std::char_traits<char>::eof()||fs::file_size(path)!=size)return {};
+    }
+    return hash?hash:1;
+}catch(...){return {};}}
 
 std::optional<PipelineCacheBytes> encodePipelineCache(const PipelineCacheIdentity& id,const PipelineCacheBytes& payload,std::uint64_t maximumBytes){
     if(maximumBytes<headerBytes||payload.size()>maximumBytes-headerBytes||!payloadMatches(id,payload))return {};

@@ -26,6 +26,12 @@ class PipelineCacheCleanupTests(unittest.TestCase):
         result=cache.clean(self.build,apply=True,tracked=set())
         self.assertEqual(result['files'],1);self.assertFalse(old.exists());self.assertTrue(fresh.exists());self.assertTrue(foreign.exists())
 
+    def test_generation_files_share_the_same_daily_budget(self):
+        old=self.entry(1,8*86400);generation=old.with_stem(old.stem+'-0123456789abcdef');old.rename(generation)
+        fresh=self.entry(2)
+        result=cache.clean(self.build,apply=True,tracked=set())
+        self.assertEqual(result['files'],1);self.assertFalse(generation.exists());self.assertTrue(fresh.exists())
+
     def test_pool_cap_and_tracked_content(self):
         first=self.entry(1,60);second=self.entry(2,30);third=self.entry(3)
         result=cache.clean(self.build,apply=True,tracked={first},maximum_pool=40)

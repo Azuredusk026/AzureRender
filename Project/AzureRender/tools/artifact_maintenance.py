@@ -693,6 +693,22 @@ def measure(path):
     return total
 
 
+def managed_environment(temporary, base=None):
+    """Keep foreground scratch and SDK caches inside the charged task tree."""
+    temporary=real_path(Path(temporary));temporary.mkdir(parents=True,exist_ok=True)
+    environment=dict(os.environ if base is None else base)
+    environment.update({key:str(temporary) for key in ('TEMP','TMP','TMPDIR','SQLITE_TMPDIR')})
+    for key,name in {'DOTNET_CLI_HOME':'dotnet-home','NUGET_PACKAGES':'nuget-packages',
+                     'NUGET_HTTP_CACHE_PATH':'nuget-http','NUGET_PLUGINS_CACHE_PATH':'nuget-plugins',
+                     'NUGET_SCRATCH':'nuget-scratch','DOTNET_BUNDLE_EXTRACT_BASE_DIR':'dotnet-extract'}.items():
+        environment[key]=str(temporary/name)
+    environment['DOTNET_CLI_TELEMETRY_OPTOUT']='1'
+    environment['DOTNET_NOLOGO']='1'
+    environment['DOTNET_GENERATE_ASPNET_CERTIFICATE']='false'
+    environment['DOTNET_ADD_GLOBAL_TOOLS_TO_PATH']='false'
+    return environment
+
+
 def guarded_run(build, name, command, timeout=600):
     """Monitor a foreground child; sampled quotas are not filesystem quotas."""
     import threading
@@ -708,8 +724,7 @@ def guarded_run(build, name, command, timeout=600):
     process=None;reader=None;errors=[];truncated=[False];start=time.monotonic();reason=None
     try:
         temporary=real_path(path/'tmp');temporary.mkdir(exist_ok=True)
-        environment=os.environ.copy()
-        environment.update({key:str(temporary) for key in ('TEMP','TMP','TMPDIR','SQLITE_TMPDIR')})
+        environment=managed_environment(temporary)
         kwargs=dict(cwd=Path(build).parent,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env=environment)
         if os.name=='nt':kwargs['creationflags']=subprocess.CREATE_NO_WINDOW|subprocess.CREATE_NEW_PROCESS_GROUP
         else:kwargs['start_new_session']=True
@@ -720,9 +735,9 @@ def guarded_run(build, name, command, timeout=600):
             tail=deque(maxlen=16);written=0;head_limit=15*2**20-256
             try:
                 with real_path(path/'process.log').open('wb') as log:
-                    for block in iter(lambda:process.stdout.read(65536),b''):
+                    for block in iter(lambda:process.stdout.read1(65536),b''):
                         if written<head_limit:
-                            keep=block[:head_limit-written];log.write(keep);written+=len(keep)
+                            keep=block[:head_limit-written];log.write(keep);log.flush();written+=len(keep)
                             if len(keep)<len(block):truncated[0]=True;tail.append(block[len(keep):])
                         else:truncated[0]=True;tail.append(block)
                     if truncated[0]:
