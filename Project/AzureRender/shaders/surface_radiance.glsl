@@ -46,7 +46,6 @@ void azureWriteCachedSurfaceRadiance(ivec2 pixel,vec3 geometricNormal){
     if((material.materialPadding&AZURE_SELECTED_PADDING)!=0U)outputColor.rgb=mix(outputColor.rgb,vec3(.96,.62,.10),.42);
     outputNormal=vec4(geometricNormal*.5+.5,0);azureWriteDisplayMask(1.0);
 }
-#if !defined(AZURE_SURFACE_RADIANCE_FAST)
 bool azureWriteSurfaceRadiance(vec3 geometricNormal){
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
     azureRadianceCount(1u);
@@ -72,6 +71,5 @@ bool azureWriteSurfaceRadiance(vec3 geometricNormal){
 #endif
     azureWriteCachedSurfaceRadiance(pixel,geometricNormal);return true;
 }
-#endif
 #endif
 #endif

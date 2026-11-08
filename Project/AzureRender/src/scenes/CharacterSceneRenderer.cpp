@@ -5144,7 +5144,16 @@ void CharacterSceneRenderer::drawPrimitive(
         ?snapshot->buffers.vertexColors.at(snapshot->instances.at(firstInstance).meshKey):whiteVertexColorBuffer_.buffer;
     if(!snapshot&&!mesh.vertexColors.empty())throw std::logic_error("Vertex colors require immutable recording buffers");
     commands.bindVertexStream(1,colorBuffer,0);
-    commands.bindPipeline(surfaceOverlay?pipeline:materialLightingPipeline(material,pipeline));
+    const auto fullPipeline=surfaceOverlay?pipeline:materialLightingPipeline(material,pipeline);
+    const auto primitiveIndex=static_cast<std::size_t>(&primitive-mesh.primitives.data());
+    bool useConservative=snapshot&&allowConservative&&run.opacity==1.F&&ordinaryOpaqueMaterial(material)
+        &&firstIndexOffset==primitive.firstIndex&&snapshot->buffers.conservativeIndirect!=VK_NULL_HANDLE;
+    if(useConservative)for(std::uint32_t i=0;i<instanceCount;++i){
+        const auto at=snapshot->buffers.conservativeOffsets.at(firstInstance+i)+primitiveIndex;
+        if(snapshot->buffers.conservativeSlots.at(at)==UINT32_MAX){useConservative=false;break;}
+    }
+    const bool selectRadiance=useConservative&&snapshot->buffers.radianceSelectionIndirect!=VK_NULL_HANDLE&&radianceSelectionMaterial(material);
+    commands.bindPipeline(selectRadiance?ordinaryRadiancePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]:fullPipeline);
     if (!bindlessTextures_) {
         const std::size_t descriptorIndex =
             frameIndex * totalMaterialCount()
@@ -5203,31 +5212,23 @@ void CharacterSceneRenderer::drawPrimitive(
         &morphConstants,
         sizeof(morphConstants));
     std::uint32_t recordedDrawCalls = 0;
-    const auto primitiveIndex=static_cast<std::size_t>(&primitive-mesh.primitives.data());
-    bool useConservative=snapshot&&allowConservative&&run.opacity==1.F&&ordinaryOpaqueMaterial(material)
-        &&firstIndexOffset==primitive.firstIndex&&snapshot->buffers.conservativeIndirect!=VK_NULL_HANDLE;
-    if(useConservative)for(std::uint32_t i=0;i<instanceCount;++i){
-        const auto at=snapshot->buffers.conservativeOffsets.at(firstInstance+i)+primitiveIndex;
-        if(snapshot->buffers.conservativeSlots.at(at)==UINT32_MAX){useConservative=false;break;}
-    }
     const bool useIndirect=!blend&&indirectBuffer!=VK_NULL_HANDLE
         &&firstIndexOffset==primitive.firstIndex&&!material.nprDiffuse.rimOrigin.present;
     if(useConservative){
         const auto& buffers=snapshot->buffers;
-        const bool selectRadiance=buffers.radianceSelectionIndirect!=VK_NULL_HANDLE&&radianceSelectionMaterial(material);
-        const auto selectedBuffer=selectRadiance?buffers.radianceSelectionIndirect:buffers.conservativeIndirect;
+
         const auto slot=[&](std::uint32_t i){return buffers.conservativeSlots.at(buffers.conservativeOffsets.at(firstInstance+i)+primitiveIndex);};
         const auto first=slot(0),stride=instanceCount>1?slot(1)-first:1U;bool regular=stride>0;
         for(std::uint32_t i=1;regular&&i<instanceCount;++i)regular=slot(i)==std::uint64_t(first)+std::uint64_t(i)*stride;
-        const auto drawRegion=[&](VkDeviceSize base){
+        const auto drawRegion=[&](VkBuffer commandBuffer,VkDeviceSize base){
         if(regular&&buffers.multiDrawIndirect){
             for(std::uint32_t i=0;i<instanceCount;){const auto count=std::min(buffers.maxDrawIndirectCount,instanceCount-i);
-                commands.drawIndexedIndirect(selectedBuffer,base+VkDeviceSize(slot(i))*20,count,stride*20);i+=count;++recordedDrawCalls;}
-        }else for(std::uint32_t i=0;i<instanceCount;++i){commands.drawIndexedIndirect(selectedBuffer,base+VkDeviceSize(slot(i))*20,1,20);++recordedDrawCalls;}
+                commands.drawIndexedIndirect(commandBuffer,base+VkDeviceSize(slot(i))*20,count,stride*20);i+=count;++recordedDrawCalls;}
+        }else for(std::uint32_t i=0;i<instanceCount;++i){commands.drawIndexedIndirect(commandBuffer,base+VkDeviceSize(slot(i))*20,1,20);++recordedDrawCalls;}
         };
-        drawRegion(0);
-        if(selectRadiance){commands.bindPipeline(ordinaryRadiancePipelines_[surfaceFacingIndex(material.doubleSided,mirrored)]);
-            if(counters)++counters->pipelineBinds;drawRegion(buffers.radianceFastOffset);}
+        if(selectRadiance){drawRegion(buffers.radianceSelectionIndirect,buffers.radianceFastOffset);commands.bindPipeline(fullPipeline);
+            if(counters)++counters->pipelineBinds;}
+        drawRegion(buffers.conservativeIndirect,0);
     }else if (useIndirect) {
         if (snapshot != nullptr ? snapshot->buffers.multiDrawIndirect : multiDrawIndirect_) {
             for (std::uint32_t i = 0; i < instanceCount;) {

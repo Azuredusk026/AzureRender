@@ -57,6 +57,22 @@
   },
   "milestones": [
     {
+      "path": "runs/20261109-005752-quad-safe-radiance-consumer-834ce3",
+      "name": "四像素组照明消费",
+      "status": "CompatibilityValidatedNoSignificantNetGainDefaultDisabled",
+      "sourceBase": "b93bdf0",
+      "evidence": "docs/acceptance/nr/quad-safe-radiance-consumer.md",
+      "checksPassed": 22,
+      "checksSkipped": 2,
+      "pairedViewFlowsPassed": 2,
+      "nativeFourFramesExact": true,
+      "validComparisonProcesses": 3,
+      "calibrationProcesses": 1,
+      "gpuSavedMs": -0.0986511999999955,
+      "reclaimedFiles": 206,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-234340-radiance-draw-selection-744d65",
       "name": "逐绘制照明资格",
       "status": "MechanismValidatedNativePrecisionPendingDefaultDisabled",

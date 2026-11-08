@@ -9,7 +9,7 @@ layout(full_quads) in;
 #endif
 #include "surface_radiance_identity.glsl"
 #include "surface_radiance_statistics.glsl"
-layout(push_constant) uniform Probe {float depth;float value;uint firstIndex;uint material;} probe;
+layout(push_constant) uniform Probe {float depth;float value;uint firstIndex;uint material;float coverage;float mismatchFromX;} probe;
 layout(location=0) flat in uvec2 source;
 layout(location=0) out vec4 outputA;
 layout(location=1) out vec4 outputB;
@@ -42,8 +42,15 @@ void main()
         vec4 a=texelFetch(inputA,pixel,0),b=texelFetch(inputB,pixel,0),c=texelFetch(inputC,pixel,0);
         if(azureSurfaceRadianceFinite(a)&&azureSurfaceRadianceFinite(b)&&azureSurfaceRadianceFinite(c))
             outputA=vec4(azureComposeSurfaceRadiance(a,b,c,vec4(8,6,5,.5)),1);
+#if defined(AZURE_SURFACE_RADIANCE_FAST_PROBE)
+        else discard;
+#endif
     }
+#if defined(AZURE_SURFACE_RADIANCE_FAST_PROBE)
+    else discard;
+#endif
 #else
+    if(probe.mismatchFromX>=0&&gl_FragCoord.x>=probe.mismatchFromX)++identity.w;
     if(probe.value==-2.0&&((int(gl_FragCoord.x)&1)==1))++identity.w;
     if(!azureSurfaceRadianceFinite(outputA))identity=uvec4(0xffffffffu);
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)

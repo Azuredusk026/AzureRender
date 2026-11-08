@@ -37,7 +37,8 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [同帧资格核验](docs/acceptance/nr/radiance-validation-path.md)通过严格四帧及安全回退检查。
 [独立深度重放](docs/acceptance/nr/radiance-depth-replay.md)通过精度与严格四帧检查。
 [逐绘制资格](docs/acceptance/nr/radiance-draw-selection.md)已在原生采集中启用轻量绘制。
-严格像素兼容继续验收，实验入口默认关闭。
+[四像素组消费](docs/acceptance/nr/quad-safe-radiance-consumer.md)通过严格四帧检查。
+本地 GPU 净成本未取得显著收益，实验入口默认关闭。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。

@@ -7,14 +7,14 @@ using namespace azurerender;
 namespace {
 void require(bool v,const char* m){if(!v)throw std::runtime_error(m);}
 constexpr VkExtent2D extent{32,24};
-struct Probe{float depth=.25F,value=1000.03125F;std::uint32_t firstIndex=123,material=19;};
+struct Probe{float depth=.25F,value=1000.03125F;std::uint32_t firstIndex=123,material=19;float coverage=1,mismatchFromX=-1;};
 struct Resources{
  test::VulkanComputeFixture& host;rhi::IRhi& rhi;
  std::unique_ptr<SurfaceRadianceCache> source,target;
  rhi::GpuImage depth{};VkImageView depthView{};
  VkRenderPass pass{};std::array<VkFramebuffer,3> frames{};
  VkDescriptorSetLayout setLayout{};VkDescriptorPool pool{};VkPipelineLayout layout{};
- VkShaderModule vertex{},producer{},consumer{};VkPipeline produce{},consume{};
+ VkShaderModule vertex{},producer{},consumer{},quadFastModule{};VkPipeline produce{},consume{},quadFast{};
  rhi::GpuBuffer readValues{},readIds{};VkDescriptorSet set{};
  rhi::GpuImage copySource{};VkImageView copySourceView{};rhi::GpuBuffer copyUpload{},copyRead{};
  VkRenderPass copyPass{};VkFramebuffer copyFrame{};VkPipeline copyPipeline{};VkShaderModule copyVertex{},copyFragment{};
@@ -28,6 +28,7 @@ struct Resources{
   for(auto frame:frames)if(frame)rhi.destroyFramebuffer(frame);
   if(validate)rhi.destroyPipeline(validate);if(validation)rhi.destroyShaderModule(validation);
   if(commit)rhi.destroyPipeline(commit);if(commitModule)rhi.destroyShaderModule(commitModule);
+  if(quadFast)rhi.destroyPipeline(quadFast);if(quadFastModule)rhi.destroyShaderModule(quadFastModule);
   if(produce)rhi.destroyPipeline(produce);if(consume)rhi.destroyPipeline(consume);
   if(vertex)rhi.destroyShaderModule(vertex);if(producer)rhi.destroyShaderModule(producer);if(consumer)rhi.destroyShaderModule(consumer);
   if(pool)rhi.destroyDescriptorPool(pool);if(layout)rhi.destroyPipelineLayout(layout);if(setLayout)rhi.destroyDescriptorSetLayout(setLayout);
@@ -60,6 +61,9 @@ struct Resources{
   rhi::GraphicsPipelineDesc pipeline;pipeline.vertexShader=vertex;pipeline.fragmentShader=producer;pipeline.layout=layout;pipeline.renderPass=pass;
   pipeline.colorAttachmentCount=4;pipeline.cullMode=VK_CULL_MODE_NONE;pipeline.depthCompare=VK_COMPARE_OP_LESS;
   produce=rhi.createGraphicsPipeline(pipeline);pipeline.fragmentShader=consumer;if(withConsumer)consume=rhi.createGraphicsPipeline(pipeline);
+  if(withConsumer&&AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION){
+   quadFastModule=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_fast_probe.frag.spv"));pipeline.fragmentShader=quadFastModule;quadFast=rhi.createGraphicsPipeline(pipeline);
+  }
   if(selection){validation=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_validation_probe.frag.spv"));
    pipeline.fragmentShader=validation;pipeline.depthWrite=true;pipeline.colorWriteMasks.assign(4,0);validate=rhi.createGraphicsPipeline(pipeline);
    commitModule=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_selection_commit.comp.spv"));commit=rhi.createComputePipeline({commitModule,layout});}
@@ -138,6 +142,39 @@ struct Resources{
   }
   const auto& original=source->selectionBuffer(0);rhi.writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,original.buffer,original.size});
  }
+ void verifyQuadFallback(){
+  for(float threshold:{-1.F,8.F,0.F}){
+   Probe input;input.coverage=.5F;input.mismatchFromX=threshold;draw(0,input,7,3);bind(0);
+   host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){for(unsigned kind:{0U,3U}){
+    const auto image=source->texture(0,kind).image.image;const auto& buffer=kind?readIds:readValues;
+    commands.imageBarrier({image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+    commands.copyImageToBuffer(image,buffer.buffer,extent);commands.bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+    commands.imageBarrier({image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_TRANSFER_READ_BIT,VK_ACCESS_SHADER_READ_BIT});
+   }});
+   host.allocator.invalidate(readValues,0,readValues.size);host.allocator.invalidate(readIds,0,readIds.size);
+   std::vector<float> sourceValues(extent.width*extent.height);std::vector<std::uint32_t> sourceIds(extent.width*extent.height*4);
+   for(unsigned i=0;i<sourceValues.size();++i)sourceValues[i]=static_cast<const float*>(readValues.mapped)[4*i];std::memcpy(sourceIds.data(),readIds.mapped,sourceIds.size()*4);
+   const auto wanted=surfaceRadianceIdentity(.25F,7,123,0,19);std::vector<float> expected(sourceValues.size());unsigned hits=0,misses=0;
+   for(unsigned y=0;y<extent.height;++y)for(unsigned x=0;x<extent.width;++x){const auto i=y*extent.width+x;if(sourceValues[i]==0)continue;bool match=true;
+    for(unsigned dy=0;dy<2;++dy)for(unsigned dx=0;dx<2;++dx){const auto q=((y&~1U)+dy)*extent.width+(x&~1U)+dx;match&=std::memcmp(sourceIds.data()+4*q,wanted.words.data(),16)==0;}
+    expected[i]=match?1000.53125F:.75F;if(match)++hits;else ++misses;
+   }
+   require(misses>0&&(threshold==0||hits>0),"Triangle boundary fixture must contain real fallback coverage");
+   host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer raw){
+    VkClearValue clear{};clear.depthStencil={1,0};commands.beginRenderPass({pass,frames[2],extent,{SurfaceRadianceCache::clearValue(0),SurfaceRadianceCache::clearValue(1),SurfaceRadianceCache::clearValue(2),SurfaceRadianceCache::clearValue(3),clear}});
+    commands.setViewport(float(extent.width),float(extent.height));commands.setScissor(extent);commands.bindDescriptorSet(layout,set);
+    Probe full=input;full.value=.75F;full.mismatchFromX=-1;Probe fast=full;fast.value=-19.F;
+    commands.bindPipeline(quadFast);commands.pushConstants(layout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&fast,sizeof(fast));vkCmdDraw(raw,3,1,0,7);
+    commands.bindPipeline(produce);commands.pushConstants(layout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&full,sizeof(full));vkCmdDraw(raw,3,1,0,7);commands.endRenderPass();
+   });
+   host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){const auto image=target->texture(0,0).image.image;
+    commands.imageBarrier({image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});commands.copyImageToBuffer(image,readValues.buffer,extent);
+    commands.bufferBarrier({readValues.buffer,0,readValues.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+    commands.imageBarrier({image,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_TRANSFER_READ_BIT,VK_ACCESS_SHADER_READ_BIT});
+   });host.allocator.invalidate(readValues,0,readValues.size);
+   for(unsigned i=0;i<expected.size();++i)require(static_cast<const float*>(readValues.mapped)[4*i]==expected[i],"Quad-safe fast-first must preserve fallback pixels and their depth");
+  }
+ }
  void bind(unsigned slot){for(unsigned kind=0;kind<4;++kind)rhi.writeDescriptorImage({set,38+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
   source->texture(slot,kind).view,source->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});}
  void read(const SurfaceRadianceCache& cache,unsigned slot,float expected,const SurfaceRadianceIdentity* identity=nullptr){
@@ -183,6 +220,7 @@ int main(int argc,char** argv)try{
    const auto pipeline=r.rhi.createGraphicsPipeline(blend);r.rhi.destroyPipeline(pipeline);
   }
 
+  if(AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION)r.verifyQuadFallback();
   r.draw(0,p,7,6);auto identity=surfaceRadianceIdentity(.25F,7,123,0,19);r.read(*r.source,0,1000.03125F,&identity);
   r.draw(1,p,7,0);r.read(*r.source,1,0);r.bind(0);
   p.value=.75F;r.draw(2,p,7,3,true);r.read(*r.target,0,1000.53125F);
