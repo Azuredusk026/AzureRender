@@ -50,6 +50,15 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-111838-gpu-draw-stage-cost-4bb6b2",
+      "name": "GPU 绘制阶段归因",
+      "status": "BoundedCullingProposal",
+      "sourceBase": "0ac1a44",
+      "evidence": "docs/acceptance/nr/gpu-draw-stage-cost.md",
+      "matchedEvents": 1009,
+      "newGpuTimingExecuted": false
+    },
+    {
       "path": "runs/20261108-101326-gpu-transparent-indices-8ef9c7",
       "name": "GPU 透明索引准备",
       "status": "IntegratedExactImagesLocalCpuImproved",
