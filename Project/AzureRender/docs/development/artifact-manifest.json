@@ -50,6 +50,16 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-143637-snapshot-shared-occlusion-0435de",
+      "name": "多阶段遮挡消费范围",
+      "status": "IncrementalScopeBelowAdmission",
+      "sourceBase": "27d2160",
+      "evidence": "docs/acceptance/nr/snapshot-shared-occlusion.md",
+      "candidateImplemented": false,
+      "incrementalUpperMs": 0.32102399999999975,
+      "newGpuTimingExecuted": false
+    },
+    {
       "path": "runs/20261108-140934-storage-monitor-cost-e470a0",
       "name": "前台空间监控开销",
       "status": "ReadyLowOverheadMonitor",

@@ -44,6 +44,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [绘制阶段归因](../acceptance/nr/gpu-draw-stage-cost.md)定位保守遮挡候选，调用统计与实际片元结果保持一致。
 [保守剔除机制](../acceptance/nr/gpu-conservative-occlusion.md)通过双设备检查，独立深度候选的整帧收益未成立。
 [主通道深度复用](../acceptance/nr/main-depth-reuse.md)保持冻结四帧完全一致，短时 GPU 均值减少约 0.87 毫秒。
+[多阶段遮挡范围](../acceptance/nr/snapshot-shared-occlusion.md)的增量上界约为 0.32 毫秒，候选保持提案状态。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

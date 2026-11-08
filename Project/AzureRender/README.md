@@ -26,6 +26,7 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [绘制阶段归因](docs/acceptance/nr/gpu-draw-stage-cost.md)定位保守遮挡候选，调用统计与实际片元结果保持一致。
 [保守剔除机制](docs/acceptance/nr/gpu-conservative-occlusion.md)通过双设备检查，独立深度候选的整帧收益未成立。
 [主通道深度复用](docs/acceptance/nr/main-depth-reuse.md)保持冻结四帧完全一致，短时 GPU 均值减少约 0.87 毫秒。
+[多阶段遮挡范围](docs/acceptance/nr/snapshot-shared-occlusion.md)的增量上界约为 0.32 毫秒，候选保持提案状态。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。
