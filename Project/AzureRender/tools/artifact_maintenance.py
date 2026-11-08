@@ -651,16 +651,26 @@ def restore(build, name):
 
 def measure(path):
     total = count = 0
-    for current, dirs, names in os.walk(real_path(path), followlinks=False):
+    root=real_path(path)
+    if not root.is_dir():raise FileNotFoundError('Task directory is missing: '+str(root))
+    identity=root.stat()
+    def walk_error(error):
+        if not isinstance(error,FileNotFoundError):raise error
+    for current, dirs, names in os.walk(root, followlinks=False,onerror=walk_error):
         for name in dirs:
-            real_path(Path(current)/name)
+            try:real_path(Path(current)/name)
+            except FileNotFoundError:continue
             if name == '.git':
                 raise ValueError('Nested Git worktree is protected')
         for name in names:
-            total += real_path(Path(current)/name).stat().st_size
+            try:size=real_path(Path(current)/name).stat().st_size
+            except FileNotFoundError:continue
+            total += size
             count += 1
             if total > POLICY['runBytes'] or count > POLICY['maximumFiles']:
                 raise ValueError('Task byte/file-count budget exceeded')
+    current=real_path(root).stat()
+    if (current.st_dev,current.st_ino)!=(identity.st_dev,identity.st_ino):raise ValueError('Task directory identity changed')
     return total
 
 

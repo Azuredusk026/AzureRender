@@ -13,6 +13,19 @@ import artifact_maintenance as maintenance
 
 
 class MaintenanceTests(unittest.TestCase):
+    def test_measure_tolerates_a_file_removed_after_directory_enumeration(self):
+        path=self.create(recovery=False);temporary=path/'tmp';temporary.mkdir();fleeting=temporary/'linker.tmp';fleeting.write_bytes(b'transient')
+        real_path=maintenance.real_path
+        def observed(candidate):
+            if Path(candidate)==fleeting and fleeting.exists():fleeting.unlink()
+            return real_path(candidate)
+        with patch.object(maintenance,'real_path',side_effect=observed):
+            measured=maintenance.measure(path)
+        self.assertFalse(fleeting.exists());self.assertGreaterEqual(measured,len(b'generated output'))
+
+    def test_measure_rejects_a_missing_task_root(self):
+        with self.assertRaises(FileNotFoundError):maintenance.measure(self.build/'runs'/'absent')
+
     def test_foreground_temporary_files_are_inside_the_task_budget(self):
         path=self.create(recovery=False)
         outside=self.root/'inherited-temp';outside.mkdir()
