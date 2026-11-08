@@ -15,7 +15,7 @@ description: 维护本机 AzureRender 开发产物，按天清理可重建内容
 会话开始至多执行一次轻量查询：
 
 ```powershell
-python C:/Users/admin/.codex/skills/azurerender-artifact-maintenance/scripts/maintain.py status
+python D:/Projects/FYP/Project/AzureRender/tools/artifact_maintenance.py status
 ```
 
 正常状态直接继续开发。
@@ -25,13 +25,20 @@ python C:/Users/admin/.codex/skills/azurerender-artifact-maintenance/scripts/mai
 每日维护入口为：
 
 ```powershell
-python C:/Users/admin/.codex/skills/azurerender-artifact-maintenance/scripts/maintain.py daily --apply
+python D:/Projects/FYP/Project/AzureRender/tools/artifact_maintenance.py daily --apply
 ```
 
 普通任务完成后保留一天，必要诊断显式选三天或七天。
 到期直接回收可重建的程序、中间件及缓存。
-每次至多十个受管任务，维护预算一百二十秒。
+每日至多十批，每批至多十项。
+所有批次、模型及缓存回收共用一百二十秒预算。
+批次之间核对活动进程，发现开发活动时延后剩余回收。
+阻断、时限和批次上限分别记录于收据。
 活动构建、测试及采集期间延后维护。
+
+项目技能发现入口为仓库的 `.agents/skills/`。
+该目录与完整维护规则均保存在 D 卷。
+本机按每日十点的既有日程执行，异常时通知。
 
 开发管线缓存共享 `build/cache/vulkan/`。
 总池为 256 MiB、单文件至多 128 MiB、最多八项，闲置七天过期。

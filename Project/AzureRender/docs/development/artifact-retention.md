@@ -4,6 +4,8 @@
 
 项目产物与恢复包均存放在项目目录。
 本机使用[目录维护技能](../../tools/skills/azurerender-artifact-maintenance/SKILL.md)。
+仓库发现入口为[项目技能](../../../../.agents/skills/azurerender-artifact-maintenance/SKILL.md)。
+技能、规则、脚本及项目产物均保存在 D 卷。
 日常会话至多执行一次轻量索引查询。
 历史大目录采用缓存清单和每日有界清理。
 资产数据库的[源文件快照](asset-source-cache.md)采用有界无损压缩。
@@ -16,6 +18,10 @@ python tools/artifact_maintenance.py daily --apply
 
 正常状态直接继续开发，清理记录写入 `build/maintenance/`。
 活动构建、测试或采集期间延后回收。
+每日受管回收至多十批，每批至多十项。
+所有批次、模型及缓存回收共用一百二十秒预算。
+批次之间复核活动进程，收据记录实际停止原因。
+阻断状态由每日入口返回，时限及批次余项留待下次维护。
 前台空间监控每轮遍历活动任务一次，预算检查复用该结果。
 根目录及链接保护在接受统计前完成核验。
 监控实现及局部开销见[专项记录](../acceptance/recovery/storage-monitor-cost.md)。

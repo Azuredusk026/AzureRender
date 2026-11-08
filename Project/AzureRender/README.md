@@ -1,6 +1,7 @@
 # AzureRender 工程
 
 开发产物使用[目录维护技能](tools/skills/azurerender-artifact-maintenance/SKILL.md)。
+仓库[技能入口](../../.agents/skills/azurerender-artifact-maintenance/SKILL.md)及完整规则均保存在 D 盘。
 [任务临时目录](docs/acceptance/recovery/managed-temporary-storage.md)随任务计入配额及每日回收，子进程沿用项目所在卷。
 [前台空间监控](docs/acceptance/recovery/storage-monitor-cost.md)保持每秒配额检查，局部夹具的监控 CPU 耗时减少约 82%。
 按天回收、精简证据及累计预算见[产物规则](docs/development/artifact-retention.md)。

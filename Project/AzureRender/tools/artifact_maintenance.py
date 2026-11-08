@@ -17,7 +17,7 @@ from artifact_cleanup import is_link, remove_artifact
 GIB = 2**30
 POLICY = dict(poolBytes=16*GIB, coldBytes=8*GIB, runBytes=2*GIB,
               maximumFiles=10000, retentionDays=1, maximumBatch=10,
-              maintenanceSeconds=120,
+              maintenanceSeconds=120, maximumDailyBatches=10,
               recoveryDays=7,evidenceDays=30,evidenceBytes=8*2**20,evidencePoolBytes=2*GIB,
               coldRoot=str(Path(__file__).resolve().parents[1]/'build/archives/managed'))
 
@@ -477,7 +477,7 @@ def maintenance_lock(build):
         yield
 
 
-def maintain(build, *, apply=False, cold=None, now=None, busy=None, tracked=None, git=None):
+def maintain(build, *, apply=False, cold=None, now=None, busy=None, tracked=None, git=None, deadline=None):
     now = time.time() if now is None else now
     build = real_path(build)
     with database(build) as db:
@@ -510,13 +510,15 @@ def maintain(build, *, apply=False, cold=None, now=None, busy=None, tracked=None
     tracked = tracked_paths(build.parent) if tracked is None else tracked
     git = (lambda: git_state(build.parent)) if git is None else git
     before = git()
-    deadline = time.monotonic()+POLICY['maintenanceSeconds']
+    local_deadline = time.monotonic()+POLICY['maintenanceSeconds']
+    deadline = local_deadline if deadline is None else min(deadline,local_deadline)
     with maintenance_lock(build):
         # Re-read leases after acquiring the exclusive maintenance lock.
         with database(build) as db:
             current = rows(db)
         references = protected_names(current)
         for name in expired[:POLICY['maximumBatch']]:
+            if time.monotonic() >= deadline:break
             record = current[name]
             archive = real_path(record['archive'])
             owned = real_path(cold or POLICY['coldRoot'])
@@ -535,6 +537,7 @@ def maintain(build, *, apply=False, cold=None, now=None, busy=None, tracked=None
                 save(db,name,latest)
             report['items'].append(dict(expiredRecoveryTask=name, recoveryDays=record.get('recoveryDays',POLICY['recoveryDays'])))
         for name in expired_evidence[:max(0,POLICY['maximumBatch']-len(report['items']))]:
+            if time.monotonic() >= deadline:break
             record=current[name];evidence=real_path(record['evidence'])
             if evidence.parent!=metadata(build)/'evidence' or not evidence.name.startswith(name+'-') or digest(evidence)!=record['evidenceSha256']:
                 raise ValueError('Expired compact evidence ownership/digest differs')
@@ -545,6 +548,7 @@ def maintain(build, *, apply=False, cold=None, now=None, busy=None, tracked=None
                 evidence.unlink();latest.update(evidence=None,evidenceExpiredAt=now);save(db,name,latest)
             report['items'].append(dict(expiredEvidenceTask=name,evidenceDays=POLICY['evidenceDays']))
         for evidence in orphans[:max(0,POLICY['maximumBatch']-len(report['items']))]:
+            if time.monotonic() >= deadline:break
             with zipfile.ZipFile(evidence) as package:
                 entry=package.getinfo('files/.artifact-inventory.json')
                 if entry.file_size>POLICY['evidenceBytes']:raise ValueError('Unreferenced evidence exceeds its ownership record')
@@ -762,19 +766,48 @@ def guarded_run(build, name, command, timeout=600):
     return report
 
 
+def daily_managed(build,apply,deadline,busy):
+    maximum=POLICY['maximumDailyBatches']
+    if not apply:
+        result=maintain(build,apply=False)
+        return dict(result,batches=[],maximumBatches=maximum,stopReason='preview')
+    result=dict(status='idle',applied=True,items=[],batches=[],maximumBatches=maximum)
+    for index in range(maximum):
+        if time.monotonic()>=deadline:
+            result.update(status='bounded',stopReason='time-budget');break
+        if index:busy=active_processes(Path(build).parent)
+        if busy:
+            result.update(status='deferred-active-work',activeProcesses=busy,stopReason='active-work');break
+        batch=maintain(build,apply=True,busy=[],deadline=deadline)
+        for key,value in batch.items():
+            if key not in {'items','status'}:result.setdefault(key,value)
+        result['items'].extend(batch['items'])
+        if batch['items']:result['batches'].append(batch)
+        if batch['status']=='blocked':
+            result.update(status='blocked',stopReason='blocked');break
+        if batch['status']=='deferred-active-work':
+            result.update(status=batch['status'],activeProcesses=batch.get('activeProcesses',[]),stopReason='active-work');break
+        if time.monotonic()>=deadline:
+            result.update(status='bounded',stopReason='time-budget');break
+        if not batch['items']:
+            result.update(status='completed' if result['items'] else 'idle',stopReason='drained');break
+    else:result.update(status='bounded',stopReason='batch-limit')
+    return result
+
+
 def daily(build,apply=False):
     start=time.monotonic()
     busy=active_processes(Path(build).parent) if apply else []
-    result=(dict(status='deferred-active-work',activeProcesses=busy,applied=apply,items=[])
-            if busy else maintain(build,apply=apply,busy=busy))
-    report=dict(managed=result,caches=None,pipelineCaches=None,assetCopies=None,externalStorageUsed=False)
-    if result['status']!='deferred-active-work':
+    result=daily_managed(build,apply,start+POLICY['maintenanceSeconds'],busy)
+    report=dict(status=result['status'],managed=result,caches=None,pipelineCaches=None,assetCopies=None,externalStorageUsed=False)
+    can_continue=result['status'] not in {'deferred-active-work','blocked'}
+    if can_continue:
         from artifact_pipeline_cache import clean as clean_pipelines
         remaining=POLICY['maintenanceSeconds']-(time.monotonic()-start)
         if remaining>5:
             report['pipelineCaches']=clean_pipelines(build,apply=apply,seconds=min(10,remaining))
     asset_policy=metadata(build)/'asset-copy-cleanup-policy.json'
-    if apply and result['status']!='deferred-active-work' and asset_policy.is_file():
+    if apply and can_continue and asset_policy.is_file():
         policy=json.loads(real_path(asset_policy).read_text(encoding='utf-8'))
         remaining=POLICY['maintenanceSeconds']-(time.monotonic()-start)
         if remaining>5:
@@ -784,7 +817,7 @@ def daily(build,apply=False):
                                 maximum_files=min(int(policy.get('maximumFiles',512)),512),seconds=remaining)
             report['assetCopies']={k:v for k,v in assets.items() if k!='items'}|dict(files=len(assets['items']))
     policy_path=metadata(build)/'cache-cleanup-policy.json'
-    if apply and result['status']!='deferred-active-work' and policy_path.is_file():
+    if apply and can_continue and policy_path.is_file():
         policy=json.loads(real_path(policy_path).read_text(encoding='utf-8'))
         remaining=POLICY['maintenanceSeconds']-(time.monotonic()-start)
         if remaining>5:

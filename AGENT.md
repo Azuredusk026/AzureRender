@@ -2,7 +2,7 @@
 
 > 文档类型：仓库开发规则
 > 状态：生效
-> 更新日期：2026-11-07
+> 更新日期：2026-11-08
 > 适用范围：本仓库的设计、实现、工具、测试与文档
 
 ## 项目定位
@@ -302,7 +302,8 @@ Markdown、规则文件和同类说明文以中文完整句子为主。英文用
 输入任务通过 `--input-run` 登记活动引用。
 任务结束封存精简证据，普通生成文件按天直接回收。
 精简证据每任务至多 8 MiB，总池 2 GiB，保留三十天。
-本机维护技能源位于 `tools/skills/azurerender-artifact-maintenance/`。
+项目技能入口为[目录维护](.agents/skills/azurerender-artifact-maintenance/SKILL.md)。
+完整规则位于 `Project/AzureRender/tools/skills/azurerender-artifact-maintenance/`。
 会话开始至多执行一次 `artifact_maintenance.py status`。
 持续写入的前台程序使用 `artifact_maintenance.py run` 监控。
 该入口将子进程临时目录设置到任务内的 `tmp/`。
@@ -311,5 +312,7 @@ Markdown、规则文件和同类说明文以中文完整句子为主。英文用
 纯产物维护执行工具检查和产物摘要核对。
 定时清理执行只读审计并保存候选。
 删除按当前会话的有效授权分批执行，每批至多十个目录。
+每日至多十批，全部批次与缓存回收共用一百二十秒预算。
+批次之间核对活动开发进程，发现活动时延后余项。
 自动清理授权覆盖的范围完成核验后直接执行。
 用户已有改动按路径及差异摘要保护。

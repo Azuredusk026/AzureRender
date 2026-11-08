@@ -163,6 +163,72 @@ class MaintenanceTests(unittest.TestCase):
         with patch.object(maintenance,'active_processes',return_value=['active-player']):result=maintenance.daily(self.build,apply=True)
         self.assertTrue(target.exists());self.assertEqual(result['managed']['status'],'deferred-active-work');self.assertIsNone(result['assetCopies'])
 
+    def expired_generated_tasks(self,count):
+        result=[];when=time.time()-2*86400
+        for index in range(count):
+            path=self.create('daily-'+str(index),recovery=False);self.close(path)
+            with maintenance.database(self.build,True) as db:
+                record=maintenance.rows(db)[path.name];record['closed']=when;maintenance.save(db,path.name,record)
+            os.utime(path/'.finished',(when,when));result.append(path)
+        return result
+
+    def daily_fixture(self,**patches):
+        from contextlib import ExitStack
+        stack=ExitStack()
+        stack.enter_context(patch.object(maintenance,'active_processes',return_value=[]))
+        stack.enter_context(patch.object(maintenance,'tracked_paths',return_value=set()))
+        stack.enter_context(patch.object(maintenance,'git_state',return_value='same'))
+        stack.enter_context(patch('artifact_pipeline_cache.clean',return_value={'status':'idle'}))
+        stack.enter_context(patch.dict(maintenance.POLICY,maximumBatch=2,**patches))
+        return stack
+
+    def test_daily_drains_multiple_batches_of_expired_generated_tasks(self):
+        paths=self.expired_generated_tasks(5)
+        with self.daily_fixture():result=maintenance.daily(self.build,apply=True)
+        self.assertTrue(all(not path.exists() for path in paths))
+        self.assertEqual(len(result['managed']['items']),5)
+        self.assertEqual([len(batch['items']) for batch in result['managed']['batches']],[2,2,1])
+        self.assertEqual(result['managed']['stopReason'],'drained')
+
+    def test_daily_stops_at_its_batch_limit(self):
+        paths=self.expired_generated_tasks(5)
+        with self.daily_fixture(maximumDailyBatches=2):result=maintenance.daily(self.build,apply=True)
+        self.assertEqual(sum(path.exists() for path in paths),1)
+        self.assertEqual(result['managed']['stopReason'],'batch-limit')
+        self.assertEqual(len(result['managed']['batches']),2)
+
+    def test_daily_rechecks_activity_between_batches(self):
+        paths=self.expired_generated_tasks(5)
+        with self.daily_fixture(),patch.object(maintenance,'active_processes',side_effect=[[],['active-player']]):
+            result=maintenance.daily(self.build,apply=True)
+        self.assertEqual(sum(path.exists() for path in paths),3)
+        self.assertEqual(result['managed']['status'],'deferred-active-work')
+        self.assertEqual(result['managed']['stopReason'],'active-work')
+        self.assertIsNone(result['pipelineCaches'])
+
+    def test_daily_budget_is_shared_by_all_batches(self):
+        paths=self.expired_generated_tasks(5);clock=[0.0];original=maintenance.maintain
+        def first_batch(*args,**kwargs):
+            result=original(*args,**kwargs);clock[0]=maintenance.POLICY['maintenanceSeconds']+1;return result
+        with self.daily_fixture(),patch.object(maintenance.time,'monotonic',side_effect=lambda:clock[0]),patch.object(maintenance,'maintain',side_effect=first_batch):
+            result=maintenance.daily(self.build,apply=True)
+        self.assertEqual(sum(path.exists() for path in paths),3)
+        self.assertEqual(result['managed']['stopReason'],'time-budget')
+        self.assertIsNone(result['pipelineCaches'])
+
+    def test_daily_reports_blocked_batch_without_continuing(self):
+        paths=self.expired_generated_tasks(5);(paths[0]/'nested/payload.bin').write_bytes(b'changed after sealing')
+        with self.daily_fixture():result=maintenance.daily(self.build,apply=True)
+        self.assertEqual(result['status'],'blocked')
+        self.assertTrue(paths[0].exists());self.assertTrue(paths[2].exists())
+        self.assertEqual(result['managed']['stopReason'],'blocked')
+        self.assertIsNone(result['pipelineCaches'])
+
+    def test_shared_deadline_protects_expired_compact_evidence(self):
+        path=self.create(recovery=False);self.close(path);released=self.apply()['items'][0];evidence=Path(released['evidence'])
+        result=maintenance.maintain(self.build,apply=True,now=time.time()+40*86400,busy=[],tracked=set(),git=lambda:'same',deadline=time.monotonic()-1)
+        self.assertTrue(evidence.exists());self.assertEqual(result['items'],[])
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
