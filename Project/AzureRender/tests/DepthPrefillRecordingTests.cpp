@@ -6,7 +6,7 @@
 using namespace azurerender;
 namespace {
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
-void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned features,float opacity,bool multisample){
+void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned features,float opacity,bool multisample,bool lighting=false){
     rhi::NullRhi backend;backend.supportedSamples=VK_SAMPLE_COUNT_1_BIT|VK_SAMPLE_COUNT_4_BIT;backend.sampleShadingSupported=true;
     CharacterSceneRenderer renderer;RenderContext context;context.rhi=&backend;context.allocator=&backend.allocator();
     context.shaderDirectory=shaders;context.renderExtent={128,96};context.bindlessTextures=indexed;context.cullingEnabled=false;
@@ -19,7 +19,8 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
     context.rampAtlasPath=root+"/assets_public/toon_ramp_atlas.ppm";
     auto asset=std::make_shared<LoadedAsset>(loadGltfAsset(path));
     for(auto& node:asset->nodes)node.opacity=opacity;
-    for(auto& material:asset->materials){material.alphaMode=mode;material.materialFeatures=features;}
+    for(auto& material:asset->materials){material.alphaMode=mode;material.materialFeatures=features;
+        if(lighting)material.materialProfileVersion=2; if(lighting)material.environmentLighting.diffuse=MaterialEnvironmentSource::GlobalEnvironment;}
     std::map<std::string,std::shared_ptr<const LoadedAsset>> meshes{{path,asset}};context.preparedMeshes=&meshes;
     context.scene.resources.push_back({"mesh",path});scene::SceneNodeDesc node;node.id="object";node.resourceId="mesh";context.scene.nodes.push_back(node);
     RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;
@@ -31,7 +32,7 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
         renderer.updateFrame(frame);RenderGraph graph;
         SceneGraphResources resources{graph.addResource("color"),graph.addResource("depth"),graph.addResource("normal"),graph.addResource("shadow")};
         renderer.registerPasses(graph,resources,context);std::string error;require(graph.compile(error),error.c_str());
-        std::set<std::string> prefill,covered,ordinaryCovered,classCovered,earlyModules;
+        std::set<std::string> prefill,covered,ordinaryCovered,classCovered,beautyCovered,earlyModules;
         for(const auto& call:backend.calls)if(call.name=="createShaderModule"&&call.detail.find(" earlyFragmentTests=1")!=std::string::npos)
             earlyModules.insert(call.detail.substr(0,call.detail.find(' ')));
         allEarlyModules.insert(earlyModules.begin(),earlyModules.end());
@@ -42,10 +43,15 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
             const bool ordinaryProgram=call.detail.find("fragmentSpec=0:1/")!=std::string::npos;
             require(ordinaryProgram||call.detail.find("fragmentSpec=1:0/2:")!=std::string::npos,"Early-depth programs require ordinary or fixed material-class specialization");
             const auto handle=call.detail.substr(0,call.detail.find(' '));
-            (ordinaryProgram?ordinaryCovered:classCovered).insert(handle);allCovered.insert(handle);
+            if(call.detail.find("4:0/")!=std::string::npos){
+                require(ordinaryProgram,"Default isolation requires ordinary material specialization");
+                beautyCovered.insert(handle);
+            }else (ordinaryProgram?ordinaryCovered:classCovered).insert(handle);
+            allCovered.insert(handle);
         }
         const bool ordinary=mode==AssetAlphaMode::Opaque&&features==0;
-        require(ordinaryCovered.size()==(!multisample&&ordinary?8*(generation+1):0),"Ordinary covered color pipelines require explicit single-sample qualification");
+        require(ordinaryCovered.size()==(!multisample&&ordinary?8*(lighting?2:1)*(generation+1):0),"Ordinary covered color pipelines require explicit single-sample qualification");
+        require(beautyCovered.size()==(!multisample&&ordinary?4*(lighting?2:1)*(generation+1):0),"Default isolation must prepare four main-only ordinary pipelines per generation");
         const bool fixedClass=mode==AssetAlphaMode::Opaque&&features==MaterialFeatureSqrtAlphaShadow;
         require(classCovered.size()==(!multisample&&fixedClass?8*(generation+1):0),"Fixed-class covered pipelines require opaque single-sample qualification");
         for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"&&call.detail.find("depthBias=1.000000/0.000000")!=std::string::npos&&call.detail.find(" masks=0/0/")!=std::string::npos){
@@ -61,7 +67,7 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
                 if(call.name=="drawIndexed"&&prefill.count(current)){
                     ++draws;require((covered.count(current)!=0)==(!multisample&&opacity==1.F),"Covered pipeline must preserve fade and MSAA fallback");
                 }
-                if(call.name=="drawIndexed"&&ordinaryCovered.count(current))++coveredColors;
+                if(call.name=="drawIndexed"&&(ordinaryCovered.count(current)||beautyCovered.count(current)))++coveredColors;
                 if(call.name=="drawIndexed"&&classCovered.count(current))++coveredClasses;
             }
             require((draws>0)==(mode==AssetAlphaMode::Opaque&&opacity>0),"Both workflows must preserve opaque-only prefill submission");++checked;
@@ -69,6 +75,22 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
             require((coveredClasses>0)==(!multisample&&fixedClass&&opacity==1.F),"Fixed-class submissions require qualified material, opacity and sample count");
         }
         require(checked==2,"Snapshot and main workflows must both execute");
+        const auto creationCount=backend.calls.size();
+        for(unsigned isolation:{0U,1U,22U,0U}){
+            frame.qaIsolationMode=isolation;renderer.updateFrame(frame);
+            RenderGraph selected;
+            SceneGraphResources selectedResources{selected.addResource("color"),selected.addResource("depth"),selected.addResource("normal"),selected.addResource("shadow")};
+            renderer.registerPasses(selected,selectedResources,context);require(selected.compile(error),error.c_str());
+            for(const auto& pass:selected.passes())if(pass.name=="character-opaque-depth"||pass.name=="character-main"){
+                rhi::NullCommandRecorder recorder;pass.recordCommands(recorder);std::string pipeline;unsigned fastDraws=0;
+                for(const auto& call:recorder.calls){if(call.name=="bindPipeline")pipeline=call.detail;
+                    if(call.name=="drawIndexed"&&beautyCovered.count(pipeline))++fastDraws;}
+                const bool expected=pass.name=="character-main"&&isolation==0&&!multisample&&ordinary&&opacity==1.F;
+                require((fastDraws>0)==expected,"Default isolation selection must preserve dynamic diagnostics and snapshot, fade and MSAA paths");
+            }
+        }
+        for(auto i=creationCount;i<backend.calls.size();++i)
+            require(backend.calls[i].name!="createGraphicsPipeline","Diagnostic toggles must select prepared pipelines");
     }
     renderer.onUnload(context);std::map<std::string,unsigned> destroyed;
     for(const auto& call:backend.calls)if(call.name=="destroyPipeline")++destroyed[call.detail];
@@ -158,6 +180,7 @@ int main(int argc,char** argv)try{
         verify(argv[1],indexed,AssetAlphaMode::Opaque,MaterialFeatureSqrtAlphaShadow,1,false);
         verify(argv[1],indexed,AssetAlphaMode::Mask,MaterialFeatureGeometryShadow,1,false);
         verify(argv[1],indexed,AssetAlphaMode::Opaque,0,1,true);
+        verify(argv[1],indexed,AssetAlphaMode::Opaque,0,1,false,true);
     }
     verifyConservativeOcclusion(argv[1],true);
     verifyConservativeOcclusion(argv[1],false);

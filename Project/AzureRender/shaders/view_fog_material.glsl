@@ -8,7 +8,7 @@ void main(){
     if(p.rows[16].w>.5)color.rgb=azureApplyFogTransport(azureSampleViewFog(AZURE_FRAGMENT_COORD.xy,depth),color.rgb,p.rows[15].w>.5?0.0:1.0);
     int effect=int(floor(camera.qaParameters.y+.5));
     if(effect==6&&camera.qaParameters.z<.5)color.rgb=vec3(0);
-    int isolation=int(floor(camera.qaParameters.x+.5));
+    int isolation=int(floor(AZURE_QA_ISOLATION+.5));
     vec3 normal=normalize(worldNormal);
     vec3 diagnostic=color.rgb;
     if(isolation==1)diagnostic=baseColor.rgb;

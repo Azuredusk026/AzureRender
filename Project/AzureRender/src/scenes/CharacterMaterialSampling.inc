@@ -36,6 +36,7 @@ void CharacterSceneRenderer::destroyMaterialShaderModule(VkShaderModule module) 
         if(it->lighting)rhi_->destroyShaderModule(it->lighting);
         if(it->coverage)rhi_->destroyShaderModule(it->coverage);
         if(it->lightingCoverage)rhi_->destroyShaderModule(it->lightingCoverage);
+        for(auto extra:it->defaultIsolation)if(extra)rhi_->destroyShaderModule(extra);
         materialShaderVariants_.erase(it);
     }
     rhi_->destroyShaderModule(module);
@@ -69,6 +70,7 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
 }
 VkPipeline CharacterSceneRenderer::createMaterialDepthPipeline(const rhi::GraphicsPipelineDesc& desc) {
     const auto scene=rhi_->createGraphicsPipeline(desc);
+    prepareDefaultIsolationPipeline(scene,desc);
     if(!desc.alphaBlend||!desc.depthTest
         ||desc.depthWrite||desc.depthCompare!=VK_COMPARE_OP_LESS)return scene;
     std::array<VkPipeline,3> variants{};
@@ -85,6 +87,38 @@ VkPipeline CharacterSceneRenderer::createMaterialDepthPipeline(const rhi::Graphi
         rhi_->destroyPipeline(scene);throw;
     }
     return scene;
+}
+void CharacterSceneRenderer::prepareDefaultIsolationPipeline(VkPipeline scene,const rhi::GraphicsPipelineDesc& desc) {
+    // Preparation runs before submission; the original pipeline remains caller-owned.
+    if(!defaultIsolationFallback_.empty()||desc.renderPass!=defaultIsolationRenderPass_
+        ||desc.rasterizationSamples!=VK_SAMPLE_COUNT_1_BIT||desc.alphaBlend)return;
+    if(std::none_of(desc.fragmentSpecialization.begin(),desc.fragmentSpecialization.end(),
+        [](const auto& value){return value.id==0&&value.value==VK_TRUE;}))return;
+    for(auto& source:materialShaderVariants_){
+        const std::array<VkShaderModule,4> modules{source.scene,source.lighting,source.coverage,source.lightingCoverage};
+        const auto found=std::find(modules.begin(),modules.end(),desc.fragmentShader);
+        if(found==modules.end()||source.path.find("_early.frag.spv")==std::string::npos)continue;
+        const auto policy=static_cast<unsigned>(found-modules.begin());
+        VkPipeline pipeline=VK_NULL_HANDLE;
+        try{
+            if(defaultIsolationPipelines_.size()>=16)throw std::runtime_error("Default isolation pipeline limit exceeded");
+            auto& module=source.defaultIsolation[policy];
+            if(!module){
+                auto file=sceneFragmentVariant(source.path,false,false,false,(policy&1U)!=0,(policy&2U)!=0);
+                file.insert(file.size()-9,"_isolation0");
+                module=rhi_->createShaderModule(readBinaryFile(file));
+            }
+            auto isolated=desc;isolated.fragmentShader=module;isolated.fragmentSpecialization.push_back({4,0});
+            pipeline=rhi_->createGraphicsPipeline(isolated);
+            defaultIsolationPipelines_.emplace_back(scene,pipeline);
+        }catch(const std::exception& error){
+            if(pipeline)rhi_->destroyPipeline(pipeline);
+            for(const auto& entry:defaultIsolationPipelines_)rhi_->destroyPipeline(entry.second);
+            defaultIsolationPipelines_.clear();defaultIsolationFallback_=error.what();
+            RuntimeDiagnostics::instance().print("render","Default isolation preparation fallback: "+defaultIsolationFallback_);
+        }
+        return;
+    }
 }
 VkPipeline CharacterSceneRenderer::createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc& desc,const std::string& path) {
     const auto module=rhi_->createShaderModule(readBinaryFile(sceneFragmentVariant(path,false,false,false,false,true)));
@@ -107,12 +141,18 @@ VkPipeline CharacterSceneRenderer::materialLightingPipeline(const AssetMaterial&
         const auto it=std::find_if(materialDepthPipelines_.begin(),materialDepthPipelines_.end(),
             [&](const auto& variant){return variant.first==scene;});
         if(it==materialDepthPipelines_.end()||!it->second[depthPolicy-1])throw std::logic_error("Explicit surface depth pipeline is unavailable");
-        return it->second[depthPolicy-1];
+        scene=it->second[depthPolicy-1];
+    }
+    if(qaIsolationMode_==0){
+        const auto found=std::find_if(defaultIsolationPipelines_.begin(),defaultIsolationPipelines_.end(),
+            [&](const auto& entry){return entry.first==scene;});
+        if(found!=defaultIsolationPipelines_.end())return found->second;
     }
     return scene;
 }
 void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
     if(rhi_){
+        for(const auto& entry:defaultIsolationPipelines_)rhi_->destroyPipeline(entry.second);
         for(auto* group:{&surfaceOverlayPipelines_,&surfaceOverlaySnapshotPipelines_})
             for(auto& facing:*group)for(auto& pipeline:facing) {
                 if(pipeline)rhi_->destroyPipeline(pipeline);pipeline=VK_NULL_HANDLE;
@@ -123,10 +163,12 @@ void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
             if(variant.lighting)rhi_->destroyShaderModule(variant.lighting);
             if(variant.coverage)rhi_->destroyShaderModule(variant.coverage);
             if(variant.lightingCoverage)rhi_->destroyShaderModule(variant.lightingCoverage);
+            for(auto module:variant.defaultIsolation)if(module)rhi_->destroyShaderModule(module);
             rhi_->destroyShaderModule(variant.scene);
         }
     }
     materialDepthPipelines_.clear();materialLightingPipelines_.clear();materialShaderVariants_.clear();
+    defaultIsolationPipelines_.clear();defaultIsolationFallback_.clear();defaultIsolationRenderPass_=VK_NULL_HANDLE;
 }
 void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContext& context,
     const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot) {

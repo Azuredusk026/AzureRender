@@ -2,7 +2,7 @@ bool azureWriteUnlitBlendBeauty(vec4 baseColor,vec3 geometricNormal,float platfo
     uint features=AZURE_MATERIAL_FEATURES;
     if(AZURE_ALPHA_MODE!=2||(AZURE_MATERIAL_CLASS!=0U&&AZURE_MATERIAL_CLASS!=8U)
         ||(features&262144U)==0U||(features&~0xc1040028U)!=0U)return false;
-    int isolation=int(floor(camera.qaParameters.x+.5)),effect=int(floor(camera.qaParameters.y+.5));
+    int isolation=int(floor(AZURE_QA_ISOLATION+.5)),effect=int(floor(camera.qaParameters.y+.5));
 #if defined(AZURE_OPAQUE_SNAPSHOT)
     if(camera.screenReflectionTrace.x>.5){isolation=0;effect=0;}
 #endif

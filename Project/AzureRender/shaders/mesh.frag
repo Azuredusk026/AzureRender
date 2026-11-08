@@ -148,6 +148,12 @@ layout(constant_id=0) const bool azureOrdinaryOpaque=false;
 layout(constant_id=1) const uint azureFixedMaterialClass=0xffffffffU;
 layout(constant_id=2) const uint azureFixedMaterialFeatureMask=0U;
 layout(constant_id=3) const uint azureFixedMaterialFeatureValue=0U;
+#if defined(AZURE_STATIC_ISOLATION)
+layout(constant_id=4) const float azureStaticIsolation=0.0;
+#define AZURE_QA_ISOLATION azureStaticIsolation
+#else
+#define AZURE_QA_ISOLATION camera.qaParameters.x
+#endif
 #define AZURE_MATERIAL_CLASS (azureOrdinaryOpaque?0U:(azureFixedMaterialClass!=0xffffffffU?azureFixedMaterialClass:material.materialClass))
 #define AZURE_ALPHA_MODE (azureOrdinaryOpaque?0:material.alphaMode)
 // View-owned temporal sampling and coverage remain dynamic.
@@ -663,6 +669,15 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 #if defined(AZURE_VIEW_FOG)
 #include "view_fog_material.glsl"
 #else
+#if defined(AZURE_STATIC_ISOLATION)
+vec3 azureBeautySum(vec3 a,vec3 b,vec3 c,vec3 d,vec3 e,vec3 f,vec3 g,vec3 h){
+    precise vec3 result=a+b+c+d+e+f+g+h;return result;
+}
+vec3 azureBeautyReplace(vec3 total,vec3 added,vec3 removed){
+    precise vec3 result=total+(added-removed);return result;
+}
+#else
+#endif
 void main() {
     prepareShadowReceiver();
     vec2 alphaUvDx=vec2(0),alphaUvDy=vec2(0);
@@ -1669,6 +1684,9 @@ void main() {
         * bandEnabled
         * 0.055;
     }
+#if defined(AZURE_STATIC_ISOLATION)
+    vec3 beautyColor=azureBeautySum(tintedDiffuse,ambientSpecular,directSpecular,rimLighting,kkSpecular,secondaryKkSpecular,matcapAccent,emissive);
+#else
     vec3 beautyColor =
         tintedDiffuse
         + ambientSpecular
@@ -1678,7 +1696,8 @@ void main() {
         + secondaryKkSpecular
         + matcapAccent
         + emissive;
-    int qaIsolationMode = int(floor(camera.qaParameters.x + 0.5));
+#endif
+    int qaIsolationMode = int(floor(AZURE_QA_ISOLATION + 0.5));
 #if defined(AZURE_OPAQUE_SNAPSHOT)
     if(camera.screenReflectionTrace.x>.5)qaIsolationMode=0;
 #endif
@@ -1736,8 +1755,12 @@ void main() {
             rimLighting=sceneRim;
         }
         if(!sceneCharacter&&nprDiffuse)rimLighting=sceneRim;
+#if defined(AZURE_STATIC_ISOLATION)
+        beautyColor=azureBeautySum(directDiffuse,directSpecular,ambientDiffuse,ambientSpecular,emissive,kkSpecular,secondaryKkSpecular,rimLighting);
+#else
         beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular
             + emissive + kkSpecular + secondaryKkSpecular + rimLighting;
+#endif
         if(overlayMaterial)beautyColor=overlayVisible>.5?baseColor.rgb:vec3(0);
     }
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
@@ -1750,7 +1773,11 @@ void main() {
         reflectionDiffuseIncident=mix(reflectionDiffuseIncident,volume.rgb,volume.w);
 #endif
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
+#if defined(AZURE_STATIC_ISOLATION)
+        beautyColor=azureBeautyReplace(beautyColor,blended,ambientDiffuse);ambientDiffuse=blended;
+#else
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
+#endif
     }
     if((nprDiffuse||projectedLighting||eyeNpr)&&camera.nprLightingParameters.x>.5){
         float visibility=mix(nprMainShadowVisibility,1.0,camera.nprGainFloor.z);
@@ -1873,7 +1900,11 @@ void main() {
         if(sceneCharacter)blended*=material.styleParameters.z*dielectricSpecularWeight;
         if(qaEffectMode==5&&qaEffectDisabled)blended=vec3(0);
         if(camera.clusterLighting.x>.5)blended=sceneReflectionResponse*radiance;
+#if defined(AZURE_STATIC_ISOLATION)
+        beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);ambientSpecular=blended;
+#else
         beautyColor+=blended-ambientSpecular;ambientSpecular=blended;
+#endif
     }
 #else
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
@@ -1904,7 +1935,11 @@ void main() {
                 sceneReflectionRadiance=mix(sceneReflectionRadiance,localRadiance,weight);
                 blended=sceneReflectionResponse*sceneReflectionRadiance;
             }
+#if defined(AZURE_STATIC_ISOLATION)
+            beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);
+#else
             beautyColor+=blended-ambientSpecular;
+#endif
             ambientSpecular=blended;
         }
     }
@@ -1925,7 +1960,11 @@ void main() {
             camera.screenReflectionTrace,camera.screenReflectionQuality);
         vec3 radiance=mix(sceneReflectionRadiance,screenReflection.rgb,screenReflection.a);
         vec3 blended=sceneReflectionResponse*radiance;
+#if defined(AZURE_STATIC_ISOLATION)
+        beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);ambientSpecular=blended;
+#else
         beautyColor+=blended-ambientSpecular;ambientSpecular=blended;
+#endif
     }
     if(materialFeatureEnabled(1024U)>.5) {
         vec2 uv=AZURE_FRAGMENT_COORD.xy/camera.clusterDepth.zw;

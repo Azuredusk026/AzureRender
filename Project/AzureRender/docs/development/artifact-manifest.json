@@ -50,6 +50,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-150504-beauty-shader-specialization-2d2daa",
+      "name": "默认隔离材质管线",
+      "status": "RegisterPressureReducedFrameCostPending",
+      "sourceBase": "ab7121f",
+      "evidence": "docs/acceptance/nr/default-isolation-pipelines.md",
+      "checksPassed": 20,
+      "registerReductionFraction": 0.25,
+      "nativeImagesExact": true,
+      "wholeFrameBenefitMeasured": false,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-143637-snapshot-shared-occlusion-0435de",
       "name": "多阶段遮挡消费范围",
       "status": "IncrementalScopeBelowAdmission",

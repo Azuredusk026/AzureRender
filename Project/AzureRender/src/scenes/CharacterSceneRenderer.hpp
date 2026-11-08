@@ -109,6 +109,7 @@ private:
     void destroyMaterialShaderModule(VkShaderModule);
     VkPipeline createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
     VkPipeline createMaterialDepthPipeline(const rhi::GraphicsPipelineDesc&);
+    void prepareDefaultIsolationPipeline(VkPipeline,const rhi::GraphicsPipelineDesc&);
     VkPipeline createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc&,const std::string&);
     VkPipeline materialLightingPipeline(const AssetMaterial&,VkPipeline) const;
     void destroyMaterialLightingPipelines() noexcept;
@@ -116,9 +117,13 @@ private:
         VkShaderModule scene=VK_NULL_HANDLE,lighting=VK_NULL_HANDLE;
         std::string path;
         VkShaderModule coverage=VK_NULL_HANDLE,lightingCoverage=VK_NULL_HANDLE;
+        std::array<VkShaderModule,4> defaultIsolation{};
     };
     std::vector<MaterialShaderVariant> materialShaderVariants_;
     std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialLightingPipelines_;
+    std::vector<std::pair<VkPipeline,VkPipeline>> defaultIsolationPipelines_;
+    VkRenderPass defaultIsolationRenderPass_=VK_NULL_HANDLE;
+    std::string defaultIsolationFallback_;
     bool independentCoverageNeeded_=false;
     std::array<bool,4> materialDepthPoliciesNeeded_{};
     std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialDepthPipelines_;

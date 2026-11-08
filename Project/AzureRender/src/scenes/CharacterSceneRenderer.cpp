@@ -1755,6 +1755,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"gpuTransparentSortingBytes\": " << (gpuTransparentSort_?gpuTransparentSort_->bytes():0) << ",\n"
          << "  \"gpuTransparentSortingVertices\": " << (gpuTransparentTickets_[currentFrame_]?gpuTransparentTickets_[currentFrame_]->vertexCount:0) << ",\n"
          << "  \"gpuTransparentSortingFallback\": " << std::quoted(gpuTransparentFallback_) << ",\n"
+         << "  \"defaultIsolationPipelines\": " << defaultIsolationPipelines_.size() << ",\n"
+         << "  \"defaultIsolationSelected\": " << (qaIsolationMode_==0&&!defaultIsolationPipelines_.empty()?"true":"false") << ",\n"
+         << "  \"defaultIsolationFallback\": " << std::quoted(defaultIsolationFallback_) << ",\n"
          << "  \"conservativeOcclusionPrepared\": " << (conservativeFrames_[currentFrame_].ticket?"true":"false") << ",\n"
          << "  \"mainDepthSplitRecorded\": " << (mainDepthSplitRecorded_[currentFrame_]?"true":"false") << ",\n"
          << "  \"conservativeOcclusionCommands\": " << (conservativeFrames_[currentFrame_].ticket?conservativeFrames_[currentFrame_].ticket->count:0) << ",\n"
@@ -3518,6 +3521,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         requireScene(asset_);for(const auto& resource:additionalResources_)requireScene(resource->asset);
     }
     const std::string shaderDirectory = context.shaderDirectory;
+    defaultIsolationRenderPass_=context.sceneRenderPass;
     rasterizationSamples_=context.rasterizationSamples;
     const auto mainFragment=[&](std::string file,bool material=false){
         return azurerender::readBinaryFile(shaderDirectory+sceneFragmentVariant(std::move(file),

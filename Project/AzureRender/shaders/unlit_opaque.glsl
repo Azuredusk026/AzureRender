@@ -4,7 +4,7 @@ bool azureWritePlainUnlitBeauty(vec4 baseColor,vec3 geometricNormal,float platfo
     uint features=AZURE_MATERIAL_FEATURES;
     if(AZURE_ALPHA_MODE!=0||(AZURE_MATERIAL_CLASS!=0U&&AZURE_MATERIAL_CLASS!=8U)
         ||(features&262144U)==0U||(features&~0xc0040028U)!=0U)return false;
-    int isolation=int(floor(camera.qaParameters.x+.5));
+    int isolation=int(floor(AZURE_QA_ISOLATION+.5));
     int effect=int(floor(camera.qaParameters.y+.5));
     bool disabled=camera.qaParameters.z<.5;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
