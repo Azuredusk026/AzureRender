@@ -57,6 +57,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261109-044234-shadow-range-index-71ce25",
+      "name": "阴影范围索引",
+      "status": "LocalGatePassedCandidateIsolated",
+      "sourceBase": "a8e6154",
+      "evidence": "docs/acceptance/nr/shadow-range-index.md",
+      "numericCasesPerDevice": 10404,
+      "canonicalNativeProcesses": 0,
+      "frameCostProcesses": 0,
+      "standaloneGpuProcesses": 3,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261109-042301-shadow-disk-classification-a77b55",
       "name": "阴影圆盘权重分类",
       "status": "LocalGateNotPassedCandidateIsolated",
