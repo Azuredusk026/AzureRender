@@ -35,6 +35,9 @@ void main()
     azureRadianceCount(1u);azureRadianceCount(2u);
     bool matched=identity.z!=0xffffffffu&&all(equal(identity,stored));bool accepted=subgroupQuadAll(matched);
     if(matched)azureRadianceCount(3u);if(accepted)azureRadianceCount(4u);
+#if defined(AZURE_SURFACE_RADIANCE_CAPTURE_FAILURES)
+    if(!accepted)azureRadianceFailure(matched?3u:2u,identity,stored,31u);
+#endif
     if(accepted){
 #else
     if(subgroupQuadAll(identity.z!=0xffffffffu&&all(equal(identity,stored)))){

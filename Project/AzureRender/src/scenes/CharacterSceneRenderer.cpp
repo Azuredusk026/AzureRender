@@ -1858,7 +1858,13 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << ", \"frames\": " << statistics.frames << ", \"producerStores\": " << statistics.producerStores
          << ", \"consumerVisits\": " << statistics.consumerVisits << ", \"eligibleRequests\": " << statistics.eligibleRequests
          << ", \"pixelMatches\": " << statistics.pixelMatches << ", \"quadMatches\": " << statistics.quadMatches
-         << ", \"overflow\": " << (statistics.overflow?"true":"false") << "},\n";
+         << ", \"sampleSpacing\": " << ((kSurfaceRadianceFrameSelection&&kSurfaceRadianceDiagnostics)?32:1)
+         << ", \"failureAttempts\": " << (surfaceRadiance_?surfaceRadiance_->lastDiagnosticAttempts():0)
+         << ", \"failureCapacity\": " << (surfaceRadiance_?surfaceRadiance_->diagnosticRecordCapacity():0)
+         << ", \"failureSamples\": [";
+    if(surfaceRadiance_){bool first=true;for(const auto& record:surfaceRadiance_->diagnosticRecords()){
+        if(!first)json << ',';first=false;json << '[';for(unsigned i=0;i<record.size();++i){if(i)json << ',';json << record[i];}json << ']';}}
+    json << "]" << ", \"overflow\": " << (statistics.overflow?"true":"false") << "},\n";
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"surfaceRadiancePrepared\": " << (surfaceRadiance_?"true":"false") << ",\n"
          << "  \"surfaceRadianceBytes\": " << (surfaceRadiance_?surfaceRadiance_->bytes():0) << ",\n"
@@ -2914,7 +2920,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     outlineMaskPass_=rhi_->createRenderPass(maskPass);
     if(surfaceRadianceCapable_&&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
         &&SurfaceRadianceCache::supported(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight)))
-        try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),SurfaceRadianceCache::kMaximumBytes,kSurfaceRadianceDiagnostics,kSurfaceRadianceFrameSelection,kSurfaceRadianceFrameSelection?65536U:0U);}
+        try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),SurfaceRadianceCache::kMaximumBytes,kSurfaceRadianceDiagnostics,kSurfaceRadianceFrameSelection,kSurfaceRadianceFrameSelection?65536U:0U,(kSurfaceRadianceFrameSelection&&kSurfaceRadianceDiagnostics)?16U:0U);}
         catch(const std::exception& error){RuntimeDiagnostics::instance().info("render",std::string("Surface radiance allocation fallback: ")+error.what());}
     rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
         {reflectionSurfaceFormat_,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},

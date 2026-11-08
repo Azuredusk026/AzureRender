@@ -224,7 +224,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             const auto cachedModule=[&](VkShaderModule module,bool fast=false){
                 const auto found=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),[&](const auto& v){return v.scene==module;});
                 if(found==materialShaderVariants_.end())throw std::logic_error("Surface radiance material program identity is unavailable");
-                auto file=found->path;file.insert(file.rfind(".frag.spv"),fast?"_radiance_fast":kSurfaceRadianceDiagnostics?"_radiance_stats":"_radiance");return createMaterialShaderModule(file);
+                auto file=found->path;file.insert(file.rfind(".frag.spv"),fast?(kSurfaceRadianceDiagnostics?"_radiance_fast_stats":"_radiance_fast"):kSurfaceRadianceDiagnostics?"_radiance_stats":"_radiance");return createMaterialShaderModule(file);
             };
             cachedColor=cachedModule(earlyColorModule,kSurfaceRadianceFrameSelection);cachedSnapshot=cachedModule(earlySnapshotModule);
             if(kSurfaceRadianceFrameSelection)validationModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_validation.frag.spv"));

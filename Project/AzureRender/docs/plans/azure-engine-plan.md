@@ -69,6 +69,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [四像素组消费](../acceptance/nr/quad-safe-radiance-consumer.md)保持原生严格四帧一致。
 1080p 短时 GPU 均值未观察到显著收益。
 实验入口默认关闭，后续核对真实消费及主场景分段成本。
+[稀疏消费归因](../acceptance/nr/sparse-consumer-attribution.md)完成一次原生诊断。
+四像素组接受占消费采样约 30.23%。
+隐藏三角形样本与完整补充成本按主场景分段继续定位。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

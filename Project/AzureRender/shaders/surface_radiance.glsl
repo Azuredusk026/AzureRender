@@ -50,7 +50,20 @@ bool azureWriteSurfaceRadiance(vec3 geometricNormal){
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
     azureRadianceCount(1u);
 #endif
+#if defined(AZURE_SURFACE_RADIANCE_CAPTURE_FAILURES)
+    if(!azureSurfaceRadianceMode()){
+#if defined(AZURE_SURFACE_RADIANCE_CAPTURE_FAILURES)
+        uint modeBits=(azureOrdinaryOpaque?1u:0u)|(camera.clusterLighting.x>.5?2u:0u)
+            |(int(floor(camera.qaParameters.x+.5))==0?4u:0u)|(int(floor(camera.qaParameters.y+.5))==0?8u:0u)
+            |((camera.screenReflectionTrace.x<=.5||camera.screenReflectionTrace.x>1.5)?16u:0u);
+        uvec4 requested=azureSurfaceRadianceIdentity(gl_FragCoord.z,surfaceRadianceSource,uint(gl_PrimitiveID),material.materialPadding>>1u);
+        azureRadianceFailure(1u,requested,uvec4(floatBitsToUint(camera.clusterLighting.x),floatBitsToUint(camera.qaParameters.x),floatBitsToUint(camera.qaParameters.y),floatBitsToUint(camera.screenReflectionTrace.x)),modeBits);
+#endif
+        return false;
+    }
+#else
     if(!azureSurfaceRadianceMode())return false;
+#endif
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
     azureRadianceCount(2u);
 #endif
@@ -65,7 +78,12 @@ bool azureWriteSurfaceRadiance(vec3 geometricNormal){
     bool accepted=subgroupQuadAll(matched);
     if(matched)azureRadianceCount(3u);
     if(accepted)azureRadianceCount(4u);
-    if(!accepted)return false;
+    if(!accepted){
+#if defined(AZURE_SURFACE_RADIANCE_CAPTURE_FAILURES)
+        azureRadianceFailure(matched?3u:2u,requested,stored,31u);
+#endif
+        return false;
+    }
 #else
     if(!subgroupQuadAll(matched))return false;
 #endif

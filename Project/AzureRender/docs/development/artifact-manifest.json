@@ -57,6 +57,20 @@
   },
   "milestones": [
     {
+      "path": "runs/20261109-015039-sparse-consumer-attribution-e39118",
+      "name": "稀疏照明消费归因",
+      "status": "AttributionCompletedDefaultDisabled",
+      "sourceBase": "db55c51",
+      "evidence": "docs/acceptance/nr/sparse-consumer-attribution.md",
+      "checksPassed": 23,
+      "checksSkipped": 2,
+      "nativeProcesses": 1,
+      "renderedFrames": 32,
+      "capturedFrames": 0,
+      "reclaimedFiles": 272,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261109-005752-quad-safe-radiance-consumer-834ce3",
       "name": "四像素组照明消费",
       "status": "CompatibilityValidatedNoSignificantNetGainDefaultDisabled",

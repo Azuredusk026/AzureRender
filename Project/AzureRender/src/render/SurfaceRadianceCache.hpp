@@ -28,7 +28,7 @@ public:
     static constexpr std::uint64_t kMaximumBytes=512ULL*1024*1024;
     struct Texture {rhi::GpuImage image{};VkImageView view=VK_NULL_HANDLE;};
     static bool supported(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes);
-    SurfaceRadianceCache(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes,bool diagnostics=false,bool selection=false,unsigned drawCapacity=0);
+    SurfaceRadianceCache(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes,bool diagnostics=false,bool selection=false,unsigned drawCapacity=0,unsigned diagnosticRecordCapacity=0);
     ~SurfaceRadianceCache();
     SurfaceRadianceCache(const SurfaceRadianceCache&)=delete;
     SurfaceRadianceCache& operator=(const SurfaceRadianceCache&)=delete;
@@ -36,12 +36,16 @@ public:
     VkSampler sampler() const noexcept{return sampler_;}
     std::uint64_t bytes() const noexcept{return bytes_;}
     bool statisticsEnabled() const noexcept{return !statisticsFrames_.empty();}
-    std::uint64_t statisticsBytes() const noexcept{return statisticsFrames_.size()*24ULL;}
+    std::uint64_t statisticsBytes() const noexcept{return statisticsFrames_.size()*statisticsFrameBytes_;}
     const rhi::GpuBuffer& statisticsBuffer(unsigned slot) const{return statisticsFrames_.at(slot).buffer;}
     // Reuse only after the owner's existing frame-slot completion fence.
     void beginStatisticsFrame(unsigned slot);
     void recordStatisticsReady(rhi::ICommandRecorder&,unsigned slot);
     Statistics statistics() const noexcept{return statistics_;}
+    using DiagnosticRecord=std::array<std::uint32_t,12>;
+    unsigned diagnosticRecordCapacity()const noexcept{return diagnosticRecordCapacity_;}
+    unsigned lastDiagnosticAttempts()const noexcept{return lastDiagnosticAttempts_;}
+    const std::vector<DiagnosticRecord>& diagnosticRecords()const noexcept{return diagnosticRecords_;}
     bool selectionEnabled() const noexcept{return !selectionFrames_.empty();}
     std::uint64_t selectionBytes() const noexcept{return selectionFrames_.size()*4ULL*(drawCapacity_?drawCapacity_+6:1);}
     const rhi::GpuBuffer& selectionBuffer(unsigned slot)const{return selectionFrames_.at(slot).buffer;}
@@ -61,6 +65,9 @@ private:
     struct StatisticsFrame {rhi::GpuBuffer buffer{};bool recorded=false;};
     std::vector<StatisticsFrame> statisticsFrames_;
     Statistics statistics_{};
+    unsigned diagnosticRecordCapacity_=0,lastDiagnosticAttempts_=0;
+    std::uint64_t statisticsFrameBytes_=24;
+    std::vector<DiagnosticRecord> diagnosticRecords_;
     std::vector<StatisticsFrame> selectionFrames_;
     SelectionStatistics selectionStatistics_{};
     unsigned drawCapacity_=0;

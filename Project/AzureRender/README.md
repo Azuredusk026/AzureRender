@@ -39,6 +39,8 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [逐绘制资格](docs/acceptance/nr/radiance-draw-selection.md)已在原生采集中启用轻量绘制。
 [四像素组消费](docs/acceptance/nr/quad-safe-radiance-consumer.md)通过严格四帧检查。
 本地 GPU 净成本未取得显著收益，实验入口默认关闭。
+[稀疏消费归因](docs/acceptance/nr/sparse-consumer-attribution.md)完成一次原生诊断。
+四像素组接受占消费采样约 30.23%，后续按主场景分段选择优化。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。

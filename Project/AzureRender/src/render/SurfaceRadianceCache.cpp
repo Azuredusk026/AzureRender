@@ -1,5 +1,6 @@
 #include "SurfaceRadianceCache.hpp"
 #include <stdexcept>
+#include <algorithm>
 namespace azurerender {
 namespace {constexpr VkImageUsageFlags usage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT;}
 bool SurfaceRadianceCache::supported(rhi::IRhi& backend,VkExtent2D extent,unsigned slots,std::uint64_t byteLimit){
@@ -10,7 +11,10 @@ bool SurfaceRadianceCache::supported(rhi::IRhi& backend,VkExtent2D extent,unsign
         if(!backend.supportsSampledImage(format,false)||!(backend.imageSampleCounts(format,usage)&VK_SAMPLE_COUNT_1_BIT))return false;
     return true;
 }
-SurfaceRadianceCache::SurfaceRadianceCache(rhi::IRhi& backend,VkExtent2D extent,unsigned slots,std::uint64_t byteLimit,bool diagnostics,bool selection,unsigned drawCapacity):rhi_(backend),drawCapacity_(drawCapacity){
+SurfaceRadianceCache::SurfaceRadianceCache(rhi::IRhi& backend,VkExtent2D extent,unsigned slots,std::uint64_t byteLimit,bool diagnostics,bool selection,unsigned drawCapacity,unsigned diagnosticRecordCapacity):rhi_(backend),diagnosticRecordCapacity_(diagnosticRecordCapacity),drawCapacity_(drawCapacity){
+    if(diagnosticRecordCapacity>16||(!diagnostics&&diagnosticRecordCapacity))throw std::invalid_argument("Capture requires diagnostics and at most sixteen records");
+    statisticsFrameBytes_=diagnosticRecordCapacity?4ULL*(7+diagnosticRecordCapacity*12):24;
+    diagnosticRecords_.reserve(diagnosticRecordCapacity);
     if(drawCapacity>65536||(!selection&&drawCapacity))throw std::invalid_argument("Draw predicates require selection and a capacity within 65536");
     if(!supported(backend,extent,slots,byteLimit))throw std::invalid_argument("Surface radiance cache exceeds format or byte capabilities");
     try{
@@ -25,9 +29,9 @@ SurfaceRadianceCache::SurfaceRadianceCache(rhi::IRhi& backend,VkExtent2D extent,
         if(diagnostics){
             statisticsFrames_.resize(slots);
             for(auto& frame:statisticsFrames_){
-                frame.buffer=backend.allocator().createBuffer(24,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+                frame.buffer=backend.allocator().createBuffer(statisticsFrameBytes_,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
                 if(!frame.buffer.mapped)throw std::runtime_error("Radiance statistics require mapped frame storage");
-                std::memset(frame.buffer.mapped,0,24);backend.allocator().flush(frame.buffer,0,24);
+                std::memset(frame.buffer.mapped,0,static_cast<std::size_t>(frame.buffer.size));backend.allocator().flush(frame.buffer,0,frame.buffer.size);
             }
         }
         if(selection){
@@ -46,20 +50,25 @@ void SurfaceRadianceCache::beginStatisticsFrame(unsigned slot){
     if(!statisticsEnabled())return;
     auto& frame=statisticsFrames_.at(slot);
     if(frame.recorded){
-        rhi_.allocator().invalidate(frame.buffer,0,24);std::array<std::uint32_t,6> words{};
+        rhi_.allocator().invalidate(frame.buffer,0,frame.buffer.size);std::array<std::uint32_t,6> words{};
         std::memcpy(words.data(),frame.buffer.mapped,24);
         if(words[5]&2U){
             statistics_.producerStores+=words[0];statistics_.consumerVisits+=words[1];statistics_.eligibleRequests+=words[2];
             statistics_.pixelMatches+=words[3];statistics_.quadMatches+=words[4];++statistics_.frames;
             statistics_.overflow|=(words[5]&1U)!=0;
+            if(diagnosticRecordCapacity_){
+                std::memcpy(&lastDiagnosticAttempts_,static_cast<const char*>(frame.buffer.mapped)+24,4);
+                diagnosticRecords_.resize(std::min(lastDiagnosticAttempts_,diagnosticRecordCapacity_));
+                if(!diagnosticRecords_.empty())std::memcpy(diagnosticRecords_.data(),static_cast<const char*>(frame.buffer.mapped)+28,diagnosticRecords_.size()*48);
+            }
         }
     }
-    std::memset(frame.buffer.mapped,0,24);rhi_.allocator().flush(frame.buffer,0,24);frame.recorded=false;
+    std::memset(frame.buffer.mapped,0,static_cast<std::size_t>(frame.buffer.size));rhi_.allocator().flush(frame.buffer,0,frame.buffer.size);frame.recorded=false;
 }
 void SurfaceRadianceCache::recordStatisticsReady(rhi::ICommandRecorder& commands,unsigned slot){
     if(!statisticsEnabled())return;
     auto& frame=statisticsFrames_.at(slot);
-    commands.bufferBarrier({frame.buffer.buffer,0,24,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_HOST_BIT,
+    commands.bufferBarrier({frame.buffer.buffer,0,frame.buffer.size,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_HOST_BIT,
         VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});frame.recorded=true;
 }
 void SurfaceRadianceCache::beginSelectionFrame(unsigned slot,bool permitted,unsigned drawCount){
@@ -90,7 +99,7 @@ void SurfaceRadianceCache::clear() noexcept {
     for(auto& frame:selectionFrames_)rhi_.allocator().destroyBuffer(frame.buffer);
     selectionFrames_.clear();selectionStatistics_={};
     for(auto& frame:statisticsFrames_)rhi_.allocator().destroyBuffer(frame.buffer);
-    statisticsFrames_.clear();statistics_={};
+    statisticsFrames_.clear();statistics_={};diagnosticRecords_.clear();lastDiagnosticAttempts_=0;
     if(sampler_)rhi_.destroySampler(sampler_);sampler_=VK_NULL_HANDLE;
     for(auto& frame:textures_)for(auto& texture:frame){if(texture.view)rhi_.destroyImageView(texture.view);rhi_.allocator().destroyImage(texture.image);texture={};}
     textures_.clear();bytes_=0;

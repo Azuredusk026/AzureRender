@@ -18,8 +18,8 @@ struct Resources{
  rhi::GpuBuffer readValues{},readIds{};VkDescriptorSet set{};
  rhi::GpuImage copySource{};VkImageView copySourceView{};rhi::GpuBuffer copyUpload{},copyRead{};
  VkRenderPass copyPass{};VkFramebuffer copyFrame{};VkPipeline copyPipeline{};VkShaderModule copyVertex{},copyFragment{};
- bool diagnostics=false,selection=false;VkPipeline validate{},commit{};VkShaderModule validation{},commitModule{};
- explicit Resources(test::VulkanComputeFixture& h,bool statistics=false,bool frameSelection=false):host(h),rhi(*h.backend),diagnostics(statistics),selection(frameSelection){}
+ bool diagnostics=false,selection=false,capture=false;VkPipeline validate{},commit{};VkShaderModule validation{},commitModule{};
+ explicit Resources(test::VulkanComputeFixture& h,bool statistics=false,bool frameSelection=false,bool captureFailures=false):host(h),rhi(*h.backend),diagnostics(statistics),selection(frameSelection),capture(captureFailures){}
  ~Resources(){
   if(copyFrame)rhi.destroyFramebuffer(copyFrame);if(copyPipeline)rhi.destroyPipeline(copyPipeline);
   if(copyVertex)rhi.destroyShaderModule(copyVertex);if(copyFragment)rhi.destroyShaderModule(copyFragment);
@@ -37,7 +37,7 @@ struct Resources{
   host.allocator.destroyBuffer(readValues);host.allocator.destroyBuffer(readIds);
  }
  void initialize(const std::string& shaders,bool withConsumer=true){
-  source=std::make_unique<SurfaceRadianceCache>(rhi,extent,2,SurfaceRadianceCache::kMaximumBytes,diagnostics,selection);target=std::make_unique<SurfaceRadianceCache>(rhi,extent,1);
+  source=std::make_unique<SurfaceRadianceCache>(rhi,extent,2,SurfaceRadianceCache::kMaximumBytes,diagnostics,selection,0,capture?16U:0U);target=std::make_unique<SurfaceRadianceCache>(rhi,extent,1);
   depth=host.allocator.createImage2D(extent.width,extent.height,VK_FORMAT_D32_SFLOAT,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT);
   depthView=rhi.createImageView(depth.image,VK_FORMAT_D32_SFLOAT,VK_IMAGE_ASPECT_DEPTH_BIT,1);
   rhi::RenderPassDesc desc;
@@ -57,7 +57,7 @@ struct Resources{
   if(selection){const auto& flag=source->selectionBuffer(0);rhi.writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,flag.buffer,4});}
   const std::string suffix=diagnostics?"_stats":"";
   vertex=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_probe.vert.spv"));producer=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_probe"+suffix+".frag.spv"));
-  if(withConsumer)consumer=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_consumer"+suffix+".frag.spv"));
+  if(withConsumer)consumer=rhi.createShaderModule(readBinaryFile(capture?shaders+"/surface_radiance_capture_probe.frag.spv":shaders+"/surface_radiance_consumer"+suffix+".frag.spv"));
   rhi::GraphicsPipelineDesc pipeline;pipeline.vertexShader=vertex;pipeline.fragmentShader=producer;pipeline.layout=layout;pipeline.renderPass=pass;
   pipeline.colorAttachmentCount=4;pipeline.cullMode=VK_CULL_MODE_NONE;pipeline.depthCompare=VK_COMPARE_OP_LESS;
   produce=rhi.createGraphicsPipeline(pipeline);pipeline.fragmentShader=consumer;if(withConsumer)consume=rhi.createGraphicsPipeline(pipeline);
@@ -261,6 +261,15 @@ int main(int argc,char** argv)try{
   r.source->beginSelectionFrame(0);selected=r.source->selectionStatistics();
   require(selected.fastFrames==2&&selected.fullFrames==2&&!selected.lastFallback,"Depth-writing validation preserves the visible coplanar winner");
 
+ }
+#endif
+#if AZURE_TEST_SURFACE_RADIANCE_DIAGNOSTICS && AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION
+ {Resources r(host,true,false,true);r.initialize(argv[1]);Probe p;r.bind(0);r.source->beginStatisticsFrame(0);p.value=-2;
+  r.draw(0,p,7,3);p.value=.75F;r.draw(2,p,7,3,true);r.source->beginStatisticsFrame(0);
+  const auto stats=r.source->statistics();const auto& records=r.source->diagnosticRecords();
+  require(stats.frames==1&&stats.producerStores==extent.width*extent.height&&stats.consumerVisits==1&&stats.pixelMatches==1&&stats.quadMatches==0,"Sparse fast diagnostics preserve producer and sampled consumer scopes");
+  require(r.source->lastDiagnosticAttempts()==1&&records.size()==1&&records[0][0]==3&&records[0][1]==0&&records[0][2]==0&&records[0][3]==31,"GPU failure capture records the real sparse quad rejection");
+  require(std::memcmp(records[0].data()+4,records[0].data()+8,16)==0,"A matched pixel can retain the reason for its quad fallback");
  }
 #endif
  require(host.allocator.statistics().liveBuffers==0&&host.allocator.statistics().liveImages==0,"GPU resources must retire");require(host.errors==0,"Vulkan validation must remain clean");
