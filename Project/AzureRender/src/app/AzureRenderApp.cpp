@@ -597,6 +597,8 @@ void AzureRenderApp::buildRenderContext(
     context.qaInstanceCount = std::max(runOptions_.instanceCount, 1U);
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.preparationWorkers=runOptions_.parallelRecordingDisabled?nullptr:&recordingWorkers_;
+    context.fragmentPrimitiveIdentity=fragmentPrimitiveIdentity_;
+    context.fragmentQuadControl=fragmentQuadControl_;
     context.renderExtent = sceneRenderExtent_;
     context.swapchainExtent = swapchainExtent_;
     context.sceneColorFormat = kHdrSceneColorFormat;
@@ -1436,6 +1438,10 @@ void AzureRenderApp::createLogicalDevice() {
     VkPhysicalDeviceFeatures supportedSampler{};vkGetPhysicalDeviceFeatures(physicalDevice_,&supportedSampler);
     deviceFeatures.samplerAnisotropy=supportedSampler.samplerAnisotropy;
     deviceFeatures.sampleRateShading=supportedSampler.sampleRateShading;
+#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS)
+    fragmentPrimitiveIdentity_=supportedSampler.geometryShader==VK_TRUE;
+    deviceFeatures.geometryShader=fragmentPrimitiveIdentity_?VK_TRUE:VK_FALSE;
+#endif
     deviceFeatures.drawIndirectFirstInstance = indirectFirstInstanceSupported_ ? VK_TRUE : VK_FALSE;
     deviceFeatures.multiDrawIndirect = multiDrawIndirectSupported_ ? VK_TRUE : VK_FALSE;
     VkPhysicalDeviceVulkan12Features vulkan12Features{
@@ -1469,6 +1475,20 @@ void AzureRenderApp::createLogicalDevice() {
         enabledExtensions.push_back(VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME);
         vulkan12Features.pNext = &inspectionFeatures;
     }
+#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS)
+    VkPhysicalDeviceShaderQuadControlFeaturesKHR quadControl{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR};
+    VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR reconvergence{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR};
+    VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures demote{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES};
+    const auto hasExtension=[&](const char* name){return std::any_of(availableExtensions.begin(),availableExtensions.end(),[&](const auto& value){return std::strcmp(value.extensionName,name)==0;});};
+    fragmentQuadControl_=false;
+    if(hasExtension(VK_KHR_SHADER_QUAD_CONTROL_EXTENSION_NAME)&&hasExtension(VK_KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION_NAME)){
+        quadControl.pNext=&reconvergence;reconvergence.pNext=&demote;VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};available.pNext=&quadControl;
+        vkGetPhysicalDeviceFeatures2(physicalDevice_,&available);
+        fragmentQuadControl_=quadControl.shaderQuadControl&&reconvergence.shaderMaximalReconvergence&&demote.shaderDemoteToHelperInvocation;
+        if(fragmentQuadControl_){enabledExtensions.push_back(VK_KHR_SHADER_QUAD_CONTROL_EXTENSION_NAME);enabledExtensions.push_back(VK_KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION_NAME);
+            demote.pNext=vulkan12Features.pNext;vulkan12Features.pNext=&quadControl;}
+    }
+#endif
     auto exactDepthBias=azurerender::rhi::queryExactDepthBias(physicalDevice_);
     exactDepthBiasEnabled_=exactDepthBias.depthBiasExact==VK_TRUE;
     if(exactDepthBiasEnabled_){

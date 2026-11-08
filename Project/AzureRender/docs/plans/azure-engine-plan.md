@@ -50,13 +50,15 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 原帧预算及正式条件保持有效。
 [固定类别范围](../acceptance/nr/fixed-class-isolation-scope.md)约占历史事件耗时的 22.67%，本单元保持范围结论。
 [共享照明组合](../acceptance/nr/radiance-precision-boundaries.md)通过双设备、双配置的小数据检查，原有 736 个程序保持一致。
-照明复用候选的消费者已具备具体精度边界，当前原生接入及画面继续待验证。
+[照明缓存接入](../acceptance/nr/radiance-cache-precision-integration.md)通过严格四帧及两种配置的设备检查。
+短时 GPU 均值增加约 0.72 毫秒，实验选项默认关闭。
+下一项先核定实际复用覆盖及附件成本，再组织有效的着色批次。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。
 原四帧及复用帧保持零像素差，正式帧预算继续验收。
 照明复用的[接收面核对](../acceptance/nr/radiance-receiver-entry.md)完成。
-四帧与原候选摘要一致，原有一字节差异继续待定位，候选保持隔离。
+该记录保存入口及图像来源，当前配置见[同帧照明复用](../development/surface-radiance-cache.md)。
 
 GPU 缓冲的[用途分配实现](../acceptance/nr/focused-device-buffers.md)通过二十二项检查。
 原冻结四帧均符合零像素条件，整帧收益待原 80W 条件确认。

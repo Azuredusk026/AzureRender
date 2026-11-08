@@ -8,7 +8,7 @@
 
 开发管线采用[有界共享缓存](docs/acceptance/nr/pipeline-cache-workflow.md)。
 原生管线准备在跨进程复用时约为 0.140 秒，相关图像与设备检查通过。
-照明复用的[接收面核对](docs/acceptance/nr/radiance-receiver-entry.md)保持原像素差异，候选继续隔离。
+照明复用的[接收面核对](docs/acceptance/nr/radiance-receiver-entry.md)保存入口位置与图像来源。
 阴影圆盘的[局部成本](docs/acceptance/nr/shadow-disk-kernel.md)未形成收益，候选保持隔离。
 [材质范围核对](docs/acceptance/nr/shadow-cost-scope.md)按三十五份实际管线常量分组，历史缓存支持范围对应约 1.47 毫秒控制差值。
 [零反射复用提案](docs/acceptance/nr/surface-lighting-reuse.md)保存反射贡献范围，实际材质覆盖依据尚未成立。
@@ -30,7 +30,8 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [默认隔离材质管线](docs/acceptance/nr/default-isolation-pipelines.md)通过严格四帧，实验程序的片元寄存器减少 25%。
 [短时成本](docs/acceptance/nr/default-isolation-cost.md)的整帧净差约为 0.04 毫秒，策略由默认关闭的构建选项控制。
 [固定类别范围](docs/acceptance/nr/fixed-class-isolation-scope.md)约占历史事件耗时的 22.67%，保留范围结论。
-[共享照明组合](docs/acceptance/nr/radiance-precision-boundaries.md)通过四项小数据 GPU 检查，既有渲染程序保持原字节，照明复用的原生修复继续待验收。
+[共享照明组合](docs/acceptance/nr/radiance-precision-boundaries.md)通过四项小数据 GPU 检查，既有渲染程序保持原字节。
+[照明缓存接入](docs/acceptance/nr/radiance-cache-precision-integration.md)通过严格四帧及设备回退检查，短时 GPU 均值增加约 0.72 毫秒，实验选项默认关闭。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。

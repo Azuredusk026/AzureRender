@@ -1,5 +1,12 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
+#extension GL_KHR_shader_subgroup_vote : require
+#extension GL_EXT_shader_quad_control : require
+#extension GL_EXT_maximal_reconvergence : require
+layout(quad_derivatives) in;
+layout(full_quads) in;
+#endif
 #ifdef AZURE_ORDINARY_EARLY_DEPTH
 layout(early_fragment_tests) in;
 #endif
@@ -666,14 +673,22 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 #include "unlit_surface_sample.glsl"
 #include "unlit_opaque.glsl"
 #include "unlit_blend.glsl"
+#include "surface_radiance.glsl"
 #if defined(AZURE_VIEW_FOG)
 #include "view_fog_material.glsl"
 #else
 #if defined(AZURE_STATIC_ISOLATION)
 #include "beauty_composition.glsl"
 #endif
-void main() {
+void main()
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    [[maximally_reconverges]]
+#endif
+{
     prepareShadowReceiver();
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) && defined(AZURE_OPAQUE_SNAPSHOT)
+    outputRadianceA=vec4(0);outputRadianceB=vec4(0);outputRadianceC=vec4(0);outputRadianceIdentity=uvec4(0xffffffffu);
+#endif
     vec2 alphaUvDx=vec2(0),alphaUvDy=vec2(0);
 #if defined(AZURE_GEOMETRY_SAMPLES)
     alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);
@@ -778,6 +793,9 @@ void main() {
     if (!gl_FrontFacing) {
         geometricNormal = -geometricNormal;
     }
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if(azureWriteSurfaceRadiance(geometricNormal))return;
+#endif
     if(azureWritePlainUnlitBeauty(baseColor,geometricNormal,platformMask))return;
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     if(azureWriteUnlitBlendBeauty(baseColor,geometricNormal,platformMask,vec3(0),1.0))return;
@@ -1937,6 +1955,9 @@ void main() {
             ambientSpecular=blended;
         }
     }
+#endif
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) && defined(AZURE_OPAQUE_SNAPSHOT)
+    azureStoreSurfaceRadiance(beautyColor,sceneReflectionResponse,sceneReflectionRadiance,ambientSpecular,characterBlend);
 #endif
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)

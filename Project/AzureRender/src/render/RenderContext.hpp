@@ -275,6 +275,8 @@ struct RenderContext {
     // View-owned output. Retire renderer recording before replacing this target.
     MotionVectorTarget* motionOutput = nullptr;
     RecordingWorkerPool* preparationWorkers = nullptr;
+    bool fragmentPrimitiveIdentity = false;
+    bool fragmentQuadControl = false;
 };
 inline std::uint32_t sceneColorAttachmentCount(const RenderContext& context) noexcept {
     return context.displayMaskEnabled?3U:2U;

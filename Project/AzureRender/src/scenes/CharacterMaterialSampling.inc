@@ -59,9 +59,13 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
             if((policy&1U)&&!needed)continue;
             if((policy&2U)&&!independentCoverageNeeded_)continue;
             auto& module=policy==1?it->lighting:policy==2?it->coverage:it->lightingCoverage;
+            auto path=it->path;const auto cached=path.find("_radiance.frag.spv");
+            if(cached!=std::string::npos)path.erase(cached,9);
             if(!module)module=rhi_->createShaderModule(readBinaryFile(
-                sceneFragmentVariant(it->path,false,false,false,(policy&1U)!=0,(policy&2U)!=0)));
+                sceneFragmentVariant(path,false,false,false,(policy&1U)!=0,(policy&2U)!=0)));
             auto extended=desc;extended.fragmentShader=module;
+            if(cached!=std::string::npos&&extended.colorAttachmentCount>3)
+                for(std::size_t i=2;i<extended.colorWriteMasks.size();++i)extended.colorWriteMasks[i]=0;
             variants[policy-1]=createMaterialDepthPipeline(extended);
         }
         materialLightingPipelines_.emplace_back(scene,variants);
@@ -175,7 +179,8 @@ void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
     defaultIsolationPipelines_.clear();defaultIsolationFallback_.clear();defaultIsolationRenderPass_=VK_NULL_HANDLE;
 }
 void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContext& context,
-    const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot) {
+    const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot,const std::string& vertexPath) {
+    VkShaderModule identityVertex=VK_NULL_HANDLE;
     bool needed=false;
     std::array<bool,kMaterialClassVariantCount> classes{};
     std::array<bool,kMaterialClassVariantCount> coveredClasses{};
@@ -208,6 +213,18 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             &&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT;
         const auto earlyColorModule=early?earlyModule(color.fragmentShader):VK_NULL_HANDLE;
         const auto earlySnapshotModule=early?earlyModule(snapshot.fragmentShader):VK_NULL_HANDLE;
+        VkShaderModule cachedColor=VK_NULL_HANDLE,cachedSnapshot=VK_NULL_HANDLE;
+        if(needed&&early&&surfaceRadiance_){
+            auto vertex=vertexPath;const auto at=vertex.rfind(".vert.spv");
+            if(at==std::string::npos)throw std::logic_error("Surface radiance identity requires a mesh vertex program");
+            vertex.insert(at,"_radiance");identityVertex=rhi_->createShaderModule(readBinaryFile(vertex));
+            const auto cachedModule=[&](VkShaderModule module){
+                const auto found=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),[&](const auto& v){return v.scene==module;});
+                if(found==materialShaderVariants_.end())throw std::logic_error("Surface radiance material program identity is unavailable");
+                auto file=found->path;file.insert(file.rfind(".frag.spv"),"_radiance");return createMaterialShaderModule(file);
+            };
+            cachedColor=cachedModule(earlyColorModule);cachedSnapshot=cachedModule(earlySnapshotModule);
+        }
         if(needed)for(unsigned facing=0;facing<4;++facing){
             auto desc=color;
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
@@ -215,6 +232,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaquePipelines_[facing]=createMaterialGraphicsPipeline(desc);
             if(early){auto covered=desc;covered.fragmentShader=earlyColorModule;
+                if(identityVertex){covered.vertexShader=identityVertex;covered.fragmentShader=cachedColor;}
                 ordinaryEarlyDepthPipelines_[facing]=createMaterialGraphicsPipeline(covered);}
             desc=snapshot;
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
@@ -222,6 +240,8 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaqueSnapshotPipelines_[facing]=createMaterialGraphicsPipeline(desc);
             if(early){auto covered=desc;covered.fragmentShader=earlySnapshotModule;
+                if(identityVertex){covered.vertexShader=identityVertex;covered.fragmentShader=cachedSnapshot;
+                    for(std::size_t i=2;i<covered.colorWriteMasks.size();++i)covered.colorWriteMasks[i]=0xf;}
                 ordinaryEarlyDepthSnapshotPipelines_[facing]=createMaterialGraphicsPipeline(covered);}
         }
         for(unsigned index=0;index<classes.size();++index)if(classes[index]){
@@ -244,7 +264,8 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                     materialClassEarlyDepthSnapshotPipelines_[index][facing]=createMaterialGraphicsPipeline(covered);}
             }
         }
-    }catch(...){destroyMaterialClassPipelines();throw;}
+    }catch(...){if(identityVertex)rhi_->destroyShaderModule(identityVertex);destroyMaterialClassPipelines();throw;}
+    if(identityVertex)rhi_->destroyShaderModule(identityVertex);
 }
 void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
     materialClassFeatureSpecializations_={};
@@ -300,8 +321,8 @@ void CharacterSceneRenderer::initializeHairIntegralPipelines(const RenderContext
                 desc.alphaBlend=kind==1;desc.depthWrite=kind==0;
                 hairIntegralPipelines_[kind*4+facing]=createMaterialGraphicsPipeline(desc);
                 if(kind==0){
-                    desc.fragmentShader=snapshot;desc.renderPass=overlayDepthPass_;desc.colorAttachmentCount=2;
-                    desc.colorWriteMasks.assign(2,0xf);
+                    desc.fragmentShader=snapshot;desc.renderPass=overlayDepthPass_;desc.colorAttachmentCount=surfaceRadiance_?6U:2U;
+                    desc.colorWriteMasks.assign(desc.colorAttachmentCount,0);desc.colorWriteMasks[0]=0xf;desc.colorWriteMasks[1]=0xf;
                     desc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;desc.minSampleShading=0;
                     hairIntegralSnapshotPipelines_[facing]=createMaterialGraphicsPipeline(desc);
                 }

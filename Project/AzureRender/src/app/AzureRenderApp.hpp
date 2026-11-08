@@ -265,6 +265,8 @@ private:
     // bindless texture array needs (runtimeDescriptorArray plus
     // shaderSampledImageArrayNonUniformIndexing).
     bool bindlessTexturesSupported_ = false;
+    bool fragmentPrimitiveIdentity_ = false;
+    bool fragmentQuadControl_ = false;
     std::vector<VkQueryPool> timestampQueryPools_;
     std::array<bool, kMaxFramesInFlight> timestampQuerySubmitted_{};
     GpuTimingAccumulator gpuTiming_;

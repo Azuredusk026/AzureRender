@@ -50,6 +50,21 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-174124-radiance-cache-precision-integration-ad0b15",
+      "name": "照明缓存精度与成本",
+      "status": "ExactMathLocalRegressionDefaultDisabled",
+      "sourceBase": "9a11cf5",
+      "evidence": "docs/acceptance/nr/radiance-cache-precision-integration.md",
+      "checksPassed": 16,
+      "checksSkipped": 2,
+      "pairedViewFlowsPassed": 4,
+      "nativeFourFramesExact": true,
+      "gpuSavedMs": -0.7161322666666727,
+      "defaultReuseEnabled": false,
+      "reclaimedFiles": 127,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-165547-default-isolation-cost-5c0521",
       "name": "默认隔离策略成本",
       "status": "InsignificantLocalCostDefaultDisabled",

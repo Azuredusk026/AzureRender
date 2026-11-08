@@ -12,6 +12,7 @@
 #include "render/GpuTransparentIndexSort.hpp"
 #include "render/GpuConservativeOcclusion.hpp"
 #include "render/DepthPrepassSplit.hpp"
+#include "render/SurfaceRadianceCache.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
@@ -102,7 +103,7 @@ private:
     bool temporalMaterialSamplesActive() const noexcept;
     void initializeHairIntegralPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&);
     void destroyHairIntegralPipelines() noexcept;
-    void initializeMaterialClassPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&,const rhi::GraphicsPipelineDesc&);
+    void initializeMaterialClassPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&,const rhi::GraphicsPipelineDesc&,const std::string& vertexPath);
     void destroyMaterialClassPipelines() noexcept;
     void prepareMaterialLightingPipelines();
     VkShaderModule createMaterialShaderModule(const std::string&);
@@ -432,6 +433,8 @@ private:
     void recordConservativeHierarchy(rhi::ICommandRecorder&,const RenderContext&);
     void recordConservativeOcclusion(const RenderContext&,const SceneInstanceSnapshot&);
     RecordingWorkerPool* preparationWorkers_=nullptr;
+    bool surfaceRadianceCapable_=false;
+    std::unique_ptr<SurfaceRadianceCache> surfaceRadiance_;
     TransparentTopologyWorkspace transparencyScratch_;
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
     std::shared_ptr<const MaterialOriginInstances> materialOriginInstances_;

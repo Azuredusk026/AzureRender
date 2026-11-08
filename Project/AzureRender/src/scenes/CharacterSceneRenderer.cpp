@@ -533,6 +533,22 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     }
     objectShadowPrepared_=objectFormat&&objectAccess.mode!=ResourceAccessMode::Unsupported&&objectAccess.mode==access.mode;
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
+#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS)
+    auto radianceRequirements=objectShadowPrepared_?objectRequirements:requirements;
+    radianceRequirements.sampledImageSlots+=4;radianceRequirements.fixedSampledImageSlots+=4;
+    radianceRequirements.fragmentColorAttachments=std::max<std::uint64_t>(6,radianceRequirements.fragmentColorAttachments);
+    const auto plainOrdinary=[](const LoadedAsset& mesh){return std::any_of(mesh.primitives.begin(),mesh.primitives.end(),[&](const AssetPrimitive& primitive){
+        if(!primitive.indexCount||primitive.materialIndex>=mesh.materials.size())return false;
+        const auto& material=mesh.materials[primitive.materialIndex];
+        return ordinaryOpaqueMaterial(material)&&!extendedMaterialLighting(material)&&!material.coverageTexture.present;});};
+    bool hasRadianceMaterial=plainOrdinary(asset_);for(const auto& resource:additionalResources_)hasRadianceMaterial|=plainOrdinary(resource->asset);
+    surfaceRadianceCapable_=hasRadianceMaterial&&context.fragmentPrimitiveIdentity&&context.fragmentQuadControl&&limits.maxColorAttachments>=6
+        &&context.renderSettings&&context.renderSettings->sceneLightingEnabled
+        &&ResourceAccessProfile::select(capabilities,radianceRequirements).mode==access.mode
+        &&SurfaceRadianceCache::supported(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight));
+#else
+    surfaceRadianceCapable_=false;
+#endif
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
         "render", "Character texture access: "
@@ -1351,6 +1367,7 @@ void CharacterSceneRenderer::registerPasses(
     VkClearValue colorClear{};overlayBegin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{colorClear,depthClear,linearClear}:std::vector<VkClearValue>{colorClear,linearClear,depthClear};
     std::array<RenderGraph::ResourceId,3> snapshotSources{};
     if(snapshotMultisampling_)snapshotSources=snapshotMultisampling_->importSources(graph,context.currentFrame,"character-opaque-source");
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)overlayBegin.clearValues.push_back(SurfaceRadianceCache::clearValue(kind));
     rhi::ImageBarrierDesc snapshotState{};snapshotState.image=opaqueSceneColor_[context.currentFrame].image.image;
     const auto snapshotColor=graph.importImage("character-opaque-color",snapshotState);
     rhi::ImageBarrierDesc depthState{};depthState.image=overlayDepthAttachments_[context.currentFrame].image;depthState.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
@@ -1367,6 +1384,12 @@ void CharacterSceneRenderer::registerPasses(
         graph.attachment(prepass,overlayDepth,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         graph.attachment(prepass,snapshotDepth,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+    }
+    std::array<RenderGraph::ResourceId,SurfaceRadianceCache::kAttachments> radianceResources{};
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind){
+        rhi::ImageBarrierDesc initial;initial.image=surfaceRadiance_->texture(context.currentFrame,kind).image.image;
+        radianceResources[kind]=graph.importImage("character-surface-radiance-"+std::to_string(kind),initial);
+        graph.attachment(prepass,radianceResources[kind],RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     }
     graph.use(prepass,resources.shadow,RenderGraphUsage::Sampled,false);
     graph.use(prepass,jointResource,RenderGraphUsage::VertexStorage,false);
@@ -1526,6 +1549,7 @@ void CharacterSceneRenderer::registerPasses(
     graph.setRecordingChunks(main, std::move(mainChunks));
     graph.use(main, overlayDepth,RenderGraphUsage::Sampled,false);
     graph.use(main,snapshotColor,RenderGraphUsage::Sampled,false);
+    if(surfaceRadiance_)for(auto resource:radianceResources)graph.use(main,resource,RenderGraphUsage::Sampled,false);
     if(reflectionResource)graph.read(main,*reflectionResource);
     if(fogResource){
         graph.use(main,*fogResource,RenderGraphUsage::FragmentStorage,false);
@@ -1615,8 +1639,14 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
         VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     rhi::RenderPassBeginDesc begin{};begin.renderPass=snapshotPass();begin.framebuffer=snapshotFramebuffer(context.currentFrame);begin.extent=context.renderExtent;
     VkClearValue color{};VkClearValue linear{};linear.color.float32[0]=100000;VkClearValue depth{};depth.depthStencil={1,0};begin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{color,depth,linear}:std::vector<VkClearValue>{color,linear,depth};
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)begin.clearValues.push_back(SurfaceRadianceCache::clearValue(kind));
     context.commands->beginRenderPass(begin);recordOverlayDepth(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
     if(snapshotMultisampling_)snapshotMultisampling_->recordResolve(*context.commands,context.currentFrame,context.currentFrame);
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+        context.commands->imageBarrier({surfaceRadiance_->texture(context.currentFrame,kind).image.image,
+            VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+
     if(screenReflectionPrepared()&&reflectionActive_[context.currentFrame]){
         const auto slot=context.currentFrame;
         if(screenReflectionTemporalPrepared()){
@@ -1741,6 +1771,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
             &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))transparent+=primitive.indexCount/3;
     }
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
+         << "  \"surfaceRadiancePrepared\": " << (surfaceRadiance_?"true":"false") << ",\n"
+         << "  \"surfaceRadianceBytes\": " << (surfaceRadiance_?surfaceRadiance_->bytes():0) << ",\n"
+         << "  \"surfaceRadianceIdentityVersion\": 1,\n"
          << "  \"loadedResourceIdentityEntries\": " << loadedResourceMeshKeys_.size() << ",\n"
          << "  \"sceneTransformCachedNodes\": " << sceneTransforms_.statistics().nodes << ",\n"
          << "  \"sceneTransformReusedWorld\": " << sceneTransforms_.statistics().reusedWorld << ",\n"
@@ -2790,9 +2823,15 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     maskPass.attachments[0].samples=context.rasterizationSamples;
     maskPass.externalReadDependency=true;
     outlineMaskPass_=rhi_->createRenderPass(maskPass);
+    if(surfaceRadianceCapable_&&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
+        &&SurfaceRadianceCache::supported(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight)))
+        try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight));}
+        catch(const std::exception& error){RuntimeDiagnostics::instance().info("render",std::string("Surface radiance allocation fallback: ")+error.what());}
     rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
         {reflectionSurfaceFormat_,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
         {context.depthFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,true,true,true}};
+    if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+        pass.attachments.push_back({SurfaceRadianceCache::format(kind),VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false});
     pass.depthAttachment=2;pass.externalReadDependency=true;overlayDepthPass_=rhi_->createRenderPass(pass);
     for(std::size_t frame=0;frame<kMaxFramesInFlight;++frame){
         auto& color=opaqueSceneColor_[frame];
@@ -2805,7 +2844,9 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
         target.sampler=rhi_->createSampler(sampler);
         auto& depth=overlayDepthAttachments_[frame];depth=allocator_->createImage2D(context.renderExtent.width,context.renderExtent.height,context.depthFormat,VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT);
         overlayDepthViews_[frame]=rhi_->createImageView(depth.image,context.depthFormat,VK_IMAGE_ASPECT_DEPTH_BIT,1);
-        overlayDepthFramebuffers_[frame]=rhi_->createFramebuffer({overlayDepthPass_,{color.view,target.view,overlayDepthViews_[frame]},context.renderExtent.width,context.renderExtent.height});
+        std::vector<VkImageView> attachments{color.view,target.view,overlayDepthViews_[frame]};
+        if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)attachments.push_back(surfaceRadiance_->texture(static_cast<unsigned>(frame),kind).view);
+        overlayDepthFramebuffers_[frame]=rhi_->createFramebuffer({overlayDepthPass_,attachments,context.renderExtent.width,context.renderExtent.height});
     }
     if(context.rasterizationSamples==VK_SAMPLE_COUNT_4_BIT){
         std::vector<SceneMultisampleDestination> destinations;
@@ -2830,6 +2871,7 @@ void CharacterSceneRenderer::destroyOverlayDepth(){
         auto& color=opaqueSceneColor_[i];if(color.view)rhi_->destroyImageView(color.view);allocator_->destroyImage(color.image);color={};
         auto& t=overlaySceneDepth_[i];if(t.view)rhi_->destroyImageView(t.view);if(t.sampler)rhi_->destroySampler(t.sampler);allocator_->destroyImage(t.image);t={};
     }
+    surfaceRadiance_.reset();
     if(overlayDepthPass_)rhi_->destroyRenderPass(overlayDepthPass_);overlayDepthPass_=VK_NULL_HANDLE;
     if(outlineMaskPass_)rhi_->destroyRenderPass(outlineMaskPass_);outlineMaskPass_=VK_NULL_HANDLE;
 }
@@ -3034,6 +3076,8 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                     const auto selected=materialLightingPipeline(m,materialClassPipeline(m,mirrored,true,run.opacity));
                     if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
                 }
+                if(surfaceRadiance_){const auto first=primitive.firstIndex<=UINT32_MAX&&primitive.indexCount<=UINT32_MAX-primitive.firstIndex
+                    ?static_cast<std::uint32_t>(primitive.firstIndex):UINT32_MAX;std::memcpy(&morph.weights[0],&first,4);}
                 morph.nodeOpacity=run.opacity;
                 commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
                 commands.drawIndexed(primitive.indexCount,primitive.firstIndex,run.instanceCount,
@@ -3067,7 +3111,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         poolDesc.sizes = {
             {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, frameCount},
             {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-             frameCount * (textureSlots + 4 + (irradianceClipmapActive_?6U:0U) + (viewFog_?2U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
+             frameCount * (textureSlots + 4 + (surfaceRadianceCapable_?4U:0U) + (irradianceClipmapActive_?6U:0U) + (viewFog_?2U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
             {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
             {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
@@ -3081,7 +3125,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         static_cast<std::uint32_t>(kMaxFramesInFlight * totalMaterialCount());
     poolDesc.sizes = {
         {VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?2U:0U))},
+        {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(surfaceRadianceCapable_?4U:0U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?2U:0U))},
         {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
         {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
@@ -3148,6 +3192,8 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
             bindings.push_back({31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,static_cast<std::uint32_t>(totalMaterialCount()),VK_SHADER_STAGE_VERTEX_BIT});
         }
         bindings.push_back({37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+            bindings.push_back({38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
         return;
     }
@@ -3195,6 +3241,8 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         bindings.push_back({31,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_VERTEX_BIT});
     }
     bindings.push_back({37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+            bindings.push_back({38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
 }
 
@@ -3216,6 +3264,10 @@ void CharacterSceneRenderer::createDescriptorSets() {
         }
     };
     const auto& irradianceData=irradianceClipmap_?irradianceClipmap_->parameters():irradianceBuffer_;
+    const auto writeRadiance=[&](VkDescriptorSet set,unsigned frame){if(!surfaceRadiance_)return;
+        for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
+            rhi_->writeDescriptorImage({set,38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,surfaceRadiance_->texture(frame,kind).view,surfaceRadiance_->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+    };
     const auto writeSceneImages=[this](VkDescriptorSet set){
         rhi_->writeDescriptorImage({set,37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,reflectionFallbackView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});
         if(probeFieldTexture_){probeFieldTexture_->writeTexture(set,23);
@@ -3283,7 +3335,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         for (std::size_t frame = 0; frame < kMaxFramesInFlight; ++frame) {
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[frame];
-            writeSceneImages(uniformWrite.set);
+            writeSceneImages(uniformWrite.set);writeRadiance(uniformWrite.set,static_cast<unsigned>(frame));
             if(viewFog_){
                 viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
                 rhi_->writeDescriptorImage({uniformWrite.set,36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
@@ -3379,7 +3431,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
 
             rhi::DescriptorBufferWrite uniformWrite{};
             uniformWrite.set = descriptorSets_[descriptorIndex];
-            writeSceneImages(uniformWrite.set);
+            writeSceneImages(uniformWrite.set);writeRadiance(uniformWrite.set,static_cast<unsigned>(frame));
             if(viewFog_){
                 viewFog_->gpu.writeDescriptors(uniformWrite.set,static_cast<unsigned>(frame),34,35);
                 rhi_->writeDescriptorImage({uniformWrite.set,36,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
@@ -3670,10 +3722,10 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         createFacingPipelines(opaquePipelines_,materialDesc);
         auto depthModule=createMaterialShaderModule(shaderDirectory+sceneFragmentVariant((objectShadowPrepared_?(bindlessTextures_?"/character_snapshot_object_bindless.frag.spv":"/character_snapshot_object.frag.spv"):(bindlessTextures_?"/character_snapshot_bindless.frag.spv":"/character_snapshot.frag.spv")),rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,irradianceClipmapActive_,probeFieldActive_));
         auto depthDesc=materialDesc;depthDesc.fragmentShader=depthModule;depthDesc.renderPass=snapshotPass();
-        depthDesc.colorAttachmentCount=2;
-        depthDesc.colorWriteMasks.assign(2,0xf);
+        depthDesc.colorAttachmentCount=surfaceRadiance_?6U:2U;
+        depthDesc.colorWriteMasks.assign(depthDesc.colorAttachmentCount,0);depthDesc.colorWriteMasks[0]=0xf;depthDesc.colorWriteMasks[1]=0xf;
         createFacingPipelines(overlayDepthPipelines_,depthDesc);
-        try{initializeMaterialClassPipelines(context,integralBase,depthDesc);initializeSurfaceOverlayPipelines(integralBase,depthDesc);}
+        try{initializeMaterialClassPipelines(context,integralBase,depthDesc,meshVertexPath(objectShadowPrepared_?"mesh_object":"mesh"));initializeSurfaceOverlayPipelines(integralBase,depthDesc);}
         catch(...){destroyMaterialShaderModule(depthModule);throw;}
         destroyMaterialShaderModule(depthModule);
         const auto simpleDepthModule=rhi_->createShaderModule(mainFragment(bindlessTextures_
@@ -3681,7 +3733,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         VkShaderModule simpleDepthVertex=VK_NULL_HANDLE;
         try{
             simpleDepthVertex=rhi_->createShaderModule(azurerender::readBinaryFile(meshVertexPath("character_snapshot_depth")));
-            auto desc=depthDesc;desc.vertexShader=simpleDepthVertex;desc.fragmentShader=simpleDepthModule;desc.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
+            auto desc=depthDesc;desc.vertexShader=simpleDepthVertex;desc.fragmentShader=simpleDepthModule;desc.colorWriteMasks.assign(desc.colorAttachmentCount,0);desc.colorWriteMasks[1]=VK_COLOR_COMPONENT_R_BIT;
             // Snapshot-depth vertices consume the mesh stream without vertex colors.
             desc.vertexAttributes.pop_back();desc.vertexBindings.resize(1);
             for(unsigned facing=0;facing<3;++facing){
@@ -3692,7 +3744,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
                     shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv",
                         rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false));
                 // Only prefill is biased; strict LESS color keeps coplanar draw order.
-                auto prefill=desc;prefill.colorWriteMasks={0,0};prefill.depthBias=true;
+                auto prefill=desc;prefill.colorWriteMasks.assign(prefill.colorAttachmentCount,0);prefill.depthBias=true;
                 prefill.depthBiasConstant=1.F;prefill.depthBiasSlope=0.F;
                 snapshotPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
                 if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT){auto covered=prefill;covered.fragmentShader=VK_NULL_HANDLE;
@@ -3786,9 +3838,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             try {
                 auto shell=outlineDesc;shell.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 shell.fragmentShader=depthModule;shell.renderPass=snapshotPass();
-                shell.colorAttachmentCount=2;
+                shell.colorAttachmentCount=surfaceRadiance_?6U:2U;
                 shell.depthTest=true;shell.depthWrite=true;shell.depthCompare=VK_COMPARE_OP_LESS;
-                shell.colorWriteMasks={0,VK_COLOR_COMPONENT_R_BIT};
+                shell.colorWriteMasks.assign(shell.colorAttachmentCount,0);shell.colorWriteMasks[1]=VK_COLOR_COMPONENT_R_BIT;
                 outlineDepthPipeline_=rhi_->createGraphicsPipeline(shell);
                 const auto coverageDepthPath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
                 if(independentCoverageNeeded_)outlineDepthCoveragePipelines_[0]=createCoverageGraphicsPipeline(shell,coverageDepthPath);
@@ -5009,6 +5061,9 @@ void CharacterSceneRenderer::drawPrimitive(
             + primitive.materialIndex * kMaterialTextureSlots;
     }
     morphConstants.gizmoTransform=primitiveGizmoTransform(gizmo,&primitive-mesh.primitives.data());
+    if(surfaceRadiance_){const auto first=primitive.firstIndex<=UINT32_MAX&&primitive.indexCount<=UINT32_MAX-primitive.firstIndex
+        ?static_cast<std::uint32_t>(primitive.firstIndex):UINT32_MAX;std::memcpy(&morphConstants.weights[0],&first,4);}
+
     commands.pushConstants(
         pipelineLayout_,
         VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,

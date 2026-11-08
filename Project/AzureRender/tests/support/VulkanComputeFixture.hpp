@@ -14,6 +14,8 @@ inline void vkRequire(VkResult result,const char* operation) {
     if(result!=VK_SUCCESS) throw std::runtime_error(std::string(operation)+": "+std::to_string(result));
 }
 
+class VulkanFeatureUnavailable : public std::runtime_error {public:using std::runtime_error::runtime_error;};
+
 // Standalone compute host. Production RHI and allocation implementations are
 // exercised without constructing a window, world or application renderer.
 class VulkanComputeFixture {
@@ -29,7 +31,7 @@ public:
     rhi::GpuAllocator allocator;
     std::unique_ptr<rhi::VulkanRhi> backend;
 
-    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false) {
+    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false) {
         try {
             VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
             application.pApplicationName="AzureRender Compute Contract";application.apiVersion=VK_API_VERSION_1_3;
@@ -74,6 +76,8 @@ public:
             queueInfo.queueFamilyIndex=family;queueInfo.queueCount=1;queueInfo.pQueuePriorities=&priority;
             VkPhysicalDeviceFeatures features{};vkGetPhysicalDeviceFeatures(physical,&features);
             VkPhysicalDeviceFeatures used{};used.shaderStorageImageExtendedFormats=features.shaderStorageImageExtendedFormats;
+            if(primitiveIdentity&&!features.geometryShader)throw VulkanFeatureUnavailable("Fragment primitive identity is unavailable");
+            used.geometryShader=primitiveIdentity?VK_TRUE:VK_FALSE;
             used.sampleRateShading=sampleShading?features.sampleRateShading:VK_FALSE;
             if(graphics){
                 if(!features.independentBlend)throw std::runtime_error("Graphics fixture requires independent attachment blending");
@@ -88,6 +92,20 @@ public:
                 if(!biasFeatures.depthBiasExact)throw std::runtime_error("Exact depth bias is unavailable");
                 deviceInfo.pNext=&biasFeatures;deviceInfo.enabledExtensionCount=1;deviceInfo.ppEnabledExtensionNames=&biasExtension;
             }
+            VkPhysicalDeviceShaderQuadControlFeaturesKHR quad{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR};
+            VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR reconvergence{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR};
+            VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures demote{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES};
+            std::vector<const char*> optionalExtensions;
+            if(exactDepthBias)optionalExtensions.push_back(biasExtension);
+            if(quadControl){
+                quad.pNext=&reconvergence;reconvergence.pNext=&demote;VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};available.pNext=&quad;
+                vkGetPhysicalDeviceFeatures2(physical,&available);
+                if(!quad.shaderQuadControl||!reconvergence.shaderMaximalReconvergence||!demote.shaderDemoteToHelperInvocation)throw VulkanFeatureUnavailable("Quad control and reconvergence are unavailable");
+                demote.pNext=const_cast<void*>(deviceInfo.pNext);deviceInfo.pNext=&quad;
+                optionalExtensions.push_back(VK_KHR_SHADER_QUAD_CONTROL_EXTENSION_NAME);
+                optionalExtensions.push_back(VK_KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION_NAME);
+            }
+            deviceInfo.enabledExtensionCount=static_cast<std::uint32_t>(optionalExtensions.size());deviceInfo.ppEnabledExtensionNames=optionalExtensions.data();
             vkRequire(vkCreateDevice(physical,&deviceInfo,nullptr,&device),"vkCreateDevice");
             vkGetDeviceQueue(device,family,0,&queue);
             VkCommandPoolCreateInfo commandInfo{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};commandInfo.queueFamilyIndex=family;
