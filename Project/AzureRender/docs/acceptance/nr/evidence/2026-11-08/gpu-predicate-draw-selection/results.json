@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "status": "mechanism-validated-scene-integration-pending",
+  "sourceBase": "a62b206",
+  "sourceHashes": {
+    "CMakeLists.txt": "da0a6349c4dad31df583661e58143447a04befaffcfdaeefd15fedd464e0dd78",
+    "src/render/GpuPredicateDrawSelection.hpp": "212e24e357ac7fe61fefa73c6a9b66993365aa5aa4a266204182860c8a4b7a4b",
+    "src/render/GpuPredicateDrawSelection.cpp": "6054a78198fb07644914f953da46d79b37d5f2409a458bbabeda97ffede79fd2",
+    "shaders/predicate_draw_selection.comp": "aead64c134b5974aa15b844f24236c8fcc6b2a20f413212f40c8cfb18bb40a6c",
+    "tests/GpuPredicateDrawSelectionTests.cpp": "06dec46580d683b27b467546f405db4bcc5cf8aea6d884497e933fb7bd292fe5",
+    "tests/GpuPredicateDrawSelectionGpuTests.cpp": "1c6007e2ecb2bdb80d7bf6ecde185125409b1135c148199056480d5bfa803649"
+  },
+  "checks": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.GpuPredicateDrawSelection(Gpu)?$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-204220-radiance-frame-selection-5dbd15\\release-nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 8.062000000005355
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.GpuPredicateDrawSelectionGpu$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-204220-radiance-frame-selection-5dbd15\\release-intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.6879999999946449
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender\\.GpuPredicateDrawSelection(Gpu)?$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-204220-radiance-frame-selection-5dbd15\\debug-nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 5.657000000006519
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender\\.GpuPredicateDrawSelectionGpu$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-204220-radiance-frame-selection-5dbd15\\debug-intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.46799999999348074
+    }
+  ],
+  "cases": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.GpuPredicateDrawSelection",
+      "seconds": "3.25644"
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "name": "AzureRender.GpuPredicateDrawSelectionGpu",
+      "seconds": "4.68588"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "name": "AzureRender.GpuPredicateDrawSelectionGpu",
+      "seconds": "0.595489"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.GpuPredicateDrawSelection",
+      "seconds": "2.77813"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "name": "AzureRender.GpuPredicateDrawSelectionGpu",
+      "seconds": "2.72848"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "name": "AzureRender.GpuPredicateDrawSelectionGpu",
+      "seconds": "0.361724"
+    }
+  ],
+  "programs": [
+    {
+      "configuration": "release",
+      "retainedExactPrograms": 673,
+      "actualPrograms": 674,
+      "sourceVerified": true
+    },
+    {
+      "configuration": "debug",
+      "retainedExactPrograms": 673,
+      "actualPrograms": 674,
+      "sourceVerified": true
+    }
+  ],
+  "gpuFlows": 4,
+  "casesPerGpuFlow": 5,
+  "sourceCommandsPerGpuFlow": 655,
+  "checkedOutputCommands": 5240,
+  "zeroSynchronizationErrors": true,
+  "zeroAllocatorResidue": true,
+  "protectedUserDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "sceneRendererModified": false,
+  "nativeSceneRuns": 0,
+  "performanceTimingRuns": 0,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 407465,
+  "evidenceSha256": "38f8d0bf97f4d61e34662a2ddfb4e971ed7bc242e41948f3183eec78c09f7e5b"
+}

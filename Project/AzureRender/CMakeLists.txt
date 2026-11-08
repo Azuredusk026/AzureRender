@@ -328,6 +328,7 @@ compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.frag")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_bounds.comp")
 compile_shader("${SHADER_SOURCE_DIR}/stable_key_sort.comp")
 compile_shader("${SHADER_SOURCE_DIR}/conservative_occlusion.comp")
+compile_shader("${SHADER_SOURCE_DIR}/predicate_draw_selection.comp")
 compile_shader("${SHADER_SOURCE_DIR}/depth_prepass_test.vert")
 compile_shader("${SHADER_SOURCE_DIR}/depth_prepass_test.frag")
 compile_shader("${SHADER_SOURCE_DIR}/transparent_deform.comp")
@@ -759,6 +760,7 @@ target_link_libraries(AzureAI PUBLIC AzureFoundation)
 add_library(AzureRenderCore STATIC
     src/render/GpuStableKeySort.cpp
     src/render/GpuConservativeOcclusion.cpp
+    src/render/GpuPredicateDrawSelection.cpp
     src/render/DepthPrepassSplit.cpp
     src/render/GpuTransparentIndexSort.cpp
     src/render/ScreenObjectVisibility.cpp
@@ -3140,6 +3142,15 @@ if(BUILD_TESTING)
     add_executable(AzureScreenObjectVisibilityTests tests/ScreenObjectVisibilityTests.cpp src/rhi/NullRhi.cpp)
     add_executable(AzureGpuStableKeySortTests tests/GpuStableKeySortTests.cpp src/rhi/NullRhi.cpp)
     add_executable(AzureGpuConservativeOcclusionTests tests/GpuConservativeOcclusionTests.cpp src/rhi/NullRhi.cpp)
+    add_executable(AzureGpuPredicateDrawSelectionTests tests/GpuPredicateDrawSelectionTests.cpp src/rhi/NullRhi.cpp)
+    target_link_libraries(AzureGpuPredicateDrawSelectionTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.GpuPredicateDrawSelection COMMAND AzureGpuPredicateDrawSelectionTests)
+    add_executable(AzureGpuPredicateDrawSelectionGpuTests tests/GpuPredicateDrawSelectionGpuTests.cpp)
+    target_link_libraries(AzureGpuPredicateDrawSelectionGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureGpuPredicateDrawSelectionGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.GpuPredicateDrawSelectionGpu COMMAND AzureGpuPredicateDrawSelectionGpuTests "${SHADER_BINARY_DIR}/predicate_draw_selection.comp.spv")
+    set_tests_properties(AzureRender.GpuPredicateDrawSelectionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+
     add_executable(AzureDepthPrepassSplitTests tests/DepthPrepassSplitTests.cpp src/rhi/NullRhi.cpp)
     target_link_libraries(AzureDepthPrepassSplitTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.DepthPrepassSplit COMMAND AzureDepthPrepassSplitTests)

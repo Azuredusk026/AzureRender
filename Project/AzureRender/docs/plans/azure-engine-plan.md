@@ -58,6 +58,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 逐片元命中率为 100.0000%。
 完整四像素组接受率为 85.0605%。
 后续性能批次按实际覆盖及附件成本选择。
+[GPU 绘制选择](../acceptance/nr/gpu-predicate-draw-selection.md)通过六项所属检查。
+当前按[管线选择计划](2026-11-08-radiance-frame-selection.md)接入同帧资格与轻量消费。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

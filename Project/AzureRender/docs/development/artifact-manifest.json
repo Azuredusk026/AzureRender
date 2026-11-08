@@ -54,6 +54,17 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-204220-radiance-frame-selection-5dbd15",
+      "name": "GPU 绘制路径选择",
+      "status": "MechanismValidatedSceneIntegrationPending",
+      "sourceBase": "a62b206",
+      "evidence": "docs/acceptance/nr/gpu-predicate-draw-selection.md",
+      "checksPassed": 6,
+      "gpuFlowsPassed": 4,
+      "nativeSceneRuns": 0,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-191723-radiance-consumption-counters-ec40da",
       "name": "照明复用消费计数",
       "status": "DiagnosticMechanismValidated",

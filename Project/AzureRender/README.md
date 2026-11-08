@@ -34,6 +34,7 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [共享照明组合](docs/acceptance/nr/radiance-precision-boundaries.md)通过四项小数据 GPU 检查，既有渲染程序保持原字节。
 [照明缓存接入](docs/acceptance/nr/radiance-cache-precision-integration.md)通过严格四帧及设备回退检查，短时 GPU 均值增加约 0.72 毫秒，实验选项默认关闭。
 [消费计数](docs/acceptance/nr/radiance-consumption-counters.md)提供实际访问与整组接受诊断，计数及复用选项默认关闭。
+[GPU 绘制选择](docs/acceptance/nr/gpu-predicate-draw-selection.md)通过六项所属检查，同帧资格与轻量照明接入继续实施。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。
