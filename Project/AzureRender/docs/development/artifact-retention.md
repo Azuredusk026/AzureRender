@@ -16,6 +16,9 @@ python tools/artifact_maintenance.py daily --apply
 
 正常状态直接继续开发，清理记录写入 `build/maintenance/`。
 活动构建、测试或采集期间延后回收。
+前台空间监控每轮遍历活动任务一次，预算检查复用该结果。
+根目录及链接保护在接受统计前完成核验。
+监控实现及局部开销见[专项记录](../acceptance/recovery/storage-monitor-cost.md)。
 纯产物维护执行工具检查及源文件、主产物摘要核对。
 编译、画面、GPU 测量和长跑按所属开发任务安排。
 

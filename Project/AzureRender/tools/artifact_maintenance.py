@@ -7,6 +7,7 @@ import os
 from pathlib import Path, PurePosixPath
 import shutil
 import sqlite3
+import stat
 import subprocess
 import time
 import zipfile
@@ -654,21 +655,35 @@ def measure(path):
     root=real_path(path)
     if not root.is_dir():raise FileNotFoundError('Task directory is missing: '+str(root))
     identity=root.stat()
-    def walk_error(error):
-        if not isinstance(error,FileNotFoundError):raise error
-    for current, dirs, names in os.walk(root, followlinks=False,onerror=walk_error):
-        for name in dirs:
-            try:real_path(Path(current)/name)
-            except FileNotFoundError:continue
-            if name == '.git':
-                raise ValueError('Nested Git worktree is protected')
-        for name in names:
-            try:size=real_path(Path(current)/name).stat().st_size
-            except FileNotFoundError:continue
-            total += size
-            count += 1
-            if total > POLICY['runBytes'] or count > POLICY['maximumFiles']:
-                raise ValueError('Task byte/file-count budget exceeded')
+    pending=[root];directories=[]
+    def inspect(info,name):
+        if stat.S_ISLNK(info.st_mode) or getattr(info,'st_file_attributes',0)&1024:
+            raise ValueError('Link/reparse point: '+str(name))
+    while pending:
+        directory=pending.pop()
+        try:
+            inspect(os.stat(directory,follow_symlinks=False),directory)
+            directories.append(directory)
+            with os.scandir(directory) as entries:
+                for entry in entries:
+                    # Fresh metadata also handles linker files removed after
+                    # enumeration; Windows DirEntry metadata may be cached.
+                    try:info=os.stat(entry.path,follow_symlinks=False)
+                    except FileNotFoundError:continue
+                    inspect(info,entry.path)
+                    if stat.S_ISDIR(info.st_mode):
+                        if entry.name=='.git':raise ValueError('Nested Git worktree is protected')
+                        pending.append(entry.path)
+                    else:
+                        total+=info.st_size;count+=1
+                        if total>POLICY['runBytes'] or count>POLICY['maximumFiles']:
+                            raise ValueError('Task byte/file-count budget exceeded')
+        except FileNotFoundError:continue
+    # Recheck visited directory names before accepting the count. A parent
+    # replaced by a junction during enumeration must invalidate the sample.
+    for directory in directories:
+        try:inspect(os.stat(directory,follow_symlinks=False),directory)
+        except FileNotFoundError:continue
     current=real_path(root).stat()
     if (current.st_dev,current.st_ino)!=(identity.st_dev,identity.st_ino):raise ValueError('Task directory identity changed')
     return total
@@ -714,7 +729,6 @@ def guarded_run(build, name, command, timeout=600):
         from artifact_budget import check
         while process.poll() is None:
             try:
-                measure(path)
                 result=check(build,run=path,planned=0,diagnostic=json.loads((path/'budget.json').read_text()).get('diagnostic',False))
                 if not result['allowed']:raise ValueError(','.join(result['reasons']))
                 if errors:raise ValueError(errors[0])

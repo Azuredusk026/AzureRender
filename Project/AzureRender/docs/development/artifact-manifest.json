@@ -50,6 +50,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-140934-storage-monitor-cost-e470a0",
+      "name": "前台空间监控开销",
+      "status": "ReadyLowOverheadMonitor",
+      "sourceBase": "794aad1",
+      "evidence": "docs/acceptance/recovery/storage-monitor-cost.md",
+      "testsPassed": 75,
+      "testsSkipped": 1,
+      "monitorCpuReductionFraction": 0.8181818181818181,
+      "runtimeProductsUnchanged": true,
+      "externalProjectStorageUsed": false
+    },
+    {
       "path": "runs/20261108-124916-main-depth-reuse-2703c1",
       "name": "主通道深度预填复用",
       "status": "IntegratedLocalCostImprovedFormalBudgetPending",

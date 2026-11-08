@@ -7,24 +7,82 @@ import time
 import unittest
 import sys
 import subprocess
+from contextlib import contextmanager
 from unittest.mock import patch
 
 import artifact_maintenance as maintenance
 
 
 class MaintenanceTests(unittest.TestCase):
+    def test_measure_bounds_filesystem_queries_for_nested_payload(self):
+        path=self.build/'runs'/'bounded-scan';path.mkdir()
+        for directory in range(10):
+            folder=path/str(directory);folder.mkdir()
+            for index in range(10):(folder/str(index)).write_bytes(b'abc')
+        with patch.object(os,'stat',wraps=os.stat) as observations:
+            measured=maintenance.measure(path)
+        self.assertEqual(measured,300)
+        self.assertLessEqual(observations.call_count,500,'Per-file ancestor queries consume the foreground monitoring budget')
+
     def test_measure_tolerates_a_file_removed_after_directory_enumeration(self):
         path=self.create(recovery=False);temporary=path/'tmp';temporary.mkdir();fleeting=temporary/'linker.tmp';fleeting.write_bytes(b'transient')
-        real_path=maintenance.real_path
-        def observed(candidate):
-            if Path(candidate)==fleeting and fleeting.exists():fleeting.unlink()
-            return real_path(candidate)
-        with patch.object(maintenance,'real_path',side_effect=observed):
+        scandir=os.scandir
+        @contextmanager
+        def observed(folder):
+            with scandir(folder) as entries:
+                captured=list(entries)
+                if Path(folder)==temporary and fleeting.exists():fleeting.unlink()
+                yield iter(captured)
+        with patch.object(os,'scandir',side_effect=observed):
             measured=maintenance.measure(path)
         self.assertFalse(fleeting.exists());self.assertGreaterEqual(measured,len(b'generated output'))
 
     def test_measure_rejects_a_missing_task_root(self):
         with self.assertRaises(FileNotFoundError):maintenance.measure(self.build/'runs'/'absent')
+
+    def test_measure_enforces_file_count_and_byte_limits(self):
+        path=self.build/'runs'/'quota-scan';path.mkdir()
+        for index in range(3):(path/str(index)).write_bytes(b'1234')
+        with patch.dict(maintenance.POLICY,maximumFiles=2):
+            with self.assertRaises(ValueError):maintenance.measure(path)
+        with patch.dict(maintenance.POLICY,runBytes=11):
+            with self.assertRaises(ValueError):maintenance.measure(path)
+        self.assertEqual(maintenance.measure(path),12)
+
+    def test_measure_rejects_nested_git_and_unreadable_directories(self):
+        path=self.build/'runs'/'protected-scan';path.mkdir();(path/'.git').mkdir()
+        with self.assertRaises(ValueError):maintenance.measure(path)
+        with patch.object(os,'scandir',side_effect=PermissionError('Unreadable task')):
+            with self.assertRaises(PermissionError):maintenance.measure(path)
+
+    def test_measure_rejects_directory_junctions(self):
+        path=self.create(recovery=False);outside=self.root/'measure-outside';outside.mkdir()
+        try:(path/'linked').symlink_to(outside,target_is_directory=True)
+        except OSError:
+            import _winapi
+            _winapi.CreateJunction(str(outside),str(path/'linked'))
+        with self.assertRaises(ValueError):maintenance.measure(path)
+        self.assertTrue(outside.exists())
+
+    def test_measure_rejects_an_ancestor_replaced_during_enumeration(self):
+        path=self.build/'runs'/'replaced-ancestor';path.mkdir()
+        branch=path/'branch';(branch/'nested').mkdir(parents=True)
+        outside=self.root/'foreign-tree';(outside/'nested').mkdir(parents=True)
+        (outside/'nested'/'payload').write_bytes(b'foreign')
+        scandir=os.scandir
+        @contextmanager
+        def observed(folder):
+            with scandir(folder) as entries:captured=list(entries)
+            if Path(folder)==branch:
+                branch.rename(path/'retired-branch')
+                try:branch.symlink_to(outside,target_is_directory=True)
+                except OSError:
+                    import _winapi
+                    _winapi.CreateJunction(str(outside),str(branch))
+            yield iter(captured)
+        with patch.object(os,'scandir',side_effect=observed):
+            with self.assertRaises(ValueError):maintenance.measure(path)
+        self.assertEqual((outside/'nested'/'payload').read_bytes(),b'foreign')
 
     def test_foreground_temporary_files_are_inside_the_task_budget(self):
         path=self.create(recovery=False)
