@@ -50,6 +50,15 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-090934-managed-temporary-storage-6b0786",
+      "name": "受管任务临时目录",
+      "status": "TaskLocalTemporaryStorage",
+      "sourceBase": "74b4dfc",
+      "evidence": "docs/acceptance/recovery/managed-temporary-storage.md",
+      "temporaryDirectory": "task/tmp",
+      "retentionDays": 1
+    },
+    {
       "path": "runs/20261108-084834-receiver-reciprocal-arithmetic-bfcfa0",
       "name": "接收运算精度核验",
       "status": "ArithmeticDifferencesAttributed",

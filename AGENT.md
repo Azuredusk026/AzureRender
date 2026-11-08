@@ -305,6 +305,9 @@ Markdown、规则文件和同类说明文以中文完整句子为主。英文用
 本机维护技能源位于 `tools/skills/azurerender-artifact-maintenance/`。
 会话开始至多执行一次 `artifact_maintenance.py status`。
 持续写入的前台程序使用 `artifact_maintenance.py run` 监控。
+该入口将子进程临时目录设置到任务内的 `tmp/`。
+临时文件计入任务预算，并随任务到期回收。
+工具的独立缓存及输出参数显式指向项目目录。
 纯产物维护执行工具检查和产物摘要核对。
 定时清理执行只读审计并保存候选。
 删除按当前会话的有效授权分批执行，每批至多十个目录。

@@ -1,6 +1,7 @@
 # AzureRender 工程
 
 开发产物使用[目录维护技能](tools/skills/azurerender-artifact-maintenance/SKILL.md)。
+[任务临时目录](docs/acceptance/recovery/managed-temporary-storage.md)随任务计入配额及每日回收，子进程沿用项目所在卷。
 按天回收、精简证据及累计预算见[产物规则](docs/development/artifact-retention.md)。
 历史模型的[每日维护](docs/acceptance/nr/daily-asset-copies.md)已接入技能入口，项目产物均保存在 D 卷。
 

@@ -678,7 +678,10 @@ def guarded_run(build, name, command, timeout=600):
         record.update(processPid=-1,generation=record.get('generation',0)+1);save(db,name,record)
     process=None;reader=None;errors=[];truncated=[False];start=time.monotonic();reason=None
     try:
-        kwargs=dict(cwd=Path(build).parent,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+        temporary=real_path(path/'tmp');temporary.mkdir(exist_ok=True)
+        environment=os.environ.copy()
+        environment.update({key:str(temporary) for key in ('TEMP','TMP','TMPDIR','SQLITE_TMPDIR')})
+        kwargs=dict(cwd=Path(build).parent,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env=environment)
         if os.name=='nt':kwargs['creationflags']=subprocess.CREATE_NO_WINDOW|subprocess.CREATE_NEW_PROCESS_GROUP
         else:kwargs['start_new_session']=True
         process=subprocess.Popen(command,**kwargs)
@@ -729,7 +732,8 @@ def guarded_run(build, name, command, timeout=600):
         with database(build,True) as db:
             current=rows(db)[name];current['processPid']=None;save(db,name,current)
     report=dict(status='budget-stopped' if reason else 'exited',exitCode=process.returncode,reason=reason,
-                seconds=time.monotonic()-start,logTruncated=truncated[0],samplingSeconds=1,command=command)
+                seconds=time.monotonic()-start,logTruncated=truncated[0],samplingSeconds=1,command=command,
+                temporaryDirectory=str(temporary))
     write_json(metadata(build)/'process-receipts'/(name+'.json'),report)
     return report
 

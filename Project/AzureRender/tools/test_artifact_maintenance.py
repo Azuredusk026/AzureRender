@@ -13,6 +13,48 @@ import artifact_maintenance as maintenance
 
 
 class MaintenanceTests(unittest.TestCase):
+    def test_foreground_temporary_files_are_inside_the_task_budget(self):
+        path=self.create(recovery=False)
+        outside=self.root/'inherited-temp';outside.mkdir()
+        keys=['TEMP','TMP','TMPDIR','SQLITE_TMPDIR']
+        command=[sys.executable,'-c',
+                 'import tempfile,pathlib,json,os; '
+                 'p=pathlib.Path(tempfile.mkdtemp())/"payload.bin"; '
+                 'p.write_bytes(b"temporary-payload"); '
+                 'print(json.dumps(dict(path=str(p),environment={k:os.environ.get(k) for k in ["TEMP","TMP","TMPDIR","SQLITE_TMPDIR"]})))']
+        with patch.dict(os.environ,{key:str(outside) for key in keys}):
+            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
+            self.assertTrue(all(os.environ[key]==str(outside) for key in keys))
+        self.assertEqual(result['exitCode'],0)
+        actual=json.loads((path/'process.log').read_text())
+        temporary=path/'tmp'
+        self.assertTrue(Path(actual['path']).is_relative_to(temporary))
+        self.assertEqual(set(actual['environment'].values()),{str(temporary.resolve())})
+        self.assertEqual(Path(actual['path']).read_bytes(),b'temporary-payload')
+        self.assertGreaterEqual(maintenance.measure(path),len(b'temporary-payload'))
+        self.assertEqual(list(outside.iterdir()),[])
+
+    def test_foreground_temporary_payload_cannot_escape_the_byte_budget(self):
+        path=self.create(recovery=False)
+        command=[sys.executable,'-c','import tempfile,pathlib; '
+                 'p=pathlib.Path(tempfile.mkdtemp())/"payload.bin"; '
+                 'p.write_bytes(bytes(131072))']
+        with patch.dict(maintenance.POLICY,runBytes=65536):
+            result=maintenance.guarded_run(self.build,path.name,command,timeout=5)
+        self.assertEqual(result['status'],'budget-stopped')
+        self.assertIn('byte/file-count',result['reason'])
+        with maintenance.database(self.build) as db:
+            self.assertIsNone(maintenance.rows(db)[path.name]['processPid'])
+
+    def test_invalid_temporary_directory_prevents_launch_and_releases_process_claim(self):
+        path=self.create(recovery=False);(path/'tmp').write_bytes(b'file')
+        with patch.object(maintenance.subprocess,'Popen') as launch:
+            with self.assertRaises(OSError):
+                maintenance.guarded_run(self.build,path.name,[sys.executable,'-c','pass'],timeout=5)
+        launch.assert_not_called()
+        with maintenance.database(self.build) as db:
+            self.assertIsNone(maintenance.rows(db)[path.name]['processPid'])
+
     def test_git_tracking_protection_uses_index_paths_with_one_root_resolution(self):
         subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
         folder=self.root/'sources';folder.mkdir()

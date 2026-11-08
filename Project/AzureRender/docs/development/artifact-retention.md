@@ -75,6 +75,10 @@ python tools/artifact_maintenance.py run --run task-directory-name --timeout 600
 ```
 
 程序输出参数须指向该任务目录。
+子进程临时文件统一放入该任务的 `tmp/`。
+运行器设置 `TEMP`、`TMP`、`TMPDIR` 及 `SQLITE_TMPDIR`。
+临时文件计入任务配额，并按任务保留期回收。
+独立缓存配置通过工具参数指定到任务目录。
 监控每秒核对占用、卷余量及运行时限。
 超限只停止本次启动的子进程树，结果保持可检查。
 采样监控可能有一个周期的超量，文件系统硬配额独立配置。

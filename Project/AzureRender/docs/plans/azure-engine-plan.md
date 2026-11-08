@@ -105,6 +105,7 @@ CPU 与 GPU 成本下降为当前首要开发目标。
 接手核验及空间前置条件见[恢复记录](../acceptance/nr/resume-storage-performance.md)。
 产物门禁按[空间计划](2026-11-06-storage-budget.md)执行。
 [目录维护技能](../acceptance/recovery/artifact-maintenance-skill.md)已部署，按天回收普通生成产物。
+[任务临时目录](../acceptance/recovery/managed-temporary-storage.md)随任务计入配额及每日回收，子进程沿用项目所在卷。
 冗余缓存首轮实际释放约 10.00 GiB，项目数据与必要证据保持在项目目录。
 本轮自动清理与性能复测见[执行记录](../acceptance/nr/autonomous-cleanup-performance.md)。
 三个过期任务的[归档维护](../acceptance/nr/archived-p0-maintenance.md)完成。

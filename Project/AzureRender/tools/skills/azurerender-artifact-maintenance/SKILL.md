@@ -68,6 +68,10 @@ python tools/artifact_maintenance.py run --run task-directory-name --timeout 600
 监控每秒核对任务、卷余量及运行时限。
 它提供采样保护，文件系统硬配额独立配置。
 普通写入边界通过 `artifact_budget.py` 追加预留。
+子进程的临时目录统一为任务目录下的 `tmp/`。
+`TEMP`、`TMP`、`TMPDIR` 及 `SQLITE_TMPDIR` 均采用该位置。
+临时文件计入任务配额，并按任务保留期回收。
+使用独立缓存配置的工具须将其缓存参数指向任务目录。
 
 ```powershell
 python tools/artifact_cleanup.py --finish build/runs/task-directory-name
