@@ -57,6 +57,19 @@
   },
   "milestones": [
     {
+      "path": "runs/20261109-045502-surface-shadow-reuse-535624",
+      "name": "同帧表面阴影复用",
+      "status": "NoNetGainCandidateIsolated",
+      "sourceBase": "64e7cc3",
+      "evidence": "docs/acceptance/nr/surface-shadow-reuse.md",
+      "checksPassed": 42,
+      "canonicalNativeProcesses": 2,
+      "frameCostProcesses": 5,
+      "reclaimedFiles": 1233,
+      "reclaimedLogicalBytes": 650794034,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261109-044234-shadow-range-index-71ce25",
       "name": "阴影范围索引",
       "status": "LocalGatePassedCandidateIsolated",
