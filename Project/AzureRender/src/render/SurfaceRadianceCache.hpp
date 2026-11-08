@@ -23,12 +23,12 @@ public:
         std::uint64_t producerStores=0,consumerVisits=0,eligibleRequests=0,pixelMatches=0,quadMatches=0,frames=0;
         bool overflow=false;
     };
-    struct SelectionStatistics {std::uint64_t frames=0,fastFrames=0,fullFrames=0;bool lastFallback=true;};
+    struct SelectionStatistics {std::uint64_t frames=0,fastFrames=0,fullFrames=0;std::uint64_t fastDraws=0,fullDraws=0,lastFastDraws=0,lastFullDraws=0,fastWitnesses=0,fullWitnesses=0,lastFastWitnesses=0,lastFullWitnesses=0;std::uint32_t lastGlobalReasons=0;bool lastFallback=true;};
     static constexpr unsigned kAttachments=4;
     static constexpr std::uint64_t kMaximumBytes=512ULL*1024*1024;
     struct Texture {rhi::GpuImage image{};VkImageView view=VK_NULL_HANDLE;};
     static bool supported(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes);
-    SurfaceRadianceCache(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes,bool diagnostics=false,bool selection=false);
+    SurfaceRadianceCache(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes,bool diagnostics=false,bool selection=false,unsigned drawCapacity=0);
     ~SurfaceRadianceCache();
     SurfaceRadianceCache(const SurfaceRadianceCache&)=delete;
     SurfaceRadianceCache& operator=(const SurfaceRadianceCache&)=delete;
@@ -43,9 +43,10 @@ public:
     void recordStatisticsReady(rhi::ICommandRecorder&,unsigned slot);
     Statistics statistics() const noexcept{return statistics_;}
     bool selectionEnabled() const noexcept{return !selectionFrames_.empty();}
-    std::uint64_t selectionBytes() const noexcept{return selectionFrames_.size()*4ULL;}
+    std::uint64_t selectionBytes() const noexcept{return selectionFrames_.size()*4ULL*(drawCapacity_?drawCapacity_+6:1);}
     const rhi::GpuBuffer& selectionBuffer(unsigned slot)const{return selectionFrames_.at(slot).buffer;}
-    void beginSelectionFrame(unsigned slot,bool permitted=false);
+    void beginSelectionFrame(unsigned slot,bool permitted=false,unsigned drawCount=0);
+    unsigned selectionDrawCapacity()const noexcept{return drawCapacity_;}
     void recordSelectionReady(rhi::ICommandRecorder&,unsigned slot);
     SelectionStatistics selectionStatistics()const noexcept{return selectionStatistics_;}
 
@@ -62,5 +63,6 @@ private:
     Statistics statistics_{};
     std::vector<StatisticsFrame> selectionFrames_;
     SelectionStatistics selectionStatistics_{};
+    unsigned drawCapacity_=0;
 };
 }

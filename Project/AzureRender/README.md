@@ -36,7 +36,8 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [消费计数](docs/acceptance/nr/radiance-consumption-counters.md)提供实际访问与整组接受诊断，计数及复用选项默认关闭。
 [同帧资格核验](docs/acceptance/nr/radiance-validation-path.md)通过严格四帧及安全回退检查。
 [独立深度重放](docs/acceptance/nr/radiance-depth-replay.md)通过精度与严格四帧检查。
-原生轻量激活继续验收，实验入口默认关闭。
+[逐绘制资格](docs/acceptance/nr/radiance-draw-selection.md)已在原生采集中启用轻量绘制。
+严格像素兼容继续验收，实验入口默认关闭。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。
@@ -589,10 +590,12 @@ GUI 发布产生项目命名的 exe 与完整游戏目录。
 ## 构建编辑器
 
 Windows 工具链为 MSVC、CMake、Ninja、Vulkan SDK 和 vcpkg。本机验收使用 MSVC 14.44 与 Vulkan SDK 1.4.350。
+SDK 须包含 `glslc` 和 `spirv-val`。
+GLSL 构建逐模块执行 Vulkan 1.3 布局校验。
 
 ```powershell
-$env:VULKAN_SDK = "C:/VulkanSDK/1.4.350.0"
-$env:VCPKG_ROOT = "C:/path/to/vcpkg"
+$env:VULKAN_SDK = "D:/Tools/VulkanSDK/1.4.350.0"
+$env:VCPKG_ROOT = "D:/Tools/vcpkg"
 ./tools/msvc_env.bat cmake --preset msvc-release
 ./tools/msvc_env.bat cmake --build --preset msvc-release
 ./build/ninja-msvc-release/AzureRender.exe --editor-project assets_public/exploration/project.azureproject

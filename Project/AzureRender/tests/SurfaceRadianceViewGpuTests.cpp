@@ -9,7 +9,9 @@
 using namespace azurerender;
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 int main(int argc,char** argv)try{
-    require(argc==3,"Expected shaders and output directory");
+    const bool selectionOnly=argc==4&&std::string(argv[3])=="--selection-only";
+    require(argc==3||selectionOnly,"Expected shaders, output directory and optional --selection-only");
+    require(!selectionOnly||AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION,"Selection smoke requires its experimental build option");
     std::unique_ptr<test::VulkanComputeFixture> owner;bool capable=true;
     try{owner=std::make_unique<test::VulkanComputeFixture>(true,false,false,true,true,(AZURE_TEST_SURFACE_RADIANCE_DIAGNOSTICS||AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION)!=0);}
     catch(const test::VulkanFeatureUnavailable&){capable=false;owner=std::make_unique<test::VulkanComputeFixture>(true);}
@@ -54,6 +56,7 @@ int main(int argc,char** argv)try{
         base.fragmentPrimitiveIdentity=base.fragmentQuadControl=capable&&requested;
         RenderViewService service(base,[&](const std::string&){auto value=std::make_unique<CharacterSceneRenderer>();renderer=value.get();return value;},[&]{vkDeviceWaitIdle(host.device);});
         for(unsigned lighting=0;lighting<(AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION?3U:2U);++lighting){
+        if(selectionOnly&&lighting!=2)continue;
         RenderViewDescriptor descriptor;descriptor.rendererId="character";descriptor.extent={48,48};
         descriptor.settings.sceneLightingEnabled=true;
         descriptor.settings.faceSdfFeature=descriptor.settings.showcasePlatformFeature=false;
@@ -64,7 +67,7 @@ int main(int argc,char** argv)try{
         scene::SceneNodeDesc node;node.id="surface";node.resourceId="surface";descriptor.scene.nodes.push_back(node);
         const auto view=service.create(descriptor);
         const unsigned isolations[]={0,0,0,0,1,22,0,0};
-        for(unsigned phase=0;phase<8;++phase){
+        for(unsigned phase=0;phase<(selectionOnly?4U:8U);++phase){
             if(phase==7)service.resize(view,{64,40});
             ++serial;base.currentFrame=serial%2;SceneFrameData frame;frame.timeSeconds=phase/60.0;
             frame.qaIsolationMode=isolations[phase];frame.qaEffectMode=phase==6?1:0;frame.qaEffectEnabled=phase!=6;

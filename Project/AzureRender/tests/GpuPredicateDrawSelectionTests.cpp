@@ -7,6 +7,7 @@ void require(bool value,const char* message){if(!value)throw std::runtime_error(
 template<class F>void reject(F action){bool failed=false;try{action();}catch(const std::exception&){failed=true;}require(failed,"Invalid draw selection accepted");}
 }
 int main()try{
+ GpuPredicateSpan defaults;require(defaults.firstWord==0&&defaults.strideWords==0&&defaults.rejectMask==UINT32_MAX,"Shared predicate layout defaults preserve all rejection bits");
  rhi::NullRhi backend;std::vector<char> code(20);code[0]=3;code[1]=2;code[2]=35;code[3]=7;
  auto source=backend.allocator().createBuffer(16*20,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
  auto predicate=backend.allocator().createBuffer(4,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
@@ -31,6 +32,14 @@ int main()try{
   reject([&]{owner.prepare(0,owner.output(0),predicate,1,true);});
   reject([&]{owner.prepare(0,source,owner.output(1),1,true);});
   reject([&]{owner.prepare(0,source,source,1,true);});
+  reject([&]{owner.prepare(0,source,predicate,16,true,GpuPredicateSpan{4,1,1});});
+  reject([&]{owner.prepare(0,source,predicate,1,true,GpuPredicateSpan{0,1,1});});
+  reject([&]{owner.prepare(0,source,predicate,1,true,GpuPredicateSpan{0,0,0});});
+  auto ranged=backend.allocator().createBuffer(4*(4+16*2),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+  owner.record(commands,owner.prepare(0,source,ranged,16,true,GpuPredicateSpan{4,2,1}));
+  reject([&]{owner.prepare(0,source,ranged,16,true,GpuPredicateSpan{UINT32_MAX,UINT32_MAX,1});});
+  backend.allocator().destroyBuffer(ranged);
+  reject([&]{owner.prepare(0,source,predicate,1,true,GpuPredicateSpan{0,0,1,1});});
   auto empty=owner.prepare(0,{}, {},0);owner.record(commands,empty);require(empty.count==0,"Empty selection is a consumed no-op");
  }
  require(backend.allocator().statistics().liveBuffers==before,"Selection outputs retire");

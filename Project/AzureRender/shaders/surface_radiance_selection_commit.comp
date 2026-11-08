@@ -1,4 +1,22 @@
 #version 450
+#if defined(AZURE_SURFACE_RADIANCE_DRAW_SELECTION)
+layout(local_size_x=128) in;
+layout(std430,binding=43) buffer Predicate {uint words[];} predicate;
+shared uint fastCount,fullCount,fastWitnesses,fullWitnesses;
+void main(){
+    uint lane=gl_LocalInvocationIndex;
+    if(lane==0){fastCount=0;fullCount=0;fastWitnesses=0;fullWitnesses=0;}barrier();
+    uint fast=0,full=0,fastSamples=0,fullSamples=0;bool rejected=(predicate.words[0]&1u)!=0u;
+    for(uint i=lane;i<predicate.words[1];i+=128u){
+        uint flags=predicate.words[6+i];if((flags&2u)==0u)continue;
+        if(rejected||(flags&1u)!=0u){++full;fullSamples+=flags>>2u;}else{++fast;fastSamples+=flags>>2u;}
+    }
+    atomicAdd(fastCount,fast);atomicAdd(fullCount,full);atomicAdd(fastWitnesses,fastSamples);atomicAdd(fullWitnesses,fullSamples);barrier();
+    if(lane==0){predicate.words[2]=fastCount;predicate.words[3]=fullCount;predicate.words[4]=fastWitnesses;predicate.words[5]=fullWitnesses;
+        predicate.words[0]=(predicate.words[0]&~3u)|2u|((rejected||fastCount==0u)?1u:0u);}
+}
+#else
 layout(local_size_x=1) in;
 layout(std430,binding=43) buffer Predicate {uint flags;} predicate;
 void main(){atomicOr(predicate.flags,2u);}
+#endif

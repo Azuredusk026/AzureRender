@@ -118,8 +118,25 @@ struct Resources{
    });
    host.allocator.invalidate(copyRead,0,bytes);const auto* actual=static_cast<const std::uint32_t*>(copyRead.mapped);
    for(unsigned i=0;i<bytes/4;++i){const auto expected=i%(flow?16:8)<8?data[i]:0x3f800000U;require(actual[i]==expected,"Depth replay must preserve normal D32 bits and reject unsafe values");}
-   const auto& flag=source->selectionBuffer(0);host.allocator.invalidate(flag,0,4);std::uint32_t value=0;std::memcpy(&value,flag.mapped,4);require(value==(flow?1U:0U),"Unsafe depth must request complete shading");
+   const auto& flag=source->selectionBuffer(0);host.allocator.invalidate(flag,0,4);std::uint32_t value=0;std::memcpy(&value,flag.mapped,4);require(value==(flow?9U:0U),"Unsafe depth must request complete shading");
   }
+ }
+ void verifyDrawReduction(const std::string& shaders){
+  SurfaceRadianceCache draws(rhi,extent,1,SurfaceRadianceCache::kMaximumBytes,false,true,8);
+  const auto module=rhi.createShaderModule(readBinaryFile(shaders+"/surface_radiance_draw_commit.comp.spv"));const auto pipeline=rhi.createComputePipeline({module,layout});
+  auto cleanup=std::unique_ptr<void,std::function<void(void*)>>(&host,[&](void*){rhi.destroyPipeline(pipeline);rhi.destroyShaderModule(module);});
+  const auto& buffer=draws.selectionBuffer(0);rhi.writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});
+  for(unsigned flow=0;flow<2;++flow){
+   draws.beginSelectionFrame(0,true,8);auto* words=static_cast<std::uint32_t*>(buffer.mapped);words[0]=flow?9U:0U;
+   const std::array<std::uint32_t,8> flags{22,31,0,46,55,0,70,79};std::memcpy(words+6,flags.data(),32);host.allocator.flush(buffer,0,buffer.size);
+   host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
+    commands.bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});
+    commands.bindComputePipeline(pipeline);commands.bindComputeDescriptorSet(layout,set);commands.dispatch(1,1,1);draws.recordSelectionReady(commands,0);
+   });
+   draws.beginSelectionFrame(0);const auto stats=draws.selectionStatistics();
+   require(stats.lastFastDraws==(flow?0U:3U)&&stats.lastFullDraws==(flow?6U:3U)&&stats.lastFallback==bool(flow)&&stats.lastGlobalReasons==(flow?8U:0U)&&stats.lastFastWitnesses==(flow?0U:33U)&&stats.lastFullWitnesses==(flow?72U:39U),"GPU reduction preserves mixed and global fallback counts");
+  }
+  const auto& original=source->selectionBuffer(0);rhi.writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,original.buffer,original.size});
  }
  void bind(unsigned slot){for(unsigned kind=0;kind<4;++kind)rhi.writeDescriptorImage({set,38+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
   source->texture(slot,kind).view,source->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});}
@@ -151,8 +168,8 @@ int main(int argc,char** argv)try{
   }
  }
 #if AZURE_TEST_SURFACE_RADIANCE_FRAME_SELECTION
- {Resources r(graphics,false,true);r.initialize(argv[1],false);r.verifyDepthCopy(argv[1]);}
- std::cout<<"D32 depth replay bit precision and unsafe-value fallback passed on "<<graphics.properties.deviceName<<'\n';
+ {Resources r(graphics,false,true);r.initialize(argv[1],false);r.verifyDepthCopy(argv[1]);r.verifyDrawReduction(argv[1]);}
+ std::cout<<"D32 precision, unsafe fallback and per-draw GPU retirement passed on "<<graphics.properties.deviceName<<'\n';
 #endif
  require(graphics.errors==0,"Masked integer attachment blending must satisfy Vulkan");
  require(!graphics.allocator.statistics().liveBuffers&&!graphics.allocator.statistics().liveImages,"Masked blending must retire resources");

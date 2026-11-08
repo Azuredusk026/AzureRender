@@ -1737,7 +1737,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     recordConservativeOcclusion(context,*instanceSnapshot_);
     if(radianceSelectionActive(context)){
         const auto& predicate=surfaceRadiance_->selectionBuffer(static_cast<unsigned>(context.currentFrame));
-        context.commands->bufferBarrier({predicate.buffer,0,4,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+        context.commands->bufferBarrier({predicate.buffer,0,predicate.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
             VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});
         recordRadianceDepthCopy(*context.commands,context);
         context.commands->beginRenderPass(radianceValidationDescription(context));
@@ -1846,6 +1846,11 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
     json << "  \"surfaceRadianceSelection\": {\"enabled\": " << (surfaceRadiance_&&surfaceRadiance_->selectionEnabled()?"true":"false")
          << ", \"prepared\": " << (conservativeFrames_[currentFrame_].selectionTicket?"true":"false")
          << ", \"frames\": " << selected.frames << ", \"fastFrames\": " << selected.fastFrames << ", \"fullFrames\": " << selected.fullFrames
+         << ", \"fastDraws\": " << selected.fastDraws << ", \"fullDraws\": " << selected.fullDraws
+         << ", \"lastFastDraws\": " << selected.lastFastDraws << ", \"lastFullDraws\": " << selected.lastFullDraws
+         << ", \"fastWitnesses\": " << selected.fastWitnesses << ", \"fullWitnesses\": " << selected.fullWitnesses
+         << ", \"lastFastWitnesses\": " << selected.lastFastWitnesses << ", \"lastFullWitnesses\": " << selected.lastFullWitnesses
+         << ", \"lastGlobalReasons\": " << selected.lastGlobalReasons
          << ", \"lastFallback\": " << (selected.lastFallback?"true":"false") << ", \"fallback\": " << std::quoted(radianceSelectionFallback_) << "},\n";
     const auto statistics=surfaceRadiance_?surfaceRadiance_->statistics():SurfaceRadianceCache::Statistics{};
     json << "  \"surfaceRadianceStatistics\": {\"enabled\": " << (surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()?"true":"false")
@@ -2909,7 +2914,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     outlineMaskPass_=rhi_->createRenderPass(maskPass);
     if(surfaceRadianceCapable_&&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
         &&SurfaceRadianceCache::supported(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight)))
-        try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),SurfaceRadianceCache::kMaximumBytes,kSurfaceRadianceDiagnostics,kSurfaceRadianceFrameSelection);}
+        try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),SurfaceRadianceCache::kMaximumBytes,kSurfaceRadianceDiagnostics,kSurfaceRadianceFrameSelection,kSurfaceRadianceFrameSelection?65536U:0U);}
         catch(const std::exception& error){RuntimeDiagnostics::instance().info("render",std::string("Surface radiance allocation fallback: ")+error.what());}
     rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
         {reflectionSurfaceFormat_,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
@@ -3172,7 +3177,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
             morph.gizmoTransform=primitiveGizmoTransform(snapshot.gizmo,&primitive-mesh.primitives.data());
             VkPipeline boundPrefill=VK_NULL_HANDLE;
             forEachPrimitiveOpacityRun(snapshot.nodeWorldOpacities,primitive.nodeIndex,first,count,[&](const PrimitiveOpacityRun& run) {
-                if (run.opacity == 0) return;
+                if (run.opacity == 0 || (validation&&run.opacity!=1.F)) return;
                 if(prefill){
                     const auto facing=m.doubleSided?2:mirrored?1:0;
                     const auto selected=rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT&&fullyCoveredPrefill(m,run.opacity)
@@ -3192,6 +3197,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 if(validation){
                     const auto pi=static_cast<std::size_t>(&primitive-mesh.primitives.data());
                     for(std::uint32_t i=0;i<run.instanceCount;++i){const auto slot=snapshot.buffers.conservativeSlots.at(snapshot.buffers.conservativeOffsets.at(run.firstInstance+i)+pi);
+                        commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,136,&slot,4);
                         commands.drawIndexedIndirect(snapshot.buffers.conservativeIndirect,VkDeviceSize(slot)*20,1,20);}
                 }else commands.drawIndexed(primitive.indexCount,primitive.firstIndex,run.instanceCount,
                     materialOriginFirstInstance(m,&snapshot,run.firstInstance,run.instanceCount));
@@ -3391,7 +3397,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             rhi_->writeDescriptorImage({set,38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,surfaceRadiance_->texture(frame,kind).view,surfaceRadiance_->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
         if(surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(frame);
             rhi_->writeDescriptorBuffer({set,42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});}
-        if(surfaceRadiance_->selectionEnabled()){const auto& buffer=surfaceRadiance_->selectionBuffer(frame);rhi_->writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,4});}
+        if(surfaceRadiance_->selectionEnabled()){const auto& buffer=surfaceRadiance_->selectionBuffer(frame);rhi_->writeDescriptorBuffer({set,43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});}
     };
     const auto writeSceneImages=[this](VkDescriptorSet set){
         rhi_->writeDescriptorImage({set,37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,reflectionFallbackView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});

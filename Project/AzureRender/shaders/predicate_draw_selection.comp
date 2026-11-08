@@ -2,13 +2,16 @@
 layout(local_size_x=64) in;
 struct Draw {uint indexCount;uint instanceCount;uint firstIndex;int vertexOffset;uint firstInstance;};
 layout(std430,binding=0) readonly buffer Source {Draw values[];} source;
-layout(std430,binding=1) readonly buffer Predicate {uint fallback;} predicate;
+layout(std430,binding=1) readonly buffer Predicate {uint words[];} predicate;
 layout(std430,binding=2) writeonly buffer Output {Draw values[];} selected;
-layout(push_constant) uniform Selection {uint count;uint capacity;uint permitted;} selection;
+layout(push_constant) uniform Selection {uint count;uint capacity;uint permitted;uint firstWord;uint strideWords;uint rejectMask;uint requiredMask;} selection;
 void main(){
     uint index=gl_GlobalInvocationID.x;if(index>=selection.count)return;
     Draw full=source.values[index],fast=full;
-    if(selection.permitted!=0u&&predicate.fallback==0u)full.instanceCount=0u;
+    uint localFlags=predicate.words[selection.firstWord+index*selection.strideWords];
+    uint rejected=(predicate.words[0]|localFlags)&selection.rejectMask;
+    bool qualified=(localFlags&selection.requiredMask)==selection.requiredMask;
+    if(selection.permitted!=0u&&qualified&&rejected==0u)full.instanceCount=0u;
     else fast.instanceCount=0u;
     selected.values[index]=full;selected.values[selection.capacity+index]=fast;
 }

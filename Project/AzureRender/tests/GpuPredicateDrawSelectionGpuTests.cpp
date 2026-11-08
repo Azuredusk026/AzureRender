@@ -13,7 +13,7 @@ int main(int argc,char** argv)try{
  {
   GpuPredicateDrawSelection owner(*host.backend,capacity,2,readBinaryFile(argv[1]));
   auto source=host.allocator.createBuffer(count*20,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
-  auto predicate=host.allocator.createBuffer(4,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT|VK_BUFFER_USAGE_TRANSFER_DST_BIT,false);
+  auto predicate=host.allocator.createBuffer((4+count*2)*4,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT|VK_BUFFER_USAGE_TRANSFER_DST_BIT,false);
   auto readback=host.allocator.createBuffer(capacity*40,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
   auto cleanup=std::unique_ptr<void,std::function<void(void*)>>(&host,[&](void*){host.allocator.destroyBuffer(source);host.allocator.destroyBuffer(predicate);host.allocator.destroyBuffer(readback);});
   std::array<VkDrawIndexedIndirectCommand,count> commands{};
@@ -41,8 +41,31 @@ int main(int argc,char** argv)try{
     require(std::memcmp(full+i,&expectedFull,20)==0&&std::memcmp(fast+i,&expectedFast,20)==0,"GPU selection changed geometry, order or fallback policy");
    }
   }
+  for(unsigned flow=0;flow<6;++flow){
+   const unsigned stride=1+flow%2,requiredMask=flow%2?2:0;const bool permitted=flow!=4;const std::uint32_t global=flow==2?1U:flow==3?2U:flow==5?UINT32_MAX:0U;
+   std::vector<std::uint32_t> flags(4+count*2,UINT32_MAX);flags[0]=global;
+   for(unsigned i=0;i<count;++i)flags[4+i*stride]=flow==1||flow==4?2U:i%3==0?0U:i%3==1?2U:3U;
+   const auto ticket=owner.prepare(flow%2,source,predicate,count,permitted,GpuPredicateSpan{4,stride,1,requiredMask});
+   host.submit([&](rhi::ICommandRecorder& recorder,VkCommandBuffer raw){
+    recorder.bufferBarrier({source.buffer,0,source.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    recorder.bufferBarrier({predicate.buffer,0,predicate.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_TRANSFER_WRITE_BIT});
+    vkCmdUpdateBuffer(raw,predicate.buffer,0,flags.size()*4,flags.data());
+    recorder.bufferBarrier({predicate.buffer,0,predicate.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+    owner.record(recorder,ticket);const auto& output=owner.output(ticket.slot);
+    recorder.bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_TRANSFER_READ_BIT});
+    const VkBufferCopy copy{0,0,output.size};vkCmdCopyBuffer(raw,output.buffer,readback.buffer,1,&copy);
+    recorder.bufferBarrier({readback.buffer,0,readback.size,VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_HOST_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_HOST_READ_BIT});
+   });
+   host.allocator.invalidate(readback,0,readback.size);const auto* full=static_cast<const VkDrawIndexedIndirectCommand*>(readback.mapped);
+   const auto* fast=reinterpret_cast<const VkDrawIndexedIndirectCommand*>(static_cast<const char*>(readback.mapped)+owner.fastOffset());
+   for(unsigned i=0;i<count;++i){auto expectedFull=commands[i],expectedFast=commands[i];
+    if(permitted&&((global|flags[4+i*stride])&1U)==0&&(flags[4+i*stride]&requiredMask)==requiredMask)expectedFull.instanceCount=0;else expectedFast.instanceCount=0;
+    require(std::memcmp(full+i,&expectedFull,20)==0&&std::memcmp(fast+i,&expectedFast,20)==0,"One rejected draw must preserve unrelated fast commands");
+   }
+  }
+
  }
  require(host.errors.load()==0,"Selection synchronization validation failed");
  require(!host.allocator.statistics().liveBuffers&&!host.allocator.statistics().liveImages,"Selection resources leaked");
- std::cout<<"GPU predicate selection: device="<<host.properties.deviceName<<" cases=5 commands=655 regions=2 validationErrors=0 liveBuffers=0 liveImages=0\n";
+ std::cout<<"GPU predicate selection: device="<<host.properties.deviceName<<" sharedCases=5 rangedCases=6 commands=1441 regions=2 validationErrors=0 liveBuffers=0 liveImages=0\n";
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}

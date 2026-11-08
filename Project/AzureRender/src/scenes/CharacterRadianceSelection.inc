@@ -7,12 +7,12 @@ void CharacterSceneRenderer::prepareRadianceSelection(){
     if(!surfaceRadiance_||!surfaceRadiance_->selectionEnabled())return;
     const bool permitted=radianceValidationPass_&&frame.ticket&&qaIsolationMode_==0&&qaEffectMode_==0
         &&screenSpaceReflectionActive(renderSettings_->screenSpaceReflection,renderSettings_->sceneLightingEnabled,qaIsolationMode_,true);
-    surfaceRadiance_->beginSelectionFrame(static_cast<unsigned>(currentFrame_),permitted);
+    surfaceRadiance_->beginSelectionFrame(static_cast<unsigned>(currentFrame_),permitted,permitted?frame.ticket->count:0);
     if(!permitted){radianceSelectionFallback_="view-or-snapshot-policy";return;}
     try{
         if(!frame.selection||frame.selection->fastOffset()!=VkDeviceSize(frame.capacity)*20)
             frame.selection=std::make_unique<GpuPredicateDrawSelection>(*rhi_,frame.capacity,1,readBinaryFile(shaderDirectory_+"/predicate_draw_selection.comp.spv"));
-        frame.selectionTicket=frame.selection->prepare(0,frame.commands->output(0),surfaceRadiance_->selectionBuffer(static_cast<unsigned>(currentFrame_)),frame.ticket->count,true);
+        frame.selectionTicket=frame.selection->prepare(0,frame.commands->output(0),surfaceRadiance_->selectionBuffer(static_cast<unsigned>(currentFrame_)),frame.ticket->count,true,GpuPredicateSpan{6,1,1,2});
         radianceSelectionFallback_.clear();
     }catch(const std::exception& error){radianceSelectionFallback_=error.what();
         RuntimeDiagnostics::instance().print("render","Radiance selection fallback: "+radianceSelectionFallback_);}
@@ -25,12 +25,12 @@ void CharacterSceneRenderer::recordRadianceSelection(rhi::ICommandRecorder& comm
     if(!radianceSelectionActive(context))return;
     const auto& predicate=surfaceRadiance_->selectionBuffer(static_cast<unsigned>(context.currentFrame));
     const auto& source=frame.commands->output(0);
-    commands.bufferBarrier({predicate.buffer,0,4,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+    commands.bufferBarrier({predicate.buffer,0,predicate.size,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
         VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     commands.bufferBarrier({source.buffer,0,source.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
         VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     frame.selection->record(commands,*frame.selectionTicket);
-    commands.bufferBarrier({predicate.buffer,0,4,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+    commands.bufferBarrier({predicate.buffer,0,predicate.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
         VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_SHADER_WRITE_BIT});
     commands.bindComputePipeline(radianceCommitPipeline_);
     commands.bindComputeDescriptorSet(pipelineLayout_,descriptorSets_.at(bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()));

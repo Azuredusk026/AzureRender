@@ -57,6 +57,22 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-234340-radiance-draw-selection-744d65",
+      "name": "逐绘制照明资格",
+      "status": "MechanismValidatedNativePrecisionPendingDefaultDisabled",
+      "sourceBase": "569a1b6",
+      "evidence": "docs/acceptance/nr/radiance-draw-selection.md",
+      "checksPassed": 33,
+      "checksSkipped": 2,
+      "pairedViewFlowsPassed": 2,
+      "finalTargetedViewFlowsPassed": 2,
+      "nativeLightweightActivationObserved": true,
+      "nativeFourFramesExact": false,
+      "performanceTimingRuns": 0,
+      "reclaimedFiles": 176,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-231330-radiance-depth-replay-626cbb",
       "name": "照明复用深度重放",
       "status": "MechanismValidatedNativeFullFallbackDefaultDisabled",

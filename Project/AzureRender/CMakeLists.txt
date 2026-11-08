@@ -114,6 +114,8 @@ endif()
 find_package(RmlUi CONFIG REQUIRED)
 find_path(MINIAUDIO_INCLUDE_DIR miniaudio.h REQUIRED)
 find_package(Vulkan REQUIRED COMPONENTS glslc)
+find_program(AZURE_SPIRV_VAL_EXECUTABLE NAMES spirv-val spirv-val.exe
+    HINTS "$ENV{VULKAN_SDK}/Bin" "${Vulkan_INCLUDE_DIR}/../Bin" REQUIRED)
 find_package(directxtex CONFIG REQUIRED)
 find_package(Ktx CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
@@ -281,8 +283,9 @@ function(compile_shader source_file)
         OUTPUT "${shader_output}"
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${SHADER_BINARY_DIR}" "${shader_dependency_directory}"
         COMMAND Vulkan::glslc ${shader_define_args} -MD -MF "${shader_depfile}" "${source_file}" -o "${shader_output}"
+        COMMAND "${AZURE_SPIRV_VAL_EXECUTABLE}" --target-env vulkan1.3 --relax-block-layout "${shader_output}"
         DEPFILE "${shader_depfile}"
-        DEPENDS "${source_file}" ${shader_lut_dependency} "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/environment_specular.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/character_surface.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
+        DEPENDS "${AZURE_SPIRV_VAL_EXECUTABLE}" "${source_file}" ${shader_lut_dependency} "${SHADER_SOURCE_DIR}/morph_data.glsl" "${SHADER_SOURCE_DIR}/shadow_compare.glsl" "${SHADER_SOURCE_DIR}/surface_response.glsl" "${SHADER_SOURCE_DIR}/environment_specular.glsl" "${SHADER_SOURCE_DIR}/light_attenuation.glsl" "${SHADER_SOURCE_DIR}/character_surface.glsl" "${SHADER_SOURCE_DIR}/sky.glsl" "${SHADER_SOURCE_DIR}/pathtracing/bsdf.glsl" "${SHADER_SOURCE_DIR}/pathtracing/lighting.glsl"
         COMMENT "Compiling ${shader_name}"
         VERBATIM
     )
@@ -305,6 +308,7 @@ if(AZURE_ENABLE_SURFACE_RADIANCE_REUSE)
 if(AZURE_ENABLE_SURFACE_RADIANCE_FRAME_SELECTION)
 compile_shader("${SHADER_SOURCE_DIR}/surface_radiance_validation.frag")
 compile_shader("${SHADER_SOURCE_DIR}/surface_radiance_selection_commit.comp")
+compile_shader("${SHADER_SOURCE_DIR}/surface_radiance_selection_commit.comp" DEFINES AZURE_SURFACE_RADIANCE_DRAW_SELECTION=1 OUTPUT_NAME surface_radiance_draw_commit.comp)
 compile_shader("${SHADER_SOURCE_DIR}/surface_radiance_depth_copy.vert")
 compile_shader("${SHADER_SOURCE_DIR}/surface_radiance_depth_copy.frag")
 compile_shader("${SHADER_SOURCE_DIR}/surface_radiance_validation.frag" DEFINES AZURE_SURFACE_RADIANCE_PROBE=1 OUTPUT_NAME surface_radiance_validation_probe.frag)

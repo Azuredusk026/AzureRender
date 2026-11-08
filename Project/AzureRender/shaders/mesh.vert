@@ -94,11 +94,13 @@ layout(push_constant) uniform MorphWeights {
 #endif
 #if defined(AZURE_SURFACE_RADIANCE_REUSE)
     layout(offset = 128) uint surfaceFirstIndex;
+    layout(offset = 136) uint surfaceDrawSlot;
 #endif
     layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
 #if defined(AZURE_SURFACE_RADIANCE_REUSE)
 layout(location=15,component=1) flat out uvec2 surfaceRadianceSource;
+layout(location=15,component=3) flat out uint surfaceRadianceDrawSlot;
 #endif
 
 #if defined(AZURE_COMPUTE_SKINNING)
@@ -112,6 +114,7 @@ vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset
 void main() {
 #if defined(AZURE_SURFACE_RADIANCE_REUSE)
     surfaceRadianceSource=uvec2(uint(gl_InstanceIndex),morphWeights.surfaceFirstIndex);
+    surfaceRadianceDrawSlot=morphWeights.surfaceDrawSlot;
 #endif
 #if !defined(AZURE_OUTLINE_MASK) && !defined(AZURE_SNAPSHOT_DEPTH)
     vertexColorRgb=vertexColor.rgb;vertexColorAlpha=vertexColor.a;

@@ -228,7 +228,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             };
             cachedColor=cachedModule(earlyColorModule,kSurfaceRadianceFrameSelection);cachedSnapshot=cachedModule(earlySnapshotModule);
             if(kSurfaceRadianceFrameSelection)validationModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_validation.frag.spv"));
-            if(kSurfaceRadianceFrameSelection){auto commit=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_selection_commit.comp.spv"));
+            if(kSurfaceRadianceFrameSelection){auto commit=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_draw_commit.comp.spv"));
                 try{radianceCommitPipeline_=rhi_->createComputePipeline({commit,pipelineLayout_});}catch(...){rhi_->destroyShaderModule(commit);throw;}
                 rhi_->destroyShaderModule(commit);
                 if(radianceDepthCopyPass_){
