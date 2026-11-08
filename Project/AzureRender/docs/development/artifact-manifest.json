@@ -50,6 +50,15 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-084834-receiver-reciprocal-arithmetic-bfcfa0",
+      "name": "接收运算精度核验",
+      "status": "ArithmeticDifferencesAttributed",
+      "sourceBase": "1d47d65",
+      "evidence": "docs/acceptance/nr/receiver-reciprocal-arithmetic.md",
+      "candidateAdopted": false,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-082005-clip-depth-roundtrip-9fcd35",
       "name": "顶点深度精度核验",
       "status": "VertexInputPrecisionAttributed",

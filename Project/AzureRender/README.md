@@ -15,6 +15,7 @@
 [线性深度核对](docs/acceptance/nr/receiver-linear-depth.md)仍有 216 处超差，接收输入的生产精度继续待验收。
 [生产投影核对](docs/acceptance/nr/receiver-projection-producer.md)定位原生深度写入链，完整区域仍有 200 处超差。
 [顶点精度核对](docs/acceptance/nr/clip-depth-roundtrip.md)逐位复现原生 11564 个顶点，当前变换输入的精度继续待核定。
+[接收运算核对](docs/acceptance/nr/receiver-reciprocal-arithmetic.md)区分齐次计算及倒数误差，兼容实现继续待验收。
 CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际顶点和索引核对，后续批次沿用收益门槛。
 [准备批次评估](docs/acceptance/nr/cpu-preparation-batch.md)的更新均值降低约 7.46%，未达到本批门槛，候选保持隔离。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。

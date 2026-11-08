@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 1,
+  "status": "homogeneous-and-reciprocal-differences-attributed",
+  "sourceBase": "1d47d65",
+  "execution": [
+    {
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-041637-object-receiver-origin-7a2735\\receiver.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-084834-receiver-reciprocal-arithmetic-bfcfa0"
+      ],
+      "exitCode": 0,
+      "seconds": 0.375,
+      "worldsUnchanged": 17017,
+      "visibilitiesUnchanged": 17017,
+      "pixels": 17017,
+      "validationErrors": 0,
+      "zeroAllocator": true
+    },
+    {
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-041637-object-receiver-origin-7a2735\\receiver.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-084834-receiver-reciprocal-arithmetic-bfcfa0"
+      ],
+      "exitCode": 0,
+      "seconds": 0.3120000000053551,
+      "worldsUnchanged": 17017,
+      "visibilitiesUnchanged": 17017,
+      "pixels": 17017,
+      "validationErrors": 0,
+      "zeroAllocator": true
+    }
+  ],
+  "arithmetic": {
+    "nvidia": {
+      "hExactComponentsVsCpu": [
+        17017,
+        17017,
+        17017,
+        17017
+      ],
+      "hMaxErrorVsCpu": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "reciprocalRnExact": 14521,
+      "reciprocalRnUlpHistogram": {
+        "-1": 502,
+        "0": 14521,
+        "1": 1994
+      },
+      "refinedReciprocalRnExact": 17017,
+      "worldFromStoredReciprocalExact": 17017,
+      "worldFromRnReciprocalExact": 14576,
+      "worldFromRnDivisionExact": 9323
+    },
+    "intel": {
+      "hExactComponentsVsCpu": [
+        12996,
+        8465,
+        11945,
+        16473
+      ],
+      "hMaxErrorVsCpu": [
+        7.62939453125e-06,
+        7.62939453125e-06,
+        7.62939453125e-06,
+        2.9802322387695312e-08
+      ],
+      "reciprocalRnExact": 14992,
+      "reciprocalRnUlpHistogram": {
+        "-1": 1015,
+        "0": 14992,
+        "1": 1010
+      },
+      "refinedReciprocalRnExact": 17017,
+      "worldFromStoredReciprocalExact": 17017,
+      "worldFromRnReciprocalExact": 15043,
+      "worldFromRnDivisionExact": 9494
+    },
+    "deviceDifference": {
+      "hExactComponents": [
+        12996,
+        8465,
+        11945,
+        16473
+      ],
+      "hMaxError": [
+        7.62939453125e-06,
+        7.62939453125e-06,
+        7.62939453125e-06,
+        2.9802322387695312e-08
+      ],
+      "reciprocalExact": 14233
+    }
+  },
+  "worldReference": {
+    "pixels": 17017,
+    "hWRange": [
+      0.2966156303882599,
+      0.31552231311798096
+    ],
+    "reciprocalRefinementChanged": 0,
+    "comparisons": {
+      "nvidia-divisionRN": {
+        "exactWorlds": 9323,
+        "exactComponents": 40587,
+        "maximumComponentError": 3.0517578125e-05,
+        "medianWorldError": 0.0
+      },
+      "nvidia-reciprocalMulRN": {
+        "exactWorlds": 14576,
+        "exactComponents": 45582,
+        "maximumComponentError": 3.0517578125e-05,
+        "medianWorldError": 0.0
+      },
+      "nvidia-refinedReciprocalMul": {
+        "exactWorlds": 14576,
+        "exactComponents": 45582,
+        "maximumComponentError": 3.0517578125e-05,
+        "medianWorldError": 0.0
+      },
+      "intel-divisionRN": {
+        "exactWorlds": 3601,
+        "exactComponents": 30093,
+        "maximumComponentError": 9.1552734375e-05,
+        "medianWorldError": 3.0517578125e-05
+      },
+      "intel-reciprocalMulRN": {
+        "exactWorlds": 5287,
+        "exactComponents": 33765,
+        "maximumComponentError": 9.1552734375e-05,
+        "medianWorldError": 3.0517578125e-05
+      },
+      "intel-refinedReciprocalMul": {
+        "exactWorlds": 5287,
+        "exactComponents": 33765,
+        "maximumComponentError": 9.1552734375e-05,
+        "medianWorldError": 3.0517578125e-05
+      },
+      "intelPrecise-divisionRN": {
+        "exactWorlds": 4622,
+        "exactComponents": 32731,
+        "maximumComponentError": 6.103515625e-05,
+        "medianWorldError": 3.0517578125e-05
+      },
+      "intelPrecise-reciprocalMulRN": {
+        "exactWorlds": 7172,
+        "exactComponents": 37021,
+        "maximumComponentError": 6.103515625e-05,
+        "medianWorldError": 3.0517578125e-05
+      },
+      "intelPrecise-refinedReciprocalMul": {
+        "exactWorlds": 7172,
+        "exactComponents": 37021,
+        "maximumComponentError": 6.103515625e-05,
+        "medianWorldError": 3.0517578125e-05
+      }
+    }
+  },
+  "deviceMath": {
+    "command": [
+      "D:/Tools/VulkanSDK/1.4.350.0/Bin/vulkaninfoSDK.exe"
+    ],
+    "features": {
+      "shaderFloat64": [
+        "false",
+        "false"
+      ],
+      "shaderInt64": [
+        "true",
+        "true"
+      ],
+      "shaderRoundingModeRTEFloat32": [
+        "true",
+        "true"
+      ],
+      "shaderFloatControls2": [
+        "true",
+        "true"
+      ]
+    },
+    "intelHomogeneousModels": {
+      "fused-fused": {
+        "exactComponents": [
+          12996,
+          8465,
+          11945,
+          16473
+        ],
+        "exactVectors": 4298
+      },
+      "fused-unfused": {
+        "exactComponents": [
+          11824,
+          8531,
+          13089,
+          16473
+        ],
+        "exactVectors": 4443
+      },
+      "unfused-fused": {
+        "exactComponents": [
+          12996,
+          8465,
+          11945,
+          16473
+        ],
+        "exactVectors": 4298
+      },
+      "unfused-unfused": {
+        "exactComponents": [
+          11824,
+          8531,
+          13089,
+          16473
+        ],
+        "exactVectors": 4443
+      }
+    }
+  },
+  "ndcModels": {
+    "separate": {
+      "ndcXExact": 17017,
+      "hExactComponents": [
+        12996,
+        8465,
+        11945,
+        16473
+      ],
+      "hExactVectors": 4298
+    },
+    "contracted": {
+      "ndcXExact": 43,
+      "hExactComponents": [
+        12994,
+        8460,
+        11945,
+        16473
+      ],
+      "hExactVectors": 4295
+    },
+    "unfused": {
+      "ndcXExact": 17017,
+      "hExactComponents": [
+        12996,
+        8465,
+        11945,
+        16473
+      ],
+      "hExactVectors": 4298
+    }
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "sha256": "725d97c8ffe7f1a25c6cc4d9beb40edad75140179a2205b91669528807403b58"
+    },
+    {
+      "configuration": "debug",
+      "sha256": "1d2664c6e81661764e201d7ee194d20662c558ac2dac45bb00254198d6e6a41a"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "candidateAdopted": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 2397645,
+  "evidenceSha256": "1ad4d314c1e37db69a183d057d78dfa5d965e29ead9288bd1f1bb5b9d4e2316c",
+  "members": [
+    {
+      "path": "analyze_probe.py",
+      "bytes": 2084,
+      "sha256": "307561a9f88f2797fe7d6f785f723e134ed5dbc73b583377a9e8cd372c94bae8"
+    },
+    {
+      "path": "borrowed/producer-cb0.bin",
+      "bytes": 1536,
+      "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+    },
+    {
+      "path": "borrowed/producer-cb1.bin",
+      "bytes": 3328,
+      "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+    },
+    {
+      "path": "borrowed/region-output.bin",
+      "bytes": 1089088,
+      "sha256": "8a6dc9f36f7bf82c048ecca7ade93f16bef389b06dd226b83030e5e5c81c5779"
+    },
+    {
+      "path": "borrowed/region-queries.bin",
+      "bytes": 272272,
+      "sha256": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 433,
+      "sha256": "13d97cb4d0ea589e5ba4c5e0e3d10fcff74d762a4a20d0f18c9aa0ce46416ab0"
+    },
+    {
+      "path": "device-math.json",
+      "bytes": 1047,
+      "sha256": "f39852765bcff5e62bc29ef51b4bc853bfb650f867c55ae088d36480767203c5"
+    },
+    {
+      "path": "device_math.py",
+      "bytes": 1996,
+      "sha256": "bf41bc5ec791d3067f8e0956ae86cc0c0c81cddfc9e3e32cd636e93639e245b0"
+    },
+    {
+      "path": "gpu-inputs.json",
+      "bytes": 1053,
+      "sha256": "98cc097bf3cefd994f33f12ffcc072a8a3753f8242c17a5c6b04dc405a186719"
+    },
+    {
+      "path": "homogeneous-probe.comp",
+      "bytes": 3469,
+      "sha256": "31a0ade609c98bbfda8eb851c239ae6bdb37e751d95a0f8fa9d130ba92e65e84"
+    },
+    {
+      "path": "homogeneous-reference.bin",
+      "bytes": 272272,
+      "sha256": "adaae33ba5dbc98818192ac279dc4d3efbcf0d3d6b4b4878492530c2b7fc5f36"
+    },
+    {
+      "path": "intel-output.bin",
+      "bytes": 1089088,
+      "sha256": "a6fdf431c90ac1c54a5ab211b2edda8c4646513440b9a8044044430fb22fed5a"
+    },
+    {
+      "path": "intel-result.json",
+      "bytes": 13785,
+      "sha256": "6d24d8c3a1e83bc7cf231ccda5a944bdcbf9aa5d8895146f36da3b7db358210d"
+    },
+    {
+      "path": "intel-vulkaninfo-errors.log",
+      "bytes": 125,
+      "sha256": "e03e8e78182c7536a40f4a33754f240ad3fc580a3af44e7d3a6bd5e1aea344bf"
+    },
+    {
+      "path": "intel.log",
+      "bytes": 13787,
+      "sha256": "3b3a5fd386e910836c20ba7bfec90500ec7daa7e3eeb82776933977a0bf54609"
+    },
+    {
+      "path": "ndc-models.json",
+      "bytes": 493,
+      "sha256": "9ef6fbc52c9f06bd17542696e94ee86f41d4d2b93dadd1af8828cb96dacd3703"
+    },
+    {
+      "path": "ndc_models.py",
+      "bytes": 1256,
+      "sha256": "747c71504295f4bae20c8b4a5725ef2de37314da2bcb0f510b5c7b4d2c7841e3"
+    },
+    {
+      "path": "nvidia-output.bin",
+      "bytes": 1089088,
+      "sha256": "f2ea950145bdd865786b7c2092e61418b1cd40f22db4bbe6d6e2a69c5d47a4f2"
+    },
+    {
+      "path": "nvidia-result.json",
+      "bytes": 13670,
+      "sha256": "ccd3aa7ad45d364481b65d2935935aff582c711513c058cb05374fb450349656"
+    },
+    {
+      "path": "nvidia.log",
+      "bytes": 13672,
+      "sha256": "4ce373a612c8ea332808ec60623d3574a2a33e08a66af8e419a073ad8249726a"
+    },
+    {
+      "path": "package.py",
+      "bytes": 4534,
+      "sha256": "f9121d274a52b288ef10acd5740a2a483a12998429f977908031c4c41a92f56c"
+    },
+    {
+      "path": "probe-analysis.json",
+      "bytes": 1333,
+      "sha256": "31ffe17768795191a695e68f41b8eb6181df3c5b9fbae83c66bb03eed653537d"
+    },
+    {
+      "path": "probe-build.json",
+      "bytes": 854,
+      "sha256": "2467ea8eabfecb6e8bc415d79b40e64734a8dbfaca0e7713266fe8e9d2dbd810"
+    },
+    {
+      "path": "probe-execution.json",
+      "bytes": 997,
+      "sha256": "eda5b7ce6037b5a69d70f3391d14c98266494e2c0f51527fc2f5726631168684"
+    },
+    {
+      "path": "probe.py",
+      "bytes": 2885,
+      "sha256": "28dd3c8c0ade11a7fa5aed1444b65dfd6095f3bd6744f125bd7b2690b79d9951"
+    },
+    {
+      "path": "receiver.spv",
+      "bytes": 12412,
+      "sha256": "f9be3567923edb163dd8e514d618a42b42b32ca4f97944e55c03a5bc12f04f94"
+    },
+    {
+      "path": "reciprocal-world-reference.bin",
+      "bytes": 204204,
+      "sha256": "41281c562273009d654af18694915ef885c434e6e02c5e14f2d5792a730b46d7"
+    },
+    {
+      "path": "world-reference.json",
+      "bytes": 1896,
+      "sha256": "e6055ea5dbbcfcd670f390f87b4b28788e6d974520b2e57341bce0ea3f1c7add"
+    },
+    {
+      "path": "world_reference.py",
+      "bytes": 2387,
+      "sha256": "41224b53725658ac5b84dd55ad30666eb0b709d0d5972d9736afa15028707752"
+    }
+  ]
+}

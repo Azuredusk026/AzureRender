@@ -82,6 +82,7 @@ NVIDIA 原生区域逐字节一致；Intel 有 175 处超出一字节，设备�
 [线性深度核对](../acceptance/nr/receiver-linear-depth.md)仍有 216 处超差，接收输入的生产精度继续待验收。
 [生产投影核对](../acceptance/nr/receiver-projection-producer.md)定位原生深度写入链，完整区域仍有 200 处超差。
 [顶点精度核对](../acceptance/nr/clip-depth-roundtrip.md)逐位复现原生 11564 个顶点，当前变换输入的精度继续待核定。
+[接收运算核对](../acceptance/nr/receiver-reciprocal-arithmetic.md)区分齐次计算及倒数误差，兼容实现继续待验收。
 [相位原点配置](../acceptance/nr/visibility-phase-origin.md)通过双设备、双配置功能检查。
 默认 NVIDIA 的 17017 处原生可见量保持逐字节一致，输入生产和 Intel 精度继续验收。
 
