@@ -6,6 +6,8 @@
 本机使用[目录维护技能](../../tools/skills/azurerender-artifact-maintenance/SKILL.md)。
 日常会话至多执行一次轻量索引查询。
 历史大目录采用缓存清单和每日有界清理。
+资产数据库的[源文件快照](asset-source-cache.md)采用有界无损压缩。
+暖缓存复用验证结果，单链接旧大缓存随资产刷新迁移。
 
 ```powershell
 python tools/artifact_maintenance.py status

@@ -19,6 +19,7 @@ AzureRender 使用以下第三方依赖。发布目录保留包管理器或上�
 | stb | MIT 或公有领域双许可 |
 | OpenEXR 与 Imath | BSD-3-Clause |
 | libdeflate | MIT |
+| Zstandard 1.5.7 | BSD-3-Clause，可选 GPLv2 双许可中的 BSD 条款 |
 | OpenJPH | BSD-2-Clause |
 | nlohmann/json | MIT |
 | Jolt Physics | MIT |

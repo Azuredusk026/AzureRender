@@ -1,4 +1,5 @@
 #include "runtime/AssetDatabase.hpp"
+#include "runtime/AssetSourceCache.hpp"
 #include "runtime/Level.hpp"
 #include "assets/TextureImportSettings.hpp"
 #include "assets/Scene2D.hpp"
@@ -141,19 +142,16 @@ void writeCache(const std::filesystem::path& path, const std::string& data) {
         cleanup();
     }catch(...){cleanup();throw;}
 }
-void append64(std::string& out, std::uint64_t value) {
-    for (unsigned i = 0; i < 8; ++i) out.push_back(static_cast<char>((value >> (i * 8)) & 255));
-}
-std::uint64_t read64(const std::string& value, std::size_t offset) {
-    std::uint64_t result = 0;
-    for (unsigned i = 0; i < 8; ++i) result |= static_cast<std::uint64_t>(static_cast<unsigned char>(value[offset + i])) << (i * 8);
-    return result;
-}
 void cache(const std::filesystem::path& path, const AssetRecord& record) {
     const auto source = bytes(record.path);
     if (hash(source) != record.contentHash) throw std::runtime_error("Asset changed during import: " + record.path.u8string());
-    std::string data = "AZCACHE1"; append64(data, record.fingerprint); append64(data, source.size()); data += source;
-    writeCache(path, data);
+    if(std::filesystem::is_regular_file(path)){
+        const auto prior=cacheBytes(path);
+        const bool legacyLarge=prior.substr(0,8)=="AZCACHE1"&&source.size()>=kAssetCacheCompressionMinimum&&source.size()<=kAssetCacheCompressionMaximum
+            &&std::filesystem::hard_link_count(path)==1;
+        if(!legacyLarge&&assetSourceCacheMatches(prior,record.fingerprint,source))return;
+    }
+    writeCache(path,encodeAssetSourceCache(source,record.fingerprint));
 }
 std::vector<std::string> discoverAssetReferences(const Json& document,const std::string& extension,
     const std::string& virtualPath,const Project& project) {
@@ -372,8 +370,7 @@ std::string AssetDatabase::readSource(const std::string& id) const {
     const auto path = cacheFile(id);
     if (std::filesystem::exists(path)) {
         const auto data = cacheBytes(path);
-        if (data.size() >= 24 && data.substr(0, 8) == "AZCACHE1" && read64(data, 8) == record.fingerprint
-            && read64(data, 16) == data.size() - 24 && hash(data.substr(24)) == record.contentHash) return data.substr(24);
+        if(auto decoded=decodeAssetSourceCache(data,record.fingerprint,record.contentHash))return std::move(*decoded);
     }
     cache(path, record); return bytes(record.path);
 }

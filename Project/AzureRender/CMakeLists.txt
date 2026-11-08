@@ -82,6 +82,7 @@ find_package(mp3lame CONFIG REQUIRED)
 find_package(Opus CONFIG REQUIRED)
 find_package(OpusFile CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
+find_package(zstd CONFIG REQUIRED)
 find_package(Jolt CONFIG REQUIRED)
 find_package(manifold 3.5.2 EXACT CONFIG REQUIRED)
 find_package(sol2 CONFIG REQUIRED)
@@ -780,6 +781,7 @@ add_library(AzureRuntime STATIC
     src/runtime/RuntimeRenderSnapshotCache.cpp
     src/runtime/Project.cpp
     src/runtime/AssetDatabase.cpp
+    src/runtime/AssetSourceCache.cpp
     src/runtime/AssetGeneration.cpp
     src/runtime/Level.cpp
     src/runtime/Prefab.cpp
@@ -951,6 +953,7 @@ target_link_libraries(AzureRenderCore PUBLIC AzureFoundation Vulkan::Vulkan nloh
 target_link_libraries(AzureRenderCore PRIVATE pugixml::pugixml Opus::opus OpusFile::opusfile mp3lame::mp3lame Microsoft::DirectXTex KTX::ktx assimp::assimp TIFF::TIFF WebP::webp ZLIB::ZLIB FLAC::FLAC Vorbis::vorbisenc)
 target_include_directories(AzureRenderCore PRIVATE "${TINYGLTF_INCLUDE_DIR}" "${STB_INCLUDE_DIR}")
 target_link_libraries(AzureRuntime PUBLIC AzureRenderCore AzureReflection Jolt::Jolt RmlUi::RmlUi)
+target_link_libraries(AzureRuntime PRIVATE zstd::libzstd)
 target_include_directories(AzureRuntime SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
 target_include_directories(AzureRenderCore SYSTEM PRIVATE ${MINIAUDIO_INCLUDE_DIR})
 if(WIN32)
@@ -1741,6 +1744,9 @@ if(BUILD_TESTING)
     target_link_libraries(AzurePhysicsInputTests PRIVATE AzureProjectRuntime)
     add_test(NAME AzureEngine.PhysicsInput COMMAND AzurePhysicsInputTests)
     add_executable(AzureAssetLevelTests tests/AssetLevelTests.cpp)
+    add_executable(AzureAssetSourceCacheTests tests/AssetSourceCacheTests.cpp)
+    target_link_libraries(AzureAssetSourceCacheTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.AssetSourceCache COMMAND AzureAssetSourceCacheTests)
     target_link_libraries(AzureAssetLevelTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.AssetLevel COMMAND AzureAssetLevelTests)
     add_executable(AzureProjectStartupTests tests/ProjectStartupTests.cpp)

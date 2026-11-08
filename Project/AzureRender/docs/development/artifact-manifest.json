@@ -50,6 +50,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-073210-compressed-asset-snapshots-d0bf8d",
+      "name": "资产源文件快照压缩",
+      "status": "CompressedAssetSnapshotsDeployed",
+      "sourceBase": "ae7bc80",
+      "evidence": "docs/acceptance/nr/compressed-asset-snapshots.md",
+      "checksPassed": 8,
+      "actualVolumeFreedBytes": 677437440,
+      "snapshotsVerified": 864,
+      "externalProjectStorageUsed": false,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-070144-cpu-preparation-batch-b386e7",
       "name": "CPU 准备批次评估",
       "status": "PreparationBatchBelowGate",
