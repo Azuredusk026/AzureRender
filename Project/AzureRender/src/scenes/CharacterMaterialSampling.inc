@@ -59,8 +59,10 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
             if((policy&1U)&&!needed)continue;
             if((policy&2U)&&!independentCoverageNeeded_)continue;
             auto& module=policy==1?it->lighting:policy==2?it->coverage:it->lightingCoverage;
-            auto path=it->path;const auto cached=path.find("_radiance.frag.spv");
-            if(cached!=std::string::npos)path.erase(cached,9);
+            auto path=it->path;const auto cachedEnd=path.rfind(".frag.spv");
+            const auto cached=cachedEnd!=std::string::npos&&cachedEnd>=15&&path.compare(cachedEnd-15,15,"_radiance_stats")==0?cachedEnd-15:
+                cachedEnd!=std::string::npos&&cachedEnd>=9&&path.compare(cachedEnd-9,9,"_radiance")==0?cachedEnd-9:std::string::npos;
+            if(cached!=std::string::npos&&cachedEnd!=std::string::npos)path.erase(cached,cachedEnd-cached);
             if(!module)module=rhi_->createShaderModule(readBinaryFile(
                 sceneFragmentVariant(path,false,false,false,(policy&1U)!=0,(policy&2U)!=0)));
             auto extended=desc;extended.fragmentShader=module;
@@ -221,7 +223,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             const auto cachedModule=[&](VkShaderModule module){
                 const auto found=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),[&](const auto& v){return v.scene==module;});
                 if(found==materialShaderVariants_.end())throw std::logic_error("Surface radiance material program identity is unavailable");
-                auto file=found->path;file.insert(file.rfind(".frag.spv"),"_radiance");return createMaterialShaderModule(file);
+                auto file=found->path;file.insert(file.rfind(".frag.spv"),kSurfaceRadianceDiagnostics?"_radiance_stats":"_radiance");return createMaterialShaderModule(file);
             };
             cachedColor=cachedModule(earlyColorModule);cachedSnapshot=cachedModule(earlySnapshotModule);
         }

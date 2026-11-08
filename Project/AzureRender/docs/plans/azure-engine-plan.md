@@ -52,7 +52,12 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [共享照明组合](../acceptance/nr/radiance-precision-boundaries.md)通过双设备、双配置的小数据检查，原有 736 个程序保持一致。
 [照明缓存接入](../acceptance/nr/radiance-cache-precision-integration.md)通过严格四帧及两种配置的设备检查。
 短时 GPU 均值增加约 0.72 毫秒，实验选项默认关闭。
-下一项先核定实际复用覆盖及附件成本，再组织有效的着色批次。
+[消费计数](../acceptance/nr/radiance-consumption-counters.md)完成帧槽、GPU 图案及设备回退检查。
+原生回收 30 个有效帧槽。
+合格访问为 104810197 次。
+逐片元命中率为 100.0000%。
+完整四像素组接受率为 85.0605%。
+后续性能批次按实际覆盖及附件成本选择。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

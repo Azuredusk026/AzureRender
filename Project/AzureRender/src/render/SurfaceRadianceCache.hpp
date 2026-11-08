@@ -19,17 +19,28 @@ inline SurfaceRadianceIdentity surfaceRadianceIdentity(float depth,std::uint32_t
 }
 class SurfaceRadianceCache final {
 public:
+    struct Statistics {
+        std::uint64_t producerStores=0,consumerVisits=0,eligibleRequests=0,pixelMatches=0,quadMatches=0,frames=0;
+        bool overflow=false;
+    };
     static constexpr unsigned kAttachments=4;
     static constexpr std::uint64_t kMaximumBytes=512ULL*1024*1024;
     struct Texture {rhi::GpuImage image{};VkImageView view=VK_NULL_HANDLE;};
     static bool supported(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes);
-    SurfaceRadianceCache(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes);
+    SurfaceRadianceCache(rhi::IRhi&,VkExtent2D,unsigned slots,std::uint64_t byteLimit=kMaximumBytes,bool diagnostics=false);
     ~SurfaceRadianceCache();
     SurfaceRadianceCache(const SurfaceRadianceCache&)=delete;
     SurfaceRadianceCache& operator=(const SurfaceRadianceCache&)=delete;
     const Texture& texture(unsigned slot,unsigned attachment) const{return textures_.at(slot).at(attachment);}
     VkSampler sampler() const noexcept{return sampler_;}
     std::uint64_t bytes() const noexcept{return bytes_;}
+    bool statisticsEnabled() const noexcept{return !statisticsFrames_.empty();}
+    std::uint64_t statisticsBytes() const noexcept{return statisticsFrames_.size()*24ULL;}
+    const rhi::GpuBuffer& statisticsBuffer(unsigned slot) const{return statisticsFrames_.at(slot).buffer;}
+    // Reuse only after the owner's existing frame-slot completion fence.
+    void beginStatisticsFrame(unsigned slot);
+    void recordStatisticsReady(rhi::ICommandRecorder&,unsigned slot);
+    Statistics statistics() const noexcept{return statistics_;}
     static VkFormat format(unsigned attachment){return attachment==3?VK_FORMAT_R32G32B32A32_UINT:VK_FORMAT_R32G32B32A32_SFLOAT;}
     static VkClearValue clearValue(unsigned attachment) noexcept {
         VkClearValue value{};if(attachment==3)for(auto& word:value.color.uint32)word=UINT32_MAX;return value;
@@ -38,5 +49,8 @@ private:
     void clear() noexcept;
     rhi::IRhi& rhi_;std::vector<std::array<Texture,kAttachments>> textures_;
     VkSampler sampler_=VK_NULL_HANDLE;std::uint64_t bytes_=0;
+    struct StatisticsFrame {rhi::GpuBuffer buffer{};bool recorded=false;};
+    std::vector<StatisticsFrame> statisticsFrames_;
+    Statistics statistics_{};
 };
 }

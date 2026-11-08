@@ -17,7 +17,11 @@ GPU 继续区分着色、缓存、显存带宽和传输。
 [照明缓存接入](../acceptance/nr/radiance-cache-precision-integration.md)保持严格四帧零差异。
 本地短时参考 GPU 均值约为 29.98 毫秒。
 候选增加约 0.72 毫秒，实验选项默认关闭。
-后续先建立实际命中覆盖及附件成本依据。
+[消费计数](../acceptance/nr/radiance-consumption-counters.md)提供实际访问及整组接受的诊断机制。
+原生回收 30 个有效帧槽。
+合格访问为 104810197 次。
+逐片元命中率为 100.0000%。
+完整四像素组接受率为 85.0605%。
 
 当前程序的[单帧定位](../acceptance/nr/current-gpu-cost.md)确认场景材质为主要成本。
 视图模式候选的局部事件改善约 13%，保持隔离诊断状态。

@@ -31,7 +31,7 @@ public:
     rhi::GpuAllocator allocator;
     std::unique_ptr<rhi::VulkanRhi> backend;
 
-    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false) {
+    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false,bool fragmentAtomics=false) {
         try {
             VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
             application.pApplicationName="AzureRender Compute Contract";application.apiVersion=VK_API_VERSION_1_3;
@@ -78,6 +78,8 @@ public:
             VkPhysicalDeviceFeatures used{};used.shaderStorageImageExtendedFormats=features.shaderStorageImageExtendedFormats;
             if(primitiveIdentity&&!features.geometryShader)throw VulkanFeatureUnavailable("Fragment primitive identity is unavailable");
             used.geometryShader=primitiveIdentity?VK_TRUE:VK_FALSE;
+            if(fragmentAtomics&&!features.fragmentStoresAndAtomics)throw VulkanFeatureUnavailable("Fragment storage atomics are unavailable");
+            used.fragmentStoresAndAtomics=fragmentAtomics?VK_TRUE:VK_FALSE;
             used.sampleRateShading=sampleShading?features.sampleRateShading:VK_FALSE;
             if(graphics){
                 if(!features.independentBlend)throw std::runtime_error("Graphics fixture requires independent attachment blending");

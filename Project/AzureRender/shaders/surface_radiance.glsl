@@ -1,5 +1,6 @@
 #if defined(AZURE_SURFACE_RADIANCE_REUSE)
 #include "surface_radiance_identity.glsl"
+#include "surface_radiance_statistics.glsl"
 layout(location=15,component=1) flat in uvec2 surfaceRadianceSource;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
 layout(location=2) out vec4 outputRadianceA;
@@ -28,10 +29,19 @@ void azureStoreSurfaceRadiance(vec3 beauty,vec3 response,vec3 radiance,vec3 ambi
     if(!azureSurfaceRadianceFinite(a)||!azureSurfaceRadianceFinite(b)||!azureSurfaceRadianceFinite(c))return;
     outputRadianceA=a;outputRadianceB=b;outputRadianceC=c;
     outputRadianceIdentity=azureSurfaceRadianceIdentity(gl_FragCoord.z,surfaceRadianceSource,uint(gl_PrimitiveID),material.materialPadding>>1u);
+#if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
+    if(outputRadianceIdentity.z!=0xffffffffu)azureRadianceCount(0u);
+#endif
 }
 #else
 bool azureWriteSurfaceRadiance(vec3 geometricNormal){
+#if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
+    azureRadianceCount(1u);
+#endif
     if(!azureSurfaceRadianceMode())return false;
+#if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
+    azureRadianceCount(2u);
+#endif
     ivec2 pixel=ivec2(gl_FragCoord.xy);
     uvec4 requested=azureSurfaceRadianceIdentity(gl_FragCoord.z,surfaceRadianceSource,uint(gl_PrimitiveID),material.materialPadding>>1u);
     ivec2 extent=textureSize(surfaceRadianceIdentity,0);uvec4 stored=uvec4(0xffffffffu);
@@ -39,7 +49,14 @@ bool azureWriteSurfaceRadiance(vec3 geometricNormal){
     if(inside)stored=texelFetch(surfaceRadianceIdentity,pixel,0);
     bool matched=inside&&requested.z!=0xffffffffu&&all(equal(requested,stored));
     // Keep implicit sampling and receiver derivatives defined in fallback quads.
+#if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
+    bool accepted=subgroupQuadAll(matched);
+    if(matched)azureRadianceCount(3u);
+    if(accepted)azureRadianceCount(4u);
+    if(!accepted)return false;
+#else
     if(!subgroupQuadAll(matched))return false;
+#endif
     vec4 a=texelFetch(surfaceRadianceA,pixel,0),b=texelFetch(surfaceRadianceB,pixel,0),c=texelFetch(surfaceRadianceC,pixel,0);
     vec3 beauty=a.rgb;
     if(camera.screenReflectionTrace.x>1.5){

@@ -54,6 +54,20 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-191723-radiance-consumption-counters-ec40da",
+      "name": "照明复用消费计数",
+      "status": "DiagnosticMechanismValidated",
+      "sourceBase": "157c757",
+      "evidence": "docs/acceptance/nr/radiance-consumption-counters.md",
+      "checksPassed": 11,
+      "checksSkipped": 1,
+      "pairedViewFlowsPassed": 2,
+      "nativeStatus": "measured-consumption",
+      "diagnosticsEnabledByDefault": false,
+      "reclaimedFiles": 87,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-184222-daily-retention-drain-053961",
       "name": "每日回收与项目技能部署",
       "status": "ProjectSkillDailyDrainDeployed",

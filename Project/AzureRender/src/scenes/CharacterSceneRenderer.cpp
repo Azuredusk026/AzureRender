@@ -1,3 +1,8 @@
+#if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
+static constexpr bool kSurfaceRadianceDiagnostics=true;
+#else
+static constexpr bool kSurfaceRadianceDiagnostics=false;
+#endif
 #include "animation/PresentedPose.hpp"
 #include "assets/AssetDeformation.hpp"
 #include "render/StableDepthOrder.hpp"
@@ -535,6 +540,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     if(access.mode==ResourceAccessMode::Unsupported) throw std::runtime_error(access.diagnostic);
 #if defined(AZURE_SURFACE_RADIANCE_PROGRAMS)
     auto radianceRequirements=objectShadowPrepared_?objectRequirements:requirements;
+    if(kSurfaceRadianceDiagnostics){++radianceRequirements.fragmentBuffers;++radianceRequirements.descriptorSetBuffers;}
     radianceRequirements.sampledImageSlots+=4;radianceRequirements.fixedSampledImageSlots+=4;
     radianceRequirements.fragmentColorAttachments=std::max<std::uint64_t>(6,radianceRequirements.fragmentColorAttachments);
     const auto plainOrdinary=[](const LoadedAsset& mesh){return std::any_of(mesh.primitives.begin(),mesh.primitives.end(),[&](const AssetPrimitive& primitive){
@@ -633,6 +639,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         renderSettings_ = &frameRenderSettings_;
     }
     currentFrame_ = frame.currentFrame;
+    if(surfaceRadiance_)surfaceRadiance_->beginStatisticsFrame(static_cast<unsigned>(currentFrame_));
     cameraPosition_ = {frame.cameraPosition[0], frame.cameraPosition[1], frame.cameraPosition[2]};
     cameraTarget_ = {frame.cameraTarget[0], frame.cameraTarget[1], frame.cameraTarget[2]};
     rotationAngle_ = frame.rotationAngle;
@@ -1385,6 +1392,13 @@ void CharacterSceneRenderer::registerPasses(
         graph.attachment(prepass,snapshotColor,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         graph.attachment(prepass,snapshotDepth,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
     }
+    std::optional<RenderGraph::ResourceId> radianceStatisticsResource;
+    if(surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()){
+        const auto& buffer=surfaceRadiance_->statisticsBuffer(context.currentFrame);rhi::BufferBarrierDesc initial{};
+        initial.buffer=buffer.buffer;initial.size=buffer.size;initial.dstStageMask=VK_PIPELINE_STAGE_HOST_BIT;initial.dstAccessMask=VK_ACCESS_HOST_WRITE_BIT;
+        radianceStatisticsResource=graph.importBuffer("character-radiance-statistics",initial);
+        graph.use(prepass,*radianceStatisticsResource,RenderGraphUsage::FragmentStorage,true);
+    }
     std::array<RenderGraph::ResourceId,SurfaceRadianceCache::kAttachments> radianceResources{};
     if(surfaceRadiance_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind){
         rhi::ImageBarrierDesc initial;initial.image=surfaceRadiance_->texture(context.currentFrame,kind).image.image;
@@ -1515,7 +1529,7 @@ void CharacterSceneRenderer::registerPasses(
         const auto& context = *frozenContext;
         recordMainDraws(context, 0, frozenInstances.get(), 0, static_cast<std::size_t>(-1),
             &commands, context.submissionCounters != nullptr ? mainCounters.get() : nullptr);
-    }, [frozenContext, mainCounters, stageCounters](rhi::ICommandRecorder& commands) {
+    }, [this,frozenContext, mainCounters, stageCounters](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         for (const auto& counters : *stageCounters) {
             mainCounters->drawCalls += counters.drawCalls;
@@ -1533,6 +1547,7 @@ void CharacterSceneRenderer::registerPasses(
             context.submissionCounters->pipelineBinds += mainCounters->pipelineBinds;
             context.submissionCounters->pushConstantUpdates += mainCounters->pushConstantUpdates;
         }
+        if(surfaceRadiance_)surfaceRadiance_->recordStatisticsReady(commands,static_cast<unsigned>(context.currentFrame));
         if (context.gpuTimingEnabled)
             commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     });
@@ -1549,6 +1564,7 @@ void CharacterSceneRenderer::registerPasses(
     graph.setRecordingChunks(main, std::move(mainChunks));
     graph.use(main, overlayDepth,RenderGraphUsage::Sampled,false);
     graph.use(main,snapshotColor,RenderGraphUsage::Sampled,false);
+    if(radianceStatisticsResource)graph.use(main,*radianceStatisticsResource,RenderGraphUsage::FragmentStorage,true);
     if(surfaceRadiance_)for(auto resource:radianceResources)graph.use(main,resource,RenderGraphUsage::Sampled,false);
     if(reflectionResource)graph.read(main,*reflectionResource);
     if(fogResource){
@@ -1612,6 +1628,9 @@ void CharacterSceneRenderer::registerPasses(
 void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     if (!instanceSnapshot_) throw std::logic_error("Direct recording requires a prepared snapshot");
     instanceSnapshot_->validateForRecording();
+    if(surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(context.currentFrame);
+        context.commands->bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});}
     for(const auto* buffer:{&morphTargetBuffer_,&morphWeightBuffers_[context.currentFrame],&jointBuffers_[context.currentFrame],&instanceBuffers_[context.currentFrame]})
         context.commands->bufferBarrier({buffer->buffer,0,buffer->size,VK_PIPELINE_STAGE_HOST_BIT,
             VK_PIPELINE_STAGE_VERTEX_SHADER_BIT|VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
@@ -1647,6 +1666,9 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
             VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
             VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
 
+    if(surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(context.currentFrame);
+        context.commands->bufferBarrier({buffer.buffer,0,buffer.size,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+            VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_SHADER_WRITE_BIT});}
     if(screenReflectionPrepared()&&reflectionActive_[context.currentFrame]){
         const auto slot=context.currentFrame;
         if(screenReflectionTemporalPrepared()){
@@ -1770,6 +1792,13 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
         for(const auto& primitive:mesh.primitives)if(mesh.materials[primitive.materialIndex].alphaMode==AssetAlphaMode::Blend
             &&!opaqueSurfaceOverlay(mesh.materials[primitive.materialIndex]))transparent+=primitive.indexCount/3;
     }
+    const auto statistics=surfaceRadiance_?surfaceRadiance_->statistics():SurfaceRadianceCache::Statistics{};
+    json << "  \"surfaceRadianceStatistics\": {\"enabled\": " << (surfaceRadiance_&&surfaceRadiance_->statisticsEnabled()?"true":"false")
+         << ", \"bytes\": " << (surfaceRadiance_?surfaceRadiance_->statisticsBytes():0)
+         << ", \"frames\": " << statistics.frames << ", \"producerStores\": " << statistics.producerStores
+         << ", \"consumerVisits\": " << statistics.consumerVisits << ", \"eligibleRequests\": " << statistics.eligibleRequests
+         << ", \"pixelMatches\": " << statistics.pixelMatches << ", \"quadMatches\": " << statistics.quadMatches
+         << ", \"overflow\": " << (statistics.overflow?"true":"false") << "},\n";
     json << "  \"uniqueMeshes\": " << additionalResources_.size()+1 << ",\n"
          << "  \"surfaceRadiancePrepared\": " << (surfaceRadiance_?"true":"false") << ",\n"
          << "  \"surfaceRadianceBytes\": " << (surfaceRadiance_?surfaceRadiance_->bytes():0) << ",\n"
@@ -2825,7 +2854,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     outlineMaskPass_=rhi_->createRenderPass(maskPass);
     if(surfaceRadianceCapable_&&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
         &&SurfaceRadianceCache::supported(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight)))
-        try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight));}
+        try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),SurfaceRadianceCache::kMaximumBytes,kSurfaceRadianceDiagnostics);}
         catch(const std::exception& error){RuntimeDiagnostics::instance().info("render",std::string("Surface radiance allocation fallback: ")+error.what());}
     rhi::RenderPassDesc pass;pass.attachments={{context.sceneColorFormat,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
         {reflectionSurfaceFormat_,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
@@ -3114,7 +3143,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
              frameCount * (textureSlots + 4 + (surfaceRadianceCapable_?4U:0U) + (irradianceClipmapActive_?6U:0U) + (viewFog_?2U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
             {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U))},
         };
         poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,frameCount});
         poolDesc.maxSets = frameCount;
@@ -3128,7 +3157,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(surfaceRadianceCapable_?4U:0U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?2U:0U))},
         {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U))},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U))},
     };
     poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,descriptorCount});
     poolDesc.maxSets = descriptorCount;
@@ -3194,6 +3223,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         bindings.push_back({37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(surfaceRadianceCapable_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
             bindings.push_back({38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics)bindings.push_back({42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
         return;
     }
@@ -3243,6 +3273,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
     bindings.push_back({37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         if(surfaceRadianceCapable_)for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
             bindings.push_back({38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
+        if(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics)bindings.push_back({42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
 }
 
@@ -3267,6 +3298,8 @@ void CharacterSceneRenderer::createDescriptorSets() {
     const auto writeRadiance=[&](VkDescriptorSet set,unsigned frame){if(!surfaceRadiance_)return;
         for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
             rhi_->writeDescriptorImage({set,38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,surfaceRadiance_->texture(frame,kind).view,surfaceRadiance_->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+        if(surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(frame);
+            rhi_->writeDescriptorBuffer({set,42,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffer.buffer,buffer.size});}
     };
     const auto writeSceneImages=[this](VkDescriptorSet set){
         rhi_->writeDescriptorImage({set,37,VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,reflectionFallbackView_,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_GENERAL});
@@ -4692,6 +4725,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     commands.beginRenderPass(mainPassDescription(context));
     recordMainDraws(context, 0, instanceSnapshot_.get());
     commands.endRenderPass();
+    if(surfaceRadiance_)surfaceRadiance_->recordStatisticsReady(commands,static_cast<unsigned>(context.currentFrame));
     if (context.gpuTimingEnabled) {
         commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     }

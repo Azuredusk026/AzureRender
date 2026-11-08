@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "status": "diagnostic-mechanism-validated",
+  "sourceBase": "157c757",
+  "sourceHashes": {
+    "CMakeLists.txt": "6d7e17c428741e39adbcf7f405e963efa27136b562e0e3fe118c2e0d1b6cbaaa",
+    "src/render/SurfaceRadianceCache.hpp": "0c8a96d0002387524b9d43ec2bcd65f72ecba6e775d67db0f1bd01056c2f2723",
+    "src/render/SurfaceRadianceCache.cpp": "a98c2e70993f7479bfcc6bd30b89089beb71560dc98e99aa999d8f576ea21a68",
+    "shaders/surface_radiance.glsl": "e66571eedfcccbf0326997f46201953e271875af8fdbd5e692e12b0ce85880c4",
+    "shaders/surface_radiance_statistics.glsl": "279ab50dac0f9cf30af5646a3b4bfafe5676b165835ea6281e5343f7e83028d5",
+    "shaders/surface_radiance_probe.frag": "c9c8e57e05bcf5286d7a12f672d271e73949c351ce6878354fb7f4f0e0af1ba7",
+    "src/scenes/CharacterSceneRenderer.cpp": "a7a32088cb6ec2e6fb89c6510d75acf795a682f92d4daefa168eceb74ecba4c0",
+    "src/scenes/CharacterMaterialSampling.inc": "8712f657e2b4354f8369026ed51767335902fa3a80c929a95f632ac7046e2c55",
+    "src/app/AzureRenderApp.cpp": "ad85adfb288603c3681878046a7c206443ace0e4c816a7527f923f0e40d3d2fa",
+    "tests/SurfaceRadianceStatisticsTests.cpp": "ab4087e6c8f6a3058e7b9a780d7ca0aa2bb4747ca520c67f99e3012b449992e2",
+    "tests/SurfaceRadianceCacheGpuTests.cpp": "87af8d182683d15a5e44d27c5d9c010238a5d6f338cbde21ec82c01c6423695f",
+    "tests/SurfaceRadianceViewGpuTests.cpp": "6ff62fcfce856051a81c8ddc70cabe82333c3468bd5c76daa5312e3067d509e6",
+    "tests/support/VulkanComputeFixture.hpp": "607cc587a3f5c3272ef45ec87834d903a2a5588cb461a6667513534507637e90"
+  },
+  "native": {
+    "status": "measured-consumption",
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 214.60999999998603,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--fixed-frame-step",
+        "--capture-fps",
+        "24",
+        "--smoke-frames",
+        "32",
+        "--gpu-timing-output",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-191723-radiance-consumption-counters-ec40da\\native-metadata\\gpu.json"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-191723-radiance-consumption-counters-ec40da\\tmp"
+    },
+    "renderedFrames": 32,
+    "capturedFrames": 0,
+    "statistics": {
+      "enabled": true,
+      "bytes": 48,
+      "frames": 30,
+      "producerStores": 104854684,
+      "consumerVisits": 104810197,
+      "eligibleRequests": 104810197,
+      "pixelMatches": 104810197,
+      "quadMatches": 89152112,
+      "overflow": false
+    },
+    "rates": {
+      "eligibleFraction": 1.0,
+      "pixelMatchFraction": 1.0,
+      "quadAcceptanceFraction": 0.8506053280292947,
+      "matchingFragmentsRejectedByQuad": 15658085
+    },
+    "cacheBytes": 462028800,
+    "sceneExtent": [
+      2560,
+      1410
+    ],
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "validationTextClean": true,
+    "zeroAllocator": true,
+    "scope": "Intrusive fragment counters, retired nonempty frame slots, real invocations excluding helpers; no performance timing or unique-pixel claim",
+    "formalPerformancePassed": false,
+    "overallVisualAcceptance": "failed-user-review"
+  },
+  "checks": [
+    {
+      "device": "nvidia",
+      "kind": "ctest",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(SurfaceRadianceCache|SurfaceRadianceStatistics|SurfaceRadianceCacheGpu|SurfaceRadianceRecording|DepthPrefillRecording)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-191723-radiance-consumption-counters-ec40da\\nvidia.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 20.64100000000326
+    },
+    {
+      "device": "nvidia",
+      "kind": "view",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSurfaceRadianceViewGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-191723-radiance-consumption-counters-ec40da\\view-nvidia"
+      ],
+      "exitCode": 0,
+      "seconds": 113.59299999999348,
+      "recordedStates": 20,
+      "activeDiagnosticStates": 4,
+      "validationErrors": 0,
+      "zeroAllocator": true
+    },
+    {
+      "device": "intel",
+      "kind": "ctest",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.SurfaceRadianceCacheGpu$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-191723-radiance-consumption-counters-ec40da\\intel.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5309999999881256
+    },
+    {
+      "device": "intel",
+      "kind": "view",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureSurfaceRadianceViewGpuTests.exe",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-191723-radiance-consumption-counters-ec40da\\view-intel"
+      ],
+      "exitCode": 0,
+      "seconds": 74.45300000000861,
+      "recordedStates": 20,
+      "activeDiagnosticStates": 4,
+      "validationErrors": 0,
+      "zeroAllocator": true
+    }
+  ],
+  "defaultChecks": [
+    {
+      "configuration": "release",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+        "-R",
+        "^AzureRender\\.(SurfaceRadianceCache|SurfaceRadianceStatistics|DepthPrefillRecording)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-191723-radiance-consumption-counters-ec40da\\release-default.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 8.53100000001723,
+      "retainedExactPrograms": 673
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+        "-R",
+        "^AzureRender\\.(SurfaceRadianceCache|SurfaceRadianceStatistics|DepthPrefillRecording)$",
+        "--output-on-failure",
+        "--no-tests=error",
+        "--output-junit",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-191723-radiance-consumption-counters-ec40da\\debug-default.xml"
+      ],
+      "exitCode": 0,
+      "seconds": 21.453000000008615,
+      "retainedExactPrograms": 673
+    }
+  ],
+  "cases": [
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceStatistics",
+      "skipped": false
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceCache",
+      "skipped": false
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceCacheGpu",
+      "skipped": false
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.SurfaceRadianceRecording",
+      "skipped": false
+    },
+    {
+      "receipt": "nvidia.xml",
+      "name": "AzureRender.DepthPrefillRecording",
+      "skipped": false
+    },
+    {
+      "receipt": "intel.xml",
+      "name": "AzureRender.SurfaceRadianceCacheGpu",
+      "skipped": true
+    },
+    {
+      "receipt": "release-default.xml",
+      "name": "AzureRender.SurfaceRadianceStatistics",
+      "skipped": false
+    },
+    {
+      "receipt": "release-default.xml",
+      "name": "AzureRender.SurfaceRadianceCache",
+      "skipped": false
+    },
+    {
+      "receipt": "release-default.xml",
+      "name": "AzureRender.DepthPrefillRecording",
+      "skipped": false
+    },
+    {
+      "receipt": "debug-default.xml",
+      "name": "AzureRender.SurfaceRadianceStatistics",
+      "skipped": false
+    },
+    {
+      "receipt": "debug-default.xml",
+      "name": "AzureRender.SurfaceRadianceCache",
+      "skipped": false
+    },
+    {
+      "receipt": "debug-default.xml",
+      "name": "AzureRender.DepthPrefillRecording",
+      "skipped": false
+    }
+  ],
+  "retainedNormalPrograms": 720,
+  "defaultPrograms": 673,
+  "diagnosticPrograms": 754,
+  "diagnosticsEnabledByDefault": false,
+  "reuseEnabledByDefault": false,
+  "counterBytesPerFrameSlot": 24,
+  "cleanup": {
+    "files": 87,
+    "logicalBytes": 39504639,
+    "volumeObservedDeltaBytes": 39686144
+  },
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 640866,
+  "evidenceSha256": "7a4d26ea85604f1c2c7fbdabe21d15550cbf7ae989edc068a43560815b3452d4",
+  "productionAudit": {
+    "status": "verified",
+    "builds": [
+      {
+        "configuration": "release",
+        "verified": true,
+        "programs": 673,
+        "diagnosticCompilationUnits": 0
+      },
+      {
+        "configuration": "debug",
+        "verified": true,
+        "programs": 673,
+        "diagnosticCompilationUnits": 0
+      }
+    ],
+    "protectedUserDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+    "sourceHashesMatch": true,
+    "nativeSourceAndProductsUnchanged": true,
+    "cDriveProjectSkillAbsent": true
+  }
+}

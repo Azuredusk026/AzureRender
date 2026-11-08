@@ -11,7 +11,7 @@ void require(bool value,const char* message){if(!value)throw std::runtime_error(
 int main(int argc,char** argv)try{
     require(argc==3,"Expected shaders and output directory");
     std::unique_ptr<test::VulkanComputeFixture> owner;bool capable=true;
-    try{owner=std::make_unique<test::VulkanComputeFixture>(true,false,false,true,true);}
+    try{owner=std::make_unique<test::VulkanComputeFixture>(true,false,false,true,true,AZURE_TEST_SURFACE_RADIANCE_DIAGNOSTICS!=0);}
     catch(const test::VulkanFeatureUnavailable&){capable=false;owner=std::make_unique<test::VulkanComputeFixture>(true);}
     auto& host=*owner;
     const std::filesystem::path root=AZURERENDER_TEST_SOURCE_DIR,output=argv[2];std::filesystem::create_directories(output);
