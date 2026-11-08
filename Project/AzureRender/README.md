@@ -46,6 +46,8 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [紧凑蒙皮输出](docs/acceptance/nr/compact-skinning-output.md)通过十四项检查及严格四帧。
 缓冲容量减少约 125.65 MiB，本地 GPU 均值减少约 0.43 毫秒。
 [计算归约门槛](docs/acceptance/nr/bounded-compute-reductions.md)完成局部评估，候选保持隔离。
+[阴影分块批处理](docs/acceptance/nr/shadow-tile-batching.md)已接入默认配置。
+严格四帧一致，独立内核减少约 43%，本地整帧减少约 0.11 毫秒。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。

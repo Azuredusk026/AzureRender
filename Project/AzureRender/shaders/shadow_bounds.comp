@@ -1,17 +1,42 @@
 #version 450
+#if defined(AZURE_SHADOW_BOUNDS_BATCH)
+layout(local_size_x=128,local_size_y=1) in;
+#else
 layout(local_size_x=4,local_size_y=4) in;
+#endif
 layout(binding=0) uniform sampler2D sourceDepth;
 layout(binding=1,std430) buffer Bounds { vec2 values[]; } result;
+#if defined(AZURE_SHADOW_BOUNDS_BATCH)
+shared vec2 tileBounds[128];
+#else
 shared vec2 tileBounds[16];
+#endif
 void main(){
+#if defined(AZURE_SHADOW_BOUNDS_BATCH)
+    uint i=gl_LocalInvocationIndex,sampleIndex=i&15u;
+    ivec2 tile=ivec2(int(gl_WorkGroupID.x*8u+i/16u),int(gl_WorkGroupID.y));
+    bool valid=tile.x<textureSize(sourceDepth,0).x/8;
+    ivec2 base=tile*8+ivec2(int(sampleIndex&3u),int(sampleIndex/4u))*2;
+    vec4 depths=vec4(1);
+    if(valid)depths=textureGather(sourceDepth,(vec2(base)+1.0)/vec2(textureSize(sourceDepth,0)));
+#else
     ivec2 tile=ivec2(gl_WorkGroupID.xy),base=tile*8+ivec2(gl_LocalInvocationID.xy)*2;
     vec4 depths=textureGather(sourceDepth,(vec2(base)+1.0)/vec2(textureSize(sourceDepth,0)));
     uint i=gl_LocalInvocationIndex;
+#endif
     tileBounds[i]=vec2(min(min(depths.x,depths.y),min(depths.z,depths.w)),max(max(depths.x,depths.y),max(depths.z,depths.w)));
     barrier();
     for(uint stride=8u;stride>0u;stride/=2u){
+#if defined(AZURE_SHADOW_BOUNDS_BATCH)
+        if(sampleIndex<stride)tileBounds[i]=vec2(min(tileBounds[i].x,tileBounds[i+stride].x),max(tileBounds[i].y,tileBounds[i+stride].y));
+#else
         if(i<stride)tileBounds[i]=vec2(min(tileBounds[i].x,tileBounds[i+stride].x),max(tileBounds[i].y,tileBounds[i+stride].y));
+#endif
         barrier();
     }
+#if defined(AZURE_SHADOW_BOUNDS_BATCH)
+    if(sampleIndex==0u&&valid)result.values[tile.y*(textureSize(sourceDepth,0).x/8)+tile.x]=tileBounds[i];
+#else
     if(i==0u)result.values[tile.y*(textureSize(sourceDepth,0).x/8)+tile.x]=tileBounds[0];
+#endif
 }

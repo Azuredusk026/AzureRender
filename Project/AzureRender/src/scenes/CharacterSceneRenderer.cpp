@@ -1,3 +1,8 @@
+#if defined(AZURE_BATCHED_SHADOW_BOUNDS)
+static constexpr unsigned kShadowBoundsTilesPerGroup=8;
+#else
+static constexpr unsigned kShadowBoundsTilesPerGroup=1;
+#endif
 #include "render/SkinnedVertex.hpp"
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
 static constexpr bool kSurfaceRadianceDiagnostics=true;
@@ -581,7 +586,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));
     },true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
-    enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+"/shadow_bounds.comp.spv"),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
+    enqueue("descriptors",loadTimings_.descriptorsMs,[this,context]{createOverlayDepth(context);if(objectShadowPrepared_){objectShadowAtlas_=std::make_unique<ObjectShadowAtlas>(*rhi_);objectShadowAtlas_->initialize();}for(auto& bounds:shadowBounds_){bounds=std::make_unique<ShadowTileBounds>(*rhi_);bounds->initialize(readBinaryFile(shaderDirectory_+(kShadowBoundsTilesPerGroup==8?"/shadow_bounds_batch.comp.spv":"/shadow_bounds.comp.spv")),shadowImageView_,shadowSampler_,context.shadowMapSize,objectShadowPrepared_?kObjectShadowCapacity:0,kShadowBoundsTilesPerGroup);}createDescriptorSetLayout();createDescriptorPool();createDescriptorSets();},true);
     enqueue("pipelines",loadTimings_.pipelinesMs,[this,context]{createGraphicsPipeline(context);initializeMotion(context);buildSceneState();},true);
     loadTimings_.cpuPrepareMs=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-prepareStart).count();
     RuntimeDiagnostics::instance().info("render","Scene load CPU preparation: "+std::to_string(loadTimings_.cpuPrepareMs)
@@ -1882,6 +1887,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"computeSkinningPreparedDispatches\": " << (computeSkinningEnabled_?skinningDispatches_.size():0) << ",\n"
          << "  \"computeSkinningPreparedVertices\": " << preparedSkinningVertices << ",\n"
          << "  \"computeSkinningVertexWords\": " << GpuSkinnedVertex::wordCount << ",\n"
+         << "  \"shadowBoundsTilesPerGroup\": " << (shadowBounds_.at(currentFrame_)?shadowBounds_.at(currentFrame_)->tilesPerGroup():0) << ",\n"
          << "  \"computeSkinningOutputBytes\": " << skinningOutputBytes << ",\n"
          << "  \"gpuTransparentSortingPrepared\": " << (gpuTransparentTickets_[currentFrame_]?"true":"false") << ",\n"
          << "  \"gpuTransparentSortingBytes\": " << (gpuTransparentSort_?gpuTransparentSort_->bytes():0) << ",\n"

@@ -17,14 +17,15 @@ class ShadowTileBounds final {
     rhi::GpuBuffer buffer_{};
     unsigned tiles_{};
     unsigned objectCapacity_{};
+    unsigned tilesPerGroup_=1;
 public:
     explicit ShadowTileBounds(rhi::IRhi& backend):backend_(backend){}
     ShadowTileBounds(const ShadowTileBounds&)=delete;
     ~ShadowTileBounds(){release();}
-    void initialize(const std::vector<char>& code,VkImageView depth,VkSampler sampler,unsigned extent,unsigned objectCapacity=0){
-        if(tiles_||!extent||extent%8||objectCapacity>kObjectShadowCapacity)throw std::invalid_argument("Shadow bounds require an empty owner, valid object capacity and a multiple-of-8 atlas");
+    void initialize(const std::vector<char>& code,VkImageView depth,VkSampler sampler,unsigned extent,unsigned objectCapacity=0,unsigned tilesPerGroup=1){
+        if(tiles_||!extent||extent%8||objectCapacity>kObjectShadowCapacity||(tilesPerGroup!=1&&tilesPerGroup!=8))throw std::invalid_argument("Shadow bounds require an empty owner, valid object capacity and a multiple-of-8 atlas");
         try{
-            tiles_=extent/8;objectCapacity_=objectCapacity;
+            tiles_=extent/8;objectCapacity_=objectCapacity;tilesPerGroup_=tilesPerGroup;
             const auto size=objectCapacity_?objectRecordsOffset()+sizeof(ObjectShadowGpuHeader)+objectCapacity_*sizeof(ObjectShadowGpuRecord):depthBoundsBytes();
             buffer_=backend_.allocator().createBuffer(size,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
             if(objectCapacity_)writeObjectRecords({});
@@ -41,8 +42,9 @@ public:
     }
     void record(rhi::ICommandRecorder& commands)const{
         if(!pipeline_)throw std::logic_error("Shadow bounds are not initialized");
-        commands.bindComputePipeline(pipeline_);commands.bindComputeDescriptorSet(layout_,set_);commands.dispatch(tiles_,tiles_,1);
+        commands.bindComputePipeline(pipeline_);commands.bindComputeDescriptorSet(layout_,set_);commands.dispatch((tiles_+tilesPerGroup_-1)/tilesPerGroup_,tiles_,1);
     }
+    unsigned tilesPerGroup()const noexcept{return tilesPerGroup_;}
     const rhi::GpuBuffer& buffer()const{return buffer_;}
     VkDeviceSize depthBoundsBytes()const{return VkDeviceSize(tiles_)*tiles_*2*sizeof(float);}
     VkDeviceSize objectRecordsOffset()const{return (depthBoundsBytes()+15)&~VkDeviceSize(15);}
@@ -60,7 +62,7 @@ private:
     void release(){
         if(pipeline_)backend_.destroyPipeline(pipeline_);if(layout_)backend_.destroyPipelineLayout(layout_);
         if(pool_)backend_.destroyDescriptorPool(pool_);if(setLayout_)backend_.destroyDescriptorSetLayout(setLayout_);
-        backend_.allocator().destroyBuffer(buffer_);pipeline_={};layout_={};pool_={};setLayout_={};set_={};tiles_=0;objectCapacity_=0;
+        backend_.allocator().destroyBuffer(buffer_);pipeline_={};layout_={};pool_={};setLayout_={};set_={};tiles_=0;objectCapacity_=0;tilesPerGroup_=1;
     }
 };
 }
