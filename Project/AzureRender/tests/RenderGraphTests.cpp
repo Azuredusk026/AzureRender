@@ -13,6 +13,15 @@ int main() {
     try {
         using namespace azurerender;
         {
+            RenderGraph timed;std::vector<int> events;
+            timed.addPass("host",[&]{events.push_back(2);});
+            const auto graphics=timed.addGraphicsPass("graphics",{},[&](rhi::ICommandRecorder&){events.push_back(99);},[&](rhi::ICommandRecorder&){events.push_back(4);});
+            std::string error;check(timed.compile(error),"Timed graph compiles");rhi::NullCommandRecorder recorder;
+            timed.execute(&recorder,[&](RenderGraph::PassId pass){check(pass==graphics,"Only command callbacks delegate");events.push_back(3);return true;},false,[&](RenderGraph::PassId,bool begin){events.push_back(begin?1:5);});
+            check(events==std::vector<int>({1,2,5,1,3,4,5}),"Primary pass boundaries include host commands, delegated commands and after-pass work");
+        }
+
+        {
             RenderGraph chunks;
             rhi::RenderPassBeginDesc description{};
             std::vector<int> order;

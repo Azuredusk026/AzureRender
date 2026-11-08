@@ -23,7 +23,7 @@ constexpr const char* kUsage =
     "[--editor <azscene path>] [--smoke-frames <positive integer>] "
     "[--portfolio] [--width <pixels>] [--height <pixels>] "
     "[--anti-aliasing <off|edge|supersample|temporal|multisample>] "
-    "[--gpu-timing] [--gpu-timing-output <json path>] "
+    "[--gpu-timing] [--gpu-pass-timing] [--gpu-timing-output <json path>] "
     "[--diagnostic-view <beauty|normal|outline|shadow>] "
     "[--no-stylized] [--no-inner-outline] [--hud] "
     "[--technical-sequence] "
@@ -63,7 +63,8 @@ constexpr const char* kHelp =
     "  --anti-aliasing off|edge|supersample|temporal|multisample  Sampling quality\n"
     "  --capture-dir <empty-dir>           Deterministic PNG output\n"
     "  --capture-frames <N> --capture-fps <1-240>\n"
-    "  --gpu-timing-output <json>          GPU pass timing\n\n"
+    "  --gpu-timing-output <json>          GPU frame timing\n"
+    "  --gpu-pass-timing                  Bounded render-graph pass timing\n\n"
     "Quality and QA:\n"
     "  --qa-camera <preset> --qa-light <preset>\n"
     "  --qa-camera scene --qa-light scene Preserve authored scene conditions\n"
@@ -439,6 +440,9 @@ ParsedCommandLine parseCommandLine(
                 requireValue(arguments, index, argument), argument);
         } else if (argument == "--portfolio") {
             parsed.options.portfolioMode = true;
+        } else if (argument == "--gpu-pass-timing") {
+            parsed.options.gpuPassTimingEnabled = true;
+            parsed.options.gpuTimingEnabled = true;
         } else if (argument == "--gpu-timing") {
             parsed.options.gpuTimingEnabled = true;
         } else if (argument == "--disable-bindless") {

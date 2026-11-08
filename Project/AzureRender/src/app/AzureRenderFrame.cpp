@@ -1232,7 +1232,7 @@ void AzureRenderApp::recordCommandBuffer(
             commandBuffer,
             timestampQueryPools_[currentFrame_],
             0,
-            kTimestampQueryCount);
+            kTimestampQueryCount+(runOptions_.gpuPassTimingEnabled?2*kMaximumTimedPasses:0));
         vkCmdWriteTimestamp(
             commandBuffer,
             VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
@@ -1284,6 +1284,19 @@ void AzureRenderApp::recordCommandBuffer(
     }
     const auto workerStart = std::chrono::steady_clock::now();
     recordingWorkers_.runAdaptive(std::move(recordingTasks));
+    std::function<void(azurerender::RenderGraph::PassId,bool)> passTiming;
+    std::vector<int> passSlots;
+    if(runOptions_.gpuPassTimingEnabled){
+        auto& names=timestampPassNames_[currentFrame_];names.clear();passSlots.assign(graph.passes().size(),-1);
+        for(const auto pass:graph.executionOrder()){
+            if(names.size()==kMaximumTimedPasses)break;
+            passSlots[pass]=static_cast<int>(names.size());names.push_back(graph.passes()[pass].name);
+        }
+        passTiming=[&](azurerender::RenderGraph::PassId pass,bool begin){
+            const int slot=passSlots[pass];if(slot<0)return;
+            commandRecorder.writeTimestamp(timestampQueryPools_[currentFrame_],kTimestampQueryCount+2*static_cast<unsigned>(slot)+(begin?0:1),VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
+        };
+    }
     const auto executionStart = std::chrono::steady_clock::now();
     graph.execute(&commandRecorder, [&](azurerender::RenderGraph::PassId pass) {
         if (recordedPasses[pass].empty()) {
@@ -1311,7 +1324,7 @@ void AzureRenderApp::recordCommandBuffer(
         serialSceneRecorder.invalidatePipelineBindings();
         if (graphics.renderPass != VK_NULL_HANDLE) vkCmdEndRenderPass(commandBuffer);
         return true;
-    }, runOptions_.parallelRecordingDisabled);
+    }, runOptions_.parallelRecordingDisabled,passTiming);
     if (runOptions_.gpuTimingEnabled) {
         const auto executionEnd = std::chrono::steady_clock::now();
         submissionCounters_.graphPreparationMilliseconds +=

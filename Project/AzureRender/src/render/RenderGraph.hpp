@@ -70,7 +70,8 @@ public:
     void dependsOn(PassId pass, PassId prerequisite);
     void execute(rhi::ICommandRecorder* recorder = nullptr,
         const std::function<bool(PassId)>& executeRecorded = {},
-        bool useFullInlineCallback = false) const;
+        bool useFullInlineCallback = false,
+        const std::function<void(PassId, bool)>& passBoundary = {}) const;
     void read(PassId pass, ResourceId resource);
     void write(PassId pass, ResourceId resource);
     void attachment(PassId pass, ResourceId resource, RenderGraphUsage usage, VkImageLayout finalLayout);

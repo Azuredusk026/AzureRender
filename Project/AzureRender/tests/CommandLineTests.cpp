@@ -34,6 +34,9 @@ void expectError(
 }  // namespace
 
 int main() try {
+    require(!azurerender::parseCommandLine({}).options.gpuPassTimingEnabled,"Pass timing defaults off");
+    const auto passTiming=azurerender::parseCommandLine({"--gpu-pass-timing"});
+    require(passTiming.options.gpuPassTimingEnabled&&passTiming.options.gpuTimingEnabled,"Pass timing implies core timing");
     require(!azurerender::parseCommandLine({}).options.qaDisableSurfaceRadianceReuse,"Radiance diagnostic defaults to off");
     require(azurerender::parseCommandLine({"--qa-disable-surface-radiance"}).options.qaDisableSurfaceRadianceReuse,"Explicit complete shading control is preserved");
     require(std::string(azurerender::commandLineHelp()).find("--qa-disable-surface-radiance")!=std::string::npos,"Radiance control is documented");

@@ -39,6 +39,7 @@ struct AzureRenderOptions {
     std::uint32_t height = 720;
     bool portfolioMode = false;
     bool gpuTimingEnabled = false;
+    bool gpuPassTimingEnabled = false;
     std::string gpuTimingOutput;
     // Force the fixed per-material descriptor path even when the device
     // supports descriptor indexing. Exists so the fallback path stays

@@ -57,6 +57,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261109-022033-gpu-pass-attribution-89c3e2",
+      "name": "GPU 通道成本归因",
+      "status": "PassAttributionCompleted",
+      "sourceBase": "ae4bf23",
+      "evidence": "docs/acceptance/nr/gpu-pass-attribution.md",
+      "checksPassed": 4,
+      "nativeProcesses": 1,
+      "renderedFrames": 32,
+      "capturedFrames": 0,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261109-015039-sparse-consumer-attribution-e39118",
       "name": "稀疏照明消费归因",
       "status": "AttributionCompletedDefaultDisabled",

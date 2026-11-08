@@ -568,7 +568,35 @@ void AzureRenderApp::collectGpuTiming(const std::size_t frameIndex) {
         gpuTiming_.frameMaxMs =
             std::max(gpuTiming_.frameMaxMs, frameMs);
     }
+    collectGpuPassTiming(frameIndex);
     appendFrameTimingCsv(shadowMs, sceneMs, postProcessMs, frameMs);
+}
+
+void AzureRenderApp::collectGpuPassTiming(const std::size_t frameIndex) {
+    if(!runOptions_.gpuPassTimingEnabled)return;
+    const auto& names=timestampPassNames_[frameIndex];if(names.empty())return;
+    std::array<std::uint64_t,kMaximumTimedPasses*4> values{};
+    const auto count=static_cast<std::uint32_t>(names.size()*2);
+    const auto result=vkGetQueryPoolResults(device_,timestampQueryPools_[frameIndex],kTimestampQueryCount,count,
+        count*2*sizeof(std::uint64_t),values.data(),2*sizeof(std::uint64_t),VK_QUERY_RESULT_64_BIT|VK_QUERY_RESULT_WITH_AVAILABILITY_BIT);
+    if(result!=VK_SUCCESS&&result!=VK_NOT_READY)vkCheck(result,"vkGetQueryPoolResults(pass timestamps)");
+    const auto mask=timestampValidBits_>=64?std::numeric_limits<std::uint64_t>::max():(std::uint64_t{1}<<timestampValidBits_)-1;
+    nlohmann::json entries=nlohmann::json::array();
+    for(std::size_t i=0;i<names.size();++i){
+        if(!values[4*i+1]||!values[4*i+3]){entries.push_back({{"name",names[i]},{"available",false}});continue;}
+        const auto ticks=(values[4*i+2]-values[4*i])&mask;
+        const double ms=static_cast<double>(ticks)*timestampPeriodNanoseconds_*1.e-6;
+        entries.push_back({{"name",names[i]},{"available",true},{"milliseconds",ms}});
+        auto found=std::find_if(gpuPassTiming_.begin(),gpuPassTiming_.end(),[&](const auto& item){return item.name==names[i];});
+        if(found==gpuPassTiming_.end()){
+            if(gpuPassTiming_.size()==128)continue;
+            gpuPassTiming_.push_back({names[i],1,ms,ms,ms});
+        }else{++found->samples;found->totalMs+=ms;found->minMs=std::min(found->minMs,ms);found->maxMs=std::max(found->maxMs,ms);}
+    }
+    if(runOptions_.gpuTimingOutput.empty())return;
+    auto path=std::filesystem::u8path(runOptions_.gpuTimingOutput);path.replace_extension(".passes.jsonl");
+    std::ofstream output(path,std::ios::binary|(gpuTiming_.samples==1?std::ios::trunc:std::ios::app));
+    if(output)output<<nlohmann::json{{"frame",gpuTiming_.samples},{"passes",std::move(entries)}}.dump()<<'\n';
 }
 
 void AzureRenderApp::appendFrameTimingCsv(
@@ -680,6 +708,8 @@ void AzureRenderApp::printGpuTimingSummary() const {
             "Failed to create GPU timing report: "
             + outputPath.u8string());
     }
+    nlohmann::json passTimings=nlohmann::json::array();
+    for(const auto& pass:gpuPassTiming_)passTimings.push_back({{"name",pass.name},{"samples",pass.samples},{"averageMs",pass.totalMs/static_cast<double>(pass.samples)},{"minMs",pass.minMs},{"maxMs",pass.maxMs}});
     output
         << std::fixed << std::setprecision(6)
         << "{\n"
@@ -695,6 +725,7 @@ void AzureRenderApp::printGpuTimingSummary() const {
             {"waitFrames", framePacingWaitFrames_}, {"waitMilliseconds", framePacingWaitMilliseconds_}}.dump() << ",\n"
         << "  \"pipelineInspection\": " << (pipelineInspection_ ? pipelineInspection_->jsonReport() : "null") << ",\n"
         << "  \"runtimeTraceFrames\": " << gameRouteFrames_.size() << ",\n"
+        << "  \"gpuPassTimings\": " << passTimings.dump() << ",\n"
         << "  \"timestampPeriodNanoseconds\": "
         << timestampPeriodNanoseconds_ << ",\n"
         << "  \"shadowAverageMs\": " << shadowAverage << ",\n"

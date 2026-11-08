@@ -126,7 +126,8 @@ void RenderGraph::setRecordingChunks(PassId pass,
 }
 
 void RenderGraph::execute(rhi::ICommandRecorder* recorder,
-    const std::function<bool(PassId)>& executeRecorded, bool useFullInlineCallback) const {
+    const std::function<bool(PassId)>& executeRecorded, bool useFullInlineCallback,
+    const std::function<void(PassId, bool)>& passBoundary) const {
     if (!compiled_) throw std::logic_error("Render graph must compile before execution");
     for (const auto& barrier : barriers_)
         if (barrier.image.image != VK_NULL_HANDLE && recorder == nullptr)
@@ -137,6 +138,7 @@ void RenderGraph::execute(rhi::ICommandRecorder* recorder,
         if (pass.recordCommands && recorder == nullptr)
             throw std::logic_error("Command pass requires command recorder");
     for (const auto pass : executionOrder_) {
+        if(passBoundary)passBoundary(pass,true);
         const auto& buffers = passBufferBarriers_[pass];
         if (!buffers.empty()) recorder->bufferBarriers(buffers.data(), buffers.size());
         for (const auto index : imageBarrierIndices_[pass])
@@ -152,6 +154,7 @@ void RenderGraph::execute(rhi::ICommandRecorder* recorder,
             }
             if (passes_[pass].afterRenderPass) passes_[pass].afterRenderPass(*recorder);
         }
+        if(passBoundary)passBoundary(pass,false);
     }
 }
 

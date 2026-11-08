@@ -1660,7 +1660,7 @@ void AzureRenderApp::createTimestampQueryPools() {
     VkQueryPoolCreateInfo createInfo{
         VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO};
     createInfo.queryType = VK_QUERY_TYPE_TIMESTAMP;
-    createInfo.queryCount = kTimestampQueryCount;
+    createInfo.queryCount = kTimestampQueryCount+(runOptions_.gpuPassTimingEnabled?2*kMaximumTimedPasses:0);
     for (VkQueryPool& pool : timestampQueryPools_) {
         vkCheck(
             vkCreateQueryPool(device_, &createInfo, nullptr, &pool),

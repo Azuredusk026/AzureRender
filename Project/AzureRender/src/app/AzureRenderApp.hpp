@@ -113,6 +113,7 @@ private:
     static constexpr std::uint32_t kShadowMapSize = 4096;
     static constexpr std::size_t kMaxFramesInFlight = 2;
     static constexpr std::uint32_t kTimestampQueryCount = 4;
+    static constexpr std::uint32_t kMaximumTimedPasses = 64;
     static constexpr std::size_t kMaxHudVertices = 24576;
     static constexpr VkFormat kHdrSceneColorFormat =
         VK_FORMAT_R16G16B16A16_SFLOAT;
@@ -268,6 +269,10 @@ private:
     bool fragmentPrimitiveIdentity_ = false;
     bool fragmentQuadControl_ = false;
     std::vector<VkQueryPool> timestampQueryPools_;
+    std::array<std::vector<std::string>, kMaxFramesInFlight> timestampPassNames_;
+    struct GpuPassTimingSummary {std::string name;std::uint64_t samples=0;double totalMs=0,minMs=0,maxMs=0;};
+    std::vector<GpuPassTimingSummary> gpuPassTiming_;
+    void collectGpuPassTiming(std::size_t frameIndex);
     std::array<bool, kMaxFramesInFlight> timestampQuerySubmitted_{};
     GpuTimingAccumulator gpuTiming_;
     SubmissionCounters submissionCounters_;
