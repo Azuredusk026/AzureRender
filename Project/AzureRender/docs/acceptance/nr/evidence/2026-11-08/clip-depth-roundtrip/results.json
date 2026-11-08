@@ -1,0 +1,868 @@
+{
+  "schemaVersion": 1,
+  "status": "vertex-input-precision-attributed",
+  "sourceBase": "e401f51",
+  "sourceHashes": {
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+    "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\receiver-current-gpu_frame2.rdc": "ee49ff463fb5edd533b434c3642177503b9be22149621e5edb8a5f4b2865607b"
+  },
+  "exportExecution": {
+    "command": [
+      "D:/Tools/RenderDoc/1.46/RenderDoc_1.46_64/qrenderdoc.exe",
+      "--python",
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261108-082005-clip-depth-roundtrip-9fcd35\\export.py"
+    ],
+    "exitCode": 0,
+    "seconds": 6.078000000008615,
+    "sourceInputsUnchanged": true,
+    "capturesUnchanged": true
+  },
+  "vertexSources": {
+    "status": "exported",
+    "sources": [
+      {
+        "label": "native",
+        "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+        "event": 422,
+        "indexCount": 43044,
+        "vertexCount": 11564,
+        "stride": 92,
+        "baseVertex": 0,
+        "flipY": false,
+        "packedSignature": true,
+        "layout": [
+          {
+            "name": "SV_Position",
+            "varName": "",
+            "register": 0,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Position",
+            "offset": 0
+          },
+          {
+            "name": "TEXCOORD0",
+            "varName": "",
+            "register": 1,
+            "compCount": 2,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 16
+          },
+          {
+            "name": "TEXCOORD1",
+            "varName": "",
+            "register": 2,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 24
+          },
+          {
+            "name": "TEXCOORD2",
+            "varName": "",
+            "register": 3,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 36
+          },
+          {
+            "name": "TEXCOORD3",
+            "varName": "",
+            "register": 4,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 48
+          },
+          {
+            "name": "TEXCOORD4",
+            "varName": "",
+            "register": 5,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 64
+          },
+          {
+            "name": "TEXCOORD5",
+            "varName": "",
+            "register": 6,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 76
+          },
+          {
+            "name": "TEXCOORD6",
+            "varName": "",
+            "register": 7,
+            "compCount": 1,
+            "varType": 4,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 88
+          }
+        ],
+        "vertexBytes": 1063888,
+        "vertexSha256": "4b93fa85d3c3e49092c719c083b84d58768b8018de882fdde2e30c6cd0a26f69",
+        "indexedClipSha256": "4f3d5e994d5a7f70b11dfc22ef12f6749735cbfeb1e3b48e90240e6a1477d91f",
+        "cullMode": "CullMode.Back",
+        "depthReadOnly": "False",
+        "frontCCW": "True"
+      },
+      {
+        "label": "native-line",
+        "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+        "event": 440,
+        "indexCount": 43044,
+        "vertexCount": 11564,
+        "stride": 92,
+        "baseVertex": 0,
+        "flipY": false,
+        "packedSignature": true,
+        "layout": [
+          {
+            "name": "SV_Position",
+            "varName": "",
+            "register": 0,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Position",
+            "offset": 0
+          },
+          {
+            "name": "TEXCOORD0",
+            "varName": "",
+            "register": 1,
+            "compCount": 2,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 16
+          },
+          {
+            "name": "TEXCOORD1",
+            "varName": "",
+            "register": 2,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 24
+          },
+          {
+            "name": "TEXCOORD2",
+            "varName": "",
+            "register": 3,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 36
+          },
+          {
+            "name": "TEXCOORD3",
+            "varName": "",
+            "register": 4,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 48
+          },
+          {
+            "name": "TEXCOORD4",
+            "varName": "",
+            "register": 5,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 64
+          },
+          {
+            "name": "TEXCOORD5",
+            "varName": "",
+            "register": 6,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 76
+          },
+          {
+            "name": "TEXCOORD6",
+            "varName": "",
+            "register": 7,
+            "compCount": 1,
+            "varType": 4,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 88
+          }
+        ],
+        "vertexBytes": 1063888,
+        "vertexSha256": "9dfe8833c04e72c86815d1b150c31f8278fb6772a1c91c0991d8a5a3376e8eb2",
+        "indexedClipSha256": "068c79859a44b666bf338956872e8ae291fef8ab1dc424894fce9b66b66686dc",
+        "cullMode": "CullMode.Front",
+        "depthReadOnly": "False",
+        "frontCCW": "True"
+      },
+      {
+        "label": "native-color",
+        "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+        "event": 950,
+        "indexCount": 43044,
+        "vertexCount": 11564,
+        "stride": 132,
+        "baseVertex": 0,
+        "flipY": false,
+        "packedSignature": true,
+        "layout": [
+          {
+            "name": "SV_Position",
+            "varName": "",
+            "register": 0,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Position",
+            "offset": 0
+          },
+          {
+            "name": "TEXCOORD0",
+            "varName": "",
+            "register": 1,
+            "compCount": 2,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 16
+          },
+          {
+            "name": "TEXCOORD1",
+            "varName": "",
+            "register": 2,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 24
+          },
+          {
+            "name": "TEXCOORD2",
+            "varName": "",
+            "register": 3,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 36
+          },
+          {
+            "name": "TEXCOORD3",
+            "varName": "",
+            "register": 4,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 48
+          },
+          {
+            "name": "TEXCOORD4",
+            "varName": "",
+            "register": 5,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 64
+          },
+          {
+            "name": "TEXCOORD5",
+            "varName": "",
+            "register": 6,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 76
+          },
+          {
+            "name": "TEXCOORD6",
+            "varName": "",
+            "register": 7,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 88
+          },
+          {
+            "name": "TEXCOORD7",
+            "varName": "",
+            "register": 8,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 100
+          },
+          {
+            "name": "TEXCOORD8",
+            "varName": "",
+            "register": 9,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 116
+          },
+          {
+            "name": "TEXCOORD9",
+            "varName": "",
+            "register": 10,
+            "compCount": 1,
+            "varType": 4,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": 128
+          }
+        ],
+        "vertexBytes": 1526448,
+        "vertexSha256": "49df748f07528ec2b1ee5a558adaa2d7c5e51f37ce38372f97d2145675afbbeb",
+        "indexedClipSha256": "4f3d5e994d5a7f70b11dfc22ef12f6749735cbfeb1e3b48e90240e6a1477d91f",
+        "cullMode": "CullMode.Back",
+        "depthReadOnly": "False",
+        "frontCCW": "True"
+      },
+      {
+        "label": "current-base",
+        "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\receiver-current-gpu_frame2.rdc",
+        "event": 378,
+        "indexCount": 43044,
+        "vertexCount": 11564,
+        "stride": 64,
+        "baseVertex": 0,
+        "flipY": false,
+        "packedSignature": false,
+        "layout": [
+          {
+            "name": "",
+            "varName": "gl_Position",
+            "register": 0,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Position",
+            "offset": 0
+          },
+          {
+            "name": "",
+            "varName": "textureCoordinate",
+            "register": 2,
+            "compCount": 2,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "worldPosition",
+            "register": 3,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "opacityCoordinate",
+            "register": 14,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          }
+        ],
+        "vertexBytes": 740096,
+        "vertexSha256": "b1758835f53e371a1da717b912f2c4a4d448b7a9574d0730697d0f2240a8ca8d",
+        "indexedClipSha256": "e23af301ad5dbc0c03d488227887e87c90bc04ea7dc405b890777c5fd618709d",
+        "depthTarget": {
+          "resource": "ResourceId::1048",
+          "width": 2560,
+          "height": 1440,
+          "format": "D32"
+        }
+      },
+      {
+        "label": "current",
+        "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\receiver-current-gpu_frame2.rdc",
+        "event": 392,
+        "indexCount": 43044,
+        "vertexCount": 11564,
+        "stride": 80,
+        "baseVertex": 0,
+        "flipY": false,
+        "packedSignature": false,
+        "layout": [
+          {
+            "name": "",
+            "varName": "gl_Position",
+            "register": 0,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Position",
+            "offset": 0
+          },
+          {
+            "name": "",
+            "varName": "opacityCoordinate",
+            "register": 0,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "textureCoordinate",
+            "register": 1,
+            "compCount": 2,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "shellColor",
+            "register": 2,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "shellDepthProjection",
+            "register": 3,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          }
+        ],
+        "vertexBytes": 925120,
+        "vertexSha256": "85b344073f0b921eed6c67496683022ec1999ecd088975ca64775df303b15780",
+        "indexedClipSha256": "f378cc58d9cdf92297ff721d91172fcd4d52a3b72dc5664ca74f1b2a59c348f4",
+        "depthTarget": {
+          "resource": "ResourceId::1048",
+          "width": 2560,
+          "height": 1440,
+          "format": "D32"
+        }
+      },
+      {
+        "label": "current-color",
+        "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\receiver-current-gpu_frame2.rdc",
+        "event": 493,
+        "indexCount": 43044,
+        "vertexCount": 11564,
+        "stride": 256,
+        "baseVertex": 0,
+        "flipY": false,
+        "packedSignature": false,
+        "layout": [
+          {
+            "name": "",
+            "varName": "gl_Position",
+            "register": 0,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Position",
+            "offset": 0
+          },
+          {
+            "name": "",
+            "varName": "worldNormal",
+            "register": 0,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "worldTangent",
+            "register": 1,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "textureCoordinate",
+            "register": 2,
+            "compCount": 2,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "worldPosition",
+            "register": 3,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "shadowPositions[0]",
+            "register": 4,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "shadowPositions[1]",
+            "register": 5,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "shadowPositions[2]",
+            "register": 6,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "shadowPositions[3]",
+            "register": 7,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "eyebrowRegion",
+            "register": 8,
+            "compCount": 1,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "instanceFaceDirection",
+            "register": 9,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "instanceFaceFrame:col0",
+            "register": 10,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "instanceFaceFrame:col1",
+            "register": 11,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "instanceFaceFrame:col2",
+            "register": 12,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "instanceFaceFrame:col3",
+            "register": 13,
+            "compCount": 4,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "opacityCoordinate",
+            "register": 14,
+            "compCount": 3,
+            "varType": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          },
+          {
+            "name": "",
+            "varName": "instanceObjectShadow",
+            "register": 15,
+            "compCount": 1,
+            "varType": 4,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "offset": null
+          }
+        ],
+        "vertexBytes": 2960384,
+        "vertexSha256": "5e557a0f4c94e78a8ce5e5bf9a5af6e9c468aa7e050a26bf33e42d14ff6ae2c3",
+        "indexedClipSha256": "e23af301ad5dbc0c03d488227887e87c90bc04ea7dc405b890777c5fd618709d"
+      }
+    ]
+  },
+  "pairedClipAnalysis": {
+    "native-vs-current-base": {
+      "screenMedian": 0.00026715189305026626,
+      "screenMax": 0.0004723925744977822,
+      "componentPixelRange": [
+        [
+          6.69515411999555e-07,
+          -0.00047202181595373816
+        ],
+        [
+          1.8198064249963508e-05,
+          -0.00026652085274747606
+        ],
+        [
+          3.528865591739816e-05,
+          -5.399688760121535e-05
+        ]
+      ],
+      "Wmedian": 7.152557373046875e-07,
+      "Wmax": 9.5367431640625e-07
+    },
+    "native-line-vs-current": {
+      "screenMedian": 0.00026713786754913385,
+      "screenMax": 0.0007579186966892354,
+      "componentPixelRange": [
+        [
+          -0.00023736090704051804,
+          -0.0006088491201605706
+        ],
+        [
+          1.8204945317901178e-05,
+          -0.0002665060444329015
+        ],
+        [
+          0.0007053916992516562,
+          0.00027724231534520527
+        ]
+      ],
+      "Wmedian": 7.152557373046875e-07,
+      "Wmax": 9.5367431640625e-07
+    },
+    "native-color-vs-current-color": {
+      "screenMedian": 0.00026715189305026626,
+      "screenMax": 0.0004723925744977822,
+      "componentPixelRange": [
+        [
+          6.69515411999555e-07,
+          -0.00047202181595373816
+        ],
+        [
+          1.8198064249963508e-05,
+          -0.00026652085274747606
+        ],
+        [
+          3.528865591739816e-05,
+          -5.399688760121535e-05
+        ]
+      ],
+      "Wmedian": 7.152557373046875e-07,
+      "Wmax": 9.5367431640625e-07
+    },
+    "depthChanges": {
+      "baseToShell": 0,
+      "maxDelta": 0.0
+    }
+  },
+  "projectionMath": {
+    "vertices": 11564,
+    "nativeAssemblyExactComponents": 46256,
+    "nativeAssemblyTotalComponents": 46256,
+    "nativeAssemblyExactVertices": 11564,
+    "nativeAssemblyMaximumError": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "relativeWorldAbsErrorMaximum": [
+      0.0,
+      2.384185791015625e-07,
+      2.384185791015625e-07
+    ],
+    "worldErrorPercentiles": [
+      [
+        0.0,
+        1.1920928955078125e-07,
+        1.4901161193847656e-07
+      ],
+      [
+        0.0,
+        2.384185791015625e-07,
+        2.123415470123291e-07
+      ],
+      [
+        0.0,
+        2.384185791015625e-07,
+        2.4586915969848633e-07
+      ]
+    ],
+    "mappedClipWExact": 137,
+    "mappedClipWAbsErrorMedian": 2.384185791015625e-07,
+    "mappedClipWAbsErrorMaximum": 2.384185791015625e-07,
+    "affineFit": [
+      [
+        0.9999999999999986,
+        -1.1026499734722868e-08,
+        2.1566197482645246e-10
+      ],
+      [
+        1.550584938808455e-17,
+        1.000000034670418,
+        1.3350882527296548e-07
+      ],
+      [
+        8.296911484483606e-17,
+        -3.487473916596873e-08,
+        1.0000001344670857
+      ],
+      [
+        -4.9083337913707924e-17,
+        1.8365153997557115e-07,
+        1.3019357432419998e-09
+      ]
+    ],
+    "affineResidualMaximum": 1.1080787717044312e-07
+  },
+  "productionProvenance": [
+    {
+      "configuration": "release",
+      "sha256": "725d97c8ffe7f1a25c6cc4d9beb40edad75140179a2205b91669528807403b58"
+    },
+    {
+      "configuration": "debug",
+      "sha256": "1d2664c6e81661764e201d7ee194d20662c558ac2dac45bb00254198d6e6a41a"
+    }
+  ],
+  "userDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "candidateAdopted": false,
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceBytes": 1213222,
+  "evidenceSha256": "18fca8852fb0c8cd1d4f5a5aa3c6c039a7e31da45501c1d3a08442b2525070f3",
+  "members": [
+    {
+      "path": "analyze_clips.py",
+      "bytes": 1412,
+      "sha256": "d15e46978096c7cde978d805017535426f98d3bf624feb0d72e669ac9a7f70f3"
+    },
+    {
+      "path": "analyze_projection_math.py",
+      "bytes": 2371,
+      "sha256": "d966db69eb4e69237d82dfa436565df9cb6f7b5918c9c670edd7621fac3abc1d"
+    },
+    {
+      "path": "borrowed-projection/writer-422-cb0.bin",
+      "bytes": 1536,
+      "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+    },
+    {
+      "path": "borrowed-projection/writer-422-cb1.bin",
+      "bytes": 3328,
+      "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 434,
+      "sha256": "403f67793c44e1e29d6c12b6d8a1c03f77f76c704ffd92927d1af77dd21bd42a"
+    },
+    {
+      "path": "clip-analysis.json",
+      "bytes": 1302,
+      "sha256": "81e36408dcd5fe6768a74f8f3110a9a247f221b9ed1d3ed1b758cf8c2557e9f2"
+    },
+    {
+      "path": "compact/arrays.json",
+      "bytes": 1938,
+      "sha256": "968ebe0221e0b69ee00af734115a1e8550f9a3331360adb800b0e3bf6738fb78"
+    },
+    {
+      "path": "compact/arrays.npz",
+      "bytes": 1119815,
+      "sha256": "0d74e6f2ce5b776faf94d44dc58aac6dd9c8a79dbdb6b38a4b9f088b8a1f4b6f"
+    },
+    {
+      "path": "compact_evidence.py",
+      "bytes": 1481,
+      "sha256": "23daff5028de6bfed91e0766a3ea635a7013c6493e2f1f0452e42a83c79ba56e"
+    },
+    {
+      "path": "export-baseline.json",
+      "bytes": 187705,
+      "sha256": "b49182c3838a676a3c2218f7d4c328e40879917aa75b8370cef5a1fd1c3e444b"
+    },
+    {
+      "path": "export-console.log",
+      "bytes": 8566,
+      "sha256": "87423f1ec9a69f74d6766a76198f06458cbffd0e302abfd3a957914f25db5b77"
+    },
+    {
+      "path": "export-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "export-execution.json",
+      "bytes": 338,
+      "sha256": "18145e376bbb5b274b4936239b09698587a394b88212a8b44a3ffb3ee1fba6e4"
+    },
+    {
+      "path": "export-result.json",
+      "bytes": 17161,
+      "sha256": "349f96719245e45a5239fb6d62da491d97dd507a0df4196b13776a21acc561cd"
+    },
+    {
+      "path": "export.py",
+      "bytes": 5279,
+      "sha256": "a0dfbbdafb0f449a5f2d80a75fbff2bef665cfa1974aa0cafa16d4d605ee29ed"
+    },
+    {
+      "path": "package.py",
+      "bytes": 4855,
+      "sha256": "ad231e07d3bb11d42ec066e76fa89ccb8440ddbcc6812ebc3b186265c148271a"
+    },
+    {
+      "path": "paired-clip-analysis.json",
+      "bytes": 1531,
+      "sha256": "ed8ebfd9a8c552492149ff6e2de2b12b57e65cdf899723d28149c83f6acbc1e3"
+    },
+    {
+      "path": "projection-math-analysis.json",
+      "bytes": 1265,
+      "sha256": "53ecb412fc5f512f69df302bb08d78815164f682e99950e5eaa8d489a11a0d9e"
+    },
+    {
+      "path": "repackage.py",
+      "bytes": 1057,
+      "sha256": "f674113d2da0954eabc6496c0a34b42ed87cabbd4cfb1c3e1b23c48c9e5f59d2"
+    },
+    {
+      "path": "run_export.py",
+      "bytes": 1850,
+      "sha256": "0dc2985d8b6cc4fc616d7be5571ee7b5d937d568e5fec18422a3b389497bee61"
+    },
+    {
+      "path": "verify_compact.py",
+      "bytes": 1671,
+      "sha256": "326b3206bb1950c5ce8fdc516937e3a62f6ea86136b97ea8a1328c1877761e8c"
+    }
+  ]
+}
