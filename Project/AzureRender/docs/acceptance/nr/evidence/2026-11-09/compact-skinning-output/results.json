@@ -1,0 +1,682 @@
+{
+  "sourceBase": "3e73e5f2641aaa5261c02b43785109c74d6b1fe2",
+  "status": "compact-output-integrated-visual-exact-local-gpu-gain",
+  "tests": [
+    {
+      "receipt": "release-nvidia.xml",
+      "name": "AzureRender.StaticSkinningRecording"
+    },
+    {
+      "receipt": "release-nvidia.xml",
+      "name": "AzureRender.SkinningBatch"
+    },
+    {
+      "receipt": "release-nvidia.xml",
+      "name": "AzureRender.OutlineCoverageRecording"
+    },
+    {
+      "receipt": "release-nvidia.xml",
+      "name": "AzureRender.SkinningGpu"
+    },
+    {
+      "receipt": "release-nvidia.xml",
+      "name": "AzureRender.MotionVectorGpu"
+    },
+    {
+      "receipt": "release-intel.xml",
+      "name": "AzureRender.SkinningGpu"
+    },
+    {
+      "receipt": "release-intel.xml",
+      "name": "AzureRender.MotionVectorGpu"
+    },
+    {
+      "receipt": "debug-nvidia.xml",
+      "name": "AzureRender.StaticSkinningRecording"
+    },
+    {
+      "receipt": "debug-nvidia.xml",
+      "name": "AzureRender.SkinningBatch"
+    },
+    {
+      "receipt": "debug-nvidia.xml",
+      "name": "AzureRender.OutlineCoverageRecording"
+    },
+    {
+      "receipt": "debug-nvidia.xml",
+      "name": "AzureRender.SkinningGpu"
+    },
+    {
+      "receipt": "debug-nvidia.xml",
+      "name": "AzureRender.MotionVectorGpu"
+    },
+    {
+      "receipt": "debug-intel.xml",
+      "name": "AzureRender.SkinningGpu"
+    },
+    {
+      "receipt": "debug-intel.xml",
+      "name": "AzureRender.MotionVectorGpu"
+    }
+  ],
+  "passed": 14,
+  "skipped": 0,
+  "native": {
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 127.90700000000652,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "4",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-023357-compact-skinning-output-1c5f2c\\image-compact-skinning\\frames-024152",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-023357-compact-skinning-output-1c5f2c\\image-compact-skinning\\runtime.json"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-023357-compact-skinning-output-1c5f2c\\tmp"
+    },
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      }
+    ],
+    "metadata": {
+      "surfaceRadianceSelection": {
+        "enabled": false,
+        "prepared": false,
+        "frames": 0,
+        "fastFrames": 0,
+        "fullFrames": 0,
+        "fastDraws": 0,
+        "fullDraws": 0,
+        "lastFastDraws": 0,
+        "lastFullDraws": 0,
+        "fastWitnesses": 0,
+        "fullWitnesses": 0,
+        "lastFastWitnesses": 0,
+        "lastFullWitnesses": 0,
+        "lastGlobalReasons": 0,
+        "lastFallback": true,
+        "fallback": ""
+      },
+      "surfaceRadianceStatistics": {
+        "enabled": false,
+        "bytes": 0,
+        "frames": 0,
+        "producerStores": 0,
+        "consumerVisits": 0,
+        "eligibleRequests": 0,
+        "pixelMatches": 0,
+        "quadMatches": 0,
+        "sampleSpacing": 1,
+        "failureAttempts": 0,
+        "failureCapacity": 0,
+        "failureSamples": [],
+        "overflow": false
+      },
+      "surfaceRadiancePrepared": false,
+      "surfaceRadianceBytes": 0,
+      "surfaceRadianceIdentityVersion": 1,
+      "computeSkinningPreparedDispatches": 11,
+      "computeSkinningPreparedVertices": 226194,
+      "computeSkinningVertexWords": 10,
+      "computeSkinningOutputBytes": 77503280,
+      "defaultIsolationPipelines": 0,
+      "defaultIsolationSelected": false,
+      "defaultIsolationFallback": "",
+      "conservativeOcclusionPrepared": true,
+      "mainDepthSplitRecorded": true,
+      "conservativeOcclusionCommands": 435,
+      "conservativeOcclusionLastZeroCommands": 212,
+      "conservativeOcclusionFallback": "",
+      "vertexCapacity": 968791
+    },
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "validationLogClean": true,
+    "zeroAllocator": true,
+    "formalPerformancePassed": false,
+    "overallVisualAcceptance": "failed-user-review"
+  },
+  "cost": {
+    "status": "diagnosed",
+    "rows": [
+      {
+        "label": "baseline-before",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 20.97341013333334,
+            "p95": 21.142830399999998
+          },
+          "shadow": {
+            "mean": 2.6015360000000007,
+            "p95": 2.6205488
+          },
+          "main": {
+            "mean": 18.095701333333334,
+            "p95": 18.2494208
+          },
+          "post": {
+            "mean": 0.2761728,
+            "p95": 0.278528
+          },
+          "cpu": {
+            "mean": 6.041596666666681,
+            "p95": 7.083205000000029
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            76.91,
+            77.92,
+            78.08,
+            78.14,
+            78.16,
+            78.86,
+            78.87,
+            79.25,
+            79.35,
+            79.52,
+            79.53,
+            79.6,
+            79.74,
+            79.83,
+            80.01,
+            80.11,
+            80.15,
+            80.27,
+            80.48,
+            80.49,
+            80.56,
+            80.58,
+            81.01,
+            81.44,
+            81.49,
+            82.07,
+            82.28,
+            82.39,
+            82.5,
+            82.6,
+            82.72,
+            82.76,
+            83.41
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            49.0,
+            76.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2535.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 38
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "candidate",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 20.499160533333335,
+            "p95": 20.8293024
+          },
+          "shadow": {
+            "mean": 2.0666314666666667,
+            "p95": 2.1660559999999998
+          },
+          "main": {
+            "mean": 18.15348906666667,
+            "p95": 18.55616
+          },
+          "post": {
+            "mean": 0.27903999999999995,
+            "p95": 0.283648
+          },
+          "cpu": {
+            "mean": 5.561768333333336,
+            "p95": 6.428560000000146
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.18,
+            76.88,
+            76.94,
+            77.25,
+            77.32,
+            77.51,
+            77.6,
+            77.67,
+            77.8,
+            78.0,
+            78.18,
+            78.5,
+            78.61,
+            78.8,
+            78.85,
+            79.45,
+            79.59,
+            79.84,
+            80.26,
+            80.56,
+            81.25,
+            81.36,
+            81.7,
+            81.74,
+            81.93,
+            82.06,
+            82.55,
+            82.61,
+            82.83,
+            83.24,
+            83.6,
+            83.84,
+            84.17,
+            84.94,
+            84.95
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            49.0,
+            78.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2550.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 38
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "baseline-after",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 20.88055466666667,
+            "p95": 20.9819632
+          },
+          "shadow": {
+            "mean": 2.601693866666667,
+            "p95": 2.6236832
+          },
+          "main": {
+            "mean": 18.00378026666667,
+            "p95": 18.115584
+          },
+          "post": {
+            "mean": 0.2750805333333333,
+            "p95": 0.27648
+          },
+          "cpu": {
+            "mean": 5.6525066666666675,
+            "p95": 6.41433500000008
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            75.1,
+            75.7,
+            75.89,
+            76.41,
+            76.64,
+            76.73,
+            76.81,
+            77.2,
+            77.46,
+            77.49,
+            77.93,
+            78.62,
+            78.7,
+            79.15,
+            79.27,
+            79.51,
+            79.68,
+            79.84,
+            79.9,
+            80.35,
+            80.56,
+            80.98,
+            81.04,
+            81.37,
+            81.43,
+            81.8,
+            81.81,
+            81.91,
+            82.16,
+            82.88,
+            82.99,
+            83.08,
+            83.16,
+            83.92,
+            85.67
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            50.0,
+            82.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2550.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 37
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      }
+    ],
+    "bracketDriftFraction": 0.004437116871024361,
+    "bracketStable": true,
+    "gpuBaselineMean": 20.926982400000004,
+    "gpuCandidateMean": 20.499160533333335,
+    "gpuSavedMs": 0.4278218666666689,
+    "gpuReductionFraction": 0.02044355265796316,
+    "sourceAndProductsUnchanged": true,
+    "projectInputsVerified": 1729,
+    "outputMemoryReductionFraction": 0.6296296296296297,
+    "baselineRuntimeVerified": true,
+    "scope": "Local diagnosis under recorded current power and thermal conditions, sixty warmup and sixty selected frames per process; before/candidate/after bracket; formal performance conditions remain pending",
+    "formalPerformancePassed": false
+  },
+  "sourceHashes": {
+    "shaders/mesh.vert": "55d43fe89e8ceccaa1c5a6e513935d8df8e73f7eb96a8f220985b96434aac004",
+    "shaders/outline.vert": "a5a1d630c338c1d0112c4cafb3f3adc97d176ac496dd522a3afe755add5f062a",
+    "shaders/shadow.vert": "4f2104262f17d351e56bbf7f1afa940dc7f2bb5e1afba39c15582acc5c362255",
+    "shaders/skin.comp": "3bbfe8fc9bf54a94cdfd213673178fbc2b5fcb40cea04c9c8c847b8c65fbee90",
+    "shaders/skinned_vertex_layout.glsl": "d49cd220c4d68ca0718eac3b93a1bfe38af874387db223de1e6ce05cde41f93a",
+    "src/render/SkinnedVertex.hpp": "d9912fc3fc16a84067b3cd4865f344c67d8d622b36fde64e8ed600dce663d399",
+    "src/scenes/CharacterSceneRenderer.cpp": "926ffcf2ea6010439561acf28893d5f94e31700b5f64662d3be898e50a215937",
+    "tests/SkinningBatchTests.cpp": "96c1707b62bb74998300ab6d958443070e3040cbe5c635f73dccb1510ec8618b",
+    "tests/SkinningGpuTests.cpp": "59f230c1fd580f7b4133892bae1244bf96b0988fac814d3310fcb18ae8ccfbf6"
+  },
+  "programs": [
+    {
+      "configuration": "release",
+      "programs": 674,
+      "changed": [
+        "character_snapshot_depth_compute.vert.spv",
+        "character_snapshot_depth_projected_bindless_compute.vert.spv",
+        "character_snapshot_depth_projected_compute.vert.spv",
+        "mesh_compute.vert.spv",
+        "mesh_object_compute.vert.spv",
+        "mesh_object_projected_bindless_compute.vert.spv",
+        "mesh_object_projected_compute.vert.spv",
+        "mesh_projected_bindless_compute.vert.spv",
+        "mesh_projected_compute.vert.spv",
+        "outline_compute.vert.spv",
+        "outline_mask_compute.vert.spv",
+        "outline_view_scaled_compute.vert.spv",
+        "outline_view_scaled_compute_bindless.vert.spv",
+        "shadow_compute.vert.spv",
+        "skin.comp.spv"
+      ],
+      "unchanged": 659
+    },
+    {
+      "configuration": "debug",
+      "programs": 674,
+      "changed": [
+        "character_snapshot_depth_compute.vert.spv",
+        "character_snapshot_depth_projected_bindless_compute.vert.spv",
+        "character_snapshot_depth_projected_compute.vert.spv",
+        "mesh_compute.vert.spv",
+        "mesh_object_compute.vert.spv",
+        "mesh_object_projected_bindless_compute.vert.spv",
+        "mesh_object_projected_compute.vert.spv",
+        "mesh_projected_bindless_compute.vert.spv",
+        "mesh_projected_compute.vert.spv",
+        "outline_compute.vert.spv",
+        "outline_mask_compute.vert.spv",
+        "outline_view_scaled_compute.vert.spv",
+        "outline_view_scaled_compute_bindless.vert.spv",
+        "shadow_compute.vert.spv",
+        "skin.comp.spv"
+      ],
+      "unchanged": 659
+    }
+  ],
+  "output": {
+    "vertexWords": 10,
+    "vertexBytes": 40,
+    "frameSlots": 2,
+    "capacityVertices": 968791,
+    "baselineLogicalBytes": 209258856,
+    "candidateLogicalBytes": 77503280,
+    "savedLogicalBytes": 131755576,
+    "reductionFraction": 0.6296296296296297
+  },
+  "cleanup": {
+    "files": 679,
+    "logicalBytes": 236018895
+  },
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "evidenceZipBytes": 1344098,
+  "evidenceZipSha256": "11e76e4ba044eebbe2f992909cec5db7f648b79082666d1cfad08e3cab231e84"
+}

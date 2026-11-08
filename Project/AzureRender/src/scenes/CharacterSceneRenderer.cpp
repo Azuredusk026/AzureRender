@@ -1,3 +1,4 @@
+#include "render/SkinnedVertex.hpp"
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS)
 static constexpr bool kSurfaceRadianceDiagnostics=true;
 #else
@@ -720,7 +721,7 @@ void CharacterSceneRenderer::ensureInstanceCapacity() {
     for(const auto& instance:sceneInstances_){
         const auto& mesh=instance.meshKey==0?asset_:additionalResources_[instance.meshKey-1]->asset;
         joints+=mesh.jointMatrices.size()*sizeof(std::array<float,16>);
-        vertices+=mesh.vertices.size()*sizeof(AssetVertex)+mesh.vertexColors.size()*sizeof(std::array<float,4>);
+        vertices+=mesh.vertices.size()*sizeof(GpuSkinnedVertex);
         morphBytes+=morphGpuMeshes_.at(instance.meshKey).weightCount*sizeof(float);
     }
     if(morphBytes>kMorphGpuBudgetBytes)throw std::runtime_error("Instance morph weights exceed 128 MiB frame budget");
@@ -1832,7 +1833,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
         ? std::string()
         : asset_.animations[animationIndex_].name;
     std::size_t triangles=0,skinned=0,transparent=0;
-    std::uint64_t preparedSkinningVertices=0;
+    std::uint64_t preparedSkinningVertices=0,skinningOutputBytes=0;
+    if(computeSkinningEnabled_)for(const auto& buffer:skinnedVertexBuffers_)skinningOutputBytes+=buffer.size;
     if(computeSkinningEnabled_)for(const auto& dispatch:skinningDispatches_)
         preparedSkinningVertices+=std::uint64_t(dispatch.parameters.vertexCount)*dispatch.parameters.instanceCount;
     const auto& instances=instanceSnapshot_?instanceSnapshot_->instances:sceneInstances_;
@@ -1879,6 +1881,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"bindPoseSharedInstances\": " << bindPoseSharedInstances_ << ",\n"
          << "  \"computeSkinningPreparedDispatches\": " << (computeSkinningEnabled_?skinningDispatches_.size():0) << ",\n"
          << "  \"computeSkinningPreparedVertices\": " << preparedSkinningVertices << ",\n"
+         << "  \"computeSkinningVertexWords\": " << GpuSkinnedVertex::wordCount << ",\n"
+         << "  \"computeSkinningOutputBytes\": " << skinningOutputBytes << ",\n"
          << "  \"gpuTransparentSortingPrepared\": " << (gpuTransparentTickets_[currentFrame_]?"true":"false") << ",\n"
          << "  \"gpuTransparentSortingBytes\": " << (gpuTransparentSort_?gpuTransparentSort_->bytes():0) << ",\n"
          << "  \"gpuTransparentSortingVertices\": " << (gpuTransparentTickets_[currentFrame_]?gpuTransparentTickets_[currentFrame_]->vertexCount:0) << ",\n"
@@ -2661,7 +2665,7 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
         }
     };
     for(auto& cache:staticSkinningOutputs_)cache.reset();
-    createOutputBuffers(static_cast<VkDeviceSize>(vertexCapacity_) * sizeof(AssetVertex), skinnedVertexBuffers_);
+    createOutputBuffers(static_cast<VkDeviceSize>(vertexCapacity_) * sizeof(GpuSkinnedVertex), skinnedVertexBuffers_);
 
     skinningDescriptorSetLayout_ = rhi_->createDescriptorSetLayout({
         {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},

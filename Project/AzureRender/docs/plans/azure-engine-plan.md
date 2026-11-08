@@ -75,6 +75,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [GPU 通道归因](../acceptance/nr/gpu-pass-attribution.md)取得十九个通道的实际结果。
 快照与最终绘制合计约 14.61 毫秒，蒙皮约为 0.60 毫秒。
 共享形变输出的数据宽度进入后续优化范围。
+[紧凑蒙皮输出](../acceptance/nr/compact-skinning-output.md)已接入普通配置。
+十四项检查及严格四帧通过，缓冲逻辑容量减少约 62.96%。
+本地 GPU 均值减少约 0.43 毫秒，正式帧预算继续待通过。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

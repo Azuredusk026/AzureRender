@@ -1,3 +1,4 @@
+#include "render/SkinnedVertex.hpp"
 #include "render/StaticSkinningOutputCache.hpp"
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
@@ -7,6 +8,7 @@
 using namespace azurerender;
 void check(bool condition, const char* reason) { if (!condition) throw std::runtime_error(reason); }
 int main() { try {
+    static_assert(sizeof(GpuSkinnedVertex)==40&&GpuSkinnedVertex::wordCount==10,"Compact GPU deformation ABI");
     {
         StaticSkinningOutputCache cache;
         const StaticSkinningRange a{1,0,64},b{2,64,32};

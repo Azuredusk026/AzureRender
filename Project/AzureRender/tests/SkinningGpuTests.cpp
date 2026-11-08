@@ -1,3 +1,4 @@
+#include "render/SkinnedVertex.hpp"
 #include "render/StaticSkinningOutputCache.hpp"
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
@@ -30,14 +31,14 @@ int main(int argc,char** argv) try {
     });
     std::array<std::uint32_t,27> source{};
     const auto number=[&](unsigned word,float value){std::memcpy(&source[word],&value,sizeof(value));};
-    number(0,1);number(1,2);number(2,3);number(4,1);number(6,1);number(9,1);
+    number(0,1);number(1,2);number(2,3);number(4,1);number(6,1);number(9,-1);
     number(16,1);number(20,4);number(24,2);
     std::array<std::array<float,16>,2> joints{};
     for(unsigned i=0;i<2;++i) {joints[i][0]=joints[i][5]=joints[i][10]=joints[i][15]=1;
         joints[i][12]=i==0?10.F:20.F;}
     input=host.allocator.createBuffer(sizeof(source),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     matrices=host.allocator.createBuffer(sizeof(joints),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
-    output=host.allocator.createBuffer(81*sizeof(std::uint32_t),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+    output=host.allocator.createBuffer(32*sizeof(std::uint32_t),VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memcpy(input.mapped,source.data(),sizeof(source));std::memcpy(matrices.mapped,joints.data(),sizeof(joints));
     LoadedAsset fixture;fixture.vertices.resize(1);fixture.nodes.resize(1);MorphTargetRange targetRange;targetRange.vertexCount=1;targetRange.targets.resize(3);
     targetRange.targets[2].positions={{{2,4,6}}};targetRange.targets[2].normals={{{1,0,0}}};targetRange.targets[2].tangents={{{0,1,0}}};fixture.morphRanges={targetRange};
@@ -91,21 +92,23 @@ int main(int argc,char** argv) try {
         });
         host.allocator.invalidate(output,0,output.size);
         const auto* words=static_cast<const std::uint32_t*>(output.mapped);
-        for(unsigned i=0;i<27;++i)if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Skinning overwrote another output slice");
+        for(unsigned i=0;i<GpuSkinnedVertex::wordCount;++i)if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Skinning overwrote another output slice");
         const auto value=[&](unsigned word){float result;std::memcpy(&result,words+word,sizeof(result));return result;};
-        if(!full&&(value(27)!=12.F || value(54)!=22.F || value(28)!=3.F || value(55)!=3.F))
+        if(!full&&(value(10)!=12.F || value(20)!=22.F || value(11)!=3.F || value(21)!=3.F))
             throw std::runtime_error("Skinning did not preserve independent joints and morph output");
         if(full){
-            if(std::abs(value(27)-12.F)>1e-5F||std::abs(value(54)-20.5F)>1e-5F||std::abs(value(28)-4.F)>1e-5F||std::abs(value(55)-1.F)>1e-5F)
+            if(std::abs(value(10)-12.F)>1e-5F||std::abs(value(20)-20.5F)>1e-5F||std::abs(value(11)-4.F)>1e-5F||std::abs(value(21)-1.F)>1e-5F)
                 throw std::runtime_error("Third target and independent instance weights differ from CPU reference");
-            for(unsigned instance=0;instance<2;++instance){const float weight=values[instance*3+2],length=std::sqrt(1+weight*weight);const auto base=(instance+1)*27;
+            for(unsigned instance=0;instance<2;++instance){const float weight=values[instance*3+2],length=std::sqrt(1+weight*weight);const auto base=(instance+1)*GpuSkinnedVertex::wordCount;
                 if(std::abs(value(base+3)-weight/length)>1e-5F||std::abs(value(base+4)-1/length)>1e-5F||std::abs(value(base+6)-1/length)>1e-5F||std::abs(value(base+7)-weight/length)>1e-5F)
                     throw std::runtime_error("Morph normals and tangents differ from CPU reference");
             }
         }
-        if(!batched)baseline.assign(words,words+81);
+        for(unsigned i:{19U,29U})if(words[i]!=source[9])throw std::runtime_error("Tangent handedness bit pattern changed");
+        for(unsigned i:{30U,31U})if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Compact output overwrote its trailing guard");
+        if(!batched)baseline.assign(words,words+32);
         else if(std::memcmp(baseline.data(),words,output.size))throw std::runtime_error("Batched deformation differs from individual slices");
-        if(!bulkBarriers)barrierBaselines.emplace_back(words,words+81);
+        if(!bulkBarriers)barrierBaselines.emplace_back(words,words+32);
         else if(std::memcmp(barrierBaselines.at(barrierCase).data(),words,output.size))
             throw std::runtime_error("Batched buffer barriers changed deformation output bytes");
         ++barrierCase;
@@ -144,12 +147,14 @@ int main(int argc,char** argv) try {
         });
         if(!cache.commit(generation,100+step))throw std::runtime_error("Actual GPU producer submission did not commit");
         host.allocator.invalidate(output,0,output.size);const auto* words=static_cast<const std::uint32_t*>(output.mapped);
-        if(step==0)staticReference.assign(words,words+81);
+        if(step==0)staticReference.assign(words,words+32);
         const bool same=std::memcmp(staticReference.data(),words,output.size)==0;
         if((step==4)==same)throw std::runtime_error("Cached/dynamic/rebuilt deformation output bytes differ from contract");
-        for(unsigned i=0;i<27;++i)if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Static cache overwrote another output range");
+        for(unsigned i=0;i<GpuSkinnedVertex::wordCount;++i)if(words[i]!=0xCDCDCDCDU)throw std::runtime_error("Static cache overwrote another output range");
     }
-    std::cout<<"Static compute content: cold/warm, cancelled producer, dynamic overwrite and rebuild, normalized81words byte exact\n";
+    std::cout<<"Static compute content: cold/warm, cancelled producer, dynamic overwrite and rebuild, normalized32words byte exact\n";
+    host.allocator.invalidate(input,0,input.size);
+    if(std::memcmp(input.mapped,source.data(),sizeof(source))!=0)throw std::runtime_error("Immutable mesh source changed");
     cleanup.reset();
     if(host.errors || host.allocator.statistics().liveBuffers || host.allocator.statistics().liveImages)
         throw std::runtime_error("Skinning validation or release failed");

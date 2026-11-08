@@ -57,6 +57,21 @@
   },
   "milestones": [
     {
+      "path": "runs/20261109-023357-compact-skinning-output-1c5f2c",
+      "name": "紧凑蒙皮输出",
+      "status": "CompactOutputIntegratedVisualExactLocalGpuGain",
+      "sourceBase": "3e73e5f",
+      "evidence": "docs/acceptance/nr/compact-skinning-output.md",
+      "checksPassed": 14,
+      "nativeFourFramesExact": true,
+      "validComparisonProcesses": 3,
+      "gpuSavedMs": 0.4278218666666689,
+      "gpuReductionFraction": 0.02044355265796316,
+      "outputSavedLogicalBytes": 131755576,
+      "reclaimedFiles": 679,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261109-022033-gpu-pass-attribution-89c3e2",
       "name": "GPU 通道成本归因",
       "status": "PassAttributionCompleted",

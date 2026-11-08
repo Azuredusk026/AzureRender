@@ -46,8 +46,9 @@ layout(push_constant) uniform MorphWeights {
 } morphWeights;
 
 #if defined(AZURE_COMPUTE_SKINNING)
+#include "skinned_vertex_layout.glsl"
 layout(std430, binding = 17) readonly buffer InstanceSkinnedVertices { uint words[]; } computed;
-float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceData.instances[gl_InstanceIndex].meta.y + uint(gl_VertexIndex))*27u+offset]); }
+float posedFloat(uint offset) { return uintBitsToFloat(computed.words[(instanceData.instances[gl_InstanceIndex].meta.y + uint(gl_VertexIndex))*azureSkinnedVertexWordCount+offset]); }
 vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset+1u),posedFloat(offset+2u)); }
 #endif
 #if defined(AZURE_VIEW_SCALED_OUTLINE)
