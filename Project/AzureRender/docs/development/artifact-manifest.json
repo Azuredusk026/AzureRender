@@ -50,6 +50,16 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-162602-fixed-class-isolation-scope-935160",
+      "name": "固定类别隔离范围",
+      "status": "ScopeBelowIndependentAdmission",
+      "sourceBase": "437e0f3",
+      "evidence": "docs/acceptance/nr/fixed-class-isolation-scope.md",
+      "historicalScopeFraction": 0.2266706153983297,
+      "candidateImplemented": false,
+      "newGpuTimingExecuted": false
+    },
+    {
       "path": "runs/20261108-150504-beauty-shader-specialization-2d2daa",
       "name": "默认隔离材质管线",
       "status": "RegisterPressureReducedFrameCostPending",

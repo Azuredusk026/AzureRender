@@ -47,6 +47,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [多阶段遮挡范围](../acceptance/nr/snapshot-shared-occlusion.md)的增量上界约为 0.32 毫秒，候选保持提案状态。
 [默认隔离材质管线](../acceptance/nr/default-isolation-pipelines.md)通过二十项所属检查及严格四帧，主通道片元寄存器减少 25%。
 实际帧收益因项目外 GPU 负载继续待测，原帧预算保持有效。
+[固定类别范围](../acceptance/nr/fixed-class-isolation-scope.md)约占历史事件耗时的 22.67%，本单元保持范围结论。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。
