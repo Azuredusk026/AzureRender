@@ -85,6 +85,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [阴影分块批处理](../acceptance/nr/shadow-tile-batching.md)已接入默认配置。
 二十八项检查及严格四帧通过，本地 GPU 均值减少约 0.11 毫秒。
 后续继续核对主场景阴影过滤及实际消费成本。
+[圆盘权重分类](../acceptance/nr/shadow-disk-classification.md)的百万组输入逐位一致。
+分类分支未通过局部效率门槛，候选保持隔离。
+本单元的原生采集及整帧计时进程数均为零。
+后续优先核对主通道遮挡与实际材质工作量。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

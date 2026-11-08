@@ -57,6 +57,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261109-042301-shadow-disk-classification-a77b55",
+      "name": "阴影圆盘权重分类",
+      "status": "LocalGateNotPassedCandidateIsolated",
+      "sourceBase": "e2c50c9",
+      "evidence": "docs/acceptance/nr/shadow-disk-classification.md",
+      "numericCases": 1048576,
+      "canonicalNativeProcesses": 0,
+      "frameCostProcesses": 0,
+      "standaloneGpuProcesses": 1,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261109-034725-shadow-tile-batching-90fe3c",
       "name": "阴影分块批处理",
       "status": "BatchedBoundsIntegratedExactLocalGain",
