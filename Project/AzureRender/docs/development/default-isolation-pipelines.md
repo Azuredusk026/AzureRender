@@ -28,6 +28,7 @@
 环境分量置换通过 `azureBeautyReplace` 求值。
 两函数以 `precise` 限定累加及置换表达式。
 调用参数的照明计算保留所属表达式。
+函数契约见[照明组合精度](beauty-composition.md)。
 
 该定义限制分量组合处的浮点收缩。
 约束范围依据 [GLSL 精确求值规则](https://docs.vulkan.org/glsl/latest/chapters/variables.html)。

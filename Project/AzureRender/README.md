@@ -29,6 +29,7 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [多阶段遮挡范围](docs/acceptance/nr/snapshot-shared-occlusion.md)的增量上界约为 0.32 毫秒，候选保持提案状态。
 [默认隔离材质管线](docs/acceptance/nr/default-isolation-pipelines.md)保持严格四帧一致，主通道片元寄存器减少 25%，实际帧收益继续待测。
 [固定类别范围](docs/acceptance/nr/fixed-class-isolation-scope.md)约占历史事件耗时的 22.67%，保留范围结论。
+[共享照明组合](docs/acceptance/nr/radiance-precision-boundaries.md)通过四项小数据 GPU 检查，原有 736 个程序逐字节一致，照明复用的原生修复继续待验收。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。

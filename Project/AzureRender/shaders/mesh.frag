@@ -670,13 +670,7 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 #include "view_fog_material.glsl"
 #else
 #if defined(AZURE_STATIC_ISOLATION)
-vec3 azureBeautySum(vec3 a,vec3 b,vec3 c,vec3 d,vec3 e,vec3 f,vec3 g,vec3 h){
-    precise vec3 result=a+b+c+d+e+f+g+h;return result;
-}
-vec3 azureBeautyReplace(vec3 total,vec3 added,vec3 removed){
-    precise vec3 result=total+(added-removed);return result;
-}
-#else
+#include "beauty_composition.glsl"
 #endif
 void main() {
     prepareShadowReceiver();
