@@ -50,6 +50,19 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-165547-default-isolation-cost-5c0521",
+      "name": "默认隔离策略成本",
+      "status": "InsignificantLocalCostDefaultDisabled",
+      "sourceBase": "8220444",
+      "evidence": "docs/acceptance/nr/default-isolation-cost.md",
+      "checksPassed": 6,
+      "gpuSavedMs": 0.04013493333333784,
+      "significantGainObserved": false,
+      "defaultSpecializationEnabled": false,
+      "reclaimedFiles": 139,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-163603-radiance-precision-boundaries-fda484",
       "name": "照明组合精度边界",
       "status": "SharedPrecisionReadyLegacyNativePending",

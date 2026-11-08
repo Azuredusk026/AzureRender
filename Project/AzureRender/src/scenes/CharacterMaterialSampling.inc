@@ -89,6 +89,7 @@ VkPipeline CharacterSceneRenderer::createMaterialDepthPipeline(const rhi::Graphi
     return scene;
 }
 void CharacterSceneRenderer::prepareDefaultIsolationPipeline(VkPipeline scene,const rhi::GraphicsPipelineDesc& desc) {
+#if defined(AZURE_DEFAULT_ISOLATION_VARIANTS)
     // Preparation runs before submission; the original pipeline remains caller-owned.
     if(!defaultIsolationFallback_.empty()||desc.renderPass!=defaultIsolationRenderPass_
         ||desc.rasterizationSamples!=VK_SAMPLE_COUNT_1_BIT||desc.alphaBlend)return;
@@ -119,6 +120,9 @@ void CharacterSceneRenderer::prepareDefaultIsolationPipeline(VkPipeline scene,co
         }
         return;
     }
+#else
+    (void)scene;(void)desc;
+#endif
 }
 VkPipeline CharacterSceneRenderer::createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc& desc,const std::string& path) {
     const auto module=rhi_->createShaderModule(readBinaryFile(sceneFragmentVariant(path,false,false,false,false,true)));

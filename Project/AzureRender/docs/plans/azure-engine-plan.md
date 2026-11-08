@@ -46,7 +46,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [主通道深度复用](../acceptance/nr/main-depth-reuse.md)保持冻结四帧完全一致，短时 GPU 均值减少约 0.87 毫秒。
 [多阶段遮挡范围](../acceptance/nr/snapshot-shared-occlusion.md)的增量上界约为 0.32 毫秒，候选保持提案状态。
 [默认隔离材质管线](../acceptance/nr/default-isolation-pipelines.md)通过二十项所属检查及严格四帧，主通道片元寄存器减少 25%。
-实际帧收益因项目外 GPU 负载继续待测，原帧预算保持有效。
+该策略的[短时净差](../acceptance/nr/default-isolation-cost.md)约为 0.04 毫秒，小于参考漂移，实验构建选项默认关闭。
+原帧预算及正式条件保持有效。
 [固定类别范围](../acceptance/nr/fixed-class-isolation-scope.md)约占历史事件耗时的 22.67%，本单元保持范围结论。
 [共享照明组合](../acceptance/nr/radiance-precision-boundaries.md)通过双设备、双配置的小数据检查，原有 736 个程序保持一致。
 照明复用候选的消费者已具备具体精度边界，当前原生接入及画面继续待验证。

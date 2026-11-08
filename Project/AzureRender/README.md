@@ -27,9 +27,10 @@ CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际�
 [保守剔除机制](docs/acceptance/nr/gpu-conservative-occlusion.md)通过双设备检查，独立深度候选的整帧收益未成立。
 [主通道深度复用](docs/acceptance/nr/main-depth-reuse.md)保持冻结四帧完全一致，短时 GPU 均值减少约 0.87 毫秒。
 [多阶段遮挡范围](docs/acceptance/nr/snapshot-shared-occlusion.md)的增量上界约为 0.32 毫秒，候选保持提案状态。
-[默认隔离材质管线](docs/acceptance/nr/default-isolation-pipelines.md)保持严格四帧一致，主通道片元寄存器减少 25%，实际帧收益继续待测。
+[默认隔离材质管线](docs/acceptance/nr/default-isolation-pipelines.md)通过严格四帧，实验程序的片元寄存器减少 25%。
+[短时成本](docs/acceptance/nr/default-isolation-cost.md)的整帧净差约为 0.04 毫秒，策略由默认关闭的构建选项控制。
 [固定类别范围](docs/acceptance/nr/fixed-class-isolation-scope.md)约占历史事件耗时的 22.67%，保留范围结论。
-[共享照明组合](docs/acceptance/nr/radiance-precision-boundaries.md)通过四项小数据 GPU 检查，原有 736 个程序逐字节一致，照明复用的原生修复继续待验收。
+[共享照明组合](docs/acceptance/nr/radiance-precision-boundaries.md)通过四项小数据 GPU 检查，既有渲染程序保持原字节，照明复用的原生修复继续待验收。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 
 阴影接收面采用[入口计算](docs/acceptance/nr/shadow-receiver-entry.md)。

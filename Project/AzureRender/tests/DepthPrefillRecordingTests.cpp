@@ -4,7 +4,11 @@
 #include <map>
 #include <set>
 using namespace azurerender;
+#ifndef AZURE_TEST_DEFAULT_ISOLATION
+#define AZURE_TEST_DEFAULT_ISOLATION 0
+#endif
 namespace {
+constexpr bool defaultIsolationPrograms=AZURE_TEST_DEFAULT_ISOLATION!=0;
 void require(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned features,float opacity,bool multisample,bool lighting=false){
     rhi::NullRhi backend;backend.supportedSamples=VK_SAMPLE_COUNT_1_BIT|VK_SAMPLE_COUNT_4_BIT;backend.sampleShadingSupported=true;
@@ -51,7 +55,7 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
         }
         const bool ordinary=mode==AssetAlphaMode::Opaque&&features==0;
         require(ordinaryCovered.size()==(!multisample&&ordinary?8*(lighting?2:1)*(generation+1):0),"Ordinary covered color pipelines require explicit single-sample qualification");
-        require(beautyCovered.size()==(!multisample&&ordinary?4*(lighting?2:1)*(generation+1):0),"Default isolation must prepare four main-only ordinary pipelines per generation");
+        require(beautyCovered.size()==(defaultIsolationPrograms&&!multisample&&ordinary?4*(lighting?2:1)*(generation+1):0),"Default isolation pipeline count must follow the build option and material qualification");
         const bool fixedClass=mode==AssetAlphaMode::Opaque&&features==MaterialFeatureSqrtAlphaShadow;
         require(classCovered.size()==(!multisample&&fixedClass?8*(generation+1):0),"Fixed-class covered pipelines require opaque single-sample qualification");
         for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"&&call.detail.find("depthBias=1.000000/0.000000")!=std::string::npos&&call.detail.find(" masks=0/0/")!=std::string::npos){
@@ -85,7 +89,7 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
                 rhi::NullCommandRecorder recorder;pass.recordCommands(recorder);std::string pipeline;unsigned fastDraws=0;
                 for(const auto& call:recorder.calls){if(call.name=="bindPipeline")pipeline=call.detail;
                     if(call.name=="drawIndexed"&&beautyCovered.count(pipeline))++fastDraws;}
-                const bool expected=pass.name=="character-main"&&isolation==0&&!multisample&&ordinary&&opacity==1.F;
+                const bool expected=defaultIsolationPrograms&&pass.name=="character-main"&&isolation==0&&!multisample&&ordinary&&opacity==1.F;
                 require((fastDraws>0)==expected,"Default isolation selection must preserve dynamic diagnostics and snapshot, fade and MSAA paths");
             }
         }
