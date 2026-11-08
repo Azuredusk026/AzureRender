@@ -101,6 +101,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 当前原生载荷约为 26.04 MiB，暖启动的 645 次创建全部命中。
 SDK 路径归属于 D 盘任务，两配置及设备检查通过。
 后续继续按实际 GPU 通道成本组织主场景优化。
+[图像缓冲所有权](../acceptance/nr/owned-image-conversion.md)已接入 glTF 与独立图像加载。
+两配置各四项检查通过，各 675 份程序摘要一致。
+本单元没有追加原生采集，完整加载成本与帧预算分别验收。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

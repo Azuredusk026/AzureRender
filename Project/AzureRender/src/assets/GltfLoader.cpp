@@ -907,7 +907,7 @@ std::vector<std::uint8_t> decodeImageRgba(
         typed.precision=azurerender::ImagePrecision::Float32;typed.colorSpace=azurerender::ImageColorSpace::Linear;
         typed.rgba32.resize(count);std::memcpy(typed.rgba32.data(),image.image.data(),count*4);
     } else throw std::runtime_error("Unsupported image precision");
-    auto converted=azurerender::convertImageToRgba8(typed,encodedColor);
+    auto converted=azurerender::convertImageToRgba8(std::move(typed),encodedColor);
     auto pixels=std::move(converted.pixels);
     std::array<double,4> factors{};
     for(std::size_t channel=0;channel<4;++channel)factors[channel]=std::clamp(factor[channel],0.0,1.0);
@@ -2944,15 +2944,15 @@ bool decodeGltfImage(tinygltf::Image* image,int imageIndex,std::string* error,st
     int requestedWidth,int requestedHeight,const unsigned char* bytes,int size,void* userData) {
     try {
         if(size<=0||size>64*1024*1024)throw std::invalid_argument("glTF image exceeds the source budget");
-        const auto decoded=azurerender::decodeImageBytes({bytes,bytes+size});
+        auto decoded=azurerender::decodeImageBytes({bytes,bytes+size});
         if((requestedWidth>0&&decoded.width!=static_cast<unsigned>(requestedWidth))||
            (requestedHeight>0&&decoded.height!=static_cast<unsigned>(requestedHeight)))throw std::invalid_argument("glTF image dimensions differ from the declaration");
-        if(userData&&!decoded.mipLevels.empty())(*static_cast<AuthoredImageMips*>(userData))[imageIndex]={decoded.mipLevels,decoded.sourceCompression};
-        auto material=azurerender::convertImageToRgba8(decoded);
+        if(userData&&!decoded.mipLevels.empty())(*static_cast<AuthoredImageMips*>(userData))[imageIndex]={std::move(decoded.mipLevels),std::move(decoded.sourceCompression)};
+        auto material=azurerender::convertImageToRgba8(std::move(decoded));
         image->width=static_cast<int>(decoded.width);image->height=static_cast<int>(decoded.height);
         image->component=4;
         if(decoded.precision==azurerender::ImagePrecision::UInt8) {
-            image->bits=8;image->pixel_type=TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE;image->image=decoded.rgba8;
+            image->bits=8;image->pixel_type=TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE;image->image=std::move(material.pixels);
         }else if(decoded.precision==azurerender::ImagePrecision::UInt16) {
             image->bits=16;image->pixel_type=TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT;image->image.resize(decoded.rgba16.size()*2);
             std::memcpy(image->image.data(),decoded.rgba16.data(),image->image.size());
@@ -3314,8 +3314,8 @@ void sampleAnimation(const LoadedAsset& asset, std::size_t animationIndex, float
 }
 
 AssetImage loadAssetImage(const std::string& path){
-    const auto image=azurerender::decodeImageFile(std::filesystem::u8path(path));
-    auto converted=azurerender::convertImageToRgba8(image);
+    auto image=azurerender::decodeImageFile(std::filesystem::u8path(path));
+    auto converted=azurerender::convertImageToRgba8(std::move(image));
     AssetImage result;result.width=image.width;result.height=image.height;
-    result.pixels=std::move(converted.pixels);result.losses=std::move(converted.losses);result.mipLevels=image.mipLevels;result.sourceCompression=image.sourceCompression;return result;
+    result.pixels=std::move(converted.pixels);result.losses=std::move(converted.losses);result.mipLevels=std::move(image.mipLevels);result.sourceCompression=std::move(image.sourceCompression);return result;
 }

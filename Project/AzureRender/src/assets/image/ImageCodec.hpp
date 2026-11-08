@@ -32,6 +32,8 @@ DecodedImage decodeImageBytes(const std::vector<unsigned char>& bytes,
 DecodedImage decodeImageFile(const std::filesystem::path& path,
     const AssetCancellation& cancelled={});
 ImageRgba8 convertImageToRgba8(const DecodedImage& image,bool encodeLinearRgb=true);
+// Consumes valid UInt8 storage; other precisions retain the same conversion.
+ImageRgba8 convertImageToRgba8(DecodedImage&& image,bool encodeLinearRgb=true);
 std::vector<float> imageLinearRgba(const DecodedImage& image);
 void reconstructBc5NormalPixels(std::vector<std::uint8_t>& pixels);
 void registerImageFormats(AssetFormatRegistry& registry);

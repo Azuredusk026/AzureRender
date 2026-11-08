@@ -39,6 +39,26 @@ void writeExr(const std::filesystem::path& path){
 }
 int main(int argc,char** argv){const auto root=std::filesystem::temp_directory_path()/("azure-image-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));try{
     std::filesystem::create_directories(root);
+    DecodedImage owned;owned.width=2;owned.height=1;owned.sourceChannels=4;
+    owned.rgba8={0,17,255,0,8,32,64,128};owned.sourceLosses={"authored diagnostic"};
+    const auto expected=convertImageToRgba8(owned);const auto* storage=owned.rgba8.data();
+    const auto adopted=convertImageToRgba8(std::move(owned));
+    require(adopted.pixels.data()==storage,"Owning UInt8 conversion must transfer the existing pixel allocation");
+    require(adopted.pixels==expected.pixels&&adopted.losses==expected.losses,"Owning conversion must preserve every byte and source diagnostic");
+    DecodedImage invalid;invalid.width=2;invalid.height=1;invalid.rgba8={1,2,3,4};
+    rejects([&]{convertImageToRgba8(std::move(invalid));},"Owning conversion rejects incomplete storage");
+    require(invalid.rgba8.size()==4,"Rejected ownership transfer must preserve input storage");
+    for(const auto precision:{ImagePrecision::UInt16,ImagePrecision::Float32}){
+        DecodedImage high;high.width=2;high.height=1;high.precision=precision;high.colorSpace=ImageColorSpace::Linear;
+        high.rgba16={0,1,32768,65535,128,256,512,1024};high.rgba32={-.25F,0,.5F,1,2,.001F,.04F,.8F};
+        high.sourceLosses={"source warning"};
+        for(bool encode:{false,true}){
+            const auto reference=convertImageToRgba8(high);auto copy=high;
+            const auto a=convertImageToRgba8(static_cast<const DecodedImage&>(high),encode);
+            const auto b=convertImageToRgba8(std::move(copy),encode);
+            require(a.pixels==b.pixels&&a.losses==b.losses,"Owning high precision conversion preserves quantization, clipping and alpha");
+        }
+    }
     const auto& formats=azurerender::assetFormatRegistry();
     for(const std::string id:{"png","jpeg","bmp","tga","ppm","hdr","exr","tiff","webp"})
         if(!formats.require(id).canRead)throw std::runtime_error("Image formats require production readers");

@@ -1,0 +1,140 @@
+{
+  "status": "implemented-targeted-checks-passed",
+  "baselineCommit": "047092937f2d80aa1eb43d4af651c318b2b36023",
+  "run": "20261109-070254-owned-image-conversion-e9881b",
+  "checks": [
+    {
+      "configuration": "release",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 6.4210000000020955,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^(AzureAssets\\.(ImageFormats|ExtendedImageFormats|RoundTrip)|AzureRender\\.MaterialTextureSharing)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-070254-owned-image-conversion-e9881b\\release-checks.xml"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-070254-owned-image-conversion-e9881b\\tmp"
+      },
+      "cases": [
+        {
+          "name": "AzureRender.MaterialTextureSharing",
+          "classname": "AzureRender.MaterialTextureSharing",
+          "time": "1.49161",
+          "status": "run"
+        },
+        {
+          "name": "AzureAssets.ExtendedImageFormats",
+          "classname": "AzureAssets.ExtendedImageFormats",
+          "time": "1.02547",
+          "status": "run"
+        },
+        {
+          "name": "AzureAssets.ImageFormats",
+          "classname": "AzureAssets.ImageFormats",
+          "time": "1.16277",
+          "status": "run"
+        },
+        {
+          "name": "AzureAssets.RoundTrip",
+          "classname": "AzureAssets.RoundTrip",
+          "time": "2.31801",
+          "status": "run"
+        }
+      ],
+      "shadersUnchanged": 675
+    },
+    {
+      "configuration": "debug",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 11.59399999998277,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^(AzureAssets\\.(ImageFormats|ExtendedImageFormats|RoundTrip)|AzureRender\\.MaterialTextureSharing)$",
+          "--output-on-failure",
+          "--no-tests=error",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-070254-owned-image-conversion-e9881b\\debug-checks.xml"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-070254-owned-image-conversion-e9881b\\tmp"
+      },
+      "cases": [
+        {
+          "name": "AzureRender.MaterialTextureSharing",
+          "classname": "AzureRender.MaterialTextureSharing",
+          "time": "3.08666",
+          "status": "run"
+        },
+        {
+          "name": "AzureAssets.ExtendedImageFormats",
+          "classname": "AzureAssets.ExtendedImageFormats",
+          "time": "3.63239",
+          "status": "run"
+        },
+        {
+          "name": "AzureAssets.ImageFormats",
+          "classname": "AzureAssets.ImageFormats",
+          "time": "1.74989",
+          "status": "run"
+        },
+        {
+          "name": "AzureAssets.RoundTrip",
+          "classname": "AzureAssets.RoundTrip",
+          "time": "2.5642",
+          "status": "run"
+        }
+      ],
+      "shadersUnchanged": 675
+    }
+  ],
+  "builds": {
+    "release": {
+      "manifestSha256": "1bba53855d4d020ba13ea8c9440e8cfe8a7ee5f099e50a495763089c1052e7d6",
+      "sourceCount": 1673
+    },
+    "debug": {
+      "manifestSha256": "28d511f4866bf1aa3ad7c6509bb8b2af13e2f4cb5d1695590d63974445a8f285",
+      "sourceCount": 1673
+    }
+  },
+  "sourceHashes": {
+    "src/assets/GltfLoader.cpp": "222398c0d50dbe0b124d6f8ee36d4739641e9409a37802f1f3abab23592da24c",
+    "src/assets/image/ImageCodec.cpp": "f9c0eff264632e64faa81f74cb098f54083c05fdad86ced2d1d9ef416f5dae7d",
+    "src/assets/image/ImageCodec.hpp": "12da07479c3ae483ff98c76f2d236ffedafe06c0e64e6fa28c7ab0442fa549ce",
+    "tests/ImageCodecTests.cpp": "7d15a33b008bd04983fbc26e5a4cf44b2dccefb3b9042f689754c301c33f1517"
+  },
+  "shadersUnchangedPerConfiguration": 675,
+  "nativeCaptureCount": 0,
+  "frameTimingProcessCount": 0,
+  "ownershipContract": "Valid UInt8 rvalue conversion preserves the original pixel allocation and byte values; borrowed conversion preserves its input; high precision conversion uses the same numeric path",
+  "fullSceneLoadingBenefitMeasured": false,
+  "formalPerformancePassed": false,
+  "visualStatus": "failed-user-review",
+  "protectedUserDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "cleanup": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-070254-owned-image-conversion-e9881b\\tmp",
+      "logicalBytes": 0
+    }
+  ],
+  "remainingRunBytes": 52324,
+  "archiveBytes": 288199,
+  "archiveSha256": "7ccd4b708d9c10d231069fcaa0605fff08d05a20eace683496cc694f9b75b1e0"
+}

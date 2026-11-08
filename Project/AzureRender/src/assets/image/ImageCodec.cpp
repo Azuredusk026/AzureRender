@@ -185,6 +185,12 @@ ImageRgba8 convertImageToRgba8(const DecodedImage& image,bool encodeLinearRgb) {
         out.pixels[i]=static_cast<std::uint8_t>(std::lround(v*255));}
     if(clipped)out.losses.push_back("Values outside [0,1] clipped for material storage");return out;
 }
+ImageRgba8 convertImageToRgba8(DecodedImage&& image,bool encodeLinearRgb) {
+    if(image.precision!=ImagePrecision::UInt8)return convertImageToRgba8(static_cast<const DecodedImage&>(image),encodeLinearRgb);
+    const auto count=sizeFor(image.width,image.height,1);
+    if(image.rgba8.size()!=count)throw std::invalid_argument("Invalid RGBA image size");
+    return {std::move(image.rgba8),std::move(image.sourceLosses)};
+}
 void reconstructBc5NormalPixels(std::vector<std::uint8_t>& pixels){
     if(pixels.size()%4)throw std::invalid_argument("BC5 normal pixels require RGBA storage");
     for(std::size_t i=0;i<pixels.size();i+=4){float x=pixels[i]/255.F*2-1,y=pixels[i+1]/255.F*2-1;const float length=std::sqrt(x*x+y*y);if(length>1){x/=length;y/=length;pixels[i]=static_cast<std::uint8_t>(std::lround((x*.5F+.5F)*255));pixels[i+1]=static_cast<std::uint8_t>(std::lround((y*.5F+.5F)*255));}const float z=std::sqrt(std::max(0.F,1-x*x-y*y));pixels[i+2]=static_cast<std::uint8_t>(std::lround((z*.5F+.5F)*255));pixels[i+3]=255;}
