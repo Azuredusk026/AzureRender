@@ -50,6 +50,16 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-080203-receiver-projection-producer-222952",
+      "name": "接收深度生产投影核验",
+      "status": "ReceiverProducerDepthPrecisionPending",
+      "sourceBase": "d0778a4",
+      "evidence": "docs/acceptance/nr/receiver-projection-producer.md",
+      "mappedVisibilityOverOneByte": 200,
+      "candidateAdopted": false,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-073210-compressed-asset-snapshots-d0bf8d",
       "name": "资产源文件快照压缩",
       "status": "CompressedAssetSnapshotsDeployed",

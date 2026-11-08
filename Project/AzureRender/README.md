@@ -13,6 +13,7 @@
 [相位原点](docs/acceptance/nr/visibility-phase-origin.md)支持两种行号约定，默认原生区域保持逐字节一致。
 [设备深度核对](docs/acceptance/nr/receiver-device-depth.md)确认当前快照的整区关系，源投影和深度生产精度继续待验收。
 [线性深度核对](docs/acceptance/nr/receiver-linear-depth.md)仍有 216 处超差，接收输入的生产精度继续待验收。
+[生产投影核对](docs/acceptance/nr/receiver-projection-producer.md)定位原生深度写入链，完整区域仍有 200 处超差。
 CPU 的[消费范围](docs/acceptance/nr/cpu-consumed-preparation.md)按实际顶点和索引核对，后续批次沿用收益门槛。
 [准备批次评估](docs/acceptance/nr/cpu-preparation-batch.md)的更新均值降低约 7.46%，未达到本批门槛，候选保持隔离。
 [资产快照压缩](docs/acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
