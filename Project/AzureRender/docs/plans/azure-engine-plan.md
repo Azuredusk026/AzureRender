@@ -107,6 +107,10 @@ SDK 路径归属于 D 盘任务，两配置及设备检查通过。
 [批提交范围](../acceptance/nr/draw-command-batch-scope.md)核对既有一百二十帧记录。
 录制窗口包含图准备及执行，线程区间约为 0.479 毫秒。
 批提交提案继续核对独立成本，后续接续交流供电下的材质分项。
+[交流电材质分项](../acceptance/nr/material-contribution-ac.md)取得四组稳定控制。
+历史匹配绘制中，直接灯循环的控制差值约为 3.03 毫秒。
+阴影接收差值约为 4.01 毫秒，编译依赖与兼容收益分别核定。
+后续优先核对直接灯循环的实际工作范围。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。
