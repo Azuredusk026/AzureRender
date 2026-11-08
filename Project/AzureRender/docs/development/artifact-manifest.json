@@ -50,6 +50,15 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-092305-shadow-cost-scope-ef3182",
+      "name": "阴影成本材质范围",
+      "status": "MaterialCostScopeAttributed",
+      "sourceBase": "ca47eed",
+      "evidence": "docs/acceptance/nr/shadow-cost-scope.md",
+      "newGpuTimingExecuted": false,
+      "candidateAdopted": false
+    },
+    {
       "path": "runs/20261108-090934-managed-temporary-storage-6b0786",
       "name": "受管任务临时目录",
       "status": "TaskLocalTemporaryStorage",
