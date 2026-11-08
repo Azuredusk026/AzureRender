@@ -1,0 +1,23 @@
+#version 450
+layout(local_size_x=128) in;
+layout(std430,binding=0) readonly buffer Source {uvec2 records[];} source;
+layout(std430,binding=1) writeonly buffer Destination {uvec2 records[];} destination;
+layout(std430,binding=2) readonly buffer Segments {uvec2 ranges[];} segments;
+layout(push_constant) uniform Parameters {uint count;uint width;} parameters;
+void main(){
+    uint index=gl_GlobalInvocationID.x;if(index>=parameters.count)return;
+    uvec2 range=segments.ranges[index];uint segmentEnd=range.x+range.y;
+    uint begin=range.x+((index-range.x)/(2*parameters.width))*(2*parameters.width);
+    uint middle=min(begin+parameters.width,segmentEnd);
+    uint end=min(middle+parameters.width,segmentEnd);
+    bool left=index<middle;
+    uint oppositeBegin=left?middle:begin,low=oppositeBegin,high=left?end:middle;
+    uvec2 value=source.records[index];
+    while(low<high){
+        uint probe=low+(high-low)/2;uint key=source.records[probe].x;
+        if(key<value.x||(!left&&key==value.x))low=probe+1;
+        else high=probe;
+    }
+    uint offset=index-(left?begin:middle)+low-oppositeBegin;
+    destination.records[begin+offset]=value;
+}

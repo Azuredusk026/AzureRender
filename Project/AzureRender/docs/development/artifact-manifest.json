@@ -50,6 +50,15 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-094742-transparent-deformation-plan-48ebfd",
+      "name": "GPU 分段稳定排序机制",
+      "status": "MechanismReadyIntegrationPending",
+      "sourceBase": "16f6f18",
+      "evidence": "docs/acceptance/nr/gpu-stable-key-sort.md",
+      "checksPassed": 6,
+      "sceneIntegrated": false
+    },
+    {
       "path": "runs/20261108-093510-surface-lighting-reuse-3223fa",
       "name": "零反射完整照明复用提案",
       "status": "CoverageEvidenceInsufficient",
