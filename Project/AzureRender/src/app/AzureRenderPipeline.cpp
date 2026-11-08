@@ -1,5 +1,6 @@
 #include "AzureRenderApp.hpp"
 #include "AzureRenderInternal.hpp"
+#include "rhi/RenderPassDescription.hpp"
 
 #include <array>
 #include <cstddef>
@@ -106,6 +107,9 @@ void AzureRenderApp::createRenderPass() {
         static_cast<std::uint32_t>(dependencies.size());
     createInfo.pDependencies = dependencies.data();
 
+    scenePassDescription_.reset();
+    try{scenePassDescription_=std::make_shared<const azurerender::rhi::RenderPassDesc>(azurerender::rhi::describeRenderPass(createInfo));}
+    catch(const std::invalid_argument&){/* Optional split metadata is unavailable. */}
     vkCheck(vkCreateRenderPass(device_, &createInfo, nullptr, &renderPass_), "vkCreateRenderPass");
 }
 

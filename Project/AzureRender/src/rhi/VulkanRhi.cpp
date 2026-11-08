@@ -756,7 +756,8 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         desc.depthAttachment >= 0 ? &depthReference : nullptr;
 
     std::vector<VkSubpassDependency> dependencies;
-    if (desc.externalReadDependency) {
+    if(!desc.dependencies.empty())dependencies=desc.dependencies;
+    else if (desc.externalReadDependency) {
         VkSubpassDependency externalToPass{};
         externalToPass.srcSubpass = VK_SUBPASS_EXTERNAL;
         externalToPass.dstSubpass = 0;

@@ -107,6 +107,9 @@ struct RenderViewService::State {
             {formats[4],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false}};
         pass.depthAttachment=1;pass.externalReadDependency=true;
         view->scenePass=rhi.createRenderPass(pass);
+        context.scenePassDescription=std::make_shared<const rhi::RenderPassDesc>(pass);
+        context.sceneDepthImage=view->images[1].image;context.sceneDepthView=view->views[1];
+        context.sceneColorImages={view->images[0].image,view->images[2].image,view->images[4].image};
         rhi::RenderPassDesc shadow;shadow.attachments={{formats[3],VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,true,true,true}};
         shadow.depthAttachment=0;shadow.externalReadDependency=true;view->shadowPass=rhi.createRenderPass(shadow);
         view->framebuffer=rhi.createFramebuffer({view->scenePass,{view->views[0],view->views[1],view->views[2],view->views[4]},context.renderExtent.width,context.renderExtent.height});
@@ -135,6 +138,7 @@ struct RenderViewService::State {
                         {view->images[0].image,view->images[1].image,view->images[2].image,view->images[4].image},
                         {view->views[0],view->views[1],view->views[2],view->views[4]}}},context.shaderDirectory);
                 context.rasterizationSamples=SceneMultisampling::kSamples;context.sceneRenderPass=view->multisampling->renderPass();
+                context.scenePassDescription.reset();context.sceneDepthImage=VK_NULL_HANDLE;context.sceneDepthView=VK_NULL_HANDLE;context.sceneColorImages={};
                 context.sceneFramebuffer=view->multisampling->framebuffer(0);
             }catch(const std::exception& error){view->multisampleFallback=error.what();}
         }

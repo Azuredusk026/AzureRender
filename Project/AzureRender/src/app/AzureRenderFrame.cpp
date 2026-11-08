@@ -985,6 +985,10 @@ void AzureRenderApp::recordCommandBuffer(
     azurerender::rhi::VulkanCommandRecorder commandRecorder(commandBuffer);
     sceneContext.commands = &commandRecorder;
     sceneContext.sceneFramebuffer = sceneMultisampling_?sceneMultisampling_->framebuffer(sceneContext.currentFrame):swapchainFramebuffers_[imageIndex];
+    if(!sceneMultisampling_){
+        sceneContext.sceneDepthImage=depthImages_[imageIndex].image;sceneContext.sceneDepthView=depthImageViews_[imageIndex];
+        sceneContext.sceneColorImages={sceneColorImages_[imageIndex].image,normalImages_[imageIndex].image,displayMaskImages_[imageIndex].image};
+    }
     if (runOptions_.gpuTimingEnabled && !timestampQueryPools_.empty()) {
         sceneContext.timestampQueryPool =
             timestampQueryPools_[currentFrame_];

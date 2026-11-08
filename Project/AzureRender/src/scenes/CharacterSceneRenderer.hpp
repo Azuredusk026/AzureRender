@@ -10,6 +10,8 @@
 #include "render/StableDepthOrder.hpp"
 #include "render/TransparentTopology.hpp"
 #include "render/GpuTransparentIndexSort.hpp"
+#include "render/GpuConservativeOcclusion.hpp"
+#include "render/DepthPrepassSplit.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
@@ -399,6 +401,31 @@ private:
     bool gpuTransparentAttempted_=false;
     std::string gpuTransparentFallback_;
     bool prepareGpuTransparentIndices(std::size_t,const internal::Vector3&);
+    struct ConservativeFrame {
+        std::unique_ptr<GpuConservativeOcclusion> commands;
+        std::unique_ptr<DepthPyramidGpu> pyramid;
+        rhi::GpuBuffer source{};
+        std::optional<GpuConservativeOcclusion::Ticket> ticket;
+        std::uint32_t capacity=0,lastZeroCommands=0;
+        std::string failure;
+    };
+    std::array<ConservativeFrame,kMaxFramesInFlight> conservativeFrames_;
+    std::array<bool,kMaxFramesInFlight> mainDepthSplitRecorded_{};
+    std::vector<bool> conservativeMeshes_;
+    std::vector<std::size_t> conservativeOffsets_;
+    std::vector<std::uint32_t> conservativeSlots_;
+    std::vector<internal::Matrix4> conservativeClipMatrices_;
+    std::shared_ptr<const rhi::RenderPassDesc> mainPassDescription_;
+    std::unique_ptr<DepthPrepassSplit> mainDepthSplit_;
+    VkExtent2D conservativeExtent_{};
+    bool conservativeAllowed_=false;
+    std::string conservativeFallback_;
+    void prepareConservativeOcclusion();
+    void destroyConservativeOcclusion();
+    bool mainDepthSplitActive(const RenderContext&) const;
+    rhi::RenderPassBeginDesc conservativeDepthPass(const RenderContext&) const;
+    void recordConservativeHierarchy(rhi::ICommandRecorder&,const RenderContext&);
+    void recordConservativeOcclusion(const RenderContext&,const SceneInstanceSnapshot&);
     RecordingWorkerPool* preparationWorkers_=nullptr;
     TransparentTopologyWorkspace transparencyScratch_;
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
@@ -674,7 +701,7 @@ private:
         std::uint32_t textureBase = 0,
         std::size_t globalMaterialBase = 0,
         SceneSubmissionCounters* counters = nullptr,
-        const SceneInstanceSnapshot* snapshot = nullptr, bool snapshotSurfaceOverlay=false);
+        const SceneInstanceSnapshot* snapshot = nullptr, bool snapshotSurfaceOverlay=false,bool allowConservative=false);
     void buildSceneState();
     void destroyGraphicsPipelinesForRecreate();
 };

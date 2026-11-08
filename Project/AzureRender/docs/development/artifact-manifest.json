@@ -50,6 +50,18 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-124916-main-depth-reuse-2703c1",
+      "name": "主通道深度预填复用",
+      "status": "IntegratedLocalCostImprovedFormalBudgetPending",
+      "sourceBase": "707a593",
+      "evidence": "docs/acceptance/nr/main-depth-reuse.md",
+      "checksPassed": 22,
+      "sceneIntegrated": true,
+      "nativeImagesExact": true,
+      "gpuSavedMs": 0.866255733333336,
+      "formalPerformancePassed": false
+    },
+    {
       "path": "runs/20261108-113315-conservative-depth-culling-079a96",
       "name": "保守层级深度剔除机制",
       "status": "MechanismReadySceneCandidateWithdrawn",

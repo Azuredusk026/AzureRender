@@ -633,6 +633,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     if(screenReflectionPrepared())publishScreenReflectionOutput(static_cast<unsigned>(currentFrame_));
     rebuildSceneInstances();
     prepareTransparentIndices();
+    prepareConservativeOcclusion();
     // CPU visibility already participates in this renderer. Preserve stable
     // GPU command slots while omitting known-empty runs from main submission.
     opaqueRecordingSpans_ = visibleSpansByMeshKey_;
@@ -641,6 +642,10 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     visibleIndices.reserve(visibleInstances_.size());
     for (const auto* instance : visibleInstances_) visibleIndices.push_back(instance->sourceIndex);
     RecordingBufferSet recordingBuffers;
+    if(const auto& occlusion=conservativeFrames_[currentFrame_];occlusion.ticket){
+        recordingBuffers.conservativeIndirect=occlusion.commands->output(0).buffer;
+        recordingBuffers.conservativeOffsets=std::move(conservativeOffsets_);recordingBuffers.conservativeSlots=std::move(conservativeSlots_);
+    }
     recordingBuffers.vertices.reserve(meshResourceCount_);
     recordingBuffers.indices.reserve(meshResourceCount_);
     recordingBuffers.multiDrawIndirect = multiDrawIndirect_;
@@ -1046,8 +1051,10 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         destination[slot].faceFrame = instanceFaceFrame(mesh,*pose.pose,model);
         // The same association as the per-frame uniform path so a single
         // instance reproduces the original values exactly.
-        destination[slot].modelViewProjection =
-            multiply(samplingProjectionMatrix_, multiply(viewMatrix_, model));
+        const auto clip=multiply(samplingProjectionMatrix_, multiply(viewMatrix_, model));
+        destination[slot].modelViewProjection=clip;
+        if(conservativeClipMatrices_.size()<sceneInstances_.size())conservativeClipMatrices_.resize(sceneInstances_.size());
+        conservativeClipMatrices_[slot]=clip;
         for (std::size_t cascade = 0;
              cascade < kShadowCascadeCount;
              ++cascade) {
@@ -1344,14 +1351,14 @@ void CharacterSceneRenderer::registerPasses(
     VkClearValue colorClear{};overlayBegin.clearValues=snapshotMultisampling_?std::vector<VkClearValue>{colorClear,depthClear,linearClear}:std::vector<VkClearValue>{colorClear,linearClear,depthClear};
     std::array<RenderGraph::ResourceId,3> snapshotSources{};
     if(snapshotMultisampling_)snapshotSources=snapshotMultisampling_->importSources(graph,context.currentFrame,"character-opaque-source");
-    const auto prepass=graph.addGraphicsPass("character-opaque-depth",overlayBegin,[this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
-        recordOverlayDepth(*frozenContext,*frozenInstances,commands);
-    });
-
     rhi::ImageBarrierDesc snapshotState{};snapshotState.image=opaqueSceneColor_[context.currentFrame].image.image;
     const auto snapshotColor=graph.importImage("character-opaque-color",snapshotState);
     rhi::ImageBarrierDesc depthState{};depthState.image=overlayDepthAttachments_[context.currentFrame].image;depthState.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
     const auto snapshotDepth=graph.importImage("character-opaque-hardware-depth",depthState);
+    const auto prepass=graph.addGraphicsPass("character-opaque-depth",overlayBegin,[this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
+        recordOverlayDepth(*frozenContext,*frozenInstances,commands);
+    });
+
     if(snapshotMultisampling_){
         for(unsigned i=0;i<3;++i)graph.attachment(prepass,snapshotSources[i],i==1?RenderGraphUsage::DepthAttachment:RenderGraphUsage::ColorAttachment,
             i==1?VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
@@ -1447,6 +1454,40 @@ void CharacterSceneRenderer::registerPasses(
         }
         graph.write(producer,*reflectionResource);
     }
+    std::optional<RenderGraph::ResourceId> conservativeIndirectResource,conservativeReady;
+    if(mainDepthSplitActive(context)){
+        mainDepthSplitRecorded_[context.currentFrame]=true;
+        const auto slot=context.currentFrame;auto& frame=conservativeFrames_[slot];const auto ticket=frame.ticket;
+        const auto prepare=graph.addGraphicsPass("character-main-depth",conservativeDepthPass(context),
+            [this,frozenContext,frozenInstances,mainCounters](rhi::ICommandRecorder& commands){
+                recordDepthCoverage(*frozenContext,*frozenInstances,commands,DepthCoverageMode::MainPrefill,
+                    frozenContext->submissionCounters?mainCounters.get():nullptr);
+            });
+        graph.attachment(prepare,resources.color,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+        graph.attachment(prepare,resources.normal,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+        if(context.displayMaskEnabled)graph.attachment(prepare,resources.displayMask,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+        graph.attachment(prepare,resources.depth,RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        for(const auto resource:{jointResource,morphTargetResource,morphWeightResource,instanceResource})graph.use(prepare,resource,RenderGraphUsage::VertexStorage,false);
+        if(skinnedResource)graph.use(prepare,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){graph.use(prepare,vertexResources[key],RenderGraphUsage::VertexBuffer,false);graph.use(prepare,indexResources[key],RenderGraphUsage::IndexBuffer,false);}
+        const auto hierarchy=graph.addResource("character-conservative-hierarchy");
+        const auto reduce=graph.addCommandPass("character-depth-hierarchy",[this,frozenContext](rhi::ICommandRecorder& commands){recordConservativeHierarchy(commands,*frozenContext);});
+        graph.use(reduce,resources.depth,RenderGraphUsage::ComputeSampled,false);graph.write(reduce,hierarchy);
+        const auto input=importHostStorage("character-occlusion-source",frame.source);
+        const auto& output=frame.commands->output(0);rhi::BufferBarrierDesc result{};result.buffer=output.buffer;result.size=output.size;
+        result.dstStageMask=VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT;result.dstAccessMask=VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
+        conservativeIndirectResource=graph.importBuffer("character-occlusion-output",result);
+        auto* owner=frame.commands.get();const auto cull=graph.addCommandPass("character-occlusion",[owner,ticket](rhi::ICommandRecorder& commands){owner->record(commands,*ticket);});
+        graph.read(cull,hierarchy);graph.use(cull,input,RenderGraphUsage::Storage,false);graph.use(cull,*conservativeIndirectResource,RenderGraphUsage::Storage,true);
+        // The split owner publishes sampling-to-depth-loading and color WAW.
+        // Logical reads order this explicit transition before the color pass.
+        const auto resume=graph.addCommandPass("character-main-depth-resume",[this,frozenContext](rhi::ICommandRecorder& commands){
+            const auto& context=*frozenContext;std::vector<VkImage> colors(context.sceneColorImages.begin(),context.sceneColorImages.begin()+mainPassDescription_->attachments.size()-1);
+            mainDepthSplit_->beforeColor(commands,context.sceneDepthImage,colors);
+        });
+        graph.read(resume,hierarchy);graph.read(resume,*conservativeIndirectResource);graph.read(resume,resources.depth);
+        conservativeReady=graph.addResource("character-main-depth-ready");graph.write(resume,*conservativeReady);
+    }
     const auto main = graph.addGraphicsPass("character-main", mainPassDescription(context), [this, frozenContext, mainCounters, frozenInstances](rhi::ICommandRecorder& commands) {
         const auto& context = *frozenContext;
         recordMainDraws(context, 0, frozenInstances.get(), 0, static_cast<std::size_t>(-1),
@@ -1504,6 +1545,8 @@ void CharacterSceneRenderer::registerPasses(
         graph.use(main, transparentIndices, RenderGraphUsage::IndexBuffer, false);
     }
     if (indirectResource) graph.use(main, *indirectResource, RenderGraphUsage::IndirectBuffer, false);
+    if(conservativeIndirectResource)graph.use(main,*conservativeIndirectResource,RenderGraphUsage::IndirectBuffer,false);
+    if(conservativeReady)graph.read(main,*conservativeReady);
     graph.use(main, boundsResource, RenderGraphUsage::FragmentStorage, false);
     graph.use(main,instanceResource,RenderGraphUsage::VertexStorage,false);
     if(objectRecordsResource)graph.use(main,*objectRecordsResource,RenderGraphUsage::FragmentStorage,false);
@@ -1599,6 +1642,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
         mask.clearValues={VkClearValue{}};
         context.commands->beginRenderPass(mask);recordOutlineMask(context,*instanceSnapshot_,*context.commands);context.commands->endRenderPass();
     }
+    recordConservativeOcclusion(context,*instanceSnapshot_);
     recordMainPass(context);
 }
 
@@ -1711,6 +1755,11 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"gpuTransparentSortingBytes\": " << (gpuTransparentSort_?gpuTransparentSort_->bytes():0) << ",\n"
          << "  \"gpuTransparentSortingVertices\": " << (gpuTransparentTickets_[currentFrame_]?gpuTransparentTickets_[currentFrame_]->vertexCount:0) << ",\n"
          << "  \"gpuTransparentSortingFallback\": " << std::quoted(gpuTransparentFallback_) << ",\n"
+         << "  \"conservativeOcclusionPrepared\": " << (conservativeFrames_[currentFrame_].ticket?"true":"false") << ",\n"
+         << "  \"mainDepthSplitRecorded\": " << (mainDepthSplitRecorded_[currentFrame_]?"true":"false") << ",\n"
+         << "  \"conservativeOcclusionCommands\": " << (conservativeFrames_[currentFrame_].ticket?conservativeFrames_[currentFrame_].ticket->count:0) << ",\n"
+         << "  \"conservativeOcclusionLastZeroCommands\": " << conservativeFrames_[currentFrame_].lastZeroCommands << ",\n"
+         << "  \"conservativeOcclusionFallback\": " << std::quoted(conservativeFallback_) << ",\n"
          << "  \"staticSkinningReusedInstances\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedCount():0) << ",\n"
          << "  \"staticSkinningReusedVertices\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedVertexCount():0) << ",\n"
          << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
@@ -2706,6 +2755,14 @@ void CharacterSceneRenderer::createOitIndexBuffers() {
 }
 
 void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
+    conservativeExtent_=context.renderExtent;mainPassDescription_=context.scenePassDescription;
+    std::uint64_t pyramidPixels=0;for(unsigned w=context.renderExtent.width,h=context.renderExtent.height;;w=std::max(1U,w/2),h=std::max(1U,h/2)){
+        pyramidPixels+=std::uint64_t(w)*h;if(w<=1&&h<=1)break;}
+    conservativeAllowed_=bool(mainPassDescription_)&&context.computeShaders&&context.gpuCulling
+        &&context.depthTestEnabled&&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
+        &&context.renderExtent.width&&context.renderExtent.height&&context.renderExtent.width<=8192&&context.renderExtent.height<=8192
+        &&pyramidPixels*4*kMaxFramesInFlight<=96ULL*1024*1024
+        &&rhi_->supportsSampledImage(context.depthFormat,false);
     rasterizationSamples_=context.rasterizationSamples;
     const auto surfaceUsage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT;
     const auto needsScreenNormal=[](const LoadedAsset& mesh) {
@@ -2758,6 +2815,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     createScreenReflectionResources(context);
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
+    destroyConservativeOcclusion();
     destroyScreenReflectionResources();
     snapshotMultisampling_.reset();
     for(std::size_t i=0;i<kMaxFramesInFlight;++i){
@@ -2989,6 +3047,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
 #include "CharacterOutlinePass.inc"
 #include "CharacterSkinningCache.inc"
 #include "CharacterMotionPass.inc"
+#include "CharacterOcclusionPass.inc"
 #include "CharacterMaterialSampling.inc"
 #include "CharacterSurfaceOverlays.inc"
 #include "CharacterScreenReflection.inc"
@@ -4594,7 +4653,7 @@ rhi::RenderPassBeginDesc CharacterSceneRenderer::mainPassDescription(const Rende
     clearValues[2].color.float32[2] = 1.0F;
     clearValues[2].color.float32[3] = 0.0F;
     rhi::RenderPassBeginDesc renderPassInfo{};
-    renderPassInfo.renderPass = context.sceneRenderPass;
+    renderPassInfo.renderPass = mainDepthSplitActive(context)?mainDepthSplit_->colorPass():context.sceneRenderPass;
     renderPassInfo.framebuffer = context.sceneFramebuffer;
     renderPassInfo.extent = context.renderExtent;
     renderPassInfo.clearValues.assign(
@@ -4746,7 +4805,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
 
     }
     if (stage == 0 || stage == 2 || stage == 4) {
-    if(settings.sceneLightingEnabled&&context.depthTestEnabled)
+    if(settings.sceneLightingEnabled&&context.depthTestEnabled&&!mainDepthSplitActive(context))
         recordDepthCoverage(context,*snapshot,commands,DepthCoverageMode::MainPrefill,counters);
     for (const std::array<std::uint32_t, 3>& span : snapshot->opaqueSpans) {
         const std::uint32_t meshKey = span[0];
@@ -4767,7 +4826,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
                         instanceCount,
                         firstInstance,
                         textureBase,
-                        globalMaterialBase, counters, snapshot);
+                        globalMaterialBase, counters, snapshot,false,mainDepthSplitActive(context));
                 }
             }
         };
@@ -4857,7 +4916,7 @@ void CharacterSceneRenderer::drawPrimitive(
     const std::uint32_t firstInstance,
     const std::uint32_t textureBase,
     const std::size_t globalMaterialBase,
-    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot,bool snapshotSurfaceOverlay) {
+    SceneSubmissionCounters* counters, const SceneInstanceSnapshot* snapshot,bool snapshotSurfaceOverlay,bool allowConservative) {
     const auto recordRun = [&](const PrimitiveOpacityRun& run) {
     if (run.opacity == 0) return;
     const auto firstInstance=run.firstInstance;
@@ -4953,10 +5012,25 @@ void CharacterSceneRenderer::drawPrimitive(
         &morphConstants,
         sizeof(morphConstants));
     std::uint32_t recordedDrawCalls = 0;
+    const auto primitiveIndex=static_cast<std::size_t>(&primitive-mesh.primitives.data());
+    bool useConservative=snapshot&&allowConservative&&run.opacity==1.F&&ordinaryOpaqueMaterial(material)
+        &&firstIndexOffset==primitive.firstIndex&&snapshot->buffers.conservativeIndirect!=VK_NULL_HANDLE;
+    if(useConservative)for(std::uint32_t i=0;i<instanceCount;++i){
+        const auto at=snapshot->buffers.conservativeOffsets.at(firstInstance+i)+primitiveIndex;
+        if(snapshot->buffers.conservativeSlots.at(at)==UINT32_MAX){useConservative=false;break;}
+    }
     const bool useIndirect=!blend&&indirectBuffer!=VK_NULL_HANDLE
         &&firstIndexOffset==primitive.firstIndex&&!material.nprDiffuse.rimOrigin.present;
-    if (useIndirect) {
-        const auto primitiveIndex = static_cast<std::size_t>(&primitive - mesh.primitives.data());
+    if(useConservative){
+        const auto& buffers=snapshot->buffers;
+        const auto slot=[&](std::uint32_t i){return buffers.conservativeSlots.at(buffers.conservativeOffsets.at(firstInstance+i)+primitiveIndex);};
+        const auto first=slot(0),stride=instanceCount>1?slot(1)-first:1U;bool regular=stride>0;
+        for(std::uint32_t i=1;regular&&i<instanceCount;++i)regular=slot(i)==std::uint64_t(first)+std::uint64_t(i)*stride;
+        if(regular&&buffers.multiDrawIndirect){
+            for(std::uint32_t i=0;i<instanceCount;){const auto count=std::min(buffers.maxDrawIndirectCount,instanceCount-i);
+                commands.drawIndexedIndirect(buffers.conservativeIndirect,VkDeviceSize(slot(i))*20,count,stride*20);i+=count;++recordedDrawCalls;}
+        }else for(std::uint32_t i=0;i<instanceCount;++i){commands.drawIndexedIndirect(buffers.conservativeIndirect,VkDeviceSize(slot(i))*20,1,20);++recordedDrawCalls;}
+    }else if (useIndirect) {
         if (snapshot != nullptr ? snapshot->buffers.multiDrawIndirect : multiDrawIndirect_) {
             for (std::uint32_t i = 0; i < instanceCount;) {
                 const auto count = std::min(snapshot != nullptr ? snapshot->buffers.maxDrawIndirectCount : maxDrawIndirectCount_, instanceCount - i);
@@ -4982,7 +5056,7 @@ void CharacterSceneRenderer::drawPrimitive(
     }
     if (counters != nullptr) {
         counters->drawCalls += recordedDrawCalls;
-        if (useIndirect)
+        if (useIndirect||useConservative)
             counters->indirectDrawCalls += recordedDrawCalls;
         ++counters->pipelineBinds;
         counters->pushConstantUpdates += 2;

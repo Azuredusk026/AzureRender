@@ -8,14 +8,22 @@ public:
     explicit ProbeRenderer(std::shared_ptr<Probe> p):p_(std::move(p)){}
     std::string_view name()const noexcept override{return "submission-probe";}
     SceneRendererCapabilities capabilities()const override{return {false,false,{"Beauty"}};}
-    void onLoad(const RenderContext&)override{}
+    void onLoad(const RenderContext& context)override{
+        if(!context.scenePassDescription||context.scenePassDescription->depthAttachment!=1
+            ||!context.sceneDepthImage||!context.sceneDepthView||!context.sceneColorImages[0]
+            ||!context.sceneColorImages[1]||!context.sceneColorImages[2])throw std::logic_error("Independent view borrowed targets incomplete");
+        source_=context.scenePassDescription;depth_=context.sceneDepthImage;
+    }
     void onUnload(const RenderContext&)override{}
     void onSwapchainRecreate(const RenderContext&)override{}
     void updateFrame(const SceneFrameData&)override{}
-    void recordScene(const RenderContext&)override{++p_->recordings;if(p_->fail)throw std::runtime_error("Injected recording failure");}
+    void recordScene(const RenderContext& context)override{
+        if(context.scenePassDescription!=source_||context.sceneDepthImage!=depth_)throw std::logic_error("Borrowed view target identity changed during recording");
+        ++p_->recordings;if(p_->fail)throw std::runtime_error("Injected recording failure");
+    }
     void onFrameSubmitted(std::uint64_t serial)noexcept override{++p_->commits;p_->serial=serial;}
     void onFrameAbandoned()noexcept override{++p_->cancels;}
-private:std::shared_ptr<Probe> p_;
+private:std::shared_ptr<Probe> p_;std::shared_ptr<const rhi::RenderPassDesc> source_;VkImage depth_{};
 };
 void checkSubmission(bool ok,const char* message){if(!ok)throw std::runtime_error(message);}
 int main(int argc,char** argv)try{

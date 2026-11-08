@@ -538,6 +538,7 @@ void AzureRenderApp::createSceneRenderer() {
         sceneRenderer_->capabilities());
     createMultisampleResources();context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
     context.sceneRenderPass=sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
+    if(sceneMultisampling_)context.scenePassDescription.reset();
 #if AZURE_WITH_EDITOR
     if (runOptions_.editorSession) {
         const auto loadedScene = runOptions_.editorSession->viewScene();
@@ -604,6 +605,7 @@ void AzureRenderApp::buildRenderContext(
     context.displayMaskEnabled=!displayMaskImages_.empty();
     context.rasterizationSamples=sceneMultisampling_?azurerender::SceneMultisampling::kSamples:VK_SAMPLE_COUNT_1_BIT;
     context.sceneRenderPass = sceneMultisampling_?sceneMultisampling_->renderPass():renderPass_;
+    context.scenePassDescription=sceneMultisampling_?nullptr:scenePassDescription_;
     context.postProcessRenderPass = postProcessRenderPass_;
     context.postProcessPipelineLayout = postProcessPipelineLayout_;
     context.postProcessDescriptorSetLayout = postProcessDescriptorSetLayout_;

@@ -21,10 +21,14 @@ int main()try{
         rejects([&]{p.record(commands,0,borrowed,DepthReduction::Minimum,{0,18});});
         rejects([&]{p.record(commands,0,borrowed,DepthReduction::Minimum,{40,18});});
         rejects([&]{p.record(commands,0,borrowed,DepthReduction::Minimum,{9000,18});});
+        rejects([&]{p.record(commands,0,borrowed,DepthReduction::Minimum,{},VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);});
         require(commands.calls.empty());
         p.record(commands,0,borrowed,DepthReduction::Minimum);
         p.record(commands,1,borrowed,DepthReduction::Maximum);
         p.record(commands,0,borrowed,DepthReduction::Minimum,{35,19});
+        p.record(commands,0,borrowed,DepthReduction::Maximum,{},VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        bool depthLayout=false;for(const auto& write:backend.descriptorImageWrites)depthLayout|=write.binding==0&&write.view==borrowed&&write.layout==VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+        require(depthLayout);
         require(!commands.calls.empty());
     }
     require(!backend.allocator().statistics().liveBuffers&&!backend.allocator().statistics().liveImages);

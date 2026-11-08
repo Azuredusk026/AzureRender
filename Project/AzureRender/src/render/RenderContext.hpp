@@ -27,6 +27,7 @@ namespace rhi {
 class IGpuAllocator;
 class IRhi;
 class ICommandRecorder;
+struct RenderPassDesc;
 }
 
 struct RenderSettings;
@@ -241,6 +242,13 @@ struct RenderContext {
 
     // Current in-flight scene framebuffer the renderer records into.
     VkFramebuffer sceneFramebuffer = VK_NULL_HANDLE;
+    // Optional single-sample framebuffer metadata and borrowed mip-zero images.
+    // Color images follow the pass's color-reference order. The host keeps
+    // these bindings alive for every recorded consumer of this frame.
+    std::shared_ptr<const rhi::RenderPassDesc> scenePassDescription;
+    VkImage sceneDepthImage=VK_NULL_HANDLE;
+    VkImageView sceneDepthView=VK_NULL_HANDLE;
+    std::array<VkImage,3> sceneColorImages{};
 
     // Scene content the renderer instantiates on onLoad: referenced assets
     // and placed nodes. Single-asset scenes carry exactly one resource and

@@ -23,6 +23,9 @@ struct RecordingBufferSet {
     std::vector<VkBuffer> indices;
     std::vector<VkBuffer> vertexColors;
     VkBuffer transparentIndices = VK_NULL_HANDLE;
+    VkBuffer conservativeIndirect=VK_NULL_HANDLE;
+    std::vector<std::size_t> conservativeOffsets;
+    std::vector<std::uint32_t> conservativeSlots;
     bool multiDrawIndirect = false;
     std::uint32_t maxDrawIndirectCount = 1;
     std::vector<std::vector<std::size_t>> transparentPrimitives;
@@ -87,6 +90,14 @@ struct SceneInstanceSnapshot final {
             throw std::logic_error("Snapshot indirect batch limit is zero");
         if (buffers.vertices.size() != buffers.indices.size())
             throw std::logic_error("Snapshot vertex/index resource counts differ");
+        if(buffers.conservativeIndirect!=VK_NULL_HANDLE){
+            if(buffers.conservativeOffsets.size()!=instances.size())
+                throw std::logic_error("Snapshot conservative offsets incomplete");
+            for(std::size_t i=0;i<buffers.conservativeOffsets.size();++i)
+                if(buffers.conservativeOffsets[i]>buffers.conservativeSlots.size()
+                    ||(i&&buffers.conservativeOffsets[i]<buffers.conservativeOffsets[i-1]))
+                    throw std::logic_error("Snapshot conservative primitive ranges invalid");
+        }
         if(!buffers.vertexColors.empty()&&buffers.vertexColors.size()!=buffers.vertices.size())
             throw std::logic_error("Snapshot vertex color resource count differs");
         if(buffers.outlineMaskImage!=VK_NULL_HANDLE

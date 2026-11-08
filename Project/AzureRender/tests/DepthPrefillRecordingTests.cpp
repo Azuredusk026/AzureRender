@@ -78,6 +78,74 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
     for(const auto& handle:allEarlyModules)require(destroyedModules[handle]==1,"Early-depth program ownership must release exactly once");
     require(!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers,"All scene resources must release");
 }
+void verifyConservativeOcclusion(const char* shaders,bool supported){
+    rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;context.rhi=&backend;context.allocator=&backend.allocator();
+    context.shaderDirectory=shaders;context.renderExtent={128,96};context.cullingEnabled=false;
+    context.computeShaders=supported;context.gpuCulling=supported;
+    auto& limits=context.descriptorLimits;limits.maxImageDimension2D=4096;limits.maxPerStageResources=4096;
+    limits.maxPerStageDescriptorSamplers=limits.maxDescriptorSetSamplers=4096;
+    limits.maxPerStageDescriptorSampledImages=limits.maxDescriptorSetSampledImages=4096;
+    const std::string root=AZURERENDER_TEST_SOURCE_DIR,path=root+"/assets_public/scene_inspector/assets/cube.gltf",fade=root+"/assets_public/test_model.gltf";
+    context.rampAtlasPath=root+"/assets_public/toon_ramp_atlas.ppm";
+    auto opaque=std::make_shared<LoadedAsset>(loadGltfAsset(path));
+    for(auto& material:opaque->materials){material.alphaMode=AssetAlphaMode::Opaque;material.materialFeatures=0;}
+    auto faded=std::make_shared<LoadedAsset>(*opaque);for(auto& node:faded->nodes)node.opacity=.5F;
+    std::map<std::string,std::shared_ptr<const LoadedAsset>> meshes{{path,opaque},{fade,faded}};context.preparedMeshes=&meshes;
+    context.scene.resources.push_back({"opaque",path});context.scene.resources.push_back({"fade",fade});
+    scene::SceneNodeDesc node;node.resourceId="opaque";
+    for(unsigned i=0;i<300;++i){node.id="opaque-"+std::to_string(i);context.scene.nodes.push_back(node);}
+    node.id="fade";node.resourceId="fade";context.scene.nodes.push_back(node);
+    RenderSettings settings;settings.faceSdfFeature=false;settings.showcasePlatformFeature=false;settings.sceneLightingEnabled=true;context.renderSettings=&settings;
+    rhi::RenderPassDesc source;source.depthAttachment=1;
+    source.attachments={{VK_FORMAT_R16G16B16A16_SFLOAT,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false},
+        {VK_FORMAT_D32_SFLOAT,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,true,true,true},
+        {VK_FORMAT_R16G16B16A16_SFLOAT,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,true,true,false}};
+    source.externalReadDependency=true;context.scenePassDescription=std::make_shared<const rhi::RenderPassDesc>(source);
+    context.sceneFramebuffer=reinterpret_cast<VkFramebuffer>(std::uintptr_t(1));
+    context.sceneDepthImage=reinterpret_cast<VkImage>(std::uintptr_t(2));context.sceneDepthView=reinterpret_cast<VkImageView>(std::uintptr_t(3));
+    context.sceneColorImages={reinterpret_cast<VkImage>(std::uintptr_t(4)),reinterpret_cast<VkImage>(std::uintptr_t(5)),VK_NULL_HANDLE};
+    renderer.onLoad(context);SceneFrameData frame;frame.cameraPosition[2]=4;frame.renderSettings=&settings;frame.swapchainWidth=128;frame.swapchainHeight=96;
+    for(unsigned generation=0;generation<2;++generation){
+        if(generation)renderer.onSwapchainRecreate(context);renderer.updateFrame(frame);RenderGraph graph;
+        SceneGraphResources resources{graph.addResource("color"),graph.addResource("depth"),graph.addResource("normal"),graph.addResource("shadow")};
+        renderer.registerPasses(graph,resources,context);std::string error;require(graph.compile(error),error.c_str());
+        if(!supported){
+            for(const auto& pass:graph.passes())require(pass.name!="character-main-depth"&&pass.name!="character-occlusion","Absent compute or indirect capability must preserve original recording");
+            continue;
+        }
+        unsigned depthDraws=0,indirect=0,producers=0,duplicatePrefill=0;
+        std::set<std::string> prefill;
+        for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"&&call.detail.find("depthBias=1.000000/0.000000")!=std::string::npos&&call.detail.find(" masks=0/0/")!=std::string::npos)
+            prefill.insert(call.detail.substr(0,call.detail.find(' ')));
+        for(const auto& pass:graph.passes()){
+            if(pass.name!="character-main-depth"&&pass.name!="character-depth-hierarchy"&&pass.name!="character-occlusion"&&pass.name!="character-main-depth-resume"&&pass.name!="character-main")continue;
+            rhi::NullCommandRecorder recorder;pass.recordCommands(recorder);
+            if(pass.name=="character-main-depth")for(const auto& call:recorder.calls)if(call.name=="drawIndexed")depthDraws+=static_cast<unsigned>(std::stoul(call.detail.substr(call.detail.find(" x")+2)));
+            if(pass.name=="character-main"){std::string pipeline;for(const auto& call:recorder.calls){
+                if(call.name=="bindPipeline")pipeline=call.detail;
+                if(call.name=="drawIndexedIndirect")++indirect;
+                if(call.name=="drawIndexed"&&prefill.count(pipeline))++duplicatePrefill;
+            }}
+            if(pass.name!="character-main")++producers;
+        }
+        require(producers==4,"Main depth, hierarchy, command and depth resume producers must be present");
+        require(depthDraws==301*opaque->primitives.size(),"Main depth must preserve opaque and faded prefill exactly once");
+        require(duplicatePrefill==0,"Color phase must consume prepared depth without another prefill");
+        require(indirect>0,"Qualified main draws must consume conservative indirect output");
+        auto incomplete=context;incomplete.sceneDepthImage=VK_NULL_HANDLE;RenderGraph fallback;
+        SceneGraphResources fallbackResources{fallback.addResource("color"),fallback.addResource("depth"),fallback.addResource("normal"),fallback.addResource("shadow")};
+        renderer.registerPasses(fallback,fallbackResources,incomplete);require(fallback.compile(error),error.c_str());
+        for(const auto& pass:fallback.passes()){
+            require(pass.name!="character-main-depth"&&pass.name!="character-occlusion","Absent borrowed target must retain the original path");
+            if(pass.name=="character-main"){rhi::NullCommandRecorder recorder;pass.recordCommands(recorder);
+                std::string pipeline;unsigned restoredPrefill=0;for(const auto& call:recorder.calls){
+                    if(call.name=="bindPipeline")pipeline=call.detail;
+                    if(call.name=="drawIndexed"&&prefill.count(pipeline))++restoredPrefill;
+                }require(restoredPrefill>0,"Fallback must restore the original main prefill");}
+        }
+    }
+    renderer.onUnload(context);require(!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers,"Occlusion scene recreation must retire every resource");
+}
 }
 int main(int argc,char** argv)try{
     require(argc==2,"Expected shader directory");
@@ -91,5 +159,7 @@ int main(int argc,char** argv)try{
         verify(argv[1],indexed,AssetAlphaMode::Mask,MaterialFeatureGeometryShadow,1,false);
         verify(argv[1],indexed,AssetAlphaMode::Opaque,0,1,true);
     }
+    verifyConservativeOcclusion(argv[1],true);
+    verifyConservativeOcclusion(argv[1],false);
     std::cout<<"Depth prefill: two workflows, descriptors, opacity, alpha modes, flags, MSAA fallback and owned recreation passed\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

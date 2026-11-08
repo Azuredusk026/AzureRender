@@ -60,7 +60,7 @@ struct RenderContext;
 struct SceneFrameData;
 }
 
-namespace azurerender::rhi { class VulkanPipelineCache; }
+namespace azurerender::rhi { class VulkanPipelineCache;struct RenderPassDesc; }
 
 class AzureRenderApp final {
 public:
@@ -322,6 +322,7 @@ private:
     VkFramebuffer shadowFramebuffer_ = VK_NULL_HANDLE;
 
     VkRenderPass renderPass_ = VK_NULL_HANDLE;
+    std::shared_ptr<const azurerender::rhi::RenderPassDesc> scenePassDescription_;
     VkRenderPass postProcessRenderPass_ = VK_NULL_HANDLE;
     VkRenderPass editorUiRenderPass_ = VK_NULL_HANDLE;
     VkDescriptorSetLayout postProcessDescriptorSetLayout_ = VK_NULL_HANDLE;

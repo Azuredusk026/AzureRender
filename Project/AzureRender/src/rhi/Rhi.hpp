@@ -224,9 +224,18 @@ struct RenderPassDesc {
     // pass output is sampled later in the frame.
     bool externalReadDependency = false;
     bool depthReadOnly = false;
+    // Explicit dependencies preserve compatibility with an existing pass.
+    // An empty list selects the externalReadDependency policy.
+    std::vector<VkSubpassDependency> dependencies;
 };
 
 inline void validateRenderPassDesc(const RenderPassDesc& desc) {
+    if(desc.dependencies.size()>64)throw std::invalid_argument("Render pass dependency count exceeds its bound");
+    for(const auto& dependency:desc.dependencies)
+        if((dependency.srcSubpass!=0&&dependency.srcSubpass!=VK_SUBPASS_EXTERNAL)
+            ||(dependency.dstSubpass!=0&&dependency.dstSubpass!=VK_SUBPASS_EXTERNAL)
+            ||(dependency.srcSubpass==VK_SUBPASS_EXTERNAL&&dependency.dstSubpass==VK_SUBPASS_EXTERNAL))
+            throw std::invalid_argument("Single-subpass dependency references an invalid subpass");
     if(desc.depthAttachment< -1||(desc.depthAttachment>=0
         &&static_cast<std::size_t>(desc.depthAttachment)>=desc.attachments.size()))
         throw std::invalid_argument("Render pass depth attachment index is invalid");
