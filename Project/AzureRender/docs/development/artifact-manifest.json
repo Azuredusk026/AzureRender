@@ -50,6 +50,15 @@
   },
   "milestones": [
     {
+      "path": "runs/20261108-093510-surface-lighting-reuse-3223fa",
+      "name": "零反射完整照明复用提案",
+      "status": "CoverageEvidenceInsufficient",
+      "sourceBase": "17df0c6",
+      "evidence": "docs/acceptance/nr/surface-lighting-reuse.md",
+      "candidateImplemented": false,
+      "newGpuTimingExecuted": false
+    },
+    {
       "path": "runs/20261108-092305-shadow-cost-scope-ef3182",
       "name": "阴影成本材质范围",
       "status": "MaterialCostScopeAttributed",

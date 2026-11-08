@@ -10,6 +10,7 @@
 照明复用的[接收面核对](docs/acceptance/nr/radiance-receiver-entry.md)保持原像素差异，候选继续隔离。
 阴影圆盘的[局部成本](docs/acceptance/nr/shadow-disk-kernel.md)未形成收益，候选保持隔离。
 [材质范围核对](docs/acceptance/nr/shadow-cost-scope.md)按三十五份实际管线常量分组，历史缓存支持范围对应约 1.47 毫秒控制差值。
+[零反射复用提案](docs/acceptance/nr/surface-lighting-reuse.md)保存反射贡献范围，实际材质覆盖依据尚未成立。
 对象接收的[同输入模型](docs/acceptance/nr/object-receiver-input-model.md)复现 17017 处原生可见量，场景集成继续验收。
 [屏幕对象可见量](docs/acceptance/nr/screen-object-visibility.md)提供公共图形通道，双设备功能检查通过，Intel 原生精度及场景接入继续验收。
 [相位原点](docs/acceptance/nr/visibility-phase-origin.md)支持两种行号约定，默认原生区域保持逐字节一致。

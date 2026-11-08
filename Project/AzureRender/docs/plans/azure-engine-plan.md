@@ -94,6 +94,7 @@ NVIDIA 原生区域逐字节一致；Intel 有 175 处超出一字节，设备�
 圆盘权重的[空覆盖候选](../acceptance/nr/shadow-disk-work.md)减少约 35.51% 的可见调用工作。
 独立[权重成本](../acceptance/nr/shadow-disk-kernel.md)保持逐像素工作形状及逐位相同输出。
 [材质范围核对](../acceptance/nr/shadow-cost-scope.md)按三十五份实际管线常量分组，历史缓存支持范围对应约 1.47 毫秒控制差值。
+[零反射复用提案](../acceptance/nr/surface-lighting-reuse.md)保存反射贡献范围，实际材质覆盖依据尚未成立。
 候选局部均值约慢 11.27%，原生四帧及成对测量未启动，候选保持隔离。
 
 材质程序的[离线优化](../acceptance/nr/material-spirv-optimization.md)完成九份附件字节核对。
