@@ -67,11 +67,13 @@ float objectShadowPageTexel(texture2D depth,sampler sharedSampler,ivec2 pixel,iv
     return texelFetch(sampler2D(depth,sharedSampler),pixel,0).r;
 }
 vec4 objectShadowGather(texture2D depth,sampler sharedSampler,vec2 uv,ivec2 lo,ivec2 hi) {
-    ivec2 base=ivec2(floor(uv*vec2(textureSize(sampler2D(depth,sharedSampler),0))-.5));
-    // Filtering coordinates can round to the adjacent texel on the sampler's
-    // subtexel grid. Keep a texel of slack around the hardware footprint.
-    if(all(greaterThanEqual(base-1,lo))&&all(lessThan(base+2,hi)))
-        return textureGather(sampler2D(depth,sharedSampler),uv);
+    vec2 extent=vec2(textureSize(sampler2D(depth,sharedSampler),0));
+    // The authored visibility filter uses an 8-bit subtexel grid. Resolve its
+    // footprint explicitly so hardware gather and page clipping agree.
+    precise vec2 coordinate=uv*extent-.5;
+    ivec2 base=ivec2(floor(roundEven(coordinate*256.0)/256.0));
+    if(all(greaterThanEqual(base,lo))&&all(lessThan(base+1,hi)))
+        return textureGather(sampler2D(depth,sharedSampler),(vec2(base)+1.0)/extent);
     return vec4(objectShadowPageTexel(depth,sharedSampler,base+ivec2(0,1),lo,hi),
                 objectShadowPageTexel(depth,sharedSampler,base+ivec2(1),lo,hi),
                 objectShadowPageTexel(depth,sharedSampler,base+ivec2(1,0),lo,hi),

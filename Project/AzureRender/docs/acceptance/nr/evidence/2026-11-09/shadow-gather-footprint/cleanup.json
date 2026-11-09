@@ -1,0 +1,161 @@
+{
+  "removed": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\tmp",
+      "removed": [
+        284,
+        1794224585.4592967
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\collector.exe",
+      "removed": [
+        263168,
+        1794223581.8841064
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\timing.exe",
+      "removed": [
+        268288,
+        1794224116.4223373
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\collector.obj",
+      "removed": [
+        3110651,
+        1794223581.7206142
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\timing.obj",
+      "removed": [
+        3160742,
+        1794224116.2451465
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\anchored.spv",
+      "removed": [
+        23760,
+        1794223852.0516462
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\filter.spv",
+      "removed": [
+        23460,
+        1794223582.0228117
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\manual-grid.spv",
+      "removed": [
+        23208,
+        1794223582.3367867
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\manual.spv",
+      "removed": [
+        23020,
+        1794223582.1870544
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\anchored-d16-output.bin",
+      "removed": [
+        790144,
+        1794223854.5534647
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\filter-d16-output.bin",
+      "removed": [
+        790144,
+        1794223584.970196
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\filter-d32-output.bin",
+      "removed": [
+        790144,
+        1794223587.3879523
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\manual-d16-output.bin",
+      "removed": [
+        790144,
+        1794223585.5695255
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\manual-grid-d16-output.bin",
+      "removed": [
+        790144,
+        1794223586.7970984
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\manual-grid-d32-output.bin",
+      "removed": [
+        790144,
+        1794223587.9839046
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\timing-after-output.bin",
+      "removed": [
+        790144,
+        1794224120.6111188
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\timing-before-output.bin",
+      "removed": [
+        790144,
+        1794224119.2983758
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\timing-candidate-output.bin",
+      "removed": [
+        790144,
+        1794224119.9622376
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\image-shadow-footprint\\frames-193830\\frame_000000.png",
+      "removed": [
+        5714675,
+        1794224582.0784862
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\image-shadow-footprint\\frames-193830\\frame_000001.png",
+      "removed": [
+        5713820,
+        1794224582.959967
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\image-shadow-footprint\\frames-193830\\frame_000002.png",
+      "removed": [
+        5713834,
+        1794224583.8162136
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-192439-intel-shadow-filter-precision-d28d29\\image-shadow-footprint\\frames-193830\\frame_000003.png",
+      "removed": [
+        5714218,
+        1794224584.783506
+      ]
+    }
+  ],
+  "freeBefore": 157787336704,
+  "freeAfter": 157824229376,
+  "observedFreedBytes": 36892672
+}

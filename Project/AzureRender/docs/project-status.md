@@ -23,7 +23,8 @@
 原四帧与六百七十五份主着色器均保持逐字节一致。
 加载耗时与每帧正式性能分别验收。
 [实际接收坐标](acceptance/nr/native-producer-gpu-intermediates.md)闭合 NVIDIA 区域的输入精度超差。
-Intel 的过滤差异及完整头发颜色继续验收。
+[固定采样足迹](acceptance/nr/shadow-gather-footprint.md)闭合 Intel 的九十处区域过滤超差。
+四项设备检查及原四帧通过，完整接收重建与头发颜色继续验收。
 
 ## 已取得的分项证据
 
