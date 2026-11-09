@@ -67,6 +67,8 @@ Intel 保留 120 处超差，最大为 33 字节。
 42 处原有颜色失败点进入门槛，完整生产接入待验。
 [基色层级内容](../acceptance/nr/hair-base-color-mip-content.md)完成十二级 RGB 核对。
 5592405 个纹素的 RGB 逐通道一致。
+[实际基色取样](../acceptance/nr/hair-base-sample-region.md)完成 31 个剩余位置的全位核对。
+27 个位置逐位一致，四处取样差异继续定位。
 
 ## 后续外观
 
