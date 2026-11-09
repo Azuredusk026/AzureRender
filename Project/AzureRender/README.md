@@ -22,6 +22,7 @@
 [接收范围](docs/acceptance/nr/clustered-receiver-ranges.md)的头表与索引写入量减少约 88%，双设备各十七项所属用例通过。
 [网格分辨率范围](docs/acceptance/nr/clustered-grid-scope.md)完成冻结夹具核对，生产沿用当前尺寸。
 [材质驻留范围](docs/acceptance/nr/material-storage-scope.md)核对 385 份纹理，采样器造成的重复仅为 3136 字节。
+[快照颜色历史](docs/acceptance/nr/snapshot-color-history.md)保持原四帧零差，整数附件混合验证未通过，候选已封存。
 级联归属修复使静止局部灯的首帧与绑定路径保持一致，原始四帧继续零差。
 [运动矢量绑定](docs/acceptance/nr/motion-descriptor-reuse.md)按帧槽复用稳定资源，所属十项检查及原生四帧核对通过。
 [展示照明按需计算](docs/acceptance/nr/presentation-environment-demand.md)的候选未达区间效率门槛，生产已恢复受检内容。
