@@ -1,0 +1,14 @@
+{
+  "baseCommit": "3f9c745ae6731b25e6195c3dbf9731807aec2c98",
+  "files": {
+    "build.log": "60899147c2a1cc85ee664b8a1e61b4a0f9cccb9448a28b674c878d24b89d102f",
+    "configure.log": "33af01c6306c0ccea3ac1da4bd3f56d0d1cd00883a9c2e8c412cde05d68bf965",
+    "ctest.log": "816d3129dae5d9bced7f490aecef8d9f10600b0f7499c7683e64684954d275cd",
+    "desktop-capabilities.json": "dff3fe7cbbf9f937592140015aae72d9c3e858273aca1857aa05ca060db26798",
+    "desktop-qualification.json": "b2c64c5d9bcc3a0c41a6a10ae21529b26133625fbafc5a3b425890d105b4e0e4",
+    "document-fingerprints.json": "969461196ea11b9dfdecb8544a5905a7495cf7051311ab1a4c58fbde8b7a2938",
+    "mobile-qualification.json": "ccf2a28b9fe936be38ac94e28c7d70b3bcaa9078eac1bbbd51ddb1de84b30274",
+    "mobile-vulkan.log": "23645092dc31255fa4e090109c349f4c2de0401db09f050c4b81d4aacf6439cf",
+    "qualify_environment.py": "a6641e9db22af863d196eab14550a0aeaa90194ce175cb51c6fd3547f4860dc1"
+  }
+}
