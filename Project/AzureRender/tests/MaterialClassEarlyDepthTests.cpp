@@ -45,7 +45,7 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
             const auto handle=call.detail.substr(0,call.detail.find(' '));ordinaryCovered.insert(handle);allCovered.insert(handle);
         }
         const bool ordinary=mode==AssetAlphaMode::Opaque&&!screenNormal;
-        require(ordinaryCovered.size()==(!multisample&&ordinary?8*(generation+1):0),"Covered material-class pipelines require explicit single-sample qualification");
+        require(ordinaryCovered.size()==(!multisample&&ordinary?4*(generation+1):0),"Covered material-class pipelines require the loaded material's facing pair");
         for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"&&call.detail.find("depthBias=1.000000/0.000000")!=std::string::npos&&call.detail.find(" masks=0/0/")!=std::string::npos){
             const auto handle=call.detail.substr(0,call.detail.find(' '));prefill.insert(handle);
             if(call.detail.find("fragment=0")!=std::string::npos){covered.insert(handle);allCovered.insert(handle);}

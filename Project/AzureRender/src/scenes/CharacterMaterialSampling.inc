@@ -185,17 +185,21 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
     VkShaderModule identityVertex=VK_NULL_HANDLE;
     VkShaderModule validationModule=VK_NULL_HANDLE;
     bool needed=false;
+    unsigned ordinaryFacings=0;
+    std::array<unsigned,kMaterialClassVariantCount> classFacings{};
     std::array<bool,kMaterialClassVariantCount> classes{};
     std::array<bool,kMaterialClassVariantCount> coveredClasses{};
     std::array<std::uint32_t,kMaterialClassVariantCount> intersections{},combined{};
     intersections.fill(~std::uint32_t{0});
     materialClassFeatureSpecializations_={};
     const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
-        if(ordinaryOpaqueMaterial(material))needed=true;
+        const unsigned facings=material.doubleSided?12U:3U;
+        if(ordinaryOpaqueMaterial(material)){needed=true;ordinaryFacings|=facings;}
         else if(material.alphaMode!=AssetAlphaMode::Blend){
             const auto index=unsigned(material.materialClass);
             if(index<classes.size()){
                 classes[index]=true;
+                classFacings[index]|=facings;
                 coveredClasses[index]=coveredClasses[index]||fullyCoveredClassMaterial(material,1.F);
                 intersections[index]&=material.materialFeatures;
                 combined[index]|=material.materialFeatures;
@@ -244,7 +248,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                 }}
 
         }
-        if(needed)for(unsigned facing=0;facing<4;++facing){
+        if(needed)for(unsigned facing=0;facing<4;++facing)if(ordinaryFacings&(1U<<facing)){
             auto desc=color;
             desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
             desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
@@ -274,7 +278,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
         for(unsigned index=0;index<classes.size();++index)if(classes[index]){
             const auto policy=fixedMaterialFeatures(intersections[index],combined[index]);
             materialClassFeatureSpecializations_[index]=policy;
-            for(unsigned facing=0;facing<4;++facing){
+            for(unsigned facing=0;facing<4;++facing)if(classFacings[index]&(1U<<facing)){
                 auto desc=color;
                 desc.frontFace=(facing&1U)?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing>=2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;

@@ -19,6 +19,9 @@
 [对象阴影页边界](acceptance/nr/object-shadow-page-boundary.md)的串扰修复通过四项设备检查。
 原始四帧保持零差，完整接收精度继续验收。
 目录维护按 D 盘项目技能与每日有界回收执行。
+[材质朝向需求](acceptance/nr/material-facing-demand.md)减少八十八次管线创建。
+原四帧与六百七十五份主着色器均保持逐字节一致。
+加载耗时与每帧正式性能分别验收。
 
 ## 已取得的分项证据
 
