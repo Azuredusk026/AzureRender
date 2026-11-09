@@ -1,0 +1,379 @@
+{
+  "status": "texture-content-audited",
+  "mips": [
+    {
+      "mip": 0,
+      "extent": [
+        2048,
+        2048
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 338455,
+      "verticalFlipRgbDifferentPixels": 4187490,
+      "nativeDecodedSha256": "66370c3777a2816f6b6ece83742bfa0485b50f7812e96ba7f9121316c902a396",
+      "vulkanDecodedSha256": "5aa13e90fac82c01f7ede36900476fc979c24d30022c94d07d8dc87dfa984f11",
+      "nativeRgbSha256": "69a60a308220e2b023c72cc4679bf4efe5f3924b910dfb9a2964099505df3801",
+      "vulkanRgbSha256": "69a60a308220e2b023c72cc4679bf4efe5f3924b910dfb9a2964099505df3801"
+    },
+    {
+      "mip": 1,
+      "extent": [
+        1024,
+        1024
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 85126,
+      "verticalFlipRgbDifferentPixels": 1046614,
+      "nativeDecodedSha256": "0efdb6ff100820b7548cf2a696d988c1eeb39113c494530db280346a62bf9b26",
+      "vulkanDecodedSha256": "91614ea00cbf1adc781a7392143dc0bc97f73dbb5ad0937c85c61d8e62543639",
+      "nativeRgbSha256": "174168afc47e29932a938d829e354f8307179239f34320a5735509adadcada2d",
+      "vulkanRgbSha256": "174168afc47e29932a938d829e354f8307179239f34320a5735509adadcada2d"
+    },
+    {
+      "mip": 2,
+      "extent": [
+        512,
+        512
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 21138,
+      "verticalFlipRgbDifferentPixels": 261612,
+      "nativeDecodedSha256": "2262a6d445af5cbb9913b0da83fce4eb2b0f0148542d73532188893b252d89d5",
+      "vulkanDecodedSha256": "8d3d2b7a36269315fc6ecc091a562516c740c87b9da3a12cecff51a0ceb72817",
+      "nativeRgbSha256": "76c5a82a9a1627053e148251a4f0e25b1ab1ee9b8c8c821d8d0442b3934c8235",
+      "vulkanRgbSha256": "76c5a82a9a1627053e148251a4f0e25b1ab1ee9b8c8c821d8d0442b3934c8235"
+    },
+    {
+      "mip": 3,
+      "extent": [
+        256,
+        256
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 5621,
+      "verticalFlipRgbDifferentPixels": 65422,
+      "nativeDecodedSha256": "00ce9ef976be5d9ab268263f9a3037fbc09bfc58a193b91c5e3125981e2f883a",
+      "vulkanDecodedSha256": "091f54d187a05aba8116b305f5e7903e1bb6211f91479116b46bacf9ac90cf4b",
+      "nativeRgbSha256": "fb9b1d68ff6e46f2aa5259fda222178a06dafb26098e66f95ef0fc48a9aab0c3",
+      "vulkanRgbSha256": "fb9b1d68ff6e46f2aa5259fda222178a06dafb26098e66f95ef0fc48a9aab0c3"
+    },
+    {
+      "mip": 4,
+      "extent": [
+        128,
+        128
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 1598,
+      "verticalFlipRgbDifferentPixels": 16360,
+      "nativeDecodedSha256": "47a1cb3116b7e4289fa1c6596d3bc2c46fc027cf256c2046b4e6c0698743e22e",
+      "vulkanDecodedSha256": "2bce6dc836761d1ebb058e8b550e64395d0812ef812fb3bf87fadbcf076ff424",
+      "nativeRgbSha256": "6d0fe72318858f28122ff26214a79a4efdb9942f5b43cc2acffd21e750fc3545",
+      "vulkanRgbSha256": "6d0fe72318858f28122ff26214a79a4efdb9942f5b43cc2acffd21e750fc3545"
+    },
+    {
+      "mip": 5,
+      "extent": [
+        64,
+        64
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 516,
+      "verticalFlipRgbDifferentPixels": 4094,
+      "nativeDecodedSha256": "099a9aa37d0aa9f86157bafdfe1d3dce0da24a44aed621050a247eba1251c700",
+      "vulkanDecodedSha256": "8eaad8c5138c8270248b90a7cf1cae54d265fdd4b9d14d846f5bc5eba68d1faf",
+      "nativeRgbSha256": "40e5a44e2f7fbd1756836f91f6599a8c4886c861279e6dccc869f99517fb6f2b",
+      "vulkanRgbSha256": "40e5a44e2f7fbd1756836f91f6599a8c4886c861279e6dccc869f99517fb6f2b"
+    },
+    {
+      "mip": 6,
+      "extent": [
+        32,
+        32
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 177,
+      "verticalFlipRgbDifferentPixels": 1024,
+      "nativeDecodedSha256": "54685d68db7851e7484a7a21e8da518e0cb74c22ec0bae08d22ca05dfbaf3093",
+      "vulkanDecodedSha256": "3bec03eb85be08fa8401cd031c311e5b35799f2ac04fa73b1be979c699b5bd45",
+      "nativeRgbSha256": "3a6d9017351dc7589846d88dfeb914bc32f553e0ce7b6b8cd256c78e3351468c",
+      "vulkanRgbSha256": "3a6d9017351dc7589846d88dfeb914bc32f553e0ce7b6b8cd256c78e3351468c"
+    },
+    {
+      "mip": 7,
+      "extent": [
+        16,
+        16
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 69,
+      "verticalFlipRgbDifferentPixels": 256,
+      "nativeDecodedSha256": "4985ca0dd72d539e2fb96263ae6c81b8cc9e1a29666994e82bea8ad5593818a8",
+      "vulkanDecodedSha256": "05b3bcaa416ce918eac7245e63f6cf637cc2817c81ab29f245b01bf3dd53e34d",
+      "nativeRgbSha256": "e23b18a11aaa58d47d38de752818cb5130296b0db3f212d5c19e24784f7ee8ad",
+      "vulkanRgbSha256": "e23b18a11aaa58d47d38de752818cb5130296b0db3f212d5c19e24784f7ee8ad"
+    },
+    {
+      "mip": 8,
+      "extent": [
+        8,
+        8
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 27,
+      "verticalFlipRgbDifferentPixels": 64,
+      "nativeDecodedSha256": "aca66a9364ab4b83c4598c3abf15d9f032535e85cc6093631416d4d5738d44fc",
+      "vulkanDecodedSha256": "5cbbf99054e2168f17b55abc1ae1ca7fc66ad3b2522c086fb8dc1fe1f6b7bf4c",
+      "nativeRgbSha256": "cf2baecf9ec638b5a2a2de1ee7bf0b609641812967e5db377148177b936fa061",
+      "vulkanRgbSha256": "cf2baecf9ec638b5a2a2de1ee7bf0b609641812967e5db377148177b936fa061"
+    },
+    {
+      "mip": 9,
+      "extent": [
+        4,
+        4
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 10,
+      "verticalFlipRgbDifferentPixels": 8,
+      "nativeDecodedSha256": "b982964ce7f224f621589c2a519566230da1952b718a83b71fb9e00426d48768",
+      "vulkanDecodedSha256": "abc9ee0782410f719fcd99bf3b9de4aa6f1aa1c006fee31a52c7bfb2b25b1d8c",
+      "nativeRgbSha256": "543788171c58365de02248c2535543520ab5398a0559ed2bda64afa632b9f912",
+      "vulkanRgbSha256": "543788171c58365de02248c2535543520ab5398a0559ed2bda64afa632b9f912"
+    },
+    {
+      "mip": 10,
+      "extent": [
+        2,
+        2
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 4,
+      "verticalFlipRgbDifferentPixels": 2,
+      "nativeDecodedSha256": "92483713d097bef41d896793cf2ba05bcb7b68df923c1c9897a58446a6cdfdf1",
+      "vulkanDecodedSha256": "bca30506d4fd7ef77338aaa168f726339004666ca33a7bb9e3a74dec06bb7265",
+      "nativeRgbSha256": "eebb05a79c808517dfdb50ac5f684a5d9f84f56bbc47eff5275b93a4785d7272",
+      "vulkanRgbSha256": "eebb05a79c808517dfdb50ac5f684a5d9f84f56bbc47eff5275b93a4785d7272"
+    },
+    {
+      "mip": 11,
+      "extent": [
+        1,
+        1
+      ],
+      "rgbDifferentPixels": 0,
+      "maxRgbByteError": 0,
+      "alphaDifferentPixels": 0,
+      "verticalFlipRgbDifferentPixels": 0,
+      "nativeDecodedSha256": "7f275a646326b1a727dbf84e14ed3cba3d1c04d1f076920ab89f8179a4766185",
+      "vulkanDecodedSha256": "7f275a646326b1a727dbf84e14ed3cba3d1c04d1f076920ab89f8179a4766185",
+      "nativeRgbSha256": "f25b1968cff981fa9a052a337ef771d95da049125a3940fd5b4e16cf97c37b4c",
+      "vulkanRgbSha256": "f25b1968cff981fa9a052a337ef771d95da049125a3940fd5b4e16cf97c37b4c"
+    }
+  ],
+  "export": {
+    "status": "exported",
+    "textures": [
+      {
+        "label": "native",
+        "event": 950,
+        "binding": 16,
+        "resource": "ResourceId::139677",
+        "format": "BC7_SRGB",
+        "width": 2048,
+        "height": 2048,
+        "mips": 12,
+        "files": [
+          {
+            "mip": 0,
+            "name": "native-0.dds",
+            "bytes": 4194452,
+            "sha256": "7a60d2e94f7aa90195c9a6e76cdcff3040b86697290dc0f39f8a92a4beafc940"
+          },
+          {
+            "mip": 1,
+            "name": "native-1.dds",
+            "bytes": 1048724,
+            "sha256": "25dce2e31a3cef7d38a95153b626bf5686ed82f2cd76b991bdd999811222b245"
+          },
+          {
+            "mip": 2,
+            "name": "native-2.dds",
+            "bytes": 262292,
+            "sha256": "9e55b6443a69aeac7be77d162d73ac0a38df2946ad8520bda6d46e9858231ab2"
+          },
+          {
+            "mip": 3,
+            "name": "native-3.dds",
+            "bytes": 65684,
+            "sha256": "ccfdd15ac6a702e6c6a41e77f61df1487ffbd59da60fd41c4f8b65fef969fea1"
+          },
+          {
+            "mip": 4,
+            "name": "native-4.dds",
+            "bytes": 16532,
+            "sha256": "b78a5f1e24cdb68693784ad241f7a2735a152b1564c0fb22a42cdd2911f09890"
+          },
+          {
+            "mip": 5,
+            "name": "native-5.dds",
+            "bytes": 4244,
+            "sha256": "e6a04206b685d603eabd605fdd22a61689bd25f9fffb7563355885d2955a9154"
+          },
+          {
+            "mip": 6,
+            "name": "native-6.dds",
+            "bytes": 1172,
+            "sha256": "cb7dfc921d8dc0924f4e4eeb5bee821c3bff7a5b6a9f96b12b0f68bc02bb91dd"
+          },
+          {
+            "mip": 7,
+            "name": "native-7.dds",
+            "bytes": 404,
+            "sha256": "8b458ac2fdb00252696619ba19a787a06ad0741474755f5e2db9c2cad5a8a10f"
+          },
+          {
+            "mip": 8,
+            "name": "native-8.dds",
+            "bytes": 212,
+            "sha256": "06414be21a10710a2937c8bda5e7362a671006265a3b51281fe42274f51c4906"
+          },
+          {
+            "mip": 9,
+            "name": "native-9.dds",
+            "bytes": 164,
+            "sha256": "07174876b1a60461f41085596d8d7a512ff4644d4bf940ca705c6fa3ecbba97f"
+          },
+          {
+            "mip": 10,
+            "name": "native-10.dds",
+            "bytes": 164,
+            "sha256": "81cc02ff76172efbacf096d02e6edd40e87d0da204f17a45c15ff6377dafcd48"
+          },
+          {
+            "mip": 11,
+            "name": "native-11.dds",
+            "bytes": 164,
+            "sha256": "2dd752d55aeca0a430eab8a6a3d37534ba9cc93d5ed4ec7febaa9f9438fe7f66"
+          }
+        ],
+        "debugMessages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      {
+        "label": "vulkan",
+        "event": 493,
+        "binding": 1,
+        "resource": "ResourceId::752",
+        "format": "R8G8B8A8_SRGB",
+        "width": 2048,
+        "height": 2048,
+        "mips": 12,
+        "files": [
+          {
+            "mip": 0,
+            "name": "vulkan-0.dds",
+            "bytes": 16777364,
+            "sha256": "15254ac4ccdef5f5996ad87a05bedbd6affe49c4aadc2d93d7f45680aac774c9"
+          },
+          {
+            "mip": 1,
+            "name": "vulkan-1.dds",
+            "bytes": 4194452,
+            "sha256": "589b3fec8404905c938b20cfeea4dd7a5b8f3a1f775f907af79fcaeca2809c39"
+          },
+          {
+            "mip": 2,
+            "name": "vulkan-2.dds",
+            "bytes": 1048724,
+            "sha256": "6d1f2a1bb127e978c033ef601cc4809da2de81c5076926136ea2285033e47721"
+          },
+          {
+            "mip": 3,
+            "name": "vulkan-3.dds",
+            "bytes": 262292,
+            "sha256": "a6c4df046bb867a883ffad5b70b62cef98baba7692b2072af041732b53ff0ef5"
+          },
+          {
+            "mip": 4,
+            "name": "vulkan-4.dds",
+            "bytes": 65684,
+            "sha256": "94ea1a498552deffdf2f7cfb4fcb3c6959487212a5279b27fe497a773556f95d"
+          },
+          {
+            "mip": 5,
+            "name": "vulkan-5.dds",
+            "bytes": 16532,
+            "sha256": "a5d73aeb137e871e7e0af740431dafb297da7a8667cc9749a8a0d021b215b940"
+          },
+          {
+            "mip": 6,
+            "name": "vulkan-6.dds",
+            "bytes": 4244,
+            "sha256": "5c55c6acf8f04e583345ed573e79b1e17d639c8c9792ae8bc5e941771b3eb577"
+          },
+          {
+            "mip": 7,
+            "name": "vulkan-7.dds",
+            "bytes": 1172,
+            "sha256": "0b31490f47bbc3cabc59a9bf38e0f9cbe48165ad3853cb560a1c164e3115293b"
+          },
+          {
+            "mip": 8,
+            "name": "vulkan-8.dds",
+            "bytes": 404,
+            "sha256": "9781c8ce6b35ba1b52601d8b8e7d3c03a4140b2f004ed2e55ff4fa07c6a77c5b"
+          },
+          {
+            "mip": 9,
+            "name": "vulkan-9.dds",
+            "bytes": 212,
+            "sha256": "689b0e3ea56a14994675b09b8f87e898ed43abef053c938664a06974dc856423"
+          },
+          {
+            "mip": 10,
+            "name": "vulkan-10.dds",
+            "bytes": 164,
+            "sha256": "222f1cd2772ca2cba9dc95fc7e250079a23a7493af85bcd536c8487927f9fef6"
+          },
+          {
+            "mip": 11,
+            "name": "vulkan-11.dds",
+            "bytes": 152,
+            "sha256": "b75745d13b5094470a04082623aa280f53a6d476aa48d0cbb07424095cfb1155"
+          }
+        ],
+        "debugMessages": []
+      }
+    ]
+  },
+  "allRgbIdentical": true,
+  "pillowVersion": "12.2.0",
+  "scope": "Actual bound base-color DDS mip contents, BC7 decoded by Pillow. Shader interpolation and hardware sample rounding remain separate.",
+  "captures": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261022-201845-endfield-capture-954719\\Endfield-games-child_frame10401.rdc",
+      "sha256": "fa2ca267f7168f5603e83ad5f817a3074d8dbee23a216e6ab8ef2c340ec06a90",
+      "bytes": 345416012
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-022702-object-visibility-depth-reconstruction-c7312f\\receiver-exact-gpu_frame2.rdc",
+      "sha256": "d04296485d9c240092c486fd300f0ac31266b5ece63311b73c63b98987a3c696",
+      "bytes": 248368064
+    }
+  ],
+  "archiveSha256": "2b9501d03e86d40df55090e8d09274ab7c14ce73149394c0ac98593f5050a525"
+}

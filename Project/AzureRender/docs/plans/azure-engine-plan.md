@@ -35,6 +35,8 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 画质工作流按[专项计划](2026-11-09-native-quality.md)继续核对世界位置与完整头发。
 [头发归因](../acceptance/nr/hair-color-visibility-attribution.md)确认 42 处颜色误差受可见量影响。
 隔离来源控制仍有 31 处超差，生产颜色基线保留原 73 处待项。
+[头发基色层级](../acceptance/nr/hair-base-color-mip-content.md)的十二级 RGB 内容全部一致。
+后续分别核对实际取样及颜色算术。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
