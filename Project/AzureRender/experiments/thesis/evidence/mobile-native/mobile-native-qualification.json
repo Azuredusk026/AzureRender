@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "devices": [
+    {
+      "name": "Adreno (TM) 750",
+      "traditional": true,
+      "subpasses": true,
+      "drlr": false,
+      "queueFamily": 0,
+      "reasons": [],
+      "extent": [
+        2560,
+        1440
+      ],
+      "scope": "capability-only; execution and visual qualification pending"
+    }
+  ]
+}
