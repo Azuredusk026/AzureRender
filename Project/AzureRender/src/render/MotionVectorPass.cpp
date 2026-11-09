@@ -10,7 +10,7 @@ MotionVectorPass::MotionVectorPass(rhi::IRhi& backend,rhi::IGpuAllocator& alloca
     const std::string& shaders,std::uint32_t materials,std::uint32_t frames,bool culling,bool depthTest)
     :rhi_(backend),allocator_(allocator),target_(target),materials_(materials){
     if(!materials||!frames||frames>2||materials>UINT32_MAX/frames/6)throw std::invalid_argument("Invalid motion descriptor capacity");
-    previous_.resize(frames);
+    previous_.resize(frames);bindings_.resize(frames);
     try{
         std::vector<rhi::DescriptorBindingDesc> bindings;
         for(unsigned i=0;i<5;++i)bindings.push_back({i,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_VERTEX_BIT});
@@ -71,12 +71,26 @@ void MotionVectorPass::prepare(std::uint32_t frame,const PackedMotionPoseFrame& 
         if(buffer.buffer)allocator_.destroyBuffer(buffer);buffer=next;}
     std::memcpy(buffer.mapped,packed.words.data(),bytes);allocator_.flush(buffer,0,bytes);
     const std::array<const rhi::GpuBuffer*,5> buffers{inputs.instances,inputs.joints,inputs.weights,inputs.targets,&buffer};
+    std::array<std::pair<VkBuffer,VkDeviceSize>,6> bufferBindings;
+    for(unsigned i=0;i<5;++i)bufferBindings[i]={buffers[i]->buffer,buffers[i]->size};
+    bufferBindings[5]={inputs.outline->buffer,inputs.outline->size};
+    auto& cached=bindings_.at(frame);
+    const auto equalImage=[](const SampledTextureBinding& a,const SampledTextureBinding& b){return a.view==b.view&&a.sampler==b.sampler;};
+    if(cached.valid&&cached.buffers==bufferBindings&&equalImage(cached.coverage,inputs.coverage)
+        &&std::equal(cached.colors.begin(),cached.colors.end(),inputs.colors.begin(),inputs.colors.end(),equalImage)
+        &&std::equal(cached.masks.begin(),cached.masks.end(),inputs.masks.begin(),inputs.masks.end(),equalImage)){
+        ++descriptorReuses_;return;
+    }
+    // A failed write leaves the entire packet invalid for the next preparation.
+    cached.valid=false;
     for(unsigned material=0;material<materials_;++material){const auto set=sets_.at(frame*materials_+material);
         for(unsigned binding=0;binding<5;++binding)rhi_.writeDescriptorBuffer({set,binding,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,buffers[binding]->buffer,buffers[binding]->size});
         rhi_.writeDescriptorBuffer({set,6,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,inputs.outline->buffer,inputs.outline->size});
         for(auto pair:{std::pair{5U,inputs.colors[material]},std::pair{7U,inputs.masks[material]},std::pair{8U,inputs.coverage}})
             rhi_.writeDescriptorImage({set,pair.first,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,pair.second.view,pair.second.sampler,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
     }
+    cached.buffers=bufferBindings;cached.colors=inputs.colors;cached.masks=inputs.masks;cached.coverage=inputs.coverage;
+    cached.valid=true;descriptorWrites_+=9ULL*materials_;
 }
 void MotionVectorPass::record(rhi::ICommandRecorder& commands,std::uint32_t frame,std::uint32_t image,VkExtent2D extent,const std::vector<MotionVectorDraw>& draws) const{
     recordToFramebuffer(commands,frame,target_.framebuffer(image),extent,draws);

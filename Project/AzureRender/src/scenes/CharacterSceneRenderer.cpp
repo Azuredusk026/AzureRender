@@ -748,6 +748,7 @@ void CharacterSceneRenderer::ensureInstanceCapacity() {
         if(i==1)staticSkinningOutputs_.at(currentFrame_).invalidate();
     }
     if(!changed)return;
+    if(motionPass_)motionPass_->invalidateBindings(static_cast<std::uint32_t>(currentFrame_));
     const auto count=bindlessTextures_?1:totalMaterialCount();
     for(std::size_t material=0;material<count;++material){
         const auto set=descriptorSets_[currentFrame_*count+material];
@@ -1905,6 +1906,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"staticSkinningReusedVertices\": " << (computeSkinningEnabled_?staticSkinningOutputs_.at(currentFrame_).reusedVertexCount():0) << ",\n"
          << "  \"motionPreviousValidObjects\": " << motionPreviousValidObjects_ << ",\n"
          << "  \"motionOutputActive\": " << (motionPass_?"true":"false") << ",\n"
+         << "  \"motionDescriptorWrites\": " << (motionPass_?motionPass_->descriptorWriteCount():0) << ",\n"
+         << "  \"motionDescriptorReuses\": " << (motionPass_?motionPass_->descriptorReuseCount():0) << ",\n"
          << "  \"temporalMaterialSamples\": " << (temporalMaterialSamplesActive()?"true":"false") << ",\n"
          << "  \"reflectionSurfaceSnapshot\": " << (reflectionSurfaceFormat_==VK_FORMAT_R32G32B32A32_SFLOAT?"true":"false") << ",\n"
          << "  \"screenReflectionComputePrepared\": " << (screenReflectionPrepared()?"true":"false") << ",\n"
@@ -3026,6 +3029,7 @@ void CharacterSceneRenderer::prepareOutlineMaskResources(const std::vector<std::
     auto& mask=outlineMasks_[currentFrame_];
     if(mask.image.width!=layout.width||mask.image.height!=layout.height){
         // updateFrame runs only after this frame slot's fence has retired.
+        if(motionPass_)motionPass_->invalidateBindings(static_cast<std::uint32_t>(currentFrame_));
         if(outlineMaskFramebuffers_[currentFrame_])rhi_->destroyFramebuffer(outlineMaskFramebuffers_[currentFrame_]);
         outlineMaskFramebuffers_[currentFrame_]=VK_NULL_HANDLE;
         if(mask.view)rhi_->destroyImageView(mask.view);

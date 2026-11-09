@@ -35,6 +35,11 @@ public:
     MotionVectorPass(const MotionVectorPass&)=delete;
     MotionVectorPass& operator=(const MotionVectorPass&)=delete;
     void prepare(std::uint32_t frame,const PackedMotionPoseFrame&,const MotionVectorInputs&);
+    // Call before destroying/recreating borrowed resources, including recycled
+    // native handles. The selected slot must have retired its pending work.
+    void invalidateBindings(std::uint32_t frame){bindings_.at(frame).valid=false;}
+    std::uint64_t descriptorWriteCount() const noexcept{return descriptorWrites_;}
+    std::uint64_t descriptorReuseCount() const noexcept{return descriptorReuses_;}
     void record(rhi::ICommandRecorder&,std::uint32_t frame,std::uint32_t image,VkExtent2D,
         const std::vector<MotionVectorDraw>&) const;
     // The caller owns a compatible framebuffer with this target's two colours
@@ -50,6 +55,14 @@ private:
     std::array<VkPipeline,8> pipelines_{};
     std::vector<VkDescriptorSet> sets_;
     std::vector<rhi::GpuBuffer> previous_;
+    struct BindingState {
+        std::array<std::pair<VkBuffer,VkDeviceSize>,6> buffers{};
+        std::vector<SampledTextureBinding> colors,masks;
+        SampledTextureBinding coverage;
+        bool valid=false;
+    };
+    std::vector<BindingState> bindings_;
+    std::uint64_t descriptorWrites_=0,descriptorReuses_=0;
     void reset() noexcept;
 };
 }

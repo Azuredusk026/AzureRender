@@ -5,12 +5,50 @@
 #include "render/RenderViewService.hpp"
 #include "rhi/NullRhi.hpp"
 #include <algorithm>
+#include <cstring>
 #include <iostream>
 #include <sstream>
 #include <nlohmann/json.hpp>
 using namespace azurerender;
 void checkMotionRecording(bool value,const char* why){if(!value)throw std::runtime_error(why);}
 nlohmann::json motionManifest(const CharacterSceneRenderer& renderer){std::ostringstream text;renderer.appendCaptureManifestFields(text);return nlohmann::json::parse("{"+text.str()+"\"end\":true}");}
+template<class Pass> auto invalidateMotionBindings(Pass& pass,unsigned slot,int)->decltype(pass.invalidateBindings(slot),void()){pass.invalidateBindings(slot);}
+template<class Pass> void invalidateMotionBindings(Pass&,unsigned,long){}
+void verifyMotionDescriptorReuse(const char* shaders){
+    rhi::NullRhi backend;
+    const auto depth=reinterpret_cast<VkImageView>(0x1000);
+    MotionVectorTarget target(backend,backend.allocator(),{32,24},VK_FORMAT_D32_SFLOAT,{depth,depth});
+    MotionVectorPass pass(backend,backend.allocator(),target,shaders,2,2,true,true);
+    rhi::GpuBuffer input;input.buffer=reinterpret_cast<VkBuffer>(0x2000);input.size=1024;
+    MotionVectorInputs bindings;bindings.instances=bindings.joints=bindings.weights=bindings.targets=bindings.outline=&input;
+    bindings.colors=bindings.masks=std::vector<SampledTextureBinding>(2,{reinterpret_cast<VkImageView>(0x3000),reinterpret_cast<VkSampler>(0x4000)});
+    bindings.coverage=bindings.colors[0];
+    PackedMotionPoseFrame packed;packed.words.resize(PackedMotionPoseFrame::kHeaderWords);
+    const auto prepare=[&](unsigned slot,unsigned expected,const char* reason){
+        backend.calls.clear();pass.prepare(slot,packed,bindings);unsigned count=0;
+        for(const auto& call:backend.calls)count+=call.name=="writeDescriptorBuffer"||call.name=="writeDescriptorImage";
+        checkMotionRecording(count==expected,reason);
+        checkMotionRecording(std::memcmp(pass.previous(slot).mapped,packed.words.data(),packed.words.size()*4)==0,"Descriptor reuse must preserve the current pose upload");
+    };
+    prepare(0,18,"First slot use must initialize all material bindings");
+    packed.words[0]=1;
+    prepare(0,0,"Unchanged motion resources must reuse descriptors while uploading new pose words");
+    prepare(1,18,"Frame slots must initialize independently");
+    prepare(0,0,"Another slot must preserve this slot's binding snapshot");
+    input.size*=2;prepare(0,18,"A changed buffer range must refresh descriptors");
+    input.buffer=reinterpret_cast<VkBuffer>(0x2100);prepare(0,18,"A replacement buffer must refresh descriptors");
+    bindings.colors[1].sampler=reinterpret_cast<VkSampler>(0x4100);prepare(0,18,"A material sampler change must refresh descriptors");
+    bindings.masks[0].view=reinterpret_cast<VkImageView>(0x3100);prepare(0,18,"A material mask change must refresh descriptors");
+    bindings.coverage.view=reinterpret_cast<VkImageView>(0x3200);prepare(0,18,"A coverage image change must refresh descriptors");
+    packed.words.resize(4096);prepare(0,18,"A grown previous-pose allocation must refresh descriptors");
+    prepare(0,0,"A stable grown allocation must reuse descriptors");
+    invalidateMotionBindings(pass,0,0);prepare(0,18,"Explicit lifetime invalidation must refresh identical handle values");
+    prepare(0,0,"A refreshed lifetime must become reusable");
+    const auto saved=bindings.coverage;bindings.coverage={};bool rejected=false;
+    try{pass.prepare(0,packed,bindings);}catch(const std::invalid_argument&){rejected=true;}
+    checkMotionRecording(rejected,"Invalid motion inputs must be rejected before publication");
+    bindings.coverage=saved;prepare(0,0,"Rejected preparation must preserve the last valid descriptor snapshot");
+}
 void verifyMotionBindingTransitions(const char* shaders){
     rhi::NullRhi backend;
     const auto depth=reinterpret_cast<VkImageView>(0x1000);
@@ -107,6 +145,7 @@ void verifyMotionRecording(const char* shaders,bool indexed,bool compute,bool ou
 }
 int main(int argc,char** argv)try{
     if(argc!=2)throw std::invalid_argument("Expected shader directory");
+    verifyMotionDescriptorReuse(argv[1]);
     verifyMotionBindingTransitions(argv[1]);
     for(bool indexed:{false,true})for(bool compute:{false,true})for(bool outlined:{false,true})verifyMotionRecording(argv[1],indexed,compute,outlined);
     {
