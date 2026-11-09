@@ -23,6 +23,8 @@ VKAPI_ATTR VkBool32 VKAPI_CALL Benchmark::debug(VkDebugUtilsMessageSeverityFlagB
 }
 
 void Benchmark::initialize() {
+    if(options.present) window=std::make_unique<Window>(options.width,options.height);
+    std::vector<const char*> instanceExtensions=window?window->instanceExtensions():std::vector<const char*>{};
     VkApplicationInfo app{VK_STRUCTURE_TYPE_APPLICATION_INFO};
     app.pApplicationName="AzureThesisBenchmark";
     uint32_t loaderVersion=VK_API_VERSION_1_0;
@@ -42,10 +44,12 @@ void Benchmark::initialize() {
     VkInstanceCreateInfo ci{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO}; ci.pApplicationInfo=&app;
     if(options.validation) {
         ci.enabledLayerCount=1; ci.ppEnabledLayerNames=&layer;
-        ci.enabledExtensionCount=1; ci.ppEnabledExtensionNames=&extension;
+        instanceExtensions.push_back(extension);
         ci.pNext=&debugInfo; debugInfo.pNext=&validation;
     }
+    ci.enabledExtensionCount=uint32_t(instanceExtensions.size());ci.ppEnabledExtensionNames=instanceExtensions.data();
     check(vkCreateInstance(&ci,nullptr,&instance),"create instance");
+    if(window) window->createSurface(instance);
     if(options.validation) {
         debugInfo.pNext=nullptr;
         auto create=reinterpret_cast<PFN_vkCreateDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(instance,"vkCreateDebugUtilsMessengerEXT"));
@@ -62,7 +66,7 @@ void Benchmark::initialize() {
     vkGetPhysicalDeviceQueueFamilyProperties(physical,&count,nullptr);
     std::vector<VkQueueFamilyProperties> families(count); vkGetPhysicalDeviceQueueFamilyProperties(physical,&count,families.data());
     bool found=false;
-    for(uint32_t i=0;i<count;++i) if((families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) && families[i].timestampValidBits) {
+    for(uint32_t i=0;i<count;++i) if((families[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) && families[i].timestampValidBits && (!window || window->supports(physical,i))) {
         queueFamily=i; timestampBits=families[i].timestampValidBits; found=true; break;
     }
     if(!found) throw std::runtime_error("graphics timestamp queue unavailable");
@@ -73,6 +77,8 @@ void Benchmark::initialize() {
     VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR local{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR};
     VkPhysicalDeviceFeatures enabled{};
     const char* localExtension=VK_KHR_DYNAMIC_RENDERING_LOCAL_READ_EXTENSION_NAME;
+    std::vector<const char*> deviceExtensions;
+    if(window) deviceExtensions.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
     if(options.path=="drlr") {
         uint32_t n=0; check(vkEnumerateDeviceExtensionProperties(physical,nullptr,&n,nullptr),"extension count");
         std::vector<VkExtensionProperties> exts(n); check(vkEnumerateDeviceExtensionProperties(physical,nullptr,&n,exts.data()),"extensions");
@@ -83,8 +89,9 @@ void Benchmark::initialize() {
         if(!dynamic.dynamicRendering || !local.dynamicRenderingLocalRead || !f.features.independentBlend)
             throw std::runtime_error("DRLR or independent color write masks unavailable");
         enabled.independentBlend=VK_TRUE; di.pEnabledFeatures=&enabled; di.pNext=&dynamic;
-        if(hasExtension) { di.enabledExtensionCount=1; di.ppEnabledExtensionNames=&localExtension; }
+        if(hasExtension) deviceExtensions.push_back(localExtension);
     }
+    di.enabledExtensionCount=uint32_t(deviceExtensions.size());di.ppEnabledExtensionNames=deviceExtensions.data();
     check(vkCreateDevice(physical,&di,nullptr,&device),"create device");
     if(options.path=="drlr") {
         beginRendering=reinterpret_cast<PFN_vkCmdBeginRendering>(vkGetDeviceProcAddr(device,"vkCmdBeginRendering"));
@@ -96,6 +103,7 @@ void Benchmark::initialize() {
         if(!beginRendering || !endRendering || !setLocations || !setInputIndices) throw std::runtime_error("DRLR command entry points unavailable");
     }
     vkGetDeviceQueue(device,queueFamily,0,&queue);
+    if(window) window->initialize(physical,device,queueFamily);
     VkCommandPoolCreateInfo pool{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};
     pool.queueFamilyIndex=queueFamily; pool.flags=VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
     check(vkCreateCommandPool(device,&pool,nullptr,&commandPool),"command pool");
@@ -356,6 +364,7 @@ void Benchmark::run() {
         uint64_t mask=timestampBits==64?~uint64_t(0):(uint64_t(1)<<timestampBits)-1;
         double gpu=double((values[1]-values[0])&mask)*double(properties.limits.timestampPeriod)/1e6;
         if(frame>=options.warmup) { gpuMs.push_back(gpu); cpuMs.push_back(std::chrono::duration<double,std::milli>(end-start).count()); }
+        if(window) { double ms=window->present(queue,output.image,options.width,options.height); if(frame>=options.warmup)presentationMs.push_back(ms); }
     }
     save();
     if(errors) throw std::runtime_error("validation errors occurred");
@@ -390,12 +399,15 @@ void Benchmark::save() {
         <<",\"measurementScope\":\"gbuffer-through-contour; readback-excluded\",\"status\":\"pilot-environment-not-qualified\",\"gpuMs\":[";
     for(size_t i=0;i<gpuMs.size();++i) { if(i) json<<','; json<<gpuMs[i]; }
     json<<"],\"cpuRecordingMs\":["; for(size_t i=0;i<cpuMs.size();++i) { if(i) json<<','; json<<cpuMs[i]; }
+    json<<"],\"presentationWorkMs\":[";
+    for(size_t i=0;i<presentationMs.size();++i) { if(i)json<<',';json<<presentationMs[i]; }
     json<<"]}\n";
     if(!image || !ppm || !json) throw std::runtime_error("result write failed");
 }
 Benchmark::~Benchmark() {
     if(device) {
         vkDeviceWaitIdle(device);
+        window.reset();
         for(auto p:{geometryPipeline,toonPipeline,contourPipeline}) if(p) vkDestroyPipeline(device,p,nullptr);
         for(auto f:{geometryFramebuffer,toonFramebuffer,contourFramebuffer}) if(f) vkDestroyFramebuffer(device,f,nullptr);
         for(auto p:{geometryPass,toonPass,contourPass}) if(p) vkDestroyRenderPass(device,p,nullptr);
@@ -415,6 +427,7 @@ Benchmark::~Benchmark() {
         auto destroy=reinterpret_cast<PFN_vkDestroyDebugUtilsMessengerEXT>(vkGetInstanceProcAddr(instance,"vkDestroyDebugUtilsMessengerEXT"));
         if(destroy) destroy(instance,messenger,nullptr);
     }
+    window.reset();
     if(instance) vkDestroyInstance(instance,nullptr);
 }
 }
@@ -424,6 +437,7 @@ int main(int argc,char** argv) {
         thesis::Options o;
         for(int i=1;i<argc;++i) {
             std::string key=argv[i]; if(key=="--validation") { o.validation=true; continue; }
+            if(key=="--present") { o.present=true;continue; }
             if(i+1==argc) throw std::invalid_argument("missing option value"); std::string value=argv[++i];
             auto number=[&]() { size_t used=0; auto n=std::stoul(value,&used); if(used!=value.size() || n>1000000) throw std::invalid_argument("invalid integer"); return uint32_t(n); };
             if(key=="--path") o.path=value; else if(key=="--gpu") o.gpu=value; else if(key=="--complexity") o.complexity=value;

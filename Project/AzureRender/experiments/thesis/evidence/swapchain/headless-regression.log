@@ -1,0 +1,4 @@
+traditional execution, eight timestamps, three stages, validation and image passed
+subpasses execution, eight timestamps, three stages, validation and image passed
+drlr execution, eight timestamps, three stages, validation and image passed
+All three paths pass with byte-identical outputs on one binary
