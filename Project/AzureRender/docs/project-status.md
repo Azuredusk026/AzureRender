@@ -22,6 +22,8 @@
 [材质朝向需求](acceptance/nr/material-facing-demand.md)减少八十八次管线创建。
 原四帧与六百七十五份主着色器均保持逐字节一致。
 加载耗时与每帧正式性能分别验收。
+[实际接收坐标](acceptance/nr/native-producer-gpu-intermediates.md)闭合 NVIDIA 区域的输入精度超差。
+Intel 的过滤差异及完整头发颜色继续验收。
 
 ## 已取得的分项证据
 

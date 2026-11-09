@@ -34,7 +34,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
 [静态阴影范围](../acceptance/nr/shadow-static-reuse-scope.md)核定历史生成成本上界约为 1.32 毫秒。
 动态失效与静态比例仍待核对，机制保持提案。
-后续先取得剩余原生接收误差的合格 GPU 中间值。
+[实际接收坐标](../acceptance/nr/native-producer-gpu-intermediates.md)通过同事件输出资格核对。
+受精度约束的重建闭合 NVIDIA 区域的四十处超差。
+后续定位 Intel 在实测坐标下的九十处过滤超差。
 
 阴影接收面的[入口计算](../acceptance/nr/shadow-receiver-entry.md)已接入生产。
 原 Intel 零历史用例及十六项双设备、双配置检查通过，四帧保持 RGB 零像素差。
