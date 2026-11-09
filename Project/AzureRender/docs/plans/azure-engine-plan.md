@@ -38,7 +38,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 受精度约束的重建闭合 NVIDIA 区域的四十处超差。
 [固定采样足迹](../acceptance/nr/shadow-gather-footprint.md)闭合 Intel 实测坐标下的过滤超差。
 四项设备检查与原四帧通过，完整接收重建和头发颜色继续验收。
-后续回到材质热点，先核对混合表面的深度测试工作量。
+[阴影历史原型](../acceptance/nr/temporal-shadow-history-prototype.md)通过独立机制及局部门槛。
+后续接入有界资源与实际失效范围，完整场景收益仍待验收。
 
 阴影接收面的[入口计算](../acceptance/nr/shadow-receiver-entry.md)已接入生产。
 原 Intel 零历史用例及十六项双设备、双配置检查通过，四帧保持 RGB 零像素差。
