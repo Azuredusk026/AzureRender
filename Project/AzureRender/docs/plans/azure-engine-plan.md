@@ -74,6 +74,8 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 几何输入对剩余颜色误差的贡献继续单因素核验。
 [几何基底来源控制](../acceptance/nr/hair-basis-color-control.md)只闭合一处颜色失败。
 主要剩余误差继续核对片元着色与附件边界。
+[附件前输出位值](../acceptance/nr/hair-final-float-values.md)区分格式和着色差异。
+主要剩余差异按色度调制线索继续定位。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
