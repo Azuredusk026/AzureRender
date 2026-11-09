@@ -345,6 +345,9 @@ compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHO
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_GEOMETRY_SAMPLES=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_depth_bindless_samples.frag)
 compile_shader("${SHADER_SOURCE_DIR}/shadow_filter_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/object_shadow_filter_test.comp")
+compile_shader("${SHADER_SOURCE_DIR}/shadow_history_clear.comp")
+compile_shader("${SHADER_SOURCE_DIR}/shadow_history_ownership_test.vert")
+compile_shader("${SHADER_SOURCE_DIR}/shadow_history_ownership_test.frag")
 compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.vert")
 compile_shader("${SHADER_SOURCE_DIR}/screen_object_visibility.frag")
 compile_shader("${SHADER_SOURCE_DIR}/shadow_bounds.comp")
@@ -870,6 +873,7 @@ add_library(AzureRenderCore STATIC
     src/render/OutlineProjectionResources.cpp
     src/render/MotionPoseData.cpp
     src/render/SurfaceRadianceCache.cpp
+    src/render/ShadowHistoryCache.cpp
     src/render/MotionVectorPass.cpp
     src/render/SceneMultisampling.cpp
     src/render/TemporalReconstruction.cpp
@@ -1363,6 +1367,14 @@ if(BUILD_TESTING)
     add_executable(AzureSurfaceRadianceCacheTests tests/SurfaceRadianceCacheTests.cpp)
     target_link_libraries(AzureSurfaceRadianceCacheTests PRIVATE AzureRenderCore)
     add_test(NAME AzureRender.SurfaceRadianceCache COMMAND AzureSurfaceRadianceCacheTests)
+    add_executable(AzureShadowHistoryCacheTests tests/ShadowHistoryCacheTests.cpp)
+    target_link_libraries(AzureShadowHistoryCacheTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ShadowHistoryCache COMMAND AzureShadowHistoryCacheTests)
+    add_executable(AzureShadowHistoryCacheGpuTests tests/ShadowHistoryCacheGpuTests.cpp)
+    target_link_libraries(AzureShadowHistoryCacheGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureShadowHistoryCacheGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ShadowHistoryCacheGpu COMMAND AzureShadowHistoryCacheGpuTests "${SHADER_BINARY_DIR}")
+    set_tests_properties(AzureRender.ShadowHistoryCacheGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120 SKIP_RETURN_CODE 77)
     if(AZURE_ENABLE_SURFACE_RADIANCE_REUSE)
     add_executable(AzureSurfaceRadianceCacheGpuTests tests/SurfaceRadianceCacheGpuTests.cpp)
     target_link_libraries(AzureSurfaceRadianceCacheGpuTests PRIVATE AzureRenderCore)

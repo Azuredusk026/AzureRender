@@ -22,6 +22,7 @@
 [权重分类](docs/acceptance/nr/shadow-disk-classification.md)通过百万组逐位核对，局部效率门槛未通过。
 [阴影范围索引](docs/acceptance/nr/shadow-range-index.md)的局部净成本减少约 42.64%，场景收益继续核定。
 [标量阴影复用](docs/acceptance/nr/surface-shadow-reuse.md)的两种诊断配置均保持严格四帧一致，整帧收益未成立，候选隔离保存。
+[阴影历史资源](docs/acceptance/nr/shadow-history-resources.md)通过有界容量、帧槽及双设备同步检查，运行时接入继续开发。
 [材质范围核对](docs/acceptance/nr/shadow-cost-scope.md)按三十五份实际管线常量分组，历史缓存支持范围对应约 1.47 毫秒控制差值。
 [零反射复用提案](docs/acceptance/nr/surface-lighting-reuse.md)保存反射贡献范围，实际材质覆盖依据尚未成立。
 对象接收的[同输入模型](docs/acceptance/nr/object-receiver-input-model.md)复现 17017 处原生可见量，场景集成继续验收。

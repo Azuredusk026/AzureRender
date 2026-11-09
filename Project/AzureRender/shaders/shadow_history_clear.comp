@@ -1,0 +1,8 @@
+#version 450
+layout(local_size_x=64) in;
+layout(set=0,binding=0,std430) buffer History { uint words[]; } history;
+void main(){
+    uint stride=gl_NumWorkGroups.x*gl_WorkGroupSize.x;
+    for(uint index=gl_GlobalInvocationID.x;index<uint(history.words.length());index+=stride)
+        history.words[index]=0xffffffffu;
+}
