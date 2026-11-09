@@ -177,6 +177,7 @@ class MaintenanceTests(unittest.TestCase):
         self.assertFalse(tracked.protects(self.root/'nested module-copy'/'output.bin'))
 
     def test_daily_asset_copy_policy_removes_only_verified_model(self):
+        subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
         from test_artifact_asset_cleanup import AssetCopiesTests
         _,source,target,catalog,lock=AssetCopiesTests().fixture(self.root)
         maintenance.write_json(self.build/'maintenance/asset-copy-cleanup-policy.json',dict(catalog=str(catalog),lock=str(lock),maximumBytes=source.stat().st_size,maximumFiles=1))
@@ -258,7 +259,9 @@ class MaintenanceTests(unittest.TestCase):
         self.assertTrue(evidence.exists());self.assertEqual(result['items'],[])
 
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory()
+        fixtures = Path(__file__).resolve().parents[1]/"build/maintenance/tests"
+        fixtures.mkdir(parents=True, exist_ok=True)
+        self.temp = tempfile.TemporaryDirectory(dir=fixtures)
         self.root = Path(self.temp.name)
         self.build = self.root/'build'
         (self.build/'runs').mkdir(parents=True)

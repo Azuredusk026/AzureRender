@@ -169,6 +169,9 @@ def main():
     receipt.mkdir(exist_ok=True)
     for path in paths:
         try:
+            from artifact_maintenance import input_protected
+            if input_protected(BUILD,path):
+                raise ValueError('Active input task is protected')
             size, newest = remove_artifact(BUILD, path, tracked)
             if path.parent == runs and now - newest < RETENTION_DAYS * 86400:
                 continue
@@ -189,4 +192,10 @@ def main():
         raise SystemExit(1)
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if '--apply' in sys.argv:
+        from artifact_maintenance import maintenance_lock
+        with maintenance_lock(BUILD):
+            main()
+    else:
+        main()

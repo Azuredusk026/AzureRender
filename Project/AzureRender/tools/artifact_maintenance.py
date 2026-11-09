@@ -384,6 +384,13 @@ def protected_names(records):
     return {name for r in records.values() if r['status'] == 'active' for name in r.get('inputs', [])}
 
 
+def input_protected(build, path):
+    with database(build) as db:
+        names = protected_names(rows(db))
+    path = Path(path).absolute()
+    return any(path == run_path(build, name) or run_path(build, name) in path.parents for name in names)
+
+
 def orphan_evidence(build,records,now):
     folder=real_path(metadata(build)/'evidence')
     if not folder.exists():return []

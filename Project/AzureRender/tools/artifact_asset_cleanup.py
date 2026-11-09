@@ -149,7 +149,8 @@ def _clean(engine,catalog,lock,*,apply=False,limit_bytes=MAXIMUM_BYTES,maximum_f
         if root not in path.parents or path.suffix.lower()!='.glb' or '.azure' in path.relative_to(root).parts:raise ValueError('Unexpected historical model target')
         if path in seen:continue
         seen.add(path)
-        if path in protected or path in tracked or not path.is_file() or nested_git(root,path):continue
+        from artifact_maintenance import input_protected
+        if path in protected or path in tracked or input_protected(engine/'build',path) or not path.is_file() or nested_git(root,path):continue
         current=identity(path)
         if current[0]!=row['bytes'] or time.time()-path.stat().st_mtime<86400:continue
         candidates=signatures.get((path.name.casefold(),current[0]),[])

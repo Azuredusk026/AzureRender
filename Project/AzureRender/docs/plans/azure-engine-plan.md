@@ -30,6 +30,11 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[并行资源调度](../development/shared-resources.md)提供重负载互斥入口。
+性能、画质与论文工作流已登记实际对话和独立工作区。
+跨工作树输入在主维护索引中持有活动引用。
+阴影历史接续按[恢复计划](2026-11-09-performance-resume.md)执行。
+
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
 [静态阴影范围](../acceptance/nr/shadow-static-reuse-scope.md)核定历史生成成本上界约为 1.32 毫秒。

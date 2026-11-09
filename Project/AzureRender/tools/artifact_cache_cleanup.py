@@ -67,7 +67,8 @@ def _clean(engine,catalog,lock,*,apply=False,limit_bytes=10*2**30,seconds=120,bu
         if root not in path.parents or path.suffix!='.azcache' or '.azure' not in path.parts:raise ValueError('Unexpected cache target')
         azure=next(p for p in path.parents if p.name=='.azure')
         if path.parent.parent!=azure/'cache':raise ValueError('Expected .azure/cache/<asset-id>/<fingerprint>.azcache')
-        if any(p==path or p in path.parents for p in protected) or path in tracked or not path.is_file():continue
+        from artifact_maintenance import input_protected
+        if any(p==path or p in path.parents for p in protected) or path in tracked or input_protected(engine/'build',path) or not path.is_file():continue
         if any((p/'.git').exists() for p in path.parents if p==root or root in p.parents):raise ValueError('Nested Git worktree is protected')
         current=identity(path)
         if current[0]>limit_bytes-bytes_removed:

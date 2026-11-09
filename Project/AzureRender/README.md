@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+[并行资源调度](docs/development/shared-resources.md)统一编译、GPU 检查及跨工作树输入保护。
+
 开发产物使用[目录维护技能](tools/skills/azurerender-artifact-maintenance/SKILL.md)。
 仓库[技能入口](../../.agents/skills/azurerender-artifact-maintenance/SKILL.md)及完整规则均保存在 D 盘。
 [任务临时目录](docs/acceptance/recovery/managed-temporary-storage.md)随任务计入配额及每日回收，子进程沿用项目所在卷。
