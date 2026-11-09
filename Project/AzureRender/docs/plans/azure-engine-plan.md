@@ -62,8 +62,8 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 [实际漫反射色带](../acceptance/nr/hair-diffuse-ramp-input.md)排定纹理及取样边界。
 头发实际漫反射响应及遮罩见[响应权重核对](../acceptance/nr/hair-diffuse-response-weights.md)。
 两端 36 个探针均通过调用及撤销资格。
-主要色度组继续核对条纹强度及饱和度。
-主要色度组继续核对响应颜色与组合权重。
+[条纹实际系数](../acceptance/nr/hair-stripe-modulation.md)完成两端资格核对。
+主要色度组继续定位主光合成后的颜色运算。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
