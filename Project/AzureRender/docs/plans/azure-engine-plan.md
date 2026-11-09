@@ -114,6 +114,11 @@ SDK 路径归属于 D 盘任务，两配置及设备检查通过。
 [缓冲内存类型](../acceptance/nr/buffer-memory-properties.md)通过两配置十项所属检查。
 当前原生存活缓冲全部采用设备本地类型，可映射 GPU 用途约为 33.50 MB。
 该观测与实际驻留、带宽分别解释，后续继续处理着色工作量。
+[聚簇灯影响盒](../acceptance/nr/clustered-influence-bounds.md)及静态分配复用已接入。
+原生灯引用由 17861 降至 14221，原始四帧保持零差。
+三进程短测的 GPU 均值减少约 0.83 毫秒，CPU 工作均值减少约 0.55 毫秒。
+候选 GPU P95 约为 19.48 毫秒，正式预算继续待通过。
+后续继续减少材质灯循环中的无效引用与重复读取。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

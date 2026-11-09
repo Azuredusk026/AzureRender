@@ -22,6 +22,12 @@ struct ClusterGridDesc {
     float projectionScaleY = 1.0F;
     bool orthographic = false;
     float projectionOffsetX=0,projectionOffsetY=0;
+    bool operator==(const ClusterGridDesc& o) const {
+        return x==o.x&&y==o.y&&z==o.z&&nearPlane==o.nearPlane&&farPlane==o.farPlane
+            &&projectionScaleX==o.projectionScaleX&&projectionScaleY==o.projectionScaleY
+            &&orthographic==o.orthographic&&projectionOffsetX==o.projectionOffsetX&&projectionOffsetY==o.projectionOffsetY;
+    }
+    bool operator!=(const ClusterGridDesc& o) const {return !(*this==o);}
 };
 
 class ClusteredLightGrid final {
@@ -44,9 +50,15 @@ public:
             clusters_.swap(replacement);
         }else for(auto& cluster:clusters_)cluster.clear();
         desc_=desc;
+        assignmentCached_=false;
     }
 
+    // Only membership inputs participate: colour/intensity updates keep the list.
     void assign(const std::vector<RenderLight>& lights) {
+        nextKeys_.clear();nextKeys_.reserve(lights.size());
+        for(const auto& light:lights)nextKeys_.push_back(assignmentKey(light));
+        if(assignmentCached_ && nextKeys_==priorKeys_)return;
+        assignmentCached_=false;
         for (auto& cluster : clusters_) cluster.clear();
         for (std::size_t index = 0; index < lights.size(); ++index) {
             const RenderLight& light = lights[index];
@@ -120,15 +132,31 @@ public:
             };
             const std::uint32_t firstZ = depthSlice(minimumDepth);
             const std::uint32_t lastZ = depthSlice(maximumDepth);
+            const bool clipBox=light.clusterBox.has_value() && light.shape.influenceBox.enabled
+                && light.shape.receivers.surfaces && !light.shape.receivers.characters
+                && std::isfinite(desc_.projectionScaleX) && std::abs(desc_.projectionScaleX)>1e-12F
+                && std::isfinite(desc_.projectionScaleY) && std::abs(desc_.projectionScaleY)>1e-12F;
+            const auto interval=[&](unsigned cell,unsigned count,double scale,double offset){
+                const double a=((2.0*cell/count-1)-offset-1e-5)/scale;
+                const double b=((2.0*(cell+1)/count-1)-offset+1e-5)/scale;
+                return std::array<double,2>{std::min(a,b),std::max(a,b)};
+            };
             for (std::uint32_t z = firstZ; z <= lastZ; ++z) {
+                const auto depthBounds=clipBox?std::array<double,2>{
+                    desc_.nearPlane*std::pow(double(desc_.farPlane)/desc_.nearPlane,double(z)/desc_.z)*(1-1e-4),
+                    desc_.nearPlane*std::pow(double(desc_.farPlane)/desc_.nearPlane,double(z+1)/desc_.z)*(1+1e-4)}:std::array<double,2>{};
                 for (std::uint32_t y = firstY; y <= lastY; ++y) {
+                    const auto yBounds=clipBox?interval(y,desc_.y,desc_.projectionScaleY,desc_.projectionOffsetY):std::array<double,2>{};
                     for (std::uint32_t x = firstX; x <= lastX; ++x) {
+                        if(clipBox&&!clusterIntersectsInfluenceBox(*light.clusterBox,
+                            interval(x,desc_.x,desc_.projectionScaleX,desc_.projectionOffsetX),yBounds,depthBounds,desc_.orthographic))continue;
                         clusters_[linearIndex(x, y, z)].push_back(
                             static_cast<std::uint32_t>(index));
                     }
                 }
             }
         }
+        priorKeys_.swap(nextKeys_);assignmentCached_=true;
     }
 
     [[nodiscard]] std::size_t clusterCount() const noexcept {
@@ -166,6 +194,26 @@ public:
     [[nodiscard]] const ClusterGridDesc& desc() const noexcept { return desc_; }
 
 private:
+    struct AssignmentKey {
+        std::array<float,3> clusterPosition{},viewPosition{};
+        float radius=0;
+        LightKind type{};
+        bool viewSpace=false,projectedBlend=false,surfaces=false,characters=false,boxEnabled=false;
+        std::optional<ClusterLightInfluenceBox> box;
+        bool operator==(const AssignmentKey& o) const {
+            return clusterPosition==o.clusterPosition&&viewPosition==o.viewPosition&&radius==o.radius&&type==o.type
+                &&viewSpace==o.viewSpace&&projectedBlend==o.projectedBlend&&surfaces==o.surfaces
+                &&characters==o.characters&&boxEnabled==o.boxEnabled&&box==o.box;
+        }
+    };
+    static AssignmentKey assignmentKey(const RenderLight& light){
+        return {{light.clusterPosition[0],light.clusterPosition[1],light.clusterPosition[2]},
+            light.viewPosition,light.radius,light.shape.type,light.viewSpaceBounds,
+            light.shape.characterResponse.isProjectedColorBlend(),light.shape.receivers.surfaces,
+            light.shape.receivers.characters,light.shape.influenceBox.enabled,light.clusterBox};
+    }
+    std::vector<AssignmentKey> priorKeys_,nextKeys_;
+    bool assignmentCached_=false;
     [[nodiscard]] std::size_t linearIndex(std::uint32_t x, std::uint32_t y, std::uint32_t z) const noexcept {
         return (static_cast<std::size_t>(z) * desc_.y + y) * desc_.x + x;
     }

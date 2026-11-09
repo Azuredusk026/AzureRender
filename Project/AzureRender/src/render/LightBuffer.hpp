@@ -6,6 +6,7 @@
 #include <vector>
 #include <utility>
 #include "ecs/LightShape.hpp"
+#include "render/ClusterLightInfluenceBox.hpp"
 
 namespace azurerender {
 
@@ -20,6 +21,7 @@ struct RenderLight {
     bool viewSpaceBounds = false;
     std::array<float, 3> viewPosition{};
     bool rasterShadowCaster = false;
+    std::optional<ClusterLightInfluenceBox> clusterBox;
 };
 
 struct alignas(16) RenderLightGpu {

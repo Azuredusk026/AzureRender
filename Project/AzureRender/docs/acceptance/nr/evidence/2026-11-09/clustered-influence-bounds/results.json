@@ -1,0 +1,865 @@
+{
+  "status": "implemented-verified",
+  "baselineCommit": "af765a523256fe7e58e843c6b5df4027350764e5",
+  "run": "20261109-081118-clustered-influence-bounds-6be5a8",
+  "cpuChecks": [
+    {
+      "configuration": "release",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 8.453000000008615,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "-R",
+          "^AzureRender\\.(ClusteredLightGrid|LightBuffer)$",
+          "-V",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\release-checks.xml"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\tmp"
+      },
+      "shadersUnchanged": 675
+    },
+    {
+      "configuration": "debug",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 6.703000000008615,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+          "--test-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "-R",
+          "^AzureRender\\.(ClusteredLightGrid|LightBuffer)$",
+          "-V",
+          "--output-junit",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\debug-checks.xml"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\tmp"
+      },
+      "shadersUnchanged": 675
+    }
+  ],
+  "gpuChecks": [
+    {
+      "device": "nvidia",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 48.53100000001723,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\gpu_checks.py",
+          "--inside",
+          "nvidia"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\tmp"
+      },
+      "report": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "ec4623446647dee02eee9d9d1e23d7e21a340b61feaf54eca5d4e206cb3f2e59",
+        "captures": [
+          {
+            "name": "pbr",
+            "maximumLinearError": null,
+            "measured": [
+              0.01520851442291271,
+              0.009134058702220787,
+              0.004776953480693729
+            ],
+            "expected": null,
+            "imageSha256": "c50fda5a553087b12d17c52ea80a4d1a4da973a64e0dd23a54a382866764bc2b",
+            "validationEnabled": false
+          },
+          {
+            "name": "pbr-zero-box",
+            "maximumLinearError": null,
+            "measured": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "expected": null,
+            "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+            "validationEnabled": false
+          },
+          {
+            "name": "pbr-zero-box-fixed",
+            "maximumLinearError": null,
+            "measured": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "expected": null,
+            "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+            "validationEnabled": false
+          },
+          {
+            "name": "pbr-zero-box-control",
+            "maximumLinearError": null,
+            "measured": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "expected": null,
+            "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+            "validationEnabled": false
+          },
+          {
+            "name": "pbr-positive-box",
+            "maximumLinearError": null,
+            "measured": [
+              0.01520851442291271,
+              0.009134058702220787,
+              0.004776953480693729
+            ],
+            "expected": null,
+            "imageSha256": "c50fda5a553087b12d17c52ea80a4d1a4da973a64e0dd23a54a382866764bc2b",
+            "validationEnabled": false
+          }
+        ]
+      }
+    },
+    {
+      "device": "intel",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 91.07800000000861,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\gpu_checks.py",
+          "--inside",
+          "intel"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\tmp"
+      },
+      "report": {
+        "schemaVersion": 1,
+        "status": "passed",
+        "playerSha256": "ec4623446647dee02eee9d9d1e23d7e21a340b61feaf54eca5d4e206cb3f2e59",
+        "captures": [
+          {
+            "name": "pbr",
+            "maximumLinearError": null,
+            "measured": [
+              0.01520851442291271,
+              0.009134058702220787,
+              0.004391442037410293
+            ],
+            "expected": null,
+            "imageSha256": "6ba66f798307bb90629bb8cc1beacc1b3df9bc7c7ebef079758bc544a5b60593",
+            "validationEnabled": false
+          },
+          {
+            "name": "pbr-zero-box",
+            "maximumLinearError": null,
+            "measured": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "expected": null,
+            "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+            "validationEnabled": false
+          },
+          {
+            "name": "pbr-zero-box-fixed",
+            "maximumLinearError": null,
+            "measured": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "expected": null,
+            "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+            "validationEnabled": false
+          },
+          {
+            "name": "pbr-zero-box-control",
+            "maximumLinearError": null,
+            "measured": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "expected": null,
+            "imageSha256": "18886ab6a52fd64a058e540909cf6cc5ce2a6e7297f20d3bc182679182db734a",
+            "validationEnabled": false
+          },
+          {
+            "name": "pbr-positive-box",
+            "maximumLinearError": null,
+            "measured": [
+              0.01520851442291271,
+              0.009134058702220787,
+              0.004391442037410293
+            ],
+            "expected": null,
+            "imageSha256": "6ba66f798307bb90629bb8cc1beacc1b3df9bc7c7ebef079758bc544a5b60593",
+            "validationEnabled": false
+          }
+        ]
+      }
+    }
+  ],
+  "strictOriginalFrames": {
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 121.96899999998277,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "4",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\image-cluster-bounds\\frames-082215",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\image-cluster-bounds\\runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\tmp"
+    },
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "firstChangedPoints": []
+      }
+    ],
+    "metadata": {
+      "surfaceRadianceSelection": {
+        "enabled": false,
+        "prepared": false,
+        "frames": 0,
+        "fastFrames": 0,
+        "fullFrames": 0,
+        "fastDraws": 0,
+        "fullDraws": 0,
+        "lastFastDraws": 0,
+        "lastFullDraws": 0,
+        "fastWitnesses": 0,
+        "fullWitnesses": 0,
+        "lastFastWitnesses": 0,
+        "lastFullWitnesses": 0,
+        "lastGlobalReasons": 0,
+        "lastFallback": true,
+        "fallback": ""
+      },
+      "surfaceRadianceStatistics": {
+        "enabled": false,
+        "bytes": 0,
+        "frames": 0,
+        "producerStores": 0,
+        "consumerVisits": 0,
+        "eligibleRequests": 0,
+        "pixelMatches": 0,
+        "quadMatches": 0,
+        "sampleSpacing": 1,
+        "failureAttempts": 0,
+        "failureCapacity": 0,
+        "failureSamples": [],
+        "overflow": false
+      },
+      "surfaceRadiancePrepared": false,
+      "surfaceRadianceBytes": 0,
+      "surfaceRadianceIdentityVersion": 1,
+      "computeSkinningPreparedDispatches": 11,
+      "computeSkinningPreparedVertices": 226194,
+      "computeSkinningVertexWords": 10,
+      "shadowBoundsTilesPerGroup": 8,
+      "computeSkinningOutputBytes": 77503280,
+      "defaultIsolationPipelines": 0,
+      "defaultIsolationSelected": false,
+      "defaultIsolationFallback": "",
+      "conservativeOcclusionPrepared": true,
+      "mainDepthSplitRecorded": true,
+      "conservativeOcclusionCommands": 435,
+      "conservativeOcclusionLastZeroCommands": 212,
+      "conservativeOcclusionFallback": "",
+      "vertexCapacity": 968791
+    },
+    "sourceInputsUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true,
+    "validationLogClean": false,
+    "zeroAllocator": true,
+    "formalPerformancePassed": false,
+    "overallVisualAcceptance": "failed-user-review",
+    "validationErrorFree": true,
+    "validationSettingsWarnings": 1,
+    "validationScope": "Deprecated VK_LAYER_ENABLES setting produced one configuration warning. No VUID, synchronization hazard or validation error. Separate two-device fixtures use VK_LAYER_VALIDATE_SYNC=1 and verify actual layer insertion."
+  },
+  "localPerformance": {
+    "status": "diagnosed",
+    "rows": [
+      {
+        "label": "baseline-before",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 19.990496000000004,
+            "p95": 20.4076512
+          },
+          "shadow": {
+            "mean": 2.016974933333333,
+            "p95": 2.1551632
+          },
+          "main": {
+            "mean": 17.69678506666667,
+            "p95": 18.0584448
+          },
+          "post": {
+            "mean": 0.2767359999999999,
+            "p95": 0.2816512
+          },
+          "cpu": {
+            "mean": 6.019995000000011,
+            "p95": 6.557479999999901
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            76.38,
+            76.53,
+            76.68,
+            77.41,
+            77.68,
+            77.86,
+            78.61,
+            78.93,
+            79.56,
+            79.63,
+            79.74,
+            79.75,
+            79.91,
+            80.04,
+            80.29,
+            80.37,
+            80.39,
+            80.43,
+            80.56,
+            80.76,
+            81.24,
+            81.28,
+            81.33,
+            81.63,
+            81.8,
+            81.94,
+            82.19,
+            82.46,
+            82.59,
+            83.23,
+            83.28,
+            83.33,
+            83.53
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            49.0,
+            80.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2430.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 35
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "candidate",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 19.116881600000003,
+            "p95": 19.4789728
+          },
+          "shadow": {
+            "mean": 2.0604037333333336,
+            "p95": 2.1720144
+          },
+          "main": {
+            "mean": 16.77800106666667,
+            "p95": 17.0932736
+          },
+          "post": {
+            "mean": 0.2784768,
+            "p95": 0.28267519999999996
+          },
+          "cpu": {
+            "mean": 5.45215166666667,
+            "p95": 6.290735000000227
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            75.25,
+            76.57,
+            77.3,
+            78.53,
+            78.6,
+            78.64,
+            78.7,
+            78.72,
+            79.08,
+            79.13,
+            79.35,
+            79.68,
+            79.69,
+            79.76,
+            79.79,
+            79.82,
+            79.84,
+            79.86,
+            80.32,
+            80.54,
+            80.6,
+            80.69,
+            80.79,
+            81.11,
+            81.13,
+            81.71,
+            81.73,
+            81.85,
+            81.88,
+            83.92,
+            84.64,
+            84.7,
+            85.58
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            50.0,
+            74.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2475.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 37
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "baseline-after",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 19.905388266666666,
+            "p95": 20.1999936
+          },
+          "shadow": {
+            "mean": 2.0607034666666664,
+            "p95": 2.1517808
+          },
+          "main": {
+            "mean": 17.568785066666667,
+            "p95": 17.8976768
+          },
+          "post": {
+            "mean": 0.2758997333333333,
+            "p95": 0.27857919999999997
+          },
+          "cpu": {
+            "mean": 5.988081666666665,
+            "p95": 6.658624999999882
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            76.1,
+            76.37,
+            76.59,
+            76.98,
+            77.04,
+            77.15,
+            77.36,
+            77.38,
+            77.5,
+            77.62,
+            77.88,
+            77.9,
+            78.0,
+            78.27,
+            78.46,
+            78.47,
+            78.77,
+            79.16,
+            79.18,
+            79.31,
+            79.48,
+            79.61,
+            79.62,
+            80.69,
+            81.01,
+            81.35,
+            82.83,
+            82.97,
+            83.48,
+            83.56,
+            83.74,
+            84.09,
+            84.59,
+            84.67,
+            84.87,
+            84.9
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            50.0,
+            81.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2550.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 38
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      }
+    ],
+    "bracketDriftFraction": 0.004266491889964002,
+    "bracketStable": true,
+    "gpuBaselineMean": 19.947942133333335,
+    "gpuCandidateMean": 19.116881600000003,
+    "gpuSavedMs": 0.8310605333333321,
+    "gpuReductionFraction": 0.041661467021433585,
+    "sourceAndProductsUnchanged": true,
+    "projectInputsVerified": 1729,
+    "shadowBoundsTilesPerGroup": 8,
+    "baselineRuntimeVerified": true,
+    "scope": "Local diagnosis under recorded current power and thermal conditions, sixty warmup and sixty selected frames per process; before/candidate/after bracket; formal performance conditions remain pending",
+    "formalPerformancePassed": false
+  },
+  "builds": {
+    "release": {
+      "manifestSha256": "0450d6168ac382c4f8693ab9a576d8bbbd799aeab2dff0ed8fe0ed6e8eeda01a",
+      "sourceCount": 1674
+    },
+    "debug": {
+      "manifestSha256": "25df00661843a3a38a00572ff9404c09e9e4419c6a8f43c82994b0ba68cf7e83",
+      "sourceCount": 1674
+    }
+  },
+  "sourceHashes": {
+    "src/render/ClusterLightInfluenceBox.hpp": "183f5a8abe5084e716e03ec1e8456b5362e85e4fe04f995228ad8017c70a7f02",
+    "src/render/ClusteredLightGrid.hpp": "249747db5efa90a611810eeb838e32b54205c237a33156814156cbcbde45a3c6",
+    "src/render/LightBuffer.hpp": "46ab14279f77a4a45c9dc9e718956ae55a047de6c6f66e1a1e2e665508667927",
+    "src/scenes/CharacterSceneRenderer.cpp": "0627491fcf1961940f0e55db2a23294077890c6c58c1d312b97218664d7a52c1",
+    "tests/ClusteredLightGridTests.cpp": "ee8e0d9a6bbe1db098257b42aa375623782c6b44f0ad233b76dd82729c98d3c9"
+  },
+  "shadersUnchangedPerConfiguration": 675,
+  "projectInputsVerified": 1729,
+  "nativeImageRuns": 1,
+  "nativeTimingRuns": 3,
+  "formalPerformancePassed": false,
+  "visualStatus": "failed-user-review",
+  "protectedUserDiffSha256": "12eb4dfb3fb7568451c11a58931cd04c26fac58b2fd41ccee465ab045de88ed8",
+  "externalStorageUsed": false,
+  "cleanup": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\tmp",
+      "logicalBytes": 344
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\red-include",
+      "logicalBytes": 8420
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\baseline-player.exe",
+      "logicalBytes": 6424064
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\benchmark.exe",
+      "logicalBytes": 304640
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\benchmark.obj",
+      "logicalBytes": 486163
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\red-baseline.exe",
+      "logicalBytes": 328192
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\red-baseline.obj",
+      "logicalBytes": 547847
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\image-cluster-bounds\\frames-082215\\frame_000000.png",
+      "logicalBytes": 5714675,
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000000.png"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\image-cluster-bounds\\frames-082215\\frame_000001.png",
+      "logicalBytes": 5713820,
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000001.png"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\image-cluster-bounds\\frames-082215\\frame_000002.png",
+      "logicalBytes": 5713834,
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000002.png"
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-081118-clustered-influence-bounds-6be5a8\\image-cluster-bounds\\frames-082215\\frame_000003.png",
+      "logicalBytes": 5714218,
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000003.png"
+    }
+  ],
+  "reclaimedLogicalBytes": 30956217,
+  "observedFreeBytesDelta": 30982144,
+  "remainingRunBytes": 11393474,
+  "archiveBytes": 1561362,
+  "archiveSha256": "254992d1fc38c82f5eed7059ccf85757bbc46b680a555a059db15d9708443196"
+}

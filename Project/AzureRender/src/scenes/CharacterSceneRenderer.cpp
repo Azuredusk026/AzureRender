@@ -4593,6 +4593,8 @@ void CharacterSceneRenderer::updateClusteredLighting(
         light.intensity = source.intensity;
         light.radius = source.radius;
         light.shape = source.shape;
+        if(source.shape.receivers.surfaces && !source.shape.receivers.characters)
+            light.clusterBox=clusterInfluenceBox(source.shape.influenceBox,view);
         light.rasterShadowCaster=mainSceneLight==&source;
         lights.push_back(light);
     }
@@ -4611,7 +4613,7 @@ void CharacterSceneRenderer::updateClusteredLighting(
         renderSettings_->cameraView&&renderSettings_->cameraView->projection==CameraProjectionKind::Orthographic?projection[13]:-projection[9],
     };
     if(!clusteredLightGrid_)clusteredLightGrid_=std::make_unique<ClusteredLightGrid>(gridDesc);
-    else clusteredLightGrid_->configure(gridDesc);
+    else if(clusteredLightGrid_->desc()!=gridDesc)clusteredLightGrid_->configure(gridDesc);
     auto& grid=*clusteredLightGrid_;
     grid.assign(frameLights_.lights());
     packedLights_ = frameLights_.gpuData();
