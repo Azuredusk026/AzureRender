@@ -1,5 +1,7 @@
 {
-  "sourceSha256": "305fd6f70ad3e763ad75f7f254d6eead5452df86dae89b2b0ab0afd3d17d0142",
+  "sourceSha256": "49efbb409d67dcfd4f02ff1e7882c3428f557e1bc67525f0cb3ce82b03c05ffc",
   "binarySha256": "c24496fd2e84bfe0a15da99f85b9f984bfa4cefa51b55784b38e31956969927b",
-  "scope": "Adreno 750 system native driver; explicit local-read device creation result -7; user viewer observation pending comparison"
+  "scope": "Adreno 750 system native driver; explicit local-read device creation result -7; user viewer observation pending comparison",
+  "sourceSnapshot": "qualification-source.cpp",
+  "sourceNote": "Build-time source reconstructed by restoring the two unused bookkeeping lines removed after native compilation; semantic implementation is unchanged."
 }

@@ -59,6 +59,7 @@ private:
     VkShaderModule shader(const std::string& name);
     void descriptors();
     void createPaths();
+    void createSubpasses();
     void record();
     void beginPass(VkRenderPass pass, VkFramebuffer framebuffer, uint32_t colorCount, bool hasDepth);
     void geometryDraw();
