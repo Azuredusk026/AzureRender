@@ -1,0 +1,4296 @@
+{
+  "status": "qualified-diffuse-ramp-input",
+  "points": 31,
+  "rampExactPoints": 23,
+  "uvExactPoints": 10,
+  "maximumRampAbsolute": 0.06570535898208618,
+  "maximumUvAbsolute": 0.026858806610107422,
+  "maximumNativeClampCpuError": 7.638744279447884e-06,
+  "maximumVulkanWrapCpuError": 2.9579798380585665e-05,
+  "maximumVulkanClampCpuError": 2.9579798380585665e-05,
+  "rows": [
+    {
+      "pixel": [
+        1306,
+        156
+      ],
+      "nativeRampBits": [
+        1062522325,
+        1062387155,
+        1062387155,
+        1058178195
+      ],
+      "vulkanRampBits": [
+        1062524117,
+        1062406867,
+        1062406867,
+        1058196115
+      ],
+      "nativeRamp": [
+        0.8312657475471497,
+        0.8232089877128601,
+        0.8232089877128601,
+        0.572335422039032
+      ],
+      "vulkanRamp": [
+        0.8313725590705872,
+        0.8243839144706726,
+        0.8243839144706726,
+        0.573403537273407
+      ],
+      "nativeUvBits": [
+        1061779772,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1061788732,
+        1056964608
+      ],
+      "nativeUv": [
+        0.787006139755249,
+        0.5
+      ],
+      "vulkanUv": [
+        0.7875401973724365,
+        0.5
+      ],
+      "rampExact": false,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0011749267578125,
+      "maximumUvAbsolute": 0.0005340576171875,
+      "nativeClampCpuError": 1.2671246247819568e-06,
+      "vulkanWrapCpuError": 3.34043128813466e-06,
+      "vulkanClampCpuError": 3.34043128813466e-06
+    },
+    {
+      "pixel": [
+        1278,
+        163
+      ],
+      "nativeRampBits": [
+        1063785960,
+        1063785960,
+        1063785960,
+        1059969966
+      ],
+      "vulkanRampBits": [
+        1063785960,
+        1063785960,
+        1063785960,
+        1059969966
+      ],
+      "nativeRamp": [
+        0.9065842628479004,
+        0.9065842628479004,
+        0.9065842628479004,
+        0.6791332960128784
+      ],
+      "vulkanRamp": [
+        0.9065842628479004,
+        0.9065842628479004,
+        0.9065842628479004,
+        0.6791332960128784
+      ],
+      "nativeUvBits": [
+        1062639328,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1062639328,
+        1056964608
+      ],
+      "nativeUv": [
+        0.8382396697998047,
+        0.5
+      ],
+      "vulkanUv": [
+        0.8382396697998047,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 2.7469560210935384e-06,
+      "vulkanWrapCpuError": 2.7469560210935384e-06,
+      "vulkanClampCpuError": 2.7469560210935384e-06
+    },
+    {
+      "pixel": [
+        1313,
+        168
+      ],
+      "nativeRampBits": [
+        1062458324,
+        1061861067,
+        1061861067,
+        1057739660
+      ],
+      "vulkanRampBits": [
+        1062458324,
+        1061861067,
+        1061861067,
+        1057739660
+      ],
+      "nativeRamp": [
+        0.8274509906768799,
+        0.7918516993522644,
+        0.7918516993522644,
+        0.546196699142456
+      ],
+      "vulkanRamp": [
+        0.8274509906768799,
+        0.7918516993522644,
+        0.7918516993522644,
+        0.546196699142456
+      ],
+      "nativeUvBits": [
+        1061561356,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1061561357,
+        1056964608
+      ],
+      "nativeUv": [
+        0.7739875316619873,
+        0.5
+      ],
+      "vulkanUv": [
+        0.7739875912666321,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.960464477539063e-08,
+      "nativeClampCpuError": 4.281249700754941e-06,
+      "vulkanWrapCpuError": 4.281249700754941e-06,
+      "vulkanClampCpuError": 4.281249700754941e-06
+    },
+    {
+      "pixel": [
+        1319,
+        172
+      ],
+      "nativeRampBits": [
+        1063225568,
+        1063225568,
+        1063225568,
+        1059189666
+      ],
+      "vulkanRampBits": [
+        1063225312,
+        1063225312,
+        1063225312,
+        1059189154
+      ],
+      "nativeRamp": [
+        0.8731822967529297,
+        0.8731822967529297,
+        0.8731822967529297,
+        0.6326237916946411
+      ],
+      "vulkanRamp": [
+        0.8731670379638672,
+        0.8731670379638672,
+        0.8731670379638672,
+        0.6325932741165161
+      ],
+      "nativeUvBits": [
+        1062283444,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1062283301,
+        1056964608
+      ],
+      "nativeUv": [
+        0.8170273303985596,
+        0.5
+      ],
+      "vulkanUv": [
+        0.8170188069343567,
+        0.5
+      ],
+      "rampExact": false,
+      "uvExact": false,
+      "maximumRampAbsolute": 3.0517578125e-05,
+      "maximumUvAbsolute": 8.52346420288086e-06,
+      "nativeClampCpuError": 5.213419596361568e-06,
+      "vulkanWrapCpuError": 5.27325798493905e-06,
+      "vulkanClampCpuError": 5.27325798493905e-06
+    },
+    {
+      "pixel": [
+        1267,
+        211
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064545268
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064545268
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9518425464630127
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9518425464630127
+      ],
+      "nativeUvBits": [
+        1064918106,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064918104,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9740654230117798,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9740653038024902,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 1.1920928955078125e-07,
+      "nativeClampCpuError": 4.311168895099193e-06,
+      "vulkanWrapCpuError": 4.311168895099193e-06,
+      "vulkanClampCpuError": 4.311168895099193e-06
+    },
+    {
+      "pixel": [
+        1282,
+        211
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063609061
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063609829
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8960402607917786
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8960860371589661
+      ],
+      "nativeUvBits": [
+        1064451945,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064451982,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9462800621986389,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9462822675704956,
+        0.5
+      ],
+      "rampExact": false,
+      "uvExact": false,
+      "maximumRampAbsolute": 4.57763671875e-05,
+      "maximumUvAbsolute": 2.205371856689453e-06,
+      "nativeClampCpuError": 7.533325868447349e-06,
+      "vulkanWrapCpuError": 7.605786417008709e-06,
+      "vulkanClampCpuError": 7.605786417008709e-06
+    },
+    {
+      "pixel": [
+        1283,
+        211
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064172014
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064172014
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.929594874382019
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.929594874382019
+      ],
+      "nativeUvBits": [
+        1064732182,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064732181,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9629834890365601,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9629834294319153,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.960464477539063e-08,
+      "nativeClampCpuError": 7.138532751582716e-07,
+      "vulkanWrapCpuError": 7.138532751582716e-07,
+      "vulkanClampCpuError": 7.138532751582716e-07
+    },
+    {
+      "pixel": [
+        1284,
+        211
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063803880
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063803880
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9076523780822754
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9076523780822754
+      ],
+      "nativeUvBits": [
+        1064548781,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064548782,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9520519375801086,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9520519971847534,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.960464477539063e-08,
+      "nativeClampCpuError": 6.935643214855958e-06,
+      "vulkanWrapCpuError": 6.935643214855958e-06,
+      "vulkanClampCpuError": 6.935643214855958e-06
+    },
+    {
+      "pixel": [
+        1268,
+        212
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064292336
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064292336
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9367666244506836
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9367666244506836
+      ],
+      "nativeUvBits": [
+        1064792114,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064792113,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9665557146072388,
+        0.5
+      ],
+      "vulkanUv": [
+        0.966555655002594,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.960464477539063e-08,
+      "nativeClampCpuError": 1.9185683306499612e-06,
+      "vulkanWrapCpuError": 1.9185683306499612e-06,
+      "vulkanClampCpuError": 1.9185683306499612e-06
+    },
+    {
+      "pixel": [
+        1281,
+        212
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063739111
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063739111
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9037918448448181
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9037918448448181
+      ],
+      "nativeUvBits": [
+        1064516628,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064516658,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9501354694366455,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9501372575759888,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 1.7881393432617188e-06,
+      "nativeClampCpuError": 7.174763025030728e-06,
+      "vulkanWrapCpuError": 7.174763025030728e-06,
+      "vulkanClampCpuError": 7.174763025030728e-06
+    },
+    {
+      "pixel": [
+        1282,
+        212
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063498212
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063498212
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8894331455230713
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8894331455230713
+      ],
+      "nativeUvBits": [
+        1064396471,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064396480,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9429735541343689,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9429740905761719,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.364418029785156e-07,
+      "nativeClampCpuError": 2.9984642477831613e-06,
+      "vulkanWrapCpuError": 2.9984642477831613e-06,
+      "vulkanClampCpuError": 2.9984642477831613e-06
+    },
+    {
+      "pixel": [
+        1283,
+        212
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064001259
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064001259
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9194170832633972
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9194170832633972
+      ],
+      "nativeUvBits": [
+        1064647190,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064647190,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9579175710678101,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9579175710678101,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 6.936344445929166e-06,
+      "vulkanWrapCpuError": 6.936344445929166e-06,
+      "vulkanClampCpuError": 6.936344445929166e-06
+    },
+    {
+      "pixel": [
+        1284,
+        212
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063834857
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063834857
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9094987511634827
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9094987511634827
+      ],
+      "nativeUvBits": [
+        1064564264,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064564264,
+        1056964608
+      ],
+      "nativeUv": [
+        0.952974796295166,
+        0.5
+      ],
+      "vulkanUv": [
+        0.952974796295166,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 1.2021438748899271e-06,
+      "vulkanWrapCpuError": 1.2021438748899271e-06,
+      "vulkanClampCpuError": 1.2021438748899271e-06
+    },
+    {
+      "pixel": [
+        1268,
+        213
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064348913
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1064348913
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9401388764381409
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9401388764381409
+      ],
+      "nativeUvBits": [
+        1064820264,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064820264,
+        1056964608
+      ],
+      "nativeUv": [
+        0.968233585357666,
+        0.5
+      ],
+      "vulkanUv": [
+        0.968233585357666,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 4.072516572195539e-06,
+      "vulkanWrapCpuError": 4.072516572195539e-06,
+      "vulkanClampCpuError": 4.072516572195539e-06
+    },
+    {
+      "pixel": [
+        1281,
+        213
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063646182
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063646182
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8982528448104858
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8982528448104858
+      ],
+      "nativeUvBits": [
+        1064470226,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064470230,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9473696947097778,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9473699331283569,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 2.384185791015625e-07,
+      "nativeClampCpuError": 8.316601024516146e-07,
+      "vulkanWrapCpuError": 8.316601024516146e-07,
+      "vulkanClampCpuError": 8.316601024516146e-07
+    },
+    {
+      "pixel": [
+        1282,
+        213
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063412450
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063412450
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8843213319778442
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8843213319778442
+      ],
+      "nativeUvBits": [
+        1064353775,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064353776,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9404286742210388,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9404287338256836,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.960464477539063e-08,
+      "nativeClampCpuError": 7.606487648192939e-06,
+      "vulkanWrapCpuError": 7.606487648192939e-06,
+      "vulkanClampCpuError": 7.606487648192939e-06
+    },
+    {
+      "pixel": [
+        1283,
+        213
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063908842
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063908842
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9139086008071899
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9139086008071899
+      ],
+      "nativeUvBits": [
+        1064600992,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064600992,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9551639556884766,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9551639556884766,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 7.12918300282972e-07,
+      "vulkanWrapCpuError": 7.12918300282972e-07,
+      "vulkanClampCpuError": 7.12918300282972e-07
+    },
+    {
+      "pixel": [
+        1284,
+        213
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063746023
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063746023
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9042038321495056
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9042038321495056
+      ],
+      "nativeUvBits": [
+        1064520032,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064520032,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9503383636474609,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9503383636474609,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 6.528227936897224e-06,
+      "vulkanWrapCpuError": 6.528227936897224e-06,
+      "vulkanClampCpuError": 6.528227936897224e-06
+    },
+    {
+      "pixel": [
+        1269,
+        214
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063801832
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063801832
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9075303077697754
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9075303077697754
+      ],
+      "nativeUvBits": [
+        1064547903,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064547903,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9519996047019958,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9519996047019958,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 6.456936107013256e-06,
+      "vulkanWrapCpuError": 6.456936107013256e-06,
+      "vulkanClampCpuError": 6.456936107013256e-06
+    },
+    {
+      "pixel": [
+        1281,
+        214
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063566053
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063566053
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8934767842292786
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8934767842292786
+      ],
+      "nativeUvBits": [
+        1064430241,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064430242,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9449864029884338,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9449864625930786,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.960464477539063e-08,
+      "nativeClampCpuError": 2.51952339624939e-06,
+      "vulkanWrapCpuError": 2.51952339624939e-06,
+      "vulkanClampCpuError": 2.51952339624939e-06
+    },
+    {
+      "pixel": [
+        1284,
+        214
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063752680
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063752680
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9046006202697754
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.9046006202697754
+      ],
+      "nativeUvBits": [
+        1064523143,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064523144,
+        1056964608
+      ],
+      "nativeUv": [
+        0.9505237936973572,
+        0.5
+      ],
+      "vulkanUv": [
+        0.950523853302002,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.960464477539063e-08,
+      "nativeClampCpuError": 5.0320344813226114e-06,
+      "vulkanWrapCpuError": 5.0320344813226114e-06,
+      "vulkanClampCpuError": 5.0320344813226114e-06
+    },
+    {
+      "pixel": [
+        1282,
+        215
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063140830
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063140830
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8681315183639526
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8681315183639526
+      ],
+      "nativeUvBits": [
+        1064218508,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064218508,
+        1056964608
+      ],
+      "nativeUv": [
+        0.932366132736206,
+        0.5
+      ],
+      "vulkanUv": [
+        0.932366132736206,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 5.736538008171976e-06,
+      "vulkanWrapCpuError": 5.736538008171976e-06,
+      "vulkanClampCpuError": 5.736538008171976e-06
+    },
+    {
+      "pixel": [
+        1283,
+        216
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063613925
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063613925
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8963301777839661
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8963301777839661
+      ],
+      "nativeUvBits": [
+        1064454162,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064454164,
+        1056964608
+      ],
+      "nativeUv": [
+        0.946412205696106,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9464123249053955,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 1.1920928955078125e-07,
+      "nativeClampCpuError": 6.648372201323305e-06,
+      "vulkanWrapCpuError": 6.648372201323305e-06,
+      "vulkanClampCpuError": 6.648372201323305e-06
+    },
+    {
+      "pixel": [
+        1264,
+        217
+      ],
+      "nativeRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063644646
+      ],
+      "vulkanRampBits": [
+        1065353216,
+        1065353216,
+        1065353216,
+        1063644646
+      ],
+      "nativeRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8981612920761108
+      ],
+      "vulkanRamp": [
+        1.0,
+        1.0,
+        1.0,
+        0.8981612920761108
+      ],
+      "nativeUvBits": [
+        1064469424,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1064469414,
+        1056964608
+      ],
+      "nativeUv": [
+        0.947321891784668,
+        0.5
+      ],
+      "vulkanUv": [
+        0.9473212957382202,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 5.960464477539062e-07,
+      "nativeClampCpuError": 4.726297715418326e-07,
+      "vulkanWrapCpuError": 4.726297715418326e-07,
+      "vulkanClampCpuError": 4.726297715418326e-07
+    },
+    {
+      "pixel": [
+        1367,
+        261
+      ],
+      "nativeRampBits": [
+        1059892397,
+        1051701424,
+        1051701424,
+        1044167869
+      ],
+      "vulkanRampBits": [
+        1059892397,
+        1051701424,
+        1051701424,
+        1044167869
+      ],
+      "nativeRamp": [
+        0.6745098233222961,
+        0.34314489364624023,
+        0.34314489364624023,
+        0.18431372940540314
+      ],
+      "vulkanRamp": [
+        0.6745098233222961,
+        0.34314489364624023,
+        0.34314489364624023,
+        0.18431372940540314
+      ],
+      "nativeUvBits": [
+        1058537546,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1058537546,
+        1056964608
+      ],
+      "nativeUv": [
+        0.5937544107437134,
+        0.5
+      ],
+      "vulkanUv": [
+        0.5937544107437134,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 7.638744279447884e-06,
+      "vulkanWrapCpuError": 7.638744279447884e-06,
+      "vulkanClampCpuError": 7.638744279447884e-06
+    },
+    {
+      "pixel": [
+        1367,
+        262
+      ],
+      "nativeRampBits": [
+        1060138416,
+        1051940019,
+        1051940019,
+        1044486338
+      ],
+      "vulkanRampBits": [
+        1060138416,
+        1051940019,
+        1051940019,
+        1044486338
+      ],
+      "nativeRamp": [
+        0.689173698425293,
+        0.3502555787563324,
+        0.3502555787563324,
+        0.1890592873096466
+      ],
+      "vulkanRamp": [
+        0.689173698425293,
+        0.3502555787563324,
+        0.3502555787563324,
+        0.1890592873096466
+      ],
+      "nativeUvBits": [
+        1058577236,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1058577236,
+        1056964608
+      ],
+      "nativeUv": [
+        0.5961201190948486,
+        0.5
+      ],
+      "vulkanUv": [
+        0.5961201190948486,
+        0.5
+      ],
+      "rampExact": true,
+      "uvExact": true,
+      "maximumRampAbsolute": 0.0,
+      "maximumUvAbsolute": 0.0,
+      "nativeClampCpuError": 4.837910334232198e-06,
+      "vulkanWrapCpuError": 4.837910334232198e-06,
+      "vulkanClampCpuError": 4.837910334232198e-06
+    },
+    {
+      "pixel": [
+        1322,
+        263
+      ],
+      "nativeRampBits": [
+        1061997773,
+        1056453880,
+        1056453880,
+        1050137752
+      ],
+      "vulkanRampBits": [
+        1062108878,
+        1057811597,
+        1057811597,
+        1051947699
+      ],
+      "nativeRamp": [
+        0.800000011920929,
+        0.48477911949157715,
+        0.48477911949157715,
+        0.29654383659362793
+      ],
+      "vulkanRamp": [
+        0.8066223859786987,
+        0.5504844784736633,
+        0.5504844784736633,
+        0.3504844605922699
+      ],
+      "nativeUvBits": [
+        1059475322,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1059925938,
+        1056964608
+      ],
+      "nativeUv": [
+        0.6496502161026001,
+        0.5
+      ],
+      "vulkanUv": [
+        0.6765090227127075,
+        0.5
+      ],
+      "rampExact": false,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.06570535898208618,
+      "maximumUvAbsolute": 0.026858806610107422,
+      "nativeClampCpuError": 5.846397549469362e-06,
+      "vulkanWrapCpuError": 5.735486161506653e-06,
+      "vulkanClampCpuError": 5.735486161506653e-06
+    },
+    {
+      "pixel": [
+        1380,
+        276
+      ],
+      "nativeRampBits": [
+        1063710439,
+        1063710439,
+        1063710439,
+        1059830700
+      ],
+      "vulkanRampBits": [
+        1063710695,
+        1063710695,
+        1063710695,
+        1059831212
+      ],
+      "nativeRamp": [
+        0.9020828604698181,
+        0.9020828604698181,
+        0.9020828604698181,
+        0.6708323955535889
+      ],
+      "vulkanRamp": [
+        0.9020981192588806,
+        0.9020981192588806,
+        0.9020981192588806,
+        0.6708629131317139
+      ],
+      "nativeUvBits": [
+        1062570110,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1062570112,
+        1056964608
+      ],
+      "nativeUv": [
+        0.8341139554977417,
+        0.5
+      ],
+      "vulkanUv": [
+        0.8341140747070312,
+        0.5
+      ],
+      "rampExact": false,
+      "uvExact": false,
+      "maximumRampAbsolute": 3.0517578125e-05,
+      "maximumUvAbsolute": 1.1920928955078125e-07,
+      "nativeClampCpuError": 9.377797444143354e-07,
+      "vulkanWrapCpuError": 2.9579798380585665e-05,
+      "vulkanClampCpuError": 2.9579798380585665e-05
+    },
+    {
+      "pixel": [
+        1193,
+        295
+      ],
+      "nativeRampBits": [
+        1062458324,
+        1062130895,
+        1062130895,
+        1057985936
+      ],
+      "vulkanRampBits": [
+        1062458324,
+        1062177232,
+        1062177232,
+        1058032272
+      ],
+      "nativeRamp": [
+        0.8274509906768799,
+        0.8079347014427185,
+        0.8079347014427185,
+        0.5608758926391602
+      ],
+      "vulkanRamp": [
+        0.8274509906768799,
+        0.8106966018676758,
+        0.8106966018676758,
+        0.5636377334594727
+      ],
+      "nativeUvBits": [
+        1061683877,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1061706992,
+        1056964608
+      ],
+      "nativeUv": [
+        0.7812903523445129,
+        0.5
+      ],
+      "vulkanUv": [
+        0.7826681137084961,
+        0.5
+      ],
+      "rampExact": false,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.0027619004249572754,
+      "maximumUvAbsolute": 0.0013777613639831543,
+      "nativeClampCpuError": 3.475768893812514e-07,
+      "vulkanWrapCpuError": 4.199906891488858e-06,
+      "vulkanClampCpuError": 4.199906891488858e-06
+    },
+    {
+      "pixel": [
+        1193,
+        296
+      ],
+      "nativeRampBits": [
+        1062326738,
+        1060234674,
+        1060234674,
+        1055872751
+      ],
+      "vulkanRampBits": [
+        1062326738,
+        1060452277,
+        1060452277,
+        1056197876
+      ],
+      "nativeRamp": [
+        0.8196078538894653,
+        0.6949111223220825,
+        0.6949111223220825,
+        0.46746012568473816
+      ],
+      "vulkanRamp": [
+        0.8196078538894653,
+        0.7078812718391418,
+        0.7078812718391418,
+        0.4771496057510376
+      ],
+      "nativeUvBits": [
+        1060903496,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1060984447,
+        1056964608
+      ],
+      "nativeUv": [
+        0.7347760200500488,
+        0.5
+      ],
+      "vulkanUv": [
+        0.7396010756492615,
+        0.5
+      ],
+      "rampExact": false,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.012970149517059326,
+      "maximumUvAbsolute": 0.0048250555992126465,
+      "nativeClampCpuError": 3.1096093794924506e-06,
+      "vulkanWrapCpuError": 7.49732933791325e-06,
+      "vulkanClampCpuError": 7.49732933791325e-06
+    },
+    {
+      "pixel": [
+        1193,
+        297
+      ],
+      "nativeRampBits": [
+        1062129359,
+        1058010768,
+        1058010768,
+        1052241080
+      ],
+      "vulkanRampBits": [
+        1062129359,
+        1058464407,
+        1058464407,
+        1052990147
+      ],
+      "nativeRamp": [
+        0.8078431487083435,
+        0.5623559951782227,
+        0.5623559951782227,
+        0.35922789573669434
+      ],
+      "vulkanRamp": [
+        0.8078431487083435,
+        0.5893949866294861,
+        0.5893949866294861,
+        0.3815518319606781
+      ],
+      "nativeUvBits": [
+        1059999024,
+        1056964608
+      ],
+      "vulkanUvBits": [
+        1060185608,
+        1056964608
+      ],
+      "nativeUv": [
+        0.6808652877807617,
+        0.5
+      ],
+      "vulkanUv": [
+        0.6919865608215332,
+        0.5
+      ],
+      "rampExact": false,
+      "uvExact": false,
+      "maximumRampAbsolute": 0.027038991451263428,
+      "maximumUvAbsolute": 0.011121273040771484,
+      "nativeClampCpuError": 6.137174718534588e-06,
+      "vulkanWrapCpuError": 4.5405883415394754e-06,
+      "vulkanClampCpuError": 4.5405883415394754e-06
+    }
+  ],
+  "qualification": {
+    "status": "qualified",
+    "points": [
+      [
+        1306,
+        156
+      ],
+      [
+        1278,
+        163
+      ],
+      [
+        1313,
+        168
+      ],
+      [
+        1319,
+        172
+      ],
+      [
+        1267,
+        211
+      ],
+      [
+        1282,
+        211
+      ],
+      [
+        1283,
+        211
+      ],
+      [
+        1284,
+        211
+      ],
+      [
+        1268,
+        212
+      ],
+      [
+        1281,
+        212
+      ],
+      [
+        1282,
+        212
+      ],
+      [
+        1283,
+        212
+      ],
+      [
+        1284,
+        212
+      ],
+      [
+        1268,
+        213
+      ],
+      [
+        1281,
+        213
+      ],
+      [
+        1282,
+        213
+      ],
+      [
+        1283,
+        213
+      ],
+      [
+        1284,
+        213
+      ],
+      [
+        1269,
+        214
+      ],
+      [
+        1281,
+        214
+      ],
+      [
+        1284,
+        214
+      ],
+      [
+        1282,
+        215
+      ],
+      [
+        1283,
+        216
+      ],
+      [
+        1264,
+        217
+      ],
+      [
+        1367,
+        261
+      ],
+      [
+        1367,
+        262
+      ],
+      [
+        1322,
+        263
+      ],
+      [
+        1380,
+        276
+      ],
+      [
+        1193,
+        295
+      ],
+      [
+        1193,
+        296
+      ],
+      [
+        1193,
+        297
+      ]
+    ],
+    "captures": [
+      {
+        "label": "native",
+        "event": 950,
+        "sourceSha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee",
+        "runs": [
+          {
+            "case": {
+              "name": "ramp-0-0",
+              "field": "ramp",
+              "component": 0,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "42a8b3d29f754dc6d983f21d5f6364db98d00d8fd55162d7c2f85c1eab372a12",
+            "values": [
+              3541,
+              1512,
+              980,
+              2272,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              3245,
+              3504,
+              3277,
+              3815,
+              980,
+              466,
+              3791
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-0-12",
+              "field": "ramp",
+              "component": 0,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "8d0ed147c00cd912851f3a5c9c2fdc22c6993cfdafd8360c4fd176b74ef1b98c",
+            "values": [
+              1356,
+              1665,
+              1341,
+              1528,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              714,
+              774,
+              1228,
+              1646,
+              1341,
+              1309,
+              1260
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-0-24",
+              "field": "ramp",
+              "component": 0,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "21645312f9fe6df0ea25704536d9e25067bc83295d61f7499ec62781835bcecf",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-1-0",
+              "field": "ramp",
+              "component": 1,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "ea992c75c8efdf09df51fb3e5dde2f1e9d53fb17db75396231fc0f65fdb6502d",
+            "values": [
+              3539,
+              1512,
+              1739,
+              2272,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              176,
+              1203,
+              1272,
+              3815,
+              1231,
+              1458,
+              1680
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-1-12",
+              "field": "ramp",
+              "component": 1,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "ebea877125a0a3aea7f0c5625351bc6a24372520c9b9747efaf592582f1ec4eb",
+            "values": [
+              1323,
+              1665,
+              1195,
+              1528,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2811,
+              2869,
+              3971,
+              1646,
+              1261,
+              798,
+              255
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-1-24",
+              "field": "ramp",
+              "component": 1,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "491450e81261fe6a72b4737158e99b92b89c8b31d9236a9f82afedc03247742c",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-2-0",
+              "field": "ramp",
+              "component": 2,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "fc50a358aee8b11d6307e5e2f259e80670cd2ae1ce92814b8c283706674cbce6",
+            "values": [
+              3539,
+              1512,
+              1739,
+              2272,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              176,
+              1203,
+              1272,
+              3815,
+              1231,
+              1458,
+              1680
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-2-12",
+              "field": "ramp",
+              "component": 2,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "6e3baccde71819425a9e72d88181944cb10dfd63ef554598bb1ed836bd8faf43",
+            "values": [
+              1323,
+              1665,
+              1195,
+              1528,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2811,
+              2869,
+              3971,
+              1646,
+              1261,
+              798,
+              255
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-2-24",
+              "field": "ramp",
+              "component": 2,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "569dfd2545888eb7e662206ef9c9b4628abbc5cfb4f7fc0ec9560f76a1b85965",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-3-0",
+              "field": "ramp",
+              "component": 3,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "0eac536105f1c4101b76fc233410d6e2ed3123d2335d7e2dba79924d5112d5c9",
+            "values": [
+              1171,
+              2990,
+              908,
+              930,
+              3060,
+              741,
+              2542,
+              3048,
+              4080,
+              3815,
+              484,
+              3819,
+              1257,
+              3313,
+              998,
+              738,
+              1514,
+              2535,
+              1000,
+              2789,
+              1000,
+              3550,
+              1509,
+              3558,
+              3261,
+              2242,
+              1176,
+              2988,
+              1424,
+              1775,
+              3256
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-3-12",
+              "field": "ramp",
+              "component": 3,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "da80318a604d2915f66ac205bbfb14c709e53e74fce2f18d0c160672d37a06e3",
+            "values": [
+              296,
+              733,
+              189,
+              543,
+              1850,
+              1622,
+              1759,
+              1669,
+              1788,
+              1653,
+              1595,
+              1717,
+              1677,
+              1802,
+              1631,
+              1574,
+              1695,
+              1655,
+              1669,
+              1611,
+              1657,
+              1507,
+              1623,
+              1630,
+              971,
+              1049,
+              2429,
+              699,
+              249,
+              3829,
+              2942
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-3-24",
+              "field": "ramp",
+              "component": 3,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "a7f4eca727bbe0e058deb28d38d5f361b5d7dbf6e555fa6f8e7c429a98755d03",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              63,
+              63,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-0-0",
+              "field": "uv",
+              "component": 0,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "831d5213cbf6b2c3960a122afe3f28a65e388fc8fdf4e38d37bba91c96e9c5db",
+            "values": [
+              2364,
+              1760,
+              1036,
+              2228,
+              3162,
+              3945,
+              1558,
+              2477,
+              50,
+              3092,
+              1719,
+              2582,
+              1576,
+              3624,
+              1746,
+              4079,
+              1440,
+              2400,
+              1599,
+              2721,
+              1415,
+              3980,
+              2066,
+              944,
+              74,
+              2900,
+              3962,
+              2174,
+              677,
+              2632,
+              3376
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-0-12",
+              "field": "uv",
+              "component": 0,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "93c8628e3433cea845027886a23ab6414ab7bb00b36f35819aa1b21b510e55e3",
+            "values": [
+              1175,
+              1385,
+              1122,
+              1298,
+              1941,
+              1827,
+              1896,
+              1851,
+              1911,
+              1843,
+              1814,
+              1875,
+              1855,
+              1917,
+              1832,
+              1803,
+              1864,
+              1844,
+              1851,
+              1822,
+              1845,
+              1770,
+              1828,
+              1832,
+              384,
+              393,
+              612,
+              1368,
+              1152,
+              961,
+              740
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-0-24",
+              "field": "uv",
+              "component": 0,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "991a7daa497d07d15762941d6795d235f69e0046f496c64bd9075452f39f9fd8",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-1-0",
+              "field": "uv",
+              "component": 1,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "4193009a356a4e9f7f1ed59707b72aa9084b1e43bb02ba362d4017784b577bbe",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-1-12",
+              "field": "uv",
+              "component": 1,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "95a2cef9ff2895bd1a72878c318bd05000a98419d3055f1e5aef0034a17eb2f4",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-1-24",
+              "field": "uv",
+              "component": 1,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "0ee5a1b35636eb0b1be9da57d8de200558051b7aad5c113c3c2d0d9dbddc0f48",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          }
+        ],
+        "samplers": [
+          {
+            "object": "ResourceId::318",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Point",
+              "magnify": "FilterMode.Point",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 0,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::365",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 1,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::338",
+            "address": [
+              "AddressMode.Wrap",
+              "AddressMode.Wrap",
+              "AddressMode.Wrap"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 2,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::960",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Comparison"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Greater",
+            "unnormalized": false,
+            "shader_binding_index": 3,
+            "array_element": 0
+          }
+        ],
+        "declaredResources": [
+          {
+            "name": "structuredbuffer0",
+            "binding": 0,
+            "index": 0
+          },
+          {
+            "name": "structuredbuffer1",
+            "binding": 1,
+            "index": 1
+          },
+          {
+            "name": "bytebuffer2",
+            "binding": 2,
+            "index": 2
+          },
+          {
+            "name": "texture3",
+            "binding": 3,
+            "index": 3
+          },
+          {
+            "name": "texture4",
+            "binding": 4,
+            "index": 4
+          },
+          {
+            "name": "texture5",
+            "binding": 5,
+            "index": 5
+          },
+          {
+            "name": "texture6",
+            "binding": 6,
+            "index": 6
+          },
+          {
+            "name": "texture7",
+            "binding": 7,
+            "index": 7
+          },
+          {
+            "name": "texture8",
+            "binding": 8,
+            "index": 8
+          },
+          {
+            "name": "texture9",
+            "binding": 9,
+            "index": 9
+          },
+          {
+            "name": "texture10",
+            "binding": 10,
+            "index": 10
+          },
+          {
+            "name": "texture11",
+            "binding": 11,
+            "index": 11
+          },
+          {
+            "name": "texture12",
+            "binding": 12,
+            "index": 12
+          },
+          {
+            "name": "texture13",
+            "binding": 13,
+            "index": 13
+          },
+          {
+            "name": "texture14",
+            "binding": 14,
+            "index": 14
+          },
+          {
+            "name": "texture15",
+            "binding": 15,
+            "index": 15
+          },
+          {
+            "name": "texture16",
+            "binding": 16,
+            "index": 16
+          },
+          {
+            "name": "texture17",
+            "binding": 17,
+            "index": 17
+          },
+          {
+            "name": "texture18",
+            "binding": 18,
+            "index": 18
+          },
+          {
+            "name": "texture19",
+            "binding": 19,
+            "index": 19
+          },
+          {
+            "name": "texture20",
+            "binding": 20,
+            "index": 20
+          }
+        ],
+        "resources": [
+          {
+            "index": 0,
+            "arrayElement": 0,
+            "resource": "ResourceId::141964",
+            "format": "Undefined"
+          },
+          {
+            "index": 1,
+            "arrayElement": 0,
+            "resource": "ResourceId::399",
+            "format": "Undefined"
+          },
+          {
+            "index": 2,
+            "arrayElement": 0,
+            "resource": "ResourceId::609",
+            "format": "R32_TYPELESS"
+          },
+          {
+            "index": 3,
+            "arrayElement": 0,
+            "resource": "ResourceId::141928",
+            "format": "R32_FLOAT"
+          },
+          {
+            "index": 4,
+            "arrayElement": 0,
+            "resource": "ResourceId::14647",
+            "format": "R16_UNORM"
+          },
+          {
+            "index": 5,
+            "arrayElement": 0,
+            "resource": "ResourceId::141931",
+            "format": "R8G8_UNORM"
+          },
+          {
+            "index": 6,
+            "arrayElement": 0,
+            "resource": "ResourceId::11293",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 7,
+            "arrayElement": 0,
+            "resource": "ResourceId::11296",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 8,
+            "arrayElement": 0,
+            "resource": "ResourceId::11299",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 9,
+            "arrayElement": 0,
+            "resource": "ResourceId::11302",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 10,
+            "arrayElement": 0,
+            "resource": "ResourceId::11305",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 11,
+            "arrayElement": 0,
+            "resource": "ResourceId::11308",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 12,
+            "arrayElement": 0,
+            "resource": "ResourceId::20170",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 13,
+            "arrayElement": 0,
+            "resource": "ResourceId::6196",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 14,
+            "arrayElement": 0,
+            "resource": "ResourceId::13524",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 15,
+            "arrayElement": 0,
+            "resource": "ResourceId::701",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 16,
+            "arrayElement": 0,
+            "resource": "ResourceId::139677",
+            "format": "BC7_SRGB"
+          },
+          {
+            "index": 17,
+            "arrayElement": 0,
+            "resource": "ResourceId::139671",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 18,
+            "arrayElement": 0,
+            "resource": "ResourceId::139862",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 19,
+            "arrayElement": 0,
+            "resource": "ResourceId::339",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 20,
+            "arrayElement": 0,
+            "resource": "ResourceId::345",
+            "format": "R8G8B8A8_SRGB"
+          }
+        ],
+        "rampTexture": {
+          "resource": "ResourceId::6196",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "shaderName": "texture13",
+          "bytes": 1024,
+          "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+        },
+        "sourceControlQualified": true,
+        "controlSha256": "41008c80fd7d1bd278f1f8096ac1466f2989472de01f382922d968f5ec8b71bb",
+        "baselineRestored": true,
+        "debugMessages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      {
+        "label": "vulkan",
+        "event": 493,
+        "sourceSha256": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca",
+        "runs": [
+          {
+            "case": {
+              "name": "ramp-0-0",
+              "field": "ramp",
+              "component": 0,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "1f0bc72d7b539e52cbc3663a8ecc7e9d0d330a0516441031b9cc476f0ea68da4",
+            "values": [
+              1237,
+              1512,
+              980,
+              2016,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              3245,
+              3504,
+              3790,
+              4071,
+              980,
+              466,
+              3791
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-0-12",
+              "field": "ramp",
+              "component": 0,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "28d92113b0347b661ae39ee76f0092512a0a522b9235a30b1f64b88c9335e0d3",
+            "values": [
+              1357,
+              1665,
+              1341,
+              1528,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              714,
+              774,
+              1255,
+              1646,
+              1341,
+              1309,
+              1260
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-0-24",
+              "field": "ramp",
+              "component": 0,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "1a0ae55fc852ac07b6b358e0fc043421fa7d87059dd898831fd4126d8b9199b7",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-1-0",
+              "field": "ramp",
+              "component": 1,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "0f6c0b913b355f16c23b793411ec063094ff2764408121be16915e17bea1944d",
+            "values": [
+              2771,
+              1512,
+              1739,
+              2016,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              176,
+              1203,
+              3213,
+              4071,
+              2512,
+              1973,
+              663
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-1-12",
+              "field": "ramp",
+              "component": 1,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "f63ec48d4a60b61907fa8ed2961b2120af1bde1c78479eb508f5b5b77e6b40a8",
+            "values": [
+              1328,
+              1665,
+              1195,
+              1528,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2811,
+              2869,
+              206,
+              1646,
+              1272,
+              851,
+              366
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-1-24",
+              "field": "ramp",
+              "component": 1,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "8225f50650eac002d513da2f1c0f999b5adf3091291f49f6bccbe3d4ef20bd6b",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-2-0",
+              "field": "ramp",
+              "component": 2,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "606cab581615c37f7a15f099654b5c4049ab5a9ba1a54e2455b4cb5639a86fe2",
+            "values": [
+              2771,
+              1512,
+              1739,
+              2016,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              176,
+              1203,
+              3213,
+              4071,
+              2512,
+              1973,
+              663
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-2-12",
+              "field": "ramp",
+              "component": 2,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "1cff24977feb819077135eb60a7810650ad4dcc70941c974159446011c80f2a2",
+            "values": [
+              1328,
+              1665,
+              1195,
+              1528,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2811,
+              2869,
+              206,
+              1646,
+              1272,
+              851,
+              366
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-2-24",
+              "field": "ramp",
+              "component": 2,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "f752e7a953c3eaf93ae7bfdb14685b5e2685883964cbf53b4c9cf27d10b42a57",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-3-0",
+              "field": "ramp",
+              "component": 3,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "1cac5fc3719178d167b5d669f4ff9513831ed61da1b39b2b7dc0c00b9fdfa570",
+            "values": [
+              2707,
+              2990,
+              908,
+              418,
+              3060,
+              1509,
+              2542,
+              3048,
+              4080,
+              3815,
+              484,
+              3819,
+              1257,
+              3313,
+              998,
+              738,
+              1514,
+              2535,
+              1000,
+              2789,
+              1000,
+              3550,
+              1509,
+              3558,
+              3261,
+              2242,
+              691,
+              3500,
+              2704,
+              3316,
+              2755
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-3-12",
+              "field": "ramp",
+              "component": 3,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "1be534b0440bdfe374e6e225084d6026b3ac3edf99ced2467019fe3a5fc9f69d",
+            "values": [
+              300,
+              733,
+              189,
+              543,
+              1850,
+              1622,
+              1759,
+              1669,
+              1788,
+              1653,
+              1595,
+              1717,
+              1677,
+              1802,
+              1631,
+              1574,
+              1695,
+              1655,
+              1669,
+              1611,
+              1657,
+              1507,
+              1623,
+              1630,
+              971,
+              1049,
+              2871,
+              699,
+              260,
+              3908,
+              3125
+            ]
+          },
+          {
+            "case": {
+              "name": "ramp-3-24",
+              "field": "ramp",
+              "component": 3,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "b686cb98e55eb638d8130319d4406cdddca525ba3980a3c2edfcafcbc9fb9bff",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              63,
+              63,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-0-0",
+              "field": "uv",
+              "component": 0,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "8737784780359f3a24638af3e85a3ca4eef54cd313d8ac6945625be3a76fd0a7",
+            "values": [
+              3132,
+              1760,
+              1037,
+              2085,
+              3160,
+              3982,
+              1557,
+              2478,
+              49,
+              3122,
+              1728,
+              2582,
+              1576,
+              3624,
+              1750,
+              4080,
+              1440,
+              2400,
+              1599,
+              2722,
+              1416,
+              3980,
+              2068,
+              934,
+              74,
+              2900,
+              4018,
+              2176,
+              3312,
+              1663,
+              1544
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-0-12",
+              "field": "uv",
+              "component": 0,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "aab468c603c7d6f7daac97a40ec6da6b2550fe44ffd43362b4161c42eaa11f53",
+            "values": [
+              1177,
+              1385,
+              1122,
+              1298,
+              1941,
+              1827,
+              1896,
+              1851,
+              1911,
+              1843,
+              1814,
+              1875,
+              1855,
+              1917,
+              1832,
+              1803,
+              1864,
+              1844,
+              1851,
+              1822,
+              1845,
+              1770,
+              1828,
+              1832,
+              384,
+              393,
+              722,
+              1368,
+              1157,
+              981,
+              786
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-0-24",
+              "field": "uv",
+              "component": 0,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "1150d12f8f4dd32b425846714b98c7e53a86980cd971b34a5f9e97daf0ba0d97",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-1-0",
+              "field": "uv",
+              "component": 1,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "a57522d84caf41ea23f30c6730d25b72797ed0c02f1bc72bdca7dd7182223b47",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-1-12",
+              "field": "uv",
+              "component": 1,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "aa89eda3e14149c02bbe56fea43b128c189ab6a74df47e9f8c61b8d49ed80e36",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "case": {
+              "name": "uv-1-24",
+              "field": "uv",
+              "component": 1,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "c81d78b8e312e0e7ddac6a1573007161c9f16d69dc510b29aecfecf8721997ad",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          }
+        ],
+        "samplers": [
+          {
+            "object": "ResourceId::152",
+            "address": [
+              "AddressMode.ClampBorder",
+              "AddressMode.ClampBorder",
+              "AddressMode.ClampBorder"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 0,
+            "array_element": 0
+          }
+        ],
+        "declaredResources": [
+          {
+            "name": "baseColorTexture",
+            "binding": 1,
+            "index": 0
+          },
+          {
+            "name": "normalTexture",
+            "binding": 2,
+            "index": 1
+          },
+          {
+            "name": "metallicRoughnessTexture",
+            "binding": 3,
+            "index": 2
+          },
+          {
+            "name": "environmentTexture",
+            "binding": 4,
+            "index": 3
+          },
+          {
+            "name": "specularEmissiveTexture",
+            "binding": 5,
+            "index": 4
+          },
+          {
+            "name": "styleMaskTexture",
+            "binding": 6,
+            "index": 5
+          },
+          {
+            "name": "matcapTexture",
+            "binding": 7,
+            "index": 6
+          },
+          {
+            "name": "hairDataTexture",
+            "binding": 8,
+            "index": 7
+          },
+          {
+            "name": "mainShadowDepth",
+            "binding": 9,
+            "index": 8
+          },
+          {
+            "name": "toonRampTexture",
+            "binding": 11,
+            "index": 9
+          },
+          {
+            "name": "faceSdfTexture",
+            "binding": 12,
+            "index": 10
+          },
+          {
+            "name": "overlaySceneDepth",
+            "binding": 18,
+            "index": 11
+          },
+          {
+            "name": "opaqueSceneColor",
+            "binding": 19,
+            "index": 12
+          },
+          {
+            "name": "reflectionProbeTexture",
+            "binding": 23,
+            "index": 13
+          },
+          {
+            "name": "shadowColorLutTexture",
+            "binding": 25,
+            "index": 14
+          },
+          {
+            "name": "objectShadowDepth",
+            "binding": 29,
+            "index": 15
+          }
+        ],
+        "resources": [
+          {
+            "index": 0,
+            "arrayElement": 0,
+            "resource": "ResourceId::752",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 1,
+            "arrayElement": 0,
+            "resource": "ResourceId::635",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 2,
+            "arrayElement": 0,
+            "resource": "ResourceId::648",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 3,
+            "arrayElement": 0,
+            "resource": "ResourceId::934",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 4,
+            "arrayElement": 0,
+            "resource": "ResourceId::343",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 5,
+            "arrayElement": 0,
+            "resource": "ResourceId::765",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 6,
+            "arrayElement": 0,
+            "resource": "ResourceId::778",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 7,
+            "arrayElement": 0,
+            "resource": "ResourceId::791",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 8,
+            "arrayElement": 0,
+            "resource": "ResourceId::149",
+            "format": "D32"
+          },
+          {
+            "index": 9,
+            "arrayElement": 0,
+            "resource": "ResourceId::982",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 10,
+            "arrayElement": 0,
+            "resource": "ResourceId::804",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 11,
+            "arrayElement": 0,
+            "resource": "ResourceId::1044",
+            "format": "R32_FLOAT"
+          },
+          {
+            "index": 12,
+            "arrayElement": 0,
+            "resource": "ResourceId::1041",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 13,
+            "arrayElement": 0,
+            "resource": "ResourceId::968",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 14,
+            "arrayElement": 0,
+            "resource": "ResourceId::817",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 15,
+            "arrayElement": 0,
+            "resource": "ResourceId::1167",
+            "format": "D16"
+          }
+        ],
+        "rampTexture": {
+          "resource": "ResourceId::765",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "shaderName": "styleMaskTexture",
+          "bytes": 1024,
+          "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+        },
+        "sourceControlQualified": true,
+        "controlSha256": "5ee2fcf833c8d1c2363c26aa87ad4c092c6c3895bd2c086228fa1b3a3c4d2abf",
+        "baselineRestored": true,
+        "debugMessages": []
+      }
+    ]
+  },
+  "scope": "Actual main diffuse-ramp read and exact sampling coordinates, with full-crop blue qualification and per-invocation seen/consistency flags. CPU address models are diagnostic predictions; shader output remains authoritative.",
+  "largeChromaStableMaterialGroup": {
+    "points": 20,
+    "rampExactPoints": 19,
+    "maximumUvAbsolute": 2.205371856689453e-06
+  },
+  "coordinateGlobals": {
+    "cb121": [
+      0.14726203680038452,
+      0.5299192667007446,
+      0.8351643085479736,
+      0.0
+    ],
+    "cb122": [
+      1.0,
+      1.0,
+      1.0,
+      0.0
+    ],
+    "sourceSha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "seconds": 181.64100000000326,
+    "source": "shared_resources.py guarded command result"
+  },
+  "archiveFiles": [
+    {
+      "name": "analyze.py",
+      "bytes": 3708,
+      "sha256": "9bdce12d2194a9d5522d30fce9576c84ed754a25d6b25f7fa63353e99616b898"
+    },
+    {
+      "name": "budget.json",
+      "bytes": 434,
+      "sha256": "2449f95e60890c4e5d1fc7a61957e6892c023e1553e2c10d9c204d7a9eb51ccd"
+    },
+    {
+      "name": "cases.json",
+      "bytes": 2109,
+      "sha256": "08fb5b4926a677f5f059bc6eac8fbb488a53606f1cc582aa2cc895c2b6dc7fba"
+    },
+    {
+      "name": "checksum-source.json",
+      "bytes": 464,
+      "sha256": "1d39ff44c3da8c2a736d607211bf6fb3614425895c7b8b94d52c268a49e04907"
+    },
+    {
+      "name": "collect.py",
+      "bytes": 6405,
+      "sha256": "98a26a0b094872dd4fdbaee306bb262fe82724dd1c9c85e1c3cf6cc7b51c0b73"
+    },
+    {
+      "name": "D3D12TokenizedProgramFormat.hpp",
+      "bytes": 130378,
+      "sha256": "5862ef7c8b819f0d02ba73563a9df4dc0e89f11fe59d8f598def39122273c626"
+    },
+    {
+      "name": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dxbc_util.py",
+      "bytes": 3858,
+      "sha256": "fe1a625c044318c64372608b635dc677dd75aff9c7556fa097656cb0d6f16376"
+    },
+    {
+      "name": "header-source.json",
+      "bytes": 420,
+      "sha256": "76a466942d51c360b1264e5b81c27e84c4696b5a3ffbbdec39d9b835d5487c2b"
+    },
+    {
+      "name": "LICENSE-RenderDoc.txt",
+      "bytes": 1336,
+      "sha256": "108b3bbf970884d6449b774c0516712c3c6d3f9d3d181a1d2580a2c2cd308db7"
+    },
+    {
+      "name": "native-original.shader",
+      "bytes": 67836,
+      "sha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee"
+    },
+    {
+      "name": "native-output-control.dxbc",
+      "bytes": 67916,
+      "sha256": "41008c80fd7d1bd278f1f8096ac1466f2989472de01f382922d968f5ec8b71bb"
+    },
+    {
+      "name": "native-ramp-top-mip.bin",
+      "bytes": 1024,
+      "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+    },
+    {
+      "name": "native-source.shader",
+      "bytes": 67836,
+      "sha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee"
+    },
+    {
+      "name": "native-stored-baseline.zlib",
+      "bytes": 150197,
+      "sha256": "d9422dbf4eb42766c1d536741ce574e2c6a871ed722ffc5107e42ec6b1cbcb0e"
+    },
+    {
+      "name": "prepare.py",
+      "bytes": 8343,
+      "sha256": "ab3750d52ec73022b217023e7feb7aadf5ac9a59ecbd3e5f0fa70ed71c311ba3"
+    },
+    {
+      "name": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ramp-0-0.dxbc",
+      "bytes": 68164,
+      "sha256": "42a8b3d29f754dc6d983f21d5f6364db98d00d8fd55162d7c2f85c1eab372a12"
+    },
+    {
+      "name": "ramp-0-0.spv",
+      "bytes": 472288,
+      "sha256": "1f0bc72d7b539e52cbc3663a8ecc7e9d0d330a0516441031b9cc476f0ea68da4"
+    },
+    {
+      "name": "ramp-0-12.dxbc",
+      "bytes": 68164,
+      "sha256": "8d0ed147c00cd912851f3a5c9c2fdc22c6993cfdafd8360c4fd176b74ef1b98c"
+    },
+    {
+      "name": "ramp-0-12.spv",
+      "bytes": 472288,
+      "sha256": "28d92113b0347b661ae39ee76f0092512a0a522b9235a30b1f64b88c9335e0d3"
+    },
+    {
+      "name": "ramp-0-24.dxbc",
+      "bytes": 68248,
+      "sha256": "21645312f9fe6df0ea25704536d9e25067bc83295d61f7499ec62781835bcecf"
+    },
+    {
+      "name": "ramp-0-24.spv",
+      "bytes": 472428,
+      "sha256": "1a0ae55fc852ac07b6b358e0fc043421fa7d87059dd898831fd4126d8b9199b7"
+    },
+    {
+      "name": "ramp-1-0.dxbc",
+      "bytes": 68164,
+      "sha256": "ea992c75c8efdf09df51fb3e5dde2f1e9d53fb17db75396231fc0f65fdb6502d"
+    },
+    {
+      "name": "ramp-1-0.spv",
+      "bytes": 472288,
+      "sha256": "0f6c0b913b355f16c23b793411ec063094ff2764408121be16915e17bea1944d"
+    },
+    {
+      "name": "ramp-1-12.dxbc",
+      "bytes": 68164,
+      "sha256": "ebea877125a0a3aea7f0c5625351bc6a24372520c9b9747efaf592582f1ec4eb"
+    },
+    {
+      "name": "ramp-1-12.spv",
+      "bytes": 472288,
+      "sha256": "f63ec48d4a60b61907fa8ed2961b2120af1bde1c78479eb508f5b5b77e6b40a8"
+    },
+    {
+      "name": "ramp-1-24.dxbc",
+      "bytes": 68248,
+      "sha256": "491450e81261fe6a72b4737158e99b92b89c8b31d9236a9f82afedc03247742c"
+    },
+    {
+      "name": "ramp-1-24.spv",
+      "bytes": 472428,
+      "sha256": "8225f50650eac002d513da2f1c0f999b5adf3091291f49f6bccbe3d4ef20bd6b"
+    },
+    {
+      "name": "ramp-2-0.dxbc",
+      "bytes": 68164,
+      "sha256": "fc50a358aee8b11d6307e5e2f259e80670cd2ae1ce92814b8c283706674cbce6"
+    },
+    {
+      "name": "ramp-2-0.spv",
+      "bytes": 472288,
+      "sha256": "606cab581615c37f7a15f099654b5c4049ab5a9ba1a54e2455b4cb5639a86fe2"
+    },
+    {
+      "name": "ramp-2-12.dxbc",
+      "bytes": 68164,
+      "sha256": "6e3baccde71819425a9e72d88181944cb10dfd63ef554598bb1ed836bd8faf43"
+    },
+    {
+      "name": "ramp-2-12.spv",
+      "bytes": 472288,
+      "sha256": "1cff24977feb819077135eb60a7810650ad4dcc70941c974159446011c80f2a2"
+    },
+    {
+      "name": "ramp-2-24.dxbc",
+      "bytes": 68248,
+      "sha256": "569dfd2545888eb7e662206ef9c9b4628abbc5cfb4f7fc0ec9560f76a1b85965"
+    },
+    {
+      "name": "ramp-2-24.spv",
+      "bytes": 472428,
+      "sha256": "f752e7a953c3eaf93ae7bfdb14685b5e2685883964cbf53b4c9cf27d10b42a57"
+    },
+    {
+      "name": "ramp-3-0.dxbc",
+      "bytes": 68164,
+      "sha256": "0eac536105f1c4101b76fc233410d6e2ed3123d2335d7e2dba79924d5112d5c9"
+    },
+    {
+      "name": "ramp-3-0.spv",
+      "bytes": 472288,
+      "sha256": "1cac5fc3719178d167b5d669f4ff9513831ed61da1b39b2b7dc0c00b9fdfa570"
+    },
+    {
+      "name": "ramp-3-12.dxbc",
+      "bytes": 68164,
+      "sha256": "da80318a604d2915f66ac205bbfb14c709e53e74fce2f18d0c160672d37a06e3"
+    },
+    {
+      "name": "ramp-3-12.spv",
+      "bytes": 472288,
+      "sha256": "1be534b0440bdfe374e6e225084d6026b3ac3edf99ced2467019fe3a5fc9f69d"
+    },
+    {
+      "name": "ramp-3-24.dxbc",
+      "bytes": 68248,
+      "sha256": "a7f4eca727bbe0e058deb28d38d5f361b5d7dbf6e555fa6f8e7c429a98755d03"
+    },
+    {
+      "name": "ramp-3-24.spv",
+      "bytes": 472428,
+      "sha256": "b686cb98e55eb638d8130319d4406cdddca525ba3980a3c2edfcafcbc9fb9bff"
+    },
+    {
+      "name": "results.json",
+      "bytes": 90047,
+      "sha256": "6e4fe65107c33ff07279b5ebe9c9cf24baf83bc23448479d4f48cf44b424766f"
+    },
+    {
+      "name": "run.py",
+      "bytes": 969,
+      "sha256": "934357bd34bed69b95311bdd9bc5cd2e9159ec67097ecdd06ae1899a999490bf"
+    },
+    {
+      "name": "state.json",
+      "bytes": 49348,
+      "sha256": "07ad9c49438fd32a5dd729019aede7f2a60f54600558852d41132350533bec8d"
+    },
+    {
+      "name": "uv-0-0.dxbc",
+      "bytes": 68164,
+      "sha256": "831d5213cbf6b2c3960a122afe3f28a65e388fc8fdf4e38d37bba91c96e9c5db"
+    },
+    {
+      "name": "uv-0-0.spv",
+      "bytes": 472288,
+      "sha256": "8737784780359f3a24638af3e85a3ca4eef54cd313d8ac6945625be3a76fd0a7"
+    },
+    {
+      "name": "uv-0-12.dxbc",
+      "bytes": 68164,
+      "sha256": "93c8628e3433cea845027886a23ab6414ab7bb00b36f35819aa1b21b510e55e3"
+    },
+    {
+      "name": "uv-0-12.spv",
+      "bytes": 472288,
+      "sha256": "aab468c603c7d6f7daac97a40ec6da6b2550fe44ffd43362b4161c42eaa11f53"
+    },
+    {
+      "name": "uv-0-24.dxbc",
+      "bytes": 68248,
+      "sha256": "991a7daa497d07d15762941d6795d235f69e0046f496c64bd9075452f39f9fd8"
+    },
+    {
+      "name": "uv-0-24.spv",
+      "bytes": 472428,
+      "sha256": "1150d12f8f4dd32b425846714b98c7e53a86980cd971b34a5f9e97daf0ba0d97"
+    },
+    {
+      "name": "uv-1-0.dxbc",
+      "bytes": 68164,
+      "sha256": "4193009a356a4e9f7f1ed59707b72aa9084b1e43bb02ba362d4017784b577bbe"
+    },
+    {
+      "name": "uv-1-0.spv",
+      "bytes": 472288,
+      "sha256": "a57522d84caf41ea23f30c6730d25b72797ed0c02f1bc72bdca7dd7182223b47"
+    },
+    {
+      "name": "uv-1-12.dxbc",
+      "bytes": 68164,
+      "sha256": "95a2cef9ff2895bd1a72878c318bd05000a98419d3055f1e5aef0034a17eb2f4"
+    },
+    {
+      "name": "uv-1-12.spv",
+      "bytes": 472288,
+      "sha256": "aa89eda3e14149c02bbe56fea43b128c189ab6a74df47e9f8c61b8d49ed80e36"
+    },
+    {
+      "name": "uv-1-24.dxbc",
+      "bytes": 68248,
+      "sha256": "0ee5a1b35636eb0b1be9da57d8de200558051b7aad5c113c3c2d0d9dbddc0f48"
+    },
+    {
+      "name": "uv-1-24.spv",
+      "bytes": 472428,
+      "sha256": "c81d78b8e312e0e7ddac6a1573007161c9f16d69dc510b29aecfecf8721997ad"
+    },
+    {
+      "name": "vulkan-ramp-top-mip.bin",
+      "bytes": 1024,
+      "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+    },
+    {
+      "name": "vulkan-source.shader",
+      "bytes": 346352,
+      "sha256": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca"
+    },
+    {
+      "name": "vulkan-stored-baseline.zlib",
+      "bytes": 281493,
+      "sha256": "c7ffde423b4cc9dfed702725bcc9b8cad608aadbbb6de97fa604a560163a38a0"
+    },
+    {
+      "name": "source-template.spvasm",
+      "bytes": 1641952,
+      "sha256": "00f56622f1905491e9f8eb3f64433175492ff1e3ee8f0393f1bfecb5972faa3c"
+    },
+    {
+      "name": "support/renderdoc_replay.py",
+      "bytes": 12198,
+      "sha256": "154afc333de5c59aa8b2ca16a2cb060a211cdfefbbccf7fa262808236ce6f8fa"
+    },
+    {
+      "name": "support/renderdoc_capture.py",
+      "bytes": 9029,
+      "sha256": "cdb3af5755f89cd7eb1e1b4f255044fda0388dc89b0feeb02e567a25c9d40ffb"
+    }
+  ],
+  "archiveBytes": 3471643,
+  "archiveSha256": "c2d4f9447c3ad1099ac204b69967a74c980359d7d2c376e063c42664b69564aa"
+}
