@@ -69,6 +69,8 @@ Intel 保留 120 处超差，最大为 33 字节。
 5592405 个纹素的 RGB 逐通道一致。
 [实际基色取样](../acceptance/nr/hair-base-sample-region.md)完成 31 个剩余位置的全位核对。
 27 个位置逐位一致，四处取样差异继续定位。
+[参数及双法线](../acceptance/nr/hair-material-sample-region.md)完成 48 个版本的资格核对。
+参数图有 25 处逐位一致，六处取样差异继续定位。
 
 ## 后续外观
 
