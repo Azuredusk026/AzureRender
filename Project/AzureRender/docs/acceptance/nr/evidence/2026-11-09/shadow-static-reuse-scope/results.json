@@ -1,0 +1,37 @@
+{
+  "status": "scope-only-not-implemented",
+  "sourceCaptureSha256": "5cbfc0ecf9fa24a7a8d8949ed54c3fc3691b7a1a58075d68f63f257b34ca6942",
+  "sourceProfileSha256": "aa2365b0709bb213bb349d210a03a6b001cea4ed61be4b3a3483b830335f03f5",
+  "sourceExtent": [
+    1280,
+    720
+  ],
+  "historicalSource": "35cc28f",
+  "groups": [
+    {
+      "renderPass": "ResourceId::10290",
+      "events": 16,
+      "eventMilliseconds": 0.09830399999999999,
+      "firstEvent": 12366,
+      "lastEvent": 12416
+    },
+    {
+      "renderPass": "ResourceId::149",
+      "events": 1103,
+      "eventMilliseconds": 1.220607999999996,
+      "firstEvent": 7073,
+      "lastEvent": 12348
+    }
+  ],
+  "allShadowDrawMs": 1.3189119999999959,
+  "totalReplayEventMs": 16.609375999999987,
+  "staticFractionMeasured": false,
+  "currentProductionCostMeasured": false,
+  "newGpuTimingProcesses": 0,
+  "newNativeProcesses": 0,
+  "newFullAssetCopies": 0,
+  "reason": "Atlas generation event total is an upper bound; static fraction and current invalidation reuse are unknown. Shadow evaluation ablation is a separate cost and cannot be credited to atlas caching.",
+  "next": "Obtain qualified actual native receiver intermediate values for outstanding image errors.",
+  "formalPerformancePassed": false,
+  "overallVisualAcceptance": "failed-user-review"
+}

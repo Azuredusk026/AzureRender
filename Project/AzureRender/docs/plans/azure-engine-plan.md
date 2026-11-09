@@ -32,8 +32,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
-后续继续评估阴影图静态部分的重复生成成本。
-先核对动态失效范围及工作量，再决定是否启动实现与集中验证。
+[静态阴影范围](../acceptance/nr/shadow-static-reuse-scope.md)核定历史生成成本上界约为 1.32 毫秒。
+动态失效与静态比例仍待核对，机制保持提案。
+后续先取得剩余原生接收误差的合格 GPU 中间值。
 
 阴影接收面的[入口计算](../acceptance/nr/shadow-receiver-entry.md)已接入生产。
 原 Intel 零历史用例及十六项双设备、双配置检查通过，四帧保持 RGB 零像素差。
