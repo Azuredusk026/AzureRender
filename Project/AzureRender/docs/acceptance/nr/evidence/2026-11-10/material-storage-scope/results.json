@@ -1,0 +1,138 @@
+{
+  "exitCode": 0,
+  "seconds": 107.06199999997625,
+  "validationClean": true,
+  "allocatorZero": true,
+  "sourceUnchanged": true,
+  "programsUnchanged": true,
+  "projectInputsUnchanged": true,
+  "nativeImageCaptures": 0,
+  "wholeFrameTimingRuns": 0,
+  "materialImageStorage": {
+    "uniqueTextures": 385,
+    "equivalentImages": 381,
+    "residentBytes": 2155557400,
+    "samplerVariantDuplicateBytes": 3136,
+    "samplerVariantDuplicateRetainedBytes": 3136,
+    "counterResidentBytes": 2155557400
+  },
+  "formatResidentBytes": {
+    "43": 933172756,
+    "37": 1222384644
+  },
+  "status": "scope-complete-no-cache-admission",
+  "baselineCommit": "3494eb6",
+  "restoredPlayerText": {
+    "baselineTextSha256": "382525740e5d267b5bfb6ab85d15ba0b40350d3b0c32078620909bf20d6caffa",
+    "restoredTextSha256": "382525740e5d267b5bfb6ab85d15ba0b40350d3b0c32078620909bf20d6caffa",
+    "identical": true
+  },
+  "restoredSource": true,
+  "bothConfigurationsProvenanceVerified": true,
+  "residentProgramsUnchanged": true,
+  "protectedFilesUnchanged": 13,
+  "diagnosticCacheCases": 8,
+  "restoredCacheCases": 8,
+  "archive": {
+    "name": "validation.zip",
+    "bytes": 425637,
+    "sha256": "63493838f624ddb06637b39da1a7e3bee8e98deb56d6ff408470535c24341210"
+  },
+  "members": [
+    {
+      "name": "SampledTextureCache.cpp.baseline",
+      "bytes": 9630,
+      "sha256": "8647786bb1cbbd6b3d4a393d34c7d56a062ca043d74066b95ae76aa2eca194bb"
+    },
+    {
+      "name": "SampledTextureCache.cpp.diagnostic",
+      "bytes": 11734,
+      "sha256": "45aeb4030f79f5c3c94d0274835eff289ec9e6b286f25533aa5a38b33f08498b"
+    },
+    {
+      "name": "baseline-programs.json",
+      "bytes": 152349,
+      "sha256": "de10086a60c4fcc2ae96cba67ba3c68f39b83e0be44192b00f35bab42c9bd429"
+    },
+    {
+      "name": "baseline-source.json",
+      "bytes": 189339,
+      "sha256": "2d9aba691726358a896a2f63c752fa2c74fe8d5d12725916855b505b88712975"
+    },
+    {
+      "name": "build.py",
+      "bytes": 1989,
+      "sha256": "018bea9dc0cd94e4ea9171eefe92c5e62744d12b5c5a62f941dc3f59ed73e8de"
+    },
+    {
+      "name": "command.json",
+      "bytes": 713,
+      "sha256": "0371816c0fd16b89eac90e96a689dedc20cdd8bff10b5be9a41ba07bcebf2041"
+    },
+    {
+      "name": "diagnostic-build-provenance.json",
+      "bytes": 412489,
+      "sha256": "565097a15d4b7482fd5ac174ab903cae79101b69182bf0a08d210da45398863d"
+    },
+    {
+      "name": "diagnostic-build.log",
+      "bytes": 1924,
+      "sha256": "a350c815645bb258ae6ec6a9adb98e931c8cc6c64ba8079807970fe53ddc3037"
+    },
+    {
+      "name": "diagnostic-cache-tests.log",
+      "bytes": 290,
+      "sha256": "d20e2c80e8b9b2669cc5760e6d7da0ba583dc6f3ee66be9c19db2b9b6779cd67"
+    },
+    {
+      "name": "native.log",
+      "bytes": 47850,
+      "sha256": "f94d854e86a869691a437edcbe993b1e15c866ee076eb5a336e08a3e2e11dcb0"
+    },
+    {
+      "name": "patch.py",
+      "bytes": 2999,
+      "sha256": "f8fd091b437f7f9d300bd3f776aaeeb3fd1820cb258296c427fe90ae416742b3"
+    },
+    {
+      "name": "restore-build-provenance.json",
+      "bytes": 412489,
+      "sha256": "d735fa9e533188d80d48e74ff8db684cc505a6378dfaa3ddf6cb1995e01929ab"
+    },
+    {
+      "name": "restore-build.log",
+      "bytes": 1713,
+      "sha256": "66cd3164af148f2c50dee55efb99586119d0585d68fe4d6bc4cbd509f3564329"
+    },
+    {
+      "name": "restore-cache-tests.log",
+      "bytes": 290,
+      "sha256": "d20e2c80e8b9b2669cc5760e6d7da0ba583dc6f3ee66be9c19db2b9b6779cd67"
+    },
+    {
+      "name": "restored-player-code.json",
+      "bytes": 211,
+      "sha256": "b646066fdb6669c7ad0c1a6fd9db2c7499757eee2d1cec59b26a813c07e0ff75"
+    },
+    {
+      "name": "results.json",
+      "bytes": 204570,
+      "sha256": "b937d92f240d98722da44a88386076a6c11a0dcaa68072f904359d17646d0955"
+    },
+    {
+      "name": "run.py",
+      "bytes": 3770,
+      "sha256": "c3130e88eaabe5b15069562d94607e38cd4a2d86d73d00be53a608399d2e3578"
+    },
+    {
+      "name": "runtime.json",
+      "bytes": 317973,
+      "sha256": "6a81011722ad2092c43404c4777fd2f08e788c200bd8d33eeab66e749cb6ec03"
+    },
+    {
+      "name": "source-change.json",
+      "bytes": 275,
+      "sha256": "3fc85dddadd60973a22015e52728c6b12b89c5d49712d2d1eae9ee9089db1a78"
+    }
+  ]
+}
