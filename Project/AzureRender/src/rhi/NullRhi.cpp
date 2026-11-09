@@ -59,11 +59,11 @@ GpuBuffer NullGpuAllocator::createBuffer(
     const VkDeviceSize size,
     const VkBufferUsageFlags usage,
     const bool hostVisible) {
-    (void)usage;
     (void)hostVisible;
     GpuBuffer result;
     result.buffer = fakeHandle<VkBuffer>(nextHandle_++);
     result.size = size;
+    result.usage=usage;
     hostBlocks_.emplace_back(static_cast<std::size_t>(size));
     result.mapped = hostBlocks_.back().data();
     ++statistics_.bufferAllocations;

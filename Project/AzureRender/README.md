@@ -11,6 +11,7 @@
 [程序代次缓存](docs/acceptance/nr/bounded-development-cache.md)的当前载荷约为 26.04 MiB，全部代次共用原容量上限。
 原生暖启动的 645 次创建全部命中，受管 SDK 缓存位于 D 盘任务内。
 图像加载通过[缓冲所有权](docs/acceptance/nr/owned-image-conversion.md)转移八位像素，两配置的格式、共享及保存重开检查通过。
+[缓冲类型统计](docs/acceptance/nr/buffer-memory-properties.md)记录真实选定属性，当前原生可映射 GPU 用途的非本地子集为零。
 照明复用的[接收面核对](docs/acceptance/nr/radiance-receiver-entry.md)保存入口位置与图像来源。
 阴影圆盘的[局部成本](docs/acceptance/nr/shadow-disk-kernel.md)未形成收益，候选保持隔离。
 [权重分类](docs/acceptance/nr/shadow-disk-classification.md)通过百万组逐位核对，局部效率门槛未通过。

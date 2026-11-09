@@ -798,7 +798,14 @@ void AzureRenderApp::printGpuTimingSummary() const {
         << gpuAllocator_.statistics().imageBytes << ",\n"
         << "    \"liveBufferBytes\": " << gpuAllocator_.statistics().liveBufferBytes << ",\n"
         << "    \"liveImageBytes\": " << gpuAllocator_.statistics().liveImageBytes << ",\n"
-        << "    \"deviceLocalPeakBytes\": " << gpuAllocator_.statistics().deviceLocalPeakBytes << "\n"
+        << "    \"deviceLocalPeakBytes\": " << gpuAllocator_.statistics().deviceLocalPeakBytes << ",\n"
+        << "    \"bufferMemoryProperties\": {\n"
+        << "      \"samples\": " << gpuAllocator_.statistics().bufferMemoryPropertySamples << ",\n"
+        << "      \"liveDeviceLocalBytes\": " << gpuAllocator_.statistics().liveDeviceLocalBufferBytes << ",\n"
+        << "      \"liveNonDeviceLocalBytes\": " << gpuAllocator_.statistics().liveNonDeviceLocalBufferBytes << ",\n"
+        << "      \"liveMappedDeviceBytes\": " << gpuAllocator_.statistics().liveMappedDeviceBufferBytes << ",\n"
+        << "      \"liveMappedNonLocalDeviceBytes\": " << gpuAllocator_.statistics().liveMappedNonLocalDeviceBufferBytes << "\n"
+        << "    }\n"
         << "  },\n"
         << "  \"resourceFrames\": ";
     resourceFrameSamples_.write(output);
