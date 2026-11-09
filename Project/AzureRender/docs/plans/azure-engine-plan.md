@@ -38,6 +38,10 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 全部世界位置逐位一致，公共运行时接入及资源成本继续验收。
 [倒数压缩配置](../acceptance/nr/reciprocal-compact-profile.md)在两设备穷举全部尾数并逐位匹配。
 参考资源为 2 MiB，公共配置与运行时路径继续接入。
+[公共参考算术](../acceptance/nr/visibility-reference-arithmetic.md)完成主配置专项核对。
+双设备的 49384 个接收像素及 17017 个头发可见量像素均满足原门槛。
+构造拒绝、容量、失败释放及两种参考配置通过。
+双配置集成、当前场景深度及完整颜色继续验收。
 画质工作流按[专项计划](2026-11-09-native-quality.md)继续核对世界位置与完整头发。
 [头发归因](../acceptance/nr/hair-color-visibility-attribution.md)确认 42 处颜色误差受可见量影响。
 隔离来源控制仍有 31 处超差，生产颜色基线保留原 73 处待项。

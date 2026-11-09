@@ -463,6 +463,8 @@ public:
     virtual VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const {return VK_SAMPLE_COUNT_1_BIT;}
     virtual bool supportsSampleShading() const noexcept {return false;}
     virtual bool supportsExactDepthBias() const noexcept {return false;}
+    // Read-only storage buffers used by a fragment stage, including set capacity.
+    virtual bool supportsFragmentStorageBuffers(VkDeviceSize,std::uint32_t=1) const {return false;}
 };
 
 }  // namespace azurerender::rhi

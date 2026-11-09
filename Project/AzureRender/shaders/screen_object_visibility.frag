@@ -1,4 +1,6 @@
 #version 450
+#extension GL_GOOGLE_include_directive : require
+#include "float32_reference.glsl"
 struct ObjectRecord {mat4 projection;vec4 lightBias;vec4 normalFilter;vec4 rect;};
 layout(binding=0,std140) uniform Parameters {
     mat4 clipToWorld;vec4 reconstruction;uvec4 control;ObjectRecord records[8];
@@ -7,6 +9,7 @@ layout(binding=1) uniform sampler2D deviceDepth;
 layout(binding=2) uniform sampler2D octNormals;
 layout(binding=3) uniform usampler2D objectIds;
 layout(binding=4) uniform sampler2D objectAtlas;
+layout(binding=5,std430) readonly buffer Arithmetic {uint corrections[];} arithmetic;
 layout(location=0) out vec2 visibility;
 const uvec4 disk[16]=uvec4[16](
     uvec4(3201081267u,1063955090u,3211864058u,3201061344u),uvec4(1040121934u,3212706305u,1064440302u,3208959771u),
@@ -18,12 +21,28 @@ const uvec4 disk[16]=uvec4[16](
     uvec4(3191700082u,3212547147u,3195515288u,1065303976u),uvec4(3211725472u,1052196876u,3209717972u,1063916682u),
     uvec4(3212796835u,1032676071u,1045209904u,1061769832u),uvec4(1050459336u,1064547749u,1041451160u,3188745312u));
 bool finite3(vec3 v){return !any(isnan(v))&&!any(isinf(v));}
+
+float referenceReciprocal(float value){
+    uint bits=floatBitsToUint(value),exponent=(bits>>23u)&255u;
+    // Profile scaling covers normal operands whose reciprocal is normal.
+    if(exponent==0u||exponent>252u)return 1.0/value;
+    uint index=bits&0x7fffffu;
+    uint code=(arithmetic.corrections[index>>4u]>>((index&15u)*2u))&3u;
+    uint normalized=float32ProfileReciprocalBits(index,code)^(bits&0x80000000u);
+    return ldexp(uintBitsToFloat(normalized),127-int(exponent));
+}
 float reversedTexel(ivec2 p,ivec2 lo,ivec2 hi){
     if(any(lessThan(p,lo))||any(greaterThanEqual(p,hi)))return 0;
     float depth=texelFetch(objectAtlas,p,0).r;return frame.control.z!=0u?1-depth:depth;
 }
 vec4 reversedGather(vec2 uv,ivec2 lo,ivec2 hi){
     ivec2 p=ivec2(floor(uv*vec2(textureSize(objectAtlas,0))-.5));
+    if((frame.control.y&2u)!=0u){
+        vec2 extent=vec2(textureSize(objectAtlas,0));
+        precise vec2 coordinate=uv*extent-.5;
+        p=ivec2(floor(roundEven(coordinate*256.0)/256.0));
+        uv=(vec2(p)+1.0)/extent;
+    }
     if(all(greaterThanEqual(p,lo))&&all(lessThan(p+1,hi))){
         vec4 depth=textureGather(objectAtlas,uv);return frame.control.z!=0u?1-depth:depth;
     }
@@ -33,10 +52,23 @@ void main(){
     visibility=vec2(1);ivec2 pixel=ivec2(gl_FragCoord.xy);uint identity=texelFetch(objectIds,pixel,0).r;
     if(identity==0u||identity>frame.control.x)return;
     float depth=texelFetch(deviceDepth,pixel,0).r;if(isnan(depth)||isinf(depth)||depth<0||depth>1)return;
-    vec2 ndc=fma((vec2(pixel)+frame.reconstruction.zw)*frame.reconstruction.xy,vec2(2),vec2(-1));
-    vec4 h=fma(frame.clipToWorld[0],vec4(ndc.x),(frame.control.y!=0u?-ndc.y:ndc.y)*frame.clipToWorld[1]);
-    h=fma(frame.clipToWorld[2],vec4(depth),h);h+=frame.clipToWorld[3];
-    if(isnan(h.w)||isinf(h.w)||abs(h.w)<1e-20)return;vec3 world=h.xyz/h.w;if(!finite3(world))return;
+    vec3 world;
+    if((frame.control.y&2u)!=0u){
+        vec2 p=vec2(pixel)+frame.reconstruction.zw;
+        vec2 ndc=vec2(float32ReferenceFma(float32ReferenceFma(p.x,frame.reconstruction.x,0.0),2.0,-1.0),
+            float32ReferenceFma(float32ReferenceFma(p.y,frame.reconstruction.y,0.0),2.0,-1.0));
+        precise vec4 h=((frame.control.y&1u)!=0u?-ndc.y:ndc.y)*frame.clipToWorld[1];
+        h=fma(vec4(ndc.x),frame.clipToWorld[0],h);
+        h=fma(vec4(depth),frame.clipToWorld[2],h);h+=frame.clipToWorld[3];
+        if(isnan(h.w)||isinf(h.w)||abs(h.w)<1e-20)return;
+        precise vec3 position=h.xyz*referenceReciprocal(h.w);world=position;
+    }else{
+        vec2 ndc=fma((vec2(pixel)+frame.reconstruction.zw)*frame.reconstruction.xy,vec2(2),vec2(-1));
+        vec4 h=fma(frame.clipToWorld[0],vec4(ndc.x),(frame.control.y!=0u?-ndc.y:ndc.y)*frame.clipToWorld[1]);
+        h=fma(frame.clipToWorld[2],vec4(depth),h);h+=frame.clipToWorld[3];
+        if(isnan(h.w)||isinf(h.w)||abs(h.w)<1e-20)return;world=h.xyz/h.w;
+    }
+    if(!finite3(world))return;
     vec2 oct=fma(texelFetch(octNormals,pixel,0).xy,vec2(2),vec2(-1));vec3 normal=vec3(oct.x,1-dot(abs(oct),vec2(1)),oct.y);
     if(normal.y<0)normal.xz=(1-abs(oct.yx))*mix(vec2(-1),vec2(1),greaterThanEqual(oct,vec2(0)));
     normal*=inversesqrt(dot(normal,normal));
