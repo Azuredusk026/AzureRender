@@ -1,0 +1,2033 @@
+{
+  "status": "diagnostic-basis-source-control",
+  "rows": [
+    {
+      "name": "control",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 31,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.28477404947993185,
+      "resolvedOriginalFailures": 42,
+      "newOriginalFailures": 0,
+      "changedHairPixels": 0,
+      "changedOutsideTargetPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1306,
+            156
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1278,
+            163
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1313,
+            168
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1319,
+            172
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1267,
+            211
+          ],
+          "absoluteError": [
+            3,
+            2,
+            3
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            211
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            211
+          ],
+          "absoluteError": [
+            3,
+            3,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            211
+          ],
+          "absoluteError": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            213
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1269,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            214
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            215
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            216
+          ],
+          "absoluteError": [
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1264,
+            217
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            261
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            262
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "pixel": [
+            1380,
+            276
+          ],
+          "absoluteError": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            295
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            296
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            297
+          ],
+          "absoluteError": [
+            1,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "identity",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 31,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.28477404947993185,
+      "resolvedOriginalFailures": 42,
+      "newOriginalFailures": 0,
+      "changedHairPixels": 0,
+      "changedOutsideTargetPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1306,
+            156
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1278,
+            163
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1313,
+            168
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1319,
+            172
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1267,
+            211
+          ],
+          "absoluteError": [
+            3,
+            2,
+            3
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            211
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            211
+          ],
+          "absoluteError": [
+            3,
+            3,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            211
+          ],
+          "absoluteError": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            213
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1269,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            214
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            215
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            216
+          ],
+          "absoluteError": [
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1264,
+            217
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            261
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            262
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "pixel": [
+            1380,
+            276
+          ],
+          "absoluteError": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            295
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            296
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            297
+          ],
+          "absoluteError": [
+            1,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "normal",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 30,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.28475446122504944,
+      "resolvedOriginalFailures": 43,
+      "newOriginalFailures": 0,
+      "changedHairPixels": 1,
+      "changedOutsideTargetPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1278,
+            163
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1313,
+            168
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1319,
+            172
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1267,
+            211
+          ],
+          "absoluteError": [
+            3,
+            2,
+            3
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            211
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            211
+          ],
+          "absoluteError": [
+            3,
+            3,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            211
+          ],
+          "absoluteError": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            213
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1269,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            214
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            215
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            216
+          ],
+          "absoluteError": [
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1264,
+            217
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            261
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            262
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "pixel": [
+            1380,
+            276
+          ],
+          "absoluteError": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            295
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            296
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            297
+          ],
+          "absoluteError": [
+            1,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tangent",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 31,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.28477404947993185,
+      "resolvedOriginalFailures": 42,
+      "newOriginalFailures": 0,
+      "changedHairPixels": 0,
+      "changedOutsideTargetPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1306,
+            156
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1278,
+            163
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1313,
+            168
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1319,
+            172
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1267,
+            211
+          ],
+          "absoluteError": [
+            3,
+            2,
+            3
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            211
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            211
+          ],
+          "absoluteError": [
+            3,
+            3,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            211
+          ],
+          "absoluteError": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            213
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1269,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            214
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            215
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            216
+          ],
+          "absoluteError": [
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1264,
+            217
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            261
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            262
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "pixel": [
+            1380,
+            276
+          ],
+          "absoluteError": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            295
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            296
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            297
+          ],
+          "absoluteError": [
+            1,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "both",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 30,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.28475446122504944,
+      "resolvedOriginalFailures": 43,
+      "newOriginalFailures": 0,
+      "changedHairPixels": 1,
+      "changedOutsideTargetPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1278,
+            163
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1313,
+            168
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1319,
+            172
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1267,
+            211
+          ],
+          "absoluteError": [
+            3,
+            2,
+            3
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            211
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            211
+          ],
+          "absoluteError": [
+            3,
+            3,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            211
+          ],
+          "absoluteError": [
+            3,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            212
+          ],
+          "absoluteError": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            212
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1268,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            213
+          ],
+          "absoluteError": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            213
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1269,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1281,
+            214
+          ],
+          "absoluteError": [
+            2,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1284,
+            214
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1282,
+            215
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1283,
+            216
+          ],
+          "absoluteError": [
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1264,
+            217
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            261
+          ],
+          "absoluteError": [
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1367,
+            262
+          ],
+          "absoluteError": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "pixel": [
+            1380,
+            276
+          ],
+          "absoluteError": [
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            295
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            296
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            297
+          ],
+          "absoluteError": [
+            1,
+            2,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "state": {
+    "status": "collected",
+    "variants": [
+      {
+        "name": "control",
+        "baselineRestored": true,
+        "shaderSha256": "5ee2fcf833c8d1c2363c26aa87ad4c092c6c3895bd2c086228fa1b3a3c4d2abf",
+        "hdrSha256": "2cfb70c130f723985b4d024f01a5f5c217774a784ab25268930944f75d0df445",
+        "finalSha256": "cd639d55a621883190ec73fc26b261d50fa565de439cceab366b099f94d661b6"
+      },
+      {
+        "name": "activation",
+        "baselineRestored": true,
+        "shaderSha256": "f1f8a634ff79ca0e81464dda87b98c426ba478f69fe60d14faf05279b58421ef",
+        "hdrSha256": "e9dadd54acfaf58e7702a17ba20fd6ecdc5916e37c545e0e4954cfc9e548292f",
+        "finalSha256": "f3122b1c0975d19cc56c486fa2a1feae5cdd4dc805e0dd1971230b067ee2c4e1"
+      },
+      {
+        "name": "identity",
+        "baselineRestored": true,
+        "shaderSha256": "8c21afd3cec92a678dd3ee05a6e56b4c77255b880bd9497ce1503e4a88d9408d",
+        "hdrSha256": "2cfb70c130f723985b4d024f01a5f5c217774a784ab25268930944f75d0df445",
+        "finalSha256": "cd639d55a621883190ec73fc26b261d50fa565de439cceab366b099f94d661b6"
+      },
+      {
+        "name": "normal",
+        "baselineRestored": true,
+        "shaderSha256": "74967e87c57058fb1eb9f1d97758553eed9d9ba5150ba6bdedb10d2463281c9d",
+        "hdrSha256": "34cabbba244dcd04987470d8ccecc50f93846ff4fddcf10317b6356c490873b9",
+        "finalSha256": "079366cb7a864e2ad5a045013a7ad5374489f7c9a6a70d4086f0a144be65aa5c"
+      },
+      {
+        "name": "tangent",
+        "baselineRestored": true,
+        "shaderSha256": "fde1a0e59243f5ecdfc1ef585e81d8eaa9252f344c87b4d23cad00418f24ebc6",
+        "hdrSha256": "aae8226ba3387c86be271193912bc5e98a9dc10f30b7a1e18c245af0e4a5f513",
+        "finalSha256": "cd639d55a621883190ec73fc26b261d50fa565de439cceab366b099f94d661b6"
+      },
+      {
+        "name": "both",
+        "baselineRestored": true,
+        "shaderSha256": "59ba99fa0dc858fba0f41562fe38128c041faf7615ad7e82025dc5b167865798",
+        "hdrSha256": "34cabbba244dcd04987470d8ccecc50f93846ff4fddcf10317b6356c490873b9",
+        "finalSha256": "079366cb7a864e2ad5a045013a7ad5374489f7c9a6a70d4086f0a144be65aa5c"
+      }
+    ],
+    "activeVariant": "both",
+    "controlQualification": {
+      "hdrExact": true,
+      "finalExact": true
+    },
+    "activationQualification": {
+      "points": 31,
+      "activePoints": 31,
+      "allPointsActive": true,
+      "blueExact": true
+    },
+    "identityQualification": {
+      "hdrExact": true,
+      "finalExact": true
+    },
+    "debugMessages": [],
+    "cleanupBaselineRestored": true
+  },
+  "scope": "Source substitution of measured native input values only at 31 diagnostic locations, with native visibility control. Not a production implementation or a full quality pass.",
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "seconds": 69.57900000002701,
+    "source": "shared_resources.py guarded command result"
+  },
+  "attachmentCpu": {
+    "status": "cpu-approximation-only",
+    "rows": [
+      {
+        "name": "stored-hdr",
+        "maskPixels": 17017,
+        "pixelsOverOneByte": 31,
+        "maximumByteError": 6,
+        "meanAbsoluteByteError": 0.26113102583690817
+      },
+      {
+        "name": "stored-hdr-toward-zero",
+        "maskPixels": 17017,
+        "pixelsOverOneByte": 28,
+        "maximumByteError": 6,
+        "meanAbsoluteByteError": 0.006131123778182601
+      }
+    ],
+    "scope": "CPU approximation after half storage and frozen quarter exposure. Distinct from actual fragment output and final GPU acceptance."
+  },
+  "archiveFiles": [
+    {
+      "name": "activation-final.zlib",
+      "bytes": 47970,
+      "sha256": "46583ddf282ebce485b43823bb3cf14e94c0a74dc2e28a4298fb0b8d74f259d4"
+    },
+    {
+      "name": "activation-hdr.zlib",
+      "bytes": 109207,
+      "sha256": "e37bd9754d5bffc0aed21e103518a3077117002924ab7de386e9c7354681dbba"
+    },
+    {
+      "name": "activation.spv",
+      "bytes": 492048,
+      "sha256": "f1f8a634ff79ca0e81464dda87b98c426ba478f69fe60d14faf05279b58421ef"
+    },
+    {
+      "name": "activation.spvasm",
+      "bytes": 1722277,
+      "sha256": "837215171fecd810c5d008574f1907e1272a3109fa5db5f991a7e0e89e21096c"
+    },
+    {
+      "name": "analyze.py",
+      "bytes": 1862,
+      "sha256": "bff5c94cd57d7071d037e9a5e89adf911ad7a7d38aa25e99ce768c77f9174b67"
+    },
+    {
+      "name": "attachment-cpu.json",
+      "bytes": 589,
+      "sha256": "5a304f6a81499c09cf41594b7492edfe8cde1c200315d68def2b4520c16ad9f9"
+    },
+    {
+      "name": "attachment-first-invalid.json",
+      "bytes": 649,
+      "sha256": "8842ebca46354a07975f0cf76f699b5a9f966dcecfe825fe9785599426f21c49"
+    },
+    {
+      "name": "baseline.py",
+      "bytes": 1801,
+      "sha256": "5968d2d85f1f55472d0286ce0075c61524e5c4a6d06d96144842e0710bea6aa6"
+    },
+    {
+      "name": "both-final.zlib",
+      "bytes": 113480,
+      "sha256": "dc998611cff895700ad7328ae506035fcf44bc33997ac5e96f37d69910f234fb"
+    },
+    {
+      "name": "both-hdr.zlib",
+      "bytes": 281492,
+      "sha256": "f4c3c0aecd42f04e16a69cb31327a533eac435468e3c561be5a69f7cc9b3b9cf"
+    },
+    {
+      "name": "both.spv",
+      "bytes": 491240,
+      "sha256": "59ba99fa0dc858fba0f41562fe38128c041faf7615ad7e82025dc5b167865798"
+    },
+    {
+      "name": "both.spvasm",
+      "bytes": 1719520,
+      "sha256": "7fe9f4787ae4c85eeae2c5b94caa7c89e9af6acb867cf5ba2c57a592d37b49b2"
+    },
+    {
+      "name": "budget.json",
+      "bytes": 434,
+      "sha256": "f561beb3489f627af7d359dc27b82366ec7d5a6cc3f8bfd66a2b2cf0f3a98336"
+    },
+    {
+      "name": "collect.py",
+      "bytes": 3550,
+      "sha256": "3c566b59c23863aad6ca3ce3381b4b6372b3049887f4047d1a02564e4555d683"
+    },
+    {
+      "name": "control-final.zlib",
+      "bytes": 113480,
+      "sha256": "9e505ccac4f77b52e0b0d452e66c38def21c200a9f85b5edb10b955baf187adc"
+    },
+    {
+      "name": "control-hdr.zlib",
+      "bytes": 281493,
+      "sha256": "c7ffde423b4cc9dfed702725bcc9b8cad608aadbbb6de97fa604a560163a38a0"
+    },
+    {
+      "name": "control.spv",
+      "bytes": 471424,
+      "sha256": "5ee2fcf833c8d1c2363c26aa87ad4c092c6c3895bd2c086228fa1b3a3c4d2abf"
+    },
+    {
+      "name": "control.spvasm",
+      "bytes": 1641952,
+      "sha256": "00f56622f1905491e9f8eb3f64433175492ff1e3ee8f0393f1bfecb5972faa3c"
+    },
+    {
+      "name": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "identity-final.zlib",
+      "bytes": 113480,
+      "sha256": "9e505ccac4f77b52e0b0d452e66c38def21c200a9f85b5edb10b955baf187adc"
+    },
+    {
+      "name": "identity-hdr.zlib",
+      "bytes": 281493,
+      "sha256": "c7ffde423b4cc9dfed702725bcc9b8cad608aadbbb6de97fa604a560163a38a0"
+    },
+    {
+      "name": "identity.spv",
+      "bytes": 491240,
+      "sha256": "8c21afd3cec92a678dd3ee05a6e56b4c77255b880bd9497ce1503e4a88d9408d"
+    },
+    {
+      "name": "identity.spvasm",
+      "bytes": 1719488,
+      "sha256": "405f0a39e542e3bf19359f09c188fb3ea3d0528c25559a11bf53a71fb3119745"
+    },
+    {
+      "name": "normal-final.zlib",
+      "bytes": 113480,
+      "sha256": "dc998611cff895700ad7328ae506035fcf44bc33997ac5e96f37d69910f234fb"
+    },
+    {
+      "name": "normal-hdr.zlib",
+      "bytes": 281492,
+      "sha256": "f4c3c0aecd42f04e16a69cb31327a533eac435468e3c561be5a69f7cc9b3b9cf"
+    },
+    {
+      "name": "normal.spv",
+      "bytes": 486748,
+      "sha256": "74967e87c57058fb1eb9f1d97758553eed9d9ba5150ba6bdedb10d2463281c9d"
+    },
+    {
+      "name": "normal.spvasm",
+      "bytes": 1701477,
+      "sha256": "368efbb5bf33750639785659f580ca04e0bbcf736a5e601283688ac1785ac50f"
+    },
+    {
+      "name": "prepare.py",
+      "bytes": 7220,
+      "sha256": "af67a740531a5d5831f12e34ff56ba109ff67c675ac0ff13e446847b4e5c0707"
+    },
+    {
+      "name": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "results.json",
+      "bytes": 32972,
+      "sha256": "ccaf7ee1320c4ac65626dce689bc4e8a3b98ad13bbd9de4c6e179e75ca16397b"
+    },
+    {
+      "name": "run.py",
+      "bytes": 958,
+      "sha256": "bf9a53956ed519783118b5f52cbe025e6b9efa6b06327322cb58598b0b2c4ca1"
+    },
+    {
+      "name": "source-control.json",
+      "bytes": 2010,
+      "sha256": "19ef5a09c1c907c8b5b5bf73444cf1bc1a74e002619859999a7827a0fb53e31b"
+    },
+    {
+      "name": "state.json",
+      "bytes": 2493,
+      "sha256": "aafb42802da1df387cc6149f337efa5fe037e99aa6f196568b1f7b298e870608"
+    },
+    {
+      "name": "tangent-final.zlib",
+      "bytes": 113480,
+      "sha256": "9e505ccac4f77b52e0b0d452e66c38def21c200a9f85b5edb10b955baf187adc"
+    },
+    {
+      "name": "tangent-hdr.zlib",
+      "bytes": 281493,
+      "sha256": "1e4da614b4b7245cf93989f367cd981f6c2825750971cda633f8565639cc2453"
+    },
+    {
+      "name": "tangent.spv",
+      "bytes": 487492,
+      "sha256": "fde1a0e59243f5ecdfc1ef585e81d8eaa9252f344c87b4d23cad00418f24ebc6"
+    },
+    {
+      "name": "tangent.spvasm",
+      "bytes": 1704431,
+      "sha256": "878b69915f618259063f71e701f246012d3e98365ad35751445ca8d524a3f8d9"
+    }
+  ],
+  "archiveBytes": 4062460,
+  "archiveSha256": "38c4ec2d3472936f829a09969cb61d871db08f5c013bd656c7523a3376a68a4e"
+}
