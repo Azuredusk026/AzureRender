@@ -140,6 +140,10 @@ SDK 路径归属于 D 盘任务，两配置及设备检查通过。
 [对象阴影页边界](../acceptance/nr/object-shadow-page-boundary.md)已补足采样器量化余量。
 两配置、两设备的四项检查通过，原始四帧保持零差。
 完整头发仍有采样及接收输入精度待项。
+[原生接收区域](../acceptance/nr/native-receiver-gpu-oracle.md)完成 49384 个像素核对。
+GPU 重建候选仍有四十处可见量超差，生产保持受检路径。
+软件调试值与实际附件的资格限制已记录。
+后续先处理冷启动管线编译成本，缩短开发验证等待。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。
