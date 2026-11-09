@@ -30,6 +30,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[参考算术主线集成](../acceptance/nr/visibility-reference-integration.md)通过两配置及原四帧。
+合计 32 项有效检查通过，双设备默认及参考路径均无跳过。
+完整头发颜色、当前深度来源和帧预算继续处理。
+
 [并行资源调度](../development/shared-resources.md)提供重负载互斥入口。
 性能、画质与论文工作流已登记实际对话和独立工作区。
 跨工作树输入在主维护索引中持有活动引用。
