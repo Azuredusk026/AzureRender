@@ -223,6 +223,13 @@ VkPipeline Benchmark::makePipeline(VkRenderPass pass,uint32_t subpass,const std:
 }
 
 void Benchmark::createPaths() {
+    if(options.path=="subpasses") {
+        createSubpasses();
+        contourPass=makePass({&output},nullptr,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        contourFramebuffer=makeFramebuffer(contourPass,{&output});
+        contourPipeline=makePipeline(contourPass,0,"contour.frag",false,1);
+        return;
+    }
     geometryPass=makePass({&albedo,&normal},&depth,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     toonPass=makePass({&toon},nullptr,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     contourPass=makePass({&output},nullptr,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
@@ -254,6 +261,16 @@ void Benchmark::fullscreenDraw(VkPipeline pipeline,VkPipelineLayout layout,VkDes
     vkCmdDraw(command,3,1,0,0);
 }
 void Benchmark::record() {
+    if(options.path=="subpasses") {
+        beginPass(geometryPass,geometryFramebuffer,3,true); geometryDraw();
+        vkCmdNextSubpass(command,VK_SUBPASS_CONTENTS_INLINE); ++nextSubpassCalls;
+        fullscreenDraw(toonPipeline,inputPipelineLayout,inputSet); ++toonDraws;
+        vkCmdEndRenderPass(command);
+        beginPass(contourPass,contourFramebuffer,1,false);
+        fullscreenDraw(contourPipeline,sampledPipelineLayout,contourSet); ++contourDraws;
+        vkCmdEndRenderPass(command);
+        return;
+    }
     beginPass(geometryPass,geometryFramebuffer,2,true); geometryDraw(); vkCmdEndRenderPass(command);
     beginPass(toonPass,toonFramebuffer,1,false); fullscreenDraw(toonPipeline,sampledPipelineLayout,sampledSet); ++toonDraws; vkCmdEndRenderPass(command);
     beginPass(contourPass,contourFramebuffer,1,false); fullscreenDraw(contourPipeline,sampledPipelineLayout,contourSet); ++contourDraws; vkCmdEndRenderPass(command);
@@ -264,7 +281,7 @@ void Benchmark::submit() {
     check(vkWaitForFences(device,1,&fence,VK_TRUE,30'000'000'000ull),"frame completion"); check(vkResetFences(device,1,&fence),"reset fence");
 }
 void Benchmark::run() {
-    if(options.path!="traditional") throw std::runtime_error("path not implemented");
+    if(options.path!="traditional" && options.path!="subpasses") throw std::runtime_error("path not implemented");
     initialize();
     for(uint32_t frame=0;frame<options.frames+options.warmup;++frame) {
         check(vkResetCommandPool(device,commandPool,0),"reset command pool");
