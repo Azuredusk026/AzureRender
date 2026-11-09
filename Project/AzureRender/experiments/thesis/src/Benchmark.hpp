@@ -5,13 +5,15 @@
 #include <filesystem>
 #include <string>
 #include <vector>
+#include <memory>
+#include "Window.hpp"
 
 namespace thesis {
 struct Options {
     std::string path="traditional", gpu="NVIDIA", complexity="low";
     std::filesystem::path shaders, output;
     uint32_t width=1920, height=1080, frames=1000, warmup=300;
-    bool validation=false;
+    bool validation=false, present=false;
     std::string captureDll,capturePrefix;
 };
 struct Image { VkImage image{}; VkDeviceMemory memory{}; VkImageView view{}; VkFormat format{}; };
@@ -51,6 +53,8 @@ private:
     PFN_vkCmdSetRenderingInputAttachmentIndicesKHR setInputIndices{};
     std::vector<VkShaderModule> modules;
     std::vector<double> gpuMs, cpuMs;
+    std::vector<double> presentationMs;
+    std::unique_ptr<Window> window;
     std::atomic<uint32_t> errors{0}, warnings{0};
     uint64_t geometryDraws{}, toonDraws{}, contourDraws{}, nextSubpassCalls{}, beginRenderingCalls{};
     void initialize();
