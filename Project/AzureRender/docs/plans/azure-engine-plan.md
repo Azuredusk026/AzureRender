@@ -53,6 +53,8 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 六处较大输入差异与其余 25 处颜色算术分别定位。
 [实际插值坐标](../acceptance/nr/hair-uv-sample-region.md)完成十二个版本的资格核对。
 六处材质取样差异中，五处具有 UV 输入差异。
+[插值基底](../acceptance/nr/hair-interpolated-basis.md)已核对实际法线和切线位值。
+几何输入对剩余颜色误差的贡献继续单因素核验。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
