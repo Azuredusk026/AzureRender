@@ -51,6 +51,9 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
         const auto report=nlohmann::json::parse(fields.str());
         require(report.at("irradianceResourceKind")==(!irradiance.empty()?"clipmap":"none"),"Renderer selects the declared irradiance resource family");
         const auto& stats=report.at("materialTextureCache");
+        require(stats.at("sealed").get<bool>()&&stats.at("retainedPixelBytes")==0
+            &&stats.at("releasedIdentityBytes")==132,
+            "Completed shared-material loads release exact CPU identities while retaining all GPU bindings");
         // Each imported resource includes its authored material and the loader's
         // fallback. Six generated 2x2 maps and one 1x1 LUT are common; the two
         // base colors and the two ORM factor combinations remain distinct.

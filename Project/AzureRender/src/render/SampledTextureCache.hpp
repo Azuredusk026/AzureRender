@@ -35,6 +35,7 @@ struct SampledTextureCacheStatistics {
     std::uint64_t requests = 0, hits = 0, uniqueTextures = 0;
     std::uint64_t requestedBytes = 0, residentBytes = 0, retainedPixelBytes = 0;
     std::uint64_t hashedPixelBytes = 0, copiedPixelBytes = 0, transferredPixelBytes = 0, discardedPixelBytes = 0;
+    std::uint64_t releasedIdentityBytes = 0;
     double hashMs = 0, matchMs = 0, mipMs = 0, uploadMs = 0;
 };
 
@@ -54,6 +55,11 @@ public:
     // Misses transfer the identity bytes; hits release redundant storage.
     SampledTextureBinding acquire(std::vector<std::uint8_t>&& pixels,
                                   const SampledTextureUpload& upload);
+    // Finish acquisition and release CPU comparison bytes. Existing bindings
+    // keep their native objects; further acquire calls fail without mutation.
+    // Idempotent and serialized with acquire. clear() starts a writable cycle.
+    void seal() noexcept;
+    bool sealed() const noexcept { return sealed_; }
     void clear() noexcept;
     const SampledTextureCacheStatistics& statistics() const noexcept { return statistics_; }
 
@@ -65,6 +71,7 @@ private:
     rhi::IGpuAllocator& allocator_;
     rhi::IRhi& rhi_;
     std::unordered_multimap<std::uint32_t, std::unique_ptr<Entry>> entries_;
+    bool sealed_ = false;
     SampledTextureCacheStatistics statistics_;
 };
 

@@ -207,15 +207,65 @@ void transferred_inputs() {
         &&cache.statistics().retainedPixelBytes==16,"Transferred ownership must retain one complete identity copy");
 }
 
+void sealed_bindings() {
+    rhi::NullRhi backend;backend.collectImageUploads=true;
+    SampledTextureCache cache(backend.allocator(),backend);
+    const auto pixels=checker();const auto binding=cache.acquire(pixels,request());
+    const auto before=cache.statistics();const auto live=backend.allocator().statistics();
+    const auto calls=backend.calls.size();
+    require(!cache.sealed(),"New caches accept complete identity comparisons");
+    cache.seal();cache.seal();
+    require(cache.sealed(),"Sealing is an explicit persistent state");
+    const auto sealed=cache.statistics();
+    require(sealed.retainedPixelBytes==0&&sealed.releasedIdentityBytes==pixels.size(),
+        "Repeated sealing releases one identity allocation and preserves cumulative release bytes");
+    require(sealed.requests==before.requests&&sealed.hits==before.hits
+        &&sealed.uniqueTextures==before.uniqueTextures&&sealed.residentBytes==before.residentBytes,
+        "Sealing preserves residency and acquisition statistics");
+    require(backend.calls.size()==calls&&backend.allocator().statistics().liveImages==live.liveImages
+        &&backend.allocator().statistics().liveImageBytes==live.liveImageBytes,
+        "Sealing retains the exact GPU objects without backend operations");
+    auto owned=pixels;const auto capacity=owned.capacity();
+    reject([&]{cache.acquire(pixels,request());});
+    reject([&]{cache.acquire(std::move(owned),request());});
+    require(owned==pixels&&owned.capacity()==capacity,"Rejected sealed requests preserve input ownership");
+    require(backend.calls.size()==calls&&cache.statistics().requests==before.requests
+        &&cache.statistics().hashedPixelBytes==before.hashedPixelBytes,
+        "Sealed requests reject before hashing, allocation or statistics mutation");
+    cache.clear();
+    require(!cache.sealed()&&cache.statistics().releasedIdentityBytes==0
+        &&backend.allocator().statistics().liveImages==0,
+        "Clear releases resident resources and starts a writable lifecycle");
+    const auto next=cache.acquire(pixels,request());
+    require(next.view!=binding.view&&next.sampler!=binding.sampler
+        &&cache.statistics().retainedPixelBytes==pixels.size(),
+        "A fresh lifecycle owns new bindings and full comparison bytes");
+}
+
+void sealed_empty_cache() {
+    rhi::NullRhi backend;
+    SampledTextureCache cache(backend.allocator(),backend);
+    cache.seal();cache.seal();
+    require(cache.sealed()&&cache.statistics().releasedIdentityBytes==0
+        &&cache.statistics().retainedPixelBytes==0,"An empty cache can finish its write phase");
+    reject([&]{cache.acquire(checker(),request());});
+    require(backend.calls.empty(),"An empty sealed cache rejects without GPU operations");
+    cache.clear();cache.clear();
+    require(!cache.sealed(),"Repeated clear keeps the cache writable");
+    cache.acquire(checker(),request());cache.seal();
+    require(cache.statistics().releasedIdentityBytes==16,"Sealing after reuse accounts for actual identity bytes");
+}
+
 int main() {
     int failed=0;
     for(const auto& test:std::vector<std::pair<const char*,std::function<void()>>>{
             {"shared multi-resource texture",shared_resources},{"complete key isolation",isolated_keys},
             {"content hash collision",hash_collision},{"invalid input recovery",invalid_inputs},
             {"authored mip bytes",authored_mips},{"partial upload recovery",failed_upload},
-            {"transferred input ownership",transferred_inputs},{"complete word and tail identity",complete_content_identity}}) {
+            {"transferred input ownership",transferred_inputs},{"complete word and tail identity",complete_content_identity},
+            {"sealed bindings and reopen",sealed_bindings},{"empty sealed lifecycle",sealed_empty_cache}}) {
         try {test.second();std::cout<<"PASS "<<test.first<<'\n';}
         catch(const std::exception& e) {++failed;std::cerr<<"FAIL "<<test.first<<": "<<e.what()<<'\n';}
     }
-    std::cout<<8-failed<<"/8 sampled texture cache cases passed\n";return failed?1:0;
+    std::cout<<10-failed<<"/10 sampled texture cache cases passed\n";return failed?1:0;
 }

@@ -87,6 +87,7 @@ SampledTextureBinding SampledTextureCache::acquire(std::vector<std::uint8_t>&& p
 SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::uint8_t>& pixels,
                                                      const SampledTextureUpload& request,
                                                      std::vector<std::uint8_t>* consumed) {
+    if(sealed_)throw std::logic_error("Sampled texture cache acquisition has finished");
     if(!request.width||!request.height
         ||request.width>std::numeric_limits<std::size_t>::max()/request.height/4)
         throw std::invalid_argument("RGBA8 texture extent is invalid");
@@ -183,5 +184,12 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     return result;
 }
 
-void SampledTextureCache::clear() noexcept { entries_.clear(); statistics_ = {}; }
+void SampledTextureCache::seal() noexcept {
+    if(sealed_)return;
+    for(auto& item:entries_)std::vector<std::uint8_t>{}.swap(item.second->pixels);
+    statistics_.releasedIdentityBytes+=statistics_.retainedPixelBytes;
+    statistics_.retainedPixelBytes=0;
+    sealed_=true;
+}
+void SampledTextureCache::clear() noexcept { entries_.clear(); statistics_ = {}; sealed_=false; }
 }

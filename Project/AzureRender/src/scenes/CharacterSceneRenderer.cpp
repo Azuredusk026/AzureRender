@@ -614,10 +614,12 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
     const auto start=std::chrono::steady_clock::now();
     if(!loadInitialized_){loadInitialized_=true;preparationWorkers_=context.preparationWorkers;initializeLoad(context);}
     do{
-        if(loadJobs_.empty())return true;
+        if(loadJobs_.empty()){materialTextureCache_->seal();return true;}
         auto job=std::move(loadJobs_.front());loadJobs_.pop_front();job();
     }while(std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count()<budgetMs);
-    return loadJobs_.empty();
+    const bool completed=loadJobs_.empty();
+    if(completed)materialTextureCache_->seal();
+    return completed;
 }
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(!objectShadowPrepared_&&std::any_of(context.scene.nodes.begin(),context.scene.nodes.end(),
@@ -2093,6 +2095,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << ", \"hits\": " << textureStats.hits << ", \"uniqueTextures\": " << textureStats.uniqueTextures
          << ", \"requestedBytes\": " << textureStats.requestedBytes << ", \"residentBytes\": " << textureStats.residentBytes
          << ", \"retainedPixelBytes\": " << textureStats.retainedPixelBytes
+         << ", \"releasedIdentityBytes\": " << textureStats.releasedIdentityBytes
+         << ", \"sealed\": " << (materialTextureCache_&&materialTextureCache_->sealed()?"true":"false")
          << ", \"hashedPixelBytes\": " << textureStats.hashedPixelBytes << ", \"copiedPixelBytes\": " << textureStats.copiedPixelBytes
          << ", \"transferredPixelBytes\": " << textureStats.transferredPixelBytes << ", \"discardedPixelBytes\": " << textureStats.discardedPixelBytes
          << ", \"hashMs\": " << textureStats.hashMs << ", \"matchMs\": " << textureStats.matchMs

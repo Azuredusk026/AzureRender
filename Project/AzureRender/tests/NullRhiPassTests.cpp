@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <set>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -107,7 +108,16 @@ std::vector<RecordedCall> runFrame(
                   << context.scene.nodes.size() << '\n';
     }
 
-    renderer.onLoad(context);
+    if(withPropResource){
+        bool complete=false;
+        for(unsigned step=0;step<1000&&!complete;++step)complete=renderer.prepareLoad(context,0);
+        if(!complete)throw std::runtime_error("Staged material loading did not complete");
+    }else renderer.onLoad(context);
+    std::ostringstream cacheFields;cacheFields<<'{';renderer.appendCaptureManifestFields(cacheFields);cacheFields<<"\"end\":0}";
+    const auto materialCache=nlohmann::json::parse(cacheFields.str()).at("materialTextureCache");
+    if(!materialCache.at("sealed").get<bool>()||materialCache.at("retainedPixelBytes")!=0
+        ||materialCache.at("releasedIdentityBytes").get<std::uint64_t>()==0)
+        throw std::runtime_error("Completed loading must retain GPU bindings and release CPU texture identities");
     bool depthLayout=false,objectLayout=false;
     for(const auto& layout:rhi.descriptorLayouts){
         if(std::none_of(layout.begin(),layout.end(),[](const auto& binding){return binding.binding==27;}))continue;
@@ -318,6 +328,8 @@ void verifyJointBufferCapacities(const std::string& label,
         if (report.at("sceneLoad").at("buffersMs").get<double>() > 0) break;
         if (complete) throw std::runtime_error("Capacity fixture never created buffers");
     }
+    if(report.at("materialTextureCache").at("sealed").get<bool>())
+        throw std::runtime_error("Partial loading must preserve the writable texture identity phase");
     if (report.at("jointCapacity") != expectedJoints
         || report.at("vertexCapacity") != expectedVertices)
         throw std::runtime_error("Joint/vertex buffer capacity contract changed: " + label);
