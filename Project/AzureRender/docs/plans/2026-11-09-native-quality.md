@@ -125,6 +125,9 @@ Intel 保留 120 处超差，最大为 33 字节。
 [漫反射色带](../acceptance/nr/hair-diffuse-ramp-input.md)完成 36 个探针核对。
 两端纹理字节一致，主要色度组的 19 个取样逐位相同。
 后续读取漫反射响应颜色及其权重。
+[响应权重](../acceptance/nr/hair-diffuse-response-weights.md)完成 36 个探针核对。
+主要色度组的 19 个遮罩逐位相同。
+响应颜色差异限定后，继续读取条纹强度及饱和度。
 
 ## 后续外观
 
