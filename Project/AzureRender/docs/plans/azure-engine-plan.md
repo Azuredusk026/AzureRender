@@ -42,6 +42,8 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 隔离来源控制仍有 31 处超差，生产颜色基线保留原 73 处待项。
 [头发基色层级](../acceptance/nr/hair-base-color-mip-content.md)的十二级 RGB 内容全部一致。
 后续分别核对实际取样及颜色算术。
+[实际取样位值](../acceptance/nr/hair-base-sample-region.md)通过十八个版本的输出资格核对。
+31 个剩余颜色位置中，27 个基色向量逐位一致。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
