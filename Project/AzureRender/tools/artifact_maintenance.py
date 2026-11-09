@@ -12,7 +12,7 @@ import subprocess
 import time
 import zipfile
 
-from artifact_cleanup import is_link, remove_artifact
+from artifact_cleanup import is_link, remove_artifact, TrackedPaths
 
 GIB = 2**30
 POLICY = dict(poolBytes=16*GIB, coldBytes=8*GIB, runBytes=2*GIB,
@@ -442,7 +442,7 @@ def active_processes(engine):
 
 def tracked_paths(engine):
     repo = Path(subprocess.check_output(['git','-C',str(engine),'rev-parse','--show-toplevel'], text=True).strip()).resolve()
-    protected=set()
+    protected=set();roots=[]
     for entry in subprocess.check_output(['git','-C',str(repo),'ls-files','--stage','-z']).split(b'\0'):
         if not entry:continue
         metadata,name=entry.split(b'\t',1);relative=Path(os.fsdecode(name))
@@ -450,8 +450,11 @@ def tracked_paths(engine):
         path=repo/relative;protected.add(path)
         # Indexed links protect both the link name and its referent. Ordinary
         # entries need no per-file filesystem walk; deletion validates its own path.
-        if metadata.split(b' ',1)[0]==b'120000':protected.add(path.resolve())
-    return protected
+        mode=metadata.split(b' ',1)[0]
+        if mode==b'120000':
+            referent=path.resolve();protected.add(referent);roots.append(referent)
+        elif mode==b'160000':roots.append(path)
+    return TrackedPaths(protected,roots)
 
 
 def git_state(engine):

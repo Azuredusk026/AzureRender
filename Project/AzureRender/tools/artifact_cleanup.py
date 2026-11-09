@@ -1,5 +1,7 @@
 """Bounded cleanup for AzureRender generated artifacts; dry-run by default."""
 import argparse
+from bisect import bisect_left
+from itertools import chain
 import json
 import os
 from pathlib import Path
@@ -13,6 +15,22 @@ import uuid
 ENGINE = Path(__file__).resolve().parents[1]
 BUILD = ENGINE / "build"
 RETENTION_DAYS = 7
+
+class TrackedPaths(frozenset):
+    """Immutable Git paths with an indexed descendant/protected-root lookup."""
+    def __new__(cls, paths=(), protected_roots=()):
+        protected_roots=tuple(protected_roots)
+        value=super().__new__(cls, chain(paths,protected_roots))
+        value._prefixes=tuple(sorted(os.path.normcase(str(path)) for path in value))
+        value._roots=tuple(os.path.normcase(str(path)).rstrip(os.sep)+os.sep for path in protected_roots)
+        return value
+
+    def protects(self, path):
+        if path in self:return True
+        name=os.path.normcase(str(path));prefix=name.rstrip(os.sep)+os.sep
+        position=bisect_left(self._prefixes,prefix)
+        if position<len(self._prefixes) and self._prefixes[position].startswith(prefix):return True
+        return any(name==root[:-1] or name.startswith(root) for root in self._roots)
 
 def is_link(path):
     return path.is_symlink() or bool(getattr(path.lstat(), "st_file_attributes", 0) & 1024)
@@ -57,7 +75,8 @@ def remove_artifact(root, path, tracked, *, apply=False):
             break
         if is_link(parent):
             raise ValueError(f"Link ancestor: {parent}")
-    if any(p == resolved or resolved in p.parents for p in tracked):
+    protected=tracked.protects(resolved) if hasattr(tracked,'protects') else any(p == resolved or resolved in p.parents for p in tracked)
+    if protected:
         raise ValueError(f"Tracked content: {path}")
     size, newest = inspect_tree(path)
     if apply:
@@ -120,9 +139,8 @@ def main():
             parser.error(str(error))
         (path / ".finished").touch()
         return
-    repo = Path(subprocess.check_output(["git", "rev-parse", "--show-toplevel"], cwd=ENGINE, text=True).strip())
-    tracked = { (repo / p).resolve() for p in subprocess.check_output(
-        ["git", "ls-files", "-z"], cwd=repo).decode("utf-8").split("\0") if p }
+    from artifact_maintenance import tracked_paths
+    tracked = tracked_paths(ENGINE)
     now = time.time()
     paths = [p for p in runs.iterdir() if eligible(p, RETENTION_DAYS, now)]
     if args.run_list:

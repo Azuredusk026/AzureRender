@@ -2,9 +2,57 @@ import tempfile
 import time
 import unittest
 from pathlib import Path
-from artifact_cleanup import eligible, remove_artifact, inspect_tree
+from artifact_cleanup import eligible, remove_artifact, inspect_tree, TrackedPaths
 
 class CleanupTests(unittest.TestCase):
+    def test_prefix_index_matches_legacy_ancestor_protection(self):
+        import random
+        rng=random.Random(101)
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d).resolve()
+            paths={root/('group'+str(rng.randrange(20)))/('nested'+str(rng.randrange(10)))/(str(i)+'.bin') for i in range(200)}
+            tracked=TrackedPaths(paths)
+            candidates=[root,root/'group1',root/'group10',root/'group100',*sorted(paths)[:20]]
+            candidates.extend(root/('group'+str(i))/('nested'+str(j)) for i in range(25) for j in range(12))
+            for candidate in candidates:
+                expected=any(p==candidate or candidate in p.parents for p in paths)
+                self.assertEqual(tracked.protects(candidate),expected,str(candidate))
+            self.assertFalse(tracked.protects(root/'group1-sibling'))
+            self.assertEqual(tracked,paths)
+
+    def test_protected_directory_roots_and_case(self):
+        import os
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d).resolve();module=root/'module';tracked=TrackedPaths({module},[module])
+            self.assertTrue(tracked.protects(module/'nested'/'generated.bin'))
+            self.assertFalse(tracked.protects(root/'module-copy'/'generated.bin'))
+            self.assertTrue(tracked.protects(root));self.assertFalse(TrackedPaths().protects(root))
+            self.assertTrue(TrackedPaths(protected_roots=[module]).protects(root))
+            if os.name=='nt':self.assertTrue(tracked.protects(Path(str(module/'nested').upper())))
+
+    def test_unicode_and_space_prefix_boundaries(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d).resolve();file=root/'资料 甲'/'数据.bin'
+            tracked=TrackedPaths([file])
+            self.assertTrue(tracked.protects(file));self.assertTrue(tracked.protects(file.parent))
+            self.assertFalse(tracked.protects(root/'资料 甲-副本'))
+
+    def test_indexed_tracking_guard_does_not_walk_all_paths(self):
+        class Indexed(set):
+            def __init__(self, protected):
+                super().__init__();self.protected=protected;self.queries=[]
+            def protects(self, path):
+                self.queries.append(path);return self.protected
+            def __iter__(self):
+                raise AssertionError("Indexed protection must not scan tracked paths per artifact")
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);path=root/'generated.bin';path.write_bytes(b'owned')
+            protected=Indexed(True)
+            with self.assertRaises(ValueError):remove_artifact(root,path,protected,apply=True)
+            self.assertTrue(path.exists());self.assertEqual(protected.queries,[path.resolve()])
+            untracked=Indexed(False);remove_artifact(root,path,untracked,apply=True)
+            self.assertFalse(path.exists());self.assertEqual(untracked.queries,[path.resolve()])
+
     def test_only_finished_expired_runs(self):
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / "run"

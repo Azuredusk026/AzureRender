@@ -165,6 +165,17 @@ class MaintenanceTests(unittest.TestCase):
         actual=maintenance.tracked_paths(self.root)
         self.assertIn(link.absolute(),actual);self.assertIn(source.absolute(),actual)
 
+    def test_indexed_gitlink_protects_its_entire_directory(self):
+        subprocess.run(['git','init','--quiet',str(self.root)],check=True,capture_output=True)
+        module=self.root/'nested module';module.mkdir();(module/'output.bin').write_bytes(b'fixture')
+        entry='160000,'+'1'*40+',nested module'
+        subprocess.run(['git','-C',str(self.root),'update-index','--add','--cacheinfo',entry],check=True,capture_output=True)
+        tracked=maintenance.tracked_paths(self.root)
+        self.assertIn(module.absolute(),tracked)
+        self.assertTrue(tracked.protects(module/'output.bin'))
+        self.assertTrue(tracked.protects(self.root))
+        self.assertFalse(tracked.protects(self.root/'nested module-copy'/'output.bin'))
+
     def test_daily_asset_copy_policy_removes_only_verified_model(self):
         from test_artifact_asset_cleanup import AssetCopiesTests
         _,source,target,catalog,lock=AssetCopiesTests().fixture(self.root)
