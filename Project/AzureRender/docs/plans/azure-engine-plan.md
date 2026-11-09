@@ -130,6 +130,10 @@ SDK 路径归属于 D 盘任务，两配置及设备检查通过。
 [展示照明按需计算](../acceptance/nr/presentation-environment-demand.md)完成四组小画面和一次集中成本核对。
 受影响区间均值差约为 4.03%，候选未达到 5% 的本地门槛。
 后参考记录到热降频信号，生产已恢复受检内容，完整长采样未启动。
+[静态图形输入](../acceptance/nr/compact-vertex-source.md)的 28 字节布局通过二十项所属检查及严格四帧。
+整帧名义差约为 1.44%，未达到采用门槛，候选隔离保存。
+展示照明组合的严格画面失败，深度片收紧的八项引用削减不足以启动原生评估。
+本单元恢复生产基准，并按项目日常维护规则回收对照副本。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

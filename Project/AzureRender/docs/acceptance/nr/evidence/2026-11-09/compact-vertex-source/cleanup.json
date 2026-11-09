@@ -1,0 +1,168 @@
+{
+  "removed": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\baseline-runtime",
+      "result": [
+        213708220,
+        1794194518.7527373
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\tmp",
+      "result": [
+        472,
+        1794207809.3306837
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\local.exe",
+      "result": [
+        220160,
+        1794194668.716887
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\local.obj",
+      "result": [
+        269145,
+        1794194668.6208992
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\slice.exe",
+      "result": [
+        305152,
+        1794207433.4750254
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\slice.obj",
+      "result": [
+        480086,
+        1794207433.3840752
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderCompactVertexSourceTests.exe",
+      "result": [
+        80896,
+        1794204613.679018
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureRenderCompactVertexSourceTests.pdb",
+      "result": [
+        2682880,
+        1794204613.6961696
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\CMakeFiles\\AzureRenderCompactVertexSourceTests.dir",
+      "result": [
+        2674625,
+        1794204613.1704621
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureRenderCompactVertexSourceTests.exe",
+      "result": [
+        26112,
+        1794204426.044724
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\CMakeFiles\\AzureRenderCompactVertexSourceTests.dir",
+      "result": [
+        210276,
+        1794204425.6536047
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-24-rejected\\frames-140102\\frame_000000.png",
+      "result": [
+        5714675,
+        1794204209.285026
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-24-rejected\\frames-140102\\frame_000001.png",
+      "result": [
+        5713820,
+        1794204210.1747282
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-24-rejected\\frames-140102\\frame_000002.png",
+      "result": [
+        5713834,
+        1794204211.0939438
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-24-rejected\\frames-140102\\frame_000003.png",
+      "result": [
+        5714219,
+        1794204212.090046
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-final-input-lighting-batch\\frames-144252\\frame_000000.png",
+      "result": [
+        5714675,
+        1794206696.3656695
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-final-input-lighting-batch\\frames-144252\\frame_000001.png",
+      "result": [
+        5713820,
+        1794206697.2326264
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-final-input-lighting-batch\\frames-144252\\frame_000002.png",
+      "result": [
+        5713584,
+        1794206698.0893717
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-final-input-lighting-batch\\frames-144252\\frame_000003.png",
+      "result": [
+        5712691,
+        1794206699.0505867
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-final-compact-source-28\\frames-141011\\frame_000000.png",
+      "result": [
+        5714675,
+        1794204746.022202
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-final-compact-source-28\\frames-141011\\frame_000001.png",
+      "result": [
+        5713820,
+        1794204746.8912249
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-final-compact-source-28\\frames-141011\\frame_000002.png",
+      "result": [
+        5713834,
+        1794204747.7617004
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-111635-compact-vertex-source-706378\\image-final-compact-source-28\\frames-141011\\frame_000003.png",
+      "result": [
+        5714218,
+        1794204748.658578
+      ]
+    }
+  ],
+  "freeBefore": 157674520576,
+  "freeAfter": 157965352960,
+  "observedFreedBytes": 290832384
+}
