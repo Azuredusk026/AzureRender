@@ -1,5 +1,25 @@
 # 项目现状
 
+## 当前验收状态
+
+性能、原生画质与集中人工复核继续待通过。
+既有长期目标为 CPU P95 八毫秒及 GPU P95 16.6 毫秒。
+严格四帧、SSIM 与关键区域亮度门槛保持有效。
+
+[接收范围](acceptance/nr/clustered-receiver-ranges.md)与
+[运动绑定复用](acceptance/nr/motion-descriptor-reuse.md)已接入生产。
+当前单元的原生短测与正式长采样分别登记。
+[静态图形输入](acceptance/nr/compact-vertex-source.md)未达到采用门槛。
+其 28 字节候选 CPU P95 约为 6.39 毫秒，GPU 约为 22.68 毫秒。
+该数据属于隔离候选，生产已恢复受检基准。
+
+[Intel 零历史兼容](acceptance/nr/shadow-receiver-entry.md)已通过原断言。
+[零贡献计算](acceptance/nr/direct-light-zero-contribution.md)未通过局部效率门槛。
+原生头发整区、对象接收精度及完整联合外观继续验收。
+目录维护按 D 盘项目技能与每日有界回收执行。
+
+## 已取得的分项证据
+
 命令准备与缓冲同步通过六项所属检查及原生零像素对照。
 短时 CPU 均值为 9.02 毫秒，P95 为 10.31 毫秒。
 原帧预算、环境及画质继续验收，来源见[同步优化](acceptance/nr/read-scope-barriers.md)。

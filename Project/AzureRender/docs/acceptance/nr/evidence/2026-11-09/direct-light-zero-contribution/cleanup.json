@@ -1,0 +1,35 @@
+{
+  "removed": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureDirectLightResponseGpuTests.exe",
+      "removed": [
+        214528,
+        1794213546.5178094
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\CMakeFiles\\AzureDirectLightResponseGpuTests.dir",
+      "removed": [
+        2719739,
+        1794213545.8067744
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\direct_light_response_reference.comp.spv",
+      "removed": [
+        7436,
+        1794213632.5058148
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\shaders\\direct_light_response_candidate.comp.spv",
+      "removed": [
+        7548,
+        1794213632.5048122
+      ]
+    }
+  ],
+  "freeBefore": 157953085440,
+  "freeAfter": 157956026368,
+  "observedFreedBytes": 2940928
+}
