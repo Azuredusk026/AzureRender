@@ -59,6 +59,8 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 主要剩余误差继续核对片元着色与附件边界。
 [附件前输出位值](../acceptance/nr/hair-final-float-values.md)区分格式和着色差异。
 主要剩余差异按色度调制线索继续定位。
+[实际漫反射色带](../acceptance/nr/hair-diffuse-ramp-input.md)排定纹理及取样边界。
+主要色度组继续核对响应颜色与组合权重。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
