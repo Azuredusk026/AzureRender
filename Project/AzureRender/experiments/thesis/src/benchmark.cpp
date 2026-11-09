@@ -23,7 +23,7 @@ VKAPI_ATTR VkBool32 VKAPI_CALL Benchmark::debug(VkDebugUtilsMessageSeverityFlagB
 
 void Benchmark::initialize() {
     VkApplicationInfo app{VK_STRUCTURE_TYPE_APPLICATION_INFO};
-    app.pApplicationName="AzureThesisBenchmark"; app.apiVersion=VK_API_VERSION_1_3;
+    app.pApplicationName="AzureThesisBenchmark"; app.apiVersion=options.path=="drlr"?VK_API_VERSION_1_4:VK_API_VERSION_1_3;
     const char* layer="VK_LAYER_KHRONOS_validation";
     const char* extension=VK_EXT_DEBUG_UTILS_EXTENSION_NAME;
     VkValidationFeatureEnableEXT sync=VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT;
@@ -63,7 +63,32 @@ void Benchmark::initialize() {
     float priority=1;
     VkDeviceQueueCreateInfo qi{VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO}; qi.queueFamilyIndex=queueFamily; qi.queueCount=1; qi.pQueuePriorities=&priority;
     VkDeviceCreateInfo di{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO}; di.queueCreateInfoCount=1; di.pQueueCreateInfos=&qi;
+    VkPhysicalDeviceDynamicRenderingFeatures dynamic{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES};
+    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR local{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_LOCAL_READ_FEATURES_KHR};
+    VkPhysicalDeviceFeatures enabled{};
+    const char* localExtension=VK_KHR_DYNAMIC_RENDERING_LOCAL_READ_EXTENSION_NAME;
+    if(options.path=="drlr") {
+        uint32_t n=0; check(vkEnumerateDeviceExtensionProperties(physical,nullptr,&n,nullptr),"extension count");
+        std::vector<VkExtensionProperties> exts(n); check(vkEnumerateDeviceExtensionProperties(physical,nullptr,&n,exts.data()),"extensions");
+        bool hasExtension=std::any_of(exts.begin(),exts.end(),[&](auto& e) { return std::strcmp(e.extensionName,localExtension)==0; });
+        if(properties.apiVersion<VK_API_VERSION_1_4 && !hasExtension) throw std::runtime_error("DRLR extension unavailable on selected device");
+        dynamic.pNext=&local; VkPhysicalDeviceFeatures2 f{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2}; f.pNext=&dynamic;
+        vkGetPhysicalDeviceFeatures2(physical,&f);
+        if(!dynamic.dynamicRendering || !local.dynamicRenderingLocalRead || !f.features.independentBlend)
+            throw std::runtime_error("DRLR or independent color write masks unavailable");
+        enabled.independentBlend=VK_TRUE; di.pEnabledFeatures=&enabled; di.pNext=&dynamic;
+        if(hasExtension) { di.enabledExtensionCount=1; di.ppEnabledExtensionNames=&localExtension; }
+    }
     check(vkCreateDevice(physical,&di,nullptr,&device),"create device");
+    if(options.path=="drlr") {
+        beginRendering=reinterpret_cast<PFN_vkCmdBeginRendering>(vkGetDeviceProcAddr(device,"vkCmdBeginRendering"));
+        endRendering=reinterpret_cast<PFN_vkCmdEndRendering>(vkGetDeviceProcAddr(device,"vkCmdEndRendering"));
+        setLocations=reinterpret_cast<PFN_vkCmdSetRenderingAttachmentLocationsKHR>(vkGetDeviceProcAddr(device,"vkCmdSetRenderingAttachmentLocations"));
+        if(!setLocations) setLocations=reinterpret_cast<PFN_vkCmdSetRenderingAttachmentLocationsKHR>(vkGetDeviceProcAddr(device,"vkCmdSetRenderingAttachmentLocationsKHR"));
+        setInputIndices=reinterpret_cast<PFN_vkCmdSetRenderingInputAttachmentIndicesKHR>(vkGetDeviceProcAddr(device,"vkCmdSetRenderingInputAttachmentIndices"));
+        if(!setInputIndices) setInputIndices=reinterpret_cast<PFN_vkCmdSetRenderingInputAttachmentIndicesKHR>(vkGetDeviceProcAddr(device,"vkCmdSetRenderingInputAttachmentIndicesKHR"));
+        if(!beginRendering || !endRendering || !setLocations || !setInputIndices) throw std::runtime_error("DRLR command entry points unavailable");
+    }
     vkGetDeviceQueue(device,queueFamily,0,&queue);
     VkCommandPoolCreateInfo pool{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};
     pool.queueFamilyIndex=queueFamily; pool.flags=VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
@@ -143,7 +168,8 @@ void Benchmark::descriptors() {
     check(vkAllocateDescriptorSets(device,&a,sets),"descriptor sets"); sampledSet=sets[0]; inputSet=sets[1]; contourSet=sets[2];
     for(int j=0;j<3;++j) for(uint32_t i=0;i<2;++i) {
         Image* image=i==1?&normal:(j==2?&toon:&albedo);
-        VkDescriptorImageInfo info{j==1?VK_NULL_HANDLE:sampler,image->view,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
+        VkDescriptorImageInfo info{j==1?VK_NULL_HANDLE:sampler,image->view,
+            j==1 && options.path=="drlr"?VK_IMAGE_LAYOUT_RENDERING_LOCAL_READ_KHR:VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL};
         VkWriteDescriptorSet w{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET}; w.dstSet=sets[j]; w.dstBinding=i; w.descriptorCount=1;
         w.descriptorType=j==1?VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT:VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER; w.pImageInfo=&info;
         vkUpdateDescriptorSets(device,1,&w,0,nullptr);
@@ -198,7 +224,6 @@ VkShaderModule Benchmark::shader(const std::string& name) {
     VkShaderModule module{}; check(vkCreateShaderModule(device,&ci,nullptr,&module),"shader module"); modules.push_back(module); return module;
 }
 VkPipeline Benchmark::makePipeline(VkRenderPass pass,uint32_t subpass,const std::string& fragment,bool geometry,uint32_t colorCount,bool dynamic) {
-    (void)dynamic;
     VkPipelineShaderStageCreateInfo stages[2]{};
     for(auto& stage:stages) { stage.sType=VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO; stage.pName="main"; }
     stages[0].stage=VK_SHADER_STAGE_VERTEX_BIT; stages[0].module=shader(geometry?"geometry.vert":"fullscreen.vert");
@@ -214,15 +239,34 @@ VkPipeline Benchmark::makePipeline(VkRenderPass pass,uint32_t subpass,const std:
     VkPipelineMultisampleStateCreateInfo ms{VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO}; ms.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;
     VkPipelineDepthStencilStateCreateInfo ds{VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO}; ds.depthTestEnable=geometry; ds.depthWriteEnable=geometry; ds.depthCompareOp=VK_COMPARE_OP_LESS;
     std::vector<VkPipelineColorBlendAttachmentState> blends(colorCount); for(auto& blend:blends) blend.colorWriteMask=15;
+    if(dynamic) for(uint32_t i=0;i<colorCount;++i) blends[i].colorWriteMask=(geometry?(i<2):(i==2))?15:0;
     VkPipelineColorBlendStateCreateInfo cb{VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO}; cb.attachmentCount=colorCount; cb.pAttachments=blends.data();
     VkGraphicsPipelineCreateInfo ci{VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO}; ci.stageCount=2; ci.pStages=stages; ci.pVertexInputState=&vi; ci.pInputAssemblyState=&ia; ci.pViewportState=&vs;
     ci.pRasterizationState=&rs; ci.pMultisampleState=&ms; ci.pDepthStencilState=&ds; ci.pColorBlendState=&cb;
-    ci.layout=(!geometry && fragment.find("local")!=std::string::npos)?inputPipelineLayout:sampledPipelineLayout;
+    ci.layout=(!geometry && (fragment.find("local")!=std::string::npos || fragment.find("dynamic")!=std::string::npos))?inputPipelineLayout:sampledPipelineLayout;
     ci.renderPass=pass; ci.subpass=subpass;
+    VkFormat formats[]={albedo.format,normal.format,toon.format};
+    uint32_t locations[]={0,1,2}, indices[]={0,1,VK_ATTACHMENT_UNUSED}, unused=VK_ATTACHMENT_UNUSED;
+    VkRenderingInputAttachmentIndexInfoKHR inputInfo{VK_STRUCTURE_TYPE_RENDERING_INPUT_ATTACHMENT_INDEX_INFO_KHR};
+    inputInfo.colorAttachmentCount=3; inputInfo.pColorAttachmentInputIndices=indices;
+    inputInfo.pDepthInputAttachmentIndex=&unused; inputInfo.pStencilInputAttachmentIndex=&unused;
+    VkRenderingAttachmentLocationInfoKHR locationInfo{VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_LOCATION_INFO_KHR};
+    locationInfo.colorAttachmentCount=3; locationInfo.pColorAttachmentLocations=locations; locationInfo.pNext=&inputInfo;
+    VkPipelineRenderingCreateInfo rendering{VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO};
+    rendering.colorAttachmentCount=3; rendering.pColorAttachmentFormats=formats; rendering.depthAttachmentFormat=depth.format;
+    rendering.pNext=&locationInfo;
+    if(dynamic) ci.pNext=&rendering;
     VkPipeline pipeline{}; check(vkCreateGraphicsPipelines(device,VK_NULL_HANDLE,1,&ci,nullptr,&pipeline),"graphics pipeline"); return pipeline;
 }
 
 void Benchmark::createPaths() {
+    if(options.path=="drlr") {
+        createDynamic();
+        contourPass=makePass({&output},nullptr,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
+        contourFramebuffer=makeFramebuffer(contourPass,{&output});
+        contourPipeline=makePipeline(contourPass,0,"contour.frag",false,1);
+        return;
+    }
     if(options.path=="subpasses") {
         createSubpasses();
         contourPass=makePass({&output},nullptr,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL);
@@ -261,6 +305,13 @@ void Benchmark::fullscreenDraw(VkPipeline pipeline,VkPipelineLayout layout,VkDes
     vkCmdDraw(command,3,1,0,0);
 }
 void Benchmark::record() {
+    if(options.path=="drlr") {
+        recordDynamic();
+        beginPass(contourPass,contourFramebuffer,1,false);
+        fullscreenDraw(contourPipeline,sampledPipelineLayout,contourSet); ++contourDraws;
+        vkCmdEndRenderPass(command);
+        return;
+    }
     if(options.path=="subpasses") {
         beginPass(geometryPass,geometryFramebuffer,3,true); geometryDraw();
         vkCmdNextSubpass(command,VK_SUBPASS_CONTENTS_INLINE); ++nextSubpassCalls;
@@ -281,7 +332,7 @@ void Benchmark::submit() {
     check(vkWaitForFences(device,1,&fence,VK_TRUE,30'000'000'000ull),"frame completion"); check(vkResetFences(device,1,&fence),"reset fence");
 }
 void Benchmark::run() {
-    if(options.path!="traditional" && options.path!="subpasses") throw std::runtime_error("path not implemented");
+    if(options.path!="traditional" && options.path!="subpasses" && options.path!="drlr") throw std::runtime_error("path not implemented");
     initialize();
     for(uint32_t frame=0;frame<options.frames+options.warmup;++frame) {
         check(vkResetCommandPool(device,commandPool,0),"reset command pool");
@@ -325,6 +376,7 @@ void Benchmark::save() {
         <<",\"validationErrors\":"<<errors.load()<<",\"validationWarnings\":"<<warnings.load()
         <<",\"geometryDraws\":"<<geometryDraws<<",\"toonDraws\":"<<toonDraws<<",\"contourDraws\":"<<contourDraws
         <<",\"nextSubpassCalls\":"<<nextSubpassCalls<<",\"beginRenderingCalls\":"<<beginRenderingCalls
+        <<",\"dynamicRenderingLocalReadEnabled\":"<<(options.path=="drlr"?"true":"false")
         <<",\"measurementScope\":\"gbuffer-through-contour; readback-excluded\",\"status\":\"pilot-environment-not-qualified\",\"gpuMs\":[";
     for(size_t i=0;i<gpuMs.size();++i) { if(i) json<<','; json<<gpuMs[i]; }
     json<<"],\"cpuRecordingMs\":["; for(size_t i=0;i<cpuMs.size();++i) { if(i) json<<','; json<<cpuMs[i]; }
