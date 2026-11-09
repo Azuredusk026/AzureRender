@@ -16,6 +16,8 @@
 [Intel 零历史兼容](acceptance/nr/shadow-receiver-entry.md)已通过原断言。
 [零贡献计算](acceptance/nr/direct-light-zero-contribution.md)未通过局部效率门槛。
 原生头发整区、对象接收精度及完整联合外观继续验收。
+[对象阴影页边界](acceptance/nr/object-shadow-page-boundary.md)的串扰修复通过四项设备检查。
+原始四帧保持零差，完整接收精度继续验收。
 目录维护按 D 盘项目技能与每日有界回收执行。
 
 ## 已取得的分项证据

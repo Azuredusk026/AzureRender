@@ -68,7 +68,9 @@ float objectShadowPageTexel(texture2D depth,sampler sharedSampler,ivec2 pixel,iv
 }
 vec4 objectShadowGather(texture2D depth,sampler sharedSampler,vec2 uv,ivec2 lo,ivec2 hi) {
     ivec2 base=ivec2(floor(uv*vec2(textureSize(sampler2D(depth,sharedSampler),0))-.5));
-    if(all(greaterThanEqual(base,lo))&&all(lessThan(base+1,hi)))
+    // Filtering coordinates can round to the adjacent texel on the sampler's
+    // subtexel grid. Keep a texel of slack around the hardware footprint.
+    if(all(greaterThanEqual(base-1,lo))&&all(lessThan(base+2,hi)))
         return textureGather(sampler2D(depth,sharedSampler),uv);
     return vec4(objectShadowPageTexel(depth,sharedSampler,base+ivec2(0,1),lo,hi),
                 objectShadowPageTexel(depth,sharedSampler,base+ivec2(1),lo,hi),

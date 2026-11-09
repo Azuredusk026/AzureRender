@@ -137,6 +137,9 @@ SDK 路径归属于 D 盘任务，两配置及设备检查通过。
 [零贡献计算](../acceptance/nr/direct-light-zero-contribution.md)通过独立位模式核对。
 局部效率未达门槛，生产沿用受检基准，原生执行次数为零。
 后续继续核对原生头发整区及对象接收精度。
+[对象阴影页边界](../acceptance/nr/object-shadow-page-boundary.md)已补足采样器量化余量。
+两配置、两设备的四项检查通过，原始四帧保持零差。
+完整头发仍有采样及接收输入精度待项。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

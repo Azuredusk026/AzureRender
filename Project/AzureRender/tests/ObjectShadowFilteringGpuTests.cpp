@@ -22,6 +22,17 @@ int main(int argc,char** argv) try {
         {.625F,.25F,.5F,0},{0,0,0,0},{.5F,0,.25F,.5F},
         {.25F,.25F,.5F,0},{0,0,0,0},{0,0,.25F,.5F}};
     std::vector<Vec4> expected={{.8625F,16,220.F/255,1},{0,64,0,1},{1,0,1,1},{1,0,1,1}};
+    // A white page surrounded by opaque neighbours. The sampler may snap a
+    // coordinate just below the next texel to its fixed subtexel grid.
+    for(unsigned y=3;y<=6;++y)for(unsigned x=7;x<=12;++x)
+        if(x<8||x>=12||y<4||y>=6)synthetic[y*width+x]=0.F;
+    std::memcpy(pixels.data(),synthetic.data(),pixels.size());
+    for(float epsilon:{1.F/1024,1.F/2048,1.F/4096})for(unsigned edge=0;edge<3;++edge){
+        const float u=(edge==1?10.F:11.5F-epsilon)/width;
+        const float v=(edge==0?5.F:5.5F-epsilon)/height;
+        queries.insert(queries.end(),{{u,v,.5F,0},{0,0,0,0},{.5F,.5F,.25F,.25F}});
+        expected.push_back({1,0,1,1});
+    }
     if(argc==3){
         std::ifstream stream(argv[2]);nlohmann::json fixture;stream>>fixture;
         width=fixture.at("width");height=fixture.at("height");format=VK_FORMAT_D16_UNORM;

@@ -1,0 +1,42 @@
+{
+  "removed": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-164916-hair-receiver-precision-73ea3d\\tmp",
+      "removed": [
+        268,
+        1794216081.800435
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-164916-hair-receiver-precision-73ea3d\\image-final-page-boundary\\frames-171650\\frame_000000.png",
+      "removed": [
+        5714675,
+        1794216078.536626
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-164916-hair-receiver-precision-73ea3d\\image-final-page-boundary\\frames-171650\\frame_000001.png",
+      "removed": [
+        5713820,
+        1794216079.3978472
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-164916-hair-receiver-precision-73ea3d\\image-final-page-boundary\\frames-171650\\frame_000002.png",
+      "removed": [
+        5713834,
+        1794216080.236372
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-164916-hair-receiver-precision-73ea3d\\image-final-page-boundary\\frames-171650\\frame_000003.png",
+      "removed": [
+        5714218,
+        1794216081.120976
+      ]
+    }
+  ],
+  "freeBefore": 157939916800,
+  "freeAfter": 157962784768,
+  "observedFreedBytes": 22867968
+}
