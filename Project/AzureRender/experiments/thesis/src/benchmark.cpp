@@ -1,5 +1,6 @@
 #include "Benchmark.hpp"
 #include "Workload.hpp"
+#include "Capture.hpp"
 #include <algorithm>
 #include <chrono>
 #include <cstring>
@@ -23,7 +24,12 @@ VKAPI_ATTR VkBool32 VKAPI_CALL Benchmark::debug(VkDebugUtilsMessageSeverityFlagB
 
 void Benchmark::initialize() {
     VkApplicationInfo app{VK_STRUCTURE_TYPE_APPLICATION_INFO};
-    app.pApplicationName="AzureThesisBenchmark"; app.apiVersion=options.path=="drlr"?VK_API_VERSION_1_4:VK_API_VERSION_1_3;
+    app.pApplicationName="AzureThesisBenchmark";
+    uint32_t loaderVersion=VK_API_VERSION_1_0;
+    auto enumerateVersion=reinterpret_cast<PFN_vkEnumerateInstanceVersion>(vkGetInstanceProcAddr(nullptr,"vkEnumerateInstanceVersion"));
+    if(enumerateVersion) check(enumerateVersion(&loaderVersion),"loader version");
+    if(loaderVersion<VK_API_VERSION_1_3) throw std::runtime_error("Vulkan 1.3 loader required");
+    app.apiVersion=std::min(loaderVersion,options.path=="drlr"?VK_API_VERSION_1_4:VK_API_VERSION_1_3);
     const char* layer="VK_LAYER_KHRONOS_validation";
     const char* extension=VK_EXT_DEBUG_UTILS_EXTENSION_NAME;
     VkValidationFeatureEnableEXT sync=VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT;
@@ -333,8 +339,10 @@ void Benchmark::submit() {
 }
 void Benchmark::run() {
     if(options.path!="traditional" && options.path!="subpasses" && options.path!="drlr") throw std::runtime_error("path not implemented");
+    Capture capture(options.captureDll,options.capturePrefix);
     initialize();
     for(uint32_t frame=0;frame<options.frames+options.warmup;++frame) {
+        if(frame==0) capture.begin();
         check(vkResetCommandPool(device,commandPool,0),"reset command pool");
         VkCommandBufferBeginInfo bi{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO}; bi.flags=VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
         check(vkBeginCommandBuffer(command,&bi),"begin commands");
@@ -343,6 +351,7 @@ void Benchmark::run() {
         auto start=std::chrono::steady_clock::now(); record(); auto end=std::chrono::steady_clock::now();
         vkCmdWriteTimestamp(command,VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,queries,1);
         check(vkEndCommandBuffer(command),"end commands"); submit();
+        if(frame==0) capture.end();
         uint64_t values[2]{}; check(vkGetQueryPoolResults(device,queries,0,2,sizeof(values),values,sizeof(uint64_t),VK_QUERY_RESULT_64_BIT|VK_QUERY_RESULT_WAIT_BIT),"timestamp results");
         uint64_t mask=timestampBits==64?~uint64_t(0):(uint64_t(1)<<timestampBits)-1;
         double gpu=double((values[1]-values[0])&mask)*double(properties.limits.timestampPeriod)/1e6;
@@ -377,6 +386,7 @@ void Benchmark::save() {
         <<",\"geometryDraws\":"<<geometryDraws<<",\"toonDraws\":"<<toonDraws<<",\"contourDraws\":"<<contourDraws
         <<",\"nextSubpassCalls\":"<<nextSubpassCalls<<",\"beginRenderingCalls\":"<<beginRenderingCalls
         <<",\"dynamicRenderingLocalReadEnabled\":"<<(options.path=="drlr"?"true":"false")
+        <<",\"captureEnabled\":"<<(options.capturePrefix.empty()?"false":"true")
         <<",\"measurementScope\":\"gbuffer-through-contour; readback-excluded\",\"status\":\"pilot-environment-not-qualified\",\"gpuMs\":[";
     for(size_t i=0;i<gpuMs.size();++i) { if(i) json<<','; json<<gpuMs[i]; }
     json<<"],\"cpuRecordingMs\":["; for(size_t i=0;i<cpuMs.size();++i) { if(i) json<<','; json<<cpuMs[i]; }
@@ -417,6 +427,7 @@ int main(int argc,char** argv) {
             if(i+1==argc) throw std::invalid_argument("missing option value"); std::string value=argv[++i];
             auto number=[&]() { size_t used=0; auto n=std::stoul(value,&used); if(used!=value.size() || n>1000000) throw std::invalid_argument("invalid integer"); return uint32_t(n); };
             if(key=="--path") o.path=value; else if(key=="--gpu") o.gpu=value; else if(key=="--complexity") o.complexity=value;
+            else if(key=="--capture") o.capturePrefix=value; else if(key=="--renderdoc") o.captureDll=value;
             else if(key=="--shaders") o.shaders=value; else if(key=="--output") o.output=value;
             else if(key=="--width") o.width=number(); else if(key=="--height") o.height=number(); else if(key=="--frames") o.frames=number(); else if(key=="--warmup") o.warmup=number();
             else throw std::invalid_argument("unknown option: "+key);
