@@ -127,6 +127,9 @@ SDK 路径归属于 D 盘任务，两配置及设备检查通过。
 [运动矢量绑定复用](../acceptance/nr/motion-descriptor-reuse.md)消除稳定准备中的描述符重写。
 两配置、两设备的十项所属检查通过，原始四帧保持逐字节一致。
 着色器全部保持原摘要，本单元效率以实际调用消除量记录。
+[展示照明按需计算](../acceptance/nr/presentation-environment-demand.md)完成四组小画面和一次集中成本核对。
+受影响区间均值差约为 4.03%，候选未达到 5% 的本地门槛。
+后参考记录到热降频信号，生产已恢复受检内容，完整长采样未启动。
 [资产快照压缩](../acceptance/nr/compressed-asset-snapshots.md)已部署，当前 864 份快照逐字节通过，实际释放约 646 MiB。
 [有界管线缓存](../acceptance/nr/pipeline-cache-workflow.md)已接入 RHI。
 原生管线准备在跨进程复用时约为 0.140 秒，636 次创建全部命中。

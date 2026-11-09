@@ -1,0 +1,21 @@
+{
+  "removed": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-105115-presentation-environment-demand-dfc34b\\baseline-runtime",
+      "result": [
+        213708220,
+        1794192879.809174
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-105115-presentation-environment-demand-dfc34b\\tmp",
+      "result": [
+        136,
+        1794193789.8742135
+      ]
+    }
+  ],
+  "freeBefore": 157758627840,
+  "freeAfter": 157973970944,
+  "observedFreedBytes": 215343104
+}
