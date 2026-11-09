@@ -2,6 +2,10 @@
 
 [并行资源调度](docs/development/shared-resources.md)统一编译、GPU 检查及跨工作树输入保护。
 
+论文三路径基准见[独立实验](experiments/thesis/README.md)。
+传统多遍、子通道及动态渲染局部读取已完成桌面正确性核对。
+正式跨平台矩阵及结果分析等待移动实机资格。
+
 开发产物使用[目录维护技能](tools/skills/azurerender-artifact-maintenance/SKILL.md)。
 仓库[技能入口](../../.agents/skills/azurerender-artifact-maintenance/SKILL.md)及完整规则均保存在 D 盘。
 [任务临时目录](docs/acceptance/recovery/managed-temporary-storage.md)随任务计入配额及每日回收，子进程沿用项目所在卷。
