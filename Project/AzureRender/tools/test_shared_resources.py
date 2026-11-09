@@ -40,6 +40,44 @@ class SharedResourcesTests(unittest.TestCase):
             self.assertEqual(value['pid'], os.getpid())
         self.assertEqual(json.loads((self.root/'queue/current.json').read_text())['state'], 'released')
 
+    def test_abrupt_owner_exit_keeps_a_live_managed_child_exclusive(self):
+        import signal
+        output = self.build/'runs'/'orphan-command'
+        maintenance.create_run(self.build, output, dict(plannedBytes=0))
+        worker = '''
+import os,sys,subprocess
+from pathlib import Path
+import artifact_maintenance as m
+import shared_resources as s
+queue,output=map(Path,sys.argv[1:])
+with s.lease(queue,'worker','orphan-test',output):
+ child=subprocess.Popen([sys.executable,'-c','import time;time.sleep(30)'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+ with m.database(output.parent.parent,True) as db:
+  record=m.rows(db)[output.name];record['processPid']=child.pid;m.save(db,output.name,record)
+ os._exit(0)
+'''
+        subprocess.run([sys.executable,'-c',worker,str(self.root/'queue'),str(output)],
+                       cwd=Path(__file__).parent,check=True)
+        with maintenance.database(self.build) as db:
+            child = maintenance.rows(db)[output.name]['processPid']
+        try:
+            with self.assertRaisesRegex(ValueError,'orphan|running'):
+                shared.try_once(self.root/'queue','next','gpu',self.root)
+        finally:
+            os.kill(child,signal.SIGTERM)
+        deadline=time.monotonic()+5
+        while shared.process_alive(child) and time.monotonic()<deadline:
+            time.sleep(.01)
+        with maintenance.database(self.build,True) as db:
+            record=maintenance.rows(db)[output.name];record['processPid']=-1
+            maintenance.save(db,output.name,record)
+        with self.assertRaisesRegex(ValueError,'inspection'):
+            shared.try_once(self.root/'queue','next','gpu',self.root)
+        with maintenance.database(self.build,True) as db:
+            record=maintenance.rows(db)[output.name];record['processPid']=None
+            maintenance.save(db,output.name,record)
+        self.assertTrue(shared.try_once(self.root/'queue','next','gpu',self.root))
+
     def test_external_consumer_protects_input_and_release_checks_owner(self):
         source = self.build/'runs'/'source'
         maintenance.create_run(self.build, source, dict(plannedBytes=0))

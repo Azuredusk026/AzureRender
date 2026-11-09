@@ -13,6 +13,53 @@ DEFAULT_BUILD = Path('D:/Projects/FYP/Project/AzureRender/build')
 DEFAULT_QUEUE = Path('D:/Projects/FYP-coordination/resources')
 
 
+def process_alive(pid):
+    if type(pid) is not int or pid<=0:
+        raise ValueError('Unknown resource process requires inspection')
+    if os.name=='nt':
+        import ctypes
+        from ctypes import wintypes
+        kernel=ctypes.WinDLL('kernel32',use_last_error=True)
+        kernel.OpenProcess.argtypes=[wintypes.DWORD,wintypes.BOOL,wintypes.DWORD]
+        kernel.OpenProcess.restype=wintypes.HANDLE
+        kernel.GetExitCodeProcess.argtypes=[wintypes.HANDLE,ctypes.POINTER(wintypes.DWORD)]
+        kernel.CloseHandle.argtypes=[wintypes.HANDLE]
+        handle=kernel.OpenProcess(0x1000,False,pid)
+        if not handle:
+            if ctypes.get_last_error()==87:return False
+            return True  # Access denied remains conservatively occupied.
+        try:
+            code=wintypes.DWORD()
+            if not kernel.GetExitCodeProcess(handle,ctypes.byref(code)):
+                raise OSError('Could not inspect resource process')
+            return code.value==259
+        finally:
+            kernel.CloseHandle(handle)
+    try:
+        os.kill(pid,0)
+        return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+
+
+def check_previous_owner(queue):
+    path=queue/'current.json'
+    if not path.exists():return
+    previous=json.loads(path.read_text())
+    if previous.get('state')!='held':return
+    if process_alive(previous.get('pid')):
+        raise ValueError('Previous resource owner is still running')
+    output=maintenance.real_path(previous['output'])
+    if output.parent.name=='runs':
+        with maintenance.database(output.parent.parent) as db:
+            record=maintenance.rows(db).get(output.name,{})
+        child=record.get('processPid')
+        if child and (child==-1 or process_alive(child)):
+            raise ValueError('An orphaned managed command is running or requires inspection')
+
+
 @contextmanager
 def lease(queue, owner, task, output):
     queue = maintenance.real_path(queue)
@@ -20,6 +67,7 @@ def lease(queue, owner, task, output):
     token = uuid.uuid4().hex
     try:
         with maintenance.maintenance_lock(queue):
+            check_previous_owner(queue)
             value = dict(owner=owner, task=task, output=str(Path(output).absolute()),
                          pid=os.getpid(), token=token, started=time.time(), state='held')
             maintenance.write_json(queue/'current.json', value)
