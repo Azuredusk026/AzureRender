@@ -12,6 +12,57 @@ int main()try{
     rhi::NullRhi backend;
     std::vector<char> code(20);code[0]=3;code[1]=2;code[2]=35;code[3]=7;
     ScreenObjectVisibilityShaders shaders{code,code};
+    backend.fragmentStorageBufferCount=0;
+    require(!ScreenObjectVisibilityGpu::supported(backend,{19,11},2),"Missing fragment storage capacity was accepted");
+    rejects([&]{ScreenObjectVisibilityGpu owner(backend,{19,11},2,shaders);});
+    backend.fragmentStorageBufferCount=8;
+    ScreenObjectVisibilityNumerics reference;
+    reference.mode=ScreenObjectVisibilityArithmetic::ProfileV1;
+    reference.reciprocalCorrections.assign(524288,0x55555555u);
+    backend.fragmentStorageBufferBytes=1048576;
+    rejects([&]{ScreenObjectVisibilityGpu owner(backend,{19,11},2,shaders,reference);});
+    backend.fragmentStorageBufferBytes=128ULL*1024*1024;
+    auto& allocator=static_cast<rhi::NullGpuAllocator&>(backend.allocator());
+    for(int failAfter=0;failAfter<5;++failAfter){
+        allocator.allocationFailureAfter=failAfter;
+        rejects([&]{ScreenObjectVisibilityGpu owner(backend,{19,11},2,shaders,reference);});
+        require(!allocator.statistics().liveImages&&!allocator.statistics().liveBuffers,"Construction failure leaked resources");
+        for(const auto& pair:{std::pair<const char*,const char*>{"createImageView","destroyImageView"},
+            {"createSampler","destroySampler"},{"createDescriptorSetLayout","destroyDescriptorSetLayout"},
+            {"createDescriptorPool","destroyDescriptorPool"},{"createPipelineLayout","destroyPipelineLayout"},
+            {"createRenderPass","destroyRenderPass"},{"createFramebuffer","destroyFramebuffer"},
+            {"createShaderModule","destroyShaderModule"},{"createGraphicsPipeline","destroyPipeline"}}){
+            unsigned creates=0,destroys=0;
+            for(const auto& call:backend.calls){creates+=call.name==pair.first;destroys+=call.name==pair.second;}
+            require(creates==destroys,"Construction failure leaked a backend handle");
+        }
+    }
+    allocator.allocationFailureAfter=-1;
+    auto badNumerics=reference;badNumerics.reciprocalCorrections.pop_back();
+    rejects([&]{ScreenObjectVisibilityGpu owner(backend,{19,11},2,shaders,badNumerics);});
+    badNumerics=reference;badNumerics.reciprocalCorrections[17]|=3u;
+    rejects([&]{ScreenObjectVisibilityGpu owner(backend,{19,11},2,shaders,badNumerics);});
+    badNumerics=reference;badNumerics.mode=static_cast<ScreenObjectVisibilityArithmetic>(99);
+    rejects([&]{ScreenObjectVisibilityGpu owner(backend,{19,11},2,shaders,badNumerics);});
+    badNumerics=reference;badNumerics.mode=ScreenObjectVisibilityArithmetic::Device;
+    rejects([&]{ScreenObjectVisibilityGpu owner(backend,{19,11},2,shaders,badNumerics);});
+    require(!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers,"Rejected numerics allocated resources");
+    {
+        ScreenObjectVisibilityGpu deviceOwner(backend,{19,11},2,shaders);
+        ScreenObjectVisibilityGpu referenceOwner(backend,{19,11},2,shaders,reference);
+        require(referenceOwner.byteBudget()==deviceOwner.byteBudget()+2097152-4,"Reference profile budget mismatch");
+        // The owner copies immutable configuration data during construction.
+        reference.reciprocalCorrections.clear();
+        ScreenObjectVisibilityInputs input;input.extent={19,11};
+        input.depth=reinterpret_cast<VkImageView>(900);input.normals=reinterpret_cast<VkImageView>(901);
+        input.objectIds=reinterpret_cast<VkImageView>(902);input.atlas=reinterpret_cast<VkImageView>(903);
+        ScreenObjectVisibilityView view;view.clipToWorld=identity();
+        ScreenObjectVisibilityRecord record;record.worldToUnitShadow=identity();
+        rhi::NullCommandRecorder commands;
+        for(unsigned slot:{0u,1u,0u})referenceOwner.record(commands,slot,input,view,{record});
+        require(!commands.calls.empty(),"Reference mode produced no commands after source release");
+    }
+    require(!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers,"Reference owner leaked resources");
     require(ScreenObjectVisibilityGpu::supported(backend,{19,11},2),"Small visibility output must be supported");
     for(const auto extent:{VkExtent2D{0,11},VkExtent2D{8193,1},VkExtent2D{8192,8192}})
         require(!ScreenObjectVisibilityGpu::supported(backend,extent,8),"Invalid or excessive visibility allocation was accepted");

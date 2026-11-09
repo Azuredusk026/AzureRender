@@ -31,6 +31,15 @@ bool depthFormat(VkFormat f){return f==VK_FORMAT_R32_SFLOAT||f==VK_FORMAT_D32_SF
 bool sampledLayout(VkImageLayout layout,VkFormat format){
     return layout==VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL||((format==VK_FORMAT_D16_UNORM||format==VK_FORMAT_D32_SFLOAT)&&layout==VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
 }
+VkDeviceSize numericsBytes(const ScreenObjectVisibilityNumerics& config){
+    require(config.mode==ScreenObjectVisibilityArithmetic::Device||config.mode==ScreenObjectVisibilityArithmetic::ProfileV1,"Unknown visibility arithmetic version");
+    if(config.mode==ScreenObjectVisibilityArithmetic::Device){
+        require(config.reciprocalCorrections.empty(),"Device arithmetic requires an empty reciprocal profile");return 4;
+    }
+    require(config.reciprocalCorrections.size()==524288,"Reciprocal profile requires exactly 524288 words");
+    for(const auto word:config.reciprocalCorrections)require((word&(word>>1)&0x55555555u)==0,"Reciprocal profile contains a reserved code");
+    return 2097152;
+}
 PackedFrame pack(VkExtent2D extent,const ScreenObjectVisibilityInputs& inputs,const ScreenObjectVisibilityView& view,const std::vector<ScreenObjectVisibilityRecord>& records){
     require(records.size()<=8,"Visibility supports at most eight object records");
     require(finite(view.clipToWorld)&&invertible(view.clipToWorld),"Visibility inverse projection must be finite and invertible");
@@ -60,21 +69,31 @@ struct ScreenObjectVisibilityGpu::Impl {
     struct Slot {rhi::GpuImage image{};VkImageView view{};VkFramebuffer framebuffer{};rhi::GpuBuffer parameters{};VkDescriptorSet set{};bool initialized=false;};
     rhi::IRhi& backend;VkExtent2D extent{};std::uint64_t bytes=0;std::vector<Slot> slots;
     VkSampler sampler{};VkDescriptorSetLayout descriptors{};VkDescriptorPool pool{};VkPipelineLayout layout{};VkRenderPass pass{};VkPipeline pipeline{};
+    rhi::GpuBuffer numerics{};bool reference=false;
     Impl(rhi::IRhi& b,VkExtent2D e):backend(b),extent(e){}
     ~Impl(){
         if(pipeline)backend.destroyPipeline(pipeline);if(layout)backend.destroyPipelineLayout(layout);
         if(pool)backend.destroyDescriptorPool(pool);if(descriptors)backend.destroyDescriptorSetLayout(descriptors);
         for(auto& slot:slots){if(slot.framebuffer)backend.destroyFramebuffer(slot.framebuffer);if(slot.view)backend.destroyImageView(slot.view);backend.allocator().destroyImage(slot.image);backend.allocator().destroyBuffer(slot.parameters);}
         if(pass)backend.destroyRenderPass(pass);if(sampler)backend.destroySampler(sampler);
+        backend.allocator().destroyBuffer(numerics);
     }
-    void initialize(unsigned frames,const ScreenObjectVisibilityShaders& shaders){
-        bytes=budget(extent,frames);slots.resize(frames);
+    void initialize(unsigned frames,const ScreenObjectVisibilityShaders& shaders,const ScreenObjectVisibilityNumerics& config){
+        const auto dataBytes=numericsBytes(config);bytes=budget(extent,frames)+dataBytes;
+        require(bytes<=256ULL*1024*1024,"Visibility resources exceed 256 MiB");
+        if(!backend.supportsFragmentStorageBuffers(dataBytes))throw std::runtime_error("Visibility fragment storage buffer capacity is unavailable");
+        reference=config.mode==ScreenObjectVisibilityArithmetic::ProfileV1;slots.resize(frames);
+        numerics=backend.allocator().createBuffer(dataBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
+        if(reference)std::memcpy(numerics.mapped,config.reciprocalCorrections.data(),std::size_t(dataBytes));
+        else std::memset(numerics.mapped,0,std::size_t(dataBytes));
+        backend.allocator().flush(numerics,0,dataBytes);
         rhi::SamplerDesc sampled;sampled.filter=VK_FILTER_NEAREST;sampled.mipmapLinear=false;
         sampled.addressU=sampled.addressV=sampled.addressW=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;sampler=backend.createSampler(sampled);
         descriptors=backend.createDescriptorSetLayout({{0,VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
             {1,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},{2,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
-            {3,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},{4,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT}});
-        rhi::DescriptorPoolDesc descriptorPool;descriptorPool.maxSets=frames;descriptorPool.sizes={{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,frames},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,frames*4}};
+            {3,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},{4,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT},
+            {5,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT}});
+        rhi::DescriptorPoolDesc descriptorPool;descriptorPool.maxSets=frames;descriptorPool.sizes={{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,frames},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,frames*4},{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,frames}};
         pool=backend.createDescriptorPool(descriptorPool);const auto sets=backend.allocateDescriptorSets(pool,descriptors,frames);
         layout=backend.createPipelineLayout(descriptors,nullptr);
         rhi::RenderPassDesc render;render.attachments={{VK_FORMAT_R8G8_UNORM,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,false,true,false}};
@@ -93,17 +112,21 @@ struct ScreenObjectVisibilityGpu::Impl {
             slot.view=backend.createImageView(slot.image.image,VK_FORMAT_R8G8_UNORM,VK_IMAGE_ASPECT_COLOR_BIT,1);slot.framebuffer=backend.createFramebuffer({pass,{slot.view},extent.width,extent.height});
             slot.parameters=backend.allocator().createBuffer(sizeof(PackedFrame),VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,true);
             backend.writeDescriptorBuffer({slot.set,0,VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,slot.parameters.buffer,slot.parameters.size});
+            backend.writeDescriptorBuffer({slot.set,5,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,numerics.buffer,numerics.size});
         }
     }
 };
 bool ScreenObjectVisibilityGpu::supported(rhi::IRhi& backend,VkExtent2D extent,unsigned frames){
-    try{(void)budget(extent,frames);}catch(const std::invalid_argument&){return false;}
-    return backend.supportsSampledImage(VK_FORMAT_R8G8_UNORM,false)&&(backend.imageSampleCounts(VK_FORMAT_R8G8_UNORM,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT)&VK_SAMPLE_COUNT_1_BIT);
+    try{if(budget(extent,frames)+4>256ULL*1024*1024)return false;}catch(const std::invalid_argument&){return false;}
+    return backend.supportsFragmentStorageBuffers(4)&&backend.supportsSampledImage(VK_FORMAT_R8G8_UNORM,false)&&(backend.imageSampleCounts(VK_FORMAT_R8G8_UNORM,VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT)&VK_SAMPLE_COUNT_1_BIT);
 }
 ScreenObjectVisibilityShaders ScreenObjectVisibilityShaders::load(const std::string& directory){return {readBinaryFile(directory+"/screen_object_visibility.vert.spv"),readBinaryFile(directory+"/screen_object_visibility.frag.spv")};}
-ScreenObjectVisibilityGpu::ScreenObjectVisibilityGpu(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,const ScreenObjectVisibilityShaders& shaders){
+ScreenObjectVisibilityGpu::ScreenObjectVisibilityGpu(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,const ScreenObjectVisibilityShaders& shaders)
+    :ScreenObjectVisibilityGpu(backend,extent,frames,shaders,ScreenObjectVisibilityNumerics{}){}
+ScreenObjectVisibilityGpu::ScreenObjectVisibilityGpu(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,const ScreenObjectVisibilityShaders& shaders,const ScreenObjectVisibilityNumerics& config){
+    if(!backend.supportsFragmentStorageBuffers(numericsBytes(config)))throw std::runtime_error("Visibility fragment storage buffer capacity is unavailable");
     (void)budget(extent,frames);if(!supported(backend,extent,frames))throw std::runtime_error("Visibility color attachment is unavailable");
-    impl_=std::make_unique<Impl>(backend,extent);impl_->initialize(frames,shaders);
+    impl_=std::make_unique<Impl>(backend,extent);impl_->initialize(frames,shaders,config);
 }
 ScreenObjectVisibilityGpu::~ScreenObjectVisibilityGpu()=default;
 std::uint64_t ScreenObjectVisibilityGpu::byteBudget() const noexcept{return impl_->bytes;}
@@ -117,12 +140,13 @@ void ScreenObjectVisibilityGpu::record(rhi::ICommandRecorder& commands,unsigned 
     require(sampledLayout(inputs.depthLayout,inputs.depthFormat)&&sampledLayout(inputs.atlasLayout,inputs.atlasFormat),"Visibility depth inputs require sampled read-only layouts");
     for(auto format:{inputs.depthFormat,inputs.normalFormat,inputs.objectIdFormat,inputs.atlasFormat})require(backend.supportsSampledImage(format,false),"Visibility sampled input format is unavailable");
     for(const auto& owned:state.slots)for(auto borrowed:{inputs.depth,inputs.normals,inputs.objectIds,inputs.atlas})require(borrowed!=owned.view,"Visibility inputs alias owned outputs");
-    const auto frame=pack(state.extent,inputs,view,records);
+    auto frame=pack(state.extent,inputs,view,records);if(state.reference)frame.control[1]|=2u;
     std::memcpy(slot.parameters.mapped,&frame,sizeof(frame));backend.allocator().flush(slot.parameters,0,sizeof(frame));
     const VkImageView views[]={inputs.depth,inputs.normals,inputs.objectIds,inputs.atlas};
     const VkImageLayout layouts[]={inputs.depthLayout,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,inputs.atlasLayout};
     for(unsigned i=0;i<4;++i)backend.writeDescriptorImage({slot.set,i+1,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,views[i],state.sampler,layouts[i]});
     commands.bufferBarrier({slot.parameters.buffer,0,slot.parameters.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_UNIFORM_READ_BIT});
+    commands.bufferBarrier({state.numerics.buffer,0,state.numerics.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     commands.imageBarrier({slot.image.image,slot.initialized?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,1,
         VkPipelineStageFlags(slot.initialized?VK_PIPELINE_STAGE_ALL_COMMANDS_BIT:VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT),VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
         slot.initialized?VK_ACCESS_SHADER_READ_BIT:0U,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT});

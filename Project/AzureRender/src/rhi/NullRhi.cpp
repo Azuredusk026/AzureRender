@@ -59,6 +59,8 @@ GpuBuffer NullGpuAllocator::createBuffer(
     const VkDeviceSize size,
     const VkBufferUsageFlags usage,
     const bool hostVisible) {
+    if(allocationFailureAfter==0)throw std::bad_alloc();
+    if(allocationFailureAfter>0)--allocationFailureAfter;
     (void)hostVisible;
     GpuBuffer result;
     result.buffer = fakeHandle<VkBuffer>(nextHandle_++);
@@ -84,6 +86,8 @@ void NullGpuAllocator::destroyBuffer(GpuBuffer& buffer) noexcept {
 GpuImage NullGpuAllocator::createImage(
     const VkImageCreateInfo& createInfo,
     const bool hostVisible) {
+    if(allocationFailureAfter==0)throw std::bad_alloc();
+    if(allocationFailureAfter>0)--allocationFailureAfter;
     (void)hostVisible;
     GpuImage result;
     result.image = fakeHandle<VkImage>(nextHandle_++);

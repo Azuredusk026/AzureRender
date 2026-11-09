@@ -36,7 +36,8 @@
 [材质范围核对](docs/acceptance/nr/shadow-cost-scope.md)按三十五份实际管线常量分组，历史缓存支持范围对应约 1.47 毫秒控制差值。
 [零反射复用提案](docs/acceptance/nr/surface-lighting-reuse.md)保存反射贡献范围，实际材质覆盖依据尚未成立。
 对象接收的[同输入模型](docs/acceptance/nr/object-receiver-input-model.md)复现 17017 处原生可见量，场景集成继续验收。
-[屏幕对象可见量](docs/acceptance/nr/screen-object-visibility.md)提供公共图形通道，双设备功能检查通过，Intel 原生精度及场景接入继续验收。
+[屏幕对象可见量](docs/acceptance/nr/screen-object-visibility.md)提供公共图形通道。
+[参考算术配置](docs/acceptance/nr/visibility-reference-arithmetic.md)通过双设备原生区域核对，当前场景接入及完整颜色继续验收。
 [相位原点](docs/acceptance/nr/visibility-phase-origin.md)支持两种行号约定，默认原生区域保持逐字节一致。
 [设备深度核对](docs/acceptance/nr/receiver-device-depth.md)确认当前快照的整区关系，源投影和深度生产精度继续待验收。
 [线性深度核对](docs/acceptance/nr/receiver-linear-depth.md)仍有 216 处超差，接收输入的生产精度继续待验收。

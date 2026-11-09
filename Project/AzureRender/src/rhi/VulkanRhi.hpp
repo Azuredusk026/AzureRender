@@ -37,6 +37,12 @@ public:
     GpuAllocator& allocator() override { return *allocator_; }
     bool supportsSampledImage(VkFormat format,bool linearFilter) const override;
     bool supportsStorageImage(VkFormat format) const override;
+    bool supportsFragmentStorageBuffers(VkDeviceSize bytes,std::uint32_t count=1) const override {
+        if(!physicalDevice_||!bytes||!count)return false;
+        VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(physicalDevice_,&properties);
+        return bytes<=properties.limits.maxStorageBufferRange&&count<=properties.limits.maxPerStageDescriptorStorageBuffers
+            &&count<=properties.limits.maxDescriptorSetStorageBuffers;
+    }
     VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const override;
     bool supportsSampleShading() const noexcept override {return sampleShadingEnabled_;}
     bool supportsExactDepthBias() const noexcept override {return exactDepthBiasEnabled_;}

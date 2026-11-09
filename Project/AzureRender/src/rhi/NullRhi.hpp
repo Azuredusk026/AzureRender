@@ -22,6 +22,8 @@ struct RecordedCall {
 // writes work; images carry no storage. Handles are minted from a counter.
 class NullGpuAllocator final : public IGpuAllocator {
 public:
+    // Fail the next allocation after this many successes; -1 disables injection.
+    int allocationFailureAfter=-1;
     void invalidate(const GpuBuffer&,VkDeviceSize,VkDeviceSize) override {}
     GpuBuffer createBuffer(
         VkDeviceSize size,
@@ -72,6 +74,8 @@ public:
     VkSampleCountFlags supportedSamples=VK_SAMPLE_COUNT_1_BIT;
     bool sampleShadingSupported=false;
     bool exactDepthBiasSupported=true;
+    std::uint32_t fragmentStorageBufferCount=8;
+    VkDeviceSize fragmentStorageBufferBytes=128ULL*1024*1024;
 
     IGpuAllocator& allocator() override { return gpuAllocator_; }
     bool supportsSampledImage(VkFormat format,bool) const override {return unavailableSampledFormats.count(format)==0;}
@@ -82,6 +86,9 @@ public:
     }
     bool supportsSampleShading() const noexcept override {return sampleShadingSupported;}
     bool supportsExactDepthBias() const noexcept override {return exactDepthBiasSupported;}
+    bool supportsFragmentStorageBuffers(VkDeviceSize bytes,std::uint32_t count=1) const override {
+        return bytes&&count&&bytes<=fragmentStorageBufferBytes&&count<=fragmentStorageBufferCount;
+    }
 
     void copyBuffer(
         const GpuBuffer& source,

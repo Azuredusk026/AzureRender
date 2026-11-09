@@ -1,5 +1,6 @@
 #include "render/ScreenObjectVisibility.hpp"
 #include "support/VulkanComputeFixture.hpp"
+#include "resources/BinaryFile.hpp"
 #include <cstring>
 #include <iostream>
 using namespace azurerender;
@@ -29,7 +30,7 @@ void require(bool value,const char* message){if(!value)throw std::runtime_error(
 std::array<float,16> identity(){return {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};}
 }
 int main(int argc,char** argv)try{
-    if(argc!=2)throw std::runtime_error("Expected production shader directory");
+    if(argc!=2&&argc!=3)throw std::runtime_error("Expected production shader directory and optional reciprocal profile");
     test::VulkanComputeFixture host(true);auto& backend=*host.backend;
     constexpr unsigned width=19,height=11;unsigned checked=0;
     {
@@ -53,7 +54,19 @@ int main(int argc,char** argv)try{
         ScreenObjectVisibilityRecord first;first.worldToUnitShadow={0,0,0,0,0,0,0,0,0,0,0,0,.5F,.5F,.5F,1};
         first.atlasRect={.1F,.1F,.3F,.8F};first.filterRadiusUv={.01F,.01F};
         auto second=first;second.atlasRect[0]=.6F;
-        ScreenObjectVisibilityGpu owner(backend,{width,height},2,ScreenObjectVisibilityShaders::load(argv[1]));
+        ScreenObjectVisibilityNumerics numerics;
+        if(argc==3){
+            numerics.mode=ScreenObjectVisibilityArithmetic::ProfileV1;
+            if(std::string(argv[2])=="--reference")numerics.reciprocalCorrections.assign(524288,0x55555555u);
+            else{
+                const auto bytes=readBinaryFile(argv[2]);
+                require(bytes.size()==2097152,"Reciprocal profile file size mismatch");
+                numerics.reciprocalCorrections.resize(bytes.size()/4);
+                std::memcpy(numerics.reciprocalCorrections.data(),bytes.data(),bytes.size());
+            }
+        }
+        ScreenObjectVisibilityGpu owner(backend,{width,height},2,ScreenObjectVisibilityShaders::load(argv[1]),numerics);
+        numerics.reciprocalCorrections.clear();
         auto readback=host.allocator.createBuffer(width*height*2,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         try{
             for(unsigned scenario=0;scenario<6;++scenario){
