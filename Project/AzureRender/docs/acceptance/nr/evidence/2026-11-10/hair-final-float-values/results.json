@@ -1,0 +1,3516 @@
+{
+  "status": "actual-final-float-comparison",
+  "points": 31,
+  "nativeStoredQualifiedPoints": 31,
+  "vulkanNearestEvenQualifiedPoints": 5,
+  "vulkanTowardZeroQualifiedPoints": 31,
+  "vulkanOutputTowardZeroMatchesNative": 6,
+  "maximumAbsolute": 0.07155084609985352,
+  "rows": [
+    {
+      "pixel": [
+        1306,
+        156
+      ],
+      "nativeBits": [
+        1078962852,
+        1060022019,
+        1058536947
+      ],
+      "vulkanBits": [
+        1078968369,
+        1060025410,
+        1058539924
+      ],
+      "native": [
+        3.2447900772094727,
+        0.6822358965873718,
+        0.5937187075614929
+      ],
+      "vulkan": [
+        3.246105432510376,
+        0.6824380159378052,
+        0.5938961505889893
+      ],
+      "maximumAbsolute": 0.0013153553009033203,
+      "parameterSampleExact": false,
+      "nativeStoredCodes": [
+        1063,
+        919,
+        453
+      ],
+      "nativePredictedTowardZero": [
+        1063,
+        919,
+        453
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        17022,
+        14709,
+        14528
+      ],
+      "vulkanNearestEvenBits": [
+        17022,
+        14710,
+        14528
+      ],
+      "vulkanTowardZeroBits": [
+        17022,
+        14709,
+        14528
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1063,
+        919,
+        454
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1278,
+        163
+      ],
+      "nativeBits": [
+        1075442807,
+        1056075158,
+        1054847633
+      ],
+      "vulkanBits": [
+        1075443299,
+        1056076287,
+        1054848636
+      ],
+      "native": [
+        2.405545949935913,
+        0.4734923243522644,
+        0.4369092285633087
+      ],
+      "vulkan": [
+        2.405663251876831,
+        0.4735259711742401,
+        0.4369391202926636
+      ],
+      "maximumAbsolute": 0.00011730194091796875,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1036,
+        889,
+        439
+      ],
+      "nativePredictedTowardZero": [
+        1036,
+        889,
+        439
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16591,
+        14227,
+        14077
+      ],
+      "vulkanNearestEvenBits": [
+        16592,
+        14228,
+        14078
+      ],
+      "vulkanTowardZeroBits": [
+        16591,
+        14227,
+        14077
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1036,
+        889,
+        439
+      ],
+      "vulkanTowardZeroMatchesNativeStored": true
+    },
+    {
+      "pixel": [
+        1313,
+        168
+      ],
+      "nativeBits": [
+        1080060745,
+        1061457876,
+        1059580680
+      ],
+      "vulkanBits": [
+        1080060698,
+        1061457837,
+        1059580657
+      ],
+      "native": [
+        3.5065481662750244,
+        0.7678196430206299,
+        0.6559300422668457
+      ],
+      "vulkan": [
+        3.5065369606018066,
+        0.7678173184394836,
+        0.6559286713600159
+      ],
+      "maximumAbsolute": 1.1205673217773438e-05,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1072,
+        930,
+        457
+      ],
+      "nativePredictedTowardZero": [
+        1072,
+        930,
+        457
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        17155,
+        14884,
+        14655
+      ],
+      "vulkanNearestEvenBits": [
+        17155,
+        14884,
+        14655
+      ],
+      "vulkanTowardZeroBits": [
+        17155,
+        14884,
+        14655
+      ],
+      "vulkanStorageNearestEvenQualified": true,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1072,
+        930,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": true
+    },
+    {
+      "pixel": [
+        1319,
+        172
+      ],
+      "nativeBits": [
+        1079598176,
+        1060966620,
+        1059575065
+      ],
+      "vulkanBits": [
+        1079598017,
+        1060966602,
+        1059575061
+      ],
+      "native": [
+        3.3962631225585938,
+        0.7385385036468506,
+        0.6555953621864319
+      ],
+      "vulkan": [
+        3.3962252140045166,
+        0.7385374307632446,
+        0.6555951237678528
+      ],
+      "maximumAbsolute": 3.790855407714844e-05,
+      "parameterSampleExact": false,
+      "nativeStoredCodes": [
+        1068,
+        926,
+        457
+      ],
+      "nativePredictedTowardZero": [
+        1068,
+        926,
+        457
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        17098,
+        14824,
+        14654
+      ],
+      "vulkanNearestEvenBits": [
+        17099,
+        14825,
+        14655
+      ],
+      "vulkanTowardZeroBits": [
+        17098,
+        14824,
+        14654
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1068,
+        926,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": true
+    },
+    {
+      "pixel": [
+        1267,
+        211
+      ],
+      "nativeBits": [
+        1071713220,
+        1058582827,
+        1058729284
+      ],
+      "vulkanBits": [
+        1071206929,
+        1058859186,
+        1058980010
+      ],
+      "native": [
+        1.758171558380127,
+        0.5964533686637878,
+        0.6051828861236572
+      ],
+      "vulkan": [
+        1.6978169679641724,
+        0.61292564868927,
+        0.6201273202896118
+      ],
+      "maximumAbsolute": 0.06035459041595459,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1008,
+        908,
+        454
+      ],
+      "nativePredictedTowardZero": [
+        1008,
+        908,
+        454
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16074,
+        14567,
+        14582
+      ],
+      "vulkanNearestEvenBits": [
+        16075,
+        14567,
+        14582
+      ],
+      "vulkanTowardZeroBits": [
+        16074,
+        14567,
+        14582
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1004,
+        910,
+        455
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1282,
+        211
+      ],
+      "nativeBits": [
+        1071428325,
+        1058707826,
+        1059028951
+      ],
+      "vulkanBits": [
+        1070933997,
+        1058978699,
+        1059270711
+      ],
+      "native": [
+        1.7242094278335571,
+        0.6039038896560669,
+        0.6230444312095642
+      ],
+      "vulkan": [
+        1.6652809381484985,
+        0.6200491786003113,
+        0.6374544501304626
+      ],
+      "maximumAbsolute": 0.058928489685058594,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1006,
+        909,
+        455
+      ],
+      "nativePredictedTowardZero": [
+        1006,
+        909,
+        455
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16041,
+        14581,
+        14617
+      ],
+      "vulkanNearestEvenBits": [
+        16041,
+        14582,
+        14618
+      ],
+      "vulkanTowardZeroBits": [
+        16041,
+        14581,
+        14617
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1002,
+        911,
+        456
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1283,
+        211
+      ],
+      "nativeBits": [
+        1071968393,
+        1059045055,
+        1059356171
+      ],
+      "vulkanBits": [
+        1071371300,
+        1059370360,
+        1059647355
+      ],
+      "native": [
+        1.7885905504226685,
+        0.6240043044090271,
+        0.6425482630729675
+      ],
+      "vulkan": [
+        1.7174115180969238,
+        0.6433939933776855,
+        0.6599041819572449
+      ],
+      "maximumAbsolute": 0.07117903232574463,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1010,
+        911,
+        457
+      ],
+      "nativePredictedTowardZero": [
+        1010,
+        911,
+        457
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16094,
+        14629,
+        14663
+      ],
+      "vulkanNearestEvenBits": [
+        16095,
+        14630,
+        14663
+      ],
+      "vulkanTowardZeroBits": [
+        16094,
+        14629,
+        14663
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1005,
+        914,
+        458
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1284,
+        211
+      ],
+      "nativeBits": [
+        1071917461,
+        1059196447,
+        1059468528
+      ],
+      "vulkanBits": [
+        1071317249,
+        1059523595,
+        1059763304
+      ],
+      "native": [
+        1.782518982887268,
+        0.633027970790863,
+        0.6492452621459961
+      ],
+      "vulkan": [
+        1.7109681367874146,
+        0.6525275111198425,
+        0.6668152809143066
+      ],
+      "maximumAbsolute": 0.07155084609985352,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1010,
+        913,
+        457
+      ],
+      "nativePredictedTowardZero": [
+        1010,
+        913,
+        457
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16088,
+        14648,
+        14677
+      ],
+      "vulkanNearestEvenBits": [
+        16088,
+        14648,
+        14678
+      ],
+      "vulkanTowardZeroBits": [
+        16088,
+        14648,
+        14677
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1005,
+        915,
+        458
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1268,
+        212
+      ],
+      "nativeBits": [
+        1071029080,
+        1057848886,
+        1058277380
+      ],
+      "vulkanBits": [
+        1070648460,
+        1058057107,
+        1058459177
+      ],
+      "native": [
+        1.6766157150268555,
+        0.5527070760726929,
+        0.5782473087310791
+      ],
+      "vulkan": [
+        1.631242275238037,
+        0.5651180148124695,
+        0.5890832543373108
+      ],
+      "maximumAbsolute": 0.04537343978881836,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1003,
+        902,
+        453
+      ],
+      "nativePredictedTowardZero": [
+        1003,
+        902,
+        453
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16006,
+        14469,
+        14518
+      ],
+      "vulkanNearestEvenBits": [
+        16006,
+        14469,
+        14518
+      ],
+      "vulkanTowardZeroBits": [
+        16006,
+        14469,
+        14518
+      ],
+      "vulkanStorageNearestEvenQualified": true,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1000,
+        904,
+        453
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1281,
+        212
+      ],
+      "nativeBits": [
+        1071649091,
+        1058705403,
+        1059040855
+      ],
+      "vulkanBits": [
+        1071111032,
+        1058998664,
+        1059301940
+      ],
+      "native": [
+        1.750526785850525,
+        0.6037594676017761,
+        0.6237539649009705
+      ],
+      "vulkan": [
+        1.686385154724121,
+        0.621239185333252,
+        0.6393158435821533
+      ],
+      "maximumAbsolute": 0.06414163112640381,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1008,
+        909,
+        455
+      ],
+      "nativePredictedTowardZero": [
+        1008,
+        909,
+        455
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16062,
+        14584,
+        14621
+      ],
+      "vulkanNearestEvenBits": [
+        16063,
+        14584,
+        14621
+      ],
+      "vulkanTowardZeroBits": [
+        16062,
+        14584,
+        14621
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1003,
+        911,
+        456
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1282,
+        212
+      ],
+      "nativeBits": [
+        1071343229,
+        1058648360,
+        1059088739
+      ],
+      "vulkanBits": [
+        1070841587,
+        1058922820,
+        1059325457
+      ],
+      "native": [
+        1.7140651941299438,
+        0.6003594398498535,
+        0.6266080737113953
+      ],
+      "vulkan": [
+        1.6542648077011108,
+        0.6167185306549072,
+        0.6407175660133362
+      ],
+      "maximumAbsolute": 0.05980038642883301,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1005,
+        908,
+        456
+      ],
+      "nativePredictedTowardZero": [
+        1005,
+        908,
+        456
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16029,
+        14575,
+        14624
+      ],
+      "vulkanNearestEvenBits": [
+        16030,
+        14575,
+        14624
+      ],
+      "vulkanTowardZeroBits": [
+        16029,
+        14575,
+        14624
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1001,
+        910,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1283,
+        212
+      ],
+      "nativeBits": [
+        1071704586,
+        1058938147,
+        1059242308
+      ],
+      "vulkanBits": [
+        1071137650,
+        1059246784,
+        1059519844
+      ],
+      "native": [
+        1.7571423053741455,
+        0.6176320910453796,
+        0.6357614994049072
+      ],
+      "vulkan": [
+        1.6895582675933838,
+        0.6360282897949219,
+        0.65230393409729
+      ],
+      "maximumAbsolute": 0.06758403778076172,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1008,
+        911,
+        456
+      ],
+      "nativePredictedTowardZero": [
+        1008,
+        911,
+        456
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16066,
+        14614,
+        14647
+      ],
+      "vulkanNearestEvenBits": [
+        16066,
+        14615,
+        14648
+      ],
+      "vulkanTowardZeroBits": [
+        16066,
+        14614,
+        14647
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1004,
+        913,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1284,
+        212
+      ],
+      "nativeBits": [
+        1071853218,
+        1059038295,
+        1059155304
+      ],
+      "vulkanBits": [
+        1071270301,
+        1059355035,
+        1059453982
+      ],
+      "native": [
+        1.7748606204986572,
+        0.6236013770103455,
+        0.6305756568908691
+      ],
+      "vulkan": [
+        1.7053714990615845,
+        0.6424805521965027,
+        0.6483782529830933
+      ],
+      "maximumAbsolute": 0.06948912143707275,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1009,
+        911,
+        456
+      ],
+      "nativePredictedTowardZero": [
+        1009,
+        911,
+        456
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16082,
+        14627,
+        14639
+      ],
+      "vulkanNearestEvenBits": [
+        16082,
+        14628,
+        14640
+      ],
+      "vulkanTowardZeroBits": [
+        16082,
+        14627,
+        14639
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1005,
+        914,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1268,
+        213
+      ],
+      "nativeBits": [
+        1070795910,
+        1057148844,
+        1058298796
+      ],
+      "vulkanBits": [
+        1070504825,
+        1057311575,
+        1058408677
+      ],
+      "native": [
+        1.6488196849822998,
+        0.5109813213348389,
+        0.5795238018035889
+      ],
+      "vulkan": [
+        1.6141196489334106,
+        0.520680844783783,
+        0.5860732197761536
+      ],
+      "maximumAbsolute": 0.03470003604888916,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1001,
+        897,
+        453
+      ],
+      "nativePredictedTowardZero": [
+        1001,
+        897,
+        453
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        15988,
+        14378,
+        14512
+      ],
+      "vulkanNearestEvenBits": [
+        15989,
+        14378,
+        14512
+      ],
+      "vulkanTowardZeroBits": [
+        15988,
+        14378,
+        14512
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        999,
+        898,
+        453
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1281,
+        213
+      ],
+      "nativeBits": [
+        1071319007,
+        1058452509,
+        1059189460
+      ],
+      "vulkanBits": [
+        1070841120,
+        1058716025,
+        1059394913
+      ],
+      "native": [
+        1.7111777067184448,
+        0.5886858105659485,
+        0.6326115131378174
+      ],
+      "vulkan": [
+        1.6542091369628906,
+        0.6043925881385803,
+        0.6448574662208557
+      ],
+      "maximumAbsolute": 0.0569685697555542,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1005,
+        907,
+        456
+      ],
+      "nativePredictedTowardZero": [
+        1005,
+        907,
+        456
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16029,
+        14549,
+        14632
+      ],
+      "vulkanNearestEvenBits": [
+        16030,
+        14550,
+        14633
+      ],
+      "vulkanTowardZeroBits": [
+        16029,
+        14549,
+        14632
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1001,
+        909,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1282,
+        213
+      ],
+      "nativeBits": [
+        1070747245,
+        1057207549,
+        1058632889
+      ],
+      "vulkanBits": [
+        1070466011,
+        1057365325,
+        1058726381
+      ],
+      "native": [
+        1.643018364906311,
+        0.5144804120063782,
+        0.5994372963905334
+      ],
+      "vulkan": [
+        1.6094926595687866,
+        0.5238845944404602,
+        0.6050098538398743
+      ],
+      "maximumAbsolute": 0.033525705337524414,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1001,
+        897,
+        454
+      ],
+      "nativePredictedTowardZero": [
+        1001,
+        897,
+        454
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        15984,
+        14384,
+        14551
+      ],
+      "vulkanNearestEvenBits": [
+        15984,
+        14385,
+        14551
+      ],
+      "vulkanTowardZeroBits": [
+        15984,
+        14384,
+        14551
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        999,
+        899,
+        454
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1283,
+        213
+      ],
+      "nativeBits": [
+        1071017164,
+        1057434570,
+        1058765421
+      ],
+      "vulkanBits": [
+        1070700308,
+        1057612020,
+        1058874742
+      ],
+      "native": [
+        1.6751952171325684,
+        0.5280119180679321,
+        0.6073368191719055
+      ],
+      "vulkan": [
+        1.637423038482666,
+        0.5385887622833252,
+        0.613852858543396
+      ],
+      "maximumAbsolute": 0.037772178649902344,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1003,
+        899,
+        454
+      ],
+      "nativePredictedTowardZero": [
+        1003,
+        899,
+        454
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16012,
+        14415,
+        14569
+      ],
+      "vulkanNearestEvenBits": [
+        16013,
+        14415,
+        14569
+      ],
+      "vulkanTowardZeroBits": [
+        16012,
+        14415,
+        14569
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1000,
+        900,
+        455
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1284,
+        213
+      ],
+      "nativeBits": [
+        1071405528,
+        1058449632,
+        1059138066
+      ],
+      "vulkanBits": [
+        1070936432,
+        1058708202,
+        1059340344
+      ],
+      "native": [
+        1.721491813659668,
+        0.5885143280029297,
+        0.629548192024231
+      ],
+      "vulkan": [
+        1.6655712127685547,
+        0.6039263010025024,
+        0.6416049003601074
+      ],
+      "maximumAbsolute": 0.05592060089111328,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1006,
+        907,
+        456
+      ],
+      "nativePredictedTowardZero": [
+        1006,
+        907,
+        456
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16041,
+        14548,
+        14626
+      ],
+      "vulkanNearestEvenBits": [
+        16042,
+        14549,
+        14626
+      ],
+      "vulkanTowardZeroBits": [
+        16041,
+        14548,
+        14626
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1002,
+        909,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1269,
+        214
+      ],
+      "nativeBits": [
+        1070076571,
+        1057277568,
+        1057845086
+      ],
+      "vulkanBits": [
+        1069836573,
+        1057409279,
+        1057954322
+      ],
+      "native": [
+        1.5630677938461304,
+        0.5186538696289062,
+        0.5524805784225464
+      ],
+      "vulkan": [
+        1.534457802772522,
+        0.5265044569969177,
+        0.558991551399231
+      ],
+      "maximumAbsolute": 0.0286099910736084,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        996,
+        898,
+        451
+      ],
+      "nativePredictedTowardZero": [
+        996,
+        898,
+        451
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        15907,
+        14390,
+        14456
+      ],
+      "vulkanNearestEvenBits": [
+        15907,
+        14390,
+        14457
+      ],
+      "vulkanTowardZeroBits": [
+        15907,
+        14390,
+        14456
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        994,
+        899,
+        451
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1281,
+        214
+      ],
+      "nativeBits": [
+        1070731679,
+        1057144367,
+        1058669604
+      ],
+      "vulkanBits": [
+        1070462725,
+        1057295739,
+        1058754746
+      ],
+      "native": [
+        1.6411627531051636,
+        0.5107144713401794,
+        0.6016256809234619
+      ],
+      "vulkan": [
+        1.6091009378433228,
+        0.5197369456291199,
+        0.6067005395889282
+      ],
+      "maximumAbsolute": 0.03206181526184082,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1001,
+        897,
+        454
+      ],
+      "nativePredictedTowardZero": [
+        1001,
+        897,
+        454
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        15983,
+        14376,
+        14554
+      ],
+      "vulkanNearestEvenBits": [
+        15984,
+        14376,
+        14555
+      ],
+      "vulkanTowardZeroBits": [
+        15983,
+        14376,
+        14554
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        998,
+        898,
+        454
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1284,
+        214
+      ],
+      "nativeBits": [
+        1070983555,
+        1057434317,
+        1058856041
+      ],
+      "vulkanBits": [
+        1070669564,
+        1057610590,
+        1058960042
+      ],
+      "native": [
+        1.6711887121200562,
+        0.527996838092804,
+        0.6127381920814514
+      ],
+      "vulkan": [
+        1.6337580680847168,
+        0.5385035276412964,
+        0.6189371347427368
+      ],
+      "maximumAbsolute": 0.037430644035339355,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1002,
+        899,
+        455
+      ],
+      "nativePredictedTowardZero": [
+        1002,
+        899,
+        455
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16008,
+        14414,
+        14579
+      ],
+      "vulkanNearestEvenBits": [
+        16009,
+        14415,
+        14580
+      ],
+      "vulkanTowardZeroBits": [
+        16008,
+        14414,
+        14579
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1000,
+        900,
+        455
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1282,
+        215
+      ],
+      "nativeBits": [
+        1069859962,
+        1053759231,
+        1057982572
+      ],
+      "vulkanBits": [
+        1069785599,
+        1053845265,
+        1057994492
+      ],
+      "native": [
+        1.5372459888458252,
+        0.40447232127189636,
+        0.5606753826141357
+      ],
+      "vulkan": [
+        1.5283812284469604,
+        0.40703633427619934,
+        0.5613858699798584
+      ],
+      "maximumAbsolute": 0.008864760398864746,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        994,
+        871,
+        451
+      ],
+      "nativePredictedTowardZero": [
+        994,
+        871,
+        451
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        15901,
+        13955,
+        14461
+      ],
+      "vulkanNearestEvenBits": [
+        15901,
+        13955,
+        14462
+      ],
+      "vulkanTowardZeroBits": [
+        15901,
+        13955,
+        14461
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        993,
+        872,
+        451
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1283,
+        216
+      ],
+      "nativeBits": [
+        1070276715,
+        1055038791,
+        1057995298
+      ],
+      "vulkanBits": [
+        1070149001,
+        1055184304,
+        1058027200
+      ],
+      "native": [
+        1.586926817893982,
+        0.4426061809062958,
+        0.5614339113235474
+      ],
+      "vulkan": [
+        1.5717021226882935,
+        0.4469428062438965,
+        0.5633354187011719
+      ],
+      "maximumAbsolute": 0.015224695205688477,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        997,
+        881,
+        451
+      ],
+      "nativePredictedTowardZero": [
+        997,
+        881,
+        451
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        15945,
+        14118,
+        14465
+      ],
+      "vulkanNearestEvenBits": [
+        15945,
+        14119,
+        14466
+      ],
+      "vulkanTowardZeroBits": [
+        15945,
+        14118,
+        14465
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        996,
+        882,
+        452
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1264,
+        217
+      ],
+      "nativeBits": [
+        1069051851,
+        1056497049,
+        1057205538
+      ],
+      "vulkanBits": [
+        1068935176,
+        1056624492,
+        1057258730
+      ],
+      "native": [
+        1.4409116506576538,
+        0.48606565594673157,
+        0.5143605470657349
+      ],
+      "vulkan": [
+        1.4270029067993164,
+        0.4898637533187866,
+        0.5175310373306274
+      ],
+      "maximumAbsolute": 0.013908743858337402,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        988,
+        892,
+        448
+      ],
+      "nativePredictedTowardZero": [
+        988,
+        892,
+        448
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        15797,
+        14294,
+        14371
+      ],
+      "vulkanNearestEvenBits": [
+        15797,
+        14294,
+        14372
+      ],
+      "vulkanTowardZeroBits": [
+        15797,
+        14294,
+        14371
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        987,
+        893,
+        449
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1367,
+        261
+      ],
+      "nativeBits": [
+        1078308010,
+        1061448684,
+        1059581264
+      ],
+      "vulkanBits": [
+        1078307825,
+        1061448656,
+        1059581314
+      ],
+      "native": [
+        3.0886635780334473,
+        0.7672717571258545,
+        0.6559648513793945
+      ],
+      "vulkan": [
+        3.0886194705963135,
+        0.7672700881958008,
+        0.6559678316116333
+      ],
+      "maximumAbsolute": 4.410743713378906e-05,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1058,
+        930,
+        457
+      ],
+      "nativePredictedTowardZero": [
+        1058,
+        930,
+        457
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16941,
+        14883,
+        14655
+      ],
+      "vulkanNearestEvenBits": [
+        16941,
+        14883,
+        14655
+      ],
+      "vulkanTowardZeroBits": [
+        16941,
+        14883,
+        14655
+      ],
+      "vulkanStorageNearestEvenQualified": true,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1058,
+        930,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": true
+    },
+    {
+      "pixel": [
+        1367,
+        262
+      ],
+      "nativeBits": [
+        1078257145,
+        1061401438,
+        1059558029
+      ],
+      "vulkanBits": [
+        1078256185,
+        1061400287,
+        1059557013
+      ],
+      "native": [
+        3.0765364170074463,
+        0.7644556760787964,
+        0.6545799374580383
+      ],
+      "vulkan": [
+        3.076307535171509,
+        0.7643870711326599,
+        0.6545193791389465
+      ],
+      "maximumAbsolute": 0.0002288818359375,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1058,
+        929,
+        457
+      ],
+      "nativePredictedTowardZero": [
+        1058,
+        929,
+        457
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16935,
+        14877,
+        14652
+      ],
+      "vulkanNearestEvenBits": [
+        16935,
+        14877,
+        14652
+      ],
+      "vulkanTowardZeroBits": [
+        16935,
+        14877,
+        14652
+      ],
+      "vulkanStorageNearestEvenQualified": true,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1058,
+        929,
+        457
+      ],
+      "vulkanTowardZeroMatchesNativeStored": true
+    },
+    {
+      "pixel": [
+        1322,
+        263
+      ],
+      "nativeBits": [
+        1057990112,
+        1036822760,
+        1036657111
+      ],
+      "vulkanBits": [
+        1058220670,
+        1038989915,
+        1040130437
+      ],
+      "native": [
+        0.5611248016357422,
+        0.09993153810501099,
+        0.09869735687971115
+      ],
+      "vulkan": [
+        0.5748671293258667,
+        0.11607810109853745,
+        0.1245756521821022
+      ],
+      "maximumAbsolute": 0.025878295302391052,
+      "parameterSampleExact": false,
+      "nativeStoredCodes": [
+        903,
+        742,
+        370
+      ],
+      "nativePredictedTowardZero": [
+        903,
+        742,
+        370
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        14489,
+        12141,
+        12281
+      ],
+      "vulkanNearestEvenBits": [
+        14489,
+        12142,
+        12281
+      ],
+      "vulkanTowardZeroBits": [
+        14489,
+        12141,
+        12281
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        905,
+        758,
+        383
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1380,
+        276
+      ],
+      "nativeBits": [
+        1074784594,
+        1059294787,
+        1057621341
+      ],
+      "vulkanBits": [
+        1074784391,
+        1059294429,
+        1057621059
+      ],
+      "native": [
+        2.2486157417297363,
+        0.638889491558075,
+        0.5391443371772766
+      ],
+      "vulkan": [
+        2.2485673427581787,
+        0.6388681530952454,
+        0.53912752866745
+      ],
+      "maximumAbsolute": 4.839897155761719e-05,
+      "parameterSampleExact": true,
+      "nativeStoredCodes": [
+        1031,
+        913,
+        450
+      ],
+      "nativePredictedTowardZero": [
+        1031,
+        913,
+        450
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        16511,
+        14620,
+        14416
+      ],
+      "vulkanNearestEvenBits": [
+        16511,
+        14620,
+        14416
+      ],
+      "vulkanTowardZeroBits": [
+        16511,
+        14620,
+        14416
+      ],
+      "vulkanStorageNearestEvenQualified": true,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        1031,
+        913,
+        450
+      ],
+      "vulkanTowardZeroMatchesNativeStored": true
+    },
+    {
+      "pixel": [
+        1193,
+        295
+      ],
+      "nativeBits": [
+        1050855713,
+        1026944450,
+        1029840439
+      ],
+      "vulkanBits": [
+        1051365056,
+        1028420246,
+        1030574808
+      ],
+      "native": [
+        0.31794074177742004,
+        0.04441619664430618,
+        0.0552045963704586
+      ],
+      "vulkan": [
+        0.33312034606933594,
+        0.04991396516561508,
+        0.05794033408164978
+      ],
+      "maximumAbsolute": 0.015179604291915894,
+      "parameterSampleExact": false,
+      "nativeStoredCodes": [
+        849,
+        666,
+        344
+      ],
+      "nativePredictedTowardZero": [
+        849,
+        666,
+        344
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        13652,
+        10851,
+        11114
+      ],
+      "vulkanNearestEvenBits": [
+        13652,
+        10852,
+        11115
+      ],
+      "vulkanTowardZeroBits": [
+        13652,
+        10851,
+        11114
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        853,
+        678,
+        347
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1193,
+        296
+      ],
+      "nativeBits": [
+        1049939662,
+        1025884608,
+        1028344058
+      ],
+      "vulkanBits": [
+        1050228539,
+        1026852031,
+        1028824899
+      ],
+      "native": [
+        0.29064029455184937,
+        0.04046797752380371,
+        0.049630142748355865
+      ],
+      "vulkan": [
+        0.2992495000362396,
+        0.04407190904021263,
+        0.05142141506075859
+      ],
+      "maximumAbsolute": 0.008609205484390259,
+      "parameterSampleExact": false,
+      "nativeStoredCodes": [
+        842,
+        658,
+        338
+      ],
+      "nativePredictedTowardZero": [
+        842,
+        658,
+        338
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        13513,
+        10660,
+        10900
+      ],
+      "vulkanNearestEvenBits": [
+        13514,
+        10660,
+        10901
+      ],
+      "vulkanTowardZeroBits": [
+        13513,
+        10660,
+        10900
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        844,
+        666,
+        340
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    },
+    {
+      "pixel": [
+        1193,
+        297
+      ],
+      "nativeBits": [
+        1048677116,
+        1023692569,
+        1026601572
+      ],
+      "vulkanBits": [
+        1048900082,
+        1024818268,
+        1026728470
+      ],
+      "native": [
+        0.2530134916305542,
+        0.032301995903253555,
+        0.04313887655735016
+      ],
+      "vulkan": [
+        0.2596583962440491,
+        0.036495551466941833,
+        0.04361160844564438
+      ],
+      "maximumAbsolute": 0.006644904613494873,
+      "parameterSampleExact": false,
+      "nativeStoredCodes": [
+        832,
+        642,
+        332
+      ],
+      "nativePredictedTowardZero": [
+        832,
+        642,
+        332
+      ],
+      "nativeStorageQualified": true,
+      "vulkanStoredBits": [
+        13351,
+        10411,
+        10645
+      ],
+      "vulkanNearestEvenBits": [
+        13352,
+        10412,
+        10645
+      ],
+      "vulkanTowardZeroBits": [
+        13351,
+        10411,
+        10645
+      ],
+      "vulkanStorageNearestEvenQualified": false,
+      "vulkanStorageTowardZeroQualified": true,
+      "vulkanTowardZeroCodes": [
+        834,
+        650,
+        332
+      ],
+      "vulkanTowardZeroMatchesNativeStored": false
+    }
+  ],
+  "qualification": {
+    "status": "qualified",
+    "points": [
+      [
+        1306,
+        156
+      ],
+      [
+        1278,
+        163
+      ],
+      [
+        1313,
+        168
+      ],
+      [
+        1319,
+        172
+      ],
+      [
+        1267,
+        211
+      ],
+      [
+        1282,
+        211
+      ],
+      [
+        1283,
+        211
+      ],
+      [
+        1284,
+        211
+      ],
+      [
+        1268,
+        212
+      ],
+      [
+        1281,
+        212
+      ],
+      [
+        1282,
+        212
+      ],
+      [
+        1283,
+        212
+      ],
+      [
+        1284,
+        212
+      ],
+      [
+        1268,
+        213
+      ],
+      [
+        1281,
+        213
+      ],
+      [
+        1282,
+        213
+      ],
+      [
+        1283,
+        213
+      ],
+      [
+        1284,
+        213
+      ],
+      [
+        1269,
+        214
+      ],
+      [
+        1281,
+        214
+      ],
+      [
+        1284,
+        214
+      ],
+      [
+        1282,
+        215
+      ],
+      [
+        1283,
+        216
+      ],
+      [
+        1264,
+        217
+      ],
+      [
+        1367,
+        261
+      ],
+      [
+        1367,
+        262
+      ],
+      [
+        1322,
+        263
+      ],
+      [
+        1380,
+        276
+      ],
+      [
+        1193,
+        295
+      ],
+      [
+        1193,
+        296
+      ],
+      [
+        1193,
+        297
+      ]
+    ],
+    "captures": [
+      {
+        "label": "native",
+        "event": 950,
+        "sourceSha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee",
+        "runs": [
+          {
+            "case": {
+              "name": "color-0-0",
+              "component": 0,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "c84c11f65c1dcb88ab48cc70ecef34112defbb2ed4d0fa905c1566c091eb8370",
+            "values": [
+              2724,
+              1143,
+              2889,
+              3168,
+              3012,
+              741,
+              137,
+              2453,
+              2904,
+              323,
+              1661,
+              2570,
+              3746,
+              3206,
+              2015,
+              3693,
+              3276,
+              2520,
+              667,
+              415,
+              2435,
+              1146,
+              107,
+              4043,
+              3242,
+              1529,
+              1504,
+              2386,
+              2337,
+              3790,
+              2812
+            ]
+          },
+          {
+            "case": {
+              "name": "color-0-12",
+              "component": 0,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "e77d296b5d8e1d4b5651a48a30568de9bf5646ed6ba29819b329e950ecc28ea8",
+            "values": [
+              1274,
+              415,
+              1542,
+              1429,
+              3600,
+              3531,
+              3663,
+              3650,
+              3433,
+              3585,
+              3510,
+              3598,
+              3634,
+              3376,
+              3504,
+              3364,
+              3430,
+              3525,
+              3201,
+              3361,
+              3422,
+              3148,
+              3250,
+              2950,
+              1114,
+              1102,
+              250,
+              254,
+              2604,
+              2380,
+              2072
+            ]
+          },
+          {
+            "case": {
+              "name": "color-0-24",
+              "component": 0,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "e57d7ebfb13f43d3c03782698dae0bdc6baa9bccddc59bd9981943a27abd1b3c",
+            "values": [
+              64,
+              64,
+              64,
+              64,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              64,
+              64,
+              63,
+              64,
+              62,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "color-1-0",
+              "component": 1,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "e1d62f3b66c96bf3cd9d3c7176112014497ef915accef4ba45f6cdf7681fa36e",
+            "values": [
+              1795,
+              3478,
+              4052,
+              220,
+              299,
+              2418,
+              3775,
+              3615,
+              3638,
+              4091,
+              296,
+              3363,
+              1111,
+              4012,
+              1053,
+              1277,
+              3018,
+              2272,
+              1664,
+              3631,
+              2765,
+              1791,
+              3399,
+              3481,
+              3052,
+              862,
+              2280,
+              3651,
+              3522,
+              448,
+              3865
+            ]
+          },
+          {
+            "case": {
+              "name": "color-1-12",
+              "component": 1,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "f5e72d92634585589bcb0e98d851be90dad67f860e7b47a60b74fd2381bcb161",
+            "values": [
+              746,
+              3878,
+              1096,
+              977,
+              395,
+              425,
+              507,
+              544,
+              215,
+              424,
+              411,
+              481,
+              506,
+              44,
+              363,
+              59,
+              114,
+              362,
+              76,
+              43,
+              114,
+              3313,
+              3625,
+              3981,
+              1094,
+              1083,
+              3274,
+              568,
+              862,
+              604,
+              68
+            ]
+          },
+          {
+            "case": {
+              "name": "color-1-24",
+              "component": 1,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "743a5a5573ff0dbc2378636f8861bce4aeaad77634581570ca5a3d141747c3fd",
+            "values": [
+              63,
+              62,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              63,
+              63,
+              61,
+              63,
+              61,
+              61,
+              61
+            ]
+          },
+          {
+            "case": {
+              "name": "color-2-0",
+              "component": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "d35909a9f12d9ff36772ff9e3f4ed845aeb150275c8c7f43494420df22738be9",
+            "values": [
+              3571,
+              657,
+              2824,
+              1305,
+              3396,
+              4055,
+              3595,
+              1264,
+              2052,
+              3671,
+              2403,
+              324,
+              3432,
+              2988,
+              724,
+              1209,
+              2669,
+              2578,
+              3934,
+              1060,
+              3177,
+              2156,
+              2594,
+              3362,
+              3408,
+              653,
+              471,
+              1373,
+              3639,
+              2298,
+              612
+            ]
+          },
+          {
+            "case": {
+              "name": "color-2-12",
+              "component": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "c485b257577dcfcfe394a47fe6cf9d4339e51200de9edaf219776a9d2967584e",
+            "values": [
+              383,
+              3579,
+              638,
+              637,
+              430,
+              503,
+              583,
+              611,
+              320,
+              506,
+              518,
+              556,
+              534,
+              325,
+              543,
+              407,
+              439,
+              530,
+              214,
+              416,
+              461,
+              248,
+              251,
+              58,
+              638,
+              633,
+              3234,
+              160,
+              1569,
+              1204,
+              779
+            ]
+          },
+          {
+            "case": {
+              "name": "color-2-24",
+              "component": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "7115b5c4649133212590719f7ff659757d915c4b6c516e7b8ce49d5b40a2360f",
+            "values": [
+              63,
+              62,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              61,
+              63,
+              61,
+              61,
+              61
+            ]
+          }
+        ],
+        "sourceControlQualified": true,
+        "controlSha256": "208c2388b502ef3692883c6c35607a729c843198784ab6c0ca5aa043e18148fa",
+        "baselineRestored": true,
+        "debugMessages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      {
+        "label": "vulkan",
+        "event": 493,
+        "sourceSha256": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca",
+        "runs": [
+          {
+            "case": {
+              "name": "color-0-0",
+              "component": 0,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "8866dae74fdf05bd142bc5fe4cfb9486996318eaaf601ee9200eef2b957f6dca",
+            "values": [
+              49,
+              1635,
+              2842,
+              3009,
+              529,
+              2029,
+              1060,
+              257,
+              3212,
+              2936,
+              3827,
+              882,
+              2461,
+              2937,
+              3360,
+              987,
+              1812,
+              368,
+              2333,
+              1797,
+              3836,
+              511,
+              3465,
+              2056,
+              3057,
+              569,
+              2686,
+              2183,
+              3776,
+              1851,
+              498
+            ]
+          },
+          {
+            "case": {
+              "name": "color-0-12",
+              "component": 0,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "f0db5f95e9c88bf707adf3ead480dc73e87d7aa94c799c76e9fadf430492240a",
+            "values": [
+              1276,
+              415,
+              1542,
+              1429,
+              3477,
+              3410,
+              3517,
+              3504,
+              3340,
+              3453,
+              3387,
+              3460,
+              3492,
+              3305,
+              3387,
+              3296,
+              3353,
+              3411,
+              3142,
+              3295,
+              3345,
+              3130,
+              3218,
+              2922,
+              1114,
+              1102,
+              306,
+              254,
+              2728,
+              2451,
+              2127
+            ]
+          },
+          {
+            "case": {
+              "name": "color-0-24",
+              "component": 0,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "7f175259a648b6958c9ec93e03810f8f99f3c139014324817ff76c309c4a03fe",
+            "values": [
+              64,
+              64,
+              64,
+              64,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              64,
+              64,
+              63,
+              64,
+              62,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "color-1-0",
+              "component": 1,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "7fa7952522cf8cda96fc32418a3c9f6cb02f3297186fcf53900280bc15fe097f",
+            "values": [
+              1090,
+              511,
+              4013,
+              202,
+              2226,
+              2955,
+              1400,
+              3083,
+              2963,
+              2440,
+              324,
+              704,
+              2459,
+              2903,
+              2425,
+              3405,
+              244,
+              2794,
+              2303,
+              3451,
+              2910,
+              1809,
+              1456,
+              3948,
+              3024,
+              3807,
+              2651,
+              3293,
+              662,
+              1215,
+              3164
+            ]
+          },
+          {
+            "case": {
+              "name": "color-1-12",
+              "component": 1,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "53279ad56fc135767b12cc23d4e28e714076bb8403b458f3cda6c93cc5015e4c",
+            "values": [
+              747,
+              3879,
+              1096,
+              977,
+              462,
+              491,
+              587,
+              624,
+              266,
+              496,
+              478,
+              557,
+              583,
+              84,
+              427,
+              97,
+              158,
+              425,
+              108,
+              80,
+              157,
+              3334,
+              3661,
+              4012,
+              1094,
+              1082,
+              3803,
+              568,
+              1223,
+              840,
+              343
+            ]
+          },
+          {
+            "case": {
+              "name": "color-1-24",
+              "component": 1,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "883b4f46cd442c5d4c3b8895e86f77ea6b6dbe437a4ed8a7bfd609a27e76935a",
+            "values": [
+              63,
+              62,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              63,
+              63,
+              61,
+              63,
+              61,
+              61,
+              61
+            ]
+          },
+          {
+            "case": {
+              "name": "color-2-0",
+              "component": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "d7705427712f043cac66cf671d97d19b6947297c07518cc7016c6f746899c85e",
+            "values": [
+              2452,
+              1660,
+              2801,
+              1301,
+              170,
+              55,
+              3963,
+              1128,
+              3625,
+              2612,
+              1553,
+              3428,
+              3102,
+              2277,
+              1377,
+              493,
+              1398,
+              56,
+              2578,
+              186,
+              682,
+              1788,
+              1728,
+              3306,
+              3458,
+              3733,
+              389,
+              1091,
+              728,
+              3907,
+              534
+            ]
+          },
+          {
+            "case": {
+              "name": "color-2-12",
+              "component": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "18a6d846dd9a31ab15adf79e9419c862ab6ff29a24a34f78bcff8718070752d7",
+            "values": [
+              384,
+              3579,
+              638,
+              637,
+              492,
+              563,
+              654,
+              683,
+              364,
+              570,
+              576,
+              623,
+              607,
+              352,
+              593,
+              430,
+              466,
+              580,
+              241,
+              437,
+              487,
+              251,
+              259,
+              71,
+              638,
+              632,
+              4082,
+              160,
+              1749,
+              1321,
+              810
+            ]
+          },
+          {
+            "case": {
+              "name": "color-2-24",
+              "component": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "0363d379c3dea16708c65ea169c7163ab16d0a6f776cff8dd378c8ff6aa7bd1b",
+            "values": [
+              63,
+              62,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              61,
+              63,
+              61,
+              61,
+              61
+            ]
+          }
+        ],
+        "sourceControlQualified": true,
+        "controlSha256": "5ee2fcf833c8d1c2363c26aa87ad4c092c6c3895bd2c086228fa1b3a3c4d2abf",
+        "baselineRestored": true,
+        "debugMessages": []
+      }
+    ]
+  },
+  "scope": "Actual pre-attachment floating outputs; native copy control and full-crop blue qualification. Storage reconstruction independently qualifies each point. Native visibility source control retained on Vulkan; production unchanged.",
+  "luminanceAttribution": {
+    "weights": [
+      0.212673,
+      0.715152,
+      0.072175
+    ],
+    "allMaximumAbsoluteLuminanceDifference": 0.016337634838238357,
+    "stableMaximumAbsoluteLuminanceDifference": 0.00010211074781417847,
+    "rows": [
+      {
+        "pixel": [
+          1306,
+          156
+        ],
+        "parameterSampleExact": false,
+        "luminanceDifference": 0.0004370935661196709,
+        "rgbDifference": [
+          0.0013153553009033203,
+          0.0002021193504333496,
+          0.0001774430274963379
+        ]
+      },
+      {
+        "pixel": [
+          1278,
+          163
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 5.116698327660561e-05,
+        "rgbDifference": [
+          0.00011730194091796875,
+          3.364682197570801e-05,
+          2.98917293548584e-05
+        ]
+      },
+      {
+        "pixel": [
+          1313,
+          168
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -4.1445181965827945e-06,
+        "rgbDifference": [
+          -1.1205673217773438e-05,
+          -2.3245811462402344e-06,
+          -1.3709068298339844e-06
+        ]
+      },
+      {
+        "pixel": [
+          1319,
+          172
+        ],
+        "parameterSampleExact": false,
+        "luminanceDifference": -8.846608638763429e-06,
+        "rgbDifference": [
+          -3.790855407714844e-05,
+          -1.0728836059570312e-06,
+          -2.384185791015625e-07
+        ]
+      },
+      {
+        "pixel": [
+          1267,
+          211
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 2.30067331790929e-05,
+        "rgbDifference": [
+          -0.06035459041595459,
+          0.016472280025482178,
+          0.01494443416595459
+        ]
+      },
+      {
+        "pixel": [
+          1282,
+          211
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 5.388010787963881e-05,
+        "rgbDifference": [
+          -0.058928489685058594,
+          0.016145288944244385,
+          0.014410018920898438
+        ]
+      },
+      {
+        "pixel": [
+          1283,
+          211
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -1.8620051026343498e-05,
+        "rgbDifference": [
+          -0.07117903232574463,
+          0.019389688968658447,
+          0.017355918884277344
+        ]
+      },
+      {
+        "pixel": [
+          1284,
+          211
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -3.681722640991442e-06,
+        "rgbDifference": [
+          -0.07155084609985352,
+          0.019499540328979492,
+          0.017570018768310547
+        ]
+      },
+      {
+        "pixel": [
+          1268,
+          212
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 8.086475551129291e-06,
+        "rgbDifference": [
+          -0.04537343978881836,
+          0.012410938739776611,
+          0.01083594560623169
+        ]
+      },
+      {
+        "pixel": [
+          1281,
+          212
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -1.73594276309015e-05,
+        "rgbDifference": [
+          -0.06414163112640381,
+          0.01747971773147583,
+          0.015561878681182861
+        ]
+      },
+      {
+        "pixel": [
+          1282,
+          212
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -3.384686708457538e-07,
+        "rgbDifference": [
+          -0.05980038642883301,
+          0.01635909080505371,
+          0.014109492301940918
+        ]
+      },
+      {
+        "pixel": [
+          1283,
+          212
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -2.3271514892577235e-05,
+        "rgbDifference": [
+          -0.06758403778076172,
+          0.018396198749542236,
+          0.016542434692382812
+        ]
+      },
+      {
+        "pixel": [
+          1284,
+          212
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 7.92234230041464e-06,
+        "rgbDifference": [
+          -0.06948912143707275,
+          0.018879175186157227,
+          0.01780259609222412
+        ]
+      },
+      {
+        "pixel": [
+          1268,
+          213
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 2.957706910371796e-05,
+        "rgbDifference": [
+          -0.03470003604888916,
+          0.009699523448944092,
+          0.006549417972564697
+        ]
+      },
+      {
+        "pixel": [
+          1281,
+          213
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 9.084227681164335e-07,
+        "rgbDifference": [
+          -0.0569685697555542,
+          0.015706777572631836,
+          0.01224595308303833
+        ]
+      },
+      {
+        "pixel": [
+          1282,
+          213
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -2.3931212425232798e-06,
+        "rgbDifference": [
+          -0.033525705337524414,
+          0.009404182434082031,
+          0.00557255744934082
+        ]
+      },
+      {
+        "pixel": [
+          1283,
+          213
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 1.2238859534262907e-06,
+        "rgbDifference": [
+          -0.037772178649902344,
+          0.010576844215393066,
+          0.0065160393714904785
+        ]
+      },
+      {
+        "pixel": [
+          1284,
+          213
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -7.057145833970537e-07,
+        "rgbDifference": [
+          -0.05592060089111328,
+          0.015411972999572754,
+          0.012056708335876465
+        ]
+      },
+      {
+        "pixel": [
+          1269,
+          214
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -2.798995971677289e-07,
+        "rgbDifference": [
+          -0.0286099910736084,
+          0.007850587368011475,
+          0.00651097297668457
+        ]
+      },
+      {
+        "pixel": [
+          1281,
+          214
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 3.60196828846515e-08,
+        "rgbDifference": [
+          -0.03206181526184082,
+          0.00902247428894043,
+          0.005074858665466309
+        ]
+      },
+      {
+        "pixel": [
+          1284,
+          214
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 8.013716340068219e-07,
+        "rgbDifference": [
+          -0.037430644035339355,
+          0.010506689548492432,
+          0.0061989426612854
+        ]
+      },
+      {
+        "pixel": [
+          1282,
+          215
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -3.567346334457105e-07,
+        "rgbDifference": [
+          -0.008864760398864746,
+          0.0025640130043029785,
+          0.0007104873657226562
+        ]
+      },
+      {
+        "pixel": [
+          1283,
+          216
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": 7.05974936485501e-07,
+        "rgbDifference": [
+          -0.015224695205688477,
+          0.004336625337600708,
+          0.0019015073776245117
+        ]
+      },
+      {
+        "pixel": [
+          1264,
+          217
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -1.296721589565259e-05,
+        "rgbDifference": [
+          -0.013908743858337402,
+          0.0037980973720550537,
+          0.003170490264892578
+        ]
+      },
+      {
+        "pixel": [
+          1367,
+          261
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -1.0358901381492616e-05,
+        "rgbDifference": [
+          -4.410743713378906e-05,
+          -1.6689300537109375e-06,
+          2.9802322387695312e-06
+        ]
+      },
+      {
+        "pixel": [
+          1367,
+          262
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -0.00010211074781417847,
+        "rgbDifference": [
+          -0.0002288818359375,
+          -6.860494613647461e-05,
+          -6.0558319091796875e-05
+        ]
+      },
+      {
+        "pixel": [
+          1322,
+          263
+        ],
+        "parameterSampleExact": false,
+        "luminanceDifference": 0.016337634838238357,
+        "rgbDifference": [
+          0.013742327690124512,
+          0.01614656299352646,
+          0.025878295302391052
+        ]
+      },
+      {
+        "pixel": [
+          1380,
+          276
+        ],
+        "parameterSampleExact": true,
+        "luminanceDifference": -2.6766553044319153e-05,
+        "rgbDifference": [
+          -4.839897155761719e-05,
+          -2.1338462829589844e-05,
+          -1.6808509826660156e-05
+        ]
+      },
+      {
+        "pixel": [
+          1193,
+          295
+        ],
+        "parameterSampleExact": false,
+        "luminanceDifference": 0.007357484006430954,
+        "rgbDifference": [
+          0.015179604291915894,
+          0.005497768521308899,
+          0.0027357377111911774
+        ]
+      },
+      {
+        "pixel": [
+          1193,
+          296
+        ],
+        "parameterSampleExact": false,
+        "luminanceDifference": 0.004537589468952268,
+        "rgbDifference": [
+          0.008609205484390259,
+          0.0036039315164089203,
+          0.0017912723124027252
+        ]
+      },
+      {
+        "pixel": [
+          1193,
+          297
+        ],
+        "parameterSampleExact": false,
+        "luminanceDifference": 0.0044463408713862305,
+        "rgbDifference": [
+          0.006644904613494873,
+          0.004193555563688278,
+          0.00047273188829421997
+        ]
+      }
+    ],
+    "scope": "CPU attribution of qualified GPU outputs; chroma and luminance examined separately. Causal stage remains to be probed."
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "seconds": 92.15599999995902,
+    "source": "shared_resources.py guarded command result"
+  },
+  "archiveFiles": [
+    {
+      "name": "analyze.py",
+      "bytes": 4086,
+      "sha256": "863e39dc1e773f5195ea98096662647ccadd4c0b304801b446146a4dac0ec36a"
+    },
+    {
+      "name": "budget.json",
+      "bytes": 434,
+      "sha256": "2c7267fdf13891945f850524a6ba52d787e2027ca5f7ae7454f3d278351b71d3"
+    },
+    {
+      "name": "cases.json",
+      "bytes": 681,
+      "sha256": "e920ea3d9ffba7a37daf9ec64540e7aabdec7e5979ad1a468024f084fa4dba52"
+    },
+    {
+      "name": "checksum-source.json",
+      "bytes": 464,
+      "sha256": "1d39ff44c3da8c2a736d607211bf6fb3614425895c7b8b94d52c268a49e04907"
+    },
+    {
+      "name": "collect.py",
+      "bytes": 4729,
+      "sha256": "77b77564a8b12184ed4a853461e28b47f88b1886385f9b0eb5fb70e0f9939733"
+    },
+    {
+      "name": "color-0-0.dxbc",
+      "bytes": 68144,
+      "sha256": "c84c11f65c1dcb88ab48cc70ecef34112defbb2ed4d0fa905c1566c091eb8370"
+    },
+    {
+      "name": "color-0-0.spv",
+      "bytes": 471772,
+      "sha256": "8866dae74fdf05bd142bc5fe4cfb9486996318eaaf601ee9200eef2b957f6dca"
+    },
+    {
+      "name": "color-0-0.spvasm",
+      "bytes": 1643157,
+      "sha256": "1584b65cd2451f8a7a9e0e58c0aa18b40ba010854d15c9bd0325cf9f7c15e98f"
+    },
+    {
+      "name": "color-0-12.dxbc",
+      "bytes": 68144,
+      "sha256": "e77d296b5d8e1d4b5651a48a30568de9bf5646ed6ba29819b329e950ecc28ea8"
+    },
+    {
+      "name": "color-0-12.spv",
+      "bytes": 471772,
+      "sha256": "f0db5f95e9c88bf707adf3ead480dc73e87d7aa94c799c76e9fadf430492240a"
+    },
+    {
+      "name": "color-0-12.spvasm",
+      "bytes": 1643159,
+      "sha256": "ee344bde02a5a9703c71dc2e108ea47dc6aa3690c54a082f44d6defc9ad03f1e"
+    },
+    {
+      "name": "color-0-24.dxbc",
+      "bytes": 68144,
+      "sha256": "e57d7ebfb13f43d3c03782698dae0bdc6baa9bccddc59bd9981943a27abd1b3c"
+    },
+    {
+      "name": "color-0-24.spv",
+      "bytes": 471772,
+      "sha256": "7f175259a648b6958c9ec93e03810f8f99f3c139014324817ff76c309c4a03fe"
+    },
+    {
+      "name": "color-0-24.spvasm",
+      "bytes": 1643159,
+      "sha256": "59e8dd6cb6b3c46877546b1d3648533c856f1496c2f28865756bd0a62055a0e2"
+    },
+    {
+      "name": "color-1-0.dxbc",
+      "bytes": 68144,
+      "sha256": "e1d62f3b66c96bf3cd9d3c7176112014497ef915accef4ba45f6cdf7681fa36e"
+    },
+    {
+      "name": "color-1-0.spv",
+      "bytes": 471772,
+      "sha256": "7fa7952522cf8cda96fc32418a3c9f6cb02f3297186fcf53900280bc15fe097f"
+    },
+    {
+      "name": "color-1-0.spvasm",
+      "bytes": 1643157,
+      "sha256": "425d8e29629daa62cfdc3cf8f008ba5a21ee064df4a2f4056f41901e4a8a4752"
+    },
+    {
+      "name": "color-1-12.dxbc",
+      "bytes": 68144,
+      "sha256": "f5e72d92634585589bcb0e98d851be90dad67f860e7b47a60b74fd2381bcb161"
+    },
+    {
+      "name": "color-1-12.spv",
+      "bytes": 471772,
+      "sha256": "53279ad56fc135767b12cc23d4e28e714076bb8403b458f3cda6c93cc5015e4c"
+    },
+    {
+      "name": "color-1-12.spvasm",
+      "bytes": 1643159,
+      "sha256": "a9e9c7d6264c1f1c25709ae0f383a972d1e62267f469c5e968fcdecafddd0bab"
+    },
+    {
+      "name": "color-1-24.dxbc",
+      "bytes": 68144,
+      "sha256": "743a5a5573ff0dbc2378636f8861bce4aeaad77634581570ca5a3d141747c3fd"
+    },
+    {
+      "name": "color-1-24.spv",
+      "bytes": 471772,
+      "sha256": "883b4f46cd442c5d4c3b8895e86f77ea6b6dbe437a4ed8a7bfd609a27e76935a"
+    },
+    {
+      "name": "color-1-24.spvasm",
+      "bytes": 1643159,
+      "sha256": "510f29ecd109ecdeb45a43489271ae03e87957ebc8cde3e9eb6a7f43faf6a54c"
+    },
+    {
+      "name": "color-2-0.dxbc",
+      "bytes": 68144,
+      "sha256": "d35909a9f12d9ff36772ff9e3f4ed845aeb150275c8c7f43494420df22738be9"
+    },
+    {
+      "name": "color-2-0.spv",
+      "bytes": 471772,
+      "sha256": "d7705427712f043cac66cf671d97d19b6947297c07518cc7016c6f746899c85e"
+    },
+    {
+      "name": "color-2-0.spvasm",
+      "bytes": 1643157,
+      "sha256": "cbbb3f3159f93f2cc7b1134badd0f73ce1443bc26c596a40a5bfa340dfd43fe7"
+    },
+    {
+      "name": "color-2-12.dxbc",
+      "bytes": 68144,
+      "sha256": "c485b257577dcfcfe394a47fe6cf9d4339e51200de9edaf219776a9d2967584e"
+    },
+    {
+      "name": "color-2-12.spv",
+      "bytes": 471772,
+      "sha256": "18a6d846dd9a31ab15adf79e9419c862ab6ff29a24a34f78bcff8718070752d7"
+    },
+    {
+      "name": "color-2-12.spvasm",
+      "bytes": 1643159,
+      "sha256": "3067c7f65c39d28285f442ad268976c7fc3af99155f41769fad754777c9e4c56"
+    },
+    {
+      "name": "color-2-24.dxbc",
+      "bytes": 68144,
+      "sha256": "7115b5c4649133212590719f7ff659757d915c4b6c516e7b8ce49d5b40a2360f"
+    },
+    {
+      "name": "color-2-24.spv",
+      "bytes": 471772,
+      "sha256": "0363d379c3dea16708c65ea169c7163ab16d0a6f776cff8dd378c8ff6aa7bd1b"
+    },
+    {
+      "name": "color-2-24.spvasm",
+      "bytes": 1643159,
+      "sha256": "3f454fb58f482b5442ea6f4e4c4265fc19621df3bbfa64a39e6d47e859efd956"
+    },
+    {
+      "name": "D3D12TokenizedProgramFormat.hpp",
+      "bytes": 130378,
+      "sha256": "5862ef7c8b819f0d02ba73563a9df4dc0e89f11fe59d8f598def39122273c626"
+    },
+    {
+      "name": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dxbc_util.py",
+      "bytes": 3858,
+      "sha256": "fe1a625c044318c64372608b635dc677dd75aff9c7556fa097656cb0d6f16376"
+    },
+    {
+      "name": "header-source.json",
+      "bytes": 420,
+      "sha256": "76a466942d51c360b1264e5b81c27e84c4696b5a3ffbbdec39d9b835d5487c2b"
+    },
+    {
+      "name": "LICENSE-RenderDoc.txt",
+      "bytes": 1336,
+      "sha256": "108b3bbf970884d6449b774c0516712c3c6d3f9d3d181a1d2580a2c2cd308db7"
+    },
+    {
+      "name": "luminance-attribution.json",
+      "bytes": 9351,
+      "sha256": "c38af6d0945e77226d6662933b3200f32c64d8e6d67e9e580e0cfa85ad1d3db8"
+    },
+    {
+      "name": "native-original.shader",
+      "bytes": 67836,
+      "sha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee"
+    },
+    {
+      "name": "native-output-control.dxbc",
+      "bytes": 67896,
+      "sha256": "208c2388b502ef3692883c6c35607a729c843198784ab6c0ca5aa043e18148fa"
+    },
+    {
+      "name": "native-source.shader",
+      "bytes": 67836,
+      "sha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee"
+    },
+    {
+      "name": "native-stored-baseline.zlib",
+      "bytes": 150197,
+      "sha256": "d9422dbf4eb42766c1d536741ce574e2c6a871ed722ffc5107e42ec6b1cbcb0e"
+    },
+    {
+      "name": "prepare.py",
+      "bytes": 4101,
+      "sha256": "f17508f0e4479f945706830313e44ab9bce4c919bfe31bfda0f4ed88c9ea5561"
+    },
+    {
+      "name": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "results.json",
+      "bytes": 60280,
+      "sha256": "c0b3784fae77dc182cb8028de79b373a23a74290aa4c0c3af5fdb1b34101db62"
+    },
+    {
+      "name": "run.py",
+      "bytes": 958,
+      "sha256": "ffee55df342863aa228630eed1e3d4a3c85003385ec49878b449011132bfea4e"
+    },
+    {
+      "name": "state.json",
+      "bytes": 17893,
+      "sha256": "e380c8409c289bb2b2273abd4431c955dd18e5a1e0e23e8b78da93250cb61cf5"
+    },
+    {
+      "name": "vulkan-source.shader",
+      "bytes": 346352,
+      "sha256": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca"
+    },
+    {
+      "name": "vulkan-stored-baseline.zlib",
+      "bytes": 281493,
+      "sha256": "c7ffde423b4cc9dfed702725bcc9b8cad608aadbbb6de97fa604a560163a38a0"
+    }
+  ],
+  "archiveBytes": 3539632,
+  "archiveSha256": "acc87e5c5093d158e764ebf970fe5c8c294124c8b478791e0cc1059eb60580e1"
+}
