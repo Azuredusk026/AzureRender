@@ -617,6 +617,9 @@ float sampleShadowMap(float normalDotLight) {
     return result;
 }
 
+#if defined(AZURE_SHADOW_HISTORY)
+#include "shadow_history.glsl"
+#endif
 vec3 rgbToHsv(vec3 c){
     float hi=max(c.r,max(c.g,c.b)),lo=min(c.r,min(c.g,c.b)),chroma=hi-lo,h=0;
     if(chroma>1e-6){if(hi==c.r)h=(c.g-c.b)/chroma;else if(hi==c.g)h=2+(c.b-c.r)/chroma;else h=4+(c.r-c.g)/chroma;h=fract(h/6);}
@@ -965,7 +968,12 @@ void main()
         :sampleShadowMap(max(dot(geometricNormal, sceneShadowDirection),0.0));
     if (qaEffectMode == 2 && qaEffectDisabled && !objectMainShadow) {
 #else
-    float shadowVisibility = sampleShadowMap(max(dot(geometricNormal, sceneShadowDirection),0.0));
+    float shadowVisibility =
+#if defined(AZURE_SHADOW_HISTORY)
+        azureSampleShadowHistory(max(dot(geometricNormal, sceneShadowDirection),0.0));
+#else
+        sampleShadowMap(max(dot(geometricNormal, sceneShadowDirection),0.0));
+#endif
     if (qaEffectMode == 2 && qaEffectDisabled) {
 #endif
         shadowVisibility = 1.0;

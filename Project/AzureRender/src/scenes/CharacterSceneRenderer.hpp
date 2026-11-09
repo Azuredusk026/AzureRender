@@ -14,6 +14,8 @@
 #include "render/GpuConservativeOcclusion.hpp"
 #include "render/DepthPrepassSplit.hpp"
 #include "render/SurfaceRadianceCache.hpp"
+#include "render/ShadowHistoryCache.hpp"
+#include "render/ShadowHistoryPolicy.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
 #include "render/ScreenReflectionGpu.hpp"
@@ -455,6 +457,24 @@ private:
     RecordingWorkerPool* preparationWorkers_=nullptr;
     bool surfaceRadianceCapable_=false;
     std::unique_ptr<SurfaceRadianceCache> surfaceRadiance_;
+    bool shadowHistoryCapable_=false,shadowHistoryRecorded_=false;
+    std::unique_ptr<ShadowHistoryCache> shadowHistory_;
+    std::array<rhi::GpuBuffer,kMaxFramesInFlight> shadowHistoryInputs_{};
+    std::array<bool,kMaxFramesInFlight> shadowHistoryStatisticsValid_{};
+    std::optional<ShadowHistoryCache::Ticket> shadowHistoryClear_;
+    ShadowHistoryViewIdentity shadowHistoryView_;
+    std::optional<unsigned> shadowHistorySubmittedSlot_;
+    std::uint64_t shadowHistorySubmission_=0,shadowHistoryEligible_=0,shadowHistoryRequests_=0,shadowHistoryHits_=0;
+    struct ShadowHistoryCaster {scene::AxisAlignedBounds bounds{};bool dynamic=false;};
+    std::vector<ShadowHistoryCaster> shadowHistoryCasters_;
+    void initializeShadowHistory(const RenderContext&);
+    void destroyShadowHistory()noexcept;
+    void prepareShadowHistory();
+    void recordShadowHistoryReady(rhi::ICommandRecorder&,unsigned);
+    void recordShadowHistoryReadback(rhi::ICommandRecorder&,unsigned);
+    void writeShadowHistoryDescriptors(VkDescriptorSet,unsigned);
+    void commitShadowHistory(std::uint64_t)noexcept;
+    void cancelShadowHistory()noexcept;
     TransparentTopologyWorkspace transparencyScratch_;
     std::shared_ptr<const SceneInstanceSnapshot> instanceSnapshot_;
     std::shared_ptr<const MaterialOriginInstances> materialOriginInstances_;

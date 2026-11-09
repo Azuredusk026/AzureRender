@@ -87,17 +87,22 @@ layout(push_constant) uniform MorphWeights {
 #if defined(AZURE_PROJECTED_SURFACE)
     layout(offset = 124) uint packedMaterial;
 #endif
+#if defined(AZURE_SURFACE_RADIANCE_REUSE) || defined(AZURE_SHADOW_HISTORY)
+    layout(offset = 128) uint surfaceFirstIndex;
 #if defined(AZURE_PROJECTED_SURFACE)
     layout(offset = 132) float samplingScale;
-#elif !defined(AZURE_SURFACE_RADIANCE_REUSE)
-    layout(offset = 128) vec2 weights;
 #endif
-#if defined(AZURE_SURFACE_RADIANCE_REUSE)
-    layout(offset = 128) uint surfaceFirstIndex;
     layout(offset = 136) uint surfaceDrawSlot;
+#elif defined(AZURE_PROJECTED_SURFACE)
+    layout(offset = 132) float samplingScale;
+#else
+    layout(offset = 128) vec2 weights;
 #endif
     layout(offset = 144) mat4 gizmoTransform;
 } morphWeights;
+#if defined(AZURE_SHADOW_HISTORY)
+layout(location=15,component=1) flat out uvec2 shadowHistorySource;
+#endif
 #if defined(AZURE_SURFACE_RADIANCE_REUSE)
 layout(location=15,component=1) flat out uvec2 surfaceRadianceSource;
 layout(location=15,component=3) flat out uint surfaceRadianceDrawSlot;
@@ -113,6 +118,9 @@ vec3 posedVector(uint offset) { return vec3(posedFloat(offset),posedFloat(offset
 #include "outline_projected_surface.glsl"
 #endif
 void main() {
+#if defined(AZURE_SHADOW_HISTORY)
+    shadowHistorySource=uvec2(uint(gl_InstanceIndex),morphWeights.surfaceFirstIndex);
+#endif
 #if defined(AZURE_SURFACE_RADIANCE_REUSE)
     surfaceRadianceSource=uvec2(uint(gl_InstanceIndex),morphWeights.surfaceFirstIndex);
     surfaceRadianceDrawSlot=morphWeights.surfaceDrawSlot;

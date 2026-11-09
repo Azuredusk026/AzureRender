@@ -37,6 +37,7 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
         SceneGraphResources resources{graph.addResource("color"),graph.addResource("depth"),graph.addResource("normal"),graph.addResource("shadow")};
         renderer.registerPasses(graph,resources,context);std::string error;require(graph.compile(error),error.c_str());
         std::set<std::string> prefill,covered,ordinaryCovered,classCovered,beautyCovered,earlyModules;
+        std::set<unsigned> ordinaryFronts,classFronts;
         for(const auto& call:backend.calls)if(call.name=="createShaderModule"&&call.detail.find(" earlyFragmentTests=1")!=std::string::npos)
             earlyModules.insert(call.detail.substr(0,call.detail.find(' ')));
         allEarlyModules.insert(earlyModules.begin(),earlyModules.end());
@@ -46,6 +47,9 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
             if(!earlyModules.count(module))continue;
             const bool ordinaryProgram=call.detail.find("fragmentSpec=0:1/")!=std::string::npos;
             require(ordinaryProgram||call.detail.find("fragmentSpec=1:0/2:")!=std::string::npos,"Early-depth programs require ordinary or fixed material-class specialization");
+            require(call.detail.find(" cull=2 ")!=std::string::npos,"Single-sided fixture requires back-face culling");
+            const auto front=call.detail.find(" front=");require(front!=std::string::npos,"Covered pipelines must record front-face state");
+            (ordinaryProgram?ordinaryFronts:classFronts).insert(static_cast<unsigned>(std::stoul(call.detail.substr(front+7))));
             const auto handle=call.detail.substr(0,call.detail.find(' '));
             if(call.detail.find("4:0/")!=std::string::npos){
                 require(ordinaryProgram,"Default isolation requires ordinary material specialization");
@@ -54,10 +58,13 @@ void verify(const char* shaders,bool indexed,AssetAlphaMode mode,unsigned featur
             allCovered.insert(handle);
         }
         const bool ordinary=mode==AssetAlphaMode::Opaque&&features==0;
-        require(ordinaryCovered.size()==(!multisample&&ordinary?8*(lighting?2:1)*(generation+1):0),"Ordinary covered color pipelines require explicit single-sample qualification");
-        require(beautyCovered.size()==(defaultIsolationPrograms&&!multisample&&ordinary?4*(lighting?2:1)*(generation+1):0),"Default isolation pipeline count must follow the build option and material qualification");
+        require(ordinaryCovered.size()==(!multisample&&ordinary?4*(lighting?2:1)*(generation+1):0),"Ordinary covered color pipelines require explicit single-sample qualification");
+        require(beautyCovered.size()==(defaultIsolationPrograms&&!multisample&&ordinary?2*(lighting?2:1)*(generation+1):0),"Default isolation pipeline count must follow the build option and material qualification");
         const bool fixedClass=mode==AssetAlphaMode::Opaque&&features==MaterialFeatureSqrtAlphaShadow;
-        require(classCovered.size()==(!multisample&&fixedClass?8*(generation+1):0),"Fixed-class covered pipelines require opaque single-sample qualification");
+        require(classCovered.size()==(!multisample&&fixedClass?4*(generation+1):0),"Fixed-class covered pipelines require opaque single-sample qualification");
+        const std::set<unsigned> fronts{unsigned(VK_FRONT_FACE_COUNTER_CLOCKWISE),unsigned(VK_FRONT_FACE_CLOCKWISE)};
+        require(ordinaryFronts==(!multisample&&ordinary?fronts:std::set<unsigned>{}),"Ordinary workflows must retain authored and mirrored front faces");
+        require(classFronts==(!multisample&&fixedClass?fronts:std::set<unsigned>{}),"Fixed-class workflows must retain authored and mirrored front faces");
         for(const auto& call:backend.calls)if(call.name=="createGraphicsPipeline"&&call.detail.find("depthBias=1.000000/0.000000")!=std::string::npos&&call.detail.find(" masks=0/0/")!=std::string::npos){
             const auto handle=call.detail.substr(0,call.detail.find(' '));prefill.insert(handle);
             if(call.detail.find("fragment=0")!=std::string::npos){covered.insert(handle);allCovered.insert(handle);}

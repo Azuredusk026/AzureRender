@@ -62,9 +62,8 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
             auto path=it->path;const auto cachedEnd=path.rfind(".frag.spv");
             const auto cached=cachedEnd!=std::string::npos&&cachedEnd>=15&&path.compare(cachedEnd-15,15,"_radiance_stats")==0?cachedEnd-15:
                 cachedEnd!=std::string::npos&&cachedEnd>=9&&path.compare(cachedEnd-9,9,"_radiance")==0?cachedEnd-9:std::string::npos;
-            if(cached!=std::string::npos&&cachedEnd!=std::string::npos)path.erase(cached,cachedEnd-cached);
             if(!module)module=rhi_->createShaderModule(readBinaryFile(
-                sceneFragmentVariant(path,false,false,false,(policy&1U)!=0,(policy&2U)!=0)));
+                materialFallbackFragment(path,(policy&1U)!=0,(policy&2U)!=0)));
             auto extended=desc;extended.fragmentShader=module;
             if(cached!=std::string::npos&&extended.colorAttachmentCount>3)
                 for(std::size_t i=2;i<extended.colorWriteMasks.size();++i)extended.colorWriteMasks[i]=0;
@@ -183,6 +182,7 @@ void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
 void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContext& context,
     const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot,const std::string& vertexPath) {
     VkShaderModule identityVertex=VK_NULL_HANDLE;
+    VkShaderModule historyVertex=VK_NULL_HANDLE;
     VkShaderModule validationModule=VK_NULL_HANDLE;
     bool needed=false;
     unsigned ordinaryFacings=0;
@@ -220,6 +220,15 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             &&rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT;
         const auto earlyColorModule=early?earlyModule(color.fragmentShader):VK_NULL_HANDLE;
         const auto earlySnapshotModule=early?earlyModule(snapshot.fragmentShader):VK_NULL_HANDLE;
+        VkShaderModule historyColor=VK_NULL_HANDLE;
+        if(needed&&early&&shadowHistory_){
+            auto vertex=vertexPath;const auto at=vertex.rfind(".vert.spv");
+            if(at==std::string::npos)throw std::logic_error("Shadow history requires a mesh vertex program");
+            vertex.insert(at,"_shadow_history");historyVertex=rhi_->createShaderModule(readBinaryFile(vertex));
+            const auto found=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),[&](const auto& variant){return variant.scene==earlyColorModule;});
+            if(found==materialShaderVariants_.end())throw std::logic_error("Shadow history material identity is unavailable");
+            auto file=found->path;file.insert(file.rfind(".frag.spv"),"_shadow_history");historyColor=createMaterialShaderModule(file);
+        }
         VkShaderModule cachedColor=VK_NULL_HANDLE,cachedSnapshot=VK_NULL_HANDLE;
         if(needed&&early&&surfaceRadiance_){
             auto vertex=vertexPath;const auto at=vertex.rfind(".vert.spv");
@@ -255,6 +264,7 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
             desc.fragmentSpecialization={{0,VK_TRUE}};
             ordinaryOpaquePipelines_[facing]=createMaterialGraphicsPipeline(desc);
             if(early){auto covered=desc;covered.fragmentShader=earlyColorModule;
+                if(historyVertex){covered.vertexShader=historyVertex;covered.fragmentShader=historyColor;}
                 if(identityVertex&&!kSurfaceRadianceFrameSelection){covered.vertexShader=identityVertex;covered.fragmentShader=cachedColor;}
                 ordinaryEarlyDepthPipelines_[facing]=createMaterialGraphicsPipeline(covered);
                 if(identityVertex&&kSurfaceRadianceFrameSelection){
@@ -295,7 +305,8 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                     materialClassEarlyDepthSnapshotPipelines_[index][facing]=createMaterialGraphicsPipeline(covered);}
             }
         }
-    }catch(...){if(validationModule)rhi_->destroyShaderModule(validationModule);if(identityVertex)rhi_->destroyShaderModule(identityVertex);destroyMaterialClassPipelines();throw;}
+    }catch(...){if(historyVertex)rhi_->destroyShaderModule(historyVertex);if(validationModule)rhi_->destroyShaderModule(validationModule);if(identityVertex)rhi_->destroyShaderModule(identityVertex);destroyMaterialClassPipelines();throw;}
+    if(historyVertex)rhi_->destroyShaderModule(historyVertex);
     if(validationModule)rhi_->destroyShaderModule(validationModule);
     if(identityVertex)rhi_->destroyShaderModule(identityVertex);
 }

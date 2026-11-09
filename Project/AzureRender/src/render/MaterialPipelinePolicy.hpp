@@ -73,4 +73,14 @@ inline std::string sceneFragmentVariant(std::string file,bool multisampled,bool 
     if(coverage)file.insert(at,"_coverage");
     return file;
 }
+// Auxiliary lighting and coverage evaluate their own complete shadow result.
+inline std::string materialFallbackFragment(std::string file,bool lighting,bool coverage){
+    const auto end=file.rfind(".frag.spv");
+    if(end==std::string::npos||end+9!=file.size())throw std::invalid_argument("Expected a fragment SPIR-V program");
+    for(const std::string suffix:{"_shadow_history","_radiance_fast_stats","_radiance_stats","_radiance_fast","_radiance"})
+        if(end>=suffix.size()&&file.compare(end-suffix.size(),suffix.size(),suffix)==0){
+            file.erase(end-suffix.size(),suffix.size());break;
+        }
+    return sceneFragmentVariant(file,false,false,false,lighting,coverage);
+}
 }

@@ -267,6 +267,7 @@ private:
     // shaderSampledImageArrayNonUniformIndexing).
     bool bindlessTexturesSupported_ = false;
     bool fragmentPrimitiveIdentity_ = false;
+    bool fragmentStorageAtomics_ = false;
     bool fragmentQuadControl_ = false;
     std::vector<VkQueryPool> timestampQueryPools_;
     std::array<std::vector<std::string>, kMaxFramesInFlight> timestampPassNames_;

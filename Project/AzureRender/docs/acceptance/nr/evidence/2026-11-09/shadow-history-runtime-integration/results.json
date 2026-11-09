@@ -1,0 +1,501 @@
+{
+  "status": "compatibility-passed-net-benefit-not-established",
+  "baseCommit": "3f9c745",
+  "defaultEnabled": false,
+  "run": "20261109-221026-shadow-history-integration-6a90ab",
+  "candidateFrames": {
+    "execution": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 266.0,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\qualified-lit-surfaces-joint-v4\\joint-materials.azureproject",
+        "--width",
+        "2560",
+        "--height",
+        "1440",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "4",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-221026-shadow-history-integration-6a90ab\\frames-qualified",
+        "--runtime-report",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-221026-shadow-history-integration-6a90ab\\runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-221026-shadow-history-integration-6a90ab\\tmp"
+    },
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387"
+      },
+      {
+        "frame": "frame_000001.png",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab"
+      },
+      {
+        "frame": "frame_000002.png",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79"
+      },
+      {
+        "frame": "frame_000003.png",
+        "changedPixels": 0,
+        "maximumByteDifference": 0,
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574"
+      }
+    ],
+    "metadata": {
+      "shadowHistoryPrepared": true,
+      "shadowHistoryBytes": 58982400,
+      "shadowHistorySampledRequests": 6962,
+      "shadowHistorySampledEligible": 6711,
+      "shadowHistorySampledHits": 1582
+    },
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "pairedCost": {
+    "status": "diagnosed",
+    "rows": [
+      {
+        "label": "baseline-before",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 19.58504906666667,
+            "p95": 19.8245744
+          },
+          "shadow": {
+            "mean": 2.0996858666666665,
+            "p95": 2.1951759999999996
+          },
+          "main": {
+            "mean": 17.197294933333335,
+            "p95": 17.5207424
+          },
+          "post": {
+            "mean": 0.28806826666666663,
+            "p95": 0.29184
+          },
+          "cpu": {
+            "mean": 5.698041666666674,
+            "p95": 6.406670000000208
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0,
+            75.06,
+            77.08,
+            77.09,
+            77.69
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            54.0,
+            85.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2340.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 128
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "candidate",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 19.731288000000003,
+            "p95": 20.0151408
+          },
+          "shadow": {
+            "mean": 2.0722885333333334,
+            "p95": 2.1871392000000003
+          },
+          "main": {
+            "mean": 17.371982933333335,
+            "p95": 17.6952832
+          },
+          "post": {
+            "mean": 0.2870165333333333,
+            "p95": 0.290816
+          },
+          "cpu": {
+            "mean": 7.027513333333327,
+            "p95": 7.781689999999896
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            54.0,
+            81.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2535.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 47
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": true,
+          "shadowHistoryBytes": 33177600,
+          "shadowHistorySampledRequests": 232810,
+          "shadowHistorySampledEligible": 226158,
+          "shadowHistorySampledHits": 105198,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      },
+      {
+        "label": "baseline-after",
+        "selectedFrames": 60,
+        "summary": {
+          "gpu": {
+            "mean": 19.526715199999995,
+            "p95": 19.7357088
+          },
+          "shadow": {
+            "mean": 2.1769296,
+            "p95": 2.2023727999999996
+          },
+          "main": {
+            "mean": 17.0626048,
+            "p95": 17.2581888
+          },
+          "post": {
+            "mean": 0.28718079999999996,
+            "p95": 0.290816
+          },
+          "cpu": {
+            "mean": 6.555908333333331,
+            "p95": 7.600850000000283
+          }
+        },
+        "environment": {
+          "powerLimits": [
+            75.0
+          ],
+          "acLineStates": [
+            1
+          ],
+          "temperatures": [
+            54.0,
+            81.0
+          ],
+          "graphicsClocks": [
+            210.0,
+            2385.0
+          ],
+          "thermalSlowdownObserved": false,
+          "samples": 46
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "computeSkinningPreparedDispatches": 11,
+          "computeSkinningPreparedVertices": 226194,
+          "computeSkinningVertexWords": 10,
+          "shadowBoundsTilesPerGroup": 8,
+          "computeSkinningOutputBytes": 77503280,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": "",
+          "conservativeOcclusionPrepared": true,
+          "mainDepthSplitRecorded": true,
+          "conservativeOcclusionCommands": 435,
+          "conservativeOcclusionLastZeroCommands": 184,
+          "conservativeOcclusionFallback": "",
+          "staticSkinningReusedInstances": 859,
+          "staticSkinningReusedVertices": 742213,
+          "vertexCapacity": 968791
+        },
+        "sceneExtent": [
+          1920,
+          1080
+        ]
+      }
+    ],
+    "bracketDriftFraction": 0.0029829320032178164,
+    "bracketStable": true,
+    "gpuBaselineMean": 19.555882133333334,
+    "gpuCandidateMean": 19.731288000000003,
+    "gpuSavedMs": -0.17540586666666869,
+    "gpuReductionFraction": -0.0089694683916961,
+    "sourceAndProductsUnchanged": true,
+    "projectInputsVerified": 1729,
+    "shadowBoundsTilesPerGroup": 8,
+    "baselineRuntimeVerified": true,
+    "scope": "Local diagnosis under recorded current power and thermal conditions, sixty warmup and sixty selected frames per process; before/candidate/after bracket; formal performance conditions remain pending",
+    "formalPerformancePassed": false
+  },
+  "checks": {
+    "effectivePassed": 52,
+    "failed": 0,
+    "skipped": 0,
+    "reusedDebugSuccessfulCases": 21,
+    "initialDebugFailure": [
+      "AzureRender.DepthPrefillRecording"
+    ],
+    "finalXml": [
+      {
+        "file": "default-debug-prefill.xml",
+        "tests": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "default-debug-intel.xml",
+        "tests": 4,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "default-release-nvidia.xml",
+        "tests": 22,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "file": "default-release-intel.xml",
+        "tests": 4,
+        "failed": 0,
+        "skipped": 0
+      }
+    ],
+    "candidateRecordingCases": 24,
+    "resourceGpuDevices": [
+      "NVIDIA",
+      "Intel"
+    ]
+  },
+  "source": {
+    "CMakeLists.txt": "2910a419d496176e6c9f4b13d4b1678674a4009eb845f979f57f998010f60e4d",
+    "shaders/mesh.frag": "970af757ddab872fc6ec038086193aac466a751e09c9f9f1ed76b68ee051d3e1",
+    "shaders/mesh.vert": "84a47e048847bbcd9520a71318c3906dde7e5323e5acc61db13b8b148f4c7965",
+    "shaders/shadow_history.glsl": "54be7b533960654e819408a7e796768ffa57833d84e838a3a91db33c1892a2ef",
+    "src/app/AzureRenderApp.cpp": "a341fd8b2d495037a191493d4a80e67cc74d957f31b6cb3c61380b96c7b6a2d5",
+    "src/app/AzureRenderApp.hpp": "425474c6b50e6ce4b88f7a34dae870bb46afc50e325ca15d52e6599f442ea1f5",
+    "src/render/RenderContext.hpp": "5a0c3fe09b1414fa2473d8d180cfdb6763736e8a29c72d87aafef19a5a93dded",
+    "src/render/MaterialPipelinePolicy.hpp": "160c7461a575d89f7432c91c1a3b7350536eade6970b0f777e8159cb22f416d1",
+    "src/scenes/CharacterMaterialSampling.inc": "04fbf8d95af2a6d0c426742f2b6852e90b1b19019fb6fd184a1115d0d87d1a1d",
+    "src/scenes/CharacterMotionPass.inc": "5492f4a76ca066714a8a61782cebbdcf8f17ff98ea3ecc1d9b2d112f9dc3d91d",
+    "src/scenes/CharacterSceneRenderer.cpp": "d2160f0954915cea1305573013a5593a68f514ee2988bd496acf2dac7208663b",
+    "src/scenes/CharacterSceneRenderer.hpp": "c9f9057a061a5d374dccc9929455ac056a9be302c30eb5c829e8a30525b4a60a",
+    "src/scenes/CharacterShadowHistory.inc": "aaf54b8e3b6a16cee15151c7886c660644e441fd24d6e835626c33ba183bf249",
+    "tests/ShadowHistoryRuntimePolicyTests.cpp": "09fe9161563d964bf3d7d2af7db8b127ad2c7a9b4b0333b9ead27a660b99e2b0",
+    "tests/ShadowHistoryRecordingTests.cpp": "f1fe6aa7f5c18ec6aaac2a15a7109e81912c434424aa062bd1af55244fd0412d",
+    "tests/DepthPrefillRecordingTests.cpp": "7e9ddb5bec1fd3e0272dfc1dbecb52bfbcec2290f6dca4ee0136af0479adc210"
+  },
+  "candidateSource": {
+    "CMakeLists.txt": "2910a419d496176e6c9f4b13d4b1678674a4009eb845f979f57f998010f60e4d",
+    "shaders/mesh.frag": "970af757ddab872fc6ec038086193aac466a751e09c9f9f1ed76b68ee051d3e1",
+    "shaders/mesh.vert": "84a47e048847bbcd9520a71318c3906dde7e5323e5acc61db13b8b148f4c7965",
+    "shaders/shadow_history.glsl": "54be7b533960654e819408a7e796768ffa57833d84e838a3a91db33c1892a2ef",
+    "src/app/AzureRenderApp.cpp": "a341fd8b2d495037a191493d4a80e67cc74d957f31b6cb3c61380b96c7b6a2d5",
+    "src/app/AzureRenderApp.hpp": "425474c6b50e6ce4b88f7a34dae870bb46afc50e325ca15d52e6599f442ea1f5",
+    "src/render/RenderContext.hpp": "5a0c3fe09b1414fa2473d8d180cfdb6763736e8a29c72d87aafef19a5a93dded",
+    "src/render/MaterialPipelinePolicy.hpp": "160c7461a575d89f7432c91c1a3b7350536eade6970b0f777e8159cb22f416d1",
+    "src/scenes/CharacterMaterialSampling.inc": "04fbf8d95af2a6d0c426742f2b6852e90b1b19019fb6fd184a1115d0d87d1a1d",
+    "src/scenes/CharacterMotionPass.inc": "5492f4a76ca066714a8a61782cebbdcf8f17ff98ea3ecc1d9b2d112f9dc3d91d",
+    "src/scenes/CharacterSceneRenderer.cpp": "d2160f0954915cea1305573013a5593a68f514ee2988bd496acf2dac7208663b",
+    "src/scenes/CharacterSceneRenderer.hpp": "c9f9057a061a5d374dccc9929455ac056a9be302c30eb5c829e8a30525b4a60a",
+    "src/scenes/CharacterShadowHistory.inc": "aaf54b8e3b6a16cee15151c7886c660644e441fd24d6e835626c33ba183bf249",
+    "tests/ShadowHistoryRuntimePolicyTests.cpp": "09fe9161563d964bf3d7d2af7db8b127ad2c7a9b4b0333b9ead27a660b99e2b0",
+    "tests/ShadowHistoryRecordingTests.cpp": "4b00c3af3dbd7d6987c7dd98e52d09c8ab1bf948dbbb6d6cadd39aeaea380692"
+  },
+  "protectedFilesUnchanged": 13,
+  "sampleSpacingPixels": [
+    32,
+    32
+  ],
+  "formalPerformancePassed": false,
+  "formalLongRunsStarted": 0,
+  "overallVisualAcceptance": "failed-user-review",
+  "baselineShaderProgramsUnchanged": 678,
+  "package": {
+    "path": "docs\\acceptance\\nr\\evidence\\2026-11-09\\shadow-history-runtime-integration\\validation.zip",
+    "sha256": "a4af4f083fb0d3506cf4e22a06f05e3921acefad5bb15ff38ca1c1ea5c77ef34",
+    "bytes": 1035258,
+    "rawBytes": 4395774,
+    "files": 105
+  }
+}

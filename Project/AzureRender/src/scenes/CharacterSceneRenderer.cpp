@@ -568,6 +568,19 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
 #else
     surfaceRadianceCapable_=false;
 #endif
+    shadowHistoryCapable_=false;
+#if defined(AZURE_SHADOW_HISTORY_PROGRAMS)
+    auto historyRequirements=objectShadowPrepared_?objectRequirements:requirements;
+    historyRequirements.fragmentBuffers+=3;historyRequirements.descriptorSetBuffers+=3;
+    shadowHistoryCapable_=!surfaceRadianceCapable_&&context.fragmentPrimitiveIdentity&&context.fragmentStorageAtomics
+        &&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
+        &&limits.maxPerStageDescriptorStorageBuffers>=historyRequirements.fragmentBuffers
+        &&limits.maxDescriptorSetStorageBuffers>=historyRequirements.descriptorSetBuffers
+        &&std::uint64_t(context.renderExtent.width)*context.renderExtent.height*8<=limits.maxStorageBufferRange
+        &&96+8*std::max<std::uint64_t>(qaInstanceCount_,scene_.nodes.size())<=limits.maxStorageBufferRange
+        &&ResourceAccessProfile::select(capabilities,historyRequirements).mode==access.mode
+        &&ShadowHistoryCache::fits(context.renderExtent,2,1);
+#endif
     bindlessTextures_ = access.mode==ResourceAccessMode::Indexed;
     azurerender::RuntimeDiagnostics::instance().info(
         "render", "Character texture access: "
@@ -668,6 +681,7 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
     updateUniformBuffer(frame);
     if(screenReflectionPrepared())publishScreenReflectionOutput(static_cast<unsigned>(currentFrame_));
     rebuildSceneInstances();
+    prepareShadowHistory();
     prepareTransparentIndices();
     prepareConservativeOcclusion();
     prepareRadianceSelection();
@@ -1315,7 +1329,7 @@ void CharacterSceneRenderer::registerPasses(
     rhi::BufferBarrierDesc boundsInitial{};boundsInitial.buffer=bounds->buffer().buffer;boundsInitial.size=bounds->depthBoundsBytes();
     boundsInitial.dstStageMask=VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;boundsInitial.dstAccessMask=VK_ACCESS_SHADER_READ_BIT;
     const auto boundsResource=graph.importBuffer("shadow-tile-bounds",boundsInitial);
-    const auto boundsPass=graph.addCommandPass("shadow-tile-bounds",[bounds](rhi::ICommandRecorder& commands){bounds->record(commands);});
+    const auto boundsPass=graph.addCommandPass("shadow-tile-bounds",[this,bounds,slot=static_cast<unsigned>(context.currentFrame)](rhi::ICommandRecorder& commands){recordShadowHistoryReady(commands,slot);bounds->record(commands);});
     graph.use(boundsPass,resources.shadow,RenderGraphUsage::ComputeSampled,false);
     graph.use(boundsPass,boundsResource,RenderGraphUsage::Storage,true);
     std::optional<RenderGraph::ResourceId> objectRecordsResource,objectAtlasResource;
@@ -1594,6 +1608,7 @@ void CharacterSceneRenderer::registerPasses(
             context.submissionCounters->pushConstantUpdates += mainCounters->pushConstantUpdates;
         }
         if(surfaceRadiance_)surfaceRadiance_->recordStatisticsReady(commands,static_cast<unsigned>(context.currentFrame));
+        recordShadowHistoryReadback(commands,static_cast<unsigned>(context.currentFrame));
         if (context.gpuTimingEnabled)
             commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     });
@@ -1700,6 +1715,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
     const auto& bounds=shadowBounds_[context.currentFrame];
     context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->depthBoundsBytes(),VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_SHADER_WRITE_BIT});
     bounds->record(*context.commands);
+    recordShadowHistoryReady(*context.commands,static_cast<unsigned>(context.currentFrame));
     context.commands->bufferBarrier({bounds->buffer().buffer,0,bounds->depthBoundsBytes(),VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     if(objectShadowPrepared_)context.commands->bufferBarrier({bounds->buffer().buffer,bounds->objectRecordsOffset(),bounds->buffer().size-bounds->objectRecordsOffset(),
         VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
@@ -1877,6 +1893,11 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"surfaceRadiancePrepared\": " << (surfaceRadiance_?"true":"false") << ",\n"
          << "  \"surfaceRadianceBytes\": " << (surfaceRadiance_?surfaceRadiance_->bytes():0) << ",\n"
          << "  \"surfaceRadianceIdentityVersion\": 1,\n"
+         << "  \"shadowHistoryPrepared\": " << (shadowHistory_?"true":"false") << ",\n"
+         << "  \"shadowHistoryBytes\": " << (shadowHistory_?shadowHistory_->bytes():0) << ",\n"
+         << "  \"shadowHistorySampledRequests\": " << shadowHistoryRequests_ << ",\n"
+         << "  \"shadowHistorySampledEligible\": " << shadowHistoryEligible_ << ",\n"
+         << "  \"shadowHistorySampledHits\": " << shadowHistoryHits_ << ",\n"
          << "  \"loadedResourceIdentityEntries\": " << loadedResourceMeshKeys_.size() << ",\n"
          << "  \"sceneTransformCachedNodes\": " << sceneTransforms_.statistics().nodes << ",\n"
          << "  \"sceneTransformReusedWorld\": " << sceneTransforms_.statistics().reusedWorld << ",\n"
@@ -2931,6 +2952,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     maskPass.attachments[0].samples=context.rasterizationSamples;
     maskPass.externalReadDependency=true;
     outlineMaskPass_=rhi_->createRenderPass(maskPass);
+    initializeShadowHistory(context);
     if(surfaceRadianceCapable_&&context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT
         &&SurfaceRadianceCache::supported(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight)))
         try{surfaceRadiance_=std::make_unique<SurfaceRadianceCache>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight),SurfaceRadianceCache::kMaximumBytes,kSurfaceRadianceDiagnostics,kSurfaceRadianceFrameSelection,kSurfaceRadianceFrameSelection?65536U:0U,(kSurfaceRadianceFrameSelection&&kSurfaceRadianceDiagnostics)?16U:0U);}
@@ -2984,6 +3006,7 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     createScreenReflectionResources(context);
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
+    destroyShadowHistory();
     destroyConservativeOcclusion();
     destroyScreenReflectionResources();
     snapshotMultisampling_.reset();
@@ -3235,6 +3258,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
 #include "CharacterMotionPass.inc"
 #include "CharacterOcclusionPass.inc"
 #include "CharacterRadianceSelection.inc"
+#include "CharacterShadowHistory.inc"
 #include "CharacterMaterialSampling.inc"
 #include "CharacterSurfaceOverlays.inc"
 #include "CharacterScreenReflection.inc"
@@ -3254,7 +3278,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
              frameCount * (textureSlots + 4 + (surfaceRadianceCapable_?(kSurfaceRadianceFrameSelection?5U:4U):0U) + (irradianceClipmapActive_?6U:0U) + (viewFog_?2U:0U) + (outlineProjectionEnabled_?static_cast<std::uint32_t>(totalMaterialCount()):0))},
             {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, frameCount*(objectShadowPrepared_?2U:1U)},
             {VK_DESCRIPTOR_TYPE_SAMPLER, frameCount},
-            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection?1U:0U))},
+            {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, frameCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection?1U:0U)+(shadowHistory_?3U:0U))},
         };
         poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,frameCount});
         poolDesc.maxSets = frameCount;
@@ -3268,7 +3292,7 @@ void CharacterSceneRenderer::createDescriptorPool() {
         {VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, descriptorCount * ((outlineProjectionEnabled_?16U:15U)+(surfaceRadianceCapable_?(kSurfaceRadianceFrameSelection?5U:4U):0U)+(irradianceClipmapActive_?6U:0U)+(viewFog_?2U:0U))},
         {VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, descriptorCount*(objectShadowPrepared_?2U:1U)},
         {VK_DESCRIPTOR_TYPE_SAMPLER, descriptorCount},
-        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection?1U:0U))},
+        {VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, descriptorCount * ((outlineProjectionEnabled_?12U:11U)+(probeFieldActive_?1U:0U)+(viewFog_?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceDiagnostics?1U:0U)+(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection?1U:0U)+(shadowHistory_?3U:0U))},
     };
     poolDesc.sizes.push_back({VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,descriptorCount});
     poolDesc.maxSets = descriptorCount;
@@ -3338,6 +3362,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         if(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection){
             bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
             bindings.push_back({44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
+        if(shadowHistory_)for(unsigned binding:{45U,46U,49U})bindings.push_back({binding,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
         return;
     }
@@ -3391,6 +3416,7 @@ void CharacterSceneRenderer::createDescriptorSetLayout() {
         if(surfaceRadianceCapable_&&kSurfaceRadianceFrameSelection){
             bindings.push_back({43,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT|VK_SHADER_STAGE_COMPUTE_BIT});
             bindings.push_back({44,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT});}
+        if(shadowHistory_)for(unsigned binding:{45U,46U,49U})bindings.push_back({binding,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,1,VK_SHADER_STAGE_FRAGMENT_BIT});
         descriptorSetLayout_=rhi_->createDescriptorSetLayout(bindings);
 }
 
@@ -3412,7 +3438,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
         }
     };
     const auto& irradianceData=irradianceClipmap_?irradianceClipmap_->parameters():irradianceBuffer_;
-    const auto writeRadiance=[&](VkDescriptorSet set,unsigned frame){if(!surfaceRadiance_)return;
+    const auto writeRadiance=[&](VkDescriptorSet set,unsigned frame){writeShadowHistoryDescriptors(set,frame);if(!surfaceRadiance_)return;
         for(unsigned kind=0;kind<SurfaceRadianceCache::kAttachments;++kind)
             rhi_->writeDescriptorImage({set,38U+kind,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,surfaceRadiance_->texture(frame,kind).view,surfaceRadiance_->sampler(),VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
         if(surfaceRadiance_->statisticsEnabled()){const auto& buffer=surfaceRadiance_->statisticsBuffer(frame);
@@ -4843,6 +4869,7 @@ void CharacterSceneRenderer::recordMainPass(const RenderContext& context) {
     recordMainDraws(context, 0, instanceSnapshot_.get());
     commands.endRenderPass();
     if(surfaceRadiance_)surfaceRadiance_->recordStatisticsReady(commands,static_cast<unsigned>(context.currentFrame));
+    recordShadowHistoryReadback(commands,static_cast<unsigned>(context.currentFrame));
     if (context.gpuTimingEnabled) {
         commands.writeTimestamp(context.timestampQueryPool, 2, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT);
     }
@@ -5221,7 +5248,7 @@ void CharacterSceneRenderer::drawPrimitive(
             + primitive.materialIndex * kMaterialTextureSlots;
     }
     morphConstants.gizmoTransform=primitiveGizmoTransform(gizmo,&primitive-mesh.primitives.data());
-    if(surfaceRadiance_){const auto first=primitive.firstIndex<=UINT32_MAX&&primitive.indexCount<=UINT32_MAX-primitive.firstIndex
+    if(surfaceRadiance_||shadowHistory_){const auto first=primitive.firstIndex<=UINT32_MAX&&primitive.indexCount<=UINT32_MAX-primitive.firstIndex
         ?static_cast<std::uint32_t>(primitive.firstIndex):UINT32_MAX;std::memcpy(&morphConstants.weights[0],&first,4);}
 
     commands.pushConstants(

@@ -599,6 +599,7 @@ void AzureRenderApp::buildRenderContext(
     context.maxFramesInFlight = kMaxFramesInFlight;
     context.preparationWorkers=runOptions_.parallelRecordingDisabled?nullptr:&recordingWorkers_;
     context.fragmentPrimitiveIdentity=fragmentPrimitiveIdentity_;
+    context.fragmentStorageAtomics=fragmentStorageAtomics_;
     context.fragmentQuadControl=fragmentQuadControl_;
     context.renderExtent = sceneRenderExtent_;
     context.swapchainExtent = swapchainExtent_;
@@ -1439,7 +1440,7 @@ void AzureRenderApp::createLogicalDevice() {
     VkPhysicalDeviceFeatures supportedSampler{};vkGetPhysicalDeviceFeatures(physicalDevice_,&supportedSampler);
     deviceFeatures.samplerAnisotropy=supportedSampler.samplerAnisotropy;
     deviceFeatures.sampleRateShading=supportedSampler.sampleRateShading;
-#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS)
+#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS) || defined(AZURE_SHADOW_HISTORY_PROGRAMS)
     fragmentPrimitiveIdentity_=supportedSampler.geometryShader==VK_TRUE;
     deviceFeatures.geometryShader=fragmentPrimitiveIdentity_?VK_TRUE:VK_FALSE;
 #endif
@@ -1494,6 +1495,10 @@ void AzureRenderApp::createLogicalDevice() {
             demote.pNext=vulkan12Features.pNext;vulkan12Features.pNext=&quadControl;}
     }
 #endif
+#if defined(AZURE_SHADOW_HISTORY_PROGRAMS)
+    deviceFeatures.fragmentStoresAndAtomics=supportedSampler.fragmentStoresAndAtomics;
+#endif
+    fragmentStorageAtomics_=deviceFeatures.fragmentStoresAndAtomics==VK_TRUE;
     auto exactDepthBias=azurerender::rhi::queryExactDepthBias(physicalDevice_);
     exactDepthBiasEnabled_=exactDepthBias.depthBiasExact==VK_TRUE;
     if(exactDepthBiasEnabled_){

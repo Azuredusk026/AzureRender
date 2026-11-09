@@ -276,6 +276,7 @@ struct RenderContext {
     MotionVectorTarget* motionOutput = nullptr;
     RecordingWorkerPool* preparationWorkers = nullptr;
     bool fragmentPrimitiveIdentity = false;
+    bool fragmentStorageAtomics = false;
     bool fragmentQuadControl = false;
 };
 inline std::uint32_t sceneColorAttachmentCount(const RenderContext& context) noexcept {

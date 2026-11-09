@@ -54,7 +54,9 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 [阴影历史原型](../acceptance/nr/temporal-shadow-history-prototype.md)通过独立机制及局部门槛。
 [有界历史资源](../acceptance/nr/shadow-history-resources.md)通过双配置与双设备检查。
 [实际静态范围与策略](../acceptance/nr/shadow-history-runtime-scope.md)完成元数据及失效契约核对。
-后续接入运行时历史读写，完整场景收益仍待验收。
+[主颜色历史](../acceptance/nr/shadow-history-runtime-integration.md)已完成实际消费与严格四帧核对。
+成对短测 GPU 均值增加约 0.175 毫秒，实验选项默认关闭。
+后续按真实片元成本与命中分布核定新的候选。
 
 阴影接收面的[入口计算](../acceptance/nr/shadow-receiver-entry.md)已接入生产。
 原 Intel 零历史用例及十六项双设备、双配置检查通过，四帧保持 RGB 零像素差。
