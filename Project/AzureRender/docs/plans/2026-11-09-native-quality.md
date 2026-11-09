@@ -71,6 +71,8 @@ Intel 保留 120 处超差，最大为 33 字节。
 27 个位置逐位一致，四处取样差异继续定位。
 [参数及双法线](../acceptance/nr/hair-material-sample-region.md)完成 48 个版本的资格核对。
 参数图有 25 处逐位一致，六处取样差异继续定位。
+[实际 UV](../acceptance/nr/hair-uv-sample-region.md)核对完成。
+六处材质差异中，五处存在 UV 差异，一处保持原层级边界。
 
 ## 后续外观
 
