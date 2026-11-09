@@ -301,6 +301,9 @@ GPU P95 为 22.744 毫秒，继续优先处理 GPU 场景成本。
 相邻深度读取的[预取候选](../acceptance/nr/shadow-filter-prefetch.md)附件一致。
 匹配耗时下降约 0.50%，候选保持隔离。
 计算反射材质的[专用候选](../acceptance/nr/computed-material-view.md)未通过原生零像素门槛。
+[普通材质视图控制](../acceptance/nr/computed-view-controls.md)通过实际启用的严格四帧。
+短时 GPU 均值名义减少约 2.46%，场景区间约为 2.94%。
+场景区间未达到既定 5% 门槛，候选隔离，默认选项关闭。
 单因素控制定位到专用管线选择，候选计时未启动。
 生产源码、双配置程序和 Release Player 代码段恢复一致。
 两配置各十三项关联检查通过，继续定位 GPU 材质成本。
