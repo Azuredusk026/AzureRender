@@ -60,6 +60,9 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 [附件前输出位值](../acceptance/nr/hair-final-float-values.md)区分格式和着色差异。
 主要剩余差异按色度调制线索继续定位。
 [实际漫反射色带](../acceptance/nr/hair-diffuse-ramp-input.md)排定纹理及取样边界。
+头发实际漫反射响应及遮罩见[响应权重核对](../acceptance/nr/hair-diffuse-response-weights.md)。
+两端 36 个探针均通过调用及撤销资格。
+主要色度组继续核对条纹强度及饱和度。
 主要色度组继续核对响应颜色与组合权重。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。

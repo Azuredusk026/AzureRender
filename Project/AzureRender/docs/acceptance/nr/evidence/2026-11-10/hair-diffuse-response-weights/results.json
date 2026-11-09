@@ -1,0 +1,4227 @@
+{
+  "status": "qualified-diffuse-response-weights",
+  "points": 31,
+  "responseExactPoints": 11,
+  "sceneExactPoints": 31,
+  "maskExactPoints": 23,
+  "maximumResponseAbsolute": 0.01228487491607666,
+  "maximumMaskAbsolute": 0.05394062399864197,
+  "rows": [
+    {
+      "pixel": [
+        1306,
+        156
+      ],
+      "nativeResponseSceneBits": [
+        1051295285,
+        1028312838,
+        1030800474,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1051308173,
+        1028331637,
+        1030822094,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.33104100823402405,
+        0.049513839185237885,
+        0.05878100544214249,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.33142510056495667,
+        0.04958387091755867,
+        0.05886154621839523,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1058178195,
+        1064586228
+      ],
+      "vulkanMaskBits": [
+        1058196115,
+        1064557556
+      ],
+      "nativeMasks": [
+        0.572335422039032,
+        0.9542839527130127
+      ],
+      "vulkanMasks": [
+        0.573403537273407,
+        0.9525749683380127
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": false,
+      "maximumResponseAbsolute": 0.0003840923309326172,
+      "maximumMaskAbsolute": 0.001708984375
+    },
+    {
+      "pixel": [
+        1278,
+        163
+      ],
+      "nativeResponseSceneBits": [
+        1052775898,
+        1028781187,
+        1031940201,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1052775898,
+        1028781187,
+        1031940201,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.37516671419143677,
+        0.051258575171232224,
+        0.06355363875627518,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.37516671419143677,
+        0.051258575171232224,
+        0.06355363875627518,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1059969966,
+        1062512085
+      ],
+      "vulkanMaskBits": [
+        1059969966,
+        1062512085
+      ],
+      "nativeMasks": [
+        0.6791332960128784,
+        0.8306553959846497
+      ],
+      "vulkanMasks": [
+        0.6791332960128784,
+        0.8306553959846497
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1313,
+        168
+      ],
+      "nativeResponseSceneBits": [
+        1050421536,
+        1025930661,
+        1027664531,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1050421537,
+        1025930661,
+        1027664531,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.30500125885009766,
+        0.04063953831791878,
+        0.047098707407712936,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.30500128865242004,
+        0.04063953831791878,
+        0.047098707407712936,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1057739660,
+        1062881754
+      ],
+      "vulkanMaskBits": [
+        1057739660,
+        1062881754
+      ],
+      "nativeMasks": [
+        0.546196699142456,
+        0.8526893854141235
+      ],
+      "vulkanMasks": [
+        0.546196699142456,
+        0.8526893854141235
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 2.9802322387695312e-08,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1319,
+        172
+      ],
+      "nativeResponseSceneBits": [
+        1051123295,
+        1026536458,
+        1029337063,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1051122956,
+        1026536025,
+        1029336546,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.32591530680656433,
+        0.04289630800485611,
+        0.05332937464118004,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.3259052038192749,
+        0.042894694954156876,
+        0.053327448666095734,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1059189666,
+        1059401637
+      ],
+      "vulkanMaskBits": [
+        1059189154,
+        1059400869
+      ],
+      "nativeMasks": [
+        0.6326237916946411,
+        0.6452582478523254
+      ],
+      "vulkanMasks": [
+        0.6325932741165161,
+        0.6452124714851379
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": false,
+      "maximumResponseAbsolute": 1.0102987289428711e-05,
+      "maximumMaskAbsolute": 4.57763671875e-05
+    },
+    {
+      "pixel": [
+        1267,
+        211
+      ],
+      "nativeResponseSceneBits": [
+        1057058431,
+        1035438428,
+        1036610617,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057058431,
+        1035438429,
+        1036610617,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5055922865867615,
+        0.08961746096611023,
+        0.09835094958543777,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5055922865867615,
+        0.08961746841669083,
+        0.09835094958543777,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1064545268,
+        1065090812
+      ],
+      "vulkanMaskBits": [
+        1064545268,
+        1065090812
+      ],
+      "nativeMasks": [
+        0.9518425464630127,
+        0.9843595027923584
+      ],
+      "vulkanMasks": [
+        0.9518425464630127,
+        0.9843595027923584
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 7.450580596923828e-09,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1282,
+        211
+      ],
+      "nativeResponseSceneBits": [
+        1057165094,
+        1036163427,
+        1037473491,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057165381,
+        1036163885,
+        1037473993,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.511949896812439,
+        0.09501912444829941,
+        0.10477986186742783,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5119670033454895,
+        0.0950225368142128,
+        0.10478360205888748,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063609061,
+        1064213231
+      ],
+      "vulkanMaskBits": [
+        1063609829,
+        1064213231
+      ],
+      "nativeMasks": [
+        0.8960402607917786,
+        0.9320515990257263
+      ],
+      "vulkanMasks": [
+        0.8960860371589661,
+        0.9320515990257263
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": false,
+      "maximumResponseAbsolute": 1.710653305053711e-05,
+      "maximumMaskAbsolute": 4.57763671875e-05
+    },
+    {
+      "pixel": [
+        1283,
+        211
+      ],
+      "nativeResponseSceneBits": [
+        1057435123,
+        1037307148,
+        1038626245,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057435123,
+        1037307148,
+        1038626245,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5280448794364929,
+        0.10354050993919373,
+        0.11336854845285416,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5280448794364929,
+        0.10354050993919373,
+        0.11336854845285416,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1064172014,
+        1064179694
+      ],
+      "vulkanMaskBits": [
+        1064172014,
+        1064179694
+      ],
+      "nativeMasks": [
+        0.929594874382019,
+        0.930052638053894
+      ],
+      "vulkanMasks": [
+        0.929594874382019,
+        0.930052638053894
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1284,
+        211
+      ],
+      "nativeResponseSceneBits": [
+        1057421898,
+        1037456763,
+        1038637519,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057421898,
+        1037456762,
+        1038637519,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5272566080093384,
+        0.10465522855520248,
+        0.11345254629850388,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5272566080093384,
+        0.10465522110462189,
+        0.11345254629850388,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063803880,
+        1064108525
+      ],
+      "vulkanMaskBits": [
+        1063803880,
+        1064108525
+      ],
+      "nativeMasks": [
+        0.9076523780822754,
+        0.9258106350898743
+      ],
+      "vulkanMasks": [
+        0.9076523780822754,
+        0.9258106350898743
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 7.450580596923828e-09,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1268,
+        212
+      ],
+      "nativeResponseSceneBits": [
+        1056732566,
+        1034000987,
+        1035628009,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1056732566,
+        1034000987,
+        1035628009,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.4930846095085144,
+        0.07890769094228745,
+        0.09102994948625565,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.4930846095085144,
+        0.07890769094228745,
+        0.09102994948625565,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1064292336,
+        1065287423
+      ],
+      "vulkanMaskBits": [
+        1064292336,
+        1065287423
+      ],
+      "nativeMasks": [
+        0.9367666244506836,
+        0.9960784316062927
+      ],
+      "vulkanMasks": [
+        0.9367666244506836,
+        0.9960784316062927
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1281,
+        212
+      ],
+      "nativeResponseSceneBits": [
+        1057323949,
+        1036372591,
+        1037697295,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057323949,
+        1036372590,
+        1037697295,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5214183926582336,
+        0.09657751768827438,
+        0.10644733160734177,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5214183926582336,
+        0.09657751023769379,
+        0.10644733160734177,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063739111,
+        1063949035
+      ],
+      "vulkanMaskBits": [
+        1063739111,
+        1063949035
+      ],
+      "nativeMasks": [
+        0.9037918448448181,
+        0.9163042902946472
+      ],
+      "vulkanMasks": [
+        0.9037918448448181,
+        0.9163042902946472
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 7.450580596923828e-09,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1282,
+        212
+      ],
+      "nativeResponseSceneBits": [
+        1057189255,
+        1035900679,
+        1037539607,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057189255,
+        1035900679,
+        1037539607,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5133900046348572,
+        0.09306149929761887,
+        0.10527246445417404,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5133900046348572,
+        0.09306149929761887,
+        0.10527246445417404,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063498212,
+        1064230127
+      ],
+      "vulkanMaskBits": [
+        1063498212,
+        1064230127
+      ],
+      "nativeMasks": [
+        0.8894331455230713,
+        0.9330586791038513
+      ],
+      "vulkanMasks": [
+        0.8894331455230713,
+        0.9330586791038513
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1283,
+        212
+      ],
+      "nativeResponseSceneBits": [
+        1057378468,
+        1036634826,
+        1037870109,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057378468,
+        1036634826,
+        1037870109,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5246679782867432,
+        0.0985313206911087,
+        0.10773489624261856,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5246679782867432,
+        0.0985313206911087,
+        0.10773489624261856,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1064001259,
+        1064298480
+      ],
+      "vulkanMaskBits": [
+        1064001259,
+        1064298480
+      ],
+      "nativeMasks": [
+        0.9194170832633972,
+        0.9371328353881836
+      ],
+      "vulkanMasks": [
+        0.9194170832633972,
+        0.9371328353881836
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1284,
+        212
+      ],
+      "nativeResponseSceneBits": [
+        1057433746,
+        1037432749,
+        1038075628,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057433747,
+        1037432750,
+        1038075629,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5279628038406372,
+        0.10447631031274796,
+        0.10926613211631775,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.527962863445282,
+        0.10447631776332855,
+        0.10926613956689835,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063834857,
+        1064194286
+      ],
+      "vulkanMaskBits": [
+        1063834857,
+        1064194286
+      ],
+      "nativeMasks": [
+        0.9094987511634827,
+        0.9309223890304565
+      ],
+      "vulkanMasks": [
+        0.9094987511634827,
+        0.9309223890304565
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 5.960464477539063e-08,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1268,
+        213
+      ],
+      "nativeResponseSceneBits": [
+        1056802267,
+        1033983094,
+        1035629037,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1056802268,
+        1033983094,
+        1035629037,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.49516186118125916,
+        0.07877437770366669,
+        0.09103760868310928,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.49516189098358154,
+        0.07877437770366669,
+        0.09103760868310928,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1064348913,
+        1065287423
+      ],
+      "vulkanMaskBits": [
+        1064348913,
+        1065287423
+      ],
+      "nativeMasks": [
+        0.9401388764381409,
+        0.9960784316062927
+      ],
+      "vulkanMasks": [
+        0.9401388764381409,
+        0.9960784316062927
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 2.9802322387695312e-08,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1281,
+        213
+      ],
+      "nativeResponseSceneBits": [
+        1057259548,
+        1036133895,
+        1037651289,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057259548,
+        1036133896,
+        1037651290,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5175797939300537,
+        0.09479909390211105,
+        0.10610456019639969,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5175797939300537,
+        0.09479910135269165,
+        0.10610456764698029,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063646182,
+        1063887338
+      ],
+      "vulkanMaskBits": [
+        1063646182,
+        1063887338
+      ],
+      "nativeMasks": [
+        0.8982528448104858,
+        0.9126268625259399
+      ],
+      "vulkanMasks": [
+        0.8982528448104858,
+        0.9126268625259399
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 7.450580596923828e-09,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1282,
+        213
+      ],
+      "nativeResponseSceneBits": [
+        1057156983,
+        1035835740,
+        1037541205,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057156983,
+        1035835740,
+        1037541205,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5114664435386658,
+        0.09257766604423523,
+        0.10528437048196793,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5114664435386658,
+        0.09257766604423523,
+        0.10528437048196793,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063412450,
+        1064081389
+      ],
+      "vulkanMaskBits": [
+        1063412450,
+        1064081389
+      ],
+      "nativeMasks": [
+        0.8843213319778442,
+        0.9241932034492493
+      ],
+      "vulkanMasks": [
+        0.8843213319778442,
+        0.9241932034492493
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1283,
+        213
+      ],
+      "nativeResponseSceneBits": [
+        1057343676,
+        1036593494,
+        1037823979,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057343676,
+        1036593494,
+        1037823979,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5225942134857178,
+        0.09822337329387665,
+        0.10739120095968246,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5225942134857178,
+        0.09822337329387665,
+        0.10739120095968246,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063908842,
+        1064101357
+      ],
+      "vulkanMaskBits": [
+        1063908842,
+        1064101357
+      ],
+      "nativeMasks": [
+        0.9139086008071899,
+        0.9253833889961243
+      ],
+      "vulkanMasks": [
+        0.9139086008071899,
+        0.9253833889961243
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1284,
+        213
+      ],
+      "nativeResponseSceneBits": [
+        1057399846,
+        1037375266,
+        1038008367,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057399846,
+        1037375266,
+        1038008366,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5259422063827515,
+        0.10404802858829498,
+        0.10876499861478806,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5259422063827515,
+        0.10404802858829498,
+        0.10876499116420746,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063746023,
+        1064141294
+      ],
+      "vulkanMaskBits": [
+        1063746023,
+        1064141294
+      ],
+      "nativeMasks": [
+        0.9042038321495056,
+        0.927763819694519
+      ],
+      "vulkanMasks": [
+        0.9042038321495056,
+        0.927763819694519
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 7.450580596923828e-09,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1269,
+        214
+      ],
+      "nativeResponseSceneBits": [
+        1055992215,
+        1033227012,
+        1035315293,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1055992215,
+        1033227012,
+        1035315293,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.4710204303264618,
+        0.07314112782478333,
+        0.08870003372430801,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.4710204303264618,
+        0.07314112782478333,
+        0.08870003372430801,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063801832,
+        1065215486
+      ],
+      "vulkanMaskBits": [
+        1063801832,
+        1065215486
+      ],
+      "nativeMasks": [
+        0.9075303077697754,
+        0.9917906522750854
+      ],
+      "vulkanMasks": [
+        0.9075303077697754,
+        0.9917906522750854
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1281,
+        214
+      ],
+      "nativeResponseSceneBits": [
+        1057163630,
+        1036123068,
+        1037584136,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057163630,
+        1036123068,
+        1037584137,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5118626356124878,
+        0.09471842646598816,
+        0.10560423135757446,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5118626356124878,
+        0.09471842646598816,
+        0.10560423880815506,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063566053,
+        1063828713
+      ],
+      "vulkanMaskBits": [
+        1063566053,
+        1063828713
+      ],
+      "nativeMasks": [
+        0.8934767842292786,
+        0.9091325402259827
+      ],
+      "vulkanMasks": [
+        0.8934767842292786,
+        0.9091325402259827
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 7.450580596923828e-09,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1284,
+        214
+      ],
+      "nativeResponseSceneBits": [
+        1057292169,
+        1036777660,
+        1038014764,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057292169,
+        1036777660,
+        1038014764,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5195241570472717,
+        0.09959551692008972,
+        0.10881265997886658,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5195241570472717,
+        0.09959551692008972,
+        0.10881265997886658,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063752680,
+        1064015340
+      ],
+      "vulkanMaskBits": [
+        1063752680,
+        1064015340
+      ],
+      "nativeMasks": [
+        0.9046006202697754,
+        0.9202563762664795
+      ],
+      "vulkanMasks": [
+        0.9046006202697754,
+        0.9202563762664795
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1282,
+        215
+      ],
+      "nativeResponseSceneBits": [
+        1056915583,
+        1035727057,
+        1037304973,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1056915583,
+        1035727057,
+        1037304973,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.49853894114494324,
+        0.09176791459321976,
+        0.10352430492639542,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.49853894114494324,
+        0.09176791459321976,
+        0.10352430492639542,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063140830,
+        1063941866
+      ],
+      "vulkanMaskBits": [
+        1063140830,
+        1063941866
+      ],
+      "nativeMasks": [
+        0.8681315183639526,
+        0.9158769845962524
+      ],
+      "vulkanMasks": [
+        0.8681315183639526,
+        0.9158769845962524
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1283,
+        216
+      ],
+      "nativeResponseSceneBits": [
+        1057115631,
+        1036400275,
+        1037615447,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1057115631,
+        1036400275,
+        1037615448,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.5090016722679138,
+        0.09678377956151962,
+        0.10583751648664474,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.5090016722679138,
+        0.09678377956151962,
+        0.10583752393722534,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1063613925,
+        1063807720
+      ],
+      "vulkanMaskBits": [
+        1063613925,
+        1063807720
+      ],
+      "nativeMasks": [
+        0.8963301777839661,
+        0.9078812599182129
+      ],
+      "vulkanMasks": [
+        0.8963301777839661,
+        0.9078812599182129
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 7.450580596923828e-09,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1264,
+        217
+      ],
+      "nativeResponseSceneBits": [
+        1055472776,
+        1034516479,
+        1036319734,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1055472776,
+        1034516479,
+        1036319734,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.4555399417877197,
+        0.0827484056353569,
+        0.09618370234966278,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.4555399417877197,
+        0.0827484056353569,
+        0.09618370234966278,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1061965516,
+        1061965516
+      ],
+      "vulkanMaskBits": [
+        1061965516,
+        1061965516
+      ],
+      "nativeMasks": [
+        0.7980773448944092,
+        0.7980773448944092
+      ],
+      "vulkanMasks": [
+        0.7980773448944092,
+        0.7980773448944092
+      ],
+      "responseExact": true,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 0.0,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1367,
+        261
+      ],
+      "nativeResponseSceneBits": [
+        1042683976,
+        1014043543,
+        1015806644,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1042683976,
+        1014043544,
+        1015806644,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.16220200061798096,
+        0.014714143238961697,
+        0.017087318003177643,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.16220200061798096,
+        0.014714144170284271,
+        0.017087318003177643,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1044167869,
+        1064745975
+      ],
+      "vulkanMaskBits": [
+        1044167869,
+        1064745975
+      ],
+      "nativeMasks": [
+        0.18431372940540314,
+        0.963805615901947
+      ],
+      "vulkanMasks": [
+        0.18431372940540314,
+        0.963805615901947
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 9.313225746154785e-10,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1367,
+        262
+      ],
+      "nativeResponseSceneBits": [
+        1042733309,
+        1013930469,
+        1015773911,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1042733308,
+        1013930468,
+        1015773911,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.16293711960315704,
+        0.014608834870159626,
+        0.017026348039507866,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.16293710470199585,
+        0.014608833938837051,
+        0.017026348039507866,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1044486338,
+        1064563700
+      ],
+      "vulkanMaskBits": [
+        1044486338,
+        1064563700
+      ],
+      "nativeMasks": [
+        0.1890592873096466,
+        0.9529411792755127
+      ],
+      "vulkanMasks": [
+        0.1890592873096466,
+        0.9529411792755127
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": true,
+      "maximumResponseAbsolute": 1.4901161193847656e-08,
+      "maximumMaskAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1322,
+        263
+      ],
+      "nativeResponseSceneBits": [
+        1044754860,
+        1024788314,
+        1025321785,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1045579284,
+        1026755264,
+        1028437186,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.19306057691574097,
+        0.036383964121341705,
+        0.03837129846215248,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.20534545183181763,
+        0.04371142387390137,
+        0.04997707158327103,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1050137752,
+        1053921610
+      ],
+      "vulkanMaskBits": [
+        1051947699,
+        1053327517
+      ],
+      "nativeMasks": [
+        0.29654383659362793,
+        0.40931159257888794
+      ],
+      "vulkanMasks": [
+        0.3504844605922699,
+        0.39160624146461487
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": false,
+      "maximumResponseAbsolute": 0.01228487491607666,
+      "maximumMaskAbsolute": 0.05394062399864197
+    },
+    {
+      "pixel": [
+        1380,
+        276
+      ],
+      "nativeResponseSceneBits": [
+        1043115415,
+        1016976953,
+        1018788581,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1043115732,
+        1016977294,
+        1018788973,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.1686309427022934,
+        0.019267188385128975,
+        0.022641608491539955,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.16863566637039185,
+        0.019267823547124863,
+        0.022642338648438454,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1059830700,
+        1062196944
+      ],
+      "vulkanMaskBits": [
+        1059831212,
+        1062196944
+      ],
+      "nativeMasks": [
+        0.6708323955535889,
+        0.8118715286254883
+      ],
+      "vulkanMasks": [
+        0.6708629131317139,
+        0.8118715286254883
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": false,
+      "maximumResponseAbsolute": 4.723668098449707e-06,
+      "maximumMaskAbsolute": 3.0517578125e-05
+    },
+    {
+      "pixel": [
+        1193,
+        295
+      ],
+      "nativeResponseSceneBits": [
+        1042700340,
+        1016853818,
+        1019460783,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1043237156,
+        1018424765,
+        1020252862,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.16244584321975708,
+        0.01903783157467842,
+        0.023893682286143303,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.1704450249671936,
+        0.021963948383927345,
+        0.02536904439330101,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1057985936,
+        1064286192
+      ],
+      "vulkanMaskBits": [
+        1058032272,
+        1064291312
+      ],
+      "nativeMasks": [
+        0.5608758926391602,
+        0.9364004135131836
+      ],
+      "vulkanMasks": [
+        0.5636377334594727,
+        0.9367055892944336
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": false,
+      "maximumResponseAbsolute": 0.007999181747436523,
+      "maximumMaskAbsolute": 0.0027618408203125
+    },
+    {
+      "pixel": [
+        1193,
+        296
+      ],
+      "nativeResponseSceneBits": [
+        1041863177,
+        1015837144,
+        1017973424,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1042169815,
+        1016877611,
+        1018500213,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.149971142411232,
+        0.017144128680229187,
+        0.021123260259628296,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.15454040467739105,
+        0.019082149490714073,
+        0.022104481235146523,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1055872751,
+        1064461298
+      ],
+      "vulkanMaskBits": [
+        1056197876,
+        1064458482
+      ],
+      "nativeMasks": [
+        0.46746012568473816,
+        0.9468375444412231
+      ],
+      "vulkanMasks": [
+        0.4771496057510376,
+        0.9466696977615356
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": false,
+      "maximumResponseAbsolute": 0.004569262266159058,
+      "maximumMaskAbsolute": 0.009689480066299438
+    },
+    {
+      "pixel": [
+        1193,
+        297
+      ],
+      "nativeResponseSceneBits": [
+        1040620846,
+        1012100657,
+        1016168710,
+        1065353216
+      ],
+      "vulkanResponseSceneBits": [
+        1040868436,
+        1014560122,
+        1016338075,
+        1065353216
+      ],
+      "nativeResponseScene": [
+        0.13145896792411804,
+        0.012904689647257328,
+        0.0177617184817791,
+        1.0
+      ],
+      "vulkanResponseScene": [
+        0.13514834642410278,
+        0.015195244923233986,
+        0.0180771853774786,
+        1.0
+      ],
+      "nativeMaskBits": [
+        1052241080,
+        1064880889
+      ],
+      "vulkanMaskBits": [
+        1052990147,
+        1064702966
+      ],
+      "nativeMasks": [
+        0.35922789573669434,
+        0.9718471169471741
+      ],
+      "vulkanMasks": [
+        0.3815518319606781,
+        0.9612420797348022
+      ],
+      "responseExact": false,
+      "sceneExact": true,
+      "masksExact": false,
+      "maximumResponseAbsolute": 0.003689378499984741,
+      "maximumMaskAbsolute": 0.022323936223983765
+    }
+  ],
+  "qualification": {
+    "status": "qualified",
+    "points": [
+      [
+        1306,
+        156
+      ],
+      [
+        1278,
+        163
+      ],
+      [
+        1313,
+        168
+      ],
+      [
+        1319,
+        172
+      ],
+      [
+        1267,
+        211
+      ],
+      [
+        1282,
+        211
+      ],
+      [
+        1283,
+        211
+      ],
+      [
+        1284,
+        211
+      ],
+      [
+        1268,
+        212
+      ],
+      [
+        1281,
+        212
+      ],
+      [
+        1282,
+        212
+      ],
+      [
+        1283,
+        212
+      ],
+      [
+        1284,
+        212
+      ],
+      [
+        1268,
+        213
+      ],
+      [
+        1281,
+        213
+      ],
+      [
+        1282,
+        213
+      ],
+      [
+        1283,
+        213
+      ],
+      [
+        1284,
+        213
+      ],
+      [
+        1269,
+        214
+      ],
+      [
+        1281,
+        214
+      ],
+      [
+        1284,
+        214
+      ],
+      [
+        1282,
+        215
+      ],
+      [
+        1283,
+        216
+      ],
+      [
+        1264,
+        217
+      ],
+      [
+        1367,
+        261
+      ],
+      [
+        1367,
+        262
+      ],
+      [
+        1322,
+        263
+      ],
+      [
+        1380,
+        276
+      ],
+      [
+        1193,
+        295
+      ],
+      [
+        1193,
+        296
+      ],
+      [
+        1193,
+        297
+      ]
+    ],
+    "captures": [
+      {
+        "label": "native",
+        "event": 950,
+        "sourceSha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee",
+        "runs": [
+          {
+            "case": {
+              "name": "responseScene-0-0",
+              "field": "responseScene",
+              "component": 0,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "83f810bfa7342c4b7bd6e9a1765e8db195ffa053c288a9ed0423d1ad32fd59e2",
+            "values": [
+              3637,
+              1498,
+              2336,
+              3679,
+              3711,
+              3878,
+              3571,
+              2634,
+              1430,
+              2989,
+              3463,
+              164,
+              2194,
+              1499,
+              28,
+              3959,
+              2236,
+              1062,
+              2455,
+              2414,
+              3977,
+              127,
+              3567,
+              3208,
+              2120,
+              2301,
+              428,
+              3479,
+              2100,
+              521,
+              3374
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-0-12",
+              "field": "responseScene",
+              "component": 0,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "c288e4f973c6af6ca8faa28f7e8fbb7bcb652b5f268f6821661734185712b72a",
+            "values": [
+              2711,
+              3073,
+              2498,
+              2669,
+              22,
+              48,
+              114,
+              111,
+              4039,
+              87,
+              54,
+              101,
+              114,
+              4056,
+              72,
+              46,
+              92,
+              106,
+              3858,
+              48,
+              79,
+              4084,
+              36,
+              3731,
+              609,
+              621,
+              1115,
+              714,
+              613,
+              409,
+              105
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-0-24",
+              "field": "responseScene",
+              "component": 0,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "bb8b1e4c09b6bc8e291f6a4b750dda21a965f6d7e24741863f8c06e4cb3ab76d",
+            "values": [
+              62,
+              62,
+              62,
+              62,
+              63,
+              63,
+              63,
+              63,
+              62,
+              63,
+              63,
+              63,
+              63,
+              62,
+              63,
+              63,
+              63,
+              63,
+              62,
+              63,
+              63,
+              62,
+              63,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-1-0",
+              "field": "responseScene",
+              "component": 1,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "c89f31632daf532c49d60c53cdac14685c739a3c10c6cc005094813deefb9f72",
+            "values": [
+              3846,
+              1155,
+              1445,
+              1034,
+              2396,
+              2403,
+              3340,
+              1403,
+              2651,
+              2671,
+              1799,
+              2762,
+              1965,
+              1142,
+              1543,
+              2396,
+              2390,
+              1826,
+              2820,
+              3004,
+              2236,
+              209,
+              1683,
+              2047,
+              919,
+              2533,
+              1882,
+              1593,
+              1338,
+              472,
+              3633
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-1-12",
+              "field": "responseScene",
+              "component": 1,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "876ddfab900c5473215b70b6353be0373676265ab776e5253904ce93f4768cde",
+            "values": [
+              1196,
+              1311,
+              615,
+              763,
+              2936,
+              3113,
+              3392,
+              3429,
+              2585,
+              3164,
+              3049,
+              3228,
+              3423,
+              2581,
+              3106,
+              3033,
+              3218,
+              3409,
+              2396,
+              3103,
+              3263,
+              3007,
+              3171,
+              2711,
+              1809,
+              1781,
+              336,
+              2525,
+              2495,
+              2247,
+              1334
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-1-24",
+              "field": "responseScene",
+              "component": 1,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "a46896ce7b910ee9ef839a5f6efb4cfd789fbb8714607dd11fd2eca250d5103f",
+            "values": [
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              60,
+              60,
+              61,
+              60,
+              60,
+              60,
+              60
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-2-0",
+              "field": "responseScene",
+              "component": 2,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "9835f97144bb09e2b714c56cd8b883cc8279f645580f483658d02aee7fa95323",
+            "values": [
+              1114,
+              2153,
+              2707,
+              4071,
+              3129,
+              1747,
+              3525,
+              2511,
+              3561,
+              271,
+              2327,
+              1053,
+              1772,
+              493,
+              3417,
+              3925,
+              4075,
+              47,
+              2141,
+              1800,
+              2348,
+              1165,
+              343,
+              3062,
+              2740,
+              2775,
+              2873,
+              2789,
+              3247,
+              2736,
+              262
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-2-12",
+              "field": "responseScene",
+              "component": 2,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "af14e56faeb188ce54724f81a3fbff8d15c83a62e0876eaf5e0373fb9e43db08",
+            "values": [
+              1804,
+              2082,
+              1038,
+              1446,
+              3222,
+              3433,
+              3714,
+              3717,
+              2982,
+              3488,
+              3449,
+              3530,
+              3580,
+              2983,
+              3476,
+              3449,
+              3518,
+              3564,
+              2906,
+              3460,
+              3565,
+              3392,
+              3468,
+              3151,
+              2239,
+              2231,
+              466,
+              2967,
+              3131,
+              2768,
+              2328
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-2-24",
+              "field": "responseScene",
+              "component": 2,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "a9ebddaa3e260630edd64342a34d6eb37d89d6802f24ba752aec20a3a48d7b0b",
+            "values": [
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              60,
+              60,
+              61,
+              60,
+              60,
+              60,
+              60
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-3-0",
+              "field": "responseScene",
+              "component": 3,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "e322bd58a2573e2999669fd9992ef043c04cdc3e6aefa93bfaf9f7285f8e5e7e",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-3-12",
+              "field": "responseScene",
+              "component": 3,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "9e5ff5f6ec32c0ec2dfff7f50cdae886977a29df182bec6fc59457d67a3da1c9",
+            "values": [
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-3-24",
+              "field": "responseScene",
+              "component": 3,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "1a648ec648209b59c15efec4967ef23736db49b22dd31c1a8362b4df8ab7864c",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-0-0",
+              "field": "masks",
+              "component": 0,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "00a7924278a7ef216e0c06d0858932785a40a9d8897e57d24db13970af18fb22",
+            "values": [
+              1171,
+              2990,
+              908,
+              930,
+              3060,
+              741,
+              2542,
+              3048,
+              4080,
+              3815,
+              484,
+              3819,
+              1257,
+              3313,
+              998,
+              738,
+              1514,
+              2535,
+              1000,
+              2789,
+              1000,
+              3550,
+              1509,
+              3788,
+              3261,
+              2242,
+              1176,
+              2988,
+              1424,
+              1775,
+              3256
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-0-12",
+              "field": "masks",
+              "component": 0,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "c44767039320d45aa1a8bfe5c17c06022d1edb54015636e98df3d622e7e2bd90",
+            "values": [
+              296,
+              733,
+              189,
+              543,
+              1850,
+              1622,
+              1759,
+              1669,
+              1788,
+              1653,
+              1595,
+              1717,
+              1677,
+              1802,
+              1631,
+              1574,
+              1695,
+              1655,
+              1669,
+              1611,
+              1657,
+              1507,
+              1623,
+              1220,
+              971,
+              1049,
+              2429,
+              699,
+              249,
+              3829,
+              2942
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-0-24",
+              "field": "masks",
+              "component": 0,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "7cb388e6dd61ca857aa69e20ba700273ea2a1dad4b691514d5eb1ba2f626718c",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              63,
+              63,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-1-0",
+              "field": "masks",
+              "component": 1,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "0daecc966d2cfc612188b7a0c85c3b8c8304304b2a75a34755f7014a91c8bb80",
+            "values": [
+              3060,
+              1493,
+              2522,
+              4005,
+              3836,
+              2799,
+              2030,
+              493,
+              3839,
+              747,
+              3311,
+              2032,
+              238,
+              3839,
+              490,
+              2029,
+              1517,
+              494,
+              1534,
+              3305,
+              1516,
+              1770,
+              2792,
+              3788,
+              3063,
+              1012,
+              330,
+              1744,
+              2032,
+              1010,
+              2809
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-1-12",
+              "field": "masks",
+              "component": 1,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "2de5bfc9bc7a479dcb50b33ea4c28211161969a6409ec5be075775b15c01a2f3",
+            "values": [
+              1860,
+              1354,
+              1444,
+              594,
+              1983,
+              1769,
+              1761,
+              1744,
+              2031,
+              1705,
+              1773,
+              1790,
+              1765,
+              2031,
+              1690,
+              1737,
+              1742,
+              1752,
+              2014,
+              1675,
+              1721,
+              1703,
+              1670,
+              1220,
+              1899,
+              1855,
+              3353,
+              1277,
+              1787,
+              1830,
+              1932
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-1-24",
+              "field": "masks",
+              "component": 1,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "a34e9944b0118ccc5fcc60d178c073bb5c7945329aa71cca84febe504fd2a33b",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              63,
+              63,
+              63,
+              63
+            ]
+          }
+        ],
+        "samplers": [
+          {
+            "object": "ResourceId::318",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Point",
+              "magnify": "FilterMode.Point",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 0,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::365",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 1,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::338",
+            "address": [
+              "AddressMode.Wrap",
+              "AddressMode.Wrap",
+              "AddressMode.Wrap"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 2,
+            "array_element": 0
+          },
+          {
+            "object": "ResourceId::960",
+            "address": [
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge",
+              "AddressMode.ClampEdge"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Comparison"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1000.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Greater",
+            "unnormalized": false,
+            "shader_binding_index": 3,
+            "array_element": 0
+          }
+        ],
+        "declaredResources": [
+          {
+            "name": "structuredbuffer0",
+            "binding": 0,
+            "index": 0
+          },
+          {
+            "name": "structuredbuffer1",
+            "binding": 1,
+            "index": 1
+          },
+          {
+            "name": "bytebuffer2",
+            "binding": 2,
+            "index": 2
+          },
+          {
+            "name": "texture3",
+            "binding": 3,
+            "index": 3
+          },
+          {
+            "name": "texture4",
+            "binding": 4,
+            "index": 4
+          },
+          {
+            "name": "texture5",
+            "binding": 5,
+            "index": 5
+          },
+          {
+            "name": "texture6",
+            "binding": 6,
+            "index": 6
+          },
+          {
+            "name": "texture7",
+            "binding": 7,
+            "index": 7
+          },
+          {
+            "name": "texture8",
+            "binding": 8,
+            "index": 8
+          },
+          {
+            "name": "texture9",
+            "binding": 9,
+            "index": 9
+          },
+          {
+            "name": "texture10",
+            "binding": 10,
+            "index": 10
+          },
+          {
+            "name": "texture11",
+            "binding": 11,
+            "index": 11
+          },
+          {
+            "name": "texture12",
+            "binding": 12,
+            "index": 12
+          },
+          {
+            "name": "texture13",
+            "binding": 13,
+            "index": 13
+          },
+          {
+            "name": "texture14",
+            "binding": 14,
+            "index": 14
+          },
+          {
+            "name": "texture15",
+            "binding": 15,
+            "index": 15
+          },
+          {
+            "name": "texture16",
+            "binding": 16,
+            "index": 16
+          },
+          {
+            "name": "texture17",
+            "binding": 17,
+            "index": 17
+          },
+          {
+            "name": "texture18",
+            "binding": 18,
+            "index": 18
+          },
+          {
+            "name": "texture19",
+            "binding": 19,
+            "index": 19
+          },
+          {
+            "name": "texture20",
+            "binding": 20,
+            "index": 20
+          }
+        ],
+        "resources": [
+          {
+            "index": 0,
+            "arrayElement": 0,
+            "resource": "ResourceId::141964",
+            "format": "Undefined"
+          },
+          {
+            "index": 1,
+            "arrayElement": 0,
+            "resource": "ResourceId::399",
+            "format": "Undefined"
+          },
+          {
+            "index": 2,
+            "arrayElement": 0,
+            "resource": "ResourceId::609",
+            "format": "R32_TYPELESS"
+          },
+          {
+            "index": 3,
+            "arrayElement": 0,
+            "resource": "ResourceId::141928",
+            "format": "R32_FLOAT"
+          },
+          {
+            "index": 4,
+            "arrayElement": 0,
+            "resource": "ResourceId::14647",
+            "format": "R16_UNORM"
+          },
+          {
+            "index": 5,
+            "arrayElement": 0,
+            "resource": "ResourceId::141931",
+            "format": "R8G8_UNORM"
+          },
+          {
+            "index": 6,
+            "arrayElement": 0,
+            "resource": "ResourceId::11293",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 7,
+            "arrayElement": 0,
+            "resource": "ResourceId::11296",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 8,
+            "arrayElement": 0,
+            "resource": "ResourceId::11299",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 9,
+            "arrayElement": 0,
+            "resource": "ResourceId::11302",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 10,
+            "arrayElement": 0,
+            "resource": "ResourceId::11305",
+            "format": "R11G11B10_FLOAT"
+          },
+          {
+            "index": 11,
+            "arrayElement": 0,
+            "resource": "ResourceId::11308",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 12,
+            "arrayElement": 0,
+            "resource": "ResourceId::20170",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 13,
+            "arrayElement": 0,
+            "resource": "ResourceId::6196",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 14,
+            "arrayElement": 0,
+            "resource": "ResourceId::13524",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 15,
+            "arrayElement": 0,
+            "resource": "ResourceId::701",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 16,
+            "arrayElement": 0,
+            "resource": "ResourceId::139677",
+            "format": "BC7_SRGB"
+          },
+          {
+            "index": 17,
+            "arrayElement": 0,
+            "resource": "ResourceId::139671",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 18,
+            "arrayElement": 0,
+            "resource": "ResourceId::139862",
+            "format": "BC7_UNORM"
+          },
+          {
+            "index": 19,
+            "arrayElement": 0,
+            "resource": "ResourceId::339",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 20,
+            "arrayElement": 0,
+            "resource": "ResourceId::345",
+            "format": "R8G8B8A8_SRGB"
+          }
+        ],
+        "rampTexture": {
+          "resource": "ResourceId::6196",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "shaderName": "texture13",
+          "bytes": 1024,
+          "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+        },
+        "sourceControlQualified": true,
+        "controlSha256": "06fec06ff784468d35d1c183ef0ecf6d6cf17869b0efcca2a0939babf2d33ab0",
+        "baselineRestored": true,
+        "debugMessages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      {
+        "label": "vulkan",
+        "event": 493,
+        "sourceSha256": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca",
+        "runs": [
+          {
+            "case": {
+              "name": "responseScene-0-0",
+              "field": "responseScene",
+              "component": 0,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "972b27188e15fa83de289f2ef0f645f430467d41f8ca497870735a6024204c98",
+            "values": [
+              141,
+              1498,
+              2337,
+              3340,
+              3711,
+              69,
+              3571,
+              2634,
+              1430,
+              2989,
+              3463,
+              164,
+              2195,
+              1500,
+              28,
+              3959,
+              2236,
+              1062,
+              2455,
+              2414,
+              3977,
+              127,
+              3567,
+              3208,
+              2120,
+              2300,
+              1556,
+              3796,
+              2340,
+              4055,
+              1108
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-0-12",
+              "field": "responseScene",
+              "component": 0,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "0dde86bff03b953518c139df4a199cf87d3ebc74d17edb55b937f5d0c75d19f1",
+            "values": [
+              2715,
+              3073,
+              2498,
+              2669,
+              22,
+              49,
+              114,
+              111,
+              4039,
+              87,
+              54,
+              101,
+              114,
+              4056,
+              72,
+              46,
+              92,
+              106,
+              3858,
+              48,
+              79,
+              4084,
+              36,
+              3731,
+              609,
+              621,
+              1316,
+              714,
+              744,
+              483,
+              166
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-0-24",
+              "field": "responseScene",
+              "component": 0,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "d9138c51b38ffca9e3ec17784094afe75c39993986433670b8543dcfe9a64a99",
+            "values": [
+              62,
+              62,
+              62,
+              62,
+              63,
+              63,
+              63,
+              63,
+              62,
+              63,
+              63,
+              63,
+              63,
+              62,
+              63,
+              63,
+              63,
+              63,
+              62,
+              63,
+              63,
+              62,
+              63,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-1-0",
+              "field": "responseScene",
+              "component": 1,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "7979b5e5230377084b48ae2f4461435e08de986193f73b8579e383596cb7c87b",
+            "values": [
+              2165,
+              1155,
+              1445,
+              601,
+              2397,
+              2861,
+              3340,
+              1402,
+              2651,
+              2670,
+              1799,
+              2762,
+              1966,
+              1142,
+              1544,
+              2396,
+              2390,
+              1826,
+              2820,
+              3004,
+              2236,
+              209,
+              1683,
+              2047,
+              920,
+              2532,
+              2752,
+              1934,
+              3517,
+              555,
+              1402
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-1-12",
+              "field": "responseScene",
+              "component": 1,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "e0736bd0b64cdc89d170a707b12cf9f8901f90fad1902dcdbfa3531e02a3255b",
+            "values": [
+              1201,
+              1311,
+              615,
+              763,
+              2936,
+              3113,
+              3392,
+              3429,
+              2585,
+              3164,
+              3049,
+              3228,
+              3423,
+              2581,
+              3106,
+              3033,
+              3218,
+              3409,
+              2396,
+              3103,
+              3263,
+              3007,
+              3171,
+              2711,
+              1809,
+              1781,
+              816,
+              2525,
+              2878,
+              2501,
+              1935
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-1-24",
+              "field": "responseScene",
+              "component": 1,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "8e4101d903759a3d4d66ec83a42de6cb9815eaa6fefa966dddcb00737da0e740",
+            "values": [
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              60,
+              60,
+              61,
+              60,
+              60,
+              60,
+              60
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-2-0",
+              "field": "responseScene",
+              "component": 2,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "e7332040cf50b3dd8d1c40d2705f469cf283d60f1e71d6130c10fdc63c106ba2",
+            "values": [
+              2254,
+              2153,
+              2707,
+              3554,
+              3129,
+              2249,
+              3525,
+              2511,
+              3561,
+              271,
+              2327,
+              1053,
+              1773,
+              493,
+              3418,
+              3925,
+              4075,
+              46,
+              2141,
+              1801,
+              2348,
+              1165,
+              344,
+              3062,
+              2740,
+              2775,
+              1218,
+              3181,
+              702,
+              1141,
+              1691
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-2-12",
+              "field": "responseScene",
+              "component": 2,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "01810634059763a5bd47faf1d34daed31d5ea65666e69a289d7117cab1a930e9",
+            "values": [
+              1809,
+              2082,
+              1038,
+              1446,
+              3222,
+              3433,
+              3714,
+              3717,
+              2982,
+              3488,
+              3449,
+              3530,
+              3580,
+              2983,
+              3476,
+              3449,
+              3518,
+              3564,
+              2906,
+              3460,
+              3565,
+              3392,
+              3468,
+              3151,
+              2239,
+              2231,
+              1227,
+              2967,
+              3325,
+              2897,
+              2369
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-2-24",
+              "field": "responseScene",
+              "component": 2,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "8e0d411e0769b081862931faf863883820ba23590c6459677b2e754642147be1",
+            "values": [
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              61,
+              60,
+              60,
+              61,
+              60,
+              60,
+              60,
+              60
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-3-0",
+              "field": "responseScene",
+              "component": 3,
+              "components": 4,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "7ba2ee800272cadfac9393cdb60e04db8a15ab59d352fe7adce11791868ce95e",
+            "values": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-3-12",
+              "field": "responseScene",
+              "component": 3,
+              "components": 4,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "08004e9fd221caf41aeff17c440e01aae7989719615b42bdb36919083f6fed20",
+            "values": [
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048,
+              2048
+            ]
+          },
+          {
+            "case": {
+              "name": "responseScene-3-24",
+              "field": "responseScene",
+              "component": 3,
+              "components": 4,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "34df121258c5390185001073e44debd09eda83addf6be82c92141293b10a7dff",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-0-0",
+              "field": "masks",
+              "component": 0,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "d657d7116a0bbf2ee84e27f968883445b85a47134b22aa95530a67e91e0edb44",
+            "values": [
+              2707,
+              2990,
+              908,
+              418,
+              3060,
+              1509,
+              2542,
+              3048,
+              4080,
+              3815,
+              484,
+              3819,
+              1257,
+              3313,
+              998,
+              738,
+              1514,
+              2535,
+              1000,
+              2789,
+              1000,
+              3550,
+              1509,
+              3788,
+              3261,
+              2242,
+              691,
+              3500,
+              2704,
+              3316,
+              2755
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-0-12",
+              "field": "masks",
+              "component": 0,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "a8623921bde610cf1b423c12814a6f3ce8cd2435f1af181112a8f2fcf7ba0f65",
+            "values": [
+              300,
+              733,
+              189,
+              543,
+              1850,
+              1622,
+              1759,
+              1669,
+              1788,
+              1653,
+              1595,
+              1717,
+              1677,
+              1802,
+              1631,
+              1574,
+              1695,
+              1655,
+              1669,
+              1611,
+              1657,
+              1507,
+              1623,
+              1220,
+              971,
+              1049,
+              2871,
+              699,
+              260,
+              3908,
+              3125
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-0-24",
+              "field": "masks",
+              "component": 0,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "b070bbda3741c6046e791960c8ecb148c4128247a57c076f60d2c54cfe6ccb59",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              62,
+              62,
+              63,
+              63,
+              62,
+              62
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-1-0",
+              "field": "masks",
+              "component": 1,
+              "components": 2,
+              "shift": 0
+            },
+            "qualified": true,
+            "shaderSha256": "cab76b2a2abbbce46dba939b6f972dddcc5429ecbbd7d5eb76f4f1ccb2e7f095",
+            "values": [
+              3060,
+              1493,
+              2522,
+              3237,
+              3836,
+              2799,
+              2030,
+              493,
+              3839,
+              747,
+              3311,
+              2032,
+              238,
+              3839,
+              490,
+              2029,
+              1517,
+              494,
+              1534,
+              3305,
+              1516,
+              1770,
+              2792,
+              3788,
+              3063,
+              1012,
+              157,
+              1744,
+              3056,
+              2290,
+              1014
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-1-12",
+              "field": "masks",
+              "component": 1,
+              "components": 2,
+              "shift": 12
+            },
+            "qualified": true,
+            "shaderSha256": "f6f1708e70df2eb196c838b52af3ce9597bc3de59741d589c2d344f20286f849",
+            "values": [
+              1853,
+              1354,
+              1444,
+              594,
+              1983,
+              1769,
+              1761,
+              1744,
+              2031,
+              1705,
+              1773,
+              1790,
+              1765,
+              2031,
+              1690,
+              1737,
+              1742,
+              1752,
+              2014,
+              1675,
+              1721,
+              1703,
+              1670,
+              1220,
+              1899,
+              1855,
+              3208,
+              1277,
+              1788,
+              1829,
+              1889
+            ]
+          },
+          {
+            "case": {
+              "name": "masks-1-24",
+              "field": "masks",
+              "component": 1,
+              "components": 2,
+              "shift": 24
+            },
+            "qualified": true,
+            "shaderSha256": "5b69d7af8ca944d0eda4e107b57f5ff97b222dfd7a3d7277d59bab2d1d706f77",
+            "values": [
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              63,
+              62,
+              63,
+              63,
+              63,
+              63
+            ]
+          }
+        ],
+        "samplers": [
+          {
+            "object": "ResourceId::152",
+            "address": [
+              "AddressMode.ClampBorder",
+              "AddressMode.ClampBorder",
+              "AddressMode.ClampBorder"
+            ],
+            "filter": {
+              "minify": "FilterMode.Linear",
+              "magnify": "FilterMode.Linear",
+              "mip": "FilterMode.Point",
+              "function": "FilterFunction.Normal"
+            },
+            "lod": {
+              "bias": 0.0,
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "maximum_anisotropy": 0.0,
+            "compare_function": "CompareFunction.Never",
+            "unnormalized": false,
+            "shader_binding_index": 0,
+            "array_element": 0
+          }
+        ],
+        "declaredResources": [
+          {
+            "name": "baseColorTexture",
+            "binding": 1,
+            "index": 0
+          },
+          {
+            "name": "normalTexture",
+            "binding": 2,
+            "index": 1
+          },
+          {
+            "name": "metallicRoughnessTexture",
+            "binding": 3,
+            "index": 2
+          },
+          {
+            "name": "environmentTexture",
+            "binding": 4,
+            "index": 3
+          },
+          {
+            "name": "specularEmissiveTexture",
+            "binding": 5,
+            "index": 4
+          },
+          {
+            "name": "styleMaskTexture",
+            "binding": 6,
+            "index": 5
+          },
+          {
+            "name": "matcapTexture",
+            "binding": 7,
+            "index": 6
+          },
+          {
+            "name": "hairDataTexture",
+            "binding": 8,
+            "index": 7
+          },
+          {
+            "name": "mainShadowDepth",
+            "binding": 9,
+            "index": 8
+          },
+          {
+            "name": "toonRampTexture",
+            "binding": 11,
+            "index": 9
+          },
+          {
+            "name": "faceSdfTexture",
+            "binding": 12,
+            "index": 10
+          },
+          {
+            "name": "overlaySceneDepth",
+            "binding": 18,
+            "index": 11
+          },
+          {
+            "name": "opaqueSceneColor",
+            "binding": 19,
+            "index": 12
+          },
+          {
+            "name": "reflectionProbeTexture",
+            "binding": 23,
+            "index": 13
+          },
+          {
+            "name": "shadowColorLutTexture",
+            "binding": 25,
+            "index": 14
+          },
+          {
+            "name": "objectShadowDepth",
+            "binding": 29,
+            "index": 15
+          }
+        ],
+        "resources": [
+          {
+            "index": 0,
+            "arrayElement": 0,
+            "resource": "ResourceId::752",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 1,
+            "arrayElement": 0,
+            "resource": "ResourceId::635",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 2,
+            "arrayElement": 0,
+            "resource": "ResourceId::648",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 3,
+            "arrayElement": 0,
+            "resource": "ResourceId::934",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 4,
+            "arrayElement": 0,
+            "resource": "ResourceId::343",
+            "format": "R8G8B8A8_SRGB"
+          },
+          {
+            "index": 5,
+            "arrayElement": 0,
+            "resource": "ResourceId::765",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 6,
+            "arrayElement": 0,
+            "resource": "ResourceId::778",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 7,
+            "arrayElement": 0,
+            "resource": "ResourceId::791",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 8,
+            "arrayElement": 0,
+            "resource": "ResourceId::149",
+            "format": "D32"
+          },
+          {
+            "index": 9,
+            "arrayElement": 0,
+            "resource": "ResourceId::982",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 10,
+            "arrayElement": 0,
+            "resource": "ResourceId::804",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 11,
+            "arrayElement": 0,
+            "resource": "ResourceId::1044",
+            "format": "R32_FLOAT"
+          },
+          {
+            "index": 12,
+            "arrayElement": 0,
+            "resource": "ResourceId::1041",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 13,
+            "arrayElement": 0,
+            "resource": "ResourceId::968",
+            "format": "R16G16B16A16_FLOAT"
+          },
+          {
+            "index": 14,
+            "arrayElement": 0,
+            "resource": "ResourceId::817",
+            "format": "R8G8B8A8_UNORM"
+          },
+          {
+            "index": 15,
+            "arrayElement": 0,
+            "resource": "ResourceId::1167",
+            "format": "D16"
+          }
+        ],
+        "rampTexture": {
+          "resource": "ResourceId::765",
+          "width": 256,
+          "height": 1,
+          "mips": 1,
+          "format": "R8G8B8A8_UNORM",
+          "shaderName": "styleMaskTexture",
+          "bytes": 1024,
+          "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+        },
+        "sourceControlQualified": true,
+        "controlSha256": "5ee2fcf833c8d1c2363c26aa87ad4c092c6c3895bd2c086228fa1b3a3c4d2abf",
+        "baselineRestored": true,
+        "debugMessages": []
+      }
+    ]
+  },
+  "scope": "Actual pre-final-scale weighted diffuse color, scene visibility and lit/ao masks. Shader output with full-crop blue qualification and seen/consistency flags.",
+  "largeChromaStableMaterialGroup": {
+    "points": 20,
+    "responseExactPoints": 10,
+    "maskExactPoints": 19,
+    "maximumResponseAbsolute": 1.710653305053711e-05,
+    "maximumResponseAbsoluteExcludingRampDifference": 5.960464477539063e-08,
+    "maximumMaskAbsolute": 4.57763671875e-05
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 176.2029999999795,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-021819-hair-diffuse-response-weights-c24e63\\run.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-021819-hair-diffuse-response-weights-c24e63\\tmp"
+  },
+  "archiveFiles": [
+    {
+      "path": "analyze.py",
+      "bytes": 2979,
+      "sha256": "e325ed9e70f62a7754b655e8d30ddee9bccaca24d496b7728701de0383127017"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 434,
+      "sha256": "59a67c687e692428fba217adcfcd2c9f8e959a682cd15234b5f371cb3df0cdff"
+    },
+    {
+      "path": "cases.json",
+      "bytes": 2361,
+      "sha256": "de60e7f7149a81311065add16e9101acdaf64d787878297f281bae69900f217e"
+    },
+    {
+      "path": "checksum-source.json",
+      "bytes": 464,
+      "sha256": "1d39ff44c3da8c2a736d607211bf6fb3614425895c7b8b94d52c268a49e04907"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 6411,
+      "sha256": "be248743075ac9e016c28734d8b5556cab5d25a5611be7e8953e9b8179fb4368"
+    },
+    {
+      "path": "D3D12TokenizedProgramFormat.hpp",
+      "bytes": 130378,
+      "sha256": "5862ef7c8b819f0d02ba73563a9df4dc0e89f11fe59d8f598def39122273c626"
+    },
+    {
+      "path": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "dxbc_util.py",
+      "bytes": 3858,
+      "sha256": "fe1a625c044318c64372608b635dc677dd75aff9c7556fa097656cb0d6f16376"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 580,
+      "sha256": "3b9fb09983bf1e1be150f6ab9c15a1742ea27d553afd756b0a3b8fbf3e6cb981"
+    },
+    {
+      "path": "generate.py",
+      "bytes": 9166,
+      "sha256": "0ff763e4f3d65465bf096bd1902757f94f1bf7980d0905428d7539b415a2bf57"
+    },
+    {
+      "path": "header-source.json",
+      "bytes": 420,
+      "sha256": "76a466942d51c360b1264e5b81c27e84c4696b5a3ffbbdec39d9b835d5487c2b"
+    },
+    {
+      "path": "LICENSE-RenderDoc.txt",
+      "bytes": 1336,
+      "sha256": "108b3bbf970884d6449b774c0516712c3c6d3f9d3d181a1d2580a2c2cd308db7"
+    },
+    {
+      "path": "masks-0-0.dxbc",
+      "bytes": 68164,
+      "sha256": "00a7924278a7ef216e0c06d0858932785a40a9d8897e57d24db13970af18fb22"
+    },
+    {
+      "path": "masks-0-0.spv",
+      "bytes": 472464,
+      "sha256": "d657d7116a0bbf2ee84e27f968883445b85a47134b22aa95530a67e91e0edb44"
+    },
+    {
+      "path": "masks-0-12.dxbc",
+      "bytes": 68164,
+      "sha256": "c44767039320d45aa1a8bfe5c17c06022d1edb54015636e98df3d622e7e2bd90"
+    },
+    {
+      "path": "masks-0-12.spv",
+      "bytes": 472464,
+      "sha256": "a8623921bde610cf1b423c12814a6f3ce8cd2435f1af181112a8f2fcf7ba0f65"
+    },
+    {
+      "path": "masks-0-24.dxbc",
+      "bytes": 68248,
+      "sha256": "7cb388e6dd61ca857aa69e20ba700273ea2a1dad4b691514d5eb1ba2f626718c"
+    },
+    {
+      "path": "masks-0-24.spv",
+      "bytes": 472604,
+      "sha256": "b070bbda3741c6046e791960c8ecb148c4128247a57c076f60d2c54cfe6ccb59"
+    },
+    {
+      "path": "masks-1-0.dxbc",
+      "bytes": 68164,
+      "sha256": "0daecc966d2cfc612188b7a0c85c3b8c8304304b2a75a34755f7014a91c8bb80"
+    },
+    {
+      "path": "masks-1-0.spv",
+      "bytes": 472464,
+      "sha256": "cab76b2a2abbbce46dba939b6f972dddcc5429ecbbd7d5eb76f4f1ccb2e7f095"
+    },
+    {
+      "path": "masks-1-12.dxbc",
+      "bytes": 68164,
+      "sha256": "2de5bfc9bc7a479dcb50b33ea4c28211161969a6409ec5be075775b15c01a2f3"
+    },
+    {
+      "path": "masks-1-12.spv",
+      "bytes": 472464,
+      "sha256": "f6f1708e70df2eb196c838b52af3ce9597bc3de59741d589c2d344f20286f849"
+    },
+    {
+      "path": "masks-1-24.dxbc",
+      "bytes": 68248,
+      "sha256": "a34e9944b0118ccc5fcc60d178c073bb5c7945329aa71cca84febe504fd2a33b"
+    },
+    {
+      "path": "masks-1-24.spv",
+      "bytes": 472604,
+      "sha256": "5b69d7af8ca944d0eda4e107b57f5ff97b222dfd7a3d7277d59bab2d1d706f77"
+    },
+    {
+      "path": "native-original.shader",
+      "bytes": 67836,
+      "sha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee"
+    },
+    {
+      "path": "native-output-control.dxbc",
+      "bytes": 67916,
+      "sha256": "06fec06ff784468d35d1c183ef0ecf6d6cf17869b0efcca2a0939babf2d33ab0"
+    },
+    {
+      "path": "native-ramp-top-mip.bin",
+      "bytes": 1024,
+      "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+    },
+    {
+      "path": "native-source.shader",
+      "bytes": 67836,
+      "sha256": "b84f4d70ba795ada599a0f78ca4f60c6d1efa39f2974e293d2d694e7222e5cee"
+    },
+    {
+      "path": "native-stored-baseline.zlib",
+      "bytes": 150197,
+      "sha256": "d9422dbf4eb42766c1d536741ce574e2c6a871ed722ffc5107e42ec6b1cbcb0e"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 4013,
+      "sha256": "b1a11b5e9e6d116a87d22505b64133a5c89ccfd48d654cd6676a0eb66473015f"
+    },
+    {
+      "path": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 868,
+      "sha256": "309b3d2b2bdf71686837298f442f4b34a9441a37c6445b53be1c23c7c16dc9df"
+    },
+    {
+      "path": "responseScene-0-0.dxbc",
+      "bytes": 68164,
+      "sha256": "83f810bfa7342c4b7bd6e9a1765e8db195ffa053c288a9ed0423d1ad32fd59e2"
+    },
+    {
+      "path": "responseScene-0-0.spv",
+      "bytes": 472464,
+      "sha256": "972b27188e15fa83de289f2ef0f645f430467d41f8ca497870735a6024204c98"
+    },
+    {
+      "path": "responseScene-0-12.dxbc",
+      "bytes": 68164,
+      "sha256": "c288e4f973c6af6ca8faa28f7e8fbb7bcb652b5f268f6821661734185712b72a"
+    },
+    {
+      "path": "responseScene-0-12.spv",
+      "bytes": 472464,
+      "sha256": "0dde86bff03b953518c139df4a199cf87d3ebc74d17edb55b937f5d0c75d19f1"
+    },
+    {
+      "path": "responseScene-0-24.dxbc",
+      "bytes": 68248,
+      "sha256": "bb8b1e4c09b6bc8e291f6a4b750dda21a965f6d7e24741863f8c06e4cb3ab76d"
+    },
+    {
+      "path": "responseScene-0-24.spv",
+      "bytes": 472604,
+      "sha256": "d9138c51b38ffca9e3ec17784094afe75c39993986433670b8543dcfe9a64a99"
+    },
+    {
+      "path": "responseScene-1-0.dxbc",
+      "bytes": 68164,
+      "sha256": "c89f31632daf532c49d60c53cdac14685c739a3c10c6cc005094813deefb9f72"
+    },
+    {
+      "path": "responseScene-1-0.spv",
+      "bytes": 472464,
+      "sha256": "7979b5e5230377084b48ae2f4461435e08de986193f73b8579e383596cb7c87b"
+    },
+    {
+      "path": "responseScene-1-12.dxbc",
+      "bytes": 68164,
+      "sha256": "876ddfab900c5473215b70b6353be0373676265ab776e5253904ce93f4768cde"
+    },
+    {
+      "path": "responseScene-1-12.spv",
+      "bytes": 472464,
+      "sha256": "e0736bd0b64cdc89d170a707b12cf9f8901f90fad1902dcdbfa3531e02a3255b"
+    },
+    {
+      "path": "responseScene-1-24.dxbc",
+      "bytes": 68248,
+      "sha256": "a46896ce7b910ee9ef839a5f6efb4cfd789fbb8714607dd11fd2eca250d5103f"
+    },
+    {
+      "path": "responseScene-1-24.spv",
+      "bytes": 472604,
+      "sha256": "8e4101d903759a3d4d66ec83a42de6cb9815eaa6fefa966dddcb00737da0e740"
+    },
+    {
+      "path": "responseScene-2-0.dxbc",
+      "bytes": 68164,
+      "sha256": "9835f97144bb09e2b714c56cd8b883cc8279f645580f483658d02aee7fa95323"
+    },
+    {
+      "path": "responseScene-2-0.spv",
+      "bytes": 472464,
+      "sha256": "e7332040cf50b3dd8d1c40d2705f469cf283d60f1e71d6130c10fdc63c106ba2"
+    },
+    {
+      "path": "responseScene-2-12.dxbc",
+      "bytes": 68164,
+      "sha256": "af14e56faeb188ce54724f81a3fbff8d15c83a62e0876eaf5e0373fb9e43db08"
+    },
+    {
+      "path": "responseScene-2-12.spv",
+      "bytes": 472464,
+      "sha256": "01810634059763a5bd47faf1d34daed31d5ea65666e69a289d7117cab1a930e9"
+    },
+    {
+      "path": "responseScene-2-24.dxbc",
+      "bytes": 68248,
+      "sha256": "a9ebddaa3e260630edd64342a34d6eb37d89d6802f24ba752aec20a3a48d7b0b"
+    },
+    {
+      "path": "responseScene-2-24.spv",
+      "bytes": 472604,
+      "sha256": "8e0d411e0769b081862931faf863883820ba23590c6459677b2e754642147be1"
+    },
+    {
+      "path": "responseScene-3-0.dxbc",
+      "bytes": 68164,
+      "sha256": "e322bd58a2573e2999669fd9992ef043c04cdc3e6aefa93bfaf9f7285f8e5e7e"
+    },
+    {
+      "path": "responseScene-3-0.spv",
+      "bytes": 472464,
+      "sha256": "7ba2ee800272cadfac9393cdb60e04db8a15ab59d352fe7adce11791868ce95e"
+    },
+    {
+      "path": "responseScene-3-12.dxbc",
+      "bytes": 68164,
+      "sha256": "9e5ff5f6ec32c0ec2dfff7f50cdae886977a29df182bec6fc59457d67a3da1c9"
+    },
+    {
+      "path": "responseScene-3-12.spv",
+      "bytes": 472464,
+      "sha256": "08004e9fd221caf41aeff17c440e01aae7989719615b42bdb36919083f6fed20"
+    },
+    {
+      "path": "responseScene-3-24.dxbc",
+      "bytes": 68248,
+      "sha256": "1a648ec648209b59c15efec4967ef23736db49b22dd31c1a8362b4df8ab7864c"
+    },
+    {
+      "path": "responseScene-3-24.spv",
+      "bytes": 472604,
+      "sha256": "34df121258c5390185001073e44debd09eda83addf6be82c92141293b10a7dff"
+    },
+    {
+      "path": "results.json",
+      "bytes": 91327,
+      "sha256": "f87d786927f15732146a3024aa7a2f740ea983636df901af363a63f9756026e8"
+    },
+    {
+      "path": "run.py",
+      "bytes": 969,
+      "sha256": "934357bd34bed69b95311bdd9bc5cd2e9159ec67097ecdd06ae1899a999490bf"
+    },
+    {
+      "path": "state.json",
+      "bytes": 50330,
+      "sha256": "9fe60549162cb5b164fe61ec2ad4d915cb21126a9c80c9b34ff8ac113853cb57"
+    },
+    {
+      "path": "vulkan-ramp-top-mip.bin",
+      "bytes": 1024,
+      "sha256": "6894c4ace481d9f4b2446004dcd7ea349d9f875bbe51a7f5bb5fd76755a50315"
+    },
+    {
+      "path": "vulkan-source.shader",
+      "bytes": 346352,
+      "sha256": "5b076fb5ca571c93b5c2d5036ff97b84e0a96d34a81e932c4b4698821a28c4ca"
+    },
+    {
+      "path": "vulkan-stored-baseline.zlib",
+      "bytes": 281493,
+      "sha256": "c7ffde423b4cc9dfed702725bcc9b8cad608aadbbb6de97fa604a560163a38a0"
+    }
+  ],
+  "archiveBytes": 3478560,
+  "archiveSha256": "2a62e122648fb69ab694d544529db74e0c757a71bc2d941f139178b83a2ea67d"
+}
