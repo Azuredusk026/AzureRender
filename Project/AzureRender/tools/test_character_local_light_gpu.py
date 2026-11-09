@@ -97,7 +97,7 @@ def run(player,output,selected=None,expected_validation=None):
                 next(n for n in level['nodes'] if n.get('resourceId')=='plane')['materialSlots']={'surface':material_id}
                 path.write_text(json.dumps(level),encoding='utf-8')
             command=[str(player.resolve()),'--project',str(folder/'lab.azureproject'),'--width','128','--height','128',
-                '--capture-dir',str(folder/'frames'),'--capture-frames','1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--qa-isolation','direct-diffuse']
+                '--capture-dir',str(folder/'frames'),'--capture-frames','2' if name in ('front','fixed') else '1','--fixed-frame-step','--qa-camera','scene','--qa-light','scene','--qa-isolation','direct-diffuse']
             if name in ('fixed','line-fixed','wrap-fixed','pbr-zero-box-fixed'):command+=['--disable-bindless','--disable-compute-skinning','--disable-parallel-recording']
             (folder/'command.json').write_text(json.dumps(command,indent=2),encoding='utf-8')
             with (folder/'player.log').open('w',encoding='utf-8') as log:subprocess.run(command,stdout=log,stderr=subprocess.STDOUT,check=True,timeout=120)
@@ -106,6 +106,10 @@ def run(player,output,selected=None,expected_validation=None):
             validation='Validation layer: enabled' in log
             if expected_validation:assert validation==(expected_validation=='enabled')
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
+            first_frame_stable=None
+            if name in ('front','fixed'):
+                following=np.asarray(Image.open(folder/'frames/frame_000001.png').convert('RGB'));first_frame_stable=bool(np.array_equal(pixels,following))
+                assert first_frame_stable,'Static punctual-light scene must preserve its first frame exactly'
             pixel_y=32 if name=='upper-light' else 96 if name=='lower-light' else 64
             pixel_x=80 if name in ('line-axis-x','line-axis-y') else 64
             if name=='offset-camera':pixel_x=pixel_y=96
@@ -137,7 +141,7 @@ def run(player,output,selected=None,expected_validation=None):
                 if name in ('side','back','upper-light','lower-light','offset-camera'):assert max(expected)>.015,'Positive control must exceed output quantization and comparison budget'
                 error=float(np.abs(measured-expected).max())
             report['captures'].append({'name':name,'maximumLinearError':error,'measured':measured.tolist(),
-                'expected':None if expected is None else expected.tolist(),'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'validationEnabled':validation})
+                'expected':None if expected is None else expected.tolist(),'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),'validationEnabled':validation,'firstFrameStable':first_frame_stable})
             if error is not None:assert error<=.008,(name,error,measured,expected)
         for a,b in (('front','fixed'),('front','disabled-scene-npr'),('pbr','pbr-control'),('line-light','line-fixed'),('line-pbr','line-pbr-control')):
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b]),(a,b)

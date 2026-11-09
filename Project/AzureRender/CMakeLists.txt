@@ -2282,6 +2282,9 @@ if(BUILD_TESTING)
     add_executable(AzureRenderClusteredLightGridTests tests/ClusteredLightGridTests.cpp)
     target_include_directories(AzureRenderClusteredLightGridTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     add_test(NAME AzureRender.ClusteredLightGrid COMMAND AzureRenderClusteredLightGridTests)
+    add_executable(AzureRenderClusteredLightReceiverTests tests/ClusteredLightReceiverTests.cpp)
+    target_include_directories(AzureRenderClusteredLightReceiverTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+    add_test(NAME AzureRender.ClusteredLightReceiver COMMAND AzureRenderClusteredLightReceiverTests)
     add_executable(
         AzureRenderComputePassTests
         tests/ComputePassTests.cpp

@@ -2805,7 +2805,7 @@ void CharacterSceneRenderer::createUniformBuffers() {
         sizeof(RenderLightGpu) * kMaxSceneLights;
     const VkDeviceSize clusterHeaderBytes =
         sizeof(std::array<std::uint32_t, 2>)
-        * kClusterGridX * kClusterGridY * kClusterGridZ;
+        * kClusterGridX * kClusterGridY * kClusterGridZ * ClusteredLightGrid::kReceiverRangeCount;
     const VkDeviceSize clusterIndexBytes =
         sizeof(std::uint32_t) * kMaxClusterLightIndices;
     lightBuffers_.resize(kMaxFramesInFlight);
@@ -4617,15 +4617,14 @@ void CharacterSceneRenderer::updateClusteredLighting(
     auto& grid=*clusteredLightGrid_;
     grid.assign(frameLights_.lights());
     packedLights_ = frameLights_.gpuData();
-    grid.gpuHeaderData(packedClusterHeaders_);
-    grid.gpuIndexData(packedClusterIndices_);
+    grid.gpuReceiverData(packedClusterHeaders_,packedClusterIndices_);
     if (!clusteredLightingReported_) {
         azurerender::RuntimeDiagnostics::instance().print(
             "render",
             "Clustered lighting: "
                 + std::to_string(frameLights_.lights().size()) + " lights, "
-                + std::to_string(packedClusterIndices_.size())
-                + " cluster references");
+                + std::to_string(grid.gpuIndexData().size())
+                + " cluster references, "+std::to_string(packedClusterIndices_.size())+" receiver references");
         clusteredLightingReported_ = true;
     }
 
@@ -4645,8 +4644,6 @@ void CharacterSceneRenderer::updateClusteredLighting(
         packedClusterHeaders_.size()
             * sizeof(std::array<std::uint32_t, 2>));
     rhi::GpuBuffer& indexBuffer = clusterIndexBuffers_[currentFrame_];
-    std::memset(
-        indexBuffer.mapped, 0, static_cast<std::size_t>(indexBuffer.size));
     if (!packedClusterIndices_.empty()) {
         if (packedClusterIndices_.size()
             > indexBuffer.size / sizeof(std::uint32_t)) {

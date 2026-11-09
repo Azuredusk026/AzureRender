@@ -1,0 +1,155 @@
+{
+  "removed": [
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\baseline-runtime",
+      "result": [
+        213187516,
+        1794184866.4717908
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\red.exe",
+      "result": [
+        251392,
+        1794185043.6076388
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\red.obj",
+      "result": [
+        387344,
+        1794185043.5191135
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\tmp",
+      "result": [
+        472,
+        1794190459.6407857
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\__pycache__",
+      "result": [
+        8591,
+        1794186285.662331
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-092602-intel-first-frame-stability-fce74b\\tmp",
+      "result": [
+        6095,
+        1794188722.101198
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-092602-intel-first-frame-stability-fce74b\\memory.exe",
+      "result": [
+        158208,
+        1794188722.0495808
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-092602-intel-first-frame-stability-fce74b\\memory.obj",
+      "result": [
+        49666,
+        1794188721.903764
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-092602-intel-first-frame-stability-fce74b\\initial-witness.zip",
+      "result": [
+        3518209,
+        1794189759.8988986
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-092602-intel-first-frame-stability-fce74b\\capture_frame1.rdc",
+      "result": [
+        11258850,
+        1794187719.5897071
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-092602-intel-first-frame-stability-fce74b\\capture_frame2.rdc",
+      "result": [
+        11571251,
+        1794187719.7775211
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-092602-intel-first-frame-stability-fce74b\\initial_frame0.rdc",
+      "result": [
+        6803879,
+        1794188276.5275116
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-092602-intel-first-frame-stability-fce74b\\initial_frame1.rdc",
+      "result": [
+        13339434,
+        1794188276.89051
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\image-receiver-ranges\\frames-084650\\frame_000000.png",
+      "result": [
+        5714675,
+        1794185446.0212128
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\image-receiver-ranges\\frames-084650\\frame_000001.png",
+      "result": [
+        5713820,
+        1794185446.8098593
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\image-receiver-ranges\\frames-084650\\frame_000002.png",
+      "result": [
+        5713834,
+        1794185447.5840209
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\image-receiver-ranges\\frames-084650\\frame_000003.png",
+      "result": [
+        5714218,
+        1794185448.3546338
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\image-final-receiver-ranges\\frames-100957\\frame_000000.png",
+      "result": [
+        5714675,
+        1794190456.2296672
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\image-final-receiver-ranges\\frames-100957\\frame_000001.png",
+      "result": [
+        5713820,
+        1794190457.0836427
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\image-final-receiver-ranges\\frames-100957\\frame_000002.png",
+      "result": [
+        5713834,
+        1794190457.9291484
+      ]
+    },
+    {
+      "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261109-084026-clustered-receiver-ranges-3d190b\\image-final-receiver-ranges\\frames-100957\\frame_000003.png",
+      "result": [
+        5714218,
+        1794190458.9149237
+      ]
+    }
+  ],
+  "freeBefore": 157536899072,
+  "freeAfter": 157844844544,
+  "observedFreedBytes": 307945472,
+  "scope": "Owned reproducible binaries, verified duplicate golden frames, verified archived diagnostic witness; current assets and source preserved."
+}

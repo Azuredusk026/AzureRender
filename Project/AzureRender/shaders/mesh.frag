@@ -128,6 +128,7 @@ layout(std430, binding = 15) readonly buffer ClusterHeaderBuffer {
 layout(std430, binding = 16) readonly buffer ClusterIndexBuffer {
     uint indices[];
 } clusterIndexData;
+#include "cluster_light_ranges.glsl"
 layout(binding=20,std430) readonly buffer ShadowBounds { vec2 values[]; } shadowBounds;
 
 layout(push_constant) uniform MaterialData {
@@ -604,6 +605,9 @@ void prepareShadowReceiver() {
     }
 }
 float sampleShadowMap(float normalDotLight) {
+    // Authored scene cascades require an explicit surface directional owner.
+    // Legacy lighting and the explicit QA key retain their cascade provider.
+    if(camera.clusterLighting.x>.5 && camera.mainLightDirection.w<.5)return 1.0;
     float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
     int c=depth<=camera.cascadeSplits.x?0:(depth<=camera.cascadeSplits.y?1:(depth<=camera.cascadeSplits.z?2:3));
     float result=sampleCascadeShadow(c,normalDotLight,shadowReceiverGradients[c],shadowReceiverCurvature);
@@ -1206,7 +1210,6 @@ void main()
         uint(clamp(logarithmicDepth, 0.0, 0.999999) * float(gridZ)),
         gridZ - 1U);
     uint clusterIndex = (clusterZ * gridY + clusterY) * gridX + clusterX;
-    uvec2 lightRange = clusterHeaderData.clusters[clusterIndex];
     vec3 clusteredDiffuse = vec3(0.0);
     vec3 sceneMainDiffuse = vec3(0.0);
     vec3 clusteredSpecular = vec3(0.0);
@@ -1237,6 +1240,14 @@ void main()
     bool attenuateEmission=camera.nprLightingParameters.x>.5&&materialFeatureEnabled(16777216U)>.5
         &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[15].w>1.5;
     bool characterLightComposition=(nprDiffuse||projectedLighting||eyeNpr)&&camera.nprLightingParameters.x>.5;
+#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+    uint baseReceiverBit=characterLightReceiver?2U:1U;
+#else
+    uint baseReceiverBit=sceneCharacter||nprDiffuse?2U:1U;
+#endif
+    uint receiverRange=baseReceiverBit==2U?AZURE_CLUSTER_CHARACTER_RANGE
+        :(attenuateEmission?AZURE_CLUSTER_SURFACE_EMISSION_RANGE:AZURE_CLUSTER_SURFACE_RANGE);
+    uvec2 lightRange=azureClusterLightRange(clusterIndex,receiverRange);
     vec4 characterBlend=vec4(0,0,0,1);
     uint sceneLightCount = uint(max(camera.clusterGrid.w, 0.0));
     for (uint lightOffset = 0U; lightOffset < lightRange.y; ++lightOffset) {
@@ -1245,11 +1256,7 @@ void main()
             continue;
         }
         ClusterLight light = sceneLightData.lights[lightIndex];
-#if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
-        uint receiverBit=characterLightReceiver?2U:1U;
-#else
-        uint receiverBit=sceneCharacter||nprDiffuse?2U:1U;
-#endif
+        uint receiverBit=baseReceiverBit;
         bool colorBlend=light.characterResponse.x==2.0||light.characterResponse.x==3.0;
         if(colorBlend&&attenuateEmission)receiverBit=2U;
         if((uint(light.boxParameters.w)&receiverBit)==0U)continue;

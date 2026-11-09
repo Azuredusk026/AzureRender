@@ -26,7 +26,7 @@ bool azureWriteUnlitBlendBeauty(vec4 baseColor,vec3 geometricNormal,float platfo
             float viewDepth=max(dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz),nearDepth);
             float logarithmicDepth=log(viewDepth/nearDepth)/log(farDepth/nearDepth);
             uint clusterZ=min(uint(clamp(logarithmicDepth,0.0,.999999)*float(gridZ)),gridZ-1U);
-            uvec2 range=clusterHeaderData.clusters[(clusterZ*gridY+clusterY)*gridX+clusterX];
+            uvec2 range=azureClusterLightRange((clusterZ*gridY+clusterY)*gridX+clusterX,AZURE_CLUSTER_CHARACTER_BLEND_RANGE);
             uint count=uint(max(camera.clusterGrid.w,0.0));
             float attenuation=1.0;
             for(uint offset=0U;offset<range.y;++offset){

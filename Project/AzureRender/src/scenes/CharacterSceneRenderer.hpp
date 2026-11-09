@@ -171,7 +171,7 @@ private:
     static constexpr std::uint32_t kShadowCascadeCount = 4;
     static constexpr VkDeviceSize kMaxClusterLightIndices =
         static_cast<VkDeviceSize>(kClusterGridX)
-        * kClusterGridY * kClusterGridZ * kMaxSceneLights;
+        * kClusterGridY * kClusterGridZ * kMaxSceneLights * ClusteredLightGrid::kReceiverRangeCount;
     static constexpr std::uint32_t kEnvironmentMipLevels = 7;
     static constexpr std::uint32_t kIblPrefilterSamples = 32;
     // Indexed textures start with environment and toon ramp. Depth images

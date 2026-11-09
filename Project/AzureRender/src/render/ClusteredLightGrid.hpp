@@ -32,6 +32,9 @@ struct ClusterGridDesc {
 
 class ClusteredLightGrid final {
 public:
+    static constexpr std::uint32_t kReceiverRangeLayoutVersion=2;
+    static constexpr std::uint32_t kReceiverRangeCount=4;
+    enum class ReceiverRange : std::uint32_t { Surface=0,Character=1,SurfaceEmission=2,CharacterBlend=3 };
     explicit ClusteredLightGrid(ClusterGridDesc desc) { configure(desc); }
 
     // Starts a new assignment while retaining storage for an equal cell count.
@@ -50,7 +53,7 @@ public:
             clusters_.swap(replacement);
         }else for(auto& cluster:clusters_)cluster.clear();
         desc_=desc;
-        assignmentCached_=false;
+        assignmentCached_=false;receiverPacked_=false;
     }
 
     // Only membership inputs participate: colour/intensity updates keep the list.
@@ -58,7 +61,7 @@ public:
         nextKeys_.clear();nextKeys_.reserve(lights.size());
         for(const auto& light:lights)nextKeys_.push_back(assignmentKey(light));
         if(assignmentCached_ && nextKeys_==priorKeys_)return;
-        assignmentCached_=false;
+        assignmentCached_=false;receiverPacked_=false;
         for (auto& cluster : clusters_) cluster.clear();
         for (std::size_t index = 0; index < lights.size(); ++index) {
             const RenderLight& light = lights[index];
@@ -191,6 +194,28 @@ public:
             offset += static_cast<std::uint32_t>(cluster.size());
         }
     }
+    // Four consecutive ranges per cluster. Every range retains input light order.
+    // Only the returned index prefix is addressable by these headers.
+    void gpuReceiverData(std::vector<std::array<std::uint32_t,2>>& headers,
+        std::vector<std::uint32_t>& indices) const {
+        if(!receiverPacked_){
+            receiverHeaders_.clear();receiverHeaders_.reserve(clusters_.size()*kReceiverRangeCount);
+            receiverIndices_.clear();
+            for(const auto& cluster:clusters_)for(std::uint32_t category=0;category<kReceiverRangeCount;++category){
+                if(receiverIndices_.size()>UINT32_MAX || cluster.size()>UINT32_MAX-receiverIndices_.size())
+                    throw std::length_error("Cluster receiver indices exceed the GPU range");
+                const auto offset=static_cast<std::uint32_t>(receiverIndices_.size());
+                for(auto index:cluster){const auto& key=priorKeys_.at(index);
+                    const bool include=category==0?key.surfaces:category==1?key.characters
+                        :category==2?(key.colorBlend?key.characters:key.surfaces):key.colorBlend&&key.characters;
+                    if(include)receiverIndices_.push_back(index);
+                }
+                receiverHeaders_.push_back({offset,static_cast<std::uint32_t>(receiverIndices_.size()-offset)});
+            }
+            receiverPacked_=true;
+        }
+        headers=receiverHeaders_;indices=receiverIndices_;
+    }
     [[nodiscard]] const ClusterGridDesc& desc() const noexcept { return desc_; }
 
 private:
@@ -198,22 +223,25 @@ private:
         std::array<float,3> clusterPosition{},viewPosition{};
         float radius=0;
         LightKind type{};
-        bool viewSpace=false,projectedBlend=false,surfaces=false,characters=false,boxEnabled=false;
+        bool viewSpace=false,projectedBlend=false,surfaces=false,characters=false,boxEnabled=false,colorBlend=false;
         std::optional<ClusterLightInfluenceBox> box;
         bool operator==(const AssignmentKey& o) const {
             return clusterPosition==o.clusterPosition&&viewPosition==o.viewPosition&&radius==o.radius&&type==o.type
                 &&viewSpace==o.viewSpace&&projectedBlend==o.projectedBlend&&surfaces==o.surfaces
-                &&characters==o.characters&&boxEnabled==o.boxEnabled&&box==o.box;
+                &&characters==o.characters&&boxEnabled==o.boxEnabled&&colorBlend==o.colorBlend&&box==o.box;
         }
     };
     static AssignmentKey assignmentKey(const RenderLight& light){
         return {{light.clusterPosition[0],light.clusterPosition[1],light.clusterPosition[2]},
             light.viewPosition,light.radius,light.shape.type,light.viewSpaceBounds,
             light.shape.characterResponse.isProjectedColorBlend(),light.shape.receivers.surfaces,
-            light.shape.receivers.characters,light.shape.influenceBox.enabled,light.clusterBox};
+            light.shape.receivers.characters,light.shape.influenceBox.enabled,light.shape.characterResponse.isColorBlend(),light.clusterBox};
     }
     std::vector<AssignmentKey> priorKeys_,nextKeys_;
     bool assignmentCached_=false;
+    mutable bool receiverPacked_=false;
+    mutable std::vector<std::array<std::uint32_t,2>> receiverHeaders_;
+    mutable std::vector<std::uint32_t> receiverIndices_;
     [[nodiscard]] std::size_t linearIndex(std::uint32_t x, std::uint32_t y, std::uint32_t z) const noexcept {
         return (static_cast<std::size_t>(z) * desc_.y + y) * desc_.x + x;
     }
