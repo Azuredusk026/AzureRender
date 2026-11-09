@@ -43,6 +43,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 [倒数参考夹具](../acceptance/nr/native-reciprocal-domain.md)在 Intel 保留一处超差。
 剩余点对应齐次 X 的一个末位单位差异，生产接入待验。
+[精确视口归一化](../acceptance/nr/receiver-exact-viewport.md)使双设备参考夹具满足接收门槛。
+全部世界位置逐位一致，公共运行时接入及资源成本继续验收。
 画质工作流按[专项计划](2026-11-09-native-quality.md)继续核对世界位置与完整头发。
 [头发归因](../acceptance/nr/hair-color-visibility-attribution.md)确认 42 处颜色误差受可见量影响。
 隔离来源控制仍有 31 处超差，生产颜色基线保留原 73 处待项。
