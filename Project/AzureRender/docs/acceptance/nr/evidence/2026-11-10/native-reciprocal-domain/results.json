@@ -1,0 +1,542 @@
+{
+  "domain": {
+    "status": "compute-domain-checked",
+    "domainElements": 8388608,
+    "nativeCoverage": {
+      "actualNativeDomainElements": 757617,
+      "requestedDomainElements": 8388608,
+      "nativeComputeExactElements": 757617
+    },
+    "allGreenPixelsPerVersion": 3686400,
+    "versions": 12,
+    "relativeToCorrectRoundedUlpHistogram": {
+      "-1": 374723,
+      "0": 7280086,
+      "1": 733799
+    },
+    "nativeWorldReconstruction": {
+      "samples": 49384,
+      "exactPixels": 49384,
+      "maxAbsolutePerComponent": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "tableSha256": "c408381446132e07fa5581e930dc33fb790bea7ec4276ef3621e322df2492a55",
+    "qualification": {
+      "status": "qualified",
+      "domainElements": 8388608,
+      "runs": [
+        {
+          "phase": 0,
+          "byte": 0,
+          "offset": 0,
+          "count": 3686400,
+          "qualified": true,
+          "shaderSha256": "a7adbf819a074ae7e8f9f45255127f5697ef5bb2a269589b498533491050a974",
+          "outputSha256": "34d3a393193235a54a164281cec332ef5d952523a967b0f020b22f867945e746"
+        },
+        {
+          "phase": 0,
+          "byte": 1,
+          "offset": 0,
+          "count": 3686400,
+          "qualified": true,
+          "shaderSha256": "0540ec9d8fe56aa1f7e7f69091dde6f2de609f706abf3e4b2608f08beac6d5a6",
+          "outputSha256": "702acf6a708285bd095471fc0dea125f3458377db03a4ac37bce2e4f4510a5b8"
+        },
+        {
+          "phase": 0,
+          "byte": 2,
+          "offset": 0,
+          "count": 3686400,
+          "qualified": true,
+          "shaderSha256": "f4966a8a17de2dd3604a87ed824fa4c3bf0cb11a6a4b5ddfbf82beced98c9142",
+          "outputSha256": "25d0189532f7e13ce7162912b54ba5867ee192e1609932f0f8aeff335b232f9e"
+        },
+        {
+          "phase": 0,
+          "byte": 3,
+          "offset": 0,
+          "count": 3686400,
+          "qualified": true,
+          "shaderSha256": "906fedcb367e1fb5bfe3b461f8fff09e4cf1c98be568df2bc9934273ce1b7a06",
+          "outputSha256": "9c92dca93a1be95d8e24be3f31ee219f762b2094fb1e61894083f022610b1266"
+        },
+        {
+          "phase": 1,
+          "byte": 0,
+          "offset": 3686400,
+          "count": 3686400,
+          "qualified": true,
+          "shaderSha256": "e0a04079b61c27ffbea9470caa7cb9834f8b6b8ff3b55f4943b106e1721ca304",
+          "outputSha256": "c5241f09b4db5541856662e28a5ca3fe032e647c81f569b8501f7819286a55ad"
+        },
+        {
+          "phase": 1,
+          "byte": 1,
+          "offset": 3686400,
+          "count": 3686400,
+          "qualified": true,
+          "shaderSha256": "9c37ec386cdf64f4027484ceaa0902f4ab305e5f60b8510c6676b571a530bbe6",
+          "outputSha256": "bf87afb84bb2bec9cb7d755b9cababdc02bdd32937ac10310601bc7a2969cff4"
+        },
+        {
+          "phase": 1,
+          "byte": 2,
+          "offset": 3686400,
+          "count": 3686400,
+          "qualified": true,
+          "shaderSha256": "4ba69e0ad12becd180bc26f8abda9f408948283f0bfc9fb489e7453ab6bdcf28",
+          "outputSha256": "6d32da891cc23d719c6f2c177065cad0e18d94cf40f48eb20105e562edeeedcd"
+        },
+        {
+          "phase": 1,
+          "byte": 3,
+          "offset": 3686400,
+          "count": 3686400,
+          "qualified": true,
+          "shaderSha256": "eb087ec03e397fbf75941323130dfd49e7e6ee84626d6ae6e5fce8cf83312f6d",
+          "outputSha256": "9c92dca93a1be95d8e24be3f31ee219f762b2094fb1e61894083f022610b1266"
+        },
+        {
+          "phase": 2,
+          "byte": 0,
+          "offset": 7372800,
+          "count": 1015808,
+          "qualified": true,
+          "shaderSha256": "66adcd805736fc5baf9cdde3a6cf5e7532c8221c9f13f96534e2c3c48d24691e",
+          "outputSha256": "7e8472f7127de4884d2cabc746d46b3d2a2d891e6a08d13be5d60c88f7f2cc6b"
+        },
+        {
+          "phase": 2,
+          "byte": 1,
+          "offset": 7372800,
+          "count": 1015808,
+          "qualified": true,
+          "shaderSha256": "47ac072c4d9970fede9f13ce7c73e7f181315a0201f55a041726657b33ac8e80",
+          "outputSha256": "d40ad1b78c780dab32f07efba2b2bc67035d0723d86254dc0e96ac89634f60b9"
+        },
+        {
+          "phase": 2,
+          "byte": 2,
+          "offset": 7372800,
+          "count": 1015808,
+          "qualified": true,
+          "shaderSha256": "f4ba5118977ef3721c54ef6995cdfc1350a1893160b40e902bfc978e5185b692",
+          "outputSha256": "237d824e64f9312f89eeef44e2e826fc33a342d07919d05a185311eb49cca30b"
+        },
+        {
+          "phase": 2,
+          "byte": 3,
+          "offset": 7372800,
+          "count": 1015808,
+          "qualified": true,
+          "shaderSha256": "593974a50d773688845cfa04c1d8d07c695cece70f4708247837d1cc933e7297",
+          "outputSha256": "9851b181073023d5a06e4eb215b95b2910b882ed0552c2a1bc43941f69e4656c"
+        }
+      ],
+      "sourceShaderSha256": "1f30e122a6d9c3257fdc2cc3bdc2b72ef60f7d1926138f89dbd6962c7fa24c52",
+      "width": 2560,
+      "height": 1440,
+      "qualifiedGreenSha256": "aa2288c90751632ae14dcc752c4675e6b8a284612ba74e9f20d8803f43bef5aa",
+      "baselineRestored": true,
+      "debugMessages": [
+        "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+        "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+      ]
+    },
+    "scope": "Complete Vulkan compute reciprocal domain plus observed native draw coverage. Exponent scaling checked against qualified native world positions. No runtime implementation or full quality claim."
+  },
+  "receiver": {
+    "status": "diagnostic-reference-lookup",
+    "rows": [
+      {
+        "device": "intel",
+        "exactPixels": 49124,
+        "pixelsOverOneByte": 1,
+        "maximumByteError": 4,
+        "nativeWorldExactPixels": 49303,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          3.0517578125e-05,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "30768dd6e42aacbc5ed59379b7f7336006baa6f282292ff8a68d4890030f37e3"
+      },
+      {
+        "device": "nvidia",
+        "exactPixels": 49126,
+        "pixelsOverOneByte": 0,
+        "maximumByteError": 1,
+        "nativeWorldExactPixels": 49384,
+        "nativeWorldExactAmongFailures": 0,
+        "worldMaximumAbsolutePerComponent": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "outputSha256": "377a39c1ec50e13fa55a592ce55f7847fc6437710fa6e66f34584d181f5a738d"
+      }
+    ],
+    "scope": "Full normalized reciprocal reference in a private compute fixture; fixed sampling footprint and original queries preserved. Production remains unchanged."
+  },
+  "exactFma": {
+    "exactNative": 49384,
+    "exactIntel": 49287,
+    "samples": 49384,
+    "failures": [
+      {
+        "index": 16869,
+        "pixel": [
+          1288,
+          273
+        ],
+        "cpuBits": 3267029988,
+        "nativeBits": 3267029988,
+        "intelBits": 3267029987
+      }
+    ]
+  },
+  "archiveFiles": [
+    {
+      "name": "analyze_domain.py",
+      "bytes": 3274,
+      "sha256": "3018b2e608b6c236967ce81d0a6e655966c3a3ec68cb7c2deac3196ec9ac1177"
+    },
+    {
+      "name": "analyze_receiver.py",
+      "bytes": 1769,
+      "sha256": "260ffc01162445173a4b725d3ea2fbd6bcea0963af3988b1a6936f3ba991f036"
+    },
+    {
+      "name": "budget.json",
+      "bytes": 435,
+      "sha256": "1e8d3f4b90d0debc2a332a0950c94e217c2030aba1924b30021b0dcf1793b640"
+    },
+    {
+      "name": "checksum-source.json",
+      "bytes": 464,
+      "sha256": "1d39ff44c3da8c2a736d607211bf6fb3614425895c7b8b94d52c268a49e04907"
+    },
+    {
+      "name": "clip-filter.comp",
+      "bytes": 2573,
+      "sha256": "9e31361795bac55eadbb85dab17228389685d870f294756f387079fd502d646a"
+    },
+    {
+      "name": "clip-filter.spv",
+      "bytes": 30308,
+      "sha256": "adee86754938fa111abb004711b070585ee83bc90f0d781b6439b061a8ec4663"
+    },
+    {
+      "name": "collector-build.log",
+      "bytes": 26607,
+      "sha256": "ca93bed3a74758d0a4627eb14d1cb162e3535c90adee947a78941c7d2ecf802f"
+    },
+    {
+      "name": "collector-inputs.json",
+      "bytes": 602,
+      "sha256": "dd3bf28433d86cdb9ef13250ed5bae7d123374cc07742f680a1cfcf0256e7cfe"
+    },
+    {
+      "name": "collect_domain.py",
+      "bytes": 3292,
+      "sha256": "c2af4beccd384e98a36d1115d9e99abc2cc0936e6eab609ca8fc9282d09bc0ca"
+    },
+    {
+      "name": "compile-command.txt",
+      "bytes": 1292,
+      "sha256": "b3c8085866f98d15da0c23741eded2670426deede166f46f2fed4c58079ea7fc"
+    },
+    {
+      "name": "compute-domain.log",
+      "bytes": 10083,
+      "sha256": "7a44cbde6961c920c685f5a3dd6bde86ca6e4ea6b15e8298092793cf561933c4"
+    },
+    {
+      "name": "compute.py",
+      "bytes": 1400,
+      "sha256": "e3cbe2a0431c40dc492b9966b0b0b480f96f6460f074a14563b9e906f8a6410f"
+    },
+    {
+      "name": "cpu-homogeneous-x.u32",
+      "bytes": 197536,
+      "sha256": "950a4b8169f3122b571a67fb85d34c1ed865dc7630be2b2f680982fbd51ff290"
+    },
+    {
+      "name": "D3D12TokenizedProgramFormat.hpp",
+      "bytes": 130378,
+      "sha256": "5862ef7c8b819f0d02ba73563a9df4dc0e89f11fe59d8f598def39122273c626"
+    },
+    {
+      "name": "domain-fixture.json",
+      "bytes": 446,
+      "sha256": "63d880c6383730017bc65e4e7bac56560a31aa5395356b2e2baace9e34b15843"
+    },
+    {
+      "name": "domain-results.json",
+      "bytes": 5446,
+      "sha256": "3c693e20d75cfbee5075ba56ebbd44a24706bad59f008bef6554b255d05ebe0f"
+    },
+    {
+      "name": "domain-state.json",
+      "bytes": 4327,
+      "sha256": "c53d0e3bb2871ac007a81a632675c32bbc4d0270bc3265e1bd79ea4f3d3362fa"
+    },
+    {
+      "name": "domain.comp",
+      "bytes": 2173,
+      "sha256": "b5c1c3ae2c0b90d98b431497dfea88b15eb41987df63363ddcb6c1ed94762ae9"
+    },
+    {
+      "name": "domain.spv",
+      "bytes": 16268,
+      "sha256": "8525b30b917fc6d3a6328e7690632f7ac91137072144ff30084da092537484c6"
+    },
+    {
+      "name": "domain_probe.py",
+      "bytes": 1472,
+      "sha256": "fa304feb4063de996a97629eae760be96d71044f53e50e6a53c911017b58a748"
+    },
+    {
+      "name": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dxbc_util.py",
+      "bytes": 3956,
+      "sha256": "97ced7dd9dd0a76a5ebb6ec4e8c419575cd24169f26fb5173007a83138a53cec"
+    },
+    {
+      "name": "exact-fma-results.json",
+      "bytes": 285,
+      "sha256": "e63d256482fe55a42282e77ac39cb8621e3d09aa2f2c20126fa2c98556bcb49d"
+    },
+    {
+      "name": "exact_fma.py",
+      "bytes": 2461,
+      "sha256": "278e8565092952b262a55def8fd166ecbde10f14451d0a00a4a423d61cdd46dc"
+    },
+    {
+      "name": "first-generator-failure.json",
+      "bytes": 1387,
+      "sha256": "07187eb5ad07e08b5d2538ae247f6d4c9e3101059de396e1613aea4e06a68d4b"
+    },
+    {
+      "name": "generator-smoke.dxbc",
+      "bytes": 12364,
+      "sha256": "a7adbf819a074ae7e8f9f45255127f5697ef5bb2a269589b498533491050a974"
+    },
+    {
+      "name": "header-source.json",
+      "bytes": 420,
+      "sha256": "76a466942d51c360b1264e5b81c27e84c4696b5a3ffbbdec39d9b835d5487c2b"
+    },
+    {
+      "name": "intel-lookup-filter.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "intel-lookup-world.log",
+      "bytes": 10111,
+      "sha256": "d546fa83bd05621c6e6ceff177b7f9bd84788df234980b946b82d13b39b0c528"
+    },
+    {
+      "name": "LICENSE-RenderDoc.txt",
+      "bytes": 1336,
+      "sha256": "108b3bbf970884d6449b774c0516712c3c6d3f9d3d181a1d2580a2c2cd308db7"
+    },
+    {
+      "name": "link-command.txt",
+      "bytes": 3319,
+      "sha256": "014c2302a8c131f093e61871650a0d2e4e9285b0ffbf9a810b1acfd31f2c9935"
+    },
+    {
+      "name": "lookup-build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "lookup-filter.comp",
+      "bytes": 2567,
+      "sha256": "136cda3d8aae63e908d4638d9131d69410a46d0463ee2b3aa76858214a83747c"
+    },
+    {
+      "name": "lookup-filter.spv",
+      "bytes": 30308,
+      "sha256": "adee86754938fa111abb004711b070585ee83bc90f0d781b6439b061a8ec4663"
+    },
+    {
+      "name": "lookup-fixture.json",
+      "bytes": 404,
+      "sha256": "e974851bb12649626ad4284415b037ca44b422fb2178729497515c2af8efb6bc"
+    },
+    {
+      "name": "lookup-world.comp",
+      "bytes": 2537,
+      "sha256": "1a9c84e2e405bb9d02f6ee349b63015a89a7bfe94b4225afe1f679df80973563"
+    },
+    {
+      "name": "lookup-world.spv",
+      "bytes": 30192,
+      "sha256": "2fd19c2b11e367107f0ca1e142fa63419021f070611e770bf9d21a13ecd44af8"
+    },
+    {
+      "name": "native-rcp-correction.2bit",
+      "bytes": 2097152,
+      "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+    },
+    {
+      "name": "native_receiver_clip_precise.glsl",
+      "bytes": 2391,
+      "sha256": "edd29a4a2cc48f94f2417da3ded42bf5f0d6f0af581667656b9a3d5d25a82d8b"
+    },
+    {
+      "name": "native_receiver_lookup.glsl",
+      "bytes": 2383,
+      "sha256": "3a2f2b41b88bcc7c887fbe7b7e0d3c1550f0340e10bdf69f459d406040c8cb82"
+    },
+    {
+      "name": "native_receiver_precise.glsl",
+      "bytes": 2084,
+      "sha256": "ab61422a64ab87d62e8615977f7a1c5b252f80394d25e94130cde8ba4d0c8b96"
+    },
+    {
+      "name": "nvidia-lookup-filter.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "nvidia-lookup-world.log",
+      "bytes": 10081,
+      "sha256": "96b85ba833c9fd147376081e9ad12c057517eb09c924a64ff4edc04724a98855"
+    },
+    {
+      "name": "object_shadow.glsl",
+      "bytes": 6392,
+      "sha256": "6fd7e87988d0632ba8ad4528f15f4bb4141c81da3ce1fbc843b622a5b77d72e6"
+    },
+    {
+      "name": "original-producer.dxbc",
+      "bytes": 12108,
+      "sha256": "1f30e122a6d9c3257fdc2cc3bdc2b72ef60f7d1926138f89dbd6962c7fa24c52"
+    },
+    {
+      "name": "phase-0-byte-0.dxbc",
+      "bytes": 12364,
+      "sha256": "a7adbf819a074ae7e8f9f45255127f5697ef5bb2a269589b498533491050a974"
+    },
+    {
+      "name": "phase-0-byte-1.dxbc",
+      "bytes": 12364,
+      "sha256": "0540ec9d8fe56aa1f7e7f69091dde6f2de609f706abf3e4b2608f08beac6d5a6"
+    },
+    {
+      "name": "phase-0-byte-2.dxbc",
+      "bytes": 12364,
+      "sha256": "f4966a8a17de2dd3604a87ed824fa4c3bf0cb11a6a4b5ddfbf82beced98c9142"
+    },
+    {
+      "name": "phase-0-byte-3.dxbc",
+      "bytes": 12364,
+      "sha256": "906fedcb367e1fb5bfe3b461f8fff09e4cf1c98be568df2bc9934273ce1b7a06"
+    },
+    {
+      "name": "phase-1-byte-0.dxbc",
+      "bytes": 12364,
+      "sha256": "e0a04079b61c27ffbea9470caa7cb9834f8b6b8ff3b55f4943b106e1721ca304"
+    },
+    {
+      "name": "phase-1-byte-1.dxbc",
+      "bytes": 12364,
+      "sha256": "9c37ec386cdf64f4027484ceaa0902f4ab305e5f60b8510c6676b571a530bbe6"
+    },
+    {
+      "name": "phase-1-byte-2.dxbc",
+      "bytes": 12364,
+      "sha256": "4ba69e0ad12becd180bc26f8abda9f408948283f0bfc9fb489e7453ab6bdcf28"
+    },
+    {
+      "name": "phase-1-byte-3.dxbc",
+      "bytes": 12364,
+      "sha256": "eb087ec03e397fbf75941323130dfd49e7e6ee84626d6ae6e5fce8cf83312f6d"
+    },
+    {
+      "name": "phase-2-byte-0.dxbc",
+      "bytes": 12364,
+      "sha256": "66adcd805736fc5baf9cdde3a6cf5e7532c8221c9f13f96534e2c3c48d24691e"
+    },
+    {
+      "name": "phase-2-byte-1.dxbc",
+      "bytes": 12364,
+      "sha256": "47ac072c4d9970fede9f13ce7c73e7f181315a0201f55a041726657b33ac8e80"
+    },
+    {
+      "name": "phase-2-byte-2.dxbc",
+      "bytes": 12364,
+      "sha256": "f4ba5118977ef3721c54ef6995cdfc1350a1893160b40e902bfc978e5185b692"
+    },
+    {
+      "name": "phase-2-byte-3.dxbc",
+      "bytes": 12364,
+      "sha256": "593974a50d773688845cfa04c1d8d07c695cece70f4708247837d1cc933e7297"
+    },
+    {
+      "name": "prepare_compute.py",
+      "bytes": 2932,
+      "sha256": "422876c2d778fb936c187d0696356869ca5400ad1f09dee7dfd5d367e540feb5"
+    },
+    {
+      "name": "prepare_receiver.py",
+      "bytes": 1721,
+      "sha256": "ac899043a615bbc209d72dd73647889d43071094a1a75cc7d538cd09ddb28f64"
+    },
+    {
+      "name": "process.log",
+      "bytes": 18,
+      "sha256": "b2d4ec8c17b4aae3ca93c176b0981945fd95840926b364a4ddd1a2d724101d84"
+    },
+    {
+      "name": "receiver-results.json",
+      "bytes": 1050,
+      "sha256": "69b2abeca62e00b5bdfb5f924654383da57774b44e30e6ee20aeff32a1dfdbf4"
+    },
+    {
+      "name": "receiver.py",
+      "bytes": 1370,
+      "sha256": "4f3641b3d664cd58f083d76e07b36b5091e86f2e8c1e9d2aa93494cbf378fcb9"
+    },
+    {
+      "name": "run.py",
+      "bytes": 1016,
+      "sha256": "f982423ecad8c4be1e358204f2c2573050a5d66523626236738f9df674d94439"
+    },
+    {
+      "name": "intel-lookup-filter.bin",
+      "bytes": 790144,
+      "sha256": "30768dd6e42aacbc5ed59379b7f7336006baa6f282292ff8a68d4890030f37e3"
+    },
+    {
+      "name": "intel-lookup-world.bin",
+      "bytes": 790144,
+      "sha256": "d8141b62b632b69411913ae2f76062ed87b1d22419668d4f97b815b0c4f6c9ce"
+    },
+    {
+      "name": "nvidia-lookup-filter.bin",
+      "bytes": 790144,
+      "sha256": "377a39c1ec50e13fa55a592ce55f7847fc6437710fa6e66f34584d181f5a738d"
+    },
+    {
+      "name": "nvidia-lookup-world.bin",
+      "bytes": 790144,
+      "sha256": "2094c9f71481f4c9af0d18aa81460a87f778a997ce2c33a573a3d9e43d7ac849"
+    }
+  ],
+  "archiveBytes": 1158559,
+  "archiveSha256": "6db25ecd0243e3413441a2741d48165b3ada875f4df8f83208b4d85f3bfa4210"
+}
