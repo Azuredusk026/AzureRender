@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "devices": [
+    {
+      "name": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "traditional": true,
+      "subpasses": true,
+      "drlr": true,
+      "queueFamily": 0,
+      "reasons": [],
+      "extent": [
+        2560,
+        1440
+      ],
+      "scope": "capability-only; execution and visual qualification pending"
+    },
+    {
+      "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "traditional": true,
+      "subpasses": true,
+      "drlr": true,
+      "queueFamily": 0,
+      "reasons": [],
+      "extent": [
+        2560,
+        1440
+      ],
+      "scope": "capability-only; execution and visual qualification pending"
+    },
+    {
+      "name": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "traditional": true,
+      "subpasses": true,
+      "drlr": true,
+      "queueFamily": 0,
+      "reasons": [],
+      "extent": [
+        2560,
+        1440
+      ],
+      "scope": "capability-only; execution and visual qualification pending"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[1/10] Generating shaders/toon.frag.spv
+[2/10] Building CXX object CMakeFiles\AzureThesisWorkloadTests.dir\tests\WorkloadTests.cpp.obj
+[3/10] Linking CXX executable AzureThesisQualification.exe
+[4/10] Linking CXX executable AzureThesisWorkloadTests.exe
+[5/10] Generating shaders/contour.frag.spv
+[6/10] Generating shaders/fullscreen.vert.spv
+[7/10] Generating shaders/geometry.frag.spv
+[8/10] Generating shaders/toon-dynamic.frag.spv
+[9/10] Generating shaders/geometry.vert.spv
+[10/10] Generating shaders/toon-local.frag.spv
