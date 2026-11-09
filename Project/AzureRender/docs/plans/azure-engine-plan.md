@@ -90,7 +90,9 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 两端 36 个探针均通过调用及撤销资格。
 [条纹实际系数](../acceptance/nr/hair-stripe-modulation.md)完成两端资格核对。
 [主光色度运算](../acceptance/nr/hair-main-chroma-operation.md)完成原生单因素归因。
-完整区域候选仍需闭合所选主灯的合成范围。
+[所选主灯组合](../acceptance/nr/hair-selected-main-composite.md)已限定主灯贡献。
+来源控制下的完整区域保留 14 处，没有新增超差。
+公共接入及剩余附件、取样差异继续验收。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
