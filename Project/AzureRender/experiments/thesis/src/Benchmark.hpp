@@ -12,6 +12,7 @@ struct Options {
     std::filesystem::path shaders, output;
     uint32_t width=1920, height=1080, frames=1000, warmup=300;
     bool validation=false;
+    std::string captureDll,capturePrefix;
 };
 struct Image { VkImage image{}; VkDeviceMemory memory{}; VkImageView view{}; VkFormat format{}; };
 struct Buffer { VkBuffer buffer{}; VkDeviceMemory memory{}; VkDeviceSize size{}; };

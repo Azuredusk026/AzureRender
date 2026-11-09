@@ -1,0 +1,41 @@
+{
+  "traditional": {
+    "vkCmdResetQueryPool": 1,
+    "vkCmdWriteTimestamp": 2,
+    "vkCmdBeginRenderPass": 3,
+    "vkCmdBindPipeline": 3,
+    "vkCmdBindVertexBuffers": 1,
+    "vkCmdPushConstants": 1,
+    "vkCmdDraw": 3,
+    "vkCmdEndRenderPass": 3,
+    "vkCmdBindDescriptorSets": 2
+  },
+  "subpasses": {
+    "vkCmdResetQueryPool": 1,
+    "vkCmdWriteTimestamp": 2,
+    "vkCmdBeginRenderPass": 2,
+    "vkCmdBindPipeline": 3,
+    "vkCmdBindVertexBuffers": 1,
+    "vkCmdPushConstants": 1,
+    "vkCmdDraw": 3,
+    "vkCmdNextSubpass": 1,
+    "vkCmdBindDescriptorSets": 2,
+    "vkCmdEndRenderPass": 2
+  },
+  "drlr": {
+    "vkCmdResetQueryPool": 1,
+    "vkCmdWriteTimestamp": 2,
+    "vkCmdPipelineBarrier": 3,
+    "vkCmdBeginRendering": 1,
+    "vkCmdSetRenderingAttachmentLocations": 1,
+    "vkCmdSetRenderingInputAttachmentIndices": 1,
+    "vkCmdBindPipeline": 3,
+    "vkCmdBindVertexBuffers": 1,
+    "vkCmdPushConstants": 1,
+    "vkCmdDraw": 3,
+    "vkCmdBindDescriptorSets": 2,
+    "vkCmdEndRendering": 1,
+    "vkCmdBeginRenderPass": 1,
+    "vkCmdEndRenderPass": 1
+  }
+}
