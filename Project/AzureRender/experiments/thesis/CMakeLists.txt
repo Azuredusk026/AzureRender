@@ -3,6 +3,28 @@ project(AzureThesis LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Vulkan REQUIRED)
+find_program(GLSLC glslc HINTS "$ENV{VULKAN_SDK}/Bin" REQUIRED)
+set(shader_outputs)
+foreach(shader geometry.vert geometry.frag fullscreen.vert toon.frag contour.frag)
+  add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/shaders/${shader}.spv"
+    COMMAND "${CMAKE_COMMAND}" -E make_directory "${CMAKE_CURRENT_BINARY_DIR}/shaders"
+    COMMAND "${GLSLC}" --target-env=vulkan1.3 "${CMAKE_CURRENT_SOURCE_DIR}/shaders/${shader}"
+      -o "${CMAKE_CURRENT_BINARY_DIR}/shaders/${shader}.spv"
+    DEPENDS "shaders/${shader}" VERBATIM)
+  list(APPEND shader_outputs "${CMAKE_CURRENT_BINARY_DIR}/shaders/${shader}.spv")
+endforeach()
+foreach(variant local dynamic)
+  set(defines -DLOCAL_READ)
+  if(variant STREQUAL "dynamic")
+    list(APPEND defines -DDYNAMIC_PATH)
+  endif()
+  add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/shaders/toon-${variant}.frag.spv"
+    COMMAND "${GLSLC}" --target-env=vulkan1.3 ${defines} "${CMAKE_CURRENT_SOURCE_DIR}/shaders/toon.frag"
+      -o "${CMAKE_CURRENT_BINARY_DIR}/shaders/toon-${variant}.frag.spv"
+    DEPENDS shaders/toon.frag "${CMAKE_CURRENT_BINARY_DIR}/shaders/toon.frag.spv" VERBATIM)
+  list(APPEND shader_outputs "${CMAKE_CURRENT_BINARY_DIR}/shaders/toon-${variant}.frag.spv")
+endforeach()
+add_custom_target(AzureThesisShaders ALL DEPENDS ${shader_outputs})
 add_executable(AzureThesisQualification src/qualification.cpp)
 target_link_libraries(AzureThesisQualification PRIVATE Vulkan::Vulkan)
 if(MSVC)
@@ -10,6 +32,9 @@ if(MSVC)
   target_link_options(AzureThesisQualification PRIVATE /INCREMENTAL:NO)
 endif()
 enable_testing()
+add_executable(AzureThesisWorkloadTests tests/WorkloadTests.cpp)
+target_include_directories(AzureThesisWorkloadTests PRIVATE src)
+add_test(NAME Thesis.Workload COMMAND AzureThesisWorkloadTests)
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
 add_test(NAME Thesis.Contracts COMMAND "${Python3_EXECUTABLE}" -B -m unittest discover
   -s "${CMAKE_CURRENT_SOURCE_DIR}/tests" -v)
