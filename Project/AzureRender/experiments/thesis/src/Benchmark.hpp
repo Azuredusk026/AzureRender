@@ -44,6 +44,10 @@ private:
     VkRenderPass geometryPass{}, toonPass{}, contourPass{};
     VkFramebuffer geometryFramebuffer{}, toonFramebuffer{}, contourFramebuffer{};
     VkPipeline geometryPipeline{}, toonPipeline{}, contourPipeline{};
+    PFN_vkCmdBeginRendering beginRendering{};
+    PFN_vkCmdEndRendering endRendering{};
+    PFN_vkCmdSetRenderingAttachmentLocationsKHR setLocations{};
+    PFN_vkCmdSetRenderingInputAttachmentIndicesKHR setInputIndices{};
     std::vector<VkShaderModule> modules;
     std::vector<double> gpuMs, cpuMs;
     std::atomic<uint32_t> errors{0}, warnings{0};
@@ -60,6 +64,8 @@ private:
     void descriptors();
     void createPaths();
     void createSubpasses();
+    void createDynamic();
+    void recordDynamic();
     void record();
     void beginPass(VkRenderPass pass, VkFramebuffer framebuffer, uint32_t colorCount, bool hasDepth);
     void geometryDraw();

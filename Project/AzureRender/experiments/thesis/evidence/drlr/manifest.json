@@ -1,0 +1,13 @@
+{
+  "base": "0fbe9fd",
+  "binarySha256": "9d0cd1d0fdd8420a34ecafe66884b00a74abb1f07e6e22ef9bbe0c742a15ba82",
+  "sources": {
+    "experiments\\thesis\\src\\benchmark.cpp": "1a8c4fc303c830ffa8c2627f6a00577cfaaa443f45fd2891ed3c4c88f15aebc4",
+    "experiments\\thesis\\src\\Benchmark.hpp": "62d79cd948a7090e0a34f4074d468b5553be8d9e1c8248cc6d9d1ada84f632b0",
+    "experiments\\thesis\\src\\Dynamic.cpp": "8afd79dcc80a580e4b266c9adeaa6114709cfb807481fed03c93535b2468d4f9",
+    "experiments\\thesis\\src\\Subpasses.cpp": "0f636b0167ac1979abd5c1910ed282c4b36dc985fa03d3e0a2ebf8126d24d43e",
+    "experiments\\thesis\\src\\Workload.hpp": "42c7a49cfd0fb08ee1bfd31736b263f9d6eed1288004f94a21746d7e53a80562"
+  },
+  "threePathRegression": true,
+  "byteEqualCount": 65536
+}
