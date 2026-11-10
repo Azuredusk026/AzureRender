@@ -1,0 +1,773 @@
+{
+  "status": "diagnostic-no-production-adoption",
+  "overall": "failed-user-review",
+  "baseCommit": "1a7da41",
+  "playerSha256": "124da059c793df4bfc18edeaef8fff653f3dc35d29c56e5560c28c6644104c77",
+  "maskPixels": 17017,
+  "allowedByteError": 1,
+  "depthCycles": [
+    {
+      "device": "nvidia",
+      "cycle": 0,
+      "failures": 0,
+      "maximumByteError": 0,
+      "changedVisibilityPixels": 0,
+      "changedDepthPixels": 0,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "visibilityExitCode": 0,
+      "validationClean": true,
+      "r32D32Exact": true
+    },
+    {
+      "device": "nvidia",
+      "cycle": 1,
+      "failures": 0,
+      "maximumByteError": 0,
+      "changedVisibilityPixels": 0,
+      "changedDepthPixels": 0,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "visibilityExitCode": 0,
+      "validationClean": true,
+      "r32D32Exact": true
+    },
+    {
+      "device": "nvidia",
+      "cycle": 2,
+      "failures": 0,
+      "maximumByteError": 0,
+      "changedVisibilityPixels": 0,
+      "changedDepthPixels": 0,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "visibilityExitCode": 0,
+      "validationClean": true,
+      "r32D32Exact": true
+    },
+    {
+      "device": "intel",
+      "cycle": 0,
+      "failures": 96,
+      "maximumByteError": 25,
+      "changedVisibilityPixels": 0,
+      "changedDepthPixels": 0,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "visibilityExitCode": 1,
+      "validationClean": true,
+      "r32D32Exact": true
+    },
+    {
+      "device": "intel",
+      "cycle": 1,
+      "failures": 96,
+      "maximumByteError": 25,
+      "changedVisibilityPixels": 0,
+      "changedDepthPixels": 0,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "visibilityExitCode": 1,
+      "validationClean": true,
+      "r32D32Exact": true
+    },
+    {
+      "device": "intel",
+      "cycle": 2,
+      "failures": 96,
+      "maximumByteError": 25,
+      "changedVisibilityPixels": 0,
+      "changedDepthPixels": 0,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "visibilityExitCode": 1,
+      "validationClean": true,
+      "r32D32Exact": true
+    }
+  ],
+  "depthComparedPixels": 22118400,
+  "color": [
+    {
+      "device": "nvidia",
+      "variant": "hair-receiver",
+      "failures": 73,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.2899453487688782,
+      "closedFromPrevious": 0,
+      "newFromPrevious": 0,
+      "closedOriginal": 0,
+      "newOriginal": 0,
+      "fourFrameSource": {
+        "device": "nvidia",
+        "variant": "hair-receiver",
+        "referenceEnabled": false,
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 73,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.2899453487688782,
+            "vsFrozenDifferentPixels": 0,
+            "vsFrozenMaxByteError": 0,
+            "sha256": "c0873ed464ffe19f8d4e70126b7a094c18c4b1471148f884d5f1ebb7fac3940c"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 73,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.2899453487688782,
+            "vsFrozenDifferentPixels": 0,
+            "vsFrozenMaxByteError": 0,
+            "sha256": "c0873ed464ffe19f8d4e70126b7a094c18c4b1471148f884d5f1ebb7fac3940c"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 73,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.2899453487688782,
+            "vsFrozenDifferentPixels": 0,
+            "vsFrozenMaxByteError": 0,
+            "sha256": "c0873ed464ffe19f8d4e70126b7a094c18c4b1471148f884d5f1ebb7fac3940c"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 73,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.2899453487688782,
+            "vsFrozenDifferentPixels": 0,
+            "vsFrozenMaxByteError": 0,
+            "sha256": "c0873ed464ffe19f8d4e70126b7a094c18c4b1471148f884d5f1ebb7fac3940c"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      }
+    },
+    {
+      "device": "nvidia",
+      "variant": "hair-reference",
+      "failures": 71,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.2899257605139958,
+      "closedFromPrevious": 4,
+      "newFromPrevious": 2,
+      "closedOriginal": 4,
+      "newOriginal": 2,
+      "fourFrameSource": {
+        "device": "nvidia",
+        "variant": "hair-reference",
+        "referenceEnabled": true,
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 71,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.2899257605139958,
+            "vsFrozenDifferentPixels": 92,
+            "vsFrozenMaxByteError": 2,
+            "sha256": "3f6a7d6c1b6cfe99d98217ddafd3608daf1a50af128cdc439620539b1db3350e"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 71,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.2899257605139958,
+            "vsFrozenDifferentPixels": 92,
+            "vsFrozenMaxByteError": 2,
+            "sha256": "3f6a7d6c1b6cfe99d98217ddafd3608daf1a50af128cdc439620539b1db3350e"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 71,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.2899257605139958,
+            "vsFrozenDifferentPixels": 92,
+            "vsFrozenMaxByteError": 2,
+            "sha256": "3f6a7d6c1b6cfe99d98217ddafd3608daf1a50af128cdc439620539b1db3350e"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 71,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.2899257605139958,
+            "vsFrozenDifferentPixels": 92,
+            "vsFrozenMaxByteError": 2,
+            "sha256": "3f6a7d6c1b6cfe99d98217ddafd3608daf1a50af128cdc439620539b1db3350e"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      }
+    },
+    {
+      "device": "nvidia",
+      "variant": "hair-chroma",
+      "failures": 54,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.28782981724158196,
+      "closedFromPrevious": 17,
+      "newFromPrevious": 0,
+      "closedOriginal": 21,
+      "newOriginal": 2,
+      "fourFrameSource": {
+        "device": "nvidia",
+        "variant": "hair-chroma",
+        "referenceEnabled": true,
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 54,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.28782981724158196,
+            "vsFrozenDifferentPixels": 163,
+            "vsFrozenMaxByteError": 3,
+            "sha256": "f45421808fd2a188339217eacc66110fa1015a0fd33d95fc48ecd4062ddcacb9"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 54,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.28782981724158196,
+            "vsFrozenDifferentPixels": 163,
+            "vsFrozenMaxByteError": 3,
+            "sha256": "f45421808fd2a188339217eacc66110fa1015a0fd33d95fc48ecd4062ddcacb9"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 54,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.28782981724158196,
+            "vsFrozenDifferentPixels": 163,
+            "vsFrozenMaxByteError": 3,
+            "sha256": "f45421808fd2a188339217eacc66110fa1015a0fd33d95fc48ecd4062ddcacb9"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 54,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.28782981724158196,
+            "vsFrozenDifferentPixels": 163,
+            "vsFrozenMaxByteError": 3,
+            "sha256": "f45421808fd2a188339217eacc66110fa1015a0fd33d95fc48ecd4062ddcacb9"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      }
+    },
+    {
+      "device": "nvidia",
+      "variant": "hair-r11",
+      "failures": 45,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.1426808485632015,
+      "closedFromPrevious": 11,
+      "newFromPrevious": 2,
+      "closedOriginal": 32,
+      "newOriginal": 4,
+      "fourFrameSource": {
+        "device": "nvidia",
+        "variant": "hair-r11",
+        "referenceEnabled": true,
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 45,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.1426808485632015,
+            "vsFrozenDifferentPixels": 6469,
+            "vsFrozenMaxByteError": 3,
+            "sha256": "b7c57bca048d3a816e54c43d99a940fc02bfc2f15d6d970454a3e6d047e210aa"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 45,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.1426808485632015,
+            "vsFrozenDifferentPixels": 6469,
+            "vsFrozenMaxByteError": 3,
+            "sha256": "b7c57bca048d3a816e54c43d99a940fc02bfc2f15d6d970454a3e6d047e210aa"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 45,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.1426808485632015,
+            "vsFrozenDifferentPixels": 6469,
+            "vsFrozenMaxByteError": 3,
+            "sha256": "b7c57bca048d3a816e54c43d99a940fc02bfc2f15d6d970454a3e6d047e210aa"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 45,
+            "maxByteError": 6,
+            "meanAbsoluteByteError": 0.1426808485632015,
+            "vsFrozenDifferentPixels": 6469,
+            "vsFrozenMaxByteError": 3,
+            "sha256": "b7c57bca048d3a816e54c43d99a940fc02bfc2f15d6d970454a3e6d047e210aa"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      }
+    },
+    {
+      "device": "nvidia",
+      "variant": "hair-uv",
+      "failures": 43,
+      "maximumByteError": 5,
+      "meanAbsoluteByteError": 0.14234784823020116,
+      "closedFromPrevious": 2,
+      "newFromPrevious": 0,
+      "closedOriginal": 33,
+      "newOriginal": 3,
+      "fourFrameSource": {
+        "device": "nvidia",
+        "variant": "hair-uv",
+        "referenceEnabled": true,
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      }
+    },
+    {
+      "device": "intel",
+      "variant": "hair-receiver",
+      "failures": 621,
+      "maximumByteError": 166,
+      "meanAbsoluteByteError": 0.37098195921725335,
+      "closedFromPrevious": 10,
+      "newFromPrevious": 558,
+      "closedOriginal": 10,
+      "newOriginal": 558,
+      "fourFrameSource": {
+        "device": "intel",
+        "variant": "hair-receiver",
+        "referenceEnabled": false,
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 621,
+            "maxByteError": 166,
+            "meanAbsoluteByteError": 0.37098195921725335,
+            "vsFrozenDifferentPixels": 5223,
+            "vsFrozenMaxByteError": 166,
+            "sha256": "3fcc7f9f7010732b78409d0b65d783a9e3c43d27a0c9247ccec92b60921aaa6a"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 621,
+            "maxByteError": 166,
+            "meanAbsoluteByteError": 0.37098195921725335,
+            "vsFrozenDifferentPixels": 5223,
+            "vsFrozenMaxByteError": 166,
+            "sha256": "3fcc7f9f7010732b78409d0b65d783a9e3c43d27a0c9247ccec92b60921aaa6a"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 621,
+            "maxByteError": 166,
+            "meanAbsoluteByteError": 0.37098195921725335,
+            "vsFrozenDifferentPixels": 5223,
+            "vsFrozenMaxByteError": 166,
+            "sha256": "3fcc7f9f7010732b78409d0b65d783a9e3c43d27a0c9247ccec92b60921aaa6a"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 621,
+            "maxByteError": 166,
+            "meanAbsoluteByteError": 0.37098195921725335,
+            "vsFrozenDifferentPixels": 5223,
+            "vsFrozenMaxByteError": 166,
+            "sha256": "3fcc7f9f7010732b78409d0b65d783a9e3c43d27a0c9247ccec92b60921aaa6a"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      }
+    },
+    {
+      "device": "intel",
+      "variant": "hair-uv",
+      "failures": 597,
+      "maximumByteError": 166,
+      "meanAbsoluteByteError": 0.21987816105463165,
+      "closedFromPrevious": 61,
+      "newFromPrevious": 37,
+      "closedOriginal": 32,
+      "newOriginal": 556,
+      "fourFrameSource": {
+        "device": "intel",
+        "variant": "hair-uv",
+        "referenceEnabled": true,
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 166,
+            "meanAbsoluteByteError": 0.21987816105463165,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 166,
+            "sha256": "b54a7ddcf0dd3f18268298f1a7a536f3e1b37038396a06bf5564c3fdf5cce4fb"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 166,
+            "meanAbsoluteByteError": 0.21987816105463165,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 166,
+            "sha256": "b54a7ddcf0dd3f18268298f1a7a536f3e1b37038396a06bf5564c3fdf5cce4fb"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 166,
+            "meanAbsoluteByteError": 0.21987816105463165,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 166,
+            "sha256": "b54a7ddcf0dd3f18268298f1a7a536f3e1b37038396a06bf5564c3fdf5cce4fb"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 166,
+            "meanAbsoluteByteError": 0.21987816105463165,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 166,
+            "sha256": "b54a7ddcf0dd3f18268298f1a7a536f3e1b37038396a06bf5564c3fdf5cce4fb"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      }
+    }
+  ],
+  "assetClosure": [
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\hair-receiver.glb",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\hair-receiver.glb",
+      "bytes": 118802636,
+      "sha256": "7ecbecc4cec04e0792cc0dbc5ec732cbbcd6d09082a69ff2f918a0c657ef2008"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\hair-receiver.azureproject",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\hair-receiver.azureproject",
+      "bytes": 235,
+      "sha256": "ac5b3b8b5d393d36a020b552c9ecb43873d787fa4319fa6ff8e2112f04f8578d"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\assets\\hair-receiver.azurelevel",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\assets\\hair-receiver.azurelevel",
+      "bytes": 9141,
+      "sha256": "8ebec2b26b79b988d29a1c3442d7f04e94b697d3c9b05a895a2dd2ac0fce4f2f"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\assets\\captured-rim-policy.azurematerial",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\assets\\captured-rim-policy.azurematerial",
+      "bytes": 146,
+      "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\assets\\captured-rim-policy.azurematerial.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\assets\\captured-rim-policy.azurematerial.azmeta",
+      "bytes": 102,
+      "sha256": "9713de607cbd28be933ca04d4538b4482da8aa060b27e728748008134fba4963"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t16.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t16.dds",
+      "bytes": 5592580,
+      "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t18.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t18.dds",
+      "bytes": 5592580,
+      "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t17.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t17.dds",
+      "bytes": 5592580,
+      "sha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t14.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t14.dds",
+      "bytes": 262272,
+      "sha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t12.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t12.dds",
+      "bytes": 349700,
+      "sha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t13.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t13.dds",
+      "bytes": 1152,
+      "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-captured-body\\t14.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-captured-body\\t14.dds",
+      "bytes": 1398276,
+      "sha256": "2ac9344b3693fefd3b74ecfc2b4f6212920b1754173b8212a8f35fcea634a068"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-captured-body\\t15.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-captured-body\\t15.dds",
+      "bytes": 1398256,
+      "sha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-captured-body\\t12.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-captured-body\\t12.dds",
+      "bytes": 32916,
+      "sha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t11.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t11.dds",
+      "bytes": 1152,
+      "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t12.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t12.dds",
+      "bytes": 262272,
+      "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t16.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t16.dds",
+      "bytes": 5592580,
+      "sha256": "c7ea4150acd1461cfe37bf7bfacdb197dd05ab7193e1ca245ab445c4e2fb2324"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t17.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t17.dds",
+      "bytes": 22369748,
+      "sha256": "38a520d6eca0f00bb8cb852679ddcd2fe1bf9c6cac7fa725c5918a5d8139dedd"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t18.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t18.dds",
+      "bytes": 5592560,
+      "sha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\hair-native-mask.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\hair-native-mask.dds",
+      "bytes": 349700,
+      "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\hair-base-coverage.dds",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\hair-base-coverage.dds",
+      "bytes": 22369768,
+      "sha256": "0bf35700e233f4b70351b604ac5e2a187fc5bddcc3a4805e68d105178d387cdf"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\hair-receiver.glb.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\hair-receiver.glb.azmeta",
+      "bytes": 102,
+      "sha256": "1bdb9218edb6bb7975fa1e1411739c01ab9c8f370ef3e42503bd135fdcdce30d"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\assets\\hair-receiver.azurelevel.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\assets\\hair-receiver.azurelevel.azmeta",
+      "bytes": 112,
+      "sha256": "3cc789ab40917563807c96653fad0e740e3a97079e9bd9a672cb04c8c0ccc8a9"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t16.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t16.dds.azmeta",
+      "bytes": 276,
+      "sha256": "dacb8a62aa4be5365c908e59ad3b2c1986bb989f47a77cbd96334aca8cb5c85a"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t18.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t18.dds.azmeta",
+      "bytes": 276,
+      "sha256": "424080184b3c22c286c90596bc4e843a0beedb5d5801be069539208b84a6a33d"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t17.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t17.dds.azmeta",
+      "bytes": 276,
+      "sha256": "bac274600e7eb80e83ec42184de60626ca36ed5d8aa2e27d7ca16c14952f55fd"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t14.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t14.dds.azmeta",
+      "bytes": 275,
+      "sha256": "199e566d2b499f5f0e6e14d62d4bfbde1c0eb38ab117d0ec2bc07d475984bad5"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t12.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t12.dds.azmeta",
+      "bytes": 275,
+      "sha256": "26b33755b6147c0ccd111c34135d2e672f8bcc382a4543b0c7ad7d306aab0feb"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-textures\\t13.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-textures\\t13.dds.azmeta",
+      "bytes": 275,
+      "sha256": "6685acf498b42fac7a5c835a7d05d825357dae277f9208703f6dd81cc0595878"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-captured-body\\t14.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-captured-body\\t14.dds.azmeta",
+      "bytes": 313,
+      "sha256": "40e77548c2e30bf462b0c73b7682fcdbb809cc36a5a1ccf44ab9b982d9e354af"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-captured-body\\t15.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-captured-body\\t15.dds.azmeta",
+      "bytes": 315,
+      "sha256": "34d6e6c85fb219367669af101852aa97e69b50aa6f86259c78647fe9fd38667b"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-captured-body\\t12.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-captured-body\\t12.dds.azmeta",
+      "bytes": 248,
+      "sha256": "c9d6333d1c222df672cc44a3bd2a04f4c3b38a69ea52776e7acc61da82988efc"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t11.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t11.dds.azmeta",
+      "bytes": 308,
+      "sha256": "5e236bb42f260f9d93ebfb96ad00cde286b8c7696a9db54b566d226efccdcf62"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t12.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t12.dds.azmeta",
+      "bytes": 308,
+      "sha256": "5721acbb474adc88f7aced20f4469abe0afdf8a733e44936c063c9fcf780fbea"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t16.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t16.dds.azmeta",
+      "bytes": 313,
+      "sha256": "da711fd4600449805a0ecd012d47fb995744e9ce5d83c5d53775a3d24626b17e"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t17.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t17.dds.azmeta",
+      "bytes": 315,
+      "sha256": "3219753dc58632e55ffb6382a03ae121b8f975fee7605179d076c93a953979fd"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\native-cloth-04\\t18.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\native-cloth-04\\t18.dds.azmeta",
+      "bytes": 315,
+      "sha256": "cd2b4563b895a54aa2fd7d66b1845f6034ae7c39e2cfb76eb731461af8357da5"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\hair-native-mask.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\hair-native-mask.dds.azmeta",
+      "bytes": 284,
+      "sha256": "fda0cd1353d35fc30499bababe7108dc7b55f1953a7d888327cb13e08715dc38"
+    },
+    {
+      "source": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261027-002548-native-hair-layer-region-closure-61c105\\captured\\character\\hair-base-coverage.dds.azmeta",
+      "destination": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-061836-native-hair-reference-raster-d5ebb7\\hair-project\\character\\hair-base-coverage.dds.azmeta",
+      "bytes": 276,
+      "sha256": "89f3a09368493d4152d2cc2e9eb1358bd7aa57c0e47bd178d818c3b02370606a"
+    }
+  ],
+  "nativeColorUnqualified": true,
+  "remaining": [
+    "Actual dynamic reference visibility producer",
+    "Intel 96 reference depth visibility failures",
+    "Skin, eye, GI, reflection and dynamic appearance gates"
+  ],
+  "archive": {
+    "bytes": 1737922,
+    "sha256": "c5cbc70685e723f76bce0e25ef13724a71fd9754314724b13cb710291f081139",
+    "members": 181
+  },
+  "failureRowsArchiveMember": "run/results.json"
+}

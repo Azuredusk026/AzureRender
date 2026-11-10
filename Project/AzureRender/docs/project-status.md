@@ -276,3 +276,6 @@ RHI 的附件样本数、管线比例及能力查询通过双配置检查。
 
 [参考相机生产接入](acceptance/nr/reference-camera-render-binding.md)完成共享标定、光栅、拾取及编辑入口检查。
 两配置、两设备的实际几何掩码和原四帧通过，完整外观按所属门槛继续验收。
+
+[原生头发参考光栅](acceptance/nr/native-hair-reference-raster.md)保留两设备的实际区域证据。
+生产覆盖的透明边界及参考可见量消费仍待验收。
