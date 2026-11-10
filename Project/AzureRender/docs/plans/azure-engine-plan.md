@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[驻留色彩图像通道范围](../acceptance/nr/resident-srgb-channel-scope.md)完成 180 份实际图像核对。
+单通道关系的乐观差额约为 113.70 MB，正式容量继续验收。
+
 [材质一致索引局部效率](../acceptance/nr/uniform-material-descriptor.md)完成完整捕获核验。
 六附件逐字节一致，成本增加约 0.48%，效率未准入。
 

@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[驻留色彩图像通道范围](docs/acceptance/nr/resident-srgb-channel-scope.md)核对 180 份实际图像的全部多级内容。
+四十份满足单通道像素关系，设备与正式内存按所属门禁继续验收。
+
 [材质一致索引局部效率](docs/acceptance/nr/uniform-material-descriptor.md)通过十份程序及六附件核对。
 测得材质成本增加约 0.48%，候选保持隔离。
 
