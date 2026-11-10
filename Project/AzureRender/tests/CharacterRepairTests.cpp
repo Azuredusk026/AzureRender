@@ -462,6 +462,55 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
         &&litPacked.rows[10]==std::array<float,4>{.8F,.9F,1.1F,.55F}
         &&litPacked.rows[11]==std::array<float,4>{1,.9F,.7F,1.1F},
         "Projected hair lighting must preserve typed colors and independent shadow controls");
+    require(!litAsset.materials[0].projectedHairRamp.lighting.mainBrightnessSaturation,
+        "Main brightness saturation must be opt-in");
+    auto saturatedStrand=litStrand;
+    auto& saturatedLighting=saturatedStrand["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["lighting"];
+    saturatedLighting["mainBrightnessSaturation"]=true;
+    const auto saturatedAsset=load(saturatedStrand);
+    require(saturatedAsset.materials[0].projectedHairRamp.lighting.mainBrightnessSaturation
+        &&packMaterialSurfaceProfile(saturatedAsset.materials[0]).rows[6][3]==9.F,
+        "Main brightness saturation must retain its independent GPU flag");
+    auto saturatedDocument=complete;
+    saturatedDocument["surface"]["materials"][0]=saturatedStrand["materials"][0];
+    saturatedDocument["surface"]["textures"]=saturatedStrand["textures"];
+    saturatedDocument["textures"]=Json::object();
+    std::map<std::string,std::filesystem::path> saturatedImages;
+    for(std::size_t index=0;index<saturatedStrand["images"].size();++index) {
+        auto uuid=std::string("00000000-0000-4000-8001-")+std::string(12-std::to_string(index).size(),'0')+std::to_string(index);
+        saturatedDocument["textures"][std::to_string(index)]={{"asset",uuid},{"usage","linear"}};
+        saturatedImages[uuid]=directory/std::filesystem::u8path(saturatedStrand["images"][index]["uri"].get<std::string>());
+    }
+    const auto saturationPath=directory/"main-chroma.azurematerial";
+    std::ofstream(saturationPath)<<MaterialData::parse(saturatedDocument).encode().dump();
+    const auto reopenedSaturation=MaterialData::load(saturationPath).interpret([&](const auto& uuid){return saturatedImages.at(uuid);});
+    require(reopenedSaturation.projectedHairRamp.lighting.mainBrightnessSaturation
+        &&packMaterialSurfaceProfile(reopenedSaturation).rows[6][3]==9.F,
+        "Complete material save and reopen must preserve main brightness saturation");
+    auto combinedSaturation=translucentStrand;
+    auto& combinedRamp=combinedSaturation["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"];
+    combinedRamp["snapshotNormal"]="material-normal-rg";
+    combinedRamp["lighting"]["mainBrightnessSaturation"]=true;
+    require(packMaterialSurfaceProfile(load(combinedSaturation).materials[0]).rows[6][3]==14.F,
+        "Main saturation must compose with transparent highlights and snapshot normals");
+    saturatedLighting["mainBrightnessSaturation"]=false;
+    require(packMaterialSurfaceProfile(load(saturatedStrand).materials[0]).rows==litPacked.rows,
+        "Explicitly disabled main saturation must preserve the complete profile");
+    for(const auto& value:Json::array({nullptr,0,1,"true",Json::array()})) {
+        saturatedLighting["mainBrightnessSaturation"]=value;
+        reject(saturatedStrand,"mainBrightnessSaturation");
+    }
+    for(unsigned invalid=0;invalid<4;++invalid) {
+        auto orphan=saturatedAsset.materials[0];
+        if(invalid==0)orphan.projectedHairRamp.present=false;
+        if(invalid==1)orphan.projectedHairRamp.lighting.present=false;
+        if(invalid==2)orphan.projectedHairRamp.surfaceResponse=AssetMaterial::ProjectedHairRamp::SurfaceResponse::Layered;
+        if(invalid==3)orphan.materialProfileVersion=1;
+        bool refused=false;
+        try { (void)packMaterialSurfaceProfile(orphan); }
+        catch(const std::invalid_argument&) { refused=true; }
+        require(refused,"Orphan main brightness saturation must fail before packing");
+    }
     for(const auto& entry:std::array<std::pair<const char*,float>,4>{{
             {"one",0.F},{"scene-visibility",2.F},{"main-light-shadow",4.F},{"object-shadow",6.F}}}) {
         auto withVisibility=litStrand;

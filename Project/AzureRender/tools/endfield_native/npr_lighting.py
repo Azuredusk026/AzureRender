@@ -98,4 +98,4 @@ def decode_projected_hair_lighting(global_rows,object_rows,material_rows,*,ambie
     if any(not 0<=v<=16 for v in (brightness,saturation,scale)):
         raise ValueError('Projected hair shadow parameters outside supported domain')
     return dict(schemaVersion=1,shadowBrightness=brightness,shadowSaturation=saturation,shadowScale=scale,
-        ambientColor=decoded['settings']['ambientColor'],mainColor=decoded['mainLight']['color'])
+        ambientColor=decoded['settings']['ambientColor'],mainColor=decoded['mainLight']['color'],mainBrightnessSaturation=True)

@@ -35,11 +35,13 @@ def color_response(base,ramp,visibility,view_alpha,scale,brightness,sat):
     return tinted*np.clip(np.dot(untinted,LUMA)/max(np.dot(tinted,LUMA),.001),0,1.5),lit_mask
 
 
-def run(player,output,selected=None,expected_validation=None,group=None):
+def run(player,output,selected=None,expected_validation=None,group=None,main_brightness_saturation=False):
     output.mkdir(parents=True,exist_ok=False)
     names=('direct','ambient','dim-visibility','diffuse-scale','kk','kk-fixed','kk-zero-ambient','kk-disabled','local-kk','extra-kk','no-main','direct-fixed','disabled-lighting','absent-input','local-response-kk','local-response-zero-kk','local-line-kk','local-line-kk-fixed',
         'local-specular-kk','local-specular-zero-kk','local-specular-kk-fixed','local-specular-diffuse','local-specular-blend-kk','local-specular-blend-kk-fixed','local-specular-blend-zero-kk',
         'local-facing-blend-rim','local-facing-blend-rim-fixed','local-facing-blend-zero-rim')
+    if main_brightness_saturation:
+        names=tuple(n for n in names if n in ('direct','ambient','kk','kk-fixed','local-kk','no-main'))+('local-kk-control',)
     if group:
         def category(name):
             if name.startswith('local-specular-'):
@@ -49,7 +51,11 @@ def run(player,output,selected=None,expected_validation=None,group=None):
     if selected:
         assert set(selected)<=set(names);names=tuple(n for n in names if n in selected)
     report={'schemaVersion':1,'status':'running','playerSha256':hashlib.sha256(player.read_bytes()).hexdigest(),'captures':[]}
+    report['mainBrightnessSaturation']=main_brightness_saturation
     frames={}
+    lighting=copy.deepcopy(LIGHTING)
+    if main_brightness_saturation:
+        lighting.update(mainBrightnessSaturation=True,ambientColor=[8,7.8,7.6],mainColor=[1,.9,.8])
     try:
         for name in names:
             print(name,flush=True);folder=output/name;case=copy.deepcopy(hair.cases()[0]);case['name']=name
@@ -66,7 +72,8 @@ def run(player,output,selected=None,expected_validation=None,group=None):
             for material in model['materials']:
                 p=material['extras']['azureRenderMaterial'];p['features'].append('diffuse-ramp')
                 p['diffuseRamp']={'schemaVersion':1,'texture':ramp_index};p['styleParameters']=[1,1,0,0]
-                h=p['hair']['projectedRamp'];h.update(surfaceResponse='strand-diffuse',diffuseScale=.48 if name=='diffuse-scale' else .96,lighting=LIGHTING)
+                h=p['hair']['projectedRamp'];h.update(surfaceResponse='strand-diffuse',diffuseScale=.48 if name=='diffuse-scale' else .96,lighting=lighting)
+                if main_brightness_saturation and name=='local-kk-control':h['lighting']=dict(lighting,mainBrightnessSaturation=False)
                 if name.startswith('local-specular-blend') or facing_blend:
                     material['alphaMode']='BLEND'
                     if 'zero' not in name:h['lighting']=dict(LIGHTING,transparentHighlights=True)
@@ -75,6 +82,8 @@ def run(player,output,selected=None,expected_validation=None,group=None):
                 model['images'][image]['uri']=hair.image_uri(Image.new('RGBA',(2,2),(side['r'],side['g'],vis,side['a'])))
             model_path.write_text(json.dumps(model),encoding='utf-8')
             level_path=folder/'assets/scene.azurelevel';level=json.loads(level_path.read_text());settings=copy.deepcopy(SETTINGS)
+            if main_brightness_saturation:
+                settings.update(ambientWeight=.8,shadowOverride=1)
             if name=='kk-zero-ambient':settings['ambientWeight']=0
             level['renderSettings']['nprLighting']=settings;level['lights'][0]['color']=[.2,.4,.6]
             if name=='disabled-lighting':settings['enabled']=False
@@ -113,15 +122,15 @@ def run(player,output,selected=None,expected_validation=None,group=None):
             validation='Validation layer: enabled' in log
             if expected_validation:assert validation==(expected_validation=='enabled')
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
-            measured=[];wanted=[]
+            measured=[];wanted=[];saturation_gains=[]
             energy_case=copy.deepcopy(case)
             if name.startswith('local-'):energy_case['local']=True
             energy_samples=hair.expectation(energy_case)
             for sample in energy_samples:
                 x,y=sample['pixel'];measured.append(hair.linear(pixels[y,x]))
                 response,lit=color_response(hair.linear(hair.CONTROL[:3]),ramp,vis/255,ramp[3],.55,.55,1.1)
-                main=LIGHTING['mainColor'];intensity=0 if name=='no-main' or name.startswith('local-') else .5
-                ambient,direct=illumination(settings,[0,0,1],LIGHTING['ambientColor'],main,intensity,1,lit,1)
+                main=lighting['mainColor'];intensity=0 if name=='no-main' or name.startswith('local-') else .5
+                ambient,direct=illumination(settings,[0,0,1],lighting['ambientColor'],main,intensity,1,lit,1)
                 if isolation=='hair-kk':
                     weight=lit;spec_scale=(.55+(1-.55)*weight)*(.5+.5*weight)
                     raw=np.asarray(sample['linearRgb'])/(.5*3)
@@ -151,6 +160,16 @@ def run(player,output,selected=None,expected_validation=None,group=None):
                     if name=='extra-kk':expected+=raw*np.array([.1,.2,.3])*.2*3
                 else:expected=response*(ambient if isolation=='ambient' else direct)*(.5 if name=='diffuse-scale' else 1)
                 if name in ('disabled-lighting','absent-input'):expected=hair.linear(hair.CONTROL[:3])*.96*np.array([.2,.4,.6])*.5*ramp[:3]
+                if main_brightness_saturation:
+                    raw=np.asarray(sample['linearRgb'])/(.5*3)
+                    spec_scale=(.55+(1-.55)*lit)*(.5+.5*lit)
+                    main_hair=np.zeros(3) if name=='no-main' or name.startswith('local-') else raw*(ambient+direct)*spec_scale
+                    main_color=response*(ambient+direct)+main_hair
+                    amount=1+np.clip(np.dot(main_color,LUMA)-.5,0,.5)**2
+                    saturation_gains.append(float(amount))
+                    if not name.startswith('local-'):expected=saturation(expected,amount)
+                    expected=np.clip(expected,0,1)
+                    assert amount>1.005,'Main saturation positive control must activate'
                 if facing_blend:
                     point=np.asarray(sample['worldPoint'])
                     incoming=np.array([3,0,1])-point
@@ -170,11 +189,13 @@ def run(player,output,selected=None,expected_validation=None,group=None):
             if facing_blend and 'zero' not in name:assert np.max(wanted)>.03
             if name=='local-response-kk' or name.startswith('local-line-') or name in ('local-specular-kk','local-specular-kk-fixed','local-specular-blend-kk','local-specular-blend-kk-fixed'):assert np.max(wanted)>.015,'KK positive control must exceed quantization and comparison budget'
             report['captures'].append({'name':name,'maximumLinearError':maximum,'imageSha256':hashlib.sha256(frame.read_bytes()).hexdigest(),
-                'validationEnabled':validation,'measured':measured[0].tolist(),'expected':np.asarray(wanted[0]).tolist()})
+                'validationEnabled':validation,'measured':measured[0].tolist(),'expected':np.asarray(wanted[0]).tolist(),
+                'mainSaturationGainRange':[min(saturation_gains),max(saturation_gains)] if saturation_gains else [1,1]})
             assert maximum<=.008,(name,maximum,measured[0],wanted[0])
         for a,b in (('direct','direct-fixed'),('kk','kk-fixed'),('local-line-kk','local-line-kk-fixed'),('local-specular-kk','local-specular-kk-fixed'),('local-specular-blend-kk','local-specular-blend-kk-fixed'),('local-facing-blend-rim','local-facing-blend-rim-fixed')):
             if a in frames and b in frames:assert np.array_equal(frames[a],frames[b])
         if 'disabled-lighting' in frames and 'absent-input' in frames:assert np.array_equal(frames['disabled-lighting'],frames['absent-input'])
+        if 'local-kk' in frames and 'local-kk-control' in frames:assert np.array_equal(frames['local-kk'],frames['local-kk-control'])
         report['status']='passed'
     except Exception as error:report.update(status='failed',error=str(error));raise
     finally:(output/'summary.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
@@ -183,8 +204,9 @@ def run(player,output,selected=None,expected_validation=None,group=None):
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__);p.add_argument('--executable',type=Path,required=True);p.add_argument('--output',type=Path)
     p.add_argument('--group',choices=('surface','local','specular'))
+    p.add_argument('--main-brightness-saturation',action='store_true')
     p.add_argument('--case',action='append');p.add_argument('--expected-validation',choices=('enabled','disabled'));args=p.parse_args()
-    if args.output:run(args.executable,args.output.resolve(),args.case,args.expected_validation,args.group)
+    if args.output:run(args.executable,args.output.resolve(),args.case,args.expected_validation,args.group,args.main_brightness_saturation)
     else:
         with tempfile.TemporaryDirectory(prefix='projected-lighting-',dir=Path(__file__).resolve().parents[1]/'build/runs') as temporary:
-            run(args.executable,Path(temporary)/'capture',args.case,args.expected_validation,args.group)
+            run(args.executable,Path(temporary)/'capture',args.case,args.expected_validation,args.group,args.main_brightness_saturation)

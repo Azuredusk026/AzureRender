@@ -99,7 +99,7 @@ class NprLightingTests(unittest.TestCase):
         result=subject.decode_projected_hair_lighting(*self.fixture(),{4:[0,0,.55,1.1]},
             ambient_row=112,main_color_row=115,shadow_color_row=4)
         self.assertEqual(result,dict(schemaVersion=1,shadowBrightness=.55,shadowSaturation=1.1,
-            shadowScale=.55,ambientColor=[.8,.9,1.1],mainColor=[1,1,1]))
+            shadowScale=.55,ambientColor=[.8,.9,1.1],mainColor=[1,1,1],mainBrightnessSaturation=True))
 
     def test_projected_hair_rejects_missing_or_invalid_shadow_inputs(self):
         for material in ({},{4:[0,0,True,1.1]},{4:[0,0,.55,float('nan')]},{4:[0,0,-1,1.1]},{4:[0,0,.55,17]}):

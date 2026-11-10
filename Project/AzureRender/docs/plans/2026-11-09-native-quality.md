@@ -39,7 +39,7 @@ GPU 运行须持有统一队列独占权。
 - [x] 记录齐次坐标差异与可见量差异。
 - [x] 根据实际误差形成单因素候选。
 - [x] 验证主配置所属回归并封存公共通道证据。
-- [ ] 集成公共通道，完成双配置与原四帧回归。
+- [x] 集成公共通道，完成双配置与原四帧回归。
 
 候选引用 `native-producer-gpu-intermediates.md`。
 过滤契约引用 `shadow-gather-footprint.md`。
@@ -87,7 +87,9 @@ Intel 保留 120 处超差，最大为 33 字节。
 实现与最终核对见[参考算术专项](../acceptance/nr/visibility-reference-arithmetic.md)。
 主配置的十四项双设备 GPU 检查全部通过。
 两份原生区域均满足一字节门槛。
-当前场景深度、完整颜色及集成回归继续验收。
+[主线集成](../acceptance/nr/visibility-reference-integration.md)通过两配置共 32 项有效检查。
+原始四帧的 RGB 与 PNG 摘要均保持零差。
+当前场景深度和完整颜色继续分别验收。
 
 ## 完整头发颜色
 
@@ -133,7 +135,9 @@ Intel 保留 120 处超差，最大为 33 字节。
 首个 Vulkan 合成范围候选未通过完整区域门禁。
 [所选主灯组合](../acceptance/nr/hair-selected-main-composite.md)完成实际输入及完整区域核对。
 候选闭合 17 处超差，保留 14 处且没有新增超差。
-后续接入公共材质契约，并核对附件格式与取样边界。
+[公共主光色度](../acceptance/nr/hair-main-brightness-saturation.md)完成两配置、双设备接入核对。
+每组 317 项数值、共 28 个图像及默认原四帧通过。
+后续继续核对附件格式与材质取样边界。
 
 ## 后续外观
 

@@ -1874,6 +1874,10 @@ void main()
             }
             vec3 primary=min(sceneHairPrimary+primaryMain,vec3(material.matcapColor.w));
             vec3 secondary=sceneHairSecondary+secondaryMain;
+            if((projectedHairFlags&8U)!=0U) {
+                mainHairPrimary=min(primaryMain,vec3(material.matcapColor.w));
+                mainHairSecondary=secondaryMain;
+            }
             beautyColor+=primary+secondary-kkSpecular-secondaryKkSpecular;
             kkSpecular=primary;secondaryKkSpecular=secondary;
         }
@@ -1887,9 +1891,22 @@ void main()
         if(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[8].w>.5) {
             vec3 mainDiffuse=camera.clusterLighting.x>.5?sceneMainDiffuse:directDiffuse;
             vec3 adjustedMain=characterDiffuseSaturation(mainDiffuse*line.x,line.y);
+            sceneMainDiffuse=adjustedMain;
             vec3 difference=adjustedMain-mainDiffuse;
             directDiffuse+=difference;beautyColor+=difference;
         }
+    }
+    if(projectedLighting&&(projectedHairFlags&8U)!=0U&&camera.nprLightingParameters.x>.5) {
+        vec3 mainColor=ambientDiffuse+sceneMainDiffuse+mainHairPrimary+mainHairSecondary;
+        float saturation=characterMainBrightnessSaturation(mainColor);
+        beautyColor+=characterDiffuseSaturation(mainColor,saturation)-mainColor;
+        vec3 adjustedMain=characterDiffuseSaturation(sceneMainDiffuse,saturation);
+        vec3 adjustedPrimary=characterDiffuseSaturation(mainHairPrimary,saturation);
+        vec3 adjustedSecondary=characterDiffuseSaturation(mainHairSecondary,saturation);
+        ambientDiffuse=characterDiffuseSaturation(ambientDiffuse,saturation);
+        directDiffuse+=adjustedMain-sceneMainDiffuse;
+        kkSpecular+=adjustedPrimary-mainHairPrimary;
+        secondaryKkSpecular+=adjustedSecondary-mainHairSecondary;
     }
 #if defined(AZURE_PROBE_FIELD)
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)

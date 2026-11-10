@@ -10,6 +10,18 @@ layout(binding=0,std430) buffer Results { float values[]; } result;
 layout(push_constant) uniform Parameters { float contrast; } parameters;
 void main(){
     uint i=gl_GlobalInvocationID.x;
+    if(i>=305u) {
+        if(i<311u) {
+            float gray[6]=float[](-1.0,0.0,.5,.75,1.0,4.0);
+            result.values[i]=characterMainBrightnessSaturation(vec3(gray[i-305u]));
+        } else {
+            vec3 mainColor=i<314u?vec3(1.5366795063018799,.6271945238113403,.6465147733688354):vec3(.8,.6,.4);
+            vec3 adjusted=characterDiffuseSaturation(mainColor,characterMainBrightnessSaturation(mainColor));
+            if(i>=314u)adjusted+=vec3(.25,.5,.75);
+            result.values[i]=adjusted[(i-311u)%3u];
+        }
+        return;
+    }
     if(i>=287u) {
 #ifdef AZURE_OUTLINE_DIRECTION_ENCODING
         vec2 inputUv[6]=vec2[](vec2(.5,.5),vec2(0),vec2(1),vec2(.5),vec2(-.25,.5),vec2(-.75,.75));

@@ -3411,6 +3411,9 @@ if(BUILD_TESTING)
             --executable $<TARGET_FILE:AzurePlayer> --group "${hair_group}" --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
         set_tests_properties("${hair_test}" PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     endforeach()
+    add_test(NAME AzureRender.ProjectedHairMainChromaGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_projected_hair_lighting_gpu.py"
+        --executable $<TARGET_FILE:AzurePlayer> --main-brightness-saturation --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+    set_tests_properties(AzureRender.ProjectedHairMainChromaGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
     add_test(NAME AzureRender.CharacterLocalLightGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_character_local_light_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer> --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
     set_tests_properties(AzureRender.CharacterLocalLightGpu PROPERTIES TIMEOUT 300 LABELS "gpu" RUN_SERIAL TRUE)
