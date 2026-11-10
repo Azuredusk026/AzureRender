@@ -65,10 +65,17 @@
           ],
           "default": "scene"
         },
-        "reflectionLayer": {"type": "integer", "minimum": 0, "maximum": 255},
+        "reflectionLayer": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
         "specularModel": {
           "type": "string",
-          "enum": ["scene", "ggx-multiscatter-fit"],
+          "enum": [
+            "scene",
+            "ggx-multiscatter-fit"
+          ],
           "default": "scene"
         },
         "globalIntensity": {
@@ -78,7 +85,20 @@
         }
       },
       "allOf": [
-        {"if": {"required": ["reflectionLayer"]}, "then": {"properties": {"reflection": {"const": "scene"}}}},
+        {
+          "if": {
+            "required": [
+              "reflectionLayer"
+            ]
+          },
+          "then": {
+            "properties": {
+              "reflection": {
+                "const": "scene"
+              }
+            }
+          }
+        },
         {
           "if": {
             "required": [
@@ -152,7 +172,8 @@
           "geometry-shadow",
           "sqrt-alpha-shadow",
           "hair-pixel-integral",
-          "unlit-texture-layers"
+          "unlit-texture-layers",
+          "r11g11b10-output"
         ]
       }
     },
@@ -199,7 +220,14 @@
         "projectedRamp": {
           "type": "object",
           "properties": {
-            "snapshotNormal": {"type": "string", "enum": ["lighting", "material-normal-rg"], "default": "lighting"},
+            "snapshotNormal": {
+              "type": "string",
+              "enum": [
+                "lighting",
+                "material-normal-rg"
+              ],
+              "default": "lighting"
+            },
             "lighting": {
               "type": "object",
               "properties": {
@@ -238,9 +266,24 @@
       "type": "object",
       "description": "Typed fields and ownership are validated by the production material interpreter.",
       "properties": {
-        "shadowSaturation": {"type": "number", "minimum": 0, "maximum": 4, "default": 1},
-        "lightingNormal": {"type": "string", "enum": ["surface", "origin-radial-horizontal", "screen-surface"]},
-        "transparentHighlights": {"type": "boolean", "default": false},
+        "shadowSaturation": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 4,
+          "default": 1
+        },
+        "lightingNormal": {
+          "type": "string",
+          "enum": [
+            "surface",
+            "origin-radial-horizontal",
+            "screen-surface"
+          ]
+        },
+        "transparentHighlights": {
+          "type": "boolean",
+          "default": false
+        },
         "rampComposition": {
           "type": "string",
           "enum": [
@@ -453,6 +496,61 @@
           "class": {
             "const": "face"
           }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "features"
+        ],
+        "properties": {
+          "features": {
+            "contains": {
+              "const": "r11g11b10-output"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "features"
+              ],
+              "properties": {
+                "features": {
+                  "contains": {
+                    "enum": [
+                      "unlit-surface",
+                      "unlit-texture-layers",
+                      "overlay",
+                      "scene-tint",
+                      "multiply-composite"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "class": {
+                  "const": "overlay"
+                }
+              }
+            },
+            {
+              "required": [
+                "surface"
+              ]
+            }
+          ]
         }
       }
     }

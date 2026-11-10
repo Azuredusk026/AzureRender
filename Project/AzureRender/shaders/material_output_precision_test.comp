@@ -1,0 +1,12 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "material_output_precision.glsl"
+layout(local_size_x=64) in;
+layout(binding=0,std430) readonly buffer Source {uvec4 values[];} source;
+layout(binding=1,std430) writeonly buffer Destination {uvec4 values[];} destination;
+layout(push_constant) uniform Parameters {uint count;uint enabled;} parameters;
+void main(){
+    uint index=gl_GlobalInvocationID.x;if(index>=parameters.count)return;
+    vec4 color=uintBitsToFloat(source.values[index]);
+    destination.values[index]=floatBitsToUint(azureMaterialOutputPrecision(color,parameters.enabled!=0u));
+}

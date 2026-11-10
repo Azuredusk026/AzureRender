@@ -752,6 +752,35 @@ void testMaterialSurfacePacking() {
     require(std::memcmp(&generic,expectedHair.data(),sizeof(expectedHair))==0,"Other materials retain stable hair-compatible rows");
 }
 
+void testMaterialOutputPrecision(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;auto source=fixture;
+    auto& profile=source["materials"][0]["extras"]["azureRenderMaterial"];
+    profile={{"schemaVersion",2},{"class","generic"},{"features",{"r11g11b10-output"}}};
+    const auto path=directory/"output-precision.gltf";
+    const auto load=[&](const Json& value){std::ofstream(path)<<value.dump();return loadGltfAsset(path.string());};
+    auto loaded=load(source).materials.at(0);
+    require((loaded.materialFeatures&MaterialFeatureR11G11B10Output)!=0,"Output precision feature must reach the material input");
+    (void)packMaterialSurfaceProfile(loaded);
+    auto defaults=source;defaults["materials"][0]["extras"]["azureRenderMaterial"]["features"]=Json::array();
+    require((load(defaults).materials.at(0).materialFeatures&MaterialFeatureR11G11B10Output)==0,"Default output precision remains native");
+    const auto reject=[&](Json value){std::string failure;try{(void)load(value);}catch(const std::exception& error){failure=error.what();}
+        if(failure.find("r11g11b10-output")==std::string::npos)throw std::runtime_error("Output precision rejection diagnostic: "+failure+" Profile="+value["materials"][0].dump());};
+    auto legacy=source;legacy["materials"][0]["extras"]["azureRenderMaterial"]["schemaVersion"]=1;reject(legacy);
+    auto blend=source;blend["materials"][0]["alphaMode"]="BLEND";reject(blend);
+    auto unlit=source;auto& unlitProfile=unlit["materials"][0]["extras"]["azureRenderMaterial"];
+    unlitProfile["features"].push_back("unlit-surface");unlitProfile["surface"]={{"schemaVersion",1},{"lighting","unlit"}};reject(unlit);
+    auto masked=source;masked["materials"][0]["alphaMode"]="MASK";(void)load(masked);
+    loaded.alphaMode=AssetAlphaMode::Blend;bool rejected=false;try{(void)packMaterialSurfaceProfile(loaded);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Typed output precision ownership must reject transparent receivers");
+    auto document=MaterialData::defaults("azure.profile").encode();
+    document["surface"]["materials"][0]={{"name","Output precision"},{"extras",{{"azureRenderMaterial",profile}}},
+        {"pbrMetallicRoughness",{{"baseColorFactor",{.2,.3,.4,1.}}}}};
+    const auto materialPath=directory/"output-precision.azurematerial";
+    std::ofstream(materialPath)<<MaterialData::parse(document).encode().dump();
+    const auto reopened=MaterialData::load(materialPath).interpret([](const std::string&)->std::filesystem::path{throw std::runtime_error("Unexpected output precision image");});
+    require((reopened.materialFeatures&MaterialFeatureR11G11B10Output)!=0,"Material save and reopen preserves output precision");
+}
+
 void testMaterialRadianceScale(const nlohmann::json& fixture,const std::filesystem::path& directory) {
     using Json=nlohmann::json;
     auto source=fixture;
@@ -1199,6 +1228,7 @@ int main(int argc,char** argv) { try {
     testProjectedHairRamp(input,directory);
     testIdentityImageSamples(input,directory);
     testOutlineSurface(input,directory);
+    testMaterialOutputPrecision(input,directory);
     testMaterialRadianceScale(input,directory);
     testMaterialDisplayTransform(input,directory);
     testEyeRadialSurface(input,directory);

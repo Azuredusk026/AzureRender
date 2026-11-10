@@ -238,3 +238,10 @@ GPU 按相同顺序读取模型、阴影及描边数据。
 场景 `nprLightingParameters.w` 保存镜面照明底值。
 表面及视图的现行布局版本保持有效。
 字段规则见[二维色带](specular-ramp.md)。
+
+## 输出精度特性
+
+`MaterialFeatureR11G11B10Output` 占第二十六位。
+该位选择[材质输出精度](material-output-precision.md)的 RGB 转换。
+默认位值为零，Alpha 和材质表步长保持现行契约。
+版本二的受光不透明及遮罩表面可声明该位。
