@@ -1314,3 +1314,6 @@ P8.1 至 P8.6 的执行结果见[集中收尾记录](../acceptance/p8/2026-10-14
 
 WC1 至 WC6 完成，证据见世界参照与相机实施记录。
 本轮覆盖双设备路径追踪、语言切换和独立发布。
+
+[主 UV 取样候选](../acceptance/nr/material-mirrored-uv-candidate.md)保留 Intel 阴影差异。
+候选接入待验，相机投影与真实深度来源继续推进。
