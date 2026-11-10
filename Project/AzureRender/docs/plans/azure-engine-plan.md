@@ -30,6 +30,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[参考相机视图主线验收](../acceptance/nr/reference-camera-view-main-integration.md)通过双配置二十项检查。
+八次设备检查、真实空间查询及重采原四帧通过。
+场景宿主绑定、Intel 原生差异及正式帧预算继续处理。
+
 [驻留色彩图像通道范围](../acceptance/nr/resident-srgb-channel-scope.md)完成 180 份实际图像核对。
 单通道关系的乐观差额约为 113.70 MB，正式容量继续验收。
 

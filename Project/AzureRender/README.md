@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[参考相机视图主线验收](docs/acceptance/nr/reference-camera-view-main-integration.md)通过双配置二十项检查及八次设备检查。
+实际射线与可见顶点通过，重采原始四帧摘要精确一致。
+
 [驻留色彩图像通道范围](docs/acceptance/nr/resident-srgb-channel-scope.md)核对 180 份实际图像的全部多级内容。
 四十份满足单通道像素关系，设备与正式内存按所属门禁继续验收。
 
