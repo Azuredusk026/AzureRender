@@ -20,6 +20,7 @@ layout(binding=26) uniform AZURE_MASK_TYPE outlineMask;
 layout(location=0) out vec4 outputColor;
 layout(location=1) out vec4 outputNormal;
 void main() {
+    azurePreparePrimaryUv(textureCoordinate);
     if(!shellCovered())discard;
     if(shell.tile!=0xffffffffu) {
         ivec2 viewSize=ivec2(camera.depth.zw);
@@ -29,7 +30,7 @@ void main() {
     }
     vec3 color=shellColor.rgb;
     if(shellColor.w<0.0) {
-        vec3 albedo=texture(SHELL_ALBEDO,textureCoordinate).rgb;
+        vec3 albedo=azureSamplePrimaryUv(SHELL_ALBEDO,textureCoordinate).rgb;
         float luminance=dot(albedo,vec3(.212673,.715152,.072175));
         color*=max(vec3(0),mix(vec3(luminance),albedo,-shellColor.w-1.0));
     }

@@ -21,13 +21,15 @@ layout(binding=3) uniform sampler2D independentCoverage;
 #endif
 #include "material_sampling.glsl"
 #include "fragment_sampling.glsl"
+#include "material_primary_uv.glsl"
 layout(location=2) AZURE_SAMPLE in vec2 textureCoordinate;
 layout(location=0) out float coverage;
 void main() {
+    azurePreparePrimaryUv(textureCoordinate);
     if(material.alphaMode==1){
         float alpha=(material.features&0x40000000u)!=0u
-            ?azureTemporalMaskAlpha(BASE,textureCoordinate,dFdx(textureCoordinate),dFdy(textureCoordinate))
-            :texture(BASE,textureCoordinate).a;
+            ?azureTemporalMaskAlpha(BASE,textureCoordinate,azurePrimaryDx(textureCoordinate),azurePrimaryDy(textureCoordinate))
+            :azureSamplePrimaryUv(BASE,textureCoordinate).a;
         if(alpha<material.cutoff)discard;
     }
     coverage=1.0;

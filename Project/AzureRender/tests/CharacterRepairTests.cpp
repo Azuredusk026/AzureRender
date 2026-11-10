@@ -781,6 +781,35 @@ void testMaterialOutputPrecision(const nlohmann::json& fixture,const std::filesy
     require((reopened.materialFeatures&MaterialFeatureR11G11B10Output)!=0,"Material save and reopen preserves output precision");
 }
 
+void testMaterialUvPolicy(const nlohmann::json& fixture,const std::filesystem::path& directory) {
+    using Json=nlohmann::json;auto source=fixture;
+    auto& profile=source["materials"][0]["extras"]["azureRenderMaterial"];
+    profile={{"schemaVersion",2},{"class","generic"},{"features",{"mirrored-coarse-uv"}}};
+    const auto path=directory/"uv-policy.gltf";
+    const auto load=[&](const Json& value){std::ofstream(path)<<value.dump();return loadGltfAsset(path.string());};
+    auto loaded=load(source).materials.at(0);
+    require((loaded.materialFeatures&MaterialFeatureMirroredCoarseUv)!=0,"Material UV policy feature must reach the material input");
+    (void)packMaterialSurfaceProfile(loaded);
+    auto defaults=source;defaults["materials"][0]["extras"]["azureRenderMaterial"]["features"]=Json::array();
+    require((load(defaults).materials.at(0).materialFeatures&MaterialFeatureMirroredCoarseUv)==0,"Default UV policy remains native");
+    const auto reject=[&](Json value){std::string failure;try{(void)load(value);}catch(const std::exception& error){failure=error.what();}
+        if(failure.find("mirrored-coarse-uv")==std::string::npos)throw std::runtime_error("Material UV policy rejection diagnostic: "+failure+" Profile="+value["materials"][0].dump());};
+    auto legacy=source;legacy["materials"][0]["extras"]["azureRenderMaterial"]["schemaVersion"]=1;reject(legacy);
+    auto blend=source;blend["materials"][0]["alphaMode"]="BLEND";reject(blend);
+    auto unlit=source;auto& unlitProfile=unlit["materials"][0]["extras"]["azureRenderMaterial"];
+    unlitProfile["features"].push_back("unlit-surface");unlitProfile["surface"]={{"schemaVersion",1},{"lighting","unlit"}};reject(unlit);
+    auto masked=source;masked["materials"][0]["alphaMode"]="MASK";(void)load(masked);
+    loaded.alphaMode=AssetAlphaMode::Blend;bool rejected=false;try{(void)packMaterialSurfaceProfile(loaded);}catch(const std::exception&){rejected=true;}
+    require(rejected,"Typed UV policy ownership must reject transparent receivers");
+    auto document=MaterialData::defaults("azure.profile").encode();
+    document["surface"]["materials"][0]={{"name","Material UV policy"},{"extras",{{"azureRenderMaterial",profile}}},
+        {"pbrMetallicRoughness",{{"baseColorFactor",{.2,.3,.4,1.}}}}};
+    const auto materialPath=directory/"uv-policy.azurematerial";
+    std::ofstream(materialPath)<<MaterialData::parse(document).encode().dump();
+    const auto reopened=MaterialData::load(materialPath).interpret([](const std::string&)->std::filesystem::path{throw std::runtime_error("Unexpected UV policy image");});
+    require((reopened.materialFeatures&MaterialFeatureMirroredCoarseUv)!=0,"Material save and reopen preserves UV policy");
+}
+
 void testMaterialRadianceScale(const nlohmann::json& fixture,const std::filesystem::path& directory) {
     using Json=nlohmann::json;
     auto source=fixture;
@@ -1229,6 +1258,7 @@ int main(int argc,char** argv) { try {
     testIdentityImageSamples(input,directory);
     testOutlineSurface(input,directory);
     testMaterialOutputPrecision(input,directory);
+    testMaterialUvPolicy(input,directory);
     testMaterialRadianceScale(input,directory);
     testMaterialDisplayTransform(input,directory);
     testEyeRadialSurface(input,directory);

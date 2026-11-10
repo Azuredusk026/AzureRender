@@ -1,6 +1,7 @@
 #include "GltfLoader.hpp"
 #include "assets/MaterialBlendDepth.hpp"
 #include "assets/MaterialOutputPrecision.hpp"
+#include "assets/MaterialUvPolicy.hpp"
 #include "assets/MaterialRimResponse.hpp"
 #include "assets/image/ImageCodec.hpp"
 #include "BrowRegions.hpp"
@@ -181,6 +182,7 @@ std::uint32_t materialFeatureFromName(const std::string& value) {
     if (value == "hair-projected-ramp") return MaterialFeatureHairProjectedRamp;
     if (value == "hair-pixel-integral") return MaterialFeatureHairPixelIntegral;
     if (value == "r11g11b10-output") return MaterialFeatureR11G11B10Output;
+    if (value == "mirrored-coarse-uv") return MaterialFeatureMirroredCoarseUv;
     if (value == "eye-radial-surface") return MaterialFeatureEyeRadialSurface;
     if (value == "unlit-surface") return MaterialFeatureUnlitSurface;
     if (value == "unlit-texture-layers") return MaterialFeatureUnlitTextureLayers;
@@ -388,6 +390,7 @@ void loadMaterialProfile(
         }
     }
     azurerender::validateMaterialOutputPrecision(result);
+    azurerender::validateMaterialUvPolicy(result);
     if(result.materialFeatures&MaterialFeatureHairPixelIntegral){
         constexpr auto required=MaterialFeatureHairAnisotropy|MaterialFeatureHairProjectedRamp;
         if(result.materialProfileVersion!=2||result.materialClass!=AssetMaterialClass::Hair
@@ -2300,6 +2303,7 @@ AssetMaterial loadMaterial(
     validateMaterialCoverage(result);
     azurerender::validateMaterialBlendDepth(result);
     azurerender::validateMaterialOutputPrecision(result);
+    azurerender::validateMaterialUvPolicy(result);
     azurerender::validateMaterialRimResponse(result);
     return result;
 }

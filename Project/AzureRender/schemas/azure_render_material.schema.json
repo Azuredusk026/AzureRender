@@ -173,7 +173,8 @@
           "sqrt-alpha-shadow",
           "hair-pixel-integral",
           "unlit-texture-layers",
-          "r11g11b10-output"
+          "r11g11b10-output",
+          "mirrored-coarse-uv"
         ]
       }
     },
@@ -533,6 +534,61 @@
                       "overlay",
                       "scene-tint",
                       "multiply-composite"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "class": {
+                  "const": "overlay"
+                }
+              }
+            },
+            {
+              "required": [
+                "surface"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "features"
+        ],
+        "properties": {
+          "features": {
+            "contains": {
+              "const": "mirrored-coarse-uv"
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schemaVersion": {
+            "const": 2
+          }
+        },
+        "not": {
+          "anyOf": [
+            {
+              "properties": {
+                "features": {
+                  "contains": {
+                    "enum": [
+                      "hair-pixel-integral",
+                      "unlit-surface",
+                      "unlit-texture-layers",
+                      "eye-radial-surface",
+                      "scene-refraction",
+                      "scene-tint",
+                      "multiply-composite",
+                      "overlay"
                     ]
                   }
                 }

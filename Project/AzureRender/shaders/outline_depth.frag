@@ -3,6 +3,7 @@
 #include "outline_surface_fragment.glsl"
 layout(location=1) out vec4 outputDepth;
 void main() {
+    azurePreparePrimaryUv(textureCoordinate);
     if(!shellCovered())discard;
     float denominator=gl_FragCoord.z*shellDepthProjection.z-shellDepthProjection.x;
     float depth=abs(denominator)>1e-12?
