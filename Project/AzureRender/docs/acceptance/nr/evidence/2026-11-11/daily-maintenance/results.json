@@ -1,0 +1,12 @@
+{
+  "status": "verified",
+  "sourceBase": "076fe6e",
+  "dailyStatus": "bounded",
+  "stopReason": "time-budget",
+  "seconds": 130.59400000004098,
+  "batches": 3,
+  "items": 26,
+  "sourceProofsExact": 2,
+  "protectedFilesExact": 13,
+  "externalStorageUsed": false
+}

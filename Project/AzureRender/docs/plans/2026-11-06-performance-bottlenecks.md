@@ -14,6 +14,32 @@ GPU 继续区分着色、缓存、显存带宽和传输。
 
 ## 当前状态
 
+主线运行时来源为 `6721bde`。
+[参考相机视图集成](../acceptance/nr/reference-camera-view-main-integration.md)通过两配置二十项检查。
+八次设备检查、实际射线及重采原始四帧均通过。
+主线 859 份程序保持受检摘要。
+
+[完整捕获](../acceptance/nr/quad-device-capture-qualification.md)覆盖 3453 个事件及 76 条管线。
+材质绘制仍为 GPU 主导成本。
+[展开接收计算](../acceptance/nr/unrolled-computed-view-local-qualification.md)的局部降幅至多约 19.49%。
+[级联需求控制](../acceptance/nr/quad-cascade-demand-local-qualification.md)的降幅至多约 14.41%。
+
+[一致索引控制](../acceptance/nr/uniform-material-descriptor.md)测得材质成本增加约 0.48%。
+这些候选均保留在隔离证据中。
+新的原生性能批次需要达到既有热点收益门槛。
+正式 CPU、GPU 及长跑保持所属采样条件。
+
+[驻留色彩图像](../acceptance/nr/resident-srgb-channel-scope.md)完成 180 份图像的全部层级核对。
+四十份满足单通道关系，乐观差额约为 113.70 MB。
+[块存储调查](../acceptance/nr/dds-block-storage-scope.md)记录来源容量及设备格式能力。
+实际缓存、采样资格和分配高水位分别验收。
+
+[管理员功率结果](../acceptance/nr/gpu-power-limit-qualification.md)确认设置入口不受设备支持。
+正式固定功率条件继续保留，独立软件工作持续推进。
+场景宿主视图、Intel 原生差异及完整颜色按专项接入。
+
+## 机制验收记录
+
 [照明缓存接入](../acceptance/nr/radiance-cache-precision-integration.md)保持严格四帧零差异。
 本地短时参考 GPU 均值约为 29.98 毫秒。
 候选增加约 0.72 毫秒，实验选项默认关闭。
@@ -23,7 +49,7 @@ GPU 继续区分着色、缓存、显存带宽和传输。
 逐片元命中率为 100.0000%。
 完整四像素组接受率为 85.0605%。
 
-当前程序的[单帧定位](../acceptance/nr/current-gpu-cost.md)确认场景材质为主要成本。
+所属批次的[单帧定位](../acceptance/nr/current-gpu-cost.md)确认场景材质为主要成本。
 视图模式候选的局部事件改善约 13%，保持隔离诊断状态。
 命令准备的[范围与分组优化](../acceptance/nr/read-scope-barriers.md)通过六项所属检查及严格四帧。
 短时 CPU 均值为 9.02 毫秒，P95 为 10.31 毫秒。

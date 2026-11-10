@@ -183,3 +183,6 @@ python tools/artifact_asset_cleanup.py inventory --root build/runs/history-task 
 见[构建维护](../acceptance/nr/legacy-worktree-build-maintenance.md)。
 十月记录见[清理清单](cleanup-2026-10-14.json)
 及[后续记录](cleanup-2026-10-26.json)。
+
+十一月十一日的[每日维护核验](../acceptance/nr/daily-maintenance-2026-11-11.md)
+记录三批目录处理、实际耗时及开发保护结果。
