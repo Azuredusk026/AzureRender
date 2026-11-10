@@ -803,3 +803,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [实际网格主坐标来源](docs/acceptance/nr/actual-geometry-uv-source.md)完成双设备的实际位置、索引及 UV 组合核对。
 完整深度平面及可见量与来源控制一致，后续接入统一场景视图。
+
+[参考相机视图契约](docs/acceptance/nr/reference-camera-view.md)通过两配置空间查询及双设备深度适配。
+17017 条来源射线的往返误差满足八位子像素门槛，宿主视图选择与绘制绑定继续接入。
