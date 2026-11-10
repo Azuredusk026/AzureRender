@@ -30,6 +30,11 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[公共梯度主线集成](../acceptance/nr/public-uv-gradient-main-integration.md)通过两配置十二项检查。
+双设备实际光栅及三角形边缘分量逐位一致。
+默认三宿主和全部既有程序摘要保持一致。
+生产取样、投影及实际深度继续按专项验收。
+
 [参考算术主线集成](../acceptance/nr/visibility-reference-integration.md)通过两配置及原四帧。
 合计 32 项有效检查通过，双设备默认及参考路径均无跳过。
 完整头发颜色、当前深度来源和帧预算继续处理。

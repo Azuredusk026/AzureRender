@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[公共梯度主线集成](docs/acceptance/nr/public-uv-gradient-main-integration.md)通过双配置及双设备检查。
+默认宿主及既有程序摘要保持一致，生产取样绑定继续验收。
+
 [并行资源调度](docs/development/shared-resources.md)统一编译、GPU 检查及跨工作树输入保护。
 
 论文三路径基准见[独立实验](experiments/thesis/README.md)。

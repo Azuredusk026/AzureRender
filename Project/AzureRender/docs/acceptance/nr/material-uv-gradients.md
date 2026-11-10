@@ -53,6 +53,10 @@ Vulkan 1.3 目标另引入未启用的丢弃降级能力。
 
 整体状态保持 `failed-user-review`。
 
+[主线集成](public-uv-gradient-main-integration.md)完成合并后的双配置验证。
+十二项所属检查及两批 Intel 光栅检查通过。
+默认三宿主及全部既有 SPIR-V 摘要保持一致。
+
 [结果清单](evidence/2026-11-10/material-uv-gradients/results.json)
 与[验证归档](evidence/2026-11-10/material-uv-gradients/validation.zip)
 保存公共源码、实际执行、身份复核及失败诊断。
