@@ -110,7 +110,8 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 实际最终颜色保留六处超差，包含一处新增超差。
 候选保持隔离。
 [显示消费边界](../acceptance/nr/hair-display-consumption.md)的整区比较最大差为一字节。
-后续核对法线、参数图及几何取样来源。
+[参数与双法线层级](../acceptance/nr/hair-normal-param-mip-content.md)的二十四级内容全部一致。
+后续核对实际顶点、插值与梯度来源。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
