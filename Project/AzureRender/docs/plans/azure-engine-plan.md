@@ -1285,3 +1285,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [实际索引与正面方向](../acceptance/nr/actual-geometry-index-source.md)通过双设备来源核对。
 两份完整深度平面与来源控制逐位一致，实际 UV 组合继续验收。
+
+[实际网格主坐标来源](../acceptance/nr/actual-geometry-uv-source.md)完成双设备的实际位置、索引及 UV 组合核对。
+完整深度平面及可见量与来源控制一致，后续接入统一场景视图。

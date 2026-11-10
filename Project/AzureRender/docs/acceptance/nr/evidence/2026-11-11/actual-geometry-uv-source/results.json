@@ -1,0 +1,990 @@
+{
+  "status": "qualified-actual-uv-source-with-existing-intel-depth-failures",
+  "overall": "failed-user-review",
+  "devices": [
+    {
+      "device": "nvidia",
+      "visibilityExitCode": 0,
+      "result": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "exactPixels": 17017,
+        "maximumByteError": 0,
+        "mismatches": [],
+        "pixels": 17017,
+        "validationErrors": 0,
+        "withinOnePixels": 17017,
+        "zeroAllocator": true
+      },
+      "failures": 0,
+      "baselineFailures": 0,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "r32D32Exact": true,
+      "changedVisibilityPixels": 0,
+      "failurePixels": [],
+      "depthPlaneValues": 3686400,
+      "depthPlaneExactValues": 3686400,
+      "maximumDepthPlaneUlp": 0
+    },
+    {
+      "device": "intel",
+      "visibilityExitCode": 1,
+      "result": {
+        "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+        "exactPixels": 16799,
+        "maximumByteError": 25,
+        "mismatches": [
+          [
+            1304,
+            1284,
+            208,
+            219
+          ],
+          [
+            1296,
+            1274,
+            68,
+            69
+          ],
+          [
+            1299,
+            1273,
+            3,
+            2
+          ],
+          [
+            1278,
+            1272,
+            213,
+            214
+          ],
+          [
+            1302,
+            1271,
+            1,
+            2
+          ],
+          [
+            1292,
+            1270,
+            232,
+            239
+          ],
+          [
+            1272,
+            1269,
+            0,
+            1
+          ],
+          [
+            1291,
+            1269,
+            207,
+            208
+          ],
+          [
+            1293,
+            1269,
+            244,
+            242
+          ],
+          [
+            1297,
+            1268,
+            19,
+            27
+          ],
+          [
+            1275,
+            1267,
+            1,
+            0
+          ],
+          [
+            1277,
+            1267,
+            1,
+            2
+          ],
+          [
+            1297,
+            1267,
+            19,
+            20
+          ],
+          [
+            1298,
+            1267,
+            27,
+            36
+          ],
+          [
+            1298,
+            1266,
+            36,
+            42
+          ],
+          [
+            1279,
+            1265,
+            0,
+            1
+          ]
+        ],
+        "pixels": 17017,
+        "validationErrors": 0,
+        "withinOnePixels": 16921,
+        "zeroAllocator": true
+      },
+      "failures": 96,
+      "baselineFailures": 96,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "r32D32Exact": true,
+      "changedVisibilityPixels": 0,
+      "failurePixels": [
+        {
+          "uiPixel": [
+            1304,
+            155
+          ],
+          "actual": 219,
+          "expected": 208
+        },
+        {
+          "uiPixel": [
+            1292,
+            169
+          ],
+          "actual": 239,
+          "expected": 232
+        },
+        {
+          "uiPixel": [
+            1293,
+            170
+          ],
+          "actual": 242,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1297,
+            171
+          ],
+          "actual": 27,
+          "expected": 19
+        },
+        {
+          "uiPixel": [
+            1298,
+            172
+          ],
+          "actual": 36,
+          "expected": 27
+        },
+        {
+          "uiPixel": [
+            1298,
+            173
+          ],
+          "actual": 42,
+          "expected": 36
+        },
+        {
+          "uiPixel": [
+            1278,
+            175
+          ],
+          "actual": 150,
+          "expected": 139
+        },
+        {
+          "uiPixel": [
+            1296,
+            175
+          ],
+          "actual": 14,
+          "expected": 16
+        },
+        {
+          "uiPixel": [
+            1295,
+            177
+          ],
+          "actual": 208,
+          "expected": 201
+        },
+        {
+          "uiPixel": [
+            1297,
+            178
+          ],
+          "actual": 244,
+          "expected": 246
+        },
+        {
+          "uiPixel": [
+            1266,
+            179
+          ],
+          "actual": 19,
+          "expected": 13
+        },
+        {
+          "uiPixel": [
+            1296,
+            179
+          ],
+          "actual": 246,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1260,
+            180
+          ],
+          "actual": 19,
+          "expected": 13
+        },
+        {
+          "uiPixel": [
+            1265,
+            181
+          ],
+          "actual": 178,
+          "expected": 187
+        },
+        {
+          "uiPixel": [
+            1303,
+            182
+          ],
+          "actual": 219,
+          "expected": 224
+        },
+        {
+          "uiPixel": [
+            1304,
+            182
+          ],
+          "actual": 239,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1262,
+            183
+          ],
+          "actual": 236,
+          "expected": 232
+        },
+        {
+          "uiPixel": [
+            1251,
+            186
+          ],
+          "actual": 47,
+          "expected": 54
+        },
+        {
+          "uiPixel": [
+            1234,
+            239
+          ],
+          "actual": 239,
+          "expected": 242
+        },
+        {
+          "uiPixel": [
+            1218,
+            246
+          ],
+          "actual": 16,
+          "expected": 19
+        },
+        {
+          "uiPixel": [
+            1290,
+            254
+          ],
+          "actual": 224,
+          "expected": 232
+        },
+        {
+          "uiPixel": [
+            1292,
+            255
+          ],
+          "actual": 236,
+          "expected": 239
+        },
+        {
+          "uiPixel": [
+            1288,
+            258
+          ],
+          "actual": 252,
+          "expected": 254
+        },
+        {
+          "uiPixel": [
+            1351,
+            258
+          ],
+          "actual": 36,
+          "expected": 27
+        },
+        {
+          "uiPixel": [
+            1353,
+            258
+          ],
+          "actual": 69,
+          "expected": 85
+        },
+        {
+          "uiPixel": [
+            1207,
+            262
+          ],
+          "actual": 128,
+          "expected": 116
+        },
+        {
+          "uiPixel": [
+            1212,
+            262
+          ],
+          "actual": 186,
+          "expected": 194
+        },
+        {
+          "uiPixel": [
+            1217,
+            262
+          ],
+          "actual": 239,
+          "expected": 242
+        },
+        {
+          "uiPixel": [
+            1322,
+            265
+          ],
+          "actual": 194,
+          "expected": 169
+        },
+        {
+          "uiPixel": [
+            1205,
+            266
+          ],
+          "actual": 54,
+          "expected": 48
+        },
+        {
+          "uiPixel": [
+            1350,
+            266
+          ],
+          "actual": 128,
+          "expected": 150
+        },
+        {
+          "uiPixel": [
+            1358,
+            267
+          ],
+          "actual": 169,
+          "expected": 178
+        },
+        {
+          "uiPixel": [
+            1348,
+            269
+          ],
+          "actual": 201,
+          "expected": 186
+        },
+        {
+          "uiPixel": [
+            1353,
+            269
+          ],
+          "actual": 232,
+          "expected": 228
+        },
+        {
+          "uiPixel": [
+            1348,
+            270
+          ],
+          "actual": 219,
+          "expected": 207
+        },
+        {
+          "uiPixel": [
+            1360,
+            270
+          ],
+          "actual": 219,
+          "expected": 213
+        },
+        {
+          "uiPixel": [
+            1348,
+            272
+          ],
+          "actual": 194,
+          "expected": 186
+        },
+        {
+          "uiPixel": [
+            1349,
+            273
+          ],
+          "actual": 223,
+          "expected": 218
+        },
+        {
+          "uiPixel": [
+            1198,
+            274
+          ],
+          "actual": 228,
+          "expected": 232
+        },
+        {
+          "uiPixel": [
+            1217,
+            274
+          ],
+          "actual": 254,
+          "expected": 252
+        },
+        {
+          "uiPixel": [
+            1361,
+            275
+          ],
+          "actual": 228,
+          "expected": 236
+        },
+        {
+          "uiPixel": [
+            1332,
+            277
+          ],
+          "actual": 23,
+          "expected": 20
+        },
+        {
+          "uiPixel": [
+            1231,
+            278
+          ],
+          "actual": 169,
+          "expected": 160
+        },
+        {
+          "uiPixel": [
+            1196,
+            279
+          ],
+          "actual": 219,
+          "expected": 224
+        },
+        {
+          "uiPixel": [
+            1232,
+            279
+          ],
+          "actual": 232,
+          "expected": 235
+        },
+        {
+          "uiPixel": [
+            1221,
+            280
+          ],
+          "actual": 27,
+          "expected": 37
+        },
+        {
+          "uiPixel": [
+            1234,
+            280
+          ],
+          "actual": 224,
+          "expected": 219
+        },
+        {
+          "uiPixel": [
+            1236,
+            280
+          ],
+          "actual": 207,
+          "expected": 194
+        },
+        {
+          "uiPixel": [
+            1195,
+            281
+          ],
+          "actual": 242,
+          "expected": 246
+        },
+        {
+          "uiPixel": [
+            1220,
+            281
+          ],
+          "actual": 54,
+          "expected": 61
+        },
+        {
+          "uiPixel": [
+            1233,
+            283
+          ],
+          "actual": 251,
+          "expected": 254
+        },
+        {
+          "uiPixel": [
+            1353,
+            283
+          ],
+          "actual": 251,
+          "expected": 249
+        },
+        {
+          "uiPixel": [
+            1368,
+            284
+          ],
+          "actual": 213,
+          "expected": 201
+        },
+        {
+          "uiPixel": [
+            1224,
+            285
+          ],
+          "actual": 15,
+          "expected": 12
+        },
+        {
+          "uiPixel": [
+            1331,
+            285
+          ],
+          "actual": 95,
+          "expected": 77
+        },
+        {
+          "uiPixel": [
+            1216,
+            286
+          ],
+          "actual": 160,
+          "expected": 150
+        },
+        {
+          "uiPixel": [
+            1236,
+            286
+          ],
+          "actual": 244,
+          "expected": 248
+        },
+        {
+          "uiPixel": [
+            1222,
+            287
+          ],
+          "actual": 86,
+          "expected": 69
+        },
+        {
+          "uiPixel": [
+            1223,
+            287
+          ],
+          "actual": 43,
+          "expected": 55
+        },
+        {
+          "uiPixel": [
+            1327,
+            287
+          ],
+          "actual": 128,
+          "expected": 105
+        },
+        {
+          "uiPixel": [
+            1238,
+            288
+          ],
+          "actual": 244,
+          "expected": 241
+        },
+        {
+          "uiPixel": [
+            1324,
+            288
+          ],
+          "actual": 105,
+          "expected": 95
+        },
+        {
+          "uiPixel": [
+            1373,
+            288
+          ],
+          "actual": 128,
+          "expected": 139
+        },
+        {
+          "uiPixel": [
+            1217,
+            289
+          ],
+          "actual": 105,
+          "expected": 95
+        },
+        {
+          "uiPixel": [
+            1240,
+            289
+          ],
+          "actual": 249,
+          "expected": 251
+        },
+        {
+          "uiPixel": [
+            1326,
+            290
+          ],
+          "actual": 105,
+          "expected": 116
+        },
+        {
+          "uiPixel": [
+            1239,
+            291
+          ],
+          "actual": 235,
+          "expected": 238
+        },
+        {
+          "uiPixel": [
+            1318,
+            291
+          ],
+          "actual": 6,
+          "expected": 9
+        },
+        {
+          "uiPixel": [
+            1229,
+            292
+          ],
+          "actual": 32,
+          "expected": 37
+        },
+        {
+          "uiPixel": [
+            1216,
+            293
+          ],
+          "actual": 186,
+          "expected": 194
+        },
+        {
+          "uiPixel": [
+            1217,
+            293
+          ],
+          "actual": 116,
+          "expected": 127
+        },
+        {
+          "uiPixel": [
+            1241,
+            296
+          ],
+          "actual": 218,
+          "expected": 228
+        },
+        {
+          "uiPixel": [
+            1322,
+            296
+          ],
+          "actual": 186,
+          "expected": 178
+        },
+        {
+          "uiPixel": [
+            1217,
+            297
+          ],
+          "actual": 150,
+          "expected": 139
+        },
+        {
+          "uiPixel": [
+            1218,
+            297
+          ],
+          "actual": 219,
+          "expected": 213
+        },
+        {
+          "uiPixel": [
+            1331,
+            297
+          ],
+          "actual": 96,
+          "expected": 78
+        },
+        {
+          "uiPixel": [
+            1319,
+            298
+          ],
+          "actual": 150,
+          "expected": 160
+        },
+        {
+          "uiPixel": [
+            1219,
+            303
+          ],
+          "actual": 224,
+          "expected": 228
+        },
+        {
+          "uiPixel": [
+            1317,
+            303
+          ],
+          "actual": 194,
+          "expected": 201
+        },
+        {
+          "uiPixel": [
+            1323,
+            319
+          ],
+          "actual": 239,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1314,
+            324
+          ],
+          "actual": 250,
+          "expected": 246
+        },
+        {
+          "uiPixel": [
+            1238,
+            327
+          ],
+          "actual": 116,
+          "expected": 105
+        },
+        {
+          "uiPixel": [
+            1242,
+            327
+          ],
+          "actual": 27,
+          "expected": 37
+        },
+        {
+          "uiPixel": [
+            1234,
+            331
+          ],
+          "actual": 245,
+          "expected": 249
+        },
+        {
+          "uiPixel": [
+            1255,
+            332
+          ],
+          "actual": 15,
+          "expected": 13
+        },
+        {
+          "uiPixel": [
+            1255,
+            334
+          ],
+          "actual": 50,
+          "expected": 39
+        },
+        {
+          "uiPixel": [
+            1314,
+            336
+          ],
+          "actual": 246,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1241,
+            339
+          ],
+          "actual": 8,
+          "expected": 10
+        },
+        {
+          "uiPixel": [
+            1238,
+            345
+          ],
+          "actual": 234,
+          "expected": 237
+        },
+        {
+          "uiPixel": [
+            1235,
+            346
+          ],
+          "actual": 234,
+          "expected": 237
+        },
+        {
+          "uiPixel": [
+            1312,
+            350
+          ],
+          "actual": 246,
+          "expected": 244
+        },
+        {
+          "uiPixel": [
+            1312,
+            351
+          ],
+          "actual": 150,
+          "expected": 160
+        },
+        {
+          "uiPixel": [
+            1226,
+            353
+          ],
+          "actual": 159,
+          "expected": 149
+        },
+        {
+          "uiPixel": [
+            1316,
+            354
+          ],
+          "actual": 201,
+          "expected": 207
+        },
+        {
+          "uiPixel": [
+            1323,
+            356
+          ],
+          "actual": 219,
+          "expected": 207
+        },
+        {
+          "uiPixel": [
+            1227,
+            364
+          ],
+          "actual": 248,
+          "expected": 246
+        }
+      ],
+      "depthPlaneValues": 3686400,
+      "depthPlaneExactValues": 3686400,
+      "maximumDepthPlaneUlp": 0
+    }
+  ],
+  "baseCommit": "997454e",
+  "runtimeSourceChanged": false,
+  "actualPositionIndexAndUvStreams": true,
+  "sourceTask": {
+    "baseCommit": "997454e",
+    "purpose": "Actual Vulkan primary UV with already-qualified world positions and index/front-face",
+    "vertices": 11564,
+    "uvComponents": 23128,
+    "differentVertices": 2688,
+    "maximumAbsolutePerComponent": [
+      0.0,
+      2.9802322387695312e-08
+    ],
+    "maximumUlpPerComponent": [
+      0,
+      64
+    ],
+    "runtimeSourceChanged": false,
+    "explorationSeconds": 1800,
+    "gpuSeconds": 300,
+    "plannedBytes": 67108864,
+    "inputs": {
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-world-positions.bin": {
+        "bytes": 185024,
+        "sha256": "41913c9e0d4f0600a6456c54002af1a2787b40d61aa31e57ec3fd8a18e8adfa1"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-110844-hair-postvs-clip-source-03c2f0\\vulkan-index.bin": {
+        "bytes": 172176,
+        "sha256": "5e797a9af4f6e37b739a31bf1a5255a4ef1b6e4f307b5084ef00c9c9af482f7d"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin": {
+        "bytes": 80,
+        "sha256": "1f284101bc5e6e56cdc7d44e47032b666fb62d592ace457baa9b4a52e52ab181"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-005626-actual-geometry-uv-source-f50f51\\actual-uv.bin": {
+        "bytes": 92512,
+        "sha256": "78055a8a050e95b54f3152055dffaab7521f9fe0bc4d55f7e6720ac4f5f8aab3"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-235205-actual-world-depth-source-bcce93\\queries.bin": {
+        "bytes": 272272,
+        "sha256": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-110844-hair-postvs-clip-source-03c2f0\\vulkan-vertex.bin": {
+        "bytes": 2960384,
+        "sha256": "5e557a0f4c94e78a8ce5e5bf9a5af6e9c468aa7e050a26bf33e42d14ff6ae2c3"
+      },
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-004745-actual-geometry-index-source-e0f0ac\\native-coverage.exe": {
+        "bytes": 293888,
+        "sha256": "e9b1aee195bc9ffc8d66e04c39435b86ffa273b290aef7faf1fd9f6393d79282"
+      }
+    }
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 4.312000000034459,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-005626-actual-geometry-uv-source-f50f51\\native-public-batch.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-005626-actual-geometry-uv-source-f50f51\\tmp"
+  },
+  "archive": {
+    "bytes": 1182521,
+    "sha256": "a4c7762d5833a66553cf4a8debc02e2478f9089f28cab91fab9923bd2973dde6",
+    "members": 47
+  }
+}
