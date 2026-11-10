@@ -144,7 +144,8 @@ Intel 保留 120 处超差，最大为 33 字节。
 候选保持隔离。
 [显示消费边界](../acceptance/nr/hair-display-consumption.md)的整区比较最大差为一字节。
 [参数与双法线层级](../acceptance/nr/hair-normal-param-mip-content.md)的二十四级内容全部一致。
-后续核对实际顶点、插值与梯度来源。
+[顶点投影来源](../acceptance/nr/hair-postvs-clip-source.md)已核对实际缓冲及原生投影运算。
+11564 个原生裁剪向量逐位重建，后续执行几何来源控制。
 
 ## 后续外观
 
