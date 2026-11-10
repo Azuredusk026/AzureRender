@@ -90,6 +90,9 @@
 [参考算术配置](docs/acceptance/nr/visibility-reference-arithmetic.md)通过双设备原生区域核对，当前场景接入及完整颜色继续验收。
 [主光亮度饱和度](docs/acceptance/nr/hair-main-brightness-saturation.md)提供显式头发照明选项，双设备所属检查及原四帧通过，完整颜色继续验收。
 [色度与缓存集成](docs/acceptance/nr/main-chroma-seal-integration.md)通过主线双配置 24 项及冻结四帧，缓存封存与缺省画面契约均保持成立。
+
+[参考透明层级](docs/acceptance/nr/reference-alpha-ellipse.md)提供显式椭圆策略。
+原生 NVIDIA 整区一致，Intel 剩余九十六处深度超差继续修正。
 [相位原点](docs/acceptance/nr/visibility-phase-origin.md)支持两种行号约定，默认原生区域保持逐字节一致。
 [设备深度核对](docs/acceptance/nr/receiver-device-depth.md)确认当前快照的整区关系，源投影和深度生产精度继续待验收。
 [线性深度核对](docs/acceptance/nr/receiver-linear-depth.md)仍有 216 处超差，接收输入的生产精度继续待验收。

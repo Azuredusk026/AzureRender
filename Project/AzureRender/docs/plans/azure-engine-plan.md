@@ -1363,3 +1363,6 @@ NVIDIA 层级更接近椭圆主轴模型，后续验证通用显式策略。
 
 [独立材质视图](../acceptance/nr/material-view-determinism.md)通过常量索引接收计算的双配置、双设备回归。
 原四帧摘要精确一致，计算视图及公共 UV 绑定按新基线继续接入。
+
+[参考透明层级](../acceptance/nr/reference-alpha-ellipse.md)通过公共策略及原四帧回归。
+NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处深度超差继续修正。

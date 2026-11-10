@@ -71,7 +71,7 @@ int main(int argc,char** argv)try{
         auto reject=[&](auto operation){try{operation();}catch(const std::invalid_argument&){++rejects;}};
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
             for(unsigned kind=0;kind<14;++kind){auto bad=foreground;auto& a=*bad.surface.alpha;
-                if(kind==0)bad.surface.schemaVersion=2;if(kind==1)bad.surface.cullMode=VK_CULL_MODE_FRONT_AND_BACK;if(kind==2)bad.surface.frontFace=static_cast<VkFrontFace>(99);
+                if(kind==0)bad.surface.schemaVersion=3;if(kind==1)bad.surface.cullMode=VK_CULL_MODE_FRONT_AND_BACK;if(kind==2)bad.surface.frontFace=static_cast<VkFrontFace>(99);
                 if(kind==3)a.uv={};if(kind==4)a.image={};if(kind==5)a.sampler={};if(kind==6)a.layout=VK_IMAGE_LAYOUT_GENERAL;if(kind==7)a.channel=4;
                 if(kind==8)a.cutoff=-.1F;if(kind==9)a.cutoff=1.1F;if(kind==10)a.cutoff=std::numeric_limits<float>::quiet_NaN();if(kind==11)a.lodBias=std::numeric_limits<float>::infinity();if(kind==12)a.lodBias=17;if(kind==13)bad.surface.schemaVersion=0;
                 reject([&]{producer.record(commands,0,{}, {bad});});}
@@ -88,8 +88,45 @@ int main(int argc,char** argv)try{
                 const float expected=retained&&a>=128?.03125F:.015625F;if(std::memcmp(&expected,&values[i],4))throw std::runtime_error("Depth alpha/cull/channel/mip mismatch at case "+std::to_string(iteration)+" pixel "+std::to_string(p));++checked;}
         }
         const auto empty=inputs.render(producer,0,{},{});for(float value:empty){if(value!=0)throw std::runtime_error("Masked depth clear failed");++checked;}
+        for(const auto support:{MaterialUvGradientSupport{},MaterialUvGradientSupport{VK_SHADER_STAGE_COMPUTE_BIT,VK_SUBGROUP_FEATURE_QUAD_BIT},MaterialUvGradientSupport{VK_SHADER_STAGE_FRAGMENT_BIT,VK_SUBGROUP_FEATURE_BASIC_BIT}})
+            reject([&]{(void)ReferenceDepthShaders::loadEllipseMasked("missing-capability-must-fail-before-file-read",support);});
+        const auto support=queryMaterialUvGradientSupport(host.physical);auto ellipseShaders=ReferenceDepthShaders::loadEllipseMasked(argv[1],support);
+        {auto bad=ellipseShaders;bad.ellipseSupport={};reject([&]{ReferenceDepthGpu invalid(backend,{8,8},1,config,bad);});}
+        {auto bad=ellipseShaders;bad.maskedVertex.clear();bad.maskedFragment.clear();reject([&]{ReferenceDepthGpu invalid(backend,{8,8},1,config,bad);});}
+        host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
+            auto bad=foreground;bad.surface.schemaVersion=2;bad.surface.alpha->lodPolicy=static_cast<ReferenceDepthAlphaLodPolicy>(99);
+            reject([&]{producer.record(commands,0,{}, {bad});});
+            bad.surface.schemaVersion=1;bad.surface.alpha->lodPolicy=ReferenceDepthAlphaLodPolicy::EllipseMajorAxisMirroredCoarseY;
+            reject([&]{producer.record(commands,0,{}, {bad});});
+            bad.surface.schemaVersion=2;reject([&]{producer.record(commands,0,{}, {bad});});
+        });
+        ReferenceDepthGpu ellipseProducer(backend,{8,8},2,config,ellipseShaders);
+        std::vector<std::vector<char>> constantMips{std::vector<char>(8*8*4,0),std::vector<char>(4*4*4)};
+        std::memset(constantMips[1].data(),255,constantMips[1].size());
+        const auto constantTexture=inputs.texture(8,8,VK_FORMAT_R8G8B8A8_UNORM,constantMips,sampled);
+        struct Case {std::array<float,2> dx,dy;float bias;bool level1;};
+        const std::array<Case,8> cases{{{{1,0},{1,0},.125F,true},{{1,1},{1,1},-.25F,true},{{1,0},{0,1},.125F,false},
+            {{-1,0},{1,0},.125F,true},{{2,0},{0,.5F},-.25F,true},{{0,0},{0,0},0,false},
+            {{.0000000001F,0},{0,.0000000001F},0,false},{{1.e20F,1.e20F},{1.e20F,1.e20F},-16,true}}};
+        foreground.surface={};foreground.surface.schemaVersion=2;foreground.surface.alpha=ReferenceDepthAlpha{uv.buffer,constantTexture.first,constantTexture.second};
+        foreground.surface.alpha->lodPolicy=ReferenceDepthAlphaLodPolicy::EllipseMajorAxisMirroredCoarseY;
+        for(const auto& testCase:cases){
+            std::array<std::array<float,2>,4> coordinates{};
+            coordinates[1]=testCase.dx;coordinates[2]=testCase.dy;
+            for(unsigned c=0;c<2;++c)coordinates[3][c]=testCase.dx[c]+testCase.dy[c];
+            const auto affine=inputs.buffer(coordinates.data(),sizeof(coordinates),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
+            foreground.surface.alpha->uv=affine.buffer;foreground.surface.alpha->lodBias=testCase.bias;
+            for(unsigned channel=0;channel<4;++channel){foreground.surface.alpha->channel=channel;
+                const auto values=inputs.render(ellipseProducer,iteration++%2,{}, {foreground,background});
+                const float expected=testCase.level1?.03125F:.015625F;
+                for(float value:values){if(std::memcmp(&expected,&value,4))throw std::runtime_error("Ellipse major-axis alpha mip mismatch at case "+std::to_string(iteration));++checked;}
+            }
+        }
+        foreground.surface.alpha->lodPolicy=ReferenceDepthAlphaLodPolicy::Device;foreground.surface.alpha->lodBias=0;
+        const auto version2Device=inputs.render(ellipseProducer,0,{}, {foreground,background});
+        for(float value:version2Device){if(value!=.03125F)throw std::runtime_error("Version2 device policy compatibility failed");++checked;}
     }
-    if(rejects!=17)throw std::runtime_error("Depth coverage rejection count differs");
+    if(rejects!=25)throw std::runtime_error("Depth coverage rejection count differs");
     if(host.errors.load()||host.allocator.statistics().liveBuffers||host.allocator.statistics().liveImages)throw std::runtime_error("Depth coverage validation or resource cleanup failed");
-    std::cout<<host.properties.deviceName<<": "<<checked<<" exact masked R32/D32 values; 17 rejects; four channels, inclusive cutoff, two mips, culling, background, slot reuse and cleanup passed\n";return 0;
+    std::cout<<host.properties.deviceName<<": "<<checked<<" exact masked R32/D32 values; 25 rejects; device/ellipse policies, versions, affine footprints, four channels, culling, slot reuse and cleanup passed\n";return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}
