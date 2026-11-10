@@ -2,6 +2,7 @@
 
 #include "render/GpuCulling.hpp"
 #include "render/VisibilityPrototype.hpp"
+#include "render/ConservativeCullShader.hpp"
 #include "rhi/Rhi.hpp"
 #include "rhi/IGpuAllocator.hpp"
 #include <cstring>
@@ -17,9 +18,10 @@ public:
     GpuCullingResources(const GpuCullingResources&) = delete;
     GpuCullingResources& operator=(const GpuCullingResources&) = delete;
 
-    void initialize(const std::vector<char>& shaderCode, std::uint32_t capacity, bool surfaces = false) {
+    void initialize(const std::vector<char>& shaderCode, std::uint32_t capacity, bool surfaces = false,bool conservative = false) {
         if (capacity == 0 || capacity_ != 0)
             throw std::invalid_argument("GPU culling initialization requires nonzero capacity and empty resources");
+        if(conservative)validateConservativeCullShader(shaderCode);
         try {
             bounds_ = backend_.allocator().createBuffer(capacity * sizeof(GpuCullBounds), VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
             source_ = backend_.allocator().createBuffer(capacity * sizeof(VkDrawIndexedIndirectCommand), VK_BUFFER_USAGE_STORAGE_BUFFER_BIT, true);
@@ -27,6 +29,7 @@ public:
                 VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT, true);
             capacity_ = capacity;
             surfaces_ = surfaces;
+            conservative_ = conservative;
             std::vector<rhi::DescriptorBindingDesc> bindings{
                 {0, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
                 {1, VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, 1, VK_SHADER_STAGE_COMPUTE_BIT},
@@ -53,7 +56,7 @@ public:
             const rhi::PushConstantRangeDesc range{VK_SHADER_STAGE_COMPUTE_BIT, sizeof(GpuCullParameters)};
             layout_ = backend_.createPipelineLayout(setLayout_, &range);
             const auto shader = backend_.createShaderModule(shaderCode);
-            try { pipeline_ = backend_.createComputePipeline({shader, layout_}); }
+            try { rhi::ComputePipelineDesc description{shader,layout_};if(conservative_)description.specialization={{0,1}};pipeline_ = backend_.createComputePipeline(description); }
             catch (...) { backend_.destroyShaderModule(shader); throw; }
             backend_.destroyShaderModule(shader);
             initialized_ = true;
@@ -86,6 +89,8 @@ public:
 
     void record(rhi::ICommandRecorder& commands, GpuCullParameters parameters) const {
         if (!initialized_) throw std::logic_error("GPU culling recording before initialization");
+        validateGpuCullParameters(parameters);
+        if(parameters.conservativeMargin>=0&&!conservative_)throw std::invalid_argument("Conservative cull parameters require an enabled pipeline");
         if (count_ == 0) return;
         commands.bindComputePipeline(pipeline_);
         commands.bindComputeDescriptorSet(layout_, set_);
@@ -125,6 +130,7 @@ private:
         count_ = 0;
         initialized_ = false;
         surfaces_ = false;
+        conservative_ = false;
     }
     rhi::IRhi& backend_;
     rhi::GpuBuffer bounds_{}, source_{}, output_{};
@@ -137,6 +143,7 @@ private:
     std::uint32_t capacity_ = 0, count_ = 0;
     bool initialized_ = false;
     bool surfaces_ = false;
+    bool conservative_ = false;
 };
 
 }  // namespace azurerender
