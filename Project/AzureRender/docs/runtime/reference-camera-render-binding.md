@@ -69,3 +69,4 @@ CPU 与 GPU 消费相同的保守余量及尺度平面。
 世界空间光照及设备深度由当前渲染机制消费。
 
 所属检查见[参考相机生产接入验收](../acceptance/nr/reference-camera-render-binding.md)。
+主线复验见[参考相机渲染主线验收](../acceptance/nr/reference-camera-binding-main-integration.md)。

@@ -16,8 +16,8 @@ int main()try{
         check(!computedMaterialViewEligible(caps,changed),"Eligibility must use exact uploaded values");
         *values[i]=std::numeric_limits<float>::quiet_NaN();check(!computedMaterialViewEligible(caps,changed),"NaN view input must use reference");
     }
-    for(unsigned i=0;i<7;++i){auto changed=caps;
-        switch(i){case 0:changed.vendorId=0x8086;break;case 1:changed.quadControl=false;break;case 2:changed.bindless=false;break;case 3:changed.singleSample=false;break;case 4:changed.referenceUv=true;break;case 5:changed.experimentalReuse=true;break;case 6:changed.depthAvailable=false;break;}
+    for(unsigned i=0;i<8;++i){auto changed=caps;
+        switch(i){case 0:changed.vendorId=0x8086;break;case 1:changed.quadControl=false;break;case 2:changed.bindless=false;break;case 3:changed.singleSample=false;break;case 4:changed.referenceUv=true;break;case 5:changed.experimentalReuse=true;break;case 6:changed.depthAvailable=false;break;case 7:changed.referenceCamera=true;break;}
         check(!computedMaterialViewEligible(changed,view),"Unsupported capability combination must use reference");
     }
     unsigned mapped=0;
@@ -31,6 +31,6 @@ int main()try{
     for(const auto path:{"mesh.frag.spv","mesh_bindless_samples.frag.spv","mesh_integral_bindless.frag.spv","mesh_fog_bindless.frag.spv","mesh_bindless_uvquad.frag.spv","mesh_bindless_radiance.frag.spv","mesh_bindless_early_isolation0.frag.spv","mesh_bindless_viewquad.frag.spv","mesh_bindless_coverage_lighting.frag.spv","mesh_bindless_custom.frag.spv","shadow_bindless.frag.spv","mesh_bindless.frag.spv.extra","mesh_bindless.frag"})
         check(!computedMaterialViewProgram(path),"Unknown or unsupported shader name must retain reference");
     check(computedMaterialViewProgram("D:\\shaders\\mesh_bindless.frag.spv")==std::optional<std::string>("D:\\shaders\\mesh_bindless_viewquad.frag.spv"),"Windows resource path mapping failed");
-    std::cout<<"Computed material view: exact uploaded values, seven capability fallbacks, "<<mapped<<" canonical programs and thirteen name refusals passed\n";
+    std::cout<<"Computed material view: exact uploaded values, eight capability fallbacks, "<<mapped<<" canonical programs and thirteen name refusals passed\n";
     return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}

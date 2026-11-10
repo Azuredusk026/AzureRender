@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[参考相机渲染主线验收](docs/acceptance/nr/reference-camera-binding-main-integration.md)通过双配置 46 项检查及双设备采集。
+保守剔除、实际光栅、拾取与重采原始四帧通过。
+
 [材质组合深度策略验收](docs/acceptance/nr/material-viewquad-production.md)通过关闭深度回退与严格四帧核对。
 候选受工作集与 GPU 帧预算约束，标准构建采用参考族。
 

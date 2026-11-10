@@ -30,6 +30,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[参考相机渲染主线验收](../acceptance/nr/reference-camera-binding-main-integration.md)通过双配置及双设备检查。
+实际视图核对 384 万个几何掩码像素，重采原始四帧精确一致。
+原生颜色与参考时间效果按各自门槛继续验收。
+
 [材质组合深度策略验收](../acceptance/nr/material-viewquad-production.md)通过严格四帧及深度回退。
 同宿主候选 GPU 均值减少约 14.72%。
 候选受峰值工作集及 GPU P95 门槛约束，标准构建采用参考族。

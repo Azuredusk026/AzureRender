@@ -1,5 +1,8 @@
 # 项目现状
 
+[参考相机渲染主线](acceptance/nr/reference-camera-binding-main-integration.md)通过保守剔除、实际光栅及拾取检查。
+双配置、双设备与重采原始四帧通过。
+
 [材质组合深度策略](acceptance/nr/material-viewquad-production.md)通过双设备边界检查及严格四帧。
 候选采用显式构建选项，正式帧预算及内存继续验收。
 

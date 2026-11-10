@@ -11,7 +11,7 @@ void CharacterSceneRenderer::initializeComputedMaterialView(const RenderContext&
     auto& caps=computedMaterialViewCapabilities_;
     caps.quadControl=context.fragmentQuadControl;
     caps.bindless=bindlessTextures_;caps.singleSample=context.rasterizationSamples==VK_SAMPLE_COUNT_1_BIT;
-    caps.referenceUv=materialUvNeeded_;caps.depthAvailable=true;
+    caps.referenceUv=materialUvNeeded_;caps.referenceCamera=referenceCameraPrepared_;caps.depthAvailable=true;
     if(context.fragmentQuadControl&&context.physicalDevice!=VK_NULL_HANDLE){
         VkPhysicalDeviceProperties properties{};vkGetPhysicalDeviceProperties(context.physicalDevice,&properties);caps.vendorId=properties.vendorID;
         const auto subgroup=queryMaterialUvGradientSupport(context.physicalDevice);

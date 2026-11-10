@@ -10,11 +10,12 @@ struct ComputedMaterialViewInputs {
 struct ComputedMaterialViewCapabilities {
     std::uint32_t vendorId=0;
     bool quadControl=false,bindless=false,singleSample=false,referenceUv=false,experimentalReuse=false,depthAvailable=false;
+    bool referenceCamera=false;
 };
 // Inputs are the exact values uploaded to the current material camera buffer.
 constexpr bool computedMaterialViewEligible(const ComputedMaterialViewCapabilities& caps,const ComputedMaterialViewInputs& input) noexcept {
     return caps.vendorId==0x10deU&&caps.quadControl&&caps.bindless&&caps.singleSample
-        &&!caps.referenceUv&&!caps.experimentalReuse&&caps.depthAvailable
+        &&!caps.referenceUv&&!caps.referenceCamera&&!caps.experimentalReuse&&caps.depthAvailable
         &&input.sceneLighting==1.F&&input.isolationMode==0.F&&input.effectMode==0.F
         &&input.effectEnabled==1.F&&input.reflectionSource==2.F;
 }
