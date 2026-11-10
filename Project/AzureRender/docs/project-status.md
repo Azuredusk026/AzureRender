@@ -1,5 +1,8 @@
 # 项目现状
 
+[材质纹理梯度主线接入](acceptance/nr/material-uv-main-integration.md)通过双配置及两设备复验。
+十八项检查、六组主线设备检查和严格四帧通过，正式整体条件继续验收。
+
 [独立材质视图](acceptance/nr/material-view-determinism.md)的接收计算及重复渲染回归通过。
 双配置、双设备与原始四帧完成所属核对。
 

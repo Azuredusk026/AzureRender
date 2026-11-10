@@ -1,0 +1,165 @@
+{
+  "status": "material-uv-main-integration-qualified",
+  "runtimeSourceCommit": "73300ab",
+  "sourceBranchCommit": "529f603",
+  "documentationCommits": [
+    "066f106",
+    "2971e9f"
+  ],
+  "build": {
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 9,
+        "skips": 0,
+        "publicGradientDevices": 2,
+        "seconds": 426.1720000000205
+      },
+      {
+        "config": "Debug",
+        "tests": 9,
+        "skips": 0,
+        "publicGradientDevices": 2,
+        "seconds": 377.469000000041
+      }
+    ],
+    "sourceUnchanged": true,
+    "oldProgramIdentitiesPerConfiguration": 688,
+    "qualifiedChildProgramIdentitiesPerConfiguration": 855,
+    "activeProgramCount": 856
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "seconds": 132.21899999998277,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "nativeFocus": {
+    "status": "passed",
+    "groups": [
+      {
+        "device": "nvidia",
+        "group": "footprint",
+        "passed": true,
+        "changedPixels": 2028,
+        "maximumByteChange": 34,
+        "bothDescriptorPoliciesExact": true
+      },
+      {
+        "device": "nvidia",
+        "group": "missing",
+        "passed": true,
+        "rejectionCases": 4,
+        "shaderLinksReleased": true
+      },
+      {
+        "device": "nvidia",
+        "group": "shadow",
+        "passed": true,
+        "capturedImages": 4,
+        "comparedPixelValues": 262144,
+        "allFourRgbExact": true,
+        "summaries": [
+          "native-nvidia-shadow\\coverage\\summary.json"
+        ]
+      },
+      {
+        "device": "intel",
+        "group": "footprint",
+        "passed": true,
+        "changedPixels": 162,
+        "maximumByteChange": 15,
+        "bothDescriptorPoliciesExact": true
+      },
+      {
+        "device": "intel",
+        "group": "missing",
+        "passed": true,
+        "rejectionCases": 4,
+        "shaderLinksReleased": true
+      },
+      {
+        "device": "intel",
+        "group": "shadow",
+        "passed": true,
+        "capturedImages": 4,
+        "comparedPixelValues": 262144,
+        "allFourRgbExact": true,
+        "summaries": [
+          "native-intel-shadow\\coverage\\summary.json"
+        ]
+      }
+    ],
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "protectedFilesExact": 13,
+    "seconds": 244.81200000003446
+  },
+  "descriptiveMemory": {
+    "peakWorkingSetBytes": 2046107648,
+    "observationIntervalMs": 50,
+    "observations": 2564,
+    "allocator": {
+      "bufferAllocations": 2042,
+      "imageAllocations": 442,
+      "liveBuffers": 881,
+      "liveImages": 442,
+      "bufferBytes": 2291424896,
+      "imageBytes": 2819632640,
+      "liveBufferBytes": 234193600,
+      "liveImageBytes": 2819632640,
+      "deviceLocalPeakBytes": 3316325184,
+      "bufferMemoryProperties": {
+        "samples": 2042,
+        "liveDeviceLocalBytes": 219448000,
+        "liveNonDeviceLocalBytes": 14745600,
+        "liveMappedDeviceBytes": 44368320,
+        "liveMappedNonLocalDeviceBytes": 0
+      }
+    },
+    "scope": "Strict four-frame joint capture; descriptive memory observation, separate from the formal P5 workload and steady-state sampling"
+  },
+  "childMatrix": {
+    "groups": 36,
+    "images": 128,
+    "scope": "Source branch shader/contract matrix; 855 programs and seven critical files byte-identical; main host separately verified by eighteen checks, four public GPU processes and six native groups"
+  },
+  "projectInputsExact": 1729,
+  "protectedFilesExact": 13,
+  "allApplicableChecksPassed": true,
+  "formalPerformanceAccepted": false,
+  "overall": "failed-user-review"
+}

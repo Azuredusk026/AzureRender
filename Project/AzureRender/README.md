@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[材质纹理梯度主线验收](docs/acceptance/nr/material-uv-main-integration.md)通过双配置十八项检查及两设备六组复验。
+原始四帧摘要一致，主线每配置包含 856 份程序。
+
 [纹理格式能力与容量](docs/acceptance/nr/texture-storage-format-scope.md)保存两设备实际查询及源图像容量范围。
 NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工作负载验收。
 

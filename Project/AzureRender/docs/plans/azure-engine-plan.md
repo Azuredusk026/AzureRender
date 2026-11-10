@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[材质纹理梯度主线验收](../acceptance/nr/material-uv-main-integration.md)通过双配置十八项检查。
+两设备六组主线复验及原四帧摘要核对通过，程序集为 856 份。
+
 [展开接收计算的局部效率](../acceptance/nr/unrolled-computed-view-local-qualification.md)完成两种候选的六附件核对。
 完整材质降幅至多约 19.49%，效率未准入，候选保持隔离。
 关闭风格化的独立控制约为 18.86%，六附件逐字节一致。
@@ -1383,7 +1386,7 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [材质主 UV 绑定](../acceptance/nr/material-primary-uv-policy.md)通过两配置、双设备的三十六组检查。
 公开材质、阴影、覆盖、足迹正控制及失败清理通过，原始四帧摘要精确一致。
-当前程序集为 855 份，实际相机与几何深度组合继续验收。
+主线程序集为 856 份，实际相机与几何深度组合继续验收。
 
 [实际网格位置](../acceptance/nr/actual-world-depth-source.md)通过公开深度的完整区域来源核对。
 两设备的可见量与原生位置控制逐字节一致，场景级投影继续接入。
