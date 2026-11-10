@@ -1,0 +1,245 @@
+{
+  "status": "qualified-scene-reference-camera-selection-and-rigid-calibration",
+  "overall": "failed-user-review",
+  "baseCommit": "80719a9",
+  "sourceSha256": {
+    "CMakeLists.txt": "171d73c2928e18558a8ad0c76edf275cee995da51cd069dcd00606ec00e43b9b",
+    "src/render/ReferenceCameraCalibration.hpp": "d9fe142c9058939bf856ca315bc01060699280f673047cd4b3657509f55be812",
+    "src/render/ReferenceCameraView.hpp": "8b6db800ffcfae64ccf5d008ea18bc9dc4c4c9ae7d9464a74e325d7ea24cbf0b",
+    "src/ecs/ReferenceCameraComponents.hpp": "1b5e2bb23aa0edebbe0c9e0d0e1fb54098829f05a13af1ac875b08c9a65279ff",
+    "src/runtime/camera/GameCameraService.hpp": "ba6de021db44f510031778221f5202b1e72a10bb9d1cdb449e56e9328fdc4e6e",
+    "src/runtime/camera/GameCameraService.cpp": "94afa861e94e548bbb651e65d922eb1f3440d3a027784f8047c7926a1f06cd6a",
+    "src/runtime/GameRuntime.hpp": "ff46eac3effbc4265f93612757ab63b72eac8c96866db60e4b8133220523fb0e",
+    "src/runtime/GameRuntime.cpp": "3b28681607df148e135f6e6b75c0e35bd032eeb0ec880c194684310afc235809",
+    "src/runtime/ComponentRegistry.cpp": "d479e86ea6c00b874554d1e2217f7ab645286c6b417dcdfa0e5819a6a3a5b018",
+    "src/app/AzureRenderApp.cpp": "431c9103241560772b0b9f233dfd51cab9024d0d5034ba5639e3d0f06620af6e",
+    "src/editor/EditorSession.cpp": "80cf867b7b2dbf88223822032db33adc82e6a01a4d3fea4ed522296c84b9e609",
+    "tests/ReferenceCameraSelectionTests.cpp": "848721214c3cac7ba18a03d45b633fc150a7a7d6da5ffc90373b4a5a4a40847d",
+    "tests/ReferenceCameraMacroTests.cpp": "6bde9b631ee1ca456ffca4665f4b40d10d6536606bd0cdc82008cb3109650e32"
+  },
+  "cpu": [
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceCameraSelectionTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera registration, composition, anchor bits, 256 rigid-motion points, missing/disabled/follow contracts, persistence and owned values passed; maximumPixelError=0.000203451",
+      "binarySha256": "531f4b871f770e9d3fc6c5c5938ef5e875bdec6a5ea94aaea94f5aa51b78432d",
+      "maximumPixelError": 0.000203451
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceCameraSelectionTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera registration, composition, anchor bits, 256 rigid-motion points, missing/disabled/follow contracts, persistence and owned values passed; maximumPixelError=0.000105427",
+      "binarySha256": "531f4b871f770e9d3fc6c5c5938ef5e875bdec6a5ea94aaea94f5aa51b78432d",
+      "maximumPixelError": 0.000105427
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceCameraMacroTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "binarySha256": "917229792e64b8959b59408ff06cb1fcaf7db914720eb7b00465b6704b23b51d"
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureCameraSystemTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Camera registration, hierarchy, selection and render ownership passed",
+      "binarySha256": "a2e76aaa439d577dec3e3bc1826cde8ac322f57cc5b8d3633c86d2c4f5e2fdfb"
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureComponentRegistryTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Registered components, metadata, migration and production codec passed",
+      "binarySha256": "77bab5f901162f0c21ba38ce264bb73299db3c8b85b7ce8f56560c01977c8661"
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureProjectReferenceViewsTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "2 reference views, signed-zero persistence, project reopen/move, 22 JSON rejections, invalid-save preservation, size boundary and failed-replacement cleanup passed",
+      "binarySha256": "e24109de2df714abc2b52a45d62e6f5b5ed14df00e4ddc831bb2026d20b75e1b"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceCameraSelectionTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera registration, composition, anchor bits, 256 rigid-motion points, missing/disabled/follow contracts, persistence and owned values passed; maximumPixelError=0.000203451",
+      "binarySha256": "8c43c946f6ffdb16d16a14043a3dbb83db36620b42aeed6f03b5522eacf6419c",
+      "maximumPixelError": 0.000203451
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceCameraSelectionTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera registration, composition, anchor bits, 256 rigid-motion points, missing/disabled/follow contracts, persistence and owned values passed; maximumPixelError=0.000105427",
+      "binarySha256": "8c43c946f6ffdb16d16a14043a3dbb83db36620b42aeed6f03b5522eacf6419c",
+      "maximumPixelError": 0.000105427
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceCameraMacroTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "binarySha256": "ab87f5636f5a2f31b9ad05000475eb62dee61bb88a3fc6e565cdbc8d0e56a167"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureCameraSystemTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Camera registration, hierarchy, selection and render ownership passed",
+      "binarySha256": "bbde129ca80fdb996a95cd0a31da93b3c5bca2f451d056700d5b864a98367a85"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureComponentRegistryTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Registered components, metadata, migration and production codec passed",
+      "binarySha256": "ebe1497608b7b7335c764d954072de2b80c579063611c09b8c7e390f2e12b552"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureProjectReferenceViewsTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "2 reference views, signed-zero persistence, project reopen/move, 22 JSON rejections, invalid-save preservation, size boundary and failed-replacement cleanup passed",
+      "binarySha256": "c895b91a9a788fa17d60516bbb212cb844d2536375d13af5b5ad9c7b44599434"
+    }
+  ],
+  "identities": [
+    {
+      "configuration": "release",
+      "programsExact": 859,
+      "hosts": {
+        "AzurePlayer": "efcd40684242a740b191233838fe81fba170fd0665ac78dedb356cbd1d6eeef1",
+        "AzureRender": "340c73246512518a7d12feaaf9e1945bb7e4b7d50dbeb19abdf434358a5d827e",
+        "AzureGameLauncher": "36b804c54355aeca840046b6dfef51d366a117c5654a5a05133f36b6d20ad2fc"
+      },
+      "build": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 20.64100000000326,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-030224-scene-reference-camera-selection-812cac\\build.py",
+          "Release"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+      }
+    },
+    {
+      "configuration": "debug",
+      "programsExact": 859,
+      "hosts": {
+        "AzurePlayer": "0e09e080e8b14cbc17aef3cff3a3205c04df7d2a10a364aa4bdff54541e27424"
+      },
+      "build": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 18.39100000000326,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-030224-scene-reference-camera-selection-812cac\\build.py",
+          "Debug"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+      }
+    }
+  ],
+  "maximumPixelError": 0.000203451,
+  "nativeMaximumPixelError": 0.000105427,
+  "pixelErrorBudget": 0.00390625,
+  "shaderProgramsAdded": 0,
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "fourExecution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 122.32800000003772,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-030224-scene-reference-camera-selection-812cac\\default-four.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-030224-scene-reference-camera-selection-812cac\\tmp"
+  },
+  "referenceMacroFix": "near local variable renamed to nearPoint; red/green macro probe and two-config actual host integration verified",
+  "remaining": [
+    "Reference raster and picking consumers",
+    "Production hair 73 color failures",
+    "Intel reference depth/visibility 96 failures",
+    "Skin, eyes, GI, reflection and dynamic appearance gates"
+  ],
+  "archive": {
+    "bytes": 170196,
+    "sha256": "b3571490ffb83d622f0881e58532823216e645723b47e336d8affb8bbbe9da02",
+    "members": 74
+  }
+}

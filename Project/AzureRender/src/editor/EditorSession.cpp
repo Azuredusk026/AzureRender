@@ -6,6 +6,7 @@
 #include "runtime/ModuleAssembly.hpp"
 #include "runtime/EngineSettings.hpp"
 #include "runtime/ProjectSettings.hpp"
+#include "runtime/ProjectReferenceViews.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 #include "gameplay/SharedSystems.hpp"
 #include "runtime/physics/PhysicsShapeFactory.hpp"
@@ -36,6 +37,7 @@ struct EditorSession::PlayState {
         if(simulation){SystemRegistry registry;gameplay::registerSharedSystems(registry);
             game=std::make_unique<GameRuntime>(runtime,registry,nlohmann::json{{"schemaVersion",1},{"input",nlohmann::json::object()},{"systems",nlohmann::json::array({{{"id","physics"},{"config",nlohmann::json::object()}}})}});
         }else game=std::make_unique<GameRuntime>(runtime,application::systems(),levels?application::configuration(context.project()):application::explorationConfiguration());
+        if(context.isProject())game->setReferenceViews(loadProjectReferenceViews(context.project()).views);
         if(context.isProject())game->physics().setMeshResolver(collisionMeshAssets(levels?levels->assets():context.assets()));
         game->physics().validateScene(runtime);
         if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=application::scripts(context.project(),runtime,*game,levels->assets());

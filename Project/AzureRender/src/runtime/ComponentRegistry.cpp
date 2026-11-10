@@ -2,6 +2,7 @@
 #include "runtime/GeneratedComponents.hpp"
 #include "runtime/physics/PhysicsDescriptors.hpp"
 #include "animation/ExpressionPose.hpp"
+#include "render/ReferenceCameraCalibration.hpp"
 namespace azurerender {
 void ComponentRegistry::add(ComponentBinding value) {
     if(sealed_)throw std::logic_error("Component registration is sealed");
@@ -83,6 +84,11 @@ ComponentRegistry makeRuntimeComponentRegistry() {
     result.setPresentation("azure.character",{"角色控制器","物理",{}, {"azure.rigid-body"}});
     result.setPresentation("azure.hinge",{"铰链约束","物理"});
     result.setPresentation("azure.camera",{"游戏相机","场景"});
+    result.setPresentation("azure.reference-camera",{"参考相机","场景",{"azure.camera"}});
+    result.addValidation("azure.reference-camera",[](const Json& value){
+        const auto name=value.at("view").get<std::string>();if(name.size()>64||(value.at("enabled").get<bool>()&&name.empty()))throw std::invalid_argument("Enabled reference camera requires a view name of1..64 bytes");
+        validateReferenceCameraPose({value.at("anchorPosition").get<std::array<float,3>>(),value.at("anchorRight").get<std::array<float,3>>(),value.at("anchorUp").get<std::array<float,3>>(),value.at("anchorBack").get<std::array<float,3>>()});
+    });
     result.addValidation("azure.camera",[](const Json& value){if(value.at("nearPlane").get<float>()>=value.at("farPlane").get<float>())throw std::invalid_argument("Camera requires near < far");});
     result.setPresentation("azure.third-person-camera",{"第三人称相机","场景"});
     result.setPresentation("azure.animator",{"动画播放器","呈现"});
