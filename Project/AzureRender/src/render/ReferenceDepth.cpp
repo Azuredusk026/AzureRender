@@ -13,18 +13,35 @@ void validate(const ReferenceDepthConfig& config){
     require(config.schemaVersion==1,"Unsupported reference depth version");
     require(config.convention==ReferenceDepthConvention::Forward||config.convention==ReferenceDepthConvention::Reversed,"Unknown reference depth convention");
 }
-struct alignas(16) Parameters {ReferenceClipProjectionParameters projection;std::array<unsigned,4> control{};};
-static_assert(sizeof(Parameters)==96);
+struct alignas(16) Parameters {ReferenceClipProjectionParameters projection;std::array<unsigned,4> control{};std::array<float,4> coverage{};};
+static_assert(sizeof(Parameters)==112);
+constexpr unsigned maskedLimit=128;
+void validate(const ReferenceDepthSurface& surface,bool maskedAvailable){
+    require(surface.schemaVersion==1,"Unsupported reference depth surface version");
+    require(surface.cullMode==VK_CULL_MODE_NONE||surface.cullMode==VK_CULL_MODE_FRONT_BIT||surface.cullMode==VK_CULL_MODE_BACK_BIT,"Unknown reference depth cull mode");
+    require(surface.frontFace==VK_FRONT_FACE_CLOCKWISE||surface.frontFace==VK_FRONT_FACE_COUNTER_CLOCKWISE,"Unknown reference depth front face");
+    if(!surface.alpha)return;
+    const auto& alpha=*surface.alpha;
+    require(maskedAvailable,"Reference depth coverage requires masked shaders");
+    require(alpha.uv&&alpha.image&&alpha.sampler,"Reference depth coverage requires UVs, image and sampler");
+    require(alpha.layout==VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,"Reference depth coverage requires sampled color layout");
+    require(alpha.channel<4&&std::isfinite(alpha.cutoff)&&alpha.cutoff>=0&&alpha.cutoff<=1
+        &&std::isfinite(alpha.lodBias)&&std::abs(alpha.lodBias)<=16,"Invalid reference depth coverage channel, cutoff or LOD bias");
+}
 constexpr VkImageUsageFlags colorUsage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
 constexpr VkImageUsageFlags depthUsage=VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT|VK_IMAGE_USAGE_SAMPLED_BIT|VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
 }
 struct ReferenceDepthGpu::Impl {
-    struct Slot {rhi::GpuImage color{},depth{};VkImageView colorView{},depthView{};VkFramebuffer framebuffer{};bool initialized=false;};
+    struct Slot {rhi::GpuImage color{},depth{};VkImageView colorView{},depthView{};VkFramebuffer framebuffer{};std::vector<VkDescriptorSet> sets;bool initialized=false;};
     rhi::IRhi& backend;VkExtent2D extent;ReferenceDepthConfig config;std::uint64_t bytes;std::vector<Slot> slots;
-    VkDescriptorSetLayout descriptors{};VkPipelineLayout layout{};VkRenderPass pass{};VkPipeline pipeline{};
+    VkDescriptorSetLayout descriptors{};VkDescriptorPool pool{};VkPipelineLayout layout{};VkRenderPass pass{};
+    std::array<VkPipeline,12> pipelines{};std::array<VkShaderModule,2> vertices{},fragments{};bool maskedAvailable=false;
     Impl(rhi::IRhi& b,VkExtent2D e,const ReferenceDepthConfig& c,unsigned count):backend(b),extent(e),config(c),bytes(budget(e,count)){}
     ~Impl(){
-        if(pipeline)backend.destroyPipeline(pipeline);if(layout)backend.destroyPipelineLayout(layout);
+        for(auto pipeline:pipelines)if(pipeline)backend.destroyPipeline(pipeline);
+        for(auto module:vertices)if(module)backend.destroyShaderModule(module);
+        for(auto module:fragments)if(module)backend.destroyShaderModule(module);
+        if(layout)backend.destroyPipelineLayout(layout);if(pool)backend.destroyDescriptorPool(pool);
         if(descriptors)backend.destroyDescriptorSetLayout(descriptors);
         for(auto& slot:slots){
             if(slot.framebuffer)backend.destroyFramebuffer(slot.framebuffer);
@@ -33,29 +50,38 @@ struct ReferenceDepthGpu::Impl {
         }
         if(pass)backend.destroyRenderPass(pass);
     }
+    VkPipeline pipeline(const ReferenceDepthSurface& surface){
+        const unsigned masked=surface.alpha?1:0,cull=surface.cullMode==VK_CULL_MODE_FRONT_BIT?1:surface.cullMode==VK_CULL_MODE_BACK_BIT?2:0;
+        auto& cached=pipelines[masked*6+(surface.frontFace==VK_FRONT_FACE_COUNTER_CLOCKWISE?3:0)+cull];
+        if(cached)return cached;
+        rhi::GraphicsPipelineDesc graphics;graphics.vertexShader=vertices[masked];graphics.fragmentShader=fragments[masked];
+        if(masked){graphics.vertexBindings={{0,16},{1,8}};graphics.vertexAttributes={{0,VK_FORMAT_R32G32B32A32_SFLOAT,0,0},{1,VK_FORMAT_R32G32_SFLOAT,0,1}};}
+        else{graphics.vertexStride=16;graphics.vertexAttributes={{0,VK_FORMAT_R32G32B32A32_SFLOAT,0}};}
+        graphics.cullMode=surface.cullMode;graphics.frontFace=surface.frontFace;graphics.colorAttachmentCount=1;graphics.renderPass=pass;graphics.layout=layout;
+        graphics.depthCompare=config.convention==ReferenceDepthConvention::Reversed?VK_COMPARE_OP_GREATER:VK_COMPARE_OP_LESS;
+        cached=backend.createGraphicsPipeline(graphics);return cached;
+    }
     void initialize(unsigned count,const ReferenceDepthShaders& shaders){
         // Prepare and validate the marked arithmetic before allocating resources.
         const auto prepared=prepareReferenceFmaShader(shaders.vertex);
         require(prepared.fusedResults==3,"Reference depth projection requires three marked Fma results");
-        descriptors=backend.createDescriptorSetLayout({});
-        const rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_VERTEX_BIT,sizeof(Parameters)};
+        require(shaders.maskedVertex.empty()==shaders.maskedFragment.empty(),"Reference depth masked shaders must form a complete pair");
+        maskedAvailable=!shaders.maskedVertex.empty();ReferenceFmaShader maskedPrepared;
+        if(maskedAvailable){maskedPrepared=prepareReferenceFmaShader(shaders.maskedVertex);require(maskedPrepared.fusedResults==3,"Masked reference projection requires three marked Fma results");}
+        descriptors=backend.createDescriptorSetLayout(maskedAvailable?std::vector<rhi::DescriptorBindingDesc>{{0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT}}:std::vector<rhi::DescriptorBindingDesc>{});
+        const rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(Parameters)};
         layout=backend.createPipelineLayout(descriptors,&push);
         rhi::RenderPassDesc render;render.depthAttachment=1;
         render.attachments={{VK_FORMAT_R32_SFLOAT,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,true,true,false},
             {VK_FORMAT_D32_SFLOAT,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,true,true,true}};
         pass=backend.createRenderPass(render);
-        VkShaderModule vertex{},fragment{};
-        try{
-            vertex=backend.createShaderModule(prepared.code);fragment=backend.createShaderModule(shaders.fragment);
-            rhi::GraphicsPipelineDesc graphics;graphics.vertexShader=vertex;graphics.fragmentShader=fragment;
-            graphics.vertexStride=16;graphics.vertexAttributes={{0,VK_FORMAT_R32G32B32A32_SFLOAT,0}};
-            graphics.cullMode=VK_CULL_MODE_NONE;graphics.colorAttachmentCount=1;graphics.renderPass=pass;graphics.layout=layout;
-            graphics.depthCompare=config.convention==ReferenceDepthConvention::Reversed?VK_COMPARE_OP_GREATER:VK_COMPARE_OP_LESS;
-            pipeline=backend.createGraphicsPipeline(graphics);
-        }catch(...){if(vertex)backend.destroyShaderModule(vertex);if(fragment)backend.destroyShaderModule(fragment);throw;}
-        backend.destroyShaderModule(vertex);backend.destroyShaderModule(fragment);
+        vertices[0]=backend.createShaderModule(prepared.code);fragments[0]=backend.createShaderModule(shaders.fragment);
+        if(maskedAvailable){vertices[1]=backend.createShaderModule(maskedPrepared.code);fragments[1]=backend.createShaderModule(shaders.maskedFragment);
+            rhi::DescriptorPoolDesc descriptorPool;descriptorPool.maxSets=count*maskedLimit;descriptorPool.sizes={{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,count*maskedLimit}};pool=backend.createDescriptorPool(descriptorPool);}
+        (void)pipeline({});
         slots.resize(count);
         for(auto& slot:slots){
+            if(maskedAvailable)slot.sets=backend.allocateDescriptorSets(pool,descriptors,maskedLimit);
             slot.color=backend.allocator().createImage2D(extent.width,extent.height,VK_FORMAT_R32_SFLOAT,colorUsage);
             slot.depth=backend.allocator().createImage2D(extent.width,extent.height,VK_FORMAT_D32_SFLOAT,depthUsage);
             slot.colorView=backend.createImageView(slot.color.image,VK_FORMAT_R32_SFLOAT,VK_IMAGE_ASPECT_COLOR_BIT,1);
@@ -71,6 +97,7 @@ bool ReferenceDepthGpu::supported(rhi::IRhi& backend,VkExtent2D extent,unsigned 
         &&(backend.imageSampleCounts(VK_FORMAT_D32_SFLOAT,depthUsage)&VK_SAMPLE_COUNT_1_BIT);
 }
 ReferenceDepthShaders ReferenceDepthShaders::load(const std::string& directory){return {readBinaryFile(directory+"/reference_depth.vert.spv"),readBinaryFile(directory+"/reference_depth.frag.spv")};}
+ReferenceDepthShaders ReferenceDepthShaders::loadMasked(const std::string& directory){auto result=load(directory);result.maskedVertex=readBinaryFile(directory+"/reference_depth_masked.vert.spv");result.maskedFragment=readBinaryFile(directory+"/reference_depth_masked.frag.spv");return result;}
 ReferenceDepthGpu::ReferenceDepthGpu(rhi::IRhi& backend,VkExtent2D extent,unsigned frames,const ReferenceDepthConfig& config,const ReferenceDepthShaders& shaders){
     validate(config);require(supported(backend,extent,frames),"Reference depth formats, extent or slot budget unavailable");
     auto candidate=std::make_unique<Impl>(backend,extent,config,frames);candidate->initialize(frames,shaders);impl_=std::move(candidate);
@@ -83,8 +110,15 @@ ReferenceDepthOutput ReferenceDepthGpu::output(unsigned index) const {
 void ReferenceDepthGpu::record(rhi::ICommandRecorder& commands,unsigned index,const ReferenceClipProjectionProfile& profile,const std::vector<ReferenceDepthGeometry>& geometry){
     validateReferenceClipProjection(profile);auto& state=*impl_;auto& slot=state.slots.at(index);
     require(geometry.size()<=65536,"Reference depth draw count exceeds 65536");
-    for(const auto& draw:geometry)require(draw.positions&&draw.indices&&draw.vertexCount&&draw.vertexCount<=16777216
+    unsigned maskedCount=0;
+    for(const auto& draw:geometry){require(draw.positions&&draw.indices&&draw.vertexCount&&draw.vertexCount<=16777216
         &&draw.indexCount&&draw.indexCount<=67108864&&draw.indexCount%3==0,"Invalid reference depth geometry buffers or counts");
+        validate(draw.surface,state.maskedAvailable);maskedCount+=draw.surface.alpha?1U:0U;}
+    require(maskedCount<=maskedLimit,"Reference depth coverage exceeds 128 draws per slot");
+    for(const auto& draw:geometry)(void)state.pipeline(draw.surface);
+    unsigned maskedIndex=0;
+    for(const auto& draw:geometry)if(draw.surface.alpha){const auto& alpha=*draw.surface.alpha;
+        state.backend.writeDescriptorImage({slot.sets[maskedIndex++],0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,alpha.image,alpha.sampler,alpha.layout});}
     Parameters parameters;parameters.projection=profile.parameters;parameters.control[0]=state.config.flipNdcY?1U:0U;
     commands.imageBarrier({slot.color.image,slot.initialized?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,1,
         VkPipelineStageFlags(slot.initialized?VK_PIPELINE_STAGE_ALL_COMMANDS_BIT:VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT),VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
@@ -98,9 +132,14 @@ void ReferenceDepthGpu::record(rhi::ICommandRecorder& commands,unsigned index,co
     const float clear=state.config.convention==ReferenceDepthConvention::Reversed?0.F:1.F;
     rhi::RenderPassBeginDesc begin;begin.renderPass=state.pass;begin.framebuffer=slot.framebuffer;begin.extent=state.extent;begin.clearValues.resize(2);
     begin.clearValues[0].color.float32[0]=clear;begin.clearValues[1].depthStencil={clear,0};
-    commands.beginRenderPass(begin);commands.bindPipeline(state.pipeline);commands.setViewport(float(state.extent.width),float(state.extent.height));commands.setScissor(state.extent);
-    commands.pushConstants(state.layout,VK_SHADER_STAGE_VERTEX_BIT,0,&parameters,sizeof(parameters));
-    for(const auto& draw:geometry){commands.bindVertexBuffer(draw.positions,0);commands.bindIndexBuffer(draw.indices,0);commands.drawIndexed(draw.indexCount,0);}
+    commands.beginRenderPass(begin);commands.setViewport(float(state.extent.width),float(state.extent.height));commands.setScissor(state.extent);maskedIndex=0;
+    for(const auto& draw:geometry){
+        commands.bindPipeline(state.pipeline(draw.surface));
+        if(draw.surface.alpha){const auto& alpha=*draw.surface.alpha;parameters.control[1]=alpha.channel;parameters.coverage={alpha.cutoff,alpha.lodBias,0,0};
+            commands.bindDescriptorSet(state.layout,slot.sets[maskedIndex++]);commands.bindVertexStream(1,alpha.uv,0);}
+        commands.pushConstants(state.layout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&parameters,sizeof(parameters));
+        commands.bindVertexBuffer(draw.positions,0);commands.bindIndexBuffer(draw.indices,0);commands.drawIndexed(draw.indexCount,0);
+    }
     commands.endRenderPass();
     commands.imageBarrier({slot.color.image,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
         VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
