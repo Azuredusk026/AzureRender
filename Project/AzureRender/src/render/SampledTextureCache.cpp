@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <chrono>
+#include <array>
 #include <cstring>
 #include <limits>
 #include <stdexcept>
@@ -53,6 +54,49 @@ struct StagingBuffer {
     rhi::GpuBuffer value;
     ~StagingBuffer() { allocator.destroyBuffer(value); }
 };
+struct ChannelPacking {
+    unsigned count=4;
+    std::array<unsigned,4> sources{};
+    VkComponentMapping mapping{};
+};
+ChannelPacking channelPacking(const std::vector<std::uint8_t>& pixels) {
+    // Candidate relations only disappear as further mip texels are inspected.
+    // A short prefix rejects ordinary RGB/RGBA data without scanning its tail.
+    std::array<unsigned,4> candidates{3,7,15,31};
+    const auto layout=[&] {
+        ChannelPacking result;result.count=0;
+        std::array<VkComponentSwizzle,4> swizzles{};
+        constexpr std::array<VkComponentSwizzle,4> stored{VK_COMPONENT_SWIZZLE_R,VK_COMPONENT_SWIZZLE_G,VK_COMPONENT_SWIZZLE_B,VK_COMPONENT_SWIZZLE_A};
+        for(unsigned c=0;c<4;++c) {
+            if(candidates[c]&1U)swizzles[c]=VK_COMPONENT_SWIZZLE_ZERO;
+            else if(candidates[c]&2U)swizzles[c]=VK_COMPONENT_SWIZZLE_ONE;
+            else {
+                unsigned prior=0;
+                for(;prior<c;++prior)if(candidates[c]&(4U<<prior))break;
+                if(prior<c)swizzles[c]=swizzles[prior];
+                else {result.sources[result.count]=c;swizzles[c]=stored[result.count++];}
+            }
+        }
+        // Constant images still retain their extent and mip count in R8.
+        if(result.count==0){result.count=1;result.sources[0]=0;}
+        result.mapping={swizzles[0],swizzles[1],swizzles[2],swizzles[3]};return result;
+    };
+    for(std::size_t at=0;at<pixels.size();at+=4) {
+        for(unsigned c=0;c<4;++c) {
+            const auto value=pixels[at+c];
+            if(value!=0)candidates[c]&=~1U;
+            if(value!=255)candidates[c]&=~2U;
+            for(unsigned prior=0;prior<c;++prior)
+                if(value!=pixels[at+prior])candidates[c]&=~(4U<<prior);
+        }
+        if(at==252&&layout().count>2)return {};
+    }
+    auto result=layout();return result.count<=2?result:ChannelPacking{};
+}
+bool channelAddressMode(VkSamplerAddressMode mode) {
+    return mode==VK_SAMPLER_ADDRESS_MODE_REPEAT||mode==VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT
+        ||mode==VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+}
 }
 
 struct SampledTextureCache::Entry {
@@ -72,8 +116,8 @@ struct SampledTextureCache::Entry {
     }
 };
 
-SampledTextureCache::SampledTextureCache(rhi::IGpuAllocator& allocator, rhi::IRhi& rhi)
-    : allocator_(allocator), rhi_(rhi) {}
+SampledTextureCache::SampledTextureCache(rhi::IGpuAllocator& allocator, rhi::IRhi& rhi,bool compactLinearChannels)
+    : allocator_(allocator), rhi_(rhi),compactLinearChannels_(compactLinearChannels) {}
 SampledTextureCache::~SampledTextureCache() { clear(); }
 
 SampledTextureBinding SampledTextureCache::acquire(const std::vector<std::uint8_t>& pixels,
@@ -155,19 +199,38 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     }
     }
     const bool suppliedMips=levels==1||storage->size()==residentBytes;
+    ChannelPacking packing;
+    VkFormat physicalFormat=request.format;
+    std::vector<std::uint8_t> packed;
+    if(compactLinearChannels_&&suppliedMips&&request.format==VK_FORMAT_R8G8B8A8_UNORM
+        &&rhi_.supportsSampledImageViewMapping()&&channelAddressMode(effective.sampler.addressU)
+        &&channelAddressMode(effective.sampler.addressV)&&channelAddressMode(effective.sampler.addressW)) {
+        packing=channelPacking(*storage);
+        if(packing.count<4) {
+            const auto format=packing.count==1?VK_FORMAT_R8_UNORM:VK_FORMAT_R8G8_UNORM;
+            if(rhi_.supportsSampledImage(format,effective.sampler.filter==VK_FILTER_LINEAR||effective.sampler.effectiveMagFilter()==VK_FILTER_LINEAR)) {
+                packed.resize(storage->size()/4*packing.count);
+                for(std::size_t p=0;p<storage->size()/4;++p)for(unsigned c=0;c<packing.count;++c)
+                    packed[p*packing.count+c]=(*storage)[p*4+packing.sources[c]];
+                storage=&packed;physicalFormat=format;
+            }else packing=ChannelPacking{};
+        }
+    }
+    const auto physicalBytes=residentBytes/4*packing.count;
     {
     TimedSection timer{statistics_.uploadMs};
     StagingBuffer staging{allocator_,allocator_.createBuffer(storage->size(),VK_BUFFER_USAGE_TRANSFER_SRC_BIT,true)};
     if(!staging.value.mapped)throw std::runtime_error("Texture staging buffer is not mapped");
     std::memcpy(staging.value.mapped,storage->data(),storage->size());
-    entry->image=allocator_.createImage2D(request.width,request.height,request.format,
+    entry->image=allocator_.createImage2D(request.width,request.height,physicalFormat,
         VK_IMAGE_USAGE_TRANSFER_DST_BIT|VK_IMAGE_USAGE_SAMPLED_BIT
             |(levels>1?VK_IMAGE_USAGE_TRANSFER_SRC_BIT:0),levels);
     rhi_.transitionImageLayout(entry->image,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,levels);
-    rhi_.copyBufferToImage(staging.value,entry->image,request.width,request.height,suppliedMips?levels:1,4);
+    rhi_.copyBufferToImage(staging.value,entry->image,request.width,request.height,suppliedMips?levels:1,packing.count);
     if(levels>1&&!suppliedMips)rhi_.generateMipmaps(entry->image,request.format,request.width,request.height,levels);
     else rhi_.transitionImageLayout(entry->image,VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,levels);
-    entry->view=rhi_.createImageView(entry->image.image,request.format,VK_IMAGE_ASPECT_COLOR_BIT,levels);
+    entry->view=packing.count<4?rhi_.createMappedSampledImageView(entry->image.image,physicalFormat,levels,packing.mapping)
+        :rhi_.createImageView(entry->image.image,request.format,VK_IMAGE_ASPECT_COLOR_BIT,levels);
     entry->sampler=rhi_.createSampler(effective.sampler);
     }
     const SampledTextureBinding result{entry->view,entry->sampler};
@@ -179,7 +242,9 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
         statistics_.transferredPixelBytes+=inputBytes;
     }else statistics_.copiedPixelBytes+=inputBytes;
     ++statistics_.requests;++statistics_.uniqueTextures;
-    statistics_.requestedBytes+=residentBytes;statistics_.residentBytes+=residentBytes;
+    statistics_.requestedBytes+=residentBytes;statistics_.residentBytes+=physicalBytes;
+    statistics_.channelSavedBytes+=residentBytes-physicalBytes;
+    if(packing.count<4)++statistics_.compactedTextures;
     statistics_.retainedPixelBytes+=inputBytes;
     return result;
 }

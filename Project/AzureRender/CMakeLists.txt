@@ -368,6 +368,7 @@ compile_shader("${SHADER_SOURCE_DIR}/transparent_deform.comp")
 compile_shader("${SHADER_SOURCE_DIR}/transparent_depth_keys.comp")
 compile_shader("${SHADER_SOURCE_DIR}/transparent_index_scatter.comp")
 compile_shader("${SHADER_SOURCE_DIR}/surface_response_test.comp")
+compile_shader("${SHADER_SOURCE_DIR}/sampled_texture_channels_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/motion_projection_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/motion_pose_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/motion_vector.vert")
@@ -918,6 +919,7 @@ add_library(AzureRenderCore STATIC
     src/rhi/VulkanPipelineCache.cpp
     src/rhi/UploadRingBuffer.cpp
     src/rhi/VulkanRhi.cpp
+    src/rhi/VulkanImageViews.cpp
     src/rhi/VulkanMemoryAllocatorImpl.cpp
     src/scenes/CharacterSceneRenderer.cpp
     src/scenes/pathtracing/PathTracingSceneRenderer.cpp
@@ -1599,6 +1601,11 @@ if(BUILD_TESTING)
     target_include_directories(AzureSampledTextureCacheTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
     target_link_libraries(AzureSampledTextureCacheTests PRIVATE Vulkan::Vulkan)
     add_test(NAME AzureRender.SampledTextureCache COMMAND AzureSampledTextureCacheTests)
+    add_executable(AzureSampledTextureChannelsGpuTests tests/SampledTextureChannelsGpuTests.cpp)
+    target_link_libraries(AzureSampledTextureChannelsGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureSampledTextureChannelsGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.SampledTextureChannelsGpu COMMAND AzureSampledTextureChannelsGpuTests "${SHADER_BINARY_DIR}/sampled_texture_channels_test.comp.spv")
+    set_tests_properties(AzureRender.SampledTextureChannelsGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 240)
     add_executable(AzureMaterialTextureSharingTests tests/MaterialTextureSharingTests.cpp)
     target_link_libraries(AzureMaterialTextureSharingTests PRIVATE AzureRenderCore)
     target_compile_definitions(AzureMaterialTextureSharingTests PRIVATE AZURERENDER_TEST_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")

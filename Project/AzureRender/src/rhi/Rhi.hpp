@@ -384,6 +384,14 @@ public:
     virtual IGpuAllocator& allocator() = 0;
     virtual bool supportsSampledImage(VkFormat format,bool linearFilter) const = 0;
     virtual bool supportsStorageImage(VkFormat) const {return false;}
+    virtual bool supportsSampledImageViewMapping() const noexcept {return false;}
+    virtual VkImageView createMappedSampledImageView(VkImage image,VkFormat format,
+            std::uint32_t mipLevels,const VkComponentMapping& mapping) {
+        if(mapping.r!=VK_COMPONENT_SWIZZLE_IDENTITY||mapping.g!=VK_COMPONENT_SWIZZLE_IDENTITY
+            ||mapping.b!=VK_COMPONENT_SWIZZLE_IDENTITY||mapping.a!=VK_COMPONENT_SWIZZLE_IDENTITY)
+            throw std::runtime_error("Sampled image component mapping is unavailable");
+        return createImageView(image,format,VK_IMAGE_ASPECT_COLOR_BIT,mipLevels);
+    }
 
     // One-shot upload helpers. Each submits and waits internally; call only
     // during load, never per frame.

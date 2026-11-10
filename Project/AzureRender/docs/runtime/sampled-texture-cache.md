@@ -11,6 +11,33 @@
 材质通过 `SampledTextureBinding` 借用描述符值。
 主资源与附加资源可在同一缓存中共享。
 
+## 线性通道存储
+
+输入及共享身份使用完整 RGBA8 字节。
+缓存可为线性 UNORM 图像选择 R8 或 RG8 物理存储。
+设备需支持对应格式、过滤及图像视图分量映射。
+Vulkan 后端提供 `createMappedSampledImageView`。
+
+全部上传 mip 逐字节确认通道相等及零、一常量。
+各层级共用同一分量映射。
+图像尺寸、mip 数量及采样器保持请求值。
+过滤后的 RGBA 值按视图映射消费。
+
+重复、镜像重复及边缘夹取支持通道收窄。
+边框采样、sRGB 及 GPU 生成 mip 使用完整 RGBA。
+格式或后端能力不足时同样使用完整 RGBA。
+构造参数 `compactLinearChannels` 控制该缓存的存储策略。
+
+`requestedBytes` 记录逻辑 RGBA 请求字节。
+`residentBytes` 记录选定表示的纹素字节。
+`channelSavedBytes` 记录唯一纹理的收窄字节。
+`compactedTextures` 记录实际使用收窄表示的纹理数。
+
+上述纹素统计与分配器的实际分配量分别计量。
+完整身份像素继续保留至 `seal()`。
+失败申请保持输入分配及成功资源计数。
+GPU 资源沿缓存清空和销毁边界释放。
+
 ## 接口与生命周期
 
 缓存构造时借用 `IGpuAllocator` 与 `IRhi`。

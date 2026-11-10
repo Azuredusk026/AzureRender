@@ -36,6 +36,7 @@ struct SampledTextureCacheStatistics {
     std::uint64_t requestedBytes = 0, residentBytes = 0, retainedPixelBytes = 0;
     std::uint64_t hashedPixelBytes = 0, copiedPixelBytes = 0, transferredPixelBytes = 0, discardedPixelBytes = 0;
     std::uint64_t releasedIdentityBytes = 0;
+    std::uint64_t channelSavedBytes = 0, compactedTextures = 0;
     double hashMs = 0, matchMs = 0, mipMs = 0, uploadMs = 0;
 };
 
@@ -44,7 +45,7 @@ struct SampledTextureCacheStatistics {
 // clear() or destruction; bindings cannot outlive this owner.
 class SampledTextureCache final {
 public:
-    SampledTextureCache(rhi::IGpuAllocator& allocator, rhi::IRhi& rhi);
+    SampledTextureCache(rhi::IGpuAllocator& allocator, rhi::IRhi& rhi,bool compactLinearChannels=true);
     ~SampledTextureCache();
     SampledTextureCache(const SampledTextureCache&) = delete;
     SampledTextureCache& operator=(const SampledTextureCache&) = delete;
@@ -72,6 +73,7 @@ private:
     rhi::IRhi& rhi_;
     std::unordered_multimap<std::uint32_t, std::unique_ptr<Entry>> entries_;
     bool sealed_ = false;
+    bool compactLinearChannels_ = true;
     SampledTextureCacheStatistics statistics_;
 };
 

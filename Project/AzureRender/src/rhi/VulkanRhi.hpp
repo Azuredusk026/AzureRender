@@ -46,6 +46,8 @@ public:
     VkSampleCountFlags imageSampleCounts(VkFormat,VkImageUsageFlags) const override;
     bool supportsSampleShading() const noexcept override {return sampleShadingEnabled_;}
     bool supportsExactDepthBias() const noexcept override {return exactDepthBiasEnabled_;}
+    bool supportsSampledImageViewMapping() const noexcept override {return true;}
+    VkImageView createMappedSampledImageView(VkImage,VkFormat,std::uint32_t,const VkComponentMapping&) override;
 
     void copyBuffer(
         const GpuBuffer& source,

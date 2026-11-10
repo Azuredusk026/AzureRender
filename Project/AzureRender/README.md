@@ -27,6 +27,7 @@
 [浮点身份编码](docs/acceptance/nr/float-history-identity.md)通过双设备完整 24 位键域、覆盖与遮挡核对，场景候选继续验证。
 [浮点快照历史](docs/acceptance/nr/float-snapshot-history.md)通过严格四帧，三进程短测未达效率门槛，候选已封存。
 [冻结纹理通道](docs/acceptance/nr/texture-channel-scope.md)记录 468 份唯一源图像的通道关系，实际驻留收益独立验收。
+[线性通道存储](docs/acceptance/nr/linear-texture-channel-storage.md)通过双设备及原四帧，107 份纹理减少约 303 MB 纹素存储，正式内存及帧预算持续待验。
 级联归属修复使静止局部灯的首帧与绑定路径保持一致，原始四帧继续零差。
 [运动矢量绑定](docs/acceptance/nr/motion-descriptor-reuse.md)按帧槽复用稳定资源，所属十项检查及原生四帧核对通过。
 [展示照明按需计算](docs/acceptance/nr/presentation-environment-demand.md)的候选未达区间效率门槛，生产已恢复受检内容。

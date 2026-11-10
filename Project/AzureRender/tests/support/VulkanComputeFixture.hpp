@@ -31,7 +31,7 @@ public:
     rhi::GpuAllocator allocator;
     std::unique_ptr<rhi::VulkanRhi> backend;
 
-    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false,bool fragmentAtomics=false) {
+    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false,bool fragmentAtomics=false,bool captureWarnings=false,bool anisotropy=false) {
         try {
             VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
             application.pApplicationName="AzureRender Compute Contract";application.apiVersion=VK_API_VERSION_1_3;
@@ -45,6 +45,7 @@ public:
             vkRequire(vkCreateInstance(&create,nullptr,&instance),"vkCreateInstance");
             VkDebugUtilsMessengerCreateInfoEXT debug{VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT};
             debug.messageSeverity=VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+            if(captureWarnings)debug.messageSeverity|=VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT;
             debug.messageType=VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT|VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT|VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
             debug.pUserData=this;
             debug.pfnUserCallback=[](VkDebugUtilsMessageSeverityFlagBitsEXT,VkDebugUtilsMessageTypeFlagsEXT,
@@ -76,6 +77,8 @@ public:
             queueInfo.queueFamilyIndex=family;queueInfo.queueCount=1;queueInfo.pQueuePriorities=&priority;
             VkPhysicalDeviceFeatures features{};vkGetPhysicalDeviceFeatures(physical,&features);
             VkPhysicalDeviceFeatures used{};used.shaderStorageImageExtendedFormats=features.shaderStorageImageExtendedFormats;
+            if(anisotropy&&!features.samplerAnisotropy)throw VulkanFeatureUnavailable("Sampler anisotropy is unavailable");
+            used.samplerAnisotropy=anisotropy?VK_TRUE:VK_FALSE;
             if(primitiveIdentity&&!features.geometryShader)throw VulkanFeatureUnavailable("Fragment primitive identity is unavailable");
             used.geometryShader=primitiveIdentity?VK_TRUE:VK_FALSE;
             if(fragmentAtomics&&!features.fragmentStoresAndAtomics)throw VulkanFeatureUnavailable("Fragment storage atomics are unavailable");
@@ -113,7 +116,7 @@ public:
             VkCommandPoolCreateInfo commandInfo{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};commandInfo.queueFamilyIndex=family;
             vkRequire(vkCreateCommandPool(device,&commandInfo,nullptr,&pool),"vkCreateCommandPool");
             allocator.initialize(instance,physical,device,VK_API_VERSION_1_3);
-            backend=std::make_unique<rhi::VulkanRhi>(device,physical,queue,pool,allocator,false,nullptr,used.sampleRateShading==VK_TRUE,exactDepthBias);
+            backend=std::make_unique<rhi::VulkanRhi>(device,physical,queue,pool,allocator,used.samplerAnisotropy==VK_TRUE,nullptr,used.sampleRateShading==VK_TRUE,exactDepthBias);
         } catch(...) {close();throw;}
     }
     ~VulkanComputeFixture() {close();}

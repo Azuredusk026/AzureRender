@@ -28,8 +28,16 @@ class SamplerFailureRhi final : public rhi::IRhi {
 public:
     rhi::NullRhi backend;
     bool failSampler=true;
+    bool mappedViews=false;
+    VkFormat blockedFormat=VK_FORMAT_UNDEFINED,mappedFormat=VK_FORMAT_UNDEFINED;
+    VkComponentMapping mapping{};
+    bool supportsSampledImageViewMapping()const noexcept override {return mappedViews;}
+    VkImageView createMappedSampledImageView(VkImage image,VkFormat format,unsigned levels,const VkComponentMapping& value) override {
+        mappedFormat=format;mapping=value;
+        return backend.createImageView(image,format,VK_IMAGE_ASPECT_COLOR_BIT,levels);
+    }
     rhi::IGpuAllocator& allocator() override { return backend.allocator(); }
-    bool supportsSampledImage(VkFormat f,bool linear)const override {return backend.supportsSampledImage(f,linear);}
+    bool supportsSampledImage(VkFormat f,bool linear)const override {return f!=blockedFormat&&backend.supportsSampledImage(f,linear);}
     void copyBuffer(const rhi::GpuBuffer& a,const rhi::GpuBuffer& b,VkDeviceSize s)override {backend.copyBuffer(a,b,s);}
     void transitionImageLayout(const rhi::GpuImage& a,VkImageLayout b,VkImageLayout c,unsigned d)override {backend.transitionImageLayout(a,b,c,d);}
     void copyBufferToImage(const rhi::GpuBuffer& a,const rhi::GpuImage& b,unsigned w,unsigned h,unsigned l,unsigned bytes)override {backend.copyBufferToImage(a,b,w,h,l,bytes);}
@@ -256,6 +264,45 @@ void sealed_empty_cache() {
     require(cache.statistics().releasedIdentityBytes==16,"Sealing after reuse accounts for actual identity bytes");
 }
 
+void compact_linear_channels() {
+    SamplerFailureRhi r;r.failSampler=false;r.mappedViews=true;r.backend.collectImageUploads=true;
+    SampledTextureCache cache(r.allocator(),r);
+    auto u=request();u.mipLevels=1;
+    const std::vector<std::uint8_t> original={255,10,20,255,255,30,40,255,255,50,60,255,255,70,80,255};
+    auto pixels=original;auto first=cache.acquire(std::move(pixels),u);
+    require(pixels.empty(),"Packed upload consumes input only on success");
+    require(r.mappedFormat==VK_FORMAT_R8G8_UNORM&&r.mapping.r==VK_COMPONENT_SWIZZLE_ONE
+        &&r.mapping.g==VK_COMPONENT_SWIZZLE_R&&r.mapping.b==VK_COMPONENT_SWIZZLE_G
+        &&r.mapping.a==VK_COMPONENT_SWIZZLE_ONE,"Two independent channels preserve all RGBA components");
+    require(r.backend.imageUploads.back().pixels==std::vector<std::uint8_t>({10,20,30,40,50,60,70,80}),"Packed upload preserves ordered texels");
+    auto second=cache.acquire(original,u);require(first.view==second.view&&cache.statistics().hits==1,"Logical RGBA identity remains shared");
+    require(cache.statistics().residentBytes==8&&cache.statistics().channelSavedBytes==8&&cache.statistics().compactedTextures==1,"Physical channel savings are accounted once");
+    cache.seal();require(cache.statistics().releasedIdentityBytes==16,"Packed binding retains full comparison identity until seal");
+}
+void compact_mip_qualification() {
+    SamplerFailureRhi r;r.failSampler=false;r.mappedViews=true;r.backend.collectImageUploads=true;
+    SampledTextureCache cache(r.allocator(),r);auto u=request();u.mipLevels=2;
+    std::vector<std::uint8_t> pixels={0,0,0,255,64,64,64,255,128,128,128,255,255,255,255,255,77,77,77,255};
+    cache.acquire(pixels,u);require(r.mappedFormat==VK_FORMAT_R8_UNORM&&r.backend.imageUploads.back().pixels==std::vector<std::uint8_t>({0,64,128,255,77}),"Every authored mip uses the same exact channel mapping");
+    cache.clear();r.mappedFormat=VK_FORMAT_UNDEFINED;pixels[17]=78;pixels[18]=79;
+    cache.acquire(pixels,u);require(r.mappedFormat==VK_FORMAT_UNDEFINED&&cache.statistics().residentBytes==20,"A differing lower mip prevents channel loss");
+    cache.clear();r.mappedFormat=VK_FORMAT_UNDEFINED;u.mipLevels=1;u.format=VK_FORMAT_R8G8B8A8_SRGB;
+    pixels.resize(16);cache.acquire(pixels,u);require(r.mappedFormat==VK_FORMAT_UNDEFINED,"sRGB remains in its qualified full representation");
+    cache.clear();u.format=VK_FORMAT_R8G8B8A8_UNORM;u.sampler.addressU=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
+    cache.acquire(pixels,u);require(r.mappedFormat==VK_FORMAT_UNDEFINED,"Border colour semantics retain full channels");
+    cache.clear();u.sampler.addressU=VK_SAMPLER_ADDRESS_MODE_REPEAT;r.blockedFormat=VK_FORMAT_R8_UNORM;
+    cache.acquire(pixels,u);require(r.mappedFormat==VK_FORMAT_UNDEFINED,"Unsupported compact formats retain RGBA");
+    cache.clear();r.blockedFormat=VK_FORMAT_UNDEFINED;u.mipLevels=2;
+    cache.acquire(pixels,u);require(r.mappedFormat==VK_FORMAT_UNDEFINED&&cache.statistics().residentBytes==20,"GPU-generated lower mips retain their qualified full representation");
+}
+void compact_failure_ownership() {
+    SamplerFailureRhi r;r.mappedViews=true;SampledTextureCache cache(r.allocator(),r);
+    auto u=request();u.mipLevels=1;auto pixels=checker();const auto original=pixels;const auto capacity=pixels.capacity();
+    reject([&]{cache.acquire(std::move(pixels),u);});
+    require(pixels==original&&pixels.capacity()==capacity&&cache.statistics().uniqueTextures==0
+        &&cache.statistics().channelSavedBytes==0&&r.allocator().statistics().liveImages==0,"Packed upload failure preserves input, resources and counters");
+}
+
 int main() {
     int failed=0;
     for(const auto& test:std::vector<std::pair<const char*,std::function<void()>>>{
@@ -263,9 +310,9 @@ int main() {
             {"content hash collision",hash_collision},{"invalid input recovery",invalid_inputs},
             {"authored mip bytes",authored_mips},{"partial upload recovery",failed_upload},
             {"transferred input ownership",transferred_inputs},{"complete word and tail identity",complete_content_identity},
-            {"sealed bindings and reopen",sealed_bindings},{"empty sealed lifecycle",sealed_empty_cache}}) {
+            {"sealed bindings and reopen",sealed_bindings},{"empty sealed lifecycle",sealed_empty_cache},{"compact linear channels",compact_linear_channels},{"complete mip qualification",compact_mip_qualification},{"packed failure ownership",compact_failure_ownership}}) {
         try {test.second();std::cout<<"PASS "<<test.first<<'\n';}
         catch(const std::exception& e) {++failed;std::cerr<<"FAIL "<<test.first<<": "<<e.what()<<'\n';}
     }
-    std::cout<<10-failed<<"/10 sampled texture cache cases passed\n";return failed?1:0;
+    std::cout<<13-failed<<"/13 sampled texture cache cases passed\n";return failed?1:0;
 }

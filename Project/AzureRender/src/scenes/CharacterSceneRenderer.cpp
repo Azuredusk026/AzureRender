@@ -2096,6 +2096,8 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << ", \"requestedBytes\": " << textureStats.requestedBytes << ", \"residentBytes\": " << textureStats.residentBytes
          << ", \"retainedPixelBytes\": " << textureStats.retainedPixelBytes
          << ", \"releasedIdentityBytes\": " << textureStats.releasedIdentityBytes
+         << ", \"channelSavedBytes\": " << textureStats.channelSavedBytes
+         << ", \"compactedTextures\": " << textureStats.compactedTextures
          << ", \"sealed\": " << (materialTextureCache_&&materialTextureCache_->sealed()?"true":"false")
          << ", \"hashedPixelBytes\": " << textureStats.hashedPixelBytes << ", \"copiedPixelBytes\": " << textureStats.copiedPixelBytes
          << ", \"transferredPixelBytes\": " << textureStats.transferredPixelBytes << ", \"discardedPixelBytes\": " << textureStats.discardedPixelBytes
