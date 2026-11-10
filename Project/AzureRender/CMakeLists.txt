@@ -368,6 +368,8 @@ compile_shader("${SHADER_SOURCE_DIR}/transparent_index_scatter.comp")
 compile_shader("${SHADER_SOURCE_DIR}/surface_response_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/material_output_precision_test.comp")
 compile_shader("${SHADER_SOURCE_DIR}/reference_clip_projection_test.comp")
+compile_shader("${SHADER_SOURCE_DIR}/reference_depth.vert")
+compile_shader("${SHADER_SOURCE_DIR}/reference_depth.frag")
 compile_shader("${SHADER_SOURCE_DIR}/material_uv_gradients_test.vert")
 compile_shader("${SHADER_SOURCE_DIR}/material_uv_gradients_test.frag" DEFINES AZURE_FRAGMENT_QUAD_OPERATIONS=1)
 compile_shader("${SHADER_SOURCE_DIR}/motion_projection_test.comp")
@@ -811,6 +813,7 @@ add_library(AzureRenderCore STATIC
     src/render/DepthPrepassSplit.cpp
     src/render/GpuTransparentIndexSort.cpp
     src/render/ScreenObjectVisibility.cpp
+    src/render/ReferenceDepth.cpp
     src/render/ColorGradingLut.cpp
     src/render/ColorGradingLutGpu.cpp
     src/render/ReflectionSpatialFilter.cpp
@@ -1257,6 +1260,11 @@ if(BUILD_TESTING)
     add_dependencies(AzureReferenceClipProjectionGpuTests AzureRenderShaders)
     add_test(NAME AzureRender.ReferenceClipProjectionGpu COMMAND AzureReferenceClipProjectionGpuTests "${SHADER_BINARY_DIR}/reference_clip_projection_test.comp.spv")
     set_tests_properties(AzureRender.ReferenceClipProjectionGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
+    add_executable(AzureReferenceDepthGpuTests tests/ReferenceDepthGpuTests.cpp)
+    target_link_libraries(AzureReferenceDepthGpuTests PRIVATE AzureRenderCore)
+    add_dependencies(AzureReferenceDepthGpuTests AzureRenderShaders)
+    add_test(NAME AzureRender.ReferenceDepthGpu COMMAND AzureReferenceDepthGpuTests "${SHADER_BINARY_DIR}")
+    set_tests_properties(AzureRender.ReferenceDepthGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 120)
     add_executable(AzureMaterialUvGradientsGpuTests tests/MaterialUvGradientsGpuTests.cpp)
     target_link_libraries(AzureMaterialUvGradientsGpuTests PRIVATE AzureRenderCore)
     add_dependencies(AzureMaterialUvGradientsGpuTests AzureRenderShaders)

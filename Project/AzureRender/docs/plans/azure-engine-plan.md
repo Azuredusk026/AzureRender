@@ -1238,3 +1238,6 @@ WC1 至 WC6 完成，证据见世界参照与相机实施记录。
 
 [参考裁剪投影](../acceptance/nr/reference-clip-projection.md)通过原生向量与双设备位精度核对。
 公共内核与原四帧回归通过，相机及深度生产继续接入。
+
+[参考几何深度](../acceptance/nr/reference-depth-source.md)通过双配置、双设备及原四帧回归。
+公共不透明生产通过，原生覆盖、壳层和可见量继续接入。
