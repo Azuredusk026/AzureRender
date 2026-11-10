@@ -56,8 +56,9 @@ struct DepthInputs {
 }
 int main(int argc,char** argv)try{
     if(argc!=2)throw std::invalid_argument("Expected depth shader directory");test::VulkanComputeFixture host(true);auto& backend=*host.backend;unsigned checked=0,rejects=0;
-    {
+    for(bool framed:{false,true}){
         DepthInputs inputs(host);std::array<std::array<float,4>,4> vertices{{{-1,-1,.03125F,1},{1,-1,.03125F,1},{-1,1,.03125F,1},{1,1,.03125F,1}}};
+        if(framed)for(auto& vertex:vertices){vertex[0]=.5F-vertex[0];vertex[1]-=1.F;}
         const auto near=inputs.buffer(vertices.data(),sizeof(vertices),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);for(auto& vertex:vertices)vertex[2]=.015625F;const auto far=inputs.buffer(vertices.data(),sizeof(vertices),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
         const std::array<std::array<float,2>,4> texcoords{{{0,0},{1,0},{0,1},{1,1}}};const auto uv=inputs.buffer(texcoords.data(),sizeof(texcoords),VK_BUFFER_USAGE_VERTEX_BUFFER_BIT);
         const std::array<unsigned,6> triangles{0,1,2,2,1,3};const auto indices=inputs.buffer(triangles.data(),sizeof(triangles),VK_BUFFER_USAGE_INDEX_BUFFER_BIT);
@@ -66,7 +67,9 @@ int main(int argc,char** argv)try{
         for(unsigned y=0;y<8;++y)for(unsigned x=0;x<8;++x){const auto k=(y/4)*2+x/4,at=(y*8+x)*4;level0[at]=red[k];level0[at+1]=static_cast<unsigned char>(255-red[k]);level0[at+2]=blue[k];level0[at+3]=128;}
         for(unsigned i=0;i<16;++i){level1[i*4]=255;level1[i*4+1]=0;level1[i*4+2]=128;level1[i*4+3]=128;}
         rhi::SamplerDesc sampled;sampled.filter=VK_FILTER_NEAREST;sampled.mipmapLinear=false;sampled.maxLod=1;sampled.addressU=sampled.addressV=sampled.addressW=VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
-        const auto texture=inputs.texture(8,8,VK_FORMAT_R8G8B8A8_UNORM,mips,sampled);auto shaders=ReferenceDepthShaders::loadMasked(argv[1]);ReferenceDepthConfig config;config.flipNdcY=false;ReferenceDepthGpu producer(backend,{8,8},2,config,shaders);
+        const auto texture=inputs.texture(8,8,VK_FORMAT_R8G8B8A8_UNORM,mips,sampled);auto shaders=ReferenceDepthShaders::loadMasked(argv[1]);ReferenceDepthConfig config;config.flipNdcY=false;
+        if(framed){config.schemaVersion=2;config.positionFrame=ReferencePositionFrame{};config.positionFrame->parameters.axes={-1,2,3,0};config.positionFrame->parameters.offset={.5F,1,0,0};shaders.positionFrame=ReferenceDepthPositionFrameShaders::load(argv[1]);}
+        ReferenceDepthGpu producer(backend,{8,8},2,config,shaders);
         ReferenceDepthGeometry foreground{near.buffer,indices.buffer,4,6},background{far.buffer,indices.buffer,4,6};foreground.surface.alpha=ReferenceDepthAlpha{uv.buffer,texture.first,texture.second};
         auto reject=[&](auto operation){try{operation();}catch(const std::invalid_argument&){++rejects;}};
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
@@ -76,7 +79,7 @@ int main(int argc,char** argv)try{
                 if(kind==8)a.cutoff=-.1F;if(kind==9)a.cutoff=1.1F;if(kind==10)a.cutoff=std::numeric_limits<float>::quiet_NaN();if(kind==11)a.lodBias=std::numeric_limits<float>::infinity();if(kind==12)a.lodBias=17;if(kind==13)bad.surface.schemaVersion=0;
                 reject([&]{producer.record(commands,0,{}, {bad});});}
             reject([&]{producer.record(commands,0,{},std::vector<ReferenceDepthGeometry>(129,foreground));});
-            {ReferenceDepthGpu opaque(backend,{8,8},1,config,ReferenceDepthShaders::load(argv[1]));reject([&]{opaque.record(commands,0,{}, {foreground});});}
+            {auto opaqueShaders=ReferenceDepthShaders::load(argv[1]);if(framed)opaqueShaders.positionFrame=shaders.positionFrame;ReferenceDepthGpu opaque(backend,{8,8},1,config,opaqueShaders);reject([&]{opaque.record(commands,0,{}, {foreground});});}
         });
         {auto incomplete=shaders;incomplete.maskedFragment.clear();reject([&]{ReferenceDepthGpu invalid(backend,{8,8},1,config,incomplete);});}
         unsigned iteration=0;
@@ -91,6 +94,7 @@ int main(int argc,char** argv)try{
         for(const auto support:{MaterialUvGradientSupport{},MaterialUvGradientSupport{VK_SHADER_STAGE_COMPUTE_BIT,VK_SUBGROUP_FEATURE_QUAD_BIT},MaterialUvGradientSupport{VK_SHADER_STAGE_FRAGMENT_BIT,VK_SUBGROUP_FEATURE_BASIC_BIT}})
             reject([&]{(void)ReferenceDepthShaders::loadEllipseMasked("missing-capability-must-fail-before-file-read",support);});
         const auto support=queryMaterialUvGradientSupport(host.physical);auto ellipseShaders=ReferenceDepthShaders::loadEllipseMasked(argv[1],support);
+        if(framed)ellipseShaders.positionFrame=shaders.positionFrame;
         {auto bad=ellipseShaders;bad.ellipseSupport={};reject([&]{ReferenceDepthGpu invalid(backend,{8,8},1,config,bad);});}
         {auto bad=ellipseShaders;bad.maskedVertex.clear();bad.maskedFragment.clear();reject([&]{ReferenceDepthGpu invalid(backend,{8,8},1,config,bad);});}
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
@@ -126,7 +130,7 @@ int main(int argc,char** argv)try{
         const auto version2Device=inputs.render(ellipseProducer,0,{}, {foreground,background});
         for(float value:version2Device){if(value!=.03125F)throw std::runtime_error("Version2 device policy compatibility failed");++checked;}
     }
-    if(rejects!=25)throw std::runtime_error("Depth coverage rejection count differs");
+    if(rejects!=50)throw std::runtime_error("Depth coverage rejection count differs");
     if(host.errors.load()||host.allocator.statistics().liveBuffers||host.allocator.statistics().liveImages)throw std::runtime_error("Depth coverage validation or resource cleanup failed");
-    std::cout<<host.properties.deviceName<<": "<<checked<<" exact masked R32/D32 values; 25 rejects; device/ellipse policies, versions, affine footprints, four channels, culling, slot reuse and cleanup passed\n";return 0;
+    std::cout<<host.properties.deviceName<<": "<<checked<<" exact masked R32/D32 values; 50 rejects; relative/world frames, device/ellipse policies, versions, affine footprints, four channels, culling, slot reuse and cleanup passed\n";return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}

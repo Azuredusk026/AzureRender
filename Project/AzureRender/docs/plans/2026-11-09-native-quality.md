@@ -268,3 +268,7 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [光栅图元与深度模型](../acceptance/nr/raster-primitive-depth-model.md)完成双设备来源核对。
 九十六处超差来自相同图元，透明层级及插值数值继续修正。
+
+[参考坐标帧与世界坐标深度](../acceptance/nr/reference-position-frame.md)通过双配置、双设备核对。
+公开世界坐标路径的完整深度平面与 CPU 预转换控制逐位一致，原始四帧摘要精确一致。
+实际索引、朝向及 UV 组合继续独立验收。
