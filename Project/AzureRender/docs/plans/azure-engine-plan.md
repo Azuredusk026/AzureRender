@@ -1339,3 +1339,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [实际顶点裁剪读回](../acceptance/nr/actual-vertex-clip-readback.md)通过双设备位精度核对。
 每设备四万三千零四十四个向量精确一致，后续核对视口及光栅插值。
+
+[阴影接收需求](../acceptance/nr/shadow-receiver-demand-scope.md)已核对光源及十四次实际材质绘制。
+当前输入没有可省接收工作，继续按实际热点选择优化。

@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[阴影接收需求](docs/acceptance/nr/shadow-receiver-demand-scope.md)已核对实际光源和材质字段。
+当前输入的条件跳过预期缩减为零，正式性能继续验收。
+
 [公共梯度主线集成](docs/acceptance/nr/public-uv-gradient-main-integration.md)通过双配置及双设备检查。
 默认宿主及既有程序摘要保持一致，生产取样绑定继续验收。
 
