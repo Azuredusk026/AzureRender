@@ -30,6 +30,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[四像素组深度可见性组合](../acceptance/nr/quad-depth-visibility.md)通过六附件及局部准入。
+完整材质降幅约 21.21%，固定类别约 31.58%。
+原生四帧及成对短时净收益按独立批次执行。
+
 [四像素组覆盖接收](../acceptance/nr/quad-coverage-receiver.md)通过六份附件核对。
 固定类别成本增加约 0.31%，效率未准入，候选保持隔离。
 

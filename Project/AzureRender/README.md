@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[四像素组深度可见性组合](docs/acceptance/nr/quad-depth-visibility.md)通过六附件及局部效率准入。
+完整材质降幅约 21.21%，原生四帧及成对净收益继续验证。
+
 [四像素组覆盖接收](docs/acceptance/nr/quad-coverage-receiver.md)通过十份程序与六附件核对。
 固定类别成本增加约 0.31%，候选保持隔离。
 

@@ -1,0 +1,133 @@
+{
+  "status": "local-qualified-combination",
+  "sourceBase": "88d84fb",
+  "standalone": {
+    "status": "isolated-below-native-admission",
+    "candidate": "quad-depth-visibility",
+    "sourceBase": "88d84fb",
+    "allSixAttachmentsExact": true,
+    "materials": 1006,
+    "fixedClassEvents": 129,
+    "totalEvents": 3453,
+    "scope": {
+      "allEventMs": {
+        "referenceMs": 13.354015999999925,
+        "candidateMs": 13.10609599999994,
+        "savedMs": 0.2479199999999846,
+        "reduction": 0.01856520165918522,
+        "share": 1.0,
+        "referenceDrift": 0.007404514117698093
+      },
+      "matchedEventMs": {
+        "referenceMs": 9.810767999999953,
+        "candidateMs": 9.600991999999954,
+        "savedMs": 0.20977599999999974,
+        "reduction": 0.021382220025996,
+        "share": 0.7346679830247327,
+        "referenceDrift": 0.0068594018327621815
+      },
+      "classEventMs": {
+        "referenceMs": 3.3848639999999994,
+        "candidateMs": 3.1997919999999995,
+        "savedMs": 0.1850719999999999,
+        "reduction": 0.05467634741011749,
+        "share": 0.25347161483107544,
+        "referenceDrift": 0.002590355181183153
+      },
+      "mainEventMs": {
+        "referenceMs": 7.054160000000015,
+        "candidateMs": 6.848480000000016,
+        "savedMs": 0.2056799999999983,
+        "reduction": 0.02915726323190825,
+        "share": 0.5282425900942499,
+        "referenceDrift": 0.0037333998661785816
+      },
+      "ordinaryMainEventMs": {
+        "referenceMs": 3.6032480000000113,
+        "candidateMs": 3.5913440000000136,
+        "savedMs": 0.011903999999997694,
+        "reduction": 0.003303686007734593,
+        "share": 0.26982504738649643,
+        "referenceDrift": 0.0057281652553480555
+      },
+      "snapshotEventMs": {
+        "referenceMs": 2.756607999999998,
+        "candidateMs": 2.7525119999999976,
+        "savedMs": 0.004096000000000544,
+        "reduction": 0.001485884101040317,
+        "share": 0.20642539293048726,
+        "referenceDrift": 0.014858841010401077
+      }
+    },
+    "qualified": false,
+    "protectedFilesExact": 13,
+    "sourceUnchanged": true,
+    "formalPerformanceAccepted": false
+  },
+  "combined": {
+    "status": "local-qualified",
+    "candidate": "quad-depth-selected-default-combination",
+    "sourceBase": "88d84fb",
+    "allSixAttachmentsExact": true,
+    "materials": 1006,
+    "fixedClassEvents": 129,
+    "totalEvents": 3453,
+    "scope": {
+      "allEventMs": {
+        "referenceMs": 13.41231999999994,
+        "candidateMs": 11.304111999999982,
+        "savedMs": 2.1082079999999586,
+        "reduction": 0.15718443938110394,
+        "share": 1.0,
+        "referenceDrift": 0.005158242571009489
+      },
+      "matchedEventMs": {
+        "referenceMs": 9.897567999999954,
+        "candidateMs": 7.798784000000027,
+        "savedMs": 2.0987839999999265,
+        "reduction": 0.21205047542991737,
+        "share": 0.7379460078494994,
+        "referenceDrift": 0.006750749274973909
+      },
+      "classEventMs": {
+        "referenceMs": 3.4238239999999998,
+        "candidateMs": 2.342688,
+        "savedMs": 1.0811359999999999,
+        "reduction": 0.31576856754319144,
+        "share": 0.2552745535448017,
+        "referenceDrift": 0.0032057722593218344
+      },
+      "mainEventMs": {
+        "referenceMs": 7.101024000000014,
+        "candidateMs": 5.633536000000015,
+        "savedMs": 1.4674879999999986,
+        "reduction": 0.2066586452883409,
+        "share": 0.5294403950994343,
+        "referenceDrift": 0.006236846967422761
+      },
+      "ordinaryMainEventMs": {
+        "referenceMs": 3.6178080000000117,
+        "candidateMs": 2.9237440000000046,
+        "savedMs": 0.6940640000000071,
+        "reduction": 0.19184655459880814,
+        "share": 0.26973767401911286,
+        "referenceDrift": 0.015841636703771596
+      },
+      "snapshotEventMs": {
+        "referenceMs": 2.796543999999998,
+        "candidateMs": 2.165247999999998,
+        "savedMs": 0.6312960000000003,
+        "reduction": 0.22574148663493251,
+        "share": 0.20850561275006937,
+        "referenceDrift": 0.008055657268399817
+      }
+    },
+    "qualified": true,
+    "protectedFilesExact": 13,
+    "sourceUnchanged": true,
+    "formalPerformanceAccepted": false
+  },
+  "nativeFourAndPairedTiming": "pending-separate-managed-unit",
+  "formalPerformanceAccepted": false,
+  "overall": "failed-user-review"
+}
