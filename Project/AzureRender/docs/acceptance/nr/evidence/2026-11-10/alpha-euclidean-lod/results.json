@@ -1,0 +1,63 @@
+{
+  "status": "failed-isolated-candidate",
+  "overall": "failed-user-review",
+  "singleFactor": "Explicit Euclidean LOD using previously checked reference quad gradients",
+  "devices": [
+    {
+      "device": "nvidia",
+      "pixels": 17017,
+      "failures": 1,
+      "newFailures": 1,
+      "closedFailures": 0,
+      "depthChangedPixels": 1,
+      "visibilityChanged": [
+        {
+          "texturePixel": [
+            1326,
+            1262
+          ],
+          "uiPixel": [
+            1326,
+            177
+          ],
+          "baseline": 23,
+          "candidate": 7,
+          "expected": 23
+        }
+      ]
+    },
+    {
+      "device": "intel",
+      "pixels": 17017,
+      "failures": 97,
+      "newFailures": 0,
+      "closedFailures": 0,
+      "depthChangedPixels": 0,
+      "visibilityChanged": []
+    }
+  ],
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 4.327999999979511,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-205255-alpha-euclidean-lod-6ac02d\\candidate.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-205255-alpha-euclidean-lod-6ac02d\\tmp"
+  },
+  "publicSourceUnchanged": true,
+  "archive": {
+    "bytes": 235411,
+    "sha256": "d4c1eb4ba0c8dc86a79d83fd3f61225de849ca9661e80b9efa114e458de7bdaf",
+    "members": 35
+  },
+  "defaultRegression": {
+    "sourceCommit": "f100244",
+    "fourFrames": "SHA256/RGB exact",
+    "reason": "Public source and executable inputs unchanged"
+  }
+}
