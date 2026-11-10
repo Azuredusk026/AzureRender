@@ -54,6 +54,8 @@
 局部减少约 21.28%，原生四帧与整帧成本继续验收。
 [原生组合验证](docs/acceptance/nr/selected-default-view-native.md)保持原四帧摘要一致。
 短时 GPU 均值减少约 12.64%，生产资格接入及正式帧预算继续验收。
+[计算视图接入核对](docs/acceptance/nr/computed-material-view-production-attempt.md)保留生产候选与身份控制。
+独立参考的可重复资格未通过，生产源码保持受检实现。
 级联归属修复使静止局部灯的首帧与绑定路径保持一致，原始四帧继续零差。
 [运动矢量绑定](docs/acceptance/nr/motion-descriptor-reuse.md)按帧槽复用稳定资源，所属十项检查及原生四帧核对通过。
 [展示照明按需计算](docs/acceptance/nr/presentation-environment-demand.md)的候选未达区间效率门槛，生产已恢复受检内容。
