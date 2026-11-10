@@ -197,7 +197,7 @@ struct AssetMaterial {
         float tangentSign=1;
         bool materialSnapshotNormal=false;
         struct Lighting {
-            bool present=false,transparentHighlights=false;
+            bool present=false,transparentHighlights=false,mainBrightnessSaturation=false;
             float shadowBrightness=1,shadowSaturation=1,shadowScale=1;
             std::array<float,3> ambientColor{1,1,1},mainColor{1,1,1};
             CharacterVisibility characterVisibility=CharacterVisibility::One;

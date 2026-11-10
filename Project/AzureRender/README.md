@@ -43,6 +43,7 @@
 对象接收的[同输入模型](docs/acceptance/nr/object-receiver-input-model.md)复现 17017 处原生可见量，场景集成继续验收。
 [屏幕对象可见量](docs/acceptance/nr/screen-object-visibility.md)提供公共图形通道。
 [参考算术配置](docs/acceptance/nr/visibility-reference-arithmetic.md)通过双设备原生区域核对，当前场景接入及完整颜色继续验收。
+[主光亮度饱和度](docs/acceptance/nr/hair-main-brightness-saturation.md)提供显式头发照明选项，双设备所属检查及原四帧通过，完整颜色继续验收。
 [相位原点](docs/acceptance/nr/visibility-phase-origin.md)支持两种行号约定，默认原生区域保持逐字节一致。
 [设备深度核对](docs/acceptance/nr/receiver-device-depth.md)确认当前快照的整区关系，源投影和深度生产精度继续待验收。
 [线性深度核对](docs/acceptance/nr/receiver-linear-depth.md)仍有 216 处超差，接收输入的生产精度继续待验收。

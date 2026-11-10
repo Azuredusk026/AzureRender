@@ -8,7 +8,7 @@
 namespace azurerender {
 // Binding 27 is a versioned union, indexed by the stable material order.
 struct alignas(16) PackedMaterialSurfaceProfile {
-    static constexpr unsigned kLayoutVersion=21;
+    static constexpr unsigned kLayoutVersion=22;
     using Row=std::array<float,4>;
     std::array<Row,22> rows=[] {
         std::array<Row,22> value{};value[19][3]=1;return value;
@@ -43,6 +43,7 @@ inline PackedMaterialSurfaceProfile packProjectedHairSurfaceProfile(const AssetM
             ?0U:static_cast<unsigned>(light.characterVisibility)+1U;
         rows[6][0]=static_cast<float>((hair.virtualLight?1U:0U)|(source<<1U));
         rows[5][3]=light.shadowScale;rows[6][3]=light.transparentHighlights?2.F:1.F;
+        if(light.mainBrightnessSaturation)rows[6][3]+=8.F;
         rows[10]={light.ambientColor[0],light.ambientColor[1],light.ambientColor[2],light.shadowBrightness};
         rows[11]={light.mainColor[0],light.mainColor[1],light.mainColor[2],light.shadowSaturation};
     }
@@ -68,6 +69,12 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateUnlitSubmission(material.unlitTextureLayers);
     validateMaterialBlendDepth(material);
     validateMaterialRimResponse(material);
+    if(material.projectedHairRamp.lighting.mainBrightnessSaturation&&
+        (!material.projectedHairRamp.present||!material.projectedHairRamp.lighting.present
+            ||material.projectedHairRamp.surfaceResponse!=AssetMaterial::ProjectedHairRamp::SurfaceResponse::StrandDiffuse
+            ||material.materialProfileVersion!=2||material.materialClass!=AssetMaterialClass::Hair
+            ||!(material.materialFeatures&MaterialFeatureDiffuseRamp)))
+        throw std::invalid_argument("Main brightness saturation requires a lit strand-diffuse hair profile in version two");
     if(material.projectedHairRamp.materialSnapshotNormal&&(!material.projectedHairRamp.present
         ||material.materialProfileVersion!=2||material.materialClass!=AssetMaterialClass::Hair))
         throw std::invalid_argument("projectedRamp.snapshotNormal requires a version 2 projected hair profile");

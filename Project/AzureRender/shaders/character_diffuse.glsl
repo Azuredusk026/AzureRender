@@ -41,6 +41,10 @@ vec3 characterLocalLightRadiance(vec3 incident,float normalDotLight,vec2 respons
 vec3 characterDiffuseSaturation(vec3 color,float amount) {
     return mix(vec3(characterDiffuseLuma(color)),color,amount);
 }
+float characterMainBrightnessSaturation(vec3 color) {
+    float high=clamp(characterDiffuseLuma(color)-.5,0.0,.5);
+    return 1.0+high*high;
+}
 // Captured main/ambient composition. Colors and source policy belong to the
 // host. Keeping the terms separate gives ambient/direct isolation exact sums.
 CharacterDiffuseIllumination characterDiffuseIllumination(vec3 normal,vec3 indirectRadiance,

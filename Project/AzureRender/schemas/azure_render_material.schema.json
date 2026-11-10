@@ -199,7 +199,17 @@
         "projectedRamp": {
           "type": "object",
           "properties": {
-            "snapshotNormal": {"type": "string", "enum": ["lighting", "material-normal-rg"], "default": "lighting"}
+            "snapshotNormal": {"type": "string", "enum": ["lighting", "material-normal-rg"], "default": "lighting"},
+            "lighting": {
+              "type": "object",
+              "properties": {
+                "mainBrightnessSaturation": {
+                  "type": "boolean",
+                  "default": false,
+                  "description": "按环境和所选主灯组合的亮度增强色度。"
+                }
+              }
+            }
           }
         }
       },
