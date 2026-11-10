@@ -1366,3 +1366,6 @@ NVIDIA 层级更接近椭圆主轴模型，后续验证通用显式策略。
 
 [参考透明层级](../acceptance/nr/reference-alpha-ellipse.md)通过公共策略及原四帧回归。
 NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处深度超差继续修正。
+
+[深度与属性插值](../acceptance/nr/depth-interpolant-source.md)完成完整区域来源核对。
+属性替代路径保持隔离，后续接续场景投影与材质绑定。
