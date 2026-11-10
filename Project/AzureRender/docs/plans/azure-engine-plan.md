@@ -1354,3 +1354,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [光栅图元与深度模型](../acceptance/nr/raster-primitive-depth-model.md)完成双设备来源核对。
 九十六处超差来自相同图元，透明层级及插值数值继续修正。
+
+[显式欧氏层级候选](../acceptance/nr/alpha-euclidean-lod.md)保留为隔离诊断。
+两设备完整区域核对未关闭透明判定差，后续核对设备尺度函数。
