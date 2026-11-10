@@ -67,6 +67,11 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [输出与加载集成](../acceptance/nr/output-pixel-loading-integration.md)通过两配置 34 项。
 双设备大纹理组合及原四帧通过，单次工作集峰值约为 1.9026 GiB。
 
+[当前场景成本](../acceptance/nr/compact-texture-gpu-cost.md)完成 3453 个事件分解。
+重点材质程序的受检耗时约占重放总量的 57.66%。
+下一局部控制核对固定过滤半径的循环成本。
+新原生整帧候选须先取得符合门槛的减少依据。
+
 [并行资源调度](../development/shared-resources.md)提供重负载互斥入口。
 性能、画质与论文工作流已登记实际对话和独立工作区。
 跨工作树输入在主维护索引中持有活动引用。
