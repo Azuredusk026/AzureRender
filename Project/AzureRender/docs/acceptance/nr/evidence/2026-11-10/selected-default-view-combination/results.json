@@ -1,0 +1,595 @@
+{
+  "status": "isolated-combination-qualified-for-native-validation",
+  "sourceHead": "61ebcfe",
+  "captureRuntimeHead": "274615b",
+  "firstBatch": {
+    "allTargetsEqual": false,
+    "comparisons": [
+      {
+        "event": 10953,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": true,
+        "baselineSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff",
+        "candidateSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff"
+      },
+      {
+        "event": 10953,
+        "target": 1,
+        "bytes": 14745600,
+        "equal": true,
+        "baselineSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444",
+        "candidateSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444"
+      },
+      {
+        "event": 18266,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": false,
+        "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+        "candidateSha256": "9b99302ef3dfc1b7961baa06d743ef5765ff11c4d834903392f0bcdd813e21d6"
+      },
+      {
+        "event": 18266,
+        "target": 1,
+        "bytes": 3686400,
+        "equal": true,
+        "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+        "candidateSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133"
+      },
+      {
+        "event": 18266,
+        "target": 2,
+        "bytes": 921600,
+        "equal": true,
+        "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+        "candidateSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+      },
+      {
+        "event": 18317,
+        "target": 0,
+        "bytes": 3686400,
+        "equal": true,
+        "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+        "candidateSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11"
+      }
+    ],
+    "summary": [
+      {
+        "mode": "baseline",
+        "allEventMs": 13.329887999999922,
+        "matchedEventMs": 7.524511999999998
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 11.514047999999946,
+        "matchedEventMs": 5.9802560000000025
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 11.497759999999955,
+        "matchedEventMs": 5.972288
+      },
+      {
+        "mode": "baseline",
+        "allEventMs": 13.332479999999938,
+        "matchedEventMs": 7.5403839999999995
+      }
+    ]
+  },
+  "orderedComposition": {
+    "allTargetsEqual": true,
+    "comparisons": [
+      {
+        "event": 10953,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": true,
+        "changedBytes": 0,
+        "firstByteDifferences": [],
+        "baselineSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff",
+        "candidateSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff"
+      },
+      {
+        "event": 10953,
+        "target": 1,
+        "bytes": 14745600,
+        "equal": true,
+        "changedBytes": 0,
+        "firstByteDifferences": [],
+        "baselineSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444",
+        "candidateSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444"
+      },
+      {
+        "event": 18266,
+        "target": 0,
+        "bytes": 7372800,
+        "equal": true,
+        "changedBytes": 0,
+        "firstByteDifferences": [],
+        "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+        "candidateSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62"
+      },
+      {
+        "event": 18266,
+        "target": 1,
+        "bytes": 3686400,
+        "equal": true,
+        "changedBytes": 0,
+        "firstByteDifferences": [],
+        "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+        "candidateSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133"
+      },
+      {
+        "event": 18266,
+        "target": 2,
+        "bytes": 921600,
+        "equal": true,
+        "changedBytes": 0,
+        "firstByteDifferences": [],
+        "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+        "candidateSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+      },
+      {
+        "event": 18317,
+        "target": 0,
+        "bytes": 3686400,
+        "equal": true,
+        "changedBytes": 0,
+        "firstByteDifferences": [],
+        "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+        "candidateSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11"
+      }
+    ],
+    "summary": [
+      {
+        "mode": "baseline",
+        "allEventMs": 13.467007999999927,
+        "matchedEventMs": 7.590144
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 11.473855999999953,
+        "matchedEventMs": 5.946368
+      },
+      {
+        "mode": "candidate",
+        "allEventMs": 11.45987199999996,
+        "matchedEventMs": 5.942111999999995
+      },
+      {
+        "mode": "baseline",
+        "allEventMs": 13.329823999999935,
+        "matchedEventMs": 7.511968000000002
+      }
+    ],
+    "referenceMilliseconds": 7.551056000000001,
+    "candidateMilliseconds": 5.944239999999997,
+    "nominalReduction": 0.2127935483460861,
+    "referenceDrift": 0.010352989038883747
+  },
+  "hotspotFraction": 0.576578,
+  "admissionThreshold": 0.2,
+  "nativeAcceptancePending": true,
+  "nativeRuns": 0,
+  "protectedFilesUnchanged": true,
+  "archiveBytes": 3828155,
+  "archiveSha256": "592c2c6d0a889971ff83a5045f2d8c1e8ddd173cf122ae27e620bbc11e6ce1e7",
+  "archiveMembers": [
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "8b37690a05e422ac006f58aa48eba8b4c0127c6fb1eb2b972332ce5f0cb0be4e"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-character_snapshot_object_bindless_clipmap_field.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-character_snapshot_object_bindless_clipmap_field_coverage.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-character_snapshot_object_bindless_clipmap_field_early.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-character_snapshot_object_bindless_clipmap_field_early_lighting.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field.frag",
+      "bytes": 123257,
+      "sha256": "c592288140872c201538336daa1890a111bcc8465b50aa3ea79f6bc545e5ae35"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_coverage.frag",
+      "bytes": 123257,
+      "sha256": "c592288140872c201538336daa1890a111bcc8465b50aa3ea79f6bc545e5ae35"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_early.frag",
+      "bytes": 123257,
+      "sha256": "c592288140872c201538336daa1890a111bcc8465b50aa3ea79f6bc545e5ae35"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_early_lighting.frag",
+      "bytes": 123257,
+      "sha256": "c592288140872c201538336daa1890a111bcc8465b50aa3ea79f6bc545e5ae35"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_lighting.frag",
+      "bytes": 123257,
+      "sha256": "c592288140872c201538336daa1890a111bcc8465b50aa3ea79f6bc545e5ae35"
+    },
+    {
+      "path": "candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_lighting_coverage.frag",
+      "bytes": 123257,
+      "sha256": "c592288140872c201538336daa1890a111bcc8465b50aa3ea79f6bc545e5ae35"
+    },
+    {
+      "path": "candidate-source/selected_receiver.glsl",
+      "bytes": 234,
+      "sha256": "6f39b7609228d6d54af5578448d221c34f5c068234dfbced092003622a518d46"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "bytes": 400908,
+      "sha256": "251994790f429c97ef1931c1289f43f48218890063257f94d561df38bdd2bf04"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field.frag.spv.build.json",
+      "bytes": 749,
+      "sha256": "8963b2d34992cdfb285733087095eeb8c5008c01736e437ccd9a4c0129047ebf"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+      "bytes": 400860,
+      "sha256": "f51e906db1b4edc11ad8fad811155e52fd722cdbb15beea4fb1a341ea5bc9dc4"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv.build.json",
+      "bytes": 806,
+      "sha256": "ce323ed7c278bd4c7590d0e7dea0565b832dba91d08f0bd4094039b7e8804220"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "bytes": 400920,
+      "sha256": "23ef95ad5370cc5e9df8d1706647b7e5555df1cffca146872ed9b3e78006ecf9"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_early.frag.spv.build.json",
+      "bytes": 800,
+      "sha256": "11dc1d11d0264a5de6dcce802488a0c034f4a1309999ba6c7c687b3d3d879ddd"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "bytes": 413864,
+      "sha256": "ebb538021523a68fbae32b91d49bfd9a393910f6a6e5f201705c3ff5d9cdbd7e"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv.build.json",
+      "bytes": 863,
+      "sha256": "8cca0b337dfdbcd402b5a04469bb13dcf86412e25ba35b6c2d9361ae7e8ee1f3"
+    },
+    {
+      "path": "compare-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compare-results.json",
+      "bytes": 721,
+      "sha256": "f30e9febf4b5ea704561c6d612feae4e1136745f46d8a67023e0aa96da3c49ca"
+    },
+    {
+      "path": "compare-state.json",
+      "bytes": 467312,
+      "sha256": "09a4feae9197c1aba9817ac443a8451d91ce746d7157c136ec0d5b881f68c6cb"
+    },
+    {
+      "path": "compare.py",
+      "bytes": 11522,
+      "sha256": "43f70d0f11ce4dd563fc8cb11c8d5fc1a312a7d03b7b0c2a8d12c60c0c9ec2e1"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field.frag.spv",
+      "bytes": 450456,
+      "sha256": "ca2fcbe29c8c9c3d8e93567c385a3fc429569d2ffff1389b9c3bf2378e34552a"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field.frag.spv.build.json",
+      "bytes": 687,
+      "sha256": "21ab98ed521ec0863766492350203d2c1353cdeed5b07921cf3d302a094a9677"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+      "bytes": 450408,
+      "sha256": "bd951904cda8ebbbc324f80407fecf4640afdd345a253f1fc1d156ae3a418e5b"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_coverage.frag.spv.build.json",
+      "bytes": 744,
+      "sha256": "39ed7373b51df71ccaf28019f39e6b50c5c94c7736ecac18fa21e290c7eea19d"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "bytes": 450468,
+      "sha256": "24fd49e127336cc5452170e107dfdcd5637ea2f02e26fc85570449026f6f2846"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_early.frag.spv.build.json",
+      "bytes": 738,
+      "sha256": "aa5e121221134f0026c4fea695a60b2f161a3d93362e3954f102e34c293aced7"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "bytes": 463504,
+      "sha256": "90d1777730d5c59fe458c4c453dec594a57f98b1c4ec4f38a7798352483a4898"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv.build.json",
+      "bytes": 801,
+      "sha256": "b5c023ea427dab1c593de52234cb5183562762e688a964aac4070c617ea974a9"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+      "bytes": 463492,
+      "sha256": "348fa5927bfb0d721017304bb894446fc1ae49a5aced8e642d36d0c0aa156274"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_lighting.frag.spv.build.json",
+      "bytes": 750,
+      "sha256": "8d5cec16a734d8df8f8b8901a37c6ce6b17335dce6f7c4e988219b6e09400a21"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+      "bytes": 463444,
+      "sha256": "043274c7e509d0cf1d77c237336869ef40a0ac93cb4aca495677b3c6591bd260"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv.build.json",
+      "bytes": 807,
+      "sha256": "521bdff9b715d840604694a2fd9d14c2696fd18c305667a9338d5a920700be24"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-character_snapshot_object_bindless_clipmap_field.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-character_snapshot_object_bindless_clipmap_field_coverage.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-character_snapshot_object_bindless_clipmap_field_early.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-character_snapshot_object_bindless_clipmap_field_early_lighting.frag",
+      "bytes": 122518,
+      "sha256": "5bed6912062a9508417cafe5d83dcf4b3f595d3f32ed37981fe779ae14ed99b5"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field.frag",
+      "bytes": 123098,
+      "sha256": "2b5061bbfe33a31f1a49751443eae375e71df95c20623d0d524e1b06bf98409d"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_coverage.frag",
+      "bytes": 123098,
+      "sha256": "2b5061bbfe33a31f1a49751443eae375e71df95c20623d0d524e1b06bf98409d"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_early.frag",
+      "bytes": 123098,
+      "sha256": "2b5061bbfe33a31f1a49751443eae375e71df95c20623d0d524e1b06bf98409d"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_early_lighting.frag",
+      "bytes": 123098,
+      "sha256": "2b5061bbfe33a31f1a49751443eae375e71df95c20623d0d524e1b06bf98409d"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_lighting.frag",
+      "bytes": 123098,
+      "sha256": "2b5061bbfe33a31f1a49751443eae375e71df95c20623d0d524e1b06bf98409d"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/combined-1090519040-mesh_object_bindless_clipmap_field_lighting_coverage.frag",
+      "bytes": 123098,
+      "sha256": "2b5061bbfe33a31f1a49751443eae375e71df95c20623d0d524e1b06bf98409d"
+    },
+    {
+      "path": "precision-boundary-diagnostic/candidate-source/selected_receiver.glsl",
+      "bytes": 234,
+      "sha256": "6f39b7609228d6d54af5578448d221c34f5c068234dfbced092003622a518d46"
+    },
+    {
+      "path": "precision-boundary-diagnostic/character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "bytes": 400908,
+      "sha256": "251994790f429c97ef1931c1289f43f48218890063257f94d561df38bdd2bf04"
+    },
+    {
+      "path": "precision-boundary-diagnostic/character_snapshot_object_bindless_clipmap_field.frag.spv.build.json",
+      "bytes": 811,
+      "sha256": "30ff20006bc34eff5deffaeba2d96995f0280a83c152c1af372f477dea3e9961"
+    },
+    {
+      "path": "precision-boundary-diagnostic/character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+      "bytes": 400860,
+      "sha256": "f51e906db1b4edc11ad8fad811155e52fd722cdbb15beea4fb1a341ea5bc9dc4"
+    },
+    {
+      "path": "precision-boundary-diagnostic/character_snapshot_object_bindless_clipmap_field_coverage.frag.spv.build.json",
+      "bytes": 868,
+      "sha256": "496d6f1836eb1d9f6ffd523ba0cbecff7e3141921c146af99915c2ef254a9fc1"
+    },
+    {
+      "path": "precision-boundary-diagnostic/character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "bytes": 400920,
+      "sha256": "23ef95ad5370cc5e9df8d1706647b7e5555df1cffca146872ed9b3e78006ecf9"
+    },
+    {
+      "path": "precision-boundary-diagnostic/character_snapshot_object_bindless_clipmap_field_early.frag.spv.build.json",
+      "bytes": 862,
+      "sha256": "ac9adad942cb94e9e1b392f433d78de6379fe60008ea57b03a0136a979117828"
+    },
+    {
+      "path": "precision-boundary-diagnostic/character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "bytes": 413864,
+      "sha256": "ebb538021523a68fbae32b91d49bfd9a393910f6a6e5f201705c3ff5d9cdbd7e"
+    },
+    {
+      "path": "precision-boundary-diagnostic/character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv.build.json",
+      "bytes": 925,
+      "sha256": "1abf077b2e67c180f048b03653f8192f303d9cd910b5f5923c3fbd9d1680e94c"
+    },
+    {
+      "path": "precision-boundary-diagnostic/compare-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "precision-boundary-diagnostic/compare-results.json",
+      "bytes": 708,
+      "sha256": "a0f00521a833cd817ab687148980e8b4aab335e79ef90e2a0813c2162b5e8eb8"
+    },
+    {
+      "path": "precision-boundary-diagnostic/compare-state.json",
+      "bytes": 469274,
+      "sha256": "0003e684f0a360d351db9ca9532e1e67bb6b42b349f845402575e3d7a7bb2566"
+    },
+    {
+      "path": "precision-boundary-diagnostic/compare.py",
+      "bytes": 12512,
+      "sha256": "e218f2df698ef21349e682a35bf030bed19f579a7006c9bf726ba26f6cb59c65"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field.frag.spv",
+      "bytes": 453700,
+      "sha256": "2f5432e790b1a3fbba22c91a8b8d0db62712202d9aaacce8e4bd60fcf69c65ca"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field.frag.spv.build.json",
+      "bytes": 749,
+      "sha256": "770561370c0cf1a0454308cbd42beb5a61f47de316cd56e78fa180cb4cc8a56a"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_coverage.frag.spv",
+      "bytes": 453652,
+      "sha256": "6273b593fa034f3ac3a0f66bec37e7212a9bb2d3587497bd9806379f38528560"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_coverage.frag.spv.build.json",
+      "bytes": 806,
+      "sha256": "53ea315f4614b37fdde06769f5852b6c7699b73e2b661709ce1b735e2eddd942"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_early.frag.spv",
+      "bytes": 453712,
+      "sha256": "1203052dff6e825932d191847284d0c100ead774d064a1b1508f4510e171c344"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_early.frag.spv.build.json",
+      "bytes": 800,
+      "sha256": "ca49fea51bd9407be13283021f88922b72cc0a8c99f903a08808c32cd6156a07"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "bytes": 466748,
+      "sha256": "0a41b79562fc2f3da90cbd0e4c430c478abd3530bc0940c7d39638dddb1fbcdd"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_early_lighting.frag.spv.build.json",
+      "bytes": 863,
+      "sha256": "e65d125b6dc9b93aeea391cbc834f3eb2f35831133d04035088563162734d1ec"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_lighting.frag.spv",
+      "bytes": 466736,
+      "sha256": "e88f71355d42186166c0098dfcaae80bb02d4bb352da67150013ae684c94280e"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_lighting.frag.spv.build.json",
+      "bytes": 812,
+      "sha256": "2ee9335abaed46bfe9638353838e2df9a81af45ffe41a03a10bee54e7e99321f"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+      "bytes": 466688,
+      "sha256": "5629f13ddc7d25727691fec2111d52fe3bf6f5bc9205ad62b81df0a327befd23"
+    },
+    {
+      "path": "precision-boundary-diagnostic/mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv.build.json",
+      "bytes": 869,
+      "sha256": "2a6cf0792d5dd9b686c72f39eec444c58cb38e4f7cc0fe316a54afde0443350b"
+    },
+    {
+      "path": "precision-boundary-diagnostic/run-environment.json",
+      "bytes": 3204300,
+      "sha256": "5884903a2ce4e9d8ef00d84a346270ca9a6a455a6b13a27e79e5ec34d166ee44"
+    },
+    {
+      "path": "precision-boundary-diagnostic/run_compare.py",
+      "bytes": 1807,
+      "sha256": "435e8272537d0839dd954344081b86d7b89345f407fbc3b61a928160aede2792"
+    },
+    {
+      "path": "precision-boundary-diagnostic/selected_receiver.glsl",
+      "bytes": 234,
+      "sha256": "6f39b7609228d6d54af5578448d221c34f5c068234dfbced092003622a518d46"
+    },
+    {
+      "path": "precision-boundary-diagnostic/startup-environment.json",
+      "bytes": 425614,
+      "sha256": "01517f0c6990a9373d4735a4afe649ffdbec0ba271784e3179cde80a95d3ce4e"
+    },
+    {
+      "path": "precision-diagnostic-hypothesis.json",
+      "bytes": 616,
+      "sha256": "035c4a06549b1a7587e981d2826062eb9b4047b309064bface865ac79d0a6099"
+    },
+    {
+      "path": "prior-admission-red.json",
+      "bytes": 379,
+      "sha256": "8a16256d7a3ad98ef0765c232fef1c58201dc21e9baed4a635e8b9cd169010c6"
+    },
+    {
+      "path": "process.log",
+      "bytes": 447,
+      "sha256": "fc5cb9d258b9dd61c528a30722b3c45b78afbd27a714703421a3c040ac143b6d"
+    },
+    {
+      "path": "protected-files.json",
+      "bytes": 1532,
+      "sha256": "de34a223309e79d7448b2acf159db62865585cba4ff8154a22c40f9df65c3355"
+    },
+    {
+      "path": "run-environment.json",
+      "bytes": 2207400,
+      "sha256": "b63cfeef4e139a5d5fd34425fe62ad1cc17e88d29859fb6577e112280e23ec0b"
+    },
+    {
+      "path": "run_compare.py",
+      "bytes": 1807,
+      "sha256": "435e8272537d0839dd954344081b86d7b89345f407fbc3b61a928160aede2792"
+    },
+    {
+      "path": "selected_receiver.glsl",
+      "bytes": 234,
+      "sha256": "6f39b7609228d6d54af5578448d221c34f5c068234dfbced092003622a518d46"
+    },
+    {
+      "path": "startup-environment.json",
+      "bytes": 425616,
+      "sha256": "a03fbbf4e47d5f14639de40c32495fc05398e552b0eeab2b6bd02dc254edba4c"
+    }
+  ]
+}
