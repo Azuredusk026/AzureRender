@@ -1,0 +1,49 @@
+{
+  "sourceCommit": "62fc79cb097c1b77fed92e78ae7902b0bf68903d",
+  "sourceFunctionSha256": "0c3598b41cc6575ecfd03a0b4dbc6a338ce3a4e8d0a1922cd56fa51e077b4e25",
+  "stagedAndWorkingFunctionMatch": true,
+  "sourceOwnerAttestation": {
+    "threadId": "01a1c097-ec33-7790-8c18-08a2b0ddb0c3",
+    "automaticChecksPerConfiguration": 8,
+    "actualGpuViewFlows": 16,
+    "matrixPixelsPerEndpoint": 199680,
+    "legacyPixelsPerEndpoint": 33280,
+    "nvidiaFrozenProgramPixels": 199680,
+    "nativeFourPngShaAndRgbExact": true,
+    "validationErrors": 0,
+    "resourcesAfterUnload": 0,
+    "stableInputs": 1729
+  },
+  "localBuilds": {
+    "release": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 179.7970000000205,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-214332-material-uv-loop-qualification-cf1d1e\\build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+    },
+    "debug": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 156.8279999999795,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-214332-material-uv-loop-qualification-cf1d1e\\build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+    }
+  },
+  "uvCombinationStatus": "pending-independent-GPU-qualification",
+  "overall": "failed-user-review"
+}

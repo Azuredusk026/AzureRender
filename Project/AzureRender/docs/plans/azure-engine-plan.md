@@ -1268,3 +1268,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [深度与属性插值](../acceptance/nr/depth-interpolant-source.md)完成完整区域来源核对。
 属性替代路径保持隔离，后续接续场景投影与材质绑定。
+
+[接收循环修正](../acceptance/nr/receiver-source-sync.md)按来源 `62fc79c` 同步。
+主 UV 组合继续核对公开材质、阴影及取样正控制。

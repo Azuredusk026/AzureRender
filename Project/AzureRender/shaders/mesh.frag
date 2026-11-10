@@ -597,7 +597,28 @@ void prepareShadowReceiver() {
     vec3 receiverNormal=normalize(worldNormal);
     shadowReceiverCurvature=max(length(dFdx(receiverNormal)),length(dFdy(receiverNormal)))
         /max(max(length(dFdx(worldPosition)),length(dFdy(worldPosition))),1e-6);
-    for(int i=0;i<4;++i){
+    {const int i=0;
+        vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
+        vec2 uv=(p.xy*.5+.5)*.5;
+        vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
+        float determinant=dx.x*dy.y-dx.y*dy.x;
+        shadowReceiverGradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+    }
+    {const int i=1;
+        vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
+        vec2 uv=(p.xy*.5+.5)*.5;
+        vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
+        float determinant=dx.x*dy.y-dx.y*dy.x;
+        shadowReceiverGradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+    }
+    {const int i=2;
+        vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
+        vec2 uv=(p.xy*.5+.5)*.5;
+        vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
+        float determinant=dx.x*dy.y-dx.y*dy.x;
+        shadowReceiverGradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+    }
+    {const int i=3;
         vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
         vec2 uv=(p.xy*.5+.5)*.5;
         vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
