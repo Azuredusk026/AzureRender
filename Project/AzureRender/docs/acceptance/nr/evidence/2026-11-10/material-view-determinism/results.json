@@ -1,0 +1,326 @@
+{
+  "status": "qualified-default-receiver-loop",
+  "baselineCommit": "76896ec",
+  "source": {
+    "CMakeLists.txt": {
+      "bytes": 301581,
+      "sha256": "9c6985a506b15e45c336d3cfc85e2bb469bcf65c764d4519879d390b735d7bcf"
+    },
+    "shaders/mesh.frag": {
+      "bytes": 122972,
+      "sha256": "4e762b0e1f3d1828190b44b95cf8c4abe9437f5e933081f9a2bf2f1382a77dc5"
+    },
+    "tests/MaterialViewDeterminismGpuTests.cpp": {
+      "bytes": 6914,
+      "sha256": "f02b62f7caa84ad33de846a02102d17f4e9693485b247b7d5367e06ff2d7e930"
+    }
+  },
+  "firstRed": {
+    "changedBytes": 6,
+    "changedRows": [
+      [
+        20,
+        3
+      ],
+      [
+        21,
+        2
+      ],
+      [
+        22,
+        1
+      ]
+    ],
+    "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+    "maximumByteError": 3,
+    "phase": 6
+  },
+  "registeredRed": {
+    "changedBytes": 60,
+    "changedRows": [
+      [
+        0,
+        14
+      ],
+      [
+        1,
+        28
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        20,
+        3
+      ],
+      [
+        21,
+        2
+      ],
+      [
+        22,
+        1
+      ],
+      [
+        27,
+        3
+      ],
+      [
+        28,
+        1
+      ],
+      [
+        29,
+        1
+      ]
+    ],
+    "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+    "lighting": 0,
+    "maximumByteError": 8,
+    "phase": 3,
+    "setting": 1
+  },
+  "builds": [
+    {
+      "configuration": "Release",
+      "ctests": 8,
+      "shaderIdentities": 687
+    },
+    {
+      "configuration": "Debug",
+      "ctests": 8,
+      "shaderIdentities": 687
+    }
+  ],
+  "gpu": [
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "target": "AzureMaterialViewDeterminismGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "full-matrix"
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "target": "AzureMaterialViewDeterminismGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "legacy-only"
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "target": "AzureTemporalViewGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "temporal"
+    },
+    {
+      "configuration": "Release",
+      "device": "intel",
+      "target": "AzureMaterialDisplayViewGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "display"
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "target": "AzureMaterialViewDeterminismGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "full-matrix"
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "target": "AzureMaterialViewDeterminismGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "legacy-only"
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "target": "AzureTemporalViewGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "temporal"
+    },
+    {
+      "configuration": "Release",
+      "device": "nvidia",
+      "target": "AzureMaterialDisplayViewGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "display"
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "target": "AzureMaterialViewDeterminismGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "full-matrix"
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "target": "AzureMaterialViewDeterminismGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "legacy-only"
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "target": "AzureTemporalViewGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "temporal"
+    },
+    {
+      "configuration": "Debug",
+      "device": "intel",
+      "target": "AzureMaterialDisplayViewGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "display"
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "target": "AzureMaterialViewDeterminismGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "full-matrix"
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "target": "AzureMaterialViewDeterminismGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "legacy-only"
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "target": "AzureTemporalViewGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "temporal"
+    },
+    {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "target": "AzureMaterialDisplayViewGpuTests",
+      "returncode": 0,
+      "validationClean": true,
+      "scope": "display"
+    }
+  ],
+  "fullMatrixPixelsPerDeviceConfiguration": 199680,
+  "legacyPixelsPerDeviceConfiguration": 33280,
+  "frozenNvidiaOriginalPixels": 199680,
+  "activePrograms": 687,
+  "recompiledMaterialPrograms": 516,
+  "changedPrograms": 512,
+  "unchangedPrograms": 175,
+  "native": {
+    "exitCode": 0,
+    "seconds": 252.82800000003772,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "protectedFilesVerified": 13,
+  "frozenReferenceRecovery": {
+    "restoredLinkedPrograms": 512,
+    "independentFiles": 687,
+    "allOriginalHashesExact": true,
+    "rootProductsUnchanged": true,
+    "referenceComparisonsCompletedBeforeRootBuild": true
+  },
+  "overall": "failed-user-review",
+  "formalPerformanceQualified": false,
+  "archive": {
+    "members": 111,
+    "bytes": 693650,
+    "sha256": "039101b2f1296919fe3c055565f29fa0acbac36b28f3954b7d3a00edf8c5202a"
+  },
+  "identicalFrameCleanup": {
+    "status": "reclaimed-exact-duplicates",
+    "files": [
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-215106-material-view-determinism-four-4bbe21\\frames\\frame_000000.png",
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000000.png",
+        "bytes": 5714675,
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387"
+      },
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-215106-material-view-determinism-four-4bbe21\\frames\\frame_000001.png",
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000001.png",
+        "bytes": 5713820,
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab"
+      },
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-215106-material-view-determinism-four-4bbe21\\frames\\frame_000002.png",
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000002.png",
+        "bytes": 5713834,
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79"
+      },
+      {
+        "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261110-215106-material-view-determinism-four-4bbe21\\frames\\frame_000003.png",
+        "reference": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261103-234012-character-reference-stages-5abe6c\\snapshot-shell-order-regression\\release-joint\\frames\\frame_000003.png",
+        "bytes": 5714218,
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574"
+      }
+    ],
+    "reclaimedBytes": 22856547,
+    "referencesRetained": true
+  }
+}

@@ -3,7 +3,7 @@
 日期：2026-11-10。
 状态为候选隔离，独立参考渲染资格未通过。
 参考源码为 `5868d1a`，GPU 字节标准保持零差。
-实际宿主的来源重建归属后续集成单元。
+当前宿主来源见[独立视图验证](material-view-determinism.md)。
 
 ## 已核对范围
 
@@ -45,3 +45,6 @@ Intel 使用相同原程序进行独立视图重建时出现差异。
 与[验证归档](evidence/2026-11-10/computed-material-view-production-attempt/validation.zip)
 保存精简源码、补丁、程序摘要及数值附件。
 全部成员均完成长度和 SHA-256 核对。
+
+[接收计算验证](material-view-determinism.md)已取得独立参考的重复渲染资格。
+计算视图候选保持隔离，后续按该受检来源重新核对。

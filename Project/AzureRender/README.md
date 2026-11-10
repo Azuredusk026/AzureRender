@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[独立材质视图](docs/acceptance/nr/material-view-determinism.md)通过接收计算、双配置及双设备回归。
+原始四帧摘要一致，计算视图与 UV 接入按新受检基线继续验证。
+
 [快照视图组合](docs/acceptance/nr/snapshot-default-view-combination.md)的动态照明控制通过六附件核对。
 新增收益未达准入条件，候选保持隔离。
 

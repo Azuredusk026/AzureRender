@@ -1360,3 +1360,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [纹理尺度来源](../acceptance/nr/texture-scale-profile.md)完成独立仿射组及原生导数观测。
 NVIDIA 层级更接近椭圆主轴模型，后续验证通用显式策略。
+
+[独立材质视图](../acceptance/nr/material-view-determinism.md)通过常量索引接收计算的双配置、双设备回归。
+原四帧摘要精确一致，计算视图及公共 UV 绑定按新基线继续接入。
