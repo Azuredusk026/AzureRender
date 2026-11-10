@@ -760,3 +760,6 @@ $env:VCPKG_ROOT = "D:/Tools/vcpkg"
 
 [公共 UV 梯度助手](docs/runtime/material-uv-gradients.md)提供纵向镜像四像素足迹及设备能力校验。
 斜边三角形的覆盖外辅助调用通过双配置、双设备补验。
+
+[主 UV 取样候选](docs/acceptance/nr/material-mirrored-uv-candidate.md)保存设备差异及隔离来源。
+候选接入待验，相机投影与真实深度来源继续推进。
