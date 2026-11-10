@@ -75,7 +75,9 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 [显示消费边界](../acceptance/nr/hair-display-consumption.md)的整区比较最大差为一字节。
 [参数与双法线层级](../acceptance/nr/hair-normal-param-mip-content.md)的二十四级内容全部一致。
 [顶点投影来源](../acceptance/nr/hair-postvs-clip-source.md)已核对实际缓冲及原生投影运算。
-11564 个原生裁剪向量逐位重建，后续执行几何来源控制。
+11564 个原生裁剪向量逐位重建。
+[相对投影来源控制](../acceptance/nr/hair-relative-projection-control.md)使六处超差保留两处。
+四处进入原门槛，控制未新增超差，后续核对实际梯度。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。

@@ -1,0 +1,1324 @@
+{
+  "status": "qualified-private-relative-projection-control",
+  "rows": [
+    {
+      "name": "control",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 6,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.13768584356819652,
+      "resolvedOriginalFailures": 68,
+      "newOriginalFailures": 1,
+      "resolvedControlFailures": 0,
+      "newControlFailures": 0,
+      "changedHairPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1306,
+            156
+          ],
+          "absoluteError": [
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            262
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            295
+          ],
+          "absoluteError": [
+            2,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            296
+          ],
+          "absoluteError": [
+            1,
+            2,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1193,
+            297
+          ],
+          "absoluteError": [
+            1,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "candidate",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 2,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.13680437209848975,
+      "resolvedOriginalFailures": 72,
+      "newOriginalFailures": 1,
+      "resolvedControlFailures": 4,
+      "newControlFailures": 0,
+      "changedHairPixels": 88,
+      "failures": [
+        {
+          "pixel": [
+            1322,
+            262
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        }
+      ]
+    }
+  ],
+  "uv": [
+    {
+      "pixel": [
+        1306,
+        156
+      ],
+      "native": [
+        0.7469484210014343,
+        0.9389315843582153
+      ],
+      "baseline": [
+        0.7469407916069031,
+        0.9389306902885437
+      ],
+      "candidate": [
+        0.7469484806060791,
+        0.9389315843582153
+      ],
+      "nativeBits": [
+        1061107715,
+        1064328658
+      ],
+      "candidateBits": [
+        1061107716,
+        1064328658
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1278,
+        163
+      ],
+      "native": [
+        0.35212719440460205,
+        0.967711329460144
+      ],
+      "baseline": [
+        0.35212722420692444,
+        0.9677113890647888
+      ],
+      "candidate": [
+        0.35212722420692444,
+        0.9677115082740784
+      ],
+      "nativeBits": [
+        1052002820,
+        1064811502
+      ],
+      "candidateBits": [
+        1052002821,
+        1064811505
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.7881393432617188e-07
+    },
+    {
+      "pixel": [
+        1313,
+        168
+      ],
+      "native": [
+        0.3929608166217804,
+        0.9275078773498535
+      ],
+      "baseline": [
+        0.3929608464241028,
+        0.9275079369544983
+      ],
+      "candidate": [
+        0.392960786819458,
+        0.9275076985359192
+      ],
+      "nativeBits": [
+        1053372969,
+        1064137000
+      ],
+      "candidateBits": [
+        1053372968,
+        1064136997
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.7881393432617188e-07
+    },
+    {
+      "pixel": [
+        1319,
+        172
+      ],
+      "native": [
+        0.40411821007728577,
+        0.9178981184959412
+      ],
+      "baseline": [
+        0.4041181802749634,
+        0.9178981781005859
+      ],
+      "candidate": [
+        0.4041181206703186,
+        0.9178980588912964
+      ],
+      "nativeBits": [
+        1053747349,
+        1063975775
+      ],
+      "candidateBits": [
+        1053747346,
+        1063975774
+      ],
+      "exact": false,
+      "maximumAbsolute": 8.940696716308594e-08
+    },
+    {
+      "pixel": [
+        1267,
+        211
+      ],
+      "native": [
+        0.7909205555915833,
+        0.8935039639472961
+      ],
+      "baseline": [
+        0.7909205555915833,
+        0.8935039639472961
+      ],
+      "candidate": [
+        0.7909205555915833,
+        0.8935040235519409
+      ],
+      "nativeBits": [
+        1061845445,
+        1063566509
+      ],
+      "candidateBits": [
+        1061845445,
+        1063566510
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1282,
+        211
+      ],
+      "native": [
+        0.8293665647506714,
+        0.8947954177856445
+      ],
+      "baseline": [
+        0.8293657898902893,
+        0.8947952389717102
+      ],
+      "candidate": [
+        0.8293666839599609,
+        0.8947954773902893
+      ],
+      "nativeBits": [
+        1062490462,
+        1063588176
+      ],
+      "candidateBits": [
+        1062490464,
+        1063588177
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.1920928955078125e-07
+    },
+    {
+      "pixel": [
+        1283,
+        211
+      ],
+      "native": [
+        0.8304873704910278,
+        0.8950430750846863
+      ],
+      "baseline": [
+        0.8304871916770935,
+        0.8950430154800415
+      ],
+      "candidate": [
+        0.8304876089096069,
+        0.8950431942939758
+      ],
+      "nativeBits": [
+        1062509266,
+        1063592331
+      ],
+      "candidateBits": [
+        1062509270,
+        1063592333
+      ],
+      "exact": false,
+      "maximumAbsolute": 2.384185791015625e-07
+    },
+    {
+      "pixel": [
+        1284,
+        211
+      ],
+      "native": [
+        0.8316063284873962,
+        0.8952381610870361
+      ],
+      "baseline": [
+        0.8316063284873962,
+        0.8952381610870361
+      ],
+      "candidate": [
+        0.8316064476966858,
+        0.8952382802963257
+      ],
+      "nativeBits": [
+        1062528039,
+        1063595604
+      ],
+      "candidateBits": [
+        1062528041,
+        1063595606
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.1920928955078125e-07
+    },
+    {
+      "pixel": [
+        1268,
+        212
+      ],
+      "native": [
+        0.7920964956283569,
+        0.890275239944458
+      ],
+      "baseline": [
+        0.7920964360237122,
+        0.8902751207351685
+      ],
+      "candidate": [
+        0.7920964956283569,
+        0.8902751207351685
+      ],
+      "nativeBits": [
+        1061865174,
+        1063512340
+      ],
+      "candidateBits": [
+        1061865174,
+        1063512338
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.1920928955078125e-07
+    },
+    {
+      "pixel": [
+        1281,
+        212
+      ],
+      "native": [
+        0.8282546997070312,
+        0.892676055431366
+      ],
+      "baseline": [
+        0.8282540440559387,
+        0.8926757574081421
+      ],
+      "candidate": [
+        0.828254759311676,
+        0.892676055431366
+      ],
+      "nativeBits": [
+        1062471808,
+        1063552619
+      ],
+      "candidateBits": [
+        1062471809,
+        1063552619
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1282,
+        212
+      ],
+      "native": [
+        0.8293750882148743,
+        0.8929232954978943
+      ],
+      "baseline": [
+        0.8293750286102295,
+        0.8929232954978943
+      ],
+      "candidate": [
+        0.8293753266334534,
+        0.8929234743118286
+      ],
+      "nativeBits": [
+        1062490605,
+        1063556767
+      ],
+      "candidateBits": [
+        1062490609,
+        1063556770
+      ],
+      "exact": false,
+      "maximumAbsolute": 2.384185791015625e-07
+    },
+    {
+      "pixel": [
+        1283,
+        212
+      ],
+      "native": [
+        0.8304926156997681,
+        0.8930938839912415
+      ],
+      "baseline": [
+        0.8304926156997681,
+        0.8930938839912415
+      ],
+      "candidate": [
+        0.8304926753044128,
+        0.8930939435958862
+      ],
+      "nativeBits": [
+        1062509354,
+        1063559629
+      ],
+      "candidateBits": [
+        1062509355,
+        1063559630
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1284,
+        212
+      ],
+      "native": [
+        0.8316084146499634,
+        0.8932214975357056
+      ],
+      "baseline": [
+        0.8316083550453186,
+        0.893221378326416
+      ],
+      "candidate": [
+        0.8316084146499634,
+        0.893221378326416
+      ],
+      "nativeBits": [
+        1062528074,
+        1063561770
+      ],
+      "candidateBits": [
+        1062528074,
+        1063561768
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.1920928955078125e-07
+    },
+    {
+      "pixel": [
+        1268,
+        213
+      ],
+      "native": [
+        0.7918207049369812,
+        0.8884726166725159
+      ],
+      "baseline": [
+        0.791820764541626,
+        0.8884726166725159
+      ],
+      "candidate": [
+        0.7918207049369812,
+        0.8884726762771606
+      ],
+      "nativeBits": [
+        1061860547,
+        1063482097
+      ],
+      "candidateBits": [
+        1061860547,
+        1063482098
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1281,
+        213
+      ],
+      "native": [
+        0.8282633423805237,
+        0.8908044695854187
+      ],
+      "baseline": [
+        0.8282633423805237,
+        0.8908044099807739
+      ],
+      "candidate": [
+        0.828263521194458,
+        0.8908045887947083
+      ],
+      "nativeBits": [
+        1062471953,
+        1063521219
+      ],
+      "candidateBits": [
+        1062471956,
+        1063521221
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.7881393432617188e-07
+    },
+    {
+      "pixel": [
+        1282,
+        213
+      ],
+      "native": [
+        0.8293793201446533,
+        0.8909505009651184
+      ],
+      "baseline": [
+        0.8293794393539429,
+        0.8909505009651184
+      ],
+      "candidate": [
+        0.8293794989585876,
+        0.8909505605697632
+      ],
+      "nativeBits": [
+        1062490676,
+        1063523669
+      ],
+      "candidateBits": [
+        1062490679,
+        1063523670
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.7881393432617188e-07
+    },
+    {
+      "pixel": [
+        1283,
+        213
+      ],
+      "native": [
+        0.83049476146698,
+        0.8910776972770691
+      ],
+      "baseline": [
+        0.8304948210716248,
+        0.8910777568817139
+      ],
+      "candidate": [
+        0.8304948210716248,
+        0.8910778164863586
+      ],
+      "nativeBits": [
+        1062509390,
+        1063525803
+      ],
+      "candidateBits": [
+        1062509391,
+        1063525805
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.1920928955078125e-07
+    },
+    {
+      "pixel": [
+        1284,
+        213
+      ],
+      "native": [
+        0.8316105604171753,
+        0.8912051320075989
+      ],
+      "baseline": [
+        0.8316104412078857,
+        0.8912048935890198
+      ],
+      "candidate": [
+        0.8316105604171753,
+        0.8912050127983093
+      ],
+      "nativeBits": [
+        1062528110,
+        1063527941
+      ],
+      "candidateBits": [
+        1062528110,
+        1063527939
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.1920928955078125e-07
+    },
+    {
+      "pixel": [
+        1269,
+        214
+      ],
+      "native": [
+        0.7925738096237183,
+        0.8860083818435669
+      ],
+      "baseline": [
+        0.7925738096237183,
+        0.8860083222389221
+      ],
+      "candidate": [
+        0.792573869228363,
+        0.8860083818435669
+      ],
+      "nativeBits": [
+        1061873182,
+        1063440754
+      ],
+      "candidateBits": [
+        1061873183,
+        1063440754
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1281,
+        214
+      ],
+      "native": [
+        0.8282666206359863,
+        0.888808012008667
+      ],
+      "baseline": [
+        0.8282665610313416,
+        0.8888079524040222
+      ],
+      "candidate": [
+        0.8282666206359863,
+        0.888808012008667
+      ],
+      "nativeBits": [
+        1062472008,
+        1063487724
+      ],
+      "candidateBits": [
+        1062472008,
+        1063487724
+      ],
+      "exact": true,
+      "maximumAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1284,
+        214
+      ],
+      "native": [
+        0.8316124677658081,
+        0.8891888856887817
+      ],
+      "baseline": [
+        0.8316124677658081,
+        0.889188826084137
+      ],
+      "candidate": [
+        0.8316124677658081,
+        0.8891888856887817
+      ],
+      "nativeBits": [
+        1062528142,
+        1063494114
+      ],
+      "candidateBits": [
+        1062528142,
+        1063494114
+      ],
+      "exact": true,
+      "maximumAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1282,
+        215
+      ],
+      "native": [
+        0.8293899893760681,
+        0.8869398832321167
+      ],
+      "baseline": [
+        0.8293899893760681,
+        0.8869399428367615
+      ],
+      "candidate": [
+        0.8293898701667786,
+        0.8869398832321167
+      ],
+      "nativeBits": [
+        1062490855,
+        1063456382
+      ],
+      "candidateBits": [
+        1062490853,
+        1063456382
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.1920928955078125e-07
+    },
+    {
+      "pixel": [
+        1283,
+        216
+      ],
+      "native": [
+        0.8305326104164124,
+        0.8851346969604492
+      ],
+      "baseline": [
+        0.8305326700210571,
+        0.885134756565094
+      ],
+      "candidate": [
+        0.8305326104164124,
+        0.8851348161697388
+      ],
+      "nativeBits": [
+        1062510025,
+        1063426096
+      ],
+      "candidateBits": [
+        1062510025,
+        1063426098
+      ],
+      "exact": false,
+      "maximumAbsolute": 1.1920928955078125e-07
+    },
+    {
+      "pixel": [
+        1264,
+        217
+      ],
+      "native": [
+        0.9645817875862122,
+        0.9232702851295471
+      ],
+      "baseline": [
+        0.9645817279815674,
+        0.9232696890830994
+      ],
+      "candidate": [
+        0.9645817279815674,
+        0.9232702255249023
+      ],
+      "nativeBits": [
+        1064758997,
+        1064065905
+      ],
+      "candidateBits": [
+        1064758996,
+        1064065904
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1367,
+        261
+      ],
+      "native": [
+        0.007481712847948074,
+        0.2932991087436676
+      ],
+      "baseline": [
+        0.007481713313609362,
+        0.29329913854599
+      ],
+      "candidate": [
+        0.007481712382286787,
+        0.29329913854599
+      ],
+      "nativeBits": [
+        1005922600,
+        1050028877
+      ],
+      "candidateBits": [
+        1005922599,
+        1050028878
+      ],
+      "exact": false,
+      "maximumAbsolute": 2.9802322387695312e-08
+    },
+    {
+      "pixel": [
+        1367,
+        262
+      ],
+      "native": [
+        0.006211841478943825,
+        0.2912614643573761
+      ],
+      "baseline": [
+        0.006211842410266399,
+        0.2912614941596985
+      ],
+      "candidate": [
+        0.006211841478943825,
+        0.2912614941596985
+      ],
+      "nativeBits": [
+        1003195572,
+        1049960505
+      ],
+      "candidateBits": [
+        1003195572,
+        1049960506
+      ],
+      "exact": false,
+      "maximumAbsolute": 2.9802322387695312e-08
+    },
+    {
+      "pixel": [
+        1322,
+        263
+      ],
+      "native": [
+        0.845440685749054,
+        0.8381146788597107
+      ],
+      "baseline": [
+        0.845440685749054,
+        0.8381146788597107
+      ],
+      "candidate": [
+        0.845440685749054,
+        0.8381146788597107
+      ],
+      "nativeBits": [
+        1062760141,
+        1062637231
+      ],
+      "candidateBits": [
+        1062760141,
+        1062637231
+      ],
+      "exact": true,
+      "maximumAbsolute": 0.0
+    },
+    {
+      "pixel": [
+        1380,
+        276
+      ],
+      "native": [
+        0.2570022642612457,
+        0.6737924218177795
+      ],
+      "baseline": [
+        0.25700223445892334,
+        0.6737923622131348
+      ],
+      "candidate": [
+        0.2570022642612457,
+        0.6737923622131348
+      ],
+      "nativeBits": [
+        1048810957,
+        1059880361
+      ],
+      "candidateBits": [
+        1048810957,
+        1059880360
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1193,
+        295
+      ],
+      "native": [
+        0.1036691889166832,
+        0.6822900176048279
+      ],
+      "baseline": [
+        0.10366613417863846,
+        0.6822898387908936
+      ],
+      "candidate": [
+        0.10366920381784439,
+        0.6822900772094727
+      ],
+      "nativeBits": [
+        1037324419,
+        1060022927
+      ],
+      "candidateBits": [
+        1037324421,
+        1060022928
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1193,
+        296
+      ],
+      "native": [
+        0.10343261063098907,
+        0.6807934641838074
+      ],
+      "baseline": [
+        0.10343021154403687,
+        0.6807932257652283
+      ],
+      "candidate": [
+        0.10343261063098907,
+        0.6807934045791626
+      ],
+      "nativeBits": [
+        1037292666,
+        1059997819
+      ],
+      "candidateBits": [
+        1037292666,
+        1059997818
+      ],
+      "exact": false,
+      "maximumAbsolute": 5.960464477539063e-08
+    },
+    {
+      "pixel": [
+        1193,
+        297
+      ],
+      "native": [
+        0.10319600999355316,
+        0.6792967915534973
+      ],
+      "baseline": [
+        0.10319430381059647,
+        0.6792967319488525
+      ],
+      "candidate": [
+        0.10319601744413376,
+        0.6792967915534973
+      ],
+      "nativeBits": [
+        1037260910,
+        1059972709
+      ],
+      "candidateBits": [
+        1037260911,
+        1059972709
+      ],
+      "exact": false,
+      "maximumAbsolute": 7.450580596923828e-09
+    }
+  ],
+  "uvExactPoints": 3,
+  "uvMaximumAbsolute": 2.384185791015625e-07,
+  "state": {
+    "status": "qualified",
+    "variants": [
+      {
+        "name": "control",
+        "hdrSha256": "e2eb49926d18cc9761e18870cb18b3adc753cda5451ebe121c4de6d236b014db",
+        "finalSha256": "03cc8bbf74286fb7542357bb357e8ee196a09248999918e3eb99ac2a8bf28b76",
+        "hdrExact": true,
+        "finalExact": true,
+        "baselineRestored": true
+      },
+      {
+        "name": "candidate",
+        "hdrSha256": "9b60492dbd8e40648dba1baef0b8861e385a1b5e715fc625c77b82ce258fd6d0",
+        "finalSha256": "9a4ab43fb4832219bda52310f53119acf6a4e6b31f25f954f8e5a58efb072af6",
+        "baselineRestored": true
+      }
+    ],
+    "uvProbes": [
+      {
+        "name": "uv-0-0",
+        "component": 0,
+        "shift": 0,
+        "blueExact": true
+      },
+      {
+        "name": "uv-0-12",
+        "component": 0,
+        "shift": 12,
+        "blueExact": true
+      },
+      {
+        "name": "uv-0-24",
+        "component": 0,
+        "shift": 24,
+        "blueExact": true
+      },
+      {
+        "name": "uv-1-0",
+        "component": 1,
+        "shift": 0,
+        "blueExact": true
+      },
+      {
+        "name": "uv-1-12",
+        "component": 1,
+        "shift": 12,
+        "blueExact": true
+      },
+      {
+        "name": "uv-1-24",
+        "component": 1,
+        "shift": 24,
+        "blueExact": true
+      }
+    ],
+    "activeVariant": "candidate",
+    "debugMessages": [],
+    "cleanupBaselineRestored": true
+  },
+  "source": {
+    "frameOffset": [
+      0.0,
+      -0.8800051212310791,
+      -3.299988031387329
+    ],
+    "calibration": "Median common frame translation across all paired VSOut positions; private source diagnosis only",
+    "nativeWorldReconstructionExactPerComponent": [
+      11564,
+      11429,
+      11564
+    ],
+    "nativeViewProjectionRows": [
+      [
+        -1.7840224504470825,
+        -2.150621521146423e-11,
+        5.351822670196949e-15,
+        -5.376568079640265e-10
+      ],
+      [
+        -1.5473923996398058e-18,
+        -3.171342372894287,
+        -1.25528785588358e-07,
+        0.01261091884225607
+      ],
+      [
+        9.592677763237134e-10,
+        -0.03999672085046768,
+        9.953185326594394e-06,
+        -0.9999206066131592
+      ],
+      [
+        0.0,
+        0.0,
+        0.10000099241733551,
+        0.0
+      ]
+    ],
+    "jitter": [
+      -0.25,
+      0.1666666865348816,
+      -9.765625145519152e-05,
+      0.00011574075324460864
+    ],
+    "depth": "old clip Z/W divided then multiplied by source clip W; float rounding remains",
+    "vertexShaderScope": "Only final clip output changes; authored UV, basis, worldPosition and material expressions retained",
+    "source": "b9c8863221e3528985d0440ed8516b85eadea7c2e331f7151098e18c3969371f"
+  },
+  "productionChanged": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "scope": "Fitted common frame and native camera projection alter final vertex clip output only. Six UV probes retain original blue output. Full frozen17017 hair gate unchanged; this private source control is not a portable camera implementation.",
+  "archiveBytes": 2535086,
+  "archiveSha256": "63c22475d8b4f4828cc79425c0dd1e0216b7c69a9a1eaf3870cef27b8bbb3885",
+  "archiveFiles": [
+    {
+      "path": "analysis.log",
+      "bytes": 2997,
+      "sha256": "1309233eb99016bc44c35682f556fc9dda1126b1111debb056f295346d45708d"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 3056,
+      "sha256": "c74501490ab878bcf6384e07cccd2d2a39c666374ff5070de351d92d171971fe"
+    },
+    {
+      "path": "baseline.py",
+      "bytes": 2150,
+      "sha256": "3ce0b955c9e57c95321f2c3ed3400a0c93c0e395065ec61a7d9ad3a54c59257e"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "430f01fa244ee2db239aa49cc25f10766ddf3327376e2b4e032c88aa691a856b"
+    },
+    {
+      "path": "candidate-final.zlib",
+      "bytes": 95475,
+      "sha256": "40300f38acc3e175fb5b2fee7ff71b330c3812b2584883a54e3c05577af5fd24"
+    },
+    {
+      "path": "candidate-hdr.zlib",
+      "bytes": 129969,
+      "sha256": "b340fe4e80c9c01570e0fc1fd8cd6a75c450d338a38cc5faa9ab387888593593"
+    },
+    {
+      "path": "candidate.spv",
+      "bytes": 19228,
+      "sha256": "008f3ee25a37d39ad9bc3ddffcdba33c648eeaf330af4a538fc39f697c6d02b0"
+    },
+    {
+      "path": "candidate.spvasm",
+      "bytes": 54151,
+      "sha256": "aed28ae3ed04144e0d27cafaa5170af94f7913a94657e403f8eb419508f75e74"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 3739,
+      "sha256": "22b2b6b3fbd74c3ee9a3067d896c0b82d94b2f56ddfff8f8353ce43eb0ebd936"
+    },
+    {
+      "path": "control-final.zlib",
+      "bytes": 101918,
+      "sha256": "6b72435aa37e972541aa21b6e631e93efa5e9e665b1d82007183d6988290dda1"
+    },
+    {
+      "path": "control-hdr.zlib",
+      "bytes": 139277,
+      "sha256": "e1b6b71123d02630ee8e303400a3653e43d4c4f2a06600eb33fd8a69b2b2433e"
+    },
+    {
+      "path": "control.spv",
+      "bytes": 18092,
+      "sha256": "900381710ef0b81cce03b1b0bb2df94b5334503ea20daedc347e4048da791e8b"
+    },
+    {
+      "path": "control.spvasm",
+      "bytes": 50741,
+      "sha256": "bd20d94cea249842b9383f4e943a45c21bee4c0c1ce82b10df9f82086c8833fe"
+    },
+    {
+      "path": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 586,
+      "sha256": "097883ec632629b71dd838ece8a839deb46aa8c25d05638f9e67af82246536dd"
+    },
+    {
+      "path": "fragment.spv",
+      "bytes": 472592,
+      "sha256": "f0ed540d11bbecdf38ec445735879089322b34bb69d33670d4fd576d7de2ffb1"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 4662,
+      "sha256": "920e0b81d794128a00894c6dc83bb0402ae4d96e668d85cc2234673bb223c03b"
+    },
+    {
+      "path": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 888,
+      "sha256": "64fa05a7e1b589623e07acf617800a9902092354edddf36a98693ee9f09df8b1"
+    },
+    {
+      "path": "results.json",
+      "bytes": 22790,
+      "sha256": "de2dc91f361057ad4a71368549a54fe75773f1f479eb3d40fc7f02022dfb322f"
+    },
+    {
+      "path": "run.py",
+      "bytes": 969,
+      "sha256": "934357bd34bed69b95311bdd9bc5cd2e9159ec67097ecdd06ae1899a999490bf"
+    },
+    {
+      "path": "source.json",
+      "bytes": 1227,
+      "sha256": "b90552bd8dc886a9d9d2fabddb8432c799740199a503c1b45d2734965fc83d78"
+    },
+    {
+      "path": "state.json",
+      "bytes": 1374,
+      "sha256": "944cd87d13c1dd1f0f819c580fbe560bd576f2616c9e5724d9f0d210b942c5f3"
+    },
+    {
+      "path": "task.json",
+      "bytes": 581,
+      "sha256": "bb976a489fbace98c70a4308daf47468cfb19b923f4e7e8d1f5bab1812edf7c8"
+    },
+    {
+      "path": "uv-0-0.spv",
+      "bytes": 346716,
+      "sha256": "ae387562fdc882c9a3ab39be619f3bb528cbb90a59ef46e92fd07cc35adc1d93"
+    },
+    {
+      "path": "uv-0-0.zlib",
+      "bytes": 194335,
+      "sha256": "6f9add587e10c2fee6ccb24b0fff32315e8b1aaca444bf3cf8d4abc325d85259"
+    },
+    {
+      "path": "uv-0-12.spv",
+      "bytes": 346716,
+      "sha256": "180c8b757efd15b112e429f9e580f96dc72bda87e0e7a789c5647d0ba4df1f7c"
+    },
+    {
+      "path": "uv-0-12.zlib",
+      "bytes": 183365,
+      "sha256": "d040834e4fa234e3da88383dce9e5a4558d66e000743b35c3e7d02b8a70376f9"
+    },
+    {
+      "path": "uv-0-24.spv",
+      "bytes": 346716,
+      "sha256": "95df0d03a2e3874b32a6d19ad1bfed53dfd28db9b1fa987f5f10192e414e7726"
+    },
+    {
+      "path": "uv-0-24.zlib",
+      "bytes": 105732,
+      "sha256": "6dcb025387ef4b4fcea32b844fd2000c3839695799520abfccdeca8b731f8205"
+    },
+    {
+      "path": "uv-1-0.spv",
+      "bytes": 346716,
+      "sha256": "f23bebac49d61c6f5f02f0f96f2223d25e519202a5131f3dda559b904dc4d725"
+    },
+    {
+      "path": "uv-1-0.zlib",
+      "bytes": 194229,
+      "sha256": "d9d5a5b14ec92e57c910f7d873780f21ee2862dc8e2fedc9797cec1e090e5ec9"
+    },
+    {
+      "path": "uv-1-12.spv",
+      "bytes": 346716,
+      "sha256": "d4c6832dbf06b7cb4a818f74d25c9d3b4aac8c0a1ba3bc7f0d2d1ff772a00891"
+    },
+    {
+      "path": "uv-1-12.zlib",
+      "bytes": 176312,
+      "sha256": "e34263bdfbbc6025feacc6fa39cb78fbe511af5f5c550031b2db3085f196e179"
+    },
+    {
+      "path": "uv-1-24.spv",
+      "bytes": 346716,
+      "sha256": "475ee7e850466f64d16281e94709cb0fc57ba25a16cd3b6c7b560ae92639baf6"
+    },
+    {
+      "path": "uv-1-24.zlib",
+      "bytes": 103862,
+      "sha256": "3516c3b92866b23169c9cc580df59866854d16fca2f104f54f36f22b22bcc821"
+    },
+    {
+      "path": "uv-source.json",
+      "bytes": 31548,
+      "sha256": "82f7a76a94044ad899f7aec6ef30bf0310156d9de9839c606ccb6245791c5083"
+    },
+    {
+      "path": "inputs/manifest.json",
+      "bytes": 685,
+      "sha256": "36e88310c26848c643061e174c94f156fa73b0d9b1f4d00f5ce32b9508e88cfc"
+    },
+    {
+      "path": "inputs/mask.png",
+      "bytes": 8418,
+      "sha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7"
+    },
+    {
+      "path": "inputs/native-packed-crop.zlib",
+      "bytes": 150197,
+      "sha256": "d9422dbf4eb42766c1d536741ce574e2c6a871ed722ffc5107e42ec6b1cbcb0e"
+    },
+    {
+      "path": "inputs/original-final.zlib",
+      "bytes": 113298,
+      "sha256": "6485d01364e0f3abc656ff5ad7cdfcdd067a70db9d79ce3618bfede8b46648d5"
+    },
+    {
+      "path": "reproduction.json",
+      "bytes": 134,
+      "sha256": "c6ea2f868883809303218fcadf21b9ae530cf0897c8212f98ad7995a99ac7a22"
+    }
+  ],
+  "archiveReproduction": {
+    "status": "independent-archive-reproduction-passed",
+    "rowsExact": true,
+    "uvExact": true,
+    "archiveMembersVerified": 41
+  }
+}
