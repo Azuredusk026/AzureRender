@@ -1,0 +1,71 @@
+{
+  "compression": {
+    "decodedBytes": 2186104960,
+    "compressedBytes": 528275524,
+    "retainedBytes": 528275524,
+    "compressSeconds": 4.312000000209082,
+    "decompressSeconds": 2.632000000216067,
+    "version": "1.5.7",
+    "level": 1,
+    "roundTripExact": true
+  },
+  "status": "decoded-source-compression-scope",
+  "seconds": 41.40700000000652,
+  "uniqueSourceFiles": 541,
+  "encodedImages": 476,
+  "uniqueDecodedImages": 468,
+  "groups": {
+    "0": {
+      "images": 6,
+      "baseBytes": 33554496
+    },
+    "1": {
+      "images": 63,
+      "baseBytes": 201285696
+    },
+    "2": {
+      "images": 107,
+      "baseBytes": 461914112
+    },
+    "3": {
+      "images": 243,
+      "baseBytes": 1160872960
+    },
+    "4": {
+      "images": 49,
+      "baseBytes": 328477696
+    }
+  },
+  "errors": [],
+  "scope": "Pillow-decoded unique frozen source images at base level; Zstandard level 1 and exact roundtrip. Runtime processed material bytes, shared ownership and actual loading peak remain separate",
+  "frozenSourceHashesVerified": 541,
+  "codecBinary": {
+    "path": "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\zstd.dll",
+    "sha256": "f0dac30f0c645dc91c20b24bb2a5e93d77b9aa5f0fef0136ebcdfe5d77a06d79"
+  },
+  "sourceBase": "fd26678",
+  "nativeImageCaptures": 0,
+  "wholeFrameTimingRuns": 0,
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 52753,
+    "sha256": "25df40062bcd868e988a72a2789573f07966888da8becfacf935e6df4ac544d7"
+  },
+  "members": [
+    {
+      "path": "scope.py",
+      "bytes": 5448,
+      "sha256": "0af5bd877accc79f6b7fbf97a87a372ea8856b2cc0948ee9d019e66f225c169f"
+    },
+    {
+      "path": "results.json",
+      "bytes": 371393,
+      "sha256": "d6aae047291d420401d1b236ea2a28fe6fa20289a4c8820ad70d569817ff3b0a"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "1a5043a191706972cab256c7e1cc88083af96df48478e4790fa12b1d9e1bf5ca"
+    }
+  ]
+}

@@ -55,6 +55,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [冻结纹理通道](../acceptance/nr/texture-channel-scope.md)完成 541 份源文件摘要及基础通道核查。
 [色度与缓存集成](../acceptance/nr/main-chroma-seal-integration.md)通过主线双配置 24 项及冻结四帧。
 [线性通道存储](../acceptance/nr/linear-texture-channel-storage.md)通过双配置、双设备及原四帧，纹素字节减少约 14.08%。
+[预备像素载荷](2026-11-10-prepared-pixel-payloads.md)按不可变载荷及加载接入两阶段执行，源基础层压缩还原核查通过。
 原四帧零差，GPU 名义改善约 0.02634%。
 区间效率门槛未通过，源码及实际宿主已恢复。
 
