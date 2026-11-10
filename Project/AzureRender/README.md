@@ -25,6 +25,7 @@
 [缓存写入生命周期](docs/acceptance/nr/material-cache-seal.md)在加载后释放约 1.66 GB 身份像素，双配置及原四帧通过。
 [快照颜色历史](docs/acceptance/nr/snapshot-color-history.md)保持原四帧零差，整数附件混合验证未通过，候选已封存。
 [浮点身份编码](docs/acceptance/nr/float-history-identity.md)通过双设备完整 24 位键域、覆盖与遮挡核对，场景候选继续验证。
+[浮点快照历史](docs/acceptance/nr/float-snapshot-history.md)通过严格四帧，三进程短测未达效率门槛，候选已封存。
 级联归属修复使静止局部灯的首帧与绑定路径保持一致，原始四帧继续零差。
 [运动矢量绑定](docs/acceptance/nr/motion-descriptor-reuse.md)按帧槽复用稳定资源，所属十项检查及原生四帧核对通过。
 [展示照明按需计算](docs/acceptance/nr/presentation-environment-demand.md)的候选未达区间效率门槛，生产已恢复受检内容。
