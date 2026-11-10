@@ -1300,3 +1300,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [场景参考相机选择](../acceptance/nr/scene-reference-camera-selection.md)通过持久锚点、刚性移动及优先级核对。
 两配置十二组检查及当前原四帧通过，光栅与拾取消费继续接入。
+
+[保守剔除参数](../acceptance/nr/conservative-frustum-transport.md)通过两配置、两设备及旧模块兼容检查。
+128 字节布局及原四帧通过，参考混合平面继续接入。
