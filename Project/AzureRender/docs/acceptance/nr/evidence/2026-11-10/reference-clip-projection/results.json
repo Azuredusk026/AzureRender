@@ -1,0 +1,101 @@
+{
+  "status": "qualified-public-kernel-scene-binding-pending",
+  "overall": "failed-user-review",
+  "nativePoints": 11564,
+  "analyticPoints": 8192,
+  "configurations": [
+    "Release",
+    "Debug"
+  ],
+  "devices": [
+    "NVIDIA",
+    "Intel"
+  ],
+  "exactGpuComponents": 316096,
+  "projectionRejections": 9,
+  "shaderRejections": 5,
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "programIdentity": [
+    {
+      "configuration": "release",
+      "playerSha256": "020951dd8594e5464a8915bfac5e5f1ca96fc0f53b4f880faabfdfc7c0cf6c60",
+      "originalPrograms": 679,
+      "allOriginalProgramsExact": true,
+      "totalPrograms": 682,
+      "sourceShaderSha256": "7c2dce1307b5850561e118f62c2638d251bebc354fb0881c542358181821b74d",
+      "preparedShaderSha256": "9b1861db5073c1476311352399d5526cc0e68b95a4a14d35675cc93eac7c6014",
+      "preparedVulkan10Validation": true
+    },
+    {
+      "configuration": "debug",
+      "playerSha256": "51ece278dbe241af8da0556bf16a99d49215711943843805563e525843415278",
+      "originalPrograms": 679,
+      "allOriginalProgramsExact": true,
+      "totalPrograms": 682,
+      "sourceShaderSha256": "7c2dce1307b5850561e118f62c2638d251bebc354fb0881c542358181821b74d",
+      "preparedShaderSha256": "9b1861db5073c1476311352399d5526cc0e68b95a4a14d35675cc93eac7c6014",
+      "preparedVulkan10Validation": true
+    }
+  ],
+  "metadata": [
+    {
+      "configuration": "Release",
+      "registrationVerified": true,
+      "playerAndShaderUnchanged": true
+    },
+    {
+      "configuration": "Debug",
+      "registrationVerified": true,
+      "playerAndShaderUnchanged": true
+    }
+  ],
+  "source": {
+    "CMakeLists.txt": "13b2ab118121c94b0dde2b0910b12b045a0745a768cc5ff4cc10292f87733a94",
+    "src/render/ReferenceClipProjection.hpp": "37eb9b6a9c55b7d9f37771a8cbb7ed91f873da4e4db8e6c2faf5b16f293ba9ca",
+    "src/render/ReferenceFmaShader.hpp": "1734b2e8878a3de9829ecb1b7a294a3e3289264b7105fdbcf78afa3d3d71d348",
+    "shaders/reference_clip_projection.glsl": "02352ee211c89e50dd724e28ea777ae495321a58bd3dc81cdd20405a9c7bf420",
+    "shaders/reference_clip_projection_test.comp": "63a45557756d2f8b71727b141d2af273a174b19ddf16afb2616b39cb7d4107dd",
+    "tests/ReferenceClipProjectionGpuTests.cpp": "5beb92bc88fc594f7b839346fbaac88e2f16a75c8e7836ed7d4ee6cb84563239"
+  },
+  "archive": {
+    "members": 123,
+    "bytes": 647409,
+    "sha256": "ecdbc9129403924f6ea8e03b88ec09af730ab7c3eaf839b50cb8d5aadd7faf5b"
+  },
+  "remaining": [
+    "Production camera frame binding",
+    "Actual depth producer",
+    "Material sampling policy and native visual gates"
+  ]
+}

@@ -808,3 +808,6 @@ $env:VCPKG_ROOT = "D:/Tools/vcpkg"
 
 [主 UV 取样候选](docs/acceptance/nr/material-mirrored-uv-candidate.md)保存设备差异及隔离来源。
 候选接入待验，相机投影与真实深度来源继续推进。
+
+[参考裁剪投影](docs/acceptance/nr/reference-clip-projection.md)通过原生向量与双设备位精度核对。
+公共内核与原四帧回归通过，相机及深度生产继续接入。
