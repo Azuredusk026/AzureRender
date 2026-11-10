@@ -806,3 +806,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [参考相机视图契约](docs/acceptance/nr/reference-camera-view.md)通过两配置空间查询及双设备深度适配。
 17017 条来源射线的往返误差满足八位子像素门槛，宿主视图选择与绘制绑定继续接入。
+
+[参考光栅位置](docs/acceptance/nr/reference-raster-projection.md)通过两配置、双设备数值核对。
+组合保留设备最终深度及屏幕偏移，场景宿主绑定继续接入。

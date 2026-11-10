@@ -1,0 +1,24 @@
+#version 450
+#extension GL_GOOGLE_include_directive : require
+#include "reference_raster_projection.glsl"
+layout(local_size_x=64) in;
+struct Input {vec4 world;vec4 base;vec4 finalClip;vec4 reference;};
+layout(std430,binding=0) readonly buffer Inputs {Input values[];} source;
+layout(std430,binding=1) writeonly buffer Outputs {vec4 values[];} destination;
+layout(push_constant) uniform Parameters {vec4 columns[4];vec4 jitter;uvec4 control;vec4 offset;} parameters;
+void main(){uint i=gl_GlobalInvocationID.x;if(i>=source.values.length())return;Input r=source.values[i];
+    destination.values[2*i]=azureReferenceRasterPosition(r.world.xyz,r.base,r.finalClip,parameters.columns,parameters.jitter.xy,parameters.control.y,parameters.offset.xyz,(parameters.control.z&1u)!=0u,(parameters.control.z&2u)!=0u);
+    // Independent device oracle: recorded reference XYW plus the frozen
+    // device division/product and screen displacement operation sequence.
+    precise vec4 expected=r.reference;
+    if(r.base.w==0||r.finalClip.w==0||expected.w==0||(parameters.control.z&1u)==0u)expected=r.finalClip;
+    else {
+        precise float ndcZ=r.finalClip.z/r.finalClip.w;expected.z=ndcZ*r.reference.w;
+        if(any(notEqual(r.base.xyw,r.finalClip.xyw))){
+            precise vec2 a=r.finalClip.xy/r.finalClip.w,b=r.base.xy/r.base.w;
+            precise vec2 d=a-b,o=d*r.reference.w;expected.xy=r.reference.xy+o;
+        }
+        if(any(isnan(expected))||any(isinf(expected)))expected=r.finalClip;
+    }
+    destination.values[2*i+1]=expected;
+}

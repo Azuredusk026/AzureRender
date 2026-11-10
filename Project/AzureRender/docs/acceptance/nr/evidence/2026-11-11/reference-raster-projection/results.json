@@ -1,0 +1,136 @@
+{
+  "status": "qualified-public-reference-raster-composition",
+  "overall": "failed-user-review",
+  "baseCommit": "7d9dd54",
+  "sourceSha256": {
+    "CMakeLists.txt": "93de89da2d88f1f01b80c02fd42027436ad68c859eb17a0e52d300bb6a2e643d",
+    "src/render/ReferenceRasterProjection.hpp": "a8ac19e4d95ef967056916b9811933dc0afbf2b5f18f869b65047baa5bbd00b0",
+    "shaders/reference_raster_projection.glsl": "2812f63b24525641ada3a3cb7c5d589df2bf6eee869c941bb3c20ea2000c7e95",
+    "shaders/reference_raster_projection_test.comp": "3dff259756dfbbc4e537daddc5d1b0afd5b0c4b6b9e5ede488c17532401efbc6",
+    "tests/ReferenceRasterProjectionGpuTests.cpp": "e43d844635ad3e8d5a18fe3f2ce7a5828e9f8a714bb9cbed4ec79666d673f10a"
+  },
+  "configurations": [
+    {
+      "configuration": "release",
+      "playerSha256": "f6a391018258ff2ea7fa32e3394cb5089e996ed206d14eb4142e4c030a954b43",
+      "playerUnchanged": true,
+      "testSha256": "5a327c68ae7ba99bd9e2dd31da62f23683873ed14bfe2f2a76d8714b52629f20",
+      "oldProgramsExact": 858,
+      "programCount": 859
+    },
+    {
+      "configuration": "debug",
+      "playerSha256": "78cb7bb5c895d4edd5339acec1cfd44678b4079371001be86b9046556a1766b2",
+      "playerUnchanged": true,
+      "testSha256": "602af5c7d12584d432f7f675d67fb4df910f571cf1ba072db0b759af7c806a72",
+      "oldProgramsExact": 858,
+      "programCount": 859
+    }
+  ],
+  "gpu": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceRasterProjectionGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\reference_raster_projection_test.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-022111-reference-raster-projection-bc4b9a\\native-records.bin"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "stdout": "NVIDIA GeForce RTX 4060 Laptop GPU: 44364 records / 177456 exact GPU raster components; CPU contracts and cleanup passed"
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceRasterProjectionGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\reference_raster_projection_test.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-022111-reference-raster-projection-bc4b9a\\native-records.bin"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "stdout": "Intel(R) RaptorLake-S Mobile Graphics Controller: 44364 records / 177456 exact GPU raster components; CPU contracts and cleanup passed"
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceRasterProjectionGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\reference_raster_projection_test.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-022111-reference-raster-projection-bc4b9a\\native-records.bin"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "stdout": "NVIDIA GeForce RTX 4060 Laptop GPU: 44364 records / 177456 exact GPU raster components; CPU contracts and cleanup passed"
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceRasterProjectionGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\reference_raster_projection_test.comp.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-022111-reference-raster-projection-bc4b9a\\native-records.bin"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "stdout": "Intel(R) RaptorLake-S Mobile Graphics Controller: 44364 records / 177456 exact GPU raster components; CPU contracts and cleanup passed"
+    }
+  ],
+  "recordsPerEndpoint": 44364,
+  "componentsPerEndpoint": 177456,
+  "totalExactGpuComponents": 709824,
+  "actualVerticesPerEndpoint": 11564,
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "originalFourReuseReason": "Both current Player executable bytes and all 858 production/reference shaders are unchanged; new shader is a standalone numeric fixture",
+  "remaining": [
+    "Scene host binding",
+    "Production hair 73 color failures",
+    "Intel depth/visibility 96 failures",
+    "Skin, eyes, GI, reflection and dynamic appearance gates"
+  ],
+  "archive": {
+    "bytes": 1558965,
+    "sha256": "8241becb8b3ec01dd6ccd93f8a14bc6ec3679d58ec1648babc87721d5b9f7ecd",
+    "members": 45
+  }
+}
