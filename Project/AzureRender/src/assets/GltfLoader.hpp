@@ -79,6 +79,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureHairPixelIntegral = 1U << 23U,
     MaterialFeatureUnlitTextureLayers = 1U << 24U,
     MaterialFeatureIndependentCoverage = 1U << 25U,
+    MaterialFeatureR11G11B10Output = 1U << 26U,
     MaterialFeatureShadowCoverageMask = MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow,
 };
 

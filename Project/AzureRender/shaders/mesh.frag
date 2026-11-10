@@ -29,6 +29,7 @@ layout(early_fragment_tests) in;
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
 #include "material_sampling.glsl"
+#include "material_output_precision.glsl"
 #include "material_specialization.glsl"
 #include "fragment_sampling.glsl"
 #include "irradiance_query.glsl"
@@ -2167,6 +2168,7 @@ void main()
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
     azureWriteDisplayMask(outputColor.a);
 #endif
+    outputColor=azureMaterialOutputPrecision(outputColor,materialFeatureEnabled(67108864U)>.5);
     float innerOutlineParticipation =
         (1.0 - platformMask)
         * (overlayMaterial ? 0.0 : 1.0)

@@ -121,7 +121,9 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 [细粒度梯度组合](../acceptance/nr/hair-relative-fine-gradient-control.md)保留一处新增超差。
 [四像素组梯度组合](../acceptance/nr/hair-relative-quad-gradient-control.md)通过私有来源完整区域。
 17017 个像素的峰差为一字节，原 73 处全部闭合且新增为零。
-公共取样、投影、存储精度及实际深度继续接入验收。
+[公共输出精度](../acceptance/nr/material-output-precision.md)完成两配置、双设备所属核对。
+3276800 次分量比较及十六张图像通过，原始四帧保持零差。
+公共取样、相对投影及实际深度继续接入验收。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。

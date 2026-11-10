@@ -1,6 +1,7 @@
 #pragma once
 #include "assets/GltfLoader.hpp"
 #include "assets/MaterialBlendDepth.hpp"
+#include "assets/MaterialOutputPrecision.hpp"
 #include "assets/MaterialRimResponse.hpp"
 #include <cstddef>
 #include <type_traits>
@@ -68,6 +69,7 @@ inline PackedMaterialSurfaceProfile packEyeSurfaceProfile(const AssetMaterial::E
 inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMaterial& material) {
     validateUnlitSubmission(material.unlitTextureLayers);
     validateMaterialBlendDepth(material);
+    validateMaterialOutputPrecision(material);
     validateMaterialRimResponse(material);
     if(material.projectedHairRamp.lighting.mainBrightnessSaturation&&
         (!material.projectedHairRamp.present||!material.projectedHairRamp.lighting.present

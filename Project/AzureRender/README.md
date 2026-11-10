@@ -532,6 +532,8 @@ ED0 至 ED7 开发交付完成，P8 状态为 Ready。
 
 AzureRender 是使用 C++17 与原生 Vulkan 的 Windows 引擎。编辑器、运行时和独立 Player 提供内容制作、游戏运行与发布能力。公开探索项目用于验证这些公共能力。
 
+[材质输出精度](docs/runtime/material-output-precision.md)提供可选的无符号 RGB 量化，公共材质与独立工具共用转换规则。
+
 ## 阅读入口
 
 | 想了解什么 | 阅读入口 |
