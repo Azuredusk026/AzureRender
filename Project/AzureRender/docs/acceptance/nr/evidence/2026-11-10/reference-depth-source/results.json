@@ -1,0 +1,444 @@
+{
+  "status": "qualified-public-opaque-depth-producer-native-material-binding-pending",
+  "overall": "failed-user-review",
+  "exactGpuAttachmentValues": 295680,
+  "gpuBatches": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceDepthGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-positions.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-indices.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\release-nvidia"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceDepthGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-positions.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-indices.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\release-intel"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceDepthGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceDepthGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders"
+      ],
+      "validationClean": true
+    }
+  ],
+  "rejectionsPerBatch": 10,
+  "projectionWorkflows": [
+    "Orthographic",
+    "Perspective"
+  ],
+  "coverageChecks": [
+    "Forward/reversed nearest overlap",
+    "Adjacent binary32 depth",
+    "Asymmetric Y mapping",
+    "Clear and slot reuse"
+  ],
+  "nativeDepthComparison": [
+    {
+      "device": "nvidia",
+      "maskPixels": 17017,
+      "colorVsNative": {
+        "exact": 15695,
+        "withinOneUlp": 16303,
+        "maxUlp": 471615,
+        "medianUlp": 0.0,
+        "maxAbsolute": 0.0008784513920545578,
+        "medianAbsolute": 0.0,
+        "missing": 0
+      },
+      "d32VsNative": {
+        "exact": 15695,
+        "withinOneUlp": 16303,
+        "maxUlp": 471615,
+        "medianUlp": 0.0,
+        "maxAbsolute": 0.0008784513920545578,
+        "medianAbsolute": 0.0,
+        "missing": 0
+      },
+      "mirroredRowDiagnostic": {
+        "exact": 0,
+        "withinOneUlp": 0,
+        "maxUlp": 1023488733,
+        "medianUlp": 1023264220.0,
+        "maxAbsolute": 0.03154264762997627,
+        "medianAbsolute": 0.030978135764598846,
+        "missing": 17017
+      },
+      "selectedColorD32BitExact": true,
+      "fullOutputSha256": "ea53cd4800661ea80a2053dbf7f1c38faf500fc520521f2700b18a93b746af2f",
+      "examples": [
+        {
+          "pixel": [
+            1305,
+            156
+          ],
+          "expected": 0.031000196933746338,
+          "color": 0.03100019507110119,
+          "depth": 0.03100019507110119
+        },
+        {
+          "pixel": [
+            1276,
+            158
+          ],
+          "expected": 0.031174106523394585,
+          "color": 0.031174108386039734,
+          "depth": 0.031174108386039734
+        },
+        {
+          "pixel": [
+            1267,
+            159
+          ],
+          "expected": 0.031160060316324234,
+          "color": 0.03116004168987274,
+          "depth": 0.03116004168987274
+        },
+        {
+          "pixel": [
+            1309,
+            159
+          ],
+          "expected": 0.03100356087088585,
+          "color": 0.031003570184111595,
+          "depth": 0.031003570184111595
+        },
+        {
+          "pixel": [
+            1265,
+            160
+          ],
+          "expected": 0.031124891713261604,
+          "color": 0.031124886125326157,
+          "depth": 0.031124886125326157
+        },
+        {
+          "pixel": [
+            1266,
+            160
+          ],
+          "expected": 0.0311538428068161,
+          "color": 0.03115379437804222,
+          "depth": 0.03115379437804222
+        },
+        {
+          "pixel": [
+            1274,
+            160
+          ],
+          "expected": 0.031178301200270653,
+          "color": 0.031178319826722145,
+          "depth": 0.031178319826722145
+        },
+        {
+          "pixel": [
+            1310,
+            160
+          ],
+          "expected": 0.031000543385744095,
+          "color": 0.031000565737485886,
+          "depth": 0.031000565737485886
+        },
+        {
+          "pixel": [
+            1264,
+            161
+          ],
+          "expected": 0.03112080879509449,
+          "color": 0.031120792031288147,
+          "depth": 0.031120792031288147
+        },
+        {
+          "pixel": [
+            1265,
+            161
+          ],
+          "expected": 0.031147625297307968,
+          "color": 0.0311475470662117,
+          "depth": 0.0311475470662117
+        },
+        {
+          "pixel": [
+            1274,
+            161
+          ],
+          "expected": 0.031193498522043228,
+          "color": 0.03119349665939808,
+          "depth": 0.03119349665939808
+        },
+        {
+          "pixel": [
+            1311,
+            161
+          ],
+          "expected": 0.03099752403795719,
+          "color": 0.030997561290860176,
+          "depth": 0.030997561290860176
+        }
+      ]
+    },
+    {
+      "device": "intel",
+      "maskPixels": 17017,
+      "colorVsNative": {
+        "exact": 7735,
+        "withinOneUlp": 15232,
+        "maxUlp": 471617,
+        "medianUlp": 1.0,
+        "maxAbsolute": 0.0008784551173448563,
+        "medianAbsolute": 1.862645149230957e-09,
+        "missing": 0
+      },
+      "d32VsNative": {
+        "exact": 7735,
+        "withinOneUlp": 15232,
+        "maxUlp": 471617,
+        "medianUlp": 1.0,
+        "maxAbsolute": 0.0008784551173448563,
+        "medianAbsolute": 1.862645149230957e-09,
+        "missing": 0
+      },
+      "mirroredRowDiagnostic": {
+        "exact": 0,
+        "withinOneUlp": 0,
+        "maxUlp": 1023488733,
+        "medianUlp": 1023264220.0,
+        "maxAbsolute": 0.03154264762997627,
+        "medianAbsolute": 0.030978135764598846,
+        "missing": 17017
+      },
+      "selectedColorD32BitExact": true,
+      "fullOutputSha256": "d02079e3e9fce4ef0d81feecd4e1c3d30a2f70610509d5181a65add0f0a30687",
+      "examples": [
+        {
+          "pixel": [
+            1274,
+            152
+          ],
+          "expected": 0.030995506793260574,
+          "color": 0.030995508655905724,
+          "depth": 0.030995508655905724
+        },
+        {
+          "pixel": [
+            1271,
+            153
+          ],
+          "expected": 0.030973419547080994,
+          "color": 0.030973421409726143,
+          "depth": 0.030973421409726143
+        },
+        {
+          "pixel": [
+            1272,
+            153
+          ],
+          "expected": 0.030972681939601898,
+          "color": 0.030972683802247047,
+          "depth": 0.030972683802247047
+        },
+        {
+          "pixel": [
+            1274,
+            153
+          ],
+          "expected": 0.03097008541226387,
+          "color": 0.03097008727490902,
+          "depth": 0.03097008727490902
+        },
+        {
+          "pixel": [
+            1278,
+            153
+          ],
+          "expected": 0.03098892793059349,
+          "color": 0.03098892979323864,
+          "depth": 0.03098892979323864
+        },
+        {
+          "pixel": [
+            1269,
+            154
+          ],
+          "expected": 0.030965782701969147,
+          "color": 0.030965784564614296,
+          "depth": 0.030965784564614296
+        },
+        {
+          "pixel": [
+            1270,
+            154
+          ],
+          "expected": 0.030955351889133453,
+          "color": 0.030955353751778603,
+          "depth": 0.030955353751778603
+        },
+        {
+          "pixel": [
+            1279,
+            154
+          ],
+          "expected": 0.030988700687885284,
+          "color": 0.030988702550530434,
+          "depth": 0.030988702550530434
+        },
+        {
+          "pixel": [
+            1301,
+            154
+          ],
+          "expected": 0.031028103083372116,
+          "color": 0.031028104946017265,
+          "depth": 0.031028104946017265
+        },
+        {
+          "pixel": [
+            1302,
+            154
+          ],
+          "expected": 0.031017089262604713,
+          "color": 0.031017091125249863,
+          "depth": 0.031017091125249863
+        },
+        {
+          "pixel": [
+            1268,
+            155
+          ],
+          "expected": 0.030945349484682083,
+          "color": 0.030945351347327232,
+          "depth": 0.030945351347327232
+        },
+        {
+          "pixel": [
+            1272,
+            155
+          ],
+          "expected": 0.031152240931987762,
+          "color": 0.03115224279463291,
+          "depth": 0.03115224279463291
+        }
+      ]
+    }
+  ],
+  "nativeSourceScope": {
+    "events": [
+      422,
+      440,
+      950
+    ],
+    "422Vs950ClipExactVertices": 11564,
+    "440ClipDifferentVertices": 11564,
+    "bothDepthShadersDiscardAlpha": true,
+    "nativeCompleteColorGate": "pending; original 17017 pixels and one-byte threshold unchanged"
+  },
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "programIdentity": [
+    {
+      "configuration": "release",
+      "playerSha256": "b7526625f7a286a05e9f3dff1642d4f87c2bf01b4af00c016320064640caa35f",
+      "totalPrograms": 684,
+      "testSha256": "b6273a61443914e3bed921c14c3ece555311409f2bc0833d78293db95a5394af",
+      "serialGpuRegistration": true
+    },
+    {
+      "configuration": "debug",
+      "playerSha256": "57830164da723aff94e960c9e4966761f2f8f8a53e6ee7468a8c15cceac38a56",
+      "totalPrograms": 684,
+      "testSha256": "be85f3d7286bfd41745b1df6a073716b3e10721c287c8948e12a1f262e265829",
+      "serialGpuRegistration": true
+    }
+  ],
+  "preparedPrograms": [
+    {
+      "configuration": "release",
+      "sourceSha256": "a8e0f700200b1a0f006070f1f6301c46e39955f80bccd1bd6e8ba211230726d9",
+      "preparedSha256": "e62ec879d7508a988781e356e0e366c2fcf1f936fca32b989d37eeee907f1073",
+      "fmaResults": 3,
+      "vulkan10Validation": true,
+      "preparerSha256": "9ca56c32d71687e957357e73e88026dcc5322a493c21975f731f8a189cdd24e4"
+    },
+    {
+      "configuration": "debug",
+      "sourceSha256": "a8e0f700200b1a0f006070f1f6301c46e39955f80bccd1bd6e8ba211230726d9",
+      "preparedSha256": "e62ec879d7508a988781e356e0e366c2fcf1f936fca32b989d37eeee907f1073",
+      "fmaResults": 3,
+      "vulkan10Validation": true,
+      "preparerSha256": "9ca56c32d71687e957357e73e88026dcc5322a493c21975f731f8a189cdd24e4"
+    }
+  ],
+  "source": {
+    "CMakeLists.txt": "13f7db8bd4b3daa198b82d16472176466a7e31f1a84d9c3710c15d1936d26e14",
+    "src/render/ReferenceDepth.hpp": "d9c83ef55019d73e6ccab6ca748a884a20f30bf755ccaad1cd2b13b90d21c579",
+    "src/render/ReferenceDepth.cpp": "ebc9a65052645d634697a32914c3a2bd5248049801c910fc949ac339853c0203",
+    "shaders/reference_depth.vert": "04eaf6a7230092442b680932581fa94f418a712f29783ff1d888d3526cf2a850",
+    "shaders/reference_depth.frag": "27cd006bf2fe7a0e2a3b1c41de4e393d427c92698f63d815878ccfb394b62ece",
+    "tests/ReferenceDepthGpuTests.cpp": "ef2960bd0626b520850cd0c756bd26383483516636b2ec6a04ca0e18bfb27651"
+  },
+  "archive": {
+    "members": 90,
+    "bytes": 3388104,
+    "sha256": "62e2076992942470541a9e67623a42aa2f2ed172c72050360d882c75705740db"
+  }
+}

@@ -815,3 +815,7 @@ $env:VCPKG_ROOT = "D:/Tools/vcpkg"
 公共内核与原四帧回归通过，相机及深度生产继续接入。
 [投影主线集成](docs/acceptance/nr/public-clip-projection-main-integration.md)通过双配置十二项检查。
 两设备共 316096 个原生及解析裁剪分量逐位一致，既有宿主与程序摘要保持一致。
+
+
+[参考几何深度](docs/acceptance/nr/reference-depth-source.md)通过双配置、双设备及原四帧回归。
+公共不透明生产通过，原生覆盖、壳层和可见量继续接入。
