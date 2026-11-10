@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[椭圆层级主线集成](docs/acceptance/nr/reference-alpha-ellipse-main-integration.md)通过双配置、双设备及原四帧核对。
+原有 687 份程序保持摘要，Intel 九十六处深度差异继续定位。
+
 [独立材质视图](docs/acceptance/nr/material-view-determinism.md)通过接收计算、双配置及双设备回归。
 原始四帧摘要一致，计算视图与 UV 接入按新受检基线继续验证。
 

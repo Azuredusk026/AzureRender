@@ -1369,3 +1369,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [深度与属性插值](../acceptance/nr/depth-interpolant-source.md)完成完整区域来源核对。
 属性替代路径保持隔离，后续接续场景投影与材质绑定。
+
+[椭圆层级主线集成](../acceptance/nr/reference-alpha-ellipse-main-integration.md)通过双配置、两设备与原四帧检查。
+默认程序身份保持一致，剩余九十六处深度超差继续修正。
