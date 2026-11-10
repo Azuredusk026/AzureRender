@@ -35,6 +35,8 @@
 #include "render/SkinningBatch.hpp"
 #include "render/MorphGpuData.hpp"
 #include "render/TemporalViewState.hpp"
+#include "render/ReferenceRasterFrustum.hpp"
+#include "render/ReferenceRasterProjection.hpp"
 #include "render/MotionVectorPass.hpp"
 #include "render/ShadowTileBounds.hpp"
 #include "scene/Frustum.hpp"
@@ -108,6 +110,9 @@ private:
     void destroyMaterialClassPipelines() noexcept;
     void prepareMaterialLightingPipelines();
     VkShaderModule createUvShaderModule(const std::string&);
+    std::vector<char> readReferenceVertexProgram(const std::string&) const;
+    bool referenceCameraPrepared_=false,referenceProjectedSurface_=false;
+    std::optional<PreparedReferenceCameraView> referenceCamera_;
     void destroyUvShaderModule(VkShaderModule);
     VkPipeline createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
     VkPipeline materialUvPipeline(const AssetMaterial&,VkPipeline) const;
@@ -353,8 +358,10 @@ private:
         std::array<float,4> nprDirectionBias{},nprGainFloor{},nprAmbientColor{},nprComposition{},nprMainRadiance{},nprLightingParameters{};
         std::array<float,4> cascadeWorldDiameters{};
         std::array<float,4> unlitTimeExposure{},unlitColorGain{};
+        ReferenceRasterProjectionParameters referenceCamera;
     };
-    static_assert(sizeof(UniformBufferObject)==43*16);
+    static_assert(sizeof(UniformBufferObject)==50*16);
+    static_assert(offsetof(UniformBufferObject,referenceCamera)==43*16);
     static_assert(offsetof(UniformBufferObject,unlitTimeExposure)==41*16);
     static_assert(offsetof(UniformBufferObject,unlitColorGain)==42*16);
     static_assert(offsetof(UniformBufferObject,cascadeWorldDiameters)==40*16);

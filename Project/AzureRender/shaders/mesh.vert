@@ -18,7 +18,13 @@ layout(binding = 0) uniform CameraData {
     vec4 faceSdfShadowColor;
     vec4 mainLightDirection;
     vec4 cascadeDepthRanges;
+#if defined(AZURE_REFERENCE_CAMERA)
+#include "reference_camera_fields.glsl"
+#endif
 } camera;
+#if defined(AZURE_REFERENCE_CAMERA)
+#include "reference_camera_vertex.glsl"
+#endif
 
 layout(std430, binding = 10) readonly buffer JointData {
     mat4 matrices[];
@@ -174,6 +180,9 @@ void main() {
     vec3 gizmoNormal = normalize(transpose(inverse(mat3(morphWeights.gizmoTransform))) * skinnedNormal);
     vec3 gizmoTangent = normalize(mat3(morphWeights.gizmoTransform) * skinnedTangent);
     gl_Position = instanceData.instances[gl_InstanceIndex].modelViewProjection * gizmoPosition;
+#if defined(AZURE_REFERENCE_CAMERA)
+    vec4 referenceDeviceBase=gl_Position;
+#endif
     mat3 modelLinear = mat3(instanceData.instances[gl_InstanceIndex].model);
     worldNormal = normalize(transpose(inverse(modelLinear)) * gizmoNormal);
     worldTangent = vec4(
@@ -184,6 +193,9 @@ void main() {
 #endif
     textureCoordinate = texcoord;
     worldPosition = (instanceData.instances[gl_InstanceIndex].model * gizmoPosition).xyz;
+#if defined(AZURE_REFERENCE_CAMERA)
+    gl_Position=azureCameraRasterPosition(worldPosition,referenceDeviceBase,gl_Position);
+#endif
     for (int cascadeIndex = 0; cascadeIndex < 4; ++cascadeIndex) {
         shadowPositions[cascadeIndex] =
             instanceData.instances[gl_InstanceIndex]

@@ -1,0 +1,942 @@
+{
+  "status": "qualified-reference-camera-render-binding",
+  "overall": "failed-user-review",
+  "baseCommit": "80199cf",
+  "sourceSha256": {
+    "CMakeLists.txt": "5669865ba1f39a6a6349881dd6e72c29f3a7e782bc7ed6e6ec78f1ab6ae2ed22",
+    "shaders/mesh.vert": "ac92054567647789fe71ebe5c423f49a324c42a447a817816269c5ee73ae69eb",
+    "shaders/outline.vert": "b4db840a1a655215169bb9f4bbd8cb5715d7805353933accfde634910f600f3f",
+    "shaders/outline_view_scaled.glsl": "1a178cd7a64b4dfd3bf7f972ee7cc9d9d55c124171fb7ac4d23ca728450642c0",
+    "shaders/reference_camera_fields.glsl": "4d27e8e075ba54943029e26f6ea9ebd08d28dce04e0c2314191ced8263c3ee63",
+    "shaders/reference_camera_vertex.glsl": "9afbe18354781c34ae2952219f5969d4174b789d79e5c09112cb1f7f5b54dde8",
+    "src/app/AzureRenderApp.cpp": "631632e5317513a8c6d1feea0c725a3ae77de599ac5e43b60a79cbf6a1b40db8",
+    "src/app/AzureRenderApp.hpp": "f56f5728dadd839e1be9134da7f01ede6b91139bce9c695d1a9ad31dd095df3e",
+    "src/editor/EditorCameraController.cpp": "139127e5f44dd118c4522ed3a48e0dcd138f371ad247287b55c990dfe2ebf9b0",
+    "src/editor/commands/EditorOperations.cpp": "27847d8c810ff91e622e8905d41995838a6db355bcf9d34baef7293620de6c9e",
+    "src/editor/viewport/EditorCameraService.cpp": "a1c5f7c54a17be9b7bd4fc875fb56cdc2df19f6beb6f897f83401e794de5c976",
+    "src/render/CameraProjection.hpp": "d26dbcb6010dba06aaeec387325e19da34f9b6b5c2b85d1667493cdf31d4e66c",
+    "src/render/CameraViewDescriptor.hpp": "51f316d543814d8f57a46c490e37d8b48f2b2e9a548c446f4581944f9eb3268b",
+    "src/render/ReferenceCameraCalibration.hpp": "8c2ba0289a51b5992d836882c3092f5ff1a9e293784df72287e7dc3581f84eb1",
+    "src/render/RenderContext.hpp": "bb736dda70cb763a463424fbf97941fa45a6283668c2dfadfb2a1c896fa1570b",
+    "src/runtime/camera/GameCameraService.cpp": "f4da790fa4a4ec255c1824aa57dc2f56c006a8db04de2b6ff2a4b09ab7aefd31",
+    "src/scenes/CharacterMaterialUv.inc": "13b6b02110ad2ee1d17ed82dd49ca4163bf00b715a97418d90557ab9aa0e6eaf",
+    "src/scenes/CharacterSceneRenderer.cpp": "edbce4114e257c477f6eab6c3a2455216499f7011e160ebad58ea208291ab92f",
+    "src/scenes/CharacterSceneRenderer.hpp": "282f328fe48ad5e90875cdc13237a64da30048b757d8f1d911a9e4f693d6fce3",
+    "tests/ExtensionRegistryTests.cpp": "23b7b6c24ccce3d1f3b98915e637b9beb0dc2c591e952c6fe682254b23f5c5e5",
+    "tests/ReferenceCameraBindingTests.cpp": "c315c2f813f1bab6c035f4fbf7eb6aceabad31db57d64ed2d716d7f0b834d1a2"
+  },
+  "builds": [
+    {
+      "configuration": "release",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 145.71899999998277,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\build.py",
+          "Release"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+      },
+      "playerSha256": "124da059c793df4bfc18edeaef8fff653f3dc35d29c56e5560c28c6644104c77"
+    },
+    {
+      "configuration": "debug",
+      "execution": {
+        "status": "exited",
+        "exitCode": 0,
+        "reason": null,
+        "seconds": 70.68799999996554,
+        "logTruncated": false,
+        "samplingSeconds": 1,
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+          "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\build.py",
+          "Debug"
+        ],
+        "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+      },
+      "playerSha256": "a20fae826bf64efa332fe1063383567cb2ba6ccbd8efa626cbb29d3a550d7e24"
+    }
+  ],
+  "cpu": [
+    {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceCameraBindingTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "187 shared reference pick rays; maximum world error=1.59366e-07; raster helpers, motion, zoom, disabled and invalid bindings passed"
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceCameraSelectionTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera registration, composition, anchor bits, 256 rigid-motion points, missing/disabled/follow contracts, persistence and owned values passed; maximumPixelError=0.000203451"
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceCameraSelectionTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera registration, composition, anchor bits, 256 rigid-motion points, missing/disabled/follow contracts, persistence and owned values passed; maximumPixelError=0.000105427"
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureRenderExtensionRegistryTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": ""
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceCameraBindingTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "187 shared reference pick rays; maximum world error=1.59366e-07; raster helpers, motion, zoom, disabled and invalid bindings passed"
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceCameraSelectionTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera registration, composition, anchor bits, 256 rigid-motion points, missing/disabled/follow contracts, persistence and owned values passed; maximumPixelError=0.000203451"
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceCameraSelectionTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera registration, composition, anchor bits, 256 rigid-motion points, missing/disabled/follow contracts, persistence and owned values passed; maximumPixelError=0.000105427"
+    },
+    {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureRenderExtensionRegistryTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": ""
+    }
+  ],
+  "raster": [
+    {
+      "mode": "ordinary",
+      "configuration": "release",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\ordinary.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-nvidia-ordinary-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-nvidia-ordinary-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "reference",
+      "configuration": "release",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\reference.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-nvidia-reference-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-nvidia-reference-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "orthographic",
+      "configuration": "release",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\orthographic.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-nvidia-orthographic-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-nvidia-orthographic-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "plain",
+      "configuration": "release",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\plain-project\\plain.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-nvidia-plain-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-nvidia-plain-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "ordinary",
+      "configuration": "release",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\ordinary.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-intel-ordinary-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-intel-ordinary-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "reference",
+      "configuration": "release",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\reference.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-intel-reference-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-intel-reference-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "orthographic",
+      "configuration": "release",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\orthographic.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-intel-orthographic-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-intel-orthographic-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "plain",
+      "configuration": "release",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\plain-project\\plain.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-intel-plain-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\release-intel-plain-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "ordinary",
+      "configuration": "debug",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\ordinary.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-nvidia-ordinary-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-nvidia-ordinary-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "reference",
+      "configuration": "debug",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\reference.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-nvidia-reference-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-nvidia-reference-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "orthographic",
+      "configuration": "debug",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\orthographic.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-nvidia-orthographic-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-nvidia-orthographic-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "plain",
+      "configuration": "debug",
+      "device": "nvidia",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\plain-project\\plain.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-nvidia-plain-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-nvidia-plain-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "ordinary",
+      "configuration": "debug",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\ordinary.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-intel-ordinary-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-intel-ordinary-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "reference",
+      "configuration": "debug",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\reference.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-intel-reference-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-intel-reference-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "orthographic",
+      "configuration": "debug",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\raster-project\\orthographic.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-intel-orthographic-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-intel-orthographic-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    {
+      "mode": "plain",
+      "configuration": "debug",
+      "device": "intel",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\plain-project\\plain.azureproject",
+        "--width",
+        "600",
+        "--height",
+        "400",
+        "--qa-camera",
+        "scene",
+        "--qa-light",
+        "scene",
+        "--capture-frames",
+        "1",
+        "--capture-fps",
+        "24",
+        "--fixed-frame-step",
+        "--capture-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-intel-plain-frames",
+        "--runtime-report",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\debug-intel-plain-runtime.json",
+        "--resource-root",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug"
+      ],
+      "exitCode": 0,
+      "validationClean": true,
+      "allocatorZero": true
+    }
+  ],
+  "identities": [
+    {
+      "mode": "ordinary",
+      "endpoints": 4,
+      "maxRgbDifference": 1,
+      "allowedRgbDifference": 1
+    },
+    {
+      "mode": "reference",
+      "endpoints": 4,
+      "maxRgbDifference": 1,
+      "allowedRgbDifference": 1
+    },
+    {
+      "mode": "orthographic",
+      "endpoints": 4,
+      "maxRgbDifference": 1,
+      "allowedRgbDifference": 1
+    },
+    {
+      "mode": "plain",
+      "endpoints": 4,
+      "maxRgbDifference": 1,
+      "allowedRgbDifference": 1
+    }
+  ],
+  "preparedModules": [
+    {
+      "program": "character_snapshot_depth_compute_reference_camera.vert.spv",
+      "rawSha256": "1cd228d91bcd90d4360e8eeb151aa89d675c15f2905bba995674188013310949",
+      "preparedSha256": "d2d2fe465960bf2a6b7b90bb11dc3f65439e02c92eaf68c393adc303aaa836af",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "character_snapshot_depth_projected_bindless_compute_reference_camera.vert.spv",
+      "rawSha256": "c3bd4a5975e7754725669ed7df8691d8957933672d90abc93f06053f7c3c054a",
+      "preparedSha256": "bf3587262875ff6cfaba89e55b949347b488b6f4adccbaacafe84bd9e5b7922d",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "character_snapshot_depth_projected_bindless_reference_camera.vert.spv",
+      "rawSha256": "7c9276d38e97d1dafd258cdfe796c875f2013d69088d4b9f1e8e33f490a2f72c",
+      "preparedSha256": "80b09288f7aefca318441fd2434b055eae08e3c6cd8c3e662353e52066fb5ef4",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "character_snapshot_depth_projected_compute_reference_camera.vert.spv",
+      "rawSha256": "0cae3f7383d5fe597e505260c3ae1f44832c8ff0aa3772edfec13441ec8a3d54",
+      "preparedSha256": "da58920c7ff716471e7f87a2c2d597779a6e7c7fcee9fb96f9d7d1d5e6a1ab9a",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "character_snapshot_depth_projected_reference_camera.vert.spv",
+      "rawSha256": "a53edac1a427637e888bbbfd76a7b258395ee211cec5572c78cb86bd80bcc0a5",
+      "preparedSha256": "00e0af1db2f47964fec184769157dc7dde360d1627d24d988fc17301b0ddc399",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "character_snapshot_depth_reference_camera.vert.spv",
+      "rawSha256": "c012961717ce5de0a1fb672129ce04dbb630eb9b21197cd2f334901015996049",
+      "preparedSha256": "2aac54e6d5d4bb6ff19e33a509f8dc1a653d952dc453413fb40df468cb516ad2",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_compute_reference_camera.vert.spv",
+      "rawSha256": "ac95b72af5d871952a5744779e2474887533b718e15d07e0e82ecbb443e256d4",
+      "preparedSha256": "c487777326b41d989f94afc7951d804b3d6d8a8d4d0b3b5861910ea021a3e4f3",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_object_compute_reference_camera.vert.spv",
+      "rawSha256": "c79282dde83acf3a4a398981c44acb140dac2841a09cffc2882491dc70a1873e",
+      "preparedSha256": "7d1794c551dce2b6b9be2706b7569a2857b262e4c1734766d812921154eaab20",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_object_projected_bindless_compute_reference_camera.vert.spv",
+      "rawSha256": "535191264fa3d5c7652d924772a3e580e56737b9fed4edd5f8c9ede0fa8f46d6",
+      "preparedSha256": "63230168f31780f0236389cd3afb20e60ba7c6904a5621ad914a238a3ae00010",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_object_projected_bindless_reference_camera.vert.spv",
+      "rawSha256": "745f87f1b71f8b44d3a7d254ebcddf3e0b712981e88be5c2615f9248231c4926",
+      "preparedSha256": "34bef6dcd0732ac897ff581c17d71bae1b27a84bef1219911a262616ece00c83",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_object_projected_compute_reference_camera.vert.spv",
+      "rawSha256": "054213d33037542e02506873affcdfeb47651195502406544a7ed0ef6cf7ee53",
+      "preparedSha256": "8fcf2d86230168a8f5d63aac1780bfc8a9326177293dfce79fa9006574d6f34a",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_object_projected_reference_camera.vert.spv",
+      "rawSha256": "ecd7bb9e9f5f86a2d31039c1f047a77e561c5dfe4d57ea8f35f7db58f66bb207",
+      "preparedSha256": "979c05b23e87c468dea5ae7cb8cdacdc9de74ac762375b080a813876c6913359",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_object_reference_camera.vert.spv",
+      "rawSha256": "59268e157b6deeb4d81e0e38f6d4821cd63fa9d93a55c9f3ff5d2b82c8a1cccb",
+      "preparedSha256": "1775b25e89dd0ebc72d297339ee1190251eee03042ce2bcf813a98f7244abf3a",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_projected_bindless_compute_reference_camera.vert.spv",
+      "rawSha256": "2f87ef52dd965bcd4dfc53984a2fc5dc3218f4d3c06a3ee7191285f5617b9821",
+      "preparedSha256": "1d52f11341fc59f065eb303dca162621d324731c4952bf769a08a1fedfc440e7",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_projected_bindless_reference_camera.vert.spv",
+      "rawSha256": "02ea20dfac4fbaefd3654846b9aac2bd6703c2f144712613e498d2e792217603",
+      "preparedSha256": "b903f9365b2e85e9b8de5606b78e5025e913203b0f015b590147d9639dd3f9c0",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_projected_compute_reference_camera.vert.spv",
+      "rawSha256": "26fea8a800b94e7c8eae324b6cc821ac7e44917c8ec35d115b8c86dcfb42caae",
+      "preparedSha256": "a208fdb5656a2cd5c200b5ff18849e1572f3f16ab625d6b8b853155c8e0099e7",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_projected_reference_camera.vert.spv",
+      "rawSha256": "19d96fb30a5a6ec4968c92845d8ebfaf94539a68800c4b99de4125f82f9bb1bb",
+      "preparedSha256": "4112bdeb42d6b75a8029eeae2fc76f6f7751760827eb4dd2ee39a6ee1097ac8c",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "mesh_reference_camera.vert.spv",
+      "rawSha256": "5ed62cbc35c0b50bece56df4e62e56bd9c60bfa942ce1b82130b70cdd55f765c",
+      "preparedSha256": "d4ecf394c6b515e65734cb0b333365b8fef0326c0e9cc4d4b426fd02a9d86812",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "outline_compute_reference_camera.vert.spv",
+      "rawSha256": "d3bf1cda59e995415450a30a5c3f22ff3c615fe87fee6f35e12267c453de6261",
+      "preparedSha256": "15713b9bca6acaa5ca680976dbda1e3b0772b703d56f0bd46bfc5bf5effa6403",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "outline_mask_compute_reference_camera.vert.spv",
+      "rawSha256": "9f73eb8b0389d6ebf7a9021dcb6044ec970ee7a7ef41a53f9324797e10acbc36",
+      "preparedSha256": "e77e496faa26eb00fddeb9238dc36f4cb5ddd51374754aa6c74c6c3f3cea2ffa",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "outline_mask_reference_camera.vert.spv",
+      "rawSha256": "40a33cc6ee4d69f950a807c1bba3d1413eb164979e96df743bf143f1320b82d3",
+      "preparedSha256": "4cdd824dcf07f9bd77db3e706c2dab2ad2083f42fbeace0b97c16ace69ffcc48",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "outline_reference_camera.vert.spv",
+      "rawSha256": "7d2445bdd977b1b87718fb779c231d5051973d16b859aa15305578abed18aed1",
+      "preparedSha256": "fee85c358c714fb6e0b48235e25d74f0be5dc22efec4d3a581ba99756372b54e",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "outline_view_scaled_bindless_reference_camera.vert.spv",
+      "rawSha256": "3547dccca13aef1671541daa4891c502b8070f4c2125ee2cc93e9be0492b4a40",
+      "preparedSha256": "aa77d3547a179f812daf3fb7d9a3f463c467da610a6a7658a34c87b965066b23",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "outline_view_scaled_compute_bindless_reference_camera.vert.spv",
+      "rawSha256": "62a7fea39eb886a3a357437f32d3ea6a7148122808ea0a776e5159a52adb0b33",
+      "preparedSha256": "2f5a2701062ebc3be508a8d3bfcec6fac72fded23676ec96adcb8decb9fbe05c",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "outline_view_scaled_compute_reference_camera.vert.spv",
+      "rawSha256": "51074ab8c7d0860115bb278bee598a4a91ff654bc4065d949e8706dd336f421b",
+      "preparedSha256": "575cde209559162672d2ac6ca2dac6b03a3067a652e78eab2ea798d17506ffd9",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    },
+    {
+      "program": "outline_view_scaled_reference_camera.vert.spv",
+      "rawSha256": "25e13787152c6e41f3be39a8bdb681d29443f0f833e3a7ccce3e16b5328396f8",
+      "preparedSha256": "711c0e4be17ea7269f57694303412f6616fc69279ad963eea70a7bff7f05e0a2",
+      "fusedResults": 3,
+      "idempotent": true,
+      "validationExitCode": 0
+    }
+  ],
+  "cameraViewLayoutVersion": 3,
+  "sceneRendererApiVersion": 10,
+  "cameraUniformBytes": 800,
+  "referenceOffset": 688,
+  "referenceBytes": 112,
+  "oldProgramsExact": 859,
+  "addedPrograms": 26,
+  "programCount": 885,
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "fourExecution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 119.53200000000652,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\default-four.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-053153-reference-camera-render-binding-c3826b\\tmp"
+  },
+  "remaining": [
+    "Production hair 73 color failures",
+    "Intel reference depth/visibility 96 failures",
+    "Reference temporal motion, screen-space reflections and view fog",
+    "Skin, eyes, GI, reflection and dynamic appearance gates"
+  ],
+  "archive": {
+    "bytes": 1343487,
+    "sha256": "dd3e3388bb5752c16c993d011a03044f31cddc2146f785b41ab3f33fffab1dbe",
+    "members": 272
+  }
+}

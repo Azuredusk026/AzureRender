@@ -98,6 +98,11 @@ AzureRenderApp::~AzureRenderApp() {
 void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
+    referenceCameraPrograms_=false;
+    if(!options.projectFile.empty()){
+        const auto project=options.projectStartup?options.projectStartup->project():azurerender::Project::load(std::filesystem::u8path(options.projectFile));
+        referenceCameraPrograms_=!azurerender::loadProjectReferenceViews(project).views.empty();
+    }
 #if !AZURE_WITH_EDITOR
     if(!options.shaderReloadConfig.empty() || !options.previewViews.empty())throw std::invalid_argument("Developer rendering tools require the AzureRender host");
 #endif
@@ -655,6 +660,7 @@ void AzureRenderApp::buildRenderContext(
         }
     }
     context.shaderDirectory = resourceLocator_.shaderDirectory().u8string();
+    context.referenceCameraPrograms=referenceCameraPrograms_;
 #if AZURE_WITH_EDITOR
     if(!activeShaderDirectory_.empty())context.shaderDirectory=activeShaderDirectory_;
 #endif
@@ -810,7 +816,7 @@ void AzureRenderApp::buildSceneFrameData(
     fallback.nearPlane=effectiveRenderSettings_.cameraNear;fallback.farPlane=effectiveRenderSettings_.cameraFar;
     const auto editingView=sceneViewActive?effectiveRenderSettings_.cameraView:std::optional<azurerender::CameraViewDescriptor>{};
     frame.camera=azurerender::selectRenderCamera(editingView,gameView,fallback);
-    if(sceneRenderer_&&(frame.camera.view.projectionOffsetX!=0||frame.camera.view.projectionOffsetY!=0))
+    if(sceneRenderer_&&(frame.camera.view.projectionOffsetX!=0||frame.camera.view.projectionOffsetY!=0||frame.camera.view.referenceCalibration))
         azurerender::validateSceneRendererCamera(sceneRenderer_->capabilities(),frame.camera.view);
     effectiveRenderSettings_.cameraView=frame.camera.view;
     effectiveRenderSettings_.cameraNear=frame.camera.view.nearPlane;

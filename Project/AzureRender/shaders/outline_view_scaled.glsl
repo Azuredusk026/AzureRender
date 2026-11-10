@@ -34,9 +34,16 @@ void main() {
     mat4 mvp=instanceData.instances[gl_InstanceIndex].modelViewProjection;
     vec3 localPosition=(morphWeights.gizmoTransform*vec4(skinnedPosition,1)).xyz;
     vec4 clip=mvp*vec4(localPosition,1);
+#if defined(AZURE_REFERENCE_CAMERA)
+    vec4 referenceDeviceBase=clip;
+#endif
     shellDepthProjection=vec4(1,0,1,0);
     if(abs(determinant(mat3(model)))<1e-12||abs(determinant(mat3(morphWeights.gizmoTransform)))<1e-12) {
-        gl_Position=clip;return;
+        gl_Position=clip;
+#if defined(AZURE_REFERENCE_CAMERA)
+        gl_Position=azureCameraRasterPosition((model*vec4(localPosition,1)).xyz,referenceDeviceBase,clip);
+#endif
+        return;
     }
     vec3 localNormal=normalize(transpose(inverse(mat3(morphWeights.gizmoTransform)))*skinnedNormal);
     if(parameters.w<.5) {
@@ -44,7 +51,11 @@ void main() {
         vec2 direction=(shifted.xy/max(shifted.w,.0001)-clip.xy/max(clip.w,.0001))*camera.clusterDepth.zw;
         float magnitude=length(direction);
         if(magnitude>.00001)clip.xy+=direction/magnitude*camera.renderingParameters.x*2.0/camera.clusterDepth.zw*clip.w;
-        gl_Position=clip;return;
+        gl_Position=clip;
+#if defined(AZURE_REFERENCE_CAMERA)
+        gl_Position=azureCameraRasterPosition((model*vec4(localPosition,1)).xyz,referenceDeviceBase,clip);
+#endif
+        return;
     }
     mat3 modelInverse=inverse(mat3(model));
     vec3 worldNormal=normalize(transpose(modelInverse)*localNormal);
@@ -72,4 +83,7 @@ void main() {
     shellDepthProjection=vec4(dot(rowZ,forward),cameraClip.z,dot(rowW,forward),cameraClip.w);
     clip.z=outlineShiftedClipDepth(clip,shellDepthProjection.xz,parameters.z*mask.g);
     gl_Position=clip;
+#if defined(AZURE_REFERENCE_CAMERA)
+    gl_Position=azureCameraRasterPosition((model*vec4(localPosition,1)).xyz,referenceDeviceBase,clip);
+#endif
 }

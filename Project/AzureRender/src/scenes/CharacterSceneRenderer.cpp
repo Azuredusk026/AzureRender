@@ -47,6 +47,7 @@ static constexpr bool kSurfaceRadianceFrameSelection=false;
 #include "render/CascadedShadow.hpp"
 #include "scene/TransformParity.hpp"
 #include "render/CameraProjection.hpp"
+#include "render/ReferenceFmaShader.hpp"
 
 #include <GLFW/glfw3.h>
 #include <stb_image.h>
@@ -310,6 +311,7 @@ SceneRendererCapabilities CharacterSceneRenderer::capabilities() const {
     caps.supportsMaterialLightingReception=true;
     caps.supportsNprRampComposition=true;
     caps.supportsMaterialCoverage=true;
+    caps.supportsReferenceCamera=true;
     caps.diagnosticViewNames = {
         "Beauty",
         "World Normal",
@@ -342,6 +344,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     shaderDirectory_ = context.shaderDirectory;
     qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
+    referenceCameraPrepared_=context.referenceCameraPrograms||(renderSettings_->cameraView&&renderSettings_->cameraView->referenceCalibration.has_value());
     faceSdfPrepared_=renderSettings_->faceSdfFeature;platformPrepared_=renderSettings_->showcasePlatformFeature;
     faceSdfTextureCount_=0;
     gpuCullingEnabled_ = context.gpuCulling;
@@ -976,6 +979,14 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
         }
     }
 
+    if(referenceCamera_&&!sceneInstances_.empty()){
+        std::array<float,3> lo=sceneInstances_.front().worldBounds.minimum,hi=sceneInstances_.front().worldBounds.maximum;
+        for(const auto& instance:sceneInstances_)for(unsigned a=0;a<3;++a){lo[a]=std::min(lo[a],instance.worldBounds.minimum[a]);hi[a]=std::max(hi[a],instance.worldBounds.maximum[a]);}
+        ReferenceCameraView device;device.extent=referenceCamera_->descriptor().extent;device.depthConvention=ReferenceDepthConvention::Forward;
+        const auto matrix=multiply(projectionMatrix_,viewMatrix_);for(unsigned c=0;c<4;++c)for(unsigned r=0;r<4;++r)device.projection.parameters.columns[c][r]=matrix[c*4+r];
+        viewFrustum_=prepareReferenceRasterFrustum(*referenceCamera_,PreparedReferenceCameraView(device),lo,hi,false).planes();
+        if(referenceProjectedSurface_||renderSettings_->outline.silhouetteWidthPixels>0){viewFrustum_={};viewFrustum_.conservativeMargin=0;viewFrustum_.referenceWPlane={0,0,0,0};}
+    }
     materialOriginInstances_=materialOriginNodes_.empty()?nullptr:
         std::make_shared<const MaterialOriginInstances>(sceneInstances_,materialOriginNodes_);
     if(materialOriginInstances_&&materialOriginInstances_->gpuCount()>instanceCapacity_)
@@ -1006,7 +1017,7 @@ void CharacterSceneRenderer::rebuildSceneInstances() {
             auto resources = std::make_unique<GpuCullingResources>(*rhi_);
             resources->initialize(azurerender::readBinaryFile(shaderDirectory_ +
                                   (visibilityPrototype_?"/visibility_prototype.comp.spv":"/cull_indirect.comp.spv")),
-                                  static_cast<std::uint32_t>(capacity),visibilityPrototype_);
+                                  static_cast<std::uint32_t>(capacity),visibilityPrototype_,referenceCameraPrepared_);
             gpuCullingFrames_[currentFrame_] = std::move(resources);
             gpuCullingCapacities_[currentFrame_] = capacity;
         }
@@ -1367,6 +1378,7 @@ void CharacterSceneRenderer::registerPasses(
         outputInitial.dstAccessMask = VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
         indirectResource = graph.importBuffer("cull-output", outputInitial);
         GpuCullParameters parameters{viewFrustum_.planes, 0, cullingEnabled_ ? 1U : 0U};
+        parameters.conservativeMargin=viewFrustum_.conservativeMargin;parameters.referenceWPlane=viewFrustum_.referenceWPlane;
         const auto cull = graph.addCommandPass("character-gpu-culling",
             [culling, parameters](rhi::ICommandRecorder& commands) { culling->record(commands, parameters); }, true);
         graph.use(cull, bounds, RenderGraphUsage::Storage, false);
@@ -2046,6 +2058,10 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"cascadeProjectionLayoutVersion\": 2,\n"
          << "  \"cascadeCasterDistance\": " << renderSettings_->shadowDistance << ",\n"
          << "  \"cameraUniformBytes\": " << sizeof(UniformBufferObject) << ",\n"
+         << "  \"referenceCameraPrograms\": " << (referenceCameraPrepared_?"true":"false") << ",\n"
+         << "  \"referenceCameraEnabled\": " << (referenceCamera_?"true":"false") << ",\n"
+         << "  \"referenceCameraLayoutVersion\": 1,\n"
+         << "  \"referenceCameraConservativeRetention\": " << (referenceCamera_&&(referenceProjectedSurface_||renderSettings_->outline.silhouetteWidthPixels>0)?"true":"false") << ",\n"
          << "  \"unlitFrameLayoutVersion\": 1,\n"
          << "  \"viewFogEnabled\": " << (viewFog_?"true":"false") << ",\n"
          << "  \"viewFogAnalyticEnabled\": " << (viewFog_&&scene_.viewFog.analytic?"true":"false") << ",\n"
@@ -3742,17 +3758,18 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     };
     bool projectedSurface=hasProjectedSurface(asset_);
     for(const auto& resource:additionalResources_)projectedSurface|=hasProjectedSurface(resource->asset);
+    referenceProjectedSurface_=projectedSurface;
     const auto meshVertexPath=[&](std::string base) {
         if(projectedSurface)base+=bindlessTextures_?"_projected_bindless":"_projected";
         if(computeSkinningEnabled_)base+="_compute";
         return shaderDirectory+"/"+base+".vert.spv";
     };
-    const auto vertexCode=azurerender::readBinaryFile(meshVertexPath(objectShadowPrepared_?"mesh_object":"mesh"));
+    const auto vertexCode=readReferenceVertexProgram(meshVertexPath(objectShadowPrepared_?"mesh_object":"mesh"));
     const auto materialFragmentPath=shaderDirectory+sceneFragmentVariant((objectShadowPrepared_
             ? (bindlessTextures_?"/mesh_object_bindless.frag.spv":"/mesh_object.frag.spv")
             : (bindlessTextures_?"/mesh_bindless.frag.spv":"/mesh.frag.spv")),rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,irradianceClipmapActive_,probeFieldActive_);
     const auto outlineVertexCode =
-        azurerender::readBinaryFile(shaderDirectory + (outlineProjectionEnabled_
+        readReferenceVertexProgram(shaderDirectory + (outlineProjectionEnabled_
             ? (computeSkinningEnabled_?(bindlessTextures_?"/outline_view_scaled_compute_bindless.vert.spv":"/outline_view_scaled_compute.vert.spv")
                 :(bindlessTextures_?"/outline_view_scaled_bindless.vert.spv":"/outline_view_scaled.vert.spv"))
             : (computeSkinningEnabled_?"/outline_compute.vert.spv":"/outline.vert.spv")));
@@ -3880,7 +3897,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             ?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv"));
         VkShaderModule simpleDepthVertex=VK_NULL_HANDLE;
         try{
-            simpleDepthVertex=rhi_->createShaderModule(azurerender::readBinaryFile(meshVertexPath("character_snapshot_depth")));
+            simpleDepthVertex=rhi_->createShaderModule(readReferenceVertexProgram(meshVertexPath("character_snapshot_depth")));
             auto desc=depthDesc;desc.vertexShader=simpleDepthVertex;desc.fragmentShader=simpleDepthModule;desc.colorWriteMasks.assign(desc.colorAttachmentCount,0);desc.colorWriteMasks[1]=VK_COLOR_COMPONENT_R_BIT;
             // Snapshot-depth vertices consume the mesh stream without vertex colors.
             desc.vertexAttributes.pop_back();desc.vertexBindings.resize(1);
@@ -4420,6 +4437,14 @@ void CharacterSceneRenderer::updateUniformBuffer(
     }
 
     UniformBufferObject uniform{};
+    referenceCamera_=settings.cameraView?resolveReferenceCamera(*settings.cameraView):std::nullopt;
+    uniform.referenceCamera.control[2]=0;
+    if(referenceCamera_){
+        if(!referenceCameraPrepared_)throw std::invalid_argument("Reference camera requires project reference programs prepared before scene loading");
+        if(settings.antiAliasing==3)throw std::invalid_argument("Reference camera requires a spatial anti-aliasing mode; temporal reference motion is not prepared");
+        if(settings.screenSpaceReflection.enabled||viewFog_)throw std::invalid_argument("Reference camera screen-space reflection and view-fog projection require separate qualification");
+        uniform.referenceCamera=referenceRasterProjectionParameters(*referenceCamera_);
+    }
     // The actual view rotation is independent of sky projection scale.
     uniform.cameraRight={viewMatrix_[0],viewMatrix_[4],viewMatrix_[8],samplingJitter_[0]};
     uniform.cameraUp={viewMatrix_[1],viewMatrix_[5],viewMatrix_[9],samplingJitter_[1]};

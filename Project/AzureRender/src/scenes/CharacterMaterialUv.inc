@@ -1,6 +1,16 @@
 // The renderer owns reference variants beside its existing material pipelines.
+std::vector<char> CharacterSceneRenderer::readReferenceVertexProgram(const std::string& path) const{
+    const auto name=std::filesystem::path(path).filename().string();
+    const bool geometry=name.size()>9&&name.compare(name.size()-9,9,".vert.spv")==0
+        &&(name.rfind("mesh",0)==0||name.rfind("outline",0)==0||name.rfind("character_snapshot_depth",0)==0);
+    if(!referenceCameraPrepared_||!geometry)return readBinaryFile(path);
+    auto reference=path;reference.insert(reference.size()-9,"_reference_camera");
+    auto prepared=prepareReferenceFmaShader(readBinaryFile(reference));
+    if(prepared.fusedResults!=3)throw std::invalid_argument("Reference camera vertex program requires three marked fused operations");
+    return std::move(prepared.code);
+}
 VkShaderModule CharacterSceneRenderer::createUvShaderModule(const std::string& path){
-    const auto module=rhi_->createShaderModule(readBinaryFile(path));
+    const auto module=rhi_->createShaderModule(readReferenceVertexProgram(path));
     try{materialUvShaderPaths_.emplace_back(module,path);}catch(...){rhi_->destroyShaderModule(module);throw;}
     return module;
 }

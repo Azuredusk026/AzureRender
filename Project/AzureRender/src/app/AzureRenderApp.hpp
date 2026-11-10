@@ -77,6 +77,7 @@ public:
         const { return effectiveRenderSettings_; }
 
 private:
+    bool referenceCameraPrograms_=false;
 #if AZURE_WITH_EDITOR
     std::unique_ptr<azurerender::ShaderHotReloader> shaderReloader_;
     std::unique_ptr<azurerender::RenderViewService> renderViews_;

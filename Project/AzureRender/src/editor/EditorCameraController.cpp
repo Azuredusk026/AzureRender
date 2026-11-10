@@ -134,7 +134,7 @@ bool EditorCameraController::apply(const EditorViewportInput& input,CameraViewDe
         next.position=internal::addVectors(next.target,offset);forward=internal::normalize(internal::scaleVector(offset,-1));
     }
     right=internal::normalize(internal::cross(forward,next.up));const auto up=internal::cross(right,forward);
-    if(input.zoomSteps!=0){const auto factor=std::exp(-input.zoomSteps*.16F);if(next.projection==CameraProjectionKind::Orthographic)next.orthoHeight=std::clamp(next.orthoHeight*factor,.0001F,1000000.F);
+    if(input.zoomSteps!=0){const auto factor=std::exp(-input.zoomSteps*.16F);if(next.projection==CameraProjectionKind::Orthographic){next.orthoHeight=std::clamp(next.orthoHeight*factor,.0001F,1000000.F);if(next.referenceCalibration)next.referenceCalibration->screenScale=std::clamp(next.referenceCalibration->screenScale/factor,1.e-6F,1.e6F);}
         else next.position=internal::subtract(next.target,internal::scaleVector(forward,std::clamp(distance*factor,.001F,1000000.F)));}
     const float panScale=(next.projection==CameraProjectionKind::Orthographic?next.orthoHeight:distance)*.0015F;
     auto translation=internal::addVectors(internal::scaleVector(right,-input.panDeltaX*panScale),internal::scaleVector(up,input.panDeltaY*panScale));

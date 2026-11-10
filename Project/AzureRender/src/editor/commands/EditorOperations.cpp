@@ -3,6 +3,9 @@
 #include "editor/EditorSession.hpp"
 #include "runtime/ComponentRegistry.hpp"
 #include "runtime/camera/GameCameraService.hpp"
+#include "runtime/ProjectReferenceViews.hpp"
+#include "ecs/ReferenceCameraComponents.hpp"
+#include "render/CameraProjection.hpp"
 #include "scene/SceneDescription.hpp"
 #include "runtime/LevelRenderSettings.hpp"
 #include "runtime/ColorGradingLutBinding.hpp"
@@ -368,7 +371,13 @@ EditRegistry editorOperations(EditorSession& session) {
         game::GameCamera camera;metadata.decode("azure.camera",&camera,{{"type","azure.camera"},{"version",metadata.type("azure.camera").version},{"data",data}});
         const auto scene=c.scene().renderDescription();const auto matrices=scene::resolveNodeWorldTransforms(scene);
         for(std::size_t i=0;i<scene.nodes.size();++i)if(scene.nodes[i].id==node){
-            const auto view=gameCameraView(camera,matrices[i]);
+            auto view=gameCameraView(camera,matrices[i]);
+            const auto data=c.componentData(node,"azure.reference-camera");
+            if(!data.is_null()){
+                game::ReferenceCamera reference;metadata.decode("azure.reference-camera",&reference,{{"type","azure.reference-camera"},{"version",metadata.type("azure.reference-camera").version},{"data",data}});
+                if(reference.enabled){const auto views=loadProjectReferenceViews(c.project());const auto found=views.views.find(reference.view);if(found==views.views.end())throw EditRejection("Reference camera view is not installed: "+reference.view);
+                    view.referenceCalibration=ReferenceCameraCalibration{found->second,{reference.anchorPosition,reference.anchorRight,reference.anchorUp,reference.anchorBack},1};validateCameraView(view,1);}
+            }
             static_cast<CameraViewDescriptor&>(session.viewportView_)=view;session.viewportViewChanged_=true;return nullptr;
         }
         throw EditRejection("Camera owner no longer exists");
