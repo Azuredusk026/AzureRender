@@ -251,3 +251,6 @@ RGB 采用五位指数及六、六、五位尾数。
 
 [深度透明覆盖](../acceptance/nr/reference-depth-coverage.md)通过公共表面及默认四帧检查。
 NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继续修正。
+
+[Intel 深度与透明取样来源](../acceptance/nr/intel-depth-alpha-footprint.md)完成位精度控制。
+九十七处超差分为七十六处单末位、二十处较大深度差及一处透明判定差。
