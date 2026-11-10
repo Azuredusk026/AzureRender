@@ -819,6 +819,8 @@ $env:VCPKG_ROOT = "D:/Tools/vcpkg"
 
 [参考几何深度](docs/acceptance/nr/reference-depth-source.md)通过双配置、双设备及原四帧回归。
 公共不透明生产通过，原生覆盖、壳层和可见量继续接入。
+[几何深度与覆盖主线集成](docs/acceptance/nr/geometry-depth-coverage-main-integration.md)通过双配置十六项检查。
+深度、覆盖及投影的双设备复核通过，重建后的实际 Player 原四帧摘要一致。
 
 [几何深度与可见量](docs/acceptance/nr/geometry-depth-visibility.md)完成双设备成对核对。
 原生深度控制通过，几何来源的七处及一百零三处超差继续修正。
