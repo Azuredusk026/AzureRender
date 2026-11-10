@@ -1,0 +1,72 @@
+{
+  "status": "qualified-vertex-output",
+  "sourceVertexCount": 11564,
+  "indices": 43044,
+  "devices": [
+    {
+      "device": "nvidia",
+      "depthIdentityQualified": true,
+      "depthIdentityDifferentPixels": 0,
+      "clipVectors": 43044,
+      "clipComponents": 172176,
+      "bitExactComponents": 172176,
+      "differentIndexOccurrences": 0,
+      "differentUniqueVertices": 0,
+      "differentComponentsByAxis": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxUlpByAxis": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "examples": []
+    },
+    {
+      "device": "intel",
+      "depthIdentityQualified": true,
+      "depthIdentityDifferentPixels": 0,
+      "clipVectors": 43044,
+      "clipComponents": 172176,
+      "bitExactComponents": 172176,
+      "differentIndexOccurrences": 0,
+      "differentUniqueVertices": 0,
+      "differentComponentsByAxis": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxUlpByAxis": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "examples": []
+    }
+  ],
+  "overall": "failed-user-review",
+  "sourceCommit": "701b735",
+  "defaultRegression": [
+    {
+      "configuration": "release",
+      "playerAndAll686ProgramsUnchanged": true,
+      "defaultFourEvidenceCommit": "f100244"
+    },
+    {
+      "configuration": "debug",
+      "playerAndAll686ProgramsUnchanged": true,
+      "defaultFourEvidenceCommit": "f100244"
+    }
+  ],
+  "archive": {
+    "members": 52,
+    "bytes": 1879833,
+    "sha256": "a889e17eb86e0792f48019f3593a92620318f12d7c201fb961b029dfe0049b27"
+  }
+}

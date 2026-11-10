@@ -830,3 +830,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [Intel 深度与透明取样来源](docs/acceptance/nr/intel-depth-alpha-footprint.md)完成位精度控制。
 九十七处超差分为七十六处单末位、二十处较大深度差及一处透明判定差。
+
+[实际顶点裁剪读回](docs/acceptance/nr/actual-vertex-clip-readback.md)通过双设备位精度核对。
+每设备四万三千零四十四个向量精确一致，后续核对视口及光栅插值。
