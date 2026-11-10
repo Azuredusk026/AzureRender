@@ -1,0 +1,889 @@
+{
+  "status": "qualified-postvs-source-diagnosis",
+  "vertices": 11564,
+  "indices": 43044,
+  "reverseIndexOrderExact": true,
+  "sourceUvMaximumPerComponent": [
+    0.0,
+    2.9802322387695312e-08
+  ],
+  "clipXywMaximumPerComponent": [
+    1.341104507446289e-07,
+    1.430511474609375e-06,
+    9.5367431640625e-07
+  ],
+  "nativeClipModelBitExactVertices": 11564,
+  "cpuSubpixelModels": [
+    {
+      "pixel": [
+        1306,
+        156
+      ],
+      "models": [
+        {
+          "label": "native",
+          "nearestTriangle": 10167,
+          "coveredTriangleCount": 2,
+          "predictedUv": [
+            0.7469484571164976,
+            0.938931569223925
+          ],
+          "actualUv": [
+            0.7469484210014343,
+            0.9389315843582153
+          ],
+          "maximumAbsoluteError": 3.6115063273278736e-08
+        },
+        {
+          "label": "vulkan",
+          "nearestTriangle": 10167,
+          "coveredTriangleCount": 2,
+          "predictedUv": [
+            0.7469407787463926,
+            0.938930772593029
+          ],
+          "actualUv": [
+            0.7469407916069031,
+            0.9389306902885437
+          ],
+          "maximumAbsoluteError": 8.230448533819157e-08
+        }
+      ]
+    },
+    {
+      "pixel": [
+        1322,
+        263
+      ],
+      "models": [
+        {
+          "label": "native",
+          "nearestTriangle": 4087,
+          "coveredTriangleCount": 8,
+          "predictedUv": [
+            0.8454407466326258,
+            0.838114791880798
+          ],
+          "actualUv": [
+            0.845440685749054,
+            0.8381146788597107
+          ],
+          "maximumAbsoluteError": 1.1302108726685134e-07
+        },
+        {
+          "label": "vulkan",
+          "nearestTriangle": 4087,
+          "coveredTriangleCount": 8,
+          "predictedUv": [
+            0.8454407466320111,
+            0.8381147918814016
+          ],
+          "actualUv": [
+            0.845440685749054,
+            0.8381146788597107
+          ],
+          "maximumAbsoluteError": 1.1302169089510983e-07
+        }
+      ]
+    },
+    {
+      "pixel": [
+        1193,
+        295
+      ],
+      "models": [
+        {
+          "label": "native",
+          "nearestTriangle": 10131,
+          "coveredTriangleCount": 2,
+          "predictedUv": [
+            0.10366920077949965,
+            0.6822900216670214
+          ],
+          "actualUv": [
+            0.1036691889166832,
+            0.6822900176048279
+          ],
+          "maximumAbsoluteError": 1.1862816451380098e-08
+        },
+        {
+          "label": "vulkan",
+          "nearestTriangle": 10131,
+          "coveredTriangleCount": 2,
+          "predictedUv": [
+            0.10366611829808549,
+            0.6822897962681168
+          ],
+          "actualUv": [
+            0.10366613417863846,
+            0.6822898387908936
+          ],
+          "maximumAbsoluteError": 4.2522776744213786e-08
+        }
+      ]
+    },
+    {
+      "pixel": [
+        1193,
+        296
+      ],
+      "models": [
+        {
+          "label": "native",
+          "nearestTriangle": 10131,
+          "coveredTriangleCount": 2,
+          "predictedUv": [
+            0.10343261201846614,
+            0.6807934441716249
+          ],
+          "actualUv": [
+            0.10343261063098907,
+            0.6807934641838074
+          ],
+          "maximumAbsoluteError": 2.0012182466722095e-08
+        },
+        {
+          "label": "vulkan",
+          "nearestTriangle": 10131,
+          "coveredTriangleCount": 2,
+          "predictedUv": [
+            0.10343020746676305,
+            0.6807932677928216
+          ],
+          "actualUv": [
+            0.10343021154403687,
+            0.6807932257652283
+          ],
+          "maximumAbsoluteError": 4.2027593294413634e-08
+        }
+      ]
+    },
+    {
+      "pixel": [
+        1193,
+        297
+      ],
+      "models": [
+        {
+          "label": "native",
+          "nearestTriangle": 10131,
+          "coveredTriangleCount": 2,
+          "predictedUv": [
+            0.10319601887878166,
+            0.6792968389784185
+          ],
+          "actualUv": [
+            0.10319600999355316,
+            0.6792967915534973
+          ],
+          "maximumAbsoluteError": 4.742492121234676e-08
+        },
+        {
+          "label": "vulkan",
+          "nearestTriangle": 10131,
+          "coveredTriangleCount": 2,
+          "predictedUv": [
+            0.10319429231897145,
+            0.6792967119354898
+          ],
+          "actualUv": [
+            0.10319430381059647,
+            0.6792967319488525
+          ],
+          "maximumAbsoluteError": 2.0013362744819574e-08
+        }
+      ]
+    }
+  ],
+  "export": {
+    "status": "exported",
+    "draws": [
+      {
+        "label": "native",
+        "event": 950,
+        "mesh": {
+          "baseVertex": 0,
+          "vertexByteOffset": 0,
+          "vertexByteStride": 132,
+          "indexByteOffset": 0,
+          "indexByteStride": 2,
+          "numIndices": 43044,
+          "flipY": false,
+          "unproject": true
+        },
+        "signature": [
+          {
+            "compCount": 4,
+            "regIndex": 0,
+            "regChannelMask": 15,
+            "semanticName": "SV_Position",
+            "semanticIndex": 0,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Position",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 2,
+            "regIndex": 1,
+            "regChannelMask": 3,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 0,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 2,
+            "regChannelMask": 7,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 1,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 3,
+            "regChannelMask": 7,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 2,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 4,
+            "regChannelMask": 15,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 3,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 5,
+            "regChannelMask": 7,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 4,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 6,
+            "regChannelMask": 7,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 5,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 7,
+            "regChannelMask": 7,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 6,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 8,
+            "regChannelMask": 15,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 7,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 9,
+            "regChannelMask": 7,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 8,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 1,
+            "regIndex": 10,
+            "regChannelMask": 1,
+            "semanticName": "TEXCOORD",
+            "semanticIndex": 9,
+            "varName": "",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.UInt"
+          }
+        ],
+        "files": [
+          {
+            "role": "vertex",
+            "name": "native-vertex.bin",
+            "bytes": 1526448,
+            "sha256": "49df748f07528ec2b1ee5a558adaa2d7c5e51f37ce38372f97d2145675afbbeb"
+          },
+          {
+            "role": "index",
+            "name": "native-index.bin",
+            "bytes": 86088,
+            "sha256": "2ab42c277510cad0ff47249acdc60d164c254f3264142ace510008dea8e9a14f"
+          }
+        ],
+        "shaderSha256": "4375f5834448e05f55cb9bea6c391b5d03315e0854c174e95b60427ccd4e8bd1",
+        "debugMessages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      {
+        "label": "vulkan",
+        "event": 493,
+        "mesh": {
+          "baseVertex": 0,
+          "vertexByteOffset": 0,
+          "vertexByteStride": 256,
+          "indexByteOffset": 0,
+          "indexByteStride": 4,
+          "numIndices": 43044,
+          "flipY": false,
+          "unproject": true
+        },
+        "signature": [
+          {
+            "compCount": 4,
+            "regIndex": 0,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "gl_Position",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Position",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 0,
+            "regChannelMask": 7,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "worldNormal",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 1,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "worldTangent",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 2,
+            "regIndex": 2,
+            "regChannelMask": 3,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "textureCoordinate",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 3,
+            "regChannelMask": 7,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "worldPosition",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 4,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "shadowPositions[0]",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 5,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "shadowPositions[1]",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 6,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "shadowPositions[2]",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 7,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "shadowPositions[3]",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 1,
+            "regIndex": 8,
+            "regChannelMask": 1,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "eyebrowRegion",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 9,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "instanceFaceDirection",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 10,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "instanceFaceFrame:col0",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 11,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "instanceFaceFrame:col1",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 12,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "instanceFaceFrame:col2",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 4,
+            "regIndex": 13,
+            "regChannelMask": 15,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "instanceFaceFrame:col3",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 3,
+            "regIndex": 14,
+            "regChannelMask": 7,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "opacityCoordinate",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.Float"
+          },
+          {
+            "compCount": 1,
+            "regIndex": 15,
+            "regChannelMask": 1,
+            "semanticName": "",
+            "semanticIndex": 0,
+            "varName": "instanceObjectShadow",
+            "stream": 0,
+            "systemValue": "ShaderBuiltin.Undefined",
+            "varType": "VarType.UInt"
+          }
+        ],
+        "files": [
+          {
+            "role": "vertex",
+            "name": "vulkan-vertex.bin",
+            "bytes": 2960384,
+            "sha256": "5e557a0f4c94e78a8ce5e5bf9a5af6e9c468aa7e050a26bf33e42d14ff6ae2c3"
+          },
+          {
+            "role": "index",
+            "name": "vulkan-index.bin",
+            "bytes": 172176,
+            "sha256": "5e797a9af4f6e37b739a31bf1a5255a4ef1b6e4f307b5084ef00c9c9af482f7d"
+          }
+        ],
+        "shaderSha256": "b9c8863221e3528985d0440ed8516b85eadea7c2e331f7151098e18c3969371f",
+        "debugMessages": []
+      }
+    ]
+  },
+  "matrixExport": {
+    "status": "exported",
+    "draws": [
+      {
+        "label": "native",
+        "event": 950,
+        "constantBuffers": [
+          {
+            "index": 0,
+            "name": "cbuffer0",
+            "binding": {},
+            "descriptor": {
+              "resource": "ResourceId::611",
+              "byteOffset": 64256,
+              "byteSize": 1536
+            },
+            "file": {
+              "name": "native-cb-0.bin",
+              "bytes": 4194304,
+              "sha256": "8e223042a99f414e2837c6483e235f7ddfc806f0bd296c0c42f5d00ac40a31be"
+            }
+          },
+          {
+            "index": 1,
+            "name": "cbuffer1",
+            "binding": {},
+            "descriptor": {
+              "resource": "ResourceId::611",
+              "byteOffset": 65792,
+              "byteSize": 3328
+            },
+            "file": {
+              "name": "native-cb-1.bin",
+              "bytes": 4194304,
+              "sha256": "8e223042a99f414e2837c6483e235f7ddfc806f0bd296c0c42f5d00ac40a31be"
+            }
+          },
+          {
+            "index": 2,
+            "name": "cbuffer2",
+            "binding": {},
+            "descriptor": {
+              "resource": "ResourceId::611",
+              "byteOffset": 255744,
+              "byteSize": 65536
+            },
+            "file": {
+              "name": "native-cb-2.bin",
+              "bytes": 4194304,
+              "sha256": "8e223042a99f414e2837c6483e235f7ddfc806f0bd296c0c42f5d00ac40a31be"
+            }
+          },
+          {
+            "index": 3,
+            "name": "cbuffer3",
+            "binding": {},
+            "descriptor": {
+              "resource": "ResourceId::466",
+              "byteOffset": 3371264,
+              "byteSize": 512
+            },
+            "file": {
+              "name": "native-cb-3.bin",
+              "bytes": 4194304,
+              "sha256": "6952d61a9ac201b4426b6de9b867b0f74a6d74471830bbd35923f68085915d25"
+            }
+          }
+        ],
+        "readOnlyBuffers": [],
+        "debugMessages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      {
+        "label": "vulkan",
+        "event": 493,
+        "constantBuffers": [
+          {
+            "index": 0,
+            "name": "camera",
+            "binding": {},
+            "descriptor": {
+              "resource": "ResourceId::1022",
+              "byteOffset": 0,
+              "byteSize": 640
+            },
+            "file": {
+              "name": "vulkan-cb-0.bin",
+              "bytes": 640,
+              "sha256": "ecd6cfc03d3724c3b9791f80ffec8669f9483bb0d3fc5fb9a3585e77558f2762"
+            }
+          },
+          {
+            "index": 1,
+            "name": "morphWeights",
+            "binding": {},
+            "descriptor": {
+              "resource": "ResourceId::285",
+              "byteOffset": 0,
+              "byteSize": 212
+            },
+            "file": {
+              "name": "vulkan-cb-1.bin",
+              "bytes": 212,
+              "sha256": "7a35e5b5215e9af6d3d645ebb8230707ccf2485491d22093e926bd18b8dc116d"
+            }
+          }
+        ],
+        "readOnlyBuffers": [],
+        "debugMessages": []
+      }
+    ]
+  },
+  "productionChanged": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "scope": "Actual VSOut buffers qualify source differences. CPU nearest-triangle interpolation is a numerical model, not GPU primitive ownership or a passing color candidate. Native and Vulkan depth conventions differ; raw Z is not compared as homologous.",
+  "archiveBytes": 2408503,
+  "archiveSha256": "49f93ce551edb19aa846f2088b56eb03fc4f08273685182603a54fd84a7be00b",
+  "archiveFiles": [
+    {
+      "path": "task.json",
+      "bytes": 412,
+      "sha256": "67df503a100ce391405b420bb85a5a6f5f59373e80041b7ab488c955d47909b7"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "dbd7c1bbd47d48ea3995b0548c2e3690a4d486649a1f9e352cbd8a22172f1b1e"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 2398,
+      "sha256": "a38fcfdc49a0c40dcab67d33f52d698a90f8b38c696574be4484ff523e8d8f67"
+    },
+    {
+      "path": "run.py",
+      "bytes": 997,
+      "sha256": "cc7ddc133e6eda8c51d43ecf58fe5dc741541433f935baff618c5ca463d2e84b"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 879,
+      "sha256": "421bd3c58fc2f8d218de265d0fd327ad7337a56eae23bde563c40591268fa9e7"
+    },
+    {
+      "path": "export-state.json",
+      "bytes": 11277,
+      "sha256": "c34d2fc95499a9a63e5de6a27795ea625019ac2da9e7cd6228ed4db29f659384"
+    },
+    {
+      "path": "export-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 568,
+      "sha256": "e3974c7d6348ccf5641f85bd6d645d7b6be63d4819d6426089973f0b5f883bba"
+    },
+    {
+      "path": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-vertex.bin",
+      "bytes": 1526448,
+      "sha256": "49df748f07528ec2b1ee5a558adaa2d7c5e51f37ce38372f97d2145675afbbeb"
+    },
+    {
+      "path": "native-index.bin",
+      "bytes": 86088,
+      "sha256": "2ab42c277510cad0ff47249acdc60d164c254f3264142ace510008dea8e9a14f"
+    },
+    {
+      "path": "vulkan-vertex.bin",
+      "bytes": 2960384,
+      "sha256": "5e557a0f4c94e78a8ce5e5bf9a5af6e9c468aa7e050a26bf33e42d14ff6ae2c3"
+    },
+    {
+      "path": "vulkan-index.bin",
+      "bytes": 172176,
+      "sha256": "5e797a9af4f6e37b739a31bf1a5255a4ef1b6e4f307b5084ef00c9c9af482f7d"
+    },
+    {
+      "path": "native-vertex.shader",
+      "bytes": 9380,
+      "sha256": "4375f5834448e05f55cb9bea6c391b5d03315e0854c174e95b60427ccd4e8bd1"
+    },
+    {
+      "path": "vulkan-vertex.shader",
+      "bytes": 18092,
+      "sha256": "b9c8863221e3528985d0440ed8516b85eadea7c2e331f7151098e18c3969371f"
+    },
+    {
+      "path": "native-vertex.asm",
+      "bytes": 13731,
+      "sha256": "836a954b50280a6bd693e230a7e9fadbf2517996e54d9499aef25b994db72d67"
+    },
+    {
+      "path": "vulkan-vertex.asm",
+      "bytes": 22276,
+      "sha256": "fc0598695c039877ae7e253995f349555e113a247cdf037ef882d884890ff1bb"
+    },
+    {
+      "path": "vulkan-vertex.spvasm",
+      "bytes": 50741,
+      "sha256": "bd20d94cea249842b9383f4e943a45c21bee4c0c1ce82b10df9f82086c8833fe"
+    },
+    {
+      "path": "collect_matrix.py",
+      "bytes": 3005,
+      "sha256": "3506f50ebfc504fa2051b7a3c109b01311d7d9dbc03bd99214af5a19d5eeb338"
+    },
+    {
+      "path": "run_matrix.py",
+      "bytes": 1004,
+      "sha256": "5802d3d38465824964d55d3cda99ef7bdc5b80813aa1dda0ed8dcabd12a056e3"
+    },
+    {
+      "path": "queued_matrix.py",
+      "bytes": 899,
+      "sha256": "c3bee9660727bb2d3454157eb0f6a9a673fd716e1d8d40044b554e4c2dc8aed7"
+    },
+    {
+      "path": "matrix-state.json",
+      "bytes": 3317,
+      "sha256": "fc2b3c9358f1b7c5f2613983feae8f201652e7f69aa8dcaaba80bbe373e68021"
+    },
+    {
+      "path": "matrix-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "matrix-execution.json",
+      "bytes": 575,
+      "sha256": "b5d878223fa4be47380f2349fd0539280f936f983e9432772997c1a71a9e3686"
+    },
+    {
+      "path": "invalid-api-collect_matrix.py",
+      "bytes": 3006,
+      "sha256": "dfa837b19a10bc6c70a02eb219e2d323c8693969fc74d8cdfcafe48176d940de"
+    },
+    {
+      "path": "invalid-api-matrix-state.json",
+      "bytes": 422,
+      "sha256": "44b51038f209d216df574ee3972e436110d4612ed375de41c6ee774d835b8402"
+    },
+    {
+      "path": "invalid-api-matrix-execution.json",
+      "bytes": 575,
+      "sha256": "fc2d678d8b2ac436f177902e7c3b13173f10d776b1fe10eb11952539255a7c8b"
+    },
+    {
+      "path": "invalid-api-matrix-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 4026,
+      "sha256": "9f80320d8f607bc78c633ce17113fd744c6636e2d88785b00ff9dfb828e1578c"
+    },
+    {
+      "path": "analysis.log",
+      "bytes": 4589,
+      "sha256": "193b6928eafab95a1ee3560d8b34378a677d245659be863841085ea6187d05e0"
+    },
+    {
+      "path": "uv-source-results.json",
+      "bytes": 31548,
+      "sha256": "82f7a76a94044ad899f7aec6ef30bf0310156d9de9839c606ccb6245791c5083"
+    },
+    {
+      "path": "results.json",
+      "bytes": 20826,
+      "sha256": "68492437ba4827ad3ab25e9e4cdd741f6b227e3cda74a1d30889faff2347ec74"
+    },
+    {
+      "path": "native-cb-0-range.bin",
+      "bytes": 1536,
+      "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+    },
+    {
+      "path": "native-cb-1-range.bin",
+      "bytes": 3328,
+      "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+    },
+    {
+      "path": "native-cb-2-range.bin",
+      "bytes": 65536,
+      "sha256": "670548c6705a52d9631365e6fe366da25ca7f93553a6ac1cc1f899baa55cbf58"
+    },
+    {
+      "path": "native-cb-3-range.bin",
+      "bytes": 512,
+      "sha256": "d122916ff5cd66c493eb0226302cc4849e314282efc49605d68b6775f26ddd3d"
+    },
+    {
+      "path": "vulkan-cb-0.bin",
+      "bytes": 640,
+      "sha256": "ecd6cfc03d3724c3b9791f80ffec8669f9483bb0d3fc5fb9a3585e77558f2762"
+    },
+    {
+      "path": "vulkan-cb-1.bin",
+      "bytes": 212,
+      "sha256": "7a35e5b5215e9af6d3d645ebb8230707ccf2485491d22093e926bd18b8dc116d"
+    }
+  ]
+}
