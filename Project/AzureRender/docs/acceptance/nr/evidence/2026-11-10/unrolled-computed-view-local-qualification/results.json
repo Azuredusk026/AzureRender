@@ -1,0 +1,109 @@
+{
+  "status": "isolated-below-native-admission",
+  "referenceSourceBase": "5009755",
+  "captureSourceBase": "274615b",
+  "gates": {
+    "hotspotFrameShare": 0.25,
+    "workReduction": 0.2,
+    "alternativeGpuSavingMs": 3
+  },
+  "candidates": [
+    {
+      "candidate": "base",
+      "scope": {
+        "allEventMs": {
+          "referenceMs": 13.495791999999938,
+          "candidateMs": 11.475087999999941,
+          "savedMs": 2.0207039999999967,
+          "reduction": 0.14972844868978463,
+          "share": 1.0
+        },
+        "matchedEventMs": {
+          "referenceMs": 9.879423999999954,
+          "candidateMs": 7.968064000000025,
+          "savedMs": 1.9113599999999291,
+          "reduction": 0.1934687690294432,
+          "share": 0.7320373639427756
+        },
+        "mainEventMs": {
+          "referenceMs": 7.093632000000021,
+          "candidateMs": 5.762368000000017,
+          "savedMs": 1.3312640000000036,
+          "reduction": 0.18767029358162357,
+          "share": 0.5256180593180492
+        },
+        "ordinaryMainEventMs": {
+          "referenceMs": 3.6239360000000156,
+          "candidateMs": 2.9500960000000083,
+          "savedMs": 0.6738400000000073,
+          "reduction": 0.1859414735801086,
+          "share": 0.26852340344309045
+        },
+        "snapshotEventMs": {
+          "referenceMs": 2.785791999999998,
+          "candidateMs": 2.205695999999998,
+          "savedMs": 0.5800960000000002,
+          "reduction": 0.20823378055504527,
+          "share": 0.20641930462473124
+        }
+      },
+      "allSixAttachmentsExact": true,
+      "qualified": false,
+      "sourceUnchanged": true,
+      "productsUnchanged": true,
+      "seconds": 149.18699999997625
+    },
+    {
+      "candidate": "directional-owner",
+      "scope": {
+        "allEventMs": {
+          "referenceMs": 13.356255999999918,
+          "candidateMs": 11.428591999999979,
+          "savedMs": 1.9276639999999396,
+          "reduction": 0.14432667358277285,
+          "share": 1.0
+        },
+        "matchedEventMs": {
+          "referenceMs": 9.839583999999956,
+          "candidateMs": 7.921792000000025,
+          "savedMs": 1.917791999999931,
+          "reduction": 0.19490580089564147,
+          "share": 0.7367022614720784
+        },
+        "mainEventMs": {
+          "referenceMs": 7.049184000000022,
+          "candidateMs": 5.753472000000016,
+          "savedMs": 1.2957120000000053,
+          "reduction": 0.1838102112244483,
+          "share": 0.5277814381515348
+        },
+        "ordinaryMainEventMs": {
+          "referenceMs": 3.615264000000015,
+          "candidateMs": 2.908048000000005,
+          "savedMs": 0.7072160000000101,
+          "reduction": 0.19561946236844863,
+          "share": 0.2706794478931848
+        },
+        "snapshotEventMs": {
+          "referenceMs": 2.790399999999999,
+          "candidateMs": 2.168319999999998,
+          "savedMs": 0.6220800000000013,
+          "reduction": 0.22293577981651425,
+          "share": 0.20892082332054854
+        }
+      },
+      "allSixAttachmentsExact": true,
+      "qualified": false,
+      "sourceUnchanged": true,
+      "productsUnchanged": true,
+      "seconds": 117.625
+    }
+  ],
+  "newNativeBatches": 0,
+  "protectedFilesExact": 13,
+  "productionSourceChanges": 0,
+  "notes": [
+    "Per-role metadata sourceBase in the reused wrapper is the capture label; compare-state records the actual reference base.",
+    "All four receiver derivative blocks and their expressions remain present."
+  ]
+}

@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[展开接收计算的局部效率](docs/acceptance/nr/unrolled-computed-view-local-qualification.md)通过两种候选的六附件核对。
+完整材质降幅至多约 19.49%，效率未准入，候选保持隔离。
+
 [椭圆层级主线集成](docs/acceptance/nr/reference-alpha-ellipse-main-integration.md)通过双配置、双设备及原四帧核对。
 原有 687 份程序保持摘要，Intel 九十六处深度差异继续定位。
 
