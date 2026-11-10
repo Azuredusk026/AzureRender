@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[深度可见性组合原生验收](docs/acceptance/nr/quad-depth-combination-native.md)通过严格四帧及成对短时净收益。
+GPU 均值减少约 13.58%，生产接入及正式帧预算继续验收。
+
 [四像素组深度可见性组合](docs/acceptance/nr/quad-depth-visibility.md)通过六附件及局部效率准入。
 完整材质降幅约 21.21%，原生四帧及成对净收益继续验证。
 

@@ -1,0 +1,452 @@
+{
+  "status": "strict-compatible-effective-private-candidate-production-integration-pending",
+  "sourceBase": "88d84fb",
+  "build": {
+    "status": "private-built",
+    "sourceBase": "88d84fb",
+    "privateAppChanges": "Enable existing optional quad device feature chain and fail clearly unless enabled; production source untouched",
+    "privateHostSha256": "1f21d9309d8ff9a8c756fb4b8768a8a8d664359ba2db6b5b3eb22d210d663b44",
+    "compiledPrograms": 256,
+    "referencePrograms": 859,
+    "measuredProgramsByteExact": 10,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "protectedFilesExact": 13,
+    "hostBuildSeconds": 12.875
+  },
+  "capture": {
+    "exitCode": 0,
+    "seconds": 280.0780000000377,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "featureRequestObserved": true,
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "privateProgramsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "cost": {
+    "rows": [
+      {
+        "label": "before",
+        "seconds": 95.48500000004424,
+        "summary": {
+          "gpu": {
+            "mean": 19.136195199999996,
+            "p95": 19.478344
+          },
+          "main": {
+            "mean": 16.7727104,
+            "p95": 17.1652096
+          },
+          "shadow": {
+            "mean": 2.0829600000000004,
+            "p95": 2.1682352
+          },
+          "post": {
+            "mean": 0.28052479999999996,
+            "p95": 0.28672
+          },
+          "cpu": {
+            "mean": 5.383755000000005,
+            "p95": 6.028975000000016
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            76.23,
+            76.36,
+            76.4,
+            76.42,
+            76.6,
+            76.89,
+            77.11,
+            77.24,
+            77.26,
+            77.29,
+            77.54,
+            77.55,
+            78.1,
+            78.58,
+            78.71,
+            78.85,
+            79.17,
+            79.31,
+            80.08,
+            80.13,
+            80.18,
+            80.22,
+            80.32,
+            80.52,
+            80.99,
+            81.3,
+            81.47,
+            81.49,
+            82.04,
+            82.39
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            48.0,
+            75.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": ""
+        }
+      },
+      {
+        "label": "candidate",
+        "seconds": 94.51600000000326,
+        "summary": {
+          "gpu": {
+            "mean": 16.3476832,
+            "p95": 16.7683648
+          },
+          "main": {
+            "mean": 14.299221333333334,
+            "p95": 14.6589184
+          },
+          "shadow": {
+            "mean": 1.7640629333333335,
+            "p95": 1.9955567999999995
+          },
+          "post": {
+            "mean": 0.2843989333333334,
+            "p95": 0.2919424
+          },
+          "cpu": {
+            "mean": 4.495873333333334,
+            "p95": 5.267125000000045
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.12,
+            75.27,
+            75.7,
+            75.81,
+            75.97,
+            76.15,
+            77.0,
+            77.36,
+            77.5,
+            77.64,
+            77.65,
+            77.66,
+            77.73,
+            77.79,
+            77.92,
+            78.0,
+            78.25,
+            78.29,
+            78.32,
+            78.43,
+            78.49,
+            78.91,
+            79.01,
+            79.36,
+            79.43,
+            79.54,
+            79.61,
+            79.85,
+            80.17,
+            80.24,
+            80.38,
+            80.91,
+            80.99,
+            81.07,
+            81.15,
+            81.27,
+            81.33,
+            81.61
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            48.0,
+            61.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": ""
+        }
+      },
+      {
+        "label": "after",
+        "seconds": 98.89100000000326,
+        "summary": {
+          "gpu": {
+            "mean": 18.694861866666663,
+            "p95": 18.8022768
+          },
+          "main": {
+            "mean": 16.391697066666666,
+            "p95": 16.5888512
+          },
+          "shadow": {
+            "mean": 2.0284085333333333,
+            "p95": 2.1388608
+          },
+          "post": {
+            "mean": 0.27475626666666664,
+            "p95": 0.27648
+          },
+          "cpu": {
+            "mean": 5.3619483333333475,
+            "p95": 6.251015000000218
+          }
+        },
+        "environment": {
+          "acLineStates": [
+            1
+          ],
+          "powerLimits": [
+            75.0,
+            75.81,
+            75.86,
+            76.29,
+            76.63,
+            76.92,
+            77.11,
+            77.19,
+            77.29,
+            77.51,
+            77.72,
+            77.86,
+            78.02,
+            78.03,
+            78.05,
+            78.13,
+            78.16,
+            78.26,
+            78.34,
+            78.44,
+            78.5,
+            78.58,
+            78.65,
+            78.7,
+            78.87,
+            78.92,
+            79.01,
+            79.13,
+            79.42,
+            79.7,
+            79.72,
+            79.76,
+            80.01,
+            80.1,
+            80.56,
+            80.87,
+            80.94,
+            81.18,
+            81.24,
+            81.46,
+            81.81,
+            82.51,
+            84.37
+          ],
+          "thermalSlowdownObserved": false,
+          "temperatureRange": [
+            49.0,
+            75.0
+          ]
+        },
+        "metadata": {
+          "surfaceRadianceSelection": {
+            "enabled": false,
+            "prepared": false,
+            "frames": 0,
+            "fastFrames": 0,
+            "fullFrames": 0,
+            "fastDraws": 0,
+            "fullDraws": 0,
+            "lastFastDraws": 0,
+            "lastFullDraws": 0,
+            "fastWitnesses": 0,
+            "fullWitnesses": 0,
+            "lastFastWitnesses": 0,
+            "lastFullWitnesses": 0,
+            "lastGlobalReasons": 0,
+            "lastFallback": true,
+            "fallback": ""
+          },
+          "surfaceRadianceStatistics": {
+            "enabled": false,
+            "bytes": 0,
+            "frames": 0,
+            "producerStores": 0,
+            "consumerVisits": 0,
+            "eligibleRequests": 0,
+            "pixelMatches": 0,
+            "quadMatches": 0,
+            "sampleSpacing": 1,
+            "failureAttempts": 0,
+            "failureCapacity": 0,
+            "failureSamples": [],
+            "overflow": false
+          },
+          "surfaceRadiancePrepared": false,
+          "surfaceRadianceBytes": 0,
+          "surfaceRadianceIdentityVersion": 1,
+          "shadowHistoryPrepared": false,
+          "shadowHistoryBytes": 0,
+          "shadowHistorySampledRequests": 0,
+          "shadowHistorySampledEligible": 0,
+          "shadowHistorySampledHits": 0,
+          "defaultIsolationPipelines": 0,
+          "defaultIsolationSelected": false,
+          "defaultIsolationFallback": ""
+        }
+      }
+    ],
+    "referenceMeanMs": 18.91552853333333,
+    "candidateMeanMs": 16.3476832,
+    "reductionFraction": 0.1357532954370385,
+    "referenceDriftFraction": 0.023331800248436417,
+    "affectedRangeReductionFraction": 0.1376766584655318,
+    "efficiencyCriteria": {
+      "minimumWholeFrameGain": true,
+      "twiceReferenceDrift": true,
+      "maximumReferenceDrift": true,
+      "minimumAffectedRangeGain": true
+    },
+    "shortEnvironmentQualified": true,
+    "privateEfficiencyPassed": true,
+    "formalPerformancePassed": false,
+    "sourceAndProgramsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "shortGpuP95Milliseconds": 16.7683648,
+  "shortCpuWorkP95Milliseconds": 5.267125000000045,
+  "shortGpuBudgetPassed": false,
+  "shortCpuBudgetPassed": true,
+  "formalPerformancePassed": false,
+  "productionAdopted": false,
+  "protectedFilesExact": 13,
+  "projectInputsExact": 1729,
+  "overall": "failed-user-review"
+}
