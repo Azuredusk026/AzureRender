@@ -80,6 +80,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [过滤半径控制](../acceptance/nr/shadow-filter-constant-control.md)保持六个附件逐字节一致。
 局部名义变化未达门槛，生产保持运行时过滤参数。
 
+[级联成本控制](../acceptance/nr/cascade-shadow-cost-control.md)保留名义差值及参考漂移。
+[滑动范围表](2026-11-10-sliding-shadow-range.md)执行隔离位值与查询成本核对。
+当前生产阴影、原四帧及正式门槛保持有效。
+
 [并行资源调度](../development/shared-resources.md)提供重负载互斥入口。
 性能、画质与论文工作流已登记实际对话和独立工作区。
 跨工作树输入在主维护索引中持有活动引用。

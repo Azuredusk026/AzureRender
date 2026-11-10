@@ -1,0 +1,390 @@
+{
+  "status": "diagnostic-control-with-reference-drift",
+  "captureRuntimeSourceHead": "274615b",
+  "defaultIdentityProof": "public-uv-gradient-main-integration",
+  "scope": "720p replay cost attribution; all cascade visibility forced to one; output changes expected",
+  "programs": [
+    {
+      "shader": "ResourceId::10339",
+      "file": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "event": 9565,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10328",
+      "file": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "event": 9632,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10417",
+      "file": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "event": 10932,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10330",
+      "file": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+      "event": 10953,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10338",
+      "file": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "event": 14085,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10311",
+      "file": "mesh_object_bindless_clipmap_field.frag.spv",
+      "event": 14134,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10405",
+      "file": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "event": 16333,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10399",
+      "file": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+      "event": 16339,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10320",
+      "file": "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+      "event": 16376,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    },
+    {
+      "shader": "ResourceId::10402",
+      "file": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+      "event": 16382,
+      "shadowRadius": 8.0,
+      "shadowRadiusBits": 1090519040,
+      "errors": ""
+    }
+  ],
+  "comparisons": [
+    {
+      "event": 10953,
+      "target": 0,
+      "bytes": 7372800,
+      "equal": false,
+      "baselineSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff",
+      "candidateSha256": "365b57fa637a0752214835f98717ea019f80dda44973041a90f33344005ea57c"
+    },
+    {
+      "event": 10953,
+      "target": 1,
+      "bytes": 14745600,
+      "equal": true,
+      "baselineSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444",
+      "candidateSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444"
+    },
+    {
+      "event": 18266,
+      "target": 0,
+      "bytes": 7372800,
+      "equal": false,
+      "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+      "candidateSha256": "97ec34e55a387f5cca5075af5ae1fa57e7dfdec9041a95bf6a6edd344b0e9528"
+    },
+    {
+      "event": 18266,
+      "target": 1,
+      "bytes": 3686400,
+      "equal": true,
+      "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+      "candidateSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133"
+    },
+    {
+      "event": 18266,
+      "target": 2,
+      "bytes": 921600,
+      "equal": true,
+      "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+      "candidateSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+    },
+    {
+      "event": 18317,
+      "target": 0,
+      "bytes": 3686400,
+      "equal": false,
+      "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+      "candidateSha256": "2402d38b1177c7f309cfd859680a45d27571050d656d87c7542bfd47c915a4ce"
+    }
+  ],
+  "summary": [
+    {
+      "mode": "baseline",
+      "allEventMs": 14.563391999999933,
+      "matchedEventMs": 8.249600000000001
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 10.310015999999996,
+      "matchedEventMs": 4.607648000000001
+    },
+    {
+      "mode": "candidate",
+      "allEventMs": 10.431008000000007,
+      "matchedEventMs": 4.608159999999998
+    },
+    {
+      "mode": "baseline",
+      "allEventMs": 13.31382399999991,
+      "matchedEventMs": 7.517792000000001
+    }
+  ],
+  "referenceMilliseconds": 7.8836960000000005,
+  "controlMilliseconds": 4.6079039999999996,
+  "nominalMatchedDifferenceMilliseconds": 3.275792000000001,
+  "referenceDrift": 0.09282549707649812,
+  "clockRangeMHz": [
+    210.0,
+    2550.0
+  ],
+  "temperatureRange": [
+    52.0,
+    61.0
+  ],
+  "powerLimitRange": [
+    75.0,
+    93.38
+  ],
+  "thermalSlowdownObserved": false,
+  "productionSourceChanged": false,
+  "sourceAndProductsUnchanged": true,
+  "protectedFilesUnchanged": 13,
+  "nativeOptimizationAdmitted": false,
+  "formalPerformancePassed": false,
+  "nextUnit": "Isolated sliding range-table correctness and query microbenchmark; native admission remains separate",
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 1792758,
+    "sha256": "bf30a32f637f851bd395818731a868d1a2cb836f2300f6c787c84212e6130129"
+  },
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "fe4288a3051feaa65ff42c52e4db230539d69a51f28bf3615d2ba94721c56013"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field.frag.spv",
+      "bytes": 378644,
+      "sha256": "2577df30b7c2d2d2f50bf69ebd26cdfe3151a03416f890741ba499f047dbc667"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field.frag.spv.build.json",
+      "bytes": 735,
+      "sha256": "7132e4ca2facdc8e67aa12628fa6f7de77c482d9a9fe68ecd68dcde1c06a857f"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv",
+      "bytes": 378596,
+      "sha256": "43587b882a90376e3c982865fc587673d641e1dba1b96f30c65307f2bd09617f"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_coverage.frag.spv.build.json",
+      "bytes": 792,
+      "sha256": "6ecd811274fe94c9f8a7f2025e556dd46eb18bae9c5f4aa913fd6ff74124b6ac"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_early.frag.spv",
+      "bytes": 378656,
+      "sha256": "a53da919bf3e881f756f1e1cba406cae1922f1a5e07986ea25e5dd71cef1df82"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_early.frag.spv.build.json",
+      "bytes": 786,
+      "sha256": "0e1998708c1a7a853f4ee7fd0a62787c3f0670c6cf25724e023256ceada4353c"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "bytes": 391600,
+      "sha256": "c2aca8e8e53d96e2a548503a065af85133ee270c5f0b8aff3edbf163b6027dfa"
+    },
+    {
+      "path": "character_snapshot_object_bindless_clipmap_field_early_lighting.frag.spv.build.json",
+      "bytes": 849,
+      "sha256": "c188d496f598db23f65e402bb2cf92f361d86db90182773a6a527d9f3a128cec"
+    },
+    {
+      "path": "compare-driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compare-results.json",
+      "bytes": 727,
+      "sha256": "ae8dd90b4a838822c31c68d93c8f96d4ac782c983c7911995df1ab65e4caadc3"
+    },
+    {
+      "path": "compare-state.json",
+      "bytes": 461163,
+      "sha256": "5d7ab0c2e11b8b9a21e9866965af898fe34661ff263e3730c03f6f12f96238ca"
+    },
+    {
+      "path": "compare.py",
+      "bytes": 6330,
+      "sha256": "1b72ccf698d9f0bb09d9b894c152dcbce92634a835cd54506ea50132729c8569"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field.frag.spv",
+      "bytes": 425712,
+      "sha256": "53b39449ffab291e957a5c71a6b4a03041728a72939b1fbf974c08675ca69e64"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field.frag.spv.build.json",
+      "bytes": 673,
+      "sha256": "c5b404e22fc6afbdb5ed125a03d97e5f8fc6191fdecd8d10381237e62060d0df"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_coverage.frag.spv",
+      "bytes": 425664,
+      "sha256": "dbc1b6a45efbd0f796f3c1523567fea76f62dbd3d1dce7f894b4ec9e78f2b561"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_coverage.frag.spv.build.json",
+      "bytes": 730,
+      "sha256": "011a0042cb91df4bdf3bbdd15a969db7675412c723737bda9f2d54929e3ca92a"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_early.frag.spv",
+      "bytes": 425724,
+      "sha256": "3f255f912f7656fdeb02a586ba8069cd93252b34a9e90f4e4353969f55cb65fd"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_early.frag.spv.build.json",
+      "bytes": 724,
+      "sha256": "692506a8a30b864db662b103cbd15f4997eab8501f1f2d86e50e09b54dad64ea"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv",
+      "bytes": 438760,
+      "sha256": "2e28a9a4efde298adbd7621cfb78872316776246088a729432b79dd75a510f37"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_early_lighting.frag.spv.build.json",
+      "bytes": 787,
+      "sha256": "939b88127878c530a4b4276ec5e77776c438305e80ddfedc25ec5e9062720278"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_lighting.frag.spv",
+      "bytes": 438748,
+      "sha256": "14e2ee959e7b07f5904324d0e754b985dea499ac0b6bf16223d32b6bb71aebbf"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_lighting.frag.spv.build.json",
+      "bytes": 736,
+      "sha256": "02c20b714eeeb89febbd38ec9cde782c68e0586369589a0c13aaacc3978115ec"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv",
+      "bytes": 438700,
+      "sha256": "8604eff40468ec43a7129848ac0d495ebb8ca42fa4f88da2bc61d938a8121048"
+    },
+    {
+      "path": "mesh_object_bindless_clipmap_field_lighting_coverage.frag.spv.build.json",
+      "bytes": 793,
+      "sha256": "3d68439166c0583cd9d26cea1456ebaff22ea4c1afe1c7f8bf096261f1a5f567"
+    },
+    {
+      "path": "process.log",
+      "bytes": 466,
+      "sha256": "7e7c480ffdf0dccd86d5e7a833a11adbe57aba6148abae8254fdfcea25f80fd4"
+    },
+    {
+      "path": "run-environment.json",
+      "bytes": 2136054,
+      "sha256": "d064fda69313799a52e833bfb6b240f4351b72be8bf699d9f4c285c1d8f49280"
+    },
+    {
+      "path": "run_compare.py",
+      "bytes": 1807,
+      "sha256": "435e8272537d0839dd954344081b86d7b89345f407fbc3b61a928160aede2792"
+    },
+    {
+      "path": "startup-environment.json",
+      "bytes": 425608,
+      "sha256": "1e160c40724891c97b1190cb27688c6784d80462d8d2f391eda5b6cdae720290"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-character_snapshot_object_bindless_clipmap_field.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-character_snapshot_object_bindless_clipmap_field_coverage.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-character_snapshot_object_bindless_clipmap_field_early.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-character_snapshot_object_bindless_clipmap_field_early_lighting.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-mesh_object_bindless_clipmap_field.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-mesh_object_bindless_clipmap_field_coverage.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-mesh_object_bindless_clipmap_field_early.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-mesh_object_bindless_clipmap_field_early_lighting.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-mesh_object_bindless_clipmap_field_lighting.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "candidate-source/radius-1090519040-mesh_object_bindless_clipmap_field_lighting_coverage.frag",
+      "bytes": 121009,
+      "sha256": "93a89daa063ccd6e4193fafaa03f353aee985a833ae42958370b9e7173686007"
+    },
+    {
+      "path": "protected-files.json",
+      "bytes": 1518,
+      "sha256": "b2754b86d468b2594c906810b5681f8abbe6132d4f36f3872c3523443159f876"
+    }
+  ]
+}
