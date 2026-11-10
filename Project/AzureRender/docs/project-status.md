@@ -249,3 +249,6 @@ RHI 的附件样本数、管线比例及能力查询通过双配置检查。
 [参考坐标帧与世界坐标深度](acceptance/nr/reference-position-frame.md)通过双配置、双设备核对。
 公开世界坐标路径的完整深度平面与 CPU 预转换控制逐位一致，原始四帧摘要精确一致。
 实际索引、朝向及 UV 组合继续独立验收。
+
+[实际索引与正面方向](acceptance/nr/actual-geometry-index-source.md)通过双设备来源核对。
+两份完整深度平面与来源控制逐位一致，实际 UV 组合继续验收。
