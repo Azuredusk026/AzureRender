@@ -1378,3 +1378,9 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [椭圆层级主线集成](../acceptance/nr/reference-alpha-ellipse-main-integration.md)通过双配置、两设备与原四帧检查。
 默认程序身份保持一致，剩余九十六处深度超差继续修正。
+[接收循环修正](../acceptance/nr/receiver-source-sync.md)按来源 `62fc79c` 同步。
+主 UV 组合继续核对公开材质、阴影及取样正控制。
+
+[材质主 UV 绑定](../acceptance/nr/material-primary-uv-policy.md)通过两配置、双设备的三十六组检查。
+公开材质、阴影、覆盖、足迹正控制及失败清理通过，原始四帧摘要精确一致。
+当前程序集为 855 份，实际相机与几何深度组合继续验收。

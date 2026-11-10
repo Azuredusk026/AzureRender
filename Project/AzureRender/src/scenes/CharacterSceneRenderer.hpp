@@ -110,6 +110,15 @@ private:
     void initializeMaterialClassPipelines(const RenderContext&,const rhi::GraphicsPipelineDesc&,const rhi::GraphicsPipelineDesc&,const std::string& vertexPath);
     void destroyMaterialClassPipelines() noexcept;
     void prepareMaterialLightingPipelines();
+    VkShaderModule createUvShaderModule(const std::string&);
+    void destroyUvShaderModule(VkShaderModule);
+    VkPipeline createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
+    VkPipeline materialUvPipeline(const AssetMaterial&,VkPipeline) const;
+    void destroyMaterialUvPipelines() noexcept;
+    std::vector<std::pair<VkShaderModule,std::string>> materialUvShaderPaths_;
+    std::vector<std::pair<VkPipeline,VkPipeline>> materialUvPipelines_;
+    bool materialUvNeeded_=false;
+    std::uint32_t materialUvClassesNeeded_=0;
     VkShaderModule createMaterialShaderModule(const std::string&);
     void destroyMaterialShaderModule(VkShaderModule);
     VkPipeline createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc&);

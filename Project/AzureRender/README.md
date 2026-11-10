@@ -864,3 +864,7 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [光栅图元与深度模型](docs/acceptance/nr/raster-primitive-depth-model.md)完成双设备来源核对。
 九十六处超差来自相同图元，透明层级及插值数值继续修正。
+
+[材质主 UV 绑定](docs/acceptance/nr/material-primary-uv-policy.md)通过两配置、双设备的三十六组检查。
+公开材质、阴影、覆盖、足迹正控制及失败清理通过，原始四帧摘要精确一致。
+当前程序集为 855 份，实际相机与几何深度组合继续验收。

@@ -1,6 +1,7 @@
 #include "node_opacity.glsl"
 #include "fragment_sampling.glsl"
 #include "material_sampling.glsl"
+#include "material_primary_uv.glsl"
 #if defined(AZURE_BINDLESS)
 #extension GL_EXT_nonuniform_qualifier : require
 layout(binding=1) uniform sampler2D textures[];
@@ -36,7 +37,7 @@ bool shellCovered() {
     bool covered=azureNodeOpacityCovered(opacityCoordinate,shell.opacity);
     if(shell.alphaMode!=1u)return covered;
     float alpha=(shell.features&0x40000000u)!=0u
-        ?azureTemporalMaskAlpha(SHELL_BASE,textureCoordinate,dFdx(textureCoordinate),dFdy(textureCoordinate))
-        :texture(SHELL_BASE,textureCoordinate).a;
+        ?azureTemporalMaskAlpha(SHELL_BASE,textureCoordinate,azurePrimaryDx(textureCoordinate),azurePrimaryDy(textureCoordinate))
+        :azureSamplePrimaryUv(SHELL_BASE,textureCoordinate).a;
     return covered&&alpha>=shell.alphaCutoff;
 }

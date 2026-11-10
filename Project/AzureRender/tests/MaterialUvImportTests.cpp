@@ -37,6 +37,14 @@ int main(){
   if(!near(selected.vertices[1].texcoord[0],0)||!near(selected.vertices[1].texcoord[1],1))throw std::runtime_error("Selected UV1 must become the runtime surface coordinates");
   if(!near(selected.vertices[0].tangent[0],0)||!near(selected.vertices[0].tangent[1],-1))throw std::runtime_error("Generated tangent must follow the selected normal UV");
   if(selected.texcoord1.size()!=3||!selected.primitives[0].hasTexcoord1)throw std::runtime_error("Secondary source stream must remain available");
+  auto referenceSecondary=secondary;
+  referenceSecondary["materials"][0]["extras"]["azureRenderMaterial"]={{"schemaVersion",2},{"class","generic"},{"features",{"mirrored-coarse-uv"}}};
+  const auto referenceSelected=load(referenceSecondary);
+  if((referenceSelected.materials[0].materialFeatures&MaterialFeatureMirroredCoarseUv)==0
+      ||referenceSelected.vertices[1].texcoord!=selected.vertices[1].texcoord
+      ||referenceSelected.vertices[0].tangent!=selected.vertices[0].tangent
+      ||referenceSelected.texcoord1!=selected.texcoord1)
+      throw std::runtime_error("Reference gradient policy must preserve the selected UV1 surface stream and tangent");
   const auto reject=[&](Json invalid){try{(void)load(invalid);}catch(const std::exception&){return;}throw std::runtime_error("Invalid surface UV input was accepted");};
   auto mixed=secondary;mixed["materials"][0]["pbrMetallicRoughness"]["baseColorTexture"]={{"index",0},{"texCoord",0}};reject(mixed);
   auto missing=secondary;missing["meshes"][0]["primitives"][0]["attributes"].erase("TEXCOORD_1");reject(missing);

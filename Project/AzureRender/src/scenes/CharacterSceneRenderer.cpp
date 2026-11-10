@@ -22,6 +22,7 @@ static constexpr bool kSurfaceRadianceFrameSelection=false;
 #include "scenes/CharacterSceneRenderer.hpp"
 #include <string_view>
 #include "render/MaterialSampling.hpp"
+#include "render/MaterialUvGradients.hpp"
 #include "render/MaterialPipelinePolicy.hpp"
 #include "render/IrradianceClipmapGpu.hpp"
 #include "render/IrradianceResource.hpp"
@@ -69,6 +70,7 @@ using namespace azurerender::internal;
 
 namespace azurerender {
 #include "CharacterViewFog.inc"
+#include "CharacterMaterialUv.inc"
 CharacterSceneRenderer::CharacterSceneRenderer() = default;
 CharacterSceneRenderer::~CharacterSceneRenderer() = default;
 
@@ -2588,7 +2590,7 @@ void CharacterSceneRenderer::createEnvironmentPrefilter() {
         rhi_->createPipelineLayout(iblPrefilterSetLayout_, &pushRange);
     iblPrefilterPipeline_ = rhi_->createComputePipeline(
         {shader, iblPrefilterPipelineLayout_});
-    rhi_->destroyShaderModule(shader);
+    destroyUvShaderModule(shader);
 
     rhi_->executeOneShot([this](rhi::ICommandRecorder& commands) {
         for (std::uint32_t level = 1;
@@ -2747,7 +2749,7 @@ void CharacterSceneRenderer::createComputeSkinningResources() {
         rhi_->createPipelineLayout(skinningDescriptorSetLayout_, &pushRange);
     skinningPipeline_ = rhi_->createComputePipeline(
         {shader, skinningPipelineLayout_});
-    rhi_->destroyShaderModule(shader);
+    destroyUvShaderModule(shader);
 
     const auto writeSet = [this](const std::size_t frame,
         const std::uint32_t meshKey,
@@ -3124,9 +3126,9 @@ void CharacterSceneRenderer::recordOutlineMask(const RenderContext& context,cons
                     if(run.opacity==0)return;
                     const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(instance).model,
                         snapshot.gizmo,&primitive-mesh.primitives.data());
-                    commands.bindPipeline(m.coverageTexture.present?outlineMaskCoveragePipelines_[m.doubleSided?2:mirrored?1:0]
+                    commands.bindPipeline(materialUvPipeline(m,m.coverageTexture.present?outlineMaskCoveragePipelines_[m.doubleSided?2:mirrored?1:0]
                         :m.doubleSided?outlineMaskDoubleSidedPipeline_
-                        :mirrored?outlineMaskMirroredPipeline_:outlineMaskPipeline_);
+                        :mirrored?outlineMaskMirroredPipeline_:outlineMaskPipeline_));
                     const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
                     if(!bindlessTextures_)commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);
                     MaterialPushConstants material{m.alphaCutoff,static_cast<std::uint32_t>(m.alphaMode),m.emissiveStrength,m.showcasePlatform,
@@ -3225,7 +3227,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :classPipeline?classPipeline
                 :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)];
-            if(!prefill&&!ordinaryColor&&!classColor)commands.bindPipeline(validation?ordinaryRadianceValidationPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]:(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline)));
+            if(!prefill&&!ordinaryColor&&!classColor)commands.bindPipeline(materialUvPipeline(m,validation?ordinaryRadianceValidationPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]:(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline))));
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
             if(counters&&!prefill&&!ordinaryColor&&!classColor)++counters->pipelineBinds;
@@ -3772,10 +3774,13 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const std::string shaderDirectory = context.shaderDirectory;
     defaultIsolationRenderPass_=context.sceneRenderPass;
     rasterizationSamples_=context.rasterizationSamples;
-    const auto mainFragment=[&](std::string file,bool material=false){
-        return azurerender::readBinaryFile(shaderDirectory+sceneFragmentVariant(std::move(file),
-            rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,material&&irradianceClipmapActive_,material&&probeFieldActive_));
+    prepareMaterialLightingPipelines();
+    if(materialUvNeeded_)validateMaterialUvGradientPolicy(MaterialUvGradientPolicy::MirroredCoarseY,queryMaterialUvGradientSupport(context.physicalDevice));
+    const auto mainFragmentPath=[&](std::string file,bool material=false){
+        return shaderDirectory+sceneFragmentVariant(std::move(file),
+            rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,material&&irradianceClipmapActive_,material&&probeFieldActive_);
     };
+    const auto mainFragment=[&](std::string file,bool material=false){return azurerender::readBinaryFile(mainFragmentPath(std::move(file),material));};
     const auto hasProjectedSurface=[](const LoadedAsset& mesh) {
         return std::any_of(mesh.materials.begin(),mesh.materials.end(),[](const AssetMaterial& material) {
             return material.outlineSurface.present&&material.outlineSurface.projectSurface;
@@ -3797,9 +3802,6 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             ? (computeSkinningEnabled_?(bindlessTextures_?"/outline_view_scaled_compute_bindless.vert.spv":"/outline_view_scaled_compute.vert.spv")
                 :(bindlessTextures_?"/outline_view_scaled_bindless.vert.spv":"/outline_view_scaled.vert.spv"))
             : (computeSkinningEnabled_?"/outline_compute.vert.spv":"/outline.vert.spv")));
-    const auto outlineFragmentCode =
-        mainFragment((outlineProjectionEnabled_
-            ?(bindlessTextures_?"/outline_view_scaled_bindless.frag.spv":"/outline_view_scaled.frag.spv"):"/outline.frag.spv"));
     const auto backgroundVertexCode =
         azurerender::readBinaryFile(shaderDirectory + "/background.vert.spv");
     const auto backgroundFragmentCode =
@@ -3810,17 +3812,12 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         azurerender::readBinaryFile(shaderDirectory + (computeSkinningEnabled_
             ? "/shadow_compute.vert.spv"
             : "/shadow.vert.spv"));
-    const auto shadowFragmentCode =
-        azurerender::readBinaryFile(shaderDirectory + (bindlessTextures_
-            ? "/shadow_bindless.frag.spv"
-            : "/shadow.frag.spv"));
     const VkShaderModule vertexModule = rhi_->createShaderModule(vertexCode);
-    prepareMaterialLightingPipelines();
     const VkShaderModule fragmentModule = createMaterialShaderModule(materialFragmentPath);
     const VkShaderModule outlineVertexModule =
         rhi_->createShaderModule(outlineVertexCode);
     const VkShaderModule outlineFragmentModule =
-        rhi_->createShaderModule(outlineFragmentCode);
+        createUvShaderModule(mainFragmentPath(outlineProjectionEnabled_?(bindlessTextures_?"/outline_view_scaled_bindless.frag.spv":"/outline_view_scaled.frag.spv"):"/outline.frag.spv"));
     const VkShaderModule backgroundVertexModule =
         rhi_->createShaderModule(backgroundVertexCode);
     const VkShaderModule backgroundFragmentModule =
@@ -3828,7 +3825,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     const VkShaderModule shadowVertexModule =
         rhi_->createShaderModule(shadowVertexCode);
     const VkShaderModule shadowFragmentModule =
-        rhi_->createShaderModule(shadowFragmentCode);
+        createUvShaderModule(shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
 
     try {
         const rhi::PushConstantRangeDesc pushConstants{
@@ -3925,7 +3922,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         try{initializeMaterialClassPipelines(context,integralBase,depthDesc,meshVertexPath(objectShadowPrepared_?"mesh_object":"mesh"));initializeSurfaceOverlayPipelines(integralBase,depthDesc);}
         catch(...){destroyMaterialShaderModule(depthModule);throw;}
         destroyMaterialShaderModule(depthModule);
-        const auto simpleDepthModule=rhi_->createShaderModule(mainFragment(bindlessTextures_
+        const auto simpleDepthModule=createUvShaderModule(mainFragmentPath(bindlessTextures_
             ?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv"));
         VkShaderModule simpleDepthVertex=VK_NULL_HANDLE;
         try{
@@ -3936,25 +3933,25 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             for(unsigned facing=0;facing<3;++facing){
                 desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
-                snapshotDepthOnlyPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+                snapshotDepthOnlyPipelines_[facing]=createMaterialUvGraphicsPipeline(desc);
                 if(independentCoverageNeeded_)snapshotCoveragePipelines_[facing]=createCoverageGraphicsPipeline(desc,
                     shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/character_snapshot_depth_bindless.frag.spv":"/character_snapshot_depth.frag.spv",
                         rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false));
                 // Only prefill is biased; strict LESS color keeps coplanar draw order.
                 auto prefill=desc;prefill.colorWriteMasks.assign(prefill.colorAttachmentCount,0);prefill.depthBias=true;
                 prefill.depthBiasConstant=1.F;prefill.depthBiasSlope=0.F;
-                snapshotPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
+                snapshotPrefillPipelines_[facing]=createMaterialUvGraphicsPipeline(prefill);
                 if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT){auto covered=prefill;covered.fragmentShader=VK_NULL_HANDLE;
-                    snapshotCoveredPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(covered);}
+                    snapshotCoveredPrefillPipelines_[facing]=createMaterialUvGraphicsPipeline(covered);}
                 prefill.renderPass=context.sceneRenderPass;
                 prefill.colorAttachmentCount=sceneColorAttachmentCount(context);
                 prefill.colorWriteMasks.assign(prefill.colorAttachmentCount,0);
-                mainPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(prefill);
+                mainPrefillPipelines_[facing]=createMaterialUvGraphicsPipeline(prefill);
                 if(rasterizationSamples_==VK_SAMPLE_COUNT_1_BIT){auto covered=prefill;covered.fragmentShader=VK_NULL_HANDLE;
-                    mainCoveredPrefillPipelines_[facing]=rhi_->createGraphicsPipeline(covered);}
+                    mainCoveredPrefillPipelines_[facing]=createMaterialUvGraphicsPipeline(covered);}
             }
-        }catch(...){if(simpleDepthVertex)rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);throw;}
-        rhi_->destroyShaderModule(simpleDepthVertex);rhi_->destroyShaderModule(simpleDepthModule);
+        }catch(...){if(simpleDepthVertex)destroyUvShaderModule(simpleDepthVertex);destroyUvShaderModule(simpleDepthModule);throw;}
+        destroyUvShaderModule(simpleDepthVertex);destroyUvShaderModule(simpleDepthModule);
 
         materialDesc.cullMode = context.faceCullingEnabled ? VK_CULL_MODE_BACK_BIT : VK_CULL_MODE_NONE;
         materialDesc.alphaBlend = true;
@@ -3989,10 +3986,10 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             sceneTintPipelines_[mirrored]=createMaterialGraphicsPipeline(tintDesc);}
 
 
-        const auto maskModule=rhi_->createShaderModule(mainFragment((bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
+        const auto maskModule=createUvShaderModule(mainFragmentPath((bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv")));
         VkShaderModule maskVertex=VK_NULL_HANDLE;
         try {
-            maskVertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv")));
+            maskVertex=createUvShaderModule(shaderDirectory_+(computeSkinningEnabled_?"/outline_mask_compute.vert.spv":"/outline_mask.vert.spv"));
             auto maskDesc=materialDesc;maskDesc.fragmentShader=maskModule;maskDesc.renderPass=outlineMaskPass_;
             maskDesc.vertexShader=maskVertex;
             maskDesc.vertexAttributes.pop_back();maskDesc.vertexBindings.resize(1);
@@ -4000,21 +3997,21 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             maskDesc.colorWriteMasks.assign(1,0xf);
             maskDesc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
             maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
-            outlineMaskPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+            outlineMaskPipeline_=createMaterialUvGraphicsPipeline(maskDesc);
             const auto coverageMaskPath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_mask_bindless.frag.spv":"/outline_mask.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
             if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[0]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
             maskDesc.frontFace=VK_FRONT_FACE_CLOCKWISE;
-            outlineMaskMirroredPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+            outlineMaskMirroredPipeline_=createMaterialUvGraphicsPipeline(maskDesc);
             if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[1]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
             maskDesc.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;maskDesc.cullMode=VK_CULL_MODE_NONE;
-            outlineMaskDoubleSidedPipeline_=rhi_->createGraphicsPipeline(maskDesc);
+            outlineMaskDoubleSidedPipeline_=createMaterialUvGraphicsPipeline(maskDesc);
             if(independentCoverageNeeded_)outlineMaskCoveragePipelines_[2]=createCoverageGraphicsPipeline(maskDesc,coverageMaskPath);
         } catch (...) {
-            if(maskVertex)rhi_->destroyShaderModule(maskVertex);
-            rhi_->destroyShaderModule(maskModule);
+            if(maskVertex)destroyUvShaderModule(maskVertex);
+            destroyUvShaderModule(maskModule);
             throw;
         }
-        rhi_->destroyShaderModule(maskModule);rhi_->destroyShaderModule(maskVertex);
+        destroyUvShaderModule(maskModule);destroyUvShaderModule(maskVertex);
 
         rhi::GraphicsPipelineDesc outlineDesc = materialDesc;
         outlineDesc.vertexShader = outlineVertexModule;
@@ -4023,14 +4020,14 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         outlineDesc.cullMode = VK_CULL_MODE_FRONT_BIT;
         outlineDesc.alphaBlend = false;
         outlineDesc.depthWrite = false;
-        outlinePipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
+        outlinePipeline_ = createMaterialUvGraphicsPipeline(outlineDesc);
         const auto coverageOutlinePath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_view_scaled_bindless.frag.spv":"/outline_view_scaled.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
         if(independentCoverageNeeded_&&outlineProjectionEnabled_)outlineCoveragePipelines_[0]=createCoverageGraphicsPipeline(outlineDesc,coverageOutlinePath);
         outlineDesc.frontFace = VK_FRONT_FACE_CLOCKWISE;
-        outlineMirroredPipeline_ = rhi_->createGraphicsPipeline(outlineDesc);
+        outlineMirroredPipeline_ = createMaterialUvGraphicsPipeline(outlineDesc);
         if(independentCoverageNeeded_&&outlineProjectionEnabled_)outlineCoveragePipelines_[1]=createCoverageGraphicsPipeline(outlineDesc,coverageOutlinePath);
         if(outlineProjectionEnabled_) {
-            const auto depthModule=rhi_->createShaderModule(mainFragment(
+            const auto depthModule=createUvShaderModule(mainFragmentPath(
                 (bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv")));
             try {
                 auto shell=outlineDesc;shell.frontFace=VK_FRONT_FACE_COUNTER_CLOCKWISE;
@@ -4038,14 +4035,14 @@ void CharacterSceneRenderer::createGraphicsPipeline(
                 shell.colorAttachmentCount=surfaceRadiance_?6U:2U;
                 shell.depthTest=true;shell.depthWrite=true;shell.depthCompare=VK_COMPARE_OP_LESS;
                 shell.colorWriteMasks.assign(shell.colorAttachmentCount,0);shell.colorWriteMasks[1]=VK_COLOR_COMPONENT_R_BIT;
-                outlineDepthPipeline_=rhi_->createGraphicsPipeline(shell);
+                outlineDepthPipeline_=createMaterialUvGraphicsPipeline(shell);
                 const auto coverageDepthPath=shaderDirectory+sceneFragmentVariant(bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv",rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,false);
                 if(independentCoverageNeeded_)outlineDepthCoveragePipelines_[0]=createCoverageGraphicsPipeline(shell,coverageDepthPath);
                 shell.frontFace=VK_FRONT_FACE_CLOCKWISE;
-                outlineDepthMirroredPipeline_=rhi_->createGraphicsPipeline(shell);
+                outlineDepthMirroredPipeline_=createMaterialUvGraphicsPipeline(shell);
                 if(independentCoverageNeeded_)outlineDepthCoveragePipelines_[1]=createCoverageGraphicsPipeline(shell,coverageDepthPath);
-            }catch(...){rhi_->destroyShaderModule(depthModule);throw;}
-            rhi_->destroyShaderModule(depthModule);
+            }catch(...){destroyUvShaderModule(depthModule);throw;}
+            destroyUvShaderModule(depthModule);
         }
 
         rhi::GraphicsPipelineDesc backgroundDesc = materialDesc;
@@ -4057,7 +4054,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         backgroundDesc.cullMode = VK_CULL_MODE_NONE;
         backgroundDesc.depthTest = false;
         backgroundDesc.depthWrite = false;
-        backgroundPipeline_ = rhi_->createGraphicsPipeline(backgroundDesc);
+        backgroundPipeline_ = createMaterialUvGraphicsPipeline(backgroundDesc);
 
         rhi::GraphicsPipelineDesc shadowDesc = materialDesc;
         shadowDesc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;shadowDesc.minSampleShading=0;
@@ -4074,40 +4071,40 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         shadowDesc.colorAttachmentCount = 0;
         shadowDesc.colorWriteMasks.clear();
         shadowDesc.renderPass = context.shadowRenderPass;
-        shadowPipeline_ = rhi_->createGraphicsPipeline(shadowDesc);
+        shadowPipeline_ = createMaterialUvGraphicsPipeline(shadowDesc);
         auto depthOnlyDesc=shadowDesc;depthOnlyDesc.fragmentShader=VK_NULL_HANDLE;
-        shadowDepthOnlyPipeline_=rhi_->createGraphicsPipeline(depthOnlyDesc);
+        shadowDepthOnlyPipeline_=createMaterialUvGraphicsPipeline(depthOnlyDesc);
         if(independentCoverageNeeded_)shadowCoveragePipeline_=createCoverageGraphicsPipeline(shadowDesc,
             shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
         if(objectShadowPrepared_){
             shadowDesc.renderPass=objectShadowAtlas_->renderPass();
             shadowDesc.depthBiasConstant=8.F;shadowDesc.depthBiasSlope=0.F;
             shadowDesc.depthBiasExact=rhi_->supportsExactDepthBias();
-            objectShadowPipeline_=rhi_->createGraphicsPipeline(shadowDesc);
+            objectShadowPipeline_=createMaterialUvGraphicsPipeline(shadowDesc);
             depthOnlyDesc=shadowDesc;depthOnlyDesc.fragmentShader=VK_NULL_HANDLE;
-            objectShadowDepthOnlyPipeline_=rhi_->createGraphicsPipeline(depthOnlyDesc);
+            objectShadowDepthOnlyPipeline_=createMaterialUvGraphicsPipeline(depthOnlyDesc);
             if(independentCoverageNeeded_)objectShadowCoveragePipeline_=createCoverageGraphicsPipeline(shadowDesc,
                 shaderDirectory+(bindlessTextures_?"/shadow_bindless.frag.spv":"/shadow.frag.spv"));
         }
     } catch (...) {
-        rhi_->destroyShaderModule(shadowFragmentModule);
-        rhi_->destroyShaderModule(shadowVertexModule);
-        rhi_->destroyShaderModule(backgroundFragmentModule);
-        rhi_->destroyShaderModule(backgroundVertexModule);
-        rhi_->destroyShaderModule(outlineFragmentModule);
-        rhi_->destroyShaderModule(outlineVertexModule);
+        destroyUvShaderModule(shadowFragmentModule);
+        destroyUvShaderModule(shadowVertexModule);
+        destroyUvShaderModule(backgroundFragmentModule);
+        destroyUvShaderModule(backgroundVertexModule);
+        destroyUvShaderModule(outlineFragmentModule);
+        destroyUvShaderModule(outlineVertexModule);
         destroyMaterialShaderModule(fragmentModule);
-        rhi_->destroyShaderModule(vertexModule);
+        destroyUvShaderModule(vertexModule);
         throw;
     }
-    rhi_->destroyShaderModule(shadowFragmentModule);
-    rhi_->destroyShaderModule(shadowVertexModule);
-    rhi_->destroyShaderModule(backgroundFragmentModule);
-    rhi_->destroyShaderModule(backgroundVertexModule);
-    rhi_->destroyShaderModule(outlineFragmentModule);
-    rhi_->destroyShaderModule(outlineVertexModule);
+    destroyUvShaderModule(shadowFragmentModule);
+    destroyUvShaderModule(shadowVertexModule);
+    destroyUvShaderModule(backgroundFragmentModule);
+    destroyUvShaderModule(backgroundVertexModule);
+    destroyUvShaderModule(outlineFragmentModule);
+    destroyUvShaderModule(outlineVertexModule);
     destroyMaterialShaderModule(fragmentModule);
-    rhi_->destroyShaderModule(vertexModule);
+    destroyUvShaderModule(vertexModule);
 }
 
 
@@ -4838,11 +4835,11 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                 }
                 forEachPrimitiveOpacityRun(snapshot->nodeWorldOpacities,primitive.nodeIndex,firstInstance,instanceCount,[&](const PrimitiveOpacityRun& run) {
                 if (run.opacity == 0) return;
-                const VkPipeline pipeline=fullyCoveredShadow(material,run.opacity)
+                const VkPipeline pipeline=materialUvPipeline(material,fullyCoveredShadow(material,run.opacity)
                     ?(objectPage?objectShadowDepthOnlyPipeline_:shadowDepthOnlyPipeline_)
                     :independentCoverageNeeded_&&material.coverageTexture.present
                         ?(objectPage?objectShadowCoveragePipeline_:shadowCoveragePipeline_)
-                        :(objectPage?objectShadowPipeline_:shadowPipeline_);
+                        :(objectPage?objectShadowPipeline_:shadowPipeline_));
                 if(pipeline!=boundPipeline){commands.bindPipeline(pipeline);boundPipeline=pipeline;
                     if(context.submissionCounters)++context.submissionCounters->pipelineBinds;
                 }
@@ -5212,7 +5209,7 @@ void CharacterSceneRenderer::drawPrimitive(
         ?snapshot->buffers.vertexColors.at(snapshot->instances.at(firstInstance).meshKey):whiteVertexColorBuffer_.buffer;
     if(!snapshot&&!mesh.vertexColors.empty())throw std::logic_error("Vertex colors require immutable recording buffers");
     commands.bindVertexStream(1,colorBuffer,0);
-    const auto fullPipeline=surfaceOverlay?pipeline:materialLightingPipeline(material,pipeline);
+    const auto fullPipeline=materialUvPipeline(material,surfaceOverlay?pipeline:materialLightingPipeline(material,pipeline));
     const auto primitiveIndex=static_cast<std::size_t>(&primitive-mesh.primitives.data());
     bool useConservative=snapshot&&allowConservative&&run.opacity==1.F&&ordinaryOpaqueMaterial(material)
         &&firstIndexOffset==primitive.firstIndex&&snapshot->buffers.conservativeIndirect!=VK_NULL_HANDLE;

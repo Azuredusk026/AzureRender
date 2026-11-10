@@ -2,10 +2,12 @@
 void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
     lightingOrdinaryNeeded_=lightingBlendNeeded_=lightingFallbackNeeded_=lightingIntegralNeeded_=false;
     lightingClassesNeeded_={};
-    independentCoverageNeeded_=false;
+    independentCoverageNeeded_=false;materialUvNeeded_=false;materialUvClassesNeeded_=0;
     materialDepthPoliciesNeeded_={};
     const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
+        validateMaterialUvPolicy(material);
         independentCoverageNeeded_|=material.coverageTexture.present;
+        if(material.materialFeatures&MaterialFeatureMirroredCoarseUv){materialUvNeeded_=true;materialUvClassesNeeded_|=1U<<unsigned(material.materialClass);}
         if(material.unlitTextureLayers.present&&material.unlitTextureLayers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual)
             materialDepthPoliciesNeeded_[1]=true;
         if(material.blendDepth.present)materialDepthPoliciesNeeded_[(material.blendDepth.write?2U:0U)
@@ -24,22 +26,22 @@ void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
     inspect(asset_);for(const auto& resource:additionalResources_)inspect(resource->asset);
 }
 VkShaderModule CharacterSceneRenderer::createMaterialShaderModule(const std::string& path) {
-    const auto module=rhi_->createShaderModule(readBinaryFile(path));
+    const auto module=createUvShaderModule(path);
     try{materialShaderVariants_.push_back({module,VK_NULL_HANDLE,path});}
-    catch(...){rhi_->destroyShaderModule(module);throw;}
+    catch(...){destroyUvShaderModule(module);throw;}
     return module;
 }
 void CharacterSceneRenderer::destroyMaterialShaderModule(VkShaderModule module) {
     const auto it=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),
         [&](const auto& variant){return variant.scene==module;});
     if(it!=materialShaderVariants_.end()){
-        if(it->lighting)rhi_->destroyShaderModule(it->lighting);
-        if(it->coverage)rhi_->destroyShaderModule(it->coverage);
-        if(it->lightingCoverage)rhi_->destroyShaderModule(it->lightingCoverage);
-        for(auto extra:it->defaultIsolation)if(extra)rhi_->destroyShaderModule(extra);
+        if(it->lighting)destroyUvShaderModule(it->lighting);
+        if(it->coverage)destroyUvShaderModule(it->coverage);
+        if(it->lightingCoverage)destroyUvShaderModule(it->lightingCoverage);
+        for(auto extra:it->defaultIsolation)if(extra)destroyUvShaderModule(extra);
         materialShaderVariants_.erase(it);
     }
-    rhi_->destroyShaderModule(module);
+    destroyUvShaderModule(module);
 }
 VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc& desc) {
     auto it=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),
@@ -62,8 +64,8 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
             auto path=it->path;const auto cachedEnd=path.rfind(".frag.spv");
             const auto cached=cachedEnd!=std::string::npos&&cachedEnd>=15&&path.compare(cachedEnd-15,15,"_radiance_stats")==0?cachedEnd-15:
                 cachedEnd!=std::string::npos&&cachedEnd>=9&&path.compare(cachedEnd-9,9,"_radiance")==0?cachedEnd-9:std::string::npos;
-            if(!module)module=rhi_->createShaderModule(readBinaryFile(
-                materialFallbackFragment(path,(policy&1U)!=0,(policy&2U)!=0)));
+            if(!module)module=createUvShaderModule(
+                materialFallbackFragment(path,(policy&1U)!=0,(policy&2U)!=0));
             auto extended=desc;extended.fragmentShader=module;
             if(cached!=std::string::npos&&extended.colorAttachmentCount>3)
                 for(std::size_t i=2;i<extended.colorWriteMasks.size();++i)extended.colorWriteMasks[i]=0;
@@ -74,7 +76,7 @@ VkPipeline CharacterSceneRenderer::createMaterialGraphicsPipeline(const rhi::Gra
     return scene;
 }
 VkPipeline CharacterSceneRenderer::createMaterialDepthPipeline(const rhi::GraphicsPipelineDesc& desc) {
-    const auto scene=rhi_->createGraphicsPipeline(desc);
+    const auto scene=createMaterialUvGraphicsPipeline(desc);
     prepareDefaultIsolationPipeline(scene,desc);
     if(!desc.alphaBlend||!desc.depthTest
         ||desc.depthWrite||desc.depthCompare!=VK_COMPARE_OP_LESS)return scene;
@@ -83,7 +85,7 @@ VkPipeline CharacterSceneRenderer::createMaterialDepthPipeline(const rhi::Graphi
         for(unsigned policy=1;policy<4;++policy)if(materialDepthPoliciesNeeded_[policy]) {
             auto variant=desc;variant.depthWrite=(policy&2U)!=0;
             variant.depthCompare=(policy&1U)?VK_COMPARE_OP_LESS_OR_EQUAL:VK_COMPARE_OP_LESS;
-            variants[policy-1]=rhi_->createGraphicsPipeline(variant);
+            variants[policy-1]=createMaterialUvGraphicsPipeline(variant);
         }
         if(std::any_of(variants.begin(),variants.end(),[](auto value){return value!=VK_NULL_HANDLE;}))
             materialDepthPipelines_.emplace_back(scene,variants);
@@ -112,10 +114,10 @@ void CharacterSceneRenderer::prepareDefaultIsolationPipeline(VkPipeline scene,co
             if(!module){
                 auto file=sceneFragmentVariant(source.path,false,false,false,(policy&1U)!=0,(policy&2U)!=0);
                 file.insert(file.size()-9,"_isolation0");
-                module=rhi_->createShaderModule(readBinaryFile(file));
+                module=createUvShaderModule(file);
             }
             auto isolated=desc;isolated.fragmentShader=module;isolated.fragmentSpecialization.push_back({4,0});
-            pipeline=rhi_->createGraphicsPipeline(isolated);
+            pipeline=createMaterialUvGraphicsPipeline(isolated);
             defaultIsolationPipelines_.emplace_back(scene,pipeline);
         }catch(const std::exception& error){
             if(pipeline)rhi_->destroyPipeline(pipeline);
@@ -130,10 +132,10 @@ void CharacterSceneRenderer::prepareDefaultIsolationPipeline(VkPipeline scene,co
 #endif
 }
 VkPipeline CharacterSceneRenderer::createCoverageGraphicsPipeline(const rhi::GraphicsPipelineDesc& desc,const std::string& path) {
-    const auto module=rhi_->createShaderModule(readBinaryFile(sceneFragmentVariant(path,false,false,false,false,true)));
-    try{auto variant=desc;variant.fragmentShader=module;const auto pipeline=rhi_->createGraphicsPipeline(variant);
-        rhi_->destroyShaderModule(module);return pipeline;
-    }catch(...){rhi_->destroyShaderModule(module);throw;}
+    const auto module=createUvShaderModule(sceneFragmentVariant(path,false,false,false,false,true));
+    try{auto variant=desc;variant.fragmentShader=module;const auto pipeline=createMaterialUvGraphicsPipeline(variant);
+        destroyUvShaderModule(module);return pipeline;
+    }catch(...){destroyUvShaderModule(module);throw;}
 }
 VkPipeline CharacterSceneRenderer::materialLightingPipeline(const AssetMaterial& material,VkPipeline scene) const {
     const auto policy=(extendedMaterialLighting(material)?1U:0U)|(material.coverageTexture.present?2U:0U);
@@ -160,6 +162,7 @@ VkPipeline CharacterSceneRenderer::materialLightingPipeline(const AssetMaterial&
     return scene;
 }
 void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
+    destroyMaterialUvPipelines();
     if(rhi_){
         for(const auto& entry:defaultIsolationPipelines_)rhi_->destroyPipeline(entry.second);
         for(auto* group:{&surfaceOverlayPipelines_,&surfaceOverlaySnapshotPipelines_})
@@ -169,11 +172,11 @@ void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
         for(const auto& variant:materialDepthPipelines_)for(auto pipeline:variant.second)if(pipeline)rhi_->destroyPipeline(pipeline);
         for(const auto& variant:materialLightingPipelines_)for(auto pipeline:variant.second)if(pipeline)rhi_->destroyPipeline(pipeline);
         for(const auto& variant:materialShaderVariants_){
-            if(variant.lighting)rhi_->destroyShaderModule(variant.lighting);
-            if(variant.coverage)rhi_->destroyShaderModule(variant.coverage);
-            if(variant.lightingCoverage)rhi_->destroyShaderModule(variant.lightingCoverage);
-            for(auto module:variant.defaultIsolation)if(module)rhi_->destroyShaderModule(module);
-            rhi_->destroyShaderModule(variant.scene);
+            if(variant.lighting)destroyUvShaderModule(variant.lighting);
+            if(variant.coverage)destroyUvShaderModule(variant.coverage);
+            if(variant.lightingCoverage)destroyUvShaderModule(variant.lightingCoverage);
+            for(auto module:variant.defaultIsolation)if(module)destroyUvShaderModule(module);
+            destroyUvShaderModule(variant.scene);
         }
     }
     materialDepthPipelines_.clear();materialLightingPipelines_.clear();materialShaderVariants_.clear();
@@ -233,27 +236,27 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
         if(needed&&early&&surfaceRadiance_){
             auto vertex=vertexPath;const auto at=vertex.rfind(".vert.spv");
             if(at==std::string::npos)throw std::logic_error("Surface radiance identity requires a mesh vertex program");
-            vertex.insert(at,"_radiance");identityVertex=rhi_->createShaderModule(readBinaryFile(vertex));
+            vertex.insert(at,"_radiance");identityVertex=createUvShaderModule(vertex);
             const auto cachedModule=[&](VkShaderModule module,bool fast=false){
                 const auto found=std::find_if(materialShaderVariants_.begin(),materialShaderVariants_.end(),[&](const auto& v){return v.scene==module;});
                 if(found==materialShaderVariants_.end())throw std::logic_error("Surface radiance material program identity is unavailable");
                 auto file=found->path;file.insert(file.rfind(".frag.spv"),fast?(kSurfaceRadianceDiagnostics?"_radiance_fast_stats":"_radiance_fast"):kSurfaceRadianceDiagnostics?"_radiance_stats":"_radiance");return createMaterialShaderModule(file);
             };
             cachedColor=cachedModule(earlyColorModule,kSurfaceRadianceFrameSelection);cachedSnapshot=cachedModule(earlySnapshotModule);
-            if(kSurfaceRadianceFrameSelection)validationModule=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_validation.frag.spv"));
-            if(kSurfaceRadianceFrameSelection){auto commit=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_draw_commit.comp.spv"));
-                try{radianceCommitPipeline_=rhi_->createComputePipeline({commit,pipelineLayout_});}catch(...){rhi_->destroyShaderModule(commit);throw;}
-                rhi_->destroyShaderModule(commit);
+            if(kSurfaceRadianceFrameSelection)validationModule=createUvShaderModule(shaderDirectory_+"/surface_radiance_validation.frag.spv");
+            if(kSurfaceRadianceFrameSelection){auto commit=createUvShaderModule(shaderDirectory_+"/surface_radiance_draw_commit.comp.spv");
+                try{radianceCommitPipeline_=rhi_->createComputePipeline({commit,pipelineLayout_});}catch(...){destroyUvShaderModule(commit);throw;}
+                destroyUvShaderModule(commit);
                 if(radianceDepthCopyPass_){
-                    auto vertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_depth_copy.vert.spv"));
+                    auto vertex=createUvShaderModule(shaderDirectory_+"/surface_radiance_depth_copy.vert.spv");
                     VkShaderModule fragment=VK_NULL_HANDLE;
-                    try{fragment=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/surface_radiance_depth_copy.frag.spv"));
+                    try{fragment=createUvShaderModule(shaderDirectory_+"/surface_radiance_depth_copy.frag.spv");
                         rhi::GraphicsPipelineDesc copy;copy.vertexShader=vertex;copy.fragmentShader=fragment;copy.layout=pipelineLayout_;
                         copy.renderPass=radianceDepthCopyPass_;copy.colorAttachmentCount=0;copy.cullMode=VK_CULL_MODE_NONE;
                         copy.depthWrite=true;copy.depthCompare=VK_COMPARE_OP_ALWAYS;
-                        radianceDepthCopyPipeline_=rhi_->createGraphicsPipeline(copy);
-                    }catch(...){if(fragment)rhi_->destroyShaderModule(fragment);rhi_->destroyShaderModule(vertex);throw;}
-                    rhi_->destroyShaderModule(fragment);rhi_->destroyShaderModule(vertex);
+                        radianceDepthCopyPipeline_=createMaterialUvGraphicsPipeline(copy);
+                    }catch(...){if(fragment)destroyUvShaderModule(fragment);destroyUvShaderModule(vertex);throw;}
+                    destroyUvShaderModule(fragment);destroyUvShaderModule(vertex);
                 }}
 
         }
@@ -269,10 +272,10 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                 ordinaryEarlyDepthPipelines_[facing]=createMaterialGraphicsPipeline(covered);
                 if(identityVertex&&kSurfaceRadianceFrameSelection){
                     auto fast=covered;fast.vertexShader=identityVertex;fast.fragmentShader=cachedColor;
-                    ordinaryRadiancePipelines_[facing]=rhi_->createGraphicsPipeline(fast);
+                    ordinaryRadiancePipelines_[facing]=createMaterialUvGraphicsPipeline(fast);
                     if(radianceValidationPass_){auto validation=fast;validation.fragmentShader=validationModule;validation.depthWrite=true;
                         validation.renderPass=radianceValidationPass_;validation.colorAttachmentCount=0;validation.colorWriteMasks.clear();
-                        ordinaryRadianceValidationPipelines_[facing]=rhi_->createGraphicsPipeline(validation);}
+                        ordinaryRadianceValidationPipelines_[facing]=createMaterialUvGraphicsPipeline(validation);}
                 }
             }
             desc=snapshot;
@@ -305,10 +308,10 @@ void CharacterSceneRenderer::initializeMaterialClassPipelines(const RenderContex
                     materialClassEarlyDepthSnapshotPipelines_[index][facing]=createMaterialGraphicsPipeline(covered);}
             }
         }
-    }catch(...){if(historyVertex)rhi_->destroyShaderModule(historyVertex);if(validationModule)rhi_->destroyShaderModule(validationModule);if(identityVertex)rhi_->destroyShaderModule(identityVertex);destroyMaterialClassPipelines();throw;}
+    }catch(...){if(historyVertex)rhi_->destroyShaderModule(historyVertex);if(validationModule)destroyUvShaderModule(validationModule);if(identityVertex)destroyUvShaderModule(identityVertex);destroyMaterialClassPipelines();throw;}
     if(historyVertex)rhi_->destroyShaderModule(historyVertex);
-    if(validationModule)rhi_->destroyShaderModule(validationModule);
-    if(identityVertex)rhi_->destroyShaderModule(identityVertex);
+    if(validationModule)destroyUvShaderModule(validationModule);
+    if(identityVertex)destroyUvShaderModule(identityVertex);
 }
 void CharacterSceneRenderer::destroyMaterialClassPipelines() noexcept {
     materialClassFeatureSpecializations_={};

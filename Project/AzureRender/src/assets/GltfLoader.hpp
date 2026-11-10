@@ -80,6 +80,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureUnlitTextureLayers = 1U << 24U,
     MaterialFeatureIndependentCoverage = 1U << 25U,
     MaterialFeatureR11G11B10Output = 1U << 26U,
+    MaterialFeatureMirroredCoarseUv = 1U << 27U,
     MaterialFeatureShadowCoverageMask = MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow,
 };
 

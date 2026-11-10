@@ -2,6 +2,7 @@
 #include "assets/GltfLoader.hpp"
 #include "assets/MaterialBlendDepth.hpp"
 #include "assets/MaterialOutputPrecision.hpp"
+#include "assets/MaterialUvPolicy.hpp"
 #include "assets/MaterialRimResponse.hpp"
 #include <cstddef>
 #include <type_traits>
@@ -70,6 +71,7 @@ inline PackedMaterialSurfaceProfile packMaterialSurfaceProfile(const AssetMateri
     validateUnlitSubmission(material.unlitTextureLayers);
     validateMaterialBlendDepth(material);
     validateMaterialOutputPrecision(material);
+    validateMaterialUvPolicy(material);
     validateMaterialRimResponse(material);
     if(material.projectedHairRamp.lighting.mainBrightnessSaturation&&
         (!material.projectedHairRamp.present||!material.projectedHairRamp.lighting.present

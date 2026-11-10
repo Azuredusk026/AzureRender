@@ -29,6 +29,7 @@ layout(early_fragment_tests) in;
 #include "light_attenuation.glsl"
 #include "character_surface.glsl"
 #include "material_sampling.glsl"
+#include "material_primary_uv.glsl"
 #include "material_output_precision.glsl"
 #include "material_specialization.glsl"
 #include "fragment_sampling.glsl"
@@ -302,8 +303,8 @@ struct ProjectedHairIncident {vec3 radiance;vec4 response;vec4 mainRadiance;floa
 CharacterProjectedHairEnergy projectedHairSample(vec3 view,vec3 light,bool directional,bool evaluateLine,
     vec2 uv,vec2 screenOffset,bool integrated,ProjectedHairIncident incident,out vec2 line) {
     ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
-    vec4 parameters=integrated?textureGrad(AZ_TEX_FACE_SDF,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):texture(AZ_TEX_FACE_SDF,uv);
-    vec4 packedNormals=integrated?textureGrad(AZ_TEX_HAIR_DATA,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):texture(AZ_TEX_HAIR_DATA,uv);
+    vec4 parameters=integrated?textureGrad(AZ_TEX_FACE_SDF,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):azureSamplePrimaryUv(AZ_TEX_FACE_SDF,uv);
+    vec4 packedNormals=integrated?textureGrad(AZ_TEX_HAIR_DATA,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):azureSamplePrimaryUv(AZ_TEX_HAIR_DATA,uv);
     vec3 basisNormal=worldNormal;vec4 basisTangent=worldTangent;
     if(integrated){
         basisNormal+=projectedHairNormalDx*screenOffset.x+projectedHairNormalDy*screenOffset.y;
@@ -420,7 +421,7 @@ CharacterDiffuseResponse projectedHairDiffuseResponse(vec3 base,vec3 normal,vec3
         azureHairPixelIntegral&&(AZURE_MATERIAL_FEATURES&0x80800000U)==0x80800000U
 #endif
         ?textureGrad(AZ_TEX_FACE_SDF,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25).b
-        :texture(AZ_TEX_FACE_SDF,textureCoordinate).b;
+        :azureSamplePrimaryUv(AZ_TEX_FACE_SDF,textureCoordinate).b;
     float litMask=min(min(characterVisibility,ao),ramp.a),aoMask=characterVisibility*ao;
     vec3 shadow=characterDiffuseSaturation(base*profile.rows[10].w,profile.rows[11].w);
     CharacterDiffuseResponse response=characterDiffuseWeightedResponse(base,shadow,0.0,profile.rows[5].w,ramp,
@@ -714,18 +715,22 @@ void main()
     [[maximally_reconverges]]
 #endif
 {
+    azurePreparePrimaryUv(textureCoordinate);
     prepareShadowReceiver();
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && defined(AZURE_OPAQUE_SNAPSHOT)
     outputRadianceA=vec4(0);outputRadianceB=vec4(0);outputRadianceC=vec4(0);outputRadianceIdentity=uvec4(0xffffffffu);
 #endif
     vec2 alphaUvDx=vec2(0),alphaUvDy=vec2(0);
 #if defined(AZURE_GEOMETRY_SAMPLES)
-    alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);
+    alphaUvDx=azurePrimaryDx(textureCoordinate);alphaUvDy=azurePrimaryDy(textureCoordinate);
 #else
-    if((AZURE_MATERIAL_FEATURES&0x40000000U)!=0U){alphaUvDx=dFdx(textureCoordinate);alphaUvDy=dFdy(textureCoordinate);}
+    if((AZURE_MATERIAL_FEATURES&0x40000000U)!=0U){alphaUvDx=azurePrimaryDx(textureCoordinate);alphaUvDy=azurePrimaryDy(textureCoordinate);}
+#endif
+#if defined(AZURE_REFERENCE_MATERIAL_UV)
+    alphaUvDx=azurePrimaryUvDx;alphaUvDy=azurePrimaryUvDy;
 #endif
     if(azureHairPixelIntegral){
-    projectedHairUvDx=dFdx(textureCoordinate);projectedHairUvDy=dFdy(textureCoordinate);
+    projectedHairUvDx=azurePrimaryDx(textureCoordinate);projectedHairUvDy=azurePrimaryDy(textureCoordinate);
     projectedHairNormalDx=dFdx(worldNormal);projectedHairNormalDy=dFdy(worldNormal);
     projectedHairTangentDx=dFdx(worldTangent);projectedHairTangentDy=dFdy(worldTangent);
     projectedHairPositionDx=dFdx(worldPosition);projectedHairPositionDy=dFdy(worldPosition);
@@ -737,7 +742,7 @@ void main()
 #if defined(AZURE_GEOMETRY_SAMPLES)
     vec4 baseColor=textureGrad(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx*.25,alphaUvDy*.25);
 #else
-    vec4 baseColor = texture(AZ_TEX_BASE_COLOR, textureCoordinate);
+    vec4 baseColor = azureSamplePrimaryUv(AZ_TEX_BASE_COLOR,textureCoordinate);
 #endif
 #if !defined(AZURE_INDEPENDENT_COVERAGE)
     if(AZURE_ALPHA_MODE==1&&(AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
@@ -807,7 +812,7 @@ void main()
 #if defined(AZURE_GEOMETRY_SAMPLES)
     float coverageAlpha=textureGrad(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate,alphaUvDx*.25,alphaUvDy*.25).a;
 #else
-    float coverageAlpha=texture(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate).a;
+    float coverageAlpha=azureSamplePrimaryUv(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate).a;
 #endif
     if((AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
         coverageAlpha=azureTemporalMaskAlpha(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate,alphaUvDx,alphaUvDy);
@@ -838,7 +843,7 @@ void main()
         - geometricNormal * dot(geometricNormal, worldTangent.xyz));
     vec3 bitangent = normalize(cross(geometricNormal, tangent)) * worldTangent.w;
     mat3 tangentToWorld = mat3(tangent, bitangent, geometricNormal);
-    vec4 normalSample=texture(AZ_TEX_NORMAL,textureCoordinate);
+    vec4 normalSample=azureSamplePrimaryUv(AZ_TEX_NORMAL,textureCoordinate);
     vec3 sampledNormal = normalSample.xyz * 2.0 - 1.0;
     vec3 shadedNormal = normalize(tangentToWorld * sampledNormal);
     vec4 hairData =
@@ -848,7 +853,7 @@ void main()
         azureHairPixelIntegral&&(AZURE_MATERIAL_FEATURES&0x80800000U)==0x80800000U
 #endif
         ?textureGrad(AZ_TEX_HAIR_DATA,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25)
-        :texture(AZ_TEX_HAIR_DATA, textureCoordinate);
+        :azureSamplePrimaryUv(AZ_TEX_HAIR_DATA,textureCoordinate);
     float hairActive = AZURE_MATERIAL_CLASS==3U ? materialFeatureEnabled(2U) : 0.0;
     bool projectedHair=hairActive>0.0&&materialFeatureEnabled(65536U)>.5;
     bool strandDiffuse=projectedHair
@@ -875,10 +880,9 @@ void main()
 
     if(eyeRadial)shadedNormal=eyeCoordinates.lightingNormal;
 
-    vec4 packedMaterial = texture(AZ_TEX_METALLIC_ROUGHNESS, textureCoordinate);
+    vec4 packedMaterial = azureSamplePrimaryUv(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate);
     float physicalAo=mix(1.0,packedMaterial.r,materialFeatureEnabled(128U));
-    vec4 specularEmissive = texture(AZ_TEX_SPECULAR_EMISSIVE,
-        textureCoordinate);
+    vec4 specularEmissive = azureSamplePrimaryUv(AZ_TEX_SPECULAR_EMISSIVE,textureCoordinate);
     float styleStrength = camera.renderingParameters.y;
     float diffuseBandThreshold = camera.renderingParameters.z;
     bool sceneCharacter=camera.clusterLighting.x>.5
@@ -888,7 +892,7 @@ void main()
     float styleMask = smoothstep(
         0.08,
         0.62,
-        texture(AZ_TEX_STYLE_MASK, textureCoordinate).r)
+        azureSamplePrimaryUv(AZ_TEX_STYLE_MASK,textureCoordinate).r)
         * styleStrength;
     if(materialFeatureEnabled(2048U)>0.5 || materialFeatureEnabled(8192U)>.5)styleMask=0.0;
     float normalVariance=max(1.0-normalSample.a,0.0);
@@ -1120,7 +1124,7 @@ void main()
         faceSdfEnabled = 0.0;
     }
     if (faceSdfEnabled > 0.0) {
-        faceSdfSample = texture(AZ_TEX_FACE_SDF, textureCoordinate);
+        faceSdfSample = azureSamplePrimaryUv(AZ_TEX_FACE_SDF,textureCoordinate);
     }
     float faceCoordinate = camera.faceSdfParameters.w > 0.5
         ? 1.0 - faceSdfSample.r

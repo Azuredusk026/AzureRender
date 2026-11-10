@@ -35,7 +35,7 @@ inline bool fullyCoveredOrdinaryMaterial(const AssetMaterial& material,float nod
 inline bool fullyCoveredClassMaterial(const AssetMaterial& material,float nodeOpacity) noexcept {
     return material.alphaMode==AssetAlphaMode::Opaque&&nodeOpacity==1.F
         &&!material.nprDiffuse.screenLightingNormal&&!opaqueSurfaceOverlay(material)
-        &&(material.materialFeatures&(MaterialFeatureHairPixelIntegral|MaterialFeatureSceneTint|MaterialFeatureMultiplyComposite))==0;
+        &&(material.materialFeatures&(MaterialFeatureHairPixelIntegral|MaterialFeatureSceneTint|MaterialFeatureMultiplyComposite|MaterialFeatureMirroredCoarseUv))==0;
 }
 struct MaterialFeatureSpecialization {
     std::uint32_t fixedMask=0,fixedValue=0;

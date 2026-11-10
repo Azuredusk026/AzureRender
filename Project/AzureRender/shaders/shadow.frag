@@ -1,6 +1,7 @@
 #version 450
 #extension GL_GOOGLE_include_directive : require
 #include "node_opacity.glsl"
+#include "material_primary_uv.glsl"
 #include "shadow_coverage.glsl"
 
 #if defined(AZURE_BINDLESS)
@@ -50,12 +51,13 @@ layout(location = 0) in vec2 textureCoordinate;
 layout(location = 1) in vec3 opacityCoordinate;
 
 void main() {
+    azurePreparePrimaryUv(textureCoordinate);
     if((material.materialFeatures&2097152u)!=0u) {
         if(!azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity))discard;
         return;
     }
     if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
-    float alpha = texture(AZ_TEX_BASE_COLOR, textureCoordinate).a;
+    float alpha = azureSamplePrimaryUv(AZ_TEX_BASE_COLOR,textureCoordinate).a;
     if((material.materialFeatures&4194304u)!=0u) {
         if(material.nodeOpacity<=0.0||shadowSqrtAlphaCoverage(alpha,material.alphaMode==2?material.nodeOpacity:1.0)
             <shadowPixelNoise(gl_FragCoord.xy))discard;

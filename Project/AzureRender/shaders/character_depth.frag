@@ -2,6 +2,7 @@
 #extension GL_GOOGLE_include_directive : require
 #include "node_opacity.glsl"
 #include "fragment_sampling.glsl"
+#include "material_primary_uv.glsl"
 #if defined(AZURE_SNAPSHOT_DEPTH)
 #include "material_sampling.glsl"
 #define DEPTH_FEATURES layout(offset=116) uint features;
@@ -37,20 +38,21 @@ layout(location=1) out float linearDepth;
 layout(location=0) out float linearDepth;
 #endif
 void main() {
+    azurePreparePrimaryUv(textureCoordinate);
     if(!azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
 #if defined(AZURE_SNAPSHOT_DEPTH)
     if(material.alphaMode==1){
         #if defined(AZURE_GEOMETRY_SAMPLES)
-        float alpha=azureTemporalMaskAlpha(BASE,textureCoordinate,dFdx(textureCoordinate),dFdy(textureCoordinate));
+        float alpha=azureTemporalMaskAlpha(BASE,textureCoordinate,azurePrimaryDx(textureCoordinate),azurePrimaryDy(textureCoordinate));
 #else
         float alpha=(material.features&0x40000000u)!=0u
-            ?azureTemporalMaskAlpha(BASE,textureCoordinate,dFdx(textureCoordinate),dFdy(textureCoordinate))
-            :texture(BASE,textureCoordinate).a;
+            ?azureTemporalMaskAlpha(BASE,textureCoordinate,azurePrimaryDx(textureCoordinate),azurePrimaryDy(textureCoordinate))
+            :azureSamplePrimaryUv(BASE,textureCoordinate).a;
 #endif
         if(alpha<material.alphaCutoff)discard;
     }
 #else
-    if(material.alphaMode==1 && texture(BASE,textureCoordinate).a<material.alphaCutoff) discard;
+    if(material.alphaMode==1 && azureSamplePrimaryUv(BASE,textureCoordinate).a<material.alphaCutoff) discard;
 #endif
     linearDepth=dot(worldPosition-camera.position.xyz,camera.forward.xyz);
 }
