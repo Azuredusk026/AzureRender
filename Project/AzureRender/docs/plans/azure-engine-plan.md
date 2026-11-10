@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[材质一致索引局部效率](../acceptance/nr/uniform-material-descriptor.md)完成完整捕获核验。
+六附件逐字节一致，成本增加约 0.48%，效率未准入。
+
 [DDS 块存储范围](../acceptance/nr/dds-block-storage-scope.md)完成源文件及物理格式能力调查。
 实际缓存、像素处理及逻辑设备特性按候选契约继续核验。
 

@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[材质一致索引局部效率](docs/acceptance/nr/uniform-material-descriptor.md)通过十份程序及六附件核对。
+测得材质成本增加约 0.48%，候选保持隔离。
+
 [DDS 块存储范围](docs/acceptance/nr/dds-block-storage-scope.md)完成八十五份源文件及两设备格式查询。
 源容量与实际 GPU 缓存节省分别记录，正式内存继续验收。
 
