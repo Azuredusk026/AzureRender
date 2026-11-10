@@ -1342,3 +1342,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [阴影接收需求](../acceptance/nr/shadow-receiver-demand-scope.md)已核对光源及十四次实际材质绘制。
 当前输入没有可省接收工作，继续按实际热点选择优化。
+
+[正式功率核定](../acceptance/nr/gpu-power-limit-qualification.md)取得驱动权限不足的实际结果。
+固定 80W 条件等待设备控制入口，独立研发继续推进。

@@ -1,0 +1,20 @@
+{
+  "status": "blocked-device-control-permission",
+  "sourceHead": "836071b",
+  "requestCommand": [
+    "nvidia-smi",
+    "-i",
+    "0",
+    "-pl",
+    "80"
+  ],
+  "requestExitCode": 4,
+  "reason": "Insufficient Permissions",
+  "nativeRuns": 0,
+  "settingsChanged": false,
+  "archive": {
+    "members": 9,
+    "bytes": 4560,
+    "sha256": "b33d1af58f1e28c1b128701c715de7a60fcb6604621961a5b0164f023bede2bf"
+  }
+}

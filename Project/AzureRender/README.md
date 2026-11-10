@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[正式功率条件](docs/acceptance/nr/gpu-power-limit-qualification.md)已保存驱动权限失败。
+固定 80W 采样等待可用的设备控制入口。
+
 [阴影接收需求](docs/acceptance/nr/shadow-receiver-demand-scope.md)已核对实际光源和材质字段。
 当前输入的条件跳过预期缩减为零，正式性能继续验收。
 
