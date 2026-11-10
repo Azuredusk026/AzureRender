@@ -299,3 +299,8 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [参考相机生产接入](../acceptance/nr/reference-camera-render-binding.md)完成共享标定、光栅、拾取及编辑入口检查。
 两配置、两设备的实际几何掩码和原四帧通过，完整外观按所属门槛继续验收。
+
+[原生头发参考光栅](../acceptance/nr/native-hair-reference-raster.md)记录实际生产候选。
+NVIDIA 组合保留 43 处超差，Intel 组合保留 597 处。
+Intel 深度可见量保留 96 处超差，循环索引保持原输出。
+生产覆盖的透明边界及实际可见量消费继续验收。
