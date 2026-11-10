@@ -1262,3 +1262,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [纹理尺度来源](../acceptance/nr/texture-scale-profile.md)完成独立仿射组及原生导数观测。
 NVIDIA 层级更接近椭圆主轴模型，后续验证通用显式策略。
+
+[参考透明层级](../acceptance/nr/reference-alpha-ellipse.md)通过公共策略及原四帧回归。
+NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处深度超差继续修正。

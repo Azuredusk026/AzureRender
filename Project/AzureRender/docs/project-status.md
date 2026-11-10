@@ -6,6 +6,9 @@
 既有长期目标为 CPU P95 八毫秒及 GPU P95 16.6 毫秒。
 严格四帧、SSIM 与关键区域亮度门槛保持有效。
 
+[参考透明层级](acceptance/nr/reference-alpha-ellipse.md)通过公共策略和原四帧检查。
+NVIDIA 完整 17017 处一致，Intel 剩余九十六处深度超差继续修正。
+
 [接收范围](acceptance/nr/clustered-receiver-ranges.md)与
 [运动绑定复用](acceptance/nr/motion-descriptor-reuse.md)已接入生产。
 当前单元的原生短测与正式长采样分别登记。
