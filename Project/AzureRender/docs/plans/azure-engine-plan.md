@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[四像素组设备资格](../acceptance/nr/quad-device-capture-qualification.md)完成私有特性链、原四帧及完整捕获核对。
+级联需求候选继续按附件字节和局部效率验收，生产来源保持受检内容。
+
 [材质纹理梯度主线验收](../acceptance/nr/material-uv-main-integration.md)通过双配置十八项检查。
 两设备六组主线复验及原四帧摘要核对通过，程序集为 856 份。
 

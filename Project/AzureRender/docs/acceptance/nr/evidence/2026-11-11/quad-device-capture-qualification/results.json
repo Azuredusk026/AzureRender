@@ -1,0 +1,95 @@
+{
+  "status": "private-quad-device-and-capture-qualified",
+  "sourceBase": "73300ab",
+  "productionSourceChanges": 0,
+  "privateDeviceFeatures": [
+    "shaderQuadControl",
+    "shaderMaximalReconvergence",
+    "shaderDemoteToHelperInvocation"
+  ],
+  "privateBuild": {
+    "status": "built",
+    "seconds": 9.327999999979511,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "playerSha256": "688b2a42ec6a5f8a8e9d0d8bc02cc52ac5a80b0221ac577000313e393f156d18"
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "seconds": 263.10999999998603,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0
+      }
+    ],
+    "featureRequestObserved": true,
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "capture": {
+    "status": "captured-profiled-and-mapped",
+    "sourceBase": "73300ab",
+    "privateDeviceFeatures": true,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "mountedInputsUnchanged": true,
+    "privateHostUnchanged": true,
+    "seconds": 267.23499999998603,
+    "usedBytes": 2077171316,
+    "steps": [
+      {
+        "script": "capture_current.py",
+        "exitCode": 0,
+        "status": "captured",
+        "seconds": 114.18800000002375
+      },
+      {
+        "script": "profile_current.py",
+        "exitCode": 0,
+        "status": "profiled",
+        "seconds": 88.375
+      },
+      {
+        "script": "map_pipelines.py",
+        "exitCode": 0,
+        "status": "classified-all-pipelines",
+        "seconds": 58.95299999997951
+      }
+    ],
+    "formalAcceptance": false
+  },
+  "captureFile": {
+    "bytes": 2064666752,
+    "sha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3"
+  },
+  "events": 3453,
+  "pipelines": 76,
+  "sumEventMs": 13.61347200000001,
+  "protectedFilesExact": 13,
+  "formalPerformanceAccepted": false,
+  "optimizationAdmission": "Separate attachment-and-efficiency qualification"
+}

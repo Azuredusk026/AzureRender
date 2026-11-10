@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[四像素组设备与捕获资格](docs/acceptance/nr/quad-device-capture-qualification.md)通过私有设备及严格四帧核对。
+3453 个事件和 76 条管线完整映射，级联候选继续局部验收。
+
 [材质纹理梯度主线验收](docs/acceptance/nr/material-uv-main-integration.md)通过双配置十八项检查及两设备六组复验。
 原始四帧摘要一致，主线每配置包含 856 份程序。
 
