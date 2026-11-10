@@ -1,0 +1,857 @@
+{
+  "status": "qualified-private-coverage-lod-diagnosis",
+  "overall": "failed-user-review",
+  "baseCommit": "10c8c32",
+  "productionSourceChanged": false,
+  "control": {
+    "status": "source-control-exact",
+    "recorded": 1794352567.684792,
+    "oldCommit": "10c8c32",
+    "productionSourceChanged": false,
+    "matchingDecodedTexels": 349525,
+    "matchingPngFrames": 4,
+    "hairPixels": 17017,
+    "failures": 597,
+    "maximumByteError": 166,
+    "nextCandidate": "Explicit ellipse major-axis LOD in isolated independent-coverage+quad programs; retain the identical project, texture, sampler and executable",
+    "queueWait": "One 180-second wait ended before any ellipse shader compilation or GPU execution"
+  },
+  "devices": [
+    {
+      "device": "nvidia",
+      "source": {
+        "device": "nvidia",
+        "variant": "hair-coverage",
+        "maskPixels": 17017,
+        "oldFailures": 43,
+        "failures": 43,
+        "oldMaximum": 5,
+        "maximum": 5,
+        "meanAbsoluteByteError": 0.14234784823020116,
+        "closed": 0,
+        "new": 0,
+        "coverageSources": [
+          {
+            "authoredMipLevels": 10,
+            "channel": "red",
+            "height": 512,
+            "materialIndex": 9,
+            "name": "M_actor_laevat_hair_01",
+            "sampler": {
+              "anisotropy": 1.0,
+              "colorSpace": "linear",
+              "filter": "linear",
+              "magFilter": "linear",
+              "mipBias": -1.0,
+              "mipFilter": "nearest",
+              "mipPolicy": "generate",
+              "schemaVersion": 2,
+              "usage": "mask",
+              "wrapU": "repeat",
+              "wrapV": "repeat"
+            },
+            "width": 512
+          }
+        ],
+        "probePixels": [
+          {
+            "pixel": [
+              1326,
+              177
+            ],
+            "native": [
+              69,
+              18,
+              23
+            ],
+            "baseline": [
+              69,
+              18,
+              23
+            ],
+            "candidate": [
+              69,
+              18,
+              23
+            ],
+            "oldError": 0,
+            "newError": 0
+          },
+          {
+            "pixel": [
+              1375,
+              276
+            ],
+            "native": [
+              207,
+              113,
+              105
+            ],
+            "baseline": [
+              207,
+              113,
+              105
+            ],
+            "candidate": [
+              207,
+              113,
+              105
+            ],
+            "oldError": 0,
+            "newError": 0
+          },
+          {
+            "pixel": [
+              1268,
+              163
+            ],
+            "native": [
+              112,
+              47,
+              49
+            ],
+            "baseline": [
+              112,
+              47,
+              49
+            ],
+            "candidate": [
+              112,
+              47,
+              49
+            ],
+            "oldError": 0,
+            "newError": 0
+          },
+          {
+            "pixel": [
+              1314,
+              283
+            ],
+            "native": [
+              158,
+              77,
+              73
+            ],
+            "baseline": [
+              158,
+              78,
+              73
+            ],
+            "candidate": [
+              158,
+              78,
+              73
+            ],
+            "oldError": 1,
+            "newError": 1
+          },
+          {
+            "pixel": [
+              1322,
+              263
+            ],
+            "native": [
+              104,
+              44,
+              43
+            ],
+            "baseline": [
+              104,
+              44,
+              43
+            ],
+            "candidate": [
+              104,
+              44,
+              43
+            ],
+            "oldError": 0,
+            "newError": 0
+          }
+        ],
+        "capture": {
+          "device": "nvidia",
+          "variant": "hair-coverage",
+          "referenceEnabled": true,
+          "cameraUniformBytes": 800,
+          "validationClean": true,
+          "allocatorZero": true,
+          "frames": [
+            {
+              "frame": 0,
+              "maskPixels": 17017,
+              "overOne": 43,
+              "maxByteError": 5,
+              "meanAbsoluteByteError": 0.14234784823020116,
+              "vsFrozenDifferentPixels": 6472,
+              "vsFrozenMaxByteError": 6,
+              "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+            },
+            {
+              "frame": 1,
+              "maskPixels": 17017,
+              "overOne": 43,
+              "maxByteError": 5,
+              "meanAbsoluteByteError": 0.14234784823020116,
+              "vsFrozenDifferentPixels": 6472,
+              "vsFrozenMaxByteError": 6,
+              "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+            },
+            {
+              "frame": 2,
+              "maskPixels": 17017,
+              "overOne": 43,
+              "maxByteError": 5,
+              "meanAbsoluteByteError": 0.14234784823020116,
+              "vsFrozenDifferentPixels": 6472,
+              "vsFrozenMaxByteError": 6,
+              "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+            },
+            {
+              "frame": 3,
+              "maskPixels": 17017,
+              "overOne": 43,
+              "maxByteError": 5,
+              "meanAbsoluteByteError": 0.14234784823020116,
+              "vsFrozenDifferentPixels": 6472,
+              "vsFrozenMaxByteError": 6,
+              "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+            }
+          ],
+          "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+        }
+      },
+      "ellipse": {
+        "device": "nvidia",
+        "variant": "hair-coverage-ellipse",
+        "maskPixels": 17017,
+        "oldFailures": 43,
+        "failures": 43,
+        "oldMaximum": 5,
+        "maximum": 5,
+        "meanAbsoluteByteError": 0.14234784823020116,
+        "closed": 0,
+        "new": 0,
+        "coverageSources": [
+          {
+            "authoredMipLevels": 10,
+            "channel": "red",
+            "height": 512,
+            "materialIndex": 9,
+            "name": "M_actor_laevat_hair_01",
+            "sampler": {
+              "anisotropy": 1.0,
+              "colorSpace": "linear",
+              "filter": "linear",
+              "magFilter": "linear",
+              "mipBias": -1.0,
+              "mipFilter": "nearest",
+              "mipPolicy": "generate",
+              "schemaVersion": 2,
+              "usage": "mask",
+              "wrapU": "repeat",
+              "wrapV": "repeat"
+            },
+            "width": 512
+          }
+        ],
+        "probePixels": [
+          {
+            "pixel": [
+              1326,
+              177
+            ],
+            "native": [
+              69,
+              18,
+              23
+            ],
+            "baseline": [
+              69,
+              18,
+              23
+            ],
+            "candidate": [
+              69,
+              18,
+              23
+            ],
+            "oldError": 0,
+            "newError": 0
+          },
+          {
+            "pixel": [
+              1375,
+              276
+            ],
+            "native": [
+              207,
+              113,
+              105
+            ],
+            "baseline": [
+              207,
+              113,
+              105
+            ],
+            "candidate": [
+              207,
+              113,
+              105
+            ],
+            "oldError": 0,
+            "newError": 0
+          },
+          {
+            "pixel": [
+              1268,
+              163
+            ],
+            "native": [
+              112,
+              47,
+              49
+            ],
+            "baseline": [
+              112,
+              47,
+              49
+            ],
+            "candidate": [
+              112,
+              47,
+              49
+            ],
+            "oldError": 0,
+            "newError": 0
+          },
+          {
+            "pixel": [
+              1314,
+              283
+            ],
+            "native": [
+              158,
+              77,
+              73
+            ],
+            "baseline": [
+              158,
+              78,
+              73
+            ],
+            "candidate": [
+              158,
+              78,
+              73
+            ],
+            "oldError": 1,
+            "newError": 1
+          },
+          {
+            "pixel": [
+              1322,
+              263
+            ],
+            "native": [
+              104,
+              44,
+              43
+            ],
+            "baseline": [
+              104,
+              44,
+              43
+            ],
+            "candidate": [
+              104,
+              44,
+              43
+            ],
+            "oldError": 0,
+            "newError": 0
+          }
+        ],
+        "capture": {
+          "device": "nvidia",
+          "variant": "hair-coverage-ellipse",
+          "referenceEnabled": true,
+          "cameraUniformBytes": 800,
+          "validationClean": true,
+          "allocatorZero": true,
+          "frames": [
+            {
+              "frame": 0,
+              "maskPixels": 17017,
+              "overOne": 43,
+              "maxByteError": 5,
+              "meanAbsoluteByteError": 0.14234784823020116,
+              "vsFrozenDifferentPixels": 6472,
+              "vsFrozenMaxByteError": 6,
+              "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+            },
+            {
+              "frame": 1,
+              "maskPixels": 17017,
+              "overOne": 43,
+              "maxByteError": 5,
+              "meanAbsoluteByteError": 0.14234784823020116,
+              "vsFrozenDifferentPixels": 6472,
+              "vsFrozenMaxByteError": 6,
+              "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+            },
+            {
+              "frame": 2,
+              "maskPixels": 17017,
+              "overOne": 43,
+              "maxByteError": 5,
+              "meanAbsoluteByteError": 0.14234784823020116,
+              "vsFrozenDifferentPixels": 6472,
+              "vsFrozenMaxByteError": 6,
+              "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+            },
+            {
+              "frame": 3,
+              "maskPixels": 17017,
+              "overOne": 43,
+              "maxByteError": 5,
+              "meanAbsoluteByteError": 0.14234784823020116,
+              "vsFrozenDifferentPixels": 6472,
+              "vsFrozenMaxByteError": 6,
+              "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+            }
+          ],
+          "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+        }
+      },
+      "changedMaskPixels": 0
+    },
+    {
+      "device": "intel",
+      "source": {
+        "device": "intel",
+        "variant": "hair-coverage",
+        "maskPixels": 17017,
+        "oldFailures": 597,
+        "failures": 597,
+        "oldMaximum": 166,
+        "maximum": 166,
+        "meanAbsoluteByteError": 0.21987816105463165,
+        "closed": 0,
+        "new": 0,
+        "coverageSources": [
+          {
+            "authoredMipLevels": 10,
+            "channel": "red",
+            "height": 512,
+            "materialIndex": 9,
+            "name": "M_actor_laevat_hair_01",
+            "sampler": {
+              "anisotropy": 1.0,
+              "colorSpace": "linear",
+              "filter": "linear",
+              "magFilter": "linear",
+              "mipBias": -1.0,
+              "mipFilter": "nearest",
+              "mipPolicy": "generate",
+              "schemaVersion": 2,
+              "usage": "mask",
+              "wrapU": "repeat",
+              "wrapV": "repeat"
+            },
+            "width": 512
+          }
+        ],
+        "probePixels": [
+          {
+            "pixel": [
+              1326,
+              177
+            ],
+            "native": [
+              69,
+              18,
+              23
+            ],
+            "baseline": [
+              235,
+              119,
+              113
+            ],
+            "candidate": [
+              235,
+              119,
+              113
+            ],
+            "oldError": 166,
+            "newError": 166
+          },
+          {
+            "pixel": [
+              1375,
+              276
+            ],
+            "native": [
+              207,
+              113,
+              105
+            ],
+            "baseline": [
+              110,
+              38,
+              40
+            ],
+            "candidate": [
+              110,
+              38,
+              40
+            ],
+            "oldError": 97,
+            "newError": 97
+          },
+          {
+            "pixel": [
+              1268,
+              163
+            ],
+            "native": [
+              112,
+              47,
+              49
+            ],
+            "baseline": [
+              140,
+              55,
+              59
+            ],
+            "candidate": [
+              140,
+              55,
+              59
+            ],
+            "oldError": 28,
+            "newError": 28
+          },
+          {
+            "pixel": [
+              1314,
+              283
+            ],
+            "native": [
+              158,
+              77,
+              73
+            ],
+            "baseline": [
+              135,
+              74,
+              70
+            ],
+            "candidate": [
+              135,
+              74,
+              70
+            ],
+            "oldError": 23,
+            "newError": 23
+          },
+          {
+            "pixel": [
+              1322,
+              263
+            ],
+            "native": [
+              104,
+              44,
+              43
+            ],
+            "baseline": [
+              105,
+              47,
+              49
+            ],
+            "candidate": [
+              105,
+              47,
+              49
+            ],
+            "oldError": 6,
+            "newError": 6
+          }
+        ],
+        "capture": {
+          "device": "intel",
+          "variant": "hair-coverage",
+          "referenceEnabled": true,
+          "cameraUniformBytes": 800,
+          "validationClean": true,
+          "allocatorZero": true,
+          "frames": [
+            {
+              "frame": 0,
+              "maskPixels": 17017,
+              "overOne": 597,
+              "maxByteError": 166,
+              "meanAbsoluteByteError": 0.21987816105463165,
+              "vsFrozenDifferentPixels": 10369,
+              "vsFrozenMaxByteError": 166,
+              "sha256": "b54a7ddcf0dd3f18268298f1a7a536f3e1b37038396a06bf5564c3fdf5cce4fb"
+            },
+            {
+              "frame": 1,
+              "maskPixels": 17017,
+              "overOne": 597,
+              "maxByteError": 166,
+              "meanAbsoluteByteError": 0.21987816105463165,
+              "vsFrozenDifferentPixels": 10369,
+              "vsFrozenMaxByteError": 166,
+              "sha256": "b54a7ddcf0dd3f18268298f1a7a536f3e1b37038396a06bf5564c3fdf5cce4fb"
+            },
+            {
+              "frame": 2,
+              "maskPixels": 17017,
+              "overOne": 597,
+              "maxByteError": 166,
+              "meanAbsoluteByteError": 0.21987816105463165,
+              "vsFrozenDifferentPixels": 10369,
+              "vsFrozenMaxByteError": 166,
+              "sha256": "b54a7ddcf0dd3f18268298f1a7a536f3e1b37038396a06bf5564c3fdf5cce4fb"
+            },
+            {
+              "frame": 3,
+              "maskPixels": 17017,
+              "overOne": 597,
+              "maxByteError": 166,
+              "meanAbsoluteByteError": 0.21987816105463165,
+              "vsFrozenDifferentPixels": 10369,
+              "vsFrozenMaxByteError": 166,
+              "sha256": "b54a7ddcf0dd3f18268298f1a7a536f3e1b37038396a06bf5564c3fdf5cce4fb"
+            }
+          ],
+          "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+        }
+      },
+      "ellipse": {
+        "device": "intel",
+        "variant": "hair-coverage-ellipse",
+        "maskPixels": 17017,
+        "oldFailures": 597,
+        "failures": 597,
+        "oldMaximum": 166,
+        "maximum": 97,
+        "meanAbsoluteByteError": 0.21296350708115414,
+        "closed": 0,
+        "new": 0,
+        "coverageSources": [
+          {
+            "authoredMipLevels": 10,
+            "channel": "red",
+            "height": 512,
+            "materialIndex": 9,
+            "name": "M_actor_laevat_hair_01",
+            "sampler": {
+              "anisotropy": 1.0,
+              "colorSpace": "linear",
+              "filter": "linear",
+              "magFilter": "linear",
+              "mipBias": -1.0,
+              "mipFilter": "nearest",
+              "mipPolicy": "generate",
+              "schemaVersion": 2,
+              "usage": "mask",
+              "wrapU": "repeat",
+              "wrapV": "repeat"
+            },
+            "width": 512
+          }
+        ],
+        "probePixels": [
+          {
+            "pixel": [
+              1326,
+              177
+            ],
+            "native": [
+              69,
+              18,
+              23
+            ],
+            "baseline": [
+              235,
+              119,
+              113
+            ],
+            "candidate": [
+              71,
+              20,
+              23
+            ],
+            "oldError": 166,
+            "newError": 2
+          },
+          {
+            "pixel": [
+              1375,
+              276
+            ],
+            "native": [
+              207,
+              113,
+              105
+            ],
+            "baseline": [
+              110,
+              38,
+              40
+            ],
+            "candidate": [
+              110,
+              38,
+              40
+            ],
+            "oldError": 97,
+            "newError": 97
+          },
+          {
+            "pixel": [
+              1268,
+              163
+            ],
+            "native": [
+              112,
+              47,
+              49
+            ],
+            "baseline": [
+              140,
+              55,
+              59
+            ],
+            "candidate": [
+              140,
+              55,
+              59
+            ],
+            "oldError": 28,
+            "newError": 28
+          },
+          {
+            "pixel": [
+              1314,
+              283
+            ],
+            "native": [
+              158,
+              77,
+              73
+            ],
+            "baseline": [
+              135,
+              74,
+              70
+            ],
+            "candidate": [
+              135,
+              74,
+              70
+            ],
+            "oldError": 23,
+            "newError": 23
+          },
+          {
+            "pixel": [
+              1322,
+              263
+            ],
+            "native": [
+              104,
+              44,
+              43
+            ],
+            "baseline": [
+              105,
+              47,
+              49
+            ],
+            "candidate": [
+              105,
+              47,
+              49
+            ],
+            "oldError": 6,
+            "newError": 6
+          }
+        ],
+        "capture": {
+          "device": "intel",
+          "variant": "hair-coverage-ellipse",
+          "referenceEnabled": true,
+          "cameraUniformBytes": 800,
+          "validationClean": true,
+          "allocatorZero": true,
+          "frames": [
+            {
+              "frame": 0,
+              "maskPixels": 17017,
+              "overOne": 597,
+              "maxByteError": 97,
+              "meanAbsoluteByteError": 0.21296350708115414,
+              "vsFrozenDifferentPixels": 10369,
+              "vsFrozenMaxByteError": 97,
+              "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+            },
+            {
+              "frame": 1,
+              "maskPixels": 17017,
+              "overOne": 597,
+              "maxByteError": 97,
+              "meanAbsoluteByteError": 0.21296350708115414,
+              "vsFrozenDifferentPixels": 10369,
+              "vsFrozenMaxByteError": 97,
+              "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+            },
+            {
+              "frame": 2,
+              "maskPixels": 17017,
+              "overOne": 597,
+              "maxByteError": 97,
+              "meanAbsoluteByteError": 0.21296350708115414,
+              "vsFrozenDifferentPixels": 10369,
+              "vsFrozenMaxByteError": 97,
+              "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+            },
+            {
+              "frame": 3,
+              "maskPixels": 17017,
+              "overOne": 597,
+              "maxByteError": 97,
+              "meanAbsoluteByteError": 0.21296350708115414,
+              "vsFrozenDifferentPixels": 10369,
+              "vsFrozenMaxByteError": 97,
+              "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+            }
+          ],
+          "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+        }
+      },
+      "changedMaskPixels": 1
+    }
+  ],
+  "programCount": 885,
+  "changedPrivatePrograms": 50,
+  "retainedProgramsExact": 835,
+  "maskPixels": 17017,
+  "maximumAllowedByteError": 1,
+  "remaining": [
+    "Public coverage LOD policy",
+    "Actual dynamic reference visibility producer",
+    "Intel 96 reference depth failures",
+    "Native color and remaining appearance gates"
+  ],
+  "archive": {
+    "bytes": 4897722,
+    "sha256": "737acebcc0f239ca5f95f1a6a182848e63d9ad62354649744a8782ca508ff107",
+    "members": 130
+  }
+}

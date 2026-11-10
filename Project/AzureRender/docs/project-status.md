@@ -279,3 +279,6 @@ RHI 的附件样本数、管线比例及能力查询通过双配置检查。
 
 [原生头发参考光栅](acceptance/nr/native-hair-reference-raster.md)保留两设备的实际区域证据。
 生产覆盖的透明边界及参考可见量消费仍待验收。
+
+[头发覆盖层级](acceptance/nr/native-hair-coverage-lod.md)核对显式椭圆层级的实际输出。
+公开材质接入与完整颜色继续按所属条件验证。
