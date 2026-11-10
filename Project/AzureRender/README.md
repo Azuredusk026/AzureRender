@@ -787,3 +787,4 @@ $env:VCPKG_ROOT = "D:/Tools/vcpkg"
 深度壳的快照顺序及背景法线见[来源核验](docs/acceptance/nr/outline-snapshot-order.md)。
 
 [公共 UV 梯度助手](docs/runtime/material-uv-gradients.md)提供纵向镜像四像素足迹及设备能力校验。
+斜边三角形的覆盖外辅助调用通过双配置、双设备补验。

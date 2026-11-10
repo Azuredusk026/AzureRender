@@ -138,6 +138,7 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 [公共输出精度](../acceptance/nr/material-output-precision.md)完成两配置、双设备所属核对。
 3276800 次分量比较及十六张图像通过，原始四帧保持零差。
 [公共 UV 梯度助手](../acceptance/nr/material-uv-gradients.md)完成双配置、双设备光栅核对。
+斜边三角形的覆盖外辅助调用通过双配置、双设备补验。
 69728 个分量逐位一致，材质覆盖绑定、相对投影和实际深度继续接入。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。

@@ -7,6 +7,6 @@ void main(){
     float product=gl_FragCoord.x*gl_FragCoord.y;
     vec2 uv=vec2(product,-2.0*product)*(1.0/1024.0);
     mat2 gradients=azureMirroredCoarseUvGradients(uv);
-    if(parameters.discardPattern!=0u&&((uint(gl_FragCoord.x)+uint(gl_FragCoord.y))&3u)==0u)discard;
+    if((parameters.discardPattern&1u)!=0u&&((uint(gl_FragCoord.x)+uint(gl_FragCoord.y))&3u)==0u)discard;
     outputColor=vec4(gradients[0],gradients[1]);
 }

@@ -31,6 +31,9 @@
 
 片元四像素组和辅助调用规则见 [Vulkan 着色器规范](https://docs.vulkan.org/spec/latest/chapters/shaders.html)。
 能力标志的含义见 [Vulkan 子组操作规范](https://docs.vulkan.org/refpages/latest/refpages/source/VkSubgroupFeatureFlagBits.html)。
+静态四像素广播按规范补齐覆盖外辅助调用。
+辅助调用参与导数和四像素操作。
+这些规则见 [GLSL 子组扩展](https://raw.githubusercontent.com/KhronosGroup/GLSL/main/extensions/khr/GL_KHR_shader_subgroup.txt)。
 调用方按策略选择匹配的程序及能力条件。
 
 ## 验证与接入
@@ -38,6 +41,8 @@
 真实图形夹具使用可独立计算的双分量 UV。
 两分量具有不同符号和比例，分别核对矩阵列。
 偶数与奇数尺寸覆盖完整区域及边缘辅助调用。
+斜边三角形核对覆盖外辅助调用提供的梯度。
+每批包含 81 个使用覆盖外来源的保留像素。
 丢弃测试在计算梯度后执行覆盖判定。
 
 公共助手与材质、深度、阴影的生产绑定分别验收。
