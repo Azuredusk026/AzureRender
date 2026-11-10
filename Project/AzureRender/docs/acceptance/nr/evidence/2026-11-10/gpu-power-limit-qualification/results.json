@@ -1,5 +1,5 @@
 {
-  "status": "blocked-device-control-permission",
+  "status": "blocked-device-control-not-supported",
   "sourceHead": "836071b",
   "requestCommand": [
     "nvidia-smi",
@@ -9,12 +9,20 @@
     "80"
   ],
   "requestExitCode": 4,
-  "reason": "Insufficient Permissions",
+  "reason": "Administrator power-limit command reports not supported",
   "nativeRuns": 0,
   "settingsChanged": false,
   "archive": {
-    "members": 9,
-    "bytes": 4560,
-    "sha256": "b33d1af58f1e28c1b128701c715de7a60fcb6604621961a5b0164f023bede2bf"
+    "members": 10,
+    "bytes": 5072,
+    "sha256": "5ffa78836e891bd3c8a492876c5327c95fdca5e1dc76142998130939cf6cbcd6"
+  },
+  "initialReason": "Insufficient Permissions",
+  "administratorProbe": {
+    "source": "user-provided-administrator-PowerShell-output",
+    "command": "nvidia-smi -i 0 -pl 80",
+    "output": "Changing power management limit is not supported for GPU: 00000000:01:00.0.\nTreating as warning and moving on.\nAll done.",
+    "exitCode": null,
+    "status": "not-supported"
   }
 }
