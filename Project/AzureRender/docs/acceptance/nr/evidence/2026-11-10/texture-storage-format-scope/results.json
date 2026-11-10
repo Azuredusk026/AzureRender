@@ -1,0 +1,16 @@
+{
+  "status": "format-scope-complete-no-production-candidate",
+  "sourceBase": "b726f02",
+  "devicesQueried": 3,
+  "uniqueVendorDevicePairs": 2,
+  "referenceTextureBytes": 1852081920,
+  "singleChannelSourceImages": 73,
+  "singleChannelFullMipSavingUpperBound": 240083133,
+  "textureBytesAfterOptimisticUpperBound": 1611998787,
+  "standardP5DeviceLocalBudget": 1610612736,
+  "standardBudgetWorkload": "Budget belongs to P5 workload; joint capture texel bytes are not its allocator high water measurement",
+  "existingSourceAndBothBuildsVerified": true,
+  "protectedFilesExact": 13,
+  "newNativeBatches": 0,
+  "productionSourceChanges": 0
+}

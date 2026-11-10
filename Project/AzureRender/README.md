@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[纹理格式能力与容量](docs/acceptance/nr/texture-storage-format-scope.md)保存两设备实际查询及源图像容量范围。
+NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工作负载验收。
+
 [展开接收计算的局部效率](docs/acceptance/nr/unrolled-computed-view-local-qualification.md)通过两种候选的六附件核对。
 完整材质降幅至多约 19.49%，效率未准入，候选保持隔离。
 
