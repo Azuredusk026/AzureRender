@@ -238,7 +238,11 @@ RGB 采用五位指数及六、六、五位尾数。
 材质绑定及各覆盖路径继续在后续单元接入。
 
 [主 UV 取样候选](../acceptance/nr/material-mirrored-uv-candidate.md)保留 Intel 阴影差异。
-候选接入待验，相机投影与真实深度来源继续推进。
+公开材质绑定通过所属检查，相机投影与真实深度来源继续推进。
+
+[材质主 UV 绑定](../acceptance/nr/material-primary-uv-policy.md)通过三十六组实际 GPU 检查。
+两配置的 855 份程序逐字节一致，原始四帧摘要精确一致。
+公开覆盖、阴影及足迹正控制通过，实际相机与网格组合继续验收。
 
 [参考裁剪投影](../acceptance/nr/reference-clip-projection.md)通过原生向量与双设备位精度核对。
 公共内核与原四帧回归通过，相机及深度生产继续接入。

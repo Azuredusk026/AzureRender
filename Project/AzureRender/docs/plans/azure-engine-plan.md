@@ -169,7 +169,7 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 3276800 次分量比较及十六张图像通过，原始四帧保持零差。
 [公共 UV 梯度助手](../acceptance/nr/material-uv-gradients.md)完成双配置、双设备光栅核对。
 斜边三角形的覆盖外辅助调用通过双配置、双设备补验。
-69728 个分量逐位一致，材质覆盖绑定、相对投影和实际深度继续接入。
+139456 个分量逐位一致，相对投影和实际深度继续接入。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
@@ -1326,7 +1326,7 @@ WC1 至 WC6 完成，证据见世界参照与相机实施记录。
 本轮覆盖双设备路径追踪、语言切换和独立发布。
 
 [主 UV 取样候选](../acceptance/nr/material-mirrored-uv-candidate.md)保留 Intel 阴影差异。
-候选接入待验，相机投影与真实深度来源继续推进。
+公开材质绑定通过所属检查，相机投影与真实深度来源继续推进。
 
 [参考裁剪投影](../acceptance/nr/reference-clip-projection.md)通过原生向量与双设备位精度核对。
 公共内核与原四帧回归通过，相机及深度生产继续接入。
@@ -1379,7 +1379,7 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 [椭圆层级主线集成](../acceptance/nr/reference-alpha-ellipse-main-integration.md)通过双配置、两设备与原四帧检查。
 默认程序身份保持一致，剩余九十六处深度超差继续修正。
 [接收循环修正](../acceptance/nr/receiver-source-sync.md)按来源 `62fc79c` 同步。
-主 UV 组合继续核对公开材质、阴影及取样正控制。
+主 UV 组合的公开材质、阴影及取样正控制通过所属验收。
 
 [材质主 UV 绑定](../acceptance/nr/material-primary-uv-policy.md)通过两配置、双设备的三十六组检查。
 公开材质、阴影、覆盖、足迹正控制及失败清理通过，原始四帧摘要精确一致。
