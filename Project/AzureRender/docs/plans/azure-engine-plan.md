@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[DDS 块存储范围](../acceptance/nr/dds-block-storage-scope.md)完成源文件及物理格式能力调查。
+实际缓存、像素处理及逻辑设备特性按候选契约继续核验。
+
 [参考位置帧主线验收](../acceptance/nr/reference-position-frame-main-integration.md)通过双配置十八项检查。
 十二次设备检查及重新采集的原四帧通过，程序集为 859 份。
 

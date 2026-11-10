@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[DDS 块存储范围](docs/acceptance/nr/dds-block-storage-scope.md)完成八十五份源文件及两设备格式查询。
+源容量与实际 GPU 缓存节省分别记录，正式内存继续验收。
+
 [参考位置帧主线验收](docs/acceptance/nr/reference-position-frame-main-integration.md)通过双配置十八项检查及十二次设备检查。
 原始四帧摘要一致，主线每配置包含 859 份程序。
 
