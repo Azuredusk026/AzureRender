@@ -1,0 +1,350 @@
+{
+  "status": "qualified-relative-fine-gradient-control",
+  "rows": [
+    {
+      "name": "control",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 2,
+      "maximumByteError": 6,
+      "meanAbsoluteByteError": 0.13680437209848975,
+      "resolvedOriginalFailures": 72,
+      "newOriginalFailures": 1,
+      "resolvedControlFailures": 0,
+      "newControlFailures": 0,
+      "changedHairPixels": 0,
+      "failures": [
+        {
+          "pixel": [
+            1322,
+            262
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        },
+        {
+          "pixel": [
+            1322,
+            263
+          ],
+          "absoluteError": [
+            2,
+            3,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "name": "candidate",
+      "maskPixels": 17017,
+      "pixelsOverOneByte": 1,
+      "maximumByteError": 2,
+      "meanAbsoluteByteError": 0.13656931303990127,
+      "resolvedOriginalFailures": 73,
+      "newOriginalFailures": 1,
+      "resolvedControlFailures": 1,
+      "newControlFailures": 0,
+      "changedHairPixels": 2,
+      "failures": [
+        {
+          "pixel": [
+            1322,
+            262
+          ],
+          "absoluteError": [
+            2,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "state": {
+    "status": "qualified",
+    "variants": [
+      {
+        "name": "control",
+        "hdrSha256": "9b60492dbd8e40648dba1baef0b8861e385a1b5e715fc625c77b82ce258fd6d0",
+        "finalSha256": "9a4ab43fb4832219bda52310f53119acf6a4e6b31f25f954f8e5a58efb072af6",
+        "hdrExact": true,
+        "finalExact": true,
+        "geometryBaselineRestored": true
+      },
+      {
+        "name": "candidate",
+        "hdrSha256": "cdb97913c654144fcd595131b62e95d259df8316e477e3e61fc5e38cfda266e8",
+        "finalSha256": "ce741d6b5877989291f7d2cb087106e8a41afa002028aaf7c261353a21577ac1",
+        "geometryBaselineRestored": true
+      }
+    ],
+    "uvProbes": [],
+    "activeVariant": "candidate",
+    "baselineRestored": true,
+    "debugMessages": [],
+    "cleanupBaselineRestored": true
+  },
+  "operations": [
+    {
+      "result": "%5185",
+      "binding": 1,
+      "coordinate": "%5184"
+    },
+    {
+      "result": "%5282",
+      "binding": 1,
+      "coordinate": "%5281"
+    },
+    {
+      "result": "%5484",
+      "binding": 2,
+      "coordinate": "%5483"
+    },
+    {
+      "result": "%5513",
+      "binding": 8,
+      "coordinate": "%5512"
+    },
+    {
+      "result": "%5623",
+      "binding": 3,
+      "coordinate": "%5622"
+    },
+    {
+      "result": "%5630",
+      "binding": 5,
+      "coordinate": "%5629"
+    },
+    {
+      "result": "%5656",
+      "binding": 6,
+      "coordinate": "%5655"
+    },
+    {
+      "result": "%6216",
+      "binding": 12,
+      "coordinate": "%6215"
+    },
+    {
+      "result": "%6626",
+      "binding": 7,
+      "coordinate": "%6625"
+    },
+    {
+      "result": "%8413",
+      "binding": 7,
+      "coordinate": "%8412"
+    },
+    {
+      "result": "%8422",
+      "binding": 7,
+      "coordinate": "%8421"
+    },
+    {
+      "result": "%8432",
+      "binding": 7,
+      "coordinate": "%8431"
+    },
+    {
+      "result": "%8442",
+      "binding": 7,
+      "coordinate": "%8441"
+    },
+    {
+      "result": "%8452",
+      "binding": 7,
+      "coordinate": "%8451"
+    },
+    {
+      "result": "%8460",
+      "binding": 7,
+      "coordinate": "%8459"
+    },
+    {
+      "result": "%8468",
+      "binding": 7,
+      "coordinate": "%8467"
+    },
+    {
+      "result": "%8481",
+      "binding": 7,
+      "coordinate": "%8480"
+    },
+    {
+      "result": "%8494",
+      "binding": 7,
+      "coordinate": "%8493"
+    },
+    {
+      "result": "%9591",
+      "binding": 6,
+      "coordinate": "%9590"
+    },
+    {
+      "result": "%14154",
+      "binding": 12,
+      "coordinate": "%14153"
+    },
+    {
+      "result": "%14169",
+      "binding": 8,
+      "coordinate": "%14168"
+    },
+    {
+      "result": "%14832",
+      "binding": 12,
+      "coordinate": "%14831"
+    }
+  ],
+  "productionChanged": false,
+  "overallVisualAcceptance": "failed-user-review",
+  "scope": "Private fine derivative control after source camera projection, source visibility, selected-main saturation and storage-grid controls. Frozen17017 mask and one-byte threshold unchanged; this diagnostic does not imply portable production equivalence.",
+  "archiveBytes": 1410964,
+  "archiveSha256": "42f91abf662ff97134050e372f8009a94a5d766872cd8a2f00860cd0233eb4f5",
+  "archiveFiles": [
+    {
+      "path": "analysis.log",
+      "bytes": 1753,
+      "sha256": "fa2c11a64ca82e420645bf64cbcb9100137f6e3fddd09f4af1560b6bcdcbde20"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 2002,
+      "sha256": "4840df578bb6b144013331e37cac97f16c3cbd007ffa46f7b94718503f22b9c0"
+    },
+    {
+      "path": "baseline.py",
+      "bytes": 2150,
+      "sha256": "3ce0b955c9e57c95321f2c3ed3400a0c93c0e395065ec61a7d9ad3a54c59257e"
+    },
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "1307da974df095e2097ff6c3c7b0e297e7d314a2aa8eb8fcae2c91ca7e294247"
+    },
+    {
+      "path": "candidate-final.zlib",
+      "bytes": 105122,
+      "sha256": "ed26a902e2ad723fa33d9b0e6cb908c4195905b65b8093a04402bb030c489d0e"
+    },
+    {
+      "path": "candidate-hdr.zlib",
+      "bytes": 145841,
+      "sha256": "688ed9139ab461e300cb55fcb6c6bc50ed9bb0bc3eceb5534f45da2b45d2a07a"
+    },
+    {
+      "path": "candidate.spv",
+      "bytes": 473568,
+      "sha256": "0e0e683bbacd833383fb90dfa3e318e4d741e706d119112a67afe7adf6b98228"
+    },
+    {
+      "path": "candidate.spvasm",
+      "bytes": 1502009,
+      "sha256": "ddb4fc1189b9e72ec33b63af2427bfa72c60aef470cf82a4595e002839905e57"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 3324,
+      "sha256": "e57757aad52b560f790adbc0b7d81f2003e19d709ef4a4020a415501d15886b0"
+    },
+    {
+      "path": "control-final.zlib",
+      "bytes": 95475,
+      "sha256": "40300f38acc3e175fb5b2fee7ff71b330c3812b2584883a54e3c05577af5fd24"
+    },
+    {
+      "path": "control-hdr.zlib",
+      "bytes": 129969,
+      "sha256": "b340fe4e80c9c01570e0fc1fd8cd6a75c450d338a38cc5faa9ab387888593593"
+    },
+    {
+      "path": "control.spv",
+      "bytes": 472592,
+      "sha256": "f0ed540d11bbecdf38ec445735879089322b34bb69d33670d4fd576d7de2ffb1"
+    },
+    {
+      "path": "control.spvasm",
+      "bytes": 1499016,
+      "sha256": "262aead97f7e76d9ce65c4fd11a94d3afff70697497639d7a943d02c5250ea02"
+    },
+    {
+      "path": "driver.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 592,
+      "sha256": "897b2a382f620b3d85fd66a09333c6c3c7e1764d021a8059525855dec4b9aef2"
+    },
+    {
+      "path": "operations.json",
+      "bytes": 1794,
+      "sha256": "1119ef2acdaa8b719040d06f978c74fd3682e64c83912ec86d280d93f3529761"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 2027,
+      "sha256": "e50ff3e871c38c69202787d6850ceb7049aa8f0f0eecc4ff4cdece407c101bd1"
+    },
+    {
+      "path": "process.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 891,
+      "sha256": "962c966ddfc737b718c0c5bc3336bd8697c87e6edfd6d468d302e6f5e3f65994"
+    },
+    {
+      "path": "results.json",
+      "bytes": 4612,
+      "sha256": "38f6a64a76ec9f929df3d59ce18c1febf822f0de44a5faf836332cd86afee299"
+    },
+    {
+      "path": "run.py",
+      "bytes": 969,
+      "sha256": "934357bd34bed69b95311bdd9bc5cd2e9159ec67097ecdd06ae1899a999490bf"
+    },
+    {
+      "path": "state.json",
+      "bytes": 766,
+      "sha256": "22a044ecca79e798e009377f735538312d29830320a99cbc35393e25d5ae0983"
+    },
+    {
+      "path": "task.json",
+      "bytes": 487,
+      "sha256": "03441d5b1faf422ac7dffd9010eafb0648f974f69649b925ab6fe15c090e0f44"
+    },
+    {
+      "path": "vertex.spv",
+      "bytes": 19228,
+      "sha256": "008f3ee25a37d39ad9bc3ddffcdba33c648eeaf330af4a538fc39f697c6d02b0"
+    },
+    {
+      "path": "inputs/manifest.json",
+      "bytes": 685,
+      "sha256": "36e88310c26848c643061e174c94f156fa73b0d9b1f4d00f5ce32b9508e88cfc"
+    },
+    {
+      "path": "inputs/mask.png",
+      "bytes": 8418,
+      "sha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7"
+    },
+    {
+      "path": "inputs/native-packed-crop.zlib",
+      "bytes": 150197,
+      "sha256": "d9422dbf4eb42766c1d536741ce574e2c6a871ed722ffc5107e42ec6b1cbcb0e"
+    },
+    {
+      "path": "inputs/original-final.zlib",
+      "bytes": 113298,
+      "sha256": "6485d01364e0f3abc656ff5ad7cdfcdd067a70db9d79ce3618bfede8b46648d5"
+    }
+  ],
+  "archiveReproductionPassed": true
+}
