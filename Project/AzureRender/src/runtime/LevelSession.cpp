@@ -1,6 +1,7 @@
 #include "runtime/LevelSession.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "assets/GltfLoader.hpp"
+#include "assets/MaterialPixelStorage.hpp"
 #include "render/ViewFogBindingJson.hpp"
 #include <nlohmann/json.hpp>
 #include <set>
@@ -63,8 +64,13 @@ void LevelSession::startWork(const std::string& reference,bool refresh){
         check();database.refresh(false,check);check();
         auto level=loadProjectLevel(project,database,reference);
         if(level.resourceKey==activeKey)level.preparedMeshes=meshes;
+        ImmutableBytePool pixelPool;
         for(const auto& resource:level.scene.resources){
-            if((!refresh || level.resourceKey!=activeKey) && !level.preparedMeshes.count(resource.path.lexically_normal().generic_u8string())){check();level.preparedMeshes.emplace(resource.path.lexically_normal().generic_u8string(),std::make_shared<const LoadedAsset>(loadGltfAsset(resource.path.u8string())));}
+            if((!refresh || level.resourceKey!=activeKey) && !level.preparedMeshes.count(resource.path.lexically_normal().generic_u8string())){
+                check();auto mesh=loadGltfAsset(resource.path.u8string());
+                for(auto& material:mesh.materials){check();prepareMaterialPixels(material,pixelPool);}
+                check();level.preparedMeshes.emplace(resource.path.lexically_normal().generic_u8string(),std::make_shared<const LoadedAsset>(std::move(mesh)));
+            }
         }
         check();return Candidate{std::move(database),std::move(level),reference,generation,refresh};
     });

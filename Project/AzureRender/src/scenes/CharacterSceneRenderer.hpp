@@ -7,6 +7,7 @@
 #include "render/EnvironmentCubeTexture.hpp"
 #include "render/OctahedralEnvironmentGpu.hpp"
 #include "render/SampledTextureCache.hpp"
+#include "foundation/ImmutableBytes.hpp"
 #include "render/MaterialPipelinePolicy.hpp"
 #include "render/StableDepthOrder.hpp"
 #include "render/TransparentTopology.hpp"
@@ -520,6 +521,7 @@ private:
     rhi::GpuBuffer vertexColorBuffer_,whiteVertexColorBuffer_;
     std::vector<GpuMaterial> gpuMaterials_;
     std::unique_ptr<SampledTextureCache> materialTextureCache_;
+    std::unique_ptr<ImmutableBytePool> materialPixelPool_;
     std::unique_ptr<OutlineProjectionResources> outlineProjection_;
     bool outlineProjectionEnabled_=false;
     GpuTexture environmentTexture_;

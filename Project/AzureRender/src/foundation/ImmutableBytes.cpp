@@ -60,6 +60,11 @@ bool ImmutableBytes::equals(const ImmutableBytes& other) const {
 std::shared_ptr<const ImmutableBytes> ImmutableBytePool::intern(const std::vector<std::uint8_t>& bytes) {
     const auto bucket=immutableBytesBucket(bytes);
     auto candidate=std::shared_ptr<const ImmutableBytes>(new ImmutableBytes(bytes,bucket));
+    return adopt(std::move(candidate));
+}
+std::shared_ptr<const ImmutableBytes> ImmutableBytePool::adopt(std::shared_ptr<const ImmutableBytes> candidate) {
+    if(!candidate)throw std::invalid_argument("An immutable byte payload is required");
+    const auto bucket=candidate->bucket();
     auto range=entries_.equal_range(bucket);
     for(auto at=range.first;at!=range.second;) {
         const auto existing=at->second.lock();

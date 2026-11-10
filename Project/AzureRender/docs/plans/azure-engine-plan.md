@@ -56,7 +56,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [色度与缓存集成](../acceptance/nr/main-chroma-seal-integration.md)通过主线双配置 24 项及冻结四帧。
 [线性通道存储](../acceptance/nr/linear-texture-channel-storage.md)通过双配置、双设备及原四帧，纹素字节减少约 14.08%。
 [预备像素载荷](2026-11-10-prepared-pixel-payloads.md)按不可变载荷及加载接入两阶段执行，源基础层压缩还原核查通过。
-[不可变载荷入口](../acceptance/nr/immutable-byte-payloads.md)通过双配置所属回归及双设备 648 组采样条件，加载阶段继续执行。
+[不可变载荷入口](../acceptance/nr/immutable-byte-payloads.md)通过双配置所属回归及双设备 648 组采样条件。
+[预备像素加载](../acceptance/nr/prepared-material-loading.md)完成直接及后台加载接入，双配置 32 项和原四帧通过，单场景工作集峰值约 1.9227 GiB。
 原四帧零差，GPU 名义改善约 0.02634%。
 区间效率门槛未通过，源码及实际宿主已恢复。
 

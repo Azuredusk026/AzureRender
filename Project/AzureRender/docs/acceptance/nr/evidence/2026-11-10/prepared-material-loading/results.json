@@ -1,0 +1,484 @@
+{
+  "status": "prepared-material-loading-and-strict-four-frames-qualified",
+  "sourceBase": "61d2f72",
+  "build": {
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 16,
+        "skips": 0,
+        "seconds": 297.15600000001723
+      },
+      {
+        "config": "Debug",
+        "tests": 16,
+        "skips": 0,
+        "seconds": 301.7820000000065
+      }
+    ],
+    "sourceUnchanged": true,
+    "cacheCasesPerConfiguration": 17
+  },
+  "fieldQualification": {
+    "checks": [
+      {
+        "config": "Release",
+        "onlyChangedProduct": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzureMaterialTextureSharingTests.exe"
+        ],
+        "unchangedRuntimeAndOtherTests": true,
+        "fieldGoldenInputs": 13
+      },
+      {
+        "config": "Debug",
+        "onlyChangedProduct": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzureMaterialTextureSharingTests.exe"
+        ],
+        "unchangedRuntimeAndOtherTests": true,
+        "fieldGoldenInputs": 13
+      }
+    ],
+    "productionSourceUnchanged": true
+  },
+  "intel": {
+    "checks": [
+      {
+        "config": "Release",
+        "target": "AzureSampledTextureChannelsGpuTests",
+        "seconds": 4.045999999972992
+      },
+      {
+        "config": "Release",
+        "target": "AzureSurfaceResponseGpuTests",
+        "seconds": 0.4380000000237487
+      },
+      {
+        "config": "Debug",
+        "target": "AzureSampledTextureChannelsGpuTests",
+        "seconds": 9.155999999959022
+      },
+      {
+        "config": "Debug",
+        "target": "AzureSurfaceResponseGpuTests",
+        "seconds": 0.4690000000409782
+      }
+    ],
+    "sourceUnchanged": true
+  },
+  "capture": {
+    "materialTextureCache": {
+      "requests": 6169,
+      "hits": 5784,
+      "uniqueTextures": 385,
+      "requestedBytes": 8394487848,
+      "residentBytes": 1852081920,
+      "retainedPixelBytes": 0,
+      "releasedIdentityBytes": 1664821444,
+      "referencedPixelBytes": 1663587808,
+      "retainedIdentityStorageBytes": 0,
+      "releasedIdentityStorageBytes": 349767343,
+      "channelSavedBytes": 303475480,
+      "compactedTextures": 107,
+      "sealed": true,
+      "hashedPixelBytes": 3743632,
+      "copiedPixelBytes": 1048576,
+      "transferredPixelBytes": 185060,
+      "discardedPixelBytes": 412836,
+      "hashMs": 1.3571,
+      "matchMs": 2.2269,
+      "mipMs": 9625.92,
+      "uploadMs": 2185.94
+    },
+    "sceneLoad": {
+      "cpuPrepareMs": 48719.6,
+      "meshUploadMs": 632.699,
+      "materialUploadMs": 19754.4,
+      "sharedTexturesMs": 406.39,
+      "buffersMs": 100.581,
+      "skinningMs": 11.3753,
+      "descriptorsMs": 124.289,
+      "pipelinesMs": 33108.4,
+      "decodedMaterialPixelBytes": 6365826224,
+      "remainingMaterialPixelBytes": 8
+    },
+    "exitCode": 0,
+    "seconds": 141.39100000000326,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "defaultIsolationDisabled": true,
+    "shadowHistoryDisabled": true,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "materialPixelPayloads": {
+    "livePayloads": 0,
+    "decodedBytes": 0,
+    "storedBytes": 0
+  },
+  "workingSet": {
+    "peakBytes": 2064527360,
+    "baselinePeakBytes": 7450550272,
+    "baselineRun": "20261110-101422-linear-texture-channel-storage-f72cca",
+    "observedReduction": 0.7229027005215005,
+    "observedBelow2GiB": true,
+    "scope": "One full frozen native scene loading run with validation; formal workload matrix remains separate"
+  },
+  "protectedFilesUnchanged": 13,
+  "existingShaderProgramsUnchanged": 773,
+  "formalMemoryPassed": false,
+  "wholeFrameTimingRuns": 0,
+  "overallVisualAcceptance": "failed-user-review",
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 875332,
+    "sha256": "2c8e7ff69513c76047dd32c4a586dcf43eea8cfe067e927b3f56993bef2e387e"
+  },
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "57c099129fe72885345cc249e71390354258042e28b33545a8546e315371572a"
+    },
+    {
+      "path": "build-results.json",
+      "bytes": 323,
+      "sha256": "825153be62e7d669b5a64ef2ccb71e82f1301255dcf511deadd78fff55f528c5"
+    },
+    {
+      "path": "build.py",
+      "bytes": 3047,
+      "sha256": "1239a66fe651752463cec2a0d8b4351a94b00ef5421578d9749bdae4228e105e"
+    },
+    {
+      "path": "capture-command.json",
+      "bytes": 855,
+      "sha256": "7c7ea8d549cf5178ea9cbf5e9ab5317abff1999020150e3c4c842840a0ad2228"
+    },
+    {
+      "path": "capture-results.json",
+      "bytes": 2228,
+      "sha256": "7853d85a20345175549cebb699cfd1c740f14b981f1a0e80e96246199b5372bc"
+    },
+    {
+      "path": "capture.log",
+      "bytes": 26493,
+      "sha256": "90cea82c4ffff7c2c4f91665e2e4ee0e2aa0c4d82cc0a59b8c83c792910ef8ab"
+    },
+    {
+      "path": "capture.py",
+      "bytes": 3842,
+      "sha256": "a0358d004d0b8a2a05a0887e2c2032412afce01b934cc0b58606dfebe5ea48b9"
+    },
+    {
+      "path": "CMakeLists.txt.baseline",
+      "bytes": 296883,
+      "sha256": "e7980e4bdddbffbedd27f43efe763d40fbade81019cc37e189b52582ee8b508c"
+    },
+    {
+      "path": "debug-build-provenance.json",
+      "bytes": 394149,
+      "sha256": "935709cc2118f376202b00deb1dd693b00f370b59c0a6de1918f36dcee382b02"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 24830,
+      "sha256": "5b0e4a57da9227ea0ef68658b517b228550a525a3515e66324794655ff21b77e"
+    },
+    {
+      "path": "debug-field-build.log",
+      "bytes": 1292,
+      "sha256": "5489f743081a5c769a683610a0c2476c038bff89e1311d501e482c1c4c06b15d"
+    },
+    {
+      "path": "debug-field-tests.log",
+      "bytes": 29441,
+      "sha256": "43d0d7f527867ff9bc91c7613156c44ce2f669d92a149b0b7960999cecae5267"
+    },
+    {
+      "path": "debug-final-build-provenance.json",
+      "bytes": 394149,
+      "sha256": "ac703b59fdd2ff5ff7c9fb8b2f645d4cb5238afc5fb60ededa9d2a192477702a"
+    },
+    {
+      "path": "debug-intel-AzureSampledTextureChannelsGpuTests.log",
+      "bytes": 155,
+      "sha256": "b148d8726d1e9ef127497805fe2de7e9d8fdb786fcb987fca706f6633db99c60"
+    },
+    {
+      "path": "debug-intel-AzureSurfaceResponseGpuTests.log",
+      "bytes": 13233,
+      "sha256": "147e1fabbf5529a183be140573cc3747673bab68a913f954734d40fd05bcc7ad"
+    },
+    {
+      "path": "debug-tests.log",
+      "bytes": 2346,
+      "sha256": "ee69552001261543757151ed8a58beb7ed2884ecdc81163193232650738cfdc2"
+    },
+    {
+      "path": "debug-tests.xml",
+      "bytes": 11874,
+      "sha256": "88e280ab3d893c245f0b40ff6133bb7a5584dcad019684f0aa4861537eb3aacc"
+    },
+    {
+      "path": "field-qualification.json",
+      "bytes": 611,
+      "sha256": "f986b497acddc0e7067212c2e5676111ca76c05671d15b97c13e41bd08e38d09"
+    },
+    {
+      "path": "intel-results.json",
+      "bytes": 575,
+      "sha256": "94566bd673ab8f7c0a41907d3efbe6b429393e0341ef6b16487665ee558d5097"
+    },
+    {
+      "path": "intel.py",
+      "bytes": 1551,
+      "sha256": "ae16ab774328ea4cda9e0ce4564668b9ae1bdaf4c44cd2f226e2bdc5e2a5b1c4"
+    },
+    {
+      "path": "memory-observations.json",
+      "bytes": 139549,
+      "sha256": "8751c6f166fb80f149d517631f1de4df65ca9a6b5f7ac2adf48c5f22a72e19f7"
+    },
+    {
+      "path": "memory_observer.py",
+      "bytes": 1478,
+      "sha256": "2ca8659c1015a3aab7d27b76fdf4a8a4c88f3f38dfdf18316855bd339acf7cb3"
+    },
+    {
+      "path": "process.log",
+      "bytes": 84,
+      "sha256": "a2c484465813e6d244ec90ee19d5510878b1c1b97f82cd4d493f8de2e2aacbb9"
+    },
+    {
+      "path": "qualify.py",
+      "bytes": 205,
+      "sha256": "0ef99a5d065db14f111267058a04367a92ce18341cc67bb166702ef07ebaae42"
+    },
+    {
+      "path": "red-build.log",
+      "bytes": 1630,
+      "sha256": "50849337973d6db1b307a4fe53ce4b8a7bb2319c23ffb5b6e25dd2e40ae8975e"
+    },
+    {
+      "path": "red.json",
+      "bytes": 48,
+      "sha256": "fa8fc51f32648d410e46a79dd9216fef87446f852807952a0a489f86e4b1e25f"
+    },
+    {
+      "path": "red.py",
+      "bytes": 769,
+      "sha256": "ea9418b3617cc9923902c37d1c7c1e0d1ba55c235fe322502994080a1cdcda3e"
+    },
+    {
+      "path": "release-build-provenance.json",
+      "bytes": 418293,
+      "sha256": "1b328132120d76a3e820281d831f2e8cb3d4094dbaa123991a46be02c0e8c26a"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 14375,
+      "sha256": "02824823c311fc51e014b5edd6469320d80df4e3091198cfb514fafb28bf4039"
+    },
+    {
+      "path": "release-field-build.log",
+      "bytes": 1298,
+      "sha256": "93be2fbcedc54e8fbc3b255e11a7b365ca670536da6eaeffd859835ecaefbc4d"
+    },
+    {
+      "path": "release-field-tests.log",
+      "bytes": 29421,
+      "sha256": "315c4fddc63734f1000a146d578075de3a7f7ba94397b971fe144bf0d687a31a"
+    },
+    {
+      "path": "release-final-build-provenance.json",
+      "bytes": 418293,
+      "sha256": "64cbde528713b6227b9f1d290eb7c35508e25bce365935f8fb54928282aa5b17"
+    },
+    {
+      "path": "release-intel-AzureSampledTextureChannelsGpuTests.log",
+      "bytes": 155,
+      "sha256": "b148d8726d1e9ef127497805fe2de7e9d8fdb786fcb987fca706f6633db99c60"
+    },
+    {
+      "path": "release-intel-AzureSurfaceResponseGpuTests.log",
+      "bytes": 13233,
+      "sha256": "147e1fabbf5529a183be140573cc3747673bab68a913f954734d40fd05bcc7ad"
+    },
+    {
+      "path": "release-tests.log",
+      "bytes": 2350,
+      "sha256": "b74bc7e9a73cb30a0873dcd29daafaf916fea14dcad64ca1c54b149ed3a10983"
+    },
+    {
+      "path": "release-tests.xml",
+      "bytes": 11874,
+      "sha256": "836379ff3e961456773c773f8dfa785af576185b34ade8dc8ac297eacff679fc"
+    },
+    {
+      "path": "results.json",
+      "bytes": 4845,
+      "sha256": "fd22deca6792e2904cf8c8836ca87b7595befbb9a9390644142e83fa2bb16b85"
+    },
+    {
+      "path": "runtime.json",
+      "bytes": 317962,
+      "sha256": "63fd085c18b4da2432edd2b18fe8fd6f1548d70f7f714141008938bb4aaf0fe4"
+    },
+    {
+      "path": "src__assets__GltfLoader.hpp.baseline",
+      "bytes": 19010,
+      "sha256": "fd7d673463075cd185b819af7e0f4546fc73544c9a834ac57eddb660ae6e74fc"
+    },
+    {
+      "path": "src__assets__MaterialData.cpp.baseline",
+      "bytes": 25499,
+      "sha256": "6b7e3e5c041a2acc5242d9264ace945df2c9fcb11289e803b9cebb5d4241b270"
+    },
+    {
+      "path": "src__foundation__ImmutableBytes.cpp.baseline",
+      "bytes": 3622,
+      "sha256": "a3333ca95f2dd60ae644a5302df2df754c61e2efc4e32dea0b995c8e965a8719"
+    },
+    {
+      "path": "src__foundation__ImmutableBytes.hpp.baseline",
+      "bytes": 1692,
+      "sha256": "9ae23d83238d22b9ab0257f7a081d9032091dc03cbd98b72821e29e170995ad6"
+    },
+    {
+      "path": "src__runtime__LevelSession.cpp.baseline",
+      "bytes": 8264,
+      "sha256": "33737f0914d089c7c755300e28990e340084c83bf2ca0c143eaf509950e52e79"
+    },
+    {
+      "path": "src__scenes__CharacterSceneRenderer.cpp.baseline",
+      "bytes": 344728,
+      "sha256": "9b52c2b04d614316bc1edd5f106b1e1590e96cf7b81947b00911a445686b1f2c"
+    },
+    {
+      "path": "src__scenes__CharacterSceneRenderer.hpp.baseline",
+      "bytes": 41626,
+      "sha256": "c9f9057a061a5d374dccc9929455ac056a9be302c30eb5c829e8a30525b4a60a"
+    },
+    {
+      "path": "strengthen.py",
+      "bytes": 2064,
+      "sha256": "a8adafeecbc96a74ad1e552860c35792027e2f51b772ca99ff850bb031ccbcd8"
+    },
+    {
+      "path": "tests__MaterialTextureSharingTests.cpp.baseline",
+      "bytes": 11509,
+      "sha256": "02ac85a837a282da64f8ab8eb367a74b59dd5908b5ae97fa6e036db29f2effaa"
+    },
+    {
+      "path": "unit-build.log",
+      "bytes": 10528,
+      "sha256": "ed37da43b285c14ac34c33b02b35f0ed6187c3f5612947e4f48aefc1c378506e"
+    },
+    {
+      "path": "unit-tests.log",
+      "bytes": 29421,
+      "sha256": "ecfd73d735f85daeb853f5a5af9a42a32eb8fb33f77a77157b0f73c708a2b1be"
+    },
+    {
+      "path": "unit.py",
+      "bytes": 759,
+      "sha256": "28a56ecf82290bc6b6140eb80d1707210bbf16aa7653c8eb88aac611880055ec"
+    },
+    {
+      "path": "frames/capture_manifest.json",
+      "bytes": 17672,
+      "sha256": "85d1390de86938a6f257e268abc51294d32eb0c0eac2dcc9cb3e26b612d83a97"
+    },
+    {
+      "path": "frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    },
+    {
+      "path": "sources/CMakeLists.txt",
+      "bytes": 296924,
+      "sha256": "457f000065e5e37c254870e51eb69eb741f4448127bef60f85c4ad858e9a5385"
+    },
+    {
+      "path": "sources/src/foundation/ImmutableBytes.hpp",
+      "bytes": 1781,
+      "sha256": "1401770c2f2cc3c87e0d16de83cce94731e6aca166081d4acf8cf7d9c77ae3da"
+    },
+    {
+      "path": "sources/src/foundation/ImmutableBytes.cpp",
+      "bytes": 3909,
+      "sha256": "a76652401ca08f2b441e9732e70ee9b7d11cba7202fa49d36de158ea4e363279"
+    },
+    {
+      "path": "sources/src/assets/GltfLoader.hpp",
+      "bytes": 19442,
+      "sha256": "d0a944969fbc33a6b1abcb5ef46e239c9720c3c40a5c78d1cb41596eab79870b"
+    },
+    {
+      "path": "sources/src/assets/MaterialData.cpp",
+      "bytes": 25606,
+      "sha256": "a840a5da215ab40712fd61dfc4deefff69191d13f64dcf5fca12b7cb988be2d4"
+    },
+    {
+      "path": "sources/src/assets/MaterialPixelStorage.hpp",
+      "bytes": 598,
+      "sha256": "e70740bd38bb2c576c267c79aabc4ef9b5cd19db9c4f8a3647aac9bebd8f1184"
+    },
+    {
+      "path": "sources/src/assets/MaterialPixelStorage.cpp",
+      "bytes": 2678,
+      "sha256": "da64b57e7621984f19946729915b48b5e7403ba4d34f30c975766343a427c903"
+    },
+    {
+      "path": "sources/src/scenes/CharacterSceneRenderer.cpp",
+      "bytes": 346066,
+      "sha256": "2b8135433818e70639b0db2b7a78c79229b18054f2b4d8c0652a5feab4330938"
+    },
+    {
+      "path": "sources/src/scenes/CharacterSceneRenderer.hpp",
+      "bytes": 41728,
+      "sha256": "b6f820f0551150cfd021abc1692e468603553f14459b552ba13462a24c38e0fc"
+    },
+    {
+      "path": "sources/src/runtime/LevelSession.cpp",
+      "bytes": 8528,
+      "sha256": "eafa8641db65b6a59396e35823846f596bfa57746858e41319207a6ea101999f"
+    },
+    {
+      "path": "sources/tests/MaterialTextureSharingTests.cpp",
+      "bytes": 16518,
+      "sha256": "be9fff32e9fb3e2d850c737372efe5c43d55a68d908351a1e7d9442eb92feeed"
+    }
+  ]
+}

@@ -39,6 +39,7 @@ struct ImmutableBytePoolStatistics {
 class ImmutableBytePool final {
 public:
     std::shared_ptr<const ImmutableBytes> intern(const std::vector<std::uint8_t>&);
+    std::shared_ptr<const ImmutableBytes> adopt(std::shared_ptr<const ImmutableBytes>);
     ImmutableBytePoolStatistics statistics() const noexcept;
 private:
     std::unordered_multimap<std::uint32_t,std::weak_ptr<const ImmutableBytes>> entries_;

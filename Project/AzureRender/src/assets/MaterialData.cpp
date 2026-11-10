@@ -1,6 +1,7 @@
 #include "MaterialData.hpp"
 #include "assets/MaterialGraph.hpp"
 #include "assets/MaterialFrame.hpp"
+#include "assets/MaterialPixelStorage.hpp"
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include <algorithm>
 #include <cctype>
@@ -120,7 +121,9 @@ AssetMaterial MaterialData::interpret(const std::function<std::filesystem::path(
         return loadEmbeddedGltfMaterials(materialBinaryDocument(std::move(document),std::move(binary)),true,imageSettings).at(0);
     }
     validate();if(parameterOverride&&!source)throw std::invalid_argument("Parameter override requires a source material");
-    AssetMaterial result=parameterOverride?*source:AssetMaterial{};if(!parameterOverride){result.name=typeId;result.materialProfileExplicit=true;}
+    AssetMaterial result=parameterOverride?*source:AssetMaterial{};
+    if(parameterOverride)restoreMaterialPixels(result);
+    if(!parameterOverride){result.name=typeId;result.materialProfileExplicit=true;}
     if(parameterOverride&&result.unlitTextureLayers.present)
         throw std::invalid_argument("Unlit texture layers require a complete profile document");
     if(parameterOverride&&result.coverageTexture.present&&textures.contains("metallicRoughness"))

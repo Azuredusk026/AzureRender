@@ -1,3 +1,4 @@
+#include "assets/MaterialPixelStorage.hpp"
 #if defined(AZURE_BATCHED_SHADOW_BOUNDS)
 static constexpr unsigned kShadowBoundsTilesPerGroup=8;
 #else
@@ -109,12 +110,11 @@ bool primitiveMirroredTransform(const Matrix4& model,const RecordingGizmoState& 
 
 std::uint64_t materialSourcePixelBytes(const LoadedAsset& asset) {
     std::uint64_t bytes=0;
-    for(const auto& m:asset.materials)
-        for(const auto* pixels:{&m.baseColorPixels,&m.normalPixels,&m.metallicRoughnessPixels,
-                &m.specularEmissivePixels,&m.styleMaskPixels,&m.matcapPixels,&m.hairDataPixels,
-                &m.faceSdf.pixels,&m.shadowColorLutPixels,&m.projectedHairRamp.parameterPixels,&m.projectedHairRamp.line.pixels})bytes+=pixels->size();
-    for(const auto& material:asset.materials)if(material.outlineSurface.present)
-        bytes+=material.outlineSurface.maskPixels.size();
+    for(const auto& material:asset.materials) {
+        for(std::size_t i=0;i<static_cast<std::size_t>(AssetMaterial::PixelKind::OutlineMask);++i)
+            bytes+=materialPixelLogicalBytes(material,static_cast<AssetMaterial::PixelKind>(i));
+        if(material.outlineSurface.present)bytes+=materialPixelLogicalBytes(material,AssetMaterial::PixelKind::OutlineMask);
+    }
     return bytes;
 }
 
@@ -333,6 +333,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
         throw std::runtime_error("RenderContext must carry the engine RHI");
     }
     materialTextureCache_=std::make_unique<SampledTextureCache>(*allocator_,*rhi_);
+    materialPixelPool_=std::make_unique<ImmutableBytePool>();
     bindlessTextures_ = context.bindlessTextures;
     cullingEnabled_ = context.cullingEnabled;
     computeIblEnabled_ = context.rgba16fStorageImage;
@@ -463,6 +464,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     enqueue("mesh 0",loadTimings_.meshUploadMs,[this]{createVertexBuffer();});
     const auto materials=[this,&enqueue](LoadedAsset& mesh,std::vector<GpuMaterial>& gpu,std::size_t key){
         gpu.resize(mesh.materials.size());
+        for(auto& material:mesh.materials)prepareMaterialPixels(material,*materialPixelPool_);
         for(std::size_t index=0;index<mesh.materials.size();++index)for(unsigned slot=0;slot<kMaterialTextureSlots;++slot)
             enqueue("material resource="+std::to_string(key)+" material="+std::to_string(index)+" slot="+std::to_string(slot),
                 loadTimings_.materialUploadMs,[this,&mesh,&gpu,index,slot]{uploadMaterialTexture(mesh,gpu,index,slot);});
@@ -499,6 +501,8 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     if(outlineProjectionEnabled_)enqueue("outline projection",loadTimings_.materialUploadMs,[this,context] {
         std::vector<LoadedAsset*> meshes{&asset_};
         for(auto& resource:additionalResources_)meshes.push_back(&resource->asset);
+        for(auto* mesh:meshes)for(auto& material:mesh->materials)if(material.outlineSurface.present)
+            restoreMaterialPixel(material,AssetMaterial::PixelKind::OutlineMask);
         const auto data=buildOutlineProjectionData(meshes,context.descriptorLimits.maxStorageBufferRange);
         outlineProjection_=std::make_unique<OutlineProjectionResources>(*allocator_,context.descriptorLimits.maxStorageBufferRange);
         outlineProjection_->initialize(data,*materialTextureCache_);
@@ -2089,6 +2093,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"jointCapacity\": " << jointCapacity_ << ",\n"
          << "  \"vertexCapacity\": " << vertexCapacity_ << ",\n";
     const auto textureStats=materialTextureCache_?materialTextureCache_->statistics():SampledTextureCacheStatistics{};
+    const auto payloadStats=materialPixelPool_?materialPixelPool_->statistics():ImmutableBytePoolStatistics{};
+    json << "  \"materialPixelPayloads\": {\"livePayloads\": " << payloadStats.livePayloads
+         << ", \"decodedBytes\": " << payloadStats.decodedBytes << ", \"storedBytes\": " << payloadStats.storedBytes << "},\n";
     auto sourcePixelBytes=materialSourcePixelBytes(asset_);
     for(const auto& resource:additionalResources_)sourcePixelBytes+=materialSourcePixelBytes(resource->asset);
     json << "  \"materialTextureCache\": {\"requests\": " << textureStats.requests
@@ -2096,6 +2103,9 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << ", \"requestedBytes\": " << textureStats.requestedBytes << ", \"residentBytes\": " << textureStats.residentBytes
          << ", \"retainedPixelBytes\": " << textureStats.retainedPixelBytes
          << ", \"releasedIdentityBytes\": " << textureStats.releasedIdentityBytes
+         << ", \"referencedPixelBytes\": " << textureStats.referencedPixelBytes
+         << ", \"retainedIdentityStorageBytes\": " << textureStats.retainedIdentityStorageBytes
+         << ", \"releasedIdentityStorageBytes\": " << textureStats.releasedIdentityStorageBytes
          << ", \"channelSavedBytes\": " << textureStats.channelSavedBytes
          << ", \"compactedTextures\": " << textureStats.compactedTextures
          << ", \"sealed\": " << (materialTextureCache_&&materialTextureCache_->sealed()?"true":"false")
@@ -2275,30 +2285,34 @@ void CharacterSceneRenderer::uploadMaterialTexture(LoadedAsset& asset,std::vecto
     const auto& settings=m.textureSettings.at(slot);
     const auto mipLevels=settings.mipPolicy=="none"?1U:m.authoredMipLevels.at(slot);
     const auto colorFormat=settings.colorSpace=="srgb"?VK_FORMAT_R8G8B8A8_SRGB:VK_FORMAT_R8G8B8A8_UNORM;
-    const auto upload=[&](std::vector<std::uint8_t>& pixels,unsigned width,unsigned height,
+    using PixelKind=AssetMaterial::PixelKind;
+    const auto upload=[&](PixelKind kind,unsigned width,unsigned height,
                          SampledTextureBinding& binding,unsigned levels,float cutoff=0) {
+        auto& pixels=materialPixelBytes(m,kind);auto& prepared=m.preparedPixels.at(static_cast<std::size_t>(kind));
         if(!materialTextureCache_)throw std::logic_error("Material texture cache is not initialized");
         SampledTextureUpload request;request.width=width;request.height=height;request.format=colorFormat;
         request.mipLevels=levels;request.semantic=settings.semantic();request.alphaCutoff=cutoff;
         request.sampler=settings.sampler(1,16);request.sampler.maxLod=VK_LOD_CLAMP_NONE;
-        if(pixels.size()>=16U*1024U*1024U)RuntimeDiagnostics::instance().info("render",
-            "Scene material texture begin: "+m.name+", slot="+std::to_string(slot)+", bytes="+std::to_string(pixels.size()));
-        binding=materialTextureCache_->acquire(std::move(pixels),request);
+        const auto bytes=materialPixelLogicalBytes(m,kind);
+        if(bytes>=16U*1024U*1024U)RuntimeDiagnostics::instance().info("render",
+            "Scene material texture begin: "+m.name+", slot="+std::to_string(slot)+", bytes="+std::to_string(bytes));
+        if(prepared){binding=materialTextureCache_->acquirePrepared(prepared,request);prepared.reset();}
+        else binding=materialTextureCache_->acquire(std::move(pixels),request);
     };
     switch(slot){
-    case 0:upload(m.baseColorPixels,m.baseColorWidth,m.baseColorHeight,g.baseColor,mipLevels,
+    case 0:upload(PixelKind::BaseColor,m.baseColorWidth,m.baseColorHeight,g.baseColor,mipLevels,
         m.alphaMode==AssetAlphaMode::Mask&&!m.coverageTexture.present?m.alphaCutoff:0);break;
-    case 1:upload(m.normalPixels,m.normalWidth,m.normalHeight,g.normal,mipLevels);break;
-    case 2:upload(m.metallicRoughnessPixels,m.metallicRoughnessWidth,m.metallicRoughnessHeight,g.metallicRoughness,mipLevels,
+    case 1:upload(PixelKind::Normal,m.normalWidth,m.normalHeight,g.normal,mipLevels);break;
+    case 2:upload(PixelKind::MetallicRoughness,m.metallicRoughnessWidth,m.metallicRoughnessHeight,g.metallicRoughness,mipLevels,
         m.coverageTexture.present?m.alphaCutoff:0);break;
-    case 3:upload(m.specularEmissivePixels,m.specularEmissiveWidth,m.specularEmissiveHeight,g.specularEmissive,mipLevels);break;
-    case 4:upload(m.styleMaskPixels,m.styleMaskWidth,m.styleMaskHeight,g.styleMask,mipLevels);break;
-    case 5:upload(m.matcapPixels,m.matcapWidth,m.matcapHeight,g.matcap,mipLevels);break;
-    case 6:upload(m.hairDataPixels,m.hairDataWidth,m.hairDataHeight,g.hairData,mipLevels);break;
-    case 7:{if(m.projectedHairRamp.present){auto& h=m.projectedHairRamp;upload(h.parameterPixels,h.parameterWidth,h.parameterHeight,g.faceSdf,mipLevels);}
-        else if(faceSdfPrepared_&&m.faceSdf.present){upload(m.faceSdf.pixels,m.faceSdf.width,m.faceSdf.height,g.faceSdf,mipLevels);++faceSdfTextureCount_;}break;}
-    case 8:if(m.projectedHairRamp.line.present){auto& line=m.projectedHairRamp.line;upload(line.pixels,line.width,line.height,g.shadowColorLut,mipLevels);}
-        else upload(m.shadowColorLutPixels,m.shadowColorLutWidth,m.shadowColorLutHeight,g.shadowColorLut,
+    case 3:upload(PixelKind::SpecularEmissive,m.specularEmissiveWidth,m.specularEmissiveHeight,g.specularEmissive,mipLevels);break;
+    case 4:upload(PixelKind::StyleMask,m.styleMaskWidth,m.styleMaskHeight,g.styleMask,mipLevels);break;
+    case 5:upload(PixelKind::Matcap,m.matcapWidth,m.matcapHeight,g.matcap,mipLevels);break;
+    case 6:upload(PixelKind::HairData,m.hairDataWidth,m.hairDataHeight,g.hairData,mipLevels);break;
+    case 7:{if(m.projectedHairRamp.present){auto& h=m.projectedHairRamp;upload(PixelKind::ProjectedParameters,h.parameterWidth,h.parameterHeight,g.faceSdf,mipLevels);}
+        else if(faceSdfPrepared_&&m.faceSdf.present){upload(PixelKind::FaceSdf,m.faceSdf.width,m.faceSdf.height,g.faceSdf,mipLevels);++faceSdfTextureCount_;}break;}
+    case 8:if(m.projectedHairRamp.line.present){auto& line=m.projectedHairRamp.line;upload(PixelKind::ProjectedLine,line.width,line.height,g.shadowColorLut,mipLevels);}
+        else upload(PixelKind::ShadowColorLut,m.shadowColorLutWidth,m.shadowColorLutHeight,g.shadowColorLut,
             m.unlitTextureLayers.coverageLayer.present?mipLevels:1);break;
     default:throw std::runtime_error("Invalid material upload slot");
     }
@@ -4239,6 +4253,8 @@ void CharacterSceneRenderer::destroyResources() {
     additionalResources_.clear();
     outlineProjection_.reset();outlineProjectionEnabled_=false;
     materialTextureCache_.reset();
+    for(auto& material:asset_.materials)for(auto& prepared:material.preparedPixels)prepared.reset();
+    materialPixelPool_.reset();
     if (iblPrefilterPipeline_ != VK_NULL_HANDLE) {
         rhi_->destroyPipeline(iblPrefilterPipeline_);
         iblPrefilterPipeline_ = VK_NULL_HANDLE;

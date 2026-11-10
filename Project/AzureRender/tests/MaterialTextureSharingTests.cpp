@@ -1,4 +1,6 @@
 #include "scenes/CharacterSceneRenderer.hpp"
+#include "assets/MaterialPixelStorage.hpp"
+#include "assets/MaterialData.hpp"
 #include "rhi/NullRhi.hpp"
 #include "support/IrradianceClipmapFixture.hpp"
 
@@ -12,6 +14,45 @@
 using namespace azurerender;
 void require(bool value,const char* reason) {if(!value)throw std::runtime_error(reason);}
 
+void verifyPreparedPixelOwnership() {
+    ImmutableBytePool firstPool,secondPool;AssetMaterial source;
+    source.baseColorWidth=source.baseColorHeight=128;source.baseColorPixels.assign(128*128*4,53);
+    source.normalPixels={1,2,3,255};source.normalWidth=source.normalHeight=1;
+    source.metallicRoughnessPixels={4,5,6,255};source.metallicRoughnessWidth=source.metallicRoughnessHeight=1;
+    source.specularEmissivePixels={7,8,9,255};source.specularEmissiveWidth=source.specularEmissiveHeight=1;
+    source.styleMaskPixels={10,11,12,255};source.styleMaskWidth=source.styleMaskHeight=1;
+    source.matcapPixels={13,14,15,255};source.matcapWidth=source.matcapHeight=1;
+    source.hairDataPixels={16,17,18,255};source.hairDataWidth=source.hairDataHeight=1;
+    source.faceSdf.pixels={19,20,21,255};source.faceSdf.width=source.faceSdf.height=1;
+    source.shadowColorLutPixels={22,23,24,255};
+    source.projectedHairRamp.parameterPixels={25,26,27,255};source.projectedHairRamp.parameterWidth=source.projectedHairRamp.parameterHeight=1;
+    source.projectedHairRamp.line.pixels={28,29,30,255};source.projectedHairRamp.line.width=source.projectedHairRamp.line.height=1;
+    source.outlineSurface.maskPixels={31,32,33,255};source.transmissionPixels={34,35,36,255};
+    const std::array<std::vector<std::uint8_t>,13> expected={source.baseColorPixels,source.normalPixels,source.metallicRoughnessPixels,
+        source.specularEmissivePixels,source.styleMaskPixels,source.matcapPixels,source.hairDataPixels,source.faceSdf.pixels,
+        source.shadowColorLutPixels,source.projectedHairRamp.parameterPixels,source.projectedHairRamp.line.pixels,
+        source.outlineSurface.maskPixels,source.transmissionPixels};
+    prepareMaterialPixels(source,firstPool,0);
+    require(source.baseColorPixels.empty()&&source.preparedPixels[0]&&source.preparedPixels[0]->compressed(),"Large prepared pixels use an immutable compressed backing");
+    auto copy=source;prepareMaterialPixels(copy,secondPool,0);
+    require(copy.preparedPixels[0]==source.preparedPixels[0],"Prepared copies adopt the independent immutable source without decoding");
+    restoreMaterialPixels(copy);
+    for(std::size_t i=0;i<expected.size();++i)require(materialPixelBytes(copy,static_cast<AssetMaterial::PixelKind>(i))==expected[i],"Every material pixel field restores complete bytes");
+    copy.baseColorPixels[0]=54;prepareMaterialPixels(copy,firstPool,0);
+    require(copy.preparedPixels[0]!=source.preparedPixels[0]&&source.preparedPixels[0]->read()==expected[0],"Mutable material copies retain independent source ownership");
+    auto patch=MaterialData::defaults("azure.pbr");patch.parameterOverride=true;
+    patch.parameters={{"baseColor",{.5,.5,.5,1.}}};patch.textures=nlohmann::json::object();
+    auto rawSource=source;restoreMaterialPixels(rawSource);
+    const auto noImages=[](const std::string&)->std::filesystem::path{throw std::runtime_error("Unexpected parameter image load");};
+    const auto preparedResult=patch.interpret(noImages,&source),rawResult=patch.interpret(noImages,&rawSource);
+    for(std::size_t i=0;i<expected.size();++i)
+        require(materialPixelBytes(preparedResult,static_cast<AssetMaterial::PixelKind>(i))==materialPixelBytes(rawResult,static_cast<AssetMaterial::PixelKind>(i)),
+            "Parameter overrides consume complete source bytes without changing their immutable owner");
+    require(source.baseColorPixels.empty()&&source.preparedPixels[0]->read()==expected[0],"Parameter interpretation preserves prepared source identity");
+    const auto retained=source.preparedPixels[0];source={};copy={};
+    require(retained->read()==expected[0],"Cancellation of material holders preserves independent readers");
+}
+
 void requireReleasedPixels(const AssetMaterial& material) {
     for(const auto* pixels:{&material.baseColorPixels,&material.normalPixels,&material.metallicRoughnessPixels,
             &material.specularEmissivePixels,&material.styleMaskPixels,&material.matcapPixels,
@@ -19,7 +60,7 @@ void requireReleasedPixels(const AssetMaterial& material) {
         require(pixels->empty()&&pixels->capacity()==0,"Uploaded renderer materials must release CPU pixel allocations");
 }
 
-void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prepared=false,const std::filesystem::path& irradiance={}) {
+void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prepared=false,const std::filesystem::path& irradiance={},bool packed=false) {
     rhi::NullRhi rhi;CharacterSceneRenderer renderer;RenderContext context;
     context.allocator=&rhi.allocator();context.rhi=&rhi;context.bindlessTextures=bindless;
     context.shaderDirectory=shaderDirectory.string();
@@ -39,10 +80,16 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
         context.scene.nodes.push_back(node);
     }
     std::map<std::string,std::shared_ptr<const LoadedAsset>> preparedMeshes;
+    std::map<std::string,std::vector<std::uint8_t>> expectedPreparedColors;
+    ImmutableBytePool sourcePool;
     if(prepared) {
-        for(const auto& resource:context.scene.resources)
-            preparedMeshes.emplace(std::filesystem::u8path(resource.path).lexically_normal().generic_u8string(),
-                std::make_shared<const LoadedAsset>(loadGltfAsset(resource.path)));
+        for(const auto& resource:context.scene.resources) {
+            auto mesh=loadGltfAsset(resource.path);
+            const auto key=std::filesystem::u8path(resource.path).lexically_normal().generic_u8string();
+            expectedPreparedColors[key]=mesh.materials.front().baseColorPixels;
+            if(packed)for(auto& material:mesh.materials)prepareMaterialPixels(material,sourcePool,0);
+            preparedMeshes.emplace(key,std::make_shared<const LoadedAsset>(std::move(mesh)));
+        }
         context.preparedMeshes=&preparedMeshes;
     }
     for(unsigned load=0;load<2;++load) {
@@ -60,8 +107,12 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
         require(stats.at("requests")==32,"Both resources must submit eight texture slots for authored and fallback materials");
         require(stats.at("hits")==23&&stats.at("uniqueTextures")==9,"Repeated resources and equivalent fallback slots must share exactly equal upload inputs");
         require(stats.at("requestedBytes")==576&&stats.at("residentBytes")==164,"Logical residency must retain all texels and mips while eliminating repeated uploads");
-        require(stats.at("copiedPixelBytes")==0&&stats.at("transferredPixelBytes")==132&&stats.at("discardedPixelBytes")==332,
-            "Unique renderer inputs transfer into the cache while redundant allocations are released without copying");
+        if(!packed) {
+            require(stats.at("copiedPixelBytes")==0&&stats.at("transferredPixelBytes")==132&&stats.at("discardedPixelBytes")==332,
+                "Unique renderer inputs transfer into the cache while redundant allocations are released without copying");
+        }else require(stats.at("copiedPixelBytes")==0&&stats.at("transferredPixelBytes")==0
+            &&stats.at("referencedPixelBytes")==132&&stats.at("discardedPixelBytes")==0,
+            "Prepared sources share their immutable backing while GPU identity and residency stay exact");
         require(report.at("sceneLoad").at("decodedMaterialPixelBytes")==464
             &&report.at("sceneLoad").at("remainingMaterialPixelBytes")==0,
             "Completed material preparation must release every decoded source allocation used by this scene");
@@ -70,8 +121,12 @@ void verify(bool bindless,const std::filesystem::path& shaderDirectory,bool prep
         for(const auto& material:state->asset->materials)requireReleasedPixels(material);
         for(const auto& pickable:state->pickables)
             for(const auto& material:pickable.asset->materials)requireReleasedPixels(material);
-        for(const auto& [path,mesh]:preparedMeshes)
-            require(!mesh->materials.front().baseColorPixels.empty(),"Borrowed prepared assets retain their decoded source pixels");
+        for(const auto& [path,mesh]:preparedMeshes) {
+            if(!packed)require(!mesh->materials.front().baseColorPixels.empty(),"Borrowed prepared assets retain their decoded source pixels");
+            else require(mesh->materials.front().baseColorPixels.empty()&&mesh->materials.front().preparedPixels[0]
+                &&mesh->materials.front().preparedPixels[0]->read()==expectedPreparedColors.at(path),
+                "Borrowed immutable prepared assets retain exact source bytes through rendering and reload");
+        }
         require(renderer.reuseScene(context),"Shared material ownership preserves scene reuse");
         if(!irradiance.empty()){
             const auto images=rhi.allocator().statistics().liveImages,buffers=rhi.allocator().statistics().liveBuffers;
@@ -133,7 +188,9 @@ void verifyProjectedPixels(bool bindless,const std::filesystem::path& shaders) {
 
 int main(int argc,char** argv) {try {
     require(argc==2,"Expected compiled shader directory");
+    verifyPreparedPixelOwnership();
     verify(false,argv[1]);verify(true,argv[1]);verify(false,argv[1],true);verify(true,argv[1],true);
+    verify(false,argv[1],true,{},true);verify(true,argv[1],true,{},true);
     verifyProjectedPixels(false,argv[1]);verifyProjectedPixels(true,argv[1]);
     auto clipmapPath=std::filesystem::temp_directory_path()/("azure-clipmap-sharing-"+
         std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".azic");

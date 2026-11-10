@@ -907,6 +907,7 @@ add_library(AzureRenderCore STATIC
     src/rhi/GpuAllocator.cpp
     src/rhi/NullRhi.cpp
     src/render/SampledTextureCache.cpp
+    src/assets/MaterialPixelStorage.cpp
     src/render/OutlineProjectionResources.cpp
     src/render/MotionPoseData.cpp
     src/render/SurfaceRadianceCache.cpp

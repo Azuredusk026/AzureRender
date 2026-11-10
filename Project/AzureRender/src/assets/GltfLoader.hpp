@@ -14,9 +14,12 @@
 #include <cstddef>
 #include <cstdint>
 #include <limits>
+#include <memory>
 #include <optional>
 #include <string>
 #include <vector>
+
+namespace azurerender {class ImmutableBytes;}
 
 struct AssetVertex {
     std::array<float, 3> position{};
@@ -111,6 +114,10 @@ struct AssetMaterialFrame {
 };
 
 struct AssetMaterial {
+    enum class PixelKind : std::size_t {
+        BaseColor,Normal,MetallicRoughness,SpecularEmissive,StyleMask,Matcap,HairData,
+        FaceSdf,ShadowColorLut,ProjectedParameters,ProjectedLine,OutlineMask,Transmission,Count
+    };
     struct BlendDepth {
         enum class Compare : std::uint8_t { Less,LessOrEqual };
         bool present=false,write=false;
@@ -288,6 +295,7 @@ struct AssetMaterial {
     AssetAlphaMode alphaMode = AssetAlphaMode::Opaque;
     float alphaCutoff = 0.5F;
     bool doubleSided = false;
+    std::array<std::shared_ptr<const azurerender::ImmutableBytes>,static_cast<std::size_t>(PixelKind::Count)> preparedPixels{};
 };
 
 inline void validateMaterialCoverage(const AssetMaterial& material) {
