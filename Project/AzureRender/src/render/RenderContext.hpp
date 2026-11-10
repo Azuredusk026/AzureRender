@@ -69,7 +69,7 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 9;
+    static constexpr std::uint32_t kApiVersion = 10;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;
@@ -83,8 +83,11 @@ struct SceneRendererCapabilities {
     bool supportsMaterialLightingReception=false;
     bool supportsNprRampComposition=false;
     bool supportsMaterialCoverage=false;
+    bool supportsReferenceCamera=false;
 };
 inline void validateSceneRendererCamera(const SceneRendererCapabilities& capabilities,const CameraViewDescriptor& camera){
+    if(camera.referenceCalibration&&!capabilities.supportsReferenceCamera)
+        throw std::invalid_argument("Scene renderer does not support reference camera calibration");
     if((camera.projectionOffsetX!=0||camera.projectionOffsetY!=0)&&!capabilities.supportsProjectionOffset)
         throw std::invalid_argument("Scene renderer does not support camera projection offsets");
 }
@@ -194,6 +197,7 @@ struct RenderContext {
     // Skinning/morph is enabled for this run; false selects vertex skinning.
     bool computeSkinning = false;
     bool gpuCulling = false;
+    bool referenceCameraPrograms = false;
     bool visibilityPrototype = false;
     bool multiDrawIndirect = false;
     std::uint32_t maxDrawIndirectCount = 1;

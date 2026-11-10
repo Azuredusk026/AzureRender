@@ -29,7 +29,7 @@
 启用参考组件时，服务查找具名视图并执行姿态转换。
 关闭组件时，选择普通游戏相机。
 
-`GameCameraSelection` 持有普通视图及可选参考视图。
+`GameCameraSelection` 持有共享相机描述及可选参考视图。
 `referenceName` 标明选中的参考配置。
 失效引用及非法姿态提供节点关联诊断。
 选择结果及配置集合各自持有数值副本。
@@ -46,7 +46,6 @@
 项目宿主及编辑器运行预览读取相同的项目配置。
 文件格式见[项目参考视图配置](project-reference-views.md)。
 
-当前接口交付相机选择及标定视图数值。
-光栅、拾取和编辑视口消费由对应宿主接入。
-新增着色器程序数为零。
+共享相机描述持有参考标定与锚点。
+光栅、拾取及编辑消费见[参考相机渲染与拾取](reference-camera-render-binding.md)。
 专项结果见[场景参考相机验收](../acceptance/nr/scene-reference-camera-selection.md)。

@@ -16,7 +16,13 @@ layout(binding = 0) uniform CameraData {
     vec4 faceLightDirection;
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
+#if defined(AZURE_REFERENCE_CAMERA)
+#include "reference_camera_fields.glsl"
+#endif
 } camera;
+#if defined(AZURE_REFERENCE_CAMERA)
+#include "reference_camera_vertex.glsl"
+#endif
 
 layout(std430, binding = 10) readonly buffer JointData {
     mat4 matrices[];
@@ -79,11 +85,17 @@ void main() {
     skinnedNormal=normalize(transpose(inverse(mat3(morphWeights.gizmoTransform)))*skinnedNormal);
     mat4 mvp=instanceData.instances[gl_InstanceIndex].modelViewProjection;
     vec4 clip=mvp*vec4(skinnedPosition,1);
+#if defined(AZURE_REFERENCE_CAMERA)
+    vec4 referenceDeviceBase=clip;
+#endif
     vec4 shifted=mvp*vec4(skinnedPosition+skinnedNormal*.001,1);
     vec2 projected=shifted.xy/max(shifted.w,.0001)-clip.xy/max(clip.w,.0001);
     vec2 pixelDirection=projected*camera.clusterDepth.zw;
     float magnitude=length(pixelDirection);
     if(magnitude>.00001)clip.xy+=pixelDirection/magnitude * camera.renderingParameters.x*2.0/camera.clusterDepth.zw*clip.w;
     gl_Position=clip;
+#if defined(AZURE_REFERENCE_CAMERA)
+    gl_Position=azureCameraRasterPosition((instanceData.instances[gl_InstanceIndex].model*vec4(skinnedPosition,1)).xyz,referenceDeviceBase,clip);
+#endif
 }
 #endif

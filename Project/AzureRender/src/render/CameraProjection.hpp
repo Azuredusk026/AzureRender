@@ -1,11 +1,20 @@
 #pragma once
 #include "render/LinearMath.hpp"
 #include "render/RenderSettings.hpp"
+#include "render/ReferenceRasterProjection.hpp"
 #include <algorithm>
 
 namespace azurerender {
 struct CameraPickRay {internal::Vector3 origin,direction;};
 struct CameraScreenSegment {std::array<float,2> from,to;};
+inline std::optional<PreparedReferenceCameraView> resolveReferenceCamera(const CameraViewDescriptor& camera){
+    if(!camera.referenceCalibration)return std::nullopt;
+    const auto& calibration=*camera.referenceCalibration;
+    if(!std::isfinite(calibration.screenScale)||calibration.screenScale<1.e-6F||calibration.screenScale>1.e6F)throw std::invalid_argument("Reference camera screen scale must be finite and in [1e-6,1e6]");
+    auto view=relocateReferenceCamera(calibration.view,calibration.anchor,referenceCameraPose(camera.position,camera.target,camera.up));
+    if(calibration.screenScale!=1){for(auto& column:view.projection.parameters.columns)for(unsigned axis=0;axis<2;++axis)column[axis]*=calibration.screenScale;for(auto& jitter:view.projection.parameters.jitter)jitter*=calibration.screenScale;}
+    return PreparedReferenceCameraView(view);
+}
 inline void validateCameraView(const CameraViewDescriptor& view,float aspect){
     for(float offset:{view.projectionOffsetX,view.projectionOffsetY})if(!std::isfinite(offset)||std::abs(offset)>2)
         throw std::invalid_argument("Camera projection offsets must be finite and in [-2,2]");
@@ -14,6 +23,7 @@ inline void validateCameraView(const CameraViewDescriptor& view,float aspect){
     if(internal::vectorLength(forward)<1e-6F||internal::vectorLength(internal::cross(forward,view.up))<1e-6F)throw std::invalid_argument("Camera requires nondegenerate forward and up vectors");
     if(!std::isfinite(aspect)||aspect<=0||!std::isfinite(view.fov)||view.fov<=.01F||view.fov>=3.13F||!std::isfinite(view.orthoHeight)||view.orthoHeight<=.00001F
         ||!std::isfinite(view.nearPlane)||!std::isfinite(view.farPlane)||view.nearPlane<=0||view.farPlane<=view.nearPlane)throw std::invalid_argument("Invalid camera projection");
+    if(view.referenceCalibration)(void)resolveReferenceCamera(view);
 }
 inline internal::Matrix4 cameraViewMatrix(const CameraViewDescriptor& view){validateCameraView(view,1);return internal::lookAt(view.position,view.target,view.up);}
 inline internal::Vector3 cameraProjectionRayOffset(const CameraViewDescriptor& view,
@@ -32,6 +42,7 @@ inline internal::Matrix4 cameraProjectionMatrix(const CameraViewDescriptor& view
 }
 inline CameraPickRay cameraPickRay(const CameraViewDescriptor& view,float u,float v,float aspect){
     validateCameraView(view,aspect);if(!std::isfinite(u)||!std::isfinite(v))throw std::invalid_argument("Invalid viewport coordinates");
+    if(const auto reference=resolveReferenceCamera(view)){const auto ray=reference->pickRay(u,v);return {ray.origin,ray.direction};}
     const auto forward=internal::normalize(internal::subtract(view.target,view.position)),right=internal::normalize(internal::cross(forward,view.up)),up=internal::cross(right,forward);
     const auto h=view.projection==CameraProjectionKind::Orthographic?view.orthoHeight*.5F:std::tan(view.fov*.5F);
     const auto offset=internal::addVectors(cameraProjectionRayOffset(view,right,up,h*aspect,h),
@@ -44,10 +55,11 @@ inline std::optional<CameraScreenSegment> projectCameraSegment(
     const CameraViewDescriptor& view,float aspect,
     const internal::Vector3& from,const internal::Vector3& to){
     const auto matrix=internal::multiply(cameraProjectionMatrix(view,aspect),cameraViewMatrix(view));
+    const auto reference=resolveReferenceCamera(view);
     const auto project=[&](const internal::Vector3& point){
         std::array<float,4> result{};
         for(std::size_t row=0;row<4;++row){result[row]=matrix[12+row];for(std::size_t axis=0;axis<3;++axis)result[row]+=matrix[axis*4+row]*point[axis];if(!std::isfinite(result[row]))throw std::invalid_argument("Invalid helper coordinates");}
-        return result;
+        return reference?projectReferenceRasterPosition(*reference,point,result,result):result;
     };
     auto a=project(from),b=project(to);
     const auto planes=[](const std::array<float,4>& p){return std::array<float,6>{p[3]+p[0],p[3]-p[0],p[3]+p[1],p[3]-p[1],p[2],p[3]-p[2]};};

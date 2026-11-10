@@ -94,6 +94,7 @@ GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const scene::Sce
                 const auto found=views.find(reference->view);if(found==views.end())throw std::invalid_argument("Reference camera view is not installed: "+reference->view);
                 const ReferenceCameraPose anchor{reference->anchorPosition,reference->anchorRight,reference->anchorUp,reference->anchorBack};
                 referenceView=relocateReferenceCamera(found->second,anchor,referenceCameraPose(view.position,view.target,view.up));
+                view.referenceCalibration=ReferenceCameraCalibration{found->second,anchor,1};
             }
         }catch(const std::exception& e){result.diagnostic=node.id+": "+e.what();if(reference&&reference->enabled)result.referenceRejected=true;continue;}
         result.view=view;result.node=node.id;result.referenceView=std::move(referenceView);result.referenceName=result.referenceView?reference->view:std::string{};priority=camera->priority;

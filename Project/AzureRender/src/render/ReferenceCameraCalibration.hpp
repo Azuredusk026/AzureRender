@@ -7,6 +7,11 @@ using ReferenceCameraViews=std::map<std::string,ReferenceCameraView>;
 struct ReferenceCameraPose {
     std::array<float,3> position{},right{1,0,0},up{0,1,0},back{0,0,1};
 };
+struct ReferenceCameraCalibration {
+    ReferenceCameraView view;
+    ReferenceCameraPose anchor;
+    float screenScale=1;
+};
 inline void validateReferenceCameraPose(const ReferenceCameraPose& p){
     for(const auto& v:{p.position,p.right,p.up,p.back})for(float f:v)if(!std::isfinite(f))throw std::invalid_argument("Reference camera pose must be finite");
     const auto dot=[](const auto& a,const auto& b){double value=0;for(unsigned i=0;i<3;++i)value+=double(a[i])*b[i];return value;};

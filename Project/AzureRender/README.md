@@ -944,3 +944,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [参考光栅混合视锥](docs/acceptance/nr/reference-raster-frustum.md)完成两配置、两设备检查。
 有界参数、退化回退及原四帧通过，光栅与拾取继续接入。
+
+[参考相机生产接入](docs/acceptance/nr/reference-camera-render-binding.md)完成共享标定、光栅、拾取及编辑入口检查。
+两配置、两设备的实际几何掩码和原四帧通过，完整外观按所属门槛继续验收。

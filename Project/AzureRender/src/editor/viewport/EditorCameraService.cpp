@@ -8,6 +8,7 @@ void EditorCameraService::projection(EditorViewDescriptor& view,CameraProjection
     validateCameraView(view,1);
     if(view.projection!=kind && kind==CameraProjectionKind::Orthographic)view.orthoHeight=2*internal::vectorLength(internal::subtract(view.target,view.position))*std::tan(view.fov*.5F);
     view.projection=kind;
+    view.referenceCalibration.reset();
 }
 void EditorCameraService::orient(EditorViewDescriptor& view,const std::string& axis){
     const std::map<std::string,internal::Vector3> directions={{"+X",{1,0,0}},{"-X",{-1,0,0}},{"+Y",{0,1,0}},{"-Y",{0,-1,0}},{"+Z",{0,0,1}},{"-Z",{0,0,-1}}};
@@ -19,6 +20,7 @@ void EditorCameraService::orient(EditorViewDescriptor& view,const std::string& a
 }
 FrameSelectionResult EditorCameraService::frameSelection(EditorViewDescriptor& view,const SelectionBoundsResult& bounds,float aspect){
     if(!bounds.valid)return {false,{}, {},0,bounds.diagnostic};
+    if(view.referenceCalibration)return {false,{}, {},0,"Choose a standard projection to frame a selection"};
     try{validateCameraView(view,aspect);}catch(const std::exception& error){return {false,{}, {},0,error.what()};}
     const auto forward=internal::normalize(internal::subtract(view.target,view.position)),right=internal::normalize(internal::cross(forward,view.up)),up=internal::cross(right,forward);
     auto candidate=view;for(unsigned a=0;a<3;++a)candidate.target[a]=(bounds.bounds.minimum[a]+bounds.bounds.maximum[a])*.5F;
