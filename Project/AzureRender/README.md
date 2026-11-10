@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[四像素组覆盖接收](docs/acceptance/nr/quad-coverage-receiver.md)通过十份程序与六附件核对。
+固定类别成本增加约 0.31%，候选保持隔离。
+
 [材质片元工作量](docs/acceptance/nr/material-fragment-work-scope.md)完成全部 1006 次绘制的模式及类别分组。
 固定类别约占整帧 25.45%，透明裁剪依赖按实际候选继续核验。
 

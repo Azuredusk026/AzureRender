@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[四像素组覆盖接收](../acceptance/nr/quad-coverage-receiver.md)通过六份附件核对。
+固定类别成本增加约 0.31%，效率未准入，候选保持隔离。
+
 [材质片元工作量](../acceptance/nr/material-fragment-work-scope.md)完成全部实际管线分组。
 固定类别占全事件耗时约 25.45%，透明裁剪与接收准备继续核验。
 

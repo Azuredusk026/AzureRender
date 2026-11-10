@@ -1,0 +1,63 @@
+{
+  "status": "isolated-below-native-admission",
+  "candidate": "quad-coverage-receiver-deferral",
+  "sourceBase": "f3071a4",
+  "allSixAttachmentsExact": true,
+  "materials": 1006,
+  "fixedClassEvents": 129,
+  "totalEvents": 3453,
+  "scope": {
+    "allEventMs": {
+      "referenceMs": 13.396303999999933,
+      "candidateMs": 13.365695999999922,
+      "savedMs": 0.030608000000011515,
+      "reduction": 0.002284809302626431,
+      "share": 1.0,
+      "referenceDrift": 0.0014547296030327323
+    },
+    "matchedEventMs": {
+      "referenceMs": 9.847423999999958,
+      "candidateMs": 9.862175999999957,
+      "savedMs": -0.014751999999999654,
+      "reduction": -0.0014980567506791337,
+      "share": 0.7350851399012748,
+      "referenceDrift": 0.0018197652502821963
+    },
+    "classEventMs": {
+      "referenceMs": 3.41512,
+      "candidateMs": 3.42568,
+      "savedMs": -0.010559999999999903,
+      "reduction": -0.003092131462437602,
+      "share": 0.25493001651799013,
+      "referenceDrift": 0.0069807210288362976
+    },
+    "mainEventMs": {
+      "referenceMs": 7.063680000000015,
+      "candidateMs": 7.076896000000014,
+      "savedMs": -0.013215999999999006,
+      "reduction": -0.001870979432816744,
+      "share": 0.5272857349310713,
+      "referenceDrift": 0.0054362598532213795
+    },
+    "ordinaryMainEventMs": {
+      "referenceMs": 3.5881440000000127,
+      "candidateMs": 3.5974560000000113,
+      "savedMs": -0.009311999999998655,
+      "reduction": -0.0025952135700235616,
+      "share": 0.2678458177718295,
+      "referenceDrift": 0.002506030973116423
+    },
+    "snapshotEventMs": {
+      "referenceMs": 2.7837439999999996,
+      "candidateMs": 2.7852799999999966,
+      "savedMs": -0.0015359999999970952,
+      "reduction": -0.0005517748758496095,
+      "share": 0.2077994049702077,
+      "referenceDrift": 0.02023174544785773
+    }
+  },
+  "qualified": false,
+  "protectedFilesExact": 13,
+  "sourceUnchanged": true,
+  "formalPerformanceAccepted": false
+}
