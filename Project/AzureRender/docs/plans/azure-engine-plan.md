@@ -32,6 +32,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 [展开接收计算的局部效率](../acceptance/nr/unrolled-computed-view-local-qualification.md)完成两种候选的六附件核对。
 完整材质降幅至多约 19.49%，效率未准入，候选保持隔离。
+关闭风格化的独立控制约为 18.86%，六附件逐字节一致。
 [纹理格式与容量](../acceptance/nr/texture-storage-format-scope.md)完成设备能力和源图像范围核对。
 正式内存按实际工作负载及分配器高水位继续验收。
 

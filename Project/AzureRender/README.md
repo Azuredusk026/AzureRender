@@ -5,6 +5,7 @@ NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工�
 
 [展开接收计算的局部效率](docs/acceptance/nr/unrolled-computed-view-local-qualification.md)通过两种候选的六附件核对。
 完整材质降幅至多约 19.49%，效率未准入，候选保持隔离。
+关闭风格化的独立控制降幅约 18.86%，六附件逐字节一致。
 
 [椭圆层级主线集成](docs/acceptance/nr/reference-alpha-ellipse-main-integration.md)通过双配置、双设备及原四帧核对。
 原有 687 份程序保持摘要，Intel 九十六处深度差异继续定位。
