@@ -91,6 +91,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [圆盘零权重控制](../acceptance/nr/shadow-disk-zero-rejection.md)保持权重及六附件零差。
 局部效率未通过，生产保持现行圆盘过滤。
 
+[内部采样控制](../acceptance/nr/shadow-interior-gather-control.md)完成兼容及替换路径校准。
+局部效率未通过，生产保持当前程序。
+后续比较中，参考与候选均采用相同替换路径。
+
 [并行资源调度](../development/shared-resources.md)提供重负载互斥入口。
 性能、画质与论文工作流已登记实际对话和独立工作区。
 跨工作树输入在主维护索引中持有活动引用。
