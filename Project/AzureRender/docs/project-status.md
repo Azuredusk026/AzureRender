@@ -270,3 +270,6 @@ RHI 的附件样本数、管线比例及能力查询通过双配置检查。
 
 [保守剔除参数](acceptance/nr/conservative-frustum-transport.md)通过两配置、两设备及旧模块兼容检查。
 128 字节布局及原四帧通过，参考混合平面继续接入。
+
+[参考光栅混合视锥](acceptance/nr/reference-raster-frustum.md)完成两配置、两设备检查。
+有界参数、退化回退及原四帧通过，光栅与拾取继续接入。

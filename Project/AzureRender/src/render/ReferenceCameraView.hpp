@@ -15,6 +15,10 @@ struct ReferenceCameraView {
     bool flipNdcY=false;
 };
 struct ReferenceCameraRay {std::array<float,3> origin,direction;};
+struct ReferenceClipBoundsDescription {
+    using Matrix=std::array<std::array<double,4>,4>;
+    Matrix linear{},magnitude{};
+};
 class PreparedReferenceCameraView final {
     using Matrix=std::array<std::array<double,4>,4>;
     ReferenceCameraView view_;Matrix matrix_{},inverse_{},magnitude_{};
@@ -53,6 +57,7 @@ public:
         for(unsigned c=0;c<4;++c){planes_[0][c]=matrix_[3][c]+matrix_[0][c];planes_[1][c]=matrix_[3][c]-matrix_[0][c];planes_[2][c]=matrix_[3][c]+matrix_[1][c];planes_[3][c]=matrix_[3][c]-matrix_[1][c];planes_[4][c]=matrix_[2][c];planes_[5][c]=matrix_[3][c]-matrix_[2][c];}
     }
     const ReferenceCameraView& descriptor() const noexcept{return view_;}
+    ReferenceClipBoundsDescription conservativeClipDescription() const noexcept{return {matrix_,magnitude_};}
     std::array<float,4> clip(const std::array<float,3>& world) const {
         auto result=projectReferenceClip(view_.projection,referenceRelativePosition(view_.frame,world));if(view_.flipNdcY)result[1]=-result[1];return result;
     }
