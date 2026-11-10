@@ -1,0 +1,1520 @@
+{
+  "status": "qualified-public-surface-and-nvidia-native-source-intel-source-pending",
+  "overall": "failed-user-review",
+  "sourceBase": "c260811",
+  "exactAttachmentValues": 320768,
+  "maskedExactValues": 25088,
+  "opaqueExactValues": 295680,
+  "rejectionsPerMaskedBatch": 17,
+  "gpuBatches": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "target": "AzureReferenceDepthGpuTests",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceDepthGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "target": "AzureReferenceDepthCoverageGpuTests",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceDepthCoverageGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "target": "AzureReferenceDepthGpuTests",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceDepthGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "target": "AzureReferenceDepthCoverageGpuTests",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceDepthCoverageGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "target": "AzureReferenceDepthGpuTests",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceDepthGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "target": "AzureReferenceDepthCoverageGpuTests",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceDepthCoverageGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "target": "AzureReferenceDepthGpuTests",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceDepthGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "target": "AzureReferenceDepthCoverageGpuTests",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceDepthCoverageGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders"
+      ],
+      "validationClean": true
+    }
+  ],
+  "nativeSource": [
+    {
+      "device": "nvidia",
+      "depthExact": 17017,
+      "depthWithinOneUlp": 17017,
+      "depthMaxUlp": 0,
+      "depthMissing": 0,
+      "colorDepthBitExact": true,
+      "visibilityExact": 17017,
+      "visibilityWithinOneByte": 17017,
+      "visibilityOverOneByte": 0,
+      "visibilityMaxError": 0,
+      "overOneWithExactDepth": 0,
+      "overOneWithOneUlpDepth": 0,
+      "overOneWithLargerDepth": 0,
+      "failures": []
+    },
+    {
+      "device": "intel",
+      "depthExact": 7964,
+      "depthWithinOneUlp": 15678,
+      "depthMaxUlp": 217835,
+      "depthMissing": 0,
+      "colorDepthBitExact": true,
+      "visibilityExact": 16798,
+      "visibilityWithinOneByte": 16920,
+      "visibilityOverOneByte": 97,
+      "visibilityMaxError": 25,
+      "overOneWithExactDepth": 0,
+      "overOneWithOneUlpDepth": 76,
+      "overOneWithLargerDepth": 21,
+      "failures": [
+        {
+          "texturePixel": [
+            1304,
+            1284
+          ],
+          "uiPixel": [
+            1304,
+            155
+          ],
+          "expected": 208,
+          "actual": 219,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1292,
+            1270
+          ],
+          "uiPixel": [
+            1292,
+            169
+          ],
+          "expected": 232,
+          "actual": 239,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1293,
+            1269
+          ],
+          "uiPixel": [
+            1293,
+            170
+          ],
+          "expected": 244,
+          "actual": 242,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1297,
+            1268
+          ],
+          "uiPixel": [
+            1297,
+            171
+          ],
+          "expected": 19,
+          "actual": 27,
+          "depthUlp": 8
+        },
+        {
+          "texturePixel": [
+            1298,
+            1267
+          ],
+          "uiPixel": [
+            1298,
+            172
+          ],
+          "expected": 27,
+          "actual": 36,
+          "depthUlp": 3
+        },
+        {
+          "texturePixel": [
+            1298,
+            1266
+          ],
+          "uiPixel": [
+            1298,
+            173
+          ],
+          "expected": 36,
+          "actual": 42,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1278,
+            1264
+          ],
+          "uiPixel": [
+            1278,
+            175
+          ],
+          "expected": 139,
+          "actual": 150,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1296,
+            1264
+          ],
+          "uiPixel": [
+            1296,
+            175
+          ],
+          "expected": 16,
+          "actual": 14,
+          "depthUlp": 4
+        },
+        {
+          "texturePixel": [
+            1295,
+            1262
+          ],
+          "uiPixel": [
+            1295,
+            177
+          ],
+          "expected": 201,
+          "actual": 208,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1326,
+            1262
+          ],
+          "uiPixel": [
+            1326,
+            177
+          ],
+          "expected": 23,
+          "actual": 7,
+          "depthUlp": 217835
+        },
+        {
+          "texturePixel": [
+            1297,
+            1261
+          ],
+          "uiPixel": [
+            1297,
+            178
+          ],
+          "expected": 246,
+          "actual": 244,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1266,
+            1260
+          ],
+          "uiPixel": [
+            1266,
+            179
+          ],
+          "expected": 13,
+          "actual": 19,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1296,
+            1260
+          ],
+          "uiPixel": [
+            1296,
+            179
+          ],
+          "expected": 244,
+          "actual": 246,
+          "depthUlp": 27
+        },
+        {
+          "texturePixel": [
+            1260,
+            1259
+          ],
+          "uiPixel": [
+            1260,
+            180
+          ],
+          "expected": 13,
+          "actual": 19,
+          "depthUlp": 3
+        },
+        {
+          "texturePixel": [
+            1265,
+            1258
+          ],
+          "uiPixel": [
+            1265,
+            181
+          ],
+          "expected": 187,
+          "actual": 178,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1303,
+            1257
+          ],
+          "uiPixel": [
+            1303,
+            182
+          ],
+          "expected": 224,
+          "actual": 219,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1304,
+            1257
+          ],
+          "uiPixel": [
+            1304,
+            182
+          ],
+          "expected": 244,
+          "actual": 239,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1262,
+            1256
+          ],
+          "uiPixel": [
+            1262,
+            183
+          ],
+          "expected": 232,
+          "actual": 236,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1251,
+            1253
+          ],
+          "uiPixel": [
+            1251,
+            186
+          ],
+          "expected": 54,
+          "actual": 47,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1234,
+            1200
+          ],
+          "uiPixel": [
+            1234,
+            239
+          ],
+          "expected": 242,
+          "actual": 239,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1218,
+            1193
+          ],
+          "uiPixel": [
+            1218,
+            246
+          ],
+          "expected": 19,
+          "actual": 16,
+          "depthUlp": 2
+        },
+        {
+          "texturePixel": [
+            1290,
+            1185
+          ],
+          "uiPixel": [
+            1290,
+            254
+          ],
+          "expected": 232,
+          "actual": 224,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1292,
+            1184
+          ],
+          "uiPixel": [
+            1292,
+            255
+          ],
+          "expected": 239,
+          "actual": 236,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1288,
+            1181
+          ],
+          "uiPixel": [
+            1288,
+            258
+          ],
+          "expected": 254,
+          "actual": 252,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1351,
+            1181
+          ],
+          "uiPixel": [
+            1351,
+            258
+          ],
+          "expected": 27,
+          "actual": 36,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1353,
+            1181
+          ],
+          "uiPixel": [
+            1353,
+            258
+          ],
+          "expected": 85,
+          "actual": 69,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1207,
+            1177
+          ],
+          "uiPixel": [
+            1207,
+            262
+          ],
+          "expected": 116,
+          "actual": 128,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1212,
+            1177
+          ],
+          "uiPixel": [
+            1212,
+            262
+          ],
+          "expected": 194,
+          "actual": 186,
+          "depthUlp": 10
+        },
+        {
+          "texturePixel": [
+            1217,
+            1177
+          ],
+          "uiPixel": [
+            1217,
+            262
+          ],
+          "expected": 242,
+          "actual": 239,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1322,
+            1174
+          ],
+          "uiPixel": [
+            1322,
+            265
+          ],
+          "expected": 169,
+          "actual": 194,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1205,
+            1173
+          ],
+          "uiPixel": [
+            1205,
+            266
+          ],
+          "expected": 48,
+          "actual": 54,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1350,
+            1173
+          ],
+          "uiPixel": [
+            1350,
+            266
+          ],
+          "expected": 150,
+          "actual": 128,
+          "depthUlp": 3
+        },
+        {
+          "texturePixel": [
+            1358,
+            1172
+          ],
+          "uiPixel": [
+            1358,
+            267
+          ],
+          "expected": 178,
+          "actual": 169,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1348,
+            1170
+          ],
+          "uiPixel": [
+            1348,
+            269
+          ],
+          "expected": 186,
+          "actual": 201,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1353,
+            1170
+          ],
+          "uiPixel": [
+            1353,
+            269
+          ],
+          "expected": 228,
+          "actual": 232,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1348,
+            1169
+          ],
+          "uiPixel": [
+            1348,
+            270
+          ],
+          "expected": 207,
+          "actual": 219,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1360,
+            1169
+          ],
+          "uiPixel": [
+            1360,
+            270
+          ],
+          "expected": 213,
+          "actual": 219,
+          "depthUlp": 10
+        },
+        {
+          "texturePixel": [
+            1348,
+            1167
+          ],
+          "uiPixel": [
+            1348,
+            272
+          ],
+          "expected": 186,
+          "actual": 194,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1349,
+            1166
+          ],
+          "uiPixel": [
+            1349,
+            273
+          ],
+          "expected": 218,
+          "actual": 223,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1198,
+            1165
+          ],
+          "uiPixel": [
+            1198,
+            274
+          ],
+          "expected": 232,
+          "actual": 228,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1217,
+            1165
+          ],
+          "uiPixel": [
+            1217,
+            274
+          ],
+          "expected": 252,
+          "actual": 254,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1361,
+            1164
+          ],
+          "uiPixel": [
+            1361,
+            275
+          ],
+          "expected": 236,
+          "actual": 228,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1332,
+            1162
+          ],
+          "uiPixel": [
+            1332,
+            277
+          ],
+          "expected": 20,
+          "actual": 23,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1231,
+            1161
+          ],
+          "uiPixel": [
+            1231,
+            278
+          ],
+          "expected": 160,
+          "actual": 169,
+          "depthUlp": 5
+        },
+        {
+          "texturePixel": [
+            1196,
+            1160
+          ],
+          "uiPixel": [
+            1196,
+            279
+          ],
+          "expected": 224,
+          "actual": 219,
+          "depthUlp": 4
+        },
+        {
+          "texturePixel": [
+            1232,
+            1160
+          ],
+          "uiPixel": [
+            1232,
+            279
+          ],
+          "expected": 235,
+          "actual": 232,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1221,
+            1159
+          ],
+          "uiPixel": [
+            1221,
+            280
+          ],
+          "expected": 37,
+          "actual": 27,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1234,
+            1159
+          ],
+          "uiPixel": [
+            1234,
+            280
+          ],
+          "expected": 219,
+          "actual": 224,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1236,
+            1159
+          ],
+          "uiPixel": [
+            1236,
+            280
+          ],
+          "expected": 194,
+          "actual": 207,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1195,
+            1158
+          ],
+          "uiPixel": [
+            1195,
+            281
+          ],
+          "expected": 246,
+          "actual": 242,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1220,
+            1158
+          ],
+          "uiPixel": [
+            1220,
+            281
+          ],
+          "expected": 61,
+          "actual": 54,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1233,
+            1156
+          ],
+          "uiPixel": [
+            1233,
+            283
+          ],
+          "expected": 254,
+          "actual": 251,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1353,
+            1156
+          ],
+          "uiPixel": [
+            1353,
+            283
+          ],
+          "expected": 249,
+          "actual": 251,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1368,
+            1155
+          ],
+          "uiPixel": [
+            1368,
+            284
+          ],
+          "expected": 201,
+          "actual": 213,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1224,
+            1154
+          ],
+          "uiPixel": [
+            1224,
+            285
+          ],
+          "expected": 12,
+          "actual": 15,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1331,
+            1154
+          ],
+          "uiPixel": [
+            1331,
+            285
+          ],
+          "expected": 77,
+          "actual": 95,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1216,
+            1153
+          ],
+          "uiPixel": [
+            1216,
+            286
+          ],
+          "expected": 150,
+          "actual": 160,
+          "depthUlp": 11
+        },
+        {
+          "texturePixel": [
+            1236,
+            1153
+          ],
+          "uiPixel": [
+            1236,
+            286
+          ],
+          "expected": 248,
+          "actual": 244,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1222,
+            1152
+          ],
+          "uiPixel": [
+            1222,
+            287
+          ],
+          "expected": 69,
+          "actual": 86,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1223,
+            1152
+          ],
+          "uiPixel": [
+            1223,
+            287
+          ],
+          "expected": 55,
+          "actual": 43,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1327,
+            1152
+          ],
+          "uiPixel": [
+            1327,
+            287
+          ],
+          "expected": 105,
+          "actual": 128,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1238,
+            1151
+          ],
+          "uiPixel": [
+            1238,
+            288
+          ],
+          "expected": 241,
+          "actual": 244,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1324,
+            1151
+          ],
+          "uiPixel": [
+            1324,
+            288
+          ],
+          "expected": 95,
+          "actual": 105,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1373,
+            1151
+          ],
+          "uiPixel": [
+            1373,
+            288
+          ],
+          "expected": 139,
+          "actual": 128,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1217,
+            1150
+          ],
+          "uiPixel": [
+            1217,
+            289
+          ],
+          "expected": 95,
+          "actual": 105,
+          "depthUlp": 22
+        },
+        {
+          "texturePixel": [
+            1240,
+            1150
+          ],
+          "uiPixel": [
+            1240,
+            289
+          ],
+          "expected": 251,
+          "actual": 249,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1326,
+            1149
+          ],
+          "uiPixel": [
+            1326,
+            290
+          ],
+          "expected": 116,
+          "actual": 105,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1239,
+            1148
+          ],
+          "uiPixel": [
+            1239,
+            291
+          ],
+          "expected": 238,
+          "actual": 235,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1318,
+            1148
+          ],
+          "uiPixel": [
+            1318,
+            291
+          ],
+          "expected": 9,
+          "actual": 6,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1229,
+            1147
+          ],
+          "uiPixel": [
+            1229,
+            292
+          ],
+          "expected": 37,
+          "actual": 32,
+          "depthUlp": 10
+        },
+        {
+          "texturePixel": [
+            1216,
+            1146
+          ],
+          "uiPixel": [
+            1216,
+            293
+          ],
+          "expected": 194,
+          "actual": 186,
+          "depthUlp": 52
+        },
+        {
+          "texturePixel": [
+            1217,
+            1146
+          ],
+          "uiPixel": [
+            1217,
+            293
+          ],
+          "expected": 127,
+          "actual": 116,
+          "depthUlp": 17
+        },
+        {
+          "texturePixel": [
+            1241,
+            1143
+          ],
+          "uiPixel": [
+            1241,
+            296
+          ],
+          "expected": 228,
+          "actual": 218,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1322,
+            1143
+          ],
+          "uiPixel": [
+            1322,
+            296
+          ],
+          "expected": 178,
+          "actual": 186,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1217,
+            1142
+          ],
+          "uiPixel": [
+            1217,
+            297
+          ],
+          "expected": 139,
+          "actual": 150,
+          "depthUlp": 4
+        },
+        {
+          "texturePixel": [
+            1218,
+            1142
+          ],
+          "uiPixel": [
+            1218,
+            297
+          ],
+          "expected": 213,
+          "actual": 219,
+          "depthUlp": 6
+        },
+        {
+          "texturePixel": [
+            1331,
+            1142
+          ],
+          "uiPixel": [
+            1331,
+            297
+          ],
+          "expected": 78,
+          "actual": 96,
+          "depthUlp": 15
+        },
+        {
+          "texturePixel": [
+            1319,
+            1141
+          ],
+          "uiPixel": [
+            1319,
+            298
+          ],
+          "expected": 160,
+          "actual": 150,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1219,
+            1136
+          ],
+          "uiPixel": [
+            1219,
+            303
+          ],
+          "expected": 228,
+          "actual": 224,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1317,
+            1136
+          ],
+          "uiPixel": [
+            1317,
+            303
+          ],
+          "expected": 201,
+          "actual": 194,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1323,
+            1120
+          ],
+          "uiPixel": [
+            1323,
+            319
+          ],
+          "expected": 244,
+          "actual": 239,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1314,
+            1115
+          ],
+          "uiPixel": [
+            1314,
+            324
+          ],
+          "expected": 246,
+          "actual": 250,
+          "depthUlp": 2
+        },
+        {
+          "texturePixel": [
+            1238,
+            1112
+          ],
+          "uiPixel": [
+            1238,
+            327
+          ],
+          "expected": 105,
+          "actual": 116,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1242,
+            1112
+          ],
+          "uiPixel": [
+            1242,
+            327
+          ],
+          "expected": 37,
+          "actual": 27,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1234,
+            1108
+          ],
+          "uiPixel": [
+            1234,
+            331
+          ],
+          "expected": 249,
+          "actual": 245,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1255,
+            1107
+          ],
+          "uiPixel": [
+            1255,
+            332
+          ],
+          "expected": 13,
+          "actual": 15,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1255,
+            1105
+          ],
+          "uiPixel": [
+            1255,
+            334
+          ],
+          "expected": 39,
+          "actual": 50,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1314,
+            1103
+          ],
+          "uiPixel": [
+            1314,
+            336
+          ],
+          "expected": 244,
+          "actual": 246,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1241,
+            1100
+          ],
+          "uiPixel": [
+            1241,
+            339
+          ],
+          "expected": 10,
+          "actual": 8,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1238,
+            1094
+          ],
+          "uiPixel": [
+            1238,
+            345
+          ],
+          "expected": 237,
+          "actual": 234,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1235,
+            1093
+          ],
+          "uiPixel": [
+            1235,
+            346
+          ],
+          "expected": 237,
+          "actual": 234,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1312,
+            1089
+          ],
+          "uiPixel": [
+            1312,
+            350
+          ],
+          "expected": 244,
+          "actual": 246,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1312,
+            1088
+          ],
+          "uiPixel": [
+            1312,
+            351
+          ],
+          "expected": 160,
+          "actual": 150,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1226,
+            1086
+          ],
+          "uiPixel": [
+            1226,
+            353
+          ],
+          "expected": 149,
+          "actual": 159,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1316,
+            1085
+          ],
+          "uiPixel": [
+            1316,
+            354
+          ],
+          "expected": 207,
+          "actual": 201,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1323,
+            1083
+          ],
+          "uiPixel": [
+            1323,
+            356
+          ],
+          "expected": 207,
+          "actual": 219,
+          "depthUlp": 1
+        },
+        {
+          "texturePixel": [
+            1227,
+            1075
+          ],
+          "uiPixel": [
+            1227,
+            364
+          ],
+          "expected": 246,
+          "actual": 248,
+          "depthUlp": 1
+        }
+      ]
+    }
+  ],
+  "nativeConfiguration": {
+    "positions": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-positions.bin",
+    "indices": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-indices.bin",
+    "profile": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+    "uv": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\native-uv.bin",
+    "mips": [
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip0.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip1.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip2.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip3.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip4.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip5.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip6.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip7.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip8.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-173835-reference-depth-coverage-4b4afc\\422-alpha-mip9.bin"
+    ],
+    "width": 512,
+    "height": 512,
+    "cutoff": 0.5,
+    "lodBias": -1,
+    "queries": "D:/Projects/FYP/Project/AzureRender/build/runs/20261108-045252-screen-object-visibility-ca2907/queries.bin"
+  },
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "programIdentity": [
+    {
+      "configuration": "release",
+      "playerSha256": "b2bd2156d2b5fba65eddabf43857c0de9650476d2c86cc1f3adb970fa18db9ce",
+      "totalPrograms": 686,
+      "testSha256": "39ebc9f36e8beff6952b1d9c323aec97f41c15fa656ca40372fea9dcdefb0cfd",
+      "serialGpuRegistration": true,
+      "coverageTestSha256": "2db47b59c9db20090ceeb43f6def9923147a1847375fa1f958d2b110f718e4c4"
+    },
+    {
+      "configuration": "debug",
+      "playerSha256": "6a889b82776c6f741f24a5c2c35b0f44b5e1b45b1b485c03c62dbebe5c32bd12",
+      "totalPrograms": 686,
+      "testSha256": "9c817e6b00b71d826fb2019a9df72560079053c58691aa7a4a70c3b54a91e103",
+      "serialGpuRegistration": true,
+      "coverageTestSha256": "9e7a1629e5b02dc5354f1377e2a893910149dd4212b51ec04f09467115ef8a95"
+    }
+  ],
+  "preparedPrograms": [
+    {
+      "configuration": "release",
+      "program": "reference_depth.vert.spv",
+      "fmaResults": 3,
+      "vulkan10Validation": true,
+      "sourceSha256": "a8e0f700200b1a0f006070f1f6301c46e39955f80bccd1bd6e8ba211230726d9",
+      "preparedSha256": "e62ec879d7508a988781e356e0e366c2fcf1f936fca32b989d37eeee907f1073"
+    },
+    {
+      "configuration": "release",
+      "program": "reference_depth_masked.vert.spv",
+      "fmaResults": 3,
+      "vulkan10Validation": true,
+      "sourceSha256": "7bcc642385515345587419e724aa8293f507b7cd763d43768a66079aab56cc57",
+      "preparedSha256": "351dc4b0d11f4673bf5f0711e6bfa5c11004d5a26b40c9acf005d9bb542cadb4"
+    },
+    {
+      "configuration": "debug",
+      "program": "reference_depth.vert.spv",
+      "fmaResults": 3,
+      "vulkan10Validation": true,
+      "sourceSha256": "a8e0f700200b1a0f006070f1f6301c46e39955f80bccd1bd6e8ba211230726d9",
+      "preparedSha256": "e62ec879d7508a988781e356e0e366c2fcf1f936fca32b989d37eeee907f1073"
+    },
+    {
+      "configuration": "debug",
+      "program": "reference_depth_masked.vert.spv",
+      "fmaResults": 3,
+      "vulkan10Validation": true,
+      "sourceSha256": "7bcc642385515345587419e724aa8293f507b7cd763d43768a66079aab56cc57",
+      "preparedSha256": "351dc4b0d11f4673bf5f0711e6bfa5c11004d5a26b40c9acf005d9bb542cadb4"
+    }
+  ],
+  "source": {
+    "CMakeLists.txt": "5b619395c53a37b641ad17bb6f1e37c48345ffe3586453a59f161b73de3bcf4d",
+    "src/render/ReferenceDepth.hpp": "772f2786842a030a68d6b46e8b7ede9c05ebfb89c2ea4d2108b6ab94c2e42c8c",
+    "src/render/ReferenceDepth.cpp": "ed246a7a5a2d34888e1ec973a360c8a8b114f1d541bac73c548e8f066a5711b6",
+    "shaders/reference_depth.vert": "134557f516d4ea89566d912d872eb0ba91c1d69541eda4987ff4e8b4f861848e",
+    "shaders/reference_depth.frag": "ddf62e1c9d05c157518811a30e2fd6d83fdc73dfeb45210c3d7ca8d867d39735",
+    "tests/ReferenceDepthCoverageGpuTests.cpp": "e555267f03d9ffca8022d369be92513756694abc4cb7c07b0aa4efb896c46295"
+  },
+  "archive": {
+    "members": 160,
+    "bytes": 1037611,
+    "sha256": "ab8d507a3b3c536dc3ac7a145c32a2c130c26f49cdd49a28d989527aa61ef107"
+  },
+  "remaining": [
+    "Intel97 visibility pixels beyond one-byte gate",
+    "Actual camera and asset scene binding",
+    "Complete native visual and performance gates"
+  ]
+}

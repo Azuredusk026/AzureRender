@@ -772,3 +772,6 @@ $env:VCPKG_ROOT = "D:/Tools/vcpkg"
 
 [几何深度与可见量](docs/acceptance/nr/geometry-depth-visibility.md)完成双设备成对核对。
 原生深度控制通过，几何来源的七处及一百零三处超差继续修正。
+
+[深度透明覆盖](docs/acceptance/nr/reference-depth-coverage.md)通过公共表面及默认四帧检查。
+NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继续修正。
