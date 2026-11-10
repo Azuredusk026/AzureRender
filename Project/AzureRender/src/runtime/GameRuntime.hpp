@@ -43,12 +43,14 @@ public:
     void renderScene(SceneDocument& scene);
     void renderScene(SceneDocument& scene,RuntimeSceneSnapshotCache& snapshots);
     GameCameraSelection renderCamera();
+    void setReferenceViews(ReferenceCameraViews views);
     // The caller retains this frame's interpolated scene through selection.
     GameCameraSelection renderCamera(const SceneDocument& scene);
     GameCameraSelection renderCamera(const scene::SceneDescription& scene);
     std::array<float,3> renderCameraPosition() const;
     std::array<float,3> renderCameraTarget() const;
 private:
+    ReferenceCameraViews referenceViews_;
     std::map<ecs::Entity, CharacterMotion> motions_;
     RuntimeLifecycle& runtime_;
     InputActions input_;

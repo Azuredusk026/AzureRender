@@ -1,6 +1,7 @@
 #include "rhi/VulkanDepthBias.hpp"
 #include "rhi/VulkanPipelineCache.hpp"
 #include "runtime/InputPreferences.hpp"
+#include "runtime/ProjectReferenceViews.hpp"
 #include "foundation/FramePacing.hpp"
 #include "assets/AssetDeformation.hpp"
 #include "AzureRenderApp.hpp"
@@ -116,6 +117,7 @@ void AzureRenderApp::run(
     }
     if (levelSession_) gameRuntime_ = std::make_unique<azurerender::GameRuntime>(runtime_,azurerender::application::systems(),azurerender::application::configuration(levelSession_->project()));
     if (gameRuntime_) {
+        gameRuntime_->setReferenceViews(azurerender::loadProjectReferenceViews(levelSession_->project()).views);
         gameRuntime_->physics().setMeshResolver(azurerender::collisionMeshAssets(levelSession_->assets()));
         gameRuntime_->physics().validateScene(runtime_);
         scriptRuntime_ = azurerender::application::scripts(levelSession_->project(),runtime_,*gameRuntime_,levelSession_->assets());

@@ -1,6 +1,7 @@
 #include "runtime/camera/GameCameraService.hpp"
 #include "runtime/RuntimeLifecycle.hpp"
 #include "ecs/CameraComponents.hpp"
+#include "ecs/ReferenceCameraComponents.hpp"
 #include "render/CameraProjection.hpp"
 #include "scene/SceneDescription.hpp"
 #include <limits>
@@ -55,6 +56,9 @@ GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const SceneDocum
     return resolveGameCamera(runtime,sceneDocument.renderDescription());
 }
 GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const scene::SceneDescription& scene){
+    return resolveGameCamera(runtime,scene,{});
+}
+GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const scene::SceneDescription& scene,const ReferenceCameraViews& views){
     GameCameraSelection result;std::int64_t priority=-1;
     const auto* cameras=runtime.world().findComponentArray<game::GameCamera>();
     std::unordered_map<std::string,const game::GameCamera*> byNode;
@@ -82,8 +86,17 @@ GameCameraSelection resolveGameCamera(RuntimeLifecycle& runtime,const scene::Sce
         if(camera->priority<priority
             ||(camera->priority==priority&&!result.node.empty()&&node.id>=result.node))continue;
         CameraViewDescriptor view;
-        try{view=gameCameraView(*camera,fallback.empty()?prepared.at(index):fallback[index]);}catch(const std::exception& e){result.diagnostic=node.id+": "+e.what();continue;}
-        result.view=view;result.node=node.id;priority=camera->priority;
+        const auto* reference=runtime.world().tryGet<game::ReferenceCamera>(runtime.entity(node.id));
+        std::optional<ReferenceCameraView> referenceView;
+        try{
+            view=gameCameraView(*camera,fallback.empty()?prepared.at(index):fallback[index]);
+            if(reference&&reference->enabled){
+                const auto found=views.find(reference->view);if(found==views.end())throw std::invalid_argument("Reference camera view is not installed: "+reference->view);
+                const ReferenceCameraPose anchor{reference->anchorPosition,reference->anchorRight,reference->anchorUp,reference->anchorBack};
+                referenceView=relocateReferenceCamera(found->second,anchor,referenceCameraPose(view.position,view.target,view.up));
+            }
+        }catch(const std::exception& e){result.diagnostic=node.id+": "+e.what();if(reference&&reference->enabled)result.referenceRejected=true;continue;}
+        result.view=view;result.node=node.id;result.referenceView=std::move(referenceView);result.referenceName=result.referenceView?reference->view:std::string{};priority=camera->priority;
     }
     if(!result.view&&result.diagnostic.empty())result.diagnostic="No enabled GameCamera";
     return result;

@@ -112,12 +112,17 @@ void GameRuntime::interpolateScene(SceneDocument& scene) const {
 GameCameraSelection GameRuntime::renderCamera(){
     return renderCamera(renderScene());
 }
+void GameRuntime::setReferenceViews(ReferenceCameraViews views){
+    if(views.size()>64)throw std::invalid_argument("Runtime reference camera collection exceeds64 views");
+    for(const auto& [name,view]:views){if(name.empty()||name.size()>64)throw std::invalid_argument("Invalid runtime reference camera name");(void)PreparedReferenceCameraView(view);}
+    referenceViews_=std::move(views);
+}
 GameCameraSelection GameRuntime::renderCamera(const SceneDocument& scene){
     return renderCamera(scene.renderDescription());
 }
 GameCameraSelection GameRuntime::renderCamera(const scene::SceneDescription& scene){
-    auto selected=resolveGameCamera(runtime_,scene);
-    if(!selected.view&&hasCamera_){
+    auto selected=resolveGameCamera(runtime_,scene,referenceViews_);
+    if(!selected.view&&hasCamera_&&!selected.referenceRejected){
         CameraViewDescriptor view;view.position=renderCameraPosition();view.target=renderCameraTarget();
         selected.view=view;selected.node="follow-camera";selected.diagnostic.clear();
     }

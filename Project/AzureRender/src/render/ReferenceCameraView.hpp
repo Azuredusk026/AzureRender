@@ -64,9 +64,9 @@ public:
         const auto point=unprojectDouble(u,v,depth);std::array<float,3> result;for(unsigned i=0;i<3;++i){result[i]=float(point[i]);require(std::isfinite(result[i]),"Reference world point exceeds binary32");}return result;
     }
     ReferenceCameraRay pickRay(double u,double v) const {
-        const auto near=unprojectDouble(u,v,view_.depthConvention==ReferenceDepthConvention::Reversed?1:0),middle=unprojectDouble(u,v,.5);std::array<double,3> direction;double squared=0;
-        for(unsigned i=0;i<3;++i){direction[i]=middle[i]-near[i];squared+=direction[i]*direction[i];}require(squared>0&&std::isfinite(squared),"Reference pick ray is degenerate");
-        ReferenceCameraRay result;for(unsigned i=0;i<3;++i){result.origin[i]=float(near[i]);result.direction[i]=float(direction[i]/std::sqrt(squared));require(std::isfinite(result.origin[i])&&std::isfinite(result.direction[i]),"Reference pick ray exceeds binary32");}return result;
+        const auto nearPoint=unprojectDouble(u,v,view_.depthConvention==ReferenceDepthConvention::Reversed?1:0),middle=unprojectDouble(u,v,.5);std::array<double,3> direction;double squared=0;
+        for(unsigned i=0;i<3;++i){direction[i]=middle[i]-nearPoint[i];squared+=direction[i]*direction[i];}require(squared>0&&std::isfinite(squared),"Reference pick ray is degenerate");
+        ReferenceCameraRay result;for(unsigned i=0;i<3;++i){result.origin[i]=float(nearPoint[i]);result.direction[i]=float(direction[i]/std::sqrt(squared));require(std::isfinite(result.origin[i])&&std::isfinite(result.direction[i]),"Reference pick ray exceeds binary32");}return result;
     }
     bool intersectsBounds(const std::array<float,3>& minimum,const std::array<float,3>& maximum) const {
         std::array<double,3> extent;

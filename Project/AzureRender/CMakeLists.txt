@@ -947,9 +947,9 @@ set(AZURE_GENERATED_DIR "${CMAKE_CURRENT_BINARY_DIR}/generated")
 set(AZURE_REFLECTION_OUTPUT "${AZURE_GENERATED_DIR}/reflection/GeneratedRegistry.hpp")
 set(AZURE_COMPONENT_OUTPUT "${AZURE_GENERATED_DIR}/runtime/GeneratedComponents.hpp")
 add_custom_command(OUTPUT "${AZURE_REFLECTION_OUTPUT}" "${AZURE_COMPONENT_OUTPUT}"
-    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp ecs/GameComponents.hpp ecs/CameraComponents.hpp ecs/ObjectShadow.hpp --components-output "${AZURE_COMPONENT_OUTPUT}"
+    COMMAND AzureMetaGen "${AZURE_REFLECTION_OUTPUT}" ecs/Components.hpp ecs/GameComponents.hpp ecs/CameraComponents.hpp ecs/ReferenceCameraComponents.hpp ecs/ObjectShadow.hpp --components-output "${AZURE_COMPONENT_OUTPUT}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src"
-    DEPENDS AzureMetaGen src/ecs/Components.hpp src/ecs/GameComponents.hpp src/ecs/CameraComponents.hpp src/ecs/ObjectShadow.hpp
+    DEPENDS AzureMetaGen src/ecs/Components.hpp src/ecs/GameComponents.hpp src/ecs/CameraComponents.hpp src/ecs/ReferenceCameraComponents.hpp src/ecs/ObjectShadow.hpp
     VERBATIM)
 add_library(AzureReflection STATIC src/reflection/Registry.cpp "${AZURE_REFLECTION_OUTPUT}")
 target_include_directories(AzureReflection PUBLIC "${AZURE_GENERATED_DIR}")
@@ -2288,7 +2288,23 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.PhysicsPlayer PROPERTIES LABELS gpu)
     add_executable(AzureProjectTests tests/ProjectTests.cpp)
     add_executable(AzureProjectReferenceViewsTests tests/ProjectReferenceViewsTests.cpp)
+    add_executable(AzureReferenceCameraSelectionTests tests/ReferenceCameraSelectionTests.cpp)
+    add_executable(AzureReferenceCameraMacroTests tests/ReferenceCameraMacroTests.cpp)
+    target_link_libraries(AzureReferenceCameraMacroTests PRIVATE AzureRenderCore)
+    add_test(NAME AzureRender.ReferenceCameraMacro COMMAND AzureReferenceCameraMacroTests)
+    target_link_libraries(AzureReferenceCameraSelectionTests PRIVATE AzureRuntime)
+    if(MSVC)
+        target_link_options(AzureReferenceCameraSelectionTests PRIVATE /INCREMENTAL:NO "$<$<CONFIG:Debug>:/DEBUG:NONE>")
+    endif()
+    add_test(NAME AzureRuntime.ReferenceCameraSelection COMMAND AzureReferenceCameraSelectionTests)
     target_link_libraries(AzureProjectReferenceViewsTests PRIVATE AzureRuntime)
+    if(MSVC)
+        # These CPU contract fixtures retain Debug compilation, assertions,
+        # runtime and linker retention while omitting rebuildable link symbols.
+        foreach(AZURE_REFERENCE_CPU_TARGET IN ITEMS AzureCameraSystemTests AzureComponentRegistryTests AzureProjectReferenceViewsTests AzureReferenceCameraSelectionTests AzureReferenceCameraMacroTests)
+            target_link_options(${AZURE_REFERENCE_CPU_TARGET} PRIVATE "$<$<CONFIG:Debug>:/DEBUG:NONE>" "$<$<CONFIG:Debug>:/OPT:NOREF>" "$<$<CONFIG:Debug>:/OPT:NOICF>")
+        endforeach()
+    endif()
     add_test(NAME AzureEngine.ProjectReferenceViews COMMAND AzureProjectReferenceViewsTests)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)

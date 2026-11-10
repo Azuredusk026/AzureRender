@@ -1297,3 +1297,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [项目参考视图配置](../acceptance/nr/project-reference-views.md)通过版本、参数位值、保存重开及目录移动核对。
 两配置项目契约及当前原四帧通过，场景选择继续接入。
+
+[场景参考相机选择](../acceptance/nr/scene-reference-camera-selection.md)通过持久锚点、刚性移动及优先级核对。
+两配置十二组检查及当前原四帧通过，光栅与拾取消费继续接入。
