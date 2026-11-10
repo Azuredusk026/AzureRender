@@ -48,6 +48,8 @@
 局部效率条件未通过，生产保持当前过滤实现。
 [内部采样控制](docs/acceptance/nr/shadow-interior-gather-control.md)保持六附件一致，局部效率未通过。
 相同字节码空控制已记录，后续比较统一双方的替换路径。
+[所选级联状态](docs/acceptance/nr/selected-shadow-receiver-control.md)保持六附件一致。
+经空控制校准后局部减少约 15.25%，组合准入继续核定。
 级联归属修复使静止局部灯的首帧与绑定路径保持一致，原始四帧继续零差。
 [运动矢量绑定](docs/acceptance/nr/motion-descriptor-reuse.md)按帧槽复用稳定资源，所属十项检查及原生四帧核对通过。
 [展示照明按需计算](docs/acceptance/nr/presentation-environment-demand.md)的候选未达区间效率门槛，生产已恢复受检内容。
