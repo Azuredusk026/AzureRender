@@ -1357,3 +1357,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [显式欧氏层级候选](../acceptance/nr/alpha-euclidean-lod.md)保留为隔离诊断。
 两设备完整区域核对未关闭透明判定差，后续核对设备尺度函数。
+
+[纹理尺度来源](../acceptance/nr/texture-scale-profile.md)完成独立仿射组及原生导数观测。
+NVIDIA 层级更接近椭圆主轴模型，后续验证通用显式策略。

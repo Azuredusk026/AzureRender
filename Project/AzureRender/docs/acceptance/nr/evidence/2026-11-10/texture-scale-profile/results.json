@@ -1,0 +1,113 @@
+{
+  "status": "qualified-observation-models-diagnostic",
+  "overall": "failed-user-review",
+  "sourceCommit": "5cb239d",
+  "genericCasesPerDevice": 512,
+  "gpuRuns": 32,
+  "executionSeconds": [
+    6.375,
+    10.609,
+    6.406
+  ],
+  "devices": [
+    {
+      "device": "nvidia",
+      "nativeD32BitExactAcrossAllEightObservations": true,
+      "nativeAlphaAndQueryLodBitExact": true,
+      "nativePixels": 17017,
+      "genericTwoAxisModels": {
+        "columnEuclidean": {
+          "pixels": 256,
+          "maximumLodError": 0.541372537612915,
+          "meanLodError": 0.1853028570958486
+        },
+        "rowEuclidean": {
+          "pixels": 256,
+          "maximumLodError": 0.4296875,
+          "meanLodError": 0.15406935973987856
+        },
+        "ellipseMajorAxis": {
+          "pixels": 256,
+          "maximumLodError": 0.11718964576721191,
+          "meanLodError": 0.04144687190091645
+        }
+      },
+      "nativeAlphaPoint": {
+        "texturePixel": [
+          1326,
+          1262
+        ],
+        "uiPixel": [
+          1326,
+          177
+        ],
+        "quadTexelDerivatives": [
+          21.2464599609375,
+          0.3056793212890625,
+          17.682830810546875,
+          0.7782363891601562
+        ],
+        "hardwareLod": 4.76953125,
+        "columnEuclideanLod": 4.409299850463867,
+        "rowEuclideanLod": 4.788803577423096,
+        "alpha": 0.729930579662323
+      }
+    },
+    {
+      "device": "intel",
+      "nativeD32BitExactAcrossAllEightObservations": true,
+      "nativeAlphaAndQueryLodBitExact": true,
+      "nativePixels": 17017,
+      "genericTwoAxisModels": {
+        "columnEuclidean": {
+          "pixels": 256,
+          "maximumLodError": 0.01072835922241211,
+          "meanLodError": 0.00427751020379219
+        },
+        "rowEuclidean": {
+          "pixels": 256,
+          "maximumLodError": 0.5039085149765015,
+          "meanLodError": 0.1271864256113986
+        },
+        "ellipseMajorAxis": {
+          "pixels": 256,
+          "maximumLodError": 0.5093132257461548,
+          "meanLodError": 0.17627687309868634
+        }
+      },
+      "nativeAlphaPoint": {
+        "texturePixel": [
+          1326,
+          1262
+        ],
+        "uiPixel": [
+          1326,
+          177
+        ],
+        "quadTexelDerivatives": [
+          21.246246337890625,
+          0.30570220947265625,
+          17.682647705078125,
+          0.7782440185546875
+        ],
+        "hardwareLod": 4.43359375,
+        "columnEuclideanLod": 4.409285545349121,
+        "rowEuclideanLod": 4.788788795471191,
+        "alpha": 0.4956440031528473
+      }
+    }
+  ],
+  "publicSourceUnchanged": true,
+  "interpretation": "Observed NVIDIA LOD is closer to ellipse major axis; this is not a bit-exact hardware algorithm identification",
+  "next": "Independent explicit ellipse major-axis LOD candidate; retain all97 production failures",
+  "archive": {
+    "bytes": 1353196,
+    "sha256": "cc0ef07b4224241457d3ddb81da9a8d6e972ef0f5dd88f025ed9cf50848b8c87",
+    "members": 183
+  },
+  "defaultRegression": {
+    "sourceCommit": "f100244",
+    "fourFrames": "SHA256/RGB exact",
+    "reason": "Public source and executable inputs unchanged"
+  }
+}
