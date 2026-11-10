@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[完整管线成本](docs/acceptance/nr/complete-capture-cost-map.md)覆盖全部 3453 个计时事件。
+实际材质绘制占约 74.41%，快照常量继续局部评估。
+
 [正式功率条件](docs/acceptance/nr/gpu-power-limit-qualification.md)已保存驱动权限失败。
 固定 80W 采样等待可用的设备控制入口。
 

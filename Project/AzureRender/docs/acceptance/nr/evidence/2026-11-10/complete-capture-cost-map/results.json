@@ -1,0 +1,58 @@
+{
+  "status": "qualified-complete-pipeline-attribution",
+  "sourceHead": "1eea1ee",
+  "captureSourceHead": "274615b",
+  "events": 3453,
+  "pipelines": 76,
+  "sumEventMs": 14.67222400000001,
+  "categories": {
+    "material": {
+      "events": 1006,
+      "milliseconds": 10.918303999999996,
+      "sharePercent": 74.41478537950339
+    },
+    "shadow-depth": {
+      "events": 1119,
+      "milliseconds": 1.217536000000011,
+      "sharePercent": 8.298237540539253
+    },
+    "compute": {
+      "events": 59,
+      "milliseconds": 1.397696,
+      "sharePercent": 9.526135915046002
+    },
+    "motion": {
+      "events": 604,
+      "milliseconds": 0.40857600000000177,
+      "sharePercent": 2.784690310071612
+    },
+    "snapshot-depth": {
+      "events": 640,
+      "milliseconds": 0.42291199999999934,
+      "sharePercent": 2.8823987420039323
+    },
+    "other": {
+      "events": 25,
+      "milliseconds": 0.30720000000000003,
+      "sharePercent": 2.09375211283579
+    }
+  },
+  "newCounterCollections": 0,
+  "nativeRuns": 0,
+  "representativePipelineIdentitiesVerified": 76,
+  "ordinaryMain": {
+    "draws": 521,
+    "milliseconds": 4.009248
+  },
+  "ordinarySnapshot": {
+    "draws": 304,
+    "milliseconds": 1.922048
+  },
+  "actionAttachmentScope": "incomplete; use actual pipeline binding map",
+  "specializationDefinition": "https://raw.githubusercontent.com/baldurk/renderdoc/v1.46/renderdoc/api/replay/vk_pipestate.h",
+  "archive": {
+    "members": 17,
+    "bytes": 85996,
+    "sha256": "aba22401a48e5de107b0e68ff91f63794a5d2cc6c2aa073e3338b7e4368250a0"
+  }
+}

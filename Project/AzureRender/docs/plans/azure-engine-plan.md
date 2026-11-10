@@ -1345,3 +1345,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [正式功率核定](../acceptance/nr/gpu-power-limit-qualification.md)取得驱动权限不足的实际结果。
 固定 80W 条件等待设备控制入口，独立研发继续推进。
+
+[完整管线成本](../acceptance/nr/complete-capture-cost-map.md)完成全部 3453 个事件的实际绑定归因。
+材质绘制占 74.41%，当前评估普通不透明快照的视图常量。
