@@ -71,7 +71,9 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 31 处半精度存储重建合格，26 处 R11 存储预测一致。
 [R11 存储控制](../acceptance/nr/hair-r11-storage-control.md)的整区 HDR 符合转换模型。
 实际最终颜色保留六处超差，包含一处新增超差。
-候选保持隔离，后续核对显示消费与材质输入。
+候选保持隔离。
+[显示消费边界](../acceptance/nr/hair-display-consumption.md)的整区比较最大差为一字节。
+后续核对法线、参数图及几何取样来源。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
