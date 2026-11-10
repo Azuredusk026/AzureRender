@@ -1294,3 +1294,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [参考光栅位置](../acceptance/nr/reference-raster-projection.md)通过两配置、双设备数值核对。
 组合保留设备最终深度及屏幕偏移，场景宿主绑定继续接入。
+
+[项目参考视图配置](../acceptance/nr/project-reference-views.md)通过版本、参数位值、保存重开及目录移动核对。
+两配置项目契约及当前原四帧通过，场景选择继续接入。

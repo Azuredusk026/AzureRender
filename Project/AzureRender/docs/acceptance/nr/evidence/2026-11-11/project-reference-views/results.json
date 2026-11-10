@@ -1,0 +1,199 @@
+{
+  "status": "qualified-project-reference-view-codec-and-persistence",
+  "overall": "failed-user-review",
+  "baseCommit": "746ba12",
+  "sourceSha256": {
+    "CMakeLists.txt": "3bbfbd564d9e5663c20089cc114bd267d9d2c47a1be1831741da7c789a93d776",
+    "src/render/ReferenceCameraViewJson.hpp": "76c025d5005a1269c06a450569c6809775eb51ed125c10298870b6cbbe856f67",
+    "src/render/ReferenceCameraViewJson.cpp": "c0c5128bacc5b5c6c3730c946e6490eb3942c20b5ce3a1683a00fff4b753ddf9",
+    "src/runtime/ProjectReferenceViews.hpp": "42c7ad70b4c1cd9416b1dc7d14927be08df8345d2e610fe6d8949c9a25322768",
+    "src/runtime/ProjectReferenceViews.cpp": "33701bb11822c87981eba5bbfdff5a5c346c18f84375b46fa74e3878ec3f14a9",
+    "tests/ProjectReferenceViewsTests.cpp": "00e8a9507c9cde022bc762ce547b5006d4bcc5aab0fecce2ccd66035de975d02"
+  },
+  "cpu": [
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureProjectReferenceViewsTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "2 reference views, signed-zero persistence, project reopen/move, 22 JSON rejections, invalid-save preservation, size boundary and failed-replacement cleanup passed",
+      "binarySha256": "61e7f65b68d46119bda1f114306b4f15b07ee65649ed4c6405a56dde2ce39c25"
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureProjectReferenceViewsTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin"
+      ],
+      "exitCode": 0,
+      "stdout": "3 reference views, signed-zero persistence, project reopen/move, 22 JSON rejections, invalid-save preservation, size boundary and failed-replacement cleanup passed",
+      "binarySha256": "61e7f65b68d46119bda1f114306b4f15b07ee65649ed4c6405a56dde2ce39c25"
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureProjectTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Project contracts passed",
+      "binarySha256": "83e354bd6639e429e49f46f8e196d9d7bf1ac77e7c5b32d5a40f9ff1ed63955a"
+    },
+    {
+      "configuration": "release",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureReferenceCameraViewTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera: independent perspective/orthographic/axis/flip and conservative bounds passed; 16 rejects; nativeRays=0 visibleVertices=0 maximumPixelError=0",
+      "binarySha256": "a4669ce6e607711667e7b667b6a6d9351ce69946ca2792a3e755227015816ea7"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureProjectReferenceViewsTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "2 reference views, signed-zero persistence, project reopen/move, 22 JSON rejections, invalid-save preservation, size boundary and failed-replacement cleanup passed",
+      "binarySha256": "c2c4e6b6cc61e0ae6175c87ad1a2d90fdb1573426963b725d68786dc999b822a"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureProjectReferenceViewsTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-165124-reference-depth-source-4d1d7d\\native-profile.bin",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-001326-reference-position-frame-482201\\native-frame.bin"
+      ],
+      "exitCode": 0,
+      "stdout": "3 reference views, signed-zero persistence, project reopen/move, 22 JSON rejections, invalid-save preservation, size boundary and failed-replacement cleanup passed",
+      "binarySha256": "c2c4e6b6cc61e0ae6175c87ad1a2d90fdb1573426963b725d68786dc999b822a"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureProjectTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Project contracts passed",
+      "binarySha256": "cd439673f11417141689c4e97a4e2866cb67f90f10a69f06e8a25611f17b28f9"
+    },
+    {
+      "configuration": "debug",
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureReferenceCameraViewTests.exe"
+      ],
+      "exitCode": 0,
+      "stdout": "Reference camera: independent perspective/orthographic/axis/flip and conservative bounds passed; 16 rejects; nativeRays=0 visibleVertices=0 maximumPixelError=0",
+      "binarySha256": "b86d7af2be18ee978b1d781656be050539643dbb3f1a33ea3c5aa74d93c884f9"
+    }
+  ],
+  "identities": [
+    {
+      "configuration": "release",
+      "programsExact": 859,
+      "hosts": {
+        "AzurePlayer": "17060aa224c425a323bba99c7c9c8d6aa3cdd2f35425c15deed6da7d9c3eb8e6",
+        "AzureRender": "3b757edf0f336c8bbe24429fbe640edb1a6e76996865ba818c881ca3d50d79f0",
+        "AzureGameLauncher": "36b804c54355aeca840046b6dfef51d366a117c5654a5a05133f36b6d20ad2fc"
+      }
+    },
+    {
+      "configuration": "debug",
+      "programsExact": 859,
+      "hosts": {
+        "AzurePlayer": "8a77e8e3db9aa1cc4b25bbb6675f801de16bfb9ddacc809c1b5003083e4513e5"
+      }
+    }
+  ],
+  "defaultFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "fourExecution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 116.875,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-023832-project-reference-views-0bb44d\\default-four.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-023832-project-reference-views-0bb44d\\tmp"
+  },
+  "debugBudgetFailure": {
+    "status": "budget-stopped",
+    "exitCode": 0,
+    "reason": "Task byte/file-count budget exceeded",
+    "seconds": 19.85999999998603,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-023832-project-reference-views-0bb44d\\build.py",
+      "Debug"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+  },
+  "reclaimedTestSymbols": [
+    {
+      "status": "reclaimed-rebuildable-test-symbols",
+      "files": 13,
+      "batches": 2,
+      "logicalBytes": 135614464,
+      "protectedProductsExact": 885,
+      "seconds": 1.2660000000032596
+    },
+    {
+      "status": "reclaimed-rebuildable-test-symbols",
+      "files": 3,
+      "batches": 1,
+      "logicalBytes": 122572800,
+      "protectedProductsExact": 887,
+      "seconds": 1.312999999965541
+    }
+  ],
+  "symbolLogicalBytesReclaimed": 258187264,
+  "sceneHostBinding": "pending",
+  "remaining": [
+    "Project reference view selection in scene host",
+    "Production hair 73 color failures",
+    "Intel reference depth/visibility 96 failures",
+    "Skin, eyes, GI, reflection and dynamic appearance gates"
+  ],
+  "archive": {
+    "bytes": 208901,
+    "sha256": "d49675c9a47b4170873a54f58d909465ca319eace1197a478384b89e801d32fb",
+    "members": 67
+  }
+}

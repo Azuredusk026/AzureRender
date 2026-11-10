@@ -913,6 +913,7 @@ add_library(AzureRenderCore STATIC
     src/render/FogViewProjection.cpp
     src/render/ViewFogBinding.cpp
     src/render/ViewFogBindingJson.cpp
+    src/render/ReferenceCameraViewJson.cpp
     src/render/ViewFogGpu.cpp
     src/render/EnvironmentCubeTexture.cpp
     src/render/ComputePass.cpp
@@ -969,6 +970,7 @@ add_library(AzureRuntime STATIC
     src/runtime/SceneRenderSnapshot.cpp
     src/runtime/RuntimeRenderSnapshotCache.cpp
     src/runtime/Project.cpp
+    src/runtime/ProjectReferenceViews.cpp
     src/runtime/AssetDatabase.cpp
     src/runtime/AssetSourceCache.cpp
     src/runtime/AssetGeneration.cpp
@@ -2285,6 +2287,9 @@ if(BUILD_TESTING)
     set_tests_properties(AzureEngine.ScriptPlayer PROPERTIES LABELS gpu)
     set_tests_properties(AzureEngine.PhysicsPlayer PROPERTIES LABELS gpu)
     add_executable(AzureProjectTests tests/ProjectTests.cpp)
+    add_executable(AzureProjectReferenceViewsTests tests/ProjectReferenceViewsTests.cpp)
+    target_link_libraries(AzureProjectReferenceViewsTests PRIVATE AzureRuntime)
+    add_test(NAME AzureEngine.ProjectReferenceViews COMMAND AzureProjectReferenceViewsTests)
     target_link_libraries(AzureProjectTests PRIVATE AzureRuntime)
     add_test(NAME AzureEngine.Project COMMAND AzureProjectTests)
     add_executable(AzureRuntimeLifecycleTests tests/RuntimeLifecycleTests.cpp)
