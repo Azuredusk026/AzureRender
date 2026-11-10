@@ -31,6 +31,8 @@
 [像素无损容量](docs/acceptance/nr/texture-payload-compression-scope.md)完成 468 份源基础层的还原核查，[预备载荷计划](docs/plans/2026-11-10-prepared-pixel-payloads.md)继续处理加载期持有范围。
 [不可变载荷入口](docs/acceptance/nr/immutable-byte-payloads.md)提供共享只读输入，双配置所属回归及双设备输入等价通过。
 [预备像素加载](docs/acceptance/nr/prepared-material-loading.md)通过双配置 32 项及冻结四帧，本场景加载峰值观察约为 1.9227 GiB，正式内存矩阵继续验收。
+[输出与加载集成](docs/acceptance/nr/output-pixel-loading-integration.md)通过双配置 34 项。
+双设备大纹理组合及原四帧通过，单次加载工作集峰值约为 1.9026 GiB。
 级联归属修复使静止局部灯的首帧与绑定路径保持一致，原始四帧继续零差。
 [运动矢量绑定](docs/acceptance/nr/motion-descriptor-reuse.md)按帧槽复用稳定资源，所属十项检查及原生四帧核对通过。
 [展示照明按需计算](docs/acceptance/nr/presentation-environment-demand.md)的候选未达区间效率门槛，生产已恢复受检内容。

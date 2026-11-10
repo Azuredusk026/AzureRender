@@ -52,14 +52,20 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 场景历史的实际采样、容量及净收益继续独立验证。
 
 [浮点快照历史](../acceptance/nr/float-snapshot-history.md)完成实际启用及三进程评估。
-[冻结纹理通道](../acceptance/nr/texture-channel-scope.md)完成 541 份源文件摘要及基础通道核查。
-[色度与缓存集成](../acceptance/nr/main-chroma-seal-integration.md)通过主线双配置 24 项及冻结四帧。
-[线性通道存储](../acceptance/nr/linear-texture-channel-storage.md)通过双配置、双设备及原四帧，纹素字节减少约 14.08%。
-[预备像素载荷](2026-11-10-prepared-pixel-payloads.md)按不可变载荷及加载接入两阶段执行，源基础层压缩还原核查通过。
-[不可变载荷入口](../acceptance/nr/immutable-byte-payloads.md)通过双配置所属回归及双设备 648 组采样条件。
-[预备像素加载](../acceptance/nr/prepared-material-loading.md)完成直接及后台加载接入，双配置 32 项和原四帧通过，单场景工作集峰值约 1.9227 GiB。
 原四帧零差，GPU 名义改善约 0.02634%。
 区间效率门槛未通过，源码及实际宿主已恢复。
+
+[冻结纹理通道](../acceptance/nr/texture-channel-scope.md)完成 541 份源文件摘要及基础通道核查。
+[色度与缓存集成](../acceptance/nr/main-chroma-seal-integration.md)通过主线双配置 24 项及冻结四帧。
+
+[线性通道存储](../acceptance/nr/linear-texture-channel-storage.md)通过双配置、双设备及原四帧，纹素字节减少约 14.08%。
+[预备像素载荷](2026-11-10-prepared-pixel-payloads.md)按不可变载荷及加载接入两阶段执行，源基础层压缩还原核查通过。
+
+[不可变载荷入口](../acceptance/nr/immutable-byte-payloads.md)通过双配置所属回归及双设备 648 组采样条件。
+[预备像素加载](../acceptance/nr/prepared-material-loading.md)完成直接及后台加载接入，双配置 32 项和原四帧通过，单场景工作集峰值约 1.9227 GiB。
+
+[输出与加载集成](../acceptance/nr/output-pixel-loading-integration.md)通过两配置 34 项。
+双设备大纹理组合及原四帧通过，单次工作集峰值约为 1.9026 GiB。
 
 [并行资源调度](../development/shared-resources.md)提供重负载互斥入口。
 性能、画质与论文工作流已登记实际对话和独立工作区。

@@ -53,6 +53,10 @@ RGB 逐像素比较的差异为零。
 原生投影、梯度和实际深度继续按专项门槛接入。
 完整生产画质状态保持 `failed-user-review`。
 
+[加载组合验收](output-pixel-loading-integration.md)核对主线共同接入。
+十六张大纹理图确认共享载荷路径并通过原色差门槛。
+两配置各十七项检查及默认原四帧通过。
+
 [结果清单](evidence/2026-11-10/material-output-precision/results.json)
 与[验证归档](evidence/2026-11-10/material-output-precision/validation.zip)
 保存源码、构建、实际图像、非法输入及原四帧比较证据。
