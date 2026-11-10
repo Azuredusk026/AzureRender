@@ -1,0 +1,212 @@
+{
+  "status": "merged-main-chroma-and-cache-seal-qualified",
+  "sourceBase": "86ac46e",
+  "build": {
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 12,
+        "skips": 0,
+        "seconds": 451.65600000001723
+      },
+      {
+        "config": "Debug",
+        "tests": 12,
+        "skips": 0,
+        "seconds": 388.4529999999795
+      }
+    ],
+    "sourceUnchanged": true,
+    "cacheCasesPerConfiguration": 10
+  },
+  "capture": {
+    "materialTextureCache": {
+      "requests": 6169,
+      "hits": 5784,
+      "uniqueTextures": 385,
+      "requestedBytes": 8394487848,
+      "residentBytes": 2155557400,
+      "retainedPixelBytes": 0,
+      "releasedIdentityBytes": 1664821444,
+      "sealed": true,
+      "hashedPixelBytes": 6365826220,
+      "copiedPixelBytes": 1048576,
+      "transferredPixelBytes": 1663772868,
+      "discardedPixelBytes": 4698907616,
+      "hashMs": 2082.71,
+      "matchMs": 550.309,
+      "mipMs": 10222,
+      "uploadMs": 2504.74
+    },
+    "sceneLoad": {
+      "cpuPrepareMs": 40652.9,
+      "meshUploadMs": 607.671,
+      "materialUploadMs": 15459.9,
+      "sharedTexturesMs": 406.649,
+      "buffersMs": 110.376,
+      "skinningMs": 14.7488,
+      "descriptorsMs": 167.413,
+      "pipelinesMs": 37140.1,
+      "decodedMaterialPixelBytes": 6365826224,
+      "remainingMaterialPixelBytes": 8
+    },
+    "exitCode": 0,
+    "seconds": 137.2970000000205,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0,
+        "pngIdentical": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "defaultIsolationDisabled": true,
+    "shadowHistoryDisabled": true,
+    "sourceUnchanged": true,
+    "productsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "protectedFilesUnchanged": 13,
+  "formalAcceptance": false,
+  "archive": {
+    "file": "validation.zip",
+    "bytes": 340656,
+    "sha256": "7c9fa9ab4fad70b1d1b57c4989a7e534a88bf38977cae9f00e6cd32222ff41dc"
+  },
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 437,
+      "sha256": "be6bce3ae78a1880ffa7c32e2614af02bf714f3a3b70e3e0dfb9d922c09663fa"
+    },
+    {
+      "path": "build-results.json",
+      "bytes": 323,
+      "sha256": "fa196900f75cd548dc6443e77fd621d674f0fd7c984e9913582eb2983ed23444"
+    },
+    {
+      "path": "build.py",
+      "bytes": 2849,
+      "sha256": "e0cc0393ebda3ba35aaf6c05e791ba0d38daf4f7d8a58ef81e83c41ba1b6b759"
+    },
+    {
+      "path": "capture-command.json",
+      "bytes": 861,
+      "sha256": "85eb6e88c3e88c685caa45b294a3118e4d46622277d1da6dd9b2797cb518b287"
+    },
+    {
+      "path": "capture-results.json",
+      "bytes": 2042,
+      "sha256": "5e2bbd0dd814ac395b8dce69788206f243877e0d27e33fc6f81066b13f1e2afb"
+    },
+    {
+      "path": "capture.log",
+      "bytes": 26806,
+      "sha256": "a02b9c3e27ab30bcfe9c5b3c01ab46368cd220ab882ae3205317468696035cb8"
+    },
+    {
+      "path": "capture.py",
+      "bytes": 3636,
+      "sha256": "95f1a886da465a80eb6712fc644317725108ccb257dcb2ca6bfc2772260cf690"
+    },
+    {
+      "path": "debug-build-provenance.json",
+      "bytes": 391704,
+      "sha256": "bbb6907c1c66516f705ef84e966dd542756b43c88d6ca2c35280cd3e6a02d4c7"
+    },
+    {
+      "path": "debug-build.log",
+      "bytes": 66242,
+      "sha256": "af5d062e85345ab29e8dbe4b2048492009137eddb58bc9ab29b5f198be6177cd"
+    },
+    {
+      "path": "debug-tests.log",
+      "bytes": 1810,
+      "sha256": "bd251a5fb4aca62f2d2dbc97e4da737fbdce3e46914eba6245d3d39aa047d201"
+    },
+    {
+      "path": "debug-tests.xml",
+      "bytes": 10155,
+      "sha256": "47cd36c8f65268ce0bd632acb5cf2303897a291f9c61e9411219b3590c2d41de"
+    },
+    {
+      "path": "memory-observations.json",
+      "bytes": 137978,
+      "sha256": "b24e9949d80814239613054382f539fc8024d80b231a6ce967e6f709ceab79bb"
+    },
+    {
+      "path": "memory_observer.py",
+      "bytes": 1478,
+      "sha256": "2ca8659c1015a3aab7d27b76fdf4a8a4c88f3f38dfdf18316855bd339acf7cb3"
+    },
+    {
+      "path": "process.log",
+      "bytes": 1672,
+      "sha256": "47cffbe6753d4bc8646cb3f343bdb6087d0a5939c628e36540f9283192989b7c"
+    },
+    {
+      "path": "release-build-provenance.json",
+      "bytes": 415773,
+      "sha256": "734374ff22d816b9c56e4b23a1ea4d136ea28fa2d52305921add4218d034e808"
+    },
+    {
+      "path": "release-build.log",
+      "bytes": 66324,
+      "sha256": "db201761469e5a9b49367023aa1ac5d856075eddee558ba993bbd60adbdd8712"
+    },
+    {
+      "path": "release-tests.log",
+      "bytes": 1814,
+      "sha256": "4a600f411867a503f04ef7e278294e7d66c5d0128b7a4b63c9daa97b775c288f"
+    },
+    {
+      "path": "release-tests.xml",
+      "bytes": 10159,
+      "sha256": "63ee736d44bfa8ceca8f319473e413ce147b258ca72359a13f0e99550370433d"
+    },
+    {
+      "path": "results.json",
+      "bytes": 2724,
+      "sha256": "ec107625c19eef8f5e6f498bf2e3b4c2f6d88b191e78d96efcb60654871dff85"
+    },
+    {
+      "path": "runtime.json",
+      "bytes": 317962,
+      "sha256": "24ffb59b5b83fb24de0b8443568a55777229df566ff6b8133e3295d085d3a185"
+    },
+    {
+      "path": "frames/capture_manifest.json",
+      "bytes": 17427,
+      "sha256": "88e075facfa2e8b86da1f6f176072b83e544b8500af0c8a39857b3df42f5cadd"
+    },
+    {
+      "path": "frames/gpu_capabilities.json",
+      "bytes": 11108,
+      "sha256": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62"
+    }
+  ]
+}

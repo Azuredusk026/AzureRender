@@ -53,6 +53,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 [浮点快照历史](../acceptance/nr/float-snapshot-history.md)完成实际启用及三进程评估。
 [冻结纹理通道](../acceptance/nr/texture-channel-scope.md)完成 541 份源文件摘要及基础通道核查。
+[色度与缓存集成](../acceptance/nr/main-chroma-seal-integration.md)通过主线双配置 24 项及冻结四帧。
 原四帧零差，GPU 名义改善约 0.02634%。
 区间效率门槛未通过，源码及实际宿主已恢复。
 
