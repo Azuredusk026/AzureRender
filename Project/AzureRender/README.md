@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[参考位置帧主线验收](docs/acceptance/nr/reference-position-frame-main-integration.md)通过双配置十八项检查及十二次设备检查。
+原始四帧摘要一致，主线每配置包含 859 份程序。
+
 [四像素组级联需求](docs/acceptance/nr/quad-cascade-demand-local-qualification.md)的两个候选通过六附件核对。
 完整材质降幅至多约 14.41%，效率未准入，候选保持隔离。
 

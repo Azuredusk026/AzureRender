@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[参考位置帧主线验收](../acceptance/nr/reference-position-frame-main-integration.md)通过双配置十八项检查。
+十二次设备检查及重新采集的原四帧通过，程序集为 859 份。
+
 [四像素组设备资格](../acceptance/nr/quad-device-capture-qualification.md)完成私有特性链、原四帧及完整捕获核对。
 [级联需求控制](../acceptance/nr/quad-cascade-demand-local-qualification.md)通过两版六附件核对。
 完整材质降幅至多约 14.41%，效率未准入，候选保持隔离。
