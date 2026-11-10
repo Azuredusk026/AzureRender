@@ -57,6 +57,7 @@ static constexpr bool kSurfaceRadianceFrameSelection=false;
 #include <cmath>
 #include <cstddef>
 #include <cstring>
+#include <cstdlib>
 #include <fstream>
 #include <iomanip>
 #include <limits>
@@ -71,6 +72,7 @@ using namespace azurerender::internal;
 namespace azurerender {
 #include "CharacterViewFog.inc"
 #include "CharacterMaterialUv.inc"
+#include "CharacterComputedMaterialView.inc"
 CharacterSceneRenderer::CharacterSceneRenderer() = default;
 CharacterSceneRenderer::~CharacterSceneRenderer() = default;
 
@@ -1926,6 +1928,11 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
          << "  \"defaultIsolationPipelines\": " << defaultIsolationPipelines_.size() << ",\n"
          << "  \"defaultIsolationSelected\": " << (qaIsolationMode_==0&&!defaultIsolationPipelines_.empty()?"true":"false") << ",\n"
          << "  \"defaultIsolationFallback\": " << std::quoted(defaultIsolationFallback_) << ",\n"
+         << "  \"computedMaterialViewPipelines\": " << computedMaterialViewPipelines_.size() << ",\n"
+         << "  \"computedMaterialViewFrameEligible\": " << (computedMaterialViewFrame_.at(currentFrame_)?"true":"false") << ",\n"
+         << "  \"computedMaterialViewRequestsTotal\": " << computedMaterialViewRequests_.load(std::memory_order_relaxed) << ",\n"
+         << "  \"computedMaterialViewSelectionsTotal\": " << computedMaterialViewSelections_.load(std::memory_order_relaxed) << ",\n"
+         << "  \"computedMaterialViewFallback\": " << std::quoted(computedMaterialViewFallback_) << ",\n"
          << "  \"conservativeOcclusionPrepared\": " << (conservativeFrames_[currentFrame_].ticket?"true":"false") << ",\n"
          << "  \"mainDepthSplitRecorded\": " << (mainDepthSplitRecorded_[currentFrame_]?"true":"false") << ",\n"
          << "  \"conservativeOcclusionCommands\": " << (conservativeFrames_[currentFrame_].ticket?conservativeFrames_[currentFrame_].ticket->count:0) << ",\n"
@@ -3776,6 +3783,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     rasterizationSamples_=context.rasterizationSamples;
     prepareMaterialLightingPipelines();
     if(materialUvNeeded_)validateMaterialUvGradientPolicy(MaterialUvGradientPolicy::MirroredCoarseY,queryMaterialUvGradientSupport(context.physicalDevice));
+    initializeComputedMaterialView(context);
     const auto mainFragmentPath=[&](std::string file,bool material=false){
         return shaderDirectory+sceneFragmentVariant(std::move(file),
             rasterizationSamples_==VK_SAMPLE_COUNT_4_BIT,material&&irradianceClipmapActive_,material&&probeFieldActive_);
@@ -4590,6 +4598,12 @@ void CharacterSceneRenderer::updateUniformBuffer(
     uniform.irradianceDimensionsEnabled={float(irradianceDimensions[0]),float(irradianceDimensions[1]),float(irradianceDimensions[2]),
         float(gi.sampling.enabledFlags(gi.enabled&&(irradianceClipmap_||!irradianceVolume_.cells.empty())))};
     uniform.irradianceParameters={gi.intensity,gi.sampling.normalOffset,gi.sampling.jitterAmplitude,gi.sampling.phase};
+    auto viewCapabilities=computedMaterialViewCapabilities_;
+    const auto& depthSource=overlaySceneDepth_.at(currentFrame_);
+    viewCapabilities.depthAvailable=reflectionActive&&reflectionComputed&&depthSource.view!=VK_NULL_HANDLE
+        &&depthSource.image.width==frame.swapchainWidth&&depthSource.image.height==frame.swapchainHeight;
+    computedMaterialViewFrame_.at(currentFrame_)=computedMaterialViewEligible(viewCapabilities,
+        {uniform.clusterLighting[0],uniform.qaParameters[0],uniform.qaParameters[1],uniform.qaParameters[2],uniform.screenReflectionTrace[0]});
     std::memcpy(
         uniformBuffers_[currentFrame_].mapped,
         &uniform,

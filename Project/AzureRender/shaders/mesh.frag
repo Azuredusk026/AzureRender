@@ -1,4 +1,12 @@
 #version 450
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+#extension GL_KHR_shader_subgroup_quad : require
+#extension GL_EXT_shader_quad_control : require
+#extension GL_EXT_maximal_reconvergence : require
+layout(quad_derivatives) in;
+layout(full_quads) in;
+#else
+#endif
 #extension GL_GOOGLE_include_directive : require
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
 #extension GL_KHR_shader_subgroup_vote : require
@@ -538,8 +546,13 @@ vec2 filteredShadowBlockers(vec2 uv,float receiver,ivec2 lo,ivec2 hi,vec2 depthG
     depths-=shadowPlaneQuad(base,lo,hi,uv,extent,depthGradient);
     return shadowBlockerMoments(depths,receiver,weight);
 }
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,float normalCurvature,vec3 projectedPosition) {
+    vec3 p=projectedPosition;
+#else
 float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,float normalCurvature) {
     vec3 p=shadowPositions[cascade].xyz/shadowPositions[cascade].w;
+#endif
     vec2 localUv=p.xy*.5+.5;
     if(p.z<=0||p.z>=1||any(lessThan(localUv,vec2(0)))||any(greaterThan(localUv,vec2(1))))return 1.0;
     ivec2 extent=textureSize(AZ_TEX_SHADOW,0),tile=extent/2,origin=ivec2(cascade%2,cascade/2)*tile;
@@ -590,9 +603,23 @@ float sampleCascadeShadow(int cascade,float normalDotLight,vec2 depthGradient,fl
     }
     return visible/max(totalWeight,1e-6);
 }
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+#include "selected_receiver.glsl"
+AzureSelectedShadowReceiver selectedShadowReceiver;
+float shadowReceiverDepth;
+int shadowReceiverCascade;
+#else
 vec2 shadowReceiverGradients[4];
+#endif
 float shadowReceiverCurvature;
 void prepareShadowReceiver() {
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+    shadowReceiverDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
+    float depth=shadowReceiverDepth;
+    shadowReceiverCascade=depth<=camera.cascadeSplits.x?0:(depth<=camera.cascadeSplits.y?1:(depth<=camera.cascadeSplits.z?2:3));
+    selectedShadowReceiver=azureEmptyShadowReceiver();
+#else
+#endif
     // Invocation-local derivatives are prepared at entry, before coverage and
     // material exits. Cascade selection and sampling consume these values.
     vec3 receiverNormal=normalize(worldNormal);
@@ -603,40 +630,82 @@ void prepareShadowReceiver() {
         vec2 uv=(p.xy*.5+.5)*.5;
         vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
         float determinant=dx.x*dy.y-dx.y*dy.x;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+        vec2 gradient=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+        if(i==shadowReceiverCascade){selectedShadowReceiver.currentPosition=p;selectedShadowReceiver.currentGradient=gradient;}
+        if(i==shadowReceiverCascade+1){selectedShadowReceiver.nextPosition=p;selectedShadowReceiver.nextGradient=gradient;}
+#else
         shadowReceiverGradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+#endif
     }
     {const int i=1;
         vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
         vec2 uv=(p.xy*.5+.5)*.5;
         vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
         float determinant=dx.x*dy.y-dx.y*dy.x;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+        vec2 gradient=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+        if(i==shadowReceiverCascade){selectedShadowReceiver.currentPosition=p;selectedShadowReceiver.currentGradient=gradient;}
+        if(i==shadowReceiverCascade+1){selectedShadowReceiver.nextPosition=p;selectedShadowReceiver.nextGradient=gradient;}
+#else
         shadowReceiverGradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+#endif
     }
     {const int i=2;
         vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
         vec2 uv=(p.xy*.5+.5)*.5;
         vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
         float determinant=dx.x*dy.y-dx.y*dy.x;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+        vec2 gradient=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+        if(i==shadowReceiverCascade){selectedShadowReceiver.currentPosition=p;selectedShadowReceiver.currentGradient=gradient;}
+        if(i==shadowReceiverCascade+1){selectedShadowReceiver.nextPosition=p;selectedShadowReceiver.nextGradient=gradient;}
+#else
         shadowReceiverGradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+#endif
     }
     {const int i=3;
         vec3 p=shadowPositions[i].xyz/shadowPositions[i].w;
         vec2 uv=(p.xy*.5+.5)*.5;
         vec2 dx=dFdx(uv),dy=dFdy(uv);float zx=dFdx(p.z),zy=dFdy(p.z);
         float determinant=dx.x*dy.y-dx.y*dy.x;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+        vec2 gradient=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+        if(i==shadowReceiverCascade){selectedShadowReceiver.currentPosition=p;selectedShadowReceiver.currentGradient=gradient;}
+        if(i==shadowReceiverCascade+1){selectedShadowReceiver.nextPosition=p;selectedShadowReceiver.nextGradient=gradient;}
+#else
         shadowReceiverGradients[i]=abs(determinant)>1e-12?vec2(zx*dy.y-zy*dx.y,zy*dx.x-zx*dy.x)/determinant:vec2(0);
+#endif
     }
 }
 float sampleShadowMap(float normalDotLight) {
     // Authored scene cascades require an explicit surface directional owner.
     // Legacy lighting and the explicit QA key retain their cascade provider.
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+    if((azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5)) && camera.mainLightDirection.w<.5)return 1.0;
+    float depth=shadowReceiverDepth;
+    int c=shadowReceiverCascade;
+    float result=sampleCascadeShadow(c,normalDotLight,selectedShadowReceiver.currentGradient,shadowReceiverCurvature,selectedShadowReceiver.currentPosition);
+#else
+    if(camera.clusterLighting.x>.5 && camera.mainLightDirection.w<.5)return 1.0;
+    float depth=shadowReceiverDepth;
+    int c=shadowReceiverCascade;
+    float result=sampleCascadeShadow(c,normalDotLight,selectedShadowReceiver.currentGradient,shadowReceiverCurvature,selectedShadowReceiver.currentPosition);
+#endif
+#else
     if(camera.clusterLighting.x>.5 && camera.mainLightDirection.w<.5)return 1.0;
     float depth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
     int c=depth<=camera.cascadeSplits.x?0:(depth<=camera.cascadeSplits.y?1:(depth<=camera.cascadeSplits.z?2:3));
     float result=sampleCascadeShadow(c,normalDotLight,shadowReceiverGradients[c],shadowReceiverCurvature);
+#endif
     if(c<3){float previous=c==0?camera.clusterDepth.x:camera.cascadeSplits[c-1];
         float blend=smoothstep(mix(previous,camera.cascadeSplits[c],.90),camera.cascadeSplits[c],depth);
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+        if(blend>0.0)result=mix(result,sampleCascadeShadow(c+1,normalDotLight,selectedShadowReceiver.nextGradient,shadowReceiverCurvature,selectedShadowReceiver.nextPosition),blend);}
+#else
         if(blend>0.0)result=mix(result,sampleCascadeShadow(c+1,normalDotLight,shadowReceiverGradients[c+1],shadowReceiverCurvature),blend);}
+#endif
     return result;
 }
 
@@ -707,15 +776,45 @@ float dualFaceRampCoordinate(vec3 direction, vec3 normal, out vec4 distanceSampl
 #if defined(AZURE_VIEW_FOG)
 #include "view_fog_material.glsl"
 #else
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+#if 1
+#include "beauty_composition.glsl"
+#endif
+#else
 #if defined(AZURE_STATIC_ISOLATION)
 #include "beauty_composition.glsl"
 #endif
+#endif
 void main()
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+#if 1
+    [[maximally_reconverges]]
+#endif
+#else
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
     [[maximally_reconverges]]
 #endif
+#endif
 {
     azurePreparePrimaryUv(textureCoordinate);
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW)
+#if !defined(AZURE_OPAQUE_SNAPSHOT)
+    if(!azureOrdinaryOpaque && AZURE_ALPHA_MODE==1 && material.nodeOpacity==1.0){
+        ivec2 depthPixel=ivec2(AZURE_FRAGMENT_COORD.xy),depthExtent=textureSize(overlaySceneDepth,0);
+        bool depthInside=all(greaterThanEqual(depthPixel,ivec2(0)))&&all(lessThan(depthPixel,depthExtent));
+        float opaqueDepth=depthInside?texelFetch(overlaySceneDepth,depthPixel,0).r:0.0;
+        float fragmentDepth=dot(worldPosition-camera.cameraPosition.xyz,camera.cameraForward.xyz);
+        bool finiteDepth=!any(isnan(vec2(opaqueDepth,fragmentDepth)))&&!any(isinf(vec2(opaqueDepth,fragmentDepth)));
+        float depthMargin=1.e-4*max(1.0,max(abs(opaqueDepth),abs(fragmentDepth)));
+        bool depthHidden=depthInside&&finiteDepth&&opaqueDepth>0.0&&opaqueDepth<100000.0&&fragmentDepth>opaqueDepth+depthMargin;
+        uint depthVisible=(!depthHidden&&!gl_HelperInvocation)?1u:0u;
+        uint quadDepthVisible=subgroupQuadBroadcast(depthVisible,0u)|subgroupQuadBroadcast(depthVisible,1u)|subgroupQuadBroadcast(depthVisible,2u)|subgroupQuadBroadcast(depthVisible,3u);
+        if(quadDepthVisible==0u)discard;
+    }
+#endif
+
+#else
+#endif
     prepareShadowReceiver();
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && defined(AZURE_OPAQUE_SNAPSHOT)
     outputRadianceA=vec4(0);outputRadianceB=vec4(0);outputRadianceC=vec4(0);outputRadianceIdentity=uvec4(0xffffffffu);
@@ -763,7 +862,11 @@ void main()
             worldNormal,worldTangent,worldToView,eyeProfile.shape.x,eyeProfile.shape.y);
         baseColor=texture(AZ_TEX_BASE_COLOR,eyeCoordinates.baseUv);
     }
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    bool eyeNpr=eyeRadial&&(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))&&camera.nprLightingParameters.x>.5
+#else
     bool eyeNpr=eyeRadial&&camera.clusterLighting.x>.5&&camera.nprLightingParameters.x>.5
+#endif
         &&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w>.5;
     bool multiplyComposite = materialFeatureEnabled(32768U) > 0.5;
     bool overlayMaterial = (AZURE_MATERIAL_CLASS == 7U
@@ -859,7 +962,11 @@ void main()
     bool strandDiffuse=projectedHair
         &&loadProjectedHairSurfaceProfile(material.materialPadding>>1U).secondaryColor.w>.5;
     uint projectedHairFlags=uint(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[6].w+.5);
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    bool projectedLighting=strandDiffuse&&(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))&&camera.nprLightingParameters.x>.5
+#else
     bool projectedLighting=strandDiffuse&&camera.clusterLighting.x>.5&&camera.nprLightingParameters.x>.5
+#endif
         &&(projectedHairFlags&3U)!=0U;
     float projectedDiffuseScale=projectedHair
         ?loadProjectedHairSurfaceProfile(material.materialPadding>>1U).objectX.w:1.0;
@@ -885,7 +992,11 @@ void main()
     vec4 specularEmissive = azureSamplePrimaryUv(AZ_TEX_SPECULAR_EMISSIVE,textureCoordinate);
     float styleStrength = camera.renderingParameters.y;
     float diffuseBandThreshold = camera.renderingParameters.z;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    bool sceneCharacter=(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))
+#else
     bool sceneCharacter=camera.clusterLighting.x>.5
+#endif
         && sceneCharacterSurface(AZURE_MATERIAL_CLASS,material.materialProfileVersion);
     if(sceneCharacter && diffuseBandThreshold<0.0)diffuseBandThreshold=.40;
     float bandEnabled = step(0.0, diffuseBandThreshold);
@@ -923,13 +1034,26 @@ void main()
         metallic = 0.0;
     }
     if(strandDiffuse)metallic=0.0;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    int qaEffectMode = azureOrdinaryOpaque?0:int(floor(camera.qaParameters.y + 0.5));
+    bool qaEffectDisabled = azureOrdinaryOpaque?false:camera.qaParameters.z < 0.5;
+#else
     int qaEffectMode = int(floor(camera.qaParameters.y + 0.5));
     bool qaEffectDisabled = camera.qaParameters.z < 0.5;
+#endif
 #if defined(AZURE_OPAQUE_SNAPSHOT)
     // SSR radiance sources retain complete lighting under specular diagnostics.
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if((azureOrdinaryOpaque?true:(camera.screenReflectionTrace.x>.5))){qaEffectMode=0;qaEffectDisabled=false;}
+#else
     if(camera.screenReflectionTrace.x>.5){qaEffectMode=0;qaEffectDisabled=false;}
 #endif
+#endif
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    bool nprDiffuse=(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))&&materialFeatureEnabled(524288U)>.5
+#else
     bool nprDiffuse=camera.clusterLighting.x>.5&&materialFeatureEnabled(524288U)>.5
+#endif
         &&!(qaEffectMode==1&&qaEffectDisabled);
     if(nprDiffuse) {
         float normalSource=materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[3].z;
@@ -971,9 +1095,17 @@ void main()
     vec3 sceneShadowDirection=lightDirection;
     bool independentNprMain=false;
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if(characterLightReceiver&&(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))
+#else
     if(characterLightReceiver&&camera.clusterLighting.x>.5
+#endif
+#else
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if((sceneCharacter||nprDiffuse)&&(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))
 #else
     if((sceneCharacter||nprDiffuse)&&camera.clusterLighting.x>.5
+#endif
 #endif
         &&camera.nprLightingParameters.y>=0&&camera.nprLightingParameters.y<camera.clusterGrid.w){
         ClusterLight characterMain=sceneLightData.lights[uint(camera.nprLightingParameters.y)];
@@ -1056,7 +1188,11 @@ void main()
     vec3 fresnel =
         f0 + (1.0 - f0) * pow(1.0 - normalDotView, 5.0);
     if(strandDiffuse)fresnel=vec3(0);
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    bool fittedEnvironment=(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))&&camera.clusterLighting.w>.5
+#else
     bool fittedEnvironment=camera.clusterLighting.x>.5&&camera.clusterLighting.w>.5
+#endif
         &&AZURE_MATERIAL_CLASS==0U;
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
     fittedEnvironment=fittedEnvironment||(environmentSources&4U)!=0U;
@@ -1377,7 +1513,11 @@ void main()
         vec3 characterRadiance=characterLight?characterLocalLightRadiance(radiance,
             dot(localLightingNormal,pointDirection),localResponse,characterSceneVisibility):radiance;
         if(!specularOnly) {
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+        if(eyeRadial&&!eyeNpr&&(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))) {
+#else
         if(eyeRadial&&!eyeNpr&&camera.clusterLighting.x>.5) {
+#endif
             // This host adapter is independent from the unbound native NPR globals.
             vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,pointDirection)*.5+.5,.5),0.0);
             vec3 illumination=radiance*pointDiffuse;
@@ -1741,6 +1881,19 @@ void main()
         * bandEnabled
         * 0.055;
     }
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+vec3 beautyColor;
+if(azureOrdinaryOpaque){    beautyColor=azureBeautySum(tintedDiffuse,ambientSpecular,directSpecular,rimLighting,kkSpecular,secondaryKkSpecular,matcapAccent,emissive);}else{    beautyColor =
+        tintedDiffuse
+        + ambientSpecular
+        + directSpecular
+        + rimLighting
+        + kkSpecular
+        + secondaryKkSpecular
+        + matcapAccent
+        + emissive;}
+    int qaIsolationMode = azureOrdinaryOpaque?0:int(floor(AZURE_QA_ISOLATION + 0.5));
+#else
 #if defined(AZURE_STATIC_ISOLATION)
     vec3 beautyColor=azureBeautySum(tintedDiffuse,ambientSpecular,directSpecular,rimLighting,kkSpecular,secondaryKkSpecular,matcapAccent,emissive);
 #else
@@ -1755,8 +1908,13 @@ void main()
         + emissive;
 #endif
     int qaIsolationMode = int(floor(AZURE_QA_ISOLATION + 0.5));
+#endif
 #if defined(AZURE_OPAQUE_SNAPSHOT)
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if((azureOrdinaryOpaque?true:(camera.screenReflectionTrace.x>.5)))qaIsolationMode=0;
+#else
     if(camera.screenReflectionTrace.x>.5)qaIsolationMode=0;
+#endif
 #endif
     vec3 sceneReflectionRadiance=vec3(0);
     vec3 sceneReflectionResponse=environmentResponse;
@@ -1773,7 +1931,11 @@ void main()
     if (overlayMaterial && overlayDisabled) {
         outputAlpha = 0.0;
     }
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if ((azureOrdinaryOpaque?true:(camera.clusterLighting.x > .5))) {
+#else
     if (camera.clusterLighting.x > .5) {
+#endif
         // Scene mode consumes only declared light/environment contributions.
         // Specialized native character passes are selected separately.
         float angle = camera.clusterLighting.z;
@@ -1812,11 +1974,16 @@ void main()
             rimLighting=sceneRim;
         }
         if(!sceneCharacter&&nprDiffuse)rimLighting=sceneRim;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+if(azureOrdinaryOpaque){        beautyColor=azureBeautySum(directDiffuse,directSpecular,ambientDiffuse,ambientSpecular,emissive,kkSpecular,secondaryKkSpecular,rimLighting);}else{        beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular
+            + emissive + kkSpecular + secondaryKkSpecular + rimLighting;}
+#else
 #if defined(AZURE_STATIC_ISOLATION)
         beautyColor=azureBeautySum(directDiffuse,directSpecular,ambientDiffuse,ambientSpecular,emissive,kkSpecular,secondaryKkSpecular,rimLighting);
 #else
         beautyColor = directDiffuse + directSpecular + ambientDiffuse + ambientSpecular
             + emissive + kkSpecular + secondaryKkSpecular + rimLighting;
+#endif
 #endif
         if(overlayMaterial)beautyColor=overlayVisible>.5?baseColor.rgb:vec3(0);
     }
@@ -1830,10 +1997,14 @@ void main()
         reflectionDiffuseIncident=mix(reflectionDiffuseIncident,volume.rgb,volume.w);
 #endif
         vec3 blended=ambientDiffuse*(1-volume.w)+(nprDiffuse?nprAmbientResponse:diffuseColor*physicalAo)*volume.rgb;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+if(azureOrdinaryOpaque){        beautyColor=azureBeautyReplace(beautyColor,blended,ambientDiffuse);ambientDiffuse=blended;}else{        beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;}
+#else
 #if defined(AZURE_STATIC_ISOLATION)
         beautyColor=azureBeautyReplace(beautyColor,blended,ambientDiffuse);ambientDiffuse=blended;
 #else
         beautyColor+=blended-ambientDiffuse;ambientDiffuse=blended;
+#endif
 #endif
     }
     if((nprDiffuse||projectedLighting||eyeNpr)&&camera.nprLightingParameters.x>.5){
@@ -1917,13 +2088,21 @@ void main()
         }
     }
     if(projectedHair&&materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[8].z>.5
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+        &&((azureOrdinaryOpaque?false:(camera.clusterLighting.x<.5))||camera.mainLightDirection.w>.5)){
+#else
         &&(camera.clusterLighting.x<.5||camera.mainLightDirection.w>.5)){
+#endif
         vec2 line;projectedHairResponse(viewDirection,lightDirection,true,true,line);
         vec3 dark=ambientDiffuse*line.x;
         vec3 adjusted=mix(vec3(dot(dark,vec3(.212673,.715152,.072175))),dark,line.y);
         beautyColor+=adjusted-ambientDiffuse;ambientDiffuse=adjusted;
         if(materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[8].w>.5) {
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+            vec3 mainDiffuse=(azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))?sceneMainDiffuse:directDiffuse;
+#else
             vec3 mainDiffuse=camera.clusterLighting.x>.5?sceneMainDiffuse:directDiffuse;
+#endif
             vec3 adjustedMain=characterDiffuseSaturation(mainDiffuse*line.x,line.y);
             sceneMainDiffuse=adjustedMain;
             vec3 difference=adjustedMain-mainDiffuse;
@@ -1973,11 +2152,16 @@ void main()
         vec3 blended=environmentResponse*radiance;
         if(sceneCharacter)blended*=material.styleParameters.z*dielectricSpecularWeight;
         if(qaEffectMode==5&&qaEffectDisabled)blended=vec3(0);
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+        if((azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5)))blended=sceneReflectionResponse*radiance;
+if(azureOrdinaryOpaque){        beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);ambientSpecular=blended;}else{        beautyColor+=blended-ambientSpecular;ambientSpecular=blended;}
+#else
         if(camera.clusterLighting.x>.5)blended=sceneReflectionResponse*radiance;
 #if defined(AZURE_STATIC_ISOLATION)
         beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);ambientSpecular=blended;
 #else
         beautyColor+=blended-ambientSpecular;ambientSpecular=blended;
+#endif
 #endif
     }
 #else
@@ -2004,15 +2188,23 @@ void main()
             if(sceneCharacter)localSpecular*=material.styleParameters.z*dielectricSpecularWeight;
             if(qaEffectMode==5 && qaEffectDisabled)localSpecular=vec3(0);
             vec3 blended=mix(ambientSpecular,localSpecular,weight);
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+            if((azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))){
+#else
             if(camera.clusterLighting.x>.5){
+#endif
                 vec3 localRadiance=textureLod(reflectionProbeTexture,direction,probeLod).rgb*camera.probeParameters.y;
                 sceneReflectionRadiance=mix(sceneReflectionRadiance,localRadiance,weight);
                 blended=sceneReflectionResponse*sceneReflectionRadiance;
             }
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+if(azureOrdinaryOpaque){            beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);}else{            beautyColor+=blended-ambientSpecular;}
+#else
 #if defined(AZURE_STATIC_ISOLATION)
             beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);
 #else
             beautyColor+=blended-ambientSpecular;
+#endif
 #endif
             ambientSpecular=blended;
         }
@@ -2023,13 +2215,25 @@ void main()
 #endif
 #if !defined(AZURE_OPAQUE_SNAPSHOT)
 #if defined(AZURE_EXTENDED_MATERIAL_LIGHTING)
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if((azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))&&(azureOrdinaryOpaque?true:(camera.screenReflectionTrace.x>.5))&&microfacetSurface&&!globalReflectionEnvironment&&reflectionLayerPlusOne==0U
+#else
     if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface&&!globalReflectionEnvironment&&reflectionLayerPlusOne==0U
+#endif
+#else
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if((azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5))&&(azureOrdinaryOpaque?true:(camera.screenReflectionTrace.x>.5))&&microfacetSurface
 #else
     if(camera.clusterLighting.x>.5&&camera.screenReflectionTrace.x>.5&&microfacetSurface
 #endif
+#endif
         &&!overlayMaterial&&!(qaEffectMode==5&&qaEffectDisabled)){
         vec4 screenReflection;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+        if((azureOrdinaryOpaque?true:(camera.screenReflectionTrace.x>1.5)))
+#else
         if(camera.screenReflectionTrace.x>1.5)
+#endif
             screenReflection=sampleComputedScreenReflection(AZURE_FRAGMENT_COORD.xy/vec2(textureSize(opaqueSceneColor,0)));
         else screenReflection=traceScreenSpaceReflection(opaqueSceneColor,overlaySceneDepth,
             camera.screenReflectionWorldToClip,camera.cameraPosition.xyz,camera.cameraForward.xyz,
@@ -2037,10 +2241,14 @@ void main()
             camera.screenReflectionTrace,camera.screenReflectionQuality);
         vec3 radiance=mix(sceneReflectionRadiance,screenReflection.rgb,screenReflection.a);
         vec3 blended=sceneReflectionResponse*radiance;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+if(azureOrdinaryOpaque){        beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);ambientSpecular=blended;}else{        beautyColor+=blended-ambientSpecular;ambientSpecular=blended;}
+#else
 #if defined(AZURE_STATIC_ISOLATION)
         beautyColor=azureBeautyReplace(beautyColor,blended,ambientSpecular);ambientSpecular=blended;
 #else
         beautyColor+=blended-ambientSpecular;ambientSpecular=blended;
+#endif
 #endif
     }
     if(materialFeatureEnabled(1024U)>.5) {
@@ -2084,7 +2292,11 @@ void main()
         }
     }
     if(eyeRadial) {
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+        if((azureOrdinaryOpaque?false:(camera.clusterLighting.x<.5))) {
+#else
         if(camera.clusterLighting.x<.5) {
+#endif
             vec4 ramp=textureLod(AZ_TEX_STYLE_MASK,vec2(dot(shadedNormal,lightDirection)*.5+.5,.5),0.0);
             vec3 illumination=keyColor*camera.showcaseParameters.y*keyVisibility*max(dot(shadedNormal,lightDirection),0.0);
             eyeHostDiffuse=baseColor.rgb*eyeDiffuseMultiplier*ramp.rgb*illumination*eyeAlphaMultiplier;
@@ -2202,7 +2414,11 @@ void main()
             1.0,
             0.68,
             max(hairActive, clamp(material.matcapColor.a, 0.0, 1.0)));
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW) && !defined(AZURE_OPAQUE_SNAPSHOT)
+    if((azureOrdinaryOpaque?true:(camera.clusterLighting.x>.5)) && !sceneCharacter)innerOutlineParticipation=0.0;
+#else
     if(camera.clusterLighting.x>.5 && !sceneCharacter)innerOutlineParticipation=0.0;
+#endif
     vec3 innerOutlineNormal = geometricNormal;
 #if defined(AZURE_OPAQUE_SNAPSHOT)
     vec3 snapshotNormal=shadedNormal;

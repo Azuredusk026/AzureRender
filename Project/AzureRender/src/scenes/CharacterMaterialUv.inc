@@ -10,7 +10,9 @@ void CharacterSceneRenderer::destroyUvShaderModule(VkShaderModule module){
     rhi_->destroyShaderModule(module);
 }
 VkPipeline CharacterSceneRenderer::createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc& desc){
-    const auto original=rhi_->createGraphicsPipeline(desc);if(!materialUvNeeded_)return original;
+    const auto original=rhi_->createGraphicsPipeline(desc);
+    prepareComputedMaterialViewPipeline(original,desc);
+    if(!materialUvNeeded_)return original;
     VkPipeline reference=original;VkShaderModule module=VK_NULL_HANDLE;
     try{
         bool selected=true;
@@ -35,6 +37,7 @@ VkPipeline CharacterSceneRenderer::materialUvPipeline(const AssetMaterial& mater
     return found->second;
 }
 void CharacterSceneRenderer::destroyMaterialUvPipelines() noexcept{
+    destroyComputedMaterialViewPipelines();
     if(rhi_)for(const auto& item:materialUvPipelines_)if(item.first!=item.second)rhi_->destroyPipeline(item.second);
     materialUvPipelines_.clear();materialUvShaderPaths_.clear();materialUvNeeded_=false;materialUvClassesNeeded_=0;
 }

@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[材质组合深度策略验收](docs/acceptance/nr/material-viewquad-production.md)通过关闭深度回退与严格四帧核对。
+候选受工作集与 GPU 帧预算约束，标准构建采用参考族。
+
 [场景参考相机主线验收](docs/acceptance/nr/scene-reference-camera-main-integration.md)通过双配置三十四项检查。
 实际移动误差、四次光栅回归及重采原始四帧通过。
 

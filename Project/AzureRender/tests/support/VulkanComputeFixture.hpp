@@ -31,7 +31,7 @@ public:
     rhi::GpuAllocator allocator;
     std::unique_ptr<rhi::VulkanRhi> backend;
 
-    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false,bool fragmentAtomics=false,bool captureWarnings=false,bool anisotropy=false) {
+    explicit VulkanComputeFixture(bool graphics=false,bool sampleShading=false,bool exactDepthBias=false,bool primitiveIdentity=false,bool quadControl=false,bool fragmentAtomics=false,bool captureWarnings=false,bool anisotropy=false,bool bindless=false) {
         try {
             VkApplicationInfo application{VK_STRUCTURE_TYPE_APPLICATION_INFO};
             application.pApplicationName="AzureRender Compute Contract";application.apiVersion=VK_API_VERSION_1_3;
@@ -111,6 +111,16 @@ public:
                 optionalExtensions.push_back(VK_KHR_SHADER_MAXIMAL_RECONVERGENCE_EXTENSION_NAME);
             }
             deviceInfo.enabledExtensionCount=static_cast<std::uint32_t>(optionalExtensions.size());deviceInfo.ppEnabledExtensionNames=optionalExtensions.data();
+            VkPhysicalDeviceVulkan12Features indexing{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
+            if(bindless){
+                VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};available.pNext=&indexing;
+                vkGetPhysicalDeviceFeatures2(physical,&available);
+                if(!indexing.runtimeDescriptorArray||!indexing.shaderSampledImageArrayNonUniformIndexing)
+                    throw VulkanFeatureUnavailable("Bindless sampled image indexing is unavailable");
+                indexing={VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES};
+                indexing.runtimeDescriptorArray=indexing.shaderSampledImageArrayNonUniformIndexing=VK_TRUE;
+                indexing.pNext=const_cast<void*>(deviceInfo.pNext);deviceInfo.pNext=&indexing;
+            }
             vkRequire(vkCreateDevice(physical,&deviceInfo,nullptr,&device),"vkCreateDevice");
             vkGetDeviceQueue(device,family,0,&queue);
             VkCommandPoolCreateInfo commandInfo{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};commandInfo.queueFamilyIndex=family;

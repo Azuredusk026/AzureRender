@@ -1,0 +1,127 @@
+{
+  "status": "default-reference-verified",
+  "sourceBase": "58294c7",
+  "defaultBuildOption": "OFF",
+  "defaultSourceSha256": {
+    "CMakeLists.txt": "95fc83455c2b82a71120c4b149217f4c5a3c0eb389c88b3088ab9e0f0dc5d6da",
+    "shaders/mesh.frag": "3ce0ff28bacc38f1b50f7dba2ce0e53be02f3988a9b313a0e3491ac13a96f4b2",
+    "shaders/selected_receiver.glsl": "6f39b7609228d6d54af5578448d221c34f5c068234dfbced092003622a518d46",
+    "src/render/ComputedMaterialView.hpp": "30cd873e4cb4007f838cd3040521da5625fa59102d318e8b95e6363bc0f04633",
+    "src/scenes/CharacterComputedMaterialView.inc": "a17dd40083c8cca1c343ae2de8ea826224d08ce4510ca0c4d80d0b50e24f3684",
+    "src/scenes/CharacterMaterialUv.inc": "23fb5a8bcd01f548583e07b4330b6806a2c2a681f661745e1589100db9a533bf",
+    "src/scenes/CharacterMaterialSampling.inc": "bbb0db05ed82c990c4534aaa82e6a617dc79dfc0312470318d484236a29a3902",
+    "src/scenes/CharacterSceneRenderer.cpp": "210fbdb5bff8c406d635dbe6e661dfef4a4c0f3414e2a9126a1b6a18a1ed8015",
+    "src/scenes/CharacterSceneRenderer.hpp": "50a4ab3f0c35dd5818854ad17e13a3e0bc0b6a7f15bc0b00670b27ef1b962e9f",
+    "src/app/AzureRenderApp.cpp": "a2a8fce6b79b3f2b7d0d3ef9faed0ebe37ebb3fe65795d1f81451cb9f02a8589",
+    "tests/ComputedMaterialViewTests.cpp": "4219afc191c174aa8b8720d131278b24d6f277896ce8eaea2c8095b819c43d7d",
+    "tests/MaterialViewDeterminismGpuTests.cpp": "ba814979e4d73de02a7edf68763d0ba6cc92e233ee093f90b1b526fc26c5c706",
+    "tests/support/VulkanComputeFixture.hpp": "ab4f342cb330fff5b74369366cbf805ae154e0132fbdcec4a7e70d34f0b89d70",
+    "tests/ComputedMaterialDepthPolicyRecordingTests.cpp": "3375533c5d452e623e7d00841441fbff3a0bd0c40d7e61dc9ecd4a8945f9f2f9",
+    "tools/test_shader_compiler_contract.py": "e1de25cde0d599fdae3c6fab095e80fe281a572eb83abb08a82d8217e24f0bde",
+    "tools/test_shader_catalog.py": "62e17691274b18ed09e63fa7c23b71cb82d9258a016feb7d65db3e868ec20d48"
+  },
+  "build": [
+    {
+      "config": "Release",
+      "tests": 12,
+      "skips": 0,
+      "activePrograms": 860,
+      "referenceProgramsExact": 860,
+      "aliases": 0,
+      "staleCandidateArtifactsRemoved": 128,
+      "option": "OFF",
+      "seconds": 138.76600000000326
+    },
+    {
+      "config": "Debug",
+      "tests": 12,
+      "skips": 0,
+      "activePrograms": 860,
+      "referenceProgramsExact": 860,
+      "aliases": 0,
+      "staleCandidateArtifactsRemoved": 128,
+      "option": "OFF",
+      "seconds": 135.64100000000326
+    }
+  ],
+  "originalFour": {
+    "exitCode": 0,
+    "seconds": 149.06300000002375,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "selection": {
+    "computedMaterialViewPipelines": 0,
+    "computedMaterialViewFrameEligible": false,
+    "computedMaterialViewRequestsTotal": 0,
+    "computedMaterialViewSelectionsTotal": 0,
+    "computedMaterialViewFallback": "build-disabled"
+  },
+  "memory": {
+    "peakWorkingSetBytes": 2046373888,
+    "observationIntervalMs": 50,
+    "observations": 2900,
+    "allocator": {
+      "bufferAllocations": 2042,
+      "imageAllocations": 442,
+      "liveBuffers": 881,
+      "liveImages": 442,
+      "bufferBytes": 2291424896,
+      "imageBytes": 2819632640,
+      "liveBufferBytes": 234193600,
+      "liveImageBytes": 2819632640,
+      "deviceLocalPeakBytes": 3316325184,
+      "bufferMemoryProperties": {
+        "samples": 2042,
+        "liveDeviceLocalBytes": 219448000,
+        "liveNonDeviceLocalBytes": 14745600,
+        "liveMappedDeviceBytes": 44368320,
+        "liveMappedNonLocalDeviceBytes": 0
+      }
+    },
+    "scope": "Strict four-frame joint capture; descriptive memory observation, separate from the formal P5 workload and steady-state sampling"
+  },
+  "projectInputsExact": 1729,
+  "protectedFilesExact": 13,
+  "candidateArchive": {
+    "bytes": 3529324,
+    "members": 152,
+    "sha256": "e020143964c42c1e5af43767a455eb9b04e16a6fed5c95517077c87980658766",
+    "memberHashesVerified": true
+  },
+  "productionAdopted": false,
+  "formalPerformancePassed": false
+}

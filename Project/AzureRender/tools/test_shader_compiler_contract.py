@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--config',type=Path,required=True)
     parser.add_argument('--dxc',type=Path,required=True)
     args=parser.parse_args();engine=Path(__file__).resolve().parents[1]
-    run=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','shader-compiler-tests'],cwd=engine,text=True).strip())
+    run=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','shader-compiler-tests','--planned-bytes',str(64*1024*1024)],cwd=engine,text=True).strip())
     report=dict(status='running',executableSha256=hashlib.sha256(args.executable.read_bytes()).hexdigest(),configSha256=hashlib.sha256(args.config.read_bytes()).hexdigest())
     try:
         command=[str(args.executable.resolve()),str(args.config.resolve()),str(args.dxc.resolve()),str(run/'work')]

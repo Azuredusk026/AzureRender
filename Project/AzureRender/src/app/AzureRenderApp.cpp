@@ -1479,7 +1479,7 @@ void AzureRenderApp::createLogicalDevice() {
         enabledExtensions.push_back(VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME);
         vulkan12Features.pNext = &inspectionFeatures;
     }
-#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS)
+#if defined(AZURE_SURFACE_RADIANCE_PROGRAMS) || defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS)
     VkPhysicalDeviceShaderQuadControlFeaturesKHR quadControl{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_QUAD_CONTROL_FEATURES_KHR};
     VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR reconvergence{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR};
     VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures demote{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES};
@@ -1489,6 +1489,9 @@ void AzureRenderApp::createLogicalDevice() {
         quadControl.pNext=&reconvergence;reconvergence.pNext=&demote;VkPhysicalDeviceFeatures2 available{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};available.pNext=&quadControl;
         vkGetPhysicalDeviceFeatures2(physicalDevice_,&available);
         fragmentQuadControl_=!runOptions_.qaDisableSurfaceRadianceReuse&&quadControl.shaderQuadControl&&reconvergence.shaderMaximalReconvergence&&demote.shaderDemoteToHelperInvocation;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS)
+        fragmentQuadControl_=quadControl.shaderQuadControl&&reconvergence.shaderMaximalReconvergence&&demote.shaderDemoteToHelperInvocation;
+#endif
 #if defined(AZURE_SURFACE_RADIANCE_DIAGNOSTICS) || defined(AZURE_SURFACE_RADIANCE_FRAME_SELECTION)
         fragmentQuadControl_&=supportedSampler.fragmentStoresAndAtomics==VK_TRUE;
         deviceFeatures.fragmentStoresAndAtomics=fragmentQuadControl_?VK_TRUE:VK_FALSE;

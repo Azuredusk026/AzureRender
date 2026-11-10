@@ -14,7 +14,8 @@ def main():
     args = parser.parse_args()
     engine = Path(__file__).resolve().parents[1]
     run = Path(subprocess.check_output([
-        sys.executable, str(engine / 'tools/artifact_cleanup.py'), '--new-run', 'shader-catalog'
+        sys.executable, str(engine / 'tools/artifact_cleanup.py'), '--new-run', 'shader-catalog',
+        '--planned-bytes', str(768*1024*1024)
     ], cwd=engine, text=True).strip())
     command = [str(args.executable.resolve()), '--compile-catalog',
                str(args.config.resolve()), str(run / 'work')]

@@ -30,6 +30,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[材质组合深度策略验收](../acceptance/nr/material-viewquad-production.md)通过严格四帧及深度回退。
+同宿主候选 GPU 均值减少约 14.72%。
+候选受峰值工作集及 GPU P95 门槛约束，标准构建采用参考族。
+
 [场景参考相机主线验收](../acceptance/nr/scene-reference-camera-main-integration.md)通过双配置三十四项检查。
 实际移动误差约为 0.000105427 像素，重采原始四帧精确一致。
 生产绘制及拾取绑定继续推进，性能组合按独立单元接入。

@@ -9,6 +9,8 @@
 #include "render/SampledTextureCache.hpp"
 #include "foundation/ImmutableBytes.hpp"
 #include "render/MaterialPipelinePolicy.hpp"
+#include "render/ComputedMaterialView.hpp"
+#include <atomic>
 #include "render/StableDepthOrder.hpp"
 #include "render/TransparentTopology.hpp"
 #include "render/GpuTransparentIndexSort.hpp"
@@ -119,6 +121,14 @@ private:
     std::vector<std::pair<VkPipeline,VkPipeline>> materialUvPipelines_;
     bool materialUvNeeded_=false;
     std::uint32_t materialUvClassesNeeded_=0;
+    void initializeComputedMaterialView(const RenderContext&);
+    void prepareComputedMaterialViewPipeline(VkPipeline,const rhi::GraphicsPipelineDesc&);
+    VkPipeline computedMaterialViewPipeline(VkPipeline) const;
+    void destroyComputedMaterialViewPipelines() noexcept;
+    ComputedMaterialViewCapabilities computedMaterialViewCapabilities_;
+    std::vector<std::pair<VkPipeline,VkPipeline>> computedMaterialViewPipelines_;
+    mutable std::atomic<std::uint64_t> computedMaterialViewRequests_{0},computedMaterialViewSelections_{0};
+    std::string computedMaterialViewFallback_;
     VkShaderModule createMaterialShaderModule(const std::string&);
     void destroyMaterialShaderModule(VkShaderModule);
     VkPipeline createMaterialGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
@@ -176,6 +186,7 @@ private:
     std::uint64_t decodedMaterialPixelBytes_=0;
     void uploadMaterialTexture(LoadedAsset& asset,std::vector<GpuMaterial>& materials,std::size_t index,unsigned slot);
     static constexpr std::size_t kMaxFramesInFlight = 2;
+    std::array<bool,kMaxFramesInFlight> computedMaterialViewFrame_{};
     static constexpr std::uint32_t kClusterGridX = 16;
     static constexpr std::uint32_t kClusterGridY = 9;
     static constexpr std::uint32_t kClusterGridZ = 24;

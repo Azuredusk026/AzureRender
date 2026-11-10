@@ -159,7 +159,7 @@ VkPipeline CharacterSceneRenderer::materialLightingPipeline(const AssetMaterial&
             [&](const auto& entry){return entry.first==scene;});
         if(found!=defaultIsolationPipelines_.end())return found->second;
     }
-    return scene;
+    return computedMaterialViewPipeline(scene);
 }
 void CharacterSceneRenderer::destroyMaterialLightingPipelines() noexcept {
     destroyMaterialUvPipelines();

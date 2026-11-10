@@ -1,5 +1,8 @@
 # 项目现状
 
+[材质组合深度策略](acceptance/nr/material-viewquad-production.md)通过双设备边界检查及严格四帧。
+候选采用显式构建选项，正式帧预算及内存继续验收。
+
 [材质纹理梯度主线接入](acceptance/nr/material-uv-main-integration.md)通过双配置及两设备复验。
 十八项检查、六组主线设备检查和严格四帧通过，正式整体条件继续验收。
 
