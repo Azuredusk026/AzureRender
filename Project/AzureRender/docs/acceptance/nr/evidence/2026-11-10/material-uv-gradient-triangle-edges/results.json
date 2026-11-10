@@ -1,0 +1,234 @@
+{
+  "status": "qualified-triangle-edge-helper-coverage",
+  "baseCommit": "7fd29cc",
+  "configurations": 2,
+  "devices": 2,
+  "pixelsPerBatch": 8716,
+  "componentsPerBatch": 34864,
+  "totalComponents": 139456,
+  "outsidePrimitiveHelperPixelsPerBatch": 81,
+  "rows": [
+    {
+      "configuration": "release",
+      "device": "nvidia",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureMaterialUvGradientsGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\material_uv_gradients_test.vert.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\material_uv_gradients_test.frag.spv"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "release",
+      "device": "intel",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzureMaterialUvGradientsGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\material_uv_gradients_test.vert.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\shaders\\material_uv_gradients_test.frag.spv"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "nvidia",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureMaterialUvGradientsGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\material_uv_gradients_test.vert.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\material_uv_gradients_test.frag.spv"
+      ],
+      "validationClean": true
+    },
+    {
+      "configuration": "debug",
+      "device": "intel",
+      "exitCode": 0,
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\AzureMaterialUvGradientsGpuTests.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\material_uv_gradients_test.vert.spv",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug\\shaders\\material_uv_gradients_test.frag.spv"
+      ],
+      "validationClean": true
+    }
+  ],
+  "defaultIdentity": "Player and production shaders unchanged; same source scope as 7fd29cc",
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 39.71899999998277,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-140647-material-uv-gradient-triangle-edges-4f6c43\\checks.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-140647-material-uv-gradient-triangle-edges-4f6c43\\tmp"
+  },
+  "archiveBytes": 21802,
+  "archiveSha256": "093a2e8c3a8f79f2378f811ae91a9cae7e4aadc5df497c0c815b5ce272861d32",
+  "members": [
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "961e1ec5b5bf243df5b7b7666e9022d034fa1cb4ca6f6ed83c56d854d6f322bf"
+    },
+    {
+      "path": "build.py",
+      "bytes": 1100,
+      "sha256": "2e3f56b3784d2b18ab690f455dbdf66df3de18000c15b9e84ec3b4ab56130217"
+    },
+    {
+      "path": "checks.py",
+      "bytes": 653,
+      "sha256": "d5e8de179d7875486af7dcc39bf038b2c776ce9c14b75ae5bef0176cd4e22ead"
+    },
+    {
+      "path": "debug-build-execution.json",
+      "bytes": 595,
+      "sha256": "e6a275a615f92d321f922fc46cff42c34e175bcf0116708a8a52ae326cee9f1a"
+    },
+    {
+      "path": "debug-final-build-commands.json",
+      "bytes": 690,
+      "sha256": "c4264583da1a7bb6c17f9853e21bbabd896cb4fc1098f5fb4baf00079b0a4ef2"
+    },
+    {
+      "path": "debug-final-build.log",
+      "bytes": 567,
+      "sha256": "39a78360449f177fd41c38e8d0b24447cc09928c78fe4b4bdd697189de4004f7"
+    },
+    {
+      "path": "debug-intel-gpu.log",
+      "bytes": 197,
+      "sha256": "a2724052b0dda75210f6ec94e4b7494f2b89dd5550e4a9ac1f17f02e3d8f0a63"
+    },
+    {
+      "path": "debug-nvidia-gpu.log",
+      "bytes": 183,
+      "sha256": "9c42415404eb766c51912ec882146b2b36c5fe934d58740d804c5f641893c553"
+    },
+    {
+      "path": "finalbatch-execution.json",
+      "bytes": 595,
+      "sha256": "508f2ec227bb87bb6be90f41d8cb3900b93bd974196185358a715794bd38659a"
+    },
+    {
+      "path": "frozen-source.json",
+      "bytes": 561,
+      "sha256": "bd87e7f8b32be98fc1bf2051307417932597f5d4b145ebf0ad77ab3f1df55e8a"
+    },
+    {
+      "path": "gpu-results.json",
+      "bytes": 2775,
+      "sha256": "f3685a9cdfdebef2269b66cd0e50f06516df03db86f7efff5372183387719787"
+    },
+    {
+      "path": "gpu.py",
+      "bytes": 1585,
+      "sha256": "f83f17043b9ca4a93ac5b871bd522985244ddc63294bbff1107fc15a6497d26b"
+    },
+    {
+      "path": "process.log",
+      "bytes": 830,
+      "sha256": "6c267db5264734eb277b45f4834db0c2a9828f03e4c8333e6f9d709c0849d017"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 963,
+      "sha256": "44e22bdb36b682b1cc23712fdf44fff615be58c56b6e48d5720679476bd526bb"
+    },
+    {
+      "path": "release-build-execution.json",
+      "bytes": 598,
+      "sha256": "86de460f8b6f2c658a88db5e554270b7d4722715df8153f07616028673f7ce74"
+    },
+    {
+      "path": "release-final-build-commands.json",
+      "bytes": 696,
+      "sha256": "79342a64f2f65a00a2a3d3da964d5d45de064bdc55c084b41af9aaae7acb6db9"
+    },
+    {
+      "path": "release-final-build.log",
+      "bytes": 570,
+      "sha256": "31f7fc9046c05b25189368e3c73519ffb813f2016627dbd0dfe6882b2068f6d0"
+    },
+    {
+      "path": "release-intel-gpu.log",
+      "bytes": 197,
+      "sha256": "a2724052b0dda75210f6ec94e4b7494f2b89dd5550e4a9ac1f17f02e3d8f0a63"
+    },
+    {
+      "path": "release-nvidia-gpu.log",
+      "bytes": 183,
+      "sha256": "9c42415404eb766c51912ec882146b2b36c5fe934d58740d804c5f641893c553"
+    },
+    {
+      "path": "results.json",
+      "bytes": 3874,
+      "sha256": "1c81fb003e5df93745d8ce3877961c2235ee59475ae3f5164f20976d23fdd2cb"
+    },
+    {
+      "path": "task-card.json",
+      "bytes": 337,
+      "sha256": "769ca18005dc140f9890f7c3ac4ded8f37b394b4b32ab4e476e3cdd4869ddcab"
+    },
+    {
+      "path": "source/tests/MaterialUvGradientsGpuTests.cpp",
+      "bytes": 7418,
+      "sha256": "67ce6bc068b8b4178973133b62d78079e16dfc6e2c9d60ff3ac09a31b8020abe"
+    },
+    {
+      "path": "source/shaders/material_uv_gradients_test.vert",
+      "bytes": 340,
+      "sha256": "3ada24db0bac0561b94414b1b31df5b77c67db99bc334a824212065e976ce983"
+    },
+    {
+      "path": "source/shaders/material_uv_gradients_test.frag",
+      "bytes": 555,
+      "sha256": "ed06f07d5c46fc43165081f4560669b7cec5e72c0db9800e672f8b472d06cddf"
+    },
+    {
+      "path": "source/shaders/material_uv_gradients.glsl",
+      "bytes": 456,
+      "sha256": "4fedaff4522fa5ba7dff837cefb57fc37dc3e1263e96a5801d4486532a5043ba"
+    },
+    {
+      "path": "source/src/render/MaterialUvGradients.hpp",
+      "bytes": 1445,
+      "sha256": "3d36d9ae2aa59631f9671e1bca3f42bc2ea1486d10ee94d43ce6349efc5b0577"
+    },
+    {
+      "path": "source/docs/runtime/material-uv-gradients.md",
+      "bytes": 2480,
+      "sha256": "6ee049fdd2e6c44c643d855c443568ee449bfaefe88bb4a9bcf4bab61680b434"
+    },
+    {
+      "path": "source/docs/acceptance/nr/material-uv-gradients.md",
+      "bytes": 2807,
+      "sha256": "41770ad513f1146babf12094cd7a58682af13ed83344da1a0ad5646f7d422f0a"
+    },
+    {
+      "path": "release-actual.vert.spv",
+      "bytes": 1940,
+      "sha256": "d394d444b7b951559b4ddce9fa04e729ce640af30eea40ebc7d5b467a34bbd2e"
+    },
+    {
+      "path": "release-actual.frag.spv",
+      "bytes": 2420,
+      "sha256": "77c25bbacbd79196457c5401f8d7c6cd68ffb7c369ceb3ebff464e01d79af515"
+    },
+    {
+      "path": "debug-actual.vert.spv",
+      "bytes": 1940,
+      "sha256": "d394d444b7b951559b4ddce9fa04e729ce640af30eea40ebc7d5b467a34bbd2e"
+    },
+    {
+      "path": "debug-actual.frag.spv",
+      "bytes": 2420,
+      "sha256": "77c25bbacbd79196457c5401f8d7c6cd68ffb7c369ceb3ebff464e01d79af515"
+    }
+  ]
+}

@@ -22,8 +22,15 @@
 每种尺寸分别核对完整绘制及计算梯度后丢弃片元。
 清除值和保留片元均按四通道单精度位值比较。
 
-两配置、双设备各核对 4358 个像素。
-每批 17432 个分量逐位一致，四批共 69728 个。
+全屏及斜边三角形分别执行全部尺寸和丢弃组合。
+两配置、双设备各核对 8716 个像素。
+每批 34864 个分量逐位一致，四批共 139456 个。
+每批有 81 个保留像素的指定来源位于三角形外。
+
+这些位置核对由辅助调用提供的梯度。
+CPU 按像素中心与三角形顶左规则计算覆盖。
+三角形外部及丢弃位置维持清除值。
+生产调用仍须在一致控制流和丢弃前计算。
 实际设备为 NVIDIA RTX 4060 Laptop 及 Intel RaptorLake-S。
 全部日志无验证错误，资源销毁后验证计数为零。
 
@@ -49,3 +56,6 @@ Vulkan 1.3 目标另引入未启用的丢弃降级能力。
 [结果清单](evidence/2026-11-10/material-uv-gradients/results.json)
 与[验证归档](evidence/2026-11-10/material-uv-gradients/validation.zip)
 保存公共源码、实际执行、身份复核及失败诊断。
+
+斜边补验的[结果清单](evidence/2026-11-10/material-uv-gradient-triangle-edges/results.json)
+与[验证归档](evidence/2026-11-10/material-uv-gradient-triangle-edges/validation.zip)保存四批执行与源码。

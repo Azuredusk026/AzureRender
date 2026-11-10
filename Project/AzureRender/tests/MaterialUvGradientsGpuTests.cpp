@@ -34,17 +34,18 @@ int main(int argc,char** argv)try{
     readback=host.allocator.createBuffer(33*35*16,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
     rhi::RenderPassDesc description;description.attachments={{format,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,true,true,false}};
     pass=backend.createRenderPass(description);framebuffer=backend.createFramebuffer({pass,{view},33,35});
-    set=backend.createDescriptorSetLayout({});const rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_FRAGMENT_BIT,4};
+    set=backend.createDescriptorSetLayout({});const rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,4};
     layout=backend.createPipelineLayout(set,&push);vertex=backend.createShaderModule(readBinaryFile(argv[1]));fragment=backend.createShaderModule(readBinaryFile(argv[2]));
     rhi::GraphicsPipelineDesc graphics;graphics.vertexShader=vertex;graphics.fragmentShader=fragment;graphics.cullMode=VK_CULL_MODE_NONE;
     graphics.renderPass=pass;graphics.layout=layout;graphics.depthTest=false;graphics.depthWrite=false;graphics.colorAttachmentCount=1;
-    pipeline=backend.createGraphicsPipeline(graphics);unsigned pixels=0;
-    for(const auto extent:{VkExtent2D{32,32},VkExtent2D{33,35}})for(unsigned discard=0;discard<2;++discard){
+    pipeline=backend.createGraphicsPipeline(graphics);unsigned pixels=0,edgeHelperPixels=0;
+    for(const auto extent:{VkExtent2D{32,32},VkExtent2D{33,35}})for(unsigned shape=0;shape<2;++shape)for(unsigned discard=0;discard<2;++discard){
+        const unsigned flags=discard|(shape<<1);
         host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer raw){
             rhi::RenderPassBeginDesc begin;begin.renderPass=pass;begin.framebuffer=framebuffer;begin.extent=extent;begin.clearValues.resize(1);
             for(auto& channel:begin.clearValues[0].color.float32)channel=-1;
             commands.beginRenderPass(begin);commands.setViewport(static_cast<float>(extent.width),static_cast<float>(extent.height));commands.setScissor(extent);commands.bindPipeline(pipeline);
-            commands.pushConstants(layout,VK_SHADER_STAGE_FRAGMENT_BIT,0,&discard,4);commands.draw(3);commands.endRenderPass();
+            commands.pushConstants(layout,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&flags,4);commands.draw(3);commands.endRenderPass();
             rhi::ImageBarrierDesc barrier;barrier.image=image.image;barrier.aspectMask=VK_IMAGE_ASPECT_COLOR_BIT;
             barrier.oldLayout=VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;barrier.newLayout=VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
             barrier.srcStageMask=VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;barrier.dstStageMask=VK_PIPELINE_STAGE_TRANSFER_BIT;
@@ -58,13 +59,19 @@ int main(int argc,char** argv)try{
         host.allocator.invalidate(readback,0,readback.size);const auto values=static_cast<const std::array<float,4>*>(readback.mapped);
         for(unsigned y=0;y<extent.height;++y)for(unsigned x=0;x<extent.width;++x){
             const float dx=(float((y/2)*2)+1.5F)/1024.F,dy=(float((x/2)*2)+.5F)/1024.F;
-            std::array<float,4> expected{dx,-2*dx,dy,-2*dy};if(discard&&((x+y)&3U)==0)expected.fill(-1);
+            const auto covered=[&](unsigned px,unsigned py){return !shape||((2*px+1)*extent.height+(2*py+1)*extent.width<2*extent.width*extent.height);};
+            const bool retained=covered(x,y)&&!(discard&&((x+y)&3U)==0);
+            std::array<float,4> expected{dx,-2*dx,dy,-2*dy};if(!retained)expected.fill(-1);
+            if(shape&&retained){const unsigned qx=(x/2)*2,qy=(y/2)*2;
+                if(!covered(qx,qy)||!covered(qx,qy+1)||!covered(qx+1,qy+1))++edgeHelperPixels;
+            }
             const auto& actual=values[y*extent.width+x];if(std::memcmp(expected.data(),actual.data(),16)!=0)
                 throw std::runtime_error("UV gradient raster mismatch at "+std::to_string(x)+","+std::to_string(y)+" discard="+std::to_string(discard));
             ++pixels;
         }
     }
+    if(edgeHelperPixels==0)throw std::runtime_error("Triangle-edge helper invocation coverage is empty");
     cleanup.reset();if(host.errors.load())throw std::runtime_error("UV gradient Vulkan validation errors");
-    std::cout<<host.properties.deviceName<<": "<<pixels<<" pixels / "<<pixels*4<<" exact components; even/odd extents, post-gradient discard, capability rejects passed\n";
+    std::cout<<host.properties.deviceName<<": "<<pixels<<" pixels / "<<pixels*4<<" exact components; "<<edgeHelperPixels<<" retained triangle-edge helper pixels; even/odd extents, post-gradient discard, capability rejects passed\n";
     return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}
