@@ -9,6 +9,7 @@
 #include <vector>
 
 namespace azurerender {
+class ImmutableBytes;
 
 // Borrowed descriptor values. The cache owns the native objects until clear().
 struct SampledTextureBinding {
@@ -37,6 +38,8 @@ struct SampledTextureCacheStatistics {
     std::uint64_t hashedPixelBytes = 0, copiedPixelBytes = 0, transferredPixelBytes = 0, discardedPixelBytes = 0;
     std::uint64_t releasedIdentityBytes = 0;
     std::uint64_t channelSavedBytes = 0, compactedTextures = 0;
+    std::uint64_t referencedPixelBytes = 0;
+    std::uint64_t retainedIdentityStorageBytes = 0, releasedIdentityStorageBytes = 0;
     double hashMs = 0, matchMs = 0, mipMs = 0, uploadMs = 0;
 };
 
@@ -56,6 +59,8 @@ public:
     // Misses transfer the identity bytes; hits release redundant storage.
     SampledTextureBinding acquire(std::vector<std::uint8_t>&& pixels,
                                   const SampledTextureUpload& upload);
+    SampledTextureBinding acquirePrepared(std::shared_ptr<const ImmutableBytes> pixels,
+                                  const SampledTextureUpload& upload);
     // Finish acquisition and release CPU comparison bytes. Existing bindings
     // keep their native objects; further acquire calls fail without mutation.
     // Idempotent and serialized with acquire. clear() starts a writable cycle.
@@ -67,7 +72,8 @@ public:
 private:
     SampledTextureBinding acquireImpl(const std::vector<std::uint8_t>& pixels,
                                      const SampledTextureUpload& upload,
-                                     std::vector<std::uint8_t>* consumed);
+                                     std::vector<std::uint8_t>* consumed,
+                                     std::shared_ptr<const ImmutableBytes> prepared={});
     struct Entry;
     rhi::IGpuAllocator& allocator_;
     rhi::IRhi& rhi_;

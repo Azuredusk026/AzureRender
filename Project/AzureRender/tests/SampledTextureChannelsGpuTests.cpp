@@ -1,5 +1,6 @@
 #include "support/VulkanComputeFixture.hpp"
 #include "render/SampledTextureCache.hpp"
+#include "foundation/ImmutableBytes.hpp"
 #include "resources/BinaryFile.hpp"
 #include <array>
 #include <cstring>
@@ -27,8 +28,9 @@ int main(int argc,char** argv) try {
     r.writeDescriptorBuffer({set,2,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,output.buffer,output.size});
     layout=r.createPipelineLayout(setLayout,nullptr);shader=r.createShaderModule(readBinaryFile(argv[1]));
     pipeline=r.createComputePipeline({shader,layout});
-    unsigned cases=0,compacted=0;
-    for(const auto size:std::array<std::array<unsigned,2>,3>{{{4,4},{3,1},{7,5}}})
+    unsigned cases=0,compacted=0,compressedInputs=0;
+    ImmutableBytePool bytePool;
+    for(const auto size:std::array<std::array<unsigned,2>,4>{{{4,4},{3,1},{7,5},{256,256}}})
     for(unsigned pattern=0;pattern<9;++pattern)for(unsigned filter=0;filter<3;++filter)
     for(auto address:{VK_SAMPLER_ADDRESS_MODE_REPEAT,VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE})
     for(unsigned anisotropy:{1U,8U}) {
@@ -57,7 +59,9 @@ int main(int argc,char** argv) try {
         u.sampler.addressU=u.sampler.addressV=u.sampler.addressW=address;
         u.sampler.maxAnisotropy=float(anisotropy);u.sampler.mipLodBias=filter==2?-.375F:0;
         SampledTextureCache original(host.allocator,r,false),compact(host.allocator,r,true);
-        const auto a=original.acquire(pixels,u),b=compact.acquire(pixels,u);
+        const auto prepared=bytePool.intern(pixels);
+        compressedInputs+=prepared->compressed()?1U:0U;
+        const auto a=original.acquire(pixels,u),b=compact.acquirePrepared(prepared,u);
         if(pattern!=5&&pattern!=6&&compact.statistics().compactedTextures!=1)
             throw std::runtime_error("Expected linear channel case must exercise compact representation");
         compacted+=unsigned(compact.statistics().compactedTextures);
@@ -77,6 +81,7 @@ int main(int argc,char** argv) try {
     if(host.allocator.statistics().liveImages||host.allocator.statistics().liveBuffers)throw std::runtime_error("GPU allocations remain live");
     const std::string device=host.properties.deviceName;
     host.close();if(host.errors.load())throw std::runtime_error("Vulkan validation warning or error");
-    std::cout<<"PASS "<<device<<" cases="<<cases<<" compacted="<<compacted<<" bitComparisons="<<std::uint64_t(cases)*samples*4<<" validation=0 liveAllocations=0\n";
+    if(compressedInputs!=162)throw std::runtime_error("Both raw and compressed immutable GPU inputs are required");
+    std::cout<<"PASS "<<device<<" cases="<<cases<<" compacted="<<compacted<<" compressedInputs="<<compressedInputs<<" bitComparisons="<<std::uint64_t(cases)*samples*4<<" validation=0 liveAllocations=0\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

@@ -29,6 +29,7 @@
 [冻结纹理通道](docs/acceptance/nr/texture-channel-scope.md)记录 468 份唯一源图像的通道关系，实际驻留收益独立验收。
 [线性通道存储](docs/acceptance/nr/linear-texture-channel-storage.md)通过双设备及原四帧，107 份纹理减少约 303 MB 纹素存储，正式内存及帧预算持续待验。
 [像素无损容量](docs/acceptance/nr/texture-payload-compression-scope.md)完成 468 份源基础层的还原核查，[预备载荷计划](docs/plans/2026-11-10-prepared-pixel-payloads.md)继续处理加载期持有范围。
+[不可变载荷入口](docs/acceptance/nr/immutable-byte-payloads.md)通过双配置所属回归及双设备输入等价，实际加载接入继续实施。
 级联归属修复使静止局部灯的首帧与绑定路径保持一致，原始四帧继续零差。
 [运动矢量绑定](docs/acceptance/nr/motion-descriptor-reuse.md)按帧槽复用稳定资源，所属十项检查及原生四帧核对通过。
 [展示照明按需计算](docs/acceptance/nr/presentation-environment-demand.md)的候选未达区间效率门槛，生产已恢复受检内容。

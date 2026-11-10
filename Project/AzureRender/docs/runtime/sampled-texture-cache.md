@@ -50,8 +50,21 @@ GPU 资源沿缓存清空和销毁边界释放。
 唯一内容直接移交缓存，重复内容释放源分配。
 校验或上传失败时，源像素保持完整。
 
+`acquirePrepared` 接收[共享不可变载荷](immutable-byte-payloads.md)。
+调用者保留独立只读所有权，缓存引用身份载荷。
+载荷与向量输入按完整内容支持双向共享。
+上传使用还原字节及相同的有效上传参数。
+
+`retainedPixelBytes` 计量身份的逻辑字节。
+`referencedPixelBytes` 记录载荷入口的唯一申请字节。
+`retainedIdentityStorageBytes` 计量身份引用的缓冲容量。
+`releasedIdentityStorageBytes` 记录解除引用的容量。
+
+共享载荷可由独立所有者继续持有。
+身份引用容量与实际进程释放量分别计量。
+
 宿主完成全部共享申请后调用 `seal()`。
-该操作释放 CPU 身份分配，保持全部 GPU 对象和绑定。
+该操作解除 CPU 身份持有，保持全部 GPU 对象和绑定。
 结束写入具有幂等性，支持空缓存。
 `sealed()` 用于查询当前写入状态。
 

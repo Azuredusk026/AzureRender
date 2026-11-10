@@ -1,4 +1,5 @@
 #include "render/SampledTextureCache.hpp"
+#include "foundation/ImmutableBytes.hpp"
 
 #include <cmath>
 #include <chrono>
@@ -12,17 +13,7 @@ namespace {
 std::uint32_t contentBucket(const std::vector<std::uint8_t>& pixels) {
     // This is only a bucket selector. Exact bytes and every effective upload
     // parameter are compared before a binding can be reused.
-    std::uint32_t hash=2166136261U;
-    // Word loads reduce the serial multiply chain. memcpy permits unaligned
-    // input and reads only complete words; every remaining byte is included.
-    std::size_t offset=0;
-    for(;pixels.size()-offset>=sizeof(std::uint32_t);offset+=sizeof(std::uint32_t)) {
-        std::uint32_t word;
-        std::memcpy(&word,pixels.data()+offset,sizeof(word));
-        hash=(hash^word)*16777619U;
-    }
-    for(;offset<pixels.size();++offset)hash=(hash^pixels[offset])*16777619U;
-    return hash;
+    return immutableBytesBucket(pixels);
 }
 struct TimedSection {
     double& elapsed;
@@ -104,6 +95,7 @@ struct SampledTextureCache::Entry {
     rhi::IRhi& rhi;
     SampledTextureUpload upload;
     std::vector<std::uint8_t> pixels;
+    std::shared_ptr<const ImmutableBytes> prepared;
     rhi::GpuImage image;
     VkImageView view=VK_NULL_HANDLE;
     VkSampler sampler=VK_NULL_HANDLE;
@@ -130,7 +122,8 @@ SampledTextureBinding SampledTextureCache::acquire(std::vector<std::uint8_t>&& p
 }
 SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::uint8_t>& pixels,
                                                      const SampledTextureUpload& request,
-                                                     std::vector<std::uint8_t>* consumed) {
+                                                     std::vector<std::uint8_t>* consumed,
+                                                     std::shared_ptr<const ImmutableBytes> prepared) {
     if(sealed_)throw std::logic_error("Sampled texture cache acquisition has finished");
     if(!request.width||!request.height
         ||request.width>std::numeric_limits<std::size_t>::max()/request.height/4)
@@ -167,14 +160,17 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     auto effective=request;
     effective.sampler.maxLod=std::min(effective.sampler.maxLod,float(levels-1));
     std::uint32_t bucket;
-    {TimedSection timer{statistics_.hashMs};bucket=contentBucket(pixels);}
-    statistics_.hashedPixelBytes+=pixels.size();
+    {TimedSection timer{statistics_.hashMs};bucket=prepared?prepared->bucket():contentBucket(pixels);}
+    if(!prepared)statistics_.hashedPixelBytes+=pixels.size();
     {
     TimedSection timer{statistics_.matchMs};
     const auto matches=entries_.equal_range(bucket);
     for(auto at=matches.first;at!=matches.second;++at) {
         const auto& found=*at->second;
-        if(sameUpload(found.upload,effective)&&found.pixels==pixels) {
+        if(!sameUpload(found.upload,effective))continue;
+        const bool sameIdentity=found.prepared?(prepared?found.prepared->equals(*prepared):found.prepared->equals(pixels))
+            :found.pixels==pixels;
+        if(sameIdentity) {
             ++statistics_.requests;++statistics_.hits;statistics_.requestedBytes+=residentBytes;
             if(consumed) {
                 statistics_.discardedPixelBytes+=consumed->size();
@@ -235,26 +231,39 @@ SampledTextureBinding SampledTextureCache::acquireImpl(const std::vector<std::ui
     }
     const SampledTextureBinding result{entry->view,entry->sampler};
     const auto inputBytes=pixels.size();
-    if(!consumed)entry->pixels=pixels;
+    if(prepared)entry->prepared=std::move(prepared);
+    else if(!consumed)entry->pixels=pixels;
     const auto inserted=entries_.emplace(bucket,std::move(entry));
     if(consumed) {
         inserted->second->pixels.swap(*consumed);
         statistics_.transferredPixelBytes+=inputBytes;
-    }else statistics_.copiedPixelBytes+=inputBytes;
+    }else if(inserted->second->prepared)statistics_.referencedPixelBytes+=inputBytes;
+    else statistics_.copiedPixelBytes+=inputBytes;
     ++statistics_.requests;++statistics_.uniqueTextures;
     statistics_.requestedBytes+=residentBytes;statistics_.residentBytes+=physicalBytes;
     statistics_.channelSavedBytes+=residentBytes-physicalBytes;
     if(packing.count<4)++statistics_.compactedTextures;
     statistics_.retainedPixelBytes+=inputBytes;
+    statistics_.retainedIdentityStorageBytes+=inserted->second->prepared?inserted->second->prepared->storedBytes():inserted->second->pixels.capacity();
     return result;
 }
 
 void SampledTextureCache::seal() noexcept {
     if(sealed_)return;
-    for(auto& item:entries_)std::vector<std::uint8_t>{}.swap(item.second->pixels);
+    for(auto& item:entries_){std::vector<std::uint8_t>{}.swap(item.second->pixels);item.second->prepared.reset();}
     statistics_.releasedIdentityBytes+=statistics_.retainedPixelBytes;
+    statistics_.releasedIdentityStorageBytes+=statistics_.retainedIdentityStorageBytes;
     statistics_.retainedPixelBytes=0;
+    statistics_.retainedIdentityStorageBytes=0;
     sealed_=true;
+}
+
+SampledTextureBinding SampledTextureCache::acquirePrepared(std::shared_ptr<const ImmutableBytes> prepared,
+                                                 const SampledTextureUpload& request) {
+    if(sealed_)throw std::logic_error("Sampled texture cache acquisition has finished");
+    if(!prepared)throw std::invalid_argument("Immutable texture payload is required");
+    auto pixels=prepared->read();
+    return acquireImpl(pixels,request,nullptr,std::move(prepared));
 }
 void SampledTextureCache::clear() noexcept { entries_.clear(); statistics_ = {}; sealed_=false; }
 }

@@ -1,9 +1,12 @@
 #include "render/SampledTextureCache.hpp"
+#include "foundation/ImmutableBytes.hpp"
 #include "rhi/NullRhi.hpp"
 
 #include <algorithm>
 #include <cstring>
 #include <functional>
+#include <future>
+#include <type_traits>
 #include <iostream>
 #include <limits>
 #include <stdexcept>
@@ -303,6 +306,58 @@ void compact_failure_ownership() {
         &&cache.statistics().channelSavedBytes==0&&r.allocator().statistics().liveImages==0,"Packed upload failure preserves input, resources and counters");
 }
 
+void immutable_payload_roundtrip() {
+    static_assert(!std::is_copy_constructible_v<ImmutableBytes>&&!std::is_copy_assignable_v<ImmutableBytes>);
+    ImmutableBytePool pool;std::vector<std::uint8_t> source(128*1024,37);const auto original=source;
+    auto a=pool.intern(source);require(source==original&&a->compressed()&&a->storedBytes()<source.size()/8,"Prepared payload compresses without changing its caller");
+    require(a->read()==original&&a->equals(original),"Immutable compressed payload restores exact bytes");
+    auto first=std::async(std::launch::async,[a]{return a->read();});
+    auto second=std::async(std::launch::async,[a]{return a->read();});
+    require(first.get()==original&&second.get()==original,"Independent reads restore one immutable payload concurrently");
+    auto b=pool.intern(source);require(a==b&&pool.statistics().livePayloads==1,"Equal complete bytes share one immutable payload");
+    source.back()=38;auto c=pool.intern(source);require(c!=a&&!c->equals(original)&&a->read()==original,"Independent source edits preserve earlier payloads");
+    a.reset();b.reset();require(pool.statistics().livePayloads==1,"Weak pool does not retain abandoned payloads");
+    c.reset();require(pool.statistics().storedBytes==0,"No live payload leaves no retained backing");
+    std::vector<std::uint8_t> noise(128*1024);std::uint32_t state=0x6248a13f;
+    for(auto& byte:noise){state^=state<<13;state^=state>>17;state^=state<<5;byte=static_cast<std::uint8_t>(state);}
+    auto raw=pool.intern(noise);require(!raw->compressed()&&raw->read()==noise,"High-entropy bytes retain their complete raw representation");
+}
+void immutable_payload_collision() {
+    ImmutableBytePool pool;
+    std::vector<std::uint8_t> a={0,0,0,0,0,0,0,0};
+    std::vector<std::uint8_t> b={1,0,0,0,147,1,0,1};
+    // Construct a second word that cancels the changed first FNV word.
+    const std::uint32_t prime=16777619U,seed=2166136261U;
+    const auto w=std::uint32_t((seed*prime)^((seed^1U)*prime));std::memcpy(b.data()+4,&w,4);
+    require(immutableBytesBucket(a)==immutableBytesBucket(b),"Fixture must exercise a real bucket collision");
+    auto x=pool.intern(a),y=pool.intern(b);require(x!=y&&x->read()==a&&y->read()==b,"Complete bytes decide pool identity under collisions");
+    auto empty=pool.intern({});require(empty->read().empty()&&!empty->compressed(),"Empty immutable payload is well defined");
+    std::shared_ptr<const ImmutableBytes> retained;
+    {ImmutableBytePool transient;retained=transient.intern(a);}
+    require(retained->read()==a,"Payload lifetime is independent of its weak pool");
+}
+void prepared_cache_identity() {
+    rhi::NullRhi backend;SampledTextureCache cache(backend.allocator(),backend);ImmutableBytePool pool;
+    const auto pixels=checker();auto payload=pool.intern(pixels);auto u=request();u.mipLevels=1;
+    auto a=cache.acquirePrepared(payload,u);auto b=cache.acquire(pixels,u);
+    require(a.view==b.view&&cache.statistics().hits==1,"Prepared and vector inputs retain complete shared identity");
+    require(cache.statistics().referencedPixelBytes==pixels.size()&&cache.statistics().copiedPixelBytes==0
+        &&cache.statistics().retainedIdentityStorageBytes==payload->storedBytes(),"Prepared cache retains shared backing separately from logical identity");
+    cache.clear();a=cache.acquire(pixels,u);b=cache.acquirePrepared(payload,u);
+    require(a.view==b.view&&cache.statistics().hits==1,"Mixed sharing is independent of acquisition order");
+    cache.seal();require(cache.statistics().retainedIdentityStorageBytes==0
+        &&cache.statistics().releasedIdentityStorageBytes>=pixels.size(),"Sealing accounts for the released raw identity backing reference");
+    const auto before=payload->read();reject([&]{cache.acquirePrepared(payload,u);});
+    require(payload->read()==before&&pool.statistics().livePayloads==1,"Sealed cache preserves the independent immutable owner");
+    cache.clear();reject([&]{cache.acquirePrepared(std::shared_ptr<const ImmutableBytes>{},u);});
+    require(cache.statistics().requests==0,"Missing immutable input fails before publishing cache state");
+}
+void prepared_cache_failure() {
+    SamplerFailureRhi r;SampledTextureCache cache(r.allocator(),r);ImmutableBytePool pool;auto data=checker();auto payload=pool.intern(data);
+    reject([&]{cache.acquirePrepared(payload,request());});
+    require(payload->read()==data&&r.allocator().statistics().liveImages==0&&cache.statistics().uniqueTextures==0,"Failed prepared upload preserves source and retires partial GPU ownership");
+}
+
 int main() {
     int failed=0;
     for(const auto& test:std::vector<std::pair<const char*,std::function<void()>>>{
@@ -310,9 +365,9 @@ int main() {
             {"content hash collision",hash_collision},{"invalid input recovery",invalid_inputs},
             {"authored mip bytes",authored_mips},{"partial upload recovery",failed_upload},
             {"transferred input ownership",transferred_inputs},{"complete word and tail identity",complete_content_identity},
-            {"sealed bindings and reopen",sealed_bindings},{"empty sealed lifecycle",sealed_empty_cache},{"compact linear channels",compact_linear_channels},{"complete mip qualification",compact_mip_qualification},{"packed failure ownership",compact_failure_ownership}}) {
+            {"sealed bindings and reopen",sealed_bindings},{"empty sealed lifecycle",sealed_empty_cache},{"compact linear channels",compact_linear_channels},{"complete mip qualification",compact_mip_qualification},{"packed failure ownership",compact_failure_ownership},{"immutable roundtrip",immutable_payload_roundtrip},{"immutable collision",immutable_payload_collision},{"prepared identity",prepared_cache_identity},{"prepared failure",prepared_cache_failure}}) {
         try {test.second();std::cout<<"PASS "<<test.first<<'\n';}
         catch(const std::exception& e) {++failed;std::cerr<<"FAIL "<<test.first<<": "<<e.what()<<'\n';}
     }
-    std::cout<<13-failed<<"/13 sampled texture cache cases passed\n";return failed?1:0;
+    std::cout<<17-failed<<"/17 sampled texture cache cases passed\n";return failed?1:0;
 }

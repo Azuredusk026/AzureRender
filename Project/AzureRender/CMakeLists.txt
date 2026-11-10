@@ -813,6 +813,7 @@ else()
     target_compile_options(AzureBuildOptions INTERFACE -Wall -Wextra -Wpedantic -Werror -Wno-missing-field-initializers)
 endif()
 add_library(AzureFoundation STATIC
+    src/foundation/ImmutableBytes.cpp
     src/foundation/SettingRegistry.cpp
     src/diagnostics/RuntimeDiagnostics.cpp
     src/resources/ResourceLocator.cpp
@@ -1120,6 +1121,7 @@ set(AZURE_HOST_SOURCES
 )
 
 target_link_libraries(AzureFoundation PUBLIC AzureBuildOptions nlohmann_json::nlohmann_json)
+target_link_libraries(AzureFoundation PRIVATE zstd::libzstd)
 target_compile_definitions(AzureFoundation PRIVATE AZURERENDER_DEVELOPMENT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 target_link_libraries(AzurePlatform PUBLIC AzureFoundation Vulkan::Vulkan glfw)
 if(WIN32)
@@ -1599,7 +1601,7 @@ if(BUILD_TESTING)
     set_tests_properties(AzureRender.AlphaMipCoverageGpu PROPERTIES LABELS gpu RUN_SERIAL TRUE TIMEOUT 600)
     add_executable(AzureSampledTextureCacheTests tests/SampledTextureCacheTests.cpp src/render/SampledTextureCache.cpp src/rhi/NullRhi.cpp)
     target_include_directories(AzureSampledTextureCacheTests PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
-    target_link_libraries(AzureSampledTextureCacheTests PRIVATE Vulkan::Vulkan)
+    target_link_libraries(AzureSampledTextureCacheTests PRIVATE AzureFoundation Vulkan::Vulkan)
     add_test(NAME AzureRender.SampledTextureCache COMMAND AzureSampledTextureCacheTests)
     add_executable(AzureSampledTextureChannelsGpuTests tests/SampledTextureChannelsGpuTests.cpp)
     target_link_libraries(AzureSampledTextureChannelsGpuTests PRIVATE AzureRenderCore)
