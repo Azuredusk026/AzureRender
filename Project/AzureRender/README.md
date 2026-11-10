@@ -957,3 +957,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 [原生头发参考光栅](docs/acceptance/nr/native-hair-reference-raster.md)记录实际区域结果。
 组合保留 NVIDIA 43 处及 Intel 597 处颜色超差。
 完整颜色门槛继续验收。
+
+[头发覆盖层级](docs/acceptance/nr/native-hair-coverage-lod.md)记录实际取样对照。
+Intel 已知边界点的误差为两字节，完整区域继续验收。
