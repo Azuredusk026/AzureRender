@@ -757,3 +757,5 @@ $env:VCPKG_ROOT = "D:/Tools/vcpkg"
 编辑器保存、移动重开及发行包入口见[受光表面交付](docs/acceptance/nr/lit-surfaces-delivery.md)。
 完整着色目录与双配置恢复见[重载核验](docs/acceptance/recovery/shader-catalog-reload.md)。
 深度壳的快照顺序及背景法线见[来源核验](docs/acceptance/nr/outline-snapshot-order.md)。
+
+[公共 UV 梯度助手](docs/runtime/material-uv-gradients.md)提供纵向镜像四像素足迹及设备能力校验。
