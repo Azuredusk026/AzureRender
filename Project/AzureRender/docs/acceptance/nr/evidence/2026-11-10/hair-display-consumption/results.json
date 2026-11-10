@@ -1,0 +1,223 @@
+{
+  "status": "qualified-display-transfer-boundary",
+  "maskPixels": 17017,
+  "maximumByteDifference": 1,
+  "pixelsOverOneByte": 0,
+  "differentPixels": 6014,
+  "overallVisualAcceptance": "failed-user-review",
+  "productionChanged": false,
+  "invalidMetadataExport": true,
+  "scope": "Actual frozen HDR and final GPU readbacks compared over the original hair mask. Ideal quarter-exposure/sRGB transfer differs by at most one byte. Unqualified metadata export provides no parameter or sampler conclusions. Material sampling remains unresolved.",
+  "pointModel": {
+    "status": "cpu-display-transfer-prediction-only",
+    "rows": [
+      {
+        "pixel": [
+          1322,
+          262
+        ],
+        "hdr": [
+          0.5234375,
+          0.091796875,
+          0.091796875,
+          1.0
+        ],
+        "idealEncoded": [
+          0.3971207892066265,
+          0.16389663579424585,
+          0.16389663579424585
+        ],
+        "idealByteUnrounded": [
+          101.26580124768977,
+          41.79364212753269,
+          41.79364212753269
+        ],
+        "idealBytes": [
+          101,
+          42,
+          42
+        ],
+        "actualBytes": [
+          101,
+          42,
+          42
+        ]
+      },
+      {
+        "pixel": [
+          1322,
+          263
+        ],
+        "hdr": [
+          0.5703125,
+          0.115234375,
+          0.123046875,
+          1.0
+        ],
+        "idealEncoded": [
+          0.41357002299950635,
+          0.18565043498858783,
+          0.1923186544962621
+        ],
+        "idealByteUnrounded": [
+          105.46035586487412,
+          47.340860922089895,
+          49.041256896546834
+        ],
+        "idealBytes": [
+          105,
+          47,
+          49
+        ],
+        "actualBytes": [
+          106,
+          47,
+          49
+        ]
+      },
+      {
+        "pixel": [
+          1306,
+          156
+        ],
+        "hdr": [
+          3.21875,
+          0.6796875,
+          0.59375,
+          1.0
+        ],
+        "idealEncoded": [
+          0.9086747560633918,
+          0.4491073131130054,
+          0.42149934282853063
+        ],
+        "idealByteUnrounded": [
+          231.7120627961649,
+          114.52236484381638,
+          107.48233242127532
+        ],
+        "idealBytes": [
+          232,
+          115,
+          107
+        ],
+        "actualBytes": [
+          232,
+          115,
+          108
+        ]
+      },
+      {
+        "pixel": [
+          1284,
+          211
+        ],
+        "hdr": [
+          1.78125,
+          0.6328125,
+          0.640625,
+          1.0
+        ],
+        "idealEncoded": [
+          0.69811765520612,
+          0.4343189860053184,
+          0.43682705403343824
+        ],
+        "idealByteUnrounded": [
+          178.0200020775606,
+          110.75134143135618,
+          111.39089877852675
+        ],
+        "idealBytes": [
+          178,
+          111,
+          111
+        ],
+        "actualBytes": [
+          178,
+          111,
+          111
+        ]
+      }
+    ]
+  },
+  "archiveBytes": 252582,
+  "archiveSha256": "c20c6e8f6333a708522b76b1f949ad34244e25ec11574a19689c1f5714894a17",
+  "archiveFiles": [
+    {
+      "path": "budget.json",
+      "bytes": 436,
+      "sha256": "fc7d0ed6637fabab621cf58b5dbbba23dd30d6e65d3b1106ac737a8f87a5fda8"
+    },
+    {
+      "path": "collect.py",
+      "bytes": 2300,
+      "sha256": "2982c59672eeaf9a2fba75ac511e84b0ce3535033246b56377f6b7018a90cfcc"
+    },
+    {
+      "path": "display-point-model.json",
+      "bytes": 2331,
+      "sha256": "c16f9800d97aa00bdf0bc1476d5f4c5941a459874d800ea344b63dc3c893b5d9"
+    },
+    {
+      "path": "display-region-comparison.json",
+      "bytes": 172,
+      "sha256": "eac962a4ba19ae8bef5758cb9766dd78f3a4dccad9264f4132221ee45a7ad6b0"
+    },
+    {
+      "path": "driver-candidate.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "execution.json",
+      "bytes": 571,
+      "sha256": "387af90f03de663cff0941964390b76fe6fa305414b865b37666d0233ccd1984"
+    },
+    {
+      "path": "invalid-entry-collect.py",
+      "bytes": 2208,
+      "sha256": "5a8e5f40d6367974f76b17e0b67216a2aaf04680220b4aea46f6b92968fb1305"
+    },
+    {
+      "path": "invalid-entry-execution.json",
+      "bytes": 571,
+      "sha256": "387af90f03de663cff0941964390b76fe6fa305414b865b37666d0233ccd1984"
+    },
+    {
+      "path": "process.log",
+      "bytes": 997,
+      "sha256": "595a76487c51e2a6cf12d1042ac968512570be1c644b11989080df803fc82755"
+    },
+    {
+      "path": "queued.py",
+      "bytes": 875,
+      "sha256": "153493f93f35f7707eae7e0dde17f291f0a84b852bdb6909c1a5c963b110a5f7"
+    },
+    {
+      "path": "run.py",
+      "bytes": 979,
+      "sha256": "a3cb55ce0dcc0841b715cfd2725b6f9a773cae49a5ce656242ebfdd3295aa6c5"
+    },
+    {
+      "path": "inputs/candidate-hdr.zlib",
+      "bytes": 139277,
+      "sha256": "e1b6b71123d02630ee8e303400a3653e43d4c4f2a06600eb33fd8a69b2b2433e"
+    },
+    {
+      "path": "inputs/candidate-final.zlib",
+      "bytes": 101918,
+      "sha256": "6b72435aa37e972541aa21b6e631e93efa5e9e665b1d82007183d6988290dda1"
+    },
+    {
+      "path": "analyze.py",
+      "bytes": 1292,
+      "sha256": "dcaead16a1a796cc422b1fad8da36030af0d8e7c511f6418f112c62bfdc14891"
+    },
+    {
+      "path": "mask.png",
+      "bytes": 8418,
+      "sha256": "298c2f71d5055769010c66b53d65137836a57efba0a3709f8bd37966f2d793c7"
+    }
+  ]
+}
