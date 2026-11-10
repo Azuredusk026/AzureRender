@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[材质片元工作量](../acceptance/nr/material-fragment-work-scope.md)完成全部实际管线分组。
+固定类别占全事件耗时约 25.45%，透明裁剪与接收准备继续核验。
+
 [参考相机视图主线验收](../acceptance/nr/reference-camera-view-main-integration.md)通过双配置二十项检查。
 八次设备检查、真实空间查询及重采原四帧通过。
 场景宿主绑定、Intel 原生差异及正式帧预算继续处理。

@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[材质片元工作量](docs/acceptance/nr/material-fragment-work-scope.md)完成全部 1006 次绘制的模式及类别分组。
+固定类别约占整帧 25.45%，透明裁剪依赖按实际候选继续核验。
+
 [参考相机视图主线验收](docs/acceptance/nr/reference-camera-view-main-integration.md)通过双配置二十项检查及八次设备检查。
 实际射线与可见顶点通过，重采原始四帧摘要精确一致。
 
