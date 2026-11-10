@@ -1,13 +1,13 @@
 #pragma once
 #include "render/ReferenceClipProjection.hpp"
 #include "render/ReferencePositionFrame.hpp"
+#include "render/ReferenceDepthConvention.hpp"
 #include "render/MaterialUvGradients.hpp"
 #include "rhi/Rhi.hpp"
 #include <memory>
 #include <optional>
 #include <string>
 namespace azurerender {
-enum class ReferenceDepthConvention {Forward,Reversed};
 struct ReferenceDepthConfig {
     unsigned schemaVersion=1;
     ReferenceDepthConvention convention=ReferenceDepthConvention::Reversed;
