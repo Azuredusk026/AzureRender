@@ -44,6 +44,8 @@
 [滑动范围表](docs/plans/2026-11-10-sliding-shadow-range.md)先执行独立位值与查询成本核对。
 [范围查询原型](docs/acceptance/nr/sliding-shadow-range-prototype.md)通过双设备完整位值核对。
 独立查询成本已记录，实际着色与整帧净收益继续核定。
+[圆盘零权重控制](docs/acceptance/nr/shadow-disk-zero-rejection.md)通过完整位值及附件核对。
+局部效率条件未通过，生产保持当前过滤实现。
 级联归属修复使静止局部灯的首帧与绑定路径保持一致，原始四帧继续零差。
 [运动矢量绑定](docs/acceptance/nr/motion-descriptor-reuse.md)按帧槽复用稳定资源，所属十项检查及原生四帧核对通过。
 [展示照明按需计算](docs/acceptance/nr/presentation-environment-demand.md)的候选未达区间效率门槛，生产已恢复受检内容。
