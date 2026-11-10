@@ -1,0 +1,332 @@
+{
+  "status": "isolated-no-native-admission",
+  "sourceHead": "1eea1ee",
+  "captureSourceHead": "274615b",
+  "fullMappedMaterialEvents": 1006,
+  "batches": {
+    "full-view-constants": {
+      "allTargetsEqual": false,
+      "comparisons": [
+        {
+          "event": 10953,
+          "target": 0,
+          "bytes": 7372800,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff",
+          "candidateSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff"
+        },
+        {
+          "event": 10953,
+          "target": 1,
+          "bytes": 14745600,
+          "equal": false,
+          "changedBytes": 5943,
+          "firstByteDifferences": [
+            [
+              68,
+              160,
+              159
+            ],
+            [
+              324,
+              120,
+              121
+            ],
+            [
+              756,
+              253,
+              254
+            ],
+            [
+              1592,
+              196,
+              195
+            ],
+            [
+              2116,
+              122,
+              120
+            ],
+            [
+              2120,
+              240,
+              238
+            ],
+            [
+              3864,
+              80,
+              78
+            ],
+            [
+              5304,
+              132,
+              133
+            ],
+            [
+              5512,
+              219,
+              220
+            ],
+            [
+              7528,
+              160,
+              152
+            ],
+            [
+              7768,
+              176,
+              172
+            ],
+            [
+              12580,
+              79,
+              78
+            ]
+          ],
+          "baselineSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444",
+          "candidateSha256": "c5af8a06c3f33a284a8d26da098420d73d8682274cc04acc62f58ae208a631f3"
+        },
+        {
+          "event": 18266,
+          "target": 0,
+          "bytes": 7372800,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+          "candidateSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62"
+        },
+        {
+          "event": 18266,
+          "target": 1,
+          "bytes": 3686400,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+          "candidateSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133"
+        },
+        {
+          "event": 18266,
+          "target": 2,
+          "bytes": 921600,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+          "candidateSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+        },
+        {
+          "event": 18317,
+          "target": 0,
+          "bytes": 3686400,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+          "candidateSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11"
+        }
+      ],
+      "measurements": [
+        {
+          "mode": "baseline",
+          "snapshotEventMs": 2.7955199999999985,
+          "allEventMs": 13.348191999999923,
+          "matchedEventMs": 9.839135999999945
+        },
+        {
+          "mode": "prior-combination",
+          "snapshotEventMs": 2.236415999999999,
+          "allEventMs": 11.504735999999934,
+          "matchedEventMs": 8.017344000000028
+        },
+        {
+          "mode": "candidate",
+          "snapshotEventMs": 1.998847999999988,
+          "allEventMs": 11.291007999999978,
+          "matchedEventMs": 7.764256000000002
+        },
+        {
+          "mode": "candidate",
+          "snapshotEventMs": 2.0398079999999954,
+          "allEventMs": 11.372127999999979,
+          "matchedEventMs": 7.872192000000015
+        },
+        {
+          "mode": "prior-combination",
+          "snapshotEventMs": 2.246655999999997,
+          "allEventMs": 11.542623999999938,
+          "matchedEventMs": 8.034912000000018
+        },
+        {
+          "mode": "baseline",
+          "snapshotEventMs": 2.7658239999999976,
+          "allEventMs": 13.392991999999927,
+          "matchedEventMs": 9.876415999999947
+        }
+      ],
+      "means": {
+        "baseline": {
+          "allEventMs": 13.370591999999924,
+          "matchedEventMs": 9.857775999999946,
+          "snapshotEventMs": 2.7806719999999983
+        },
+        "prior-combination": {
+          "allEventMs": 11.523679999999935,
+          "matchedEventMs": 8.026128000000023,
+          "snapshotEventMs": 2.241535999999998
+        },
+        "candidate": {
+          "allEventMs": 11.33156799999998,
+          "matchedEventMs": 7.818224000000009,
+          "snapshotEventMs": 2.019327999999992
+        }
+      },
+      "originalMaterialGainPercent": 20.689778302935146,
+      "incrementalMaterialGainPercent": 2.590339949724374,
+      "incrementalWholeGainPercent": 1.6671063410295672,
+      "incrementalSnapshotGainPercent": 9.91320237551423,
+      "priorWholeReferenceDriftPercent": 0.3287838607111995,
+      "sourceUnchanged": true,
+      "productsUnchanged": true
+    },
+    "dynamic-lighting-control": {
+      "allTargetsEqual": true,
+      "comparisons": [
+        {
+          "event": 10953,
+          "target": 0,
+          "bytes": 7372800,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff",
+          "candidateSha256": "a5de48e07c28bae946a76aac2e79caa64b38ad44867f6bca5369b1e4050337ff"
+        },
+        {
+          "event": 10953,
+          "target": 1,
+          "bytes": 14745600,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444",
+          "candidateSha256": "a58e8df5cfc6f24b834c2c670f9110124b4df11326acf3f93fbd23e406277444"
+        },
+        {
+          "event": 18266,
+          "target": 0,
+          "bytes": 7372800,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62",
+          "candidateSha256": "7658884aafb0d5a3d1e18d52e449dcb6d0edc05034fb55a562dbe846c7753d62"
+        },
+        {
+          "event": 18266,
+          "target": 1,
+          "bytes": 3686400,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133",
+          "candidateSha256": "3eb094b5420b7a0e8abc405096fd318d658a6be53f5b83dd924cf4f09d0a2133"
+        },
+        {
+          "event": 18266,
+          "target": 2,
+          "bytes": 921600,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5",
+          "candidateSha256": "b18721b01c4ebae06c13dda6b6101b18f73e9c8e988811aa0d6008e43fccebe5"
+        },
+        {
+          "event": 18317,
+          "target": 0,
+          "bytes": 3686400,
+          "equal": true,
+          "changedBytes": 0,
+          "firstByteDifferences": [],
+          "baselineSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11",
+          "candidateSha256": "631aaf5cf57b952b6aab45a6de5b2f5ee986ed9f0d5257f808dc456e6c478f11"
+        }
+      ],
+      "measurements": [
+        {
+          "mode": "baseline",
+          "snapshotEventMs": 2.8057599999999976,
+          "allEventMs": 13.354943999999946,
+          "matchedEventMs": 9.830591999999957
+        },
+        {
+          "mode": "prior-combination",
+          "snapshotEventMs": 2.2312959999999973,
+          "allEventMs": 11.546015999999948,
+          "matchedEventMs": 8.043488000000028
+        },
+        {
+          "mode": "candidate",
+          "snapshotEventMs": 2.1913599999999978,
+          "allEventMs": 11.502559999999953,
+          "matchedEventMs": 7.990336000000022
+        },
+        {
+          "mode": "candidate",
+          "snapshotEventMs": 2.168831999999998,
+          "allEventMs": 11.496159999999959,
+          "matchedEventMs": 7.965728000000011
+        },
+        {
+          "mode": "prior-combination",
+          "snapshotEventMs": 2.2435839999999967,
+          "allEventMs": 11.512319999999956,
+          "matchedEventMs": 8.044864000000013
+        },
+        {
+          "mode": "baseline",
+          "snapshotEventMs": 2.801664,
+          "allEventMs": 13.438655999999945,
+          "matchedEventMs": 9.879871999999953
+        }
+      ],
+      "means": {
+        "baseline": {
+          "allEventMs": 13.396799999999946,
+          "matchedEventMs": 9.855231999999955,
+          "snapshotEventMs": 2.803711999999999
+        },
+        "prior-combination": {
+          "allEventMs": 11.529167999999952,
+          "matchedEventMs": 8.044176000000022,
+          "snapshotEventMs": 2.2374399999999968
+        },
+        "candidate": {
+          "allEventMs": 11.499359999999957,
+          "matchedEventMs": 7.978032000000017,
+          "snapshotEventMs": 2.180095999999998
+        }
+      },
+      "originalMaterialGainPercent": 19.047750474062376,
+      "incrementalMaterialGainPercent": 0.8222594831341912,
+      "incrementalWholeGainPercent": 0.2585442418741368,
+      "incrementalSnapshotGainPercent": 2.5629290617848466,
+      "priorWholeReferenceDriftPercent": 0.2922674038576946,
+      "sourceUnchanged": true,
+      "productsUnchanged": true
+    }
+  },
+  "nativeRuns": 0,
+  "productionAdopted": false,
+  "precisionScope": "Full snapshot view folding changes octahedral normal GB; retaining dynamic clusterLighting comparisons restores all six target identities",
+  "retryCondition": "New arithmetic identity proof or cost evidence reaching original admission gates",
+  "archive": {
+    "members": 85,
+    "bytes": 3981436,
+    "sha256": "ba80ab7ddc313cbce35c6260d7406f024a3407a92e090f4deb6825f20db3368c"
+  }
+}

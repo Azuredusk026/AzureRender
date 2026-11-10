@@ -1348,3 +1348,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [完整管线成本](../acceptance/nr/complete-capture-cost-map.md)完成全部 3453 个事件的实际绑定归因。
 材质绘制占 74.41%，当前评估普通不透明快照的视图常量。
+
+[快照视图组合](../acceptance/nr/snapshot-default-view-combination.md)完成两批局部核对。
+动态照明控制的六附件精确一致，新增收益未达准入条件。

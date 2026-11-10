@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[快照视图组合](docs/acceptance/nr/snapshot-default-view-combination.md)的动态照明控制通过六附件核对。
+新增收益未达准入条件，候选保持隔离。
+
 [完整管线成本](docs/acceptance/nr/complete-capture-cost-map.md)覆盖全部 3453 个计时事件。
 实际材质绘制占约 74.41%，快照常量继续局部评估。
 
