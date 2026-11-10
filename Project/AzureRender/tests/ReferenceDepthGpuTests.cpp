@@ -48,9 +48,20 @@ int main(int argc,char** argv)try{
         host.allocator.invalidate(readback,0,readback.size);
     };
     const std::vector<std::uint32_t> triangles{0,1,2,2,1,3,4,5,6,6,5,7};
-    for(bool perspective:{false,true})for(bool reversed:{false,true})for(bool flip:{false,true}){
+    auto framedShaders=shaders;framedShaders.positionFrame=ReferenceDepthPositionFrameShaders::load(argv[1]);
+    ReferencePositionFrame positionFrame;positionFrame.parameters.axes={-3,1,2,0};positionFrame.parameters.offset={1,.5F,0,0};
+    for(unsigned kind=0;kind<5;++kind)rejected([&]{
+        ReferenceDepthConfig config;config.schemaVersion=2;config.positionFrame=positionFrame;auto candidate=framedShaders;
+        if(kind==0)config.schemaVersion=1;if(kind==1)config.schemaVersion=3;
+        if(kind==2)candidate.positionFrame={};if(kind==3)config.positionFrame->parameters.axes[1]=-3;
+        if(kind==4){candidate=ReferenceDepthShaders::loadMasked(argv[1]);candidate.positionFrame=framedShaders.positionFrame;candidate.positionFrame.maskedVertex.clear();}
+        ReferenceDepthGpu producer(backend,{33,35},2,config,candidate);
+    });
+    if(host.allocator.statistics().liveBuffers||host.allocator.statistics().liveImages)throw std::runtime_error("Rejected frame input allocated resources");
+    for(bool framed:{false,true})for(bool perspective:{false,true})for(bool reversed:{false,true})for(bool flip:{false,true}){
         ReferenceDepthConfig config;config.convention=reversed?ReferenceDepthConvention::Reversed:ReferenceDepthConvention::Forward;config.flipNdcY=flip;
-        ReferenceDepthGpu producer(backend,{33,35},2,config,shaders);if(producer.byteBudget()!=33*35*8*2)throw std::runtime_error("Depth budget mismatch");
+        if(framed){config.schemaVersion=2;config.positionFrame=positionFrame;}
+        ReferenceDepthGpu producer(backend,{33,35},2,config,framed?framedShaders:shaders);if(producer.byteBudget()!=33*35*8*2)throw std::runtime_error("Depth budget mismatch");
         ReferenceClipProjectionProfile profile;
         if(perspective){profile.parameters.columns={ReferenceClipProjectionParameters::Row{1,0,0,0},{0,1,0,0},{0,0,reversed?0.F:-1.F,-1},{0,0,reversed?std::nextafter(.0625F,1.F):-.0625F,0}};}
         const float near=reversed?std::nextafter(.03125F,1.F):(perspective?.96875F:std::nextafter(.96875F,0.F)),far=reversed?.015625F:.984375F;
@@ -59,6 +70,7 @@ int main(int argc,char** argv)try{
             for(auto xy:{std::array<float,2>{-1,-1},{1,-1},{-1,1},{1,1}})vertices.push_back({xy[0]*w,xy[1]*w,perspective?-w:(layer?far:near),1});}
         for(unsigned iteration=0;iteration<4;++iteration){const bool empty=iteration==2;auto input=vertices;
             if(iteration==3)for(auto& vertex:input)vertex[1]=-.75F*(perspective?-vertex[2]:1.F)+.25F*vertex[1];
+            if(framed)for(auto& vertex:input)vertex={vertex[1]-.5F,vertex[2],1.F-vertex[0],1};
             draw(producer,iteration%2,profile,input,triangles,empty);
             const auto values=static_cast<const float*>(readback.mapped);
             for(unsigned i=0;i<33*35*2;++i){const unsigned y=(i%(33*35))/33;
@@ -66,7 +78,7 @@ int main(int argc,char** argv)try{
                 if(std::memcmp(values+i,&expected,4))throw std::runtime_error("Reference depth clear/overlap/precision/axis mismatch");++checked;}
         }
     }
-    if(rejects!=10)throw std::runtime_error("Reference depth rejection contract failed: "+std::to_string(rejects));
+    if(rejects!=15)throw std::runtime_error("Reference depth rejection contract failed: "+std::to_string(rejects));
     if(argc==6){
         auto profileBytes=readBinaryFile(argv[2]),vertexBytes=readBinaryFile(argv[3]),indexBytes=readBinaryFile(argv[4]);
         if(profileBytes.size()!=80||vertexBytes.empty()||vertexBytes.size()%16||indexBytes.empty()||indexBytes.size()%12)throw std::invalid_argument("Invalid native depth fixture");
@@ -80,5 +92,5 @@ int main(int argc,char** argv)try{
     }
     cleanup.reset();if(host.allocator.statistics().liveBuffers||host.allocator.statistics().liveImages)throw std::runtime_error("Reference depth resources leaked");
     if(host.errors.load())throw std::runtime_error("Reference depth Vulkan validation errors");
-    std::cout<<host.properties.deviceName<<": "<<checked<<" exact R32/D32 values; forward/reversed overlap, clear, slot reuse, ten rejects, cleanup passed\n";return 0;
+    std::cout<<host.properties.deviceName<<": "<<checked<<" exact R32/D32 values; relative/world frames, forward/reversed overlap, clear, slot reuse, fifteen rejects, cleanup passed\n";return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}

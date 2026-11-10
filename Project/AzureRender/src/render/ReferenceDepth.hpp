@@ -1,5 +1,6 @@
 #pragma once
 #include "render/ReferenceClipProjection.hpp"
+#include "render/ReferencePositionFrame.hpp"
 #include "render/MaterialUvGradients.hpp"
 #include "rhi/Rhi.hpp"
 #include <memory>
@@ -11,6 +12,7 @@ struct ReferenceDepthConfig {
     unsigned schemaVersion=1;
     ReferenceDepthConvention convention=ReferenceDepthConvention::Reversed;
     bool flipNdcY=true;
+    std::optional<ReferencePositionFrame> positionFrame;
 };
 enum class ReferenceDepthAlphaLodPolicy {Device,EllipseMajorAxisMirroredCoarseY};
 struct ReferenceDepthAlpha {
@@ -29,17 +31,23 @@ struct ReferenceDepthSurface {
     std::optional<ReferenceDepthAlpha> alpha;
 };
 struct ReferenceDepthGeometry {
-    // Borrowed VERTEX_BUFFER vec4 positions (xyz camera-relative, w ignored),
-    // and INDEX_BUFFER uint32 triangles. All indices address vertexCount.
+    // Borrowed VERTEX_BUFFER vec4 positions and INDEX_BUFFER uint32 triangles.
+    // Version1 consumes relative xyz; version2 transforms world xyz through positionFrame.
+    // Position w is ignored. All indices address vertexCount.
     VkBuffer positions{},indices{};
     std::uint32_t vertexCount=0,indexCount=0;
     ReferenceDepthSurface surface;
+};
+struct ReferenceDepthPositionFrameShaders {
+    std::vector<char> vertex,maskedVertex;
+    static ReferenceDepthPositionFrameShaders load(const std::string& directory);
 };
 struct ReferenceDepthShaders {
     std::vector<char> vertex,fragment;
     std::vector<char> maskedVertex,maskedFragment;
     std::vector<char> ellipseFragment;
     MaterialUvGradientSupport ellipseSupport;
+    ReferenceDepthPositionFrameShaders positionFrame;
     static ReferenceDepthShaders load(const std::string& directory);
     static ReferenceDepthShaders loadMasked(const std::string& directory);
     static ReferenceDepthShaders loadEllipseMasked(const std::string& directory,MaterialUvGradientSupport);

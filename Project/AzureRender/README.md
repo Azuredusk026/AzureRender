@@ -876,7 +876,11 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [材质主 UV 绑定](docs/acceptance/nr/material-primary-uv-policy.md)通过两配置、双设备的三十六组检查。
 公开材质、阴影、覆盖、足迹正控制及失败清理通过，原始四帧摘要精确一致。
-当前程序集为 855 份，实际相机与几何深度组合继续验收。
+当前程序集为 858 份，实际相机与几何深度组合继续验收。
 
 [实际网格位置](docs/acceptance/nr/actual-world-depth-source.md)通过公开深度的完整区域来源核对。
 两设备的可见量与原生位置控制逐字节一致，场景级投影继续接入。
+
+[参考坐标帧与世界坐标深度](docs/acceptance/nr/reference-position-frame.md)通过双配置、双设备核对。
+公开世界坐标路径的完整深度平面与 CPU 预转换控制逐位一致，原始四帧摘要精确一致。
+实际索引、朝向及 UV 组合继续独立验收。

@@ -10,11 +10,12 @@ std::uint64_t budget(VkExtent2D extent,unsigned frames){
     require(bytes<=256ULL*1024*1024,"Reference depth resources exceed 256 MiB");return bytes;
 }
 void validate(const ReferenceDepthConfig& config){
-    require(config.schemaVersion==1,"Unsupported reference depth version");
+    require((config.schemaVersion==1&&!config.positionFrame)||(config.schemaVersion==2&&config.positionFrame),"Reference depth version2 requires a position frame; version1 uses relative inputs");
+    if(config.positionFrame)validateReferencePositionFrame(*config.positionFrame);
     require(config.convention==ReferenceDepthConvention::Forward||config.convention==ReferenceDepthConvention::Reversed,"Unknown reference depth convention");
 }
-struct alignas(16) Parameters {ReferenceClipProjectionParameters projection;std::array<unsigned,4> control{};std::array<float,4> coverage{};};
-static_assert(sizeof(Parameters)==112);
+struct alignas(16) Parameters {ReferenceClipProjectionParameters projection;std::array<unsigned,4> control{};std::array<float,4> coverage{},frameOffset{};};
+static_assert(sizeof(Parameters)==128);
 constexpr unsigned maskedLimit=128;
 void validate(const ReferenceDepthSurface& surface,bool maskedAvailable,bool ellipseAvailable){
     require(surface.schemaVersion==1||surface.schemaVersion==2,"Unsupported reference depth surface version");
@@ -67,14 +68,16 @@ struct ReferenceDepthGpu::Impl {
     }
     void initialize(unsigned count,const ReferenceDepthShaders& shaders){
         // Prepare and validate the marked arithmetic before allocating resources.
-        const auto prepared=prepareReferenceFmaShader(shaders.vertex);
+        const auto& vertex=config.positionFrame?shaders.positionFrame.vertex:shaders.vertex;
+        const auto& maskedVertex=config.positionFrame?shaders.positionFrame.maskedVertex:shaders.maskedVertex;
+        const auto prepared=prepareReferenceFmaShader(vertex);
         require(prepared.fusedResults==3,"Reference depth projection requires three marked Fma results");
         require(shaders.maskedVertex.empty()==shaders.maskedFragment.empty(),"Reference depth masked shaders must form a complete pair");
         maskedAvailable=!shaders.maskedVertex.empty();ReferenceFmaShader maskedPrepared;
         ellipseAvailable=!shaders.ellipseFragment.empty();
         if(ellipseAvailable){require(maskedAvailable,"Ellipse coverage requires the complete masked shader pair");
             validateMaterialUvGradientPolicy(MaterialUvGradientPolicy::MirroredCoarseY,shaders.ellipseSupport);}
-        if(maskedAvailable){maskedPrepared=prepareReferenceFmaShader(shaders.maskedVertex);require(maskedPrepared.fusedResults==3,"Masked reference projection requires three marked Fma results");}
+        if(maskedAvailable){maskedPrepared=prepareReferenceFmaShader(maskedVertex);require(maskedPrepared.fusedResults==3,"Masked reference projection requires three marked Fma results");}
         descriptors=backend.createDescriptorSetLayout(maskedAvailable?std::vector<rhi::DescriptorBindingDesc>{{0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,1,VK_SHADER_STAGE_FRAGMENT_BIT}}:std::vector<rhi::DescriptorBindingDesc>{});
         const rhi::PushConstantRangeDesc push{VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(Parameters)};
         layout=backend.createPipelineLayout(descriptors,&push);
@@ -105,6 +108,7 @@ bool ReferenceDepthGpu::supported(rhi::IRhi& backend,VkExtent2D extent,unsigned 
         &&(backend.imageSampleCounts(VK_FORMAT_D32_SFLOAT,depthUsage)&VK_SAMPLE_COUNT_1_BIT);
 }
 ReferenceDepthShaders ReferenceDepthShaders::load(const std::string& directory){return {readBinaryFile(directory+"/reference_depth.vert.spv"),readBinaryFile(directory+"/reference_depth.frag.spv")};}
+ReferenceDepthPositionFrameShaders ReferenceDepthPositionFrameShaders::load(const std::string& directory){return {readBinaryFile(directory+"/reference_depth_frame.vert.spv"),readBinaryFile(directory+"/reference_depth_masked_frame.vert.spv")};}
 ReferenceDepthShaders ReferenceDepthShaders::loadMasked(const std::string& directory){auto result=load(directory);result.maskedVertex=readBinaryFile(directory+"/reference_depth_masked.vert.spv");result.maskedFragment=readBinaryFile(directory+"/reference_depth_masked.frag.spv");return result;}
 ReferenceDepthShaders ReferenceDepthShaders::loadEllipseMasked(const std::string& directory,MaterialUvGradientSupport support){
     validateMaterialUvGradientPolicy(MaterialUvGradientPolicy::MirroredCoarseY,support);
@@ -132,6 +136,7 @@ void ReferenceDepthGpu::record(rhi::ICommandRecorder& commands,unsigned index,co
     for(const auto& draw:geometry)if(draw.surface.alpha){const auto& alpha=*draw.surface.alpha;
         state.backend.writeDescriptorImage({slot.sets[maskedIndex++],0,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,alpha.image,alpha.sampler,alpha.layout});}
     Parameters parameters;parameters.projection=profile.parameters;parameters.control[0]=state.config.flipNdcY?1U:0U;
+    if(state.config.positionFrame){parameters.control[2]=referencePositionFrameCode(*state.config.positionFrame);parameters.frameOffset=state.config.positionFrame->parameters.offset;}
     commands.imageBarrier({slot.color.image,slot.initialized?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,1,
         VkPipelineStageFlags(slot.initialized?VK_PIPELINE_STAGE_ALL_COMMANDS_BIT:VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT),VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
         slot.initialized?VK_ACCESS_SHADER_READ_BIT:0U,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT});
