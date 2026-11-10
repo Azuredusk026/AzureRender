@@ -137,7 +137,8 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 17017 个像素的峰差为一字节，原 73 处全部闭合且新增为零。
 [公共输出精度](../acceptance/nr/material-output-precision.md)完成两配置、双设备所属核对。
 3276800 次分量比较及十六张图像通过，原始四帧保持零差。
-公共取样、相对投影及实际深度继续接入验收。
+[公共 UV 梯度助手](../acceptance/nr/material-uv-gradients.md)完成双配置、双设备光栅核对。
+69728 个分量逐位一致，材质覆盖绑定、相对投影和实际深度继续接入。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
