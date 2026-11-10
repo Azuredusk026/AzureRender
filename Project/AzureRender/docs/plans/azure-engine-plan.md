@@ -1351,3 +1351,6 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [快照视图组合](../acceptance/nr/snapshot-default-view-combination.md)完成两批局部核对。
 动态照明控制的六附件精确一致，新增收益未达准入条件。
+
+[光栅图元与深度模型](../acceptance/nr/raster-primitive-depth-model.md)完成双设备来源核对。
+九十六处超差来自相同图元，透明层级及插值数值继续修正。
