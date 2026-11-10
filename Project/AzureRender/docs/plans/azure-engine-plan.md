@@ -1327,3 +1327,6 @@ WC1 至 WC6 完成，证据见世界参照与相机实施记录。
 
 [参考几何深度](../acceptance/nr/reference-depth-source.md)通过双配置、双设备及原四帧回归。
 公共不透明生产通过，原生覆盖、壳层和可见量继续接入。
+
+[几何深度与可见量](../acceptance/nr/geometry-depth-visibility.md)完成双设备成对核对。
+原生深度控制通过，几何来源的七处及一百零三处超差继续修正。
