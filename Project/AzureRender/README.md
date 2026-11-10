@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[光栅位置与项目视图主线验收](docs/acceptance/nr/reference-raster-project-main-integration.md)通过双配置二十六项检查。
+四次设备检查与重采原始四帧通过，场景消费绑定继续推进。
+
 [深度可见性组合原生验收](docs/acceptance/nr/quad-depth-combination-native.md)通过严格四帧及成对短时净收益。
 GPU 均值减少约 13.58%，生产接入及正式帧预算继续验收。
 

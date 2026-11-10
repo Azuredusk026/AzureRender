@@ -1,0 +1,138 @@
+{
+  "status": "reference-raster-project-main-integration-qualified",
+  "runtimeSourceCommit": "b514de0",
+  "sourceBranchCommit": "80719a9",
+  "rasterSourceCommit": "746ba12",
+  "rasterIntegrationCommit": "1e04cd3",
+  "build": {
+    "status": "built-and-checked",
+    "checks": [
+      {
+        "config": "Release",
+        "tests": 13,
+        "skips": 0,
+        "reusedBuildAndChecks": true,
+        "seconds": 7.577999999979511
+      },
+      {
+        "config": "Debug",
+        "tests": 13,
+        "skips": 0,
+        "reusedBuildAndChecks": false,
+        "seconds": 123.68800000002375
+      }
+    ],
+    "gpuProcesses": [
+      {
+        "config": "Release",
+        "device": "nvidia",
+        "target": "AzureReferenceRasterProjectionGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Release",
+        "device": "intel",
+        "target": "AzureReferenceRasterProjectionGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "nvidia",
+        "target": "AzureReferenceRasterProjectionGpuTests",
+        "passed": true
+      },
+      {
+        "config": "Debug",
+        "device": "intel",
+        "target": "AzureReferenceRasterProjectionGpuTests",
+        "passed": true
+      }
+    ],
+    "nativeCpuRays": 34034,
+    "visibleVertexChecks": 23128,
+    "exactRasterComponents": 709824,
+    "sourceUnchanged": true,
+    "productsVerified": true,
+    "existingProgramsExact": 859,
+    "childProgramsExact": 859,
+    "activeProgramCount": 860,
+    "allHostSectionsExact": false,
+    "allHostBytesExact": false,
+    "dllsExact": true
+  },
+  "originalFour": {
+    "method": "fresh-capture",
+    "result": {
+      "exitCode": 0,
+      "seconds": 130.78200000000652,
+      "frames": [
+        {
+          "name": "frame_000000.png",
+          "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000001.png",
+          "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000002.png",
+          "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        },
+        {
+          "name": "frame_000003.png",
+          "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+          "changedPixels": 0,
+          "maximumByteError": 0
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "sourceUnchanged": true,
+      "programsUnchanged": true,
+      "projectInputsUnchanged": true
+    }
+  },
+  "protectedFilesExact": 13,
+  "projectInputsExact": 1729,
+  "sourceProofsFresh": true,
+  "childGpuScope": {
+    "sourceCommits": [
+      "746ba12",
+      "80719a9"
+    ],
+    "integrationCommits": [
+      "1e04cd3",
+      "b514de0"
+    ],
+    "sourceConflicts": false,
+    "documentationConflict": "Additive CHANGELOG entries retained",
+    "archives": [
+      {
+        "name": "reference-raster-projection",
+        "bytes": 1558965,
+        "members": 45,
+        "memberHashesVerified": 44,
+        "sha256": "8241becb8b3ec01dd6ccd93f8a14bc6ec3679d58ec1648babc87721d5b9f7ecd"
+      },
+      {
+        "name": "project-reference-views",
+        "bytes": 208901,
+        "members": 67,
+        "memberHashesVerified": 66,
+        "sha256": "d49675c9a47b4170873a54f58d909465ca319eace1197a478384b89e801d32fb"
+      }
+    ]
+  },
+  "overall": "failed-user-review",
+  "formalPerformanceAccepted": false
+}

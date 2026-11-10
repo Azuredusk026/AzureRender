@@ -30,6 +30,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[光栅位置与项目视图主线验收](../acceptance/nr/reference-raster-project-main-integration.md)通过双配置二十六项检查。
+709824 个设备组合分量逐位一致，重采原始四帧精确一致。
+项目持久配置已接入，场景选择及实际绘制继续推进。
+
 [深度可见性组合原生验收](../acceptance/nr/quad-depth-combination-native.md)通过原始四帧及四项短时效率条件。
 GPU 均值约为 16.34768 毫秒，较两侧参考减少约 13.58%。
 GPU P95 约为 16.76836 毫秒，生产接入及正式预算继续执行。
@@ -1415,7 +1419,7 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [椭圆层级主线集成](../acceptance/nr/reference-alpha-ellipse-main-integration.md)通过双配置、两设备与原四帧检查。
 默认程序身份保持一致，剩余九十六处深度超差继续修正。
-[接收循环修正](../acceptance/nr/receiver-source-sync.md)按来源 `62fc79c` 同步。
+[材质主纹理坐标策略](../acceptance/nr/material-primary-uv-policy.md)记录接收循环来源 `62fc79c`。
 主 UV 组合的公开材质、阴影及取样正控制通过所属验收。
 
 [材质主 UV 绑定](../acceptance/nr/material-primary-uv-policy.md)通过两配置、双设备的三十六组检查。
