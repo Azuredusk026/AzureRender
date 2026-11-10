@@ -30,6 +30,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[场景参考相机主线验收](../acceptance/nr/scene-reference-camera-main-integration.md)通过双配置三十四项检查。
+实际移动误差约为 0.000105427 像素，重采原始四帧精确一致。
+生产绘制及拾取绑定继续推进，性能组合按独立单元接入。
+
 [光栅位置与项目视图主线验收](../acceptance/nr/reference-raster-project-main-integration.md)通过双配置二十六项检查。
 709824 个设备组合分量逐位一致，重采原始四帧精确一致。
 项目持久配置已接入，场景选择及实际绘制继续推进。

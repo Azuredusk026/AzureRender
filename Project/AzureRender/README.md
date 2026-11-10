@@ -1,5 +1,8 @@
 # AzureRender 工程
 
+[场景参考相机主线验收](docs/acceptance/nr/scene-reference-camera-main-integration.md)通过双配置三十四项检查。
+实际移动误差、四次光栅回归及重采原始四帧通过。
+
 [光栅位置与项目视图主线验收](docs/acceptance/nr/reference-raster-project-main-integration.md)通过双配置二十六项检查。
 四次设备检查与重采原始四帧通过，场景消费绑定继续推进。
 
