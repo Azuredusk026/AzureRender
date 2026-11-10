@@ -67,7 +67,9 @@ NVIDIA 通过，Intel 保留 120 处一字节以上超差。
 [所选主灯组合](../acceptance/nr/hair-selected-main-composite.md)已限定主灯贡献。
 来源控制下的完整区域保留 14 处，没有新增超差。
 [公共主光色度](../acceptance/nr/hair-main-brightness-saturation.md)通过两配置、双设备所属检查及默认原四帧。
-剩余附件与取样差异继续按完整颜色门槛验收。
+[修正后的浮点输出](../acceptance/nr/hair-main-chroma-final-float.md)通过九项探针资格。
+31 处半精度存储重建合格，26 处 R11 存储预测一致。
+后续执行完整区域的实际附件转换候选。
 
 [材质朝向需求](../acceptance/nr/material-facing-demand.md)已接入加载阶段。
 完整场景管线请求由 645 次收敛到 557 次，原四帧保持零差。
