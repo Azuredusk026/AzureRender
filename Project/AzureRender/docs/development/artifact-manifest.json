@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261111-210839-native-d3d11-depth-devices-9e7a22",
+      "name": "原生深度设备对照",
+      "sourceBase": "698e53d",
+      "evidence": "docs/acceptance/nr/native-d3d11-depth-devices.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/native-d3d11-depth-devices/results.json"
+    },
+    {
       "path": "runs/20261111-072757-material-ellipse-coverage-policy-3e26b6",
       "name": "独立覆盖椭圆选级",
       "sourceBase": "dfb1ca3",

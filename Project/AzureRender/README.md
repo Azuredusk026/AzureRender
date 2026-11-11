@@ -964,4 +964,5 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 
 [头发覆盖层级](docs/acceptance/nr/native-hair-coverage-lod.md)记录实际取样对照。
 [椭圆选级](docs/acceptance/nr/material-ellipse-coverage-policy.md)记录公开材质策略及实际头发的验证。
+[原生深度设备对照](docs/acceptance/nr/native-d3d11-depth-devices.md)记录双设备重放及参考差异。
 Intel 已知边界点的误差为两字节，完整区域继续验收。

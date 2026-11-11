@@ -309,3 +309,7 @@ Intel 深度可见量保留 96 处超差，循环索引保持原输出。
 Intel 既有峰值点从 166 降至 2 字节，整区峰值为 97。
 公开覆盖策略见[椭圆选级](../acceptance/nr/material-ellipse-coverage-policy.md)。
 参考深度、实际可见量及完整颜色按所属条件验收。
+
+[原生深度设备对照](../acceptance/nr/native-d3d11-depth-devices.md)核对 D3D11 写入及实际消费。
+Intel 的跨接口深度有 17014 个点逐位一致。
+场景参考深度及完整颜色继续验收。
