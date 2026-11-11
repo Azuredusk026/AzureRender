@@ -345,7 +345,8 @@
       ],
       "properties": {
         "schemaVersion": {
-          "const": 1
+          "type": "integer",
+          "enum": [1, 2]
         },
         "texture": {
           "type": "integer",
@@ -356,8 +357,16 @@
             "red",
             "alpha"
           ]
+        },
+        "lodPolicy": {
+          "const": "ellipse-major"
         }
-      }
+      },
+      "if": {
+        "properties": { "schemaVersion": { "const": 2 } }
+      },
+      "then": { "required": ["lodPolicy"] },
+      "else": { "not": { "required": ["lodPolicy"] } }
     },
     "blendDepth": {
       "type": "object",

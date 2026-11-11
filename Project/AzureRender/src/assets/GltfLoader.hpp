@@ -78,6 +78,7 @@ enum AssetMaterialFeature : std::uint32_t {
     MaterialFeatureIndependentCoverage = 1U << 25U,
     MaterialFeatureR11G11B10Output = 1U << 26U,
     MaterialFeatureMirroredCoarseUv = 1U << 27U,
+    MaterialFeatureEllipseMajorCoverage = 1U << 28U,
     MaterialFeatureShadowCoverageMask = MaterialFeatureGeometryShadow|MaterialFeatureSqrtAlphaShadow,
 };
 
@@ -303,6 +304,20 @@ inline void validateMaterialCoverage(const AssetMaterial& material) {
     if(material.coverageTexture.present&&(!material.metallicRoughnessWidth||!material.metallicRoughnessHeight
         ||material.textureSettings[2].colorSpace!="linear"))
         throw std::invalid_argument("coverageTexture requires a complete linear image");
+    const bool ellipse=material.coverageTexture.lodPolicy==AssetMaterial::CoverageTexture::LodPolicy::EllipseMajor;
+    if(ellipse!=((material.materialFeatures&MaterialFeatureEllipseMajorCoverage)!=0))
+        throw std::invalid_argument("coverageTexture LOD policy ownership is inconsistent");
+    if(ellipse){
+        const auto& sampler=material.textureSettings[2];
+        using Settings=azurerender::TextureImportSettings;
+        if((material.materialFeatures&MaterialFeatureMirroredCoarseUv)==0)
+            throw std::invalid_argument("coverageTexture ellipse-major requires mirrored-coarse-uv");
+        if(sampler.filter!="linear"||(sampler.magFilter!=Settings::MagFilter::Linear
+            &&sampler.magFilter!=Settings::MagFilter::MatchFilter)
+            ||sampler.mipFilter!=Settings::MipFilter::Nearest||sampler.anisotropy!=1.0F
+            ||sampler.mipPolicy!="generate")
+            throw std::invalid_argument("coverageTexture ellipse-major requires linear filtering, nearest mip, anisotropy one and a mip chain");
+    }
 }
 
 struct AssetPrimitive {

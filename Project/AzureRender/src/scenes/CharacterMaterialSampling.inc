@@ -2,11 +2,12 @@
 void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
     lightingOrdinaryNeeded_=lightingBlendNeeded_=lightingFallbackNeeded_=lightingIntegralNeeded_=false;
     lightingClassesNeeded_={};
-    independentCoverageNeeded_=false;materialUvNeeded_=false;materialUvClassesNeeded_=0;
+    independentCoverageNeeded_=ellipseCoverageNeeded_=materialUvNeeded_=false;materialUvClassesNeeded_=0;
     materialDepthPoliciesNeeded_={};
     const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
         validateMaterialUvPolicy(material);
         independentCoverageNeeded_|=material.coverageTexture.present;
+        ellipseCoverageNeeded_|=material.coverageTexture.lodPolicy==AssetMaterial::CoverageTexture::LodPolicy::EllipseMajor;
         if(material.materialFeatures&MaterialFeatureMirroredCoarseUv){materialUvNeeded_=true;materialUvClassesNeeded_|=1U<<unsigned(material.materialClass);}
         if(material.unlitTextureLayers.present&&material.unlitTextureLayers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual)
             materialDepthPoliciesNeeded_[1]=true;

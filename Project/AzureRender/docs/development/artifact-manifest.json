@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261111-072757-material-ellipse-coverage-policy-3e26b6",
+      "name": "独立覆盖椭圆选级",
+      "sourceBase": "dfb1ca3",
+      "evidence": "docs/acceptance/nr/material-ellipse-coverage-policy.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/material-ellipse-coverage-policy/results.json"
+    },
+    {
       "path": "runs/20261109-045502-surface-shadow-reuse-535624",
       "name": "同帧表面阴影复用",
       "status": "NoNetGainCandidateIsolated",

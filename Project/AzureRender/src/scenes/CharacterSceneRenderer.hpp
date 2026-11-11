@@ -141,6 +141,7 @@ private:
     VkRenderPass defaultIsolationRenderPass_=VK_NULL_HANDLE;
     std::string defaultIsolationFallback_;
     bool independentCoverageNeeded_=false;
+    bool ellipseCoverageNeeded_=false;
     std::array<bool,4> materialDepthPoliciesNeeded_{};
     std::vector<std::pair<VkPipeline,std::array<VkPipeline,3>>> materialDepthPipelines_;
     std::array<VkPipeline,3> outlineMaskCoveragePipelines_{};

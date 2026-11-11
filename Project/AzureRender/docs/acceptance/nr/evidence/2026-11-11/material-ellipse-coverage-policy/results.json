@@ -1,0 +1,1208 @@
+{
+  "status": "qualified-opt-in-ellipse-coverage",
+  "overall": "failed-user-review",
+  "baseCommit": "dfb1ca3",
+  "maskPixels": 17017,
+  "maximumAllowedByteError": 1,
+  "scope": "Single-sample spatial coverage",
+  "programs": {
+    "release": {
+      "configuration": "Release",
+      "count": 885,
+      "unchanged": 841,
+      "changed": [
+        "character_depth_bindless_coverage_uvquad.frag.spv",
+        "character_depth_coverage_uvquad.frag.spv",
+        "character_snapshot_bindless_clipmap_coverage_uvquad.frag.spv",
+        "character_snapshot_bindless_clipmap_field_coverage_uvquad.frag.spv",
+        "character_snapshot_bindless_coverage_uvquad.frag.spv",
+        "character_snapshot_bindless_field_coverage_uvquad.frag.spv",
+        "character_snapshot_clipmap_coverage_uvquad.frag.spv",
+        "character_snapshot_clipmap_field_coverage_uvquad.frag.spv",
+        "character_snapshot_coverage_uvquad.frag.spv",
+        "character_snapshot_depth_bindless_coverage_uvquad.frag.spv",
+        "character_snapshot_depth_coverage_uvquad.frag.spv",
+        "character_snapshot_field_coverage_uvquad.frag.spv",
+        "character_snapshot_object_bindless_clipmap_coverage_uvquad.frag.spv",
+        "character_snapshot_object_bindless_clipmap_field_coverage_uvquad.frag.spv",
+        "character_snapshot_object_bindless_coverage_uvquad.frag.spv",
+        "character_snapshot_object_bindless_field_coverage_uvquad.frag.spv",
+        "character_snapshot_object_clipmap_coverage_uvquad.frag.spv",
+        "character_snapshot_object_clipmap_field_coverage_uvquad.frag.spv",
+        "character_snapshot_object_coverage_uvquad.frag.spv",
+        "character_snapshot_object_field_coverage_uvquad.frag.spv",
+        "mesh_bindless_clipmap_coverage_uvquad.frag.spv",
+        "mesh_bindless_clipmap_field_coverage_uvquad.frag.spv",
+        "mesh_bindless_coverage_uvquad.frag.spv",
+        "mesh_bindless_field_coverage_uvquad.frag.spv",
+        "mesh_clipmap_coverage_uvquad.frag.spv",
+        "mesh_clipmap_field_coverage_uvquad.frag.spv",
+        "mesh_coverage_uvquad.frag.spv",
+        "mesh_field_coverage_uvquad.frag.spv",
+        "mesh_object_bindless_clipmap_coverage_uvquad.frag.spv",
+        "mesh_object_bindless_clipmap_field_coverage_uvquad.frag.spv",
+        "mesh_object_bindless_coverage_uvquad.frag.spv",
+        "mesh_object_bindless_field_coverage_uvquad.frag.spv",
+        "mesh_object_clipmap_coverage_uvquad.frag.spv",
+        "mesh_object_clipmap_field_coverage_uvquad.frag.spv",
+        "mesh_object_coverage_uvquad.frag.spv",
+        "mesh_object_field_coverage_uvquad.frag.spv",
+        "outline_depth_bindless_coverage_uvquad.frag.spv",
+        "outline_depth_coverage_uvquad.frag.spv",
+        "outline_mask_bindless_coverage_uvquad.frag.spv",
+        "outline_mask_coverage_uvquad.frag.spv",
+        "outline_view_scaled_bindless_coverage_uvquad.frag.spv",
+        "outline_view_scaled_coverage_uvquad.frag.spv",
+        "shadow_bindless_coverage_uvquad.frag.spv",
+        "shadow_coverage_uvquad.frag.spv"
+      ],
+      "validated": 44,
+      "cpuExit": 0,
+      "playerSha256": "861b5d20505e8d0e27407e924fd2e838a1cfdbefdcf8f54b676c1ec630b33899"
+    },
+    "debug": {
+      "configuration": "Debug",
+      "count": 885,
+      "unchanged": 841,
+      "changed": [
+        "character_depth_bindless_coverage_uvquad.frag.spv",
+        "character_depth_coverage_uvquad.frag.spv",
+        "character_snapshot_bindless_clipmap_coverage_uvquad.frag.spv",
+        "character_snapshot_bindless_clipmap_field_coverage_uvquad.frag.spv",
+        "character_snapshot_bindless_coverage_uvquad.frag.spv",
+        "character_snapshot_bindless_field_coverage_uvquad.frag.spv",
+        "character_snapshot_clipmap_coverage_uvquad.frag.spv",
+        "character_snapshot_clipmap_field_coverage_uvquad.frag.spv",
+        "character_snapshot_coverage_uvquad.frag.spv",
+        "character_snapshot_depth_bindless_coverage_uvquad.frag.spv",
+        "character_snapshot_depth_coverage_uvquad.frag.spv",
+        "character_snapshot_field_coverage_uvquad.frag.spv",
+        "character_snapshot_object_bindless_clipmap_coverage_uvquad.frag.spv",
+        "character_snapshot_object_bindless_clipmap_field_coverage_uvquad.frag.spv",
+        "character_snapshot_object_bindless_coverage_uvquad.frag.spv",
+        "character_snapshot_object_bindless_field_coverage_uvquad.frag.spv",
+        "character_snapshot_object_clipmap_coverage_uvquad.frag.spv",
+        "character_snapshot_object_clipmap_field_coverage_uvquad.frag.spv",
+        "character_snapshot_object_coverage_uvquad.frag.spv",
+        "character_snapshot_object_field_coverage_uvquad.frag.spv",
+        "mesh_bindless_clipmap_coverage_uvquad.frag.spv",
+        "mesh_bindless_clipmap_field_coverage_uvquad.frag.spv",
+        "mesh_bindless_coverage_uvquad.frag.spv",
+        "mesh_bindless_field_coverage_uvquad.frag.spv",
+        "mesh_clipmap_coverage_uvquad.frag.spv",
+        "mesh_clipmap_field_coverage_uvquad.frag.spv",
+        "mesh_coverage_uvquad.frag.spv",
+        "mesh_field_coverage_uvquad.frag.spv",
+        "mesh_object_bindless_clipmap_coverage_uvquad.frag.spv",
+        "mesh_object_bindless_clipmap_field_coverage_uvquad.frag.spv",
+        "mesh_object_bindless_coverage_uvquad.frag.spv",
+        "mesh_object_bindless_field_coverage_uvquad.frag.spv",
+        "mesh_object_clipmap_coverage_uvquad.frag.spv",
+        "mesh_object_clipmap_field_coverage_uvquad.frag.spv",
+        "mesh_object_coverage_uvquad.frag.spv",
+        "mesh_object_field_coverage_uvquad.frag.spv",
+        "outline_depth_bindless_coverage_uvquad.frag.spv",
+        "outline_depth_coverage_uvquad.frag.spv",
+        "outline_mask_bindless_coverage_uvquad.frag.spv",
+        "outline_mask_coverage_uvquad.frag.spv",
+        "outline_view_scaled_bindless_coverage_uvquad.frag.spv",
+        "outline_view_scaled_coverage_uvquad.frag.spv",
+        "shadow_bindless_coverage_uvquad.frag.spv",
+        "shadow_coverage_uvquad.frag.spv"
+      ],
+      "validated": 44,
+      "cpuExit": 0,
+      "playerSha256": "323159d11c20155502c8d930dc86e64cc06ee834b71a8089c5d88728257d5128"
+    }
+  },
+  "captures": [
+    {
+      "hair": {
+        "configuration": "Release",
+        "device": "nvidia",
+        "variant": "hair-coverage",
+        "referenceEnabled": true,
+        "coverageSource": {
+          "authoredMipLevels": 10,
+          "channel": "red",
+          "height": 512,
+          "lodPolicy": "ellipse-major",
+          "materialIndex": 9,
+          "name": "M_actor_laevat_hair_01",
+          "sampler": {
+            "anisotropy": 1.0,
+            "colorSpace": "linear",
+            "filter": "linear",
+            "magFilter": "linear",
+            "mipBias": -1.0,
+            "mipFilter": "nearest",
+            "mipPolicy": "generate",
+            "schemaVersion": 2,
+            "usage": "mask",
+            "wrapU": "repeat",
+            "wrapV": "repeat"
+          },
+          "width": 512
+        },
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "privateControlExact": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      },
+      "plane": {
+        "configuration": "Release",
+        "device": "nvidia",
+        "extent": 274,
+        "ellipseLodAfterBias": 0.7630344058337939,
+        "selectedMip": 1,
+        "positivePixels": 65536,
+        "opaqueControlExact": true,
+        "cases": {
+          "ellipse": {
+            "sha256": "147c3b57041b5c818ad56b114fe0f5e327b8e7472ffe6653fe10e5738cb77174",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "ellipse-major",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          },
+          "opaque-level": {
+            "sha256": "147c3b57041b5c818ad56b114fe0f5e327b8e7472ffe6653fe10e5738cb77174",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "device",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          },
+          "transparent-level": {
+            "sha256": "2090c010e5157002fa2648f3a783a69f07732b6b378dd4bed84cdb8015573390",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "device",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          }
+        },
+        "validationClean": true,
+        "allocatorZero": true
+      }
+    },
+    {
+      "hair": {
+        "configuration": "Release",
+        "device": "intel",
+        "variant": "hair-coverage",
+        "referenceEnabled": true,
+        "coverageSource": {
+          "authoredMipLevels": 10,
+          "channel": "red",
+          "height": 512,
+          "lodPolicy": "ellipse-major",
+          "materialIndex": 9,
+          "name": "M_actor_laevat_hair_01",
+          "sampler": {
+            "anisotropy": 1.0,
+            "colorSpace": "linear",
+            "filter": "linear",
+            "magFilter": "linear",
+            "mipBias": -1.0,
+            "mipFilter": "nearest",
+            "mipPolicy": "generate",
+            "schemaVersion": 2,
+            "usage": "mask",
+            "wrapU": "repeat",
+            "wrapV": "repeat"
+          },
+          "width": 512
+        },
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "privateControlExact": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 97,
+            "meanAbsoluteByteError": 0.21296350708115414,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 97,
+            "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 97,
+            "meanAbsoluteByteError": 0.21296350708115414,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 97,
+            "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 97,
+            "meanAbsoluteByteError": 0.21296350708115414,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 97,
+            "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 97,
+            "meanAbsoluteByteError": 0.21296350708115414,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 97,
+            "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      },
+      "plane": {
+        "configuration": "Release",
+        "device": "intel",
+        "extent": 274,
+        "ellipseLodAfterBias": 0.7630344058337939,
+        "selectedMip": 1,
+        "positivePixels": 65536,
+        "opaqueControlExact": true,
+        "cases": {
+          "ellipse": {
+            "sha256": "5e5b3a16cc2ad0fd4d2374955ae98d691696caa7f766ee6d930dbbe9d6ddc530",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "ellipse-major",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          },
+          "opaque-level": {
+            "sha256": "5e5b3a16cc2ad0fd4d2374955ae98d691696caa7f766ee6d930dbbe9d6ddc530",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "device",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          },
+          "transparent-level": {
+            "sha256": "84eeeb6d731c10bd78930d31256b8661fce47ef9886a891d00de97ba94ee8468",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "device",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          }
+        },
+        "validationClean": true,
+        "allocatorZero": true
+      }
+    },
+    {
+      "hair": {
+        "configuration": "Debug",
+        "device": "nvidia",
+        "variant": "hair-coverage",
+        "referenceEnabled": true,
+        "coverageSource": {
+          "authoredMipLevels": 10,
+          "channel": "red",
+          "height": 512,
+          "lodPolicy": "ellipse-major",
+          "materialIndex": 9,
+          "name": "M_actor_laevat_hair_01",
+          "sampler": {
+            "anisotropy": 1.0,
+            "colorSpace": "linear",
+            "filter": "linear",
+            "magFilter": "linear",
+            "mipBias": -1.0,
+            "mipFilter": "nearest",
+            "mipPolicy": "generate",
+            "schemaVersion": 2,
+            "usage": "mask",
+            "wrapU": "repeat",
+            "wrapV": "repeat"
+          },
+          "width": 512
+        },
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "privateControlExact": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 43,
+            "maxByteError": 5,
+            "meanAbsoluteByteError": 0.14234784823020116,
+            "vsFrozenDifferentPixels": 6472,
+            "vsFrozenMaxByteError": 6,
+            "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      },
+      "plane": {
+        "configuration": "Debug",
+        "device": "nvidia",
+        "extent": 274,
+        "ellipseLodAfterBias": 0.7630344058337939,
+        "selectedMip": 1,
+        "positivePixels": 65536,
+        "opaqueControlExact": true,
+        "cases": {
+          "ellipse": {
+            "sha256": "147c3b57041b5c818ad56b114fe0f5e327b8e7472ffe6653fe10e5738cb77174",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "ellipse-major",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          },
+          "opaque-level": {
+            "sha256": "147c3b57041b5c818ad56b114fe0f5e327b8e7472ffe6653fe10e5738cb77174",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "device",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          },
+          "transparent-level": {
+            "sha256": "2090c010e5157002fa2648f3a783a69f07732b6b378dd4bed84cdb8015573390",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "device",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          }
+        },
+        "validationClean": true,
+        "allocatorZero": true
+      }
+    },
+    {
+      "hair": {
+        "configuration": "Debug",
+        "device": "intel",
+        "variant": "hair-coverage",
+        "referenceEnabled": true,
+        "coverageSource": {
+          "authoredMipLevels": 10,
+          "channel": "red",
+          "height": 512,
+          "lodPolicy": "ellipse-major",
+          "materialIndex": 9,
+          "name": "M_actor_laevat_hair_01",
+          "sampler": {
+            "anisotropy": 1.0,
+            "colorSpace": "linear",
+            "filter": "linear",
+            "magFilter": "linear",
+            "mipBias": -1.0,
+            "mipFilter": "nearest",
+            "mipPolicy": "generate",
+            "schemaVersion": 2,
+            "usage": "mask",
+            "wrapU": "repeat",
+            "wrapV": "repeat"
+          },
+          "width": 512
+        },
+        "cameraUniformBytes": 800,
+        "validationClean": true,
+        "allocatorZero": true,
+        "privateControlExact": true,
+        "frames": [
+          {
+            "frame": 0,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 97,
+            "meanAbsoluteByteError": 0.21296350708115414,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 97,
+            "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+          },
+          {
+            "frame": 1,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 97,
+            "meanAbsoluteByteError": 0.21296350708115414,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 97,
+            "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+          },
+          {
+            "frame": 2,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 97,
+            "meanAbsoluteByteError": 0.21296350708115414,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 97,
+            "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+          },
+          {
+            "frame": 3,
+            "maskPixels": 17017,
+            "overOne": 597,
+            "maxByteError": 97,
+            "meanAbsoluteByteError": 0.21296350708115414,
+            "vsFrozenDifferentPixels": 10369,
+            "vsFrozenMaxByteError": 97,
+            "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+          }
+        ],
+        "sourceGate": "17017 original native hair pixels; per-channel at most one byte"
+      },
+      "plane": {
+        "configuration": "Debug",
+        "device": "intel",
+        "extent": 274,
+        "ellipseLodAfterBias": 0.7630344058337939,
+        "selectedMip": 1,
+        "positivePixels": 65536,
+        "opaqueControlExact": true,
+        "cases": {
+          "ellipse": {
+            "sha256": "5e5b3a16cc2ad0fd4d2374955ae98d691696caa7f766ee6d930dbbe9d6ddc530",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "ellipse-major",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          },
+          "opaque-level": {
+            "sha256": "5e5b3a16cc2ad0fd4d2374955ae98d691696caa7f766ee6d930dbbe9d6ddc530",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "device",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          },
+          "transparent-level": {
+            "sha256": "84eeeb6d731c10bd78930d31256b8661fce47ef9886a891d00de97ba94ee8468",
+            "source": {
+              "authoredMipLevels": 7,
+              "channel": "red",
+              "height": 64,
+              "lodPolicy": "device",
+              "materialIndex": 0,
+              "name": "Coverage",
+              "sampler": {
+                "anisotropy": 1.0,
+                "colorSpace": "linear",
+                "filter": "linear",
+                "mipBias": -1.0,
+                "mipFilter": "nearest",
+                "mipPolicy": "generate",
+                "schemaVersion": 1,
+                "usage": "mask",
+                "wrapU": "repeat",
+                "wrapV": "repeat"
+              },
+              "width": 64
+            }
+          }
+        },
+        "validationClean": true,
+        "allocatorZero": true
+      }
+    }
+  ],
+  "debugReleasePngExact": {
+    "nvidia": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "intel": [
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "defaultRegression": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "allExact": true
+  },
+  "run": "20261111-072757-material-ellipse-coverage-policy-3e26b6",
+  "sceneMeshSource": {
+    "material": "M_actor_laevat_hair_01",
+    "sceneModelNodes": [
+      {
+        "id": "hero",
+        "components": [
+          "azure.transform",
+          "azure.object-shadow"
+        ]
+      },
+      {
+        "id": "camera",
+        "components": [
+          "azure.transform",
+          "azure.camera",
+          "azure.reference-camera"
+        ]
+      },
+      {
+        "id": "main",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-0",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-6",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-7",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-2",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-8",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-1",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-3",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-4",
+        "components": [
+          "azure.transform"
+        ]
+      },
+      {
+        "id": "captured-local-5",
+        "components": [
+          "azure.transform"
+        ]
+      }
+    ],
+    "heroTransform": {
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "mesh": [
+      {
+        "meshIndex": 9,
+        "primitiveIndex": 0,
+        "nodes": [
+          [
+            {
+              "name": "S_actor_laevat_hair_01_lod0",
+              "matrix": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                2.220446049250314e-16,
+                -1.0000000000000002,
+                0.0,
+                0.0,
+                1.0000000000000002,
+                2.220446049250314e-16,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            },
+            {
+              "name": "chr_0016_laevat_postmodel",
+              "rotation": [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071068286895752
+              ]
+            }
+          ]
+        ],
+        "vertices": 11564,
+        "indices": 43044,
+        "positionBounds": [
+          [
+            -0.14387553930282593,
+            1.2089804410934448,
+            -0.1434481143951416
+          ],
+          [
+            0.1580737978219986,
+            1.7236125469207764,
+            0.13949298858642578
+          ]
+        ],
+        "uvBounds": [
+          [
+            0.00391077995300293,
+            0.003898441791534424
+          ],
+          [
+            0.99609375,
+            0.9961328506469727
+          ]
+        ],
+        "exactIndexSequence": true,
+        "exactUvSequence": true,
+        "directPositionMaxDifference": 2.4586915969848633e-07,
+        "exactPositionVertices": 0,
+        "positionDifferenceBounds": [
+          [
+            0.0,
+            1.1920928955078125e-07,
+            1.4901161193847656e-07
+          ],
+          [
+            0.0,
+            2.384185791015625e-07,
+            2.4586915969848633e-07
+          ]
+        ],
+        "imported": [
+          {
+            "worldMatrix": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0000001343588567,
+                -1.343588567070953e-07,
+                0.0
+              ],
+              [
+                0.0,
+                1.343588567070953e-07,
+                1.0000001343588567,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "importedVerticesExact": 11564,
+            "importedComponentsExact": 34692,
+            "importedMaximumDifference": 0.0
+          }
+        ]
+      }
+    ],
+    "authoredReferenceProfileExact": true,
+    "authoredReferenceFrameExact": true,
+    "authoredFlipNdcY": false,
+    "native": {
+      "vertices": 11564,
+      "indices": 43044,
+      "positionBounds": [
+        [
+          -0.14387553930282593,
+          1.2089805603027344,
+          -0.14344796538352966
+        ],
+        [
+          0.1580737978219986,
+          1.7236127853393555,
+          0.13949322700500488
+        ]
+      ],
+      "uvBounds": [
+        [
+          0.00391077995300293,
+          0.003898441791534424
+        ],
+        [
+          0.99609375,
+          0.9961328506469727
+        ]
+      ]
+    }
+  },
+  "visibilityProbe": {
+    "scope": "Spatial intersection with historical intervention. Current effect requires a new production readback.",
+    "devices": {
+      "nvidia": {
+        "failures": 43,
+        "legacyVisibilityResolved": 40,
+        "legacyVisibilityMatched": 40,
+        "legacyVisibilityOverOne": 40,
+        "interiorFailures": 12,
+        "strongInteriorFailures": 0,
+        "intelDepthVisibilityIntersection": 6,
+        "strongIntelDepthVisibilityIntersection": 0,
+        "intelPeakInDepthVisibilityFailures": false,
+        "positiveProbePixels": [
+          {
+            "pixel": [
+              1322,
+              320
+            ],
+            "currentColorMaxError": 5,
+            "legacyVisibilityError": 21
+          },
+          {
+            "pixel": [
+              1324,
+              289
+            ],
+            "currentColorMaxError": 5,
+            "legacyVisibilityError": 17
+          },
+          {
+            "pixel": [
+              1220,
+              282
+            ],
+            "currentColorMaxError": 4,
+            "legacyVisibilityError": 15
+          },
+          {
+            "pixel": [
+              1220,
+              278
+            ],
+            "currentColorMaxError": 4,
+            "legacyVisibilityError": 10
+          },
+          {
+            "pixel": [
+              1219,
+              273
+            ],
+            "currentColorMaxError": 4,
+            "legacyVisibilityError": 11
+          },
+          {
+            "pixel": [
+              1300,
+              171
+            ],
+            "currentColorMaxError": 3,
+            "legacyVisibilityError": 7
+          },
+          {
+            "pixel": [
+              1322,
+              290
+            ],
+            "currentColorMaxError": 3,
+            "legacyVisibilityError": 11
+          },
+          {
+            "pixel": [
+              1323,
+              289
+            ],
+            "currentColorMaxError": 3,
+            "legacyVisibilityError": 8
+          }
+        ]
+      },
+      "intel": {
+        "failures": 597,
+        "legacyVisibilityResolved": 36,
+        "legacyVisibilityMatched": 41,
+        "legacyVisibilityOverOne": 37,
+        "interiorFailures": 229,
+        "strongInteriorFailures": 12,
+        "intelDepthVisibilityIntersection": 10,
+        "strongIntelDepthVisibilityIntersection": 1,
+        "intelPeakInDepthVisibilityFailures": false,
+        "positiveProbePixels": [
+          {
+            "pixel": [
+              1322,
+              290
+            ],
+            "currentColorMaxError": 14,
+            "legacyVisibilityError": 11
+          },
+          {
+            "pixel": [
+              1321,
+              293
+            ],
+            "currentColorMaxError": 11,
+            "legacyVisibilityError": 10
+          },
+          {
+            "pixel": [
+              1322,
+              320
+            ],
+            "currentColorMaxError": 7,
+            "legacyVisibilityError": 21
+          },
+          {
+            "pixel": [
+              1324,
+              289
+            ],
+            "currentColorMaxError": 6,
+            "legacyVisibilityError": 17
+          },
+          {
+            "pixel": [
+              1220,
+              282
+            ],
+            "currentColorMaxError": 4,
+            "legacyVisibilityError": 15
+          },
+          {
+            "pixel": [
+              1367,
+              276
+            ],
+            "currentColorMaxError": 4,
+            "legacyVisibilityError": 9
+          },
+          {
+            "pixel": [
+              1220,
+              278
+            ],
+            "currentColorMaxError": 4,
+            "legacyVisibilityError": 10
+          },
+          {
+            "pixel": [
+              1219,
+              273
+            ],
+            "currentColorMaxError": 4,
+            "legacyVisibilityError": 11
+          }
+        ]
+      }
+    }
+  },
+  "archive": {
+    "bytes": 360736,
+    "sha256": "5b4d6f0d8847ce69a5e78bb7fb4a8343840dd9eb48eeae4611713611e089a762",
+    "members": 154
+  }
+}

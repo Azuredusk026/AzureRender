@@ -32,6 +32,8 @@ void CharacterSceneRenderer::prepareTemporalFrame(const SceneFrameData& frame){
 }
 void CharacterSceneRenderer::initializeMotion(const RenderContext& context){
     motionTarget_=context.motionOutput?context.motionOutput:reflectionOwnedMotion_.get();
+    if(ellipseCoverageNeeded_&&motionTarget_)
+        throw std::invalid_argument("coverageTexture ellipse-major requires a spatial configuration without motion output");
     if(totalMaterialCount()>UINT32_MAX)throw std::length_error("Motion material count exceeds descriptor addressing");
     if(motionTarget_)motionPass_=std::make_unique<MotionVectorPass>(*rhi_,*allocator_,*motionTarget_,shaderDirectory_,
         static_cast<std::uint32_t>(totalMaterialCount()),static_cast<std::uint32_t>(kMaxFramesInFlight),context.faceCullingEnabled,context.depthTestEnabled);

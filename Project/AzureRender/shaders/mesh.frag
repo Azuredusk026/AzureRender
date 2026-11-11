@@ -809,7 +809,7 @@ void main()
 #if defined(AZURE_GEOMETRY_SAMPLES)
     float coverageAlpha=textureGrad(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate,alphaUvDx*.25,alphaUvDy*.25).a;
 #else
-    float coverageAlpha=azureSamplePrimaryUv(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate).a;
+    float coverageAlpha=azureSampleCoverageAlpha(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate,AZURE_MATERIAL_FEATURES);
 #endif
     if((AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
         coverageAlpha=azureTemporalMaskAlpha(AZ_TEX_METALLIC_ROUGHNESS,textureCoordinate,alphaUvDx,alphaUvDy);

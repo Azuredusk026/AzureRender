@@ -5,6 +5,8 @@
 #include "material_primary_uv.glsl"
 #if defined(AZURE_SNAPSHOT_DEPTH)
 #include "material_sampling.glsl"
+#endif
+#if defined(AZURE_SNAPSHOT_DEPTH) || (defined(AZURE_REFERENCE_MATERIAL_UV) && defined(AZURE_INDEPENDENT_COVERAGE) && !defined(AZURE_GEOMETRY_SAMPLES))
 #define DEPTH_FEATURES layout(offset=116) uint features;
 #else
 #define DEPTH_FEATURES
@@ -47,12 +49,12 @@ void main() {
 #else
         float alpha=(material.features&0x40000000u)!=0u
             ?azureTemporalMaskAlpha(BASE,textureCoordinate,azurePrimaryDx(textureCoordinate),azurePrimaryDy(textureCoordinate))
-            :azureSamplePrimaryUv(BASE,textureCoordinate).a;
+            :azureSampleCoverageAlpha(BASE,textureCoordinate,material.features);
 #endif
         if(alpha<material.alphaCutoff)discard;
     }
 #else
-    if(material.alphaMode==1 && azureSamplePrimaryUv(BASE,textureCoordinate).a<material.alphaCutoff) discard;
+    if(material.alphaMode==1 && azureSampleCoverageAlpha(BASE,textureCoordinate,material.features)<material.alphaCutoff) discard;
 #endif
     linearDepth=dot(worldPosition-camera.position.xyz,camera.forward.xyz);
 }
