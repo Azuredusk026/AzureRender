@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-010418-scene-reference-object-visibility-709f68",
+      "name": "场景参考对象可见量",
+      "sourceBase": "22663a8",
+      "evidence": "docs/acceptance/nr/scene-reference-object-visibility.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-object-visibility/results.json"
+    },
+    {
       "path": "runs/20261111-232828-scene-reference-normal-60ddfa",
       "name": "场景参考法线与对象身份",
       "sourceBase": "7044017",

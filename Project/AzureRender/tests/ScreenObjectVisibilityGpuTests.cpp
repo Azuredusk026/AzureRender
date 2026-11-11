@@ -67,17 +67,26 @@ int main(int argc,char** argv)try{
         }
         ScreenObjectVisibilityGpu owner(backend,{width,height},2,ScreenObjectVisibilityShaders::load(argv[1]),numerics);
         numerics.reciprocalCorrections.clear();
+        struct AbandonedRecording {};
+        try{
+            host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer){
+                owner.record(commands,0,inputs,view,{first});
+                throw AbandonedRecording{};
+            });
+        }catch(const AbandonedRecording&){}
         auto readback=host.allocator.createBuffer(width*height*2,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         try{
-            for(unsigned scenario=0;scenario<6;++scenario){
+            for(unsigned scenario=0;scenario<7;++scenario){
                 const auto slot=scenario%2;
                 std::vector<ScreenObjectVisibilityRecord> records(scenario==0?8:2,second);records[0]=first;
                 inputs.objectDepth=scenario==2?ScreenObjectDepth::Forward:ScreenObjectDepth::Reversed;
-                if(scenario==3)records.clear();
+                if(scenario==3||scenario==6)records.clear();
                 if(scenario==4){inputs.normals=normals16;inputs.normalFormat=VK_FORMAT_R16G16_UNORM;inputs.objectIds=ids32;inputs.objectIdFormat=VK_FORMAT_R32_UINT;}
                 if(scenario==5){records.resize(1);records[0].filterRadiusUv={.75F,.75F};}
                 host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer native){
-                    owner.record(commands,slot,inputs,view,records);const auto output=owner.output(slot);
+                    if(scenario==6)owner.recordNeutral(commands,slot);
+                    else owner.record(commands,slot,inputs,view,records);
+                    const auto output=owner.output(slot);
                     commands.imageBarrier({output.image,output.layout,VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,1,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
                         VK_PIPELINE_STAGE_TRANSFER_BIT,VK_ACCESS_SHADER_READ_BIT,VK_ACCESS_TRANSFER_READ_BIT});
                     VkBufferImageCopy copy{};copy.imageSubresource={VK_IMAGE_ASPECT_COLOR_BIT,0,0,1};copy.imageExtent={width,height,1};

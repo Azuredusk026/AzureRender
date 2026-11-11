@@ -4,7 +4,11 @@
 #include "render/ReferenceDepthConvention.hpp"
 #include <algorithm>
 #include <limits>
+#include <optional>
 namespace azurerender {
+struct SceneReferenceObjectVisibilitySettings {
+    std::array<float,2> pixelOffset{.5F,.5F};
+};
 struct ReferenceCameraView {
     std::uint32_t schemaVersion=1;
     std::array<std::uint32_t,3> reserved{};
@@ -15,6 +19,7 @@ struct ReferenceCameraView {
     bool flipNdcY=false;
     bool produceSceneDepth=false;
     bool produceSceneVisibilityInputs=false;
+    std::optional<SceneReferenceObjectVisibilitySettings> objectVisibility;
 };
 struct ReferenceCameraRay {std::array<float,3> origin,direction;};
 struct ReferenceClipBoundsDescription {
@@ -43,6 +48,11 @@ public:
             "Scene reference depth requires reversed depth");
         require(!view.produceSceneVisibilityInputs||view.produceSceneDepth,
             "Scene visibility inputs require scene reference depth");
+        if(view.objectVisibility){
+            require(view.produceSceneVisibilityInputs,"Scene object visibility requires scene visibility inputs");
+            for(const float offset:view.objectVisibility->pixelOffset)
+                require(std::isfinite(offset)&&std::abs(offset)<=1.F,"Scene object visibility pixel offset must be in [-1,1]");
+        }
         validateReferencePositionFrame(view.frame);validateReferenceClipProjection(view.projection);const auto& p=view.projection.parameters;
         for(unsigned row=0;row<4;++row){
             matrix_[row][3]=p.columns[3][row];magnitude_[row][3]=std::abs(double(p.columns[3][row]));
@@ -60,10 +70,26 @@ public:
             for(unsigned row=0;row<4;++row)if(row!=c){const double factor=augmented[row][c];for(unsigned k=0;k<8;++k)augmented[row][k]-=factor*augmented[c][k];}}
         for(unsigned row=0;row<4;++row)for(unsigned c=0;c<4;++c){inverse_[row][c]=augmented[row][c+4];require(std::isfinite(inverse_[row][c]),"Reference inverse matrix is nonfinite");}
         const double condition=norm(matrix_)*norm(inverse_);require(std::isfinite(condition)&&condition<=1.e12,"Reference camera matrix condition exceeds1e12");
+        if(view.objectVisibility)(void)clipToReference();
         for(unsigned c=0;c<4;++c){planes_[0][c]=matrix_[3][c]+matrix_[0][c];planes_[1][c]=matrix_[3][c]-matrix_[0][c];planes_[2][c]=matrix_[3][c]+matrix_[1][c];planes_[3][c]=matrix_[3][c]-matrix_[1][c];planes_[4][c]=matrix_[2][c];planes_[5][c]=matrix_[3][c]-matrix_[2][c];}
     }
     const ReferenceCameraView& descriptor() const noexcept{return view_;}
     ReferenceClipBoundsDescription conservativeClipDescription() const noexcept{return {matrix_,magnitude_};}
+    std::array<float,16> clipToReference() const {
+        std::array<float,16> result{};
+        for(unsigned row=0;row<3;++row){
+            const int axis=view_.frame.parameters.axes[row];
+            const auto source=static_cast<unsigned>(std::abs(axis)-1);
+            const double sign=axis<0?-1:1;
+            for(unsigned col=0;col<4;++col){
+                const double value=sign*inverse_[source][col]+double(view_.frame.parameters.offset[row])*inverse_[3][col];
+                result[col*4+row]=static_cast<float>(value);
+            }
+        }
+        for(unsigned col=0;col<4;++col)result[col*4+3]=static_cast<float>(inverse_[3][col]);
+        for(const float value:result)require(std::isfinite(value),"Reference clip inverse exceeds binary32");
+        return result;
+    }
     std::array<float,4> clip(const std::array<float,3>& world) const {
         auto result=projectReferenceClip(view_.projection,referenceRelativePosition(view_.frame,world));if(view_.flipNdcY)result[1]=-result[1];return result;
     }

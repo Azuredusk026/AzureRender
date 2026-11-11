@@ -58,6 +58,7 @@
 namespace azurerender {
 
 class IrradianceClipmapGpu;
+class ScreenObjectVisibilityGpu;
 // The stylized character pipeline, migrated from the monolith application
 // class into the first concrete ISceneRenderer. It owns the loaded glTF
 // asset, its GPU resources (buffers/textures/descriptors/pipelines), the
@@ -116,13 +117,16 @@ private:
     bool referenceCameraPrepared_=false,referenceProjectedSurface_=false;
     std::optional<PreparedReferenceCameraView> referenceCamera_;
     std::unique_ptr<SceneReferenceDepthTargets> referenceSceneDepth_;
+    std::unique_ptr<ScreenObjectVisibilityGpu> referenceObjectVisibility_;
     std::array<VkPipeline,3> referenceSceneDepthPipelines_{};
     std::array<VkPipeline,3> referenceSceneVisibilityPipelines_{};
-    struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;std::uint64_t submission;};
+    struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;bool objectVisibility;std::uint64_t submission;};
     std::optional<ReferenceDepthSubmission> pendingReferenceDepth_;
     std::optional<ReferenceDepthSubmission> submittedReferenceDepth_;
     bool referenceDepthActive() const noexcept;
     bool referenceVisibilityActive() const noexcept;
+    bool referenceObjectVisibilityActive() const noexcept;
+    void recordReferenceObjectVisibility(rhi::ICommandRecorder&,unsigned slot,const SceneInstanceSnapshot&);
     void createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context,bool visibilityInputs);
     void destroyUvShaderModule(VkShaderModule);
     VkPipeline createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc&);

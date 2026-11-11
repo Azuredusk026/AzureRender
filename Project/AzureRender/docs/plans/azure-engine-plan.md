@@ -1317,3 +1317,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [场景参考法线与对象身份](../acceptance/nr/scene-reference-normal.md)记录实际场景输入。
 可见量装配继续核对同帧对象图集及参考重建。
+
+[场景参考对象可见量](../acceptance/nr/scene-reference-object-visibility.md)记录同帧图集及输出。
+原生图集、参考标定及完整颜色按各自门槛验收。

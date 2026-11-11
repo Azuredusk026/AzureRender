@@ -840,3 +840,6 @@ Intel 设备差异与完整颜色继续验收。
 
 [场景参考法线与对象身份](docs/acceptance/nr/scene-reference-normal.md)记录同帧输入。
 NVIDIA 法线来源控制的 17,017 个可见量均在一字节内。
+
+[场景参考对象可见量](docs/acceptance/nr/scene-reference-object-visibility.md)接入实际图集和记录。
+完整接收及头发区域继续按一字节门槛核对。

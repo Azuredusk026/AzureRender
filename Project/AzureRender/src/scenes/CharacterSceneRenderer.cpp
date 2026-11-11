@@ -48,6 +48,7 @@ static constexpr bool kSurfaceRadianceFrameSelection=false;
 #include "scene/TransformParity.hpp"
 #include "render/CameraProjection.hpp"
 #include "render/ReferenceFmaShader.hpp"
+#include "render/SceneReferenceObjectVisibility.hpp"
 
 #include <GLFW/glfw3.h>
 #include <stb_image.h>
@@ -346,6 +347,7 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
     referenceCameraPrepared_=context.referenceCameraPrograms||context.referenceSceneDepthPrograms||context.referenceSceneVisibilityPrograms
+        ||context.referenceSceneObjectVisibilityPrograms
         ||(renderSettings_->cameraView&&renderSettings_->cameraView->referenceCalibration.has_value());
     faceSdfPrepared_=renderSettings_->faceSdfFeature;platformPrepared_=renderSettings_->showcasePlatformFeature;
     faceSdfTextureCount_=0;
@@ -616,6 +618,7 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(referenceDepthRequested(context)!=static_cast<bool>(referenceSceneDepth_))return false;
     if(referenceSceneDepth_&&referenceSceneDepth_->visibilityInputs()!=referenceVisibilityRequested(context))return false;
+    if(referenceObjectVisibilityRequested(context)!=static_cast<bool>(referenceObjectVisibility_))return false;
     if(!objectShadowPrepared_&&std::any_of(context.scene.nodes.begin(),context.scene.nodes.end(),
         [](const auto& node){return node.objectShadow&&node.objectShadow->enabled;}))return false;
     if(scene_.reflectionProbe.texture!=context.scene.reflectionProbe.texture)return false;
@@ -1456,6 +1459,7 @@ void CharacterSceneRenderer::registerPasses(
     for(std::uint32_t key=0;key<meshResourceCount_;++key){graph.use(prepass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);graph.use(prepass,indexResources[key],RenderGraphUsage::IndexBuffer,false);}
     if(referenceDepthActive()){
         const auto slot=context.currentFrame;
+        const bool objectVisibility=referenceObjectVisibilityActive();
         const auto pass=graph.addGraphicsPass("character-reference-depth",referenceSceneDepth_->begin(slot),
             [this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
                 recordDepthCoverage(*frozenContext,*frozenInstances,commands,DepthCoverageMode::ReferenceDepth);
@@ -1463,13 +1467,24 @@ void CharacterSceneRenderer::registerPasses(
         rhi::ImageBarrierDesc raster{};raster.image=referenceSceneDepth_->rasterImage(slot);
         rhi::ImageBarrierDesc hardware{};hardware.image=referenceSceneDepth_->hardwareImage(slot);
         hardware.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
-        graph.attachment(pass,graph.importImage("character-reference-r32",raster),RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        const auto rasterResource=graph.importImage("character-reference-r32",raster);
+        graph.attachment(pass,rasterResource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         graph.attachment(pass,graph.importImage("character-reference-d32",hardware),RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
         if(referenceSceneDepth_->visibilityInputs()){
             rhi::ImageBarrierDesc normal{};normal.image=referenceSceneDepth_->packedNormalImage(slot);
             rhi::ImageBarrierDesc identity{};identity.image=referenceSceneDepth_->objectIdImage(slot);
-            graph.attachment(pass,graph.importImage("character-reference-normal",normal),RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
-            graph.attachment(pass,graph.importImage("character-reference-object-id",identity),RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            const auto normalResource=graph.importImage("character-reference-normal",normal);
+            const auto identityResource=graph.importImage("character-reference-object-id",identity);
+            graph.attachment(pass,normalResource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            graph.attachment(pass,identityResource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+            if(objectVisibility){
+                const auto output=graph.addCommandPass("character-reference-object-visibility",
+                    [this,slot,frozenInstances](rhi::ICommandRecorder& commands){recordReferenceObjectVisibility(commands,slot,*frozenInstances);});
+                if(objectAtlasResource){
+                    for(const auto input:{rasterResource,normalResource,identityResource,*objectAtlasResource})
+                        graph.use(output,input,RenderGraphUsage::Sampled,false);
+                }else graph.dependsOn(output,pass);
+            }
         }
         for(const auto input:{jointResource,morphTargetResource,morphWeightResource,instanceResource})
             graph.use(pass,input,RenderGraphUsage::VertexStorage,false);
@@ -1478,7 +1493,7 @@ void CharacterSceneRenderer::registerPasses(
             graph.use(pass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
             graph.use(pass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
         }
-        pendingReferenceDepth_=ReferenceDepthSubmission{slot,referenceVisibilityActive(),0};
+        pendingReferenceDepth_=ReferenceDepthSubmission{slot,referenceVisibilityActive(),objectVisibility,0};
     }
     std::optional<RenderGraph::ResourceId> outlineMaskResource;
     if(frozenInstances->buffers.outlineMaskImage){
@@ -1737,7 +1752,7 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
         context.commands->beginRenderPass(referenceSceneDepth_->begin(context.currentFrame));
         recordDepthCoverage(context,*instanceSnapshot_,*context.commands,DepthCoverageMode::ReferenceDepth);
         context.commands->endRenderPass();
-        pendingReferenceDepth_=ReferenceDepthSubmission{context.currentFrame,referenceVisibilityActive(),0};
+        pendingReferenceDepth_=ReferenceDepthSubmission{context.currentFrame,referenceVisibilityActive(),referenceObjectVisibilityActive(),0};
     }
     recordShadowPass(context);
     if(!instanceSnapshot_->objectShadowPages.empty()){
@@ -1747,6 +1762,14 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
         context.commands->imageBarrier({objectShadowAtlas_->image().image,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,
             VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
             VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
+    }
+    if(referenceObjectVisibilityActive()){
+        const auto slot=context.currentFrame;
+        if(!instanceSnapshot_->objectShadowPages.empty())
+            for(const auto image:{referenceSceneDepth_->rasterImage(slot),referenceSceneDepth_->packedNormalImage(slot),referenceSceneDepth_->objectIdImage(slot)})
+                context.commands->imageBarrier({image,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+                    VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
+        recordReferenceObjectVisibility(*context.commands,slot,*instanceSnapshot_);
     }
     context.commands->imageBarrier({context.shadowImage,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,1,VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT,VK_IMAGE_ASPECT_DEPTH_BIT});
     const auto& bounds=shadowBounds_[context.currentFrame];
@@ -3042,6 +3065,9 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     if(referenceDepthRequested(context))
         referenceSceneDepth_=std::make_unique<SceneReferenceDepthTargets>(*rhi_,context.renderExtent,
             static_cast<unsigned>(kMaxFramesInFlight),referenceVisibilityRequested(context));
+    if(referenceObjectVisibilityRequested(context))
+        referenceObjectVisibility_=std::make_unique<ScreenObjectVisibilityGpu>(*rhi_,context.renderExtent,
+            static_cast<unsigned>(kMaxFramesInFlight),ScreenObjectVisibilityShaders::load(shaderDirectory_));
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
     for(auto* pipelines:{&referenceSceneDepthPipelines_,&referenceSceneVisibilityPipelines_})
@@ -3051,6 +3077,7 @@ void CharacterSceneRenderer::destroyOverlayDepth(){
         }
     pendingReferenceDepth_.reset();
     submittedReferenceDepth_.reset();
+    referenceObjectVisibility_.reset();
     referenceSceneDepth_.reset();
     destroyConservativeOcclusion();
     destroyScreenReflectionResources();
@@ -4522,6 +4549,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
             throw std::invalid_argument("Scene reference depth requires prepared single-sample spatial attachments");
         if(referenceVisibilityActive()&&!referenceSceneDepth_->visibilityInputs())
             throw std::invalid_argument("Scene reference visibility inputs must be prepared before scene loading");
+        if(referenceObjectVisibilityActive()&&!referenceObjectVisibility_)
+            throw std::invalid_argument("Scene reference object visibility must be prepared before scene loading");
         uniform.referenceCamera=referenceRasterProjectionParameters(*referenceCamera_);
     }
     // The actual view rotation is independent of sky projection scale.

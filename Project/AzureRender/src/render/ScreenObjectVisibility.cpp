@@ -66,7 +66,7 @@ PackedFrame pack(VkExtent2D extent,const ScreenObjectVisibilityInputs& inputs,co
 }
 }
 struct ScreenObjectVisibilityGpu::Impl {
-    struct Slot {rhi::GpuImage image{};VkImageView view{};VkFramebuffer framebuffer{};rhi::GpuBuffer parameters{};VkDescriptorSet set{};bool initialized=false;};
+    struct Slot {rhi::GpuImage image{};VkImageView view{};VkFramebuffer framebuffer{};rhi::GpuBuffer parameters{};VkDescriptorSet set{};};
     rhi::IRhi& backend;VkExtent2D extent{};std::uint64_t bytes=0;std::vector<Slot> slots;
     VkSampler sampler{};VkDescriptorSetLayout descriptors{};VkDescriptorPool pool{};VkPipelineLayout layout{};VkRenderPass pass{};VkPipeline pipeline{};
     rhi::GpuBuffer numerics{};bool reference=false;
@@ -96,7 +96,7 @@ struct ScreenObjectVisibilityGpu::Impl {
         rhi::DescriptorPoolDesc descriptorPool;descriptorPool.maxSets=frames;descriptorPool.sizes={{VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,frames},{VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,frames*4},{VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,frames}};
         pool=backend.createDescriptorPool(descriptorPool);const auto sets=backend.allocateDescriptorSets(pool,descriptors,frames);
         layout=backend.createPipelineLayout(descriptors,nullptr);
-        rhi::RenderPassDesc render;render.attachments={{VK_FORMAT_R8G8_UNORM,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,false,true,false}};
+        rhi::RenderPassDesc render;render.attachments={{VK_FORMAT_R8G8_UNORM,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,true,true,false}};
         pass=backend.createRenderPass(render);
         VkShaderModule vertex{},fragment{};
         try{
@@ -114,6 +114,20 @@ struct ScreenObjectVisibilityGpu::Impl {
             backend.writeDescriptorBuffer({slot.set,0,VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,slot.parameters.buffer,slot.parameters.size});
             backend.writeDescriptorBuffer({slot.set,5,VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,numerics.buffer,numerics.size});
         }
+    }
+    void begin(rhi::ICommandRecorder& commands,const Slot& slot) const {
+        // Each pass defines the entire attachment, including a slot whose previous recording was abandoned.
+        commands.imageBarrier({slot.image.image,VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,1,
+            VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            VK_ACCESS_SHADER_READ_BIT|VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT});
+        VkClearValue clear{};
+        clear.color.float32[0]=clear.color.float32[1]=1.F;
+        commands.beginRenderPass({pass,slot.framebuffer,extent,{clear}});
+    }
+    void finish(rhi::ICommandRecorder& commands,const Slot& slot) const {
+        commands.endRenderPass();
+        commands.imageBarrier({slot.image.image,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
+            VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     }
 };
 bool ScreenObjectVisibilityGpu::supported(rhi::IRhi& backend,VkExtent2D extent,unsigned frames){
@@ -147,13 +161,14 @@ void ScreenObjectVisibilityGpu::record(rhi::ICommandRecorder& commands,unsigned 
     for(unsigned i=0;i<4;++i)backend.writeDescriptorImage({slot.set,i+1,VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,views[i],state.sampler,layouts[i]});
     commands.bufferBarrier({slot.parameters.buffer,0,slot.parameters.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_UNIFORM_READ_BIT});
     commands.bufferBarrier({state.numerics.buffer,0,state.numerics.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
-    commands.imageBarrier({slot.image.image,slot.initialized?VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL:VK_IMAGE_LAYOUT_UNDEFINED,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,1,
-        VkPipelineStageFlags(slot.initialized?VK_PIPELINE_STAGE_ALL_COMMANDS_BIT:VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT),VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-        slot.initialized?VK_ACCESS_SHADER_READ_BIT:0U,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT});
-    commands.beginRenderPass({state.pass,slot.framebuffer,state.extent,{}});commands.bindPipeline(state.pipeline);commands.bindDescriptorSet(state.layout,slot.set);
-    commands.setViewport(float(state.extent.width),float(state.extent.height));commands.setScissor(state.extent);commands.draw(3);commands.endRenderPass();
-    commands.imageBarrier({slot.image.image,VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,1,
-        VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
-    slot.initialized=true;
+    state.begin(commands,slot);
+    commands.bindPipeline(state.pipeline);commands.bindDescriptorSet(state.layout,slot.set);
+    commands.setViewport(float(state.extent.width),float(state.extent.height));commands.setScissor(state.extent);commands.draw(3);
+    state.finish(commands,slot);
+}
+void ScreenObjectVisibilityGpu::recordNeutral(rhi::ICommandRecorder& commands,unsigned index){
+    const auto& slot=impl_->slots.at(index);
+    impl_->begin(commands,slot);
+    impl_->finish(commands,slot);
 }
 }

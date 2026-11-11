@@ -21,10 +21,11 @@ void to_json(nlohmann::json& j,const ReferenceCameraView& v){
         {"extent",v.extent},{"depthConvention",v.depthConvention==ReferenceDepthConvention::Forward?"forward":"reversed"},{"flipNdcY",v.flipNdcY}};
     if(v.produceSceneDepth)j["produceSceneDepth"]=true;
     if(v.produceSceneVisibilityInputs)j["produceSceneVisibilityInputs"]=true;
+    if(v.objectVisibility)j["objectVisibility"]={{"pixelOffset",v.objectVisibility->pixelOffset}};
 }
 void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY"},
-        {"produceSceneDepth","produceSceneVisibilityInputs"});
+        {"produceSceneDepth","produceSceneVisibilityInputs","objectVisibility"});
     version(j);ReferenceCameraView v;
     const auto& frame=j.at("frame");fields(frame,{"schemaVersion","axes","offset"});version(frame);
     const auto& axes=frame.at("axes");if(!axes.is_array()||axes.size()!=3)throw std::invalid_argument("Invalid reference camera axis count");
@@ -46,6 +47,11 @@ void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     if(j.contains("produceSceneVisibilityInputs")){
         if(!j.at("produceSceneVisibilityInputs").is_boolean())throw std::invalid_argument("Scene visibility input flag must be boolean");
         v.produceSceneVisibilityInputs=j.at("produceSceneVisibilityInputs").get<bool>();
+    }
+    if(j.contains("objectVisibility")){
+        const auto& settings=j.at("objectVisibility");
+        fields(settings,{"pixelOffset"});
+        v.objectVisibility=SceneReferenceObjectVisibilitySettings{vector<2>(settings.at("pixelOffset"))};
     }
     (void)PreparedReferenceCameraView(v);value=std::move(v);
 }

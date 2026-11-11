@@ -84,6 +84,9 @@ public:
     VkImage hardwareImage(unsigned slot) const{return slots_.at(slot).hardware.image;}
     VkImage packedNormalImage(unsigned slot) const{return slots_.at(slot).packedNormals.image;}
     VkImage objectIdImage(unsigned slot) const{return slots_.at(slot).objectIds.image;}
+    VkImageView rasterView(unsigned slot) const{return slots_.at(slot).rasterView;}
+    VkImageView packedNormalView(unsigned slot) const{return slots_.at(slot).packedNormalView;}
+    VkImageView objectIdView(unsigned slot) const{return slots_.at(slot).objectIdView;}
     bool visibilityInputs() const noexcept{return visibilityInputs_;}
 
     rhi::RenderPassBeginDesc begin(unsigned slot) const {
@@ -97,7 +100,7 @@ public:
         return result;
     }
 
-    SceneReferenceDepthCapture read(unsigned slot,std::uint64_t submission,bool readVisibility) const {
+    SceneReferenceDepthCapture read(unsigned slot,std::uint64_t submission,bool readVisibility,VkImage objectVisibility) const {
         SceneReferenceDepthCapture result;
         result.extent=extent_;
         result.submission=submission;
@@ -108,6 +111,7 @@ public:
             result.packedNormals=readPlane<std::uint32_t>(packedNormalImage(slot),false);
             result.objectIds=readPlane<std::uint8_t>(objectIdImage(slot),false);
         }
+        if(objectVisibility)result.objectVisibility=readPlane<std::uint16_t>(objectVisibility,false);
         return result;
     }
 

@@ -320,3 +320,7 @@ NVIDIA 冻结深度逐位一致，Intel 保留设备间深度差异。
 [场景参考法线与对象身份](../acceptance/nr/scene-reference-normal.md)接入实际场景输入。
 NVIDIA 法线来源控制的完整头发区域满足一字节门槛。
 场景图集装配和完整颜色继续按所属条件验收。
+
+[场景参考对象可见量](../acceptance/nr/scene-reference-object-visibility.md)接入当前场景。
+图集、逆投影及对象记录的独立控制均完成。
+实际输入与材质消费按原门槛继续验收。

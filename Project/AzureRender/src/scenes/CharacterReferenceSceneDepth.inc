@@ -1,16 +1,23 @@
 namespace {
 bool referenceDepthRequested(const RenderContext& context){
-    if(context.referenceSceneDepthPrograms||context.referenceSceneVisibilityPrograms)return true;
+    if(context.referenceSceneDepthPrograms||context.referenceSceneVisibilityPrograms||context.referenceSceneObjectVisibilityPrograms)return true;
     if(!context.renderSettings||!context.renderSettings->cameraView)return false;
     const auto reference=resolveReferenceCamera(*context.renderSettings->cameraView);
     return reference&&reference->descriptor().produceSceneDepth;
 }
 
 bool referenceVisibilityRequested(const RenderContext& context){
-    if(context.referenceSceneVisibilityPrograms)return true;
+    if(context.referenceSceneVisibilityPrograms||context.referenceSceneObjectVisibilityPrograms)return true;
     if(!context.renderSettings||!context.renderSettings->cameraView)return false;
     const auto& calibration=context.renderSettings->cameraView->referenceCalibration;
     return calibration&&calibration->view.produceSceneVisibilityInputs;
+}
+
+bool referenceObjectVisibilityRequested(const RenderContext& context){
+    if(context.referenceSceneObjectVisibilityPrograms)return true;
+    if(!context.renderSettings||!context.renderSettings->cameraView)return false;
+    const auto& calibration=context.renderSettings->cameraView->referenceCalibration;
+    return calibration&&calibration->view.objectVisibility.has_value();
 }
 
 std::vector<std::array<std::uint32_t,3>> referenceDepthSpans(const std::vector<scene::SceneInstance>& instances){
@@ -38,10 +45,35 @@ bool CharacterSceneRenderer::referenceVisibilityActive() const noexcept {
     return referenceCamera_&&referenceCamera_->descriptor().produceSceneVisibilityInputs;
 }
 
+bool CharacterSceneRenderer::referenceObjectVisibilityActive() const noexcept {
+    return referenceCamera_&&referenceCamera_->descriptor().objectVisibility.has_value();
+}
+
 std::optional<SceneReferenceDepthCapture> CharacterSceneRenderer::readReferenceSceneDepth() const {
     if(!referenceSceneDepth_||!submittedReferenceDepth_)return std::nullopt;
     const auto& frame=*submittedReferenceDepth_;
-    return referenceSceneDepth_->read(frame.slot,frame.submission,frame.visibilityInputs);
+    const VkImage visibility=frame.objectVisibility?referenceObjectVisibility_->output(frame.slot).image:VK_NULL_HANDLE;
+    return referenceSceneDepth_->read(frame.slot,frame.submission,frame.visibilityInputs,visibility);
+}
+
+void CharacterSceneRenderer::recordReferenceObjectVisibility(rhi::ICommandRecorder& commands,unsigned slot,
+    const SceneInstanceSnapshot& snapshot){
+    if(snapshot.objectShadowPages.empty()){
+        referenceObjectVisibility_->recordNeutral(commands,slot);
+        return;
+    }
+    ScreenObjectVisibilityInputs inputs;
+    inputs.depth=referenceSceneDepth_->rasterView(slot);
+    inputs.normals=referenceSceneDepth_->packedNormalView(slot);
+    inputs.objectIds=referenceSceneDepth_->objectIdView(slot);
+    inputs.atlas=objectShadowAtlas_->view();
+    inputs.extent=referenceObjectVisibility_->output(slot).extent;
+    inputs.atlasFormat=VK_FORMAT_D16_UNORM;
+    inputs.atlasLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+    inputs.objectDepth=ScreenObjectDepth::Forward;
+    const auto view=sceneReferenceObjectVisibilityView(*referenceCamera_);
+    const auto records=sceneReferenceObjectVisibilityRecords(referenceCamera_->descriptor().frame,snapshot.objectShadowPages);
+    referenceObjectVisibility_->record(commands,slot,inputs,view,records);
 }
 
 void CharacterSceneRenderer::createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context,bool visibilityInputs){

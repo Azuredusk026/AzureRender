@@ -60,6 +60,7 @@ public:
     ScreenObjectVisibilityOutput output(unsigned slot) const;
     void record(rhi::ICommandRecorder&,unsigned slot,const ScreenObjectVisibilityInputs&,const ScreenObjectVisibilityView&,
         const std::vector<ScreenObjectVisibilityRecord>&);
+    void recordNeutral(rhi::ICommandRecorder&,unsigned slot);
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };
