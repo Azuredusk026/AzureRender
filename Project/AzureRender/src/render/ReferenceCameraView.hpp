@@ -14,6 +14,7 @@ struct ReferenceCameraView {
     ReferenceDepthConvention depthConvention=ReferenceDepthConvention::Reversed;
     bool flipNdcY=false;
     bool produceSceneDepth=false;
+    bool produceSceneVisibilityInputs=false;
 };
 struct ReferenceCameraRay {std::array<float,3> origin,direction;};
 struct ReferenceClipBoundsDescription {
@@ -40,6 +41,8 @@ public:
         require(view.depthConvention==ReferenceDepthConvention::Forward||view.depthConvention==ReferenceDepthConvention::Reversed,"Unknown reference camera depth convention");
         require(!view.produceSceneDepth||view.depthConvention==ReferenceDepthConvention::Reversed,
             "Scene reference depth requires reversed depth");
+        require(!view.produceSceneVisibilityInputs||view.produceSceneDepth,
+            "Scene visibility inputs require scene reference depth");
         validateReferencePositionFrame(view.frame);validateReferenceClipProjection(view.projection);const auto& p=view.projection.parameters;
         for(unsigned row=0;row<4;++row){
             matrix_[row][3]=p.columns[3][row];magnitude_[row][3]=std::abs(double(p.columns[3][row]));

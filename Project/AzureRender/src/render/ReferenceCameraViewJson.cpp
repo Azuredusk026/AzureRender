@@ -3,8 +3,11 @@
 namespace azurerender {
 namespace {
 using Json=nlohmann::json;
-void fields(const Json& j,std::initializer_list<const char*> names){
-    if(!j.is_object()||j.size()!=names.size())throw std::invalid_argument("Unexpected reference camera fields");
+void fields(const Json& j,std::initializer_list<const char*> names,std::initializer_list<const char*> optional={}){
+    if(!j.is_object())throw std::invalid_argument("Unexpected reference camera fields");
+    auto known=names.size();
+    for(auto name:optional)if(j.contains(name))++known;
+    if(j.size()!=known)throw std::invalid_argument("Unexpected reference camera fields");
     for(auto name:names)if(!j.contains(name))throw std::invalid_argument("Missing reference camera field");
 }
 void version(const Json& j){if(!j.at("schemaVersion").is_number_integer()||j.at("schemaVersion")!=1)throw std::invalid_argument("Unsupported reference camera JSON version");}
@@ -17,11 +20,11 @@ void to_json(nlohmann::json& j,const ReferenceCameraView& v){
         {"projection",{{"schemaVersion",1},{"columns",v.projection.parameters.columns},{"jitter",{v.projection.parameters.jitter[0],v.projection.parameters.jitter[1]}}}},
         {"extent",v.extent},{"depthConvention",v.depthConvention==ReferenceDepthConvention::Forward?"forward":"reversed"},{"flipNdcY",v.flipNdcY}};
     if(v.produceSceneDepth)j["produceSceneDepth"]=true;
+    if(v.produceSceneVisibilityInputs)j["produceSceneVisibilityInputs"]=true;
 }
 void from_json(const nlohmann::json& j,ReferenceCameraView& value){
-    if(j.contains("produceSceneDepth"))
-        fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY","produceSceneDepth"});
-    else fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY"});
+    fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY"},
+        {"produceSceneDepth","produceSceneVisibilityInputs"});
     version(j);ReferenceCameraView v;
     const auto& frame=j.at("frame");fields(frame,{"schemaVersion","axes","offset"});version(frame);
     const auto& axes=frame.at("axes");if(!axes.is_array()||axes.size()!=3)throw std::invalid_argument("Invalid reference camera axis count");
@@ -39,6 +42,10 @@ void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     if(j.contains("produceSceneDepth")){
         if(!j.at("produceSceneDepth").is_boolean())throw std::invalid_argument("Reference camera produceSceneDepth must be boolean");
         v.produceSceneDepth=j.at("produceSceneDepth").get<bool>();
+    }
+    if(j.contains("produceSceneVisibilityInputs")){
+        if(!j.at("produceSceneVisibilityInputs").is_boolean())throw std::invalid_argument("Scene visibility input flag must be boolean");
+        v.produceSceneVisibilityInputs=j.at("produceSceneVisibilityInputs").get<bool>();
     }
     (void)PreparedReferenceCameraView(v);value=std::move(v);
 }

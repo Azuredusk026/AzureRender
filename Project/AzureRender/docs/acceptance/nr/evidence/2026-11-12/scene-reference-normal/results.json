@@ -1,0 +1,2179 @@
+{
+  "status": "qualified-scene-reference-visibility-input-producers",
+  "overall": "failed-user-review",
+  "baseCommit": "7044017",
+  "sceneRendererApiVersion": 12,
+  "source": {
+    "hairNormalScale": 1.0,
+    "backFacingSelector": 0.0,
+    "coverageCutoff": 0.5,
+    "lodBias": -1.0,
+    "maskPoints": 17017,
+    "producerConsumerPackedExact": 17017
+  },
+  "controls": {
+    "baseline": {
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "exactPixels": 16996,
+      "maximumByteError": 12,
+      "mismatches": [
+        [
+          1279,
+          1266,
+          2,
+          3
+        ],
+        [
+          1297,
+          1261,
+          246,
+          244
+        ],
+        [
+          1234,
+          1204,
+          244,
+          242
+        ],
+        [
+          1290,
+          1185,
+          232,
+          224
+        ],
+        [
+          1322,
+          1177,
+          246,
+          244
+        ],
+        [
+          1322,
+          1176,
+          239,
+          232
+        ],
+        [
+          1322,
+          1174,
+          169,
+          178
+        ],
+        [
+          1362,
+          1171,
+          213,
+          207
+        ],
+        [
+          1199,
+          1166,
+          232,
+          228
+        ],
+        [
+          1326,
+          1148,
+          169,
+          178
+        ],
+        [
+          1348,
+          1148,
+          28,
+          24
+        ],
+        [
+          1320,
+          1135,
+          254,
+          253
+        ],
+        [
+          1242,
+          1112,
+          37,
+          27
+        ],
+        [
+          1231,
+          1109,
+          248,
+          249
+        ],
+        [
+          1242,
+          1109,
+          54,
+          42
+        ],
+        [
+          1310,
+          1106,
+          255,
+          254
+        ]
+      ],
+      "pixels": 17017,
+      "validationErrors": 0,
+      "withinOnePixels": 17001,
+      "zeroAllocator": true,
+      "deviceExitCode": 1,
+      "inputs": {
+        "depth": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "normals": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+        "atlas": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+        "queries": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+        "expected": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+        "profile": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      },
+      "candidateNormalSha256": "3fd3b68999be300b8bc18943554ee06358e4f149eddcba3a873fb785305d3dca",
+      "candidateNativeBasisSha256": "b296d3a98338d53d08f997db44da843e5fd97b18f70cb7fff06bddf0c8142a46",
+      "source": "Production normals with frozen depth, atlas, IDs and inverse projection",
+      "oneByteGatePassed": false
+    },
+    "ellipse": {
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "exactPixels": 16953,
+      "maximumByteError": 45,
+      "mismatches": [
+        [
+          1271,
+          1286,
+          251,
+          254
+        ],
+        [
+          1279,
+          1266,
+          2,
+          3
+        ],
+        [
+          1297,
+          1261,
+          246,
+          244
+        ],
+        [
+          1293,
+          1260,
+          77,
+          47
+        ],
+        [
+          1259,
+          1255,
+          228,
+          224
+        ],
+        [
+          1258,
+          1253,
+          253,
+          251
+        ],
+        [
+          1310,
+          1252,
+          246,
+          201
+        ],
+        [
+          1311,
+          1252,
+          194,
+          213
+        ],
+        [
+          1234,
+          1204,
+          244,
+          242
+        ],
+        [
+          1290,
+          1185,
+          232,
+          224
+        ],
+        [
+          1292,
+          1182,
+          248,
+          244
+        ],
+        [
+          1321,
+          1177,
+          248,
+          246
+        ],
+        [
+          1321,
+          1176,
+          228,
+          236
+        ],
+        [
+          1321,
+          1175,
+          228,
+          232
+        ],
+        [
+          1322,
+          1175,
+          219,
+          224
+        ],
+        [
+          1322,
+          1174,
+          169,
+          213
+        ]
+      ],
+      "pixels": 17017,
+      "validationErrors": 0,
+      "withinOnePixels": 16963,
+      "zeroAllocator": true,
+      "deviceExitCode": 1,
+      "inputs": {
+        "depth": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "normals": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+        "atlas": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+        "queries": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+        "expected": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+        "profile": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      },
+      "candidateNormalSha256": "59c50d7287defa38ebb3ffde6e163a798fefc1b32255e8a7c6dd732aafebdd79",
+      "candidateNativeBasisSha256": "bf1597761ca6b850d231895f5bacdaf9d8591fc3047f51bb04fe61a8c4bb9010",
+      "source": "Production normals with frozen depth, atlas, IDs and inverse projection",
+      "oneByteGatePassed": false
+    },
+    "implicit": {
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "exactPixels": 17000,
+      "maximumByteError": 12,
+      "mismatches": [
+        [
+          1279,
+          1266,
+          2,
+          3
+        ],
+        [
+          1297,
+          1261,
+          246,
+          244
+        ],
+        [
+          1234,
+          1204,
+          244,
+          242
+        ],
+        [
+          1290,
+          1185,
+          232,
+          224
+        ],
+        [
+          1322,
+          1174,
+          169,
+          178
+        ],
+        [
+          1362,
+          1171,
+          213,
+          207
+        ],
+        [
+          1199,
+          1166,
+          232,
+          228
+        ],
+        [
+          1326,
+          1148,
+          169,
+          178
+        ],
+        [
+          1348,
+          1148,
+          28,
+          24
+        ],
+        [
+          1320,
+          1135,
+          254,
+          253
+        ],
+        [
+          1242,
+          1112,
+          37,
+          27
+        ],
+        [
+          1231,
+          1109,
+          248,
+          249
+        ],
+        [
+          1242,
+          1109,
+          54,
+          42
+        ],
+        [
+          1310,
+          1106,
+          255,
+          254
+        ],
+        [
+          1308,
+          1102,
+          253,
+          254
+        ],
+        [
+          1232,
+          1090,
+          243,
+          240
+        ]
+      ],
+      "pixels": 17017,
+      "validationErrors": 0,
+      "withinOnePixels": 17005,
+      "zeroAllocator": true,
+      "deviceExitCode": 1,
+      "inputs": {
+        "depth": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "normals": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+        "atlas": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+        "queries": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+        "expected": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+        "profile": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      },
+      "candidateNormalSha256": "adb2fe2f6ce5a17031162c5c35cddca937dd3c89609f783ca6fe5927b467f0ed",
+      "candidateNativeBasisSha256": "9aadd19d995449605b04aa153f6a4e49e1043fa1ec274f1832d21838d42bd46a",
+      "source": "Production normals with frozen depth, atlas, IDs and inverse projection",
+      "oneByteGatePassed": false
+    },
+    "reference-frame": {
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "exactPixels": 17014,
+      "maximumByteError": 1,
+      "mismatches": [
+        [
+          1323,
+          1143,
+          248,
+          249
+        ],
+        [
+          1320,
+          1135,
+          254,
+          253
+        ],
+        [
+          1310,
+          1106,
+          255,
+          254
+        ]
+      ],
+      "pixels": 17017,
+      "validationErrors": 0,
+      "withinOnePixels": 17017,
+      "zeroAllocator": true,
+      "deviceExitCode": 0,
+      "inputs": {
+        "depth": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "normals": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+        "atlas": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+        "queries": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+        "expected": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+        "profile": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      },
+      "candidateNormalSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "candidateNativeBasisSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "source": "Production normals with frozen depth, atlas, IDs and inverse projection",
+      "oneByteGatePassed": true
+    },
+    "intel-reference-frame": {
+      "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+      "exactPixels": 16788,
+      "maximumByteError": 51,
+      "mismatches": [
+        [
+          1271,
+          1286,
+          251,
+          254
+        ],
+        [
+          1278,
+          1285,
+          236,
+          244
+        ],
+        [
+          1296,
+          1274,
+          68,
+          69
+        ],
+        [
+          1276,
+          1273,
+          95,
+          116
+        ],
+        [
+          1294,
+          1273,
+          54,
+          27
+        ],
+        [
+          1295,
+          1273,
+          23,
+          36
+        ],
+        [
+          1278,
+          1272,
+          213,
+          214
+        ],
+        [
+          1302,
+          1271,
+          1,
+          2
+        ],
+        [
+          1291,
+          1269,
+          207,
+          208
+        ],
+        [
+          1297,
+          1268,
+          19,
+          20
+        ],
+        [
+          1294,
+          1267,
+          7,
+          4
+        ],
+        [
+          1297,
+          1267,
+          19,
+          20
+        ],
+        [
+          1293,
+          1266,
+          9,
+          5
+        ],
+        [
+          1298,
+          1266,
+          36,
+          37
+        ],
+        [
+          1292,
+          1265,
+          1,
+          3
+        ],
+        [
+          1283,
+          1264,
+          127,
+          128
+        ]
+      ],
+      "pixels": 17017,
+      "validationErrors": 0,
+      "withinOnePixels": 16887,
+      "zeroAllocator": true,
+      "deviceExitCode": 1,
+      "inputs": {
+        "depth": "02a45801c10f071def9e85501756cc7a192a8fca0196d993472cf26a3498fcdb",
+        "normals": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+        "atlas": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+        "queries": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+        "expected": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+        "profile": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      },
+      "candidateNormalSha256": "c54e38d52bbcfc8618345e2f0d1dd38d155ee8da467a1d531fc1845c1b9ca798",
+      "candidateNativeBasisSha256": "c54e38d52bbcfc8618345e2f0d1dd38d155ee8da467a1d531fc1845c1b9ca798",
+      "source": "Production normals with frozen depth, atlas, IDs and inverse projection",
+      "oneByteGatePassed": false
+    }
+  },
+  "captures": {
+    "release-nvidia-fixed-reference-frame": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "binding": "fixed",
+      "computeSkinning": false,
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin",
+        "normalFrame": "reference",
+        "packedNormals": "reference-normals-a2b10g10r10.bin",
+        "objectIds": "reference-object-ids-r8.bin"
+      },
+      "rasterSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "priorRasterSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "normalsSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "wholeDepthExact": true,
+      "selectedDepthExact": 17017,
+      "hardwareDepthExact": true,
+      "selectedObjectIdsExact": 17017,
+      "packedNormalExact": 16967,
+      "normalWithinOne": 17017,
+      "maximumNormalCodeError": 1,
+      "normalExactPerChannel": [
+        16984,
+        16999
+      ],
+      "color": [
+        {
+          "frame": 0,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        },
+        {
+          "frame": 1,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        },
+        {
+          "frame": 2,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "normalAngleDegrees": {
+        "median": 0.0,
+        "p95": 1.2074182697257333e-06,
+        "maximum": 0.27416353791689113
+      },
+      "strongest": [
+        {
+          "pixel": [
+            1327,
+            283
+          ],
+          "actual": 3222133028,
+          "expected": 3222134052,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1328,
+            283
+          ],
+          "actual": 3222202774,
+          "expected": 3222201750,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            287
+          ],
+          "actual": 3222194771,
+          "expected": 3222195795,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1321,
+            289
+          ],
+          "actual": 3222018197,
+          "expected": 3222018198,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1323,
+            291
+          ],
+          "actual": 3222092037,
+          "expected": 3222093061,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            291
+          ],
+          "actual": 3222060269,
+          "expected": 3222060270,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1234,
+            292
+          ],
+          "actual": 3221982000,
+          "expected": 3221983024,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            293
+          ],
+          "actual": 3222052059,
+          "expected": 3222052060,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            294
+          ],
+          "actual": 3222054117,
+          "expected": 3222055141,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1325,
+            295
+          ],
+          "actual": 3222221273,
+          "expected": 3222220249,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1323,
+            296
+          ],
+          "actual": 3222063353,
+          "expected": 3222063354,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            298
+          ],
+          "actual": 3222178221,
+          "expected": 3222178220,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1321,
+            302
+          ],
+          "actual": 3222157770,
+          "expected": 3222157771,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            303
+          ],
+          "actual": 3222033711,
+          "expected": 3222034735,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1320,
+            304
+          ],
+          "actual": 3222171123,
+          "expected": 3222172148,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1240,
+            305
+          ],
+          "actual": 3222184481,
+          "expected": 3222184482,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1317,
+            305
+          ],
+          "actual": 3222123058,
+          "expected": 3222124082,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1319,
+            306
+          ],
+          "actual": 3222130210,
+          "expected": 3222130211,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1320,
+            306
+          ],
+          "actual": 3222100538,
+          "expected": 3222101562,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1325,
+            306
+          ],
+          "actual": 3222024473,
+          "expected": 3222024474,
+          "error": 1
+        }
+      ]
+    },
+    "release-nvidia-indexed-compute": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "binding": "indexed",
+      "computeSkinning": true,
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin",
+        "normalFrame": "reference",
+        "packedNormals": "reference-normals-a2b10g10r10.bin",
+        "objectIds": "reference-object-ids-r8.bin"
+      },
+      "rasterSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "priorRasterSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "normalsSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "wholeDepthExact": true,
+      "selectedDepthExact": 17017,
+      "hardwareDepthExact": true,
+      "selectedObjectIdsExact": 17017,
+      "packedNormalExact": 16967,
+      "normalWithinOne": 17017,
+      "maximumNormalCodeError": 1,
+      "normalExactPerChannel": [
+        16984,
+        16999
+      ],
+      "color": [
+        {
+          "frame": 0,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        },
+        {
+          "frame": 1,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        },
+        {
+          "frame": 2,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "normalAngleDegrees": {
+        "median": 0.0,
+        "p95": 1.2074182697257333e-06,
+        "maximum": 0.27416353791689113
+      },
+      "strongest": [
+        {
+          "pixel": [
+            1327,
+            283
+          ],
+          "actual": 3222133028,
+          "expected": 3222134052,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1328,
+            283
+          ],
+          "actual": 3222202774,
+          "expected": 3222201750,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            287
+          ],
+          "actual": 3222194771,
+          "expected": 3222195795,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1321,
+            289
+          ],
+          "actual": 3222018197,
+          "expected": 3222018198,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1323,
+            291
+          ],
+          "actual": 3222092037,
+          "expected": 3222093061,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            291
+          ],
+          "actual": 3222060269,
+          "expected": 3222060270,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1234,
+            292
+          ],
+          "actual": 3221982000,
+          "expected": 3221983024,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            293
+          ],
+          "actual": 3222052059,
+          "expected": 3222052060,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            294
+          ],
+          "actual": 3222054117,
+          "expected": 3222055141,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1325,
+            295
+          ],
+          "actual": 3222221273,
+          "expected": 3222220249,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1323,
+            296
+          ],
+          "actual": 3222063353,
+          "expected": 3222063354,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            298
+          ],
+          "actual": 3222178221,
+          "expected": 3222178220,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1321,
+            302
+          ],
+          "actual": 3222157770,
+          "expected": 3222157771,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            303
+          ],
+          "actual": 3222033711,
+          "expected": 3222034735,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1320,
+            304
+          ],
+          "actual": 3222171123,
+          "expected": 3222172148,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1240,
+            305
+          ],
+          "actual": 3222184481,
+          "expected": 3222184482,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1317,
+            305
+          ],
+          "actual": 3222123058,
+          "expected": 3222124082,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1319,
+            306
+          ],
+          "actual": 3222130210,
+          "expected": 3222130211,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1320,
+            306
+          ],
+          "actual": 3222100538,
+          "expected": 3222101562,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1325,
+            306
+          ],
+          "actual": 3222024473,
+          "expected": 3222024474,
+          "error": 1
+        }
+      ]
+    },
+    "release-intel-fixed-qualified": {
+      "configuration": "Release",
+      "device": "intel",
+      "binding": "fixed",
+      "computeSkinning": false,
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin",
+        "normalFrame": "reference",
+        "packedNormals": "reference-normals-a2b10g10r10.bin",
+        "objectIds": "reference-object-ids-r8.bin"
+      },
+      "rasterSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "priorRasterSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "normalsSha256": "c54e38d52bbcfc8618345e2f0d1dd38d155ee8da467a1d531fc1845c1b9ca798",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "wholeDepthExact": true,
+      "selectedDepthExact": 17017,
+      "hardwareDepthExact": true,
+      "selectedObjectIdsExact": 17017,
+      "packedNormalExact": 15274,
+      "normalWithinOne": 16131,
+      "maximumNormalCodeError": 895,
+      "normalExactPerChannel": [
+        15644,
+        15726
+      ],
+      "color": [
+        {
+          "frame": 0,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "overOne": 597,
+          "maxByteError": 97
+        },
+        {
+          "frame": 1,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "overOne": 597,
+          "maxByteError": 97
+        },
+        {
+          "frame": 2,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "overOne": 597,
+          "maxByteError": 97
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "normalAngleDegrees": {
+        "median": 0.0,
+        "p95": 0.5046068528557878,
+        "maximum": 18.39276094157232
+      },
+      "strongest": [
+        {
+          "pixel": [
+            1203,
+            268
+          ],
+          "actual": 3222212617,
+          "expected": 3221296152,
+          "error": 895
+        },
+        {
+          "pixel": [
+            1204,
+            267
+          ],
+          "actual": 3222206480,
+          "expected": 3221315603,
+          "error": 870
+        },
+        {
+          "pixel": [
+            1205,
+            266
+          ],
+          "actual": 3222187032,
+          "expected": 3221335052,
+          "error": 832
+        },
+        {
+          "pixel": [
+            1295,
+            166
+          ],
+          "actual": 3222095929,
+          "expected": 3221429260,
+          "error": 651
+        },
+        {
+          "pixel": [
+            1315,
+            352
+          ],
+          "actual": 3221463029,
+          "expected": 3222034414,
+          "error": 558
+        },
+        {
+          "pixel": [
+            1251,
+            341
+          ],
+          "actual": 3221510151,
+          "expected": 3221986308,
+          "error": 465
+        },
+        {
+          "pixel": [
+            1289,
+            249
+          ],
+          "actual": 3222272414,
+          "expected": 3222220465,
+          "error": 275
+        },
+        {
+          "pixel": [
+            1293,
+            252
+          ],
+          "actual": 3222265233,
+          "expected": 3222253207,
+          "error": 262
+        },
+        {
+          "pixel": [
+            1306,
+            233
+          ],
+          "actual": 3222246027,
+          "expected": 3222251913,
+          "error": 258
+        },
+        {
+          "pixel": [
+            1308,
+            228
+          ],
+          "actual": 3222258283,
+          "expected": 3222240664,
+          "error": 211
+        },
+        {
+          "pixel": [
+            1307,
+            226
+          ],
+          "actual": 3222249063,
+          "expected": 3222249903,
+          "error": 184
+        },
+        {
+          "pixel": [
+            1307,
+            225
+          ],
+          "actual": 3222248034,
+          "expected": 3222245813,
+          "error": 173
+        },
+        {
+          "pixel": [
+            1306,
+            224
+          ],
+          "actual": 3222248025,
+          "expected": 3222252992,
+          "error": 153
+        },
+        {
+          "pixel": [
+            1321,
+            294
+          ],
+          "actual": 3222263280,
+          "expected": 3222183303,
+          "error": 105
+        },
+        {
+          "pixel": [
+            1321,
+            293
+          ],
+          "actual": 3222167912,
+          "expected": 3222243790,
+          "error": 102
+        },
+        {
+          "pixel": [
+            1243,
+            342
+          ],
+          "actual": 3221858221,
+          "expected": 3221910352,
+          "error": 93
+        },
+        {
+          "pixel": [
+            1295,
+            340
+          ],
+          "actual": 3221584774,
+          "expected": 3221677007,
+          "error": 90
+        },
+        {
+          "pixel": [
+            1243,
+            345
+          ],
+          "actual": 3221936905,
+          "expected": 3221877600,
+          "error": 87
+        },
+        {
+          "pixel": [
+            1289,
+            250
+          ],
+          "actual": 3222164246,
+          "expected": 3222213312,
+          "error": 86
+        },
+        {
+          "pixel": [
+            1287,
+            247
+          ],
+          "actual": 3222261352,
+          "expected": 3222205117,
+          "error": 85
+        }
+      ]
+    },
+    "debug-nvidia-fixed-qualified": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "binding": "fixed",
+      "computeSkinning": false,
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin",
+        "normalFrame": "reference",
+        "packedNormals": "reference-normals-a2b10g10r10.bin",
+        "objectIds": "reference-object-ids-r8.bin"
+      },
+      "rasterSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "priorRasterSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "normalsSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "wholeDepthExact": true,
+      "selectedDepthExact": 17017,
+      "hardwareDepthExact": true,
+      "selectedObjectIdsExact": 17017,
+      "packedNormalExact": 16967,
+      "normalWithinOne": 17017,
+      "maximumNormalCodeError": 1,
+      "normalExactPerChannel": [
+        16984,
+        16999
+      ],
+      "color": [
+        {
+          "frame": 0,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        },
+        {
+          "frame": 1,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        },
+        {
+          "frame": 2,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "overOne": 43,
+          "maxByteError": 5
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "normalAngleDegrees": {
+        "median": 0.0,
+        "p95": 1.2074182697257333e-06,
+        "maximum": 0.27416353791689113
+      },
+      "strongest": [
+        {
+          "pixel": [
+            1327,
+            283
+          ],
+          "actual": 3222133028,
+          "expected": 3222134052,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1328,
+            283
+          ],
+          "actual": 3222202774,
+          "expected": 3222201750,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            287
+          ],
+          "actual": 3222194771,
+          "expected": 3222195795,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1321,
+            289
+          ],
+          "actual": 3222018197,
+          "expected": 3222018198,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1323,
+            291
+          ],
+          "actual": 3222092037,
+          "expected": 3222093061,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            291
+          ],
+          "actual": 3222060269,
+          "expected": 3222060270,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1234,
+            292
+          ],
+          "actual": 3221982000,
+          "expected": 3221983024,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            293
+          ],
+          "actual": 3222052059,
+          "expected": 3222052060,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            294
+          ],
+          "actual": 3222054117,
+          "expected": 3222055141,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1325,
+            295
+          ],
+          "actual": 3222221273,
+          "expected": 3222220249,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1323,
+            296
+          ],
+          "actual": 3222063353,
+          "expected": 3222063354,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1324,
+            298
+          ],
+          "actual": 3222178221,
+          "expected": 3222178220,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1321,
+            302
+          ],
+          "actual": 3222157770,
+          "expected": 3222157771,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1327,
+            303
+          ],
+          "actual": 3222033711,
+          "expected": 3222034735,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1320,
+            304
+          ],
+          "actual": 3222171123,
+          "expected": 3222172148,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1240,
+            305
+          ],
+          "actual": 3222184481,
+          "expected": 3222184482,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1317,
+            305
+          ],
+          "actual": 3222123058,
+          "expected": 3222124082,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1319,
+            306
+          ],
+          "actual": 3222130210,
+          "expected": 3222130211,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1320,
+            306
+          ],
+          "actual": 3222100538,
+          "expected": 3222101562,
+          "error": 1
+        },
+        {
+          "pixel": [
+            1325,
+            306
+          ],
+          "actual": 3222024473,
+          "expected": 3222024474,
+          "error": 1
+        }
+      ]
+    },
+    "debug-intel-fixed-qualified": {
+      "configuration": "Debug",
+      "device": "intel",
+      "binding": "fixed",
+      "computeSkinning": false,
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin",
+        "normalFrame": "reference",
+        "packedNormals": "reference-normals-a2b10g10r10.bin",
+        "objectIds": "reference-object-ids-r8.bin"
+      },
+      "rasterSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "priorRasterSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "normalsSha256": "c54e38d52bbcfc8618345e2f0d1dd38d155ee8da467a1d531fc1845c1b9ca798",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "wholeDepthExact": true,
+      "selectedDepthExact": 17017,
+      "hardwareDepthExact": true,
+      "selectedObjectIdsExact": 17017,
+      "packedNormalExact": 15274,
+      "normalWithinOne": 16131,
+      "maximumNormalCodeError": 895,
+      "normalExactPerChannel": [
+        15644,
+        15726
+      ],
+      "color": [
+        {
+          "frame": 0,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "overOne": 597,
+          "maxByteError": 97
+        },
+        {
+          "frame": 1,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "overOne": 597,
+          "maxByteError": 97
+        },
+        {
+          "frame": 2,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "overOne": 597,
+          "maxByteError": 97
+        }
+      ],
+      "validationClean": true,
+      "allocatorZero": true,
+      "normalAngleDegrees": {
+        "median": 0.0,
+        "p95": 0.5046068528557878,
+        "maximum": 18.39276094157232
+      },
+      "strongest": [
+        {
+          "pixel": [
+            1203,
+            268
+          ],
+          "actual": 3222212617,
+          "expected": 3221296152,
+          "error": 895
+        },
+        {
+          "pixel": [
+            1204,
+            267
+          ],
+          "actual": 3222206480,
+          "expected": 3221315603,
+          "error": 870
+        },
+        {
+          "pixel": [
+            1205,
+            266
+          ],
+          "actual": 3222187032,
+          "expected": 3221335052,
+          "error": 832
+        },
+        {
+          "pixel": [
+            1295,
+            166
+          ],
+          "actual": 3222095929,
+          "expected": 3221429260,
+          "error": 651
+        },
+        {
+          "pixel": [
+            1315,
+            352
+          ],
+          "actual": 3221463029,
+          "expected": 3222034414,
+          "error": 558
+        },
+        {
+          "pixel": [
+            1251,
+            341
+          ],
+          "actual": 3221510151,
+          "expected": 3221986308,
+          "error": 465
+        },
+        {
+          "pixel": [
+            1289,
+            249
+          ],
+          "actual": 3222272414,
+          "expected": 3222220465,
+          "error": 275
+        },
+        {
+          "pixel": [
+            1293,
+            252
+          ],
+          "actual": 3222265233,
+          "expected": 3222253207,
+          "error": 262
+        },
+        {
+          "pixel": [
+            1306,
+            233
+          ],
+          "actual": 3222246027,
+          "expected": 3222251913,
+          "error": 258
+        },
+        {
+          "pixel": [
+            1308,
+            228
+          ],
+          "actual": 3222258283,
+          "expected": 3222240664,
+          "error": 211
+        },
+        {
+          "pixel": [
+            1307,
+            226
+          ],
+          "actual": 3222249063,
+          "expected": 3222249903,
+          "error": 184
+        },
+        {
+          "pixel": [
+            1307,
+            225
+          ],
+          "actual": 3222248034,
+          "expected": 3222245813,
+          "error": 173
+        },
+        {
+          "pixel": [
+            1306,
+            224
+          ],
+          "actual": 3222248025,
+          "expected": 3222252992,
+          "error": 153
+        },
+        {
+          "pixel": [
+            1321,
+            294
+          ],
+          "actual": 3222263280,
+          "expected": 3222183303,
+          "error": 105
+        },
+        {
+          "pixel": [
+            1321,
+            293
+          ],
+          "actual": 3222167912,
+          "expected": 3222243790,
+          "error": 102
+        },
+        {
+          "pixel": [
+            1243,
+            342
+          ],
+          "actual": 3221858221,
+          "expected": 3221910352,
+          "error": 93
+        },
+        {
+          "pixel": [
+            1295,
+            340
+          ],
+          "actual": 3221584774,
+          "expected": 3221677007,
+          "error": 90
+        },
+        {
+          "pixel": [
+            1243,
+            345
+          ],
+          "actual": 3221936905,
+          "expected": 3221877600,
+          "error": 87
+        },
+        {
+          "pixel": [
+            1289,
+            250
+          ],
+          "actual": 3222164246,
+          "expected": 3222213312,
+          "error": 86
+        },
+        {
+          "pixel": [
+            1287,
+            247
+          ],
+          "actual": 3222261352,
+          "expected": 3222205117,
+          "error": 85
+        }
+      ]
+    }
+  },
+  "crossConfiguration": {
+    "nvidia-fixed": {
+      "inputs": [
+        "release-nvidia-fixed-reference-frame",
+        "debug-nvidia-fixed-qualified"
+      ],
+      "exact": {
+        "rasterSha256": true,
+        "normalsSha256": true,
+        "objectIdsSha256": true,
+        "color": true
+      }
+    },
+    "intel-fixed": {
+      "inputs": [
+        "release-intel-fixed-qualified",
+        "debug-intel-fixed-qualified"
+      ],
+      "exact": {
+        "rasterSha256": true,
+        "normalsSha256": true,
+        "objectIdsSha256": true,
+        "color": true
+      }
+    },
+    "shaderCatalogsExact": true
+  },
+  "objectIdentityControl": {
+    "release": {
+      "cases": {
+        "visibility": {
+          "depthSha256": "b949f425853d7986131fa47c22245beae4a4069ffd33ec14a0f5fa213b946cfc",
+          "depthSamples": [
+            0.0,
+            0.5,
+            0.625,
+            0.625
+          ],
+          "objectIds": [
+            0,
+            1,
+            2,
+            2
+          ],
+          "packedNormal": [
+            0,
+            3222269441,
+            3222269441,
+            3222269441
+          ]
+        },
+        "depth": {
+          "depthSha256": "b949f425853d7986131fa47c22245beae4a4069ffd33ec14a0f5fa213b946cfc",
+          "depthSamples": [
+            0.0,
+            0.5,
+            0.625,
+            0.625
+          ]
+        },
+        "permuted": {
+          "depthSha256": "b949f425853d7986131fa47c22245beae4a4069ffd33ec14a0f5fa213b946cfc",
+          "depthSamples": [
+            0.0,
+            0.5,
+            0.625,
+            0.625
+          ],
+          "objectIds": [
+            0,
+            1,
+            2,
+            2
+          ],
+          "packedNormal": [
+            0,
+            3221748731,
+            3221748731,
+            3221748731
+          ]
+        }
+      },
+      "wholeDepthExact": true,
+      "visibilityInputsOnlyWhenSelected": true,
+      "referenceAxisPermutation": true,
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    "debug": {
+      "cases": {
+        "visibility": {
+          "depthSha256": "b949f425853d7986131fa47c22245beae4a4069ffd33ec14a0f5fa213b946cfc",
+          "depthSamples": [
+            0.0,
+            0.5,
+            0.625,
+            0.625
+          ],
+          "objectIds": [
+            0,
+            1,
+            2,
+            2
+          ],
+          "packedNormal": [
+            0,
+            3222269441,
+            3222269441,
+            3222269441
+          ]
+        },
+        "depth": {
+          "depthSha256": "b949f425853d7986131fa47c22245beae4a4069ffd33ec14a0f5fa213b946cfc",
+          "depthSamples": [
+            0.0,
+            0.5,
+            0.625,
+            0.625
+          ]
+        },
+        "permuted": {
+          "depthSha256": "b949f425853d7986131fa47c22245beae4a4069ffd33ec14a0f5fa213b946cfc",
+          "depthSamples": [
+            0.0,
+            0.5,
+            0.625,
+            0.625
+          ],
+          "objectIds": [
+            0,
+            1,
+            2,
+            2
+          ],
+          "packedNormal": [
+            0,
+            3221748731,
+            3221748731,
+            3221748731
+          ]
+        }
+      },
+      "wholeDepthExact": true,
+      "visibilityInputsOnlyWhenSelected": true,
+      "referenceAxisPermutation": true,
+      "validationClean": true,
+      "allocatorZero": true
+    }
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "ef98d71974283d60efb1ee40c4ba5f1984dd37ec9233abad6588b1b43277d662",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 426524615,
+    "taskBudgetBytes": 536870912
+  },
+  "compiledPrograms": 891,
+  "unchangedPrograms": 887,
+  "validatedPrograms": 4,
+  "archive": {
+    "bytes": 6189234,
+    "sha256": "a67c8a5483dd3be4a9a1700ce6fdb20bff0d4d9d87a3aa8340cae5111bcc6198",
+    "files": 238,
+    "contents": {
+      "run/baseline-normal-visibility-execution.json": "ec29e34de41cbe80c2b012c41962685dc44b139c9f86a3098f60157f7c3f60bb",
+      "run/baseline-release-build.log": "885a060e6e173543fbb6c21b205ce296a61da3fe7b778cd3ad953af2d0ac32bd",
+      "run/baseline-release-final-build-execution.json": "de2481a3c93caada913f1965c97ab8d43495b7b8e6607808cdfa96e9c91ecaba",
+      "run/baseline-release-verification.json": "6f758573dfb5596de5309318ed1d5c71ef16c12c3609261958dec1829ed93a56",
+      "run/budget.json": "1493e3fe7b7034ce6e685adb67575d3dbca723543f89b62d3a36ef9e1fb3b686",
+      "run/build.py": "fd8f61c6ec05b2d10342374e19f63a0665b79370fb8fa9918b5844e14b60950e",
+      "run/capture-normal.py": "f38982437b13f8c1e6755f98d9a343a1df5da3865269dcf11c822921c36d174f",
+      "run/compact-capture.py": "b792dcf9dbc1c7e6c32b1745435f82067e083ddbaab64826368dc0bae66a94e3",
+      "run/compare-configurations.py": "ebde098381d16ccd52dbc101651a8c7df957471d5374afcc24131071503f9088",
+      "run/compare-normal-devices.py": "83a9a889a9ea43a4d5c239ffd64a2bd7dd37fda2e97ac7dfce2a4ca280898c97",
+      "run/compare-normal-visibility.py": "3e1c19440eb3305c062bf5730c66115d1dd67ab6e9db0f15f7cc2ca25f31cab1",
+      "run/configuration-comparison.json": "76a530ba9ccce413f0d19ccb8df08744a48e28719f2572f51fda766cd220fddf",
+      "run/configuration-red/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/configuration-red/level.azurelevel": "014ca5908d51c59a33168be750dd35b9e2227f08083274df188e11ed8fec04a2",
+      "run/configuration-red/plane.gltf": "9b7b7ffa845e4c0f7177d4cf7ec5dc3d1fcb39151813c3715cd7d9025b6507c7",
+      "run/debug-budget-stopped-build.log": "1c4ec0e8126ad5f259026b26c94277fc82e0a56979eb2525aacddeb72ae386bd",
+      "run/debug-budget-stopped-execution.json": "e5f7dc26f1e660432b641d7717d59f9dad66f4145ea612ba02b243a61d648c2c",
+      "run/debug-build-commands.json": "d680fd6bfa059052db38cbf5b865c4d54bdf5baf0606f1507f97f5924fed7318",
+      "run/debug-build.log": "d835a12e73b00af844f85156966384adf866f7b0cd91c075cce21dcf8a178e29",
+      "run/debug-ctest.log": "0e6a1cfee11658c18019d8172b8fe20fc2eeaa58bafebd47077bfd4ba846035b",
+      "run/debug-ctest.xml": "f4d01c50f3807d505d6b27c5a56d33167799578901ad61c8e258d73a8327e5a8",
+      "run/debug-final-build-execution.json": "42e9f153e31cff43059754f7244143ecc441ddb3ccc3bffef176bd96da692e62",
+      "run/debug-intel-fixed-qualified-command.json": "fd92cc94a6ee32771692008d1fe9eaf03428fa74085bf1cce7ee51706008af3f",
+      "run/debug-intel-fixed-qualified-execution.json": "9ef46feca47ce107d01a0219e5985dad1099fb5949b7d9d3a18367041a49dabe",
+      "run/debug-intel-fixed-qualified-frames/capture_manifest.json": "c595b5b585e42d6f1fa00eb33341bad7cf0c248d46ce442bbdad3ebe69da3222",
+      "run/debug-intel-fixed-qualified-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/debug-intel-fixed-qualified-frames/reference-planes.json": "b0596046f3ec29ccd185bacf0ad50876d3f03bca02f513b7b16f50148cdf55fd",
+      "run/debug-intel-fixed-qualified-results.json": "eb49d3ee08f04368252269941813a6d1370ac5305a2b0474137f904b72e76c21",
+      "run/debug-intel-fixed-qualified.log": "6ebf1666f800e00a83c1b03dcb1bf0db0c136c92ab893bb8d2e02033ff522e58",
+      "run/debug-internal-preflight.log": "2f8f51ec740de19416dbee18533337a51f31d30019fa2af344277d61859eadfe",
+      "run/debug-link-budget-recovery.json": "845a6e4de01370a30627127634b2407caf62bbdaae89e53e508143a94d8bc230",
+      "run/debug-nvidia-fixed-qualified-command.json": "72d91992672af52ad174f45e2b721e82dce6cf123698c4af0ffd72b63ac1d23b",
+      "run/debug-nvidia-fixed-qualified-execution.json": "26fc7472492fbfa6c49c73097eff49c2a1014b65778902dda548e0ebec3f2fda",
+      "run/debug-nvidia-fixed-qualified-frames/capture_manifest.json": "0f825167198180ee0ae866f24309592b955349c889adec375ab964325feb05b8",
+      "run/debug-nvidia-fixed-qualified-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/debug-nvidia-fixed-qualified-frames/reference-planes.json": "3619e487dd28384b455388fd35c978b57e336c96670ea1c67916fae582e37b9e",
+      "run/debug-nvidia-fixed-qualified-results.json": "b90c563592753aaa58a83d7e4b634bf9249aafa450569c2caa2c485eb1a720ce",
+      "run/debug-nvidia-fixed-qualified.log": "f7844d131724a50cd03d0bbd9e08b52951194441a7f548590004eb609addad40",
+      "run/debug-recovery-dry-run.log": "cf1518d985d97571af930de940256380c4b520639a0f9e70af0d932a8d2c562f",
+      "run/debug-spirv.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/debug-verification.json": "ac2691ccb7dd35d070de1375c7fd4a54e718b6d39e8f3e2828bf3c5ed9311dad",
+      "run/default-four-command.json": "5afa8b11e5274701201b3631c6630534e006b0bb19ac3a391fafee0ec9b3036f",
+      "run/default-four-execution.json": "8891719fbc7e7da5307411b6ffa170c52e05e08304db7c2256f7a5bc9e44e017",
+      "run/default-four-frames/capture_manifest.json": "4d9bc75935b3a894e38a4c530d04332fb95f9ee7185083cf89d4003257a34dfc",
+      "run/default-four-frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "run/default-four-results.json": "39a37231ebe683151b650df6a7b9dd91d7568ba83856d4b8c03f8f69ba25388f",
+      "run/default-four.log": "5183d0786b209ce703c3d359f747f824541b2a6b3d206f695e0f78ecc9c79300",
+      "run/default-four.py": "f3d9d1fcf1d9a36b187f58e83f4f36b30140641c387701fa817ae39547636da9",
+      "run/default-runtime.json": "9d0fa526f572641c7407388188b069e276d46968748c550257cde2242299b604",
+      "run/ellipse-normal-visibility-execution.json": "1eda7b371578e0accd4d723f32511faad3340ff1e045582ad4aff0191f409199",
+      "run/ellipse-release-build-execution.json": "2cedf8da8a70d87f838800a6f8e645cb58ee68d754493327ae51e01b1af69e8e",
+      "run/ellipse-release-build.log": "5c388d0880e68564f497beca97517a44a42f4f3ab8a8cb3e7de3829287c8fa57",
+      "run/first-release-build.log": "7d6c5d328ab1f2004267ffa9f5605cd91e9fc63944d51c62e92740e71de8162a",
+      "run/first-release-final-build-execution.json": "b78bf0e80f68c66efe4cfd68a3f0b567613bd001626eea32072615542c5a90a4",
+      "run/hair-copy-inputs.json": "0624f7067524164ed5c78557d2e5c8cc489217ca646160366069dc352c1395cd",
+      "run/hair-project/config/reference-views.json": "49023f637da4356d41c30f987dd9cb5c755330ba027cee7bf8d03398be965edb",
+      "run/implicit-normal-visibility-execution.json": "8d8f1ffc24543f7f44a97e714106829e7bf0ac99f55db2a063f410f494d252b3",
+      "run/implicit-release-build-execution.json": "2f2daa6bd3dc9cdee4155a4cf592c6dd764a061ae6d4e8fa4f1d6e3710629362",
+      "run/implicit-release-build.log": "6ee39fc7aa5f5ccc7f954807f5150fa82bfd4d85e4807f9b72bb7b1ab9e3b7df",
+      "run/implicit-release-verification.json": "2a519f8e473c134f2afb0a0f1e12983e359e5e13536bb0972622adf2d27a6014",
+      "run/inspect-normal-inputs.py": "4982324759014f422b90b8002e475baedef66d9ca6911c1f5a733b195f924f09",
+      "run/inspect-normal-vertices.py": "6d0a9064774c8029d540fd6360b67dc9e9782688caf65b55e101eb5a341a49b3",
+      "run/intel-normal-visibility-control-qualified/calibration.json": "9e63413d702302146d074c9338c959573633322cf2cd2f03908622761e3968f0",
+      "run/intel-normal-visibility-control-qualified/command.json": "f68149be021dc3d9ca6d744e926fdee28b60c9a6f0bd3eec3679fbf199e7fd83",
+      "run/intel-normal-visibility-control-qualified/expected.bin": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+      "run/intel-normal-visibility-control-qualified/intel-live-normal-source-result.json": "d7a2b1fe0da390a4818355c5809000b78c865f8b88eaa2e5682f0311463e8b7e",
+      "run/intel-normal-visibility-control-qualified/intel-live-normal-source-rg8.bin": "8cec555e18342936e951e8815d7c4defd5c16d154e0c1601fff91117dad5c198",
+      "run/intel-normal-visibility-control-qualified/process.log": "40c838d333b83575094f298a91908c407f2efe4b6edc39160e378fece9135fb3",
+      "run/intel-normal-visibility-control-qualified/queries.bin": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+      "run/intel-normal-visibility-control-qualified/reference-planes.json": "706c56bc291ed7ac2f06e3aa672597e0c1b42b7ed6f5a474d44a4b6ac741cfa2",
+      "run/intel-normal-visibility-control-qualified/summary.json": "5a113b92bd421acbe90742916c92285a20087b0686325d8540a76ff3130094b3",
+      "run/matrix-gpu.py": "c1bf4738338cb408c46a0bba40f3578f263b34dab0e28c7374c9380200611e90",
+      "run/native-intel-normal-source-execution.json": "f70bf9e28d0ca6bbeebb25fd81e886a86bb114ae28ae2dc32be973000907e4ad",
+      "run/native-normal-stage-proof.json": "c6af0495f020034b156aaac4bee3778a7981f904fb0987246c77fc69330aad5b",
+      "run/normal-device-comparison.json": "5fcc8ba809c96fab6c60235b44f91da5d80ab40b5aad3352ceddcdff29e61bf7",
+      "run/normal-device-sampler-model.json": "579c393a034d25788464395494aa71c67face7f85cccbcc4041bf9ee0dc00f3f",
+      "run/normal-device-sampler-model.py": "99d3ac3ef259b2322e3240cc3507a4ceb580d55033a4d48591826142c695d5c5",
+      "run/normal-footprint-control.json": "807bcf632ae1b53a8380984ef8f8bec08186b4c490c62ddf93b16dc42118d66d",
+      "run/normal-footprint-control.py": "50f127c5ab0055467666c8b92a87ae4d2cbea915ec9854609edd7d68ddf0bde6",
+      "run/normal-source-execution.json": "27a068c7aa32746d5294ff33561783513cd2728014d4609a07efc4f5f6eba0e2",
+      "run/normal-source-inspection.json": "91b8b32f8919987fabf2144d138686cef3c0a3a668db5a729db1552117b19924",
+      "run/normal-source-replay/421-pixel.asm": "3a194d23ec1cc1a9b521fba92892ea7f423689729da91a4dfafcd64e39ba575a",
+      "run/normal-source-replay/422-normal-crop.bin": "36a9028a460cdc3e364fd038808a5d6900b8fe105f8f0084d8995551304a42c2",
+      "run/normal-source-replay/422-pixel.asm": "3a194d23ec1cc1a9b521fba92892ea7f423689729da91a4dfafcd64e39ba575a",
+      "run/normal-source-replay/440-pixel.asm": "2cd53ca8ad7ffd48bdb4c12294f90ec8b0e81435f07987ec23cd823a312f184b",
+      "run/normal-source-replay/478-pixel.asm": "51ab3ad70ec491864c7d6d5a07f246547e151077cfc400f8fc994ea331aab38b",
+      "run/normal-source-replay/522-pixel.asm": "5dc302dc360199e1fb1911767c2f771c4a4fc86f7bc291f92ca6f1d65ee0389c",
+      "run/normal-source-replay/699-normal-crop.bin": "87390f640f8663e86f18a91fe08069b0675cce775eaa6fe2ca78d2df87191d7e",
+      "run/normal-source-replay/699-pixel.asm": "1e5888ef3eb9c7d83703155c157525e03f9245d585c219fcbffa2d59369ded08",
+      "run/normal-source-replay/command.json": "1c06683fa4392309c1d388b14b59a070730c7f1cd46c5dd9fb6ec08eb9a9e20a",
+      "run/normal-source-replay/normal-source.json": "78239077c243aada55161a0d05b5308f8c87555f45105757946ad9d61c5642f3",
+      "run/normal-source-replay/replay.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/normal-source-replay/request.json": "0b2d0a3cc4d0b1962d333005e82126ea4ebb3264f50fcd687a213eb59c98f8a5",
+      "run/normal-source-replay-intel/421-pixel.asm": "3a194d23ec1cc1a9b521fba92892ea7f423689729da91a4dfafcd64e39ba575a",
+      "run/normal-source-replay-intel/422-normal-crop.bin": "06c4c46f3b683a374a09410e28b45f2d948583c545131cd18f1bba0cc13e288b",
+      "run/normal-source-replay-intel/422-pixel.asm": "3a194d23ec1cc1a9b521fba92892ea7f423689729da91a4dfafcd64e39ba575a",
+      "run/normal-source-replay-intel/440-pixel.asm": "2cd53ca8ad7ffd48bdb4c12294f90ec8b0e81435f07987ec23cd823a312f184b",
+      "run/normal-source-replay-intel/478-pixel.asm": "51ab3ad70ec491864c7d6d5a07f246547e151077cfc400f8fc994ea331aab38b",
+      "run/normal-source-replay-intel/522-pixel.asm": "5dc302dc360199e1fb1911767c2f771c4a4fc86f7bc291f92ca6f1d65ee0389c",
+      "run/normal-source-replay-intel/699-normal-crop.bin": "b3541ede05c9c6c8893b37c908a617670915779a32de5736898082f7fed1de8f",
+      "run/normal-source-replay-intel/699-pixel.asm": "1e5888ef3eb9c7d83703155c157525e03f9245d585c219fcbffa2d59369ded08",
+      "run/normal-source-replay-intel/command.json": "1c06683fa4392309c1d388b14b59a070730c7f1cd46c5dd9fb6ec08eb9a9e20a",
+      "run/normal-source-replay-intel/normal-source.json": "9264366d7877fd25c9c5875a9b495b160df40918fa9babdf570ca44cdd8507b2",
+      "run/normal-source-replay-intel/replay.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/normal-source-replay-intel/request.json": "203a2b61863c35e7cb38eb896e64b8443f1f796c67d685022cbfd8ab1901a97f",
+      "run/normal-source-worker.py": "536f1322308c97432502cc1710fea212cc34a781ad565da20003cb768f1d93c8",
+      "run/normal-source.py": "53ad82ecb228fd25bb0be58b754cdcbfd43365c14efad143f1e2fca651f298e4",
+      "run/normal-vertex-comparison.json": "994e319e2d904ba68a050310d416ae0830d32c54a0ce3970b2354a0671f0e189",
+      "run/normal-visibility-control.py": "ad9fded0cece032ca1a71bb3b2cd577bccc79dacd1babdd72045ebb94c973ee2",
+      "run/normal-visibility-intersection.json": "cf9fb6842b9e7b143c141803b2a8bb86769e263e0175a840898d3539fed24700",
+      "run/nvidia-normal-visibility-control-baseline/calibration.json": "ac7a796e1e281345e95bed38b80d058a225dc6a5a718faef0bfccd899b8b8259",
+      "run/nvidia-normal-visibility-control-baseline/command.json": "757f9b1ad86a875e517ef1f2feff9c7e12db905e60caf1bd8ccbd0478e957dff",
+      "run/nvidia-normal-visibility-control-baseline/expected.bin": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+      "run/nvidia-normal-visibility-control-baseline/nvidia-live-normal-source-result.json": "7b040c3e069cc5457d486ff95f45d65aac1ce25099df3afb1946e38501402e8d",
+      "run/nvidia-normal-visibility-control-baseline/nvidia-live-normal-source-rg8.bin": "c6b999d2e94c1b01ba11ef4a7b3c6554567a4a2a76f6cb25d3319e1fa91238c6",
+      "run/nvidia-normal-visibility-control-baseline/process.log": "b57ac9403357f2501f6cc55c5597330b3e6896aa9652c0a770b060bb328c241d",
+      "run/nvidia-normal-visibility-control-baseline/queries.bin": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+      "run/nvidia-normal-visibility-control-baseline/reference-planes.json": "8139e50e7d90f501becd4b65dd1254cd9b2cea974fa53c3f9e20155f1696f300",
+      "run/nvidia-normal-visibility-control-baseline/summary.json": "af9b81b00a036713dd9ef0677ea05a1138de6bded021880059c567937fde9001",
+      "run/nvidia-normal-visibility-control-ellipse/calibration.json": "5a7f22c69acea0d2c2abcce5efe4f5a461c75ed6118981230575989c843b16bd",
+      "run/nvidia-normal-visibility-control-ellipse/command.json": "ce2d719ba510df79e7cffaac4e4333d05be7d603b7e3dba19cc20e6a6cb6465a",
+      "run/nvidia-normal-visibility-control-ellipse/expected.bin": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+      "run/nvidia-normal-visibility-control-ellipse/nvidia-live-normal-source-result.json": "cbab993107bf4532797ecade65d577feb834ab1a6de56fa3acc99a6409941e8e",
+      "run/nvidia-normal-visibility-control-ellipse/nvidia-live-normal-source-rg8.bin": "7abf11f2e682f2ee5129722cb35921bdb22bff88406d6a7ffb3979e05af058fc",
+      "run/nvidia-normal-visibility-control-ellipse/process.log": "770d6ce9d620a478dfbc4002707ac0466ca2347c338b4bb5ec8528f7f4f938f2",
+      "run/nvidia-normal-visibility-control-ellipse/queries.bin": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+      "run/nvidia-normal-visibility-control-ellipse/reference-planes.json": "72f2cc7c90901e15790685a37025dcfdbd308a2e64e87564dde2715580c42561",
+      "run/nvidia-normal-visibility-control-ellipse/summary.json": "16b5e047bedf071739c5339fdc622dbb3331b4e2d1b79d8fa5879fd440a3d7d2",
+      "run/nvidia-normal-visibility-control-implicit/calibration.json": "7aed86333b1b3dff0a3467c335a6d1833ee8757b8ee7c9de930d3f3ca13f4465",
+      "run/nvidia-normal-visibility-control-implicit/command.json": "d40fe4fadb92511cfd624a1125a970508360cc2939dd12b5329439c490bdaf63",
+      "run/nvidia-normal-visibility-control-implicit/expected.bin": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+      "run/nvidia-normal-visibility-control-implicit/nvidia-live-normal-source-result.json": "3b82a42acab3754e4c30d8cae219c28444fc9bf326776648bcf96040d1ee6291",
+      "run/nvidia-normal-visibility-control-implicit/nvidia-live-normal-source-rg8.bin": "16d389e8b20c6c8b04323651d27f06002dbf50ec21e612a1bc2e280117d35cbc",
+      "run/nvidia-normal-visibility-control-implicit/process.log": "f457e787b69b5877a37f7fca334588520c044a452cc76f44140b80ccdc247b95",
+      "run/nvidia-normal-visibility-control-implicit/queries.bin": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+      "run/nvidia-normal-visibility-control-implicit/reference-planes.json": "4fb50dff038a30b56e0c354d4c0c86eb0db91327ef30af2d779e8c7d1ec44738",
+      "run/nvidia-normal-visibility-control-implicit/summary.json": "716eb69f9fb1c9b634c4f88a7d8394700a8d8dad8b2a489ca3781ce4e96e040c",
+      "run/nvidia-normal-visibility-control-reference-frame/calibration.json": "5dc88575d17c46422657bd68347601771adc28da9c030de68dfe82436fd581f1",
+      "run/nvidia-normal-visibility-control-reference-frame/command.json": "03dab41f9d1f70b374de9cb44fd30541fcdc50a3a26a8f9bb895aa5a726991be",
+      "run/nvidia-normal-visibility-control-reference-frame/expected.bin": "236272245e199c433f4b601ff7cc55667f2e50dd88dbb7d1966ed4ce939dab50",
+      "run/nvidia-normal-visibility-control-reference-frame/nvidia-live-normal-source-result.json": "81fef0459ff1e0304908aa2d52db61f1177244ccd819cc976e86f9f175f215a9",
+      "run/nvidia-normal-visibility-control-reference-frame/nvidia-live-normal-source-rg8.bin": "773d96357062677cc9bab34208ed953654d096739e37afba62b97fa2ef38faae",
+      "run/nvidia-normal-visibility-control-reference-frame/process.log": "162663d6c1cf84c4146b2f182fc1426e9e6a497fa49c596709c754fd7395c77d",
+      "run/nvidia-normal-visibility-control-reference-frame/queries.bin": "2ffff6e92f0fac8fe5b79d4fd6eb6e7c4c4fe1b9ae5eb38b2eb0cc8cbee3a7e8",
+      "run/nvidia-normal-visibility-control-reference-frame/reference-planes.json": "2ac237cc7326755d730a821e5eab755db7478807a2ab552b2a2422acc5bdd59d",
+      "run/nvidia-normal-visibility-control-reference-frame/summary.json": "5e82dc7b22931b998adbf2d51b8861445631350717a54eafd53aacf8a9a6d646",
+      "run/object-frame-source-control.json": "4d9309b1a25fa09bb6e42b25b1f9e07e3821f8adf49ae37fc2f5612e221a655f",
+      "run/object-frame-source-control.py": "5341b1342da5e6953801acd2dc3b5593fced4fd905d0510f99428ceb6379046f",
+      "run/object-id-control-debug/depth-command.json": "a202b0a672c3b4f209129932f1e2df73a0ba3b7629ea2d73b9f25d9d2659e532",
+      "run/object-id-control-debug/depth.log": "312383c2c938a0d7e314921a5c91162abf5e922360d2d5d1af6630bd5a599c21",
+      "run/object-id-control-debug/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/object-id-control-debug/level.azurelevel": "80d2c03d3c101b6f2956d91231fe9a24708ee270a6295a341c826d889b252885",
+      "run/object-id-control-debug/permuted-command.json": "ce082f73eeccf5118c046e7abcd2fa66150aaa77e2139d96d35453cf6bfd4a8f",
+      "run/object-id-control-debug/permuted.log": "a16093ba4ffd7e2aec1d53a43944656c647240b20543482cddcf8ae9d1cb5aa4",
+      "run/object-id-control-debug/plane.gltf": "998bb02baec941a67d80d3cb8d88fa936c7aeb79472672d28acea87d4ea1efbf",
+      "run/object-id-control-debug/summary.json": "db47a5594682003729f06d11a2679938f68a363a5927272872fdf78d5598225e",
+      "run/object-id-control-debug/visibility-command.json": "84a40803c6c23e6420147a5306ee9218e531717bcbec64b950a988cb3c2897fb",
+      "run/object-id-control-debug/visibility.log": "1b5dba6731983e27f2874245cf2776e8deeea8a5b4213d2d40eb280e6ee745ca",
+      "run/object-id-control-debug-execution.json": "72de6fe36bf1a3555642ce1002eb016f83d2f1815f15ed1437a0c2d42feae4d3",
+      "run/object-id-control-release/depth-command.json": "ceea8dc669b5b588deac2484efe24a9d689caf27847e1e933dd310999dec9873",
+      "run/object-id-control-release/depth.log": "086e02b8852c2b52a44dc47235c01411747c8e38fcfdf85837b6b4f661a9a22a",
+      "run/object-id-control-release/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/object-id-control-release/level.azurelevel": "80d2c03d3c101b6f2956d91231fe9a24708ee270a6295a341c826d889b252885",
+      "run/object-id-control-release/permuted-command.json": "5bf1a1bf7d6ef81e9160bc07304b2bcbdaf06e0de688fcb2edb36789c7449075",
+      "run/object-id-control-release/permuted.log": "025fc3c36e89800128e863d837886c9cde494e2a17d7abe89f1813d618c80ae8",
+      "run/object-id-control-release/plane.gltf": "998bb02baec941a67d80d3cb8d88fa936c7aeb79472672d28acea87d4ea1efbf",
+      "run/object-id-control-release/summary.json": "db47a5594682003729f06d11a2679938f68a363a5927272872fdf78d5598225e",
+      "run/object-id-control-release/visibility-command.json": "5a167dc8a505650c97ae684e68e44f80b74404e3c1bd40793be0be0591b2af40",
+      "run/object-id-control-release/visibility.log": "91167bb1fcbf2ec6fe0349bbb8015a3fa5d98d5c27930a8ae321243ccdcce173",
+      "run/object-id-control-release-execution.json": "e615fa8a4c40a33b2de5d48162ff6a6e3a88a7796f9880ff270ce2827269e2a9",
+      "run/object-id-control.py": "b01b7d967e693606c2d6ddf9396c467234595f90b17e32e8fd883197c3bbb61a",
+      "run/package-evidence.py": "ea48ee68624b81781856d919d5079594236f5f2edfae2e9757c1c64acd5258e7",
+      "run/prepare-fixture.py": "c6b6ef7d4a98cf9dade5fee91b09484a0e7f6de25ee0bdcfd4723b98fb49bf33",
+      "run/process.log": "39a37231ebe683151b650df6a7b9dd91d7568ba83856d4b8c03f8f69ba25388f",
+      "run/queued-build.py": "b8f278418a5068f7ab04a8e9ab26934b8b4a5397824a9a6e0ea371b960428cb4",
+      "run/queued-gpu.py": "47aab890ba03ccfb3ffc5a6e67f971628ecbb3bcafc8f884dc3e286843588bc4",
+      "run/receiver-input-overlap.json": "820cce3735790999c6e4254b70fef29729dd660b2abdb0202e5b2db25042b3d7",
+      "run/receiver-input-overlap.py": "632e20ad815a070668679c32ce52dd05609162e7f344e4dfab2054a8f2224785",
+      "run/recover-debug-link-budget.py": "3ff232e8265942eddbe99c42fa8d9befc107f4039f4a081e61032ab13e8b241d",
+      "run/red.py": "c0e39f37d1b76f1af40e2df06582e4fcd83643af420be0847e6121bf51b9a963",
+      "run/reference-frame-normal-visibility-execution.json": "aac19dbc00af4ff3d88efd2a04bf4f4aa50148381096aa0b5c8cb36859b44dee",
+      "run/release-build-commands.json": "c3dc23a0100c2e553294ab31504484afd6609bb370fb2cf06e4bea33ee1a611d",
+      "run/release-build.log": "3c759931765f47e37659c902fd1cd3975cec8fd1837d30e5f1b3245e5a5bb47c",
+      "run/release-candidate.py": "c174f0d46d127177e211325582acdfd0892860cd354127b8f2dfcd2c509a346c",
+      "run/release-ctest.log": "ff2350c55a51cb39eb36cbb88fd97d08b020342c00bf9a20279159fb2fffce98",
+      "run/release-ctest.xml": "94a1c7fe2b3a9a0ddb5dd216a078df588ee039e45f3fd84d7dbad691c047424d",
+      "run/release-ellipse.py": "5003f1d312396843ca49a6784e40953020ac18758f04179fde0599c7564912d7",
+      "run/release-final-build-execution.json": "5d0e5f3761602a01de1159a90ef10590fc3d027f84a1d09bb3e551755d300573",
+      "run/release-gpu-ctest.log": "27c4a06024e7d99f1d592cb6c2f8ab6bb08c5442574a64d50134d96206e948f0",
+      "run/release-gpu-ctest.xml": "5584cae640ed878906ecd8af22488dc2f08f4c7f5fea54af57e39d308e358923",
+      "run/release-gpu-verification.json": "c20c3cd4f3d7c1c724041d3e3fe259b34702077ac437d460717223f85c06342b",
+      "run/release-implicit.py": "eeccff9c2d15d2f374d0403d16c55c4343ffc5b186f9524e62dde1848dd00394",
+      "run/release-intel-fixed-qualified-command.json": "76f4f46f0728e6fe6e567d501b749c39b663bc5de0d774a29a90d7b7ac541920",
+      "run/release-intel-fixed-qualified-execution.json": "f2d5e915f049afed91f283361ca854bf86b471c604906905f8386b5562946ae4",
+      "run/release-intel-fixed-qualified-frames/capture_manifest.json": "11bd3688d817aed2f9b60fd36e8b5420f9b0fe1a93e44710eb321de07dcb112f",
+      "run/release-intel-fixed-qualified-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/release-intel-fixed-qualified-frames/reference-planes.json": "b0596046f3ec29ccd185bacf0ad50876d3f03bca02f513b7b16f50148cdf55fd",
+      "run/release-intel-fixed-qualified-frames/reference-planes.zip": "ab451f89235252c4b1133d1984c2dddd9c6fefa9f2cefe022b0bf1ce971fce8d",
+      "run/release-intel-fixed-qualified-results.json": "734abd758d68040f47f8767f2f428112fb61c779ac00ebb50f843bd2f3ee9518",
+      "run/release-intel-fixed-qualified.log": "ca036c66cae0524c759899a947f6fa023d40cb70f5345fc601563634346fb542",
+      "run/release-intel-normal-visibility-execution.json": "f4e41078febea4ba4c3c362cc8cb1569ceb112568c49acfb2e1469b4e2d220b4",
+      "run/release-internal-preflight.log": "f09fb68602b95e58e07ed1bea1381d5d04ba6b61d2285f535cc14257aa00a479",
+      "run/release-nvidia-fixed-command.json": "1e669129320a81afc3b74a7e77e1612e7696fcc4d1d8ffa77dba8a6c44cf4f3c",
+      "run/release-nvidia-fixed-ellipse-command.json": "b3617215a8729f3c1a4939816586cc4f4f7b22fec1c060a0e0ff50c1923bb3c5",
+      "run/release-nvidia-fixed-ellipse-execution.json": "a1e415bfa3661a7d429e2777b4574b57953ff8e4a8930fbbb054cee542e0e611",
+      "run/release-nvidia-fixed-ellipse-results.json": "d6a2f51bc0d328dc86615da3d6bcc52ef8a07c87437bc54c50e6a8842a78a3bd",
+      "run/release-nvidia-fixed-ellipse.log": "c362d643eed61ae652aaa3e5d16a3971e2cb23f04ada53ff0e2999fdd229ef20",
+      "run/release-nvidia-fixed-execution.json": "c381c46d8572b5a4839361ca69ed84a7fd8f92190e30ef2ff913556a55fff8bb",
+      "run/release-nvidia-fixed-implicit-command.json": "e2b430b3b8cf8f8674227711b51e35934f96203a7c50e2593e026346818be716",
+      "run/release-nvidia-fixed-implicit-execution.json": "2c4ffa73fef9c5f49a9199fce182cbf0f63adc650f92969647fc212ddae40cd7",
+      "run/release-nvidia-fixed-implicit-results.json": "b3534a3b9cdecaabf387072f763226d2df0c2a1856a504d08828ac2a5f45c270",
+      "run/release-nvidia-fixed-implicit.log": "3ab753f5be3b1f80102a7a66cc61906ba27845e3a2a5e5997e1cb965ac73caf7",
+      "run/release-nvidia-fixed-reference-frame-command.json": "06d332ce0a65b34c77914ab5e99d1f78f47c9343becf87ff5878389aa9e53759",
+      "run/release-nvidia-fixed-reference-frame-execution.json": "abbb5e29172a7769f9bbca206b5eb7f3847740a713cacbeb333c7d19c35fba72",
+      "run/release-nvidia-fixed-reference-frame-frames/capture_manifest.json": "035250896f01d022823c50f0dfdddc023aad8863e6fe5d3cd0561290db64dc88",
+      "run/release-nvidia-fixed-reference-frame-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/release-nvidia-fixed-reference-frame-frames/reference-planes.json": "3619e487dd28384b455388fd35c978b57e336c96670ea1c67916fae582e37b9e",
+      "run/release-nvidia-fixed-reference-frame-frames/reference-planes.zip": "a618ad06d738ec93bd5fb407098382b70fc30cf910d576a396db7cad099f191b",
+      "run/release-nvidia-fixed-reference-frame-results.json": "181e38ce49f12ecf94727b557d9e2debcac4e1ff03f55e8be9d2c706b55f2f45",
+      "run/release-nvidia-fixed-reference-frame.log": "cadd5d7ae822ac4ddbbcbed847f621469984070025c943e300efe0fac952fb2c",
+      "run/release-nvidia-fixed-results.json": "0c7d76f0ca6278341e18bee21ccc08c50f94bd5d55abee79fc0f06d87a6f1925",
+      "run/release-nvidia-fixed.log": "0251ba35868e7e3edb2ffe282ea8db22b40feec861a037419474a072390ce3ac",
+      "run/release-nvidia-indexed-compute-command.json": "3dfb5cc00ac38113895add2d23c88fe04226886ace05feb3edb0102ab08aec82",
+      "run/release-nvidia-indexed-compute-execution.json": "08135ba1fc5759c66ee5a9babcf74c96acec9d8a29a913e5ffcd581c15efd22e",
+      "run/release-nvidia-indexed-compute-frames/capture_manifest.json": "26fa2dbd1fea302a7e03a9a49665fd1735af71d5bf882a4c101725ae39212de1",
+      "run/release-nvidia-indexed-compute-frames/gpu_capabilities.json": "4519e53d5b1922648c42ffa52aa3a87423be1595447a7d98e33b08f60da80e62",
+      "run/release-nvidia-indexed-compute-frames/reference-planes.json": "3619e487dd28384b455388fd35c978b57e336c96670ea1c67916fae582e37b9e",
+      "run/release-nvidia-indexed-compute-results.json": "08d4e4cf86b013ada560907f1dd5039e4585e362598ff4af4ee8afc186322fff",
+      "run/release-nvidia-indexed-compute.log": "cc4b4cf85bb935ca7c88dae77a2835bb704c8f52a804897fdb75cc116cfa12dd",
+      "run/release-reference-depth-tests-execution.json": "289f51efe585588b0516e35035bc3c91b111fa4960912992f53b884e7c3fdeed",
+      "run/release-spirv.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/release-verification.json": "c28aca5971a4b265f3ce2b11f8f81c624e2951bb8ee4c0a0b20363a52317968c",
+      "run/runtime-red-result.json": "aabf2cc99b9b828c567b4992f43f58348827df83b7d12ac72f00a996b89686e0",
+      "run/runtime-red.log": "86c02bf7d04e8c253d58931a96c94bec198b6fc88b6ab1e1936188b17570b14a",
+      "run/runtime-red.py": "4f35f83fc455fba0cfb41b919a2d28ac53277d1c9c91f14792ed224bf642b39c",
+      "run/task-card.json": "7de784c26f759b9f546f69261204fff03caffc0b78a6e2542c503a56031669f3",
+      "run/verify-build.py": "042601fd9140fd65eb1e545a45a113bfa61ba9b90d14efcc0dbd70fae34dc2be",
+      "run/watch-red.py": "c6c40e158dfae167319e88de383fa9cde7b39704626af66536bcd099d3163ae7"
+    }
+  }
+}

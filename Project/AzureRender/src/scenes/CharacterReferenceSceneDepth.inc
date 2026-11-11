@@ -1,9 +1,16 @@
 namespace {
 bool referenceDepthRequested(const RenderContext& context){
-    if(context.referenceSceneDepthPrograms)return true;
+    if(context.referenceSceneDepthPrograms||context.referenceSceneVisibilityPrograms)return true;
     if(!context.renderSettings||!context.renderSettings->cameraView)return false;
     const auto reference=resolveReferenceCamera(*context.renderSettings->cameraView);
     return reference&&reference->descriptor().produceSceneDepth;
+}
+
+bool referenceVisibilityRequested(const RenderContext& context){
+    if(context.referenceSceneVisibilityPrograms)return true;
+    if(!context.renderSettings||!context.renderSettings->cameraView)return false;
+    const auto& calibration=context.renderSettings->cameraView->referenceCalibration;
+    return calibration&&calibration->view.produceSceneVisibilityInputs;
 }
 
 std::vector<std::array<std::uint32_t,3>> referenceDepthSpans(const std::vector<scene::SceneInstance>& instances){
@@ -27,36 +34,56 @@ bool CharacterSceneRenderer::referenceDepthActive() const noexcept {
     return referenceCamera_&&referenceCamera_->descriptor().produceSceneDepth;
 }
 
-std::optional<SceneReferenceDepthCapture> CharacterSceneRenderer::readReferenceSceneDepth() const {
-    if(!referenceSceneDepth_||!submittedReferenceDepth_)return std::nullopt;
-    const auto [slot,submission]=*submittedReferenceDepth_;
-    return referenceSceneDepth_->read(slot,submission);
+bool CharacterSceneRenderer::referenceVisibilityActive() const noexcept {
+    return referenceCamera_&&referenceCamera_->descriptor().produceSceneVisibilityInputs;
 }
 
-void CharacterSceneRenderer::createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context){
+std::optional<SceneReferenceDepthCapture> CharacterSceneRenderer::readReferenceSceneDepth() const {
+    if(!referenceSceneDepth_||!submittedReferenceDepth_)return std::nullopt;
+    const auto& frame=*submittedReferenceDepth_;
+    return referenceSceneDepth_->read(frame.slot,frame.submission,frame.visibilityInputs);
+}
+
+void CharacterSceneRenderer::createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context,bool visibilityInputs){
     validateMaterialUvGradientPolicy(MaterialUvGradientPolicy::MirroredCoarseY,queryMaterialUvGradientSupport(context.physicalDevice));
-    const auto fragment=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+(bindlessTextures_
-        ?"/reference_scene_depth_bindless.frag.spv":"/reference_scene_depth.frag.spv")));
+    const auto fragmentName=visibilityInputs?"/reference_scene_visibility":"/reference_scene_depth";
+    const auto fragment=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+fragmentName+
+        (bindlessTextures_?"_bindless.frag.spv":".frag.spv")));
+    VkShaderModule visibilityVertex=VK_NULL_HANDLE;
     try{
+        if(visibilityInputs){
+            const auto vertexPath=shaderDirectory_+"/character_snapshot_depth_visibility"+
+                (computeSkinningEnabled_?"_compute.vert.spv":".vert.spv");
+            visibilityVertex=rhi_->createShaderModule(readReferenceVertexProgram(vertexPath));
+            desc.vertexShader=visibilityVertex;
+        }
         desc.vertexSpecialization.push_back({7,VK_TRUE});
         desc.fragmentShader=fragment;
         desc.renderPass=referenceSceneDepth_->renderPass();
-        desc.colorAttachmentCount=1;
-        desc.colorWriteMasks={VK_COLOR_COMPONENT_R_BIT};
+        desc.colorAttachmentCount=referenceSceneDepth_->visibilityInputs()?3:1;
+        desc.colorWriteMasks.assign(desc.colorAttachmentCount,0);
+        desc.colorWriteMasks[0]=VK_COLOR_COMPONENT_R_BIT;
+        if(visibilityInputs){
+            desc.colorWriteMasks[1]=VK_COLOR_COMPONENT_R_BIT|VK_COLOR_COMPONENT_G_BIT|VK_COLOR_COMPONENT_B_BIT|VK_COLOR_COMPONENT_A_BIT;
+            desc.colorWriteMasks[2]=VK_COLOR_COMPONENT_R_BIT;
+        }
         desc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;
         desc.minSampleShading=0;
         desc.depthTest=true;
         desc.depthWrite=true;
         desc.depthCompare=VK_COMPARE_OP_GREATER;
-        for(unsigned facing=0;facing<referenceSceneDepthPipelines_.size();++facing){
+        auto& pipelines=visibilityInputs?referenceSceneVisibilityPipelines_:referenceSceneDepthPipelines_;
+        for(unsigned facing=0;facing<pipelines.size();++facing){
             // The reference attachment stores rows in the opposite order to the scene view.
             desc.frontFace=facing==1?VK_FRONT_FACE_COUNTER_CLOCKWISE:VK_FRONT_FACE_CLOCKWISE;
             desc.cullMode=context.faceCullingEnabled&&facing!=2?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
-            referenceSceneDepthPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+            pipelines[facing]=rhi_->createGraphicsPipeline(desc);
         }
     }catch(...){
+        if(visibilityVertex)rhi_->destroyShaderModule(visibilityVertex);
         rhi_->destroyShaderModule(fragment);
         throw;
     }
+    if(visibilityVertex)rhi_->destroyShaderModule(visibilityVertex);
     rhi_->destroyShaderModule(fragment);
 }

@@ -56,8 +56,13 @@ layout(location=0,component=3) out float vertexColorAlpha;
 #else
 #define AZURE_VERTEX_OUTPUT(locationIndex) layout(location = locationIndex) out
 #endif
+#if defined(AZURE_REFERENCE_SCENE_VISIBILITY)
+layout(location=0) out vec3 worldNormal;
+layout(location=1) out vec4 worldTangent;
+#else
 AZURE_VERTEX_OUTPUT(0) vec3 worldNormal;
 AZURE_VERTEX_OUTPUT(1) vec4 worldTangent;
+#endif
 layout(location = 2) out vec2 textureCoordinate;
 #if defined(AZURE_SNAPSHOT_DEPTH)
 layout(location=3) out vec3 worldPosition;

@@ -17,6 +17,9 @@ struct SceneReferenceDepthCapture {
     // IEEE 754 binary32 bit patterns in scene row order from bottom to top.
     std::vector<std::uint32_t> rasterDepth;
     std::vector<std::uint32_t> hardwareDepth;
+    // Y-pole octahedral normals use the signed axes of the selected reference frame.
+    std::vector<std::uint32_t> packedNormals;
+    std::vector<std::uint8_t> objectIds;
 };
 
 struct SceneGraphResources {

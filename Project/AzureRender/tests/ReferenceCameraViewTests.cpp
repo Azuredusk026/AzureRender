@@ -28,13 +28,27 @@ int main(int argc,char** argv)try{
     const auto depthView=depthDocument.get<ReferenceCameraView>();
     check(depthView.produceSceneDepth&&nlohmann::json(depthView)==depthDocument,
         "Scene reference depth must survive view persistence");
-    for(const auto& invalid:nlohmann::json::array({0,nullptr,"true"})){
-        auto rejectedDocument=depthDocument;
-        rejectedDocument["produceSceneDepth"]=invalid;
-        bool rejected=false;
-        try{(void)rejectedDocument.get<ReferenceCameraView>();}catch(const std::invalid_argument&){rejected=true;}
-        check(rejected,"Scene reference depth requires a boolean");
-    }
+    auto visibilityDocument=depthDocument;
+    visibilityDocument["produceSceneVisibilityInputs"]=true;
+    const auto visibilityView=visibilityDocument.get<ReferenceCameraView>();
+    check(visibilityView.produceSceneVisibilityInputs&&nlohmann::json(visibilityView)==visibilityDocument,
+        "Scene visibility inputs must survive view persistence");
+    auto disabledVisibility=visibilityDocument;
+    disabledVisibility["produceSceneVisibilityInputs"]=false;
+    check(nlohmann::json(disabledVisibility.get<ReferenceCameraView>())==depthDocument,
+        "Explicitly disabled visibility inputs have the canonical depth-only representation");
+    visibilityDocument.erase("produceSceneDepth");
+    bool missingDepthRejected=false;
+    try{(void)visibilityDocument.get<ReferenceCameraView>();}catch(const std::invalid_argument&){missingDepthRejected=true;}
+    check(missingDepthRejected,"Scene visibility inputs require scene reference depth");
+    for(const auto* field:{"produceSceneDepth","produceSceneVisibilityInputs"})
+        for(const auto& invalid:nlohmann::json::array({0,nullptr,"true"})){
+            auto rejectedDocument=depthDocument;
+            rejectedDocument[field]=invalid;
+            bool rejected=false;
+            try{(void)rejectedDocument.get<ReferenceCameraView>();}catch(const std::invalid_argument&){rejected=true;}
+            check(rejected,"Scene reference output flags require boolean values");
+        }
     auto forwardDepth=depthDocument;
     forwardDepth["depthConvention"]="forward";
     bool forwardRejected=false;

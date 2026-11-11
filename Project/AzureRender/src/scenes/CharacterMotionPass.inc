@@ -40,9 +40,9 @@ void CharacterSceneRenderer::initializeMotion(const RenderContext& context){
 }
 void CharacterSceneRenderer::onFrameSubmitted(std::uint64_t submission) noexcept{
     commitSkinningOutputs(submission);
-    if(pendingReferenceDepthSlot_)submittedReferenceDepth_.emplace(*pendingReferenceDepthSlot_,submission);
-    else submittedReferenceDepth_.reset();
-    pendingReferenceDepthSlot_.reset();
+    submittedReferenceDepth_=pendingReferenceDepth_;
+    if(submittedReferenceDepth_)submittedReferenceDepth_->submission=submission;
+    pendingReferenceDepth_.reset();
     if(temporalView_.commit(submission)){
         motionPoses_.commit(submission);
         if(reflectionPendingSlot_&&submission>reflectionHistorySubmission_){
@@ -55,7 +55,7 @@ void CharacterSceneRenderer::onFrameSubmitted(std::uint64_t submission) noexcept
 }
 void CharacterSceneRenderer::onFrameAbandoned() noexcept{
     abandonSkinningOutputs();
-    pendingReferenceDepthSlot_.reset();
+    pendingReferenceDepth_.reset();
     temporalView_.cancel();motionPoses_.cancel();reflectionPendingSlot_.reset();reflectionPendingView_.reset();
     state_.temporalFrame=temporalView_.committed()?&*temporalView_.committed():nullptr;
 }

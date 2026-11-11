@@ -837,3 +837,6 @@ Intel 已知边界点的误差为两字节，完整区域继续验收。
 [场景参考深度](docs/acceptance/nr/scene-reference-depth.md)记录实际 Player 的 R32 与 D32 读回。
 NVIDIA 的 17,017 个冻结头发深度逐位一致。
 Intel 设备差异与完整颜色继续验收。
+
+[场景参考法线与对象身份](docs/acceptance/nr/scene-reference-normal.md)记录同帧输入。
+NVIDIA 法线来源控制的 17,017 个可见量均在一字节内。

@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261111-232828-scene-reference-normal-60ddfa",
+      "name": "场景参考法线与对象身份",
+      "sourceBase": "7044017",
+      "evidence": "docs/acceptance/nr/scene-reference-normal.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-normal/results.json"
+    },
+    {
       "path": "runs/20261111-213928-scene-reference-depth-728062",
       "name": "场景参考深度",
       "sourceBase": "1588c84",

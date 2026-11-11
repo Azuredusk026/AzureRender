@@ -316,3 +316,7 @@ Intel 的跨接口深度有 17014 个点逐位一致。
 [场景参考深度](../acceptance/nr/scene-reference-depth.md)记录实际 Player 的双附件读回。
 NVIDIA 冻结深度逐位一致，Intel 保留设备间深度差异。
 真实法线、对象可见量及完整颜色继续验收。
+
+[场景参考法线与对象身份](../acceptance/nr/scene-reference-normal.md)接入实际场景输入。
+NVIDIA 法线来源控制的完整头发区域满足一字节门槛。
+场景图集装配和完整颜色继续按所属条件验收。

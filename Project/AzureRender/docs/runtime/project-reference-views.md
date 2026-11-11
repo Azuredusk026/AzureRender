@@ -22,6 +22,11 @@
 保存时以 `true` 表示启用。
 附件说明见[场景参考深度](scene-reference-depth.md)。
 
+`produceSceneVisibilityInputs` 为可选布尔字段。
+启用时，视图同时声明 `produceSceneDepth`。
+附件包含压缩法线及对象身份。
+保存时以 `true` 表示启用。
+
 嵌套坐标帧及投影各声明版本一。
 保留字段采用所属数学类型的零值。
 未知字段、版本及非法数值按输入错误处理。
