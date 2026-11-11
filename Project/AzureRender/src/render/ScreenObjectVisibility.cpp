@@ -8,6 +8,7 @@ using Float4=std::array<float,4>;
 struct alignas(16) PackedRecord {std::array<float,16> projection{};Float4 lightBias{},normalFilter{},rect{};};
 struct alignas(16) PackedFrame {
     std::array<float,16> clipToWorld{};Float4 reconstruction{};std::array<std::uint32_t,4> control{};
+    // control.z stores the atlas in bit zero and projections at their one-based object IDs.
     std::array<PackedRecord,8> records{};
 };
 static_assert(sizeof(PackedRecord)==112&&sizeof(PackedFrame)==992,"Visibility uniform layout mismatch");
@@ -50,6 +51,10 @@ PackedFrame pack(VkExtent2D extent,const ScreenObjectVisibilityInputs& inputs,co
     result.control={static_cast<unsigned>(records.size()),view.flipNdcY?1U:0U,inputs.objectDepth==ScreenObjectDepth::Forward?1U:0U,view.phaseOrigin==ScreenObjectVisibilityPhaseOrigin::BottomLeft?1U:0U};
     for(unsigned i=0;i<records.size();++i){
         const auto& record=records[i];
+        const auto projectionDepth=record.projectionDepth.value_or(inputs.objectDepth);
+        require(projectionDepth==ScreenObjectDepth::Forward||projectionDepth==ScreenObjectDepth::Reversed,
+            "Unknown visibility projection depth convention");
+        if(projectionDepth==ScreenObjectDepth::Forward)result.control[2]|=1u<<(i+1);
         require(finite(record.worldToUnitShadow)&&record.worldToUnitShadow[3]==0&&record.worldToUnitShadow[7]==0&&record.worldToUnitShadow[11]==0&&record.worldToUnitShadow[15]==1,"Visibility object projection must be finite and affine");
         require(finite(record.lightDirection),"Visibility light direction must be finite");
         float length=0;for(float x:record.lightDirection)length+=x*x;

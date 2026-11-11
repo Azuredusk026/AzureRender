@@ -1326,3 +1326,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [原生图集与接收输入来源](../acceptance/nr/native-atlas-and-receiver-producers.md)核对逐事件深度和法线写入。
 图集投影的乘加次序与两份服饰几何继续核对。
+
+[对象可见量深度方向](../acceptance/nr/visibility-projection-depth.md)接入逐记录选择。
+原生对象记录和图集投影沿实际来源继续验收。

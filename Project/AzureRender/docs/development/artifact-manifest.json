@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-025941-visibility-projection-depth-c1c792",
+      "name": "对象可见量深度方向",
+      "sourceBase": "b9fb734",
+      "evidence": "docs/acceptance/nr/visibility-projection-depth.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/visibility-projection-depth/results.json"
+    },
+    {
       "path": "runs/20261112-024632-native-atlas-and-receiver-producers-d5e705",
       "name": "原生图集与接收输入来源",
       "sourceBase": "4e4c00c",

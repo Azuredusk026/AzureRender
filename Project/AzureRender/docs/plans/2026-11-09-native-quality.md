@@ -332,3 +332,6 @@ NVIDIA 头发区域有 277 处超差，Intel 有 428 处。
 [原生图集与接收输入来源](../acceptance/nr/native-atlas-and-receiver-producers.md)核对双方图集绘制。
 两份服饰对应 1,604 处同配对图集超差。
 原生头发的图集投影按实际乘加次序逐位重建。
+
+[对象可见量深度方向](../acceptance/nr/visibility-projection-depth.md)分别定义图集与记录方向。
+当前场景的原生记录标定继续使用实际图集和参考附件。

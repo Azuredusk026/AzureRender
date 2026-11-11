@@ -46,6 +46,8 @@ int main(int argc,char** argv)try{
         inputs.normals=uploaded.upload(width,height,VK_FORMAT_A2B10G10R10_UNORM_PACK32,normals.data(),normals.size()*4);
         inputs.objectIds=uploaded.upload(width,height,VK_FORMAT_R8_UINT,ids.data(),ids.size());
         inputs.atlas=uploaded.upload(16,16,VK_FORMAT_R16_UNORM,atlas.data(),atlas.size()*2);
+        const std::vector<std::uint16_t> middleDepth(16*16,32768);
+        const auto middleAtlas=uploaded.upload(16,16,VK_FORMAT_R16_UNORM,middleDepth.data(),middleDepth.size()*2);
         std::vector<std::uint16_t> alternateNormals(width*height*2,32768);
         std::vector<std::uint32_t> alternateIds(ids.begin(),ids.end());
         const auto normals16=uploaded.upload(width,height,VK_FORMAT_R16G16_UNORM,alternateNormals.data(),alternateNormals.size()*2);
@@ -76,13 +78,21 @@ int main(int argc,char** argv)try{
         }catch(const AbandonedRecording&){}
         auto readback=host.allocator.createBuffer(width*height*2,VK_BUFFER_USAGE_TRANSFER_DST_BIT,true);
         try{
-            for(unsigned scenario=0;scenario<7;++scenario){
+            for(unsigned scenario=0;scenario<9;++scenario){
                 const auto slot=scenario%2;
-                std::vector<ScreenObjectVisibilityRecord> records(scenario==0?8:2,second);records[0]=first;
+                std::vector<ScreenObjectVisibilityRecord> records(scenario==0||scenario>=7?8:2,second);records[0]=first;
                 inputs.objectDepth=scenario==2?ScreenObjectDepth::Forward:ScreenObjectDepth::Reversed;
                 if(scenario==3||scenario==6)records.clear();
                 if(scenario==4){inputs.normals=normals16;inputs.normalFormat=VK_FORMAT_R16G16_UNORM;inputs.objectIds=ids32;inputs.objectIdFormat=VK_FORMAT_R32_UINT;}
                 if(scenario==5){records.resize(1);records[0].filterRadiusUv={.75F,.75F};}
+                if(scenario>=7){
+                    inputs.atlas=middleAtlas;
+                    inputs.objectDepth=scenario==7?ScreenObjectDepth::Reversed:ScreenObjectDepth::Forward;
+                    for(auto& record:records)record.worldToUnitShadow[14]=.75F;
+                    records[0].projectionDepth=scenario==7?ScreenObjectDepth::Forward:ScreenObjectDepth::Reversed;
+                    records[1].projectionDepth=inputs.objectDepth;
+                    if(scenario==7)records[7].projectionDepth=ScreenObjectDepth::Forward;
+                }
                 host.submit([&](rhi::ICommandRecorder& commands,VkCommandBuffer native){
                     if(scenario==6)owner.recordNeutral(commands,slot);
                     else owner.record(commands,slot,inputs,view,records);
@@ -99,12 +109,16 @@ int main(int argc,char** argv)try{
                 const auto* bytes=static_cast<const std::uint8_t*>(readback.mapped);
                 for(unsigned i=0;i<ids.size();++i){
                     unsigned expected=255;
-                    if(ids[i]>0&&ids[i]<=records.size())expected=inputs.objectDepth==ScreenObjectDepth::Forward?(ids[i]==1?0:255):(ids[i]==1?255:0);
+                    if(ids[i]>0&&ids[i]<=records.size()){
+                        if(scenario>=7)expected=(scenario==7?(ids[i]==1||ids[i]==8):ids[i]!=1)?0:255;
+                        else expected=inputs.objectDepth==ScreenObjectDepth::Forward?(ids[i]==1?0:255):(ids[i]==1?255:0);
+                    }
                     if(bytes[i*2]!=255||bytes[i*2+1]!=expected)
                         throw std::runtime_error("Visibility synthetic mismatch at scenario "+std::to_string(scenario)+" pixel "+std::to_string(i)+" expected "+std::to_string(expected)+" got "+std::to_string(bytes[i*2+1]));
                     ++checked;
                 }
             }
+            inputs.objectDepth=ScreenObjectDepth::Reversed;
             // A nonuniform atlas makes the 4x4 rotation phase observable.
             std::vector<std::uint16_t> irregular(16*16);
             for(unsigned y=0;y<16;++y)for(unsigned x=0;x<16;++x)irregular[y*16+x]=(x*29+y*41+x*y*11)%127<60?65535:0;
@@ -141,5 +155,5 @@ int main(int argc,char** argv)try{
     }
     require(!host.errors.load(),"Visibility synchronization validation failed");
     require(!host.allocator.statistics().liveImages&&!host.allocator.statistics().liveBuffers,"Visibility GPU allocations leaked");
-    std::cout<<"PASS: "<<host.properties.deviceName<<", "<<checked<<" pixels, forward/reverse, IDs, frame reuse, zero validation/leaks\n";return 0;
+    std::cout<<"PASS: "<<host.properties.deviceName<<", "<<checked<<" pixels, mixed projection/atlas depth, IDs, frame reuse, zero validation/leaks\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}

@@ -849,3 +849,6 @@ NVIDIA 法线来源控制的 17,017 个可见量均在一字节内。
 
 [原生图集与接收输入来源](docs/acceptance/nr/native-atlas-and-receiver-producers.md)记录逐事件实际读回。
 图集投影、服饰几何及接收输入按来源继续核对。
+
+[对象可见量深度方向](docs/acceptance/nr/visibility-projection-depth.md)定义图集与逐对象投影的约定。
+同一图集可由正向和反向记录共同使用。

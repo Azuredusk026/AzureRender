@@ -20,6 +20,9 @@ NVIDIA 法线来源控制的全部头发可见量满足一字节门槛。
 [原生图集与接收输入来源](acceptance/nr/native-atlas-and-receiver-producers.md)已核对逐事件读回。
 对象图集的投影次序及两份服饰几何已有对应来源。
 
+[对象可见量深度方向](acceptance/nr/visibility-projection-depth.md)支持逐记录投影。
+原生记录可在实际正向图集中表达反向投影。
+
 [参考透明层级](acceptance/nr/reference-alpha-ellipse.md)通过公共策略和原四帧检查。
 NVIDIA 完整 17017 处一致，Intel 剩余九十六处深度超差继续修正。
 

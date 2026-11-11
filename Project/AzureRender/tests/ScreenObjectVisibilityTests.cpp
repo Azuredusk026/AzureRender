@@ -102,6 +102,7 @@ int main()try{
         auto badRecord=record;badRecord.atlasRect={.8F,0,.4F,1};rejects([&]{owner.record(commands,0,inputs,view,{badRecord});});
         badRecord=record;badRecord.lightDirection={0,0,0};rejects([&]{owner.record(commands,0,inputs,view,{badRecord});});
         badRecord=record;badRecord.filterRadiusUv[0]=-1;rejects([&]{owner.record(commands,0,inputs,view,{badRecord});});
+        badRecord=record;badRecord.projectionDepth=static_cast<ScreenObjectDepth>(99);rejects([&]{owner.record(commands,0,inputs,view,{badRecord});});
         badRecord=record;badRecord.normalBias=std::numeric_limits<float>::quiet_NaN();rejects([&]{owner.record(commands,0,inputs,view,{badRecord});});
         rejects([&]{owner.record(commands,2,inputs,view,records);});
         rejects([&]{owner.record(commands,0,inputs,view,std::vector<ScreenObjectVisibilityRecord>(9,record));});

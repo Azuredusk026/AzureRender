@@ -2,6 +2,7 @@
 #include "rhi/Rhi.hpp"
 #include <array>
 #include <memory>
+#include <optional>
 #include <string>
 namespace azurerender {
 enum class ScreenObjectDepth {Forward,Reversed};
@@ -29,6 +30,7 @@ struct ScreenObjectVisibilityRecord {
     std::array<float,4> atlasRect{0,0,1,1};
     std::array<float,2> filterRadiusUv{};
     float minimumReceiverDepth=.01F;
+    std::optional<ScreenObjectDepth> projectionDepth;
 };
 struct ScreenObjectVisibilityInputs {
     VkImageView depth{},normals{},objectIds{},atlas{};
@@ -45,7 +47,8 @@ struct ScreenObjectVisibilityOutput {
 };
 // Inputs are borrowed sampled images with matching declared formats and extents.
 // Normals use RG Y-pole octahedral encoding; integer object IDs 1..8 select records, zero is background.
-// Projection and atlas share objectDepth. The inverse view independently defines device depth.
+// objectDepth describes the atlas and is the default for records without projectionDepth.
+// The inverse view independently defines device depth.
 // The caller publishes input dependencies, retires a slot's consumers before record, and waits before destruction.
 // Output is valid after record submits; callers preserve its sampled layout until slot reuse.
 class ScreenObjectVisibilityGpu final {
