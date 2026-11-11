@@ -131,6 +131,8 @@ private:
     VkPipeline computedMaterialViewPipeline(VkPipeline) const;
     void destroyComputedMaterialViewPipelines() noexcept;
     ComputedMaterialViewCapabilities computedMaterialViewCapabilities_;
+    std::uint8_t computedMaterialOrdinaryPolicies_=0;
+    std::array<std::uint8_t,unsigned(AssetMaterialClass::Showcase)+1> computedMaterialClassPolicies_{};
     std::vector<std::pair<VkPipeline,VkPipeline>> computedMaterialViewPipelines_;
     mutable std::atomic<std::uint64_t> computedMaterialViewRequests_{0},computedMaterialViewSelections_{0};
     std::string computedMaterialViewFallback_;

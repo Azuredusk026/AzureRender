@@ -19,11 +19,12 @@ int main(int argc,char** argv)try{
     std::map<std::string,std::shared_ptr<const LoadedAsset>> prepared{{path,asset}};
     nlohmann::json report={{"device",host->properties.deviceName},{"quadEnabled",quad},{"cases",nlohmann::json::array()}};
     const bool qualified=AZURE_TEST_COMPUTED_MATERIAL_VIEW&&quad&&host->properties.vendorID==0x10deU;
-    for(bool depth:{true,false}){
+    for(unsigned mode=0;mode<3;++mode){
+        const bool depth=mode!=1,referenceCameraPrograms=mode==2;
         rhi::NullRhi backend;CharacterSceneRenderer renderer;RenderContext context;RenderSettings settings;
         context.rhi=&backend;context.allocator=&backend.allocator();context.shaderDirectory=argv[1];context.physicalDevice=host->physical;
         context.renderExtent={128,96};context.shadowMapSize=32;context.bindlessTextures=quad;context.fragmentQuadControl=quad;
-        context.depthTestEnabled=depth;context.computeShaders=true;context.rgba16fStorageImage=true;context.cullingEnabled=false;
+        context.depthTestEnabled=depth;context.referenceCameraPrograms=referenceCameraPrograms;context.computeShaders=true;context.rgba16fStorageImage=true;context.cullingEnabled=false;
         context.descriptorLimits=host->properties.limits;context.sceneColorFormat=VK_FORMAT_R16G16B16A16_SFLOAT;context.depthFormat=context.shadowFormat=VK_FORMAT_D32_SFLOAT;
         context.rampAtlasPath=(source/"assets_public/toon_ramp_atlas.ppm").string();context.preparedMeshes=&prepared;
         context.scene.resources.push_back({"cube",path});scene::SceneNodeDesc node;node.id="cube";node.resourceId="cube";context.scene.nodes.push_back(node);
@@ -33,10 +34,13 @@ int main(int argc,char** argv)try{
         renderer.updateFrame(frame);rhi::NullCommandRecorder commands;context.commands=&commands;renderer.recordScene(context);
         std::ostringstream fields;fields<<'{';renderer.appendCaptureManifestFields(fields);fields<<"\"end\":true}";const auto data=nlohmann::json::parse(fields.str());
         renderer.onUnload(context);const bool zero=!backend.allocator().statistics().liveImages&&!backend.allocator().statistics().liveBuffers;
-        report["cases"].push_back({{"depthTest",depth},{"preparedPipelines",data.at("computedMaterialViewPipelines")},{"frameEligible",data.at("computedMaterialViewFrameEligible")},{"selections",data.at("computedMaterialViewSelectionsTotal")},{"fallback",data.at("computedMaterialViewFallback")},{"reflectionPrepared",data.at("screenReflectionComputePrepared")},{"zeroAllocator",zero}});
+        report["cases"].push_back({{"depthTest",depth},{"referenceCameraPrograms",referenceCameraPrograms},{"preparedPipelines",data.at("computedMaterialViewPipelines")},{"frameEligible",data.at("computedMaterialViewFrameEligible")},{"selections",data.at("computedMaterialViewSelectionsTotal")},{"fallback",data.at("computedMaterialViewFallback")},{"reflectionPrepared",data.at("screenReflectionComputePrepared")},{"zeroAllocator",zero}});
         std::ofstream(output/"results.json")<<report.dump(2)<<'\n';require(zero,"Depth policy recording must release every owned resource");
-        if(depth&&qualified){require(data.at("computedMaterialViewPipelines").get<unsigned>()>0&&data.at("computedMaterialViewFrameEligible").get<bool>(),"Qualified depth-enabled view must prepare and select its existing optimized policy");}
-        else require(data.at("computedMaterialViewPipelines")==0&&!data.at("computedMaterialViewFrameEligible").get<bool>(),"Depth-disabled or unqualified view must retain reference pipelines");
+        if(depth&&qualified&&!referenceCameraPrograms){
+            require(data.at("computedMaterialViewPipelines").get<unsigned>()>0&&data.at("computedMaterialViewSelectionsTotal").get<unsigned>()>0&&data.at("computedMaterialViewFrameEligible").get<bool>(),"Qualified depth-enabled view must prepare and select its existing optimized policy");
+            require(data.at("computedMaterialViewPipelines").get<unsigned>()<=8,"Specialized material preparation exceeds the active policy combinations");
+        }
+        else require(data.at("computedMaterialViewPipelines")==0&&!data.at("computedMaterialViewFrameEligible").get<bool>(),"Depth-disabled, reference-camera or unqualified view must retain reference pipelines");
     }
     require(host->errors.load()==0,"Capability fixture must have no Vulkan validation messages");
     report["status"]="passed";report["validationErrors"]=host->errors.load();std::ofstream(output/"results.json")<<report.dump(2)<<'\n';

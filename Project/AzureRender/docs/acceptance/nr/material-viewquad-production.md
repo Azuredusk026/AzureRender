@@ -54,3 +54,4 @@ Intel 两配置均选择参考管线。
 
 [标准深度资格](material-viewquad-standard-depth.md)保存双配置与双设备证据。
 [运行契约](../../runtime/computed-material-view.md)说明候选的构建及选择条件。
+专用材质准备及长窗口结果见[管线范围验收](material-viewquad-pipeline-scope.md)。

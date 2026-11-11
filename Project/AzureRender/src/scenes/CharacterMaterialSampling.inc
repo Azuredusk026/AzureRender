@@ -4,9 +4,21 @@ void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
     lightingClassesNeeded_={};
     independentCoverageNeeded_=false;materialUvNeeded_=false;materialUvClassesNeeded_=0;
     materialDepthPoliciesNeeded_={};
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS)
+    computedMaterialOrdinaryPolicies_=0;computedMaterialClassPolicies_.fill(0);
+#endif
     const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
         validateMaterialUvPolicy(material);
         independentCoverageNeeded_|=material.coverageTexture.present;
+#if defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS)
+        if(material.alphaMode!=AssetAlphaMode::Blend){
+            const auto policy=(extendedMaterialLighting(material)?1U:0U)|(material.coverageTexture.present?2U:0U);
+            const auto bit=static_cast<std::uint8_t>(1U<<(policy+4U*unsigned(material.doubleSided)));
+            const auto index=unsigned(material.materialClass);
+            if(ordinaryOpaqueMaterial(material))computedMaterialOrdinaryPolicies_|=bit;
+            else if(index<computedMaterialClassPolicies_.size())computedMaterialClassPolicies_[index]|=bit;
+        }
+#endif
         if(material.materialFeatures&MaterialFeatureMirroredCoarseUv){materialUvNeeded_=true;materialUvClassesNeeded_|=1U<<unsigned(material.materialClass);}
         if(material.unlitTextureLayers.present&&material.unlitTextureLayers.depthCompare==UnlitTextureLayers::DepthCompare::LessOrEqual)
             materialDepthPoliciesNeeded_[1]=true;

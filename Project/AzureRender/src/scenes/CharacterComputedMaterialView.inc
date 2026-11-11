@@ -23,11 +23,31 @@ void CharacterSceneRenderer::initializeComputedMaterialView(const RenderContext&
 #endif
 }
 void CharacterSceneRenderer::prepareComputedMaterialViewPipeline(VkPipeline original,const rhi::GraphicsPipelineDesc& desc){
-    if(!desc.depthTest||(desc.depthCompare!=VK_COMPARE_OP_LESS&&desc.depthCompare!=VK_COMPARE_OP_LESS_OR_EQUAL&&desc.depthCompare!=VK_COMPARE_OP_EQUAL))return;
+    if(desc.alphaBlend||!desc.depthTest||(desc.depthCompare!=VK_COMPARE_OP_LESS&&desc.depthCompare!=VK_COMPARE_OP_LESS_OR_EQUAL&&desc.depthCompare!=VK_COMPARE_OP_EQUAL))return;
     if(!computedMaterialViewEligible(computedMaterialViewCapabilities_,{1,0,0,1,2}))return;
     const auto source=std::find_if(materialUvShaderPaths_.begin(),materialUvShaderPaths_.end(),[&](const auto& item){return item.first==desc.fragmentShader;});
     const auto path=source!=materialUvShaderPaths_.end()?computedMaterialViewProgram(source->second):std::nullopt;
     if(!path)return;
+    unsigned fixedClass=UINT32_MAX;
+    bool ordinary=false;
+    for(const auto& value:desc.fragmentSpecialization){
+        if(value.id==0)ordinary=value.value==VK_TRUE;
+        if(value.id==1)fixedClass=value.value;
+    }
+    const auto policies=ordinary?computedMaterialOrdinaryPolicies_:
+        fixedClass<computedMaterialClassPolicies_.size()?computedMaterialClassPolicies_[fixedClass]:0U;
+    if(!policies)return;
+    std::string_view name=source->second;
+    name.remove_suffix(std::string_view(".frag.spv").size());
+    const auto endsWith=[&](std::string_view suffix){
+        return name.size()>=suffix.size()&&name.substr(name.size()-suffix.size())==suffix;
+    };
+    const bool coverage=endsWith("_coverage");
+    if(coverage)name.remove_suffix(std::string_view("_coverage").size());
+    const unsigned policy=(endsWith("_lighting")?1U:0U)|(coverage?2U:0U);
+    const unsigned single=1U<<policy,doubleSided=1U<<(policy+4U);
+    const unsigned allowedFacing=desc.cullMode==VK_CULL_MODE_NONE?single|doubleSided:single;
+    if((policies&allowedFacing)==0U)return;
     VkShaderModule module=VK_NULL_HANDLE;VkPipeline pipeline=VK_NULL_HANDLE;
     try{
         if(computedMaterialViewPipelines_.size()>=512)throw std::runtime_error("Computed material view pipeline budget exceeded");
