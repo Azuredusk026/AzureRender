@@ -741,6 +741,13 @@
       "sourceBase": "ce6381e",
       "evidence": "docs/acceptance/nr/material-lighting-regression.md",
       "results": "docs/acceptance/nr/evidence/2026-11-12/material-lighting-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/npr-ramp-shard-evidence",
+      "name": "NPR 渐变组合回归矩阵",
+      "sourceBase": "4a1c933",
+      "evidence": "docs/acceptance/nr/npr-ramp-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/npr-ramp-regression/results.json"
     }
   ],
   "preservedBuilds": [

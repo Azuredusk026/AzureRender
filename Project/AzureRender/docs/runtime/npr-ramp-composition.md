@@ -67,7 +67,7 @@ NPR 画像第二行的第四分量保存颜色合成策略。
 
 ## 验证
 
-`AzureEngine.NprRampCompositionGpu` 通过生产入口采集。
+`AzureEngine.NprRampCompositionGpu` 和 `AzureEngine.NprRampCompositionGpu.Fabric` 通过生产入口分别采集通用材质和织物。
 数值控制覆盖两种材质及两条描述符路径。
 场景可见量覆盖零、二分之一和一。
 完整文档、透明混合、裁剪和多重采样分别检查。
@@ -75,4 +75,5 @@ NPR 画像第二行的第四分量保存颜色合成策略。
 公共线性误差预算为 0.008。
 缺省配置与显式缺省配置要求逐像素一致。
 原生来源与范围见[合成核验](../acceptance/nr/npr-view-ramp-composition.md)。
+[渐变组合回归矩阵](../acceptance/nr/npr-ramp-regression.md)记录两种配置的测试结果。
 整体画质与交付目标见[开发总计划](../plans/azure-engine-plan.md)。

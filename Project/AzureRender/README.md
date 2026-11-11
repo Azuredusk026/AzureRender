@@ -80,6 +80,8 @@ NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工�
 
 [材质光照回归矩阵](docs/acceptance/nr/material-lighting-regression.md)核对通用材质、织物和对象阴影的双绑定输出。
 
+[NPR 渐变组合回归矩阵](docs/acceptance/nr/npr-ramp-regression.md)核对通用材质、织物及两种绑定的像素输出。
+
 [快照视图组合](docs/acceptance/nr/snapshot-default-view-combination.md)的动态照明控制通过六附件核对。
 新增收益未达准入条件，候选保持隔离。
 

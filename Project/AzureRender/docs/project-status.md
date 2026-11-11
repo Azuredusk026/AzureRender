@@ -25,6 +25,8 @@
 
 [材质光照回归矩阵](acceptance/nr/material-lighting-regression.md)通过双配置 168 个采集用例，覆盖通用材质、织物及对象阴影。
 
+[NPR 渐变组合回归矩阵](acceptance/nr/npr-ramp-regression.md)通过两种配置共四项测试及 104 个采集用例。
+
 [椭圆覆盖选级主线验收](acceptance/nr/material-ellipse-coverage-main-integration.md)通过双配置、双设备及原始四帧。
 
 [场景参考深度主线验收](acceptance/nr/scene-reference-depth-main-integration.md)通过双配置和双设备全图深度读回。

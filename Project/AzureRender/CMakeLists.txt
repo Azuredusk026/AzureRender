@@ -2290,10 +2290,14 @@ if(BUILD_TESTING)
     add_material_lighting_gpu(AzureEngine.MaterialLightingGpu generic-environment)
     add_material_lighting_gpu(AzureEngine.MaterialLightingGpu.Fabric fabric-environment)
     add_material_lighting_gpu(AzureEngine.MaterialLightingGpu.ObjectShadow object-shadow)
-    add_test(NAME AzureEngine.NprRampCompositionGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_ramp_composition_gpu.py"
-        --executable $<TARGET_FILE:AzurePlayer>
-        --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
-    set_tests_properties(AzureEngine.NprRampCompositionGpu PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    function(add_npr_ramp_composition_gpu name material_class)
+        add_test(NAME "${name}" COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_npr_ramp_composition_gpu.py"
+            --executable $<TARGET_FILE:AzurePlayer> --material-class "${material_class}"
+            --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")
+        set_tests_properties("${name}" PROPERTIES TIMEOUT 600 LABELS "gpu" RUN_SERIAL TRUE)
+    endfunction()
+    add_npr_ramp_composition_gpu(AzureEngine.NprRampCompositionGpu generic)
+    add_npr_ramp_composition_gpu(AzureEngine.NprRampCompositionGpu.Fabric fabric)
     add_test(NAME AzureEngine.MaterialDisplayGpu COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_material_display_gpu.py"
         --executable $<TARGET_FILE:AzurePlayer>
         --expected-validation "$<IF:$<CONFIG:Debug>,enabled,disabled>")

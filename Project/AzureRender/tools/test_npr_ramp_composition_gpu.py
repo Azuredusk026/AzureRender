@@ -75,10 +75,12 @@ def prepare(folder,kind,policy,visibility,mode):
     pad_material_profile_index(model);write(path,model);write(levelPath,level)
     return folder/'lab.azureproject'
 
-def run(player,output,selected=None,backends=('indexed','fixed'),expected_validation='any'):
+def run(player,output,selected=None,backends=('indexed','fixed'),expected_validation='any',material_class=None):
     output.mkdir(parents=True,exist_ok=False);sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
     definitions=[(kind,policy,visibility,'opaque') for kind in ['generic','fabric'] for policy in ['default','mask','view'] for visibility in [0,.5,1]]
     definitions += [(kind,'view',.5,mode) for kind in ['generic','fabric'] for mode in ['mask','blend','msaa','document']]
+    if material_class is not None:
+        definitions=[case for case in definitions if case[0]==material_class]
     name=lambda c:c[0]+'-'+c[1]+'-'+str(c[2])+'-'+c[3]
     if selected:
         assert set(selected)<={name(c) for c in definitions};definitions=[c for c in definitions if name(c) in selected]
@@ -129,9 +131,10 @@ def run(player,output,selected=None,backends=('indexed','fixed'),expected_valida
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--executable',type=Path,required=True);p.add_argument('--output',type=Path)
+    p.add_argument('--material-class',choices=['generic','fabric'])
     p.add_argument('--case',action='append');p.add_argument('--backend',action='append',choices=['indexed','fixed']);p.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any');args=p.parse_args()
     engine=Path(__file__).resolve().parents[1];task=None
     if args.output is None:task=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','npr-ramp-composition'],text=True,cwd=engine).strip());args.output=task/'captures'
-    try:run(args.executable.resolve(),args.output.resolve(),args.case,args.backend or ('indexed','fixed'),args.expected_validation)
+    try:run(args.executable.resolve(),args.output.resolve(),args.case,args.backend or ('indexed','fixed'),args.expected_validation,args.material_class)
     finally:
         if task:subprocess.run([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--finish',str(task)],cwd=engine,check=True)
