@@ -283,3 +283,6 @@ RHI 的附件样本数、管线比例及能力查询通过双配置检查。
 [头发覆盖层级](acceptance/nr/native-hair-coverage-lod.md)核对显式椭圆层级的实际输出。
 [椭圆选级](acceptance/nr/material-ellipse-coverage-policy.md)记录公开材质及原生头发的核对。
 参考深度、实际可见量及完整颜色按所属条件验证。
+
+[原生深度设备对照](acceptance/nr/native-d3d11-depth-devices.md)记录两设备实际深度及颜色读回。
+Intel 的同设备跨接口深度保留三个差异点。
