@@ -69,7 +69,7 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 10;
+    static constexpr std::uint32_t kApiVersion = 11;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;
@@ -198,6 +198,7 @@ struct RenderContext {
     bool computeSkinning = false;
     bool gpuCulling = false;
     bool referenceCameraPrograms = false;
+    bool referenceSceneDepthPrograms = false;
     bool visibilityPrototype = false;
     bool multiDrawIndirect = false;
     std::uint32_t maxDrawIndirectCount = 1;

@@ -22,6 +22,13 @@ using namespace azurerender::internal;
 
 namespace {
 
+void writeReferenceDepthPlane(const std::filesystem::path& path,const std::vector<std::uint32_t>& data){
+    std::ofstream output(path,std::ios::binary);
+    output.write(reinterpret_cast<const char*>(data.data()),static_cast<std::streamsize>(data.size()*sizeof(data.front())));
+    output.close();
+    if(!output)throw std::runtime_error("Failed to write scene reference depth: "+path.u8string());
+}
+
 std::string fnv1a64Hex(const std::string& value) {
     std::uint64_t hash = 14695981039346656037ULL;
     for (const unsigned char byte : value) {
@@ -485,6 +492,19 @@ void AzureRenderApp::writeCaptureManifest(
         output << ",\n";
     }
     if (sceneRenderer_ != nullptr) {
+        if(const auto depth=sceneRenderer_->readReferenceSceneDepth()){
+            const auto pixels=std::size_t(depth->extent.width)*depth->extent.height;
+            if(!pixels||depth->rasterDepth.size()!=pixels||depth->hardwareDepth.size()!=pixels)
+                throw std::runtime_error("Invalid scene reference depth capture dimensions");
+            constexpr auto rasterName="reference-depth-r32.bin";
+            constexpr auto hardwareName="reference-depth-d32.bin";
+            writeReferenceDepthPlane(outputPath.parent_path()/rasterName,depth->rasterDepth);
+            writeReferenceDepthPlane(outputPath.parent_path()/hardwareName,depth->hardwareDepth);
+            output << "  \"referenceSceneDepth\": {\"width\": " << depth->extent.width
+                   << ", \"height\": " << depth->extent.height << ", \"submission\": " << depth->submission
+                   << ", \"rowOrigin\": \"bottom-left\""
+                   << ", \"raster\": " << std::quoted(rasterName) << ", \"hardware\": " << std::quoted(hardwareName) << "},\n";
+        }
         sceneRenderer_->appendCaptureManifestFields(output);
     } else {
         output

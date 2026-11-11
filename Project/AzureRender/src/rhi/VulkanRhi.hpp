@@ -203,6 +203,7 @@ public:
         VkImage image,
         VkBuffer buffer,
         VkExtent2D extent) override;
+    void copyDepthImageToBuffer(VkImage image,VkBuffer buffer,VkExtent2D extent) override;
     void writeTimestamp(
         VkQueryPool pool,
         std::uint32_t query,

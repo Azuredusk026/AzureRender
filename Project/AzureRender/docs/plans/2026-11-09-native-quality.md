@@ -312,4 +312,7 @@ Intel 既有峰值点从 166 降至 2 字节，整区峰值为 97。
 
 [原生深度设备对照](../acceptance/nr/native-d3d11-depth-devices.md)核对 D3D11 写入及实际消费。
 Intel 的跨接口深度有 17014 个点逐位一致。
-场景参考深度及完整颜色继续验收。
+
+[场景参考深度](../acceptance/nr/scene-reference-depth.md)记录实际 Player 的双附件读回。
+NVIDIA 冻结深度逐位一致，Intel 保留设备间深度差异。
+真实法线、对象可见量及完整颜色继续验收。

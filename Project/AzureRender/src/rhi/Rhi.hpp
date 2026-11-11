@@ -373,6 +373,9 @@ public:
         VkQueryPool pool,
         std::uint32_t query,
         VkPipelineStageFlagBits stage) = 0;
+    virtual void copyDepthImageToBuffer(VkImage,VkBuffer,VkExtent2D) {
+        throw std::logic_error("Depth attachment readback is unavailable");
+    }
 };
 
 // Device-level resource operations. Scene renderers create all GPU objects

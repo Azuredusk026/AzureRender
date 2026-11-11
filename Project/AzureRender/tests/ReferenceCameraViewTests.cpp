@@ -1,5 +1,7 @@
 #include "render/ReferenceCameraView.hpp"
 #include "render/ReferenceCameraDepth.hpp"
+#include "render/ReferenceCameraViewJson.hpp"
+#include <nlohmann/json.hpp>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -14,6 +16,30 @@ std::vector<char> read(const char* path){std::ifstream in(path,std::ios::binary|
 int main(int argc,char** argv)try{
     check(argc==1||argc==5,"Expected optional projection/frame/world/query fixtures");
     ReferenceCameraView view;view.extent={256,128};PreparedReferenceCameraView identity(view);
+    const nlohmann::json legacy=view;
+    check(!legacy.contains("produceSceneDepth")&&!legacy.get<ReferenceCameraView>().produceSceneDepth,
+        "Legacy views keep their serialized fields and skip scene reference depth");
+    auto disabledDepth=legacy;
+    disabledDepth["produceSceneDepth"]=false;
+    check(nlohmann::json(disabledDepth.get<ReferenceCameraView>())==legacy,
+        "Explicitly disabled scene depth has the canonical legacy representation");
+    auto depthDocument=legacy;
+    depthDocument["produceSceneDepth"]=true;
+    const auto depthView=depthDocument.get<ReferenceCameraView>();
+    check(depthView.produceSceneDepth&&nlohmann::json(depthView)==depthDocument,
+        "Scene reference depth must survive view persistence");
+    for(const auto& invalid:nlohmann::json::array({0,nullptr,"true"})){
+        auto rejectedDocument=depthDocument;
+        rejectedDocument["produceSceneDepth"]=invalid;
+        bool rejected=false;
+        try{(void)rejectedDocument.get<ReferenceCameraView>();}catch(const std::invalid_argument&){rejected=true;}
+        check(rejected,"Scene reference depth requires a boolean");
+    }
+    auto forwardDepth=depthDocument;
+    forwardDepth["depthConvention"]="forward";
+    bool forwardRejected=false;
+    try{(void)forwardDepth.get<ReferenceCameraView>();}catch(const std::invalid_argument&){forwardRejected=true;}
+    check(forwardRejected,"Scene reference depth requires reversed depth");
     const auto pixel=identity.project({.25F,-.5F,.75F});check(pixel==std::array<double,3>{160,32,.75},"Identity pixel convention");
     auto ray=identity.pickRay(.5,.5);check(ray.origin==std::array<float,3>{0,0,1}&&ray.direction==std::array<float,3>{0,0,-1},"Orthographic near ray");
     view.flipNdcY=true;PreparedReferenceCameraView flipped(view);check(flipped.project({.25F,-.5F,.75F})==std::array<double,3>{160,96,.75},"Flipped pixel convention");

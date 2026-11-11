@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261111-213928-scene-reference-depth-728062",
+      "name": "场景参考深度",
+      "sourceBase": "1588c84",
+      "evidence": "docs/acceptance/nr/scene-reference-depth.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/scene-reference-depth/results.json"
+    },
+    {
       "path": "runs/20261111-210839-native-d3d11-depth-devices-9e7a22",
       "name": "原生深度设备对照",
       "sourceBase": "698e53d",

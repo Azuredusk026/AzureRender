@@ -1,0 +1,729 @@
+{
+  "status": "qualified-scene-reference-depth-producer",
+  "overall": "failed-user-review",
+  "baseCommit": "1588c84",
+  "sceneRendererApiVersion": 11,
+  "acceptedFrozenMaximumColorError": 1,
+  "frozenHairMaskPixels": 17017,
+  "orientationControl": {
+    "regularSceneRows": {
+      "exact": 16146,
+      "withinOne": 16772,
+      "maximumUlp": 115,
+      "clearMismatches": 0
+    },
+    "nativeRows": {
+      "exact": 17017,
+      "withinOne": 17017,
+      "maximumUlp": 0,
+      "clearMismatches": 0
+    }
+  },
+  "captures": {
+    "release-nvidia-indexed-qualified": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "binding": "indexed",
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin"
+      },
+      "frames": [
+        {
+          "frame": 0,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "priorPixelDifferences": 0,
+          "overOne": 43,
+          "maximumByteError": 5
+        },
+        {
+          "frame": 1,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "priorPixelDifferences": 0,
+          "overOne": 43,
+          "maximumByteError": 5
+        },
+        {
+          "frame": 2,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "priorPixelDifferences": 0,
+          "overOne": 43,
+          "maximumByteError": 5
+        }
+      ],
+      "rasterSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "hardwareSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "validationClean": true,
+      "allocatorZero": true,
+      "nonzeroPixels": 360416,
+      "hardwareAgreement": {
+        "exact": 3686400,
+        "withinOne": 3686400,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "againstFrozen": {
+        "exact": 17017,
+        "withinOne": 17017,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "againstSameNative": {
+        "exact": 17017,
+        "withinOne": 17017,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "againstPriorVulkan": {
+        "exact": 17017,
+        "withinOne": 17017,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "alternateOrientationAgainstNative": {
+        "exact": 0,
+        "withinOne": 0,
+        "maximumUlp": 1023408371,
+        "clearMismatches": 9090
+      },
+      "selectedProbes": []
+    },
+    "release-intel-fixed-qualified": {
+      "configuration": "Release",
+      "device": "intel",
+      "binding": "fixed",
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin"
+      },
+      "frames": [
+        {
+          "frame": 0,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "priorPixelDifferences": 0,
+          "overOne": 597,
+          "maximumByteError": 97
+        },
+        {
+          "frame": 1,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "priorPixelDifferences": 0,
+          "overOne": 597,
+          "maximumByteError": 97
+        },
+        {
+          "frame": 2,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "priorPixelDifferences": 0,
+          "overOne": 597,
+          "maximumByteError": 97
+        }
+      ],
+      "rasterSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "hardwareSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "validationClean": true,
+      "allocatorZero": true,
+      "nonzeroPixels": 360417,
+      "hardwareAgreement": {
+        "exact": 3686400,
+        "withinOne": 3686400,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "againstFrozen": {
+        "exact": 7965,
+        "withinOne": 15677,
+        "maximumUlp": 212,
+        "clearMismatches": 0
+      },
+      "againstSameNative": {
+        "exact": 17014,
+        "withinOne": 17014,
+        "maximumUlp": 217835,
+        "clearMismatches": 0
+      },
+      "againstPriorVulkan": {
+        "exact": 17017,
+        "withinOne": 17017,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "alternateOrientationAgainstNative": {
+        "exact": 0,
+        "withinOne": 0,
+        "maximumUlp": 1023408373,
+        "clearMismatches": 9090
+      },
+      "selectedProbes": [
+        {
+          "pixel": [
+            1326,
+            177
+          ],
+          "raster": 1023224849,
+          "sameDeviceNative": 1023007014,
+          "priorVulkan": 1023224849,
+          "frozen": 1023224849
+        },
+        {
+          "pixel": [
+            1311,
+            355
+          ],
+          "raster": 1023461123,
+          "sameDeviceNative": 1023461132,
+          "priorVulkan": 1023461123,
+          "frozen": 1023461131
+        },
+        {
+          "pixel": [
+            1312,
+            355
+          ],
+          "raster": 1023464682,
+          "sameDeviceNative": 1023464687,
+          "priorVulkan": 1023464682,
+          "frozen": 1023464686
+        }
+      ]
+    },
+    "debug-nvidia-fixed-qualified": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "binding": "fixed",
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin"
+      },
+      "frames": [
+        {
+          "frame": 0,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "priorPixelDifferences": 0,
+          "overOne": 43,
+          "maximumByteError": 5
+        },
+        {
+          "frame": 1,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "priorPixelDifferences": 0,
+          "overOne": 43,
+          "maximumByteError": 5
+        },
+        {
+          "frame": 2,
+          "sha256": "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+          "priorPixelDifferences": 0,
+          "overOne": 43,
+          "maximumByteError": 5
+        }
+      ],
+      "rasterSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "hardwareSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "validationClean": true,
+      "allocatorZero": true,
+      "nonzeroPixels": 360416,
+      "hardwareAgreement": {
+        "exact": 3686400,
+        "withinOne": 3686400,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "againstFrozen": {
+        "exact": 17017,
+        "withinOne": 17017,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "againstSameNative": {
+        "exact": 17017,
+        "withinOne": 17017,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "againstPriorVulkan": {
+        "exact": 17017,
+        "withinOne": 17017,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "alternateOrientationAgainstNative": {
+        "exact": 0,
+        "withinOne": 0,
+        "maximumUlp": 1023408371,
+        "clearMismatches": 9090
+      },
+      "selectedProbes": []
+    },
+    "debug-intel-fixed-qualified": {
+      "configuration": "Debug",
+      "device": "intel",
+      "binding": "fixed",
+      "capture": {
+        "width": 2560,
+        "height": 1440,
+        "submission": 3,
+        "rowOrigin": "bottom-left",
+        "raster": "reference-depth-r32.bin",
+        "hardware": "reference-depth-d32.bin"
+      },
+      "frames": [
+        {
+          "frame": 0,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "priorPixelDifferences": 0,
+          "overOne": 597,
+          "maximumByteError": 97
+        },
+        {
+          "frame": 1,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "priorPixelDifferences": 0,
+          "overOne": 597,
+          "maximumByteError": 97
+        },
+        {
+          "frame": 2,
+          "sha256": "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+          "priorPixelDifferences": 0,
+          "overOne": 597,
+          "maximumByteError": 97
+        }
+      ],
+      "rasterSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "hardwareSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "validationClean": true,
+      "allocatorZero": true,
+      "nonzeroPixels": 360417,
+      "hardwareAgreement": {
+        "exact": 3686400,
+        "withinOne": 3686400,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "againstFrozen": {
+        "exact": 7965,
+        "withinOne": 15677,
+        "maximumUlp": 212,
+        "clearMismatches": 0
+      },
+      "againstSameNative": {
+        "exact": 17014,
+        "withinOne": 17014,
+        "maximumUlp": 217835,
+        "clearMismatches": 0
+      },
+      "againstPriorVulkan": {
+        "exact": 17017,
+        "withinOne": 17017,
+        "maximumUlp": 0,
+        "clearMismatches": 0
+      },
+      "alternateOrientationAgainstNative": {
+        "exact": 0,
+        "withinOne": 0,
+        "maximumUlp": 1023408373,
+        "clearMismatches": 9090
+      },
+      "selectedProbes": [
+        {
+          "pixel": [
+            1326,
+            177
+          ],
+          "raster": 1023224849,
+          "sameDeviceNative": 1023007014,
+          "priorVulkan": 1023224849,
+          "frozen": 1023224849
+        },
+        {
+          "pixel": [
+            1311,
+            355
+          ],
+          "raster": 1023461123,
+          "sameDeviceNative": 1023461132,
+          "priorVulkan": 1023461123,
+          "frozen": 1023461131
+        },
+        {
+          "pixel": [
+            1312,
+            355
+          ],
+          "raster": 1023464682,
+          "sameDeviceNative": 1023464687,
+          "priorVulkan": 1023464682,
+          "frozen": 1023464686
+        }
+      ]
+    }
+  },
+  "builds": {
+    "Release": {
+      "configuration": "Release",
+      "count": 887,
+      "unchanged": 879,
+      "changed": [
+        "character_snapshot_depth_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_bindless_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_bindless_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_reference_camera.vert.spv",
+        "character_snapshot_depth_reference_camera.vert.spv"
+      ],
+      "added": [
+        "reference_scene_depth.frag.spv",
+        "reference_scene_depth_bindless.frag.spv"
+      ],
+      "validated": 8,
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry)|AzureEngine[.]ProjectReferenceViews)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\release-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "c1e644f2be57bedcf415ecfc79b81974b673043ff7c1e830ff01e57af0cdf2ad"
+    },
+    "Debug": {
+      "configuration": "Debug",
+      "count": 887,
+      "unchanged": 879,
+      "changed": [
+        "character_snapshot_depth_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_bindless_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_bindless_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_reference_camera.vert.spv",
+        "character_snapshot_depth_reference_camera.vert.spv"
+      ],
+      "added": [
+        "reference_scene_depth.frag.spv",
+        "reference_scene_depth_bindless.frag.spv"
+      ],
+      "validated": 8,
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry)|AzureEngine[.]ProjectReferenceViews)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\debug-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "b822ff3cbff556e7ac8e8c8f7ae684d8c24e41de6c9d14eb62be26c49c8cf2b1"
+    }
+  },
+  "ordinaryCamera": {
+    "referenceProgramsPrepared": true,
+    "referenceCameraEnabled": false,
+    "depthCaptureAbsent": true,
+    "validationClean": true,
+    "allocatorZero": true
+  },
+  "referenceClipControl": {
+    "extent": 274,
+    "controls": {
+      "visible": {
+        "farPlane": 20,
+        "depthSha256": "055c66dec5fe6d3f57af9d4043f46aa30d7540f55da6146d1609381760161191",
+        "nonzero": 65536
+      },
+      "device-clipped": {
+        "farPlane": 1,
+        "depthSha256": "055c66dec5fe6d3f57af9d4043f46aa30d7540f55da6146d1609381760161191",
+        "nonzero": 65536
+      }
+    },
+    "deviceColorDifferences": 65536,
+    "referenceDepthExact": true,
+    "hardwareAgreement": true,
+    "multisamplingRejected": true,
+    "validationClean": true,
+    "allocatorZero": true
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "c1e644f2be57bedcf415ecfc79b81974b673043ff7c1e830ff01e57af0cdf2ad",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 518314287,
+    "taskBudgetBytes": 536870912
+  },
+  "receipts": {
+    "release-nvidia-indexed-qualified": {
+      "name": "release-nvidia-indexed-qualified",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\scene-capture.py",
+        "Release",
+        "nvidia",
+        "indexed",
+        "--tag=qualified",
+        "--slot-reuse"
+      ],
+      "exitCode": 0,
+      "status": "exited",
+      "seconds": 99.01600000000326
+    },
+    "release-intel-fixed-qualified": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 32.60899999999674,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\scene-capture.py",
+        "Release",
+        "intel",
+        "fixed",
+        "--tag=qualified",
+        "--slot-reuse"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\tmp"
+    },
+    "debug-nvidia-fixed-qualified": {
+      "name": "debug-nvidia-fixed-qualified",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\scene-capture.py",
+        "Debug",
+        "nvidia",
+        "fixed",
+        "--tag=qualified",
+        "--slot-reuse"
+      ],
+      "exitCode": 0,
+      "status": "exited",
+      "seconds": 92.875
+    },
+    "debug-intel-fixed-qualified": {
+      "name": "debug-intel-fixed-qualified",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\scene-capture.py",
+        "Debug",
+        "intel",
+        "fixed",
+        "--tag=qualified",
+        "--slot-reuse"
+      ],
+      "exitCode": 0,
+      "status": "exited",
+      "seconds": 92.18800000002375
+    },
+    "release-nvidia-fixed": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 32.32800000003772,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\scene-capture.py",
+        "Release",
+        "nvidia",
+        "fixed"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\tmp"
+    },
+    "release-nvidia-fixed-origin": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 29.78100000001723,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\scene-capture.py",
+        "Release",
+        "nvidia",
+        "fixed",
+        "--tag=origin"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\tmp"
+    },
+    "release-qualified-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 215.53200000000652,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+    },
+    "debug-final-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 123.96899999998277,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\build.py",
+        "Debug"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\tmp"
+    },
+    "release-nvidia-fixed-ordinary": {
+      "name": "release-nvidia-fixed-ordinary",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\scene-capture.py",
+        "Release",
+        "nvidia",
+        "fixed",
+        "--ordinary"
+      ],
+      "exitCode": 0,
+      "status": "exited",
+      "seconds": 23.20299999997951
+    },
+    "clip-control": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 5.51600000000326,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\clip-control.py",
+        "--reuse-positive"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\tmp"
+    },
+    "default-four": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 282.2029999999795,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\default-four.py"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\tmp"
+    },
+    "release-depth-gpu": {
+      "name": "release-depth-gpu",
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\verify-build.py",
+        "Release",
+        "--gpu"
+      ],
+      "exitCode": 0,
+      "status": "exited",
+      "seconds": 2.8910000000032596
+    }
+  },
+  "duplicateDepthPlanes": {
+    "status": "compacted",
+    "representations": [
+      {
+        "capture": "release-nvidia-fixed",
+        "retained": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\release-nvidia-fixed-frames\\reference-depth-r32.bin",
+        "duplicate": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\release-nvidia-fixed-frames\\reference-depth-d32.bin",
+        "bytes": 14745600,
+        "sha256": "d1e86d4b6176cc232698b3348c90c6637cea7aeffbf3579f21f92f2ca0f353df"
+      },
+      {
+        "capture": "release-nvidia-fixed-origin",
+        "retained": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\release-nvidia-fixed-origin-frames\\reference-depth-r32.bin",
+        "duplicate": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261111-213928-scene-reference-depth-728062\\release-nvidia-fixed-origin-frames\\reference-depth-d32.bin",
+        "bytes": 14745600,
+        "sha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e"
+      }
+    ]
+  },
+  "sourceSha256": {
+    "CMakeLists.txt": "6e0e0e18593bea0fce620df8044a8a4bca9e13b7fda1d7c54a93b07d829a2c6a",
+    "shaders/reference_camera_vertex.glsl": "08e0bedb3f4fd4337d3fefa6d16618a6ba781dc496cfd954dbb114d9c81b7f4d",
+    "shaders/reference_raster_projection.glsl": "312ff627c6590808cbc4c908d72c55323cccd4988b41062cc8c9ad9c810c4674",
+    "shaders/reference_scene_depth.frag": "e45da582c55c59ef9481660d5d07b60d162e0321f2ac5ed758b1d04a766596cc",
+    "src/app/AzureRenderApp.cpp": "78fed112e5aa77de768e66d34876c876ded72a639e65344c6239cd76c6141c60",
+    "src/app/AzureRenderApp.hpp": "8f5c78e7bba6fdedddc8d51ca0f872c8048e5056677146d3190a652418fc9d22",
+    "src/app/AzureRenderCapture.cpp": "726a4d5ff6b2565e4f0b937fb31cbdfe61a150effd86b5698f7d84867277e706",
+    "src/extensions/ISceneRenderer.hpp": "53f7cf06a1ae98a3ddcd42c0c843b5c5d850e8078a627e2adc937aa6845a9b95",
+    "src/render/ReferenceCameraView.hpp": "2411c2d8a54330d3b659310dcec270eeabee0cded2113fd8c001d03b4630f450",
+    "src/render/ReferenceCameraViewJson.cpp": "291df6439ad6cf9918abd28d8be2c53eed90c2440ace46d78fd1baabb43d16f2",
+    "src/render/RenderContext.hpp": "5c275921946b40582ce4f1635d6e194b6337854e916ad32b244d44147957b269",
+    "src/render/SceneReferenceDepthTargets.hpp": "826d06bddd6e00e828e739cf328ae9bcaa7b91d3c5160addab294f18ff526e45",
+    "src/rhi/Rhi.hpp": "abe278a69650aaa2db78b4b71ca3fbcb10b9d5069e73180de5fec7f4646c4f67",
+    "src/rhi/VulkanRhi.cpp": "3499397c5cdeb50fd3c2f36df505829d8f4021d5117cedaae1d898401266b588",
+    "src/rhi/VulkanRhi.hpp": "bd709e5ed2fbd5a36cbe8dd29ad3f6e8ebb2e0261742bd69f8e75358af16aaf1",
+    "src/scenes/CharacterMotionPass.inc": "e873b9265d71d1d9b6b5ec75fb5cef557fa751e5d9b94425adaf7f9e48cdfedd",
+    "src/scenes/CharacterReferenceSceneDepth.inc": "782bf7b98f473caca022a4f26d6b0cbd1ea42cf94113873df8fb3aa5233cdc3b",
+    "src/scenes/CharacterSceneRenderer.cpp": "91d3c154d19161c5be6bd0a7a2f54377f3e39dd7250e5bed966de8b1a3b531f4",
+    "src/scenes/CharacterSceneRenderer.hpp": "75a60359ed68eaa8b78f36100d8ceaad676a9687ed018dfa4a0a2269df2c8483",
+    "tests/ExtensionRegistryTests.cpp": "e9d0130670038cfa9305845828801bf3bf9f622e8a023f7379a28bcf1ea0c5a6",
+    "tests/ReferenceCameraViewTests.cpp": "cefa0d38f7c186e8f12b6a941bcbf81ad3651f0c6cd717e6c371f9a6888758c9"
+  },
+  "archive": {
+    "bytes": 4294121,
+    "sha256": "536ee1f3149438c451ff7595e3f7aee2c926fb1eb3f3bf20d8d5de3848771765",
+    "members": 155
+  }
+}

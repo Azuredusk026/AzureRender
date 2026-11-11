@@ -20,6 +20,9 @@ vec4 azureReferenceRasterPosition(vec3 world,vec4 deviceBase,vec4 deviceFinal,ve
     if(!enabled)return deviceFinal;
     vec4 referenceClip=azureReferenceClipProjection(azureReferenceRelativePosition(world,packedAxes,frameOffset),columns,jitter);
     if(flipY)referenceClip.y=-referenceClip.y;
+#if defined(AZURE_REFERENCE_RASTER_SCENE_DEPTH)
+    if(azureReferenceSceneDepth){referenceClip.y=-referenceClip.y;return referenceClip;}
+#endif
     return azureComposeReferenceRasterPosition(referenceClip,deviceBase,deviceFinal,true);
 }
 #endif
