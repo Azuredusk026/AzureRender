@@ -15,6 +15,7 @@ from PIL import Image
 from create_visibility_fixture import component, surface, pad_material_profile_index
 from convert_material_semantics import complete_material_document
 from test_unlit_texture_layers_gpu import profile, png_uri, linear
+from render_capture_layout import CAMERA_UNIFORM_BYTES, MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 
 CASES=('alpha','additive','none','disabled','absent','camera-mismatch','aspect-mismatch',
@@ -127,7 +128,7 @@ def run(player, output, validation, selected):
             manifest=json.loads((root/'frames/capture_manifest.json').read_text())
             if multisample:assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
             if object_shadow:assert manifest['objectShadowPrepared'] and manifest['objectShadowPages']==1,name
-            assert manifest['materialSurfaceProfileLayoutVersion']==21 and manifest['cameraUniformBytes']==688,name
+            assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION and manifest['cameraUniformBytes']==CAMERA_UNIFORM_BYTES,name
             expected_state=kind if kind in ('camera-mismatch','aspect-mismatch') else 'disabled' if kind in ('absent','disabled') else 'matched'
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])
             pixels=np.asarray(Image.open(root/'frames/frame_000000.png').convert('RGB'));errors=[]

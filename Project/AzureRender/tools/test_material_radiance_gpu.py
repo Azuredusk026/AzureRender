@@ -24,6 +24,7 @@ from native_render.light_lab import generate
 from create_visibility_fixture import pad_material_profile_index
 from convert_material_semantics import complete_material_document
 import test_projected_hair_gpu as hair_fixture
+from render_capture_layout import MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 BUDGET=.008
 ROOT=Path(__file__).resolve().parents[1]
@@ -160,7 +161,7 @@ def run(player,output,selected=(),expected_validation='any'):
             row['allocatorUnloadOnStdout']='Allocator after unload: buffers=0 images=0' in log
             if expected_validation!='any':assert ('Validation layer: enabled' in log)==(expected_validation=='enabled'),name
             image=np.array(Image.open(folder/'frames/frame_000000.png').convert('RGB'));images[name]=image
-            manifest=read(folder/'frames/capture_manifest.json');assert manifest['capturedFrames']==1 and manifest['materialSurfaceProfileLayoutVersion']==21,name
+            manifest=read(folder/'frames/capture_manifest.json');assert manifest['capturedFrames']==1 and manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION,name
             overrides=manifest['materialRadianceScales']
             if gain is not None and gain!=1:assert overrides and all(x['radianceScale']==gain for x in overrides),(name,overrides)
             else:assert overrides==[],(name,overrides)

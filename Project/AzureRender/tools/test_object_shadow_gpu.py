@@ -12,6 +12,7 @@ import numpy as np
 from PIL import Image
 from native_render.light_lab import generate
 from convert_material_semantics import complete_material_document
+from render_capture_layout import MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 
 def component(kind,data):
@@ -138,7 +139,7 @@ def run(player,output,selected=None,expected_validation=None):
             pages=0 if name.endswith('disabled') else 2 if name=='two-objects' else 1
             assert manifest['objectShadowLayoutVersion']==2 and manifest['objectShadowPages']==pages
             assert manifest['objectShadowDepthBytes']==(16*1024*1024 if pages else 0)
-            assert manifest['instanceDataLayoutVersion']==2 and manifest['materialSurfaceProfileLayoutVersion']==21
+            assert manifest['instanceDataLayoutVersion']==2 and manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
             if name.endswith('-ms'):assert manifest['rasterizationSamples']==4
             frame=folder/'frames/frame_000001.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             assert np.array_equal(pixels,np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'))),name

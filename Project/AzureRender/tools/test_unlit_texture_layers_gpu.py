@@ -16,6 +16,7 @@ import numpy as np
 from PIL import Image
 from create_visibility_fixture import component, surface
 from convert_material_semantics import complete_material_document
+from render_capture_layout import CAMERA_UNIFORM_BYTES, MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 
 def linear(value):
@@ -151,7 +152,7 @@ def run(player,root,expected_validation='any',selected=None):
         if expected_validation!='any':assert validation==(expected_validation=='enabled'),name
         report=json.loads((out/'runtime.json').read_text());assert not report['scriptErrors'] and not report['presentationErrors'],name
         manifest=json.loads((out/'frames/capture_manifest.json').read_text())
-        assert manifest['materialSurfaceProfileLayoutVersion']==21 and manifest['cameraUniformBytes']==688 and manifest['unlitFrameLayoutVersion']==1,name
+        assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION and manifest['cameraUniformBytes']==CAMERA_UNIFORM_BYTES and manifest['unlitFrameLayoutVersion']==1,name
         assert np.allclose(manifest['qaCameraPosition'],[camera_x,0,3],atol=1e-6),name
         images=[np.asarray(Image.open(out/f'frames/frame_{i:06d}.png').convert('RGB')) for i in range(frames)]
         for i,image in enumerate(images):

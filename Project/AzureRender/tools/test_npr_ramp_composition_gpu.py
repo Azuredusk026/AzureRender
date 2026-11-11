@@ -13,6 +13,7 @@ from PIL import Image
 from native_render.light_lab import generate
 from create_visibility_fixture import component, surface, pad_material_profile_index
 from convert_material_semantics import complete_material_document
+from render_capture_layout import MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 BUDGET=.008
 LUMA=np.array([.21267290413379669,.7151522040367126,.07217500358819962])
@@ -103,7 +104,7 @@ def run(player,output,selected=None,backends=('indexed','fixed'),expected_valida
                 assert 'Allocator after unload: buffers=0 images=0' in text,label
                 validation='Validation layer: enabled' in text
                 if expected_validation!='any':assert validation==(expected_validation=='enabled'),label
-                manifest=json.loads((folder/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==21 and manifest['capturedFrames']==1
+                manifest=json.loads((folder/'frames/capture_manifest.json').read_text());assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION and manifest['capturedFrames']==1
                 assert len(manifest['nprRampCompositions'])==(1 if policy=='view' else 0),label
                 runtime=json.loads((folder/'runtime.json').read_text());assert not runtime['scriptErrors'] and not runtime['presentationErrors'],label
                 image=np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'));images[label]=image

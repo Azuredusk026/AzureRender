@@ -35,6 +35,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 1080p60 诊断的 GPU P95 约为 18.04 毫秒，标准构建采用参考族。
 
 [材质视图回归矩阵](../acceptance/nr/material-view-regression-matrix.md)通过双配置三十六项检查。
+[捕获布局回归](../acceptance/nr/capture-layout-regression.md)通过双配置八项多采样轮廓光检查。
 完整项目回归按两种配置执行。
 
 [椭圆覆盖选级主线验收](../acceptance/nr/material-ellipse-coverage-main-integration.md)通过二十二项自动检查、双设备头发采集及原始四帧。

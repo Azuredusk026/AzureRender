@@ -72,6 +72,8 @@ NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工�
 
 [材质视图回归矩阵](docs/acceptance/nr/material-view-regression-matrix.md)核对两种配置的视图读回、覆盖拒绝及生成层级。
 
+[捕获布局回归](docs/acceptance/nr/capture-layout-regression.md)核对材质与相机常量布局及两种配置的多采样轮廓光。
+
 [快照视图组合](docs/acceptance/nr/snapshot-default-view-combination.md)的动态照明控制通过六附件核对。
 新增收益未达准入条件，候选保持隔离。
 

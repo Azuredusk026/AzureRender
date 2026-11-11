@@ -17,6 +17,7 @@ from test_character_probe_gpu import prepare as probe_fixture, linear
 from native_render.light_lab import generate
 from native_render.probe_field_lab import prepare as probe_field_fixture
 from convert_material_semantics import complete_material_document
+from render_capture_layout import MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 GLOBAL=np.array([.12,.24,.36]);PROBE=np.array([.8,.4,.2]);GI=np.array([.8,.2,.4]);BASE=np.array([.4,.3,.2]);BUDGET=.008
 
@@ -79,7 +80,7 @@ def run(player,output,selected=None,backends=('indexed','fixed'),expected_valida
                 row=dict(name=name,status='running',command=command,inputs=inputs);report['cases'].append(row);print('START',name,flush=True)
                 with (folder/'player.log').open('wb') as log:result=subprocess.run(command,cwd=folder,stdout=log,stderr=log,env=env,startupinfo=startup,timeout=120)
                 row['exitCode']=result.returncode;assert result.returncode==0,(name,'Player failure');logs=[json.loads(line) for line in (folder/'captures/azureplayer.log.jsonl').read_text().splitlines()];assert not any(r['level']=='error' or r['subsystem']=='validation' and r['level']=='warning' for r in logs);assert any(r['message']=='Allocator after unload: buffers=0 images=0' for r in logs);assert not re.search(r'VUID-|Validation (?:Error|Warning)|SYNC-HAZARD|\[error\]',(folder/'player.log').read_text(errors='replace'),re.I)
-                manifest=json.loads((folder/'frames/capture_manifest.json').read_text());assert manifest['capturedFrames']==1 and manifest['materialSurfaceProfileLayoutVersion']==21;runtime=json.loads((folder/'runtime.json').read_text());assert not runtime['scriptErrors'] and not runtime['presentationErrors'];image=np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'));images[name]=image
+                manifest=json.loads((folder/'frames/capture_manifest.json').read_text());assert manifest['capturedFrames']==1 and manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION;runtime=json.loads((folder/'runtime.json').read_text());assert not runtime['scriptErrors'] and not runtime['presentationErrors'];image=np.asarray(Image.open(folder/'frames/frame_000000.png').convert('RGB'));images[name]=image
                 validation='Validation layer: enabled' in (folder/'player.log').read_text(errors='replace');row['validationEnabled']=validation
                 if expected_validation!='any':assert validation==(expected_validation=='enabled'),name
                 if is_object:

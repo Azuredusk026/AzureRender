@@ -12,6 +12,7 @@ from PIL import Image
 from native_render.light_lab import generate
 from test_npr_diffuse_gpu import linear
 from create_visibility_fixture import pad_material_profile_index
+from render_capture_layout import MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 
 def run(player,output,selected=None,expected_validation=None,quality="existing"):
@@ -85,7 +86,7 @@ def run(player,output,selected=None,expected_validation=None,quality="existing")
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text())
             if quality=='multisample':assert manifest['rasterizationSamples']==manifest['snapshotRasterizationSamples']==manifest['outlineMaskSamples']==4 and not manifest['multisampleFallback']
             if material_rim:
-                assert manifest['materialSurfaceProfileLayoutVersion']==21 and manifest['lightBufferLayoutVersion']==3
+                assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION and manifest['lightBufferLayoutVersion']==3
             frame=folder/'frames/frame_000000.png';pixels=np.asarray(Image.open(frame).convert('RGB'));frames[name]=pixels
             x=64 if name=='interior' else 84;measured=linear(pixels[64,x])
             samples=[(.375,.125),(.875,.375),(.125,.625),(.625,.875)] if quality=='multisample' else [(.5,.5)]

@@ -15,6 +15,7 @@ from PIL import Image
 from create_visibility_fixture import component, surface, pad_material_profile_index
 from convert_material_semantics import complete_material_document
 from test_unlit_texture_layers_gpu import profile, png_uri, linear
+from render_capture_layout import CAMERA_UNIFORM_BYTES, MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 
 CASES=('analytic-only','combined','camera-mismatch','orthographic','offset','height-only','additive','msaa')
@@ -142,7 +143,7 @@ def run(player, output, validation, selected):
             if validation!='any':assert ('Validation layer: enabled' in log)==(validation=='enabled'),name
             manifest=json.loads((root/'frames/capture_manifest.json').read_text())
             if kind=='msaa':assert manifest['rasterizationSamples']==4 and manifest['snapshotRasterizationSamples']==4
-            assert manifest['materialSurfaceProfileLayoutVersion']==21 and manifest['cameraUniformBytes']==688,name
+            assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION and manifest['cameraUniformBytes']==CAMERA_UNIFORM_BYTES,name
             expected_state='analytic-only' if independent else 'camera-mismatch' if kind=='camera-mismatch' else 'matched'
             assert manifest['viewFogAnalyticEnabled'] and manifest['viewFogFrameBytes']==336 and manifest['viewFogFrameLayoutVersion']==2,name
             assert manifest['viewFogMatch']==expected_state,(name,manifest['viewFogMatch'])

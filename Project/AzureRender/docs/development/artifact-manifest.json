@@ -713,6 +713,13 @@
       "sourceBase": "4979ca5",
       "evidence": "docs/acceptance/nr/scene-reference-normal-main-integration.md",
       "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-normal-main-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260",
+      "name": "捕获布局回归",
+      "sourceBase": "9dcae82",
+      "evidence": "docs/acceptance/nr/capture-layout-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/capture-layout-regression/results.json"
     }
   ],
   "preservedBuilds": [

@@ -16,6 +16,7 @@ from PIL import Image
 
 from test_material_radiance_gpu import prepare as prepare_radiance
 from test_unlit_texture_layers_gpu import profile as layer_profile
+from render_capture_layout import MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 
 ROOT=Path(__file__).resolve().parents[1]
 BUDGET=.008
@@ -134,7 +135,7 @@ def run(player,output,selected,expected_validation):
             assert any(row['message']=='Allocator after unload: buffers=0 images=0' for row in diagnostics),name
             if expected_validation!='any':assert ('Validation layer: enabled' in log)==(expected_validation=='enabled'),name
             manifest=json.loads((folder/'frames/capture_manifest.json').read_text())
-            assert manifest['materialSurfaceProfileLayoutVersion']==21 and manifest['qaStateFingerprintVersion']==4,name
+            assert manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION and manifest['qaStateFingerprintVersion']==4,name
             assert manifest['sceneDisplayMaskFormat']=='R8_UNORM' and manifest['sceneDisplayMaskBytes']>0,name
             overrides=manifest['materialDisplayTransforms']
             assert bool(overrides)==(mode=='linear'),(name,overrides)

@@ -10,6 +10,7 @@ import numpy as np
 from PIL import Image
 from test_material_radiance_gpu import prepare as prepare_radiance,linear
 import test_projected_hair_gpu as hair
+from render_capture_layout import MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION
 ROOT=Path(__file__).resolve().parents[1]
 BUDGET=.008
 
@@ -62,7 +63,7 @@ def run(player,output,fixed,expected_validation):
                 assert any(r['message']=='Allocator after unload: buffers=0 images=0' for r in messages),name
                 validation='Validation layer: enabled' in log
                 if expected_validation:assert validation==(expected_validation=='enabled'),name
-                manifest=read(folder/'frames/capture_manifest.json');assert manifest['capturedFrames']==1 and manifest['materialSurfaceProfileLayoutVersion']==22,name
+                manifest=read(folder/'frames/capture_manifest.json');assert manifest['capturedFrames']==1 and manifest['materialSurfaceProfileLayoutVersion']==MATERIAL_SURFACE_PROFILE_LAYOUT_VERSION,name
                 runtime=read(folder/'runtime.json');assert runtime['scriptErrors']==[] and runtime['presentationErrors']==[],name
                 png=folder/'frames/frame_000000.png';image=np.array(Image.open(png).convert('RGB'));images[name]=image
                 measured=np.array([linear(image[y,x]) for x,y in pixels]);error=float(abs(measured-wanted).max())
