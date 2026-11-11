@@ -17,9 +17,24 @@ void save(const std::filesystem::path& path,const std::vector<unsigned char>& by
 }
 
 int main(int argc,char** argv)try{
-    check(argc==3||argc==4,"Expected shader and output directories, with optional frozen reference shaders");
-    const bool legacyOnly=argc==4&&std::string(argv[3])=="--legacy-only";
-    const bool computedView=argc==4&&std::string(argv[3])=="--computed-viewquad";
+    check(argc==3||argc==4||argc==6,"Expected shader and output directories, a mode, and optional matrix coordinates");
+    const std::string mode=argc>=4?argv[3]:"";
+    const bool legacyOnly=mode=="--legacy-only";
+    const bool computedView=mode=="--computed-viewquad";
+    const bool singleCase=argc==6;
+    const unsigned lightingCount=computedView?3U:2U;
+    unsigned firstLighting=0,lightingEnd=lightingCount,firstSetting=0,settingEnd=3;
+    if(singleCase){
+        check(mode=="--current"||computedView,"Matrix coordinates require current or computed shaders");
+        const auto readCoordinate=[](const std::string& coordinate,unsigned limit){
+            check(coordinate.size()==1&&coordinate[0]>='0'&&coordinate[0]<'0'+int(limit),"Invalid material view matrix coordinate");
+            return static_cast<unsigned>(coordinate[0]-'0');
+        };
+        firstLighting=readCoordinate(argv[4],lightingCount);
+        firstSetting=readCoordinate(argv[5],3);
+        lightingEnd=firstLighting+1;
+        settingEnd=firstSetting+1;
+    }
     const std::filesystem::path root=AZURERENDER_TEST_SOURCE_DIR,output=argv[2];
     std::filesystem::create_directories(output);
     nlohmann::json model;std::ifstream(root/"assets_public/scene_inspector/assets/cube.gltf")>>model;
@@ -58,7 +73,7 @@ int main(int argc,char** argv)try{
         RenderViewService service(base,[&](const std::string&){auto value=std::make_unique<CharacterSceneRenderer>();renderer=value.get();return value;},
             [&]{vkDeviceWaitIdle(host.device);});
         std::uint64_t serial=0;
-        for(unsigned lighting=0;lighting<(computedView?3U:2U);++lighting)for(unsigned setting=0;setting<3;++setting){
+        for(unsigned lighting=firstLighting;lighting<lightingEnd;++lighting)for(unsigned setting=firstSetting;setting<settingEnd;++setting){
         if(legacyOnly&&(lighting!=0||setting!=1))continue;
         RenderViewDescriptor descriptor;descriptor.rendererId="character";descriptor.extent={48,48};
         descriptor.settings.faceSdfFeature=descriptor.settings.showcasePlatformFeature=false;
@@ -117,6 +132,7 @@ int main(int argc,char** argv)try{
     nlohmann::json result={{"device",host.properties.deviceName},{"pixelsCompared",pixelsCompared},
         {"validationErrors",host.errors.load()},{"zeroAllocator",true},{"status","passed"},
         {"computedViewMode",computedView},{"computedCapable",computedCapable},{"eligibleChecks",eligibleChecks},{"fallbackChecks",fallbackChecks}};
+    if(singleCase)result["matrixCase"]={{"lighting",firstLighting},{"setting",firstSetting}};
     std::ofstream(output/"results.json")<<result.dump(2)<<'\n';std::cout<<result.dump()<<'\n';
     return 0;
 }catch(const std::exception& error){std::cerr<<error.what()<<'\n';return 1;}

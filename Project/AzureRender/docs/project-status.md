@@ -15,6 +15,8 @@
 [独立材质视图](acceptance/nr/material-view-determinism.md)的接收计算及重复渲染回归通过。
 双配置、双设备与原始四帧完成所属核对。
 
+[材质视图回归矩阵](acceptance/nr/material-view-regression-matrix.md)通过两种配置三十六项检查。
+
 ## 当前验收状态
 
 性能、原生画质与集中人工复核继续待通过。

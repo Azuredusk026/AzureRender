@@ -657,6 +657,13 @@
       "name": "P8 集中交付",
       "status": "Ready",
       "evidence": "docs/acceptance/p8/2026-10-14.md"
+    },
+    {
+      "path": "runs/20261111-070645-handoff-full-regression-60c706",
+      "name": "材质视图回归矩阵",
+      "sourceBase": "eaf39fd",
+      "evidence": "docs/acceptance/nr/material-view-regression-matrix.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/material-view-regression-matrix/results.json"
     }
   ],
   "preservedBuilds": [

@@ -34,6 +34,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 候选四帧加载的峰值工作集约为 2.047 GB。
 1080p60 诊断的 GPU P95 约为 18.04 毫秒，标准构建采用参考族。
 
+[材质视图回归矩阵](../acceptance/nr/material-view-regression-matrix.md)通过双配置三十六项检查。
+完整项目回归按两种配置执行。
+
 [参考相机渲染主线验收](../acceptance/nr/reference-camera-binding-main-integration.md)通过双配置及双设备检查。
 实际视图核对 384 万个几何掩码像素，重采原始四帧精确一致。
 原生颜色与参考时间效果按各自门槛继续验收。
