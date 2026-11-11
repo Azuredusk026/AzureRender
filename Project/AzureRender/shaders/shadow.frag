@@ -57,7 +57,7 @@ void main() {
         return;
     }
     if (material.alphaMode != 2 && !azureNodeOpacityCovered(opacityCoordinate,material.nodeOpacity)) discard;
-    float alpha = azureSamplePrimaryUv(AZ_TEX_BASE_COLOR,textureCoordinate).a;
+    float alpha = azureSampleCoverageAlpha(AZ_TEX_BASE_COLOR,textureCoordinate,material.materialFeatures);
     if((material.materialFeatures&4194304u)!=0u) {
         if(material.nodeOpacity<=0.0||shadowSqrtAlphaCoverage(alpha,material.alphaMode==2?material.nodeOpacity:1.0)
             <shadowPixelNoise(gl_FragCoord.xy))discard;

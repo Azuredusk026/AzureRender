@@ -98,6 +98,33 @@ int main(){
         std::ofstream(root/"coverage.dds.azmeta")<<Json{{"schemaVersion",1},{"id","00000000-0000-4000-8000-000000000001"},{"settings",{{"texture",{{"filter","linear"},{"mipFilter","nearest"},{"anisotropy",1},{"mipBias",-1}}}}}};
         const auto sampled=load(mipSource);require(sampled.textureSettings[2].mipBias==-1&&sampled.textureSettings[2].sampler(3,16).maxLod==2
             &&sampled.textureSettings[2].mipFilter==TextureImportSettings::MipFilter::Nearest,"Coverage must use its own sampler and mip range");
+        auto ellipse=mipSource;auto& ellipseProfile=ellipse["materials"][0]["extras"]["azureRenderMaterial"];
+        ellipseProfile["features"]={"mirrored-coarse-uv"};ellipseProfile["coverageTexture"]["schemaVersion"]=2;ellipseProfile["coverageTexture"]["lodPolicy"]="ellipse-major";
+        const auto prepared=load(ellipse);
+        require(prepared.coverageTexture.lodPolicy==MaterialCoverageTexture::LodPolicy::EllipseMajor
+            &&(prepared.materialFeatures&MaterialFeatureEllipseMajorCoverage)!=0,"Explicit coverage must retain its typed LOD policy");
+        require(prepared.metallicRoughnessPixels==sampled.metallicRoughnessPixels&&prepared.textureSettings[2].mipBias==-1,"Explicit coverage must preserve every mip and the authored bias");
+        require(sampled.coverageTexture.lodPolicy==MaterialCoverageTexture::LodPolicy::Device,"Version one coverage must retain device LOD");
+        for(int invalid=0;invalid<3;++invalid){auto value=ellipse;auto& profile=value["materials"][0]["extras"]["azureRenderMaterial"];
+            if(invalid==0)profile["features"]=Json::array();if(invalid==1)profile["coverageTexture"]["lodPolicy"]="unknown";if(invalid==2)profile["coverageTexture"]["schemaVersion"]=1;
+            bool failed=false;try{(void)load(value);}catch(const std::exception&){failed=true;}require(failed,"Invalid explicit coverage mode must be rejected");}
+        for(int invalid=0;invalid<5;++invalid){
+            auto value=prepared;auto& settings=value.textureSettings[2];
+            if(invalid==0)settings.filter="nearest";
+            if(invalid==1)settings.magFilter=TextureImportSettings::MagFilter::Nearest;
+            if(invalid==2)settings.mipFilter=TextureImportSettings::MipFilter::Linear;
+            if(invalid==3)settings.anisotropy=2;
+            if(invalid==4)settings.mipPolicy="none";
+            bool failed=false;try{(void)packMaterialSurfaceProfile(value);}catch(const std::invalid_argument&){failed=true;}
+            require(failed,"Ellipse coverage must reject incompatible sampler settings");
+        }
+        auto ellipseDocument=document;
+        ellipseDocument["surface"]["materials"][0]["extras"]["azureRenderMaterial"]=ellipseProfile;
+        ellipseDocument["surface"]["materials"][0]["extras"]["azureRenderMaterial"]["coverageTexture"]["texture"]=0;
+        const auto ellipseData=MaterialData::parse(ellipseDocument);
+        require(MaterialGraph::fromMaterial(ellipseData).compile().encode()==ellipseDocument
+            &&ellipseData.interpret([&](const auto&){return root/"coverage.dds";}).coverageTexture.lodPolicy==MaterialCoverageTexture::LodPolicy::EllipseMajor,
+            "Complete documents must preserve and interpret the coverage LOD policy");
         auto plain=MaterialData::defaults("azure.pbr");std::ofstream(root/"replacement.azurematerial")<<plain.encode();
         LoadedAsset replaced;replaced.materials={red};replaced.materials[0].slotId="coverage-slot";
         MaterialBinding binding;binding.path=(root/"replacement.azurematerial").string();

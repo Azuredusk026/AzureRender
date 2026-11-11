@@ -2,7 +2,7 @@
 void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
     lightingOrdinaryNeeded_=lightingBlendNeeded_=lightingFallbackNeeded_=lightingIntegralNeeded_=false;
     lightingClassesNeeded_={};
-    independentCoverageNeeded_=false;materialUvNeeded_=false;materialUvClassesNeeded_=0;
+    independentCoverageNeeded_=ellipseCoverageNeeded_=materialUvNeeded_=false;materialUvClassesNeeded_=0;
     materialDepthPoliciesNeeded_={};
 #if defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS)
     computedMaterialOrdinaryPolicies_=0;computedMaterialClassPolicies_.fill(0);
@@ -10,6 +10,7 @@ void CharacterSceneRenderer::prepareMaterialLightingPipelines() {
     const auto inspect=[&](const auto& asset){for(const auto& material:asset.materials){
         validateMaterialUvPolicy(material);
         independentCoverageNeeded_|=material.coverageTexture.present;
+        ellipseCoverageNeeded_|=material.coverageTexture.lodPolicy==AssetMaterial::CoverageTexture::LodPolicy::EllipseMajor;
 #if defined(AZURE_COMPUTED_MATERIAL_VIEW_PROGRAMS)
         if(material.alphaMode!=AssetAlphaMode::Blend){
             const auto policy=(extendedMaterialLighting(material)?1U:0U)|(material.coverageTexture.present?2U:0U);

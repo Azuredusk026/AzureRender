@@ -307,4 +307,5 @@ Intel 深度可见量保留 96 处超差，循环索引保持原输出。
 
 [原生头发覆盖层级](../acceptance/nr/native-hair-coverage-lod.md)记录独立图源及椭圆层级对照。
 Intel 既有峰值点从 166 降至 2 字节，整区峰值为 97。
-公开覆盖选级与完整颜色按所属条件继续验收。
+公开覆盖策略见[椭圆选级](../acceptance/nr/material-ellipse-coverage-policy.md)。
+参考深度、实际可见量及完整颜色按所属条件验收。

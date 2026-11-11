@@ -677,6 +677,8 @@ void CharacterSceneRenderer::updateFrame(const SceneFrameData& frame) {
         frameRenderSettings_ = *frame.renderSettings;
         renderSettings_ = &frameRenderSettings_;
     }
+    if(ellipseCoverageNeeded_&&renderSettings_&&(renderSettings_->antiAliasing==3||renderSettings_->antiAliasing==4))
+        throw std::invalid_argument("coverageTexture ellipse-major requires single-sample spatial rendering");
     currentFrame_ = frame.currentFrame;
     if(surfaceRadiance_)surfaceRadiance_->beginStatisticsFrame(static_cast<unsigned>(currentFrame_));
     cameraPosition_ = {frame.cameraPosition[0], frame.cameraPosition[1], frame.cameraPosition[2]};
@@ -2013,6 +2015,7 @@ void CharacterSceneRenderer::appendCaptureManifestFields(
                      const auto& material=mesh.materials[index];if(!material.coverageTexture.present)continue;
                      values.push_back({{"materialIndex",base+index},{"name",material.name},
                          {"channel",material.coverageTexture.channel==AssetMaterial::CoverageTexture::Channel::Red?"red":"alpha"},
+                         {"lodPolicy",material.coverageTexture.lodPolicy==AssetMaterial::CoverageTexture::LodPolicy::EllipseMajor?"ellipse-major":"device"},
                          {"width",material.metallicRoughnessWidth},{"height",material.metallicRoughnessHeight},
                          {"authoredMipLevels",material.authoredMipLevels[2]},{"sampler",material.textureSettings[2].describe()}});
                  }
@@ -3798,6 +3801,9 @@ void CharacterSceneRenderer::createGraphicsPipeline(
     defaultIsolationRenderPass_=context.sceneRenderPass;
     rasterizationSamples_=context.rasterizationSamples;
     prepareMaterialLightingPipelines();
+    if(ellipseCoverageNeeded_&&(rasterizationSamples_!=VK_SAMPLE_COUNT_1_BIT
+        ||(renderSettings_&&(renderSettings_->antiAliasing==3||renderSettings_->antiAliasing==4))))
+        throw std::invalid_argument("coverageTexture ellipse-major requires single-sample spatial rendering");
     if(materialUvNeeded_)validateMaterialUvGradientPolicy(MaterialUvGradientPolicy::MirroredCoarseY,queryMaterialUvGradientSupport(context.physicalDevice));
     initializeComputedMaterialView(context);
     const auto mainFragmentPath=[&](std::string file,bool material=false){

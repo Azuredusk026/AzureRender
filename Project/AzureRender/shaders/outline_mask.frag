@@ -29,7 +29,7 @@ void main() {
     if(material.alphaMode==1){
         float alpha=(material.features&0x40000000u)!=0u
             ?azureTemporalMaskAlpha(BASE,textureCoordinate,azurePrimaryDx(textureCoordinate),azurePrimaryDy(textureCoordinate))
-            :azureSamplePrimaryUv(BASE,textureCoordinate).a;
+            :azureSampleCoverageAlpha(BASE,textureCoordinate,material.features);
         if(alpha<material.cutoff)discard;
     }
     coverage=1.0;

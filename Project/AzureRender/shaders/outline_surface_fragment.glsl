@@ -38,6 +38,6 @@ bool shellCovered() {
     if(shell.alphaMode!=1u)return covered;
     float alpha=(shell.features&0x40000000u)!=0u
         ?azureTemporalMaskAlpha(SHELL_BASE,textureCoordinate,azurePrimaryDx(textureCoordinate),azurePrimaryDy(textureCoordinate))
-        :azureSamplePrimaryUv(SHELL_BASE,textureCoordinate).a;
+        :azureSampleCoverageAlpha(SHELL_BASE,textureCoordinate,shell.features);
     return covered&&alpha>=shell.alphaCutoff;
 }

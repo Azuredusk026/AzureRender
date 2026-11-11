@@ -1736,9 +1736,14 @@ AssetMaterial loadMaterial(
             if(extras.contains("azureRenderMaterial")&&extras.at("azureRenderMaterial").contains("coverageTexture")) {
                 const auto& value=extras.at("azureRenderMaterial").at("coverageTexture");
                 if(!value.is_object()||!value.contains("schemaVersion")||!value.at("schemaVersion").is_number_integer()
-                    ||value.at("schemaVersion")!=1||!value.contains("texture")||!value.at("texture").is_number_integer())
-                    throw std::invalid_argument("coverageTexture requires schemaVersion one and an integer texture index");
-                for(const auto& field:value.items())if(field.key()!="schemaVersion"&&field.key()!="texture"&&field.key()!="channel")
+                    ||(value.at("schemaVersion")!=1&&value.at("schemaVersion")!=2)
+                    ||!value.contains("texture")||!value.at("texture").is_number_integer())
+                    throw std::invalid_argument("coverageTexture requires schemaVersion one or two and an integer texture index");
+                const bool ellipse=value.at("schemaVersion")==2;
+                if(ellipse&&(!value.contains("lodPolicy")||value.at("lodPolicy")!="ellipse-major"))
+                    throw std::invalid_argument("coverageTexture schemaVersion two requires lodPolicy ellipse-major");
+                for(const auto& field:value.items())if(field.key()!="schemaVersion"&&field.key()!="texture"&&field.key()!="channel"
+                    &&(!ellipse||field.key()!="lodPolicy"))
                     throw std::invalid_argument("coverageTexture has an unknown field");
                 const auto index=value.at("texture").get<std::int64_t>();
                 if(index<0||static_cast<std::uint64_t>(index)>=model.textures.size())
@@ -1748,6 +1753,10 @@ AssetMaterial loadMaterial(
                     throw std::invalid_argument("coverageTexture requires red or alpha");
                 result.coverageTexture={true,value.value("channel",std::string("red"))=="red"
                     ?AssetMaterial::CoverageTexture::Channel::Red:AssetMaterial::CoverageTexture::Channel::Alpha};
+                if(ellipse){
+                    result.coverageTexture.lodPolicy=AssetMaterial::CoverageTexture::LodPolicy::EllipseMajor;
+                    result.materialFeatures|=MaterialFeatureEllipseMajorCoverage;
+                }
                 if(metallicRoughnessImage>=0)throw std::invalid_argument("coverageTexture conflicts with metallicRoughnessTexture");
                 independentCoverageTexture=static_cast<int>(index);
                 metallicRoughnessImage=model.textures.at(static_cast<std::size_t>(index)).source;
