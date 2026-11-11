@@ -119,7 +119,6 @@ void AzureRenderApp::synchronizeEditorRuntime(){
         else session.context().attachRenderSettings(renderSettings_);
     }
     if(!session.playing())session.context().attachRenderSettings(renderSettings_);
-    if(!session.playing() && session.context().reloadChangedAssets())static_cast<void>(session.execute(azurerender::EditorCommand::ReloadAssets));
 #endif
 }
 void AzureRenderApp::synchronizeGameUi(){

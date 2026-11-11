@@ -128,8 +128,14 @@ def run(executable, output, workflow, config):
         content=json.loads(asset_path.read_text(encoding='utf-8'))
         content.setdefault('extras',{})['previewFingerprintFixture']=1
         asset_path.write_text(json.dumps(content),encoding='utf-8');frames(25)
-        changed=next(entry for entry in status()['thumbnails'] if entry['asset']==thumb['asset'])
+        updated_thumbnails={entry['asset']:entry for entry in status()['thumbnails']}
+        changed=updated_thumbnails[thumb['asset']]
         assert changed['fingerprint']!=thumb['fingerprint'] and changed['handle']!=thumb['handle']
+        if workflow=='exploration':
+            unaffected=next(entry for entry in thumbnails if entry['asset']!=thumb['asset'])
+            retained=updated_thumbnails[unaffected['asset']]
+            assert (retained['fingerprint'],retained['handle'])==(unaffected['fingerprint'],unaffected['handle']), \
+                'An unrelated thumbnail must retain its cached view after asset refresh'
         edit('preview.inspect',passed=False,handle=thumb['handle'])
         click('assets.grid')
         edit('preview.clear');frames()

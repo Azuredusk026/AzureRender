@@ -1,5 +1,6 @@
 #pragma once
 #include "render/RenderViewService.hpp"
+#include <functional>
 #include <map>
 namespace azurerender {
 struct ThumbnailKey {
@@ -12,6 +13,7 @@ public:
     ~AssetThumbnailService();
     RenderViewHandle request(const ThumbnailKey&,const RenderViewDescriptor&);
     void invalidate(const std::string& assetId);
+    void invalidateStale(const std::function<bool(const ThumbnailKey&)>& isCurrent);
     void clear();
     nlohmann::json describe() const;
 private:

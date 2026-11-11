@@ -727,6 +727,13 @@
       "sourceBase": "0736944",
       "evidence": "docs/acceptance/nr/editor-sampling-regression.md",
       "results": "docs/acceptance/nr/evidence/2026-11-12/editor-sampling-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/devtools-host-evidence",
+      "name": "编辑器资产刷新",
+      "sourceBase": "6f1e323",
+      "evidence": "docs/acceptance/nr/editor-asset-refresh.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-asset-refresh/results.json"
     }
   ],
   "preservedBuilds": [

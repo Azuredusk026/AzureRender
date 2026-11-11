@@ -84,13 +84,17 @@ void AzureRenderApp::drawFrame() {
 
 #if AZURE_WITH_EDITOR
     if (runOptions_.editorSession != nullptr) {
-        if (runOptions_.editorSession->consumeAssetReloadRequest()) {
+        auto& session=*runOptions_.editorSession;
+        const auto revisionBeforeAssetScan=session.context().revision();
+        const auto changedAssets=session.playing()?0:session.context().reloadChangedAssets();
+        const bool fullReload=session.consumeAssetReloadRequest();
+        if (fullReload || changedAssets) {
+            if(changedAssets)session.context().log("Asset reload requested; changed files: "+std::to_string(changedAssets));
             vkCheck(vkDeviceWaitIdle(device_), "vkDeviceWaitIdle(asset reload)");
             graphicsCompleted_=graphicsSubmission_;
             releasePreparedRenderer();
-#if AZURE_WITH_EDITOR
-            invalidatePreviews();graphicsCompleted_=graphicsSubmission_;renderViews_->complete(graphicsCompleted_);
-#endif
+            invalidatePreviews(!fullReload && previewDocumentRevision_==revisionBeforeAssetScan);
+            renderViews_->complete(graphicsCompleted_);
             if (sceneRenderer_ != nullptr) {
                 azurerender::RenderContext unloadContext;
                 buildRenderContext(unloadContext);
@@ -102,7 +106,7 @@ void AzureRenderApp::drawFrame() {
                 "editor", "Renderer resources reloaded");
         }
         std::string captureLabel;
-        if (runOptions_.editorSession->consumeCaptureRequest(captureLabel)) {
+        if (session.consumeCaptureRequest(captureLabel)) {
             pendingScreenshotLabel_ = std::move(captureLabel);
             screenshotRequested_ = true;
         }

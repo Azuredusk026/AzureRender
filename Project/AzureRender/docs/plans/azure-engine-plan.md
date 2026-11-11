@@ -37,6 +37,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [材质视图回归矩阵](../acceptance/nr/material-view-regression-matrix.md)通过双配置三十六项检查。
 [捕获布局回归](../acceptance/nr/capture-layout-regression.md)通过双配置八项多采样轮廓光检查。
 [编辑器采样回归](../acceptance/nr/editor-sampling-regression.md)通过双配置五模式切换、越界拒绝及保存重开检查。
+[编辑器资产刷新](../acceptance/nr/editor-asset-refresh.md)通过双配置十秒刷新门槛。
 完整项目回归按两种配置执行。
 
 [椭圆覆盖选级主线验收](../acceptance/nr/material-ellipse-coverage-main-integration.md)通过二十二项自动检查、双设备头发采集及原始四帧。
@@ -513,12 +514,10 @@ GPU P95 为 22.744 毫秒，继续优先处理 GPU 场景成本。
 | 3 | 头发及角色阴影 | 固定姿态的单变量图像对照 | 沿用完整区域及原始像素门槛 |
 | 4 | 地面反射及间接照明 | 同机位分项对照及明确差异范围 | 固定粗糙度、曝光、输入与时间 |
 | 5 | 联合动态 | 静态候选的角色与物流序列 | 当前静态候选具备局部通过证据 |
-| 待调度 | 编辑器资产网格超时 | 闲置管线生命周期的单项结果 | 画质核验完成，或超时阻断当前任务 |
+| 已验收 | 编辑器资产网格刷新 | 匹配指纹的缩略图缓存 | 两种配置通过原十秒预算 |
 
-资产网格超时已保留根因采样及失败日志。
-管线复用为[隔离候选](2026-11-05-pipeline-reuse.md)。
-综合等待与短检失败已归档，重试需取得异常栈。
-生产构建保持受检实现，原十秒预算继续有效。
+[编辑器资产刷新](../acceptance/nr/editor-asset-refresh.md)保存根因采样、缓存控制及两种配置的结果。
+独立[管线复用候选](2026-11-05-pipeline-reuse.md)的资源所有权与异常证据按所属条件维护。
 
 GPU 的[硬件采样](../acceptance/nr/gpu-hardware-counters.md)取得实际指令及存储计数。
 重点遮挡绘制的 DRAM 访问较低，仍执行大量片元指令。

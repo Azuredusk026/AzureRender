@@ -21,6 +21,8 @@
 
 [编辑器采样回归](acceptance/nr/editor-sampling-regression.md)通过两种配置的五模式切换及保存重开检查。
 
+[编辑器资产刷新](acceptance/nr/editor-asset-refresh.md)通过两种配置的十秒刷新门槛。
+
 [椭圆覆盖选级主线验收](acceptance/nr/material-ellipse-coverage-main-integration.md)通过双配置、双设备及原始四帧。
 
 [场景参考深度主线验收](acceptance/nr/scene-reference-depth-main-integration.md)通过双配置和双设备全图深度读回。

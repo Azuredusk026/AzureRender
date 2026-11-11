@@ -93,7 +93,7 @@ private:
     void initializeDevtools();
     void pollDevtools();
     void finishDevtools();
-    void invalidatePreviews();
+    void invalidatePreviews(bool keepCurrentThumbnails=false);
     nlohmann::json previewOperation(const std::string&,const nlohmann::json&);
     azurerender::RenderViewDescriptor previewDescriptor(const nlohmann::json&);
 #endif

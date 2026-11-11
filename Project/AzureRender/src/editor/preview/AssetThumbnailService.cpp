@@ -24,6 +24,16 @@ void AssetThumbnailService::invalidate(const std::string& assetId){
     const auto found=entries_.find(assetId);if(found==entries_.end())return;
     views_.release(found->second.handle);entries_.erase(found);
 }
+void AssetThumbnailService::invalidateStale(const std::function<bool(const ThumbnailKey&)>& isCurrent){
+    for(auto entry=entries_.begin();entry!=entries_.end();){
+        if(isCurrent(entry->second.key)){
+            ++entry;
+        }else{
+            views_.release(entry->second.handle);
+            entry=entries_.erase(entry);
+        }
+    }
+}
 void AssetThumbnailService::clear(){while(!entries_.empty())invalidate(entries_.begin()->first);}
 nlohmann::json AssetThumbnailService::describe() const{
     auto result=nlohmann::json::array();

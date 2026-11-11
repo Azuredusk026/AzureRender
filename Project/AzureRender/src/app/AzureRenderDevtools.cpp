@@ -154,13 +154,37 @@ nlohmann::json AzureRenderApp::previewOperation(const std::string& operation,con
     if(operation=="preview.clear"){invalidatePreviews();return true;}
     throw EditRejection("Unknown development operation");
 }
-void AzureRenderApp::invalidatePreviews(){
-    if(thumbnails_)thumbnails_->clear();if(renderViews_)renderViews_->clear();toolViews_.clear();cameraPreview_=0;
+void AzureRenderApp::invalidatePreviews(bool keepCurrentThumbnails){
+    const auto session=runOptions_.editorSession;
+    if(keepCurrentThumbnails && thumbnails_ && session && session->context().isProject()){
+        const auto& context=session->context();
+        const auto& assets=context.assets();
+        const auto cache=context.project().file.parent_path()/".azure/previews";
+        const auto settings=previewDescriptor(nlohmann::json::object());
+        thumbnails_->invalidateStale([&](const ThumbnailKey& key){
+            const auto record=assets.records().find(key.assetId);
+            if(record==assets.records().end())return false;
+            try{
+                return ThumbnailProviderRegistry::builtins().describe(record->second,assets,cache,settings).key==key;
+            }catch(const std::exception&){
+                return false;
+            }
+        });
+        for(const auto handle:toolViews_)renderViews_->release(handle);
+        if(cameraPreview_)renderViews_->release(cameraPreview_);
+    }else{
+        if(thumbnails_)thumbnails_->clear();
+        if(renderViews_)renderViews_->clear();
+    }
+    toolViews_.clear();
+    cameraPreview_=0;
+    // A reload can replace views later in the same frame.
+    if(session)previewDocumentRevision_=session->context().revision();
 }
 void AzureRenderApp::pollDevtools(){
     if(renderViews_)renderViews_->complete(graphicsCompleted_);
     if(auto session=runOptions_.editorSession;session && previewDocumentRevision_!=session->context().revision()){
-        invalidatePreviews();previewDocumentRevision_=session->context().revision();
+        invalidatePreviews();
     }
     if(!shaderReloader_)return;
     shaderReloader_->poll();const auto candidate=shaderReloader_->candidate();if(!candidate)return;
