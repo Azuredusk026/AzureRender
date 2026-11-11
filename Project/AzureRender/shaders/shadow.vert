@@ -2,8 +2,20 @@
 #extension GL_GOOGLE_include_directive : require
 #include "morph_data.glsl"
 #include "skin_position.glsl"
+#include "reference_position_frame.glsl"
+#include "reference_clip_projection.glsl"
 
-layout(binding = 0) uniform CameraData {
+layout(constant_id=8) const bool azureReferenceObjectShadowRaster=false;
+
+struct ReferenceObjectShadowRaster {
+    vec4 columns[4];
+    vec4 jitter;
+    uvec4 control;
+    vec4 offset;
+    vec4 absoluteOrigin;
+};
+
+layout(std140,binding = 0) uniform CameraData {
     vec4 cameraPosition;
     vec4 cameraForward;
     vec4 clusterGrid;
@@ -16,6 +28,8 @@ layout(binding = 0) uniform CameraData {
     vec4 faceLightDirection;
     vec4 faceSdfParameters;
     vec4 faceSdfShadowColor;
+    // The extension starts after the 800-byte scene camera block.
+    layout(offset=800) ReferenceObjectShadowRaster objectShadows[8];
 } camera;
 
 layout(std430, binding = 10) readonly buffer JointData {
@@ -65,10 +79,18 @@ void main() {
         + jointWeights.w * jointData.matrices[jointBase + jointIndices.w];
     vec4 skinnedPosition = azureSkinPosition(skinMatrix,morphedPosition);
 #endif
-    gl_Position = shadowParameters.cascadeIndex==4u
-        ? shadowParameters.gizmoTransform * skinnedPosition :
-        instanceData.instances[gl_InstanceIndex]
-            .cascadeLightModelViewProjection[shadowParameters.cascadeIndex]
-        * shadowParameters.gizmoTransform * skinnedPosition;
+    if(azureReferenceObjectShadowRaster&&shadowParameters.cascadeIndex>=5u){
+        ReferenceObjectShadowRaster raster=camera.objectShadows[shadowParameters.cascadeIndex-5u];
+        vec3 world=(shadowParameters.gizmoTransform*skinnedPosition).xyz;
+        vec3 relative=azureReferenceRelativePosition(world,raster.control.y,raster.offset.xyz);
+        precise vec3 absolute=relative+raster.absoluteOrigin.xyz;
+        precise vec4 clip=azureReferenceClipProjection(absolute,raster.columns,raster.jitter.xy);
+        gl_Position=vec4(clip.x,-clip.y,clip.w-clip.z,clip.w);
+    }else{
+        gl_Position=shadowParameters.cascadeIndex==4u
+            ?shadowParameters.gizmoTransform*skinnedPosition
+            :instanceData.instances[gl_InstanceIndex].cascadeLightModelViewProjection[shadowParameters.cascadeIndex]
+                *shadowParameters.gizmoTransform*skinnedPosition;
+    }
     textureCoordinate = texcoord;
 }

@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-040725-reference-object-shadow-raster-2c9e58",
+      "name": "参考对象图集光栅",
+      "sourceBase": "34d8e9a",
+      "evidence": "docs/acceptance/nr/reference-object-shadow-raster.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/reference-object-shadow-raster/results.json"
+    },
+    {
       "path": "runs/20261112-032619-native-object-record-calibration-19d2f9",
       "name": "原生对象记录标定",
       "sourceBase": "bc12f32",

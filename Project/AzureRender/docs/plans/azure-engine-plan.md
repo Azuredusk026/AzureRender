@@ -1332,3 +1332,7 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [原生对象记录标定](../acceptance/nr/native-object-record-calibration.md)核对当前对象和灯光投影。
 图集写入与接收法线继续按各自来源验收。
+
+[参考对象图集光栅](../acceptance/nr/reference-object-shadow-raster.md)核对真实 D16 写入及读回。
+NVIDIA 头发可见量通过一字节门槛，Intel 仍有 236 处超差。
+完整接收继续核对深度和法线，颜色继续核对同帧材质输入。

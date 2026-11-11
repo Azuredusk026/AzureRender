@@ -1,11 +1,19 @@
 #pragma once
 
 #include "render/ObjectShadowAtlas.hpp"
-#include "render/ReferenceCameraView.hpp"
+#include "render/ReferenceRasterProjection.hpp"
 #include "render/ScreenObjectVisibility.hpp"
 #include "scene/TransformEditing.hpp"
 
 namespace azurerender {
+
+struct alignas(16) SceneReferenceObjectShadowRasterParameters {
+    ReferenceRasterProjectionParameters raster;
+    std::array<float,4> absoluteOrigin{};
+};
+static_assert(sizeof(SceneReferenceObjectShadowRasterParameters)==128);
+static_assert(offsetof(SceneReferenceObjectShadowRasterParameters,absoluteOrigin)==112);
+using SceneReferenceObjectShadowRasterArray=std::array<SceneReferenceObjectShadowRasterParameters,kObjectShadowCapacity>;
 
 inline ReferencePositionFrame sceneReferenceObjectVisibilityFrame(const PreparedReferenceCameraView& camera){
     auto frame=camera.descriptor().frame;
@@ -64,6 +72,43 @@ inline std::array<float,16> sceneReferenceCalibratedObjectProjection(const Refer
     return result;
 }
 
+inline const SceneReferenceObjectVisibilityRecordCalibration* sceneReferenceObjectRecord(
+    const SceneReferenceObjectVisibilityCalibration* calibration,unsigned page){
+    if(!calibration)return nullptr;
+    const auto& configured=calibration->objectRecords;
+    const auto found=std::find_if(configured.begin(),configured.end(),[page](const auto& source){return source.atlasPage==page;});
+    return found==configured.end()?nullptr:&*found;
+}
+
+inline std::optional<SceneReferenceObjectShadowRasterParameters> sceneReferenceObjectShadowRaster(
+    const PreparedReferenceCameraView& camera,const ObjectShadowPage& page){
+    const auto& settings=camera.descriptor().objectVisibility;
+    if(!settings||!settings->calibration)return std::nullopt;
+    const auto& calibration=*settings->calibration;
+    const auto* source=sceneReferenceObjectRecord(&calibration,page.page);
+    if(!source)return std::nullopt;
+
+    const auto frame=sceneReferenceObjectVisibilityFrame(camera);
+    const auto unit=sceneReferenceCalibratedObjectProjection(frame,*source,page.gpu.worldToUnitShadow);
+    SceneReferenceObjectShadowRasterParameters result;
+    result.raster=referenceRasterProjectionParameters(camera);
+    result.raster.projection.jitter={};
+    for(unsigned axis=0;axis<3;++axis){
+        result.absoluteOrigin[axis]=calibration.positionOffset[axis]-result.raster.offset[axis];
+        if(!std::isfinite(result.absoluteOrigin[axis]))throw std::invalid_argument("Reference object raster origin exceeds binary32");
+    }
+    for(unsigned col=0;col<4;++col){
+        auto& column=result.raster.projection.columns[col];
+        column={2*unit[col*4],-2*unit[col*4+1],unit[col*4+2],unit[col*4+3]};
+    }
+    result.raster.projection.columns[3][0]-=1;
+    result.raster.projection.columns[3][1]+=1;
+    ReferenceClipProjectionProfile profile;
+    profile.parameters=result.raster.projection;
+    validateReferenceClipProjection(profile);
+    return result;
+}
+
 inline std::vector<ScreenObjectVisibilityRecord> sceneReferenceObjectVisibilityRecords(const ReferencePositionFrame& frame,
     const std::vector<ObjectShadowPage>& pages,const SceneReferenceObjectVisibilityCalibration* calibration=nullptr){
     static_assert(kReferenceObjectVisibilityRecordCapacity==kObjectShadowCapacity);
@@ -89,15 +134,11 @@ inline std::vector<ScreenObjectVisibilityRecord> sceneReferenceObjectVisibilityR
             }
         }
         for(unsigned row=0;row<4;++row)record.worldToUnitShadow[12+row]=static_cast<float>(translation[row]);
-        if(calibration){
-            const auto& configured=calibration->objectRecords;
-            const auto found=std::find_if(configured.begin(),configured.end(),[&](const auto& source){return source.atlasPage==page.page;});
-            if(found!=configured.end()){
-                record.worldToUnitShadow=sceneReferenceCalibratedObjectProjection(frame,*found,worldProjection);
-                record.projectionDepth=ScreenObjectDepth::Reversed;
-                if(std::equal(worldProjection.begin(),worldProjection.begin()+12,found->anchorWorldToUnit.begin()))
-                    record.lightDirection=found->lightDirection;
-            }
+        if(const auto* source=sceneReferenceObjectRecord(calibration,page.page)){
+            record.worldToUnitShadow=sceneReferenceCalibratedObjectProjection(frame,*source,worldProjection);
+            record.projectionDepth=ScreenObjectDepth::Reversed;
+            if(std::equal(worldProjection.begin(),worldProjection.begin()+12,source->anchorWorldToUnit.begin()))
+                record.lightDirection=source->lightDirection;
         }
         record.normalBias=object.biasAndFilter[0];
         record.lightBias=object.biasAndFilter[1];

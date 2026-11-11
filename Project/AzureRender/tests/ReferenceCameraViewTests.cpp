@@ -97,12 +97,29 @@ int main(int argc,char** argv)try{
         ObjectShadowPage page;
         page.page=6;
         page.gpu.worldToUnitShadow=anchorShadow;
+        const PreparedReferenceCameraView casterCamera(recordView);
+        const auto caster=sceneReferenceObjectShadowRaster(casterCamera,page);
+        check(caster&&caster->raster.offset==recordView.frame.parameters.offset
+            &&caster->raster.control[1]==referencePositionFrameCode(recordView.frame),
+            "Shadow raster uses the active reference frame");
+        const std::array<float,3> casterWorld{.25F,.125F,.75F};
+        const auto relative=referenceRelativePosition(recordView.frame,casterWorld);
+        std::array<float,3> absolute{};
+        for(unsigned axis=0;axis<3;++axis)absolute[axis]=relative[axis]+caster->absoluteOrigin[axis];
+        check(absolute==referenceRelativePosition(sceneReferenceObjectVisibilityFrame(casterCamera),casterWorld),
+            "Shadow raster reconstructs the authored absolute position");
+        ReferenceClipProjectionProfile casterProjection;
+        casterProjection.parameters=caster->raster.projection;
+        const auto unit=internal::transformPosition(authoredShadow,absolute);
+        check(projectReferenceClip(casterProjection,absolute)==std::array<float,4>{2*unit[0]-1,1-2*unit[1],unit[2],1},
+            "Shadow raster clip projection matches authored receiver coordinates");
         const ReferencePositionFrame frame;
         auto records=sceneReferenceObjectVisibilityRecords(frame,{page},&calibration);
         check(records.size()==1&&records[0].worldToUnitShadow==authoredShadow
             &&records[0].projectionDepth==ScreenObjectDepth::Reversed&&records[0].lightDirection==authoredLight,
             "Object record anchor preserves authored projection and light");
         page.page=5;
+        check(!sceneReferenceObjectShadowRaster(casterCamera,page),"Unselected shadow raster page");
         records=sceneReferenceObjectVisibilityRecords(frame,{page},&calibration);
         check(records[0].worldToUnitShadow==anchorShadow&&!records[0].projectionDepth,
             "Unselected object page keeps the scene projection");

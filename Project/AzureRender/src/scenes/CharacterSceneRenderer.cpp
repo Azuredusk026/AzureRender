@@ -584,14 +584,15 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + ", requested slots=" + std::to_string(indexedSlots)
             + ", stage sampler limit="
             + std::to_string(limits.maxPerStageDescriptorSamplers));
-    enqueue("buffers",loadTimings_.buffersMs,[this]{
+    const bool referenceObjectRaster=referenceObjectVisibilityRequested(context);
+    enqueue("buffers",loadTimings_.buffersMs,[this,referenceObjectRaster]{
         loadedBindPoses_.clear();loadedBindPoses_.reserve(additionalResources_.size()+1);
         loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(asset_)));
         for(const auto& resource:additionalResources_)loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(resource->asset)));
         loadedAnimations_.clear();loadedAnimations_.reserve(additionalResources_.size()+1);
         loadedAnimations_.emplace_back(asset_);
         for(const auto& resource:additionalResources_)loadedAnimations_.emplace_back(resource->asset);
-        createUniformBuffers();createJointBuffers();
+        createUniformBuffers(referenceObjectRaster);createJointBuffers();
         if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));
     },true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
@@ -1156,6 +1157,24 @@ void CharacterSceneRenderer::prepareObjectShadows(){
     if(!inputs.empty()&&!objectShadowPrepared_)throw std::runtime_error("Object shadow layout is unavailable; reload the scene with a supported resource profile");
     objectShadowPages_=buildObjectShadowFrame(inputs,internal::scaleVector(frameCharacterLight_,-1.F)).pages;
     if(!objectShadowPrepared_)return;
+    if(referenceObjectVisibilityActive()&&!objectShadowPages_.empty()){
+        SceneReferenceObjectShadowRasterArray raster{};
+        bool active=false;
+        for(auto& page:objectShadowPages_){
+            if(const auto parameters=sceneReferenceObjectShadowRaster(*referenceCamera_,page)){
+                raster[page.page]=*parameters;
+                page.referenceRaster=true;
+                active=true;
+            }
+        }
+        if(active){
+            auto& uniform=uniformBuffers_[currentFrame_];
+            constexpr auto offset=sizeof(UniformBufferObject);
+            if(uniform.size<offset+sizeof(raster))throw std::logic_error("Reference object raster uniforms were not prepared");
+            std::memcpy(static_cast<char*>(uniform.mapped)+offset,raster.data(),sizeof(raster));
+            allocator_->flush(uniform,offset,sizeof(raster));
+        }
+    }
     std::vector<ObjectShadowGpuRecord> records;
     for(const auto& page:objectShadowPages_)records.push_back(page.gpu);
     shadowBounds_[currentFrame_]->writeObjectRecords(records);
@@ -2857,7 +2876,7 @@ void CharacterSceneRenderer::recordComputeSkinning(
     noteSkinningOutputRecorded(skinningOutputTicket_);
 }
 
-void CharacterSceneRenderer::createUniformBuffers() {
+void CharacterSceneRenderer::createUniformBuffers(bool referenceObjectRaster) {
     // One typed, immutable record per stable asset material index.
     std::vector<PackedMaterialSurfaceProfile> profiles;
     const auto appendProfiles=[&](const LoadedAsset& mesh) {
@@ -2876,7 +2895,7 @@ void CharacterSceneRenderer::createUniformBuffers() {
     materialSurfaceProfiles_=allocator_->createBuffer(profileBytes,VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,true);
     std::memcpy(materialSurfaceProfiles_.mapped,profiles.data(),profileBytes);
     allocator_->flush(materialSurfaceProfiles_,0,profileBytes);
-    const VkDeviceSize size = sizeof(UniformBufferObject);
+    const VkDeviceSize size=sizeof(UniformBufferObject)+(referenceObjectRaster?sizeof(SceneReferenceObjectShadowRasterArray):0);
     uniformBuffers_.resize(kMaxFramesInFlight);
     for (std::size_t index = 0; index < kMaxFramesInFlight; ++index) {
         uniformBuffers_[index] = allocator_->createBuffer(
@@ -3616,7 +3635,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
-            uniformWrite.range = sizeof(UniformBufferObject);
+            uniformWrite.range = uniformBuffers_[frame].size;
             rhi_->writeDescriptorBuffer(uniformWrite);
 
             rhi::DescriptorImageArrayWrite arrayWrite{};
@@ -3712,7 +3731,7 @@ void CharacterSceneRenderer::createDescriptorSets() {
             uniformWrite.binding = 0;
             uniformWrite.type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             uniformWrite.buffer = uniformBuffers_[frame].buffer;
-            uniformWrite.range = sizeof(UniformBufferObject);
+            uniformWrite.range = uniformBuffers_[frame].size;
             rhi_->writeDescriptorBuffer(uniformWrite);
 
             writeImage(
@@ -4153,6 +4172,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             shadowDesc.renderPass=objectShadowAtlas_->renderPass();
             shadowDesc.depthBiasConstant=8.F;shadowDesc.depthBiasSlope=0.F;
             shadowDesc.depthBiasExact=rhi_->supportsExactDepthBias();
+            if(referenceObjectVisibilityRequested(context))shadowDesc.vertexSpecialization.push_back({8,VK_TRUE});
             objectShadowPipeline_=createMaterialUvGraphicsPipeline(shadowDesc);
             depthOnlyDesc=shadowDesc;depthOnlyDesc.fragmentShader=VK_NULL_HANDLE;
             objectShadowDepthOnlyPipeline_=createMaterialUvGraphicsPipeline(depthOnlyDesc);
@@ -4845,12 +4865,13 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
             static_cast<float>(cascadeOffset.y));
         if(objectPage)commands.setScissor({cascadeResolution-2,cascadeResolution-2},{cascadeOffset.x+1,cascadeOffset.y+1});
         else commands.setScissor({cascadeResolution,cascadeResolution},cascadeOffset);
+        const std::uint32_t shadowLayer=objectPage&&objectPage->referenceRaster?5+objectPage->page:cascade;
         commands.pushConstants(
             pipelineLayout_,
             VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
             sizeof(MaterialPushConstants) + sizeof(MorphPushConstants),
-            &cascade,
-            sizeof(cascade));
+            &shadowLayer,
+            sizeof(shadowLayer));
         if (context.submissionCounters != nullptr) {
             ++context.submissionCounters->pushConstantUpdates;
         }
@@ -4911,8 +4932,10 @@ void CharacterSceneRenderer::recordShadowDraws(const RenderContext& context,
                 MorphPushConstants morphConstants{};
                 morphConstants.weights = snapshot->settings.morphWeights;
                 morphConstants.gizmoTransform=primitiveGizmoTransform(snapshot->gizmo,&primitive-mesh.primitives.data());
-                if(objectPage)morphConstants.gizmoTransform=internal::multiply(objectPage->worldToClip,
-                    internal::multiply(snapshot->instances.at(objectPage->instanceIndex).model,morphConstants.gizmoTransform));
+                if(objectPage){
+                    const auto world=internal::multiply(snapshot->instances.at(objectPage->instanceIndex).model,morphConstants.gizmoTransform);
+                    morphConstants.gizmoTransform=objectPage->referenceRaster?world:internal::multiply(objectPage->worldToClip,world);
+                }
                 if (bindlessTextures_) {
                     morphConstants.textureBaseIndex =
                         textureBase

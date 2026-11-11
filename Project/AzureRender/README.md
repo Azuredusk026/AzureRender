@@ -855,3 +855,7 @@ NVIDIA 法线来源控制的 17,017 个可见量均在一字节内。
 
 [原生对象记录标定](docs/acceptance/nr/native-object-record-calibration.md)接入实际对象可见量。
 NVIDIA 头发区域的 182 处超差均与图集单项对照重合。
+
+[参考对象图集光栅](docs/acceptance/nr/reference-object-shadow-raster.md)以标定投影写入实际图集。
+NVIDIA 的 17,017 个头发可见量位置满足一字节门槛。
+Intel、完整接收及材质颜色继续按冻结区域验收。

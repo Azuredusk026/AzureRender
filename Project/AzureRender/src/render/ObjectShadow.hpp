@@ -38,6 +38,7 @@ struct ObjectShadowPage {
     internal::Matrix4 worldToClip;
     std::uint32_t instanceIndex=0;
     unsigned page=0;
+    bool referenceRaster=false;
 };
 struct ObjectShadowFrame { std::vector<ObjectShadowPage> pages; };
 
