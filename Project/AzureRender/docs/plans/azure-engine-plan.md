@@ -37,6 +37,8 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [材质视图回归矩阵](../acceptance/nr/material-view-regression-matrix.md)通过双配置三十六项检查。
 完整项目回归按两种配置执行。
 
+[椭圆覆盖选级主线验收](../acceptance/nr/material-ellipse-coverage-main-integration.md)通过二十二项自动检查、双设备头发采集及原始四帧。
+
 [参考相机渲染主线验收](../acceptance/nr/reference-camera-binding-main-integration.md)通过双配置及双设备检查。
 实际视图核对 384 万个几何掩码像素，重采原始四帧精确一致。
 原生颜色与参考时间效果按各自门槛继续验收。

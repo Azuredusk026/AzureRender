@@ -17,6 +17,8 @@
 
 [材质视图回归矩阵](acceptance/nr/material-view-regression-matrix.md)通过两种配置三十六项检查。
 
+[椭圆覆盖选级主线验收](acceptance/nr/material-ellipse-coverage-main-integration.md)通过双配置、双设备及原始四帧。
+
 ## 当前验收状态
 
 性能、原生画质与集中人工复核继续待通过。

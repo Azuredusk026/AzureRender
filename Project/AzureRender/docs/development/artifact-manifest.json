@@ -671,6 +671,13 @@
       "sourceBase": "eaf39fd",
       "evidence": "docs/acceptance/nr/material-view-regression-matrix.md",
       "results": "docs/acceptance/nr/evidence/2026-11-11/material-view-regression-matrix/results.json"
+    },
+    {
+      "path": "runs/20261111-211029-ellipse-coverage-main-integration-b59590",
+      "name": "椭圆覆盖选级主线验收",
+      "sourceBase": "3810892",
+      "evidence": "docs/acceptance/nr/material-ellipse-coverage-main-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/material-ellipse-coverage-main-integration/results.json"
     }
   ],
   "preservedBuilds": [
