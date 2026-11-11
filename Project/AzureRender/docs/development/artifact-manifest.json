@@ -706,6 +706,13 @@
       "sourceBase": "4940c17",
       "evidence": "docs/acceptance/nr/scene-reference-depth-main-integration.md",
       "results": "docs/acceptance/nr/evidence/2026-11-11/scene-reference-depth-main-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-010219-scene-reference-normal-main-integration-19659e",
+      "name": "场景参考法线与对象身份主线验收",
+      "sourceBase": "4979ca5",
+      "evidence": "docs/acceptance/nr/scene-reference-normal-main-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-normal-main-integration/results.json"
     }
   ],
   "preservedBuilds": [

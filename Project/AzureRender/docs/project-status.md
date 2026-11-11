@@ -21,6 +21,8 @@
 
 [场景参考深度主线验收](acceptance/nr/scene-reference-depth-main-integration.md)通过双配置和双设备全图深度读回。
 
+[场景参考法线与对象身份主线验收](acceptance/nr/scene-reference-normal-main-integration.md)通过双配置、双设备附件及原始四帧。
+
 ## 当前验收状态
 
 性能、原生画质与集中人工复核继续待通过。

@@ -39,6 +39,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 [椭圆覆盖选级主线验收](../acceptance/nr/material-ellipse-coverage-main-integration.md)通过二十二项自动检查、双设备头发采集及原始四帧。
 
+[场景参考法线与对象身份主线验收](../acceptance/nr/scene-reference-normal-main-integration.md)通过三十项检查及双设备四附件读回。
+完整可见量和联合画质继续按所属条件核对。
+
 [场景参考深度主线验收](../acceptance/nr/scene-reference-depth-main-integration.md)通过三十项检查和双设备深度全图读回。
 原始四帧精确一致，完整颜色按所属门槛验收。
 
