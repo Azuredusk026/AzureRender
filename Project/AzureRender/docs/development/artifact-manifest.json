@@ -692,6 +692,13 @@
       "sourceBase": "3810892",
       "evidence": "docs/acceptance/nr/material-ellipse-coverage-main-integration.md",
       "results": "docs/acceptance/nr/evidence/2026-11-11/material-ellipse-coverage-main-integration/results.json"
+    },
+    {
+      "path": "runs/20261111-232953-scene-reference-depth-main-integration-20e9e2",
+      "name": "场景参考深度主线验收",
+      "sourceBase": "4940c17",
+      "evidence": "docs/acceptance/nr/scene-reference-depth-main-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-11/scene-reference-depth-main-integration/results.json"
     }
   ],
   "preservedBuilds": [

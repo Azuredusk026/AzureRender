@@ -64,6 +64,8 @@ NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工�
 [独立材质视图](docs/acceptance/nr/material-view-determinism.md)通过接收计算、双配置及双设备回归。
 原始四帧摘要一致，计算视图与 UV 接入按新受检基线继续验证。
 
+[场景参考深度主线验收](docs/acceptance/nr/scene-reference-depth-main-integration.md)通过双配置、双设备逐位深度读回及原始四帧。
+
 [椭圆覆盖选级主线验收](docs/acceptance/nr/material-ellipse-coverage-main-integration.md)通过双配置、双设备及原始四帧核对。
 
 [材质视图回归矩阵](docs/acceptance/nr/material-view-regression-matrix.md)核对两种配置的视图读回、覆盖拒绝及生成层级。

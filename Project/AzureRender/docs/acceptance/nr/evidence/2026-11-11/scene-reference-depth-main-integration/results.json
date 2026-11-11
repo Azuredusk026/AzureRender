@@ -1,0 +1,148 @@
+{
+  "status": "passed",
+  "run": "20261111-232953-scene-reference-depth-main-integration-20e9e2",
+  "mainHead": "4940c17",
+  "qualityCommit": "7044017",
+  "builds": [
+    {
+      "configuration": "Release",
+      "programs": 888,
+      "unchanged": 880,
+      "changed": [
+        "character_snapshot_depth_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_bindless_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_bindless_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_reference_camera.vert.spv",
+        "character_snapshot_depth_reference_camera.vert.spv"
+      ],
+      "added": [
+        "reference_scene_depth.frag.spv",
+        "reference_scene_depth_bindless.frag.spv"
+      ],
+      "tests": 15,
+      "validationPassed": true
+    },
+    {
+      "configuration": "Debug",
+      "programs": 888,
+      "unchanged": 880,
+      "changed": [
+        "character_snapshot_depth_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_bindless_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_bindless_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_compute_reference_camera.vert.spv",
+        "character_snapshot_depth_projected_reference_camera.vert.spv",
+        "character_snapshot_depth_reference_camera.vert.spv"
+      ],
+      "added": [
+        "reference_scene_depth.frag.spv",
+        "reference_scene_depth_bindless.frag.spv"
+      ],
+      "tests": 15,
+      "validationPassed": true
+    }
+  ],
+  "gpu": [
+    {
+      "device": "nvidia",
+      "binding": "indexed",
+      "depthPixels": 3686400,
+      "depthSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "frames": [
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022",
+        "8877f812644159bf05bd52690ce6a14cb4341c1c5e10d18280ee9ec624af3022"
+      ],
+      "qualityExact": true,
+      "validationClean": true,
+      "validationLoaderInstanceAndDevice": true,
+      "allocatorZero": true
+    },
+    {
+      "device": "intel",
+      "binding": "fixed",
+      "depthPixels": 3686400,
+      "depthSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "frames": [
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf",
+        "c2698aab615d60c6a3b2af77aa080e26ea89cc3e36e077d3c4ece117a7580ccf"
+      ],
+      "qualityExact": true,
+      "validationClean": true,
+      "validationLoaderInstanceAndDevice": true,
+      "allocatorZero": true
+    }
+  ],
+  "original": {
+    "exitCode": 0,
+    "seconds": 127.03099999995902,
+    "frames": [
+      {
+        "name": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "referenceSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "referenceSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "referenceSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      },
+      {
+        "name": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "referenceSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "changedPixels": 0,
+        "maximumByteError": 0
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "sourceUnchanged": true,
+    "programsUnchanged": true,
+    "projectInputsUnchanged": true
+  },
+  "protectedFiles": {
+    "docs/acceptance/p5/closure/source-evidence/interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs/acceptance/p5/closure/source-evidence/manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201",
+    "src/rhi/GpuAllocator.hpp": "2e81204107f3e5cfa765bde0e90c1e6a0131721b6ea6b521b3c73490793164dd",
+    "src/rhi/VulkanRhi.cpp": "4ca84f5a9c7ce471c5f9a75009fd26af8a3fd6b6291be8674e829178291d1840",
+    "tests/MaterialPipelinePolicyTests.cpp": "01f18ad44129c11d97bc2c1d8b0c2c1f3f85bffd0af5403f43d2db513acc7c31",
+    "tests/MotionRecordingTests.cpp": "f8e27feb08afaed0ec723fe7caa76d196909ecba97d06ca7c7ed5943bdc3311e",
+    "tests/ObjectShadowAtlasTests.cpp": "dfb7219c73f059415061b73bc4844a7f0a207b7cb75f0ef81c75b376f8f0ab15",
+    "tests/ShadowTileBoundsGpuTests.cpp": "62504a6a47633cc04f8f886a9013b64f55293b8294afe8e12b69e1c634303b6b",
+    "tools/endfield_native/character_surfaces.py": "6c7c476448f3860b7ec8b3dbddd37cbb7c95b1596ebc3355f2fd1f25cb46c8bb",
+    "tools/test_native_character_surfaces.py": "0c870dfb4a2fb9203fc8ef364a4e494d30d1c8ba133f5514d96db40c839cb1d4"
+  },
+  "sceneRendererApiVersion": 11,
+  "depthReadbackSourceSha256": "d7732b1965e0fce36a9131b67ac82dfcb6396c73f21782a8313e8b928e2458f0",
+  "qualityArchive": {
+    "commit": "7044017",
+    "archive": {
+      "bytes": 4294121,
+      "sha256": "536ee1f3149438c451ff7595e3f7aee2c926fb1eb3f3bf20d8d5de3848771765",
+      "members": 155
+    },
+    "memberSha256Verified": 154
+  },
+  "archive": {
+    "bytes": 608981,
+    "members": 39,
+    "sha256": "131873372d92cc4a223adcc482429d5aa16eb0367527ea401a108ddae35d298c"
+  }
+}

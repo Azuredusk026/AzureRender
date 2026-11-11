@@ -19,6 +19,8 @@
 
 [椭圆覆盖选级主线验收](acceptance/nr/material-ellipse-coverage-main-integration.md)通过双配置、双设备及原始四帧。
 
+[场景参考深度主线验收](acceptance/nr/scene-reference-depth-main-integration.md)通过双配置和双设备全图深度读回。
+
 ## 当前验收状态
 
 性能、原生画质与集中人工复核继续待通过。
