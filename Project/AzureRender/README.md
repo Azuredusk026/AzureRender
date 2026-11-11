@@ -869,3 +869,5 @@ Intel 颜色及完整接收按冻结区域继续验收。
 
 [项目参考可见量算术](docs/acceptance/nr/project-reference-visibility-profile.md)接入编辑器、Player 和发布包。
 Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `ProfileV1` 对照。
+
+[原生接收输入来源](docs/acceptance/nr/native-receiver-producer-replay.md)核对服饰法线和头发外扩深度。
