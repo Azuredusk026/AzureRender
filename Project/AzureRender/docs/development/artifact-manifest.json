@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-053111-intel-reference-visibility-sources-5238e2",
+      "name": "Intel 参考可见量来源",
+      "sourceBase": "fa82f57",
+      "evidence": "docs/acceptance/nr/intel-reference-visibility-sources.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/intel-reference-visibility-sources/results.json"
+    },
+    {
       "path": "runs/20261112-044926-material-reference-object-visibility-344def",
       "name": "材质参考对象可见量",
       "sourceBase": "4bf4e7d",

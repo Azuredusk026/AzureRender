@@ -1340,3 +1340,7 @@ NVIDIA 头发可见量通过一字节门槛，Intel 仍有 236 处超差。
 [材质参考对象可见量](../acceptance/nr/material-reference-object-visibility.md)接入快照及主通道。
 NVIDIA 的完整头发颜色达到一字节门槛。
 Intel 的 580 处颜色超差继续按设备输入核对。
+
+[Intel 参考可见量来源](../acceptance/nr/intel-reference-visibility-sources.md)核对实际附件与算术。
+同输入的 `ProfileV1` 在双设备满足一字节门槛。
+场景配置、纹理选级及完整接收继续按冻结区域验收。

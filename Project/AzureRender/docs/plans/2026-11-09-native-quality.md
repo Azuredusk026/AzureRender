@@ -158,6 +158,10 @@ Intel 保留 120 处超差，最大为 33 字节。
 NVIDIA 的 17,017 个头发可见量和颜色位置均满足一字节门槛。
 Intel 的冻结可见量和颜色分别核对设备输入。
 
+[Intel 参考可见量来源](../acceptance/nr/intel-reference-visibility-sources.md)保存固定输入和原生选级读回。
+同输入的 `ProfileV1` 达到接收门槛。
+场景数值配置及纹理梯度继续核对。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。

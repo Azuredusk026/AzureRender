@@ -863,3 +863,6 @@ Intel、完整接收及材质颜色继续按冻结区域验收。
 [材质参考对象可见量](docs/acceptance/nr/material-reference-object-visibility.md)读取同帧附件。
 NVIDIA 的 17,017 个头发颜色位置均在一字节内。
 Intel 颜色及完整接收按冻结区域继续验收。
+
+[Intel 参考可见量来源](docs/acceptance/nr/intel-reference-visibility-sources.md)记录实际图集及原生选级。
+同输入的参考算术在两块设备满足一字节门槛。
