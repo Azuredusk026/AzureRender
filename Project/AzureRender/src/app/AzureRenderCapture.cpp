@@ -22,11 +22,11 @@ using namespace azurerender::internal;
 
 namespace {
 
-void writeReferenceDepthPlane(const std::filesystem::path& path,const std::vector<std::uint32_t>& data){
+template<class T> void writeReferencePlane(const std::filesystem::path& path,const std::vector<T>& data){
     std::ofstream output(path,std::ios::binary);
     output.write(reinterpret_cast<const char*>(data.data()),static_cast<std::streamsize>(data.size()*sizeof(data.front())));
     output.close();
-    if(!output)throw std::runtime_error("Failed to write scene reference depth: "+path.u8string());
+    if(!output)throw std::runtime_error("Failed to write scene reference attachment: "+path.u8string());
 }
 
 std::string fnv1a64Hex(const std::string& value) {
@@ -498,12 +498,23 @@ void AzureRenderApp::writeCaptureManifest(
                 throw std::runtime_error("Invalid scene reference depth capture dimensions");
             constexpr auto rasterName="reference-depth-r32.bin";
             constexpr auto hardwareName="reference-depth-d32.bin";
-            writeReferenceDepthPlane(outputPath.parent_path()/rasterName,depth->rasterDepth);
-            writeReferenceDepthPlane(outputPath.parent_path()/hardwareName,depth->hardwareDepth);
+            writeReferencePlane(outputPath.parent_path()/rasterName,depth->rasterDepth);
+            writeReferencePlane(outputPath.parent_path()/hardwareName,depth->hardwareDepth);
             output << "  \"referenceSceneDepth\": {\"width\": " << depth->extent.width
                    << ", \"height\": " << depth->extent.height << ", \"submission\": " << depth->submission
                    << ", \"rowOrigin\": \"bottom-left\""
-                   << ", \"raster\": " << std::quoted(rasterName) << ", \"hardware\": " << std::quoted(hardwareName) << "},\n";
+                   << ", \"raster\": " << std::quoted(rasterName) << ", \"hardware\": " << std::quoted(hardwareName);
+            if(!depth->packedNormals.empty()||!depth->objectIds.empty()){
+                if(depth->packedNormals.size()!=pixels||depth->objectIds.size()!=pixels)
+                    throw std::runtime_error("Invalid scene reference visibility input dimensions");
+                constexpr auto normalName="reference-normals-a2b10g10r10.bin";
+                constexpr auto objectIdName="reference-object-ids-r8.bin";
+                writeReferencePlane(outputPath.parent_path()/normalName,depth->packedNormals);
+                writeReferencePlane(outputPath.parent_path()/objectIdName,depth->objectIds);
+                output << ", \"normalFrame\": \"reference\", \"packedNormals\": " << std::quoted(normalName)
+                       << ", \"objectIds\": " << std::quoted(objectIdName);
+            }
+            output << "},\n";
         }
         sceneRenderer_->appendCaptureManifestFields(output);
     } else {

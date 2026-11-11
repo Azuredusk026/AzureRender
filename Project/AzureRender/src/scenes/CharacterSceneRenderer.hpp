@@ -122,10 +122,13 @@ private:
     std::optional<PreparedReferenceCameraView> referenceCamera_;
     std::unique_ptr<SceneReferenceDepthTargets> referenceSceneDepth_;
     std::array<VkPipeline,3> referenceSceneDepthPipelines_{};
-    std::optional<unsigned> pendingReferenceDepthSlot_;
-    std::optional<std::pair<unsigned,std::uint64_t>> submittedReferenceDepth_;
+    std::array<VkPipeline,3> referenceSceneVisibilityPipelines_{};
+    struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;std::uint64_t submission;};
+    std::optional<ReferenceDepthSubmission> pendingReferenceDepth_;
+    std::optional<ReferenceDepthSubmission> submittedReferenceDepth_;
     bool referenceDepthActive() const noexcept;
-    void createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context);
+    bool referenceVisibilityActive() const noexcept;
+    void createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context,bool visibilityInputs);
     void destroyUvShaderModule(VkShaderModule);
     VkPipeline createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
     VkPipeline materialUvPipeline(const AssetMaterial&,VkPipeline) const;
@@ -338,6 +341,7 @@ private:
         std::uint32_t padding = 0;
     };
     static_assert(sizeof(MaterialPushConstants) == 128);
+    static_assert(offsetof(MaterialPushConstants,hairParameters)==64);
 
     struct MorphPushConstants {
         // Projected mesh programs consume word one as output-pixel sampling

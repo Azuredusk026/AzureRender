@@ -27,6 +27,10 @@
 既有长期目标为 CPU P95 八毫秒及 GPU P95 16.6 毫秒。
 严格四帧、SSIM 与关键区域亮度门槛保持有效。
 
+[场景参考法线与对象身份](acceptance/nr/scene-reference-normal.md)接入实际 Player 附件。
+NVIDIA 法线来源控制的全部头发可见量满足一字节门槛。
+完整场景可见量及颜色继续验收。
+
 [参考透明层级](acceptance/nr/reference-alpha-ellipse.md)通过公共策略和原四帧检查。
 NVIDIA 完整 17017 处一致，Intel 剩余九十六处深度超差继续修正。
 
