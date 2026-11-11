@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "sourceBase": "0736944",
+  "run": "20261112-011326-handoff-final-regression-e2e260",
+  "configurations": {
+    "debug": {
+      "test": "AzureRender.SamplingHostGpu",
+      "seconds": 84.539,
+      "validation": {
+        "qualitySwitches": 9,
+        "samplingModes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "outOfRangeRejected": 5,
+        "supersamplingResize": true,
+        "assetReload": true,
+        "saveReopen": true,
+        "validationErrors": 0,
+        "resourcesAfterUnload": 0
+      },
+      "editorSha256": "779a33ac50c8324515b2cce74f7f68bf332c64a8ba71e8f3ad47cf778c081661",
+      "unchangedProducts": 1283
+    },
+    "release": {
+      "test": "AzureRender.SamplingHostGpu",
+      "seconds": 10.8012,
+      "validation": {
+        "qualitySwitches": 9,
+        "samplingModes": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "outOfRangeRejected": 5,
+        "supersamplingResize": true,
+        "assetReload": true,
+        "saveReopen": true,
+        "validationErrors": 0,
+        "resourcesAfterUnload": 0
+      },
+      "editorSha256": "8c37194a89965d92f055f3dcd8921f70185999f29ae27f58da6e817976218da9",
+      "unchangedProducts": 1638
+    }
+  },
+  "source": {
+    "debug": {
+      "changedSource": {
+        "tools/test_render_sampling_host.py": [
+          "dae8895af75578488ecbf7b8820655977c56ad5a0adad7cdabca2697a16a30de",
+          "5c654a02540517c0d4af8328ae29d7b88c79249cc83987df9c87d9ebe7295d45"
+        ]
+      },
+      "impactedTests": [
+        {
+          "index": 166,
+          "name": "AzureRender.SamplingHostGpu"
+        }
+      ],
+      "unchangedProducts": 1283,
+      "previousProductReceiptSha256": "8606a0bfe68539d0545b220784c9e934ccf7c81fd0f7efcba7f74bfdd7fbb151",
+      "currentProductReceiptSha256": "040bc66e5cb514ccc8e0cc080274d921f8fa4c42eeb0ce885a8e736d93aefed6"
+    },
+    "release": {
+      "changedSource": {
+        "tools/test_render_sampling_host.py": [
+          "dae8895af75578488ecbf7b8820655977c56ad5a0adad7cdabca2697a16a30de",
+          "5c654a02540517c0d4af8328ae29d7b88c79249cc83987df9c87d9ebe7295d45"
+        ]
+      },
+      "impactedTests": [
+        {
+          "index": 166,
+          "name": "AzureRender.SamplingHostGpu"
+        }
+      ],
+      "unchangedProducts": 1638,
+      "previousProductReceiptSha256": "f1c917fdcbbc933b994550827835a4d50e4583b12d8302756b969a9e2f745b05",
+      "currentProductReceiptSha256": "4e1614c183ef5b0fd12a340bcce15ebbeb9362b56a4866bde1b591d38d82362c"
+    }
+  },
+  "protectedFiles": {
+    "docs/acceptance/p5/closure/source-evidence/interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs/acceptance/p5/closure/source-evidence/manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201",
+    "src/rhi/GpuAllocator.hpp": "2e81204107f3e5cfa765bde0e90c1e6a0131721b6ea6b521b3c73490793164dd",
+    "src/rhi/VulkanRhi.cpp": "4ca84f5a9c7ce471c5f9a75009fd26af8a3fd6b6291be8674e829178291d1840",
+    "tests/MaterialPipelinePolicyTests.cpp": "01f18ad44129c11d97bc2c1d8b0c2c1f3f85bffd0af5403f43d2db513acc7c31",
+    "tests/MotionRecordingTests.cpp": "f8e27feb08afaed0ec723fe7caa76d196909ecba97d06ca7c7ed5943bdc3311e",
+    "tests/ObjectShadowAtlasTests.cpp": "dfb7219c73f059415061b73bc4844a7f0a207b7cb75f0ef81c75b376f8f0ab15",
+    "tests/ShadowTileBoundsGpuTests.cpp": "62504a6a47633cc04f8f886a9013b64f55293b8294afe8e12b69e1c634303b6b",
+    "tools/endfield_native/character_surfaces.py": "6c7c476448f3860b7ec8b3dbddd37cbb7c95b1596ebc3355f2fd1f25cb46c8bb",
+    "tools/test_native_character_surfaces.py": "0c870dfb4a2fb9203fc8ef364a4e494d30d1c8ba133f5514d96db40c839cb1d4"
+  },
+  "archive": {
+    "status": "passed",
+    "archive": "docs/acceptance/nr/evidence/2026-11-12/editor-sampling-regression/validation.zip",
+    "files": 30,
+    "logicalBytes": 1996567,
+    "archiveBytes": 633210,
+    "sha256": "7fc6917176f5b5a010e97ed4182d2f2a6f23f86492dc52de84fb9ba5ce84e5df",
+    "removedSource": false,
+    "sourceCommit": "073694440824cf7fafc36b943cc6ce1e319cf6a3"
+  }
+}

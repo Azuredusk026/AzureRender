@@ -715,11 +715,18 @@
       "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-normal-main-integration/results.json"
     },
     {
-      "path": "runs/20261112-011326-handoff-final-regression-e2e260",
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/layout-contract-evidence",
       "name": "捕获布局回归",
       "sourceBase": "9dcae82",
       "evidence": "docs/acceptance/nr/capture-layout-regression.md",
       "results": "docs/acceptance/nr/evidence/2026-11-12/capture-layout-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/sampling-host-evidence",
+      "name": "编辑器采样回归",
+      "sourceBase": "0736944",
+      "evidence": "docs/acceptance/nr/editor-sampling-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-sampling-regression/results.json"
     }
   ],
   "preservedBuilds": [

@@ -14,6 +14,7 @@ def run(executable,root):
     command=[str(executable),'--editor-project',str(project/'project.azureproject'),'--editor-close-policy','save','--width','1280','--height','720',
              '--fixed-frame-step','--validation-token-env','AZURE_SAMPLING_TOKEN','--validation-endpoint',str(endpoint_file)]
     process=subprocess.Popen(command,env=env,stdout=logs[0],stderr=logs[1],startupinfo=startup);evidence=[]
+    quality_switches=(0,2,1,2,0,2,3,4,2)
     try:
         deadline=time.monotonic()+45
         while not endpoint_file.exists() and time.monotonic()<deadline:
@@ -31,9 +32,9 @@ def run(executable,root):
             assert value['quality']==quality and value['sceneExtent']==[v*scale for v in value['outputExtent']],value
             return value
         frames();initial=call('query',name='document.version')
-        for quality in [0,2,1,2,0,2]:
+        for quality in quality_switches:
             edit('settings.set',name='render.antiAliasing',value=quality);inspect(quality)
-        edit('settings.set',passed=False,name='render.antiAliasing',value=3)
+        edit('settings.set',passed=False,name='render.antiAliasing',value=5)
         assert call('query',name='document.version')==initial
         before=inspect(2);window=NativeWindow(process.pid);assert window.find()
         window.user.SetWindowPos.argtypes=[wintypes.HWND,wintypes.HWND,ctypes.c_int,ctypes.c_int,ctypes.c_int,ctypes.c_int,wintypes.UINT]
@@ -58,7 +59,8 @@ def run(executable,root):
     assert reopen.returncode==0 and 'VUID-' not in reopen.stderr and 'Allocator after unload: buffers=0 images=0' in reopen.stdout
     saved=json.loads((project/'assets/inspection.azurelevel').read_text(encoding='utf-8'))
     assert saved['renderSettings']['antiAliasing']==2,'Authored quality must survive save and reopen'
-    report={'qualitySwitches':6,'supersamplingResize':True,'assetReload':True,'saveReopen':True,'validationErrors':0,'resourcesAfterUnload':0}
+    report={'qualitySwitches':len(quality_switches),'samplingModes':sorted(set(quality_switches)),'outOfRangeRejected':5,
+            'supersamplingResize':True,'assetReload':True,'saveReopen':True,'validationErrors':0,'resourcesAfterUnload':0}
     (root/'summary.json').write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps(report))
 if __name__=='__main__':
     p=argparse.ArgumentParser(__doc__);p.add_argument('--executable',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
