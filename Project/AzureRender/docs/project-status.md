@@ -23,6 +23,9 @@ NVIDIA 法线来源控制的全部头发可见量满足一字节门槛。
 [对象可见量深度方向](acceptance/nr/visibility-projection-depth.md)支持逐记录投影。
 原生记录可在实际正向图集中表达反向投影。
 
+[原生对象记录标定](acceptance/nr/native-object-record-calibration.md)核对实际 Player 的接收投影。
+NVIDIA 头发的剩余超差对应当前图集。
+
 [参考透明层级](acceptance/nr/reference-alpha-ellipse.md)通过公共策略和原四帧检查。
 NVIDIA 完整 17017 处一致，Intel 剩余九十六处深度超差继续修正。
 

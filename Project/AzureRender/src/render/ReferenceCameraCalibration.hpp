@@ -57,6 +57,16 @@ inline ReferenceCameraView relocateReferenceCamera(const ReferenceCameraView& so
                 relocated.clipToWorld[col*4+row]=static_cast<float>(value);
             }
         }
+        for(std::size_t index=0;index<authored.objectRecords.size();++index){
+            const auto& record=authored.objectRecords[index];
+            auto& target=relocated.objectRecords[index];
+            for(unsigned axis=0;axis<3;++axis){
+                const auto sign=static_cast<float>(signs[axis]);
+                target.lightDirection[worldAxes[axis]]=sign*record.lightDirection[axis];
+                for(unsigned row=0;row<4;++row)
+                    target.referenceToUnit[worldAxes[axis]*4+row]=sign*record.referenceToUnit[axis*4+row];
+            }
+        }
     }
     (void)PreparedReferenceCameraView(result);return result;
 }

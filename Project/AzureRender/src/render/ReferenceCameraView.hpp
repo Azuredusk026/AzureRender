@@ -5,11 +5,19 @@
 #include <algorithm>
 #include <limits>
 #include <optional>
+#include <vector>
 namespace azurerender {
+inline constexpr unsigned kReferenceObjectVisibilityRecordCapacity=8;
+struct SceneReferenceObjectVisibilityRecordCalibration {
+    unsigned atlasPage=0;
+    std::array<float,16> anchorWorldToUnit{},referenceToUnit{};
+    std::array<float,3> lightDirection{0,1,0};
+};
 struct SceneReferenceObjectVisibilityCalibration {
     std::uint32_t schemaVersion=1;
     std::array<float,3> positionOffset{};
     std::array<float,16> clipToWorld{1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+    std::vector<SceneReferenceObjectVisibilityRecordCalibration> objectRecords;
 };
 struct SceneReferenceObjectVisibilitySettings {
     std::array<float,2> pixelOffset{.5F,.5F};
@@ -51,6 +59,17 @@ class PreparedReferenceCameraView final {
         require(std::isfinite(condition)&&condition<=1.e12,"Reference camera matrix condition exceeds1e12");
         return inverse;
     }
+    static void validateObjectProjection(const std::array<float,16>& projection){
+        require(projection[3]==0&&projection[7]==0&&projection[11]==0&&projection[15]==1,
+            "Scene object calibration projection must be affine");
+        Matrix matrix{};
+        for(unsigned row=0;row<4;++row)for(unsigned col=0;col<4;++col){
+            const float value=projection[col*4+row];
+            require(std::isfinite(value),"Scene object calibration projection must be finite");
+            matrix[row][col]=value;
+        }
+        (void)invert(matrix);
+    }
     static void validateVisibilityCalibration(const SceneReferenceObjectVisibilityCalibration& calibration){
         require(calibration.schemaVersion==1,"Unsupported scene object visibility calibration version");
         for(const float value:calibration.positionOffset)require(std::isfinite(value),"Scene object visibility origin must be finite");
@@ -61,6 +80,17 @@ class PreparedReferenceCameraView final {
             matrix[row][col]=value;
         }
         (void)invert(matrix);
+        std::array<bool,kReferenceObjectVisibilityRecordCapacity> usedPages{};
+        for(const auto& record:calibration.objectRecords){
+            require(record.atlasPage<usedPages.size()&&!usedPages[record.atlasPage],
+                "Scene object calibration atlas pages must be unique and in range");
+            usedPages[record.atlasPage]=true;
+            validateObjectProjection(record.anchorWorldToUnit);
+            validateObjectProjection(record.referenceToUnit);
+            float squared=0;
+            for(float component:record.lightDirection)squared+=component*component;
+            require(squared>=.99F&&squared<=1.01F,"Scene object calibration light direction must have unit length");
+        }
     }
     std::array<double,3> unprojectDouble(double u,double v,double depth) const {
         require(std::isfinite(u)&&std::isfinite(v)&&std::isfinite(depth)&&depth>=0&&depth<=1,"Invalid reference viewport coordinates or depth");

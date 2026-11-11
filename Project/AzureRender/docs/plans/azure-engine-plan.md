@@ -1329,3 +1329,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [对象可见量深度方向](../acceptance/nr/visibility-projection-depth.md)接入逐记录选择。
 原生对象记录和图集投影沿实际来源继续验收。
+
+[原生对象记录标定](../acceptance/nr/native-object-record-calibration.md)核对当前对象和灯光投影。
+图集写入与接收法线继续按各自来源验收。

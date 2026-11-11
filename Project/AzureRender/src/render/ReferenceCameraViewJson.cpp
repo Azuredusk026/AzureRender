@@ -23,9 +23,16 @@ void to_json(nlohmann::json& j,const ReferenceCameraView& v){
     if(v.produceSceneVisibilityInputs)j["produceSceneVisibilityInputs"]=true;
     if(v.objectVisibility){
         j["objectVisibility"]={{"pixelOffset",v.objectVisibility->pixelOffset}};
-        if(const auto& calibration=v.objectVisibility->calibration)
-            j["objectVisibility"]["calibration"]={{"schemaVersion",1},{"positionOffset",calibration->positionOffset},
-                {"clipToWorld",calibration->clipToWorld}};
+        if(const auto& calibration=v.objectVisibility->calibration){
+            auto& authored=j["objectVisibility"]["calibration"];
+            authored={{"schemaVersion",1},{"positionOffset",calibration->positionOffset},{"clipToWorld",calibration->clipToWorld}};
+            if(!calibration->objectRecords.empty()){
+                auto& records=authored["objectRecords"]=Json::array();
+                for(const auto& record:calibration->objectRecords)
+                    records.push_back({{"atlasPage",record.atlasPage},{"anchorWorldToUnit",record.anchorWorldToUnit},
+                        {"referenceToUnit",record.referenceToUnit},{"lightDirection",record.lightDirection}});
+            }
+        }
     }
 }
 void from_json(const nlohmann::json& j,ReferenceCameraView& value){
@@ -60,10 +67,23 @@ void from_json(const nlohmann::json& j,ReferenceCameraView& value){
         visibility.pixelOffset=vector<2>(settings.at("pixelOffset"));
         if(settings.contains("calibration")){
             const auto& authored=settings.at("calibration");
-            fields(authored,{"schemaVersion","positionOffset","clipToWorld"});version(authored);
+            fields(authored,{"schemaVersion","positionOffset","clipToWorld"},{"objectRecords"});version(authored);
             auto& calibration=visibility.calibration.emplace();
             calibration.positionOffset=vector<3>(authored.at("positionOffset"));
             calibration.clipToWorld=vector<16>(authored.at("clipToWorld"));
+            if(authored.contains("objectRecords")){
+                const auto& records=authored.at("objectRecords");
+                if(!records.is_array()||records.size()>kReferenceObjectVisibilityRecordCapacity)
+                    throw std::invalid_argument("Invalid scene object calibration record count");
+                for(const auto& record:records){
+                    fields(record,{"atlasPage","anchorWorldToUnit","referenceToUnit","lightDirection"});
+                    const auto& page=record.at("atlasPage");
+                    if(!page.is_number_integer()||page<0||page>=kReferenceObjectVisibilityRecordCapacity)
+                        throw std::invalid_argument("Invalid scene object calibration atlas page");
+                    calibration.objectRecords.push_back({page.get<unsigned>(),vector<16>(record.at("anchorWorldToUnit")),
+                        vector<16>(record.at("referenceToUnit")),vector<3>(record.at("lightDirection"))});
+                }
+            }
         }
     }
     (void)PreparedReferenceCameraView(v);value=std::move(v);

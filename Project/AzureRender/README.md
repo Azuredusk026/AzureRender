@@ -852,3 +852,6 @@ NVIDIA 法线来源控制的 17,017 个可见量均在一字节内。
 
 [对象可见量深度方向](docs/acceptance/nr/visibility-projection-depth.md)定义图集与逐对象投影的约定。
 同一图集可由正向和反向记录共同使用。
+
+[原生对象记录标定](docs/acceptance/nr/native-object-record-calibration.md)接入实际对象可见量。
+NVIDIA 头发区域的 182 处超差均与图集单项对照重合。

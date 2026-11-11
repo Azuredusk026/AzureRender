@@ -335,3 +335,7 @@ NVIDIA 头发区域有 277 处超差，Intel 有 428 处。
 
 [对象可见量深度方向](../acceptance/nr/visibility-projection-depth.md)分别定义图集与记录方向。
 当前场景的原生记录标定继续使用实际图集和参考附件。
+
+[原生对象记录标定](../acceptance/nr/native-object-record-calibration.md)使用原生投影和灯向。
+NVIDIA 头发区域与图集单项对照在一字节内一致。
+当前图集和完整颜色继续按原门槛验收。

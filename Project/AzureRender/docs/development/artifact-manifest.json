@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-032619-native-object-record-calibration-19d2f9",
+      "name": "原生对象记录标定",
+      "sourceBase": "bc12f32",
+      "evidence": "docs/acceptance/nr/native-object-record-calibration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/native-object-record-calibration/results.json"
+    },
+    {
       "path": "runs/20261112-025941-visibility-projection-depth-c1c792",
       "name": "对象可见量深度方向",
       "sourceBase": "b9fb734",

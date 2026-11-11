@@ -71,6 +71,69 @@ int main(int argc,char** argv)try{
         bad["objectVisibility"]["calibration"][field]=value;
         check(rejectsObjectDocument(bad),"Invalid scene object visibility calibration");
     }
+    auto recordDocument=calibratedDocument;
+    const std::array<float,16> anchorShadow{1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+    const std::array<float,16> authoredShadow{1,0,0,0,0,1,0,0,0,0,-1,0,.125F,.25F,1,1};
+    const std::array<float,3> authoredLight{0,0,1};
+    auto& authoredRecords=recordDocument["objectVisibility"]["calibration"]["objectRecords"];
+    authoredRecords=nlohmann::json::array({{{"atlasPage",6},{"anchorWorldToUnit",anchorShadow},
+        {"referenceToUnit",authoredShadow},{"lightDirection",authoredLight}}});
+    const auto recordView=recordDocument.get<ReferenceCameraView>();
+    check(nlohmann::json(recordView)==recordDocument,"Authored object record round trip");
+    for(const auto& [field,value]:std::array<std::pair<const char*,nlohmann::json>,4>{{
+        {"atlasPage",8},{"anchorWorldToUnit",std::array<float,16>{}},
+        {"referenceToUnit",nlohmann::json::array({1})},{"lightDirection",std::array<float,3>{}}}}){
+        auto bad=recordDocument;
+        bad["objectVisibility"]["calibration"]["objectRecords"][0][field]=value;
+        check(rejectsObjectDocument(bad),"Invalid object projection calibration");
+    }
+    {
+        auto bad=recordDocument;
+        bad["objectVisibility"]["calibration"]["objectRecords"].push_back(authoredRecords.front());
+        check(rejectsObjectDocument(bad),"Duplicate calibrated atlas page");
+    }
+    {
+        const auto& calibration=*recordView.objectVisibility->calibration;
+        ObjectShadowPage page;
+        page.page=6;
+        page.gpu.worldToUnitShadow=anchorShadow;
+        const ReferencePositionFrame frame;
+        auto records=sceneReferenceObjectVisibilityRecords(frame,{page},&calibration);
+        check(records.size()==1&&records[0].worldToUnitShadow==authoredShadow
+            &&records[0].projectionDepth==ScreenObjectDepth::Reversed&&records[0].lightDirection==authoredLight,
+            "Object record anchor preserves authored projection and light");
+        page.page=5;
+        records=sceneReferenceObjectVisibilityRecords(frame,{page},&calibration);
+        check(records[0].worldToUnitShadow==anchorShadow&&!records[0].projectionDepth,
+            "Unselected object page keeps the scene projection");
+        page.page=6;
+        page.gpu.worldToUnitShadow[12]=-.5F;
+        records=sceneReferenceObjectVisibilityRecords(frame,{page},&calibration);
+        const std::array<float,3> point{.25F,.125F,.75F},moved{.75F,.125F,.75F};
+        check(internal::transformPosition(records[0].worldToUnitShadow,moved)==internal::transformPosition(authoredShadow,point)
+            &&records[0].lightDirection==authoredLight,"Object record follows live translation and preserves its light");
+        page.gpu.worldToUnitShadow={1,0,0,0,0,0,1,0,0,-1,0,0,0,0,0,1};
+        records=sceneReferenceObjectVisibilityRecords(frame,{page},&calibration);
+        check(internal::transformPosition(records[0].worldToUnitShadow,point)==internal::transformPosition(authoredShadow,
+                internal::transformPosition(page.gpu.worldToUnitShadow,point))
+            &&records[0].lightDirection==std::array<float,3>{0,1,0},"Object record follows the current light basis");
+
+        auto source=recordView;
+        source.frame.parameters.axes={-3,1,2,0};
+        const PreparedReferenceCameraView initial(source);
+        const ReferenceCameraPose anchor;
+        const ReferenceCameraPose current{{2,3,4},{0,0,-1},{0,1,0},{1,0,0}};
+        const PreparedReferenceCameraView relocated(relocateReferenceCamera(source,anchor,current));
+        const auto beforeFrame=sceneReferenceObjectVisibilityFrame(initial);
+        const auto afterFrame=sceneReferenceObjectVisibilityFrame(relocated);
+        const auto& after=*relocated.descriptor().objectVisibility->calibration;
+        page.gpu.worldToUnitShadow=anchorShadow;
+        const auto first=sceneReferenceObjectVisibilityRecords(beforeFrame,{page},&calibration).front();
+        const auto second=sceneReferenceObjectVisibilityRecords(afterFrame,{page},&after).front();
+        check(internal::transformPosition(first.worldToUnitShadow,referenceRelativePosition(beforeFrame,point))
+            ==internal::transformPosition(second.worldToUnitShadow,referenceRelativePosition(afterFrame,point))
+            &&second.lightDirection==std::array<float,3>{0,1,0},"Camera relocation rebases the same physical object record");
+    }
     auto disabledVisibility=visibilityDocument;
     disabledVisibility["produceSceneVisibilityInputs"]=false;
     check(nlohmann::json(disabledVisibility.get<ReferenceCameraView>())==depthDocument,
