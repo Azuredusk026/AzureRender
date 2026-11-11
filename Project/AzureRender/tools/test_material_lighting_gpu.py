@@ -65,8 +65,17 @@ def field_fixture(folder,kind,mode):
     model['materials'][0]['extras']={'azureRenderMaterial':profile};write(path,model)
     return project,['--qa-isolation','reflection'],np.array([.25,.0625,.125])
 
-def run(player,output,selected=None,backends=('indexed','fixed'),expected_validation='any'):
-    output.mkdir(parents=True,exist_ok=False);modes=['diffuse-default','diffuse-scene','diffuse-global','diffuse-half','diffuse-zero','diffuse-inherit','reflection-default','reflection-scene','reflection-global','reflection-half','composed','mix-diffuse','mix-reflection','field-default','field-diffuse-global'];definitions=[(kind,mode) for kind in ['generic','fabric'] for mode in modes+['object-'+m for m in ['reference','clear','shadow','disabled','legacy','document']]];names={kind+'-'+mode for kind,mode in definitions}
+def run(player,output,selected=None,backends=('indexed','fixed'),expected_validation='any',group=None):
+    output.mkdir(parents=True,exist_ok=False)
+    modes=['diffuse-default','diffuse-scene','diffuse-global','diffuse-half','diffuse-zero','diffuse-inherit',
+           'reflection-default','reflection-scene','reflection-global','reflection-half','composed','mix-diffuse',
+           'mix-reflection','field-default','field-diffuse-global']
+    object_modes=['object-'+mode for mode in ('reference','clear','shadow','disabled','legacy','document')]
+    definitions=[(kind,mode) for kind in ('generic','fabric') for mode in modes+object_modes]
+    if group:
+        definitions=[(kind,mode) for kind,mode in definitions
+                     if group==('object-shadow' if mode in object_modes else kind+'-environment')]
+    names={kind+'-'+mode for kind,mode in definitions}
     if selected:assert set(selected)<=names;definitions=[(k,m) for k,m in definitions if k+'-'+m in selected]
     sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();frozen=dict(playerSha256=sha(player),scriptSha256=sha(Path(__file__)),shaders={p.name:sha(p) for p in (player.parent/'shaders').glob('*.spv')});report=dict(status='running',linearBudget=BUDGET,cases=[],**frozen);images={};env=os.environ.copy();env.setdefault('DOTNET_ROOT','D:/Tools/dotnet9');startup=None
     if hasattr(subprocess,'STARTUPINFO'):startup=subprocess.STARTUPINFO();startup.dwFlags|=subprocess.STARTF_USESHOWWINDOW;startup.wShowWindow=0
@@ -105,8 +114,10 @@ def run(player,output,selected=None,backends=('indexed','fixed'),expected_valida
         write(output/'summary.json',report)
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--player','--executable',dest='player',type=Path,required=True);parser.add_argument('--output',type=Path);parser.add_argument('--case',action='append');parser.add_argument('--backend',action='append',choices=['indexed','fixed']);parser.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any');args=parser.parse_args();engine=Path(__file__).resolve().parents[1];task=None
+    parser=argparse.ArgumentParser();parser.add_argument('--player','--executable',dest='player',type=Path,required=True);parser.add_argument('--output',type=Path);parser.add_argument('--case',action='append');parser.add_argument('--backend',action='append',choices=['indexed','fixed']);parser.add_argument('--expected-validation',choices=['any','enabled','disabled'],default='any')
+    parser.add_argument('--group',choices=('generic-environment','fabric-environment','object-shadow'))
+    args=parser.parse_args();engine=Path(__file__).resolve().parents[1];task=None
     if args.output is None:task=Path(subprocess.check_output([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--new-run','material-lighting-gpu'],cwd=engine,text=True).strip());args.output=task/'validation'
-    try:run(args.player.resolve(),args.output.resolve(),args.case,args.backend or ('indexed','fixed'),args.expected_validation)
+    try:run(args.player.resolve(),args.output.resolve(),args.case,args.backend or ('indexed','fixed'),args.expected_validation,args.group)
     finally:
         if task is not None:subprocess.run([sys.executable,str(engine/'tools/artifact_cleanup.py'),'--finish',str(task)],cwd=engine,check=True)

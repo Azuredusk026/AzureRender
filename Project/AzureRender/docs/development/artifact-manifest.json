@@ -734,6 +734,13 @@
       "sourceBase": "6f1e323",
       "evidence": "docs/acceptance/nr/editor-asset-refresh.md",
       "results": "docs/acceptance/nr/evidence/2026-11-12/editor-asset-refresh/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/material-lighting-shard-evidence",
+      "name": "材质光照回归矩阵",
+      "sourceBase": "ce6381e",
+      "evidence": "docs/acceptance/nr/material-lighting-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/material-lighting-regression/results.json"
     }
   ],
   "preservedBuilds": [
