@@ -866,3 +866,6 @@ Intel 颜色及完整接收按冻结区域继续验收。
 
 [Intel 参考可见量来源](docs/acceptance/nr/intel-reference-visibility-sources.md)记录实际图集及原生选级。
 同输入的参考算术在两块设备满足一字节门槛。
+
+[项目参考可见量算术](docs/acceptance/nr/project-reference-visibility-profile.md)接入编辑器、Player 和发布包。
+Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `ProfileV1` 对照。

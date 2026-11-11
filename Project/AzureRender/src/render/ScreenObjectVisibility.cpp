@@ -37,9 +37,9 @@ VkDeviceSize numericsBytes(const ScreenObjectVisibilityNumerics& config){
     if(config.mode==ScreenObjectVisibilityArithmetic::Device){
         require(config.reciprocalCorrections.empty(),"Device arithmetic requires an empty reciprocal profile");return 4;
     }
-    require(config.reciprocalCorrections.size()==524288,"Reciprocal profile requires exactly 524288 words");
-    for(const auto word:config.reciprocalCorrections)require((word&(word>>1)&0x55555555u)==0,"Reciprocal profile contains a reserved code");
-    return 2097152;
+    require(config.reciprocalCorrections.size()==kScreenObjectVisibilityProfileWords,"Reciprocal profile requires exactly 524288 words");
+    for(const auto word:config.reciprocalCorrections)require(validScreenObjectVisibilityProfileWord(word),"Reciprocal profile contains a reserved code");
+    return kScreenObjectVisibilityProfileBytes;
 }
 PackedFrame pack(VkExtent2D extent,const ScreenObjectVisibilityInputs& inputs,const ScreenObjectVisibilityView& view,const std::vector<ScreenObjectVisibilityRecord>& records){
     require(records.size()<=8,"Visibility supports at most eight object records");

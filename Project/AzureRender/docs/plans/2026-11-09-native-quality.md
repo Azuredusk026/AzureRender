@@ -160,7 +160,10 @@ Intel 的冻结可见量和颜色分别核对设备输入。
 
 [Intel 参考可见量来源](../acceptance/nr/intel-reference-visibility-sources.md)保存固定输入和原生选级读回。
 同输入的 `ProfileV1` 达到接收门槛。
-场景数值配置及纹理梯度继续核对。
+
+[项目参考可见量算术](../acceptance/nr/project-reference-visibility-profile.md)核对编辑器、Player 和发布配置。
+完整接收分别核对事件 377 的法线与事件 422 的深度。
+Intel 头发颜色继续核对纹理梯度与层级选择。
 
 ## 后续外观
 

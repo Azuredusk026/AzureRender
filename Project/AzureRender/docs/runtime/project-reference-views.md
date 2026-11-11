@@ -7,7 +7,7 @@
 
 ## 文件格式
 
-根字段为 `schemaVersion` 和 `views`。
+根字段包含 `schemaVersion` 和 `views`，可选 `objectVisibilityArithmetic`。
 `views` 将稳定名称映射到参考相机视图。
 文件至多 1 MiB，集合至多六十四项。
 名称由一至六十四个 ASCII 字母、数字、点、横线或下划线构成。
@@ -57,6 +57,23 @@
 未知字段、版本及非法数值按输入错误处理。
 所有矩阵、尺寸及数值范围共用参考视图的准备校验。
 
+## 对象可见量算术
+
+`objectVisibilityArithmetic` 省略时使用设备算术。
+设置为 `"profile-v1"` 时使用 `ProfileV1`。
+配置须包含至少一个启用了 `objectVisibility` 的视图。
+
+参考资源位于项目的 `config/object-visibility-profile-v1.bin`。
+文件恰好为 2,097,152 字节，由 524,288 个小端序无符号整数构成。
+每个整数保存十六个两位编码，依次表示倒数的负一码、零码或正一码修正。
+编码三为保留值。
+算术和输入范围见[参考可见量算术](../acceptance/nr/visibility-reference-arithmetic.md)。
+
+Player 启动及项目校验读取同一资源。
+编辑器在项目激活和进入播放时读取配置。
+渲染器持有供各帧槽共享的存储缓冲，设备算术使用四字节占位缓冲。
+游戏发布包收录配置和启用的算术资源，两项均计入文件摘要。
+
 ## 读写与所有权
 
 `loadProjectReferenceViews` 接收已加载的项目。
@@ -66,6 +83,7 @@
 
 `saveProjectReferenceViews` 接收完整集合。
 保存先校验并生成有界文本，再写入同目录临时文件。
+启用 `ProfileV1` 时，保存先核对现有资源的长度和全部编码。
 文件刷新和关闭后，通过重命名替换目标。
 失败时清除所属临时文件，并保留目标内容。
 

@@ -620,6 +620,7 @@ bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
     if(referenceDepthRequested(context)!=static_cast<bool>(referenceSceneDepth_))return false;
     if(referenceSceneDepth_&&referenceSceneDepth_->visibilityInputs()!=referenceVisibilityRequested(context))return false;
     if(referenceObjectVisibilityRequested(context)!=static_cast<bool>(referenceObjectVisibility_))return false;
+    if(referenceObjectVisibility_&&referenceObjectVisibilityNumerics_!=context.referenceObjectVisibilityNumerics)return false;
     if(!objectShadowPrepared_&&std::any_of(context.scene.nodes.begin(),context.scene.nodes.end(),
         [](const auto& node){return node.objectShadow&&node.objectShadow->enabled;}))return false;
     if(scene_.reflectionProbe.texture!=context.scene.reflectionProbe.texture)return false;
@@ -3115,9 +3116,13 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     if(referenceDepthRequested(context))
         referenceSceneDepth_=std::make_unique<SceneReferenceDepthTargets>(*rhi_,context.renderExtent,
             static_cast<unsigned>(kMaxFramesInFlight),referenceVisibilityRequested(context));
-    if(referenceObjectVisibilityRequested(context))
+    if(referenceObjectVisibilityRequested(context)){
+        const ScreenObjectVisibilityNumerics deviceNumerics;
+        const auto& numerics=context.referenceObjectVisibilityNumerics?*context.referenceObjectVisibilityNumerics:deviceNumerics;
         referenceObjectVisibility_=std::make_unique<ScreenObjectVisibilityGpu>(*rhi_,context.renderExtent,
-            static_cast<unsigned>(kMaxFramesInFlight),ScreenObjectVisibilityShaders::load(shaderDirectory_));
+            static_cast<unsigned>(kMaxFramesInFlight),ScreenObjectVisibilityShaders::load(shaderDirectory_),numerics);
+        referenceObjectVisibilityNumerics_=context.referenceObjectVisibilityNumerics;
+    }
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
     for(auto* pipelines:{&referenceSceneDepthPipelines_,&referenceSceneVisibilityPipelines_})
@@ -3128,6 +3133,7 @@ void CharacterSceneRenderer::destroyOverlayDepth(){
     pendingReferenceDepth_.reset();
     submittedReferenceDepth_.reset();
     referenceObjectVisibility_.reset();
+    referenceObjectVisibilityNumerics_.reset();
     referenceSceneDepth_.reset();
     if(referenceObjectIdFallbackView_)rhi_->destroyImageView(referenceObjectIdFallbackView_);
     referenceObjectIdFallbackView_=VK_NULL_HANDLE;

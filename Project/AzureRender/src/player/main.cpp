@@ -10,6 +10,7 @@
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "resources/ResourceLocator.hpp"
 #include "runtime/Project.hpp"
+#include "runtime/ProjectReferenceViews.hpp"
 #include "runtime/AssetDatabase.hpp"
 #include "runtime/Level.hpp"
 #include "assets/GltfLoader.hpp"
@@ -87,6 +88,7 @@ int main(int argc, char** argv) {
             if (projectPath.empty()) throw std::runtime_error("--check-project requires --project");
             const auto& startup=*cli.options.projectStartup;
             const auto& project=startup.project();
+            auto referenceViews=azurerender::loadProjectReferenceViews(project);
             auto assets=startup.assets();
             for (const auto& item : assets.records()) {
                 const auto& path = item.second.path;
@@ -99,6 +101,7 @@ int main(int argc, char** argv) {
             }
             azurerender::RuntimeLifecycle runtime;runtime.loadScene(startup.level().scene);runtime.start();
             azurerender::GameRuntime game(runtime,azurerender::application::systems(),azurerender::application::configuration(project));
+            game.setReferenceViews(std::move(referenceViews.views));
             auto scripts=azurerender::application::scripts(project,runtime,game,assets);scripts->shutdown();
             std::cout << "Project validation passed\n";
             return EXIT_SUCCESS;

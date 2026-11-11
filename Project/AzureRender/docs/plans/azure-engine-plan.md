@@ -1343,4 +1343,7 @@ Intel 的 580 处颜色超差继续按设备输入核对。
 
 [Intel 参考可见量来源](../acceptance/nr/intel-reference-visibility-sources.md)核对实际附件与算术。
 同输入的 `ProfileV1` 在双设备满足一字节门槛。
-场景配置、纹理选级及完整接收继续按冻结区域验收。
+
+[项目参考可见量算术](../acceptance/nr/project-reference-visibility-profile.md)接入实际生产入口。
+完整接收按原生写入事件核对法线与深度。
+Intel 头发颜色继续按冻结区域核对纹理选级。

@@ -118,6 +118,7 @@ private:
     std::optional<PreparedReferenceCameraView> referenceCamera_;
     std::unique_ptr<SceneReferenceDepthTargets> referenceSceneDepth_;
     std::unique_ptr<ScreenObjectVisibilityGpu> referenceObjectVisibility_;
+    std::shared_ptr<const ScreenObjectVisibilityNumerics> referenceObjectVisibilityNumerics_;
     rhi::GpuImage referenceObjectIdFallback_{};
     VkImageView referenceObjectIdFallbackView_{};
     std::array<VkPipeline,3> referenceSceneDepthPipelines_{};

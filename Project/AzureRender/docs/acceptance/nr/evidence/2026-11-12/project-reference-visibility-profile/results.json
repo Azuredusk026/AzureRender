@@ -1,0 +1,2480 @@
+{
+  "status": "qualified-project-reference-visibility-profile",
+  "overall": "failed-user-review",
+  "baseCommit": "3dc8cce41e9b632386ffdf2be47d4234fa8ccbd0",
+  "sceneRendererApiVersion": 16,
+  "acceptedMaximumByteError": 1,
+  "fixture": [
+    {
+      "relative": "assets/captured-rim-policy.azurematerial",
+      "bytes": 146,
+      "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610"
+    },
+    {
+      "relative": "assets/captured-rim-policy.azurematerial.azmeta",
+      "bytes": 102,
+      "sha256": "9713de607cbd28be933ca04d4538b4482da8aa060b27e728748008134fba4963"
+    },
+    {
+      "relative": "assets/hair-coverage.azurelevel",
+      "bytes": 15661,
+      "sha256": "85d82573dca382b236ba1e54f83e22625f703092ca9c6225c3b04fc6705c2c2d"
+    },
+    {
+      "relative": "character/captured-hair-normal.dds",
+      "bytes": 5592580,
+      "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+    },
+    {
+      "relative": "character/captured-hair-normal.dds.azmeta",
+      "bytes": 449,
+      "sha256": "bc0ceb65e52c31e1beec370ab08324c9f78d36da9f74ea0602ffd8485cda00e0"
+    },
+    {
+      "relative": "character/hair-base-coverage.dds",
+      "bytes": 22369768,
+      "sha256": "0bf35700e233f4b70351b604ac5e2a187fc5bddcc3a4805e68d105178d387cdf"
+    },
+    {
+      "relative": "character/hair-base-coverage.dds.azmeta",
+      "bytes": 276,
+      "sha256": "89f3a09368493d4152d2cc2e9eb1358bd7aa57c0e47bd178d818c3b02370606a"
+    },
+    {
+      "relative": "character/hair-coverage.glb",
+      "bytes": 118802964,
+      "sha256": "849282e0b6a7a7681aba32b336b546a588044b1f19ca889100015a7379ed5169"
+    },
+    {
+      "relative": "character/hair-native-mask.dds",
+      "bytes": 349700,
+      "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+    },
+    {
+      "relative": "character/hair-native-mask.dds.azmeta",
+      "bytes": 284,
+      "sha256": "fda0cd1353d35fc30499bababe7108dc7b55f1953a7d888327cb13e08715dc38"
+    },
+    {
+      "relative": "character/native-captured-body/t12.dds",
+      "bytes": 32916,
+      "sha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86"
+    },
+    {
+      "relative": "character/native-captured-body/t12.dds.azmeta",
+      "bytes": 248,
+      "sha256": "c9d6333d1c222df672cc44a3bd2a04f4c3b38a69ea52776e7acc61da82988efc"
+    },
+    {
+      "relative": "character/native-captured-body/t14.dds",
+      "bytes": 1398276,
+      "sha256": "2ac9344b3693fefd3b74ecfc2b4f6212920b1754173b8212a8f35fcea634a068"
+    },
+    {
+      "relative": "character/native-captured-body/t14.dds.azmeta",
+      "bytes": 313,
+      "sha256": "40e77548c2e30bf462b0c73b7682fcdbb809cc36a5a1ccf44ab9b982d9e354af"
+    },
+    {
+      "relative": "character/native-captured-body/t15.dds",
+      "bytes": 1398256,
+      "sha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e"
+    },
+    {
+      "relative": "character/native-captured-body/t15.dds.azmeta",
+      "bytes": 315,
+      "sha256": "34d6e6c85fb219367669af101852aa97e69b50aa6f86259c78647fe9fd38667b"
+    },
+    {
+      "relative": "character/native-cloth-04/t11.dds",
+      "bytes": 1152,
+      "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+    },
+    {
+      "relative": "character/native-cloth-04/t11.dds.azmeta",
+      "bytes": 308,
+      "sha256": "5e236bb42f260f9d93ebfb96ad00cde286b8c7696a9db54b566d226efccdcf62"
+    },
+    {
+      "relative": "character/native-cloth-04/t12.dds",
+      "bytes": 262272,
+      "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+    },
+    {
+      "relative": "character/native-cloth-04/t12.dds.azmeta",
+      "bytes": 308,
+      "sha256": "5721acbb474adc88f7aced20f4469abe0afdf8a733e44936c063c9fcf780fbea"
+    },
+    {
+      "relative": "character/native-cloth-04/t16.dds",
+      "bytes": 5592580,
+      "sha256": "c7ea4150acd1461cfe37bf7bfacdb197dd05ab7193e1ca245ab445c4e2fb2324"
+    },
+    {
+      "relative": "character/native-cloth-04/t16.dds.azmeta",
+      "bytes": 313,
+      "sha256": "da711fd4600449805a0ecd012d47fb995744e9ce5d83c5d53775a3d24626b17e"
+    },
+    {
+      "relative": "character/native-cloth-04/t17.dds",
+      "bytes": 22369748,
+      "sha256": "38a520d6eca0f00bb8cb852679ddcd2fe1bf9c6cac7fa725c5918a5d8139dedd"
+    },
+    {
+      "relative": "character/native-cloth-04/t17.dds.azmeta",
+      "bytes": 315,
+      "sha256": "3219753dc58632e55ffb6382a03ae121b8f975fee7605179d076c93a953979fd"
+    },
+    {
+      "relative": "character/native-cloth-04/t18.dds",
+      "bytes": 5592560,
+      "sha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a"
+    },
+    {
+      "relative": "character/native-cloth-04/t18.dds.azmeta",
+      "bytes": 315,
+      "sha256": "cd2b4563b895a54aa2fd7d66b1845f6034ae7c39e2cfb76eb731461af8357da5"
+    },
+    {
+      "relative": "character/native-coverage.dds",
+      "bytes": 349700,
+      "sha256": "a093f699c9c13b33a5943dedb93be626dea9ba5f60b715d44f5f8c54bbd2327a"
+    },
+    {
+      "relative": "character/native-coverage.dds.azmeta",
+      "bytes": 447,
+      "sha256": "049a068f29023607ac692fd6ec1f3c06cd95ce3b5758f544ea298dd898a6300b"
+    },
+    {
+      "relative": "character/native-textures/t12.dds",
+      "bytes": 349700,
+      "sha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4"
+    },
+    {
+      "relative": "character/native-textures/t12.dds.azmeta",
+      "bytes": 275,
+      "sha256": "26b33755b6147c0ccd111c34135d2e672f8bcc382a4543b0c7ad7d306aab0feb"
+    },
+    {
+      "relative": "character/native-textures/t13.dds",
+      "bytes": 1152,
+      "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05"
+    },
+    {
+      "relative": "character/native-textures/t13.dds.azmeta",
+      "bytes": 275,
+      "sha256": "6685acf498b42fac7a5c835a7d05d825357dae277f9208703f6dd81cc0595878"
+    },
+    {
+      "relative": "character/native-textures/t14.dds",
+      "bytes": 262272,
+      "sha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4"
+    },
+    {
+      "relative": "character/native-textures/t14.dds.azmeta",
+      "bytes": 275,
+      "sha256": "199e566d2b499f5f0e6e14d62d4bfbde1c0eb38ab117d0ec2bc07d475984bad5"
+    },
+    {
+      "relative": "character/native-textures/t16.dds",
+      "bytes": 5592580,
+      "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643"
+    },
+    {
+      "relative": "character/native-textures/t16.dds.azmeta",
+      "bytes": 276,
+      "sha256": "dacb8a62aa4be5365c908e59ad3b2c1986bb989f47a77cbd96334aca8cb5c85a"
+    },
+    {
+      "relative": "character/native-textures/t17.dds",
+      "bytes": 5592580,
+      "sha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995"
+    },
+    {
+      "relative": "character/native-textures/t17.dds.azmeta",
+      "bytes": 276,
+      "sha256": "bac274600e7eb80e83ec42184de60626ca36ed5d8aa2e27d7ca16c14952f55fd"
+    },
+    {
+      "relative": "character/native-textures/t18.dds",
+      "bytes": 5592580,
+      "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+    },
+    {
+      "relative": "character/native-textures/t18.dds.azmeta",
+      "bytes": 276,
+      "sha256": "424080184b3c22c286c90596bc4e843a0beedb5d5801be069539208b84a6a33d"
+    },
+    {
+      "relative": "config/object-visibility-profile-v1.bin",
+      "bytes": 2097152,
+      "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+    },
+    {
+      "relative": "config/reference-views.json",
+      "bytes": 3691,
+      "sha256": "16835eb74fe5af7cb9a6f0df2f6309016f6d0d945293bc985d146f73639333bb"
+    },
+    {
+      "relative": "hair-coverage.azureproject",
+      "bytes": 312,
+      "sha256": "2fa150253f5641bd67c1da3bb854efb1acd90c7dd90e76232996e63ce043c393"
+    }
+  ],
+  "builds": {
+    "release": {
+      "configuration": "Release",
+      "shaderCount": 891,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility)|AzureEngine[.]ProjectReferenceViews|AzureEditor[.]ProjectFlow)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\release-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "e33361ab31402f679b70a561ee7ecec53bb3d12b65eeb78955e01e14c487aff2",
+      "tests": 6
+    },
+    "debug": {
+      "configuration": "Debug",
+      "shaderCount": 891,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility)|AzureEngine[.]ProjectReferenceViews)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\debug-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "42590ef083c61edbe88a3cdfa6df239c1d8316ce5ccda81a6a9c3f74e568eee0",
+      "tests": 5
+    },
+    "release-nvidia-gpu": {
+      "configuration": "Release",
+      "shaderCount": 891,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\release-nvidia-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "e33361ab31402f679b70a561ee7ecec53bb3d12b65eeb78955e01e14c487aff2",
+      "tests": 4
+    },
+    "release-intel-gpu": {
+      "configuration": "Release",
+      "shaderCount": 891,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\release-intel-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "e33361ab31402f679b70a561ee7ecec53bb3d12b65eeb78955e01e14c487aff2",
+      "tests": 4
+    },
+    "debug-nvidia-gpu": {
+      "configuration": "Debug",
+      "shaderCount": 891,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\debug-nvidia-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "42590ef083c61edbe88a3cdfa6df239c1d8316ce5ccda81a6a9c3f74e568eee0",
+      "tests": 4
+    },
+    "debug-intel-gpu": {
+      "configuration": "Debug",
+      "shaderCount": 891,
+      "changedShaders": {},
+      "ctestCommand": [
+        "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+        "--test-dir",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-031856-hair-main-chroma-debug-668bf2\\debug",
+        "-R",
+        "^AzureRender[.](ScreenObjectVisibility(Gpu|ReferenceGpu)|ReferenceDepth(Coverage)?Gpu)$",
+        "--no-tests=error",
+        "--output-on-failure",
+        "--output-junit",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\debug-intel-gpu-ctest.xml"
+      ],
+      "ctestExit": 0,
+      "playerSha256": "42590ef083c61edbe88a3cdfa6df239c1d8316ce5ccda81a6a9c3f74e568eee0",
+      "tests": 4
+    }
+  },
+  "captures": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "program": "actual Player with project ProfileV1",
+      "visibilitySha256": "5abbfa11116ada7a4c1c31220496cc2e22c1f00f96f2138b427ba49c586d94ac",
+      "referenceDepthSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "referenceNormalsSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "colors": [
+        "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76",
+        "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76",
+        "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76"
+      ],
+      "colorHair": {
+        "pixels": 17017,
+        "exact": 10977,
+        "overOne": 0,
+        "maximum": 1,
+        "mean": 0.1364713717654894
+      },
+      "colorHairBaseline": {
+        "pixels": 17017,
+        "exact": 10977,
+        "overOne": 0,
+        "maximum": 1,
+        "mean": 0.1364713717654894
+      },
+      "hair": {
+        "pixels": 17017,
+        "exact": 17013,
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0,
+        "maximum": 1,
+        "median": 0.0,
+        "samples": []
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 46231,
+        "overOne": 2736,
+        "baselineOverOne": 2736,
+        "closed": 0,
+        "introduced": 0,
+        "maximum": 255,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            154,
+            242,
+            236
+          ],
+          [
+            1278,
+            155,
+            207,
+            194
+          ],
+          [
+            1299,
+            155,
+            232,
+            224
+          ],
+          [
+            1265,
+            157,
+            116,
+            95
+          ],
+          [
+            1260,
+            160,
+            105,
+            116
+          ],
+          [
+            1270,
+            161,
+            170,
+            253
+          ],
+          [
+            1232,
+            163,
+            11,
+            187
+          ],
+          [
+            1271,
+            163,
+            19,
+            255
+          ],
+          [
+            1272,
+            163,
+            23,
+            255
+          ],
+          [
+            1273,
+            163,
+            13,
+            255
+          ],
+          [
+            1274,
+            163,
+            13,
+            255
+          ],
+          [
+            1297,
+            163,
+            77,
+            255
+          ],
+          [
+            1299,
+            163,
+            23,
+            255
+          ],
+          [
+            1300,
+            163,
+            31,
+            255
+          ],
+          [
+            1269,
+            164,
+            2,
+            250
+          ],
+          [
+            1270,
+            164,
+            7,
+            254
+          ],
+          [
+            1275,
+            164,
+            27,
+            254
+          ],
+          [
+            1296,
+            164,
+            77,
+            255
+          ],
+          [
+            1301,
+            164,
+            54,
+            255
+          ],
+          [
+            1233,
+            165,
+            16,
+            250
+          ],
+          [
+            1268,
+            165,
+            0,
+            255
+          ],
+          [
+            1269,
+            165,
+            0,
+            208
+          ],
+          [
+            1270,
+            165,
+            0,
+            232
+          ],
+          [
+            1271,
+            165,
+            0,
+            194
+          ],
+          [
+            1272,
+            165,
+            0,
+            213
+          ]
+        ]
+      },
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "program": "actual Player with project ProfileV1",
+      "visibilitySha256": "d54b15c7a622e089c89883abca66ca377632e425a7f7ceeff6074f97b79ae5d3",
+      "referenceDepthSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "referenceNormalsSha256": "c54e38d52bbcfc8618345e2f0d1dd38d155ee8da467a1d531fc1845c1b9ca798",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "colors": [
+        "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3",
+        "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3",
+        "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3"
+      ],
+      "colorHair": {
+        "pixels": 17017,
+        "exact": 11414,
+        "overOne": 575,
+        "maximum": 97,
+        "mean": 0.21059332824038707
+      },
+      "colorHairBaseline": {
+        "pixels": 17017,
+        "exact": 11408,
+        "overOne": 580,
+        "maximum": 97,
+        "mean": 0.21123974065150536
+      },
+      "hair": {
+        "pixels": 17017,
+        "exact": 16682,
+        "overOne": 208,
+        "baselineOverOne": 236,
+        "closed": 42,
+        "introduced": 14,
+        "maximum": 51,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            153,
+            254,
+            251
+          ],
+          [
+            1278,
+            154,
+            244,
+            236
+          ],
+          [
+            1304,
+            155,
+            219,
+            208
+          ],
+          [
+            1276,
+            166,
+            116,
+            95
+          ],
+          [
+            1294,
+            166,
+            27,
+            54
+          ],
+          [
+            1295,
+            166,
+            36,
+            23
+          ],
+          [
+            1292,
+            169,
+            239,
+            232
+          ],
+          [
+            1293,
+            170,
+            242,
+            244
+          ],
+          [
+            1297,
+            171,
+            27,
+            19
+          ],
+          [
+            1294,
+            172,
+            4,
+            7
+          ],
+          [
+            1298,
+            172,
+            36,
+            27
+          ],
+          [
+            1298,
+            173,
+            42,
+            36
+          ],
+          [
+            1292,
+            174,
+            3,
+            1
+          ],
+          [
+            1278,
+            175,
+            150,
+            139
+          ],
+          [
+            1284,
+            175,
+            242,
+            236
+          ],
+          [
+            1296,
+            175,
+            14,
+            16
+          ],
+          [
+            1295,
+            177,
+            208,
+            201
+          ],
+          [
+            1326,
+            177,
+            19,
+            23
+          ],
+          [
+            1272,
+            178,
+            139,
+            127
+          ],
+          [
+            1297,
+            178,
+            244,
+            246
+          ],
+          [
+            1266,
+            179,
+            19,
+            13
+          ],
+          [
+            1296,
+            179,
+            246,
+            244
+          ],
+          [
+            1260,
+            180,
+            19,
+            13
+          ],
+          [
+            1265,
+            181,
+            178,
+            187
+          ],
+          [
+            1303,
+            182,
+            219,
+            224
+          ]
+        ]
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45787,
+        "overOne": 2981,
+        "baselineOverOne": 3031,
+        "closed": 90,
+        "introduced": 40,
+        "maximum": 255,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            153,
+            254,
+            251
+          ],
+          [
+            1271,
+            154,
+            242,
+            236
+          ],
+          [
+            1278,
+            154,
+            244,
+            236
+          ],
+          [
+            1278,
+            155,
+            201,
+            194
+          ],
+          [
+            1299,
+            155,
+            232,
+            224
+          ],
+          [
+            1304,
+            155,
+            219,
+            208
+          ],
+          [
+            1265,
+            157,
+            116,
+            95
+          ],
+          [
+            1260,
+            160,
+            105,
+            116
+          ],
+          [
+            1270,
+            161,
+            170,
+            253
+          ],
+          [
+            1232,
+            163,
+            7,
+            187
+          ],
+          [
+            1271,
+            163,
+            19,
+            255
+          ],
+          [
+            1272,
+            163,
+            23,
+            255
+          ],
+          [
+            1273,
+            163,
+            13,
+            255
+          ],
+          [
+            1274,
+            163,
+            13,
+            255
+          ],
+          [
+            1297,
+            163,
+            77,
+            255
+          ],
+          [
+            1299,
+            163,
+            23,
+            255
+          ],
+          [
+            1300,
+            163,
+            31,
+            255
+          ],
+          [
+            1269,
+            164,
+            2,
+            250
+          ],
+          [
+            1270,
+            164,
+            7,
+            254
+          ],
+          [
+            1275,
+            164,
+            54,
+            254
+          ],
+          [
+            1296,
+            164,
+            77,
+            255
+          ],
+          [
+            1301,
+            164,
+            54,
+            255
+          ],
+          [
+            1233,
+            165,
+            19,
+            250
+          ],
+          [
+            1268,
+            165,
+            0,
+            255
+          ],
+          [
+            1269,
+            165,
+            0,
+            208
+          ]
+        ]
+      },
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "program": "actual Player with project ProfileV1",
+      "visibilitySha256": "5abbfa11116ada7a4c1c31220496cc2e22c1f00f96f2138b427ba49c586d94ac",
+      "referenceDepthSha256": "76b408186899e8a0cab586054933d9974ee59eed59d264f185cb36ced5878e0e",
+      "referenceNormalsSha256": "cbe0d3780970ca90e61aecb34b4e890ddfa3d9d89aec0aafaabf29c6f4ed12e5",
+      "objectIdsSha256": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+      "colors": [
+        "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76",
+        "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76",
+        "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76"
+      ],
+      "colorHair": {
+        "pixels": 17017,
+        "exact": 10977,
+        "overOne": 0,
+        "maximum": 1,
+        "mean": 0.1364713717654894
+      },
+      "colorHairBaseline": {
+        "pixels": 17017,
+        "exact": 10977,
+        "overOne": 0,
+        "maximum": 1,
+        "mean": 0.1364713717654894
+      },
+      "hair": {
+        "pixels": 17017,
+        "exact": 17013,
+        "overOne": 0,
+        "baselineOverOne": 0,
+        "closed": 0,
+        "introduced": 0,
+        "maximum": 1,
+        "median": 0.0,
+        "samples": []
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 46231,
+        "overOne": 2736,
+        "baselineOverOne": 2736,
+        "closed": 0,
+        "introduced": 0,
+        "maximum": 255,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            154,
+            242,
+            236
+          ],
+          [
+            1278,
+            155,
+            207,
+            194
+          ],
+          [
+            1299,
+            155,
+            232,
+            224
+          ],
+          [
+            1265,
+            157,
+            116,
+            95
+          ],
+          [
+            1260,
+            160,
+            105,
+            116
+          ],
+          [
+            1270,
+            161,
+            170,
+            253
+          ],
+          [
+            1232,
+            163,
+            11,
+            187
+          ],
+          [
+            1271,
+            163,
+            19,
+            255
+          ],
+          [
+            1272,
+            163,
+            23,
+            255
+          ],
+          [
+            1273,
+            163,
+            13,
+            255
+          ],
+          [
+            1274,
+            163,
+            13,
+            255
+          ],
+          [
+            1297,
+            163,
+            77,
+            255
+          ],
+          [
+            1299,
+            163,
+            23,
+            255
+          ],
+          [
+            1300,
+            163,
+            31,
+            255
+          ],
+          [
+            1269,
+            164,
+            2,
+            250
+          ],
+          [
+            1270,
+            164,
+            7,
+            254
+          ],
+          [
+            1275,
+            164,
+            27,
+            254
+          ],
+          [
+            1296,
+            164,
+            77,
+            255
+          ],
+          [
+            1301,
+            164,
+            54,
+            255
+          ],
+          [
+            1233,
+            165,
+            16,
+            250
+          ],
+          [
+            1268,
+            165,
+            0,
+            255
+          ],
+          [
+            1269,
+            165,
+            0,
+            208
+          ],
+          [
+            1270,
+            165,
+            0,
+            232
+          ],
+          [
+            1271,
+            165,
+            0,
+            194
+          ],
+          [
+            1272,
+            165,
+            0,
+            213
+          ]
+        ]
+      },
+      "validationClean": true,
+      "allocatorZero": true
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "program": "actual Player with project ProfileV1",
+      "visibilitySha256": "d54b15c7a622e089c89883abca66ca377632e425a7f7ceeff6074f97b79ae5d3",
+      "referenceDepthSha256": "10919eec626e6659aaec6248e7f1282a8419a2c144082cb84ee6cb4c29602c6d",
+      "referenceNormalsSha256": "c54e38d52bbcfc8618345e2f0d1dd38d155ee8da467a1d531fc1845c1b9ca798",
+      "objectIdsSha256": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+      "colors": [
+        "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3",
+        "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3",
+        "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3"
+      ],
+      "colorHair": {
+        "pixels": 17017,
+        "exact": 11414,
+        "overOne": 575,
+        "maximum": 97,
+        "mean": 0.21059332824038707
+      },
+      "colorHairBaseline": {
+        "pixels": 17017,
+        "exact": 11408,
+        "overOne": 580,
+        "maximum": 97,
+        "mean": 0.21123974065150536
+      },
+      "hair": {
+        "pixels": 17017,
+        "exact": 16682,
+        "overOne": 208,
+        "baselineOverOne": 236,
+        "closed": 42,
+        "introduced": 14,
+        "maximum": 51,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            153,
+            254,
+            251
+          ],
+          [
+            1278,
+            154,
+            244,
+            236
+          ],
+          [
+            1304,
+            155,
+            219,
+            208
+          ],
+          [
+            1276,
+            166,
+            116,
+            95
+          ],
+          [
+            1294,
+            166,
+            27,
+            54
+          ],
+          [
+            1295,
+            166,
+            36,
+            23
+          ],
+          [
+            1292,
+            169,
+            239,
+            232
+          ],
+          [
+            1293,
+            170,
+            242,
+            244
+          ],
+          [
+            1297,
+            171,
+            27,
+            19
+          ],
+          [
+            1294,
+            172,
+            4,
+            7
+          ],
+          [
+            1298,
+            172,
+            36,
+            27
+          ],
+          [
+            1298,
+            173,
+            42,
+            36
+          ],
+          [
+            1292,
+            174,
+            3,
+            1
+          ],
+          [
+            1278,
+            175,
+            150,
+            139
+          ],
+          [
+            1284,
+            175,
+            242,
+            236
+          ],
+          [
+            1296,
+            175,
+            14,
+            16
+          ],
+          [
+            1295,
+            177,
+            208,
+            201
+          ],
+          [
+            1326,
+            177,
+            19,
+            23
+          ],
+          [
+            1272,
+            178,
+            139,
+            127
+          ],
+          [
+            1297,
+            178,
+            244,
+            246
+          ],
+          [
+            1266,
+            179,
+            19,
+            13
+          ],
+          [
+            1296,
+            179,
+            246,
+            244
+          ],
+          [
+            1260,
+            180,
+            19,
+            13
+          ],
+          [
+            1265,
+            181,
+            178,
+            187
+          ],
+          [
+            1303,
+            182,
+            219,
+            224
+          ]
+        ]
+      },
+      "receiver": {
+        "pixels": 49384,
+        "exact": 45787,
+        "overOne": 2981,
+        "baselineOverOne": 3031,
+        "closed": 90,
+        "introduced": 40,
+        "maximum": 255,
+        "median": 0.0,
+        "samples": [
+          [
+            1271,
+            153,
+            254,
+            251
+          ],
+          [
+            1271,
+            154,
+            242,
+            236
+          ],
+          [
+            1278,
+            154,
+            244,
+            236
+          ],
+          [
+            1278,
+            155,
+            201,
+            194
+          ],
+          [
+            1299,
+            155,
+            232,
+            224
+          ],
+          [
+            1304,
+            155,
+            219,
+            208
+          ],
+          [
+            1265,
+            157,
+            116,
+            95
+          ],
+          [
+            1260,
+            160,
+            105,
+            116
+          ],
+          [
+            1270,
+            161,
+            170,
+            253
+          ],
+          [
+            1232,
+            163,
+            7,
+            187
+          ],
+          [
+            1271,
+            163,
+            19,
+            255
+          ],
+          [
+            1272,
+            163,
+            23,
+            255
+          ],
+          [
+            1273,
+            163,
+            13,
+            255
+          ],
+          [
+            1274,
+            163,
+            13,
+            255
+          ],
+          [
+            1297,
+            163,
+            77,
+            255
+          ],
+          [
+            1299,
+            163,
+            23,
+            255
+          ],
+          [
+            1300,
+            163,
+            31,
+            255
+          ],
+          [
+            1269,
+            164,
+            2,
+            250
+          ],
+          [
+            1270,
+            164,
+            7,
+            254
+          ],
+          [
+            1275,
+            164,
+            54,
+            254
+          ],
+          [
+            1296,
+            164,
+            77,
+            255
+          ],
+          [
+            1301,
+            164,
+            54,
+            255
+          ],
+          [
+            1233,
+            165,
+            19,
+            250
+          ],
+          [
+            1268,
+            165,
+            0,
+            255
+          ],
+          [
+            1269,
+            165,
+            0,
+            208
+          ]
+        ]
+      },
+      "validationClean": true,
+      "allocatorZero": true
+    }
+  },
+  "profileBinding": {
+    "status": "qualified",
+    "captureReceipt": {
+      "artifacts": [
+        {
+          "path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\profile-binding\\capture_frame3.rdc",
+          "bytes": 57454325,
+          "sha256": "cf63369d785820b714bc2c633236a04a7229283f444de084a7b04773c41cb2c0"
+        }
+      ],
+      "capture_options": {
+        "apiValidation": true,
+        "debugOutputMute": false,
+        "hookIntoChildren": false,
+        "refAllResources": false
+      },
+      "messages": [
+        {
+          "type": "TargetControlMessageType.CapturableWindowCount",
+          "at_unix": 1794439090.238799
+        },
+        {
+          "type": "TargetControlMessageType.RegisterAPI",
+          "at_unix": 1794439091.198859
+        },
+        {
+          "type": "TargetControlMessageType.RegisterAPI",
+          "at_unix": 1794439094.1754806
+        },
+        {
+          "type": "TargetControlMessageType.CaptureProgress",
+          "at_unix": 1794439094.208004
+        },
+        {
+          "type": "TargetControlMessageType.CaptureProgress",
+          "at_unix": 1794439094.3231516
+        },
+        {
+          "type": "TargetControlMessageType.NewCapture",
+          "at_unix": 1794439094.4248958
+        }
+      ],
+      "source_identity_scope": "explicit launch executable",
+      "execute_result": "<Result: 'Success'>",
+      "ident": 38920,
+      "pid": 14704,
+      "target": "AzurePlayer",
+      "api_at_connection": "",
+      "capture": {
+        "path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\profile-binding\\capture_frame3.rdc",
+        "bytes": 57454325,
+        "sha256": "cf63369d785820b714bc2c633236a04a7229283f444de084a7b04773c41cb2c0"
+      },
+      "capture_frame": 3,
+      "api": "Vulkan",
+      "status": "captured"
+    },
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "event": 116,
+    "shaderSha256": "068411f6f0c2bab090849a8f936d52db8a689083bfcae6a7ccc1f26902370d6b",
+    "profile": {
+      "set": 0,
+      "binding": 5,
+      "resource": "ResourceId::584",
+      "offset": 0,
+      "bytes": 2097152,
+      "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+    },
+    "uniform": {
+      "bytes": 992,
+      "sha256": "9bf8d6dd677a4a0affc06871e53004eb54f926f86642b209460be1dd1542d2cb",
+      "control": [
+        1,
+        3,
+        3,
+        0
+      ]
+    },
+    "debugMessages": []
+  },
+  "receiverSourceAttribution": {
+    "296": {
+      "samples": 496,
+      "hair": 0,
+      "profileOutsideHair": 129,
+      "profileOver64": 50,
+      "inputs": {
+        "depthAll": {
+          "exact": 174,
+          "withinOne": 332,
+          "quantiles": [
+            0.0,
+            0.0,
+            1.0,
+            18166.25,
+            75654.0,
+            95475.40000000001,
+            123266.0
+          ]
+        },
+        "depthResidual": {
+          "exact": 8,
+          "withinOne": 13,
+          "quantiles": [
+            0.0,
+            49223.0,
+            63408.0,
+            83257.0,
+            87928.4,
+            110645.91999999998,
+            123266.0
+          ]
+        },
+        "normalAll": {
+          "exact": 0,
+          "withinOne": 156,
+          "quantiles": [
+            1.0,
+            1.0,
+            2.0,
+            30.0,
+            89.5,
+            328.20000000000005,
+            417.0
+          ]
+        },
+        "normalResidual": {
+          "exact": 0,
+          "withinOne": 4,
+          "quantiles": [
+            1.0,
+            41.0,
+            67.0,
+            102.0,
+            138.20000000000002,
+            416.0,
+            417.0
+          ]
+        }
+      },
+      "cases": {
+        "intel-device": {
+          "overOne": 129,
+          "closed": 2,
+          "added": 2,
+          "maximum": 251
+        },
+        "intel-profile": {
+          "overOne": 129,
+          "closed": 0,
+          "added": 0,
+          "maximum": 251
+        },
+        "intel-native-atlas": {
+          "overOne": 129,
+          "closed": 0,
+          "added": 0,
+          "maximum": 251
+        },
+        "intel-native-depth": {
+          "overOne": 123,
+          "closed": 9,
+          "added": 3,
+          "maximum": 121
+        },
+        "intel-native-normal": {
+          "overOne": 118,
+          "closed": 12,
+          "added": 1,
+          "maximum": 251
+        },
+        "intel-native-all": {
+          "overOne": 0,
+          "closed": 129,
+          "added": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "310": {
+      "samples": 255,
+      "hair": 0,
+      "profileOutsideHair": 2,
+      "profileOver64": 0,
+      "inputs": {
+        "depthAll": {
+          "exact": 136,
+          "withinOne": 233,
+          "quantiles": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            4.0,
+            5.0
+          ]
+        },
+        "depthResidual": {
+          "exact": 0,
+          "withinOne": 1,
+          "quantiles": [
+            1.0,
+            2.0,
+            3.0,
+            4.0,
+            4.6,
+            4.96,
+            5.0
+          ]
+        },
+        "normalAll": {
+          "exact": 0,
+          "withinOne": 132,
+          "quantiles": [
+            1.0,
+            1.0,
+            1.0,
+            2.0,
+            2.0,
+            3.0,
+            3.0
+          ]
+        },
+        "normalResidual": {
+          "exact": 0,
+          "withinOne": 2,
+          "quantiles": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "cases": {
+        "intel-device": {
+          "overOne": 1,
+          "closed": 1,
+          "added": 0,
+          "maximum": 2
+        },
+        "intel-profile": {
+          "overOne": 2,
+          "closed": 0,
+          "added": 0,
+          "maximum": 6
+        },
+        "intel-native-atlas": {
+          "overOne": 2,
+          "closed": 0,
+          "added": 0,
+          "maximum": 6
+        },
+        "intel-native-depth": {
+          "overOne": 0,
+          "closed": 2,
+          "added": 0,
+          "maximum": 1
+        },
+        "intel-native-normal": {
+          "overOne": 2,
+          "closed": 0,
+          "added": 0,
+          "maximum": 6
+        },
+        "intel-native-all": {
+          "overOne": 0,
+          "closed": 2,
+          "added": 0,
+          "maximum": 0
+        }
+      }
+    },
+    "328": {
+      "samples": 9116,
+      "hair": 0,
+      "profileOutsideHair": 126,
+      "profileOver64": 31,
+      "inputs": {
+        "depthAll": {
+          "exact": 3546,
+          "withinOne": 7791,
+          "quantiles": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            3.0,
+            30.850000000000364,
+            320971.0
+          ]
+        },
+        "depthResidual": {
+          "exact": 20,
+          "withinOne": 60,
+          "quantiles": [
+            0.0,
+            1.0,
+            2.0,
+            83747.5,
+            116878.5,
+            215833.75,
+            320971.0
+          ]
+        },
+        "normalAll": {
+          "exact": 5120,
+          "withinOne": 8840,
+          "quantiles": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            2.0,
+            32.0
+          ]
+        },
+        "normalResidual": {
+          "exact": 55,
+          "withinOne": 126,
+          "quantiles": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "cases": {
+        "intel-device": {
+          "overOne": 143,
+          "closed": 5,
+          "added": 22,
+          "maximum": 251
+        },
+        "intel-profile": {
+          "overOne": 126,
+          "closed": 0,
+          "added": 0,
+          "maximum": 251
+        },
+        "intel-native-atlas": {
+          "overOne": 125,
+          "closed": 1,
+          "added": 0,
+          "maximum": 251
+        },
+        "intel-native-depth": {
+          "overOne": 44,
+          "closed": 88,
+          "added": 6,
+          "maximum": 23
+        },
+        "intel-native-normal": {
+          "overOne": 91,
+          "closed": 42,
+          "added": 7,
+          "maximum": 251
+        },
+        "intel-native-all": {
+          "overOne": 0,
+          "closed": 126,
+          "added": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "345": {
+      "samples": 3825,
+      "hair": 0,
+      "profileOutsideHair": 236,
+      "profileOver64": 53,
+      "inputs": {
+        "depthAll": {
+          "exact": 1028,
+          "withinOne": 1999,
+          "quantiles": [
+            0.0,
+            0.0,
+            1.0,
+            16.0,
+            50.0,
+            78044.7199999999,
+            356257.0
+          ]
+        },
+        "depthResidual": {
+          "exact": 57,
+          "withinOne": 104,
+          "quantiles": [
+            0.0,
+            1.0,
+            11.5,
+            66691.5,
+            87155.5,
+            120728.55,
+            356257.0
+          ]
+        },
+        "normalAll": {
+          "exact": 1,
+          "withinOne": 1850,
+          "quantiles": [
+            0.0,
+            1.0,
+            2.0,
+            2.0,
+            2.0,
+            3.0,
+            341.0
+          ]
+        },
+        "normalResidual": {
+          "exact": 0,
+          "withinOne": 85,
+          "quantiles": [
+            1.0,
+            1.0,
+            2.0,
+            2.0,
+            2.0,
+            3.0,
+            3.0
+          ]
+        }
+      },
+      "cases": {
+        "intel-device": {
+          "overOne": 243,
+          "closed": 12,
+          "added": 19,
+          "maximum": 255
+        },
+        "intel-profile": {
+          "overOne": 236,
+          "closed": 0,
+          "added": 0,
+          "maximum": 255
+        },
+        "intel-native-atlas": {
+          "overOne": 236,
+          "closed": 0,
+          "added": 0,
+          "maximum": 255
+        },
+        "intel-native-depth": {
+          "overOne": 133,
+          "closed": 122,
+          "added": 19,
+          "maximum": 29
+        },
+        "intel-native-normal": {
+          "overOne": 149,
+          "closed": 103,
+          "added": 16,
+          "maximum": 255
+        },
+        "intel-native-all": {
+          "overOne": 0,
+          "closed": 236,
+          "added": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "377": {
+      "samples": 16629,
+      "hair": 0,
+      "profileOutsideHair": 1399,
+      "profileOver64": 248,
+      "inputs": {
+        "depthAll": {
+          "exact": 5955,
+          "withinOne": 11527,
+          "quantiles": [
+            0.0,
+            0.0,
+            1.0,
+            3.0,
+            17.0,
+            619.320000000007,
+            429177.0
+          ]
+        },
+        "depthResidual": {
+          "exact": 425,
+          "withinOne": 783,
+          "quantiles": [
+            0.0,
+            0.0,
+            1.0,
+            15.0,
+            94.0,
+            172695.25999999992,
+            376234.0
+          ]
+        },
+        "normalAll": {
+          "exact": 9,
+          "withinOne": 93,
+          "quantiles": [
+            0.0,
+            16.0,
+            35.0,
+            68.0,
+            122.0,
+            428.72000000000116,
+            956.0
+          ]
+        },
+        "normalResidual": {
+          "exact": 0,
+          "withinOne": 1,
+          "quantiles": [
+            1.0,
+            26.5,
+            59.0,
+            122.0,
+            244.4000000000001,
+            779.06,
+            956.0
+          ]
+        }
+      },
+      "cases": {
+        "intel-device": {
+          "overOne": 1398,
+          "closed": 5,
+          "added": 4,
+          "maximum": 253
+        },
+        "intel-profile": {
+          "overOne": 1399,
+          "closed": 0,
+          "added": 0,
+          "maximum": 253
+        },
+        "intel-native-atlas": {
+          "overOne": 1399,
+          "closed": 0,
+          "added": 0,
+          "maximum": 253
+        },
+        "intel-native-depth": {
+          "overOne": 1359,
+          "closed": 62,
+          "added": 22,
+          "maximum": 253
+        },
+        "intel-native-normal": {
+          "overOne": 158,
+          "closed": 1253,
+          "added": 12,
+          "maximum": 248
+        },
+        "intel-native-all": {
+          "overOne": 0,
+          "closed": 1399,
+          "added": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "422": {
+      "samples": 19063,
+      "hair": 17017,
+      "profileOutsideHair": 881,
+      "profileOver64": 527,
+      "inputs": {
+        "depthAll": {
+          "exact": 7965,
+          "withinOne": 15677,
+          "quantiles": [
+            0.0,
+            0.0,
+            1.0,
+            1.0,
+            1154.5999999999985,
+            215769.72000000076,
+            752140.0
+          ]
+        },
+        "depthResidual": {
+          "exact": 67,
+          "withinOne": 175,
+          "quantiles": [
+            0.0,
+            8355.0,
+            64947.0,
+            160805.0,
+            260456.6,
+            588432.0799999993,
+            752140.0
+          ]
+        },
+        "normalAll": {
+          "exact": 17070,
+          "withinOne": 18051,
+          "quantiles": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            32.0,
+            895.0
+          ]
+        },
+        "normalResidual": {
+          "exact": 862,
+          "withinOne": 922,
+          "quantiles": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            11.0,
+            58.11999999999989,
+            895.0
+          ]
+        }
+      },
+      "cases": {
+        "intel-device": {
+          "overOne": 1117,
+          "closed": 15,
+          "added": 43,
+          "maximum": 255
+        },
+        "intel-profile": {
+          "overOne": 1089,
+          "closed": 0,
+          "added": 0,
+          "maximum": 255
+        },
+        "intel-native-atlas": {
+          "overOne": 1088,
+          "closed": 1,
+          "added": 0,
+          "maximum": 255
+        },
+        "intel-native-depth": {
+          "overOne": 152,
+          "closed": 944,
+          "added": 7,
+          "maximum": 93
+        },
+        "intel-native-normal": {
+          "overOne": 973,
+          "closed": 120,
+          "added": 4,
+          "maximum": 255
+        },
+        "intel-native-all": {
+          "overOne": 0,
+          "closed": 1089,
+          "added": 0,
+          "maximum": 1
+        }
+      }
+    }
+  },
+  "colorCrops": {
+    "bounds": [
+      1140,
+      130,
+      1430,
+      440
+    ],
+    "reference": {
+      "path": "frozen-rgb.png",
+      "sha256": "f8efabd15740cb4531750ce74706432a9854c91aac41c2d0b635e99f759c89a2"
+    },
+    "mask": {
+      "path": "frozen-mask.png",
+      "sha256": "5eeecbedcc240fb746137eaca38791c2643ddd1bfa41593ad2613ddf54725a72"
+    },
+    "outputs": {
+      "nvidia": {
+        "profile": {
+          "path": "nvidia-profile.png",
+          "sha256": "9a39917504ac8c9d781f73fd3fbea7227d6959f858c19ee338df47600f2a9e7a",
+          "frameSha256": [
+            "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76",
+            "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76",
+            "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76"
+          ]
+        },
+        "device": {
+          "path": "nvidia-device.png",
+          "sha256": "9a39917504ac8c9d781f73fd3fbea7227d6959f858c19ee338df47600f2a9e7a",
+          "frameSha256": [
+            "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76",
+            "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76",
+            "6a9e8f61015837ce6e7b7f6aa86c49246ee486868b6c0e92128e635a1dda9e76"
+          ]
+        }
+      },
+      "intel": {
+        "profile": {
+          "path": "intel-profile.png",
+          "sha256": "fb662fe2ce26e774559c985fd419553b06a796ee1ce973b626c4a4ff2912ca35",
+          "frameSha256": [
+            "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3",
+            "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3",
+            "5a3810bdc59224b651ffda0fb45f98048294197de5a453e1073b58662bc8b5a3"
+          ]
+        },
+        "device": {
+          "path": "intel-device.png",
+          "sha256": "982acebb613af9a54c17412e806d41befab4a7bcbdf2d19da5f4f4115b13c120",
+          "frameSha256": [
+            "3d5dd1ecd260bd0e96156714098ca8865ee77f84521de0f2e715e08ed18d1f27",
+            "3d5dd1ecd260bd0e96156714098ca8865ee77f84521de0f2e715e08ed18d1f27",
+            "3d5dd1ecd260bd0e96156714098ca8865ee77f84521de0f2e715e08ed18d1f27"
+          ]
+        }
+      }
+    }
+  },
+  "crossConfiguration": {
+    "nvidia": {
+      "visibilitySha256": true,
+      "referenceDepthSha256": true,
+      "referenceNormalsSha256": true,
+      "objectIdsSha256": true,
+      "colors": true,
+      "colorHair": true,
+      "colorHairBaseline": true,
+      "hair": true,
+      "receiver": true
+    },
+    "intel": {
+      "visibilitySha256": true,
+      "referenceDepthSha256": true,
+      "referenceNormalsSha256": true,
+      "objectIdsSha256": true,
+      "colors": true,
+      "colorHair": true,
+      "colorHairBaseline": true,
+      "hair": true,
+      "receiver": true
+    }
+  },
+  "projectValidation": {
+    "before": {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\cli-project\\lab.azureproject",
+        "--check-project"
+      ],
+      "playerSha256": "dd8ccd6a688aad89c4bdde7c4d540fa6eb5a755c7b084383444007588bd7a564",
+      "cases": {
+        "valid": {
+          "code": 0,
+          "log": "Project loaded: Local light laboratory (light-lab)\r\nProject validation passed\r\n"
+        },
+        "reserved": {
+          "code": 0,
+          "log": "Project loaded: Local light laboratory (light-lab)\r\nProject validation passed\r\n"
+        },
+        "truncated": {
+          "code": 0,
+          "log": "Project loaded: Local light laboratory (light-lab)\r\nProject validation passed\r\n"
+        },
+        "missing": {
+          "code": 0,
+          "log": "Project loaded: Local light laboratory (light-lab)\r\nProject validation passed\r\n"
+        }
+      }
+    },
+    "verified": {
+      "command": [
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release\\AzurePlayer.exe",
+        "--project",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-061922-project-reference-visibility-profile-47902e\\cli-project\\lab.azureproject",
+        "--check-project"
+      ],
+      "playerSha256": "e33361ab31402f679b70a561ee7ecec53bb3d12b65eeb78955e01e14c487aff2",
+      "cases": {
+        "valid": {
+          "code": 0,
+          "log": "Project loaded: Local light laboratory (light-lab)\r\nProject validation passed\r\n"
+        },
+        "reserved": {
+          "code": 1,
+          "log": "Project loaded: Local light laboratory (light-lab)\r\nAzurePlayer: Project visibility profile contains a reserved code\r\n"
+        },
+        "truncated": {
+          "code": 1,
+          "log": "Project loaded: Local light laboratory (light-lab)\r\nAzurePlayer: Project visibility profile requires exactly 2097152 bytes\r\n"
+        },
+        "missing": {
+          "code": 1,
+          "log": "Project loaded: Local light laboratory (light-lab)\r\nAzurePlayer: Project visibility profile requires exactly 2097152 bytes\r\n"
+        }
+      }
+    }
+  },
+  "portablePackage": {
+    "playerSha256": "e33361ab31402f679b70a561ee7ecec53bb3d12b65eeb78955e01e14c487aff2",
+    "builderSha256": "cb553f7e4f604966345de7695f48a57e0fbe5d09a60a3172002703b01c5c401e",
+    "installation": {
+      "source": "29bdeaaba4978eb34d47f2668acddbb8436bd349a346dc92b34f524b56b8cbe4",
+      "runtimeRecipe": "a95782d5c571678badf43839a8b821270ee37c179766e37a57508d56b13c7f40",
+      "statements": 71
+    },
+    "packageFiles": 1346,
+    "configuration": {
+      "reference-views.json": {
+        "path": "game/config/reference-views.json",
+        "size": 7121,
+        "sha256": "f870eb2817f7094df18bbfbf7d0255d289d0c04b093d115650b7bc5a415d1e7d"
+      },
+      "object-visibility-profile-v1.bin": {
+        "path": "game/config/object-visibility-profile-v1.bin",
+        "size": 2097152,
+        "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      }
+    },
+    "sourceUnavailable": true,
+    "installUnavailable": true,
+    "movedCheck": true
+  },
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "e33361ab31402f679b70a561ee7ecec53bb3d12b65eeb78955e01e14c487aff2",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 520614698,
+    "taskBudgetBytes": 536870912
+  },
+  "archive": {
+    "bytes": 621016,
+    "sha256": "848964b2a0bd745696f4870a379686178f86e0bb91bfc9dd3969c24996d5fef4",
+    "files": 147,
+    "contents": {
+      "run/attribute-profile-receivers.py": "03b5ad2fff01580add3dbdc80f6ce30b1e802765312eb69c1b2e717d87cf3c95",
+      "run/budget.json": "073bc43604035b48166e1e613e8736ce6e6fb764d9a45e0bf6fe39ab2b5abf73",
+      "run/build.py": "c10c2c35d28291650f3d9407c804e72819df3a45c2d81c5df04f4270a80a798e",
+      "run/capture-hair-visibility.py": "abfe5b84f9cd1f838b4828cd9e371345e54fd4881703d1a9467d1c8380206a8f",
+      "run/claim-inputs.py": "2564698c4b7d4e033584d539593d29024f4d4ab9002e2ac15d7aba7a41114df4",
+      "run/compact-capture.py": "647af78a949d1ce53ca808a3e1adf3c19d1cb70a9836ccf62536672e3d23fe8a",
+      "run/compare-configurations.py": "39fe8b42b75c89b24de19ebe28e95d4c29dcfdc8921043537278050953b600a3",
+      "run/cross-configuration.json": "9506beb2bff8f4a7c851da048ddf42ca275fb0d4f206042d39bd7bcf393613c8",
+      "run/debug-build-commands.json": "b5d4b85c93b018c47bd4521d3ac9772e04d1b0bdca378bbf3a628e927b804b15",
+      "run/debug-build-execution.json": "70147b8bab3947dc740c9c0812600c867775b6e524c340091ff3a141309a69fa",
+      "run/debug-build.log": "6a50bc7f7574ddbab2800b346d67c53860d0f1d025572961112d14c23f2e5d3e",
+      "run/debug-ctest.log": "471735dd21dc0ac1b1a480473437416ee5ac6ae7df9254b26d1ada78b821f224",
+      "run/debug-ctest.xml": "25e65949868b9c0ab76d03094ddb6f254d2722d92ad7c4810194ac559d4f85e3",
+      "run/debug-dry-run.log": "b2281cc33a5939612c1dede5af6e73dbe8027e3b68c6e9751f00f943698fe9d9",
+      "run/debug-intel-capture-execution.json": "d2053056963195ed1dad437658d7395072f1ad77560d4c9de123224c39101e15",
+      "run/debug-intel-command.json": "3ab29c1358ebd9e8253f7c551d0720399343881e65cb7af979fc31737e0b2de0",
+      "run/debug-intel-gpu-ctest.log": "1e4a7e658524d24a2ec0a8bc4b5a5128ea6444d557669bea10e86b43dfd38af1",
+      "run/debug-intel-gpu-ctest.xml": "bf34c9bdd65025e638736fecbf8cd31bf3d95544e3a474253232ddbe3635196a",
+      "run/debug-intel-gpu-tests-execution.json": "656179e27305175cd961a3408bdbc73c961afa5ce918f5f8751def875be36d7e",
+      "run/debug-intel-gpu-verification.json": "a667e3d0ed4b50825bf605acc8c83bfb5a7606864818bfdc7b29bbf4e741906e",
+      "run/debug-intel-results.json": "0ea97e8ceeb7d44d0f9352daf3709f8847acb5b74c7ab546804b25d6d2169e0f",
+      "run/debug-intel.log": "f9904ee92153180b0d699fe3f743cac7de9bf98b0503959376dc8ba6b2676dff",
+      "run/debug-internal-preflight.log": "5eb15377814f19bbdd6e31542891444ac7bc213cd8bbed101ae43a99f9172b06",
+      "run/debug-link-budget-preparation.json": "632463e699f026b170c14ba614640a5975ff4214e2adc79ea7b15872471c2d50",
+      "run/debug-nvidia-capture-execution.json": "915a7dc898cfd568078b4904be1270a00742e6b7ef5c7e6bdd5518b45d1aee5d",
+      "run/debug-nvidia-command.json": "26fb9a96d75fd3de30de8f014c73b56eee9078364e11a844d74cbda2f05125a2",
+      "run/debug-nvidia-gpu-ctest.log": "12fa2b10f60fd692dd355eb8d1551220d3f79e943572c3c6d52566f4b34f11b4",
+      "run/debug-nvidia-gpu-ctest.xml": "b31be1c637855d062c106a0778004931b29dc28feb75870c5de342098f16d13e",
+      "run/debug-nvidia-gpu-tests-execution.json": "807c99dfd42e8180298b77751bc0ab9d1585d3572c8d948b370a11fabf383147",
+      "run/debug-nvidia-gpu-verification.json": "cdfae5c7b515a141ba4c9a635ce1de61552513e493b55d7bb7d96df4439d50b6",
+      "run/debug-nvidia-results.json": "b6b1d659c0be0c1f0345b7f4cd064c81783d03d671ab02f5018394af9fd9d919",
+      "run/debug-nvidia.log": "df1e142f495dcbfe91912ebe240ad9a01fcfc212c4704f57e0b87a25e6cfb281",
+      "run/debug-verification.json": "ad9d12b16b802de5d07ddece71b715f83af2c89629e9246872b4644bef3fc84d",
+      "run/default-four-command.json": "b7cdaa181eafd75eda29007107d3bf219822f19952bf358175a56b6571b5a31b",
+      "run/default-four-results.json": "6cf18d688f646333fa05d0e9954eb484eef8c84155a2d3feb6f3658b2670df63",
+      "run/default-four.log": "fadb843a15ec2855908176f1581b35530d1fc8330900d2c7a52700d0e9de7af3",
+      "run/default-four.py": "f3d9d1fcf1d9a36b187f58e83f4f36b30140641c387701fa817ae39547636da9",
+      "run/default-runtime.json": "28f7ee3c03eed26d39b807f7cc7f63036e4e23e09ce27359b353809d7cb6aacd",
+      "run/export-color-crops.py": "5b1986d5dcf7a8593d7a43431b2750f0f4196d53c0bf63f0259881ba0bbdeedd",
+      "run/green-editor-typecheck.json": "4072f528892f0654e55983cc0c2263d25439eea30ff3a5850bf3ffb479de01f6",
+      "run/green-editor-typecheck.log": "a16329194a512f2ecff661c9f3f9c5b914fc6f110b1b3de077e57a8bf6b610bc",
+      "run/green-player-profile-check.json": "82f0cd56d77dff3bb0f3c59a95253c52181a9489bab3c5183654913a2cdfcce6",
+      "run/green-typecheck.json": "7f509f7db98bc921d7476fa19eed2243275e3f7ffed73de2f7bea351f5ba87e5",
+      "run/green-typecheck.log": "3815ef97df20429a24d439ec8cc057a3026a30573c13fc67f74a4da901c169b3",
+      "run/original-four-execution.json": "8e1bb350a19cebdeb6994d4b737c6cbe69157910be4734d6f9d7b19e29ef4a4e",
+      "run/package-build.log": "49a1d2017c8798e7d61c3fb57c117225a815de9e56d9dd8a9b74b295cece9685",
+      "run/package-evidence.py": "abec7ac17933efda4af8edd3f244578ac9a7c40b8e9a051174ba08e71266a39a",
+      "run/package-execution.json": "f775c35e09c10682571ab166083a58a1eaa5ec0a19c3fc42d71be4f0a3112953",
+      "run/package-first-execution.json": "9839cf10bc278161d5c3017e0d4b69aba024ff01f2d5a7c51b444e994dde0459",
+      "run/package-first-install.log": "f5444247eb6bc818ecb9ae410239a866ee4985bf335e6f4b0c8f7d6de8b01c91",
+      "run/package-first-process.log": "abe2fa7b2887348dc44d095cd381e39d638bfca17437f6258693d5cefc10e176",
+      "run/package-install.log": "bfa8adf6e9e7d360cc895836d543d722a9106e9b2caeeecc8c9bb02c2123a196",
+      "run/package-moved-player.log": "f8e0e635b31201163276e11a27e249879ce4db184cbbb34afbc9f4f65300651c",
+      "run/package-rules.log": "93742fe5ce9c01fe4c38b09fbdc619af824874dad910b7411d66836461f7d354",
+      "run/package-second-execution.json": "fe3b77ee3d064a977bf732f48ba1bab02f4c0fb58acb0f721a71d352976ce030",
+      "run/package-second-install.log": "62a0907650e36b57db214b5f9dece89905994164c1375e5a5fedf836ad6de5a2",
+      "run/package-second-process.log": "7563c36f4f76cee402b09a7947215655c3d8053e0d72a382a8ac41d4de784137",
+      "run/package-third-execution.json": "b2b459e4eead5f6051590c1c505d733c4f309e78f1c3c6158aee99be4a69b402",
+      "run/package-third-install.log": "ab2cd1e5d5f6396be128c8be16d5c4fc07cb80e87d6395cf36a4f867e319e5ef",
+      "run/package-third-process.log": "fddc6c42bcfe9fc2b1c9c46e62256de9d6df1205a52924cd500ea89cf24a8c8f",
+      "run/package-verification.json": "b5d961f0c0bdb2a978bf19c6a4c05364c3701704b9c8f5577694b6014935b18c",
+      "run/prepare-debug-budget.py": "0fd404d1e7f356f48378f25d1d646f39a59e2a7376a151d60b44950e91e4dfef",
+      "run/prepare-fixture.py": "f52471b27c0614a0536159963e876f0f7352a3877f22a5aa6e70bbb054a52762",
+      "run/process.log": "fa383f637baf8a759e73eee7f9563872756da9a1696006680ffb01abd025aa09",
+      "run/profile-binding-execution.json": "747ba12648b22ca7cf9a16b6c21e8cfd716eed6fa7ee21a47ab63c1ecd188d67",
+      "run/profile-binding-worker.py": "48146fe9349e06c01057a28a4a144cd84669632a4d6ff932d1a5cda57d039d31",
+      "run/profile-binding.py": "806ba183f1deca27b6864ed06e3cd94a816e18e0a1f48f862db5e5014883f2c4",
+      "run/profile-fixture-inputs.json": "ac9b933dff202bbb5640e3ae971f39f6881e07a9085881fd64bf55b306155208",
+      "run/profile-receiver-attribution.json": "36139fdc09f7b5786a7121d0654ac558cbd29977c3c712834c025ef77bca7366",
+      "run/profile-typecheck.py": "1cb160f5014282cd7fa581135c2c3801b6790580687ee692129aa5df161240da",
+      "run/project-profile-check.py": "f95d08d3fed4f0324940a5f60c7bb9effd7ab8a39e3b0741dda274f95cea127e",
+      "run/queued-qualification.py": "6f0738b98692c9832f58ffe2b2730d7c32d030d8f14cf5c6e05ec50e7f12ac45",
+      "run/queued-release.py": "9b950b0f0b51a0a11e8a4b19b5c9e9b2b15a38edc7e072539ced704c8ada9eef",
+      "run/red-editor-typecheck.json": "e316864e2f3187d9bd38bcf19c329a63ddf1a2d975314bba50d7a7f2b7bc7123",
+      "run/red-editor-typecheck.log": "0beda80ad295730289b7f90fa64f0bbfd8ebb01962dcf08b71d51faf768af83d",
+      "run/red-package-rules.log": "41c51ca50ce96415126c31bed209934039b3c8bd16684d1686f1e43326c3f5e2",
+      "run/red-player-profile-check.json": "956a56e04a35427d43c8f598a2951709217e217f5710d68ebe0ac64693bde0c2",
+      "run/red-typecheck.json": "07fd03b3877794419b00bb73f029578a283d0b54e103030464412fdd7d433e88",
+      "run/red-typecheck.log": "9684ce217843a4b0acdd9e237094c4765ca3d3fb42918843ff49355725027bce",
+      "run/release-build-commands.json": "1eedf07422e36aa67acd569001f4fae0bfbee2e035e97a6a54c6e1a6992efc90",
+      "run/release-build-execution.json": "1ed609861716e653ac86b024758a3e0efc8134cb6ad2dd1581553be9bc478399",
+      "run/release-build.log": "87b23ecd1ad78883851902b57a537054792612b43a171e5587b5db51e948d189",
+      "run/release-ctest.log": "fad7ccd7a4518f9ca0b039153e760b55938254ad96094dff2b34138bcaba522a",
+      "run/release-ctest.xml": "f291cdc262ff61e4d3726feffdcfee9e435fe2952679eed09d2993b27b8b7f34",
+      "run/release-dry-run.log": "14e6f9443e8e944b21ce4a472b75e2b462b03c4de8ce3695c63cfcae6248d0e6",
+      "run/release-editor-dry-run.log": "e0af4644249b6873458b023de633e67b0a7cd7871a6a836222551fb54b0de950",
+      "run/release-initial-build-commands.json": "71c4bef088e3caffb05931dd6c41daa9662addd83e406843e8e279890bdea7c3",
+      "run/release-initial-build-execution.json": "b02fe1fc391d36d26c288b8bfbed3598bce2abb8a3ad75dd1f5c52b583f68a0f",
+      "run/release-initial-build.log": "0472f75991d5295d4f304e55486293d6969e447cd9ca36d33471d5934372a158",
+      "run/release-initial-ctest.log": "d43e47c44b84a942bdaf37070dd99576193f2aeec86404403e8053d919f80246",
+      "run/release-initial-ctest.xml": "cf991571916ba3f5019eeb08c9805d7ad2e8ab0c9625658f755fba5a5dbe90ae",
+      "run/release-intel-capture-execution.json": "947b847acdea0cb3513294c82b91bff6fe5ea26f83ff4d3a93e166b75c275674",
+      "run/release-intel-command.json": "e3cbe0dd1467d7825a51e189d456c2b7553f63d2792206d84bc4ec49d04ece1a",
+      "run/release-intel-gpu-ctest.log": "70776154e576e6b98ed65625141ff861f655c3995b4bc29e020f76dfc3c706e7",
+      "run/release-intel-gpu-ctest.xml": "afb731cd31d15ad29f0d5694446698db7ff5ec2837bdd7ac076f89f9f5847319",
+      "run/release-intel-gpu-tests-execution.json": "96774774dd004c26d209c54101ddf644121180a810f47cb5c7ff245a0ae58446",
+      "run/release-intel-gpu-verification.json": "75cc69e68e1af298b7317fda0e515f127c733dbb2bb85ee9f2797a288d24cc3d",
+      "run/release-intel-results.json": "f122a514099db98a32e87b42751f50fcf48a08b462d36ff38ff136a766a7137b",
+      "run/release-intel.log": "378979a50d83f7f3bc9b9cea641ecce394e25d7578673d2afd1567501a181415",
+      "run/release-internal-preflight.log": "472a0e851022baafed977d00b535b1f1d43b237918eb81546d630c5fa45ef143",
+      "run/release-nvidia-capture-execution.json": "85c829bab0d73542ca3b0e0ca25b1b75c68f443f928e0fde579455a05cd8f127",
+      "run/release-nvidia-command.json": "1fc89584f1e70c84ea8e9a1627be6f9b2fb97b4c4ad2a5807595755fea25cd5a",
+      "run/release-nvidia-gpu-ctest.log": "4ac29397a126cb5ee93059aabd5332093943824bc76efef035fe96a77c5e0449",
+      "run/release-nvidia-gpu-ctest.xml": "218166cc38eb2278d97fbbba9c132598a413b56ac45860af7003fcd04be4332b",
+      "run/release-nvidia-gpu-tests-execution.json": "f7360f5f90ca05af1786c4b18ffac8ee5805c1ac8934a428db9cef8eea882d96",
+      "run/release-nvidia-gpu-verification.json": "316c4fa9825764a725d1d3cd6b7cdebe4116f7c6ae7b2d2d30d0e9dc59098e35",
+      "run/release-nvidia-results.json": "c593f1662b33de89a5aa3e9491672f73b6e806b8028a90ee04e2a92dab5fcbc2",
+      "run/release-nvidia.log": "1de5821d9bbad521d6ffb4a73411faaf8d7bc5059fd0aec14145c9aaef21154c",
+      "run/release-package-build-commands.json": "c4e3b46a08cb5df8d6a0197ec136ef3a073961b0ae9bf35af14f4f1cfb3238d4",
+      "run/release-package-build.log": "444778c648a541f845e67814edd266f469de3e0fb13398220c6a9cdd7ebe6135",
+      "run/release-package-internal-preflight.log": "4570ea9378e999a10128a2225b06fa484a509004096ee5dbb8789483acf9dc11",
+      "run/release-package-targets-execution.json": "98f96015de511e2a6ad321b4706834bf622c5db71eac1e407aadacb8c9923d51",
+      "run/release-verification.json": "461e1fccf8e724d5d10f7d7aae5fe6754b82b361f96b38053684e6aaf721f31d",
+      "run/task-card.json": "84f2e3c6214d6db6509cc3412268503451345c2fb749adef782953665bc811ea",
+      "run/verify-build.py": "cfe203fa53d02b04b1108a100a3d5b77b6e81ecf13bdf9de3ded058c82ca912d",
+      "run/verify-package.py": "85ecd7a4eb271a3f422abe48e0ab050f0bc164ace110b1e21232440bd8655d43",
+      "run/package-runtime-install.cmake": "a95782d5c571678badf43839a8b821270ee37c179766e37a57508d56b13c7f40",
+      "run/release-nvidia-frames/capture_manifest.json": "238e6301e4764dab0b6a59e6f8dea12a7f84340c6f04048449bd694c263d4eb5",
+      "run/release-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/release-nvidia-frames/reference-planes.json": "fcfab58cd3f67fb24314534473ee7c1c2d76c51922dd8d21fd12e0cbfa93d929",
+      "run/release-intel-frames/capture_manifest.json": "343c1d97e46b52accf83aeae53025c40098e396b86a97e2a6bdcddaa684919ff",
+      "run/release-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/release-intel-frames/reference-planes.json": "dc411fe210e3ea3ce2301ef260818c2971fbf8999f949b91cc6e210a7b7fb619",
+      "run/debug-nvidia-frames/capture_manifest.json": "3f6ac7608e8615796bfb79749ba62d1ccc211254cee6f8c3c23a6eeaac92d759",
+      "run/debug-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/debug-nvidia-frames/reference-planes.json": "fcfab58cd3f67fb24314534473ee7c1c2d76c51922dd8d21fd12e0cbfa93d929",
+      "run/debug-intel-frames/capture_manifest.json": "19a2061b598164ab4e0199b3fb73cbbcc58a594c47e96c292462c067b546e3bb",
+      "run/debug-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/debug-intel-frames/reference-planes.json": "dc411fe210e3ea3ce2301ef260818c2971fbf8999f949b91cc6e210a7b7fb619",
+      "run/profile-binding/report.json": "d2874965f63e3ffae8c1447e030f460e498739c5e460860e46a958ad81fb4848",
+      "run/profile-binding/request.json": "7e1449510fa88e514543b25cd1579ffb36d375c4da95aa662bc16694745b68b3",
+      "run/profile-binding/command.json": "66d562325875cd8a75c0362192778d15afeb54ddb1804d7fe5400d965e3d4cc3",
+      "run/profile-binding/renderdoc.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/profile-binding/fixture/lab.azureproject": "fabadebfc78ccfcd83765bd2ab631acb93bbc031ee8ea8fd587c23a444bfd7d5",
+      "run/profile-binding/fixture/plane.gltf": "646eb5bd1db2cc240316038f20908df445bbcfb5cf2954122ee9c289a1b334ad",
+      "run/profile-binding/fixture/level.azurelevel": "0cb7a3ab664c0f16db8da5bb42d3ac21fe71da4f969c216944f20eec827b94f0",
+      "run/profile-binding/fixture/config/reference-views.json": "f870eb2817f7094df18bbfbf7d0255d289d0c04b093d115650b7bc5a415d1e7d",
+      "run/profile-binding/frames/capture_manifest.json": "79ee161b83f87203ff5c04e462ff3011b6a53e942905b7e3cdaad622c064ecf6",
+      "run/profile-binding/frames/frame_000002.png": "8bf4241f881a71a5189ae3505f7bc63782ff4df95d702f66ff476c24908d85b1",
+      "run/hair-color-crops/frozen-mask.png": "5eeecbedcc240fb746137eaca38791c2643ddd1bfa41593ad2613ddf54725a72",
+      "run/hair-color-crops/frozen-rgb.png": "f8efabd15740cb4531750ce74706432a9854c91aac41c2d0b635e99f759c89a2",
+      "run/hair-color-crops/intel-device.png": "982acebb613af9a54c17412e806d41befab4a7bcbdf2d19da5f4f4115b13c120",
+      "run/hair-color-crops/intel-profile.png": "fb662fe2ce26e774559c985fd419553b06a796ee1ce973b626c4a4ff2912ca35",
+      "run/hair-color-crops/manifest.json": "7ca9019adcfc6671e64b385ffe199ebfd6893f0cb2813244e0dd6515099e7b60",
+      "run/hair-color-crops/nvidia-device.png": "9a39917504ac8c9d781f73fd3fbea7227d6959f858c19ee338df47600f2a9e7a",
+      "run/hair-color-crops/nvidia-profile.png": "9a39917504ac8c9d781f73fd3fbea7227d6959f858c19ee338df47600f2a9e7a",
+      "run/default-four-frames/capture_manifest.json": "40b7a72c90c9774057972fef64781ad3f9533f4a40db9bf6cec7c48706ad4697"
+    }
+  }
+}

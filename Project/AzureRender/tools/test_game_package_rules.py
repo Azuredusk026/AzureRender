@@ -60,6 +60,32 @@ class GamePackageRules(unittest.TestCase):
         self.assertEqual((self.output / "game/config/engine-settings.json").read_bytes(), settings.read_bytes())
         build_game.verify_package(self.output)
 
+    def test_reference_views_and_profile_survive_portable_packaging(self):
+        config = self.project.parent / "config"
+        config.mkdir()
+        views = config / "reference-views.json"
+        views.write_text(json.dumps({"schemaVersion": 1, "views": {"objects": {}},
+            "objectVisibilityArithmetic": "profile-v1"}), encoding="utf-8")
+        profile = config / "object-visibility-profile-v1.bin"
+        profile.write_bytes(b"\x55" * 2097152)
+        (config / "editor-only.json").write_text("{}")
+        manifest = self.build()
+        installed = self.output / "game/config"
+        self.assertEqual((installed / views.name).read_bytes(), views.read_bytes())
+        self.assertEqual(build_game.digest(installed / profile.name), build_game.digest(profile))
+        self.assertFalse((installed / "editor-only.json").exists())
+        entries = {entry["path"]: entry for entry in manifest["files"]}
+        self.assertEqual(entries["game/config/" + profile.name]["sha256"], build_game.digest(profile))
+        build_game.verify_package(self.output)
+        (installed / profile.name).unlink()
+        with self.assertRaises(ValueError):
+            build_game.verify_package(self.output)
+        previous = (self.output / "game_manifest.json").read_bytes()
+        profile.unlink()
+        with self.assertRaisesRegex(ValueError, "profile"):
+            self.build(replace=True)
+        self.assertEqual((self.output / "game_manifest.json").read_bytes(), previous)
+
     def test_portable_tree_and_hashes(self):
         cache = self.project.parent / "content/.azure"
         cache.mkdir()

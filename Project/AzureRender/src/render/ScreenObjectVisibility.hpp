@@ -1,4 +1,5 @@
 #pragma once
+#include "render/ScreenObjectVisibilityNumerics.hpp"
 #include "rhi/Rhi.hpp"
 #include <array>
 #include <memory>
@@ -7,14 +8,6 @@
 namespace azurerender {
 enum class ScreenObjectDepth {Forward,Reversed};
 enum class ScreenObjectVisibilityPhaseOrigin {TopLeft,BottomLeft};
-enum class ScreenObjectVisibilityArithmetic {Device,ProfileV1};
-struct ScreenObjectVisibilityNumerics {
-    ScreenObjectVisibilityArithmetic mode=ScreenObjectVisibilityArithmetic::Device;
-    // ProfileV1: 2^23 normalized mantissas, sixteen two-bit corrections per word.
-    // Codes 0/1/2 mean -1/0/+1 ULP from nearest-even reciprocal; 3 is reserved.
-    // The owner copies the fixed 524288 words and retains immutable GPU storage.
-    std::vector<std::uint32_t> reciprocalCorrections;
-};
 struct ScreenObjectVisibilityView {
     // Column-major device-clip to world. Pixel offsets are applied before NDC conversion.
     std::array<float,16> clipToWorld{};
@@ -54,6 +47,7 @@ struct ScreenObjectVisibilityOutput {
 class ScreenObjectVisibilityGpu final {
 public:
     ScreenObjectVisibilityGpu(rhi::IRhi&,VkExtent2D,unsigned frames,const ScreenObjectVisibilityShaders&);
+    // The owner copies the fixed profile into immutable GPU storage.
     ScreenObjectVisibilityGpu(rhi::IRhi&,VkExtent2D,unsigned frames,const ScreenObjectVisibilityShaders&,const ScreenObjectVisibilityNumerics&);
     ~ScreenObjectVisibilityGpu();
     ScreenObjectVisibilityGpu(const ScreenObjectVisibilityGpu&)=delete;
