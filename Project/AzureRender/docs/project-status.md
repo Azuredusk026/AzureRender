@@ -286,3 +286,7 @@ RHI 的附件样本数、管线比例及能力查询通过双配置检查。
 
 [原生深度设备对照](acceptance/nr/native-d3d11-depth-devices.md)记录两设备实际深度及颜色读回。
 Intel 的同设备跨接口深度保留三个差异点。
+
+[场景参考深度](acceptance/nr/scene-reference-depth.md)接入实际 Player 的反向深度附件。
+NVIDIA 冻结深度与 Intel 同设备 Vulkan 各有 17,017 点逐位一致。
+实际法线、对象可见量及完整颜色继续验收。

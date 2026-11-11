@@ -78,6 +78,7 @@ public:
 
 private:
     bool referenceCameraPrograms_=false;
+    bool referenceSceneDepthPrograms_=false;
 #if AZURE_WITH_EDITOR
     std::unique_ptr<azurerender::ShaderHotReloader> shaderReloader_;
     std::unique_ptr<azurerender::RenderViewService> renderViews_;

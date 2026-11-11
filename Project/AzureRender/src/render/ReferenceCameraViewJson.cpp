@@ -16,9 +16,13 @@ void to_json(nlohmann::json& j,const ReferenceCameraView& v){
     j={{"schemaVersion",1},{"frame",{{"schemaVersion",1},{"axes",{v.frame.parameters.axes[0],v.frame.parameters.axes[1],v.frame.parameters.axes[2]}},{"offset",{v.frame.parameters.offset[0],v.frame.parameters.offset[1],v.frame.parameters.offset[2]}}}},
         {"projection",{{"schemaVersion",1},{"columns",v.projection.parameters.columns},{"jitter",{v.projection.parameters.jitter[0],v.projection.parameters.jitter[1]}}}},
         {"extent",v.extent},{"depthConvention",v.depthConvention==ReferenceDepthConvention::Forward?"forward":"reversed"},{"flipNdcY",v.flipNdcY}};
+    if(v.produceSceneDepth)j["produceSceneDepth"]=true;
 }
 void from_json(const nlohmann::json& j,ReferenceCameraView& value){
-    fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY"});version(j);ReferenceCameraView v;
+    if(j.contains("produceSceneDepth"))
+        fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY","produceSceneDepth"});
+    else fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY"});
+    version(j);ReferenceCameraView v;
     const auto& frame=j.at("frame");fields(frame,{"schemaVersion","axes","offset"});version(frame);
     const auto& axes=frame.at("axes");if(!axes.is_array()||axes.size()!=3)throw std::invalid_argument("Invalid reference camera axis count");
     for(unsigned i=0;i<3;++i){if(!axes[i].is_number_integer()||axes[i]<-3||axes[i]>3||axes[i]==0)throw std::invalid_argument("Invalid reference camera axis");v.frame.parameters.axes[i]=axes[i].get<int>();}
@@ -32,6 +36,10 @@ void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     else if(j.at("depthConvention")=="reversed")v.depthConvention=ReferenceDepthConvention::Reversed;
     else throw std::invalid_argument("Unknown reference camera depth convention");
     if(!j.at("flipNdcY").is_boolean())throw std::invalid_argument("Reference camera flip must be boolean");v.flipNdcY=j.at("flipNdcY").get<bool>();
+    if(j.contains("produceSceneDepth")){
+        if(!j.at("produceSceneDepth").is_boolean())throw std::invalid_argument("Reference camera produceSceneDepth must be boolean");
+        v.produceSceneDepth=j.at("produceSceneDepth").get<bool>();
+    }
     (void)PreparedReferenceCameraView(v);value=std::move(v);
 }
 }

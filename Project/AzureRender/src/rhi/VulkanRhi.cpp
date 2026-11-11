@@ -1075,21 +1075,27 @@ void VulkanCommandRecorder::clearColorImage(
     vkCmdClearColorImage(commandBuffer_, image, layout, &color, 1, &range);
 }
 
-void VulkanCommandRecorder::copyImageToBuffer(
-    const VkImage image,
-    const VkBuffer buffer,
-    const VkExtent2D extent) {
+static void copyAttachmentImageToBuffer(VkCommandBuffer commands,VkImage image,VkBuffer buffer,
+    VkExtent2D extent,VkImageAspectFlags aspect) {
     VkBufferImageCopy copy{};
-    copy.imageSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+    copy.imageSubresource.aspectMask = aspect;
     copy.imageSubresource.layerCount = 1;
     copy.imageExtent = {extent.width, extent.height, 1};
     vkCmdCopyImageToBuffer(
-        commandBuffer_,
+        commands,
         image,
         VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
         buffer,
         1,
         &copy);
+}
+
+void VulkanCommandRecorder::copyImageToBuffer(VkImage image,VkBuffer buffer,VkExtent2D extent) {
+    copyAttachmentImageToBuffer(commandBuffer_,image,buffer,extent,VK_IMAGE_ASPECT_COLOR_BIT);
+}
+
+void VulkanCommandRecorder::copyDepthImageToBuffer(VkImage image,VkBuffer buffer,VkExtent2D extent) {
+    copyAttachmentImageToBuffer(commandBuffer_,image,buffer,extent,VK_IMAGE_ASPECT_DEPTH_BIT);
 }
 
 void VulkanCommandRecorder::writeTimestamp(

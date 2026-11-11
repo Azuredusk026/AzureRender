@@ -99,9 +99,13 @@ void AzureRenderApp::run(
     const AzureRenderOptions& options) {
     runOptions_ = options;
     referenceCameraPrograms_=false;
+    referenceSceneDepthPrograms_=false;
     if(!options.projectFile.empty()){
         const auto project=options.projectStartup?options.projectStartup->project():azurerender::Project::load(std::filesystem::u8path(options.projectFile));
-        referenceCameraPrograms_=!azurerender::loadProjectReferenceViews(project).views.empty();
+        const auto views=azurerender::loadProjectReferenceViews(project).views;
+        referenceCameraPrograms_=!views.empty();
+        referenceSceneDepthPrograms_=std::any_of(views.begin(),views.end(),
+            [](const auto& entry){return entry.second.produceSceneDepth;});
     }
 #if !AZURE_WITH_EDITOR
     if(!options.shaderReloadConfig.empty() || !options.previewViews.empty())throw std::invalid_argument("Developer rendering tools require the AzureRender host");
@@ -661,6 +665,7 @@ void AzureRenderApp::buildRenderContext(
     }
     context.shaderDirectory = resourceLocator_.shaderDirectory().u8string();
     context.referenceCameraPrograms=referenceCameraPrograms_;
+    context.referenceSceneDepthPrograms=referenceSceneDepthPrograms_;
 #if AZURE_WITH_EDITOR
     if(!activeShaderDirectory_.empty())context.shaderDirectory=activeShaderDirectory_;
 #endif

@@ -1,3 +1,7 @@
+#if defined(AZURE_SNAPSHOT_DEPTH)
+layout(constant_id=7) const bool azureReferenceSceneDepth=false;
+#define AZURE_REFERENCE_RASTER_SCENE_DEPTH
+#endif
 #include "reference_raster_projection.glsl"
 vec4 azureCameraRasterPosition(vec3 world,vec4 deviceBase,vec4 deviceFinal){
     return azureReferenceRasterPosition(world,deviceBase,deviceFinal,

@@ -1311,4 +1311,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 两配置、两设备的实际几何掩码和原四帧通过，完整外观按所属门槛继续验收。
 
 [椭圆选级](../acceptance/nr/material-ellipse-coverage-policy.md)记录独立覆盖的公开策略及实际头发证据。
-参考深度、可见量及完整颜色按各自门槛验收。
+
+[场景参考深度](../acceptance/nr/scene-reference-depth.md)接入双附件生产与实际采集。
+可见量及完整颜色按各自门槛验收。

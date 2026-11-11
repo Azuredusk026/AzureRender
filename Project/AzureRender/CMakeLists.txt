@@ -349,6 +349,8 @@ compile_shader(
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_SNAPSHOT_DEPTH=1 OUTPUT_NAME character_snapshot_depth.vert)
 compile_shader("${SHADER_SOURCE_DIR}/mesh.vert" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_COMPUTE_SKINNING=1 OUTPUT_NAME character_snapshot_depth_compute.vert)
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag")
+compile_shader("${SHADER_SOURCE_DIR}/reference_scene_depth.frag" DEFINES AZURE_REFERENCE_MATERIAL_UV=1 AZURE_FRAGMENT_QUAD_OPERATIONS=1 AZURE_INDEPENDENT_COVERAGE=1)
+compile_shader("${SHADER_SOURCE_DIR}/reference_scene_depth.frag" DEFINES AZURE_REFERENCE_MATERIAL_UV=1 AZURE_FRAGMENT_QUAD_OPERATIONS=1 AZURE_INDEPENDENT_COVERAGE=1 AZURE_BINDLESS=1 OUTPUT_NAME reference_scene_depth_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 OUTPUT_NAME character_snapshot_depth.frag)
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_BINDLESS=1 OUTPUT_NAME character_snapshot_depth_bindless.frag)
 compile_shader("${SHADER_SOURCE_DIR}/character_depth.frag" DEFINES AZURE_SNAPSHOT_DEPTH=1 AZURE_GEOMETRY_SAMPLES=1 OUTPUT_NAME character_snapshot_depth_samples.frag)

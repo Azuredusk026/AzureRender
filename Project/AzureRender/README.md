@@ -833,3 +833,7 @@ NVIDIA 完整原生深度与可见量精确一致，Intel 九十七处超差继�
 [椭圆选级](docs/acceptance/nr/material-ellipse-coverage-policy.md)记录公开材质策略及实际头发的验证。
 [原生深度设备对照](docs/acceptance/nr/native-d3d11-depth-devices.md)记录双设备重放及参考差异。
 Intel 已知边界点的误差为两字节，完整区域继续验收。
+
+[场景参考深度](docs/acceptance/nr/scene-reference-depth.md)记录实际 Player 的 R32 与 D32 读回。
+NVIDIA 的 17,017 个冻结头发深度逐位一致。
+Intel 设备差异与完整颜色继续验收。

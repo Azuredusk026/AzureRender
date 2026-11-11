@@ -71,6 +71,7 @@ using namespace azurerender::internal;
 namespace azurerender {
 #include "CharacterViewFog.inc"
 #include "CharacterMaterialUv.inc"
+#include "CharacterReferenceSceneDepth.inc"
 CharacterSceneRenderer::CharacterSceneRenderer() = default;
 CharacterSceneRenderer::~CharacterSceneRenderer() = default;
 
@@ -344,7 +345,8 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
     shaderDirectory_ = context.shaderDirectory;
     qaInstanceCount_ = std::max(context.qaInstanceCount, 1U);
     renderSettings_ = context.renderSettings;
-    referenceCameraPrepared_=context.referenceCameraPrograms||(renderSettings_->cameraView&&renderSettings_->cameraView->referenceCalibration.has_value());
+    referenceCameraPrepared_=context.referenceCameraPrograms||context.referenceSceneDepthPrograms
+        ||(renderSettings_->cameraView&&renderSettings_->cameraView->referenceCalibration.has_value());
     faceSdfPrepared_=renderSettings_->faceSdfFeature;platformPrepared_=renderSettings_->showcasePlatformFeature;
     faceSdfTextureCount_=0;
     gpuCullingEnabled_ = context.gpuCulling;
@@ -612,6 +614,7 @@ bool CharacterSceneRenderer::prepareLoad(const RenderContext& context,double bud
     return loadJobs_.empty();
 }
 bool CharacterSceneRenderer::reuseScene(const RenderContext& context){
+    if(referenceDepthRequested(context)!=static_cast<bool>(referenceSceneDepth_))return false;
     if(!objectShadowPrepared_&&std::any_of(context.scene.nodes.begin(),context.scene.nodes.end(),
         [](const auto& node){return node.objectShadow&&node.objectShadow->enabled;}))return false;
     if(scene_.reflectionProbe.texture!=context.scene.reflectionProbe.texture)return false;
@@ -1450,6 +1453,26 @@ void CharacterSceneRenderer::registerPasses(
     graph.use(prepass,clusterIndexResource,RenderGraphUsage::FragmentStorage,false);
     if(skinnedResource)graph.use(prepass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
     for(std::uint32_t key=0;key<meshResourceCount_;++key){graph.use(prepass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);graph.use(prepass,indexResources[key],RenderGraphUsage::IndexBuffer,false);}
+    if(referenceDepthActive()){
+        const auto slot=context.currentFrame;
+        const auto pass=graph.addGraphicsPass("character-reference-depth",referenceSceneDepth_->begin(slot),
+            [this,frozenContext,frozenInstances](rhi::ICommandRecorder& commands){
+                recordDepthCoverage(*frozenContext,*frozenInstances,commands,DepthCoverageMode::ReferenceDepth);
+            });
+        rhi::ImageBarrierDesc raster{};raster.image=referenceSceneDepth_->rasterImage(slot);
+        rhi::ImageBarrierDesc hardware{};hardware.image=referenceSceneDepth_->hardwareImage(slot);
+        hardware.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+        graph.attachment(pass,graph.importImage("character-reference-r32",raster),RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        graph.attachment(pass,graph.importImage("character-reference-d32",hardware),RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        for(const auto input:{jointResource,morphTargetResource,morphWeightResource,instanceResource})
+            graph.use(pass,input,RenderGraphUsage::VertexStorage,false);
+        if(skinnedResource)graph.use(pass,*skinnedResource,RenderGraphUsage::VertexStorage,false);
+        for(std::uint32_t key=0;key<meshResourceCount_;++key){
+            graph.use(pass,vertexResources[key],RenderGraphUsage::VertexBuffer,false);
+            graph.use(pass,indexResources[key],RenderGraphUsage::IndexBuffer,false);
+        }
+        pendingReferenceDepthSlot_=slot;
+    }
     std::optional<RenderGraph::ResourceId> outlineMaskResource;
     if(frozenInstances->buffers.outlineMaskImage){
         rhi::ImageBarrierDesc maskInitial{};maskInitial.image=frozenInstances->buffers.outlineMaskImage;
@@ -1703,6 +1726,12 @@ void CharacterSceneRenderer::recordScene(const RenderContext& context) {
             VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_INDEX_READ_BIT});
     }
     recordComputeSkinning(context);
+    if(referenceDepthActive()){
+        context.commands->beginRenderPass(referenceSceneDepth_->begin(context.currentFrame));
+        recordDepthCoverage(context,*instanceSnapshot_,*context.commands,DepthCoverageMode::ReferenceDepth);
+        context.commands->endRenderPass();
+        pendingReferenceDepthSlot_=context.currentFrame;
+    }
     recordShadowPass(context);
     if(!instanceSnapshot_->objectShadowPages.empty()){
         context.commands->beginRenderPass(objectShadowAtlas_->beginDescription());
@@ -3003,8 +3032,17 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
         }
     }
     createScreenReflectionResources(context);
+    if(referenceDepthRequested(context))
+        referenceSceneDepth_=std::make_unique<SceneReferenceDepthTargets>(*rhi_,context.renderExtent,static_cast<unsigned>(kMaxFramesInFlight));
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
+    for(auto& pipeline:referenceSceneDepthPipelines_){
+        if(pipeline)rhi_->destroyPipeline(pipeline);
+        pipeline=VK_NULL_HANDLE;
+    }
+    pendingReferenceDepthSlot_.reset();
+    submittedReferenceDepth_.reset();
+    referenceSceneDepth_.reset();
     destroyConservativeOcclusion();
     destroyScreenReflectionResources();
     snapshotMultisampling_.reset();
@@ -3158,6 +3196,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
 void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
     rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters){
     const bool validation=mode==DepthCoverageMode::RadianceValidation;
+    const bool referenceDepth=mode==DepthCoverageMode::ReferenceDepth;
     const bool mainPrefill=mode==DepthCoverageMode::MainPrefill;
     const bool prefill=mainPrefill||mode==DepthCoverageMode::SnapshotPrefill;
     const bool colorRequired=mode==DepthCoverageMode::SnapshotColor;
@@ -3169,14 +3208,20 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
         commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[context.currentFrame]);
         if(counters)++counters->descriptorSetBinds;
     }
-    for(std::size_t spanIndex=0;spanIndex<snapshot.visibleSpans.size();++spanIndex){
-        const auto& span=snapshot.visibleSpans[spanIndex];
+    // The reference depth clip interval is independent of the main camera's device depth.
+    std::vector<std::array<std::uint32_t,3>> referenceSpans;
+    if(referenceDepth)referenceSpans=referenceDepthSpans(snapshot.instances);
+    const auto& spans=referenceDepth?referenceSpans:snapshot.visibleSpans;
+    for(std::size_t spanIndex=0;spanIndex<spans.size();++spanIndex){
+        const auto& span=spans[spanIndex];
         const auto key=span[0],first=span[1],count=span[2];const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
         const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
         const auto materialBase=key==0?0:additionalResources_[key-1]->globalMaterialBase;
         commands.bindVertexBuffer(snapshot.buffers.vertices.at(key),0);commands.bindIndexBuffer(snapshot.buffers.indices.at(key),0);
         for(const auto& primitive:mesh.primitives){
             const auto& m=mesh.materials[primitive.materialIndex];if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay)continue;
+            if(referenceDepth&&m.alphaMode==AssetAlphaMode::Mask&&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0)
+                throw std::invalid_argument("Scene reference depth requires an authored coverage texture coordinate");
             if(validation){
                 if(!radianceSelectionMaterial(m))continue;bool complete=true;
                 const auto pi=static_cast<std::size_t>(&primitive-mesh.primitives.data());
@@ -3184,7 +3229,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 if(!complete)continue;
             }
 
-            if(!mainPrefill&&m.nprDiffuse.screenLightingNormal)continue;
+            if(!mainPrefill&&!referenceDepth&&m.nprDiffuse.screenLightingNormal)continue;
             if(prefill&&m.alphaMode!=AssetAlphaMode::Opaque)continue;
             if(mainPrefill&&(m.materialFeatures&(MaterialFeatureSceneTint|MaterialFeatureMultiplyComposite))!=0)continue;
             if(m.showcasePlatform>.5F&&!snapshot.settings.characterPresentation.platformEnabled)continue;
@@ -3203,7 +3248,8 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 :(m.materialFeatures&MaterialFeatureHairPixelIntegral)?hairIntegralPipeline(m,mirrored,true)
                 :classPipeline?classPipeline
                 :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)];
-            if(!prefill&&!ordinaryColor&&!classColor)commands.bindPipeline(materialUvPipeline(m,validation?ordinaryRadianceValidationPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]:(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline))));
+            if(referenceDepth)commands.bindPipeline(referenceSceneDepthPipelines_[m.doubleSided?2:mirrored?1:0]);
+            else if(!prefill&&!ordinaryColor&&!classColor)commands.bindPipeline(materialUvPipeline(m,validation?ordinaryRadianceValidationPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]:(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline))));
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
             if(!bindlessTextures_){commands.bindDescriptorSet(pipelineLayout_,descriptorSets_[set]);if(counters)++counters->descriptorSetBinds;}
             if(counters&&!prefill&&!ordinaryColor&&!classColor)++counters->pipelineBinds;
@@ -3231,7 +3277,7 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                     const auto selected=materialLightingPipeline(m,materialClassPipeline(m,mirrored,true,run.opacity));
                     if(selected!=boundPrefill){commands.bindPipeline(selected);boundPrefill=selected;if(counters)++counters->pipelineBinds;}
                 }
-                if(surfaceRadiance_){const auto first=primitive.firstIndex<=UINT32_MAX&&primitive.indexCount<=UINT32_MAX-primitive.firstIndex
+                if(surfaceRadiance_&&!referenceDepth){const auto first=primitive.firstIndex<=UINT32_MAX&&primitive.indexCount<=UINT32_MAX-primitive.firstIndex
                     ?static_cast<std::uint32_t>(primitive.firstIndex):UINT32_MAX;std::memcpy(&morph.weights[0],&first,4);}
                 morph.nodeOpacity=run.opacity;
                 commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,sizeof(material),&morph,sizeof(morph));
@@ -3907,6 +3953,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
             auto desc=depthDesc;desc.vertexShader=simpleDepthVertex;desc.fragmentShader=simpleDepthModule;desc.colorWriteMasks.assign(desc.colorAttachmentCount,0);desc.colorWriteMasks[1]=VK_COLOR_COMPONENT_R_BIT;
             // Snapshot-depth vertices consume the mesh stream without vertex colors.
             desc.vertexAttributes.pop_back();desc.vertexBindings.resize(1);
+            if(referenceSceneDepth_)createReferenceDepthPipelines(desc,context);
             for(unsigned facing=0;facing<3;++facing){
                 desc.frontFace=facing==1?VK_FRONT_FACE_CLOCKWISE:VK_FRONT_FACE_COUNTER_CLOCKWISE;
                 desc.cullMode=facing==2?VK_CULL_MODE_NONE:context.faceCullingEnabled?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
@@ -4449,6 +4496,8 @@ void CharacterSceneRenderer::updateUniformBuffer(
         if(!referenceCameraPrepared_)throw std::invalid_argument("Reference camera requires project reference programs prepared before scene loading");
         if(settings.antiAliasing==3)throw std::invalid_argument("Reference camera requires a spatial anti-aliasing mode; temporal reference motion is not prepared");
         if(settings.screenSpaceReflection.enabled||viewFog_)throw std::invalid_argument("Reference camera screen-space reflection and view-fog projection require separate qualification");
+        if(referenceDepthActive()&&(!referenceSceneDepth_||rasterizationSamples_!=VK_SAMPLE_COUNT_1_BIT||settings.antiAliasing==4))
+            throw std::invalid_argument("Scene reference depth requires prepared single-sample spatial attachments");
         uniform.referenceCamera=referenceRasterProjectionParameters(*referenceCamera_);
     }
     // The actual view rotation is independent of sky projection scale.

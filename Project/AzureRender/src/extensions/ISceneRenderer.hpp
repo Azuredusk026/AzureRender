@@ -4,11 +4,20 @@
 #include "render/RenderGraph.hpp"
 
 #include <ostream>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <string_view>
 
 namespace azurerender {
+
+struct SceneReferenceDepthCapture {
+    VkExtent2D extent{};
+    std::uint64_t submission=0;
+    // IEEE 754 binary32 bit patterns in scene row order from bottom to top.
+    std::vector<std::uint32_t> rasterDepth;
+    std::vector<std::uint32_t> hardwareDepth;
+};
 
 struct SceneGraphResources {
     RenderGraph::ResourceId color;
@@ -120,6 +129,11 @@ public:
     // is open; the renderer writes complete `"key": value,` lines.
     virtual void appendCaptureManifestFields(std::ostream& json) const {
         (void)json;
+    }
+
+    // The host calls this after the last capture submission has completed.
+    virtual std::optional<SceneReferenceDepthCapture> readReferenceSceneDepth() const {
+        return std::nullopt;
     }
 
     // Optional hook: maps a renderer-local diagnostic index to a display name.

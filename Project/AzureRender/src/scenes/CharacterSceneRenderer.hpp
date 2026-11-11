@@ -16,6 +16,7 @@
 #include "render/SurfaceRadianceCache.hpp"
 #include "render/OutlineProjectionResources.hpp"
 #include "render/SceneMultisampling.hpp"
+#include "render/SceneReferenceDepthTargets.hpp"
 #include "render/ScreenReflectionGpu.hpp"
 #include "render/ProjectedScreenReflectionGpu.hpp"
 #include "render/ReflectionReprojection.hpp"
@@ -80,6 +81,7 @@ public:
     void updateFrame(const SceneFrameData& frame) override;
     void onFrameSubmitted(std::uint64_t submission) noexcept override;
     void onFrameAbandoned() noexcept override;
+    std::optional<SceneReferenceDepthCapture> readReferenceSceneDepth() const override;
     void recordScene(const RenderContext& context) override;
     void registerPasses(RenderGraph& graph, const SceneGraphResources& resources,
                         const RenderContext& context) override;
@@ -113,6 +115,12 @@ private:
     std::vector<char> readReferenceVertexProgram(const std::string&) const;
     bool referenceCameraPrepared_=false,referenceProjectedSurface_=false;
     std::optional<PreparedReferenceCameraView> referenceCamera_;
+    std::unique_ptr<SceneReferenceDepthTargets> referenceSceneDepth_;
+    std::array<VkPipeline,3> referenceSceneDepthPipelines_{};
+    std::optional<unsigned> pendingReferenceDepthSlot_;
+    std::optional<std::pair<unsigned,std::uint64_t>> submittedReferenceDepth_;
+    bool referenceDepthActive() const noexcept;
+    void createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context);
     void destroyUvShaderModule(VkShaderModule);
     VkPipeline createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
     VkPipeline materialUvPipeline(const AssetMaterial&,VkPipeline) const;
@@ -291,7 +299,7 @@ private:
     void initializeSurfaceOverlayPipelines(const rhi::GraphicsPipelineDesc& color,const rhi::GraphicsPipelineDesc& snapshot);
     void recordSurfaceOverlays(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,bool snapshotColor,SceneSubmissionCounters* counters=nullptr);
-    enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill,RadianceValidation};
+    enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill,RadianceValidation,ReferenceDepth};
     void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
     void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
