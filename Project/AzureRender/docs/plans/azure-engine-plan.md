@@ -1323,3 +1323,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [对象可见量逆投影标定](../acceptance/nr/scene-visibility-reference-calibration.md)核对实际相机与当前对象记录。
 图集、材质输入及完整颜色按各自门槛验收。
+
+[原生图集与接收输入来源](../acceptance/nr/native-atlas-and-receiver-producers.md)核对逐事件深度和法线写入。
+图集投影的乘加次序与两份服饰几何继续核对。

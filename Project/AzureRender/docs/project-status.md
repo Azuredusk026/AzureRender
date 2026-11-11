@@ -17,6 +17,9 @@ NVIDIA 法线来源控制的全部头发可见量满足一字节门槛。
 [对象可见量逆投影标定](acceptance/nr/scene-visibility-reference-calibration.md)核对双设备的实际输出。
 头发与完整接收区域继续按一字节门槛验收。
 
+[原生图集与接收输入来源](acceptance/nr/native-atlas-and-receiver-producers.md)已核对逐事件读回。
+对象图集的投影次序及两份服饰几何已有对应来源。
+
 [参考透明层级](acceptance/nr/reference-alpha-ellipse.md)通过公共策略和原四帧检查。
 NVIDIA 完整 17017 处一致，Intel 剩余九十六处深度超差继续修正。
 

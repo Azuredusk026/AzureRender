@@ -1,0 +1,2062 @@
+{
+  "status": "qualified-native-atlas-and-receiver-producer-isolation",
+  "overall": "failed-user-review",
+  "sourceCommit": "4e4c00c65d07056cd5b235d83d807a4395388c12",
+  "native": {
+    "status": "qualified",
+    "resource": "ResourceId::158089",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "uses": [
+      [
+        125,
+        "ResourceUsage.Clear"
+      ],
+      [
+        143,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        152,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        163,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        171,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        182,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        191,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        200,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        208,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        223,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        237,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        699,
+        "ResourceUsage.PS_Resource"
+      ]
+    ],
+    "atlasSha256": "86daee0e01e9c33207679b094bdf5cf31a26d2f93754f11abf6c44df1faecf57",
+    "stages": {
+      "125": {
+        "tile": {
+          "path": "125-tile.zlib",
+          "bytes": 2055,
+          "sha256": "8ad667a452ec238e240dd04ba72ecedacfb56be4952320a485b76267ef9995b0"
+        },
+        "tileSha256": "5647f05ec18958947d32874eeb788fa396a05d0bab7c1b71f112ceb7e9b31eee"
+      },
+      "143": {
+        "tile": {
+          "path": "143-tile.zlib",
+          "bytes": 2508,
+          "sha256": "12b32ba3f1d5bd329abd2aded5b76a06d33887688a624fc0cafd76ef8eac36e0"
+        },
+        "tileSha256": "5a3a157ff83774368928223c431831ccc8c24cb888e127dde6f3048cbd2d7fec",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        },
+        "vertex": {
+          "program": {
+            "path": "143-0.dxbc",
+            "bytes": 6136,
+            "sha256": "b2374fafafc47f408343c5a512697d67f41c3c079a643436194b922ab8b0693c"
+          },
+          "assembly": {
+            "path": "143-0.asm",
+            "bytes": 9375,
+            "sha256": "3da63b61a1d8bfd4d0694c91ff672f2e01922c6aec1e5f8012c3962664434600"
+          },
+          "sources": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "143-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 250624,
+              "path": "143-0-b1.bin",
+              "bytes": 65536,
+              "sha256": "6ed05fa9d4516c06e6cf78519ba193bae0ea2a93b5aaf0b371050b25e9a4ba4d"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 237824,
+              "path": "143-0-b2.bin",
+              "bytes": 256,
+              "sha256": "68b7b88d68d4ea95c71ca5cd6fbba7e989068516e9e8cb73f4b881fc19d8f039"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3473664,
+              "path": "143-0-b3.bin",
+              "bytes": 512,
+              "sha256": "c9aa5653585d188b12fa1df440796c203f66ba6a0d0d5909bbfc575d4879b1d2"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "143-4.dxbc",
+            "bytes": 100,
+            "sha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+          },
+          "assembly": {
+            "path": "143-4.asm",
+            "bytes": 107,
+            "sha256": "7544a887417494a61df95f8d1fbbb61cffe06cb1d937400b56cafe8579842519"
+          },
+          "sources": {},
+          "constants": {}
+        }
+      },
+      "152": {
+        "tile": {
+          "path": "152-tile.zlib",
+          "bytes": 2662,
+          "sha256": "b0f6d9c92dfd055d9d2f6bb9bce7aa634fe6bb6d34937d6fc8638304b4c5d39d"
+        },
+        "tileSha256": "21699f46031d9d5b14db63d4f78d293114aa03404c20161c8cb4c740fa5461dd",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        }
+      },
+      "163": {
+        "tile": {
+          "path": "163-tile.zlib",
+          "bytes": 120539,
+          "sha256": "70e9dc2c1c36dddd7d7def2c53fa0720ae6fcdff264963cb7489546b16d0085b"
+        },
+        "tileSha256": "debdd68442a96b75f4fb41f291337418aa91d51e039d2e5ed07662678f540e3e",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        }
+      },
+      "171": {
+        "tile": {
+          "path": "171-tile.zlib",
+          "bytes": 123245,
+          "sha256": "f0a611d4dfd6241367063da5c302d00b6387267b3aa45a5338eb3872cec835a8"
+        },
+        "tileSha256": "bf800600e1d7c24ea423779aa9c7d7f9146650e584986d0324ba7b2174c75728",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        }
+      },
+      "182": {
+        "tile": {
+          "path": "182-tile.zlib",
+          "bytes": 185225,
+          "sha256": "9701e46ea0dfc9e93faf280cfe6079ba506c7fb8d314c7610ceb380be1870252"
+        },
+        "tileSha256": "a399678374c34e86b8499ed5a8c0cb718ad1ad4ebdc9f6b9c38960f1d2025279",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        }
+      },
+      "191": {
+        "tile": {
+          "path": "191-tile.zlib",
+          "bytes": 225098,
+          "sha256": "d2394c1822a39f9d7b7832ce028360473796a5318388fc20f02e7217f7407aa7"
+        },
+        "tileSha256": "f647dac89841a638b8b7d56b8f7dfee5561693889e2009cacb1c75e8a53ecd2e",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        }
+      },
+      "200": {
+        "tile": {
+          "path": "200-tile.zlib",
+          "bytes": 267050,
+          "sha256": "6540c4bb0f7d9752af07fb48ee44575abbb2d48135576e2e09a6655763a3b76f"
+        },
+        "tileSha256": "7de6f15c07191adc8473239d2830947838ec6d2acaeaa9bb45d13e6f3c818ff1",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        }
+      },
+      "208": {
+        "tile": {
+          "path": "208-tile.zlib",
+          "bytes": 309835,
+          "sha256": "495e96cefcbfa161ded9e5751ce15fb7c65d74abb0cdb7966107ec46f9525307"
+        },
+        "tileSha256": "11f3830673711f5ac9de856911a53c2349c16d9e867824d3eff8104ed02b9001",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        }
+      },
+      "223": {
+        "tile": {
+          "path": "223-tile.zlib",
+          "bytes": 310181,
+          "sha256": "0ab2ceb98947083718bf82c71d215842443c531f867d58b6a429170e901a8979"
+        },
+        "tileSha256": "1a0a02b31136e615b12fe2f8b343fe0bd0b26770739a27619ec113947aaf7e1d",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        },
+        "vertex": {
+          "program": {
+            "path": "223-0.dxbc",
+            "bytes": 6136,
+            "sha256": "55d5528624744a9b0bad8f95cef93dd7d1bdaff130d0ff5cfcd70ee83ca213ab"
+          },
+          "assembly": {
+            "path": "223-0.asm",
+            "bytes": 9375,
+            "sha256": "e3546814ec12066dd07b043c3a53db8861414d7c266273f79d33366e6979f895"
+          },
+          "sources": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "223-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 252672,
+              "path": "223-0-b1.bin",
+              "bytes": 65536,
+              "sha256": "5ee1f3a11f7b62ba4bddae7c2355f75470a5c2b9d2adf275b9f33d68aef154ed"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 237824,
+              "path": "223-0-b2.bin",
+              "bytes": 256,
+              "sha256": "68b7b88d68d4ea95c71ca5cd6fbba7e989068516e9e8cb73f4b881fc19d8f039"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3239424,
+              "path": "223-0-b3.bin",
+              "bytes": 512,
+              "sha256": "2a26cbdb7d8cdccfa906f406f1f245d1e8c38b5605267d7d5d7594801380dc75"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "223-4.dxbc",
+            "bytes": 744,
+            "sha256": "08d02aacbf1ce0c26afbfb77e7334ad17376b4169e81ffe34919ecb8aa150543"
+          },
+          "assembly": {
+            "path": "223-4.asm",
+            "bytes": 834,
+            "sha256": "2d63f46714d2df23cc9021a76c96e8982139b33ce8fc5ba1971657c203179ceb"
+          },
+          "sources": {
+            "0": "ResourceId::85388"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 65792,
+              "path": "223-4-b0.bin",
+              "bytes": 3328,
+              "sha256": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55"
+            },
+            "1": {
+              "resource": "ResourceId::466",
+              "offset": 3239424,
+              "path": "223-4-b1.bin",
+              "bytes": 512,
+              "sha256": "2a26cbdb7d8cdccfa906f406f1f245d1e8c38b5605267d7d5d7594801380dc75"
+            }
+          }
+        }
+      },
+      "237": {
+        "tile": {
+          "path": "237-tile.zlib",
+          "bytes": 320269,
+          "sha256": "d7c51c132136de5ddadf3865beb503a85acfb40d2a1007ef5fc7d858d7fa4dcb"
+        },
+        "tileSha256": "10e123c7075479f3bea3337e0651537e6408a468a3f5dae81de6be05d6eb7cb9",
+        "viewport": {
+          "x": "2048.0",
+          "y": "1024.0",
+          "width": "1024.0",
+          "height": "1024.0",
+          "minDepth": "0.0",
+          "maxDepth": "1.0"
+        },
+        "rasterizer": {
+          "depthBias": "-8",
+          "slopeScaledDepthBias": "-0.0",
+          "depthBiasClamp": "0.0",
+          "cullMode": "CullMode.NoCull",
+          "scissorEnable": "True"
+        },
+        "depth": {
+          "depthEnable": "True",
+          "depthWrites": "True",
+          "depthFunction": "CompareFunction.GreaterEqual"
+        },
+        "vertex": {
+          "program": {
+            "path": "237-0.dxbc",
+            "bytes": 6136,
+            "sha256": "b2374fafafc47f408343c5a512697d67f41c3c079a643436194b922ab8b0693c"
+          },
+          "assembly": {
+            "path": "237-0.asm",
+            "bytes": 9375,
+            "sha256": "3da63b61a1d8bfd4d0694c91ff672f2e01922c6aec1e5f8012c3962664434600"
+          },
+          "sources": {
+            "0": "ResourceId::399"
+          },
+          "constants": {
+            "0": {
+              "resource": "ResourceId::611",
+              "offset": 64256,
+              "path": "237-0-b0.bin",
+              "bytes": 1536,
+              "sha256": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155"
+            },
+            "1": {
+              "resource": "ResourceId::611",
+              "offset": 252928,
+              "path": "237-0-b1.bin",
+              "bytes": 65536,
+              "sha256": "fcd7259d5140c468083b910200ce958c6ce8bbb2b28723041732234c6a818796"
+            },
+            "2": {
+              "resource": "ResourceId::611",
+              "offset": 237824,
+              "path": "237-0-b2.bin",
+              "bytes": 256,
+              "sha256": "68b7b88d68d4ea95c71ca5cd6fbba7e989068516e9e8cb73f4b881fc19d8f039"
+            },
+            "3": {
+              "resource": "ResourceId::466",
+              "offset": 3373312,
+              "path": "237-0-b3.bin",
+              "bytes": 512,
+              "sha256": "c9aa5653585d188b12fa1df440796c203f66ba6a0d0d5909bbfc575d4879b1d2"
+            }
+          }
+        },
+        "pixel": {
+          "program": {
+            "path": "237-4.dxbc",
+            "bytes": 100,
+            "sha256": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f"
+          },
+          "assembly": {
+            "path": "237-4.asm",
+            "bytes": 107,
+            "sha256": "7544a887417494a61df95f8d1fbbb61cffe06cb1d937400b56cafe8579842519"
+          },
+          "sources": {},
+          "constants": {}
+        },
+        "postVertex": {
+          "count": 11564,
+          "stride": 76,
+          "indexStride": 2,
+          "baseVertex": 0,
+          "vertices": {
+            "path": "237-post-vertices.zlib",
+            "bytes": 615354,
+            "sha256": "6acd2e55205bd36505909a83b7dadfaf71d9ac262ab44f398904da6b70f60478"
+          },
+          "indices": {
+            "path": "237-post-indices.zlib",
+            "bytes": 45625,
+            "sha256": "5c3e329a1a6bc8a2ed589b82d37a1511f11b3c55ed7e3a514125fc2d48877119"
+          }
+        }
+      }
+    },
+    "receiverNormal": {
+      "resource": "ResourceId::141952",
+      "uses": [
+        [
+          275,
+          "ResourceUsage.Clear"
+        ],
+        [
+          296,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          310,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          328,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          345,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          363,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          377,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          391,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          404,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          422,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          440,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          460,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          478,
+          "ResourceUsage.ColorTarget"
+        ],
+        [
+          522,
+          "ResourceUsage.PS_Resource"
+        ],
+        [
+          625,
+          "ResourceUsage.PS_Resource"
+        ],
+        [
+          699,
+          "ResourceUsage.PS_Resource"
+        ]
+      ],
+      "boundsNative": [
+        1140,
+        1000,
+        1430,
+        1310
+      ],
+      "stages": {
+        "275": {
+          "rawSha256": "defe5059e4a7b5c797a007fa8428d93cf7586359b5d78c6c9c1a4a8586ea7a2a",
+          "crop": {
+            "path": "275-receiver-normal.zlib",
+            "bytes": 371,
+            "sha256": "87b69c698bab717e1401a1a6755c5876aa1c16605489db10cd58167601a32ce0"
+          }
+        },
+        "296": {
+          "rawSha256": "54671ea142d909c181cb648bfadd7827aaecfd4e4b15b598c6cedc2700dbfbd1",
+          "crop": {
+            "path": "296-receiver-normal.zlib",
+            "bytes": 2245,
+            "sha256": "2f0b4df96714a05c3c1cd813cda7b372ae4891bbf0b8d1fe928a8f4f6fcb1a6c"
+          }
+        },
+        "310": {
+          "rawSha256": "9e683c9548f4e41ef5008df033e83637a48ef15f2d6005ee4de4e92e5298ee81",
+          "crop": {
+            "path": "310-receiver-normal.zlib",
+            "bytes": 2357,
+            "sha256": "d4149f896beeccb70a7e52669b52d27de01ea17b25d9ec9ea192a221289e6f2c"
+          }
+        },
+        "328": {
+          "rawSha256": "e21d26ec4c69a65e6e2ac7e3fceff3d3d7da6b5d79e6ee76e29cd42cf4ca8205",
+          "crop": {
+            "path": "328-receiver-normal.zlib",
+            "bytes": 52222,
+            "sha256": "adbbe50af746077587cb3a49d85dd3dc8c7ece869f75be7c34866dc2934bc4a3"
+          }
+        },
+        "345": {
+          "rawSha256": "9271b3fcfde75ab69aef3156ac430e57fd0cd7290df432f738dee75abc9ed53f",
+          "crop": {
+            "path": "345-receiver-normal.zlib",
+            "bytes": 83065,
+            "sha256": "9ed640449f406180d5ed3f2d2baa66e3ad53e78b05b53e9744ac857275021ab8"
+          }
+        },
+        "363": {
+          "rawSha256": "66e005986dd35dd6eda5c303036741a212a33f90ff5d6c8cc3e82483fc002b4f",
+          "crop": {
+            "path": "363-receiver-normal.zlib",
+            "bytes": 83065,
+            "sha256": "9ed640449f406180d5ed3f2d2baa66e3ad53e78b05b53e9744ac857275021ab8"
+          }
+        },
+        "377": {
+          "rawSha256": "682af3cdbb2920b99af77d70d08fa7d642003643b7be2e58248a3718210706cf",
+          "crop": {
+            "path": "377-receiver-normal.zlib",
+            "bytes": 118457,
+            "sha256": "d20287899adc8f241139c3f5430347c5ada9ab96d3dba231fe4ab324047668d2"
+          }
+        },
+        "391": {
+          "rawSha256": "e2aaf31165fc28366b995df97ed27b35e29e2b01b2ce18d70ea2c37af961031d",
+          "crop": {
+            "path": "391-receiver-normal.zlib",
+            "bytes": 118457,
+            "sha256": "d20287899adc8f241139c3f5430347c5ada9ab96d3dba231fe4ab324047668d2"
+          }
+        },
+        "404": {
+          "rawSha256": "1fafcc587afc1f589e48f79a0924714eaf46e4e86738c3a23faa5d4b01686b2c",
+          "crop": {
+            "path": "404-receiver-normal.zlib",
+            "bytes": 118457,
+            "sha256": "d20287899adc8f241139c3f5430347c5ada9ab96d3dba231fe4ab324047668d2"
+          }
+        },
+        "422": {
+          "rawSha256": "ca462dae3a626ab03d4beb04844d332728ad6baabc1497b1e9fad2b089d04f6e",
+          "crop": {
+            "path": "422-receiver-normal.zlib",
+            "bytes": 152998,
+            "sha256": "cf031855991b097c712916f582190808c559c0d4d9b17c2d6eda9f78657b57ba"
+          }
+        },
+        "440": {
+          "rawSha256": "ca462dae3a626ab03d4beb04844d332728ad6baabc1497b1e9fad2b089d04f6e",
+          "crop": {
+            "path": "440-receiver-normal.zlib",
+            "bytes": 152998,
+            "sha256": "cf031855991b097c712916f582190808c559c0d4d9b17c2d6eda9f78657b57ba"
+          }
+        },
+        "460": {
+          "rawSha256": "cd9ce462bc626e925d48cbff0b32fa3294e1902975452ddeac41ccc084b7b4cf",
+          "crop": {
+            "path": "460-receiver-normal.zlib",
+            "bytes": 174056,
+            "sha256": "77131f7d50c290b62b459c1b5834fa03bb404f657548f158531ef7e561c2f6d2"
+          }
+        },
+        "478": {
+          "rawSha256": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+          "crop": {
+            "path": "478-receiver-normal.zlib",
+            "bytes": 174056,
+            "sha256": "77131f7d50c290b62b459c1b5834fa03bb404f657548f158531ef7e561c2f6d2"
+          }
+        },
+        "699": {
+          "rawSha256": "63731d707e7ba30d9417049c8148b9bd2167208e435e8d9f0cc100a1fd03e095",
+          "crop": {
+            "path": "699-receiver-normal.zlib",
+            "bytes": 174056,
+            "sha256": "77131f7d50c290b62b459c1b5834fa03bb404f657548f158531ef7e561c2f6d2"
+          }
+        }
+      }
+    }
+  },
+  "vulkan": {
+    "status": "qualified",
+    "resource": "ResourceId::1604",
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "uses": [
+      [
+        225,
+        "ResourceUsage.Clear"
+      ],
+      [
+        238,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        242,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        246,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        251,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        256,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        260,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        264,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        268,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        272,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        276,
+        "ResourceUsage.DepthStencilTarget"
+      ],
+      [
+        397,
+        "ResourceUsage.Barrier"
+      ],
+      [
+        406,
+        "ResourceUsage.PS_Resource"
+      ]
+    ],
+    "atlasSha256": "ee700ac4164ffd1923cc9ca1eaeddf27366213a4b8dc5cf0e17fa154328f781e",
+    "stages": {
+      "238": {
+        "indexCount": 17037,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "238-tile.zlib",
+          "bytes": 120154,
+          "sha256": "1e3d75d44860ca22495ff096dd71f08e5bc378f33249c0a5b61649ca69a6724d"
+        },
+        "tileSha256": "9dee398db964f3a5605de6f7895d93fe188d35e747cc35ba448b381c28276043",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ]
+      },
+      "242": {
+        "indexCount": 102927,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "242-tile.zlib",
+          "bytes": 173427,
+          "sha256": "7c93f4b381c603fc05ccaa8e117bdbaa23578fd34a37013a078d95af8b02b1a5"
+        },
+        "tileSha256": "fb0fa6b687c2763347a02962b7cb9a685a15f89dea8132c6b92f07a037d9a55a",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ],
+        "postVertex": {
+          "count": 32031,
+          "stride": 48,
+          "indexStride": 4,
+          "baseVertex": 0,
+          "vertices": {
+            "path": "242-post-vertices.zlib",
+            "bytes": 687835,
+            "sha256": "fdde6886ccfac226233bedba437d13d857645916b1064acd72efd0e0600edf7b"
+          },
+          "indices": {
+            "path": "242-post-indices.zlib",
+            "bytes": 108757,
+            "sha256": "27c7879f45030e57d107c616bdbb6350a02ef5c15783cb8e262ee9c58c909f3e"
+          }
+        }
+      },
+      "246": {
+        "indexCount": 61923,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "246-tile.zlib",
+          "bytes": 244901,
+          "sha256": "c09334373be8b2eb863db15ddb406d72635d0b8185f737d48ca610c9b585040b"
+        },
+        "tileSha256": "bad722c8bf0e4894c6dff0c07dd7abbbb21c62a4f76ff4775a7912d21be1ea7f",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ],
+        "postVertex": {
+          "count": 17541,
+          "stride": 48,
+          "indexStride": 4,
+          "baseVertex": 0,
+          "vertices": {
+            "path": "246-post-vertices.zlib",
+            "bytes": 437156,
+            "sha256": "6ab7b71600498144534adb863894eb2fff7ebb92528cb6442228ce4b65c949ca"
+          },
+          "indices": {
+            "path": "246-post-indices.zlib",
+            "bytes": 65428,
+            "sha256": "e5d65b8f91c15d868f7f20ebd6f4a5fec2097d4c6f3da5b10cce9c38a03e96a6"
+          }
+        }
+      },
+      "251": {
+        "indexCount": 10698,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": {
+          "id": "ResourceId::1216",
+          "sha256": "91ac2f1e32ea6ee107bbb9143c9e96cdffef43e22ae53b9626c3eb7d7a1af245"
+        },
+        "tile": {
+          "path": "251-tile.zlib",
+          "bytes": 245232,
+          "sha256": "314f2df8184b64aea4fd1dacdedec49ffb7343e9b7a02343de2c363e42788792"
+        },
+        "tileSha256": "4d5a15e9ea45fa3b0280c0eec41e666b3ca713a793dde6756c8f5398d605ec16",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ]
+      },
+      "256": {
+        "indexCount": 7698,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "256-tile.zlib",
+          "bytes": 290169,
+          "sha256": "ffa03cf73228ad3d9046d332885c0f682dab2a349366b2fb2d984143941de23c"
+        },
+        "tileSha256": "a544864e2e9ce085591fed59ff750317006639861a9a1568011a08196b15e24e",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ]
+      },
+      "260": {
+        "indexCount": 21489,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "260-tile.zlib",
+          "bytes": 307560,
+          "sha256": "aae4aea721a6bba6f6c47a7306f440425c870ab7ae174ba8743dbfa8f322aa66"
+        },
+        "tileSha256": "6f1a1b30091f4124a97545dc8a91ba2bc8a76095a2c97d3d28e579444b32d569",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ]
+      },
+      "264": {
+        "indexCount": 1878,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "264-tile.zlib",
+          "bytes": 307779,
+          "sha256": "da1b351714d2bf404edd78d18c7223b0646465fa3b5f1ad0fc6357c2ec606931"
+        },
+        "tileSha256": "f6ee270dff74d0a9eaedde61679d4f17c36ba6e96b44f56c48d0ddd147ea0935",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ]
+      },
+      "268": {
+        "indexCount": 8718,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "268-tile.zlib",
+          "bytes": 309930,
+          "sha256": "972c073fbb4d3a6eaddaccd020f14bd98932531eae5ddf6071aca86d0fc9e616"
+        },
+        "tileSha256": "18d589cf14d6beacc9c0150d4ee85154b57984299a54dfa8b85b63f159e1d194",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ]
+      },
+      "272": {
+        "indexCount": 43044,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "272-tile.zlib",
+          "bytes": 320085,
+          "sha256": "9045514e9f680db7d55c04504995fba9625d1b02881aca314585c713a9e1051c"
+        },
+        "tileSha256": "1764beab8b6bbf9379ebfbf1dbeed093ba27649897feb65426c93fbc01300f3a",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ],
+        "postVertex": {
+          "count": 11564,
+          "stride": 48,
+          "indexStride": 4,
+          "baseVertex": 0,
+          "vertices": {
+            "path": "272-post-vertices.zlib",
+            "bytes": 294398,
+            "sha256": "5142eb74e55432c6aab681761923254c0130fe3a0dac84a9db7a1d9b9b5d00bb"
+          },
+          "indices": {
+            "path": "272-post-indices.zlib",
+            "bytes": 43955,
+            "sha256": "886d7249353f031a94310f1e020ae64da7f436f8fdb4d735942d007cc40482c8"
+          }
+        }
+      },
+      "276": {
+        "indexCount": 948,
+        "vertex": {
+          "id": "ResourceId::1215",
+          "sha256": "5414c14dd37602cae2f5a252aff08a562947a2d432c9a5ef7555ff6dbf4f87c5"
+        },
+        "pixel": null,
+        "tile": {
+          "path": "276-tile.zlib",
+          "bytes": 320091,
+          "sha256": "c665f3b9d314aaadfd4c4625bb669c7afba199b2868a0adfaa503dc1f04397ef"
+        },
+        "tileSha256": "f54d829293f4bb05ea220132265a0bf6c01b6fb2e5e6cd8c0d0268bb8f2827dc",
+        "viewport": [
+          2048.0,
+          1024.0,
+          1024.0,
+          1024.0,
+          0.0,
+          1.0
+        ]
+      }
+    }
+  },
+  "atlasProducerComparison": {
+    "casterEventMap": {
+      "143": 264,
+      "152": 276,
+      "163": 238,
+      "171": 268,
+      "182": 256,
+      "191": 242,
+      "200": 260,
+      "208": 246,
+      "223": 251,
+      "237": 272
+    },
+    "nativeDepthUpdates": {
+      "125": 0,
+      "143": 163,
+      "152": 79,
+      "163": 65700,
+      "171": 4951,
+      "182": 37136,
+      "191": 51433,
+      "200": 25442,
+      "208": 64379,
+      "223": 855,
+      "237": 11613
+    },
+    "actualDepthUpdates": {
+      "238": 65841,
+      "242": 51763,
+      "246": 65391,
+      "251": 856,
+      "256": 26876,
+      "260": 11144,
+      "264": 163,
+      "268": 5006,
+      "272": 11615,
+      "276": 68
+    },
+    "coveredByBoth": 182211,
+    "actualOnly": 21,
+    "nativeOnly": 25,
+    "depthError": {
+      "2": {
+        "pixels": 2380,
+        "sameMaterial": 2345,
+        "differentMaterial": 35,
+        "eventPairs": [
+          {
+            "nativeEvent": 208,
+            "productionEvent": 246,
+            "sameMaterial": true,
+            "count": 1123
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 242,
+            "sameMaterial": true,
+            "count": 481
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 260,
+            "sameMaterial": true,
+            "count": 252
+          },
+          {
+            "nativeEvent": 182,
+            "productionEvent": 256,
+            "sameMaterial": true,
+            "count": 193
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 238,
+            "sameMaterial": true,
+            "count": 146
+          },
+          {
+            "nativeEvent": 237,
+            "productionEvent": 272,
+            "sameMaterial": true,
+            "count": 137
+          },
+          {
+            "nativeEvent": 208,
+            "productionEvent": 242,
+            "sameMaterial": false,
+            "count": 12
+          },
+          {
+            "nativeEvent": 171,
+            "productionEvent": 268,
+            "sameMaterial": true,
+            "count": 7
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 6
+          },
+          {
+            "nativeEvent": 143,
+            "productionEvent": 264,
+            "sameMaterial": true,
+            "count": 4
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 3
+          },
+          {
+            "nativeEvent": 182,
+            "productionEvent": 260,
+            "sameMaterial": false,
+            "count": 2
+          },
+          {
+            "nativeEvent": 223,
+            "productionEvent": 251,
+            "sameMaterial": true,
+            "count": 2
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 242,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 272,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 171,
+            "productionEvent": 276,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 171,
+            "productionEvent": 242,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 182,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 238,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 256,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 260,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 256,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 208,
+            "productionEvent": 251,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 223,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          }
+        ]
+      },
+      "32": {
+        "pixels": 271,
+        "sameMaterial": 236,
+        "differentMaterial": 35,
+        "eventPairs": [
+          {
+            "nativeEvent": 208,
+            "productionEvent": 246,
+            "sameMaterial": true,
+            "count": 139
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 242,
+            "sameMaterial": true,
+            "count": 66
+          },
+          {
+            "nativeEvent": 237,
+            "productionEvent": 272,
+            "sameMaterial": true,
+            "count": 21
+          },
+          {
+            "nativeEvent": 208,
+            "productionEvent": 242,
+            "sameMaterial": false,
+            "count": 12
+          },
+          {
+            "nativeEvent": 182,
+            "productionEvent": 256,
+            "sameMaterial": true,
+            "count": 6
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 6
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 3
+          },
+          {
+            "nativeEvent": 182,
+            "productionEvent": 260,
+            "sameMaterial": false,
+            "count": 2
+          },
+          {
+            "nativeEvent": 143,
+            "productionEvent": 264,
+            "sameMaterial": true,
+            "count": 1
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 238,
+            "sameMaterial": true,
+            "count": 1
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 242,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 272,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 171,
+            "productionEvent": 276,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 171,
+            "productionEvent": 242,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 182,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 238,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 256,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 260,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 256,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 260,
+            "sameMaterial": true,
+            "count": 1
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 208,
+            "productionEvent": 251,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 223,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 223,
+            "productionEvent": 251,
+            "sameMaterial": true,
+            "count": 1
+          }
+        ]
+      },
+      "512": {
+        "pixels": 56,
+        "sameMaterial": 37,
+        "differentMaterial": 19,
+        "eventPairs": [
+          {
+            "nativeEvent": 208,
+            "productionEvent": 246,
+            "sameMaterial": true,
+            "count": 23
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 242,
+            "sameMaterial": true,
+            "count": 9
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 5
+          },
+          {
+            "nativeEvent": 237,
+            "productionEvent": 272,
+            "sameMaterial": true,
+            "count": 3
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 2
+          },
+          {
+            "nativeEvent": 182,
+            "productionEvent": 260,
+            "sameMaterial": false,
+            "count": 2
+          },
+          {
+            "nativeEvent": 163,
+            "productionEvent": 272,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 171,
+            "productionEvent": 242,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 182,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 238,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 256,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 191,
+            "productionEvent": 260,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 256,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 260,
+            "sameMaterial": true,
+            "count": 1
+          },
+          {
+            "nativeEvent": 200,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 208,
+            "productionEvent": 242,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 223,
+            "productionEvent": 246,
+            "sameMaterial": false,
+            "count": 1
+          },
+          {
+            "nativeEvent": 223,
+            "productionEvent": 251,
+            "sameMaterial": true,
+            "count": 1
+          }
+        ]
+      }
+    },
+    "hairVertex": {
+      "vertices": 11564,
+      "triangleCornerOrder": [
+        2,
+        1,
+        0
+      ],
+      "comparedAxes": [
+        "atlasX",
+        "atlasY",
+        "D16"
+      ],
+      "median": [
+        0.006075859069824219,
+        0.004608154296875,
+        0.20898118615150452
+      ],
+      "p95": [
+        0.016448974609375,
+        0.012542724609375,
+        0.5761630833148956
+      ],
+      "maximum": [
+        0.024477005004882812,
+        0.020172119140625,
+        0.8984237909317017
+      ],
+      "xySubpixelExact": 442,
+      "d16WithinOne": 11564
+    }
+  },
+  "receiverSourceAttribution": {
+    "atlasResource": "ResourceId::158089",
+    "normalResource": "ResourceId::141952",
+    "atlasLastDepthWrite": {
+      "0": {
+        "rawChanges": 0,
+        "finalTexels": 866340,
+        "frozenCovered": 0,
+        "shared": 0,
+        "actualOnly": 21,
+        "frozenOnly": 0,
+        "overTwo": 0,
+        "over32": 0,
+        "over512": 0,
+        "maximum": 0
+      },
+      "143": {
+        "rawChanges": 163,
+        "finalTexels": 103,
+        "frozenCovered": 103,
+        "shared": 103,
+        "actualOnly": 0,
+        "frozenOnly": 0,
+        "overTwo": 4,
+        "over32": 1,
+        "over512": 0,
+        "maximum": 228
+      },
+      "152": {
+        "rawChanges": 79,
+        "finalTexels": 67,
+        "frozenCovered": 67,
+        "shared": 67,
+        "actualOnly": 0,
+        "frozenOnly": 0,
+        "overTwo": 0,
+        "over32": 0,
+        "over512": 0,
+        "maximum": 1
+      },
+      "163": {
+        "rawChanges": 65700,
+        "finalTexels": 18132,
+        "frozenCovered": 18132,
+        "shared": 18132,
+        "actualOnly": 0,
+        "frozenOnly": 0,
+        "overTwo": 151,
+        "over32": 6,
+        "over512": 3,
+        "maximum": 9886
+      },
+      "171": {
+        "rawChanges": 4951,
+        "finalTexels": 1062,
+        "frozenCovered": 1062,
+        "shared": 1062,
+        "actualOnly": 0,
+        "frozenOnly": 0,
+        "overTwo": 9,
+        "over32": 2,
+        "over512": 1,
+        "maximum": 895
+      },
+      "182": {
+        "rawChanges": 37136,
+        "finalTexels": 24873,
+        "frozenCovered": 24873,
+        "shared": 24870,
+        "actualOnly": 0,
+        "frozenOnly": 3,
+        "overTwo": 196,
+        "over32": 9,
+        "over512": 3,
+        "maximum": 7753
+      },
+      "191": {
+        "rawChanges": 51433,
+        "finalTexels": 50622,
+        "frozenCovered": 50622,
+        "shared": 50621,
+        "actualOnly": 0,
+        "frozenOnly": 1,
+        "overTwo": 490,
+        "over32": 75,
+        "over512": 17,
+        "maximum": 11920
+      },
+      "200": {
+        "rawChanges": 25442,
+        "finalTexels": 11144,
+        "frozenCovered": 11144,
+        "shared": 11142,
+        "actualOnly": 0,
+        "frozenOnly": 2,
+        "overTwo": 254,
+        "over32": 3,
+        "over512": 3,
+        "maximum": 27914
+      },
+      "208": {
+        "rawChanges": 64379,
+        "finalTexels": 63765,
+        "frozenCovered": 63765,
+        "shared": 63748,
+        "actualOnly": 0,
+        "frozenOnly": 17,
+        "overTwo": 1136,
+        "over32": 152,
+        "over512": 24,
+        "maximum": 5024
+      },
+      "223": {
+        "rawChanges": 855,
+        "finalTexels": 855,
+        "frozenCovered": 855,
+        "shared": 855,
+        "actualOnly": 0,
+        "frozenOnly": 0,
+        "overTwo": 3,
+        "over32": 2,
+        "over512": 2,
+        "maximum": 1188
+      },
+      "237": {
+        "rawChanges": 11613,
+        "finalTexels": 11613,
+        "frozenCovered": 11613,
+        "shared": 11611,
+        "actualOnly": 0,
+        "frozenOnly": 2,
+        "overTwo": 137,
+        "over32": 21,
+        "over512": 3,
+        "maximum": 1134
+      }
+    },
+    "receiverLastNormalChange": {
+      "nvidia": {
+        "296": {
+          "rawChanges": 498,
+          "receivers": 496,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 132,
+          "overOneNonhair": 132,
+          "over64": 50,
+          "maximum": 251
+        },
+        "310": {
+          "rawChanges": 255,
+          "receivers": 255,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 2,
+          "overOneNonhair": 2,
+          "over64": 0,
+          "maximum": 12
+        },
+        "328": {
+          "rawChanges": 16564,
+          "receivers": 9116,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 174,
+          "overOneNonhair": 174,
+          "over64": 30,
+          "maximum": 251
+        },
+        "345": {
+          "rawChanges": 10711,
+          "receivers": 3825,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 267,
+          "overOneNonhair": 267,
+          "over64": 53,
+          "maximum": 255
+        },
+        "377": {
+          "rawChanges": 17995,
+          "receivers": 16629,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 1400,
+          "overOneNonhair": 1400,
+          "over64": 248,
+          "maximum": 253
+        },
+        "422": {
+          "rawChanges": 19063,
+          "receivers": 19063,
+          "receiversHair": 17017,
+          "normalExact": 19008,
+          "overOne": 1154,
+          "overOneNonhair": 877,
+          "over64": 529,
+          "maximum": 255
+        }
+      },
+      "intel": {
+        "296": {
+          "rawChanges": 498,
+          "receivers": 496,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 130,
+          "overOneNonhair": 130,
+          "over64": 50,
+          "maximum": 251
+        },
+        "310": {
+          "rawChanges": 255,
+          "receivers": 255,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 2,
+          "overOneNonhair": 2,
+          "over64": 0,
+          "maximum": 12
+        },
+        "328": {
+          "rawChanges": 16564,
+          "receivers": 9116,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 200,
+          "overOneNonhair": 200,
+          "over64": 31,
+          "maximum": 251
+        },
+        "345": {
+          "rawChanges": 10711,
+          "receivers": 3825,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 286,
+          "overOneNonhair": 286,
+          "over64": 53,
+          "maximum": 255
+        },
+        "377": {
+          "rawChanges": 17995,
+          "receivers": 16629,
+          "receiversHair": 0,
+          "normalExact": 0,
+          "overOne": 1400,
+          "overOneNonhair": 1400,
+          "over64": 251,
+          "maximum": 253
+        },
+        "422": {
+          "rawChanges": 19063,
+          "receivers": 19063,
+          "receiversHair": 17017,
+          "normalExact": 17070,
+          "overOne": 1309,
+          "overOneNonhair": 881,
+          "over64": 529,
+          "maximum": 255
+        }
+      }
+    }
+  },
+  "projection": {
+    "pixelConsumerEvent": 699,
+    "vertexSourceEvents": [
+      143,
+      223,
+      237
+    ],
+    "depthConvention": "reversed",
+    "atlasPage": 6,
+    "referenceAxes": [
+      -1,
+      2,
+      3
+    ],
+    "referenceOffset": [
+      -300.0,
+      300.0,
+      -300.0
+    ],
+    "absoluteCameraOrigin": [
+      -300.0,
+      300.8800048828125,
+      -296.70001220703125
+    ],
+    "rasterClipColumns": [
+      1.2360974550247192,
+      0.07361747324466705,
+      0.059343110769987106,
+      0.0,
+      -1.899196711008244e-08,
+      -0.6784549355506897,
+      0.2135448008775711,
+      0.0,
+      -0.2179575115442276,
+      0.41750505566596985,
+      0.3365512192249298,
+      0.0,
+      305.3840637207031,
+      351.50201416015625,
+      55.04122543334961,
+      1.0
+    ],
+    "rasterClipSha256": "4973f0a3cd1b2e7d27114bd24f3ceb1602d070d09e5956ebe92946504019340e",
+    "consumerUnitColumns": [
+      0.6180487275123596,
+      -0.03680873662233353,
+      0.059343110769987106,
+      0.0,
+      -9.49598355504122e-09,
+      0.33922746777534485,
+      0.2135448008775711,
+      0.0,
+      -0.1089787557721138,
+      -0.20875252783298492,
+      0.3365512192249298,
+      0.0,
+      153.19203186035156,
+      -175.25100708007812,
+      55.04122543334961,
+      1.0
+    ],
+    "consumerUnitSha256": "f1d778b822dc1303d334338a3f35728940f106f12d7db0d903c53408dfa9ec6e",
+    "viewportConversion": "x = 2u - 1; y = 1 - 2v; z = reversed depth",
+    "matrixBitMatch": true,
+    "casterHairPixelProgramEmpty": true
+  },
+  "vertexArithmetic": {
+    "vertices": 11564,
+    "exactVertices": 11564,
+    "exactComponents": 46256,
+    "maximumClipError": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "groupedVsDoubleMaxClipError": [
+      3.014955933622332e-05,
+      2.894634008043795e-05,
+      7.2557722887722775e-06,
+      0.0
+    ],
+    "viewport": "native event 237",
+    "sourceFloatOffsets": {
+      "position": 0,
+      "relativePosition": 6
+    }
+  },
+  "execution": {
+    "native": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 6.312000000034459,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-024632-native-atlas-and-receiver-producers-d5e705\\native-atlas-producers.py",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-024632-native-atlas-and-receiver-producers-d5e705"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-024632-native-atlas-and-receiver-producers-d5e705\\tmp"
+    },
+    "vulkan": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 5.532000000006519,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-024632-native-atlas-and-receiver-producers-d5e705\\vulkan-atlas-producers.py"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-024632-native-atlas-and-receiver-producers-d5e705\\tmp"
+    }
+  },
+  "archive": {
+    "bytes": 6925337,
+    "sha256": "bd24898ef20119c4b12cc05e66f26f946f39fd0ab3d231084694ba41877e85cc",
+    "files": 94,
+    "contents": {
+      "atlas-cross-producer-attribution.json": "d617fae7524b9a1f69afa07777db882653ab75ac3f28fa711195f815c49a1368",
+      "attribute-producers.py": "abbcfa7b62e36a73a506216c564c6bf3e77dbab284e94324a92ef97076f70697",
+      "budget.json": "df113d0edabdf982951d9f73f7b529fbb05810a8ad242b3f32e21a7da52a81ed",
+      "claim-inputs.py": "b8f54387c3c9f0d3dcefc6bab765db8a404fba7204031363c44622a8b5a606d6",
+      "compare-atlas-producers.py": "c8563cff84f931b0feee4c34081a999aaa6455bfb59e8b8137a40ec6b7edd412",
+      "native-atlas-producer-worker.py": "23ce53d8b2a82a53f47b2637a407e491ae946a0c9ead8f9fbb1968e41a4dd9dc",
+      "native-atlas-producers-execution.json": "70ed3397c9d2981f1f2db600292d98269e5dc1f8b244f37c938737f00e2d4367",
+      "native-atlas-producers.py": "ac642ee45206bdbd846634619d38c1a989e5f8db9f209409d10b793d8c91c357",
+      "native-atlas-projection-source.json": "788b14a9ee7c5eb5048bb8efc230441154facfd77b05ceeee0b5e9abf4ff2af1",
+      "native-shadow-vertex-arithmetic.json": "9df36ddbd3d7fb8fac86684a16b7bfd9b493909bd970c211fe37a9a71be91efc",
+      "package-evidence.py": "91dcbdb74dba72cc068723dd162e2c410dea493d8558858534b4bdcd29e8c82c",
+      "process.log": "5f4ed05a558087a29e539e5058ed6b30b4ef8df7d71af9be539fb68e7014a676",
+      "producer-attribution.json": "f281e735f4cd40d921e125c074f845c0926a461f86c230ad7503577716d063e6",
+      "queued-gpu.py": "45af9d3d15ecc03da8c05f18b98c0cf9d3d7c48ccf883b7bd06a6a21f5b13c19",
+      "task-card.json": "0643a1e7207d9a4d1e71aa2ce9698eed8b51d5caf19d0af44f9df92cf20c7832",
+      "verify-native-atlas-projection.py": "8838752099a3290a70286f3983d5989afe274adff7a72a8e3387162747aa6356",
+      "verify-native-shadow-vertex-arithmetic.py": "ae6a9add9d4e1988f00f404140c89c21cd80746a7e5fb686d08b592f2e7d5377",
+      "vulkan-atlas-producer-worker.py": "6c445ddc1872dd21b06fccd83c197fb6496d0dcddc4fe616affe5abcc19d33de",
+      "vulkan-atlas-producers-execution.json": "5024397cdd7efd4bae4d830882f247302d0b05212175ce08584649ad37e7ecff",
+      "vulkan-atlas-producers.py": "9b585b3965e1381aa4b10f4cd63c146ac37204a0318a5181494d8afe4a053c39",
+      "native-atlas-producers/125-tile.zlib": "8ad667a452ec238e240dd04ba72ecedacfb56be4952320a485b76267ef9995b0",
+      "native-atlas-producers/143-0-b0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+      "native-atlas-producers/143-0-b1.bin": "6ed05fa9d4516c06e6cf78519ba193bae0ea2a93b5aaf0b371050b25e9a4ba4d",
+      "native-atlas-producers/143-0-b2.bin": "68b7b88d68d4ea95c71ca5cd6fbba7e989068516e9e8cb73f4b881fc19d8f039",
+      "native-atlas-producers/143-0-b3.bin": "c9aa5653585d188b12fa1df440796c203f66ba6a0d0d5909bbfc575d4879b1d2",
+      "native-atlas-producers/143-0.asm": "3da63b61a1d8bfd4d0694c91ff672f2e01922c6aec1e5f8012c3962664434600",
+      "native-atlas-producers/143-0.dxbc": "b2374fafafc47f408343c5a512697d67f41c3c079a643436194b922ab8b0693c",
+      "native-atlas-producers/143-4.asm": "7544a887417494a61df95f8d1fbbb61cffe06cb1d937400b56cafe8579842519",
+      "native-atlas-producers/143-4.dxbc": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f",
+      "native-atlas-producers/143-tile.zlib": "12b32ba3f1d5bd329abd2aded5b76a06d33887688a624fc0cafd76ef8eac36e0",
+      "native-atlas-producers/152-tile.zlib": "b0f6d9c92dfd055d9d2f6bb9bce7aa634fe6bb6d34937d6fc8638304b4c5d39d",
+      "native-atlas-producers/163-tile.zlib": "70e9dc2c1c36dddd7d7def2c53fa0720ae6fcdff264963cb7489546b16d0085b",
+      "native-atlas-producers/171-tile.zlib": "f0a611d4dfd6241367063da5c302d00b6387267b3aa45a5338eb3872cec835a8",
+      "native-atlas-producers/182-tile.zlib": "9701e46ea0dfc9e93faf280cfe6079ba506c7fb8d314c7610ceb380be1870252",
+      "native-atlas-producers/191-tile.zlib": "d2394c1822a39f9d7b7832ce028360473796a5318388fc20f02e7217f7407aa7",
+      "native-atlas-producers/200-tile.zlib": "6540c4bb0f7d9752af07fb48ee44575abbb2d48135576e2e09a6655763a3b76f",
+      "native-atlas-producers/208-tile.zlib": "495e96cefcbfa161ded9e5751ce15fb7c65d74abb0cdb7966107ec46f9525307",
+      "native-atlas-producers/223-0-b0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+      "native-atlas-producers/223-0-b1.bin": "5ee1f3a11f7b62ba4bddae7c2355f75470a5c2b9d2adf275b9f33d68aef154ed",
+      "native-atlas-producers/223-0-b2.bin": "68b7b88d68d4ea95c71ca5cd6fbba7e989068516e9e8cb73f4b881fc19d8f039",
+      "native-atlas-producers/223-0-b3.bin": "2a26cbdb7d8cdccfa906f406f1f245d1e8c38b5605267d7d5d7594801380dc75",
+      "native-atlas-producers/223-0.asm": "e3546814ec12066dd07b043c3a53db8861414d7c266273f79d33366e6979f895",
+      "native-atlas-producers/223-0.dxbc": "55d5528624744a9b0bad8f95cef93dd7d1bdaff130d0ff5cfcd70ee83ca213ab",
+      "native-atlas-producers/223-4-b0.bin": "30ed44bbe849bdb3a1cff0c94840eef52c79a6e412a126a3c7ee71d5546f8f55",
+      "native-atlas-producers/223-4-b1.bin": "2a26cbdb7d8cdccfa906f406f1f245d1e8c38b5605267d7d5d7594801380dc75",
+      "native-atlas-producers/223-4.asm": "2d63f46714d2df23cc9021a76c96e8982139b33ce8fc5ba1971657c203179ceb",
+      "native-atlas-producers/223-4.dxbc": "08d02aacbf1ce0c26afbfb77e7334ad17376b4169e81ffe34919ecb8aa150543",
+      "native-atlas-producers/223-tile.zlib": "0ab2ceb98947083718bf82c71d215842443c531f867d58b6a429170e901a8979",
+      "native-atlas-producers/237-0-b0.bin": "04ac7183f0cf0853cc0484e799e35389d505116afb8ff4028e4124870ed02155",
+      "native-atlas-producers/237-0-b1.bin": "fcd7259d5140c468083b910200ce958c6ce8bbb2b28723041732234c6a818796",
+      "native-atlas-producers/237-0-b2.bin": "68b7b88d68d4ea95c71ca5cd6fbba7e989068516e9e8cb73f4b881fc19d8f039",
+      "native-atlas-producers/237-0-b3.bin": "c9aa5653585d188b12fa1df440796c203f66ba6a0d0d5909bbfc575d4879b1d2",
+      "native-atlas-producers/237-0.asm": "3da63b61a1d8bfd4d0694c91ff672f2e01922c6aec1e5f8012c3962664434600",
+      "native-atlas-producers/237-0.dxbc": "b2374fafafc47f408343c5a512697d67f41c3c079a643436194b922ab8b0693c",
+      "native-atlas-producers/237-4.asm": "7544a887417494a61df95f8d1fbbb61cffe06cb1d937400b56cafe8579842519",
+      "native-atlas-producers/237-4.dxbc": "aca1cf0d617ea67f21751ae52c7a1980cc8c220290ca4f3366962d5f6f8be83f",
+      "native-atlas-producers/237-post-indices.zlib": "5c3e329a1a6bc8a2ed589b82d37a1511f11b3c55ed7e3a514125fc2d48877119",
+      "native-atlas-producers/237-post-vertices.zlib": "6acd2e55205bd36505909a83b7dadfaf71d9ac262ab44f398904da6b70f60478",
+      "native-atlas-producers/237-tile.zlib": "d7c51c132136de5ddadf3865beb503a85acfb40d2a1007ef5fc7d858d7fa4dcb",
+      "native-atlas-producers/275-receiver-normal.zlib": "87b69c698bab717e1401a1a6755c5876aa1c16605489db10cd58167601a32ce0",
+      "native-atlas-producers/296-receiver-normal.zlib": "2f0b4df96714a05c3c1cd813cda7b372ae4891bbf0b8d1fe928a8f4f6fcb1a6c",
+      "native-atlas-producers/310-receiver-normal.zlib": "d4149f896beeccb70a7e52669b52d27de01ea17b25d9ec9ea192a221289e6f2c",
+      "native-atlas-producers/328-receiver-normal.zlib": "adbbe50af746077587cb3a49d85dd3dc8c7ece869f75be7c34866dc2934bc4a3",
+      "native-atlas-producers/345-receiver-normal.zlib": "9ed640449f406180d5ed3f2d2baa66e3ad53e78b05b53e9744ac857275021ab8",
+      "native-atlas-producers/363-receiver-normal.zlib": "9ed640449f406180d5ed3f2d2baa66e3ad53e78b05b53e9744ac857275021ab8",
+      "native-atlas-producers/377-receiver-normal.zlib": "d20287899adc8f241139c3f5430347c5ada9ab96d3dba231fe4ab324047668d2",
+      "native-atlas-producers/391-receiver-normal.zlib": "d20287899adc8f241139c3f5430347c5ada9ab96d3dba231fe4ab324047668d2",
+      "native-atlas-producers/404-receiver-normal.zlib": "d20287899adc8f241139c3f5430347c5ada9ab96d3dba231fe4ab324047668d2",
+      "native-atlas-producers/422-receiver-normal.zlib": "cf031855991b097c712916f582190808c559c0d4d9b17c2d6eda9f78657b57ba",
+      "native-atlas-producers/440-receiver-normal.zlib": "cf031855991b097c712916f582190808c559c0d4d9b17c2d6eda9f78657b57ba",
+      "native-atlas-producers/460-receiver-normal.zlib": "77131f7d50c290b62b459c1b5834fa03bb404f657548f158531ef7e561c2f6d2",
+      "native-atlas-producers/478-receiver-normal.zlib": "77131f7d50c290b62b459c1b5834fa03bb404f657548f158531ef7e561c2f6d2",
+      "native-atlas-producers/699-receiver-normal.zlib": "77131f7d50c290b62b459c1b5834fa03bb404f657548f158531ef7e561c2f6d2",
+      "native-atlas-producers/command.json": "28d80a34ab77feb66aaf8468c32a871dea3a314f82787fba57328d6a4fa3d7ab",
+      "native-atlas-producers/native-atlas-producers.json": "c73963dfbfae3ea56d88ff87c1a819e7d78be4cd601195dd12f090cb69e40afa",
+      "native-atlas-producers/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native-atlas-producers/request.json": "5c05ffc3b595f0a00065a7b08fc391f1aef59cb14791728d2a9e57f34e55bf4f",
+      "native-atlas-producers/worker.py": "23ce53d8b2a82a53f47b2637a407e491ae946a0c9ead8f9fbb1968e41a4dd9dc",
+      "vulkan-atlas-producers/238-tile.zlib": "1e3d75d44860ca22495ff096dd71f08e5bc378f33249c0a5b61649ca69a6724d",
+      "vulkan-atlas-producers/242-tile.zlib": "7c93f4b381c603fc05ccaa8e117bdbaa23578fd34a37013a078d95af8b02b1a5",
+      "vulkan-atlas-producers/246-tile.zlib": "c09334373be8b2eb863db15ddb406d72635d0b8185f737d48ca610c9b585040b",
+      "vulkan-atlas-producers/251-tile.zlib": "314f2df8184b64aea4fd1dacdedec49ffb7343e9b7a02343de2c363e42788792",
+      "vulkan-atlas-producers/256-tile.zlib": "ffa03cf73228ad3d9046d332885c0f682dab2a349366b2fb2d984143941de23c",
+      "vulkan-atlas-producers/260-tile.zlib": "aae4aea721a6bba6f6c47a7306f440425c870ab7ae174ba8743dbfa8f322aa66",
+      "vulkan-atlas-producers/264-tile.zlib": "da1b351714d2bf404edd78d18c7223b0646465fa3b5f1ad0fc6357c2ec606931",
+      "vulkan-atlas-producers/268-tile.zlib": "972c073fbb4d3a6eaddaccd020f14bd98932531eae5ddf6071aca86d0fc9e616",
+      "vulkan-atlas-producers/272-post-indices.zlib": "886d7249353f031a94310f1e020ae64da7f436f8fdb4d735942d007cc40482c8",
+      "vulkan-atlas-producers/272-post-vertices.zlib": "5142eb74e55432c6aab681761923254c0130fe3a0dac84a9db7a1d9b9b5d00bb",
+      "vulkan-atlas-producers/272-tile.zlib": "9045514e9f680db7d55c04504995fba9625d1b02881aca314585c713a9e1051c",
+      "vulkan-atlas-producers/276-tile.zlib": "c665f3b9d314aaadfd4c4625bb669c7afba199b2868a0adfaa503dc1f04397ef",
+      "vulkan-atlas-producers/command.json": "930edf9fcd421c9b44c4926e332802558437c1d60c3075dcb632bd900c25de25",
+      "vulkan-atlas-producers/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "vulkan-atlas-producers/request.json": "0548defb7a1d7cb0045d1ea6588c3ca251aa5486872765a26f51cb2ba9b68e57",
+      "vulkan-atlas-producers/vulkan-atlas-producers.json": "b5e83b3ef95be837ed169e01a7783b61b2a0d2e29be167ca4a690020f0c0e67b"
+    }
+  }
+}

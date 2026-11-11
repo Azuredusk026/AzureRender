@@ -328,3 +328,7 @@ NVIDIA 法线来源控制的完整头发区域满足一字节门槛。
 [对象可见量逆投影标定](../acceptance/nr/scene-visibility-reference-calibration.md)使用原生片元常量。
 NVIDIA 头发区域有 277 处超差，Intel 有 428 处。
 对象图集、记录及头发外的参考输入继续按来源验收。
+
+[原生图集与接收输入来源](../acceptance/nr/native-atlas-and-receiver-producers.md)核对双方图集绘制。
+两份服饰对应 1,604 处同配对图集超差。
+原生头发的图集投影按实际乘加次序逐位重建。
