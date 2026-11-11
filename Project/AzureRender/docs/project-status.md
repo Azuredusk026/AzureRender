@@ -12,7 +12,10 @@ NVIDIA 法线来源控制的全部头发可见量满足一字节门槛。
 
 [场景参考对象可见量](acceptance/nr/scene-reference-object-visibility.md)接入实际场景图集。
 双设备的生产输出及输入隔离结果已登记。
-图集深度、参考标定及材质消费继续验收。
+图集深度及材质消费继续验收。
+
+[对象可见量逆投影标定](acceptance/nr/scene-visibility-reference-calibration.md)核对双设备的实际输出。
+头发与完整接收区域继续按一字节门槛验收。
 
 [参考透明层级](acceptance/nr/reference-alpha-ellipse.md)通过公共策略和原四帧检查。
 NVIDIA 完整 17017 处一致，Intel 剩余九十六处深度超差继续修正。

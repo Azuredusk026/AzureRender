@@ -6,10 +6,18 @@
 
 namespace azurerender {
 
+inline ReferencePositionFrame sceneReferenceObjectVisibilityFrame(const PreparedReferenceCameraView& camera){
+    auto frame=camera.descriptor().frame;
+    const auto& calibration=camera.descriptor().objectVisibility.value().calibration;
+    if(calibration)for(unsigned axis=0;axis<3;++axis)frame.parameters.offset[axis]=calibration->positionOffset[axis];
+    return frame;
+}
+
 inline ScreenObjectVisibilityView sceneReferenceObjectVisibilityView(const PreparedReferenceCameraView& camera){
+    const auto& settings=camera.descriptor().objectVisibility.value();
     ScreenObjectVisibilityView result;
-    result.clipToWorld=camera.clipToReference();
-    result.pixelOffset=camera.descriptor().objectVisibility.value().pixelOffset;
+    result.clipToWorld=settings.calibration?settings.calibration->clipToWorld:camera.clipToReference();
+    result.pixelOffset=settings.pixelOffset;
     // The reference pass reverses Y relative to the prepared camera projection.
     result.flipNdcY=true;
     result.phaseOrigin=ScreenObjectVisibilityPhaseOrigin::TopLeft;

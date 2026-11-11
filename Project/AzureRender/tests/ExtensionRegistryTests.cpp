@@ -106,10 +106,10 @@ int main() {
     // Scene renderer registry reuses the same dependency/version contract and
     // the default diagnostic view lookup comes from capabilities.
     azurerender::SceneRendererRegistry sceneRegistry;
-    if(sceneRegistry.kApiVersion!=13||azurerender::SceneRendererCapabilities::kApiVersion!=13){
-        std::cerr<<"Scene reference object visibility requires scene renderer API version thirteen\n";return 1;
+    if(sceneRegistry.kApiVersion!=14||azurerender::SceneRendererCapabilities::kApiVersion!=14){
+        std::cerr<<"Scene reference visibility calibration requires scene renderer API version fourteen\n";return 1;
     }
-    for(const auto legacyApi:{1U,2U,3U,4U,5U,6U,7U,8U,9U,10U,11U,12U}){
+    for(const auto legacyApi:{1U,2U,3U,4U,5U,6U,7U,8U,9U,10U,11U,12U,13U}){
         bool oldSceneApiRejected=false;
         try{sceneRegistry.registerFactory({"scene.old",legacyApi,{"render"},{}},[]{return std::make_unique<TestSceneRenderer>();});}
         catch(const std::runtime_error&){oldSceneApiRejected=true;}

@@ -843,3 +843,6 @@ NVIDIA 法线来源控制的 17,017 个可见量均在一字节内。
 
 [场景参考对象可见量](docs/acceptance/nr/scene-reference-object-visibility.md)接入实际图集和记录。
 完整接收及头发区域继续按一字节门槛核对。
+
+[对象可见量逆投影标定](docs/acceptance/nr/scene-visibility-reference-calibration.md)记录原生矩阵及当前场景坐标。
+双设备的冻结区域仍按一字节门槛验收。

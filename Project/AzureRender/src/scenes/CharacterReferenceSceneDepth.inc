@@ -72,7 +72,7 @@ void CharacterSceneRenderer::recordReferenceObjectVisibility(rhi::ICommandRecord
     inputs.atlasLayout=VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
     inputs.objectDepth=ScreenObjectDepth::Forward;
     const auto view=sceneReferenceObjectVisibilityView(*referenceCamera_);
-    const auto records=sceneReferenceObjectVisibilityRecords(referenceCamera_->descriptor().frame,snapshot.objectShadowPages);
+    const auto records=sceneReferenceObjectVisibilityRecords(sceneReferenceObjectVisibilityFrame(*referenceCamera_),snapshot.objectShadowPages);
     referenceObjectVisibility_->record(commands,slot,inputs,view,records);
 }
 

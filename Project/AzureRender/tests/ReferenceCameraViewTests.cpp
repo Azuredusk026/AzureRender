@@ -2,6 +2,7 @@
 #include "render/ReferenceCameraDepth.hpp"
 #include "render/ReferenceCameraViewJson.hpp"
 #include "render/SceneReferenceObjectVisibility.hpp"
+#include "render/CameraProjection.hpp"
 #include <nlohmann/json.hpp>
 #include <cstring>
 #include <fstream>
@@ -12,6 +13,11 @@ using namespace azurerender;
 namespace {
 void check(bool value,const char* message){if(!value)throw std::runtime_error(message);}
 bool close(float a,float b){return std::abs(a-b)<1.e-6F;}
+std::array<float,3> reconstruct(const std::array<float,16>& inverse,const std::array<float,4>& clip){
+    std::array<float,4> result{};
+    for(unsigned row=0;row<4;++row)for(unsigned col=0;col<4;++col)result[row]+=inverse[col*4+row]*clip[col];
+    return {result[0]/result[3],result[1]/result[3],result[2]/result[3]};
+}
 std::vector<char> read(const char* path){std::ifstream in(path,std::ios::binary|std::ios::ate);check(bool(in),"Fixture absent");const auto n=in.tellg();check(n>0&&n<=16*1024*1024,"Fixture size invalid");std::vector<char> bytes(static_cast<std::size_t>(n));in.seekg(0);in.read(bytes.data(),n);check(bool(in),"Fixture read failed");return bytes;}
 }
 int main(int argc,char** argv)try{
@@ -51,6 +57,19 @@ int main(int argc,char** argv)try{
         auto bad=objectDocument;
         bad["objectVisibility"]=invalid;
         check(rejectsObjectDocument(bad),"Invalid scene object visibility configuration");
+    }
+    auto calibratedDocument=objectDocument;
+    const std::array<float,16> authoredInverse{1,0,0,0,0,1,0,0,0,0,1,0,4,5.5F,7,1};
+    auto& authored=calibratedDocument["objectVisibility"]["calibration"];
+    authored={{"schemaVersion",1},{"positionOffset",{5,6,7}},{"clipToWorld",authoredInverse}};
+    const auto calibratedView=calibratedDocument.get<ReferenceCameraView>();
+    check(calibratedView.objectVisibility->calibration&&nlohmann::json(calibratedView)==calibratedDocument,
+        "Visibility calibration must preserve authored matrix and origin bits");
+    for(const auto& [field,value]:std::array<std::pair<const char*,nlohmann::json>,4>{{
+        {"schemaVersion",2},{"clipToWorld",std::array<float,16>{}},{"positionOffset",{0,0}},{"clipToWorld",{1}}}}){
+        auto bad=calibratedDocument;
+        bad["objectVisibility"]["calibration"][field]=value;
+        check(rejectsObjectDocument(bad),"Invalid scene object visibility calibration");
     }
     auto disabledVisibility=visibilityDocument;
     disabledVisibility["produceSceneVisibilityInputs"]=false;
@@ -95,10 +114,9 @@ int main(int argc,char** argv)try{
             &&screen.phaseOrigin==ScreenObjectVisibilityPhaseOrigin::TopLeft,"Reference attachment raster convention");
         const std::array<float,3> world{.25F,-2.F,1.F};
         const auto clip=camera.clip(world);
-        std::array<float,4> restored{};
-        for(unsigned row=0;row<4;++row)for(unsigned col=0;col<4;++col)restored[row]+=screen.clipToWorld[col*4+row]*clip[col];
+        const auto restored=reconstruct(screen.clipToWorld,clip);
         const auto expected=referenceRelativePosition(calibrated.frame,world);
-        for(unsigned axis=0;axis<3;++axis)check(close(restored[axis]/restored[3],expected[axis]),"Reference inverse must use signed coordinates and offsets");
+        for(unsigned axis=0;axis<3;++axis)check(close(restored[axis],expected[axis]),"Reference inverse must use signed coordinates and offsets");
         ObjectShadowPage page;
         page.gpu.worldToUnitShadow={1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
         page.gpu.biasAndFilter={.02F,.01F,4,2};
@@ -110,6 +128,36 @@ int main(int argc,char** argv)try{
         check(projected==world&&record.lightDirection==std::array<float,3>{-1,0,0},"Object record and light use the reference coordinate frame");
         check(record.filterRadiusUv==std::array<float,2>{1.F/1024,1.F/1024}
             &&record.lightBias==.01F&&record.normalBias==.02F&&record.atlasRect==page.gpu.atlasRect,"Object atlas record preserves authored values");
+    }
+    {
+        auto source=calibratedView;
+        source.frame.parameters.axes={-3,1,2,0};
+        source.frame.parameters.offset={1,.5F,0,0};
+        const PreparedReferenceCameraView camera(source);
+        const auto screen=sceneReferenceObjectVisibilityView(camera);
+        const auto frame=sceneReferenceObjectVisibilityFrame(camera);
+        const std::array<float,3> world{.25F,.5F,-.75F};
+        check(screen.clipToWorld==authoredInverse&&frame.parameters.axes==source.frame.parameters.axes
+            &&frame.parameters.offset==std::array<float,4>{5,6,7,0},"Static calibration must preserve the authored frame");
+        check(reconstruct(screen.clipToWorld,camera.clip(world))==referenceRelativePosition(frame,world),
+            "Authored inverse and object projection use the same coordinates");
+
+        const ReferenceCameraPose anchor;
+        const ReferenceCameraPose moved{{2,3,4},{0,0,-1},{0,1,0},{1,0,0}};
+        CameraViewDescriptor descriptor;
+        descriptor.position=moved.position;
+        descriptor.target={1,3,4};
+        descriptor.up=moved.up;
+        descriptor.referenceCalibration=ReferenceCameraCalibration{source,anchor,2.F};
+        const auto relocated=resolveReferenceCamera(descriptor);
+        check(relocated.has_value(),"Calibrated camera relocation");
+        const auto movedScreen=sceneReferenceObjectVisibilityView(*relocated);
+        const auto movedFrame=sceneReferenceObjectVisibilityFrame(*relocated);
+        check(movedFrame.parameters.axes==std::array<std::int32_t,4>{1,2,3,0}
+            &&movedFrame.parameters.offset==std::array<float,4>{6,7,-5,0},"Relocated calibration must preserve the world origin");
+        const std::array<float,3> movedWorld{1.25F,3.5F,3.75F};
+        check(reconstruct(movedScreen.clipToWorld,relocated->clip(movedWorld))==referenceRelativePosition(movedFrame,movedWorld),
+            "Calibrated inverse follows camera rotation, translation and scale");
     }
     check(identity.intersectsBounds({-.5F,-.5F,.1F},{.5F,.5F,.9F}),"Inside bounds");check(!identity.intersectsBounds({2,-.5F,.1F},{3,.5F,.9F}),"Side outside bounds");check(!identity.intersectsBounds({-.5F,-.5F,1.1F},{.5F,.5F,1.5F}),"Depth outside bounds");
     check(identity.intersectsBounds({1,0,.5F},{1,0,.5F}),"Touching bounds retained");const float adjacent=std::nextafter(1.F,2.F);check(identity.intersectsBounds({adjacent,0,.5F},{adjacent,0,.5F}),"Rounding uncertainty retained");check(!identity.intersectsBounds({1.01F,0,.5F},{1.02F,0,.5F}),"Separated bounds rejected");

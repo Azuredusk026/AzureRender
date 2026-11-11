@@ -21,7 +21,12 @@ void to_json(nlohmann::json& j,const ReferenceCameraView& v){
         {"extent",v.extent},{"depthConvention",v.depthConvention==ReferenceDepthConvention::Forward?"forward":"reversed"},{"flipNdcY",v.flipNdcY}};
     if(v.produceSceneDepth)j["produceSceneDepth"]=true;
     if(v.produceSceneVisibilityInputs)j["produceSceneVisibilityInputs"]=true;
-    if(v.objectVisibility)j["objectVisibility"]={{"pixelOffset",v.objectVisibility->pixelOffset}};
+    if(v.objectVisibility){
+        j["objectVisibility"]={{"pixelOffset",v.objectVisibility->pixelOffset}};
+        if(const auto& calibration=v.objectVisibility->calibration)
+            j["objectVisibility"]["calibration"]={{"schemaVersion",1},{"positionOffset",calibration->positionOffset},
+                {"clipToWorld",calibration->clipToWorld}};
+    }
 }
 void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY"},
@@ -50,8 +55,16 @@ void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     }
     if(j.contains("objectVisibility")){
         const auto& settings=j.at("objectVisibility");
-        fields(settings,{"pixelOffset"});
-        v.objectVisibility=SceneReferenceObjectVisibilitySettings{vector<2>(settings.at("pixelOffset"))};
+        fields(settings,{"pixelOffset"},{"calibration"});
+        auto& visibility=v.objectVisibility.emplace();
+        visibility.pixelOffset=vector<2>(settings.at("pixelOffset"));
+        if(settings.contains("calibration")){
+            const auto& authored=settings.at("calibration");
+            fields(authored,{"schemaVersion","positionOffset","clipToWorld"});version(authored);
+            auto& calibration=visibility.calibration.emplace();
+            calibration.positionOffset=vector<3>(authored.at("positionOffset"));
+            calibration.clipToWorld=vector<16>(authored.at("clipToWorld"));
+        }
     }
     (void)PreparedReferenceCameraView(v);value=std::move(v);
 }

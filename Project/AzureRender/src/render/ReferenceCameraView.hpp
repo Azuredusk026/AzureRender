@@ -6,8 +6,14 @@
 #include <limits>
 #include <optional>
 namespace azurerender {
+struct SceneReferenceObjectVisibilityCalibration {
+    std::uint32_t schemaVersion=1;
+    std::array<float,3> positionOffset{};
+    std::array<float,16> clipToWorld{1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+};
 struct SceneReferenceObjectVisibilitySettings {
     std::array<float,2> pixelOffset{.5F,.5F};
+    std::optional<SceneReferenceObjectVisibilityCalibration> calibration;
 };
 struct ReferenceCameraView {
     std::uint32_t schemaVersion=1;
@@ -32,6 +38,30 @@ class PreparedReferenceCameraView final {
     std::array<std::array<double,4>,6> planes_{};
     static void require(bool value,const char* message){if(!value)throw std::invalid_argument(message);}
     static double norm(const Matrix& m){double result=0;for(const auto& row:m){double sum=0;for(double v:row)sum+=std::abs(v);result=std::max(result,sum);}return result;}
+    static Matrix invert(const Matrix& matrix){
+        std::array<std::array<double,8>,4> augmented{};
+        for(unsigned row=0;row<4;++row){for(unsigned c=0;c<4;++c)augmented[row][c]=matrix[row][c];augmented[row][row+4]=1;}
+        for(unsigned c=0;c<4;++c){unsigned pivot=c;for(unsigned row=c+1;row<4;++row)if(std::abs(augmented[row][c])>std::abs(augmented[pivot][c]))pivot=row;
+            require(augmented[pivot][c]!=0,"Reference camera matrix is singular");std::swap(augmented[c],augmented[pivot]);const double divisor=augmented[c][c];
+            for(auto& value:augmented[c])value/=divisor;
+            for(unsigned row=0;row<4;++row)if(row!=c){const double factor=augmented[row][c];for(unsigned k=0;k<8;++k)augmented[row][k]-=factor*augmented[c][k];}}
+        Matrix inverse{};
+        for(unsigned row=0;row<4;++row)for(unsigned c=0;c<4;++c){inverse[row][c]=augmented[row][c+4];require(std::isfinite(inverse[row][c]),"Reference inverse matrix is nonfinite");}
+        const double condition=norm(matrix)*norm(inverse);
+        require(std::isfinite(condition)&&condition<=1.e12,"Reference camera matrix condition exceeds1e12");
+        return inverse;
+    }
+    static void validateVisibilityCalibration(const SceneReferenceObjectVisibilityCalibration& calibration){
+        require(calibration.schemaVersion==1,"Unsupported scene object visibility calibration version");
+        for(const float value:calibration.positionOffset)require(std::isfinite(value),"Scene object visibility origin must be finite");
+        Matrix matrix{};
+        for(unsigned row=0;row<4;++row)for(unsigned col=0;col<4;++col){
+            const float value=calibration.clipToWorld[col*4+row];
+            require(std::isfinite(value),"Scene object visibility inverse matrix must be finite");
+            matrix[row][col]=value;
+        }
+        (void)invert(matrix);
+    }
     std::array<double,3> unprojectDouble(double u,double v,double depth) const {
         require(std::isfinite(u)&&std::isfinite(v)&&std::isfinite(depth)&&depth>=0&&depth<=1,"Invalid reference viewport coordinates or depth");
         const std::array<double,4> clip{2*u-1,2*v-1,depth,1};std::array<double,4> world{};
@@ -62,15 +92,11 @@ public:
         }
         for(unsigned c=0;c<4;++c){matrix_[0][c]-=2*double(p.jitter[0])*matrix_[3][c];matrix_[1][c]+=2*double(p.jitter[1])*matrix_[3][c];
             magnitude_[0][c]+=2*std::abs(double(p.jitter[0]))*magnitude_[3][c];magnitude_[1][c]+=2*std::abs(double(p.jitter[1]))*magnitude_[3][c];if(view.flipNdcY)matrix_[1][c]=-matrix_[1][c];}
-        std::array<std::array<double,8>,4> augmented{};
-        for(unsigned row=0;row<4;++row){for(unsigned c=0;c<4;++c)augmented[row][c]=matrix_[row][c];augmented[row][row+4]=1;}
-        for(unsigned c=0;c<4;++c){unsigned pivot=c;for(unsigned row=c+1;row<4;++row)if(std::abs(augmented[row][c])>std::abs(augmented[pivot][c]))pivot=row;
-            require(augmented[pivot][c]!=0,"Reference camera matrix is singular");std::swap(augmented[c],augmented[pivot]);const double divisor=augmented[c][c];
-            for(auto& value:augmented[c])value/=divisor;
-            for(unsigned row=0;row<4;++row)if(row!=c){const double factor=augmented[row][c];for(unsigned k=0;k<8;++k)augmented[row][k]-=factor*augmented[c][k];}}
-        for(unsigned row=0;row<4;++row)for(unsigned c=0;c<4;++c){inverse_[row][c]=augmented[row][c+4];require(std::isfinite(inverse_[row][c]),"Reference inverse matrix is nonfinite");}
-        const double condition=norm(matrix_)*norm(inverse_);require(std::isfinite(condition)&&condition<=1.e12,"Reference camera matrix condition exceeds1e12");
-        if(view.objectVisibility)(void)clipToReference();
+        inverse_=invert(matrix_);
+        if(view.objectVisibility){
+            if(view.objectVisibility->calibration)validateVisibilityCalibration(*view.objectVisibility->calibration);
+            else (void)clipToReference();
+        }
         for(unsigned c=0;c<4;++c){planes_[0][c]=matrix_[3][c]+matrix_[0][c];planes_[1][c]=matrix_[3][c]-matrix_[0][c];planes_[2][c]=matrix_[3][c]+matrix_[1][c];planes_[3][c]=matrix_[3][c]-matrix_[1][c];planes_[4][c]=matrix_[2][c];planes_[5][c]=matrix_[3][c]-matrix_[2][c];}
     }
     const ReferenceCameraView& descriptor() const noexcept{return view_;}

@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "name": "对象可见量逆投影标定",
+      "sourceBase": "87ac510",
+      "evidence": "docs/acceptance/nr/scene-visibility-reference-calibration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-visibility-reference-calibration/results.json"
+    },
+    {
       "path": "runs/20261112-010418-scene-reference-object-visibility-709f68",
       "name": "场景参考对象可见量",
       "sourceBase": "22663a8",

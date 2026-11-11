@@ -1320,3 +1320,6 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [场景参考对象可见量](../acceptance/nr/scene-reference-object-visibility.md)记录同帧图集及输出。
 原生图集、参考标定及完整颜色按各自门槛验收。
+
+[对象可见量逆投影标定](../acceptance/nr/scene-visibility-reference-calibration.md)核对实际相机与当前对象记录。
+图集、材质输入及完整颜色按各自门槛验收。

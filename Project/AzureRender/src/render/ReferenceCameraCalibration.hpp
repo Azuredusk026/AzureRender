@@ -36,6 +36,28 @@ inline ReferenceCameraView relocateReferenceCamera(const ReferenceCameraView& so
         for(unsigned col=0;col<3;++col){double value=0;for(unsigned axis=0;axis<3;++axis){const int choice=source.frame.parameters.axes[axis];value+=double(source.projection.parameters.columns[axis][row])*(choice<0?-1:1)*rotation[std::abs(choice)-1][col];}result.projection.parameters.columns[col][row]=float(value);}
         double translation=source.projection.parameters.columns[3][row];for(unsigned axis=0;axis<3;++axis){const int choice=source.frame.parameters.axes[axis];translation+=double(source.projection.parameters.columns[axis][row])*((choice<0?-1:1)*double(anchor.position[std::abs(choice)-1])+source.frame.parameters.offset[axis]);}result.projection.parameters.columns[3][row]=float(translation);
     }
+    if(source.objectVisibility&&source.objectVisibility->calibration){
+        const auto& authored=*source.objectVisibility->calibration;
+        auto& relocated=*result.objectVisibility->calibration;
+        std::array<unsigned,3> worldAxes{};
+        std::array<double,3> signs{},worldOrigin{};
+        for(unsigned axis=0;axis<3;++axis){
+            const int choice=source.frame.parameters.axes[axis];
+            worldAxes[axis]=static_cast<unsigned>(std::abs(choice)-1);
+            signs[axis]=choice<0?-1:1;
+            worldOrigin[worldAxes[axis]]=signs[axis]*authored.positionOffset[axis];
+        }
+        for(unsigned row=0;row<3;++row){
+            relocated.positionOffset[row]=static_cast<float>(worldOrigin[row]);
+            double translation=double(current.position[row])+worldOrigin[row];
+            for(unsigned axis=0;axis<3;++axis)translation-=rotation[axis][row]*(double(anchor.position[axis])+worldOrigin[axis]);
+            for(unsigned col=0;col<4;++col){
+                double value=translation*authored.clipToWorld[col*4+3];
+                for(unsigned axis=0;axis<3;++axis)value+=rotation[worldAxes[axis]][row]*signs[axis]*authored.clipToWorld[col*4+axis];
+                relocated.clipToWorld[col*4+row]=static_cast<float>(value);
+            }
+        }
+    }
     (void)PreparedReferenceCameraView(result);return result;
 }
 }
