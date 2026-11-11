@@ -118,6 +118,8 @@ private:
     std::optional<PreparedReferenceCameraView> referenceCamera_;
     std::unique_ptr<SceneReferenceDepthTargets> referenceSceneDepth_;
     std::unique_ptr<ScreenObjectVisibilityGpu> referenceObjectVisibility_;
+    rhi::GpuImage referenceObjectIdFallback_{};
+    VkImageView referenceObjectIdFallbackView_{};
     std::array<VkPipeline,3> referenceSceneDepthPipelines_{};
     std::array<VkPipeline,3> referenceSceneVisibilityPipelines_{};
     struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;bool objectVisibility;std::uint64_t submission;};
@@ -126,6 +128,7 @@ private:
     bool referenceDepthActive() const noexcept;
     bool referenceVisibilityActive() const noexcept;
     bool referenceObjectVisibilityActive() const noexcept;
+    void writeReferenceMaterialVisibilityDescriptors(VkDescriptorSet,unsigned slot,bool active);
     void recordReferenceObjectVisibility(rhi::ICommandRecorder&,unsigned slot,const SceneInstanceSnapshot&);
     void createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context,bool visibilityInputs);
     void destroyUvShaderModule(VkShaderModule);
@@ -379,6 +382,7 @@ private:
     };
     static_assert(sizeof(UniformBufferObject)==50*16);
     static_assert(offsetof(UniformBufferObject,referenceCamera)==43*16);
+    static_assert(offsetof(UniformBufferObject,referenceCamera)+offsetof(ReferenceRasterProjectionParameters,control)==48*16);
     static_assert(offsetof(UniformBufferObject,unlitTimeExposure)==41*16);
     static_assert(offsetof(UniformBufferObject,unlitColorGain)==42*16);
     static_assert(offsetof(UniformBufferObject,cascadeWorldDiameters)==40*16);
@@ -507,6 +511,7 @@ private:
     std::array<std::unique_ptr<ShadowTileBounds>,kMaxFramesInFlight> shadowBounds_;
     std::unique_ptr<ObjectShadowAtlas> objectShadowAtlas_;
     std::array<VkImageView,kMaxFramesInFlight> objectShadowBoundViews_{};
+    std::array<bool,kMaxFramesInFlight> referenceMaterialVisibilityBound_{};
     bool objectShadowPrepared_=false;
     unsigned objectShadowMaxDimension_=0;
     std::vector<ObjectShadowPage> objectShadowPages_;

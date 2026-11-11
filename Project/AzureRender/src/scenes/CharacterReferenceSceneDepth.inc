@@ -49,6 +49,13 @@ bool CharacterSceneRenderer::referenceObjectVisibilityActive() const noexcept {
     return referenceCamera_&&referenceCamera_->descriptor().objectVisibility.has_value();
 }
 
+void CharacterSceneRenderer::writeReferenceMaterialVisibilityDescriptors(VkDescriptorSet set,unsigned slot,bool active){
+    const auto visibility=active?referenceObjectVisibility_->output(slot).view:gpuMaterials_[0].baseColor.view;
+    const auto identity=active?referenceSceneDepth_->objectIdView(slot):referenceObjectIdFallbackView_;
+    rhi_->writeDescriptorImage({set,45,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,visibility,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+    rhi_->writeDescriptorImage({set,46,VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,identity,VK_NULL_HANDLE,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL});
+}
+
 std::optional<SceneReferenceDepthCapture> CharacterSceneRenderer::readReferenceSceneDepth() const {
     if(!referenceSceneDepth_||!submittedReferenceDepth_)return std::nullopt;
     const auto& frame=*submittedReferenceDepth_;

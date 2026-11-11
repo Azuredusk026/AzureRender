@@ -153,6 +153,11 @@ Intel 保留 120 处超差，最大为 33 字节。
 17017 个像素的峰差为一字节，原 73 处全部闭合且新增为零。
 公共取样、投影、存储精度及实际深度继续接入验收。
 
+[参考图集光栅](../acceptance/nr/reference-object-shadow-raster.md)核对实际图集来源。
+[材质参考对象可见量](../acceptance/nr/material-reference-object-visibility.md)核对同帧颜色。
+NVIDIA 的 17,017 个头发可见量和颜色位置均满足一字节门槛。
+Intel 的冻结可见量和颜色分别核对设备输入。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。

@@ -1,4 +1,7 @@
 #version 450
+#if defined(AZURE_OBJECT_SHADOW)
+#extension GL_EXT_samplerless_texture_functions : require
+#endif
 #extension GL_GOOGLE_include_directive : require
 #if defined(AZURE_SURFACE_RADIANCE_REUSE) && !defined(AZURE_OPAQUE_SNAPSHOT)
 #extension GL_KHR_shader_subgroup_vote : require
@@ -77,6 +80,9 @@ layout(binding = 0) uniform CameraData {
     vec4 nprDirectionBias,nprGainFloor,nprAmbientColor,nprComposition,nprMainRadiance,nprLightingParameters;
     vec4 cascadeWorldDiameters;
     vec4 unlitTimeExposure,unlitColorGain;
+#if defined(AZURE_OBJECT_SHADOW)
+    layout(offset=768) uvec4 referenceControl;
+#endif
 } camera;
 #if defined(AZURE_PROBE_FIELD)
 layout(binding=23) uniform sampler2DArray reflectionProbeTexture;
@@ -212,9 +218,19 @@ layout(location = 14) AZURE_SAMPLE in vec3 opacityCoordinate;
 #if defined(AZURE_OBJECT_SHADOW)
 layout(location=15) flat in uint instanceObjectShadow;
 layout(binding=29) uniform texture2D objectShadowDepth;
+layout(binding=45) uniform texture2D referenceObjectVisibility;
+layout(binding=46) uniform utexture2D referenceObjectIds;
 #include "object_shadow.glsl"
 vec2 objectShadowRecordPair(uint index) { return shadowBounds.values[index]; }
 float materialObjectVisibility(vec3 surfaceNormal){
+    if(camera.referenceControl.w!=0u&&AZURE_ALPHA_MODE!=2&&instanceObjectShadow!=0u){
+        ivec2 extent=textureSize(referenceObjectVisibility,0);
+        ivec2 pixel=ivec2(AZURE_FRAGMENT_COORD.xy);
+        pixel.y=extent.y-1-pixel.y;
+        if(all(greaterThanEqual(pixel,ivec2(0)))&&all(lessThan(pixel,extent))
+            &&texelFetch(referenceObjectIds,pixel,0).r==instanceObjectShadow)
+            return texelFetch(referenceObjectVisibility,pixel,0).g;
+    }
     ivec2 extent=textureSize(AZ_TEX_SHADOW,0)/8;
     ObjectShadowRecord record;
     if(!objectShadowLoadRecord(uint(extent.x*extent.y),instanceObjectShadow,record))return 1.0;

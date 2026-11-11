@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-044926-material-reference-object-visibility-344def",
+      "name": "材质参考对象可见量",
+      "sourceBase": "4bf4e7d",
+      "evidence": "docs/acceptance/nr/material-reference-object-visibility.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/material-reference-object-visibility/results.json"
+    },
+    {
       "path": "runs/20261112-040725-reference-object-shadow-raster-2c9e58",
       "name": "参考对象图集光栅",
       "sourceBase": "34d8e9a",

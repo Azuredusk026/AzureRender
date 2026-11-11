@@ -859,3 +859,7 @@ NVIDIA 头发区域的 182 处超差均与图集单项对照重合。
 [参考对象图集光栅](docs/acceptance/nr/reference-object-shadow-raster.md)以标定投影写入实际图集。
 NVIDIA 的 17,017 个头发可见量位置满足一字节门槛。
 Intel、完整接收及材质颜色继续按冻结区域验收。
+
+[材质参考对象可见量](docs/acceptance/nr/material-reference-object-visibility.md)读取同帧附件。
+NVIDIA 的 17,017 个头发颜色位置均在一字节内。
+Intel 颜色及完整接收按冻结区域继续验收。
