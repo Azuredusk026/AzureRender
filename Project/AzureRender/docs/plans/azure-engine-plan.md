@@ -1366,3 +1366,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [眉部接收深度与法线来源](../acceptance/nr/eyebrow-receiver-producer.md)核对 496 个位置的实际绘制与附件。头发裁剪、纹理选级及图集输入继续按原门槛验收。
 
 [原生头发法线纹理层级偏移](../acceptance/nr/native-hair-normal-mip-bias.md)核对 49 档双设备原生选级，Intel 固定偏移的最小超差为 477 处。
+
+[原生眉部与头发模板](../acceptance/nr/native-eyebrow-hair-stencil.md)确认 135 个重叠位置的原生模板保护与参考附件要求。

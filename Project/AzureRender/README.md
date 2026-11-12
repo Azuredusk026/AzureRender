@@ -888,3 +888,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [眉部接收深度与法线来源](docs/acceptance/nr/eyebrow-receiver-producer.md)记录实际附件写入顺序和对应顶点。
 
 [原生头发法线纹理层级偏移](docs/acceptance/nr/native-hair-normal-mip-bias.md)记录双设备的层级边界与固定偏移对照。
+
+[原生眉部与头发模板](docs/acceptance/nr/native-eyebrow-hair-stencil.md)记录双设备模板状态、附件和像素历史。
