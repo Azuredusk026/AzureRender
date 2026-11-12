@@ -1,0 +1,8 @@
+{
+  "model": "Pixel 6",
+  "product": "oriole",
+  "build": "CP2A.260705.006",
+  "android": "17",
+  "qualificationSha256": "c24496fd2e84bfe0a15da99f85b9f984bfa4cefa51b55784b38e31956969927b",
+  "capabilitySha256": "1db1579043632959a7b81eb1b3e705d8bbaa7d9b2f7ecde7c41faf240109fc34"
+}
