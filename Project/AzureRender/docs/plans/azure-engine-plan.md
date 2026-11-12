@@ -1394,3 +1394,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [体表接收法线纹理](../acceptance/nr/native-body-normal-source.md)核对十一层压缩块。NVIDIA 和 Intel 的体表可见量分别有 46 和 77 处超差，后续核对采样后法线重建。
 
 [投影头发主纹理层级](../acceptance/nr/projected-hair-point-mip.md)完成两配置、双设备和原始四帧专项回归。Intel 冻结 RGB 仍有 32 处超差，按原门槛继续验收。
+
+[头发光栅量化与体表法线](../acceptance/nr/reference-raster-source.md)记录双设备来源对照。顶点精度传播和体表可见量分别持有后续验证项，整体画质按原条件验收。
