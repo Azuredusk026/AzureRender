@@ -902,3 +902,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [原生纹理取样足迹](docs/acceptance/nr/native-texture-sampling-footprint.md)记录双设备点选层级、受控梯度及冻结头发对照。
 
 [参考头发选层边界](docs/acceptance/nr/reference-hair-mip-footprint.md)记录实际场景的双设备选层候选及未通过的字节门槛。
+
+[参考头发片元层级](docs/acceptance/nr/reference-hair-live-lod.md)记录实际片元层级和半层边界读回。

@@ -1380,3 +1380,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [原生纹理取样足迹](../acceptance/nr/native-texture-sampling-footprint.md)测量固定梯度下的最近层级。轴向与对角近似在冻结头发的 17,017 个位置中逐位复现 17,012 个 NVIDIA 压缩法线值。实际颜色与可见量继续按原门槛验收。
 
 [参考头发选层边界](../acceptance/nr/reference-hair-mip-footprint.md)记录实际场景未通过的候选。正式接收继续以已验收的参考外壳版本为基线，按实际层级及原生显式层级核对新增位置。
+
+[参考头发片元层级](../acceptance/nr/reference-hair-live-lod.md)核对半层边界。NVIDIA 的 8 处法线变化全部处于一个 8 位层级精度单位内。边界采样继续在双设备正式场景核对。
