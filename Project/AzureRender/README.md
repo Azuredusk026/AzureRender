@@ -1,7 +1,7 @@
 # AzureRender 工程
 
 [材质组合管线范围验收](docs/acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧、工作集和短时净收益检查。
-1080p60 诊断继续受 GPU 帧预算和设备供电条件约束。
+1080p60 联合场景诊断记录到约 2.593 GiB 的设备本地内存高水位，正式帧预算与功率条件继续验收。
 
 [参考相机渲染主线验收](docs/acceptance/nr/reference-camera-binding-main-integration.md)通过双配置 46 项检查及双设备采集。
 保守剔除、实际光栅、拾取与重采原始四帧通过。

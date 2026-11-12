@@ -322,6 +322,17 @@
     "gpuBudgetPassed": false,
     "cpuBudgetPassed": true,
     "peakWorkingSetBytes": 2022453248,
+    "memoryAttribution": {
+      "scope": "frozen-joint-scene-1080p60-diagnostic",
+      "peakWorkingSetLimitBytes": 2147483648,
+      "deviceLocalLimitBytes": 1610612736,
+      "deviceLocalExcessBytes": 1174068032,
+      "materialTexelBytes": 1852081920,
+      "residentSrgbChannelUpperBoundBytes": 113700984,
+      "ddsBlockSourceUpperBoundBytes": 141848232,
+      "remainingExcessIfBoundsDisjointAndFullyRealizedBytes": 918518816,
+      "formalMemoryAccepted": false
+    },
     "allocator": {
       "bufferAllocations": 2039,
       "imageAllocations": 442,
