@@ -1378,3 +1378,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [参考外壳深度投影](../acceptance/nr/reference-outline-projection.md)核对事件 440 的独立深度系数。外壳区域的可见量超差为 NVIDIA 1 处和 Intel 43 处，完整接收分别为 237 处和 608 处。
 
 [原生纹理取样足迹](../acceptance/nr/native-texture-sampling-footprint.md)测量固定梯度下的最近层级。轴向与对角近似在冻结头发的 17,017 个位置中逐位复现 17,012 个 NVIDIA 压缩法线值。实际颜色与可见量继续按原门槛验收。
+
+[参考头发选层边界](../acceptance/nr/reference-hair-mip-footprint.md)记录实际场景未通过的候选。正式接收继续以已验收的参考外壳版本为基线，按实际层级及原生显式层级核对新增位置。

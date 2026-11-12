@@ -1,0 +1,957 @@
+{
+  "status": "failed-reference-hair-mip-footprint",
+  "overallStatus": "failed-user-review",
+  "gate": {
+    "status": "failed-reference-hair-mip-footprint",
+    "checks": {
+      "nvidiaFrozenHairVisibility": false,
+      "nvidiaFrozenHairColor": true,
+      "nvidiaReceiverCount": false,
+      "intelReceiverCount": true,
+      "intelReferenceNormalImproved": true,
+      "intelFrozenHairVisibilityImproved": true,
+      "intelFrozenHairColor": true
+    },
+    "overallStatus": "failed-user-review",
+    "receiver": {
+      "nvidia": {
+        "samples": 49384,
+        "baselineOverOne": 237,
+        "overOne": 240,
+        "introduced": 3,
+        "closed": 0,
+        "normalsChanged": 8
+      },
+      "intel": {
+        "samples": 49384,
+        "baselineOverOne": 608,
+        "overOne": 486,
+        "introduced": 2,
+        "closed": 124,
+        "normalsChanged": 1061
+      }
+    },
+    "hair": {
+      "nvidia": {
+        "normal": {
+          "baselineExact": 16967,
+          "exact": 16961,
+          "baselineOverOne": 0,
+          "overOne": 6,
+          "maximum": 27,
+          "changed": 6
+        },
+        "hairVisibility": {
+          "overOne": 2,
+          "baselineOverOne": 0,
+          "closed": 0,
+          "introduced": 2
+        },
+        "hairColor": {
+          "overOne": 0,
+          "baselineOverOne": 0,
+          "closed": 0,
+          "introduced": 0
+        }
+      },
+      "intel": {
+        "normal": {
+          "baselineExact": 15274,
+          "exact": 16146,
+          "baselineOverOne": 886,
+          "overOne": 13,
+          "maximum": 65,
+          "changed": 924
+        },
+        "hairVisibility": {
+          "overOne": 104,
+          "baselineOverOne": 208,
+          "closed": 105,
+          "introduced": 1
+        },
+        "hairColor": {
+          "overOne": 569,
+          "baselineOverOne": 575,
+          "closed": 11,
+          "introduced": 5
+        }
+      }
+    }
+  },
+  "scope": {
+    "local": "external-input-451b6ead0d4c485d92b3b49326e02227",
+    "main": "external-input-b003d43f54ed4021ab497eab6feb4a11",
+    "sourceBase": "fa8c6a9fbc883bf8880bf983e81343b6a2435ab2",
+    "plannedBytes": 268435456,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5",
+      "20261112-133809-reference-receiver-source-isolation-6cdff0",
+      "20261112-135432-reference-outline-projection-d784cf",
+      "20261112-143340-native-texture-sampling-footprint-750e56"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "Opt-in explicit point-mip footprint for reference snapshot hair normal",
+    "gate": "Frozen 49384 receivers and 17017 hair at original one-byte gate; preserve original four frames and reference depth/IDs"
+  },
+  "release": {
+    "configuration": "Release",
+    "shaderCount": 895,
+    "changedShaders": {
+      "reference_scene_visibility.frag.spv": {
+        "before": "bccd46480c788d7a3033eaa007c5b885a5101d20e0d12adc86207e06c45ef082",
+        "after": "268aa7dc1ca6d1d7ce567c53b3a6df25c21bb5b7933c6527e89088c8c71b1236"
+      },
+      "reference_scene_visibility_bindless.frag.spv": {
+        "before": "987f290ad0b612a031d363141045b44977a97113a9ad10e501f743d90501111c",
+        "after": "78f304f756dadc164e12d792b727247c38460cff7929ed19eabaa92c79091f67"
+      }
+    },
+    "ctestCommand": [
+      "D:/Tools/VS2022BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+      "--test-dir",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\release",
+      "-R",
+      "^(AzureRender[.](ReferenceCameraView|ReferenceCameraBinding|ExtensionRegistry|ScreenObjectVisibility|MaterialCoverage)|AzureEngine[.]ProjectReferenceViews|AzureAssets[.]MaterialDocument|AzureEditor[.]ProjectFlow)$",
+      "--no-tests=error",
+      "--output-on-failure",
+      "--output-junit",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\release-ctest.xml"
+    ],
+    "ctestExit": 0,
+    "tests": 8,
+    "playerSha256": "d293ef322a9defd006967f0a7134cf974ffd7452138376d4782eddc2608f7ea6"
+  },
+  "fixture": [
+    {
+      "relative": "character/hair-coverage.glb",
+      "originalSha256": "2c2e47d1be8c511a3fa1b0d2a6b01f61169a3540fb375ae07417c28fece2f2cb",
+      "candidateSha256": "b87e639e9c9ae0d92cdf637c03f5f125e6d80b297a5043b245ac85daff12c073",
+      "unchangedPayloadSha256": "187c43e2756ed8a9c3fcc05246c4e7df9ee41ee499a8e850edf3833e5d2026ca"
+    }
+  ],
+  "layout": {
+    "release": {
+      "size": 3720,
+      "fieldOffset": 3718
+    },
+    "debug": {
+      "size": 4296,
+      "fieldOffset": 4294
+    }
+  },
+  "isolation": {
+    "sourceBase": "fa8c6a9fbc883bf8880bf983e81343b6a2435ab2",
+    "candidatePatchSha256": "589d15f44d104ec38f025cc5ecd5f171beb174b8a6436efeff2bc95fb75da2e3",
+    "candidatePlayerSha256": "d293ef322a9defd006967f0a7134cf974ffd7452138376d4782eddc2608f7ea6",
+    "restoredPlayerSha256": "eea374f276ff53b04b9d93d5ab281c7eb539bbc636f84af01c50e6924c9f0517",
+    "restoredShaderCount": 895,
+    "restoredFiles": [
+      "schemas/azure_render_material.schema.json",
+      "shaders/reference_scene_depth.frag",
+      "shaders/texture_footprint.glsl",
+      "src/assets/GltfLoader.cpp",
+      "src/assets/GltfLoader.hpp",
+      "src/assets/MaterialData.cpp",
+      "src/assets/MaterialSurfaceProfile.hpp",
+      "src/scenes/CharacterSceneRenderer.cpp"
+    ],
+    "overallStatus": "failed-user-review"
+  },
+  "attribution": {
+    "source": "actual reference normals and independent native explicit mip readbacks",
+    "modeledClip": "nearest-8",
+    "derivativeRow": 0,
+    "derivativeColumn": 0,
+    "devices": {
+      "nvidia": {
+        "samples": 17017,
+        "baselineNormalOverOne": 0,
+        "candidateNormalOverOne": 6,
+        "candidateHasDeviceMip": 17017,
+        "candidateMatchesModelMip": 17014,
+        "samplesOverOne": [
+          {
+            "pixel": [
+              1193,
+              1143
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 1.5080713574934115,
+            "deltaFromHalfLevel": 0.00807135749341148,
+            "texelDx": [
+              5.548255316993533,
+              0.408249260196726
+            ],
+            "texelDy": [
+              0.4834080703598147,
+              3.066238321585388
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 8,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": false
+          },
+          {
+            "pixel": [
+              1193,
+              1142
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 1.5080713574934115,
+            "deltaFromHalfLevel": 0.00807135749341148,
+            "texelDx": [
+              5.548255316993533,
+              0.408249260196726
+            ],
+            "texelDy": [
+              0.4834080703598147,
+              3.066238321585388
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 23,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": false
+          },
+          {
+            "pixel": [
+              1193,
+              1141
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 1.5084253483501922,
+            "deltaFromHalfLevel": 0.008425348350192152,
+            "texelDx": [
+              5.54876303746002,
+              0.4108332533462544
+            ],
+            "texelDy": [
+              0.48342576806643933,
+              3.066350577440744
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 27,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": false
+          },
+          {
+            "pixel": [
+              1193,
+              1140
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 1.5084253483501922,
+            "deltaFromHalfLevel": 0.008425348350192152,
+            "texelDx": [
+              5.54876303746002,
+              0.4108332533462544
+            ],
+            "texelDy": [
+              0.48342576806643933,
+              3.066350577440744
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 9,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": false
+          },
+          {
+            "pixel": [
+              1247,
+              1091
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": true,
+            "modelMip": 4,
+            "estimatedLod": 3.5014147202473858,
+            "deltaFromHalfLevel": 0.001414720247385759,
+            "texelDx": [
+              19.941164520976145,
+              3.6766843262710154
+            ],
+            "texelDy": [
+              -12.074327355575633,
+              0.9729609658334084
+            ],
+            "originalDeviceMips": [
+              4,
+              6
+            ],
+            "candidateDeviceMips": [
+              3,
+              7
+            ],
+            "frozenNvidiaMips": [
+              4,
+              6
+            ],
+            "candidateCodeError": 8,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1246,
+              1090
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": true,
+            "modelMip": 4,
+            "estimatedLod": 3.5014147202473858,
+            "deltaFromHalfLevel": 0.001414720247385759,
+            "texelDx": [
+              19.941164520976145,
+              3.6766843262710154
+            ],
+            "texelDy": [
+              -12.074327355575633,
+              0.9729609658334084
+            ],
+            "originalDeviceMips": [
+              4
+            ],
+            "candidateDeviceMips": [
+              3
+            ],
+            "frozenNvidiaMips": [
+              4
+            ],
+            "candidateCodeError": 8,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          }
+        ],
+        "noMatchingDeviceMip": [],
+        "inputSha256": "b963c986a3d144b22f477c360a73a5efc3825a0475d7bb04aec8430916f78d96"
+      },
+      "intel": {
+        "samples": 17017,
+        "baselineNormalOverOne": 886,
+        "candidateNormalOverOne": 13,
+        "candidateHasDeviceMip": 17016,
+        "candidateMatchesModelMip": 17011,
+        "samplesOverOne": [
+          {
+            "pixel": [
+              1262,
+              1275
+            ],
+            "baselineBad": true,
+            "visibilityOverOne": false,
+            "modelMip": 3,
+            "estimatedLod": 2.6195981826755004,
+            "deltaFromHalfLevel": 0.11959818267550038,
+            "texelDx": [
+              9.596052170879261,
+              1.2544809119242473
+            ],
+            "texelDy": [
+              -7.497772381980212,
+              3.537633461476389
+            ],
+            "originalDeviceMips": [
+              2
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              3
+            ],
+            "candidateCodeError": 3,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1308,
+              1266
+            ],
+            "baselineBad": true,
+            "visibilityOverOne": false,
+            "modelMip": 1,
+            "estimatedLod": 0.6868494155125657,
+            "deltaFromHalfLevel": 0.18684941551256573,
+            "texelDx": [
+              2.7131360736950683,
+              -0.875754051294507
+            ],
+            "texelDy": [
+              1.4762824628242015,
+              2.311483479092203
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              1
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 2,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1240,
+              1242
+            ],
+            "baselineBad": true,
+            "visibilityOverOne": false,
+            "modelMip": 1,
+            "estimatedLod": 1.3518459545807309,
+            "deltaFromHalfLevel": -0.14815404541926913,
+            "texelDx": [
+              4.43664160078481,
+              1.943646189832407
+            ],
+            "texelDy": [
+              -2.0707372546905845,
+              3.4464372272227592
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              1
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 2,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1241,
+              1199
+            ],
+            "baselineBad": true,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 2.403489161996674,
+            "deltaFromHalfLevel": -0.09651083800332616,
+            "texelDx": [
+              9.921558422544422,
+              1.9201909212835062
+            ],
+            "texelDy": [
+              -2.0900565765683723,
+              2.5622064114285763
+            ],
+            "originalDeviceMips": [
+              2
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              2
+            ],
+            "candidateCodeError": 2,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1240,
+              1191
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 2.4891043596470324,
+            "deltaFromHalfLevel": -0.01089564035296764,
+            "texelDx": [
+              10.518734499448442,
+              2.0650225953975223
+            ],
+            "texelDy": [
+              -1.1764851746016802,
+              2.6966157223229743
+            ],
+            "originalDeviceMips": [
+              2
+            ],
+            "candidateDeviceMips": [
+              3
+            ],
+            "frozenNvidiaMips": [
+              2
+            ],
+            "candidateCodeError": 65,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1268,
+              1177
+            ],
+            "baselineBad": true,
+            "visibilityOverOne": false,
+            "modelMip": 5,
+            "estimatedLod": 4.750387276543387,
+            "deltaFromHalfLevel": 0.2503872765433872,
+            "texelDx": [
+              51.04863195284452,
+              -1.2065029137947931
+            ],
+            "texelDy": [
+              26.696011706064837,
+              2.8244936449150373
+            ],
+            "originalDeviceMips": [
+              5
+            ],
+            "candidateDeviceMips": [
+              5
+            ],
+            "frozenNvidiaMips": [
+              5
+            ],
+            "candidateCodeError": 2,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1193,
+              1143
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 1.5080713574934115,
+            "deltaFromHalfLevel": 0.00807135749341148,
+            "texelDx": [
+              5.548255316993533,
+              0.408249260196726
+            ],
+            "texelDy": [
+              0.4834080703598147,
+              3.066238321585388
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 8,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": false
+          },
+          {
+            "pixel": [
+              1193,
+              1142
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 1.5080713574934115,
+            "deltaFromHalfLevel": 0.00807135749341148,
+            "texelDx": [
+              5.548255316993533,
+              0.408249260196726
+            ],
+            "texelDy": [
+              0.4834080703598147,
+              3.066238321585388
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 23,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": false
+          },
+          {
+            "pixel": [
+              1193,
+              1141
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 1.5084253483501922,
+            "deltaFromHalfLevel": 0.008425348350192152,
+            "texelDx": [
+              5.54876303746002,
+              0.4108332533462544
+            ],
+            "texelDy": [
+              0.48342576806643933,
+              3.066350577440744
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 27,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": false
+          },
+          {
+            "pixel": [
+              1193,
+              1140
+            ],
+            "baselineBad": false,
+            "visibilityOverOne": false,
+            "modelMip": 2,
+            "estimatedLod": 1.5084253483501922,
+            "deltaFromHalfLevel": 0.008425348350192152,
+            "texelDx": [
+              5.54876303746002,
+              0.4108332533462544
+            ],
+            "texelDy": [
+              0.48342576806643933,
+              3.066350577440744
+            ],
+            "originalDeviceMips": [
+              1
+            ],
+            "candidateDeviceMips": [
+              2
+            ],
+            "frozenNvidiaMips": [
+              1
+            ],
+            "candidateCodeError": 9,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": false
+          },
+          {
+            "pixel": [
+              1353,
+              1121
+            ],
+            "baselineBad": true,
+            "visibilityOverOne": false,
+            "modelMip": 1,
+            "estimatedLod": 0.9536841905687798,
+            "deltaFromHalfLevel": 0.45368419056877984,
+            "texelDx": [
+              3.0865109823828334,
+              2.2897854135139823
+            ],
+            "texelDy": [
+              -1.7355660032708329,
+              2.8313387382831934
+            ],
+            "originalDeviceMips": [
+              1,
+              3
+            ],
+            "candidateDeviceMips": [
+              1,
+              3
+            ],
+            "frozenNvidiaMips": [
+              1,
+              3
+            ],
+            "candidateCodeError": 2,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1247,
+              1091
+            ],
+            "baselineBad": true,
+            "visibilityOverOne": true,
+            "modelMip": 4,
+            "estimatedLod": 3.5014147202473858,
+            "deltaFromHalfLevel": 0.001414720247385759,
+            "texelDx": [
+              19.941164520976145,
+              3.6766843262710154
+            ],
+            "texelDy": [
+              -12.074327355575633,
+              0.9729609658334084
+            ],
+            "originalDeviceMips": [
+              3,
+              7
+            ],
+            "candidateDeviceMips": [
+              3,
+              7
+            ],
+            "frozenNvidiaMips": [
+              4,
+              6
+            ],
+            "candidateCodeError": 8,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          },
+          {
+            "pixel": [
+              1246,
+              1090
+            ],
+            "baselineBad": true,
+            "visibilityOverOne": false,
+            "modelMip": 4,
+            "estimatedLod": 3.5014147202473858,
+            "deltaFromHalfLevel": 0.001414720247385759,
+            "texelDx": [
+              19.941164520976145,
+              3.6766843262710154
+            ],
+            "texelDy": [
+              -12.074327355575633,
+              0.9729609658334084
+            ],
+            "originalDeviceMips": [
+              3
+            ],
+            "candidateDeviceMips": [
+              3
+            ],
+            "frozenNvidiaMips": [
+              4
+            ],
+            "candidateCodeError": 8,
+            "closestMipCodeError": 0,
+            "modeledMipWithinFrozenCodes": true
+          }
+        ],
+        "noMatchingDeviceMip": [
+          {
+            "pixel": [
+              1326,
+              1262
+            ],
+            "minimumCodeError": 659,
+            "frozenCodeError": 0
+          }
+        ],
+        "inputSha256": "8ca4a0bf68a770b8a5b1b1ec1df38a0f227f8af3469617ff21765c7feb27eb4d"
+      }
+    }
+  },
+  "executions": {
+    "release-build": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 203.93800000002375,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261110-030251-hair-main-chroma-public-9e799c\\tmp"
+    },
+    "release-cpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 26.31199999997625,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\verify-build.py",
+        "Release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\tmp"
+    },
+    "release-nvidia-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 13.827999999979511,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\verify-build.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\tmp"
+    },
+    "release-intel-gpu-tests": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 2.172000000020489,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\verify-build.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\tmp"
+    },
+    "release-nvidia-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 60.14100000000326,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\capture.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\tmp"
+    },
+    "release-intel-capture": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 29.85899999999674,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\capture.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\tmp"
+    },
+    "release-candidate-gate": {
+      "status": "exited",
+      "exitCode": 2,
+      "reason": null,
+      "seconds": 1.2030000000377186,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\candidate-gate.py",
+        "release"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded\\tmp"
+    }
+  },
+  "lease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-reference-hair-mip-footprint-release-final",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-153052-reference-hair-mip-footprint-510ded",
+    "pid": 20552,
+    "token": "62d68afd2e504987afc404bf66203fae",
+    "started": 1794469388.7045813,
+    "state": "released",
+    "ended": 1794469727.4900827
+  },
+  "archive": {
+    "sha256": "e85b31fb94f8122847570c5d7a4c2ffe7cba71cd0ac502014d02b5b0b568dd06",
+    "bytes": 455965,
+    "members": 76
+  }
+}
