@@ -1,0 +1,883 @@
+{
+  "status": "qualified-color-pair-control",
+  "gate": {
+    "status": "qualified-color-pair-control",
+    "overallStatus": "failed-user-review",
+    "referenceAttachmentsExact": true,
+    "activated": true,
+    "nvidiaFrozenHairPass": true,
+    "colors": {
+      "t17": {
+        "nvidia": [
+          {
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "fullFrameChanged": 0,
+            "cropChanged": 0,
+            "frozenHairChanged": 0,
+            "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+            "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          },
+          {
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "fullFrameChanged": 0,
+            "cropChanged": 0,
+            "frozenHairChanged": 0,
+            "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+            "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          },
+          {
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "fullFrameChanged": 0,
+            "cropChanged": 0,
+            "frozenHairChanged": 0,
+            "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+            "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          }
+        ],
+        "intel": [
+          {
+            "baselineOverOne": 568,
+            "overOne": 528,
+            "introduced": 13,
+            "closed": 53,
+            "fullFrameChanged": 299,
+            "cropChanged": 299,
+            "frozenHairChanged": 260,
+            "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+            "after": "c3913fa9e8eb4b135e30a9e11125dea4bdf06b19247a5311b27b894b294fd285"
+          },
+          {
+            "baselineOverOne": 568,
+            "overOne": 528,
+            "introduced": 13,
+            "closed": 53,
+            "fullFrameChanged": 299,
+            "cropChanged": 299,
+            "frozenHairChanged": 260,
+            "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+            "after": "c3913fa9e8eb4b135e30a9e11125dea4bdf06b19247a5311b27b894b294fd285"
+          },
+          {
+            "baselineOverOne": 568,
+            "overOne": 528,
+            "introduced": 13,
+            "closed": 53,
+            "fullFrameChanged": 299,
+            "cropChanged": 299,
+            "frozenHairChanged": 260,
+            "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+            "after": "c3913fa9e8eb4b135e30a9e11125dea4bdf06b19247a5311b27b894b294fd285"
+          }
+        ]
+      },
+      "pair": {
+        "nvidia": [
+          {
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "fullFrameChanged": 0,
+            "cropChanged": 0,
+            "frozenHairChanged": 0,
+            "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+            "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          },
+          {
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "fullFrameChanged": 0,
+            "cropChanged": 0,
+            "frozenHairChanged": 0,
+            "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+            "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          },
+          {
+            "baselineOverOne": 0,
+            "overOne": 0,
+            "introduced": 0,
+            "closed": 0,
+            "fullFrameChanged": 0,
+            "cropChanged": 0,
+            "frozenHairChanged": 0,
+            "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+            "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+          }
+        ],
+        "intel": [
+          {
+            "baselineOverOne": 568,
+            "overOne": 393,
+            "introduced": 40,
+            "closed": 215,
+            "fullFrameChanged": 808,
+            "cropChanged": 808,
+            "frozenHairChanged": 712,
+            "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+            "after": "926f32655489df58c3a625dc40dd49358325f07bdce6621bc6919dd3661fd3e7"
+          },
+          {
+            "baselineOverOne": 568,
+            "overOne": 393,
+            "introduced": 40,
+            "closed": 215,
+            "fullFrameChanged": 808,
+            "cropChanged": 808,
+            "frozenHairChanged": 712,
+            "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+            "after": "926f32655489df58c3a625dc40dd49358325f07bdce6621bc6919dd3661fd3e7"
+          },
+          {
+            "baselineOverOne": 568,
+            "overOne": 393,
+            "introduced": 40,
+            "closed": 215,
+            "fullFrameChanged": 808,
+            "cropChanged": 808,
+            "frozenHairChanged": 712,
+            "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+            "after": "926f32655489df58c3a625dc40dd49358325f07bdce6621bc6919dd3661fd3e7"
+          }
+        ]
+      }
+    },
+    "t18IntroducedClosedByT17": 41,
+    "t18IntroducedClosedByPair": 12,
+    "t18IntroducedStillInPair": 35,
+    "pairIntroducedOutsideT18": 5,
+    "pairClosedOverBothSingleControls": 20,
+    "overlaysCompacted": {
+      "t17": 895,
+      "pair": 895
+    }
+  },
+  "inputs": {
+    "t17": {
+      "t17.dds": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995",
+      "t17.dds.azmeta": "bac274600e7eb80e83ec42184de60626ca36ed5d8aa2e27d7ca16c14952f55fd"
+    },
+    "t18": {
+      "t18.dds": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54",
+      "t18.dds.azmeta": "424080184b3c22c286c90596bc4e843a0beedb5d5801be069539208b84a6a33d"
+    }
+  },
+  "nativeShaderSha256": "94ea8006e109415efe9e54a02829543139d3eab5da02535374a8b59187fa19ec",
+  "modes": {
+    "t17": {
+      "programs": {
+        "mesh_coverage_uvquad.frag.spv": {
+          "baselineSha256": "d2c700b3ba3113d064ef07de3cc182dc4d00a7ab0df3e0b4b8c0630e39a49660",
+          "probeSha256": "f4554a5d154cde02cb24d7be24c90398f8e4b91807627efddabf03c79c41ab19",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_object_coverage_uvquad.frag.spv": {
+          "baselineSha256": "52dfd7cbace94ce5276113e7ed2054ad4cb4e1c9a034af16403d8b5424d994b6",
+          "probeSha256": "3567dd54fa39863a09e3c0b3d15cbfabea5e24d247b7d2e662e5b2d56daa0bef",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh_object_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_clipmap_coverage_uvquad.frag.spv": {
+          "baselineSha256": "eca7fbc4c6d8236040f6623eb62be6f9ec79b8d2931b2cb4d4435c3b5594cae2",
+          "probeSha256": "61bb7d0c11ab87640dcfd4061ad4976fb0e1c127ea6c8caae9de9bbd5f6fcd45",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh_clipmap_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_object_clipmap_coverage_uvquad.frag.spv": {
+          "baselineSha256": "135f94112e61884d6c98452405f07882c8b6213399e1299b03370a8925e58703",
+          "probeSha256": "b08bb9b416b547bf01e9d5372645031d4ebf28e45f751240cc7b75d9b01206a1",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh_object_clipmap_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_field_coverage_uvquad.frag.spv": {
+          "baselineSha256": "563916c2930f397513fe55c4bac67d4c54f291b5cadddfd184c25c439193e5bc",
+          "probeSha256": "cd1b332b4beed4d9a66c5aa2478db1e6c282fda85671eadb0b92b413d41ade25",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh_field_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_object_field_coverage_uvquad.frag.spv": {
+          "baselineSha256": "162f42b0e85d8ccef003a81d443447a2e4a4c7613fc2ddeaa4271dd64f665811",
+          "probeSha256": "74685419d54097a775806076bfb5d0988e11522394c6f7019fff819b010712ae",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh_object_field_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_clipmap_field_coverage_uvquad.frag.spv": {
+          "baselineSha256": "ce22410e0210c9dd2ffbc66e9321c3e4dc34b3add81ee61bbe86bc7ffec233de",
+          "probeSha256": "e81fbef9fef9c2d0e1f8fb0d6229bd465f611f0802156725c0487118defbad24",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh_clipmap_field_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_object_clipmap_field_coverage_uvquad.frag.spv": {
+          "baselineSha256": "32dffa06aaee284c55e105eda5395fdc443794cd141c6cba19a9bee498a906a1",
+          "probeSha256": "800af74725334b53154c018a3dd389152a8eb978266cef6f254bf4f1198ce10b",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\t17\\shader-probe\\mesh_object_clipmap_field_coverage_uvquad.frag.spv"
+          ]
+        }
+      },
+      "results": {
+        "nvidia": {
+          "device": "nvidia",
+          "playerSha256": "169f56e366863849289fdff6c6c5526d44c812386c921438aadeb65e78965844",
+          "attachments": {
+            "raster": {
+              "exact": true,
+              "before": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+              "after": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+            },
+            "hardware": {
+              "exact": true,
+              "before": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+              "after": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+            },
+            "packedNormals": {
+              "exact": true,
+              "before": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+              "after": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+            },
+            "objectIds": {
+              "exact": true,
+              "before": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+              "after": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+            },
+            "objectVisibility": {
+              "exact": true,
+              "before": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+              "after": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+            }
+          },
+          "colors": [
+            {
+              "baselineOverOne": 0,
+              "overOne": 0,
+              "introduced": 0,
+              "closed": 0,
+              "fullFrameChanged": 0,
+              "cropChanged": 0,
+              "frozenHairChanged": 0,
+              "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+              "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+            },
+            {
+              "baselineOverOne": 0,
+              "overOne": 0,
+              "introduced": 0,
+              "closed": 0,
+              "fullFrameChanged": 0,
+              "cropChanged": 0,
+              "frozenHairChanged": 0,
+              "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+              "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+            },
+            {
+              "baselineOverOne": 0,
+              "overOne": 0,
+              "introduced": 0,
+              "closed": 0,
+              "fullFrameChanged": 0,
+              "cropChanged": 0,
+              "frozenHairChanged": 0,
+              "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+              "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+            }
+          ],
+          "shaderCount": 895,
+          "validationClean": true,
+          "allocatorZero": true
+        },
+        "intel": {
+          "device": "intel",
+          "playerSha256": "169f56e366863849289fdff6c6c5526d44c812386c921438aadeb65e78965844",
+          "attachments": {
+            "raster": {
+              "exact": true,
+              "before": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+              "after": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+            },
+            "hardware": {
+              "exact": true,
+              "before": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+              "after": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+            },
+            "packedNormals": {
+              "exact": true,
+              "before": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+              "after": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132"
+            },
+            "objectIds": {
+              "exact": true,
+              "before": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+              "after": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+            },
+            "objectVisibility": {
+              "exact": true,
+              "before": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+              "after": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3"
+            }
+          },
+          "colors": [
+            {
+              "baselineOverOne": 568,
+              "overOne": 528,
+              "introduced": 13,
+              "closed": 53,
+              "fullFrameChanged": 299,
+              "cropChanged": 299,
+              "frozenHairChanged": 260,
+              "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+              "after": "c3913fa9e8eb4b135e30a9e11125dea4bdf06b19247a5311b27b894b294fd285"
+            },
+            {
+              "baselineOverOne": 568,
+              "overOne": 528,
+              "introduced": 13,
+              "closed": 53,
+              "fullFrameChanged": 299,
+              "cropChanged": 299,
+              "frozenHairChanged": 260,
+              "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+              "after": "c3913fa9e8eb4b135e30a9e11125dea4bdf06b19247a5311b27b894b294fd285"
+            },
+            {
+              "baselineOverOne": 568,
+              "overOne": 528,
+              "introduced": 13,
+              "closed": 53,
+              "fullFrameChanged": 299,
+              "cropChanged": 299,
+              "frozenHairChanged": 260,
+              "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+              "after": "c3913fa9e8eb4b135e30a9e11125dea4bdf06b19247a5311b27b894b294fd285"
+            }
+          ],
+          "shaderCount": 895,
+          "validationClean": true,
+          "allocatorZero": true
+        }
+      },
+      "execution": {
+        "nvidia": {
+          "status": "exited",
+          "exitCode": 0,
+          "reason": null,
+          "seconds": 37.85999999998603,
+          "logTruncated": false,
+          "samplingSeconds": 1,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+            "-B",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\color-capture.py",
+            "t17",
+            "nvidia"
+          ],
+          "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\tmp"
+        },
+        "intel": {
+          "status": "exited",
+          "exitCode": 0,
+          "reason": null,
+          "seconds": 44.40599999995902,
+          "logTruncated": false,
+          "samplingSeconds": 1,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+            "-B",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\color-capture.py",
+            "t17",
+            "intel"
+          ],
+          "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\tmp"
+        }
+      }
+    },
+    "pair": {
+      "programs": {
+        "mesh_coverage_uvquad.frag.spv": {
+          "baselineSha256": "d2c700b3ba3113d064ef07de3cc182dc4d00a7ab0df3e0b4b8c0630e39a49660",
+          "probeSha256": "4f9c21645b31e501d211eec4919a24b3d8a4353a183059df06593aa8ba61b5eb",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_object_coverage_uvquad.frag.spv": {
+          "baselineSha256": "52dfd7cbace94ce5276113e7ed2054ad4cb4e1c9a034af16403d8b5424d994b6",
+          "probeSha256": "45e117a405602d7baf762f120d6a72110573f69745aec7cdefa1e2621be18338",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh_object_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_clipmap_coverage_uvquad.frag.spv": {
+          "baselineSha256": "eca7fbc4c6d8236040f6623eb62be6f9ec79b8d2931b2cb4d4435c3b5594cae2",
+          "probeSha256": "62dc2290eb1c863949c9eaf872034e6aed3a638737e3732ece024a717a82901f",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh_clipmap_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_object_clipmap_coverage_uvquad.frag.spv": {
+          "baselineSha256": "135f94112e61884d6c98452405f07882c8b6213399e1299b03370a8925e58703",
+          "probeSha256": "a3d7d682fab8b81fcedc283a8d26d95b27dc98a0c4cb33020b61a56b11ebfe7a",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh_object_clipmap_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_field_coverage_uvquad.frag.spv": {
+          "baselineSha256": "563916c2930f397513fe55c4bac67d4c54f291b5cadddfd184c25c439193e5bc",
+          "probeSha256": "3c689e0220238dab4d3ae3816640d4e5066df53d43256d6b27799bc08a4b2149",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh_field_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_object_field_coverage_uvquad.frag.spv": {
+          "baselineSha256": "162f42b0e85d8ccef003a81d443447a2e4a4c7613fc2ddeaa4271dd64f665811",
+          "probeSha256": "e12b4d05669a75594eeed053cbc909b7327715dda10cf942953e5a70ae102873",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh_object_field_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_clipmap_field_coverage_uvquad.frag.spv": {
+          "baselineSha256": "ce22410e0210c9dd2ffbc66e9321c3e4dc34b3add81ee61bbe86bc7ffec233de",
+          "probeSha256": "d50c3cba1324cc9ef24e6f503271e10413b49dcfde4b671b46ece62042a78b7a",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh_clipmap_field_coverage_uvquad.frag.spv"
+          ]
+        },
+        "mesh_object_clipmap_field_coverage_uvquad.frag.spv": {
+          "baselineSha256": "32dffa06aaee284c55e105eda5395fdc443794cd141c6cba19a9bee498a906a1",
+          "probeSha256": "99f62bcbf8ce75ce991d97343cce06a3d439a477ee3013351bec455fc6e5cd91",
+          "command": [
+            "D:\\Tools\\VulkanSDK\\1.4.350.0\\Bin\\glslc.exe",
+            "--target-env=vulkan1.1",
+            "-DAZURE_REFERENCE_MATERIAL_UV=1",
+            "-DAZURE_FRAGMENT_QUAD_OPERATIONS=1",
+            "-DAZURE_INDEPENDENT_COVERAGE=1",
+            "-DAZURE_PROBE_FIELD=1",
+            "-DAZURE_IRRADIANCE_CLIPMAP=1",
+            "-DAZURE_OBJECT_SHADOW=1",
+            "-DAZURE_EXTENDED_MATERIAL_LIGHTING=1",
+            "-ID:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\shaders",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh.frag",
+            "-o",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\pair\\shader-probe\\mesh_object_clipmap_field_coverage_uvquad.frag.spv"
+          ]
+        }
+      },
+      "results": {
+        "nvidia": {
+          "device": "nvidia",
+          "playerSha256": "169f56e366863849289fdff6c6c5526d44c812386c921438aadeb65e78965844",
+          "attachments": {
+            "raster": {
+              "exact": true,
+              "before": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+              "after": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+            },
+            "hardware": {
+              "exact": true,
+              "before": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2",
+              "after": "f1ef0ea6a727554f6593b2c2333e49650eec5c8f2b25acb03d8e250ae8ce35a2"
+            },
+            "packedNormals": {
+              "exact": true,
+              "before": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424",
+              "after": "37df16157c41a1ffdacb7b2ad21e9d84d7a0b81612e7b79c0bc294c496c1c424"
+            },
+            "objectIds": {
+              "exact": true,
+              "before": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10",
+              "after": "d14ae2982d8d7b1f99c93572ba6d0ce9f9af3643cd250a2636b3c4b765a62a10"
+            },
+            "objectVisibility": {
+              "exact": true,
+              "before": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336",
+              "after": "1010efb44d81c2bef5c0384cd50844a97537cf79c5750f35220b4b0e2cae8336"
+            }
+          },
+          "colors": [
+            {
+              "baselineOverOne": 0,
+              "overOne": 0,
+              "introduced": 0,
+              "closed": 0,
+              "fullFrameChanged": 0,
+              "cropChanged": 0,
+              "frozenHairChanged": 0,
+              "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+              "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+            },
+            {
+              "baselineOverOne": 0,
+              "overOne": 0,
+              "introduced": 0,
+              "closed": 0,
+              "fullFrameChanged": 0,
+              "cropChanged": 0,
+              "frozenHairChanged": 0,
+              "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+              "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+            },
+            {
+              "baselineOverOne": 0,
+              "overOne": 0,
+              "introduced": 0,
+              "closed": 0,
+              "fullFrameChanged": 0,
+              "cropChanged": 0,
+              "frozenHairChanged": 0,
+              "before": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4",
+              "after": "e7673fd8104605089e3cfec894dd2337acd7579569be86a23683ed1cb6f622a4"
+            }
+          ],
+          "shaderCount": 895,
+          "validationClean": true,
+          "allocatorZero": true
+        },
+        "intel": {
+          "device": "intel",
+          "playerSha256": "169f56e366863849289fdff6c6c5526d44c812386c921438aadeb65e78965844",
+          "attachments": {
+            "raster": {
+              "exact": true,
+              "before": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+              "after": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+            },
+            "hardware": {
+              "exact": true,
+              "before": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45",
+              "after": "d2dbed224741d08e346cd7a30f2feed0b3883bb5346d42c7889d84df8d241a45"
+            },
+            "packedNormals": {
+              "exact": true,
+              "before": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132",
+              "after": "cc379c0b311eaf6c4d28093c88adf642190ee5b694d1a9b32d98a811fab73132"
+            },
+            "objectIds": {
+              "exact": true,
+              "before": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b",
+              "after": "f831b78c8c2d0242fb00e5530f59791d952141d85fa02bf41e1aa2387bc7248b"
+            },
+            "objectVisibility": {
+              "exact": true,
+              "before": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3",
+              "after": "6e7b8e5a946cd8758a935462ae68e1bc6d25c6b9ab2a2e54ce8bfb8b2ad7e4c3"
+            }
+          },
+          "colors": [
+            {
+              "baselineOverOne": 568,
+              "overOne": 393,
+              "introduced": 40,
+              "closed": 215,
+              "fullFrameChanged": 808,
+              "cropChanged": 808,
+              "frozenHairChanged": 712,
+              "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+              "after": "926f32655489df58c3a625dc40dd49358325f07bdce6621bc6919dd3661fd3e7"
+            },
+            {
+              "baselineOverOne": 568,
+              "overOne": 393,
+              "introduced": 40,
+              "closed": 215,
+              "fullFrameChanged": 808,
+              "cropChanged": 808,
+              "frozenHairChanged": 712,
+              "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+              "after": "926f32655489df58c3a625dc40dd49358325f07bdce6621bc6919dd3661fd3e7"
+            },
+            {
+              "baselineOverOne": 568,
+              "overOne": 393,
+              "introduced": 40,
+              "closed": 215,
+              "fullFrameChanged": 808,
+              "cropChanged": 808,
+              "frozenHairChanged": 712,
+              "before": "8fa31201727325707e7d20e3b13544949bea6f863fe5cdb7632b373ca3210bf6",
+              "after": "926f32655489df58c3a625dc40dd49358325f07bdce6621bc6919dd3661fd3e7"
+            }
+          ],
+          "shaderCount": 895,
+          "validationClean": true,
+          "allocatorZero": true
+        }
+      },
+      "execution": {
+        "nvidia": {
+          "status": "exited",
+          "exitCode": 0,
+          "reason": null,
+          "seconds": 37.95299999997951,
+          "logTruncated": false,
+          "samplingSeconds": 1,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+            "-B",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\color-capture.py",
+            "pair",
+            "nvidia"
+          ],
+          "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\tmp"
+        },
+        "intel": {
+          "status": "exited",
+          "exitCode": 0,
+          "reason": null,
+          "seconds": 43.84399999998277,
+          "logTruncated": false,
+          "samplingSeconds": 1,
+          "command": [
+            "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+            "-B",
+            "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\color-capture.py",
+            "pair",
+            "intel"
+          ],
+          "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da\\tmp"
+        }
+      }
+    }
+  },
+  "sourceT18Archive": "f18623a388d472d7c430ca1d7715c9b09e7619947f1c4f7fd291ac336fd0d37a",
+  "lease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-reference-hair-color-pair-gpu",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-174157-reference-hair-color-pair-8d76da",
+    "pid": 38872,
+    "token": "128d18f3e2174302813aa073b5be0adc",
+    "started": 1794477055.3918917,
+    "state": "released",
+    "ended": 1794477222.7600315
+  },
+  "scope": {
+    "local": "external-input-d4f150fdfb7840289e51c1ecae6cceeb",
+    "main": "external-input-6eedd2f363c64c11bbbeec252b76a841",
+    "sourceBase": "4b1b38ca2c89ac2ccc1460294b3444aaf0ccf83a",
+    "plannedBytes": 352321536,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5",
+      "20261112-133809-reference-receiver-source-isolation-6cdff0",
+      "20261112-135432-reference-outline-projection-d784cf",
+      "20261112-143340-native-texture-sampling-footprint-750e56",
+      "20261112-153052-reference-hair-mip-footprint-510ded",
+      "20261112-155601-reference-hair-live-lod-2d2bfd",
+      "20261112-164303-reference-hair-mip-boundary-342000",
+      "20261112-173549-reference-hair-color-source-196fbc"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "Independent t17 and joint t17+t18 beauty shader controls",
+    "gate": "Five unchanged reference attachments; frozen 17017-position RGB on both devices"
+  },
+  "archive": {
+    "sha256": "f1d43ad35acc226c5dbc877ed5e50965d2ad4a2c0737163f9724f11ec25d79b3",
+    "bytes": 3281611,
+    "members": 69
+  }
+}

@@ -30,6 +30,10 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[三纹理采样与视口选择集成](../acceptance/nr/projected-hair-viewport-integration.md)通过所属构建和双显卡复验。
+
+[空白视口选择](../acceptance/nr/editor-empty-viewport-selection.md)通过探索项目和场景检视项目的所属回归。
+
 [参考头发半层采样集成](../acceptance/nr/reference-hair-boundary-integration.md)通过所属构建和双显卡复验。
 
 [画质与性能集成](../acceptance/nr/quality-performance-integration.md)通过两种配置的标准构建及双设备回归。
@@ -1576,3 +1580,13 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [参考头发片元层级](../acceptance/nr/reference-hair-live-lod.md)核对半层边界。NVIDIA 的 8 处法线变化全部处于一个 8 位层级精度单位内。边界采样继续在双设备正式场景核对。
 
 [参考头发近邻层级](../acceptance/nr/reference-hair-mip-boundary.md)核对参考法线边界采样。NVIDIA 冻结头发可见量和 RGB 超差均为零，Intel 分别为 111 处和 568 处，整体画质仍按原门槛验收。
+
+[头发着色双法线采样](../acceptance/nr/reference-hair-color-source.md)核对原生纹理 t18 的单变量控制。Intel RGB 超差 449 处，参数纹理继续按同一冻结范围核对。
+
+[头发参数与双法线选层](../acceptance/nr/reference-hair-color-pair.md)核对冻结 RGB，Intel 联合控制有 393 处超差。基色选层按同一原生采样器继续核对。
+
+[头发基色与三纹理选层](../acceptance/nr/reference-hair-color-triple.md)核对原生同采样器的三份纹理。Intel 冻结 RGB 超差为 32 处，继续按一字节门槛验收。
+
+[体表接收法线纹理](../acceptance/nr/native-body-normal-source.md)核对十一层压缩块。NVIDIA 和 Intel 的体表可见量分别有 46 和 77 处超差，后续核对采样后法线重建。
+
+[投影头发主纹理层级](../acceptance/nr/projected-hair-point-mip.md)完成两配置、双设备和原始四帧专项回归。Intel 冻结 RGB 仍有 32 处超差，按原门槛继续验收。

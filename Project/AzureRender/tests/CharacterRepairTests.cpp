@@ -302,6 +302,43 @@ void testProjectedHairRamp(const nlohmann::json& fixture,const std::filesystem::
         auto bad=source;bad["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["snapshotNormal"]=invalid;
         reject(bad);
     }
+    auto pointMipSource=source;
+    auto& pointMipMaterial=pointMipSource["materials"][0];
+    auto& pointMipProfile=pointMipMaterial["extras"]["azureRenderMaterial"];
+    pointMipProfile["features"].push_back("mirrored-coarse-uv");
+    auto& pointMipRamp=pointMipProfile["hair"]["projectedRamp"];
+    pointMipRamp["primaryTextureFootprint"]="axis-diagonal";
+    const auto primaryImagePath=directory/"projected-primary.png";
+    std::filesystem::copy_file(directory/"projected-ramp.png",primaryImagePath,std::filesystem::copy_options::overwrite_existing);
+    const auto primaryImage=static_cast<int>(pointMipSource["images"].size());
+    pointMipSource["images"].push_back({{"uri","projected-primary.png"}});
+    const auto primaryTexture=static_cast<int>(pointMipSource["textures"].size());
+    pointMipSource["textures"].push_back({{"source",primaryImage}});
+    pointMipMaterial["pbrMetallicRoughness"]["baseColorTexture"]["index"]=primaryTexture;
+    pointMipProfile["hair"]["dataTexture"]=primaryTexture;
+    pointMipRamp["parameterTexture"]=primaryTexture;
+    const auto pointMipMetadata=directory/"projected-primary.png.azmeta";
+    Json pointMipSettings={{"filter","linear"},{"mipFilter","nearest"},{"anisotropy",1},{"mipBias",-1}};
+    const auto writePointMipSettings=[&] {
+        std::ofstream(pointMipMetadata)<<Json{{"settings",{{"texture",pointMipSettings}}}};
+    };
+    writePointMipSettings();
+    const auto pointMipPacked=packMaterialSurfaceProfile(load(pointMipSource).materials[0]);
+    require(pointMipPacked.rows[6][3]==16&&pointMipPacked.rows[12]==std::array<float,4>{-1,-1,-1,0},
+        "Projected hair primary footprint must retain its flag and three sampler biases");
+    auto invalidFootprint=pointMipSource;
+    invalidFootprint["materials"][0]["extras"]["azureRenderMaterial"]["features"]={"hair-anisotropy","hair-projected-ramp"};
+    reject(invalidFootprint,"primaryTextureFootprint");
+    for(const auto& value:Json::array({nullptr,true,1,"ellipse-major"})) {
+        auto invalid=pointMipSource;
+        invalid["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["primaryTextureFootprint"]=value;
+        reject(invalid,"primaryTextureFootprint");
+    }
+    pointMipSettings["anisotropy"]=2;
+    writePointMipSettings();
+    reject(pointMipSource,"primaryTextureFootprint");
+    std::filesystem::remove(pointMipMetadata);
+
     auto handed=source;handed["materials"][0]["extras"]["azureRenderMaterial"]["hair"]["projectedRamp"]["tangentSign"]=-1;
     auto integrated=source;
     integrated["materials"][0]["extras"]["azureRenderMaterial"]["features"].push_back("hair-pixel-integral");

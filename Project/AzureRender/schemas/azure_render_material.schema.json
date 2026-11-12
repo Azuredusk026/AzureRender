@@ -221,6 +221,11 @@
         "projectedRamp": {
           "type": "object",
           "properties": {
+            "primaryTextureFootprint": {
+              "type": "string",
+              "const": "axis-diagonal",
+              "description": "使用轴向与对角足迹选择头发基色 RGB、参数和双法线的纹理层级。"
+            },
             "snapshotNormal": {
               "type": "string",
               "enum": [

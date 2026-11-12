@@ -40,6 +40,10 @@ layout(early_fragment_tests) in;
 #include "character_surface.glsl"
 #include "material_sampling.glsl"
 #include "material_primary_uv.glsl"
+#if defined(AZURE_REFERENCE_MATERIAL_UV) && !defined(AZURE_OPAQUE_SNAPSHOT) && !defined(AZURE_GEOMETRY_SAMPLES)
+#define AZURE_HAIR_PRIMARY_MIP 1
+#include "texture_footprint.glsl"
+#endif
 #include "material_output_precision.glsl"
 #include "material_specialization.glsl"
 #include "fragment_sampling.glsl"
@@ -292,6 +296,25 @@ struct PackedMaterialSurfaceProfile { vec4 rows[22]; };
 layout(std430,binding=27) readonly buffer MaterialSurfaceProfiles {
     PackedMaterialSurfaceProfile profiles[];
 } materialSurfaceProfiles;
+#if defined(AZURE_HAIR_PRIMARY_MIP)
+vec4 selectProjectedHairPrimaryMip(sampler2D image,vec2 uv,vec4 implicitSample,int biasLane) {
+    if(AZURE_MATERIAL_CLASS!=3U)return implicitSample;
+    uint profile=material.materialPadding>>1U;
+    uint flags=uint(materialSurfaceProfiles.profiles[profile].rows[6].w+.5);
+    if((flags&16U)==0u)return implicitSample;
+    vec2 size=vec2(textureSize(image,0));
+    float lod=azureAxisDiagonalMipLod(azurePrimaryUvDx*size,azurePrimaryUvDy*size);
+    float bias=materialSurfaceProfiles.profiles[profile].rows[12][biasLane];
+    bool atBoundary=abs(fract(lod+bias)-.5)<=1.0/256.0;
+    vec4 explicitSample=textureLod(image,uv,lod);
+    return mix(explicitSample,implicitSample,bvec4(atBoundary));
+}
+vec4 sampleProjectedHairPrimaryMip(sampler2D image,vec2 uv,int biasLane) {
+    return selectProjectedHairPrimaryMip(image,uv,azureSamplePrimaryUv(image,uv),biasLane);
+}
+#else
+#define sampleProjectedHairPrimaryMip(image,uv,biasLane) azureSamplePrimaryUv(image,uv)
+#endif
 float azureMaterialRadianceScale() {
     return materialSurfaceProfiles.profiles[material.materialPadding>>1U].rows[19].w;
 }
@@ -326,8 +349,8 @@ struct ProjectedHairIncident {vec3 radiance;vec4 response;vec4 mainRadiance;floa
 CharacterProjectedHairEnergy projectedHairSample(vec3 view,vec3 light,bool directional,bool evaluateLine,
     vec2 uv,vec2 screenOffset,bool integrated,ProjectedHairIncident incident,out vec2 line) {
     ProjectedHairProfile p=loadProjectedHairSurfaceProfile(material.materialPadding>>1U);
-    vec4 parameters=integrated?textureGrad(AZ_TEX_FACE_SDF,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):azureSamplePrimaryUv(AZ_TEX_FACE_SDF,uv);
-    vec4 packedNormals=integrated?textureGrad(AZ_TEX_HAIR_DATA,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):azureSamplePrimaryUv(AZ_TEX_HAIR_DATA,uv);
+    vec4 parameters=integrated?textureGrad(AZ_TEX_FACE_SDF,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):sampleProjectedHairPrimaryMip(AZ_TEX_FACE_SDF,uv,2);
+    vec4 packedNormals=integrated?textureGrad(AZ_TEX_HAIR_DATA,uv,projectedHairUvDx*.25,projectedHairUvDy*.25):sampleProjectedHairPrimaryMip(AZ_TEX_HAIR_DATA,uv,1);
     vec3 basisNormal=worldNormal;vec4 basisTangent=worldTangent;
     if(integrated){
         basisNormal+=projectedHairNormalDx*screenOffset.x+projectedHairNormalDy*screenOffset.y;
@@ -444,7 +467,7 @@ CharacterDiffuseResponse projectedHairDiffuseResponse(vec3 base,vec3 normal,vec3
         azureHairPixelIntegral&&(AZURE_MATERIAL_FEATURES&0x80800000U)==0x80800000U
 #endif
         ?textureGrad(AZ_TEX_FACE_SDF,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25).b
-        :azureSamplePrimaryUv(AZ_TEX_FACE_SDF,textureCoordinate).b;
+        :sampleProjectedHairPrimaryMip(AZ_TEX_FACE_SDF,textureCoordinate,2).b;
     float litMask=min(min(characterVisibility,ao),ramp.a),aoMask=characterVisibility*ao;
     vec3 shadow=characterDiffuseSaturation(base*profile.rows[10].w,profile.rows[11].w);
     CharacterDiffuseResponse response=characterDiffuseWeightedResponse(base,shadow,0.0,profile.rows[5].w,ramp,
@@ -857,6 +880,9 @@ void main()
     vec4 baseColor=textureGrad(AZ_TEX_BASE_COLOR,textureCoordinate,alphaUvDx*.25,alphaUvDy*.25);
 #else
     vec4 baseColor = azureSamplePrimaryUv(AZ_TEX_BASE_COLOR,textureCoordinate);
+#if defined(AZURE_HAIR_PRIMARY_MIP)
+    baseColor.rgb=selectProjectedHairPrimaryMip(AZ_TEX_BASE_COLOR,textureCoordinate,baseColor,0).rgb;
+#endif
 #endif
 #if !defined(AZURE_INDEPENDENT_COVERAGE)
     if(AZURE_ALPHA_MODE==1&&(AZURE_MATERIAL_FEATURES&0x40000000U)!=0U)
@@ -971,7 +997,7 @@ void main()
         azureHairPixelIntegral&&(AZURE_MATERIAL_FEATURES&0x80800000U)==0x80800000U
 #endif
         ?textureGrad(AZ_TEX_HAIR_DATA,textureCoordinate,projectedHairUvDx*.25,projectedHairUvDy*.25)
-        :azureSamplePrimaryUv(AZ_TEX_HAIR_DATA,textureCoordinate);
+        :sampleProjectedHairPrimaryMip(AZ_TEX_HAIR_DATA,textureCoordinate,1);
     float hairActive = AZURE_MATERIAL_CLASS==3U ? materialFeatureEnabled(2U) : 0.0;
     bool projectedHair=hairActive>0.0&&materialFeatureEnabled(65536U)>.5;
     bool strandDiffuse=projectedHair

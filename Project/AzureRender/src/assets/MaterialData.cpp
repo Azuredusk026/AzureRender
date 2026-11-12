@@ -237,6 +237,8 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.referenceDepthStencil != AssetMaterial::ReferenceDepthStencil::Ordinary
             && source.referenceDepthStencil != replacement.referenceDepthStencil, "referenceDepthStencil");
         lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
+        lost(source.projectedHairRamp.axisDiagonalPrimaryTextureFootprint
+            && !replacement.projectedHairRamp.axisDiagonalPrimaryTextureFootprint,"hair.projectedRamp.primaryTextureFootprint");
         lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
         lost(source.unlitTextureLayers.present&&!replacement.unlitTextureLayers.present,"surface.layers");
         lost(source.unlitTextureLayers.submission==UnlitTextureLayers::Submission::OpaqueOverlay

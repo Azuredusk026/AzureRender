@@ -604,14 +604,14 @@ void CharacterSceneRenderer::initializeLoad(const RenderContext& context) {
             + ", stage sampler limit="
             + std::to_string(limits.maxPerStageDescriptorSamplers));
     const bool referenceObjectRaster=referenceObjectVisibilityRequested(context);
-    enqueue("buffers",loadTimings_.buffersMs,[this,referenceObjectRaster]{
+    enqueue("buffers",loadTimings_.buffersMs,[this,referenceObjectRaster,maximumSamplerLodBias=limits.maxSamplerLodBias]{
         loadedBindPoses_.clear();loadedBindPoses_.reserve(additionalResources_.size()+1);
         loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(asset_)));
         for(const auto& resource:additionalResources_)loadedBindPoses_.push_back(std::make_shared<const AssetPose>(bindAnimationPose(resource->asset)));
         loadedAnimations_.clear();loadedAnimations_.reserve(additionalResources_.size()+1);
         loadedAnimations_.emplace_back(asset_);
         for(const auto& resource:additionalResources_)loadedAnimations_.emplace_back(resource->asset);
-        createUniformBuffers(referenceObjectRaster);createJointBuffers();
+        createUniformBuffers(referenceObjectRaster,maximumSamplerLodBias);createJointBuffers();
         if(scene_.viewFog.enabled)viewFog_=std::make_unique<ViewFogState>(*rhi_,scene_.viewFog,static_cast<unsigned>(kMaxFramesInFlight));
     },true);
     enqueue("skinning",loadTimings_.skinningMs,[this]{createComputeSkinningResources();createOitIndexBuffers();},true);
@@ -2947,7 +2947,7 @@ void CharacterSceneRenderer::recordComputeSkinning(
     noteSkinningOutputRecorded(skinningOutputTicket_);
 }
 
-void CharacterSceneRenderer::createUniformBuffers(bool referenceObjectRaster) {
+void CharacterSceneRenderer::createUniformBuffers(bool referenceObjectRaster,float maximumSamplerLodBias) {
     // One typed, immutable record per stable asset material index.
     std::vector<PackedMaterialSurfaceProfile> profiles;
     const auto appendProfiles=[&](const LoadedAsset& mesh) {
@@ -2955,7 +2955,12 @@ void CharacterSceneRenderer::createUniformBuffers(bool referenceObjectRaster) {
             const auto layer=material.environmentLighting.reflectionLayer;
             if(layer&&(!probeFieldTexture_||*layer>=probeFieldTexture_->image().arrayLayers))
                 throw std::runtime_error("Material "+material.name+" reflectionLayer exceeds the scene reflection field");
-            profiles.push_back(packMaterialSurfaceProfile(material));
+            auto profile = packMaterialSurfaceProfile(material);
+            if (material.projectedHairRamp.axisDiagonalPrimaryTextureFootprint) {
+                for (float& bias : profile.rows[12])
+                    bias = std::clamp(bias, -maximumSamplerLodBias, maximumSamplerLodBias);
+            }
+            profiles.push_back(profile);
         }
     };
     appendProfiles(asset_);for(const auto& resource:additionalResources_)appendProfiles(resource->asset);

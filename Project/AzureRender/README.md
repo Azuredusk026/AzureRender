@@ -1,5 +1,9 @@
 # AzureRender 工程
 
+[三纹理采样与视口选择集成](docs/acceptance/nr/projected-hair-viewport-integration.md)通过两种配置及双显卡参考附件核对。
+
+[空白视口选择](docs/acceptance/nr/editor-empty-viewport-selection.md)通过两种配置的实际编辑输入核对。
+
 [参考头发半层采样集成](docs/acceptance/nr/reference-hair-boundary-integration.md)通过两种配置及双显卡参考附件核对。
 
 [画质与性能集成验收](docs/acceptance/nr/quality-performance-integration.md)通过两种配置的构建、双显卡参考附件及原始四帧核对。
@@ -1067,3 +1071,13 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [参考头发片元层级](docs/acceptance/nr/reference-hair-live-lod.md)记录实际片元层级和半层边界读回。
 
 [参考头发近邻层级](docs/acceptance/nr/reference-hair-mip-boundary.md)记录参考法线的边界采样和双设备场景验收。
+
+[头发着色双法线采样](docs/acceptance/nr/reference-hair-color-source.md)记录固定着色程序的实际颜色和参考附件。
+
+[头发参数与双法线选层](docs/acceptance/nr/reference-hair-color-pair.md)记录着色纹理的独立和联合对照。
+
+[头发基色与三纹理选层](docs/acceptance/nr/reference-hair-color-triple.md)记录基色和三纹理的实际着色对照。
+
+[体表接收法线纹理](docs/acceptance/nr/native-body-normal-source.md)记录原生和夹具的法线层级内容。
+
+[投影头发主纹理层级](docs/acceptance/nr/projected-hair-point-mip.md)记录可选材质路径及双设备生产回归。

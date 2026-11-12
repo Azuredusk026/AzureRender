@@ -57,6 +57,20 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-213746-nr-projected-hair-integration-b5c673",
+      "name": "三纹理采样与视口选择集成",
+      "sourceBase": "0909e26",
+      "evidence": "docs/acceptance/nr/projected-hair-viewport-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/projected-hair-viewport-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/editor-empty-viewport-green",
+      "name": "空白视口选择",
+      "sourceBase": "b10997b",
+      "evidence": "docs/acceptance/nr/editor-empty-viewport-selection.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-empty-viewport-selection/results.json"
+    },
+    {
       "path": "runs/20261112-173937-nr-hair-boundary-integration-6ceb4f",
       "name": "参考头发半层采样集成",
       "sourceBase": "9d5de3d",

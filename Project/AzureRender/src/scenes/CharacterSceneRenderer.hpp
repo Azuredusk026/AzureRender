@@ -759,7 +759,7 @@ private:
     void uploadMaterialTextures(
         LoadedAsset& asset,
         std::vector<GpuMaterial>& gpuMaterials);
-    void createUniformBuffers(bool referenceObjectRaster);
+    void createUniformBuffers(bool referenceObjectRaster,float maximumSamplerLodBias);
     void createJointBuffers();
     void createOitIndexBuffers();
     void createDescriptorSetLayout();
