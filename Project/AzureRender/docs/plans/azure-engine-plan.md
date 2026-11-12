@@ -1376,3 +1376,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [参考接收输入对照](../acceptance/nr/reference-receiver-source-isolation.md)在双设备逐字节复现完整可见量附件。原生深度和法线联合替换时，接收超差为 NVIDIA 10 处和 Intel 6 处，Intel 冻结头发可见量进入门槛。实际场景画质状态为 `failed-user-review`。
 
 [参考外壳深度投影](../acceptance/nr/reference-outline-projection.md)核对事件 440 的独立深度系数。外壳区域的可见量超差为 NVIDIA 1 处和 Intel 43 处，完整接收分别为 237 处和 608 处。
+
+[原生纹理取样足迹](../acceptance/nr/native-texture-sampling-footprint.md)测量固定梯度下的最近层级。轴向与对角近似在冻结头发的 17,017 个位置中逐位复现 17,012 个 NVIDIA 压缩法线值。实际颜色与可见量继续按原门槛验收。

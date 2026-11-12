@@ -1,0 +1,4821 @@
+{
+  "status": "qualified",
+  "overallStatus": "failed-user-review",
+  "inputSha256": "37aa6f988b632cc184ba34a7072f7f253555b64f15f79cbfde7937a03805e860",
+  "shapes": 100,
+  "scaleSteps": 257,
+  "positionsPerAdapter": 411200,
+  "devices": {
+    "nvidia": {
+      "vendor": 4318,
+      "valuesSha256": "77cd2af32b1e660077b98c86d67d075d01cb9858f33350dcd97709cc6ff3a66f",
+      "derivativesSha256": "5184c1b9ff257af6c9a68d3e569c9d1c2a13369264dc7a2c12d706cf7e0662d9",
+      "exactCornerGradients": 25700,
+      "maximumCornerGradientError": 0.0,
+      "covered": 411200,
+      "variedWithinCell": 0,
+      "biasGradDifferentCells": 0,
+      "biasGradDifferentBoundaries": 0,
+      "models": {
+        "maxAxis": {
+          "differentCells": 2764,
+          "exactBoundaryIntervals": 0,
+          "medianBoundaryErrorLod": 0.07701172637712261,
+          "p95BoundaryErrorLod": 0.46917378570943585,
+          "maximumBoundaryErrorLod": 0.5185351560215192
+        },
+        "ellipse": {
+          "differentCells": 888,
+          "exactBoundaryIntervals": 6,
+          "medianBoundaryErrorLod": 0.036826850794532184,
+          "p95BoundaryErrorLod": 0.09120629575194783,
+          "maximumBoundaryErrorLod": 0.1297682149993875
+        },
+        "maxComponent": {
+          "differentCells": 6090,
+          "exactBoundaryIntervals": 0,
+          "medianBoundaryErrorLod": 0.26959733033012334,
+          "p95BoundaryErrorLod": 0.5779824844272216,
+          "maximumBoundaryErrorLod": 0.6526338504836122
+        },
+        "axisBounds": {
+          "differentCells": 2452,
+          "exactBoundaryIntervals": 2,
+          "medianBoundaryErrorLod": 0.06584686238620518,
+          "p95BoundaryErrorLod": 0.3736027468645624,
+          "maximumBoundaryErrorLod": 0.4974023565847059
+        },
+        "cardinalDiagonal": {
+          "differentCells": 46,
+          "exactBoundaryIntervals": 55,
+          "medianBoundaryErrorLod": 0.0020468140416469716,
+          "p95BoundaryErrorLod": 0.0034983236450835562,
+          "maximumBoundaryErrorLod": 0.005280127164525972
+        }
+      },
+      "boundaries": [
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.115,
+              0.04898979485566356
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.06875,
+              0.10439558180306291
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.125
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.04375,
+              0.11709371246996997
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0875,
+              0.08926785535678562
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.12,
+              0.035
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.322,
+              0.13717142559585796
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.1925,
+              0.2923076290485761
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.35
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.12249999999999998,
+              0.3278623949159159
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.24499999999999997,
+              0.24994999499899972
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.33599999999999997,
+              0.098
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.5980000000000001,
+              0.2547469332494505
+            ]
+          },
+          "bias": 89,
+          "grad": 89
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.35750000000000004,
+              0.5428570253759272
+            ]
+          },
+          "bias": 115,
+          "grad": 115
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.65
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.22749999999999998,
+              0.6088873048438439
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.45499999999999996,
+              0.46419284785528525
+            ]
+          },
+          "bias": 101,
+          "grad": 101
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.624,
+              0.18200000000000002
+            ]
+          },
+          "bias": 89,
+          "grad": 89
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.92,
+              0.39191835884530846
+            ]
+          },
+          "bias": 31,
+          "grad": 31
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.55,
+              0.8351646544245033
+            ]
+          },
+          "bias": 64,
+          "grad": 64
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.35,
+              0.9367496997597597
+            ]
+          },
+          "bias": 92,
+          "grad": 92
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.7,
+              0.714142842854285
+            ]
+          },
+          "bias": 47,
+          "grad": 47
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.96,
+              0.28
+            ]
+          },
+          "bias": 31,
+          "grad": 31
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.12429827677171659,
+              0.013226427771009776
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.09626826618974212,
+              0.07973343668010902
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.036546463090342096,
+              0.11953809449537943
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.007603444746223702,
+              0.12476853621002021
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.0575772710991595,
+              0.11094979879555389
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.10452356105026846,
+              0.06855527102543466
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.34803517496080644,
+              0.03703399775882737
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.2695511453312779,
+              0.22325362270430524
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.10233009665295786,
+              0.3347066645870624
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.021289645289426364,
+              0.34935190138805655
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.1612163590776466,
+              0.31065943662755086
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.29266597094075164,
+              0.19195475887121702
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.6463510392129262,
+              0.06877742440925083
+            ]
+          },
+          "bias": 90,
+          "grad": 90
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.500594984186659,
+              0.4146138707365669
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.1900416080697789,
+              0.6215980913759731
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.03953791268036325,
+              0.6487963882921051
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.2994018097156294,
+              0.5769389537368802
+            ]
+          },
+          "bias": 112,
+          "grad": 112
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.543522517461396,
+              0.3564874093322602
+            ]
+          },
+          "bias": 83,
+          "grad": 83
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.9943862141737327,
+              0.1058114221680782
+            ]
+          },
+          "bias": 37,
+          "grad": 37
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.7701461295179369,
+              0.6378674934408721
+            ]
+          },
+          "bias": 63,
+          "grad": 63
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.29237170472273677,
+              0.9563047559630354
+            ]
+          },
+          "bias": 116,
+          "grad": 116
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.060827557969789614,
+              0.9981482896801617
+            ]
+          },
+          "bias": 97,
+          "grad": 97
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.460618168793276,
+              0.8875983903644311
+            ]
+          },
+          "bias": 66,
+          "grad": 66
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.8361884884021477,
+              0.5484421682034772
+            ]
+          },
+          "bias": 28,
+          "grad": 28
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.11751663543756538,
+              -0.04260094359793399
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.12147818257377728,
+              0.029462707930060193
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.08524979500781231,
+              0.09141921270239631
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.04786099543231054,
+              0.11547434830397767
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.0031129179320532954,
+              0.12496123295625847
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.063892501592113,
+              0.10743718276417077
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.32904657922518304,
+              -0.11928264207421516
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.34013891120657636,
+              0.08249558220416854
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.23869942602187444,
+              0.2559737955667096
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.1340107872104695,
+              0.32332817525113744
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.008716170209749227,
+              0.34989145227752366
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.1788990044579164,
+              0.30082411173967816
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.61108650427534,
+              -0.22152490670925676
+            ]
+          },
+          "bias": 95,
+          "grad": 95
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.6316865493836419,
+              0.15320608123631302
+            ]
+          },
+          "bias": 114,
+          "grad": 114
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.44329893404062404,
+              0.47537990605246083
+            ]
+          },
+          "bias": 142,
+          "grad": 142
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.2488771762480148,
+              0.6004666111806839
+            ]
+          },
+          "bias": 133,
+          "grad": 133
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.016187173246677136,
+              0.649798411372544
+            ]
+          },
+          "bias": 106,
+          "grad": 106
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.3322410082789876,
+              0.558673350373688
+            ]
+          },
+          "bias": 103,
+          "grad": 103
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.940133083500523,
+              -0.3408075487834719
+            ]
+          },
+          "bias": 36,
+          "grad": 36
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.9718254605902182,
+              0.23570166344048155
+            ]
+          },
+          "bias": 61,
+          "grad": 61
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.6819983600624985,
+              0.7313537016191705
+            ]
+          },
+          "bias": 137,
+          "grad": 137
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.3828879634584843,
+              0.9237947864318213
+            ]
+          },
+          "bias": 82,
+          "grad": 82
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.024903343456426363,
+              0.9996898636500677
+            ]
+          },
+          "bias": 48,
+          "grad": 48
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.511140012736904,
+              0.8594974621133662
+            ]
+          },
+          "bias": 44,
+          "grad": 44
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.10122182883303558,
+              -0.07334262994804348
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.12489334670942423,
+              -0.0051625524423056235
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.10714591258776404,
+              0.06437975936375677
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.07783598566975856,
+              0.09780878966032214
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.031451655061012794,
+              0.12097848318574285
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.031803713464632566,
+              0.12088640870610537
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.28342112073249964,
+              -0.20535936385452175
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.3497013707863878,
+              -0.014455146838455744
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.3000085552457393,
+              0.18026332621851895
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.21794075987532396,
+              0.273864611048902
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.08806463417083582,
+              0.33873975292007996
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.08905039770097117,
+              0.338481944377095
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.5263535099317851,
+              -0.3813816757298261
+            ]
+          },
+          "bias": 105,
+          "grad": 105
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.649445402889006,
+              -0.026845272699989244
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.557158745456373,
+              0.33477474869153523
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.40474712548274455,
+              0.5086057062336752
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.16354860631726653,
+              0.6290881125658628
+            ]
+          },
+          "bias": 103,
+          "grad": 103
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.16537931001608935,
+              0.628609325271748
+            ]
+          },
+          "bias": 83,
+          "grad": 83
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.8097746306642847,
+              -0.5867410395843479
+            ]
+          },
+          "bias": 55,
+          "grad": 55
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.9991467736753938,
+              -0.04130041953844499
+            ]
+          },
+          "bias": 66,
+          "grad": 66
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.8571673007021123,
+              0.5150380749100542
+            ]
+          },
+          "bias": 122,
+          "grad": 122
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.6226878853580685,
+              0.7824703172825771
+            ]
+          },
+          "bias": 90,
+          "grad": 90
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.25161324048810235,
+              0.9678278654859428
+            ]
+          },
+          "bias": 52,
+          "grad": 52
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.2544297077170605,
+              0.967091269648843
+            ]
+          },
+          "bias": 27,
+          "grad": 27
+        }
+      ]
+    },
+    "intel": {
+      "vendor": 32902,
+      "valuesSha256": "0ec2583690f4ecb83d36f862f506737fbcbb4e1e558ae728e5d44a3d175cd083",
+      "derivativesSha256": "5184c1b9ff257af6c9a68d3e569c9d1c2a13369264dc7a2c12d706cf7e0662d9",
+      "exactCornerGradients": 25700,
+      "maximumCornerGradientError": 0.0,
+      "covered": 411200,
+      "variedWithinCell": 0,
+      "biasGradDifferentCells": 0,
+      "biasGradDifferentBoundaries": 0,
+      "models": {
+        "maxAxis": {
+          "differentCells": 63,
+          "exactBoundaryIntervals": 41,
+          "medianBoundaryErrorLod": 0.00259761205191289,
+          "p95BoundaryErrorLod": 0.0025976927380244154,
+          "maximumBoundaryErrorLod": 0.012519488197005657
+        },
+        "ellipse": {
+          "differentCells": 2529,
+          "exactBoundaryIntervals": 14,
+          "medianBoundaryErrorLod": 0.04447609817371578,
+          "p95BoundaryErrorLod": 0.46795550539074704,
+          "maximumBoundaryErrorLod": 0.48779012356187934
+        },
+        "maxComponent": {
+          "differentCells": 3681,
+          "exactBoundaryIntervals": 0,
+          "medianBoundaryErrorLod": 0.06705525070436025,
+          "p95BoundaryErrorLod": 0.44899553492868893,
+          "maximumBoundaryErrorLod": 0.44899553492868893
+        },
+        "axisBounds": {
+          "differentCells": 1673,
+          "exactBoundaryIntervals": 37,
+          "medianBoundaryErrorLod": 0.0037124668424586282,
+          "p95BoundaryErrorLod": 0.3815622733479231,
+          "maximumBoundaryErrorLod": 0.4974023565847059
+        },
+        "cardinalDiagonal": {
+          "differentCells": 2745,
+          "exactBoundaryIntervals": 0,
+          "medianBoundaryErrorLod": 0.07711503786110274,
+          "p95BoundaryErrorLod": 0.4583548774095775,
+          "maximumBoundaryErrorLod": 0.5194828042772617
+        }
+      },
+      "boundaries": [
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.115,
+              0.04898979485566356
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.06875,
+              0.10439558180306291
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.125
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.04375,
+              0.11709371246996997
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0875,
+              0.08926785535678562
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.12,
+              0.035
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.322,
+              0.13717142559585796
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.1925,
+              0.2923076290485761
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.35
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.12249999999999998,
+              0.3278623949159159
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.24499999999999997,
+              0.24994999499899972
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.33599999999999997,
+              0.098
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.5980000000000001,
+              0.2547469332494505
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.35750000000000004,
+              0.5428570253759272
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.65
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.22749999999999998,
+              0.6088873048438439
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.45499999999999996,
+              0.46419284785528525
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.624,
+              0.18200000000000002
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.92,
+              0.39191835884530846
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.55,
+              0.8351646544245033
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.35,
+              0.9367496997597597
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.7,
+              0.714142842854285
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.96,
+              0.28
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.12429827677171659,
+              0.013226427771009776
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.09626826618974212,
+              0.07973343668010902
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.036546463090342096,
+              0.11953809449537943
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.007603444746223702,
+              0.12476853621002021
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.0575772710991595,
+              0.11094979879555389
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.10452356105026846,
+              0.06855527102543466
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.34803517496080644,
+              0.03703399775882737
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.2695511453312779,
+              0.22325362270430524
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.10233009665295786,
+              0.3347066645870624
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.021289645289426364,
+              0.34935190138805655
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.1612163590776466,
+              0.31065943662755086
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.29266597094075164,
+              0.19195475887121702
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.6463510392129262,
+              0.06877742440925083
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.500594984186659,
+              0.4146138707365669
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.1900416080697789,
+              0.6215980913759731
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.03953791268036325,
+              0.6487963882921051
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.2994018097156294,
+              0.5769389537368802
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.543522517461396,
+              0.3564874093322602
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.9943862141737327,
+              0.1058114221680782
+            ]
+          },
+          "bias": 129,
+          "grad": 129
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.7701461295179369,
+              0.6378674934408721
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.29237170472273677,
+              0.9563047559630354
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.060827557969789614,
+              0.9981482896801617
+            ]
+          },
+          "bias": 130,
+          "grad": 130
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.460618168793276,
+              0.8875983903644311
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.8361884884021477,
+              0.5484421682034772
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.11751663543756538,
+              -0.04260094359793399
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.12147818257377728,
+              0.029462707930060193
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.08524979500781231,
+              0.09141921270239631
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.04786099543231054,
+              0.11547434830397767
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.0031129179320532954,
+              0.12496123295625847
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.063892501592113,
+              0.10743718276417077
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.32904657922518304,
+              -0.11928264207421516
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.34013891120657636,
+              0.08249558220416854
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.23869942602187444,
+              0.2559737955667096
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.1340107872104695,
+              0.32332817525113744
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.008716170209749227,
+              0.34989145227752366
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.1788990044579164,
+              0.30082411173967816
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.61108650427534,
+              -0.22152490670925676
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.6316865493836419,
+              0.15320608123631302
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.44329893404062404,
+              0.47537990605246083
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.2488771762480148,
+              0.6004666111806839
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.016187173246677136,
+              0.649798411372544
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.3322410082789876,
+              0.558673350373688
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.940133083500523,
+              -0.3408075487834719
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.9718254605902182,
+              0.23570166344048155
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.6819983600624985,
+              0.7313537016191705
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.3828879634584843,
+              0.9237947864318213
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.024903343456426363,
+              0.9996898636500677
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.511140012736904,
+              0.8594974621133662
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.10122182883303558,
+              -0.07334262994804348
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.12489334670942423,
+              -0.0051625524423056235
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.10714591258776404,
+              0.06437975936375677
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.07783598566975856,
+              0.09780878966032214
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.031451655061012794,
+              0.12097848318574285
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.031803713464632566,
+              0.12088640870610537
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.28342112073249964,
+              -0.20535936385452175
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.3497013707863878,
+              -0.014455146838455744
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.3000085552457393,
+              0.18026332621851895
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.21794075987532396,
+              0.273864611048902
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.08806463417083582,
+              0.33873975292007996
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.08905039770097117,
+              0.338481944377095
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.5263535099317851,
+              -0.3813816757298261
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.649445402889006,
+              -0.026845272699989244
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.557158745456373,
+              0.33477474869153523
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.40474712548274455,
+              0.5086057062336752
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.16354860631726653,
+              0.6290881125658628
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.16537931001608935,
+              0.628609325271748
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.8097746306642847,
+              -0.5867410395843479
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.9991467736753938,
+              -0.04130041953844499
+            ]
+          },
+          "bias": 130,
+          "grad": 130
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.8571673007021123,
+              0.5150380749100542
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.6226878853580685,
+              0.7824703172825771
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.25161324048810235,
+              0.9678278654859428
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.2544297077170605,
+              0.967091269648843
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        }
+      ]
+    },
+    "intel-alt": {
+      "vendor": 32902,
+      "valuesSha256": "0ec2583690f4ecb83d36f862f506737fbcbb4e1e558ae728e5d44a3d175cd083",
+      "derivativesSha256": "5184c1b9ff257af6c9a68d3e569c9d1c2a13369264dc7a2c12d706cf7e0662d9",
+      "exactCornerGradients": 25700,
+      "maximumCornerGradientError": 0.0,
+      "covered": 411200,
+      "variedWithinCell": 0,
+      "biasGradDifferentCells": 0,
+      "biasGradDifferentBoundaries": 0,
+      "models": {
+        "maxAxis": {
+          "differentCells": 63,
+          "exactBoundaryIntervals": 41,
+          "medianBoundaryErrorLod": 0.00259761205191289,
+          "p95BoundaryErrorLod": 0.0025976927380244154,
+          "maximumBoundaryErrorLod": 0.012519488197005657
+        },
+        "ellipse": {
+          "differentCells": 2529,
+          "exactBoundaryIntervals": 14,
+          "medianBoundaryErrorLod": 0.04447609817371578,
+          "p95BoundaryErrorLod": 0.46795550539074704,
+          "maximumBoundaryErrorLod": 0.48779012356187934
+        },
+        "maxComponent": {
+          "differentCells": 3681,
+          "exactBoundaryIntervals": 0,
+          "medianBoundaryErrorLod": 0.06705525070436025,
+          "p95BoundaryErrorLod": 0.44899553492868893,
+          "maximumBoundaryErrorLod": 0.44899553492868893
+        },
+        "axisBounds": {
+          "differentCells": 1673,
+          "exactBoundaryIntervals": 37,
+          "medianBoundaryErrorLod": 0.0037124668424586282,
+          "p95BoundaryErrorLod": 0.3815622733479231,
+          "maximumBoundaryErrorLod": 0.4974023565847059
+        },
+        "cardinalDiagonal": {
+          "differentCells": 2745,
+          "exactBoundaryIntervals": 0,
+          "medianBoundaryErrorLod": 0.07711503786110274,
+          "p95BoundaryErrorLod": 0.4583548774095775,
+          "maximumBoundaryErrorLod": 0.5194828042772617
+        }
+      },
+      "boundaries": [
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.0,
+              0.0
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.115,
+              0.04898979485566356
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.06875,
+              0.10439558180306291
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.125
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.04375,
+              0.11709371246996997
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0875,
+              0.08926785535678562
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.12,
+              0.035
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.322,
+              0.13717142559585796
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.1925,
+              0.2923076290485761
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.35
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.12249999999999998,
+              0.3278623949159159
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.24499999999999997,
+              0.24994999499899972
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.33599999999999997,
+              0.098
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.5980000000000001,
+              0.2547469332494505
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.35750000000000004,
+              0.5428570253759272
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              0.65
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.22749999999999998,
+              0.6088873048438439
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.45499999999999996,
+              0.46419284785528525
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.624,
+              0.18200000000000002
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.92,
+              0.39191835884530846
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              1.0,
+              0.0,
+              -0.55,
+              0.8351646544245033
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.35,
+              0.9367496997597597
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.7,
+              0.714142842854285
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 0,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              1.0,
+              0.0,
+              0.96,
+              0.28
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.12429827677171659,
+              0.013226427771009776
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.09626826618974212,
+              0.07973343668010902
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.036546463090342096,
+              0.11953809449537943
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.007603444746223702,
+              0.12476853621002021
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.0575772710991595,
+              0.11094979879555389
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.10452356105026846,
+              0.06855527102543466
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.34803517496080644,
+              0.03703399775882737
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.2695511453312779,
+              0.22325362270430524
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.10233009665295786,
+              0.3347066645870624
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.021289645289426364,
+              0.34935190138805655
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.1612163590776466,
+              0.31065943662755086
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.29266597094075164,
+              0.19195475887121702
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.6463510392129262,
+              0.06877742440925083
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.500594984186659,
+              0.4146138707365669
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.1900416080697789,
+              0.6215980913759731
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.03953791268036325,
+              0.6487963882921051
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.2994018097156294,
+              0.5769389537368802
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.543522517461396,
+              0.3564874093322602
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.9943862141737327,
+              0.1058114221680782
+            ]
+          },
+          "bias": 129,
+          "grad": 129
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.7701461295179369,
+              0.6378674934408721
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              -0.29237170472273677,
+              0.9563047559630354
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.060827557969789614,
+              0.9981482896801617
+            ]
+          },
+          "bias": 130,
+          "grad": 130
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.460618168793276,
+              0.8875983903644311
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 17,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.9563047559630354,
+              0.29237170472273677,
+              0.8361884884021477,
+              0.5484421682034772
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.11751663543756538,
+              -0.04260094359793399
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.12147818257377728,
+              0.029462707930060193
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.08524979500781231,
+              0.09141921270239631
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.04786099543231054,
+              0.11547434830397767
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.0031129179320532954,
+              0.12496123295625847
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.063892501592113,
+              0.10743718276417077
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.32904657922518304,
+              -0.11928264207421516
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.34013891120657636,
+              0.08249558220416854
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.23869942602187444,
+              0.2559737955667096
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.1340107872104695,
+              0.32332817525113744
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.008716170209749227,
+              0.34989145227752366
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.1788990044579164,
+              0.30082411173967816
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.61108650427534,
+              -0.22152490670925676
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.6316865493836419,
+              0.15320608123631302
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.44329893404062404,
+              0.47537990605246083
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.2488771762480148,
+              0.6004666111806839
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.016187173246677136,
+              0.649798411372544
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.3322410082789876,
+              0.558673350373688
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.940133083500523,
+              -0.3408075487834719
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.9718254605902182,
+              0.23570166344048155
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.6819983600624985,
+              0.7313537016191705
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              -0.3828879634584843,
+              0.9237947864318213
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.024903343456426363,
+              0.9996898636500677
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 43,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.7313537016191705,
+              0.6819983600624985,
+              0.511140012736904,
+              0.8594974621133662
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.10122182883303558,
+              -0.07334262994804348
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.12489334670942423,
+              -0.0051625524423056235
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.10714591258776404,
+              0.06437975936375677
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.07783598566975856,
+              0.09780878966032214
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.031451655061012794,
+              0.12097848318574285
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.125,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.031803713464632566,
+              0.12088640870610537
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.28342112073249964,
+              -0.20535936385452175
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.3497013707863878,
+              -0.014455146838455744
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.3000085552457393,
+              0.18026332621851895
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.21794075987532396,
+              0.273864611048902
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.08806463417083582,
+              0.33873975292007996
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.35,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.08905039770097117,
+              0.338481944377095
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.5263535099317851,
+              -0.3813816757298261
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.649445402889006,
+              -0.026845272699989244
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.557158745456373,
+              0.33477474869153523
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.40474712548274455,
+              0.5086057062336752
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.16354860631726653,
+              0.6290881125658628
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 0.65,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.16537931001608935,
+              0.628609325271748
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": -0.92,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.8097746306642847,
+              -0.5867410395843479
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": -0.55,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.9991467736753938,
+              -0.04130041953844499
+            ]
+          },
+          "bias": 130,
+          "grad": 130
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.8571673007021123,
+              0.5150380749100542
+            ]
+          },
+          "bias": 132,
+          "grad": 132
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.35,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.6226878853580685,
+              0.7824703172825771
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.7,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              -0.25161324048810235,
+              0.9678278654859428
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        },
+        {
+          "shape": {
+            "rotation": 59,
+            "ratio": 1,
+            "correlation": 0.96,
+            "gradientShape": [
+              0.5150380749100542,
+              0.8571673007021123,
+              0.2544297077170605,
+              0.967091269648843
+            ]
+          },
+          "bias": 131,
+          "grad": 131
+        }
+      ]
+    }
+  },
+  "nvidiaIntelDifferentCells": {
+    "sampleBias": 2701,
+    "sampleGrad": 2701
+  },
+  "intelLuidReadbacksExact": true,
+  "intelLuidDifferentCells": {
+    "sampleBias": 0,
+    "sampleGrad": 0
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 1.1719999999622814,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56\\footprint.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56\\footprint.hlsl",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56\\gradients.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56\\tmp"
+  },
+  "originalExecution": {
+    "status": "exited",
+    "exitCode": 1,
+    "reason": null,
+    "seconds": 4.453000000037719,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56\\footprint.exe",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56\\footprint.hlsl",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56\\gradients.bin",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56\\tmp"
+  },
+  "nvidiaRepeatExact": true,
+  "lease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-native-texture-sampling-footprint",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-143340-native-texture-sampling-footprint-750e56",
+    "pid": 23252,
+    "token": "36591aed19064b449c45c348e7f33eb7",
+    "started": 1794468461.6978202,
+    "state": "released",
+    "ended": 1794468462.8990133
+  },
+  "adapters": {
+    "nvidia": {
+      "deviceId": 10464,
+      "debugLayer": false,
+      "luid": "0:80898",
+      "adapter": "NVIDIA GeForce RTX 4060 Laptop GPU"
+    },
+    "intel": {
+      "deviceId": 42888,
+      "debugLayer": false,
+      "luid": "0:79932",
+      "adapter": "Intel(R) UHD Graphics"
+    },
+    "intel-alt": {
+      "deviceId": 42888,
+      "debugLayer": false,
+      "luid": "0:127521",
+      "adapter": "Intel(R) UHD Graphics"
+    }
+  },
+  "unchangedRuntime": {
+    "release": {
+      "playerSha256": "eea374f276ff53b04b9d93d5ab281c7eb539bbc636f84af01c50e6924c9f0517",
+      "shaderCount": 895
+    },
+    "debug": {
+      "playerSha256": "c2ddbc427dc1051f48803a3e5cbfb3ad5d1151e9397fd1f2399efc1dd5f8e574",
+      "shaderCount": 895
+    }
+  },
+  "runtimeShaders": {
+    "sha256": {
+      "runtime.vert.dxbc": "8587d10de249fdb0970d8f6dbca5df59a080f5f77924a506170f86872d2809b4",
+      "runtime.frag.dxbc": "ca10e6fc5e68842b0e0196f611d490898974b079e4ec5c89d47618867d4f36ba"
+    },
+    "preflightExact": true
+  },
+  "scope": {
+    "local": "external-input-aaa9b1470955467fa95d0ec84358dee0",
+    "main": "external-input-82c022b7d10844a48c8ebad87b1b922f",
+    "sourceBase": "3a2f491ff5a4975944e2b4cc36c94ec48034d03c",
+    "plannedBytes": 67108864,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5",
+      "20261112-133809-reference-receiver-source-isolation-6cdff0",
+      "20261112-135432-reference-outline-projection-d784cf"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "D3D11 gradient shape controlled mip selection",
+    "gate": "Measure both physical adapters, complete tile coverage, immutable input and unchanged engine; exact one-byte scene gate remains"
+  },
+  "frozenControl": {
+    "samples": 17017,
+    "primitiveArchiveSha256": "633a175655d4434167597320ac8b139db4b660eb449f3dfd1cb8823050d44d3b",
+    "case": {
+      "vertices": "nearest-8",
+      "row": 0,
+      "col": 0,
+      "footprint": "cardinal-diagonal",
+      "agreement": {
+        "nvidia": 17012,
+        "intel": 16089
+      },
+      "agreementAmongUniqueDifferences": {
+        "nvidia": 848,
+        "intel": 4
+      },
+      "intelOverOneVsFrozen": 11,
+      "nvidiaOverOneVsFrozen": 5,
+      "intelOverOneInColorMask": 1
+    }
+  },
+  "archive": {
+    "sha256": "692944528bf8c4a2273fd6b8a6f6e7d3571872f7c5a57c7b8d1f31f3a8c3e2a2",
+    "bytes": 3450623,
+    "members": 61
+  }
+}
