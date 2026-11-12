@@ -882,3 +882,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [服饰接收法线采样](docs/acceptance/nr/cloth-receiver-native-sampler.md)记录双设备采样与接收结果。
 
 [服饰接收法线绿色方向](docs/acceptance/nr/cloth-receiver-normal-y.md)记录切线空间转换和剩余误差。
+
+[参考法线采样后重建](docs/acceptance/nr/reference-normal-sampled-rg.md)记录材质入口、参考附件及双设备回归。

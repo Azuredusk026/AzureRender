@@ -228,6 +228,7 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.faceSdf.present&&!replacement.faceSdf.present,"faceSdf");
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
         lost(source.coverageTexture.present&&!replacement.coverageTexture.present,"coverageTexture");
+        lost(source.sampledReferenceNormal&&!replacement.sampledReferenceNormal,"referenceNormal");
         lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
         lost(source.eyeSurface.present&&!replacement.eyeSurface.present,"eyeSurface");
         lost(source.unlitTextureLayers.present&&!replacement.unlitTextureLayers.present,"surface.layers");

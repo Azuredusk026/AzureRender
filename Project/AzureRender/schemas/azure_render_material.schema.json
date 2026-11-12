@@ -368,6 +368,24 @@
       "then": { "required": ["lodPolicy"] },
       "else": { "not": { "required": ["lodPolicy"] } }
     },
+    "referenceNormal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "encoding"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "encoding": {
+          "type": "string",
+          "const": "sampled-rg"
+        }
+      }
+    },
     "blendDepth": {
       "type": "object",
       "additionalProperties": false,
@@ -406,6 +424,11 @@
           {
             "required": [
               "mainLightShadow"
+            ]
+          },
+          {
+            "required": [
+              "referenceNormal"
             ]
           }
         ]

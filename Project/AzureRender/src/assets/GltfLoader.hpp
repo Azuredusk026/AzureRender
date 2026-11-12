@@ -144,6 +144,7 @@ struct AssetMaterial {
     azurerender::MaterialMainLightShadow mainLightShadow=azurerender::MaterialMainLightShadow::Scene;
     using CoverageTexture=azurerender::MaterialCoverageTexture;
     CoverageTexture coverageTexture;
+    bool sampledReferenceNormal=false;
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;

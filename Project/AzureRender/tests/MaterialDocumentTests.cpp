@@ -217,6 +217,7 @@ int main(){try{
     {std::ofstream output(replacementPath);output<<MaterialData::defaults("azure.pbr").encode();}
     AssetMaterial source;source.name="face-slot";source.slotId="source-slot";source.materialClass=AssetMaterialClass::Face;
     source.faceSdf.present=true;source.nprDiffuse.present=true;source.outlineSurface.present=true;
+    source.sampledReferenceNormal=true;
     source.outlineSurface.depthPrepass=true;source.outlineSurface.projectSurface=true;source.outlineSurface.width=.65F;
     source.materialFeatures=MaterialFeatureDiffuseRamp|MaterialFeatureGeometryShadow;
     source.nprDiffuse.lighting={true,{1.2F,.8F,.6F},{.7F,.9F,1.1F}};
@@ -234,7 +235,7 @@ int main(){try{
     const auto& warning=messages.back();
     require(warning.find("source-slot")!=std::string::npos&&warning.find("faceSdf")!=std::string::npos
         &&warning.find("nprDiffuse")!=std::string::npos&&warning.find("diffuse-ramp")!=std::string::npos
-        &&warning.find("outlineSurface")!=std::string::npos,
+        &&warning.find("outlineSurface")!=std::string::npos&&warning.find("referenceNormal")!=std::string::npos,
         "Replacement diagnostic must identify the slot and discarded semantics");
     require(mesh.materials[0].slotId==source.slotId&&mesh.materials[0].name==source.name&&!mesh.materials[0].faceSdf.present,
         "Diagnostics must preserve explicit full replacement and stable slot identity");
@@ -256,6 +257,7 @@ int main(){try{
     require(patched.emissiveStrength==3&&(patched.materialFeatures&MaterialFeatureEmissiveMask),"Override must reach its runtime consumer");
     require(patched.faceSdf.present&&patched.faceSdf.headNode==7&&patched.faceSdf.pixels==source.faceSdf.pixels
         &&patched.outlineSurface.present&&patched.outlineSurface.depthPrepass&&patched.outlineSurface.projectSurface&&patched.outlineSurface.width==.65F
+        &&patched.sampledReferenceNormal
         &&patched.nprDiffuse.present&&patched.nprDiffuse.lighting.present
         &&patched.nprDiffuse.lighting.ambientColor==source.nprDiffuse.lighting.ambientColor
         &&patched.nprDiffuse.lighting.mainColor==source.nprDiffuse.lighting.mainColor

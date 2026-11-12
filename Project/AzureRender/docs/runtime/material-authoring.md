@@ -191,6 +191,12 @@ SDF 头节点按所绑定模型的节点名称解析。
 节点、纹理索引及合法组合由生产解释器校验。
 工具通过同一解释器输出结果。
 
+版本二画像可为标准法线纹理声明 `referenceNormal`。
+该对象以 `schemaVersion` 1 和 `encoding` `sampled-rg` 启用参考法线的采样后重建。
+参数覆盖继承该声明。
+完整材质替换的运行诊断会报告被替换画像中的参考法线声明。
+附件编码与读取见[场景参考深度](scene-reference-depth.md)。
+
 ```text
 AzureMaterialValidator model.glb
 AzureMaterialValidator --slots model.glb

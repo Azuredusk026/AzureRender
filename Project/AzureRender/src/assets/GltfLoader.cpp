@@ -208,8 +208,18 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture","blendDepth"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture","blendDepth","referenceNormal"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
+            if(profile.contains("referenceNormal")) {
+                const auto& value=profile.at("referenceNormal");
+                if(profile.at("schemaVersion")!=2||!value.is_object()||value.size()!=2
+                    ||!value.contains("schemaVersion")||!value.at("schemaVersion").is_number_integer()||value.at("schemaVersion")!=1
+                    ||!value.contains("encoding")||value.at("encoding")!="sampled-rg")
+                    throw std::invalid_argument(context+": referenceNormal requires schemaVersion one, sampled-rg and profile version two");
+                if(material.normalTexture.index<0)
+                    throw std::invalid_argument(context+": referenceNormal requires a standard normal texture");
+                result.sampledReferenceNormal=true;
+            }
             if(profile.contains("blendDepth")) {
                 const auto& value=profile.at("blendDepth");
                 if(profile.contains("surface"))throw std::invalid_argument(context+": blendDepth conflicts with unlit surface ownership");
