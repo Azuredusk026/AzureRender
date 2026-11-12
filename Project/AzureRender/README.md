@@ -94,7 +94,7 @@ NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工�
 [完整管线成本](docs/acceptance/nr/complete-capture-cost-map.md)覆盖全部 3453 个计时事件。
 实际材质绘制占约 74.41%，快照常量继续局部评估。
 
-[正式功率条件](docs/acceptance/nr/gpu-power-limit-qualification.md)已保存管理员入口的不支持结果。
+[正式功率条件](docs/acceptance/nr/gpu-power-limit-qualification.md)记录驱动设置结果与厂商控制面板状态。
 固定 80W 采样等待可用的设备控制入口。
 
 [阴影接收需求](docs/acceptance/nr/shadow-receiver-demand-scope.md)已核对实际光源和材质字段。
