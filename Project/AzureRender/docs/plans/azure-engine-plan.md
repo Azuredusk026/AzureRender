@@ -1352,3 +1352,6 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [参考场景外扩深度](../acceptance/nr/reference-scene-outline-depth.md)接入材质外扩绘制。
 服饰法线、外扩投影系数与覆盖继续按原生来源核对。
+
+[原生服饰接收法线输入](../acceptance/nr/native-cloth-receiver-normal-input.md)核对十二级 BC5 与材质 UV 方向。
+服饰一按原生层级、采样参数及法线重建分别验收。

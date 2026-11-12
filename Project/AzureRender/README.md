@@ -874,3 +874,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 
 [参考场景外扩深度](docs/acceptance/nr/reference-scene-outline-depth.md)记录反向深度写入与双设备验收。
 完整接收可见量和 Intel 头发颜色继续按冻结区域验收。
+
+[原生服饰接收法线输入](docs/acceptance/nr/native-cloth-receiver-normal-input.md)记录双设备一致的原生层级与 UV 方向。
