@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/depth-split-range-recovery",
+      "name": "主深度颜色附件范围",
+      "sourceBase": "ae2af1a",
+      "evidence": "docs/acceptance/nr/main-depth-attachment-range.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/main-depth-attachment-range/results.json"
+    },
+    {
       "path": "runs/20261112-011326-handoff-final-regression-e2e260",
       "name": "编辑器视口模型加载",
       "sourceBase": "05689f3",

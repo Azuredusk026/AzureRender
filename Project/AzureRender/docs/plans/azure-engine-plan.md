@@ -43,6 +43,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [材质光照回归矩阵](../acceptance/nr/material-lighting-regression.md)通过双配置六项测试及 168 个采集用例。
 [NPR 渐变组合回归矩阵](../acceptance/nr/npr-ramp-regression.md)通过双配置四项测试及 104 个采集用例。
 [NullRhi 录制相机](../acceptance/nr/null-rhi-camera-regression.md)通过两种配置的裁剪平面与录制检查。
+[主深度颜色附件范围](../acceptance/nr/main-depth-attachment-range.md)通过三个颜色附件的实际场景和八项所属检查。
 完整项目回归按两种配置执行。
 
 [材质组合级联成本](../acceptance/nr/computed-cascade-demand-comparison.md)通过六附件核对，局部耗时降幅低于准入门槛。

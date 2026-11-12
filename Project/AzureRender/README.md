@@ -86,6 +86,8 @@ NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工�
 
 [NullRhi 录制相机](docs/acceptance/nr/null-rhi-camera-regression.md)验证常规视角与远距背向场景的裁剪记录。
 
+[主深度颜色附件范围](docs/acceptance/nr/main-depth-attachment-range.md)通过三个颜色附件的实际渲染和两种配置的八项所属回归。
+
 [材质组合级联成本](docs/acceptance/nr/computed-cascade-demand-comparison.md)记录四像素组按需级联计算的实际回放。
 
 [阴影圆盘行范围成本](docs/acceptance/nr/shadow-disk-row-interval.md)记录采样范围、实际附件和逐事件耗时。

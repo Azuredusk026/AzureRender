@@ -35,6 +35,8 @@
 
 [NullRhi 录制相机](acceptance/nr/null-rhi-camera-regression.md)通过两种配置的裁剪平面与命令录制检查。
 
+[主深度颜色附件范围](acceptance/nr/main-depth-attachment-range.md)通过两种配置的保守遮挡及实际画面核对。
+
 [椭圆覆盖选级主线验收](acceptance/nr/material-ellipse-coverage-main-integration.md)通过双配置、双设备及原始四帧。
 
 [场景参考深度主线验收](acceptance/nr/scene-reference-depth-main-integration.md)通过双配置和双设备全图深度读回。

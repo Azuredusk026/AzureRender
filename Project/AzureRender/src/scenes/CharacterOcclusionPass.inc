@@ -115,6 +115,8 @@ void CharacterSceneRenderer::recordConservativeOcclusion(const RenderContext& co
     commands.bufferBarrier({frame.source.buffer,0,frame.source.size,VK_PIPELINE_STAGE_HOST_BIT,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_ACCESS_HOST_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
     frame.commands->record(commands,*frame.ticket);const auto& output=frame.commands->output(0);
     commands.bufferBarrier({output.buffer,0,output.size,VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,VK_ACCESS_SHADER_WRITE_BIT,VK_ACCESS_INDIRECT_COMMAND_READ_BIT});
-    std::vector<VkImage> colors(context.sceneColorImages.begin(),context.sceneColorImages.begin()+mainPassDescription_->attachments.size()-1);
+    const auto colorCount = mainPassDescription_->attachments.size() - 1;
+    const std::vector<VkImage> colors(context.sceneColorImages.begin(),
+        context.sceneColorImages.begin() + colorCount);
     mainDepthSplit_->beforeColor(commands,context.sceneDepthImage,colors);
 }

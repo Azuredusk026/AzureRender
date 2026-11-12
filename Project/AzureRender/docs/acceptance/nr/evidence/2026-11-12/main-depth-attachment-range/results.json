@@ -1,0 +1,359 @@
+{
+  "status": "qualified",
+  "sourceBase": "ae2af1a",
+  "configurationChecks": {
+    "debug": {
+      "buildSeconds": 130.76600000000326,
+      "split": {
+        "seconds": 11.01600000000326,
+        "imageSha256": "973a6e7e137930615c636e113c603a48e847a6d4c1629d5704917a3fe7894f45",
+        "conservativePrepared": true,
+        "splitRecorded": true,
+        "commands": 384,
+        "fallback": "",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260\\depth-split-range-recovery\\fixture\\project.azureproject",
+          "--width",
+          "480",
+          "--height",
+          "270",
+          "--qa-camera",
+          "full-body-front",
+          "--qa-light",
+          "scene",
+          "--qa-isolation",
+          "beauty",
+          "--capture-frames",
+          "1",
+          "--fixed-frame-step",
+          "--capture-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260\\depth-split-range-recovery\\debug-split",
+          "--resource-root",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug"
+        ]
+      },
+      "fallback": {
+        "seconds": 5.10999999998603,
+        "imageSha256": "973a6e7e137930615c636e113c603a48e847a6d4c1629d5704917a3fe7894f45",
+        "conservativePrepared": false,
+        "splitRecorded": false,
+        "commands": 0,
+        "fallback": "view-or-edit-policy",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260\\depth-split-range-recovery\\fixture\\project.azureproject",
+          "--width",
+          "480",
+          "--height",
+          "270",
+          "--qa-camera",
+          "full-body-front",
+          "--qa-light",
+          "scene",
+          "--qa-isolation",
+          "beauty",
+          "--capture-frames",
+          "1",
+          "--fixed-frame-step",
+          "--capture-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260\\depth-split-range-recovery\\debug-fallback",
+          "--resource-root",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-debug",
+          "--disable-gpu-culling"
+        ]
+      },
+      "ctest": {
+        "AzureRender.DepthPrepassSplit": 3.1335,
+        "AzureRender.DepthPrepassSplitGpu": 1.86188,
+        "AzureRender.GpuConservativeOcclusion": 1.77508,
+        "AzureRender.GpuConservativeOcclusionGpu": 3.2789
+      }
+    },
+    "release": {
+      "buildSeconds": 131.56300000002375,
+      "split": {
+        "seconds": 7.9060000000172295,
+        "imageSha256": "973a6e7e137930615c636e113c603a48e847a6d4c1629d5704917a3fe7894f45",
+        "conservativePrepared": true,
+        "splitRecorded": true,
+        "commands": 384,
+        "fallback": "",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260\\depth-split-range-recovery\\fixture\\project.azureproject",
+          "--width",
+          "480",
+          "--height",
+          "270",
+          "--qa-camera",
+          "full-body-front",
+          "--qa-light",
+          "scene",
+          "--qa-isolation",
+          "beauty",
+          "--capture-frames",
+          "1",
+          "--fixed-frame-step",
+          "--capture-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260\\depth-split-range-recovery\\release-split",
+          "--resource-root",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release"
+        ]
+      },
+      "fallback": {
+        "seconds": 1.3910000000032596,
+        "imageSha256": "973a6e7e137930615c636e113c603a48e847a6d4c1629d5704917a3fe7894f45",
+        "conservativePrepared": false,
+        "splitRecorded": false,
+        "commands": 0,
+        "fallback": "view-or-edit-policy",
+        "command": [
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release\\AzurePlayer.exe",
+          "--project",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260\\depth-split-range-recovery\\fixture\\project.azureproject",
+          "--width",
+          "480",
+          "--height",
+          "270",
+          "--qa-camera",
+          "full-body-front",
+          "--qa-light",
+          "scene",
+          "--qa-isolation",
+          "beauty",
+          "--capture-frames",
+          "1",
+          "--fixed-frame-step",
+          "--capture-dir",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\runs\\20261112-011326-handoff-final-regression-e2e260\\depth-split-range-recovery\\release-fallback",
+          "--resource-root",
+          "D:\\Projects\\FYP\\Project\\AzureRender\\build\\ninja-msvc-release",
+          "--disable-gpu-culling"
+        ]
+      },
+      "ctest": {
+        "AzureRender.DepthPrepassSplit": 2.76572,
+        "AzureRender.DepthPrepassSplitGpu": 3.04778,
+        "AzureRender.GpuConservativeOcclusion": 1.45644,
+        "AzureRender.GpuConservativeOcclusionGpu": 1.75772
+      }
+    }
+  },
+  "protectedFiles": {
+    "docs/acceptance/p5/closure/source-evidence/interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs/acceptance/p5/closure/source-evidence/manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201",
+    "src/rhi/GpuAllocator.hpp": "2e81204107f3e5cfa765bde0e90c1e6a0131721b6ea6b521b3c73490793164dd",
+    "src/rhi/VulkanRhi.cpp": "4ca84f5a9c7ce471c5f9a75009fd26af8a3fd6b6291be8674e829178291d1840",
+    "tests/MaterialPipelinePolicyTests.cpp": "01f18ad44129c11d97bc2c1d8b0c2c1f3f85bffd0af5403f43d2db513acc7c31",
+    "tests/MotionRecordingTests.cpp": "f8e27feb08afaed0ec723fe7caa76d196909ecba97d06ca7c7ed5943bdc3311e",
+    "tests/ObjectShadowAtlasTests.cpp": "dfb7219c73f059415061b73bc4844a7f0a207b7cb75f0ef81c75b376f8f0ab15",
+    "tests/ShadowTileBoundsGpuTests.cpp": "62504a6a47633cc04f8f886a9013b64f55293b8294afe8e12b69e1c634303b6b",
+    "tools/endfield_native/character_surfaces.py": "6c7c476448f3860b7ec8b3dbddd37cbb7c95b1596ebc3355f2fd1f25cb46c8bb",
+    "tools/test_native_character_surfaces.py": "0c870dfb4a2fb9203fc8ef364a4e494d30d1c8ba133f5514d96db40c839cb1d4"
+  },
+  "archive": {
+    "bytes": 180943,
+    "sha256": "c396594caafc9c3b0d4690eb47fe4b66a694dc9cc57b5b84b1f61c4426cd1b0f",
+    "members": {
+      "baseline-fixture.json": {
+        "bytes": 1021,
+        "sha256": "d19f60a7f3c7cbd581d22e0b9a67c93e3571c0078409ac3cb58a97f5ba9040c6"
+      },
+      "build-queue.json": {
+        "bytes": 531,
+        "sha256": "f425812611365a4e031a246da3228144a2d75deb45563d77b7e6cd2ee440121e"
+      },
+      "debug-fallback/capture_manifest.json": {
+        "bytes": 11512,
+        "sha256": "183764d5565069acc5a29b3279ff3e70d2550bb99a30b9c941daeb94b2317e45"
+      },
+      "debug-fallback/frame_000000.png": {
+        "bytes": 18068,
+        "sha256": "973a6e7e137930615c636e113c603a48e847a6d4c1629d5704917a3fe7894f45"
+      },
+      "debug-fallback/process.log": {
+        "bytes": 3910,
+        "sha256": "0919c8e86c8fde13be730f7f2d14017eb1ad0cb5c14033dde89bcf98cc7d3486"
+      },
+      "debug-split/capture_manifest.json": {
+        "bytes": 11494,
+        "sha256": "09dc11db67fbd5df09a09e6b3a242eab1493338fca913a68719f664ce319627f"
+      },
+      "debug-split/frame_000000.png": {
+        "bytes": 18068,
+        "sha256": "973a6e7e137930615c636e113c603a48e847a6d4c1629d5704917a3fe7894f45"
+      },
+      "debug-split/process.log": {
+        "bytes": 3905,
+        "sha256": "6332fd60ddeec555286e7de3489a92f6b4e395ff3af7289ac421ecf66ca5508a"
+      },
+      "debug/debug-ctest-460-460.json": {
+        "bytes": 203,
+        "sha256": "4611a4b7244cf82d6640472b8b2c98192065c3f2e6f40cc3532b68246c17246d"
+      },
+      "debug/debug-ctest-460-460.log": {
+        "bytes": 368,
+        "sha256": "963c8dba4e550a4fc6521278ef3b535de9dbce4d56902fdf67b702fee65dea4b"
+      },
+      "debug/debug-ctest-460-460.xml": {
+        "bytes": 494,
+        "sha256": "71bbdaf3d8048247ab771b55699ab81e265c5bbdb33f68a7ecd2e71e13947421"
+      },
+      "debug/debug-ctest-461-461.json": {
+        "bytes": 203,
+        "sha256": "68694b3aff3e8465fe2503e7013f85281e012c53392967e35837c7e4fe2e2b60"
+      },
+      "debug/debug-ctest-461-461.log": {
+        "bytes": 428,
+        "sha256": "fbd7c25eecbff3ebd4840d0f84610c17cd827c7bef5b18b99bc8c5a0988d0cee"
+      },
+      "debug/debug-ctest-461-461.xml": {
+        "bytes": 600,
+        "sha256": "d8dadd8379c37268fb0930e334fb21b88ca745f043188c94438ed4e6b83c8869"
+      },
+      "debug/debug-ctest-462-462.json": {
+        "bytes": 202,
+        "sha256": "1567cfeceef644e8e85fd89093e8d8eed6a5ac207e5ac2cb4f7ec569960fb8ac"
+      },
+      "debug/debug-ctest-462-462.log": {
+        "bytes": 381,
+        "sha256": "20f6eab815a480365e7efea87e1762166f59e9da35f135967a08b031eca97d3b"
+      },
+      "debug/debug-ctest-462-462.xml": {
+        "bytes": 493,
+        "sha256": "ccf1c673e811d752eefc47d36d9f0b2bf4d153a8fa37389d06934f0579c9b699"
+      },
+      "debug/debug-ctest-463-463.json": {
+        "bytes": 203,
+        "sha256": "99ead10750a8e87096c171ae0dcb6f63697ea2b25e956623d0abb623f9f6a5bf"
+      },
+      "debug/debug-ctest-463-463.log": {
+        "bytes": 442,
+        "sha256": "c71d0797306fba0faf2f29905a47bd8e0581fd083c58547f21d2a536c1b65c5a"
+      },
+      "debug/debug-ctest-463-463.xml": {
+        "bytes": 641,
+        "sha256": "cd97ac28f2fd032e8dd58f2453df9920f40dfca953de731d886abf46f8e62156"
+      },
+      "fixture/assets/scene.azurelevel": {
+        "bytes": 211776,
+        "sha256": "d76b37654e28cb09fc6e98959255582a876f124768881d8ad245e0bbeab42810"
+      },
+      "fixture/assets/scene.azurelevel.azmeta": {
+        "bytes": 112,
+        "sha256": "6036556b39d8de5a3faf0ed8a036634a2884d1a7608810762b13567cf6a0ad0b"
+      },
+      "fixture/assets/surface.gltf": {
+        "bytes": 1121,
+        "sha256": "57a6f48cfcd501b6b61cdba0a9b5dccfbe32dcff6a68fad70e800bdaa9e3d3ea"
+      },
+      "fixture/assets/surface.gltf.azmeta": {
+        "bytes": 112,
+        "sha256": "6fc314c0126446503eb3cd85a0337ec02f8996d70b10364ee77360eac119f515"
+      },
+      "fixture/project.azureproject": {
+        "bytes": 164,
+        "sha256": "74970b33a055b9c73db4e9d9bb68cf9c07f16ea3d25bf592385805d3590fcbf9"
+      },
+      "focus-queue.json": {
+        "bytes": 533,
+        "sha256": "9b77aa5c6cbe07720dbda67cda63cea9ffad6b6305d04164eab59457722e92ab"
+      },
+      "product-delta.json": {
+        "bytes": 439452,
+        "sha256": "9e16c3afd1de0346bc474e8d3c64edf56295f40c0a80d91575f067a626146d1f"
+      },
+      "range-recovery.py": {
+        "bytes": 4141,
+        "sha256": "079bba9aa50279afabe4714ce1237216e4cc700ce7842da49313fc353aabd7d3"
+      },
+      "release-fallback/capture_manifest.json": {
+        "bytes": 11512,
+        "sha256": "69a8e26c97ffb0af9023be0660b9d57f50834145815cfce72227cc54cb4d8247"
+      },
+      "release-fallback/frame_000000.png": {
+        "bytes": 18068,
+        "sha256": "973a6e7e137930615c636e113c603a48e847a6d4c1629d5704917a3fe7894f45"
+      },
+      "release-fallback/process.log": {
+        "bytes": 3890,
+        "sha256": "e007ce0a2513cb80a34a02de6e8770101babc0af13cf9705d87d7633ac193a1f"
+      },
+      "release-split/capture_manifest.json": {
+        "bytes": 11492,
+        "sha256": "7f1003cbb48c2fe6454e1fc733f1ec5cb050021f8ea89048a03e5921a7c5cb88"
+      },
+      "release-split/frame_000000.png": {
+        "bytes": 18068,
+        "sha256": "973a6e7e137930615c636e113c603a48e847a6d4c1629d5704917a3fe7894f45"
+      },
+      "release-split/process.log": {
+        "bytes": 3884,
+        "sha256": "d3e56ad15017e4c461ee9e34d60423d60da421524d6be38838097a8f6e115aab"
+      },
+      "release/release-ctest-462-462.json": {
+        "bytes": 203,
+        "sha256": "bce36aa5e5f8611405fcfb88df5e216a25dc909ab8ea0decc1e7f2ae4a1100d6"
+      },
+      "release/release-ctest-462-462.log": {
+        "bytes": 372,
+        "sha256": "12e4b04b505a08acafeb424cac6eea68120191f42e07b29e19c59c2e3e843056"
+      },
+      "release/release-ctest-462-462.xml": {
+        "bytes": 495,
+        "sha256": "3fc70b665f23c322136237c48522aa2c5128c5e440b05fba50330d9a118dab7f"
+      },
+      "release/release-ctest-463-463.json": {
+        "bytes": 203,
+        "sha256": "7912d7691e5ee7e0c0f935a4419016e1eda991877c0c5e6cb62c09eb7a42e4b1"
+      },
+      "release/release-ctest-463-463.log": {
+        "bytes": 432,
+        "sha256": "09535d4a14bf677d908976f68df145195350c0e32889e71c78770d76e126a96b"
+      },
+      "release/release-ctest-463-463.xml": {
+        "bytes": 600,
+        "sha256": "61d8362b2e4bf353b04218102280ff1db390a50c3b4360717264ce468d4c4bc0"
+      },
+      "release/release-ctest-464-464.json": {
+        "bytes": 202,
+        "sha256": "48237b4bdebf803583eb1dfbcd5407740eee70c98edbae677130ccaaa3613f73"
+      },
+      "release/release-ctest-464-464.log": {
+        "bytes": 385,
+        "sha256": "fa78d8de9eab8244fcd983f32aefdf30b070abb01602ea372c3538512fb233ad"
+      },
+      "release/release-ctest-464-464.xml": {
+        "bytes": 493,
+        "sha256": "9c5d8d6ef71c834201f56c8fde977306ea7dccfb092553d4312caa880d0cd37b"
+      },
+      "release/release-ctest-465-465.json": {
+        "bytes": 203,
+        "sha256": "643f7b15095aeb8e9fcf7019bfe8fecd59ea173a3456ce08dcb168fe7ddf56c5"
+      },
+      "release/release-ctest-465-465.log": {
+        "bytes": 446,
+        "sha256": "794dfbd542ae3027cbfbc9f44f43bbb867d81cf06af5ae988e445fbd6e9013a2"
+      },
+      "release/release-ctest-465-465.xml": {
+        "bytes": 642,
+        "sha256": "64649061203fe7d227404aaa8a2d6a9f66bd3c530a37f5de3c2e34f6d02a16a0"
+      },
+      "results-capture.json": {
+        "bytes": 4874,
+        "sha256": "a58dd78dace000a32864245f94bdefa464d2d175f3deaa62589fbbf20ce79734"
+      },
+      "stack.log": {
+        "bytes": 3328,
+        "sha256": "2d88c14701a4c7b2453bb0a9549715e5caf1488fbb9cf6f94ef7ee22d8d91095"
+      }
+    }
+  }
+}

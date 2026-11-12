@@ -1603,7 +1603,10 @@ void CharacterSceneRenderer::registerPasses(
         // The split owner publishes sampling-to-depth-loading and color WAW.
         // Logical reads order this explicit transition before the color pass.
         const auto resume=graph.addCommandPass("character-main-depth-resume",[this,frozenContext](rhi::ICommandRecorder& commands){
-            const auto& context=*frozenContext;std::vector<VkImage> colors(context.sceneColorImages.begin(),context.sceneColorImages.begin()+mainPassDescription_->attachments.size()-1);
+            const auto& context = *frozenContext;
+            const auto colorCount = mainPassDescription_->attachments.size() - 1;
+            const std::vector<VkImage> colors(context.sceneColorImages.begin(),
+                context.sceneColorImages.begin() + colorCount);
             mainDepthSplit_->beforeColor(commands,context.sceneDepthImage,colors);
         });
         graph.read(resume,hierarchy);graph.read(resume,*conservativeIndirectResource);graph.read(resume,resources.depth);
