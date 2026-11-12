@@ -27,6 +27,8 @@
 
 [编辑器资产刷新](acceptance/nr/editor-asset-refresh.md)通过两种配置的十秒刷新门槛。
 
+[编辑器视口模型加载](acceptance/nr/editor-placed-resource-loading.md)记录模型首次放置及原有可玩流程的验收。
+
 [材质光照回归矩阵](acceptance/nr/material-lighting-regression.md)通过双配置 168 个采集用例，覆盖通用材质、织物及对象阴影。
 
 [NPR 渐变组合回归矩阵](acceptance/nr/npr-ramp-regression.md)通过两种配置共四项测试及 104 个采集用例。

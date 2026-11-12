@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260",
+      "name": "编辑器视口模型加载",
+      "sourceBase": "05689f3",
+      "evidence": "docs/acceptance/nr/editor-placed-resource-loading.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/editor-placed-resource-loading/results.json"
+    },
+    {
       "path": "runs/20261111-232828-scene-reference-normal-60ddfa",
       "name": "场景参考法线与对象身份",
       "sourceBase": "7044017",

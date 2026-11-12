@@ -16,6 +16,18 @@ inline void checkEditorRenderResourceState() {
     require(state.needsReload(scene),"An unloaded renderer needs scene resources");
     state.load(scene,[]{});
     require(!state.needsReload(scene),"First synchronization after a successful load must be idle");
+    auto imported=scene;
+    imported.resources.push_back({"mesh-b","mesh","models/b.glb"});
+    require(!state.needsReload(imported),"Importing an unplaced model must leave the renderer idle");
+    require(EditorRenderResourceState::describe(imported).resources.size()==1,
+        "The renderer must receive only placed models while editing");
+    auto placed=imported;
+    auto instance=node;instance.id="second-actor";instance.resourceId="mesh-b";
+    placed.nodes.push_back(instance);
+    require(state.needsReload(placed),"First placement of the imported mesh must request a reload");
+    const auto description=EditorRenderResourceState::describe(placed);
+    require(description.resources.size()==2&&description.resources[1].id=="mesh-b",
+        "The placed mesh must reach the renderer in document resource order");
     auto changed=scene;changed.resources[0].path="models/b.glb";
     require(state.needsReload(changed),"A changed mesh path must request a reload");
     changed=scene;changed.nodes[0].resourceId="mesh-b";
@@ -47,6 +59,7 @@ inline void checkEditorRenderResourceState() {
     auto first=scene,second=scene;
     first.resources[0].id="mesh-a";first.resources[0].path="bc";
     second.resources[0].id="mesh-ab";second.resources[0].path="c";
+    second.nodes[0].resourceId="mesh-ab";
     state.load(first,[]{});
     require(state.needsReload(second),"Resource field boundaries must not alias in the signature");
 }

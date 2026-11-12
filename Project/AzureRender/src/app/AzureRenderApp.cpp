@@ -570,7 +570,12 @@ void AzureRenderApp::createSceneRenderer() {
 
 azurerender::scene::SceneDescription AzureRenderApp::resolveRenderDescription(
     const azurerender::SceneDocument& document) const {
+#if AZURE_WITH_EDITOR
+    const bool editing = runOptions_.editorSession && !runOptions_.editorSession->playing();
+    auto description = editing ? azurerender::EditorRenderResourceState::describe(document) : document.renderDescription();
+#else
     auto description = document.renderDescription();
+#endif
     if (!sceneResourcePaths_) sceneResourcePaths_.emplace(resourceLocator_);
     std::vector<std::string> requested;
     requested.reserve(description.resources.size());

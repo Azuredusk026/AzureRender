@@ -4,6 +4,7 @@ struct VisibilityComponent {
 };
 }
 #include "EditorContext.hpp"
+#include "EditorRenderResourceState.hpp"
 
 #include "diagnostics/RuntimeDiagnostics.hpp"
 #include "ecs/Components.hpp"
@@ -497,7 +498,9 @@ std::vector<EditorContext::ResourceStatus> EditorContext::resourceStatuses() con
 
 void EditorContext::updateResourceWriteTimes() {
     resourceWriteTimes_.clear();
+    const auto referenced = EditorRenderResourceState::referencedResources(scene_.nodes);
     for (const SceneResource& resource : scene_.resources) {
+        if (referenced.count(resource.id) == 0) continue;
         std::error_code error;
         const auto time = std::filesystem::last_write_time(
             resolvedResourcePath(resource), error);
@@ -507,21 +510,28 @@ void EditorContext::updateResourceWriteTimes() {
 
 std::size_t EditorContext::reloadChangedAssets() {
     std::size_t changed = 0;
+    decltype(resourceWriteTimes_) observedWrites;
+    const auto referenced = EditorRenderResourceState::referencedResources(scene_.nodes);
+    observedWrites.reserve(referenced.size());
     for (const SceneResource& resource : scene_.resources) {
-        std::error_code error;
-        const auto current = std::filesystem::last_write_time(
-            resolvedResourcePath(resource), error);
+        if (referenced.count(resource.id) == 0) continue;
         const auto previous = std::find_if(
             resourceWriteTimes_.begin(), resourceWriteTimes_.end(),
             [&](const auto& item) { return item.first == resource.id; });
+        std::error_code error;
+        const auto current = std::filesystem::last_write_time(
+            resolvedResourcePath(resource), error);
         if (error || previous == resourceWriteTimes_.end()
             || previous->second != current) {
             ++changed;
         }
+        if (!error) {
+            observedWrites.emplace_back(resource.id, current);
+        }
     }
+    resourceWriteTimes_ = std::move(observedWrites);
     if(changed&&assets_)try { assets_->refresh(); }
-        catch(const std::exception& error) { updateResourceWriteTimes();log("Asset reload rejected: "+std::string(error.what()));return 0; }
-    updateResourceWriteTimes();
+        catch(const std::exception& error) { log("Asset reload rejected: "+std::string(error.what()));return 0; }
     if(changed)notifyAssetVersionChanged();
     return changed;
 }

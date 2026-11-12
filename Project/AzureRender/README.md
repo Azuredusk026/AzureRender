@@ -78,6 +78,8 @@ NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工�
 
 [编辑器资产刷新](docs/acceptance/nr/editor-asset-refresh.md)核对缩略图的来源指纹、句柄和刷新预算。
 
+[编辑器视口模型加载](docs/acceptance/nr/editor-placed-resource-loading.md)核对导入、首次放置、文件更新及完整可玩编辑流程。
+
 [材质光照回归矩阵](docs/acceptance/nr/material-lighting-regression.md)核对通用材质、织物和对象阴影的双绑定输出。
 
 [NPR 渐变组合回归矩阵](docs/acceptance/nr/npr-ramp-regression.md)核对通用材质、织物及两种绑定的像素输出。

@@ -23,7 +23,12 @@ std::filesystem::path uniquePath(const std::string& suffix) {
 }  // namespace
 
 int main() {
-    checkEditorRenderResourceState();
+    try {
+        checkEditorRenderResourceState();
+    } catch (const std::exception& error) {
+        std::cerr << error.what() << '\n';
+        return 1;
+    }
     {
         const auto root=uniquePath("-relative-grade");std::filesystem::create_directory(root);
         const auto path=root/"scene.azscene",lut=root/"grade.azlut";

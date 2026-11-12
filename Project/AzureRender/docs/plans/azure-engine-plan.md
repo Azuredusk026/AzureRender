@@ -39,6 +39,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 [捕获布局回归](../acceptance/nr/capture-layout-regression.md)通过双配置八项多采样轮廓光检查。
 [编辑器采样回归](../acceptance/nr/editor-sampling-regression.md)通过双配置五模式切换、越界拒绝及保存重开检查。
 [编辑器资产刷新](../acceptance/nr/editor-asset-refresh.md)通过双配置十秒刷新门槛。
+[编辑器视口模型加载](../acceptance/nr/editor-placed-resource-loading.md)核对导入、放置、外部文件更新及可玩流程。
 [材质光照回归矩阵](../acceptance/nr/material-lighting-regression.md)通过双配置六项测试及 168 个采集用例。
 [NPR 渐变组合回归矩阵](../acceptance/nr/npr-ramp-regression.md)通过双配置四项测试及 104 个采集用例。
 [NullRhi 录制相机](../acceptance/nr/null-rhi-camera-regression.md)通过两种配置的裁剪平面与录制检查。

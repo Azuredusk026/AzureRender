@@ -1,0 +1,231 @@
+{
+  "status": "qualified",
+  "sourceBase": "05689f3",
+  "configurations": {
+    "debug": {
+      "AzureEngine.EditorPlayable": {
+        "passed": true,
+        "seconds": 163.526,
+        "registryIndex": 338,
+        "registeredTimeoutSeconds": 240,
+        "workload": {
+          "actions": 529,
+          "nodes": 83,
+          "resources": 11,
+          "editStateRestored": true,
+          "scriptRecovery": true,
+          "validationErrors": 0,
+          "built": false
+        }
+      },
+      "AzureEditor.TaskService": {
+        "passed": true,
+        "seconds": 5.59649,
+        "registryIndex": 398
+      },
+      "AzureRender.EditorSession": {
+        "passed": true,
+        "seconds": 3.99747,
+        "registryIndex": 410
+      }
+    },
+    "release": {
+      "AzureEngine.EditorPlayable": {
+        "passed": true,
+        "seconds": 37.9079,
+        "registryIndex": 340,
+        "registeredTimeoutSeconds": 240,
+        "workload": {
+          "actions": 529,
+          "nodes": 83,
+          "resources": 11,
+          "editStateRestored": true,
+          "scriptRecovery": true,
+          "validationErrors": 0,
+          "built": false
+        }
+      },
+      "AzureEditor.TaskService": {
+        "passed": true,
+        "seconds": 7.66534,
+        "registryIndex": 400
+      },
+      "AzureRender.EditorSession": {
+        "passed": true,
+        "seconds": 3.39246,
+        "registryIndex": 412
+      }
+    }
+  },
+  "builds": {
+    "debug": {
+      "status": "built",
+      "seconds": 181.96900000004098,
+      "tests": 605,
+      "missingCommands": [],
+      "hostSha256": "0f0c86705b3b3df9869edca3a409782fc56905a72326906984f49424c1e55b1f"
+    },
+    "release": {
+      "status": "built",
+      "seconds": 300.60899999999674,
+      "tests": 607,
+      "missingCommands": [],
+      "hostSha256": "f2ab3104ca678024e26dc8a690f0924d2bed096a3a9e2276f3a4f2e72457428f"
+    }
+  },
+  "protectedFiles": {
+    "docs/acceptance/p5/closure/source-evidence/interruption.json": "4bd07a5e3af10be9aceac2b0ddaa0e5e80c850bc704cc3eae4dfed332e04e979",
+    "docs/acceptance/p5/closure/source-evidence/manifest.json": "11f99d3171d7609a1200aa86920c7fb1251fae4e96e6ecebb76a391359488c43",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-green.log": "b0d7a3991dec0248b49e57e2d9cbdede8e7f286838add2f0723593d8598ee0e7",
+    "docs/acceptance/p5/closure/source-evidence/performance-provenance-red.log": "f7c1533fc970cbb4665bfbf9267a17ee044e5e01bb22d3d0b74aafc2217c98c4",
+    "src/app/AzureRenderSupport.cpp": "a150ee53a294246d87d8cde42be2881e53e0dd1908481ef91b8786808e80b201",
+    "src/rhi/GpuAllocator.hpp": "2e81204107f3e5cfa765bde0e90c1e6a0131721b6ea6b521b3c73490793164dd",
+    "src/rhi/VulkanRhi.cpp": "4ca84f5a9c7ce471c5f9a75009fd26af8a3fd6b6291be8674e829178291d1840",
+    "tests/MaterialPipelinePolicyTests.cpp": "01f18ad44129c11d97bc2c1d8b0c2c1f3f85bffd0af5403f43d2db513acc7c31",
+    "tests/MotionRecordingTests.cpp": "f8e27feb08afaed0ec723fe7caa76d196909ecba97d06ca7c7ed5943bdc3311e",
+    "tests/ObjectShadowAtlasTests.cpp": "dfb7219c73f059415061b73bc4844a7f0a207b7cb75f0ef81c75b376f8f0ab15",
+    "tests/ShadowTileBoundsGpuTests.cpp": "62504a6a47633cc04f8f886a9013b64f55293b8294afe8e12b69e1c634303b6b",
+    "tools/endfield_native/character_surfaces.py": "6c7c476448f3860b7ec8b3dbddd37cbb7c95b1596ebc3355f2fd1f25cb46c8bb",
+    "tools/test_native_character_surfaces.py": "0c870dfb4a2fb9203fc8ef364a4e494d30d1c8ba133f5514d96db40c839cb1d4"
+  },
+  "trackedSourceLineEndings": {
+    "src/editor/EditorContext.hpp": {
+      "gitContentMatches": true,
+      "worktreeSha256": "9d49ab9725c88da8737b5400bf22855126097fedbee997f732d604e21d55dc22"
+    },
+    "src/editor/commands/EditService.cpp": {
+      "gitContentMatches": true,
+      "worktreeSha256": "a65012f5a2aba982ef2a09da11b70fcfd496552799076d211b464559cd7205da"
+    },
+    "src/editor/commands/EditTransaction.cpp": {
+      "gitContentMatches": true,
+      "worktreeSha256": "4d953621f28938bb523d6baf56c5dcbd37e39e1cd7aa30c2c6d522b00bd7efd3"
+    }
+  },
+  "archive": {
+    "bytes": 34553,
+    "sha256": "4e633ecf26303483d0780aa6e2aeab09467dbb32cfbfefa9acdee33ede284ce9",
+    "members": {
+      "debug-build-results.json": {
+        "bytes": 189,
+        "sha256": "2d5582e1db536754829cf71521dad636b9b7832ad006e0728393e28ba1a194b3"
+      },
+      "debug-ctest-338-338.json": {
+        "bytes": 201,
+        "sha256": "49c18a6e255e4be610acc8ce609610682a48fbe45bc0cfaa2c37930c6ad99ddc"
+      },
+      "debug-ctest-338-338.log": {
+        "bytes": 420,
+        "sha256": "761d3810620cf0022d1776d14cadc5ad4238524543e3913925b50275af8de8f0"
+      },
+      "debug-ctest-338-338.xml": {
+        "bytes": 591,
+        "sha256": "4fc0a1c7d22edab5a04a450ab6872f1324c0b50a022e6c17c214bd40527022bb"
+      },
+      "debug-ctest-398-398.json": {
+        "bytes": 202,
+        "sha256": "9459c431b4a57bf2744e5b7a8578d1afb8d0764e13210919cad40341f3a8e934"
+      },
+      "debug-ctest-398-398.log": {
+        "bytes": 362,
+        "sha256": "617884a0abc92eba6cacdf43af1bac130dc119cc1014caed734e07a701bb2e82"
+      },
+      "debug-ctest-398-398.xml": {
+        "bytes": 1261,
+        "sha256": "81d2f037e0d166827b65cb354f825195597825c26f57b99d2741bf577e465c9e"
+      },
+      "debug-ctest-410-410.json": {
+        "bytes": 202,
+        "sha256": "9cb237851c7a820a5acec9bfcfea6089e881202e1ad85bab8b667ac943f65e38"
+      },
+      "debug-ctest-410-410.log": {
+        "bytes": 364,
+        "sha256": "53de1ae6e252bb26304dbed44d7e3dc193879c6717e1e940ec37bca10df2f852"
+      },
+      "debug-ctest-410-410.xml": {
+        "bytes": 1515,
+        "sha256": "d4c42c86ba64e30ba876ddcee7b561a8a4f1c4282990915f61eaa3c457489a3e"
+      },
+      "editor-placed-resource-rebuild-queue.log": {
+        "bytes": 540,
+        "sha256": "2e634cd988066cf282931e416ce708e9142234bf2001ac63c2d8de286a627290"
+      },
+      "editor-placed-resource-revalidate-light-cpu.log": {
+        "bytes": 1092,
+        "sha256": "3a4e22b461e6249af7e3c55c639806eb4c02a1296424a5f0d1b7fa59fe36458f"
+      },
+      "editor-placement-product-delta.json": {
+        "bytes": 159055,
+        "sha256": "4276a9363fd7ad0046424a4ba485a486b85f7c2c43c0eb4f6e5c76f68465f857"
+      },
+      "editor-playable-placed-resource-debug/ctest.xml": {
+        "bytes": 2941,
+        "sha256": "babebc217599d4bada40faa271c7b1c9b04047a98e5f02a6ed9c482459503fcf"
+      },
+      "editor-playable-placed-resource-debug/results.json": {
+        "bytes": 2193,
+        "sha256": "2d0d5cce6a2fe4f726492f3ed31f5bb7f1a6c148ee4efee013e9ea24c175db78"
+      },
+      "editor-playable-unplaced-import-debug/ctest.xml": {
+        "bytes": 1534,
+        "sha256": "09dc6738663340273a18d1d2a4a4842296713b78134b9a1c3359bc5df273bcf3"
+      },
+      "editor-playable-unplaced-import-debug/results.json": {
+        "bytes": 1591,
+        "sha256": "cf2ee5d1d83548265ecdbe0bb338916b4bff88b663e66acf32214bff6983010c"
+      },
+      "editor-resource-signature-baseline/check.cpp": {
+        "bytes": 616,
+        "sha256": "4156213d5853340b0c1f62203373653b790c03dd8a4dcbcad49260d56687a4a3"
+      },
+      "editor-resource-signature-baseline/results.log": {
+        "bytes": 58,
+        "sha256": "3cbf0ef4f46a1edfffdef9066d957ca15907dee4b123d81639bd969c575af304"
+      },
+      "editor-unplaced-import-red/ctest.xml": {
+        "bytes": 600,
+        "sha256": "401ea482ad031508067d7d85c411c7d8475d06ec4114a8d566af001de893a2b3"
+      },
+      "release-build-results.json": {
+        "bytes": 189,
+        "sha256": "80b8d6294977e16ad2e1f38eeececa289e1f0367aaf10f2ea0b56b9dae628149"
+      },
+      "release-ctest-340-340.json": {
+        "bytes": 202,
+        "sha256": "f0e377b22119061c84cf49a4255f3fca08c237deb837a5aed2aa270de4257699"
+      },
+      "release-ctest-340-340.log": {
+        "bytes": 424,
+        "sha256": "7c1e81060edeb37612eb320437f54da9ee134f6381801e392483844492627e90"
+      },
+      "release-ctest-340-340.xml": {
+        "bytes": 590,
+        "sha256": "03ffebf9f78963006c45bd5dc84a83a5762364ed59400db916c7c8acff8fe648"
+      },
+      "release-ctest-400-400.json": {
+        "bytes": 189,
+        "sha256": "65d716e00d08d2b6fb1f6f548aaeb278743320b6b21e952993db007edbeab72a"
+      },
+      "release-ctest-400-400.log": {
+        "bytes": 366,
+        "sha256": "b37f7d76d40aef626d3612cb46a8b4a64a30d66212ff15881ecf78e42ff996be"
+      },
+      "release-ctest-400-400.xml": {
+        "bytes": 1261,
+        "sha256": "447ca624178989aeea68f8b1a486b66bdcbe7beec66f92c05481f12b06c1b755"
+      },
+      "release-ctest-412-412.json": {
+        "bytes": 202,
+        "sha256": "3d270227ac1c4599a9fe373df02ab5b5a9e8cb5dbf114fe472a39b216f23df94"
+      },
+      "release-ctest-412-412.log": {
+        "bytes": 368,
+        "sha256": "dcb5390500a37fcaade68944591e80a36b19c60fd78af620ebbed1a31931639c"
+      },
+      "release-ctest-412-412.xml": {
+        "bytes": 1515,
+        "sha256": "a0fefe08e5bbc9798b8c2bbe3025d6fb78a37a84b12b7c684fb1499a5e6e9a55"
+      }
+    }
+  }
+}
