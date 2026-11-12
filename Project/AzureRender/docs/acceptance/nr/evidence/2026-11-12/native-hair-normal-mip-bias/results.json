@@ -1,0 +1,933 @@
+{
+  "status": "qualified-native-hair-normal-mip-bias",
+  "overall": "failed-user-review",
+  "baseline": {
+    "bias": -1.0,
+    "nvidiaOverOne": 0,
+    "intelOverOne": 886
+  },
+  "intelBest": {
+    "bias": -0.9375,
+    "nvidiaOverOne": 548,
+    "intelOverOne": 477
+  },
+  "comparison": {
+    "devices": {
+      "nvidia": {
+        "samples": 833833,
+        "unique": 808972,
+        "transitions": 26186,
+        "pointsWithTransitions": 16316,
+        "monotonicViolations": 0,
+        "selectedSha256": "0fecac8be4ee49da8b2f09c81e8c535ad7634dc7830dcbe5db5d193655710ccc",
+        "inferredLod": {
+          "count": 26186,
+          "quantile": [
+            0.859375,
+            1.703125,
+            1.890625,
+            2.078125,
+            2.703125,
+            3.921875,
+            8.265625
+          ]
+        }
+      },
+      "intel": {
+        "samples": 833833,
+        "unique": 809273,
+        "transitions": 25585,
+        "pointsWithTransitions": 16324,
+        "monotonicViolations": 0,
+        "selectedSha256": "dfd28c5a059b0c2fa30a1669a151eade34971d4e8e90395c1949bc2a822cd2b1",
+        "inferredLod": {
+          "count": 25585,
+          "quantile": [
+            0.859375,
+            1.640625,
+            1.828125,
+            2.015625,
+            2.640625,
+            3.859375,
+            8.265625
+          ]
+        }
+      }
+    },
+    "frozenNormalDifference": 886,
+    "nvidiaMinusIntel": {
+      "count": 16250,
+      "quantile": [
+        -0.0625,
+        0.0,
+        0.03125,
+        0.0625,
+        0.09375,
+        0.25,
+        4.59375
+      ]
+    },
+    "nvidiaMinusIntelAtDifferences": {
+      "count": 844,
+      "quantile": [
+        0.03125,
+        0.03125,
+        0.09375,
+        0.125,
+        0.25,
+        0.4375,
+        4.59375
+      ]
+    },
+    "biasAgainstFrozen": [
+      {
+        "bias": -1.75,
+        "nvidiaOverOne": 13225,
+        "intelOverOne": 14238
+      },
+      {
+        "bias": -1.71875,
+        "nvidiaOverOne": 12875,
+        "intelOverOne": 13813
+      },
+      {
+        "bias": -1.6875,
+        "nvidiaOverOne": 12340,
+        "intelOverOne": 13433
+      },
+      {
+        "bias": -1.65625,
+        "nvidiaOverOne": 11987,
+        "intelOverOne": 13045
+      },
+      {
+        "bias": -1.625,
+        "nvidiaOverOne": 11636,
+        "intelOverOne": 12639
+      },
+      {
+        "bias": -1.59375,
+        "nvidiaOverOne": 11143,
+        "intelOverOne": 12225
+      },
+      {
+        "bias": -1.5625,
+        "nvidiaOverOne": 10601,
+        "intelOverOne": 11859
+      },
+      {
+        "bias": -1.53125,
+        "nvidiaOverOne": 9973,
+        "intelOverOne": 11514
+      },
+      {
+        "bias": -1.5,
+        "nvidiaOverOne": 9384,
+        "intelOverOne": 10845
+      },
+      {
+        "bias": -1.46875,
+        "nvidiaOverOne": 8594,
+        "intelOverOne": 10156
+      },
+      {
+        "bias": -1.4375,
+        "nvidiaOverOne": 7991,
+        "intelOverOne": 9600
+      },
+      {
+        "bias": -1.40625,
+        "nvidiaOverOne": 7170,
+        "intelOverOne": 8843
+      },
+      {
+        "bias": -1.375,
+        "nvidiaOverOne": 6334,
+        "intelOverOne": 8175
+      },
+      {
+        "bias": -1.34375,
+        "nvidiaOverOne": 5418,
+        "intelOverOne": 7450
+      },
+      {
+        "bias": -1.3125,
+        "nvidiaOverOne": 4820,
+        "intelOverOne": 6648
+      },
+      {
+        "bias": -1.28125,
+        "nvidiaOverOne": 4106,
+        "intelOverOne": 5871
+      },
+      {
+        "bias": -1.25,
+        "nvidiaOverOne": 3398,
+        "intelOverOne": 5093
+      },
+      {
+        "bias": -1.21875,
+        "nvidiaOverOne": 2905,
+        "intelOverOne": 4488
+      },
+      {
+        "bias": -1.1875,
+        "nvidiaOverOne": 2423,
+        "intelOverOne": 3794
+      },
+      {
+        "bias": -1.15625,
+        "nvidiaOverOne": 2044,
+        "intelOverOne": 3190
+      },
+      {
+        "bias": -1.125,
+        "nvidiaOverOne": 1429,
+        "intelOverOne": 2778
+      },
+      {
+        "bias": -1.09375,
+        "nvidiaOverOne": 1042,
+        "intelOverOne": 2260
+      },
+      {
+        "bias": -1.0625,
+        "nvidiaOverOne": 601,
+        "intelOverOne": 1738
+      },
+      {
+        "bias": -1.03125,
+        "nvidiaOverOne": 205,
+        "intelOverOne": 1211
+      },
+      {
+        "bias": -1.0,
+        "nvidiaOverOne": 0,
+        "intelOverOne": 886
+      },
+      {
+        "bias": -0.96875,
+        "nvidiaOverOne": 257,
+        "intelOverOne": 653
+      },
+      {
+        "bias": -0.9375,
+        "nvidiaOverOne": 548,
+        "intelOverOne": 477
+      },
+      {
+        "bias": -0.90625,
+        "nvidiaOverOne": 848,
+        "intelOverOne": 597
+      },
+      {
+        "bias": -0.875,
+        "nvidiaOverOne": 1119,
+        "intelOverOne": 688
+      },
+      {
+        "bias": -0.84375,
+        "nvidiaOverOne": 1509,
+        "intelOverOne": 852
+      },
+      {
+        "bias": -0.8125,
+        "nvidiaOverOne": 1869,
+        "intelOverOne": 1127
+      },
+      {
+        "bias": -0.78125,
+        "nvidiaOverOne": 2353,
+        "intelOverOne": 1346
+      },
+      {
+        "bias": -0.75,
+        "nvidiaOverOne": 2729,
+        "intelOverOne": 1751
+      },
+      {
+        "bias": -0.71875,
+        "nvidiaOverOne": 3096,
+        "intelOverOne": 2195
+      },
+      {
+        "bias": -0.6875,
+        "nvidiaOverOne": 3658,
+        "intelOverOne": 2554
+      },
+      {
+        "bias": -0.65625,
+        "nvidiaOverOne": 4030,
+        "intelOverOne": 2957
+      },
+      {
+        "bias": -0.625,
+        "nvidiaOverOne": 4395,
+        "intelOverOne": 3383
+      },
+      {
+        "bias": -0.59375,
+        "nvidiaOverOne": 4924,
+        "intelOverOne": 3819
+      },
+      {
+        "bias": -0.5625,
+        "nvidiaOverOne": 5505,
+        "intelOverOne": 4200
+      },
+      {
+        "bias": -0.53125,
+        "nvidiaOverOne": 6137,
+        "intelOverOne": 4559
+      },
+      {
+        "bias": -0.5,
+        "nvidiaOverOne": 6759,
+        "intelOverOne": 5249
+      },
+      {
+        "bias": -0.46875,
+        "nvidiaOverOne": 7568,
+        "intelOverOne": 5979
+      },
+      {
+        "bias": -0.4375,
+        "nvidiaOverOne": 8200,
+        "intelOverOne": 6547
+      },
+      {
+        "bias": -0.40625,
+        "nvidiaOverOne": 9041,
+        "intelOverOne": 7320
+      },
+      {
+        "bias": -0.375,
+        "nvidiaOverOne": 9912,
+        "intelOverOne": 8013
+      },
+      {
+        "bias": -0.34375,
+        "nvidiaOverOne": 10868,
+        "intelOverOne": 8790
+      },
+      {
+        "bias": -0.3125,
+        "nvidiaOverOne": 11487,
+        "intelOverOne": 9618
+      },
+      {
+        "bias": -0.28125,
+        "nvidiaOverOne": 12225,
+        "intelOverOne": 10423
+      },
+      {
+        "bias": -0.25,
+        "nvidiaOverOne": 12944,
+        "intelOverOne": 11231
+      }
+    ]
+  },
+  "nativeReplay": {
+    "status": "qualified",
+    "bias": [
+      -1.75,
+      -1.71875,
+      -1.6875,
+      -1.65625,
+      -1.625,
+      -1.59375,
+      -1.5625,
+      -1.53125,
+      -1.5,
+      -1.46875,
+      -1.4375,
+      -1.40625,
+      -1.375,
+      -1.34375,
+      -1.3125,
+      -1.28125,
+      -1.25,
+      -1.21875,
+      -1.1875,
+      -1.15625,
+      -1.125,
+      -1.09375,
+      -1.0625,
+      -1.03125,
+      -1.0,
+      -0.96875,
+      -0.9375,
+      -0.90625,
+      -0.875,
+      -0.84375,
+      -0.8125,
+      -0.78125,
+      -0.75,
+      -0.71875,
+      -0.6875,
+      -0.65625,
+      -0.625,
+      -0.59375,
+      -0.5625,
+      -0.53125,
+      -0.5,
+      -0.46875,
+      -0.4375,
+      -0.40625,
+      -0.375,
+      -0.34375,
+      -0.3125,
+      -0.28125,
+      -0.25
+    ],
+    "devices": {
+      "nvidia": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "copyControlExact": true,
+        "restorationExact": true,
+        "hashes": [
+          {
+            "bias": -1.75,
+            "shader": "675929476ec63b6f7a626dba0c997368d332d600666587dab18155e47a6d70b8",
+            "attachment": "075ea0bbdf5e0723084b6521e692e4254f4a8df9c722794a20f87cd329727725"
+          },
+          {
+            "bias": -1.71875,
+            "shader": "443926c038a67630e39050e2d06ec4adc931df4a77e6b8f4d25f45df2e5613f8",
+            "attachment": "2ad53af87bcfbc23ef6df7712023ec22c9b91815a322baa77dab4eee2662f24a"
+          },
+          {
+            "bias": -1.6875,
+            "shader": "4b0ca71d24a984ca68a400a329ada54078ffc81d48c299d6d7c27d91775c8ce9",
+            "attachment": "767ae828b1c77c634a14171973147ea08aa41ff127b0382c56ae266bd392018e"
+          },
+          {
+            "bias": -1.65625,
+            "shader": "95c750199bca060cd7d73f1e6677e814cc24586fc42c95aabca4bd92dcc5f1a8",
+            "attachment": "60859e5d2c965a0d49ff92b31ce69762155c014bce451567db69261ae40c7806"
+          },
+          {
+            "bias": -1.625,
+            "shader": "af9ad7774488218f01d1fa779fe988e725ecf1cf475c3886db0cf97495ec4fbd",
+            "attachment": "fd556ba2d89e9b5883b444b9d8d050cd20d479e5831e18940d098913c7e24be8"
+          },
+          {
+            "bias": -1.59375,
+            "shader": "7533945fc4092fef46b8207c7854bf181f3f33d09e1e1b307caa18370e479fdf",
+            "attachment": "e8f46c9caa2f647f3eed5cf15ce095c8b9f986219053732b8131623deaf2116a"
+          },
+          {
+            "bias": -1.5625,
+            "shader": "1c2388e5fcef2b8ef08d595e8d4bb387fecaacae2d3cd646a99a520c30e81aac",
+            "attachment": "ac4a61e0f8aa2c44c5c5561990d2a719b2ce52ca26582eba0bf01e5d3e90ac28"
+          },
+          {
+            "bias": -1.53125,
+            "shader": "4c62120ebdc8d16c9a5b3a480cd7bbf39b7a2769dbef2f328eaa0f18b37f86ce",
+            "attachment": "a9784bf11a41452a0d03263fcfa3f0417aecb5d18448528671a1e8f7f8ac8e3a"
+          },
+          {
+            "bias": -1.5,
+            "shader": "11e90fa3e8adf9866d6df29d3bb17d585a54b712a86f711645e12a591755fedc",
+            "attachment": "ed29891d1e37162ae5c388d9655ff35580b100d9efb637212d9edb7de1bc266e"
+          },
+          {
+            "bias": -1.46875,
+            "shader": "6f9c9bf65f2d46a9d7cc7c9dee91a1464489958e05e0c9324e0715c99cfe75df",
+            "attachment": "eb87d1e1e460251e6400c73a53a6452c41aa96a90772df8c3170e769a2b27378"
+          },
+          {
+            "bias": -1.4375,
+            "shader": "9b533e4c26d9d9a024fd04a64e1b437dc6dbf09b59c3065802323902f9781025",
+            "attachment": "c73878f6ae01af711d5d6b5fa3a748c7ff7d866b344b38825b5f4fd1b56a09ff"
+          },
+          {
+            "bias": -1.40625,
+            "shader": "bfe612f69d77504570f7a31f8d47064c8b831fc8fe5cdc3c1af64bb87d142c06",
+            "attachment": "d2060ab07ac58c05d3c60219c9d29f8a2278b2f6cef2273aefb0cd58737fa917"
+          },
+          {
+            "bias": -1.375,
+            "shader": "46edbce4f999d689d44536f3bd6ecc517720acff09ff50c5703f0bc1bbae8466",
+            "attachment": "6ac1b3be084dcadae74b7fe32c2cc5ffbd1f9af594f06dc855e12b4495ca4978"
+          },
+          {
+            "bias": -1.34375,
+            "shader": "d36e981c60772e48e17cbc2dde4d9058c55f3c6d9adbb251b35ce88cfb25d282",
+            "attachment": "dcc3b0eec174b1795be21c0df89da8dac42891d3ea1fce132df8fab6414f414b"
+          },
+          {
+            "bias": -1.3125,
+            "shader": "823e97491a95315662f33621c1b0ca3448be450aed980f22721369b7ecdd147b",
+            "attachment": "b871782e84b89ff9df4173bf21572fe27607cc048ed6183a02598f98e91155da"
+          },
+          {
+            "bias": -1.28125,
+            "shader": "bf6698794a0ddfe82b7d98f7721787a22588e64b7ed96e9c2d83afe5c5ba49ab",
+            "attachment": "d7adb97b75df3d0ca07caa1daf5e456f31385f5a14f99e5b746c16bc0bbbdbfc"
+          },
+          {
+            "bias": -1.25,
+            "shader": "a2bcda68ad0964b548f0a352eaa37020a7776726eaba329a0124b36fc7ae424c",
+            "attachment": "73eb033ccbc1882a73e45b0a4c3c263797fe978c351101e6f87232797d0d5f36"
+          },
+          {
+            "bias": -1.21875,
+            "shader": "061c017c2a9c8217b7fd362f2822edeb24ca84897ada708d73fe93bec1a9ffe3",
+            "attachment": "2bb5a78dc5dbd1bcfe5826c809ae910d487344bc84d736f9f188215586ec343a"
+          },
+          {
+            "bias": -1.1875,
+            "shader": "2bb38054f5f161d9587172657d1a0fbbac7c7021daf3de605be7fcaa02d035de",
+            "attachment": "a7a9699a01930bffea8ea6f22046230aa85fdd6aaf6c2f8b55766abc613bc2e1"
+          },
+          {
+            "bias": -1.15625,
+            "shader": "2fd9580b11d9853d8d9db9f8cfd0f6034c3103f9809f72580d01dfa95cb18891",
+            "attachment": "d14ec1e1ac3859be0152a1a188bde7dba8c5a4b168947e041299dcc4e0e6603f"
+          },
+          {
+            "bias": -1.125,
+            "shader": "63f1667f676c902fc4a3fb6cf8cf7e6621d959b31d3078fa2c991334cccbcfce",
+            "attachment": "6da029a6c94b45c1ce815c071ba65f736a0fe20cc77e76b10ef58c0cf676b76f"
+          },
+          {
+            "bias": -1.09375,
+            "shader": "19d8d7231e48da8c732e140ff9420f196cdbbe3d48cf85b5f07af9e97f2becec",
+            "attachment": "3672ef25f142cf3165c62fd3461cfc8885e2ce94fbc9169870ee115a272b898f"
+          },
+          {
+            "bias": -1.0625,
+            "shader": "250615e575275a4798f518efd97edb5d37df72c761ee41c749636497559a0982",
+            "attachment": "3b25eb60df890ec264c38617c8a5a80c02fd017228726bb0b04fbd692f42f61e"
+          },
+          {
+            "bias": -1.03125,
+            "shader": "261653f907804c9f7e73435e8f29f886e53e2e5c023147da6b10b915b277d322",
+            "attachment": "b58d1ae5d7b1ce0eba5e75ac3fd8b0873a746d3b055369beec0fcc5c38de068d"
+          },
+          {
+            "bias": -1.0,
+            "shader": "c9de6d856b7852e8b56e13c97e242d0249c04756cb715bb7a9922b3d313b7510",
+            "attachment": "ca462dae3a626ab03d4beb04844d332728ad6baabc1497b1e9fad2b089d04f6e"
+          },
+          {
+            "bias": -0.96875,
+            "shader": "9dc2434237cee7fd8862360e0b24fcd63f7724d055bd8bb62876d62b63dccf28",
+            "attachment": "e1a1cd2396768fc568069e84a90b911fd5668d59c8a745cf5ab818ca8a298ae6"
+          },
+          {
+            "bias": -0.9375,
+            "shader": "9f9af17388878cf99dde68f06161c282f1303217e1d24ab271f575707b48497e",
+            "attachment": "e4fbda159a87bcab2612f301bcf7869d5aea988f649ee0e5c28cd5a232b87c88"
+          },
+          {
+            "bias": -0.90625,
+            "shader": "6789332a5b88e4fd47ed45f664741c07acd7e10714fad375c14710b898c40d1f",
+            "attachment": "977d23ce399c3f2147ff144e1d83881a6229e225f7f2021c158fd652ea23cf55"
+          },
+          {
+            "bias": -0.875,
+            "shader": "11a3372d7bc0a0089c99b3d879ceb873fb733354a7fcc401dc91cfbbe3446fae",
+            "attachment": "54edc036dd9fde19b025d4d4719ff5d3fc9557d9288cf842f7cba3d3ddac914b"
+          },
+          {
+            "bias": -0.84375,
+            "shader": "2c5d0ac45ca214e0fa15e87c4024a2a892a37b0de85e22a33cc25260b03e5117",
+            "attachment": "ecc86e20aa8ae3fba144ee731acc461d53a1c449396787de0390d8731baf5a70"
+          },
+          {
+            "bias": -0.8125,
+            "shader": "9d8466903cf2179c923433dcd2e34bd9268ecaf9fd976b056f7991cf8e9c896c",
+            "attachment": "9e5e027fe510c47ba07cb5591e2b08595a13aaec72b1cb9b5ec26af8a6b66a0d"
+          },
+          {
+            "bias": -0.78125,
+            "shader": "190dfff25e5a4a19904a0fad5e2219ea9d57e7da1d2fbbd10f570b0b747a22d9",
+            "attachment": "bc4a6ceaa1ecf0ffa9b96ec32fbeee4dfd3a1655eba76ae4538eabb6a44237c1"
+          },
+          {
+            "bias": -0.75,
+            "shader": "db7cc2743b5723f6b0d7eff388b1d5316ee2de83b90e5e4a9a2406e46443c982",
+            "attachment": "88aabb6c37d5556cbf2a4032dd9c9a8f1608a966e979c7e6dc419a21454c84e4"
+          },
+          {
+            "bias": -0.71875,
+            "shader": "fabdf14b89168bd8ebf76a035c4816038fc8b15247fe1de961b061a911085881",
+            "attachment": "0674002b6041414d5cfbc537c7e59dc7c8e9aa757c66c32bbabc7094b27030b2"
+          },
+          {
+            "bias": -0.6875,
+            "shader": "aa080657fd61a3c0d4ad36143aa3af3923f910ae6b4d1f6886cc288a537b1b63",
+            "attachment": "3fdb67891cbed824a5d6b701f685a662d1f79758c2bea5e4299ee443c2959c30"
+          },
+          {
+            "bias": -0.65625,
+            "shader": "bee5cec1995288140b59cf5eb99089ac1475aed718d3618fb3172ed0af20aaa2",
+            "attachment": "737da82c3f761c24dbcfb4a2b9f408e248cfcb0114f4fbbcc1ee1d30a26d4387"
+          },
+          {
+            "bias": -0.625,
+            "shader": "a6f40a04544a43f3b4603e843f70c0f84485883d77da5250ea2f48b8aa71e302",
+            "attachment": "68502cdecedd47e67beebe6a3307e3182ff71214a41d409ab93139d6c74a1f40"
+          },
+          {
+            "bias": -0.59375,
+            "shader": "025c2da70adadee135be608068a81d92d1b6614281ff6c54fa01394de43ccd65",
+            "attachment": "31313885cafe73ddfd04812d7869dae0d4a47e24da86297280bcace43408433d"
+          },
+          {
+            "bias": -0.5625,
+            "shader": "a16eb17f027851523083f7aed5facd1afcb45d7e792a54cd8528a1c965149dbc",
+            "attachment": "4adc36d565d504ad083dd66400cd3f71d8dd7703178b198c5c1daef6f0709a1e"
+          },
+          {
+            "bias": -0.53125,
+            "shader": "e7ef991a1c7200e41c2962e37c5684507025a8e30863acd7065f2a82ce29e418",
+            "attachment": "9aa9beeca15cb72dc3812b74d4ce505102c3248d7ce69a58a9333ea3e0c10e5e"
+          },
+          {
+            "bias": -0.5,
+            "shader": "fca69f0a010ae2971cad30b1ad253118b6feaa096355fb62a5988f86c14a4c82",
+            "attachment": "5982df0ffb89c514f32f771518daf9af674d96c7f7a6cde283492e9bda007a54"
+          },
+          {
+            "bias": -0.46875,
+            "shader": "c9ea6ccf9298e6708c683368005f162daa78d520f003b751705b22202bef70f5",
+            "attachment": "25550c19faac1f9e0f21f7a5cf2422e851e76b05be2f04e75fa2f867fb9bc132"
+          },
+          {
+            "bias": -0.4375,
+            "shader": "08d63fcf0751945393d9c56ca47b799419f5293563291c02aa356d71f95f8c9f",
+            "attachment": "fab684c85b2c412e3e8cce691967889b303fbd208203dc0e08bb72ecae795cc6"
+          },
+          {
+            "bias": -0.40625,
+            "shader": "e7d742b1451efccbba3d33f3ad39179b83e026cf17eaab7d0e275af0f6e8a7d2",
+            "attachment": "ace79af651c949122fb4766439627f37aebebff12903f8abdf80da4247f226ac"
+          },
+          {
+            "bias": -0.375,
+            "shader": "754024342d0a4de9be6efe0e6da7a72c5d81015510bf76227c3310f85e202001",
+            "attachment": "1311c479381dc79059ac3f30b21f1f28670bf93915228d994e6378ab9bffcfa8"
+          },
+          {
+            "bias": -0.34375,
+            "shader": "941f78338726453793ab36d0d79f6914c841aa3aa83c973a9222abe1440feafb",
+            "attachment": "2de10d93ef1c01def17a065f4f30a22d692bc0951fe64d79b93d54ab0fb28c17"
+          },
+          {
+            "bias": -0.3125,
+            "shader": "bbf2497a22adb61c99bcee757ff66ee821ca6ddbf981d00eacc88d4ed5f9cbe7",
+            "attachment": "cffd3cf04a08d6fd08c13f08740c035c0822cfaedb459a95bfdb643619bc7448"
+          },
+          {
+            "bias": -0.28125,
+            "shader": "ed39bfbe6bd6ba54a7aaea7af3a01c05864a5fa0fe32ac40c2fb344e3398bfda",
+            "attachment": "4af57f420f261b3ee5f0d9008573839b03b28ad8d01b26c60a0736d116df3892"
+          },
+          {
+            "bias": -0.25,
+            "shader": "a4bbbdb59c9cbc0e7feae513dc8772d075d9c075997e906e24d2ab013058cf60",
+            "attachment": "091b0da9b84db14949b00f87a692332ab5a43e234e905e147c557dd1ec9aa058"
+          }
+        ],
+        "messages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      "intel": {
+        "device": "Intel(R) UHD Graphics",
+        "copyControlExact": true,
+        "restorationExact": true,
+        "hashes": [
+          {
+            "bias": -1.75,
+            "shader": "675929476ec63b6f7a626dba0c997368d332d600666587dab18155e47a6d70b8",
+            "attachment": "bdb0ab57964c2d175d03b388549bca3c091ea7d55a21613b6490f1fe93f2a98d"
+          },
+          {
+            "bias": -1.71875,
+            "shader": "443926c038a67630e39050e2d06ec4adc931df4a77e6b8f4d25f45df2e5613f8",
+            "attachment": "9ca2bb544e9abe866429a6e084d77b826b4af1f82e94dafaa1c644741a4c55b3"
+          },
+          {
+            "bias": -1.6875,
+            "shader": "4b0ca71d24a984ca68a400a329ada54078ffc81d48c299d6d7c27d91775c8ce9",
+            "attachment": "17d3fd40cbc5d17eaa14acc713410becd95423ecec3a6e7c21f9e5fa004d2d0d"
+          },
+          {
+            "bias": -1.65625,
+            "shader": "95c750199bca060cd7d73f1e6677e814cc24586fc42c95aabca4bd92dcc5f1a8",
+            "attachment": "30f1de27d2547674a6dd0035d4dc898534690c69b60ef383071242d976bf2a67"
+          },
+          {
+            "bias": -1.625,
+            "shader": "af9ad7774488218f01d1fa779fe988e725ecf1cf475c3886db0cf97495ec4fbd",
+            "attachment": "1a35a4639e63c10ee391982fd16a9dabe76262c6ab4242c98d647f42fe2a0a49"
+          },
+          {
+            "bias": -1.59375,
+            "shader": "7533945fc4092fef46b8207c7854bf181f3f33d09e1e1b307caa18370e479fdf",
+            "attachment": "89ec3d18d94c532a1900477045695ecca97ee8d29816fdbbb304908c31869c19"
+          },
+          {
+            "bias": -1.5625,
+            "shader": "1c2388e5fcef2b8ef08d595e8d4bb387fecaacae2d3cd646a99a520c30e81aac",
+            "attachment": "71b8b172715790490f5a63af367ca706fa8955fc6a1aa4637a78a69074241e63"
+          },
+          {
+            "bias": -1.53125,
+            "shader": "4c62120ebdc8d16c9a5b3a480cd7bbf39b7a2769dbef2f328eaa0f18b37f86ce",
+            "attachment": "084f55ebb74a0f6494b9099daa0ae60d80d06ca5e5b9730e2630890d69e24229"
+          },
+          {
+            "bias": -1.5,
+            "shader": "11e90fa3e8adf9866d6df29d3bb17d585a54b712a86f711645e12a591755fedc",
+            "attachment": "25aa569b30db8c082453366c39a2a08a3c55cdd61dd43f079f137f8178850c1f"
+          },
+          {
+            "bias": -1.46875,
+            "shader": "6f9c9bf65f2d46a9d7cc7c9dee91a1464489958e05e0c9324e0715c99cfe75df",
+            "attachment": "2f94a3ad8790f468624ae3bf03d1b14041f48d2aab8118e2bc1e1e36671836e8"
+          },
+          {
+            "bias": -1.4375,
+            "shader": "9b533e4c26d9d9a024fd04a64e1b437dc6dbf09b59c3065802323902f9781025",
+            "attachment": "9c3ddd8e5e2bace7c8bfb046ba9bbe04b5c41137698a96fddd034bf94ae6694a"
+          },
+          {
+            "bias": -1.40625,
+            "shader": "bfe612f69d77504570f7a31f8d47064c8b831fc8fe5cdc3c1af64bb87d142c06",
+            "attachment": "11823ff9e73fd4427996ab90d01a0d2bf199268a500c35c2f9eb6081e87b5501"
+          },
+          {
+            "bias": -1.375,
+            "shader": "46edbce4f999d689d44536f3bd6ecc517720acff09ff50c5703f0bc1bbae8466",
+            "attachment": "920b1761b25b88ac212473c41b4907ad0307bf599997950b0e5c7eed793a94ba"
+          },
+          {
+            "bias": -1.34375,
+            "shader": "d36e981c60772e48e17cbc2dde4d9058c55f3c6d9adbb251b35ce88cfb25d282",
+            "attachment": "6982a4dfec5cd887aad716007f77cfa9b35ec9e222fb77c2740fb4515490a3ca"
+          },
+          {
+            "bias": -1.3125,
+            "shader": "823e97491a95315662f33621c1b0ca3448be450aed980f22721369b7ecdd147b",
+            "attachment": "f0fff254cf2eb86104ac2297c36bd5d159480739aa1081f72b3ffb89cf19f764"
+          },
+          {
+            "bias": -1.28125,
+            "shader": "bf6698794a0ddfe82b7d98f7721787a22588e64b7ed96e9c2d83afe5c5ba49ab",
+            "attachment": "7bad6f35a496e9873bf7778be7310c5ecfcff02455402e6fb89cb15739ab9325"
+          },
+          {
+            "bias": -1.25,
+            "shader": "a2bcda68ad0964b548f0a352eaa37020a7776726eaba329a0124b36fc7ae424c",
+            "attachment": "a8e3d57a7946771afd8523248dd4a32f44d73246ca5bece249cb969b2f5916d5"
+          },
+          {
+            "bias": -1.21875,
+            "shader": "061c017c2a9c8217b7fd362f2822edeb24ca84897ada708d73fe93bec1a9ffe3",
+            "attachment": "df12d4018441e95b33bb96753c524f0c05d86b62d9cd1fbef0e9781ed5ff0666"
+          },
+          {
+            "bias": -1.1875,
+            "shader": "2bb38054f5f161d9587172657d1a0fbbac7c7021daf3de605be7fcaa02d035de",
+            "attachment": "dfe2c804e94ed774a41a37e716fd3bc0e7f1f33a044ad0026053f9799409349f"
+          },
+          {
+            "bias": -1.15625,
+            "shader": "2fd9580b11d9853d8d9db9f8cfd0f6034c3103f9809f72580d01dfa95cb18891",
+            "attachment": "03b644624621bdc82cc02a20477272cdd28ddfa514c39877b6e9cd1bcc62953d"
+          },
+          {
+            "bias": -1.125,
+            "shader": "63f1667f676c902fc4a3fb6cf8cf7e6621d959b31d3078fa2c991334cccbcfce",
+            "attachment": "f1a8f4d3593a6954d3bebeed892491d23fc41ae047e65c8f26d76ed46c1ae189"
+          },
+          {
+            "bias": -1.09375,
+            "shader": "19d8d7231e48da8c732e140ff9420f196cdbbe3d48cf85b5f07af9e97f2becec",
+            "attachment": "51ea3f2caf1e10da31d1269fe1359e2b477526a911dd4d6e876eadc8bbd92829"
+          },
+          {
+            "bias": -1.0625,
+            "shader": "250615e575275a4798f518efd97edb5d37df72c761ee41c749636497559a0982",
+            "attachment": "28ee993eb4002d08dddf5cbe7817b6cbd4aa7505590a9838c18a77e3229873ef"
+          },
+          {
+            "bias": -1.03125,
+            "shader": "261653f907804c9f7e73435e8f29f886e53e2e5c023147da6b10b915b277d322",
+            "attachment": "1407f4fe1a64e25524340a9995f49c6d690e687ce9c845ee313d7c2bb4aa60e4"
+          },
+          {
+            "bias": -1.0,
+            "shader": "c9de6d856b7852e8b56e13c97e242d0249c04756cb715bb7a9922b3d313b7510",
+            "attachment": "132c5e6359e25b854ca2f5fb385453d6e004fd2479f8537a7327e5f9e034c087"
+          },
+          {
+            "bias": -0.96875,
+            "shader": "9dc2434237cee7fd8862360e0b24fcd63f7724d055bd8bb62876d62b63dccf28",
+            "attachment": "de8bc591b36036d293bf764ac03bc0830a0cee74586da08eba265f2187db31b3"
+          },
+          {
+            "bias": -0.9375,
+            "shader": "9f9af17388878cf99dde68f06161c282f1303217e1d24ab271f575707b48497e",
+            "attachment": "21bd5f1983dd1cc15a79c29b044add96decbb377210bf9d42c90875c764328ad"
+          },
+          {
+            "bias": -0.90625,
+            "shader": "6789332a5b88e4fd47ed45f664741c07acd7e10714fad375c14710b898c40d1f",
+            "attachment": "e04892e0633a0cbbed17b2a1a8ce55eefbbd178f2bdd03885ec613c9155b6577"
+          },
+          {
+            "bias": -0.875,
+            "shader": "11a3372d7bc0a0089c99b3d879ceb873fb733354a7fcc401dc91cfbbe3446fae",
+            "attachment": "7918ad26a0dd5eff0784859abbe25c7220b3058199f3835a1284f60cce121578"
+          },
+          {
+            "bias": -0.84375,
+            "shader": "2c5d0ac45ca214e0fa15e87c4024a2a892a37b0de85e22a33cc25260b03e5117",
+            "attachment": "ac8fc190adb29648e92bddc7e9a3d5a36bc5a71730f79183f72e6eafb7a236da"
+          },
+          {
+            "bias": -0.8125,
+            "shader": "9d8466903cf2179c923433dcd2e34bd9268ecaf9fd976b056f7991cf8e9c896c",
+            "attachment": "d01f78274f78eff827b613bbd41bcdf953582fb359db6fcd6fcd822888a779cb"
+          },
+          {
+            "bias": -0.78125,
+            "shader": "190dfff25e5a4a19904a0fad5e2219ea9d57e7da1d2fbbd10f570b0b747a22d9",
+            "attachment": "7b37acb4e74e926c936a19d4744c2af7a58eea2913cfe198e26c3cc8d23f14c8"
+          },
+          {
+            "bias": -0.75,
+            "shader": "db7cc2743b5723f6b0d7eff388b1d5316ee2de83b90e5e4a9a2406e46443c982",
+            "attachment": "3e4bec4447ed9b1afece4670cfba187a7bf806c302046c90062b2b0a75ea8cc1"
+          },
+          {
+            "bias": -0.71875,
+            "shader": "fabdf14b89168bd8ebf76a035c4816038fc8b15247fe1de961b061a911085881",
+            "attachment": "78507421ed4a2b1273fe4a81361602de11472a35134720620c6fc1898eb3f78a"
+          },
+          {
+            "bias": -0.6875,
+            "shader": "aa080657fd61a3c0d4ad36143aa3af3923f910ae6b4d1f6886cc288a537b1b63",
+            "attachment": "a598129ba4be69780e5866c05b5ed2793215facf74556700d5e26f1d8ea9e5ae"
+          },
+          {
+            "bias": -0.65625,
+            "shader": "bee5cec1995288140b59cf5eb99089ac1475aed718d3618fb3172ed0af20aaa2",
+            "attachment": "76f67e210798a5d2e67fd773389ea7e9a057f5c8db91b1599fee0963bdac42ef"
+          },
+          {
+            "bias": -0.625,
+            "shader": "a6f40a04544a43f3b4603e843f70c0f84485883d77da5250ea2f48b8aa71e302",
+            "attachment": "504aec0072b00f678dd4b2bb8c8f34fad7e6634094bff807d511b189ec46976b"
+          },
+          {
+            "bias": -0.59375,
+            "shader": "025c2da70adadee135be608068a81d92d1b6614281ff6c54fa01394de43ccd65",
+            "attachment": "0c34a22efae633e8780c99dd12e64b4dee35f6ebc3c63a33daa55d0e249f597e"
+          },
+          {
+            "bias": -0.5625,
+            "shader": "a16eb17f027851523083f7aed5facd1afcb45d7e792a54cd8528a1c965149dbc",
+            "attachment": "9e2e18a97e1934501434400aeb0c021ab4010775740e6f7532beeaac0a8fe3de"
+          },
+          {
+            "bias": -0.53125,
+            "shader": "e7ef991a1c7200e41c2962e37c5684507025a8e30863acd7065f2a82ce29e418",
+            "attachment": "ea3507878cc5444038f1ddebc72f150580a68a5e58f018c453e13822b863b7a1"
+          },
+          {
+            "bias": -0.5,
+            "shader": "fca69f0a010ae2971cad30b1ad253118b6feaa096355fb62a5988f86c14a4c82",
+            "attachment": "c0475b984fa79081e2b7029c40d5efb77849202b18b7c59270e8d602b8c9fa04"
+          },
+          {
+            "bias": -0.46875,
+            "shader": "c9ea6ccf9298e6708c683368005f162daa78d520f003b751705b22202bef70f5",
+            "attachment": "8ae31a238cb113d81229d0cd353f97c62f3b26750351689d3e2dc1c90dff3d30"
+          },
+          {
+            "bias": -0.4375,
+            "shader": "08d63fcf0751945393d9c56ca47b799419f5293563291c02aa356d71f95f8c9f",
+            "attachment": "8fa42712eca8d20772116db6e8f7a47f9c0fc29d132ce86be2cb8abccc2b0e2d"
+          },
+          {
+            "bias": -0.40625,
+            "shader": "e7d742b1451efccbba3d33f3ad39179b83e026cf17eaab7d0e275af0f6e8a7d2",
+            "attachment": "96adcbe33470797ab81f4169c9cc3c2b66bfe953b4b900305021d47669be28ce"
+          },
+          {
+            "bias": -0.375,
+            "shader": "754024342d0a4de9be6efe0e6da7a72c5d81015510bf76227c3310f85e202001",
+            "attachment": "e1e1808f4bfa2b4209887039cb9401c59a6b14f46f0747c3a604bbb25e8dd4d2"
+          },
+          {
+            "bias": -0.34375,
+            "shader": "941f78338726453793ab36d0d79f6914c841aa3aa83c973a9222abe1440feafb",
+            "attachment": "6aa7ddf144b65f69837bd9f02680d81e889eb5cb230d70ee61f15c885d8af9f5"
+          },
+          {
+            "bias": -0.3125,
+            "shader": "bbf2497a22adb61c99bcee757ff66ee821ca6ddbf981d00eacc88d4ed5f9cbe7",
+            "attachment": "abf96b9d05ae9502fe4c842daf759f10e8798816af383d9f32b95914a6d8a83d"
+          },
+          {
+            "bias": -0.28125,
+            "shader": "ed39bfbe6bd6ba54a7aaea7af3a01c05864a5fa0fe32ac40c2fb344e3398bfda",
+            "attachment": "402786fc4a0115d66aea5a2b463feb99a5b4d9243598e609aad765b0c02e0168"
+          },
+          {
+            "bias": -0.25,
+            "shader": "a4bbbdb59c9cbc0e7feae513dc8772d075d9c075997e906e24d2ab013058cf60",
+            "attachment": "91481e571942a9b5da111b8a7e7a75a9ca5a2f489401ebfd050ab63b923ff3f5"
+          }
+        ],
+        "messages": []
+      }
+    }
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 23.35999999998603,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-104825-native-hair-normal-mip-bias-883aba\\native-normal-bias.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-104825-native-hair-normal-mip-bias-883aba\\tmp"
+  },
+  "archive": {
+    "bytes": 4966505,
+    "sha256": "a12d0bf200f385f4b8260bf167b84121c7351e8f388d1f4d05ea1593f88ebce2",
+    "contents": {
+      "run/task-card.json": "17e04ed4dc619147cd8735c90634018f9bf120479b662df09d5fa38ea6e13b4c",
+      "run/native-normal-bias.py": "9e278eecefc03ead2d38d361b6cdac64644e75895d7428032f0a50ce3280bcba",
+      "run/native-normal-bias-worker.py": "6a5991a38b879863641c3bea18402aac67e1768eba00d2e95391e6c14e32c854",
+      "run/verify-patch.py": "f636760ae3b4a3ee1d47d6993283c628f9488bf25c93e93b6a24b2baf91c4252",
+      "run/queued-replay.py": "1d6bdb1d9377ea9667667404ca939aa3b6eceee4c9f8c744dc6ee11a06bda6b9",
+      "run/replay-execution.json": "f4e088e10c46d0037a0555612255df56149c0b337f4a4f043b76f0fc5c9ab507",
+      "run/package-evidence.py": "8cda6de56fe42e1fabaa844aa9dd80bb2e6cbbc52014b590fa94b387f5201ea3",
+      "run/native-normal-bias-comparison.json": "16368197b58e672d949f85a0b6ce344b94e4e4d86f59eaef50d98dfae739b51e",
+      "run/native-normal-bias/bias-replay.json": "ca68d30caee27f0a975cdc1b5c57d1ce203dab06ecb38ee97e1d9056c54f8363",
+      "run/native-normal-bias/command.json": "375398df62d7ff613b8eb7421fca4b73e0f9ed72fb73851f3f30d7dc95ce3bbf",
+      "run/native-normal-bias/intel-422-pixel.asm": "3a194d23ec1cc1a9b521fba92892ea7f423689729da91a4dfafcd64e39ba575a",
+      "run/native-normal-bias/intel-biased-normals.bin": "dfd28c5a059b0c2fa30a1669a151eade34971d4e8e90395c1949bc2a822cd2b1",
+      "run/native-normal-bias/intel-inferred-lod.bin": "beea6c544f0a4dd2a1d828c1cdbcaf053de9a0cdcc3aaaf107609aa7dc63be65",
+      "run/native-normal-bias/nvidia-422-pixel.asm": "3a194d23ec1cc1a9b521fba92892ea7f423689729da91a4dfafcd64e39ba575a",
+      "run/native-normal-bias/nvidia-biased-normals.bin": "0fecac8be4ee49da8b2f09c81e8c535ad7634dc7830dcbe5db5d193655710ccc",
+      "run/native-normal-bias/nvidia-inferred-lod.bin": "e8287d5f689a613355d33e8b418f3d4c4af1babe622737755c731ed2f4b1839d",
+      "run/native-normal-bias/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/native-normal-bias/request.json": "da7509c487e75191b70218b30478d0aa20e2eec399f691287553bafb2174a311"
+    }
+  }
+}

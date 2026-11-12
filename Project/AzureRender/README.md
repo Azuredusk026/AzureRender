@@ -886,3 +886,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [参考法线采样后重建](docs/acceptance/nr/reference-normal-sampled-rg.md)记录材质入口、参考附件及双设备回归。
 
 [眉部接收深度与法线来源](docs/acceptance/nr/eyebrow-receiver-producer.md)记录实际附件写入顺序和对应顶点。
+
+[原生头发法线纹理层级偏移](docs/acceptance/nr/native-hair-normal-mip-bias.md)记录双设备的层级边界与固定偏移对照。

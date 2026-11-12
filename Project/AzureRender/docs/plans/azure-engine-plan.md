@@ -1364,3 +1364,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [参考法线采样后重建](../acceptance/nr/reference-normal-sampled-rg.md)接入材质画像及两份参考片元程序。
 [眉部接收深度与法线来源](../acceptance/nr/eyebrow-receiver-producer.md)核对 496 个位置的实际绘制与附件。头发裁剪、纹理选级及图集输入继续按原门槛验收。
+
+[原生头发法线纹理层级偏移](../acceptance/nr/native-hair-normal-mip-bias.md)核对 49 档双设备原生选级，Intel 固定偏移的最小超差为 477 处。
