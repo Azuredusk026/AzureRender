@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261113-005205-nr-main-registered-regression-c82feb",
+      "name": "投影头发主线注册用例",
+      "sourceBase": "e972e76",
+      "evidence": "docs/acceptance/nr/projected-hair-viewport-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-13/projected-hair-registration/results.json"
+    },
+    {
       "path": "runs/20261113-032750-playable-release-30min-85dc35f-886a32",
       "name": "可玩包三十分钟长跑",
       "sourceBase": "85dc35f",

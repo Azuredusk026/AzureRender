@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "sourceBase": "e972e7667cc414cc09e177ba7368976771bdf23d",
+  "reuse": {
+    "release": {
+      "registered": 607,
+      "unchangedProducts": 1294,
+      "changedCommands": [
+        "AzureEngine.ProjectedHairGpu",
+        "AzureEngine.ProjectedHairSurfaceGpu"
+      ],
+      "inputChange": "CMakeLists.txt",
+      "newCmakeSha256": "1dd89079071cda3cf61c93b61fc4973da1c64a1b7df89390717045cb1d11d161",
+      "newProductReceiptSha256": "70a26944dd33f882b669c270a0441c271c109d83faa6e2d0a056806ef58d4891"
+    },
+    "debug": {
+      "registered": 605,
+      "unchangedProducts": 1287,
+      "changedCommands": [],
+      "inputChange": "CMakeLists.txt",
+      "newCmakeSha256": "1dd89079071cda3cf61c93b61fc4973da1c64a1b7df89390717045cb1d11d161",
+      "newProductReceiptSha256": "4a99d551360f16b48c84e30cea5436c2e8e5e24bc643ce5e0c80c69496b5d830"
+    }
+  },
+  "reports": {
+    "release-hair-registration-gpu": {
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 107.26599999994505,
+      "tests": 2,
+      "selectedTests": 2,
+      "automaticFixtureTests": [],
+      "failed": [],
+      "skipped": []
+    },
+    "release-hair-registration-source": {
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 39.75,
+      "tests": 4,
+      "selectedTests": 4,
+      "automaticFixtureTests": [],
+      "failed": [],
+      "skipped": []
+    },
+    "debug-hair-registration-gpu": {
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 242.73399999993853,
+      "tests": 2,
+      "selectedTests": 2,
+      "automaticFixtureTests": [],
+      "failed": [],
+      "skipped": []
+    },
+    "debug-hair-registration-source": {
+      "status": "passed",
+      "exitCode": 0,
+      "seconds": 34.625,
+      "tests": 4,
+      "selectedTests": 4,
+      "automaticFixtureTests": [],
+      "failed": [],
+      "skipped": []
+    }
+  },
+  "archive": {
+    "members": 42,
+    "bytes": 697772,
+    "sha256": "f44e2f4584320c8cedbc306e52c255caf9edf04d0529d60b9cbb5da73820b056"
+  }
+}

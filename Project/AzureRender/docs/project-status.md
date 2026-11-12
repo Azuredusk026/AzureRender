@@ -2,6 +2,7 @@
 
 [三纹理采样与视口选择集成](acceptance/nr/projected-hair-viewport-integration.md)通过两种配置的视口选择、可玩编辑、双显卡和原始四帧回归。
 完整参考接收超差为 NVIDIA 237 处和 Intel 494 处。
+[投影头发主线注册用例](acceptance/nr/projected-hair-viewport-integration.md#主线注册用例)通过两种配置的 GPU 与构建契约检查。
 
 [主线联合场景短测](acceptance/nr/performance-bottlenecks.md#主线联合场景短测)完成标准程序的成本定位。
 主颜色与不透明快照占 GPU 帧平均耗时的 72.2%。

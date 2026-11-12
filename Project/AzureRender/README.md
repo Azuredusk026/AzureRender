@@ -1,6 +1,7 @@
 # AzureRender 工程
 
 [三纹理采样与视口选择集成](docs/acceptance/nr/projected-hair-viewport-integration.md)通过两种配置及双显卡参考附件核对。
+主线投影头发和表面响应的注册用例通过 Debug 与 Release 复测。
 
 [主线联合场景短测](docs/acceptance/nr/performance-bottlenecks.md#主线联合场景短测)记录帧耗时、渲染通道及显存峰值。
 

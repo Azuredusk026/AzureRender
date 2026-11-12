@@ -29,3 +29,12 @@ Debug 可玩编辑流程的归档包含一次 240 秒超时和同一门槛下的
 
 [结果清单](evidence/2026-11-12/projected-hair-viewport-integration/results.json)和
 [验证归档](evidence/2026-11-12/projected-hair-viewport-integration/validation.zip)保存验收依据。
+
+## 主线注册用例
+
+投影头发和表面响应的注册命令均接收 Player 路径。Debug 命令同时传入 `--require-validation`。
+两种配置分别通过两项实际 GPU 用例和四项构建契约检查。
+核对了 Release 1294 份和 Debug 1287 份产物的摘要，原有通过结果继续按产物和命令登记。
+
+[结果清单](evidence/2026-11-13/projected-hair-registration/results.json)和
+[验证归档](evidence/2026-11-13/projected-hair-registration/validation.zip)保存生成命令、产物摘要及测试记录。
