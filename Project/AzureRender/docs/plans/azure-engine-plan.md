@@ -1359,4 +1359,6 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [服饰接收法线层级](../acceptance/nr/cloth-receiver-authored-mips.md)核对现有采样器读取原生十二级的实际结果。
 
 [服饰接收法线采样](../acceptance/nr/cloth-receiver-native-sampler.md)核对重复寻址、最近邻层级及偏移。
-服饰一的绿色通道方向及采样后法线重建继续验收。
+
+[服饰接收法线绿色方向](../acceptance/nr/cloth-receiver-normal-y.md)核对切线空间方向。
+服饰一的采样后法线重建、参考深度及图集输入继续按原门槛验收。
