@@ -762,6 +762,13 @@
       "sourceBase": "953648e",
       "evidence": "docs/acceptance/nr/null-rhi-camera-regression.md",
       "results": "docs/acceptance/nr/evidence/2026-11-12/null-rhi-camera-regression/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/shadow-row-interval-evidence",
+      "name": "阴影圆盘行范围成本",
+      "sourceBase": "a6b1bb6",
+      "evidence": "docs/acceptance/nr/shadow-disk-row-interval.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/shadow-disk-row-interval/results.json"
     }
   ],
   "preservedBuilds": [

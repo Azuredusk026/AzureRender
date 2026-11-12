@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "status": "measured-local-rejected",
+  "sourceCommit": "a6b1bb6e5d1a9bd79b56d039d3a263c3d1439e06",
+  "replaySourceBase": "88d84fb",
+  "captureSha256": "35077c571bcb70bc99688bfb97eec1b291bd6567df7482746fd3f5db49f339b3",
+  "events": 3453,
+  "materialEvents": 1006,
+  "exactAttachments": 6,
+  "verifiedProgramPairs": 10,
+  "geometry": {
+    "status": "geometry-preflight",
+    "sourceArchiveSha256": "f8eddf82cc437eb50178c68145ef60a273cbd4fed67747d16d7d8a25a6a91717",
+    "capturedWorkShapes": 48,
+    "fixturePixels": 921600,
+    "activeFixturePixels": 136908,
+    "originalCalls": 11917189,
+    "retainedCalls": 7685013,
+    "removedCalls": 4232176,
+    "removedFraction": 0.35513207015513476,
+    "testedFloat32Shapes": 131072,
+    "testedFloat32Groups": 20893319,
+    "omittedPositiveGroups": 0,
+    "margin": 0.001,
+    "mapping": "Same x parity and ascending accumulation order; only zero-weight groups may be skipped."
+  },
+  "referenceMaterialMs": 7.801088000000023,
+  "candidateMaterialMs": 7.716592000000018,
+  "referenceTotalEventMs": 11.360783999999992,
+  "candidateTotalEventMs": 11.26431999999998,
+  "materialShare": 0.6866681031872474,
+  "materialSavings": 0.010831309683983159,
+  "baselineDrift": 0.008253207757687961,
+  "minimumMaterialShare": 0.25,
+  "minimumMaterialSavings": 0.2,
+  "maximumBaselineDrift": 0.05,
+  "productionChanged": false,
+  "replaySeconds": 84.21899999998277,
+  "timings": [
+    {
+      "role": "qualified",
+      "totalMs": 11.346943999999993,
+      "scopeMs": {
+        "classSpecialized": 2.3582399999999994,
+        "materials": 7.76889600000002,
+        "main": 5.613376,
+        "ordinaryMain": 2.9172160000000003,
+        "snapshot": 2.155519999999999
+      }
+    },
+    {
+      "role": "candidate",
+      "totalMs": 11.23203199999998,
+      "scopeMs": {
+        "classSpecialized": 2.3761279999999987,
+        "materials": 7.681056000000018,
+        "main": 5.537824,
+        "ordinaryMain": 2.8432319999999978,
+        "snapshot": 2.1432319999999994
+      }
+    },
+    {
+      "role": "candidate",
+      "totalMs": 11.29660799999998,
+      "scopeMs": {
+        "classSpecialized": 2.365024,
+        "materials": 7.7521280000000194,
+        "main": 5.606847999999994,
+        "ordinaryMain": 2.878304,
+        "snapshot": 2.14528
+      }
+    },
+    {
+      "role": "qualified",
+      "totalMs": 11.374623999999988,
+      "scopeMs": {
+        "classSpecialized": 2.3721279999999996,
+        "materials": 7.833280000000027,
+        "main": 5.650111999999996,
+        "ordinaryMain": 2.938015999999996,
+        "snapshot": 2.183167999999999
+      }
+    }
+  ],
+  "environmentSha256": {
+    "startup-environment.json": "597c3384c651cd19c42f6b17eadb575c2b9b731028e63e48214097396a2f945e",
+    "run-environment.json": "f3e10e0fb19ce142d3d11cd6918d52f50a2ca49e92cc61f5cdac37d9de674109"
+  },
+  "archive": {
+    "status": "passed",
+    "archive": "docs/acceptance/nr/evidence/2026-11-12/shadow-disk-row-interval/validation.zip",
+    "files": 17,
+    "logicalBytes": 1608884,
+    "archiveBytes": 181867,
+    "sha256": "02dc2c401c99c47e079865e942b7299adab56ce8ec0b93bc10a19335eebec337",
+    "removedSource": false,
+    "sourceCommit": "a6b1bb6e5d1a9bd79b56d039d3a263c3d1439e06"
+  }
+}

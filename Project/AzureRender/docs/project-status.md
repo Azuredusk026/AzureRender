@@ -5,6 +5,8 @@
 
 [材质组合级联成本](acceptance/nr/computed-cascade-demand-comparison.md)的六份附件逐字节一致，局部耗时降幅低于准入门槛。
 
+[阴影圆盘行范围成本](acceptance/nr/shadow-disk-row-interval.md)通过六附件核对，材质耗时减少约 1.08%。
+
 [参考相机渲染主线](acceptance/nr/reference-camera-binding-main-integration.md)通过保守剔除、实际光栅及拾取检查。
 双配置、双设备与重采原始四帧通过。
 

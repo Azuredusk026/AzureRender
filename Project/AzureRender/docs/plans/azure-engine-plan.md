@@ -44,6 +44,7 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 完整项目回归按两种配置执行。
 
 [材质组合级联成本](../acceptance/nr/computed-cascade-demand-comparison.md)通过六附件核对，局部耗时降幅低于准入门槛。
+[阴影圆盘行范围成本](../acceptance/nr/shadow-disk-row-interval.md)通过六附件核对，实际材质耗时减少约 1.08%。
 
 [椭圆覆盖选级主线验收](../acceptance/nr/material-ellipse-coverage-main-integration.md)通过二十二项自动检查、双设备头发采集及原始四帧。
 

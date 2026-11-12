@@ -32,6 +32,9 @@ GPU 继续区分着色、缓存、显存带宽和传输。
 [材质组合级联成本](../acceptance/nr/computed-cascade-demand-comparison.md)在已合格的组合路径中测得约 0.34% 的材质耗时降幅。
 同批参考漂移约为 0.53%，候选保留在局部证据范围。
 
+[阴影圆盘行范围成本](../acceptance/nr/shadow-disk-row-interval.md)在代表输入中跳过约 35.51% 的循环组。
+实际材质事件耗时减少约 1.08%，候选保留在隔离验证范围。
+
 [驻留色彩图像](../acceptance/nr/resident-srgb-channel-scope.md)完成 180 份图像的全部层级核对。
 四十份满足单通道关系，乐观差额约为 113.70 MB。
 [块存储调查](../acceptance/nr/dds-block-storage-scope.md)记录来源容量及设备格式能力。
