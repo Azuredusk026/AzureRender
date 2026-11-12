@@ -1372,3 +1372,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [参考深度模板覆盖](../acceptance/nr/reference-depth-stencil-coverage.md)接入保护位及场景扩展 API 17。完整接收超差为 NVIDIA 410 处和 Intel 742 处，眉部各 30 处。
 
 [参考几何法线](../acceptance/nr/reference-geometric-normal.md)核对眉部和脸部的原生几何法线。完整接收超差为 NVIDIA 284 处和 Intel 632 处，新增位置纳入同一验收范围。
+
+[参考接收输入对照](../acceptance/nr/reference-receiver-source-isolation.md)在双设备逐字节复现完整可见量附件。原生深度和法线联合替换时，接收超差为 NVIDIA 10 处和 Intel 6 处，Intel 冻结头发可见量进入门槛。实际场景画质状态为 `failed-user-review`。

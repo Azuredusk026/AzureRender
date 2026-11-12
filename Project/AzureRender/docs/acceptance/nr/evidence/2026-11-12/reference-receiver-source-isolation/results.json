@@ -1,0 +1,533 @@
+{
+  "status": "qualified",
+  "rawSourceProgramSha256": "12a5568b8c5bce3b980f3aeb3edefa956a6ca7e67f248bd756ae593e2e16d5e0",
+  "parametersSha256": "4975464726f6c181e2ceb126e4e75f6b38309c958c6ba1ed1aaac516d2852fd9",
+  "atlasSha256": {
+    "nvidia": "df174554896d0969532f372427354f38efb7b6ce7e7e57d1902e674d0d3ab7da",
+    "intel": "379c0962dd7b4cd89aee2d1c03843ba2b1ff96c0dd7825dc82d683fb6edf232c"
+  },
+  "devices": {
+    "nvidia": {
+      "actualSha256": "de828206a8d8f1a1a245cb970712bf78b44c8de2be51c9672db19360ec6df170",
+      "cases": {
+        "cached-nvidia-atlas": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "de828206a8d8f1a1a245cb970712bf78b44c8de2be51c9672db19360ec6df170",
+          "actualFullAttachmentExact": true,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 284,
+            "maximum": 44,
+            "closed": 0,
+            "introduced": 0,
+            "geometricIntroducedStillOverOne": 10
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "cached-intel-atlas": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "1fad648951363e8ac712baa0f431740326adce3312eddaab6dddb351889aac87",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 281,
+            "maximum": 44,
+            "closed": 5,
+            "introduced": 2,
+            "geometricIntroducedStillOverOne": 10
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-atlas": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "14922bba34447b0bf5b7111afaf62bb43df1a78fb72763dc058d126bd1bf1d32",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 278,
+            "maximum": 44,
+            "closed": 8,
+            "introduced": 2,
+            "geometricIntroducedStillOverOne": 9
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-normals": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "1b1cd6516ff328b50cddf44fd9523a10877a3f1689a571ea25ec4f59883e1e6d",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 134,
+            "maximum": 44,
+            "closed": 164,
+            "introduced": 14,
+            "geometricIntroducedStillOverOne": 8
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-normals-atlas": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "7c82381ed8f3513b1f89b21fb9a3a1a3118530144356c98da1480921f4373712",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 123,
+            "maximum": 44,
+            "closed": 174,
+            "introduced": 13,
+            "geometricIntroducedStillOverOne": 7
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 0,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-depth": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "65be6f8b28f65a40f0a26404b405551249ded958720882951266370f3a6156dc",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 193,
+            "maximum": 27,
+            "closed": 100,
+            "introduced": 9,
+            "geometricIntroducedStillOverOne": 3
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-depth-atlas": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "9f5a08f15f3d08f90950d6f8f6b3ff891ac920f5d5ddfd2394299f7dc0be4dc3",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 189,
+            "maximum": 27,
+            "closed": 106,
+            "introduced": 11,
+            "geometricIntroducedStillOverOne": 2
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-depth-normals": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "84b319de13004b436abf9c4bbae7dfa5f7f59463e0491b6df4252d7ab67201e3",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 10,
+            "maximum": 20,
+            "closed": 275,
+            "introduced": 1,
+            "geometricIntroducedStillOverOne": 1
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-depth-normals-atlas": {
+          "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "validationErrors": 0,
+          "vendor": 4318,
+          "zeroAllocator": true,
+          "outputSha256": "ed6b1149357db8d07e9fd5fd247d372890e31f50303879f4e1f8607ac8e8b76e",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 0,
+            "maximum": 0,
+            "closed": 284,
+            "introduced": 0,
+            "geometricIntroducedStillOverOne": 0
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 0,
+            "closed": 0,
+            "introduced": 0
+          }
+        }
+      },
+      "reproducingAtlasSources": [
+        "nvidia"
+      ],
+      "selectedAtlas": "nvidia"
+    },
+    "intel": {
+      "actualSha256": "cdc36c32e1e0e409f9d57354a08aafda95269630eb02fdf1bb3a9f12a809df59",
+      "cases": {
+        "cached-intel-atlas": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "cdc36c32e1e0e409f9d57354a08aafda95269630eb02fdf1bb3a9f12a809df59",
+          "actualFullAttachmentExact": true,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 632,
+            "maximum": 201,
+            "closed": 0,
+            "introduced": 0,
+            "geometricIntroducedStillOverOne": 21
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 208,
+            "maximum": 51,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "cached-nvidia-atlas": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "5b03f064a1ec59a2374d08d74266ad4659016ba6743515a1219540a15cb5d581",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 635,
+            "maximum": 201,
+            "closed": 2,
+            "introduced": 5,
+            "geometricIntroducedStillOverOne": 21
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 208,
+            "maximum": 51,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-atlas": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "ca84e238e1ee46c7d0e6e5b558b48b4893c8b0dd77e6d313f47092cbbbe86e46",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 631,
+            "maximum": 201,
+            "closed": 1,
+            "introduced": 0,
+            "geometricIntroducedStillOverOne": 21
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 208,
+            "maximum": 51,
+            "closed": 0,
+            "introduced": 0
+          }
+        },
+        "native-normals": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "93ba7e8e01895231a09bb847b2ee38d1cb8e07bdb0d2e98cef206999c86258a2",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 310,
+            "maximum": 32,
+            "closed": 353,
+            "introduced": 31,
+            "geometricIntroducedStillOverOne": 20
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 96,
+            "maximum": 25,
+            "closed": 116,
+            "introduced": 4
+          }
+        },
+        "native-normals-atlas": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "26a76d8cee5f743ea70523ee18c2fab2c6521a9e6b7a3db5c9d30e960d13123e",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 306,
+            "maximum": 32,
+            "closed": 356,
+            "introduced": 30,
+            "geometricIntroducedStillOverOne": 20
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 96,
+            "maximum": 25,
+            "closed": 116,
+            "introduced": 4
+          }
+        },
+        "native-depth": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "4d6497ef3673c3ce65429e4e0c3e2d7c23c30e729c79e17a731172414c87bcaa",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 395,
+            "maximum": 169,
+            "closed": 269,
+            "introduced": 32,
+            "geometricIntroducedStillOverOne": 1
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 130,
+            "maximum": 51,
+            "closed": 84,
+            "introduced": 6
+          }
+        },
+        "native-depth-atlas": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "f27877a8fa64b9b7676324a43ac367c4cc052e766e5df6e1d4ee20087da72c54",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 393,
+            "maximum": 169,
+            "closed": 270,
+            "introduced": 31,
+            "geometricIntroducedStillOverOne": 1
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 130,
+            "maximum": 51,
+            "closed": 84,
+            "introduced": 6
+          }
+        },
+        "native-depth-normals": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "294bb7731d2f6cf88444951c4e40d0dd9a8677cba2764038117d5415708d9e9e",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 6,
+            "maximum": 13,
+            "closed": 628,
+            "introduced": 2,
+            "geometricIntroducedStillOverOne": 0
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 208,
+            "introduced": 0
+          }
+        },
+        "native-depth-normals-atlas": {
+          "device": "Intel(R) RaptorLake-S Mobile Graphics Controller",
+          "validationErrors": 0,
+          "vendor": 32902,
+          "zeroAllocator": true,
+          "outputSha256": "f49aed38731ee3c2246f9ac2f6d0ef8cbda6a89f7d5af57a399301270cd181cd",
+          "actualFullAttachmentExact": false,
+          "receiver": {
+            "samples": 49384,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 632,
+            "introduced": 0,
+            "geometricIntroducedStillOverOne": 0
+          },
+          "hair": {
+            "samples": 17017,
+            "overOne": 0,
+            "maximum": 1,
+            "closed": 208,
+            "introduced": 0
+          }
+        }
+      },
+      "reproducingAtlasSources": [
+        "intel"
+      ],
+      "selectedAtlas": "intel"
+    }
+  },
+  "overallStatus": "failed-user-review",
+  "scope": {
+    "local": "external-input-50845e90000a44e18b89bdf10cf5e40e",
+    "main": "external-input-739e231bf87144ceb6945eb574e14c2f",
+    "sourceBase": "c1601a271a47ced3c357ba2920f4b2590b390f36",
+    "plannedBytes": 67108864,
+    "localInputs": [
+      "20261112-010418-scene-reference-object-visibility-709f68",
+      "20261112-013522-scene-visibility-atlas-source-33c6c3",
+      "20261111-232828-scene-reference-normal-60ddfa",
+      "20261110-030251-hair-main-chroma-public-9e799c",
+      "20261110-031856-hair-main-chroma-debug-668bf2",
+      "20261110-003435-visibility-numeric-contract-4f95e7",
+      "20261110-003031-reciprocal-compact-profile-4e7929",
+      "20261110-112309-hair-relative-projection-control-b9da17",
+      "20261111-213928-scene-reference-depth-728062",
+      "20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "20261112-025941-visibility-projection-depth-c1c792",
+      "20261112-032619-native-object-record-calibration-19d2f9",
+      "20261112-033450-native-object-record-source-capture-071c26",
+      "20261112-040725-reference-object-shadow-raster-2c9e58",
+      "20261112-041837-reference-object-shadow-raster-capture-60f161",
+      "20261112-044926-material-reference-object-visibility-344def",
+      "20261112-053111-intel-reference-visibility-sources-5238e2",
+      "20261112-061922-project-reference-visibility-profile-47902e",
+      "20261112-072016-native-receiver-producer-replay-523058",
+      "20261112-073905-reference-scene-outline-depth-d97cff",
+      "20261112-083618-native-cloth-receiver-normal-input-a94a9c",
+      "20261112-084230-cloth-receiver-authored-mips-a73d87",
+      "20261112-090101-cloth-receiver-native-sampler-e301d1",
+      "20261112-091515-cloth-receiver-normal-y-29da47",
+      "20261112-093321-reference-normal-sampled-rg-ceb2c6",
+      "20261112-103417-eyebrow-receiver-producer-1f8f43",
+      "20261112-104825-native-hair-normal-mip-bias-883aba",
+      "20261112-105542-native-eyebrow-hair-stencil-8ad501",
+      "20261112-110307-reference-depth-stencil-coverage-198047",
+      "20261112-114419-reference-geometric-normal-3e57b5"
+    ],
+    "mainInputs": [
+      "20261103-234012-character-reference-stages-5abe6c",
+      "20261022-201845-endfield-capture-954719",
+      "20261027-022702-object-visibility-depth-reconstruction-c7312f"
+    ],
+    "change": "Actual fixed-input ProfileV1 source isolation for 49384 receiver positions",
+    "gate": "Reference attachments and original four exact; one-byte receivers and hair unchanged"
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 8.40700000000652,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-133809-reference-receiver-source-isolation-6cdff0\\source-isolation.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-133809-reference-receiver-source-isolation-6cdff0\\tmp"
+  },
+  "originalLaunch": {
+    "status": "exited",
+    "exitCode": 1,
+    "reason": null,
+    "seconds": 4.25,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-133809-reference-receiver-source-isolation-6cdff0\\source-isolation.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-133809-reference-receiver-source-isolation-6cdff0\\tmp"
+  },
+  "resourceRelease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-reference-receiver-source-isolation",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-133809-reference-receiver-source-isolation-6cdff0",
+    "pid": 36300,
+    "token": "2d735a0edea9453b8a56106e7f95ee61",
+    "started": 1794462663.5196466,
+    "state": "released",
+    "ended": 1794462671.9472184
+  },
+  "archive": {
+    "sha256": "6fa75599558fc6cb0ea3e2ea29b760559103a0dab8cf1f486bc085612574328c",
+    "bytes": 813977,
+    "members": 94
+  }
+}
