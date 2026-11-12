@@ -128,3 +128,35 @@ void CharacterSceneRenderer::createReferenceDepthPipelines(rhi::GraphicsPipeline
     if(visibilityVertex)rhi_->destroyShaderModule(visibilityVertex);
     rhi_->destroyShaderModule(fragment);
 }
+
+void CharacterSceneRenderer::createReferenceOutlineDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context){
+    const std::string binding=bindlessTextures_?"_bindless":"";
+    const std::string skinning=computeSkinningEnabled_?"_compute":"";
+    VkShaderModule vertex=VK_NULL_HANDLE,fragment=VK_NULL_HANDLE;
+    try{
+        vertex=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/reference_scene_outline_depth"+skinning+binding+".vert.spv"));
+        fragment=rhi_->createShaderModule(readBinaryFile(shaderDirectory_+"/reference_scene_depth"+binding+".frag.spv"));
+        desc.vertexShader=vertex;
+        desc.fragmentShader=fragment;
+        desc.renderPass=referenceSceneDepth_->renderPass();
+        desc.colorAttachmentCount=referenceSceneDepth_->visibilityInputs()?3:1;
+        desc.colorWriteMasks.assign(desc.colorAttachmentCount,0);
+        desc.colorWriteMasks[0]=VK_COLOR_COMPONENT_R_BIT;
+        desc.rasterizationSamples=VK_SAMPLE_COUNT_1_BIT;
+        desc.minSampleShading=0;
+        desc.depthTest=true;
+        desc.depthWrite=true;
+        desc.depthCompare=VK_COMPARE_OP_GREATER;
+        desc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_FRONT_BIT:VK_CULL_MODE_NONE;
+        for(unsigned facing=0;facing<referenceSceneOutlineDepthPipelines_.size();++facing){
+            desc.frontFace=facing?VK_FRONT_FACE_COUNTER_CLOCKWISE:VK_FRONT_FACE_CLOCKWISE;
+            referenceSceneOutlineDepthPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+        }
+    }catch(...){
+        if(fragment)rhi_->destroyShaderModule(fragment);
+        if(vertex)rhi_->destroyShaderModule(vertex);
+        throw;
+    }
+    rhi_->destroyShaderModule(fragment);
+    rhi_->destroyShaderModule(vertex);
+}

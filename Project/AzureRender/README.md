@@ -871,3 +871,6 @@ Intel 颜色及完整接收按冻结区域继续验收。
 Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `ProfileV1` 对照。
 
 [原生接收输入来源](docs/acceptance/nr/native-receiver-producer-replay.md)核对服饰法线和头发外扩深度。
+
+[参考场景外扩深度](docs/acceptance/nr/reference-scene-outline-depth.md)记录反向深度写入与双设备验收。
+完整接收可见量和 Intel 头发颜色继续按冻结区域验收。

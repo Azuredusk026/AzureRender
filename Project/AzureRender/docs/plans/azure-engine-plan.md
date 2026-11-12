@@ -1349,4 +1349,6 @@ Intel 的 580 处颜色超差继续按设备输入核对。
 Intel 头发颜色继续按冻结区域核对纹理选级。
 
 [原生接收输入来源](../acceptance/nr/native-receiver-producer-replay.md)核对事件 377 的纹理与事件 440 的深度。
-参考场景先接入头发外扩深度，再核对服饰法线。
+
+[参考场景外扩深度](../acceptance/nr/reference-scene-outline-depth.md)接入材质外扩绘制。
+服饰法线、外扩投影系数与覆盖继续按原生来源核对。

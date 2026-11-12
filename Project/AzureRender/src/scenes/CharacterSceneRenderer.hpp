@@ -122,6 +122,7 @@ private:
     rhi::GpuImage referenceObjectIdFallback_{};
     VkImageView referenceObjectIdFallbackView_{};
     std::array<VkPipeline,3> referenceSceneDepthPipelines_{};
+    std::array<VkPipeline,2> referenceSceneOutlineDepthPipelines_{};
     std::array<VkPipeline,3> referenceSceneVisibilityPipelines_{};
     struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;bool objectVisibility;std::uint64_t submission;};
     std::optional<ReferenceDepthSubmission> pendingReferenceDepth_;
@@ -132,6 +133,7 @@ private:
     void writeReferenceMaterialVisibilityDescriptors(VkDescriptorSet,unsigned slot,bool active);
     void recordReferenceObjectVisibility(rhi::ICommandRecorder&,unsigned slot,const SceneInstanceSnapshot&);
     void createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context,bool visibilityInputs);
+    void createReferenceOutlineDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context);
     void destroyUvShaderModule(VkShaderModule);
     VkPipeline createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
     VkPipeline materialUvPipeline(const AssetMaterial&,VkPipeline) const;
@@ -313,8 +315,10 @@ private:
     enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill,RadianceValidation,ReferenceDepth};
     void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
+    enum class OutlineShellPass {Color,SnapshotDepth,ReferenceDepth};
     void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
-        rhi::ICommandRecorder& commands,bool depthShell,SceneSubmissionCounters* counters=nullptr,
+        rhi::ICommandRecorder& commands,const std::vector<std::array<std::uint32_t,3>>& spans,OutlineShellPass pass,
+        SceneSubmissionCounters* counters=nullptr,
         std::optional<std::size_t> spanIndex=std::nullopt);
     struct MaterialPushConstants {
         float alphaCutoff = 0.5F;

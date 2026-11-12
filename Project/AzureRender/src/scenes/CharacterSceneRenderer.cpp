@@ -3130,6 +3130,10 @@ void CharacterSceneRenderer::destroyOverlayDepth(){
             if(pipeline)rhi_->destroyPipeline(pipeline);
             pipeline=VK_NULL_HANDLE;
         }
+    for(auto& pipeline:referenceSceneOutlineDepthPipelines_){
+        if(pipeline)rhi_->destroyPipeline(pipeline);
+        pipeline=VK_NULL_HANDLE;
+    }
     pendingReferenceDepth_.reset();
     submittedReferenceDepth_.reset();
     referenceObjectVisibility_.reset();
@@ -3285,7 +3289,7 @@ void CharacterSceneRenderer::recordOverlayDepth(const RenderContext& context,con
         recordDepthCoverage(context,snapshot,commands,DepthCoverageMode::SnapshotPrefill);
     recordDepthCoverage(context,snapshot,commands,colorRequired?DepthCoverageMode::SnapshotColor:DepthCoverageMode::SnapshotDepth);
     if(colorRequired)recordSurfaceOverlays(context,snapshot,commands,true);
-    if(depthShell&&!colorRequired)recordOutlineShells(context,snapshot,commands,true);
+    if(depthShell&&!colorRequired)recordOutlineShells(context,snapshot,commands,snapshot.visibleSpans,OutlineShellPass::SnapshotDepth);
 }
 
 void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
@@ -3398,8 +3402,9 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
         }
         // Finish this resource's depth footprint before a later resource can
         // contribute background colors or normals behind the expanded shell.
-        if(colorRequired)recordOutlineShells(context,snapshot,commands,true,counters,spanIndex);
+        if(colorRequired)recordOutlineShells(context,snapshot,commands,spans,OutlineShellPass::SnapshotDepth,counters,spanIndex);
     }
+    if(referenceDepth)recordOutlineShells(context,snapshot,commands,spans,OutlineShellPass::ReferenceDepth);
 }
 
 #include "CharacterOutlinePass.inc"
@@ -4165,6 +4170,7 @@ void CharacterSceneRenderer::createGraphicsPipeline(
         outlineMirroredPipeline_ = createMaterialUvGraphicsPipeline(outlineDesc);
         if(independentCoverageNeeded_&&outlineProjectionEnabled_)outlineCoveragePipelines_[1]=createCoverageGraphicsPipeline(outlineDesc,coverageOutlinePath);
         if(outlineProjectionEnabled_) {
+            if(referenceSceneDepth_)createReferenceOutlineDepthPipelines(outlineDesc,context);
             const auto depthModule=createUvShaderModule(mainFragmentPath(
                 (bindlessTextures_?"/outline_depth_bindless.frag.spv":"/outline_depth.frag.spv")));
             try {
@@ -5256,7 +5262,7 @@ void CharacterSceneRenderer::recordMainDraws(const RenderContext& context, std::
     }
     }
     if(stage==0||stage==2||stage==4)recordSurfaceOverlays(context,*snapshot,commands,false,counters);
-    if(stage==0||stage==1||stage==4)recordOutlineShells(context,*snapshot,commands,false,counters);
+    if(stage==0||stage==1||stage==4)recordOutlineShells(context,*snapshot,commands,snapshot->visibleSpans,OutlineShellPass::Color,counters);
     if((stage==0||stage==4)&&viewFog_){
         const auto descriptor=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount();
         viewFog_->record(commands,pipelineLayout_,descriptorSets_[descriptor],counters);
