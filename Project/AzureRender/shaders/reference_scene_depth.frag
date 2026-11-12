@@ -15,6 +15,7 @@ layout(push_constant) uniform Material {
     int alphaMode;
 #if defined(AZURE_REFERENCE_SCENE_VISIBILITY)
     layout(offset=64) vec4 normalControl;
+    layout(offset=80) float referenceNormalMipBias;
 #endif
     layout(offset=116) uint features;
     layout(offset=136) uint textureBase;
@@ -71,8 +72,20 @@ vec3 surfaceNormal(){
     }
     if(mode>0.0){
         // The authored snapshot normal follows the reference attachment's raster rows.
-        vec2 encoded=mode==2.0?texture(NORMAL_TEXTURE,textureCoordinate).rg:sampleSurfaceTexture(HAIR_DATA).rg;
-        if(mode==2.0)encoded.y=1.0-encoded.y;
+        bool materialNormal=mode==2.0||mode==5.0;
+        vec2 encoded;
+        if(mode==5.0){
+            vec2 size=vec2(textureSize(NORMAL_TEXTURE,0));
+            float lod=azureAxisDiagonalMipLod(azurePrimaryDx(textureCoordinate)*size,azurePrimaryDy(textureCoordinate)*size);
+            precise float biasedLod=lod+material.referenceNormalMipBias;
+            bool atBoundary=abs(fract(biasedLod)-0.5)<=1.0/256.0;
+            vec2 implicitNormal=texture(NORMAL_TEXTURE,textureCoordinate).rg;
+            vec2 explicitNormal=textureLod(NORMAL_TEXTURE,textureCoordinate,lod).rg;
+            encoded=mix(explicitNormal,implicitNormal,bvec2(atBoundary));
+        }else{
+            encoded=materialNormal?texture(NORMAL_TEXTURE,textureCoordinate).rg:sampleSurfaceTexture(HAIR_DATA).rg;
+        }
+        if(materialNormal)encoded.y=1.0-encoded.y;
         return characterProjectedHairNormal(encoded,material.normalControl.y,worldNormal,
             vec4(worldTangent.xyz,worldTangent.w*material.normalControl.z))*facing;
     }

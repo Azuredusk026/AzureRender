@@ -3381,6 +3381,12 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 float normalMode=hair.present?(hair.materialSnapshotNormal?2.F:1.F):0.F;
                 if (m.sampledReferenceNormal) normalMode = 3.F;
                 if (m.geometricReferenceNormal) normalMode = 4.F;
+                if (m.hairPointMipReferenceNormal) {
+                    normalMode = 5.F;
+                    const float maximumBias = context.descriptorLimits.maxSamplerLodBias;
+                    // The reference visibility shader consumes the first style lane as the sampler bias.
+                    material.styleParameters[0] = std::clamp(m.textureSettings[1].mipBias, -maximumBias, maximumBias);
+                }
                 material.hairParameters={normalMode,hair.surfaceNormalScale,hair.tangentSign,normalAxes};
             }
             commands.pushConstants(pipelineLayout_,VK_SHADER_STAGE_VERTEX_BIT|VK_SHADER_STAGE_FRAGMENT_BIT,0,&material,sizeof(material));

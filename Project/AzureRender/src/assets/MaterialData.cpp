@@ -229,7 +229,8 @@ void applyMaterialBindings(LoadedAsset& mesh,const std::map<std::string,Material
         lost(source.nprDiffuse.present&&!replacement.nprDiffuse.present,"nprDiffuse");
         lost(source.coverageTexture.present&&!replacement.coverageTexture.present,"coverageTexture");
         lost((source.sampledReferenceNormal && !replacement.sampledReferenceNormal)
-            || (source.geometricReferenceNormal && !replacement.geometricReferenceNormal), "referenceNormal");
+            || (source.geometricReferenceNormal && !replacement.geometricReferenceNormal)
+            || (source.hairPointMipReferenceNormal && !replacement.hairPointMipReferenceNormal), "referenceNormal");
         lost(source.referenceDepthStencil != AssetMaterial::ReferenceDepthStencil::Ordinary
             && source.referenceDepthStencil != replacement.referenceDepthStencil, "referenceDepthStencil");
         lost(source.projectedHairRamp.present&&!replacement.projectedHairRamp.present,"hair.projectedRamp");
