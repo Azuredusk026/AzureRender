@@ -1386,3 +1386,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [参考头发近邻层级](../acceptance/nr/reference-hair-mip-boundary.md)核对参考法线边界采样。NVIDIA 冻结头发可见量和 RGB 超差均为零，Intel 分别为 111 处和 568 处，整体画质仍按原门槛验收。
 
 [头发着色双法线采样](../acceptance/nr/reference-hair-color-source.md)核对原生纹理 t18 的单变量控制。Intel RGB 超差 449 处，参数纹理继续按同一冻结范围核对。
+
+[头发参数与双法线选层](../acceptance/nr/reference-hair-color-pair.md)核对冻结 RGB，Intel 联合控制有 393 处超差。基色选层按同一原生采样器继续核对。

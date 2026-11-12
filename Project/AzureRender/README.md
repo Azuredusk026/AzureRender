@@ -908,3 +908,5 @@ Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `Prof
 [参考头发近邻层级](docs/acceptance/nr/reference-hair-mip-boundary.md)记录参考法线的边界采样和双设备场景验收。
 
 [头发着色双法线采样](docs/acceptance/nr/reference-hair-color-source.md)记录固定着色程序的实际颜色和参考附件。
+
+[头发参数与双法线选层](docs/acceptance/nr/reference-hair-color-pair.md)记录着色纹理的独立和联合对照。
