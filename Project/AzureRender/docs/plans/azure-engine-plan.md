@@ -47,8 +47,8 @@ CPU 工作 P95 为 5.90 毫秒，GPU 帧 P95 为 20.33 毫秒。
 参考附件和原始四帧逐字节一致。
 
 [材质组合管线范围验收](../acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧及短时净收益。
-候选四帧加载的峰值工作集约为 2.047 GB。
-1080p60 联合场景诊断的 GPU P95 约为 18.04 毫秒，设备本地内存高水位约为 2.593 GiB。
+[主线材质候选采样](../acceptance/nr/material-viewquad-integration.md)完成 1080p60 连续 1800 帧诊断。
+CPU 工作 P95 为 5.62 毫秒，GPU P95 为 18.56 毫秒，设备本地内存峰值为 2.593 GiB。
 标准构建采用参考族。
 
 [材质视图回归矩阵](../acceptance/nr/material-view-regression-matrix.md)通过双配置三十六项检查。

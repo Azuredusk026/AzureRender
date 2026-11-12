@@ -57,6 +57,13 @@
   },
   "milestones": [
     {
+      "path": "runs/20261113-022822-nr-material-viewquad-main-integration-e65379",
+      "name": "主线材质候选采样",
+      "sourceBase": "01cc6b2",
+      "evidence": "docs/acceptance/nr/material-viewquad-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-13/material-viewquad-integration/results.json"
+    },
+    {
       "path": "runs/20261113-005205-nr-main-registered-regression-c82feb",
       "name": "可玩包关卡提交",
       "sourceBase": "fdeec10",

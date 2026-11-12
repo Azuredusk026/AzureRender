@@ -13,7 +13,7 @@
 [画质与性能集成验收](docs/acceptance/nr/quality-performance-integration.md)通过两种配置的构建、双显卡参考附件及原始四帧核对。
 
 [材质组合管线范围验收](docs/acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧、工作集和短时净收益检查。
-1080p60 联合场景诊断记录到约 2.593 GiB 的设备本地内存高水位，正式帧预算与功率条件继续验收。
+[主线材质候选采样](docs/acceptance/nr/material-viewquad-integration.md)记录 1800 帧的 GPU P95 为 18.56 毫秒，设备本地内存峰值约为 2.593 GiB。
 
 [参考相机渲染主线验收](docs/acceptance/nr/reference-camera-binding-main-integration.md)通过双配置 46 项检查及双设备采集。
 保守剔除、实际光栅、拾取与重采原始四帧通过。

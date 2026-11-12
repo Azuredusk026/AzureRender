@@ -19,7 +19,8 @@
 原始四帧逐字节一致，完整画质和正式性能继续验收。
 
 [材质组合管线范围](acceptance/nr/material-viewquad-pipeline-scope.md)通过工作集及短时成本检查。
-正式固定功率、长窗口 GPU 帧预算及完整交付继续验收。
+[主线材质候选采样](acceptance/nr/material-viewquad-integration.md)的 1800 帧 GPU P95 为 18.56 毫秒，设备本地内存峰值约为 2.593 GiB。
+两项均超出预算，正式采集须满足固定功率及热状态条件。
 
 [材质组合级联成本](acceptance/nr/computed-cascade-demand-comparison.md)的六份附件逐字节一致，局部耗时降幅低于准入门槛。
 

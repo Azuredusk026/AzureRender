@@ -19,6 +19,10 @@ GPU 继续区分着色、缓存、显存带宽和传输。
 实际通道时间用于安排材质着色优化。
 正式环境和长跑继续按所属门禁核验。
 
+[主线材质候选采样](../acceptance/nr/material-viewquad-integration.md)通过冻结四帧及短时收益门槛。
+完整 1800 帧的 CPU 工作 P95 为 5.62 毫秒，GPU P95 为 18.56 毫秒。
+GPU 帧时延和设备本地内存均超出预算。
+
 主线运行时来源为 `6721bde`。
 [参考相机视图集成](../acceptance/nr/reference-camera-view-main-integration.md)通过两配置二十项检查。
 八次设备检查、实际射线及重采原始四帧均通过。
