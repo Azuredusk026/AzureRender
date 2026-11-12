@@ -31,6 +31,7 @@ struct RenderPassDesc;
 }
 
 struct RenderSettings;
+struct ScreenObjectVisibilityNumerics;
 class MotionVectorTarget;
 class RecordingWorkerPool;
 struct TemporalPreparedFrame;
@@ -69,7 +70,7 @@ struct RendererSceneState {
 // renderer is loaded, so a scene renderer can never silently depend on a
 // resource the engine does not provide.
 struct SceneRendererCapabilities {
-    static constexpr std::uint32_t kApiVersion = 12;
+    static constexpr std::uint32_t kApiVersion = 17;
 
     bool requiresSceneDepth = true;
     bool requiresSceneNormal = true;
@@ -200,6 +201,7 @@ struct RenderContext {
     bool referenceCameraPrograms = false;
     bool referenceSceneDepthPrograms = false;
     bool referenceSceneVisibilityPrograms = false;
+    bool referenceSceneObjectVisibilityPrograms = false;
     bool visibilityPrototype = false;
     bool multiDrawIndirect = false;
     std::uint32_t maxDrawIndirectCount = 1;
@@ -284,6 +286,8 @@ struct RenderContext {
     bool fragmentPrimitiveIdentity = false;
     bool fragmentStorageAtomics = false;
     bool fragmentQuadControl = false;
+    // The project may supply immutable arithmetic data for its reference views.
+    std::shared_ptr<const ScreenObjectVisibilityNumerics> referenceObjectVisibilityNumerics;
 };
 inline std::uint32_t sceneColorAttachmentCount(const RenderContext& context) noexcept {
     return context.displayMaskEnabled?3U:2U;

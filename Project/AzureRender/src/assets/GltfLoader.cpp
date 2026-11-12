@@ -208,8 +208,30 @@ void loadMaterialProfile(
                 ||(profile.at("schemaVersion")!=1&&profile.at("schemaVersion")!=2))
                 throw std::invalid_argument(context+": unsupported schemaVersion");
             const std::set<std::string> fields{"schemaVersion","class","features","styleParameters","featureParameters",
-                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture","blendDepth"};
+                "faceSdf","hair","diffuseRamp","shadowColorLut","eyeSurface","outlineSurface","specularInput","specularRamp","nprDiffuse","surface","composite","sceneRefraction","radianceScale","displayTransform","environmentLighting","mainLightShadow","coverageTexture","blendDepth","referenceNormal","referenceDepthStencil"};
             for(const auto& field:profile.items())if(!fields.count(field.key()))throw std::invalid_argument(context+": unknown field "+field.key());
+            if (profile.contains("referenceDepthStencil")) {
+                const auto& value = profile.at("referenceDepthStencil");
+                if (profile.at("schemaVersion") != 2 || !value.is_object() || value.size() != 2
+                    || !value.contains("schemaVersion") || !value.at("schemaVersion").is_number_integer()
+                    || value.at("schemaVersion") != 1 || !value.contains("role")
+                    || (value.at("role") != "protect" && value.at("role") != "respect"))
+                    throw std::invalid_argument(context + ": referenceDepthStencil requires schemaVersion one, protect or respect, and profile version two");
+                using Stencil = AssetMaterial::ReferenceDepthStencil;
+                result.referenceDepthStencil = value.at("role") == "protect" ? Stencil::Protect : Stencil::Respect;
+            }
+            if(profile.contains("referenceNormal")) {
+                const auto& value=profile.at("referenceNormal");
+                if (profile.at("schemaVersion") != 2 || !value.is_object() || value.size() != 2
+                    || !value.contains("schemaVersion") || !value.at("schemaVersion").is_number_integer()
+                    || value.at("schemaVersion") != 1 || !value.contains("encoding")
+                    || (value.at("encoding") != "sampled-rg" && value.at("encoding") != "geometry"))
+                    throw std::invalid_argument(context + ": referenceNormal requires schemaVersion one, sampled-rg or geometry, and profile version two");
+                result.sampledReferenceNormal = value.at("encoding") == "sampled-rg";
+                result.geometricReferenceNormal = value.at("encoding") == "geometry";
+                if (result.sampledReferenceNormal && material.normalTexture.index < 0)
+                    throw std::invalid_argument(context + ": sampled-rg referenceNormal requires a standard normal texture");
+            }
             if(profile.contains("blendDepth")) {
                 const auto& value=profile.at("blendDepth");
                 if(profile.contains("surface"))throw std::invalid_argument(context+": blendDepth conflicts with unlit surface ownership");
@@ -2310,6 +2332,9 @@ AssetMaterial loadMaterial(
     const bool ordinary=microfacetClass&&!result.nprDiffuse.present&&!result.projectedHairRamp.present&&!result.eyeSurface.present;
     azurerender::validateMaterialLighting(result.environmentLighting,result.mainLightShadow,result.materialProfileVersion,lit,ordinary,microfacetClass);
     validateMaterialCoverage(result);
+    if (result.referenceDepthStencil != AssetMaterial::ReferenceDepthStencil::Ordinary
+        && (result.alphaMode == AssetAlphaMode::Blend || result.materialClass == AssetMaterialClass::Overlay))
+        throw std::invalid_argument(result.name + ": referenceDepthStencil requires a reference depth surface");
     azurerender::validateMaterialBlendDepth(result);
     azurerender::validateMaterialOutputPrecision(result);
     azurerender::validateMaterialUvPolicy(result);

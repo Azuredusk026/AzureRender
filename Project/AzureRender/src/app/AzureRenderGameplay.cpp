@@ -108,7 +108,9 @@ void AzureRenderApp::synchronizeEditorRuntime(){
         glfwSetInputMode(frontend_->nativeHandle(),GLFW_CURSOR,GLFW_CURSOR_NORMAL);
         vkCheck(vkDeviceWaitIdle(device_),"vkDeviceWaitIdle(editor runtime)");gameUi_.reset();gameUiPath_.clear();
         invalidatePreviews();graphicsCompleted_=graphicsSubmission_;renderViews_->complete(graphicsCompleted_);
+        releasePreparedRenderer();
         azurerender::RenderContext context;buildRenderContext(context);if(sceneRenderer_){sceneRenderer_->onUnload(context);sceneRenderer_.reset();}
+        applyProjectReferenceViews(session.referenceViews());
         renderSettings_=session.viewScene().renderSettings;createSceneRenderer();
         if(session.playing()){if(session.levels()){
                 rendererResourceKey_=session.levels()->current().resourceKey;

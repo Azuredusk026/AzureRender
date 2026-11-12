@@ -33,7 +33,7 @@ float referenceReciprocal(float value){
 }
 float reversedTexel(ivec2 p,ivec2 lo,ivec2 hi){
     if(any(lessThan(p,lo))||any(greaterThanEqual(p,hi)))return 0;
-    float depth=texelFetch(objectAtlas,p,0).r;return frame.control.z!=0u?1-depth:depth;
+    float depth=texelFetch(objectAtlas,p,0).r;return (frame.control.z&1u)!=0u?1-depth:depth;
 }
 vec4 reversedGather(vec2 uv,ivec2 lo,ivec2 hi){
     ivec2 p=ivec2(floor(uv*vec2(textureSize(objectAtlas,0))-.5));
@@ -44,7 +44,7 @@ vec4 reversedGather(vec2 uv,ivec2 lo,ivec2 hi){
         uv=(vec2(p)+1.0)/extent;
     }
     if(all(greaterThanEqual(p,lo))&&all(lessThan(p+1,hi))){
-        vec4 depth=textureGather(objectAtlas,uv);return frame.control.z!=0u?1-depth:depth;
+        vec4 depth=textureGather(objectAtlas,uv);return (frame.control.z&1u)!=0u?1-depth:depth;
     }
     return vec4(reversedTexel(p+ivec2(0,1),lo,hi),reversedTexel(p+ivec2(1),lo,hi),reversedTexel(p+ivec2(1,0),lo,hi),reversedTexel(p,lo,hi));
 }
@@ -78,7 +78,7 @@ void main(){
     vec3 q=fma(record.projection[0].xyz,vec3(biased.x),biased.y*record.projection[1].xyz);
     q=fma(record.projection[2].xyz,vec3(biased.z),q);q+=record.projection[3].xyz;
     if(!finite3(q)||any(lessThanEqual(q.xy,vec2(0)))||any(greaterThanEqual(q.xy,vec2(1))))return;
-    if(frame.control.z!=0u)q.z=1-q.z;q.z=max(q.z,record.normalFilter.w);if(q.z>=1)return;
+    if((frame.control.z&(1u<<identity))!=0u)q.z=1-q.z;q.z=max(q.z,record.normalFilter.w);if(q.z>=1)return;
     vec2 uv=fma(q.xy,record.rect.zw,record.rect.xy);vec2 size=vec2(textureSize(objectAtlas,0));
     ivec2 lo=ivec2(ceil(record.rect.xy*size-.5)),hi=ivec2(ceil((record.rect.xy+record.rect.zw)*size-.5));
     uint phaseY=frame.control.w!=0u?uint(textureSize(objectIds,0).y-1-pixel.y):uint(pixel.y);

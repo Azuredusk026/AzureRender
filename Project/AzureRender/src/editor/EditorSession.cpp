@@ -6,7 +6,6 @@
 #include "runtime/ModuleAssembly.hpp"
 #include "runtime/EngineSettings.hpp"
 #include "runtime/ProjectSettings.hpp"
-#include "runtime/ProjectReferenceViews.hpp"
 #include "app/ProjectRuntimeAssembly.hpp"
 #include "gameplay/SharedSystems.hpp"
 #include "runtime/physics/PhysicsShapeFactory.hpp"
@@ -25,7 +24,7 @@ struct EditorSession::PlayState {
     std::unique_ptr<PresentationRuntime> presentation;
     std::unique_ptr<IScriptRuntime> scripts;
     ModuleAssembly modules;
-    explicit PlayState(EditorContext& context,bool simulate=false):simulation(simulate) {
+    PlayState(EditorContext& context,const ProjectReferenceViews& referenceViews,bool simulate):simulation(simulate) {
         modules.add({"preview.document",1,{},{}}, [this,&context](auto&) {
         if (context.isProject()&&!simulation) levels = std::make_unique<LevelSession>(context.project(), runtime);
         runtime.replaceScene(context.scene(), [&](auto& target) {
@@ -33,11 +32,11 @@ struct EditorSession::PlayState {
         });
         }, [this] { levels.reset(); });
         modules.add({"preview.world",1,{}, {"preview.document"}}, [this](auto&) { runtime.start(); }, [this] { runtime.stop(); });
-        modules.add({"preview.game",1,{}, {"preview.world"}}, [this,&context](auto&) {
+        modules.add({"preview.game",1,{}, {"preview.world"}}, [this,&context,views=referenceViews.views](auto&) {
         if(simulation){SystemRegistry registry;gameplay::registerSharedSystems(registry);
             game=std::make_unique<GameRuntime>(runtime,registry,nlohmann::json{{"schemaVersion",1},{"input",nlohmann::json::object()},{"systems",nlohmann::json::array({{{"id","physics"},{"config",nlohmann::json::object()}}})}});
         }else game=std::make_unique<GameRuntime>(runtime,application::systems(),levels?application::configuration(context.project()):application::explorationConfiguration());
-        if(context.isProject())game->setReferenceViews(loadProjectReferenceViews(context.project()).views);
+        if(context.isProject())game->setReferenceViews(views);
         if(context.isProject())game->physics().setMeshResolver(collisionMeshAssets(levels?levels->assets():context.assets()));
         game->physics().validateScene(runtime);
         if(levels){presentation=std::make_unique<PresentationRuntime>(runtime,levels->assets());scripts=application::scripts(context.project(),runtime,*game,levels->assets());
@@ -180,6 +179,7 @@ EditorSession::EditorSession(std::shared_ptr<EditorContext> context)
     if (context_ == nullptr) {
         throw std::invalid_argument("Editor session requires a context");
     }
+    if(context_->isProject())referenceViews_=loadProjectReferenceViews(context_->project());
     projects_=std::make_unique<ProjectOpenService>(EditorWorkspace::configDirectory()/"recent-projects.json");
     tasks_=std::make_unique<EditorTaskService>([this](const auto& source,const auto& message){recordError(source,message);});
     documentGuard_=std::make_unique<DocumentActionGuard>([this]{return context_->dirty()||(documentGuard_->action()==DocumentAction::Close&&documents_.dirtyExcept(context_->documentId()));},[this]{if(documentGuard_->action()==DocumentAction::Close)documents_.saveAll();else context_->save();});
@@ -246,6 +246,7 @@ void EditorSession::activatePendingProject() {
     if(documentGuard_->state()==DocumentActionState::Idle){pendingProject_.reset();return;}
     if(documentGuard_->state()!=DocumentActionState::Ready||documentGuard_->action()!=DocumentAction::Open)return;
     try {
+        auto referenceViews=loadProjectReferenceViews(pendingProject_->project());
         auto edits=std::make_unique<EditService>(*pendingProject_,editorOperations(*this),[this](const EditDescriptor& descriptor){return editEnabled(descriptor);});
         auto selection=std::make_unique<SelectionService>(*pendingProject_,*edits);
         auto gizmo=std::make_unique<GizmoController>(*pendingProject_);
@@ -255,7 +256,8 @@ void EditorSession::activatePendingProject() {
         const auto settingsResult=loadProjectSettings(settings_,pendingProject_->project());if(!settingsResult.passed)throw EditRejection(settingsResult.diagnostic);settings_.applyPending();
         references_.cancel();content_.reset();contentDirectories_.reset();materials_.clear();prefabs_.clear();context_->detachRenderSettings();proposals_.reset();
         selection_=std::move(selection);gizmo_=std::move(gizmo);edits_=std::move(edits);
-        context_=std::move(pendingProject_);proposals_=std::move(proposals);documents_.clear();retainDocument();documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
+        context_=std::move(pendingProject_);referenceViews_=std::move(referenceViews);
+        proposals_=std::move(proposals);documents_.clear();retainDocument();documentGuard_->reset();runtimeReset_=true;assetReloadRequested_=true;
     }catch(const std::exception& error){pendingProject_.reset();documentGuard_->reset();recordError("project.open",error.what());}
 }
 void EditorSession::configureModel(std::shared_ptr<IModelTransport> transport){
@@ -317,7 +319,13 @@ bool EditorSession::executeInternal(const EditorCommand command) noexcept {
     if(command==EditorCommand::Play || command==EditorCommand::Simulate || command==EditorCommand::Pause || command==EditorCommand::Resume || command==EditorCommand::Step || command==EditorCommand::Stop){
         context_->closeEditMerge();
         try{
-            if(command==EditorCommand::Play||command==EditorCommand::Simulate){if(play_)return false;auto candidate=std::make_unique<PlayState>(*context_,command==EditorCommand::Simulate);context_->detachRenderSettings();play_=std::move(candidate);runtimeReset_=true;context_->log(simulating()?"Simulation started":"Play started");}
+            if(command==EditorCommand::Play||command==EditorCommand::Simulate){
+                if(play_)return false;
+                auto referenceViews=context_->isProject()?loadProjectReferenceViews(context_->project()):ProjectReferenceViews{};
+                auto candidate=std::make_unique<PlayState>(*context_,referenceViews,command==EditorCommand::Simulate);
+                context_->detachRenderSettings();play_=std::move(candidate);referenceViews_=std::move(referenceViews);runtimeReset_=true;
+                context_->log(simulating()?"Simulation started":"Play started");
+            }
             else if(command==EditorCommand::Stop){if(!play_)return false;play_.reset();runtimeReset_=true;context_->log("Play stopped; edit state restored");}
             else{if(!play_)return false;if(command==EditorCommand::Pause)play_->runtime.pause();else if(command==EditorCommand::Resume)play_->runtime.resume();else play_->runtime.step();}
             return true;

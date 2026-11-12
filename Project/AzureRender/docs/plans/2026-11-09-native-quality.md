@@ -153,6 +153,21 @@ Intel 保留 120 处超差，最大为 33 字节。
 17017 个像素的峰差为一字节，原 73 处全部闭合且新增为零。
 公共取样、投影、存储精度及实际深度继续接入验收。
 
+[参考图集光栅](../acceptance/nr/reference-object-shadow-raster.md)核对实际图集来源。
+[材质参考对象可见量](../acceptance/nr/material-reference-object-visibility.md)核对同帧颜色。
+NVIDIA 的 17,017 个头发可见量和颜色位置均满足一字节门槛。
+Intel 的冻结可见量和颜色分别核对设备输入。
+
+[Intel 参考可见量来源](../acceptance/nr/intel-reference-visibility-sources.md)保存固定输入和原生选级读回。
+同输入的 `ProfileV1` 达到接收门槛。
+
+[项目参考可见量算术](../acceptance/nr/project-reference-visibility-profile.md)核对编辑器、Player 和发布配置。
+完整接收分别核对事件 377 的法线与事件 422 的深度。
+Intel 头发颜色继续核对纹理梯度与层级选择。
+
+[原生接收输入来源](../acceptance/nr/native-receiver-producer-replay.md)记录服饰双通道法线和头发外扩写入。
+参考场景外扩深度与服饰法线分别进入生产验证。
+
 ## 后续外观
 
 - [ ] 按原计划核对皮肤、眼睛、GI 与反射。
@@ -320,3 +335,22 @@ NVIDIA 冻结深度逐位一致，Intel 保留设备间深度差异。
 [场景参考法线与对象身份](../acceptance/nr/scene-reference-normal.md)接入实际场景输入。
 NVIDIA 法线来源控制的完整头发区域满足一字节门槛。
 场景图集装配和完整颜色继续按所属条件验收。
+
+[场景参考对象可见量](../acceptance/nr/scene-reference-object-visibility.md)接入当前场景。
+图集、逆投影及对象记录的独立控制均完成。
+实际输入与材质消费按原门槛继续验收。
+
+[对象可见量逆投影标定](../acceptance/nr/scene-visibility-reference-calibration.md)使用原生片元常量。
+NVIDIA 头发区域有 277 处超差，Intel 有 428 处。
+对象图集、记录及头发外的参考输入继续按来源验收。
+
+[原生图集与接收输入来源](../acceptance/nr/native-atlas-and-receiver-producers.md)核对双方图集绘制。
+两份服饰对应 1,604 处同配对图集超差。
+原生头发的图集投影按实际乘加次序逐位重建。
+
+[对象可见量深度方向](../acceptance/nr/visibility-projection-depth.md)分别定义图集与记录方向。
+当前场景的原生记录标定继续使用实际图集和参考附件。
+
+[原生对象记录标定](../acceptance/nr/native-object-record-calibration.md)使用原生投影和灯向。
+NVIDIA 头发区域与图集单项对照在一字节内一致。
+当前图集和完整颜色继续按原门槛验收。

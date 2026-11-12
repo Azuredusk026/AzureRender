@@ -1,19 +1,13 @@
 #pragma once
+#include "render/ScreenObjectVisibilityNumerics.hpp"
 #include "rhi/Rhi.hpp"
 #include <array>
 #include <memory>
+#include <optional>
 #include <string>
 namespace azurerender {
 enum class ScreenObjectDepth {Forward,Reversed};
 enum class ScreenObjectVisibilityPhaseOrigin {TopLeft,BottomLeft};
-enum class ScreenObjectVisibilityArithmetic {Device,ProfileV1};
-struct ScreenObjectVisibilityNumerics {
-    ScreenObjectVisibilityArithmetic mode=ScreenObjectVisibilityArithmetic::Device;
-    // ProfileV1: 2^23 normalized mantissas, sixteen two-bit corrections per word.
-    // Codes 0/1/2 mean -1/0/+1 ULP from nearest-even reciprocal; 3 is reserved.
-    // The owner copies the fixed 524288 words and retains immutable GPU storage.
-    std::vector<std::uint32_t> reciprocalCorrections;
-};
 struct ScreenObjectVisibilityView {
     // Column-major device-clip to world. Pixel offsets are applied before NDC conversion.
     std::array<float,16> clipToWorld{};
@@ -29,6 +23,7 @@ struct ScreenObjectVisibilityRecord {
     std::array<float,4> atlasRect{0,0,1,1};
     std::array<float,2> filterRadiusUv{};
     float minimumReceiverDepth=.01F;
+    std::optional<ScreenObjectDepth> projectionDepth;
 };
 struct ScreenObjectVisibilityInputs {
     VkImageView depth{},normals{},objectIds{},atlas{};
@@ -45,12 +40,14 @@ struct ScreenObjectVisibilityOutput {
 };
 // Inputs are borrowed sampled images with matching declared formats and extents.
 // Normals use RG Y-pole octahedral encoding; integer object IDs 1..8 select records, zero is background.
-// Projection and atlas share objectDepth. The inverse view independently defines device depth.
+// objectDepth describes the atlas and is the default for records without projectionDepth.
+// The inverse view independently defines device depth.
 // The caller publishes input dependencies, retires a slot's consumers before record, and waits before destruction.
 // Output is valid after record submits; callers preserve its sampled layout until slot reuse.
 class ScreenObjectVisibilityGpu final {
 public:
     ScreenObjectVisibilityGpu(rhi::IRhi&,VkExtent2D,unsigned frames,const ScreenObjectVisibilityShaders&);
+    // The owner copies the fixed profile into immutable GPU storage.
     ScreenObjectVisibilityGpu(rhi::IRhi&,VkExtent2D,unsigned frames,const ScreenObjectVisibilityShaders&,const ScreenObjectVisibilityNumerics&);
     ~ScreenObjectVisibilityGpu();
     ScreenObjectVisibilityGpu(const ScreenObjectVisibilityGpu&)=delete;
@@ -60,6 +57,7 @@ public:
     ScreenObjectVisibilityOutput output(unsigned slot) const;
     void record(rhi::ICommandRecorder&,unsigned slot,const ScreenObjectVisibilityInputs&,const ScreenObjectVisibilityView&,
         const std::vector<ScreenObjectVisibilityRecord>&);
+    void recordNeutral(rhi::ICommandRecorder&,unsigned slot);
 private:
     struct Impl;std::unique_ptr<Impl> impl_;
 };

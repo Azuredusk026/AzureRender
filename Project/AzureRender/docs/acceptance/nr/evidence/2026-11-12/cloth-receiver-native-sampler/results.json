@@ -1,0 +1,812 @@
+{
+  "status": "qualified-cloth-receiver-native-sampler-input",
+  "overall": "failed-user-review",
+  "baseCommit": "e0b5a7b8bbdfdc583641f2b4f4ada3183723b4fb",
+  "scope": "reference fixture only",
+  "acceptedMaximumByteError": 1,
+  "fixture": {
+    "files": [
+      {
+        "relative": "assets/captured-rim-policy.azurematerial",
+        "bytes": 146,
+        "sha256": "ce7baa8b50676f0a625656be9658a885864aa008bdc8cf0916fdd368ef322610"
+      },
+      {
+        "relative": "assets/captured-rim-policy.azurematerial.azmeta",
+        "bytes": 102,
+        "sha256": "9713de607cbd28be933ca04d4538b4482da8aa060b27e728748008134fba4963"
+      },
+      {
+        "relative": "assets/hair-coverage.azurelevel",
+        "bytes": 15661,
+        "sha256": "85d82573dca382b236ba1e54f83e22625f703092ca9c6225c3b04fc6705c2c2d"
+      },
+      {
+        "relative": "character/captured-hair-normal.dds",
+        "bytes": 5592580,
+        "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+      },
+      {
+        "relative": "character/captured-hair-normal.dds.azmeta",
+        "bytes": 449,
+        "sha256": "bc0ceb65e52c31e1beec370ab08324c9f78d36da9f74ea0602ffd8485cda00e0"
+      },
+      {
+        "relative": "character/cloth-receiver-normal-authored.dds",
+        "bytes": 5592580,
+        "sha256": "1fb335fe9de63f7338e93e2d44e8b1c23bcf0a7ee08581ca0ed723efb8455ba9"
+      },
+      {
+        "relative": "character/cloth-receiver-normal-authored.dds.azmeta",
+        "bytes": 449,
+        "sha256": "3729331732c863451c67cd47c568c7dfdbd8ebf99065214e7340744cffc8134a"
+      },
+      {
+        "relative": "character/hair-base-coverage.dds",
+        "bytes": 22369768,
+        "sha256": "0bf35700e233f4b70351b604ac5e2a187fc5bddcc3a4805e68d105178d387cdf"
+      },
+      {
+        "relative": "character/hair-base-coverage.dds.azmeta",
+        "bytes": 276,
+        "sha256": "89f3a09368493d4152d2cc2e9eb1358bd7aa57c0e47bd178d818c3b02370606a"
+      },
+      {
+        "relative": "character/hair-coverage.glb",
+        "bytes": 118803068,
+        "sha256": "c58d715113e88021f0ccc629cbafb3d88cd060168b6bf0a5c8bcf6519e7d4185"
+      },
+      {
+        "relative": "character/hair-native-mask.dds",
+        "bytes": 349700,
+        "sha256": "afcc37dc11b59e370e722f99c800702288d6cd0db4f1ee62c4bf9ab6ca0e453e"
+      },
+      {
+        "relative": "character/hair-native-mask.dds.azmeta",
+        "bytes": 284,
+        "sha256": "fda0cd1353d35fc30499bababe7108dc7b55f1953a7d888327cb13e08715dc38"
+      },
+      {
+        "relative": "character/native-captured-body/t12.dds",
+        "bytes": 32916,
+        "sha256": "6cf915c33198d3afd064ab182e0378e96a1daea49e6ab2dd52ffc9f376d68b86"
+      },
+      {
+        "relative": "character/native-captured-body/t12.dds.azmeta",
+        "bytes": 248,
+        "sha256": "c9d6333d1c222df672cc44a3bd2a04f4c3b38a69ea52776e7acc61da82988efc"
+      },
+      {
+        "relative": "character/native-captured-body/t14.dds",
+        "bytes": 1398276,
+        "sha256": "2ac9344b3693fefd3b74ecfc2b4f6212920b1754173b8212a8f35fcea634a068"
+      },
+      {
+        "relative": "character/native-captured-body/t14.dds.azmeta",
+        "bytes": 313,
+        "sha256": "40e77548c2e30bf462b0c73b7682fcdbb809cc36a5a1ccf44ab9b982d9e354af"
+      },
+      {
+        "relative": "character/native-captured-body/t15.dds",
+        "bytes": 1398256,
+        "sha256": "3d16ddcced1a4f482f969250b835c5ea569ce620d8ef16cc465fc19cbb266a9e"
+      },
+      {
+        "relative": "character/native-captured-body/t15.dds.azmeta",
+        "bytes": 315,
+        "sha256": "34d6e6c85fb219367669af101852aa97e69b50aa6f86259c78647fe9fd38667b"
+      },
+      {
+        "relative": "character/native-cloth-04/t11.dds",
+        "bytes": 1152,
+        "sha256": "40a1ad06cc99d97a74848aa64bbabd00861559c0a6aa4a58e14034a783995653"
+      },
+      {
+        "relative": "character/native-cloth-04/t11.dds.azmeta",
+        "bytes": 308,
+        "sha256": "5e236bb42f260f9d93ebfb96ad00cde286b8c7696a9db54b566d226efccdcf62"
+      },
+      {
+        "relative": "character/native-cloth-04/t12.dds",
+        "bytes": 262272,
+        "sha256": "b23e301482461a8b4ef44ac875cb9883e11aa507273413e42171dd0b8c113e1a"
+      },
+      {
+        "relative": "character/native-cloth-04/t12.dds.azmeta",
+        "bytes": 308,
+        "sha256": "5721acbb474adc88f7aced20f4469abe0afdf8a733e44936c063c9fcf780fbea"
+      },
+      {
+        "relative": "character/native-cloth-04/t16.dds",
+        "bytes": 5592580,
+        "sha256": "c7ea4150acd1461cfe37bf7bfacdb197dd05ab7193e1ca245ab445c4e2fb2324"
+      },
+      {
+        "relative": "character/native-cloth-04/t16.dds.azmeta",
+        "bytes": 313,
+        "sha256": "da711fd4600449805a0ecd012d47fb995744e9ce5d83c5d53775a3d24626b17e"
+      },
+      {
+        "relative": "character/native-cloth-04/t17.dds",
+        "bytes": 22369748,
+        "sha256": "38a520d6eca0f00bb8cb852679ddcd2fe1bf9c6cac7fa725c5918a5d8139dedd"
+      },
+      {
+        "relative": "character/native-cloth-04/t17.dds.azmeta",
+        "bytes": 315,
+        "sha256": "3219753dc58632e55ffb6382a03ae121b8f975fee7605179d076c93a953979fd"
+      },
+      {
+        "relative": "character/native-cloth-04/t18.dds",
+        "bytes": 5592560,
+        "sha256": "434c6c5aad9ba8fe14a594e86f331d1d0a0bad72f6fc5b1e7579c12dc1595b2a"
+      },
+      {
+        "relative": "character/native-cloth-04/t18.dds.azmeta",
+        "bytes": 315,
+        "sha256": "cd2b4563b895a54aa2fd7d66b1845f6034ae7c39e2cfb76eb731461af8357da5"
+      },
+      {
+        "relative": "character/native-coverage.dds",
+        "bytes": 349700,
+        "sha256": "a093f699c9c13b33a5943dedb93be626dea9ba5f60b715d44f5f8c54bbd2327a"
+      },
+      {
+        "relative": "character/native-coverage.dds.azmeta",
+        "bytes": 447,
+        "sha256": "049a068f29023607ac692fd6ec1f3c06cd95ce3b5758f544ea298dd898a6300b"
+      },
+      {
+        "relative": "character/native-textures/t12.dds",
+        "bytes": 349700,
+        "sha256": "388813b5465244f3f07a2a383021ca470f60bbd08aa3d4d7daa801a8c09aeaa4"
+      },
+      {
+        "relative": "character/native-textures/t12.dds.azmeta",
+        "bytes": 275,
+        "sha256": "26b33755b6147c0ccd111c34135d2e672f8bcc382a4543b0c7ad7d306aab0feb"
+      },
+      {
+        "relative": "character/native-textures/t13.dds",
+        "bytes": 1152,
+        "sha256": "6f0bdcb7d4da88f997622f690688683380a208bf7bd929ef55522e5edadace05"
+      },
+      {
+        "relative": "character/native-textures/t13.dds.azmeta",
+        "bytes": 275,
+        "sha256": "6685acf498b42fac7a5c835a7d05d825357dae277f9208703f6dd81cc0595878"
+      },
+      {
+        "relative": "character/native-textures/t14.dds",
+        "bytes": 262272,
+        "sha256": "cb0c4a5bf2eb2dcf6b4abc7bec66fe1b7dc6400a79efc49811484b35d17993d4"
+      },
+      {
+        "relative": "character/native-textures/t14.dds.azmeta",
+        "bytes": 275,
+        "sha256": "199e566d2b499f5f0e6e14d62d4bfbde1c0eb38ab117d0ec2bc07d475984bad5"
+      },
+      {
+        "relative": "character/native-textures/t16.dds",
+        "bytes": 5592580,
+        "sha256": "4a382264f75c816ccf8fdf70c5e4bccfcf6dc5b31d74c1fcb92b29a9bd556643"
+      },
+      {
+        "relative": "character/native-textures/t16.dds.azmeta",
+        "bytes": 276,
+        "sha256": "dacb8a62aa4be5365c908e59ad3b2c1986bb989f47a77cbd96334aca8cb5c85a"
+      },
+      {
+        "relative": "character/native-textures/t17.dds",
+        "bytes": 5592580,
+        "sha256": "12df068935abc56ac44d86c08a5b342e748f85f5ef3b6d2048485064d8292995"
+      },
+      {
+        "relative": "character/native-textures/t17.dds.azmeta",
+        "bytes": 276,
+        "sha256": "bac274600e7eb80e83ec42184de60626ca36ed5d8aa2e27d7ca16c14952f55fd"
+      },
+      {
+        "relative": "character/native-textures/t18.dds",
+        "bytes": 5592580,
+        "sha256": "876179d4707dfd219f8100a656ff602807535f601888165caf77282f58deda54"
+      },
+      {
+        "relative": "character/native-textures/t18.dds.azmeta",
+        "bytes": 276,
+        "sha256": "424080184b3c22c286c90596bc4e843a0beedb5d5801be069539208b84a6a33d"
+      },
+      {
+        "relative": "config/object-visibility-profile-v1.bin",
+        "bytes": 2097152,
+        "sha256": "bbda0d685ab5a66767c2c3881a67dff147e1f5a2c766db1f6dd5b63fecedcf2c"
+      },
+      {
+        "relative": "config/reference-views.json",
+        "bytes": 3691,
+        "sha256": "16835eb74fe5af7cb9a6f0df2f6309016f6d0d945293bc985d146f73639333bb"
+      },
+      {
+        "relative": "hair-coverage.azureproject",
+        "bytes": 312,
+        "sha256": "2fa150253f5641bd67c1da3bb854efb1acd90c7dd90e76232996e63ce043c393"
+      }
+    ],
+    "authoredDdsSha256": "1fb335fe9de63f7338e93e2d44e8b1c23bcf0a7ee08581ca0ed723efb8455ba9",
+    "baselineMetadataSha256": "412071bd7578744976af70c87cf98220c41f4827b05b683a56a0d84d35ec10cd",
+    "candidateMetadataSha256": "3729331732c863451c67cd47c568c7dfdbd8ebf99065214e7340744cffc8134a",
+    "sampler": {
+      "schemaVersion": 2,
+      "usage": "normal",
+      "colorSpace": "linear",
+      "filter": "linear",
+      "magFilter": "linear",
+      "wrapU": "repeat",
+      "wrapV": "repeat",
+      "mipPolicy": "generate",
+      "mipFilter": "nearest",
+      "anisotropy": 1,
+      "mipBias": -1
+    },
+    "sameTextureAndGeometry": true
+  },
+  "captures": {
+    "release-nvidia": {
+      "configuration": "Release",
+      "device": "nvidia",
+      "playerSha256": "0098141adb7c91acbacfbcb72f9642e3206ba6262361de0da9ebe2207903a36f",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 1672,
+        "baselineOverOne": 1707,
+        "closed": 157,
+        "introduced": 122,
+        "maximum": 254,
+        "changed": 1031
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 140,
+          "baselineOverOne": 140,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 251,
+          "changed": 0
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 0,
+          "baselineOverOne": 0,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 1,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 130,
+          "baselineOverOne": 130,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 45,
+          "changed": 0
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 1310,
+          "baselineOverOne": 1345,
+          "closed": 157,
+          "introduced": 122,
+          "maximum": 254,
+          "changed": 1031
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        }
+      },
+      "clothNormal": {
+        "current": {
+          "exact": 88,
+          "withinOne": 405,
+          "median": 32.0,
+          "p95": 175.0,
+          "maximum": 978
+        },
+        "baseline": {
+          "exact": 14,
+          "withinOne": 111,
+          "median": 35.0,
+          "p95": 165.0,
+          "maximum": 966
+        }
+      },
+      "normalChangedPixels": 75086,
+      "depthExact": true,
+      "idsExact": true,
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 0,
+      "hairColorOverOne": 0,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "5080630650c120fffe99eb15e86a2ac006bff6d2ace9e487e68dc917fbf90338",
+      "normalsSha256": "abea23dbb50eebf9a938df106a533ea2c5fb7a44d86acc2bb1daf4c3aa4c50ea",
+      "colorSha256": [
+        "717b97597c13ea49ec165eaff7eaffb19c8be8a738214d5a2272dc210bfcc391",
+        "717b97597c13ea49ec165eaff7eaffb19c8be8a738214d5a2272dc210bfcc391",
+        "717b97597c13ea49ec165eaff7eaffb19c8be8a738214d5a2272dc210bfcc391"
+      ]
+    },
+    "release-intel": {
+      "configuration": "Release",
+      "device": "intel",
+      "playerSha256": "0098141adb7c91acbacfbcb72f9642e3206ba6262361de0da9ebe2207903a36f",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 1944,
+        "baselineOverOne": 1966,
+        "closed": 125,
+        "introduced": 103,
+        "maximum": 254,
+        "changed": 932
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 139,
+          "baselineOverOne": 139,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 251,
+          "changed": 0
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 2,
+          "baselineOverOne": 2,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 6,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 77,
+          "baselineOverOne": 77,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 34,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 135,
+          "baselineOverOne": 135,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 29,
+          "changed": 0
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 1317,
+          "baselineOverOne": 1339,
+          "closed": 125,
+          "introduced": 103,
+          "maximum": 254,
+          "changed": 932
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 274,
+          "baselineOverOne": 274,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 93,
+          "changed": 0
+        }
+      },
+      "clothNormal": {
+        "current": {
+          "exact": 83,
+          "withinOne": 370,
+          "median": 33.0,
+          "p95": 176.59999999999854,
+          "maximum": 978
+        },
+        "baseline": {
+          "exact": 19,
+          "withinOne": 125,
+          "median": 34.0,
+          "p95": 168.0,
+          "maximum": 959
+        }
+      },
+      "normalChangedPixels": 74725,
+      "depthExact": true,
+      "idsExact": true,
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 208,
+      "hairColorOverOne": 575,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "54c4f2de3c2137ffb8069808cda97c7c68c58badce079ea9015b753372f3c195",
+      "normalsSha256": "9ecff27017123bd74918a244c9812d6030cfbd8e764a7d6e10acb2af9ab2e00d",
+      "colorSha256": [
+        "2d355e3b700c3c6b1cd93ca0029184996008bf8f0059f6abbb1962173a5e97d3",
+        "2d355e3b700c3c6b1cd93ca0029184996008bf8f0059f6abbb1962173a5e97d3",
+        "2d355e3b700c3c6b1cd93ca0029184996008bf8f0059f6abbb1962173a5e97d3"
+      ]
+    },
+    "debug-nvidia": {
+      "configuration": "Debug",
+      "device": "nvidia",
+      "playerSha256": "aa56b41109d7390699575bd9b679fb8ccfe8ad2b1e526c36096746895d2f4ccb",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 1672,
+        "baselineOverOne": 1707,
+        "closed": 157,
+        "introduced": 122,
+        "maximum": 254,
+        "changed": 1031
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 140,
+          "baselineOverOne": 140,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 251,
+          "changed": 0
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 0,
+          "baselineOverOne": 0,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 1,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 130,
+          "baselineOverOne": 130,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 45,
+          "changed": 0
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 1310,
+          "baselineOverOne": 1345,
+          "closed": 157,
+          "introduced": 122,
+          "maximum": 254,
+          "changed": 1031
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 46,
+          "baselineOverOne": 46,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 23,
+          "changed": 0
+        }
+      },
+      "clothNormal": {
+        "current": {
+          "exact": 88,
+          "withinOne": 405,
+          "median": 32.0,
+          "p95": 175.0,
+          "maximum": 978
+        },
+        "baseline": {
+          "exact": 14,
+          "withinOne": 111,
+          "median": 35.0,
+          "p95": 165.0,
+          "maximum": 966
+        }
+      },
+      "normalChangedPixels": 75086,
+      "depthExact": true,
+      "idsExact": true,
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 0,
+      "hairColorOverOne": 0,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "5080630650c120fffe99eb15e86a2ac006bff6d2ace9e487e68dc917fbf90338",
+      "normalsSha256": "abea23dbb50eebf9a938df106a533ea2c5fb7a44d86acc2bb1daf4c3aa4c50ea",
+      "colorSha256": [
+        "717b97597c13ea49ec165eaff7eaffb19c8be8a738214d5a2272dc210bfcc391",
+        "717b97597c13ea49ec165eaff7eaffb19c8be8a738214d5a2272dc210bfcc391",
+        "717b97597c13ea49ec165eaff7eaffb19c8be8a738214d5a2272dc210bfcc391"
+      ]
+    },
+    "debug-intel": {
+      "configuration": "Debug",
+      "device": "intel",
+      "playerSha256": "aa56b41109d7390699575bd9b679fb8ccfe8ad2b1e526c36096746895d2f4ccb",
+      "receiver": {
+        "pixels": 49384,
+        "overOne": 1944,
+        "baselineOverOne": 1966,
+        "closed": 125,
+        "introduced": 103,
+        "maximum": 254,
+        "changed": 932
+      },
+      "receiverByOwner": {
+        "296": {
+          "pixels": 496,
+          "overOne": 139,
+          "baselineOverOne": 139,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 251,
+          "changed": 0
+        },
+        "310": {
+          "pixels": 255,
+          "overOne": 2,
+          "baselineOverOne": 2,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 6,
+          "changed": 0
+        },
+        "328": {
+          "pixels": 9116,
+          "overOne": 77,
+          "baselineOverOne": 77,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 34,
+          "changed": 0
+        },
+        "345": {
+          "pixels": 3825,
+          "overOne": 135,
+          "baselineOverOne": 135,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 29,
+          "changed": 0
+        },
+        "377": {
+          "pixels": 16629,
+          "overOne": 1317,
+          "baselineOverOne": 1339,
+          "closed": 125,
+          "introduced": 103,
+          "maximum": 254,
+          "changed": 932
+        },
+        "422": {
+          "pixels": 19063,
+          "overOne": 274,
+          "baselineOverOne": 274,
+          "closed": 0,
+          "introduced": 0,
+          "maximum": 93,
+          "changed": 0
+        }
+      },
+      "clothNormal": {
+        "current": {
+          "exact": 83,
+          "withinOne": 370,
+          "median": 33.0,
+          "p95": 176.59999999999854,
+          "maximum": 978
+        },
+        "baseline": {
+          "exact": 19,
+          "withinOne": 125,
+          "median": 34.0,
+          "p95": 168.0,
+          "maximum": 959
+        }
+      },
+      "normalChangedPixels": 74725,
+      "depthExact": true,
+      "idsExact": true,
+      "hairVisibilityExact": true,
+      "hairColorExact": true,
+      "hairVisibilityOverOne": 208,
+      "hairColorOverOne": 575,
+      "validationClean": true,
+      "allocatorZero": true,
+      "visibilitySha256": "54c4f2de3c2137ffb8069808cda97c7c68c58badce079ea9015b753372f3c195",
+      "normalsSha256": "9ecff27017123bd74918a244c9812d6030cfbd8e764a7d6e10acb2af9ab2e00d",
+      "colorSha256": [
+        "2d355e3b700c3c6b1cd93ca0029184996008bf8f0059f6abbb1962173a5e97d3",
+        "2d355e3b700c3c6b1cd93ca0029184996008bf8f0059f6abbb1962173a5e97d3",
+        "2d355e3b700c3c6b1cd93ca0029184996008bf8f0059f6abbb1962173a5e97d3"
+      ]
+    }
+  },
+  "execution": {
+    "release-nvidia": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 32.93699999997625,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-090101-cloth-receiver-native-sampler-e301d1\\capture.py",
+        "Release",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-090101-cloth-receiver-native-sampler-e301d1\\tmp"
+    },
+    "release-intel": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 27.43700000003446,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-090101-cloth-receiver-native-sampler-e301d1\\capture.py",
+        "Release",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-090101-cloth-receiver-native-sampler-e301d1\\tmp"
+    },
+    "debug-nvidia": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 67.98399999999674,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-090101-cloth-receiver-native-sampler-e301d1\\capture.py",
+        "Debug",
+        "nvidia"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-090101-cloth-receiver-native-sampler-e301d1\\tmp"
+    },
+    "debug-intel": {
+      "status": "exited",
+      "exitCode": 0,
+      "reason": null,
+      "seconds": 99.93800000002375,
+      "logTruncated": false,
+      "samplingSeconds": 1,
+      "command": [
+        "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+        "-B",
+        "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-090101-cloth-receiver-native-sampler-e301d1\\capture.py",
+        "Debug",
+        "intel"
+      ],
+      "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-090101-cloth-receiver-native-sampler-e301d1\\tmp"
+    }
+  },
+  "crossConfigurationExact": true,
+  "originalFour": {
+    "exitCode": 0,
+    "frames": [
+      {
+        "frame": "frame_000000.png",
+        "sha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "expectedSha256": "4faf27a0d379b247e9a0a98d77dd8a8c2622ad689dc914428ca8df7944b79387",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000001.png",
+        "sha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "expectedSha256": "55678cd9b32fb282416bb975ead40e01c7a66042b93d8a4ff6f75da29dc3a2ab",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000002.png",
+        "sha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "expectedSha256": "ecee0ff56e78afd0447c1704224b1aabcb16f73bac624d0ce69e27a1e4f33d79",
+        "pngExact": true
+      },
+      {
+        "frame": "frame_000003.png",
+        "sha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "expectedSha256": "1eb14b1cce256811991cb04971dd86d7bb2eda455d127e0e4667c258921a6574",
+        "pngExact": true
+      }
+    ],
+    "validationClean": true,
+    "allocatorZero": true,
+    "depthCaptureAbsent": true,
+    "allExact": true,
+    "playerSha256": "0098141adb7c91acbacfbcb72f9642e3206ba6262361de0da9ebe2207903a36f",
+    "projectSha256": "13638585d18092a315bd7586a88b349fe256c468eb9090ccb6189232b8209d78",
+    "taskBytes": 446333243,
+    "taskBudgetBytes": 536870912
+  },
+  "archive": {
+    "bytes": 61349,
+    "sha256": "822447685c7832ea545a5834109c669f9c7446e17464eec164319d575dae2416",
+    "contents": {
+      "run/budget.json": "a90a585600f6b3775c6cb69bcbff66370dc9426d9088cf9c4297351a72c7c4c8",
+      "run/capture.py": "9c49297124f6b24d1cf7d3651352fe41b4fce6cd154a081ae373af29a87b943e",
+      "run/claim-inputs.py": "96e681d5d75f3cc2d92be11a10b39dd9e92d706fb312c6e7e0a8be000e405384",
+      "run/compact-capture.py": "fef2983594dc535968b6b1dfe29b4510d02901dd2e51110ffe4148a53cdfd6a9",
+      "run/debug-intel-command.json": "58e2111241050ba9c7ba9db9ca4e281a0d8694d6c81429761a95e848ed947cda",
+      "run/debug-intel-execution.json": "d7c2cb852e3cec41f845289f2563baa3715e6c60a6ab67cc2a92ad308611584a",
+      "run/debug-intel-results.json": "453f8a7f7cb5318f6b6d4c8f185c4f9e22de405b6d20c84abfca007cade544c3",
+      "run/debug-intel.log": "6c6003e7ce929586cdec76bc05d87b5fd941fa4a8c370d69520477094bf133a7",
+      "run/debug-nvidia-command.json": "b6d95cb73fbedf45c1f2894762c0d5b921735c6ca677586fc8e89a2689080e6d",
+      "run/debug-nvidia-execution.json": "90bd2713362476744e0521abcb53bc8c071da185041a6597bbb4679b549dc16a",
+      "run/debug-nvidia-results.json": "2ef5a0910cf61a44cee85864e53eecb661ed97a2197d2d4782676dc69834fc59",
+      "run/debug-nvidia.log": "adb105bc6e0ac9886b3a6fffda5dd4880e12b1f6e461207371fd88cf384e6328",
+      "run/fixture-inputs.json": "0df1a9d317b771b219daceadea7e67b2313c7d8950620fe9068a787e3b922c34",
+      "run/package-evidence.py": "d0729ef72a4bf6857202ce3521eb84d0490b3481d1d94a8c8545f7b64a133d5e",
+      "run/prepare-fixture.py": "99c3afb02767adbfca4940c760dd72a3cc0bbeb6b02fc1a0e18d84d1e76e5bc8",
+      "run/process.log": "07e5e5d71afd5a939dc8e2ec08de33d2d18fe15116349fa97dc73646cd140c65",
+      "run/queued-capture.py": "6ad022127c4f2bea494dfd055e467ade5d012f91a765984136d488dc0dbbedbb",
+      "run/release-intel-command.json": "44c773c10aa7468266ac459277211491cbc37b86efda2dcfcc052a9d8753e9de",
+      "run/release-intel-execution.json": "b477e0ce704c915d2a41438cc5f487ae7c3c1242b0000b92f3bf7f0365bed932",
+      "run/release-intel-results.json": "f53fd3205ecbfa0d70111fb27190f499112912d47907827803fb494b8845b016",
+      "run/release-intel.log": "60f4694b1e428b488070a0b52630694ecffe7ae2d7a6ed0d2c875c38a2343f2a",
+      "run/release-nvidia-command.json": "cb8145bfcac42e7c907a2694a54282535b9b011e50cdd995df7c88630899211d",
+      "run/release-nvidia-execution.json": "38df8e1af0d8c7b50ef81e6911496455d8df5efeab30c0eb63337c15ea73b757",
+      "run/release-nvidia-results.json": "231c39c1568c61df6de433657dbc187d99366fe6cfa9b6ee064393c3bf2cbe51",
+      "run/release-nvidia.log": "dfa7558b559dce0247d288d49a91866d1751966ffb4060845a6d7bbbf6654f41",
+      "run/task-card.json": "b60b48b04c788b4fc8e739f879064be0ebc759e4987c99319fe12dea0b2f93e5",
+      "run/hair-project/character/cloth-receiver-normal-authored.dds.azmeta": "3729331732c863451c67cd47c568c7dfdbd8ebf99065214e7340744cffc8134a",
+      "run/release-nvidia-frames/capture_manifest.json": "5827714a2d06436700c4568c60ff4aa6fd35ee256e05a1767b5d1ac02ecbe76f",
+      "run/release-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/release-nvidia-frames/reference-planes.json": "ea9dd002f09e891637645c6235bedd02f87b050ee0e2288690b9ca91892bd8d1",
+      "run/release-intel-frames/capture_manifest.json": "4b9465a040824812ca2d8ea89ad85e2de3dcb71279c2f4664c18384b12943b4c",
+      "run/release-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/release-intel-frames/reference-planes.json": "64bafd703bb450081762696f4f30d470892342baf7582dc626aa6ada2d36402a",
+      "run/debug-nvidia-frames/capture_manifest.json": "e7be24b26d2e8c0ab589429c881ea19dbc769fcb054d3da0c1924e89c6faed48",
+      "run/debug-nvidia-frames/gpu_capabilities.json": "7c45c92b4b5d17e94eb68ace460ebeb959a2da6b27474d1b7d64a7d7522c0d54",
+      "run/debug-nvidia-frames/reference-planes.json": "ea9dd002f09e891637645c6235bedd02f87b050ee0e2288690b9ca91892bd8d1",
+      "run/debug-intel-frames/capture_manifest.json": "a0c5ff4fb710e3ec418ba44eacc948b7608bb9943e1e3a3ad1ed80713a61db2b",
+      "run/debug-intel-frames/gpu_capabilities.json": "a38eaca3509b417cfe23614fe415bd9ccc5622fc682d8623142cdeb7dc3d85cc",
+      "run/debug-intel-frames/reference-planes.json": "64bafd703bb450081762696f4f30d470892342baf7582dc626aa6ada2d36402a"
+    }
+  }
+}

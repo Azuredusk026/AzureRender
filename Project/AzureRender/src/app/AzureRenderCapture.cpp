@@ -514,6 +514,13 @@ void AzureRenderApp::writeCaptureManifest(
                 output << ", \"normalFrame\": \"reference\", \"packedNormals\": " << std::quoted(normalName)
                        << ", \"objectIds\": " << std::quoted(objectIdName);
             }
+            if(!depth->objectVisibility.empty()){
+                if(depth->objectVisibility.size()!=pixels||depth->objectIds.size()!=pixels)
+                    throw std::runtime_error("Invalid scene reference object visibility dimensions");
+                constexpr auto visibilityName="reference-object-visibility-rg8.bin";
+                writeReferencePlane(outputPath.parent_path()/visibilityName,depth->objectVisibility);
+                output << ", \"objectVisibility\": " << std::quoted(visibilityName);
+            }
             output << "},\n";
         }
         sceneRenderer_->appendCaptureManifestFields(output);

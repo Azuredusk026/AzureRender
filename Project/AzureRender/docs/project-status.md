@@ -1,5 +1,8 @@
 # 项目现状
 
+[画质与性能集成](acceptance/nr/quality-performance-integration.md)通过双配置和双设备的所属检查。
+原始四帧逐字节一致，完整画质和正式性能继续验收。
+
 [材质组合管线范围](acceptance/nr/material-viewquad-pipeline-scope.md)通过工作集及短时成本检查。
 正式固定功率、长窗口 GPU 帧预算及完整交付继续验收。
 
@@ -52,6 +55,22 @@
 [场景参考法线与对象身份](acceptance/nr/scene-reference-normal.md)接入实际 Player 附件。
 NVIDIA 法线来源控制的全部头发可见量满足一字节门槛。
 完整场景可见量及颜色继续验收。
+
+[场景参考对象可见量](acceptance/nr/scene-reference-object-visibility.md)接入实际场景图集。
+双设备的生产输出及输入隔离结果已登记。
+图集深度及材质消费继续验收。
+
+[对象可见量逆投影标定](acceptance/nr/scene-visibility-reference-calibration.md)核对双设备的实际输出。
+头发与完整接收区域继续按一字节门槛验收。
+
+[原生图集与接收输入来源](acceptance/nr/native-atlas-and-receiver-producers.md)已核对逐事件读回。
+对象图集的投影次序及两份服饰几何已有对应来源。
+
+[对象可见量深度方向](acceptance/nr/visibility-projection-depth.md)支持逐记录投影。
+原生记录可在实际正向图集中表达反向投影。
+
+[原生对象记录标定](acceptance/nr/native-object-record-calibration.md)核对实际 Player 的接收投影。
+NVIDIA 头发的剩余超差对应当前图集。
 
 [参考透明层级](acceptance/nr/reference-alpha-ellipse.md)通过公共策略和原四帧检查。
 NVIDIA 完整 17017 处一致，Intel 剩余九十六处深度超差继续修正。

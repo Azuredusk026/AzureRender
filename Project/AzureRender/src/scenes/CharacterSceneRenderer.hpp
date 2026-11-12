@@ -63,6 +63,7 @@
 namespace azurerender {
 
 class IrradianceClipmapGpu;
+class ScreenObjectVisibilityGpu;
 // The stylized character pipeline, migrated from the monolith application
 // class into the first concrete ISceneRenderer. It owns the loaded glTF
 // asset, its GPU resources (buffers/textures/descriptors/pipelines), the
@@ -121,14 +122,23 @@ private:
     bool referenceCameraPrepared_=false,referenceProjectedSurface_=false;
     std::optional<PreparedReferenceCameraView> referenceCamera_;
     std::unique_ptr<SceneReferenceDepthTargets> referenceSceneDepth_;
-    std::array<VkPipeline,3> referenceSceneDepthPipelines_{};
-    std::array<VkPipeline,3> referenceSceneVisibilityPipelines_{};
-    struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;std::uint64_t submission;};
+    std::unique_ptr<ScreenObjectVisibilityGpu> referenceObjectVisibility_;
+    std::shared_ptr<const ScreenObjectVisibilityNumerics> referenceObjectVisibilityNumerics_;
+    rhi::GpuImage referenceObjectIdFallback_{};
+    VkImageView referenceObjectIdFallbackView_{};
+    std::array<std::array<VkPipeline, 3>, 3> referenceSceneDepthPipelines_{};
+    std::array<std::array<VkPipeline, 2>, 2> referenceSceneOutlineDepthPipelines_{};
+    std::array<std::array<VkPipeline, 3>, 3> referenceSceneVisibilityPipelines_{};
+    struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;bool objectVisibility;std::uint64_t submission;};
     std::optional<ReferenceDepthSubmission> pendingReferenceDepth_;
     std::optional<ReferenceDepthSubmission> submittedReferenceDepth_;
     bool referenceDepthActive() const noexcept;
     bool referenceVisibilityActive() const noexcept;
+    bool referenceObjectVisibilityActive() const noexcept;
+    void writeReferenceMaterialVisibilityDescriptors(VkDescriptorSet,unsigned slot,bool active);
+    void recordReferenceObjectVisibility(rhi::ICommandRecorder&,unsigned slot,const SceneInstanceSnapshot&);
     void createReferenceDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context,bool visibilityInputs);
+    void createReferenceOutlineDepthPipelines(rhi::GraphicsPipelineDesc desc,const RenderContext& context);
     void destroyUvShaderModule(VkShaderModule);
     VkPipeline createMaterialUvGraphicsPipeline(const rhi::GraphicsPipelineDesc&);
     VkPipeline materialUvPipeline(const AssetMaterial&,VkPipeline) const;
@@ -321,8 +331,10 @@ private:
     enum class DepthCoverageMode {SnapshotDepth,SnapshotColor,SnapshotPrefill,MainPrefill,RadianceValidation,ReferenceDepth};
     void recordDepthCoverage(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
         rhi::ICommandRecorder& commands,DepthCoverageMode mode,SceneSubmissionCounters* counters=nullptr);
+    enum class OutlineShellPass {Color,SnapshotDepth,ReferenceDepth};
     void recordOutlineShells(const RenderContext& context,const SceneInstanceSnapshot& snapshot,
-        rhi::ICommandRecorder& commands,bool depthShell,SceneSubmissionCounters* counters=nullptr,
+        rhi::ICommandRecorder& commands,const std::vector<std::array<std::uint32_t,3>>& spans,OutlineShellPass pass,
+        SceneSubmissionCounters* counters=nullptr,
         std::optional<std::size_t> spanIndex=std::nullopt);
     struct MaterialPushConstants {
         float alphaCutoff = 0.5F;
@@ -391,6 +403,7 @@ private:
     };
     static_assert(sizeof(UniformBufferObject)==50*16);
     static_assert(offsetof(UniformBufferObject,referenceCamera)==43*16);
+    static_assert(offsetof(UniformBufferObject,referenceCamera)+offsetof(ReferenceRasterProjectionParameters,control)==48*16);
     static_assert(offsetof(UniformBufferObject,unlitTimeExposure)==41*16);
     static_assert(offsetof(UniformBufferObject,unlitColorGain)==42*16);
     static_assert(offsetof(UniformBufferObject,cascadeWorldDiameters)==40*16);
@@ -537,6 +550,7 @@ private:
     std::array<std::unique_ptr<ShadowTileBounds>,kMaxFramesInFlight> shadowBounds_;
     std::unique_ptr<ObjectShadowAtlas> objectShadowAtlas_;
     std::array<VkImageView,kMaxFramesInFlight> objectShadowBoundViews_{};
+    std::array<bool,kMaxFramesInFlight> referenceMaterialVisibilityBound_{};
     bool objectShadowPrepared_=false;
     unsigned objectShadowMaxDimension_=0;
     std::vector<ObjectShadowPage> objectShadowPages_;
@@ -745,7 +759,7 @@ private:
     void uploadMaterialTextures(
         LoadedAsset& asset,
         std::vector<GpuMaterial>& gpuMaterials);
-    void createUniformBuffers();
+    void createUniformBuffers(bool referenceObjectRaster);
     void createJointBuffers();
     void createOitIndexBuffers();
     void createDescriptorSetLayout();

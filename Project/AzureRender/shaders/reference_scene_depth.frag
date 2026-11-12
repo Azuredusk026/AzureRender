@@ -59,6 +59,16 @@ vec4 sampleSurfaceTexture(sampler2D image){
 vec3 surfaceNormal(){
     float facing=gl_FrontFacing?1.0:-1.0;
     float mode=material.normalControl.x;
+    if (mode == 4.0)
+        return characterProjectedSafeNormalize(worldNormal, vec3(0, 0, 1)) * facing;
+    if(mode==3.0){
+        vec2 xy=fma(sampleSurfaceTexture(NORMAL_TEXTURE).rg,vec2(2.0),vec2(-1.0));
+        float z=sqrt(max(1.0-min(dot(xy,xy),1.0),0.0));
+        vec3 bitangent=cross(worldNormal,worldTangent.xyz)*worldTangent.w;
+        vec3 mapped=fma(worldTangent.xyz,vec3(xy.x),bitangent*xy.y);
+        mapped=fma(worldNormal,vec3(z),mapped);
+        return characterProjectedSafeNormalize(mapped,characterProjectedSafeNormalize(worldNormal,vec3(0,0,1)))*facing;
+    }
     if(mode>0.0){
         // The authored snapshot normal follows the reference attachment's raster rows.
         vec2 encoded=mode==2.0?texture(NORMAL_TEXTURE,textureCoordinate).rg:sampleSurfaceTexture(HAIR_DATA).rg;

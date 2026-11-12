@@ -368,6 +368,41 @@
       "then": { "required": ["lodPolicy"] },
       "else": { "not": { "required": ["lodPolicy"] } }
     },
+    "referenceDepthStencil": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "role"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "role": {
+          "enum": ["protect", "respect"]
+        }
+      }
+    },
+    "referenceNormal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "encoding"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "encoding": {
+          "type": "string",
+          "enum": ["sampled-rg", "geometry"]
+        }
+      }
+    },
     "blendDepth": {
       "type": "object",
       "additionalProperties": false,
@@ -406,6 +441,16 @@
           {
             "required": [
               "mainLightShadow"
+            ]
+          },
+          {
+            "required": [
+              "referenceNormal"
+            ]
+          },
+          {
+            "required": [
+              "referenceDepthStencil"
             ]
           }
         ]

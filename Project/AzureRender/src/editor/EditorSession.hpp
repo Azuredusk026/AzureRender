@@ -23,6 +23,7 @@
 #include "editor/GameBuildJob.hpp"
 #include "runtime/GameRuntime.hpp"
 #include "runtime/LevelSession.hpp"
+#include "runtime/ProjectReferenceViews.hpp"
 #include "runtime/IScriptRuntime.hpp"
 #include "runtime/PresentationRuntime.hpp"
 #include "editor/commands/EditService.hpp"
@@ -75,6 +76,7 @@ public:
     PresentationRuntime* presentation() noexcept;
     double advance(double delta);
     SceneDocument viewScene();
+    const ProjectReferenceViews& referenceViews() const noexcept {return referenceViews_;}
     bool consumeRuntimeReset() noexcept;
     bool startBuild(const std::filesystem::path& install, const std::filesystem::path& output, bool replace = false) noexcept;
     void pollBuild();
@@ -192,6 +194,7 @@ private:
     void activatePendingProject();
     bool editEnabled(const EditDescriptor& descriptor) const;
     std::shared_ptr<EditorContext> context_;
+    ProjectReferenceViews referenceViews_;
     std::shared_ptr<EditorContext> pendingProject_;
     std::unique_ptr<ProjectOpenService> projects_;
     std::unique_ptr<ContentOperationService> content_;

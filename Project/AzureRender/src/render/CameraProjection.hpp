@@ -12,7 +12,12 @@ inline std::optional<PreparedReferenceCameraView> resolveReferenceCamera(const C
     const auto& calibration=*camera.referenceCalibration;
     if(!std::isfinite(calibration.screenScale)||calibration.screenScale<1.e-6F||calibration.screenScale>1.e6F)throw std::invalid_argument("Reference camera screen scale must be finite and in [1e-6,1e6]");
     auto view=relocateReferenceCamera(calibration.view,calibration.anchor,referenceCameraPose(camera.position,camera.target,camera.up));
-    if(calibration.screenScale!=1){for(auto& column:view.projection.parameters.columns)for(unsigned axis=0;axis<2;++axis)column[axis]*=calibration.screenScale;for(auto& jitter:view.projection.parameters.jitter)jitter*=calibration.screenScale;}
+    if(calibration.screenScale!=1){
+        for(auto& column:view.projection.parameters.columns)for(unsigned axis=0;axis<2;++axis)column[axis]*=calibration.screenScale;
+        for(auto& jitter:view.projection.parameters.jitter)jitter*=calibration.screenScale;
+        if(view.objectVisibility&&view.objectVisibility->calibration)
+            for(unsigned i=0;i<8;++i)view.objectVisibility->calibration->clipToWorld[i]/=calibration.screenScale;
+    }
     return PreparedReferenceCameraView(view);
 }
 inline void validateCameraView(const CameraViewDescriptor& view,float aspect){

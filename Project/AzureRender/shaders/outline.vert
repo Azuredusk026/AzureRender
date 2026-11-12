@@ -39,7 +39,11 @@ layout(location = 4) in uvec4 jointIndices;
 layout(location = 5) in vec4 jointWeights;
 layout(location = 6) in vec3 morph0;
 layout(location = 7) in vec3 morph1;
+#if defined(AZURE_REFERENCE_SCENE_OUTLINE_DEPTH)
+layout(location = 14) out vec3 opacityCoordinate;
+#else
 layout(location = 0) out vec3 opacityCoordinate;
+#endif
 
 layout(push_constant) uniform MorphWeights {
 #if defined(AZURE_VIEW_SCALED_OUTLINE)

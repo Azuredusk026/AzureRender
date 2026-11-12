@@ -21,10 +21,26 @@ void to_json(nlohmann::json& j,const ReferenceCameraView& v){
         {"extent",v.extent},{"depthConvention",v.depthConvention==ReferenceDepthConvention::Forward?"forward":"reversed"},{"flipNdcY",v.flipNdcY}};
     if(v.produceSceneDepth)j["produceSceneDepth"]=true;
     if(v.produceSceneVisibilityInputs)j["produceSceneVisibilityInputs"]=true;
+    const auto& outline=v.outlineDepthProjection;
+    if(outline.schemaVersion==1)
+        j["outlineDepthProjection"]={{"schemaVersion",1},{"clipWSlope",outline.clipWSlope},{"clipZIntercept",outline.clipZIntercept}};
+    if(v.objectVisibility){
+        j["objectVisibility"]={{"pixelOffset",v.objectVisibility->pixelOffset}};
+        if(const auto& calibration=v.objectVisibility->calibration){
+            auto& authored=j["objectVisibility"]["calibration"];
+            authored={{"schemaVersion",1},{"positionOffset",calibration->positionOffset},{"clipToWorld",calibration->clipToWorld}};
+            if(!calibration->objectRecords.empty()){
+                auto& records=authored["objectRecords"]=Json::array();
+                for(const auto& record:calibration->objectRecords)
+                    records.push_back({{"atlasPage",record.atlasPage},{"anchorWorldToUnit",record.anchorWorldToUnit},
+                        {"referenceToUnit",record.referenceToUnit},{"lightDirection",record.lightDirection}});
+            }
+        }
+    }
 }
 void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     fields(j,{"schemaVersion","frame","projection","extent","depthConvention","flipNdcY"},
-        {"produceSceneDepth","produceSceneVisibilityInputs"});
+        {"produceSceneDepth","produceSceneVisibilityInputs","outlineDepthProjection","objectVisibility"});
     version(j);ReferenceCameraView v;
     const auto& frame=j.at("frame");fields(frame,{"schemaVersion","axes","offset"});version(frame);
     const auto& axes=frame.at("axes");if(!axes.is_array()||axes.size()!=3)throw std::invalid_argument("Invalid reference camera axis count");
@@ -46,6 +62,37 @@ void from_json(const nlohmann::json& j,ReferenceCameraView& value){
     if(j.contains("produceSceneVisibilityInputs")){
         if(!j.at("produceSceneVisibilityInputs").is_boolean())throw std::invalid_argument("Scene visibility input flag must be boolean");
         v.produceSceneVisibilityInputs=j.at("produceSceneVisibilityInputs").get<bool>();
+    }
+    if(j.contains("outlineDepthProjection")){
+        const auto& outline=j.at("outlineDepthProjection");
+        fields(outline,{"schemaVersion","clipWSlope","clipZIntercept"});version(outline);
+        v.outlineDepthProjection={1,number(outline.at("clipWSlope")),number(outline.at("clipZIntercept"))};
+    }
+    if(j.contains("objectVisibility")){
+        const auto& settings=j.at("objectVisibility");
+        fields(settings,{"pixelOffset"},{"calibration"});
+        auto& visibility=v.objectVisibility.emplace();
+        visibility.pixelOffset=vector<2>(settings.at("pixelOffset"));
+        if(settings.contains("calibration")){
+            const auto& authored=settings.at("calibration");
+            fields(authored,{"schemaVersion","positionOffset","clipToWorld"},{"objectRecords"});version(authored);
+            auto& calibration=visibility.calibration.emplace();
+            calibration.positionOffset=vector<3>(authored.at("positionOffset"));
+            calibration.clipToWorld=vector<16>(authored.at("clipToWorld"));
+            if(authored.contains("objectRecords")){
+                const auto& records=authored.at("objectRecords");
+                if(!records.is_array()||records.size()>kReferenceObjectVisibilityRecordCapacity)
+                    throw std::invalid_argument("Invalid scene object calibration record count");
+                for(const auto& record:records){
+                    fields(record,{"atlasPage","anchorWorldToUnit","referenceToUnit","lightDirection"});
+                    const auto& page=record.at("atlasPage");
+                    if(!page.is_number_integer()||page<0||page>=kReferenceObjectVisibilityRecordCapacity)
+                        throw std::invalid_argument("Invalid scene object calibration atlas page");
+                    calibration.objectRecords.push_back({page.get<unsigned>(),vector<16>(record.at("anchorWorldToUnit")),
+                        vector<16>(record.at("referenceToUnit")),vector<3>(record.at("lightDirection"))});
+                }
+            }
+        }
     }
     (void)PreparedReferenceCameraView(v);value=std::move(v);
 }

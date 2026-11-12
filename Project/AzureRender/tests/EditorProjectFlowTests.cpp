@@ -2,6 +2,7 @@
 #include "editor/EditorWorkspace.hpp"
 #include "editor/projects/ProjectOpenService.hpp"
 #include "editor/projects/ProjectCenterController.hpp"
+#include "runtime/ProjectReferenceViews.hpp"
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -60,7 +61,26 @@ int main() {
         std::filesystem::remove(second->project().file);
         require(!restored.recent()[0].at("available").get<bool>(),"Missing recent project must remain recoverable");
         std::filesystem::remove_all(root/"second");Project::create(root/"second","Second");
+        const auto profileProject=Project::load(root/"second/project.azureproject");
+        ReferenceCameraView profileView;
+        profileView.extent={128,128};
+        profileView.produceSceneDepth=true;
+        profileView.produceSceneVisibilityInputs=true;
+        profileView.objectVisibility.emplace();
+        ProjectReferenceViews profileConfiguration;
+        profileConfiguration.views.emplace("objects",profileView);
+        profileConfiguration.objectVisibilityArithmetic=ScreenObjectVisibilityArithmetic::ProfileV1;
+        const auto profilePath=projectReferenceVisibilityProfilePath(profileProject);
+        std::filesystem::create_directories(profilePath.parent_path());
+        const auto writeProfile=[&](char code){
+            std::ofstream sidecar(profilePath,std::ios::binary|std::ios::trunc);
+            sidecar<<std::string(kScreenObjectVisibilityProfileBytes,code);
+            require(static_cast<bool>(sidecar),"Write editor profile fixture");
+        };
+        writeProfile('\x55');
+        saveProjectReferenceViews(profileProject,profileConfiguration);
         EditorSession session(first);session.setRecentProjectsPath(root/"session-recent.json");
+        require(!session.referenceViews().objectVisibilityProfile,"Editor starts with the source project's device arithmetic");
         require(static_cast<bool>(session.edit("node.rename",{{"value","Unsaved"}})),"Edit before switching");
         const auto identity=session.context().documentVersion().documentId;
         require(static_cast<bool>(session.edit("project.open",{{"path",(root/"second/project.azureproject").u8string()}})),"Open must enter document protection");
@@ -71,13 +91,24 @@ int main() {
         session.edit("project.open",{{"path",(root/"second/project.azureproject").u8string()}});
         session.edit("document.decision",{{"value","save"}});session.pollTasks();
         require(session.context().project().name=="Second"&&!session.context().canUndo(),"Switch must isolate history");
+        const auto appliedProfile=session.referenceViews().objectVisibilityProfile;
+        require(appliedProfile&&appliedProfile->reciprocalCorrections.front()==0x55555555u,"Switch applies the destination profile");
         require(EditorContext::openProject(first->project().file)->scene().nodes.front().name=="Unsaved","Save decision must persist source");
         require(!session.edit("project.open",{{"path",(root/"missing.azureproject").u8string()}}),"Failed open must preserve active project");
         require(session.context().project().name=="Second","Failure must preserve active project");
+        writeProfile('\x03');
+        require(!session.execute(EditorCommand::Play)&&session.referenceViews().objectVisibilityProfile==appliedProfile,
+            "Invalid play configuration preserves the current render profile");
+        writeProfile('\x56');
+        require(session.execute(EditorCommand::Play)&&session.referenceViews().objectVisibilityProfile
+            &&session.referenceViews().objectVisibilityProfile->reciprocalCorrections.front()==0x56565656u,
+            "Play refreshes and shares the installed project profile");
+        require(session.execute(EditorCommand::Stop),"Stop the editor profile control");
         const auto task=session.edit("project.create",{{"templateId","scene"},{"destination",(root/"async-project").u8string()},{"name","Async"}});
         require(static_cast<bool>(task)&&task.value.contains("task"),"Template creation must return a cancellable task");
         for(int i=0;i<1000&&session.context().project().name!="Async";++i){session.pollTasks();std::this_thread::sleep_for(std::chrono::milliseconds(2));}
         require(session.context().project().name=="Async","Completed template task must activate at a frame boundary");
+        require(!session.referenceViews().objectVisibilityProfile,"Switching to device arithmetic releases the project's profile");
         const auto cancel=session.edit("project.create",{{"templateId","scene"},{"destination",(root/"cancel-task").u8string()},{"name","Cancelled"}});
         require(static_cast<bool>(cancel),"Start cancellable creation");
         require(static_cast<bool>(session.edit("tasks.cancel",{{"id",cancel.value.at("task")}})),"Task cancellation uses public operation");

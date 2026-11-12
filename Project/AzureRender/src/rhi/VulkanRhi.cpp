@@ -519,6 +519,10 @@ VkPipeline VulkanRhi::createGraphicsPipeline(
     depthStencil.depthTestEnable = desc.depthTest ? VK_TRUE : VK_FALSE;
     depthStencil.depthWriteEnable = desc.depthWrite ? VK_TRUE : VK_FALSE;
     depthStencil.depthCompareOp = desc.depthCompare;
+    if (desc.stencil) {
+        depthStencil.stencilTestEnable = VK_TRUE;
+        depthStencil.front = depthStencil.back = *desc.stencil;
+    }
 
     std::vector<VkPipelineColorBlendAttachmentState> colorBlendAttachments(
         desc.colorAttachmentCount);
@@ -730,7 +734,8 @@ VkRenderPass VulkanRhi::createRenderPass(const RenderPassDesc& desc) {
         attachment.storeOp = source.store
             ? VK_ATTACHMENT_STORE_OP_STORE
             : VK_ATTACHMENT_STORE_OP_DONT_CARE;
-        attachment.stencilLoadOp = source.isDepth&&source.load?VK_ATTACHMENT_LOAD_OP_LOAD:VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+        attachment.stencilLoadOp = source.clearStencil ? VK_ATTACHMENT_LOAD_OP_CLEAR
+            : source.isDepth && source.load ? VK_ATTACHMENT_LOAD_OP_LOAD : VK_ATTACHMENT_LOAD_OP_DONT_CARE;
         attachment.stencilStoreOp = source.isDepth&&source.load&&source.store?VK_ATTACHMENT_STORE_OP_STORE:VK_ATTACHMENT_STORE_OP_DONT_CARE;
         attachment.initialLayout = source.initialLayout;
         attachment.finalLayout = source.finalLayout;

@@ -57,6 +57,69 @@
   },
   "milestones": [
     {
+      "path": "runs/20261112-141547-nr-combination-59f28b",
+      "name": "画质与性能集成",
+      "sourceBase": "b10997b",
+      "evidence": "docs/acceptance/nr/quality-performance-integration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/quality-performance-integration/results.json"
+    },
+    {
+      "path": "runs/20261112-053111-intel-reference-visibility-sources-5238e2",
+      "name": "Intel 参考可见量来源",
+      "sourceBase": "fa82f57",
+      "evidence": "docs/acceptance/nr/intel-reference-visibility-sources.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/intel-reference-visibility-sources/results.json"
+    },
+    {
+      "path": "runs/20261112-044926-material-reference-object-visibility-344def",
+      "name": "材质参考对象可见量",
+      "sourceBase": "4bf4e7d",
+      "evidence": "docs/acceptance/nr/material-reference-object-visibility.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/material-reference-object-visibility/results.json"
+    },
+    {
+      "path": "runs/20261112-040725-reference-object-shadow-raster-2c9e58",
+      "name": "参考对象图集光栅",
+      "sourceBase": "34d8e9a",
+      "evidence": "docs/acceptance/nr/reference-object-shadow-raster.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/reference-object-shadow-raster/results.json"
+    },
+    {
+      "path": "runs/20261112-032619-native-object-record-calibration-19d2f9",
+      "name": "原生对象记录标定",
+      "sourceBase": "bc12f32",
+      "evidence": "docs/acceptance/nr/native-object-record-calibration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/native-object-record-calibration/results.json"
+    },
+    {
+      "path": "runs/20261112-025941-visibility-projection-depth-c1c792",
+      "name": "对象可见量深度方向",
+      "sourceBase": "b9fb734",
+      "evidence": "docs/acceptance/nr/visibility-projection-depth.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/visibility-projection-depth/results.json"
+    },
+    {
+      "path": "runs/20261112-024632-native-atlas-and-receiver-producers-d5e705",
+      "name": "原生图集与接收输入来源",
+      "sourceBase": "4e4c00c",
+      "evidence": "docs/acceptance/nr/native-atlas-and-receiver-producers.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/native-atlas-and-receiver-producers/results.json"
+    },
+    {
+      "path": "runs/20261112-020715-scene-visibility-reference-calibration-f77af1",
+      "name": "对象可见量逆投影标定",
+      "sourceBase": "87ac510",
+      "evidence": "docs/acceptance/nr/scene-visibility-reference-calibration.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-visibility-reference-calibration/results.json"
+    },
+    {
+      "path": "runs/20261112-010418-scene-reference-object-visibility-709f68",
+      "name": "场景参考对象可见量",
+      "sourceBase": "22663a8",
+      "evidence": "docs/acceptance/nr/scene-reference-object-visibility.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/scene-reference-object-visibility/results.json"
+    },
+    {
       "path": "runs/20261112-011326-handoff-final-regression-e2e260/depth-split-range-recovery",
       "name": "主深度颜色附件范围",
       "sourceBase": "ae2af1a",

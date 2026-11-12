@@ -1,5 +1,6 @@
 #include "runtime/ProjectReferenceViews.hpp"
 #include "render/ReferenceCameraViewJson.hpp"
+#include "render/ScreenObjectVisibility.hpp"
 #include <chrono>
 #include <fstream>
 #include <iostream>
@@ -55,7 +56,48 @@ int main(int argc,char** argv)try{
     auto invalid=values;invalid.views.begin()->second.projection.parameters.columns[0][0]=std::numeric_limits<float>::infinity();rejects([&]{saveProjectReferenceViews(project,invalid);});require(bytes(path)==original,"Invalid save changed existing file");
     write(path,R"({"schemaVersion":99,"views":{}})");rejects([&]{(void)loadProjectReferenceViews(project);});write(path,original);
     write(path,std::string(1024*1024+1,' '));rejects([&]{(void)loadProjectReferenceViews(project);});write(path,original);
+    require(!loadProjectReferenceViews(project).objectVisibilityProfile,"Default project must use device arithmetic");
+    const auto profileRoot=base/"profile-project";
+    std::filesystem::create_directories(profileRoot/"assets");
+    std::filesystem::create_directories(profileRoot/"config");
+    write(profileRoot/"assets/startup.azscene","{}");
+    write(profileRoot/"project.azureproject",bytes(project.file));
+    auto profileProject=Project::load(profileRoot/"project.azureproject");
+    auto profileViews=values;
+    auto selected=perspective;selected.produceSceneDepth=true;selected.produceSceneVisibilityInputs=true;
+    selected.objectVisibility=SceneReferenceObjectVisibilitySettings{};
+    profileViews.views.emplace("profile-camera",selected);
+    profileViews.objectVisibilityArithmetic=ScreenObjectVisibilityArithmetic::ProfileV1;
+    const auto profileJson=encodeProjectReferenceViews(profileViews);
+    require(profileJson.at("objectVisibilityArithmetic")=="profile-v1","Profile setting must round-trip");
+    require(!decodeProjectReferenceViews(profileJson).objectVisibilityProfile,"JSON decoding must keep resource loading separate");
+    j=profileJson;j["objectVisibilityArithmetic"]="unknown";bad(j);
+    j=profileJson;j["objectVisibilityArithmetic"]=1;bad(j);
+    j=profileJson;j["views"].erase("profile-camera");bad(j);
+    const auto sidecar=projectReferenceVisibilityProfilePath(profileProject);
+    rejects([&]{saveProjectReferenceViews(profileProject,profileViews);});
+    std::string profile(kScreenObjectVisibilityProfileBytes,'\x55');
+    profile.replace(0,4,"\x20\x04\x55\x0a",4);
+    profile.replace(profile.size()-4,4,"\xa5\x5a\x01\x80",4);
+    write(sidecar,profile);saveProjectReferenceViews(profileProject,profileViews);
+    const auto storedProfileJson=bytes(projectReferenceViewsPath(profileProject));
+    const auto loadedProfile=loadProjectReferenceViews(profileProject).objectVisibilityProfile;
+    require(loadedProfile&&loadedProfile->mode==ScreenObjectVisibilityArithmetic::ProfileV1
+        &&loadedProfile->reciprocalCorrections.size()==kScreenObjectVisibilityProfileWords
+        &&loadedProfile->reciprocalCorrections.front()==0x0a550420U&&loadedProfile->reciprocalCorrections.back()==0x80015aa5U,
+        "Profile words must load with little-endian byte order");
+    auto invalidProfile=profile;invalidProfile[0]='\x03';write(sidecar,invalidProfile);
+    rejects([&]{(void)loadProjectReferenceViews(profileProject);});
+    rejects([&]{saveProjectReferenceViews(profileProject,profileViews);});
+    require(bytes(projectReferenceViewsPath(profileProject))==storedProfileJson,"Invalid profile changed saved configuration");
+    write(sidecar,profile.substr(1));rejects([&]{(void)loadProjectReferenceViews(profileProject);});
+    write(sidecar,profile+'\x55');rejects([&]{(void)loadProjectReferenceViews(profileProject);});
+    write(sidecar,profile);
     std::filesystem::rename(base,moved);project=Project::load(std::filesystem::path(moved)/"project.azureproject");require(encodeProjectReferenceViews(loadProjectReferenceViews(project))==encoded,"Moved project reference views failed");
+    profileProject=Project::load(std::filesystem::path(moved)/"profile-project/project.azureproject");
+    const auto movedProfile=loadProjectReferenceViews(profileProject);
+    require(movedProfile.objectVisibilityProfile->reciprocalCorrections==loadedProfile->reciprocalCorrections
+        &&encodeProjectReferenceViews(movedProfile)==profileJson,"Moved project profile changed");
     const auto target=projectReferenceViewsPath(project);std::filesystem::remove(target);std::filesystem::create_directory(target);rejects([&]{saveProjectReferenceViews(project,values);});require(std::filesystem::is_directory(target),"Failed replacement changed target");
     require(std::distance(std::filesystem::directory_iterator(target.parent_path()),std::filesystem::directory_iterator{})==1,"Failed save leaked temporary file");
     std::cout<<values.views.size()<<" reference views, signed-zero persistence, project reopen/move, "<<refused<<" JSON rejections, invalid-save preservation, size boundary and failed-replacement cleanup passed\n";return 0;

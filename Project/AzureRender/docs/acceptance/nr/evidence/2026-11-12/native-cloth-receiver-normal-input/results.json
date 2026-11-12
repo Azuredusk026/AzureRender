@@ -1,0 +1,434 @@
+{
+  "status": "qualified-native-cloth-receiver-normal-input",
+  "overall": "failed-user-review",
+  "comparison": {
+    "sourceBase": "8550bfdb7aef1c93688e5aba616c9ab60fdebd8f",
+    "outlinePlayer": "0098141adb7c91acbacfbcb72f9642e3206ba6262361de0da9ebe2207903a36f",
+    "nativeResource": "ResourceId::87521",
+    "nativeEvent": 377,
+    "receiver": {
+      "nvidia": {
+        "pixels": 16629,
+        "previousOverOne": 1402,
+        "overOne": 1350
+      },
+      "intel": {
+        "pixels": 16629,
+        "previousOverOne": 1399,
+        "overOne": 1349
+      }
+    },
+    "normalAsset": {
+      "path": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-073905-reference-scene-outline-depth-d97cff\\hair-project\\character\\hair-coverage.glb",
+      "sha256": "849282e0b6a7a7681aba32b336b546a588044b1f19ca889100015a7379ed5169",
+      "imageName": "T_actor_laevat_cloth_01_N-normal",
+      "pngBytes": 7373862,
+      "pngSha256": "c65df30156c698f809c824ef7e28fcfabc1c7a0b03ed616a13a34b5ef2ac3a90",
+      "indices": 102927,
+      "sampler": null,
+      "normalScale": 1,
+      "uvMin": [
+        0.0015300512313842773,
+        0.003198862075805664
+      ],
+      "uvMax": [
+        0.9970054030418396,
+        0.9973191618919373
+      ]
+    },
+    "texelCount": 4194304,
+    "orientation": {
+      "rows-0-green-0": {
+        "exact": 7998,
+        "withinOne": 31890,
+        "meanPerChannel": [
+          32.39326310157776,
+          32.74385142326355
+        ],
+        "medianMaximum": 41.0,
+        "p95Maximum": 122.0,
+        "maximum": 255
+      },
+      "rows-0-green-1": {
+        "exact": 3884,
+        "withinOne": 30234,
+        "meanPerChannel": [
+          32.39326310157776,
+          32.56415009498596
+        ],
+        "medianMaximum": 41.0,
+        "p95Maximum": 121.0,
+        "maximum": 255
+      },
+      "rows-1-green-0": {
+        "exact": 4189362,
+        "withinOne": 4192794,
+        "meanPerChannel": [
+          0.001477956771850586,
+          0.001135110855102539
+        ],
+        "medianMaximum": 0.0,
+        "p95Maximum": 0.0,
+        "maximum": 13
+      },
+      "rows-1-green-1": {
+        "exact": 0,
+        "withinOne": 420789,
+        "meanPerChannel": [
+          0.001477956771850586,
+          41.317442655563354
+        ],
+        "medianMaximum": 21.0,
+        "p95Maximum": 159.0,
+        "maximum": 255
+      }
+    },
+    "vertexUv": {
+      "atlasEvent": 191,
+      "nativeVertices": 32021,
+      "fixtureVertices": 32031,
+      "halfPrecisionDirect": 101,
+      "halfPrecisionFlippedV": 31988
+    },
+    "dds": {
+      "file": "cloth-receiver-normal.dds",
+      "bytes": 5592580,
+      "headerBytes": 148,
+      "sha256": "924a06afe633006325ec42ae990c203a500495a75c61353d1409d2fd7e2c07cf"
+    }
+  },
+  "nativeReplay": {
+    "status": "qualified",
+    "devices": {
+      "nvidia": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "levels": [
+          {
+            "level": 0,
+            "extent": [
+              2048,
+              2048
+            ],
+            "bytes": 4194304,
+            "sha256": "5a839ca9b920d1ade77fe97a49aac129097838e72710bbbf07228b35eafc8ed9"
+          },
+          {
+            "level": 1,
+            "extent": [
+              1024,
+              1024
+            ],
+            "bytes": 1048576,
+            "sha256": "c852caf9cb0a4e95e29f2103c0d4aa03a6ed0018d465a7b85b59408475b4035b"
+          },
+          {
+            "level": 2,
+            "extent": [
+              512,
+              512
+            ],
+            "bytes": 262144,
+            "sha256": "455c5d31aa67fd2feaf892ce812305626f307f19dc9aa0fa2bfb7c825f6a72fa"
+          },
+          {
+            "level": 3,
+            "extent": [
+              256,
+              256
+            ],
+            "bytes": 65536,
+            "sha256": "65315fa6779d28e5e1aacf26d6fbd387bc55c9ae4276b9bce8f45793e00c063a"
+          },
+          {
+            "level": 4,
+            "extent": [
+              128,
+              128
+            ],
+            "bytes": 16384,
+            "sha256": "8100225eb647ed24f70ddb6f806a27bb9f20ea2fdf1e0e5e7833282c2b31c8cf"
+          },
+          {
+            "level": 5,
+            "extent": [
+              64,
+              64
+            ],
+            "bytes": 4096,
+            "sha256": "e0d9b94f5d05c9d4ac9937859bd5ac0fa5edf1dae7c2a4a606343e7557d99d61"
+          },
+          {
+            "level": 6,
+            "extent": [
+              32,
+              32
+            ],
+            "bytes": 1024,
+            "sha256": "fee38c90e616cdcee4f4daae6810af2876a3383aa0def17d5db456b5e00f0ce1"
+          },
+          {
+            "level": 7,
+            "extent": [
+              16,
+              16
+            ],
+            "bytes": 256,
+            "sha256": "0c8bf796f28c7af5a7b586038902e3543e886e45e31cbf412edff5cd3dc33f3e"
+          },
+          {
+            "level": 8,
+            "extent": [
+              8,
+              8
+            ],
+            "bytes": 64,
+            "sha256": "a7a5b4f89d948f03a5420b7ca6a471711c526ebc7d5abcafabe75b3213ee4c9d"
+          },
+          {
+            "level": 9,
+            "extent": [
+              4,
+              4
+            ],
+            "bytes": 16,
+            "sha256": "c06a55c30b68c65b66341d376bf6d7475ce14d4732fed0642659785ac79ce29b"
+          },
+          {
+            "level": 10,
+            "extent": [
+              2,
+              2
+            ],
+            "bytes": 16,
+            "sha256": "fea00b44c4b81a6717f44d33d7d5c4616e23828a3e7b2749389a0d091862d80f"
+          },
+          {
+            "level": 11,
+            "extent": [
+              1,
+              1
+            ],
+            "bytes": 16,
+            "sha256": "1ea20f28474ed632dfea377bb36263b242d2b1d2d9cf34efac0e2982bda8d0aa"
+          }
+        ],
+        "sampler": {
+          "bias": 0.0,
+          "lod": [
+            0.0,
+            1000.0
+          ],
+          "anisotropy": 0.0,
+          "address": [
+            "AddressMode.Wrap",
+            "AddressMode.Wrap"
+          ],
+          "filters": [
+            "FilterMode.Linear",
+            "FilterMode.Linear",
+            "FilterMode.Point"
+          ]
+        },
+        "program": {
+          "pixelSha256": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0",
+          "vertexSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+          "sampleBias": -1.0,
+          "normalScale": 1.0,
+          "backface": 0.0,
+          "uvTransform": [
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        "messages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      "intel": {
+        "device": "Intel(R) UHD Graphics",
+        "levels": [
+          {
+            "level": 0,
+            "extent": [
+              2048,
+              2048
+            ],
+            "bytes": 4194304,
+            "sha256": "5a839ca9b920d1ade77fe97a49aac129097838e72710bbbf07228b35eafc8ed9"
+          },
+          {
+            "level": 1,
+            "extent": [
+              1024,
+              1024
+            ],
+            "bytes": 1048576,
+            "sha256": "c852caf9cb0a4e95e29f2103c0d4aa03a6ed0018d465a7b85b59408475b4035b"
+          },
+          {
+            "level": 2,
+            "extent": [
+              512,
+              512
+            ],
+            "bytes": 262144,
+            "sha256": "455c5d31aa67fd2feaf892ce812305626f307f19dc9aa0fa2bfb7c825f6a72fa"
+          },
+          {
+            "level": 3,
+            "extent": [
+              256,
+              256
+            ],
+            "bytes": 65536,
+            "sha256": "65315fa6779d28e5e1aacf26d6fbd387bc55c9ae4276b9bce8f45793e00c063a"
+          },
+          {
+            "level": 4,
+            "extent": [
+              128,
+              128
+            ],
+            "bytes": 16384,
+            "sha256": "8100225eb647ed24f70ddb6f806a27bb9f20ea2fdf1e0e5e7833282c2b31c8cf"
+          },
+          {
+            "level": 5,
+            "extent": [
+              64,
+              64
+            ],
+            "bytes": 4096,
+            "sha256": "e0d9b94f5d05c9d4ac9937859bd5ac0fa5edf1dae7c2a4a606343e7557d99d61"
+          },
+          {
+            "level": 6,
+            "extent": [
+              32,
+              32
+            ],
+            "bytes": 1024,
+            "sha256": "fee38c90e616cdcee4f4daae6810af2876a3383aa0def17d5db456b5e00f0ce1"
+          },
+          {
+            "level": 7,
+            "extent": [
+              16,
+              16
+            ],
+            "bytes": 256,
+            "sha256": "0c8bf796f28c7af5a7b586038902e3543e886e45e31cbf412edff5cd3dc33f3e"
+          },
+          {
+            "level": 8,
+            "extent": [
+              8,
+              8
+            ],
+            "bytes": 64,
+            "sha256": "a7a5b4f89d948f03a5420b7ca6a471711c526ebc7d5abcafabe75b3213ee4c9d"
+          },
+          {
+            "level": 9,
+            "extent": [
+              4,
+              4
+            ],
+            "bytes": 16,
+            "sha256": "c06a55c30b68c65b66341d376bf6d7475ce14d4732fed0642659785ac79ce29b"
+          },
+          {
+            "level": 10,
+            "extent": [
+              2,
+              2
+            ],
+            "bytes": 16,
+            "sha256": "fea00b44c4b81a6717f44d33d7d5c4616e23828a3e7b2749389a0d091862d80f"
+          },
+          {
+            "level": 11,
+            "extent": [
+              1,
+              1
+            ],
+            "bytes": 16,
+            "sha256": "1ea20f28474ed632dfea377bb36263b242d2b1d2d9cf34efac0e2982bda8d0aa"
+          }
+        ],
+        "sampler": {
+          "bias": 0.0,
+          "lod": [
+            0.0,
+            1000.0
+          ],
+          "anisotropy": 0.0,
+          "address": [
+            "AddressMode.Wrap",
+            "AddressMode.Wrap"
+          ],
+          "filters": [
+            "FilterMode.Linear",
+            "FilterMode.Linear",
+            "FilterMode.Point"
+          ]
+        },
+        "program": {
+          "pixelSha256": "cf35bcfab626ca6ba74fdb95f36f0947b8a5df93eed4adf2f94cedf9951feca0",
+          "vertexSha256": "588e2efbfc43c84cdd37d2c1295c69089d534802b1facdfaa3906c2d4fd36c77",
+          "sampleBias": -1.0,
+          "normalScale": 1.0,
+          "backface": 0.0,
+          "uvTransform": [
+            1.0,
+            1.0,
+            0.0,
+            0.0
+          ]
+        },
+        "messages": []
+      }
+    },
+    "dds": {
+      "file": "cloth-receiver-normal.dds",
+      "bytes": 5592580,
+      "headerBytes": 148,
+      "sha256": "924a06afe633006325ec42ae990c203a500495a75c61353d1409d2fd7e2c07cf"
+    }
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 7.35999999998603,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-083618-native-cloth-receiver-normal-input-a94a9c\\replay.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-083618-native-cloth-receiver-normal-input-a94a9c\\tmp"
+  },
+  "archive": {
+    "bytes": 13211,
+    "sha256": "b1cac9e0a9740e58eb77b77d25dcce6e18d1e024cc66e29fe596dc597c2805a1",
+    "contents": {
+      "run/task-card.json": "196f34ba65bb513418977ab1dba47ae547f9f271a4fa293b4128ccc1f8fe7d27",
+      "run/replay.py": "a1a41d59af1a3ed32aa571df3cf93da1582c638469dc93854c7ce15669dbfedd",
+      "run/replay-worker.py": "7903f7a7560f01339c1576d145bdef1bb4c4e6f0c01446170f1f3cc0c5fca2d4",
+      "run/queued-replay.py": "f862046b3ce6661c65df567f9fbb6c35c63e8df6accfd49d0774d3f7662c1453",
+      "run/replay-execution.json": "d223740ad63a0d89f385f0638c2836db8fd4aadad3430a35fed2ed223ee5434b",
+      "run/compare-input.py": "d28e53783e8ea80ec65949e7ef85c25266de2e2776f01a3ebe4e9d77d4f2c258",
+      "run/package-evidence.py": "7cba86c4cb91d6bf612f48e8459e2b50206164e1250b0f4923e1f203e4aa8fb0",
+      "run/source-comparison.json": "7dea340ba49d0423288ee2214c46031851e02eeb2adb5beba5c42978b473970c",
+      "run/native-source/request.json": "8e1266ea90d942b1641c759047c58aeaea657a97970efa21d805a34294cf09d4",
+      "run/native-source/command.json": "dd704dfd3585cde4e9306ab9e3885555d9570da053948024d6fb80025db28f6b",
+      "run/native-source/report.json": "9623a854ca151e58e3d1cd9dc07996480b6d007cdc94f32c0476c0c54d954956",
+      "run/native-source/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

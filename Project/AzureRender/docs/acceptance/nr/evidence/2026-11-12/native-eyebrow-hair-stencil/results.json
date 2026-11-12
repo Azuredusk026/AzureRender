@@ -1,0 +1,1962 @@
+{
+  "status": "qualified-native-eyebrow-hair-stencil",
+  "overall": "failed-user-review",
+  "result": {
+    "eyebrowPoints": 496,
+    "overlap": 135,
+    "depthBeforeMaxUlp": 1,
+    "playerHairDepthOverNativeUlp": [
+      10771,
+      123265
+    ],
+    "stencilBefore": 0,
+    "stencilEyebrow": 52,
+    "protectedBit": 16,
+    "overlapStencilDepthPreserved": 135,
+    "rejectedPixelHistory": 6,
+    "passedPixelHistoryControls": 2,
+    "sameStencilCropsAcrossAdapters": 6
+  },
+  "nativeReplay": {
+    "status": "qualified",
+    "devices": {
+      "nvidia": {
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "states": {
+          "296": {
+            "event": 296,
+            "indices": 1878,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 52,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 52,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "310": {
+            "event": 310,
+            "indices": 948,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 52,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 52,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "328": {
+            "event": 328,
+            "indices": 17037,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "345": {
+            "event": 345,
+            "indices": 8718,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "363": {
+            "event": 363,
+            "indices": 7698,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "377": {
+            "event": 377,
+            "indices": 102882,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "391": {
+            "event": 391,
+            "indices": 21489,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "404": {
+            "event": 404,
+            "indices": 61935,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "422": {
+            "event": 422,
+            "indices": 43044,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 16,
+              "writeMask": 239,
+              "function": "CompareFunction.GreaterEqual",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 16,
+              "writeMask": 239,
+              "function": "CompareFunction.GreaterEqual",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "440": {
+            "event": 440,
+            "indices": 43044,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 16,
+              "writeMask": 239,
+              "function": "CompareFunction.GreaterEqual",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 16,
+              "writeMask": 239,
+              "function": "CompareFunction.GreaterEqual",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Front",
+            "frontCCW": true
+          },
+          "460": {
+            "event": 460,
+            "indices": 2304,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 0,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 0,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "478": {
+            "event": 478,
+            "indices": 6,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 5,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 5,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          }
+        },
+        "attachments": {
+          "276": {
+            "path": "nvidia-276-d32s8.zlib",
+            "sha256": "3ebf5b6ac781d29497a237cddb5b0543e8db31071ef7ca2d1621491525dd3a33",
+            "fullSha256": "2c3b31f896845d87d1f7e363e15f67ea90138d5702852807471dd0f86c6a879e",
+            "rawCropSha256": "de7619cd58a9209e2752270da2a5ab2c3992e345b5d798e20c228a5e5b9bcb60",
+            "overlapSecondWords": [
+              [
+                0,
+                135
+              ]
+            ]
+          },
+          "296": {
+            "path": "nvidia-296-d32s8.zlib",
+            "sha256": "825b58c1edc50423d34a0085c5d2ac2dd1bcb207df031fdd54d2e75a4b030127",
+            "fullSha256": "8d9c912b9020a38e0ee15306d2037e4a4917eb75f5000ab4974fdfc55ea92f03",
+            "rawCropSha256": "c4ec87f748e6504955c51683befab1bcd299a6b745c612cb709b8fe5fc13f1e1",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          },
+          "421": {
+            "path": "nvidia-421-d32s8.zlib",
+            "sha256": "ffb6f5e22c3b2a946784395cae6d37c88720932a428f42e04d2f79fd89b0acbd",
+            "fullSha256": "4b34d76fb6827531f98cdd31cd804e3d8c08d4b2bd78f829c3fab9f750e458fe",
+            "rawCropSha256": "7ec36bd1f040d8432481404011376ffac08fab5f6689c63c21755561b5b5599a",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          },
+          "422": {
+            "path": "nvidia-422-d32s8.zlib",
+            "sha256": "3752c59925baa296a9e07434638ba73940542b0289fa9e4d7cf6d45acfb78867",
+            "fullSha256": "2c3c34affbc7ed8b048899433f08dbbc63fff82e0069b415f5188b839c53886e",
+            "rawCropSha256": "b28a4709bf4628b606e0b4c62da93c03e5531504e8716b429d4d0a0ae4226c7f",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          },
+          "440": {
+            "path": "nvidia-440-d32s8.zlib",
+            "sha256": "b28d5d798de9ca29f2a9431f85c3f9d4c1b6451e3ebc48412f0d7486b41bae41",
+            "fullSha256": "21d64d703c09af4c5225da903aa6102e116ecd9fe6733ebb2a96eecd0d27e999",
+            "rawCropSha256": "af3b6dbf879df7e1a1f04e02c533321af3ca25be8002a9f52def17953b3f6e66",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          },
+          "699": {
+            "path": "nvidia-699-d32s8.zlib",
+            "sha256": "d0ede0524f89ff6cab2fbfc7c40bcd97777f201b7d59218000dd09eb4293d74b",
+            "fullSha256": "0f2250a0db74cd72b061575510c646a57b022c44454d7a72b565630f9330e8ca",
+            "rawCropSha256": "81c582bff1a4435869bb2670e7a7041676bfc44c5fb8221b6a6c129149848f45",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          }
+        },
+        "history": [
+          {
+            "point": [
+              1326,
+              1181
+            ],
+            "kind": "native-eyebrow-player-hair",
+            "changes": [
+              {
+                "event": 296,
+                "fragment": 0,
+                "primitive": 116,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  0,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.0,
+                  0.03101184032857418,
+                  0.03101184032857418
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 0,
+                "primitive": 1719,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  52,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03101184032857418,
+                  0.030961373820900917,
+                  0.03101184032857418
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 1,
+                "primitive": 4088,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03101184032857418,
+                  0.03099142573773861,
+                  0.03101184032857418
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 2,
+                "primitive": 7765,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03101184032857418,
+                  0.03030378557741642,
+                  0.03101184032857418
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 3,
+                "primitive": 10301,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.03101184032857418,
+                  0.031031902879476547,
+                  0.03101184032857418
+                ]
+              }
+            ]
+          },
+          {
+            "point": [
+              1296,
+              1190
+            ],
+            "kind": "native-eyebrow-player-hair",
+            "changes": [
+              {
+                "event": 296,
+                "fragment": 0,
+                "primitive": 616,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  0,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.0,
+                  0.03120037168264389,
+                  0.03120037168264389
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 0,
+                "primitive": 4247,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  52,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03120037168264389,
+                  0.03131570294499397,
+                  0.03131570294499397
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 1,
+                "primitive": 6369,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.03131570294499397,
+                  0.029346931725740433,
+                  0.03120037168264389
+                ]
+              }
+            ]
+          },
+          {
+            "point": [
+              1262,
+              1194
+            ],
+            "kind": "native-eyebrow-player-hair",
+            "changes": [
+              {
+                "event": 296,
+                "fragment": 0,
+                "primitive": 521,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  0,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.0,
+                  0.031170571222901344,
+                  0.031170571222901344
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 0,
+                "primitive": 5133,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  52,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.031170571222901344,
+                  0.02949218638241291,
+                  0.031170571222901344
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 1,
+                "primitive": 5477,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.031170571222901344,
+                  0.02945498563349247,
+                  0.031170571222901344
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 2,
+                "primitive": 9720,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.031170571222901344,
+                  0.03130446746945381,
+                  0.03130446746945381
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 3,
+                "primitive": 10567,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03130446746945381,
+                  0.029481129720807076,
+                  0.03130446746945381
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 4,
+                "primitive": 11958,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.03130446746945381,
+                  0.030039966106414795,
+                  0.031170571222901344
+                ]
+              }
+            ]
+          },
+          {
+            "point": [
+              1320,
+              1177
+            ],
+            "kind": "native-eyebrow-player-hair",
+            "changes": [
+              {
+                "event": 296,
+                "fragment": 0,
+                "primitive": 147,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  0,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.0,
+                  0.031014204025268555,
+                  0.031014204025268555
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 0,
+                "primitive": 6812,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  52,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.031014204025268555,
+                  0.029478304088115692,
+                  0.031014204025268555
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 1,
+                "primitive": 7770,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": true,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -1,
+                  -2
+                ],
+                "depth": [
+                  0.031014204025268555,
+                  -1.0,
+                  0.031014204025268555
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 2,
+                "primitive": 11478,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.031014204025268555,
+                  0.031153321266174316,
+                  0.031014204025268555
+                ]
+              }
+            ]
+          },
+          {
+            "point": [
+              1320,
+              1180
+            ],
+            "kind": "native-eyebrow-player-hair",
+            "changes": [
+              {
+                "event": 296,
+                "fragment": 0,
+                "primitive": 103,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  0,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.0,
+                  0.031025560572743416,
+                  0.031025560572743416
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 0,
+                "primitive": 4089,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  52,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.031025560572743416,
+                  0.03106056898832321,
+                  0.03106056898832321
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 1,
+                "primitive": 6813,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03106056898832321,
+                  0.029484432190656662,
+                  0.03106056898832321
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 2,
+                "primitive": 11476,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.03106056898832321,
+                  0.031184012070298195,
+                  0.031025560572743416
+                ]
+              }
+            ]
+          },
+          {
+            "point": [
+              1299,
+              1183
+            ],
+            "kind": "native-eyebrow-player-hair",
+            "changes": [
+              {
+                "event": 296,
+                "fragment": 0,
+                "primitive": 449,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  0,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.0,
+                  0.031121375039219856,
+                  0.031121375039219856
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 0,
+                "primitive": 6368,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  52,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.031121375039219856,
+                  0.029326697811484337,
+                  0.031121375039219856
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 1,
+                "primitive": 9669,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": true
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  52
+                ],
+                "depth": [
+                  0.031121375039219856,
+                  0.03145194798707962,
+                  0.031121375039219856
+                ]
+              }
+            ]
+          },
+          {
+            "point": [
+              1341,
+              1161
+            ],
+            "kind": "native-hair",
+            "changes": [
+              {
+                "event": 422,
+                "fragment": 0,
+                "primitive": 96,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  0,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.0,
+                  0.03045770153403282,
+                  0.03045770153403282
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 1,
+                "primitive": 6956,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03045770153403282,
+                  0.02965419739484787,
+                  0.03045770153403282
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 2,
+                "primitive": 7737,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03045770153403282,
+                  0.03034411557018757,
+                  0.03045770153403282
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 3,
+                "primitive": 7860,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03045770153403282,
+                  0.03000088408589363,
+                  0.03045770153403282
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 4,
+                "primitive": 7913,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  36
+                ],
+                "depth": [
+                  0.03045770153403282,
+                  0.02967693842947483,
+                  0.03045770153403282
+                ]
+              }
+            ]
+          },
+          {
+            "point": [
+              1222,
+              1216
+            ],
+            "kind": "native-hair",
+            "changes": [
+              {
+                "event": 422,
+                "fragment": 0,
+                "primitive": 3272,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  36,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03034091368317604,
+                  0.03029649704694748,
+                  0.03034091368317604
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 1,
+                "primitive": 6316,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03034091368317604,
+                  0.03006540797650814,
+                  0.03034091368317604
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 2,
+                "primitive": 8981,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03034091368317604,
+                  0.030502157285809517,
+                  0.030502157285809517
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 3,
+                "primitive": 9565,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.030502157285809517,
+                  0.03071279637515545,
+                  0.03071279637515545
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 4,
+                "primitive": 10048,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03071279637515545,
+                  0.030406763777136803,
+                  0.03071279637515545
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 5,
+                "primitive": 10054,
+                "passed": false,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": true,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  -2
+                ],
+                "depth": [
+                  0.03071279637515545,
+                  0.030324701219797134,
+                  0.03071279637515545
+                ]
+              },
+              {
+                "event": 422,
+                "fragment": 6,
+                "primitive": 11120,
+                "passed": true,
+                "tests": {
+                  "backfaceCulled": false,
+                  "sampleMasked": false,
+                  "depthClipped": false,
+                  "scissorClipped": false,
+                  "shaderDiscarded": false,
+                  "depthTestFailed": false,
+                  "stencilTestFailed": false
+                },
+                "stencil": [
+                  -2,
+                  -2,
+                  36
+                ],
+                "depth": [
+                  0.03071279637515545,
+                  0.03080160543322563,
+                  0.03080160543322563
+                ]
+              }
+            ]
+          }
+        ],
+        "messages": [
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::GetCounterAvailabilityImage\nNvPerf could not determine counter availability for this GPU",
+          "NVIDIA Nsight Perf SDK\nNVD3D11Counters::Impl::TryInitializePerfSDK\nNvPerf could not initialize counter availability image"
+        ]
+      },
+      "intel": {
+        "device": "Intel(R) UHD Graphics",
+        "states": {
+          "296": {
+            "event": 296,
+            "indices": 1878,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 52,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 52,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "310": {
+            "event": 310,
+            "indices": 948,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 52,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 52,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "328": {
+            "event": 328,
+            "indices": 17037,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "345": {
+            "event": 345,
+            "indices": 8718,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "363": {
+            "event": 363,
+            "indices": 7698,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "377": {
+            "event": 377,
+            "indices": 102882,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "391": {
+            "event": 391,
+            "indices": 21489,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "404": {
+            "event": 404,
+            "indices": 61935,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "422": {
+            "event": 422,
+            "indices": 43044,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 16,
+              "writeMask": 239,
+              "function": "CompareFunction.GreaterEqual",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 16,
+              "writeMask": 239,
+              "function": "CompareFunction.GreaterEqual",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          },
+          "440": {
+            "event": 440,
+            "indices": 43044,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 36,
+              "compareMask": 16,
+              "writeMask": 239,
+              "function": "CompareFunction.GreaterEqual",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 36,
+              "compareMask": 16,
+              "writeMask": 239,
+              "function": "CompareFunction.GreaterEqual",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Front",
+            "frontCCW": true
+          },
+          "460": {
+            "event": 460,
+            "indices": 2304,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 0,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 0,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.NoCull",
+            "frontCCW": true
+          },
+          "478": {
+            "event": 478,
+            "indices": 6,
+            "depthReadOnly": false,
+            "stencilReadOnly": false,
+            "depthEnable": true,
+            "depthWrites": true,
+            "depthFunction": "CompareFunction.GreaterEqual",
+            "stencilEnable": true,
+            "front": {
+              "reference": 5,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "back": {
+              "reference": 5,
+              "compareMask": 255,
+              "writeMask": 255,
+              "function": "CompareFunction.AlwaysTrue",
+              "passOperation": "StencilOperation.Replace",
+              "failOperation": "StencilOperation.Keep",
+              "depthFailOperation": "StencilOperation.Keep"
+            },
+            "cullMode": "CullMode.Back",
+            "frontCCW": true
+          }
+        },
+        "attachments": {
+          "276": {
+            "path": "intel-276-d32s8.zlib",
+            "sha256": "3ebf5b6ac781d29497a237cddb5b0543e8db31071ef7ca2d1621491525dd3a33",
+            "fullSha256": "2c3b31f896845d87d1f7e363e15f67ea90138d5702852807471dd0f86c6a879e",
+            "rawCropSha256": "de7619cd58a9209e2752270da2a5ab2c3992e345b5d798e20c228a5e5b9bcb60",
+            "overlapSecondWords": [
+              [
+                0,
+                135
+              ]
+            ]
+          },
+          "296": {
+            "path": "intel-296-d32s8.zlib",
+            "sha256": "766b80b1a0480ce44e6d058dc22f6c532ca9156f2b48e7412c26598b3c572cb5",
+            "fullSha256": "7e66723ee284c8c34134616c0ae89552a7f6c2e9d65f2ad48341f4830e3aaf5c",
+            "rawCropSha256": "0ea4856f17c946a2df6727f074b289cb2e2fb7d9fb148e75b4447cb24dd92e51",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          },
+          "421": {
+            "path": "intel-421-d32s8.zlib",
+            "sha256": "e033c34eddfdd41ce4a9c8fc6b6317b0f9baff068b31216aa8c3c40e3d12a0cd",
+            "fullSha256": "3c6e96000afbad1d2392e20c698c3a44ac5f3719cabeca45ebf6436ac5c54990",
+            "rawCropSha256": "1e33a18baaa519c4be510d0504482ebfb29d468bc121b64078b2e35d7163ed43",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          },
+          "422": {
+            "path": "intel-422-d32s8.zlib",
+            "sha256": "755acedaa8e19a8f99da80d371b3d314bc51b1e49caf20e77eeafcb4cc89a9a9",
+            "fullSha256": "632d0741d7a667980c18a1ebe980964d0c08eb78aaceca923f19cb9cf2d52d64",
+            "rawCropSha256": "0efed3e3c17472cb5409c8bc2d02612d436d191c18aae280973748881501bc1e",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          },
+          "440": {
+            "path": "intel-440-d32s8.zlib",
+            "sha256": "3427a243f1dd135e484618b383c19539ad1fa91257bcdacb2b54611f29aa1266",
+            "fullSha256": "f3b7c082dcd42bcae8520668eb4221ce25e811672f87cd0f4da4ae7648b58c5b",
+            "rawCropSha256": "0604763299c8ad25e1ec80405b9ffa26e0fa40412413b16d39b8976895feb730",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          },
+          "699": {
+            "path": "intel-699-d32s8.zlib",
+            "sha256": "430a451601724037f3d3be06b7ce5d6c07d60cc1f9614a37f74842033d8c7552",
+            "fullSha256": "3fabedb65271a9030f736a9d1a87a138079b1bfb39eb9a0ce5f46557517b9b58",
+            "rawCropSha256": "dc8f8bd02556d420a421accb675e061f67c158e2015f3dd3f72ad341804603ab",
+            "overlapSecondWords": [
+              [
+                52,
+                135
+              ]
+            ]
+          }
+        },
+        "history": [],
+        "messages": []
+      }
+    }
+  },
+  "execution": {
+    "status": "exited",
+    "exitCode": 0,
+    "reason": null,
+    "seconds": 10.797000000020489,
+    "logTruncated": false,
+    "samplingSeconds": 1,
+    "command": [
+      "D:\\Projects\\FYP\\Project\\AzureRender\\build\\reinstall-environment\\venv\\Scripts\\python.exe",
+      "-B",
+      "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-105542-native-eyebrow-hair-stencil-8ad501\\replay.py"
+    ],
+    "temporaryDirectory": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-105542-native-eyebrow-hair-stencil-8ad501\\tmp"
+  },
+  "lease": {
+    "owner": "01a1c099-8121-7be3-b0b8-7af2f9a06b2a",
+    "task": "quality-native-eyebrow-hair-stencil",
+    "output": "D:\\Projects\\FYP-worktrees\\nr-quality\\Project\\AzureRender\\build\\runs\\20261112-105542-native-eyebrow-hair-stencil-8ad501",
+    "pid": 48684,
+    "token": "a6eecb58974845b6bcaa2c6518a4ff33",
+    "started": 1794452353.031537,
+    "state": "released",
+    "ended": 1794452363.8629756
+  },
+  "archive": {
+    "bytes": 1446845,
+    "sha256": "3b89ff9cf631c741f5f89607d9b396018544bc6af5aad34b1a64b2579373d1d6",
+    "contents": {
+      "run/task-card.json": "23eb8e7c207d00c2c0b276fac6cb5c9c839d150591abda32c197f348e5266f88",
+      "run/replay.py": "c4d4d51b585a24c5a23838a48c44f107f0c063700786ebc849c37f680cf2379a",
+      "run/replay-worker.py": "047994769cdb86db88e36e060d32def23b0b7bd63b3a89e42b6181938e46362b",
+      "run/queued-replay.py": "9a7af8fa23c780d1bb1d4413041db1005f567892b8d2521c37e68d58f1c6aa14",
+      "run/replay-execution.json": "6ec1a1c94f406870b60d1896ec7fe67d1c5c6746b7214ef681e18d4654cc28fd",
+      "run/lease-held.json": "889413370e9e3215cfa336c0347761bfea827f53562efafcc61afa95e0550dd6",
+      "run/lease-released.json": "3f4972414aa29188892c1cd68206aa0fc731c18a7031c1634a12e54d1c12a696",
+      "run/package-evidence.py": "889dbd922d3cd0687f63040da970ac76fbbac8503242a2f1df160bed4187fd8b",
+      "run/stencil-replay/command.json": "691703edfed05625af479dfdc8c2e278f50cae87b8d421fa3441cf5c6c5cadd4",
+      "run/stencil-replay/intel-276-d32s8.zlib": "3ebf5b6ac781d29497a237cddb5b0543e8db31071ef7ca2d1621491525dd3a33",
+      "run/stencil-replay/intel-296-d32s8.zlib": "766b80b1a0480ce44e6d058dc22f6c532ca9156f2b48e7412c26598b3c572cb5",
+      "run/stencil-replay/intel-421-d32s8.zlib": "e033c34eddfdd41ce4a9c8fc6b6317b0f9baff068b31216aa8c3c40e3d12a0cd",
+      "run/stencil-replay/intel-422-d32s8.zlib": "755acedaa8e19a8f99da80d371b3d314bc51b1e49caf20e77eeafcb4cc89a9a9",
+      "run/stencil-replay/intel-440-d32s8.zlib": "3427a243f1dd135e484618b383c19539ad1fa91257bcdacb2b54611f29aa1266",
+      "run/stencil-replay/intel-699-d32s8.zlib": "430a451601724037f3d3be06b7ce5d6c07d60cc1f9614a37f74842033d8c7552",
+      "run/stencil-replay/nvidia-276-d32s8.zlib": "3ebf5b6ac781d29497a237cddb5b0543e8db31071ef7ca2d1621491525dd3a33",
+      "run/stencil-replay/nvidia-296-d32s8.zlib": "825b58c1edc50423d34a0085c5d2ac2dd1bcb207df031fdd54d2e75a4b030127",
+      "run/stencil-replay/nvidia-421-d32s8.zlib": "ffb6f5e22c3b2a946784395cae6d37c88720932a428f42e04d2f79fd89b0acbd",
+      "run/stencil-replay/nvidia-422-d32s8.zlib": "3752c59925baa296a9e07434638ba73940542b0289fa9e4d7cf6d45acfb78867",
+      "run/stencil-replay/nvidia-440-d32s8.zlib": "b28d5d798de9ca29f2a9431f85c3f9d4c1b6451e3ebc48412f0d7486b41bae41",
+      "run/stencil-replay/nvidia-699-d32s8.zlib": "d0ede0524f89ff6cab2fbfc7c40bcd97777f201b7d59218000dd09eb4293d74b",
+      "run/stencil-replay/process.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run/stencil-replay/report.json": "7582fc1f4a4a52b97552e200abe02cd181bac4d9a2ce1e4b8655228620ba9a69",
+      "run/stencil-replay/request.json": "8c61a670d5037646b81987e965899b9be15df7a96d7bf07fe3a7c17901ac68f3"
+    }
+  }
+}

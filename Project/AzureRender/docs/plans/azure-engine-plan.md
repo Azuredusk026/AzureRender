@@ -30,6 +30,9 @@ Player 的 CPU 工作 P95 至多为八毫秒。
 
 ## 当前执行顺序
 
+[画质与性能集成](../acceptance/nr/quality-performance-integration.md)通过两种配置的标准构建及双设备回归。
+参考附件和原始四帧逐字节一致。
+
 [材质组合管线范围验收](../acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧及短时净收益。
 候选四帧加载的峰值工作集约为 2.047 GB。
 1080p60 联合场景诊断的 GPU P95 约为 18.04 毫秒，设备本地内存高水位约为 2.593 GiB。
@@ -1504,3 +1507,68 @@ NVIDIA 整区精确一致，Intel 透明判定差已关闭，剩余九十六处�
 
 [场景参考法线与对象身份](../acceptance/nr/scene-reference-normal.md)记录实际场景输入。
 可见量装配继续核对同帧对象图集及参考重建。
+
+[场景参考对象可见量](../acceptance/nr/scene-reference-object-visibility.md)记录同帧图集及输出。
+原生图集、参考标定及完整颜色按各自门槛验收。
+
+[对象可见量逆投影标定](../acceptance/nr/scene-visibility-reference-calibration.md)核对实际相机与当前对象记录。
+图集、材质输入及完整颜色按各自门槛验收。
+
+[原生图集与接收输入来源](../acceptance/nr/native-atlas-and-receiver-producers.md)核对逐事件深度和法线写入。
+图集投影的乘加次序与两份服饰几何继续核对。
+
+[对象可见量深度方向](../acceptance/nr/visibility-projection-depth.md)接入逐记录选择。
+原生对象记录和图集投影沿实际来源继续验收。
+
+[原生对象记录标定](../acceptance/nr/native-object-record-calibration.md)核对当前对象和灯光投影。
+图集写入与接收法线继续按各自来源验收。
+
+[参考对象图集光栅](../acceptance/nr/reference-object-shadow-raster.md)核对真实 D16 写入及读回。
+NVIDIA 头发可见量通过一字节门槛，Intel 仍有 236 处超差。
+完整接收继续核对深度和法线，颜色继续核对同帧材质输入。
+
+[材质参考对象可见量](../acceptance/nr/material-reference-object-visibility.md)接入快照及主通道。
+NVIDIA 的完整头发颜色达到一字节门槛。
+Intel 的 580 处颜色超差继续按设备输入核对。
+
+[Intel 参考可见量来源](../acceptance/nr/intel-reference-visibility-sources.md)核对实际附件与算术。
+同输入的 `ProfileV1` 在双设备满足一字节门槛。
+
+[项目参考可见量算术](../acceptance/nr/project-reference-visibility-profile.md)接入实际生产入口。
+完整接收按原生写入事件核对法线与深度。
+Intel 头发颜色继续按冻结区域核对纹理选级。
+
+[原生接收输入来源](../acceptance/nr/native-receiver-producer-replay.md)核对事件 377 的纹理与事件 440 的深度。
+
+[参考场景外扩深度](../acceptance/nr/reference-scene-outline-depth.md)接入材质外扩绘制。
+服饰法线、外扩投影系数与覆盖继续按原生来源核对。
+
+[原生服饰接收法线输入](../acceptance/nr/native-cloth-receiver-normal-input.md)核对十二级 BC5 与材质 UV 方向。
+服饰一按原生层级、采样参数及法线重建分别验收。
+
+[服饰接收法线层级](../acceptance/nr/cloth-receiver-authored-mips.md)核对现有采样器读取原生十二级的实际结果。
+
+[服饰接收法线采样](../acceptance/nr/cloth-receiver-native-sampler.md)核对重复寻址、最近邻层级及偏移。
+
+[服饰接收法线绿色方向](../acceptance/nr/cloth-receiver-normal-y.md)核对切线空间方向。
+
+[参考法线采样后重建](../acceptance/nr/reference-normal-sampled-rg.md)接入材质画像及两份参考片元程序。
+[眉部接收深度与法线来源](../acceptance/nr/eyebrow-receiver-producer.md)核对 496 个位置的实际绘制与附件。头发裁剪、纹理选级及图集输入继续按原门槛验收。
+
+[原生头发法线纹理层级偏移](../acceptance/nr/native-hair-normal-mip-bias.md)核对 49 档双设备原生选级，Intel 固定偏移的最小超差为 477 处。
+
+[原生眉部与头发模板](../acceptance/nr/native-eyebrow-hair-stencil.md)确认 135 个重叠位置的原生模板保护与参考附件要求。
+
+[参考深度模板覆盖](../acceptance/nr/reference-depth-stencil-coverage.md)接入保护位及场景扩展 API 17。完整接收超差为 NVIDIA 410 处和 Intel 742 处，眉部各 30 处。
+
+[参考几何法线](../acceptance/nr/reference-geometric-normal.md)核对眉部和脸部的原生几何法线。完整接收超差为 NVIDIA 284 处和 Intel 632 处，新增位置纳入同一验收范围。
+
+[参考接收输入对照](../acceptance/nr/reference-receiver-source-isolation.md)在双设备逐字节复现完整可见量附件。原生深度和法线联合替换时，接收超差为 NVIDIA 10 处和 Intel 6 处，Intel 冻结头发可见量进入门槛。实际场景画质状态为 `failed-user-review`。
+
+[参考外壳深度投影](../acceptance/nr/reference-outline-projection.md)核对事件 440 的独立深度系数。外壳区域的可见量超差为 NVIDIA 1 处和 Intel 43 处，完整接收分别为 237 处和 608 处。
+
+[原生纹理取样足迹](../acceptance/nr/native-texture-sampling-footprint.md)测量固定梯度下的最近层级。轴向与对角近似在冻结头发的 17,017 个位置中逐位复现 17,012 个 NVIDIA 压缩法线值。实际颜色与可见量继续按原门槛验收。
+
+[参考头发选层边界](../acceptance/nr/reference-hair-mip-footprint.md)记录实际场景未通过的候选。正式接收继续以已验收的参考外壳版本为基线，按实际层级及原生显式层级核对新增位置。
+
+[参考头发片元层级](../acceptance/nr/reference-hair-live-lod.md)核对半层边界。NVIDIA 的 8 处法线变化全部处于一个 8 位层级精度单位内。边界采样继续在双设备正式场景核对。

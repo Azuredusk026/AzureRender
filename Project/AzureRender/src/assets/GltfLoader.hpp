@@ -151,6 +151,9 @@ struct AssetMaterial {
     azurerender::MaterialMainLightShadow mainLightShadow=azurerender::MaterialMainLightShadow::Scene;
     using CoverageTexture=azurerender::MaterialCoverageTexture;
     CoverageTexture coverageTexture;
+    bool sampledReferenceNormal=false;
+    enum class ReferenceDepthStencil { Ordinary, Protect, Respect };
+    ReferenceDepthStencil referenceDepthStencil = ReferenceDepthStencil::Ordinary;
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;
@@ -298,6 +301,7 @@ struct AssetMaterial {
     AssetAlphaMode alphaMode = AssetAlphaMode::Opaque;
     float alphaCutoff = 0.5F;
     bool doubleSided = false;
+    bool geometricReferenceNormal = false;
     std::array<std::shared_ptr<const azurerender::ImmutableBytes>,static_cast<std::size_t>(PixelKind::Count)> preparedPixels{};
 };
 

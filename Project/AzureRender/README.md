@@ -1,5 +1,7 @@
 # AzureRender 工程
 
+[画质与性能集成验收](docs/acceptance/nr/quality-performance-integration.md)通过两种配置的构建、双显卡参考附件及原始四帧核对。
+
 [材质组合管线范围验收](docs/acceptance/nr/material-viewquad-pipeline-scope.md)通过原始四帧、工作集和短时净收益检查。
 1080p60 联合场景诊断记录到约 2.593 GiB 的设备本地内存高水位，正式帧预算与功率条件继续验收。
 
@@ -997,3 +999,67 @@ Intel 设备差异与完整颜色继续验收。
 
 [场景参考法线与对象身份](docs/acceptance/nr/scene-reference-normal.md)记录同帧输入。
 NVIDIA 法线来源控制的 17,017 个可见量均在一字节内。
+
+[场景参考对象可见量](docs/acceptance/nr/scene-reference-object-visibility.md)接入实际图集和记录。
+完整接收及头发区域继续按一字节门槛核对。
+
+[对象可见量逆投影标定](docs/acceptance/nr/scene-visibility-reference-calibration.md)记录原生矩阵及当前场景坐标。
+双设备的冻结区域仍按一字节门槛验收。
+
+[原生图集与接收输入来源](docs/acceptance/nr/native-atlas-and-receiver-producers.md)记录逐事件实际读回。
+图集投影、服饰几何及接收输入按来源继续核对。
+
+[对象可见量深度方向](docs/acceptance/nr/visibility-projection-depth.md)定义图集与逐对象投影的约定。
+同一图集可由正向和反向记录共同使用。
+
+[原生对象记录标定](docs/acceptance/nr/native-object-record-calibration.md)接入实际对象可见量。
+NVIDIA 头发区域的 182 处超差均与图集单项对照重合。
+
+[参考对象图集光栅](docs/acceptance/nr/reference-object-shadow-raster.md)以标定投影写入实际图集。
+NVIDIA 的 17,017 个头发可见量位置满足一字节门槛。
+Intel、完整接收及材质颜色继续按冻结区域验收。
+
+[材质参考对象可见量](docs/acceptance/nr/material-reference-object-visibility.md)读取同帧附件。
+NVIDIA 的 17,017 个头发颜色位置均在一字节内。
+Intel 颜色及完整接收按冻结区域继续验收。
+
+[Intel 参考可见量来源](docs/acceptance/nr/intel-reference-visibility-sources.md)记录实际图集及原生选级。
+同输入的参考算术在两块设备满足一字节门槛。
+
+[项目参考可见量算术](docs/acceptance/nr/project-reference-visibility-profile.md)接入编辑器、Player 和发布包。
+Intel 实际 Player 的完整可见量附件逐字节匹配固定输入的 `ProfileV1` 对照。
+
+[原生接收输入来源](docs/acceptance/nr/native-receiver-producer-replay.md)核对服饰法线和头发外扩深度。
+
+[参考场景外扩深度](docs/acceptance/nr/reference-scene-outline-depth.md)记录反向深度写入与双设备验收。
+完整接收可见量和 Intel 头发颜色继续按冻结区域验收。
+
+[原生服饰接收法线输入](docs/acceptance/nr/native-cloth-receiver-normal-input.md)记录双设备一致的原生层级与 UV 方向。
+
+[服饰接收法线层级](docs/acceptance/nr/cloth-receiver-authored-mips.md)记录原生层级输入的双配置实测。
+
+[服饰接收法线采样](docs/acceptance/nr/cloth-receiver-native-sampler.md)记录双设备采样与接收结果。
+
+[服饰接收法线绿色方向](docs/acceptance/nr/cloth-receiver-normal-y.md)记录切线空间转换和剩余误差。
+
+[参考法线采样后重建](docs/acceptance/nr/reference-normal-sampled-rg.md)记录材质入口、参考附件及双设备回归。
+
+[眉部接收深度与法线来源](docs/acceptance/nr/eyebrow-receiver-producer.md)记录实际附件写入顺序和对应顶点。
+
+[原生头发法线纹理层级偏移](docs/acceptance/nr/native-hair-normal-mip-bias.md)记录双设备的层级边界与固定偏移对照。
+
+[原生眉部与头发模板](docs/acceptance/nr/native-eyebrow-hair-stencil.md)记录双设备模板状态、附件和像素历史。
+
+[参考深度模板覆盖](docs/acceptance/nr/reference-depth-stencil-coverage.md)记录保护位材质入口、实际接收附件和双配置回归。
+
+[参考几何法线](docs/acceptance/nr/reference-geometric-normal.md)记录眉部、脸部及其剩余接收超差。
+
+[参考接收输入对照](docs/acceptance/nr/reference-receiver-source-isolation.md)记录双设备完整可见量附件复现及深度、法线和阴影图集的独立影响。
+
+[参考外壳深度投影](docs/acceptance/nr/reference-outline-projection.md)记录独立深度系数及双设备冻结外壳对照。
+
+[原生纹理取样足迹](docs/acceptance/nr/native-texture-sampling-footprint.md)记录双设备点选层级、受控梯度及冻结头发对照。
+
+[参考头发选层边界](docs/acceptance/nr/reference-hair-mip-footprint.md)记录实际场景的双设备选层候选及未通过的字节门槛。
+
+[参考头发片元层级](docs/acceptance/nr/reference-hair-live-lod.md)记录实际片元层级和半层边界读回。

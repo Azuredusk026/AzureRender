@@ -58,6 +58,8 @@ class ImGuiEditorLayer;
 class ISceneRenderer;
 struct RenderContext;
 struct SceneFrameData;
+struct ScreenObjectVisibilityNumerics;
+struct ProjectReferenceViews;
 }
 
 namespace azurerender::rhi { class VulkanPipelineCache;struct RenderPassDesc; }
@@ -80,6 +82,9 @@ private:
     bool referenceCameraPrograms_=false;
     bool referenceSceneDepthPrograms_=false;
     bool referenceSceneVisibilityPrograms_=false;
+    bool referenceSceneObjectVisibilityPrograms_=false;
+    std::shared_ptr<const azurerender::ScreenObjectVisibilityNumerics> referenceObjectVisibilityNumerics_;
+    void applyProjectReferenceViews(const azurerender::ProjectReferenceViews&);
 #if AZURE_WITH_EDITOR
     std::unique_ptr<azurerender::ShaderHotReloader> shaderReloader_;
     std::unique_ptr<azurerender::RenderViewService> renderViews_;

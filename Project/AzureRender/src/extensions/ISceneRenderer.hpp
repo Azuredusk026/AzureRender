@@ -20,6 +20,7 @@ struct SceneReferenceDepthCapture {
     // Y-pole octahedral normals use the signed axes of the selected reference frame.
     std::vector<std::uint32_t> packedNormals;
     std::vector<std::uint8_t> objectIds;
+    std::vector<std::uint16_t> objectVisibility;
 };
 
 struct SceneGraphResources {
