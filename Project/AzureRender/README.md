@@ -82,6 +82,8 @@ NVIDIA 的 RGB8 路径缺少采样能力，正式内存预算继续按实际工�
 
 [NPR 渐变组合回归矩阵](docs/acceptance/nr/npr-ramp-regression.md)核对通用材质、织物及两种绑定的像素输出。
 
+[NullRhi 录制相机](docs/acceptance/nr/null-rhi-camera-regression.md)验证常规视角与远距背向场景的裁剪记录。
+
 [材质组合级联成本](docs/acceptance/nr/computed-cascade-demand-comparison.md)记录四像素组按需级联计算的实际回放。
 
 [快照视图组合](docs/acceptance/nr/snapshot-default-view-combination.md)的动态照明控制通过六附件核对。

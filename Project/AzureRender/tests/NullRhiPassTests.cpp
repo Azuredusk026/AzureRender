@@ -178,7 +178,8 @@ std::vector<RecordedCall> runFrame(
         frame.cameraPosition[1] = 100.0F;
         frame.cameraTarget[0] = 20000.0F;
     }
-    if (runtimeMutation != 0) frame.cameraPosition[2] = 5.0F;
+    // Recording a normal view requires an eye distinct from the target.
+    if (!cameraLooksAway || runtimeMutation != 0) frame.cameraPosition[2] = 5.0F;
     renderer.updateFrame(frame);
 
     if (runtimeMutation > 0 && runtimeMutation < 4) {

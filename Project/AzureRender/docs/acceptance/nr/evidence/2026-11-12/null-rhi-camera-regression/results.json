@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "status": "passed",
+  "sourceBase": "953648e",
+  "runtimeSourceHead": "bfe700e",
+  "failure": "GPU cull planes must be finite",
+  "cause": "The NullRhi test frame used equal eye and target positions for its default recording camera.",
+  "defaultTestEyeZ": 5,
+  "productionChanged": false,
+  "configurations": {
+    "debug": {
+      "index": 420,
+      "passedInGroup": 1,
+      "nullRhiSeconds": 10.9117,
+      "identicalProducts": 1282,
+      "registeredTests": 605
+    },
+    "release": {
+      "index": 422,
+      "passedInGroup": 7,
+      "nullRhiSeconds": 2.32091,
+      "identicalProducts": 1637,
+      "registeredTests": 607
+    }
+  },
+  "archive": {
+    "status": "passed",
+    "archive": "docs/acceptance/nr/evidence/2026-11-12/null-rhi-camera-regression/validation.zip",
+    "files": 35,
+    "logicalBytes": 3318673,
+    "archiveBytes": 780887,
+    "sha256": "e5410e5b34193745fc1b3057eea981b65a6188860ab82a8130662c5b48cfc216",
+    "removedSource": false,
+    "sourceCommit": "953648effba7e39db61a84885d76beacb80cd3e3"
+  }
+}

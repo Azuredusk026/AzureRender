@@ -755,6 +755,13 @@
       "sourceBase": "bfe700e",
       "evidence": "docs/acceptance/nr/computed-cascade-demand-comparison.md",
       "results": "docs/acceptance/nr/evidence/2026-11-12/computed-cascade-demand-comparison/results.json"
+    },
+    {
+      "path": "runs/20261112-011326-handoff-final-regression-e2e260/null-rhi-camera-evidence",
+      "name": "NullRhi 录制相机回归",
+      "sourceBase": "953648e",
+      "evidence": "docs/acceptance/nr/null-rhi-camera-regression.md",
+      "results": "docs/acceptance/nr/evidence/2026-11-12/null-rhi-camera-regression/results.json"
     }
   ],
   "preservedBuilds": [
