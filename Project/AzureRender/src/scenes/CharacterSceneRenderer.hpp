@@ -121,9 +121,9 @@ private:
     std::shared_ptr<const ScreenObjectVisibilityNumerics> referenceObjectVisibilityNumerics_;
     rhi::GpuImage referenceObjectIdFallback_{};
     VkImageView referenceObjectIdFallbackView_{};
-    std::array<VkPipeline,3> referenceSceneDepthPipelines_{};
-    std::array<VkPipeline,2> referenceSceneOutlineDepthPipelines_{};
-    std::array<VkPipeline,3> referenceSceneVisibilityPipelines_{};
+    std::array<std::array<VkPipeline, 3>, 3> referenceSceneDepthPipelines_{};
+    std::array<std::array<VkPipeline, 2>, 2> referenceSceneOutlineDepthPipelines_{};
+    std::array<std::array<VkPipeline, 3>, 3> referenceSceneVisibilityPipelines_{};
     struct ReferenceDepthSubmission {unsigned slot;bool visibilityInputs;bool objectVisibility;std::uint64_t submission;};
     std::optional<ReferenceDepthSubmission> pendingReferenceDepth_;
     std::optional<ReferenceDepthSubmission> submittedReferenceDepth_;

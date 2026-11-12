@@ -145,6 +145,8 @@ struct AssetMaterial {
     using CoverageTexture=azurerender::MaterialCoverageTexture;
     CoverageTexture coverageTexture;
     bool sampledReferenceNormal=false;
+    enum class ReferenceDepthStencil { Ordinary, Protect, Respect };
+    ReferenceDepthStencil referenceDepthStencil = ReferenceDepthStencil::Ordinary;
     std::vector<std::uint8_t> baseColorPixels;
     std::uint32_t baseColorWidth = 0;
     std::uint32_t baseColorHeight = 0;

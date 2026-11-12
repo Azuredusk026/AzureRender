@@ -1368,3 +1368,5 @@ Intel 头发颜色继续按冻结区域核对纹理选级。
 [原生头发法线纹理层级偏移](../acceptance/nr/native-hair-normal-mip-bias.md)核对 49 档双设备原生选级，Intel 固定偏移的最小超差为 477 处。
 
 [原生眉部与头发模板](../acceptance/nr/native-eyebrow-hair-stencil.md)确认 135 个重叠位置的原生模板保护与参考附件要求。
+
+[参考深度模板覆盖](../acceptance/nr/reference-depth-stencil-coverage.md)接入保护位及场景扩展 API 17。完整接收超差为 NVIDIA 410 处和 Intel 742 处，眉部各 30 处。

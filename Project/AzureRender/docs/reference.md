@@ -292,13 +292,14 @@ capabilities -> onLoad -> (updateFrame -> recordScene)*
 
 `RenderContext` 提供 Device、Physical Device、Graphics Queue/Family 和 Command Pool。它也提供当前 Command Buffer、格式、Extent、公共 Render Pass 和 Framebuffer。其他字段包括 Shadow Map、环境、Shader 目录、Ramp 和 Timing Query。Renderer 只借用这些对象，不能销毁它们。
 
-内置 Renderer：
+场景渲染器按 API 17 注册。该版本的图形管线描述支持固定模板状态，渲染通道附件描述支持显式清除模板。
 
-| ID | API | Capabilities |
-| --- | ---: | --- |
-| `character` | 1 | geometry、editor、capture |
-| `blackhole` | 1 | fullscreen、temporal、capture |
-| `sample` | 1 | sdk-example、capture |
+| 内置渲染器 | 能力 |
+| --- | --- |
+| `character` | geometry、editor、capture |
+| `blackhole` | fullscreen、temporal、capture |
+| `pathtracing` | geometry、progressive、capture |
+| `sample` | sdk-example、capture |
 
 ## `.azscene` v2
 
@@ -317,11 +318,11 @@ prefabSource, instanceOf
 | 契约 | 版本 |
 | --- | ---: |
 | 应用 | 0.1.0-rc1 |
-| Renderer SDK / Registry API | 3 |
+| 场景渲染器注册 API | 17 |
 | `azure.camera` / `CameraViewDescriptor` | 2 |
 | RenderSettings | 8 |
 | `.azscene` | 2 |
-| Material Profile | 1 |
+| 材质画像 | 1、2 |
 | Face SDF Profile | 1 |
 | Showcase Look Catalog | 1 |
 | Toon Ramp Profiles | 1 |

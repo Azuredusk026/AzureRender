@@ -1442,7 +1442,7 @@ void CharacterSceneRenderer::registerPasses(
             });
         rhi::ImageBarrierDesc raster{};raster.image=referenceSceneDepth_->rasterImage(slot);
         rhi::ImageBarrierDesc hardware{};hardware.image=referenceSceneDepth_->hardwareImage(slot);
-        hardware.aspectMask=VK_IMAGE_ASPECT_DEPTH_BIT;
+        hardware.aspectMask=referenceSceneDepth_->hardwareAspects();
         const auto rasterResource=graph.importImage("character-reference-r32",raster);
         graph.attachment(pass,rasterResource,RenderGraphUsage::ColorAttachment,VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         graph.attachment(pass,graph.importImage("character-reference-d32",hardware),RenderGraphUsage::DepthAttachment,VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
@@ -3113,9 +3113,18 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
                 VK_PIPELINE_STAGE_TRANSFER_BIT,VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,VK_ACCESS_TRANSFER_WRITE_BIT,VK_ACCESS_SHADER_READ_BIT});
         });
     }
-    if(referenceDepthRequested(context))
+    if (referenceDepthRequested(context)) {
+        const auto usesStencil = [](const LoadedAsset& asset) {
+            return std::any_of(asset.primitives.begin(), asset.primitives.end(), [&](const AssetPrimitive& primitive) {
+                return primitive.indexCount && asset.materials[primitive.materialIndex].referenceDepthStencil
+                    != AssetMaterial::ReferenceDepthStencil::Ordinary;
+            });
+        };
+        const bool stencilEnabled = usesStencil(asset_) || std::any_of(additionalResources_.begin(), additionalResources_.end(),
+            [&](const auto& resource) { return usesStencil(resource->asset); });
         referenceSceneDepth_=std::make_unique<SceneReferenceDepthTargets>(*rhi_,context.renderExtent,
-            static_cast<unsigned>(kMaxFramesInFlight),referenceVisibilityRequested(context));
+            static_cast<unsigned>(kMaxFramesInFlight),referenceVisibilityRequested(context),stencilEnabled);
+    }
     if(referenceObjectVisibilityRequested(context)){
         const ScreenObjectVisibilityNumerics deviceNumerics;
         const auto& numerics=context.referenceObjectVisibilityNumerics?*context.referenceObjectVisibilityNumerics:deviceNumerics;
@@ -3125,15 +3134,17 @@ void CharacterSceneRenderer::createOverlayDepth(const RenderContext& context) {
     }
 }
 void CharacterSceneRenderer::destroyOverlayDepth(){
-    for(auto* pipelines:{&referenceSceneDepthPipelines_,&referenceSceneVisibilityPipelines_})
-        for(auto& pipeline:*pipelines){
-            if(pipeline)rhi_->destroyPipeline(pipeline);
-            pipeline=VK_NULL_HANDLE;
+    const auto releasePipelines = [&](auto& groups) {
+        for (auto& group : groups) {
+            for (auto& pipeline : group) {
+                if (pipeline) rhi_->destroyPipeline(pipeline);
+                pipeline = VK_NULL_HANDLE;
+            }
         }
-    for(auto& pipeline:referenceSceneOutlineDepthPipelines_){
-        if(pipeline)rhi_->destroyPipeline(pipeline);
-        pipeline=VK_NULL_HANDLE;
-    }
+    };
+    releasePipelines(referenceSceneDepthPipelines_);
+    releasePipelines(referenceSceneVisibilityPipelines_);
+    releasePipelines(referenceSceneOutlineDepthPipelines_);
     pendingReferenceDepth_.reset();
     submittedReferenceDepth_.reset();
     referenceObjectVisibility_.reset();
@@ -3313,7 +3324,8 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
     std::vector<std::array<std::uint32_t,3>> referenceSpans;
     if(referenceDepth)referenceSpans=referenceDepthSpans(snapshot.instances);
     const auto& spans=referenceDepth?referenceSpans:snapshot.visibleSpans;
-    for(std::size_t spanIndex=0;spanIndex<spans.size();++spanIndex){
+    const bool stencilEnabled = referenceDepth && referenceSceneDepth_->stencilEnabled();
+    const auto recordSpan = [&](std::size_t spanIndex, bool respectStencil) {
         const auto& span=spans[spanIndex];
         const auto key=span[0],first=span[1],count=span[2];const auto& mesh=key==0?asset_:additionalResources_[key-1]->asset;
         const auto textureBase=key==0?kSharedTextureSlots:additionalResources_[key-1]->textureBase;
@@ -3321,6 +3333,8 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
         commands.bindVertexBuffer(snapshot.buffers.vertices.at(key),0);commands.bindIndexBuffer(snapshot.buffers.indices.at(key),0);
         for(const auto& primitive:mesh.primitives){
             const auto& m=mesh.materials[primitive.materialIndex];if(m.alphaMode==AssetAlphaMode::Blend||m.materialClass==AssetMaterialClass::Overlay)continue;
+            if (stencilEnabled && (m.referenceDepthStencil == AssetMaterial::ReferenceDepthStencil::Respect) != respectStencil)
+                continue;
             if(referenceDepth&&m.alphaMode==AssetAlphaMode::Mask&&(m.materialFeatures&MaterialFeatureEyeRadialSurface)!=0)
                 throw std::invalid_argument("Scene reference depth requires an authored coverage texture coordinate");
             if(validation){
@@ -3351,7 +3365,8 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
                 :overlayDepthPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)];
             if(referenceDepth){
                 const auto& pipelines=visibilityInputs?referenceSceneVisibilityPipelines_:referenceSceneDepthPipelines_;
-                commands.bindPipeline(pipelines[m.doubleSided?2:mirrored?1:0]);
+                const auto stencilRole = stencilEnabled ? static_cast<std::size_t>(m.referenceDepthStencil) : 0;
+                commands.bindPipeline(pipelines[stencilRole][m.doubleSided?2:mirrored?1:0]);
             }
             else if(!prefill&&!ordinaryColor&&!classColor)commands.bindPipeline(materialUvPipeline(m,validation?ordinaryRadianceValidationPipelines_[surfaceFacingIndex(m.doubleSided,mirrored)]:(simpleDepth?depthPipeline:materialLightingPipeline(m,depthPipeline))));
             const auto set=bindlessTextures_?context.currentFrame:context.currentFrame*totalMaterialCount()+materialBase+primitive.materialIndex;
@@ -3404,7 +3419,13 @@ void CharacterSceneRenderer::recordDepthCoverage(const RenderContext& context,co
         // Finish this resource's depth footprint before a later resource can
         // contribute background colors or normals behind the expanded shell.
         if(colorRequired)recordOutlineShells(context,snapshot,commands,spans,OutlineShellPass::SnapshotDepth,counters,spanIndex);
-    }
+    };
+    for (std::size_t spanIndex = 0; spanIndex < spans.size(); ++spanIndex)
+        recordSpan(spanIndex, false);
+    // Resolve the nearest ordinary or protected surface before any respecting draw.
+    if (stencilEnabled)
+        for (std::size_t spanIndex = 0; spanIndex < spans.size(); ++spanIndex)
+            recordSpan(spanIndex, true);
     if(referenceDepth)recordOutlineShells(context,snapshot,commands,spans,OutlineShellPass::ReferenceDepth);
 }
 

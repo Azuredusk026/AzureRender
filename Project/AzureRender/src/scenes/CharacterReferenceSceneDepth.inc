@@ -1,4 +1,20 @@
 namespace {
+using ReferenceDepthStencil = AssetMaterial::ReferenceDepthStencil;
+
+VkStencilOpState referenceDepthStencilState(ReferenceDepthStencil role) {
+    constexpr std::uint32_t protection = 1;
+    const bool respect = role == ReferenceDepthStencil::Respect;
+    VkStencilOpState state{};
+    state.failOp = VK_STENCIL_OP_KEEP;
+    state.depthFailOp = VK_STENCIL_OP_KEEP;
+    state.passOp = respect ? VK_STENCIL_OP_KEEP : VK_STENCIL_OP_REPLACE;
+    state.compareOp = respect ? VK_COMPARE_OP_EQUAL : VK_COMPARE_OP_ALWAYS;
+    state.compareMask = protection;
+    state.writeMask = respect ? 0 : protection;
+    state.reference = role == ReferenceDepthStencil::Protect ? protection : 0;
+    return state;
+}
+
 bool referenceDepthRequested(const RenderContext& context){
     if(context.referenceSceneDepthPrograms||context.referenceSceneVisibilityPrograms||context.referenceSceneObjectVisibilityPrograms)return true;
     if(!context.renderSettings||!context.renderSettings->cameraView)return false;
@@ -114,11 +130,18 @@ void CharacterSceneRenderer::createReferenceDepthPipelines(rhi::GraphicsPipeline
         desc.depthWrite=true;
         desc.depthCompare=VK_COMPARE_OP_GREATER;
         auto& pipelines=visibilityInputs?referenceSceneVisibilityPipelines_:referenceSceneDepthPipelines_;
-        for(unsigned facing=0;facing<pipelines.size();++facing){
-            // The reference attachment stores rows in the opposite order to the scene view.
-            desc.frontFace=facing==1?VK_FRONT_FACE_COUNTER_CLOCKWISE:VK_FRONT_FACE_CLOCKWISE;
-            desc.cullMode=context.faceCullingEnabled&&facing!=2?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
-            pipelines[facing]=rhi_->createGraphicsPipeline(desc);
+        const bool stencilEnabled = referenceSceneDepth_->stencilEnabled();
+        const auto roles = stencilEnabled ? pipelines.size() : 1;
+        for (std::size_t role = 0; role < roles; ++role) {
+            if (stencilEnabled)
+                desc.stencil = referenceDepthStencilState(static_cast<ReferenceDepthStencil>(role));
+            auto& orientations = pipelines[role];
+            for (unsigned facing = 0; facing < orientations.size(); ++facing) {
+                // The reference attachment stores rows in the opposite order to the scene view.
+                desc.frontFace=facing==1?VK_FRONT_FACE_COUNTER_CLOCKWISE:VK_FRONT_FACE_CLOCKWISE;
+                desc.cullMode=context.faceCullingEnabled&&facing!=2?VK_CULL_MODE_BACK_BIT:VK_CULL_MODE_NONE;
+                orientations[facing]=rhi_->createGraphicsPipeline(desc);
+            }
         }
     }catch(...){
         if(visibilityVertex)rhi_->destroyShaderModule(visibilityVertex);
@@ -148,9 +171,14 @@ void CharacterSceneRenderer::createReferenceOutlineDepthPipelines(rhi::GraphicsP
         desc.depthWrite=true;
         desc.depthCompare=VK_COMPARE_OP_GREATER;
         desc.cullMode=context.faceCullingEnabled?VK_CULL_MODE_FRONT_BIT:VK_CULL_MODE_NONE;
-        for(unsigned facing=0;facing<referenceSceneOutlineDepthPipelines_.size();++facing){
-            desc.frontFace=facing?VK_FRONT_FACE_COUNTER_CLOCKWISE:VK_FRONT_FACE_CLOCKWISE;
-            referenceSceneOutlineDepthPipelines_[facing]=rhi_->createGraphicsPipeline(desc);
+        const auto roles = referenceSceneDepth_->stencilEnabled() ? referenceSceneOutlineDepthPipelines_.size() : 1;
+        for (std::size_t role = 0; role < roles; ++role) {
+            if (role == 1) desc.stencil = referenceDepthStencilState(ReferenceDepthStencil::Respect);
+            auto& orientations = referenceSceneOutlineDepthPipelines_[role];
+            for (unsigned facing = 0; facing < orientations.size(); ++facing) {
+                desc.frontFace=facing?VK_FRONT_FACE_COUNTER_CLOCKWISE:VK_FRONT_FACE_CLOCKWISE;
+                orientations[facing]=rhi_->createGraphicsPipeline(desc);
+            }
         }
     }catch(...){
         if(fragment)rhi_->destroyShaderModule(fragment);

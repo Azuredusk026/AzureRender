@@ -45,8 +45,11 @@ void CharacterSceneRenderer::recordOutlineShells(const RenderContext& context,
             if(!eligible(material))continue;
             const auto primitiveIndex=static_cast<std::size_t>(&primitive-mesh.primitives.data());
             const bool mirrored=primitiveMirroredTransform(snapshot.instances.at(first).model,snapshot.gizmo,primitiveIndex);
-            if(referenceDepth)commands.bindPipeline(referenceSceneOutlineDepthPipelines_[mirrored?1:0]);
-            else commands.bindPipeline(materialUvPipeline(material,material.coverageTexture.present&&outlineProjectionEnabled_
+            if (referenceDepth) {
+                const bool respectStencil = referenceSceneDepth_->stencilEnabled()
+                    && material.referenceDepthStencil == AssetMaterial::ReferenceDepthStencil::Respect;
+                commands.bindPipeline(referenceSceneOutlineDepthPipelines_[respectStencil ? 1 : 0][mirrored ? 1 : 0]);
+            } else commands.bindPipeline(materialUvPipeline(material,material.coverageTexture.present&&outlineProjectionEnabled_
                 ?(depthShell?outlineDepthCoveragePipelines_:outlineCoveragePipelines_)[mirrored?1:0]
                 :depthShell?(mirrored?outlineDepthMirroredPipeline_:outlineDepthPipeline_)
                 :(mirrored?outlineMirroredPipeline_:outlinePipeline_)));

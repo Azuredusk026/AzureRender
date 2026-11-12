@@ -153,6 +153,8 @@ struct GraphicsPipelineDesc {
     bool depthBiasExact = false;
     ShaderSpecialization vertexSpecialization;
     ShaderSpecialization fragmentSpecialization;
+    // A fixed state shared by front and back faces.
+    std::optional<VkStencilOpState> stencil;
 };
 
 inline constexpr std::uint32_t kMaximumVertexBindings=16;
@@ -213,6 +215,7 @@ struct RenderPassAttachmentDesc {
     // Loading requires defined prior contents and is exclusive with clear.
     bool load = false;
     VkSampleCountFlagBits samples = VK_SAMPLE_COUNT_1_BIT;
+    bool clearStencil = false;
 };
 
 // A single-subpass render pass; every pass in the project fits this shape.
@@ -245,6 +248,11 @@ inline void validateRenderPassDesc(const RenderPassDesc& desc) {
         if(attachment.clear&&attachment.load)throw std::invalid_argument("Render pass attachment cannot load and clear");
         if(attachment.load&&attachment.initialLayout==VK_IMAGE_LAYOUT_UNDEFINED)
             throw std::invalid_argument("Loading an attachment requires defined prior contents");
+        if (attachment.clearStencil && (!attachment.isDepth || !attachment.clear
+            || (attachment.format != VK_FORMAT_D16_UNORM_S8_UINT
+                && attachment.format != VK_FORMAT_D24_UNORM_S8_UINT
+                && attachment.format != VK_FORMAT_D32_SFLOAT_S8_UINT)))
+            throw std::invalid_argument("Clearing stencil requires a cleared depth-stencil attachment");
     }
     if(desc.depthAttachment>=0&&!desc.attachments[static_cast<std::size_t>(desc.depthAttachment)].isDepth)
         throw std::invalid_argument("Render pass depth index must identify a depth attachment");

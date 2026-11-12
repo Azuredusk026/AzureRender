@@ -368,6 +368,23 @@
       "then": { "required": ["lodPolicy"] },
       "else": { "not": { "required": ["lodPolicy"] } }
     },
+    "referenceDepthStencil": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "role"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "const": 1
+        },
+        "role": {
+          "enum": ["protect", "respect"]
+        }
+      }
+    },
     "referenceNormal": {
       "type": "object",
       "additionalProperties": false,
@@ -429,6 +446,11 @@
           {
             "required": [
               "referenceNormal"
+            ]
+          },
+          {
+            "required": [
+              "referenceDepthStencil"
             ]
           }
         ]
