@@ -7,6 +7,7 @@
 
 #include <cassert>
 #include <algorithm>
+#include <array>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -118,6 +119,7 @@ std::vector<RecordedCall> runFrame(
     if(!materialCache.at("sealed").get<bool>()||materialCache.at("retainedPixelBytes")!=0
         ||materialCache.at("releasedIdentityBytes").get<std::uint64_t>()==0)
         throw std::runtime_error("Completed loading must retain GPU bindings and release CPU texture identities");
+    constexpr std::array<unsigned, 3> objectImageBindings{29, 50, 51};
     bool depthLayout=false,objectLayout=false;
     for(const auto& layout:rhi.descriptorLayouts){
         if(std::none_of(layout.begin(),layout.end(),[](const auto& binding){return binding.binding==27;}))continue;
@@ -131,9 +133,17 @@ std::vector<RecordedCall> runFrame(
             if(value.type==VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE||value.type==VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER)images+=value.count;
         }
         const auto array=binding(1);const auto expected=array->count>1?array->count+5:16;
-        objectLayout=binding(29)!=layout.end();
-        if(objectLayout&&binding(29)->type!=VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE)throw std::runtime_error("Object atlas must borrow the shared sampler");
-        if(images!=expected+(objectLayout?1U:0U)||samplers!=expected)throw std::runtime_error("Depth layout image/sampler budget differs from its selected capability");
+        objectLayout=binding(objectImageBindings.front())!=layout.end();
+        for (const auto index : objectImageBindings) {
+            const auto slot = binding(index);
+            if ((slot != layout.end()) != objectLayout)
+                throw std::runtime_error("Object shadow and reference image bindings must be allocated together");
+            if (objectLayout && (slot->type != VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE || slot->count != 1
+                    || slot->stages != VK_SHADER_STAGE_FRAGMENT_BIT))
+                throw std::runtime_error("Object shadow and reference bindings must be independent fragment images");
+        }
+        const auto objectImages = objectLayout ? objectImageBindings.size() : 0U;
+        if(images!=expected+objectImages||samplers!=expected)throw std::runtime_error("Depth layout image/sampler budget differs from its selected capability");
         depthLayout=true;
     }
     if(!depthLayout)throw std::runtime_error("Main material descriptor layout was not recorded");
@@ -145,10 +155,12 @@ std::vector<RecordedCall> runFrame(
             if(size.type==VK_DESCRIPTOR_TYPE_SAMPLER)samplers+=size.count;
         }
         if(!images&&!samplers)continue;
-        if(images!=pool.maxSets*(objectLayout?2U:1U)||samplers!=pool.maxSets)throw std::runtime_error("Depth pool must match selected images and one shared sampler per set");
+        const auto imagesPerSet = 1U + (objectLayout ? objectImageBindings.size() : 0U);
+        if(images!=pool.maxSets*imagesPerSet||samplers!=pool.maxSets)throw std::runtime_error("Depth pool must match selected images and one shared sampler per set");
         depthPool=true;
     }
     unsigned depthImages=0,depthSamplers=0;
+    std::array<unsigned, objectImageBindings.size()> objectImageWrites{};
     for(const auto& write:rhi.descriptorImageWrites){
         if(write.binding==9&&write.type==VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE){
             if(write.sampler!=VK_NULL_HANDLE)throw std::runtime_error("Depth image write contains an unrelated sampler");
@@ -158,8 +170,23 @@ std::vector<RecordedCall> runFrame(
             if(write.view!=VK_NULL_HANDLE)throw std::runtime_error("Shared sampler write contains an unrelated image");
             ++depthSamplers;
         }
+        for (std::size_t index = 0; index < objectImageBindings.size(); ++index) {
+            if (write.binding != objectImageBindings[index]) continue;
+            const bool atlas = write.binding == objectImageBindings.front();
+            const bool validView = atlas ? write.view == context.shadowImageView : write.view != VK_NULL_HANDLE;
+            const auto layout = atlas ? VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL
+                                      : VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+            if (write.type != VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE || !validView
+                    || write.sampler != VK_NULL_HANDLE || write.layout != layout)
+                throw std::runtime_error("Object shadow and reference writes must carry one image without a sampler");
+            ++objectImageWrites[index];
+        }
     }
     if(!depthPool||!depthImages||depthImages!=depthSamplers)throw std::runtime_error("Separated depth allocation and descriptor writes disagree");
+    for (const auto writes : objectImageWrites) {
+        if (writes != (objectLayout ? depthImages : 0U))
+            throw std::runtime_error("Each prepared object and reference binding requires one image per material set");
+    }
     SceneFrameData frame{};
     frame.renderSettings = &settings;
     frame.swapchainWidth = 1280;
